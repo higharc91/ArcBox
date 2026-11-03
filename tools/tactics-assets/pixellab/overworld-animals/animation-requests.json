@@ -1,0 +1,1682 @@
+[
+  {
+    "key": "mule/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200000,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200001,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200003,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200004,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200006,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200007,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200009,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200010,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200012,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200013,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200015,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200016,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200018,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200019,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200021,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "mule/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four natural hooved legs in a slow four-beat walk. Both panniers, saddle, rolls and straps remain fixed to the torso; tail follows its root. No rider. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200022,
+      "subject_description": "A small grey pack mule with four hooved legs, long ears, saddle, bedroll and two woven grain panniers.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200100,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200101,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200103,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200104,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200106,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200107,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200109,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200110,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200112,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200113,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200115,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200116,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200118,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200119,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200121,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "goat/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four cloven-hoofed legs take small coordinated steps. Horns remain fixed to the head and short tail follows its root. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200122,
+      "subject_description": "A small brown-and-white farm goat with four cloven-hoofed legs, short horns and beard.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200200,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200201,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200203,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200204,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200206,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200207,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200209,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200210,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200212,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200213,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200215,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200216,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200218,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200219,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200221,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "fox/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four slim canid legs walk lightly. Low narrow torso, fox muzzle and white-tipped bushy tail remain consistent. No extra tail. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200222,
+      "subject_description": "A small red fox with four canid legs, white chest and white-tipped bushy tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200300,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200301,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200303,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200304,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200306,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200307,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200309,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200310,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200312,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200313,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200315,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200316,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200318,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200319,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A restrained one-pixel floating bob, feet hidden, no water drawn. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200321,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "duck/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Paddle smoothly in place in a swimming pose. Both feet remain hidden beneath the body, folded wings do not flap, head stays steady. No water or ripples drawn. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200322,
+      "subject_description": "A small swimming mallard duck with green head, yellow bill, brown chest, folded feathered wings and hidden feet.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200400,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200401,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200402,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200403,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200404,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-west/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200405,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200406,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200407,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/west/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200408,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200409,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200410,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-west/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200411,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200412,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200413,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200414,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200415,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200416,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/north-east/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200417,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200418,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200419,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/east/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200420,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. A small peck toward the ground then look up again, two feet planted. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200421,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Two bird legs make a short coordinated hop in place and settle. Wings stay mostly folded, using only a tiny balance flick. No flight or extra legs. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200422,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "crow/animations/south-east/flap",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One short grounded wing stretch and flap then fold both wings again. Two legs remain planted, feathers attached. Do not fly away or change body size. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200423,
+      "subject_description": "A small charcoal-feathered crow standing on two bird legs, with a short beak, folded wings and one feathered tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200500,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200501,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200503,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200504,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200506,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200507,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200509,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200510,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200512,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200513,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200515,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200516,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200518,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200519,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200521,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "dog/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four canid legs take a natural alternating walk. Friendly small farm dog with steady muzzle and attached following tail, not a giant wolf. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200522,
+      "subject_description": "A small brown farm dog with four canid legs, floppy ears and one attached tail.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200600,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing south throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 200601,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200603,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing south-west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 200604,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200606,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing west throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 200607,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200609,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing north-west throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 200610,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north-west, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200612,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing north throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 200613,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200615,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing north-east throughout. Back remains toward viewer. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 200616,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing north-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200618,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 200619,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One tiny stationary weight adjustment, then return. Keep every support foot planted; silhouette and body size nearly unchanged. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200621,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  },
+  {
+    "key": "sheep/animations/south-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE, returning to the start. Four short cloven-hoofed legs take small measured steps. Wool stays attached to a single solid barrel-shaped body; no shedding or growing fleece. Facing south-east throughout. Keep exact species anatomy, attached body parts, coat, material palette, pixel clusters and physical scale. No turning toward camera, drifting across canvas, extra limbs, steam, particles, rings, symbols, effects, background, shadows or new equipment. All tips stay within transparent margins.",
+      "frame_count": 8,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 200622,
+      "subject_description": "A small cream woolly sheep with a beige face, two ears and four short cloven-hoofed legs.",
+      "initial_pose": "Stationary, facing south-east, with the original anatomy and attached equipment."
+    }
+  }
+]

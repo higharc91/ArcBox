@@ -296,13 +296,14 @@ public partial class BoardCanvas : Node2D
         }
 
         var sprite = unit.Sprite;
-        var size = new Vector2(sprite.Width, sprite.Height);
-        var corner = feet - new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY);
+        var size = new Vector2(sprite.WorldWidth, sprite.WorldHeight);
+        var corner = feet - new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY) * sprite.PixelScale;
         if (Load(sprite.Path) is { } texture)
         {
             var source = sprite.Source(unit.Anim.FrameAt(clock), unit.Row);
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
-            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            var light = !sprite.Unlit && _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet,
+                sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
             light = unit.Away ? light * AwayShade : light;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
@@ -337,10 +338,10 @@ public partial class BoardCanvas : Node2D
         else if (Load(unit.Sprite.Path) is { } texture)
         {
             var sprite = unit.Sprite;
-            var size = new Vector2(sprite.Width, sprite.Height);
-            var corner = -new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY);
+            var size = new Vector2(sprite.WorldWidth, sprite.WorldHeight);
+            var corner = -new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY) * sprite.PixelScale;
             var source = sprite.Source(unit.Anim.FrameAt(_clock), 0);
-            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            var light = !sprite.Unlit && _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
             var tint = new Color(light.R * look.Tint.R, light.G * look.Tint.G, light.B * look.Tint.B, look.Alpha);
             DrawTextureRectRegion(texture, new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size),
                 new Rect2(source.X, source.Y, source.Width, source.Height), tint);

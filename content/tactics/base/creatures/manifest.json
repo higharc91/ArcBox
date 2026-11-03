@@ -1,0 +1,5184 @@
+{
+  "version": 1,
+  "status": "integrated art",
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "sprites": {
+    "fauna_mule": {
+      "file": "fauna_mule.png",
+      "family": "mule",
+      "variant": "grey",
+      "frame": {
+        "width": 74,
+        "height": 82,
+        "anchor": [
+          36,
+          74
+        ]
+      },
+      "portrait": [
+        3,
+        11,
+        66,
+        66
+      ],
+      "headTop": 13,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 34.0,
+      "footprintHeight": 36.0,
+      "keys": [
+        "fauna.pack_mule",
+        "fauna.pack_mule.grey"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_goat": {
+      "file": "fauna_goat.png",
+      "family": "goat",
+      "variant": "rust",
+      "frame": {
+        "width": 50,
+        "height": 48,
+        "anchor": [
+          26,
+          42
+        ]
+      },
+      "portrait": [
+        6,
+        8,
+        37,
+        37
+      ],
+      "headTop": 10,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 21.5,
+      "footprintHeight": 19.5,
+      "keys": [
+        "fauna.farm_goat",
+        "fauna.farm_goat.rust"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_fox": {
+      "file": "fauna_fox.png",
+      "family": "fox",
+      "variant": "russet",
+      "frame": {
+        "width": 52,
+        "height": 68,
+        "anchor": [
+          26,
+          62
+        ]
+      },
+      "portrait": [
+        11,
+        35,
+        30,
+        30
+      ],
+      "headTop": 37,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 23.5,
+      "footprintHeight": 30.0,
+      "keys": [
+        "fauna.red_fox",
+        "fauna.red_fox.russet"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_duck": {
+      "file": "fauna_duck.png",
+      "family": "duck",
+      "variant": "mallard",
+      "frame": {
+        "width": 32,
+        "height": 28,
+        "anchor": [
+          16,
+          24
+        ]
+      },
+      "portrait": [
+        3,
+        2,
+        26,
+        26
+      ],
+      "headTop": 8,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 13.5,
+      "footprintHeight": 11.0,
+      "keys": [
+        "fauna.river_duck",
+        "fauna.river_duck.mallard"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_crow": {
+      "file": "fauna_crow.png",
+      "family": "crow",
+      "variant": "charcoal",
+      "frame": {
+        "width": 44,
+        "height": 52,
+        "anchor": [
+          22,
+          44
+        ]
+      },
+      "portrait": [
+        11,
+        26,
+        21,
+        21
+      ],
+      "headTop": 28,
+      "pixelScale": 0.4,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 15.200000000000001,
+      "footprintHeight": 16.400000000000002,
+      "keys": [
+        "fauna.field_crow",
+        "fauna.field_crow.charcoal"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "flap": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "fps": 9.090909090909092,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_dog": {
+      "file": "fauna_dog.png",
+      "family": "dog",
+      "variant": "brown",
+      "frame": {
+        "width": 56,
+        "height": 58,
+        "anchor": [
+          28,
+          50
+        ]
+      },
+      "portrait": [
+        11,
+        19,
+        34,
+        34
+      ],
+      "headTop": 21,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 26.0,
+      "footprintHeight": 24.0,
+      "keys": [
+        "fauna.farm_dog",
+        "fauna.farm_dog.brown"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "fauna_sheep": {
+      "file": "fauna_sheep.png",
+      "family": "sheep",
+      "variant": "cream",
+      "frame": {
+        "width": 56,
+        "height": 52,
+        "anchor": [
+          28,
+          46
+        ]
+      },
+      "portrait": [
+        8,
+        9,
+        40,
+        40
+      ],
+      "headTop": 11,
+      "pixelScale": 0.5,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 25.5,
+      "footprintHeight": 22.0,
+      "keys": [
+        "fauna.farm_sheep",
+        "fauna.farm_sheep.cream"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+    },
+    "wolf_grey": {
+      "file": "wolf_grey.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 45.2,
+      "footprintHeight": 37.6,
+      "keys": [
+        "beasts.wolf.grey",
+        "beasts.wolf"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "grey",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wolf_timber": {
+      "file": "wolf_timber.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 45.2,
+      "footprintHeight": 37.6,
+      "keys": [
+        "beasts.wolf.timber"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "timber",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wolf_dire": {
+      "file": "wolf_dire.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.5,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 56.5,
+      "footprintHeight": 47.0,
+      "keys": [
+        "beasts.wolf.dire"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "dire",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wolf_frost": {
+      "file": "wolf_frost.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 45.2,
+      "footprintHeight": 37.6,
+      "keys": [
+        "beasts.wolf.frost"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "frost",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wolf_wildshape": {
+      "file": "wolf_wildshape.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 45.2,
+      "footprintHeight": 37.6,
+      "keys": [
+        "beasts.wolf.wildshape"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "wildshape",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "boar_brown": {
+      "file": "boar_brown.png",
+      "frame": {
+        "width": 141,
+        "height": 109,
+        "anchor": [
+          70,
+          105
+        ]
+      },
+      "portrait": [
+        31,
+        31,
+        77,
+        77
+      ],
+      "headTop": 33,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          4
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          4
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 39.68,
+      "footprintHeight": 32.96,
+      "keys": [
+        "beasts.boar.brown",
+        "beasts.boar"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "boar",
+      "variant": "brown",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "boar_dark": {
+      "file": "boar_dark.png",
+      "frame": {
+        "width": 141,
+        "height": 109,
+        "anchor": [
+          70,
+          105
+        ]
+      },
+      "portrait": [
+        31,
+        31,
+        77,
+        77
+      ],
+      "headTop": 33,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          4
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          4
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 39.68,
+      "footprintHeight": 32.96,
+      "keys": [
+        "beasts.boar.dark"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "boar",
+      "variant": "dark",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "bear_brown": {
+      "file": "bear_brown.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 59.2,
+      "footprintHeight": 48.800000000000004,
+      "keys": [
+        "beasts.bear.brown",
+        "beasts.bear"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "brown",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "bear_black": {
+      "file": "bear_black.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.34,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 50.32,
+      "footprintHeight": 41.480000000000004,
+      "keys": [
+        "beasts.bear.black"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "black",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "bear_polar": {
+      "file": "bear_polar.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.472,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 69.856,
+      "footprintHeight": 57.583999999999996,
+      "keys": [
+        "beasts.bear.polar"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "polar",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "bear_wildshape": {
+      "file": "bear_wildshape.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 59.2,
+      "footprintHeight": 48.800000000000004,
+      "keys": [
+        "beasts.bear.wildshape"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "wildshape",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "spider_black": {
+      "file": "spider_black.png",
+      "frame": {
+        "width": 177,
+        "height": 206,
+        "anchor": [
+          88,
+          151
+        ]
+      },
+      "portrait": [
+        19,
+        20,
+        141,
+        141
+      ],
+      "headTop": 30,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          13
+        ],
+        "north-west": [
+          0,
+          17
+        ],
+        "north": [
+          0,
+          32
+        ],
+        "north-east": [
+          0,
+          18
+        ],
+        "east": [
+          0,
+          15
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 55.36,
+      "footprintHeight": 47.68,
+      "keys": [
+        "beasts.spider.black",
+        "beasts.spider"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "spider",
+      "variant": "black",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "spider_red": {
+      "file": "spider_red.png",
+      "frame": {
+        "width": 177,
+        "height": 206,
+        "anchor": [
+          88,
+          151
+        ]
+      },
+      "portrait": [
+        19,
+        20,
+        141,
+        141
+      ],
+      "headTop": 30,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          13
+        ],
+        "north-west": [
+          0,
+          17
+        ],
+        "north": [
+          0,
+          32
+        ],
+        "north-east": [
+          0,
+          18
+        ],
+        "east": [
+          0,
+          15
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 55.36,
+      "footprintHeight": 47.68,
+      "keys": [
+        "beasts.spider.red"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "spider",
+      "variant": "red",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "slime_green": {
+      "file": "slime_green.png",
+      "frame": {
+        "width": 125,
+        "height": 99,
+        "anchor": [
+          62,
+          92
+        ]
+      },
+      "portrait": [
+        24,
+        21,
+        78,
+        78
+      ],
+      "headTop": 31,
+      "pixelScale": 0.34,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          3
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          2
+        ],
+        "east": [
+          0,
+          4
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 41.14,
+      "footprintHeight": 30.6,
+      "keys": [
+        "beasts.slime.green",
+        "beasts.slime"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "slime",
+      "variant": "green",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "slime_blue": {
+      "file": "slime_blue.png",
+      "frame": {
+        "width": 125,
+        "height": 99,
+        "anchor": [
+          62,
+          92
+        ]
+      },
+      "portrait": [
+        24,
+        21,
+        78,
+        78
+      ],
+      "headTop": 31,
+      "pixelScale": 0.34,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          3
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          2
+        ],
+        "east": [
+          0,
+          4
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 41.14,
+      "footprintHeight": 30.6,
+      "keys": [
+        "beasts.slime.blue"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "slime",
+      "variant": "blue",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "slime_magma": {
+      "file": "slime_magma.png",
+      "frame": {
+        "width": 125,
+        "height": 99,
+        "anchor": [
+          62,
+          92
+        ]
+      },
+      "portrait": [
+        24,
+        21,
+        78,
+        78
+      ],
+      "headTop": 31,
+      "pixelScale": 0.34,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          3
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          2
+        ],
+        "east": [
+          0,
+          4
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 41.14,
+      "footprintHeight": 30.6,
+      "keys": [
+        "beasts.slime.magma"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "slime",
+      "variant": "magma",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "bat_dusk": {
+      "file": "bat_dusk.png",
+      "frame": {
+        "width": 223,
+        "height": 186,
+        "anchor": [
+          111,
+          180
+        ]
+      },
+      "portrait": [
+        20,
+        0,
+        186,
+        186
+      ],
+      "headTop": 69,
+      "pixelScale": 0.26,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {},
+      "footprintWidth": 56.940000000000005,
+      "footprintHeight": 46.28,
+      "keys": [
+        "beasts.bat.dusk",
+        "beasts.bat"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bat",
+      "variant": "dusk",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "drake_red": {
+      "file": "drake_red.png",
+      "frame": {
+        "width": 246,
+        "height": 223,
+        "anchor": [
+          116,
+          213
+        ]
+      },
+      "portrait": [
+        26,
+        36,
+        180,
+        180
+      ],
+      "headTop": 38,
+      "pixelScale": 0.36,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          6
+        ],
+        "west": [
+          0,
+          22
+        ],
+        "north-west": [
+          0,
+          22
+        ],
+        "north": [
+          0,
+          8
+        ],
+        "north-east": [
+          0,
+          5
+        ],
+        "east": [
+          0,
+          6
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 85.67999999999999,
+      "footprintHeight": 75.96,
+      "keys": [
+        "beasts.drake.red",
+        "beasts.drake"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "drake",
+      "variant": "red",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "drake_green": {
+      "file": "drake_green.png",
+      "frame": {
+        "width": 246,
+        "height": 223,
+        "anchor": [
+          116,
+          213
+        ]
+      },
+      "portrait": [
+        26,
+        36,
+        180,
+        180
+      ],
+      "headTop": 38,
+      "pixelScale": 0.36,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          6
+        ],
+        "west": [
+          0,
+          22
+        ],
+        "north-west": [
+          0,
+          22
+        ],
+        "north": [
+          0,
+          8
+        ],
+        "north-east": [
+          0,
+          5
+        ],
+        "east": [
+          0,
+          6
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 85.67999999999999,
+      "footprintHeight": 75.96,
+      "keys": [
+        "beasts.drake.green"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "drake",
+      "variant": "green",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "drake_blue": {
+      "file": "drake_blue.png",
+      "frame": {
+        "width": 246,
+        "height": 223,
+        "anchor": [
+          116,
+          213
+        ]
+      },
+      "portrait": [
+        26,
+        36,
+        180,
+        180
+      ],
+      "headTop": 38,
+      "pixelScale": 0.36,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          6
+        ],
+        "west": [
+          0,
+          22
+        ],
+        "north-west": [
+          0,
+          22
+        ],
+        "north": [
+          0,
+          8
+        ],
+        "north-east": [
+          0,
+          5
+        ],
+        "east": [
+          0,
+          6
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 85.67999999999999,
+      "footprintHeight": 75.96,
+      "keys": [
+        "beasts.drake.blue"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "drake",
+      "variant": "blue",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "warg_black": {
+      "file": "warg_black.png",
+      "frame": {
+        "width": 180,
+        "height": 152,
+        "anchor": [
+          89,
+          146
+        ]
+      },
+      "portrait": [
+        17,
+        6,
+        143,
+        143
+      ],
+      "headTop": 8,
+      "pixelScale": 0.3,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          7
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          7
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 52.199999999999996,
+      "footprintHeight": 43.199999999999996,
+      "keys": [
+        "bestiary.warg.black",
+        "bestiary.warg"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "warg",
+      "variant": "black",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "warg_ash": {
+      "file": "warg_ash.png",
+      "frame": {
+        "width": 180,
+        "height": 152,
+        "anchor": [
+          89,
+          146
+        ]
+      },
+      "portrait": [
+        17,
+        6,
+        143,
+        143
+      ],
+      "headTop": 8,
+      "pixelScale": 0.3,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          7
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          7
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 52.199999999999996,
+      "footprintHeight": 43.199999999999996,
+      "keys": [
+        "bestiary.warg.ash"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "warg",
+      "variant": "ash",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "hookbeak_brown": {
+      "file": "hookbeak_brown.png",
+      "frame": {
+        "width": 213,
+        "height": 202,
+        "anchor": [
+          106,
+          188
+        ]
+      },
+      "portrait": [
+        19,
+        18,
+        173,
+        173
+      ],
+      "headTop": 20,
+      "pixelScale": 0.28,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          2
+        ],
+        "west": [
+          0,
+          1
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          6
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 58.52,
+      "footprintHeight": 52.080000000000005,
+      "keys": [
+        "bestiary.hookbeak.brown",
+        "bestiary.hookbeak"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "hookbeak",
+      "variant": "brown",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "hookbeak_snow": {
+      "file": "hookbeak_snow.png",
+      "frame": {
+        "width": 213,
+        "height": 202,
+        "anchor": [
+          106,
+          188
+        ]
+      },
+      "portrait": [
+        19,
+        18,
+        173,
+        173
+      ],
+      "headTop": 20,
+      "pixelScale": 0.28,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          2
+        ],
+        "west": [
+          0,
+          1
+        ],
+        "north-west": [
+          0,
+          1
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          1
+        ],
+        "east": [
+          0,
+          6
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 58.52,
+      "footprintHeight": 52.080000000000005,
+      "keys": [
+        "bestiary.hookbeak.snow"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "hookbeak",
+      "variant": "snow",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "scorpion_sand": {
+      "file": "scorpion_sand.png",
+      "frame": {
+        "width": 187,
+        "height": 168,
+        "anchor": [
+          85,
+          164
+        ]
+      },
+      "portrait": [
+        14,
+        25,
+        142,
+        142
+      ],
+      "headTop": 27,
+      "pixelScale": 0.3,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          -3
+        ],
+        "west": [
+          0,
+          16
+        ],
+        "north-west": [
+          0,
+          14
+        ],
+        "north": [
+          0,
+          20
+        ],
+        "north-east": [
+          0,
+          15
+        ],
+        "east": [
+          0,
+          16
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 51.9,
+      "footprintHeight": 48.6,
+      "keys": [
+        "bestiary.scorpion.sand",
+        "bestiary.scorpion"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "scorpion",
+      "variant": "sand",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "scorpion_ember": {
+      "file": "scorpion_ember.png",
+      "frame": {
+        "width": 187,
+        "height": 168,
+        "anchor": [
+          85,
+          164
+        ]
+      },
+      "portrait": [
+        14,
+        25,
+        142,
+        142
+      ],
+      "headTop": 27,
+      "pixelScale": 0.3,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          -3
+        ],
+        "west": [
+          0,
+          16
+        ],
+        "north-west": [
+          0,
+          14
+        ],
+        "north": [
+          0,
+          20
+        ],
+        "north-east": [
+          0,
+          15
+        ],
+        "east": [
+          0,
+          16
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 51.9,
+      "footprintHeight": 48.6,
+      "keys": [
+        "bestiary.scorpion.ember"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "scorpion",
+      "variant": "ember",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "harpy_dusk": {
+      "file": "harpy_dusk.png",
+      "frame": {
+        "width": 210,
+        "height": 186,
+        "anchor": [
+          106,
+          183
+        ]
+      },
+      "portrait": [
+        36,
+        32,
+        142,
+        142
+      ],
+      "headTop": 43,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {},
+      "footprintWidth": 65.28,
+      "footprintHeight": 57.92,
+      "keys": [
+        "bestiary.harpy.dusk",
+        "bestiary.harpy"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "harpy",
+      "variant": "dusk",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "harpy_storm": {
+      "file": "harpy_storm.png",
+      "frame": {
+        "width": 210,
+        "height": 186,
+        "anchor": [
+          106,
+          183
+        ]
+      },
+      "portrait": [
+        36,
+        32,
+        142,
+        142
+      ],
+      "headTop": 43,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {},
+      "footprintWidth": 65.28,
+      "footprintHeight": 57.92,
+      "keys": [
+        "bestiary.harpy.storm"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "harpy",
+      "variant": "storm",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wisp_marsh": {
+      "file": "wisp_marsh.png",
+      "frame": {
+        "width": 35,
+        "height": 70,
+        "anchor": [
+          12,
+          67
+        ]
+      },
+      "portrait": [
+        0,
+        0,
+        35,
+        35
+      ],
+      "headTop": 4,
+      "pixelScale": 0.5,
+      "unlit": true,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {},
+      "footprintWidth": 15.5,
+      "footprintHeight": 32.5,
+      "keys": [
+        "bestiary.wisp.marsh",
+        "bestiary.wisp"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wisp",
+      "variant": "marsh",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "wisp_ember": {
+      "file": "wisp_ember.png",
+      "frame": {
+        "width": 35,
+        "height": 70,
+        "anchor": [
+          12,
+          67
+        ]
+      },
+      "portrait": [
+        0,
+        0,
+        35,
+        35
+      ],
+      "headTop": 4,
+      "pixelScale": 0.5,
+      "unlit": true,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {},
+      "footprintWidth": 15.5,
+      "footprintHeight": 32.5,
+      "keys": [
+        "bestiary.wisp.ember"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wisp",
+      "variant": "ember",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "gargoyle_granite": {
+      "file": "gargoyle_granite.png",
+      "frame": {
+        "width": 235,
+        "height": 210,
+        "anchor": [
+          118,
+          201
+        ]
+      },
+      "portrait": [
+        27,
+        20,
+        184,
+        184
+      ],
+      "headTop": 22,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          -2
+        ],
+        "west": [
+          0,
+          12
+        ],
+        "north-west": [
+          0,
+          16
+        ],
+        "north": [
+          0,
+          6
+        ],
+        "north-east": [
+          0,
+          10
+        ],
+        "east": [
+          0,
+          10
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 73.92,
+      "footprintHeight": 63.68,
+      "keys": [
+        "bestiary.gargoyle.granite",
+        "bestiary.gargoyle"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "gargoyle",
+      "variant": "granite",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "gargoyle_obsidian": {
+      "file": "gargoyle_obsidian.png",
+      "frame": {
+        "width": 235,
+        "height": 210,
+        "anchor": [
+          118,
+          201
+        ]
+      },
+      "portrait": [
+        27,
+        20,
+        184,
+        184
+      ],
+      "headTop": 22,
+      "pixelScale": 0.32,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          -2
+        ],
+        "west": [
+          0,
+          12
+        ],
+        "north-west": [
+          0,
+          16
+        ],
+        "north": [
+          0,
+          6
+        ],
+        "north-east": [
+          0,
+          10
+        ],
+        "east": [
+          0,
+          10
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 73.92,
+      "footprintHeight": 63.68,
+      "keys": [
+        "bestiary.gargoyle.obsidian"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "gargoyle",
+      "variant": "obsidian",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "crab_shore": {
+      "file": "crab_shore.png",
+      "frame": {
+        "width": 216,
+        "height": 208,
+        "anchor": [
+          108,
+          199
+        ]
+      },
+      "portrait": [
+        17,
+        25,
+        183,
+        183
+      ],
+      "headTop": 93,
+      "pixelScale": 0.26,
+      "unlit": false,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          2
+        ],
+        "west": [
+          0,
+          10
+        ],
+        "north-west": [
+          0,
+          16
+        ],
+        "north": [
+          0,
+          41
+        ],
+        "north-east": [
+          0,
+          17
+        ],
+        "east": [
+          0,
+          -1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 51.22,
+      "footprintHeight": 51.22,
+      "keys": [
+        "bestiary.crab.shore",
+        "bestiary.crab"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "crab",
+      "variant": "shore",
+      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    }
+  },
+  "legacyDistinctForms": [
+    "beasts.wolf.alpha",
+    "beasts.bear.undead",
+    "beasts.spider.phase",
+    "beasts.slime.crystal",
+    "beasts.bat.vampire",
+    "bestiary.warg.rider",
+    "bestiary.scorpion.black",
+    "bestiary.crab.deep"
+  ],
+  "legacyOverrides": {
+    "beasts.wolf.alpha": {
+      "pixelScale": 0.6625000000000001,
+      "headTop": 11,
+      "footprintWidth": 30.4752,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.4
+    },
+    "beasts.bear.undead": {
+      "pixelScale": 0.9375,
+      "headTop": 15,
+      "footprintWidth": 39.37520000000001,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.4
+    },
+    "beasts.spider.phase": {
+      "pixelScale": 0.9083872,
+      "headTop": 15,
+      "footprintWidth": 37.24416,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.32
+    },
+    "beasts.slime.crystal": {
+      "pixelScale": 0.8122219200000002,
+      "headTop": 22,
+      "footprintWidth": 21.118080000000003,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.34
+    },
+    "beasts.bat.vampire": {
+      "pixelScale": 0.60666684,
+      "headTop": 0,
+      "footprintWidth": 26.086840000000002,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.26
+    },
+    "bestiary.warg.rider": {
+      "pixelScale": 0.7628573999999999,
+      "headTop": 5,
+      "footprintWidth": 35.8542,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.3
+    },
+    "bestiary.scorpion.black": {
+      "pixelScale": 1.11,
+      "headTop": 16,
+      "footprintWidth": 43.29,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.3
+    },
+    "bestiary.crab.deep": {
+      "pixelScale": 0.8863634,
+      "headTop": 23,
+      "footprintWidth": 38.1134,
+      "note": "Original distinct-form art retained; physical scale follows the new primary specimen.",
+      "familyScale": 0.26
+    }
+  },
+  "pending": [],
+  "notes": "Distinct structural forms retain their original authored art instead of losing riders, ribs, crystals or other identifying features.",
+  "scalePolicy": "Reviewed beside the 36-world-pixel human fighter. Species scales are shared by every facing and action. Giant species remain larger; ordinary wildlife does not use giant proportions."
+}

@@ -1283,6 +1283,29 @@
       "default": "grey",
       "note": "anchor on the chimney top; leans right with the wind (mirror for a west wind)"
     },
+    "river_steam": {
+      "name": "Warm ford steam",
+      "group": "terrain",
+      "kind": "sprite",
+      "frame": [
+        48,
+        32
+      ],
+      "frames": 16,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        24,
+        28
+      ],
+      "layer": "over",
+      "blend": "normal",
+      "variants": {
+        "mist": "terrain/river_steam_mist.png"
+      },
+      "default": "mist",
+      "note": "local curls over warm water only; phase-offset sparse instances; no light emission; do not obscure the crossing"
+    },
     "rain": {
       "name": "Rain sheet",
       "group": "weather",

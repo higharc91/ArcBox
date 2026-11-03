@@ -82,13 +82,21 @@ public sealed record BoardChanges(ImmutableArray<ZoneView> Zones, ImmutableArray
 /// </summary>
 public static class HostSprite
 {
+    private static readonly ImmutableHashSet<string> LegacyRaces =
+        ["human", "elf", "half_elf", "dwarf", "halfling", "gnome", "half_orc", "tiefling", "aasimar", "goliath", "dragonborn"];
     /// <summary>The key for a sheet with this sprite and these tags, or null if it has neither a sprite nor a class.</summary>
     public static string? Of(string? sprite, IEnumerable<string> tags)
-        => sprite ?? tags.FirstOrDefault(t => t.StartsWith(SheetBuilder.ClassTag, StringComparison.Ordinal)) switch
-        {
-            { } tag => $"characters.class_{tag[SheetBuilder.ClassTag.Length..]}",
-            null => null,
-        };
+    {
+        if (sprite is not null)
+            return sprite;
+        var all = tags.ToArray();
+        var cls = all.FirstOrDefault(t => t.StartsWith(SheetBuilder.ClassTag, StringComparison.Ordinal))?[SheetBuilder.ClassTag.Length..];
+        if (cls is null)
+            return null;
+        var race = all.FirstOrDefault(t => t.StartsWith(SheetBuilder.RaceTag, StringComparison.Ordinal))?[SheetBuilder.RaceTag.Length..]
+            ?? all.FirstOrDefault(LegacyRaces.Contains);  // campaign battles saved before explicit race tags
+        return $"characters.{(race is null ? "class" : race)}_{cls}";
+    }
 }
 
 /// <summary>

@@ -148,14 +148,29 @@ public sealed class WorldPlan
     public ImmutableArray<BlockPlan> BlocksIn(ArtArea view) => [.. Blocks.Where(b => !b.Plan.Items.IsEmpty && new ArtArea(b.Plan.Min, b.Plan.Max).Overlaps(view))];
 
     /// <summary>What a unit covers: its sprite and the ring at its feet, facing either way. Its marks stand above everything, so they don't count.</summary>
-    public static ArtArea AreaOf(BoardUnit unit)
+    public static ArtArea AreaOf(BoardUnit unit) => BoundsOf(unit, bodyOnly: false);
+
+    /// <summary>The visible body used for prop fading, excluding transparent animation padding.</summary>
+    public static ArtArea BodyAreaOf(BoardUnit unit) => BoundsOf(unit, bodyOnly: true);
+
+    private static ArtArea BoundsOf(BoardUnit unit, bool bodyOnly)
     {
         var sprite = unit.Sprite;
-        var left = unit.Feet.X - (unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX);
-        var top = unit.Feet.Y - sprite.AnchorY;
+        var left = unit.Feet.X - (unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX) * sprite.PixelScale;
+        var top = unit.Feet.Y - sprite.AnchorY * sprite.PixelScale;
+        var right = left + sprite.WorldWidth;
+        var bottom = top + sprite.WorldHeight;
+        // High-resolution sheets reserve transparent room for weapons and gait. It must not fade a building.
+        if (bodyOnly && sprite.FootprintWidth > 0)
+        {
+            left = unit.Feet.X - sprite.FootprintWidth / 2;
+            right = unit.Feet.X + sprite.FootprintWidth / 2;
+            top = unit.Feet.Y - sprite.HeadLift;
+            bottom = unit.Feet.Y;
+        }
         var ring = new Vector2(unit.Ring, unit.Ring / 2);
         return new ArtArea(Vector2.Min(new Vector2(left, top), unit.Feet - ring),
-            Vector2.Max(new Vector2(left + sprite.Width, top + sprite.Height), unit.Feet + ring));
+            Vector2.Max(new Vector2(right, bottom), unit.Feet + ring));
     }
 
     /// <summary>

@@ -1,0 +1,26 @@
+{
+  "method": "Fixed native pose with an authored one-native-pixel buoyancy cycle; actual travel is provided by WorldFauna.",
+  "reason": "Rejected provider motion unfolded wings and invented visible feet.",
+  "offsets": {
+    "idle": [
+      0,
+      0,
+      -1,
+      0,
+      0
+    ],
+    "move": [
+      0,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  "world_pixel_scale": 0.5,
+  "no_per_frame_recentering": true
+}

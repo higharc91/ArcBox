@@ -1,0 +1,2438 @@
+[
+  {
+    "key": "wolf/idle/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 190000
+    }
+  },
+  {
+    "key": "wolf/idle/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 190001
+    }
+  },
+  {
+    "key": "wolf/idle/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 190002
+    }
+  },
+  {
+    "key": "boar/idle/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing north-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 190003
+    }
+  },
+  {
+    "key": "boar/idle/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing north-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 190004
+    }
+  },
+  {
+    "key": "boar/idle/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 190005
+    }
+  },
+  {
+    "key": "bear/idle/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 190006
+    }
+  },
+  {
+    "key": "bear/idle/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 190007
+    }
+  },
+  {
+    "key": "bear/idle/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing north-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 190008
+    }
+  },
+  {
+    "key": "bear/idle/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 190009
+    }
+  },
+  {
+    "key": "spider/idle/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 190010
+    }
+  },
+  {
+    "key": "spider/idle/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 190011
+    }
+  },
+  {
+    "key": "spider/idle/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 190012
+    }
+  },
+  {
+    "key": "slime/idle/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 190013
+    }
+  },
+  {
+    "key": "slime/idle/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 190014
+    }
+  },
+  {
+    "key": "slime/idle/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 190015
+    }
+  },
+  {
+    "key": "slime/idle/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing north-west. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 190016
+    }
+  },
+  {
+    "key": "slime/idle/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 190017
+    }
+  },
+  {
+    "key": "slime/idle/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 190018
+    }
+  },
+  {
+    "key": "drake/idle/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 190019
+    }
+  },
+  {
+    "key": "gargoyle/idle/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Remain stationary in this exact pose. One very small body weight adjustment then return. Keep all support feet planted and silhouette nearly unchanged. Keep EXACT original anatomy, ear lengths, horns, tail, material colors and facing south-east. No particles, vapor, steam, rings, sparks, symbols, new appendages or extra horns. No growing, turning, camera movement or ground movement. Only the animal itself moves subtly.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 190020
+    }
+  },
+  {
+    "key": "wolf/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191021
+    }
+  },
+  {
+    "key": "wolf/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192022
+    }
+  },
+  {
+    "key": "wolf/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191023
+    }
+  },
+  {
+    "key": "wolf/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192024
+    }
+  },
+  {
+    "key": "wolf/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191025
+    }
+  },
+  {
+    "key": "wolf/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192026
+    }
+  },
+  {
+    "key": "wolf/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191027
+    }
+  },
+  {
+    "key": "wolf/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192028
+    }
+  },
+  {
+    "key": "wolf/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191029
+    }
+  },
+  {
+    "key": "wolf/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192030
+    }
+  },
+  {
+    "key": "wolf/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191031
+    }
+  },
+  {
+    "key": "wolf/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192032
+    }
+  },
+  {
+    "key": "wolf/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191033
+    }
+  },
+  {
+    "key": "wolf/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192034
+    }
+  },
+  {
+    "key": "wolf/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward bite lunge, snap the jaws then recover; exactly four canid legs. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191035
+    }
+  },
+  {
+    "key": "wolf/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME wolf collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192036
+    }
+  },
+  {
+    "key": "boar/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191037
+    }
+  },
+  {
+    "key": "boar/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192038
+    }
+  },
+  {
+    "key": "boar/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191039
+    }
+  },
+  {
+    "key": "boar/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192040
+    }
+  },
+  {
+    "key": "boar/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191041
+    }
+  },
+  {
+    "key": "boar/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192042
+    }
+  },
+  {
+    "key": "boar/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191043
+    }
+  },
+  {
+    "key": "boar/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192044
+    }
+  },
+  {
+    "key": "boar/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191045
+    }
+  },
+  {
+    "key": "boar/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192046
+    }
+  },
+  {
+    "key": "boar/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191047
+    }
+  },
+  {
+    "key": "boar/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192048
+    }
+  },
+  {
+    "key": "boar/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191049
+    }
+  },
+  {
+    "key": "boar/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192050
+    }
+  },
+  {
+    "key": "boar/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short low tusk thrust with the head and shoulders, then recover; exactly four hooved legs. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191051
+    }
+  },
+  {
+    "key": "boar/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME boar collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192052
+    }
+  },
+  {
+    "key": "bear/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191053
+    }
+  },
+  {
+    "key": "bear/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192054
+    }
+  },
+  {
+    "key": "bear/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191055
+    }
+  },
+  {
+    "key": "bear/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192056
+    }
+  },
+  {
+    "key": "bear/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191057
+    }
+  },
+  {
+    "key": "bear/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192058
+    }
+  },
+  {
+    "key": "bear/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191059
+    }
+  },
+  {
+    "key": "bear/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192060
+    }
+  },
+  {
+    "key": "bear/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191061
+    }
+  },
+  {
+    "key": "bear/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192062
+    }
+  },
+  {
+    "key": "bear/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191063
+    }
+  },
+  {
+    "key": "bear/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192064
+    }
+  },
+  {
+    "key": "bear/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191065
+    }
+  },
+  {
+    "key": "bear/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192066
+    }
+  },
+  {
+    "key": "bear/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A brief forepaw swipe with the other three paws supporting the weight, then recover. No standing upright. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191067
+    }
+  },
+  {
+    "key": "bear/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bear collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192068
+    }
+  },
+  {
+    "key": "spider/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191069
+    }
+  },
+  {
+    "key": "spider/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192070
+    }
+  },
+  {
+    "key": "spider/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191071
+    }
+  },
+  {
+    "key": "spider/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192072
+    }
+  },
+  {
+    "key": "spider/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191073
+    }
+  },
+  {
+    "key": "spider/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192074
+    }
+  },
+  {
+    "key": "spider/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191075
+    }
+  },
+  {
+    "key": "spider/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192076
+    }
+  },
+  {
+    "key": "spider/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191077
+    }
+  },
+  {
+    "key": "spider/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192078
+    }
+  },
+  {
+    "key": "spider/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191079
+    }
+  },
+  {
+    "key": "spider/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192080
+    }
+  },
+  {
+    "key": "spider/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191081
+    }
+  },
+  {
+    "key": "spider/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192082
+    }
+  },
+  {
+    "key": "spider/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A low forward bite lunge with coordinated support from exactly eight legs, then recover. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191083
+    }
+  },
+  {
+    "key": "spider/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME spider collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192084
+    }
+  },
+  {
+    "key": "slime/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191085
+    }
+  },
+  {
+    "key": "slime/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192086
+    }
+  },
+  {
+    "key": "slime/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191087
+    }
+  },
+  {
+    "key": "slime/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192088
+    }
+  },
+  {
+    "key": "slime/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191089
+    }
+  },
+  {
+    "key": "slime/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192090
+    }
+  },
+  {
+    "key": "slime/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191091
+    }
+  },
+  {
+    "key": "slime/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192092
+    }
+  },
+  {
+    "key": "slime/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191093
+    }
+  },
+  {
+    "key": "slime/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192094
+    }
+  },
+  {
+    "key": "slime/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191095
+    }
+  },
+  {
+    "key": "slime/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192096
+    }
+  },
+  {
+    "key": "slime/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191097
+    }
+  },
+  {
+    "key": "slime/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192098
+    }
+  },
+  {
+    "key": "slime/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A compact forward ooze surge and recoil, maintaining one connected volume. No limbs or projectile. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191099
+    }
+  },
+  {
+    "key": "slime/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME slime collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Flattened legless ooze puddle. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192100
+    }
+  },
+  {
+    "key": "bat/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191101
+    }
+  },
+  {
+    "key": "bat/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192102
+    }
+  },
+  {
+    "key": "bat/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191103
+    }
+  },
+  {
+    "key": "bat/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192104
+    }
+  },
+  {
+    "key": "bat/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191105
+    }
+  },
+  {
+    "key": "bat/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192106
+    }
+  },
+  {
+    "key": "bat/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191107
+    }
+  },
+  {
+    "key": "bat/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192108
+    }
+  },
+  {
+    "key": "bat/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191109
+    }
+  },
+  {
+    "key": "bat/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192110
+    }
+  },
+  {
+    "key": "bat/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191111
+    }
+  },
+  {
+    "key": "bat/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192112
+    }
+  },
+  {
+    "key": "bat/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191113
+    }
+  },
+  {
+    "key": "bat/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192114
+    }
+  },
+  {
+    "key": "bat/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward aerial bite and return, with coherent wingbeats. Two wing forelimbs, two hind feet. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191115
+    }
+  },
+  {
+    "key": "bat/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME bat collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192116
+    }
+  },
+  {
+    "key": "drake/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191117
+    }
+  },
+  {
+    "key": "drake/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192118
+    }
+  },
+  {
+    "key": "drake/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191119
+    }
+  },
+  {
+    "key": "drake/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192120
+    }
+  },
+  {
+    "key": "drake/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191121
+    }
+  },
+  {
+    "key": "drake/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192122
+    }
+  },
+  {
+    "key": "drake/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191123
+    }
+  },
+  {
+    "key": "drake/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192124
+    }
+  },
+  {
+    "key": "drake/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191125
+    }
+  },
+  {
+    "key": "drake/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192126
+    }
+  },
+  {
+    "key": "drake/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191127
+    }
+  },
+  {
+    "key": "drake/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192128
+    }
+  },
+  {
+    "key": "drake/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191129
+    }
+  },
+  {
+    "key": "drake/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192130
+    }
+  },
+  {
+    "key": "drake/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward reptilian bite, then recover. Exactly four legs, two wings kept folded and one attached tail. No breath weapon. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191131
+    }
+  },
+  {
+    "key": "drake/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME drake collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192132
+    }
+  },
+  {
+    "key": "warg/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191133
+    }
+  },
+  {
+    "key": "warg/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192134
+    }
+  },
+  {
+    "key": "warg/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191135
+    }
+  },
+  {
+    "key": "warg/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192136
+    }
+  },
+  {
+    "key": "warg/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191137
+    }
+  },
+  {
+    "key": "warg/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192138
+    }
+  },
+  {
+    "key": "warg/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191139
+    }
+  },
+  {
+    "key": "warg/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192140
+    }
+  },
+  {
+    "key": "warg/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191141
+    }
+  },
+  {
+    "key": "warg/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192142
+    }
+  },
+  {
+    "key": "warg/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191143
+    }
+  },
+  {
+    "key": "warg/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192144
+    }
+  },
+  {
+    "key": "warg/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191145
+    }
+  },
+  {
+    "key": "warg/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192146
+    }
+  },
+  {
+    "key": "warg/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A powerful short forward jaw snap, then recover. Four canid legs, no rider. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191147
+    }
+  },
+  {
+    "key": "warg/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME warg collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192148
+    }
+  },
+  {
+    "key": "hookbeak/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191149
+    }
+  },
+  {
+    "key": "hookbeak/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192150
+    }
+  },
+  {
+    "key": "hookbeak/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191151
+    }
+  },
+  {
+    "key": "hookbeak/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192152
+    }
+  },
+  {
+    "key": "hookbeak/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191153
+    }
+  },
+  {
+    "key": "hookbeak/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192154
+    }
+  },
+  {
+    "key": "hookbeak/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191155
+    }
+  },
+  {
+    "key": "hookbeak/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192156
+    }
+  },
+  {
+    "key": "hookbeak/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191157
+    }
+  },
+  {
+    "key": "hookbeak/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192158
+    }
+  },
+  {
+    "key": "hookbeak/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191159
+    }
+  },
+  {
+    "key": "hookbeak/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192160
+    }
+  },
+  {
+    "key": "hookbeak/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191161
+    }
+  },
+  {
+    "key": "hookbeak/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192162
+    }
+  },
+  {
+    "key": "hookbeak/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short downward hooked-beak strike then recover, supported by four heavy clawed limbs. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191163
+    }
+  },
+  {
+    "key": "hookbeak/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME hookbeak collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192164
+    }
+  },
+  {
+    "key": "scorpion/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191165
+    }
+  },
+  {
+    "key": "scorpion/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192166
+    }
+  },
+  {
+    "key": "scorpion/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191167
+    }
+  },
+  {
+    "key": "scorpion/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192168
+    }
+  },
+  {
+    "key": "scorpion/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191169
+    }
+  },
+  {
+    "key": "scorpion/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192170
+    }
+  },
+  {
+    "key": "scorpion/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191171
+    }
+  },
+  {
+    "key": "scorpion/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192172
+    }
+  },
+  {
+    "key": "scorpion/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191173
+    }
+  },
+  {
+    "key": "scorpion/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192174
+    }
+  },
+  {
+    "key": "scorpion/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191175
+    }
+  },
+  {
+    "key": "scorpion/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192176
+    }
+  },
+  {
+    "key": "scorpion/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191177
+    }
+  },
+  {
+    "key": "scorpion/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192178
+    }
+  },
+  {
+    "key": "scorpion/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short forward pincer snap then recover. Exactly eight walking legs, two pincers and one attached tail with one stinger. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191179
+    }
+  },
+  {
+    "key": "scorpion/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME scorpion collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192180
+    }
+  },
+  {
+    "key": "harpy/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191181
+    }
+  },
+  {
+    "key": "harpy/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192182
+    }
+  },
+  {
+    "key": "harpy/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191183
+    }
+  },
+  {
+    "key": "harpy/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192184
+    }
+  },
+  {
+    "key": "harpy/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191185
+    }
+  },
+  {
+    "key": "harpy/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192186
+    }
+  },
+  {
+    "key": "harpy/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191187
+    }
+  },
+  {
+    "key": "harpy/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192188
+    }
+  },
+  {
+    "key": "harpy/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191189
+    }
+  },
+  {
+    "key": "harpy/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192190
+    }
+  },
+  {
+    "key": "harpy/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191191
+    }
+  },
+  {
+    "key": "harpy/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192192
+    }
+  },
+  {
+    "key": "harpy/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191193
+    }
+  },
+  {
+    "key": "harpy/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192194
+    }
+  },
+  {
+    "key": "harpy/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short aerial talon rake then recover with coherent wingbeats. Two wing-arms and two taloned legs, no extra hands. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191195
+    }
+  },
+  {
+    "key": "harpy/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME harpy collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192196
+    }
+  },
+  {
+    "key": "gargoyle/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191197
+    }
+  },
+  {
+    "key": "gargoyle/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192198
+    }
+  },
+  {
+    "key": "gargoyle/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191199
+    }
+  },
+  {
+    "key": "gargoyle/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192200
+    }
+  },
+  {
+    "key": "gargoyle/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191201
+    }
+  },
+  {
+    "key": "gargoyle/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192202
+    }
+  },
+  {
+    "key": "gargoyle/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191203
+    }
+  },
+  {
+    "key": "gargoyle/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192204
+    }
+  },
+  {
+    "key": "gargoyle/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191205
+    }
+  },
+  {
+    "key": "gargoyle/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192206
+    }
+  },
+  {
+    "key": "gargoyle/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191207
+    }
+  },
+  {
+    "key": "gargoyle/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192208
+    }
+  },
+  {
+    "key": "gargoyle/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191209
+    }
+  },
+  {
+    "key": "gargoyle/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192210
+    }
+  },
+  {
+    "key": "gargoyle/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A short crouched stone-claw swipe then recover. Two arms, two legs and two rigid wings, no rubbery limbs. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191211
+    }
+  },
+  {
+    "key": "gargoyle/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME gargoyle collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Wings folded against body, legs relaxed. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192212
+    }
+  },
+  {
+    "key": "crab/attack/south",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing south throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south",
+      "view": "low top-down",
+      "seed": 191213
+    }
+  },
+  {
+    "key": "crab/down/south",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing south. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192214
+    }
+  },
+  {
+    "key": "crab/attack/south-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing south-west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-west",
+      "view": "low top-down",
+      "seed": 191215
+    }
+  },
+  {
+    "key": "crab/down/south-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing south-west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192216
+    }
+  },
+  {
+    "key": "crab/attack/west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing west throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "west",
+      "view": "low top-down",
+      "seed": 191217
+    }
+  },
+  {
+    "key": "crab/down/west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing west. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192218
+    }
+  },
+  {
+    "key": "crab/attack/north-west",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing north-west throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-west",
+      "view": "low top-down",
+      "seed": 191219
+    }
+  },
+  {
+    "key": "crab/down/north-west",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing north-west. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192220
+    }
+  },
+  {
+    "key": "crab/attack/north",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing north throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north",
+      "view": "low top-down",
+      "seed": 191221
+    }
+  },
+  {
+    "key": "crab/down/north",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing north. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192222
+    }
+  },
+  {
+    "key": "crab/attack/north-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing north-east throughout. Back remains to viewer. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "north-east",
+      "view": "low top-down",
+      "seed": 191223
+    }
+  },
+  {
+    "key": "crab/down/north-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing north-east. Back remains to viewer. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192224
+    }
+  },
+  {
+    "key": "crab/attack/east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "east",
+      "view": "low top-down",
+      "seed": 191225
+    }
+  },
+  {
+    "key": "crab/down/east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192226
+    }
+  },
+  {
+    "key": "crab/attack/south-east",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "A quick pincer snap then recover. Eight walking legs and two claw-bearing limbs. Rigid carapace. Remain in the same canvas position, facing south-east throughout. One restrained attack cycle returning to the original pose. Keep the body size, crisp pixel style and attached anatomy unchanged. All tips inside margins. No attack marks, particles, impact symbols, steam, blood, magic, scenery or new objects.",
+      "frame_count": 4,
+      "no_background": true,
+      "direction": "south-east",
+      "view": "low top-down",
+      "seed": 191227
+    }
+  },
+  {
+    "key": "crab/down/south-east",
+    "name": "edit_image_pixen",
+    "arguments": {
+      "description": "Change ONLY pose: the SAME crab collapsed limp on its side on the ground, defeated but not graphic. Facing south-east. Keep exact size, colors, pixel style and connected original anatomy. Original legs relaxed; no added limbs or wings. Eyes closed. Entire body inside transparent margins. No hovering, standing, blood, particles, symbols, effects, shadow or background. One complete creature.",
+      "no_background": true,
+      "seed": 192228
+    }
+  }
+]
