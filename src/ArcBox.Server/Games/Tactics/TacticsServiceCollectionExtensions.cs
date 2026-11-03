@@ -46,6 +46,8 @@ public static class TacticsServiceCollectionExtensions
             var battleList = devSettings?.GetValue<bool>(BattleListSetting) ?? false;
             return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>(), lore: sp.GetRequiredService<Lazy<LoreBook>>(), seed: seed, battleList: battleList)
             {
+                BattleDifficulty = devSettings?.GetValue<Difficulty?>("Tactics:Difficulty") ?? Difficulty.Normal,
+                BattleSeed = devSettings?.GetValue<ulong?>("Tactics:BattleSeed"),
                 FaultLogged = fault => LogFault(log, fault),
                 StoryLogged = problem => log.LogWarning("Tactics story: {Problem}", problem),
             };
