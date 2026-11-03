@@ -241,6 +241,7 @@ public sealed partial class TacticsGame
                 injury = t.Injury.Id.Value, label = t.Injury.Name, kind = t.Injury.Mends, detail = InjuryDetail(t.Injury),
                 can = !camp.Jobs.Any(j => j.Key != profile.Value && j.Value.Target == t.Member && j.Value.Injury == t.Injury.Id.Value),
                 selected = pick.Target == t.Member && pick.Injury == t.Injury.Id.Value }) : [],
+            members = RecoveryMembers(),
             picked = pick, result = camp.Results.IsEmpty ? null : camp.Results[^1],
             party = camp.Actors.Select(m => new { member = m, name = _doc.Members[m].Character.Name, job = camp.Jobs.GetValueOrDefault(m)?.Job }),
             leader = profile.Value == _lead, vip = IsVip(player),
@@ -256,7 +257,7 @@ public sealed partial class TacticsGame
         var seats = SceneCast.Place(ground, camp.At, _at, _facing, [], actors.Length, t => ground.Map.InBounds(t) && reached.Contains(t));
         return new CampView(camp.Mode, camp.Source, camp.Stage, camp.At, _doc.World!.RestSeq,
             [.. actors.Select((m, i) => new CampPersonView(m, _doc.Members[m].Character.Name, camp.Jobs.GetValueOrDefault(m)?.Job,
-                i < seats.Length ? seats[i] : _at, _doc.Members[m].WellFed))], camp.Results.IsEmpty ? null : camp.Results[^1], camp.Results.Length, camp.Due);
+                i < seats.Length ? seats[i] : _at, _doc.Members[m].WellFed))], camp.Results.IsEmpty ? null : camp.Results[^1], camp.Results.Length, camp.Due, RecoveryMembers());
     }
 
     private static string JobName(string job) => job switch { "tend" => "Tend wounds", "rally" => "Rally", "cook" => "Cook", "watch" => "Keep watch", _ => "Rest easy" };

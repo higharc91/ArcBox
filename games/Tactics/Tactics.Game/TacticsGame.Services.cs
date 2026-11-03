@@ -59,6 +59,7 @@ public sealed partial class TacticsGame
             room = Camp?.Rooms.Contains(m.Key) == true, wellFed = m.Value.WellFed,
             injuries = m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)).OfType<InjuryDef>()
                 .Select(i => new { id = i.Id.Value, name = i.Name, kind = i.Mends, detail = InjuryDetail(i) }) }), ArcJson.Options);
+        data["members"] = JsonSerializer.SerializeToNode(RecoveryMembers(), ArcJson.Options);
         data["restReady"] = _doc.World?.RestReady == true;
         data["roomsOpen"] = Camp?.Stage == "rooms";
         data["canPropose"] = profile.Value == _lead && Camp is null && _doc.World?.RestReady == true;

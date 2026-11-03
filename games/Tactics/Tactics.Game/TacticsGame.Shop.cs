@@ -153,5 +153,5 @@ public sealed partial class TacticsGame
         [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))],
         shop.Services.IsEmpty ? null : shop.Services,
         shop.Services.IsEmpty ? null : [.. _doc.Members.Select(m => new ServiceGuestView(m.Key, m.Value.Character.Name,
-            [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))]);
+            [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))], shop.Services.IsEmpty ? null : RecoveryMembers());
 }

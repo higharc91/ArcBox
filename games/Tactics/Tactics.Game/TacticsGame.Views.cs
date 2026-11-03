@@ -371,7 +371,8 @@ public sealed record TacticsHostView(string Phase, string Banner, string? Notice
 public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, long Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ShopService>? Services = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ServiceGuestView>? Guests = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ServiceGuestView>? Guests = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null);
 
 /// <summary>A recovery service's possible guest, including absent campaign members.</summary>
 public sealed record ServiceGuestView(string Member, string Name, ImmutableArray<string> Injuries, bool Room);
@@ -379,7 +380,8 @@ public sealed record ServiceGuestView(string Member, string Name, ImmutableArray
 public sealed record CampPersonView(string Member, string Name, string? Job, Tile At, bool WellFed);
 /// <summary>Saved recovery presentation, separate from walking and normal story packets.</summary>
 public sealed record CampView(string Mode, string Source, string Stage, Tile At, int Visit, ImmutableArray<CampPersonView> People,
-    CampResult? Result, int ResultCount, DateTimeOffset? Until);
+    CampResult? Result, int ResultCount, DateTimeOffset? Until,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null);
 
 /// <summary>A character's individual purse, for the shared TV shop display.</summary>
 public sealed record PurseView(string Member, string Name, int Gold);
