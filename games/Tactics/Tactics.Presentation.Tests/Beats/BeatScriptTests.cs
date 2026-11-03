@@ -53,6 +53,18 @@ public sealed class BeatScriptTests
 
     private static RollResult Roll(int die, bool success, bool crit = false) => new([die], die, 3, die + 3, 12, success, crit, false);
 
+    [Theory]
+    [InlineData("ashmaw.maul")]
+    [InlineData("ashmaw.party_maul")]
+    public void Both_bear_profiles_keep_the_whole_attack_clip(string ability)
+    {
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Foe), new("beasts.attack", null, null));
+        var script = Script(Near, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "slashing", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        Assert.Equal(1.0, lunge.Length);
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+    }
+
     private static BattleEvent[] Hit(int amount, int after, string? anim = "characters.attack", string? fx = "fx.slash.steel", string? projectile = null,
         bool crit = false) =>
     [

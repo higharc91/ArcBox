@@ -46,6 +46,17 @@ internal sealed partial class Validation
                 {
                     var at = Pointer.Append(Pointer.Append(ptr, name), i);
                     Ref(RefKind.Monster, units[i].Unit, file, Pointer.Append(at, "unit"));
+                    if (units[i].UnitByParty is { } variants)
+                    {
+                        if (!Enumerable.Range(def.Party.Min, def.Party.Max - def.Party.Min + 1).SequenceEqual(variants.Keys))
+                            Error(file, Pointer.Append(at, "unitByParty"), "Provide one monster for every supported party size.");
+                        foreach (var (size, monster) in variants)
+                        {
+                            var valueAt = Pointer.Append(Pointer.Append(at, "unitByParty"), size.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                            if (string.IsNullOrWhiteSpace(monster)) Error(file, valueAt, "The monster id is empty.");
+                            else Ref(RefKind.Monster, monster, file, valueAt);
+                        }
+                    }
                     foreach (var (values, field) in new[] { (units[i].CountByParty, "countByParty"), (units[i].HpByParty, "hpByParty") })
                         if (values is not null)
                         {

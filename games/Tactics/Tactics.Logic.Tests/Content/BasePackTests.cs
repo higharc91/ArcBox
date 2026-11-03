@@ -49,7 +49,7 @@ public sealed class BasePackTests
         Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [
-            "air_elemental", "ashmaw", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
+            "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
             "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
             "ivo_rime", "kobold", "kobold_foreman", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",

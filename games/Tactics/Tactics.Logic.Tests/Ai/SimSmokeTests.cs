@@ -45,8 +45,13 @@ public sealed class SimSmokeTests
         // defeating every enemy credits nearly all of the placed enemies' HP: only an unsourced kill (a fall, deep water) is
         // left out. (A battle won another way, by surviving, say, needn't have defeated anyone.)
         double Dealt(SimBattle b) => b.PerClass.Sum(p => p.Value.DamagePerRound * b.Classes.Count(c => c == p.Key) * b.Rounds);
-        double EnemyHp(SimBattle b) => rules.Encounters[b.Encounter].Enemies
-            .Sum(e => e.Count * SheetBuilder.ForMonster(e.Unit, rules, e.Level).MaxHp);
+        // Read the actual encounter setup: authored party-size HP and monster profiles can differ
+        // from the base stat block. This budget checks scoring against what really entered battle.
+        var enemyHp = battles.ToDictionary(b => b, b =>
+            Encounters.Setup(b.Encounter, [.. b.Classes.Select((cls, i) => new PartyMember(new UnitId($"hero{i + 1}"),
+                SheetBuilder.DefaultCharacter($"Hero {i + 1}", "human", cls, null, b.Level, rules), new AiControlled("companion")))],
+                config.Difficulty, rules).Units.Where(u => u.Sheet.Side == Side.Enemy).Sum(u => u.Sheet.MaxHp));
+        double EnemyHp(SimBattle b) => enemyHp[b];
         double SpawnHp(SimBattle b) => rules.Encounters[b.Encounter].Triggers.SelectMany(t => t.Do).Select(a => a.Spawn)
             .OfType<SpawnAction>().Sum(s => s.Count * SheetBuilder.ForMonster(s.Unit, rules, s.Level).MaxHp);
         Assert.All(battles, b => Assert.True(Dealt(b) <= EnemyHp(b) + SpawnHp(b) + 0.01,

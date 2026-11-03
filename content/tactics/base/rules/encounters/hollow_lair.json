@@ -1,6 +1,6 @@
 {
   "id": "hollow_lair",
-  "name": "Ashmaw’s Bed",
+  "name": "Ashmaw\u2019s Bed",
   "map": "hollow_lair",
   "level": 2,
   "party": {
@@ -18,9 +18,17 @@
         "1": 32,
         "2": 60,
         "3": 90,
-        "4": 120,
-        "5": 150,
-        "6": 180
+        "4": 240,
+        "5": 320,
+        "6": 400
+      },
+      "unitByParty": {
+        "1": "ashmaw",
+        "2": "ashmaw",
+        "3": "ashmaw",
+        "4": "ashmaw_party",
+        "5": "ashmaw_party",
+        "6": "ashmaw_party"
       }
     }
   ],

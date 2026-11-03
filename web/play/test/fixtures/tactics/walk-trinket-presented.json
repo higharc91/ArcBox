@@ -58,12 +58,12 @@
           "objective": "Quest complete",
           "history": [
             {
-              "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens.",
+              "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens. Recommended level: 2.",
               "done": true,
               "objective": null
             },
             {
-              "log": "Dagna sent us to the cave below Maud\u2019s hut on the burned east bank.",
+              "log": "Dagna sent us to the cave below Maud\u2019s hut on the burned east bank. Recommended level: 2.",
               "done": true,
               "objective": null
             },

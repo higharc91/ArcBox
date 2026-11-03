@@ -672,7 +672,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
-                var length = used.Ability.Value == "ashmaw.maul" ? 1.0
+                var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman" ? 0.75 : BeatTiming.Lunge;
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);

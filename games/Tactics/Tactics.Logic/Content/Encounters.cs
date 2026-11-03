@@ -42,6 +42,13 @@ public static class Encounters
         if (party.Select(m => m.Id).Distinct().Count() != party.Length)
             throw new ArgumentException("Two party members have the same id.", nameof(party));
 
+        // Select the authored group variant before resolving tags and phases. Keep the placement's
+        // stable identity and original trigger tag; all older encounters omit this optional mapping.
+        EncounterUnitDef ForParty(EncounterUnitDef unit) => unit.UnitByParty is { } variants
+            ? unit with { Unit = variants.GetValueOrDefault(party.Length, unit.Unit), Tag = unit.UnitTag }
+            : unit;
+        def = def with { Enemies = [.. def.Enemies.Select(ForParty)], Npcs = [.. def.Npcs.Select(ForParty)] };
+
         var map = rules.MapFor(def.Map);
         if (map is null)
             problems.Add("/map", $"Unknown map '{def.Map}'.");

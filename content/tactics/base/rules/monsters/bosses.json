@@ -123,5 +123,69 @@
           "passives": []
         }
       ]
-    }
-  ]
+    },
+  {
+    "id": "ashmaw_party",
+    "name": "Ashmaw",
+    "level": 2,
+    "cr": "2",
+    "xp": 0,
+    "move": 4,
+    "attacks": 1,
+    "scores": {
+      "str": 21,
+      "dex": 12,
+      "con": 16,
+      "int": 2,
+      "wis": 12,
+      "cha": 7
+    },
+    "hp": 120,
+    "ac": 14,
+    "weapon": {
+      "id": "claws",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "ashmaw.party_maul",
+      "ashmaw.cinder_roar"
+    ],
+    "passives": [
+      "ashmaw.roar_recharge"
+    ],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast",
+      "boss",
+      "ashmaw"
+    ],
+    "aiProfile": "ashmaw",
+    "sprite": "monsters.ashmaw",
+    "resources": {
+      "roar": 1
+    },
+    "resist": [
+      "fire"
+    ],
+    "phases": [
+      {
+        "hpBelow": 50,
+        "abilities": [
+          "ashmaw.ash_shake"
+        ],
+        "passives": []
+      }
+    ]
+  }
+]

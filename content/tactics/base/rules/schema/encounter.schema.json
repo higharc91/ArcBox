@@ -91,6 +91,17 @@
               }
             },
             "additionalProperties": false
+          },
+          "unitByParty": {
+            "type": "object",
+            "description": "Explicit monster profile for every supported party size; placement identity and trigger tag remain stable.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
           }
         },
         "required": [
@@ -154,6 +165,17 @@
               "^[1-9][0-9]*$": {
                 "type": "integer",
                 "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "unitByParty": {
+            "type": "object",
+            "description": "Explicit monster profile for every supported party size; placement identity and trigger tag remain stable.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "string",
+                "minLength": 1
               }
             },
             "additionalProperties": false

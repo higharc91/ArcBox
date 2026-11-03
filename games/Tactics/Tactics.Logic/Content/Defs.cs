@@ -444,7 +444,8 @@ public sealed record EncounterUnitDef(string Unit,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Id = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, int>? CountByParty = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, int>? HpByParty = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, int>? HpByParty = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, string>? UnitByParty = null)
 {
     /// <summary>The tag objectives and triggers use: <see cref="Tag"/>, or the monster id.</summary>
     [JsonIgnore]
