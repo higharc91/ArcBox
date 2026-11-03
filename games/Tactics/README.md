@@ -16,6 +16,8 @@ dotnet run -c Release --project games/Tactics/Tactics.Sim -- --levels 1,3,5,7,10
 
 That full sweep is 9,000 battles and takes about 5 minutes. While iterating, use `--seeds 6` (about 1.5 minutes), or narrow it with `--encounters a,b` and `--levels`. `--help` lists every option. The rules are read at run time, so a content edit needs no rebuild.
 
+The report also groups environmental reactions, same-side/self conduction damage, burning tile-rounds and terminal surface deaths by encounter and level. Downs are reported separately from deaths. Environment-off encounters produce zero environmental tallies.
+
 Six seeds are noisy, so judge the final numbers at 20. The report flags:
 - win rates outside 60–95%, and mean battle lengths outside 8–12 rounds, at each encounter's own level;
 - role-band values more than ±15% from the band mean;
@@ -24,6 +26,10 @@ Six seeds are noisy, so judge the final numbers at 20. The report flags:
 Simulated parties have no subclass. The latest numbers and every tuning decision are in [the final balance report](../../docs/superpowers/reports/2026-10-30-tactics-balance.md).
 
 If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dotnet test games/Tactics/Tactics.Logic.Tests`, review each diff, then run again without the flag. The recording run fails `Warlord_bridge_plays_the_showcase_triggers` if it runs before the replay is written; the second run must pass. To re-record `warlord-bridge` from the AI, empty its `commands` in `Golden/warlord-bridge.replay.json`.
+
+## Environmental encounter balance
+
+Environmental reactions are opt-in per encounter. The [Phase G report](../../docs/superpowers/reports/2026-11-02-environmental-tiles/milestone-g.md) compares the river and showcase encounters with reactions off and on, separates adding Ford Assault's stormcaller from enabling reactions, and records the party-size results and real Chapter 1 playtest. Showcase opt-ins require their intended-level simulation to meet the win-rate and battle-length targets. A pooled pass does not guarantee that every party size is balanced; the four-character Ford result is called out separately.
 
 ## Bot phones and the TV, end to end
 
@@ -111,7 +117,7 @@ These turn SRD 5.2 into this game, and every content file starts from them. **Th
   - Every other resource interpolates linearly between the spec §4.5 endpoints (level 1 → level 10), rounding down.
   - *After balancing:* the wizard keeps this Mana table. The bard, cleric, druid and sorcerer pools and the ranger's Focus differ, and warlock spells can cost more than 1 pact.
 - **Affordable on arrival:** every ability a class or subclass grants, offers in a `choose` list or puts in its `defaultPicks` can be paid for from the class's pools at the level it arrives, and pools never shrink as the level rises. Tune a cost and a pool together, or move the pick to the level its cost fits.
-- **The area ladder:** within one class's Mana spells, a higher-tier area spell covering at least as many tiles never deals less direct damage per target than a lower-tier one (equal is fine: the bigger footprint is the upgrade). Two area spells of the same tier whose footprints are within a third of each other differ by at most 1.5× per target. Single-target spells, damage dealt only by a zone and subclass kits aren't on this ladder. Balance tuning has to cut the whole ladder, not only the spells in `defaultPicks`.
+- **The area ladder:** within one class's Mana spells, a higher-tier area spell covering at least as many tiles never deals less direct damage per target than a lower-tier one (equal is fine: the bigger footprint is the upgrade). Two area spells of the same tier whose footprints are within a third of each other differ by at most 1.5× per target. Single-target spells, damage dealt only by a zone, secondary environmental conduction and subclass kits aren't on this ladder. Conduction depends on the terrain and nearby units, so it is measured in encounter simulations rather than counted as a spell's direct area damage. Balance tuning has to cut the whole ladder, not only the spells in `defaultPicks`.
   - `ContentLadderTests` checks both rules at every level 1–10, so they hold beyond the levels and picks the simulator samples.
 - **Spell ranges:** touch → 1. SRD range ≤ 30 ft → 4. Any longer ranged spell → 6.
 - **Weapon ranges:** thrown → 4. Shortbow and light crossbow → 6. Longbow and heavy crossbow → 8.

@@ -188,6 +188,20 @@ public static class Report
                      + $"{c.Battles.Sum(b => b.Rejected)} | {c.Battles.Sum(b => b.Replans)} | {c.Battles.Sum(b => b.ForcedEnds)} |");
         Line(md);
 
+        Line(md, "### Environmental reactions and surfaces");
+        Line(md);
+        Line(md, "Friendly conduction damage is same-side/self HP and temporary HP actually lost, without overkill. Burning tile-rounds count unique tiles present at any point in each round; surface deaths count terminal Died/Out events directly caused by surface packets, not Downs.");
+        Line(md);
+        Line(md, "| Encounter | Level | Reactions / battle | Friendly conduction damage / battle | Burning tile-rounds / battle | Surface deaths | Reaction rules |");
+        Line(md, "|---|---:|---:|---:|---:|---:|---|");
+        foreach (var c in winCells)
+        {
+            var measures = c.Battles.Select(b => b.Environmental ?? new EnvironmentStats(0, 0, 0, 0, ImmutableSortedDictionary<string, int>.Empty)).ToArray();
+            var counts = measures.SelectMany(m => m.ByRule).GroupBy(p => p.Key).OrderBy(g => g.Key, StringComparer.Ordinal);
+            Line(md, $"| {c.Encounter} | {c.Level} | {Num(measures.Average(m => m.Reactions))} | {Num(measures.Average(m => m.FriendlyConductionDamage))} | {Num(measures.Average(m => m.BurningTileRounds))} | {measures.Sum(m => m.SurfaceDeaths)} | {string.Join(", ", counts.Select(g => $"{g.Key}: {g.Sum(p => p.Value)}"))} |");
+        }
+        Line(md);
+
         // 7. Configuration
         Line(md, Headings[6]);
         Line(md);

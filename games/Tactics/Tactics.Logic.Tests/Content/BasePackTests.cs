@@ -51,7 +51,7 @@ public sealed class BasePackTests
         [
             "air_elemental", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
-            "goblin", "goblin_archer", "goblin_boss", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
+            "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
             "ivo_rime", "kobold", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
             "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
             "wraith", "zombie",

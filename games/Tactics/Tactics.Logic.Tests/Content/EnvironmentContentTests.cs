@@ -7,7 +7,7 @@ namespace Tactics.Logic.Tests;
 public sealed class EnvironmentContentTests
 {
     [Fact]
-    public void Base_pack_has_the_agreed_rules_but_no_encounter_is_opted_in()
+    public void Base_pack_has_the_agreed_rules_and_only_approved_encounters_can_opt_in()
     {
         var rules = BasePackTests.Rules;
         Assert.Contains("planks/*", rules.Environment.Fuel);
@@ -17,7 +17,10 @@ public sealed class EnvironmentContentTests
         Assert.Equal(3, rules.Environment.Surfaces["ice_sheet"].Rounds);
         Assert.Equal(10, rules.Environment.Surfaces["oil"].Rounds);
         Assert.Null(rules.Environment.Surfaces["scorched"].Rounds);
-        Assert.All(rules.Encounters.Values, e => Assert.False(e.Environment));
+        Assert.True(rules.Encounters["river_crossing"].Environment);
+        Assert.True(rules.Encounters["ford_assault"].Environment);
+        string[] enabled = ["ford_assault", "forest_ruins", "river_crossing", "warlord_bridge"];
+        Assert.Equal(enabled, rules.Encounters.Where(e => e.Value.Environment).Select(e => e.Key));
     }
 
     [Theory]

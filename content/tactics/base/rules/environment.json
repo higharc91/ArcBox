@@ -4,6 +4,7 @@
     "mine_boards/*",
     "grass/dry",
     "grass/autumn",
+    "grass_ford/autumn",
     "forest_floor/leafy"
   ],
   "zoneFuel": [
