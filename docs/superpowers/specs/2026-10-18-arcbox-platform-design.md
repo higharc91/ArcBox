@@ -234,7 +234,7 @@ Hub methods only validate the input, look up the room and post a command to that
 | Failure | Behavior |
 |---|---|
 | Game throws an exception | Log it with the room code and game ID, then end the game with "Game crashed" and return to the lobby. Players stay connected, and other rooms are unaffected. |
-| Game call takes longer than 2 s | The watchdog logs it and closes the room (`RoomClosed("game stopped responding")`). **Known limitation:** .NET can't abort the stuck thread, so it stays busy until the server restarts. This is acceptable for trusted authors. |
+| Game call takes longer than 10 s by default | The watchdog logs it and closes the room (`RoomClosed("game stopped responding")`). The timeout is configurable and allows for scheduling delays on a busy machine. **Known limitation:** .NET can't abort the stuck thread, so it stays busy until the server restarts. This is acceptable for trusted authors. |
 | `HostView` / `PlayerView` throws | Handled the same as a game exception. |
 | Stale `viewId`, oversized payload, or bad JSON | Dropped and logged at debug level. |
 | Message flood | Rate limit of about 20 messages per second per connection. Excess messages are dropped. |

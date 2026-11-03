@@ -98,7 +98,14 @@ public sealed class RoomManagerTests : IDisposable
             var viewId = sender.LastViewId("c1");
             _ = room.SendInputAsync("c1", viewId, Json(new { pressed = "x" }));
             Assert.True(HangerGame.Entered.Wait(TimeSpan.FromSeconds(5), TestContext.Current.CancellationToken));
+            // A short scheduling delay must not destroy the room on a loaded TV/server machine.
             time.Advance(TimeSpan.FromSeconds(3));
+            var sweep = m.SweepAsync();
+            time.Advance(TimeSpan.FromSeconds(2)); // the idle-park attempt times out while the game is busy
+            await sweep;
+            Assert.Equal(1, m.Count);
+            Assert.Empty(sender.Of("c1", ClientMethods.RoomClosed));
+            time.Advance(new RoomOptions().GameCallTimeout);
             await m.SweepAsync();
             Assert.Equal(0, m.Count);
             Assert.Equal("game stopped responding", sender.Of("c1", ClientMethods.RoomClosed).Single().Args[0]);
