@@ -1,3 +1,4 @@
+import { SurfaceScene } from "./surfaces";
 import { useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Crest, Logo, Portrait } from "./art";
@@ -140,6 +141,7 @@ export function Status({ data }: CustomScreenProps) {
   const active = seen(s.active);
   return (
     <div class="tx tx-status">
+      <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
         {s.active ? <NamedPortrait name={s.active} size={60} /> : null}
@@ -234,6 +236,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const pass = r.options.find((o) => o.id === "pass");
   return (
     <div class="tx tx-react">
+      <SurfaceScene kinds={r.surfaces} />
       <div class="tx-alert" role="alert">
         <span class="tx-eyebrow">Reaction</span>
         <p class="tx-alert-title">{TRIGGERS[r.trigger] ?? "You can react"}</p>

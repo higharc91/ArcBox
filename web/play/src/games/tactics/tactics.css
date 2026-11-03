@@ -666,3 +666,33 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   .tx-bar > i { transition: none; }
   .tx button:not(:disabled):active { transform: none; }
 }
+
+/* Current terrain: quiet edge effects leave the battle controls readable and tappable. */
+.tx:has(.tx-surface-scene) { isolation: isolate; }
+.tx .tx-surface-scene { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; user-select: none; }
+.tx .tx-surface { position: absolute; inset: 0; --surface: #f39a37; }
+.tx .tx-surface::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--surface) 12%, transparent), transparent 12% 88%, color-mix(in srgb, var(--surface) 12%, transparent)); }
+.tx .tx-surface i { position: absolute; left: var(--x); bottom: -16px; width: 5px; height: 9px; border-radius: 60% 40% 40% 60%; background: var(--surface); opacity: 0; animation: tx-ember 5s linear infinite; animation-delay: calc(var(--i) * -0.43s); }
+.tx .tx-surface-burning i { box-shadow: 0 0 12px #e67325; }
+.tx .tx-surface-water { --surface: #72c8eb; }
+.tx .tx-surface-water i { width: 170px; height: 42px; background: none; border: 2px solid var(--surface); border-radius: 50%; animation-name: tx-ripple; animation-duration: 7s; }
+.tx .tx-surface-ice_sheet { --surface: #a8e5f1; }
+.tx .tx-surface-ice_sheet i { width: 9px; height: 13px; border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); animation-name: tx-frost; animation-duration: 9s; }
+.tx .tx-surface-oil { --surface: #9b83c4; }
+.tx .tx-surface-oil i { width: 120px; height: 36px; border: 1px solid var(--surface); border-radius: 50%; background: linear-gradient(110deg, #649d9c30, #916abf40, #bda55b20); animation-name: tx-ripple; animation-duration: 11s; }
+.tx .tx-surface-web { --surface: #d1cec5; }
+.tx .tx-surface-web i { width: 46px; height: 56px; border-radius: 0; border: 1px solid #d1cec550; background: repeating-linear-gradient(45deg, transparent 0 9px, #d1cec540 10px 11px); animation-name: tx-frost; animation-duration: 14s; }
+.tx .tx-surface-scorched { --surface: #9a8d80; }
+.tx .tx-surface-scorched i { width: 3px; height: 3px; animation-duration: 12s; }
+.tx .tx-current-surfaces { display: flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: .035em; color: var(--wf-ink); padding: 7px 12px; border: 1px solid #b6a48455; border-radius: 6px; background: #121527e8; }
+.tx .tx-terrain-dot { width: 6px; height: 6px; border-radius: 50%; background: #e6bd5c; box-shadow: 0 0 9px #e6bd5c70; }
+.tx .tx-cell.risk { box-shadow: inset 0 0 0 2px #ebbc52; background-image: repeating-linear-gradient(135deg, #ebbc5233 0 3px, transparent 3px 7px) !important; }
+.tx .tx-cell.spread { position: relative; }
+.tx .tx-cell.spread::after { content: ""; position: absolute; inset: 3px; border: 1px dashed #86dded; pointer-events: none; }
+.tx .tx-spread-key { color: #a2e5f0; font-size: 14px; grid-column: 1 / -1; }
+@keyframes tx-ember { 0% { transform: translate(0, 0) scale(.6); opacity: 0; } 15% { opacity: .55; } 75% { opacity: .2; } 100% { transform: translate(18px, -36vh) scale(.15); opacity: 0; } }
+@keyframes tx-ripple { 0% { transform: translate(-50%, 0) scale(.5); opacity: 0; } 25% { opacity: .25; } 100% { transform: translate(-50%, -10vh) scale(1.9); opacity: 0; } }
+@keyframes tx-frost { 0% { transform: translate(0, 0) rotate(0); opacity: 0; } 20% { opacity: .3; } 100% { transform: translate(-12px, -54vh) rotate(80deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .tx .tx-surface-scene i { animation: none; opacity: .14; bottom: 12px; }
+}
