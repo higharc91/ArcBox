@@ -367,7 +367,7 @@ public sealed class InteractTests
         var s = new Session();
         s.ToWalking();
         var placed = Rules.InteractablesIn("ashen_ford");
-        Assert.InRange(placed.Length, 12, 18);
+        Assert.Equal(19, placed.Length);
         Assert.Equal(placed.Where(t => t.Hidden is null).Select(t => t.Id), s.Host.Explore!.Things!.Value.Select(t => t.Id));    // the cache isn't found yet
         Assert.Empty(s.Host.Explore!.ThingEvents!.Value);                   // nothing has happened to one yet
         Assert.True(Walk(s).TryGetProperty("targets", out _));            // a region with things gives the leader's walk screen its list

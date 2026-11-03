@@ -883,15 +883,15 @@ public sealed class WalkingTests
     public void Ashen_fords_things_cost_the_explore_view_a_known_amount()
     {
         // Every view carries every thing that's there and seen (interactables design §2.9), so each step's view grows by all of them: about
-        // 190 bytes a thing (2.9 KB for Ashen Ford's 15 seen things), which takes a step's view past one packet (1420 bytes); this pins what they cost, so a
+        // 190 bytes a thing (3.3 KB for Ashen Ford's 17 seen things), which takes a step's view past one packet (1420 bytes); this pins what they cost, so a
         // change to what a thing sends, or a much fuller region, is seen here.
         var s = At(Road());
         Hold(s, "se", 3);
         var view = Party(s);
         var things = JsonSerializer.SerializeToUtf8Bytes(view, ArcJson.Options).Length - JsonSerializer.SerializeToUtf8Bytes(WalkingPart(view), ArcJson.Options).Length;
 
-        Assert.Equal(15, view.Things!.Value.Length);
-        Assert.InRange(things, 1, 15 * 200);
+        Assert.Equal(17, view.Things!.Value.Length);
+        Assert.InRange(things, 1, 17 * 200);
     }
 
     [Fact]

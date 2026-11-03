@@ -156,6 +156,7 @@ public sealed partial class TacticsGame
     /// <summary>Uses <paramref name="def"/>: at once, or as an interaction's scene.</summary>
     private void Use(InteractableDef def)
     {
+        if (def.Kind == "campfire") { ProposeRest("camp", def.Id, def.At); return; }
         var save = ThingState(def);
         var worked = Interactables.Worked(AllThings).Contains(def.Id);
         switch (InteractScenes.Plan(def, save, StoryFlags(), worked, ItemName))

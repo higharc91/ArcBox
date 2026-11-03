@@ -92,7 +92,12 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        return StartEngine(Encounters.Setup(encounter, party, Difficulty.Normal, Rules), Rules, seed);
+        var setup = Encounters.Setup(encounter, party, Difficulty.Normal, Rules);
+        var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
+        if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
+            setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)
+                ? u with { Sheet = u.Sheet with { Passives = u.Sheet.Passives.Add("rest.well_fed") } } : u)] };
+        return StartEngine(setup, Rules, seed);
     }
 
     /// <summary>
