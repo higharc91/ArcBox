@@ -1,0 +1,149 @@
+{
+  "fuel": [
+    "planks/*",
+    "mine_boards/*",
+    "grass/dry",
+    "grass/autumn",
+    "grass_ford/autumn",
+    "forest_floor/leafy"
+  ],
+  "zoneFuel": [
+    "grease"
+  ],
+  "surfaces": {
+    "burning": {
+      "rounds": 2,
+      "spreads": true,
+      "leaves": "scorched",
+      "passives": [
+        {
+          "id": "surface.burning",
+          "hook": "onEnterTile",
+          "target": "self",
+          "effects": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ],
+          "oncePerTurn": true
+        },
+        {
+          "id": "surface.burning",
+          "hook": "onTurnStart",
+          "target": "self",
+          "effects": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ],
+          "oncePerTurn": true
+        }
+      ]
+    },
+    "ice_sheet": {
+      "rounds": 3,
+      "difficult": true,
+      "insulates": true,
+      "passives": [
+        {
+          "id": "surface.ice.slip",
+          "hook": "onEnterTile",
+          "target": "self",
+          "effects": [
+            {
+              "save": {
+                "stat": "dex",
+                "dc": 10
+              },
+              "onFail": [
+                {
+                  "apply": "prone"
+                }
+              ]
+            }
+          ],
+          "oncePerTurn": true
+        }
+      ]
+    },
+    "oil": {
+      "rounds": 10,
+      "fuel": true
+    },
+    "scorched": {
+      "rounds": null
+    }
+  },
+  "reactions": [
+    {
+      "id": "conduct",
+      "damage": "lightning",
+      "tiles": "water",
+      "conduct": {
+        "reach": 6,
+        "save": "dex",
+        "half": true
+      }
+    },
+    {
+      "id": "thaw",
+      "damage": "fire",
+      "tiles": "surface:ice_sheet",
+      "ends": true
+    },
+    {
+      "id": "burn_web",
+      "damage": "fire",
+      "tiles": "zone:web",
+      "surface": "burning",
+      "rounds": 1,
+      "consumes": true,
+      "passives": [
+        {
+          "id": "surface.burning.web",
+          "hook": "onTurnStart",
+          "target": "self",
+          "effects": [
+            {
+              "damage": {
+                "dice": "2d4",
+                "type": "fire"
+              }
+            }
+          ],
+          "oncePerTurn": true
+        }
+      ]
+    },
+    {
+      "id": "ignite",
+      "damage": "fire",
+      "tiles": "fuel",
+      "surface": "burning",
+      "consumes": true
+    },
+    {
+      "id": "freeze",
+      "damage": "cold",
+      "tiles": "shallows",
+      "surface": "ice_sheet"
+    },
+    {
+      "id": "douse",
+      "enters": "water",
+      "remove": "burning"
+    }
+  ],
+  "materialFamilies": [
+    "planks",
+    "mine_boards",
+    "grass",
+    "forest_floor"
+  ]
+}

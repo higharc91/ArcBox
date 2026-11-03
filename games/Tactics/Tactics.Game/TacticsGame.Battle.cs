@@ -308,7 +308,7 @@ public sealed partial class TacticsGame
         if (after.Active != command.Actor || after.Pending is not null
             || command is Move move && after.Units.TryGetValue(move.Actor, out var mover) && mover.Pos != move.Path[^1])
             _plan = null;
-        Pace(AddBeat(command.Actor, resolution.Events), resolution.Events.Length);
+        Pace(AddBeat(command.Actor, resolution.Events, before.Active), resolution.Events.Length);
     }
 
     // ---- Players ------------------------------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ public sealed partial class TacticsGame
             _ctx.CancelTimer(Timers.React);
             _reactTimerFor = null;
         }
-        Pace(AddBeat(unit, resolution.Events), resolution.Events.Length);
+        Pace(AddBeat(unit, resolution.Events, state.Active), resolution.Events.Length);
         Drive();
     }
 
@@ -452,14 +452,14 @@ public sealed partial class TacticsGame
     private void SetState(BattleState state) => _doc = _doc with { Battle = Save_ with { State = state } };
 
     /// <summary>Logs a beat and saves the document (rules-engine spec §2.5). Returns its number, or null for no events.</summary>
-    private int? AddBeat(UnitId? actor, ImmutableArray<BattleEvent> events)
+    private int? AddBeat(UnitId? actor, ImmutableArray<BattleEvent> events, UnitId? activeBefore = null)
     {
         if (events.IsDefaultOrEmpty)
         {
             Save();
             return null;
         }
-        var beat = new Beat(++_seq, actor, events);
+        var beat = new Beat(++_seq, actor, events, activeBefore);
         var log = Save_.Log.IsDefault ? [] : Save_.Log;
         log = log.Add(beat);
         if (log.Length > TacticsDocument.LogBeats)

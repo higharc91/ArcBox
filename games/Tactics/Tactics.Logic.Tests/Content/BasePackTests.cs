@@ -46,14 +46,14 @@ public sealed class BasePackTests
         Assert.Equal(12, pack.Backgrounds.Count);
         Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "shaken", "sprained_ankle", "wrenched_shoulder"],
             pack.Injuries.Keys.Select(i => i.Value));
-        Assert.Equal(["alchemists_fire", "greater_healing", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
+        Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [
             "air_elemental", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
-            "goblin", "goblin_archer", "goblin_boss", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
+            "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
             "ivo_rime", "kobold", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
-            "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
+            "orc_brute", "rime_spider", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
             "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
@@ -239,7 +239,7 @@ public sealed class BasePackTests
         var map = AsciiMap.Parse(field);
         var rules = RulesPack.InMemory("smoke", base_.Abilities.Values, base_.Passives.Values, base_.Conditions.Values, [map],
             base_.Injuries.Values, items: base_.Items.Values,
-            monsters: base_.Monsters.Keys.Select(m => (m, SheetBuilder.ForMonster(m, base_))));
+            monsters: base_.Monsters.Keys.Select(m => (m, SheetBuilder.ForMonster(m, base_))), environment: base_.Environment);
         Invariants.Enabled = true;
         var owners = base_.Classes.Values
             .SelectMany(c => c.Subclasses.Select(s => (SubclassDef?)s).DefaultIfEmpty(null)
@@ -261,7 +261,8 @@ public sealed class BasePackTests
             var setup = new BattleSetup(map, [.. battle.Select(b => new UnitPlacement(U(b.Item1), b.Item2,
                 b.Item2.Side == Side.Party ? new PlayerControlled(new ProfileId("pr_" + b.Item1)) : new AiControlled("brute"), b.Item3,
                 b.Item1 == "user" ? bag : []))],
-                ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
+                ObjectivesDef.Default, [], Difficulty.Normal, 0, [],
+                Environment: ability.Effects.OfType<ZoneEffect>().Any(z => z.Surface));
             var state = Battle.Start(setup, rules, seed: 3).State;
             Assert.Equal(U("user"), state.Active);
             if (ability.Target.Kind == TargetKind.DownedAlly)

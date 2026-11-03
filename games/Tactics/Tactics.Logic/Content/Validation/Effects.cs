@@ -118,6 +118,12 @@ internal sealed partial class Validation
                 AtLeast(revive.Hp, 1, file, At("hp"));
                 break;
             case ZoneEffect zone:
+                if (zone.Surface)
+                {
+                    Ref(RefKind.Surface, zone.Kind, file, At("kind"));
+                    if (zone.Concentration || zone.BlocksSight || zone.Difficult || !zone.Passives.IsDefaultOrEmpty)
+                        Error(file, ptr, "Surface zones take their traits from environment.json and cannot require concentration.");
+                }
                 AreaSize(zone.Area, file, At("area"));
                 for (var i = 0; !zone.Passives.IsDefault && i < zone.Passives.Length; i++)
                     if (zone.Passives[i].Static is { MaxHp: not 0 })

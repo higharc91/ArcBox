@@ -207,6 +207,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-abilities, .tx-known, .tx-targets, .tx-lines, .tx-encounters, .tx-party { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .tx .tx-ability { width: 100%; display: flex; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; text-align: left; min-height: 64px; }
 .tx-ability.static { display: flex; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; }
+/* Browsing stays compact; selecting a card shows its full tooltip before the Use confirmation. */
+.tx-turn:not(.aiming) .tx-ability .tx-tip { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
 .tx-ic { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 8px;
   background: rgba(230, 189, 92, 0.1); border: 1px solid rgba(230, 189, 92, 0.4); }
 .tx-ab-text { flex: 1; min-width: 0; }
@@ -665,6 +668,69 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   .tx .tx-interact, .tx-say, .tx-ask.arrived .tx-ask-head, .tx-check.arrived .tx-check-head, .tx-roll.fresh, .tx-roll.fresh .tx-d20 { animation: none; }
   .tx-bar > i { transition: none; }
   .tx button:not(:disabled):active { transform: none; }
+}
+
+/* Current terrain: quiet edge effects leave the battle controls readable and tappable. */
+.tx:has(.tx-surface-scene) { isolation: isolate; }
+.tx .tx-surface-scene { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; user-select: none; }
+.tx .tx-surface { position: absolute; inset: 0; --surface: #f39a37; }
+.tx .tx-surface::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--surface) 12%, transparent), transparent 12% 88%, color-mix(in srgb, var(--surface) 12%, transparent)); }
+.tx .tx-surface i { position: absolute; left: var(--x); bottom: -16px; width: 7px; height: 13px; border-radius: 60% 40% 40% 60%; background: var(--surface); opacity: 0; animation: tx-ember 5s linear infinite; animation-delay: calc(var(--i) * -0.43s); }
+.tx .tx-surface-burning i { box-shadow: 0 0 12px #e67325; }
+.tx .tx-surface-water { --surface: #72c8eb; }
+.tx .tx-surface-water i { width: 170px; height: 42px; background: none; border: 2px solid var(--surface); border-radius: 50%; animation-name: tx-ripple; animation-duration: 7s; }
+.tx .tx-surface-ice_sheet { --surface: #a8e5f1; }
+.tx .tx-surface-ice_sheet i { width: 12px; height: 20px; border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); animation-name: tx-frost; animation-duration: 9s; }
+.tx .tx-surface-oil { --surface: #9b83c4; }
+.tx .tx-surface-oil i { width: 120px; height: 36px; border: 1px solid var(--surface); border-radius: 50%; background: linear-gradient(110deg, #649d9c30, #916abf40, #bda55b20); animation-name: tx-ripple; animation-duration: 11s; }
+.tx .tx-surface-scorched { --surface: #9a8d80; }
+.tx .tx-surface-scorched i { width: 3px; height: 3px; animation-duration: 12s; }
+.tx .tx-current-surfaces { display: flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: .035em; color: var(--wf-ink); padding: 7px 12px; border: 1px solid #b6a48455; border-radius: 6px; background: #121527e8; }
+.tx .tx-terrain-dot { width: 6px; height: 6px; border-radius: 50%; background: #e6bd5c; box-shadow: 0 0 9px #e6bd5c70; }
+.tx .tx-cell.risk { box-shadow: inset 0 0 0 2px #ebbc52; background-image: repeating-linear-gradient(135deg, #ebbc5233 0 3px, transparent 3px 7px) !important; }
+.tx .tx-cell.spread { position: relative; }
+.tx .tx-cell.spread::after { content: ""; position: absolute; inset: 3px; border: 1px dashed #86dded; pointer-events: none; }
+.tx .tx-spread-key { color: #a2e5f0; font-size: 14px; grid-column: 1 / -1; }
+@keyframes tx-ember { 0% { transform: translate(0, 0) scale(.6); opacity: 0; } 15% { opacity: .8; } 75% { opacity: .4; } 100% { transform: translate(18px, -36vh) scale(.15); opacity: 0; } }
+@keyframes tx-ripple { 0% { transform: translate(-50%, 0) scale(.5); opacity: 0; } 25% { opacity: .5; } 100% { transform: translate(-50%, -10vh) scale(1.9); opacity: 0; } }
+@keyframes tx-frost { 0% { transform: translate(0, 0) rotate(0); opacity: 0; } 20% { opacity: .6; } 100% { transform: translate(-12px, -54vh) rotate(80deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .tx .tx-surface-scene i { animation: none; opacity: .14; bottom: 12px; }
+}
+
+/* A brighter rim and travelling reflections make the terrain legible over opaque cards, with a clear centre. */
+.tx .tx-surface-glare { --glare: #ff963e; position: fixed; inset: 0; z-index: 10; pointer-events: none; overflow: hidden; user-select: none; }
+.tx .tx-surface-glare::before { content: ""; position: absolute; inset: 0; border: 2px solid color-mix(in srgb, var(--glare) 65%, transparent); box-shadow: inset 0 0 30px color-mix(in srgb, var(--glare) 34%, transparent), inset 0 -20px 42px color-mix(in srgb, var(--glare) 24%, transparent); background: radial-gradient(ellipse at 0 100%, color-mix(in srgb, var(--glare) 24%, transparent), transparent 34%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--glare) 20%, transparent), transparent 34%); animation: tx-glare-breathe 6s ease-in-out infinite; }
+.tx .tx-surface-glare::after { content: ""; position: absolute; inset: -80% 0 0; background: linear-gradient(120deg, transparent 42%, color-mix(in srgb, var(--glare) 30%, transparent) 47%, #ffffff8c 50%, transparent 55%); mask-image: linear-gradient(90deg, #000, transparent 9% 91%, #000); animation: tx-glare-sweep 8s ease-in-out infinite; }
+.tx .tx-glare-water { --glare: #6bdcff; }
+.tx .tx-glare-ice_sheet { --glare: #c5f3ff; }
+.tx .tx-glare-ice_sheet::before { background: linear-gradient(135deg, #c9faff66, transparent 17% 83%, #c9faff55), linear-gradient(45deg, #91cfe844, transparent 15% 85%, #91cfe844); animation-duration: 9s; }
+.tx .tx-glare-oil { --glare: #be8bea; }
+.tx .tx-glare-oil::before { border-color: #b095e6aa; background: linear-gradient(110deg, #6dd9cc4d, #b88de955 15%, transparent 28% 72%, #d894b955 85%, #dbc47b4d); mask-image: linear-gradient(90deg, #000, transparent 13% 87%, #000); }
+.tx .tx-glare-web { --glare: #ded8c7; }
+.tx .tx-glare-web::before { background: none; box-shadow: inset 0 0 20px #ded8c722; animation-duration: 12s; }
+.tx .tx-glare-scorched { --glare: #b6a38a; }
+.tx .tx-glare-scorched::before { background: radial-gradient(ellipse at 0 100%, #30221c99, transparent 35%), radial-gradient(ellipse at 100% 100%, #4b3b3188, transparent 35%); }
+@keyframes tx-glare-breathe { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+@keyframes tx-glare-sweep { 0%, 12% { transform: translateY(-30%); opacity: 0; } 30% { opacity: .7; } 72% { transform: translateY(40%); opacity: .5; } 90%, 100% { transform: translateY(60%); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .tx .tx-surface-glare::before { animation: none; opacity: .75; }
+  .tx .tx-surface-glare::after { animation: none; opacity: 0; }
+}
+
+/* Silk stays tethered to the screen corners instead of floating like a tile or particle. */
+.tx .tx-web-corner { position: absolute; width: min(36vw, 150px); aspect-ratio: 1; color: #eee7d7; }
+.tx .tx-web-corner.top-left { top: 0; left: 0; }
+.tx .tx-web-corner.top-right { top: 0; right: 0; width: min(30vw, 125px); transform: scaleX(-1); }
+.tx .tx-web-corner.bottom-left { bottom: 0; left: 0; width: min(44vw, 185px); transform: scaleY(-1); }
+.tx .tx-web-corner svg { width: 100%; height: 100%; overflow: visible; transform-origin: 0 0; animation: tx-web-sway 11s ease-in-out infinite; }
+.tx .tx-web-corner.top-right svg { animation-delay: -4s; animation-duration: 13s; }
+.tx .tx-web-corner.bottom-left svg { animation-delay: -7s; animation-duration: 15s; }
+.tx .tx-web-spokes { stroke: currentColor; stroke-width: .85; opacity: .5; }
+.tx .tx-web-cross { stroke: currentColor; stroke-width: .65; opacity: .38; }
+@keyframes tx-web-sway { 0%, 100% { transform: rotate(-.8deg) scale(1); opacity: .75; } 50% { transform: rotate(1deg) scale(1.025); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .tx .tx-web-corner svg { animation: none; }
 }
 
 /* Party purse and trader stand-ins. */

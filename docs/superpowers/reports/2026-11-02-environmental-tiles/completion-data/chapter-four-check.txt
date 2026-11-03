@@ -1,0 +1,9 @@
+[tv-e2e 06:05:48] chapter: 4 bots play Chapter 1 by force
+[tv-e2e 06:21:21] chapter: scenes: ch1_mayor (16), ch1_ford (19), ch1_dawn (4), ch1_bridge_cost (8), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 06:21:21] chapter: lines: 94, said 94
+[tv-e2e 06:21:21] chapter: the fight: TACTICS screen tactics-battle-river_crossing (line 579)
+[tv-e2e 06:21:21] chapter: the card: Chapter I · The Bridge at the Ford (line 4151)
+[tv-e2e 06:21:21] chapter: the fights: Lost at Storming the Ford; Lost at Storming the Ford; Won at Storming the Ford
+[tv-e2e 06:21:21] chapter: 6 walks to a "!", 1 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 06:21:21] chapter: 29 shots in /workspace/issue69-finish/chapter-four-complete/chapter
+[tv-e2e 06:21:21] OK

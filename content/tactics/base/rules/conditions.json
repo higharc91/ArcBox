@@ -82,5 +82,7 @@
   { "id": "metamagic.extended", "name": "Extended Spell", "tags": ["magical"] },
   { "id": "metamagic.careful", "name": "Careful Spell", "tags": ["magical"] },
   { "id": "metamagic.quickened", "name": "Quickened Spell", "tags": ["magical"] },
-  { "id": "metamagic.distant", "name": "Distant Spell", "tags": ["magical"] }
+  { "id": "metamagic.distant", "name": "Distant Spell", "tags": ["magical"] },
+  { "id": "oiled", "name": "Oiled", "tags": ["physical"],
+    "damageTaken": { "type": "fire", "bonus": 5, "consume": true } }
 ]

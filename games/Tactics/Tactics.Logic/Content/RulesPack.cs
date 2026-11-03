@@ -23,6 +23,8 @@ public sealed partial class RulesPack
         Injuries = injuries;
         Maps = maps;
         catalog ??= Catalog.Empty;
+        Environment = catalog.Environment ?? EnvironmentDef.None;
+        Warnings = catalog.Warnings.IsDefault ? [] : catalog.Warnings;
         Classes = catalog.Classes;
         Races = catalog.Races;
         Backgrounds = catalog.Backgrounds;
@@ -49,6 +51,12 @@ public sealed partial class RulesPack
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
     private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
     private readonly ImmutableSortedDictionary<string, Lazy<FrozenSet<Tile>>> _reach;
+
+    /// <summary>The pack's reactions; they run only in encounters that opt in.</summary>
+    public EnvironmentDef Environment { get; }
+
+    /// <summary>Non-fatal content diagnostics, such as large connected fuel patches.</summary>
+    public ImmutableArray<ContentError> Warnings { get; }
 
     /// <summary>The art manifest the pack was loaded with, if any.</summary>
     public ArtManifest? Art { get; }
@@ -183,7 +191,8 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
         XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions,
         ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>>? Interactables = null,
-        ImmutableSortedDictionary<string, ImmutableArray<ShopDef>>? Shops = null)
+        ImmutableSortedDictionary<string, ImmutableArray<ShopDef>>? Shops = null,
+        EnvironmentDef? Environment = null, ImmutableArray<ContentError> Warnings = default)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),
@@ -233,7 +242,7 @@ public sealed partial class RulesPack
     public static RulesPack InMemory(string hash, IEnumerable<AbilityDef>? abilities = null, IEnumerable<PassiveDef>? passives = null,
         IEnumerable<ConditionDef>? conditions = null, IEnumerable<BattleMap>? maps = null, IEnumerable<InjuryDef>? injuries = null,
         IEnumerable<(string Id, UnitSheet Sheet)>? monsters = null, IEnumerable<ItemDef>? items = null,
-        IEnumerable<AiProfileDef>? aiProfiles = null)
+        IEnumerable<AiProfileDef>? aiProfiles = null, EnvironmentDef? environment = null)
         => new(hash,
             WithBuiltIn(Index(abilities, a => a.Id, Comparer<AbilityId>.Default, "ability"), a => a.Id, CommonAttack, CommonHelp),
             Index(passives, p => p.Id, StringComparer.Ordinal, "passive"),
@@ -242,6 +251,7 @@ public sealed partial class RulesPack
             Index(maps, m => m.Id, StringComparer.Ordinal, "map"),
             Catalog.Empty with
             {
+                Environment = environment,
                 Items = Index(items, i => i.Id, Comparer<ItemId>.Default, "item"),
                 AiProfiles = Index(aiProfiles, p => p.Id, StringComparer.Ordinal, "AI profile"),
             },

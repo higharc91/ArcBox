@@ -1,6 +1,52 @@
 [
-  { "id": "potion_of_healing", "price": 50, "name": "Potion of Healing", "use": "item.potion_of_healing", "tags": ["healing", "potion"] },
-  { "id": "greater_healing", "price": 150, "name": "Potion of Greater Healing", "use": "item.greater_healing", "tags": ["healing", "potion"] },
-  { "id": "alchemists_fire", "price": 50, "name": "Alchemist's Fire", "use": "item.alchemists_fire", "tags": ["damage", "thrown"] },
-  { "id": "smoke_bomb", "price": 25, "name": "Smoke Bomb", "use": "item.smoke_bomb", "tags": ["obscure", "thrown"] }
+  {
+    "id": "potion_of_healing",
+    "price": 50,
+    "name": "Potion of Healing",
+    "use": "item.potion_of_healing",
+    "tags": [
+      "healing",
+      "potion"
+    ]
+  },
+  {
+    "id": "greater_healing",
+    "price": 150,
+    "name": "Potion of Greater Healing",
+    "use": "item.greater_healing",
+    "tags": [
+      "healing",
+      "potion"
+    ]
+  },
+  {
+    "id": "alchemists_fire",
+    "price": 50,
+    "name": "Alchemist's Fire",
+    "use": "item.alchemists_fire",
+    "tags": [
+      "damage",
+      "thrown"
+    ]
+  },
+  {
+    "id": "smoke_bomb",
+    "price": 25,
+    "name": "Smoke Bomb",
+    "use": "item.smoke_bomb",
+    "tags": [
+      "obscure",
+      "thrown"
+    ]
+  },
+  {
+    "id": "oil_flask",
+    "name": "Flask of Oil",
+    "use": "item.oil_flask",
+    "tags": [
+      "control",
+      "thrown"
+    ],
+    "price": 10
+  }
 ]

@@ -21,8 +21,11 @@ public static class WorldTuning
     /// <summary>How long the opening fade takes, in seconds. Everything that can't wait a frame's budget happens behind it.</summary>
     public const double FadeSeconds = 0.4;
 
-    /// <summary>How long the title card waits for the world to open, in seconds of frames, before the screen goes on without it.</summary>
+    /// <summary>How long loading may make no progress before the screen goes on without the world.</summary>
     public const double OpenTimeout = 10;
+
+    /// <summary>Maximum total wait, even if a very slow world continues making progress.</summary>
+    public const double OpenMaxWait = 60;
 
     /// <summary>Opacity of a tall prop when faded in front of a walker.</summary>
     public const float PropFadeAlpha = 0.35f;

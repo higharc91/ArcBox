@@ -92,6 +92,16 @@ internal sealed class DamageDist
     /// <summary>A fixed amount.</summary>
     public static DamageDist Point(int value) => value == 0 ? Zero : new DamageDist(value, [1.0]);
 
+    /// <summary>This distribution conditioned on a positive packet (the caller checks that its probability is nonzero).</summary>
+    public DamageDist Positive()
+    {
+        var start = Math.Max(1, Min);
+        var mass = AtLeast(1);
+        var values = new double[Max - start + 1];
+        for (var i = 0; i < values.Length; i++) values[i] = _p[start - Min + i] / mass;
+        return new DamageDist(start, values);
+    }
+
     /// <summary>The sum of <paramref name="count"/> dice of <paramref name="sides"/> sides.</summary>
     public static DamageDist Dice(int count, int sides)
     {

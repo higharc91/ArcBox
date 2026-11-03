@@ -114,6 +114,15 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>How far it's got.</summary>
     public Stage Now { get; private set; } = Stage.Building;
 
+    /// <summary>Monotonic opening work: stage changes, textures loaded and visible blocks recorded.</summary>
+    public long LoadingProgress => Now switch
+    {
+        Stage.Building => 0,
+        Stage.Textures => 1L + _texture,
+        Stage.Near => 2L + _texture + _blocks.Count(b => b.Recorded > 0),
+        _ => 0,
+    };
+
     /// <summary>The region's ground, once it's built.</summary>
     public WorldGround? Ground { get; private set; }
 

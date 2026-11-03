@@ -1,0 +1,11 @@
+using System.Collections.Immutable;
+using System.Reflection;
+using System.Text.Json;
+using Tactics.Logic;
+using Tactics.Sim;
+var rules = RulesPack.Load(["/workspace/issue69-finish/final13-on"]);
+var config = new SimConfig(["ford_assault"], [1], 1, [4], 20, Difficulty.Normal);
+var method = typeof(SimRunner).GetMethod("Play", BindingFlags.NonPublic | BindingFlags.Static)!;
+ImmutableArray<string> classes = ["fighter", "cleric", "rogue", "wizard"];
+var results = Enumerable.Range(1,20).AsParallel().AsOrdered().Select(seed => (SimBattle)method.Invoke(null, [config,rules,"ford_assault",1,classes,(ulong)seed])!).ToArray();
+Console.WriteLine(JsonSerializer.Serialize(new {classes,wins=results.Count(b => b.Outcome==BattleOutcome.Won),battles=results.Length,meanRounds=results.Average(b=>b.Rounds),capped=results.Count(b=>b.Capped),seeds=results.Select(b=>new {b.Seed,outcome=b.Outcome.ToString(),b.Rounds,b.Capped})},new JsonSerializerOptions{WriteIndented=true}));

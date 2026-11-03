@@ -51,6 +51,7 @@ public sealed class Counterspell : INamedHook
             Queue = w.State.Queue.RemoveAll(s => s switch
             {
                 RunEffectsStep { HookDepth: 0 } run => run.Source == caster && run.Ability == spell.Id,
+                ReactStep reaction => reaction.Source == caster && reaction.Ability == spell.Id,
                 AttackStep { HookDepth: 0 } attack => attack.Source == caster && attack.Ability == spell.Id,
                 OfferReactionStep offer => offer.Trigger.Kind == ReactionTriggerKind.SpellCast && offer.Trigger.Actor == caster
                                            && offer.Trigger.Ability == spell.Id,

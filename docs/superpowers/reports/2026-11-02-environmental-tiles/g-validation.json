@@ -1,0 +1,1194 @@
+{
+  "date": "2026-11-03",
+  "branch": "environmental-tiles",
+  "implementationCommit": "d3172e91e62e15a53b056561e10c20cd647d2590",
+  "originalCommit": "357df1c0",
+  "finalUniqueComparisonBattles": 12960,
+  "results": {
+    "core-original": {
+      "ford_assault:1": {
+        "encounter": "ford_assault",
+        "level": 1,
+        "battles": 360,
+        "won": 300,
+        "win": "83.3%",
+        "meanRounds": 8.4,
+        "capped": 3,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "64.2%",
+          "5": "90.8%",
+          "6": "95.0%"
+        }
+      },
+      "ford_assault:3": {
+        "encounter": "ford_assault",
+        "level": 3,
+        "battles": 360,
+        "won": 359,
+        "win": "99.7%",
+        "meanRounds": 5.3,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "99.2%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      },
+      "ford_assault:5": {
+        "encounter": "ford_assault",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 4.8,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      },
+      "river_crossing:1": {
+        "encounter": "river_crossing",
+        "level": 1,
+        "battles": 360,
+        "won": 325,
+        "win": "90.3%",
+        "meanRounds": 9.5,
+        "capped": 2,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "71.7%",
+          "5": "99.2%",
+          "6": "100.0%"
+        }
+      },
+      "river_crossing:3": {
+        "encounter": "river_crossing",
+        "level": 3,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 6.6,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      },
+      "river_crossing:5": {
+        "encounter": "river_crossing",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 5.6,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      }
+    },
+    "bridge-original": {
+      "warlord_bridge:3": {
+        "encounter": "warlord_bridge",
+        "level": 3,
+        "battles": 360,
+        "won": 263,
+        "win": "73.1%",
+        "meanRounds": 10.4,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "53.3%",
+          "5": "65.8%",
+          "6": "100.0%"
+        }
+      },
+      "warlord_bridge:5": {
+        "encounter": "warlord_bridge",
+        "level": 5,
+        "battles": 360,
+        "won": 323,
+        "win": "89.7%",
+        "meanRounds": 10.9,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "79.2%",
+          "5": "90.0%",
+          "6": "100.0%"
+        }
+      },
+      "warlord_bridge:7": {
+        "encounter": "warlord_bridge",
+        "level": 7,
+        "battles": 360,
+        "won": 344,
+        "win": "95.6%",
+        "meanRounds": 10.7,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "86.7%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      }
+    },
+    "rime-original": {
+      "crystal_cave:5": {
+        "encounter": "crystal_cave",
+        "level": 5,
+        "battles": 360,
+        "won": 314,
+        "win": "87.2%",
+        "meanRounds": 12.7,
+        "capped": 2,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "61.7%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      },
+      "crystal_cave:7": {
+        "encounter": "crystal_cave",
+        "level": 7,
+        "battles": 360,
+        "won": 344,
+        "win": "95.6%",
+        "meanRounds": 11.7,
+        "capped": 2,
+        "winFlag": "**HIGH**",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "86.7%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      },
+      "crystal_cave:9": {
+        "encounter": "crystal_cave",
+        "level": 9,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 7.8,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      }
+    },
+    "forest-original": {
+      "forest_ruins:1": {
+        "encounter": "forest_ruins",
+        "level": 1,
+        "battles": 360,
+        "won": 133,
+        "win": "36.9%",
+        "meanRounds": 10.1,
+        "capped": 3,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "9.2%",
+          "5": "33.3%",
+          "6": "68.3%"
+        }
+      },
+      "forest_ruins:3": {
+        "encounter": "forest_ruins",
+        "level": 3,
+        "battles": 360,
+        "won": 317,
+        "win": "88.1%",
+        "meanRounds": 10.6,
+        "capped": 4,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "69.2%",
+          "5": "95.0%",
+          "6": "100.0%"
+        }
+      },
+      "forest_ruins:5": {
+        "encounter": "forest_ruins",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 8.2,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        }
+      }
+    },
+    "core-on": {
+      "ford_assault:1": {
+        "encounter": "ford_assault",
+        "level": 1,
+        "battles": 360,
+        "won": 247,
+        "win": "68.6%",
+        "meanRounds": 8.5,
+        "capped": 1,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "46.7%",
+          "5": "77.5%",
+          "6": "81.7%"
+        },
+        "environment": {
+          "reactionsPerBattle": 8.6,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 61.1,
+          "surfaceDeaths": 86,
+          "rules": "conduct: 22, freeze: 3, ignite: 741, spread: 2330"
+        }
+      },
+      "ford_assault:3": {
+        "encounter": "ford_assault",
+        "level": 3,
+        "battles": 360,
+        "won": 358,
+        "win": "99.4%",
+        "meanRounds": 5.7,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "98.3%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 5.3,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 29.4,
+          "surfaceDeaths": 33,
+          "rules": "ignite: 578, spread: 1319"
+        }
+      },
+      "ford_assault:5": {
+        "encounter": "ford_assault",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 4.9,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 6.2,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 49.6,
+          "surfaceDeaths": 93,
+          "rules": "freeze: 15, ignite: 809, spread: 1414"
+        }
+      },
+      "river_crossing:1": {
+        "encounter": "river_crossing",
+        "level": 1,
+        "battles": 360,
+        "won": 329,
+        "win": "91.4%",
+        "meanRounds": 9.4,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "75.0%",
+          "5": "100.0%",
+          "6": "99.2%"
+        },
+        "environment": {
+          "reactionsPerBattle": 2.7,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 17.3,
+          "surfaceDeaths": 44,
+          "rules": "conduct: 4, freeze: 2, ignite: 241, spread: 721"
+        }
+      },
+      "river_crossing:3": {
+        "encounter": "river_crossing",
+        "level": 3,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 6.6,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 1.6,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 8.4,
+          "surfaceDeaths": 5,
+          "rules": "ignite: 167, spread: 403"
+        }
+      },
+      "river_crossing:5": {
+        "encounter": "river_crossing",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 5.4,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 4.4,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 38.5,
+          "surfaceDeaths": 111,
+          "rules": "ignite: 600, spread: 983"
+        }
+      }
+    },
+    "ford-off": {
+      "ford_assault:1": {
+        "encounter": "ford_assault",
+        "level": 1,
+        "battles": 360,
+        "won": 269,
+        "win": "74.7%",
+        "meanRounds": 10.4,
+        "capped": 3,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "51.7%",
+          "5": "85.0%",
+          "6": "87.5%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      },
+      "ford_assault:3": {
+        "encounter": "ford_assault",
+        "level": 3,
+        "battles": 360,
+        "won": 359,
+        "win": "99.7%",
+        "meanRounds": 6.4,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "99.2%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      },
+      "ford_assault:5": {
+        "encounter": "ford_assault",
+        "level": 5,
+        "battles": 360,
+        "won": 359,
+        "win": "99.7%",
+        "meanRounds": 5.3,
+        "capped": 1,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "100.0%",
+          "5": "99.2%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      }
+    },
+    "bridge-on": {
+      "warlord_bridge:3": {
+        "encounter": "warlord_bridge",
+        "level": 3,
+        "battles": 360,
+        "won": 258,
+        "win": "71.7%",
+        "meanRounds": 10.4,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "53.3%",
+          "5": "61.7%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.5,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 1.8,
+          "surfaceDeaths": 5,
+          "rules": "ignite: 58, spread: 134"
+        }
+      },
+      "warlord_bridge:5": {
+        "encounter": "warlord_bridge",
+        "level": 5,
+        "battles": 360,
+        "won": 328,
+        "win": "91.1%",
+        "meanRounds": 10.9,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "79.2%",
+          "5": "94.2%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 1.4,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 5.0,
+          "surfaceDeaths": 4,
+          "rules": "ignite: 165, spread: 351"
+        }
+      },
+      "warlord_bridge:7": {
+        "encounter": "warlord_bridge",
+        "level": 7,
+        "battles": 360,
+        "won": 340,
+        "win": "94.4%",
+        "meanRounds": 10.7,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "86.7%",
+          "5": "96.7%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.9,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 3.1,
+          "surfaceDeaths": 3,
+          "rules": "burn_web: 24, ignite: 90, spread: 196"
+        }
+      }
+    },
+    "rime-on": {
+      "crystal_cave:5": {
+        "encounter": "crystal_cave",
+        "level": 5,
+        "battles": 360,
+        "won": 322,
+        "win": "89.4%",
+        "meanRounds": 12.7,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "70.8%",
+          "5": "98.3%",
+          "6": "99.2%"
+        },
+        "environment": {
+          "reactionsPerBattle": 5.1,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 22.0,
+          "surfaceDeaths": 5,
+          "rules": "burn_web: 284, ignite: 544, spread: 1022"
+        }
+      },
+      "crystal_cave:7": {
+        "encounter": "crystal_cave",
+        "level": 7,
+        "battles": 360,
+        "won": 348,
+        "win": "96.7%",
+        "meanRounds": 10.9,
+        "capped": 0,
+        "winFlag": "**HIGH**",
+        "roundFlag": "",
+        "bySize": {
+          "4": "90.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 5.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 20.6,
+          "surfaceDeaths": 0,
+          "rules": "burn_web: 374, ignite: 400, spread: 1012"
+        }
+      },
+      "crystal_cave:9": {
+        "encounter": "crystal_cave",
+        "level": 9,
+        "battles": 360,
+        "won": 359,
+        "win": "99.7%",
+        "meanRounds": 7.8,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "99.2%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 4.1,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 17.2,
+          "surfaceDeaths": 2,
+          "rules": "burn_web: 204, ignite: 363, spread: 908"
+        }
+      }
+    },
+    "forest-on": {
+      "forest_ruins:1": {
+        "encounter": "forest_ruins",
+        "level": 1,
+        "battles": 360,
+        "won": 129,
+        "win": "35.8%",
+        "meanRounds": 10.1,
+        "capped": 5,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "9.2%",
+          "5": "32.5%",
+          "6": "65.8%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.8,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 3.7,
+          "surfaceDeaths": 4,
+          "rules": "ignite: 86, spread: 186"
+        }
+      },
+      "forest_ruins:3": {
+        "encounter": "forest_ruins",
+        "level": 3,
+        "battles": 360,
+        "won": 318,
+        "win": "88.3%",
+        "meanRounds": 10.6,
+        "capped": 4,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "70.0%",
+          "5": "95.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.5,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 2.7,
+          "surfaceDeaths": 3,
+          "rules": "ignite: 56, spread: 138"
+        }
+      },
+      "forest_ruins:5": {
+        "encounter": "forest_ruins",
+        "level": 5,
+        "battles": 360,
+        "won": 360,
+        "win": "100.0%",
+        "meanRounds": 8.2,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "100.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 1.2,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 6.3,
+          "surfaceDeaths": 2,
+          "rules": "ignite: 139, spread: 307"
+        }
+      }
+    },
+    "rime-off": {
+      "crystal_cave:5": {
+        "encounter": "crystal_cave",
+        "level": 5,
+        "battles": 360,
+        "won": 318,
+        "win": "88.3%",
+        "meanRounds": 12.5,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "65.0%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      },
+      "crystal_cave:7": {
+        "encounter": "crystal_cave",
+        "level": 7,
+        "battles": 360,
+        "won": 340,
+        "win": "94.4%",
+        "meanRounds": 11.4,
+        "capped": 1,
+        "winFlag": "",
+        "roundFlag": "**CAPPED**",
+        "bySize": {
+          "4": "83.3%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      },
+      "crystal_cave:9": {
+        "encounter": "crystal_cave",
+        "level": 9,
+        "battles": 360,
+        "won": 357,
+        "win": "99.2%",
+        "meanRounds": 8.1,
+        "capped": 0,
+        "winFlag": "",
+        "roundFlag": "",
+        "bySize": {
+          "4": "97.5%",
+          "5": "100.0%",
+          "6": "100.0%"
+        },
+        "environment": {
+          "reactionsPerBattle": 0.0,
+          "friendlyConductionPerBattle": 0.0,
+          "burningTileRoundsPerBattle": 0.0,
+          "surfaceDeaths": 0,
+          "rules": ""
+        }
+      }
+    }
+  },
+  "gates": {
+    "river_crossing": true,
+    "ford_assault": true,
+    "warlord_bridge": true,
+    "crystal_cave": false,
+    "forest_ruins": true
+  },
+  "productionEnabled": [
+    "ford_assault",
+    "forest_ruins",
+    "river_crossing",
+    "warlord_bridge"
+  ],
+  "tuningApplied": false,
+  "sourceFiles": {
+    "content/tactics/base/rules/abilities/monsters.json": "66a7a5360387c52dfc1e4a50aad8bc9e613cf0af08ed6bb0f3ad1599715527e7",
+    "content/tactics/base/rules/encounters/ford_assault.json": "474f39d8a00b31b744c8a763e42f557a3b2ade5c0dd751d1cda9160167453da9",
+    "content/tactics/base/rules/encounters/forest_ruins.json": "d1dd56fe78f95a8a13e158a5010ae17de906a89f7d45a460c338602e81930cfd",
+    "content/tactics/base/rules/encounters/river_crossing.json": "39fe8ca71db04aa5bc13fe0e05568e0d29394b15191cf7ce14a14259731bf8d2",
+    "content/tactics/base/rules/encounters/warlord_bridge.json": "54dffaf0a2352d1f072f6ad90f6a04dd03367b80e161c333fe447ef070bba008",
+    "content/tactics/base/rules/environment.json": "c0157fc956254fa37abe3171c85b645c34c7b9b4da698055bf17e7506041e183",
+    "content/tactics/base/rules/maps/forest_ruins.json": "a3997d54286519b07bf238ab2228fcea17ad873d5e7fd3f7146b3bd6fa1c1060",
+    "content/tactics/base/rules/monsters/goblinoids.json": "39450bf96e323516ace091bcc61826a469e5b5b28d0422ed14e3084a167dc687",
+    "games/Tactics/README.md": "d3e65c686bd39d027fb33188db5c30db9d5b976f71325c7414b1281a1590f92f",
+    "games/Tactics/Tactics.Game/Campaign/TacticsDocument.cs": "6d21ea1014610ba0a670b85038c9d813593d8457089eb13ffc43c271d2fa0362",
+    "games/Tactics/Tactics.Game/TacticsGame.Battle.cs": "8ea3acab9c8a3f3df94121dfb59dbe7726afdbd0272f0b027cc697f79abbb819",
+    "games/Tactics/Tactics.Logic.Tests/Ai/EnvironmentTallyTests.cs": "dcdbf37560bbf840dc8f5045c8737e85d74d21ee6b7141878143e846cdccaf19",
+    "games/Tactics/Tactics.Logic.Tests/Content/BasePackTests.cs": "68bc76c96aa94f6037fc5d74fca4dfcaa8eb439217046b55be90c65e26c819df",
+    "games/Tactics/Tactics.Logic.Tests/Content/EnvironmentContentTests.cs": "91241d7330f3749979eda6065dc5bc5f80c21fff695782575f46310a1a738bce",
+    "games/Tactics/Tactics.Logic.Tests/Content/EnvironmentEncounterTests.cs": "8a5ad81ae5c71d8cb7a7255496733841619f3d4e93d2d1af1ed4d3c323cf6e08",
+    "games/Tactics/Tactics.Logic.Tests/Golden/GoldenTests.cs": "d136a1840a8e78fdf4b8679abe7b3ca29028acfdc4c38f4d5172afa337892974",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-ford-storm.events.json": "a41806ffbafe24a64d37c44f880f482316c4b9a9edaf41587a42bfb8d295af2a",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-ford-storm.replay.json": "30a73cce283595ffca944488e353ba56ca9e54e94325283972d8f2606b334125",
+    "games/Tactics/Tactics.Logic.Tests/Support/Replay.cs": "55f412b3c08f4e521128e1c968d7ac3abcaf9922bf60698e39a8601a98f237a5",
+    "games/Tactics/Tactics.Presentation.Tests/Beats/DisplayedBattleTests.cs": "29fd6da281c1e3f760898772534a8b56a97d7b39496d03433415cf12e9b42288",
+    "games/Tactics/Tactics.Presentation/Beats/DisplayedBattle.cs": "6fb6c42f07aa03b73bf9c0c1905107f7596868ae2c324868575400774609a672",
+    "games/Tactics/Tactics.Sim/EnvironmentTally.cs": "69ae3070b805ebfa2dbc65715c0db8bc65c151b8aa69ab6b18f00d1461a352d9",
+    "games/Tactics/Tactics.Sim/Report.cs": "4a0183dc7150dc07aad2bc78bda54ece3011a7d2d801d32dfcaacb172067fad3",
+    "games/Tactics/Tactics.Sim/SimRunner.cs": "c9665142d47c32eb40297d420bfa29d20a47da32b736bd65cb3b44d24f62f289",
+    "games/Tactics/Tactics.Sim/Tally.cs": "d0e67c17a5efec2e909b62b360cf81406bec837b102e246d40cf5507808154bc",
+    "web/play/test/fixtures/tactics/environment-turn.json": "8f5b73526784b7bd564bd0a805398487e77deb547834ce89541395317423ee94"
+  },
+  "rulesSnapshots": {
+    "rules-original": {
+      "algorithm": "SHA256 of sorted relative-path:SHA256 lines",
+      "digest": "fa8c285592224719d52926b828d8dfce115b6e07558e18ab141a05a3b6785498",
+      "files": {
+        "abilities/barbarian.json": "2aaeae0a334cafcf6e54b1bc8a30b8ed98ab4165bec7a22436ac5aef190559ee",
+        "abilities/bard.json": "471a0096b118c80e4998ede36b68647fc74db7d650f48f938c4e1c60e7d49db7",
+        "abilities/cleric.json": "8aeb9f39665099d67409936ce6984d9875de06bdc5aff8c77a87c85f6ee71d90",
+        "abilities/common.json": "034535ad1c202b3db7133d9adf83ef3f668cfbab646781f96bd212025611a0a8",
+        "abilities/druid.json": "2a745d270688126d3072f39c9e0a62830795dae01dc9c3e330c126ac8d6f23ca",
+        "abilities/fighter.json": "68b49fbf6e0b9a4f6c0ca42eb568a0f041b701f85d5143b248a09569a7275640",
+        "abilities/monk.json": "51f06fe2e2be315d88bbde4995a0ebd4d51da081c9bb12c2aa47b552a161e309",
+        "abilities/monsters.json": "dff503f92e20eb627cc8bace6bbe400d24c5d41ddc0027b0cc0db89a04e775ba",
+        "abilities/paladin.json": "022aeac5546ee7637385f17404088319470cf931ed28b7885379d247bad0692f",
+        "abilities/races.json": "acd0b02da9e0ad6c3508283678c20c1037ed683889f78ed21ca69c7e50b3822c",
+        "abilities/ranger.json": "cc394c99308a773a0ab36fb65764bc320ce561dad5569491a67fdc810c520f50",
+        "abilities/rogue.json": "f2835f28c185c8653accfbe7aa19566aada15ebd353b4e88ae27a016615b2512",
+        "abilities/sorcerer.json": "24eab94591d5235d50806e3c90610aaff8e10a8a3b71a4530daa546eec02d8eb",
+        "abilities/villains.json": "eb42e24531a8856bbb1c619b3fc37d4f3e67921aa4bf47f133902709b2b17a89",
+        "abilities/warlock.json": "451a8089e61ed7647dc3421ad6889d06496c16ae57c01dad42722d68763b8e28",
+        "abilities/wizard.json": "15beae8c5fad98621a1c22f7145b4e6a3395772648a38c8b30f14bedbcd4b2fa",
+        "ai-profiles.json": "a3fd037856dd7323c7d44fe42f102a8c56e1814ec431bdffc65fbeef91bae66b",
+        "armor.json": "a6156b272b46ce0f1626ecadcab7089eb15bbcd0307e41d69269539227b70713",
+        "backgrounds.json": "349a25fc4873ce9e97c18911269216f699cd6b10722be824bb9f55c17ff0e029",
+        "classes/barbarian.json": "31335e042046c96d5565068783d0e0a071fa52c9f43e457a522a6fb73b9d2020",
+        "classes/bard.json": "c7690abf19bb270ec62ef7912050b94ba3a89048b9a9c5f906555e5cb79ad321",
+        "classes/cleric.json": "fc576b48b7600e4c14a5c8a05cc00d1a9d77cfcb0997145d6d959f8f3fa83a0e",
+        "classes/druid.json": "73202f2138db8f9fde72d029ee098c6941a44c3cdc6ff27ec23c7842ef076b14",
+        "classes/fighter.json": "3705b05f0e5cee70f2d9d57f9de6d81affe2e8e4ac35798db9624c37626fc150",
+        "classes/monk.json": "dad00f641ea22e12fa9063601183f0bc51ac794fee7bbb133f488f51004532ad",
+        "classes/paladin.json": "b0da4d50ed66237fe0a1b44de6f8385963c685a3d3ffd46821960d1a3bd4ed4d",
+        "classes/ranger.json": "428fdc6533bef25b8775eba9da637397687b2a40244a0fed6f124fa5f762ff46",
+        "classes/rogue.json": "4efcd83f5b4e460c9f3aefed1a9a687fcb663d4f87ee118817e673a5af7c07c2",
+        "classes/sorcerer.json": "ad035b23de02b88aa8f63f5904bb6be3140157e58d427e2902db8b0b74192317",
+        "classes/warlock.json": "fbfcb5b011c662a785c150b4c851c43a927c3ac73699fa1b8e8838211f3f0189",
+        "classes/wizard.json": "8977668428f5c283453d88e28530641db167a8a9be1f02ad8d7bd86d2ee2ba41",
+        "conditions.json": "c1ac5419042319b0752c57c1a257531fb04d2700d89868c1d6b096b462b97d81",
+        "encounters/crypt_hall.json": "c2d43f002dec443dbf092d36dfc2f4a092f6f1c650a1e25044c7a1885ff11264",
+        "encounters/crystal_cave.json": "4910af50d3b8669cb7b87e95db93706b6a11a903321776f0d149b41854fe8a0b",
+        "encounters/ford_assault.json": "fed8a988c4af1ede4952ffb5adda6e95659095bb78aed53c6d7a9779e3bb2992",
+        "encounters/forest_ruins.json": "454191422c4a4eb3530ff3f8e2bfe0d0793d4a584c3e19babf38bcc68a1ccd4d",
+        "encounters/hall_of_the_flame.json": "3330b0d1d433b3f44eb1bb68b745d4ae27a869ece73e795e7171fa6997250333",
+        "encounters/keep_gate.json": "6be526538526f399fd7ec6474bd02c9d187f8c2ec282796c0e5d82f64e468a20",
+        "encounters/rime_tower.json": "990c2dfeb4614bc71cf1dcc2125d671555b2879877bebb7de7f5f3c5d1df0934",
+        "encounters/river_crossing.json": "50401367543fdc67eb6e780a9e8d2eed90674f76d2afaf2768ecf58ebab1e44a",
+        "encounters/warlord_bridge.json": "6f0aa3d3531ba819ea163608fa0f613baaa8e781fd207de980ec59f4ae614225",
+        "environment.json": "970324ddc6f18b3c2c7b26cfab5950c2e95cd5fbe3d45f65a9cacd99913f7727",
+        "injuries.json": "071f310e057260764304043077207747743083b83086682d56f6cf173dc0c82d",
+        "interactables/ashen_ford.json": "d694e66c4ed612d9474df220521d49b9d01e0acace05c7fc8bfa3dd4324b65a7",
+        "items.json": "654cab13c8ad625ebc43867ad417a320e71d25806ba626ac5b692aca8f3feaa3",
+        "manifest.json": "d5e09c205c75732d75c363150d89521fe40a2dbd5bdea0859a29a20639f00965",
+        "maps/crypt_hall.json": "ae4f49052cf71b18361c1f05b9d4975330b8657ba7e697af42d24b6d33df38ce",
+        "maps/crystal_cave.json": "fcbd1a5efe9641be299bc80036e3c1750c602d6f1aa11a8808b9ea572062002f",
+        "maps/forest_ruins.json": "6560d7169f3ec998736d4fcd3b9038d16466e6bd8288e8f592796eedab2e7fe0",
+        "maps/hall_of_the_flame.json": "70803fb3b7743f36d9a812ac39b55b9aff000daf2fdd932a29ef23ea3d40f6fb",
+        "maps/keep_gate.json": "3321f809aeea353286ce6f36fe691d854ef528ce1dd0ca94740206a22561aecf",
+        "maps/river_crossing.json": "c20e42cbcbae3ccecc8619a28cfa56e79c6fbeb4d4226191dc489005d55a1588",
+        "maps/warlord_bridge.json": "57978a215202b18378896d5f76d5b5a74d9d030f8fde6ce65a63c1a6c242a2fa",
+        "monsters/beasts-1.json": "0c16c635f7ec65f29fdbd0952732c7bfc9de89c1c559048c520e6d1f603e0320",
+        "monsters/bosses.json": "d78b09fa85e07a3e2265fe238d10d96a54eafd6ee35857d1804fa4b044d864e6",
+        "monsters/companions.json": "3b6fe90476a3e4b202d74c07d5bac71c65a76bd6d9a3b41c0bbdfc9c8686c0a4",
+        "monsters/goblinoids.json": "cb1bfe8ac1a421667603a61c35750914d619ebe37d3d459660a8d21701cb04ee",
+        "monsters/humanoids.json": "5dead38c8329a1c1060fdb45851232fc76971d12f3ff902d8f0e9c420f419baa",
+        "monsters/undead.json": "cda75f09193bc2edb68ff10ef0f4e70cba6671579afd8817023b0f14e5a1b2e3",
+        "monsters/villains.json": "37a24d46ad99b8976c3536d48f951d423894cc1e6233ed19c4c017425db48149",
+        "monsters/wildshape.json": "5d3c49ca3877ecc30f1252b304e90b47ae3cf294335cbce18ce8a89824942995",
+        "races.json": "b820ad12258e7c8589e0ccfa60ad3664ae78154aaf834e9605101a5292f49abd",
+        "schema/abilities.schema.json": "9981e3469a473f5c8221bc5c54e8fde15cb5053870fa619e2e10daa344ec76a0",
+        "schema/ai-profiles.schema.json": "33938e1f3334056235bdd9872140634faa0afd2a86652facc672769195621460",
+        "schema/armor.schema.json": "ff8e0ba6e229e8fd785bb5632a053c492c58227ecb890265724bc0d248244515",
+        "schema/backgrounds.schema.json": "8f27477d599fc81560bfc3f8a40d2fd8e603d379fbea97448b035b5bc272e0bb",
+        "schema/class.schema.json": "21b1c1dbdd399264fb9fce39a54dc0474aaea9e360e9556a6726c02b06e74e48",
+        "schema/common.schema.json": "717a3a21a58534c33ac1f4334f8c2a51ffb9ba63fc91a5c13ebd7e30a22f9554",
+        "schema/conditions.schema.json": "3fb115fcc32243e9e3f8cbc1d45bedaf6194f5d7821c939f0ec46834e984e590",
+        "schema/encounter.schema.json": "e89efc09c1173baa0d934faed07e40415f3dee3479b69579965338b98f6146df",
+        "schema/environment.schema.json": "25126e1bbc3c6a1532ae919b18752cd8ba1fa2a2bfa67701a8cad5ddac476025",
+        "schema/injuries.schema.json": "7a1baa8c7fe9836f2f681ee09e5d788af9332e382941e47f8104993e8b5a64f1",
+        "schema/interactables.schema.json": "a73a7e30c639d9fdd78b92546c6cfbca098a983861a8f480c03e8ed279e6b534",
+        "schema/items.schema.json": "50ca95b4b8ee82c0c23b7810e486a86b7e591c46b6debf0262bed0bb55b12280",
+        "schema/manifest.schema.json": "c6634ed4054281c1872c8e34a63d4bf607adff96d4512bf04c6d052566263259",
+        "schema/map.schema.json": "2908693e6aa6f99718a16939a1c9d19116f851ace2d2b119437207a3b400654d",
+        "schema/monsters.schema.json": "9a8d2497654acbdf55294e3199f945cdefe057c4b066d6ac52083a3df6d2d509",
+        "schema/races.schema.json": "8b8b7cce4e23d468ec47f10600c2d9096c4c7fb156fcb0bbb756c38bcdecee80",
+        "schema/region.schema.json": "21886aa5af390541e44765ff29172b34c88cee2f1269398b3e29e63b71493844",
+        "schema/weapons.schema.json": "3af4bbb214f2c7a0c35ae385236355b4cdd15a9370a685a7184ceda27c625316",
+        "schema/xp.schema.json": "ed355e833d1890e57eb1a63ba1840933d17ce59f568dcdfbddd8c50e9e159db3",
+        "weapons.json": "8327ee923a7bd78555869af723486196aa8291e2ae093c76fc5d6f48856bea9c",
+        "world/ashen_ford.json": "e2d0c97bbc4968fd849b4d06ba5786c67e7b3da1fd872d95a0b8e0a98077261b",
+        "xp.json": "913ecb2bcf0f417abffe1120fbd2f551a2d97e08c291d23be51fd491e5614fab"
+      }
+    },
+    "rules-candidate-on": {
+      "algorithm": "SHA256 of sorted relative-path:SHA256 lines",
+      "digest": "db5e0298673d4ccd1cc24c0364b7663ca549353ad0c30bf3b1e9253f1303995e",
+      "files": {
+        "abilities/barbarian.json": "2aaeae0a334cafcf6e54b1bc8a30b8ed98ab4165bec7a22436ac5aef190559ee",
+        "abilities/bard.json": "471a0096b118c80e4998ede36b68647fc74db7d650f48f938c4e1c60e7d49db7",
+        "abilities/cleric.json": "8aeb9f39665099d67409936ce6984d9875de06bdc5aff8c77a87c85f6ee71d90",
+        "abilities/common.json": "034535ad1c202b3db7133d9adf83ef3f668cfbab646781f96bd212025611a0a8",
+        "abilities/druid.json": "2a745d270688126d3072f39c9e0a62830795dae01dc9c3e330c126ac8d6f23ca",
+        "abilities/fighter.json": "68b49fbf6e0b9a4f6c0ca42eb568a0f041b701f85d5143b248a09569a7275640",
+        "abilities/monk.json": "51f06fe2e2be315d88bbde4995a0ebd4d51da081c9bb12c2aa47b552a161e309",
+        "abilities/monsters.json": "66a7a5360387c52dfc1e4a50aad8bc9e613cf0af08ed6bb0f3ad1599715527e7",
+        "abilities/paladin.json": "022aeac5546ee7637385f17404088319470cf931ed28b7885379d247bad0692f",
+        "abilities/races.json": "acd0b02da9e0ad6c3508283678c20c1037ed683889f78ed21ca69c7e50b3822c",
+        "abilities/ranger.json": "cc394c99308a773a0ab36fb65764bc320ce561dad5569491a67fdc810c520f50",
+        "abilities/rogue.json": "f2835f28c185c8653accfbe7aa19566aada15ebd353b4e88ae27a016615b2512",
+        "abilities/sorcerer.json": "24eab94591d5235d50806e3c90610aaff8e10a8a3b71a4530daa546eec02d8eb",
+        "abilities/villains.json": "eb42e24531a8856bbb1c619b3fc37d4f3e67921aa4bf47f133902709b2b17a89",
+        "abilities/warlock.json": "451a8089e61ed7647dc3421ad6889d06496c16ae57c01dad42722d68763b8e28",
+        "abilities/wizard.json": "15beae8c5fad98621a1c22f7145b4e6a3395772648a38c8b30f14bedbcd4b2fa",
+        "ai-profiles.json": "a3fd037856dd7323c7d44fe42f102a8c56e1814ec431bdffc65fbeef91bae66b",
+        "armor.json": "a6156b272b46ce0f1626ecadcab7089eb15bbcd0307e41d69269539227b70713",
+        "backgrounds.json": "349a25fc4873ce9e97c18911269216f699cd6b10722be824bb9f55c17ff0e029",
+        "classes/barbarian.json": "31335e042046c96d5565068783d0e0a071fa52c9f43e457a522a6fb73b9d2020",
+        "classes/bard.json": "c7690abf19bb270ec62ef7912050b94ba3a89048b9a9c5f906555e5cb79ad321",
+        "classes/cleric.json": "fc576b48b7600e4c14a5c8a05cc00d1a9d77cfcb0997145d6d959f8f3fa83a0e",
+        "classes/druid.json": "73202f2138db8f9fde72d029ee098c6941a44c3cdc6ff27ec23c7842ef076b14",
+        "classes/fighter.json": "3705b05f0e5cee70f2d9d57f9de6d81affe2e8e4ac35798db9624c37626fc150",
+        "classes/monk.json": "dad00f641ea22e12fa9063601183f0bc51ac794fee7bbb133f488f51004532ad",
+        "classes/paladin.json": "b0da4d50ed66237fe0a1b44de6f8385963c685a3d3ffd46821960d1a3bd4ed4d",
+        "classes/ranger.json": "428fdc6533bef25b8775eba9da637397687b2a40244a0fed6f124fa5f762ff46",
+        "classes/rogue.json": "4efcd83f5b4e460c9f3aefed1a9a687fcb663d4f87ee118817e673a5af7c07c2",
+        "classes/sorcerer.json": "ad035b23de02b88aa8f63f5904bb6be3140157e58d427e2902db8b0b74192317",
+        "classes/warlock.json": "fbfcb5b011c662a785c150b4c851c43a927c3ac73699fa1b8e8838211f3f0189",
+        "classes/wizard.json": "8977668428f5c283453d88e28530641db167a8a9be1f02ad8d7bd86d2ee2ba41",
+        "conditions.json": "c1ac5419042319b0752c57c1a257531fb04d2700d89868c1d6b096b462b97d81",
+        "encounters/crypt_hall.json": "c2d43f002dec443dbf092d36dfc2f4a092f6f1c650a1e25044c7a1885ff11264",
+        "encounters/crystal_cave.json": "c58694442ad39949dfec42e548018396ca5b93f4ee74a26191b8dc059a54eefc",
+        "encounters/ford_assault.json": "474f39d8a00b31b744c8a763e42f557a3b2ade5c0dd751d1cda9160167453da9",
+        "encounters/forest_ruins.json": "3c2825042f1523b2089b64bb05f2eaac5117b5388cfd5a18f06762a6e15c7e41",
+        "encounters/hall_of_the_flame.json": "3330b0d1d433b3f44eb1bb68b745d4ae27a869ece73e795e7171fa6997250333",
+        "encounters/keep_gate.json": "6be526538526f399fd7ec6474bd02c9d187f8c2ec282796c0e5d82f64e468a20",
+        "encounters/rime_tower.json": "990c2dfeb4614bc71cf1dcc2125d671555b2879877bebb7de7f5f3c5d1df0934",
+        "encounters/river_crossing.json": "39fe8ca71db04aa5bc13fe0e05568e0d29394b15191cf7ce14a14259731bf8d2",
+        "encounters/warlord_bridge.json": "939449a2ec5baa42f9361bcfae07f4663949897aea21a76d9a3db69b16276f48",
+        "environment.json": "c0157fc956254fa37abe3171c85b645c34c7b9b4da698055bf17e7506041e183",
+        "injuries.json": "071f310e057260764304043077207747743083b83086682d56f6cf173dc0c82d",
+        "interactables/ashen_ford.json": "d694e66c4ed612d9474df220521d49b9d01e0acace05c7fc8bfa3dd4324b65a7",
+        "items.json": "654cab13c8ad625ebc43867ad417a320e71d25806ba626ac5b692aca8f3feaa3",
+        "manifest.json": "d5e09c205c75732d75c363150d89521fe40a2dbd5bdea0859a29a20639f00965",
+        "maps/crypt_hall.json": "ae4f49052cf71b18361c1f05b9d4975330b8657ba7e697af42d24b6d33df38ce",
+        "maps/crystal_cave.json": "fcbd1a5efe9641be299bc80036e3c1750c602d6f1aa11a8808b9ea572062002f",
+        "maps/forest_ruins.json": "d2a6bbb5241ea9dc92d553bb05ccf50b1fbd4a9bc79a3fef91886eebbc0c3155",
+        "maps/hall_of_the_flame.json": "70803fb3b7743f36d9a812ac39b55b9aff000daf2fdd932a29ef23ea3d40f6fb",
+        "maps/keep_gate.json": "3321f809aeea353286ce6f36fe691d854ef528ce1dd0ca94740206a22561aecf",
+        "maps/river_crossing.json": "c20e42cbcbae3ccecc8619a28cfa56e79c6fbeb4d4226191dc489005d55a1588",
+        "maps/warlord_bridge.json": "57978a215202b18378896d5f76d5b5a74d9d030f8fde6ce65a63c1a6c242a2fa",
+        "monsters/beasts-1.json": "0c16c635f7ec65f29fdbd0952732c7bfc9de89c1c559048c520e6d1f603e0320",
+        "monsters/bosses.json": "d78b09fa85e07a3e2265fe238d10d96a54eafd6ee35857d1804fa4b044d864e6",
+        "monsters/companions.json": "3b6fe90476a3e4b202d74c07d5bac71c65a76bd6d9a3b41c0bbdfc9c8686c0a4",
+        "monsters/goblinoids.json": "39450bf96e323516ace091bcc61826a469e5b5b28d0422ed14e3084a167dc687",
+        "monsters/humanoids.json": "5dead38c8329a1c1060fdb45851232fc76971d12f3ff902d8f0e9c420f419baa",
+        "monsters/undead.json": "cda75f09193bc2edb68ff10ef0f4e70cba6671579afd8817023b0f14e5a1b2e3",
+        "monsters/villains.json": "37a24d46ad99b8976c3536d48f951d423894cc1e6233ed19c4c017425db48149",
+        "monsters/wildshape.json": "5d3c49ca3877ecc30f1252b304e90b47ae3cf294335cbce18ce8a89824942995",
+        "races.json": "b820ad12258e7c8589e0ccfa60ad3664ae78154aaf834e9605101a5292f49abd",
+        "schema/abilities.schema.json": "9981e3469a473f5c8221bc5c54e8fde15cb5053870fa619e2e10daa344ec76a0",
+        "schema/ai-profiles.schema.json": "33938e1f3334056235bdd9872140634faa0afd2a86652facc672769195621460",
+        "schema/armor.schema.json": "ff8e0ba6e229e8fd785bb5632a053c492c58227ecb890265724bc0d248244515",
+        "schema/backgrounds.schema.json": "8f27477d599fc81560bfc3f8a40d2fd8e603d379fbea97448b035b5bc272e0bb",
+        "schema/class.schema.json": "21b1c1dbdd399264fb9fce39a54dc0474aaea9e360e9556a6726c02b06e74e48",
+        "schema/common.schema.json": "717a3a21a58534c33ac1f4334f8c2a51ffb9ba63fc91a5c13ebd7e30a22f9554",
+        "schema/conditions.schema.json": "3fb115fcc32243e9e3f8cbc1d45bedaf6194f5d7821c939f0ec46834e984e590",
+        "schema/encounter.schema.json": "e89efc09c1173baa0d934faed07e40415f3dee3479b69579965338b98f6146df",
+        "schema/environment.schema.json": "25126e1bbc3c6a1532ae919b18752cd8ba1fa2a2bfa67701a8cad5ddac476025",
+        "schema/injuries.schema.json": "7a1baa8c7fe9836f2f681ee09e5d788af9332e382941e47f8104993e8b5a64f1",
+        "schema/interactables.schema.json": "a73a7e30c639d9fdd78b92546c6cfbca098a983861a8f480c03e8ed279e6b534",
+        "schema/items.schema.json": "50ca95b4b8ee82c0c23b7810e486a86b7e591c46b6debf0262bed0bb55b12280",
+        "schema/manifest.schema.json": "c6634ed4054281c1872c8e34a63d4bf607adff96d4512bf04c6d052566263259",
+        "schema/map.schema.json": "2908693e6aa6f99718a16939a1c9d19116f851ace2d2b119437207a3b400654d",
+        "schema/monsters.schema.json": "9a8d2497654acbdf55294e3199f945cdefe057c4b066d6ac52083a3df6d2d509",
+        "schema/races.schema.json": "8b8b7cce4e23d468ec47f10600c2d9096c4c7fb156fcb0bbb756c38bcdecee80",
+        "schema/region.schema.json": "21886aa5af390541e44765ff29172b34c88cee2f1269398b3e29e63b71493844",
+        "schema/weapons.schema.json": "3af4bbb214f2c7a0c35ae385236355b4cdd15a9370a685a7184ceda27c625316",
+        "schema/xp.schema.json": "ed355e833d1890e57eb1a63ba1840933d17ce59f568dcdfbddd8c50e9e159db3",
+        "weapons.json": "8327ee923a7bd78555869af723486196aa8291e2ae093c76fc5d6f48856bea9c",
+        "world/ashen_ford.json": "e2d0c97bbc4968fd849b4d06ba5786c67e7b3da1fd872d95a0b8e0a98077261b",
+        "xp.json": "913ecb2bcf0f417abffe1120fbd2f551a2d97e08c291d23be51fd491e5614fab"
+      }
+    },
+    "rules-candidate-off": {
+      "algorithm": "SHA256 of sorted relative-path:SHA256 lines",
+      "digest": "7a1c688df933f02d576c52f8849a9fbb05b9ead76450c0e0c0ffc09e1b254d1f",
+      "files": {
+        "abilities/barbarian.json": "2aaeae0a334cafcf6e54b1bc8a30b8ed98ab4165bec7a22436ac5aef190559ee",
+        "abilities/bard.json": "471a0096b118c80e4998ede36b68647fc74db7d650f48f938c4e1c60e7d49db7",
+        "abilities/cleric.json": "8aeb9f39665099d67409936ce6984d9875de06bdc5aff8c77a87c85f6ee71d90",
+        "abilities/common.json": "034535ad1c202b3db7133d9adf83ef3f668cfbab646781f96bd212025611a0a8",
+        "abilities/druid.json": "2a745d270688126d3072f39c9e0a62830795dae01dc9c3e330c126ac8d6f23ca",
+        "abilities/fighter.json": "68b49fbf6e0b9a4f6c0ca42eb568a0f041b701f85d5143b248a09569a7275640",
+        "abilities/monk.json": "51f06fe2e2be315d88bbde4995a0ebd4d51da081c9bb12c2aa47b552a161e309",
+        "abilities/monsters.json": "66a7a5360387c52dfc1e4a50aad8bc9e613cf0af08ed6bb0f3ad1599715527e7",
+        "abilities/paladin.json": "022aeac5546ee7637385f17404088319470cf931ed28b7885379d247bad0692f",
+        "abilities/races.json": "acd0b02da9e0ad6c3508283678c20c1037ed683889f78ed21ca69c7e50b3822c",
+        "abilities/ranger.json": "cc394c99308a773a0ab36fb65764bc320ce561dad5569491a67fdc810c520f50",
+        "abilities/rogue.json": "f2835f28c185c8653accfbe7aa19566aada15ebd353b4e88ae27a016615b2512",
+        "abilities/sorcerer.json": "24eab94591d5235d50806e3c90610aaff8e10a8a3b71a4530daa546eec02d8eb",
+        "abilities/villains.json": "eb42e24531a8856bbb1c619b3fc37d4f3e67921aa4bf47f133902709b2b17a89",
+        "abilities/warlock.json": "451a8089e61ed7647dc3421ad6889d06496c16ae57c01dad42722d68763b8e28",
+        "abilities/wizard.json": "15beae8c5fad98621a1c22f7145b4e6a3395772648a38c8b30f14bedbcd4b2fa",
+        "ai-profiles.json": "a3fd037856dd7323c7d44fe42f102a8c56e1814ec431bdffc65fbeef91bae66b",
+        "armor.json": "a6156b272b46ce0f1626ecadcab7089eb15bbcd0307e41d69269539227b70713",
+        "backgrounds.json": "349a25fc4873ce9e97c18911269216f699cd6b10722be824bb9f55c17ff0e029",
+        "classes/barbarian.json": "31335e042046c96d5565068783d0e0a071fa52c9f43e457a522a6fb73b9d2020",
+        "classes/bard.json": "c7690abf19bb270ec62ef7912050b94ba3a89048b9a9c5f906555e5cb79ad321",
+        "classes/cleric.json": "fc576b48b7600e4c14a5c8a05cc00d1a9d77cfcb0997145d6d959f8f3fa83a0e",
+        "classes/druid.json": "73202f2138db8f9fde72d029ee098c6941a44c3cdc6ff27ec23c7842ef076b14",
+        "classes/fighter.json": "3705b05f0e5cee70f2d9d57f9de6d81affe2e8e4ac35798db9624c37626fc150",
+        "classes/monk.json": "dad00f641ea22e12fa9063601183f0bc51ac794fee7bbb133f488f51004532ad",
+        "classes/paladin.json": "b0da4d50ed66237fe0a1b44de6f8385963c685a3d3ffd46821960d1a3bd4ed4d",
+        "classes/ranger.json": "428fdc6533bef25b8775eba9da637397687b2a40244a0fed6f124fa5f762ff46",
+        "classes/rogue.json": "4efcd83f5b4e460c9f3aefed1a9a687fcb663d4f87ee118817e673a5af7c07c2",
+        "classes/sorcerer.json": "ad035b23de02b88aa8f63f5904bb6be3140157e58d427e2902db8b0b74192317",
+        "classes/warlock.json": "fbfcb5b011c662a785c150b4c851c43a927c3ac73699fa1b8e8838211f3f0189",
+        "classes/wizard.json": "8977668428f5c283453d88e28530641db167a8a9be1f02ad8d7bd86d2ee2ba41",
+        "conditions.json": "c1ac5419042319b0752c57c1a257531fb04d2700d89868c1d6b096b462b97d81",
+        "encounters/crypt_hall.json": "b362cdd9c5ea3c04e51c1fe4cc8fcc700fb988c8cd54fae5fc2631ccca6b41d9",
+        "encounters/crystal_cave.json": "43b1d560f6728e443b89df498fdeaaa8be6a5e9fcd1d5fa93ff8dbb716780c92",
+        "encounters/ford_assault.json": "7c7fe9feb7a2ef1f9cdfd3bd2e41578a1cecbb3ade510b07aa3bf27324bfeed7",
+        "encounters/forest_ruins.json": "d28876f3c28d2c92fd83b0c9a06d6392f0e25245b7bbab24dd1216ee11d4f055",
+        "encounters/hall_of_the_flame.json": "433ea00d6a143b6181993135084f927145cbc947445472ae86a7b167e898bc19",
+        "encounters/keep_gate.json": "5a35dcc2b3c7f77743324aa18a7a587c6386aeb5c0f93bcfe1009a16b62aa98d",
+        "encounters/rime_tower.json": "9592871043680da9bcd38cc9c1f40e2cbffddfb8853f22c6b29332552e32b6a2",
+        "encounters/river_crossing.json": "a14f810879f7a2d14a58b2ea2057016dc3f01788f244a2ef4efe97534d4177cf",
+        "encounters/warlord_bridge.json": "3bb17877321f062f0fc3096bd922041361dab8767be5faed8d17523ac43313a4",
+        "environment.json": "c0157fc956254fa37abe3171c85b645c34c7b9b4da698055bf17e7506041e183",
+        "injuries.json": "071f310e057260764304043077207747743083b83086682d56f6cf173dc0c82d",
+        "interactables/ashen_ford.json": "d694e66c4ed612d9474df220521d49b9d01e0acace05c7fc8bfa3dd4324b65a7",
+        "items.json": "654cab13c8ad625ebc43867ad417a320e71d25806ba626ac5b692aca8f3feaa3",
+        "manifest.json": "d5e09c205c75732d75c363150d89521fe40a2dbd5bdea0859a29a20639f00965",
+        "maps/crypt_hall.json": "ae4f49052cf71b18361c1f05b9d4975330b8657ba7e697af42d24b6d33df38ce",
+        "maps/crystal_cave.json": "fcbd1a5efe9641be299bc80036e3c1750c602d6f1aa11a8808b9ea572062002f",
+        "maps/forest_ruins.json": "d2a6bbb5241ea9dc92d553bb05ccf50b1fbd4a9bc79a3fef91886eebbc0c3155",
+        "maps/hall_of_the_flame.json": "70803fb3b7743f36d9a812ac39b55b9aff000daf2fdd932a29ef23ea3d40f6fb",
+        "maps/keep_gate.json": "3321f809aeea353286ce6f36fe691d854ef528ce1dd0ca94740206a22561aecf",
+        "maps/river_crossing.json": "c20e42cbcbae3ccecc8619a28cfa56e79c6fbeb4d4226191dc489005d55a1588",
+        "maps/warlord_bridge.json": "57978a215202b18378896d5f76d5b5a74d9d030f8fde6ce65a63c1a6c242a2fa",
+        "monsters/beasts-1.json": "0c16c635f7ec65f29fdbd0952732c7bfc9de89c1c559048c520e6d1f603e0320",
+        "monsters/bosses.json": "d78b09fa85e07a3e2265fe238d10d96a54eafd6ee35857d1804fa4b044d864e6",
+        "monsters/companions.json": "3b6fe90476a3e4b202d74c07d5bac71c65a76bd6d9a3b41c0bbdfc9c8686c0a4",
+        "monsters/goblinoids.json": "39450bf96e323516ace091bcc61826a469e5b5b28d0422ed14e3084a167dc687",
+        "monsters/humanoids.json": "5dead38c8329a1c1060fdb45851232fc76971d12f3ff902d8f0e9c420f419baa",
+        "monsters/undead.json": "cda75f09193bc2edb68ff10ef0f4e70cba6671579afd8817023b0f14e5a1b2e3",
+        "monsters/villains.json": "37a24d46ad99b8976c3536d48f951d423894cc1e6233ed19c4c017425db48149",
+        "monsters/wildshape.json": "5d3c49ca3877ecc30f1252b304e90b47ae3cf294335cbce18ce8a89824942995",
+        "races.json": "b820ad12258e7c8589e0ccfa60ad3664ae78154aaf834e9605101a5292f49abd",
+        "schema/abilities.schema.json": "9981e3469a473f5c8221bc5c54e8fde15cb5053870fa619e2e10daa344ec76a0",
+        "schema/ai-profiles.schema.json": "33938e1f3334056235bdd9872140634faa0afd2a86652facc672769195621460",
+        "schema/armor.schema.json": "ff8e0ba6e229e8fd785bb5632a053c492c58227ecb890265724bc0d248244515",
+        "schema/backgrounds.schema.json": "8f27477d599fc81560bfc3f8a40d2fd8e603d379fbea97448b035b5bc272e0bb",
+        "schema/class.schema.json": "21b1c1dbdd399264fb9fce39a54dc0474aaea9e360e9556a6726c02b06e74e48",
+        "schema/common.schema.json": "717a3a21a58534c33ac1f4334f8c2a51ffb9ba63fc91a5c13ebd7e30a22f9554",
+        "schema/conditions.schema.json": "3fb115fcc32243e9e3f8cbc1d45bedaf6194f5d7821c939f0ec46834e984e590",
+        "schema/encounter.schema.json": "e89efc09c1173baa0d934faed07e40415f3dee3479b69579965338b98f6146df",
+        "schema/environment.schema.json": "25126e1bbc3c6a1532ae919b18752cd8ba1fa2a2bfa67701a8cad5ddac476025",
+        "schema/injuries.schema.json": "7a1baa8c7fe9836f2f681ee09e5d788af9332e382941e47f8104993e8b5a64f1",
+        "schema/interactables.schema.json": "a73a7e30c639d9fdd78b92546c6cfbca098a983861a8f480c03e8ed279e6b534",
+        "schema/items.schema.json": "50ca95b4b8ee82c0c23b7810e486a86b7e591c46b6debf0262bed0bb55b12280",
+        "schema/manifest.schema.json": "c6634ed4054281c1872c8e34a63d4bf607adff96d4512bf04c6d052566263259",
+        "schema/map.schema.json": "2908693e6aa6f99718a16939a1c9d19116f851ace2d2b119437207a3b400654d",
+        "schema/monsters.schema.json": "9a8d2497654acbdf55294e3199f945cdefe057c4b066d6ac52083a3df6d2d509",
+        "schema/races.schema.json": "8b8b7cce4e23d468ec47f10600c2d9096c4c7fb156fcb0bbb756c38bcdecee80",
+        "schema/region.schema.json": "21886aa5af390541e44765ff29172b34c88cee2f1269398b3e29e63b71493844",
+        "schema/weapons.schema.json": "3af4bbb214f2c7a0c35ae385236355b4cdd15a9370a685a7184ceda27c625316",
+        "schema/xp.schema.json": "ed355e833d1890e57eb1a63ba1840933d17ce59f568dcdfbddd8c50e9e159db3",
+        "weapons.json": "8327ee923a7bd78555869af723486196aa8291e2ae093c76fc5d6f48856bea9c",
+        "world/ashen_ford.json": "e2d0c97bbc4968fd849b4d06ba5786c67e7b3da1fd872d95a0b8e0a98077261b",
+        "xp.json": "913ecb2bcf0f417abffe1120fbd2f551a2d97e08c291d23be51fd491e5614fab"
+      }
+    }
+  },
+  "legacyGoldenFiles": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "phoneFixturesChanged": [
+    "web/play/test/fixtures/tactics/environment-turn.json"
+  ],
+  "tests": {
+    "fullSolution": {
+      "passed": 5875,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0
+    },
+    "afterForest": {
+      "logic": 1174,
+      "phoneFixtures": 7,
+      "tvContracts": 53,
+      "failed": 0,
+      "skipped": 0
+    },
+    "web": {
+      "passed": 484,
+      "failed": 0,
+      "exit": 0
+    },
+    "dotnetBuildWarnings": 0,
+    "webBuild": "passed; existing 537.65kB flyover advisory"
+  },
+  "chapter": {
+    "sixPlayers": {
+      "status": "OK",
+      "branch": "force",
+      "freshCampaign": true,
+      "wonBattles": 1,
+      "storyLinesSaidOnce": 94,
+      "screenshots": 25,
+      "chapterCard": true,
+      "walkStepsAfterCard": 4,
+      "tvErrors": 0,
+      "readingSeconds": 1,
+      "renderer": "OpenGL software, 30 FPS cap, Dummy audio"
+    },
+    "fourPlayers": {
+      "completedLosses": 3,
+      "stoppedDuringAttempt": 4,
+      "chapterCard": false,
+      "tvErrors": 0
+    }
+  },
+  "contentChecks": {
+    "coreMapUnchanged": true,
+    "crystalCaveUnchanged": true,
+    "forestMaterialOnlyChanges": [
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "shamanStatsCloned": true,
+    "cinderBoltUnchanged": true,
+    "approvedEnvironmentNumbersUnchanged": true,
+    "legacyGoldenFilesUnchanged": 6
+  },
+  "artifacts": {
+    "g-candidates/crystal_cave.json": "c58694442ad39949dfec42e548018396ca5b93f4ee74a26191b8dc059a54eefc",
+    "g-chapter-card.png": "f60abfd956b79b1305d2b5cfd68dacf65cd1a7f1b8b09be79d1b00aac125358a",
+    "g-chapter-check.txt": "fb20c8d01f53d6b61c9451591b4b70d20a5fdf7168e4e842d06bca293cb2f8d4",
+    "g-content-build.txt": "e5b6fa04007538a64972195ff66e6b944196a1cc32f82327019d9fca9a0e4996",
+    "g-data/bridge-on.md": "3aaa0e8a8d38a2308a1ad4a9ce59a6fa46bdecac6ade22843d43759394785b63",
+    "g-data/bridge-original.md": "3692a1241a880419425580f735f5f23f0a3d7c42b8f92210343da2dc3ddb2950",
+    "g-data/core-on.md": "c3cf5f535e1fdb7bb2d0906ed99c7a4eecd2bc074d230534510eec4f29fc4b9a",
+    "g-data/core-original.md": "7f4c917096cfd9c9ae7ffce8a27b07a0eb3a06ee414705e094e280f904006da7",
+    "g-data/ford-off.md": "340df7a6db463fc08886e80f2a42a87dc9b01b93dc3cdf818c477940fe83a0d9",
+    "g-data/forest-on.md": "36d4d96a30f91bc13a64de445fd11ac9a06dbfb0ba77dfe2718435fc0f5457d4",
+    "g-data/forest-original.md": "73d590d88c22257c357d9668f7d77dc325dddf6dc9341c32d2098fd8d928c2c2",
+    "g-data/rime-off.md": "4c26ba3b3290b6d518bf8fa3146c751debc2b68039b23de87eceb74960fe59f1",
+    "g-data/rime-on.md": "448d9e43377e8e9d7742aba910069698ab04852e5bf7e4fcbc4c71e60f7c0be2",
+    "g-data/rime-original.md": "cfc6b505d8035a0f5c949b722059ee47fad8893f3b086e546511cd0495c8e0df",
+    "g-final-logic-tests.txt": "908fe510e613678be9c770b870fced1e606b68232be1d69f1d85c76a9408598c",
+    "g-final-phone-tests.txt": "b3b6bd71c942034e4c86a64275762c4ac849f288ba0a059eeaa6149c11e28f64",
+    "g-final-tv-tests.txt": "2ec3e025861b612ec48f442e0222c40161d7fdadd950e37fe8ad9e2fe7fcaa02",
+    "g-ford-battle.png": "a2fe299844fe0e5be030d9685208151d5579ad6c2afc45dc7e17cd5d1a0891ce",
+    "g-ford-fire.png": "96ed148afa9ab1ce0487566f374e447199354bd8add6012eb676bad40497d9e0",
+    "g-phones-four.txt": "2da8828e1dd2527337fda2a41a42120050597cb1ae7e61d8761a96aaf060871d",
+    "g-phones-six.txt": "acdb21c5e0c4d86a70089cf1af68aef0a9c5021f648310b7f9449379bd2ef141",
+    "g-solution-tests.txt": "884592ad50e6e10aea2280c9ca63b9e929b29fedaed102ec581a2fc4477088bb",
+    "g-tv-build.txt": "4ca0348783cdda7d993b43ddb02465f6fa86e04442c94816953d796785c7ec8d",
+    "g-tv-six.txt": "7fce41e1e70afd821457787d9cde0b83a8e7f7552e57c63bc7113811e4af093f",
+    "g-web-build.txt": "e00a18692c97c4ea6f99a034c877b51d7892a516544772771c420bfb08f6252b",
+    "g-web-tests.txt": "cf99b2a8c1f8b77b60506da4abb38b8ece7a4a7c9d5581ee9d1bfc5e187bd67a"
+  }
+}

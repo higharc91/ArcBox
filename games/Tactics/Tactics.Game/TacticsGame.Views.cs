@@ -34,7 +34,7 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
     public static PhoneChoices Of(TurnChoices choices, RulesPack? rules = null) => new(choices.Unit, choices.Economy, choices.Moves,
         [.. choices.Abilities.Select(a =>
         {
-            bool Bare(TargetChoice t) => t.Target.Unit is null && t.Target.Tile == t.Aim && t.Affected.IsEmpty;
+            bool Bare(TargetChoice t) => t.Target.Unit is null && t.Target.Tile == t.Aim && t.Affected.IsEmpty && t.Spread.IsDefaultOrEmpty;
             var def = rules is null ? null
                 : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
                 : rules.Abilities.GetValueOrDefault(a.Ability);
@@ -512,7 +512,7 @@ public sealed partial class TacticsGame
         if (UnitOf(profile) is not { } unit || !state.Units.TryGetValue(unit, out var me))
             return new WaitView("You're not in this battle.");
         if (state.Pending is ReactionOffer offer && offer.Reactor == unit && IsPlayed(unit))
-            return Custom(Screens.React, new
+            return PhoneSurfaces.Attach(Custom(Screens.React, new
             {
                 unit,
                 trigger = offer.Trigger,
@@ -526,25 +526,25 @@ public sealed partial class TacticsGame
                     id = o.Id,
                     label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
                     target = o.Target,
-                    tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules) : null,
+                    tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
-            }) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
+            }), state, me, Rules) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
-            return Custom(Screens.Turn, new
+            return PhoneSurfaces.Attach(Custom(Screens.Turn, new
             {
                 me = UnitViewOf(me),
                 map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
                 choices = PhoneChoices.Of(Choices.For(state, unit, Rules), Rules),
-            })
+            }), state, me, Rules)
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
-        return Custom(Screens.Status, new
+        return PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
             me = UnitViewOf(me),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
             upIn = UpIn(state, unit),
             aiPlaying = !IsPlayed(unit),
-        });
+        }), state, me, Rules);
     }
 
     /// <summary>How many turns until <paramref name="unit"/>'s, this round (exact: no initiative rolls), or null.</summary>

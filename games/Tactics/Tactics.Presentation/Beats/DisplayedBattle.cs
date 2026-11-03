@@ -61,7 +61,11 @@ public static class DisplayedBattle
     /// The rest stays as the view has it: conditions (a condition applied twice can't be told from a new one), the board,
     /// a form, a unit that left. Those were the state already, and only for the length of one beat.
     /// </summary>
-    public static BattleView Before(BattleView view, Beat beat) => beat.Events.Reverse().Aggregate(view, Undo);
+    public static BattleView Before(BattleView view, Beat beat)
+    {
+        var before = beat.Events.Reverse().Aggregate(view, Undo);
+        return beat.ActiveBefore is { } active ? before with { Active = active } : before;
+    }
 
     private static BattleView Undo(BattleView view, BattleEvent e) => e switch
     {

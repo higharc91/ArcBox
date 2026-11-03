@@ -1,0 +1,12 @@
+{"name":"river-ford-storm","seed":7,"setup":"river-ford-storm","commands":[
+{"$type":"Use","actor":"shaman","ability":"goblin_shaman.storm_hex","target":{"unit":"wet"}},
+{"$type":"EndTurn","actor":"shaman"},
+{"$type":"Use","actor":"mage","ability":"replay.frost","target":{"tile":[7,8]}},
+{"$type":"EndTurn","actor":"mage"},
+{"$type":"EndTurn","actor":"gob"},
+{"$type":"EndTurn","actor":"wet"},
+{"$type":"Use","actor":"shaman","ability":"kobold_slinger.fire_pot","target":{"tile":[5,8]}},
+{"$type":"EndTurn","actor":"shaman"},
+{"$type":"Move","actor":"mage","path":[[5,8],[6,8]]},
+{"$type":"EndTurn","actor":"mage"}
+]}

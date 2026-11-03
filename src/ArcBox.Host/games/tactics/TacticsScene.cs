@@ -476,7 +476,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             if (world.Now != WorldCanvas.Stage.Failed)
             {
-                GD.PushError($"Tactics world: '{_worldRegion}' didn't open in {WorldTuning.OpenTimeout} s; going on without it");
+                GD.PushError($"Tactics world: '{_worldRegion}' stalled or exceeded {WorldTuning.OpenMaxWait} s while opening; going on without it");
             }
             _unreadableWorld = _worldRegion;
             CloseWorld();
@@ -545,7 +545,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             WorldCanvas.Stage.Failed => WorldStage.Failed,
             _ => WorldStage.Building,
         };
-        if (!_cover.Frame(delta, stage, world.Lifted))
+        if (!_cover.Frame(delta, stage, world.Lifted, world.LoadingProgress))
         {
             return false;
         }
@@ -1268,7 +1268,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var units = stage.Shown(UnitPlan.Build(shown, _terrain, _unitArt, stage.Fit, stage.Places, stage.Poses, where.Origin));
         var (marked, draws) = MarkRule.Apply(units, beat, _unitArt, MarkRule.Shown(director.Stage, _overWorld));
         board.SetUnits(marked, _unitArt);
-        board.SetEffects(draws, System.Numerics.Vector2.Zero);
+        board.SetEffects([.. draws.Select(d => d.AtWorldOrigin(where.Origin))], System.Numerics.Vector2.Zero);
         board.GridAlpha = director.GridAlpha;
         _stageShake = beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);

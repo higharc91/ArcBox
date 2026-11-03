@@ -19,6 +19,18 @@ public sealed class DisplayedBattleTests
 
     private static UnitView After(BattleEvent e, UnitView unit) => DisplayedBattle.Apply(View(null, unit), e, View(null, unit)).Units.Single();
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Undoing_a_winning_beat_restores_the_turn_even_when_a_reactor_acted(bool reaction)
+    {
+        var actor = reaction ? S : A;
+        var beat = new Beat(1, actor, [new AbilityUsed(actor, new AbilityId("common.attack"), new Target(Unit: S), null),
+            new Died(S), new BattleEnded(BattleOutcome.Won)], ActiveBefore: A);
+        var ended = View(null, Unit(A), Unit(S, hp: 0, life: "Dead"));
+        Assert.Equal(A, DisplayedBattle.Before(ended, beat).Active);
+    }
+
     [Fact]
     public void A_step_moves_the_unit_to_the_end_of_its_path()
         => Assert.Equal(new Tile(1, 3), After(new Moved(A, [new Tile(1, 1), new Tile(1, 2), new Tile(1, 3)]), Unit(A)).At);

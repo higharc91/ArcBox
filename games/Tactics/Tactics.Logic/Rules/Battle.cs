@@ -32,7 +32,7 @@ public static partial class Battle
             Counters: Ordinal.Map<int>(), FiredTriggers: Ordinal.Set(), Outcome: null, Injuries: [], ItemsUsed: [],
             NextSerial: 0, StartedThisRound: [], DelayedThisRound: [], Xp: setup.Xp,
             Loot: setup.Loot.IsDefault ? [] : setup.Loot, Difficulty: setup.Difficulty,
-            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers);
+            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment };
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);
@@ -189,6 +189,8 @@ public static partial class Battle
                 return Rejection.Of(RejectCode.NoItem);
             ability = itemAbility;
         }
+        if (!w.State.Environment && EffectTree.All(ability.Effects).OfType<ZoneEffect>().Any(z => z.Surface))
+            return new Rejection(RejectCode.InvalidTarget, "You can't use that here.");
         if (CostRefusal(user, ability) is { } cost)
             return cost;
         if (ResolveTarget(w, user, ability, use.Target, out var aim, out var targets) is { } target)
@@ -213,6 +215,8 @@ public static partial class Battle
                 steps.AddRange(targets.Select(t => new RunEffectsStep(user.Id, t, aim, ability.Id, run)));
             start = end;
         }
+        if (w.State.Environment)
+            steps.Add(new ReactStep(user.Id, ability.Id, aim, Areas.Tiles(ability.Target.Area, user.Pos, aim, w.Terrain), w.NewResolution(), targets));
         w.PushFront([.. steps]);
         return null;
     }
@@ -432,9 +436,12 @@ public static partial class Battle
     /// the encounter's triggers (<see cref="Triggers.Check"/>), whose actions go to the front of the queue.
     /// Each step starts at hook depth 0; steps that carry a depth set it themselves.
     /// </summary>
+    private static bool ResolutionEnded(BattleWriter w) => w.State.Outcome is not null
+        || !(w.State.Environment && w.State.Queue.Any(s => s is ReactStep)) && Objectives.Check(w);
+
     private static void Settle(BattleWriter w, RulesPack rules)
     {
-        for (var steps = 0; !Objectives.Check(w) && w.State.Pending is null; steps++)
+        for (var steps = 0; !ResolutionEnded(w) && w.State.Pending is null; steps++)
         {
             Triggers.Check(w, rules);
             if (w.PopFront() is not { } step)
@@ -477,6 +484,7 @@ public static partial class Battle
             ClearUsed(w, round: true);
             w.Emit(new RoundStarted(round, order));
             ZoneRules.TickOrphans(w);
+            Surfaces.RoundStart(w);
             DownedRules.TickRound(w);
             if (Objectives.Check(w))
                 return;

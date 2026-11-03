@@ -1,0 +1,11 @@
+  ArcBox.Sdk -> /workspace/arcbox-environmental/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  ArcBox.Sdk.Testing -> /workspace/arcbox-environmental/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Tactics.Logic -> /workspace/arcbox-environmental/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Sim -> /workspace/arcbox-environmental/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/arcbox-environmental/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.58
