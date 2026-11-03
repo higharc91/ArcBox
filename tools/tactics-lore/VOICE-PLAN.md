@@ -1,5 +1,7 @@
 # Wardenflame voice production
 
+Current playback policy (issue #76 owner decision): Tactics uses authored recordings and captions only. A missing or unreadable recording is logged and never invokes live TTS; registered voice themes remain for possible future use. Earlier live-fallback verification below is historical.
+
 The NPC/quest slice is rendered and integrated. Casting is authoritative in `voice-casting.json`; paid jobs and asset IDs, including superseded takes, remain in `tools/tactics-lore/voice-assets.json`. See [the delivery report](../../docs/superpowers/reports/2026-11-03-npcs-quests/README.md) and its voice comparisons.
 
 ## One person, one cast
