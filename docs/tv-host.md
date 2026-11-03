@@ -541,3 +541,10 @@ A saved 3-second sleep leads into an 8-second sunrise, both skippable by the lea
 this does not implement a continuous day/night clock. The inn has a native pixel interior with seated class sprites and window light.
 See the [accepted presentation design](superpowers/specs/2026-11-03-tactics-camp-presentation-proposal.md) and
 [verification/preview](superpowers/reports/2026-11-03-camp-presentation/README.md).
+
+
+**Animated phone camp.** Each phone now shows a compact camp scene with the current participant's class sprite marked by a heart,
+saved job poses, native fire/prop art, sleep and sunrise. The inn room screen uses the hearth art. A compact version remains on the
+optional camp conversation, vote and story check screens; ordinary story packets are untouched. Phone art loads through the normal
+hashed content-pack URLs, has a non-interactive fallback, and honors reduced-motion. TV headings, embers, sleep marks, failed-cook
+smoke, sunrise rays and inn hearth flicker add atmosphere without changing recovery rules.

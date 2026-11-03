@@ -79,3 +79,25 @@ The full run exited 0: 98 story lines checked (94 voiced plus four caption-only 
 passed, the Chapter I card appeared and the party walked afterward. There were no gameplay or rendering errors. The verifier
 recorded 29 chapter screenshots. Main was rechecked before finishing and remains `f4a28fc5`; the environment branch has not yet
 landed there, so the issue's conditional merge is still pending upstream.
+
+
+## Phone animation and visual polish follow-up
+
+Each participating phone now has a compact animated camp, using the same PixelLab fire, shelter, pot and hearth art as the TV
+and native class sprites from the content pack. The viewer's character has a small heart, the figures act according to saved jobs,
+they doze at sleep and wake at sunrise, and the fire becomes embers. The inn uses its own backdrop. Existing icon-atlas art replaces
+letter placeholders on job buttons. Motion respects `prefers-reduced-motion` and the scene is decorative to assistive technology.
+
+The animation stays visible during the fireside story, vote and any story check. Only camp-story packets get the optional
+`campScene` data; normal story screens and existing phone fixtures stay unchanged. The TV adds a clearer heading, extra embers,
+sleep marks, a smoke puff on a failed cook, sunlight rays and subtle hearth flicker. These are presentation only.
+
+- Solution and TV host build: zero warnings or errors. Final game suite: 589 passed, including camp-story dialogue/vote and reconnect.
+- Web suite: 491 passed; after the final story-check addition, the affected camp/tactics suites passed 31 tests and the production build passed.
+- Chromium at 390×844: all pack portraits, injury icons and five job icons loaded; actual sprite frames changed; no horizontal overflow or page errors.
+  Reduced-motion disabled the animations. Dialogue and vote screens retained their controls and the scene.
+- Godot/Xvfb software-OpenGL demo showed jobs, sleep, dawn and inn; no gameplay errors. The existing four-instance ObjectDB shutdown warning remains.
+- Local session previews: `/workspace/artifacts/arcbox-camp-tv-polished.mp4` (34 s, game audio; sunrise around 0:25) and
+  `/workspace/artifacts/arcbox-camp-phone-animation.mp4` (silent, about 10 s).
+
+![Animated camp on a player's phone](phone-polish.png)
