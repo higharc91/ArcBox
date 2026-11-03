@@ -28,7 +28,105 @@
           "south-west": "Idle/rotations/south-west.png"
         },
         "animations": {
+          "ashmaw_hurt_pinned_clean": {
+            "south-east": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-east/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-east/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-east/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/south/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-west/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-west/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-west/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-west/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/east/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/east/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/east/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/east/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-west/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-west/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-west/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/south-west/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/north/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-east/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-east/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-east/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/north-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_hurt_pinned_clean/west/frame_000.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/west/frame_001.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/west/frame_002.png",
+              "Idle/animations/ashmaw_hurt_pinned_clean/west/frame_003.png"
+            ]
+          },
           "ashmaw_walk_template_pilot": {
+            "north-west": [
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-west/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/west/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-east/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/north-east/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south-west/frame_005.png"
+            ],
             "south": [
               "Idle/animations/ashmaw_walk_template_pilot/south/frame_000.png",
               "Idle/animations/ashmaw_walk_template_pilot/south/frame_001.png",
@@ -36,6 +134,393 @@
               "Idle/animations/ashmaw_walk_template_pilot/south/frame_003.png",
               "Idle/animations/ashmaw_walk_template_pilot/south/frame_004.png",
               "Idle/animations/ashmaw_walk_template_pilot/south/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/east/frame_005.png"
+            ]
+          },
+          "ashmaw_idle_pinned_clean": {
+            "north-east": [
+              "Idle/animations/ashmaw_idle_pinned_clean/north-east/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-east/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-east/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_idle_pinned_clean/west/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/west/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/west/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/west/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_idle_pinned_clean/south-west/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-west/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-west/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-west/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/ashmaw_idle_pinned_clean/north-west/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-west/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-west/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north-west/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_idle_pinned_clean/south-east/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-east/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-east/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/south-east/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_idle_pinned_clean/north/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/north/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_idle_pinned_clean/east/frame_000.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/east/frame_001.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/east/frame_002.png",
+              "Idle/animations/ashmaw_idle_pinned_clean/east/frame_003.png"
+            ]
+          },
+          "ashmaw_idle_template_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_005.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_006.png",
+              "Idle/animations/ashmaw_idle_template_pilot/south/frame_007.png"
+            ]
+          },
+          "ashmaw_attack_custom_pilot": {
+            "south-west": [
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-west/frame_007.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/east/frame_007.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south-east/frame_007.png"
+            ],
+            "north-west": [
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-west/frame_007.png"
+            ],
+            "north-east": [
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north-east/frame_007.png"
+            ],
+            "south": [
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/south/frame_007.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/west/frame_007.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_000.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_001.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_002.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_003.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_004.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_005.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_006.png",
+              "Idle/animations/ashmaw_attack_custom_pilot/north/frame_007.png"
+            ]
+          },
+          "ashmaw_attack_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_attack_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_005.png",
+              "Idle/animations/ashmaw_attack_pilot/south/frame_006.png"
+            ]
+          },
+          "ashmaw_hurt_custom_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_hurt_custom_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_hurt_custom_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_hurt_custom_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_hurt_custom_pilot/south/frame_003.png"
+            ]
+          },
+          "ashmaw_idle_custom_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_idle_custom_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_idle_custom_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_idle_custom_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_idle_custom_pilot/south/frame_003.png"
+            ]
+          },
+          "ashmaw_roar_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_roar_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/south/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/south-west/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_roar_pilot/north/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/north/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/north/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/north/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/north/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/north/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/south-east/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/north-east/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_roar_pilot/east/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/east/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/east/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/east/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/east/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/east/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/north-west/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_roar_pilot/west/frame_000.png",
+              "Idle/animations/ashmaw_roar_pilot/west/frame_001.png",
+              "Idle/animations/ashmaw_roar_pilot/west/frame_002.png",
+              "Idle/animations/ashmaw_roar_pilot/west/frame_003.png",
+              "Idle/animations/ashmaw_roar_pilot/west/frame_004.png",
+              "Idle/animations/ashmaw_roar_pilot/west/frame_005.png"
+            ]
+          },
+          "ashmaw_shake_pilot": {
+            "north-east": [
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/north-east/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/south-east/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_shake_pilot/east/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/east/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/east/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/east/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/east/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/east/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/south-west/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_shake_pilot/north/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/north/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/north/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/north/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/north/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/north/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/north-west/frame_005.png"
+            ],
+            "south": [
+              "Idle/animations/ashmaw_shake_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/south/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_shake_pilot/west/frame_000.png",
+              "Idle/animations/ashmaw_shake_pilot/west/frame_001.png",
+              "Idle/animations/ashmaw_shake_pilot/west/frame_002.png",
+              "Idle/animations/ashmaw_shake_pilot/west/frame_003.png",
+              "Idle/animations/ashmaw_shake_pilot/west/frame_004.png",
+              "Idle/animations/ashmaw_shake_pilot/west/frame_005.png"
+            ]
+          },
+          "ashmaw_death_custom_pilot": {
+            "north-west": [
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-west/frame_007.png"
+            ],
+            "north-east": [
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north-east/frame_007.png"
+            ],
+            "north": [
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/north/frame_007.png"
+            ],
+            "south-west": [
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-west/frame_007.png"
+            ],
+            "south": [
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south/frame_007.png"
+            ],
+            "east": [
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/east/frame_007.png"
+            ],
+            "west": [
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/west/frame_007.png"
+            ],
+            "south-east": [
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_000.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_001.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_002.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_003.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_004.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_005.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_006.png",
+              "Idle/animations/ashmaw_death_custom_pilot/south-east/frame_007.png"
             ]
           }
         }
@@ -43,5 +528,5 @@
     }
   ],
   "export_version": "3.1",
-  "export_date": "2026-11-03T17:01:20.380903"
+  "export_date": "2026-11-03T19:32:00.734413"
 }

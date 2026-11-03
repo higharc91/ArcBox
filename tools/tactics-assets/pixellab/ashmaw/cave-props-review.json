@@ -1,0 +1,27 @@
+{
+  "authorization": "Owner requested blood, bones, spooky/darker cave and scattered kobold candles after core branch work.",
+  "palette": "ashen_ford",
+  "styleReference": "human_fighter_world",
+  "sources": {
+    "candle-stubs": {
+      "status": "accepted static, imported at exactly half native size for physical scale",
+      "source": "candle-stubs-source.png",
+      "animation": "Rejected: generated animation invents large pale smoke shapes. Use normal renderer candle-light flicker, preserve generated source."
+    },
+    "animal-bones": {
+      "status": "accepted",
+      "source": "animal-bones-source.png",
+      "lore": "Old animal remains; the fisher boy is alive at Maud."
+    },
+    "dried-blood": {
+      "status": "accepted",
+      "source": "dried-blood-source.png",
+      "placement": "Low, nonblocking ground stains concentrated near Ashmaw."
+    }
+  },
+  "failedAttempts": [
+    "candle-stubs-run.json",
+    "animal-bones-run.json"
+  ],
+  "retryReason": "PixelLab reported terminal generation failures due to heavy load before retries; no pending job was duplicated."
+}

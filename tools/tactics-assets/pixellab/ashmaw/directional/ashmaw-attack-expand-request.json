@@ -1,0 +1,18 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 8,
+  "keep_first_frame": false,
+  "animation_name": "ashmaw_attack_custom_pilot",
+  "directions": [
+    "south-east",
+    "east",
+    "north-east",
+    "north",
+    "north-west",
+    "west",
+    "south-west"
+  ],
+  "action_description": "A natural grounded cave bear attack. Keep hind paws grounded and preserve the current viewing direction. Lean forward into one short bite, make one compact forepaw swipe, then recover to the starting stance. Solid fur-covered anatomy throughout. No bones, guides, letters, marks, particles, turning, spinning or leaping.",
+  "animation_group_id": "8021517c-5aba-4495-887f-88ca83bc4836"
+}

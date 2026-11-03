@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (Grounded cave bear roar: hold the original viewing direction, keep hind paws fixed, raise the shoulders slightly, open the mouth in one low powerful roar, then close it and recover the exact starting posture. Solid grey fur-covered anatomy throughout; no spinning, leaping, skeletal guides or added marks.)\ndirections: south-east, east, north-east, north, north-west, west, south-west (7 jobs)\njob_ids: south-east=2badc2c2-44a3-40cd-8ab8-271b05788069, east=7b0c2d9e-99c8-441d-8943-bc3bfe7148e1, north-east=399d25fa-5cf1-41cc-bdc1-3a138db02d2d, north=0f62da85-6ae8-451c-b621-529bae07b51f, north-west=ca1d554a-54ea-4cfe-a7ad-23bfdf82e718, west=914c67a2-abae-4c23-9114-1addfb382a2b, south-west=c570b47d-63ec-4d3b-bdd4-f08581127109\ngroup: d9716f04-0bc1-4e9f-9bb6-52ea22c1b352\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south-east 180x180, east 208x208, north-east 176x176, north 176x176, north-west 176x176, west 208x208, south-west 180x180 (frames are stored at this size: the character plus room to move)\ncost: 23 generations (south-east=3, east=4, north-east=3, north=3, north-west=3, west=4, south-west=3)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"Grounded cave bear roar: hold the original viewing direction, keep hind paws fixed, raise the shoulders slightly, open the mouth in one low powerful roar, then close it and recover the exact starting posture. Solid grey fur-covered anatomy throughout; no spinning, leaping, skeletal guides or added marks.\", animation_group_id=\"d9716f04-0bc1-4e9f-9bb6-52ea22c1b352\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

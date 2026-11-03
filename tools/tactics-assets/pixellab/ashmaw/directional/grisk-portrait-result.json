@@ -1,0 +1,20 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "status: completed\nid: 455e3769-a63a-4f82-8f21-4b5525e3cd6b\nsize: 64\u00d764px\ndownload: https://api.pixellab.ai/mcp/portrait-character/455e3769-a63a-4f82-8f21-4b5525e3cd6b/download\nseed: 7481",
+      "annotations": null,
+      "meta": null
+    },
+    {
+      "type": "image",
+      "data": "[Saved as grisk-portrait-source.png]",
+      "mimeType": "image/png",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

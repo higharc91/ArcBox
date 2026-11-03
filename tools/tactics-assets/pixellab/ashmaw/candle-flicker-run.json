@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "object: 239eccc3-d03b-45b2-81e8-250e35430c67\ngroup: 2f5898a4-4fee-409f-adfd-7b5762c879db\nmode: v3\ndescription: Only the two tiny candle flames flicker gently in place with very small warm light variations. Every stone, candle body and wax drip remains exactly still. No camera or object movement, no added smoke, no new objects. Seamless restrained loop.\ndisplay_name: candle_flicker\nframes: 4\ndirections: unknown (1 queued)\neta: ~30-60s/direction\n\nhint: get_object(object_id=\"239eccc3-d03b-45b2-81e8-250e35430c67\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

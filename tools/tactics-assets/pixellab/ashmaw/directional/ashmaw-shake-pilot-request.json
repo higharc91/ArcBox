@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 6,
+  "keep_first_frame": false,
+  "action_description": "The bear braces all four paws, rolls a heavy shudder through its shoulders and shakes loose a few tiny grey ash flecks, then settles back into the exact starting stance. No hopping or turning, feet remain in contact.",
+  "animation_name": "ashmaw_shake_pilot",
+  "directions": [
+    "south"
+  ]
+}

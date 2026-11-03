@@ -28,6 +28,172 @@
           "south-west": "Idle/rotations/south-west.png"
         },
         "animations": {
+          "grisk_attack_pilot": {
+            "west": [
+              "Idle/animations/grisk_attack_pilot/west/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/west/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/west/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/west/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/west/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/west/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_attack_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/south-east/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/south-east/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/south-east/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/grisk_attack_pilot/east/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/east/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/east/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/east/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/east/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/east/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/grisk_attack_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/south-west/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/south-west/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/south-west/frame_005.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_attack_pilot/south/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/south/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/south/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/south/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/south/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/south/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/grisk_attack_pilot/north/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/north/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/north/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/north/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/north/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/north/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/grisk_attack_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/north-west/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/north-west/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/north-west/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_attack_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_attack_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_attack_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_attack_pilot/north-east/frame_003.png",
+              "Idle/animations/grisk_attack_pilot/north-east/frame_004.png",
+              "Idle/animations/grisk_attack_pilot/north-east/frame_005.png"
+            ]
+          },
+          "grisk_idle_template_pilot": {
+            "north": [
+              "Idle/animations/grisk_idle_template_pilot/north/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/north/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/north/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/north/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/grisk_idle_template_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/north-west/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_idle_template_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/south-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/grisk_idle_template_pilot/west/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/west/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/west/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/west/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_idle_template_pilot/south/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/south/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/south/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/south/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/grisk_idle_template_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/south-west/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_idle_template_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/north-east/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/grisk_idle_template_pilot/east/frame_000.png",
+              "Idle/animations/grisk_idle_template_pilot/east/frame_001.png",
+              "Idle/animations/grisk_idle_template_pilot/east/frame_002.png",
+              "Idle/animations/grisk_idle_template_pilot/east/frame_003.png"
+            ]
+          },
+          "grisk_shout_pilot": {
+            "north-west": [
+              "Idle/animations/grisk_shout_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/north-west/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/grisk_shout_pilot/north/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/north/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/north/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/north/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_shout_pilot/south/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/south/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/south/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/south/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/grisk_shout_pilot/east/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/east/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/east/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/east/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_shout_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/south-east/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_shout_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/north-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/grisk_shout_pilot/west/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/west/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/west/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/west/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/grisk_shout_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_shout_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_shout_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_shout_pilot/south-west/frame_003.png"
+            ]
+          },
           "grisk_walk_template_pilot": {
             "east": [
               "Idle/animations/grisk_walk_template_pilot/east/frame_000.png",
@@ -93,11 +259,161 @@
               "Idle/animations/grisk_walk_template_pilot/south-east/frame_004.png",
               "Idle/animations/grisk_walk_template_pilot/south-east/frame_005.png"
             ]
+          },
+          "grisk_hurt_pilot": {
+            "south-west": [
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/south-west/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/grisk_hurt_pilot/west/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/west/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/west/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/west/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/west/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/west/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/north-east/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/grisk_hurt_pilot/north/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/north/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/north/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/north/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/north/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/north/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/south-east/frame_005.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_hurt_pilot/south/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/south/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/south/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/south/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/south/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/south/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/grisk_hurt_pilot/east/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/east/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/east/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/east/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/east/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/east/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_003.png",
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_004.png",
+              "Idle/animations/grisk_hurt_pilot/north-west/frame_005.png"
+            ]
+          },
+          "grisk_attack_east_pinned": {
+            "east": [
+              "Idle/animations/grisk_attack_east_pinned/east/frame_000.png",
+              "Idle/animations/grisk_attack_east_pinned/east/frame_001.png",
+              "Idle/animations/grisk_attack_east_pinned/east/frame_002.png",
+              "Idle/animations/grisk_attack_east_pinned/east/frame_003.png",
+              "Idle/animations/grisk_attack_east_pinned/east/frame_004.png",
+              "Idle/animations/grisk_attack_east_pinned/east/frame_005.png"
+            ]
+          },
+          "grisk_death_pilot": {
+            "north-west": [
+              "Idle/animations/grisk_death_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_003.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_004.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_005.png",
+              "Idle/animations/grisk_death_pilot/north-west/frame_006.png"
+            ],
+            "east": [
+              "Idle/animations/grisk_death_pilot/east/frame_000.png",
+              "Idle/animations/grisk_death_pilot/east/frame_001.png",
+              "Idle/animations/grisk_death_pilot/east/frame_002.png",
+              "Idle/animations/grisk_death_pilot/east/frame_003.png",
+              "Idle/animations/grisk_death_pilot/east/frame_004.png",
+              "Idle/animations/grisk_death_pilot/east/frame_005.png",
+              "Idle/animations/grisk_death_pilot/east/frame_006.png"
+            ],
+            "north": [
+              "Idle/animations/grisk_death_pilot/north/frame_000.png",
+              "Idle/animations/grisk_death_pilot/north/frame_001.png",
+              "Idle/animations/grisk_death_pilot/north/frame_002.png",
+              "Idle/animations/grisk_death_pilot/north/frame_003.png",
+              "Idle/animations/grisk_death_pilot/north/frame_004.png",
+              "Idle/animations/grisk_death_pilot/north/frame_005.png",
+              "Idle/animations/grisk_death_pilot/north/frame_006.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_death_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_003.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_004.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_005.png",
+              "Idle/animations/grisk_death_pilot/south-east/frame_006.png"
+            ],
+            "west": [
+              "Idle/animations/grisk_death_pilot/west/frame_000.png",
+              "Idle/animations/grisk_death_pilot/west/frame_001.png",
+              "Idle/animations/grisk_death_pilot/west/frame_002.png",
+              "Idle/animations/grisk_death_pilot/west/frame_003.png",
+              "Idle/animations/grisk_death_pilot/west/frame_004.png",
+              "Idle/animations/grisk_death_pilot/west/frame_005.png",
+              "Idle/animations/grisk_death_pilot/west/frame_006.png"
+            ],
+            "south-west": [
+              "Idle/animations/grisk_death_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_003.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_004.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_005.png",
+              "Idle/animations/grisk_death_pilot/south-west/frame_006.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_death_pilot/south/frame_000.png",
+              "Idle/animations/grisk_death_pilot/south/frame_001.png",
+              "Idle/animations/grisk_death_pilot/south/frame_002.png",
+              "Idle/animations/grisk_death_pilot/south/frame_003.png",
+              "Idle/animations/grisk_death_pilot/south/frame_004.png",
+              "Idle/animations/grisk_death_pilot/south/frame_005.png",
+              "Idle/animations/grisk_death_pilot/south/frame_006.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_death_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_003.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_004.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_005.png",
+              "Idle/animations/grisk_death_pilot/north-east/frame_006.png"
+            ]
           }
         }
       }
     }
   ],
   "export_version": "3.1",
-  "export_date": "2026-11-03T17:01:23.196344"
+  "export_date": "2026-11-03T19:34:11.117113"
 }

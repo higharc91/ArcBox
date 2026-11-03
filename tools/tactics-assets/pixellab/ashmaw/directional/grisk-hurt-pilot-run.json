@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: Brief restrained recoil from a hit, then return to guard. Keep the pick gripped in the right hand and helmet fixed to the head.\nmode: template\ndirections: south (1 jobs)\njob_ids: south=e1b57cd7-84f5-4b5e-8e21-d42face5c213\ngroup: cb052c08-ad0e-4e8e-8e6f-cf2f7f9325c6\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", template_animation_id=\"taking-punch\", animation_group_id=\"cb052c08-ad0e-4e8e-8e6f-cf2f7f9325c6\", directions=[...])\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nif poor: delete_animation(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

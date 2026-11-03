@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: The kobold staggers and falls backward, ending motionless. Right hand keeps its mining pick; helmet lantern and tally cord stay attached. No fading, no vanishing, no resurrection.\nmode: template\ndirections: south (1 jobs)\njob_ids: south=c1096480-cf24-4c42-8e2f-5a5b40026dcb\ngroup: f545c684-dcef-4f87-9695-ed90777751d8\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", template_animation_id=\"falling-back-death\", animation_group_id=\"f545c684-dcef-4f87-9695-ed90777751d8\", directions=[...])\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nif poor: delete_animation(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

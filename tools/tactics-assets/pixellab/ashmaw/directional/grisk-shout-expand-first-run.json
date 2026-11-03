@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: v3 custom (Kobold foreman barks an order: feet stay planted, mouth opens, free left fist lifts briefly and drops. Right hand keeps the mining pick gripped firmly throughout. Helmet lamp and tally cord stay attached; return to original stance without turning.)\ndirections: north (1 jobs)\njob_ids: north=97f19d8f-fdce-4e75-b32f-a52e12543f8a\ngroup: 81a30ba2-c10b-4459-8ada-399000c72c88\nframes: 4 (reference stripped, keep_first_frame=false)\ncanvas: north 112x112 (frames are stored at this size: the character plus room to move)\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", action_description=\"Kobold foreman barks an order: feet stay planted, mouth opens, free left fist lifts briefly and drops. Right hand keeps the mining pick gripped firmly throughout. Helmet lamp and tally cord stay attached; return to original stance without turning.\", animation_group_id=\"81a30ba2-c10b-4459-8ada-399000c72c88\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

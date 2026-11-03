@@ -1,0 +1,17 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 6,
+  "keep_first_frame": false,
+  "action_description": "A compact four-footed shoulder shake. All paws remain planted as the shoulders roll briefly left then right and settle back to the starting posture. Maintain the current viewing direction. Preserve the solid grey fur and body proportions; no standing up, turning, spinning, skeletal guides or added marks.",
+  "animation_name": "ashmaw_shake_pilot",
+  "directions": [
+    "south-east",
+    "north-east",
+    "north",
+    "north-west",
+    "west",
+    "south-west"
+  ],
+  "animation_group_id": "e1fa035d-3cc8-42b4-af76-159109a9f06c"
+}
