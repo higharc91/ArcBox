@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://arcbox.local/tactics/rules/schema/encounter.schema.json",
   "title": "Encounter",
-  "description": "encounters/<id>.json (spec \u00a74.8). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec \u00a74.10).",
+  "description": "encounters/<id>.json (spec §4.8). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
   "type": "object",
   "properties": {
     "id": {
@@ -184,6 +184,27 @@
       "type": "boolean",
       "default": false,
       "description": "Opt this encounter into the loaded environmental reactions; absent is off."
+    },
+    "itemLoot": {
+      "type": "array",
+      "description": "Fixed item stacks awarded once to the party on victory, in addition to the existing loot table ids.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          }
+        },
+        "required": [
+          "item"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [

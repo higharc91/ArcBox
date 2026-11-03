@@ -59,6 +59,13 @@
       "effects": [ { "zone": { "kind": "smoke", "area": { "shape": "burst", "size": 1 }, "rounds": 2, "blocksSight": true } } ],
       "presentation": { "anim": "characters.shoot", "fx": "fx.smoke.grey", "projectile": "projectiles.rock" },
       "ai": { "tags": ["defend", "area", "item"] },
-      "flavor": "Thick smoke fills the area: nothing can see into, out of or through it." }
+      "flavor": "Thick smoke fills the area: nothing can see into, out of or through it." },
+    { "id": "item.oil_flask", "name": "Flask of Oil", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "tile", "range": 4, "los": true, "area": { "shape": "burst", "size": 1, "includeSelf": true, "friendlyFire": true } },
+      "effects": [ { "zone": { "kind": "oil", "area": { "shape": "burst", "size": 1 }, "rounds": 10, "surface": true } },
+                   { "save": { "stat": "dex", "dcStat": "dex" }, "onFail": [ { "apply": "oiled", "rounds": 10 } ] } ],
+      "presentation": { "anim": "characters.shoot", "fx": "fx.smoke.grey", "projectile": "projectiles.rock" },
+      "ai": { "tags": ["control", "area", "item"] },
+      "flavor": "Oil splashes the area. The next fire damage an oiled creature takes deals 5 extra fire; the coating lasts 10 rounds." }
   ]
 }

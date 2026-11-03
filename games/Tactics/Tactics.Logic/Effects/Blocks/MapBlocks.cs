@@ -100,8 +100,9 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
     /// <inheritdoc />
     protected override string? Describe(ZoneEffect def, int level, RulesPack rules)
     {
-        var text = $"creates a {TooltipText.Humanize(def.Kind)} zone ({TooltipText.Area(def.Area)}) "
-                   + (def.Rounds is { } rounds ? TooltipText.ForRounds(rounds) : "for the battle");
+        var duration = def.Rounds ?? (def.Surface ? rules.Environment.Surfaces.GetValueOrDefault(def.Kind)?.Rounds : null);
+        var text = $"creates a {TooltipText.Humanize(def.Kind)} {(def.Surface ? "surface" : "zone")} ({TooltipText.Area(def.Area)}) "
+                   + (duration is { } rounds ? TooltipText.ForRounds(rounds) : "for the battle");
         if (def.Difficult)
             text += ", difficult terrain";
         if (def.BlocksSight)
@@ -120,6 +121,12 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
             return;
         var source = ctx.SourceUnit;
         var tiles = Areas.Tiles(def.Area, source.Pos, ctx.Aim ?? source.Pos, ctx.W.Terrain);
+        if (def.Surface)
+        {
+            Surfaces.Create(ctx.W, def.Kind, tiles, source.Id, def.Kind, def.Rounds,
+                def.Passives.IsDefaultOrEmpty ? null : def.Passives);
+            return;
+        }
         if (!tiles.IsEmpty)
             ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration),
                 def.Concentration, def.Difficult, def.Passives, def.BlocksSight);

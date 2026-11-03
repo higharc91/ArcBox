@@ -487,11 +487,20 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         _lastBattle = BattleViewOf();
         var members = _doc.Members;
+        var rewards = result.Outcome == BattleOutcome.Won
+            ? Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot ?? [] : [];
+        var rewardGiven = false;
         for (var i = 0; i < save.Members.Length; i++)
         {
             var unit = UnitFor(i);
             if (!members.TryGetValue(save.Members[i].Value, out var record) || !state.Units.TryGetValue(unit, out var u))
                 continue;
+            var bag = u.Bag;
+            if (!rewardGiven && !rewards.IsDefaultOrEmpty)
+            {
+                bag = StackLoot(bag, rewards);
+                rewardGiven = true; // one party-wide reward, assigned to the first participating hero
+            }
             members = members.SetItem(save.Members[i].Value, record with
             {
                 Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
@@ -501,7 +510,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                     Injuries = result.Outcome == BattleOutcome.Lost
                         ? record.Character.Injuries
                         : record.Character.Injuries.AddRange(result.Injuries.GetValueOrDefault(unit, [])),
-                    Bag = u.Bag,
+                    Bag = bag,
                 },
             });
         }

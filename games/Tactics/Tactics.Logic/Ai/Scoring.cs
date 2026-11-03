@@ -44,6 +44,7 @@ internal sealed class Strike(BattleWriter w, UnitState user, AbilityDef? ability
     public bool Neutral { get; } = neutral;
     public HashSet<string> Fired { get; } = new(StringComparer.Ordinal);
     public HashSet<ConditionId> Quarrying { get; } = [];
+    public bool ProjectingDamageTaken { get; set; }
     public EffectContext Context { get; } = new(w, w.Rules, user.Id, null, aim, ability);
 }
 

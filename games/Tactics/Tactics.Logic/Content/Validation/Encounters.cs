@@ -28,6 +28,12 @@ internal sealed partial class Validation
             });
             if (def is null)
                 return null;
+            for (var i = 0; !def.ItemLoot.IsDefault && i < def.ItemLoot.Length; i++)
+            {
+                var at = Pointer.Append(Pointer.Append(ptr, "itemLoot"), i);
+                Ref(RefKind.Item, def.ItemLoot[i].Item.Value, file, Pointer.Append(at, "item"));
+                AtLeast(def.ItemLoot[i].Count, 1, file, Pointer.Append(at, "count"));
+            }
             Ref(RefKind.Map, def.Map, file, Pointer.Append(ptr, "map"));
             if (def.Level is < 1 or > 10)
                 Error(file, Pointer.Append(ptr, "level"), $"The level {def.Level} must be in 1..10.");

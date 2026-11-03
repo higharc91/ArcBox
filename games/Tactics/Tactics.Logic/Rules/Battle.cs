@@ -189,6 +189,8 @@ public static partial class Battle
                 return Rejection.Of(RejectCode.NoItem);
             ability = itemAbility;
         }
+        if (!w.State.Environment && EffectTree.All(ability.Effects).OfType<ZoneEffect>().Any(z => z.Surface))
+            return new Rejection(RejectCode.InvalidTarget, "You can't use that here.");
         if (CostRefusal(user, ability) is { } cost)
             return cost;
         if (ResolveTarget(w, user, ability, use.Target, out var aim, out var targets) is { } target)

@@ -147,6 +147,7 @@ internal static class PackLoader
             RefKind.Armor => armors.ContainsKey(id),
             RefKind.Map => maps.ContainsKey(id),
             RefKind.AiProfile => aiProfiles.ContainsKey(id),
+            RefKind.Surface => environments.Values.SingleOrDefault()?.Def.Surfaces.ContainsKey(id) == true,
             _ => false,
         });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);

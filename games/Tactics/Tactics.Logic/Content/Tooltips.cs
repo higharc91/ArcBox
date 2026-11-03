@@ -145,6 +145,9 @@ public static class Tooltips
     {
         List<string> parts = [];
         parts.AddRange(TooltipText.Clauses(c.Static, rules));
+        if (c.DamageTaken is { } damage)
+            parts.Add(damage.Consume ? $"the next {damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}, then this ends"
+                : $"{damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}");
         if (c.Implies is { } implied)
             parts.Add($"also counts as {TooltipText.Condition(implied, rules)}");
         if (!c.Passives.IsDefaultOrEmpty)

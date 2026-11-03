@@ -234,7 +234,11 @@ public sealed record ConditionDef(ConditionId Id, string Name,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PassiveDef> Passives,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Implies = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] DamageTakenDef? DamageTaken = null);
+
+/// <summary>A condition's flat bonus to a matching positive damage packet, before defenses, optionally consumed by it.</summary>
+public sealed record DamageTakenDef(string Type, int Bonus, bool Consume = false);
 
 /// <summary>
 /// A lasting area effect on the map (e.g. a wall of fire or a difficult-terrain spell), numbered by
@@ -444,7 +448,7 @@ public sealed record EncounterUnitDef(string Unit,
 
 /// <summary>
 /// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, optional intended party
-/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, objectives (the default lose is
+/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, objectives (the default lose is
 /// <c>party_out</c>) and triggers. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
@@ -452,7 +456,8 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
     ImmutableArray<TriggerDef> Triggers, int Xp = 250,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value

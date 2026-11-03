@@ -509,7 +509,10 @@ public sealed class StageEndTests
             var (was, now) = (before[members[i].Value], s.Game.Document.Members[members[i].Value]);
             Assert.Equal([.. was.Character.Injuries, .. result.Injuries.GetValueOrDefault(TacticsGame.UnitFor(i), [])], now.Character.Injuries);
             Assert.NotEmpty(now.Character.Injuries);
-            Assert.Equal(was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0), now.Character.Bag);
+            var expectedBag = was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0);
+            if (outcome == BattleOutcome.Won && i == 0)
+                expectedBag = expectedBag.Add(new ItemStack(new ItemId("oil_flask"), 1)); // Ford's one party-wide victory reward
+            Assert.Equal(expectedBag, now.Character.Bag);
         }
     }
 
