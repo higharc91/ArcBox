@@ -7,7 +7,7 @@ namespace ArcBox.Server.Games.Tactics;
 /// <summary>
 /// Loads the Tactics rules pack and lore as the server starts, before it takes connections, so that no room's game call has to. Loading
 /// the pack takes about 1.4 s on an idle 4-core machine, and a room's game call that runs longer than
-/// <see cref="RoomOptions.GameCallTimeout"/> (2 s) has the room closed as hung. On a loaded machine (a TV rendering in software on the same
+/// <see cref="RoomOptions.GameCallTimeout"/> has the room closed as hung. On a loaded machine (a TV rendering in software on the same
 /// box, in the end-to-end runs) that happened to the first campaign, to Muster, and to a restarted server's room as every phone rejoined at
 /// once. A pack that fails to load doesn't stop the server: it's logged here, and it fails the first Tactics room with its errors, as
 /// before, since <see cref="Lazy{T}"/> keeps the exception. Lore the game plays but would never show (<see cref="LoreBook.Warnings"/>) is

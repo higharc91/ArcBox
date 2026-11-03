@@ -487,7 +487,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             if (world.Now != WorldCanvas.Stage.Failed)
             {
-                GD.PushError($"Tactics world: '{_worldRegion}' didn't open in {WorldTuning.OpenTimeout} s; going on without it");
+                GD.PushError($"Tactics world: '{_worldRegion}' stalled or exceeded {WorldTuning.OpenMaxWait} s while opening; going on without it");
             }
             _unreadableWorld = _worldRegion;
             CloseWorld();
@@ -557,7 +557,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             WorldCanvas.Stage.Failed => WorldStage.Failed,
             _ => WorldStage.Building,
         };
-        if (!_cover.Frame(delta, stage, world.Lifted))
+        if (!_cover.Frame(delta, stage, world.Lifted, world.LoadingProgress))
         {
             return false;
         }

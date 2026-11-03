@@ -22,6 +22,8 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
 {
     /// <summary>It's a mark for the people watching, a number or a die badge, rather than part of the scene: it goes when the units' marks do (<see cref="MarkRule"/>).</summary>
     public bool Mark { get; init; }
+    /// <summary>An optional tint for recovery effects; ordinary effects retain their existing white modulation.</summary>
+    public Rgb? Tint { get; init; }
 
     /// <summary>A transient surface sorts into the board here; other effects draw over the scene.</summary>
     public long? Order { get; init; }
@@ -30,8 +32,6 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
     public FxDraw AtWorldOrigin(Tile origin) => Order is { } order
         ? this with { Order = order + BoardOrder.Key(origin, BoardLayer.Under) }
         : this;
-    /// <summary>An optional tint for recovery effects; ordinary effects retain their existing white modulation.</summary>
-    public Rgb? Tint { get; init; }
 }
 
 /// <summary>Where a number that pops up over a unit is drawn this moment, in art pixels.</summary>

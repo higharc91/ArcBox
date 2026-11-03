@@ -155,6 +155,7 @@ public sealed class RestTests
         s = Again(doc, rules: Rules);
         s.Send(0, "battles");
         s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+        Assert.True(s.Game.Document.Battle!.State.Environment);
         Assert.All(s.Game.Document.Battle!.State.Units.Where(u => u.Key.Value.StartsWith("hero", StringComparison.Ordinal)), u => Assert.Equal(3, u.Value.TempHp));
         StageEndTests.Ended(s, outcome);
         Assert.Equal(ready, s.Game.Document.World!.RestReady);

@@ -77,8 +77,8 @@ TV_ENGINE_ARGS='--rendering-method gl_compatibility --audio-driver Dummy' tools/
 
 The full run exited 0: 98 story lines checked (94 voiced plus four caption-only camp lines), the ford won, both recovery visits
 passed, the Chapter I card appeared and the party walked afterward. There were no gameplay or rendering errors. The verifier
-recorded 29 chapter screenshots. Main was rechecked before finishing and remains `f4a28fc5`; the environment branch has not yet
-landed there, so the issue's conditional merge is still pending upstream.
+recorded 29 chapter screenshots. At the time of that preview, main was `f4a28fc5` and the environment branch had not yet landed. The later integration merges
+main `3de038bb` (environmental tiles) into this branch while retaining the recovery and per-player economy work.
 
 
 ## Phone animation and visual polish follow-up
@@ -101,3 +101,24 @@ sleep marks, a smoke puff on a failed cook, sunlight rays and subtle hearth flic
   `/workspace/artifacts/arcbox-camp-phone-animation.mp4` (silent, about 10 s).
 
 ![Animated camp on a player's phone](phone-polish.png)
+
+
+## Environmental merge and TV loading
+
+Main `3de038bb` brings environmental tiles and oil into the recovery branch. The resolved content keeps the oil flask and the
+Well fed passive, the chest's split gold and item loot, and both authored campfires. Both the environment and camp demo launchers
+remain available; recovery tints and environmental surface ordering coexist.
+
+A slow software renderer exposed a loading bug during integration: the TV gave up after ten seconds even while textures were
+advancing. Loading now times out after ten seconds without progress, with a 60-second overall limit. The regular-speed TV opened
+at 1280×720 on the same machine after this change. Regression tests cover continued progress, a stall, the overall limit and reset.
+
+Validation: the merged solution built with zero warnings; Tactics logic passed, gameplay passed 599 tests, presentation passed
+2,379 tests before the watchdog change and the 10 watchdog tests passed afterward, world tools passed 386, and the phone suite
+passed 497. The full solution test run was stopped during an unrelated long-running racing presentation suite. A web timing test
+that timed out while competing with other tests passed in the isolated phone-suite rerun.
+
+A six-phone, normal-speed integration run at 640×360 won the environmental ford battle and reached the campfire. After all
+players voted to rest, several camp job results appeared, then the server's room watchdog closed the room as unresponsive.
+The camp reflection, dawn, inn and chapter completion therefore remain unverified in this merged live run. The cause of the
+server stall is not yet established. Logs: `/workspace/artifacts/camp-environment-small-e2e.log` and the adjacent server/TV logs.
