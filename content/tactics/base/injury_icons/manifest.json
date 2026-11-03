@@ -1,0 +1,77 @@
+{
+  "about": "Original reusable Wardenflame injury/debuff icons. PixelLab Pixen, native 32x32. Owner requested these for recovery UI and future reuse. Nearest-neighbour sampling; no image edits.",
+  "icons": {
+    "cracked_ribs": {
+      "file": "cracked_ribs.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Cracked ribs",
+      "kind": "body"
+    },
+    "sprained_ankle": {
+      "file": "sprained_ankle.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Sprained ankle",
+      "kind": "body"
+    },
+    "concussion": {
+      "file": "concussion.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Concussion",
+      "kind": "body"
+    },
+    "deep_cut": {
+      "file": "deep_cut.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Deep cut",
+      "kind": "body"
+    },
+    "wrenched_shoulder": {
+      "file": "wrenched_shoulder.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Wrenched shoulder",
+      "kind": "body"
+    },
+    "black_eye": {
+      "file": "black_eye.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Black eye",
+      "kind": "rest"
+    },
+    "bruised_pride": {
+      "file": "bruised_pride.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Bruised pride",
+      "kind": "spirit"
+    },
+    "shaken": {
+      "file": "shaken.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Shaken",
+      "kind": "spirit"
+    }
+  }
+}

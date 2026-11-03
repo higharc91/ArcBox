@@ -1,0 +1,112 @@
+{
+  "generator": "PixelLab",
+  "model": "pixen",
+  "date": "2026-11-03",
+  "authorization": "Owner follow-up requested generated injury icons, overriding the original issue placeholder-only constraint for these icons.",
+  "assets": {
+    "black_eye": {
+      "jobId": "25745a86-2394-4776-bdca-5d7e5415e159",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A pale eye with a swollen purple and dark violet bruised eye socket.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/black_eye.png"
+    },
+    "bruised_pride": {
+      "jobId": "18b57cf7-6abf-4c23-a177-6de301014f38",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A broken golden laurel wreath, one bent leaf falling, violet shadow: wounded pride.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/bruised_pride.png"
+    },
+    "shaken": {
+      "jobId": "5c6f1a04-7b6a-4bda-8a52-9f3f95734a7e",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A trembling pale open hand surrounded by two wisps of purple fear.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/shaken.png"
+    },
+    "cracked_ribs": {
+      "jobId": "dfa99075-b17a-406a-8d09-d12e27f39655",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. An ivory ribcage with one clearly cracked rib and a small red fracture flare.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/cracked_ribs.png"
+    },
+    "sprained_ankle": {
+      "jobId": "7f42c654-c59a-4b55-ad82-91cf109dc5e0",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A bent ankle wrapped in pale bandages, a small crimson pain flare at the joint.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/sprained_ankle.png"
+    },
+    "concussion": {
+      "jobId": "6c804821-e546-48f0-ab4f-455b3d9a6628",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A side profile of a pale head with a small golden dizziness spiral above the temple.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/concussion.png"
+    },
+    "deep_cut": {
+      "jobId": "8c669d5a-6c9c-48a8-a082-06c97ea76b87",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A single deep diagonal crimson wound across a muted brown forearm, bold red slash, restrained blood.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/deep_cut.png"
+    },
+    "wrenched_shoulder": {
+      "jobId": "720606bc-b02c-4349-975b-695402b2f0c9",
+      "request": {
+        "description": "Original fantasy RPG debuff status icon for Wardenflame. A single bold readable emblem centered in a 32x32 square, old-school hand-painted pixel art, sharp pixels, one-pixel dark outline, top-left highlights, no letters, no words, no numbers, no border. Deep midnight navy background #111326, warm ivory highlights #f4ecd6, restrained crimson and violet injury accents. Strong silhouette, readable at tiny size. A pale shoulder and upper arm joint with a red twisting pain flare at the shoulder.",
+        "width": 32,
+        "height": 32,
+        "no_background": false,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7103
+      },
+      "file": "injury_icons/wrenched_shoulder.png"
+    }
+  }
+}
