@@ -30,7 +30,7 @@
       "standIn": "Existing narrative panel with game-rendered title and bounty text."
     },
     "icons.trinket.barbarian": {
-      "name": "Ashmaw\u2019s Mantle",
+      "name": "Ashmaw’s Mantle",
       "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A ash-grey fur shoulder mantle with subdued ember tips. Transparent 32x32 keepsake icon, readable at phone size.",
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
@@ -60,7 +60,7 @@
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
     "icons.trinket.paladin": {
-      "name": "Warden\u2019s Ember Badge",
+      "name": "Warden’s Ember Badge",
       "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A modest Ford Watch badge with one dull ember stud. Transparent 32x32 keepsake icon, readable at phone size.",
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
@@ -70,7 +70,7 @@
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
     "icons.trinket.rogue": {
-      "name": "Kobold Delver\u2019s Ring",
+      "name": "Kobold Delver’s Ring",
       "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A plain kobold copper delving ring with a tally notch. Transparent 32x32 keepsake icon, readable at phone size.",
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
@@ -85,12 +85,30 @@
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     },
     "icons.trinket.wizard": {
-      "name": "Kobold Surveyor\u2019s Lens",
+      "name": "Kobold Surveyor’s Lens",
       "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A small brass surveyor lens in a battered leather loop. Transparent 32x32 keepsake icon, readable at phone size.",
       "standIn": "Existing class crest rendered in the rare-trinket frame."
     }
   },
   "terrainGaps": {
     "status": "Use existing cave_floor, rock, ash, mine_boards and planks materials; document any discovered gap here before requesting generation."
+  },
+  "ownerFinalCavePolish": {
+    "requested": "2026-11-03",
+    "order": "After core branch implementation and validation; final cave art/audio pass.",
+    "authorized": [
+      "Additional bones and blood around Ashmaw’s bed",
+      "Spookier cave detail and new assets as needed",
+      "Darker interior with readable routes and characters",
+      "Fitting cave exploration music and ambience, plus battle/boss continuity",
+      "Kobold candle stubs in stone niches and mining-lamp clusters around the Diggings; sparse, broken or extinguished candles nearer Ashmaw. Show a worked cave and the miners’ retreat while keeping the lair spooky.",
+      "Give Grisk the occasional voiced bark: “You no take candle!” Keep it infrequent among his other lines."
+    ],
+    "loreConstraints": [
+      "Remains belong to hunted livestock, animals and the miners’ abandoned workings; the fisher’s boy survives at Maud’s",
+      "No carryable shard or premature main-lore secret",
+      "Keep the post-Nest camp safe and distinguish it visually from the lair"
+    ],
+    "review": "Show the new cave art and actual in-world lighting/music result."
   }
 }

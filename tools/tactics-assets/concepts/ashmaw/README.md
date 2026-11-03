@@ -10,4 +10,4 @@ Scenario generated these three production references on 2026-11-03 using the liv
 
 **Cost: 39 Scenario CU, 13 per image.** The owner approved both character concepts: “ok, both look good now for concept art.” See [approvals.json](approvals.json). The environment is a reference for existing Ashen Ford materials; it does not approve a new palette or generation of terrain and props.
 
-PixelLab pilots are recorded under `../../pixellab/ashmaw/pilots/`. Final sprite integration requires a separate owner review of actual world and battle motion alongside the party. Review questions must display the relevant art.
+PixelLab pilots are recorded under `../../pixellab/ashmaw/pilots/`. The owner approved actual world and battle motion alongside the party (“Approve both”). Both dedicated character atlases and portraits are installed in production. Review questions display the relevant art. Subsequent owner requests also authorized the cave’s candles, animal remains and dried-blood props; those use the existing palette.

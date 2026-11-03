@@ -1,0 +1,13 @@
+{
+  "order": [
+    "Stock goblin attack vocalization",
+    "Grisk battle opening",
+    "Owner-approved candle bark"
+  ],
+  "sources": [
+    "content/tactics/base/sfx/goblin_attack.ogg",
+    "content/tactics/base/lore/audio/bark_grisk_battle_start_1.a718e473.ogg",
+    "content/tactics/base/lore/audio/bark_grisk_candle_1.f31d8679.ogg"
+  ],
+  "processing": "Sample-rate conversion and silence between clips only; original assets unchanged."
+}

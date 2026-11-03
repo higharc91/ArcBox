@@ -1,0 +1,63 @@
+{
+  "status": "Superseded; never installed. Owner requested approximately 60% four-player wins, then clarified difficulty changes apply only to four or more players.",
+  "target": "Owner confirmed level 2",
+  "recommended": "i-refined",
+  "boss": {
+    "ac": 14,
+    "hpByParty": {
+      "1": 20,
+      "2": 60,
+      "3": 160,
+      "4": 240,
+      "5": 320,
+      "6": 400
+    },
+    "maul": "Two separate attacks, each 1d6+7 on hit",
+    "cubs": false
+  },
+  "measured": {
+    "normalLevel2FourMembers": {
+      "battles": 480,
+      "won": 358,
+      "winRate": 74.6,
+      "meanRounds": 11.8,
+      "medianRounds": 11,
+      "roundCapLosses": 4,
+      "parties": 24,
+      "seeds": 20
+    },
+    "storyLevel2Solo": {
+      "battles": 100,
+      "won": 53,
+      "winRate": 53,
+      "coverage": "Five sampled healer/defender builds; not all classes."
+    },
+    "normalLevel2TwoMembers": {
+      "battles": 120,
+      "won": 73,
+      "winRate": 60.8,
+      "meanRounds": 5.8,
+      "seeds": 20,
+      "parties": 6
+    },
+    "normalLevel2ThreeMembers": {
+      "battles": 120,
+      "winRate": 65.0,
+      "seeds": 20,
+      "parties": 6
+    }
+  },
+  "sources": {
+    "encounters/hollow_lair.json": {
+      "sha256": "3b1aaa542f80be261ce44c67f61fff4f4811083f06e81bd045c5c42240ba6105"
+    },
+    "abilities/monsters.json": {
+      "sha256": "ff2dd7bf34edabe2eaed856a498f9a5a4aa3971bc30db4e4fd152d8c919651db"
+    },
+    "monsters/bosses.json": {
+      "sha256": "59146fda3c1d1f43f48270f6a6373393cb8eaacac30801cf002a1e2cfb7a1e70"
+    }
+  },
+  "scaleConfirmation": "1380-battle levels1-3/sizes1-4 sweep plus360-battle two-member refinement; unchanged sizes reuse their measured results.",
+  "supersededBy": "../boss-balance-final.md"
+}
