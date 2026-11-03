@@ -4,7 +4,7 @@
 - [B — environmental engine](milestone-b.md): default-off surfaces, reactions, tooltips, model and mutation checks.
 - [C — AI uses reactions](milestone-c.md): conduction/fire/ice value, empty-water aims, Story ally protection and performance.
 - [D — oil flask](milestone-d.md): the item, one-use fire coating, two approved loot placements and persistent rewards.
-- [E — TV surfaces and animations](milestone-e.md): layered reactions, readable ignition, surfaced ground, and an actual TV motion reel.
+- [E — TV surfaces and animations](milestone-e.md): layered reactions, readable ignition, surfaced ground, and an actual TV motion reel. [Steam refinement](steam-refinement.md) slows its dissipation after user review.
 
 ## Current status — 2026-11-03 (UTC)
 
