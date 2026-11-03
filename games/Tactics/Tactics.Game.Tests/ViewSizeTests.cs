@@ -38,6 +38,24 @@ public sealed class ViewSizeTests(ITestOutputHelper output)
         Measure(state, party, "round 3");
     }
 
+    [Theory]
+    [InlineData("wizard")]
+    [InlineData("druid")]
+    [InlineData("cleric")]
+    public void Environmental_level_10_previews_stay_below_the_phone_warning(string cls)
+    {
+        var rules = Pack.Value;
+        var id = new UnitId("hero1");
+        PartyMember[] party = [.. Enumerable.Range(1, 4).Select(i => new PartyMember(new UnitId($"hero{i}"),
+            SheetBuilder.DefaultCharacter(cls, "human", cls, null, 10, rules), new PlayerControlled(new ProfileId($"pr_test{i}"))))];
+        var state = Battle.Start(Encounters.Setup("river_crossing", [.. party], Difficulty.Normal, rules), rules, 5).State;
+        state = state with { Environment = true, TurnIndex = state.Order.IndexOf(id) };
+        var choices = PhoneChoices.Of(Choices.For(state, id, rules), rules);
+        var bytes = Encoding.UTF8.GetByteCount(JsonSerializer.Serialize(choices, ArcJson.Options));
+        output.WriteLine($"{cls}: {bytes} bytes with environmental previews");
+        Assert.True(bytes < 64 * 1024, $"{cls} environmental choices use {bytes} bytes");
+    }
+
     private void Measure(BattleState state, PartyMember[] party, string when)
     {
         var rules = Pack.Value;
