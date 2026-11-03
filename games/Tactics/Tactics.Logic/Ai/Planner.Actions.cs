@@ -12,7 +12,7 @@ internal sealed partial class Planner
     /// a disengage (<see cref="Escape"/>) or a dash, and whether it leaves the map as it is (<see cref="Stable"/>), so a
     /// move planned before it still holds after it.
     /// </summary>
-    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable);
+    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable, bool Reacts);
 
     /// <summary>
     /// What the unit can use: its sheet's abilities and the built-in <c>common.*</c> actions it can pay for (in id order),
@@ -48,7 +48,8 @@ internal sealed partial class Planner
         var stable = !Scorer.All(top).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect or DashEffect
             or JumpToEffect or ZoneEffect or HazardEffect or AlterTerrainEffect or SummonEffect or TransformEffect or TurnOrderEffect
             || e is ApplyEffect a && Halts(a.Condition) || e is StatModEffect m && (m.Mods.CantMove || m.Mods.Incapacitated));
-        return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash, stable);
+        return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash,
+            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet));
     }
 
     /// <summary>True when the condition (or one it implies) stops its holder moving or acting.</summary>
@@ -137,6 +138,9 @@ internal sealed partial class Planner
             targets = meant.SelectMany(u => Areas.Tiles(area, u.Pos, u.Pos, _scorer.Terrain)).Distinct().Order()
                 .Where(t => Reach.Distance(from, t) <= maxRange).Select(t => new Target(Tile: t));
 
+        if (usable.Reacts && def.Kind == TargetKind.Tile && area.Shape is AreaShape.Single or AreaShape.Burst or AreaShape.Cross or AreaShape.Ring)
+            targets = targets.Concat(ReactionAims(usable).Where(t => Reach.Distance(from, t) <= maxRange).Select(t => new Target(Tile: t))).Distinct();
+
         // An aimed burst, cross or ring without attack rolls is worth the same from any tile, so it is remembered by its aim;
         // not one that can include its caster, which counts only when the caster stands in it.
         var fixedAim = area.Shape is AreaShape.Burst or AreaShape.Cross or AreaShape.Ring && def.Kind != TargetKind.Self
@@ -154,8 +158,42 @@ internal sealed partial class Planner
                 if (fixedAim)
                     _aimValues[(usable.Command, usable.Item, aim)] = value;
             }
+            if (usable.Reacts)
+            {
+                var reaction = _scorer.ReactionWorth(new Strike(w, me, ability, aim, neutral: false), aim, affected, _p);
+                if (state.Difficulty == Difficulty.Story && reaction.FriendlyDamage)
+                    continue;
+                value += reaction.Value;
+            }
             yield return new Action(target, aim, affected, value);
         }
+    }
+
+    private readonly Dictionary<AbilityId, ImmutableArray<Tile>> _reactionAims = [];
+
+    /// <summary>Empty aims that can reach a foe through water or put a surface on its route.</summary>
+    private ImmutableArray<Tile> ReactionAims(Usable usable)
+    {
+        if (_reactionAims.TryGetValue(usable.Ability.Id, out var known))
+            return known;
+        var ability = usable.Ability;
+        var types = Scorer.All(ability.Effects).OfType<DamageEffect>()
+            .Select(d => d.Type ?? (d.Weapon ? _me.Sheet.Weapon.DamageType : null)).ToHashSet();
+        var rules = _rules.Environment.Reactions.Where(r => r.Damage is not null && types.Contains(r.Damage)).ToArray();
+        var aims = ImmutableArray.CreateBuilder<Tile>();
+        var map = _scorer.Terrain.Map;
+        for (var x = 0; x < map.Width; x++)
+            for (var y = 0; y < map.Height; y++)
+            {
+                var aim = new Tile(x, y);
+                var tiles = Areas.Tiles(ability.Target.Area, _me.Pos, aim, _scorer.Terrain);
+                if (rules.Any(rule => rule.Conduct is { } c
+                    ? _scorer.Conducted(_scorer.W, tiles, c.Reach).Any(t => _foes.Any(f => f.Pos == t))
+                    : rule.Surface is not null && tiles.Any(t => Surfaces.Matches(_scorer.W, _rules.Environment, rule.Tiles, t)
+                        && _foes.Any(f => f.Pos == t || Surfaces.Neighbours(t).Contains(f.Pos)))))
+                    aims.Add(aim);
+            }
+        return _reactionAims[ability.Id] = aims.ToImmutable();
     }
 
     private static IEnumerable<Tile> Neighbours(Tile t) => [t with { Y = t.Y - 1 }, t with { X = t.X + 1 }, t with { Y = t.Y + 1 }, t with { X = t.X - 1 }];

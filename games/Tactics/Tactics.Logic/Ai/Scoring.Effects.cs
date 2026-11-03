@@ -155,8 +155,8 @@ internal sealed partial class Scorer
         return Outcome.None;
     }
 
-    /// <summary>An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives.</summary>
-    private Outcome Attack(AttackEffect def, Strike st, UnitState target)
+    /// <summary>The shared attack odds for direct damage and the element that a hit releases.</summary>
+    private (int Modifier, int Ac, Edge Edge, double Hit, double Crit) AttackOdds(AttackEffect def, Strike st, UnitState target)
     {
         var user = st.User;
         var sheet = user.Sheet;
@@ -198,6 +198,13 @@ internal sealed partial class Scorer
         var pHit = Odds.Hit(modifier, ac, edge);
         var pCrit = targetMods.CritWhenAdjacent && Reach.Distance(user.Pos, target.Pos) == 1 ? pHit : Odds.Crit(edge);
 
+        return (modifier, ac, edge, pHit, pCrit);
+    }
+
+    /// <summary>An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives.</summary>
+    private Outcome Attack(AttackEffect def, Strike st, UnitState target)
+    {
+        var (modifier, ac, edge, pHit, pCrit) = AttackOdds(def, st, target);
         var hitRoll = new RollResult([], 0, modifier, 0, ac, Success: true, Crit: false, Fumble: false);
         var critRoll = hitRoll with { Crit = true };
         var hooks = OnHitPassives(def, st, target, edge, hitRoll);

@@ -43,6 +43,18 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
     public void P95_under_250ms_with_overlapping_hazard_paths_on_6_vs_10()
         => AssertWithinBudget(Setup(BasePackTests.Rules), BasePackTests.Rules, "river_crossing stress with spell hazards", hazards: true);
 
+    [Fact]
+    [Trait("Category", "Perf")]
+    public void P95_under_250ms_with_conduction_and_surface_choices_on_6_vs_10()
+    {
+        var rules = BasePackTests.Rules;
+        var setup = Setup(rules) with { Environment = true };
+        var spells = new[] { "wizard.lightning_bolt", "wizard.fireball", "wizard.ray_of_frost" }.Select(id => new AbilityId(id));
+        setup = setup with { Units = [.. setup.Units.Select(u => u.Sheet.CastingStat is null ? u
+            : u with { Sheet = u.Sheet with { Abilities = [.. u.Sheet.Abilities.Concat(spells).Distinct()] } })] };
+        AssertWithinBudget(setup, rules, "environment-enabled river stress, fire/cold/lightning", hazards: true);
+    }
+
     private void AssertWithinBudget(BattleSetup setup, RulesPack rules, string label, bool hazards = false)
     {
         // The start of every turn in two played-out battles, cycled: warm up, then time only the Plan calls.
@@ -138,6 +150,13 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
                     return new Zone(index + 1, null, effect.Kind, tiles, null, false, effect.Difficult, effect.Passives);
                 })], NextSerial = 4,
             };
+        }
+        if (setup.Environment)
+        {
+            var oil = Enumerable.Range(0, setup.Map.Width).SelectMany(x => Enumerable.Range(0, setup.Map.Height).Select(y => new Tile(x, y)))
+                .Where(t => (setup.Map[t].Flags & TileFlags.Water) == 0 && (t.X + t.Y) % 3 == 0).ToImmutableArray();
+            state = state with { Zones = state.Zones.Add(new Zone(state.NextSerial, null, "oil", oil, 10, false, false, [], Surface: true, Source: "oil")),
+                NextSerial = state.NextSerial + 1 };
         }
         Assert.Equal(16, state.Units.Count);
         for (var turn = 0; turn < turns && state.Outcome is null; turn++)
