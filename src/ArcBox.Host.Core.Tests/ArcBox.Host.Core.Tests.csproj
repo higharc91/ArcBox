@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="../ArcBox.Host/Shell/AppArgs.cs" Link="Shell/AppArgs.cs" />
     <Using Include="Xunit" />
   </ItemGroup>
 

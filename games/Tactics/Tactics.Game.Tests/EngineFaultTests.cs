@@ -184,7 +184,7 @@ public sealed class EngineFaultTests
         Assert.Contains(TacticsGame.BattleCalledOff, s.Host.Notice);
         Assert.NotEmpty(faults);
         Assert.All(faults, f => Assert.IsType<RulesInvariantException>(f.Error));
-        Assert.Contains(faults, f => f.Command?.Contains("EndTurn", StringComparison.Ordinal) == true);
+        Assert.Contains(faults, f => f.Where == "resume" && f.State is not null);
         // Dropped as if never fought: no battle kept, no XP, no win, no results.
         var after = TacticsDocument.Read(s.Lease.Document);
         Assert.Null(after.Battle);

@@ -509,7 +509,7 @@ public sealed class ThingShowTests
     }
 
     [Fact]
-    public void Fifty_things_cost_a_frame_little_and_allocate_little()
+    public void Fifty_things_have_bounded_projection_work_and_allocate_little()
     {
         var show = Show();
         var many = Enumerable.Range(0, 50).Select(i => (i % 3) switch
@@ -522,14 +522,15 @@ public sealed class ThingShowTests
         for (var i = 0; i < 100; i++)
             show.Frame(1.0 / 60);                                               // warm: the caches fill
         var bytes = GC.GetAllocatedBytesForCurrentThread();
-        var clock = System.Diagnostics.Stopwatch.StartNew();
+        var projections = 0;
+        System.Numerics.Vector2 Project(System.Numerics.Vector2 point, bool _) { projections++; return point; }
         const int Frames = 1000;
         for (var i = 0; i < Frames; i++)
-            Assert.Equal(50, show.Frame(1.0 / 60).Units.Length);
-        var ms = clock.Elapsed.TotalMilliseconds / Frames;
+            Assert.Equal(50, show.Frame(1.0 / 60, Project).Units.Length);
+
         var kb = (GC.GetAllocatedBytesForCurrentThread() - bytes) / 1024.0 / Frames;
-        Console.WriteLine($"THINGS 50 things: {ms:0.000} ms and {kb:0.0} KB a frame");
-        Assert.True(ms < 0.5, $"{ms:0.000} ms a frame");
+        // Projection work must stay linear in the visible things, independent of machine load.
+        Assert.InRange(projections, 50 * Frames, 200 * Frames);
         Assert.True(kb < 64, $"{kb:0.0} KB a frame");
     }
 }

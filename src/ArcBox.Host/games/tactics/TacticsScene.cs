@@ -487,7 +487,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             if (world.Now != WorldCanvas.Stage.Failed)
             {
-                GD.PushError($"Tactics world: '{_worldRegion}' stalled or exceeded {WorldTuning.OpenMaxWait} s while opening; going on without it");
+                GD.PushError($"Tactics world: '{_worldRegion}' stalled or exceeded {WorldTuning.OpenMaxWait} s while opening (stage {world.Now}, progress {world.LoadingProgress}); going on without it");
             }
             _unreadableWorld = _worldRegion;
             CloseWorld();
@@ -880,6 +880,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             return;
         }
+        if (screen.Seq != _missingStoryVoiceSeq && screen.Caption is { } caption && _voices?.ForLine(caption.Line) is null)
+        {
+            _missingStoryVoiceSeq = screen.Seq;
+            GD.Print($"TACTICS missing voice clip: {caption.Line}");
+        }
         if (LogStory && (tick.Say is not null || screen.Seq != _storyLogged))
         {
             _storyLogged = screen.Seq;
@@ -892,6 +897,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     }
 
     private int _storyLogged = -1;
+    private int _missingStoryVoiceSeq = -1;
 
     /// <summary>The screenshot a story screen is worth, by what it shows: once or twice each, so a run's shots cover every panel.</summary>
     private static string? Moment(StoryScreen screen, StoryTick tick) => screen switch

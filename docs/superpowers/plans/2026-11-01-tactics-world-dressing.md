@@ -38,7 +38,7 @@ Decides fade or silhouette. Throwaway drawing is fine, but keep what's good.
 
 **Files:**
 - Modify: `games/Tactics/Tactics.Presentation/World/DemoRegion.cs` (a wood: at least 1,500 tall props in one view's reach)
-- Create: `src/ArcBox.Host/games/tactics/TallProps.cs`
+- Create: `games/Tactics/Tactics.Presentation/World/PropFade.cs`
 - Modify: `src/ArcBox.Host/games/tactics/WorldDemo.cs`, `WorldCanvas.cs`
 
 - [ ] **Step 1: Split tall props out of `WorldPlan` blocks** for the demo: `height >= 2` in the manifest goes to a per-block list, kept in `Blocks` order.
@@ -144,7 +144,7 @@ Skip if Task 1 chose the silhouette. Then draw the party's silhouette over tall 
 
 **Files:**
 - Create: `games/Tactics/Tactics.Presentation/World/PropFade.cs`
-- Modify: `World/WorldPlan.cs` (`Overlay` skips what's faded), `World/WorldTuning.cs`, `src/ArcBox.Host/games/tactics/TallProps.cs`, `WorldCanvas.cs`
+- Modify: `World/WorldPlan.cs` (`Overlay` skips what's faded), `World/WorldTuning.cs`, `games/Tactics/Tactics.Presentation/World/PropFade.cs`, `WorldCanvas.cs`
 - Test: `games/Tactics/Tactics.Presentation.Tests/World/PropFadeTests.cs`, `OverlayPictureTests.cs`
 
 **Interfaces:**

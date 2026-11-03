@@ -738,7 +738,7 @@ class Watch {
     fs.readSync(fd, chunk, 0, chunk.length, this.pos ?? 0);
     fs.closeSync(fd);
     this.pos = size;
-    const lines = ((this.rest ?? '') + chunk.toString('utf8')).split('\n');
+    const lines = ((this.rest ?? '') + chunk.toString('utf8')).split(/\r?\n/);
     this.rest = lines.pop();
     for (const line of lines) {
       // STORY marker lines come one a beat, together: a run of them is the whole set
@@ -825,10 +825,15 @@ async function pause(bots, name) {
   return leader;
 }
 
-async function runScript(bots, leader) {
+async function runScript(bots, leader, watch) {
   for (const [dir, seconds] of walkScript) {
     if (dir === 'pause') {
       leader = await pause(bots, seconds);
+      continue;
+    }
+    if (dir === 'route') {
+      await walkToBeat(bots, watch, 'ashen_ford', { beat: `shop:${seconds}` }, false);
+      leader = await leaderOf(bots);
       continue;
     }
     log(`WALK ${dir} for ${seconds} s`);
@@ -909,7 +914,7 @@ async function walkAbout(bots, lines, watch) {
   let leader = await leaderOf(bots);
   log(`${leader.name} leads`);
   if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
-  if (walkScript) leader = await runScript(bots, leader);
+  if (walkScript) leader = await runScript(bots, leader, watch);
   if (latencyPresses) await runLatency(leader, watch);
   if (floodSeconds) await runFlood(leader);
   if (dropMode) await runDrop(leader, lines[bots.indexOf(leader)], bots.filter((b) => b !== leader), watch);
@@ -1056,7 +1061,7 @@ const onWalk = (bots) => bots.every((b) => b.view?.screen === 'walk');
  * (a party put somewhere the bots didn't know of is routed again from where the step went), and taps Interact once it's offered. A
  * step into an armed stamp on the way starts the beat as well. Gives back once the beat has begun.
  */
-async function walkToBeat(bots, watch, region, marker) {
+async function walkToBeat(bots, watch, region, marker, interact = true) {
   for (let attempt = 1; attempt <= 6; attempt++) {
     const tile = await until('where the party stands', () => {
       watch.read();
@@ -1091,6 +1096,7 @@ async function walkToBeat(bots, watch, region, marker) {
       log(`CHAPTER no Interact at ${at}: routing again`);
       continue;
     }
+    if (!interact) { log(`WALK route arrived at ${marker.beat}`); return; }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
     await lead.input('interact', marker.beat.startsWith('shop:') || marker.beat.startsWith('person:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
@@ -1241,11 +1247,41 @@ async function playShop(bots, watch, state) {
   const sale = buyer.view.data.sell.find(x => x.item === row.item);
   await trade(buyer, 'shopSell', sale, 1);
   if (purse() !== before - row.price + sale.price) throw new Error('Sale did not credit the purse');
+  // Empty the buyer's starting kit before exercising the real between-session remake API.
+  for (const remaining of [...buyer.view.data.sell]) if (remaining.count > 0) await trade(buyer, 'shopSell', remaining, remaining.count);
+  const earned = purse();
+  const campaign = bots[0].lobby.campaign.code;
   await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
   await until('walking after trade', () => onWalk(bots));
   await bots[0].input('endSession');
   await until('the session to end', () => bots[0].ended);
-  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
+  await sleep(250);
+  const headers = { Authorization: `Profile ${buyer.profileKey.key}`, 'Content-Type': 'application/json' };
+  const url = `${server}/api/campaigns/${campaign}`;
+  let response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`Remake portal GET failed: ${response.status}`);
+  let portal = await response.json();
+  for (const cls of ['wizard', 'cleric', 'fighter']) {
+    response = await fetch(`${url}/commands`, { method: 'POST', headers, body: JSON.stringify({
+      type: 'createCharacter', version: portal.info.version,
+      data: { race: 'human', class: cls, background: 'soldier', scores: { str: 15, dex: 15, con: 15, int: 8, wis: 8, cha: 8 } },
+    }) });
+    if (!response.ok) throw new Error(`Remake ${cls} failed: ${response.status}`);
+    portal = await response.json();
+  }
+  for (const bot of bots) bot.ended = null;
+  const previous = bots[0].view.viewId;
+  await bots[0].conn.invoke('StartGame');
+  await until('the remade party to walk', () => bots[0].view.viewId !== previous && onWalk(bots));
+  await walkToBeat(bots, watch, 'ashen_ford', { beat: 'shop:af_market_herbalist' });
+  await until('the shop after remaking', () => bots.every(b => b.view?.screen === 'shop'));
+  if (buyer.view.data.gold !== earned || buyer.view.data.sell.some(row => row.count > 0)) throw new Error('Remaking refilled a sold kit or minted gold');
+  log('SHOP remake OK: sold kit stayed empty and gold unchanged after three portal remakes');
+  await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
+  await until('walking after remake check', () => onWalk(bots));
+  await bots[0].input('endSession');
+  await until('the remade session to end', () => bots[0].ended);
+  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, remade without farming, left');
 }
 
 (async () => {
@@ -1266,8 +1302,8 @@ async function playShop(bots, watch, state) {
   // The lobby's campaign step, as the phones do it.
   await vip.conn.invoke('SelectGame', 'tactics');
   await until('Tactics selected', () => vip.lobby.selectedGameId === 'tactics');
-  await vip.conn.invoke('CreateCampaign', `Bots ${Date.now() % 100000}`);
-  for (const bot of rest) await bot.conn.invoke('ClaimMember', { member: null, profileKeys: [] });
+  vip.profileKey = await vip.conn.invoke('CreateCampaign', `Bots ${Date.now() % 100000}`);
+  for (const bot of rest) bot.profileKey = await bot.conn.invoke('ClaimMember', { member: null, profileKeys: [] });
   if (people > 0) log(`Waiting for ${people} more to join room ${code}`);
   await until(`${people} more to join`, () => vip.lobby.players.filter((p) => p.connected && p.profile).length >= players + people);
   await until('the room to be able to start', () => vip.lobby.canStart || vip.lobby.inGame);

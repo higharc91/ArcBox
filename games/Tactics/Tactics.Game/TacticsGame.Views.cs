@@ -476,6 +476,9 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
+        // Recovery is rare and uses the existing header; it stays stable across walk presses/releases.
+        if (_phase == TacticsPhase.Exploration && view is CustomView recovered && _worldRecoveryNotice is { } recovery)
+            return recovered with { Header = recovery };
         // A toast changes the view, and a new view means a new viewId under the leader's thumb.
         return view is CustomView { Screen: not Screens.Walk } custom && _toasts.TryGetValue(id, out var toast)
             ? custom with { Header = toast.Text }

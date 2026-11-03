@@ -51,3 +51,5 @@ records the tested source hashes, counts and unchanged golden hashes.
 
 The next milestone is D: the approved loot-only oil flask. TV/phone integration and encounter opt-ins remain E–G; their
 visual checks and opt-in balance simulations are still pending those milestones. No PR was opened.
+
+Current integration update (issue #76): this milestone is merged into main via PR #72. Its default-off/held-content statements describe the milestone checkpoint; the completion report records five enabled encounters and the final balance verification.

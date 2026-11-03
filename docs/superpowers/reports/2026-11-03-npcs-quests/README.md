@@ -1,5 +1,7 @@
 # NPCs, side quests and phone controls — issue #73
 
+Current playback policy (issue #76 owner decision): Tactics uses authored recordings and captions only. A missing or unreadable recording is logged and never invokes live TTS; registered voice themes remain for possible future use. Earlier live-fallback verification below is historical.
+
 Initial delivery was on `npcs-and-quests`, with rest/recovery and character/palette prerequisites integrated. Main was unchanged at that stage. The owner subsequently authorized merging; [PR #75](https://github.com/higharc91/ArcBox/pull/75) carries this delivery into main.
 
 ## Owner defaults and remaining decisions

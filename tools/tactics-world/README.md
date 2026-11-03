@@ -171,9 +171,8 @@ Each export changes the pack's hash: see the note at the end of [Exporting from 
 
 - **The scarp is one long even ridge,** x 54 to 59 from the south edge up to about y 17. It's the first thing to break up. Keep it closed:
   it's what sends the road north round its tip, and a gap shortens the walk.
-- **Start to ford is about 40 seconds,** and the far ends a little over a minute. Nothing checks those times on a painted scene until
-  the walking milestone, so a shortcut won't be reported.
-- **Woods are only floor,** as the world has no props yet. So moored boats and tents are low blocks.
+- **Start to ford is about 40 seconds,** and the far ends a little over a minute. Walking and route tools now use the exported scene; remeasure routes after painting.
+- **Woods, boats and tents use authored props/buildings** in the integrated world; keep their collision and navigation clear.
 
 Keep a note of how long Ashen Ford takes to paint. It's the guide for how long later chapters will take, and it decides whether a chapter a
 week is realistic (spec section 7). Write it here when it's done:
@@ -252,3 +251,11 @@ Copy-Item content/tactics/base/rules $env:TEMP\rules-copy -Recurse
 `regions/ashen_ford.tscn` began as Claude's scripted draft, `AshenFordDraft` in `Tactics.WorldTools`. It's now painted work like any other
 scene. `--draft=ashen_ford` writes the scene only if it isn't there. No command replaces a scene: `--draft`, `--new` and `--sample` all
 say so, change nothing and exit 2, so re-drafting means deleting the scene by hand.
+
+## Editing existing props without repainting
+
+Use `--edit-props=<region>` to change individual props while preserving the scene’s terrain paint. Repeat `--clear-prop=<x>,<y>` and `--place-prop=<id>@<variant>@<x>,<y>` for each edit, then export and check the region. Do not regenerate the region from its draft.
+
+```bash
+godot --headless --path tools/tactics-world -- --edit-props=ashen_ford --clear-prop=26,58
+```

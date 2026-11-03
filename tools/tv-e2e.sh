@@ -154,6 +154,7 @@
 #   ARCBOX_WALK_LANDED  (walk) the percentage of those that must reach the TV (default 90)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
 #   TV_HOLD          (tactics) seconds the bots leave the results up (default 6)
+#   ARCBOX_DIFFICULTY Story|Normal|Hard (default Story for chapter runs, Normal otherwise).
 #   ARCBOX_SERVER_ENV more KEY=value settings for the server, in every mode (REDLINE's too, which ignores Tactics ones), e.g. a Development seed that puts the party by the stamp, so the
 #                    fight walks in rather than fading: Tactics__Seed__Region=ashen_ford Tactics__Seed__At__0=96 Tactics__Seed__At__1=61
 #   ARCBOX_BOT_ARGS  (tactics) the bots' fighting options, in place of --fight; e.g. --sit-out=turn for a party that loses
@@ -193,6 +194,9 @@ CAMP=${ARCBOX_CAMP:-}
 QUESTS=${ARCBOX_QUESTS:-}
 SILENT=${ARCBOX_SILENT:-}
 BRANCH=${ARCBOX_BRANCH:-force}
+# Chapter automation uses Story difficulty and a reproducible battle seed; balance belongs in the simulator.
+DIFFICULTY=${ARCBOX_DIFFICULTY:-$([[ "$CHAPTER" == "1" ]] && echo Story || echo Normal)}
+BATTLE_SEED_ENV=$([[ "$CHAPTER" == "1" ]] && echo Tactics__BattleSeed=76 || true)
 LINE_S=${ARCBOX_LINE:-2.5}
 AT_LINE=${ARCBOX_AT_LINE:-3}
 RESTART_SCENE=${ARCBOX_RESTART_SCENE:-ch1_maud}
@@ -213,8 +217,8 @@ AT_BEAT=${ARCBOX_AT_BEAT:-30}
 ENCOUNTER=${ARCBOX_ENCOUNTER:-river_crossing}
 HOLD=${TV_HOLD:-6}
 WALK=${ARCBOX_WALK:-}
-# From Ashen Ford's spawn: the road east, rests long enough for a screenshot and a save, the restart, the TV, and back towards the gate.
-WALK_SCRIPT=${ARCBOX_WALK_SCRIPT:-e:3,stop:2,ne:2.5,stop:2,pause:restart,ne:1.5,stop:2,pause:tv,se:1,ne:1,stop:2,w:1.5,stop:2}
+# Navigate between authored shop targets using route.cs; stop for saves, server restart and TV reconnect.
+WALK_SCRIPT=${ARCBOX_WALK_SCRIPT:-route:af_market_herbalist,route:af_inn,route:af_market_herbalist,stop:2,pause:restart,route:af_inn,stop:2,pause:tv,route:af_market_herbalist,stop:2}
 WALK_PRESSES=${ARCBOX_WALK_PRESSES:-20}
 WALK_STEPS=${ARCBOX_WALK_STEPS:-12}
 WALK_SLACK=${ARCBOX_WALK_SLACK:-250}
@@ -418,7 +422,7 @@ DB="$OUT/arcbox.db"
 # start_server <log>: the server on $URL and $DB, in the background; returns once it answers.
 start_server() {
   local out=$1
-  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" ${STAGE_ENV:-} ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
+  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Tactics__Difficulty="$DIFFICULTY" ${BATTLE_SEED_ENV:-} Storage__Path="$DB" ${STAGE_ENV:-} ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
   SERVER_PID=$!
   for _ in $(seq 1 60); do
     curl -sf -o /dev/null "$URL/" && return 0
@@ -571,8 +575,10 @@ if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then
     /^WALK [0-9]+ / { if ($2 <= last) print NR ": " $0 " after " last; last = $2 }' "$OUT/tv.log")
   [[ -z "$DOWN" ]] || walk_fail "WALK lines that only climb; these didn't: $DOWN"
   # --walk moved the party, as the TV drew it.
-  MOVED=$(awk -v to="$RESTART_AT" 'NR < to && /^WALKAT / { if (!n++) { x = $5; y = $6 } lx = $5; ly = $6 }
-    END { dx = lx - x; dy = ly - y; if (dx < 0) dx = -dx; if (dy < 0) dy = -dy; print (dx > dy ? dx : dy) + 0 }' "$OUT/tv.log")
+  MOVED=$(awk -v to="$RESTART_AT" '
+    NR < to && /^TACTICS walk snapped to / && !origin { x = $5; y = $6; origin = 1 }
+    NR < to && /^WALKAT / { if (!origin) { x = $5; y = $6; origin = 1 } lx = $5; ly = $6; drawn = 1 }
+    END { if (!drawn) { print 0; exit } dx = lx - x; dy = ly - y; if (dx < 0) dx = -dx; if (dy < 0) dy = -dy; print (dx > dy ? dx : dy) + 0 }' "$OUT/tv.log")
   log "the TV drew the leader $MOVED tiles from where it started, before the restart"
   awk -v m="$MOVED" 'BEGIN { exit !(m >= 4) }' || walk_fail "the leader drawn 4 tiles or more from the start"
 

@@ -61,6 +61,8 @@ Art remains procedural: [prompt manifest](2026-11-03-tactics-npcs-quests-art.jso
 
 ## Voice and verification
 
+Issue #76 owner decision supersedes live speech fallback: a Tactics line without a playable authored clip shows captions only, logs the missing recording, and never calls live TTS. Voice themes remain registered.
+
 All new spoken scene and bark lines have rendered Ogg clips, delivery directions and registered cast themes. Existing named casts are unchanged. The [voice plan](../../../tools/tactics-lore/VOICE-PLAN.md) records actual casting, rendering, fallback limits and drift checks. Paid Scenario renders, including superseded takes, are retained by job/asset ID in `tools/tactics-lore/voice-assets.json`; total 114 renders, 220 CU. Nine additional town barks reuse existing matching captions/casts and recordings at no generation cost.
 
 Run the commands in [the report](../reports/2026-11-03-npcs-quests/README.md) for unit coverage, the 264-case phone audit, the Godot NPC demonstration and real TV/phone quest plus Chapter 1 playthroughs. The delivered slice excludes companions, romance, timed/multi-region quests and path lines.
