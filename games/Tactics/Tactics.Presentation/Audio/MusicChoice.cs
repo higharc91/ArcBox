@@ -57,6 +57,8 @@ public static class MusicChoice
     {
         if (!Enum.TryParse<TacticsPhase>(view.Phase, out var phase))
             return null;
+        if (phase == TacticsPhase.Story && view.Camp is { Stage: not ("vote" or "dawn") })
+            return new MusicCue(Camp);
         return phase switch
         {
             TacticsPhase.Muster => new MusicCue(Title),
@@ -77,7 +79,7 @@ public static class MusicChoice
     private static bool IsBoss(BattleView? battle) => battle is not null && Fights.ContainsKey(battle.Encounter);
 
     /// <summary>The bed under <paramref name="view"/>'s fight, or null away from one.</summary>
-    public static string? AmbienceOf(TacticsHostView view) => view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : null;
+    public static string? AmbienceOf(TacticsHostView view) => view.Camp is { Mode: "camp", Stage: not ("vote" or "dawn") } ? "amb_campfire" : view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : null;
 
     /// <summary>The bed for a map, by its id in <c>sfx/manifest.json</c>, or null.</summary>
     public static string? Ambience(string map) => Beds.GetValueOrDefault(map);
