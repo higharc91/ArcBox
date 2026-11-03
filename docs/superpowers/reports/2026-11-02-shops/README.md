@@ -63,3 +63,36 @@ or errors and the web production build passed. All existing phone fixture files 
 starting potion for 25 gold, bought a smoke bomb for 25, retried the purchase ID without a second charge, sold it for 12, and
 verified teammates' balances and sellable inventories stayed unchanged. The corrected live multiplayer run completed buy, idempotent retry, sell, leave, and End session successfully.
 The harness now waits for every phone's new view before continuing, so the leader never submits Leave using a stale view ID.
+
+## Economy follow-up: remake exploit and Chapter 1 rewards
+
+The sell/remake exploit was reproduced with a regression test, then fixed. Every remake now carries the current inventory,
+injuries and personal gold through a class/race change. It cannot restore sold or consumed starting supplies or delete purchased
+items. Initial creation still grants its normal starting kit; free pre-battle remakes remain unlimited and only post-battle
+remakes consume the one free remake.
+
+Chapter 1 now awards these **party totals**, split among participating players:
+
+| Source | Gold |
+|---|---:|
+| Mayor's request, closing node: council advance | 200 |
+| Victory in either ford encounter | 120 |
+| Reeve's chest, plus its existing potion | 60 |
+| Smugglers' cache, plus its existing smoke bomb | 40 |
+
+A four-player party receives 50 gold each from the mayor, enough for one healing potion each while stock lasts. Normal Chapter 1
+play with both optional treasures awards 420 gold in total. Both story routes have the same victory reward, and defeats pay
+nothing. Already-resolved story nodes and emptied treasure do not get retroactive rewards. Prices, stock, starting gold and item
+loot are unchanged. No narration lines or audio assets changed.
+
+The live shop scenario now completes the mayor's request first and checks the advance is split evenly across phones. A follower
+then buys using that reward, retries the trade ID, sells and leaves while teammates' purses and sellable inventories stay unchanged.
+Validation passed: 556 game tests, 1,044 logic tests, 483 phone tests and 12 lore-checker tests; the .NET solution build has zero
+warnings/errors and the production web build passed with its existing Rollup notices. Prior phone fixture bytes remain unchanged.
+The live run completed the mayor's scene, showed 50 gold on every phone, bought a healing potion from Ana's own purse as a follower while Bo led, retried the
+purchase ID without another charge, sold it, left and ended the session. It checked other players' balances and sellable inventories
+stayed unchanged. [Council-funded shop screenshot](council-funded-shop.png).
+
+The fresh-campaign route helper now includes initial interactable obstacles, as the server does. The first live attempt correctly
+paid the reward but repeatedly routed through the town well; after fixing the helper, the isolated run reached Wenna and passed.
+No runtime walking or map layout was changed.

@@ -61,7 +61,7 @@
 //
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
-//   --shop                    walk to Wenna, sell a starting item to fund their own smoke bomb, buy, retry its trade id, sell and leave.
+//   --shop                    earn the council advance, walk to Wenna, buy from an own purse, retry its trade id, sell and leave.
 //
 // The story (overworld 5d), in place of the battle list:
 //
@@ -1123,17 +1123,23 @@ async function playChapter(bots, watch, state) {
   log(`Session over: ${vip.ended.message ?? ''}`);
 }
 
-/** Real phone trades, funded by selling starting consumables; no development gold or balance changes. */
+/** Real phone trades funded by the shipped council reward; no injected gold or sold starting supplies. */
 async function playShop(bots, watch, state) {
   const timer = setInterval(() => { for (const bot of bots) void bot.act(state); }, TICK_MS);
   timer.unref();
   idlePings(bots);
   await until('the party to walk', () => onWalk(bots));
   if (tvLog && !asHost) await until('the TV world', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  await walkToBeat(bots, watch, 'ashen_ford', { beat: 'ch1_mayors_request' });
+  await until('the council advance on every phone', () => onWalk(bots) && bots.reduce((sum, b) => sum + (b.view.data.gold ?? 0), 0) === 200);
+  const share = Math.floor(200 / bots.length);
+  if (!bots.every(b => b.view.data.gold === share || b.view.data.gold === share + 1)) throw new Error('The council advance was not split evenly');
+  log(`SHOP council advance: ${bots.map(b => `${b.name} ${b.view.data.gold}`).join(', ')} gold`);
   await walkToBeat(bots, watch, 'ashen_ford', { beat: 'shop:af_market_herbalist' });
   await until('the shop on every phone', () => bots.every(b => b.view?.screen === 'shop'));
   clearInterval(timer);
-  const buyer = bots[1] ?? bots[0]; // A follower trades independently after the leader opens the shop.
+  const buyer = bots.find(b => !b.view.data.leader && b.view.data.you.canBuy) ?? bots[0];
+  log(`SHOP ${buyer.name} trades as ${buyer.view.data.leader ? 'leader' : 'follower'}`);
   const purse = () => buyer.view.data.gold;
   async function trade(bot, action, row, count) {
     const before = bot.view.viewId;
@@ -1145,13 +1151,8 @@ async function playShop(bots, watch, state) {
     log(`SHOP ${action} ${count} ${row.item}: ${purse()} gold`);
     return id;
   }
-  const item = "smoke_bomb";
-  const price = buyer.view.data.items.find(x => x.item === item).price;
-  while (purse() < price) {
-    const seller = buyer.view.data.sell.some(x => x.price > 0 && x.count > 0) ? buyer : null;
-    if (!seller) throw new Error("The buyer's starting bag cannot fund a smoke bomb");
-    await trade(seller, 'shopSell', seller.view.data.sell.find(x => x.price > 0 && x.count > 0), 1);
-  }
+  const potion = buyer.view.data.items.find(x => x.item === 'potion_of_healing');
+  const item = purse() >= potion.price ? potion.item : 'smoke_bomb';
   const row = buyer.view.data.items.find(x => x.item === item);
   const before = purse();
   const id = await trade(buyer, 'shopBuy', row, 1);
@@ -1166,7 +1167,7 @@ async function playShop(bots, watch, state) {
   await until('walking after trade', () => onWalk(bots));
   await bots[0].input('endSession');
   await until('the session to end', () => bots[0].ended);
-  log('SHOP OK: own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
+  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
 }
 
 (async () => {

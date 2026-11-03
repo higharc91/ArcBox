@@ -235,10 +235,10 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             if (result.Character is not { } character)
                 return new(null, result.Problem);
             var record = mine is null ? new MemberRecord(character, 0, Color: color)
-                : type == "createCharacter" && mine.HasFought
-                    // The free remake after fighting: the new character keeps what the old one went through (its XP,
-                    // injuries and bag), so remaking can't heal scars or refill potions.
-                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag }, Remade = true }
+                : type == "createCharacter"
+                    // Every remake keeps the existing inventory, injuries and purse. Starting kits are granted only
+                    // on first creation, so selling a kit then remaking cannot refill it. Only post-battle remakes use the free one.
+                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag }, Remade = mine.Remade || mine.HasFought }
                     : mine with { Character = character };
             if (color is not null)
                 record = record with { Color = color };

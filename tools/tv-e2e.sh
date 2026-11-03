@@ -455,7 +455,7 @@ log "starting the TV ($RES, preset $PRESET)"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=$([[ "$CHAPTER" == "1" ]] && echo 7200 || echo 1800)
   start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
-    $([[ "$CHAPTER" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+    $([[ "$CHAPTER" == "1" || "$SHOP" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -472,8 +472,8 @@ log "TV opened room $CODE"
 
 # ---- Shop: real bot phones walk to the herbalist, buy, retry, sell and leave.
 if [[ "$GAME" == "tactics" && "$SHOP" == "1" ]]; then
-  log "shop: bots walk to Wenna and trade from their own bags"
-  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --shop --hold=1 --tv-log="$OUT/tv.log" --timeout=300 > "$OUT/phones.log" 2>&1
+  log "shop: bots earn the council advance, then trade at Wenna from their own purses and bags"
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --shop --hold=1 --line=0.1 --tv-log="$OUT/tv.log" --timeout=300 > "$OUT/phones.log" 2>&1
   grep -q 'SHOP OK' "$OUT/phones.log"
   sleep 2
   if grep -E 'SCRIPT ERROR|Unhandled exception|ERROR: ' "$OUT/tv.log" | grep -vE 'audio|ALSA|PulseAudio'; then

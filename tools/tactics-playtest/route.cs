@@ -21,7 +21,10 @@ if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" o
 }
 var rules = RulesPack.Load([args[0]], ArtManifests.Load(Directory.GetParent(Path.TrimEndingDirectorySeparator(Path.GetFullPath(args[0])))!.FullName));
 var region = rules.RegionFor(args[1]) ?? throw new ArgumentException($"No region {args[1]}.");
-var terrain = rules.GroundFor(region.Def.Id)!.Terrain;
+// These runs start fresh campaigns. Include the interactables in their initial states, just as WalkGround does on the server:
+// a town well or closed chest must not be treated as a walkable route tile merely because the underlying ground is clear.
+var terrain = rules.GroundFor(region.Def.Id)!
+    .With(Interactables.Blocking(rules.InteractablesIn(region.Def.Id), null, new HashSet<string>(StringComparer.Ordinal)));
 var start = new Tile(int.Parse(args[^2]), int.Parse(args[^1]));
 
 Func<Tile, bool> goal;

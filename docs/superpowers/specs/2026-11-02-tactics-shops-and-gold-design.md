@@ -75,6 +75,24 @@ Defaults, all content-driven and each switchable off:
 
 Not by default: gold per kill, gold that scales with level, gold from the overworld mobs idea (that's tied to the farming question in §8).
 
+### Chapter 1 reward content (owner-authorized follow-up)
+
+| Source | Party gold | Four players | Six players |
+|---|---:|---:|---:|
+| Mayor's request, closing node (`ch1_mayor.close`) | 200 | 50 each | 33 each, two remainder coins assigned in profile order |
+| Ford battle victory (`ford_assault` or `river_crossing`) | 120 | 30 each | 20 each |
+| Reeve's chest, alongside its potion | 60 | 15 each | 10 each |
+| Smugglers' cache, alongside its smoke bomb | 40 | 10 each | 6 each, four remainder coins assigned in profile order |
+
+The two ford battles are alternative story routes; either route earns the same 120-gold victory reward, and losses earn nothing.
+Normal Chapter 1 play pays 420 gold if both optional treasures are found. The council advance funds an early shop purchase
+without selling a starting potion. Story and treasure rewards retain their existing once-only saved resolution; victory gold
+is saved with the battle checkpoint. Already-resolved story nodes and emptied treasure are not rewarded retroactively. These
+amounts are intentionally small initial tuning values; starting gold remains zero and no new fees or sinks were added.
+
+**Remake exploit fixed:** every existing character carries its current bag, injuries and purse through class/race changes. Starting
+kits are granted only on first creation. Pre-battle remakes remain unlimited, and only a post-battle remake uses the one free remake.
+
 ### 2.3 What players see
 - **TV:** the total across player purses on the party banner while walking (explicitly labelled), individual balances in the shop, and a "+25 gold" pop like XP's. Hidden while it's 0 and no shop
   has ever been seen, so Ashen Ford's TV frame is unchanged until gold exists (keep the size budget: see §6.4).
@@ -301,7 +319,7 @@ Built on `shops-and-gold`. The following **USER DECISION** defaults from the iss
 | Decision | Implemented default |
 |---|---|
 | A | One saved purse and bag per player. All gold rewards split evenly among participants, including chest gold. Legacy shared gold splits once on load. |
-| B / B2 | Content-defined loot, winning encounters and story rewards/payments; zero starting gold; no per-kill gold. |
+| B / B2 | Content-defined loot, winning encounters and story rewards/payments; Chapter 1 reward amounts above; zero starting gold; no per-kill gold. |
 | C | Healing 50 gp; greater healing 150 gp; alchemist's fire 50 gp; smoke bomb 25 gp. Oil remains absent; its future default is 10 gp. |
 | D | Content sellRatio 0.5, rounded down after the shop's rounded-up buy price. |
 | E | Haggling off. The DC is validated content metadata; no haggle input or discount is enabled. |
@@ -309,7 +327,7 @@ Built on `shops-and-gold`. The following **USER DECISION** defaults from the iss
 | I | No gameplay bag limit; integer overflow is refused. |
 | J | Per-line chapter restock or never. Rest is reserved content metadata; no rest mechanic exists. |
 | K | One herbalist, Wenna's Remedies, at merchant person 30 in Ashen Ford's painted market. Accepts potion and obscure tags (the existing smoke-bomb tag). |
-| L | No new fees, bribes, or other Chapter 1 balance changes. |
+| L | No new fees or bribes. The owner subsequently authorized the modest Chapter 1 reward schedule above and the remake exploit fix. |
 
 Gold and prices are integers. Positive fractional modified buy prices round up; sales round down. Accepted trade IDs are retained per shop for the most recent 32 trades; older IDs are outside that bounded replay window. The stock save also retains its content starting counts so normal sales survive reloads, while a changed content baseline is clamped and removed lines disappear. A saved shop cursor sits beside `WorldSave.Story`, preserving a paused beat's cursor. Last-phone departure closes the shop; ending a session preserves the visit for resumption.
 

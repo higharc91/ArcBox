@@ -272,6 +272,41 @@ public sealed class ShopTests
     }
 
     [Fact]
+    public void Selling_then_repeatedly_remaking_cannot_refill_a_starting_kit_or_mint_gold()
+    {
+        var s = AtShop(0);
+        var profile = s.Profiles[0]!.Value;
+        s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        s.Send(0, "shopSell", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, member = profile.Value, trade = "original-kit" });
+        Assert.Equal(25, s.Game.Document.For(profile)!.Gold);
+        Assert.Empty(s.Game.Document.For(profile)!.Character.Bag);
+        s.Send(0, "endSession");
+
+        var portal = new TacticsCampaignRules(Rules);
+        foreach (var cls in new[] { "wizard", "cleric", "fighter" })
+        {
+            var change = portal.Handle(s.Lease.Info, s.Lease.Document, profile, "createCharacter",
+                System.Text.Json.JsonSerializer.SerializeToElement(new { race = "human", @class = cls, background = "soldier",
+                    scores = new { str = 15, dex = 15, con = 15, @int = 8, wis = 8, cha = 8 } }, ArcJson.Options));
+            Assert.Null(change.Error);
+            var member = TacticsDocument.Read(change.Document!.Value).For(profile)!;
+            Assert.Equal(cls, member.Character.Class);
+            Assert.False(member.Remade); // Pre-battle remakes remain unlimited.
+            Assert.Empty(member.Character.Bag);
+            Assert.Equal(25, member.Gold);
+
+            s = new Session(document: change.Document.Value);
+            s.Harness.Resume(s.Lease);
+            for (var i = 0; i < 4; i++) s.Harness.SetConnected(i, true);
+            var before = s.Lease.Document.GetRawText();
+            s.Send(0, "shopSell", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, member = profile.Value, trade = "refilled-" + cls });
+            Assert.Equal(before, s.Lease.Document.GetRawText());
+            Assert.Equal(25, s.Game.Document.For(profile)!.Gold);
+            s.Send(0, "endSession");
+        }
+    }
+
+    [Fact]
     public void Legacy_shared_gold_is_split_once_preserving_existing_purses_and_the_total()
     {
         var doc = AtShop(10).Game.Document with { Gold = 25 };
