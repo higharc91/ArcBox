@@ -49,6 +49,11 @@ public sealed partial class Room
 
     private volatile RoomStatus _status = RoomStatus.Lobby;
     private string? _hostConnectionId;
+    // Issue #77: the view the TV holds, so it can be sent a patch against it instead of the whole view. Only for a host connection
+    // that asked (UseHostPatches); a host that didn't gets whole views as before.
+    private bool _hostPatches;
+    private JsonElement? _hostHas;
+    private string? _hostHasGame;
     private string? _selectedGameId;
     private GameSession? _session;
     private GameResults? _lastResults;
@@ -158,6 +163,7 @@ public sealed partial class Room
         }
 
         _hostConnectionId = connectionId;
+        ForgetHostView(patches: false);
         _knownConnections.TryAdd(connectionId, 0);
         _hostAbsentSince = null;
         _allAbsentSince = null;
@@ -171,9 +177,62 @@ public sealed partial class Room
 
         if (_status == RoomStatus.InGame && _session?.CurrentHostView != null)
         {
-            _sender.Send(connectionId, ClientMethods.HostView, _session.GameId, _session.CurrentHostView.Value);
+            SendHostView(_session.GameId, _session.CurrentHostView.Value, whole: true);
         }
     });
+
+    /// <summary>
+    /// The host asks to be sent patches against the view it has (<see cref="ClientMethods.HostViewPatch"/>) instead of whole views
+    /// (issue #77). It holds until the host connection changes. Host only.
+    /// </summary>
+    public Task UseHostPatchesAsync(string connectionId) => EnqueueAsync(() =>
+    {
+        EnsureHost(connectionId);
+        _hostPatches = true;
+    });
+
+    /// <summary>The host lost track of its view (a patch it couldn't apply): send the whole view again. Host only.</summary>
+    public Task ResendHostViewAsync(string connectionId) => EnqueueAsync(() =>
+    {
+        EnsureHost(connectionId);
+        _hostHas = null;
+        if (_status == RoomStatus.InGame && _session?.CurrentHostView != null)
+        {
+            SendHostView(_session.GameId, _session.CurrentHostView.Value, whole: true);
+        }
+    });
+
+    /// <summary>
+    /// Sends the TV <paramref name="view"/>: as a patch against the view it has when it asked for patches and one is smaller, else whole.
+    /// </summary>
+    private void SendHostView(string gameId, JsonElement view, bool whole = false)
+    {
+        if (_hostConnectionId is not { } host)
+        {
+            return;
+        }
+
+        if (!whole && _hostPatches && _hostHas is { } has && _hostHasGame == gameId
+            && HostViewPatch.Diff(has, view) is { } patch)
+        {
+            var patchElement = JsonSerializer.SerializeToElement(patch);
+            if (patchElement.GetRawText().Length < view.GetRawText().Length)
+            {
+                _sender.Send(host, ClientMethods.HostViewPatch, gameId, patchElement);
+                (_hostHas, _hostHasGame) = (view, gameId);
+                return;
+            }
+        }
+
+        _sender.Send(host, ClientMethods.HostView, gameId, view);
+        (_hostHas, _hostHasGame) = (view, gameId);
+    }
+
+    private void ForgetHostView(bool patches)
+    {
+        _hostPatches = patches;
+        (_hostHas, _hostHasGame) = (null, null);
+    }
 
     // --- Seats: how a phone gets into the room (spec §3.1-3.2) ---
 
@@ -496,6 +555,7 @@ public sealed partial class Room
         if (connectionId == _hostConnectionId)
         {
             _hostConnectionId = null;
+            ForgetHostView(patches: false);
             _hostAbsentSince = _time.GetUtcNow();
         }
         else
@@ -574,7 +634,7 @@ public sealed partial class Room
         var updates = _session.TakeViewUpdates();
         if (updates.Host != null && _hostConnectionId != null)
         {
-            _sender.Send(_hostConnectionId, ClientMethods.HostView, _session.GameId, updates.Host.Value);
+            SendHostView(_session.GameId, updates.Host.Value);
         }
 
         foreach (var playerUpdate in updates.Players)
@@ -597,6 +657,7 @@ public sealed partial class Room
         _session?.Dispose();
         _session = null;
         _status = RoomStatus.Lobby;
+        ForgetHostView(_hostPatches);
         _lastResults = results;
         ReleaseCampaign();
         foreach (var slot in _members.All)

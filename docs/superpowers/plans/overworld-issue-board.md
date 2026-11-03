@@ -85,8 +85,29 @@ Review follow-up: the recovery block itself is protected. If it fails, a direct 
 `FinishBuild` (`WorldCanvas.cs:~527`) runs `WorldFauna`'s constructor: about 440 ms in Debug by reading and timing. `FaunaRange.Pen` can be up to 18^4 rectangles. The title card hides it.
 **Done when:** the main-thread part of opening is under a frame's budget.
 
-### OW-13 · Explore view is 2.9 KB · `todo`
-Its historical budget is 1,420 bytes, and it goes out on every step. Send things only when they change, or only those nearby.
+### OW-13 · Explore view is too big for one packet · `done`, issue #77
+The whole TV view in Ashen Ford is about 4.3 KB, against one packet's 1,420 bytes, and it went out on every step. The TV now asks for **host view patches** (`HostViewPatch` in `ArcBox.Sdk.Protocol`). After a whole view on bind, a new game or a resend, it gets only what changed; arrays of things patch by id.
+
+**Measured** (Tactics tests on Ashen Ford's real views):
+- a party of 4 walking: median 449 bytes and at most 457 a step (whole view 4,271);
+- a party of 6: median 316 and at most 450;
+- a chest opening: 234.
+
+**Proved by:**
+- `WalkingTests` (every step of a walk under a packet, rebuilt exactly);
+- `HostViewPatchTests` (format cases, plus 300 random views × 20 changes each, more with `HOSTPATCH_SEEDS`);
+- `HostPatchTests` (the room's whole-or-patch rules);
+- `HostClientTests` (a real TV client applying patches, an older TV that doesn't ask, and a TV taking a room over).
+
+No game code changed: the TV's scenes still get whole views.
+
+**On the real TV** (Linux, Xvfb and lavapipe, `ARCBOX_SHOTS=0`):
+- `ARCBOX_WALK=1`: OK (restart, reconnect and dropped phone).
+- `ARCBOX_RESTART=1`: OK; 5 patches applied.
+- `ARCBOX_RECONNECT=1`: OK.
+- `ARCBOX_CHAPTER=1`: OK; 580 patches applied.
+
+None of the runs asked for a whole view again. Battles rarely patch: their views have no id-keyed arrays, so the whole view is usually as small, and it's sent whole.
 
 ### OW-14 · Fauna draws over props · `todo`
 Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or keep them clear.
