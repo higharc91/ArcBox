@@ -12,7 +12,8 @@ public sealed class EnvironmentEncounterTests
         Assert.Equal(new Tile(9, 7), spawn.At);
         Assert.DoesNotContain(rules.Encounters.Where(e => e.Key != "ford_assault").SelectMany(e => e.Value.Enemies), e => e.Unit == "goblin_ford_shaman");
         var shaman = rules.Monsters[spawn.Unit];
-        Assert.Contains(new AbilityId("goblin_shaman.cinder_bolt"), shaman.Abilities);
+        Assert.Contains(new AbilityId("goblin_ford_shaman.cinder_bolt"), shaman.Abilities);
+        Assert.Contains(new AbilityId("goblin_shaman.cinder_bolt"), rules.Monsters["goblin_shaman"].Abilities);
         Assert.Contains(new AbilityId("goblin_shaman.storm_hex"), shaman.Abilities);
         Assert.DoesNotContain(new AbilityId("goblin_shaman.storm_hex"), rules.Monsters["goblin_shaman"].Abilities);
         Assert.Equal("characters.goblin_shaman", shaman.Sprite);

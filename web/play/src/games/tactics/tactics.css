@@ -207,6 +207,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-abilities, .tx-known, .tx-targets, .tx-lines, .tx-encounters, .tx-party { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .tx .tx-ability { width: 100%; display: flex; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; text-align: left; min-height: 64px; }
 .tx-ability.static { display: flex; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; }
+/* Browsing stays compact; selecting a card shows its full tooltip before the Use confirmation. */
+.tx-turn:not(.aiming) .tx-ability .tx-tip { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
 .tx-ic { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 8px;
   background: rgba(230, 189, 92, 0.1); border: 1px solid rgba(230, 189, 92, 0.4); }
 .tx-ab-text { flex: 1; min-width: 0; }

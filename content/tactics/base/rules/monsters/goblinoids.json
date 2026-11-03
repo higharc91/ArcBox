@@ -28,7 +28,7 @@
     "scores": { "str": 8, "dex": 14, "con": 12, "int": 11, "wis": 15, "cha": 10 }, "hp": 18, "ac": 13, "armor": "Light",
     "weapon": { "id": "quarterstaff", "damage": "1d6", "damageType": "bludgeoning", "stat": "str", "finesse": false, "ranged": false,
                 "range": 1, "reach": false, "tags": ["simple", "versatile"] },
-    "abilities": ["goblin_shaman.cinder_bolt", "goblin_shaman.storm_hex", "goblin_boss.rally"], "passives": [], "skills": ["arcana", "perception"],
+    "abilities": ["goblin_ford_shaman.cinder_bolt", "goblin_shaman.storm_hex", "goblin_boss.rally"], "passives": [], "skills": ["arcana", "perception"],
     "tags": ["goblinoid", "humanoid", "caster"], "aiProfile": "caster", "sprite": "characters.goblin_shaman" },
   { "id": "hobgoblin", "name": "Hobgoblin", "cr": "1/2", "xp": 100,
     "scores": { "str": 16, "dex": 12, "con": 12, "int": 10, "wis": 13, "cha": 9 }, "hp": { "1": 11, "5": 50 }, "ac": 18, "armor": "Heavy",

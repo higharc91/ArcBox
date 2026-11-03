@@ -27,6 +27,7 @@ public sealed class OilLootTests
     public void The_placed_chest_is_the_only_other_flask_and_starting_kits_have_none()
     {
         var rules = Rules;
+        Assert.Equal(10, rules.Items[new ItemId("oil_flask")].Price);
         var encounters = rules.Encounters.Values.SelectMany(e => e.ItemLoot.IsDefault ? [] : e.ItemLoot).Where(s => s.Item.Value == "oil_flask").ToArray();
         Assert.Equal(1, Assert.Single(encounters).Count);
         Assert.Equal("ford_assault", Assert.Single(rules.Encounters.Values, e => !e.ItemLoot.IsDefaultOrEmpty).Id);
