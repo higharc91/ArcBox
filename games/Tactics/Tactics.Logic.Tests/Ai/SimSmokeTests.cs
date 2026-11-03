@@ -90,6 +90,20 @@ public sealed class SimSmokeTests
     }
 
     [Fact]
+    public void Reward_sweeps_reject_wrong_class_trinkets_and_record_the_equipment()
+    {
+        var rules = BasePackTests.Rules;
+        var config = new SimConfig([], [2], 1, [4], 1, Difficulty.Normal,
+            Trinkets: ImmutableDictionary<string, string>.Empty.Add("wizard", "ember_claw_gauntlet"));
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(config, rules));
+        config = config with { Trinkets = ImmutableDictionary<string, string>.Empty.Add("fighter", "ember_claw_gauntlet") };
+        Assert.Empty(SimRunner.Run(config, rules));
+        var report = Report.Markdown([], config);
+        Assert.Contains("--trinkets fighter:ember_claw_gauntlet", report, StringComparison.Ordinal);
+        Assert.Contains("fighter: `ember_claw_gauntlet`", report, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Sampled_parties_are_fixed_distinct_and_have_a_healer_or_defender()
     {
         var rules = BasePackTests.Rules;
