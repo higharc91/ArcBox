@@ -205,6 +205,12 @@ public partial class Narrator : Node
         {
             return;
         }
+        if (!NarratorFallbackPolicy.AllowsLiveSpeech(line.Theme))
+        {
+            GD.Print($"TACTICS missing voice clip ({line.Theme}): {line.Text}");
+            Pump();
+            return;
+        }
         if (_session is { } session && _policy.UseServer(Now))
         {
             _mode = Mode.Fetching;
