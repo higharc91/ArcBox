@@ -14,7 +14,7 @@
 // (unless there's no way to the "!" but across one).
 using Tactics.Logic;
 
-if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" or "shop")))
+if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" or "shop" or "thing")))
 {
     Console.Error.WriteLine("usage: route.cs <rules dir> <region> <map> <x> <y>  |  route.cs <rules dir> <region> beat <beat id> <x> <y>");
     return 2;
@@ -29,7 +29,12 @@ var start = new Tile(int.Parse(args[^2]), int.Parse(args[^1]));
 
 Func<Tile, bool> goal;
 Func<Tile, bool>? avoid = null;
-if (args.Length == 6 && args[2] == "shop")
+if (args.Length == 6 && args[2] == "thing")
+{
+    var target = rules.InteractablesIn(region.Def.Id).Single(t => t.Id == args[3]);
+    goal = t => Interactables.InReach(terrain, t, target);
+}
+else if (args.Length == 6 && args[2] == "shop")
 {
     var shop = rules.ShopsIn(region.Def.Id).Single(s => s.Id == args[3]);
     var at = shop.Keeper.Person is { } person ? region.Def.People[person].At : rules.InteractablesIn(region.Def.Id).Single(t => t.Id == shop.Keeper.Thing).At;

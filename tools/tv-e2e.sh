@@ -140,6 +140,7 @@
 #   ARCBOX_WALK      1 = (tactics) walk the world rather than fight, with a server restart, a TV kill and a dropped phone (above)
 #   ARCBOX_STAGE     1 = fights where the party walks into them, one lost and one fought again (above); implies ARCBOX_GAME=tactics
 #   ARCBOX_CHAPTER   1 = all of Chapter 1 from a fresh campaign (above); implies ARCBOX_GAME=tactics
+#   ARCBOX_CAMP      1 = with CHAPTER, camp after the ford and buy an inn room after the next story rest
 #   ARCBOX_BRANCH    (chapter) force (default) or parley: the option the bots vote for at the ford. skip-assault is force with a
 #                    Development seed that has the Ford Assault done (Tactics__Seed__Beats__0=ch1_ford_assault), so the ford choice goes
 #                    straight on to Old Maud with no fight: the chapter to its card without the assault's coin toss (decision 31)
@@ -187,6 +188,7 @@ GODOT=${GODOT:-$(command -v godot || true)}
 SHOP=${ARCBOX_SHOP:-}
 STAGE=${ARCBOX_STAGE:-}
 CHAPTER=${ARCBOX_CHAPTER:-}
+CAMP=${ARCBOX_CAMP:-}
 SILENT=${ARCBOX_SILENT:-}
 BRANCH=${ARCBOX_BRANCH:-force}
 LINE_S=${ARCBOX_LINE:-2.5}
@@ -664,7 +666,7 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
   fi
   set +e
   : > "$OUT/phones.log"
-  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter --branch="$VOTE" \
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter $([[ "$CAMP" == "1" ]] && echo --camp) --branch="$VOTE" \
     --line="$LINE_S" ${ARCBOX_BOT_ARGS:---fight} $([[ "$SILENT" == "1" ]] && echo --silent) --hold="$HOLD" --timeout=1800 \
     --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
   PHONES_PID=$!

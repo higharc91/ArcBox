@@ -51,6 +51,15 @@ Every bot logs each move, ability and end of turn, and a timeout says which scre
 
 **`--chapter`** plays all of Chapter 1 from wherever the party is, from a fresh campaign with no seed: it walks to the beat on offer, which it reads from the TV's `--story-log` (`STORY marker <beat> <x> <y> <emote>`) or the host view, by `route.cs … beat <id> <x> <y>` (round every stamp, so a battle beat's fight starts from its "!"), checking each step lands where the route said and routing again if not, and taps Interact once it's offered. In the scenes the leader skips each line after `--line` seconds (default 1.5), everyone votes for `--branch=force|parley` at the ford (and for `--story-pick`'s ids elsewhere, else the first option), and the best bonus rolls. A battle beat is fought with `--fight`; a loss puts its "!" back and the bots walk to it again. Once the TV shows `STORY card` the party walks a few steps and the VIP ends the session. `--silent` answers nothing and skips no line, so everything runs on the game's timers. With no TV (`--host --shown`) parley and force each played through in about 5 minutes. **A lost fight** (the user's rule, 2026-11-01) pays no XP, and the party wakes with that fight's injuries tended, its earlier ones as they were, and the potions it drank gone. When a loss kept its injuries, the bots lost nearly every Ford Assault retry they were seen to play after a real loss (14 of 15); with `--lose=1` (a loss that spends little) they won 6 of 12 retries under the old rule and 8 of 12 with the injuries healed. A force run is still about a coin toss on its first fight (5 of 10 won from the "!" side with no TV).
 
+Add `--camp` to a Chapter 1 run to visit the ford campfire after the battle, vote Rest, pick Tend where a body injury needs care
+(or Cook otherwise), resolve the night, and sponsor an inn room after the next story rest is earned. The script checks both recovery
+visits before accepting the card. The equivalent TV script is `ARCBOX_CHAPTER=1 ARCBOX_CAMP=1 ARCBOX_BRANCH=force ARCBOX_PHONES=6 tools/tv-e2e.sh --skip-build`.
+
+Rest mends injuries rather than replenishing HP or slots, which remain fresh every battle. Camp jobs use each player's own character;
+paid inn rooms and temple cures spend the buyer's own purse and can help any campaign member. See the
+[rest design](../../docs/superpowers/specs/2026-11-03-tactics-rest-and-recovery-design.md) for the balance defaults, saves and timers.
+
+
 With any walking option the party walks instead, and then the VIP ends the session. They run in this order:
 
 | Option | What it does |
@@ -122,3 +131,9 @@ These turn SRD 5.2 into this game, and every content file starts from them. **Th
 - **Left out:** spells with no battle use (utility, ritual, travel, divination).
 - **`defaultPicks`:** every class lists a preset loadout per level, used by the simulator and by AI-built characters. Real players choose their own in the portal (sub-project 4).
 - **Content may add, never override:** an id defined twice without `"replaces"` is a load error.
+
+
+Recovery screens share `RecoveryMemberView` (battle-ready HP, class resources and injury ids) and compact party cards.
+The phone `InjuryIcon` resolves `injury_icons/manifest.json`; the TV reads the same data. The eight 32×32 images were generated in
+PixelLab at the owner's request, with prompts and provenance in `docs/superpowers/specs/2026-11-03-tactics-injury-icons.json`.
+Tap an injury to inspect its effect or confirm treatment. Ordinary shop/controller fixtures remain unchanged.
