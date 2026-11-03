@@ -82,3 +82,7 @@ request. Native PNG size and coverage are also checked against every rules injur
 Detailed checks are saved in [validation.txt](validation.txt).
 
 The full-solution check was run before the presentation follow-up; the affected game and presentation suites were rerun afterwards.
+
+
+The later owner-authorized [cozy camp follow-up](../2026-11-03-camp-presentation/README.md) supersedes the initial presentation:
+close campsite views, job progress/poses, additional PixelLab art, visible sleep/sunrise and an original morning cue.

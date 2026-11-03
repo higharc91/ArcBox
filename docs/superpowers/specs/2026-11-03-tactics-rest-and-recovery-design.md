@@ -22,7 +22,7 @@ A tied vote leaves the party walking. Existing 5d vote screens, presence holds a
 | R9 | A player can pay from their own purse for another character, including an away character. |
 | R10 | Camp only at two authored Ashen Ford campfires. |
 
-The owner also requested cozy campfire music. Use the existing acoustic `camp` loop under `amb_campfire` during jobs, results and talks; the inn uses the same music without outdoor ambience. Return to region music at dawn. No audio generation.
+The owner also requested cozy campfire music. Use the existing acoustic `camp` loop under `amb_campfire` during jobs, results and talks; the inn uses the same music without outdoor ambience. The later owner-approved presentation follow-up adds an original synthesized flute/harp/chime sunrise sting, then returns to regional music. See the [accepted camp presentation](2026-11-03-tactics-camp-presentation-proposal.md).
 
 These are the issue's recommended defaults, open to owner override; no additional economy values are introduced.
 
@@ -40,7 +40,7 @@ chapter/never stock. Camp talks play at most one eligible unseen scene each nigh
 
 - [x] Rules, validation, injury kinds, campfire, shop services, Well fed passive, camp lore tags and parity checks.
 - [x] Save compatibility and one-rest earning.
-- [x] Camp vote/jobs/targets/rolls/watch/talk/dawn with restart and disconnect coverage.
+- [x] Camp vote/jobs/targets/rolls/watch/talk/sleep/dawn with restart and disconnect coverage.
 - [x] Inn and temple services, sponsorship and atomic replay protection.
 - [x] Phone screens and seven new fixtures; existing fixtures unchanged.
 - [x] TV gathering, night/dawn, results, effects, sounds and camp demo.
@@ -63,3 +63,9 @@ reads the same manifest. Prompts, model, seed and job provenance are in [the ico
 
 Four-character recovery menus were checked at 390×844, and at 320px width with no horizontal overflow. A six-member TV inn panel
 was rendered in the camp demo. The [report](../reports/2026-11-03-rest/README.md) records checks and screenshots.
+
+
+The owner subsequently authorized the full cozy camp presentation and new art. The TV now focuses on the live campsite with
+job poses, PixelLab props/loops, honest progress and compact party bars. Saved sleep (3 seconds) precedes sunrise (8 seconds),
+both skippable. Recovery applies once at dawn; morning continues after leaving camp. The inn shares the night progression with
+its own hearth interior. [The follow-up report](../reports/2026-11-03-camp-presentation/README.md) records the final preview and checks.

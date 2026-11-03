@@ -507,8 +507,8 @@ The TV gathers the party on clear tiles, darkens the existing world canvas, disp
 No world plans or lighting bakes are rebuilt for the night. Away characters can receive tending, food and dawn healing.
 
 The existing looping `camp` track supplies the cozy guitar/lute/fiddle/cello music during jobs, results, camp talks and the inn night.
-Outdoor camp also plays the existing `amb_campfire` bed (fire and crickets). Votes retain the region's music; dawn crossfades back to it.
-The usual Music/Sfx volume controls and voice ducking apply. No new audio was generated.
+Outdoor camp also plays the existing `amb_campfire` bed (fire and crickets). Votes retain the region's music; dawn plays the original `camp_dawn` flute/harp/chime sting once, then returns to regional music.
+The usual Music/Sfx volume controls and voice ducking apply. The sunrise score is synthesized from the original score in `tools/tactics-audio/compose_dawn.py`.
 Recovery sound keys use existing fallbacks: camp_start→spell_fire_aura, camp_mend→ui_level_up, camp_cook→ui_confirm,
 camp_dawn→ui_menu_open, temple_heal→shrine_use, inn_room→door_open. Successful tending uses a green-tinted `fx.poof`.
 Well fed uses the bowl glyph and grants 3 temporary HP at the next battle start, ending after that battle.
@@ -519,7 +519,7 @@ and gain Well fed; unpaid guests receive ordinary dawn healing. Temple healing c
 Each service purchase shares the shop's atomic save and trade-ID protection.
 
 Visual check: `godot --path src/ArcBox.Host -- --world-demo=camp --shots=/tmp/arcbox-camp-shots --preset=low --res=1280x720`.
-It shows gathering, mending, Well fed, dawn and a six-member inn panel. Add `--audio-log` to inspect music and ambience transitions.
+It shows the authored east-road camp, all six jobs, sleep, sunrise, walking in morning light, and the inn. `--world-demo=camp-ford` uses the old-chapel campsite. Add `--audio-log` to inspect music and ambience transitions.
 Live regression: `ARCBOX_CHAPTER=1 ARCBOX_CAMP=1 ARCBOX_BRANCH=force ARCBOX_PHONES=6 tools/tv-e2e.sh --skip-build`.
 The bots camp after the ford, take a paid room after the next earned rest, then continue to the Chapter 1 card.
 See the [design and owner defaults](superpowers/specs/2026-11-03-tactics-rest-and-recovery-design.md) and
@@ -532,3 +532,12 @@ small session menu. HP/resources are the next battle's ready values; injuries re
 generation of eight native 32×32 injury icons; both clients resolve stable injury ids through `injury_icons/manifest.json`.
 The reusable phone `InjuryIcon` supports future menus. Prompts and generation provenance are in
 [the injury icon brief](superpowers/specs/2026-11-03-tactics-injury-icons.json).
+
+
+**Cozy camp vignette follow-up.** Camping now eases the cached world into a close view with real class job/rest animations,
+PixelLab shelter, bedrolls, bowls and animated fire/pot. One local warm light keeps the party readable under a much darker blue night.
+The phase strip and job counts derive from saved choices/results; the compact bottom ribbon shows HP/resources and injury badges.
+A saved 3-second sleep leads into an 8-second sunrise, both skippable by the leader. Morning persists outside camp using `RestSeq`;
+this does not implement a continuous day/night clock. The inn has a native pixel interior with seated class sprites and window light.
+See the [accepted presentation design](superpowers/specs/2026-11-03-tactics-camp-presentation-proposal.md) and
+[verification/preview](superpowers/reports/2026-11-03-camp-presentation/README.md).

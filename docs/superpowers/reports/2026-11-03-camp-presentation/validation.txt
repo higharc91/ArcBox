@@ -1,0 +1,128 @@
+/tmp/camp-vignette-final-build.log
+  ArcBox.Host -> /workspace/ArcBox/src/ArcBox.Host/.godot/mono/temp/bin/Debug/ArcBox.Host.dll
+  ArcBox.Sdk.Tests -> /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll
+  ArcBox.Server.Tests -> /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll
+  Tactics.World.Editor -> /workspace/ArcBox/tools/tactics-world/.godot/mono/temp/bin/Debug/Tactics.World.Editor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:31.63
+
+/tmp/camp-vignette-all-tests.log
+  /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (1m 28s 127ms)
+  /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (42s 357ms)
+  /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (1m 48s 255ms)
+  /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (647ms)
+
+  total: 5815
+  failed: 0
+  succeeded: 5815
+  skipped: 0
+  duration: 7m 47s 334ms
+
+/tmp/camp-vignette-final-game-tests.log
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (2m 01s 510ms)
+
+Test run summary: Passed!
+  total: 589
+  failed: 0
+  succeeded: 589
+  skipped: 0
+  duration: 2m 01s 739ms
+
+/tmp/camp-vignette-final-presentation-tests.log
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (2m 43s 857ms)
+
+Test run summary: Passed!
+  total: 2357
+  failed: 0
+  succeeded: 2357
+  skipped: 0
+  duration: 2m 44s 124ms
+
+/tmp/camp-vignette-web-tests.log
+    at teardownWindow (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+
+ Test Files  22 passed (22)
+      Tests  489 passed (489)
+   Start at  04:52:32
+   Duration  17.86s (transform 6.66s, setup 0ms, import 13.86s, tests 17.42s, environment 13.51s)
+
+
+/tmp/camp-vignette-web-build.log
+dist/assets/index-CAt8p4m9.js                                      47.47 kB │ gzip:  16.03 kB
+dist/assets/transport-DsaAlUWl.js                                  72.45 kB │ gzip:  19.77 kB
+dist/assets/index-BG5s8Dca.js                                      90.49 kB │ gzip:  30.14 kB
+dist/assets/flyover-Dw6hqjxH.js                                   537.65 kB │ gzip: 138.72 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.63s
+
+/tmp/camp-vignette-audio-tests.log
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+
+Original 44 phone fixtures compared against main f4a28fc5: byte-identical.
+Sunrise asset reproduced byte-identically from compose_dawn.py + audio.encode.
+
+
+{
+    "programs": [
+
+    ],
+    "stream_groups": [
+
+    ],
+    "streams": [
+        {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 720
+        },
+        {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 2
+        }
+    ],
+    "format": {
+        "duration": "55.000000",
+        "size": "7825690"
+    }
+}
+
+
+[Parsed_volumedetect_0 @ 0x7f518c002400] mean_volume: -22.5 dB
+[Parsed_volumedetect_0 @ 0x7f518c002400] max_volume: -4.5 dB
+
+Live six-phone Chapter 1, force branch, CAMP=1, exit 0:
+05:20:13 CAMP OK: voted, chose own jobs, resolved saved rolls, reached dawn
+05:23:07 INN OK: agreed night, paid for a room from an own purse, reached dawn
+[tv-e2e 05:26:27] letting the TV finish its shots (12 s)
+[tv-e2e 05:26:40] shots stopped
+[tv-e2e 05:26:40] TV stopped
+[tv-e2e 05:26:41] Xvfb stopped
+[tv-e2e 05:26:41] server stopped
+[tv-e2e 05:26:41] chapter: scenes: ch1_mayor (16), ch1_ford (19), ch1_dawn (4), ch1_bridge_cost (8), ch1_camp_reflection (4), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 05:26:41] chapter: lines: 98, said 94
+[tv-e2e 05:26:41] chapter: the fight: TACTICS screen tactics-battle-river_crossing (line 591)
+[tv-e2e 05:26:41] chapter: the card: Chapter I · The Bridge at the Ford (line 2832)
+[tv-e2e 05:26:41] chapter: the fights: Won at Storming the Ford
+[tv-e2e 05:26:41] chapter: 4 walks to a "!", 1 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 05:26:41] a shot of the chapter-card: /tmp/arcbox-camp-vignette-e2e/chapter/28-chapter-card.png
+[tv-e2e 05:26:41] a shot of the walking-after: /tmp/arcbox-camp-vignette-e2e/chapter/29-walking-after.png
+[tv-e2e 05:26:41] chapter: 29 shots in /tmp/arcbox-camp-vignette-e2e/chapter
+[tv-e2e 05:26:41] OK
