@@ -119,7 +119,8 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
     ImmutableArray<string> Played = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ThingCursor? Thing = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ThingCursor? Thing = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PersonCursor? Person = null)
 {
     /// <summary>The scenes before a fight, and all of a story beat's.</summary>
     public const string Lead = "lead";
@@ -133,6 +134,11 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
     /// <summary>The nodes played; never a default array.</summary>
     public ImmutableArray<string> Played { get => field.IsDefault ? [] : field; init; } = Played;
 }
+
+/// <summary>A named conversation and its starter, entry, underlying story cursor and deferred service.</summary>
+public sealed record PersonCursor(string Id, string By, string Entry,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Under = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Service = null);
 
 /// <summary>
 /// An interaction under way (interactables design §2.7): the thing, its state when the interaction began, which its scene is built from
@@ -182,7 +188,11 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RestReady = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CampSave? Camp = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int RestSeq = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> CampScenes = default)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> CampScenes = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
+    ImmutableSortedDictionary<string, long>? BarkCounters = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> QuestsRewarded = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PinnedQuest = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;

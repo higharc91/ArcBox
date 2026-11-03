@@ -130,7 +130,7 @@ public sealed partial class TacticsGame
     private Tile? SpotOf(ArcBeat beat) => _region?.Def.Beats.Where(b => b.Beat == beat.Id).Select(b => (Tile?)b.At).FirstOrDefault();
 
     /// <summary>The beat of the arc with this id, or null.</summary>
-    private ArcBeat? BeatNamed(string id) => StoryArc?.Beats.FirstOrDefault(b => b.Id == id);
+    private ArcBeat? BeatNamed(string? id) => StoryArc?.Beats.FirstOrDefault(b => b.Id == id);
 
     /// <summary>True while <paramref name="beat"/> is a battle waiting at its fight: its lead-in played, and it was lost, fled or never begun.</summary>
     private bool AtTheFight(ArcBeat beat) => Cursor is { Stage: StorySave.Fight } c && c.Beat == beat.Id;
@@ -164,7 +164,7 @@ public sealed partial class TacticsGame
     private ImmutableArray<CastView> CastOf()
     {
         if (_phase != TacticsPhase.Story || _telling is StoryStates.Card or StoryStates.Gap || _region is not { } region
-            || CurrentScene() is not { } scene || Cursor?.Node is not { } node || BeatNamed(scene.Beat) is not { } beat)
+            || CurrentScene() is not { } scene || Cursor?.Node is not { } node || (Cursor.Person is not null ? CursorBeat() : BeatNamed(scene.Beat)) is not { } beat)
             return [];
         var cast = SceneCast.Speakers(scene).Select(Lore.Character).OfType<LoreCharacter>().ToList();
         var by = SceneCast.SpeakersBy(scene, node).ToHashSet(StringComparer.Ordinal);
@@ -365,7 +365,7 @@ public sealed partial class TacticsGame
     {
         if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
-        var next = c.Thing is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
+        var next = c.Thing is not null || c.Person is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
         {
             StageDone();
@@ -395,6 +395,7 @@ public sealed partial class TacticsGame
     {
         if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
+        if (c.Person is not null) { FinishConversation(); return; }
         if (c.Thing is not null)
         {
             FinishInteraction();
@@ -446,6 +447,7 @@ public sealed partial class TacticsGame
                 RestReady = true,
             },
         };
+        PrepareQuestSave();
         KeepWorld();
         if (ChapterOver)
         {
@@ -545,6 +547,7 @@ public sealed partial class TacticsGame
         if (_doc.World?.Shop is not null) { ResumeShop(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
+        if (c.Person is not null) { ResumeConversation(c); return; }
         if (c.Thing is { } thing)
         {
             ResumeInteraction(c, thing);
@@ -856,6 +859,7 @@ public sealed partial class TacticsGame
         CloseQuestion();
         ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, beat));
+        ConversationAction(option);
         EnterNode(scene, SceneRun.Target(option));
     }
 
@@ -878,6 +882,7 @@ public sealed partial class TacticsGame
         var result = SkillCheck.Roll(die, bonus, check.Dc);
         ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, CursorBeat()));
+        ConversationAction(option);
         SetCursor(Cursor! with
         {
             Node = SceneRun.Target(option, result.Success), Line = 0,
@@ -953,15 +958,17 @@ public sealed partial class TacticsGame
         var world = _doc.World!;
         var all = world.Flags.Concat(flags).Distinct(StringComparer.Ordinal).ToImmutableArray();
         if (all.Length != world.Flags.Length)
+        {
             _doc = _doc with { World = world with { Flags = all } };
+        }
     }
 
     private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : Cursor is { Scene: { } id } c
-        ? c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
+        ? c.Person is not null ? Lore.Scene(id) : c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
         : null;
 
     /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
-    private ArcBeat CursorBeat() => Camp is not null || Cursor!.Thing is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
+    private ArcBeat CursorBeat() => Camp is not null || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 

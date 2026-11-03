@@ -92,6 +92,46 @@
       "preset": "Orus",
       "pitch": -2
     },
+    "townsfolk_barmaid": {
+      "preset": "Zephyr",
+      "pitch": 2
+    },
+    "townsfolk_child": {
+      "preset": "Laomedeia",
+      "pitch": 4
+    },
+    "townsfolk_farmer": {
+      "preset": "Charon",
+      "pitch": -2
+    },
+    "townsfolk_farmhand": {
+      "preset": "Achird",
+      "pitch": 2
+    },
+    "townsfolk_fisher": {
+      "preset": "Algenib",
+      "pitch": -2
+    },
+    "townsfolk_goblin_archer": {
+      "preset": "Enceladus",
+      "pitch": -3
+    },
+    "townsfolk_goblin_cutthroat": {
+      "preset": "Iapetus",
+      "pitch": -3
+    },
+    "townsfolk_goblin_spear": {
+      "preset": "Orus",
+      "pitch": -4
+    },
+    "townsfolk_guard": {
+      "preset": "Fenrir",
+      "pitch": -2
+    },
+    "townsfolk_merchant": {
+      "preset": "Zubenelgenubi",
+      "pitch": 2
+    },
     "vorga": {
       "preset": "Iapetus",
       "pitch": 1
@@ -237,6 +277,15 @@
     },
     "bark_dagna_holt_revived_1": {
       "main": "bark_dagna_holt_revived_1.51964b23.ogg"
+    },
+    "bark_dagna_holt_town_1": {
+      "main": "bark_dagna_holt_town_1.7ac0db21.ogg"
+    },
+    "bark_dagna_holt_town_2": {
+      "main": "bark_dagna_holt_town_2.26ec0bc2.ogg"
+    },
+    "bark_dagna_holt_town_3": {
+      "main": "bark_dagna_holt_town_3.43d579f7.ogg"
     },
     "bark_dagna_holt_turn_start_1": {
       "main": "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
@@ -427,6 +476,15 @@
     "bark_lark_miss_1": {
       "main": "bark_lark_miss_1.27e4a469.ogg"
     },
+    "bark_lark_town_1": {
+      "main": "bark_lark_town_1.8c84394e.ogg"
+    },
+    "bark_lark_town_2": {
+      "main": "bark_lark_town_2.47f3b804.ogg"
+    },
+    "bark_lark_town_3": {
+      "main": "bark_lark_town_3.75d76d50.ogg"
+    },
     "bark_lark_victory_1": {
       "main": "bark_lark_victory_1.14825b09.ogg"
     },
@@ -525,6 +583,15 @@
     },
     "bark_mother_skarrow_miss_1": {
       "main": "bark_mother_skarrow_miss_1.cb584b82.ogg"
+    },
+    "bark_mother_skarrow_town_1": {
+      "main": "bark_mother_skarrow_town_1.78f71d05.ogg"
+    },
+    "bark_mother_skarrow_town_2": {
+      "main": "bark_mother_skarrow_town_2.833a159c.ogg"
+    },
+    "bark_mother_skarrow_town_3": {
+      "main": "bark_mother_skarrow_town_3.75e2525f.ogg"
     },
     "bark_mother_skarrow_victory_1": {
       "main": "bark_mother_skarrow_victory_1.75c16ffb.ogg"
@@ -721,6 +788,12 @@
     "bark_pip_ashdown_town_4": {
       "main": "bark_pip_ashdown_town_4.8ec99094.ogg"
     },
+    "bark_pip_whistle_brought": {
+      "main": "bark_pip_whistle_brought.064f3858.ogg"
+    },
+    "bark_pip_whistle_left": {
+      "main": "bark_pip_whistle_left.8792a71e.ogg"
+    },
     "bark_rook_battle_start_1": {
       "main": "bark_rook_battle_start_1.e9ed23f6.ogg"
     },
@@ -879,6 +952,30 @@
     },
     "ch1_bridge_cost_song_2": {
       "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
+    },
+    "ch1_camp_hunger_1": {
+      "main": "ch1_camp_hunger_1.506f828b.ogg"
+    },
+    "ch1_camp_hunger_2": {
+      "main": "ch1_camp_hunger_2.750c194a.ogg"
+    },
+    "ch1_camp_open_1": {
+      "main": "ch1_camp_open_1.b7fd3291.ogg"
+    },
+    "ch1_camp_open_2": {
+      "main": "ch1_camp_open_2.43f35597.ogg"
+    },
+    "ch1_camp_truth_1": {
+      "main": "ch1_camp_truth_1.c769024e.ogg"
+    },
+    "ch1_camp_truth_2": {
+      "main": "ch1_camp_truth_2.f40316a9.ogg"
+    },
+    "ch1_camp_warmth_1": {
+      "main": "ch1_camp_warmth_1.3e92d833.ogg"
+    },
+    "ch1_camp_warmth_2": {
+      "main": "ch1_camp_warmth_2.8fe4d02a.ogg"
     },
     "ch1_dawn_open_1": {
       "main": "ch1_dawn_open_1.57455db3.ogg"
@@ -3396,6 +3493,288 @@
     },
     "say_warlord_bridge_5": {
       "main": "say_warlord_bridge_5.d98f0f5d.ogg"
+    },
+    "sq_bree_tallow_001": {
+      "main": "sq_bree_tallow_001.d1d46aac.ogg"
+    },
+    "sq_bree_tallow_002": {
+      "main": "sq_bree_tallow_002.2810075a.ogg"
+    },
+    "sq_bree_tallow_003": {
+      "main": "sq_bree_tallow_003.32cb52b3.ogg"
+    },
+    "sq_bree_tallow_004": {
+      "main": "sq_bree_tallow_004.08ffae32.ogg"
+    },
+    "sq_celandine_marrowby_001": {
+      "main": "sq_celandine_marrowby_001.f17a9a1c.ogg"
+    },
+    "sq_celandine_marrowby_002": {
+      "main": "sq_celandine_marrowby_002.c15624cf.ogg"
+    },
+    "sq_celandine_marrowby_003": {
+      "main": "sq_celandine_marrowby_003.51e9e194.ogg"
+    },
+    "sq_celandine_marrowby_004": {
+      "main": "sq_celandine_marrowby_004.44ec3c57.ogg"
+    },
+    "sq_celandine_marrowby_005": {
+      "main": "sq_celandine_marrowby_005.25070de1.ogg"
+    },
+    "sq_celandine_marrowby_006": {
+      "main": "sq_celandine_marrowby_006.78649698.ogg"
+    },
+    "sq_celandine_marrowby_007": {
+      "main": "sq_celandine_marrowby_007.6893ae17.ogg"
+    },
+    "sq_corvin_ashby_001": {
+      "main": "sq_corvin_ashby_001.21560473.ogg"
+    },
+    "sq_corvin_ashby_002": {
+      "main": "sq_corvin_ashby_002.ecea49cb.ogg"
+    },
+    "sq_corvin_ashby_003": {
+      "main": "sq_corvin_ashby_003.ca32291e.ogg"
+    },
+    "sq_corvin_ashby_004": {
+      "main": "sq_corvin_ashby_004.fb286043.ogg"
+    },
+    "sq_corvin_ashby_005": {
+      "main": "sq_corvin_ashby_005.8c017f33.ogg"
+    },
+    "sq_halden_varrow_001": {
+      "main": "sq_halden_varrow_001.e2925bf4.ogg"
+    },
+    "sq_halden_varrow_002": {
+      "main": "sq_halden_varrow_002.5a8db401.ogg"
+    },
+    "sq_halden_varrow_003": {
+      "main": "sq_halden_varrow_003.4cd573c2.ogg"
+    },
+    "sq_halden_varrow_004": {
+      "main": "sq_halden_varrow_004.8edf7763.ogg"
+    },
+    "sq_halden_varrow_005": {
+      "main": "sq_halden_varrow_005.dd300ceb.ogg"
+    },
+    "sq_halden_varrow_006": {
+      "main": "sq_halden_varrow_006.9590c1e8.ogg"
+    },
+    "sq_halden_varrow_007": {
+      "main": "sq_halden_varrow_007.33f77f39.ogg"
+    },
+    "sq_halden_varrow_008": {
+      "main": "sq_halden_varrow_008.5ac63204.ogg"
+    },
+    "sq_halden_varrow_009": {
+      "main": "sq_halden_varrow_009.e6dca9fd.ogg"
+    },
+    "sq_halden_varrow_010": {
+      "main": "sq_halden_varrow_010.4e64e47c.ogg"
+    },
+    "sq_mother_aubrine_001": {
+      "main": "sq_mother_aubrine_001.0052a19e.ogg"
+    },
+    "sq_mother_aubrine_002": {
+      "main": "sq_mother_aubrine_002.4d7a0c80.ogg"
+    },
+    "sq_mother_aubrine_003": {
+      "main": "sq_mother_aubrine_003.78b2f48e.ogg"
+    },
+    "sq_mother_aubrine_004": {
+      "main": "sq_mother_aubrine_004.8c311ef1.ogg"
+    },
+    "sq_narrator_001": {
+      "main": "sq_narrator_001.2e0e233a.ogg"
+    },
+    "sq_narrator_002": {
+      "main": "sq_narrator_002.fc6415c3.ogg"
+    },
+    "sq_narrator_003": {
+      "main": "sq_narrator_003.2c85b6c5.ogg"
+    },
+    "sq_narrator_004": {
+      "main": "sq_narrator_004.86c2cea9.ogg"
+    },
+    "sq_narrator_005": {
+      "main": "sq_narrator_005.0c7dd04a.ogg"
+    },
+    "sq_narrator_006": {
+      "main": "sq_narrator_006.167065c1.ogg"
+    },
+    "sq_narrator_007": {
+      "main": "sq_narrator_007.bf949727.ogg"
+    },
+    "sq_narrator_008": {
+      "main": "sq_narrator_008.2ade918c.ogg"
+    },
+    "sq_narrator_009": {
+      "main": "sq_narrator_009.12c6f268.ogg"
+    },
+    "sq_narrator_010": {
+      "main": "sq_narrator_010.c382061d.ogg"
+    },
+    "sq_narrator_011": {
+      "main": "sq_narrator_011.bbdc92d3.ogg"
+    },
+    "sq_narrator_012": {
+      "main": "sq_narrator_012.171b2639.ogg"
+    },
+    "sq_narrator_013": {
+      "main": "sq_narrator_013.91ccbf2e.ogg"
+    },
+    "sq_pip_ashdown_001": {
+      "main": "sq_pip_ashdown_001.ac1ef55b.ogg"
+    },
+    "sq_pip_ashdown_002": {
+      "main": "sq_pip_ashdown_002.313ddde7.ogg"
+    },
+    "sq_pip_ashdown_003": {
+      "main": "sq_pip_ashdown_003.d786fd62.ogg"
+    },
+    "sq_pip_ashdown_004": {
+      "main": "sq_pip_ashdown_004.55a46c04.ogg"
+    },
+    "sq_pip_ashdown_005": {
+      "main": "sq_pip_ashdown_005.925f72b5.ogg"
+    },
+    "sq_pip_ashdown_006": {
+      "main": "sq_pip_ashdown_006.90cff62b.ogg"
+    },
+    "sq_pip_ashdown_007": {
+      "main": "sq_pip_ashdown_007.120bacff.ogg"
+    },
+    "sq_pip_ashdown_008": {
+      "main": "sq_pip_ashdown_008.3610e712.ogg"
+    },
+    "sq_rook_001": {
+      "main": "sq_rook_001.d142b44b.ogg"
+    },
+    "sq_rook_002": {
+      "main": "sq_rook_002.9d30c961.ogg"
+    },
+    "sq_rook_003": {
+      "main": "sq_rook_003.804f3bfa.ogg"
+    },
+    "sq_rook_004": {
+      "main": "sq_rook_004.b1e13f17.ogg"
+    },
+    "sq_tobin_fell_001": {
+      "main": "sq_tobin_fell_001.2edc9806.ogg"
+    },
+    "sq_tobin_fell_002": {
+      "main": "sq_tobin_fell_002.c3c88e85.ogg"
+    },
+    "sq_tobin_fell_003": {
+      "main": "sq_tobin_fell_003.0df9c3fd.ogg"
+    },
+    "sq_tobin_fell_004": {
+      "main": "sq_tobin_fell_004.18a08c9e.ogg"
+    },
+    "sq_tobin_fell_005": {
+      "main": "sq_tobin_fell_005.fc27494e.ogg"
+    },
+    "sq_tobin_fell_006": {
+      "main": "sq_tobin_fell_006.16aba1c5.ogg"
+    },
+    "sq_tobin_fell_007": {
+      "main": "sq_tobin_fell_007.05fe394e.ogg"
+    },
+    "sq_tobin_fell_008": {
+      "main": "sq_tobin_fell_008.463aa699.ogg"
+    },
+    "town_barmaid_1": {
+      "main": "town_barmaid_1.ae904edb.ogg"
+    },
+    "town_barmaid_2": {
+      "main": "town_barmaid_2.c9333086.ogg"
+    },
+    "town_barmaid_3": {
+      "main": "town_barmaid_3.eadaabc4.ogg"
+    },
+    "town_child_1": {
+      "main": "town_child_1.9ce7845d.ogg"
+    },
+    "town_child_2": {
+      "main": "town_child_2.ee14683c.ogg"
+    },
+    "town_child_3": {
+      "main": "town_child_3.e6998aad.ogg"
+    },
+    "town_farmer_1": {
+      "main": "town_farmer_1.b6a1bc49.ogg"
+    },
+    "town_farmer_2": {
+      "main": "town_farmer_2.baa174aa.ogg"
+    },
+    "town_farmer_3": {
+      "main": "town_farmer_3.4602ed8a.ogg"
+    },
+    "town_farmer_ford_open": {
+      "main": "town_farmer_ford_open.5c265c35.ogg"
+    },
+    "town_farmhand_1": {
+      "main": "town_farmhand_1.ce64d693.ogg"
+    },
+    "town_farmhand_2": {
+      "main": "town_farmhand_2.e8f5035a.ogg"
+    },
+    "town_farmhand_3": {
+      "main": "town_farmhand_3.78410f57.ogg"
+    },
+    "town_fisher_1": {
+      "main": "town_fisher_1.58db0875.ogg"
+    },
+    "town_fisher_2": {
+      "main": "town_fisher_2.89b18b66.ogg"
+    },
+    "town_fisher_3": {
+      "main": "town_fisher_3.e3b6c06c.ogg"
+    },
+    "town_goblin_archer_1": {
+      "main": "town_goblin_archer_1.ce727baa.ogg"
+    },
+    "town_goblin_archer_2": {
+      "main": "town_goblin_archer_2.0b14a208.ogg"
+    },
+    "town_goblin_archer_3": {
+      "main": "town_goblin_archer_3.3092fca3.ogg"
+    },
+    "town_goblin_cutthroat_1": {
+      "main": "town_goblin_cutthroat_1.f0346326.ogg"
+    },
+    "town_goblin_cutthroat_2": {
+      "main": "town_goblin_cutthroat_2.14332864.ogg"
+    },
+    "town_goblin_cutthroat_3": {
+      "main": "town_goblin_cutthroat_3.68f58196.ogg"
+    },
+    "town_goblin_spear_1": {
+      "main": "town_goblin_spear_1.39123c92.ogg"
+    },
+    "town_goblin_spear_2": {
+      "main": "town_goblin_spear_2.2c70e85e.ogg"
+    },
+    "town_goblin_spear_3": {
+      "main": "town_goblin_spear_3.7a162de0.ogg"
+    },
+    "town_guard_1": {
+      "main": "town_guard_1.9747c5b4.ogg"
+    },
+    "town_guard_2": {
+      "main": "town_guard_2.1a5ba8bc.ogg"
+    },
+    "town_guard_3": {
+      "main": "town_guard_3.8844e25a.ogg"
+    },
+    "town_merchant_1": {
+      "main": "town_merchant_1.29d3285f.ogg"
+    },
+    "town_merchant_2": {
+      "main": "town_merchant_2.2093ebdf.ogg"
+    },
+    "town_merchant_3": {
+      "main": "town_merchant_3.7f14b3d7.ogg"
     },
     "voice_earnest_ally_down_1": {
       "high": "voice_earnest_ally_down_1.df179278.ogg",

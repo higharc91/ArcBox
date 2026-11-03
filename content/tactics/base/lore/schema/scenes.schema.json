@@ -26,7 +26,7 @@
         },
         "beat": {
           "$ref": "common.schema.json#/$defs/id",
-          "description": "The arcs.json beat this scene plays out. A beat can have several scenes (an approach, the beat itself, an aftermath)."
+          "description": "Optional: the arcs.json beat this scene plays out; omit for an interaction hook. A beat can have several scenes (an approach, the beat itself, an aftermath)."
         },
         "place": {
           "$ref": "common.schema.json#/$defs/id",
@@ -69,7 +69,6 @@
       },
       "required": [
         "id",
-        "beat",
         "cast",
         "start",
         "nodes"
@@ -245,6 +244,33 @@
           "minimum": -2147483647,
           "maximum": 2147483647,
           "description": "Party gold gained or spent once when resolved."
+        },
+        "unless": {
+          "$ref": "common.schema.json#/$defs/flags"
+        },
+        "give": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "service": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "quest": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            "advance": {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            "complete": {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            "stage": {
+              "$ref": "common.schema.json#/$defs/id"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [

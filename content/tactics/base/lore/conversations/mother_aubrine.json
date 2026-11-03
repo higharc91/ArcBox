@@ -1,0 +1,88 @@
+{
+  "id": "talk_mother_aubrine",
+  "character": "mother_aubrine",
+  "title": "Mother Aubrine",
+  "cast": [
+    "mother_aubrine"
+  ],
+  "start": "greet",
+  "entries": [
+    {
+      "node": "greet",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "greet",
+      "lines": [
+        {
+          "id": "sq_mother_aubrine_001",
+          "speaker": "mother_aubrine",
+          "text": "Come in out of the draught. You need not have the right words to rest here.",
+          "mood": "idle",
+          "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism."
+        }
+      ],
+      "options": [
+        {
+          "id": "healing",
+          "label": "We need the chapel's healing services.",
+          "to": "service",
+          "service": "af_chapel"
+        },
+        {
+          "id": "faith",
+          "label": "What keeps the Hearth burning?",
+          "to": "faith"
+        },
+        {
+          "id": "leave",
+          "label": "Thank you, Mother.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "service",
+      "lines": [
+        {
+          "id": "sq_mother_aubrine_002",
+          "speaker": "mother_aubrine",
+          "text": "Set down what hurts. We will speak plainly about the work and its cost.",
+          "mood": "idle",
+          "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "faith",
+      "lines": [
+        {
+          "id": "sq_mother_aubrine_003",
+          "speaker": "mother_aubrine",
+          "text": "Hands that tend it. Someone bringing wood when someone else cannot. Faith is not a reason to leave your neighbour cold.",
+          "mood": "idle",
+          "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_mother_aubrine_004",
+          "speaker": "mother_aubrine",
+          "text": "Go gently. Come back if you cannot.",
+          "mood": "idle",
+          "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

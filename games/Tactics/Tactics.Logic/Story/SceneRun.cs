@@ -54,7 +54,7 @@ public static class SceneRun
     /// Without it, a hub nobody answers would take its first question for ever (5d plan, default 3 and the user's decision 2).
     /// </summary>
     public static ImmutableArray<SceneOption> Offered(SceneNode node, IReadOnlySet<string> flags, PartyTags tags, IReadOnlySet<string> played)
-        => [.. node.Options.Where(o => o.Requires.All(flags.Contains) && tags.Match(o.Tags) && !o.Targets.Any(played.Contains))];
+        => [.. node.Options.Where(o => o.Requires.All(flags.Contains) && (o.Unless.IsDefault || !o.Unless.Any(flags.Contains)) && tags.Match(o.Tags) && !o.Targets.Any(played.Contains))];
 
     /// <summary>
     /// What a question nobody answers takes, from what's <paramref name="offered"/>: a vote takes the first option, as the spec says, and

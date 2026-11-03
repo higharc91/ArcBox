@@ -4051,9 +4051,21 @@
       "text": "See? Taking works. Asking never fed anybody."
     },
     "Iapetus.ca4cdd62": {
-      "asset": "asset_uUJ57PovpVaDi9VAgpLcrvZX",
+      "line": "say_warlord_bridge_2",
+      "speaker": "vorga",
       "preset": "Iapetus",
-      "text": "Archers, to the ridge!"
+      "text": "Archers, to the ridge!",
+      "renderText": "Archers, to the ridge!",
+      "delivery": null,
+      "asset": "asset_PRPNZ4DpcwrwtmxQQo1LLg7d",
+      "job": "job_cYH7ZfettJnwv2WzYFdo6qkt",
+      "creativeUnits": 1,
+      "issue": 73,
+      "previous": {
+        "asset": "asset_uUJ57PovpVaDi9VAgpLcrvZX",
+        "preset": "Iapetus",
+        "text": "Archers, to the ridge!"
+      }
     },
     "Iapetus.cb5b3b6c": {
       "asset": "asset_1PsGGXpMV9Q428wANrrhrg4V",
@@ -6564,6 +6576,3560 @@
       "asset": "asset_vckume6i3KutvuVupbBptSfA",
       "preset": "Zubenelgenubi",
       "text": "Rude of them to stand there."
+    },
+    "Charon.9f2d4194": {
+      "line": "sq_halden_varrow_001",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_7Vium7hhEtMKWE9PGJ5EQbTh",
+      "job": "job_we99A1jCZCBTvi43uF5iFSJF",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.63824fa8": {
+      "line": "sq_tobin_fell_001",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_eWWYHUkhUxo3QCbv3QnnMece",
+      "job": "job_3ygEbvux5CDqTuUtXsnc9SWc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.945e2eab": {
+      "line": "bark_pip_whistle_left",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "We could visit Annet again. I will bring something to wipe the stone.",
+      "renderText": "<Bright child voice, softly earnest, no mysterious undertone. Mood: idle.> We could visit Annet again. I will bring something to wipe the stone.",
+      "delivery": {
+        "direction": "Bright child voice, softly earnest, no mysterious undertone.",
+        "mood": "idle"
+      },
+      "asset": "asset_WNVPJJXNfJPdHR8RPaWCFDbj",
+      "job": "job_iNGRHDpTFDKm7wQSXFtEPcpn",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.b12da047": {
+      "line": "town_farmer_1",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Frost in the furrows again. Ground ought to be warming by now.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> Frost in the furrows again. Ground ought to be warming by now.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_mYk1NN7EcbNetWTGkjvdZHAv",
+      "job": "job_pxgHdcbnQ2XRrYkxMC3mfrCx",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.5dffa632": {
+      "line": "town_goblin_spear_1",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Stay your side. I will stay mine.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Stay your side. I will stay mine.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_Cve9WEfwN5rCjfFCCPAQu2SJ",
+      "job": "job_2egrUb4QWRZ4wZb9grFJoF21",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Sadachbia.efd22717": {
+      "line": "sq_corvin_ashby_001",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "The river steams, the soil chills, and everyone calls it weather. Forgive me. What did you want to ask?",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> The river steams, the soil chills, and everyone calls it weather. Forgive me. What did you want to ask?",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_ES69HgZ38Dr7PKNKxs35YMvJ",
+      "job": "job_qQcjnereemtifgPPJvPUwToc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.079f1599": {
+      "line": "bark_pip_whistle_brought",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "I kept the whistle safe. Next time I visit, I will take it with me.",
+      "renderText": "<Bright child voice, quietly proud and careful. Mood: happy.> I kept the whistle safe. Next time I visit, I will take it with me.",
+      "delivery": {
+        "direction": "Bright child voice, quietly proud and careful.",
+        "mood": "happy"
+      },
+      "asset": "asset_LMeLfZVuDCJuZjJphkPubknn",
+      "job": "job_A9P1HLPx6fzADWrQzqDxAaUd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.d6a6421c": {
+      "line": "ch1_camp_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Beyond the firelight, the river keeps talking. No one has quite found the courage to sleep.",
+      "renderText": "Beyond the firelight, the river keeps talking. No one has quite found the courage to sleep.",
+      "delivery": null,
+      "asset": "asset_WD79xgcsSg5rpCcsVKty6v5h",
+      "job": "job_8SmvGGSRkJsXJYik3zCHiVr2",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Callirrhoe.717065b6": {
+      "line": "ch1_camp_open_2",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "renderText": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "delivery": null,
+      "asset": "asset_TNhd1o77Scj3k5rRuuhqzHTr",
+      "job": "job_osW6Ttq1N2oy3Nf2EnVAnoHJ",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Callirrhoe.86a9cad8": {
+      "line": "ch1_camp_hunger_1",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "renderText": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "delivery": null,
+      "asset": "asset_7J8ctfp1ababhKRx7gKL5w9f",
+      "job": "job_zXVcz6jqeRREg3dLXrJRHdM5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.9567fba5": {
+      "line": "ch1_camp_hunger_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A log settles. Someone passes the pot without being asked.",
+      "renderText": "A log settles. Someone passes the pot without being asked.",
+      "delivery": null,
+      "asset": "asset_K8GQQP6atQvK8Uygrgu7z2oZ",
+      "job": "job_B4rfNfbf5dE9ULdi8DaWoPDo",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Callirrhoe.7cae8c94": {
+      "line": "ch1_camp_truth_1",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "renderText": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "delivery": null,
+      "asset": "asset_QoztPntzsYzXMuJRmnLpQ7Eb",
+      "job": "job_bRuUzGt72dxEN1utudYb4xj4",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Algieba.b33cef6f": {
+      "line": "ch1_camp_truth_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The fire gives everyone the same small share of warmth. For once, nobody has locked it away.",
+      "renderText": "The fire gives everyone the same small share of warmth. For once, nobody has locked it away.",
+      "delivery": null,
+      "asset": "asset_MCSNN6g9yauXFJYgtYMrtyPd",
+      "job": "job_fi7n8zgZtqMLnrUCK4XoRWY3",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Algieba.c4475a81": {
+      "line": "ch1_camp_warmth_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Maud's words return with the smell of woodsmoke: warmth was lent, not given. You look into the coals a little differently.",
+      "renderText": "Maud's words return with the smell of woodsmoke: warmth was lent, not given. You look into the coals a little differently.",
+      "delivery": null,
+      "asset": "asset_E2jWNJiE5yNczytpy5GRwuVh",
+      "job": "job_phYxhViEPSYxDw1AMbZF9CNX",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Callirrhoe.83528ce4": {
+      "line": "ch1_camp_warmth_2",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Then we'd better learn how to give something back.",
+      "renderText": "Then we'd better learn how to give something back.",
+      "delivery": null,
+      "asset": "asset_ZfEioM59EHMsBj7eR3MSaBFM",
+      "job": "job_Dc4EfoTfp3fVZqWfRhy15pzy",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Charon.12618c91": {
+      "line": "town_farmer_2",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "You can count the seed twice. It will not make a second harvest.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> You can count the seed twice. It will not make a second harvest.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_yRCBoaBu8111gEATANRekDT3",
+      "job": "job_kHetgqYDKFchQgLgyYsAn1AT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.5febc775": {
+      "line": "town_farmer_3",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Mind the rows, friend. There is still something living here.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> Mind the rows, friend. There is still something living here.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_ESPv9nB8P2aActoVaY26Umwk",
+      "job": "job_KArkERcG66kZ7XoyVXixtCos",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.ed67b469": {
+      "line": "town_farmer_ford_open",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Bridge is open. Now let us see if the seed gets through.",
+      "renderText": "<plain, weathered, a small cautious relief Mood: happy.> Bridge is open. Now let us see if the seed gets through.",
+      "delivery": {
+        "direction": "plain, weathered, a small cautious relief",
+        "mood": "happy"
+      },
+      "asset": "asset_tPp4yyZi4q1uXZfnVBYchVqS",
+      "job": "job_SFhXU35twhsoFivZ4S5HZYE9",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Achird.31d6cbdf": {
+      "line": "town_farmhand_1",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "Another sack carried uphill. Same empty bowl down here.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> Another sack carried uphill. Same empty bowl down here.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_9gebD4erKSLykfHm8WSYLPpR",
+      "job": "job_CYUpZkysZqGJuuBR5MQwm7zu",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Achird.49445d08": {
+      "line": "town_farmhand_2",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "If talk were kindling, the Ash Market would heat the Vale.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> If talk were kindling, the Ash Market would heat the Vale.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_U5suahNueF5bZtT2yShmGCJv",
+      "job": "job_ZhprbQfwCAe5ZRsHMvin85QG",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Achird.be122c5a": {
+      "line": "town_farmhand_3",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "They pay by the day. Funny how the days keep getting longer.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> They pay by the day. Funny how the days keep getting longer.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_C5ydsvV2A6twgsjXAz6fgA6T",
+      "job": "job_dExAbwsmUPdEZbExFVCsxCEz",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Algenib.258b4dd7": {
+      "line": "town_fisher_1",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "River steams, nets come up cold. Tell me how that works.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> River steams, nets come up cold. Tell me how that works.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_8wU1F5iyTTkF5xAJ5pCbtpTG",
+      "job": "job_tx8bRi4jyV2yjqfnL31mVJqZ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algenib.2482f729": {
+      "line": "town_fisher_2",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Do not whistle over the water. Let it keep its own counsel.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Do not whistle over the water. Let it keep its own counsel.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_bPWkKx8n4LRaEf3hUYE747tX",
+      "job": "job_xAiGJmAq3m1on8DgjmJLY5qw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algenib.7e7562ba": {
+      "line": "town_fisher_3",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Used to take two hands to lift this net. Now one will do.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Used to take two hands to lift this net. Now one will do.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_pXtPeQPqSgGRqA1GbNcp6d3x",
+      "job": "job_atFTwG5RKw2Gv8k5aisw9g1t",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zubenelgenubi.b7b73a01": {
+      "line": "town_merchant_1",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Road is shut, cart is empty. That is the price of it.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Road is shut, cart is empty. That is the price of it.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_Zp7SCdWNV6XPtUxeC25Gr3vz",
+      "job": "job_uEbnFZNQD2tZKmmT232WE2b5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zubenelgenubi.e61dbb1b": {
+      "line": "town_merchant_2",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Coin is welcome. A clear road would be better.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Coin is welcome. A clear road would be better.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_4Ndka6UXffAbNcg4vndCM2ok",
+      "job": "job_iueG332ryy2pPZHeVDXBq8cR",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Zubenelgenubi.3da2fb67": {
+      "line": "town_merchant_3",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Look all you like. I remember when people bought things too.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Look all you like. I remember when people bought things too.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_HRyKRrB9uXCw9MtYjbTFGqNn",
+      "job": "job_NzgAsgKRBFnYemKnw2Z4UBFt",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Fenrir.fff33d43": {
+      "line": "town_guard_1",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Captain says hold here. So here is where I hold.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Captain says hold here. So here is where I hold.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_RTJR99cBACVTdMigfTinwzCA",
+      "job": "job_56mrtFAW1XjkDDRZee8skJrG",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Fenrir.20e52730": {
+      "line": "town_guard_2",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Keep a light by your door tonight. Just in case.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Keep a light by your door tonight. Just in case.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_ttk4fFqRH5rw4s2dEuF7YYGY",
+      "job": "job_3LVKtjTTf9LW8kn4jTfwTnfH",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Fenrir.437897fa": {
+      "line": "town_guard_3",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Bridge watch was a good posting once.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Bridge watch was a good posting once.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_5Xmj3sj3Q8kHtxfnRCwCB5jX",
+      "job": "job_SSEenAT7bv7zD23MAya34dtV",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Zephyr.136a87e7": {
+      "line": "town_barmaid_1",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Hot bowls to the left. Wet boots stay by the door.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> Hot bowls to the left. Wet boots stay by the door.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_2KgzUbog8c3mYSdwr2dhWejV",
+      "job": "job_DwkeAdARvbWxA9NYs3x3xdug",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Zephyr.4e0f17b1": {
+      "line": "town_barmaid_2",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Bree keeps the fire going. We keep everyone fed.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> Bree keeps the fire going. We keep everyone fed.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_JPbZeBitQLq5ZtLj9qtxzm1A",
+      "job": "job_niBX2LXoaRUwdDD5wAmEdmoT",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Zephyr.d1f7dd5e": {
+      "line": "town_barmaid_3",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "An empty cup is easy fixed. The rest takes listening.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> An empty cup is easy fixed. The rest takes listening.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_cJrAnetvnHxVVQZF1Gx1bLtq",
+      "job": "job_oG7HG7E4Y4nHcPsxio7axPeo",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Laomedeia.7b26fc3e": {
+      "line": "town_child_1",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Bet you cannot jump that puddle with all that armour.",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> Bet you cannot jump that puddle with all that armour.",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_i5wY3CLTvxqkyMH5X2rzsAjS",
+      "job": "job_1trX36anf9grCJRk1jQgF7vU",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Laomedeia.7383d38d": {
+      "line": "town_child_2",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "We are playing bridge guards. Nobody wants to be the bridge.",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> We are playing bridge guards. Nobody wants to be the bridge.",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_1bjaNDbc9tqj45YA7BpaedH4",
+      "job": "job_owARL3CFoxHdqqMCj1paqD6T",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Laomedeia.0ca9aa1b": {
+      "line": "town_child_3",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Have you seen a frog today? A proper big one?",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> Have you seen a frog today? A proper big one?",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_Fkv7zWNwu25QFDYFqz1KXt6b",
+      "job": "job_46dMYEpGtWRzviWruvUB5k5L",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Enceladus.df72bffc": {
+      "line": "town_goblin_archer_1",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Hands where I can see them. Food where I can smell it.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Hands where I can see them. Food where I can smell it.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_Heg9g9gDEbhZjvGRzcVMawr8",
+      "job": "job_F5MXcAYbNr8sN1gBgsE1qReJ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Enceladus.fcd074c7": {
+      "line": "town_goblin_archer_2",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Your river? Funny. It runs past our camp too.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Your river? Funny. It runs past our camp too.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_Pgkqc3mhRWwWr9MXXjB6ssHZ",
+      "job": "job_w2dBz9TNapmC6jrCJ5gzuUmf",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Enceladus.009ebcdf": {
+      "line": "town_goblin_archer_3",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Bowstring hates this damp. So do I.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Bowstring hates this damp. So do I.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_3m4Uc28fUcXkcMM6FmgoCgYe",
+      "job": "job_Rmqww9Nufew7n1xrv3qYKQAE",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Iapetus.f97dde3d": {
+      "line": "town_goblin_cutthroat_1",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Fine boots. Must be warm having two good ones.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Fine boots. Must be warm having two good ones.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_7Y6iM98Be81UWophxX5mGQrt",
+      "job": "job_3qGiqky9AHjKEerWeL7xxN4Z",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Iapetus.61e28b4e": {
+      "line": "town_goblin_cutthroat_2",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Town locks its grain. Calls us thieves. Clever town.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Town locks its grain. Calls us thieves. Clever town.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_csfKg5bZhiTaHHSMirQniZ1m",
+      "job": "job_m3KdJFVcVGqbfUYx9GqJAMEh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Iapetus.f108aa63": {
+      "line": "town_goblin_cutthroat_3",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Easy now. I am only looking. You do that too.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Easy now. I am only looking. You do that too.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_GA3k1eEKJENCnk7XGLcAk7F9",
+      "job": "job_9ZUDWtehoknfDrSSPDHhagA2",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Orus.b6895647": {
+      "line": "town_goblin_spear_2",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Spear is light. Empty belly is heavy.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Spear is light. Empty belly is heavy.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_f3jToLxxmduMwkyz2thnNaaQ",
+      "job": "job_VXjdkfERNgev6pZSXDWvxCvt",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    "Orus.5fbe522b": {
+      "line": "town_goblin_spear_3",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Mother says watch the ford. I watch the ford.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Mother says watch the ford. I watch the ford.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_p1m9MH9SEZHuuJypcVuWbFwK",
+      "job": "job_ZimSG5QNL7pkm57QSL2FRGL6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.481be0f7": {
+      "line": "sq_halden_varrow_002",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The stores must last the winter. That is my responsibility. If you find a cut sack, follow the grain, not the rumours.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The stores must last the winter. That is my responsibility. If you find a cut sack, follow the grain, not the rumours.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_FfKoNKSYZHrzHNJCsogKj88B",
+      "job": "job_yCoqsM1sX4hnHFmQzhG2vqyc",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Charon.76438b67": {
+      "line": "sq_halden_varrow_003",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "You know what I kept from the town. I cannot put that right with another speech. Find where those seed sacks went; I will see that this account is answered.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> You know what I kept from the town. I cannot put that right with another speech. Find where those seed sacks went; I will see that this account is answered.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_e4aNHDNV4VwZ3Md3sxqM8APJ",
+      "job": "job_YgYGirr8xttveoD8QieyJLU1",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Charon.44c3b3aa": {
+      "line": "sq_halden_varrow_004",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Start with the seed sacks beside the granary. The Ash Market keeps a tally of everything it carries.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Start with the seed sacks beside the granary. The Ash Market keeps a tally of everything it carries.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_bwmra7VdeHgpF8ktKP7BChzV",
+      "job": "job_HktNEimBBBcEXmRsgbuMywJz",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.e0ac2c28": {
+      "line": "sq_halden_varrow_005",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The seed stores, then the market tally. Bring me something I can act on, and I will pay for your trouble.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The seed stores, then the market tally. Bring me something I can act on, and I will pay for your trouble.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_Bnjva2eSc385bdhLzhDSKL5f",
+      "job": "job_FGB5rynb72XBRSfZCtF6LvNT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.40ca512d": {
+      "line": "sq_halden_varrow_006",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "A market mark on town seed. I had hoped for a simpler answer. Will you leave the account with me, or take it to Lady Marrowby?",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> A market mark on town seed. I had hoped for a simpler answer. Will you leave the account with me, or take it to Lady Marrowby?",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_8UC6nvN4ecnzY455nxA1fSp9",
+      "job": "job_GJ5gKeCGb87DjVXXWew7Kd5K",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Charon.46c7e6ae": {
+      "line": "sq_halden_varrow_007",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "I will have the sacks counted in daylight, with witnesses. Your payment comes from my purse. Let us begin with that much honesty.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> I will have the sacks counted in daylight, with witnesses. Your payment comes from my purse. Let us begin with that much honesty.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_bECH8PwY4a43zi9tfmVfz9oj",
+      "job": "job_E8zGqNhKjoie9imyb4V5i1N1",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Charon.a084dcfe": {
+      "line": "sq_halden_varrow_008",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Then take the tally. She respects a written account, even when she dislikes the sum.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Then take the tally. She respects a written account, even when she dislikes the sum.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_rumn5x3kMRes7RigAcaZppT9",
+      "job": "job_ubn5vSgykuo3UDxZ1HAqYtvk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.b469de01": {
+      "line": "sq_halden_varrow_009",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The seed has been counted. This time the town saw the count. Thank you.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The seed has been counted. This time the town saw the count. Thank you.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_Sns7jKc82n2KZrVprkCUD8Qq",
+      "job": "job_dGgByPaJaEkKrS5DUJgJzPit",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Charon.e5f79050": {
+      "line": "sq_halden_varrow_010",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Keep warm. We have work enough for tomorrow.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Keep warm. We have work enough for tomorrow.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_mHCGbSuBj1Po7TSiCynKeutf",
+      "job": "job_h3LoLGueaF9TTpt9b6YazYnc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zephyr.956b3ff0": {
+      "line": "sq_bree_tallow_001",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Sit if you are sitting, help if you are standing. I have bowls to fill and rooms upstairs. What do you need?",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> Sit if you are sitting, help if you are standing. I have bowls to fill and rooms upstairs. What do you need?",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_5Pc7F4PDS2hT963wPvrLyLMV",
+      "job": "job_LzQT9tyMX5yA2F4y8FnnQSgN",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zephyr.74e941e8": {
+      "line": "sq_bree_tallow_002",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "A room, a hot bowl, and a door that shuts. We will sort out who is staying.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> A room, a hot bowl, and a door that shuts. We will sort out who is staying.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_RzpBCY4D3BKpTYbaBPjbo7LN",
+      "job": "job_wmkE81D4f91u7UHHuXrWh2iY",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zephyr.851dcde8": {
+      "line": "sq_bree_tallow_003",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "People come in talking about the cold and go out talking about the stew. I can manage one of those problems.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> People come in talking about the cold and go out talking about the stew. I can manage one of those problems.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_S7gYxc5GzMVkmWaRrR1UzycA",
+      "job": "job_dQKoAzSBkJWSHh4j6no9Zm5i",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Zephyr.b295aab5": {
+      "line": "sq_bree_tallow_004",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Mind your scarf. Wind is getting into everything.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> Mind your scarf. Wind is getting into everything.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_Yh17228tEvgQe2xK37vKUjtv",
+      "job": "job_1XMEjhgufxZkdYQHyt1R6Gv7",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Vindemiatrix.17612cbb": {
+      "line": "sq_mother_aubrine_001",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Come in out of the draught. You need not have the right words to rest here.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Come in out of the draught. You need not have the right words to rest here.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_fGG3u4a441qDuhjq2fcRzS3g",
+      "job": "job_5Gs6cUdH7SaGRHrw5EZqoRo6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Vindemiatrix.2218ff98": {
+      "line": "sq_mother_aubrine_002",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Set down what hurts. We will speak plainly about the work and its cost.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Set down what hurts. We will speak plainly about the work and its cost.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_9jwLTqnVyRVqzUZRE9NReFnn",
+      "job": "job_VxBtyEyj77gEDM426HveQkCg",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Vindemiatrix.b35c7361": {
+      "line": "sq_mother_aubrine_003",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Hands that tend it. Someone bringing wood when someone else cannot. Faith is not a reason to leave your neighbour cold.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Hands that tend it. Someone bringing wood when someone else cannot. Faith is not a reason to leave your neighbour cold.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_rvuvEePYWmvkkDsy7LboFW33",
+      "job": "job_1vQK2UTJsjGB8DYiwS8g6z9z",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Vindemiatrix.bbbe8ad6": {
+      "line": "sq_mother_aubrine_004",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Go gently. Come back if you cannot.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Go gently. Come back if you cannot.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_MNwbb71QEjFhrPhCXh8WkUY7",
+      "job": "job_G7EZd1vqaepa7SC5j8ftW3Xh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.c11d6fae": {
+      "line": "sq_tobin_fell_002",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_u6LLVKkpMgPw5UPw6VMWPfHD",
+      "job": "job_ufwQ3he8tuLmJCZfXGNGYrAk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.5402397d": {
+      "line": "sq_tobin_fell_003",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_2bZ55DC6TezFziUfML6b94JN",
+      "job": "job_21NjdjLxBRo8bQkMmpZ8F24o",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.6b5b2aa6": {
+      "line": "sq_tobin_fell_004",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_YXugPm8U7T4fb1EZQSFw3mkE",
+      "job": "job_DmKNpEom8LonPbZLmvmUadfi",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.602a7891": {
+      "line": "sq_tobin_fell_005",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_r9UG6bh7Lm3y4p1Sk77fXNw3",
+      "job": "job_ePd3T1UWp1pqfvPb61VFPaPd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.9e0b100f": {
+      "line": "sq_tobin_fell_006",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_Me79aB1FbyHrmy1sguzSzVHv",
+      "job": "job_WRFtvU8RBYwVrpNpB8r6161N",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.18e2a006": {
+      "line": "sq_tobin_fell_007",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Still needs tending. But it is a fire I can pay for.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Still needs tending. But it is a fire I can pay for.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_32Kz1MLyA7pyv3NMSy4bHRbk",
+      "job": "job_vNMUGokangMcApokUhynfknA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.8463a20a": {
+      "line": "sq_tobin_fell_008",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Shut the door behind you. Saves what heat there is.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Shut the door behind you. Saves what heat there is.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_mrvifCMauyccB5noz21gKEXq",
+      "job": "job_zHaNRnaJ3UWmpCKtajkntyfb",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.2e0b4eeb": {
+      "line": "sq_pip_ashdown_001",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Annet was a guard. She had a whistle, a proper one. I think it is by her stone. Would you look? I do not want somebody treading on it.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Annet was a guard. She had a whistle, a proper one. I think it is by her stone. Would you look? I do not want somebody treading on it.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_c5z8uChoVN2wGAjY56xhDJLE",
+      "job": "job_9gwAkQjXSS2tpFDYmUB7rYRu",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Leda.d8736201": {
+      "line": "sq_pip_ashdown_002",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Thank you. Do not make it into a dare. It is her place.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Thank you. Do not make it into a dare. It is her place.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_jjE27S3BXnyESnwnynHxFV4y",
+      "job": "job_KhnzBPaB4DJa7afgcWjePPnk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.3795c134": {
+      "line": "sq_pip_ashdown_003",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Annet's stone, near the other graves. You will know it.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Annet's stone, near the other graves. You will know it.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_tVFCPazJKvwinhLjDxcT5J35",
+      "job": "job_3uyH6spS12ZkS1Z6qM1msCbb",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.6abe7082": {
+      "line": "sq_pip_ashdown_004",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "You found it. May I hold it? I will not blow it here.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> You found it. May I hold it? I will not blow it here.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_fg7jazaX7QsmBhyXMzZUfbkp",
+      "job": "job_JkywaanMLMnckCLbeTyAEcSG",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.450c384d": {
+      "line": "sq_pip_ashdown_005",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "It is heavier than I thought. I will take it back when I visit her. Promise.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> It is heavier than I thought. I will take it back when I visit her. Promise.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_6D5K2o17yAQk85WVThfi6bWK",
+      "job": "job_nsC76XG3YCjRTyAPhnkRhdQB",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.812de2d8": {
+      "line": "sq_pip_ashdown_006",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "You left it with her? Good. I could come with you next time. Just to sit a little.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> You left it with her? Good. I could come with you next time. Just to sit a little.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_3kTXqtqq5NJpLEMihiiGbirw",
+      "job": "job_oTxvaMfXCDaCvnc44HULVh6H",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.a04b509f": {
+      "line": "sq_pip_ashdown_007",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "I know where it belongs now. Thank you for being careful.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> I know where it belongs now. Thank you for being careful.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_gBPoS6ZAREk1h3q7uhVXsijA",
+      "job": "job_RAyZcED6o591NAPwWTTKc2gS",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Leda.41123800": {
+      "line": "sq_pip_ashdown_008",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Mind the puddles. The deep one looks just like the others.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Mind the puddles. The deep one looks just like the others.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_J4SWuJWGVs7LStnLzoazZYCZ",
+      "job": "job_dkj9ftrv6SsgSVJegHXv6Lgs",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Sadachbia.cff2fc1c": {
+      "line": "sq_corvin_ashby_002",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "The forge needs dry fuel and a proper draught. That will not cure the Vale, but it will let Tobin work without another shard.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> The forge needs dry fuel and a proper draught. That will not cure the Vale, but it will let Tobin work without another shard.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_zyp4xJJXZcyFZYNn2Eyqfjfr",
+      "job": "job_AwCrezHSKrT3meh7YsvXSz2V",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Sadachbia.92939553": {
+      "line": "sq_corvin_ashby_003",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Not enough to be certain. Try dry charcoal first. A modest experiment is better than a grand mistake.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> Not enough to be certain. Try dry charcoal first. A modest experiment is better than a grand mistake.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_W5bzouKfREiopFBkS7wEkesq",
+      "job": "job_LChamNTxohAmj4KBCszwHM1u",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Sadachbia.14b6a856": {
+      "line": "sq_corvin_ashby_004",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Watch what changes. The waterline, the birds, the heat in a stone. Memory is useful; measurements are kinder to an argument.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> Watch what changes. The waterline, the birds, the heat in a stone. Memory is useful; measurements are kinder to an argument.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_5cfDiQFTnttN7hRFCcU986io",
+      "job": "job_xTsaADjRhqhinybz4QGZphNK",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Sadachbia.f86a0115": {
+      "line": "sq_corvin_ashby_005",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "If you find a warm stone where it should be cold, bring it. Carefully.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> If you find a warm stone where it should be cold, bring it. Carefully.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_Q5Ju9edtQ494ZHYJokPkXJKt",
+      "job": "job_TqHmRqqQpdtw2ytcRLaZKtkJ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.ad74bc4f": {
+      "line": "sq_celandine_marrowby_001",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "A tally. How conscientious. The market carries many sacks; not every inconvenience is a scandal.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> A tally. How conscientious. The market carries many sacks; not every inconvenience is a scandal.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_NXypwtTQXHNpUMmFJGG7FCJL",
+      "job": "job_sRGGcjM9cwxPcPV35zvxMJt2",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.fe0a79c0": {
+      "line": "sq_celandine_marrowby_002",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Very well. A correction in the account, and the seed goes back. Do tell the town how generously these matters can be resolved.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> Very well. A correction in the account, and the seed goes back. Do tell the town how generously these matters can be resolved.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_8KydybqtfUpz6eS9vCHpDjQt",
+      "job": "job_QgMyDCMHWCufmXcMV2ygypkA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.f33f7580": {
+      "line": "sq_celandine_marrowby_003",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "There. Written, witnessed, settled. Halden may pay your fee. I trust this concludes your errand.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> There. Written, witnessed, settled. Halden may pay your fee. I trust this concludes your errand.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_sHukt4cCUQ4LkC2NFcTxtQNA",
+      "job": "job_WQbrBRquvCdUHYEdBrm7TNJy",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.1be9eba3": {
+      "line": "sq_celandine_marrowby_004",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "An interesting performance. Bring me an account the mayor is prepared to sign, and we may speak again.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> An interesting performance. Bring me an account the mayor is prepared to sign, and we may speak again.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_RWHBTrjJAH2u6AMrV3KjquH1",
+      "job": "job_2qzDvifBAwWo7jDe9Z23ijH9",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.281d77b8": {
+      "line": "sq_celandine_marrowby_005",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "The lower fields are lovely from here. One sees so much more with a little distance.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> The lower fields are lovely from here. One sees so much more with a little distance.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_cxTu8LFoogFR91hCEmX2jrH6",
+      "job": "job_vtF2tNX7Y25hVNnVYSstQMrm",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.dd4d340c": {
+      "line": "sq_celandine_marrowby_006",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "The seed account is settled. Do try to find a less tedious subject.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> The seed account is settled. Do try to find a less tedious subject.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_HWob1a1sMhJDz3xwd9igHHsT",
+      "job": "job_EJ3kB887urZZseHAz2iSbXZw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Autonoe.590fb525": {
+      "line": "sq_celandine_marrowby_007",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Give Halden my regards. He is so attentive to small matters.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> Give Halden my regards. He is so attentive to small matters.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_KHQSzzhDoGnj2vo4NSDNZ8ko",
+      "job": "job_XCFywmB8xdqiyFrjQXTEkona",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Umbriel.73adffde": {
+      "line": "sq_rook_001",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Tobin sent you? I have charcoal. Dry, counted, and quite ordinary. He can mend my cart axle when the forge is hot.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Tobin sent you? I have charcoal. Dry, counted, and quite ordinary. He can mend my cart axle when the forge is hot.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_XUopJqZQqiTYQnd7N5mzLfrj",
+      "job": "job_dvYWkhYkJVAvb2SQ2ZpmoT28",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Umbriel.9a4c3508": {
+      "line": "sq_rook_002",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Take the marked bundle. Tell Tobin I remember my debts, and his. No shards in this bargain.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Take the marked bundle. Tell Tobin I remember my debts, and his. No shards in this bargain.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_dHqv7KoGpDNQGSP1khzGiVAL",
+      "job": "job_H6Hg63uaRxqb1A5sDRXqGCxf",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Umbriel.a5b52eb2": {
+      "line": "sq_rook_003",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "The bundle went to the forge. I will bring the cart when the road lets me.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> The bundle went to the forge. I will bring the cart when the road lets me.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_TyG7moNfj8Vr94ZgYjJ9eT9X",
+      "job": "job_ZH6eH3FseCm3otYuuGCW5qJA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Umbriel.5a48861b": {
+      "line": "sq_rook_004",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Fair enough. Mind the boards. They are older than my promises.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Fair enough. Mind the boards. They are older than my promises.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_WikCJ7hbCeDWtByQ3xLv5Rue",
+      "job": "job_dzi6ft8ap3NGc2V6C3zFNbo5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.a139638f": {
+      "line": "sq_narrator_001",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A slit seam, a scatter of seed, and a chalk mark used by the Ash Market. Someone carried this sack away before it was counted.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> A slit seam, a scatter of seed, and a chalk mark used by the Ash Market. Someone carried this sack away before it was counted.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_zmiHp9Lp4qdpkWMwtvFfvmuv",
+      "job": "job_L1LiXkrSxtU2xe8ddctCHt31",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Algieba.c7e17a3c": {
+      "line": "sq_narrator_002",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The market tally should show where the seed went.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The market tally should show where the seed went.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_f3Jkp4Yq9Uad7e6SkQBcQxjd",
+      "job": "job_kT9JNJeu7Sy2XTCxwdN9Cs9J",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.7c8203c4": {
+      "line": "sq_narrator_003",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The seed lies cold against the stones.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The seed lies cold against the stones.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_PxogEARQFhLLUBJQ2n4JfGWW",
+      "job": "job_Gh4yQ5ThnQZiN3Hd8YZ3HSvd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.30d484f0": {
+      "line": "sq_narrator_004",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Town seed, entered as a private transfer. The countermark belongs to the Marrowby account.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Town seed, entered as a private transfer. The countermark belongs to the Marrowby account.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_rXyLmNhp91k85382GCwganyp",
+      "job": "job_QNzL5UrDgwrs1CVjeApDVEi1",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.9cda426d": {
+      "line": "sq_narrator_005",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Ink, date, and countermark. Enough to ask a direct question.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Ink, date, and countermark. Enough to ask a direct question.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_TbE4ZYpS28sApfLfJX6AJnr9",
+      "job": "job_bvjRGCVUrDYhMWh1whkRgiPw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.5ccac5ee": {
+      "line": "sq_narrator_006",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The ledger closes with a dry whisper.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The ledger closes with a dry whisper.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_8zzMkZ52Xbsw2pdeeTVxAdpv",
+      "job": "job_fDGERdmpjGekRRfbFyTB3BSM",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.636d159f": {
+      "line": "sq_narrator_007",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Under an oiled cover, a store of charcoal has stayed dry. The dockmaster's mark releases one bundle for the town forge.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Under an oiled cover, a store of charcoal has stayed dry. The dockmaster's mark releases one bundle for the town forge.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_8Tk5gX4hLEvtMX3af3Bm6mAc",
+      "job": "job_jfbEtxv4ZKEENsEakaarh1L6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.36a58335": {
+      "line": "sq_narrator_008",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Ordinary charcoal, carefully kept. Enough to put heat back into Tobin's work.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Ordinary charcoal, carefully kept. Enough to put heat back into Tobin's work.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_vEv7AoSSdY1veF73kajK4St2",
+      "job": "job_hEe8d8hswLFHVUjYmB8p8dzk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.60dc3745": {
+      "line": "sq_narrator_009",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The cover settles over the dry stores.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The cover settles over the dry stores.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_7zGbswgK1wMy9wJ8LonZpqCV",
+      "job": "job_kB54gWjqEVDoqcsuzi6EWbcf",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.2dc96347": {
+      "line": "sq_narrator_010",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Annet's whistle rests beside her stone, its cord tucked out of the mud. There is no need to sound it.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Annet's whistle rests beside her stone, its cord tucked out of the mud. There is no need to sound it.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_KHPmhc7fFnAwjgYSjM7RPJpA",
+      "job": "job_sN5hn6z9YMu5ugCD4i2TFeDy",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.02d29e96": {
+      "line": "sq_narrator_011",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "You straighten the cord and leave the whistle where Pip can visit it. A small kindness, without an audience.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> You straighten the cord and leave the whistle where Pip can visit it. A small kindness, without an audience.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_2r5nGo2xAKb2TGA3SBiCwpsp",
+      "job": "job_MZ5mvjseADNpd24Z4FmKdwMS",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.a6f4923c": {
+      "line": "sq_narrator_012",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "You wrap the whistle for the walk back. Pip should decide what happens next.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> You wrap the whistle for the walk back. Pip should decide what happens next.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_DJyeYJsxY4dJLxEiAsjxETYp",
+      "job": "job_KqUKMc1b5jQzqzozped8NWJn",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Algieba.c5d99719": {
+      "line": "sq_narrator_013",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "For a moment, even the river seems far away.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> For a moment, even the river seems far away.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_duE6LiHW8EQPpcbHD9u5y3nQ",
+      "job": "job_YPdebfMV6PLsaRMesjF5wwxR",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.a3e3db4c": {
+      "line": "sq_tobin_fell_001",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_Rtxd1FoaEoFvECMc98gyTyi3",
+      "job": "job_spXQCHWP2w45E5h7o8SDruX7",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.a39805fa": {
+      "line": "sq_tobin_fell_002",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_gBeW9LkAbdDBwbo1jtAS3i84",
+      "job": "job_Xq4xuH9dRE1Vn72rWUdpif6b",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.3f239799": {
+      "line": "sq_tobin_fell_003",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_nj9VVd3cN8qbuZ2ezcJYJKVD",
+      "job": "job_7ba9FjUYXrMr1tdniWeurwwN",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.4082284b": {
+      "line": "sq_tobin_fell_004",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_skopkLYb41SVgjux8omxj3MR",
+      "job": "job_y5s5zDDtcWm42AB5GnF8BBCw",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.aa130f14": {
+      "line": "sq_tobin_fell_005",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_8dy6d9YNXArcLBrf18pjraXT",
+      "job": "job_pKBAPE5b61Gzjf46swzczDRB",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    "Orus.a637ba5f": {
+      "line": "sq_tobin_fell_006",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_qYBjR6kp31f5meHXtmiapFmo",
+      "job": "job_cVVy5PR7iDiyMiGzHABTdwCT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.15fa0b5d": {
+      "line": "sq_tobin_fell_007",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Still needs tending. But it is a fire I can pay for.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Still needs tending. But it is a fire I can pay for.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_C2TsbWp8GKYVRyagfNxfXDCm",
+      "job": "job_5exQhF3LCqCgptx8jg8kYNE8",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Orus.da254fc5": {
+      "line": "sq_tobin_fell_008",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Shut the door behind you. Saves what heat there is.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Shut the door behind you. Saves what heat there is.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_itN5u6VNNhgE35nteTPr1Rup",
+      "job": "job_6Do7oKyH6JC1TrUQdBwqXNHh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    "Iapetus.395b3df2": {
+      "line": "say_warlord_bridge_2",
+      "speaker": "vorga",
+      "preset": "Iapetus",
+      "text": "Archers, to the ridge!",
+      "renderText": "<Speak in Iapetus's normal mid-low conversational register, firm and clear. A calm military order, not a shout.> Archers, to the ridge!",
+      "file": "say_warlord_bridge_2.637844be.ogg",
+      "asset": "asset_zEPdsX3WTRD4FbJmRFFLdzzX",
+      "job": "job_BJtkNSPmnkDomjqnpHCSZtc2",
+      "creativeUnits": 2,
+      "issue": 73,
+      "replacesRaw": "Iapetus.ca4cdd62"
     }
-  }
+  },
+  "npcsAndQuests": [
+    {
+      "raw": "Charon.9f2d4194",
+      "line": "sq_halden_varrow_001",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_7Vium7hhEtMKWE9PGJ5EQbTh",
+      "job": "job_we99A1jCZCBTvi43uF5iFSJF",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.63824fa8",
+      "line": "sq_tobin_fell_001",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_eWWYHUkhUxo3QCbv3QnnMece",
+      "job": "job_3ygEbvux5CDqTuUtXsnc9SWc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.945e2eab",
+      "line": "bark_pip_whistle_left",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "We could visit Annet again. I will bring something to wipe the stone.",
+      "renderText": "<Bright child voice, softly earnest, no mysterious undertone. Mood: idle.> We could visit Annet again. I will bring something to wipe the stone.",
+      "delivery": {
+        "direction": "Bright child voice, softly earnest, no mysterious undertone.",
+        "mood": "idle"
+      },
+      "asset": "asset_WNVPJJXNfJPdHR8RPaWCFDbj",
+      "job": "job_iNGRHDpTFDKm7wQSXFtEPcpn",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.b12da047",
+      "line": "town_farmer_1",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Frost in the furrows again. Ground ought to be warming by now.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> Frost in the furrows again. Ground ought to be warming by now.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_mYk1NN7EcbNetWTGkjvdZHAv",
+      "job": "job_pxgHdcbnQ2XRrYkxMC3mfrCx",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.5dffa632",
+      "line": "town_goblin_spear_1",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Stay your side. I will stay mine.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Stay your side. I will stay mine.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_Cve9WEfwN5rCjfFCCPAQu2SJ",
+      "job": "job_2egrUb4QWRZ4wZb9grFJoF21",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Sadachbia.efd22717",
+      "line": "sq_corvin_ashby_001",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "The river steams, the soil chills, and everyone calls it weather. Forgive me. What did you want to ask?",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> The river steams, the soil chills, and everyone calls it weather. Forgive me. What did you want to ask?",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_ES69HgZ38Dr7PKNKxs35YMvJ",
+      "job": "job_qQcjnereemtifgPPJvPUwToc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.079f1599",
+      "line": "bark_pip_whistle_brought",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "I kept the whistle safe. Next time I visit, I will take it with me.",
+      "renderText": "<Bright child voice, quietly proud and careful. Mood: happy.> I kept the whistle safe. Next time I visit, I will take it with me.",
+      "delivery": {
+        "direction": "Bright child voice, quietly proud and careful.",
+        "mood": "happy"
+      },
+      "asset": "asset_LMeLfZVuDCJuZjJphkPubknn",
+      "job": "job_A9P1HLPx6fzADWrQzqDxAaUd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.d6a6421c",
+      "line": "ch1_camp_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Beyond the firelight, the river keeps talking. No one has quite found the courage to sleep.",
+      "renderText": "Beyond the firelight, the river keeps talking. No one has quite found the courage to sleep.",
+      "delivery": null,
+      "asset": "asset_WD79xgcsSg5rpCcsVKty6v5h",
+      "job": "job_8SmvGGSRkJsXJYik3zCHiVr2",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Callirrhoe.717065b6",
+      "line": "ch1_camp_open_2",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "renderText": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "delivery": null,
+      "asset": "asset_TNhd1o77Scj3k5rRuuhqzHTr",
+      "job": "job_osW6Ttq1N2oy3Nf2EnVAnoHJ",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Callirrhoe.86a9cad8",
+      "line": "ch1_camp_hunger_1",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "renderText": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "delivery": null,
+      "asset": "asset_7J8ctfp1ababhKRx7gKL5w9f",
+      "job": "job_zXVcz6jqeRREg3dLXrJRHdM5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.9567fba5",
+      "line": "ch1_camp_hunger_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A log settles. Someone passes the pot without being asked.",
+      "renderText": "A log settles. Someone passes the pot without being asked.",
+      "delivery": null,
+      "asset": "asset_K8GQQP6atQvK8Uygrgu7z2oZ",
+      "job": "job_B4rfNfbf5dE9ULdi8DaWoPDo",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Callirrhoe.7cae8c94",
+      "line": "ch1_camp_truth_1",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "renderText": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "delivery": null,
+      "asset": "asset_QoztPntzsYzXMuJRmnLpQ7Eb",
+      "job": "job_bRuUzGt72dxEN1utudYb4xj4",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.b33cef6f",
+      "line": "ch1_camp_truth_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The fire gives everyone the same small share of warmth. For once, nobody has locked it away.",
+      "renderText": "The fire gives everyone the same small share of warmth. For once, nobody has locked it away.",
+      "delivery": null,
+      "asset": "asset_MCSNN6g9yauXFJYgtYMrtyPd",
+      "job": "job_fi7n8zgZtqMLnrUCK4XoRWY3",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.c4475a81",
+      "line": "ch1_camp_warmth_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Maud's words return with the smell of woodsmoke: warmth was lent, not given. You look into the coals a little differently.",
+      "renderText": "Maud's words return with the smell of woodsmoke: warmth was lent, not given. You look into the coals a little differently.",
+      "delivery": null,
+      "asset": "asset_E2jWNJiE5yNczytpy5GRwuVh",
+      "job": "job_phYxhViEPSYxDw1AMbZF9CNX",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Callirrhoe.83528ce4",
+      "line": "ch1_camp_warmth_2",
+      "speaker": "dagna_holt",
+      "preset": "Callirrhoe",
+      "text": "Then we'd better learn how to give something back.",
+      "renderText": "Then we'd better learn how to give something back.",
+      "delivery": null,
+      "asset": "asset_ZfEioM59EHMsBj7eR3MSaBFM",
+      "job": "job_Dc4EfoTfp3fVZqWfRhy15pzy",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.12618c91",
+      "line": "town_farmer_2",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "You can count the seed twice. It will not make a second harvest.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> You can count the seed twice. It will not make a second harvest.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_yRCBoaBu8111gEATANRekDT3",
+      "job": "job_kHetgqYDKFchQgLgyYsAn1AT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.5febc775",
+      "line": "town_farmer_3",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Mind the rows, friend. There is still something living here.",
+      "renderText": "<plain, weathered and quietly worried Mood: idle.> Mind the rows, friend. There is still something living here.",
+      "delivery": {
+        "direction": "plain, weathered and quietly worried",
+        "mood": "idle"
+      },
+      "asset": "asset_ESPv9nB8P2aActoVaY26Umwk",
+      "job": "job_KArkERcG66kZ7XoyVXixtCos",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.ed67b469",
+      "line": "town_farmer_ford_open",
+      "speaker": "townsfolk_farmer",
+      "preset": "Charon",
+      "text": "Bridge is open. Now let us see if the seed gets through.",
+      "renderText": "<plain, weathered, a small cautious relief Mood: happy.> Bridge is open. Now let us see if the seed gets through.",
+      "delivery": {
+        "direction": "plain, weathered, a small cautious relief",
+        "mood": "happy"
+      },
+      "asset": "asset_tPp4yyZi4q1uXZfnVBYchVqS",
+      "job": "job_SFhXU35twhsoFivZ4S5HZYE9",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Achird.31d6cbdf",
+      "line": "town_farmhand_1",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "Another sack carried uphill. Same empty bowl down here.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> Another sack carried uphill. Same empty bowl down here.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_9gebD4erKSLykfHm8WSYLPpR",
+      "job": "job_CYUpZkysZqGJuuBR5MQwm7zu",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Achird.49445d08",
+      "line": "town_farmhand_2",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "If talk were kindling, the Ash Market would heat the Vale.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> If talk were kindling, the Ash Market would heat the Vale.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_U5suahNueF5bZtT2yShmGCJv",
+      "job": "job_ZhprbQfwCAe5ZRsHMvin85QG",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Achird.be122c5a",
+      "line": "town_farmhand_3",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "They pay by the day. Funny how the days keep getting longer.",
+      "renderText": "<young, tired, dry working voice Mood: idle.> They pay by the day. Funny how the days keep getting longer.",
+      "delivery": {
+        "direction": "young, tired, dry working voice",
+        "mood": "idle"
+      },
+      "asset": "asset_C5ydsvV2A6twgsjXAz6fgA6T",
+      "job": "job_dExAbwsmUPdEZbExFVCsxCEz",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Algenib.258b4dd7",
+      "line": "town_fisher_1",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "River steams, nets come up cold. Tell me how that works.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> River steams, nets come up cold. Tell me how that works.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_8wU1F5iyTTkF5xAJ5pCbtpTG",
+      "job": "job_tx8bRi4jyV2yjqfnL31mVJqZ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algenib.2482f729",
+      "line": "town_fisher_2",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Do not whistle over the water. Let it keep its own counsel.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Do not whistle over the water. Let it keep its own counsel.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_bPWkKx8n4LRaEf3hUYE747tX",
+      "job": "job_xAiGJmAq3m1on8DgjmJLY5qw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algenib.7e7562ba",
+      "line": "town_fisher_3",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Used to take two hands to lift this net. Now one will do.",
+      "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Used to take two hands to lift this net. Now one will do.",
+      "delivery": {
+        "direction": "low, unhurried, superstitious river voice",
+        "mood": "idle"
+      },
+      "asset": "asset_pXtPeQPqSgGRqA1GbNcp6d3x",
+      "job": "job_atFTwG5RKw2Gv8k5aisw9g1t",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zubenelgenubi.b7b73a01",
+      "line": "town_merchant_1",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Road is shut, cart is empty. That is the price of it.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Road is shut, cart is empty. That is the price of it.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_Zp7SCdWNV6XPtUxeC25Gr3vz",
+      "job": "job_uEbnFZNQD2tZKmmT232WE2b5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zubenelgenubi.e61dbb1b",
+      "line": "town_merchant_2",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Coin is welcome. A clear road would be better.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Coin is welcome. A clear road would be better.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_4Ndka6UXffAbNcg4vndCM2ok",
+      "job": "job_iueG332ryy2pPZHeVDXBq8cR",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Zubenelgenubi.3da2fb67",
+      "line": "town_merchant_3",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Look all you like. I remember when people bought things too.",
+      "renderText": "<brisk market patter with worry beneath it Mood: idle.> Look all you like. I remember when people bought things too.",
+      "delivery": {
+        "direction": "brisk market patter with worry beneath it",
+        "mood": "idle"
+      },
+      "asset": "asset_HRyKRrB9uXCw9MtYjbTFGqNn",
+      "job": "job_NzgAsgKRBFnYemKnw2Z4UBFt",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Fenrir.fff33d43",
+      "line": "town_guard_1",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Captain says hold here. So here is where I hold.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Captain says hold here. So here is where I hold.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_RTJR99cBACVTdMigfTinwzCA",
+      "job": "job_56mrtFAW1XjkDDRZee8skJrG",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Fenrir.20e52730",
+      "line": "town_guard_2",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Keep a light by your door tonight. Just in case.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Keep a light by your door tonight. Just in case.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_ttk4fFqRH5rw4s2dEuF7YYGY",
+      "job": "job_3LVKtjTTf9LW8kn4jTfwTnfH",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Fenrir.437897fa",
+      "line": "town_guard_3",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Bridge watch was a good posting once.",
+      "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Bridge watch was a good posting once.",
+      "delivery": {
+        "direction": "restrained, ashamed but loyal military voice",
+        "mood": "idle"
+      },
+      "asset": "asset_5Xmj3sj3Q8kHtxfnRCwCB5jX",
+      "job": "job_SSEenAT7bv7zD23MAya34dtV",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.136a87e7",
+      "line": "town_barmaid_1",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Hot bowls to the left. Wet boots stay by the door.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> Hot bowls to the left. Wet boots stay by the door.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_2KgzUbog8c3mYSdwr2dhWejV",
+      "job": "job_DwkeAdARvbWxA9NYs3x3xdug",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.4e0f17b1",
+      "line": "town_barmaid_2",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Bree keeps the fire going. We keep everyone fed.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> Bree keeps the fire going. We keep everyone fed.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_JPbZeBitQLq5ZtLj9qtxzm1A",
+      "job": "job_niBX2LXoaRUwdDD5wAmEdmoT",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.d1f7dd5e",
+      "line": "town_barmaid_3",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "An empty cup is easy fixed. The rest takes listening.",
+      "renderText": "<practical, warm, quick but clear Mood: idle.> An empty cup is easy fixed. The rest takes listening.",
+      "delivery": {
+        "direction": "practical, warm, quick but clear",
+        "mood": "idle"
+      },
+      "asset": "asset_cJrAnetvnHxVVQZF1Gx1bLtq",
+      "job": "job_oG7HG7E4Y4nHcPsxio7axPeo",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Laomedeia.7b26fc3e",
+      "line": "town_child_1",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Bet you cannot jump that puddle with all that armour.",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> Bet you cannot jump that puddle with all that armour.",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_i5wY3CLTvxqkyMH5X2rzsAjS",
+      "job": "job_1trX36anf9grCJRk1jQgF7vU",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Laomedeia.7383d38d",
+      "line": "town_child_2",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "We are playing bridge guards. Nobody wants to be the bridge.",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> We are playing bridge guards. Nobody wants to be the bridge.",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_1bjaNDbc9tqj45YA7BpaedH4",
+      "job": "job_owARL3CFoxHdqqMCj1paqD6T",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Laomedeia.0ca9aa1b",
+      "line": "town_child_3",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Have you seen a frog today? A proper big one?",
+      "renderText": "<bright, pitched up, innocent without baby talk Mood: idle.> Have you seen a frog today? A proper big one?",
+      "delivery": {
+        "direction": "bright, pitched up, innocent without baby talk",
+        "mood": "idle"
+      },
+      "asset": "asset_Fkv7zWNwu25QFDYFqz1KXt6b",
+      "job": "job_46dMYEpGtWRzviWruvUB5k5L",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Enceladus.df72bffc",
+      "line": "town_goblin_archer_1",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Hands where I can see them. Food where I can smell it.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Hands where I can see them. Food where I can smell it.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_Heg9g9gDEbhZjvGRzcVMawr8",
+      "job": "job_F5MXcAYbNr8sN1gBgsE1qReJ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Enceladus.fcd074c7",
+      "line": "town_goblin_archer_2",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Your river? Funny. It runs past our camp too.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Your river? Funny. It runs past our camp too.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_Pgkqc3mhRWwWr9MXXjB6ssHZ",
+      "job": "job_w2dBz9TNapmC6jrCJ5gzuUmf",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Enceladus.009ebcdf",
+      "line": "town_goblin_archer_3",
+      "speaker": "townsfolk_goblin_archer",
+      "preset": "Enceladus",
+      "text": "Bowstring hates this damp. So do I.",
+      "renderText": "<thin, wary rasp, short measured phrases Mood: idle.> Bowstring hates this damp. So do I.",
+      "delivery": {
+        "direction": "thin, wary rasp, short measured phrases",
+        "mood": "idle"
+      },
+      "asset": "asset_3m4Uc28fUcXkcMM6FmgoCgYe",
+      "job": "job_Rmqww9Nufew7n1xrv3qYKQAE",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Iapetus.f97dde3d",
+      "line": "town_goblin_cutthroat_1",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Fine boots. Must be warm having two good ones.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Fine boots. Must be warm having two good ones.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_7Y6iM98Be81UWophxX5mGQrt",
+      "job": "job_3qGiqky9AHjKEerWeL7xxN4Z",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Iapetus.61e28b4e",
+      "line": "town_goblin_cutthroat_2",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Town locks its grain. Calls us thieves. Clever town.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Town locks its grain. Calls us thieves. Clever town.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_csfKg5bZhiTaHHSMirQniZ1m",
+      "job": "job_m3KdJFVcVGqbfUYx9GqJAMEh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Iapetus.f108aa63",
+      "line": "town_goblin_cutthroat_3",
+      "speaker": "townsfolk_goblin_cutthroat",
+      "preset": "Iapetus",
+      "text": "Easy now. I am only looking. You do that too.",
+      "renderText": "<sly, scratchy goblin voice, dry amusement Mood: idle.> Easy now. I am only looking. You do that too.",
+      "delivery": {
+        "direction": "sly, scratchy goblin voice, dry amusement",
+        "mood": "idle"
+      },
+      "asset": "asset_GA3k1eEKJENCnk7XGLcAk7F9",
+      "job": "job_9ZUDWtehoknfDrSSPDHhagA2",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.b6895647",
+      "line": "town_goblin_spear_2",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Spear is light. Empty belly is heavy.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Spear is light. Empty belly is heavy.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_f3jToLxxmduMwkyz2thnNaaQ",
+      "job": "job_VXjdkfERNgev6pZSXDWvxCvt",
+      "creativeUnits": 1,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.5fbe522b",
+      "line": "town_goblin_spear_3",
+      "speaker": "townsfolk_goblin_spear",
+      "preset": "Orus",
+      "text": "Mother says watch the ford. I watch the ford.",
+      "renderText": "<rough, hungry goblin rasp, guarded not monstrous Mood: idle.> Mother says watch the ford. I watch the ford.",
+      "delivery": {
+        "direction": "rough, hungry goblin rasp, guarded not monstrous",
+        "mood": "idle"
+      },
+      "asset": "asset_p1m9MH9SEZHuuJypcVuWbFwK",
+      "job": "job_ZimSG5QNL7pkm57QSL2FRGL6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.481be0f7",
+      "line": "sq_halden_varrow_002",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The stores must last the winter. That is my responsibility. If you find a cut sack, follow the grain, not the rumours.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The stores must last the winter. That is my responsibility. If you find a cut sack, follow the grain, not the rumours.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_FfKoNKSYZHrzHNJCsogKj88B",
+      "job": "job_yCoqsM1sX4hnHFmQzhG2vqyc",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.76438b67",
+      "line": "sq_halden_varrow_003",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "You know what I kept from the town. I cannot put that right with another speech. Find where those seed sacks went; I will see that this account is answered.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> You know what I kept from the town. I cannot put that right with another speech. Find where those seed sacks went; I will see that this account is answered.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_e4aNHDNV4VwZ3Md3sxqM8APJ",
+      "job": "job_YgYGirr8xttveoD8QieyJLU1",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.44c3b3aa",
+      "line": "sq_halden_varrow_004",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Start with the seed sacks beside the granary. The Ash Market keeps a tally of everything it carries.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Start with the seed sacks beside the granary. The Ash Market keeps a tally of everything it carries.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_bwmra7VdeHgpF8ktKP7BChzV",
+      "job": "job_HktNEimBBBcEXmRsgbuMywJz",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.e0ac2c28",
+      "line": "sq_halden_varrow_005",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The seed stores, then the market tally. Bring me something I can act on, and I will pay for your trouble.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The seed stores, then the market tally. Bring me something I can act on, and I will pay for your trouble.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_Bnjva2eSc385bdhLzhDSKL5f",
+      "job": "job_FGB5rynb72XBRSfZCtF6LvNT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.40ca512d",
+      "line": "sq_halden_varrow_006",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "A market mark on town seed. I had hoped for a simpler answer. Will you leave the account with me, or take it to Lady Marrowby?",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> A market mark on town seed. I had hoped for a simpler answer. Will you leave the account with me, or take it to Lady Marrowby?",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_8UC6nvN4ecnzY455nxA1fSp9",
+      "job": "job_GJ5gKeCGb87DjVXXWew7Kd5K",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.46c7e6ae",
+      "line": "sq_halden_varrow_007",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "I will have the sacks counted in daylight, with witnesses. Your payment comes from my purse. Let us begin with that much honesty.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> I will have the sacks counted in daylight, with witnesses. Your payment comes from my purse. Let us begin with that much honesty.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_bECH8PwY4a43zi9tfmVfz9oj",
+      "job": "job_E8zGqNhKjoie9imyb4V5i1N1",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.a084dcfe",
+      "line": "sq_halden_varrow_008",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Then take the tally. She respects a written account, even when she dislikes the sum.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Then take the tally. She respects a written account, even when she dislikes the sum.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_rumn5x3kMRes7RigAcaZppT9",
+      "job": "job_ubn5vSgykuo3UDxZ1HAqYtvk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.b469de01",
+      "line": "sq_halden_varrow_009",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "The seed has been counted. This time the town saw the count. Thank you.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> The seed has been counted. This time the town saw the count. Thank you.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_Sns7jKc82n2KZrVprkCUD8Qq",
+      "job": "job_dGgByPaJaEkKrS5DUJgJzPit",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Charon.e5f79050",
+      "line": "sq_halden_varrow_010",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Keep warm. We have work enough for tomorrow.",
+      "renderText": "<Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain. Mood: idle.> Keep warm. We have work enough for tomorrow.",
+      "delivery": {
+        "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain.",
+        "mood": "idle"
+      },
+      "asset": "asset_mHCGbSuBj1Po7TSiCynKeutf",
+      "job": "job_h3LoLGueaF9TTpt9b6YazYnc",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.956b3ff0",
+      "line": "sq_bree_tallow_001",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Sit if you are sitting, help if you are standing. I have bowls to fill and rooms upstairs. What do you need?",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> Sit if you are sitting, help if you are standing. I have bowls to fill and rooms upstairs. What do you need?",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_5Pc7F4PDS2hT963wPvrLyLMV",
+      "job": "job_LzQT9tyMX5yA2F4y8FnnQSgN",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.74e941e8",
+      "line": "sq_bree_tallow_002",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "A room, a hot bowl, and a door that shuts. We will sort out who is staying.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> A room, a hot bowl, and a door that shuts. We will sort out who is staying.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_RzpBCY4D3BKpTYbaBPjbo7LN",
+      "job": "job_wmkE81D4f91u7UHHuXrWh2iY",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.851dcde8",
+      "line": "sq_bree_tallow_003",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "People come in talking about the cold and go out talking about the stew. I can manage one of those problems.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> People come in talking about the cold and go out talking about the stew. I can manage one of those problems.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_S7gYxc5GzMVkmWaRrR1UzycA",
+      "job": "job_dQKoAzSBkJWSHh4j6no9Zm5i",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Zephyr.b295aab5",
+      "line": "sq_bree_tallow_004",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Mind your scarf. Wind is getting into everything.",
+      "renderText": "<Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality. Mood: idle.> Mind your scarf. Wind is getting into everything.",
+      "delivery": {
+        "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality.",
+        "mood": "idle"
+      },
+      "asset": "asset_Yh17228tEvgQe2xK37vKUjtv",
+      "job": "job_1XMEjhgufxZkdYQHyt1R6Gv7",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Vindemiatrix.17612cbb",
+      "line": "sq_mother_aubrine_001",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Come in out of the draught. You need not have the right words to rest here.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Come in out of the draught. You need not have the right words to rest here.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_fGG3u4a441qDuhjq2fcRzS3g",
+      "job": "job_5Gs6cUdH7SaGRHrw5EZqoRo6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Vindemiatrix.2218ff98",
+      "line": "sq_mother_aubrine_002",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Set down what hurts. We will speak plainly about the work and its cost.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Set down what hurts. We will speak plainly about the work and its cost.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_9jwLTqnVyRVqzUZRE9NReFnn",
+      "job": "job_VxBtyEyj77gEDM426HveQkCg",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Vindemiatrix.b35c7361",
+      "line": "sq_mother_aubrine_003",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Hands that tend it. Someone bringing wood when someone else cannot. Faith is not a reason to leave your neighbour cold.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Hands that tend it. Someone bringing wood when someone else cannot. Faith is not a reason to leave your neighbour cold.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_rvuvEePYWmvkkDsy7LboFW33",
+      "job": "job_1vQK2UTJsjGB8DYiwS8g6z9z",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Vindemiatrix.bbbe8ad6",
+      "line": "sq_mother_aubrine_004",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Go gently. Come back if you cannot.",
+      "renderText": "<Clear mezzo, measured and maternal; patient attention, never breathy mysticism. Mood: idle.> Go gently. Come back if you cannot.",
+      "delivery": {
+        "direction": "Clear mezzo, measured and maternal; patient attention, never breathy mysticism.",
+        "mood": "idle"
+      },
+      "asset": "asset_MNwbb71QEjFhrPhCXh8WkUY7",
+      "job": "job_G7EZd1vqaepa7SC5j8ftW3Xh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.c11d6fae",
+      "line": "sq_tobin_fell_002",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_u6LLVKkpMgPw5UPw6VMWPfHD",
+      "job": "job_ufwQ3he8tuLmJCZfXGNGYrAk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.5402397d",
+      "line": "sq_tobin_fell_003",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_2bZ55DC6TezFziUfML6b94JN",
+      "job": "job_21NjdjLxBRo8bQkMmpZ8F24o",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.6b5b2aa6",
+      "line": "sq_tobin_fell_004",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_YXugPm8U7T4fb1EZQSFw3mkE",
+      "job": "job_DmKNpEom8LonPbZLmvmUadfi",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.602a7891",
+      "line": "sq_tobin_fell_005",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_r9UG6bh7Lm3y4p1Sk77fXNw3",
+      "job": "job_ePd3T1UWp1pqfvPb61VFPaPd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.9e0b100f",
+      "line": "sq_tobin_fell_006",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_Me79aB1FbyHrmy1sguzSzVHv",
+      "job": "job_WRFtvU8RBYwVrpNpB8r6161N",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.18e2a006",
+      "line": "sq_tobin_fell_007",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Still needs tending. But it is a fire I can pay for.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Still needs tending. But it is a fire I can pay for.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_32Kz1MLyA7pyv3NMSy4bHRbk",
+      "job": "job_vNMUGokangMcApokUhynfknA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.8463a20a",
+      "line": "sq_tobin_fell_008",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Shut the door behind you. Saves what heat there is.",
+      "renderText": "<Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases. Mood: idle.> Shut the door behind you. Saves what heat there is.",
+      "delivery": {
+        "direction": "Rough, laconic blacksmith bass; low register, dry humour, deliberate clipped phrases.",
+        "mood": "idle"
+      },
+      "asset": "asset_mrvifCMauyccB5noz21gKEXq",
+      "job": "job_zHaNRnaJ3UWmpCKtajkntyfb",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.2e0b4eeb",
+      "line": "sq_pip_ashdown_001",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Annet was a guard. She had a whistle, a proper one. I think it is by her stone. Would you look? I do not want somebody treading on it.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Annet was a guard. She had a whistle, a proper one. I think it is by her stone. Would you look? I do not want somebody treading on it.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_c5z8uChoVN2wGAjY56xhDJLE",
+      "job": "job_9gwAkQjXSS2tpFDYmUB7rYRu",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.d8736201",
+      "line": "sq_pip_ashdown_002",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Thank you. Do not make it into a dare. It is her place.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Thank you. Do not make it into a dare. It is her place.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_jjE27S3BXnyESnwnynHxFV4y",
+      "job": "job_KhnzBPaB4DJa7afgcWjePPnk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.3795c134",
+      "line": "sq_pip_ashdown_003",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Annet's stone, near the other graves. You will know it.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Annet's stone, near the other graves. You will know it.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_tVFCPazJKvwinhLjDxcT5J35",
+      "job": "job_3uyH6spS12ZkS1Z6qM1msCbb",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.6abe7082",
+      "line": "sq_pip_ashdown_004",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "You found it. May I hold it? I will not blow it here.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> You found it. May I hold it? I will not blow it here.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_fg7jazaX7QsmBhyXMzZUfbkp",
+      "job": "job_JkywaanMLMnckCLbeTyAEcSG",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.450c384d",
+      "line": "sq_pip_ashdown_005",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "It is heavier than I thought. I will take it back when I visit her. Promise.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> It is heavier than I thought. I will take it back when I visit her. Promise.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_6D5K2o17yAQk85WVThfi6bWK",
+      "job": "job_nsC76XG3YCjRTyAPhnkRhdQB",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.812de2d8",
+      "line": "sq_pip_ashdown_006",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "You left it with her? Good. I could come with you next time. Just to sit a little.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> You left it with her? Good. I could come with you next time. Just to sit a little.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_3kTXqtqq5NJpLEMihiiGbirw",
+      "job": "job_oTxvaMfXCDaCvnc44HULVh6H",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.a04b509f",
+      "line": "sq_pip_ashdown_007",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "I know where it belongs now. Thank you for being careful.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> I know where it belongs now. Thank you for being careful.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_gBPoS6ZAREk1h3q7uhVXsijA",
+      "job": "job_RAyZcED6o591NAPwWTTKc2gS",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Leda.41123800",
+      "line": "sq_pip_ashdown_008",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "Mind the puddles. The deep one looks just like the others.",
+      "renderText": "<Bright, quick child voice; curious and earnest, small pauses when something hurts. Mood: idle.> Mind the puddles. The deep one looks just like the others.",
+      "delivery": {
+        "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts.",
+        "mood": "idle"
+      },
+      "asset": "asset_J4SWuJWGVs7LStnLzoazZYCZ",
+      "job": "job_dkj9ftrv6SsgSVJegHXv6Lgs",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Sadachbia.cff2fc1c",
+      "line": "sq_corvin_ashby_002",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "The forge needs dry fuel and a proper draught. That will not cure the Vale, but it will let Tobin work without another shard.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> The forge needs dry fuel and a proper draught. That will not cure the Vale, but it will let Tobin work without another shard.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_zyp4xJJXZcyFZYNn2Eyqfjfr",
+      "job": "job_AwCrezHSKrT3meh7YsvXSz2V",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Sadachbia.92939553",
+      "line": "sq_corvin_ashby_003",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Not enough to be certain. Try dry charcoal first. A modest experiment is better than a grand mistake.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> Not enough to be certain. Try dry charcoal first. A modest experiment is better than a grand mistake.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_W5bzouKfREiopFBkS7wEkesq",
+      "job": "job_LChamNTxohAmj4KBCszwHM1u",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Sadachbia.14b6a856",
+      "line": "sq_corvin_ashby_004",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Watch what changes. The waterline, the birds, the heat in a stone. Memory is useful; measurements are kinder to an argument.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> Watch what changes. The waterline, the birds, the heat in a stone. Memory is useful; measurements are kinder to an argument.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_5cfDiQFTnttN7hRFCcU986io",
+      "job": "job_xTsaADjRhqhinybz4QGZphNK",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Sadachbia.f86a0115",
+      "line": "sq_corvin_ashby_005",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "If you find a warm stone where it should be cold, bring it. Carefully.",
+      "renderText": "<Light, quick, a little anxious; precise educated words with warm, distracted curiosity. Mood: idle.> If you find a warm stone where it should be cold, bring it. Carefully.",
+      "delivery": {
+        "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity.",
+        "mood": "idle"
+      },
+      "asset": "asset_Q5Ju9edtQ494ZHYJokPkXJKt",
+      "job": "job_TqHmRqqQpdtw2ytcRLaZKtkJ",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.ad74bc4f",
+      "line": "sq_celandine_marrowby_001",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "A tally. How conscientious. The market carries many sacks; not every inconvenience is a scandal.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> A tally. How conscientious. The market carries many sacks; not every inconvenience is a scandal.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_NXypwtTQXHNpUMmFJGG7FCJL",
+      "job": "job_sRGGcjM9cwxPcPV35zvxMJt2",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.fe0a79c0",
+      "line": "sq_celandine_marrowby_002",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Very well. A correction in the account, and the seed goes back. Do tell the town how generously these matters can be resolved.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> Very well. A correction in the account, and the seed goes back. Do tell the town how generously these matters can be resolved.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_8KydybqtfUpz6eS9vCHpDjQt",
+      "job": "job_QgMyDCMHWCufmXcMV2ygypkA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.f33f7580",
+      "line": "sq_celandine_marrowby_003",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "There. Written, witnessed, settled. Halden may pay your fee. I trust this concludes your errand.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> There. Written, witnessed, settled. Halden may pay your fee. I trust this concludes your errand.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_sHukt4cCUQ4LkC2NFcTxtQNA",
+      "job": "job_WQbrBRquvCdUHYEdBrm7TNJy",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.1be9eba3",
+      "line": "sq_celandine_marrowby_004",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "An interesting performance. Bring me an account the mayor is prepared to sign, and we may speak again.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> An interesting performance. Bring me an account the mayor is prepared to sign, and we may speak again.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_RWHBTrjJAH2u6AMrV3KjquH1",
+      "job": "job_2qzDvifBAwWo7jDe9Z23ijH9",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.281d77b8",
+      "line": "sq_celandine_marrowby_005",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "The lower fields are lovely from here. One sees so much more with a little distance.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> The lower fields are lovely from here. One sees so much more with a little distance.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_cxTu8LFoogFR91hCEmX2jrH6",
+      "job": "job_vtF2tNX7Y25hVNnVYSstQMrm",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.dd4d340c",
+      "line": "sq_celandine_marrowby_006",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "The seed account is settled. Do try to find a less tedious subject.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> The seed account is settled. Do try to find a less tedious subject.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_HWob1a1sMhJDz3xwd9igHHsT",
+      "job": "job_EJ3kB887urZZseHAz2iSbXZw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Autonoe.590fb525",
+      "line": "sq_celandine_marrowby_007",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Give Halden my regards. He is so attentive to small matters.",
+      "renderText": "<Smooth cultured alto, lightly amused elven lilt; never raises her voice. Mood: idle.> Give Halden my regards. He is so attentive to small matters.",
+      "delivery": {
+        "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice.",
+        "mood": "idle"
+      },
+      "asset": "asset_KHQSzzhDoGnj2vo4NSDNZ8ko",
+      "job": "job_XCFywmB8xdqiyFrjQXTEkona",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Umbriel.73adffde",
+      "line": "sq_rook_001",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Tobin sent you? I have charcoal. Dry, counted, and quite ordinary. He can mend my cart axle when the forge is hot.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Tobin sent you? I have charcoal. Dry, counted, and quite ordinary. He can mend my cart axle when the forge is hot.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_XUopJqZQqiTYQnd7N5mzLfrj",
+      "job": "job_dvYWkhYkJVAvb2SQ2ZpmoT28",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Umbriel.9a4c3508",
+      "line": "sq_rook_002",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Take the marked bundle. Tell Tobin I remember my debts, and his. No shards in this bargain.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Take the marked bundle. Tell Tobin I remember my debts, and his. No shards in this bargain.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_dHqv7KoGpDNQGSP1khzGiVAL",
+      "job": "job_H6Hg63uaRxqb1A5sDRXqGCxf",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Umbriel.a5b52eb2",
+      "line": "sq_rook_003",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "The bundle went to the forge. I will bring the cart when the road lets me.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> The bundle went to the forge. I will bring the cart when the road lets me.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_TyG7moNfj8Vr94ZgYjJ9eT9X",
+      "job": "job_ZH6eH3FseCm3otYuuGCW5qJA",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Umbriel.5a48861b",
+      "line": "sq_rook_004",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Fair enough. Mind the boards. They are older than my promises.",
+      "renderText": "<Low, easy, confidential dockside voice; a smile kept just out of sight. Mood: idle.> Fair enough. Mind the boards. They are older than my promises.",
+      "delivery": {
+        "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight.",
+        "mood": "idle"
+      },
+      "asset": "asset_WikCJ7hbCeDWtByQ3xLv5Rue",
+      "job": "job_dzi6ft8ap3NGc2V6C3zFNbo5",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.a139638f",
+      "line": "sq_narrator_001",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A slit seam, a scatter of seed, and a chalk mark used by the Ash Market. Someone carried this sack away before it was counted.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> A slit seam, a scatter of seed, and a chalk mark used by the Ash Market. Someone carried this sack away before it was counted.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_zmiHp9Lp4qdpkWMwtvFfvmuv",
+      "job": "job_L1LiXkrSxtU2xe8ddctCHt31",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.c7e17a3c",
+      "line": "sq_narrator_002",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The market tally should show where the seed went.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The market tally should show where the seed went.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_f3Jkp4Yq9Uad7e6SkQBcQxjd",
+      "job": "job_kT9JNJeu7Sy2XTCxwdN9Cs9J",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.7c8203c4",
+      "line": "sq_narrator_003",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The seed lies cold against the stones.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The seed lies cold against the stones.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_PxogEARQFhLLUBJQ2n4JfGWW",
+      "job": "job_Gh4yQ5ThnQZiN3Hd8YZ3HSvd",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.30d484f0",
+      "line": "sq_narrator_004",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Town seed, entered as a private transfer. The countermark belongs to the Marrowby account.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Town seed, entered as a private transfer. The countermark belongs to the Marrowby account.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_rXyLmNhp91k85382GCwganyp",
+      "job": "job_QNzL5UrDgwrs1CVjeApDVEi1",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.9cda426d",
+      "line": "sq_narrator_005",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Ink, date, and countermark. Enough to ask a direct question.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Ink, date, and countermark. Enough to ask a direct question.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_TbE4ZYpS28sApfLfJX6AJnr9",
+      "job": "job_bvjRGCVUrDYhMWh1whkRgiPw",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.5ccac5ee",
+      "line": "sq_narrator_006",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The ledger closes with a dry whisper.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The ledger closes with a dry whisper.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_8zzMkZ52Xbsw2pdeeTVxAdpv",
+      "job": "job_fDGERdmpjGekRRfbFyTB3BSM",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.636d159f",
+      "line": "sq_narrator_007",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Under an oiled cover, a store of charcoal has stayed dry. The dockmaster's mark releases one bundle for the town forge.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Under an oiled cover, a store of charcoal has stayed dry. The dockmaster's mark releases one bundle for the town forge.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_8Tk5gX4hLEvtMX3af3Bm6mAc",
+      "job": "job_jfbEtxv4ZKEENsEakaarh1L6",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.36a58335",
+      "line": "sq_narrator_008",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Ordinary charcoal, carefully kept. Enough to put heat back into Tobin's work.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Ordinary charcoal, carefully kept. Enough to put heat back into Tobin's work.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_vEv7AoSSdY1veF73kajK4St2",
+      "job": "job_hEe8d8hswLFHVUjYmB8p8dzk",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.60dc3745",
+      "line": "sq_narrator_009",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The cover settles over the dry stores.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> The cover settles over the dry stores.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_7zGbswgK1wMy9wJ8LonZpqCV",
+      "job": "job_kB54gWjqEVDoqcsuzi6EWbcf",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.2dc96347",
+      "line": "sq_narrator_010",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Annet's whistle rests beside her stone, its cord tucked out of the mud. There is no need to sound it.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> Annet's whistle rests beside her stone, its cord tucked out of the mud. There is no need to sound it.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_KHPmhc7fFnAwjgYSjM7RPJpA",
+      "job": "job_sN5hn6z9YMu5ugCD4i2TFeDy",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.02d29e96",
+      "line": "sq_narrator_011",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "You straighten the cord and leave the whistle where Pip can visit it. A small kindness, without an audience.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> You straighten the cord and leave the whistle where Pip can visit it. A small kindness, without an audience.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_2r5nGo2xAKb2TGA3SBiCwpsp",
+      "job": "job_MZ5mvjseADNpd24Z4FmKdwMS",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.a6f4923c",
+      "line": "sq_narrator_012",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "You wrap the whistle for the walk back. Pip should decide what happens next.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> You wrap the whistle for the walk back. Pip should decide what happens next.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_DJyeYJsxY4dJLxEiAsjxETYp",
+      "job": "job_KqUKMc1b5jQzqzozped8NWJn",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Algieba.c5d99719",
+      "line": "sq_narrator_013",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "For a moment, even the river seems far away.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded, leave room for the cold. Mood: idle.> For a moment, even the river seems far away.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold.",
+        "mood": "idle"
+      },
+      "asset": "asset_duE6LiHW8EQPpcbHD9u5y3nQ",
+      "job": "job_YPdebfMV6PLsaRMesjF5wwxR",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.a3e3db4c",
+      "line": "sq_tobin_fell_001",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_Rtxd1FoaEoFvECMc98gyTyi3",
+      "job": "job_spXQCHWP2w45E5h7o8SDruX7",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.a39805fa",
+      "line": "sq_tobin_fell_002",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_gBeW9LkAbdDBwbo1jtAS3i84",
+      "job": "job_Xq4xuH9dRE1Vn72rWUdpif6b",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.3f239799",
+      "line": "sq_tobin_fell_003",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_nj9VVd3cN8qbuZ2ezcJYJKVD",
+      "job": "job_7ba9FjUYXrMr1tdniWeurwwN",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.4082284b",
+      "line": "sq_tobin_fell_004",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_skopkLYb41SVgjux8omxj3MR",
+      "job": "job_y5s5zDDtcWm42AB5GnF8BBCw",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.aa130f14",
+      "line": "sq_tobin_fell_005",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_8dy6d9YNXArcLBrf18pjraXT",
+      "job": "job_pKBAPE5b61Gzjf46swzczDRB",
+      "creativeUnits": 3,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.a637ba5f",
+      "line": "sq_tobin_fell_006",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_qYBjR6kp31f5meHXtmiapFmo",
+      "job": "job_cVVy5PR7iDiyMiGzHABTdwCT",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.15fa0b5d",
+      "line": "sq_tobin_fell_007",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Still needs tending. But it is a fire I can pay for.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Still needs tending. But it is a fire I can pay for.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_C2TsbWp8GKYVRyagfNxfXDCm",
+      "job": "job_5exQhF3LCqCgptx8jg8kYNE8",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Orus.da254fc5",
+      "line": "sq_tobin_fell_008",
+      "speaker": "tobin_fell",
+      "preset": "Orus",
+      "text": "Shut the door behind you. Saves what heat there is.",
+      "renderText": "<Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch. Mood: idle.> Shut the door behind you. Saves what heat there is.",
+      "delivery": {
+        "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch.",
+        "mood": "idle"
+      },
+      "asset": "asset_itN5u6VNNhgE35nteTPr1Rup",
+      "job": "job_6Do7oKyH6JC1TrUQdBwqXNHh",
+      "creativeUnits": 2,
+      "issue": 73
+    },
+    {
+      "raw": "Iapetus.ca4cdd62",
+      "line": "say_warlord_bridge_2",
+      "speaker": "vorga",
+      "preset": "Iapetus",
+      "text": "Archers, to the ridge!",
+      "renderText": "Archers, to the ridge!",
+      "delivery": null,
+      "asset": "asset_PRPNZ4DpcwrwtmxQQo1LLg7d",
+      "job": "job_cYH7ZfettJnwv2WzYFdo6qkt",
+      "creativeUnits": 1,
+      "issue": 73,
+      "previous": {
+        "asset": "asset_uUJ57PovpVaDi9VAgpLcrvZX",
+        "preset": "Iapetus",
+        "text": "Archers, to the ridge!"
+      }
+    },
+    {
+      "line": "say_warlord_bridge_2",
+      "speaker": "vorga",
+      "preset": "Iapetus",
+      "text": "Archers, to the ridge!",
+      "renderText": "<Speak in Iapetus's normal mid-low conversational register, firm and clear. A calm military order, not a shout.> Archers, to the ridge!",
+      "file": "say_warlord_bridge_2.637844be.ogg",
+      "raw": "Iapetus.395b3df2",
+      "asset": "asset_zEPdsX3WTRD4FbJmRFFLdzzX",
+      "job": "job_BJtkNSPmnkDomjqnpHCSZtc2",
+      "creativeUnits": 2,
+      "issue": 73,
+      "replacesRaw": "Iapetus.ca4cdd62"
+    }
+  ],
+  "townBarkReuse": [
+    {
+      "source": "ch1_parley_open_3",
+      "line": "bark_mother_skarrow_town_1",
+      "speaker": "mother_skarrow",
+      "raw": "Laomedeia.a238995d",
+      "fromFile": "ch1_parley_open_3.78f71d05.ogg",
+      "file": "bark_mother_skarrow_town_1.78f71d05.ogg",
+      "asset": "asset_kRGxqnCVsGuYDrJzV69DjjcX"
+    },
+    {
+      "source": "ch1_parley_young_fail_1",
+      "line": "bark_mother_skarrow_town_2",
+      "speaker": "mother_skarrow",
+      "raw": "Laomedeia.5b42a283",
+      "fromFile": "ch1_parley_young_fail_1.833a159c.ogg",
+      "file": "bark_mother_skarrow_town_2.833a159c.ogg",
+      "asset": "asset_yn29NfGEzfDxSz7RrjPKhQQz"
+    },
+    {
+      "source": "ch1_song_open_3",
+      "line": "bark_mother_skarrow_town_3",
+      "speaker": "mother_skarrow",
+      "raw": "Laomedeia.0bd3bde1",
+      "fromFile": "ch1_song_open_3.75e2525f.ogg",
+      "file": "bark_mother_skarrow_town_3.75e2525f.ogg",
+      "asset": "asset_UHG9GvRDKUm5CSWY4dHBbqJT"
+    },
+    {
+      "source": "bark_lark_camp_1",
+      "line": "bark_lark_town_1",
+      "speaker": "lark",
+      "raw": "Aoede.f11686a2",
+      "fromFile": "bark_lark_camp_1.8c84394e.ogg",
+      "file": "bark_lark_town_1.8c84394e.ogg",
+      "asset": "asset_pnWRogXDQMprDHWmLb9xgVSc"
+    },
+    {
+      "source": "bark_lark_camp_3",
+      "line": "bark_lark_town_2",
+      "speaker": "lark",
+      "raw": "Aoede.38b5f375",
+      "fromFile": "bark_lark_camp_3.47f3b804.ogg",
+      "file": "bark_lark_town_2.47f3b804.ogg",
+      "asset": "asset_cAuxfQpuibAmVBXEn7o4hkUL"
+    },
+    {
+      "source": "bark_lark_camp_4",
+      "line": "bark_lark_town_3",
+      "speaker": "lark",
+      "raw": "Aoede.f4330e9c",
+      "fromFile": "bark_lark_camp_4.75d76d50.ogg",
+      "file": "bark_lark_town_3.75d76d50.ogg",
+      "asset": "asset_SmX2Dq5RPHBCUYuWFKoAj6V3"
+    },
+    {
+      "source": "bark_dagna_holt_camp_2",
+      "line": "bark_dagna_holt_town_1",
+      "speaker": "dagna_holt",
+      "raw": "Callirrhoe.3c4e55f2",
+      "fromFile": "bark_dagna_holt_camp_2.7ac0db21.ogg",
+      "file": "bark_dagna_holt_town_1.7ac0db21.ogg",
+      "asset": "asset_11pDVgLVmMQEQ8Cm2TNfC4Jc"
+    },
+    {
+      "source": "bark_dagna_holt_battle_start_1",
+      "line": "bark_dagna_holt_town_2",
+      "speaker": "dagna_holt",
+      "raw": "Callirrhoe.4db22098",
+      "fromFile": "bark_dagna_holt_battle_start_1.26ec0bc2.ogg",
+      "file": "bark_dagna_holt_town_2.26ec0bc2.ogg",
+      "asset": "asset_DHikC8oH64DyUmN8WFHv5xhR"
+    },
+    {
+      "source": "bark_dagna_holt_battle_start_3",
+      "line": "bark_dagna_holt_town_3",
+      "speaker": "dagna_holt",
+      "raw": "Callirrhoe.4f222ab0",
+      "fromFile": "bark_dagna_holt_battle_start_3.43d579f7.ogg",
+      "file": "bark_dagna_holt_town_3.43d579f7.ogg",
+      "asset": "asset_NxgmpDQwVv9vcjTDecJk6yG2"
+    }
+  ]
 }

@@ -496,3 +496,6 @@ backups/
 
 # A test scene: see tools/tactics-world/README.md
 tools/tactics-world/regions/_sample.tscn
+
+# Cached, reproducible measurements of unchanged voice clips
+.cache/tactics-voice-features.json

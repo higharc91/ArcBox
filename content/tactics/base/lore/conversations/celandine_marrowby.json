@@ -1,0 +1,165 @@
+{
+  "id": "talk_celandine_marrowby",
+  "character": "celandine_marrowby",
+  "title": "Lady Celandine Marrowby",
+  "cast": [
+    "celandine_marrowby"
+  ],
+  "start": "greet",
+  "entries": [
+    {
+      "node": "done",
+      "requires": [
+        "sq_grain_done"
+      ],
+      "unless": []
+    },
+    {
+      "node": "account",
+      "requires": [
+        "sq_grain_tally"
+      ],
+      "unless": [
+        "sq_grain_done"
+      ]
+    },
+    {
+      "node": "greet",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "account",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_001",
+          "speaker": "celandine_marrowby",
+          "text": "A tally. How conscientious. The market carries many sacks; not every inconvenience is a scandal.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "options": [
+        {
+          "id": "persuade",
+          "label": "These were seed sacks. Let the town have them.",
+          "check": {
+            "skill": "persuasion",
+            "dc": 12,
+            "fail": "refuse",
+            "pass": "release"
+          }
+        },
+        {
+          "id": "intimidate",
+          "label": "We can read this tally aloud in the square.",
+          "check": {
+            "skill": "intimidation",
+            "dc": 13,
+            "fail": "refuse",
+            "pass": "release"
+          }
+        },
+        {
+          "id": "quiet",
+          "label": "We will take this to the mayor.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "release",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_002",
+          "speaker": "celandine_marrowby",
+          "text": "Very well. A correction in the account, and the seed goes back. Do tell the town how generously these matters can be resolved.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "options": [
+        {
+          "id": "settle",
+          "label": "Witness the return of the seed.",
+          "to": "settled",
+          "quest": {
+            "complete": "sq_missing_grain"
+          },
+          "sets": [
+            "sq_grain_confronted"
+          ]
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "settled",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_003",
+          "speaker": "celandine_marrowby",
+          "text": "There. Written, witnessed, settled. Halden may pay your fee. I trust this concludes your errand.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "refuse",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_004",
+          "speaker": "celandine_marrowby",
+          "text": "An interesting performance. Bring me an account the mayor is prepared to sign, and we may speak again.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "greet",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_005",
+          "speaker": "celandine_marrowby",
+          "text": "The lower fields are lovely from here. One sees so much more with a little distance.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "done",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_006",
+          "speaker": "celandine_marrowby",
+          "text": "The seed account is settled. Do try to find a less tedious subject.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_celandine_marrowby_007",
+          "speaker": "celandine_marrowby",
+          "text": "Give Halden my regards. He is so attentive to small matters.",
+          "mood": "idle",
+          "direction": "Smooth cultured alto, lightly amused elven lilt; never raises her voice."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

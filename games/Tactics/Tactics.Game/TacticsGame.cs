@@ -114,6 +114,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (seed is not null)
             _doc = seed.SeedInto(_doc, Rules);
         _doc = Coloured(_doc);
+        _questLogLeader = null;
+        _questObservedFlags = null;
         EnterWorld();
         ElectAtStart();
         KeepWorld();
@@ -136,6 +138,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
         _doc = Coloured(TacticsDocument.Read(_lease.Document));
+        _questLogLeader = null;
+        _questObservedFlags = null;
         EnterWorld();
         _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
         SaveWorld();
@@ -235,6 +239,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (custom.Action is null)
             return;
         HeardFrom(profile);
+        if (custom.Action == "questLog") { QuestLogInput(player, profile, custom.Data); return; }
+        if (QuestLogOpen && custom.Action is not ("endSession" or "pickClass")) return;
         switch (_phase)
         {
             case TacticsPhase.Muster when custom.Action == "pickClass":
@@ -300,6 +306,15 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// <inheritdoc />
     public void OnTimer(string key)
     {
+        if (key == "questResult") { QuestResultDone(); return; }
+        if (key == "townBark")
+        {
+            _bark = null;
+            Unnote(_barkNote);
+            if (_thingNote == _barkNote) _thingNote = null;
+            _barkNote = null;
+            return;
+        }
         if (_phase == TacticsPhase.Story && Camp is not null)
         {
             if (CampVote || CampTalk) StoryTimer(key);
@@ -583,7 +598,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     // ---- Helpers ------------------------------------------------------------------------------------------------------
 
-    private void Save() => _lease.Save(_doc.ToJson());
+    private void Save() { PrepareQuestSave(); _lease.Save(_doc.ToJson()); }
 
     private void Toast(PlayerId player, string text)
         => _toasts[player] = (_toasts.GetValueOrDefault(player).Count + 1, text);

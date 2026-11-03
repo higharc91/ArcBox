@@ -12,6 +12,20 @@ namespace Tactics.Presentation.Tests.World;
 public sealed class WorldPeopleTests
 {
     [Fact]
+    public void A_walking_person_stops_for_their_bark_and_resumes_without_sliding_or_jumping()
+    {
+        var person = Person("farmer", 5, 5, "se", (6,5), (6,6)) with { Id = "farmer" };
+        var people = new WorldPeople([person], Ground, Art.Value);
+        people.Units(0, Everywhere, []);
+        var bark = new BarkView("farmer",1,DateTimeOffset.MaxValue,new StoryLineView("hello","townsfolk_farmer","Farmer",null,"idle","Hello."));
+        var first = Assert.Single(people.Units(5, Everywhere, [], leader: new Tile(4,5), bark: bark));
+        var held = Assert.Single(people.Units(7, Everywhere, [], leader: new Tile(4,5), bark: bark));
+        Assert.Equal(first.Feet, held.Feet);
+        var resumed = Assert.Single(people.Units(7.01, Everywhere, [], leader: new Tile(4,5)));
+        Assert.True(Vector2.Distance(held.Feet,resumed.Feet) < 1);
+    }
+
+    [Fact]
     public void A_departing_person_fades_without_renumbering_the_people_who_remain()
     {
         var people = new WorldPeople([Person("guard", 5, 5) with { Id = "watch", Unless = ["gone"] }, Person("farmer", 6, 5)], Ground, Art.Value);

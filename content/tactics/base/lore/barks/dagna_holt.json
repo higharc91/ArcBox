@@ -141,6 +141,29 @@
         "text": "Don't tell me it'll be all right. Tell me what we're doing.",
         "mood": "idle"
       }
+    ],
+    "town": [
+      {
+        "id": "bark_dagna_holt_town_1",
+        "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+        "speaker": "dagna_holt",
+        "mood": "idle",
+        "direction": "low, flat, few words"
+      },
+      {
+        "id": "bark_dagna_holt_town_2",
+        "text": "Form up. Nobody dies stupid.",
+        "speaker": "dagna_holt",
+        "mood": "angry",
+        "direction": "low, flat, Northern"
+      },
+      {
+        "id": "bark_dagna_holt_town_3",
+        "text": "Right. Let's earn our bread.",
+        "speaker": "dagna_holt",
+        "mood": "idle",
+        "direction": "low, flat, few words"
+      }
     ]
   }
 }

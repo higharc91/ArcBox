@@ -1,4 +1,5 @@
 using Tactics.Game;
+using Tactics.Logic;
 using Tactics.Presentation.Audio;
 
 namespace Tactics.Presentation.Story;
@@ -24,10 +25,10 @@ public sealed record StorySay(string Line, string Text, string? Clip, string The
 public static class StoryVoice
 {
     /// <summary>
-    /// The one switch for a line with no clip (the user's decision 1: a TTS key, or captions only). Captions until the user decides, as the
-    /// local session leans: the server reads such a line on a reading timer, which a voice reading it out might overrun.
+    /// The NPC/quest slice explicitly enables a speaker-matched live voice for a failed or unavailable recording.
+    /// Captions remain visible, and callers can still opt into captions-only playback.
     /// </summary>
-    public const SpeechFallback Fallback = SpeechFallback.Captions;
+    public const SpeechFallback Fallback = SpeechFallback.Speech;
 
     /// <summary>The voice theme the voice chain reads a line with no clip in.</summary>
     public const string Theme = "tactics.story";
@@ -43,5 +44,5 @@ public static class StoryVoice
     public static StorySay? For(StoryLineView line, VoiceClips? clips, SpeechFallback fallback = Fallback)
         => clips?.ForLine(line.Id) is { } clip
             ? new StorySay(line.Id, line.Text, clip.Path, Theme)
-            : fallback == SpeechFallback.Speech ? new StorySay(line.Id, line.Text, null, Theme) : null;
+            : fallback == SpeechFallback.Speech ? new StorySay(line.Id, line.Text, null, TacticsVoices.ForSpeaker(line.Speaker)) : null;
 }

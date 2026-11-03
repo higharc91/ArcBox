@@ -217,7 +217,26 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] long? Gold = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<TraderView>? Traders = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Morning = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<string>? PeopleFlags = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<string>? PeopleFlags = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] BarkView? Bark = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestEventView? QuestEvent = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestTrackerView? Pinned = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestLogView? QuestLog = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<QuestPersonMarker>? QuestMarkers = null);
+
+public sealed record QuestPersonMarker(Tile At, bool TurnIn);
+
+public sealed record QuestTrackerView(string Id, string Name, string Objective, string Status, Tile? Target);
+public sealed record QuestHistoryView(string Log, bool Done, string? Objective);
+public sealed record QuestItemView(string Name, int Count);
+public sealed record QuestRewardView(int Gold, int Xp, ImmutableArray<QuestItemView> Items);
+public sealed record QuestEntryView(string Id, string Name, string Status, string Giver, string? Portrait, string Objective, ImmutableArray<QuestHistoryView> History, string? Result, QuestRewardView? Rewards);
+public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading);
+
+public sealed record QuestEventView(int Seq, string Quest, string Name, string Kind, DateTimeOffset Until, int Gold, int Xp);
+
+/// <summary>A numbered, expiring person utterance; never a phase change.</summary>
+public sealed record BarkView(string Person, long Seq, DateTimeOffset Until, StoryLineView Line);
 
 /// <summary>A reachable trader marker, never the full shop stock.</summary>
 public sealed record TraderView(string Id, Tile At, int? Person, bool Open, string? Sprite = null);
@@ -440,6 +459,7 @@ public sealed partial class TacticsGame
                 portal = PortalPath(),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
+            TacticsPhase.Exploration when QuestLogOpen => QuestLogScreen(player, profile),
             TacticsPhase.Exploration => WalkScreen(player, profile),
             TacticsPhase.Story => StoryScreen(player, profile),
             // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
@@ -489,9 +509,22 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
+        if (!RegionQuests.IsEmpty)
+        {
+            data["journal"] = JsonSerializer.SerializeToNode(Journal(leads), ArcJson.Options);
+            if (leads) data["canOpenLog"] = true;
+            if (_questEvent is { } notice && notice.Until > _ctx.Now)
+            {
+                var quest = RegionQuests.FirstOrDefault(q => q.Id == notice.Quest)?.State(StoryFlags());
+                data["questNotice"] = JsonSerializer.SerializeToNode(new { id = notice.Quest, notice.Name, notice.Kind,
+                    objective = quest?.Status == "active" ? quest.Current.Objective : "Quest " + (quest?.Status == "done" ? "complete" : "failed"),
+                    canPin = leads && quest?.Status == "active" }, ArcJson.Options);
+            }
+            if (QuestTracker() is { } tracker) data["pinned"] = JsonSerializer.SerializeToNode(new { tracker.Id, tracker.Name, tracker.Objective }, ArcJson.Options);
+        }
         if (HasCampfires && _doc.World?.RestReady == true) data["restReady"] = true;
         if (VisibleGold(profile) is { } gold) data["gold"] = gold;
-        if (!AllThings.IsEmpty || !RegionShops.IsEmpty)
+        if (!AllThings.IsEmpty || !RegionShops.IsEmpty || !PersonTargets().IsEmpty)
         {
             if (leads && InteractLabel() is null && targets.Length > 0) data["interact"] = targets[0].Label;
             data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
@@ -513,7 +546,7 @@ public sealed partial class TacticsGame
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
         Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
-            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags());
+            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags(), Bark: CurrentBark(), QuestEvent: _questEvent, Pinned: QuestTracker(), QuestLog: QuestLogOpen ? Journal(true) : null, QuestMarkers: QuestPersonMarkers());
 
     private ControllerView BattleScreen(ProfileId profile)
     {

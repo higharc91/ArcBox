@@ -191,13 +191,13 @@ public sealed partial class TacticsGame
     {
         var seen = _doc.World!.CampScenes.IsDefault ? [] : _doc.World.CampScenes;
         var scene = Lore.Scenes.FirstOrDefault(s => s.Camp && !seen.Contains(s.Id) && SceneRun.Plays(s, StoryFlags())
-            && StoryArc?.Beats.Any(b => b.Id == s.Beat) == true && _doc.World.Beats.Contains(s.Beat));
+            && StoryArc?.Beats.Any(b => b.Id == s.Beat) == true && s.Beat is not null && _doc.World.Beats.Contains(s.Beat));
         if (scene is null) { BeginSleep(); return; }
         EndTelling();
         _doc = _doc with { World = _doc.World with
         {
             Camp = Camp! with { Stage = "talk", Talk = scene.Id, Due = null }, CampScenes = seen.Add(scene.Id),
-            Story = new StorySave(scene.Beat, StorySave.Lead, scene.Id, null, 0, _storySeq),
+            Story = new StorySave(scene.Beat!, StorySave.Lead, scene.Id, null, 0, _storySeq),
         } };
         BeginScene(CampScene()!);
     }

@@ -1,0 +1,150 @@
+{
+  "quests": [
+    {
+      "id": "sq_missing_grain",
+      "name": "Where the Grain Went",
+      "giver": "halden_varrow",
+      "region": "ashen_ford",
+      "stages": [
+        {
+          "id": "asked",
+          "objective": "Inspect the granary seed sacks",
+          "log": "Halden asked us to trace missing seed without stirring more accusations.",
+          "when": [
+            "sq_grain_asked"
+          ],
+          "target": {
+            "thing": "af_granary_sack"
+          }
+        },
+        {
+          "id": "clue",
+          "objective": "Read the Ash Market tally",
+          "log": "The cut sack bears a market mark. We should compare the tally.",
+          "when": [
+            "sq_grain_clue"
+          ],
+          "target": {
+            "thing": "af_ash_market_tally"
+          }
+        },
+        {
+          "id": "tally",
+          "objective": "Speak to Celandine or Halden",
+          "log": "The tally lists town seed as a private transfer. We can confront Celandine or ask Halden to settle it quietly.",
+          "when": [
+            "sq_grain_tally"
+          ],
+          "target": {
+            "person": "celandine_marrowby"
+          }
+        }
+      ],
+      "done": {
+        "when": [
+          "sq_grain_done"
+        ],
+        "log": "The seed was returned under a witnessed account. Emberwick has one less debt hidden in its stores."
+      },
+      "rewards": {
+        "gold": 30,
+        "xp": 100,
+        "items": [],
+        "sets": [
+          "sq_grain_accounted"
+        ]
+      }
+    },
+    {
+      "id": "sq_cold_forge",
+      "name": "A Cold Forge",
+      "giver": "tobin_fell",
+      "region": "ashen_ford",
+      "stages": [
+        {
+          "id": "asked",
+          "objective": "Find fuel at the docks",
+          "log": "Tobin needs ordinary dry fuel. We can inspect the dock stores or arrange a fair supply through Rook.",
+          "when": [
+            "sq_forge_asked"
+          ],
+          "target": {
+            "thing": "af_dock_charcoal"
+          }
+        },
+        {
+          "id": "fuel",
+          "objective": "Bring the fuel to Tobin",
+          "log": "We have secured dry charcoal. It will keep the forge working without another ember debt.",
+          "when": [
+            "sq_forge_fuel"
+          ],
+          "target": {
+            "person": "tobin_fell"
+          }
+        }
+      ],
+      "done": {
+        "when": [
+          "sq_forge_done"
+        ],
+        "log": "The forge has a working charcoal fire. This is useful heat, not a cure for the Vale."
+      },
+      "rewards": {
+        "gold": 0,
+        "xp": 100,
+        "items": [
+          {
+            "item": "oil_flask",
+            "count": 1
+          }
+        ],
+        "sets": []
+      }
+    },
+    {
+      "id": "sq_guards_whistle",
+      "name": "The Guard's Whistle",
+      "giver": "pip_ashdown",
+      "region": "ashen_ford",
+      "stages": [
+        {
+          "id": "asked",
+          "objective": "Visit Annet's grave",
+          "log": "Pip asked us to find the whistle beside Annet's stone and treat the place with care.",
+          "when": [
+            "sq_whistle_asked"
+          ],
+          "target": {
+            "thing": "af_grave_annet"
+          }
+        },
+        {
+          "id": "found",
+          "objective": "Bring the whistle to Pip",
+          "log": "We are keeping the whistle safe until we can show it to Pip.",
+          "when": [
+            "sq_whistle_found"
+          ],
+          "target": {
+            "person": "pip_ashdown"
+          }
+        }
+      ],
+      "done": {
+        "when": [
+          "sq_whistle_done"
+        ],
+        "log": "We treated Annet's whistle with care. Pip knows where it belongs, and that someone listened."
+      },
+      "rewards": {
+        "gold": 0,
+        "xp": 100,
+        "items": [],
+        "sets": [
+          "sq_whistle_remembered"
+        ]
+      }
+    }
+  ]
+}

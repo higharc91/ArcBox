@@ -173,12 +173,39 @@ public sealed class PhoneFixtureTests
 
     private static JsonNode Node(ControllerView view) => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
 
+    // Freeze the pre-quest lore contract as well as the pre-shop rules: existing screens must remain byte-identical.
+    private static readonly Lazy<LoreBook> LegacyStoryLore = new(() =>
+    {
+        var folder = Directory.CreateTempSubdirectory("tactics-legacy-lore-");
+        try
+        {
+            var source = Path.Combine(ExplorationTests.ContentRules(), "lore");
+            foreach (var file in Directory.EnumerateFiles(source, "*.json", SearchOption.AllDirectories))
+            {
+                var to = Path.Combine(folder.FullName, "lore", Path.GetRelativePath(source, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(to)!); File.Copy(file, to);
+            }
+            var indexPath = Path.Combine(folder.FullName, "lore", "pack.json");
+            var index = JsonNode.Parse(File.ReadAllText(indexPath))!;
+            var files = index["files"]!.AsArray();
+            foreach (var file in files.Where(f => f!.GetValue<string>() is var name &&
+                (name.StartsWith("conversations/", StringComparison.Ordinal) || name is "quests.json" or "scenes/side_quests.json" or "barks/townsfolk.json")).ToArray()) files.Remove(file);
+            File.WriteAllText(indexPath, index.ToJsonString());
+            foreach (var file in Directory.EnumerateFiles(Path.Combine(source, "audio"), "*.ogg"))
+                File.CreateSymbolicLink(Path.Combine(folder.FullName, "lore", "audio", Path.GetFileName(file)), file);
+            var book = LoreBook.Load(folder.FullName);
+            foreach (var line in book.Scenes.SelectMany(sc => sc.Lines)) _ = book.ClipSeconds(line.Id);
+            return book;
+        }
+        finally { folder.Delete(recursive: true); }
+    });
+
     private static SortedDictionary<string, JsonNode> CaptureStory()
     {
         var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
         TacticsGameTests.Session Ford()
         {
-            var s = new TacticsGameTests.Session(seed: 3, game: new TacticsGame(Pack.Value, lore: StoryTests.Lore,
+            var s = new TacticsGameTests.Session(seed: 3, game: new TacticsGame(Pack.Value, lore: LegacyStoryLore.Value,
                 seed: StoryTests.SeedFor(StoryTests.FordChoice) with { At = StoryTests.NearSpot(StoryTests.FordChoice) }));
             s.ToWalking();
             return s;
@@ -275,6 +302,38 @@ public sealed class PhoneFixtureTests
             ["portal-character"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!,
         };
         Check(views);
+    }
+
+    [Fact]
+    public void Npc_and_quest_journal_screens_match_their_fixtures()
+    {
+        var screens = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
+        var talk = ConversationQuestTests.At("halden_varrow");
+        ConversationQuestTests.Talk(talk, "halden_varrow");
+        screens["talk-vote"] = Node(talk.Harness.PlayerView(ConversationQuestTests.Lead(talk)));
+        var check = ConversationQuestTests.At("corvin_ashby", "sq_forge_asked");
+        ConversationQuestTests.Talk(check, "corvin_ashby");
+        ConversationQuestTests.Choose(check, "arcana");
+        StoryVoteTests.Until(check, () => check.Host.Story!.State == TacticsGame.StoryStates.PickRoller, "conversation skill check");
+        screens["talk-check"] = Node(check.Harness.PlayerView(ConversationQuestTests.Lead(check)));
+        var s = ConversationQuestTests.At("halden_varrow", "sq_grain_asked", "sq_grain_tally");
+        var leader = ConversationQuestTests.Lead(s); var follower = (leader + 1) % 4;
+        s.Send(leader, "questLog", new { action = "pin", quest = "sq_missing_grain" });
+        screens["walk-pinned"] = Node(s.Harness.PlayerView(leader));
+        var privateView = Node(s.Harness.PlayerView(follower));
+        privateView["screen"] = "questLog";
+        privateView["data"] = privateView["data"]!["journal"]!.DeepClone();
+        screens["questlog-private"] = privateView;
+        s.Send(leader, "questLog", new { action = "open", quest = "sq_missing_grain" });
+        screens["questlog-leader"] = Node(s.Harness.PlayerView(leader));
+        screens["questlog-viewer"] = Node(s.Harness.PlayerView(follower));
+        s.Send(leader, "questLog", new { action = "close" });
+        ConversationQuestTests.Talk(s, "halden_varrow"); ConversationQuestTests.Choose(s, "quiet");
+        StoryVoteTests.Until(s, () => s.Game.Document.World!.Flags.Contains("sq_grain_done"), "quest complete");
+        // Leave the final spoken line immediately, while the result tracker is still visible.
+        s.Send(leader, "skip");
+        screens["walk-pinned-done"] = Node(s.Harness.PlayerView(leader));
+        Check(screens);
     }
 
     private static void Check(SortedDictionary<string, JsonNode> screens)

@@ -129,6 +129,56 @@
       "pitch": 1,
       "filter": "fey",
       "note": "shares wry.high; fey shimmer and pitch keep them apart"
+    },
+    "townsfolk_farmer": {
+      "preset": "Charon",
+      "pitch": -2,
+      "note": "farmer: shares Charon with a distinct -2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_farmhand": {
+      "preset": "Achird",
+      "pitch": 2,
+      "note": "farmhand: shares Achird with a distinct +2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_fisher": {
+      "preset": "Algenib",
+      "pitch": -2,
+      "note": "fisher: shares Algenib with a distinct -2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_merchant": {
+      "preset": "Zubenelgenubi",
+      "pitch": 2,
+      "note": "merchant: shares Zubenelgenubi with a distinct +2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_guard": {
+      "preset": "Fenrir",
+      "pitch": -2,
+      "note": "guard: shares Fenrir with a distinct -2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_barmaid": {
+      "preset": "Zephyr",
+      "pitch": 2,
+      "note": "barmaid: shares Zephyr with a distinct +2 semitone register; grounded Ashen Ford townsfolk"
+    },
+    "townsfolk_child": {
+      "preset": "Laomedeia",
+      "pitch": 4,
+      "note": "child: shares Laomedeia with a distinct +4 semitone register; bright child voice"
+    },
+    "townsfolk_goblin_archer": {
+      "preset": "Enceladus",
+      "pitch": -3,
+      "note": "goblin archer: shares Enceladus with a distinct -3 semitone register; rasping, narrow throat, hungry and wary; distinct from Mother Skarrow"
+    },
+    "townsfolk_goblin_cutthroat": {
+      "preset": "Iapetus",
+      "pitch": -3,
+      "note": "goblin cutthroat: shares Iapetus with a distinct -3 semitone register; rasping, narrow throat, hungry and wary; distinct from Mother Skarrow"
+    },
+    "townsfolk_goblin_spear": {
+      "preset": "Orus",
+      "pitch": -4,
+      "note": "goblin spear: shares Orus with a distinct -4 semitone register; rasping, narrow throat, hungry and wary; distinct from Mother Skarrow"
     }
   }
 }

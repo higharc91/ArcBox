@@ -7,23 +7,55 @@
         "text": "I can run that for you! Two coppers. One if you're nice. Three if you're not.",
         "mood": "happy",
         "direction": "bright and quick",
-        "weight": 3
+        "weight": 3,
+        "unless": [
+          "sq_whistle_done"
+        ]
       },
       {
         "id": "bark_pip_ashdown_town_2",
         "text": "I didn't take it. I was holding it. For you. Here.",
         "mood": "happy",
-        "direction": "an easy, practised lie"
+        "direction": "an easy, practised lie",
+        "unless": [
+          "sq_whistle_done"
+        ]
       },
       {
         "id": "bark_pip_ashdown_town_3",
         "text": "Bree says I'm not to bother you. I'm not bothering. I'm standing.",
-        "mood": "idle"
+        "mood": "idle",
+        "unless": [
+          "sq_whistle_done"
+        ]
       },
       {
         "id": "bark_pip_ashdown_town_4",
         "text": "I know a quicker way round the docks. Don't ask how. I just do.",
-        "mood": "surprised"
+        "mood": "surprised",
+        "unless": [
+          "sq_whistle_done"
+        ]
+      },
+      {
+        "id": "bark_pip_whistle_left",
+        "text": "We could visit Annet again. I will bring something to wipe the stone.",
+        "speaker": "pip_ashdown",
+        "mood": "idle",
+        "direction": "Bright child voice, softly earnest, no mysterious undertone.",
+        "requires": [
+          "sq_whistle_left"
+        ]
+      },
+      {
+        "id": "bark_pip_whistle_brought",
+        "text": "I kept the whistle safe. Next time I visit, I will take it with me.",
+        "speaker": "pip_ashdown",
+        "mood": "happy",
+        "direction": "Bright child voice, quietly proud and careful.",
+        "requires": [
+          "sq_whistle_brought"
+        ]
       }
     ],
     "camp": [

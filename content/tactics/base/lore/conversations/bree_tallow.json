@@ -1,0 +1,88 @@
+{
+  "id": "talk_bree_tallow",
+  "character": "bree_tallow",
+  "title": "Bree Tallow",
+  "cast": [
+    "bree_tallow"
+  ],
+  "start": "greet",
+  "entries": [
+    {
+      "node": "greet",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "greet",
+      "lines": [
+        {
+          "id": "sq_bree_tallow_001",
+          "speaker": "bree_tallow",
+          "text": "Sit if you are sitting, help if you are standing. I have bowls to fill and rooms upstairs. What do you need?",
+          "mood": "idle",
+          "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality."
+        }
+      ],
+      "options": [
+        {
+          "id": "room",
+          "label": "Show us the rooms and prices.",
+          "to": "service",
+          "service": "af_inn"
+        },
+        {
+          "id": "town",
+          "label": "How is the town holding up?",
+          "to": "town"
+        },
+        {
+          "id": "leave",
+          "label": "We should be going.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "service",
+      "lines": [
+        {
+          "id": "sq_bree_tallow_002",
+          "speaker": "bree_tallow",
+          "text": "A room, a hot bowl, and a door that shuts. We will sort out who is staying.",
+          "mood": "idle",
+          "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "town",
+      "lines": [
+        {
+          "id": "sq_bree_tallow_003",
+          "speaker": "bree_tallow",
+          "text": "People come in talking about the cold and go out talking about the stew. I can manage one of those problems.",
+          "mood": "idle",
+          "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_bree_tallow_004",
+          "speaker": "bree_tallow",
+          "text": "Mind your scarf. Wind is getting into everything.",
+          "mood": "idle",
+          "direction": "Brisk, warm West Country voice; busy hands, practical kindness, no sentimentality."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

@@ -56,16 +56,16 @@ public sealed class StoryTrackTests
         => Assert.All(AllLines().Where(l => !l.Scene.Camp), l => Assert.NotNull(Clips.ForLine(l.Line.Id)));
 
     [Fact]
-    public void Camp_reflections_use_existing_portraits_and_caption_fallback_without_new_audio()
+    public void Camp_reflections_use_existing_portraits_and_the_completed_voice_batch()
     {
         var lines = AllLines().Where(l => l.Scene.Camp).ToArray();
         Assert.Equal(8, lines.Length);
         foreach (var (_, line) in lines)
         {
-            Assert.Null(Clips.ForLine(line.Id));
+            Assert.NotNull(Clips.ForLine(line.Id));
             var track = Running();
             var tick = track.Receive(Showing(2, LineOf(line)), T0);
-            Assert.Null(tick.Say);
+            Assert.Equal(line.Id, tick.Say!.Line);
             Assert.Equal(line.Id, tick.Screen!.Caption!.Line);
         }
     }
@@ -99,12 +99,22 @@ public sealed class StoryTrackTests
 
         Assert.Null(say.Clip);
         Assert.Equal("The wind drops.", say.Text);
-        Assert.Equal(StoryVoice.Theme, say.Theme);
+        Assert.Equal(TacticsVoices.Narrator, say.Theme);
     }
 
     [Fact]
-    public void The_fallback_is_captions_until_the_user_decides()
-        => Assert.Equal(SpeechFallback.Captions, StoryVoice.Fallback);
+    public void Named_and_townsfolk_live_fallbacks_use_their_registered_cast()
+    {
+        foreach (var speaker in new[] { "halden_varrow", "townsfolk_farmer", "townsfolk_goblin_spear" })
+        {
+            var line = new StoryLineView("missing_clip", speaker, speaker, null, "idle", "Hello.");
+            Assert.Equal(TacticsVoices.Npc(speaker), StoryVoice.For(line, null)!.Theme);
+        }
+    }
+
+    [Fact]
+    public void The_npc_slice_uses_live_speech_for_an_unavailable_clip()
+        => Assert.Equal(SpeechFallback.Speech, StoryVoice.Fallback);
 
     [Fact]
     public void A_fresh_track_shows_the_line_and_doesnt_speak()

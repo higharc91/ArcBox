@@ -1,0 +1,274 @@
+{
+  "presets": {
+    "farmer": {
+      "speaker": "townsfolk_farmer",
+      "lines": [
+        {
+          "id": "town_farmer_1",
+          "text": "Frost in the furrows again. Ground ought to be warming by now.",
+          "speaker": "townsfolk_farmer",
+          "mood": "idle",
+          "direction": "plain, weathered and quietly worried"
+        },
+        {
+          "id": "town_farmer_2",
+          "text": "You can count the seed twice. It will not make a second harvest.",
+          "speaker": "townsfolk_farmer",
+          "mood": "idle",
+          "direction": "plain, weathered and quietly worried"
+        },
+        {
+          "id": "town_farmer_3",
+          "text": "Mind the rows, friend. There is still something living here.",
+          "speaker": "townsfolk_farmer",
+          "mood": "idle",
+          "direction": "plain, weathered and quietly worried"
+        },
+        {
+          "id": "town_farmer_ford_open",
+          "speaker": "townsfolk_farmer",
+          "text": "Bridge is open. Now let us see if the seed gets through.",
+          "mood": "happy",
+          "direction": "plain, weathered, a small cautious relief",
+          "requires": [
+            "ch1_ember_found"
+          ]
+        }
+      ]
+    },
+    "farmhand": {
+      "speaker": "townsfolk_farmhand",
+      "lines": [
+        {
+          "id": "town_farmhand_1",
+          "text": "Another sack carried uphill. Same empty bowl down here.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice"
+        },
+        {
+          "id": "town_farmhand_2",
+          "text": "If talk were kindling, the Ash Market would heat the Vale.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice"
+        },
+        {
+          "id": "town_farmhand_3",
+          "text": "They pay by the day. Funny how the days keep getting longer.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice"
+        }
+      ]
+    },
+    "fisher": {
+      "speaker": "townsfolk_fisher",
+      "lines": [
+        {
+          "id": "town_fisher_1",
+          "text": "River steams, nets come up cold. Tell me how that works.",
+          "speaker": "townsfolk_fisher",
+          "mood": "idle",
+          "direction": "low, unhurried, superstitious river voice"
+        },
+        {
+          "id": "town_fisher_2",
+          "text": "Do not whistle over the water. Let it keep its own counsel.",
+          "speaker": "townsfolk_fisher",
+          "mood": "idle",
+          "direction": "low, unhurried, superstitious river voice"
+        },
+        {
+          "id": "town_fisher_3",
+          "text": "Used to take two hands to lift this net. Now one will do.",
+          "speaker": "townsfolk_fisher",
+          "mood": "idle",
+          "direction": "low, unhurried, superstitious river voice"
+        }
+      ]
+    },
+    "merchant": {
+      "speaker": "townsfolk_merchant",
+      "lines": [
+        {
+          "id": "town_merchant_1",
+          "text": "Road is shut, cart is empty. That is the price of it.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it"
+        },
+        {
+          "id": "town_merchant_2",
+          "text": "Coin is welcome. A clear road would be better.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it"
+        },
+        {
+          "id": "town_merchant_3",
+          "text": "Look all you like. I remember when people bought things too.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it"
+        }
+      ]
+    },
+    "guard": {
+      "speaker": "townsfolk_guard",
+      "lines": [
+        {
+          "id": "town_guard_1",
+          "text": "Captain says hold here. So here is where I hold.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice"
+        },
+        {
+          "id": "town_guard_2",
+          "text": "Keep a light by your door tonight. Just in case.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice"
+        },
+        {
+          "id": "town_guard_3",
+          "text": "Bridge watch was a good posting once.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice"
+        }
+      ]
+    },
+    "barmaid": {
+      "speaker": "townsfolk_barmaid",
+      "lines": [
+        {
+          "id": "town_barmaid_1",
+          "text": "Hot bowls to the left. Wet boots stay by the door.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear"
+        },
+        {
+          "id": "town_barmaid_2",
+          "text": "Bree keeps the fire going. We keep everyone fed.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear"
+        },
+        {
+          "id": "town_barmaid_3",
+          "text": "An empty cup is easy fixed. The rest takes listening.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear"
+        }
+      ]
+    },
+    "child": {
+      "speaker": "townsfolk_child",
+      "lines": [
+        {
+          "id": "town_child_1",
+          "text": "Bet you cannot jump that puddle with all that armour.",
+          "speaker": "townsfolk_child",
+          "mood": "idle",
+          "direction": "bright, pitched up, innocent without baby talk"
+        },
+        {
+          "id": "town_child_2",
+          "text": "We are playing bridge guards. Nobody wants to be the bridge.",
+          "speaker": "townsfolk_child",
+          "mood": "idle",
+          "direction": "bright, pitched up, innocent without baby talk"
+        },
+        {
+          "id": "town_child_3",
+          "text": "Have you seen a frog today? A proper big one?",
+          "speaker": "townsfolk_child",
+          "mood": "idle",
+          "direction": "bright, pitched up, innocent without baby talk"
+        }
+      ]
+    },
+    "goblin_archer": {
+      "speaker": "townsfolk_goblin_archer",
+      "lines": [
+        {
+          "id": "town_goblin_archer_1",
+          "text": "Hands where I can see them. Food where I can smell it.",
+          "speaker": "townsfolk_goblin_archer",
+          "mood": "idle",
+          "direction": "thin, wary rasp, short measured phrases"
+        },
+        {
+          "id": "town_goblin_archer_2",
+          "text": "Your river? Funny. It runs past our camp too.",
+          "speaker": "townsfolk_goblin_archer",
+          "mood": "idle",
+          "direction": "thin, wary rasp, short measured phrases"
+        },
+        {
+          "id": "town_goblin_archer_3",
+          "text": "Bowstring hates this damp. So do I.",
+          "speaker": "townsfolk_goblin_archer",
+          "mood": "idle",
+          "direction": "thin, wary rasp, short measured phrases"
+        }
+      ]
+    },
+    "goblin_cutthroat": {
+      "speaker": "townsfolk_goblin_cutthroat",
+      "lines": [
+        {
+          "id": "town_goblin_cutthroat_1",
+          "text": "Fine boots. Must be warm having two good ones.",
+          "speaker": "townsfolk_goblin_cutthroat",
+          "mood": "idle",
+          "direction": "sly, scratchy goblin voice, dry amusement"
+        },
+        {
+          "id": "town_goblin_cutthroat_2",
+          "text": "Town locks its grain. Calls us thieves. Clever town.",
+          "speaker": "townsfolk_goblin_cutthroat",
+          "mood": "idle",
+          "direction": "sly, scratchy goblin voice, dry amusement"
+        },
+        {
+          "id": "town_goblin_cutthroat_3",
+          "text": "Easy now. I am only looking. You do that too.",
+          "speaker": "townsfolk_goblin_cutthroat",
+          "mood": "idle",
+          "direction": "sly, scratchy goblin voice, dry amusement"
+        }
+      ]
+    },
+    "goblin_spear": {
+      "speaker": "townsfolk_goblin_spear",
+      "lines": [
+        {
+          "id": "town_goblin_spear_1",
+          "text": "Stay your side. I will stay mine.",
+          "speaker": "townsfolk_goblin_spear",
+          "mood": "idle",
+          "direction": "rough, hungry goblin rasp, guarded not monstrous"
+        },
+        {
+          "id": "town_goblin_spear_2",
+          "text": "Spear is light. Empty belly is heavy.",
+          "speaker": "townsfolk_goblin_spear",
+          "mood": "idle",
+          "direction": "rough, hungry goblin rasp, guarded not monstrous"
+        },
+        {
+          "id": "town_goblin_spear_3",
+          "text": "Mother says watch the ford. I watch the ford.",
+          "speaker": "townsfolk_goblin_spear",
+          "mood": "idle",
+          "direction": "rough, hungry goblin rasp, guarded not monstrous"
+        }
+      ]
+    }
+  }
+}

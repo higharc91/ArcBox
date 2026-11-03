@@ -6806,6 +6806,22 @@
       "face": "se",
       "id": "af_fisher_4",
       "voice": "townsfolk_fisher"
+    },
+    {
+      "preset": "bandit_captain",
+      "at": [
+        104,
+        104
+      ],
+      "face": "se",
+      "id": "rook",
+      "character": "rook",
+      "requires": [
+        "sq_forge_contact"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ]
     }
   ]
 }

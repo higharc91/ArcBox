@@ -1684,3 +1684,13 @@ Preset = "goblin_archer"
 Id = "af_goblin_archer_3"
 Unless = "ch1_skarrow_slain ch1_skarrow_spared"
 Voice = "townsfolk_goblin_archer"
+
+[node name="Rook" type="Marker2D" parent="People"]
+position = Vector2(3344, 3344)
+script = ExtResource("10_q22gg")
+Id = "rook"
+Character = "rook"
+Preset = "bandit_captain"
+Face = "se"
+Requires = "sq_forge_contact"
+Unless = "sq_forge_done"

@@ -8,7 +8,7 @@ namespace Tactics.Presentation.World;
 
 /// <summary>
 /// The people of a region (spec §3.2): dressing the TV draws from the region's own file, standing idle or walking a short loop, sorted among the party by their tiles and passing
-/// through the same overlay. The server never hears of them, so there's no phone change and no state, and nobody can be walled in by one. Everything here is worked out from a clock.
+/// through the same overlay. The server checks identity, reach and presence for interactions; people never block paths. Everything here is worked out from a clock.
 /// <para>
 /// When a beat's figure is someone who's already standing about, it replaces them: of everyone in that preset, the one nearest the beat steps out of the picture, so nobody shows twice.
 /// Only those near the screen are drawn: each one costs the overlay its closure, and the rest of a region's people have no reason to.
@@ -38,6 +38,7 @@ public sealed class WorldPeople
     private readonly Vector2[] _feet;
     private readonly bool?[] _present;
     private readonly float[] _opacity;
+    private readonly double[] _paused;
     private double _lastClock;
     private const float FadeSeconds = 0.35f;
     private static readonly ImmutableHashSet<string> NoFlags = ImmutableHashSet<string>.Empty;
@@ -52,6 +53,7 @@ public sealed class WorldPeople
         _feet = [.. _people.Select(p => UnitPlace.On(terrain, p.At).Feet)];
         _present = new bool?[_people.Length];
         _opacity = new float[_people.Length];
+        _paused = new double[_people.Length];
     }
 
     /// <summary>Where someone is, and whether they're on their way.</summary>
@@ -94,7 +96,7 @@ public sealed class WorldPeople
     /// <paramref name="pixels"/> is the walk's, as for the party, so a figure stands still against the ground as the camera moves.
     /// </summary>
     public ImmutableArray<BoardUnit> Units(double clock, Vector2 around, ImmutableArray<StoryMarker> markers, Func<Vector2, bool, Vector2>? pixels = null,
-        ImmutableArray<CastView> cast = default, IReadOnlySet<string>? flags = null, Tile? leader = null)
+        ImmutableArray<CastView> cast = default, IReadOnlySet<string>? flags = null, Tile? leader = null, Tactics.Game.BarkView? bark = null)
     {
         if (_people.IsEmpty)
             return [];
@@ -122,7 +124,11 @@ public sealed class WorldPeople
                 _opacity[i] = Math.Clamp(_opacity[i] + (_present[i] == true ? elapsed : -elapsed) / FadeSeconds, 0, 1);
             if (_opacity[i] <= 0 || outside || Array.IndexOf(taken, i) >= 0)
                 continue;
-            var stance = PlaceAt(person, clock + Phase(person));
+            var speaking = bark is not null && _ids[i] == bark.Person;
+            if (speaking) _paused[i] += elapsed;
+            var stance = PlaceAt(person, clock + Phase(person) - _paused[i]);
+            if (speaking && leader is { } party)
+                stance = new Stance(stance.Place, false, new Vector2(party.X + .5f - stance.Place.Map.X, party.Y + .5f - stance.Place.Map.Y));
             units.Add(UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels) with { Opacity = _opacity[i] });
         }
         units.Sort((a, b) => a.Order.CompareTo(b.Order));
