@@ -129,6 +129,15 @@
       "loop": false,
       "group": "sting",
       "use": "BattleEnded with victory over a boss (generated with vocals allowed, for the wordless choir)"
+    },
+    "camp_dawn": {
+      "files": [
+        "camp_dawn.ogg"
+      ],
+      "loop": false,
+      "group": "sting",
+      "use": "Sunrise after camp or inn; then the region music resumes",
+      "source": "original synthesized score (compose_dawn.py)"
     }
   }
 }

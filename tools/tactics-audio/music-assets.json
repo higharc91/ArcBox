@@ -138,6 +138,14 @@
    "group": "sting",
    "loop": false,
    "seed": 4241
+  },
+  "camp_dawn": {
+   "source": "original synthesized score",
+   "generator": "tools/tactics-audio/compose_dawn.py",
+   "duration": 6.8,
+   "group": "sting",
+   "loop": false,
+   "seed": 7114
   }
  },
  "failures": [

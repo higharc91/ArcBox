@@ -23,6 +23,7 @@ public static class MusicChoice
     private const string BossVictory = "victory_boss";
     private const string Defeat = "defeat";
     private const string Camp = "camp";
+    private const string Dawn = "camp_dawn";
     private const string Emberwick = "town_emberwick";
 
     private static readonly ImmutableDictionary<string, string> Fights = new Dictionary<string, string>
@@ -50,13 +51,15 @@ public static class MusicChoice
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Emberwick];
+    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn, Emberwick];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
     {
         if (!Enum.TryParse<TacticsPhase>(view.Phase, out var phase))
             return null;
+        if (phase == TacticsPhase.Story && view.Camp is { Stage: "dawn" })
+            return new MusicCue(Dawn, view.Explore is { } dawnPlace ? Regions.GetValueOrDefault(dawnPlace.Region, Explore) : Explore);
         if (phase == TacticsPhase.Story && view.Camp is { Stage: not ("vote" or "dawn") })
             return new MusicCue(Camp);
         return phase switch

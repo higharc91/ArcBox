@@ -74,3 +74,25 @@ input gives byte-identical files.
 The music manifest uses `tracks` in place of `sounds`. The art loader turns every entry of a top-level object into a
 key `<set>.<id>`, so `sfx.swing_sword` and `music.battle` are valid presentation keys. Keep any other top-level value a
 string, or it creates stray keys.
+
+
+## Original sunrise cue
+
+`camp_dawn` is a brief original G-major flute, harp and chime score, synthesized without external samples or quoted melodies.
+It plays once at camp/inn sunrise, then the regional track resumes. Reproduce it with NumPy and the standard encoder:
+
+```sh
+python3 tools/tactics-audio/compose_dawn.py /tmp/camp_dawn.wav
+python3 - <<'PYCODE'
+import json, sys
+from pathlib import Path
+sys.path.insert(0, "tools/tactics-audio")
+import audio
+spec = json.loads(Path("tools/tactics-audio/music-list.json").read_text())["camp_dawn"]
+audio.encode(Path("/tmp/camp_dawn.wav"), Path("content/tactics/base/music/camp_dawn.ogg"), spec, "music")
+audio.write_manifests()
+PYCODE
+```
+
+The encoded sting is about 5.83 seconds after silence trimming, at the existing −19 LUFS sting target.
+`music-assets.json` records its original-score provenance; the manifest preserves its per-track `source` rather than attributing it to Scenario.

@@ -193,6 +193,8 @@ def write_manifests() -> dict[str, int]:
                 continue
             entry = {"files": files, "loop": bool(spec.get("loop")), "group": spec.get("group", ""),
                      "use": spec.get("use", "")}
+            if "source" in spec:
+                entry["source"] = spec["source"]
             if "voice" in spec:
                 entry["voice"] = spec["voice"]
             table[sid] = entry
