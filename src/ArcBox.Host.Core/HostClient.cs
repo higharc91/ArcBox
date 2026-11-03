@@ -196,13 +196,16 @@ public sealed class HostClient : IAsyncDisposable
         await _connection.DisposeAsync();
     }
 
-    /// <summary>Asks for patches; a server that doesn't offer them keeps sending whole views, which works the same.</summary>
+    /// <summary>
+    /// Asks for patches. Sent without waiting for an answer, so binding as host takes no longer than it did: the room handles it after
+    /// the bind, in order. A server that doesn't offer patches keeps sending whole views, which works the same.
+    /// </summary>
     private async Task AskForPatchesAsync()
     {
         if (!UsePatches)
             return;
-        try { await _connection.InvokeAsync("UseHostPatches"); }
-        catch (HubException) { /* An older server: whole views. */ }
+        try { await _connection.SendAsync("UseHostPatches"); }
+        catch (Exception ex) when (ex is HubException or InvalidOperationException) { /* Not connected: the next bind asks again. */ }
     }
 
     private void ForgetView()
