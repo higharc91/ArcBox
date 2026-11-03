@@ -1021,12 +1021,12 @@
         "lit": "campfire_lit.png"
       },
       "size": [
-        28,
-        30
+        48,
+        48
       ],
       "anchor": [
-        14,
-        27
+        24,
+        44
       ],
       "frames": 1,
       "fps": 0,
