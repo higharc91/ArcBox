@@ -1,0 +1,38 @@
+Running tests from /workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 075ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 18s 533ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (4m 08s 101ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 058ms)
+Running tests from /workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 456ms)
+Running tests from /workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 09s 736ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (2m 17s 462ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (6s 254ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (35s 195ms)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (1m 24s 406ms)
+
+Test run summary: Passed!
+  /workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (35s 195ms)
+  /workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 09s 736ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (4m 08s 101ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (2m 17s 462ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 18s 533ms)
+  /workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 075ms)
+  /workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 058ms)
+  /workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (6s 254ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (1m 24s 406ms)
+  /workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 456ms)
+
+  total: 6129
+  failed: 0
+  succeeded: 6129
+  skipped: 0
+  duration: 6m 47s 469ms
