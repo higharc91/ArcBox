@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "template_animation_id": "walk-6-frames",
+  "animation_name": "ashmaw_walk_template_pilot",
+  "directions": [
+    "south"
+  ],
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "Slow heavy quadruped bear walking in place toward viewer, alternating forepaws and opposing hind paws, planted supporting paws throughout. No hopping, no head turning. Preserve the ash-grey bear and tiny ember fur tips."
+}

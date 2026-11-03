@@ -1,0 +1,8 @@
+{
+  "action": "Seamless WALK IN PLACE loop straight toward viewer. Alternate left and right planted foot contacts and return exactly to initial pose, never rotate the head, shoulders or body. Helmet remains rigidly attached to head. RIGHT hand (viewer LEFT) firmly grips the pick shaft throughout; hand, handle and pick head form one connected piece. Carry pick upright; do not wave it, swap hands or let it float. Tail follows the hips subtly. Maintain sprite scale and fixed camera.",
+  "frame_count": 8,
+  "first_frame_url": "https://api.pixellab.ai/mcp/images/9a126672-9cc0-4a9c-9c7d-984501f065ce/download",
+  "last_frame_url": "https://api.pixellab.ai/mcp/images/9a126672-9cc0-4a9c-9c7d-984501f065ce/download",
+  "seed": 7425,
+  "no_background": true
+}

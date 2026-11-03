@@ -1,0 +1,15 @@
+{
+  "job": {
+    "jobId": "job_hMzkr86vs1u2QbWENA27Kwjq",
+    "jobType": "custom",
+    "status": "success",
+    "progress": 1,
+    "createdAt": "2026-11-03T15:43:18.920Z",
+    "updatedAt": "2026-11-03T15:43:59.211Z",
+    "modelId": "model_google-gemini-nano-banana-2-1",
+    "assetIds": [
+      "asset_PQHAc99yMMSUBJFMbBsxm8ic"
+    ],
+    "cuCost": 13
+  }
+}

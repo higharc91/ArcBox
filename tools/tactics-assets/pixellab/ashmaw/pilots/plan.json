@@ -1,0 +1,87 @@
+{
+  "provider": "PixelLab",
+  "scope": "One south-facing pilot per character; inspect before rotations/full animation sets.",
+  "conceptApproval": "tools/tactics-assets/concepts/ashmaw/approvals.json",
+  "requests": [
+    {
+      "id": "ashmaw",
+      "tool": "create_image_pro",
+      "request": "ashmaw-request.json",
+      "seed": 7401,
+      "quotedGenerations": 10,
+      "approvedConcept": "tools/tactics-assets/concepts/ashmaw/ashmaw-concept.png",
+      "approvedConceptSha256": "953e9ea1a2496f13482e82038c6bf19bb24dce29065d7ceddcd641dc6a3916b6",
+      "styleProfile": "tools/tactics-assets/pixellab/wardenflame-style.json",
+      "status": "completed",
+      "chargedGenerations": 10,
+      "selectedCandidate": 1,
+      "review": "Front-facing reference suitable for animation pilot."
+    },
+    {
+      "id": "grisk",
+      "tool": "create_image_pro",
+      "request": "grisk-request.json",
+      "seed": 7402,
+      "quotedGenerations": 10,
+      "approvedConcept": "tools/tactics-assets/concepts/ashmaw/grisk-concept.png",
+      "approvedConceptSha256": "e7c2318bdb2eb5f3ca8c61648dd02e872c631890addd527c680c7f91c598c2de",
+      "styleProfile": "tools/tactics-assets/pixellab/wardenflame-style.json",
+      "status": "completed",
+      "chargedGenerations": 10,
+      "selectedCandidate": 1,
+      "review": "Front-most candidate still angled; correct facing before directional generation."
+    }
+  ],
+  "followups": [
+    {
+      "id": "ashmaw-idle-pilot",
+      "tool": "animate_image",
+      "plannedGenerationsUpperBound": 4,
+      "frameCount": 4,
+      "playbackSeconds": 4,
+      "chargedGenerations": 1,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-front-correction",
+      "tool": "edit_image",
+      "quotedGenerations": 10,
+      "chargedGenerations": 10,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-idle-pilot",
+      "tool": "animate_image",
+      "plannedGenerationsUpperBound": 3,
+      "frameCount": 4,
+      "status": "completed",
+      "chargedGenerations": 1
+    },
+    {
+      "id": "ashmaw-walk-pilot",
+      "tool": "animate_image",
+      "plannedGenerationsUpperBound": 3,
+      "frameCount": 8,
+      "status": "completed",
+      "chargedGenerations": 2
+    },
+    {
+      "id": "ashmaw-walk-loop-pilot",
+      "tool": "animate_image",
+      "plannedGenerationsUpperBound": 2,
+      "frameCount": 8,
+      "reason": "First walk turned its muzzle and ended mid-step; retain as rejected pilot, pin both endpoints on retry.",
+      "status": "completed",
+      "chargedGenerations": 2
+    },
+    {
+      "id": "grisk-walk-pilot",
+      "tool": "animate_image",
+      "plannedGenerationsUpperBound": 2,
+      "frameCount": 8,
+      "status": "completed",
+      "chargedGenerations": 2
+    }
+  ],
+  "chargedGenerationsSoFar": 38
+}

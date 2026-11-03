@@ -1,0 +1,25 @@
+{
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "parameters": {
+    "prompt": "Original production character concept sheet for Wardenflame, Embers of the Vale. Match the supplied approved brown-bear reference in grounded painted tactical-fantasy design, believable bear anatomy, clean separated material planes and restrained warm parchment presentation. Design ASHMAW, an ancient enormous cave bear that slept against a fading ember sliver for a century. This is the same animal family as the reference, grown larger: a massive low neck, broad heavy shoulders, a deep ash-grey coat, worn muzzle and eyes glowing like tiny banked coals. Only a few dry fur tips and the longest foreclaw hold a dull ember-orange warmth, with a little smoke at the shoulder. Most fur is cool grey, charcoal and pale ash. It is hungry, cold, old and magnificent, deserving mercy rather than a demonic monster. No lava cracks, molten flesh, crystal growths, spikes, armor, horns or flames replacing its body. Preserve a strong recognisable bear silhouette for tiny later game sprites. Four anatomically coherent legs, weight-bearing paws, consistent scar/coat pattern on every view, and firmly attached claws. Lay out full-body front, large three-quarter and back views of the same quadrupedal bear, with generous separation and all paws/ears inside the canvas. Include a head study, a small fur-tip and warm foreclaw material study, and a SIDE-VIEW scale inset with the same bear rearing upright beside a practical human adventurer. Human height 1.75 m; bear shoulder height on four paws about 1.8 m, reared height about 3.5 m, approximately twice the human. Put them on the same baseline. Human is a neutral scale reference with simple worn clothing, not a second hero design. Top-left light, warm highlights and cooler shadows, humane melancholy, painterly but clean not photorealistic, clear contours suitable for later pixel translation. Plain warm parchment background, no scenic landscape. No lettering, labels, captions, watermarks, UI or franchise references.",
+    "referenceImages": [
+      "asset_wJ9jPmmzuRMV6Qrdw4dGFqMd"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  },
+  "seed": null,
+  "seed_note": "The live Nano Banana 2.1 schema does not expose a seed parameter.",
+  "estimatedCU": 13,
+  "approval": "pending",
+  "reference": {
+    "path": "tools/tactics-assets/concepts/animals/generated/bear.png",
+    "asset_id": "asset_wJ9jPmmzuRMV6Qrdw4dGFqMd"
+  }
+}

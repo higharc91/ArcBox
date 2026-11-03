@@ -1,0 +1,47 @@
+{
+  "group_id": "8d3ce13a-4657-4dbb-899b-ad5effeb8ceb",
+  "states": [
+    {
+      "character": {
+        "id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+        "name": "Idle",
+        "prompt": "Rotate the exact ash-grey bear into only the missing EAST and WEST views. Keep the original pixel scale and all anatomy; the extra transparent border is intentional room for the full muzzle and hindquarters. Do not enlarge the body to fill the border. Keep the entire body and every paw inside the canvas with transparent margin. SOUTH is the straight front-facing input. Preserve the tiny banked coal eyes and sparse dull ember fur tips.",
+        "size": {
+          "width": 160,
+          "height": 160
+        },
+        "template_id": "bear",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-03T16:34:11.388384+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "ashmaw_walk_template_pilot": {
+            "south": [
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_000.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_001.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_002.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_003.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_004.png",
+              "Idle/animations/ashmaw_walk_template_pilot/south/frame_005.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-03T17:01:20.380903"
+}

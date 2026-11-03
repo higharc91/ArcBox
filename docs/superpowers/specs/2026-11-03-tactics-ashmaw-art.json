@@ -1,0 +1,96 @@
+{
+  "issue": 74,
+  "status": "Prompts only for props, poster, icons and terrain. No generation authorized for these assets.",
+  "characterArt": {
+    "provider": "PixelLab",
+    "records": "tools/tactics-assets/pixellab/ashmaw/",
+    "concepts": "tools/tactics-assets/concepts/ashmaw/",
+    "approval": "Both concepts and pixel pilot direction approved; actual TV world and battle motion approval still required."
+  },
+  "palette": "Use existing Wardenflame Ashen Ford palette; no new cave palette approved.",
+  "prompts": {
+    "interactables.bounty_board.empty": {
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. Small weathered oak town notice board with ordinary pinned scraps, readable parchment shapes and iron pins, matching notice_board_u.",
+      "standIn": "Existing town.notice_board_u building with procedural interaction marker."
+    },
+    "interactables.bounty_board.posted": {
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. Same weathered oak notice board, with one prominent aged parchment showing a simple ash-grey bear silhouette and the Ford Watch seal shape. No lettering.",
+      "standIn": "Existing town.notice_board_u building with procedural bounty marker."
+    },
+    "interactables.cave_mouth.idle": {
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. Dark rounded cave mouth recessed into burned-bank grey rock, low warm amber glow deep inside, soot and dry earth at the feet. No molten lava or crystals. Match surrounding cave-floor and rock textures.",
+      "standIn": "Procedural dark stone arch against painted existing cliff materials."
+    },
+    "items.ember_claw": {
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. One worn broad bear foreclaw, charcoal keratin with a tiny banked amber glow at its base. A warm proof of mercy, not a magical crystal or marketable shard. Transparent 32x32 icon.",
+      "standIn": "Procedural claw-shaped pickup marker and authored text."
+    },
+    "ui.bounty_poster": {
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. Weathered parchment panel with a simple grey bear silhouette and Ford Watch seal, generous blank space for game-rendered typography, warm practical materials, no pre-rendered lettering.",
+      "standIn": "Existing narrative panel with game-rendered title and bounty text."
+    },
+    "icons.trinket.barbarian": {
+      "name": "Ashmaw\u2019s Mantle",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A ash-grey fur shoulder mantle with subdued ember tips. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.bard": {
+      "name": "Bat-Bone Flute",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A short flute carved from pale bat bone. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.cleric": {
+      "name": "Hearthstone Pendant",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A smooth small hearthstone on a plain cord. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.druid": {
+      "name": "Ashwood Totem",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A ashwood bear totem on a cord. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.fighter": {
+      "name": "Ember-Claw Gauntlet",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A worn leather gauntlet with one warm bear claw. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.monk": {
+      "name": "Cinder Wraps",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A charcoal linen hand wraps with muted amber stitching. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.paladin": {
+      "name": "Warden\u2019s Ember Badge",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A modest Ford Watch badge with one dull ember stud. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.ranger": {
+      "name": "Ashmaw-Tooth Arrowheads",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A small bundle of tooth-shaped arrowheads. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.rogue": {
+      "name": "Kobold Delver\u2019s Ring",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A plain kobold copper delving ring with a tally notch. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.sorcerer": {
+      "name": "Smouldering Eye",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A round amber-glass eye charm, no crystal shard. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.warlock": {
+      "name": "Ash-Black Sigil",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A blackened iron sigil with a scratched ash mark. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    },
+    "icons.trinket.wizard": {
+      "name": "Kobold Surveyor\u2019s Lens",
+      "prompt": "Original Wardenflame pixel art, restrained Ashen Ford palette, top-left light, crisp native pixels, clean silhouette, no antialiasing, no text, no bloom. A small brass surveyor lens in a battered leather loop. Transparent 32x32 keepsake icon, readable at phone size.",
+      "standIn": "Existing class crest rendered in the rare-trinket frame."
+    }
+  },
+  "terrainGaps": {
+    "status": "Use existing cave_floor, rock, ash, mine_boards and planks materials; document any discovered gap here before requesting generation."
+  }
+}

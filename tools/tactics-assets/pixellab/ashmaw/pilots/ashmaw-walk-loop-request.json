@@ -1,0 +1,8 @@
+{
+  "action": "Seamless looping bear WALK IN PLACE toward viewer, complete left-right gait cycle and return exactly to first pose. Keep muzzle and both shoulders square facing SOUTH throughout, head centered without looking to either side. Slow lumbering steps, alternating forepaws lifting and planting while opposite hind paws support the body. Never all four paws airborne. No translation, no turning, no changing size. First and last poses match; finish a full cycle, not a half step.",
+  "frame_count": 8,
+  "first_frame_url": "https://api.pixellab.ai/mcp/images/6aa463e8-3262-4e50-99dd-46aaa0c56769/download?index=0",
+  "seed": 7424,
+  "no_background": true,
+  "last_frame_url": "https://api.pixellab.ai/mcp/images/6aa463e8-3262-4e50-99dd-46aaa0c56769/download?index=0"
+}

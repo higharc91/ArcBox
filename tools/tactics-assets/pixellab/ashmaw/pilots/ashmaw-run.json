@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 6aa463e8-3262-4e50-99dd-46aaa0c56769\njob_id: 6aa463e8-3262-4e50-99dd-46aaa0c56769\nmodel: pro\ndescription: Original grounded tactical fantasy pixel art for Wardenflame, Embers of the Vale. Three-quarter 2:1 isometric presentation, top-left light, warm highlights and cooler material shadows, selective coloured outlines, restrained clustered detail, clear silhouettes, worn practical materials. Match the supplied approved reference. Transparent background for standalone sprites. Preserve a clear ground-contact point. Background terrain must remain quieter than the characters. Ashmaw, the approved ancient giant cave bear: ash-grey heavy fur, a broad old muzzle, tiny banked-coal eyes and a few dull copper-orange smouldering shoulder/fur tips. A recognisable four-legged BEAR, with massive shoulders, low heavy neck, realistic weight-bearing paws and coherent attached claws. Quiet menacing age, not a lava monster. Standing on all four legs in a calm planted idle. Low top-down camera, facing straight SOUTH toward the viewer, both eyes and ears equally visible, shoulders square to the camera, no three-quarter turn. Preserve the approved concept's face and coat; no horns, crystals, armor, big flames or detached particles. Allow spare canvas above the head for later rearing motions. One subject only, feet in frame, no ground shadow, floor, labels or sheet. Crisp native pixels, warm top-left light, selective outline and clustered material detail. Use the attached fighter for rendering style only, never its anatomy or costume. Transparent background.\nsize: 128x128px\ntransparent: True\ncandidates: 4\nreferences: 1\nstyle_image: yes (outline, detail, shading)\npalette: 97 colours (Wardenflame / Ashen Ford)\nmax colours: 48 per image\nseed: 7401\nasset_id: 90432dce-0b86-508f-8461-3775dab78dbb\nasset_status: pending (saved when generation completes)\ncost: 10 generations\nstatus: processing (~1-10 min)\n\nhint: get_image(job_id=\"6aa463e8-3262-4e50-99dd-46aaa0c56769\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/6aa463e8-3262-4e50-99dd-46aaa0c56769/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

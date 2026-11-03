@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: Slow heavy quadruped bear walking in place toward viewer, alternating forepaws and opposing hind paws, planted supporting paws throughout. No hopping, no head turning. Preserve the ash-grey bear and tiny ember fur tips.\nmode: template\ndirections: south (1 jobs)\njob_ids: south=ef661183-6c01-433f-bfaf-42ac786d8277\ngroup: 565a2bc8-5fdc-4532-99c0-145d12439cc1\ncost: up to 2 generations (2/dir x 1 at most). On a 160x160 canvas this 6-frame clip runs in up to 2 batches per direction, 1 generation per batch, charged as each batch finishes\neta: ~2-10 min per batch, one batch at a time (up to 2 per direction)\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", template_animation_id=\"walk-6-frames\", animation_group_id=\"565a2bc8-5fdc-4532-99c0-145d12439cc1\", directions=[...])\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nif poor: delete_animation(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

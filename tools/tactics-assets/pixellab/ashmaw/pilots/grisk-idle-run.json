@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 04eb081e-99c0-4ef0-ab6f-fc450808ae30\njob_id: 04eb081e-99c0-4ef0-ab6f-fc450808ae30\naction: Subtle breathing idle loop, facing exactly straight toward viewer without turning. Feet stay planted. Helmet and hair stay fixed on the head. His RIGHT hand stays wrapped around the pick shaft on viewer LEFT; pick and hand move together as one, no floating equipment. Slight chest breathing only. Return to starting pose. No swaying, no stepping or bouncing.\nframes: 4\nsize: 96x96px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 7413\nasset_id: e2eadaad-5b83-57e1-9bcb-41115d816739\nasset_status: pending (saved when generation completes)\ncost: 1 generation\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"04eb081e-99c0-4ef0-ab6f-fc450808ae30\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/04eb081e-99c0-4ef0-ab6f-fc450808ae30/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

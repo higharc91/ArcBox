@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 88cba94f-5d0c-4575-8644-031ba7c1a1e0\njob_id: 88cba94f-5d0c-4575-8644-031ba7c1a1e0\naction: Very slow breathing idle loop, heavy bear remains planted in exactly the same place, facing straight toward viewer. Only subtle chest expansion and settling shoulders. All four paws stay anchored; no stepping, no side to side movement, no head turns, no camera movement. Return to starting pose. Ember fur tips remain tiny and subdued.\nframes: 4\nsize: 128x128px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 7411\nasset_id: 5ab0fae1-7d04-5333-b422-b82337b3508d\nasset_status: pending (saved when generation completes)\ncost: 1 generation\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"88cba94f-5d0c-4575-8644-031ba7c1a1e0\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/88cba94f-5d0c-4575-8644-031ba7c1a1e0/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

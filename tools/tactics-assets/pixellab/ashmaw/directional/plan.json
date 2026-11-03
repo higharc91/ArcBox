@@ -1,0 +1,111 @@
+{
+  "provider": "PixelLab",
+  "ownerPilotApproval": "Yes, keep this direction",
+  "requests": [
+    {
+      "id": "ashmaw",
+      "tool": "create_character",
+      "maximumBudgetGenerations": 9,
+      "directions": 8,
+      "mode": "v3",
+      "seed": null,
+      "status": "completed",
+      "chargedGenerations": 2,
+      "characterId": "4ee216f2-2bce-4a6e-9801-00e1cf57fc82"
+    },
+    {
+      "id": "grisk",
+      "tool": "create_character",
+      "maximumBudgetGenerations": 9,
+      "directions": 8,
+      "mode": "v3",
+      "seed": null,
+      "status": "completed",
+      "chargedGenerations": 2,
+      "characterId": "87f7effb-96de-402f-90ae-a37905475882"
+    }
+  ],
+  "productionImport": "Requires separate actual TV world and battle motion review.",
+  "chargedGenerations": 4,
+  "canvasCorrection": {
+    "reason": "East and west rotations touch both horizontal canvas edges; preserve the six usable views on a larger padded canvas and regenerate only the two side views.",
+    "tool": "create_character",
+    "maximumBudgetGenerations": 9,
+    "request": "ashmaw-padding-request.json",
+    "sourceCanvas": [
+      128,
+      128
+    ],
+    "paddedCanvas": [
+      160,
+      160
+    ],
+    "fixedOffset": [
+      16,
+      16
+    ],
+    "status": "completed",
+    "characterId": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+    "quotedGenerations": 4,
+    "chargedGenerations": 4
+  },
+  "walkTemplatePilots": [
+    {
+      "id": "grisk",
+      "direction": "south",
+      "maximumBudgetGenerations": 4,
+      "reason": "Validate skeleton-based walking and pick contact before expanding this animation to all directions.",
+      "status": "completed",
+      "quotedGenerations": 1,
+      "groupId": "ca790616-3e06-487c-b81e-35b79e79ce4a",
+      "jobId": "8f683ced-60ab-4030-b92d-9e591862abf3",
+      "chargedGenerations": 1,
+      "review": "Right-hand pick remains connected throughout six-frame south loop."
+    },
+    {
+      "id": "ashmaw",
+      "direction": "south",
+      "maximumBudgetGenerations": 4,
+      "request": "ashmaw-walk-template-request.json"
+    }
+  ],
+  "walkExpansion": {
+    "id": "grisk",
+    "directions": [
+      "south-east",
+      "east",
+      "north-east",
+      "north",
+      "north-west",
+      "west",
+      "south-west"
+    ],
+    "maximumBudgetGenerations": 7
+  },
+  "idleTemplatePilots": [
+    {
+      "id": "grisk",
+      "direction": "south",
+      "maximumBudgetGenerations": 1
+    },
+    {
+      "id": "ashmaw",
+      "direction": "south",
+      "maximumBudgetGenerations": 8,
+      "note": "Template clip length determines actual cost; inspect submit receipt."
+    }
+  ],
+  "ashmawWalkExpansion": {
+    "directions": [
+      "south-east",
+      "east",
+      "north-east",
+      "north",
+      "north-west",
+      "west",
+      "south-west"
+    ],
+    "maximumBudgetGenerations": 14,
+    "groupId": "565a2bc8-5fdc-4532-99c0-145d12439cc1"
+  }
+}

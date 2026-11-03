@@ -1,0 +1,103 @@
+{
+  "group_id": "722a2ad9-c752-4a56-b291-f2eafe63c780",
+  "states": [
+    {
+      "character": {
+        "id": "87f7effb-96de-402f-90ae-a37905475882",
+        "name": "Idle",
+        "prompt": "The exact small reptilian kobold foreman in the front-facing input, which is straight SOUTH. Rotate consistently: helmet with caged lamp fixed to head, patched vest, tally cord and curved tail. Mining pick stays in anatomical RIGHT hand in every view, fingers wrapped around shaft, including from back. Back views show back of helmet and clothes, no front belt buckle or face. Preserve native pixel style, colors and proportions.",
+        "size": {
+          "width": 96,
+          "height": 96
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-03T16:22:32.809051+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "grisk_walk_template_pilot": {
+            "east": [
+              "Idle/animations/grisk_walk_template_pilot/east/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/east/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/east/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/east/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/east/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/east/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/grisk_walk_template_pilot/north/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/north/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/north/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/north/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/north/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/north/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/grisk_walk_template_pilot/west/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/west/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/west/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/west/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/west/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/west/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/south-west/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/north-west/frame_005.png"
+            ],
+            "south": [
+              "Idle/animations/grisk_walk_template_pilot/south/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/south/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/south/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/south/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/south/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/south/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/north-east/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_000.png",
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_001.png",
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_002.png",
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_003.png",
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_004.png",
+              "Idle/animations/grisk_walk_template_pilot/south-east/frame_005.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-03T17:01:23.196344"
+}

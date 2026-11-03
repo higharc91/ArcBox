@@ -1,0 +1,20 @@
+{
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "seed": null,
+  "seed_note": "Model schema does not expose seeds.",
+  "parameters": {
+    "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the supplied Ashmaw sheet's grounded humane tactical-fantasy rendering: clean separated material planes, restrained painted detail for later pixel translation, warm top-left highlights and cooler shadows, worn practical materials, a consistent original game art direction. Create ONE environmental development concept sheet for THE CINDER HOLLOW, a small winding cave in the old burned east bank of the Ashen Ford. The supplied bear sheet is ONLY a style and Ashmaw creature-design reference. Compose three spacious connected isometric studies on one sheet: the exterior entrance under a layered dark stone cliff near a hermit's modest hut; the DIGGINGS, a poor kobold-worked chamber with worn timber braces, planked walkways, rope, low ore carts and scattered picks; and ASHMAW'S BED, a rounded deep cave with a tiny dim coal seam in the rock and a huge ash-grey bear resting beside it. The entrance is in golden autumn, cold old grey ash and dry grass, not an active volcano. Inside, a readable winding traversable floor leads from a narrow bat-filled throat, through the workings, a webbed warm nest, then to the round lair. Show believable head clearance, human-sized routes and a tiny neutral adventurer for scale. Charcoal-grey layered rock, earth-brown timber, pale dry ash, muted rusty iron, dim amber oil lanterns and tiny localized ember-orange warmth near the lair. Existing Ashen Ford stone/wood/ember material language only: no new neon hue scheme. The cave is cooling: warm pools are few and small; most stone is dark and quiet. No lava river, giant sellable crystals, shining treasure palace, impossible floating platforms or elaborate dwarven machinery. Keep environment detail quieter than the characters, with clearly readable floor and wall planes. Add a restrained bottom material strip of cave stone, old ash, worn plank and warm coal; leave room between studies. No lettering, labels, map icons, UI, watermark or franchise references.",
+    "referenceImages": [
+      "asset_wynqsh1xvxktkt87JBqpupQN"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  },
+  "approval": "pending"
+}

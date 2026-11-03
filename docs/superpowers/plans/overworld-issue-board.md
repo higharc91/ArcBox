@@ -124,6 +124,9 @@ No granary building, because the kit has none: (42,70) is sacks and crates. Maud
 ### OW-35 · NPCs and side quests · `done`, issue #73
 Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, atomic rewards and the shared/private pinned quest journal. Completed on `npcs-and-quests`; main integration is tracked in [PR #75](https://github.com/higharc91/ArcBox/pull/75). Rest/recovery and the character/palette board are integrated as prerequisites; OW-07 is complete. Full suite: 6,081 .NET and 504 phone tests. Mobile layout audit: 264 cases, including movement-wheel clearance. Actual force/parley chapter runs and the grain quest passed. [Report](../reports/2026-11-03-npcs-quests/README.md).
 
+### OW-36 · Ashmaw bounty · `doing`, issue #74
+Work is on `ashmaw-bounty`, based on merged #73. Both Scenario character concepts are owner-approved; PixelLab single-facing and idle pilots are under review before directional expansion. The twelve class trinkets, retained/dormant remake behavior and phone details are implemented; quest, cave, audio and integration checks remain in progress. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
+
 ## P3: later, needs design with the user
 
 Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
