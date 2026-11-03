@@ -30,6 +30,14 @@ test('safe water is a valid fire exit even though its warning mentions conductio
   assert.equal(escapeBurning({ surfaces: ['burning'], choices: { moves: [water] } }), water);
 });
 
+test('escaping still pursues the objective instead of scattering toward the nearest map edge', () => {
+  const retreat = { to: [0, 0], cost: 1 };
+  const ford = { to: [4, 2], cost: 4 };
+  const shortcutThroughFire = { to: [5, 2], cost: 3, risk: 3.5 };
+  const data = { surfaces: ['burning'], choices: { moves: [retreat, shortcutThroughFire, ford] } };
+  assert.equal(escapeBurning(data, [6, 2]), ford);
+});
+
 test('ordinary ground, decorative oil and no reachable safe exit do not cause shuffling', () => {
   for (const surfaces of [undefined, [], ['scorched'], ['oil']])
     assert.equal(escapeBurning({ surfaces, choices: { moves: [{ cost: 1 }] } }), null);

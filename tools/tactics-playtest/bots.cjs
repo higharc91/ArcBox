@@ -496,7 +496,7 @@ class Bot {
       }
       // The phone shows fire under this hero and forecasts each path's damage.
       // Movement still works after an action; do not end the turn in avoidable fire.
-      const escape = !this.moved && escapeBurning(this.view.data);
+      const escape = !this.moved && escapeBurning(this.view.data, foes.length ? weakest(foes, me.at).at : undefined);
       if (escape) {
         this.moved = true;
         log(`${this.name} leaves burning ground`);
@@ -507,9 +507,11 @@ class Bot {
       const starts = [...tactic.home.values()];
       const close = foes.filter((f) => starts.some((h) => dist(f.at, h) <= ENGAGE));
       if (close.length) tactic.quiet = 0;
-      if (!tactic.advance && foes.length <= 2) {
+      const objective = foes.find((foe) => TARGETS.has(foe.id));
+      if (!tactic.advance && (objective || foes.length <= 2)) {
         tactic.advance = true;
-        log(`${this.name}: ${foes.length} foe${foes.length === 1 ? '' : 's'} left, so the party goes after them`);
+        log(objective ? `${this.name}: pursue the defeat objective ${objective.name}`
+          : `${this.name}: ${foes.length} foe${foes.length === 1 ? '' : 's'} left, so the party goes after them`);
       }
       // Walk only while there's still an action to take where the walk ends: to the weakest foe near the party, or once the party goes
       // after them, the weakest of all; otherwise back to where this hero started.
