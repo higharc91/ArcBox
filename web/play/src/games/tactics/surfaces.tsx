@@ -15,6 +15,7 @@ export function SurfaceScene({ kinds }: { kinds?: string[] }) {
         {Array.from({ length: 12 }, (_, i) => <i key={i} style={{ "--i": i, "--x": `${4 + (i * 37) % 92}%` }} />)}
       </div>)}
     </div>
+    <div class={`tx-surface-glare tx-glare-${known[0]}`} aria-hidden="true" />
     <div class="tx-current-surfaces" role="status" aria-label={`Current terrain: ${known.map(k => terrain[k]).join(", ")}`}>
       <span class="tx-terrain-dot" aria-hidden="true" />
       {known.map(k => terrain[k]).join(" · ")}

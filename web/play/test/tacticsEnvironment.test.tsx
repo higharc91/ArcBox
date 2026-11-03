@@ -18,8 +18,10 @@ it.each([turnFixture, statusFixture, reactFixture])("immerses the current surfac
   expect(screen.getByLabelText("Current terrain: Burning ground, Water")).toBeTruthy();
   expect(document.querySelectorAll(".tx-surface-scene i").length).toBeLessThanOrEqual(24);
   expect(document.querySelector(".tx-surface-scene")?.getAttribute("aria-hidden")).toBe("true");
+  expect(document.querySelector(".tx-surface-glare")?.getAttribute("aria-hidden")).toBe("true");
   shown.rerender(<ControllerScreen view={structuredClone(fixture) as CustomView} send={send} me="ALEX" game="tactics" />);
   expect(document.querySelector(".tx-surface-scene")).toBeNull();
+  expect(document.querySelector(".tx-surface-glare")).toBeNull();
 });
 it("warns before moving and commits the exact server path", () => {
   const view = structuredClone(turnFixture) as CustomView;
