@@ -40,11 +40,15 @@ public sealed class CampLoreTests
         s.Send(0, "interact", new { target = fire.Id }); RestTests.Vote(s);
         for (var i = 0; i < 4; i++) s.Send(i, "campJob", new { job = i == 0 ? "watch" : "rest" });
         StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp?.Stage == "talk", "the camp reflection");
+        var view = s.Screen(0)!;
+        Assert.Equal("talk", view.Data.GetProperty("campScene").GetProperty("stage").GetString());
+        Assert.Equal(4, view.Data.GetProperty("campScene").GetProperty("members").GetArrayLength());
         var cursor = s.Game.Document.World!.Story!;
         Assert.Contains("Player1 takes the first watch", s.Host.Story!.Line!.Text);
         s = Resume(s.Game.Document);
         Assert.Equal(cursor.Node, s.Game.Document.World!.Story!.Node);
         StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.Asking, "the camp vote");
+        Assert.Equal("talk", s.Screen(0)!.Data.GetProperty("campScene").GetProperty("stage").GetString());
         for (var i = 0; i < 4; i++) s.Send(i, "vote", new { option = "hunger" });
         RestTests.Finish(s);
         Assert.Contains("camp_ch1_compassion", s.Game.Document.World!.Flags);

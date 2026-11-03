@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using ArcBox.Sdk;
 using Tactics.Logic;
 
@@ -237,7 +238,20 @@ public sealed partial class TacticsGame
     private CustomView CampScreen(Player player, ProfileId profile)
     {
         var camp = Camp!;
-        if (CampVote || CampTalk) return StoryScreen(player, profile);
+        if (CampVote) return StoryScreen(player, profile);
+        if (CampTalk)
+        {
+            // Keep the little camp on phones during the existing story/vote, without changing ordinary story packets.
+            var story = StoryScreen(player, profile);
+            var data = JsonNode.Parse(story.Data.GetRawText())!.AsObject();
+            data["campScene"] = JsonSerializer.SerializeToNode(new
+            {
+                stage = "talk", mode = camp.Mode, you = profile.Value,
+                members = RecoveryMembers().Select(m => new { m.Member, m.Class, m.Here }),
+                party = camp.Actors.Select(m => new { member = m, job = camp.Jobs.GetValueOrDefault(m)?.Job }),
+            }, ArcJson.Options);
+            return story with { Data = JsonSerializer.SerializeToElement(data, ArcJson.Options) };
+        }
         if (camp.Stage == "rooms") return ShopScreen(player, profile);
         var pick = camp.Jobs.GetValueOrDefault(profile.Value);
         var targeting = camp.Stage == "jobs" && pick is not null && RecoveryRules.Mends(pick.Job) is not null;
