@@ -65,6 +65,45 @@ public sealed class PhoneFixtureTests
         Check(screens);
     }
 
+    [Fact]
+    public void Recovery_screens_match_their_fixtures()
+    {
+        var camp = RestTests.AtCamp();
+        camp.Send(0, "interact", new { target = "fire" });
+        var screens = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["camp-vote"] = Node(camp.Harness.PlayerView(0)) };
+        RestTests.Vote(camp);
+        screens["camp-job"] = Node(camp.Harness.PlayerView(0));
+        camp.Send(0, "campJob", new { job = "tend" });
+        screens["camp-target"] = Node(camp.Harness.PlayerView(0));
+        camp.Send(0, "campJob", new { job = "cook" });
+        for (var i = 1; i < 4; i++) camp.Send(i, "campJob", new { job = "rest" });
+        screens["camp-rolled"] = Node(camp.Harness.PlayerView(0));
+        var inn = AuthoredService("af_inn");
+        screens["walk-ready-to-rest"] = Node(inn.Harness.PlayerView(0));
+        inn.Send(0, "interact", new { target = "shop:af_inn" });
+        inn.Send(0, "restPropose", new { shop = "af_inn" });
+        RestTests.Vote(inn);
+        screens["inn-rooms"] = Node(inn.Harness.PlayerView(0));
+        var temple = AuthoredService("af_chapel");
+        temple.Send(0, "interact", new { target = "shop:af_chapel" });
+        screens["temple"] = Node(temple.Harness.PlayerView(0));
+        Check(screens);
+    }
+
+    private static TacticsGameTests.Session AuthoredService(string id)
+    {
+        var s = ShopTests.AtShop(100);
+        var rules = TacticsGameTests.Rules;
+        var shop = rules.ShopsIn("ashen_ford").Single(x => x.Id == id);
+        var at = rules.RegionFor("ashen_ford")!.Def.People[shop.Keeper.Person!.Value].At;
+        var target = new InteractableDef(id, "stall", at);
+        var near = rules.ReachFor("ashen_ford")!.Where(t => t != at && Interactables.InReach(rules.GroundFor("ashen_ford")!.Terrain, t, target)).Order().First();
+        var doc = s.Game.Document;
+        doc = doc with { World = doc.World! with { At = near, Facing = at, RestReady = true },
+            Members = Ordinal.Map(doc.Members.Select(m => (m.Key, m.Value with { Character = m.Value.Character with { Injuries = [new("black_eye"), new("cracked_ribs")] } }))) };
+        return RestTests.Again(doc, rules: rules);
+    }
+
     private static string FixtureDir()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);

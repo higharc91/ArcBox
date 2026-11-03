@@ -158,6 +158,7 @@ const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : 
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
 const chapter = opt('chapter', false) === true;
 const shopRun = opt('shop', false) === true;
+const recoveryRun = opt('camp', false) === true;
 /** --branch=force|parley: the option the party votes for at the ford. */
 const branch = String(opt('branch', 'force'));
 /** --silent: nobody answers anything or skips a line, so every line, vote, choice and check runs on the game's own timers. */
@@ -659,6 +660,15 @@ class Bot {
         log(`${this.name} picks ${best.name} to roll ${view.data.skill}`);
         return this.input('pickRoller', { member: best.id });
       }
+      case 'camp-job':
+        if (!view.data.canPick || view.data.picked) return;
+        return this.input('campJob', { job: view.data.jobs.find(j => j.id === 'tend')?.can ? 'tend' : 'cook' });
+      case 'camp-target': {
+        if (!view.data.canPick || view.data.picked?.target) return;
+        const target = view.data.targets.find(t => t.can);
+        return target ? this.input('campJob', { job: view.data.job, target: target.member, injury: target.injury }) : this.input('campJob', { job: 'cook' });
+      }
+      case 'camp-roll': return; // The server's result and dawn timers run; nobody votes for a roller.
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
@@ -940,7 +950,7 @@ function stampOf(id) {
  */
 async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : ['beat', beat] : [stamp.map];
+  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : ['beat', beat] : [stamp.map];
   const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
@@ -1081,7 +1091,7 @@ async function walkToBeat(bots, watch, region, marker) {
       continue;
     }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
-    await lead.input('interact', marker.beat.startsWith('shop:') ? { target: marker.beat } : undefined);
+    await lead.input('interact', marker.beat.startsWith('shop:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
     log('CHAPTER the tap started nothing: trying again');
   }
@@ -1105,6 +1115,7 @@ async function playChapter(bots, watch, state) {
   await until('the walk screen', () => bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader));
   if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
   let since = 0;
+  let camped = false, inn = false;
   for (let n = 1; ; n++) {
     const marker = await until('a "!" on offer, or the chapter\'s card', () => {
       watch.read();
@@ -1122,7 +1133,32 @@ async function playChapter(bots, watch, state) {
     log(`CHAPTER ${marker.beat} is over`);
     // The TV puts the new "!" up in the same view as it wakes or moves the party, and can log it first: a moment for the snap.
     await sleep(2000);
+    if (recoveryRun && !camped && fightsDone > 0 && onWalk(bots)) {
+      await walkToBeat(bots, watch, region, { beat: 'thing:af_ford_campfire' });
+      await until('camp jobs and dawn to finish', () => onWalk(bots));
+      camped = true;
+      log('CAMP OK: voted, chose own jobs, resolved saved rolls, reached dawn');
+      await sleep(1000);
+    }
+    if (recoveryRun && camped && !inn && onWalk(bots) && bots.some(b => b.view.data.restReady)) {
+      await walkToBeat(bots, watch, region, { beat: 'shop:af_inn' });
+      await until('the inn on every phone', () => bots.every(b => b.view?.screen === 'shop'));
+      const leader = bots.find(b => b.view.data.leader);
+      await leader.input('restPropose', { shop: 'af_inn' });
+      await until('agreed rooms on every phone', () => bots.every(b => b.view?.screen === 'shop' && b.view.data.roomsOpen));
+      const payer = bots.find(b => b.view.data.gold >= 10);
+      const guest = payer.view.data.guests.find(g => !g.room);
+      const service = payer.view.data.services.find(s => s.kind === 'room');
+      const before = payer.view.data.gold;
+      await payer.input('shopService', { shop: 'af_inn', service: service.id, member: guest.member, trade: require('crypto').randomUUID() });
+      await until('the paid room', () => payer.view.data.gold === before - service.price && payer.view.data.guests.some(g => g.member === guest.member && g.room));
+      await until('dawn at the inn', () => onWalk(bots));
+      inn = true;
+      log('INN OK: agreed night, paid for a room from an own purse, reached dawn');
+      await sleep(1000);
+    }
   }
+  if (recoveryRun && (!camped || !inn)) throw new Error('The chapter did not complete both camp and inn recovery');
   log(`CHAPTER the card: ${fs.existsSync(String(tvLog)) ? (fs.readFileSync(tvLog, 'utf8').match(/^STORY card (.*)$/m)?.[1] ?? '') : ''}`);
   await until('walking after the card', () => onWalk(bots) && bots.some((b) => b.view.data.leader));
   await sleep(holdMs);

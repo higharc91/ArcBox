@@ -363,6 +363,7 @@ public sealed partial class TacticsGame
     /// <summary>The scene ended: the next of its stage that plays, after a gap, or else what follows the stage.</summary>
     private void SceneDone(SceneDef scene)
     {
+        if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
         var next = c.Thing is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
@@ -392,6 +393,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StageDone()
     {
+        if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
         if (c.Thing is not null)
         {
@@ -441,6 +443,7 @@ public sealed partial class TacticsGame
                 Flags = [.. world.Flags.Concat(beat.Sets).Distinct(StringComparer.Ordinal)],
                 Beats = world.Beats.Contains(beat.Id) ? world.Beats : world.Beats.Add(beat.Id),
                 Story = null,
+                RestReady = true,
             },
         };
         KeepWorld();
@@ -538,6 +541,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void ResumeStory()
     {
+        if (Camp is not null) { ResumeCamp(); return; }
         if (_doc.World?.Shop is not null) { ResumeShop(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
@@ -633,7 +637,7 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>How long the open question has (5d default 4).</summary>
-    private TimeSpan QuestionLength() => _telling switch
+    private TimeSpan QuestionLength() => CampVote ? TimeSpan.FromSeconds(20) : _telling switch
     {
         StoryStates.TieBreak => Tell.TieBreak,
         StoryStates.PickRoller => Tell.Roller,
@@ -747,7 +751,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StoryPresenceChanged()
     {
-        if (_doc.World?.Shop is not null) return;
+        if (_doc.World?.Shop is not null && Camp is null) return;
         if (!Questioning)
             return;
         if (!Voters().Any())
@@ -791,6 +795,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void QuestionDue()
     {
+        if (CampVote) { RestVoteDue(); return; }
         if (!Questioning || CurrentNode() is null)
             return;
         switch (_telling)
@@ -951,12 +956,12 @@ public sealed partial class TacticsGame
             _doc = _doc with { World = world with { Flags = all } };
     }
 
-    private SceneDef? CurrentScene() => Cursor is { Scene: { } id } c
+    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : Cursor is { Scene: { } id } c
         ? c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
         : null;
 
     /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
-    private ArcBeat CursorBeat() => Cursor!.Thing is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
+    private ArcBeat CursorBeat() => Camp is not null || Cursor!.Thing is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 

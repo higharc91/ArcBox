@@ -61,6 +61,10 @@
             "$ref": "#/$defs/node"
           },
           "minItems": 1
+        },
+        "camp": {
+          "type": "boolean",
+          "description": "Optional once-per-campaign camp reflection; never part of the normal beat chain."
         }
       },
       "required": [

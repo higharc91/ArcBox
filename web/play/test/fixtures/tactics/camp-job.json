@@ -1,0 +1,234 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "camp-job",
+  "data": {
+    "stage": "jobs",
+    "mode": "camp",
+    "job": null,
+    "you": "pr_member1",
+    "canPick": true,
+    "jobs": [
+      {
+        "id": "tend",
+        "name": "Tend wounds",
+        "skill": "medicine",
+        "dc": 12,
+        "can": true
+      },
+      {
+        "id": "rally",
+        "name": "Rally",
+        "skill": "persuasion",
+        "dc": 12,
+        "can": true
+      },
+      {
+        "id": "cook",
+        "name": "Cook",
+        "skill": "survival",
+        "dc": 10,
+        "can": true
+      },
+      {
+        "id": "watch",
+        "name": "Keep watch",
+        "skill": "perception",
+        "dc": 0,
+        "can": true
+      },
+      {
+        "id": "rest",
+        "name": "Rest easy",
+        "skill": "survival",
+        "dc": 0,
+        "can": true
+      }
+    ],
+    "targets": [],
+    "members": [
+      {
+        "member": "pr_member1",
+        "name": "Player1",
+        "class": "fighter",
+        "here": true,
+        "hp": 7,
+        "maxHp": 7,
+        "resources": [
+          {
+            "name": "second_wind",
+            "current": 2,
+            "max": 2
+          },
+          {
+            "name": "superiority",
+            "current": 2,
+            "max": 2
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          },
+          {
+            "id": "shaken",
+            "name": "Shaken",
+            "kind": "spirit",
+            "detail": "Shaken \u00B7 spirit recovery \u00B7 Frightened at battle start"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member2",
+        "name": "Player2",
+        "class": "cleric",
+        "here": true,
+        "hp": 5,
+        "maxHp": 5,
+        "resources": [
+          {
+            "name": "devotion",
+            "current": 4,
+            "max": 4
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          },
+          {
+            "id": "shaken",
+            "name": "Shaken",
+            "kind": "spirit",
+            "detail": "Shaken \u00B7 spirit recovery \u00B7 Frightened at battle start"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member3",
+        "name": "Player3",
+        "class": "rogue",
+        "here": true,
+        "hp": 5,
+        "maxHp": 5,
+        "resources": [
+          {
+            "name": "edge",
+            "current": 3,
+            "max": 3
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          },
+          {
+            "id": "shaken",
+            "name": "Shaken",
+            "kind": "spirit",
+            "detail": "Shaken \u00B7 spirit recovery \u00B7 Frightened at battle start"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member4",
+        "name": "Player4",
+        "class": "wizard",
+        "here": true,
+        "hp": 3,
+        "maxHp": 3,
+        "resources": [
+          {
+            "name": "mana",
+            "current": 4,
+            "max": 4
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          },
+          {
+            "id": "shaken",
+            "name": "Shaken",
+            "kind": "spirit",
+            "detail": "Shaken \u00B7 spirit recovery \u00B7 Frightened at battle start"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      }
+    ],
+    "picked": null,
+    "result": null,
+    "party": [
+      {
+        "member": "pr_member1",
+        "name": "Player1",
+        "job": null
+      },
+      {
+        "member": "pr_member2",
+        "name": "Player2",
+        "job": null
+      },
+      {
+        "member": "pr_member3",
+        "name": "Player3",
+        "job": null
+      },
+      {
+        "member": "pr_member4",
+        "name": "Player4",
+        "job": null
+      }
+    ],
+    "leader": true,
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:33.72\u002B00:00",
+  "header": null
+}

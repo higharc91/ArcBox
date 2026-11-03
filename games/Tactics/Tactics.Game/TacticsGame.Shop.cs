@@ -72,17 +72,19 @@ public sealed partial class TacticsGame
         {
             var count = line.Count;
             if (count >= 0 && saved?.Stock.TryGetValue(line.Item.Value, out var kept) == true
-                && !(line.Restock == "chapter" && chapter > saved.Chapter)) count = saved.Initial?.GetValueOrDefault(line.Item.Value, int.MinValue) == line.Count ? Math.Max(0, kept) : Math.Clamp(kept, 0, count);
+                && !(line.Restock == "chapter" && chapter > saved.Chapter) && !(line.Restock == "rest" && (_doc.World?.RestSeq ?? 0) > saved.Rest)) count = saved.Initial?.GetValueOrDefault(line.Item.Value, int.MinValue) == line.Count ? Math.Max(0, kept) : Math.Clamp(kept, 0, count);
             stock = stock.SetItem(line.Item.Value, count);
         }
         return new ShopSave(stock, chapter, saved?.Seq ?? 0, saved is null || saved.Trades.IsDefault ? [] : saved.Trades,
-            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))));
+            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))), _doc.World?.RestSeq ?? 0);
     }
 
     private void ShopInput(Player player, ProfileId profile, CustomInput input)
     {
         if (OpenShop is not { } shop || Str(input.Data, "shop") != shop.Id || !_online.Contains(player.Id)) return;
-        if (input.Action == "shopLeave") { if (profile.Value == _lead) CloseShop(); return; }
+        if (input.Action == "restPropose") { if (profile.Value == _lead && shop.Services.Any(s => s.Kind == "room") && Camp is null) ProposeRest("inn", shop.Id, KeeperTile(shop)); return; }
+        if (input.Action == "shopService") { ShopService(player, profile, input); return; }
+        if (input.Action == "shopLeave") { if (profile.Value == _lead && Camp is null) CloseShop(); return; }
         if (input.Action is not ("shopBuy" or "shopSell")) return;
         var trade = Str(input.Data, "trade");
         if (string.IsNullOrWhiteSpace(trade) || trade.Length > 128) { Toast(player.Id, "A trade id is required."); return; }
@@ -127,7 +129,7 @@ public sealed partial class TacticsGame
         var shop = OpenShop!;
         var stock = StockOf(shop);
         var member = _doc.For(profile);
-        return Custom("shop", new
+        return WithServices(Custom("shop", new
         {
             shop = new { id = shop.Id, name = shop.Name, keeper = shop.Name, greeting = shop.Greeting },
             gold = member?.Gold ?? 0,
@@ -141,12 +143,15 @@ public sealed partial class TacticsGame
             vip = IsVip(player),
             feed = _tradeFeed.ToArray(),
             portal = PortalPath(),
-        });
+        }), profile);
     }
 
-    private ShopView? ShopViewOf() => OpenShop is not { } shop ? null : new ShopView(shop.Id, shop.Name, shop.Name,
+    private ShopView? ShopViewOf() => CampVote || CampTalk || OpenShop is not { } shop ? null : new ShopView(shop.Id, shop.Name, shop.Name,
         shop.Greeting, TotalGold, StockOf(shop).Seq,
         [.. shop.Stock.Select(s => new ShopItemView(s.Item.Value, Rules.Items[s.Item].Name, ShopRules.Buy(Rules.Items[s.Item], shop), StockOf(shop).Stock[s.Item.Value]))],
         [.. _tradeFeed], shop.Keeper.Person is { } person ? "characters." + _region!.Def.People[person].Preset : null,
-        [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))]);
+        [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))],
+        shop.Services.IsEmpty ? null : shop.Services,
+        shop.Services.IsEmpty ? null : [.. _doc.Members.Select(m => new ServiceGuestView(m.Key, m.Value.Character.Name,
+            [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))], shop.Services.IsEmpty ? null : RecoveryMembers());
 }

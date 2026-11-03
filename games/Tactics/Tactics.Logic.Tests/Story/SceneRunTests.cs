@@ -354,7 +354,7 @@ public sealed class SceneRunTests
                 PlayBeat(step, (scene, flags) => Explore(scene, step.Beat, flags, tags, problems, memo), played);
         }
         Assert.Empty(problems);
-        Assert.Equal(Book.Scenes.Select(s => s.Id).Order(), played.Order());
+        Assert.Equal(Book.Scenes.Where(s => !s.Camp).Select(s => s.Id).Order(), played.Order());
     }
 
     /// <summary>A <c>next</c> can't lead round in a circle: only an option can go back, and options are each taken once.</summary>

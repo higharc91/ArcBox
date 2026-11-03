@@ -29,9 +29,9 @@ describe("tactics phone module", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
       .filter((n) => !n.startsWith("portal-")).sort();
     expect(names).toEqual([
-      "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "environment-status", "environment-turn", "pickClass", "pickEncounter",
+      "camp-job", "camp-rolled", "camp-target", "camp-vote", "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "environment-status", "environment-turn", "inn-rooms", "pickClass", "pickEncounter",
       "pickEncounter-noWalk",
-      "react", "results", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader", "walk-things", "walk-things-follower", "walk-with-gold",
+      "react", "results", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "temple", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-with-gold",
     ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);

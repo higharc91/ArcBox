@@ -56,13 +56,20 @@ public sealed class ThingArtTests
     }
 
     [Fact]
-    public void Until_the_set_exists_a_kind_draws_as_its_stand_in_or_as_the_marker()
+    public void Kinds_without_generated_art_keep_their_stand_in_or_marker()
     {
         var art = Now.Value;
-        Assert.False(art.HasOwnArt);
+        Assert.True(art.HasOwnArt);
         foreach (var thing in EveryState())
         {
             var pick = art.Pick(thing);
+            if (thing.Kind == "campfire")
+            {
+                Assert.Equal(ThingSource.Art, pick.Source);
+                Assert.Equal("interactables.campfire." + thing.State, pick.Key);
+                Assert.True(File.Exists(Path.Combine(Pack.Root, pick.Sprite!.Path)));
+                continue;
+            }
             if (thing.StandIn is null)
             {
                 Assert.Equal(ThingSource.Marker, pick.Source);

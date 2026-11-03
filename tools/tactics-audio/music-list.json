@@ -158,5 +158,16 @@
   "use": "BattleEnded with victory over a boss (generated with vocals allowed, for the wordless choir)",
   "seed": 4241,
   "instrumental": false
+ },
+ "camp_dawn": {
+  "prompt": "Original brief pastoral sunrise cue: airy flute, rippling harp and soft high chimes, hopeful G major, an ascending phrase resolving warmly. Original score in compose_dawn.py; no samples or quoted melodies.",
+  "duration": 6.8,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "Sunrise after camp or inn; then the region music resumes",
+  "seed": 7114,
+  "instrumental": true,
+  "source": "original synthesized score (compose_dawn.py)"
  }
 }

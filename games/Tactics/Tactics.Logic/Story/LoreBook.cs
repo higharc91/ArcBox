@@ -47,7 +47,7 @@ public sealed class LoreBook
         Arcs = arcs;
         Scenes = scenes;
         _byRegion = arcs.ToImmutableSortedDictionary(a => a.Region, a => a, StringComparer.Ordinal);
-        _scenesByBeat = scenes.GroupBy(s => s.Beat, StringComparer.Ordinal)
+        _scenesByBeat = scenes.Where(s => !s.Camp).GroupBy(s => s.Beat, StringComparer.Ordinal)
             .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray(), StringComparer.Ordinal);
         _characters = characters.ToImmutableDictionary(c => c.Id, c => c, StringComparer.Ordinal);
         _clipFiles = clipFiles;
@@ -156,9 +156,9 @@ public sealed class LoreBook
                 if (!seen.Add(scene.Id))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is already in the pack.");
                 // A battle beat plays its lead-in, the fight, then its aftermath, so in the pack's order no lead-in can follow an aftermath.
-                if (scene.After)
+                if (!scene.Camp && scene.After)
                     aftermath.Add(scene.Beat);
-                else if (aftermath.Contains(scene.Beat))
+                else if (!scene.Camp && aftermath.Contains(scene.Beat))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is a lead-in of '{scene.Beat}', and comes after one of its aftermath scenes.");
                 scenes.Add(scene);
                 warnings.AddRange(Unshown(scene, choiceBeats).Select(w => $"{scenePath}: {w}"));
@@ -286,11 +286,15 @@ public sealed class LoreBook
         var beat = Required(e, "beat", where);
         if (!beats.TryGetValue(beat, out var kind))
             throw new BadLore($"{where} plays the beat '{beat}', which no arc has.");
+        if (Field(e, "camp", where).ValueKind == JsonValueKind.Null)
+            throw new BadLore($"{where} has a 'camp' that isn't true or false.");
+        if (Flag(e, "camp", where) && Flag(e, "after", where))
+            throw new BadLore($"{where} cannot be both a camp scene and a battle aftermath.");
         if (Flag(e, "after", where) && kind != ArcBeat.Battle)
             throw new BadLore($"{where} is an aftermath, and only a battle beat has one: '{beat}' is a {kind} beat.");
         var nodes = List(e, "nodes", where, required: true).Select(n => ReadNode(n, where)).ToImmutableArray();
         var scene = new SceneDef(id, beat, Optional(e, "place", where), Optional(e, "title", where) ?? "", Strings(e, "requires", where),
-            Strings(e, "unless", where), Strings(e, "cast", where), Required(e, "start", where), nodes, Flag(e, "after", where));
+            Strings(e, "unless", where), Strings(e, "cast", where), Required(e, "start", where), nodes, Flag(e, "after", where), Flag(e, "camp", where));
 
         if (nodes.GroupBy(n => n.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } repeated)
             throw new BadLore($"{where} has the node '{repeated.Key}' twice.");

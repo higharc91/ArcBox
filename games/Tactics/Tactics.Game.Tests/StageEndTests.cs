@@ -151,6 +151,12 @@ public sealed class StageEndTests
     /// </summary>
     private static readonly Lazy<RulesPack> NoFord = new(() => ExplorationTests.EditedRules(rules =>
     {
+        // This synthetic flood cuts off the eastern fire as well as the beats relocated below.
+        var thingsPath = Path.Combine(rules, "interactables", "ashen_ford.json");
+        var things = JsonNode.Parse(File.ReadAllText(thingsPath))!;
+        var list = things["interactables"]!.AsArray();
+        list.Remove(list.Single(t => t!["id"]!.GetValue<string>() == "af_ford_campfire"));
+        File.WriteAllText(thingsPath, things.ToJsonString());
         var mapPath = Path.Combine(rules, "maps", "river_crossing.json");
         var map = JsonNode.Parse(File.ReadAllText(mapPath))!;
         var width = map["size"]![0]!.GetValue<int>();

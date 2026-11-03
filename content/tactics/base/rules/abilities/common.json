@@ -67,5 +67,6 @@
       "presentation": { "anim": "characters.shoot", "fx": "fx.smoke.grey", "projectile": "projectiles.rock" },
       "ai": { "tags": ["control", "area", "item"] },
       "flavor": "Oil splashes the area. The next fire damage an oiled creature takes deals 5 extra fire; the coating lasts 10 rounds." }
-  ]
+  ],
+  "passives": [{ "id": "rest.well_fed", "hook": "onBattleStart", "target": "self", "effects": [{ "tempHp": { "dice": "3" } }] }]
 }

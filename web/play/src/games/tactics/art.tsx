@@ -145,3 +145,14 @@ export function Logo({ small = false }: { small?: boolean }) {
     </div>
   );
 }
+
+interface InjuryManifest { icons: Record<string, { file: string; size: [number, number]; name: string; kind: string }> }
+/** Reusable injury/debuff art keyed by rules injury id. The surrounding control supplies the accessible name. */
+export function InjuryIcon({ id }: { id: string }) {
+  const base = usePackBase();
+  const manifest = usePackJson<InjuryManifest>("injury_icons/manifest.json");
+  const icon = manifest?.icons[id];
+  return <span class="tx-injury-icon" aria-hidden="true">{base && icon
+    ? <img src={`${base}injury_icons/${icon.file}`} alt="" width="32" height="32" draggable={false} />
+    : <span>✦</span>}</span>;
+}

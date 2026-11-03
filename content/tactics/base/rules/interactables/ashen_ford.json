@@ -149,6 +149,8 @@
       "name": "smugglers' cache",
       "hidden": 12,
       "loot": [{ "item": "smoke_bomb", "count": 1 }, { "gold": 40 }]
-    }
+    },
+    {"id": "af_ford_campfire", "kind": "campfire", "at": [119, 62], "name": "ford campfire"},
+    {"id": "af_road_campfire", "kind": "campfire", "at": [73, 64], "name": "road campfire"}
   ]
 }

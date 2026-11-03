@@ -111,6 +111,21 @@ class CheckTests(unittest.TestCase):
         # The well-formed scene (a check, a tagged option, a flag the beat sets) raises nothing.
         self.assertFalse([e for e in errors if "/scenes/0/" in e], errors)
 
+    def test_camp_scenes_are_separate_from_battle_aftermaths_and_can_set_their_own_flags(self):
+        def scene(id_, **extra):
+            return dict(id=id_, beat="fight", cast=["narrator"], start="n",
+                        nodes=[dict(id="n", lines=[dict(id=id_+"_line", speaker="narrator", text="Fire.")],
+                                    sets=["camp_reflection"] if extra.get("camp") is True else [], end=True)], **extra)
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            (pack / "scenes").mkdir()
+            (pack / "pack.json").write_text(json.dumps(dict(id="camp", loreVersion=1, requires=["story"], files=["scenes/camp.json"])))
+            (pack / "scenes/camp.json").write_text(json.dumps(dict(scenes=[
+                scene("won", after=True), scene("reflection", camp=True), scene("bad_both", camp=True, after=True)])) )
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        self.assertTrue(any("camp scene cannot also" in e for e in errors), errors)
+        self.assertFalse(any("reflection" in e or "lead-in" in e for e in errors), errors)
+
     def test_after_is_only_for_a_battle_beat(self):
         def scene(id_: str, beat: str, after: bool | None) -> dict:
             s = {"id": id_, "beat": beat, "cast": ["narrator"], "start": "n",

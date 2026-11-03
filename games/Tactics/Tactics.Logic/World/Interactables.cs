@@ -193,6 +193,7 @@ public static class Interactables
         {
             InteractableFamily.Container when save.State == InteractableKinds.Closed => $"Open the {name}",
             InteractableFamily.Passage when save.State == InteractableKinds.Closed => worked ? $"Look at the {name}" : $"Open the {name}",
+            InteractableFamily.Rest => "Make camp",
             InteractableFamily.Switch => $"Pull the {name}",
             InteractableFamily.Readable => $"Read the {name}",
             InteractableFamily.Pickup when save.State == InteractableKinds.Here => $"Pick up the {name}",

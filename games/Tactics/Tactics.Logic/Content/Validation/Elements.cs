@@ -175,6 +175,8 @@ internal sealed partial class Validation
             if (!EffectsIn(e, "effects", file, ptr, inSave: false))
                 return null;
             var def = Deserialize<InjuryDef>(e, file, ptr);
+            if (def is not null && def.Mends is not ("rest" or "spirit" or "body"))
+                Error(file, Pointer.Append(ptr, "mends"), "An injury mends with rest, spirit or body recovery.");
             if (def is { Weight: < 1 })
                 Error(file, Pointer.Append(ptr, "weight"), "The weight must be at least 1.");
             if (def is { Hook: null, Effects.IsEmpty: false })

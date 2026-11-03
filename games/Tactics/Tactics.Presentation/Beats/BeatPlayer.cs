@@ -30,6 +30,8 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
     public FxDraw AtWorldOrigin(Tile origin) => Order is { } order
         ? this with { Order = order + BoardOrder.Key(origin, BoardLayer.Under) }
         : this;
+    /// <summary>An optional tint for recovery effects; ordinary effects retain their existing white modulation.</summary>
+    public Rgb? Tint { get; init; }
 }
 
 /// <summary>Where a number that pops up over a unit is drawn this moment, in art pixels.</summary>

@@ -497,20 +497,26 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _things = ThingsFor(plan.Terrain, art);
             (_thingsFed, _plugsAsked) = (null, []);
         }
+        world.CampLight(_camp, _campPhaseSeconds, _explore?.Morning == true, delta);
+        var campActive = CampScene.Active(_camp);
+        var coverLook = _cover.Look(_walking, _battle, _overWorld);
+        _header.Visible = _table.Visible = !campActive && coverLook.HeaderAndTable;
+        if (_worldHud is { } campWorldHud) campWorldHud.Visible = !campActive && coverLook.PanelsShown;
         FeedWalk();
         FeedThings();
 
-        var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, _director is { } director ? WalkStage.Of(director, _stageShake) : null);
+        var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, CampStage(plan.Terrain, delta, _director is { } director ? WalkStage.Of(director, _stageShake) : null));
         if (frame.Cut)
         {
             GD.Print(FormattableString.Invariant($"TACTICS walk snapped to {frame.Tile.X:0.0} {frame.Tile.Y:0.0}"));
         }
+        frame = frame with { Units = CampScene.Pose(frame.Units, _camp, _campPhaseSeconds), Walkers = CampScene.Pose(frame.Walkers, _camp, _campPhaseSeconds) };
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
         var things = _things?.Frame(delta, _walk.Pixels, world.View);
         Plug(world, things?.Plugs ?? []);
-        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, shown.Units) : frame.Units, frame.Walkers, art);
-        world.ShowEffects(things?.Effects ?? []);
+        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, [.. shown.Units.Where(u => !CampScene.Active(_camp) || u.Id.Value != "thing:" + _camp!.Source)]) : frame.Units, frame.Walkers, art);
+        world.ShowEffects([.. things?.Effects ?? [], .. MendDraws()]);
         foreach (var sound in things?.Sounds ?? [])
         {
             _audio.Play(sound, ThingSounds.Db);
@@ -746,6 +752,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         Show(screen);
         ShowShop(v);
+        ShowCamp(v);
         director.LastBlowPlayed();      // nothing if the results aren't up, or have had it
     }
 

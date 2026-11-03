@@ -152,6 +152,26 @@ public sealed class MusicChoiceTests
         Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Story")));
     }
 
+    [Theory]
+    [InlineData("camp", "jobs", "camp", "amb_campfire")]
+    [InlineData("camp", "results", "camp", "amb_campfire")]
+    [InlineData("camp", "talk", "camp", "amb_campfire")]
+    [InlineData("inn", "rooms", "camp", null)]
+    [InlineData("camp", "vote", "town_emberwick", null)]
+    [InlineData("camp", "dawn", "camp_dawn", null)]
+    [InlineData("inn", "dawn", "camp_dawn", null)]
+    public void Recovery_nights_play_the_cozy_loop_under_the_fire_and_return_to_region_music_at_dawn(string mode, string stage, string music, string? ambience)
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+        var camp = new CampView(mode, "fire", stage, new Tile(2, 2), 0, [], null, 0, null);
+        var view = View("Story") with { Explore = explore, Camp = camp };
+        Assert.Equal(new MusicCue(music, stage == "dawn" ? "town_emberwick" : null), MusicChoice.Of(view));
+        if (stage == "dawn") Assert.False(Bank.Value.Track("camp_dawn")!.Loop);
+        Assert.Equal(ambience, MusicChoice.AmbienceOf(view));
+        Assert.True(Bank.Value.Track("camp")!.Loop);
+        Assert.True(Bank.Value.Sound("amb_campfire")!.Loop);
+    }
+
     [Fact]
     public void A_region_with_no_track_of_its_own_gets_the_field_tune()
     {

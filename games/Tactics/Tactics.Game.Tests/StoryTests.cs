@@ -50,7 +50,10 @@ public sealed class StoryTests
     {
         var spot = SpotOf(beat);
         foreach (var from in StageBattleTests.Reached.Order())
-            if (!StoryRules.InReach(Ground, from, spot))
+            if (!StoryRules.InReach(Ground, from, spot)
+                && !Rules.ShopsIn("ashen_ford").Any(shop => shop.Keeper.Person is { } person
+                    && Interactables.InReach(Ground, from, new InteractableDef(shop.Id, "stall", StageBattleTests.Region.People[person].At)))
+                && !Rules.InteractablesIn("ashen_ford").Any(thing => Interactables.InReach(Ground, from, thing)))
                 foreach (var dir in Enum.GetValues<WalkDir>())
                     if (WorldWalk.Next(Ground, from, dir, ClassDef.DefaultJump, null) is { } move && StoryRules.InReach(Ground, move.To, spot))
                         return (from, dir);

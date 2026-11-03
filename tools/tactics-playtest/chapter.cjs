@@ -22,7 +22,7 @@ const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
 
-const SCENES = JSON.parse(fs.readFileSync(path.join(__dirname, '../../content/tactics/base/lore/scenes/ch1.json'), 'utf8')).scenes;
+const SCENES = [...JSON.parse(fs.readFileSync(path.join(__dirname, '../../content/tactics/base/lore/scenes/ch1.json'), 'utf8')).scenes, ...JSON.parse(fs.readFileSync(path.join(__dirname, '../../content/tactics/base/lore/scenes/camp.json'), 'utf8')).scenes];
 const ORDER = {
   force: ['ch1_mayor', 'ch1_ford', 'ch1_dawn', 'ch1_bridge_cost', 'ch1_maud', 'ch1_docks', 'ch1_kindler', 'ch1_four_more'],
   parley: ['ch1_mayor', 'ch1_ford', 'ch1_parley', 'ch1_young_ones', 'ch1_road_east', 'ch1_maud', 'ch1_granary', 'ch1_song', 'ch1_docks',
@@ -48,7 +48,7 @@ function check(file, branch, args) {
   const shown = [];
   for (const [i, text] of lines.entries()) {
     const m = STORY.exec(text);
-    if (m && m[2] !== '-') shown.push({ at: i + 1, line: m[2], said: m[3] === 'said', state: m[4] });
+    if (m && m[2] !== '-' && m[2] !== 'rest_vote_ask') shown.push({ at: i + 1, line: m[2], said: m[3] === 'said', state: m[4] });
   }
   const order = shown.filter((s, i) => i === 0 || shown[i - 1].line !== s.line).map((s) => s.line);
   const unknown = order.filter((l) => !sceneOf.has(l));
@@ -63,8 +63,9 @@ function check(file, branch, args) {
   }
   const scenes = runs.map((r) => r.scene);
   console.log(`scenes: ${runs.map((r) => `${r.scene} (${r.lines.length})`).join(', ')}`);
-  if (JSON.stringify(scenes) !== JSON.stringify(ORDER[branch])) fail.push(`the scenes ${ORDER[branch].join(', ')} in order (they were ${scenes.join(', ')})`);
+  if (JSON.stringify(scenes.filter(id => !SCENES.find(s => s.id === id)?.camp)) !== JSON.stringify(ORDER[branch])) fail.push(`the scenes ${ORDER[branch].join(', ')} in order (they were ${scenes.join(', ')})`);
 
+  if (scenes.filter(id => SCENES.find(s => s.id === id)?.camp).length > 1) fail.push('a camp reflection played more than once');
   // Each scene's lines walk its graph.
   for (const run of runs) {
     const scene = SCENES.find((sc) => sc.id === run.scene);
@@ -105,7 +106,8 @@ function check(file, branch, args) {
     const times = shown.filter((s) => s.line === line && s.said).length;
     said += times;
     if (times > 1) fail.push(`${line} said once (it was said ${times} times)`);
-    if (times === 0 && line !== backTo && line !== inFlight) fail.push(`${line} said (it was only shown)`);
+    const captionOnly = SCENES.find(s => s.id === sceneOf.get(line))?.camp === true;
+    if (times === 0 && !captionOnly && line !== backTo && line !== inFlight) fail.push(`${line} said (it was only shown)`);
   }
   console.log(`lines: ${new Set(order).size}, said ${said}${backTo ? `; the relaunched TV came back to ${backTo}` : ''}${inFlight ? `; the restart came back to ${inFlight}` : ''}`);
   if (relaunched && backTo) {

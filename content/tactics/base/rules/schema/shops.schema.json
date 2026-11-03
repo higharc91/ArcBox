@@ -130,6 +130,38 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 30
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "kind",
+                "price"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kind": {
+                  "enum": [
+                    "room",
+                    "cure"
+                  ]
+                },
+                "price": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         },
         "additionalProperties": false

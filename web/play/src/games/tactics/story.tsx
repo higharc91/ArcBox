@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { MoodPortrait, Portrait } from "./art";
+import { CampScene, type CampSceneData } from "./camp-scene";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { CheckCard, CheckData, CheckRoll, DialogueData, StoryOption, VoteData } from "./types";
 import { className, LineIcon, useShellClock } from "./ui";
@@ -63,7 +64,7 @@ function AskHead({ eyebrow, title, tie }: { eyebrow: string; title: string; tie:
  * so the second tap of a double tap can't skip the line after.
  */
 export function Dialogue({ data, send, viewId }: CustomScreenProps) {
-  const d = data as DialogueData;
+  const d = data as DialogueData & { campScene?: CampSceneData };
   const sfx = useSfx();
   const shown = useRef({ view: viewId, at: Date.now() });
   if (shown.current.view !== viewId) shown.current = { view: viewId, at: Date.now() };
@@ -82,6 +83,7 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
   return (
     <div class="tx tx-story">
       <StoryHost vip={d.vip} send={send} />
+      {d.campScene && <CampScene {...d.campScene} />}
       {d.title ? <p class="tx-story-title"><span class="tx-eyebrow">The story</span><b>{d.title}</b></p> : null}
       {/* Live, and never remounted, so a screen reader says each new line as it comes. */}
       <div class="tx-say-live" aria-live="polite">
@@ -229,7 +231,7 @@ export function Vote(props: CustomScreenProps) {
 }
 
 function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { question: string }) {
-  const d = data as VoteData;
+  const d = data as VoteData & { campScene?: CampSceneData };
   const alerted = useAlertOnMount("yourTurn", question, d.canChoose);
   const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("vote", { option: id }));
 
@@ -254,6 +256,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
   return (
     <div class={`tx tx-ask${alerted ? " arrived" : ""}`}>
       <StoryHost vip={d.vip} send={send} />
+      {d.campScene && <CampScene {...d.campScene} />}
       <AskHead eyebrow={eyebrow} title={title} tie={d.tie} />
       <ul class={`tx-options${d.canChoose ? "" : " static"}`} aria-label="Options">
         {d.options.map((o, i) => {
@@ -358,7 +361,7 @@ export function Check(props: CustomScreenProps) {
 }
 
 function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { question: string }) {
-  const d = data as CheckData;
+  const d = data as CheckData & { campScene?: CampSceneData };
   const alerted = useAlertOnMount("yourTurn", question, d.canChoose && !d.roll);
   const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("pickRoller", { member: id }));
 
@@ -373,6 +376,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
   return (
     <div class={`tx tx-check${roll ? " rolled" : ""}${alerted ? " arrived" : ""}`}>
       <StoryHost vip={d.vip} send={send} />
+      {d.campScene && <CampScene {...d.campScene} />}
       <div class="tx-check-head">
         <span class="tx-eyebrow">Skill check</span>
         <h2 class="tx-check-skill">{skillName(d.skill)}</h2>

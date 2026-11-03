@@ -52,7 +52,7 @@ public partial class FxLayer : Node2D
             var size = new Vector2(draw.Size.X, draw.Size.Y);
             var source = new Rect2(draw.Source.X, draw.Source.Y, draw.Source.Width, draw.Source.Height);
             DrawSetTransform(new Vector2(draw.TopLeft.X, draw.TopLeft.Y) + size / 2, draw.Rotation);
-            DrawTextureRectRegion(texture, new Rect2(-size / 2, size), source, new Color(1, 1, 1, draw.Alpha));
+            DrawTextureRectRegion(texture, new Rect2(-size / 2, size), source, draw.Tint is { } tint ? new Color(tint.R, tint.G, tint.B, draw.Alpha) : new Color(1, 1, 1, draw.Alpha));
         }
     }
 }

@@ -36,6 +36,7 @@ public partial class TacticsAudio : Node
     private readonly Dictionary<AudioStreamPlayer, long> _startedAt = [];
     private long _started;
     private string? _then;
+    private string? _playingMusic;
 
     public override void _Ready()
     {
@@ -113,6 +114,7 @@ public partial class TacticsAudio : Node
 
     private void Start(string id, float fade, string? then)
     {
+        if (_playingMusic == id && _music[_front].Playing) { _then = then; return; }
         if (_bank?.Track(id) is not { } track || Stream(track.File, track.Loop) is not { } stream)
         {
             if (then is not null)
@@ -127,6 +129,7 @@ public partial class TacticsAudio : Node
         next.Stream = stream;
         next.VolumeDb = QuietDb;
         next.Play();
+        _playingMusic = id;
         Fade(next, 0, fade, stopAfter: false);
         AudioLog.Play(AudioBuses.Music, id);
 
