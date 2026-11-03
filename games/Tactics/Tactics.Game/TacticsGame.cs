@@ -108,6 +108,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Start(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign);
+        _doc = TacticsDocument.Read(campaign.Document);
+        WorldCall("start", () => StartCore(ctx, players, campaign));
+    }
+
+    private void StartCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
+    {
+        (_ctx, _players, _lease) = (ctx, players, campaign);
         foreach (var p in players)
             _online.Add(p.Id);
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
@@ -137,6 +144,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
+        _doc = TacticsDocument.Read(_lease.Document);
+        WorldCall("resume", () => ResumeCore(ctx, players, campaign));
+    }
+
+    private void ResumeCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
+    {
+        (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
         _doc = Coloured(TacticsDocument.Read(_lease.Document));
         _questLogLeader = null;
         _questObservedFlags = null;
@@ -164,6 +178,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 if (!RestartBattle(save))
                     return;
             }
+            if (Invariants.Enabled) Invariants.Check(_doc.Battle!.State, Rules);
             foreach (var unit in _doc.Battle!.State.Units.Values)
                 if (unit.Controller is PlayerControlled { Owner: var owner } && _players.Any(p => p.Profile == owner))
                     _awaited.Add(owner);
@@ -189,6 +204,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnPlayerConnectionChanged(PlayerId id, bool connected)
+        => WorldCall("connection", () => ConnectionCore(id, connected));
+
+    private void ConnectionCore(PlayerId id, bool connected)
     {
         if (connected ? !_online.Add(id) : !_online.Remove(id))
             return;
@@ -223,6 +241,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnInput(PlayerId from, PlayerInput input)
+        => WorldCall(input.Payload.ValueKind == JsonValueKind.Object && input.Payload.TryGetProperty("action", out var action) ? "input:" + action.ToString() : "input", () => InputCore(from, input));
+
+    private void InputCore(PlayerId from, PlayerInput input)
     {
         var player = _players.FirstOrDefault(p => p.Id == from);
         if (player?.Profile is not { } profile)
@@ -305,6 +326,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnTimer(string key)
+        => WorldCall("timer:" + key, () => TimerCore(key));
+
+    private void TimerCore(string key)
     {
         if (key == "questResult") { QuestResultDone(); return; }
         if (key == "townBark")
