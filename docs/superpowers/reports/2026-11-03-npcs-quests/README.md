@@ -1,6 +1,6 @@
 # NPCs, side quests and phone controls — issue #73
 
-Delivered on `npcs-and-quests`; no PR requested. Prerequisite rest/recovery and character/palette branches are integrated into this branch. Main has not been changed.
+Initial delivery was on `npcs-and-quests`, with rest/recovery and character/palette prerequisites integrated. Main was unchanged at that stage. The owner subsequently authorized merging; [PR #75](https://github.com/higharc91/ArcBox/pull/75) carries this delivery into main.
 
 ## Owner defaults and remaining decisions
 
@@ -19,7 +19,7 @@ All twelve authorized defaults are implemented: 100 XP per quest; grain pays 30 
 
 | Check | Result |
 |---|---|
-| Full Release .NET solution | **6,079 passed, 0 failed, 0 skipped**; [log](solution-tests.txt) |
+| Full Release .NET solution | **6,081 passed, 0 failed, 0 skipped**; [log](solution-tests.txt) |
 | Godot .NET host build | **0 warnings, 0 errors**; [log](host-build.txt) |
 | Speaking-emote polish | **24 WorldPeople tests passed** after the final visual addition; [log](bark-emote-tests.txt) |
 | Phone Vitest suite | **504 passed** across 24 files |
@@ -50,6 +50,10 @@ The web production build succeeds. Vite retains its existing warning for the unr
 The [voice sample gallery](voice-samples.html) contains **71 existing/new samples across 23 speakers**, including all ten townsfolk casts. Serve the repository root with `python3 -m http.server 8000`, then open `/docs/superpowers/reports/2026-11-03-npcs-quests/voice-samples.html` to listen. Audio sources are the actual shipped Oggs. Mechanical checks passed; these samples are offered for human delivery review, not as a claim of subjective listening approval.
 
 **Voice cost:** 104 initial renders/196 CU, eight Tobin refinements/21 CU, two Vorga repairs/3 CU = **114 renders, 220 CU**. Each batch estimate was reported before generation. All paid job/asset IDs and superseded takes remain in [voice-assets.json](../../../../tools/tactics-lore/voice-assets.json). Nine town lines reuse existing matching captions/casts at zero generation cost, with provenance. Named casting is unchanged; [VOICE-PLAN](../../../../tools/tactics-lore/VOICE-PLAN.md) documents delivery hashes, checks and the live Chirp3-HD post-processing limitation. No failed-render caption-only lines remain.
+
+## Main integration
+
+The owner authorized merging through [PR #75](https://github.com/higharc91/ArcBox/pull/75). The branch was synchronized with main, retaining its watchdog and world-rendering fixes. The refreshed full suite passed **6,081 .NET tests and 504 phone tests**, with a warning-free host build. The two merge conflicts were property placement and constructor formatting only. Validation also found a stale watchdog persistence test: it now advances the configured timeout, and the two classes sharing a static hung-game gate run in the same test collection. Both focused watchdog cases pass.
 
 ## Reproduce
 
