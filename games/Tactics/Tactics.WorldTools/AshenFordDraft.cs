@@ -246,7 +246,9 @@ public static class AshenFordDraft
             (35, 11), (45, 18), (36, 26), (44, 30), (18, 39), (24, 34), (31, 38), (36, 36), (44, 40),
             (17, 87), (28, 86), (34, 88), (39, 90), (43, 90), (49, 84),
             (36, 100), (40, 100), (44, 100), (36, 105), (40, 105), (44, 105)),                         // grain left standing in short, open rows
-        new("farm_goat", "rust", (22, 83), (46, 89)),                                                   // two quiet goats in separate enclosed fields
+        new("farm_goat", "rust", (22, 83), (45, 89)),                                                   // two quiet goats in separate enclosed fields
+        new("farm_dog", "brown", (52, 26)),                                                            // the reeve's dog, by the steading
+        new("farm_sheep", "cream", (24, 89), (27, 90)),                                                // a few sheep on what the goats left
         new("pack_mule", "grey", (50, 23)),                                                            // grain panniers beside the cart at Long Acre's gate
         new("cart", "hay", (48, 23)),
         new("well", "stone", (30, 89)),
