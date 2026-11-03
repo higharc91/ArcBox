@@ -1,5 +1,5 @@
 {
-  "notes": "Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips. Per-set manifest fragments and prompts only. No art or audio generation. Lit fire animation may be delivered as a separate 6-frame transition strip while static states remain manifest-compatible.",
+  "notes": "Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips. Per-set manifest fragments and prompts only. Prompt-only assets except the owner-authorized injury icons described below. No audio generation. Lit fire animation may be delivered as a separate 6-frame transition strip while static states remain manifest-compatible. Owner follow-up authorizes eight actual PixelLab injury icons: see injury_icons/manifest.json and 2026-11-03-tactics-injury-icons.json. Other new assets remain stand-ins; no audio generated.",
   "sets": {
     "interactables": {
       "props": {

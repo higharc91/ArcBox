@@ -4,7 +4,7 @@ using Tactics.Logic;
 
 namespace Tactics.Presentation.World;
 
-/// <summary>Scripted normal host views for the fire, recovery, cooking and dawn. Uses existing art only.</summary>
+/// <summary>Scripted normal host views for the fire, recovery, cooking and dawn. Uses the existing courtyard and shared injury icons.</summary>
 public static class CampDemo
 {
     /// <summary>The real view contract displayed in a small existing courtyard.</summary>

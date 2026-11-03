@@ -134,6 +134,20 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 ## 8. The user's list
 
+**Rest and recovery (#71), USER DECISION defaults implemented:** R1 black eye→rest, bruised pride/shaken→spirit, other injuries→body;
+R2 Tend Medicine 12, Rally better Performance/Persuasion 12, Cook Survival 10; R3 healing-spell Tend advantage;
+R4 Well fed gives all characters 3 temporary HP next battle only; R5 Watch radius 6; R6 inn 10 gold per character;
+R7 temple 25 gold per injury; R8 inn needs the party rest; R9 sponsor any character from your own purse;
+R10 campfires only, two in Ashen Ford. These defaults remain open to owner override.
+The leader proposes; a 20-second strict majority votes, with unanswered votes counting as Rest and a tie continuing the journey.
+Jobs and inn purchases take 30 seconds. Away characters receive ordinary dawn recovery and can be targets/guests.
+HP and slots remain fresh each battle. A won/lost battle or completed story beat earns at most one rest; camp talks and interactions earn none.
+Rolls/effects and service payments save atomically, old saves stay v1, and existing phone fixtures are unchanged.
+The owner's follow-up asks for cozy campfire music: the existing acoustic `camp` loop plays under outdoor `amb_campfire`, including talks,
+and crossfades back to regional music at dawn. The later owner follow-up authorizes eight PixelLab injury icons and a compact recovery UI: battle-ready HP/resource bars, debuff icons beside names, treatment on tap, and one room-booking action per character. Icons use the shared `injury_icons/manifest.json` and reusable phone/TV components. No audio generated.
+See [design](../specs/2026-11-03-tactics-rest-and-recovery-design.md), [prompt brief](../specs/2026-11-03-tactics-rest-art.json)
+and [verification report](../reports/2026-11-03-rest/README.md). Work stays on `rest-and-recovery`; no PR unless asked.
+
 **Gold and shops (#68), owner correction applied:** A separate saved purse and bag per player; all gold rewards split evenly among participants, including chest gold; legacy shared gold migrates once without losing the total; B loot + battle wins + story; B2 starting gold 0; C healing 50 / greater 150 / fire 50 / smoke 25 (future oil 10); D sell at 50%; E no haggling; F any present player; G purchases to the buyer; H sell only own bag; I no bag cap; J chapter restock per line; K one Ashen Ford herbalist; L no other gold sinks. Other balance values retain the issue's defaults. Each present player trades on their own phone after the leader interacts with the keeper; a purchase never spends another player's purse. See the shops design's implementation section and shops art JSON. Old saves remain v1 and old phone fixtures remain unchanged. Rules hash changes restart a saved battle once. The owner-authorized economy follow-up is implemented: every remake preserves the current bag, injuries and gold, preventing sell/remake/refill loops. First creation still grants its normal kit, pre-battle remakes remain unlimited, and the one post-battle remake is unchanged. Chapter 1 now grants 200 gold at the close of the mayor's request, 120 on either ford battle win, 60 in the reeve's chest and 40 in the smugglers' cache. These are party totals, split into personal purses. Existing item loot, prices and shop stock are unchanged.
 
 

@@ -496,3 +496,39 @@ or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMar
 The walk banner shows the total across individual player purses when gold or shops are relevant. A reachable trader has a stand-in notice marker; while trading, the keeper faces the party. The TV's separate shop panel shows the keeper's existing portrait, greeting, stock, prices, individual character balances and recent trades. Each phone shows "Your purse", selects quantities and buys/sells using only its own saved purse and bag; the leader leaves. Purchases are confirmed by the server, never applied optimistically. Gold gains produce a fading `+N gold` label. Sound keys `ui_coin_buy`, `ui_coin_sell`, `ui_shop_open`, `ui_shop_close` fall back to existing `ui_loot`/`ui_confirm` sounds. No new art or audio is required.
 
 Art review: `godot --path src/ArcBox.Host -- --world-demo=shop --shots=/tmp/arcbox-shop-shots --preset=low --res=1280x720`. It uses the existing demo courtyard and exits after its shots. Live check: `ARCBOX_SHOP=1 tools/tv-e2e.sh --skip-build`; bot phones walk to Wenna, sell starting consumables to fund a potion, buy, replay the trade ID, sell, and leave. Chapter regression: `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force tools/tv-e2e.sh --skip-build`. On machines without Vulkan, use `TV_RENDERING_DRIVER=opengl3 TV_ENGINE_ARGS='--rendering-method gl_compatibility --audio-driver Dummy'`; this selects supported software rendering rather than starting a failing Vulkan driver.
+
+
+## Wardenflame camp and recovery (issue #71)
+
+A won/lost fight or completed story beat earns one non-stacking rest. At either Ashen Ford campfire the leader proposes a night,
+then the existing story vote gives present players 20 seconds for Rest / Not yet. Unanswered votes count as Rest; a tie continues walking.
+Each present character chooses Tend wounds, Rally, Cook, Keep watch or Rest easy within 30 seconds, and chooses an exact injury when needed.
+The TV gathers the party on clear tiles, darkens the existing world canvas, displays jobs and saved results, then fades back at dawn.
+No world plans or lighting bakes are rebuilt for the night. Away characters can receive tending, food and dawn healing.
+
+The existing looping `camp` track supplies the cozy guitar/lute/fiddle/cello music during jobs, results, camp talks and the inn night.
+Outdoor camp also plays the existing `amb_campfire` bed (fire and crickets). Votes retain the region's music; dawn crossfades back to it.
+The usual Music/Sfx volume controls and voice ducking apply. No new audio was generated.
+Recovery sound keys use existing fallbacks: camp_start→spell_fire_aura, camp_mend→ui_level_up, camp_cook→ui_confirm,
+camp_dawn→ui_menu_open, temple_heal→shrine_use, inn_room→door_open. Successful tending uses a green-tinted `fx.poof`.
+Well fed uses the bowl glyph and grants 3 temporary HP at the next battle start, ending after that battle.
+
+The Last Coal inn and Chapel of the Hearth reuse shops and individual purses. The inn proposes the same rest vote, then offers rooms
+for 30 seconds at 10 gold per character; anyone can sponsor another character, including someone away. Paid guests mend all injuries
+and gain Well fed; unpaid guests receive ordinary dawn healing. Temple healing costs 25 gold per selected injury and needs no rest.
+Each service purchase shares the shop's atomic save and trade-ID protection.
+
+Visual check: `godot --path src/ArcBox.Host -- --world-demo=camp --shots=/tmp/arcbox-camp-shots --preset=low --res=1280x720`.
+It shows gathering, mending, Well fed, dawn and a six-member inn panel. Add `--audio-log` to inspect music and ambience transitions.
+Live regression: `ARCBOX_CHAPTER=1 ARCBOX_CAMP=1 ARCBOX_BRANCH=force ARCBOX_PHONES=6 tools/tv-e2e.sh --skip-build`.
+The bots camp after the ford, take a paid room after the next earned rest, then continue to the Chapter 1 card.
+See the [design and owner defaults](superpowers/specs/2026-11-03-tactics-rest-and-recovery-design.md) and
+[art/audio prompt brief](superpowers/specs/2026-11-03-tactics-rest-art.json).
+
+
+**Compact recovery follow-up.** The TV's camp/inn cards show each character's HP and class-resource bars, with injury badges beside
+the name. Phone menus use the same data and badges, with treatment details on tap, one room-booking action per character, and a
+small session menu. HP/resources are the next battle's ready values; injuries remain until mended. The owner authorized PixelLab
+generation of eight native 32×32 injury icons; both clients resolve stable injury ids through `injury_icons/manifest.json`.
+The reusable phone `InjuryIcon` supports future menus. Prompts and generation provenance are in
+[the injury icon brief](superpowers/specs/2026-11-03-tactics-injury-icons.json).
