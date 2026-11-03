@@ -13,7 +13,10 @@ public abstract record LitItem(long Order);
 public sealed record LitFace(Face Face, ImmutableArray<LightProbe> Probes, bool Art, bool Glow) : LitItem(Face.Order)
 {
     /// <summary>A corner's colour now: the face's own, times the light there if it takes any.</summary>
-    public Rgb ColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.Tint : Face.Tint.Times(lighting.At(Probes[corner]));
+    public Rgb ColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.TintAt(corner) : Face.TintAt(corner).Times(lighting.At(Probes[corner]));
+
+    /// <summary>A corner's colour for art that's baked: as <see cref="ColourAt"/>, with every light at its mean, whatever the last step left.</summary>
+    public Rgb MeanColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.TintAt(corner) : Face.TintAt(corner).Times(lighting.MeanAt(Probes[corner]));
 }
 
 /// <summary>A sprite with what it needs from the light.</summary>
@@ -22,8 +25,14 @@ public sealed record LitFace(Face Face, ImmutableArray<LightProbe> Probes, bool 
 /// <param name="Glow">Draw what glows of it over that, unlit.</param>
 public sealed record LitSprite(Sprite Sprite, LightProbe? Probe, bool Glow) : LitItem(Sprite.Order)
 {
+    /// <summary>True when this sprite is a prop of height 2 or more.</summary>
+    public bool IsTallProp => Sprite.IsTallProp;
+
     /// <summary>What to modulate it by now.</summary>
     public Rgb LightNow(BoardLighting lighting) => Probe is null ? new Rgb(1, 1, 1) : lighting.At(Probe);
+
+    /// <summary>What to modulate it by when it's baked: as <see cref="LightNow"/>, with every light at its mean, whatever the last step left.</summary>
+    public Rgb MeanLight(BoardLighting lighting) => Probe is null ? new Rgb(1, 1, 1) : lighting.MeanAt(Probe);
 }
 
 /// <summary>
@@ -59,9 +68,16 @@ public sealed record LitBoard(ImmutableArray<LitItem> Items, BoardLighting Light
 
     private static void AddFace(ImmutableArray<LitItem>.Builder items, Face face, BoardLighting lighting)
     {
+        if (face.Kind == FaceKind.Shadow)
+        {
+            // In cells as the top under it is: it's see-through, so the overlay can repaint it only over a cell of the top it repaints.
+            foreach (var cell in face.Cells())
+                items.Add(new LitFace(cell, [], true, false));
+            return;
+        }
         var lit = lighting.Active && face.Lit;
-        var glow = lighting.Active && face.Image?.Glow is not null;
-        if (!lit || face.Kind != FaceKind.Top || !Reached(face, lighting))
+        var glow = lighting.Active && (face.Image?.Glow is not null || (face.Lights is not null && lighting.Ambient != BoardLighting.Daylight));
+        if (!lit || face.Kind is not (FaceKind.Top or FaceKind.Blend) || !Reached(face, lighting))
         {
             items.Add(new LitFace(face, lit ? Probes(face, lighting) : [], true, glow));
             return;

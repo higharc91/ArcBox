@@ -9,27 +9,29 @@ namespace Tactics.Game.Tests;
 /// <summary><see cref="TacticsGame"/> on the platform harness: muster, encounter pick, the battle loop, results and resume.</summary>
 public sealed class TacticsGameTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() =>
+    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")], ArtManifests.Load(ContentBase())));
+
+    internal static string ContentBase()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return Path.Combine(dir.FullName, "content", "tactics", "base");
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
-    });
+    }
 
-    private static RulesPack Rules => Pack.Value;
+    internal static RulesPack Rules => Pack.Value;
 
     private static readonly string[] FourClasses = ["fighter", "cleric", "rogue", "wizard"];
 
     /// <summary>A four-member campaign session: the harness, its lease and the game.</summary>
-    private sealed class Session
+    internal sealed class Session
     {
         /// <param name="reseated">Members sit in the opposite order (another night, other phones).</param>
         public Session(int seed = 1, JsonElement? document = null, TacticsGame? game = null, bool reseated = false)
         {
             var order = reseated ? new[] { 4, 3, 2, 1 } : [1, 2, 3, 4];
             Profiles = [.. order.Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
-            Game = game ?? new TacticsGame(Rules);
+            Game = game ?? new TacticsGame(Rules, battleList: true);     // most tests reach a fight through the list
             Harness = new GameHarness<TacticsGame>(Game, playerCount: 4, seed: seed, profiles: Profiles);
             var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", Profiles[0]!.Value,
                 [.. Profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", i == 0 ? CampaignRole.Owner : CampaignRole.Player,
@@ -54,14 +56,29 @@ public sealed class TacticsGameTests
             Assert.Equal(TacticsPhase.Muster, Game.Phase);
             for (var i = 0; i < 4; i++)
                 Send(i, "pickClass", new { @class = FourClasses[i] });
+            Assert.Equal(TacticsPhase.Exploration, Game.Phase);
+            Send(0, "battles");
             Assert.Equal(TacticsPhase.EncounterPick, Game.Phase);
             if (everyoneAway)
                 for (var i = 1; i < 4; i++)
                     Harness.SetConnected(i, false);
             Send(0, "pickEncounter", new { encounter });
             Assert.Equal(TacticsPhase.Battle, Game.Phase);
+            // River Crossing is stamped in Ashen Ford, so it's fought in the world, where the opening beat waits for the TV's walk-in
+            // (overworld 5c). These tests are about the battle after it: the TV has shown it.
+            if (Host.Battle!.Stage is not null)
+                Harness.HostSignal("shown", new { seq = Host.Battle.Beats[^1].Seq });
             if (everyoneAway)
                 Harness.SetConnected(0, false);
+        }
+
+        /// <summary>Starts, and everyone picks a class, which puts the party in the world.</summary>
+        public void ToWalking()
+        {
+            Harness.StartCampaign(Lease);
+            for (var i = 0; i < 4; i++)
+                Send(i, "pickClass", new { @class = FourClasses[i] });
+            Assert.Equal(TacticsPhase.Exploration, Game.Phase);
         }
 
         /// <summary>Lets time pass in fallback-timer steps until the battle is over (or the step budget runs out).</summary>
@@ -201,6 +218,44 @@ public sealed class TacticsGameTests
         Assert.NotNull(resumed.Host.Notice);
         Assert.Equal(Rules.Hash, resumed.Game.Document.Battle!.State.ContentHash);
         Assert.Equal(1, resumed.Game.Document.Battle.Log[0].Seq);
+    }
+
+    [Fact]
+    public void A_repainted_region_doesnt_restart_a_saved_battle()
+    {
+        var s = new Session();
+        s.ToBattle(everyoneAway: true);
+        for (var i = 0; i < 20; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        var saved = TacticsDocument.Read(s.Lease.Document);
+
+        var rules = Directory.CreateTempSubdirectory("tactics-repaint-test-");
+        try
+        {
+            var from = Path.Combine(ContentBase(), "rules");
+            foreach (var file in Directory.EnumerateFiles(from, "*", SearchOption.AllDirectories))
+            {
+                var to = Path.Combine(rules.FullName, Path.GetRelativePath(from, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(to)!);
+                File.Copy(file, to);
+            }
+            var region = Path.Combine(rules.FullName, "world", "ashen_ford.json");
+            var before = File.ReadAllText(region);
+            var after = before.Replace("The Ashen Ford", "The Ashen Ford, repainted", StringComparison.Ordinal);
+            Assert.NotEqual(before, after);
+            File.WriteAllText(region, after);
+
+            var resumed = new Session(document: saved.ToJson(), game: new TacticsGame(RulesPack.Load([rules.FullName], ArtManifests.Load(ContentBase()))));
+            resumed.Harness.Resume(resumed.Lease);
+
+            Assert.Null(resumed.Host.Notice);
+            Assert.True(saved.Battle!.Log[0].Seq > 1);
+            Assert.True(resumed.Game.Document.Battle!.Log[0].Seq >= saved.Battle.Log[0].Seq);
+        }
+        finally
+        {
+            rules.Delete(recursive: true);
+        }
     }
 
     [Fact]

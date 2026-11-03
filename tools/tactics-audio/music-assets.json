@@ -31,13 +31,13 @@
    "seed": 4204
   },
   "defeat": {
-   "asset": "asset_HFJWTD7W9ET2ebhNAoGmPeTw",
-   "job": "job_Rctitx67evZE2kfVbzcFS4tk",
+   "asset": "asset_LvSwLjJFdzzpQKWtWodW3e1Y",
+   "job": "job_2W6Mp6KHw9o4yKJvNVMukAvR",
    "cu": 30.0,
-   "duration": 6,
+   "duration": 10,
    "group": "sting",
    "loop": false,
-   "seed": 4206
+   "seed": 4242
   },
   "dungeon": {
    "asset": "asset_fovDZaKz3xvW6LrP4oDyiusW",
@@ -66,13 +66,13 @@
    "cu": 60
   },
   "victory": {
-   "asset": "asset_MAXy5nqbKgkpGeG6HqQdiPNs",
-   "job": "job_B8khteDX3xZZbmQkv81JQYQf",
+   "asset": "asset_XRNHCpSCpy2SS9ixsdHdHtdt",
+   "job": "job_AB5EkesTdq3C8Q4HVQKtzBvZ",
    "cu": 30.0,
-   "duration": 7,
+   "duration": 9,
    "group": "sting",
    "loop": false,
-   "seed": 4205
+   "seed": 4240
   },
   "finale": {
    "asset": "asset_tRofyzuR1jZmkKdQiYfoSWkC",
@@ -129,6 +129,15 @@
    "group": "music",
    "loop": true,
    "seed": 4200
+  },
+  "victory_boss": {
+   "asset": "asset_psvqu9crg1T3fSrRJvqxYJnB",
+   "job": "job_3F1bcAqkiSAnG7SiN1EaVixR",
+   "cu": 30.0,
+   "duration": 16,
+   "group": "sting",
+   "loop": false,
+   "seed": 4241
   }
  },
  "failures": [

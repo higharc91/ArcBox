@@ -45,6 +45,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         // The factory runs as Development, whose Web:Root is web/play/dist when it has been built; tests serve wwwroot.
         builder.UseSetting("Web:Root", "");
+        // The tactics tests reach their fight through the battle list, which only this Development switch offers from the world.
+        builder.UseSetting("Tactics:BattleList", "true");
         // Like the settings above, read while Program registers services.
         SeedContent();
         builder.UseSetting("Content:Root", _contentRoot.FullName);

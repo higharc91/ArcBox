@@ -24,6 +24,8 @@ internal sealed record MapContent(MapDef Def, BattleMap Map);
 /// </summary>
 internal sealed partial class Validation(ArtManifest? art)
 {
+    internal ArtManifest? Art => art;
+
     /// <summary>The largest ability or effect range, in tiles.</summary>
     public const int MaxRange = 12;
 

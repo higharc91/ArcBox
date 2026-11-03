@@ -475,7 +475,7 @@ The default `lose` is `party_out` (every party member Downed or Out). When the p
 ### 4.9 Packs and pinning
 - A pack is a folder with a `manifest.json`: `id`, `rulesVersion`, `requires` (other pack ids) and the file list. `base` is always loaded. Each weekly chapter is its own pack (`chapter-03`, and so on).
 - **A chapter may add ids.** Changing a base id needs an explicit `"replaces": "<id>"`, so balance changes are deliberate and easy to review.
-- **The content hash** is SHA-256 over the loaded packs' files in a fixed order. It's stored in every saved battle (§2.5).
+- **The content hash** is SHA-256 over the loaded packs' files in a fixed order, except `world/`, which no battle reads. It's stored in every saved battle (§2.5).
 
 ### 4.10 Validation and attribution
 - **The JSON Schemas** in `rules/schema/` check structure. They're also usable in an editor while writing a chapter.

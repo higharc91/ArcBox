@@ -1,95 +1,53 @@
-using System.Collections.Immutable;
 using Tactics.Logic;
 
 namespace Tactics.WorldTools;
 
 /// <summary>
-/// The ground a region will be walked on, for proving a region before milestone 5b's walking exists. Like 5b's <c>WorldGround</c>, it
-/// is the whole region as one <see cref="Terrain"/> with stamped props standing on it, and it steps through <see cref="Paths.StepCost"/>,
-/// so a climb over the default Jump is blocked and a drop of any height is free. Void is impassable.
+/// A region's walking, measured, for proving a region is good to paint and play. The ground is <see cref="WorldGround"/> and every step is
+/// <see cref="WorldWalk"/>'s, at the default Jump, so this can't disagree with the party. What it adds is how long a walk takes.
 /// </summary>
 public sealed class RegionWalk
 {
     /// <summary>How long a straight step takes, in seconds. Milestone 5b's rate.</summary>
     public const double StepSeconds = 0.30;
 
-    private static readonly (int X, int Y)[] Straight = [(0, -1), (1, 0), (0, 1), (-1, 0)];
+    private const int Jump = ClassDef.DefaultJump;
 
-    private static readonly (int X, int Y)[] Diagonal = [(1, -1), (1, 1), (-1, 1), (-1, -1)];
+    /// <summary>The directions that step on both axes.</summary>
+    private static readonly WalkDir[] Diagonals = [WalkDir.E, WalkDir.S, WalkDir.W, WalkDir.N];
 
     private readonly Terrain _terrain;
 
-    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps.</summary>
-    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps)
-    {
-        var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
-        var bytes = new byte[width * height * 3];
-        for (var y = 0; y < height; y++)
-            for (var x = 0; x < width; x++)
-            {
-                var at = (y * width + x) * 3;
-                var tile = region.TileAt(new Tile(x, y));
-                (bytes[at], bytes[at + 1], bytes[at + 2]) = tile is null
-                    ? ((byte)0, (byte)0, (byte)TileFlags.Impassable)
-                    : ((byte)tile.Height, (byte)tile.Material, (byte)tile.Flags);
-            }
+    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps, and <paramref name="art"/> its props and buildings.</summary>
+    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art) => _terrain = WorldGround.Of(region, maps, art).Terrain;
 
-        ImmutableArray<PropPlacement> props =
-        [
-            .. region.Def.Stamps.SelectMany(s => maps[s.Map].Props.Select(p => p with { At = new Tile(p.At.X + s.At.X, p.At.Y + s.At.Y) })),
-        ];
-        var world = BattleMap.FromBytes(region.Def.Id, width, height, bytes, region.Def.Materials, props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
-        _terrain = new Terrain(world, ImmutableSortedDictionary<Tile, int>.Empty, []);
-    }
+    /// <summary>Walking on <paramref name="terrain"/>: a region's ground with things in the way (<see cref="WorldGround.With"/>).</summary>
+    public RegionWalk(Terrain terrain) => _terrain = terrain;
+
+    /// <summary>Walking on an existing <see cref="WorldGround"/>.</summary>
+    public RegionWalk(WorldGround ground) => _terrain = ground.Terrain;
 
     /// <summary>The tiles one legal straight step from <paramref name="t"/>.</summary>
-    public IEnumerable<Tile> Steps(Tile t) => Straight.Select(d => new Tile(t.X + d.X, t.Y + d.Y)).Where(next => Legal(t, next));
+    public IEnumerable<Tile> Steps(Tile t) => WorldWalk.Steps(_terrain, t, Jump);
 
     /// <summary>Whether a party can stand on the tile, a blocking prop counting against it.</summary>
     public bool Standable(Tile t) => _terrain.Walkable(t);
 
     /// <summary>Whether a single straight step is legal.</summary>
-    public bool Legal(Tile from, Tile to) => Paths.StepCost(_terrain, from, to, ClassDef.DefaultJump) != int.MaxValue;
+    public bool Legal(Tile from, Tile to) => WorldWalk.Legal(_terrain, from, to, Jump);
 
     /// <summary>Everything that can be walked to from <paramref name="start"/>, never entering <paramref name="closed"/>.</summary>
-    public HashSet<Tile> From(Tile start, IEnumerable<Tile>? closed = null)
-    {
-        var shut = closed?.ToHashSet() ?? [];
-        var reached = new HashSet<Tile> { start };
-        var open = new Stack<Tile>([start]);
-        while (open.TryPop(out var tile))
-            foreach (var next in Steps(tile))
-                if (!shut.Contains(next) && reached.Add(next))
-                    open.Push(next);
-        return reached;
-    }
+    public HashSet<Tile> From(Tile start, IEnumerable<Tile>? closed = null) => WorldWalk.Reach(_terrain, start, Jump, closed?.ToHashSet());
 
     /// <summary>Everything that can walk to <paramref name="end"/>: a flood along the steps backward.</summary>
-    public HashSet<Tile> To(Tile end)
-    {
-        var reached = new HashSet<Tile> { end };
-        var open = new Stack<Tile>([end]);
-        while (open.TryPop(out var tile))
-            foreach (var (x, y) in Straight)
-            {
-                var from = new Tile(tile.X + x, tile.Y + y);
-                if (_terrain.Walkable(from) && Legal(from, tile) && reached.Add(from))
-                    open.Push(from);
-            }
-        return reached;
-    }
+    public HashSet<Tile> To(Tile end) => WorldWalk.ReachBack(_terrain, end, Jump);
 
     /// <summary>The tiles that can be walked to from <paramref name="start"/> but can't walk back to it: the floors of one-way pits.</summary>
-    public IReadOnlyCollection<Tile> Trapped(Tile start)
-    {
-        var back = To(start);
-        return [.. From(start).Where(t => !back.Contains(t))];
-    }
+    public IReadOnlyCollection<Tile> Trapped(Tile start) => [.. WorldWalk.Trapped(_terrain, start, Jump)];
 
     /// <summary>
-    /// The quickest walked route, in seconds: 5b's 8-way steps at <see cref="StepSeconds"/> a tile, ×√2 on a diagonal, which is legal only
-    /// if both corner tiles can be stood on and one of the two L-paths is legal leg by leg. Rough ground and long drops cost nothing
-    /// extra here, as walk-time targets count tiles. Null if it can't be walked.
+    /// The quickest walked route, in seconds: <see cref="WorldWalk"/>'s 8-way steps at <see cref="StepSeconds"/> a tile, ×√2 on a diagonal.
+    /// Rough ground and long drops cost nothing extra here, as walk-time targets count tiles. Null if it can't be walked.
     /// </summary>
     public double? Seconds(Tile start, Func<Tile, bool> arrived)
     {
@@ -124,14 +82,9 @@ public sealed class RegionWalk
 
             foreach (var next in Steps(tile))
                 Consider(next, cost + 1);
-            foreach (var (x, y) in Diagonal)
-            {
-                var next = new Tile(tile.X + x, tile.Y + y);
-                var (cornerX, cornerY) = (new Tile(next.X, tile.Y), new Tile(tile.X, next.Y));
-                if (Standable(next) && Standable(cornerX) && Standable(cornerY)
-                    && ((Legal(tile, cornerX) && Legal(cornerX, next)) || (Legal(tile, cornerY) && Legal(cornerY, next))))
-                    Consider(next, cost + Math.Sqrt(2));
-            }
+            foreach (var dir in Diagonals)
+                if (WorldWalk.Next(_terrain, tile, dir, Jump, null) is { Diagonal: true } move)
+                    Consider(move.To, cost + Math.Sqrt(2));
         }
 
         void Consider(Tile to, double cost)

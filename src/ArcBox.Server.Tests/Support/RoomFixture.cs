@@ -27,8 +27,9 @@ public sealed class RoomFixture : IAsyncDisposable
     /// <param name="seed">Runs against the empty database before the profile and campaign services load it.</param>
     /// <param name="rules">The campaign rules for <c>ledger</c>; the default is <see cref="LedgerRules"/>.</param>
     /// <param name="loggers">The rooms' loggers; the default logs nothing.</param>
+    /// <param name="game">One more game to register.</param>
     public RoomFixture(GameManifest? ledger = null, Action<ArcDb>? seed = null, ICampaignRules? rules = null,
-        ILoggerFactory? loggers = null)
+        ILoggerFactory? loggers = null, GameRegistration? game = null)
     {
         Time = new FakeTimeProvider(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
         Sender = new RecordingSender();
@@ -36,7 +37,8 @@ public sealed class RoomFixture : IAsyncDisposable
             new(() => new CounterGame()),
             new(() => new ThrowerGame()),
             new(() => new LedgerGame(ledger ?? LedgerGame.Campaign)),
-            new(() => new LedgerGame(LedgerGame.Plain))
+            new(() => new LedgerGame(LedgerGame.Plain)),
+            .. game is null ? Array.Empty<GameRegistration>() : [game]
         ]);
         _db = StorageTestSupport.NewMemoryDb();
         seed?.Invoke(_db);

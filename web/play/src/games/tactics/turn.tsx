@@ -41,7 +41,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   const map = useMap(mapId);
   const icons = useIcons();
   const sfx = useSfx();
-  useAlertOnMount("yourTurn");
+  useAlertOnMount("yourTurn", `turn ${me.id}`);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.

@@ -188,4 +188,34 @@ public sealed class PaintedRegionTests
     [InlineData(-32.5, 0, -2, 0)]
     public void A_marker_stands_on_the_tile_its_position_falls_in(double x, double y, int tileX, int tileY)
         => Assert.Equal(new Tile(tileX, tileY), PaintedRegion.TileAt(x, y));
+
+    [Fact]
+    public void Erasing_a_prop_leaves_the_ground()
+    {
+        var painted = Painted() with
+        {
+            Heights = new Dictionary<Tile, int> { [A] = 2 },
+            Flags = new Dictionary<Tile, TileFlags> { [A] = TileFlags.Difficult },
+            Props = new Dictionary<Tile, (string Id, string? Variant)> { [A] = ("tree", "green") },
+        };
+
+        var erased = painted with { Props = new Dictionary<Tile, (string Id, string? Variant)>() };
+        var source = erased.ToSource().Source;
+
+        Assert.Equal(new TileInfoNamed(2, Grass, TileFlags.Difficult), source.Get(A));
+        Assert.Empty(source.Props);
+    }
+
+    [Fact]
+    public void Apply_stamp_puts_nothing_on_the_props_layer()
+    {
+        var painted = Painted() with
+        {
+            Stamps = [new RegionStamp("ford", A, 0)],
+        };
+
+        var source = painted.ToSource().Source;
+
+        Assert.Empty(source.Props);
+    }
 }

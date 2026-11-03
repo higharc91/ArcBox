@@ -27,6 +27,176 @@ public sealed class UnitPlanTests
 
     private static BoardUnit One(string? active, params UnitView[] units) => Assert.Single(Plan(active, units), u => u.Id.Value == units[0].Id.Value);
 
+    private static ImmutableArray<WalkerView> Walkers(params string[] ids)
+        => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
+
+    [Fact]
+    public void Walkers_have_no_bars_and_only_the_leader_a_crown()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 3, new Vector2(1, 0)), ["b"] = new("idle", 3, new Vector2(1, 0)) };
+
+        var units = UnitPlan.Walkers(Walkers("a", "b"), places, poses, Art.Value);
+
+        Assert.All(units, u => Assert.Null(u.Bar));
+        Assert.All(units, u => Assert.False(u.Active));
+        var crowned = Assert.Single(units, u => u.CrownAt is not null);
+        Assert.Equal("a", crowned.Id.Value);
+        Assert.True(crowned.CrownAt!.Value.Y < crowned.Feet.Y - 20);
+        Assert.Equal(places["a"].Feet, crowned.Feet);
+    }
+
+    // Interaction review 5b, item 11: the party's green ring faded into grass. A walker's ring now goes over a dark one; in a fight only a
+    // hero with a player's colour has one, so a hero's ring is the same in the world and in a fight.
+    [Fact]
+    public void A_walkers_ring_is_outlined_and_a_fights_only_for_a_coloured_hero()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+
+        Assert.All(UnitPlan.Walkers(Walkers("a", "b"), places, new Dictionary<string, UnitPose>(), Art.Value), u => Assert.True(u.Outlined));
+        Assert.False(One(null, Unit("ally1", "Party", 3, 3)).Outlined);
+        Assert.False(One(null, Unit("goblin", "Enemy", 3, 3)).Outlined);
+        Assert.True(One(null, Unit("hero1", "Party", 3, 3) with { Color = "#7ccbff" }).Outlined);
+    }
+
+    // The user's answer 14: a walker's ring is their player's colour; with none, or one that isn't a colour, it's the party's green.
+    [Fact]
+    public void A_walkers_ring_is_their_players_colour_else_the_partys_green()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0),
+            ["c"] = new(new Vector2(1.5f, 3.5f), 0), ["d"] = new(new Vector2(1.5f, 2.5f), 0) };
+        WalkerView[] party = [new("a", "a", "characters.class_rogue", true, true, "#7ccbff"), new("b", "b", "characters.class_rogue", false, false, "#FFD23F"),
+            new("c", "c", "characters.class_rogue", true, false), new("d", "d", "characters.class_rogue", true, false, "teal")];
+
+        var rings = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), Art.Value).ToDictionary(u => u.Id.Value, u => u.RingColour);
+
+        Assert.Equal(Rgb.Hex("#7ccbff"), rings["a"]);
+        Assert.Equal(Rgb.Hex("#ffd23f"), rings["b"]);       // away, still theirs: the canvas dims it as it dims them
+        Assert.Equal(UnitPlan.PartyRing, rings["c"]);
+        Assert.Equal(UnitPlan.PartyRing, rings["d"]);
+    }
+
+    // In a fight a hero wears their colour, a companion the party's green, a goblin its red. A hero keeps their colour on their own turn
+    // (the turn's gold hid whose it was, and matched the palette's Gold); anyone else has the turn's gold on theirs.
+    [Theory]
+    [InlineData("hero2")]
+    [InlineData("ally1")]
+    [InlineData("goblin")]
+    public void A_fights_rings_are_the_heros_colour_the_sides_and_the_turns_gold(string active)
+    {
+        UnitView[] units = [Unit("hero1", "Party", 3, 3) with { Color = "#ffab94" }, Unit("hero2", "Party", 4, 3) with { Color = "#8ff0c4" },
+            Unit("ally1", "Party", 5, 3), Unit("goblin", "Enemy", 9, 5) with { Color = "#ffab94" }];
+
+        var rings = Plan(active, units).ToDictionary(u => u.Id.Value);
+
+        Assert.Equal(Rgb.Hex("#ffab94"), rings["hero1"].RingColour);
+        Assert.Equal(Rgb.Hex("#8ff0c4"), rings["hero2"].RingColour);
+        Assert.Equal(active == "ally1" ? UnitPlan.ActiveRing : UnitPlan.PartyRing, rings["ally1"].RingColour);
+        Assert.Equal(active == "goblin" ? UnitPlan.ActiveRing : UnitPlan.EnemyRing, rings["goblin"].RingColour);   // a colour on a foe is never drawn
+        Assert.Null(rings["goblin"].Colour);
+        Assert.True(rings[active].Active);
+    }
+
+    [Fact]
+    public void A_walker_whose_phone_is_gone_is_away()
+    {
+        WalkerView[] party = [new("a", "a", "characters.class_rogue", true, true), new("b", "b", "characters.class_rogue", false, false)];
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+
+        var units = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), Art.Value);
+
+        Assert.Equal(["b"], units.Where(u => u.Away).Select(u => u.Id.Value));
+    }
+
+    [Fact]
+    public void A_walker_and_its_crown_go_on_the_pixels_they_are_given()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("walk", 0.25, new Vector2(1, 0)) };
+
+        var plain = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+        var moved = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value, (art, standing) => standing ? art : art + new Vector2(5, 7)));
+
+        Assert.Equal(plain.Feet + new Vector2(5, 7), moved.Feet);
+        Assert.Equal(plain.CrownAt + new Vector2(5, 7), moved.CrownAt);
+        Assert.Equal(plain.Order, moved.Order);
+    }
+
+    [Fact]
+    public void A_standing_walker_is_said_to_be_standing()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 0.25, new Vector2(1, 0)) };
+
+        var moved = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value, (art, standing) => standing ? art + new Vector2(1, 1) : art));
+
+        Assert.Equal(places["a"].Feet + new Vector2(1, 1), moved.Feet);
+    }
+
+    [Fact]
+    public void The_crown_is_the_one_the_emote_manifest_says()
+    {
+        using var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "emotes", "manifest.json")));
+        var root = manifest.RootElement;
+        var crown = Art.Value.Crown!;
+
+        Assert.Equal(root.GetProperty("emotes").GetProperty("crown").GetProperty("row").GetInt32(), crown.Row);
+        Assert.Equal(root.GetProperty("frame")[0].GetInt32(), crown.Width);
+        Assert.Equal(root.GetProperty("anchor")[1].GetInt32(), crown.AnchorY);
+        Assert.True(File.Exists(Path.Combine(Pack.Root, crown.Path)));
+    }
+
+    [Fact]
+    public void The_crown_plays_through_once_then_loops_its_tail()
+    {
+        var crown = new EmoteStrip("e.png", 20, 20, 8, 19, 11, Frames: 4, Fps: 8, LoopStart: 2);
+
+        Assert.Equal([0, 1, 2, 3, 2, 3, 2], Enumerable.Range(0, 7).Select(i => crown.FrameAt(i / 8.0 + 0.01)));
+        Assert.Equal(new ArtRect(60, 220, 20, 20), crown.Source(3));
+    }
+
+    [Fact]
+    public void Walkers_are_in_the_painters_order()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(5.5f, 5.5f), 0), ["b"] = new(new Vector2(2.5f, 2.5f), 0) };
+
+        var units = UnitPlan.Walkers(Walkers("a", "b"), places, new Dictionary<string, UnitPose>(), Art.Value);
+
+        Assert.Equal(["b", "a"], units.Select(u => u.Id.Value));
+    }
+
+    [Fact]
+    public void A_walker_with_no_place_isnt_drawn()
+        => Assert.Empty(UnitPlan.Walkers(Walkers("a"), new Dictionary<string, UnitPlace>(), new Dictionary<string, UnitPose>(), Art.Value));
+
+    [Theory]
+    [InlineData(1, 0, 0, false)]
+    [InlineData(0, 1, 0, true)]
+    [InlineData(0, -1, 1, true)]
+    [InlineData(-1, 0, 1, false)]
+    public void A_walker_shows_the_facing_its_pose_says(float x, float y, int row, bool mirror)
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("walk", 0.25, new Vector2(x, y)) };
+
+        var unit = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+
+        Assert.Equal((row, mirror), (unit.Row, unit.Mirror));
+        Assert.Equal(Pack.Frames("characters", "walk")[3], unit.Anim.FrameAt(0));
+    }
+
+    [Fact]
+    public void An_idle_walker_keeps_breathing_on_the_canvass_clock()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 2, new Vector2(1, 0)) };
+
+        var unit = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+
+        Assert.True(unit.Anim.Loop);
+        Assert.True(unit.Anim.Frames.Length > 1);
+    }
+
     [Fact]
     public void A_unit_stands_on_the_centre_of_its_tile_as_the_terrain_draws_it()
     {

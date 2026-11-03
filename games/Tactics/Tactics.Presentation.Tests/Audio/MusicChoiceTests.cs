@@ -48,24 +48,48 @@ public sealed class MusicChoiceTests
         Assert.True(Bank.Value.Track("battle")!.Loop);
     }
 
+    /// <summary>
+    /// The music each encounter in the rules is meant to have. Any encounter falls back to the battle theme, so this list is
+    /// what makes the choice a decision: a new encounter fails <see cref="Every_encounter_in_the_rules_has_its_music_decided"/>
+    /// until it's added here, with the battle theme or its own.
+    /// </summary>
+    private static readonly Dictionary<string, string> FightMusic = new()
+    {
+        ["river_crossing"] = "battle",
+        ["forest_ruins"] = "battle",
+        ["crypt_hall"] = "battle",
+        ["crystal_cave"] = "battle",
+        ["ford_assault"] = "battle",
+        ["warlord_bridge"] = "boss",
+        ["rime_tower"] = "boss",
+        ["keep_gate"] = "boss",
+        ["hall_of_the_flame"] = "finale",
+    };
+
+    public static TheoryData<string, string> Fights
+    {
+        get
+        {
+            var rows = new TheoryData<string, string>();
+            foreach (var (encounter, track) in FightMusic)
+                rows.Add(encounter, track);
+            return rows;
+        }
+    }
+
     [Theory]
-    [InlineData("river_crossing", "battle")]
-    [InlineData("forest_ruins", "battle")]
-    [InlineData("crypt_hall", "battle")]
-    [InlineData("crystal_cave", "battle")]
-    [InlineData("ford_assault", "battle")]
-    [InlineData("rime_tower", "battle")]
-    [InlineData("warlord_bridge", "boss")]
-    [InlineData("keep_gate", "boss")]
-    [InlineData("hall_of_the_flame", "finale")]
+    [MemberData(nameof(Fights))]
     public void A_fight_plays_what_its_encounter_calls_for(string encounter, string track)
         => Assert.Equal(new MusicCue(track), MusicChoice.Of(View("Battle", Fight(encounter))));
 
     [Fact]
-    public void Every_encounter_in_the_rules_has_music()
+    public void Every_encounter_in_the_rules_has_its_music_decided()
     {
-        foreach (var file in Directory.GetFiles(Path.Combine(Pack.Root, "rules", "encounters")))
-            Assert.NotNull(MusicChoice.Of(View("Battle", Fight(Path.GetFileNameWithoutExtension(file)))));
+        var encounters = Directory.GetFiles(Path.Combine(Pack.Root, "rules", "encounters"), "*.json")
+            .Select(Path.GetFileNameWithoutExtension).Order(StringComparer.Ordinal).ToArray();
+
+        Assert.NotEmpty(encounters);
+        Assert.Equal(encounters, FightMusic.Keys.Order(StringComparer.Ordinal).ToArray());
     }
 
     [Theory]
@@ -74,14 +98,67 @@ public sealed class MusicChoiceTests
     public void Results_play_a_sting_and_then_settle(string outcome, string sting)
         => Assert.Equal(new MusicCue(sting, Then: "camp"), MusicChoice.Of(View("Results", outcome: outcome)));
 
+    [Theory]
+    [InlineData("warlord_bridge")]
+    [InlineData("keep_gate")]
+    [InlineData("rime_tower")]
+    [InlineData("hall_of_the_flame")]
+    public void Beating_a_boss_plays_the_grand_fanfare(string encounter)
+        => Assert.Equal(new MusicCue("victory_boss", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Won") with { LastBattle = Fight(encounter) }));
+
+    [Theory]
+    [InlineData("river_crossing")]
+    [InlineData("ford_assault")]
+    public void Beating_an_ordinary_fight_plays_the_usual_fanfare(string encounter)
+        => Assert.Equal(new MusicCue("victory", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Won") with { LastBattle = Fight(encounter) }));
+
+    [Fact]
+    public void Losing_to_a_boss_is_still_the_defeat_theme()
+        => Assert.Equal(new MusicCue("defeat", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Lost") with { LastBattle = Fight("keep_gate") }));
+
+    [Fact]
+    public void The_boss_fanfare_is_a_sting_that_ends()
+        => Assert.False(Bank.Value.Track("victory_boss")!.Loop);
+
     [Fact]
     public void A_party_that_fled_gets_no_sting() => Assert.Equal(new MusicCue("camp"), MusicChoice.Of(View("Results", outcome: "Fled")));
 
     [Theory]
     [InlineData("Muster", "title")]
     [InlineData("EncounterPick", "explore")]
+    [InlineData("Exploration", "explore")]
     public void The_screens_before_a_fight_have_their_own_tunes(string phase, string track)
         => Assert.Equal(new MusicCue(track), MusicChoice.Of(View(phase)));
+
+    [Fact]
+    public void The_ashen_ford_has_the_track_the_manifest_gives_it()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("town_emberwick"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("EncounterPick") with { Explore = explore }));
+    }
+
+    /// <summary>A scene keeps the region's music, so walking up to the mayor doesn't change the tune.</summary>
+    [Fact]
+    public void A_scene_keeps_the_regions_track()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("town_emberwick"), MusicChoice.Of(View("Story") with { Explore = explore }));
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Story")));
+    }
+
+    [Fact]
+    public void A_region_with_no_track_of_its_own_gets_the_field_tune()
+    {
+        var explore = new ExploreView("mirewood", "Mirewood", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+    }
 
     [Theory]
     [InlineData("Resuming")]
@@ -94,6 +171,7 @@ public sealed class MusicChoiceTests
         Assert.Equal("amb_river", MusicChoice.AmbienceOf(View("Battle", Fight("river_crossing", "river_crossing"))));
         Assert.Null(MusicChoice.AmbienceOf(View("Results", outcome: "Won")));
         Assert.Null(MusicChoice.AmbienceOf(View("Muster")));
+        Assert.Null(MusicChoice.AmbienceOf(View("Exploration")));
     }
 
     [Fact]

@@ -8,6 +8,10 @@ export const PATTERNS = {
   charge: 8,
   /** The cork: a sharp kick, then a long rumble. */
   pop: [45, 25, 160],
+  /** A thumb coming down on the walk pad. */
+  walkPress: 8,
+  /** The held direction changing under the thumb: a double tick, to tell it from a press without looking. */
+  walkTurn: [4, 24, 4],
 } as const satisfies Record<string, number | readonly number[]>;
 
 export type HapticName = keyof typeof PATTERNS;

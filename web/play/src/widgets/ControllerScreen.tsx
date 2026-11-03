@@ -55,12 +55,10 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
   // A layout effect, so the view is known before the Countdown's first tick (a child's passive effect).
   useLayoutEffect(() => feedback?.onView(view, game), [feedback, view.viewId]);
   // The shake widget streams charge updates and cues its own fizz and pop: no tap click on each of them.
-  const sendWithFeedback: Send = feedback && view.kind !== "shake"
-    ? (payload) => {
-        feedback.onSend();
-        send(payload);
-      }
-    : send;
+  const sendWithFeedback: Send = (payload, options) => {
+    if (view.kind !== "shake" && !options?.quiet) feedback?.onSend();
+    send(payload);
+  };
 
   return (
     <SkinContext.Provider value={skin}>

@@ -129,7 +129,7 @@ That's about 4 a second, against 20 tokens a second per connection in `RoomOptio
 - **Drop:** free at any height. A step's duration grows for long ones.
 - **Deep water, void, Impassable, blocking props:** blocked through `Terrain.Walkable`.
 - **Diagonal:** legal only if both corner tiles are walkable and at least one L-path is legal leg by leg. No cutting past wall corners, which keeps 4-way reachability valid.
-- **Sliding:** a blocked diagonal tries its two axes, preferring the last axis moved. A blocked straight step doesn't slide: the party turns to face that way and stays.
+- **Sliding:** a blocked diagonal tries its two axes, preferring the last axis moved. A blocked straight step doesn't slide: the party turns to face that way and stays. *Amended by interaction review 5b, item 7:* a blocked straight step slides round a one-tile jag, when exactly one side is open and the step on from it is too.
 
 **The party:** the server holds one leader tile plus a trail of recent legs. Followers are drawn along that trail, so they can't stand on anything illegal.
 

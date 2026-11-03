@@ -28,6 +28,7 @@ internal sealed partial class Validation
             });
             if (def is null)
                 return null;
+            if (def.Gold < 0) Error(file, Pointer.Append(ptr, "gold"), "Gold cannot be negative.");
             Ref(RefKind.Map, def.Map, file, Pointer.Append(ptr, "map"));
             if (def.Level is < 1 or > 10)
                 Error(file, Pointer.Append(ptr, "level"), $"The level {def.Level} must be in 1..10.");

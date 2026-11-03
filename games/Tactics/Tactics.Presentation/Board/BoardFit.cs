@@ -1,4 +1,5 @@
 using System.Numerics;
+using Tactics.Logic;
 
 namespace Tactics.Presentation.Board;
 
@@ -44,6 +45,16 @@ public sealed record BoardFit(Vector2 Origin, float Scale)
         var origin = new Vector2(Area.X + Area.Width / 2 - middle.X * scale, Area.Y + Area.Height / 2 - middle.Y * scale);
         return new BoardFit(new Vector2(MathF.Round(origin.X), MathF.Round(origin.Y)), scale);
     }
+
+    /// <summary>
+    /// The fit for a battle drawn in place on a region (overworld 5c §4): the battle map's own art pixels, where the world's art has its origin
+    /// at <paramref name="worldOrigin"/> at <paramref name="scale"/>. The projection is linear, so the stamp's offset is one constant
+    /// (<see cref="StageOffset"/>), and every pixel of the board, its units and its effects lands on the world pixel under it.
+    /// </summary>
+    public static BoardFit Stage(BattleStage stage, Vector2 worldOrigin, float scale) => new(worldOrigin + StageOffset(stage) * scale, scale);
+
+    /// <summary>Where the battle map's art origin is in the region's art: the back corner of its tile (0, 0), raised by the stamp's height.</summary>
+    public static Vector2 StageOffset(BattleStage stage) => BoardProjection.Corner(stage.Origin.X, stage.Origin.Y, stage.Height);
 
     /// <summary>An art pixel's place on the 1920x1080 layout.</summary>
     public Vector2 ToScreen(Vector2 art) => Origin + art * Scale;

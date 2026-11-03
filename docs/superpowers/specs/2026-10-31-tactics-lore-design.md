@@ -211,8 +211,11 @@ that plays it (sub-project 5), so voice, translation and review can start now.
 - **Checks.** `check: {skill, dc, pass, fail}` is a skill check: the party picks who rolls. Pass and fail each lead
   to a node.
 - **Order.** A beat's scenes play in file order. Each scene's `requires` and `unless` are tested as it starts, so
-  a vote in one scene can choose which of the next scenes plays. A battle beat's lead-in comes before its encounter,
-  and the scenes after it are the aftermath.
+  a vote in one scene can choose which of the next scenes plays.
+- **Lead-in and aftermath.** A battle beat's scenes are its lead-in, played before the encounter, unless they're
+  marked **`after: true`**: those are its aftermath, played once the fight is won. Position in the file doesn't make a
+  scene an aftermath; only the flag does, so an unmarked scene placed after the others still plays before the fight.
+  Only a battle beat's scene may carry `after`, and a beat's aftermath scenes come after all its lead-in scenes.
 - **Gated options.** An option's `requires` is tested when the node shows. Writers gate alternatives on flags that
   exactly one earlier choice sets, such as the two Chapter I outcomes or the three Chapter II bargains. A
   runtime that starts mid-campaign (a test, or a chapter played alone) must seed those flags, or a node can come up
@@ -221,6 +224,7 @@ that plays it (sub-project 5), so voice, translation and review can start now.
   - every target exists, every node is reachable, and some path ends;
   - speakers are in the scene's `cast`;
   - a vote offers every choice of its beat;
+  - `after` is only on a battle beat's scenes, and no lead-in of a beat comes after one of its aftermath scenes;
   - every flag a scene sets is one that `arcs.json` or an encounter already sets, so dialogue can't invent story
     state.
 

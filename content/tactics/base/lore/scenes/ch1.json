@@ -257,6 +257,7 @@
         },
         {
           "id": "close",
+          "gold": 200,
           "lines": [
             {
               "id": "ch1_mayor_close_1",
@@ -962,6 +963,7 @@
     {
       "id": "ch1_bridge_cost",
       "beat": "ch1_ford_assault",
+      "after": true,
       "title": "What the Bridge Cost",
       "unless": [
         "ch1_skarrow_spared"
@@ -1138,6 +1140,7 @@
     {
       "id": "ch1_road_east",
       "beat": "ch1_river_crossing",
+      "after": true,
       "title": "The Road East",
       "requires": [
         "ch1_skarrow_spared"

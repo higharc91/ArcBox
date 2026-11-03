@@ -1,0 +1,54 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "shop",
+  "data": {
+    "shop": {
+      "id": "af_market_herbalist",
+      "name": "Wenna\u0027s Remedies",
+      "keeper": "Wenna\u0027s Remedies",
+      "greeting": "Wenna wipes her hands on her apron. Potions, salves. Coin first."
+    },
+    "gold": 50,
+    "items": [
+      {
+        "item": "potion_of_healing",
+        "name": "Potion of Healing",
+        "price": 50,
+        "count": 0,
+        "can": false,
+        "detail": "1 tile: heals 2d4\u002B2"
+      },
+      {
+        "item": "smoke_bomb",
+        "name": "Smoke Bomb",
+        "price": 25,
+        "count": 2,
+        "can": true,
+        "detail": "4 tiles, burst 1: creates a smoke zone (burst 1) for 2 rounds, blocks line of sight \u2014 Thick smoke fills the area: nothing can see into, out of or through it."
+      }
+    ],
+    "sell": [
+      {
+        "member": "pr_member1",
+        "item": "potion_of_healing",
+        "name": "Potion of Healing",
+        "price": 25,
+        "count": 4
+      }
+    ],
+    "you": {
+      "member": "pr_member1",
+      "canBuy": true
+    },
+    "leader": true,
+    "vip": true,
+    "feed": [
+      "Player1 bought 3 \u00D7 Potion of Healing \u2014 150 gold"
+    ],
+    "portal": "/c/ABCD"
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

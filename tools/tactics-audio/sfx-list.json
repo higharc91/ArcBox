@@ -1493,5 +1493,255 @@
   "group": "ambience",
   "loop": true,
   "use": "Forest maps"
+ },
+ "door_open": {
+  "prompt": "Heavy old wooden door creaking open on iron hinges, single slow creak",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Interactable door opened",
+  "seed": 8100
+ },
+ "door_close": {
+  "prompt": "Heavy wooden door swinging shut with a solid thud and latch click",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Interactable door closed",
+  "seed": 8107
+ },
+ "gate_open": {
+  "prompt": "Iron gate swinging open, metal hinges squeal and a chain rattle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Gate opened",
+  "seed": 8114
+ },
+ "gate_close": {
+  "prompt": "Iron gate clanging shut with a heavy metal latch",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.0,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Gate closed",
+  "seed": 8121
+ },
+ "drawbridge_lower": {
+  "prompt": "Wooden drawbridge lowering, heavy chain winch ratcheting, ends with a deep wooden thump",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 3.0,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Drawbridge lowered",
+  "seed": 8128
+ },
+ "drawbridge_raise": {
+  "prompt": "Heavy chain winch ratcheting as a wooden drawbridge is hauled up, creaking timbers",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 3.0,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Drawbridge raised",
+  "seed": 8135
+ },
+ "secret_door_open": {
+  "prompt": "Stone wall panel grinding and sliding open, low rumble of moving stone",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Secret door opened",
+  "seed": 8142
+ },
+ "secret_door_close": {
+  "prompt": "Stone panel grinding shut, ends with a dull stone thud",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.6,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Secret door closed",
+  "seed": 8149
+ },
+ "chest_open": {
+  "prompt": "Wooden treasure chest lid creaking open, metal clasp unclicks",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Chest opened",
+  "seed": 8156
+ },
+ "crate_open": {
+  "prompt": "Wooden crate lid pried open, nails squeak and planks clatter",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Crate opened",
+  "seed": 8163
+ },
+ "barrel_open": {
+  "prompt": "Wooden barrel lid knocked loose, hollow wooden pop and rattle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.7,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Barrel opened",
+  "seed": 8170
+ },
+ "sack_open": {
+  "prompt": "Burlap sack untied and opened, rope slipping and coarse cloth rustle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.7,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Sack opened",
+  "seed": 8177
+ },
+ "cache_open": {
+  "prompt": "Loose stones and earth brushed aside, hidden wooden box scraped out",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.0,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Hidden cache opened",
+  "seed": 8184
+ },
+ "lever_pull": {
+  "prompt": "Heavy iron lever pulled, metal ratchet clunk and a mechanism engaging",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Lever pulled",
+  "seed": 8191
+ },
+ "lock_open": {
+  "prompt": "Old iron lock unlocking, key turning and a satisfying metal click",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Lock opened",
+  "seed": 8198
+ },
+ "lock_fail": {
+  "prompt": "Lockpick slipping in an iron lock, small metal scrape and rattle, no click",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Lockpick failed",
+  "seed": 8205
+ },
+ "secret_found": {
+  "prompt": "Soft magical discovery chime, light airy shimmer rising",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Something hidden found",
+  "seed": 8212
+ },
+ "trap_spotted": {
+  "prompt": "Short tense metallic ting, alert sting, a trap noticed",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Trap spotted",
+  "seed": 8219
+ },
+ "trap_spring": {
+  "prompt": "Mechanical trap snapping shut, spring release and sharp metal clack",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Trap sprung",
+  "seed": 8226
+ },
+ "trap_disarm": {
+  "prompt": "Delicate mechanism being disarmed, small tool clicks and a spring gently released",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Trap disarmed",
+  "seed": 8233
+ },
+ "item_pickup": {
+  "prompt": "Small item picked up, quick soft leather and cloth rustle with a tiny clink",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Item picked up",
+  "seed": 8240
+ },
+ "page_turn": {
+  "prompt": "Old parchment page turning, dry paper rustle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "world",
+  "loop": false,
+  "use": "Book or note read",
+  "seed": 8247
+ },
+ "shrine_use": {
+  "prompt": "Gentle holy chime with a warm soft hum, blessing granted",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.6,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Shrine used",
+  "seed": 8254
+ },
+ "well_draw": {
+  "prompt": "Bucket rope winch creaking at a stone well, water sloshing in a wooden bucket",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Well drawn from",
+  "seed": 8261
+ },
+ "altar_use": {
+  "prompt": "Low mystic resonant hum swelling with a faint crystalline shimmer",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 1,
+  "group": "world",
+  "loop": false,
+  "use": "Altar used",
+  "seed": 8268
  }
 }

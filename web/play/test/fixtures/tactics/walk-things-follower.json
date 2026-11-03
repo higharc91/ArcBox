@@ -1,0 +1,57 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": false,
+    "leaderName": "Player1",
+    "region": "The Vault",
+    "objective": "Explore the region",
+    "me": {
+      "name": "Player2",
+      "cls": "Cleric",
+      "level": 1,
+      "color": "#7ccbff"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": false,
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": null,
+    "targets": [],
+    "beat": false,
+    "search": false
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

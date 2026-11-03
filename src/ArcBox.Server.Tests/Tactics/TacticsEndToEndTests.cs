@@ -45,10 +45,11 @@ public sealed class TacticsEndToEndTests
                 await phone.InvokeAsync<ProfileKey?>("ClaimMember", new ClaimMemberRequest(null));
             await phones[0].InvokeAsync("StartGame");
 
-            // Muster and the battle pick.
+            // Muster, out of the world, and the battle pick.
             for (var i = 0; i < 4; i++)
                 await Send(phones[i], await phones[i].WaitForAsync(ClientMethods.ControllerView, Screen("pickClass")),
                     new { action = "pickClass", data = new { @class = classes[i] } });
+            await Send(phones[0], await phones[0].WaitForAsync(ClientMethods.ControllerView, Screen("walk")), new { action = "battles" });
             await Send(phones[0], await phones[0].WaitForAsync(ClientMethods.ControllerView, Screen("pickEncounter")),
                 new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
 

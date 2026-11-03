@@ -13,7 +13,7 @@ public sealed class CompanionTests
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
@@ -23,7 +23,7 @@ public sealed class CompanionTests
     private static (GameHarness<TacticsGame> H, TacticsGame Game, FakeCampaignLease Lease) TwoPlayers(JsonElement? document = null)
     {
         ProfileId?[] profiles = [new ProfileId("pr_a"), new ProfileId("pr_b")];
-        var game = new TacticsGame(Rules);
+        var game = new TacticsGame(Rules, battleList: true);
         var h = new GameHarness<TacticsGame>(game, playerCount: 2, profiles: profiles);
         var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
             [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
@@ -40,6 +40,7 @@ public sealed class CompanionTests
     private static void ToBattle(GameHarness<TacticsGame> h)
     {
         PickClasses(h);
+        h.Input(0, new { action = "battles" });
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
     }
 
@@ -49,6 +50,7 @@ public sealed class CompanionTests
         var (h, game, lease) = TwoPlayers();
         h.StartCampaign(lease);
         PickClasses(h);
+        h.Input(0, new { action = "battles" });
         var pick = (CustomView)h.PlayerView(0);
         var crossing = pick.Data.GetProperty("encounters").EnumerateArray().Single(e => e.GetProperty("id").GetString() == "river_crossing");
         Assert.True(crossing.GetProperty("fits").GetBoolean());

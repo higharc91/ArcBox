@@ -43,6 +43,10 @@
           "$ref": "common.schema.json#/$defs/flags",
           "description": "The scene doesn't play if any of these flags is set (for the version of a scene that depends on an earlier choice)."
         },
+        "after": {
+          "type": "boolean",
+          "description": "Only on a battle beat: the scene is the aftermath, played after the fight is won. Unmarked scenes are the lead-in, played before it. A beat's aftermath scenes come after all its lead-in scenes."
+        },
         "cast": {
           "$ref": "common.schema.json#/$defs/ids",
           "description": "Who appears: character ids, and 'narrator'. Every line's speaker must be in it."
@@ -102,6 +106,12 @@
         },
         "end": {
           "const": true
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": -2147483647,
+          "maximum": 2147483647,
+          "description": "Party gold gained or spent once when resolved."
         }
       },
       "required": [
@@ -225,6 +235,12 @@
             "fail"
           ],
           "additionalProperties": false
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": -2147483647,
+          "maximum": 2147483647,
+          "description": "Party gold gained or spent once when resolved."
         }
       },
       "required": [

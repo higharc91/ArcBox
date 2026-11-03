@@ -85,7 +85,8 @@
         "fits": true,
         "companions": 0
       }
-    ]
+    ],
+    "canWalk": true
   },
   "viewId": "v1",
   "deadlineUtc": null,

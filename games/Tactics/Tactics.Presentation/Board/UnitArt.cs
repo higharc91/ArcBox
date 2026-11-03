@@ -58,6 +58,29 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     public ArtRect Source(int column, int row) => new(column * Width, row * Height, Width, Height);
 }
 
+/// <summary>An emote: a row of emotes/manifest.json's sheet that plays through once and then loops its tail.</summary>
+/// <param name="Path">Relative to the pack's root.</param>
+/// <param name="Width">One frame's width.</param>
+/// <param name="Height">One frame's height.</param>
+/// <param name="AnchorX">The tail's tip, across: it goes a pixel above the head.</param>
+/// <param name="AnchorY">The tail's tip, down.</param>
+/// <param name="Row">Its row of the sheet.</param>
+/// <param name="Frames">How many frames it has.</param>
+/// <param name="Fps">How fast they go.</param>
+/// <param name="LoopStart">The frame the loop goes back to.</param>
+public sealed record EmoteStrip(string Path, int Width, int Height, int AnchorX, int AnchorY, int Row, int Frames, double Fps, int LoopStart)
+{
+    /// <summary>The frame at <paramref name="seconds"/> in.</summary>
+    public int FrameAt(double seconds)
+    {
+        var frame = (long)(seconds * Fps);
+        return frame < Frames ? (int)frame : LoopStart + (int)((frame - LoopStart) % (Frames - LoopStart));
+    }
+
+    /// <summary>A frame's place in the sheet.</summary>
+    public ArtRect Source(int frame) => new(frame * Width, Row * Height, Width, Height);
+}
+
 /// <summary>A status effect: an animated strip drawn at the unit's anchor, under or over the unit.</summary>
 public sealed record StatusEffect(string Path, int Frames, double Fps, bool Under);
 
@@ -107,6 +130,7 @@ public sealed class UnitArt
     public const int EffectAnchorY = 37;
 
     private const string CharacterSet = "characters";
+    private const string EmoteSet = "emotes";
     private const int HeadroomShare = 6;   // monsters' sheets don't say where the head is: about this fraction of the frame is empty above it
     private const string DigitStyle = "damage";
 
@@ -135,6 +159,7 @@ public sealed class UnitArt
     private readonly Dictionary<(string Style, string Text), (ArtRect Rect, int Advance)> _glyphs = [];
     private readonly Dictionary<UnitTone, UnitSprite> _standIns = [];
     private readonly HashSet<string> _presets = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, EmoteStrip> _emotes = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _heads = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _headOffsets = new(StringComparer.Ordinal);
     private ManifestSet _characters = null!;
@@ -157,6 +182,9 @@ public sealed class UnitArt
     /// <summary>One arrow frame's width.</summary>
     public int ArrowWidth { get; private set; }
 
+    /// <summary>The crown over the party's leader, from the emotes' manifest, or null for a pack with none.</summary>
+    public EmoteStrip? Crown { get; private set; }
+
     /// <summary>The point of the arrow in its frame, across.</summary>
     public int ArrowAnchorX { get; private set; }
 
@@ -178,9 +206,28 @@ public sealed class UnitArt
         art._bosses = new ManifestSet("bosses", bosses.RootElement);
         art.ReadStatus(status.RootElement, icons.RootElement);
         art.ReadUi(ui.RootElement);
+        art.ReadCrown(packRoot);
         foreach (var set in new[] { art._beasts, art._bosses })
             art.ReadMonsters(set, set.Name == "beasts" ? beasts.RootElement.GetProperty("beasts") : bosses.RootElement.GetProperty("monsters"));
         return art;
+    }
+
+    /// <summary>An emote by its name in emotes/manifest.json (<c>alert</c> is the story's "!"), or null for one the pack doesn't have.</summary>
+    public EmoteStrip? Emote(string name) => _emotes.GetValueOrDefault(name);
+
+    private void ReadCrown(string packRoot)
+    {
+        var path = System.IO.Path.Combine(packRoot, EmoteSet, "manifest.json");
+        if (!File.Exists(path))
+            return;
+        using var doc = JsonDocument.Parse(File.ReadAllText(path));
+        var root = doc.RootElement;
+        var (frame, anchor) = (root.GetProperty("frame"), root.GetProperty("anchor"));
+        foreach (var emote in root.GetProperty("emotes").EnumerateObject())
+            _emotes[emote.Name] = new EmoteStrip($"{EmoteSet}/{EmoteSet}.png", frame[0].GetInt32(), frame[1].GetInt32(), anchor[0].GetInt32(),
+                anchor[1].GetInt32(), emote.Value.GetProperty("row").GetInt32(), root.GetProperty("frames").GetInt32(), root.GetProperty("fps").GetDouble(),
+                root.GetProperty("loopStart").GetInt32());
+        Crown = Emote("crown");
     }
 
     /// <summary>The sprite for a key, or null if the pack has none. A monster's unknown or missing variant takes its first.</summary>
@@ -316,9 +363,12 @@ public sealed class UnitArt
     private UnitSprite Character(string preset)
     {
         var build = BuildOf(preset);
-        return new UnitSprite($"{CharacterSet}/presets/{preset}.png", _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
+        return new UnitSprite(SheetOf(preset), _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
             _heads.GetValueOrDefault(build), _characters.Idle, _characters.Down, _headOffsets.GetValueOrDefault(build), _characters.Anims);
     }
+
+    /// <summary>The file a preset's sprites are in, relative to the pack's root.</summary>
+    public static string SheetOf(string preset) => $"{CharacterSet}/presets/{preset}.png";
 
     private string BuildOf(string preset)
     {

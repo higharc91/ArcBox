@@ -22,6 +22,28 @@ public sealed class BasePackRegionTests
     [Fact]
     public void The_pack_has_regions_to_check() => Assert.NotEmpty(Regions());
 
+    /// <summary>
+    /// Every arc in the lore replayed on Ashen Ford's ground, renamed for the arc's region, as a painted region of its own will be:
+    /// whatever the ground lacks is a problem to report, never a throw. <c>ch4_pip_remembers</c> has no place, which once threw.
+    /// </summary>
+    [Fact]
+    public void Every_arc_in_the_lore_can_be_replayed()
+    {
+        var ford = Pack.Value.RegionFor("ashen_ford")!.Def;
+        var arcs = LoreBook.Load(ContentPaths.ContentBase).Arcs;
+        Assert.Contains(arcs, a => a.Beats.Any(b => b.Place is null));
+
+        foreach (var arc in arcs)
+        {
+            var story = StoryOrder.Check(WorldRegion.From(ford with { Id = arc.Region, Chapter = arc.Chapter }), Pack.Value, ContentPaths.ContentBase);
+
+            if (arc.Region == ford.Id)
+                Assert.NotEmpty(story.Legs);
+            else
+                Assert.Contains(story.Problems, p => p.Contains($"'{arc.Beats[^1].Id}' has no spot", StringComparison.Ordinal));
+        }
+    }
+
     [Theory]
     [MemberData(nameof(Regions))]
     public void A_region_plays_in_story_order_on_every_branch(string id)

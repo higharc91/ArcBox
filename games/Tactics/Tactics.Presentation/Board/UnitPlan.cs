@@ -62,7 +62,49 @@ public sealed record UnitCountdown(Vector2 Centre, string Text);
 /// <param name="ArrowAt">Where the point of the turn arrow goes, on the active unit.</param>
 public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Feet, UnitSprite Sprite, UnitAnim Anim, double Phase, int Row, bool Mirror,
     float Ring, bool Active, ImmutableArray<StatusEffect> Under, ImmutableArray<StatusEffect> Over, UnitBar? Bar, UnitCountdown? Countdown,
-    ImmutableArray<ArtRect> Icons, Vector2 IconsAt, Vector2? ArrowAt);
+    ImmutableArray<ArtRect> Icons, Vector2 IconsAt, Vector2? ArrowAt)
+{
+    /// <summary>Where the anchor of the leader's crown goes (the crown row of emotes/manifest.json); null for anyone else.</summary>
+    public Vector2? CrownAt { get; init; }
+
+    /// <summary>One of a region's people, who stands about and has no say in anything: what they stand behind doesn't fade for them.</summary>
+    public bool Dressing { get; init; }
+
+    /// <summary>An emote over the unit, as the crown is drawn: a story beat's "!" (<see cref="World.StoryMarks"/>); null for none.</summary>
+    public EmoteStrip? Emote { get; init; }
+
+    /// <summary>Where <see cref="Emote"/>'s tail goes.</summary>
+    public Vector2? EmoteAt { get; init; }
+
+    /// <summary>Nothing of the unit is drawn but its marks: a story beat's "!" with nobody standing under it.</summary>
+    public bool MarksOnly { get; init; }
+
+    /// <summary>A walker whose player's phone has gone: drawn a little dim.</summary>
+    public bool Away { get; init; }
+
+    /// <summary>
+    /// A thing to interact with (<see cref="World.ThingShow"/>), drawn with no ring: its sprite under <see cref="ThingLook.Scale"/> and
+    /// <see cref="ThingLook.Tint"/>, or its plain marker, and its label. Null for anyone else.
+    /// </summary>
+    public ThingLook? Thing { get; init; }
+
+    /// <summary>
+    /// A ring goes over a dark one (<see cref="UnitPlan.RingOutline"/>), so it reads on grass as well as stone: a walker's, and a hero's in a
+    /// fight who has a player's colour. Anyone else in a fight has their side's ring alone, as ever.
+    /// </summary>
+    public bool Outlined { get; init; }
+
+    /// <summary>Their player's own colour (<see cref="PlayerInk.Of"/>), for a walker or a hero; null for the side's.</summary>
+    public Rgb? Colour { get; init; }
+
+    /// <summary>
+    /// The colour its ring is drawn in: its player's colour, always, even on their turn, when the canvas only draws it wider and the turn's
+    /// arrow says whose turn it is. The turn's gold would hide whose hero it is, and is all but the palette's own "Gold", so on the turn of
+    /// the player beside the gold one the TV showed two gold rings (seen on the TV, 2026-11-01). With no player's colour: the turn's gold on
+    /// the unit whose turn it is, else its side's (<see cref="UnitPlan.ToneRing"/>), so a walker with none keeps the party's green.
+    /// </summary>
+    public Rgb RingColour => Colour ?? (Active ? UnitPlan.ActiveRing : UnitPlan.ToneRing(Tone));
+}
 
 /// <summary>
 /// The units of a battle, ready to draw: what stands where, sorted into the painter's order, with what marks each one.
@@ -70,6 +112,29 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
 /// </summary>
 public static class UnitPlan
 {
+    /// <summary>What a walker's ring is drawn over, so it reads on any ground.</summary>
+    public static readonly Rgb RingOutline = Rgb.Hex("#0b0b10");
+
+    /// <summary>The party's ring with no player's colour: ui/manifest.json's palette's hp green.</summary>
+    public static readonly Rgb PartyRing = Rgb.Hex("#63d36f");
+
+    /// <summary>An enemy's ring: the palette's enemy red.</summary>
+    public static readonly Rgb EnemyRing = Rgb.Hex("#e2534c");
+
+    /// <summary>Anyone else's ring.</summary>
+    public static readonly Rgb NeutralRing = Rgb.Hex("#dbceb7");
+
+    /// <summary>The ring of the unit whose turn it is: the palette's gold.</summary>
+    public static readonly Rgb ActiveRing = Rgb.Hex("#ffe794");
+
+    /// <summary>A side's ring.</summary>
+    public static Rgb ToneRing(UnitTone tone) => tone switch
+    {
+        UnitTone.Party => PartyRing,
+        UnitTone.Enemy => EnemyRing,
+        _ => NeutralRing,
+    };
+
     /// <summary>An HP bar's width.</summary>
     public const int BarWidth = 30;
 
@@ -86,6 +151,7 @@ public static class UnitPlan
     public const int CountdownScale = 2;
 
     private const string Prone = "prone";     // a Downed unit is always prone, and already lying down
+    private const string Idling = "idle";
     private const int DigitHeight = 12;
     private const int Gap = 2;
     private const float LyingHeight = 14;     // how tall a figure lying down is
@@ -98,20 +164,79 @@ public static class UnitPlan
     /// <summary>
     /// The drawn units of <paramref name="battle"/> (Up and Downed), back to front. A unit in <paramref name="places"/> is
     /// drawn there and not on its tile, and a unit in <paramref name="poses"/> plays that instead of idling, if it's on its feet.
+    /// <paramref name="worldOffset"/> is the world tile of the map's (0, 0) for a battle drawn in place (<see cref="World.StagePlan"/>), whose
+    /// board keeps the region's keys: it moves only where units sort, never where they're drawn.
     /// </summary>
     public static ImmutableArray<BoardUnit> Build(BattleView battle, BoardTerrain terrain, UnitArt art, BoardFit fit,
-        IReadOnlyDictionary<UnitId, UnitPlace>? places = null, IReadOnlyDictionary<UnitId, UnitPose>? poses = null)
+        IReadOnlyDictionary<UnitId, UnitPlace>? places = null, IReadOnlyDictionary<UnitId, UnitPose>? poses = null, Tile worldOffset = default)
     {
         var drawn = battle.Units.Where(u => u.Life is "Up" or "Downed" && terrain.Map.InBounds(u.At)).ToArray();
         var top = (BoardFit.Area.Y - fit.Origin.Y) / fit.Scale;
         return [.. drawn
             .Select(unit => Unit(unit, drawn, battle.Active, art, top,
                 places is not null && places.TryGetValue(unit.Id, out var place) ? place : UnitPlace.On(terrain, unit.At),
-                poses?.GetValueOrDefault(unit.Id)))
+                poses?.GetValueOrDefault(unit.Id), worldOffset))
             .OrderBy(u => u.Order)];
     }
 
-    private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose)
+    /// <summary>
+    /// The party in the world, back to front: walkers from <see cref="World.WalkTrack"/>, each with its ring and no bar, and a crown over
+    /// whoever leads. A walker with no place yet isn't drawn. An idling pose animates on the canvas's clock, as an idle unit does.
+    /// <paramref name="pixels"/> says where feet go on the screen's pixels, given whether they're standing still; everything of a walker's follows them.
+    /// </summary>
+    public static ImmutableArray<BoardUnit> Walkers(IEnumerable<WalkerView> party, IReadOnlyDictionary<string, UnitPlace> places,
+        IReadOnlyDictionary<string, UnitPose> poses, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+        => [.. party.Where(w => places.ContainsKey(w.Id)).Select(w => Walker(w, places[w.Id], poses.GetValueOrDefault(w.Id), art, pixels)).OrderBy(u => u.Order)];
+
+    private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
+    {
+        var sprite = art.Sprite(walker.Sprite) ?? art.StandIn(UnitTone.Party);
+        var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : (0, false);
+        var feet = pixels?.Invoke(place.Feet, pose is null || pose.Anim == Idling) ?? place.Feet;
+        var id = new UnitId(walker.Id);
+        var anim = pose is null || pose.Anim == Idling ? sprite.Idle : new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false);
+        return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing),
+            false, [], [], null, null, [], feet, null)
+        {
+            CrownAt = walker.Leads ? Overhead(feet, sprite) : null,
+            Away = !walker.Here,
+            Outlined = true,
+            Colour = PlayerInk.Of(walker.Color),
+        };
+    }
+
+    /// <summary>
+    /// A figure standing in the world as dressing (a story beat's, overworld 5d default 12): idle, looking at the viewer, with no ring and no
+    /// marks, sorted among the party by its tile. <paramref name="sprite"/> is a key the pack may not draw: then it's the neutral stand-in.
+    /// With <paramref name="look"/>, a way across the map, it looks that way instead (a scene's cast, towards the party), as a walker does.
+    /// </summary>
+    public static BoardUnit Figure(string id, string? sprite, UnitPlace place, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null, Vector2? look = null)
+    {
+        var drawn = art.Sprite(sprite) ?? art.StandIn(UnitTone.Neutral);
+        var feet = pixels?.Invoke(place.Feet, true) ?? place.Feet;
+        var unit = new UnitId(id);
+        var (row, mirror) = look is { } way && way != Vector2.Zero ? Looking(way.X, way.Y) : (0, false);
+        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), row, mirror, 0, false, [], [], null,
+            null, [], feet, null);
+    }
+
+    /// <summary>
+    /// Someone of a region's people (<see cref="World.WorldPeople"/>): a figure with a way of looking and, with <paramref name="walking"/>, an animation of their own to loop.
+    /// </summary>
+    public static BoardUnit Person(string id, string sprite, UnitPlace place, Vector2 looking, string? walking, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+    {
+        var drawn = art.Sprite(sprite)!;
+        var feet = pixels?.Invoke(place.Feet, walking is null) ?? place.Feet;
+        var unit = new UnitId(id);
+        var (row, mirror) = Looking(looking.X, looking.Y);
+        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, walking is null ? drawn.Idle : drawn.Anim(walking), PhaseOf(unit), row, mirror, 0, false, [], [], null,
+            null, [], feet, null) { Dressing = true };
+    }
+
+    /// <summary>Where the tail of an emote over a standing figure goes: a crown's or a "!"'s, just over the head of <paramref name="sprite"/> at <paramref name="feet"/>.</summary>
+    public static Vector2 Overhead(Vector2 feet, UnitSprite sprite) => new(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap);
+
+    private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose, Tile offset)
     {
         var tone = ToneOf(unit.Side);
         var sprite = art.Sprite(unit.Sprite) ?? art.StandIn(tone);
@@ -121,6 +246,7 @@ public static class UnitPlan
         var effects = looks.Select(l => l.Effect).OfType<StatusEffect>().DistinctBy(e => e.Path).ToArray();
         ImmutableArray<ArtRect> icons = [.. looks.Select(l => l.Icon).OfType<ArtRect>().Distinct().Take(MaxIcons)];
         var isActive = unit.Id == active;
+        var colour = tone == UnitTone.Party ? PlayerInk.Of(unit.Color) : null;     // a hero's player's, as their walker's ring was
 
         // The marks stack up from the head. If the stack would reach the top strip, all of it comes down onto the unit.
         var feet = place.Feet;
@@ -137,7 +263,7 @@ public static class UnitPlan
             y = arrow - art.ArrowAnchorY;
         var shift = Math.Max(0, top - y);
 
-        return new BoardUnit(OrderOf(place.Over, sprite), unit.Id, tone, feet, sprite,
+        return new BoardUnit(OrderOf(new Tile(place.Over.X + offset.X, place.Over.Y + offset.Y), sprite), unit.Id, tone, feet, sprite,
             downed ? new UnitAnim([sprite.Down.Frames[^1]], 1, false)
                 : pose is not null ? new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false)
                 : sprite.Idle,
@@ -146,7 +272,11 @@ public static class UnitPlan
             downed ? null : new UnitBar(new Vector2(feet.X - BarWidth / 2f, markTop + shift), BarWidth, Fill(unit.Hp, unit.MaxHp, art.Bar(tone))),
             downed ? new UnitCountdown(new Vector2(feet.X, (markTop + mark) / 2 + shift), unit.Countdown.ToString(CultureInfo.InvariantCulture)) : null,
             icons, new Vector2(feet.X - icons.Length * IconStep / 2f, iconsTop + shift),
-            isActive ? new Vector2(feet.X, arrow + shift) : null);
+            isActive ? new Vector2(feet.X, arrow + shift) : null)
+        {
+            Colour = colour,
+            Outlined = colour is not null,
+        };
     }
 
     /// <summary>A unit's place in the idle cycle, from its id: from its place in a list, a unit leaving would make the rest jump.</summary>

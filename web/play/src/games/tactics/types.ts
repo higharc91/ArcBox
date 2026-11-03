@@ -137,10 +137,141 @@ export interface EncounterOption {
   companions?: number;
 }
 
+export interface WalkMember {
+  name: string;
+  /** The class's name, as shown. */
+  cls: string;
+  here: boolean;
+  leads: boolean;
+  /** Their colour, "#rrggbb"; absent from an older server. */
+  color?: string;
+}
+
+/** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
+export interface WalkData {
+  gold?: number;
+  leader: boolean;
+  leaderName: string | null;
+  region: string | null;
+  objective: string;
+  /** `color`: the player's colour, "#rrggbb" (their pick, else their join order's); absent from an older server. */
+  me: { name: string; cls: string; level: number; color?: string };
+  party: WalkMember[];
+  vip: boolean;
+  canBattle: boolean;
+  /** The campaign portal's path; null outside a campaign. */
+  portal?: string | null;
+  /** The leader's Interact button ("Talk", "Look around"…), while a beat's spot is in reach; null or absent otherwise. */
+  interact?: string | null;
+  /**
+   * The leader's things to interact with in reach (chests, doors, levers…), nearest first, each with its button's words: `interact`
+   * sent with `{ target: id }` uses one. Empty for everyone else; absent in a region with no things, and from an older server. The Interact
+   * button uses the first, unless a beat is in reach (then `interact` is the beat's word); with more than one choice, a list beside it has them all.
+   */
+  targets?: { id: string; label: string }[];
+  /** With `targets`: true when the leader's button is a beat's (`interact` is its word, sent with no target); false when it's the first thing's. */
+  beat?: boolean;
+  /**
+   * With `targets`: true on the leader's screen, where a Search button sends `search` (interactables design §7.4): the party's
+   * Investigation check for what's hidden nearby. False for everyone else; absent in a region with no things.
+   */
+  search?: boolean;
+}
+
+/**
+ * A line of a scene. Everything is null between lines (the gap between scenes, or while a roll is revealed). The narrator
+ * has no speaker and no portrait. `canSkip` is the leader's, and a skip names `line`, so a late tap can't skip the next.
+ */
+export interface DialogueData {
+  title: string | null;
+  line: string | null;
+  speaker: string | null;
+  /** A portrait preset of the pack's (`portraits/manifest.json`), drawn in `mood`. */
+  portrait: string | null;
+  mood: string | null;
+  text: string | null;
+  canSkip: boolean;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
+}
+
+export interface StoryOption {
+  can?: boolean;
+  needs?: string;
+  id: string;
+  label: string;
+  /** The skill check picking it starts, if any. */
+  skill: string | null;
+  dc: number | null;
+}
+
+/**
+ * A question: the party's vote (`party`), or a choice the leader makes for everyone. On a tie only the tied options come,
+ * and `decider` breaks it. No tally: that's the TV's. `chosen` is the party's pick of a leader's choice, for those who
+ * didn't make it.
+ */
+export interface VoteData {
+  party: boolean;
+  canChoose: boolean;
+  options: StoryOption[];
+  mine: string | null;
+  chosen: string | null;
+  tie: boolean;
+  decider: string | null;
+  /** The players away when it was asked, by name. */
+  away: string[];
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
+}
+
+export interface CheckCard {
+  /** The member's id, which `pickRoller` sends. */
+  id: string;
+  name: string;
+  player: string;
+  /** The class's name, as shown. */
+  cls: string;
+  bonus: number;
+  /** Where the bonus comes from: "Proficient · CHA 14". */
+  note: string;
+  here: boolean;
+}
+
+export interface CheckRoll {
+  member: string;
+  die: number;
+  bonus: number;
+  total: number;
+  /** Null for a search, whose DC isn't shown. */
+  dc: number | null;
+  success: boolean;
+}
+
+/** A skill check: the party picks who rolls, by a vote on the same rules, then the roll. */
+export interface CheckData {
+  skill: string;
+  /** Null for a search (interactables design §7.4): each thing it looks for has its own DC, and it mustn't say whether there are any. */
+  dc: number | null;
+  /** The option it's for. */
+  title: string;
+  cards: CheckCard[];
+  mine: string | null;
+  canChoose: boolean;
+  tie: boolean;
+  decider: string | null;
+  /** On a tie, the members it's between. */
+  tied: string[];
+  roll: CheckRoll | null;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
+}
+
 export interface ResultsData {
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
   lines: { name: string; xp: number; injuries: string[] }[];
+  /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
+  note?: string | null;
   vip: boolean;
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */

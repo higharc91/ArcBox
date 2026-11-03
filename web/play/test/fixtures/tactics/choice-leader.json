@@ -1,0 +1,38 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": false,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "why",
+        "label": "Why did they take the bridge?",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "truth",
+        "label": "Your guards shot first, Captain. At children.",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "cases",
+        "label": "Make your cases. Both of you.",
+        "skill": null,
+        "dc": null
+      }
+    ],
+    "mine": null,
+    "chosen": null,
+    "tie": false,
+    "decider": "Player1",
+    "away": [],
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:57.7000416\u002B00:00",
+  "header": null
+}

@@ -53,7 +53,7 @@ public partial class HudLayer : Control
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         MouseFilter = MouseFilterEnum.Ignore;
 
-        var panels = Scaled(art.PanelsPath);
+        var panels = Scaled(packRoot, art.PanelsPath);
         _title = ArcTheme.Label("", ArcTheme.Bold, 36, Ink);
         _round = ArcTheme.Label("", ArcTheme.SemiBold, 26, Gold);
         _objectiveText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
@@ -141,7 +141,8 @@ public partial class HudLayer : Control
         _prompt.Position = new Vector2(Math.Min(centred, _order.Position.X - PanelGap - _prompt.Size.X), Top);
     }
 
-    private static StyleBoxTexture Box(Texture2D? texture, HudPiece piece) => new()
+    /// <summary>A piece of the panels' art as a stylebox, at the size the HUD draws it.</summary>
+    internal static StyleBoxTexture Box(Texture2D? texture, HudPiece piece) => new()
     {
         Texture = texture,
         RegionRect = new Rect2(piece.Rect.X * ArtScale, piece.Rect.Y * ArtScale, piece.Rect.Width * ArtScale, piece.Rect.Height * ArtScale),
@@ -160,9 +161,9 @@ public partial class HudLayer : Control
     };
 
     /// <summary>A stylebox can't scale its art, so the image itself is made bigger, with nearest filtering, as the manifest asks.</summary>
-    private Texture2D? Scaled(string file)
+    internal static Texture2D? Scaled(string root, string file)
     {
-        var path = System.IO.Path.Combine(_root, file);
+        var path = System.IO.Path.Combine(root, file);
         var image = System.IO.File.Exists(path) ? Image.LoadFromFile(path) : null;
         if (image is null || image.IsEmpty())
         {

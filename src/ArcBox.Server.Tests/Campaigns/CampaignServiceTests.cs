@@ -316,6 +316,35 @@ public sealed class CampaignServiceTests : IDisposable
         Assert.Equal("End of session 1", only.Label);
     }
 
+    /// <summary>
+    /// Review: each snapshot has a key of its own, so a disk that's down while checkpoints go on kept every one of them waiting. Only the
+    /// newest MaxSnapshots per campaign wait; once the disk is back, those are the ones written.
+    /// </summary>
+    [Fact]
+    public async Task A_disk_thats_down_keeps_only_the_newest_snapshots_waiting()
+    {
+        var disk = new StorageWriterTests.FailingDisk(_db) { Broken = true };
+        using var writer = new StorageWriter(_db, _time, NullLogger<StorageWriter>.Instance) { Connect = disk.Open };
+        var campaigns = new CampaignService(_db, writer, new CampaignRulesRegistry([new LedgerRules()]), _time, _log);
+        var c = campaigns.Create("ledger", "Embers", _dave);
+        var lease = campaigns.CheckOut(c.Id, "AAAA")!;
+        var ct = TestContext.Current.CancellationToken;
+
+        for (var i = 1; i <= 130; i++)
+        {
+            lease.Checkpoint(Doc($$"""{"notes":["{{i}}"]}"""), $"Cp {i}");
+            if (i % 40 == 0) await writer.FlushAsync(ct);       // tries on a failing disk, mid-way
+        }
+        Assert.True(writer.Failing);
+        Assert.InRange(writer.PendingCount, CampaignService.MaxSnapshots, CampaignService.MaxSnapshots + 4);    // the snapshots, the campaign and its profile rows
+
+        disk.Broken = false;
+        await writer.FlushAsync(ct);
+
+        Assert.Equal(CampaignService.MaxSnapshots, _db.Scalar<int>("SELECT COUNT(*) FROM campaign_snapshots"));
+        Assert.Equal("Cp 81", _db.Scalar<string>("SELECT label FROM campaign_snapshots ORDER BY id LIMIT 1"));
+    }
+
     [Fact]
     public async Task Checkpoint_always_snapshots_and_prunes_to_50()
     {

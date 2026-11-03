@@ -20,9 +20,13 @@ public static class Palette
     /// <summary>The Flags layer's tile set: one source, with a tile per flag combination.</summary>
     public const string Flags = "res://palette/flags.tres";
 
+    /// <summary>The Props layer's tile set: one source, with a tile per prop swatch in the prop atlas.</summary>
+    public const string Props = "res://palette/props.tres";
+
     private const string SwatchFolder = "res://palette/materials/";
     private const string HeightsImage = "res://palette/heights.png";
     private const string FlagsImage = "res://palette/flags.png";
+    private const string PropsImage = "res://palette/props.png";
 
     private static readonly Vector2I TileSize = new(PaletteBuilder.TileSize, PaletteBuilder.TileSize);
 
@@ -49,6 +53,37 @@ public static class Palette
             Blit(flags, PaletteBuilder.FlagsTile((TileFlags)bits), new Vector2I(x, y));
         }
         Save(flags, FlagsImage);
+
+        var propSwatches = PaletteBuilder.AllPropSwatches(RegionPaths.Content);
+        var propRows = (propSwatches.Count + PaletteBuilder.PropAtlasColumns - 1) / PaletteBuilder.PropAtlasColumns;
+        var props = Image.CreateEmpty(TileSize.X * PaletteBuilder.PropAtlasColumns, TileSize.Y * propRows, false, Image.Format.Rgba8);
+        for (var i = 0; i < propSwatches.Count; i++)
+        {
+            var swatch = propSwatches[i];
+            var at = new Vector2I(i % PaletteBuilder.PropAtlasColumns, i / PaletteBuilder.PropAtlasColumns);
+            var texturePath = Path.Combine(RegionPaths.Content, swatch.Texture);
+            if (File.Exists(texturePath))
+            {
+                var texture = Image.LoadFromFile(texturePath);
+                var scaled = texture.Duplicate() as Image ?? texture;
+                if (scaled.GetWidth() > TileSize.X || scaled.GetHeight() > TileSize.Y)
+                {
+                    var scale = Math.Min((float)TileSize.X / scaled.GetWidth(), (float)TileSize.Y / scaled.GetHeight());
+                    scaled.Resize(Math.Max(1, (int)(scaled.GetWidth() * scale)), Math.Max(1, (int)(scaled.GetHeight() * scale)), Image.Interpolation.Nearest);
+                }
+                var destX = at.X * TileSize.X + (TileSize.X - scaled.GetWidth()) / 2;
+                var destY = at.Y * TileSize.Y + (TileSize.Y - scaled.GetHeight());
+                props.BlitRect(scaled, new Rect2I(Vector2I.Zero, scaled.GetSize()), new Vector2I(destX, destY));
+            }
+            if (swatch.Blocks)
+            {
+                var markTile = new byte[TileSize.X * TileSize.Y * 4];
+                PaletteBuilder.MarkBlocking(markTile);
+                var markImg = Image.CreateFromData(TileSize.X, TileSize.Y, false, Image.Format.Rgba8, markTile);
+                props.BlendRect(markImg, new Rect2I(Vector2I.Zero, TileSize), at * TileSize);
+            }
+        }
+        Save(props, PropsImage);
     }
 
     /// <summary>
@@ -84,6 +119,15 @@ public static class Palette
             flags.CreateTile(new Vector2I(x, y));
         }
         SaveSet(flags, Flags);
+
+        var propSwatches = PaletteBuilder.AllPropSwatches(RegionPaths.Content);
+        var propsSource = NewSource("props", PropsImage);
+        for (var i = 0; i < propSwatches.Count; i++)
+        {
+            var at = new Vector2I(i % PaletteBuilder.PropAtlasColumns, i / PaletteBuilder.PropAtlasColumns);
+            propsSource.CreateTile(at);
+        }
+        SaveSet(propsSource, Props);
     }
 
     private static TileSetAtlasSource NewSource(string name, string image) => new()

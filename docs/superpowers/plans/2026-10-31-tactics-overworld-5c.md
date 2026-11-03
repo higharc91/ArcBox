@@ -54,7 +54,7 @@
 9. **5b's risk on fixed scale is closed.** All seven maps are 14×12, and at scale 2 the tallest is 960 px against the 992 px `BoardFit.Area` (`BoardFit.cs:23`). That's excluding sprites and skirts.
 10. **The camera clamp must not apply in a fight.** A stamp near the region's edge would sit off-centre with 5b's 16-tile margin.
 11. **`Battle.Result` is never used for flags.** `EndBattle` drops `FlagsSet` (`TacticsGame.cs:350-384`, `BattleResult.cs:21`).
-12. **Losing pays half XP every time.** That's today's rule (`Objectives.cs`, `Battle.Result`). Retrying makes it farmable. It stays, because changing it would be a rules change, but it goes on the user's list.
+12. **Losing pays half XP every time.** (Superseded 2026-11-01: a loss now pays no XP and its injuries heal; see the cloud handoff §8.) That's today's rule (`Objectives.cs`, `Battle.Result`). Retrying makes it farmable. It stays, because changing it would be a rules change, but it goes on the user's list.
 13. **The region check needs one addition.** `start` and `recovery` must not be inside a stamp. Otherwise a defeat wakes the party on the battlefield.
 
 ## Design

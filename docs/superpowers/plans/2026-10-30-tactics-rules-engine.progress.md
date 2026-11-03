@@ -115,7 +115,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Losing concentration.** Becoming Downed, Out, Dead or incapacitated ends that unit's concentration.
 
 **Downed, Out and XP**
-- **XP:** full on a win, half (rounded down) on a loss or a retreat. Absent members get it too.
+- **XP:** full on a win, half (rounded down) on a retreat, none on a loss (the user's rule, 2026-11-01; it was half). Absent members get it too.
 - **One function for 0 HP.** Every drop to 0 HP goes through `DownedRules.Drop` in `Rules/Downed.cs`:
   - party members and protected NPCs go Downed;
   - everyone else dies;

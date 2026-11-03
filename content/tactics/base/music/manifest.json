@@ -121,6 +121,14 @@
       "loop": false,
       "group": "sting",
       "use": "BattleEnded with victory"
+    },
+    "victory_boss": {
+      "files": [
+        "victory_boss.ogg"
+      ],
+      "loop": false,
+      "group": "sting",
+      "use": "BattleEnded with victory over a boss (generated with vocals allowed, for the wordless choir)"
     }
   }
 }

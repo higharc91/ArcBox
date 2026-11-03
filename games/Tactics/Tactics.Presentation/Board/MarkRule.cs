@@ -1,0 +1,91 @@
+using System.Collections.Immutable;
+using System.Numerics;
+using Tactics.Presentation.Beats;
+using Tactics.Presentation.World;
+
+namespace Tactics.Presentation.Board;
+
+/// <summary>
+/// Which of the units' marks the TV draws at a moment: their HP bars, Downed counts, condition icons and turn arrow, and the numbers and die
+/// badges that pop up over them. Pure: <c>TacticsScene</c> applies it to what <see cref="UnitPlan.Build"/> and <see cref="BeatPlayer.Frame"/> give.
+/// </summary>
+public static class MarkRule
+{
+    private const float Gap = 2;     // above and below a count: closer than that, a number over it reads as part of it
+
+    /// <summary>
+    /// Whether the units' marks show at <paramref name="stage"/>: only while the fight is being played, on the plain board
+    /// (<see cref="StageStep.Off"/>) or in the world (<see cref="StageStep.Fighting"/>, <see cref="StageStep.Fading"/>). Not in the walk-in,
+    /// where the party is still walking as it does in the world, with no bars, nor once the results are over the world, nor in the wake after
+    /// them. And never while the header and table are over the board (<paramref name="covered"/>: <see cref="PhaseScreen.OverWorld"/>), which
+    /// comes while the last blow still plays: a bar would poke out bright from under the table, and the counts show through it.
+    /// </summary>
+    public static bool Shown(StageStep stage, bool covered) => !covered && stage is StageStep.Off or StageStep.Fighting or StageStep.Fading;
+
+    /// <summary>The units with no marks: no bar, no count, no icons and no turn arrow.</summary>
+    public static ImmutableArray<BoardUnit> Bare(ImmutableArray<BoardUnit> units)
+        => units.Any(u => u.Bar is not null || u.Countdown is not null || !u.Icons.IsEmpty || u.ArrowAt is not null)
+            ? [.. units.Select(u => u with { Bar = null, Countdown = null, Icons = [], ArrowAt = null })]
+            : units;
+
+    /// <summary>The beat's draws with its marks (<see cref="FxDraw.Mark"/>) left out unless <paramref name="shown"/>; the scene's own effects stay.</summary>
+    public static ImmutableArray<FxDraw> Effects(ImmutableArray<FxDraw> draws, bool shown)
+        => shown || !draws.Any(d => d.Mark) ? draws : [.. draws.Where(d => !d.Mark)];
+
+    /// <summary>
+    /// The units and the beat's draws as they're drawn this moment: if <paramref name="shown"/>, all of it, with no Downed count near a number
+    /// popping up (<see cref="ClearOfPops"/>); otherwise the units bare and the beat's numbers and badges gone.
+    /// </summary>
+    public static (ImmutableArray<BoardUnit> Units, ImmutableArray<FxDraw> Draws) Apply(ImmutableArray<BoardUnit> units, BeatFrame beat, UnitArt art, bool shown)
+        => shown ? (ClearOfPops(units, beat.Pops, art), beat.Draws) : (Bare(units), Effects(beat.Draws, false));
+
+    /// <summary>
+    /// The units with no Downed count while a number pops up over that unit, or close enough beside its count to be read with it: "-10" next to
+    /// a "2" reads as "-102". The count is back as soon as the number has gone.
+    /// </summary>
+    public static ImmutableArray<BoardUnit> ClearOfPops(ImmutableArray<BoardUnit> units, ImmutableArray<PopBox> pops, UnitArt art)
+    {
+        if (pops.IsDefaultOrEmpty || !units.Any(u => u.Countdown is not null))
+            return units;
+        return [.. units.Select(u => u.Countdown is { } count && Crowded(u, count, pops, art) ? u with { Countdown = null } : u)];
+    }
+
+    /// <summary>Where a count is drawn (<c>UnitMarks.DrawDigits</c>), in art pixels: its top left and size.</summary>
+    public static (Vector2 TopLeft, Vector2 Size) CountBox(UnitCountdown count, UnitArt art)
+    {
+        var glyphs = CountGlyphs(count, art);
+        if (glyphs.IsEmpty)
+            return (count.Centre, Vector2.Zero);
+        var min = glyphs.Aggregate(new Vector2(float.MaxValue), (m, g) => Vector2.Min(m, g.TopLeft));
+        var max = glyphs.Aggregate(new Vector2(float.MinValue), (m, g) => Vector2.Max(m, g.TopLeft + g.Size));
+        return (min, max - min);
+    }
+
+    /// <summary>
+    /// A count's digits as <c>UnitMarks.DrawDigits</c> draws them, in <see cref="UnitArt.NumbersPath"/> at <see cref="UnitPlan.CountdownScale"/>:
+    /// centred on the count's middle, each on the advance of the one before, each centred up and down.
+    /// </summary>
+    public static ImmutableArray<(ArtRect Source, Vector2 TopLeft, Vector2 Size)> CountGlyphs(UnitCountdown count, UnitArt art)
+    {
+        var glyphs = count.Text.Select(art.Digit).ToArray();
+        const int scale = UnitPlan.CountdownScale;
+        var pen = count.Centre.X - glyphs.Sum(g => g.Advance) * scale / 2f;
+        var drawn = ImmutableArray.CreateBuilder<(ArtRect, Vector2, Vector2)>(glyphs.Length);
+        foreach (var (rect, advance) in glyphs)
+        {
+            var size = new Vector2(rect.Width, rect.Height) * scale;
+            drawn.Add((rect, new Vector2(pen, count.Centre.Y - size.Y / 2), size));
+            pen += advance * scale;
+        }
+        return drawn.MoveToImmutable();
+    }
+
+    private static bool Crowded(BoardUnit unit, UnitCountdown count, ImmutableArray<PopBox> pops, UnitArt art)
+    {
+        var (topLeft, size) = CountBox(count, art);
+        var reach = new Vector2(art.Digit('0').Advance * UnitPlan.CountdownScale, Gap);     // a digit's width aside: closer than that, it's one number
+        var (low, high) = (topLeft - reach, topLeft + size + reach);
+        return pops.Any(p => p.Unit == unit.Id
+            || (p.TopLeft.X < high.X && p.TopLeft.X + p.Size.X > low.X && p.TopLeft.Y < high.Y && p.TopLeft.Y + p.Size.Y > low.Y));
+    }
+}

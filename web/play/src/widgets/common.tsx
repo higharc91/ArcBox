@@ -2,7 +2,8 @@ import { useRef, useState } from "preact/hooks";
 import type { Option } from "../protocol";
 import { useSkin } from "../games/module";
 
-export type Send = (payload: object) => void;
+/** `quiet` sends without the tap cue: for input that streams, where each message isn't a tap. */
+export type Send = (payload: object, options?: { quiet?: boolean }) => void;
 
 export interface WidgetProps<V> {
   view: V;

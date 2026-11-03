@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="ArcBox.Server.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Game content packs (spec §3.6): ../../content/<gameId>/<packId>/… lands in the output and publish folders as
          content/…, which is where Content:Root points by default. An empty folder (only .gitkeep) matches nothing. -->
     <Content Include="..\..\content\**\*" Exclude="..\..\content\**\.gitkeep"

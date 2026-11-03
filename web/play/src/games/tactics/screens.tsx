@@ -39,7 +39,8 @@ export function PickClass({ data, send }: CustomScreenProps) {
 }
 
 export function PickEncounter({ data, send }: CustomScreenProps) {
-  const { encounters } = data as { encounters: EncounterOption[] };
+  // canWalk: whether there's a world to go back to; a pack with no region has none, and an older server sends nothing (no button).
+  const { encounters, canWalk } = data as { encounters: EncounterOption[]; canWalk?: boolean };
   const sfx = useSfx();
   return (
     <div class="tx tx-muster">
@@ -61,6 +62,11 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
+      {canWalk ? (
+        <div class="tx-foot">
+          <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); send("backToWalk"); }}>Back to walking</button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -89,24 +95,27 @@ function NamedPortrait({ name, size }: { name: string; size: 40 | 60 }) {
 export function Results({ data, send }: CustomScreenProps) {
   const r = data as ResultsData;
   const won = r.outcome === "Won";
+  // After a loss the server's line says it all: no "+0 XP" or injuries on each hero.
+  const lost = r.outcome === "Lost";
   return (
     <div class="tx tx-results">
       <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : "Defeat"} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
+      {r.note ? <p class="tx-note center tx-result-note">{r.note}</p> : null}
       <ul class="tx-lines">
         {r.lines.map((l) => (
           <li key={l.name}>
             <NamedPortrait name={l.name} size={40} />
             <b>{l.name}</b>
-            <span class="tx-xp">+{l.xp} XP</span>
-            {l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
+            {lost ? null : <span class="tx-xp">+{l.xp} XP</span>}
+            {!lost && l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
           </li>
         ))}
       </ul>
       {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
       {r.vip ? (
         <div class="tx-foot">
-          <button type="button" class="tx-btn gold" onClick={() => send("next")}>Next battle</button>
+          <button type="button" class="tx-btn gold" onClick={() => send("next")}>Carry on</button>
           <button type="button" class="tx-btn ghost" onClick={() => send("end")}>End session</button>
         </div>
       ) : <p class="tx-note center">Waiting for the host…</p>}
@@ -217,7 +226,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const r = data as ReactData;
   const detail = reactionDetail(r);
   const sfx = useSfx();
-  useAlertOnMount("reaction");
+  useAlertOnMount("reaction", "react");
   const answer = (id: string) => {
     sfx(id === "pass" ? "cancel" : "confirm");
     send("react", { choice: id });

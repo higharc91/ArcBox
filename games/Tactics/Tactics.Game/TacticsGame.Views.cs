@@ -1,13 +1,19 @@
 using System.Collections.Immutable;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using ArcBox.Sdk;
 using Tactics.Logic;
 
 namespace Tactics.Game;
 
 /// <summary>A unit as the TV and phones draw it.</summary>
+/// <param name="Color">
+/// The TV's alone (spec §4.5): a hero's player's colour, "#rrggbb" (<see cref="WalkerView.Color"/>), for their ring in the fight; null for
+/// everyone else, and always on a phone, which never sees it.
+/// </param>
 public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprite, Tile At, int Hp, int MaxHp, int TempHp,
-    string Life, int Countdown, ImmutableArray<string> Conditions, string? Player);
+    string Life, int Countdown, ImmutableArray<string> Conditions, string? Player,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null);
 
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
@@ -85,6 +91,19 @@ public static class HostSprite
         };
 }
 
+/// <summary>
+/// Where a battle stands in the world (overworld 5c §3), for the TV to draw the board in place. Tiles in the battle are still the map's
+/// own: <paramref name="Origin"/> is the world tile of the map's (0, 0), and <paramref name="Height"/> is added to its heights.
+/// </summary>
+/// <param name="Region">The region's id, as <see cref="ExploreView.Region"/>.</param>
+/// <param name="Origin">The world tile of the battle map's tile (0, 0).</param>
+/// <param name="Height">The levels the stamp is raised by.</param>
+/// <param name="Heroes">
+/// The walker each <c>hero&lt;n&gt;</c> is, by <see cref="WalkerView.Id"/>, in order: <c>hero1</c> first. A hero the AI plays has no
+/// <see cref="UnitView.Player"/>, so this is the only way to tell which walker steps into which slot.
+/// </param>
+public sealed record StageView(string Region, Tile Origin, int Height, ImmutableArray<string> Heroes);
+
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
 /// <param name="Encounter">The encounter.</param>
 /// <param name="Map">The map.</param>
@@ -98,9 +117,10 @@ public static class HostSprite
 /// <param name="Objectives">What wins and loses it, as they stand (<see cref="ObjectiveState.Current"/>).</param>
 /// <param name="Reacting">The unit whose player has a reaction prompt waiting on their phone. An AI's offer isn't a wait, so it isn't here.</param>
 /// <param name="Name">The encounter's own name. <paramref name="Encounter"/> is its id.</param>
+/// <param name="Stage">Where it stands in the world, or null for a battle on a plain board: no region, or a map the region doesn't stamp.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
-    UnitId? Reacting = null, string? Name = null);
+    UnitId? Reacting = null, string? Name = null, StageView? Stage = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -110,6 +130,217 @@ public sealed record ClassOption(string Id, string Name, string Role);
 
 /// <summary>A member's line on the results screen.</summary>
 public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Injuries);
+
+/// <summary>One step the party took: the tile it reached and how long the step takes.</summary>
+/// <param name="Seq">The step's number, which only goes up.</param>
+/// <param name="To">The tile at the end of it.</param>
+/// <param name="Ms">How long it takes to walk.</param>
+public sealed record WalkLeg(int Seq, Tile To, int Ms);
+
+/// <summary>A member of the party on the TV.</summary>
+/// <param name="Id">Their profile.</param>
+/// <param name="Name">Their player's name.</param>
+/// <param name="Sprite">Their sprite key (<see cref="HostSprite"/>).</param>
+/// <param name="Here">True while their phone is connected.</param>
+/// <param name="Leads">True for the leader.</param>
+/// <param name="Color">
+/// The player's colour, "#rrggbb" (<see cref="PlayerColors"/>), for their ring: the one they picked, else the palette's for their place in
+/// join order. Always readable on grass, stone and ash.
+/// </param>
+public sealed record WalkerView(string Id, string Name, string Sprite, bool Here, bool Leads, string? Color = null);
+
+/// <summary>
+/// The party in the world, for the TV: in every phase once a region exists, so a TV that joins mid-fight can learn the region. It
+/// changes only when a step commits, the party turns, or <paramref name="Held"/> or <paramref name="Blocked"/> does.
+/// </summary>
+/// <param name="Region">The region's id.</param>
+/// <param name="Name">The region's name.</param>
+/// <param name="Epoch">Changes on a teleport, or a new session: the path can't be followed across it, so the TV snaps.</param>
+/// <param name="Seq">The number of the last step.</param>
+/// <param name="At">The leader's tile.</param>
+/// <param name="Facing">The tile the leader faces.</param>
+/// <param name="Held">True while the leader holds a direction the party can walk. Against a wall it's false, so the party stands, and <paramref name="Facing"/> says which way.</param>
+/// <param name="Legs">The last few steps, oldest first. The TV can miss views, so it fills in from these.</param>
+/// <param name="Party">The party, in member order.</param>
+/// <param name="Leader">The leader's player's name, or null with nobody here to lead.</param>
+/// <param name="Chapter">The region's chapter, for the TV's panel.</param>
+/// <param name="Blocked">
+/// True while the leader holds a direction a wall refused (spec §4.5, overworld 5b review item 2), so the TV can bump the leader
+/// against it: a press that does nothing must not look like letting go or a dropped phone. It's false again once the thumb lifts, so
+/// each press against a wall is its own bump. The phone isn't told, because that would mint a new view under the thumb.
+/// </param>
+/// <param name="Bumps">
+/// How many steps a wall has refused, counting up from 0 each session: every press, change of direction or latched quick tap that a
+/// wall turns back, and a held walk reaching one. The TV bumps whenever it goes up, which catches what <paramref name="Blocked"/> can't:
+/// a latched tap into a wall is refused and let go in the same moment. A new <paramref name="Epoch"/> may start it again from 0.
+/// </param>
+/// <param name="Arrived">
+/// How the party came to <paramref name="At"/> when a fight in the world ended, so the TV knows how to show that <paramref name="Epoch"/>
+/// (overworld 5c §3): <c>fellIn</c> after a win or a flight, where the followers fall in behind the leader; <c>woke</c> after a loss, at
+/// the recovery spawn. Null otherwise, and again from the party's next step or fight.
+/// </param>
+/// <param name="Markers">
+/// The story beat on offer, where it waits (overworld 5d §2): at most one, since one beat is offered at a time. It changes only when what's
+/// on offer does, or its scene starts or ends, never with a step.
+/// </param>
+/// <param name="Cast">
+/// Who stands at the scene's spot while a scene plays (the user's answer of 2026-11-01, item 21): its speakers who aren't the narrator, in
+/// the order they first speak, each on a tile of their own that no walker stands on. Empty outside a scene, and in the chapter's card.
+/// </param>
+/// <param name="Things">
+/// The things to interact with that the TV may draw (interactables design §2.9): what's there and has been seen, in the order they're
+/// written, each in its state. A hidden thing or a trap nobody has seen isn't sent. Null, and left out of the JSON, for a region with no things.
+/// </param>
+/// <param name="ThingEvents">
+/// What has just happened to things, oldest first, for the TV to animate (design §2.8): the last few, each numbered. The numbers go on
+/// across a server restart (<see cref="WorldSave.ThingSeq"/>). Null, and left out of the JSON, for a region with no things.
+/// </param>
+/// <param name="Plugs">
+/// Where the TV draws wall over a gap: each shut passage nobody has found (a secret door), by tile and which way its wall runs, and nothing
+/// else, so it gives nothing away; the region is painted with the gap open. In tile order. Null, and left out of the JSON, for a region with
+/// no things.
+/// </param>
+public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
+    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0,
+    string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingView>? Things = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<WallPlug>? Plugs = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] long? Gold = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<TraderView>? Traders = null);
+
+/// <summary>A reachable trader marker, never the full shop stock.</summary>
+public sealed record TraderView(string Id, Tile At, int? Person, bool Open, string? Sprite = null);
+
+/// <summary>A plug of wall for the TV to draw over a gap (<see cref="ExploreView.Plugs"/>): only where, and which way the wall runs.</summary>
+/// <param name="At">The gap's tile.</param>
+/// <param name="Facing">Which way its wall runs, as a passage's facing: <c>sw</c> and <c>ne</c> along x, <c>se</c> and <c>nw</c> along y.</param>
+public sealed record WallPlug(Tile At, string Facing);
+
+/// <summary>A thing to interact with, as the TV draws it (interactables design §2.9, §4).</summary>
+/// <param name="Id">Its id.</param>
+/// <param name="Kind">Its kind (<see cref="InteractableKinds"/>).</param>
+/// <param name="At">Its tile.</param>
+/// <param name="Facing">Which way its sprite faces: <c>ne</c>, <c>se</c>, <c>sw</c> or <c>nw</c>.</param>
+/// <param name="Art">Its art key, without its state (<c>interactables.chest</c>): the art brief's, which may not be made yet.</param>
+/// <param name="State">The state its art is drawn in: the art's variant (<c>closed</c>, <c>open</c>, <c>on</c>, <c>armed</c>…).</param>
+/// <param name="StandIn">An art key the pack has now, to draw until <paramref name="Art"/> exists; null for a plain marker.</param>
+/// <param name="Name">Its name, as a title.</param>
+/// <param name="Blocks">True while it stands in the way of walking.</param>
+/// <param name="Trapped">True for a thing whose trap is set and has been seen: the TV warns of it.</param>
+public sealed record ThingView(string Id, string Kind, Tile At, string Facing, string Art, string State, string? StandIn, string Name, bool Blocks,
+    bool Trapped)
+{
+    /// <summary>
+    /// <paramref name="def"/> as the TV is sent it in <paramref name="save"/>'s state with <paramref name="flags"/> set, whether or not it's
+    /// <see cref="Interactables.Visible"/> (the caller sends only what is): the server's views, and the art check's (<c>--world-demo=things</c>).
+    /// </summary>
+    public static ThingView Of(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
+        => new(def.Id, def.Kind, def.At, def.Facing ?? "sw", Interactables.ArtOf(def), Interactables.ArtState(def, save), Interactables.StandInOf(def, save),
+            Interactables.TitleOf(def), Interactables.Blocks(def, save, flags), Interactables.Trapped(def, save));
+}
+
+/// <summary>Something that happened to a thing, for the TV to animate (interactables design §2.8).</summary>
+/// <param name="Seq">Its number, which only goes up in a session.</param>
+/// <param name="Id">The thing.</param>
+/// <param name="What">What happened: one of <see cref="Tactics.Logic.ThingEvents"/>.</param>
+/// <param name="By">The name of the character who did it, or found it; null with nobody.</param>
+/// <param name="Line">What the TV says of it, or null.</param>
+public sealed record ThingEventView(int Seq, string Id, string What, string? By, string? Line);
+
+/// <summary>A speaker of the scene under way, standing in the world (<see cref="ExploreView.Cast"/>). Dressing only: it doesn't block the party.</summary>
+/// <param name="Id">The character's id in the lore.</param>
+/// <param name="Name">The character's name.</param>
+/// <param name="Sprite">Their sprite key: <c>characters.&lt;preset&gt;</c>.</param>
+/// <param name="At">The tile they stand on.</param>
+/// <param name="Facing">The tile they look towards: the leader's, so they face the party.</param>
+public sealed record CastView(string Id, string Name, string Sprite, Tile At, Tile Facing);
+
+/// <summary>
+/// A story beat's marker in the world (overworld 5d §2, default 12): who stands at its spot, and the emote over them. Dressing only: the
+/// figure doesn't block the party.
+/// </summary>
+/// <param name="Beat">The beat.</param>
+/// <param name="At">Its spot.</param>
+/// <param name="Sprite">The sprite key of the figure standing there: the first of the cast of the scene it opens with who isn't the narrator. Null with nobody to show.</param>
+/// <param name="Emote">The emote over them: <c>alert</c> (the "!") while the beat waits, null while its scene plays.</param>
+public sealed record StoryMarker(string Beat, Tile At, string? Sprite, string? Emote);
+
+/// <summary>A line of a scene, as the TV shows and speaks it (overworld 5d §9).</summary>
+/// <param name="Id">The line's id, which its clip is keyed by (<c>VoiceClips.ForLine</c>).</param>
+/// <param name="Speaker">A character's id, or <c>narrator</c>.</param>
+/// <param name="Name">The speaker's name, or null for the narrator.</param>
+/// <param name="Portrait">The speaker's portrait preset (<c>portraits/&lt;preset&gt;_&lt;mood&gt;.png</c>), or null for the narrator, who has none.</param>
+/// <param name="Mood">The portrait's mood.</param>
+/// <param name="Text">What's said.</param>
+/// <param name="Role">The speaker's role in the lore (<c>ally</c>, <c>npc</c>, <c>rival</c>, <c>villain</c>), for the portrait's backdrop; null for the narrator.</param>
+public sealed record StoryLineView(string Id, string Speaker, string? Name, string? Portrait, string Mood, string Text, string? Role = null);
+
+/// <summary>What a scene is doing, for the TV (overworld 5d §9). <see cref="Seq"/> is the line's: a new one is a line to say.</summary>
+/// <param name="Seq">The number of the line's showing; it only goes up, across a restart too.</param>
+/// <param name="Scene">The scene's id.</param>
+/// <param name="Title">Its title.</param>
+/// <param name="State">One of <see cref="TacticsGame.StoryStates"/>.</param>
+/// <param name="Line">The line showing, or null in a gap or a roll's reveal.</param>
+/// <param name="Ask">The question open, or null.</param>
+/// <param name="Check">The skill check under way, or null.</param>
+/// <param name="Until">When what's showing ends: the line (a question's close is <see cref="StoryAskView.Deadline"/>), the gap or the reveal.</param>
+/// <param name="Campaign">
+/// The campaign the story is of: <see cref="Seq"/> counts within it, so a TV that sees it change knows another story has begun, and what it
+/// heard of the last one says nothing of this one.
+/// </param>
+public sealed record StoryView(int Seq, string Scene, string Title, string State, StoryLineView? Line, StoryAskView? Ask, StoryCheckView? Check,
+    DateTimeOffset? Until, string? Campaign = null);
+
+/// <summary>An option of a question, for the TV, with who has voted for it: the tally is the TV's alone (5d flag 7).</summary>
+public sealed record StoryOptionView(string Id, string Label, string? Skill, int? Dc, ImmutableArray<string> Voters);
+
+/// <summary>A question open in a scene, for the TV.</summary>
+/// <param name="Party">True for a party vote; false for a choice that's the leader's.</param>
+/// <param name="Voted">How many have voted.</param>
+/// <param name="Of">How many can: everyone here with a character, and anyone who voted and has gone.</param>
+/// <param name="Away">The players whose characters are in the party but whose phones aren't here: they don't vote.</param>
+/// <param name="Tie">True while a tie is being broken.</param>
+/// <param name="Decider">Who breaks the tie, or chooses for the party: their player's name.</param>
+/// <param name="Deadline">When it closes, or null while it waits for a phone.</param>
+/// <param name="Options">What's offered, in the node's order; only the tied during a tie-break.</param>
+/// <param name="Span">
+/// How long its clock ran when it started, in seconds, with <paramref name="Deadline"/>: the question's length, or longer if the line asking it
+/// outlasts that. The TV counts down against it, and learns how far its own clock is off the server's when it sees a question open.
+/// </param>
+/// <param name="Colors">
+/// Each party player's colour, "#rrggbb", by their player's name (the names <see cref="StoryOptionView.Voters"/> holds), for the vote dots.
+/// </param>
+public sealed record StoryAskView(bool Party, int Voted, int Of, ImmutableArray<string> Away, bool Tie, string? Decider, DateTimeOffset? Deadline,
+    ImmutableArray<StoryOptionView> Options, double? Span = null, ImmutableSortedDictionary<string, string>? Colors = null);
+
+/// <summary>A character who can roll a skill check, for the TV.</summary>
+/// <param name="Member">Their member id.</param>
+/// <param name="Name">The character's name.</param>
+/// <param name="Player">Their player's name.</param>
+/// <param name="Sprite">Their sprite key (<see cref="HostSprite"/>).</param>
+/// <param name="Bonus">What they add to the die.</param>
+/// <param name="Note">Where the bonus comes from: "Proficient · WIS 14", or the stat alone.</param>
+/// <param name="Here">False when their phone isn't here: they can still be picked.</param>
+/// <param name="Votes">How many picked them.</param>
+/// <param name="Class">Their class's name, as the phone's card shows it.</param>
+/// <param name="Color">Their player's colour, "#rrggbb" (<see cref="WalkerView.Color"/>).</param>
+public sealed record StoryCardView(string Member, string Name, string Player, string? Sprite, int Bonus, string Note, bool Here, int Votes,
+    string? Class = null, string? Color = null);
+
+/// <summary>A skill check under way, for the TV.</summary>
+/// <param name="Skill">The skill.</param>
+/// <param name="Dc">Its DC; null for an active Search, whose DC isn't shown: each thing it looks for has its own, and it mustn't say whether there are any (interactables design §7.4).</param>
+/// <param name="Title">The option's label.</param>
+/// <param name="Cards">Who can roll, in member order.</param>
+/// <param name="Chosen">Who rolls, once picked.</param>
+/// <param name="Roll">The roll, once made.</param>
+/// <param name="Tie">True while a tie over who rolls is being broken.</param>
+/// <param name="Decider">Who breaks it: their player's name.</param>
+/// <param name="Span">How long the pick's clock ran when it started, in seconds, with <paramref name="Deadline"/> (<see cref="StoryAskView.Span"/>).</param>
+/// <param name="Deadline">When the pick closes, or null.</param>
+public sealed record StoryCheckView(string Skill, int? Dc, string Title, ImmutableArray<StoryCardView> Cards, string? Chosen, RollResult? Roll,
+    bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null, double? Span = null);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>
@@ -125,19 +356,48 @@ public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Inju
 /// At Results, the battle as it ended. The blow that ends a battle goes straight to Results, so no <paramref name="Battle"/>
 /// ever carries it: without this the TV could never play it.
 /// </param>
+/// <param name="Explore">The party in the world, in every phase; null for a pack with no region.</param>
+/// <param name="Story">The scene under way, in the Story phase; null otherwise.</param>
+/// <param name="Chapter">The chapter that has just ended, while its card shows ("Chapter I · The Bridge at the Ford"); null otherwise.</param>
+/// <param name="ResultNote">At Results after a loss, what the loss did to the party (<see cref="TacticsGame.LossNote"/>); null otherwise.</param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
-    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null);
+    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null,
+    string? Chapter = null, string? ResultNote = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopView? Shop = null);
+
+/// <summary>The TV shop panel, sent separately from the walking packet.</summary>
+public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, long Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default);
+
+/// <summary>A character's individual purse, for the shared TV shop display.</summary>
+public sealed record PurseView(string Member, string Name, int Gold);
+/// <summary>One stock row.</summary>
+public sealed record ShopItemView(string Item, string Name, int Price, int Count);
 
 public sealed partial class TacticsGame
 {
     /// <inheritdoc />
-    public object HostView() => new TacticsHostView(_phase.ToString(), Banner(), _notice, _doc.PartyLevel,
+    public object HostView() => new TacticsHostView(_phase.ToString(), Banner(), Notice(), _doc.PartyLevel,
         [.. _players.Where(p => _doc.For(p.Profile!.Value) is not null).Select(p => p.Name)],
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null);
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null, ShopViewOf());
+
+    /// <summary>The player's colour: the one kept with them (every member has one, <see cref="PlayerColors.Assign"/>).</summary>
+    private string ColorOf(string member) => _doc.Members.GetValueOrDefault(member)?.Color ?? PlayerColors.Default(0);
+
+    /// <summary>A scene's view with the players' colours on its question and its roll's cards, for the TV's vote dots.</summary>
+    private StoryView? Coloured(StoryView? story) => story is null ? null : story with
+    {
+        Ask = story.Ask is { } ask
+            ? ask with { Colors = Walkers().ToImmutableSortedDictionary(w => w.Player.Name, w => ColorOf(w.Player.Profile!.Value.Value), StringComparer.Ordinal) }
+            : null,
+        Check = story.Check is { } check
+            ? check with { Cards = [.. check.Cards.Select(c => c with { Color = ColorOf(c.Member) })] }
+            : null,
+    };
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)
@@ -147,18 +407,22 @@ public sealed partial class TacticsGame
             return new WaitView("Waiting…");
         var view = _phase switch
         {
-            TacticsPhase.Muster when _doc.For(profile) is null => Custom(Screens.PickClass, new
+            TacticsPhase.Story when OpenShop is not null => ShopScreen(player, profile),
+            TacticsPhase.Muster or TacticsPhase.Exploration or TacticsPhase.Story when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
                 portal = PortalPath(),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
-            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
+            TacticsPhase.Exploration => WalkScreen(player, profile),
+            TacticsPhase.Story => StoryScreen(player, profile),
+            // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
+            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null }),
             TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
-                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), vip = IsVip(player),
+                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player),
                 level = _doc.PartyLevel, portal = PortalPath(),
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
@@ -166,10 +430,63 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
-        return view is CustomView custom && _toasts.TryGetValue(id, out var toast)
+        // A toast changes the view, and a new view means a new viewId under the leader's thumb.
+        return view is CustomView { Screen: not Screens.Walk } custom && _toasts.TryGetValue(id, out var toast)
             ? custom with { Header = toast.Text }
             : view;
     }
+
+    /// <summary>
+    /// The walk screen. It holds nothing that changes as the party walks (no tile, deadline or toast): the server mints a new
+    /// view only when this JSON changes, and a new view would drop whatever the pad is sending. The one exception is the leader's
+    /// <c>interact</c> (overworld 5d §2), which changes only on the step that brings a beat's spot into reach or takes it out of reach.
+    /// </summary>
+    private CustomView WalkScreen(Player player, ProfileId profile)
+    {
+        var character = _doc.For(profile)!.Character;
+        var vip = IsVip(player);
+        var leads = _lead == profile.Value;
+        var targets = leads ? TradeTargets() : [];
+        var data = JsonSerializer.SerializeToNode(new
+        {
+            leader = leads,
+            leaderName = Leader?.Name,
+            region = _region?.Def.Name,
+            objective = Objective(),
+            me = new { name = character.Name, cls = ClassName(character), level = _doc.PartyLevel, color = ColorOf(profile.Value) },
+            party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads,
+                color = ColorOf(w.Player.Profile!.Value.Value) }),
+            vip,
+            canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
+            portal = PortalPath(),
+            interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
+        }, ArcJson.Options)!.AsObject();
+        // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
+        // region that has things, so a walk screen anywhere else is exactly as it was.
+        if (VisibleGold(profile) is { } gold) data["gold"] = gold;
+        if (!AllThings.IsEmpty || !RegionShops.IsEmpty)
+        {
+            if (leads && InteractLabel() is null && targets.Length > 0) data["interact"] = targets[0].Label;
+            data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
+            data["beat"] = leads && InteractLabel() is not null;     // the button is the beat's, not the first thing's
+            data["search"] = leads && !AllThings.IsEmpty;     // the leader's Search (design §7.4): only where there are things, so a walk screen elsewhere is as it was
+        }
+        return Custom(Screens.Walk, data);
+    }
+
+    private string ClassName(CharacterRecord character) => Rules.Classes.GetValueOrDefault(character.Class)?.Name ?? character.Class;
+
+    /// <summary>The session's players who have a character, in member order, since seats change between nights.</summary>
+    private IEnumerable<(Player Player, CharacterRecord Character, bool Here, bool Leads)> Walkers()
+        => _doc.Members.SelectMany(m => _players.Where(p => p.Profile?.Value == m.Key)
+            .Select(p => (p, m.Value.Character, _online.Contains(p.Id), _lead == m.Key)));
+
+    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
+        [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
+            HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
+        Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
+            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))]);
 
     private ControllerView BattleScreen(ProfileId profile)
     {
@@ -233,6 +550,14 @@ public sealed partial class TacticsGame
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
                 _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
 
+    /// <summary>
+    /// The one line Results show after a loss, on the phone and the TV alike: the party wakes with that fight's wounds tended, no XP, and the
+    /// potions it drank gone. <paramref name="woke"/>: it woke at the region's recovery point (a loss with no world to wake in doesn't).
+    /// </summary>
+    public static string LossNote(bool woke)
+        => (woke ? "You wake at the recovery point. " : "") + "Wounds tended — no XP. Potions used are gone.";
+
+    /// <summary>Each hero's line at Results: the XP the result pays, and the fight's injuries, except after a loss, which tends them.</summary>
     private ImmutableArray<ResultLine> ResultLines()
     {
         if (_result is null || _doc.Battle is not null && _phase != TacticsPhase.Results)
@@ -241,7 +566,7 @@ public sealed partial class TacticsGame
         {
             var unit = UnitFor(i);
             var name = _players.FirstOrDefault(p => p.Profile == profile)?.Name ?? _doc.For(profile)?.Character.Name ?? unit.Value;
-            return new ResultLine(name, _result.Xp.GetValueOrDefault(unit),
+            return new ResultLine(name, _result.Xp.GetValueOrDefault(unit), _result.Outcome == BattleOutcome.Lost ? [] :
                 [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
         })];
     }
@@ -251,10 +576,25 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags) })],
+            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id) })],
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
-            Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name);
+            Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
+            StageOf(save) is { } stage
+                ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
+                : null);
+    }
+
+    /// <summary>
+    /// The colour of the member <paramref name="unit"/> is (<c>hero&lt;n&gt;</c> is <see cref="BattleSave.Members"/>' n-th), whoever plays it
+    /// now; null for a companion, a monster, or a member with no colour kept.
+    /// </summary>
+    private string? HeroColor(BattleSave save, UnitId unit)
+    {
+        for (var i = 0; i < save.Members.Length; i++)
+            if (UnitFor(i) == unit)
+                return PlayerColors.Parse(_doc.Members.GetValueOrDefault(save.Members[i].Value)?.Color);
+        return null;
     }
 
     private UnitView UnitViewOf(UnitState u)
@@ -277,7 +617,11 @@ public sealed partial class TacticsGame
             case TacticsPhase.Results:
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:
-                return "Resuming the battle…";
+                return _doc.Battle is null ? "Resuming the story…" : "Resuming the battle…";
+            case TacticsPhase.Exploration:
+                return Leader is { } leader ? $"{leader.Name} leads the party" : "The party waits for someone to lead it";
+            case TacticsPhase.Story:
+                return StoryBanner();
         }
         var state = State;
         if (state.Pending is ReactionOffer offer)
