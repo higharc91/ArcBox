@@ -61,6 +61,8 @@
 //
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
+//   --shop                    earn the council advance, walk to Wenna, buy from an own purse, retry its trade id, sell and leave.
+//
 // The story (overworld 5d), in place of the battle list:
 //
 //   --story[=<n>]             the leader taps Interact whenever the walk screen offers it, and the phones answer the story's screens: a
@@ -155,6 +157,7 @@ const losing = () => fightsDone < loseFights;
 const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
 const chapter = opt('chapter', false) === true;
+const shopRun = opt('shop', false) === true;
 /** --branch=force|parley: the option the party votes for at the ford. */
 const branch = String(opt('branch', 'force'));
 /** --silent: nobody answers anything or skips a line, so every line, vote, choice and check runs on the game's own timers. */
@@ -649,7 +652,7 @@ class Bot {
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
-        if (walking || stampFights || chapter || !view.data.vip) return;
+        if (walking || stampFights || chapter || shopRun || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
@@ -927,7 +930,7 @@ function stampOf(id) {
  */
 async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const goal = beat ? ['beat', beat] : [stamp.map];
+  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : ['beat', beat] : [stamp.map];
   const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
@@ -1068,7 +1071,7 @@ async function walkToBeat(bots, watch, region, marker) {
       continue;
     }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
-    await lead.input('interact');
+    await lead.input('interact', marker.beat.startsWith('shop:') ? { target: marker.beat } : undefined);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
     log('CHAPTER the tap started nothing: trying again');
   }
@@ -1120,6 +1123,53 @@ async function playChapter(bots, watch, state) {
   log(`Session over: ${vip.ended.message ?? ''}`);
 }
 
+/** Real phone trades funded by the shipped council reward; no injected gold or sold starting supplies. */
+async function playShop(bots, watch, state) {
+  const timer = setInterval(() => { for (const bot of bots) void bot.act(state); }, TICK_MS);
+  timer.unref();
+  idlePings(bots);
+  await until('the party to walk', () => onWalk(bots));
+  if (tvLog && !asHost) await until('the TV world', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  await walkToBeat(bots, watch, 'ashen_ford', { beat: 'ch1_mayors_request' });
+  await until('the council advance on every phone', () => onWalk(bots) && bots.reduce((sum, b) => sum + (b.view.data.gold ?? 0), 0) === 200);
+  const share = Math.floor(200 / bots.length);
+  if (!bots.every(b => b.view.data.gold === share || b.view.data.gold === share + 1)) throw new Error('The council advance was not split evenly');
+  log(`SHOP council advance: ${bots.map(b => `${b.name} ${b.view.data.gold}`).join(', ')} gold`);
+  await walkToBeat(bots, watch, 'ashen_ford', { beat: 'shop:af_market_herbalist' });
+  await until('the shop on every phone', () => bots.every(b => b.view?.screen === 'shop'));
+  clearInterval(timer);
+  const buyer = bots.find(b => !b.view.data.leader && b.view.data.you.canBuy) ?? bots[0];
+  log(`SHOP ${buyer.name} trades as ${buyer.view.data.leader ? 'leader' : 'follower'}`);
+  const purse = () => buyer.view.data.gold;
+  async function trade(bot, action, row, count) {
+    const before = bot.view.viewId;
+    const otherPurses = bots.filter(b => b !== bot).map(b => [b, b.view.data.gold, b.view.viewId, JSON.stringify(b.view.data.sell)]);
+    const expected = bot.view.data.gold + (action === 'shopBuy' ? -1 : 1) * row.price * count;
+    const id = require('crypto').randomUUID();
+    await bot.input(action, { shop: bot.view.data.shop.id, item: row.item, member: row.member, count, trade: id });
+    await until('trade confirmation', () => bot.view.viewId !== before && bot.view.data.gold === expected && otherPurses.every(([b, gold, viewId, bag]) => b.view?.viewId !== viewId && b.view?.data?.gold === gold && JSON.stringify(b.view.data.sell) === bag));
+    log(`SHOP ${action} ${count} ${row.item}: ${purse()} gold`);
+    return id;
+  }
+  const potion = buyer.view.data.items.find(x => x.item === 'potion_of_healing');
+  const item = purse() >= potion.price ? potion.item : 'smoke_bomb';
+  const row = buyer.view.data.items.find(x => x.item === item);
+  const before = purse();
+  const id = await trade(buyer, 'shopBuy', row, 1);
+  if (purse() !== before - row.price) throw new Error("Purchase did not debit the buyer's own purse");
+  await buyer.input('shopBuy', { shop: buyer.view.data.shop.id, item: row.item, count: 1, trade: id });
+  await sleep(500);
+  if (purse() !== before - row.price) throw new Error('Repeated trade charged twice');
+  const sale = buyer.view.data.sell.find(x => x.item === row.item);
+  await trade(buyer, 'shopSell', sale, 1);
+  if (purse() !== before - row.price + sale.price) throw new Error('Sale did not credit the purse');
+  await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
+  await until('walking after trade', () => onWalk(bots));
+  await bots[0].input('endSession');
+  await until('the session to end', () => bots[0].ended);
+  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
+}
+
 (async () => {
   const host = asHost ? new HubConnectionBuilder().withUrl(`${server}/hub`).configureLogging(LogLevel.Critical).build() : null;
   const watch = new Watch(host);
@@ -1148,6 +1198,11 @@ async function playChapter(bots, watch, state) {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (shopRun) {
+    await playShop(bots, watch, state);
+    await Promise.all(bots.map(b => b.conn.stop()));
+    process.exit(0);
+  }
   if (chapter) {
     await playChapter(bots, watch, state);
     await Promise.all(bots.map((b) => b.conn.stop()));

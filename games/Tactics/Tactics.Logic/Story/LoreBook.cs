@@ -317,7 +317,7 @@ public sealed class LoreBook
         var end = Flag(e, "end", where);
         if ((hasOptions ? 1 : 0) + (next is null ? 0 : 1) + (end ? 1 : 0) != 1)
             throw new BadLore($"{where} needs exactly one of 'options', 'next' or 'end'.");
-        return new(id, lines, Strings(e, "sets", where), options, Flag(e, "vote", where), next, end);
+        return new(id, lines, Strings(e, "sets", where), options, Flag(e, "vote", where), next, end, Gold(e, where));
     }
 
     private static SceneLine ReadLine(JsonElement e, string node)
@@ -344,7 +344,7 @@ public sealed class LoreBook
         if (to is null && check is null)
             throw new BadLore($"{where} needs 'to' or a 'check'.");
         return new(id, Required(e, "label", where), to, Optional(e, "choice", where), Strings(e, "sets", where), Strings(e, "requires", where),
-            tags, check);
+            tags, check, Gold(e, where));
     }
 
     private static JsonElement Field(JsonElement e, string name, string where)
@@ -373,6 +373,14 @@ public sealed class LoreBook
         { ValueKind: JsonValueKind.False } => false,
         _ => throw new BadLore($"{where} has a '{name}' that isn't true or false."),
     };
+
+    private static int Gold(JsonElement e, string where)
+    {
+        if (!e.TryGetProperty("gold", out _)) return 0;
+        var value = Whole(e, "gold", where);
+        if (value == int.MinValue) throw new BadLore($"{where} gold is outside the supported range.");
+        return value;
+    }
 
     private static int Whole(JsonElement e, string name, string where)
         => Field(e, name, where) is { ValueKind: JsonValueKind.Number } value && value.TryGetInt32(out var n)

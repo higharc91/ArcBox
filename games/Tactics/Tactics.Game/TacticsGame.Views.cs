@@ -213,7 +213,12 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingView>? Things = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<WallPlug>? Plugs = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<WallPlug>? Plugs = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] long? Gold = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<TraderView>? Traders = null);
+
+/// <summary>A reachable trader marker, never the full shop stock.</summary>
+public sealed record TraderView(string Id, Tile At, int? Person, bool Open, string? Sprite = null);
 
 /// <summary>A plug of wall for the TV to draw over a gap (<see cref="ExploreView.Plugs"/>): only where, and which way the wall runs.</summary>
 /// <param name="At">The gap's tile.</param>
@@ -366,7 +371,17 @@ public sealed record StoryCheckView(string Skill, int? Dc, string Title, Immutab
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
     string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null,
-    string? Chapter = null, string? ResultNote = null);
+    string? Chapter = null, string? ResultNote = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopView? Shop = null);
+
+/// <summary>The TV shop panel, sent separately from the walking packet.</summary>
+public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, long Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default);
+
+/// <summary>A character's individual purse, for the shared TV shop display.</summary>
+public sealed record PurseView(string Member, string Name, int Gold);
+/// <summary>One stock row.</summary>
+public sealed record ShopItemView(string Item, string Name, int Price, int Count);
 
 public sealed partial class TacticsGame
 {
@@ -376,7 +391,7 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null);
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null, ShopViewOf());
 
     /// <summary>The player's colour: the one kept with them (every member has one, <see cref="PlayerColors.Assign"/>).</summary>
     private string ColorOf(string member) => _doc.Members.GetValueOrDefault(member)?.Color ?? PlayerColors.Default(0);
@@ -400,6 +415,7 @@ public sealed partial class TacticsGame
             return new WaitView("Waiting…");
         var view = _phase switch
         {
+            TacticsPhase.Story when OpenShop is not null => ShopScreen(player, profile),
             TacticsPhase.Muster or TacticsPhase.Exploration or TacticsPhase.Story when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
@@ -438,7 +454,7 @@ public sealed partial class TacticsGame
         var character = _doc.For(profile)!.Character;
         var vip = IsVip(player);
         var leads = _lead == profile.Value;
-        var targets = leads ? ThingTargets() : [];
+        var targets = leads ? TradeTargets() : [];
         var data = JsonSerializer.SerializeToNode(new
         {
             leader = leads,
@@ -455,11 +471,13 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
-        if (!AllThings.IsEmpty)
+        if (VisibleGold(profile) is { } gold) data["gold"] = gold;
+        if (!AllThings.IsEmpty || !RegionShops.IsEmpty)
         {
+            if (leads && InteractLabel() is null && targets.Length > 0) data["interact"] = targets[0].Label;
             data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
             data["beat"] = leads && InteractLabel() is not null;     // the button is the beat's, not the first thing's
-            data["search"] = leads;     // the leader's Search (design §7.4): only where there are things, so a walk screen elsewhere is as it was
+            data["search"] = leads && !AllThings.IsEmpty;     // the leader's Search (design §7.4): only where there are things, so a walk screen elsewhere is as it was
         }
         return Custom(Screens.Walk, data);
     }
@@ -475,7 +493,8 @@ public sealed partial class TacticsGame
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
-        Things.IsEmpty ? null : _thingEvents, PlugViews());
+        Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
+            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))]);
 
     private ControllerView BattleScreen(ProfileId profile)
     {

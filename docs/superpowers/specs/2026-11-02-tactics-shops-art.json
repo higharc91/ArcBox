@@ -1,0 +1,231 @@
+{
+  "notes": "Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet. These are per-set manifest fragments, not installed art. No art or audio has been generated.",
+  "sets": {
+    "icons": {
+      "props": {
+        "gold": {
+          "variants": {
+            "strip": "gold.png"
+          },
+          "size": [
+            12,
+            12
+          ],
+          "anchor": [
+            6,
+            11
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "shop"
+          ]
+        },
+        "gold_large": {
+          "variants": {
+            "strip": "gold_large.png"
+          },
+          "size": [
+            24,
+            24
+          ],
+          "anchor": [
+            12,
+            23
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "shop"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "icons.gold": {
+            "prompt": "Pixel art game asset, 12x12 per frame. A small stack of three warm gold coins, two highlight pixels. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "a gold diamond"
+          },
+          "icons.gold_large": {
+            "prompt": "Pixel art game asset, 24x24 per frame. A leather coin pouch with a few gold coins spilling beside it. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "a gold diamond"
+          }
+        }
+      }
+    },
+    "fx": {
+      "props": {
+        "coin": {
+          "variants": {
+            "strip": "coin.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 6,
+          "fps": 10,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "shop"
+          ]
+        },
+        "trader": {
+          "variants": {
+            "strip": "trader.png"
+          },
+          "size": [
+            12,
+            12
+          ],
+          "anchor": [
+            6,
+            11
+          ],
+          "frames": 4,
+          "fps": 6,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "shop"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "fx.coin": {
+            "prompt": "Pixel art game asset, 16x16 per frame. Six frames of a gold coin spinning up, glinting and fading; fixed registration between frames. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "a fading +gold label"
+          },
+          "fx.trader": {
+            "prompt": "Pixel art game asset, 12x12 per frame. Four seamless looping frames of a gold coin glint over a trader; subtle motion, readable at sofa distance. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "notice/alert emote"
+          }
+        }
+      }
+    },
+    "interactables": {
+      "props": {
+        "stall": {
+          "variants": {
+            "open": "stall_open.png",
+            "closed": "stall_closed.png"
+          },
+          "size": [
+            110,
+            111
+          ],
+          "anchor": [
+            38,
+            84
+          ],
+          "frames": 4,
+          "fps": 6,
+          "blocks": true,
+          "cover": "none",
+          "height": 1,
+          "tags": [
+            "shop"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "interactables.stall.open": {
+            "prompt": "Pixel art game asset, 110x111 per frame. A fantasy market stall matching town.stall silhouette and palette; awning, small potion bottles and goods; closed variant covers the goods with cloth. State: open. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "town.stall"
+          },
+          "interactables.stall.closed": {
+            "prompt": "Pixel art game asset, 110x111 per frame. A fantasy market stall matching town.stall silhouette and palette; awning, small potion bottles and goods; closed variant covers the goods with cloth. State: closed. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "town.stall"
+          }
+        }
+      }
+    },
+    "ui": {
+      "props": {
+        "shop_frame": {
+          "variants": {
+            "strip": "shop_frame.png"
+          },
+          "size": [
+            48,
+            48
+          ],
+          "anchor": [
+            0,
+            0
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "shop"
+          ],
+          "slice": [
+            12,
+            12,
+            12,
+            12
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "ui.shop_frame": {
+            "prompt": "Pixel art game asset, 48x48 per frame. Optional nine-slice charcoal fantasy shop panel with restrained warm gold trim, matching the story frame; keep text area empty. Pixel art at 1x, shown at 2x. Use the pack palette, transparent background, no anti-aliasing, light from top-left, 1px dark outlines. Sprite strips run left to right; world anchors are at the feet.",
+            "standIn": "story-style glass panel"
+          }
+        }
+      }
+    }
+  },
+  "portraits": {
+    "keeper": "Reuse the keeper person preset portrait; merchant for Wenna. No new portrait."
+  },
+  "sounds": {
+    "ui_coin_buy": {
+      "prompt": "Coins counted onto a wooden counter, short.",
+      "fallback": [
+        "ui_loot",
+        "ui_confirm"
+      ]
+    },
+    "ui_coin_sell": {
+      "prompt": "A coin pouch set down, two clinks.",
+      "fallback": [
+        "ui_loot",
+        "ui_confirm"
+      ]
+    },
+    "ui_shop_open": {
+      "prompt": "A wooden shop door with a small bell.",
+      "fallback": [
+        "ui_loot",
+        "ui_confirm"
+      ]
+    },
+    "ui_shop_close": {
+      "prompt": "The bell again, softer.",
+      "fallback": [
+        "ui_loot",
+        "ui_confirm"
+      ]
+    }
+  }
+}

@@ -37,6 +37,7 @@ public sealed partial class RulesPack
         Xp = catalog.Xp;
         Regions = catalog.Regions;
         Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
+        Shops = catalog.Shops ?? ImmutableSortedDictionary.Create<string, ImmutableArray<ShopDef>>(StringComparer.Ordinal);
         _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None)), StringComparer.Ordinal);
         _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
             r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
@@ -117,6 +118,12 @@ public sealed partial class RulesPack
     /// <summary>The things to interact with in the region with this id: none for a region with no <c>interactables</c> file.</summary>
     public ImmutableArray<InteractableDef> InteractablesIn(string region) => Interactables.GetValueOrDefault(region, []);
 
+    /// <summary>Traders by region.</summary>
+    public ImmutableSortedDictionary<string, ImmutableArray<ShopDef>> Shops { get; }
+
+    /// <summary>Traders in a region, or none.</summary>
+    public ImmutableArray<ShopDef> ShopsIn(string region) => Shops.GetValueOrDefault(region, []);
+
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
 
@@ -184,6 +191,7 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
         XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions,
         ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>>? Interactables = null,
+        ImmutableSortedDictionary<string, ImmutableArray<ShopDef>>? Shops = null,
         EnvironmentDef? Environment = null, ImmutableArray<ContentError> Warnings = default)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),

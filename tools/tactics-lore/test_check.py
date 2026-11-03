@@ -11,6 +11,19 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CheckTests(unittest.TestCase):
+    def test_story_gold_matches_the_runtime_int32_contract(self):
+        schemas = check.load_schemas()
+        for value in (0, 25, -20, 2147483647, -2147483647):
+            errors = check.Errors()
+            check.validate(value, schemas["scenes.schema.json"]["$defs"]["option"]["properties"]["gold"],
+                           "scenes.schema.json", schemas, "gold-test", "/gold", errors)
+            self.assertFalse(errors)
+        for value in (True, 1.5, "25", None, 2147483648, -2147483648):
+            errors = check.Errors()
+            check.validate(value, schemas["scenes.schema.json"]["$defs"]["node"]["properties"]["gold"],
+                           "scenes.schema.json", schemas, "gold-test", "/gold", errors)
+            self.assertTrue(errors, repr(value))
+
     def test_base_lore_pack_is_valid(self):
         self.assertEqual(check.check([check.CONTENT / "lore"]), [])
 

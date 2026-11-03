@@ -257,6 +257,7 @@
         },
         {
           "id": "close",
+          "gold": 200,
           "lines": [
             {
               "id": "ch1_mayor_close_1",

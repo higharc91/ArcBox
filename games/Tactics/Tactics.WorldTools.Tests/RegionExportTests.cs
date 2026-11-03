@@ -120,6 +120,7 @@ public sealed class RegionExportTests : IDisposable
     /// <summary><paramref name="id"/>'s things to interact with, taken out of the copied <paramref name="rules"/>.</summary>
     internal static void WithoutThings(string rules, string id)
     {
+        WithoutShops(rules, id);
         var path = Path.Combine(rules, "manifest.json");
         var manifest = JsonNode.Parse(File.ReadAllText(path))!;
         var files = manifest["files"]!.AsArray();
@@ -127,6 +128,16 @@ public sealed class RegionExportTests : IDisposable
             files.Remove(file);
         File.WriteAllText(path, manifest.ToJsonString());
         File.Delete(Path.Combine(rules, "interactables", $"{id}.json"));
+    }
+
+    // Synthetic maps replace the town's people, so their test packs omit the real town's shops too.
+    internal static void WithoutShops(string rules, string id)
+    {
+        var path = Path.Combine(rules, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        var files = manifest["files"]!.AsArray();
+        foreach (var file in files.Where(f => f!.GetValue<string>() == $"shops/{id}.json").ToArray()) files.Remove(file);
+        File.WriteAllText(path, manifest.ToJsonString());
     }
 
     private static Dictionary<Tile, string> Grid(int width, int height, string material = Grass)

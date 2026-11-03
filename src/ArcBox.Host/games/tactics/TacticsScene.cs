@@ -745,6 +745,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _loop.Held = null;
         }
         Show(screen);
+        ShowShop(v);
         director.LastBlowPlayed();      // nothing if the results aren't up, or have had it
     }
 

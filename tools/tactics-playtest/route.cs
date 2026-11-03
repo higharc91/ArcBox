@@ -14,19 +14,29 @@
 // (unless there's no way to the "!" but across one).
 using Tactics.Logic;
 
-if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] != "beat"))
+if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" or "shop")))
 {
     Console.Error.WriteLine("usage: route.cs <rules dir> <region> <map> <x> <y>  |  route.cs <rules dir> <region> beat <beat id> <x> <y>");
     return 2;
 }
 var rules = RulesPack.Load([args[0]], ArtManifests.Load(Directory.GetParent(Path.TrimEndingDirectorySeparator(Path.GetFullPath(args[0])))!.FullName));
 var region = rules.RegionFor(args[1]) ?? throw new ArgumentException($"No region {args[1]}.");
-var terrain = rules.GroundFor(region.Def.Id)!.Terrain;
+// These runs start fresh campaigns. Include the interactables in their initial states, just as WalkGround does on the server:
+// a town well or closed chest must not be treated as a walkable route tile merely because the underlying ground is clear.
+var terrain = rules.GroundFor(region.Def.Id)!
+    .With(Interactables.Blocking(rules.InteractablesIn(region.Def.Id), null, new HashSet<string>(StringComparer.Ordinal)));
 var start = new Tile(int.Parse(args[^2]), int.Parse(args[^1]));
 
 Func<Tile, bool> goal;
 Func<Tile, bool>? avoid = null;
-if (args.Length == 6)
+if (args.Length == 6 && args[2] == "shop")
+{
+    var shop = rules.ShopsIn(region.Def.Id).Single(s => s.Id == args[3]);
+    var at = shop.Keeper.Person is { } person ? region.Def.People[person].At : rules.InteractablesIn(region.Def.Id).Single(t => t.Id == shop.Keeper.Thing).At;
+    var target = new InteractableDef(shop.Id, "stall", at);
+    goal = t => Interactables.InReach(terrain, t, target);
+}
+else if (args.Length == 6)
 {
     var spot = region.Def.Beats.SingleOrDefault(b => b.Beat == args[3])?.At ?? throw new ArgumentException($"{args[1]} has no spot for {args[3]}.");
     // Round the fights' ground, as a player walking to a "!" would: a step into an armed stamp starts its fight from wherever it is.

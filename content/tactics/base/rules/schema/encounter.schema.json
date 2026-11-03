@@ -184,6 +184,11 @@
       "type": "boolean",
       "default": false,
       "description": "Opt this encounter into the loaded environmental reactions; absent is off."
+    },
+    "gold": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
     }
   },
   "required": [

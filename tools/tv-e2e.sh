@@ -13,6 +13,7 @@
 #   ARCBOX_STAGE=1 GODOT=… tools/tv-e2e.sh                                          a fight in the world: walk in, lose, wake, walk back
 #                                                                                   in and fight it again (with ARCBOX_RECONNECT=1,
 #                                                                                   ARCBOX_RESTART=1 or ARCBOX_DROP_SIGNALS=1 too)
+#   ARCBOX_SHOP=1 GODOT=… tools/tv-e2e.sh                                          the herbalist shop, real phone trades and a duplicate id
 #   ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley|skip-assault GODOT=… tools/tv-e2e.sh all of Chapter 1 from a fresh campaign, on a branch
 #                                                                                   (with ARCBOX_RESTART=1 and ARCBOX_RECONNECT=1 mid-scene)
 #
@@ -184,6 +185,7 @@ set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 GODOT=${GODOT:-$(command -v godot || true)}
+SHOP=${ARCBOX_SHOP:-}
 STAGE=${ARCBOX_STAGE:-}
 CHAPTER=${ARCBOX_CHAPTER:-}
 SILENT=${ARCBOX_SILENT:-}
@@ -193,7 +195,7 @@ AT_LINE=${ARCBOX_AT_LINE:-3}
 RESTART_SCENE=${ARCBOX_RESTART_SCENE:-ch1_maud}
 RECONNECT_SCENE=${ARCBOX_RECONNECT_SCENE:-ch1_docks}
 DROP_SIGNALS=${ARCBOX_DROP_SIGNALS:-}
-GAME=${ARCBOX_GAME:-$([[ "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
+GAME=${ARCBOX_GAME:-$([[ "$SHOP" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
 PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
@@ -453,8 +455,8 @@ log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=$([[ "$CHAPTER" == "1" ]] && echo 7200 || echo 1800)
-  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
-    $([[ "$CHAPTER" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
+    $([[ "$CHAPTER" == "1" || "$SHOP" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -468,6 +470,19 @@ for _ in $(seq 1 360); do
 done
 [[ -n "$CODE" ]] || { log "no ROOM line from the TV after 180 s"; tail -30 "$OUT/tv.log"; exit 1; }
 log "TV opened room $CODE"
+
+# ---- Shop: real bot phones walk to the herbalist, buy, retry, sell and leave.
+if [[ "$GAME" == "tactics" && "$SHOP" == "1" ]]; then
+  log "shop: bots earn the council advance, then trade at Wenna from their own purses and bags"
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --shop --hold=1 --line=0.1 --tv-log="$OUT/tv.log" --timeout=300 > "$OUT/phones.log" 2>&1
+  grep -q 'SHOP OK' "$OUT/phones.log"
+  sleep 2
+  if grep -E 'SCRIPT ERROR|Unhandled exception|ERROR: ' "$OUT/tv.log" | grep -vE 'audio|ALSA|PulseAudio'; then
+    log "FAILED: TV error"; exit 1
+  fi
+  log "OK: shop buy, idempotent retry, sell and leave"
+  exit 0
+fi
 
 # ---- 4w. Tactics walking: the bots walk the world, the server restarts, the TV is killed, and the leader's phone is cut.
 if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then

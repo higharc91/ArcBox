@@ -140,6 +140,33 @@ public sealed class CharacterTests
         Assert.Equal(JsonValueKind.Null, rules.PortalView(Info, remade.Document!.Value, Ana).GetProperty("options").ValueKind);
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Remakes_keep_purchased_items_injuries_and_gold_before_and_after_fighting(bool fought)
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        var create = Json(new { race = "human", @class = "fighter", background = Background,
+            scores = new { str = 15, dex = 15, con = 15, @int = 8, wis = 8, cha = 8 } });
+        var made = rules.Handle(Info, rules.NewDocument(Info), Ana, "createCharacter", create);
+        var doc = TacticsDocument.Read(made.Document!.Value);
+        var mine = doc.For(Ana)!;
+        doc = doc with { Members = doc.Members.SetItem(Ana.Value, mine with
+        {
+            Gold = 75, Fought = fought,
+            Character = mine.Character with { Bag = [new ItemStack(new ItemId("smoke_bomb"), 2)], Injuries = [new InjuryId("black_eye")] },
+        }) };
+        var changed = rules.Handle(Info, doc.ToJson(), Ana, "createCharacter", Json(new { race = "elf", @class = "wizard",
+            background = Background, scores = new { str = 8, dex = 15, con = 15, @int = 15, wis = 8, cha = 8 } }));
+        Assert.Null(changed.Error);
+        var after = TacticsDocument.Read(changed.Document!.Value).For(Ana)!;
+        Assert.Equal("wizard", after.Character.Class);
+        Assert.Equal([new ItemStack(new ItemId("smoke_bomb"), 2)], after.Character.Bag);
+        Assert.Equal([new InjuryId("black_eye")], after.Character.Injuries);
+        Assert.Equal(75, after.Gold);
+        Assert.Equal(fought, after.Remade);
+    }
+
     [Fact]
     public void Portal_commands_refuse_nonsense_with_a_reason()
     {
