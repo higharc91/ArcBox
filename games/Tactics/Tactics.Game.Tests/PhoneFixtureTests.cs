@@ -301,6 +301,11 @@ public sealed class PhoneFixtureTests
             ["portal-new"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), bo).GetRawText())!,
             ["portal-character"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!,
         };
+        var equipped = doc.Members[ana.Value];
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "hearthstone_pendant" } }) };
+        views["portal-trinket"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "ember_claw_gauntlet" } }) };
+        views["portal-trinket-dormant"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
         Check(views);
     }
 

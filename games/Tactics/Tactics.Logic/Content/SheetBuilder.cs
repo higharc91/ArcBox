@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
@@ -13,7 +14,8 @@ namespace Tactics.Logic;
 public sealed record CharacterRecord(string Name, string Race, string Class, string? Subclass, string Background,
     int Level, ImmutableSortedDictionary<Stat, int> BaseScores, ImmutableSortedDictionary<Stat, int> Increases,
     ImmutableArray<AbilityId> Picks, ImmutableArray<InjuryId> Injuries, string Weapon, string Armor, bool Shield,
-    ImmutableArray<ItemStack> Bag);
+    ImmutableArray<ItemStack> Bag,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)
@@ -89,6 +91,8 @@ public static class SheetBuilder
                 injuries.Add(injury);
             else
                 problems.Add($"/injuries/{i}", $"Unknown injury '{recordedInjuries[i]}'.");
+        if (c.Trinket is { } trinket && !rules.Trinkets.ContainsKey(trinket))
+            problems.Add("/trinket", $"Unknown trinket '{trinket}'.");
         var bag = c.Bag.IsDefault ? [] : c.Bag;
         for (var i = 0; i < bag.Length; i++)
             if (!rules.Items.ContainsKey(bag[i].Item))
@@ -133,10 +137,12 @@ public static class SheetBuilder
             else
                 passives.Add(pick.Value);
 
+        var trinket = c.Trinket is { } worn && rules.Trinkets.TryGetValue(worn, out var known) && known.ActiveFor(c) ? known : null;
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
                     + passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0)
-                    + injuries.Sum(i => i.Static.MaxHp);
+                    + injuries.Sum(i => i.Static.MaxHp) + (trinket?.Static.MaxHp ?? 0);
         passives.AddRange(injuries.Select(i => RulesPack.InjuryPassiveId(i.Id)));
+        if (trinket is not null) passives.Add(RulesPack.TrinketPassiveId(trinket.Id));
 
         var skills = new List<string>(background.Skills);
         skills.AddRange(cls.SkillChoices.From.Where(s => !skills.Contains(s)).Take(cls.SkillChoices.Count + race.ExtraSkills));
