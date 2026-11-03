@@ -13,6 +13,7 @@ public sealed partial class TacticsGame
     private CampSave? Camp => _doc.World?.Camp;
     private bool CampVote => Camp?.Stage == "vote";
     private bool CampTalk => Camp?.Stage == "talk";
+    private TimeSpan CampPause => Camp?.Stage switch { "jobs" or "rooms" => TimeSpan.FromSeconds(30), "sleep" => Tell.CampSleep, "dawn" => Tell.CampDawn, _ => Tell.Reveal };
     private bool HasCampfires => AllThings.Any(t => t.Kind == "campfire");
 
     private SceneDef? CampScene()
@@ -79,7 +80,7 @@ public sealed partial class TacticsGame
         if (CampVote) { BeginScene(CampScene()!); return; }
         if (CampTalk && CampScene() is { } scene && Cursor is { Node: { } node } cursor)
         { if (cursor.Roll is not null) ShowRoll(); else PlayLine(scene, scene.Node(node)!, cursor.Line); return; }
-        ArmCamp(Camp?.Stage is "jobs" or "rooms" ? TimeSpan.FromSeconds(30) : Tell.Reveal);
+        ArmCamp(CampPause);
     }
 
     private void CampPresenceChanged()
@@ -93,7 +94,7 @@ public sealed partial class TacticsGame
             Save();
         }
         else if (Camp.Due is null)
-            ArmCamp(Camp.Stage is "jobs" or "rooms" ? TimeSpan.FromSeconds(30) : Tell.Reveal);
+            ArmCamp(CampPause);
     }
 
     private IEnumerable<(string Member, InjuryDef Injury)> CampTargets(string job)
@@ -107,7 +108,7 @@ public sealed partial class TacticsGame
         if (CampVote || CampTalk) { StoryInput(player, profile, input); return; }
         if (Camp.Stage == "rooms") { ShopInput(player, profile, input); return; }
         if (input.Action is "skip" or "campNext")
-        { if (profile.Value == _lead && Camp.Stage is "results" or "dawn") CampAdvance(); return; }
+        { if (profile.Value == _lead && Camp.Stage is "results" or "sleep" or "dawn") CampAdvance(); return; }
         if (Camp.Stage != "jobs" || input.Action != "campJob") return;
         var job = Str(input.Data, "job");
         if (job is null || !RecoveryRules.Jobs.Contains(job)) return;
@@ -132,7 +133,8 @@ public sealed partial class TacticsGame
         switch (Camp.Stage)
         {
             case "jobs": case "results": ResolveCampJob(); break;
-            case "rooms": Dawn(); break;
+            case "rooms": BeginSleep(); break;
+            case "sleep": Dawn(); break;
             case "dawn": FinishCamp(); break;
         }
     }
@@ -189,7 +191,7 @@ public sealed partial class TacticsGame
         var seen = _doc.World!.CampScenes.IsDefault ? [] : _doc.World.CampScenes;
         var scene = Lore.Scenes.FirstOrDefault(s => s.Camp && !seen.Contains(s.Id) && SceneRun.Plays(s, StoryFlags())
             && StoryArc?.Beats.Any(b => b.Id == s.Beat) == true && _doc.World.Beats.Contains(s.Beat));
-        if (scene is null) { Dawn(); return; }
+        if (scene is null) { BeginSleep(); return; }
         EndTelling();
         _doc = _doc with { World = _doc.World with
         {
@@ -199,8 +201,16 @@ public sealed partial class TacticsGame
         BeginScene(CampScene()!);
     }
 
+    private void BeginSleep()
+    {
+        EndTelling();
+        _doc = _doc with { World = _doc.World! with { Story = null, Camp = Camp! with { Stage = "sleep", Due = null } } };
+        ArmCamp(Tell.CampSleep);
+    }
+
     private void Dawn()
     {
+        if (Camp?.Stage == "dawn") { ArmCamp(Tell.CampDawn); return; }
         var camp = Camp!;
         var members = Ordinal.Map(_doc.Members.Select(m =>
         {
@@ -211,7 +221,7 @@ public sealed partial class TacticsGame
         _doc = _doc with { Members = members, World = _doc.World! with
         { RestReady = false, RestSeq = checked(_doc.World.RestSeq + 1), Camp = camp with { Stage = "dawn" }, Story = null } };
         if (camp.Mode == "camp" && ThingNamed(camp.Source) is { } fire) SetThing(fire, ThingState(fire) with { State = "unlit" });
-        ArmCamp(Tell.SceneGap);
+        ArmCamp(Tell.CampDawn);
     }
 
     private void FinishCamp()
@@ -254,10 +264,11 @@ public sealed partial class TacticsGame
         var actors = camp.Actors.IsEmpty ? GoldParticipants.Order(StringComparer.Ordinal).ToImmutableArray() : camp.Actors;
         var reached = WalkReach();
         var ground = WalkGround();
-        var seats = SceneCast.Place(ground, camp.At, _at, _facing, [], actors.Length, t => ground.Map.InBounds(t) && reached.Contains(t));
+        var seats = RecoveryRules.Seats(ground, camp.At, reached, actors.Length);
         return new CampView(camp.Mode, camp.Source, camp.Stage, camp.At, _doc.World!.RestSeq,
             [.. actors.Select((m, i) => new CampPersonView(m, _doc.Members[m].Character.Name, camp.Jobs.GetValueOrDefault(m)?.Job,
-                i < seats.Length ? seats[i] : _at, _doc.Members[m].WellFed))], camp.Results.IsEmpty ? null : camp.Results[^1], camp.Results.Length, camp.Due, RecoveryMembers());
+                i < seats.Length ? seats[i] : _at, _doc.Members[m].WellFed, camp.Jobs.GetValueOrDefault(m)?.Target,
+                camp.Results.FirstOrDefault(r => r.Member == m) is { } result ? result.Job == "rest" ? "rested" : result.Passed ? "success" : "failed" : null))], camp.Results.IsEmpty ? null : camp.Results[^1], camp.Results.Length, camp.Due, RecoveryMembers());
     }
 
     private static string JobName(string job) => job switch { "tend" => "Tend wounds", "rally" => "Rally", "cook" => "Cook", "watch" => "Keep watch", _ => "Rest easy" };

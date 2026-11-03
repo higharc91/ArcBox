@@ -363,7 +363,7 @@ public sealed partial class TacticsGame
     /// <summary>The scene ended: the next of its stage that plays, after a gap, or else what follows the stage.</summary>
     private void SceneDone(SceneDef scene)
     {
-        if (CampTalk) { EndTelling(); Dawn(); return; }
+        if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
         var next = c.Thing is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
@@ -393,7 +393,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StageDone()
     {
-        if (CampTalk) { EndTelling(); Dawn(); return; }
+        if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
         if (c.Thing is not null)
         {

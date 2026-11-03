@@ -115,6 +115,21 @@ public sealed class RestTests
     }
 
     [Fact]
+    public void Saved_job_outcomes_and_targets_survive_reconnect_for_the_TV()
+    {
+        var s = AtCamp(); s.Send(0, "interact", new { target = "fire" }); Vote(s);
+        var actor = s.Profiles[0]!.Value.Value;
+        var target = s.Profiles[2]!.Value.Value;
+        s.Send(0, "campJob", new { job = "tend", target, injury = "cracked_ribs" });
+        StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Results.Length == 1, "first camp result");
+        var person = s.Host.Camp!.People.Single(p => p.Member == actor);
+        Assert.Equal("success", person.Outcome);
+        Assert.Equal(target, person.Target);
+        var resumed = Again(s.Game.Document);
+        Assert.Equal(person, resumed.Host.Camp!.People.Single(p => p.Member == actor));
+    }
+
+    [Fact]
     public void Cooking_and_watch_help_the_whole_party_without_stacking_and_credit_the_watcher()
     {
         var s = AtCamp();
@@ -193,14 +208,16 @@ public sealed class RestTests
     [InlineData("vote")]
     [InlineData("jobs")]
     [InlineData("results")]
+    [InlineData("sleep")]
     [InlineData("dawn")]
     public void Ending_the_session_at_each_camp_stage_preserves_the_cursor_and_a_departing_leader_cannot_stall_it(string stage)
     {
         var s = AtCamp(); s.Send(0, "interact", new { target = "fire" });
         if (stage != "vote") Vote(s);
-        if (stage is "results" or "dawn")
+        if (stage is "results" or "sleep" or "dawn")
         {
             for (var i = 0; i < 4; i++) s.Send(i, "campJob", new { job = "rest" });
+            if (stage == "sleep") StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Stage == "sleep", "saved sleep");
             if (stage == "dawn") StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Stage == "dawn", "saved dawn");
         }
         var cursor = s.Game.Document.World!.Camp!;
@@ -216,6 +233,36 @@ public sealed class RestTests
         Assert.Equal(1, next.Game.Document.World!.RestSeq);
         Assert.False(next.Game.Document.World.RestReady);
         Assert.All(next.Game.Document.Members.Values, m => Assert.Equal([new InjuryId("cracked_ribs"), new InjuryId("shaken")], m.Character.Injuries));
+    }
+
+    [Fact]
+    public void Sleep_does_not_heal_early_and_the_sunrise_holds_then_survives_return_to_walking()
+    {
+        var s = AtCamp(); s.Send(0, "interact", new { target = "fire" }); Vote(s);
+        for (var i = 0; i < 4; i++) s.Send(i, "campJob", new { job = "rest" });
+        StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Stage == "sleep", "the sleep transition");
+        Assert.True(s.Game.Document.World!.RestReady);
+        Assert.All(s.Game.Document.Members.Values, m => Assert.Contains(new InjuryId("black_eye"), m.Character.Injuries));
+        s = Again(s.Game.Document);
+        StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Stage == "dawn", "sunrise");
+        Assert.True(s.Host.Explore!.Morning);
+        s.Harness.Advance(TimeSpan.FromSeconds(2));
+        Assert.Equal("dawn", s.Game.Document.World!.Camp!.Stage);
+        Finish(s);
+        Assert.True(s.Host.Explore!.Morning);
+        Assert.Equal(1, s.Game.Document.World!.RestSeq);
+    }
+
+    [Fact]
+    public void A_blocking_fire_still_gives_every_present_character_a_different_reachable_seat()
+    {
+        var s = AtCamp(); s.Send(0, "interact", new { target = "fire" }); Vote(s);
+        var camp = s.Host.Camp!;
+        Assert.Equal(4, camp.People.Select(p => p.At).Distinct().Count());
+        Assert.DoesNotContain(camp.People, p => p.At == camp.At);
+        var ground = CampRules.Value.GroundFor("vault")!.With([camp.At]);
+        Assert.False(ground.Walkable(camp.At));
+        Assert.All(camp.People, p => Assert.True(ground.Walkable(p.At)));
     }
 
 }

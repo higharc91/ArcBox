@@ -59,6 +59,12 @@ public sealed record StoryTiming
     /// <summary>The pause between two scenes of a beat, with the next one's title: 2 s.</summary>
     public TimeSpan SceneGap { get; init; } = TimeSpan.FromSeconds(2);
 
+    /// <summary>The brief settle-to-sleep transition before recovery is applied.</summary>
+    public TimeSpan CampSleep { get; init; } = TimeSpan.FromSeconds(3);
+
+    /// <summary>Time to see the sunrise and hear its original music cue, skippable by the leader.</summary>
+    public TimeSpan CampDawn { get; init; } = TimeSpan.FromSeconds(8);
+
     /// <summary>How long the card at the end of a chapter shows: 6 s.</summary>
     public TimeSpan Card { get; init; } = TimeSpan.FromSeconds(6);
 

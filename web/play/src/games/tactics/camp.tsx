@@ -32,7 +32,7 @@ export function Camp(props: CustomScreenProps) {
       }} />;
   return <section class={`tx tx-camp tx-recovery${rolled ? " tx-recovery-roll" : ""}`}>
     {d.vip && <RecoveryMenu keep={d.mode === "inn" ? "Stay at the inn" : "Stay by the fire"} send={send} />}
-    <header><span class="tx-eyebrow">{d.mode === "inn" ? "At the inn" : "By the fire"}</span><h1>{d.stage === "dawn" ? "A new dawn" : rolled ? "A moment by the fire" : d.stage === "results" ? "A quiet moment" : "Make yourself useful"}</h1></header>
+    <header><span class="tx-eyebrow">{d.mode === "inn" ? "At the inn" : "By the fire"}</span><h1>{d.stage === "dawn" ? "A new dawn" : rolled ? "A moment by the fire" : d.stage === "sleep" ? "A quiet night" : d.stage === "results" ? "A quiet moment" : "Make yourself useful"}</h1></header>
     {d.stage === "jobs" ? <>
       <div class="tx-camp-jobs" aria-label="Camp jobs">{d.jobs.map(j => <button class="tx-btn" aria-label={j.name} aria-pressed={d.job === j.id} disabled={!d.canPick || j.can === false}
         onClick={() => send("campJob", { job: j.id })} key={j.id}><span class="tx-job-disc" aria-hidden="true">{shortJob[j.id]?.[0]}</span>{shortJob[j.id] ?? j.name}</button>)}</div>
@@ -42,7 +42,7 @@ export function Camp(props: CustomScreenProps) {
         note: result.secondDie ? `Advantage: ${result.die}, ${result.secondDie}` : "Camp check", here: true }], mine: null, canChoose: false, tie: false, decider: null, tied: [], vip: false,
       roll: { member: result.member, die: Math.max(result.die, result.secondDie ?? result.die), bonus: result.bonus,
         total: Math.max(result.die, result.secondDie ?? result.die) + result.bonus, dc: result.job === "watch" ? null : result.dc, success: result.passed } }} />
-      : <p class="tx-recovery-result" role="status">{d.stage === "dawn" ? "Rest injuries mended. Ready for the road." : result?.text ?? "A quiet night."}</p>}
+      : <p class="tx-recovery-result" role="status">{d.stage === "dawn" ? "Rest injuries mended. Ready for the road." : d.stage === "sleep" ? "The party settles down to sleep." : result?.text ?? "A quiet night."}</p>}
     {rolled ? <details class="tx-recovery-roll-party"><summary>Party status · {members.length} members</summary>{partyCards}</details> : partyCards}
     {d.stage !== "jobs" && d.leader && <button class="tx-btn ghost tx-recovery-continue" onClick={() => send("campNext")}>Continue</button>}
     {help && <Sheet title="Camp jobs" eyebrow="Your own character rolls" onClose={() => setHelp(false)}><p>Tend: Medicine DC 12, mend a body injury. Healing spells grant advantage.</p>
