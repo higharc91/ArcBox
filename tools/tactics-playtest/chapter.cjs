@@ -36,6 +36,11 @@ const sceneOf = new Map(SCENES.flatMap((sc) => sc.nodes.flatMap((n) => (n.lines 
 
 /** The TV log's lines, numbered from 1. */
 const read = (file) => fs.readFileSync(file, 'utf8').split('\n');
+// Side interactions may precede Chapter 1; keep unknown-line checks strict against their actual authored IDs.
+const LORE = path.join(__dirname, '../../content/tactics/base/lore');
+const SIDE_LINES = new Set(JSON.parse(fs.readFileSync(path.join(LORE, 'pack.json'), 'utf8')).files
+  .filter(f => f.startsWith('conversations/') || f === 'scenes/side_quests.json')
+  .flatMap(f => { const d = JSON.parse(fs.readFileSync(path.join(LORE, f), 'utf8')); return (d.scenes ?? [d]).flatMap(sc => sc.nodes.flatMap(n => n.lines.map(l => l.id))); }));
 const STORY = /^STORY (\d+) (\S+) (said|shown) (\S+)/;
 
 function check(file, branch, args) {
@@ -51,7 +56,7 @@ function check(file, branch, args) {
     if (m && m[2] !== '-' && m[2] !== 'rest_vote_ask') shown.push({ at: i + 1, line: m[2], said: m[3] === 'said', state: m[4] });
   }
   const order = shown.filter((s, i) => i === 0 || shown[i - 1].line !== s.line).map((s) => s.line);
-  const unknown = order.filter((l) => !sceneOf.has(l));
+  const unknown = order.filter((l) => !sceneOf.has(l) && !SIDE_LINES.has(l));
   if (unknown.length) fail.push(`lines that aren't Chapter 1's: ${unknown.join(', ')}`);
 
   // The scenes, in order: each scene's lines together, and the branch's scenes.
@@ -126,6 +131,9 @@ function check(file, branch, args) {
   } else if (lines.some((l) => /^TACTICS screen tactics-battle-/.test(l))) fail.push('no fight on the TV (the assault was done)');
 
   // The card after the last line, and a step after it.
+  const settled = lines.filter(l => /^QUEST people /.test(l)).at(-1);
+  if (branch !== 'skip-assault' && settled && !settled.includes(branch === 'force' ? 'ch1_skarrow_slain' : 'ch1_skarrow_spared'))
+    fail.push('the won ending must settle its people gates');
   const card = lines.findIndex((l) => /^STORY card /.test(l)) + 1;
   const last = shown.at(-1)?.at ?? 0;
   if (!card || card < last) fail.push(`STORY card after the last line (line ${last})`);

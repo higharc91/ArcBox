@@ -129,7 +129,10 @@ public sealed class WorldPeople
             var stance = PlaceAt(person, clock + Phase(person) - _paused[i]);
             if (speaking && leader is { } party)
                 stance = new Stance(stance.Place, false, new Vector2(party.X + .5f - stance.Place.Map.X, party.Y + .5f - stance.Place.Map.Y));
-            units.Add(UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels) with { Opacity = _opacity[i] });
+            var unit = UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels) with { Opacity = _opacity[i] };
+            if (speaking && _art.Emote("question") is { } emote)
+                unit = unit with { Emote = emote, EmoteAt = UnitPlan.Overhead(unit.Feet, unit.Sprite) };
+            units.Add(unit);
         }
         units.Sort((a, b) => a.Order.CompareTo(b.Order));
         return units.ToImmutable();

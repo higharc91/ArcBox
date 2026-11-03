@@ -10,11 +10,11 @@ import { packBase, packJson } from "./pack";
  * stays quiet.
  */
 
-export type Cue = "select" | "confirm" | "cancel" | "yourTurn" | "reaction" | "dice";
+export type Cue = "select" | "confirm" | "cancel" | "yourTurn" | "reaction" | "dice" | "questlogOpen" | "questlogClose" | "questlogPin";
 
 const SOUND: Record<Cue, string> = {
   select: "ui_select", confirm: "ui_confirm", cancel: "ui_cancel", yourTurn: "ui_your_turn", reaction: "ui_reaction_prompt",
-  dice: "ui_dice_roll",
+  dice: "ui_dice_roll", questlogOpen: "questlog_open", questlogClose: "questlog_close", questlogPin: "questlog_pin",
 };
 /** Vibration patterns (ms) for the cues worth feeling with the phone in a pocket. */
 const BUZZ: Partial<Record<Cue, number[]>> = { yourTurn: [60, 80, 120], reaction: [120, 60, 120] };
@@ -47,7 +47,8 @@ function buffer(id: string): Promise<AudioBuffer | null> {
   if (!pending) {
     pending = (async () => {
       const [base, manifest] = await Promise.all([packBase(), packJson<SfxManifest>("sfx/manifest.json")]);
-      const files = manifest?.sounds[id]?.files;
+      const fallback: Record<string, string> = { questlog_open: "page_turn", questlog_close: "page_turn", questlog_pin: "ui_select" };
+      const files = [id, fallback[id]].map(key => key ? manifest?.sounds[key]?.files : undefined).find(files => files?.length);
       if (!base || !files?.length || !ctx) return null;
       const file = files[Math.floor(Math.random() * files.length)]!;
       const data = await (await fetch(`${base}sfx/${file}`)).arrayBuffer();

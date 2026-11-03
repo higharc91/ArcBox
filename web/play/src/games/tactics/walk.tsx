@@ -1,3 +1,4 @@
+import { WalkJournal } from "./quests";
 import type { JSX } from "preact";
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useFeedback } from "../../feedback/feedback";
@@ -440,18 +441,26 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
 
   return (
     <div class={`tx tx-walk ${d.leader ? "lead" : "follow"}${arrived.current ? " arrived" : ""}`}>
-      <div class="tx-walk-info">
-        {d.vip ? <HostMenu canBattle={d.canBattle} send={send} /> : null}
+      <div class="tx-walk-sidebar">
         {/* A status, so a screen reader hears who leads, and that it's this phone when the lead comes here. */}
+        <div class="tx-walk-leadrow">
         <div class="tx-walk-who" role="status">
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>
+        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Session actions">•••</summary><HostMenu canBattle={d.canBattle} send={send} /></details> : null}
+        </div>
+        <div class="tx-walk-info">
         {d.leader || d.leaderName
           ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
           : null}
+        {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
         <div class="tx-walk-goal">
+          <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
+          {d.restReady && <span class="tx-rest-ready">Ready to rest</span>}
+          {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
+          </div>
           <p>{d.objective}</p>
         </div>
         {d.leader ? null : (
@@ -465,15 +474,14 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           </div>
         )}
         <Party party={d.party} />
-        {d.restReady && <span class="tx-rest-ready">Ready to rest</span>}
-        {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
+      </div>
         {d.leader && d.search ? (
           <div class="tx-walk-dock">
             {choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
             <Search send={send} viewId={viewId} />
           </div>
-        ) : d.leader && choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
+        ) : d.leader && choices.length > 0 ? <div class="tx-walk-dock"><Interact choices={choices} send={send} viewId={viewId} /></div> : null}
       </div>
       {d.leader ? <Pad sender={sender} /> : null}
     </div>

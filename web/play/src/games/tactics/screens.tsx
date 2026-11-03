@@ -44,7 +44,7 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
   const { encounters, canWalk } = data as { encounters: EncounterOption[]; canWalk?: boolean };
   const sfx = useSfx();
   return (
-    <div class="tx tx-muster">
+    <div class="tx tx-muster tx-controls-layout"><div class="tx-controls-scroll">
       <h2 class="tx-title">Choose a battle</h2>
       <ul class="tx-encounters">
         {encounters.map((e) => (
@@ -63,6 +63,7 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
+      </div>
       {canWalk ? (
         <div class="tx-foot">
           <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); send("backToWalk"); }}>Back to walking</button>

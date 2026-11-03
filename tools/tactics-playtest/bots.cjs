@@ -158,6 +158,7 @@ const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : 
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
 const chapter = opt('chapter', false) === true;
 const shopRun = opt('shop', false) === true;
+const questRun = opt('quests', false) === true;
 const recoveryRun = opt('camp', false) === true;
 /** --branch=force|parley: the option the party votes for at the ford. */
 const branch = String(opt('branch', 'force'));
@@ -950,7 +951,7 @@ function stampOf(id) {
  */
 async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : ['beat', beat] : [stamp.map];
+  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : beat.startsWith('person:') ? ['person', beat.slice(7)] : ['beat', beat] : [stamp.map];
   const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
@@ -1091,7 +1092,7 @@ async function walkToBeat(bots, watch, region, marker) {
       continue;
     }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
-    await lead.input('interact', marker.beat.startsWith('shop:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
+    await lead.input('interact', marker.beat.startsWith('shop:') || marker.beat.startsWith('person:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
     log('CHAPTER the tap started nothing: trying again');
   }
@@ -1102,6 +1103,36 @@ async function walkToBeat(bots, watch, region, marker) {
  * --chapter: from wherever the party is, the beat on offer (the TV's STORY marker lines, or the host view), walked to and played, and
  * so on to the chapter's card; then a walk, and the session ends. A fight lost puts its "!" back, so it's walked to again.
  */
+async function playGrainQuest(bots, watch, region) {
+  await walkToBeat(bots, watch, region, { beat: 'person:halden_varrow' });
+  await until('Halden conversation to end', () => onWalk(bots));
+  let leader = await leaderOf(bots);
+  if (!leader.view.data.journal?.quests.some(q => q.id === 'sq_missing_grain')) throw new Error('Grain quest did not start');
+  log('QUEST started: Where the Grain Went');
+  await leader.input('questLog', { action: 'open', quest: 'sq_missing_grain' });
+  await until('the shared journal', () => bots.every(b => b.view?.screen === 'questLog'));
+  leader = bots.find(b => b.view.data.canPin);
+  await leader.input('questLog', { action: 'unpin' });
+  await until('unpinned journal', () => !leader.view.data.pinned);
+  await leader.input('questLog', { action: 'pin', quest: 'sq_missing_grain' });
+  await until('pinned journal', () => leader.view.data.pinned === 'sq_missing_grain');
+  await sleep(2500);
+  log('QUEST journal: opened on TV, selected and pinned');
+  await leader.input('questLog', { action: 'close' });
+  await until('walking after the journal', () => onWalk(bots));
+  for (const [thing, objective] of [['af_granary_sack', 'Read the Ash Market tally'], ['af_ash_market_tally', 'Speak to Celandine or Halden']]) {
+    await walkToBeat(bots, watch, region, { beat: 'thing:' + thing });
+    await until(thing + ' clue scene to end', () => onWalk(bots));
+    leader = await leaderOf(bots);
+    if (leader.view.data.pinned?.objective !== objective) throw new Error('Tracker did not advance after ' + thing);
+    log('QUEST tracker: ' + objective);
+  }
+  await walkToBeat(bots, watch, region, { beat: 'person:halden_varrow' });
+  await until('the completed grain quest', () => onWalk(bots) && bots.some(b => b.view.data.journal?.quests.some(q => q.id === 'sq_missing_grain' && q.status === 'done')));
+  await until('the completed pin to clear', () => bots.every(b => !b.view.data.pinned));
+  log('QUEST OK: talked, voted, opened journal, pinned, followed both clues, completed, auto-unpinned');
+}
+
 async function playChapter(bots, watch, state) {
   const region = JSON.parse(fs.readFileSync(path.join(RULES, 'world', 'ashen_ford.json'), 'utf8')).id;
   setInterval(() => {
@@ -1114,6 +1145,7 @@ async function playChapter(bots, watch, state) {
   idlePings(bots);
   await until('the walk screen', () => bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader));
   if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  if (questRun) await playGrainQuest(bots, watch, region);
   let since = 0;
   let camped = false, inn = false;
   for (let n = 1; ; n++) {

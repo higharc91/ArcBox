@@ -70,6 +70,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private ThingArt? _thingArt;
     private ExploreView? _thingsFed;    // the last view the things were given
     private bool _thingsOff;            // the pack's art for things can't be read: they're left out, and nothing else stops
+    private QuestHud? _questHud;
     private WorldHud? _worldHud;
     private ExploreView? _explore;
     private WalkStats? _walkStats;
@@ -367,6 +368,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     }
 
     /// <summary>Gives the walk the view the director lets it follow, and after a fight's new epoch, where the followers stood.</summary>
+    private (int Epoch, string Person, long Seq)? _spokenBark;
+
     private void FeedWalk()
     {
         if (_walk is not { } walk)
@@ -386,6 +389,14 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (next.Seed is { } seed)
         {
             walk.Seed(seed);
+        }
+        if (next.View.Bark is { } bark && bark.Until > DateTimeOffset.UtcNow
+            && _spokenBark != (next.View.Epoch, bark.Person, bark.Seq))
+        {
+            _spokenBark = (next.View.Epoch, bark.Person, bark.Seq);
+            if (StoryVoice.For(bark.Line, _voices, SpeechFallback.Speech) is { } say)
+                _narrator?.Say(say.Text, "tactics.npc." + bark.Line.Speaker.Replace('_', '-'), NarrationPriority.Question,
+                    clip: say.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
         }
         _fed = next.View;
     }
@@ -530,6 +541,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             Bumped(frame);
         }
         _worldHud?.Clear(frame.Walkers, frame.Fit);
+        _questHud?.Frame(_explore, _walking && !_battle && !campActive, plan.Terrain, frame.Fit, delta);
         WalkMoments(world, frame, delta);
     }
 
@@ -729,6 +741,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var director = _director;
         var screen = PhaseScreen.Of(v, director);
         TellStory(v);
+        LogQuestState(v);
+        QuestAudio(v);
 
         // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
         if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null && _loop is not null)
@@ -760,6 +774,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// Gives the story every host view, so it knows whether the TV watched the party walk up to a scene (overworld 5d §10). The layer is
     /// made with the pack's art the first time there's a world to tell a story in.
     /// </summary>
+    private string? _questLogged;
+    private void LogQuestState(TacticsHostView view)
+    {
+        if (!LogStory || view.Explore is not { } explore) return;
+        var key = $"{explore.Pinned?.Id}|{explore.Pinned?.Objective}|{explore.QuestLog?.Selected}|{string.Join(',', explore.PeopleFlags ?? [])}";
+        if (key == _questLogged) return;
+        _questLogged = key;
+        GD.Print(explore.Pinned is { } pin ? $"QUEST tracker {pin.Id} {pin.Status} {pin.Objective}" : "QUEST tracker none");
+        GD.Print(explore.QuestLog is { } log ? $"QUEST journal {log.Selected}" : "QUEST journal closed");
+        if (explore.PeopleFlags is { } flags) GD.Print($"QUEST people {string.Join(',', flags)}");
+        if (explore.QuestLog is not null) _shots?.Capture("npcs-e2e-journal");
+    }
+
     private void TellStory(TacticsHostView view)
     {
         if (_story is null)
@@ -970,6 +997,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
                 _worldHud = new WorldHud(root, HudArt.Load(root, _unitArt)) { Visible = false };
                 _coverShown = null;
                 AddChild(_worldHud);
+                _questHud ??= new QuestHud(root, HudArt.Load(root, _unitArt));
+                AddChild(_questHud);
                 MoveChild(_worldHud, _caption.GetIndex());
             }
         }

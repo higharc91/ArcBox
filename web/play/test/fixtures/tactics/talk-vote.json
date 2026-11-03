@@ -1,0 +1,38 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": true,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "accept",
+        "label": "We will look into the missing grain.",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "press",
+        "label": "Why keep the granary locked?",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "leave",
+        "label": "Another time.",
+        "skill": null,
+        "dc": null
+      }
+    ],
+    "mine": null,
+    "chosen": null,
+    "tie": false,
+    "decider": null,
+    "away": [],
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:45\u002B00:00",
+  "header": null
+}

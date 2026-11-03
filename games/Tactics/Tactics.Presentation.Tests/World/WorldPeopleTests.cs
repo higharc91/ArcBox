@@ -21,8 +21,11 @@ public sealed class WorldPeopleTests
         var first = Assert.Single(people.Units(5, Everywhere, [], leader: new Tile(4,5), bark: bark));
         var held = Assert.Single(people.Units(7, Everywhere, [], leader: new Tile(4,5), bark: bark));
         Assert.Equal(first.Feet, held.Feet);
+        Assert.Equal(Art.Value.Emote("question"), held.Emote);
+        Assert.Equal(UnitPlan.Overhead(held.Feet, held.Sprite), held.EmoteAt);
         var resumed = Assert.Single(people.Units(7.01, Everywhere, [], leader: new Tile(4,5)));
         Assert.True(Vector2.Distance(held.Feet,resumed.Feet) < 1);
+        Assert.Null(resumed.Emote);
     }
 
     [Fact]
