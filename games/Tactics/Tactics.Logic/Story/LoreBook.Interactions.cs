@@ -46,7 +46,7 @@ public sealed partial class LoreBook
                         throw new BadLore($"{where} needs a two-integer tile target.");
                     tile = new Tile(x, y);
                 }
-                target = new QuestTarget(Optional(t, "person", where), Optional(t, "thing", where), tile);
+                target = new QuestTarget(Optional(t, "person", where), Optional(t, "thing", where), tile, Optional(t, "region", where));
                 if ((target.Person is null ? 0 : 1) + (target.Thing is null ? 0 : 1) + (tile is null ? 0 : 1) != 1)
                     throw new BadLore($"{where} target must name exactly one person, thing or tile.");
             }
@@ -57,10 +57,24 @@ public sealed partial class LoreBook
         if (stages.IsEmpty || stages.Select(s => s.Id).Distinct().Count() != stages.Length) throw new BadLore($"{where} needs distinct stages.");
         var rewards = Field(root, "rewards", where);
         var items = List(rewards, "items", where, required: false).Select(e => new QuestItem(Required(e, "item", where), Whole(e, "count", where))).ToImmutableArray();
+        ImmutableSortedDictionary<string, string>? trinkets = null;
+        if (Field(rewards, "trinkets", where) is { ValueKind: not JsonValueKind.Undefined } rewardMap)
+        {
+            if (rewardMap.ValueKind != JsonValueKind.Object) throw new BadLore($"{where} trinket rewards must map classes to trinket IDs.");
+            var builder = ImmutableSortedDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
+            foreach (var entry in rewardMap.EnumerateObject())
+            {
+                if (string.IsNullOrWhiteSpace(entry.Name) || entry.Value.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(entry.Value.GetString()))
+                    throw new BadLore($"{where} has an empty or invalid class trinket reward.");
+                if (!builder.TryAdd(entry.Name, entry.Value.GetString()!)) throw new BadLore($"{where} repeats trinket class '{entry.Name}'.");
+            }
+            if (builder.Count == 0) throw new BadLore($"{where} has an empty trinket reward map.");
+            trinkets = builder.ToImmutable();
+        }
         int Amount(string key) => Field(rewards, key, where).ValueKind == JsonValueKind.Undefined ? 0 : Whole(rewards, key, where);
         var result = new QuestDef(id, Required(root, "name", where), Required(root, "giver", where), Required(root, "region", where), stages,
             Ending(Field(root, "done", where)), Field(root, "failed", where) is { ValueKind: JsonValueKind.Object } failed ? Ending(failed) : null,
-            new QuestRewards(Amount("gold"), Amount("xp"), items, Strings(rewards, "sets", where)));
+            new QuestRewards(Amount("gold"), Amount("xp"), items, Strings(rewards, "sets", where), trinkets));
         if (result.Done.When.IsEmpty || result.Rewards.Gold < 0 || result.Rewards.Xp < 0 || items.Any(i => i.Count <= 0))
             throw new BadLore($"{where} has invalid rewards or no completing flags.");
         return result;
@@ -86,6 +100,8 @@ public sealed partial class LoreBook
         var regions = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
         var things = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
         var items = new HashSet<string>(StringComparer.Ordinal);
+        var classes = new HashSet<string>(StringComparer.Ordinal);
+        var trinkets = new Dictionary<string, string>(StringComparer.Ordinal);
         var shops = new HashSet<string>(StringComparer.Ordinal);
         var hooks = new List<(string Thing,string Scene)>();
         var rules = Path.Combine(basePack, "rules");
@@ -105,6 +121,9 @@ public sealed partial class LoreBook
                 if (file.StartsWith("interactables/", StringComparison.Ordinal)) things.Add(root.GetProperty("region").GetString()!,
                     root.GetProperty("interactables").EnumerateArray().Select(t => t.GetProperty("id").GetString()!).ToHashSet(StringComparer.Ordinal));
                 if (file == "items.json") items.UnionWith(root.EnumerateArray().Select(t => t.GetProperty("id").GetString()!));
+                if (file.StartsWith("classes/", StringComparison.Ordinal)) classes.Add(root.GetProperty("id").GetString()!);
+                if (file == "trinkets.json")
+                    foreach (var trinket in root.EnumerateArray()) trinkets.Add(trinket.GetProperty("id").GetString()!, trinket.GetProperty("class").GetString()!);
                 if (file.StartsWith("shops/", StringComparison.Ordinal)) shops.UnionWith(root.GetProperty("shops").EnumerateArray().Select(t => t.GetProperty("id").GetString()!));
             }
         }
@@ -152,17 +171,20 @@ public sealed partial class LoreBook
         {
             if (!characters.Any(c => c.Id == quest.Giver)) throw new InvalidDataException($"quest '{quest.Id}' has unknown giver '{quest.Giver}'.");
             if (File.Exists(manifest) && !regions.ContainsKey(quest.Region)) throw new InvalidDataException($"quest '{quest.Id}' has unknown region '{quest.Region}'.");
-            var region = regions.GetValueOrDefault(quest.Region);
             foreach (var stage in quest.Stages)
             {
+                var targetRegion = stage.Target?.Region ?? quest.Region;
+                if (File.Exists(manifest) && !regions.ContainsKey(targetRegion))
+                    throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown target region '{targetRegion}'.");
+                var region = regions.GetValueOrDefault(targetRegion);
                 if (!stage.When.All(setters.Contains)) throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has flags nothing in the pack can set.");
-                if (File.Exists(manifest) && stage.Target?.Thing is { } thing && (!things.TryGetValue(quest.Region, out var regionThings) || !regionThings.Contains(thing)))
+                if (File.Exists(manifest) && stage.Target?.Thing is { } thing && (!things.TryGetValue(targetRegion, out var regionThings) || !regionThings.Contains(thing)))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown thing '{thing}'.");
                 if (File.Exists(manifest) && stage.Target?.Tile is { } tile)
                 {
                     var size = region.GetProperty("size").EnumerateArray().Select(v => v.GetInt32()).ToArray();
                     if (tile.X < 0 || tile.Y < 0 || tile.X >= size[0] || tile.Y >= size[1])
-                        throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' target is outside region '{quest.Region}'.");
+                        throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' target is outside region '{targetRegion}'.");
                 }
                 if (File.Exists(manifest) && stage.Target?.Person is { } person && (!region.TryGetProperty("people", out var people)
                     || !people.EnumerateArray().Any(p => p.TryGetProperty("id", out var id) && id.GetString() == person)))
@@ -172,6 +194,14 @@ public sealed partial class LoreBook
                 throw new InvalidDataException($"quest '{quest.Id}' cannot set main-story flags.");
             foreach (var item in quest.Rewards.Items)
                 if (File.Exists(manifest) && !items.Contains(item.Item)) throw new InvalidDataException($"quest '{quest.Id}' has unknown item '{item.Item}'.");
+            if (File.Exists(manifest) && quest.Rewards.Trinkets is { } rewardMap)
+            {
+                foreach (var (cls, id) in rewardMap)
+                    if (!classes.Contains(cls) || !trinkets.TryGetValue(id, out var owner) || owner != cls)
+                        throw new InvalidDataException($"quest '{quest.Id}' has invalid trinket '{id}' for class '{cls}'.");
+                foreach (var cls in classes)
+                    if (!rewardMap.ContainsKey(cls)) throw new InvalidDataException($"quest '{quest.Id}' has no trinket reward for class '{cls}'.");
+            }
         }
     }
 }

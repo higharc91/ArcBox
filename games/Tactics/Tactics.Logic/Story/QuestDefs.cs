@@ -1,12 +1,15 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
-public sealed record QuestTarget(string? Person = null, string? Thing = null, Tile? Tile = null);
+public sealed record QuestTarget(string? Person = null, string? Thing = null, Tile? Tile = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Region = null);
 public sealed record QuestStage(string Id, string Objective, string Log, ImmutableArray<string> When, QuestTarget? Target = null);
 public sealed record QuestEnding(ImmutableArray<string> When, string Log);
 public sealed record QuestItem(string Item, int Count);
-public sealed record QuestRewards(int Gold, int Xp, ImmutableArray<QuestItem> Items, ImmutableArray<string> Sets);
+public sealed record QuestRewards(int Gold, int Xp, ImmutableArray<QuestItem> Items, ImmutableArray<string> Sets,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<string, string>? Trinkets = null);
 public sealed record QuestDef(string Id, string Name, string Giver, string Region, ImmutableArray<QuestStage> Stages,
     QuestEnding Done, QuestEnding? Failed, QuestRewards Rewards)
 {

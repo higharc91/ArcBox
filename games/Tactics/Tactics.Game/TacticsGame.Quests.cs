@@ -5,7 +5,15 @@ namespace Tactics.Game;
 
 public sealed partial class TacticsGame
 {
-    private ImmutableArray<QuestDef> RegionQuests => _region is null ? [] : [.. Lore.Quests.Where(q => q.Region == _region.Def.Id)];
+    private ImmutableArray<QuestDef> RegionQuests
+    {
+        get
+        {
+            if (_region is null) return [];
+            var flags = StoryFlags();
+            return [.. Lore.Quests.Where(q => q.Region == _region.Def.Id || q.State(flags) is not null)];
+        }
+    }
     private QuestEventView? _questEvent;
     private int _questSeq;
     private IReadOnlySet<string>? _questObservedFlags;
@@ -52,6 +60,9 @@ public sealed partial class TacticsGame
                 } });
             }
             members = Ordinal.Map(members.Select(m => (m.Key, m.Value with { Xp = checked(m.Value.Xp + quest.Rewards.Xp) })));
+            if (quest.Rewards.Trinkets is { } trinkets)
+                members = Ordinal.Map(members.Select(m => (m.Key, m.Value with
+                { Character = m.Value.Character with { Trinket = trinkets[m.Value.Character.Class] } })));
             var level = TacticsDocument.LevelFor(members.Values.Select(m => m.Xp), Rules.Xp);
             if (level > _doc.PartyLevel)
                 members = Ordinal.Map(members.Select(m => (m.Key, m.Value with { Character = LevelUp(m.Value.Character, level) })));

@@ -425,6 +425,7 @@ def _side_content(defs, docs, scenes, content, errors):
                 if scene.get("beat") and not scene.get("camp"):
                     main_flags.update(value)
     people, things, regions, items, services = {}, {}, {}, set(), set()
+    classes, trinkets = set(), {}
     manifest = content / "rules" / "manifest.json"
     if manifest.exists():
         for file in json.loads(manifest.read_text())["files"]:
@@ -441,6 +442,10 @@ def _side_content(defs, docs, scenes, content, errors):
                 items.update(x["id"] for x in (data if isinstance(data,list) else [data]))
             if file.startswith("shops/"):
                 services.update(s["id"] for s in data["shops"])
+            if file.startswith("classes/"):
+                classes.add(data["id"])
+            if file == "trinkets.json":
+                trinkets.update({t["id"]: t["class"] for t in data})
     for scene, loc in scenes:
         for node in scene["nodes"]:
             for option in node.get("options", []):
@@ -489,15 +494,24 @@ def _side_content(defs, docs, scenes, content, errors):
             if not stage["when"] or set(stage["when"]) - setters:
                 errors.add(where, "/stages", f"stage '{stage['id']}' has flags nothing in the pack can set")
             target = stage.get("target", {})
-            if target and len(target) != 1: errors.add(where,"/target","target must name one person, thing or tile")
+            target_region = target.get("region", q["region"])
+            if target and len(set(target) - {"region"}) != 1: errors.add(where,"/target","target must name one person, thing or tile")
+            if target and target_region not in regions: errors.add(where,"/target",f"unknown target region '{target_region}'")
             for kind, value in target.items():
-                if kind == "person" and value not in people.get(q["region"], {}): errors.add(where,"/target",f"unknown person '{value}'")
-                if kind == "thing" and value not in things.get(q["region"], {}): errors.add(where,"/target",f"unknown thing '{value}'")
-                if kind == "tile" and q["region"] in regions:
-                    width,height = regions[q["region"]]["size"]
+                if kind == "person" and value not in people.get(target_region, {}): errors.add(where,"/target",f"unknown person '{value}'")
+                if kind == "thing" and value not in things.get(target_region, {}): errors.add(where,"/target",f"unknown thing '{value}'")
+                if kind == "tile" and target_region in regions:
+                    width,height = regions[target_region]["size"]
                     if len(value)!=2 or not (0<=value[0]<width and 0<=value[1]<height): errors.add(where,"/target","target is outside the quest region")
         for item in q["rewards"].get("items", []):
             if item["item"] not in items: errors.add(where,"/rewards",f"unknown item '{item['item']}'")
+        if manifest.exists() and "trinkets" in q["rewards"]:
+            reward_map = q["rewards"]["trinkets"]
+            for cls, item in reward_map.items():
+                if cls not in classes or trinkets.get(item) != cls:
+                    errors.add(where, "/rewards/trinkets", f"invalid trinket '{item}' for class '{cls}'")
+            for cls in sorted(classes - set(reward_map)):
+                errors.add(where, "/rewards/trinkets", f"no trinket reward for class '{cls}'")
         if set(q["rewards"].get("sets", [])) & main_flags: errors.add(where,"/rewards","side rewards cannot set main-story flags")
     # Only complete game packs opt into people coverage; small validator fixtures have no townsfolk file.
     if any(w.endswith("/barks/townsfolk.json") for _, w in docs):

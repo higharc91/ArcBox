@@ -8,6 +8,7 @@ namespace Tactics.Game.Tests;
 public sealed class EntranceTravelTests
 {
     private static readonly Lazy<RulesPack> Pack = new(Load);
+    internal static RulesPack TestRules => Pack.Value;
 
     private static RulesPack Load()
     {
