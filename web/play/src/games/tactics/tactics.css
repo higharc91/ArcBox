@@ -680,8 +680,6 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-surface-ice_sheet i { width: 12px; height: 20px; border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); animation-name: tx-frost; animation-duration: 9s; }
 .tx .tx-surface-oil { --surface: #9b83c4; }
 .tx .tx-surface-oil i { width: 120px; height: 36px; border: 1px solid var(--surface); border-radius: 50%; background: linear-gradient(110deg, #649d9c30, #916abf40, #bda55b20); animation-name: tx-ripple; animation-duration: 11s; }
-.tx .tx-surface-web { --surface: #d1cec5; }
-.tx .tx-surface-web i { width: 46px; height: 56px; border-radius: 0; border: 1px solid #d1cec550; background: repeating-linear-gradient(45deg, transparent 0 9px, #d1cec540 10px 11px); animation-name: tx-frost; animation-duration: 14s; }
 .tx .tx-surface-scorched { --surface: #9a8d80; }
 .tx .tx-surface-scorched i { width: 3px; height: 3px; animation-duration: 12s; }
 .tx .tx-current-surfaces { display: flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: .035em; color: var(--wf-ink); padding: 7px 12px; border: 1px solid #b6a48455; border-radius: 6px; background: #121527e8; }
@@ -707,7 +705,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-glare-oil { --glare: #be8bea; }
 .tx .tx-glare-oil::before { border-color: #b095e6aa; background: linear-gradient(110deg, #6dd9cc4d, #b88de955 15%, transparent 28% 72%, #d894b955 85%, #dbc47b4d); mask-image: linear-gradient(90deg, #000, transparent 13% 87%, #000); }
 .tx .tx-glare-web { --glare: #ded8c7; }
-.tx .tx-glare-web::before { background: repeating-radial-gradient(ellipse at 0 100%, transparent 0 25px, #e9e3d266 26px 27px, transparent 28px 45px); mask-image: linear-gradient(90deg, #000, transparent 12% 88%, #000); animation-duration: 12s; }
+.tx .tx-glare-web::before { background: none; box-shadow: inset 0 0 20px #ded8c722; animation-duration: 12s; }
 .tx .tx-glare-scorched { --glare: #b6a38a; }
 .tx .tx-glare-scorched::before { background: radial-gradient(ellipse at 0 100%, #30221c99, transparent 35%), radial-gradient(ellipse at 100% 100%, #4b3b3188, transparent 35%); }
 @keyframes tx-glare-breathe { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
@@ -715,4 +713,19 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 @media (prefers-reduced-motion: reduce) {
   .tx .tx-surface-glare::before { animation: none; opacity: .75; }
   .tx .tx-surface-glare::after { animation: none; opacity: 0; }
+}
+
+/* Silk stays tethered to the screen corners instead of floating like a tile or particle. */
+.tx .tx-web-corner { position: absolute; width: min(36vw, 150px); aspect-ratio: 1; color: #eee7d7; }
+.tx .tx-web-corner.top-left { top: 0; left: 0; }
+.tx .tx-web-corner.top-right { top: 0; right: 0; width: min(30vw, 125px); transform: scaleX(-1); }
+.tx .tx-web-corner.bottom-left { bottom: 0; left: 0; width: min(44vw, 185px); transform: scaleY(-1); }
+.tx .tx-web-corner svg { width: 100%; height: 100%; overflow: visible; transform-origin: 0 0; animation: tx-web-sway 11s ease-in-out infinite; }
+.tx .tx-web-corner.top-right svg { animation-delay: -4s; animation-duration: 13s; }
+.tx .tx-web-corner.bottom-left svg { animation-delay: -7s; animation-duration: 15s; }
+.tx .tx-web-spokes { stroke: currentColor; stroke-width: .85; opacity: .5; }
+.tx .tx-web-cross { stroke: currentColor; stroke-width: .65; opacity: .38; }
+@keyframes tx-web-sway { 0%, 100% { transform: rotate(-.8deg) scale(1); opacity: .75; } 50% { transform: rotate(1deg) scale(1.025); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .tx .tx-web-corner svg { animation: none; }
 }

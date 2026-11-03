@@ -49,3 +49,14 @@ it("shows selected secondary spread without activating a surface animation", () 
   fireEvent.click(screen.getByRole("button", { name: "Back" }));
   expect(document.querySelectorAll(".tx-cell.spread")).toHaveLength(0);
 });
+
+it("web terrain uses corner-anchored silk instead of floating square particles", () => {
+  const view = structuredClone(turnFixture) as CustomView;
+  Object.assign(view.data as object, { surfaces: ["web"] });
+  const shown = render(<ControllerScreen view={view} send={() => {}} me="ALEX" game="tactics" />);
+  expect(screen.getByLabelText("Current terrain: Webs")).toBeTruthy();
+  expect(document.querySelectorAll(".tx-surface-scene i")).toHaveLength(0);
+  expect(document.querySelectorAll(".tx-web-corner svg")).toHaveLength(3);
+  shown.rerender(<ControllerScreen view={structuredClone(turnFixture) as CustomView} send={() => {}} me="ALEX" game="tactics" />);
+  expect(document.querySelector(".tx-web-corner")).toBeNull();
+});
