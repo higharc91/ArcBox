@@ -2334,6 +2334,69 @@
       "duration": 1.8,
       "group": "world",
       "loop": false
+    },
+    "amb_cinder_hollow": {
+      "asset": "asset_g6SRnFg7RyvzHZgayJVQqwvd",
+      "job": "job_qygEvzpBxxYuKsnrK9wzKYHP",
+      "cu": 90.0,
+      "duration": 30.0,
+      "group": "ambience",
+      "loop": true,
+      "seed": 7474
+    },
+    "ashmaw_breath_loop": {
+      "asset": "asset_bTd2BKgryGooaBd83SG1jWh9",
+      "job": "job_KnutZPfbTGiYgkdNM3asyQUZ",
+      "cu": 24.0,
+      "duration": 8.0,
+      "group": "ambience",
+      "loop": true,
+      "seed": 7248
+    },
+    "ashmaw_death": {
+      "asset": "asset_RWj7nADdeZcZUNmsHAWLacka",
+      "job": "job_WYHziwvZR4FtSYNebcg75Rze",
+      "cu": 11.0,
+      "duration": 3.5,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_hurt.1": {
+      "asset": "asset_PcB51fE4icDZQRAqVYpieqZN",
+      "job": "job_9xnBYou9fJfm87bVGL7EiurH",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_hurt.2": {
+      "asset": "asset_TzNmduA8joAg4NmnVqK2ni4p",
+      "job": "job_9xnBYou9fJfm87bVGL7EiurH",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
+    },
+    "ashmaw_maul.1": {
+      "asset": "asset_SJ7PmhnSsFFcSGzyckeFCtFL",
+      "job": "job_xY5yewPCKmEkWCJPKCQJte48",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_maul.2": {
+      "asset": "asset_ePMpbvWZ5KG6hTT1TCCcs3m6",
+      "job": "job_xY5yewPCKmEkWCJPKCQJte48",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
     }
   }
 }

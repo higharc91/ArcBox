@@ -18,6 +18,14 @@
       "group": "ambience",
       "use": "Camp screen and night camps"
     },
+    "amb_cinder_hollow": {
+      "files": [
+        "amb_cinder_hollow.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Cinder Hollow region ambience"
+    },
     "amb_dungeon": {
       "files": [
         "amb_dungeon.ogg"
@@ -139,6 +147,44 @@
       "loop": false,
       "group": "weapon",
       "use": "Arrow, bolt, dart or javelin hits an unarmoured target"
+    },
+    "ashmaw_breath_loop": {
+      "files": [
+        "ashmaw_breath_loop.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Quiet idle breath in Ashmaw lair",
+      "voice": "bear"
+    },
+    "ashmaw_death": {
+      "files": [
+        "ashmaw_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_hurt": {
+      "files": [
+        "ashmaw_hurt.1.ogg",
+        "ashmaw_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_maul": {
+      "files": [
+        "ashmaw_maul.1.ogg",
+        "ashmaw_maul.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Maul for Ashmaw",
+      "voice": "bear"
     },
     "attack_crit": {
       "files": [

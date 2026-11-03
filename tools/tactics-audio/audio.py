@@ -52,7 +52,7 @@ LOOP_XFADE = {"ambience": 1.0, "music": 2.0}
 
 KINDS = {
     "sfx": {"list": HERE / "sfx-list.json", "assets": HERE / "sfx-assets.json", "out": BASE / "sfx", "group_key": "sounds",
-            "channels": 1, "quality": 4},
+            "channels": 1, "quality": 4, "external": HERE / "external-sfx.json"},
     "music": {"list": HERE / "music-list.json", "assets": HERE / "music-assets.json", "out": BASE / "music",
               "group_key": "tracks", "channels": 2, "quality": 5},
 }
@@ -198,12 +198,24 @@ def write_manifests() -> dict[str, int]:
             if "voice" in spec:
                 entry["voice"] = spec["voice"]
             table[sid] = entry
-        manifest = {"about": f"Generated {kind}: id -> Ogg Vorbis files in this folder (pick one at random when there are "
-                             f"several). See tools/tactics-audio/audio.py.",
+        external = load(k["external"]).get(k["group_key"], {}) if "external" in k else {}
+        for sid, entry in external.items():
+            if sid in table:
+                raise ValueError(f"{sid} is registered as both generated and external audio")
+            if not entry.get("files") or any(not (k["out"] / f).is_file() for f in entry["files"]):
+                raise ValueError(f"external audio {sid} has a missing file")
+            table[sid] = entry
+        table = dict(sorted(table.items()))
+        about = ("Generated sfx: id -> audio files in this folder (gameplay effects are Ogg Vorbis; nearby world-animal calls may be WAV). "
+                 "Pick one at random when there are several. See tools/tactics-audio/audio.py.") if external else (
+                 f"Generated {kind}: id -> Ogg Vorbis files in this folder (pick one at random when there are several). See tools/tactics-audio/audio.py.")
+        manifest = {"about": about,
                     "model": meta.get("model", ""),
                     k["group_key"]: table}
         k["out"].mkdir(parents=True, exist_ok=True)
-        (k["out"] / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+        path = k["out"] / "manifest.json"
+        if load(path) != manifest:
+            path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         counts[kind] = len(table)
     return counts
 
