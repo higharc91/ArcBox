@@ -25,7 +25,7 @@ public sealed record WalkHud(string Title, string Detail, string Leader, string?
     {
         var chapter = Numeral(explore.Chapter);
         return new WalkHud(chapter.Length > 0 ? $"Chapter {chapter} · {explore.Name}" : explore.Name,
-            $"Exploring · Party level {level.ToString(CultureInfo.InvariantCulture)}",
+            $"Exploring · Party level {level.ToString(CultureInfo.InvariantCulture)}" + (explore.Gold is { } gold ? $" · ◆ {gold} gold across player purses" : ""),
             explore.Leader ?? Nobody,
             explore.Leader is null || explore.Party.IsDefault ? null : explore.Party.FirstOrDefault(w => w.Leads)?.Sprite);
     }

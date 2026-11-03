@@ -27,7 +27,7 @@ public static class ThingsDemo
     public const string Region = "things_demo";
 
     private const int Width = 88;
-    private const int Height = 112;
+    private const int Height = 140;
     private const int FloorHeight = 1;
     private const int WallHeight = 4;
     private static readonly string[] Materials = ["grass/lush", "flagstone/grey", "rock/grey"];
@@ -37,18 +37,18 @@ public static class ThingsDemo
     public static readonly ImmutableArray<string> Kinds =
         ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone",
          "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "hidden_path",
-         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains"];
+         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "stall"];
 
     /// <summary>The first 21 kinds fill the first three galleries as they always have; these go where there's room.</summary>
     private static readonly ImmutableDictionary<string, (int Gallery, int Column, int Row)> Placed = new Dictionary<string, (int, int, int)>
     {
-        ["hidden_path"] = (2, 1, 3),
+        ["hidden_path"] = (2, 1, 3), ["stall"] = (4, 0, 0),
         ["tracks"] = (3, 0, 0), ["scratches"] = (3, 0, 1), ["disturbed_earth"] = (3, 0, 2), ["bloodstain"] = (3, 0, 3),
         ["draft"] = (3, 1, 0), ["carving"] = (3, 1, 1), ["rune"] = (3, 1, 2), ["remains"] = (3, 1, 3),
     }.ToImmutableDictionary(StringComparer.Ordinal);
 
     /// <summary>The galleries: the tile where each starts. Each is apart from the rest, so a shot of one shows none of another.</summary>
-    private static readonly Tile[] Galleries = [new(14, 22), new(12, 50), new(14, 74), new(14, 100)];
+    private static readonly Tile[] Galleries = [new(14, 22), new(12, 50), new(14, 74), new(14, 100), new(14, 126)];
 
     /// <summary>Kinds to a column, and columns to a gallery.</summary>
     private const int Rows = 4, Columns = 2;

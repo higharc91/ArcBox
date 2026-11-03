@@ -15,6 +15,7 @@ internal sealed record Loaded<T>(T Def, string Id, string? Replaces, string File
 
 /// <summary>A thing to interact with, and the region its file places it in.</summary>
 internal sealed record RegionThing(string Region, InteractableDef Def);
+internal sealed record RegionShop(string Region, ShopDef Def);
 
 /// <summary>
 /// Reads rules packs for <see cref="RulesPack.Load"/>: the manifests, the pack order, each listed file by its kind, the
@@ -40,7 +41,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables }
+    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -59,6 +60,7 @@ internal static class PackLoader
         public List<Loaded<EncounterDef>> Encounters { get; } = [];
         public List<Loaded<RegionDef>> Regions { get; } = [];
         public List<Loaded<RegionThing>> Things { get; } = [];
+        public List<Loaded<RegionShop>> Shops { get; } = [];
         public List<Loaded<AiProfileDef>> AiProfiles { get; } = [];
         public List<Loaded<InjuryDef>> Injuries { get; } = [];
         public List<Loaded<XpTable>> Xp { get; } = [];
@@ -131,6 +133,7 @@ internal static class PackLoader
         var encounters = Merge(content.Encounters, "encounter", v);
         var regions = Merge(content.Regions, "region", v);
         var things = Merge(content.Things, "interactable", v);
+        var shops = Merge(content.Shops, "shop", v);
         var aiProfiles = Merge(content.AiProfiles, "AI profile", v);
         var injuries = Merge(content.Injuries, "injury", v);
         var xp = Merge(content.Xp, "XP table", v);
@@ -155,6 +158,7 @@ internal static class PackLoader
         v.CheckEncounters(encounters.Values, battleMaps, Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal));
         v.CheckRegions(regions.Values, battleMaps, things.Values, injuries.Keys.ToHashSet(StringComparer.Ordinal));
 
+        v.CheckShops(shops.Values, regions.Values, battleMaps, things.Values, items.Values);
         if (v.Errors.Count > 0)
             throw new ContentException([.. v.Errors]);
 
@@ -177,6 +181,8 @@ internal static class PackLoader
                 xp.Values.SingleOrDefault()?.Def ?? XpTable.Default,
                 Index(regions.Values, r => r.Id, r => WorldRegion.From(r.Def), StringComparer.Ordinal),
                 content.Things.Where(t => things[t.Id] == t).GroupBy(t => t.Def.Region, StringComparer.Ordinal)
+                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
+                shops.Values.GroupBy(t => t.Def.Region, StringComparer.Ordinal)
                     .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
                 Environment: environments.Values.SingleOrDefault()?.Def, Warnings: [.. v.Warnings]));
     }
@@ -282,6 +288,7 @@ internal static class PackLoader
         ["maps", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Map,
         ["encounters", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Encounter,
         ["world", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Region,
+        ["shops", var shopName] when shopName.EndsWith(".json", StringComparison.Ordinal) => FileKind.Shops,
         ["interactables", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Interactables,
         _ => null,
     };
@@ -360,6 +367,11 @@ internal static class PackLoader
                 break;
             case FileKind.Region:
                 Add(c.Regions, v.Region(root, file, ""), d => d.Id, _ => null, file, "", v);
+                break;
+            case FileKind.Shops:
+                if (v.ShopsFile(root, file, "") is { } shops)
+                    for (var i = 0; i < shops.Shops.Length; i++)
+                        Add(c.Shops, new RegionShop(shops.Region, shops.Shops[i] with { SellRatio = shops.SellRatio }), t => t.Def.Id, _ => null, file, $"/shops/{i}", v);
                 break;
             case FileKind.Interactables:
                 if (v.ThingsFile(root, file, "") is { } list)

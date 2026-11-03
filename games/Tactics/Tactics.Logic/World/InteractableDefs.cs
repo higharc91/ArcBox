@@ -113,7 +113,8 @@ public sealed class HiddenDefJsonConverter : JsonConverter<HiddenDef>
 }
 
 /// <summary>An item found in a container or on the ground: <see cref="Count"/> of the rules pack's <see cref="Item"/>.</summary>
-public sealed record LootDef([property: JsonRequired] ItemId Item, int Count = 1);
+public sealed record LootDef(ItemId Item = default, int Count = 1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0);
 
 /// <summary>
 /// One thing to interact with (design §2.1). <see cref="Kind"/> names a kind of <see cref="InteractableKinds"/>, which gives everything

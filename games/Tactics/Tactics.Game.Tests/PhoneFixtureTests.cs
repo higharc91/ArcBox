@@ -18,9 +18,52 @@ public sealed class PhoneFixtureTests
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
+                return LegacyPack(Path.Combine(dir.FullName, "content", "tactics", "base"));
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
+
+    // Pin the pre-shop contract with a pack that has no shops. New shop fixtures use the real base pack.
+    private static RulesPack LegacyPack(string content)
+    {
+        var folder = Directory.CreateTempSubdirectory("tactics-legacy-contract-");
+        try
+        {
+            var source = Path.Combine(content, "rules");
+            var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(source, "manifest.json")))!.AsObject();
+            var files = manifest["files"]!.AsArray().Select(x => x!.GetValue<string>()).Where(x => !x.StartsWith("shops/", StringComparison.Ordinal)).ToArray();
+            manifest["files"] = new JsonArray(files.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
+            foreach (var file in files)
+            {
+                var path = Path.Combine(folder.FullName, file);
+                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+                File.Copy(Path.Combine(source, file), path);
+            }
+            File.WriteAllText(Path.Combine(folder.FullName, "manifest.json"), manifest.ToJsonString());
+            return RulesPack.Load([folder.FullName], ArtManifests.Load(content));
+        }
+        finally { folder.Delete(true); }
+    }
+
+    [Fact]
+    public void Shop_screens_match_their_fixtures()
+    {
+        var s = ShopTests.AtShop(200);
+        var screens = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["walk-with-gold"] = Node(s.Harness.PlayerView(0)) };
+        s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        screens["shop-open"] = Node(s.Harness.PlayerView(0));
+        screens["shop-sell"] = Node(s.Harness.PlayerView(1));
+        s.Send(0, "shopBuy", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 3, trade = "fixture-buy" });
+        screens["shop-sold-out"] = Node(s.Harness.PlayerView(0));
+        var poor = ShopTests.AtShop(0);
+        poor.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        screens["shop-poor"] = Node(poor.Harness.PlayerView(0));
+        var doc = poor.Game.Document with { Members = poor.Game.Document.Members.Remove(poor.Profiles[1]!.Value.Value) };
+        var spectator = new TacticsGameTests.Session(document: doc.ToJson());
+        spectator.Harness.Resume(spectator.Lease);
+        for (var i = 0; i < 4; i++) spectator.Harness.SetConnected(i, true);
+        screens["shop-spectator"] = Node(spectator.Harness.PlayerView(1));
+        Check(screens);
+    }
 
     private static string FixtureDir()
     {

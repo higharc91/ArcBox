@@ -162,7 +162,7 @@ public partial class Main : Control
             AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
             return;
         }
-        if (_args.WorldDemo is "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        if (_args.WorldDemo is "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
         {
             // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
             GD.Print("Things demo: no server connection");
@@ -171,7 +171,7 @@ public partial class Main : Control
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
             var tactics = _scene as Games.Tactics.TacticsScene;
             AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
-                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots));
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, shop: _args.WorldDemo == "shop"));
             return;
         }
         if (_args.WorldDemo is { } region)

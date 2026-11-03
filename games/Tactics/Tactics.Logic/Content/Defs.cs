@@ -376,7 +376,8 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
 /// </summary>
 public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
 
 /// <summary>
 /// A suit of armour (<c>armor.json</c>): its <see cref="Kind"/> caps the DEX bonus (light: none, medium: +2, heavy: DEX
@@ -384,7 +385,8 @@ public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
 /// character's <see cref="CharacterRecord.Shield"/> adds +2. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ArmorDef(string Id, string Name, ArmorKind Kind, int BaseAc,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
 
 /// <summary>
 /// A prop as written in a map file. <see cref="Cover"/> is <c>"none"</c>, <c>"half"</c> or <c>"three_quarters"</c>
@@ -457,7 +459,8 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value

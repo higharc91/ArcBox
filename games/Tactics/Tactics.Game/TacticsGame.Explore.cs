@@ -725,6 +725,8 @@ public sealed partial class TacticsGame
     /// <summary>Brings the document up to the party, without saving it.</summary>
     private void KeepWorld()
     {
+        if (_doc.Shops is { } shops && _region is { } shopRegion && shopRegion.Def.Chapter > shops.Chapter)
+            _doc = _doc with { Shops = shops with { Chapter = shopRegion.Def.Chapter } };
         if (!WorldChanged)
             return;
         _doc = _doc with

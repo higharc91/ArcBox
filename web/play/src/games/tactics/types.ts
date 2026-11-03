@@ -155,6 +155,7 @@ export interface WalkMember {
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  gold?: number;
   leader: boolean;
   leaderName: string | null;
   region: string | null;
@@ -201,6 +202,8 @@ export interface DialogueData {
 }
 
 export interface StoryOption {
+  can?: boolean;
+  needs?: string;
   id: string;
   label: string;
   /** The skill check picking it starts, if any. */

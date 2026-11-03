@@ -991,6 +991,29 @@
         "path"
       ],
       "layer": "ground"
+    },
+    "stall": {
+      "variants": {
+        "open": "stall_open.png",
+        "closed": "stall_closed.png"
+      },
+      "size": [
+        110,
+        111
+      ],
+      "anchor": [
+        38,
+        84
+      ],
+      "frames": 4,
+      "fps": 6.0,
+      "blocks": true,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "trade"
+      ]
     }
   },
   "notes": {

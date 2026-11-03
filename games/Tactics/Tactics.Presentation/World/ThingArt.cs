@@ -98,6 +98,19 @@ public sealed class ThingArt
             if (doc.RootElement.TryGetProperty("extras", out var extras))
                 art.AddExtras("pickups", extras);
         }
+        var town = Path.Combine(packRoot, "town", "manifest.json");
+        if (File.Exists(town))
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(town));
+            if (doc.RootElement.TryGetProperty("buildings", out var buildings) && buildings.TryGetProperty("stall", out var stall))
+            {
+                var size = stall.GetProperty("size");
+                var anchor = stall.GetProperty("anchor");
+                art._assets["town.stall"] = new Asset([.. stall.GetProperty("variants").EnumerateObject().Select(v => (v.Name, "town/" + v.Value.GetProperty("image").GetString()))],
+                    size[0].GetInt32(), size[1].GetInt32(), anchor[0].GetInt32(), anchor[1].GetInt32(),
+                    stall.GetProperty("frames").GetInt32(), stall.GetProperty("fps").GetDouble(), false, []);
+            }
+        }
         return art;
     }
 

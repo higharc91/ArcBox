@@ -877,7 +877,7 @@ public sealed class WalkingTests
     }
 
     /// <summary>The view without the region's things and their events: what walking itself costs a step.</summary>
-    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null };
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, Gold = null, Traders = null };
 
     [Fact]
     public void Ashen_fords_things_cost_the_explore_view_a_known_amount()

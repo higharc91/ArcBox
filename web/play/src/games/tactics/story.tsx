@@ -125,6 +125,7 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
       <span class="tx-letter" aria-hidden="true">{letter}</span>
       <span class="tx-opt-text">
         <b>“{option.label}”</b>
+        {option.needs && <small>{option.needs}</small>}
         {option.skill ? (
           <span class="tx-opt-check">
             <i aria-hidden="true" />
@@ -261,7 +262,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
           return (
             <li key={o.id}>
               {d.canChoose ? (
-                <button type="button" class={`tx-option${on ? " on" : ""}`} aria-pressed={o.id === mine} onClick={() => pick(o.id)}>
+                <button type="button" class={`tx-option${on ? " on" : ""}`} aria-pressed={o.id === mine} disabled={o.can === false} onClick={() => pick(o.id)}>
                   <OptionBody option={o} letter={LETTERS[i] ?? ""} tag={tag} />
                 </button>
               ) : (

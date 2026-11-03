@@ -58,6 +58,7 @@ public sealed partial class TacticsGame
 
     /// <summary>What the open question offers, in the node's order.</summary>
     private ImmutableArray<SceneOption> _offered = [];
+    private ImmutableArray<SceneOption> _shopOptions = [];
 
     /// <summary>When the open question closes, or null while it waits for a phone (nobody here can answer it). The TV's countdown.</summary>
     private DateTimeOffset? _closeAt;
@@ -294,6 +295,8 @@ public sealed partial class TacticsGame
     private void EnterNode(SceneDef scene, string id)
     {
         var node = scene.Node(id)!;
+        if (!Cursor!.Played.Contains(node.Id) && !CanPayGold(node.Gold)) { Note($"Needs {-(long)node.Gold} gold."); StageDone(); return; }
+        if (!Cursor!.Played.Contains(node.Id)) ChangePartyGold(node.Gold);
         AddFlags(node.Sets);
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
@@ -535,6 +538,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void ResumeStory()
     {
+        if (_doc.World?.Shop is not null) { ResumeShop(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
         if (c.Thing is { } thing)
@@ -604,6 +608,8 @@ public sealed partial class TacticsGame
     {
         var c = Cursor!;
         _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), c.Played.ToHashSet(StringComparer.Ordinal));
+        _shopOptions = _offered;
+        _offered = [.. _offered.Where(o => CanPayGold(o.Gold))];
         if (c.Checking is { } decided)
         {
             SetCursor(c with { Checking = null });
@@ -692,6 +698,7 @@ public sealed partial class TacticsGame
     private void CloseQuestion()
     {
         _ctx.CancelTimer(Timers.Vote);
+        _shopOptions = [];
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
         _span = null;
         _votes.Clear();
@@ -740,6 +747,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StoryPresenceChanged()
     {
+        if (_doc.World?.Shop is not null) return;
         if (!Questioning)
             return;
         if (!Voters().Any())
@@ -828,6 +836,7 @@ public sealed partial class TacticsGame
     private void Decide(SceneOption option)
     {
         var (scene, beat) = (CurrentScene()!, CursorBeat());
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(scene, CurrentNode()!); return; }
         if (option.Check is not null)
         {
             var offered = _offered;
@@ -840,6 +849,7 @@ public sealed partial class TacticsGame
             return;
         }
         CloseQuestion();
+        ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, beat));
         EnterNode(scene, SceneRun.Target(option));
     }
@@ -856,10 +866,12 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Roll(SceneOption option, string member)
     {
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(CurrentScene()!, CurrentNode()!); return; }
         var check = option.Check!;
         var bonus = SkillCheck.Bonus(_doc.Members[member].Character, check.Skill, Rules);
         var die = _ctx.Random.Next(1, 21);
         var result = SkillCheck.Roll(die, bonus, check.Dc);
+        ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, CursorBeat()));
         SetCursor(Cursor! with
         {
@@ -985,14 +997,25 @@ public sealed partial class TacticsGame
         => [.. (members ?? Party().Where(m => !m.Here).Select(m => m.Member)).Select(PlayerName)];
 
     /// <summary>What's on offer now: everything, or only the tied during a tie-break.</summary>
-    private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _offered;
+    private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _shopOptions.IsEmpty ? _offered : _shopOptions;
+
+    private object OptionPhone(SceneOption option)
+    {
+        var node = System.Text.Json.JsonSerializer.SerializeToNode(new { id = option.Id, label = option.Label, skill = option.Check?.Skill, dc = option.Check?.Dc }, ArcJson.Options)!.AsObject();
+        if (option.Gold < 0)
+        {
+            node["can"] = CanPayGold(option.Gold);
+            node["needs"] = $"needs {-(long)option.Gold} gold";
+        }
+        return node;
+    }
 
     private StoryAskView AskView()
     {
         var votes = LiveVotes().ToList();
         var of = PartyQuestion ? Voters().Select(p => p.Profile!.Value.Value).Union(votes.Select(v => v.Key)).Count() : 1;
         return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
-            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
+            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, !CanPayGold(o.Gold) ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
                 ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
                 : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))], _closeAt is null ? null : _span);
     }
@@ -1055,7 +1078,7 @@ public sealed partial class TacticsGame
             {
                 party = PartyQuestion,
                 canChoose = Decider() is { } decider ? decider == member : true,
-                options = OptionsShown().Select(o => new { id = o.Id, label = o.Label, skill = o.Check?.Skill, dc = o.Check?.Dc }),
+                options = OptionsShown().Select(OptionPhone),
                 mine = MineOf(member),
                 chosen = PartyChoice(),
                 tie = _telling == StoryStates.TieBreak,

@@ -102,7 +102,7 @@
       "at": [30, 83],
       "name": "reeve's chest",
       "lock": { "key": "af_reeves_key", "keyName": "reeve's key", "pick": 13, "force": 15 },
-      "loot": [{ "item": "potion_of_healing", "count": 1 }, { "item": "oil_flask", "count": 1 }]
+      "loot": [{ "item": "potion_of_healing", "count": 1 }, { "item": "oil_flask", "count": 1 }, { "gold": 60 }]
     },
     {
       "id": "af_dock_crate",
@@ -148,7 +148,7 @@
       "at": [92, 96],
       "name": "smugglers' cache",
       "hidden": 12,
-      "loot": [{ "item": "smoke_bomb", "count": 1 }]
+      "loot": [{ "item": "smoke_bomb", "count": 1 }, { "gold": 40 }]
     }
   ]
 }

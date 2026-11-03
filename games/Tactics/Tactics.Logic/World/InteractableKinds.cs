@@ -5,6 +5,8 @@ namespace Tactics.Logic;
 /// <summary>How a kind of thing behaves: which of the engine's state machines it runs (design §2.2).</summary>
 public enum InteractableFamily
 {
+    /// <summary>A shop counter.</summary>
+    Trade,
     /// <summary>Opens once and gives up its loot: chests, crates, barrels, sacks, hidden caches.</summary>
     Container,
     /// <summary>Stands in the way while closed: doors, gates, drawbridges, secret doors.</summary>
@@ -126,6 +128,7 @@ public static class InteractableKinds
     /// <summary>Every kind, by id.</summary>
     public static ImmutableSortedDictionary<string, InteractableKind> All { get; } = new[]
     {
+        new InteractableKind("stall", InteractableFamily.Trade, "stall", "interactables.stall", [Opened, Closed], true, Stand((Opened, "town.stall"), (Closed, "town.stall")), ["The stall is closed."]),
         Container("chest", "chest", true, "props.chest", "props.chest_open", "It's empty."),
         Container("crate", "crate", true, "props.crate", "props.crate", "Nothing but straw."),
         Container("barrel", "barrel", true, "props.barrel", "props.barrel", "Rainwater, and nothing else."),

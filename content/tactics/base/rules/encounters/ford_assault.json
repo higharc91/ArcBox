@@ -3,7 +3,7 @@
                { "unit": "goblin", "zone": "goblin_camp", "count": 3, "tag": "skarrow_clan" },
                { "unit": "goblin_archer", "zone": "ridge_spawn", "count": 2, "tag": "skarrow_clan" },
                { "unit": "goblin_ford_shaman", "at": [9, 7], "id": "ford_shaman", "tag": "skarrow_clan" } ],
-  "xp": 300, "loot": ["goblin_camp"], "itemLoot": [{ "item": "oil_flask", "count": 1 }],
+  "xp": 300, "gold": 120, "loot": ["goblin_camp"], "itemLoot": [{ "item": "oil_flask", "count": 1 }],
   "objectives": { "win": { "any": ["defeat:mother_skarrow", "defeat_all"] } },
   "triggers": [
     { "id": "skarrow_greeting", "when": { "round": 1 },

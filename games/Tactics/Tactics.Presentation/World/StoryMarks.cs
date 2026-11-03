@@ -56,7 +56,7 @@ public static class StoryMarks
     {
         var place = UnitPlace.On(terrain, marker.At);
         var figure = marker.Sprite is null ? null : UnitPlan.Figure($"marker:{marker.Beat}", marker.Sprite, place, art, pixels);
-        var emote = marker.Emote is { } name ? art.Emote(name) : null;
+        var emote = marker.Emote is { } name ? name == "shop" ? art.Emote("trader") ?? art.Emote("notice") ?? art.Emote("alert") : art.Emote(name) : null;
         // With nobody standing there, the "!" floats where a head would be, so it reads the same from the sofa.
         var head = figure?.Sprite ?? art.StandIn(UnitTone.Neutral);
         var feet = figure?.Feet ?? pixels?.Invoke(place.Feet, true) ?? place.Feet;

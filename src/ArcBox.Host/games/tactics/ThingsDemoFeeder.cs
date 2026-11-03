@@ -25,11 +25,11 @@ public partial class ThingsDemoFeeder : Node
     {
     }
 
-    public ThingsDemoFeeder(Action<JsonElement> send, Action<bool> captions, Screenshotter? shots, IReadOnlyList<ThingsDemoStep>? steps = null)
+    public ThingsDemoFeeder(Action<JsonElement> send, Action<bool> captions, Screenshotter? shots, IReadOnlyList<ThingsDemoStep>? steps = null, bool shop = false)
     {
         Name = "ThingsDemoFeeder";
         (_send, _captions, _shots) = (send, captions, shots);
-        _steps = steps ?? ThingsDemo.Steps();
+        _steps = steps ?? (shop ? ShopDemo.Steps() : ThingsDemo.Steps());
         GD.Print($"THINGS demo: {_steps.Count} views, {_steps.Sum(s => s.Shots.Length)} shots");
     }
 

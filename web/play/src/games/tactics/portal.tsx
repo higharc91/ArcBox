@@ -155,9 +155,9 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
       <h2 class="tx-title">Make your character</h2>
       {freeRemake ? (
         <p class="portal-banner" role="note">
-          This is your one free remake. Your XP, injuries and bag carry over, and after this the character is yours for good.
+          This is your one free remake. Your XP, injuries, gold and bag carry over, and after this the character is yours for good.
         </p>
-      ) : null}
+      ) : start ? <p class="tx-note">Your gold, bag and injuries carry over. Remaking does not refill starting supplies.</p> : null}
 
       <LookPreview race={race} cls={cls} color={color} title={`${raceName} ${clsName}`} />
 
