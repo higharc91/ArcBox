@@ -680,3 +680,85 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-shop-quantity button { min-width: 44px; min-height: 48px; }
 .tx-shop-quantity button:last-child { flex: 1; }
 .tx-shop-quantity output { min-width: 2ch; text-align: center; }
+
+/* Camp jobs and sponsored recovery retain the phone's existing type, details sheets and touch targets. */
+.tx-camp-jobs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; }
+.tx-camp-jobs button { display: flex; flex-direction: column; gap: .4rem; align-items: center; }
+.tx-camp-jobs [aria-pressed="true"] { outline: 2px solid var(--wf-gold); }
+.tx-job-disc { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--wf-gold); border-radius: 50%; color: var(--wf-gold); }
+.tx-services { display: grid; gap: 1rem; }
+.tx-rest-ready { color: var(--wf-gold); font-weight: 700; }
+
+/* Compact recovery: vitals first, injury details on tap. */
+.tx-recovery { position: relative; padding-top: 4px; }
+.tx-recovery > header { padding-right: 40px; margin-bottom: 4px; display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; }
+.tx-recovery > header h1 { font-size: 25px; line-height: 1.12; margin: 0; }
+.tx-recovery > header .tx-eyebrow { font-size: 10px; grid-column: 1 / -1; }
+.tx-recovery-purse { font-size: 13px; color: var(--wf-gold-hi); align-self: center; white-space: nowrap; }
+.tx-recovery-menu { position: absolute; z-index: 20; top: 0; right: 0; }
+.tx-recovery-menu > summary { cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; color: var(--wf-gold); }
+.tx-recovery-menu > summary::-webkit-details-marker { display: none; }
+.tx-recovery-menu .tx-walk-host { position: absolute; right: 0; width: 240px; padding: 10px; border: 1px solid var(--wf-edge); border-radius: 10px; background: #111326; box-shadow: 0 8px 24px #000a; }
+.tx-recovery-menu .tx-walk-host > span { display: none; }
+.tx-recovery-menu .tx-walk-host .tx-btn { font-size: 14px; }
+.tx-recovery-section, .tx-recovery-service-line { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin: 12px 0 8px; font-size: 12px; color: var(--wf-muted); }
+.tx-recovery-service-line { margin-top: 0; font-size: 14px; }
+.tx-recovery-service-line b { color: var(--wf-gold); white-space: nowrap; }
+.tx-recovery-section small, .tx-recovery-section .tx-link { font-size: 11px; }
+.tx-recovery-party { display: grid; gap: 8px; }
+.tx-recovery-card { display: flex; align-items: flex-start; gap: 10px; padding: 9px; border: 1px solid #d4c29622; border-radius: 10px; background: linear-gradient(120deg, #ffffff07, #07091255); }
+.tx-recovery-card.you { border-color: #e6bd5c66; }
+.tx-recovery-card-main { flex: 1; min-width: 0; }
+.tx-recovery-name { display: flex; gap: 6px; align-items: center; min-height: 20px; margin-bottom: 5px; }
+.tx-recovery-name > strong { font-size: 15px; overflow: hidden; text-overflow: ellipsis; }
+.tx-recovery-name > span { font-size: 10px; color: var(--wf-muted); margin-left: auto; white-space: nowrap; }
+.tx-recovery-meter > span { display: flex; justify-content: space-between; gap: 5px; font-size: 10px; line-height: 1.2; margin-bottom: 3px; color: #c4c7c9; }
+.tx-recovery-meter b { font-weight: 500; color: #ecefe7; }
+.tx-recovery-meter > div { height: 6px; background: #0008; border-radius: 3px; overflow: hidden; }
+.tx-recovery-meter i { display: block; height: 100%; width: var(--fill); background: linear-gradient(#87d59b, #367653); border-radius: inherit; }
+.tx-recovery-resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 7px; margin-top: 5px; }
+.tx-recovery-meter.resource > div { height: 4px; }
+.tx-recovery-meter.resource i { background: linear-gradient(#83aee0, #506ea8); }
+.tx-recovery-effects { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 7px; }
+.tx-injury-button { display: grid; place-items: center; padding: 3px; min-width: 40px; min-height: 40px; background: #111326; border: 1px solid #b06973; border-radius: 5px; cursor: pointer; }
+.tx-injury-button.spirit { border-color: #a28bca; }
+.tx-injury-button.rest { border-color: #9f987f; }
+.tx-injury-button:focus-visible { outline: 2px solid var(--wf-gold); outline-offset: 2px; }
+.tx-injury-icon, .tx-injury-icon img { display: block; width: 32px; height: 32px; image-rendering: pixelated; }
+.tx-injury-icon > span { display: grid; place-items: center; height: 100%; color: #c290a2; }
+.tx-recovery-fed { display: grid; place-items: center; width: 32px; height: 36px; color: var(--wf-gold); font-size: 24px; }
+.tx-recovery-fed .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.tx-recovery-book { border: 1px solid var(--wf-edge); border-radius: 5px; padding: 5px 7px; min-height: 36px; color: var(--wf-gold-hi); background: #e6bd5c15; font: 600 12px var(--wf-sans); white-space: nowrap; cursor: pointer; font-size: 11px; }
+.tx-recovery-book:disabled { opacity: .45; cursor: default; }
+.tx-recovery-book.booked { color: #a4d8ac; border-color: #a4d8ac66; opacity: 1; }
+.tx-recovery-help { margin: 14px 0; font-size: 12px; color: var(--wf-muted); }
+.tx-recovery-help summary { cursor: pointer; }
+.tx-recovery-help p { font-size: 13px; line-height: 1.4; }
+.tx-recovery-propose { width: 100%; margin: 5px 0; font-size: 15px; min-height: 44px; }
+.tx-recovery.tx-camp .tx-camp-jobs { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; }
+.tx-recovery .tx-camp-jobs .tx-btn { font-size: 12px; padding: 8px 2px; gap: 5px; min-height: 62px; border-radius: 7px; }
+.tx-recovery .tx-job-disc { width: 23px; height: 23px; font-size: 12px; }
+.tx-recovery > .tx-note, .tx-recovery > .tx-note p { font-size: 12px; margin: 8px 0; }
+.tx-recovery-continue { width: 100%; margin-top: 10px; font-size: 14px; }
+.tx-recovery-result { font-size: 14px; color: var(--wf-muted); margin: 0 0 14px; }
+.tx-recovery-roll .tx-check { padding: 0; margin-bottom: 14px; }
+.tx-recovery-roll .tx-check-skill { font-size: 22px; }
+.tx-recovery-roll .tx-check-for { font-size: 13px; }
+.tx-recovery-roll .tx-check-head { margin-bottom: 8px; }
+.tx.tx-recovery { gap: 8px; }
+.tx-shop.tx-recovery { box-sizing: border-box; width: 100%; max-width: 42rem; margin: 0 auto; padding: 4px var(--gutter) 16px; }
+.tx-recovery-identity { flex: 1; min-width: 0; }
+.tx-recovery-identity strong { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tx-recovery-identity small { display: block; font-size: 10px; color: var(--wf-muted); }
+.tx-recovery-name .tx-recovery-effects { flex: none; max-width: 146px; margin-top: 0; gap: 3px; }
+.tx .tx-injury-button { min-width: 36px; min-height: 36px; padding: 1px; border: 1px solid #b06973; border-radius: 4px; background: #111326; }
+.tx .tx-injury-button.spirit { border-color: #a28bca; }
+.tx .tx-injury-button.rest { border-color: #9f987f; }
+.tx-recovery-section { margin-top: 8px; }
+.tx-recovery-roll-party { font-size: 12px; color: var(--wf-muted); }
+.tx-recovery-roll-party > summary { cursor: pointer; padding: 10px 0; }
+@media (max-width: 340px) {
+  .tx-recovery-card { padding: 8px; gap: 7px; }
+  .tx-recovery-card .tx-portrait { display: none; }
+  .tx-recovery-section { font-size: 11px; }
+}

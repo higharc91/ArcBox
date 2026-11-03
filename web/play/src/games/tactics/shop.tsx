@@ -1,10 +1,12 @@
 import { useEffect, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
+import { Services, type ServiceData } from "./services";
 import { Sheet } from "./details";
+import { RecoveryMenu } from "./recovery";
 import { HostMenu } from "./walk";
 
 interface ShopRow { item: string; name: string; price: number; count: number; can?: boolean; member?: string; detail?: string }
-interface ShopData {
+interface ShopData extends ServiceData {
   shop: { id: string; name: string; keeper: string; greeting: string };
   gold: number; items: ShopRow[]; sell: ShopRow[];
   you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; feed: string[];
@@ -28,6 +30,8 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
   const [pending, setPending] = useState(false);
   const [detail, setDetail] = useState<ShopRow | null>(null);
   useEffect(() => { setPending(false); setCounts({}); }, [viewId, data]);
+  const recovery = !!d.services?.length;
+  const inn = d.services?.some(s => s.kind === "room");
   const rows = tab === "buy" ? d.items : d.sell;
   const trade = (row: ShopRow, count: number) => {
     if (pending) return;
@@ -37,14 +41,15 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
       ...(tab === "sell" ? { member: row.member } : {}),
     });
   };
-  return <section class="tx tx-shop">
-    {d.vip && <HostMenu canBattle={false} keep="Keep trading" send={send} />}
-    <header><span class="tx-eyebrow">Trader · {d.shop.keeper}</span><h1>{d.shop.name}</h1>
-      <span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></header>
-    <div class="tx-shop-tabs" role="tablist" aria-label="Trade">
+  return <section class={`tx tx-shop${recovery ? " tx-recovery" : ""}`}>
+    {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" send={send} /> : <HostMenu canBattle={false} keep="Keep trading" send={send} />)}
+    <header><span class="tx-eyebrow">{recovery ? inn ? "Inn" : "Temple" : `Trader · ${d.shop.keeper}`}</span><h1>{d.shop.name}</h1>
+      {recovery ? <strong class="tx-recovery-purse" aria-label="Your purse" aria-live="polite">{d.gold} gold</strong> : <><span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></>}</header>
+    {(!d.services?.length || d.items.length > 0) && <div class="tx-shop-tabs" role="tablist" aria-label="Trade">
       <button class="tx-btn" role="tab" aria-selected={tab === "buy"} onClick={() => setTab("buy")}>Buy</button>
       <button class="tx-btn" role="tab" aria-selected={tab === "sell"} onClick={() => setTab("sell")}>Sell</button>
-    </div>
+    </div>}
+    {d.services?.length ? <Services data={d} send={send} viewId={viewId} makeId={tradeId} /> : null}
     {!d.you.canBuy && <p class="tx-note">Choose a character to trade.</p>}
     <ul class="tx-shop-items" aria-label={tab === "buy" ? "Shop stock" : "Your bag"}>
       {rows.map(row => {
@@ -65,9 +70,9 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
         </li>;
       })}
     </ul>
-    {rows.length === 0 && <p class="tx-note">No items to sell here.</p>}
-    <div class="tx-note" role="status">{d.feed.map((line, i) => <p key={i}>{line}</p>)}</div>
-    {d.leader ? <button class="tx-btn ghost" disabled={pending} onClick={() => send("shopLeave", { shop: d.shop.id })}>Leave shop</button> : <p class="tx-note">The leader closes the shop.</p>}
+    {rows.length === 0 && !d.services?.length && <p class="tx-note">No items to sell here.</p>}
+    <div class="tx-note" role="status">{(recovery ? d.feed.slice(-1) : d.feed).map((line, i) => <p key={i}>{line}</p>)}</div>
+    {d.roomsOpen ? <p class="tx-note">Dawn follows shortly.</p> : d.leader ? <button class="tx-btn ghost" disabled={pending} onClick={() => send("shopLeave", { shop: d.shop.id })}>Leave shop</button> : <p class="tx-note">The leader closes the shop.</p>}
     {detail && <Sheet title={detail.name} eyebrow="Item details" onClose={() => setDetail(null)}><p>{detail.detail ?? detail.name}</p><p>{detail.price} gold each</p></Sheet>}
   </section>;
 }

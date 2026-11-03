@@ -1,0 +1,32 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": true,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "rest",
+        "label": "Rest",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "later",
+        "label": "Not yet",
+        "skill": null,
+        "dc": null
+      }
+    ],
+    "mine": null,
+    "chosen": null,
+    "tie": false,
+    "decider": null,
+    "away": [],
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",
+  "header": null
+}
