@@ -101,6 +101,14 @@ The whole TV view in Ashen Ford is about 4.3 KB, against one packet's 1,420 byte
 
 No game code changed: the TV's scenes still get whole views.
 
+**On the real TV** (Linux, Xvfb and lavapipe, `ARCBOX_SHOTS=0`):
+- `ARCBOX_WALK=1`: OK (restart, reconnect and dropped phone).
+- `ARCBOX_RESTART=1`: OK; 5 patches applied.
+- `ARCBOX_RECONNECT=1`: OK.
+- `ARCBOX_CHAPTER=1`: OK; 580 patches applied.
+
+None of the runs asked for a whole view again. Battles rarely patch: their views have no id-keyed arrays, so the whole view is usually as small, and it's sent whole.
+
 ### OW-14 · Fauna draws over props · `todo`
 Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or keep them clear.
 
