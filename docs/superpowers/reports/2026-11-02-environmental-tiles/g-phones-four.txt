@@ -1,0 +1,275 @@
+03:53:49 Ana joined NVXM
+03:53:49 Bo joined NVXM
+03:53:49 Cy joined NVXM
+03:53:49 Dee joined NVXM
+03:53:50 Game on
+03:53:56 Ana picks fighter
+03:54:02 Bo picks cleric
+03:54:08 Cy picks rogue
+03:54:14 Dee picks wizard
+03:54:19 CHAPTER 1: ch1_mayors_request at 33,59
+03:54:27 CHAPTER Dee walks 5 steps from 26,58 to ch1_mayors_request
+03:54:29 CHAPTER Dee taps Talk: ch1_mayors_request
+03:54:29 CHAPTER ch1_mayors_request begins
+03:54:29 LINE ch1_mayor_open_1 narrator
+03:54:32 Dee skips line ch1_mayor_open_1
+03:54:32 LINE ch1_mayor_open_2 narrator
+03:54:34 Dee skips line ch1_mayor_open_2
+03:54:35 LINE ch1_mayor_open_3 Pip Ashdown
+03:54:37 Dee skips line ch1_mayor_open_3
+03:54:37 LINE ch1_mayor_open_4 Bree Tallow
+03:54:40 Dee skips line ch1_mayor_open_4
+03:54:40 LINE ch1_mayor_halden_1 Halden Varrow
+03:54:43 Dee skips line ch1_mayor_halden_1
+03:54:43 LINE ch1_mayor_halden_2 Halden Varrow
+03:54:45 Dee skips line ch1_mayor_halden_2
+03:54:46 LINE ch1_mayor_halden_3 Dagna Holt
+03:54:48 Dee skips line ch1_mayor_halden_3
+03:54:48 Dee votes goblins
+03:54:57 LINE ch1_mayor_goblins_1 Halden Varrow
+03:54:59 Dee skips line ch1_mayor_goblins_1
+03:54:59 LINE ch1_mayor_goblins_2 Dagna Holt
+03:55:02 Dee skips line ch1_mayor_goblins_2
+03:55:02 LINE ch1_mayor_goblins_3 Bree Tallow
+03:55:05 Dee skips line ch1_mayor_goblins_3
+03:55:05 LINE ch1_mayor_goblins_4 Halden Varrow
+03:55:07 LINE ch1_mayor_close_1 narrator
+03:55:07 Dee skips line ch1_mayor_close_1
+03:55:08 LINE ch1_mayor_close_2 Pip Ashdown
+03:55:10 Dee skips line ch1_mayor_close_2
+03:55:10 LINE ch1_mayor_close_3 The Hooded Stranger
+03:55:13 Dee skips line ch1_mayor_close_3
+03:55:13 LINE ch1_mayor_close_4 Halden Varrow
+03:55:16 Dee skips line ch1_mayor_close_4
+03:55:16 CHAPTER ch1_mayors_request is over
+03:55:18 CHAPTER 2: ch1_the_ford_choice at 94,59
+03:55:24 CHAPTER Dee walks 109 steps from 31,57 to ch1_the_ford_choice
+03:56:05 CHAPTER Dee taps Talk: ch1_the_ford_choice
+03:56:05 CHAPTER ch1_the_ford_choice begins
+03:56:05 LINE ch1_ford_open_1 narrator
+03:56:07 Dee skips line ch1_ford_open_1
+03:56:08 LINE ch1_ford_open_2 narrator
+03:56:10 Dee skips line ch1_ford_open_2
+03:56:11 LINE ch1_ford_open_3 Halden Varrow
+03:56:13 Dee skips line ch1_ford_open_3
+03:56:13 LINE ch1_ford_open_4 Dagna Holt
+03:56:16 Dee skips line ch1_ford_open_4
+03:56:16 Dee votes why
+03:56:22 LINE ch1_ford_why_1 Halden Varrow
+03:56:24 Dee skips line ch1_ford_why_1
+03:56:24 Dee votes insight
+03:56:30 Ana picks Bo to roll insight
+03:56:30 Bo picks Bo to roll insight
+03:56:30 Cy picks Bo to roll insight
+03:56:30 Dee picks Bo to roll insight
+03:56:37 LINE ch1_ford_why_pass_1 narrator
+03:56:40 Dee skips line ch1_ford_why_pass_1
+03:56:40 LINE ch1_ford_why_pass_2 Halden Varrow
+03:56:42 Dee skips line ch1_ford_why_pass_2
+03:56:43 LINE ch1_ford_cases_1 Dagna Holt
+03:56:45 Dee skips line ch1_ford_cases_1
+03:56:45 LINE ch1_ford_cases_2 Dagna Holt
+03:56:48 Dee skips line ch1_ford_cases_2
+03:56:48 LINE ch1_ford_cases_3 Bree Tallow
+03:56:51 Dee skips line ch1_ford_cases_3
+03:56:51 LINE ch1_ford_cases_4 Bree Tallow
+03:56:53 Dee skips line ch1_ford_cases_4
+03:56:54 LINE ch1_ford_cases_5 Halden Varrow
+03:56:56 Dee skips line ch1_ford_cases_5
+03:56:56 LINE ch1_ford_vote_1 Halden Varrow
+03:56:59 Dee skips line ch1_ford_vote_1
+03:56:59 Ana votes force
+03:56:59 Bo votes force
+03:56:59 Cy votes force
+03:56:59 Dee votes force
+03:57:03 LINE ch1_ford_force_1 Dagna Holt
+03:57:05 Dee skips line ch1_ford_force_1
+03:57:06 LINE ch1_ford_force_2 Bree Tallow
+03:57:08 Dee skips line ch1_ford_force_2
+03:57:08 LINE ch1_ford_force_3 Halden Varrow
+03:57:11 Dee skips line ch1_ford_force_3
+03:57:13 LINE ch1_dawn_open_1 narrator
+03:57:16 Dee skips line ch1_dawn_open_1
+03:57:16 LINE ch1_dawn_open_2 Mother Skarrow
+03:57:18 Dee skips line ch1_dawn_open_2
+03:57:19 LINE ch1_dawn_open_3 Mother Skarrow
+03:57:21 Dee skips line ch1_dawn_open_3
+03:57:21 LINE ch1_dawn_open_4 Dagna Holt
+03:57:24 Dee skips line ch1_dawn_open_4
+03:57:24 Cy ends the turn
+03:57:41 Dee ends the turn
+03:57:41 Bo ends the turn
+03:57:44 Ana ends the turn
+03:57:45 Cy ends the turn
+03:57:55 Dee uses Magic Missile on Goblin
+03:57:55 Dee ends the turn
+03:57:55 Bo uses Guiding Bolt on Goblin
+03:57:55 Bo ends the turn
+03:58:00 Ana moves
+03:58:00 Ana ends the turn
+03:58:00 Cy moves
+03:58:01 Cy ends the turn
+03:58:15 Dee uses Potion of Healing on Dee
+03:58:15 Dee moves
+03:58:16 Dee uses Magic Missile on Mother Skarrow
+03:58:16 Dee ends the turn
+03:58:16 Bo uses Cure Wounds on Bo
+03:58:16 Bo ends the turn
+03:58:20 Ana moves back
+03:58:20 Ana ends the turn
+03:58:20 Cy moves back
+03:58:20 Cy ends the turn
+03:58:33 Dee uses Magic Missile on Mother Skarrow
+03:58:33 Dee ends the turn
+03:58:34 Bo uses Toll the Dead on Goblin
+03:58:34 Bo ends the turn
+03:58:38 Ana moves
+03:58:38 Ana ends the turn
+03:58:39 Cy uses Potion of Healing on Cy
+03:58:39 Cy moves
+03:58:39 Cy ends the turn
+03:58:55 Bo uses Healing Word on Dee
+03:58:55 Bo uses Toll the Dead on Goblin
+03:58:56 Bo ends the turn
+03:58:59 Ana uses Potion of Healing on Ana
+03:58:59 Ana moves
+03:58:59 Ana uses Trip Attack on Goblin
+03:58:59 Ana ends the turn
+03:59:00 Cy moves
+03:59:00 Cy uses Attack on Goblin
+03:59:00 Cy ends the turn
+03:59:12 Bo uses Healing Word on Dee
+03:59:13 Bo moves
+03:59:13 Bo uses Toll the Dead on Goblin
+03:59:13 Bo ends the turn
+03:59:17 Ana moves
+03:59:17 Ana uses Second Wind
+03:59:17 Ana ends the turn
+03:59:18 Cy moves
+03:59:30 Dee uses Magic Missile on Mother Skarrow
+03:59:30 Dee ends the turn
+03:59:31 Bo uses Cure Wounds on Bo
+03:59:31 Bo ends the turn
+03:59:35 Ana moves
+03:59:35 Ana uses Attack on Goblin
+03:59:36 Ana ends the turn
+03:59:50 Bo uses Sacred Flame on Skarrow Stormcaller
+03:59:50 Bo ends the turn
+04:00:02 Bo uses Sacred Flame on Goblin
+04:00:02 Bo ends the turn
+04:00:10 Bo uses Sacred Flame on Skarrow Stormcaller
+04:00:10 Bo ends the turn
+04:00:18 Bo uses Potion of Healing on Bo
+04:00:18 Bo uses Sacred Flame on Skarrow Stormcaller
+04:00:18 Bo ends the turn
+04:00:25 Bo uses Sacred Flame on Skarrow Stormcaller
+04:00:25 Bo ends the turn
+04:00:33 Bo uses Sacred Flame on Skarrow Stormcaller
+04:00:33 Bo ends the turn
+04:00:49 Lost at Storming the Ford: Ana +0 XP, Bo +0 XP, Cy +0 XP, Dee +0 XP
+04:00:49 CHAPTER ch1_the_ford_choice is over
+04:00:51 CHAPTER 3: ch1_ford_assault at 96,63
+04:00:56 CHAPTER Dee walks 113 steps from 31,57 to ch1_ford_assault
+04:01:38 CHAPTER Dee taps Begin: ch1_ford_assault
+04:01:38 CHAPTER ch1_ford_assault begins
+04:01:38 Cy ends the turn
+04:01:52 Dee ends the turn
+04:01:53 Bo ends the turn
+04:01:55 Ana ends the turn
+04:01:56 Cy ends the turn
+04:02:03 Dee uses Magic Missile on Goblin
+04:02:04 Dee ends the turn
+04:02:04 Bo uses Toll the Dead on Goblin
+04:02:04 Bo ends the turn
+04:02:08 Ana moves
+04:02:09 Ana ends the turn
+04:02:09 Cy moves
+04:02:09 Cy ends the turn
+04:02:22 Dee uses Magic Missile on Goblin
+04:02:22 Dee ends the turn
+04:02:27 Ana moves
+04:02:27 Ana ends the turn
+04:02:41 Ana uses Second Wind
+04:02:41 Ana uses Precision Attack on Goblin
+04:02:42 Ana ends the turn
+04:02:54 Ana uses Second Wind
+04:02:54 Ana uses Trip Attack on Goblin
+04:02:54 Ana ends the turn
+04:03:06 Lost at Storming the Ford: Ana +0 XP, Bo +0 XP, Cy +0 XP, Dee +0 XP
+04:03:07 CHAPTER ch1_ford_assault is over
+04:03:09 CHAPTER 4: ch1_ford_assault at 96,63
+04:03:14 CHAPTER Dee walks 113 steps from 31,57 to ch1_ford_assault
+04:03:55 CHAPTER Dee taps Begin: ch1_ford_assault
+04:03:56 CHAPTER ch1_ford_assault begins
+04:03:56 Cy ends the turn
+04:04:10 Dee ends the turn
+04:04:10 Bo ends the turn
+04:04:13 Ana ends the turn
+04:04:13 Cy ends the turn
+04:04:21 Dee uses Magic Missile on Goblin
+04:04:21 Dee ends the turn
+04:04:21 Bo uses Toll the Dead on Goblin
+04:04:22 Bo ends the turn
+04:04:25 Ana moves
+04:04:25 Ana ends the turn
+04:04:26 Cy moves
+04:04:26 Cy ends the turn
+04:04:37 Dee uses Magic Missile on Goblin
+04:04:38 Dee ends the turn
+04:04:38 Bo uses Guiding Bolt on Mother Skarrow
+04:04:38 Bo ends the turn
+04:04:43 Ana moves back
+04:04:43 Ana ends the turn
+04:04:43 Cy moves back
+04:04:44 Cy ends the turn
+04:04:55 Bo uses Cure Wounds on Dee
+04:04:56 Bo uses Healing Word on Bo
+04:04:56 Bo ends the turn
+04:04:59 Ana moves
+04:05:00 Ana ends the turn
+04:05:00 Cy moves
+04:05:00 Cy ends the turn
+04:05:13 Dee uses Magic Missile on Mother Skarrow
+04:05:13 Dee ends the turn
+04:05:14 Bo uses Healing Word on Cy
+04:05:14 Bo uses Cure Wounds on Bo
+04:05:14 Bo ends the turn
+04:05:16 Ana moves
+04:05:17 Ana ends the turn
+04:05:17 Cy uses Attack on Goblin
+04:05:17 Cy ends the turn
+04:05:32 Dee uses Magic Missile on Mother Skarrow
+04:05:32 Dee ends the turn
+04:05:32 Bo uses Toll the Dead on Goblin
+04:05:32 Bo ends the turn
+04:05:35 Ana moves
+04:05:35 Ana ends the turn
+04:05:51 Dee uses Magic Missile on Goblin
+04:05:51 Dee ends the turn
+04:05:51 Bo uses Sacred Flame on Mother Skarrow
+04:05:52 Bo ends the turn
+04:06:06 Dee uses Fire Bolt on Mother Skarrow
+04:06:06 Dee ends the turn
+04:06:06 Bo uses Toll the Dead on Goblin
+04:06:07 Bo ends the turn
+04:06:20 Bo uses Toll the Dead on Goblin
+04:06:20 Bo ends the turn
+04:06:36 Lost at Storming the Ford: Ana +0 XP, Bo +0 XP, Cy +0 XP, Dee +0 XP
+04:06:37 CHAPTER ch1_ford_assault is over
+04:06:39 CHAPTER 5: ch1_ford_assault at 96,63
+04:06:44 CHAPTER Dee walks 113 steps from 31,57 to ch1_ford_assault
+04:07:26 CHAPTER Dee taps Begin: ch1_ford_assault
+04:07:26 CHAPTER ch1_ford_assault begins
+04:07:26 Cy ends the turn
+04:07:40 Dee ends the turn
+04:07:40 Bo ends the turn
+04:07:43 Ana ends the turn
+04:07:43 Cy ends the turn
+04:07:51 Dee uses Magic Missile on Goblin
+04:07:51 Dee ends the turn
+04:07:52 Bo uses Guiding Bolt on Goblin
+04:07:52 Bo ends the turn
+04:07:55 Ana moves
+04:07:56 Ana ends the turn
+04:07:56 Cy moves
+04:07:56 Cy ends the turn

@@ -1,0 +1,7 @@
+xUnit.net v3 In-Process Runner v4.0.2+0c7aa4991f (64-bit .NET 10.0.14)
+  Discovering: Tactics.Game.Tests
+  Discovered:  Tactics.Game.Tests
+  Starting:    Tactics.Game.Tests
+  Finished:    Tactics.Game.Tests (ID = '34f841c0963aa68329c551e6401ecd70f64805e48d74519a5378ef50892ca75f')
+=== TEST EXECUTION SUMMARY ===
+   Tactics.Game.Tests  Total: 7, Errors: 0, Failed: 0, Skipped: 0, Not Run: 0, Time: 10.129s
