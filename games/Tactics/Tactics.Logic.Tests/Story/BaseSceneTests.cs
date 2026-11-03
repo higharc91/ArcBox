@@ -23,7 +23,8 @@ public sealed class BaseSceneTests
         Assert.Equal(13, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Select(ChapterOf).Distinct());
-        Assert.Equal(70, Book.Scenes.Length);
+        Assert.Equal(70, Book.Scenes.Count(s => !s.Camp));
+        Assert.Single(Book.Scenes.Where(s => s.Camp));
     }
 
     [Fact]
@@ -31,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(829, lines.Count);
+        Assert.Equal(837, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
@@ -51,14 +52,14 @@ public sealed class BaseSceneTests
         Assert.Empty(twice);
     }
 
-    /// <summary>Every line in every chapter has its own clip in the audio manifest, and the clip reads: no line falls back to a timer.</summary>
+    /// <summary>Every main-story line has its own clip; camp reflections use captions until voiced. Each clip in the audio manifest, and the clip reads: no line falls back to a timer.</summary>
     [Fact]
     public void Every_line_has_a_clip_length()
     {
         using var manifest = JsonDocument.Parse(File.ReadAllBytes(Lore("audio", "manifest.json")));
         var listed = manifest.RootElement.GetProperty("lines");
         var missing = new List<string>();
-        foreach (var line in Book.Scenes.SelectMany(s => s.Lines))
+        foreach (var line in Book.Scenes.Where(s => !s.Camp).SelectMany(s => s.Lines))
         {
             if (!listed.TryGetProperty(line.Id, out var clip) || !clip.TryGetProperty("main", out var file) || !File.Exists(Lore("audio", file.GetString()!)))
                 missing.Add($"{line.Id}: no clip in the manifest");
@@ -164,7 +165,7 @@ public sealed class BaseSceneTests
     public void Scenes_set_only_flags_the_arcs_set()
     {
         var arcs = Book.Arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))).ToHashSet();
-        var invented = Book.Scenes.SelectMany(s => s.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets)))).Where(f => !arcs.Contains(f)).Distinct();
+        var invented = Book.Scenes.Where(s => !s.Camp).SelectMany(s => s.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets)))).Where(f => !arcs.Contains(f)).Distinct();
         Assert.Empty(invented);
     }
 

@@ -40,7 +40,7 @@ public sealed class StoryTrackTests
     [Fact]
     public void Every_chapter_1_line_finds_its_clip()
     {
-        var lines = AllLines().Where(l => l.Scene.Id.StartsWith("ch1_", StringComparison.Ordinal)).Select(l => l.Line).ToArray();
+        var lines = AllLines().Where(l => !l.Scene.Camp).Where(l => l.Scene.Id.StartsWith("ch1_", StringComparison.Ordinal)).Select(l => l.Line).ToArray();
 
         Assert.Equal(208, lines.Length);       // when this moves, check the new lines were rendered
         Assert.All(lines, line =>
@@ -53,7 +53,22 @@ public sealed class StoryTrackTests
 
     [Fact]
     public void Every_line_of_every_chapter_finds_its_clip()
-        => Assert.All(AllLines(), l => Assert.NotNull(Clips.ForLine(l.Line.Id)));
+        => Assert.All(AllLines().Where(l => !l.Scene.Camp), l => Assert.NotNull(Clips.ForLine(l.Line.Id)));
+
+    [Fact]
+    public void Camp_reflections_use_existing_portraits_and_caption_fallback_without_new_audio()
+    {
+        var lines = AllLines().Where(l => l.Scene.Camp).ToArray();
+        Assert.Equal(8, lines.Length);
+        foreach (var (_, line) in lines)
+        {
+            Assert.Null(Clips.ForLine(line.Id));
+            var track = Running();
+            var tick = track.Receive(Showing(2, LineOf(line)), T0);
+            Assert.Null(tick.Say);
+            Assert.Equal(line.Id, tick.Screen!.Caption!.Line);
+        }
+    }
 
     [Fact]
     public void A_bark_isnt_a_scene_line_but_has_its_own_clip()
@@ -485,7 +500,8 @@ public sealed class StoryTrackTests
             var random = new Random(seed);
             var feed = ServerStory(random, lines);
             var join = random.Next(feed.Count);
-            var track = Track(random.Next(4) == 0 ? SpeechFallback.Speech : SpeechFallback.Captions);
+            var fallback = random.Next(4) == 0 ? SpeechFallback.Speech : SpeechFallback.Captions;
+            var track = Track(fallback);
             var heard = new HashSet<(string?, string)>();
             for (var i = 0; i + 1 < feed.Count; i++)
                 if (random.Next(12) == 0)
@@ -502,6 +518,12 @@ public sealed class StoryTrackTests
                 }
                 if (watched && view is { Seq: 1, State: States.Lines, Line: { } first })
                 {
+                    if (Clips.ForLine(first.Id) is null && fallback == SpeechFallback.Captions)
+                    {
+                        Assert.Null(tick.Say);
+                        Assert.Equal(first.Id, tick.Screen!.Caption!.Line);
+                        continue;
+                    }
                     Assert.True(tick.Say?.Line == first.Id, $"seed {seed}: the walk-up's first line went unsaid");
                     firstLinesSaid++;
                 }

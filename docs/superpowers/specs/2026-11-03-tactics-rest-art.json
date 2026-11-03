@@ -1,0 +1,369 @@
+{
+  "notes": "Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips. Per-set manifest fragments and prompts only. No art or audio generation. Lit fire animation may be delivered as a separate 6-frame transition strip while static states remain manifest-compatible.",
+  "sets": {
+    "interactables": {
+      "props": {
+        "campfire": {
+          "variants": {
+            "unlit": "campfire_unlit.png",
+            "lit": "campfire_lit.png"
+          },
+          "size": [
+            28,
+            30
+          ],
+          "anchor": [
+            14,
+            27
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": true,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "interactable",
+            "rest"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "interactables.campfire.unlit": {
+            "prompt": "A ring of stones and split logs, cold coals. 28x30. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "props.campfire"
+          },
+          "interactables.campfire.lit": {
+            "prompt": "A ring of stones and split logs, low six-frame warm flame loop. 28x30 per frame. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "existing campfire ambient"
+          }
+        }
+      }
+    },
+    "icons": {
+      "props": {
+        "job_tend": {
+          "variants": {
+            "default": "job_tend.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "job_rally": {
+          "variants": {
+            "default": "job_rally.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "job_cook": {
+          "variants": {
+            "default": "job_cook.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "job_watch": {
+          "variants": {
+            "default": "job_watch.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "job_rest": {
+          "variants": {
+            "default": "job_rest.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "well_fed": {
+          "variants": {
+            "default": "well_fed.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "injury_body": {
+          "variants": {
+            "default": "injury_body.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "injury_spirit": {
+          "variants": {
+            "default": "injury_spirit.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        },
+        "injury_rest": {
+          "variants": {
+            "default": "injury_rest.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "icons.job_tend": {
+            "prompt": "16x16 icon: a wrapped bandage. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "a letter on a disc"
+          },
+          "icons.job_rally": {
+            "prompt": "16x16 icon: two joined hands. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "a letter on a disc"
+          },
+          "icons.job_cook": {
+            "prompt": "16x16 icon: a steaming cooking pot. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "a letter on a disc"
+          },
+          "icons.job_watch": {
+            "prompt": "16x16 icon: an open eye. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "a letter on a disc"
+          },
+          "icons.job_rest": {
+            "prompt": "16x16 icon: a rolled bedroll. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "a letter on a disc"
+          },
+          "icons.well_fed": {
+            "prompt": "16x16 icon: a bowl of stew. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "bowl glyph"
+          },
+          "icons.injury_body": {
+            "prompt": "16x16 icon: a bandaged arm. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "coloured dot"
+          },
+          "icons.injury_spirit": {
+            "prompt": "16x16 icon: a steady candle. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "coloured dot"
+          },
+          "icons.injury_rest": {
+            "prompt": "16x16 icon: a closed eye. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "coloured dot"
+          }
+        }
+      }
+    },
+    "fx": {
+      "props": {
+        "mend": {
+          "variants": {
+            "default": "mend.png"
+          },
+          "size": [
+            32,
+            32
+          ],
+          "anchor": [
+            16,
+            31
+          ],
+          "frames": 6,
+          "fps": 10,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "fx.mend": {
+            "prompt": "A soft green sparkle around a healed character. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "fx.poof tinted green"
+          }
+        }
+      }
+    },
+    "ui": {
+      "props": {
+        "camp_night": {
+          "variants": {
+            "default": "camp_night.png"
+          },
+          "size": [
+            320,
+            180
+          ],
+          "anchor": [
+            160,
+            179
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "rest"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "ui.camp_night": {
+            "prompt": "A subtle dark blue edge vignette, transparent centre. Pixel art at 1x shown at 2x. Use the Wardenflame pack palette, transparent background, no antialiasing, top-left light, one-pixel dark outlines, feet anchors. Horizontal strips.",
+            "standIn": "dark gradient"
+          }
+        }
+      }
+    }
+  },
+  "sounds": {
+    "camp_start": {
+      "fallback": "spell_fire_aura",
+      "prompt": "Soft logs catching, gentle fire crackle"
+    },
+    "camp_mend": {
+      "fallback": "ui_level_up",
+      "prompt": "Warm gentle recovery chime"
+    },
+    "camp_cook": {
+      "fallback": "ui_confirm",
+      "prompt": "Quiet pot lid and approving kitchen chime"
+    },
+    "camp_dawn": {
+      "fallback": "ui_menu_open",
+      "prompt": "Soft morning rise and distant birds"
+    },
+    "temple_heal": {
+      "fallback": "shrine_use",
+      "prompt": "Clear restrained healing bell"
+    },
+    "inn_room": {
+      "fallback": "door_open",
+      "prompt": "A wooden inn door opens and closes"
+    }
+  }
+}

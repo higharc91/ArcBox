@@ -358,7 +358,7 @@ public static class AshenFordDraft
         new("ruin_arch", "grey", (96, 68), (94, 58)),
         new("ruin_wall", "grey", (100, 49), (101, 50)),                                 // the bridge's west abutment
         new("rubble", "ashen", (95, 67), (97, 66), (89, 53), (96, 51), (102, 50), (101, 46), (100, 47), (91, 60), (98, 64)),
-        new("campfire", "fire", (119, 53), (119, 62), (123, 55), (116, 66)),            // goblin fires on the far bank
+        new("campfire", "fire", (119, 53), (123, 55), (116, 66)),            // goblin fires on the far bank
         new("banner", "goblin", (118, 50), (121, 64), (124, 52), (120, 68)),
         new("banner", "goblin", (103, 47), (99, 59), (98, 64), (118, 55), (118, 62)),   // and their claim on the old bridge, and on both ends of the crossing
         new("skull_pike", "bone", (118, 56), (118, 60), (116, 50), (99, 58), (99, 65), (103, 49)),

@@ -1014,6 +1014,29 @@
         "interactable",
         "trade"
       ]
+    },
+    "campfire": {
+      "variants": {
+        "unlit": "campfire_unlit.png",
+        "lit": "campfire_lit.png"
+      },
+      "size": [
+        28,
+        30
+      ],
+      "anchor": [
+        14,
+        27
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": true,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "rest"
+      ]
     }
   },
   "notes": {

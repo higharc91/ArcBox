@@ -259,7 +259,8 @@ public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray
 public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HookKind? Hook = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<EffectDef> Effects = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<EffectDef> Effects = default,
+    string Mends = "body");
 
 /// <summary>A resource that refills during the battle: <see cref="Amount"/> every <see cref="EveryRounds"/> rounds.</summary>
 public sealed record ResourceRegenDef(string Resource, int Amount, int EveryRounds);

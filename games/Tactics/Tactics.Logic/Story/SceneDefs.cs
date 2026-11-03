@@ -62,7 +62,7 @@ public sealed record SceneNode(string Id, ImmutableArray<SceneLine> Lines, Immut
 /// the others are its lead-in.
 /// </summary>
 public sealed record SceneDef(string Id, string Beat, string? Place, string Title, ImmutableArray<string> Requires, ImmutableArray<string> Unless,
-    ImmutableArray<string> Cast, string Start, ImmutableArray<SceneNode> Nodes, bool After)
+    ImmutableArray<string> Cast, string Start, ImmutableArray<SceneNode> Nodes, bool After, bool Camp = false)
 {
     /// <summary>The speaker who isn't a character.</summary>
     public const string Narrator = "narrator";

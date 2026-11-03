@@ -1,0 +1,120 @@
+{
+  "scenes": [
+    {
+      "id": "ch1_camp_reflection",
+      "beat": "ch1_the_ford_choice",
+      "camp": true,
+      "title": "What the Fire Keeps",
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "requires": [],
+      "unless": [],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_camp_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Beyond the firelight, the river keeps talking. No one has quite found the courage to sleep."
+            },
+            {
+              "id": "ch1_camp_open_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears."
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "hunger",
+              "label": "Talk about Skarrow's people.",
+              "to": "hunger",
+              "sets": [
+                "camp_ch1_compassion"
+              ]
+            },
+            {
+              "id": "truth",
+              "label": "Talk about what Varrow owes the town.",
+              "to": "truth",
+              "sets": [
+                "camp_ch1_accountability"
+              ]
+            },
+            {
+              "id": "warmth",
+              "label": "Talk about what Maud said of the warmth.",
+              "to": "warmth",
+              "requires": [
+                "ch1_met_maud"
+              ],
+              "sets": [
+                "camp_ch1_embers"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hunger",
+          "lines": [
+            {
+              "id": "ch1_camp_hunger_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side."
+            },
+            {
+              "id": "ch1_camp_hunger_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "A log settles. Someone passes the pot without being asked."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "truth",
+          "lines": [
+            {
+              "id": "ch1_camp_truth_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening."
+            },
+            {
+              "id": "ch1_camp_truth_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The fire gives everyone the same small share of warmth. For once, nobody has locked it away."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "warmth",
+          "lines": [
+            {
+              "id": "ch1_camp_warmth_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Maud's words return with the smell of woodsmoke: warmth was lent, not given. You look into the coals a little differently."
+            },
+            {
+              "id": "ch1_camp_warmth_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Then we'd better learn how to give something back."
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

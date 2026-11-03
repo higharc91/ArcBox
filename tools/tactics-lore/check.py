@@ -386,6 +386,13 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
             arc_flags.update(entry.get("sets", []))
             for choice in entry.get("choices", []):
                 arc_flags.update(choice["sets"])
+    # Camp reflections may declare their own outcome flags without adding a beat to the main story chain.
+    for scene, _ in scenes:
+        if scene.get("camp"):
+            for node in scene.get("nodes", []):
+                arc_flags.update(node.get("sets", []))
+                for option in node.get("options", []):
+                    arc_flags.update(option.get("sets", []))
     tagged = {"background": set(defs["background"]) | (rules["backgrounds"] if rules else set()),
               "race": rules["races"] if rules else None, "class": rules["classes"] if rules else None}
     covered: dict[str, set[str]] = {}
@@ -397,11 +404,13 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
         if beat is None:
             errors.add(where, f"{ptr}/beat", f"no beat has the id '{scene['beat']}'")
         # A battle beat plays its lead-in, then the fight, then its aftermath, so the two kinds can't interleave in file order.
-        if scene.get("after"):
+        if scene.get("camp") and scene.get("after"):
+            errors.add(where, f"{ptr}/camp", "a camp scene cannot also be a battle aftermath")
+        if scene.get("after") and not scene.get("camp"):
             if beat is not None and beat[0]["kind"] != "battle":
                 errors.add(where, f"{ptr}/after", f"only a battle beat has an aftermath, and '{scene['beat']}' is a {beat[0]['kind']} beat")
             aftermath.add(scene["beat"])
-        elif scene["beat"] in aftermath:
+        elif not scene.get("camp") and scene["beat"] in aftermath:
             errors.add(where, ptr, f"a lead-in of '{scene['beat']}' comes after one of its aftermath scenes; move it before them")
         if "place" in scene and scene["place"] not in defs["place"]:
             errors.add(where, f"{ptr}/place", f"no place has the id '{scene['place']}'")

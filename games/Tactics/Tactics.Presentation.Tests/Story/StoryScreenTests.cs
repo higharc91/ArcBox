@@ -82,7 +82,7 @@ public sealed class StoryScreenTests
             Assert.True(File.Exists(Path.Combine(Pack.Root, face.Backdrop)), face.Backdrop);
             speakers++;
         }
-        Assert.Equal(829 - AllLines().Count(l => l.Line.Speaker == "narrator"), speakers);
+        Assert.Equal(837 - AllLines().Count(l => l.Line.Speaker == "narrator"), speakers);
     }
 
     [Fact]
@@ -131,7 +131,7 @@ public sealed class StoryScreenTests
     public void Every_line_in_the_lore_fits_the_caption()
     {
         var lines = AllLines().ToArray();
-        Assert.Equal(829, lines.Length);
+        Assert.Equal(837, lines.Length);
         foreach (var (_, line) in lines)
         {
             var caption = Screen(Showing(1, LineOf(line))).Caption!;

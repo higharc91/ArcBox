@@ -30,6 +30,8 @@ public enum InteractableFamily
     Notice,
     /// <summary>A hidden path (design §7.3): a tile that stands in the way until it's found, then is walked like any ground.</summary>
     Path,
+    /// <summary>A fire where the party can spend its earned rest.</summary>
+    Rest,
 }
 
 /// <summary>
@@ -128,6 +130,7 @@ public static class InteractableKinds
     /// <summary>Every kind, by id.</summary>
     public static ImmutableSortedDictionary<string, InteractableKind> All { get; } = new[]
     {
+        new InteractableKind("campfire", InteractableFamily.Rest, "campfire", "interactables.campfire", ["unlit", "lit"], true, Stand(("unlit", "props.campfire"), ("lit", "props.campfire")), ["You're not tired yet."]),
         new InteractableKind("stall", InteractableFamily.Trade, "stall", "interactables.stall", [Opened, Closed], true, Stand((Opened, "town.stall"), (Closed, "town.stall")), ["The stall is closed."]),
         Container("chest", "chest", true, "props.chest", "props.chest_open", "It's empty."),
         Container("crate", "crate", true, "props.crate", "props.crate", "Nothing but straw."),

@@ -19,6 +19,16 @@ internal sealed partial class Validation
                 if ((shop.Keeper.Person is null) == (shop.Keeper.Thing is null)) Error(file, at + "/keeper", "Choose exactly one person or thing.");
                 if (shop.PriceMod is <= 0 or > 4) Error(file, at + "/priceMod", "Price modifier must be in (0, 4].");
                 if (shop.Haggle is < 1 or > 30) Error(file, at + "/haggle", "Haggle DC must be 1 to 30.");
+                var services = new HashSet<string>(StringComparer.Ordinal);
+                for (var j = 0; j < shop.Services.Length; j++)
+                {
+                    var service = shop.Services[j];
+                    var p = at + $"/services/{j}";
+                    if (string.IsNullOrWhiteSpace(service.Id) || !services.Add(service.Id)) Error(file, p + "/id", "Services need distinct nonempty ids.");
+                    if (string.IsNullOrWhiteSpace(service.Name)) Error(file, p + "/name", "A service needs a name.");
+                    if (service.Kind is not ("room" or "cure")) Error(file, p + "/kind", "A service must be room or cure.");
+                    if (service.Price <= 0) Error(file, p + "/price", "A paid service needs a positive price.");
+                }
                 var seen = new HashSet<ItemId>();
                 for (var j = 0; j < shop.Stock.Length; j++)
                 {

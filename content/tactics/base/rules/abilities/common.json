@@ -60,5 +60,6 @@
       "presentation": { "anim": "characters.shoot", "fx": "fx.smoke.grey", "projectile": "projectiles.rock" },
       "ai": { "tags": ["defend", "area", "item"] },
       "flavor": "Thick smoke fills the area: nothing can see into, out of or through it." }
-  ]
+  ],
+  "passives": [{ "id": "rest.well_fed", "hook": "onBattleStart", "target": "self", "effects": [{ "tempHp": { "dice": "3" } }] }]
 }

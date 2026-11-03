@@ -18,7 +18,14 @@ public sealed record ShopStock(ItemId Item,
 public sealed record ShopDef(string Id, string Name, ShopKeeper Keeper, ImmutableArray<ShopStock> Stock,
     ImmutableArray<string> Buys, string Greeting = "Welcome.", string Farewell = "Safe travels.", decimal PriceMod = 1m,
     ImmutableArray<string> Requires = default, ImmutableArray<string> Unless = default, int? Haggle = null,
-    decimal SellRatio = 0.5m);
+    decimal SellRatio = 0.5m, ImmutableArray<ShopService> Services = default)
+{
+    /// <summary>Paid rooms and cures; never a default array.</summary>
+    public ImmutableArray<ShopService> Services { get => field.IsDefault ? [] : field; init; } = Services;
+}
+
+/// <summary>A paid recovery service, charged to the authenticated buyer.</summary>
+public sealed record ShopService(string Id, string Name, string Kind, int Price);
 
 /// <summary>Reads finite stock or the explicit infinite sentinel.</summary>
 public sealed class StockCountConverter : JsonConverter<int>
