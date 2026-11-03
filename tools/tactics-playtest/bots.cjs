@@ -187,6 +187,7 @@ const RECONNECT_MS = Array.from({ length: 120 }, () => 1000);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /** Battle tiles are [x, y]; reach and range are Manhattan. */
 const dist = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+const { safestMoves, escapeBurning } = require('./hazards.cjs');
 
 const RULES = path.join(__dirname, '../../content/tactics/base/rules');
 const [WATER, DIFFICULT, IMPASSABLE, DEEP] = [1, 2, 4, 16];
@@ -324,10 +325,9 @@ function stepTowards(data, goal, { wade = true, within = 0 } = {}) {
   if (dist(me.at, goal) <= within) return null;
   const closest = (moves) => moves.reduce((a, b) => (near(b.to) < near(a.to) || (near(b.to) === near(a.to) && b.cost < a.cost) ? b : a), moves[0]);
   const dry = choices.moves.filter((m) => !inWater(map, m.to));
-  for (const moves of wade ? [dry, choices.moves] : [dry]) {
-    const best = moves.length ? closest(moves) : null;
-    if (best && near(best.to) < near(me.at)) return best;
-  }
+  const progress = safestMoves((wade ? choices.moves : dry).filter((m) => near(m.to) < near(me.at)));
+  const safeDry = progress.filter((m) => !inWater(map, m.to));
+  if (progress.length) return closest(safeDry.length ? safeDry : progress);
   return null;
 }
 
@@ -493,6 +493,14 @@ class Bot {
           ability: best.ability.ability, item: best.ability.item ?? undefined,
           unit: best.target.target.unit ?? undefined, tile: best.target.target.tile ?? undefined,
         });
+      }
+      // The phone shows fire under this hero and forecasts each path's damage.
+      // Movement still works after an action; do not end the turn in avoidable fire.
+      const escape = !this.moved && escapeBurning(this.view.data);
+      if (escape) {
+        this.moved = true;
+        log(`${this.name} leaves burning ground`);
+        return this.input('move', { path: escape.path });
       }
       if (!tactic.home.has(this.name)) tactic.home.set(this.name, me.at);
       const home = tactic.home.get(this.name);
