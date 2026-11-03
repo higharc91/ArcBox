@@ -20,7 +20,8 @@ public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
@@ -174,7 +175,11 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedDictionary<string, InteractableSave>? Things = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]     int ThingSeq = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopCursor? Shop = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopCursor? Shop = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RestReady = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CampSave? Camp = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int RestSeq = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> CampScenes = default)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
