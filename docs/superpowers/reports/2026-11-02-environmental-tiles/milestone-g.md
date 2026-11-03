@@ -1,5 +1,7 @@
 # G — encounter integration and balance
 
+**Historical integration checkpoint.** The later [completion report](completion.md) records the authorized Ford/cave tuning, final visual review, merged shops/gold integration and four-player chapter validation. The measurements and held decisions below describe the earlier checkpoint, not the final shipped configuration.
+
 Phase G adds the Ford Assault stormcaller and enables the environmental rules in River Crossing and Ford Assault. Showcase opt-ins are gated on their intended-level simulation results; the approved reaction damage, duration, saves and AI weights are unchanged.
 
 ## What changed

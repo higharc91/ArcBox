@@ -29,9 +29,11 @@ If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dot
 
 ## Environmental encounter balance
 
-Environmental reactions are opt-in per encounter. The [Phase G report](../../docs/superpowers/reports/2026-11-02-environmental-tiles/milestone-g.md) compares the river and showcase encounters with reactions off and on, separates adding Ford Assault's stormcaller from enabling reactions, and records the party-size results and real Chapter 1 playtest. Showcase opt-ins require their intended-level simulation to meet the win-rate and battle-length targets. A pooled pass does not guarantee that every party size is balanced; the four-character Ford result is called out separately.
+Environmental reactions are opt-in per encounter. River Crossing, Ford Assault, Forest Ruins, Warlord Bridge and Crystal Cave enable them. The [completion report](../../docs/superpowers/reports/2026-11-02-environmental-tiles/completion.md) records final Ford/cave tuning, on/off comparisons, party-size results, visual review and Chapter 1 validation. The [earlier Phase G checkpoint](../../docs/superpowers/reports/2026-11-02-environmental-tiles/milestone-g.md) preserves the original measurements. Showcase opt-ins require their intended-level simulation to meet the win-rate and battle-length targets. A pooled pass does not guarantee equal difficulty at every party size.
 
 ## Bot phones and the TV, end to end
+
+The fighting bots read the phone's optional damage forecasts when choosing a route, and leave burning ground on a safe path even after spending their action. Safe exits stay directed toward the shared target, and explicit defeat objectives trigger pursuit immediately. The bots retain the dry-ground preference among equally safe paths. This uses public phone data, not hidden battle state. Run its regression checks with `node --test tools/tactics-playtest/hazards.test.cjs`; the completion report records the older hazard-unaware attempts separately.
 
 `tools/tactics-playtest/bots.cjs` joins a room as N phones over the real hub, with no browser, and plays a session: the first bot is the VIP, makes a campaign and starts the game, and each bot picks a class at Muster. Its header has every option and how to run the server and TV by hand; it needs `npm ci` in `web/play` first.
 

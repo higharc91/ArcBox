@@ -1,0 +1,12 @@
+{
+  "baseline": "357df1c0",
+  "unchanged": [
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json"
+  ],
+  "changed": []
+}
