@@ -57,6 +57,24 @@ public static class DemoBattle
             bridge);
     }
 
+    /// <summary>A visual check of the shipped encounter at its intended level, with real enemies and starting zones.</summary>
+    public static TacticsHostView Encounter(string id, string packRoot)
+    {
+        var rules = RulesPack.Load([Path.Combine(packRoot, "rules")], ArtManifests.Load(packRoot));
+        var encounter = rules.Encounters[id];
+        string[] classes = ["fighter", "cleric", "rogue", "wizard", "ranger", "paladin"];
+        var size = Math.Clamp(5, encounter.Party.Min, encounter.Party.Max);
+        ImmutableArray<PartyMember> party = [.. classes.Take(size).Select(cls => new PartyMember(new UnitId(cls),
+            SheetBuilder.DefaultCharacter(cls, "human", cls, null, encounter.Level ?? 1, rules), new AiControlled("companion")))];
+        var state = Battle.Start(Encounters.Setup(id, party, Difficulty.Normal, rules), rules, 7).State;
+        ImmutableArray<UnitView> units = [.. state.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name,
+            u.Sheet.Side.ToString(), HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), u.Pos, u.Hp, u.Sheet.MaxHp, u.TempHp,
+            u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], null))];
+        var battle = new BattleView(id, state.MapId, state.Round, state.Order, state.Active, units, [], null,
+            BoardChanges.Of(state), state.Objectives.Current, Name: encounter.Name);
+        return new TacticsHostView("Battle", "Encounter art preview", null, 1, [], null, battle, null, null);
+    }
+
     /// <summary>The host view for a demo spec: a map id, with <c>:changed</c> or <c>:fight</c> or neither.</summary>
     public static TacticsHostView View(string spec)
     {
