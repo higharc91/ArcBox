@@ -233,7 +233,9 @@ public sealed record QuestRewardView(int Gold, int Xp, ImmutableArray<QuestItemV
 public sealed record QuestEntryView(string Id, string Name, string Status, string Giver, string? Portrait, string Objective, ImmutableArray<QuestHistoryView> History, string? Result, QuestRewardView? Rewards);
 public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading);
 
-public sealed record QuestEventView(int Seq, string Quest, string Name, string Kind, DateTimeOffset Until, int Gold, int Xp);
+public sealed record TrinketGiftView(string Member, string Name, string Class, string Trinket, string Title, bool Here);
+public sealed record QuestEventView(int Seq, string Quest, string Name, string Kind, DateTimeOffset Until, int Gold, int Xp,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<TrinketGiftView>? Gifts = null);
 
 /// <summary>A numbered, expiring person utterance; never a phase change.</summary>
 public sealed record BarkView(string Person, long Seq, DateTimeOffset Until, StoryLineView Line);
@@ -519,6 +521,11 @@ public sealed partial class TacticsGame
                 data["questNotice"] = JsonSerializer.SerializeToNode(new { id = notice.Quest, notice.Name, notice.Kind,
                     objective = quest?.Status == "active" ? quest.Current.Objective : "Quest " + (quest?.Status == "done" ? "complete" : "failed"),
                     canPin = leads && quest?.Status == "active" }, ArcJson.Options);
+                if (notice.Gifts?.FirstOrDefault(g => g.Member == profile.Value) is { } gift
+                    && Rules.Trinkets.TryGetValue(gift.Trinket, out var trinket))
+                    data["questNotice"]!["trinket"] = JsonSerializer.SerializeToNode(new
+                    { id = trinket.Id, name = trinket.Name, text = trinket.Text, rarity = trinket.Rarity,
+                        @class = trinket.Class, className = Rules.Classes[trinket.Class].Name, active = true }, ArcJson.Options);
             }
             if (QuestTracker() is { } tracker) data["pinned"] = JsonSerializer.SerializeToNode(new { tracker.Id, tracker.Name, tracker.Objective }, ArcJson.Options);
         }
@@ -606,7 +613,7 @@ public sealed partial class TacticsGame
         => _players.Where(p => p.Profile is { } pr && _awaited.Contains(pr)).Select(p => p.Name);
 
     private ImmutableArray<EncounterOption> EncounterOptions()
-        => [.. Rules.Encounters.Values.OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
+        => [.. Rules.Encounters.Values.Where(e => !e.StoryOnly).OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
                 _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
 

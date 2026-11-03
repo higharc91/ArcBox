@@ -84,6 +84,50 @@
         { "id": "warden_archive", "name": "The Warden Archive", "kind": "tower", "summary": "Oswin Hale's library: three centuries of records, the only complete history of the Vale." },
         { "id": "flame_hall", "name": "The Hall of the Flame", "kind": "lair", "summary": "The great hall where the heart of the Hearthflame burns red, and the dragon sleeps.", "unlock": { "flag": "ch5_gate_passed" } }
       ]
+    },
+    {
+      "id": "cinder_hollow",
+      "name": "The Cinder Hollow",
+      "chapter": 1,
+      "card": "chapters.ashen_ford",
+      "summary": "A warm cave beneath Maud’s bank, opened by hungry diggers and an older hunger.",
+      "history": "The cave kept its warmth through a century of winters. Recent picks have broken its quiet; a great grey bear now hunts the Southfield goats.",
+      "mood": "Cool stone near the entrance; iron lamps, damp boards and banked amber ash deeper in.",
+      "factions": [
+        "the_ash_market"
+      ],
+      "encounters": [
+        "hollow_throat",
+        "hollow_diggings",
+        "hollow_nest",
+        "hollow_lair"
+      ],
+      "places": [
+        {
+          "id": "hollow_throat",
+          "name": "The Throat",
+          "kind": "dungeon",
+          "summary": "Bats cluster above a damp, narrow passage."
+        },
+        {
+          "id": "hollow_diggings",
+          "name": "The Diggings",
+          "kind": "dungeon",
+          "summary": "A crew of kobolds works under a foreman’s lamp."
+        },
+        {
+          "id": "hollow_nest",
+          "name": "The Warm Nest",
+          "kind": "lair",
+          "summary": "Webs stretch across the last of the worked stone."
+        },
+        {
+          "id": "hollow_lair",
+          "name": "Ashmaw’s Bed",
+          "kind": "lair",
+          "summary": "A vast grey bear lies against a dull seam in the rock."
+        }
+      ]
     }
   ]
 }

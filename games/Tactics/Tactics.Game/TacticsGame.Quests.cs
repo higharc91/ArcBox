@@ -15,6 +15,7 @@ public sealed partial class TacticsGame
         }
     }
     private QuestEventView? _questEvent;
+    private static double QuestNoticeSeconds(QuestEventView notice) => notice.Gifts is { Length: > 0 } gifts ? Math.Max(7, gifts.Length * 2.4 + 1) : 7;
     private int _questSeq;
     private IReadOnlySet<string>? _questObservedFlags;
 
@@ -41,9 +42,13 @@ public sealed partial class TacticsGame
                 : previous.Stage != state.Stage ? "update" : null;
             if (kind is not null)
             {
-                _questEvent = new QuestEventView(++_questSeq, quest.Id, quest.Name, kind, _phase == TacticsPhase.Exploration ? _ctx.Now.AddSeconds(7) : DateTimeOffset.MaxValue, quest.Rewards.Gold, quest.Rewards.Xp);
+                ImmutableArray<TrinketGiftView>? gifts = kind == "complete" && quest.Rewards.Trinkets is { } giftMap
+                    ? [.. _doc.Members.Select(m => new TrinketGiftView(m.Key, m.Value.Character.Name, m.Value.Character.Class,
+                        giftMap[m.Value.Character.Class], Rules.Trinkets[giftMap[m.Value.Character.Class]].Name, Online(new ArcBox.Sdk.ProfileId(m.Key))))] : null;
+                _questEvent = new QuestEventView(++_questSeq, quest.Id, quest.Name, kind, _phase == TacticsPhase.Exploration ? _ctx.Now.AddSeconds(7) : DateTimeOffset.MaxValue, quest.Rewards.Gold, quest.Rewards.Xp, gifts);
+                if (_phase == TacticsPhase.Exploration) _questEvent = _questEvent with { Until = _ctx.Now.AddSeconds(QuestNoticeSeconds(_questEvent)) };
                 _ctx.CancelTimer("questResult");
-                if (_phase == TacticsPhase.Exploration) _ctx.SetTimer("questResult", TimeSpan.FromSeconds(7));
+                if (_phase == TacticsPhase.Exploration) _ctx.SetTimer("questResult", TimeSpan.FromSeconds(QuestNoticeSeconds(_questEvent)));
                 if (kind == "start" && _doc.World!.PinnedQuest is null)
                     _doc = _doc with { World = _doc.World with { PinnedQuest = quest.Id } };
             }
@@ -81,8 +86,8 @@ public sealed partial class TacticsGame
     private void ShowPendingQuestNotice()
     {
         if (_questEvent is not { Until: var until } notice || until != DateTimeOffset.MaxValue) return;
-        _questEvent = notice with { Until = _ctx.Now.AddSeconds(7) };
-        _ctx.SetTimer("questResult", TimeSpan.FromSeconds(7));
+        _questEvent = notice with { Until = _ctx.Now.AddSeconds(QuestNoticeSeconds(notice)) };
+        _ctx.SetTimer("questResult", TimeSpan.FromSeconds(QuestNoticeSeconds(_questEvent)));
     }
 
     private void QuestResultDone()

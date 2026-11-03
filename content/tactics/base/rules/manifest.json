@@ -69,6 +69,16 @@
     "encounters/keep_gate.json",
     "encounters/hall_of_the_flame.json",
     "world/ashen_ford.json",
-    "interactables/ashen_ford.json"
+    "interactables/ashen_ford.json",
+    "maps/hollow_throat.json",
+    "encounters/hollow_throat.json",
+    "maps/hollow_diggings.json",
+    "encounters/hollow_diggings.json",
+    "maps/hollow_nest.json",
+    "encounters/hollow_nest.json",
+    "maps/hollow_lair.json",
+    "encounters/hollow_lair.json",
+    "world/cinder_hollow.json",
+    "interactables/cinder_hollow.json"
   ]
 }

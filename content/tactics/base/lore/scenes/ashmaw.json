@@ -1,0 +1,221 @@
+{
+  "scenes": [
+    {
+      "id": "ashmaw_board",
+      "title": "The Watch Board",
+      "cast": [
+        "narrator"
+      ],
+      "start": "notices",
+      "nodes": [
+        {
+          "id": "notices",
+          "lines": [
+            {
+              "id": "ashmaw_notices",
+              "speaker": "narrator",
+              "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "options": [
+            {
+              "id": "leave",
+              "label": "Finish reading.",
+              "to": "leave"
+            },
+            {
+              "id": "bounty",
+              "label": "Read the newly posted bounty.",
+              "to": "bounty",
+              "requires": [
+                "ch1_ford_settled"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bounty",
+          "lines": [
+            {
+              "id": "ashmaw_bounty_1",
+              "speaker": "narrator",
+              "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            },
+            {
+              "id": "ashmaw_bounty_2",
+              "speaker": "narrator",
+              "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true,
+          "sets": [
+            "sq_ashmaw_posted"
+          ]
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ashmaw_leave",
+              "speaker": "narrator",
+              "text": "The pins have rusted into the old notices.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ashmaw_throat",
+      "title": "The Throat",
+      "cast": [
+        "narrator"
+      ],
+      "start": "throat_open",
+      "nodes": [
+        {
+          "id": "throat_open",
+          "lines": [
+            {
+              "id": "ashmaw_throat_open",
+              "speaker": "narrator",
+              "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "beat": "hollow_throat"
+    },
+    {
+      "id": "ashmaw_diggings",
+      "title": "The Diggings",
+      "cast": [
+        "narrator"
+      ],
+      "start": "diggings_open",
+      "nodes": [
+        {
+          "id": "diggings_open",
+          "lines": [
+            {
+              "id": "ashmaw_diggings_open",
+              "speaker": "narrator",
+              "text": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; let the distant picks die away."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "beat": "hollow_diggings"
+    },
+    {
+      "id": "ashmaw_nest",
+      "title": "The Warm Nest",
+      "cast": [
+        "narrator"
+      ],
+      "start": "nest_open",
+      "nodes": [
+        {
+          "id": "nest_open",
+          "lines": [
+            {
+              "id": "ashmaw_nest_open",
+              "speaker": "narrator",
+              "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "beat": "hollow_nest"
+    },
+    {
+      "id": "ashmaw_lair",
+      "title": "Ashmaw’s Bed",
+      "cast": [
+        "narrator"
+      ],
+      "start": "lair_open",
+      "nodes": [
+        {
+          "id": "lair_open",
+          "lines": [
+            {
+              "id": "ashmaw_lair_open",
+              "speaker": "narrator",
+              "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "beat": "hollow_lair"
+    },
+    {
+      "id": "ashmaw_lair_after",
+      "title": "The Last Warmth",
+      "cast": [
+        "narrator"
+      ],
+      "start": "death",
+      "nodes": [
+        {
+          "id": "death",
+          "lines": [
+            {
+              "id": "ashmaw_death",
+              "speaker": "narrator",
+              "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "beat": "hollow_lair",
+      "after": true
+    },
+    {
+      "id": "ashmaw_satchel",
+      "title": "The Boy’s Satchel",
+      "cast": [
+        "narrator"
+      ],
+      "start": "satchel",
+      "nodes": [
+        {
+          "id": "satchel",
+          "lines": [
+            {
+              "id": "ashmaw_satchel",
+              "speaker": "narrator",
+              "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

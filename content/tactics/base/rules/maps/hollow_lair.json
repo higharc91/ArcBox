@@ -1,0 +1,161 @@
+{
+  "id": "hollow_lair",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "AgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEEAgEEAgEEAgEEAgEEAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAgEEAgEEAgEEAAAAAAMAAAMAAAMAAAQAAAQAAAMAAAMAAAMAAAMAAAAAAAAAAgEEAgEEAAAAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAgEEAgEEAAAAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAgEEAAAAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAgEEAAAAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAgEEAAAAAAMAAAMAAAMAAAQAAAQAAAMAAAMAAAMAAAMAAAAAAAAAAgEEAgEEAgEEAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAMAAAAAAgEEAgEEAgEEAgEEAgEEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEEAgEE",
+  "materials": [
+    "rock_ford/bank",
+    "rock_ford/bank",
+    "mine_gravel/brown",
+    "ash_ford/charred",
+    "mine_boards/oak",
+    "dirt/dark"
+  ],
+  "props": [
+    {
+      "id": "stalagmite",
+      "at": [
+        3,
+        3
+      ],
+      "blocks": true,
+      "cover": "half"
+    },
+    {
+      "id": "stalagmite",
+      "at": [
+        3,
+        9
+      ],
+      "blocks": true,
+      "cover": "half"
+    },
+    {
+      "id": "vent",
+      "at": [
+        5,
+        2
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "animal_bones",
+      "at": [
+        3,
+        5
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "animal_bones",
+      "at": [
+        6,
+        3
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "animal_bones",
+      "at": [
+        4,
+        8
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "animal_bones",
+      "at": [
+        8,
+        5
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "dried_blood",
+      "at": [
+        4,
+        6
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "dried_blood",
+      "at": [
+        5,
+        7
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "dried_blood",
+      "at": [
+        6,
+        5
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "dried_blood",
+      "at": [
+        8,
+        7
+      ],
+      "blocks": false,
+      "cover": "none"
+    },
+    {
+      "id": "dried_blood",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": false,
+      "cover": "none"
+    }
+  ],
+  "zones": {
+    "party_spawn": [
+      [
+        12,
+        5
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        12,
+        6
+      ],
+      [
+        11,
+        6
+      ],
+      [
+        12,
+        7
+      ],
+      [
+        11,
+        7
+      ]
+    ],
+    "enemy_spawn": [
+      [
+        4,
+        6
+      ]
+    ],
+    "exit": []
+  }
+}

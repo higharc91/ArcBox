@@ -91,12 +91,12 @@ public sealed partial class LoreBook
     }
     private static void ValidateSideContent(string basePack, ImmutableArray<QuestDef> quests,
         IEnumerable<SceneDef> scenes, IEnumerable<ConversationDef> conversations, ImmutableArray<LoreCharacter> characters,
-        IReadOnlySet<string> mainFlags, BarkBook barks)
+        IReadOnlySet<string> mainFlags, BarkBook barks, IEnumerable<string> beatFlags)
     {
         if (quests.IsEmpty && !conversations.Any() && !scenes.Any(s => s.Beat is null)) return;
         var allScenes = scenes.ToArray();
         var setters = allScenes.SelectMany(s => s.Nodes).SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets))).ToHashSet(StringComparer.Ordinal);
-        setters.UnionWith(mainFlags);
+        setters.UnionWith(beatFlags);
         var regions = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
         var things = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
         var items = new HashSet<string>(StringComparer.Ordinal);
@@ -177,7 +177,7 @@ public sealed partial class LoreBook
                 if (File.Exists(manifest) && !regions.ContainsKey(targetRegion))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown target region '{targetRegion}'.");
                 var region = regions.GetValueOrDefault(targetRegion);
-                if (!stage.When.All(setters.Contains)) throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has flags nothing in the pack can set.");
+                if (stage.When.IsDefaultOrEmpty || File.Exists(manifest) && !stage.When.All(setters.Contains)) throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has flags nothing in the pack can set.");
                 if (File.Exists(manifest) && stage.Target?.Thing is { } thing && (!things.TryGetValue(targetRegion, out var regionThings) || !regionThings.Contains(thing)))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown thing '{thing}'.");
                 if (File.Exists(manifest) && stage.Target?.Tile is { } tile)

@@ -42,5 +42,49 @@
     "saves": ["dex", "con"], "abilities": ["drake.flame_breath"], "passives": [], "resist": ["fire"],
     "skills": ["perception"], "tags": ["dragon", "boss"],
     "aiProfile": "boss", "sprite": "beasts.drake.red",
-    "phases": [ { "hpBelow": 50, "abilities": ["drake.tail_sweep"], "passives": [] } ] }
-]
+    "phases": [ { "hpBelow": 50, "abilities": ["drake.tail_sweep"], "passives": [] } ] },
+    {
+      "id": "kobold_foreman",
+      "name": "Grisk",
+      "cr": "1/2",
+      "xp": 0,
+      "scores": {
+        "str": 7,
+        "dex": 16,
+        "con": 9,
+        "int": 8,
+        "wis": 7,
+        "cha": 8
+      },
+      "hp": 32,
+      "ac": 14,
+      "armor": "Light",
+      "weapon": {
+        "id": "mining_pick",
+        "damage": "1d6",
+        "damageType": "piercing",
+        "stat": "dex",
+        "finesse": true,
+        "ranged": false,
+        "range": 1,
+        "reach": false,
+        "tags": [
+          "simple",
+          "light"
+        ]
+      },
+      "abilities": [
+        "grisk.dig_faster"
+      ],
+      "passives": [],
+      "tags": [
+        "humanoid",
+        "kobold",
+        "grisk"
+      ],
+      "aiProfile": "brute",
+      "sprite": "monsters.kobold_foreman",
+      "level": 2,
+      "resources": {}
+    }
+  ]

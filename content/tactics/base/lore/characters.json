@@ -570,6 +570,23 @@
           "note": "Watches her closely; she remembers too much."
         }
       ]
+    },
+    {
+      "id": "grisk",
+      "preset": "kobold",
+      "name": "Grisk",
+      "epithet": "Foreman of the Diggings",
+      "role": "npc",
+      "faction": "the_ash_market",
+      "summary": "A wiry kobold foreman with a helmet lantern and a tally cord.",
+      "bio": "Grisk counts every chip and every breath of lamp oil. The market pays by the pound; it does not pay for frightened workers, and it has never come down to hear the thing behind the stone. His pick woke it. Now he keeps digging because stopping would leave him time to listen.",
+      "wants": "To be paid, to keep his crew working, and to leave this cave alive.",
+      "flaw": "He bargains with money he has not yet earned.",
+      "voice": {
+        "theme": "tactics.npc.grisk",
+        "description": "Small wiry kobold; high, nasal, raspy and breathless. Barked orders break into terrified bargaining.",
+        "sample": "Bear’s awake! Dig or die!"
+      }
     }
   ]
 }

@@ -160,7 +160,7 @@ public sealed partial class TacticsGame
         var waiting = Cursor?.Beat != beat.Id || AtTheFight(beat) && _phase == TacticsPhase.Exploration;
         // While one of its scenes plays, the scene's cast stands in the figure's place (CastOf), so nobody is shown twice.
         var playing = _phase == TacticsPhase.Story && Cursor?.Beat == beat.Id && CurrentScene() is not null;
-        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
+        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : figure.SpriteKey, waiting ? "alert" : null)];
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ public sealed partial class TacticsGame
         var reached = WalkReach();      // on the ground as it is, things and painted props in the way
         var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
         return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
-            .Select(c => new CastView(c.Who.Id, c.Who.Name, $"characters.{c.Who.Preset}", c.Tile, _at))];
+            .Select(c => new CastView(c.Who.Id, c.Who.Name, c.Who.SpriteKey, c.Tile, _at))];
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public sealed partial class TacticsGame
     /// chapter's last beat, that the next chapter isn't here yet (5d default 13).
     /// </summary>
     private string Objective() => OnOffer() is { Place: { } place } ? $"Go to {Lore.PlaceName(place) ?? place}"
-        : ChapterOver ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
+        : ChapterOver && StoryArc is { SideAdventure: false } ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
         : "Explore the region";
 
     /// <summary>A chapter's number as the cards write it.</summary>
@@ -461,7 +461,7 @@ public sealed partial class TacticsGame
         };
         PrepareQuestSave();
         KeepWorld();
-        if (ChapterOver)
+        if (ChapterOver && StoryArc is { SideAdventure: false })
         {
             _lease.Checkpoint(_doc.ToJson(), $"End of Chapter {Numeral(StoryArc!.Chapter)}");
             ShowCard();
@@ -1001,7 +1001,7 @@ public sealed partial class TacticsGame
     private StoryLineView LineView(SceneLine line)
     {
         var who = Lore.Character(line.Speaker);
-        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.Preset, line.Mood, line.Text, who?.Role);
+        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.PortraitKey, line.Mood, line.Text, who?.Role);
     }
 
     /// <summary>The scene for the TV, in the Story phase, with the live tally: the TV's alone (5d flag 7).</summary>
@@ -1141,7 +1141,7 @@ public sealed partial class TacticsGame
             title = scene?.Title ?? _card,
             line = line?.Id,
             speaker = who?.Name,
-            portrait = who?.Preset,
+            portrait = who?.PortraitKey,
             mood = line?.Mood,
             text = line?.Text,
             canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,

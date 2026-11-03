@@ -890,8 +890,8 @@ public sealed class WalkingTests
         var view = Party(s);
         var things = JsonSerializer.SerializeToUtf8Bytes(view, ArcJson.Options).Length - JsonSerializer.SerializeToUtf8Bytes(WalkingPart(view), ArcJson.Options).Length;
 
-        Assert.Equal(17, view.Things!.Value.Length);
-        Assert.InRange(things, 1, 17 * 200);
+        Assert.Equal(18, view.Things!.Value.Length);
+        Assert.InRange(things, 1, 18 * 200);
     }
 
     [Fact]

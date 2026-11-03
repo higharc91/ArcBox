@@ -16,5 +16,6 @@
   { "id": "boss_cruel", "damage": 1.2, "kill": 1.5, "control": 1.0, "heal": 0.6, "revive": 1.0, "caution": 0.1, "focusFire": 1.2,
     "objective": 1.5, "hoard": 0.2, "cruel": true },
   { "id": "companion", "damage": 1.0, "kill": 1.2, "control": 0.8, "heal": 1.5, "revive": 4.0, "caution": 0.6, "focusFire": 0.8,
-    "objective": 1.5, "hoard": 0.0 }
+    "objective": 1.5, "hoard": 0.0 },
+  {"id": "ashmaw", "damage": 1.2, "kill": 1.5, "control": 0.15, "heal": 0.3, "revive": 0.5, "caution": 0.0, "focusFire": 0.6, "objective": 1.0, "hoard": 0.1}
 ]

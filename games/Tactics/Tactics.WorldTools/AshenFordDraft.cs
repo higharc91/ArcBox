@@ -602,6 +602,7 @@ public static class AshenFordDraft
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
         source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Concat(AtMauds).Concat(OldBridge).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
         source.People.AddRange(Named.Concat(Townsfolk));
+        source.NamedSpawns.Add("cinder_hollow_return", new Tile(131, 99));
         return source;
     }
 

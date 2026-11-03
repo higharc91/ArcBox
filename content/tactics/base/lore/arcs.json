@@ -295,6 +295,72 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ashmaw_bounty",
+      "chapter": 1,
+      "region": "cinder_hollow",
+      "title": "The Cinder Hollow",
+      "sideAdventure": true,
+      "levels": [
+        2,
+        2
+      ],
+      "summary": "Follow the diggers into the cooling cave and bring Dagna proof of Ashmaw.",
+      "beats": [
+        {
+          "id": "hollow_throat",
+          "kind": "battle",
+          "summary": "The Throat",
+          "place": "hollow_throat",
+          "encounter": "hollow_throat",
+          "requires": [
+            "sq_ashmaw_entered"
+          ],
+          "sets": [
+            "sq_ashmaw_throat_won"
+          ]
+        },
+        {
+          "id": "hollow_diggings",
+          "kind": "battle",
+          "summary": "The Diggings",
+          "place": "hollow_diggings",
+          "encounter": "hollow_diggings",
+          "requires": [
+            "sq_ashmaw_throat_won"
+          ],
+          "sets": [
+            "sq_ashmaw_diggings_won"
+          ]
+        },
+        {
+          "id": "hollow_nest",
+          "kind": "battle",
+          "summary": "The Warm Nest",
+          "place": "hollow_nest",
+          "encounter": "hollow_nest",
+          "requires": [
+            "sq_ashmaw_diggings_won"
+          ],
+          "sets": [
+            "sq_ashmaw_lair"
+          ]
+        },
+        {
+          "id": "hollow_lair",
+          "kind": "battle",
+          "summary": "Ashmaw’s Bed",
+          "place": "hollow_lair",
+          "encounter": "hollow_lair",
+          "requires": [
+            "sq_ashmaw_lair"
+          ],
+          "sets": [
+            "sq_ashmaw_slain"
+          ]
+        }
+      ]
     }
   ],
   "endings": [

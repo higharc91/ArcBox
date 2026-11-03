@@ -459,6 +459,7 @@ public sealed partial class TacticsGame
             Save();
             return null;
         }
+        events = GriskBarks.Enrich(State, events, Lore.Barks, _seq + 1);
         var beat = new Beat(++_seq, actor, events, activeBefore);
         var log = Save_.Log.IsDefault ? [] : Save_.Log;
         log = log.Add(beat);

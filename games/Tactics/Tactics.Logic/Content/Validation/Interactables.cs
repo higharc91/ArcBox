@@ -211,7 +211,9 @@ internal sealed partial class Validation
                     ok = false;
                     continue;
                 }
-                if (stamps.Where(s => s.Holds(at)).Select(s => s.Map).FirstOrDefault() is { } map)
+                // A gated nonblocking pickup may appear after a stamped battle is won. Other things never overlap fights.
+                if (!(def.Kind == "pickup" && !def.Requires.IsDefaultOrEmpty && !def.Unless.IsDefaultOrEmpty && def.Blocks != true)
+                    && stamps.Where(s => s.Holds(at)).Select(s => s.Map).FirstOrDefault() is { } map)
                     Error(t, "at", $"'{def.Id}' at {at} is inside the stamp '{map}': a fight there would play over it.");
                 if (!byTile.TryAdd(at, def.Id))
                     Error(t, "at", $"'{def.Id}' at {at} shares its tile with '{byTile[at]}'.");

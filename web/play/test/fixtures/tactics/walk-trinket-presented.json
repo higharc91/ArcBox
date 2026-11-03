@@ -1,0 +1,123 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Ashen Ford",
+    "objective": "Go to Emberwick",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1,
+      "color": "#ffd23f"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": true,
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": "Talk to Dagna Holt",
+    "journal": {
+      "quests": [
+        {
+          "id": "sq_ashmaw",
+          "name": "The Cinder Hollow Bounty",
+          "status": "done",
+          "giver": "Dagna Holt",
+          "portrait": "guard_captain",
+          "objective": "Quest complete",
+          "history": [
+            {
+              "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens.",
+              "done": true,
+              "objective": null
+            },
+            {
+              "log": "Dagna sent us to the cave below Maud\u2019s hut on the burned east bank.",
+              "done": true,
+              "objective": null
+            },
+            {
+              "log": "Ashmaw is dead. Take its warm ember-claw as proof, then return to Captain Dagna.",
+              "done": true,
+              "objective": "Bring the claw to Dagna"
+            }
+          ],
+          "result": "The boy is safe at Maud\u2019s. Dagna paid the bounty and set aside a class trinket for every companion, including those away.",
+          "rewards": {
+            "gold": 60,
+            "xp": 300,
+            "items": []
+          }
+        }
+      ],
+      "selected": "sq_ashmaw",
+      "pinned": null,
+      "canPin": true,
+      "reading": null
+    },
+    "canOpenLog": true,
+    "questNotice": {
+      "id": "sq_ashmaw",
+      "name": "The Cinder Hollow Bounty",
+      "kind": "complete",
+      "objective": "Quest complete",
+      "canPin": false,
+      "trinket": {
+        "id": "ember_claw_gauntlet",
+        "name": "Ember-Claw Gauntlet",
+        "text": "A small claw set into a watchman\u2019s leather wrist-guard. \u002B1 to attack rolls.",
+        "rarity": "rare",
+        "class": "fighter",
+        "className": "Fighter",
+        "active": true
+      }
+    },
+    "gold": 15,
+    "targets": [
+      {
+        "id": "person:dagna_holt",
+        "label": "Talk to Dagna Holt"
+      },
+      {
+        "id": "person:af_guard_4",
+        "label": "Talk to the guard"
+      }
+    ],
+    "beat": false,
+    "search": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

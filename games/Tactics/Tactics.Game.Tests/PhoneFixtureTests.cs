@@ -341,6 +341,17 @@ public sealed class PhoneFixtureTests
         Check(screens);
     }
 
+    [Fact]
+    public void The_bounty_presents_only_the_receiving_phones_class_trinket()
+    {
+        var s = ConversationQuestTests.At("dagna_holt", "ch1_ford_settled", "sq_ashmaw_posted", "sq_ashmaw_accepted", "sq_ashmaw_slain", "sq_ashmaw_claw");
+        ConversationQuestTests.Talk(s, "dagna_holt");
+        ConversationQuestTests.Choose(s, "present");
+        ConversationQuestTests.WalkAgain(s);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
+    }
+
     private static void Check(SortedDictionary<string, JsonNode> screens)
     {
         var dir = FixtureDir();

@@ -46,13 +46,22 @@ internal sealed partial class Validation
                 {
                     var at = Pointer.Append(Pointer.Append(ptr, name), i);
                     Ref(RefKind.Monster, units[i].Unit, file, Pointer.Append(at, "unit"));
+                    foreach (var (values, field) in new[] { (units[i].CountByParty, "countByParty"), (units[i].HpByParty, "hpByParty") })
+                        if (values is not null)
+                        {
+                            if (!Enumerable.Range(def.Party.Min, def.Party.Max - def.Party.Min + 1).SequenceEqual(values.Keys))
+                                Error(file, Pointer.Append(at, field), "Provide one value for every supported party size.");
+                            foreach (var (size, value) in values)
+                                if (value < 1 || field == "countByParty" && value > units[i].Count)
+                                    Error(file, Pointer.Append(at, field), "Values must be positive; counts cannot exceed count.");
+                        }
                     if (units[i].Id is { } id)
                     {
                         if (string.IsNullOrWhiteSpace(id))
                             Error(file, Pointer.Append(at, "id"), "The id is empty.");
                         else if (!ids.Add(id))
                             Error(file, Pointer.Append(at, "id"), $"Two units in this encounter are named '{id}'.");
-                        if (units[i].Count != 1)
+                        if (units[i].Count != 1 || units[i].CountByParty?.Values.Any(n => n != 1) == true)
                             Error(file, Pointer.Append(at, "id"), "A unit with an \"id\" is a single unit (\"count\" 1).");
                     }
                     Ref(RefKind.AiProfile, units[i].AiProfile, file, Pointer.Append(at, "aiProfile"));

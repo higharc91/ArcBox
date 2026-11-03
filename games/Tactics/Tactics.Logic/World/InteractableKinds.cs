@@ -144,6 +144,7 @@ public static class InteractableKinds
         Passage("secret_door", "hidden door", "A seam in the stone.", hide: true),
         new InteractableKind("lever", InteractableFamily.Switch, "lever", "interactables.lever", [Off, On], false, Stand(), ["Clunk."]),
         Readable("note", "note", false, null),
+        Readable("bounty_board", "bounty board", false, "props.signpost"),
         Readable("plaque", "plaque", false, null),
         Readable("book", "book", false, null),
         Readable("gravestone", "gravestone", true, "props.gravestone"),

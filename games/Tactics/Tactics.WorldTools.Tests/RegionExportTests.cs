@@ -128,6 +128,15 @@ public sealed class RegionExportTests : IDisposable
             files.Remove(file);
         File.WriteAllText(path, manifest.ToJsonString());
         File.Delete(Path.Combine(rules, "interactables", $"{id}.json"));
+        // Synthetic replacements have no named destinations. Remove inbound links from this isolated fixture too.
+        foreach (var file in files.Select(f => f!.GetValue<string>()).Where(f => f.StartsWith("interactables/", StringComparison.Ordinal)))
+        {
+            var target = Path.Combine(rules, file);
+            var data = JsonNode.Parse(File.ReadAllText(target))!;
+            var things = data["interactables"]!.AsArray();
+            foreach (var thing in things.Where(t => t?["to"]?["region"]?.GetValue<string>() == id).ToArray()) things.Remove(thing);
+            File.WriteAllText(target, data.ToJsonString());
+        }
     }
 
     // Synthetic maps replace the town's people, so their test packs omit the real town's shops too.

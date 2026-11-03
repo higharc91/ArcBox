@@ -63,6 +63,7 @@ public sealed class AshenFordDraftTests
         Stamps = [.. source.Stamps],
         Starts = [source.Start],
         Recoveries = [source.Recovery],
+        NamedSpawns = [.. source.NamedSpawns.Select(s => (s.Key, s.Value))],
     };
 
     /// <summary>Exports the draft into a copy of the pack, over the region the pack lists, and loads the copy, which runs every check the game does.</summary>
@@ -99,7 +100,7 @@ public sealed class AshenFordDraftTests
         using var lore = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "lore", "arcs.json")));
         return
         [
-            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("chapter").GetInt32() == 1)
+            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("region").GetString() == "ashen_ford")
                 .SelectMany(arc => arc.GetProperty("beats").EnumerateArray())
                 .Select(beat => (beat.GetProperty("id").GetString()!, beat.GetProperty("place").GetString()!)),
         ];

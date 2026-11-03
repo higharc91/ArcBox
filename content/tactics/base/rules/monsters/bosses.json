@@ -59,5 +59,69 @@
     "saves": ["dex", "con", "wis", "cha"], "abilities": ["dragon.fire_breath", "dragon.frightful_roar"], "passives": [],
     "immune": ["fire"], "skills": ["perception", "stealth"], "tags": ["dragon", "boss", "huge"],
     "aiProfile": "boss_cruel", "sprite": "bosses.dragon.red",
-    "phases": [ { "hpBelow": 50, "abilities": ["dragon.cataclysm"], "passives": [], "aiProfile": "boss_cruel" } ] }
-]
+    "phases": [ { "hpBelow": 50, "abilities": ["dragon.cataclysm"], "passives": [], "aiProfile": "boss_cruel" } ] },
+    {
+      "id": "ashmaw",
+      "name": "Ashmaw",
+      "level": 2,
+      "cr": "2",
+      "xp": 0,
+      "move": 4,
+      "attacks": 1,
+      "scores": {
+        "str": 17,
+        "dex": 12,
+        "con": 16,
+        "int": 2,
+        "wis": 12,
+        "cha": 7
+      },
+      "hp": 120,
+      "ac": 12,
+      "weapon": {
+        "id": "claws",
+        "damage": "1d6",
+        "damageType": "slashing",
+        "stat": "str",
+        "finesse": false,
+        "ranged": false,
+        "range": 1,
+        "reach": false,
+        "tags": [
+          "natural"
+        ]
+      },
+      "abilities": [
+        "ashmaw.maul",
+        "ashmaw.cinder_roar"
+      ],
+      "passives": [
+        "ashmaw.roar_recharge"
+      ],
+      "skills": [
+        "perception"
+      ],
+      "tags": [
+        "beast",
+        "boss",
+        "ashmaw"
+      ],
+      "aiProfile": "ashmaw",
+      "sprite": "monsters.ashmaw",
+      "resources": {
+        "roar": 1
+      },
+      "resist": [
+        "fire"
+      ],
+      "phases": [
+        {
+          "hpBelow": 50,
+          "abilities": [
+            "ashmaw.ash_shake"
+          ],
+          "passives": []
+        }
+      ]
+    }
+  ]

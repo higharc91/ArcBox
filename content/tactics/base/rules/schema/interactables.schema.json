@@ -52,7 +52,8 @@
               "remains",
               "hidden_path",
               "stall",
-              "campfire"
+              "campfire",
+              "bounty_board"
             ]
           },
           "at": {
@@ -305,10 +306,17 @@
           "to": {
             "type": "object",
             "properties": {
-              "region": { "$ref": "common.schema.json#/$defs/id" },
-              "spawn": { "$ref": "common.schema.json#/$defs/id" }
+              "region": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "spawn": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
             },
-            "required": ["region", "spawn"],
+            "required": [
+              "region",
+              "spawn"
+            ],
             "additionalProperties": false
           },
           "scene": {

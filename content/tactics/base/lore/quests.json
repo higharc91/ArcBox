@@ -145,6 +145,98 @@
           "sq_whistle_remembered"
         ]
       }
+    },
+    {
+      "id": "sq_ashmaw",
+      "name": "The Cinder Hollow Bounty",
+      "giver": "dagna_holt",
+      "region": "ashen_ford",
+      "stages": [
+        {
+          "id": "posted",
+          "objective": "Speak to Captain Dagna",
+          "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens.",
+          "when": [
+            "sq_ashmaw_posted"
+          ],
+          "target": {
+            "person": "dagna_holt"
+          }
+        },
+        {
+          "id": "accepted",
+          "objective": "Find the Cinder Hollow",
+          "log": "Dagna sent us to the cave below Maud’s hut on the burned east bank.",
+          "when": [
+            "sq_ashmaw_accepted"
+          ],
+          "target": {
+            "thing": "af_cinder_hollow_mouth"
+          }
+        },
+        {
+          "id": "entered",
+          "objective": "Search the Hollow",
+          "log": "We entered the cave. The miners’ tracks lead deeper into the rock.",
+          "when": [
+            "sq_ashmaw_entered"
+          ]
+        },
+        {
+          "id": "lair",
+          "objective": "Face Ashmaw",
+          "log": "Beyond the webs, a safe fire marks the last approach to Ashmaw’s bed.",
+          "when": [
+            "sq_ashmaw_lair"
+          ],
+          "target": {
+            "region": "cinder_hollow",
+            "tile": [
+              19,
+              32
+            ]
+          }
+        },
+        {
+          "id": "slain",
+          "objective": "Bring the claw to Dagna",
+          "log": "Ashmaw is dead. Take its warm ember-claw as proof, then return to Captain Dagna.",
+          "when": [
+            "sq_ashmaw_slain"
+          ],
+          "target": {
+            "person": "dagna_holt"
+          }
+        }
+      ],
+      "done": {
+        "when": [
+          "sq_ashmaw_done"
+        ],
+        "log": "The boy is safe at Maud’s. Dagna paid the bounty and set aside a class trinket for every companion, including those away."
+      },
+      "rewards": {
+        "gold": 60,
+        "xp": 300,
+        "items": [],
+        "sets": [
+          "sq_ashmaw_rewarded"
+        ],
+        "trinkets": {
+          "barbarian": "ashmaw_mantle",
+          "bard": "bat_bone_flute",
+          "cleric": "hearthstone_pendant",
+          "druid": "ashwood_totem",
+          "fighter": "ember_claw_gauntlet",
+          "monk": "cinder_wraps",
+          "paladin": "wardens_ember_badge",
+          "ranger": "ashmaw_tooth_arrowheads",
+          "rogue": "kobold_delvers_ring",
+          "sorcerer": "smouldering_eye",
+          "warlock": "ash_black_sigil",
+          "wizard": "kobold_surveyors_lens"
+        }
+      }
     }
   ]
 }

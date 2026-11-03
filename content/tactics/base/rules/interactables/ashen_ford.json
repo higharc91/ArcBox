@@ -285,6 +285,38 @@
         "sq_forge_done"
       ],
       "scene": "sq_forge_docks"
+    },
+    {
+      "id": "af_bounty_board",
+      "kind": "bounty_board",
+      "at": [
+        37,
+        60
+      ],
+      "name": "Watch bounty board",
+      "scene": "ashmaw_board",
+      "text": [
+        "Town notices hang beneath the Watch seal."
+      ]
+    },
+    {
+      "id": "af_cinder_hollow_mouth",
+      "kind": "cave_mouth",
+      "at": [
+        131,
+        98
+      ],
+      "name": "the Cinder Hollow",
+      "requires": [
+        "sq_ashmaw_accepted"
+      ],
+      "sets": [
+        "sq_ashmaw_entered"
+      ],
+      "to": {
+        "region": "cinder_hollow",
+        "spawn": "entrance"
+      }
     }
   ]
 }

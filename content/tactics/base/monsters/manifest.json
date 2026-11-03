@@ -1,0 +1,17 @@
+{
+  "about": "Named monster keys retain explicit stand-ins until the owner approves final in-game motion. The final creature atlas overrides these aliases.",
+  "sprites": {
+    "ashmaw": {
+      "standIn": "beasts.bear.wildshape"
+    },
+    "kobold_foreman": {
+      "standIn": "characters.kobold"
+    }
+  },
+  "animations": [
+    "attack",
+    "roar",
+    "shake",
+    "shout"
+  ]
+}

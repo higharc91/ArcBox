@@ -22,6 +22,7 @@ public sealed class StoryRulesTests
     internal static List<(ArcBeat Beat, HashSet<string> Flags, HashSet<string> Done)> Play(Arc arc, Func<ArcBeat, ArcChoice> choose)
     {
         var (flags, done, offered) = (new HashSet<string>(), new HashSet<string>(), new List<(ArcBeat, HashSet<string>, HashSet<string>)>());
+        if (arc.SideAdventure && !arc.Beats.IsEmpty) flags.UnionWith(arc.Beats[0].Requires);
         while (StoryRules.Available(arc, flags, done) is { } beat)
         {
             offered.Add((beat, [.. flags], [.. done]));
