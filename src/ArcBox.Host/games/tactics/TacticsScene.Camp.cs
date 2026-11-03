@@ -14,55 +14,35 @@ public partial class TacticsScene
 {
     private readonly RecoveryShow _recovery = new();
     private CampView? _camp;
-    private PanelContainer? _campPanel;
-    private VBoxContainer? _campRows;
+    private CampHud? _campHud;
     private string? _campMoment;
     private double _mendAt;
+    private double _campPhaseSeconds;
+    private string? _campPhaseKey;
     private string? _mendedMember;
 
     private void ShowCamp(TacticsHostView view)
     {
         _camp = view.Camp;
-        _world?.CampLight(RecoveryShow.Night(_camp));
-        if (_campPanel is null)
-        {
-            _campRows = ArcTheme.VBox(7);
-            _campPanel = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 24, 20), _campRows);
-            _campPanel.SetAnchorsPreset(LayoutPreset.CenterRight);
-            _campPanel.OffsetLeft = -620; _campPanel.OffsetRight = -40; _campPanel.OffsetTop = -340; _campPanel.OffsetBottom = 340;
-            AddChild(_campPanel);
-        }
-        _campPanel.Visible = _camp is { Mode: "camp", Stage: not ("vote" or "talk") };
+        var phaseKey = _camp is { } current ? current.Source + "/" + current.Stage : null;
+        if (_campPhaseKey != phaseKey) { _campPhaseKey = phaseKey; _campPhaseSeconds = 0; }
+
+        if (_campHud is null && _unitArt is not null && _content.TryGetValue(BasePack, out var root))
+        { _campHud = new CampHud(m => RecoveryCard(m, CampJobNote(_camp?.People.FirstOrDefault(p => p.Member == m.Member)), compact: true), root, _unitArt); AddChild(_campHud); }
+        _campHud?.Show(_camp);
         if (_camp is not { } camp) { _campMoment = null; return; }
         var moment = $"{camp.Source}/{camp.Visit}/{camp.Stage}/{camp.ResultCount}/{string.Join(',', camp.People.Select(p => p.Job))}";
         if (_campMoment == moment) return;
         var before = _campMoment;
         _campMoment = moment;
-        foreach (var child in _campRows!.GetChildren()) { _campRows.RemoveChild(child); child.QueueFree(); }
-        _campRows.AddChild(ArcTheme.Meta(camp.Stage == "dawn" ? "DAWN" : "BY THE FIRE"));
-        _campRows.AddChild(ArcTheme.Label(camp.Stage == "dawn" ? "A new day" : "Around the fire", ArcTheme.Bold, 30, ArcTheme.Gold));
-        if (camp.Members is { } members)
-            foreach (var member in members)
-                _campRows.AddChild(RecoveryCard(member, camp.People.FirstOrDefault(p => p.Member == member.Member)?.Job is { } job ? CampJobLabel(job) : null));
-        else foreach (var person in camp.People)
-            _campRows.AddChild(ArcTheme.Label($"{person.Name} · {CampJobLabel(person.Job)}", ArcTheme.SemiBold, 23));
         if (camp.Result is { } result && camp.Stage == "results")
         {
-            if (result.Die > 0)
-            {
-                var die = Math.Max(result.Die, result.SecondDie ?? result.Die);
-                _campRows.AddChild(ArcTheme.Label($"d20 {die} + {result.Bonus} = {die + result.Bonus}" + (result.Dc > 0 ? $" · DC {result.Dc}" : ""), ArcTheme.Bold, 27, result.Passed ? new Color(.5f, 1, .6f) : ArcTheme.Gold));
-                if (result.SecondDie is { } second) _campRows.AddChild(ArcTheme.Label($"Advantage · {result.Die} / {second}", ArcTheme.SemiBold, 22));
-            }
-            var words = ArcTheme.Label(result.Text, ArcTheme.SemiBold, 23);
-            words.AutowrapMode = TextServer.AutowrapMode.WordSmart;
-            _campRows.AddChild(words);
             var sound = result.Passed && result.Job is "tend" or "rally" ? "camp_mend" : result.Job == "cook" && result.Passed ? "camp_cook" : null;
             if (sound is not null) PlayRecovery(sound);
             if (result.Passed && result.Job is "tend" or "rally") { _mendedMember = result.Target; _mendAt = _clock.Elapsed.TotalSeconds; }
             _narrator?.Say(result.Text, "tactics.narrator", ArcBox.Host.Core.Audio.NarrationPriority.Question);
         }
-        if (camp.Stage == "dawn") { PlayRecovery("camp_dawn"); _campRows.AddChild(ArcTheme.Label("Rest injuries mended · Ready for the road", ArcTheme.SemiBold, 22)); }
+        if (camp.Stage == "dawn") PlayRecovery("camp_dawn");
         else if (camp.Mode == "camp" && (before is null || before.Contains("/vote/", StringComparison.Ordinal))) PlayRecovery("camp_start");
         _shots?.Capture("camp-" + camp.Stage + "-" + camp.ResultCount);
     }
@@ -72,8 +52,12 @@ public partial class TacticsScene
 
     private WalkStage? CampStage(BoardTerrain terrain, double delta, WalkStage? normal)
     {
+        if (_campHud is null && _unitArt is not null && _content.TryGetValue(BasePack, out var root))
+        { _campHud = new CampHud(m => RecoveryCard(m, CampJobNote(_camp?.People.FirstOrDefault(p => p.Member == m.Member)), compact: true), root, _unitArt); AddChild(_campHud); _campHud.Show(_camp); }
+        _campPhaseSeconds += delta;
+        _campHud?.Tick(_campPhaseSeconds, delta);
         var places = _recovery.Gather(_camp, terrain, _walk!.Places, delta);
-        return places is null ? normal : new WalkStage(normal?.Hold, normal?.Cuts ?? 0, places, false, normal?.Shake ?? default);
+        return places is null ? normal : new WalkStage(_camp is { Mode: "camp" } camp ? new StageCamera(new System.Numerics.Vector2(camp.At.X + .5f, camp.At.Y + .5f), terrain.Top(camp.At)) : normal?.Hold, normal?.Cuts ?? 0, places, false, normal?.Shake ?? default);
     }
 
     private ImmutableArray<FxDraw> MendDraws()
@@ -87,5 +71,8 @@ public partial class TacticsScene
             new System.Numerics.Vector2(feet.X - clip.AnchorX, feet.Y - clip.AnchorY - clip.Lift), new System.Numerics.Vector2(clip.Width, clip.Height), 0, clip.Additive, 1)
             { Tint = new Rgb(.4f, 1, .55f) }];
     }
-    private static string CampJobLabel(string? job) => job switch { "tend" => "Tend wounds", "rally" => "Rally", "cook" => "Cook", "watch" => "Keep watch", "rest" => "Rest easy", _ => "Choosing a job" };
+    private static string? CampJobNote(CampPersonView? person) => person?.Job is not { } job ? null
+        : (person.Outcome == "success" ? "✓ " : person.Outcome == "failed" ? "× " : "") + CampJobLabel(job);
+
+    private static string CampJobLabel(string? job) => job switch { "tend" => "Tend", "rally" => "Rally", "cook" => "Cook", "watch" => "Watch", "rest" => "Rest", _ => "Choosing a job" };
 }

@@ -16,7 +16,7 @@ public sealed class RecoveryShow
     /// <summary>Move the pictured party towards the server's legal, unique seats at a walking pace.</summary>
     public IReadOnlyDictionary<string, UnitPlace>? Gather(CampView? camp, BoardTerrain terrain, IReadOnlyDictionary<string, UnitPlace> start, double seconds)
     {
-        if (camp is not { Mode: "camp", Stage: not ("vote" or "dawn") }) { _now.Clear(); return null; }
+        if (camp is not { Mode: "camp", Stage: not "vote" }) { _now.Clear(); return null; }
         foreach (var person in camp.People)
         {
             var goal = UnitPlace.On(terrain, person.At);

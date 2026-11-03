@@ -383,8 +383,12 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var size = GetViewport().GetVisibleRect().Size;
         var window = new System.Numerics.Vector2(size.X, size.Y);
         var origin = WorldView.OriginIn(fit, window);
-        _world.Position = new Vector2(origin.X, origin.Y);
-        _view = WorldView.Seen(origin, window);
+        var focus = window * .5f;
+        var zoomedOrigin = focus + (origin - focus) * _campZoom;
+        _world.Position = new Vector2(zoomedOrigin.X, zoomedOrigin.Y);
+        _world.Scale = new Vector2(WorldTuning.Scale * _campZoom, WorldTuning.Scale * _campZoom);
+        var min = -zoomedOrigin / (WorldTuning.Scale * _campZoom);
+        _view = new ArtArea(min, min + window / (WorldTuning.Scale * _campZoom));
         if (_stage is not { Visible: true })
         {
             _over?.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));

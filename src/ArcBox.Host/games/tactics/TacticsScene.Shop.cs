@@ -37,7 +37,7 @@ public partial class TacticsScene
             _goldGain.Position = new Vector2(44, 180);
             AddChild(_goldGain);
         }
-        _shopPanel.Visible = view.Shop is not null;
+        _shopPanel.Visible = view.Shop is not null && !CampScene.Active(view.Camp);
         _shopPurse!.Visible = false;
         _shopPurse.Text = view.Explore?.Gold is { } gold ? $"◆ {gold} gold" : "";
         if (_lastPurse is { } before && view.Explore?.Gold is { } after && after > before)

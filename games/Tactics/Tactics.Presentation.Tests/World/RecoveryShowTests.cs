@@ -21,10 +21,10 @@ public sealed class RecoveryShowTests
     {
         var steps = CampDemo.Steps();
         Assert.True(RecoveryShow.Night(steps[0].View.Camp));
-        Assert.True(steps[1].View.Camp!.Result!.Passed);
-        Assert.Equal("tend", steps[1].View.Camp!.Result!.Job);
-        Assert.All(steps[2].View.Camp!.People, p => Assert.True(p.WellFed));
-        Assert.False(RecoveryShow.Night(steps[3].View.Camp));
+        Assert.True(steps.Single(s => s.Label == "camp-mend").View.Camp!.Result!.Passed);
+        Assert.Equal("tend", steps.Single(s => s.Label == "camp-mend").View.Camp!.Result!.Job);
+        Assert.All(steps.Single(s => s.Label == "camp-well-fed").View.Camp!.People, p => Assert.True(p.WellFed));
+        Assert.False(RecoveryShow.Night(steps.Single(s => s.Label == "camp-dawn").View.Camp));
         Assert.Null(steps[^1].View.Camp);
         Assert.Single(steps[0].View.Explore!.Things!.Value.Where(t => t.Kind == "campfire"));
     }
