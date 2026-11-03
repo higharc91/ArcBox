@@ -35,9 +35,15 @@ A rolled-back quest payout initially left its transient “30 gold, 100 XP” co
 - Parley chapter: **OK**, 130 lines, River Crossing won, card, subsequent walking.
 - Default walk: **OK**, original coverage/displacement/latency/drop assertions retained.
 - Shop: **OK**, including three real portal remakes after selling the kit.
-- Full .NET suite: **6,107 passed, 0 failed, 0 skipped**, all ten modules, in 22m 03s. Command: `dotnet test --solution ArcBox.slnx --no-build --no-restore --max-parallel-test-modules 1`.
+- Original full .NET suite: **6,107 passed, 0 failed, 0 skipped**, all ten modules, in 22m 03s. Command: `dotnet test --solution ArcBox.slnx --no-build --no-restore --max-parallel-test-modules 1`.
 
 The first broad run competed with compilation and hit runner startup failures and web timeouts. The phone rerun passed. A later broad run exceeded two AI timing budgets; all five existing AI performance cases passed in a separate Debug process with unchanged 250 ms limits (stress p95 149.4 ms; overlapping hazards 145.1 ms). The final full suite passed after renderer/compiler activity stopped, including those same AI performance cases.
+
+## Review follow-up: recovery failures
+
+The outer world guard now protects the entire recovery block as well. If recovery itself throws (including inside `EnterWorld`), it first saves the pre-action party and progression with no battle, story, shop or camp and the position/facing reset to the region's authored start. This fallback bypasses world validation, quest processing, leader timers and callbacks before saving; it then resets in-memory cursors without host calls. Timer cancellation and diagnostic sinks are best effort after the save.
+
+The new regression first failed with `EnterWorld` escaping from the recovery catch. Its two cases cover failure during both initial entry and recovery, and failure only during recovery after a later resume error. They verify the saved start position, cleared cursors, preserved party/stock/flags, phone/TV notices despite a throwing log sink, no stale timers, and successfully reopening and walking from the repaired save. Follow-up validation: the solution rebuild passed with **0 warnings/errors**, and **31 world/battle-fault tests passed**, including both new cases. The complete affected suites also passed: **638 gameplay tests** and **411 server tests**, with no failures or skips. These are follow-up results, separate from the original full-suite run. Logs: `/workspace/artifacts/issue76-recovery-fallback-{red,green,solution-build,gameplay,server}.log`.
 
 ## Linux rendering and measurement limits
 

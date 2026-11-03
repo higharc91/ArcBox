@@ -138,5 +138,53 @@ public sealed class WorldRecoveryTests
         Assert.True(s.Host.Explore!.Epoch > epoch);
     }
 
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_failed_EnterWorld_during_recovery_saves_the_region_start_and_reopens(bool failInitialEntry)
+    {
+        var original = ShopTests.AtShop();
+        original.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        var before = original.Game.Document;
+        Assert.NotNull(before.World!.Shop);
+        var entries = 0;
+        var game = new TacticsGame(Rules)
+        {
+            WorldEntering = () => { if (++entries > 1 || failInitialEntry) throw new InvalidOperationException("world validation failed"); },
+            WorldActionCompleted = _ => throw new InvalidOperationException("resume failed after entering"),
+            StoryLogged = _ => throw new InvalidOperationException("logging failed too"),
+        };
+        var resumed = new Session(document: before.ToJson(), game: game);
+        resumed.Harness.Resume(resumed.Lease);
+        Assert.Equal(2, entries); // Recovery retries entry, and that retry always fails.
+        var saved = TacticsDocument.Read(resumed.Lease.Document);
+        Assert.Null(saved.Battle);
+        Assert.Null(saved.World!.Story);
+        Assert.Null(saved.World.Shop);
+        Assert.Null(saved.World.Camp);
+        var start = Rules.RegionFor(before.World.Region)!.Def.Spawns.Start;
+        Assert.NotEqual(start, before.World.At);
+        Assert.Equal(start, saved.World.At);
+        var expected = before with
+        {
+            Battle = null,
+            World = before.World with { At = start, Facing = new(start.X + 1, start.Y), Story = null, Shop = null, Camp = null },
+        };
+        Assert.Equal(expected.ToJson().GetRawText(), resumed.Lease.Document.GetRawText());
+        Assert.Contains("changed", resumed.Host.Notice);
+        Assert.Contains("changed", resumed.Screen(0)!.Header);
+        Assert.Empty(resumed.Harness.ActiveTimers);
+        var reopened = new Session(document: resumed.Lease.Document);
+        reopened.Harness.Resume(reopened.Lease);
+        for (var i = 0; i < 4; i++) reopened.Harness.SetConnected(i, true);
+        Assert.Equal(TacticsPhase.Exploration, reopened.Game.Phase);
+        Assert.Equal(start, reopened.Game.Document.World!.At);
+        var leader = Enumerable.Range(0, 4).First(i => reopened.Screen(i)!.Data.GetProperty("leader").GetBoolean());
+        var seq = reopened.Host.Explore!.Seq;
+        reopened.Send(leader, "walk", new { dir = "e" });
+        reopened.Harness.Advance(TimeSpan.FromSeconds(1));
+        Assert.NotEqual(seq, reopened.Host.Explore!.Seq);
+    }
+
     private static Session Walking() { var s = new Session(); s.ToWalking(); return s; }
 }

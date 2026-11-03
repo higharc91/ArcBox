@@ -79,6 +79,8 @@ The new heroes are detailed and about 36 px tall, while townsfolk still use chun
 ### OW-11 · Only battles survive an exception · `done`
 World inputs, timers and reconnect/resume operations now roll back failed actions and recover to safe walking, preserving purses, bags, stock and quest state. Broken active cursors, transient notifications and their timers are cleared; failed recovery saves bypass quest processing. The phones and TV show a recoverable notice. Invalid saved battles are checked before replay and called off without rewards/injuries, with structured engine-fault logs. The 30 focused checks passed (world paths, actual quest payout rollback, existing battle recovery and chapter settings), including a real subsequent walking step, reopening recovered saves and strictly advancing epochs for repeated recoveries.
 
+Review follow-up: the recovery block itself is protected. If it fails, a direct minimal save clears all active cursors and moves the preserved party to the region start before callbacks or timer work. Two `EnterWorld` failure cases reproduce the original escape, then verify reopening/walking and phone/TV notices even with a throwing log sink. All 31 focused world/battle-fault checks pass, followed by all 638 gameplay and 411 server tests; the solution rebuild has zero warnings/errors.
+
 ### OW-12 · World open stalls the main thread · `todo`
 `FinishBuild` (`WorldCanvas.cs:~527`) runs `WorldFauna`'s constructor: about 440 ms in Debug by reading and timing. `FaunaRange.Pen` can be up to 18^4 rectangles. The title card hides it.
 **Done when:** the main-thread part of opening is under a frame's budget.
