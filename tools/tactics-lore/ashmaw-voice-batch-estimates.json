@@ -1,0 +1,93 @@
+{
+  "purpose": "Batch remaining lines by speaker. Split and verify individual lines before voices.py import; provenance records parent asset and segment times.",
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "speaker": "narrator",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 20,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 20,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "speaker": "dagna_holt",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 17,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 17,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "speaker": "grisk",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 6,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 6,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "speaker": "old_maud",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 5,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 5,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    }
+  ]
+}

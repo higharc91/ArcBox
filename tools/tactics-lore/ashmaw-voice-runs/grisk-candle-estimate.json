@@ -1,0 +1,16 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+    }
+  ],
+  "structuredContent": {
+    "dry_run": true,
+    "model_id": "model_google-gemini-3-8-flash-tts",
+    "job": {},
+    "creativeUnitsCost": 2,
+    "creativeUnitsDiscount": 0
+  },
+  "isError": false
+}

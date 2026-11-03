@@ -2397,6 +2397,107 @@
       "group": "creature",
       "loop": false,
       "seed": 7249
+    },
+    "ashmaw_roar.1": {
+      "asset": "asset_GE2CEz3yM6GB2nHmH3bqcU9S",
+      "job": "job_ZyZB1Z54QcBpFjg3jjeGmq4u",
+      "cu": 7.5,
+      "duration": 2.4,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_roar.2": {
+      "asset": "asset_9QXQbuHTryrD9v5UN7iZRXjc",
+      "job": "job_ZyZB1Z54QcBpFjg3jjeGmq4u",
+      "cu": 7.5,
+      "duration": 2.4,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
+    },
+    "ashmaw_shake": {
+      "asset": "asset_DfLNggehFXPatYZgJtiswQZx",
+      "job": "job_WFLmaT2T5GL8G25FFa3TKUq7",
+      "cu": 5.0,
+      "duration": 1.5,
+      "group": "creature",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.08:ratio=3:attack=3:release=120:makeup=2",
+        "sourceSha256": "1c1bda03da101f80d25353626b3f7eaa01b6bd4a4da56ddd6fa56be39de5fd7b",
+        "outputSha256": "052e68918f0badca997b18904cd0ef9cb845ed20d1002ee12945c311ab5fba68"
+      }
+    },
+    "bounty_accept": {
+      "asset": "asset_xC6jDkRKbcAHz2jqZ4GRGsj6",
+      "job": "job_Qu2aqXpG6zpo6x1EnChnDyNj",
+      "cu": 3,
+      "duration": 0.7,
+      "group": "ui",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.03:ratio=4:attack=1:release=80:makeup=2",
+        "sourceSha256": "8d143377f2f2886403acffc99c8cbf0c698f74ce1b4de2fb24b4b52f45f3f8c9",
+        "outputSha256": "57e9ffae63b43131d3f3845c60f3a23a5c9a40114c51e5026f8d5da24cedd362"
+      }
+    },
+    "cave_enter": {
+      "asset": "asset_W8yp4LVSrX3RSJMhgSh69Yhg",
+      "job": "job_Xb2ZVRVD4EFwBgdp793johgE",
+      "sourceSha256": "421f695325cd2244112aee2d3b46b6d193ffb4ca7275d9fe9c872bb2712e2797",
+      "cu": 5,
+      "duration": 1.5,
+      "group": "foley",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.03:ratio=4:attack=1:release=80:makeup=2",
+        "sourceSha256": "421f695325cd2244112aee2d3b46b6d193ffb4ca7275d9fe9c872bb2712e2797",
+        "outputSha256": "c729df480ab4689d02def4afce17fe6290e1540d592e9f5e890459a97b0bb050"
+      }
+    },
+    "kobold_pick.1": {
+      "asset": "asset_GBvqvxzEezxXVe15ak6WyrHF",
+      "job": "job_qHYcvC4tm11PbR9mZ2EYFHrz",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "sfx",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "f6b61450f0d892194d5a4f6f1fc927cd0e6c97f68ee06cd9d9fede21eb57d54f",
+      "postprocess": {
+        "filter": "acompressor=threshold=0.008:ratio=12:attack=0.1:release=70:makeup=4",
+        "sourceSha256": "f6b61450f0d892194d5a4f6f1fc927cd0e6c97f68ee06cd9d9fede21eb57d54f",
+        "outputSha256": "176d8e476ae721bb8bdc215635272195c195a397f82a49245bdb01ff6d4c2fe2"
+      }
+    },
+    "kobold_pick.2": {
+      "asset": "asset_bmp8PheXBZSFU4JMCZLJyPKg",
+      "job": "job_qHYcvC4tm11PbR9mZ2EYFHrz",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "sfx",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "a6d5a5517ab6d22b4075f4506cd9e30146a765f33cbe7ad30bf66ad2a73de246",
+      "postprocess": {
+        "filter": "acompressor=threshold=0.01:ratio=8:attack=0.1:release=70:makeup=4",
+        "sourceSha256": "a6d5a5517ab6d22b4075f4506cd9e30146a765f33cbe7ad30bf66ad2a73de246",
+        "outputSha256": "cd558c09ba401a3c6c96bcc6b30d756168a0be096a5188f4ba7ba621cd7e1863"
+      }
+    },
+    "trinket_presented": {
+      "asset": "asset_9x7QZ1Eao7DsN6FJmnZk2L4x",
+      "job": "job_TkBS4C6SybjgaVLrMVYHvcmq",
+      "cu": 5,
+      "duration": 1.4,
+      "group": "ui",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "92dd7ef28a1af2966cd8d1c5acb5445e408d7f0de2df5966e6834afff9aef803"
     }
   }
 }

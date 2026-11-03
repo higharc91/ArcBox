@@ -1,0 +1,604 @@
+{
+  "model": "model_google-gemini-3-8-flash-tts",
+  "estimatedCU": 60,
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.b2d431bf",
+        "line": "ashmaw_notices",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.e087bd73",
+        "line": "ashmaw_bounty",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 4,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 4,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.5726c727",
+        "line": "ashmaw_leave",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.bb5cc646",
+        "line": "ashmaw_throat_open",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.f10a0ef8",
+        "line": "ashmaw_diggings_open",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.7b678d48",
+        "line": "ashmaw_nest_open",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.de033800",
+        "line": "ashmaw_lair_open",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.6af483c6",
+        "line": "ashmaw_death",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algieba.92014549",
+        "line": "ashmaw_satchel",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.5f9525f0",
+        "line": "ashmaw_busy",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.d15873f6",
+        "line": "ashmaw_offer",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.44213570",
+        "line": "ashmaw_accepted",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.6abe32f5",
+        "line": "ashmaw_later",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.00de6679",
+        "line": "ashmaw_progress",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.fff13bfd",
+        "line": "ashmaw_proof",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.4ad1a029",
+        "line": "ashmaw_wait",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.fb4b386f",
+        "line": "ashmaw_presented",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Callirrhoe.8378895f",
+        "line": "ashmaw_done",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.915ae3ad",
+        "line": "bark_grisk_battle_start_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.aa780356",
+        "line": "bark_grisk_hit_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.f7e6dda0",
+        "line": "bark_grisk_low_hp_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.1a961fcd",
+        "line": "bark_grisk_ally_down_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.f5a41e31",
+        "line": "bark_grisk_turn_start_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 1,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 1,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Algenib.7301ebb5",
+        "line": "bark_grisk_defeat_1",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 2,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 2,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Achernar.0fc80f43",
+        "line": "ashmaw_maud_waiting",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "raw": "Achernar.b2984b21",
+        "line": "ashmaw_maud_after",
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"dry_run\": true,\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job\": {},\n  \"creativeUnitsCost\": 3,\n  \"creativeUnitsDiscount\": 0\n}"
+            }
+          ],
+          "structuredContent": {
+            "dry_run": true,
+            "model_id": "model_google-gemini-3-8-flash-tts",
+            "job": {},
+            "creativeUnitsCost": 3,
+            "creativeUnitsDiscount": 0
+          },
+          "isError": false
+        }
+      }
+    }
+  ]
+}

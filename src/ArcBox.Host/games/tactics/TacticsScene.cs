@@ -234,6 +234,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     public override void _Process(double delta)
     {
+        GiftAudio();
         if (_director is { } director)
         {
             TellWorld(director);
@@ -541,7 +542,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             Bumped(frame);
         }
         _worldHud?.Clear(frame.Walkers, frame.Fit);
-        _questHud?.Frame(_explore, _walking && !_battle && !campActive, plan.Terrain, frame.Fit, delta);
+        _questHud?.Frame(_explore, _walking && !_battle && !campActive, plan.Terrain, frame.Fit, delta, frame.Walkers);
         WalkMoments(world, frame, delta);
     }
 

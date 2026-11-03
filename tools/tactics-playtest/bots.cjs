@@ -37,6 +37,7 @@
 //                        lead-in, its aftermath) play through: the leader skips each line after 1.5 s, and every bot that may answer a
 //                        vote takes the first option, and a check the best bonus, so no run waits on a 45 s vote
 //   --timeout=<seconds>  give up after this long (default 900)
+//   --bounty --host     play Chapter 1, then the complete Ashmaw bounty through real hub/phone inputs; verify travel and class gifts
 //
 // Phone views have no position and bots answer each view once, so walking is a scripted loop of its own. Without these modes the
 // VIP leaves the walk screen with `battles`, and the run is the battle it always was. With any of them the party walks, and then the
@@ -150,13 +151,17 @@ const loseFights = count('lose', Infinity);
 const stampFights = count('walk-to-stamp', 1);
 /** Fights over so far: the VIP counts them as it leaves each results screen. */
 let fightsDone = 0;
+let lastFightOutcome = null;
+let bountyChoice = null;
 /** When the VIP last went on from a results screen. */
 let resultsLeft = 0;
 const losing = () => fightsDone < loseFights;
 /** --story[=<n>] and --story-pick=<ids>: walk to the "!" and play n beats, choosing these options where offered. */
 const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
-const chapter = opt('chapter', false) === true;
+const bountyRun = opt('bounty', false) === true;
+const chapter = opt('chapter', false) === true || bountyRun;
+if (bountyRun && !asHost) throw new Error('--bounty needs --host so region transfers can be verified.');
 const shopRun = opt('shop', false) === true;
 const questRun = opt('quests', false) === true;
 const recoveryRun = opt('camp', false) === true;
@@ -469,6 +474,9 @@ class Bot {
   /** The player's move on a `turn` screen: one command per view. */
   turn() {
     const { me, units, choices } = this.view.data;
+    // The Hollow's rooms have no distant riverbank to defend against. Pursue survivors so
+    // a damaged caster pair does not return home while the kobolds retreat across the mine.
+    if (bountyRun && String(this.view.data.map).startsWith('hollow_')) tactic.advance = true;
     const foes = units.filter((u) => u.side === 'Enemy' && u.life === 'Up');
     if (process.env.BOTS_DEBUG && this.debugSeen !== this.view.viewId) {
       this.debugSeen = this.view.viewId;
@@ -649,7 +657,7 @@ class Bot {
         if (storyBeats) return this.storyAnswer(state);
         if (silent || !view.data.canChoose || view.data.mine || !view.data.options?.length) return;
         const ids = view.data.options.map((o) => o.id);
-        const pick = storyPick.find((id) => ids.includes(id)) ?? ids[0];
+        const pick = (bountyChoice && ids.includes(bountyChoice) ? bountyChoice : null) ?? storyPick.find((id) => ids.includes(id)) ?? ids[0];
         log(`${this.name} votes ${pick}`);
         return this.input('vote', { option: pick });
       }
@@ -692,6 +700,7 @@ class Bot {
         state.resultsAt ??= Date.now() + holdMs;
         if (Date.now() < state.resultsAt) return;
         [state.resultsAt, state.resultsSince] = [undefined, undefined];
+        lastFightOutcome = view.data.outcome;
         log(`${view.data.outcome} at ${view.data.encounter}: ${view.data.lines.map((l) => `${l.name} +${l.xp} XP`).join(', ')}`);
         resultsLeft = Date.now();
         fightsDone++;
@@ -719,6 +728,7 @@ class Watch {
       if (v?.chapter && !this.card) this.card = Date.now();
       const e = v?.explore;
       if (!e) return;
+      this.region = e.region;
       const marks = (e.markers ?? []).map((m) => ({ beat: m.beat, at: m.at, emote: m.emote ?? null }));
       if (JSON.stringify(marks) !== JSON.stringify(this.markers)) [this.markers, this.markersSeen] = [marks, Date.now()];
       this.held = e.held;
@@ -1093,6 +1103,7 @@ async function walkToBeat(bots, watch, region, marker) {
     }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
     await lead.input('interact', marker.beat.startsWith('shop:') || marker.beat.startsWith('person:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
+    if (marker.instant) return log(`BOUNTY instant interaction sent: ${marker.beat}`);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
     log('CHAPTER the tap started nothing: trying again');
   }
@@ -1131,6 +1142,48 @@ async function playGrainQuest(bots, watch, region) {
   await until('the completed grain quest', () => onWalk(bots) && bots.some(b => b.view.data.journal?.quests.some(q => q.id === 'sq_missing_grain' && q.status === 'done')));
   await until('the completed pin to clear', () => bots.every(b => !b.view.data.pinned));
   log('QUEST OK: talked, voted, opened journal, pinned, followed both clues, completed, auto-unpinned');
+}
+
+/** Full shipped bounty after the normal chapter: real travel, fights, rest, proof and class rewards. No injected flags or gold. */
+async function playBounty(bots, watch) {
+  const interact = async (region, beat, choice, instant = false) => {
+    bountyChoice = choice;
+    await walkToBeat(bots, watch, region, { beat, instant });
+    await until(beat + ' to finish', () => onWalk(bots));
+  };
+  const quest = bot => bot.view?.data.journal?.quests.find(q => q.id === 'sq_ashmaw');
+  await interact('ashen_ford', 'thing:af_bounty_board', 'bounty');
+  await until('the posted bounty in the journal', () => bots.every(b => quest(b)?.objective === 'Speak to Captain Dagna'));
+  await interact('ashen_ford', 'person:dagna_holt', 'accept');
+  await until('the accepted bounty', () => bots.every(b => quest(b)?.objective === 'Find the Cinder Hollow'));
+  // The bounty is a fresh level-two adventure; recover the spell slots and wounds spent settling the ford first.
+  await interact('ashen_ford', 'thing:af_ford_campfire', 'rest');
+  await interact('ashen_ford', 'thing:af_cinder_hollow_mouth', 'enter');
+  await until('the saved Hollow arrival', () => watch.region === 'cinder_hollow' && onWalk(bots));
+  for (const encounter of ['hollow_throat', 'hollow_diggings', 'hollow_nest', 'hollow_lair']) {
+    if (encounter === 'hollow_lair') await interact('cinder_hollow', 'thing:hollow_safe_fire', 'rest');
+    const before = fightsDone;
+    bountyChoice = null;
+    await walkToBeat(bots, watch, 'cinder_hollow', { beat: encounter });
+    await until(encounter + ' won and its aftermath finished', () => fightsDone > before && onWalk(bots));
+    if (lastFightOutcome !== 'Won') throw new Error(`Bounty stopped: ${encounter} was ${lastFightOutcome}`);
+    log('BOUNTY won ' + encounter);
+  }
+  await interact('cinder_hollow', 'thing:hollow_ember_claw', null, true);
+  await until('the claw proof objective', () => bots.every(b => quest(b)?.objective === 'Bring the claw to Dagna'));
+  await interact('cinder_hollow', 'thing:hollow_exit', 'enter');
+  await until('the named Ford return', () => watch.region === 'ashen_ford' && onWalk(bots));
+  const purses = bots.map(b => b.view.data.gold ?? 0);
+  await interact('ashen_ford', 'person:dagna_holt', 'present');
+  await until('each private class gift', () => bots.every(b => quest(b)?.status === 'done' && b.view.data.questNotice?.trinket));
+  for (const [i, bot] of bots.entries()) {
+    const notice = bot.view.data.questNotice;
+    if (notice.trinket.class !== CLASSES[i] || notice.gifts) throw new Error('Wrong or shared private trinket: ' + bot.name);
+  }
+  const paid = bots.reduce((sum, b, i) => sum + (b.view.data.gold ?? 0) - purses[i], 0);
+  if (paid !== 60) throw new Error('Bounty paid ' + paid + ' gold, expected 60');
+  bountyChoice = null;
+  log('BOUNTY OK: posted, accepted, travelled, won all four chambers, rested, took proof, returned, received 60 gold and private class trinkets');
 }
 
 async function playChapter(bots, watch, state) {
@@ -1193,6 +1246,7 @@ async function playChapter(bots, watch, state) {
   if (recoveryRun && (!camped || !inn)) throw new Error('The chapter did not complete both camp and inn recovery');
   log(`CHAPTER the card: ${fs.existsSync(String(tvLog)) ? (fs.readFileSync(tvLog, 'utf8').match(/^STORY card (.*)$/m)?.[1] ?? '') : ''}`);
   await until('walking after the card', () => onWalk(bots) && bots.some((b) => b.view.data.leader));
+  if (bountyRun) await playBounty(bots, watch);
   await sleep(holdMs);
   await walkOn(bots, watch, 'CHAPTER');
   const vip = bots[0];

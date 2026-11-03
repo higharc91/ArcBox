@@ -2,6 +2,7 @@ using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Audio;
 using Tactics.Presentation.Tests.Board;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests.Audio;
 
@@ -15,6 +16,30 @@ public sealed class MusicChoiceTests
 
     private static TacticsHostView View(string phase, BattleView? battle = null, string? outcome = null)
         => new(phase, "", null, 1, [], null, battle, outcome, null);
+
+    [Fact]
+    public void The_cave_uses_the_dungeon_score_and_returns_to_the_Ford_theme_outside()
+    {
+        var basis = ThingsDemo.Steps()[0].View with { Phase = "Exploration" };
+        var cave = basis with { Explore = basis.Explore! with { Region = "cinder_hollow" } };
+        Assert.Equal(new MusicCue("dungeon"), MusicChoice.Of(cave));
+        Assert.Equal(new MusicCue("town_emberwick"), MusicChoice.Of(cave with { Explore = cave.Explore! with { Region = "ashen_ford" } }));
+    }
+
+    [Fact]
+    public void Ashmaws_breath_is_local_to_the_lair_and_stops_on_death()
+    {
+        var explore = ThingsDemo.Steps()[0].View.Explore! with { Region = "cinder_hollow", At = new(10, 32), PeopleFlags = [] };
+        var view = View("Exploration") with { Explore = explore };
+        Assert.Equal("ashmaw_breath_loop", MusicChoice.CreatureAmbienceOf(view));
+        Assert.Null(MusicChoice.CreatureAmbienceOf(view with { Explore = explore with { At = new(5, 2) } }));
+        Assert.Null(MusicChoice.CreatureAmbienceOf(view with { Explore = explore with { PeopleFlags = ["sq_ashmaw_slain"] } }));
+        var ashmaw = new UnitView(new("ashmaw"), "Ashmaw", "Enemy", "monsters.ashmaw", new(4, 6), 1, 32, 0, "Up", 0, [], null);
+        var fight = Fight("hollow_lair", "hollow_lair") with { Units = [ashmaw] };
+        Assert.Equal("ashmaw_breath_loop", MusicChoice.CreatureAmbienceOf(View("Battle", fight)));
+        Assert.Null(MusicChoice.CreatureAmbienceOf(View("Battle", fight with { Units = [ashmaw with { Hp = 0, Life = "Dead" }] })));
+        Assert.True(Bank.Value.Sound("ashmaw_breath_loop")!.Loop);
+    }
 
     [Fact]
     public void Every_track_it_names_is_in_the_manifest_and_on_disk()
@@ -60,6 +85,7 @@ public sealed class MusicChoiceTests
         ["crypt_hall"] = "battle",
         ["crystal_cave"] = "battle",
         ["ford_assault"] = "battle",
+        ["hollow_throat"] = "battle", ["hollow_diggings"] = "battle", ["hollow_nest"] = "battle", ["hollow_lair"] = "boss",
         ["warlord_bridge"] = "boss",
         ["rime_tower"] = "boss",
         ["keep_gate"] = "boss",

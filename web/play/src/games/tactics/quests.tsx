@@ -3,6 +3,7 @@ import type { CustomScreenProps } from "../module";
 import { MoodPortrait } from "./art";
 import { useSfx } from "./sfx";
 import "./quests.css";
+import { TrinketSlot, type Trinket } from "./trinket";
 
 export interface QuestEntry {
   id: string; name: string; status: "active" | "done" | "failed"; giver: string; portrait?: string;
@@ -61,12 +62,13 @@ export function QuestLog({ data, send }: CustomScreenProps) {
   </>}</div>;
 }
 
-export interface QuestNoticeData { id: string; name: string; kind: string; objective: string; canPin: boolean }
-function QuestNotice({ notice, send, read }: { notice: QuestNoticeData; send: Send; read: (quest: string) => void }) {
+export interface QuestNoticeData { id: string; name: string; kind: string; objective: string; canPin: boolean; trinket?: Trinket }
+function QuestNotice({ notice, send, read, stop }: { notice: QuestNoticeData; send: Send; read: (quest: string) => void; stop: () => void }) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const held = useRef(false); const sfx = useSfx();
   const cancel = () => { if (timer.current !== null) clearTimeout(timer.current); timer.current = null; };
   useEffect(() => cancel, []);
+  useEffect(() => { if (notice.trinket) stop(); }, [notice.id, notice.trinket?.id]);
   const label = notice.kind === "start" ? "Quest started" : notice.kind === "update" ? "Quest updated" : notice.kind === "complete" ? "Quest complete" : "Quest failed";
   return <div role="status"><button type="button" class="tx-tracker-chip tx-quest-notice" onContextMenu={e => e.preventDefault()}
     onPointerDown={() => { cancel(); held.current = false; if (notice.canPin) timer.current = setTimeout(() => {
@@ -75,7 +77,7 @@ function QuestNotice({ notice, send, read }: { notice: QuestNoticeData; send: Se
     onClick={() => { if (!held.current) read(notice.id); held.current = false; }}>
       <span aria-hidden="true">✦</span><span><span class="tx-quest-notice-label">{label}{notice.canPin ? " · Hold to pin" : ""}</span>
       <b>{notice.name}</b>{notice.kind === "start" || notice.kind === "update" ? <small>{notice.objective}</small> : null}</span>
-    </button></div>;
+    </button>{notice.trinket ? <div class="tx-trinket-presented"><span class="tx-eyebrow">Presented to you</span><TrinketSlot key={`${notice.id}:${notice.trinket.id}`} trinket={notice.trinket} presented /></div> : null}</div>;
 }
 
 export function WalkJournal({ journal, pinned, notice, send, stop }: {
@@ -84,7 +86,7 @@ export function WalkJournal({ journal, pinned, notice, send, stop }: {
   const [open, setOpen] = useState(false); const [initial, setInitial] = useState<string>();
   const read = (quest?: string) => { stop(); setInitial(quest); setOpen(true); };
   return <div class="tx-walk-journal">
-    {notice ? <QuestNotice notice={notice} send={send} read={read} /> : null}
+    {notice ? <QuestNotice notice={notice} send={send} read={read} stop={stop} /> : null}
     {pinned && notice?.id !== pinned.id ? <button type="button" class="tx-tracker-chip" onClick={() => read(pinned.id)}><span aria-hidden="true">◆</span><span><b>{pinned.name}</b><small>{pinned.objective}</small></span></button> : null}
     <button type="button" class="tx-btn ghost" onClick={() => { stop(); if (journal.canPin) send("questLog", { action: "open" }); else read(); }}>{journal.canPin ? "Quest log" : "Read quest journal"}</button>
     {open ? <div class="tx-journal-modal" role="dialog" aria-modal="true" aria-label="Private quest journal" onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}>

@@ -2,15 +2,14 @@
   "content": [
     {
       "type": "text",
-      "text": "⚠ Scenario error (trace_id: mcpt_udDT3g2uFeQSC5iPbeXF8GRz). For a diagnostic report, run diagnostics_run."
-    },
-    {
-      "type": "text",
-      "text": "Error: 429 {\"reason\":\"Too Many Requests. Please, wait 981 seconds before trying again.\",\"name\":\"RateLimitError\",\"details\":{\"cooldownSeconds\":\"984\",\"remainingSeconds\":\"981\"}}"
+      "text": "{\n  \"model_id\": \"model_mirelo-sfx-2-0-text-to-audio\",\n  \"job_id\": \"job_WFLmaT2T5GL8G25FFa3TKUq7\",\n  \"status\": \"queued\",\n  \"message\": \"Job started (status 'queued'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_WFLmaT2T5GL8G25FFa3TKUq7' (one call waits on up to 32 jobs).\"\n}"
     }
   ],
   "structuredContent": {
-    "error_code": "INVALID_ARGUMENT"
+    "model_id": "model_mirelo-sfx-2-0-text-to-audio",
+    "job_id": "job_WFLmaT2T5GL8G25FFa3TKUq7",
+    "status": "queued",
+    "message": "Job started (status 'queued'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_WFLmaT2T5GL8G25FFa3TKUq7' (one call waits on up to 32 jobs)."
   },
-  "isError": true
+  "isError": false
 }

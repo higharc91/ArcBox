@@ -8245,6 +8245,471 @@
       "creativeUnits": 2,
       "issue": 73,
       "replacesRaw": "Iapetus.ca4cdd62"
+    },
+    "Algenib.915ae3ad": {
+      "asset": "asset_L53oWit8RwV48vbETX7rVUws",
+      "job": "job_vb2Cov7goWiDgt8AgiLhvGUe",
+      "preset": "Algenib",
+      "text": "Bear’s awake! Dig or die!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
+      "creativeUnits": 2,
+      "issue": 74,
+      "derived": {
+        "start": 0,
+        "end": 2.66,
+        "reason": "Remove tail noise after the completed spoken line; preserve source render.",
+        "sourceSha256": "b6905a1685bcb144129b85dbea4fc91cac2663d4431a9d5f4ae0eaf9dc959f98",
+        "wavSha256": "b1fd1b7a9481a6ab9efeb7cac853b38df995de61c15b72946113ee4e55a71302"
+      }
+    },
+    "Algieba.b2d431bf": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 0,
+        "end": 8.24,
+        "matchingCoverage": 0.9048,
+        "recognized": "Bread at the greenery gate at noon. Lost one red hen. The lower fort is closed by order of the watch.",
+        "wavSha256": "df965bba4cb152f859c877d1f3a38d9e655799ff5144ac9892f6644f77247077"
+      }
+    },
+    "Algieba.e087bd73": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 8.98,
+        "end": 26.5,
+        "matchingCoverage": 0.9583,
+        "recognized": "By order of Captain Dagna Holt, a great grey bear hunts the southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the forward watch. Sixty gold and a fitted watch gift for each companion. Speak to the captain before entering the center hollow.",
+        "wavSha256": "8ca8859b3df4562ac00d3987b8193a678c629d69530ffd6eff4557e4b8c81616"
+      },
+      "supersededBy": [
+        "Algieba.0bb18d07",
+        "Algieba.c43db8c1"
+      ]
+    },
+    "Algieba.5726c727": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "The pins have rusted into the old notices.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 27.34,
+        "end": 29.42,
+        "matchingCoverage": 1.0,
+        "recognized": "The pins have rusted into the old notices.",
+        "wavSha256": "d60cda1f0ce3c8364f23d9f57006364150c83713fb7ea6be4785a25d6617980e"
+      }
+    },
+    "Algieba.bb5cc646": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 29.8,
+        "end": 36.92,
+        "matchingCoverage": 1.0,
+        "recognized": "The passage narrows. Wet wings stir overhead. Something thick moves beneath the dripping stone.",
+        "wavSha256": "ca09ad0dd42030dc1051e4abaffe047139453bc3035af684869532ad2fa22ddb"
+      }
+    },
+    "Algieba.f10a0ef8": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+      "renderText": "<Quiet, clear storyteller; let the distant picks die away. Mood: idle.> Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 37.46,
+        "end": 44.22,
+        "matchingCoverage": 0.95,
+        "recognized": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts as frightened crew.",
+        "wavSha256": "f752760b0945379ca35af9a52d6563a8cb396a936d4298d78fb89c5018ff1e0b"
+      }
+    },
+    "Algieba.7b678d48": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 44.96,
+        "end": 50.26,
+        "matchingCoverage": 1.0,
+        "recognized": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+        "wavSha256": "03bfb97317a16ff3d0b1cf55d228d674c5e5e2f89375ab7c3bc8cf79358c5f9d"
+      }
+    },
+    "Algieba.de033800": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 50.96,
+        "end": 58.88,
+        "matchingCoverage": 1.0,
+        "recognized": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them and cold.",
+        "wavSha256": "a09174db55a0a6626b0dea934b87a933c0f41a511fff488c1e9577441e6362ab"
+      }
+    },
+    "Algieba.6af483c6": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 59.68,
+        "end": 71.12,
+        "matchingCoverage": 0.9667,
+        "recognized": "Ashmaw lowers its head. The coal and the wall gutters once. Then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "wavSha256": "963252eefec7291d21562511501232786c01b46738e6017a195f9bbf124e63cc"
+      }
+    },
+    "Algieba.92014549": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 71.8,
+        "end": 82.52,
+        "matchingCoverage": 0.913,
+        "recognized": "A small satchel. Torn. But empty. Inside charcoal unfolded paper. Maud. I got out. I'll wait by your fire. Please tell Da.",
+        "wavSha256": "9940acc7897718fcef6e96f838c1968913abecdd4e30bad6a487c45b0a09ab5e"
+      }
+    },
+    "Callirrhoe.5f9525f0": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "The ford first. I have too few guards to bury another.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 0,
+        "end": 4.04,
+        "matchingCoverage": 0.9091,
+        "recognized": "The Ford first. I have two few guards to bury another.",
+        "wavSha256": "6afebce78be8609cc6abadf4b6639409adeee78b4ee7824fa23012cc96cab8d9"
+      }
+    },
+    "Callirrhoe.d15873f6": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 5.66,
+        "end": 19.36,
+        "matchingCoverage": 0.881,
+        "recognized": "The bridge cost us enough. Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+        "wavSha256": "92bdbed8b0601474b4ecbb8fef49d446aef7859773dd717747be85bc2395bb6c"
+      },
+      "supersededRawBy": "Callirrhoe.c459c28d"
+    },
+    "Callirrhoe.44213570": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 20.54,
+        "end": 31.52,
+        "matchingCoverage": 1.0,
+        "recognized": "Bring the Ember Claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully. That bear has lived through. More winters than this watch.",
+        "wavSha256": "d00a811d9bfba54934ab7621468bfbf76e78b189a603bad53fcbdd768366d3ce"
+      }
+    },
+    "Callirrhoe.6abe32f5": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Then take the time. Cold courage does nobody any good.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 32.68,
+        "end": 36.54,
+        "matchingCoverage": 1.0,
+        "recognized": "Then take the time. Cold courage does nobody any good.",
+        "wavSha256": "3e6773f2b7687b178078c8ccdae54e553e12590aeb718415dfc047e3e4c0ec23"
+      }
+    },
+    "Callirrhoe.00de6679": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 37.52,
+        "end": 43.86,
+        "matchingCoverage": 1.0,
+        "recognized": "Below Maud's hut, follow the miners track. Come back with the claw and with every soul you take in.",
+        "wavSha256": "6e446cfe905c685620a8e796701bb277aac47b7be8a4b90c7e65c07185bbd07d"
+      }
+    },
+    "Callirrhoe.fff13bfd": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 44.7,
+        "end": 56.94,
+        "matchingCoverage": 0.9706,
+        "recognized": "Still warm. Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+        "wavSha256": "358cc285d52d6e07ec6f716a1888d7707a6b1d1c6709c9e65ea40f928b677f1a"
+      },
+      "supersededRawBy": "Callirrhoe.a0ee05c2"
+    },
+    "Callirrhoe.4ad1a029": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "They will stay here. A promise does not spoil overnight.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 57.56,
+        "end": 60.78,
+        "matchingCoverage": 1.0,
+        "recognized": "They will stay here. A promise does not spoil overnight.",
+        "wavSha256": "7ecccc251125108a792c6c26553fa4f5fdc5c6bf2a0c8e134d3f296f34862da3"
+      }
+    },
+    "Callirrhoe.fb4b386f": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 61.82,
+        "end": 67.12,
+        "matchingCoverage": 1.0,
+        "recognized": "For the ones here and the ones we expect home. The watch remembers who stood for this town.",
+        "wavSha256": "5ec399d21f3c431293f73890a4b806b183d2cb5ca082a25c6571ef1f105ba36b"
+      }
+    },
+    "Callirrhoe.8378895f": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 68.0,
+        "end": 73.04,
+        "matchingCoverage": 1.0,
+        "recognized": "The pens are quiet. The boy is home. That is enough good news for one day.",
+        "wavSha256": "a9c95ad5b4c911b1d515348b6a92f96ee849c89303b6eeaa0122cc728a8eb252"
+      }
+    },
+    "Algenib.aa780356": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Algenib",
+      "text": "That was my good side!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> That was my good side!",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 0.72,
+        "end": 2.3,
+        "matchingCoverage": 1.0,
+        "recognized": "that was my good side.",
+        "wavSha256": "86de38245c3a3a1474ede1a0c10beb0a8d10568b513b04ce0b6ea8718195c452"
+      }
+    },
+    "Algenib.f7e6dda0": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Algenib",
+      "text": "The market pays! I’ll split it!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 3.18,
+        "end": 6.16,
+        "matchingCoverage": 1.0,
+        "recognized": "The market pays. I'll split it.",
+        "wavSha256": "5cdb13a495a5a2d840d7e7f5697140444036626eabbc1898eb1ef4a14008b845"
+      }
+    },
+    "Algenib.1a961fcd": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Algenib",
+      "text": "Up! I counted you in the wages!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Up! I counted you in the wages!",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 6.6,
+        "end": 9.18,
+        "matchingCoverage": 0.8571,
+        "recognized": "I counted you in the wages.",
+        "wavSha256": "b716417b9684f45f274fe2bc96d32a070a8ebac6b052189d2434b689941a8604"
+      }
+    },
+    "Algenib.f5a41e31": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Algenib",
+      "text": "Dig faster!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Dig faster!",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 9.74,
+        "end": 10.94,
+        "matchingCoverage": 1.0,
+        "recognized": "Dig faster.",
+        "wavSha256": "7d3599628cba6276a66bce1bb8f8ac80123872154cd5be45de71c8629dc83c18"
+      }
+    },
+    "Algenib.7301ebb5": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Algenib",
+      "text": "Tell them… I kept the tally.",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 12.12,
+        "end": 14.94,
+        "matchingCoverage": 1.0,
+        "recognized": "Tell them I kept the tally.",
+        "wavSha256": "36e65705951a41f1cea00f79290e1365ca315e978873c25e8843916bfebeca33"
+      }
+    },
+    "Achernar.0fc80f43": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Achernar",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 15.72,
+        "end": 27.5,
+        "matchingCoverage": 1.0,
+        "recognized": "The boy is by my fire. Let his father know. As for that old bear, hunger wakes before a creature does. Go gently, if you can.",
+        "wavSha256": "c73b1dcdf57cbb96ab7d4c4c9ab3c73eaf1d98de80636123ec7b3325e9c2aa26"
+      }
+    },
+    "Achernar.b2984b21": {
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "preset": "Achernar",
+      "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "renderText": "<Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "batch": "ashmaw_grisk_maud_batch",
+      "derived": {
+        "start": 28.22,
+        "end": 41.6,
+        "matchingCoverage": 1.0,
+        "recognized": "Poor old thing. A hundred winters. And the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+        "wavSha256": "c95853b3e846b72b6fac44dec342e4c7ce64ef8bf1fcb806451d67f198e40812"
+      }
+    },
+    "Algieba.0bb18d07": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 8.98,
+        "end": 19.14,
+        "matchingCoverage": 0.9655,
+        "recognized": "By order of Captain Dagna Holt, a great grey bear hunts the southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the forward watch.",
+        "wavSha256": "ae629f91dc84f2d02463e5fb4f281c3f959b5787aba70b6c0474658c5d1bf12a"
+      }
+    },
+    "Algieba.c43db8c1": {
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "preset": "Algieba",
+      "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "batch": "ashmaw_narrator_batch",
+      "derived": {
+        "start": 20.08,
+        "end": 26.5,
+        "matchingCoverage": 0.9474,
+        "recognized": "Sixty gold and a fitted watch gift for each companion. Speak to the captain before entering the center hollow.",
+        "wavSha256": "bcb10c88b7798ccb65e48155ec58731856836862a0e8aa90bbb5c06475a835a8"
+      }
+    },
+    "Callirrhoe.c459c28d": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 8.06,
+        "end": 19.36,
+        "matchingCoverage": 0.8649,
+        "recognized": "Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+        "wavSha256": "0c1db255f19c8c5d5ad7428744c63e390d5a4b15107392c465155538375ccc96"
+      }
+    },
+    "Callirrhoe.a0ee05c2": {
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "preset": "Callirrhoe",
+      "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "batch": "ashmaw_dagna_holt_batch",
+      "derived": {
+        "start": 46.18,
+        "end": 56.94,
+        "matchingCoverage": 0.9688,
+        "recognized": "Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+        "wavSha256": "eff1501ca2f70c587c0e9e13afacb9afd3dc5ac49cd614f81a4cfa976d274d5f"
+      }
+    },
+    "Algenib.1cae7ac3": {
+      "asset": "asset_s4q1aEdaj3MtiGbKu7WjXfd1",
+      "job": "job_mUbkmMnRbe7XjGGGRbNTT7Eg",
+      "preset": "Algenib",
+      "text": "You no take candle!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; a sharp, possessive protest. Keep every word clear. Mood: angry.> You no take candle!",
+      "sourceSha256": "eaefa264d00641ef4eb7a976d3826bcc76c71b4ee5a0b2e327b969072eebdb4f"
     }
   },
   "npcsAndQuests": [
@@ -10130,6 +10595,831 @@
       "fromFile": "bark_dagna_holt_battle_start_3.43d579f7.ogg",
       "file": "bark_dagna_holt_town_3.43d579f7.ogg",
       "asset": "asset_NxgmpDQwVv9vcjTDecJk6yG2"
+    }
+  ],
+  "ashmawBounty": [
+    {
+      "raw": "Algenib.915ae3ad",
+      "preset": "Algenib",
+      "text": "Bear’s awake! Dig or die!",
+      "line": "bark_grisk_battle_start_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "asset": "asset_L53oWit8RwV48vbETX7rVUws",
+      "job": "job_vb2Cov7goWiDgt8AgiLhvGUe",
+      "creativeUnits": 2,
+      "derived": {
+        "start": 0,
+        "end": 2.66,
+        "reason": "Remove tail noise after the completed spoken line; preserve source render.",
+        "sourceSha256": "b6905a1685bcb144129b85dbea4fc91cac2663d4431a9d5f4ae0eaf9dc959f98",
+        "wavSha256": "b1fd1b7a9481a6ab9efeb7cac853b38df995de61c15b72946113ee4e55a71302"
+      }
+    },
+    {
+      "raw": "Algieba.b2d431bf",
+      "preset": "Algieba",
+      "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "line": "ashmaw_notices",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 0,
+        "end": 8.24,
+        "matchingCoverage": 0.9048,
+        "recognized": "Bread at the greenery gate at noon. Lost one red hen. The lower fort is closed by order of the watch.",
+        "wavSha256": "df965bba4cb152f859c877d1f3a38d9e655799ff5144ac9892f6644f77247077"
+      }
+    },
+    {
+      "raw": "Algieba.e087bd73",
+      "preset": "Algieba",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "line": "ashmaw_bounty",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 8.98,
+        "end": 26.5,
+        "matchingCoverage": 0.9583,
+        "recognized": "By order of Captain Dagna Holt, a great grey bear hunts the southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the forward watch. Sixty gold and a fitted watch gift for each companion. Speak to the captain before entering the center hollow.",
+        "wavSha256": "8ca8859b3df4562ac00d3987b8193a678c629d69530ffd6eff4557e4b8c81616"
+      },
+      "supersededBy": [
+        "ashmaw_bounty_1",
+        "ashmaw_bounty_2"
+      ],
+      "reason": "Split a five-row TV caption into two readable beats. Same paid narrator take; derive new cuts without regeneration."
+    },
+    {
+      "raw": "Algieba.5726c727",
+      "preset": "Algieba",
+      "text": "The pins have rusted into the old notices.",
+      "line": "ashmaw_leave",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 27.34,
+        "end": 29.42,
+        "matchingCoverage": 1.0,
+        "recognized": "The pins have rusted into the old notices.",
+        "wavSha256": "d60cda1f0ce3c8364f23d9f57006364150c83713fb7ea6be4785a25d6617980e"
+      }
+    },
+    {
+      "raw": "Algieba.bb5cc646",
+      "preset": "Algieba",
+      "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "line": "ashmaw_throat_open",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 29.8,
+        "end": 36.92,
+        "matchingCoverage": 1.0,
+        "recognized": "The passage narrows. Wet wings stir overhead. Something thick moves beneath the dripping stone.",
+        "wavSha256": "ca09ad0dd42030dc1051e4abaffe047139453bc3035af684869532ad2fa22ddb"
+      }
+    },
+    {
+      "raw": "Algieba.f10a0ef8",
+      "preset": "Algieba",
+      "text": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+      "line": "ashmaw_diggings_open",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; let the distant picks die away. Mood: idle.> Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; let the distant picks die away.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 37.46,
+        "end": 44.22,
+        "matchingCoverage": 0.95,
+        "recognized": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts as frightened crew.",
+        "wavSha256": "f752760b0945379ca35af9a52d6563a8cb396a936d4298d78fb89c5018ff1e0b"
+      }
+    },
+    {
+      "raw": "Algieba.7b678d48",
+      "preset": "Algieba",
+      "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "line": "ashmaw_nest_open",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 44.96,
+        "end": 50.26,
+        "matchingCoverage": 1.0,
+        "recognized": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+        "wavSha256": "03bfb97317a16ff3d0b1cf55d228d674c5e5e2f89375ab7c3bc8cf79358c5f9d"
+      }
+    },
+    {
+      "raw": "Algieba.de033800",
+      "preset": "Algieba",
+      "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "line": "ashmaw_lair_open",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 50.96,
+        "end": 58.88,
+        "matchingCoverage": 1.0,
+        "recognized": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them and cold.",
+        "wavSha256": "a09174db55a0a6626b0dea934b87a933c0f41a511fff488c1e9577441e6362ab"
+      }
+    },
+    {
+      "raw": "Algieba.6af483c6",
+      "preset": "Algieba",
+      "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "line": "ashmaw_death",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 59.68,
+        "end": 71.12,
+        "matchingCoverage": 0.9667,
+        "recognized": "Ashmaw lowers its head. The coal and the wall gutters once. Then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "wavSha256": "963252eefec7291d21562511501232786c01b46738e6017a195f9bbf124e63cc"
+      }
+    },
+    {
+      "raw": "Algieba.92014549",
+      "preset": "Algieba",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "line": "ashmaw_satchel",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 71.8,
+        "end": 82.52,
+        "matchingCoverage": 0.913,
+        "recognized": "A small satchel. Torn. But empty. Inside charcoal unfolded paper. Maud. I got out. I'll wait by your fire. Please tell Da.",
+        "wavSha256": "9940acc7897718fcef6e96f838c1968913abecdd4e30bad6a487c45b0a09ab5e"
+      }
+    },
+    {
+      "raw": "Callirrhoe.5f9525f0",
+      "preset": "Callirrhoe",
+      "text": "The ford first. I have too few guards to bury another.",
+      "line": "ashmaw_busy",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 0,
+        "end": 4.04,
+        "matchingCoverage": 0.9091,
+        "recognized": "The Ford first. I have two few guards to bury another.",
+        "wavSha256": "6afebce78be8609cc6abadf4b6639409adeee78b4ee7824fa23012cc96cab8d9"
+      }
+    },
+    {
+      "raw": "Callirrhoe.d15873f6",
+      "preset": "Callirrhoe",
+      "text": "The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "line": "ashmaw_offer",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 5.66,
+        "end": 19.36,
+        "matchingCoverage": 0.881,
+        "recognized": "The bridge cost us enough. Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+        "wavSha256": "92bdbed8b0601474b4ecbb8fef49d446aef7859773dd717747be85bc2395bb6c"
+      },
+      "supersededRawBy": "Callirrhoe.c459c28d",
+      "reason": "Trim a short opening sentence so the complete replacement confirmation fits the existing three-row TV caption."
+    },
+    {
+      "raw": "Callirrhoe.44213570",
+      "preset": "Callirrhoe",
+      "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "line": "ashmaw_accepted",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 20.54,
+        "end": 31.52,
+        "matchingCoverage": 1.0,
+        "recognized": "Bring the Ember Claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully. That bear has lived through. More winters than this watch.",
+        "wavSha256": "d00a811d9bfba54934ab7621468bfbf76e78b189a603bad53fcbdd768366d3ce"
+      }
+    },
+    {
+      "raw": "Callirrhoe.6abe32f5",
+      "preset": "Callirrhoe",
+      "text": "Then take the time. Cold courage does nobody any good.",
+      "line": "ashmaw_later",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 32.68,
+        "end": 36.54,
+        "matchingCoverage": 1.0,
+        "recognized": "Then take the time. Cold courage does nobody any good.",
+        "wavSha256": "3e6773f2b7687b178078c8ccdae54e553e12590aeb718415dfc047e3e4c0ec23"
+      }
+    },
+    {
+      "raw": "Callirrhoe.00de6679",
+      "preset": "Callirrhoe",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "line": "ashmaw_progress",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 37.52,
+        "end": 43.86,
+        "matchingCoverage": 1.0,
+        "recognized": "Below Maud's hut, follow the miners track. Come back with the claw and with every soul you take in.",
+        "wavSha256": "6e446cfe905c685620a8e796701bb277aac47b7be8a4b90c7e65c07185bbd07d"
+      }
+    },
+    {
+      "raw": "Callirrhoe.fff13bfd",
+      "preset": "Callirrhoe",
+      "text": "Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "line": "ashmaw_proof",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 44.7,
+        "end": 56.94,
+        "matchingCoverage": 0.9706,
+        "recognized": "Still warm. Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+        "wavSha256": "358cc285d52d6e07ec6f716a1888d7707a6b1d1c6709c9e65ea40f928b677f1a"
+      },
+      "supersededRawBy": "Callirrhoe.a0ee05c2",
+      "reason": "Trim a short opening sentence so the complete replacement confirmation fits the existing three-row TV caption."
+    },
+    {
+      "raw": "Callirrhoe.4ad1a029",
+      "preset": "Callirrhoe",
+      "text": "They will stay here. A promise does not spoil overnight.",
+      "line": "ashmaw_wait",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 57.56,
+        "end": 60.78,
+        "matchingCoverage": 1.0,
+        "recognized": "They will stay here. A promise does not spoil overnight.",
+        "wavSha256": "7ecccc251125108a792c6c26553fa4f5fdc5c6bf2a0c8e134d3f296f34862da3"
+      }
+    },
+    {
+      "raw": "Callirrhoe.fb4b386f",
+      "preset": "Callirrhoe",
+      "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "line": "ashmaw_presented",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 61.82,
+        "end": 67.12,
+        "matchingCoverage": 1.0,
+        "recognized": "For the ones here and the ones we expect home. The watch remembers who stood for this town.",
+        "wavSha256": "5ec399d21f3c431293f73890a4b806b183d2cb5ca082a25c6571ef1f105ba36b"
+      }
+    },
+    {
+      "raw": "Callirrhoe.8378895f",
+      "preset": "Callirrhoe",
+      "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+      "line": "ashmaw_done",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 68.0,
+        "end": 73.04,
+        "matchingCoverage": 1.0,
+        "recognized": "The pens are quiet. The boy is home. That is enough good news for one day.",
+        "wavSha256": "a9c95ad5b4c911b1d515348b6a92f96ee849c89303b6eeaa0122cc728a8eb252"
+      }
+    },
+    {
+      "raw": "Algenib.aa780356",
+      "preset": "Algenib",
+      "text": "That was my good side!",
+      "line": "bark_grisk_hit_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> That was my good side!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 0.72,
+        "end": 2.3,
+        "matchingCoverage": 1.0,
+        "recognized": "that was my good side.",
+        "wavSha256": "86de38245c3a3a1474ede1a0c10beb0a8d10568b513b04ce0b6ea8718195c452"
+      }
+    },
+    {
+      "raw": "Algenib.f7e6dda0",
+      "preset": "Algenib",
+      "text": "The market pays! I’ll split it!",
+      "line": "bark_grisk_low_hp_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 3.18,
+        "end": 6.16,
+        "matchingCoverage": 1.0,
+        "recognized": "The market pays. I'll split it.",
+        "wavSha256": "5cdb13a495a5a2d840d7e7f5697140444036626eabbc1898eb1ef4a14008b845"
+      }
+    },
+    {
+      "raw": "Algenib.1a961fcd",
+      "preset": "Algenib",
+      "text": "Up! I counted you in the wages!",
+      "line": "bark_grisk_ally_down_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Up! I counted you in the wages!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 6.6,
+        "end": 9.18,
+        "matchingCoverage": 0.8571,
+        "recognized": "I counted you in the wages.",
+        "wavSha256": "b716417b9684f45f274fe2bc96d32a070a8ebac6b052189d2434b689941a8604"
+      }
+    },
+    {
+      "raw": "Algenib.f5a41e31",
+      "preset": "Algenib",
+      "text": "Dig faster!",
+      "line": "bark_grisk_turn_start_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Dig faster!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 9.74,
+        "end": 10.94,
+        "matchingCoverage": 1.0,
+        "recognized": "Dig faster.",
+        "wavSha256": "7d3599628cba6276a66bce1bb8f8ac80123872154cd5be45de71c8629dc83c18"
+      }
+    },
+    {
+      "raw": "Algenib.7301ebb5",
+      "preset": "Algenib",
+      "text": "Tell them… I kept the tally.",
+      "line": "bark_grisk_defeat_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 12.12,
+        "end": 14.94,
+        "matchingCoverage": 1.0,
+        "recognized": "Tell them I kept the tally.",
+        "wavSha256": "36e65705951a41f1cea00f79290e1365ca315e978873c25e8843916bfebeca33"
+      }
+    },
+    {
+      "raw": "Achernar.0fc80f43",
+      "preset": "Achernar",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "line": "ashmaw_maud_waiting",
+      "speaker": "old_maud",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "delivery": {
+        "direction": "Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 15.72,
+        "end": 27.5,
+        "matchingCoverage": 1.0,
+        "recognized": "The boy is by my fire. Let his father know. As for that old bear, hunger wakes before a creature does. Go gently, if you can.",
+        "wavSha256": "c73b1dcdf57cbb96ab7d4c4c9ab3c73eaf1d98de80636123ec7b3325e9c2aa26"
+      }
+    },
+    {
+      "raw": "Achernar.b2984b21",
+      "preset": "Achernar",
+      "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "line": "ashmaw_maud_after",
+      "speaker": "old_maud",
+      "renderText": "<Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "delivery": {
+        "direction": "Ancient, papery, unhurried; a small grief, without explaining its cause.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "batch": "ashmaw_grisk_maud_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 28.22,
+        "end": 41.6,
+        "matchingCoverage": 1.0,
+        "recognized": "Poor old thing. A hundred winters. And the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+        "wavSha256": "c95853b3e846b72b6fac44dec342e4c7ce64ef8bf1fcb806451d67f198e40812"
+      }
+    },
+    {
+      "raw": "Algieba.0bb18d07",
+      "preset": "Algieba",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "line": "ashmaw_bounty_1",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 8.98,
+        "end": 19.14,
+        "matchingCoverage": 0.9655,
+        "recognized": "By order of Captain Dagna Holt, a great grey bear hunts the southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the forward watch.",
+        "wavSha256": "ae629f91dc84f2d02463e5fb4f281c3f959b5787aba70b6c0474658c5d1bf12a"
+      }
+    },
+    {
+      "raw": "Algieba.c43db8c1",
+      "preset": "Algieba",
+      "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "line": "ashmaw_bounty_2",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "batch": "ashmaw_narrator_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 20.08,
+        "end": 26.5,
+        "matchingCoverage": 0.9474,
+        "recognized": "Sixty gold and a fitted watch gift for each companion. Speak to the captain before entering the center hollow.",
+        "wavSha256": "bcb10c88b7798ccb65e48155ec58731856836862a0e8aa90bbb5c06475a835a8"
+      }
+    },
+    {
+      "raw": "Callirrhoe.c459c28d",
+      "preset": "Callirrhoe",
+      "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "line": "ashmaw_offer",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 8.06,
+        "end": 19.36,
+        "matchingCoverage": 0.8649,
+        "recognized": "Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+        "wavSha256": "0c1db255f19c8c5d5ad7428744c63e390d5a4b15107392c465155538375ccc96"
+      }
+    },
+    {
+      "raw": "Callirrhoe.a0ee05c2",
+      "preset": "Callirrhoe",
+      "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "line": "ashmaw_proof",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "batch": "ashmaw_dagna_holt_batch",
+      "creativeUnits": 0,
+      "derived": {
+        "start": 46.18,
+        "end": 56.94,
+        "matchingCoverage": 0.9688,
+        "recognized": "Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+        "wavSha256": "eff1501ca2f70c587c0e9e13afacb9afd3dc5ac49cd614f81a4cfa976d274d5f"
+      }
+    },
+    {
+      "raw": "Algenib.1cae7ac3",
+      "preset": "Algenib",
+      "text": "You no take candle!",
+      "line": "bark_grisk_candle_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; a sharp, possessive protest. Keep every word clear. Mood: angry.> You no take candle!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; a sharp, possessive protest. Keep every word clear.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "asset": "asset_s4q1aEdaj3MtiGbKu7WjXfd1",
+      "job": "job_mUbkmMnRbe7XjGGGRbNTT7Eg",
+      "creativeUnits": 2,
+      "sourceSha256": "eaefa264d00641ef4eb7a976d3826bcc76c71b4ee5a0b2e327b969072eebdb4f",
+      "ownerApproval": {
+        "date": "2026-11-03",
+        "reply": "that voice line is perfect",
+        "encodedOggSha256": "dd1cc97a7a65ac386a971e6b2933148d4c9d82b741532c07fc90b023278d4994",
+        "listeningMp3Sha256": "a1a9f161285287f3b6fcb3cb4e67099324c4d10d5f508262617cd44f3421b5bc",
+        "note": "Keep this exact take and the current +4-semitone processing. No re-recording or additional trimming."
+      }
+    }
+  ],
+  "ashmawBatches": [
+    {
+      "batch": "ashmaw_narrator_batch",
+      "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
+      "creativeUnits": 20,
+      "sourceSha256": "fc0b923788416776f524b72ffe9a03883e9862463556629233a4e3855f418247",
+      "model": "model_google-gemini-3-8-flash-tts",
+      "speaker": "narrator",
+      "cuts": [
+        "Algieba.b2d431bf",
+        "Algieba.5726c727",
+        "Algieba.bb5cc646",
+        "Algieba.f10a0ef8",
+        "Algieba.7b678d48",
+        "Algieba.de033800",
+        "Algieba.6af483c6",
+        "Algieba.92014549",
+        "Algieba.0bb18d07",
+        "Algieba.c43db8c1"
+      ],
+      "previousCuts": [
+        "Algieba.e087bd73"
+      ]
+    },
+    {
+      "batch": "ashmaw_dagna_holt_batch",
+      "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
+      "creativeUnits": 17,
+      "sourceSha256": "9102a0ca7d3fe6276f9bd6198f0a0695ad9ee49474ad9963ee018f31c0d47d5b",
+      "model": "model_google-gemini-3-8-flash-tts",
+      "speaker": "dagna_holt",
+      "cuts": [
+        "Callirrhoe.5f9525f0",
+        "Callirrhoe.c459c28d",
+        "Callirrhoe.44213570",
+        "Callirrhoe.6abe32f5",
+        "Callirrhoe.00de6679",
+        "Callirrhoe.a0ee05c2",
+        "Callirrhoe.4ad1a029",
+        "Callirrhoe.fb4b386f",
+        "Callirrhoe.8378895f"
+      ],
+      "previousCuts": [
+        "Callirrhoe.d15873f6",
+        "Callirrhoe.fff13bfd"
+      ]
+    },
+    {
+      "batch": "ashmaw_grisk_maud_batch",
+      "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
+      "creativeUnits": 11,
+      "sourceSha256": "d57ec727301869b2cdf987b5fc37e4aeac6c71208adb53f88c56b610f7cd31f9",
+      "model": "model_google-gemini-3-8-flash-tts",
+      "speakers": {
+        "grisk": "Algenib",
+        "old_maud": "Achernar"
+      },
+      "cuts": [
+        "Algenib.aa780356",
+        "Algenib.f7e6dda0",
+        "Algenib.1a961fcd",
+        "Algenib.f5a41e31",
+        "Algenib.7301ebb5",
+        "Achernar.0fc80f43",
+        "Achernar.b2984b21"
+      ]
     }
   ]
 }

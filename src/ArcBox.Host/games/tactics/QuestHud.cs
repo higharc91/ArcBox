@@ -18,11 +18,14 @@ public partial class QuestHud(string root, HudArt art) : Control
     private bool _walking;
     private float _open;
     private double _clock;
+    private IReadOnlyList<BoardUnit> _walkers = [];
+    private static readonly string[] GiftClasses = ["fighter", "rogue", "wizard", "cleric", "ranger", "paladin", "bard", "druid", "warlock", "monk", "barbarian", "sorcerer"];
     private readonly Dictionary<string, Texture2D?> _pictures = [];
 
     public override void _Ready() { SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect); MouseFilter = MouseFilterEnum.Ignore; }
-    public void Frame(ExploreView? view, bool walking, BoardTerrain terrain, BoardFit fit, double delta)
+    public void Frame(ExploreView? view, bool walking, BoardTerrain terrain, BoardFit fit, double delta, IReadOnlyList<BoardUnit>? walkers = null)
     {
+        _walkers = walkers ?? [];
         (_view, _walking, _terrain, _fit) = (view, walking, terrain, fit);
         if (view?.QuestLog is { } journal) _journal = journal;
         _clock += delta;
@@ -58,6 +61,7 @@ public partial class QuestHud(string root, HudArt art) : Control
                 Box(new Rect2(620, 150, 700, 120), new Color("25252bf5"), Gold);
                 Text(label.ToUpperInvariant(), new Vector2(650, 185), 24, Gold, 640, true);
                 Text(ev.Name, new Vector2(650, 222), 32, Paper, 640, true);
+                Gift(ev);
                 if (ev.Kind == "complete") Text($"+{ev.Gold} gold · +{ev.Xp} XP per member", new Vector2(650, 253), 24, Paper, 640);
             }
         }
@@ -110,6 +114,25 @@ public partial class QuestHud(string root, HudArt art) : Control
                 new Vector2(1000,Math.Min(at+36,882)),26,Ink,650);
         }
     }
+    private void Gift(QuestEventView ev)
+    {
+        if (ev.Gifts is not { Length: > 0 } gifts || _fit is null) return;
+        var elapsed = Math.Max(0, Math.Max(7, gifts.Length * 2.4 + 1) - (ev.Until - DateTimeOffset.UtcNow).TotalSeconds);
+        var gift = gifts[Math.Min(gifts.Length - 1, (int)(elapsed / 2.4))];
+        var unit = _walkers.FirstOrDefault(u => u.Id.Value == gift.Member);
+        var screen = gift.Here && unit is not null ? _fit.ToScreen(unit.Feet) : new System.Numerics.Vector2(1550, 910);
+        var x = Math.Clamp(screen.X - 210, 40, 1460);
+        var y = Math.Clamp(screen.Y - 190, 300, 870);
+        var rect = new Rect2(x, y, 420, 128);
+        Box(rect, new Color("28231ff5"), Gold);
+        DrawCircle(new Vector2(x + 42, y + 52), 30 + (float)Math.Sin(_clock * 3) * 2, new Color("d5a64d33"));
+        if (Picture("crests/classes.png") is { } image && Array.IndexOf(GiftClasses, gift.Class) is var index and >= 0)
+            DrawTextureRectRegion(image, new Rect2(x + 18, y + 28, 48, 48), new Rect2(index * 32, 0, 32, 32));
+        Text(gift.Name + (gift.Here ? " · Presented" : " · Set aside"), new Vector2(x + 82, y + 34), 23, Gold, 320, true);
+        Text(gift.Title, new Vector2(x + 82, y + 69), 25, Paper, 320, true);
+        Text($"{Math.Min(gifts.Length, (int)(elapsed / 2.4) + 1)} / {gifts.Length} · Rare trinket", new Vector2(x + 20, y + 110), 22, Gold, 380);
+    }
+
     private Vector2? Point(Tile tile)
     {
         if (_terrain is null || _fit is null || !_terrain.Map.InBounds(tile)) return null;

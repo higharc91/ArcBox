@@ -1,0 +1,30 @@
+{
+  "request": {
+    "raw": "Algenib.915ae3ad",
+    "preset": "Algenib",
+    "text": "Bear’s awake! Dig or die!",
+    "line": "bark_grisk_battle_start_1",
+    "speaker": "grisk",
+    "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
+    "delivery": {
+      "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+      "mood": "angry"
+    },
+    "scene": false
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job_id\": \"job_vb2Cov7goWiDgt8AgiLhvGUe\",\n  \"status\": \"in-progress\",\n  \"message\": \"Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_vb2Cov7goWiDgt8AgiLhvGUe' (one call waits on up to 32 jobs).\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "model_id": "model_google-gemini-3-8-flash-tts",
+      "job_id": "job_vb2Cov7goWiDgt8AgiLhvGUe",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_vb2Cov7goWiDgt8AgiLhvGUe' (one call waits on up to 32 jobs)."
+    },
+    "isError": false
+  }
+}

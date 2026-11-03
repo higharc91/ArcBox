@@ -186,6 +186,24 @@
       "use": "Maul for Ashmaw",
       "voice": "bear"
     },
+    "ashmaw_roar": {
+      "files": [
+        "ashmaw_roar.1.ogg",
+        "ashmaw_roar.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Cinder Roar for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_shake": {
+      "files": [
+        "ashmaw_shake.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Ash Shake for Ashmaw"
+    },
     "attack_crit": {
       "files": [
         "attack_crit.1.ogg",
@@ -326,6 +344,14 @@
       "group": "weapon",
       "use": "Bludgeoning weapon hits an unarmoured target"
     },
+    "bounty_accept": {
+      "files": [
+        "bounty_accept.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Dagna bounty accepted"
+    },
     "bow_release": {
       "files": [
         "bow_release.1.ogg",
@@ -352,6 +378,14 @@
       "loop": false,
       "group": "world",
       "use": "Hidden cache opened"
+    },
+    "cave_enter": {
+      "files": [
+        "cave_enter.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Voted cave entrance travel"
     },
     "chest_open": {
       "files": [
@@ -751,6 +785,15 @@
       "loop": false,
       "group": "world",
       "use": "Item picked up"
+    },
+    "kobold_pick": {
+      "files": [
+        "kobold_pick.1.ogg",
+        "kobold_pick.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Kobold mining interaction in the Diggings"
     },
     "lever_pull": {
       "files": [
@@ -1380,6 +1423,14 @@
       "loop": false,
       "group": "world",
       "use": "Trap sprung"
+    },
+    "trinket_presented": {
+      "files": [
+        "trinket_presented.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Each class trinket presented at turn-in"
     },
     "troll_attack": {
       "files": [

@@ -1,0 +1,143 @@
+{
+  "request": {
+    "id": "ashmaw_narrator_batch",
+    "speaker": "narrator",
+    "voice": "Algieba",
+    "text": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.\n<long pause>\n<Quiet, clear storyteller; let the distant picks die away. Mood: idle.> Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.\n<long pause>\n<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+    "lines": [
+      {
+        "raw": "Algieba.b2d431bf",
+        "preset": "Algieba",
+        "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+        "line": "ashmaw_notices",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.e087bd73",
+        "preset": "Algieba",
+        "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+        "line": "ashmaw_bounty",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.5726c727",
+        "preset": "Algieba",
+        "text": "The pins have rusted into the old notices.",
+        "line": "ashmaw_leave",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.bb5cc646",
+        "preset": "Algieba",
+        "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+        "line": "ashmaw_throat_open",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.f10a0ef8",
+        "preset": "Algieba",
+        "text": "Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+        "line": "ashmaw_diggings_open",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; let the distant picks die away. Mood: idle.> Pick marks cross the stone like a tally. Under an iron helmet lamp, a wiry foreman counts his frightened crew.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; let the distant picks die away.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.7b678d48",
+        "preset": "Algieba",
+        "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+        "line": "ashmaw_nest_open",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.de033800",
+        "preset": "Algieba",
+        "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+        "line": "ashmaw_lair_open",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.6af483c6",
+        "preset": "Algieba",
+        "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "line": "ashmaw_death",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      },
+      {
+        "raw": "Algieba.92014549",
+        "preset": "Algieba",
+        "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+        "line": "ashmaw_satchel",
+        "speaker": "narrator",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+          "mood": "idle"
+        },
+        "scene": false
+      }
+    ],
+    "characters": 2041
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job_id\": \"job_mNwDwf8k4dN8TQMs2wW7KwHE\",\n  \"status\": \"in-progress\",\n  \"message\": \"Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mNwDwf8k4dN8TQMs2wW7KwHE' (one call waits on up to 32 jobs).\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "model_id": "model_google-gemini-3-8-flash-tts",
+      "job_id": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mNwDwf8k4dN8TQMs2wW7KwHE' (one call waits on up to 32 jobs)."
+    },
+    "isError": false
+  }
+}

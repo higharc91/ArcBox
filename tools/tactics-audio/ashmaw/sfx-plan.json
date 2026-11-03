@@ -4,7 +4,7 @@
   "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
   "clipCount": 15,
   "noCubs": true,
-  "status": "Six jobs submitted (nine clips); five remaining jobs paused by a second provider rate limit.",
+  "status": "All 11 paid jobs completed; 15 clips imported. No cubs generated.",
   "estimatedCU": 174,
   "jobs": [
     {
@@ -18,7 +18,12 @@
       "duration": 30.0,
       "numOutputs": 1,
       "seed": 7474,
-      "loop": true
+      "loop": true,
+      "status": "completed",
+      "assets": [
+        "asset_g6SRnFg7RyvzHZgayJVQqwvd"
+      ],
+      "jobId": "job_qygEvzpBxxYuKsnrK9wzKYHP"
     },
     {
       "kind": "sfx",
@@ -31,7 +36,12 @@
       "duration": 8.0,
       "numOutputs": 1,
       "seed": 7248,
-      "loop": true
+      "loop": true,
+      "status": "completed",
+      "assets": [
+        "asset_bTd2BKgryGooaBd83SG1jWh9"
+      ],
+      "jobId": "job_KnutZPfbTGiYgkdNM3asyQUZ"
     },
     {
       "kind": "sfx",
@@ -44,7 +54,12 @@
       "duration": 3.5,
       "numOutputs": 1,
       "seed": 7248,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_RWj7nADdeZcZUNmsHAWLacka"
+      ],
+      "jobId": "job_WYHziwvZR4FtSYNebcg75Rze"
     },
     {
       "kind": "sfx",
@@ -58,7 +73,13 @@
       "duration": 0.8,
       "numOutputs": 2,
       "seed": 7248,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_PcB51fE4icDZQRAqVYpieqZN",
+        "asset_TzNmduA8joAg4NmnVqK2ni4p"
+      ],
+      "jobId": "job_9xnBYou9fJfm87bVGL7EiurH"
     },
     {
       "kind": "sfx",
@@ -72,7 +93,13 @@
       "duration": 0.9,
       "numOutputs": 2,
       "seed": 7248,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_SJ7PmhnSsFFcSGzyckeFCtFL",
+        "asset_ePMpbvWZ5KG6hTT1TCCcs3m6"
+      ],
+      "jobId": "job_xY5yewPCKmEkWCJPKCQJte48"
     },
     {
       "kind": "sfx",
@@ -86,7 +113,13 @@
       "duration": 2.4,
       "numOutputs": 2,
       "seed": 7248,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_GE2CEz3yM6GB2nHmH3bqcU9S",
+        "asset_9QXQbuHTryrD9v5UN7iZRXjc"
+      ],
+      "jobId": "job_ZyZB1Z54QcBpFjg3jjeGmq4u"
     },
     {
       "kind": "sfx",
@@ -99,7 +132,12 @@
       "duration": 1.5,
       "numOutputs": 1,
       "seed": 7474,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_DfLNggehFXPatYZgJtiswQZx"
+      ],
+      "jobId": "job_WFLmaT2T5GL8G25FFa3TKUq7"
     },
     {
       "kind": "sfx",
@@ -112,7 +150,12 @@
       "duration": 0.7,
       "numOutputs": 1,
       "seed": 7474,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_xC6jDkRKbcAHz2jqZ4GRGsj6"
+      ],
+      "jobId": "job_Qu2aqXpG6zpo6x1EnChnDyNj"
     },
     {
       "kind": "sfx",
@@ -125,7 +168,12 @@
       "duration": 1.5,
       "numOutputs": 1,
       "seed": 7474,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_W8yp4LVSrX3RSJMhgSh69Yhg"
+      ],
+      "jobId": "job_Xb2ZVRVD4EFwBgdp793johgE"
     },
     {
       "kind": "sfx",
@@ -139,7 +187,13 @@
       "duration": 0.8,
       "numOutputs": 2,
       "seed": 7474,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_GBvqvxzEezxXVe15ak6WyrHF",
+        "asset_bmp8PheXBZSFU4JMCZLJyPKg"
+      ],
+      "jobId": "job_qHYcvC4tm11PbR9mZ2EYFHrz"
     },
     {
       "kind": "sfx",
@@ -152,11 +206,15 @@
       "duration": 1.4,
       "numOutputs": 1,
       "seed": 7474,
-      "loop": false
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_9x7QZ1Eao7DsN6FJmnZk2L4x"
+      ],
+      "jobId": "job_TkBS4C6SybjgaVLrMVYHvcmq"
     }
   ],
-  "submittedEstimateCU": 151,
-  "remainingEstimateCU": 23,
-  "retryNotBefore": "2026-11-03T17:17:44.857672+00:00",
-  "rateLimitReceipt": "ashmaw_shake-run.json"
+  "submittedEstimateCU": 174,
+  "remainingEstimateCU": 0,
+  "actualCU": 174
 }

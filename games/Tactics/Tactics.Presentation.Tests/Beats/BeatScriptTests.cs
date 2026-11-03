@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Tests.Board;
 
@@ -33,6 +34,22 @@ public sealed class BeatScriptTests
 
     private static AbilityUsed Used(string? anim, string? fx, string? projectile, UnitId target)
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
+
+    [Theory]
+    [InlineData("ashmaw.cinder_roar", "monsters.roar", 1.2, "ashmaw_roar")]
+    [InlineData("ashmaw.ash_shake", "monsters.shake", 1.0, "ashmaw_shake")]
+    [InlineData("grisk.dig_faster", "monsters.shout", 0.7, null)]
+    public void Creature_self_actions_show_the_whole_clip_and_play_their_own_sound(string ability, string anim, double length, string? sound)
+    {
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), new PresentationDef(anim, null, null));
+        var script = BeatScript.Of(new Beat(1, Hero, [used]), Near, Near, Fx.Value, SoundBank.Load(Pack.Root));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>());
+        Assert.Equal(anim, pose.Anim);
+        Assert.Equal(length, pose.Length);
+        Assert.True(script.Length >= pose.At + pose.Length);
+        if (sound is not null) Assert.Contains(script.Cues.OfType<SoundCue>(), c => c.Id == sound);
+        Assert.DoesNotContain(script.Cues.OfType<SoundCue>(), c => c.Id == "spell_cast");
+    }
 
     private static RollResult Roll(int die, bool success, bool crit = false) => new([die], die, 3, die + 3, 12, success, crit, false);
 

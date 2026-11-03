@@ -1,0 +1,11 @@
+{
+  "submittedAt": "2026-11-03T20:00:02Z",
+  "model": "model_mirelo-sfx-2-0-text-to-audio",
+  "jobId": "job_TkBS4C6SybjgaVLrMVYHvcmq",
+  "clips": ["trinket_presented"],
+  "duration": 1.4,
+  "numOutputs": 1,
+  "seed": 7474,
+  "estimatedCU": 5,
+  "status": "queued"
+}

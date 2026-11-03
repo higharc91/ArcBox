@@ -11,3 +11,6 @@
 .tx .tx-journal-card b { color:#382b24; }.tx .tx-journal-card small { color:#624c35; }.tx .tx-journal-cover .tx-btn { color:#f8e4b9; }.tx .tx-journal-card:not(:disabled):active { background:#e8d3aa; }
 
 .tx .tx-quest-notice { width:100%; user-select:none; touch-action:manipulation; border-color:#bc9458; }.tx-quest-notice-label { display:block; color:#ebc47b; font-size:13px; letter-spacing:.03em; }.tx .tx-tracker-chip { color:#f7e3ba; }.tx .tx-tracker-chip small { color:#dfd1b9; }
+
+.tx-trinket-presented { margin:8px 0; padding:10px; border:1px solid #bf9b55; border-radius:8px; background:#32291f; }
+.tx-trinket-presented .tx-trinket { width:100%; max-width:100%; min-width:0; }

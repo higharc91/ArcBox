@@ -1,0 +1,37 @@
+{
+  "request": {
+    "model_id": "model_google-gemini-3-8-flash-tts",
+    "parameters": {
+      "text": "grisk: <High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> That was my good side!\n<long pause>\ngrisk: <High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!\n<long pause>\ngrisk: <High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Up! I counted you in the wages!\n<long pause>\ngrisk: <High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Dig faster!\n<long pause>\ngrisk: <High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.\n<long pause>\nold_maud: <Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.\n<long pause>\nold_maud: <Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "language": "en-US",
+      "multiSpeakerConfig": [
+        {
+          "speaker": "grisk",
+          "speakerVoice": "Algenib"
+        },
+        {
+          "speaker": "old_maud",
+          "speakerVoice": "Achernar"
+        }
+      ]
+    },
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "wait": false
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job_id\": \"job_W4VWS5a459iQdfwYWyBhiSUL\",\n  \"status\": \"in-progress\",\n  \"message\": \"Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_W4VWS5a459iQdfwYWyBhiSUL' (one call waits on up to 32 jobs).\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "model_id": "model_google-gemini-3-8-flash-tts",
+      "job_id": "job_W4VWS5a459iQdfwYWyBhiSUL",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_W4VWS5a459iQdfwYWyBhiSUL' (one call waits on up to 32 jobs)."
+    },
+    "isError": false
+  }
+}
