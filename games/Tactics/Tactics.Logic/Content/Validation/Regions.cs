@@ -235,10 +235,13 @@ internal sealed partial class Validation
         /// </summary>
         private void People(List<Placed> stamps)
         {
+            var ids = new HashSet<string>(StringComparer.Ordinal);
             for (var i = 0; i < region.People.Length; i++)
             {
                 var person = region.People[i];
                 var at = At("people", i);
+                if (person.Id is { } id && (string.IsNullOrWhiteSpace(id) || !ids.Add(id)))
+                    v.Error(file, Pointer.Append(at, "id"), $"The person id '{id}' must be non-empty and unique in the region.");
                 if (v.Art is { } art && !art.Keys.Contains($"characters.{person.Preset}"))
                     v.Error(file, Pointer.Append(at, "preset"), $"Unknown character preset '{person.Preset}'.");
                 if (!RegionPerson.Faces.Contains(person.Face))

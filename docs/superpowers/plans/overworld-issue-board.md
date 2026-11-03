@@ -63,9 +63,9 @@ Texture memory goes from 158 MB to 350 MB with the new characters, measured on t
 ### OW-06 · A 273 ms frame with the new characters · `done`
 It was the screenshots. With `ARCBOX_SHOTS=0` no frame was over 16 ms. See the results table.
 
-### OW-07 · Beaten goblins never leave · `todo`
-`RegionPerson` has no flags (`RegionDefs.cs:32`), and `WorldPeople.Units` (`WorldPeople.cs:89`) reads none. Win at the ford and goblins still stand at (99,63), (99,64), (95,58), (117,55), (117,61), two of them a tile from the fight. Camp goblins stay after any ending. It needs a `needs`/`gone` flag field on people: a region format change only.
-**Done when:** people appear and leave by story flag, with a test for each branch.
+### OW-07 · Beaten goblins never leave · `done`
+People have stable IDs, optional lore identities and flag gates, round-tripped through the painting workspace. Goblin warriors leave after a won force or parley ending; Mother Skarrow leaves only after force. A failed attempt keeps them present. Departures fade over 0.35 seconds; arrivals wait off-screen or behind the party. Existing story flags remain unchanged.
+**Validation:** 6,048 .NET tests and 497 web tests pass; two actual Godot exports are byte-identical. Integrated on `npcs-and-quests` for issue #73.
 
 ### OW-08 · The ford's bridge planks end in a straight cut · `todo`
 In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop in a vertical line, and a unit behind them is cut off with it. It's there without the new characters too. Probably a sorting or block-edge clip, or the bridge sprite against the stamp's edge. Add the case to `OverlayPictureTests`.
@@ -106,15 +106,14 @@ Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or kee
 
 ## P2: features under way
 
-### OW-30 · Environmental tiles · `todo`, issue #69
-Engine and AI are built and off by default. The oil flask (D) is on `environmental-tiles`, which is 7 commits ahead of here. **Left, in order:** E, TV art (`TileReacted` isn't drawn, and surfaces have no `ZoneArt`). F, phone (Risk, Warn, Spread). G, content (shaman lightning, opt-ins, sims in band). Then a new golden, and Chapter 1 end to end.
-**Finding:** River Crossing has nothing that burns without oil. Its materials are `grass_ford/*`, and `environment.json` lists `grass/autumn`. The plan's smallest version, decks, doesn't exist on that map. `needs user`.
+### OW-30 · Environmental tiles · `done`, issue #69
+Merged in #72: engine, AI, oil, TV effects, immersive phone effects, content, simulations and Chapter 1 validation. Steam dissipates slowly and the web effect uses actual web shapes. Available on this branch through main.
 
 ### OW-31 · Shops · `todo`, issue #68
 Merged in #70. Check the remake fix and the Chapter 1 gold source on the TV and phones, and give `oil_flask` a price of 10 once OW-30's branch is merged. The questions in #68 still stand.
 
-### OW-32 · Rest and recovery · `todo`, issue #71
-A camp, the inn and the temple. Nothing is built yet: its branch is the same commit as `main`.
+### OW-32 · Rest and recovery · `integrated`, issue #71
+Camp, inn and temple implementations from `rest-and-recovery` are merged into `npcs-and-quests` as an issue #73 prerequisite. Main has not been changed by this integration. NPC conversations will reuse these services.
 
 ### OW-33 · Hidden things · `todo`
 Ashen Ford has scuffs and a cache, but no hidden path or door. The open items are in the interactables design §7.8.
@@ -122,9 +121,12 @@ Ashen Ford has scuffs and a cache, but no hidden path or door. The open items ar
 ### OW-34 · Places still short of the lore · `todo`
 No granary building, because the kit has none: (42,70) is sacks and crates. Maud's hut is a plain cottage with no charms. Both are art requests, so ask before generating.
 
+### OW-35 · NPCs and side quests · `doing`, issue #73
+Named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, and the shared/pinned quest journal. Work: `npcs-and-quests`. Rest/recovery and the character/palette board are integrated as prerequisites on this branch; OW-07 is part of this work.
+
 ## P3: later, needs design with the user
 
-Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, talking to NPCs and side quests, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
+Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
 
 ## Decisions waiting for the user
 

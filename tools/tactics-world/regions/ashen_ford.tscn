@@ -1293,88 +1293,121 @@ position = Vector2(944, 2000)
 script = ExtResource("10_q22gg")
 Preset = "mayor"
 Face = "se"
+Id = "halden_varrow"
+Character = "halden_varrow"
 
 [node name="innkeeper_1" type="Marker2D" parent="People" unique_id=170956571]
 position = Vector2(816, 1776)
 script = ExtResource("10_q22gg")
 Preset = "innkeeper"
+Id = "bree_tallow"
+Character = "bree_tallow"
 
 [node name="priest_2" type="Marker2D" parent="People" unique_id=287721059]
 position = Vector2(976, 1776)
 script = ExtResource("10_q22gg")
 Preset = "priest"
+Id = "mother_aubrine"
+Character = "mother_aubrine"
 
 [node name="blacksmith_3" type="Marker2D" parent="People" unique_id=331880571]
 position = Vector2(1168, 1776)
 script = ExtResource("10_q22gg")
 Preset = "blacksmith"
 Face = "se"
+Id = "tobin_fell"
+Character = "tobin_fell"
 
 [node name="guard_captain_4" type="Marker2D" parent="People" unique_id=140759522]
 position = Vector2(1456, 2064)
 script = ExtResource("10_q22gg")
 Preset = "guard_captain"
 Face = "ne"
+Id = "dagna_holt"
+Character = "dagna_holt"
 
 [node name="hermit_5" type="Marker2D" parent="People" unique_id=1645927659]
 position = Vector2(4176, 2896)
 script = ExtResource("10_q22gg")
 Preset = "hermit"
+Id = "old_maud"
+Character = "old_maud"
 
 [node name="goblin_shaman_6" type="Marker2D" parent="People" unique_id=1219758375]
 position = Vector2(4304, 784)
 script = ExtResource("10_q22gg")
 Preset = "goblin_shaman"
 Face = "nw"
+Id = "mother_skarrow"
+Character = "mother_skarrow"
+Unless = "ch1_skarrow_slain"
 
 [node name="child_7" type="Marker2D" parent="People" unique_id=1614550287]
 position = Vector2(1072, 1904)
 script = ExtResource("10_q22gg")
 Preset = "child"
+Id = "af_child_3"
+Voice = "townsfolk_child"
 
 [node name="minstrel_8" type="Marker2D" parent="People" unique_id=18645336]
 position = Vector2(944, 1872)
 script = ExtResource("10_q22gg")
 Preset = "minstrel"
+Id = "lark"
+Character = "lark"
 
 [node name="sage_9" type="Marker2D" parent="People" unique_id=599425199]
 position = Vector2(1168, 1872)
 script = ExtResource("10_q22gg")
 Preset = "sage"
 Face = "ne"
+Id = "corvin_ashby"
+Character = "corvin_ashby"
 
 [node name="noble_10" type="Marker2D" parent="People" unique_id=248599880]
 position = Vector2(1328, 2192)
 script = ExtResource("10_q22gg")
 Preset = "noble"
 Face = "se"
+Id = "celandine_marrowby"
+Character = "celandine_marrowby"
 
 [node name="merchant_11" type="Marker2D" parent="People" unique_id=169338645]
 position = Vector2(848, 2064)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
+Id = "af_merchant_2"
+Voice = "townsfolk_merchant"
 
 [node name="merchant_12" type="Marker2D" parent="People" unique_id=381112496]
 position = Vector2(912, 2064)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
+Id = "af_merchant_3"
+Voice = "townsfolk_merchant"
 
 [node name="merchant_13" type="Marker2D" parent="People" unique_id=1663959980]
 position = Vector2(1136, 2064)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
+Id = "af_merchant_4"
+Voice = "townsfolk_merchant"
 
 [node name="farmer_14" type="Marker2D" parent="People" unique_id=232461790]
 position = Vector2(848, 2128)
 script = ExtResource("10_q22gg")
 Preset = "farmer"
 Face = "ne"
+Id = "af_farmer_3"
+Voice = "townsfolk_farmer"
 
 [node name="barmaid_15" type="Marker2D" parent="People" unique_id=2071290924]
 position = Vector2(1136, 2128)
 script = ExtResource("10_q22gg")
 Preset = "barmaid"
 Face = "ne"
+Id = "af_barmaid_2"
+Voice = "townsfolk_barmaid"
 
 [node name="child_16" type="Marker2D" parent="People" unique_id=1384870903]
 position = Vector2(976, 1904)
@@ -1382,39 +1415,53 @@ script = ExtResource("10_q22gg")
 Preset = "child"
 Face = "se"
 Walk = "30,60 30,61 31,61 32,61 32,60 32,59 31,59"
+Id = "pip_ashdown"
+Character = "pip_ashdown"
 
 [node name="farmhand_17" type="Marker2D" parent="People" unique_id=102225405]
 position = Vector2(1200, 1936)
 script = ExtResource("10_q22gg")
 Preset = "farmhand"
 Walk = "37,61 36,61 36,60"
+Id = "af_farmhand_2"
+Voice = "townsfolk_farmhand"
 
 [node name="guard_18" type="Marker2D" parent="People" unique_id=1806229262]
 position = Vector2(1488, 1968)
 script = ExtResource("10_q22gg")
 Preset = "guard"
+Id = "af_guard_3"
+Voice = "townsfolk_guard"
 
 [node name="guard_19" type="Marker2D" parent="People" unique_id=165173427]
 position = Vector2(1488, 2032)
 script = ExtResource("10_q22gg")
 Preset = "guard"
 Face = "ne"
+Id = "af_guard_4"
+Voice = "townsfolk_guard"
 
 [node name="guard_20" type="Marker2D" parent="People" unique_id=495605428]
 position = Vector2(976, 2512)
 script = ExtResource("10_q22gg")
 Preset = "guard"
 Face = "se"
+Id = "af_guard_5"
+Voice = "townsfolk_guard"
 
 [node name="guard_21" type="Marker2D" parent="People" unique_id=1744190746]
 position = Vector2(1040, 2512)
 script = ExtResource("10_q22gg")
 Preset = "guard"
+Id = "af_guard_6"
+Voice = "townsfolk_guard"
 
 [node name="guard_22" type="Marker2D" parent="People" unique_id=1292188981]
 position = Vector2(1552, 1936)
 script = ExtResource("10_q22gg")
 Preset = "guard"
+Id = "af_guard_2"
+Voice = "townsfolk_guard"
 
 [node name="farmer_23" type="Marker2D" parent="People" unique_id=521554749]
 position = Vector2(1328, 1968)
@@ -1422,6 +1469,8 @@ script = ExtResource("10_q22gg")
 Preset = "farmer"
 Face = "se"
 Walk = "42,61 43,61 43,62 42,62 41,62"
+Id = "af_farmer_2"
+Voice = "townsfolk_farmer"
 
 [node name="barmaid_24" type="Marker2D" parent="People" unique_id=860008842]
 position = Vector2(656, 2000)
@@ -1429,12 +1478,16 @@ script = ExtResource("10_q22gg")
 Preset = "barmaid"
 Face = "se"
 Walk = "21,62 22,62 22,61 21,61 20,61"
+Id = "af_barmaid_1"
+Voice = "townsfolk_barmaid"
 
 [node name="child_25" type="Marker2D" parent="People" unique_id=394898302]
 position = Vector2(592, 1808)
 script = ExtResource("10_q22gg")
 Preset = "child"
 Face = "nw"
+Id = "af_child_1"
+Voice = "townsfolk_child"
 
 [node name="guard_26" type="Marker2D" parent="People" unique_id=2030691831]
 position = Vector2(848, 1584)
@@ -1442,133 +1495,192 @@ script = ExtResource("10_q22gg")
 Preset = "guard"
 Face = "se"
 Walk = "27,49 28,49 29,49 29,48 28,48 27,48 26,48"
+Id = "af_guard_1"
+Voice = "townsfolk_guard"
 
 [node name="farmer_27" type="Marker2D" parent="People" unique_id=998538380]
 position = Vector2(1232, 432)
 script = ExtResource("10_q22gg")
 Preset = "farmer"
+Id = "af_farmer_1"
+Voice = "townsfolk_farmer"
 
 [node name="farmhand_28" type="Marker2D" parent="People" unique_id=996906385]
 position = Vector2(720, 1200)
 script = ExtResource("10_q22gg")
 Preset = "farmhand"
 Face = "se"
+Id = "af_farmhand_1"
+Voice = "townsfolk_farmhand"
 
 [node name="farmer_29" type="Marker2D" parent="People" unique_id=187784687]
 position = Vector2(816, 2800)
 script = ExtResource("10_q22gg")
 Preset = "farmer"
 Face = "ne"
+Id = "af_farmer_5"
+Voice = "townsfolk_farmer"
 
 [node name="farmhand_30" type="Marker2D" parent="People" unique_id=1733040432]
 position = Vector2(1200, 2736)
 script = ExtResource("10_q22gg")
 Preset = "farmhand"
+Id = "af_farmhand_3"
+Voice = "townsfolk_farmhand"
 
 [node name="farmer_31" type="Marker2D" parent="People" unique_id=1201852321]
 position = Vector2(976, 2768)
 script = ExtResource("10_q22gg")
 Preset = "farmer"
 Face = "se"
+Id = "af_farmer_4"
+Voice = "townsfolk_farmer"
 
 [node name="merchant_32" type="Marker2D" parent="People" unique_id=1495450305]
 position = Vector2(1680, 1008)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
 Face = "se"
+Id = "af_merchant_1"
+Voice = "townsfolk_merchant"
 
 [node name="fisher_33" type="Marker2D" parent="People" unique_id=1739764895]
 position = Vector2(3280, 2992)
 script = ExtResource("10_q22gg")
 Preset = "fisher"
 Face = "se"
+Id = "af_fisher_2"
+Voice = "townsfolk_fisher"
 
 [node name="fisher_34" type="Marker2D" parent="People" unique_id=809817481]
 position = Vector2(3376, 2960)
 script = ExtResource("10_q22gg")
 Preset = "fisher"
+Id = "af_fisher_1"
+Voice = "townsfolk_fisher"
 
 [node name="fisher_35" type="Marker2D" parent="People" unique_id=1933254963]
 position = Vector2(3344, 3184)
 script = ExtResource("10_q22gg")
 Preset = "fisher"
 Face = "se"
+Id = "af_fisher_3"
+Voice = "townsfolk_fisher"
 
 [node name="fisher_36" type="Marker2D" parent="People" unique_id=1636803996]
 position = Vector2(3312, 3344)
 script = ExtResource("10_q22gg")
 Preset = "fisher"
 Face = "se"
+Id = "af_fisher_4"
+Voice = "townsfolk_fisher"
 
 [node name="merchant_37" type="Marker2D" parent="People" unique_id=1632505832]
 position = Vector2(3120, 2992)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
+Id = "af_merchant_5"
+Voice = "townsfolk_merchant"
 
 [node name="merchant_38" type="Marker2D" parent="People" unique_id=1981925056]
 position = Vector2(3120, 3344)
 script = ExtResource("10_q22gg")
 Preset = "merchant"
+Id = "af_merchant_6"
+Voice = "townsfolk_merchant"
 
 [node name="goblin_spear_39" type="Marker2D" parent="People" unique_id=900471990]
 position = Vector2(4240, 816)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
 Face = "se"
+Id = "af_goblin_spear_1"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_archer_40" type="Marker2D" parent="People" unique_id=174317375]
 position = Vector2(4336, 816)
 script = ExtResource("10_q22gg")
 Preset = "goblin_archer"
+Id = "af_goblin_archer_1"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_archer"
 
 [node name="goblin_cutthroat_41" type="Marker2D" parent="People" unique_id=1465681912]
 position = Vector2(4240, 752)
 script = ExtResource("10_q22gg")
 Preset = "goblin_cutthroat"
 Face = "se"
+Id = "af_goblin_cutthroat_1"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_cutthroat"
 
 [node name="goblin_spear_42" type="Marker2D" parent="People" unique_id=1942948567]
 position = Vector2(4304, 880)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
 Walk = "134,28 133,28 133,27"
+Id = "af_goblin_spear_2"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_spear_43" type="Marker2D" parent="People" unique_id=1852150059]
 position = Vector2(3184, 2032)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
 Face = "nw"
+Id = "af_goblin_spear_5"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_spear_44" type="Marker2D" parent="People" unique_id=29531691]
 position = Vector2(3184, 2064)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
 Face = "se"
+Id = "af_goblin_spear_6"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_archer_45" type="Marker2D" parent="People" unique_id=325025440]
 position = Vector2(3056, 1872)
 script = ExtResource("10_q22gg")
 Preset = "goblin_archer"
 Face = "se"
+Id = "af_goblin_archer_2"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_archer"
 
 [node name="goblin_spear_46" type="Marker2D" parent="People" unique_id=270760669]
 position = Vector2(3760, 1776)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
+Id = "af_goblin_spear_3"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_spear_47" type="Marker2D" parent="People" unique_id=1395916681]
 position = Vector2(3760, 1968)
 script = ExtResource("10_q22gg")
 Preset = "goblin_spear"
 Face = "ne"
+Id = "af_goblin_spear_4"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_spear"
 
 [node name="goblin_cutthroat_48" type="Marker2D" parent="People" unique_id=504318909]
 position = Vector2(3856, 1744)
 script = ExtResource("10_q22gg")
 Preset = "goblin_cutthroat"
 Face = "se"
+Id = "af_goblin_cutthroat_2"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_cutthroat"
 
 [node name="goblin_archer_49" type="Marker2D" parent="People" unique_id=1766560407]
 position = Vector2(3856, 2032)
 script = ExtResource("10_q22gg")
 Preset = "goblin_archer"
+Id = "af_goblin_archer_3"
+Unless = "ch1_skarrow_slain ch1_skarrow_spared"
+Voice = "townsfolk_goblin_archer"

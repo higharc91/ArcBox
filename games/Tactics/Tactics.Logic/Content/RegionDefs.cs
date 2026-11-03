@@ -30,7 +30,13 @@ public sealed record RegionBuilding(string Id, string Variant, [property: JsonRe
 /// one of <see cref="Faces"/>, and <see cref="Walk"/> the tiles of a short loop they walk from <see cref="At"/> and back to it, if they walk.
 /// </summary>
 public sealed record RegionPerson(string Preset, [property: JsonRequired] Tile At, string Face,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<Tile> Walk = default)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<Tile> Walk = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Id = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Character = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Bark = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Voice = null)
 {
     /// <summary>The ways someone can face, as the screen has them: +x is south-east and +y south-west.</summary>
     public static readonly ImmutableArray<string> Faces = ["se", "sw", "nw", "ne"];

@@ -8,6 +8,12 @@ namespace Tactics.World.Editor;
 [GlobalClass]
 public partial class PersonMarker : TileMarker
 {
+    [Export] public string Id { get; set; } = "";
+    [Export] public string Character { get; set; } = "";
+    [Export] public string Requires { get; set; } = "";
+    [Export] public string Unless { get; set; } = "";
+    [Export] public string Bark { get; set; } = "";
+    [Export] public string Voice { get; set; } = "";
     private static readonly Color Ink = new(0.45f, 1f, 0.6f);
 
     private string _preset = "";

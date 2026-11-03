@@ -8,7 +8,19 @@ namespace Tactics.WorldTools;
 public static class PersonText
 {
     /// <summary>What tells two people apart: one standing on a tile, doing one thing.</summary>
-    public static string Key(RegionPerson person) => $"{person.Preset} {person.At} {person.Face} {Walk(person.Walk)}";
+    public static string Key(RegionPerson person) => $"{person.Preset} {person.At} {person.Face} {Walk(person.Walk)}"
+        + (person.Id is null && person.Character is null && person.Requires.IsDefault && person.Unless.IsDefault && person.Bark is null && person.Voice is null
+            ? "" : $" {person.Id} {person.Character} {Flags(person.Requires)} {Flags(person.Unless)} {person.Bark} {person.Voice}");
+
+    public static ImmutableArray<string> Flags(string text)
+    {
+        var flags = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Distinct(StringComparer.Ordinal).ToImmutableArray();
+        return flags.IsEmpty ? default : flags;
+    }
+
+    public static string Flags(ImmutableArray<string> flags) => flags.IsDefaultOrEmpty ? "" : string.Join(' ', flags);
+
+    public static string? Optional(string text) => string.IsNullOrWhiteSpace(text) ? null : text.Trim();
 
     /// <summary>The tiles of <paramref name="walk"/> as text, nothing for no walk.</summary>
     public static string Walk(ImmutableArray<Tile> walk)

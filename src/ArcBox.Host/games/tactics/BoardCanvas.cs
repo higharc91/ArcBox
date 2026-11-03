@@ -325,6 +325,7 @@ public partial class BoardCanvas : Node2D
             var light = !sprite.Unlit && _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet,
                 sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
             light = unit.Away ? light * AwayShade : light;
+            light.A *= unit.Opacity;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
         else

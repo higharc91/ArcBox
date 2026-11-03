@@ -70,6 +70,9 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     /// <summary>One of a region's people, who stands about and has no say in anything: what they stand behind doesn't fade for them.</summary>
     public bool Dressing { get; init; }
 
+    /// <summary>Presence transitions for world people; ordinary units remain opaque.</summary>
+    public float Opacity { get; init; } = 1;
+
     /// <summary>An emote over the unit, as the crown is drawn: a story beat's "!" (<see cref="World.StoryMarks"/>); null for none.</summary>
     public EmoteStrip? Emote { get; init; }
 
