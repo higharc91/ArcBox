@@ -124,7 +124,7 @@
       "voice": {
         "theme": "tactics.npc.corvin-ashby",
         "description": "Light, quick tenor, an anxious academic. Trails off mid-sentence when he has an idea.",
-        "sample": "There should be a record for every year. There isn't. Forty-one years are simply… not there."
+        "sample": "There should be a record for every year. There isn't. Forty-one years are simply\u2026 not there."
       },
       "relationships": [
         {
@@ -585,8 +585,10 @@
       "voice": {
         "theme": "tactics.npc.grisk",
         "description": "Small wiry kobold; high, nasal, raspy and breathless. Barked orders break into terrified bargaining.",
-        "sample": "Bear’s awake! Dig or die!"
-      }
+        "sample": "Bear\u2019s awake! Dig or die!"
+      },
+      "sprite": "monsters.kobold_foreman",
+      "portrait": "grisk"
     }
   ]
 }

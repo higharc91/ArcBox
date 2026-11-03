@@ -155,7 +155,7 @@
         {
           "id": "posted",
           "objective": "Speak to Captain Dagna",
-          "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens.",
+          "log": "The Watch offers a bounty for the great grey bear hunting the Southfield pens. Recommended level: 2.",
           "when": [
             "sq_ashmaw_posted"
           ],
@@ -166,7 +166,7 @@
         {
           "id": "accepted",
           "objective": "Find the Cinder Hollow",
-          "log": "Dagna sent us to the cave below Maud’s hut on the burned east bank.",
+          "log": "Dagna sent us to the cave below Maud\u2019s hut on the burned east bank. Recommended level: 2.",
           "when": [
             "sq_ashmaw_accepted"
           ],
@@ -177,7 +177,7 @@
         {
           "id": "entered",
           "objective": "Search the Hollow",
-          "log": "We entered the cave. The miners’ tracks lead deeper into the rock.",
+          "log": "We entered the cave. The miners\u2019 tracks lead deeper into the rock.",
           "when": [
             "sq_ashmaw_entered"
           ]
@@ -185,7 +185,7 @@
         {
           "id": "lair",
           "objective": "Face Ashmaw",
-          "log": "Beyond the webs, a safe fire marks the last approach to Ashmaw’s bed.",
+          "log": "Beyond the webs, a safe fire marks the last approach to Ashmaw\u2019s bed.",
           "when": [
             "sq_ashmaw_lair"
           ],
@@ -213,7 +213,7 @@
         "when": [
           "sq_ashmaw_done"
         ],
-        "log": "The boy is safe at Maud’s. Dagna paid the bounty and set aside a class trinket for every companion, including those away."
+        "log": "The boy is safe at Maud\u2019s. Dagna paid the bounty and set aside a class trinket for every companion, including those away."
       },
       "rewards": {
         "gold": 60,

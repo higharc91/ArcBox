@@ -5108,6 +5108,309 @@
       "family": "crab",
       "variant": "shore",
       "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+    },
+    "ashmaw_bounty": {
+      "file": "ashmaw_bounty.png",
+      "family": "ashmaw",
+      "variant": "bounty",
+      "frame": {
+        "width": 192,
+        "height": 192,
+        "anchor": [
+          96,
+          171
+        ]
+      },
+      "portrait": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "headTop": 39,
+      "pixelScale": 0.65,
+      "columns": 8,
+      "rowsPerDirection": 6,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 70,
+      "footprintHeight": 36,
+      "keys": [
+        "monsters.ashmaw"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 1,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 5.2,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            18,
+            19,
+            20,
+            21
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "fps": 6,
+          "loop": false
+        },
+        "roar": {
+          "frames": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "fps": 5,
+          "loop": false
+        },
+        "shake": {
+          "frames": [
+            36,
+            37,
+            38,
+            39,
+            40,
+            41
+          ],
+          "fps": 6,
+          "loop": false
+        }
+      },
+      "provenance": "Owner-approved concepts, pixel direction and actual TV world/battle motion, 2026-11-03. Curated paid sources under tools/tactics-assets/pixellab/ashmaw."
+    },
+    "grisk_bounty": {
+      "file": "grisk_bounty.png",
+      "family": "kobold_foreman",
+      "variant": "bounty",
+      "frame": {
+        "width": 128,
+        "height": 128,
+        "anchor": [
+          64,
+          110
+        ]
+      },
+      "portrait": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "headTop": 21,
+      "pixelScale": 0.34,
+      "columns": 8,
+      "rowsPerDirection": 5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 14,
+      "footprintHeight": 12,
+      "keys": [
+        "monsters.kobold_foreman"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 7.5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "fps": 7,
+          "loop": false
+        },
+        "shout": {
+          "frames": [
+            29,
+            30,
+            31,
+            32
+          ],
+          "fps": 6,
+          "loop": false
+        }
+      },
+      "provenance": "Owner-approved concepts, pixel direction and actual TV world/battle motion, 2026-11-03. Curated paid sources under tools/tactics-assets/pixellab/ashmaw."
     }
   },
   "legacyDistinctForms": [

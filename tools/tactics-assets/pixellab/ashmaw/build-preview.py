@@ -9,6 +9,8 @@ DIRECTIONS = ['south','south-west','west','north-west','north','north-east','eas
 
 def build(destination):
     destination.mkdir(parents=True, exist_ok=True)
+    approval = json.loads((ROOT/'tools/tactics-assets/concepts/ashmaw/approvals.json').read_text())
+    motion_approved = approval.get('inGameMotionReview', {}).get('status') == 'approved'
     for child in SOURCE.iterdir():
         target = destination / child.name
         if child.name in ('creatures','portraits'):
@@ -34,7 +36,7 @@ def build(destination):
     (destination/'portraits/manifest.json').write_text(json.dumps(portraits,indent=2)+'\n')
     manifest = json.loads((SOURCE/'creatures/manifest.json').read_text())
     curated=json.loads((ART/'curation.json').read_text())
-    audit = {'reviewOnly': True, 'coverage': 'Every required action has eight real facings; missing or miscounted clips fail the build.', 'characters': {}}
+    audit = {'reviewOnly': True, 'ownerApprovedMotion': motion_approved, 'coverage': 'Every required action has eight real facings; missing or miscounted clips fail the build.', 'characters': {}}
     for name,folder,size,anchor,scale,groups in [
         ('ashmaw','ashmaw-padded',192,(96,171),.65,{'idle':('ashmaw_idle_pinned_clean',4,1,True),'walk':('ashmaw_walk_template_pilot',6,5.2,True),'attack':('ashmaw_attack_custom_pilot',8,8,False),'hurt':('ashmaw_hurt_pinned_clean',4,8,False),'down':('ashmaw_death_custom_pilot',8,6,False),'roar':('ashmaw_roar_pilot',6,5,False),'shake':('ashmaw_shake_pilot',6,6,False)}),
         ('kobold_foreman','grisk-template',128,(64,110),.34,{'idle':('grisk_idle_template_pilot',4,3,True),'walk':('grisk_walk_template_pilot',6,7.5,True),'attack':('grisk_attack_pilot',6,8,False),'hurt':('grisk_hurt_pilot',6,9,False),'down':('grisk_death_pilot',7,7,False),'shout':('grisk_shout_pilot',4,6,False)})]:
@@ -78,7 +80,7 @@ def build(destination):
             offset+=n
         head=min(b[1] for b in bounds)
         atlas.save(destination/'creatures'/('review_'+name+'.png'))
-        manifest['sprites']['review_'+name]={'file':'review_'+name+'.png','family':name,'variant':'review','frame':{'width':size,'height':size,'anchor':list(anchor)},'portrait':[0,0,size,size],'headTop':head,'pixelScale':scale,'columns':8,'rowsPerDirection':rows,'directions':DIRECTIONS,'facingOffsets':{d:[0,0] for d in DIRECTIONS},'footprintWidth':70 if name=='ashmaw' else 14,'footprintHeight':36 if name=='ashmaw' else 12,'keys':['monsters.'+name],'anims':anims,'provenance':'Owner-approved concept/pixel direction. REVIEW ONLY: full directional actions curated; production TV motion approval pending. See review-audit.json.'}
+        manifest['sprites']['review_'+name]={'file':'review_'+name+'.png','family':name,'variant':'review','frame':{'width':size,'height':size,'anchor':list(anchor)},'portrait':[0,0,size,size],'headTop':head,'pixelScale':scale,'columns':8,'rowsPerDirection':rows,'directions':DIRECTIONS,'facingOffsets':{d:[0,0] for d in DIRECTIONS},'footprintWidth':70 if name=='ashmaw' else 14,'footprintHeight':36 if name=='ashmaw' else 12,'keys':['monsters.'+name],'anims':anims,'provenance':'REVIEW PACK: curated eight-direction source; actual TV motion '+('owner-approved.' if motion_approved else 'approval pending.')+' See review-audit.json.'}
         audit['characters'][name]={'canvas':size,'anchor':list(anchor),'pixelScale':scale,'actualAnimatedFacings':actual,'curation':curated.get(name,{})}
     (destination/'creatures/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (destination/'review-audit.json').write_text(json.dumps(audit,indent=2)+'\n')

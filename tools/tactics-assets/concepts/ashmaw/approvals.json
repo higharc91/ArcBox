@@ -19,7 +19,7 @@
     "asset_id": "asset_PQHAc99yMMSUBJFMbBsxm8ic",
     "file": "cinder_hollow-concept.png"
   },
-  "pixelArt": "Single-facing PixelLab pilots in progress; owner must review in-game motion before final integration.",
+  "pixelArt": "Full eight-direction action sets and actual TV world/battle motion approved for production integration.",
   "reviewPreference": "Always show the relevant art alongside review questions.",
   "pixelPilotReview": {
     "status": "approved direction",
@@ -27,5 +27,19 @@
     "date": "2026-11-03",
     "preview": "Ashmaw and Grisk idle pilots shown together",
     "scope": "Preserve this design direction; actual world and battle motion approval still required before final integration."
+  },
+  "inGameMotionReview": {
+    "status": "approved",
+    "ownerResponse": "Approve both",
+    "date": "2026-11-03",
+    "characters": [
+      "ashmaw",
+      "grisk"
+    ],
+    "evidence": [
+      "grisk-world-battle-v7.gif",
+      "ashmaw-world-battle-v7.gif"
+    ],
+    "scope": "Actual in-game scale and animations approved for production integration."
   }
 }

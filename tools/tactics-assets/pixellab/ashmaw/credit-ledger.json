@@ -90,13 +90,15 @@
     "scope": "Observed account delta across character/portrait revisions, cave prop attempts and candle animation. Includes retained rejected takes; failed jobs may be refunded by provider."
   },
   "motionApproval": {
-    "status": "pending",
+    "status": "approved",
     "askedAt": "2026-11-03T19:49:00Z",
     "evidence": [
       "grisk-world-battle-v7.gif",
       "ashmaw-world-battle-v7.gif"
     ],
-    "note": "Production stand-ins stay until the owner approves the actual TV motion under issue 74 section 6.2."
+    "note": "Owner approved both actual TV motion previews; production integration is authorized.",
+    "ownerResponse": "Approve both",
+    "approvedOn": "2026-11-03"
   },
   "historicalAccountCheck": {
     "at": "2026-11-03T18:37:00Z",
