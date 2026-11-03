@@ -6,7 +6,7 @@
 - [D — oil flask](milestone-d.md): the item, one-use fire coating, two approved loot placements and persistent rewards.
 - [E — TV surfaces and animations](milestone-e.md): layered reactions, readable ignition, surfaced ground, and an actual TV motion reel. [Steam refinement](steam-refinement.md) slows its dissipation after user review.
 
-- [F — phone forecasts and terrain effects](milestone-f.md): movement risk, secondary spread, conducted-unit previews and current-tile animation. [Enhanced glare](phone-glare-refinement.md) makes the terrain effects clearer after review.
+- [F — phone forecasts and terrain effects](milestone-f.md): movement risk, secondary spread, conducted-unit previews and current-tile animation. [Enhanced glare](phone-glare-refinement.md) makes the terrain effects clearer after review. [Web strands](phone-web-refinement.md) replace the floating square shapes.
 
 ## Current status — 2026-11-03 (UTC)
 
