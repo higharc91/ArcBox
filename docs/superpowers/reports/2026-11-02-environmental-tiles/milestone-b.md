@@ -3,7 +3,7 @@
 Issue #69. Definitions `a1980c4d`; runtime `f7bacd80`.
 [Validation counts and source/golden SHA256 values](core-validation.json). The published 35 changed files match the isolated, validated checkout byte for byte.
 
-**A-only merge boundary: `dccfab9f`.** The owner should merge through that commit into `ccr-18ad4510-q68nad`, rather than merge this branch tip with B before A's review. This is separate from the AI-only milestone A. No encounter is opted in, and there are no map, art, audio,
+**A-only merge boundary: `dccfab9f`.** Status update 2026-11-03: after user review and authorization, A was merged through that commit into `ccr-18ad4510-q68nad`. B remains on the feature branch; [C is now implemented](milestone-c.md). This is separate from the AI-only milestone A. No encounter is opted in, and there are no map, art, audio,
 starting-kit, enemy, loot or balance edits. The oil surface is supported; the oil-flask item is milestone D.
 
 ## What changed
@@ -69,5 +69,4 @@ All gameplay values below are the approved values, in `content/tactics/base/rule
 | Content warning | Connected fuel patch over 12 tiles |
 
 No new balance values were chosen. There are no TV shots in this milestone: animation and board rendering are milestone E,
-phone risk/spread fields are F, and encounter opt-ins and balance simulations are G. Milestone C remains blocked until the
-owner has read A's report and merged A, as required by the agreed plan.
+phone risk/spread fields are F, and encounter opt-ins and balance simulations are G. Milestone C was gated on A review and merge when B was published. That gate is now fulfilled; see the [C report](milestone-c.md).

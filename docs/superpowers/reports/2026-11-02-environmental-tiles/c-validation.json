@@ -1,0 +1,37 @@
+{
+  "runtimeCommit": "ba68f50f2eb19d9fe7c39c35a77b23e76340efcc",
+  "aiMergedThrough": "dccfab9f6491011464dfbdb66be2c7bab76f4c70",
+  "aiMergeBranch": "ccr-18ad4510-q68nad",
+  "dateUtc": "2026-11-03",
+  "solutionPassed": 5806,
+  "solutionFailed": 0,
+  "solutionSkipped": 0,
+  "webPassed": 478,
+  "warnings": 0,
+  "newScenarios": 21,
+  "preCScenarioFailures": 11,
+  "focusedPassed": 59,
+  "performanceP95BudgetMs": 250,
+  "performanceP95Ms": {
+    "environmentEnabledStress": 56.4,
+    "hazardStress": 20.9,
+    "riverStress": 16.9,
+    "cryptHall": 6.0,
+    "crystalCave": 6.6
+  },
+  "sourceSHA256": {
+    "games/Tactics/Tactics.Logic/Ai/Planner.Actions.cs": "0d9128641a8ad0af1eacd7e0a618ccc5ffd1a9ac8aab0de50f4c97d390fbd80b",
+    "games/Tactics/Tactics.Logic/Ai/Scoring.Effects.cs": "cc30d4576e4f22dc52cd3fbb1eaaae1b3cef5b416bac67358650e5c7ecb46044",
+    "games/Tactics/Tactics.Logic/Ai/Scoring.Reactions.cs": "b1d9f9abb17111a85b3d82558f071d0a5fc8f48f7d8a5a870863016334c15488",
+    "games/Tactics/Tactics.Logic.Tests/Ai/EnvironmentalAiTests.cs": "92b2da0392cbcbee50ac38489cfbc818c5c10223292e94b531b9684986f3f7d5",
+    "games/Tactics/Tactics.Logic.Tests/Ai/AiPerformanceTests.cs": "f187be579f59412aab3909df546b0655dac27c4b39f4fb83bd242720ce2c9ee7"
+  },
+  "goldenSHA256": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  }
+}
