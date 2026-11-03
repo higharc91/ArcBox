@@ -17,6 +17,8 @@ using Xunit;
 
 namespace ArcBox.Server.Tests;
 
+// These tests share HangerGame's static gate and must not reset it concurrently.
+[Collection("Hanger game")]
 public sealed class RoomManagerTests : IDisposable
 {
     private readonly FakeTimeProvider time = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
