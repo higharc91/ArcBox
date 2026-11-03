@@ -27,13 +27,16 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
         MouseFilter = MouseFilterEnum.Ignore;
         TextureFilter = TextureFilterEnum.Nearest;
         var top = ArcTheme.VBox(6);
-        top.Position = new Vector2(70, 35);
+
         _title = ArcTheme.Label("", ArcTheme.Bold, 30, ArcTheme.Gold);
         _progress = ArcTheme.Label("", ArcTheme.SemiBold, 23);
         var timeline = ArcTheme.HBox(25);
         foreach (var text in new[] { "SETTLE IN", "CAMP JOBS", "NIGHT", "DAWN" })
         { var label = ArcTheme.Meta(text); _steps.Add(label); timeline.AddChild(label); }
-        top.AddChild(_title); top.AddChild(timeline); top.AddChild(_progress); AddChild(top);
+        top.AddChild(_title); top.AddChild(timeline); top.AddChild(_progress);
+        var heading = ArcTheme.Panel(ArcTheme.GlassBox(null, 20, 12), top);
+        heading.Position = new Vector2(50, 25);
+        AddChild(heading);
         var ribbonPanel = ArcTheme.Panel(ArcTheme.GlassBox(null, 12, 10), _ribbon = ArcTheme.HBox(7));
         ribbonPanel.SetAnchorsPreset(LayoutPreset.BottomWide);
         ribbonPanel.OffsetLeft = 42; ribbonPanel.OffsetRight = -42; ribbonPanel.OffsetTop = -184; ribbonPanel.OffsetBottom = -26;
@@ -83,6 +86,13 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
         if (camp.Mode == "inn" && _hearth is not null) { DrawInn(camp); return; }
         var dawn = camp.Stage == "dawn" ? (float)Math.Clamp(_seconds / 4.5, 0, 1) : 0;
         var width = Size.X;
+        // A soft frame brings the eye to the party while keeping the authored landscape visible.
+        for (var i = 0; i < 12; i++)
+        {
+            var alpha = (1 - i / 12f) * .035f;
+            DrawRect(new Rect2(i * 12, 0, 12, Size.Y), new Color(.015f, .02f, .05f, alpha));
+            DrawRect(new Rect2(width - (i + 1) * 12, 0, 12, Size.Y), new Color(.015f, .02f, .05f, alpha));
+        }
         for (var y = 0; y < 260; y += 8)
         {
             var fade = 1 - y / 260f;
@@ -107,6 +117,12 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
             var sun = new Vector2(width - 185, 210 - dawn * 145);
             DrawCircle(sun, 65, new Color(1, .66f, .31f, .12f));
             DrawCircle(sun, 42, new Color(1, .87f, .56f, dawn));
+            for (var i = 0; i < 8; i++)
+            {
+                var angle = i * MathF.PI / 4 + (float)_clock * .02f;
+                var direction = new Vector2(MathF.Cos(angle), MathF.Sin(angle));
+                DrawLine(sun + direction * 51, sun + direction * 65, new Color(1, .87f, .6f, dawn * .65f), 3);
+            }
             var warmth = MathF.Sin(dawn * MathF.PI) * .12f;
             DrawRect(new Rect2(Vector2.Zero, Size), new Color(1, .64f, .35f, warmth));
         }
@@ -115,6 +131,8 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
     {
         var morning = camp.Stage == "dawn" ? (float)Math.Clamp(_seconds / 4.5, 0, 1) : 0;
         DrawTextureRect(_hearth!, new Rect2(Vector2.Zero, Size), false, new Color(1, 1, 1).Lerp(new Color(1.12f, 1.1f, 1), morning));
+        var hearthGlow = .035f + .012f * MathF.Sin((float)_clock * 6);
+        DrawCircle(new Vector2(Size.X * .13f, Size.Y * .72f), Size.Y * .17f, new Color(1, .62f, .24f, hearthGlow * (1 - morning)));
         if (morning > 0)
         {
             var scale = Size / new Vector2(320, 180);

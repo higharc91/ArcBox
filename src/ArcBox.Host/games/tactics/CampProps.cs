@@ -79,5 +79,31 @@ internal sealed partial class CampProps(string root) : Node2D
         var fire = UnitPlace.On(_terrain, camp.At).Feet;
         var name = camp.Stage == "dawn" && _stageSeconds > 3 ? "fire_unlit" : "fire_" + (int)(_clock * 6 % 5);
         if (Texture(name) is { } tex) _glowing.DrawTexture(tex, new Vector2(fire.X - 24, fire.Y - 44));
+        if (camp.Stage != "dawn")
+        {
+            for (var i = 0; i < 12; i++)
+            {
+                var age = (float)((_clock * .36 + i * .13) % 1);
+                var drift = MathF.Sin((float)_clock * 1.4f + i * 3) * (3 + age * 10);
+                _glowing.DrawRect(new Rect2(fire.X + drift, fire.Y - 25 - age * 48, 1.2f, 1.2f), new Color(1, .67f, .25f, MathF.Sin(age * MathF.PI) * .8f));
+            }
+        }
+        if (camp.Stage == "sleep")
+        {
+            foreach (var person in camp.People)
+            {
+                var feet = UnitPlace.On(_terrain, person.At).Feet;
+                var rise = (float)(_clock % 2) * 4;
+                _glowing.DrawString(ThemeDB.FallbackFont, new Vector2(feet.X + 5, feet.Y - 33 - rise), "z", HorizontalAlignment.Left, -1, 8, new Color(.8f, .87f, 1, 1 - rise / 8));
+            }
+        }
+        if (camp.Stage == "results" && camp.Result is { Job: "cook", Passed: false })
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                var age = (float)((_clock * .4 + i / 3.0) % 1);
+                _glowing.DrawCircle(new Vector2(fire.X + 33 + MathF.Sin(age * 5 + i) * 3, fire.Y - 31 - age * 18), 2 + age * 2, new Color(.55f, .55f, .58f, (1 - age) * .5f));
+            }
+        }
     }
 }
