@@ -24,6 +24,10 @@ public static class Hp
         if (!DownedRules.InBattle(u))
             return 0;
         amount = Math.Max(0, amount);
+        var triggers = amount > 0 && type is not null
+            ? Conditions.Active(u, w.Rules).Where(c => c.Def.DamageTaken is { } trigger && trigger.Type == type).ToArray()
+            : [];
+        amount += triggers.Sum(c => c.Def.DamageTaken!.Bonus);
         if (type is not null)
         {
             var mods = Modifiers.For(w, unit, w.Rules);
@@ -38,6 +42,9 @@ public static class Hp
         if (u.Life == LifeState.Downed)
         {
             if (amount > 0)
+                foreach (var id in triggers.Where(c => c.Def.DamageTaken!.Consume).Select(c => c.From.Id).Distinct())
+                    Conditions.Remove(w, unit, id);
+            if (amount > 0)
                 DownedRules.Hit(w, unit, crit, resolution);
             return 0;
         }
@@ -46,6 +53,9 @@ public static class Hp
         var hp = Math.Max(0, u.Hp - (amount - absorbed));
         w.Set(u with { TempHp = u.TempHp - absorbed, Hp = hp });
         w.Emit(new Damaged(unit, amount, type, hp));
+        if (amount > 0)
+            foreach (var id in triggers.Where(c => c.Def.DamageTaken!.Consume).Select(c => c.From.Id).Distinct())
+                Conditions.Remove(w, unit, id);
         if (absorbed > 0 && absorbed == u.TempHp && u.TrueSheet is not null)
             Transforms.Revert(w, unit);
         if (amount <= 0)
@@ -106,6 +116,7 @@ public sealed class DamageBlock : EffectBlock<DamageEffect>
     /// <inheritdoc />
     protected override void Run(DamageEffect def, EffectContext ctx)
     {
+        Surfaces.RecordDamage(ctx, def);
         var target = ctx.TargetUnit(Key);
         var sheet = ctx.SourceUnit.Sheet;
         var crit = ctx.Last?.Crit == true;

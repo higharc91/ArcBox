@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/environment.schema.json",
+  "title": "Environmental reactions",
+  "description": "Data for opted-in battles. The C# loader validates references and bounded fire behavior.",
+  "type": "object",
+  "properties": {
+    "fuel": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[^/*]+/([^/]+|\\*)$"
+      }
+    },
+    "zoneFuel": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "rounds": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "spreads": {
+            "type": "boolean"
+          },
+          "leaves": {
+            "type": "string"
+          },
+          "difficult": {
+            "type": "boolean"
+          },
+          "insulates": {
+            "type": "boolean"
+          },
+          "fuel": {
+            "type": "boolean"
+          },
+          "passives": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/passive"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "reactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "damage": {
+            "type": "string"
+          },
+          "tiles": {
+            "type": "string"
+          },
+          "conduct": {
+            "type": "object",
+            "properties": {
+              "reach": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              },
+              "save": {
+                "enum": [
+                  "str",
+                  "dex",
+                  "con",
+                  "int",
+                  "wis",
+                  "cha"
+                ]
+              },
+              "half": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "reach",
+              "save",
+              "half"
+            ],
+            "additionalProperties": false
+          },
+          "surface": {
+            "type": "string"
+          },
+          "rounds": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "consumes": {
+            "type": "boolean"
+          },
+          "ends": {
+            "type": "boolean"
+          },
+          "enters": {
+            "enum": [
+              "water"
+            ]
+          },
+          "remove": {
+            "type": "string"
+          },
+          "passives": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/passive"
+            }
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "replaces": {
+      "const": "environment"
+    },
+    "materialFamilies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Referenced material families for standalone rules validation. Checked against the art catalogue when available."
+    }
+  },
+  "required": [
+    "fuel",
+    "surfaces",
+    "reactions"
+  ],
+  "additionalProperties": false
+}

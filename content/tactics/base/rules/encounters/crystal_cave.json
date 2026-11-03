@@ -1,6 +1,121 @@
-{ "id": "crystal_cave", "name": "Crystal Cave", "map": "crystal_cave", "level": 7, "party": { "min": 4, "max": 6 },
-  "enemies": [ { "unit": "giant_spider", "zone": "spider_nest", "count": 3, "level": 7, "variant": "red" },
-               { "unit": "kobold_slinger", "zone": "crystal_ridge", "count": 4, "level": 7 },
-               { "unit": "kobold", "zone": "chasm_ledge", "count": 3, "level": 7, "aiProfile": "skirmisher" } ],
-  "xp": 1200, "loot": ["crystal_hoard"],
-  "objectives": { "win": "defeat_all" } }
+{
+  "id": "crystal_cave",
+  "name": "Crystal Cave",
+  "map": "crystal_cave",
+  "level": 7,
+  "party": {
+    "min": 4,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "rime_spider",
+      "zone": "spider_nest",
+      "count": 1,
+      "level": 7,
+      "variant": "red",
+      "tag": "rime_nest_spider",
+      "id": "giant_spider.1"
+    },
+    {
+      "unit": "rime_spider",
+      "zone": "spider_nest",
+      "count": 1,
+      "level": 7,
+      "variant": "red",
+      "tag": "rime_nest_spider",
+      "id": "giant_spider.2"
+    },
+    {
+      "unit": "rime_spider",
+      "zone": "spider_nest",
+      "count": 1,
+      "level": 7,
+      "variant": "red",
+      "tag": "rime_nest_spider",
+      "id": "giant_spider.3"
+    },
+    {
+      "unit": "rime_spider",
+      "zone": "spider_nest",
+      "count": 1,
+      "level": 7,
+      "variant": "red",
+      "tag": "rime_nest_spider",
+      "id": "giant_spider.4"
+    },
+    {
+      "unit": "kobold_slinger",
+      "zone": "crystal_ridge",
+      "count": 4,
+      "level": 7
+    },
+    {
+      "unit": "kobold",
+      "zone": "chasm_ledge",
+      "count": 2,
+      "level": 7,
+      "aiProfile": "skirmisher"
+    }
+  ],
+  "xp": 1200,
+  "loot": [
+    "crystal_hoard"
+  ],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "environment": true,
+  "triggers": [
+    {
+      "id": "spider_webs",
+      "when": {
+        "round": 1
+      },
+      "do": [
+        {
+          "effects": [
+            {
+              "zone": {
+                "kind": "web",
+                "area": {
+                  "shape": "single"
+                },
+                "rounds": null,
+                "difficult": true,
+                "passives": [
+                  {
+                    "id": "rime.web",
+                    "hook": "onEnterTile",
+                    "target": "self",
+                    "effects": [
+                      {
+                        "save": {
+                          "stat": "dex",
+                          "dc": 13
+                        },
+                        "onFail": [
+                          {
+                            "apply": "restrained",
+                            "untilSave": true
+                          }
+                        ]
+                      }
+                    ],
+                    "when": {
+                      "not": {
+                        "targetTag": "rime_nest_spider"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "zone": "spider_nest",
+          "source": "rime_nest_spider"
+        }
+      ]
+    }
+  ]
+}

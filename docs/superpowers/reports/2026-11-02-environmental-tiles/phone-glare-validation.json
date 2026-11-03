@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-03",
+  "branch": "environmental-tiles",
+  "baseCommit": "6b2badc9",
+  "codeCommit": "42ae4abe6bf523f3dbec1e45afcf260f23455bd7",
+  "change": "Brighter terrain rim, slow glare/reflection, larger and brighter particles; no server or gameplay changes",
+  "dotnet": {
+    "passed": 5864,
+    "failed": 0,
+    "skipped": 0,
+    "duration": "3m 40s 562ms"
+  },
+  "web": {
+    "passed": 483,
+    "failed": 0,
+    "typeCheckAndBuild": "pass",
+    "warning": "Existing large Three.js flyover chunk advisory, as F."
+  },
+  "browser": {
+    "errors": [],
+    "terrainLooks": 6,
+    "riskTap": true,
+    "selectedSpread": true,
+    "reducedMotion": true,
+    "clears": true,
+    "narrowAndLandscape": true,
+    "glareDoesNotInterceptTaps": true,
+    "glareReducedMotion": true,
+    "glareClears": true
+  },
+  "browserScriptSha256": "ca86074338bcff474beb225462d7baff2b656e734669b03af4626e740ce1e864",
+  "sourceSha256": {
+    "web/play/src/games/tactics/surfaces.tsx": "316e7790e9be7bd4ca483e7b14fd40f4307b9b6b5895d3c8df15c3cb8fbe5067",
+    "web/play/src/games/tactics/tactics.css": "5d40ec340fad8145c56a3edb8d8cd8ec50cb768b46c45903b991d7ded45dea05",
+    "web/play/test/tacticsEnvironment.test.tsx": "e5744945f004734060bddb5e22801a88867359ed2242c59219a9321bf66e1f8e"
+  },
+  "fixtureSha256Unchanged": {
+    "web/play/test/fixtures/tactics/check-search-rolled.json": "5b80deb436a0117c2fbc72dfd4a2d5d102fef42a741c048f6a0abf9bf0108f5f",
+    "web/play/test/fixtures/tactics/react.json": "5d6a1d6ed614920c2877328ba280276cf33ffa02f9e090b6e8aa4584dc48f7b2",
+    "web/play/test/fixtures/tactics/pickEncounter-noWalk.json": "95d9f25e9ae1a8af411935305b04e0c47697bfc66704358f9155e4ce2af76b82",
+    "web/play/test/fixtures/tactics/pickClass.json": "aa2a9ce8789b303e3ce60e488179f5157a9e52a1f98b3f5068eeb1475e9790a6",
+    "web/play/test/fixtures/tactics/dialogue-leader.json": "b15d82052e5483a68763fe44ee2ea05531823c00ac1d2d285da78b3f83c36c51",
+    "web/play/test/fixtures/tactics/choice-leader.json": "76e873039558e93e27b9960aa69235c1f4d92b7a0ee74efaf2112dea7693fe4f",
+    "web/play/test/fixtures/tactics/environment-status.json": "823b17dd4a8cf71a63c60114a1045b69df6e27d4ee022d524a6bfc97e6b064ff",
+    "web/play/test/fixtures/tactics/turn.json": "1280b4dc6ad7cdebb5e33f2e2a2c7539aac3c837ac959ebc8bf23082b639416c",
+    "web/play/test/fixtures/tactics/results.json": "e167faa5a31d180656418704069968edc15c7d71ab9c11a5adb9ba761d265186",
+    "web/play/test/fixtures/tactics/environment-turn.json": "77dad60643c653b3585ef9d2498ca05c9f53e1e556a7de8a3e749da54b7fba91",
+    "web/play/test/fixtures/tactics/portal-character.json": "97a45cb1389ae6c497022547339a5838fa09e803658a5227c112d4d40558582c",
+    "web/play/test/fixtures/tactics/walk-leader.json": "bdce93ffb460e19cd58890653f473b5c7ee5cd94ae9603da6b2cbdcf4610477c",
+    "web/play/test/fixtures/tactics/walk-follower.json": "907bf812c2e7d6b1c6b67eebf6bbb0a6c760819e6ee38095dc21adefb54c5764",
+    "web/play/test/fixtures/tactics/walk-interact.json": "d5e2f21182b3c6863642a3afd2647f2b5e3dfcb3558e1f78e246555e72de112c",
+    "web/play/test/fixtures/tactics/dialogue.json": "f65850a26c9655fbdb5f26d29e5142645fd843c4db7fe0d194d2dca631a39cae",
+    "web/play/test/fixtures/tactics/check-rolled.json": "fd8416b087f5ab9f623475344bcf0617da2630601b9aa63cbfa5f26c0919eff6",
+    "web/play/test/fixtures/tactics/walk-things.json": "d0e6d01ceaa22493a451ff74683caa7bb1cbb4053fa09ef4d2e1e12f4dd474a4",
+    "web/play/test/fixtures/tactics/vote-tie.json": "07b3391bd19ee5a69bc8cda5f9a51e5e02ed095530b5575ba3d855531581e854",
+    "web/play/test/fixtures/tactics/check-pick.json": "af637a701c258e9de324855b8a2e3cc52024d0fb4b3161a7ca575d7f3d0b69d3",
+    "web/play/test/fixtures/tactics/walk-things-follower.json": "88b3116ebbe67ac6e115b3f2856b5f48c11836334cf2265a05eee060804242d2",
+    "web/play/test/fixtures/tactics/portal-new.json": "35224456b0aa5e829c075ce548028a4e523e53d628b2766c00d4373ee4928eec",
+    "web/play/test/fixtures/tactics/vote.json": "c8f6eca5bbfd7685cd6197d24ef4069dd95b9e5d65b8a2ac99468a5a93fb7d21",
+    "web/play/test/fixtures/tactics/choice-follower.json": "6e47ea3513f86f7c64109cef86aba425e0079f6e75700cf6e90f977fb2fc694e",
+    "web/play/test/fixtures/tactics/pickEncounter.json": "1d0e43c1210e593e6adb6eada94e76faee3a38f5cf613917cf87bcdd0ae20944",
+    "web/play/test/fixtures/tactics/check-search.json": "3e4ad5234dfdbd36db0d87952ed01b51693fdabf98a7e5db74d49103fae373a7",
+    "web/play/test/fixtures/tactics/status.json": "4fdb48472b464255c1429909eb820346bdc111b397d9b98eca8c43278b30a870"
+  },
+  "goldensUnchanged": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "preview": {
+    "file": "phone-glare-preview.mp4",
+    "durationSeconds": 34.48,
+    "width": 390,
+    "height": 844,
+    "fps": 25,
+    "bytes": 2207368,
+    "source": "Real Chromium controller; six cosmetic look overrides on the F fixture with actual pack art"
+  },
+  "artifactSha256": {
+    "phone-glare-tests.txt": "f0bf577798320aebc51bdfd24ba07f30481451c57dd544cb5d84130cbdbdc72f",
+    "phone-glare-build.txt": "81a6fda28b5c43a98a8e169ebf4704bd8ae7a069cd230b48fffb605c75ce765c",
+    "phone-glare-web.txt": "ba4da35d2a31b8100d5601298aa4a74f73dd7c3c9a3e34cc50d212c9e30a01b9",
+    "phone-glare-preview.mp4": "9fc4c1e2685400fefc520fd1e0c85d421b4aa16ea2a3ac60a1773f6e14ec28c7",
+    "phone-glare-comparison.png": "dd52a840c41c5e47a4c897750248720a6bf010f97be5b33a070b7596c66cc5d5"
+  },
+  "logs": "Trailing whitespace normalized; originals in /workspace/issue69-glare."
+}

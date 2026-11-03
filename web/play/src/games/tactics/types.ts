@@ -32,6 +32,8 @@ export interface MoveChoice {
   to: Tile;
   cost: number;
   path: Tile[];
+  risk?: number;
+  warn?: string;
 }
 
 export interface Target {
@@ -49,6 +51,7 @@ export interface TargetChoice {
   target: Target;
   aim: Tile;
   affected: UnitPreview[];
+  spread?: Tile[];
 }
 
 export interface Cost {
@@ -84,6 +87,7 @@ export interface TurnChoices {
 }
 
 export interface TurnData {
+  surfaces?: string[];
   me: UnitView;
   /** The map id, for its terrain from the content pack. */
   map?: string;
@@ -100,6 +104,7 @@ export interface ReactOption {
 }
 
 export interface ReactData {
+  surfaces?: string[];
   unit: string;
   trigger: string;
   cause: {
@@ -114,6 +119,7 @@ export interface ReactData {
 }
 
 export interface StatusData {
+  surfaces?: string[];
   me: UnitView;
   active: string | null;
   upIn: number | null;

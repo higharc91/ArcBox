@@ -180,6 +180,32 @@
     "replaces": {
       "$ref": "common.schema.json#/$defs/replaces"
     },
+    "environment": {
+      "type": "boolean",
+      "default": false,
+      "description": "Opt this encounter into the loaded environmental reactions; absent is off."
+    },
+    "itemLoot": {
+      "type": "array",
+      "description": "Fixed item stacks awarded once to the party on victory, in addition to the existing loot table ids.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          }
+        },
+        "required": [
+          "item"
+        ],
+        "additionalProperties": false
+      }
+    },
     "gold": {
       "type": "integer",
       "minimum": 0,

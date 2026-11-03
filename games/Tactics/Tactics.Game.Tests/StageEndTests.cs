@@ -178,16 +178,6 @@ public sealed class StageEndTests
         map["tiles"] = Convert.ToBase64String(tiles);
         File.WriteAllText(mapPath, map.ToJsonString());
 
-        // The rebuilt Ashen Ford has the old bridge's deck north of the stamp, (105, 48) to (108, 48): the river there too, or it's a way round.
-        var river = new Tile(106, 47);
-        foreach (var deck in Enumerable.Range(105, 4).Select(x => new Tile(x, 48)))
-        {
-            var source = Chunk(river, out _);
-            var bytes = Chunk(deck, out var chunk);
-            Array.Copy(source, WorldIndex(river), bytes, WorldIndex(deck), 3);
-            chunk["tiles"] = Convert.ToBase64String(bytes);
-        }
-
         var hither = region["spawns"]!["recovery"]!.DeepClone();
         foreach (var beat in region["beats"]!.AsArray())
             if (beat!["at"]![0]!.GetValue<int>() >= stage.Origin.X + 8)
@@ -519,7 +509,10 @@ public sealed class StageEndTests
             var (was, now) = (before[members[i].Value], s.Game.Document.Members[members[i].Value]);
             Assert.Equal([.. was.Character.Injuries, .. result.Injuries.GetValueOrDefault(TacticsGame.UnitFor(i), [])], now.Character.Injuries);
             Assert.NotEmpty(now.Character.Injuries);
-            Assert.Equal(was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0), now.Character.Bag);
+            var expectedBag = was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0);
+            if (outcome == BattleOutcome.Won && i == 0)
+                expectedBag = expectedBag.Add(new ItemStack(new ItemId("oil_flask"), 1)); // Ford's one party-wide victory reward
+            Assert.Equal(expectedBag, now.Character.Bag);
         }
     }
 

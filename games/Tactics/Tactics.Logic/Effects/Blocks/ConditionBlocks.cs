@@ -33,7 +33,7 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
             return;
         var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, conc);
         var condition = new ActiveCondition(def.Condition, ctx.Source, rounds, def.UntilSave, dc, stat,
-            Concentration: conc, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
+            Concentration: conc, AppliedThisTurn: ctx.W.State.Active == ctx.Source, SourceZone: ctx.W.State.Environment ? ctx.SourceZone : null);
         ctx.W.Set(target with { Conditions = target.Conditions.RemoveAll(c => c.Id == def.Condition).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target.Id, def.Condition));
         Conditions.BreakIfIncapacitated(ctx.W, target.Id);
@@ -114,6 +114,6 @@ public sealed class DispelBlock : EffectBlock<DispelEffect>
                 Conditions.BreakConcentration(ctx.W, id);
         }
         if (def.Zones && ctx.Aim is { } aim)
-            ZoneRules.End(ctx.W, z => z.Tiles.Contains(aim));
+            ZoneRules.End(ctx.W, z => !z.Surface && z.Tiles.Contains(aim));
     }
 }

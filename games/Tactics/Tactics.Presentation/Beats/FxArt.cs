@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Numerics;
+using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Beats;
 
@@ -71,6 +73,8 @@ public sealed class FxArt
 
     private readonly Dictionary<string, Dictionary<string, FxClip>> _sets = new(StringComparer.Ordinal);
     private readonly Dictionary<string, FxClip> _defaults = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, HazardArt> _hazards = new(StringComparer.Ordinal);
+
     private readonly Dictionary<string, ShotArt> _shots = new(StringComparer.Ordinal);
 
     private FxArt()
@@ -84,8 +88,23 @@ public sealed class FxArt
         art.ReadEffects(packRoot, "fx");
         art.ReadEffects(packRoot, "signature");
         art.ReadShots(packRoot);
+        using var hazards = JsonDocument.Parse(File.ReadAllText(Path.Combine(packRoot, "hazards", "manifest.json")));
+        var root = hazards.RootElement;
+        static Vector2 Pair(JsonElement e) => new(e[0].GetSingle(), e[1].GetSingle());
+        var (frame, origin) = (Pair(root.GetProperty("frame")), Pair(root.GetProperty("origin")));
+        var (overFrame, overOrigin) = (Pair(root.GetProperty("overFrame")), Pair(root.GetProperty("overOrigin")));
+        foreach (var entry in root.GetProperty("hazards").EnumerateObject())
+        {
+            var e = entry.Value;
+            ArtImage Image(string file, Vector2 size) => new($"hazards/{file}", e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(), (int)size.Y);
+            art._hazards[entry.Name] = new HazardArt(Image(e.GetProperty("ground").GetString()!, frame),
+                e.TryGetProperty("over", out var over) ? Image(over.GetString()!, overFrame) : null, frame, origin, overFrame, overOrigin);
+        }
         return art;
     }
+
+    /// <summary>A transient hazard's two layers, or null when the pack has no art for it.</summary>
+    public HazardArt? Hazard(string id) => _hazards.GetValueOrDefault(id);
 
     /// <summary>The effect for a key, or null.</summary>
     public FxClip? Clip(string key)

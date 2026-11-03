@@ -125,6 +125,44 @@ public sealed class GoldenTests
         Assert.Single(events.OfType<BattleEnded>());
     }
 
+    [Fact]
+    public void River_ford_storm_replays_conduction_freeze_and_dousing_on_the_shipped_map()
+    {
+        var replay = Replay.Load(Path.Combine(Folder(), "river-ford-storm" + Suffix));
+        var (final, events) = Replay.Run(replay, roundTripEachStep: true);
+        Assert.True(final.Environment);
+        Assert.Equal("river_crossing", final.MapId);
+        Assert.Contains(events, e => e is TileReacted { Rule: "conduct" });
+        Assert.Contains(events, e => e is TileReacted { Rule: "freeze" });
+        Assert.Contains(events, e => e is TileReacted { Rule: "douse" });
+        Assert.Contains(events, e => e is ConditionApplied { Unit.Value: "mage", Condition.Value: "burning" });
+        Assert.Contains(events, e => e is ConditionRemoved { Unit.Value: "mage", Condition.Value: "burning" });
+        Assert.DoesNotContain(final.Units[new UnitId("mage")].Conditions, c => c.Id.Value == "burning");
+    }
+
+    [Fact]
+    public void Environmental_tally_reads_the_live_ford_replay_packets()
+    {
+        var replay = Replay.Load(Path.Combine(Folder(), "river-ford-storm" + Suffix));
+        var preset = Replay.Preset(replay.Setup);
+        var start = preset.Begin(replay.Seed);
+        var state = start.State;
+        var tally = new Tactics.Sim.EnvironmentTally(preset.Rules);
+        tally.Read(start.Events, state);
+        foreach (var command in replay.Commands)
+        {
+            var result = Battle.Apply(state, command, preset.Rules);
+            Assert.Null(result.Rejected);
+            state = result.State;
+            tally.Read(result.Events, state);
+        }
+        var stats = tally.Snapshot();
+        Assert.Equal(4, stats.Reactions);
+        Assert.Equal(6, stats.FriendlyConductionDamage); // the shaman conducts into its own goblin
+        Assert.Equal(1, stats.BurningTileRounds);
+        Assert.Equal(0, stats.SurfaceDeaths);
+    }
+
     private static string FirstDifference(string expected, string actual)
     {
         var e = expected.Split('\n');

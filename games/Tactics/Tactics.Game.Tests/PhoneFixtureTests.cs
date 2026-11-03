@@ -262,6 +262,40 @@ public sealed class PhoneFixtureTests
     /// game as it's played, with no battle list; the rest from one with the Development battle list, which is the way to a fight that
     /// doesn't depend on the story.
     /// </summary>
+    [Fact]
+    public void Environmental_turn_and_waiting_screens_match_real_resumed_views()
+    {
+        var seed = new TacticsGameTests.Session();
+        seed.ToBattle();
+        var doc = TacticsDocument.Read(seed.Lease.Document);
+        var save = doc.Battle!;
+        var mage = new UnitId("hero4");
+        var swimmer = new UnitId("hero1");
+        var state = save.State with { Environment = true, TurnIndex = save.State.Order.IndexOf(mage), Pending = null };
+        var at = state.Units[mage].Pos;
+        state = state with
+        {
+            Units = state.Units.SetItem(swimmer, state.Units[swimmer] with { Pos = new Tile(6, 7) })
+                .SetItem(new UnitId("goblin.1"), state.Units[new UnitId("goblin.1")] with { Pos = new Tile(4, 9) }),
+            Zones = [new Zone(1, mage, "burning", [at, new Tile(3, 11)], 2, false, false, Pack.Value.Environment.Surfaces["burning"].Passives, Surface: true),
+                new Zone(2, mage, "oil", [new Tile(4, 9)], 10, false, false, [], Surface: true)],
+            NextSerial = 3,
+        };
+        var resumed = new TacticsGameTests.Session(document: (doc with { Battle = save with { State = state, Log = [] } }).ToJson());
+        resumed.Harness.Resume(resumed.Lease);
+        for (var i = 0; i < 4; i++) resumed.Harness.SetConnected(i, true);
+        Assert.Equal(TacticsPhase.Battle, resumed.Game.Phase);
+        Assert.Equal("turn", resumed.Screen(3)!.Screen);
+        Assert.Equal("status", resumed.Screen(0)!.Screen);
+        Assert.Contains("burning", resumed.Screen(3)!.Data.GetProperty("surfaces").EnumerateArray().Select(e => e.GetString()));
+        Assert.Contains("water", resumed.Screen(0)!.Data.GetProperty("surfaces").EnumerateArray().Select(e => e.GetString()));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["environment-turn"] = Node(resumed.Screen(3)!),
+            ["environment-status"] = Node(resumed.Screen(0)!),
+        });
+    }
+
     private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)
     {
         var rules = pack ?? Pack.Value;

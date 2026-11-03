@@ -300,6 +300,9 @@ public sealed class BoardPlanTests
 
     [Theory]
     [InlineData("fire", "burning")]
+    [InlineData("burning", "burning")]
+    [InlineData("ice_sheet", "ice")]
+    [InlineData("oil", "oil")]
     [InlineData("web", "web")]
     [InlineData("ice", "ice")]
     [InlineData("grease", "oil")]
@@ -309,6 +312,18 @@ public sealed class BoardPlanTests
     [InlineData("spikes", "spikes")]
     public void Zone_kinds_map_onto_the_hazard_set(string kind, string hazard)
         => Assert.Equal(hazard, ZoneArt.HazardFor(kind));
+
+    [Fact]
+    public void Scorched_surface_is_a_decal_on_the_raised_tile_and_never_a_fallback_tint()
+    {
+        var at = new Tile(0, 0);
+        var plan = Plan(Map(["planks/oak"], [], "2:0:0"), new BoardChanges([new ZoneView(1, "scorched", [at])], [], []));
+        var decal = Assert.Single(Faces(plan), f => f.Kind == FaceKind.Decal);
+        Assert.Equal(Pack.Art.Decal("scorch_burnt"), decal.Image);
+        Assert.InRange(decal.Alpha, 0.6f, 0.8f);
+        Assert.Equal(BoardProjection.Corner(0, 0, 2), decal.Points[0]);
+        Assert.DoesNotContain(Faces(plan), f => f.Kind == FaceKind.Tint);
+    }
 
     [Fact]
     public void A_zone_kind_with_no_hazard_art_still_shows_as_a_tint()

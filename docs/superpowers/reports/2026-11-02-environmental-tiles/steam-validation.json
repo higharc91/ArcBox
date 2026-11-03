@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-03",
+  "branch": "environmental-tiles",
+  "request": "Slower natural steam dissipation after E review",
+  "steamSeconds": 2.4,
+  "riseArtPixels": 12,
+  "expansion": 0.18,
+  "actionTimingChanged": false,
+  "sourceSha256": {
+    "games/Tactics/Tactics.Presentation.Tests/Beats/BeatPlayerTests.cs": "b460637750484c366ae11ad1cdd6ead19e1ddf7ef2825c80fa6d3bfbbc696382",
+    "games/Tactics/Tactics.Presentation.Tests/Beats/BeatScriptTests.cs": "31fc6b6d10aa768ddd655f45dc8c21238459168542e9cf24f3f64490939b527c",
+    "games/Tactics/Tactics.Presentation/Beats/BeatPlayer.cs": "5f1b99fe6acbc0dcf102f808a229362c8416da3fa9e938826a3e635697aaad3b",
+    "games/Tactics/Tactics.Presentation/Beats/BeatScript.cs": "299e2014ba09c1bc10a110b9c31e22c175abd3dbebe33084e1972dc9485b8677"
+  },
+  "goldensUnchanged": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "validation": {
+    "dotnetPassed": 5853,
+    "dotnetFailed": 0,
+    "dotnetSkipped": 0,
+    "webPassed": 478,
+    "webFailed": 0,
+    "focusedPassed": 194,
+    "newRegressionCases": 2,
+    "hostBuildWarnings": 0,
+    "hostBuildErrors": 0
+  },
+  "motion": {
+    "engine": "Godot 4.7.2 Mono / Mesa Compatibility / Xvfb",
+    "capture": "Fixed 30fps actual TV renderer, full demo recorded; thaw/douse excerpts exported",
+    "preview": "steam-preview.mp4",
+    "durationSeconds": 6.4,
+    "review": "Inspected successive frames: clouds persist beyond action completion, rise, expand and clear gradually.",
+    "warnings": "Same V-Sync/SSAA driver and 8 ObjectDB shutdown warnings documented in E; no new application errors."
+  },
+  "artifactSha256": {
+    "steam-tv.txt": "73bdbb14e971212d5d355a786cfa33128e49b8129a11591d6e8ba65e0868813a",
+    "steam-host-build.txt": "c4ca98da309e2447bae925604f3d6751fd37b6bbf4e1c8037e0edade6866be3e",
+    "steam-tests.txt": "1d2a0f74defcae4c65f11bf4f51bdf9d2c18a5dcd2c561bebbd38f770d2cef5e",
+    "steam-web.txt": "0e2fbbc2b3b3657644c12473ccb7339845d2902b32808cf8f17bd8e4c4b24d62",
+    "steam-preview.mp4": "b430534d1d56064518d7ea8ae20a6098602b0a218d27237f9391f79557458482"
+  },
+  "logNote": "Trailing whitespace normalized in committed logs; raw logs in /workspace/issue69-steam."
+}

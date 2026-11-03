@@ -1,0 +1,1582 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "turn",
+  "data": {
+    "me": {
+      "id": "hero4",
+      "name": "Player4",
+      "side": "Party",
+      "sprite": null,
+      "at": [
+        2,
+        10
+      ],
+      "hp": 8,
+      "maxHp": 8,
+      "tempHp": 0,
+      "life": "Up",
+      "countdown": 0,
+      "conditions": [],
+      "player": "Player4"
+    },
+    "map": "river_crossing",
+    "units": [
+      {
+        "id": "goblin.1",
+        "name": "Goblin",
+        "side": "Enemy",
+        "sprite": "characters.goblin_cutthroat",
+        "at": [
+          4,
+          9
+        ],
+        "hp": 16,
+        "maxHp": 16,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "goblin.2",
+        "name": "Goblin",
+        "side": "Enemy",
+        "sprite": "characters.goblin_cutthroat",
+        "at": [
+          10,
+          5
+        ],
+        "hp": 16,
+        "maxHp": 16,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "goblin.3",
+        "name": "Goblin",
+        "side": "Enemy",
+        "sprite": "characters.goblin_cutthroat",
+        "at": [
+          9,
+          6
+        ],
+        "hp": 16,
+        "maxHp": 16,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "goblin.4",
+        "name": "Goblin",
+        "side": "Enemy",
+        "sprite": "characters.goblin_cutthroat",
+        "at": [
+          10,
+          6
+        ],
+        "hp": 16,
+        "maxHp": 16,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "goblin_archer.1",
+        "name": "Goblin Archer",
+        "side": "Enemy",
+        "sprite": "characters.goblin_archer",
+        "at": [
+          11,
+          2
+        ],
+        "hp": 14,
+        "maxHp": 14,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "goblin_archer.2",
+        "name": "Goblin Archer",
+        "side": "Enemy",
+        "sprite": "characters.goblin_archer",
+        "at": [
+          12,
+          2
+        ],
+        "hp": 14,
+        "maxHp": 14,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": null
+      },
+      {
+        "id": "hero1",
+        "name": "Player1",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          6,
+          7
+        ],
+        "hp": 12,
+        "maxHp": 12,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player1"
+      },
+      {
+        "id": "hero2",
+        "name": "Player2",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          2,
+          9
+        ],
+        "hp": 10,
+        "maxHp": 10,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player2"
+      },
+      {
+        "id": "hero3",
+        "name": "Player3",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          1,
+          10
+        ],
+        "hp": 10,
+        "maxHp": 10,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player3"
+      },
+      {
+        "id": "hero4",
+        "name": "Player4",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          2,
+          10
+        ],
+        "hp": 8,
+        "maxHp": 8,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player4"
+      }
+    ],
+    "choices": {
+      "unit": "hero4",
+      "economy": {
+        "moveLeft": 4,
+        "action": true,
+        "bonus": true,
+        "reaction": true,
+        "extraActions": 0
+      },
+      "moves": [
+        {
+          "to": [
+            0,
+            8
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "to": [
+            0,
+            9
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "to": [
+            0,
+            10
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "to": [
+            0,
+            11
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "to": [
+            1,
+            7
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "to": [
+            1,
+            8
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "to": [
+            1,
+            9
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              9
+            ]
+          ]
+        },
+        {
+          "to": [
+            1,
+            11
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              11
+            ]
+          ]
+        },
+        {
+          "to": [
+            2,
+            6
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              2,
+              6
+            ]
+          ]
+        },
+        {
+          "to": [
+            2,
+            7
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              2,
+              7
+            ]
+          ]
+        },
+        {
+          "to": [
+            2,
+            8
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ]
+          ]
+        },
+        {
+          "to": [
+            2,
+            11
+          ],
+          "cost": 1,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              11
+            ]
+          ]
+        },
+        {
+          "to": [
+            3,
+            7
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              7
+            ]
+          ]
+        },
+        {
+          "to": [
+            3,
+            8
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "to": [
+            3,
+            9
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "to": [
+            3,
+            10
+          ],
+          "cost": 1,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "to": [
+            3,
+            11
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              11
+            ]
+          ],
+          "risk": 7,
+          "warn": "burns ~7"
+        },
+        {
+          "to": [
+            4,
+            8
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              8
+            ]
+          ]
+        },
+        {
+          "to": [
+            4,
+            10
+          ],
+          "cost": 2,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              10
+            ]
+          ]
+        },
+        {
+          "to": [
+            4,
+            11
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              11
+            ]
+          ],
+          "risk": 3.5,
+          "warn": "burns ~4"
+        },
+        {
+          "to": [
+            5,
+            9
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              5,
+              9
+            ]
+          ]
+        },
+        {
+          "to": [
+            5,
+            10
+          ],
+          "cost": 3,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              10
+            ]
+          ]
+        },
+        {
+          "to": [
+            5,
+            11
+          ],
+          "cost": 4,
+          "path": [
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              11
+            ]
+          ],
+          "risk": 3.5,
+          "warn": "burns ~4"
+        }
+      ],
+      "abilities": [
+        {
+          "ability": "common.dash",
+          "item": null,
+          "name": "Dash",
+          "tooltip": "Self: you gain your Move again",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "self"
+        },
+        {
+          "ability": "common.disengage",
+          "item": null,
+          "name": "Disengage",
+          "tooltip": "Self: you are Disengaged until the end of your turn",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "self"
+        },
+        {
+          "ability": "common.dodge",
+          "item": null,
+          "name": "Dodge",
+          "tooltip": "Self: you are Dodging for 1 round",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "self"
+        },
+        {
+          "ability": "common.help",
+          "item": null,
+          "name": "Help",
+          "tooltip": "1 tile: gets a downed target up at 1 HP; otherwise gives it advantage on its next d20",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "hero2",
+                "tile": null
+              },
+              "aim": [
+                2,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "hero2",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": "hero3",
+                "tile": null
+              },
+              "aim": [
+                1,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero3",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
+          "ability": "wizard.arcane_recovery",
+          "item": null,
+          "name": "Arcane Recovery",
+          "tooltip": "Self: you gain 1 mana",
+          "cost": {
+            "bonus": 1,
+            "uses": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "self"
+        },
+        {
+          "ability": "wizard.burning_hands",
+          "item": null,
+          "name": "Burning Hands",
+          "tooltip": "Dex save, self, cone 3: 3d6 fire; half damage on a save. Fire: removes ice sheet. Fire: web tiles becomes burning for 1 round (spreads each round; At the start of your turn, on yourself: 2d4 fire (once per turn)). Fire: fuel becomes burning for 2 rounds (spreads each round; When you enter a tile, on yourself: 1d6 fire (once per turn); At the start of your turn, on yourself: 1d6 fire (once per turn))",
+          "cost": {
+            "action": 1,
+            "resource": {
+              "mana": 1
+            }
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  3,
+                  10
+                ]
+              },
+              "aim": [
+                3,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 7.7,
+                  "heal": 0
+                }
+              ],
+              "spread": [
+                [
+                  3,
+                  10
+                ],
+                [
+                  4,
+                  9
+                ],
+                [
+                  4,
+                  10
+                ],
+                [
+                  4,
+                  11
+                ],
+                [
+                  5,
+                  9
+                ],
+                [
+                  5,
+                  10
+                ],
+                [
+                  5,
+                  11
+                ]
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  1,
+                  10
+                ]
+              },
+              "aim": [
+                1,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero3",
+                  "damage": 6.9,
+                  "heal": 0
+                }
+              ],
+              "spread": [
+                [
+                  0,
+                  9
+                ],
+                [
+                  0,
+                  10
+                ],
+                [
+                  0,
+                  11
+                ],
+                [
+                  1,
+                  10
+                ]
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  2,
+                  11
+                ]
+              },
+              "aim": [
+                2,
+                11
+              ],
+              "affected": [],
+              "spread": [
+                [
+                  2,
+                  11
+                ]
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  2,
+                  9
+                ]
+              },
+              "aim": [
+                2,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "hero2",
+                  "damage": 8,
+                  "heal": 0
+                }
+              ],
+              "spread": [
+                [
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  7
+                ],
+                [
+                  1,
+                  8
+                ],
+                [
+                  2,
+                  7
+                ],
+                [
+                  2,
+                  8
+                ],
+                [
+                  2,
+                  9
+                ],
+                [
+                  3,
+                  7
+                ],
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  7
+                ]
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "direction"
+        },
+        {
+          "ability": "wizard.fire_bolt",
+          "item": null,
+          "name": "Fire Bolt",
+          "tooltip": "Spell attack, 6 tiles: 1d10 fire. Fire: removes ice sheet. Fire: web tiles becomes burning for 1 round (spreads each round; At the start of your turn, on yourself: 2d4 fire (once per turn)). Fire: fuel becomes burning for 2 rounds (spreads each round; When you enter a tile, on yourself: 1d6 fire (once per turn); At the start of your turn, on yourself: 1d6 fire (once per turn))",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "goblin.1",
+                "tile": null
+              },
+              "aim": [
+                4,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 3.3,
+                  "heal": 0
+                }
+              ],
+              "spread": [
+                [
+                  4,
+                  9
+                ]
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
+          "ability": "wizard.magic_missile",
+          "item": null,
+          "name": "Magic Missile",
+          "tooltip": "6 tiles: 3 times: 1d4\u002B1 force",
+          "cost": {
+            "action": 1,
+            "resource": {
+              "mana": 1
+            }
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "goblin.1",
+                "tile": null
+              },
+              "aim": [
+                4,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 10.5,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
+          "ability": "wizard.ray_of_frost",
+          "item": null,
+          "name": "Ray of Frost",
+          "tooltip": "Spell attack, 6 tiles: 1d8 cold; target gets -1 Move for 1 round. Cold: shallow water becomes ice sheet for 3 rounds (difficult terrain; When you enter a tile, on yourself: Dex save (target is Prone) (once per turn) (Dex DC 10))",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "goblin.1",
+                "tile": null
+              },
+              "aim": [
+                4,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 2.7,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
+          "ability": "wizard.sleep",
+          "item": null,
+          "name": "Sleep",
+          "tooltip": "Wis save, 6 tiles, burst 1: target is Unconscious until saved",
+          "cost": {
+            "action": 1,
+            "resource": {
+              "mana": 1
+            },
+            "concentration": true
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  3,
+                  9
+                ]
+              },
+              "aim": [
+                3,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  4,
+                  8
+                ]
+              },
+              "aim": [
+                4,
+                8
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  4,
+                  9
+                ]
+              },
+              "aim": [
+                4,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  4,
+                  10
+                ]
+              },
+              "aim": [
+                4,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": null,
+                "tile": [
+                  5,
+                  9
+                ]
+              },
+              "aim": [
+                5,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "goblin.1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [
+            [
+              0,
+              6
+            ],
+            [
+              0,
+              7
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              11
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "aim": "tile"
+        },
+        {
+          "ability": "common.use_item",
+          "item": "potion_of_healing",
+          "name": "Potion of Healing",
+          "tooltip": "1 tile: heals 2d4\u002B2",
+          "cost": {
+            "bonus": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "hero2",
+                "tile": null
+              },
+              "aim": [
+                2,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "hero2",
+                  "damage": 0,
+                  "heal": 7
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": "hero3",
+                "tile": null
+              },
+              "aim": [
+                1,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero3",
+                  "damage": 0,
+                  "heal": 7
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": "hero4",
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 7
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        }
+      ],
+      "canDelay": true
+    },
+    "surfaces": [
+      "burning"
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:01:00\u002B00:00",
+  "header": null
+}

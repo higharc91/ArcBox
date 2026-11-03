@@ -1,0 +1,38 @@
+Running tests from /workspace/arcbox-environmental/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (723ms)
+Running tests from /workspace/arcbox-environmental/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (31s 916ms)
+Running tests from /workspace/arcbox-environmental/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (57s 982ms)
+Running tests from /workspace/arcbox-environmental/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (945ms)
+Running tests from /workspace/arcbox-environmental/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 046ms)
+Running tests from /workspace/arcbox-environmental/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (41s 872ms)
+Running tests from /workspace/arcbox-environmental/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (43s 947ms)
+Running tests from /workspace/arcbox-environmental/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (17s 611ms)
+Running tests from /workspace/arcbox-environmental/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (27s 035ms)
+Running tests from /workspace/arcbox-environmental/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/arcbox-environmental/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (3s 534ms)
+
+Test run summary: Passed!
+  /workspace/arcbox-environmental/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (3s 534ms)
+  /workspace/arcbox-environmental/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (41s 872ms)
+  /workspace/arcbox-environmental/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 046ms)
+  /workspace/arcbox-environmental/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (723ms)
+  /workspace/arcbox-environmental/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (945ms)
+  /workspace/arcbox-environmental/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (27s 035ms)
+  /workspace/arcbox-environmental/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (43s 947ms)
+  /workspace/arcbox-environmental/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (31s 916ms)
+  /workspace/arcbox-environmental/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (17s 611ms)
+  /workspace/arcbox-environmental/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (57s 982ms)
+
+  total: 5864
+  failed: 0
+  succeeded: 5864
+  skipped: 0
+  duration: 3m 48s 770ms

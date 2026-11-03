@@ -41,7 +41,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops }
+    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -64,6 +64,7 @@ internal static class PackLoader
         public List<Loaded<AiProfileDef>> AiProfiles { get; } = [];
         public List<Loaded<InjuryDef>> Injuries { get; } = [];
         public List<Loaded<XpTable>> Xp { get; } = [];
+        public List<Loaded<EnvironmentDef>> Environments { get; } = [];
     }
 
     /// <summary>Loads the packs in <paramref name="packDirectories"/>; see <see cref="RulesPack.Load"/>.</summary>
@@ -76,6 +77,15 @@ internal static class PackLoader
         foreach (var pack in Order(ReadManifests(packDirectories, v), v))
         {
             hashed.Add((pack.ManifestFile, pack.ManifestBytes));
+            // Material traits must validate even for callers (such as the simulator) that do not load all art.
+            var terrainManifest = Path.Combine(Path.GetDirectoryName(pack.Dir)!, "terrain", "manifest.json");
+            if (art is null && File.Exists(terrainManifest))
+            {
+                using var terrain = JsonDocument.Parse(File.ReadAllBytes(terrainManifest));
+                if (terrain.RootElement.TryGetProperty("textures", out var textures))
+                    foreach (var family in textures.EnumerateObject())
+                        v.MaterialFamilies.Add(family.Name);
+            }
             var seen = new HashSet<string>(StringComparer.Ordinal);
             for (var i = 0; i < pack.Manifest.Files.Length; i++)
             {
@@ -127,6 +137,7 @@ internal static class PackLoader
         var aiProfiles = Merge(content.AiProfiles, "AI profile", v);
         var injuries = Merge(content.Injuries, "injury", v);
         var xp = Merge(content.Xp, "XP table", v);
+        var environments = Merge(content.Environments, "environment", v);
 
         v.Resolve((kind, id) => kind switch
         {
@@ -139,9 +150,11 @@ internal static class PackLoader
             RefKind.Armor => armors.ContainsKey(id),
             RefKind.Map => maps.ContainsKey(id),
             RefKind.AiProfile => aiProfiles.ContainsKey(id),
+            RefKind.Surface => environments.Values.SingleOrDefault()?.Def.Surfaces.ContainsKey(id) == true,
             _ => false,
         });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);
+        v.CheckEnvironment(environments.Values.SingleOrDefault(), maps.Values);
         v.CheckEncounters(encounters.Values, battleMaps, Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal));
         v.CheckRegions(regions.Values, battleMaps, things.Values, injuries.Keys.ToHashSet(StringComparer.Ordinal));
 
@@ -170,7 +183,8 @@ internal static class PackLoader
                 content.Things.Where(t => things[t.Id] == t).GroupBy(t => t.Def.Region, StringComparer.Ordinal)
                     .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
                 shops.Values.GroupBy(t => t.Def.Region, StringComparer.Ordinal)
-                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal)));
+                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
+                Environment: environments.Values.SingleOrDefault()?.Def, Warnings: [.. v.Warnings]));
     }
 
     // ---- Packs ------------------------------------------------------------------------------------------------------
@@ -258,6 +272,7 @@ internal static class PackLoader
 
     private static FileKind? KindOf(string file) => file.Split('/') switch
     {
+        ["environment.json"] => FileKind.Environment,
         ["conditions.json"] => FileKind.Conditions,
         ["races.json"] => FileKind.Races,
         ["backgrounds.json"] => FileKind.Backgrounds,
@@ -300,6 +315,9 @@ internal static class PackLoader
     {
         switch (kind)
         {
+            case FileKind.Environment:
+                Add(c.Environments, v.Environment(root, file, ""), _ => EnvironmentDef.Id, e => e.Replaces, file, "", v, idPointer: false);
+                break;
             case FileKind.Conditions:
                 List(root, file, "conditions", v, (e, p) => Add(c.Conditions, v.Condition(e, file, p), d => d.Id.Value,
                     d => d.Replaces?.Value, file, p, v, e, RefKind.Condition));

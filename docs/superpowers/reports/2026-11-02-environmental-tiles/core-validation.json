@@ -1,0 +1,95 @@
+{
+  "validatedCommit": "008f3b7c1f5ca1bde157adef47b0966fa99a7191",
+  "solutionPassed": 5784,
+  "solutionFailed": 0,
+  "solutionSkipped": 0,
+  "webPassed": 478,
+  "buildWarnings": 0,
+  "focusedPassed": 91,
+  "modelSeeds": [
+    1,
+    7,
+    19,
+    37,
+    67,
+    101,
+    211,
+    397,
+    601,
+    997,
+    2003,
+    4099
+  ],
+  "modelStressCommandsPerSeed": 2048,
+  "mutations": [
+    {
+      "mutation": "mutation-scorched",
+      "test": "Fire_on_empty_fuel",
+      "exit": 1
+    },
+    {
+      "mutation": "mutation-insulation",
+      "test": "Conduction_is_bounded",
+      "exit": 1
+    },
+    {
+      "mutation": "mutation-order",
+      "test": "Conduction_event_uses_breadth",
+      "exit": 1
+    },
+    {
+      "mutation": "mutation-cascade",
+      "test": "Fire_condition_ticks",
+      "exit": 1
+    }
+  ],
+  "goldenSHA256": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "changedFileSHA256": {
+    "content/tactics/base/rules/environment.json": "970324ddc6f18b3c2c7b26cfab5950c2e95cd5fbe3d45f65a9cacd99913f7727",
+    "content/tactics/base/rules/manifest.json": "d5e09c205c75732d75c363150d89521fe40a2dbd5bdea0859a29a20639f00965",
+    "content/tactics/base/rules/schema/encounter.schema.json": "8857209bdd1bf96c55d6384328ddcde7faea51e2e920402198aa95ab833ff33e",
+    "content/tactics/base/rules/schema/environment.schema.json": "25126e1bbc3c6a1532ae919b18752cd8ba1fa2a2bfa67701a8cad5ddac476025",
+    "games/Tactics/Tactics.Game/TacticsGame.Views.cs": "6a22f4c682d710b21ebabf42da98d092acc9973ffb72ad4eadea935d5883f8f6",
+    "games/Tactics/Tactics.Logic.Tests/Content/EnvironmentContentTests.cs": "7c73e6f046b24c78b5e026da134c1319f29962e4d5e9d11a80c572739514954a",
+    "games/Tactics/Tactics.Logic.Tests/Effects/SurfaceRulesTests.cs": "0cdb61fc98ce78274002e13c56f7c63dd1a0079c810de13c081dcf03d5ec9044",
+    "games/Tactics/Tactics.Logic.Tests/Rules/SurfaceModelTests.cs": "63f04241d38462c45a19aba0601e95ee762d7eb5ba576d2982645413db8a4490",
+    "games/Tactics/Tactics.Logic.Tests/Support/TestBattle.cs": "478df590c407851856e27e1351d4718aba95dc666cabc7eea839ddc110545c14",
+    "games/Tactics/Tactics.Logic/Content/Defs.cs": "4327689144ee29c2d41872aaaf87e2fe3dcbe91b31b2ade852fa97b11704d689",
+    "games/Tactics/Tactics.Logic/Content/Encounters.cs": "335fe1a515f0b73ad06d47cfb8c0d1b2f2319b767275b3fab9b82c8d1659fcad",
+    "games/Tactics/Tactics.Logic/Content/EnvironmentDef.cs": "05b27004b1d8297635c557d285c7a7cad4b77291403c7729705afd84cdff7b3c",
+    "games/Tactics/Tactics.Logic/Content/PackLoader.cs": "fc72d62307b44547c77870e512eb586740fe974f481179cefb2f543f1da81d85",
+    "games/Tactics/Tactics.Logic/Content/RulesPack.cs": "5a0000c7cffcaf0a7b072f532b07798d6aad8009584a90162685620bc0354ed2",
+    "games/Tactics/Tactics.Logic/Content/Tooltips.cs": "6240cb35568b975fc7df036c0935df33fe6c345ddb3bd5b6e68457cb06ef58e4",
+    "games/Tactics/Tactics.Logic/Content/Validation/Environment.cs": "8c29b07a5aa8baeb02d4c67f87c73912b7f0923986f60c25733c89b95ab4aa2e",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/ConditionBlocks.cs": "133491bf5898b8049d190483c1aa85b040944dde8c52f96d785bebbe513f4f02",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/Flow.cs": "49b030f42f7e0eab3d49314f26f924f48c193aab033538ca9535a085958c0c57",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/Hp.cs": "831ae35e60092a11b53490c48f1ff7c3e1e9c81c0ed8aab250132e964005cc36",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/MapBlocks.cs": "4967d9031e8c024b474de51f692ae295ba1ad3128871b1083187c0215e7870de",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/Motion.cs": "356b0bda39b70b794693f46a9861ceee28b5351d97844d7a16d25b4cc9c48210",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/Rolls.cs": "ada8cecda59814e860a8b7fa633dc74e1ddafddd7289553af41705c5b7b1767d",
+    "games/Tactics/Tactics.Logic/Effects/Blocks/SurfaceRules.cs": "f23cfc12264e99e7f305aa72c1704ff04f8fc4e86fcd90c129669f2555d12cfe",
+    "games/Tactics/Tactics.Logic/Effects/EffectContext.cs": "79241e63629a05e2fde8c33eea8fe56750a4519120417526cdbcef2a6abcccb3",
+    "games/Tactics/Tactics.Logic/Effects/NamedHooks/Counterspell.cs": "c4ad23c96342abff754f72b4105cece82b66584767f9830aa8af3bff67ed7340",
+    "games/Tactics/Tactics.Logic/Rules/Battle.cs": "8b93c9cb7cf06e58e512a5ca98a8966c9e76d4b8a36ec4caeac9e6a35462e3f8",
+    "games/Tactics/Tactics.Logic/Rules/Choices.cs": "614f9721890afc1bd42411decdefd98e45b75a5fe5249b5a432da5d5945d068e",
+    "games/Tactics/Tactics.Logic/Rules/Invariants.cs": "515ea8c5b924dbf1016992c732b2527a236914610f8bfb08dd4aef3f26c345bf",
+    "games/Tactics/Tactics.Logic/Rules/Movement.cs": "e457195de441f768a718ab18d62426647b6802396b12364f1fd949ebc32d2f9b",
+    "games/Tactics/Tactics.Logic/Rules/ReactStep.cs": "f22c903030512e2ce09f738d29836ffde47461d9bfde3f6056c5e0face397a8c",
+    "games/Tactics/Tactics.Logic/Rules/Steps.cs": "13802a388ab06306000688e549c89dd003ccc6c121569ff1ec2c8bee1b0b7756",
+    "games/Tactics/Tactics.Logic/State/BattleSetup.cs": "b28565a38273b97fc79a8193dfd7969658d1d6c5a69c00c1420e7832a4f63bf5",
+    "games/Tactics/Tactics.Logic/State/BattleState.cs": "02f8aaf4e81746cf03718801f45c434dd5364e88a7fa5a6c527da0cfd656334f",
+    "games/Tactics/Tactics.Logic/State/Events.cs": "42995984028af99ebb376f1caa6534b223652f1c97543d76ec83e4916ed49cc1",
+    "games/Tactics/Tactics.Logic/State/UnitState.cs": "f7243ca9bcd4f91fa020ce7a4a58223ac671448bf95237f12103234083467dbb"
+  },
+  "basePackContentWarnings": 0,
+  "publishedDefinitionCommit": "a1980c4d604a8954ffdc2aed294726287f3112c2",
+  "publishedRuntimeCommit": "f7bacd80118aeba2c45c3c9646aec25a31251e9f",
+  "aiOnlyMergeBoundary": "dccfab9f6491011464dfbdb66be2c7bab76f4c70"
+}

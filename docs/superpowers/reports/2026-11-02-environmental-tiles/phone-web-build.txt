@@ -1,0 +1,131 @@
+
+> arcbox-play@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v6.4.4 building for production...
+transforming...
+node_modules/@microsoft/signalr/dist/esm/Utils.js (190:0): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@microsoft/signalr/dist/esm/Utils.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/@microsoft/signalr/dist/esm/Utils.js (208:0): A comment
+
+"/*#__PURE__*/"
+
+in "node_modules/@microsoft/signalr/dist/esm/Utils.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 125 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/title.html                                                     0.74 kB │ gzip:   0.36 kB
+dist/index.html                                                     0.75 kB │ gzip:   0.36 kB
+dist/dev.html                                                       1.00 kB │ gzip:   0.40 kB
+dist/assets/pixelify-sans-cyrillic-700-normal-BrZTw8tu.woff         4.41 kB
+dist/assets/pixelify-sans-latin-ext-700-normal-ClyJstAh.woff2       5.42 kB
+dist/assets/titillium-web-latin-ext-900-normal-DbUGIJDR.woff2       5.52 kB
+dist/assets/titillium-web-latin-ext-700-normal-DeLo1m_T.woff2       6.68 kB
+dist/assets/titillium-web-latin-ext-600-normal-u1udDzIn.woff2       6.78 kB
+dist/assets/titillium-web-latin-ext-400-normal-Bot9mzhf.woff2       6.82 kB
+dist/assets/alegreya-sans-greek-400-normal-8U5NAP_q.woff            6.82 kB
+dist/assets/alegreya-sans-greek-700-normal-BZuMtSJ5.woff            6.87 kB
+dist/assets/alegreya-sans-greek-500-normal-BwxJMQU_.woff            6.87 kB
+dist/assets/alegreya-sans-greek-800-normal-BLeqXWgY.woff            6.94 kB
+dist/assets/alegreya-sans-greek-ext-400-normal-D6j-TQLM.woff        7.22 kB
+dist/assets/alegreya-sans-greek-ext-500-normal-Cp0bGOKK.woff        7.28 kB
+dist/assets/alegreya-sans-greek-ext-700-normal-BVJ8GoGc.woff        7.35 kB
+dist/assets/alegreya-sans-greek-ext-800-normal-Y9Z6K4Rv.woff        7.36 kB
+dist/assets/pixelify-sans-latin-ext-700-normal-BadXkHzZ.woff        7.47 kB
+dist/assets/alegreya-sans-vietnamese-400-normal-BFvpiE3j.woff       7.64 kB
+dist/assets/alegreya-sans-vietnamese-500-normal-B1LHNMw0.woff       7.65 kB
+dist/assets/alegreya-sans-vietnamese-700-normal-D0056cUE.woff       7.68 kB
+dist/assets/alegreya-sans-vietnamese-800-normal-DR1LKS7f.woff       7.73 kB
+dist/assets/titillium-web-latin-ext-900-normal-CeQ5kzAQ.woff        7.77 kB
+dist/assets/pixelify-sans-latin-700-normal-D3Xxx3QE.woff2           7.90 kB
+dist/assets/cinzel-latin-ext-700-normal-C24KFjuG.woff2              8.26 kB
+dist/assets/cinzel-latin-ext-800-normal-BVA5zD9y.woff2              8.34 kB
+dist/assets/alegreya-sans-greek-ext-500-normal-8OvC5Vmr.woff2       8.44 kB
+dist/assets/alegreya-sans-greek-ext-400-normal-CaUEPd_u.woff2       8.44 kB
+dist/assets/alegreya-sans-greek-ext-700-normal-ChNZoGr1.woff2       8.64 kB
+dist/assets/alegreya-sans-greek-ext-800-normal-uCdZyMib.woff2       8.66 kB
+dist/assets/alegreya-sans-greek-500-normal-CjlmbScm.woff2           8.78 kB
+dist/assets/alegreya-sans-greek-400-normal-B87Md6o9.woff2           8.82 kB
+dist/assets/alegreya-sans-greek-700-normal-CTof9pYC.woff2           8.93 kB
+dist/assets/alegreya-sans-greek-800-normal-BF_Q3SoR.woff2           8.94 kB
+dist/assets/alegreya-sans-cyrillic-ext-800-normal-AL7dFV8Q.woff     8.96 kB
+dist/assets/alegreya-sans-cyrillic-ext-400-normal-ClLgPhqT.woff     8.98 kB
+dist/assets/alegreya-sans-cyrillic-ext-500-normal-CBZLRaMr.woff     9.06 kB
+dist/assets/alegreya-sans-cyrillic-ext-700-normal-YOec_wOb.woff     9.06 kB
+dist/assets/alegreya-sans-vietnamese-500-normal-CFLbXWhL.woff2      9.10 kB
+dist/assets/alegreya-sans-vietnamese-400-normal-D7fwYHgb.woff2      9.11 kB
+dist/assets/titillium-web-latin-ext-700-normal-CX1-8Oys.woff        9.16 kB
+dist/assets/titillium-web-latin-ext-600-normal-CrXBuK16.woff        9.22 kB
+dist/assets/titillium-web-latin-ext-400-normal-dam1wzvV.woff        9.28 kB
+dist/assets/alegreya-sans-vietnamese-700-normal-CHYTK2w7.woff2      9.37 kB
+dist/assets/alegreya-sans-vietnamese-800-normal-BW-pKOU0.woff2      9.37 kB
+dist/assets/cinzel-latin-ext-700-normal-CORa-yIv.woff               9.81 kB
+dist/assets/cinzel-latin-ext-800-normal-gMcvnDsD.woff               9.84 kB
+dist/assets/alegreya-sans-cyrillic-500-normal-gEBUHwKD.woff        10.32 kB
+dist/assets/alegreya-sans-cyrillic-700-normal-qSextXl4.woff        10.36 kB
+dist/assets/alegreya-sans-cyrillic-400-normal-C2XSGevv.woff        10.37 kB
+dist/assets/alegreya-sans-cyrillic-800-normal-BCYhB7NR.woff        10.40 kB
+dist/assets/titillium-web-latin-900-normal-CE5cGYJA.woff2          10.46 kB
+dist/assets/pixelify-sans-latin-700-normal-BctWAS0u.woff           10.49 kB
+dist/assets/alegreya-sans-cyrillic-ext-400-normal-CBouUAPx.woff2   11.04 kB
+dist/assets/alegreya-sans-cyrillic-ext-800-normal-t99nLxKn.woff2   11.09 kB
+dist/assets/alegreya-sans-cyrillic-ext-700-normal-Cpzx2u2L.woff2   11.14 kB
+dist/assets/alegreya-sans-cyrillic-ext-500-normal-BjdEjhHc.woff2   11.17 kB
+dist/assets/titillium-web-latin-700-normal-YDdGQjzo.woff2          11.73 kB
+dist/assets/titillium-web-latin-600-normal-DBtSc4_g.woff2          12.12 kB
+dist/assets/alegreya-sans-cyrillic-500-normal-kQHBM3cE.woff2       12.20 kB
+dist/assets/alegreya-sans-cyrillic-400-normal-CFUoBDld.woff2       12.28 kB
+dist/assets/alegreya-sans-cyrillic-700-normal-BMO00Gdb.woff2       12.34 kB
+dist/assets/titillium-web-latin-400-normal-BmGsO8Gb.woff2          12.34 kB
+dist/assets/alegreya-sans-cyrillic-800-normal-D2Jsre_s.woff2       12.44 kB
+dist/assets/titillium-web-latin-900-normal-DKgyPzvu.woff           14.17 kB
+dist/assets/cinzel-latin-700-normal-Dkw14w9r.woff2                 15.18 kB
+dist/assets/cinzel-latin-800-normal-CwkMVn6z.woff2                 15.26 kB
+dist/assets/titillium-web-latin-700-normal-D73cfq1_.woff           15.67 kB
+dist/assets/titillium-web-latin-600-normal-DAj26wWp.woff           16.26 kB
+dist/assets/titillium-web-latin-400-normal--_2x2_rV.woff           16.46 kB
+dist/assets/cinzel-latin-700-normal-C-gK7hA8.woff                  17.52 kB
+dist/assets/cinzel-latin-800-normal-69OYDlL6.woff                  17.54 kB
+dist/assets/alegreya-sans-latin-ext-400-normal-DpBVrRWA.woff       19.99 kB
+dist/assets/alegreya-sans-latin-ext-700-normal-CkNjzB9Y.woff       20.07 kB
+dist/assets/alegreya-sans-latin-ext-800-normal-D8aPPA-q.woff       20.09 kB
+dist/assets/alegreya-sans-latin-ext-500-normal-CxFoZ42m.woff       20.17 kB
+dist/assets/alegreya-sans-latin-ext-400-normal-D7N6b6bd.woff2      21.28 kB
+dist/assets/alegreya-sans-latin-ext-500-normal-TH5u60nj.woff2      21.50 kB
+dist/assets/alegreya-sans-latin-800-normal-17etSahV.woff           21.54 kB
+dist/assets/alegreya-sans-latin-400-normal-DmA8jeke.woff           21.55 kB
+dist/assets/alegreya-sans-latin-700-normal-BnzUNlma.woff           21.60 kB
+dist/assets/alegreya-sans-latin-500-normal-vXxrTKJT.woff           21.72 kB
+dist/assets/alegreya-sans-latin-ext-800-normal-BBRJ-mcX.woff2      21.86 kB
+dist/assets/alegreya-sans-latin-ext-700-normal-HuHd3-Mg.woff2      21.87 kB
+dist/assets/alegreya-sans-latin-400-normal-DtLlO8BS.woff2          23.71 kB
+dist/assets/alegreya-sans-latin-500-normal-DS713u5J.woff2          23.93 kB
+dist/assets/alegreya-sans-latin-800-normal-CpHsWMQ0.woff2          23.96 kB
+dist/assets/alegreya-sans-latin-700-normal-DEbcy2sF.woff2          23.98 kB
+dist/assets/title-DNxcwrHw.css                                      4.10 kB │ gzip:   1.42 kB
+dist/assets/dev-Da9keIxL.css                                       10.13 kB │ gzip:   2.65 kB
+dist/assets/700-g1k5qugX.css                                       16.97 kB │ gzip:   4.75 kB
+dist/assets/transport-B__iy7iK.css                                 24.41 kB │ gzip:   5.73 kB
+dist/assets/index-C-YngXUV.css                                     59.90 kB │ gzip:  12.42 kB
+dist/assets/index-C9YCQbQY.js                                       0.09 kB │ gzip:   0.10 kB
+dist/assets/conditions-BIbtEucI.js                                  0.10 kB │ gzip:   0.11 kB
+dist/assets/pack-Bt9A_9Fz.js                                        0.93 kB │ gzip:   0.51 kB
+dist/assets/map-BZfn2oe4.js                                         1.08 kB │ gzip:   0.67 kB
+dist/assets/skin-DI8k--dB.js                                        2.03 kB │ gzip:   1.04 kB
+dist/assets/feedback-BMhGuCfX.js                                    5.26 kB │ gzip:   2.21 kB
+dist/assets/title-DyzErtW_.js                                       5.65 kB │ gzip:   2.60 kB
+dist/assets/preload-helper-D-P5pJKC.js                             16.16 kB │ gzip:   6.67 kB
+dist/assets/dev-BWiSSB98.js                                        16.47 kB │ gzip:   6.22 kB
+dist/assets/index-DAkvIHvs.js                                      47.47 kB │ gzip:  16.03 kB
+dist/assets/transport-NfN-4l7F.js                                  72.45 kB │ gzip:  19.77 kB
+dist/assets/index-DR7bVBmO.js                                      80.32 kB │ gzip:  26.92 kB
+dist/assets/flyover-DpVEPErz.js                                   537.65 kB │ gzip: 138.72 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.68s

@@ -28,6 +28,10 @@ namespace Tactics.Sim;
 /// </summary>
 internal sealed class Tally(RulesPack rules)
 {
+    private readonly EnvironmentTally _environment = new(rules);
+
+    public EnvironmentStats Environment => _environment.Snapshot();
+
     private sealed class Member(string cls)
     {
         public string Class { get; } = cls;
@@ -83,6 +87,7 @@ internal sealed class Tally(RulesPack rules)
     public void Read(ImmutableArray<BattleEvent> events, BattleState state)
     {
         Learn(state);
+        _environment.Read(events, state);
         foreach (var e in events)
         {
             ReadOne(e);

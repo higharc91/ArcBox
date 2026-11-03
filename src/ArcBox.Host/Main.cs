@@ -142,7 +142,14 @@ public partial class Main : Control
             ShowGame("tactics");
             var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
-            OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
+            if (board == "environment")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
+            else if (board.StartsWith("encounter:", StringComparison.Ordinal))
+                OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(
+                    global::Tactics.Presentation.Board.DemoBattle.Encounter(board["encounter:".Length..], pack), ArcJson.Options)));
+            else
+                OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
             return;
         }
         if (_args.StoryDemo is { } storyFrom)
@@ -708,6 +715,8 @@ public partial class Main : Control
     {
         if (_client is not { } client)
         {
+            if (_args.TacticsDemo is not null)
+                return;     // Dev boards acknowledge beats locally; they have no server to report to.
             GD.PushWarning($"Host signal '{kind}' dropped: not connected");
             return;
         }

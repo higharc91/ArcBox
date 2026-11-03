@@ -12,7 +12,7 @@ namespace ArcBox.Host.Shell;
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
-/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server),
+/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server; <c>encounter:&lt;id&gt;</c> uses its real units and starting zones),
 /// the dev-only <c>--world-demo[=&lt;region&gt;|hilly[:&lt;block tiles&gt;]]</c> (draw a whole region in blocks, pan over it and print what it cost;
 /// <c>--world-demo=things</c> is the art check for things to interact with instead: every kind in every state, then each event, no server),
 /// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown, and <c>WALKAT</c> lines with where the party is drawn),

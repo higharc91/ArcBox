@@ -33,7 +33,7 @@ public partial class FxLayer : Node2D
     /// <summary>Shows the draws of <paramref name="draws"/> in this layer's blend.</summary>
     public void Show(ImmutableArray<FxDraw> draws)
     {
-        var mine = draws.Where(d => d.Additive == _additive).ToImmutableArray();
+        var mine = draws.Where(d => d.Order is null && d.Additive == _additive).ToImmutableArray();
         if (!mine.IsEmpty || !_draws.IsEmpty)
         {
             _draws = mine;

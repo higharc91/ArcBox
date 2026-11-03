@@ -1,0 +1,134 @@
+{
+  "classes": [
+    "fighter",
+    "cleric",
+    "rogue",
+    "wizard"
+  ],
+  "wins": 15,
+  "battles": 20,
+  "meanRounds": 7.6,
+  "capped": 0,
+  "seeds": [
+    {
+      "Seed": 1,
+      "outcome": "Lost",
+      "Rounds": 11,
+      "Capped": false
+    },
+    {
+      "Seed": 2,
+      "outcome": "Won",
+      "Rounds": 8,
+      "Capped": false
+    },
+    {
+      "Seed": 3,
+      "outcome": "Lost",
+      "Rounds": 11,
+      "Capped": false
+    },
+    {
+      "Seed": 4,
+      "outcome": "Won",
+      "Rounds": 6,
+      "Capped": false
+    },
+    {
+      "Seed": 5,
+      "outcome": "Lost",
+      "Rounds": 11,
+      "Capped": false
+    },
+    {
+      "Seed": 6,
+      "outcome": "Won",
+      "Rounds": 4,
+      "Capped": false
+    },
+    {
+      "Seed": 7,
+      "outcome": "Won",
+      "Rounds": 6,
+      "Capped": false
+    },
+    {
+      "Seed": 8,
+      "outcome": "Won",
+      "Rounds": 8,
+      "Capped": false
+    },
+    {
+      "Seed": 9,
+      "outcome": "Won",
+      "Rounds": 15,
+      "Capped": false
+    },
+    {
+      "Seed": 10,
+      "outcome": "Won",
+      "Rounds": 9,
+      "Capped": false
+    },
+    {
+      "Seed": 11,
+      "outcome": "Won",
+      "Rounds": 6,
+      "Capped": false
+    },
+    {
+      "Seed": 12,
+      "outcome": "Lost",
+      "Rounds": 6,
+      "Capped": false
+    },
+    {
+      "Seed": 13,
+      "outcome": "Won",
+      "Rounds": 7,
+      "Capped": false
+    },
+    {
+      "Seed": 14,
+      "outcome": "Won",
+      "Rounds": 7,
+      "Capped": false
+    },
+    {
+      "Seed": 15,
+      "outcome": "Lost",
+      "Rounds": 7,
+      "Capped": false
+    },
+    {
+      "Seed": 16,
+      "outcome": "Won",
+      "Rounds": 9,
+      "Capped": false
+    },
+    {
+      "Seed": 17,
+      "outcome": "Won",
+      "Rounds": 6,
+      "Capped": false
+    },
+    {
+      "Seed": 18,
+      "outcome": "Won",
+      "Rounds": 5,
+      "Capped": false
+    },
+    {
+      "Seed": 19,
+      "outcome": "Won",
+      "Rounds": 4,
+      "Capped": false
+    },
+    {
+      "Seed": 20,
+      "outcome": "Won",
+      "Rounds": 6,
+      "Capped": false
+    }
+  ]
+}

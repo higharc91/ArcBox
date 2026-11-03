@@ -546,6 +546,11 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             foreach (var tile in zone.Tiles.Where(t => terrain.Map.InBounds(t) && within?.Contains(t) != false))
             {
                 var ground = BoardOrder.Key(tile, BoardLayer.Ground);
+                if (zone.Kind == "scorched" && art.Decal("scorch_burnt") is { } decal)
+                {
+                    items.Add(Flat(FaceKind.Decal, ground, tile, terrain.Top(tile), decal, 1) with { Alpha = 0.7f });
+                    continue;
+                }
                 if (hazard is null)
                 {
                     items.Add(Flat(FaceKind.Tint, ground, tile, terrain.Top(tile), null, 1) with { Fill = ZoneTint, Alpha = TintAlpha, Lit = false });

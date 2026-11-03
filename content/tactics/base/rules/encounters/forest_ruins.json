@@ -1,4 +1,4 @@
-{ "id": "forest_ruins", "name": "Forest Ruins", "map": "forest_ruins", "level": 3, "party": { "min": 4, "max": 6 },
+{ "id": "forest_ruins", "name": "Forest Ruins", "map": "forest_ruins", "level": 3, "environment": true, "party": { "min": 4, "max": 6 },
   "enemies": [ { "unit": "bandit_captain", "zone": "ruin_courtyard", "count": 1 },
                { "unit": "bandit", "zone": "ruin_courtyard", "count": 2 },
                { "unit": "cultist", "zone": "ruin_courtyard", "count": 2 },

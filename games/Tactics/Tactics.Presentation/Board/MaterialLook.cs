@@ -95,6 +95,9 @@ public static class ZoneArt
     private static readonly ImmutableDictionary<string, string> Hazards = new Dictionary<string, string>
     {
         ["fire"] = "burning",
+        ["burning"] = "burning",
+        ["ice_sheet"] = "ice",
+        ["oil"] = "oil",
         ["ember_rune"] = "burning",
         ["poison"] = "poison",
         ["ice"] = "ice",

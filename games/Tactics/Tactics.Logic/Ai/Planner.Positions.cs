@@ -17,7 +17,9 @@ internal sealed partial class Planner
             cost += Paths.StepCost(_scorer.Terrain, prev, step, _me.Sheet.Jump);
             prev = step;
         }
-        var position = Position(t) - 0.01 * cost;
+        var hazards = _scorer.Hazards(_me, t, path);
+        var position = Position(t, hazards.Staying) - 0.01 * cost
+                       - (HazardCost(hazards.Entering + hazards.Staying) - HazardCost(hazards.Staying));
         var risk = Risk(path);
         return new Spot(t, path, cost, position, risk, position - (1 + _p.Caution) * risk);
     }
@@ -32,7 +34,7 @@ internal sealed partial class Planner
     /// zone (the objectives). A companion also guards: standing next to a healer or
     /// protected ally adds half the objective weight × the damage the foes threaten it with next round (capped at its HP).
     /// </summary>
-    private double Position(Tile t)
+    private double Position(Tile t, double zoneDamage)
     {
         var mods = _scorer.Mods(_me.Id, t);
         var ac = _me.Sheet.Ac + mods.Ac;
@@ -50,6 +52,9 @@ internal sealed partial class Planner
             threat += ev;
         }
         var score = -_p.Caution * _wariness * threat * Math.Clamp(2 * threat / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
+
+        // Known zone damage uses the threat term's caution and HP urgency, without its late-battle wariness decay.
+        score -= HazardCost(zoneDamage);
 
         var nearest = _foes.OrderBy(f => Reach.Distance(f.Pos, t)).ThenBy(f => f.Id).FirstOrDefault();
         if (nearest is not null)
@@ -91,6 +96,9 @@ internal sealed partial class Planner
             score -= 0.3 * Math.Max(0.5, _p.Objective) * goal.Min(g => Reach.Distance(g, t));
         return score;
     }
+
+    private double HazardCost(double damage) => _p.Caution * damage
+        * Math.Clamp(2 * damage / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
 
     private ImmutableArray<(Tile Pos, double Danger)>? _guarded;
 

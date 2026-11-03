@@ -85,6 +85,10 @@ public sealed record BattleState(
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ImmutableSortedSet<Tile>? Sunk { get; init; }
 
+    /// <summary>Whether this encounter enables the pack's environmental reactions.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool Environment { get; init; }
+
     /// <summary>The unit whose turn it is: <c>Order[TurnIndex]</c> while the battle has no outcome, otherwise null.</summary>
     [JsonIgnore]
     public UnitId? Active => Outcome is null && TurnIndex >= 0 && TurnIndex < Order.Length ? Order[TurnIndex] : null;

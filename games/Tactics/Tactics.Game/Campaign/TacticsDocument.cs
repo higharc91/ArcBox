@@ -41,8 +41,11 @@ public sealed record MemberRecord(CharacterRecord Character, int Xp,
 /// <summary>
 /// One beat of the battle log: the events one applied command produced, numbered so the TV can say which it has shown
 /// (adapter spec §4.3). <see cref="Actor"/> is the command's actor, or null for the battle's start.
+/// <see cref="ActiveBefore"/> preserves the turn when a command ends the battle without a TurnEnded event;
+/// a reaction's actor can be someone else. Absent on older saved beats.
 /// </summary>
-public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Events);
+public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Events,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] UnitId? ActiveBefore = null);
 
 /// <summary>
 /// A battle under way, as saved after every command: what it was started from (so a changed rules pack can restart it,

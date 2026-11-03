@@ -243,8 +243,14 @@ public sealed partial class TacticsGame
             ChangePartyGold(loot.Gold);
         if (def.Loot.IsEmpty || !_doc.Members.TryGetValue(member, out var record))
             return;
-        var bag = record.Character.Bag.ToList();
-        foreach (var loot in def.Loot.Where(l => l.Gold == 0 && Rules.Items.ContainsKey(l.Item)))
+        var bag = StackLoot(record.Character.Bag, def.Loot);
+        _doc = _doc with { Members = _doc.Members.SetItem(member, record with { Character = record.Character with { Bag = bag } }) };
+    }
+
+    private ImmutableArray<ItemStack> StackLoot(ImmutableArray<ItemStack> original, IEnumerable<LootDef> rewards)
+    {
+        var bag = original.ToList();
+        foreach (var loot in rewards.Where(l => l.Gold == 0 && Rules.Items.ContainsKey(l.Item)))
         {
             var at = bag.FindIndex(s => s.Item == loot.Item);
             if (at >= 0)
@@ -252,7 +258,7 @@ public sealed partial class TacticsGame
             else
                 bag.Add(new ItemStack(loot.Item, loot.Count));
         }
-        _doc = _doc with { Members = _doc.Members.SetItem(member, record with { Character = record.Character with { Bag = [.. bag] } }) };
+        return [.. bag];
     }
 
     /// <summary>

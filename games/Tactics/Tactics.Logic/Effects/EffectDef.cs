@@ -141,10 +141,11 @@ public sealed record DispelEffect(bool Concentration = false, bool Zones = false
 /// user's concentration with <see cref="Concentration"/>. A <see cref="Difficult"/> zone costs 2 Move per tile; a
 /// <see cref="BlocksSight"/> one blocks line of sight (smoke, darkness). Its
 /// <see cref="Passives"/> belong to every unit standing in it (usually <c>onEnterTile</c> and <c>onTurnStart</c> with
-/// <c>"target": "self"</c>), their effects coming from the zone's owner.
+/// <c>"target": "self"</c>), their effects coming from the zone's owner. With <see cref="Surface"/>, its kind is an
+/// environmental surface: it uses the definition's traits and round clock, and requires an opted-in battle.
 /// </summary>
 public sealed record ZoneEffect(string Kind, AreaDef Area, int? Rounds, ImmutableArray<PassiveDef> Passives,
-    bool Concentration = false, bool Difficult = false, bool BlocksSight = false) : EffectDef
+    bool Concentration = false, bool Difficult = false, bool BlocksSight = false, bool Surface = false) : EffectDef
 {
     /// <inheritdoc />
     public override bool OnTile => true;

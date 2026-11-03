@@ -458,4 +458,187 @@ public sealed class PlannerTests
             return new PartyMember(U(id), SheetBuilder.DefaultCharacter(id, "human", cls, null, level, rules), new AiControlled(profiles[cls]));
         })];
     }
+    private static BattleState Hazard(BattleState state, string ability, params Tile[] tiles)
+    {
+        var zone = Assert.IsType<ZoneEffect>(A(ability).Effects.First(e => e is ZoneEffect));
+        return state with
+        {
+            Zones = [new Zone(1, U("kara"), zone.Kind, [.. tiles], 10, false, zone.Difficult, zone.Passives)],
+            NextSerial = 2,
+        };
+    }
+
+    [Theory]
+    [InlineData("wizard.wall_of_fire")]
+    [InlineData("druid.spike_growth")]
+    [InlineData("druid.moonbeam")]
+    public void Avoids_hazardous_high_ground_when_a_near_equal_safe_shot_exists(string ability)
+    {
+        // The northern perch is closer. Its existing spell zone must outweigh that one-step benefit.
+        var battle = On("""
+            0. 0. 1. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 1. 0. 0. 0.
+            """).With(A(ability))
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow }), T(1, 1), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 1));
+        var state = Hazard(battle.Start().State, ability, T(2, 0));
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+        Assert.NotEqual(T(2, 0), EndTile(state, U("archer"), plan));
+        Assert.NotNull(UseOf(plan, "common.attack"));
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Theory]
+    [InlineData("wizard.wall_of_fire")]
+    [InlineData("druid.spike_growth")]
+    [InlineData("druid.moonbeam")]
+    public void Aggressive_unit_crosses_a_hazard_when_it_is_the_only_way_to_hit(string ability)
+    {
+        var battle = On("0. 0. 0. 0. 0.").With(A(ability))
+            .Enemy("brute", First(TestSheets.Fighter with { MaxHp = 100, Move = 5 }), T(0, 0), new AiControlled("brute"))
+            .Party("kara", TestSheets.Cleric with { MaxHp = 1, Move = 0 }, T(4, 0));
+        var state = Hazard(battle.Start().State, ability, T(1, 0), T(2, 0));
+        var plan = Ai.Plan(state, U("brute"), battle.Rules);
+        Assert.True(UseOf(plan, "common.attack")?.Target.Unit == U("kara"), plan.Explain);
+        Assert.Contains(plan.Commands.OfType<Move>().SelectMany(m => m.Path), t => t == T(1, 0));
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void Leaving_an_enter_only_zone_does_not_charge_for_the_tile_already_occupied()
+    {
+        var battle = On("0. 0. 0. 0. 0.").With(A("druid.spike_growth"))
+            .Enemy("brute", First(TestSheets.Fighter), T(0, 0), new AiControlled("brute"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(3, 0));
+        var plain = battle.Start().State;
+        var state = Hazard(plain, "druid.spike_growth", T(0, 0));
+        var expected = Ai.Plan(plain, U("brute"), battle.Rules);
+        var actual = Ai.Plan(state, U("brute"), battle.Rules);
+        Assert.Equal(JsonSerializer.Serialize(expected.Commands, ArcJson.Options), JsonSerializer.Serialize(actual.Commands, ArcJson.Options));
+        Assert.Equal(expected.Score, actual.Score);
+    }
+
+    [Fact]
+    public void A_safe_destination_does_not_hide_spike_damage_along_the_route()
+    {
+        var battle = On("""
+            0. 0. 0. 1. 0. 0. 0.
+            0. 0# 0# 0# 0# 0. 0.
+            0. 0. 0. 0. 1. 0. 0.
+            """).With(A("druid.spike_growth"))
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow, Move = 6 }), T(0, 1), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 1));
+        var state = Hazard(battle.Start().State, "druid.spike_growth", T(2, 0));
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+        Assert.DoesNotContain(plan.Commands.OfType<Move>().SelectMany(m => m.Path), t => t == T(2, 0));
+        Assert.NotNull(UseOf(plan, "common.attack"));
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, true)]
+    public void End_turn_hazards_respect_immunity(bool immune, bool takesPerch)
+    {
+        var battle = On("""
+            0. 0. 1. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 1. 0. 0. 0.
+            """).With(A("wizard.wall_of_fire"))
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow,
+                Immune = immune ? Ordinal.Set("fire") : Ordinal.Set() }), T(1, 1), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 1));
+        var state = Hazard(battle.Start().State, "wizard.wall_of_fire", T(2, 0));
+        state = state with { Zones = [state.Zones[0] with { Passives = [.. state.Zones[0].Passives.Select(p => p with { Hook = HookKind.OnTurnEnd })] }] };
+        var before = JsonSerializer.Serialize(state, ArcJson.Options);
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+        Assert.Equal(takesPerch, EndTile(state, U("archer"), plan) == T(2, 0));
+        Assert.Equal(before, JsonSerializer.Serialize(state, ArcJson.Options));
+        Assert.Equal(plan.Explain, Ai.Plan(state, U("archer"), battle.Rules).Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void An_enter_passive_already_spent_this_turn_does_not_deter_a_move()
+    {
+        var battle = On("""
+            0. 0. 1. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 1. 0. 0. 0.
+            """).With(A("druid.spike_growth"))
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow }), T(1, 1), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 1));
+        var state = Hazard(battle.Start().State, "druid.spike_growth", T(2, 0));
+        state = state with { Zones = [state.Zones[0] with { Passives = [.. state.Zones[0].Passives.Select(p => p with { OncePerTurn = true })] }] };
+        state = state.Change("archer", u => u with { UsedThisTurn = Ordinal.Set("druid.spike_growth.step") });
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+        Assert.Equal(T(2, 0), EndTile(state, U("archer"), plan));
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void Spike_growth_on_the_first_step_is_counted_even_when_the_destination_is_adjacent()
+    {
+        var battle = On("""
+            0. 1. 0. 0. 0.
+            0. 1. 0. 0. 0.
+            """).With(A("druid.spike_growth"))
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow }), T(0, 0), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(4, 0));
+        var state = Hazard(battle.Start().State, "druid.spike_growth", T(1, 0));
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+        Assert.NotEqual(T(1, 0), EndTile(state, U("archer"), plan));
+        Assert.NotNull(UseOf(plan, "common.attack"));
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void Moonbeam_danger_uses_the_zone_casters_save_dc_and_exact_half_damage_rounding()
+    {
+        var battle = On("0. 0. 0. 0. 0. 0. 0.").With(A("druid.moonbeam"))
+            .Enemy("archer", First(TestSheets.Fighter with { MaxHp = 100, Move = 0 }), T(0, 0), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 0));
+        var plain = battle.Start().State;
+        var state = Hazard(plain, "druid.moonbeam", T(0, 0));
+        var plainScore = Ai.Plan(plain, U("archer"), battle.Rules).Score;
+        var hazardScore = Ai.Plan(state, U("archer"), battle.Rules).Score;
+        // Caster WIS 16 gives DC 13; fighter CON save +4 fails 8/20. 2d10 averages 11, rounded halves average 5.25.
+        var damage = .4 * 11 + .6 * 5.25;
+        Assert.Equal(Base.AiProfiles["archer"].Caution * .5 * damage, plainScore - hazardScore, precision: 6);
+    }
+
+    [Theory]
+    [InlineData(false, false, null, 2)]
+    [InlineData(true, false, null, 1)]
+    [InlineData(false, true, null, 1)]
+    [InlineData(false, false, 1, 1)]
+    public void Overlapping_zones_honor_shared_passive_limits(bool perTurn, bool perRound, int? uses, int expectedTicks)
+    {
+        var battle = On("0. 0. 0. 0. 0. 0. 0.").With(A("druid.moonbeam"))
+            .Enemy("archer", First(TestSheets.Fighter with { MaxHp = 100, Move = 0 }), T(0, 0), new AiControlled("archer"))
+            .Party("kara", TestSheets.Cleric with { Move = 0 }, T(6, 0));
+        var plain = battle.Start().State;
+        var state = Hazard(plain, "druid.moonbeam", T(0, 0));
+        var passive = state.Zones[0].Passives.Single(p => p.Hook == HookKind.OnTurnStart)
+            with { Hook = HookKind.OnTurnEnd, OncePerTurn = perTurn, OncePerRound = perRound, UsesPerBattle = uses };
+        var zone = state.Zones[0] with { Passives = [passive] };
+        state = state with { Zones = [zone, zone with { Serial = 2 }], NextSerial = 3 };
+        var difference = Ai.Plan(plain, U("archer"), battle.Rules).Score - Ai.Plan(state, U("archer"), battle.Rules).Score;
+        Assert.Equal(expectedTicks * Base.AiProfiles["archer"].Caution * .5 * 7.55, difference, precision: 6);
+    }
+
+    [Fact]
+    public void Zone_hook_conditions_test_the_affected_unit_instead_of_the_caster()
+    {
+        var battle = On("0. 0. 0. 0. 0. 0. 0.").With(A("druid.moonbeam"))
+            .Enemy("archer", First(TestSheets.Fighter with { Move = 0 }), T(0, 0), new AiControlled("archer"))
+            .Party("kara", TestSheets.Goblin with { Move = 0 }, T(6, 0));
+        var plain = battle.Start().State;
+        var state = Hazard(plain, "druid.moonbeam", T(0, 0));
+        state = state with { Zones = [state.Zones[0] with { Passives = [.. state.Zones[0].Passives.Select(p =>
+            p with { When = new WhenDef(TargetTag: "goblinoid") })] }] };
+        Assert.Equal(Ai.Plan(plain, U("archer"), battle.Rules).Score, Ai.Plan(state, U("archer"), battle.Rules).Score);
+    }
+
 }

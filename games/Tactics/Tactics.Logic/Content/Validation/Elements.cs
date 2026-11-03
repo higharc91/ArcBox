@@ -73,6 +73,13 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<ConditionDef>(e, file, ptr);
+            if (def?.DamageTaken is { } damage)
+            {
+                var at = Pointer.Append(ptr, "damageTaken");
+                if (!DamageTypes.Contains(damage.Type))
+                    Error(file, Pointer.Append(at, "type"), $"Unknown damage type '{damage.Type}'.");
+                AtLeast(damage.Bonus, 0, file, Pointer.Append(at, "bonus"));
+            }
             if (def?.Implies is { } implies)
                 Ref(RefKind.Condition, implies.Value, file, Pointer.Append(ptr, "implies"));
             if (def?.Static is { MaxHp: not 0 })

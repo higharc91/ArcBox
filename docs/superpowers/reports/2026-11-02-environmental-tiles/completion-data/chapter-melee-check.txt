@@ -1,0 +1,9 @@
+[tv-e2e 06:15:59] chapter: 4 bots play Chapter 1 by force
+[tv-e2e 06:24:26] chapter: scenes: ch1_mayor (16), ch1_ford (19), ch1_dawn (4), ch1_bridge_cost (8), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 06:24:26] chapter: lines: 94, said 94
+[tv-e2e 06:24:26] chapter: the fight: TACTICS screen tactics-battle-river_crossing (line 576)
+[tv-e2e 06:24:26] chapter: the card: Chapter I · The Bridge at the Ford (line 1893)
+[tv-e2e 06:24:26] chapter: the fights: Won at Storming the Ford
+[tv-e2e 06:24:26] chapter: 4 walks to a "!", 1 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 06:24:26] chapter: 25 shots in /workspace/issue69-finish/chapter-four-melee/chapter
+[tv-e2e 06:24:26] OK

@@ -1,0 +1,95 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Movie Maker mode enabled, recording movie in 1920×1080 @ 30 FPS...
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-environmental/content/tactics/base
+THINGS demo: 12 views, 12 shots
+THINGS demo step The ford at 0.03 s
+AUDIO Music boss
+AUDIO Sfx ambience amb_plains_wind
+TACTICS screen tactics-battle-warlord_bridge
+SHOT /workspace/issue69-steam/tv/shots/001-tactics.png
+SHOT /workspace/issue69-steam/tv/shots/002-tactics-battle-warlord-bridge.png
+SHOT /workspace/issue69-steam/tv/shots/003-environment-the-ford.png
+THINGS demo step Lightning through water at 2.03 s
+AUDIO Sfx spell_lightning
+AUDIO Sfx ui_dice_roll
+AUDIO Sfx dmg_lightning
+AUDIO Sfx goblin_hurt
+SHOT /workspace/issue69-steam/tv/shots/004-tactics-beat-hit-1.png
+SHOT /workspace/issue69-steam/tv/shots/005-tactics-beat-save-1.png
+SHOT /workspace/issue69-steam/tv/shots/006-tactics-beat-reaction-conduct-1.png
+SHOT /workspace/issue69-steam/tv/shots/007-environment-lightning-through-water.png
+BEAT 1 from 8.389 to 12.389 took 4.000 scripted 0.720 swings 0 waiting 0 [TileReacted,Damaged]
+THINGS demo step Freeze the ford at 5.02 s
+AUDIO Sfx spell_ice
+SHOT /workspace/issue69-steam/tv/shots/008-tactics-beat-reaction-freeze-2.png
+SHOT /workspace/issue69-steam/tv/shots/009-tactics-beat-zone-2.png
+SHOT /workspace/issue69-steam/tv/shots/010-environment-freeze-the-ford.png
+BEAT 2 from 20.916 to 23.263 took 2.347 scripted 0.671 swings 0 waiting 0 [TileReacted,ZoneCreated]
+THINGS demo step Thaw to steam at 8.02 s
+AUDIO Sfx smoke_poof
+SHOT /workspace/issue69-steam/tv/shots/011-tactics-beat-reaction-thaw-3.png
+SHOT /workspace/issue69-steam/tv/shots/012-environment-thaw-to-steam.png
+BEAT 3 from 30.011 to 32.252 took 2.241 scripted 0.767 swings 0 waiting 0 [TileReacted,ZoneEnded]
+THINGS demo step Timber bridge at 11.03 s
+SHOT /workspace/issue69-steam/tv/shots/013-environment-timber-bridge.png
+THINGS demo step Ignite the deck at 13.03 s
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue69-steam/tv/shots/014-tactics-beat-reaction-ignite-1.png
+SHOT /workspace/issue69-steam/tv/shots/015-tactics-beat-zone-1.png
+SHOT /workspace/issue69-steam/tv/shots/016-environment-ignite-the-deck.png
+BEAT 1 from 44.611 to 47.374 took 2.763 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneCreated]
+THINGS demo step Fire spreads at 16.03 s
+AUDIO Sfx round_start
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue69-steam/tv/shots/017-tactics-beat-reaction-spread-2.png
+SHOT /workspace/issue69-steam/tv/shots/018-tactics-beat-zone-2.png
+SHOT /workspace/issue69-steam/tv/shots/019-environment-fire-spreads.png
+BEAT 2 from 53.587 to 56.628 took 3.041 scripted 0.957 swings 0 waiting 0 [RoundStarted,TileReacted,ZoneCreated]
+THINGS demo step Douse the flames at 19.03 s
+AUDIO Sfx smoke_poof
+SHOT /workspace/issue69-steam/tv/shots/020-tactics-beat-reaction-douse-3.png
+SHOT /workspace/issue69-steam/tv/shots/021-tactics-beat-zone-3.png
+SHOT /workspace/issue69-steam/tv/shots/022-environment-douse-the-flames.png
+BEAT 3 from 62.906 to 65.212 took 2.306 scripted 0.683 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo step Oil on the deck at 22.03 s
+AUDIO Sfx zone_created
+BEAT 4 from 71.740 to 72.456 took 0.716 scripted 0.300 swings 0 waiting 0 [ZoneCreated]
+SHOT /workspace/issue69-steam/tv/shots/023-tactics-beat-zone-4.png
+SHOT /workspace/issue69-steam/tv/shots/024-environment-oil-on-the-deck.png
+THINGS demo step Oil catches fire at 25.03 s
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue69-steam/tv/shots/025-tactics-beat-reaction-ignite-5.png
+SHOT /workspace/issue69-steam/tv/shots/026-tactics-beat-zone-5.png
+SHOT /workspace/issue69-steam/tv/shots/027-environment-oil-catches-fire.png
+BEAT 5 from 80.397 to 83.392 took 2.995 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo step Webs across the path at 28.03 s
+AUDIO Sfx zone_created
+BEAT 6 from 89.960 to 90.797 took 0.837 scripted 0.300 swings 0 waiting 0 [ZoneCreated]
+SHOT /workspace/issue69-steam/tv/shots/028-environment-webs-across-the-path.png
+THINGS demo step Burn away the webs at 31.03 s
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue69-steam/tv/shots/029-tactics-beat-reaction-burn-web-7.png
+SHOT /workspace/issue69-steam/tv/shots/030-environment-burn-away-the-webs.png
+BEAT 7 from 100.454 to 103.779 took 3.324 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo done
+TACTICS left: narrator cleared
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+--------------------------------------------------------------------------------
+Done recording movie at path: /workspace/issue69-steam/tv/reel.avi
+991 frames at 30 FPS (movie length: 00:00:33:01), recorded in 00:01:48 (30% of real-time speed).
+CPU render time: 5.46 seconds (average: 5.51 ms/frame)
+GPU render time: 14.28 seconds (average: 14.41 ms/frame)
+Encoding time: 30.63 seconds (average: 30.91 ms/frame)
+--------------------------------------------------------------------------------
