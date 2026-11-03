@@ -2,6 +2,9 @@ import { useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { Sheet } from "./details";
 import { Check } from "./story";
+import { CampScene } from "./camp-scene";
+import { Sprite, useIcons } from "./art";
+import { usePackBase } from "./pack";
 import { RecoveryMenu, RecoveryParty, type RecoveryMember } from "./recovery";
 
 interface CampData {
@@ -12,11 +15,14 @@ interface CampData {
   members?: RecoveryMember[];
   result?: { member: string; job: string; skill: string; die: number; secondDie?: number; bonus: number; dc: number; passed: boolean; text: string };
 }
+const jobArt: Record<string, string> = { tend: "heal", rally: "inspire", cook: "food", watch: "torch", rest: "second_wind" };
 const shortJob: Record<string, string> = { tend: "Tend", rally: "Rally", cook: "Cook", watch: "Watch", rest: "Rest" };
 
 /** A short job row above the shared party cards; injury details and treatment open on tap. */
 export function Camp(props: CustomScreenProps) {
   const { data, send } = props;
+  const base = usePackBase();
+  const icons = useIcons();
   const d = data as CampData;
   const [help, setHelp] = useState(false);
   const result = d.result;
@@ -33,9 +39,11 @@ export function Camp(props: CustomScreenProps) {
   return <section class={`tx tx-camp tx-recovery${rolled ? " tx-recovery-roll" : ""}`}>
     {d.vip && <RecoveryMenu keep={d.mode === "inn" ? "Stay at the inn" : "Stay by the fire"} send={send} />}
     <header><span class="tx-eyebrow">{d.mode === "inn" ? "At the inn" : "By the fire"}</span><h1>{d.stage === "dawn" ? "A new dawn" : rolled ? "A moment by the fire" : d.stage === "sleep" ? "A quiet night" : d.stage === "results" ? "A quiet moment" : "Make yourself useful"}</h1></header>
+    <CampScene stage={d.stage} mode={d.mode} members={members} party={d.party} you={d.you} />
     {d.stage === "jobs" ? <>
       <div class="tx-camp-jobs" aria-label="Camp jobs">{d.jobs.map(j => <button class="tx-btn" aria-label={j.name} aria-pressed={d.job === j.id} disabled={!d.canPick || j.can === false}
-        onClick={() => send("campJob", { job: j.id })} key={j.id}><span class="tx-job-disc" aria-hidden="true">{shortJob[j.id]?.[0]}</span>{shortJob[j.id] ?? j.name}</button>)}</div>
+        onClick={() => send("campJob", { job: j.id })} key={j.id}><span class="tx-job-disc" aria-hidden="true">{base && icons?.icons[jobArt[j.id] ?? ""]
+          ? <Sprite src={`${base}icons/${icons.icons[jobArt[j.id]!]!.atlas}`} rect={icons.icons[jobArt[j.id]!]!.rect} /> : shortJob[j.id]?.[0]}</span>{shortJob[j.id] ?? j.name}</button>)}</div>
       <div class="tx-recovery-section"><span>{d.job === "tend" || d.job === "rally" ? "Tap an injury to help" : "Party · battle ready"}</span><button class="tx-link" onClick={() => setHelp(true)}>About jobs</button></div>
     </> : rolled ? <Check {...props} data={{ skill: result.skill, dc: result.job === "watch" ? null : result.dc, title: result.text,
       cards: [{ id: result.member, name: d.party.find(p => p.member === result.member)?.name ?? result.member, player: "", cls: "", bonus: result.bonus,

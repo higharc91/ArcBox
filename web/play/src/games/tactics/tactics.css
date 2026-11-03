@@ -762,3 +762,57 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   .tx-recovery-card .tx-portrait { display: none; }
   .tx-recovery-section { font-size: 11px; }
 }
+
+/* A small window onto the party's rest, using the same native pixel art as the TV. */
+.tx-camp-scene { position: relative; width: 100%; height: 132px; overflow: hidden; isolation: isolate; border: 1px solid #c5975266; border-radius: 10px; background: #11162b; image-rendering: pixelated; box-shadow: inset 0 0 0 2px #090b18, 0 4px 15px #0005; }
+.tx-camp-scene > div { position: absolute; pointer-events: none; }
+.camp-sky { inset: 0; background: linear-gradient(#10182e, #293149 60%, #84604b); }
+.camp-sky::after { content: ""; position: absolute; inset: 0; background: linear-gradient(#799ab6, #e1a775 70%, #f5d1a0); opacity: 0; transition: opacity 3s; }
+.tx-camp-scene.dawn .camp-sky::after { opacity: 1; }
+.camp-moon, .camp-sun { right: 12%; top: 15px; width: 20px; height: 20px; border-radius: 50%; background: #ffefc4; box-shadow: 0 0 14px #ffe2a574; transition: opacity 2s, transform 3s; }
+.camp-moon::after { content: ""; position: absolute; width: 18px; height: 18px; left: 7px; top: -4px; border-radius: 50%; background: #182139; }
+.camp-sun { opacity: 0; top: 24px; transform: translateY(35px); background: #fff1bc; box-shadow: 0 0 28px 10px #ffcf8170; }
+.tx-camp-scene.dawn .camp-moon { opacity: 0; transform: translateY(-18px); }
+.tx-camp-scene.dawn .camp-sun { opacity: 1; transform: translateY(0); }
+.camp-stars { inset: 0; transition: opacity 2s; }
+.camp-stars i { position: absolute; width: 2px; height: 2px; background: #fff2cb; animation: camp-twinkle 2.8s ease-in-out infinite alternate; }
+.tx-camp-scene.dawn .camp-stars { opacity: 0; }
+.camp-hills { bottom: 28px; left: -5%; width: 110%; height: 47px; background: #1e3440; clip-path: polygon(0 72%,15% 32%,30% 67%,45% 15%,60% 65%,78% 27%,100% 65%,100% 100%,0 100%); }
+.camp-ground { inset: auto 0 0; height: 38px; background: linear-gradient(#36433b,#242b2d); }
+.tx-camp-scene.dawn .camp-ground { background: linear-gradient(#79905e,#596d49); }
+.camp-tent { left: 5%; bottom: 21px; width: 64px; height: 64px; background: var(--tent) center/contain no-repeat; opacity: .85; }
+.camp-glow { left: 50%; bottom: 9px; width: 125px; height: 70px; transform: translateX(-50%); background: radial-gradient(ellipse,#ffb04b8c,transparent 70%); animation: camp-warmth 1.7s ease-in-out infinite alternate; }
+.camp-flame { left: 50%; bottom: 14px; width: 48px; height: 48px; transform: translateX(-50%); background: var(--fire-0) center/contain no-repeat; animation: camp-fire .8s steps(1) infinite; }
+.tx-camp-scene.dawn .camp-flame { background-image: var(--embers); animation: none; }
+.tx-camp-scene.dawn .camp-glow { animation: none; opacity: 0; }
+.camp-pot { left: calc(50% + 22px); bottom: 10px; width: 32px; height: 32px; background: var(--pot) center/contain no-repeat; }
+.camp-person { width: 32px; height: 40px; z-index: 2; transform: translate(-50%,-75%); }
+.camp-sprite { display: block; width: 32px; height: 40px; background-image: var(--sprite); background-repeat: no-repeat; background-position: var(--first) 0; animation: camp-actor var(--speed) steps(var(--frames)) infinite; animation-delay: var(--delay); }
+.camp-heart, .camp-zzz { position: absolute; left: 50%; top: -9px; color: #ffddad; font: normal 11px/1 sans-serif; text-shadow: 0 1px #573f3b; animation: camp-float 2.5s ease-in-out infinite; }
+.camp-zzz { left: 75%; color: #e5eeff; animation-delay: var(--delay); }
+.camp-sparks { inset: 0; z-index: 3; }
+.camp-sparks i { position: absolute; bottom: 32px; width: 3px; height: 3px; background: #ffd980; animation: camp-spark 3s linear infinite; }
+.tx-camp-scene.dawn .camp-sparks { opacity: 0; }
+.tx-camp-scene.inn { background: #30251f var(--hearth) center 48%/cover no-repeat; }
+.tx-camp-scene.inn .camp-sky, .tx-camp-scene.inn .camp-moon, .tx-camp-scene.inn .camp-sun, .tx-camp-scene.inn .camp-stars, .tx-camp-scene.inn .camp-hills, .tx-camp-scene.inn .camp-ground { display: none; }
+.tx-camp-scene.inn.dawn::after { content: ""; position: absolute; inset: 0; background: #ffd99c30; pointer-events: none; }
+@keyframes camp-fire { 0% { background-image: var(--fire-0); } 20% { background-image: var(--fire-1); } 40% { background-image: var(--fire-2); } 60% { background-image: var(--fire-3); } 80%,100% { background-image: var(--fire-4); } }
+@keyframes camp-actor { from { background-position-x: var(--first); } to { background-position-x: var(--last); } }
+@keyframes camp-twinkle { from { opacity: .25; } to { opacity: .9; } }
+@keyframes camp-warmth { from { opacity: .7; transform: translateX(-50%) scale(.95); } to { opacity: 1; transform: translateX(-50%) scale(1.05); } }
+@keyframes camp-float { 0%,100% { transform: translate(-50%,0); opacity: .65; } 50% { transform: translate(-50%,-4px); opacity: 1; } }
+@keyframes camp-spark { 0% { opacity: 0; transform: translate(0,0); } 20% { opacity: .9; } 100% { opacity: 0; transform: translate(8px,-58px); } }
+@media (prefers-reduced-motion: reduce) { .tx-camp-scene *, .tx-camp-scene *::before, .tx-camp-scene *::after { animation: none !important; transition: none !important; } }
+@media (max-height: 650px) { .tx-camp-scene { height: 100px; } }
+
+.camp-sprite { transform: scale(1.25); transform-origin: center bottom; }
+.tx-recovery .tx-job-disc:has(.tx-sprite) { background: transparent; border-color: transparent; }
+.tx-camp-scene { box-sizing: border-box; }
+
+.tx-story .tx-camp-scene, .tx-ask .tx-camp-scene, .tx-check .tx-camp-scene { height: 96px; margin-bottom: 8px; }
+
+.camp-tree { bottom: 25px; width: 48px; height: 64px; background: var(--tree) center/contain no-repeat; filter: brightness(.5) saturate(.7); opacity: .85; }
+.camp-tree.left { left: -18px; } .camp-tree.right { right: -18px; transform: scaleX(-1); }
+.tx-camp-scene.dawn .camp-tree { filter: brightness(.9) saturate(.85); }
+.camp-bush { bottom: -5px; z-index: 3; width: 28px; height: 22px; background: var(--bush) center/contain no-repeat; filter: brightness(.65); }
+.camp-bush.left { left: 0; } .camp-bush.right { right: 0; transform: scaleX(-1); }

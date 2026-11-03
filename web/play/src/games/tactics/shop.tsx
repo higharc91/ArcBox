@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
+import { CampScene } from "./camp-scene";
 import { Services, type ServiceData } from "./services";
 import { Sheet } from "./details";
 import { RecoveryMenu } from "./recovery";
@@ -45,6 +46,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
     {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" send={send} /> : <HostMenu canBattle={false} keep="Keep trading" send={send} />)}
     <header><span class="tx-eyebrow">{recovery ? inn ? "Inn" : "Temple" : `Trader · ${d.shop.keeper}`}</span><h1>{d.shop.name}</h1>
       {recovery ? <strong class="tx-recovery-purse" aria-label="Your purse" aria-live="polite">{d.gold} gold</strong> : <><span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></>}</header>
+    {inn && d.roomsOpen && <CampScene stage="rooms" mode="inn" members={d.members ?? []} you={d.you.member} />}
     {(!d.services?.length || d.items.length > 0) && <div class="tx-shop-tabs" role="tablist" aria-label="Trade">
       <button class="tx-btn" role="tab" aria-selected={tab === "buy"} onClick={() => setTab("buy")}>Buy</button>
       <button class="tx-btn" role="tab" aria-selected={tab === "sell"} onClick={() => setTab("sell")}>Sell</button>

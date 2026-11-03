@@ -2,6 +2,9 @@ import { afterEach, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import { Camp } from "../src/games/tactics/camp";
 import { Shop } from "../src/games/tactics/shop";
+import { Dialogue, Vote } from "../src/games/tactics/story";
+import dialogue from "./fixtures/tactics/dialogue.json";
+import vote from "./fixtures/tactics/vote.json";
 
 afterEach(cleanup);
 const camp = { stage: "jobs", canPick: true, leader: true, vip: false, you: "ana", job: null,
@@ -60,4 +63,34 @@ it("shows compact battle-ready bars and keeps injury effects behind a tap", () =
   fireEvent.click(screen.getByRole("button", { name: "Bo: Cracked ribs" }));
   expect(screen.getByText("HP −5")).toBeTruthy();
   expect(screen.getByRole("button", { name: "Heal Bo's Cracked ribs · 25 gold" })).toBeTruthy();
+});
+
+it("shows each phone its own character and changes the little scene with the real camp stage", () => {
+  const send = vi.fn();
+  const members = ["ana", "bo"].map((member, i) => ({ member, name: member, class: i ? "cleric" : "fighter", here: true,
+    hp: 10, maxHp: 10, resources: [], injuries: [], wellFed: false, room: false }));
+  const data = { ...camp, members, party: [{ member: "ana", name: "Ana", job: "cook" }, { member: "bo", name: "Bo" }] };
+  const view = render(<Camp data={data} send={send} stream={send} viewId="one" />);
+  expect(view.container.querySelectorAll(".camp-person")).toHaveLength(2);
+  expect(view.container.querySelectorAll(".camp-heart")).toHaveLength(1);
+  expect(view.container.querySelector(".camp-pot")).toBeTruthy();
+  view.rerender(<Camp data={{ ...data, stage: "sleep" }} send={send} stream={send} viewId="two" />);
+  expect(view.container.querySelectorAll(".camp-zzz")).toHaveLength(2);
+  expect(view.container.querySelector(".camp-pot")).toBeNull();
+  view.rerender(<Camp data={{ ...data, stage: "dawn" }} send={send} stream={send} viewId="three" />);
+  expect(view.container.querySelector(".tx-camp-scene.dawn")).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Continue" })).toBeTruthy();
+});
+
+
+it("keeps the little camp on each phone during fireside dialogue and votes", () => {
+  const send = vi.fn();
+  const campScene = { stage: "talk", you: "ana", members: [{ member: "ana", class: "fighter", here: true }] };
+  const view = render(<Dialogue data={{ ...dialogue.data, campScene }} send={send} stream={send} viewId="one" />);
+  expect(view.container.querySelector(".camp-heart")).toBeTruthy();
+  expect(screen.getByText(/Forty of them/)).toBeTruthy();
+  view.rerender(<Vote data={{ ...vote.data, campScene }} send={send} stream={send} viewId="two" />);
+  expect(view.container.querySelector(".camp-heart")).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: /parley with the chief/ }));
+  expect(send).toHaveBeenCalledWith("vote", { option: "parley" });
 });
