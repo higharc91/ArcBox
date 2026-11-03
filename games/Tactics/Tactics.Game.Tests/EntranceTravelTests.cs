@@ -73,6 +73,8 @@ public sealed class EntranceTravelTests
         Assert.Equal(new Tile(2, 2), s.Game.Document.World.At);
         Assert.Contains("hollow_entered", s.Game.Document.World.Flags);
         Assert.True(s.Host.Explore!.Epoch > epoch);
+        Assert.Equal("hollow", s.Host.Explore.Region);
+        Assert.Equal(["exit"], s.Host.Explore.Things!.Value.Select(t => t.Id));
         var again = new Session(document: s.Lease.Document, game: new TacticsGame(Pack.Value));
         again.Harness.Resume(again.Lease);
         StoryResumeTests.AllBack(again);
