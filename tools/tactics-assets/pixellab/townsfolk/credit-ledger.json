@@ -22,7 +22,7 @@
     "talkEightDirections": 8,
     "total": 30,
     "receipts": "halden/",
-    "productionInstalled": false
+    "productionInstalled": true
   },
   "townsfolkTotal": 79.25
 }

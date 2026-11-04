@@ -1,3 +1,6 @@
+> Latest: Halden’s chat approval has arrived and his exact reviewed atlas is now
+> installed. See [Halden’s production checks](halden-installed/report.md).
+
 > Continuation on 2026-11-04: Bree’s complete set and TV appearance are now owner-approved
 > and installed unchanged. Halden’s complete directional review is ready; 0.75
 > PixelLab generations remain. Current integration, memory gates and checks are in

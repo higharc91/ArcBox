@@ -1,3 +1,6 @@
+> Later continuation: Halden is now approved and installed. The review-only status
+> below is historical. See [his production installation checks](../halden-installed/report.md).
+
 # Issue #80 — approved Bree integration and Halden review
 
 Continuation on 2026-11-04, branch `townsfolk-art`, after loading checkpoint

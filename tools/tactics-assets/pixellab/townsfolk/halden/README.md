@@ -1,8 +1,10 @@
-# Halden Varrow — review only
+# Halden Varrow — approved and installed
 
 Complete real eight-direction idle, walk and talk from the existing approved Halden
-concept. No concept regeneration or character reroll. **Owner pixel/TV approval is
-required before production installation.** Bree is already approved and installed.
+concept. No concept regeneration or character reroll. The owner approved the shown
+full set and native TV preview in chat: **“OK, he looks good”**. The exact reviewed
+atlas is now installed alongside Bree. `sprite-approval.json` retains hashes and
+approval evidence; `install-approved.cjs` verifies them before installation.
 
 ![Eight-direction walk](halden-eight-direction-walk.gif)
 
@@ -25,7 +27,7 @@ head silhouette during approval. Compact output itself clips no opaque pixels.
 `atlas-validation.json` records all source SHA256s, native canvases, fixed offsets,
 visible bounds, body heights and foot drift. Idle/walk low-point drift is zero;
 talk's southwest low point varies by 0.5 world pixels, the other directions by zero.
-These measurements support visual review; they do not grant approval.
+These measurements support visual review; the separate chat approval authorizes installation.
 
 From the repository root, after installing the parent folder's Node dependencies:
 
@@ -49,3 +51,12 @@ The public Backblaze URLs returned 403. The documented authenticated PixelLab
 character-download ZIP worked once jobs completed; it returns 423 while active.
 Credentials must be restricted to the API host and stripped on cross-host redirects.
 No credential or signed upload URL is retained here. Reuse these saved frames.
+
+## Production integration
+
+Run `node tools/tactics-assets/pixellab/townsfolk/halden/install-approved.cjs` from
+the repository root to reproduce the approved swap offline. It verifies review
+and TV hashes plus the authored frame metadata, installs only the existing PNG
+and manifest entry, and preserves legacy assets. Keys: `characters.mayor` and
+`characters.halden_varrow`. No portrait, rule, balance or phone contract changes.
+[Integration checks](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/halden-installed/report.md).

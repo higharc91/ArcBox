@@ -5788,6 +5788,85 @@
         }
       },
       "provenance": "PixelLab candidate 1; complete directional/motion set and TV appearance approved by owner in chat. Source checkpoint 0eacebec; exact atlas SHA256 9c316179a4790fe59c8d7f42caff95c6155da5d247d8cf997f2a6da0d53f884d"
+    },
+    "halden_varrow": {
+      "file": "halden_varrow.png",
+      "family": "townsfolk",
+      "variant": "halden_varrow",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 10,
+      "pixelScale": 0.5,
+      "columns": 15,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.mayor",
+        "characters.halden_varrow"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3.3333333333333335,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "talk": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            13,
+            12,
+            11
+          ],
+          "fps": 5.333333333333333,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "PixelLab; complete directional idle/walk/talk and native TV appearance approved by owner in chat. Exact atlas SHA256 784a9ffc2ce4504bf23021e45df8409f0b3f5995c2b75a6dc06c42e49fea9081"
     }
   },
   "legacyDistinctForms": [

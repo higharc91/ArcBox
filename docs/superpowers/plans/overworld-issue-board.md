@@ -53,13 +53,13 @@ The default route uses `route.cs` navigation between authored targets, with enou
 
 ## P1: bugs and problems
 
-### OW-05 · Character memory · `approved Bree passes; recheck later cast`
+### OW-05 · Character memory · `approved Bree/Halden pass; recheck later cast`
 Texture memory goes from 158 MB to 350 MB with the new characters, measured on the TV. A hero is about 37.5 MB of sheets by estimate, and the pack grows from 118 MB to 179 MB, so a cold TV download is 51% larger. Fine on an RTX 5080, unknown on a TV box. Options: load only the sheets a party uses, drop frames, or smaller atlases.
 **Owner decision (issue #80):** maximum **512 MiB (536,870,912 bytes)** of TV texture memory with four members.
 On `townsfolk-art`, world sheets now resolve the actual sprite path, queue uploads within the existing texture budget, and release unused party/battle sheets. Only the current region's placed people and actual drawn heroes/creatures are requested. Fauna share one texture per source; their navigation is prepared off-thread, and their uploads are budgeted. Approved Bree is now installed; legacy sheets remain available.
 The new `--world-demo=<region> --perf` gate draws four distinct heroes, walks the region, replaces all four with another race, restores them, and fails above the binary limit. Its log verifier also requires actual uploads/releases and rejects incomplete runs.
 Loading-only checkpoint, before Bree installation: Linux software-Vulkan baseline → after region-open measurements: Ashen Ford **269.6 → 264.9 MiB**; Cinder Hollow **154.9 → 154.9 MiB**. Measured roster-swap peaks are **302.6 / 192.4 MiB**, both below 512. These are memory results, not GPU timing claims. At that checkpoint the unchanged production cold pack was **200,832,616 bytes (191.53 MiB)**, with identical before/after inventory hashes.
-After approved Bree integration: production Ashen Ford opens at **267.56 MiB**, roster peak **305.24 MiB**; Cinder Hollow remains **154.87 / 192.37 MiB**. The production cold pack is now **201,146,592 bytes** (+313,976). Halden’s separate review passes at **307.44 MiB** peak; he remains approval-gated. Current evidence: `reports/2026-11-03-townsfolk-art/approved-integration/`.
+After approved Bree integration: production Ashen Ford opens at **267.56 MiB**, roster peak **305.24 MiB**; Cinder Hollow remains **154.87 / 192.37 MiB**. The production cold pack is now **201,146,592 bytes** (+313,976). Halden’s separate review passed at **307.44 MiB** peak; he was then approved and installed. Current combined production peaks at **307.61 MiB**. Current evidence: `reports/2026-11-03-townsfolk-art/approved-integration/`.
 Evidence: `docs/superpowers/reports/2026-11-03-townsfolk-art/loading/`. Debug/Release builds have zero warnings/errors; 508 phone and 16 bot-tool tests pass. The full solution covered 6,253 tests with one known AI timing fluctuation; the entire isolated logic rerun then passed all 1,258 cases with unchanged limits. All other modules passed. The live walk/reconnect and Cinder Hollow creature/battle tour pass, with four real-party sheets retained across formation. Re-run the gate for the final approved cast; the art approval gate remains separate.
 
 ### OW-06 · A 273 ms frame with the new characters · `done`
@@ -77,7 +77,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `Bree integrated; Halden awaiting review`
+### OW-10 · Heroes and townsfolk don't match · `Bree and Halden approved and integrated`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -109,7 +109,8 @@ TV appearance (“I approve or bree.”). Her exact 4.5 MiB atlas is now install
 ordinary barks use talk with idle fallback. Optional placed-person variants survive
 native Godot save/load/export; drawing and preload use one selector.
 Halden’s complete eight-direction idle/walk/talk set cost 30 more generations;
-his 4.21875 MiB review atlas and TV shots need owner approval before installation.
+the owner approved his 4.21875 MiB atlas and TV shots (“OK, he looks good”), and
+the exact atlas is now installed.
 The current live balance is **0.75 generations**; no purchase/upgrade. Other 24
 sprites and portraits remain. The approved Bree production gate peaks at
 **305.24 MiB** in Ashen Ford and **192.37 MiB** in Cinder Hollow. Cold production
@@ -200,7 +201,7 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 ## Decisions waiting for the user
 
 1. OW-05's target is resolved: 512 MiB with four members. Used-only loading and fresh production/Bree-review memory gates pass. Recheck after final approved art integration.
-2. All concepts and Bree’s complete set/TV appearance are approved; Bree is installed. Halden’s complete directional/motion review is ready for owner approval. Other 24 sprites and portraits remain. Live PixelLab balance is 0.75 generations after 30 for Halden; no purchase or upgrade. Scenario remains 221 CU. See the approved-integration report.
+2. All concepts and Bree’s complete set/TV appearance are approved; Bree is installed. Halden’s complete directional/motion set and TV preview are approved and installed. Other 24 sprites and portraits remain. Live PixelLab balance is 0.75 generations after 30 for Halden; no purchase or upgrade. Scenario remains 221 CU. See the approved-integration report.
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
 5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
@@ -232,3 +233,14 @@ Painting in the real editor, the pad on real phones, sound, sofa distance, a mod
 - Linux OpenGL compatibility cold TV reopening intermittently exceeded the loading watchdog on this software-rendered worker. Managed snapshots did not identify a managed deadlock; loader errors now include stage/progress. Default Vulkan/Mesa validation passed the cold reconnect. Further OpenGL/drawing investigation belongs with OW-12/the drawing issue; no opening timeout was increased.
 - The production phone build succeeds but reports the existing REDLINE flyover chunk at 537.65 kB. This is recorded for the REDLINE follow-up; its warning limit was not raised.
 - All five existing AI performance cases passed in an isolated Debug process with their original 250 ms p95 budgets. The final full-suite result is recorded in the issue #76 report.
+
+### Issue #80 — Halden approval continuation
+
+The owner approved Halden’s complete set and TV appearance in chat: “OK, he looks good”.
+His exact reviewed 4.21875 MiB atlas is installed with existing talk/stop/resume
+wiring; legacy assets remain. No new generation, portrait, rules, balance or phone
+change. Production four-member texture gate peaks: Ashen Ford **307.61 MiB**,
+Cinder Hollow **192.37 MiB**, below **512 MiB**. Cold pack **201,517,448 bytes**
+(+370,856 from Bree-only). Other 24 sprites and portraits remain; 0.75 generations
+was the last observed balance, with no spend for this integration. Latest report:
+`docs/superpowers/reports/2026-11-03-townsfolk-art/halden-installed/report.md`.

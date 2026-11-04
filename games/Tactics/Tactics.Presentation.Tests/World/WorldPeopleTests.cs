@@ -28,15 +28,17 @@ public sealed class WorldPeopleTests
         Assert.Null(resumed.Emote);
     }
 
-    [Fact]
-    public void Approved_Bree_uses_her_talk_clip_while_holding_ground_then_resumes_walking()
+    [Theory]
+    [InlineData("innkeeper", "bree", "bree_tallow")]
+    [InlineData("mayor", "halden", "halden_varrow")]
+    public void Approved_named_people_use_their_talk_clip_while_holding_ground_then_resume_walking(string preset, string id, string name)
     {
-        var person = Person("innkeeper", 5, 5, "se", (6, 5), (6, 6)) with { Id = "bree" };
+        var person = Person(preset, 5, 5, "se", (6, 5), (6, 6)) with { Id = id };
         var people = new WorldPeople([person], Ground, Art.Value);
         var time = Enumerable.Range(1, 1000).Select(i => i / 100d)
             .First(t => people.PlaceAt(person, t + people.Phase(person)).Walking);
         var before = Assert.Single(people.Units(time, Everywhere, []));
-        var bark = new BarkView("bree", 1, DateTimeOffset.MaxValue, new StoryLineView("hello", "bree_tallow", "Bree", null, "idle", "Welcome."));
+        var bark = new BarkView(id, 1, DateTimeOffset.MaxValue, new StoryLineView("hello", name, name, null, "idle", "Welcome."));
         var first = Assert.Single(people.Units(time + .02, Everywhere, [], leader: new Tile(4, 5), bark: bark));
         var held = Assert.Single(people.Units(time + 2, Everywhere, [], leader: new Tile(4, 5), bark: bark));
         Assert.Equal(before.Feet, first.Feet);

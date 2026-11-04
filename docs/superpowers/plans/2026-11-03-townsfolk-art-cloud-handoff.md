@@ -5,8 +5,8 @@ branch; inspect a dirty tree before changing it. Pull with rebase before pushing
 Do not merge, open a PR, close #80 or reset unrelated work. The owner requested a
 checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree’s
 full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
-complete eight-direction idle/walk/talk set is review-only. Current PixelLab balance
-is **0.75 generations**; do not submit more paid work or purchase credits.
+complete eight-direction idle/walk/talk set is also now approved and installed.
+Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
 The original checkpoint details below are retained as provenance; current status
 and next steps at the end supersede its pending-approval statements.
@@ -110,8 +110,8 @@ the atlas hash. The normalizer's older hero-canvas output is a staging source.
 
 ## Continue in this order
 
-1. Bree’s full-set/TV approval and integration are complete. Review Halden’s new
-   directional GIFs/TV shot with the owner before his production integration.
+1. Bree’s and Halden’s full-set/TV approvals and integrations are complete.
+   Future NPC sets retain their own owner pixel/TV approval gate.
    Continue independent free **OW-05 loading/perf/tooling work** while awaiting
    approval or an available allowance. Do not redo approved concepts.
 2. After approval, finish the named/generic sprite pipeline from the existing
@@ -192,3 +192,24 @@ passes with `LP_NUM_THREADS=2`, 20/20 presses, 95 ms median against the unchange
 not claim GPU timing. The environment has a four-CPU quota. Whole-cast final
 regression and new-art Windows review remain ahead; prior full-solution/isolated
 logic and cave-tour evidence is in the loading report, not a fresh full rerun.
+
+## Current checkpoint after Halden approval
+
+The owner reviewed Halden directly in chat (directions, native TV square, walk/talk
+GIFs) and approved: **“OK, he looks good”**. `halden/sprite-approval.json` records
+this gate, exact preview/source hashes and production installation. Do not ask
+for his approval again or regenerate his completed art.
+
+`node tools/tactics-assets/pixellab/townsfolk/halden/install-approved.cjs` installs
+the exact 1440×768, 4.21875 MiB atlas at `creatures/halden_varrow.png`, bound to
+`characters.mayor` and `characters.halden_varrow`. The existing talk/stop/resume
+wiring is reused. No new generation or credit spend, no portrait/rule/phone change.
+Production four-party gate peaks: Ashen Ford **307.61 MiB**, Cinder Hollow
+**192.37 MiB**, with the same 512 MiB cap. The production cold pack is now
+**201,517,448 bytes**, +370,856 from the Bree-only pack.
+
+Latest evidence: [Halden installation report](../reports/2026-11-03-townsfolk-art/halden-installed/report.md).
+Other 24 sprites and portraits remain; obtain a fresh balance/quote before any
+future paid work and never buy credits automatically. Keep all existing approved
+source frames, receipts and approval gates. Pull with rebase before pushing this
+branch; no merge, PR or issue closure. Earlier review-only statements are historical.

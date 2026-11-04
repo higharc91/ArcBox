@@ -33,7 +33,7 @@ public sealed class CreatureAtlasTests
             if (entry.GetProperty("family").GetString() == "townsfolk")
             {
                 // Approved civilian clips retain their authored counts and never need a combat attack.
-                Assert.Equal(5, sprite.Idle.Frames.Length);
+                Assert.Equal(item.Name == "bree_tallow" ? 5 : 4, sprite.Idle.Frames.Length);
                 Assert.Equal(6, sprite.Anims["walk"].Frames.Length);
                 Assert.Equal(8, sprite.Anims["talk"].Frames.Length);
                 Assert.False(sprite.Anims.ContainsKey("attack"));
