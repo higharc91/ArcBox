@@ -131,3 +131,13 @@ peak; raw sources/curation/receipts are retained, with119 unrelated frames exact
 Frame/foot/gait/portrait/import/bark/rebuild checks pass. Review memory peaks
 317.09 /192.37 MiB, below512 with four heroes. No PixelLab spend or gameplay/phone
 changes. [Current Lark report and previews](lark-imagegen/report.md).
+
+## Latest continuation: Lark approved/installed, Corvin appearance review
+
+Lark's exact owner-approved body and six portraits are installed.125 focused tests
+pass, Debug/Release test-project builds have zero warnings/errors. Four-party
+production peaks317.26 /192.37 MiB, below512; cold203,477,572 bytes /4,835 files.
+[Installation report](lark-installed/report.md). Corvin's first image-tool pixel
+appearance candidate reuses his approved concept and awaits appearance approval.
+No Corvin production change, no PixelLab spend, rules/balance/phone unchanged.
+[Corvin appearance report](corvin-imagegen-trial.md).

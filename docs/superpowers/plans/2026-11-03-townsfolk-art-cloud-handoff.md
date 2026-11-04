@@ -8,7 +8,8 @@ full-set/TV approval arrived and her exact compact atlas is now installed. Halde
 complete eight-direction idle/walk/talk set is also now approved and installed.
 Mother Aubrine’s complete image-tool set and native TV review are now also approved
 and installed. Tobin’s approved body and six portraits are also installed. Lark’s
-appearance is approved and the completed set awaits finished-set/TV approval. Read the latest
+finished set is now approved and installed. Corvin’s first pixel appearance
+candidate awaits approval. Read the latest
 [Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
@@ -395,3 +396,28 @@ are in his installation report. Rules, balance and phone contracts unchanged.
 sprite sets and remaining portraits are ahead. Check live PixelLab costs/balance
 before future paid work; never purchase credits. Pull with rebase before pushing
 this branch; no PR, merge or issue closure. Earlier pending-state notes are historical.
+
+## Latest checkpoint — Lark installed, Corvin first appearance
+
+The owner approved Lark's completed set: **“Looks good, next”**. Approval is recorded
+against all existing hashes, and the exact atlas/six portraits are installed.
+Do not ask for Lark approval again or regenerate the completed art. Production
+aliases: minstrel and lark.125 focused tests pass; Debug/Release test-project builds
+zero warnings/errors; typed production importer/bark/portrait check passes.
+Four-party production peaks **317.26 MiB Ashen /192.37 MiB Cinder**, cap512.
+Cold pack **203,477,572 bytes /4,835 files**, +634,319; inventory SHA256
+`ddc6d04e5211f70321235e691f88d540d43b7044fc37d4a69ac99a13702d0d1f`.
+Read [the Lark installation report](../reports/2026-11-03-townsfolk-art/lark-installed/report.md).
+No rules, balance or phone-contract changes. Earlier pending-Lark notes are historical.
+
+Corvin Ashby follows Lark in the approved named queue. One first pixel appearance
+sheet is under `tools/tactics-assets/imagegen/townsfolk/corvin-ashby/`, with exact
+request, input/output hashes and original path. Existing concept reused, no redesign
+or other character regeneration. Corvin's preset is sage, character id corvin_ashby.
+Right-hip satchel/keys, left-hip notebooks/ink bottle; round spectacles and worried
+humane face. **Corvin appearance approval is pending**; do not expand to motions
+before it. Native import/alpha/palette/scale/anchor QA and final full-set/TV gate
+remain ahead. No Corvin production content. Other21 sprite sets and remaining
+portraits are ahead. One appearance image-tool call, zero PixelLab calls/credits.
+Check live costs/balance before future paid work; never purchase credits. Rebase
+before pushing townsfolk-art; no merge, PR or issue closure.

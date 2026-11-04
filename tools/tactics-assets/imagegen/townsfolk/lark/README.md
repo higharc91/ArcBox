@@ -1,9 +1,9 @@
 # Lark — completed image-tool review set
 
 The owner approved the pixel appearance: **“Yes, looks great. Continue”**.
-The finished directional/motion/portrait/native TV set is ready for review.
-It remains a separate overlay; production contains approved Bree, Halden,
-Aubrine and Tobin. No PixelLab API call, credit debit, purchase or upgrade.
+The owner then approved the finished set: **“Looks good, next”**.
+The exact body and six portraits are now installed in production alongside Bree,
+Halden, Aubrine and Tobin. The separate review overlay remains available. No PixelLab API call, credit debit, purchase or upgrade.
 
 [Watch the 16.6-second finished review](lark-finished-review.mp4).
 Actual sprite loops and portraits, ending with a **labelled native TV still**;
@@ -83,7 +83,10 @@ handoff/TV-host guide. Cloud memory results are not a hardware timing benchmark.
 
 ## Approval gate
 
-Appearance approval is complete. **Finished-set/portrait/TV approval is pending**.
+Appearance and **finished-set/portrait/TV approvals are complete**.
+Installation and fresh production checks are documented in the
+[installation report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/lark-installed/report.md).
+The earlier pending-state guard evidence below remains historical.
 The approval record binds the finished review to15 exact asset/validation hashes
 and its native TV screenshot. The guarded installer refuses appearance approval
 alone, verified against the complete unchanged production inventory. After full

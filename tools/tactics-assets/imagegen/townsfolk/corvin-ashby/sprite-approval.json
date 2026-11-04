@@ -1,0 +1,28 @@
+{
+  "character": "Corvin Ashby",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 1,
+  "originalPath": "/workspace/generated_images/exec-d26eb205-d583-42a7-b779-2211754eeabe.png",
+  "candidateSha256": "94e9b081045a886bc92bfcb9d23e29a0e25038a27c83e863bb3ff789fe1e880c",
+  "requestSha256": "f52d067aa058ef348706741ad335f16ed36c55d9a2eb223dfe701e7f21339bf0",
+  "inputSha256": {
+    "tools/tactics-assets/concepts/townsfolk/generated/character_corvin_ashby.png": "7a2f48d3a2a8ace1bf185caa7ccdf3a76b4ea08b57f9649261e8de09a0320a8d",
+    "tools/tactics-assets/imagegen/townsfolk/tobin-fell/rotations/south.png": "25f282262bf1d65d218643180d162fb08327beb5a4053df40c56ea9f5d5797c3"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Approved concept reused; first pixel appearance pass only.",
+    "Eight requested standing facings manually inspected in S,SW,W,NW / N,NE,E,SE order.",
+    "Right-hip satchel/keys and left-hip notebooks/ink bottle remain subject to native directional QA.",
+    "Native grid, alpha, palette, body size, anchors and ground contact remain unvalidated.",
+    "No motions or portraits generated; retain appearance and finished-set/TV approval gates."
+  ],
+  "presetReference": "sage",
+  "characterId": "corvin_ashby"
+}

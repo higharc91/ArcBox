@@ -1,6 +1,6 @@
 {
   "character": "Lark",
-  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
+  "stage": "complete_set_approved_installed",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 1,
@@ -13,9 +13,9 @@
   },
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "reviewNotes": [
     "Approved concept and pixel appearance reused.",
     "Eight real facings with idle/walk/talk and six40x40 portraits.",
@@ -31,14 +31,14 @@
     "scope": "Appearance approved; separate full-set/portrait/TV review remains."
   },
   "completedSet": {
-    "status": "pending_owner_full_set_and_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 143,
     "curatedHeldSlots": 1,
     "portraits": 6,
     "completionImageToolCalls": 11,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_lark.png": "c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b",
       "review-sprite.json": "72884d6355a22834f16bccbbf1941c5633a8d293cef8b562ed0a394bfa0570e9",
@@ -60,5 +60,10 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/lark-imagegen/world-songkeeper.png",
       "sha256": "eb00b51423cfdce3430028303c9385a8233a2593e6a7d1d9be39094a2be03633"
     }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks good, next",
+    "context": "Owner response to completed directional motion, six portrait expressions and native square TV review shown in chat."
   }
 }

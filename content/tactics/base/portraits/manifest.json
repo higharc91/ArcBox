@@ -496,12 +496,12 @@
       "surprised": "stranger_surprised.png"
     },
     "minstrel": {
-      "idle": "minstrel_idle.png",
-      "hurt": "minstrel_hurt.png",
-      "happy": "minstrel_happy.png",
-      "angry": "minstrel_angry.png",
-      "sad": "minstrel_sad.png",
-      "surprised": "minstrel_surprised.png"
+      "idle": "lark_idle.png",
+      "hurt": "lark_hurt.png",
+      "happy": "lark_happy.png",
+      "angry": "lark_angry.png",
+      "sad": "lark_sad.png",
+      "surprised": "lark_surprised.png"
     },
     "fisher": {
       "idle": "fisher_idle.png",
@@ -535,6 +535,14 @@
       "angry": "tobin_fell_angry.png",
       "sad": "tobin_fell_sad.png",
       "surprised": "tobin_fell_surprised.png"
+    },
+    "lark": {
+      "idle": "lark_idle.png",
+      "hurt": "lark_hurt.png",
+      "happy": "lark_happy.png",
+      "angry": "lark_angry.png",
+      "sad": "lark_sad.png",
+      "surprised": "lark_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
