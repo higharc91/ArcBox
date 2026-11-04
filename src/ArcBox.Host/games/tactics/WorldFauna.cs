@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Godot;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
@@ -44,20 +45,49 @@ internal sealed partial class WorldFauna : Node2D
     private readonly BoardLighting? _lighting;
     private readonly List<Actor> _actors = [];
     private double _clock;
+    private sealed record Skin(ImageTexture Texture, int Width, int Height, int AnchorX, int AnchorY);
+    private readonly Dictionary<string, Skin> _skins = new(StringComparer.Ordinal);
+    private IEnumerator<bool>? _pending;
+    public bool BudgetedExternally { get; init; }
+    internal sealed record PlannedAnimal(PropPlacement Prop, PropArt Art, UnitSprite? Creature, Tile[] Domain,
+        bool Water, float Speed, float PauseMin, float PauseMax);
 
-    public WorldFauna(string packRoot, BattleMap map, BoardLighting lighting)
-        : this(packRoot, map, new Color(lighting.Ambient.R, lighting.Ambient.G, lighting.Ambient.B))
+    /// <summary>One animal at a time, drained within WorldCanvas's texture budget.</summary>
+    public bool LoadOne()
+    {
+        if (_pending?.MoveNext() == true) return true;
+        _pending?.Dispose();
+        _pending = null;
+        return false;
+    }
+
+    public override void _ExitTree()
+    {
+        _pending?.Dispose();
+        _pending = null;
+        foreach (var skin in _skins.Values) skin.Texture.Dispose();
+        _skins.Clear();
+    }
+
+    public WorldFauna(string packRoot, BattleMap map, BoardLighting lighting, PlannedAnimal[]? planned = null)
+        : this(packRoot, map, new Color(lighting.Ambient.R, lighting.Ambient.G, lighting.Ambient.B), planned)
     {
         _lighting = lighting;
     }
 
-    public WorldFauna(string packRoot, BattleMap map, Color light)
+    public WorldFauna(string packRoot, BattleMap map, Color light, PlannedAnimal[]? planned = null)
     {
         _map = map;
-        var artIndex = ArtIndex.Load(packRoot);
-        var units = UnitArt.Load(packRoot);
+        _pending = Populate(packRoot, light, planned ?? Prepare(map, ArtIndex.Load(packRoot), UnitArt.Load(packRoot))).GetEnumerator();
+    }
+
+    // Only metadata and navigation: called during WorldCanvas's background build, before native uploads.
+    public static PlannedAnimal[] Prepare(BattleMap map, ArtIndex artIndex, UnitArt units)
+    {
         var animals = map.Props.Where(p => WorldAnimalIds.Contains(p.Id) && map.InBounds(p.At)).ToArray();
+        if (animals.Length == 0) return [];
         var free = FaunaRange.Free(map, artIndex.PropHeight);
+        var result = new List<PlannedAnimal>();
 
         foreach (var prop in animals)
         {
@@ -78,31 +108,24 @@ internal sealed partial class WorldFauna : Node2D
                 prop.Variant is null ? map.Materials : map.Materials.Prepend(prop.Variant));
             if (art is null)
                 continue;
-            var creature = units.Sprite("fauna." + prop.Id);
-            var imagePath = Path.Combine(packRoot, creature?.Path ?? art.Image.Path);
-            if (!File.Exists(imagePath))
-                continue;
-            var image = Image.LoadFromFile(imagePath);
-            if (image.IsEmpty())
-                continue;
+            result.Add(new PlannedAnimal(prop, art, units.Sprite("fauna." + prop.Id), domain, water, speed, pauseMin, pauseMax));
+        }
+        return [.. result];
+    }
 
-            // Art made bigger than the world is shrunk to whole pixels once, here, at the manifest's scale.
-            var (frameWidth, frameHeight, anchorX, anchorY) = (art.Width, art.Height, art.AnchorX, art.AnchorY);
-            if (creature is not null)
-                (frameWidth, frameHeight, anchorX, anchorY) = (creature.Width, creature.Height, creature.AnchorX, creature.AnchorY);
-            else if (art.Scale < 1)
-            {
-                image.Convert(Image.Format.Rgba8);
-                var strip = SpriteShrink.Shrink(image.GetData(), image.GetWidth(), image.GetHeight(), art.Image.Frames, art.Scale);
-                (anchorX, anchorY) = SpriteShrink.Anchor(art.AnchorX, art.AnchorY, art.Width, art.Height, art.Scale);
-                image = Image.CreateFromData(strip.Width, strip.Height, false, Image.Format.Rgba8, strip.Rgba);
-                (frameWidth, frameHeight) = (strip.FrameWidth, strip.Height);
-            }
+    private IEnumerable<bool> Populate(string packRoot, Color light, PlannedAnimal[] planned)
+    {
+        foreach (var animal in planned)
+        {
+            var (prop, art, creature, domain, water, speed, pauseMin, pauseMax) = animal;
+            var skin = LoadSkin(packRoot, art, creature);
+            if (skin is null) continue;
+            var (frameWidth, frameHeight, anchorX, anchorY) = (skin.Width, skin.Height, skin.AnchorX, skin.AnchorY);
 
             var sprite = new Sprite2D
             {
                 Name = $"fauna_{prop.Id}_{prop.At.X}_{prop.At.Y}",
-                Texture = ImageTexture.CreateFromImage(image),
+                Texture = skin.Texture,
                 Centered = false,
                 RegionEnabled = true,
                 RegionRect = new Rect2(0, 0, frameWidth, frameHeight),
@@ -128,11 +151,47 @@ internal sealed partial class WorldFauna : Node2D
             };
             sprite.Position = actor.From;
             _actors.Add(actor);
+            yield return true;
         }
+        GD.Print($"WORLD fauna {_actors.Count} actors, {_skins.Count} shared textures");
+    }
+
+    private Skin? LoadSkin(string packRoot, PropArt art, UnitSprite? creature)
+    {
+        var file = creature?.Path ?? art.Image.Path;
+        if (_skins.TryGetValue(file, out var known)) return known;
+        var path = Path.Combine(packRoot, file);
+        if (!File.Exists(path)) return null;
+        using var image = Image.LoadFromFile(path);
+        if (image.IsEmpty()) return null;
+        var (width, height, ax, ay) = (art.Width, art.Height, art.AnchorX, art.AnchorY);
+        ImageTexture texture;
+        if (creature is not null)
+        {
+            (width, height, ax, ay) = (creature.Width, creature.Height, creature.AnchorX, creature.AnchorY);
+            texture = ImageTexture.CreateFromImage(image);
+        }
+        else if (art.Scale < 1)
+        {
+            image.Convert(Image.Format.Rgba8);
+            var strip = SpriteShrink.Shrink(image.GetData(), image.GetWidth(), image.GetHeight(), art.Image.Frames, art.Scale);
+            (ax, ay) = SpriteShrink.Anchor(art.AnchorX, art.AnchorY, art.Width, art.Height, art.Scale);
+            using var reduced = Image.CreateFromData(strip.Width, strip.Height, false, Image.Format.Rgba8, strip.Rgba);
+            texture = ImageTexture.CreateFromImage(reduced);
+            (width, height) = (strip.FrameWidth, strip.Height);
+        }
+        else texture = ImageTexture.CreateFromImage(image);
+        return _skins[file] = new Skin(texture, width, height, ax, ay);
     }
 
     public override void _Process(double delta)
     {
+        if (!BudgetedExternally)
+        {
+            var started = Stopwatch.GetTimestamp();
+            while (LoadOne())
+                if (Stopwatch.GetElapsedTime(started).TotalMilliseconds >= WorldTuning.TextureBudgetMs) break;
+        }
         _clock += delta;
         foreach (var actor in _actors)
         {
