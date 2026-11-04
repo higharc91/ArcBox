@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: aa983ed4-fd89-4e61-85cd-93b185bd2f40\nanimation: throw-object\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=14f3999c-5c7a-41aa-b718-6919e8a44617, south-west=3203dfec-7da1-463e-a648-8a00547be27f, west=9990fccc-65e2-4727-8132-cfc38c14ee46, north-west=f3dd5eb6-da87-417c-a359-5db0f2873c59, north=1506c9c3-90ff-4605-9700-87aff87ba32f, north-east=4b652590-30b3-4044-ae15-bb7e585d00a2, east=085a6b3a-af9a-42c9-91d4-591aa807b9e7, south-east=53af03ec-d799-4cc2-881f-1674ea1767d5\ngroup: 73f1af11-dced-4d18-af6f-f3ffab957cd9\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", template_animation_id=\"throw-object\", animation_group_id=\"73f1af11-dced-4d18-af6f-f3ffab957cd9\", directions=[...])\n\nhint: get_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\")\nif poor: delete_animation(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -5411,6 +5411,303 @@
         }
       },
       "provenance": "Owner-approved concepts, pixel direction and actual TV world/battle motion, 2026-11-03. Curated paid sources under tools/tactics-assets/pixellab/ashmaw."
+    },
+    "kobold_refresh_worker": {
+      "file": "kobold_refresh_worker.png",
+      "family": "kobold",
+      "variant": "worker",
+      "frame": {
+        "width": 128,
+        "height": 128,
+        "anchor": [
+          64,
+          110
+        ]
+      },
+      "headTop": 30,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 14,
+      "footprintHeight": 12,
+      "keys": [
+        "characters.kobold"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 7.5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "fps": 7,
+          "loop": false
+        }
+      },
+      "provenance": "PixelLab eight-direction sprites based on matching Grisk concept; source in tools/tactics-assets/pixellab/kobold-refresh/source."
+    },
+    "kobold_refresh_slinger": {
+      "file": "kobold_refresh_slinger.png",
+      "family": "kobold",
+      "variant": "slinger",
+      "frame": {
+        "width": 128,
+        "height": 128,
+        "anchor": [
+          64,
+          110
+        ]
+      },
+      "headTop": 28,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 14,
+      "footprintHeight": 12,
+      "keys": [
+        "characters.kobold_slinger"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 7.5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "fps": 7,
+          "loop": false
+        },
+        "throw": {
+          "frames": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "shoot": {
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "PixelLab eight-direction sprites based on matching Grisk concept; source in tools/tactics-assets/pixellab/kobold-refresh/source."
     }
   },
   "legacyDistinctForms": [

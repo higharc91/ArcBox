@@ -88,7 +88,7 @@ public static class SoundChoice
     public static string Launch(string key, string? weapon) => key switch
     {
         ArrowKey => Shot(weapon),
-        RockKey => "throw",
+        RockKey => weapon == "sling" ? "sling_release" : "throw",
         _ => "spell_cast",
     };
 

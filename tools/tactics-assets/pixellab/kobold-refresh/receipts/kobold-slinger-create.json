@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: aa983ed4-fd89-4e61-85cd-93b185bd2f40\nname: Wardenflame kobold slinger\nmode: pro (15 generations, 8 directions)\nbody: humanoid\nsize: 96x96px\nview: low top-down\nstyle character: 87f7effb-96de-402f-90ae-a37905475882\nstatus: processing (~3-5 min)\n\nhint: get_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

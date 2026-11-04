@@ -123,7 +123,7 @@
       "effects": [ { "save": { "stat": "dex", "dc": 13 },
                      "onFail": [ { "damage": { "dice": { "1": "2d6", "7": "3d8" }, "type": "fire" } }, { "apply": "burning", "rounds": 2 } ],
                      "onSuccess": [ { "damage": { "dice": "1d6", "type": "fire" } } ] } ],
-      "presentation": { "anim": "characters.shoot", "projectile": "projectiles.fireball", "fx": "fx.explosion" },
+      "presentation": { "anim": "characters.cast", "projectile": "projectiles.fireball", "fx": "fx.explosion" },
       "ai": { "tags": ["damage", "area"] } },
     { "id": "boar.gore_charge", "name": "Gore Charge", "tier": 0, "cost": { "action": 1, "uses": 2 }, "isWeaponAttack": true,
       "target": { "kind": "enemy", "range": 1, "los": true, "area": { "shape": "single" } },

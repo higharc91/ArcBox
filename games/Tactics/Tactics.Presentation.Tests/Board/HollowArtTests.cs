@@ -38,6 +38,27 @@ public sealed class HollowArtTests
             }
     }
 
+    [Theory]
+    [InlineData("kobold", "worker")]
+    [InlineData("kobold_slinger", "slinger")]
+    public void Refreshed_kobolds_use_matching_atlases_and_portraits(string preset, string role)
+    {
+        var art = UnitArt.Load(Pack.Root);
+        var sprite = art.Sprite("characters." + preset)!;
+        Assert.Equal("creatures/kobold_refresh_" + role + ".png", sprite.Path);
+        foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" })
+            Assert.True(sprite.Anims.ContainsKey(action));
+        Assert.Equal(8, sprite.Directions.Length);
+        var portrait = HudArt.Load(Pack.Root, art).Portrait("characters." + preset, UnitTone.Enemy);
+        Assert.Equal("portraits/" + preset + "_refresh.png", portrait.Path);
+        Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
+        if (role == "slinger")
+        {
+            Assert.True(sprite.Anims.ContainsKey("shoot"));
+            Assert.True(sprite.Anims.ContainsKey("throw"));
+        }
+    }
+
     [Fact]
     public void Grisk_uses_his_approved_art_in_conversations_and_world_markers()
     {

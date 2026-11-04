@@ -288,20 +288,20 @@
       "surprised": "cultist_surprised.png"
     },
     "kobold": {
-      "idle": "kobold_idle.png",
-      "hurt": "kobold_hurt.png",
-      "happy": "kobold_happy.png",
-      "angry": "kobold_angry.png",
-      "sad": "kobold_sad.png",
-      "surprised": "kobold_surprised.png"
+      "idle": "kobold_refresh.png",
+      "hurt": "kobold_refresh.png",
+      "happy": "kobold_refresh.png",
+      "angry": "kobold_refresh.png",
+      "sad": "kobold_refresh.png",
+      "surprised": "kobold_refresh.png"
     },
     "kobold_slinger": {
-      "idle": "kobold_slinger_idle.png",
-      "hurt": "kobold_slinger_hurt.png",
-      "happy": "kobold_slinger_happy.png",
-      "angry": "kobold_slinger_angry.png",
-      "sad": "kobold_slinger_sad.png",
-      "surprised": "kobold_slinger_surprised.png"
+      "idle": "kobold_slinger_refresh.png",
+      "hurt": "kobold_slinger_refresh.png",
+      "happy": "kobold_slinger_refresh.png",
+      "angry": "kobold_slinger_refresh.png",
+      "sad": "kobold_slinger_refresh.png",
+      "surprised": "kobold_slinger_refresh.png"
     },
     "hobgoblin": {
       "idle": "hobgoblin_idle.png",
