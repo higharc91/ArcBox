@@ -109,3 +109,11 @@ Fresh production four-party peaks:310.83MiB Ashen /192.37MiB Cinder, below512.
 Tobin's first image-tool appearance sheet awaits owner review before animation.
 No PixelLab spend or rule/balance/phone changes. See
 [the installation report](aubrine-installed/report.md) for receipts and current next steps.
+
+## Latest continuation: Tobin completed review
+
+Tobin's approved pixel appearance now has eight-direction idle/walk/talk animations
+(144 native frames), six portraits and a native forge TV review. Full-set approval
+is pending; production remains unchanged. Review memory peaks313.87 /192.37 MiB
+with four heroes, below512. Frame/import/bark/portrait/exact-rebuild checks pass.
+No PixelLab spend or gameplay/phone changes. [Current report](tobin-imagegen/report.md).

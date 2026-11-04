@@ -7,7 +7,7 @@ checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree
 full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
 complete eight-direction idle/walk/talk set is also now approved and installed.
 Mother Aubrine’s complete image-tool set and native TV review are now also approved
-and installed; Tobin’s first appearance candidate awaits approval. Read the latest
+and installed; Tobin’s appearance is approved and his finished set awaits TV approval. Read the latest
 [Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
@@ -283,3 +283,35 @@ full-set/portrait/TV approval remain separate gates. Other23 sprites, including
 Tobin, and remaining portraits are ahead. No PixelLab calls/spend; check fresh
 costs and balance before any future paid work. Never purchase credits. Pull with
 rebase before pushing townsfolk-art. Do not merge, open a PR or close issue80.
+
+## Current checkpoint — Tobin finished, full-set approval pending
+
+The owner approved his appearance: **“yeah that looks great. Proceed with finishing him”**.
+Do not ask for appearance approval again. The complete eight-direction idle/walk/
+talk set (144 native frames) and six 40×40 portraits are now committed under
+`tools/tactics-assets/imagegen/townsfolk/tobin-fell/`, with all raw requests/sources,
+receipts, native frames, atlas, review GIFs and a 16.6-second silent reel ending
+in a labelled native TV still. Reuse them; do not regenerate completed art.
+
+Read [the Tobin review report](../reports/2026-11-03-townsfolk-art/tobin-imagegen/report.md).
+Final atlas SHA256:`d0b6a196f881238c2a5ea9928abe1a68abc5dc083a5c3a7491a3e9265a0bf11e`.
+1728×768 /5.0625 MiB, frame96×96, anchor[48,84], scale0.5; playback10/6/10.
+One regular source-column grid and shared transform per direction, never individual
+frame recentring or mirroring. Planted/stride foot checks pass, max1.5 world pixels.
+A corrected south walk replaces only six frames; all138 other native frames are
+exact. Use `rotations/` for final native guides, not appearance input guides.
+
+**Full-set/portrait/TV approval is pending.** The finished approval record binds
+13 preview/import hashes and the native forge TV shot. The guarded installer
+refuses the pending gate and was tested against the unchanged production inventory.
+After approval, install these exact assets, add Tobin's strict10/6/10 counts and
+portrait/stop-resume cases, and rerun production gates. Body/portrait aliases are
+blacksmith and tobin_fell. No production content or rules/balance/phone changes.
+
+Typed importer/portrait/bark checks, all144 frame checks and exact rebuild pass.
+Four actual heroes review peaks: **313.87 MiB Ashen /192.37 MiB Cinder**, cap512.
+Production remains202,137,516 bytes /4,821files, inventory hash unchanged.
+Ten completion image-tool calls, zero PixelLab calls/credits; no purchase. Other22
+sprite sets and remaining portraits are ahead. Check fresh PixelLab costs/balance
+before future paid work. Pull with rebase before pushing townsfolk-art; no merge,
+PR or issue closure. Earlier appearance-pending notes are historical.

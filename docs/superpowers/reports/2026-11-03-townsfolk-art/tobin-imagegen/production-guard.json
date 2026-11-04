@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "pendingApprovalInstallerRejected": true,
+  "productionUnchanged": true,
+  "inventory": {
+    "bytes": 202137516,
+    "files": 4821,
+    "inventorySha256": "5caa9ac9075f37f45f3087c8ba2f681618cd6c85ce021300b545851bc7bd6514"
+  }
+}

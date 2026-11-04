@@ -274,3 +274,17 @@ approved concept with exact request/hashes. Await appearance approval before
 motion generation; retain final TV/native validation gates. No Tobin production
 installation. Zero PixelLab calls/credits; other23 sprites and remaining portraits
 ahead. Keep branch only; rebase before pushing, no PR/merge/issue closure.
+
+### Issue #80 — Tobin complete-set review
+
+Tobin's appearance is approved: “yeah that looks great. Proceed with finishing him”.
+His image-tool set now includes eight real idle/walk/talk facings (144 frames),
+six 40×40 portraits, a 16.6-second review reel and native forge TV screenshot.
+Full-set/portrait/TV approval remains pending; no production swap yet. The regular
+source grid is registered once per direction, with shared transforms/palette,
+binary alpha and horizontal/vertical foot checks. The corrected front walk keeps
+all 138 unaffected native frames exact. Typed import/bark/portrait and offline
+frame/rebuild checks pass. Four-party review memory peaks **313.87 MiB Ashen /
+192.37 MiB Cinder**, below512. Production cold pack remains202,137,516 bytes.
+Zero PixelLab calls/spend; rules/balance/phone unchanged. Other22 sprite sets
+and remaining portraits are ahead. See `reports/2026-11-03-townsfolk-art/tobin-imagegen/report.md`.

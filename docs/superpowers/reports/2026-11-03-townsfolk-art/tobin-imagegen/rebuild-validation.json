@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "originalBoundAssetsRebuiltExactly": 12,
+  "closeupRepeatBuild": "MATCH",
+  "combinedBoundAssetsMatching": 13,
+  "networkCalls": 0,
+  "pixelLabCalls": 0
+}
