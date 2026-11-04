@@ -19,5 +19,10 @@
     "Sword stays sheathed at anatomical left hip; pouch/horn at right; anatomical right shoulder pauldron.",
     "No animations or portraits generated yet; preserve appearance and full-set/TV gates.",
     "Existing recorded town bark included without speech generation."
-  ]
+  ],
+  "voiceReview": {
+    "status": "existing_voice_rejected_recast_requested",
+    "reason": "Owner says existing voice sounds too young for a seasoned veteran.",
+    "plan": "voice-recast-plan.json"
+  }
 }

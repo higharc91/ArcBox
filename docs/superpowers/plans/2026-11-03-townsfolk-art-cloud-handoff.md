@@ -507,3 +507,17 @@ spend or speech generation; no prices inferred or credits purchased. Rules,
 balance and phone contracts unchanged except Pip’s cosmetic placement variant.
 Include existing recorded voice samples with future drafts. Rebase before pushing
 townsfolk-art; no PR, merge or issue closure. Earlier pending-Pip notes are historical.
+
+## Latest Dagna direction — voice recast requested
+
+The owner rejected Dagna’s existing voice as too young for a seasoned veteran and
+requested changing the voice, keeping the older visual direction. The proposal,
+exact sample lines and complete current Dagna line inventory are saved in
+`tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast-plan.json`.
+Speech generation is blocked: Scenario/TTS tools are not connected in this session.
+No new voice/audio was generated, no credits spent, and production casting/clips
+remain intact. Audition a mature female voice with low, flat Northern command;
+Gacrux is a candidate, not an approved cast. Check live schemas/cost/balance before
+spending, never purchase credits. Render a concrete preview, then update all Dagna
+recordings and live fallback consistently after owner voice approval. Do not pitch
+shift the rejected sample and present it as a newly cast performance.

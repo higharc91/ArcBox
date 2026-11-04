@@ -1,0 +1,300 @@
+{
+  "status": "blocked_missing_speech_generator_connection",
+  "ownerRequest": "Change her voice, it doesn't sound like a season veteran",
+  "currentPreset": "Callirrhoe",
+  "currentPitch": -1,
+  "proposedPresetToAudition": "Gacrux",
+  "presetStatus": "candidate only; verify live availability and cost before rendering",
+  "deliveryBrief": "Mature female guard captain, approximately late40s to50s. Low, flat Northern English delivery, few words, grounded chest resonance and lightly weathered texture. Twelve years of command and grief held under discipline. Calm authority, clipped practical phrasing, understated fatigue; no youthful brightness, theatrical growling, frailty, or cheerful sing-song. Preserve exact caption words.",
+  "previewLines": [
+    {
+      "line": "bark_dagna_holt_town_1",
+      "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+      "renderText": "<Mature female guard captain, approximately late40s to50s. Low, flat Northern English delivery, few words, grounded chest resonance and lightly weathered texture. Twelve years of command and grief held under discipline. Calm authority, clipped practical phrasing, understated fatigue; no youthful brightness, theatrical growling, frailty, or cheerful sing-song. Preserve exact caption words.> Don't tell me it'll be all right. Tell me what we're doing."
+    },
+    {
+      "line": "bark_dagna_holt_battle_start_1",
+      "text": "Form up. Nobody dies stupid.",
+      "renderText": "<Mature female guard captain, approximately late40s to50s. Low, flat Northern English delivery, few words, grounded chest resonance and lightly weathered texture. Twelve years of command and grief held under discipline. Calm authority, clipped practical phrasing, understated fatigue; no youthful brightness, theatrical growling, frailty, or cheerful sing-song. Preserve exact caption words.> Form up. Nobody dies stupid."
+    }
+  ],
+  "replacementScope": {
+    "speaker": "dagna_holt",
+    "lineCount": 66,
+    "lines": [
+      {
+        "id": "bark_dagna_holt_battle_start_1",
+        "text": "Form up. Nobody dies stupid."
+      },
+      {
+        "id": "bark_dagna_holt_battle_start_2",
+        "text": "Eyes front. Shields up."
+      },
+      {
+        "id": "bark_dagna_holt_battle_start_3",
+        "text": "Right. Let's earn our bread."
+      },
+      {
+        "id": "bark_dagna_holt_turn_start_1",
+        "text": "Mine."
+      },
+      {
+        "id": "bark_dagna_holt_turn_start_2",
+        "text": "Moving."
+      },
+      {
+        "id": "bark_dagna_holt_hit_1",
+        "text": "Down."
+      },
+      {
+        "id": "bark_dagna_holt_hit_2",
+        "text": "Stay there."
+      },
+      {
+        "id": "bark_dagna_holt_miss_1",
+        "text": "Damn it."
+      },
+      {
+        "id": "bark_dagna_holt_crit_1",
+        "text": "That's for the bridge."
+      },
+      {
+        "id": "bark_dagna_holt_kill_1",
+        "text": "Done."
+      },
+      {
+        "id": "bark_dagna_holt_kill_2",
+        "text": "One less."
+      },
+      {
+        "id": "bark_dagna_holt_ally_down_1",
+        "text": "Someone's down! Cover them!"
+      },
+      {
+        "id": "bark_dagna_holt_ally_down_2",
+        "text": "Not again. Not on my watch."
+      },
+      {
+        "id": "bark_dagna_holt_low_hp_1",
+        "text": "Had worse. Not much worse."
+      },
+      {
+        "id": "bark_dagna_holt_healed_1",
+        "text": "Ta. Back in."
+      },
+      {
+        "id": "bark_dagna_holt_revived_1",
+        "text": "Still here. Don't fuss."
+      },
+      {
+        "id": "bark_dagna_holt_victory_1",
+        "text": "Count heads. Everyone? Good."
+      },
+      {
+        "id": "bark_dagna_holt_victory_2",
+        "text": "That'll do."
+      },
+      {
+        "id": "bark_dagna_holt_defeat_1",
+        "text": "Fall back! Back, now!"
+      },
+      {
+        "id": "bark_dagna_holt_camp_1",
+        "text": "Sleep. I'll take the watch. Habit."
+      },
+      {
+        "id": "bark_dagna_holt_camp_2",
+        "text": "Don't tell me it'll be all right. Tell me what we're doing."
+      },
+      {
+        "id": "bark_dagna_holt_town_1",
+        "text": "Don't tell me it'll be all right. Tell me what we're doing."
+      },
+      {
+        "id": "bark_dagna_holt_town_2",
+        "text": "Form up. Nobody dies stupid."
+      },
+      {
+        "id": "bark_dagna_holt_town_3",
+        "text": "Right. Let's earn our bread."
+      },
+      {
+        "id": "ch1_camp_open_2",
+        "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears."
+      },
+      {
+        "id": "ch1_camp_hunger_1",
+        "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side."
+      },
+      {
+        "id": "ch1_camp_truth_1",
+        "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening."
+      },
+      {
+        "id": "ch1_camp_warmth_2",
+        "text": "Then we'd better learn how to give something back."
+      },
+      {
+        "id": "ch1_mayor_halden_3",
+        "text": "Killed two of my guards doing it. Coll and Annet. Good people."
+      },
+      {
+        "id": "ch1_mayor_goblins_2",
+        "text": "Forty winters she's led them. Clever. She'll smile at you while her archers find the range."
+      },
+      {
+        "id": "ch1_mayor_hero_3",
+        "text": "Calm's for after. Bridge first."
+      },
+      {
+        "id": "ch1_mayor_soldier_1",
+        "text": "Aye. You were. Not many of us walked off it."
+      },
+      {
+        "id": "ch1_mayor_soldier_2",
+        "text": "You saw what they did. When the time comes, you tell them."
+      },
+      {
+        "id": "ch1_ford_open_4",
+        "text": "Hit them at dawn, from both banks. They'll break. Goblins always break."
+      },
+      {
+        "id": "ch1_ford_truth_1",
+        "text": "Say that again."
+      },
+      {
+        "id": "ch1_ford_truth_2",
+        "text": "Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children."
+      },
+      {
+        "id": "ch1_ford_truth_3",
+        "text": "Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one."
+      },
+      {
+        "id": "ch1_ford_cases_1",
+        "text": "Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it."
+      },
+      {
+        "id": "ch1_ford_cases_2",
+        "text": "They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs."
+      },
+      {
+        "id": "ch1_ford_pay_fail_2",
+        "text": "Twenty crowns. My own. Now choose."
+      },
+      {
+        "id": "ch1_ford_force_1",
+        "text": "Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light."
+      },
+      {
+        "id": "ch1_ford_parley_1",
+        "text": "Talk, then. When she puts a spear through you, remember who told you she would."
+      },
+      {
+        "id": "ch1_dawn_open_4",
+        "text": "Now. Before she says anything else."
+      },
+      {
+        "id": "ch1_bridge_cost_soldier_1",
+        "text": "Children. Our lads shot at children."
+      },
+      {
+        "id": "ch1_bridge_cost_soldier_2",
+        "text": "And we've just finished what they started. Gods help me."
+      },
+      {
+        "id": "ch1_bridge_cost_over_1",
+        "text": "The road's open. That's what we came for."
+      },
+      {
+        "id": "ch1_bridge_cost_over_2",
+        "text": "Funny. I thought this would feel like something."
+      },
+      {
+        "id": "ch1_young_ones_open_5",
+        "text": "Truce or no truce, they're on my bridge. Ready when you are."
+      },
+      {
+        "id": "ch1_road_east_open_3",
+        "text": "Bridge is clear. Carts can cross by noon."
+      },
+      {
+        "id": "ch1_road_east_open_4",
+        "text": "I wanted her dead, you know. For Coll and Annet. I still might, some days."
+      },
+      {
+        "id": "ch1_road_east_open_5",
+        "text": "But I've never seen goblins carry their own children off a bridge before. I'll think on it."
+      },
+      {
+        "id": "ch1_granary_open_3",
+        "text": "The goblins, Halden. They want feeding. We gave our word."
+      },
+      {
+        "id": "ch1_granary_press_1",
+        "text": "Halden. You locked those gates in the spring, before the clan ever came down. I want to know why."
+      },
+      {
+        "id": "ch1_granary_confess_4",
+        "text": "Six years. I've sat at your table for six years."
+      },
+      {
+        "id": "ch1_granary_doors_2",
+        "text": "Aye. Somebody has to count the sacks honestly."
+      },
+      {
+        "id": "ch5_epi_clan_slain_rekindled_open_3",
+        "text": "The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can."
+      },
+      {
+        "id": "ch5_epi_clan_slain_returned_open_2",
+        "text": "They remember the bridge. So do I. That's the trouble with remembering. It works on both sides."
+      },
+      {
+        "id": "ashmaw_busy",
+        "text": "The ford first. I have too few guards to bury another."
+      },
+      {
+        "id": "ashmaw_offer",
+        "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?"
+      },
+      {
+        "id": "ashmaw_accepted",
+        "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch."
+      },
+      {
+        "id": "ashmaw_later",
+        "text": "Then take the time. Cold courage does nobody any good."
+      },
+      {
+        "id": "ashmaw_progress",
+        "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in."
+      },
+      {
+        "id": "ashmaw_proof",
+        "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?"
+      },
+      {
+        "id": "ashmaw_wait",
+        "text": "They will stay here. A promise does not spoil overnight."
+      },
+      {
+        "id": "ashmaw_presented",
+        "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town."
+      },
+      {
+        "id": "ashmaw_done",
+        "text": "The pens are quiet. The boy is home. That is enough good news for one day."
+      }
+    ]
+  },
+  "workflow": [
+    "Obtain live model schema, quote and balance; never purchase credits.",
+    "Render the two sample lines for owner listening review.",
+    "Once the sample is approved, recast all Dagna lines and her live-TTS theme consistently; preserve old recordings/provenance.",
+    "Run voice import/check and verify clip/caption mappings."
+  ],
+  "liveCost": "unavailable without generator connection",
+  "creditsSpent": 0,
+  "newRecordingsGenerated": 0
+}
