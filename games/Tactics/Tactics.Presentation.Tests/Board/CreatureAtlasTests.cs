@@ -30,10 +30,21 @@ public sealed class CreatureAtlasTests
                         Assert.InRange(source.X, 0, width - source.Width);
                         Assert.InRange(source.Y, 0, height - source.Height);
                     }
-            Assert.Equal(4, sprite.Idle.Frames.Length);
-            Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
-                sprite.Anim("walk").Frames.Length);
-            Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
+            if (entry.GetProperty("family").GetString() == "townsfolk")
+            {
+                // Approved civilian clips retain their authored counts and never need a combat attack.
+                Assert.Equal(5, sprite.Idle.Frames.Length);
+                Assert.Equal(6, sprite.Anims["walk"].Frames.Length);
+                Assert.Equal(8, sprite.Anims["talk"].Frames.Length);
+                Assert.False(sprite.Anims.ContainsKey("attack"));
+            }
+            else
+            {
+                Assert.Equal(4, sprite.Idle.Frames.Length);
+                Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
+                    sprite.Anim("walk").Frames.Length);
+                Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
+            }
         }
     }
 

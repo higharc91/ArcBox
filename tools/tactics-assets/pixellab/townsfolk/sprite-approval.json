@@ -1,13 +1,13 @@
 {
   "character": "character_bree_tallow",
-  "stage": "static_candidate_selection",
+  "stage": "full_directional_tv_approval",
   "status": "approved",
   "candidate": 1,
   "date": "2026-11-03",
   "owner_quote": "nvm back to cndiate 1",
   "source": "normalized/candidate-1.png",
   "sourceSha256": "f24f6be283612a1ae81783d443bc31e75134853bd7e7362a5317bbbc790e474a",
-  "scope": "Bree candidate 1 static appearance and displayed idle motion approved. Continue directional/walk/gesture work and separate TV review; production integration remains gated on TV review.",
+  "scope": "Bree candidate 1, complete eight-direction idle/walk/talk set and committed TV appearance approved. Production integration of these existing assets is authorized; other NPC pixel art retains its own review gate.",
   "history": [
     {
       "candidate": 2,
@@ -24,5 +24,22 @@
     "jobId": "67e30958-824f-4ac1-a27f-611943cd3617",
     "preview": "bree-idle-review.gif",
     "previewSha256": "12d37639348b644bc214d982c259153ab87d789dc530e27b2e80ec214cd26cb4"
+  },
+  "fullSetApproval": {
+    "status": "approved",
+    "date": "2026-11-04",
+    "owner_quote": "I approve or bree.",
+    "context": "Owner approval in chat after loading checkpoint 6da0040c and the full-set/TV review request.",
+    "sourceArtCheckpoint": "0eacebec",
+    "sha256": {
+      "bree-eight-direction-idle.gif": "5675384532b189641ed849a7c0ae612ca6400f76b12efc873afca073bb900447",
+      "bree-eight-direction-walk.gif": "2d2c137471063140ff5c80c12755e8c76d54a4dfad34426d40bf5f911ae8f8ce",
+      "bree-eight-direction-talk.gif": "ea6d1bb24d95c7dd413c0fb20e58ca397449074c40460e247bf7a06616fc0a28",
+      "directional/atlas-plan.json": "0bd6329fd060698cb7429014d7f776c1b59b6e4edabeb7aeb01c319e269b41db",
+      "directional/review-output.json": "55751a05bc7873004f5bc8e40b46ce0a7c2b73e2d1ee2f971b2a0ca70bea0e54",
+      "docs/superpowers/reports/2026-11-03-townsfolk-art/bree/world-inn.png": "67b243188c93697b202ead8ec10ce37762acc12d7838d7d1f484bcdfb7024f5e",
+      "docs/superpowers/reports/2026-11-03-townsfolk-art/bree/world-square.png": "aad65649edd581879ad83fd51d0f1571e7e1a08e8ac58c43f7222edce1dcd431",
+      "docs/superpowers/reports/2026-11-03-townsfolk-art/bree/world-market.png": "17b76532dff10b3ec18e3ccefd215d78be0db51742420f55c199af7492d2eb6e"
+    }
   }
 }

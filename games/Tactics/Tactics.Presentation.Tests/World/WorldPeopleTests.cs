@@ -29,6 +29,53 @@ public sealed class WorldPeopleTests
     }
 
     [Fact]
+    public void Approved_Bree_uses_her_talk_clip_while_holding_ground_then_resumes_walking()
+    {
+        var person = Person("innkeeper", 5, 5, "se", (6, 5), (6, 6)) with { Id = "bree" };
+        var people = new WorldPeople([person], Ground, Art.Value);
+        var time = Enumerable.Range(1, 1000).Select(i => i / 100d)
+            .First(t => people.PlaceAt(person, t + people.Phase(person)).Walking);
+        var before = Assert.Single(people.Units(time, Everywhere, []));
+        var bark = new BarkView("bree", 1, DateTimeOffset.MaxValue, new StoryLineView("hello", "bree_tallow", "Bree", null, "idle", "Welcome."));
+        var first = Assert.Single(people.Units(time + .02, Everywhere, [], leader: new Tile(4, 5), bark: bark));
+        var held = Assert.Single(people.Units(time + 2, Everywhere, [], leader: new Tile(4, 5), bark: bark));
+        Assert.Equal(before.Feet, first.Feet);
+        Assert.Equal(first.Feet, held.Feet);
+        Assert.Equal(first.Sprite.Anims["talk"], first.Anim);
+        Assert.Equal(first.Anim, held.Anim);
+        Assert.InRange(first.Row, 0, 7);
+        Assert.False(first.Mirror);
+        var resumed = Assert.Single(people.Units(time + 2.02, Everywhere, [], leader: new Tile(4, 5)));
+        Assert.Equal(resumed.Sprite.Anims["walk"], resumed.Anim);
+        Assert.True(Vector2.Distance(held.Feet, resumed.Feet) < 2);
+    }
+
+    [Fact]
+    public void A_barking_person_without_a_talk_clip_uses_idle_instead_of_attack()
+    {
+        var people = new WorldPeople([Person("kobold", 5, 5) with { Id = "speaker" }], Ground, Art.Value);
+        var bark = new BarkView("speaker", 1, DateTimeOffset.MaxValue, new StoryLineView("hello", "speaker", "Speaker", null, "idle", "Hello."));
+        var unit = Assert.Single(people.Units(1, Everywhere, [], leader: new Tile(4, 5), bark: bark));
+        Assert.False(unit.Sprite.Anims.ContainsKey("talk"));
+        Assert.Equal(unit.Sprite.Idle, unit.Anim);
+        Assert.NotEqual(unit.Sprite.Anims["attack"], unit.Anim);
+    }
+
+    [Theory]
+    [InlineData("bree", "tallow", "creatures/bree_tallow.png")]
+    [InlineData("innkeeper", "missing", "creatures/bree_tallow.png")]
+    [InlineData("innkeeper", null, "creatures/bree_tallow.png")]
+    public void Placed_art_variants_and_region_preloading_select_the_same_sheet(string preset, string? variant, string path)
+    {
+        var person = Person(preset, 5, 5) with { Variant = variant };
+        var key = WorldPeople.SpriteKey(person, Art.Value);
+        var loaded = Art.Value.Sprite(key);
+        Assert.EndsWith(path, loaded!.Path.Replace('\\', '/'), StringComparison.Ordinal);
+        var drawn = Assert.Single(new WorldPeople([person], Ground, Art.Value).Units(0, Everywhere, []));
+        Assert.Same(loaded, drawn.Sprite);
+    }
+
+    [Fact]
     public void A_departing_person_fades_without_renumbering_the_people_who_remain()
     {
         var people = new WorldPeople([Person("guard", 5, 5) with { Id = "watch", Unless = ["gone"] }, Person("farmer", 6, 5)], Ground, Art.Value);

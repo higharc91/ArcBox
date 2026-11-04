@@ -13,6 +13,8 @@ public partial class PersonMarker : TileMarker
     [Export] public string Requires { get; set; } = "";
     [Export] public string Unless { get; set; } = "";
     [Export] public string Bark { get; set; } = "";
+    /// <summary>Optional art suffix: farmer + b selects characters.farmer_b when available.</summary>
+    [Export] public string Variant { get; set; } = "";
     [Export] public string Voice { get; set; } = "";
     private static readonly Color Ink = new(0.45f, 1f, 0.6f);
 

@@ -266,3 +266,15 @@ Use `--edit-props=<region>` to change individual props while preserving the scen
 ```bash
 godot --headless --path tools/tactics-world -- --edit-props=ashen_ford --clear-prop=26,58
 ```
+
+### Cosmetic people variants
+
+A PersonMarker's optional `Variant` is an art suffix: preset `farmer`, variant `b`
+selects `characters.farmer_b` when that sprite exists. Blank or unavailable variants
+use the preset's original art. Identity, voice, gates and interactions stay with the
+preset/person. Save/load/export preserves the suffix; no placed production variants
+are changed by adding this field. Drawing and region preloading share the selector.
+
+Run `godot --headless --path tools/tactics-world -- --check-person-variants` from
+the repository root after building the editor. It checks native scene save/load,
+painted export and JSON round-trip in a temporary scene, preserving production work.

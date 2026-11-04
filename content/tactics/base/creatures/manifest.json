@@ -78,8 +78,8 @@
           0
         ]
       },
-      "footprintWidth": 34.0,
-      "footprintHeight": 36.0,
+      "footprintWidth": 34,
+      "footprintHeight": 36,
       "keys": [
         "fauna.pack_mule",
         "fauna.pack_mule.grey"
@@ -117,7 +117,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_goat": {
       "file": "fauna_goat.png",
@@ -224,7 +224,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_fox": {
       "file": "fauna_fox.png",
@@ -293,7 +293,7 @@
         ]
       },
       "footprintWidth": 23.5,
-      "footprintHeight": 30.0,
+      "footprintHeight": 30,
       "keys": [
         "fauna.red_fox",
         "fauna.red_fox.russet"
@@ -331,7 +331,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_duck": {
       "file": "fauna_duck.png",
@@ -400,7 +400,7 @@
         ]
       },
       "footprintWidth": 13.5,
-      "footprintHeight": 11.0,
+      "footprintHeight": 11,
       "keys": [
         "fauna.river_duck",
         "fauna.river_duck.mallard"
@@ -438,7 +438,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_crow": {
       "file": "fauna_crow.png",
@@ -556,7 +556,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_dog": {
       "file": "fauna_dog.png",
@@ -624,8 +624,8 @@
           0
         ]
       },
-      "footprintWidth": 26.0,
-      "footprintHeight": 24.0,
+      "footprintWidth": 26,
+      "footprintHeight": 24,
       "keys": [
         "fauna.farm_dog",
         "fauna.farm_dog.brown"
@@ -663,7 +663,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_sheep": {
       "file": "fauna_sheep.png",
@@ -732,7 +732,7 @@
         ]
       },
       "footprintWidth": 25.5,
-      "footprintHeight": 22.0,
+      "footprintHeight": 22,
       "keys": [
         "fauna.farm_sheep",
         "fauna.farm_sheep.cream"
@@ -770,7 +770,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
     },
     "wolf_grey": {
       "file": "wolf_grey.png",
@@ -1111,7 +1111,7 @@
         ]
       },
       "footprintWidth": 56.5,
-      "footprintHeight": 47.0,
+      "footprintHeight": 47,
       "keys": [
         "beasts.wolf.dire"
       ],
@@ -5708,6 +5708,86 @@
         }
       },
       "provenance": "PixelLab eight-direction sprites based on matching Grisk concept; source in tools/tactics-assets/pixellab/kobold-refresh/source."
+    },
+    "bree_tallow": {
+      "file": "bree_tallow.png",
+      "family": "townsfolk",
+      "variant": "bree_tallow",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 16,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.innkeeper",
+        "characters.bree_tallow"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "fps": 3.3333333333333335,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "talk": {
+          "frames": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12
+          ],
+          "fps": 5.333333333333333,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "PixelLab candidate 1; complete directional/motion set and TV appearance approved by owner in chat. Source checkpoint 0eacebec; exact atlas SHA256 9c316179a4790fe59c8d7f42caff95c6155da5d247d8cf997f2a6da0d53f884d"
     }
   },
   "legacyDistinctForms": [

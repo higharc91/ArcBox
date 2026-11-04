@@ -398,7 +398,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         plan.DropProbes();
         var preparedTime = clock.Elapsed.TotalMilliseconds;
         var units = UnitArt.Load(_painter.Root);
-        var sheets = ground.People.Where(p => ground.Map.InBounds(p.At)).Select(p => units.Sprite($"characters.{p.Preset}")?.Path).OfType<string>().Distinct().ToArray();
+        var sheets = ground.People.Where(p => ground.Map.InBounds(p.At)).Select(p => units.Sprite(WorldPeople.SpriteKey(p, units))?.Path).OfType<string>().Distinct().ToArray();
         var fauna = WorldFauna.Prepare(ground.Map, art, units);
         closing.ThrowIfCancellationRequested();
         return new Built(ground, plan, items, sheets, fauna, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, total {clock.Elapsed.TotalMilliseconds:0} ms");

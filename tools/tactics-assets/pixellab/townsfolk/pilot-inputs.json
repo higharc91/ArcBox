@@ -1,5 +1,5 @@
 {
-  "status": "Bree eight-direction review art complete; original candidate 1 + idle approved; full directional/TV approval pending",
+  "status": "Complete candidate-1 directional idle/walk/talk and committed TV appearance owner-approved; compact production atlas installed",
   "character": "character_bree_tallow",
   "approvedConceptAsset": "asset_5BTscGVgZiaVkGpPJb65F1X1",
   "conceptSha256": "9f4b30a04a1d4509b0beb53f3c216514ada18e5c34be85d9428a929225186ba5",
@@ -16,14 +16,14 @@
   "heroPixelScale": 0.5,
   "heroHeadY": 51,
   "heroHeadToFootWorldPixels": 36,
-  "pilotScope": "Original pilot approved. Full eight-direction idle/walk/talk review set prepared in separate pack; production integration remains pending.",
+  "pilotScope": "Bree-only integration approved in chat after checkpoint 6da0040c; approved atlas reused without regeneration. Portrait phase remains.",
   "generationCost": {
     "unit": "PixelLab subscription generations",
     "initialPilot": 19,
     "directionalExtension": 30.25,
     "total": 49.25
   },
-  "integrationApproved": false,
+  "integrationApproved": true,
   "staticJobId": "f4e7da2d-389f-40e7-8814-04e2e040dac0",
   "idleJobId": "67e30958-824f-4ac1-a27f-611943cd3617",
   "selectedCandidate": 1,

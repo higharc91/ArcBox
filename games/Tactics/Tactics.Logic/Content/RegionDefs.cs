@@ -36,7 +36,8 @@ public sealed record RegionPerson(string Preset, [property: JsonRequired] Tile A
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Bark = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Voice = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Voice = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null)
 {
     /// <summary>The ways someone can face, as the screen has them: +x is south-east and +y south-west.</summary>
     public static readonly ImmutableArray<string> Faces = ["se", "sw", "nw", "ne"];
