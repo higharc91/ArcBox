@@ -352,6 +352,17 @@ public sealed class PhoneFixtureTests
         { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
     }
 
+    /// <summary>Who takes a found item (the owner's decision 1): the 5d vote screen, with what it asks.</summary>
+    [Fact]
+    public void The_loot_vote_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(2, 1), LootVoteTests.Hoard.Value);
+        s.Send(0, "interact", new { target = "bomb" });
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.Asking, "the loot vote");
+        s.Send(1, "vote", new { option = s.Profiles[2]!.Value.Value });
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["vote-loot"] = Node(s.Harness.PlayerView(1)) });
+    }
+
     private static void Check(SortedDictionary<string, JsonNode> screens)
     {
         var dir = FixtureDir();

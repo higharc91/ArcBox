@@ -211,6 +211,8 @@ public sealed partial class TacticsGame
                 Say(instant.Line);
                 KeepWorld();
                 Save();
+                if (LootWaiting)
+                    BeginLootVote();        // who takes what it gave
                 break;
             case ScenePlan scene:
                 LeaveExploration();
@@ -275,15 +277,15 @@ public sealed partial class TacticsGame
         _doc = _doc with { World = world with { Things = things.SetItem(def.Id, save) } };
     }
 
-    /// <summary>The thing's loot goes into <paramref name="member"/>'s bag, stacking with what's there (design §3.1, USER DECISION 1).</summary>
+    /// <summary>
+    /// The thing's loot (design §1.1): its gold is split across the purses, and its items go to whoever the party picks (USER DECISION 1,
+    /// decided 2026-11-03: <see cref="GiveFound"/>), straight into <paramref name="member"/>'s bag for a party of one.
+    /// </summary>
     private void GiveLoot(InteractableDef def, string member)
     {
         foreach (var loot in def.Loot.Where(l => l.Gold > 0))
             ChangePartyGold(loot.Gold);
-        if (def.Loot.IsEmpty || !_doc.Members.TryGetValue(member, out var record))
-            return;
-        var bag = StackLoot(record.Character.Bag, def.Loot);
-        _doc = _doc with { Members = _doc.Members.SetItem(member, record with { Character = record.Character with { Bag = bag } }) };
+        GiveFound(def.Loot.Where(l => l.Gold == 0).Select(l => (l.Item, l.Count)), member, Interactables.NameOf(def));
     }
 
     private ImmutableArray<ItemStack> StackLoot(ImmutableArray<ItemStack> original, IEnumerable<LootDef> rewards)

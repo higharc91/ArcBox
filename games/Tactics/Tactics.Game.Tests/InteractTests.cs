@@ -72,22 +72,25 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void An_unlocked_chest_opens_at_once_and_its_loot_is_the_leaders_once()
+    public void An_unlocked_chest_opens_at_once_and_its_loot_is_the_openers_once_nobody_votes_otherwise()
     {
         var s = Vault.At(new Tile(6, 1));
         var before = Count(s, Leader(s), "potion_of_healing");
 
         Interact(s);
 
-        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        // It opens at once; who takes what was inside is the party's vote (the owner's decision 1), and silence leaves it with the opener.
         Assert.Equal("open", Saved(s, "chest")!.State);
+        Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+        Assert.Equal("Inside: 2 × Potion of Healing.", s.Host.Notice);
+        Until(s, () => s.Game.Phase == TacticsPhase.Exploration, "the loot vote's close", TimeSpan.FromSeconds(30));
         Assert.Equal(before + 2, Count(s, Leader(s), "potion_of_healing"));
         Assert.Contains("chest_looted", Doc(s).World!.Flags);
         Assert.Equal(("open", "props.chest_open"), (Thing(s, "chest")!.State, Thing(s, "chest")!.StandIn));
         var e = s.Host.Explore!.ThingEvents!.Value[^1];
         Assert.Equal(("chest", ThingEvents.Opened), (e.Id, e.What));
         Assert.Equal(Doc(s).Members[Leader(s)].Character.Name, e.By);
-        Assert.Equal("Inside: 2 × Potion of Healing.", s.Host.Notice);
+        Assert.Equal($"{e.By} takes the 2 × Potion of Healing.", s.Host.Notice);
         Assert.Empty(Targets(s));
 
         Interact(s);

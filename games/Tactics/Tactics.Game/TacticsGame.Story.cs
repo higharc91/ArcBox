@@ -557,6 +557,8 @@ public sealed partial class TacticsGame
     {
         if (Camp is not null) { ResumeCamp(); return; }
         if (_doc.World?.Shop is not null) { ResumeShop(); return; }
+        // Found items the party was voting on, or that wait with nothing else under way: the vote, asked again.
+        if (_doc.World?.Loot is { } loot && (loot.Voting || Cursor is null or { Stage: StorySave.Fight })) { ResumeLoot(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
         if (c.Person is not null) { ResumeConversation(c); return; }
@@ -652,7 +654,7 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>How long the open question has (5d default 4).</summary>
-    private TimeSpan QuestionLength() => CampVote || EntranceVote ? TimeSpan.FromSeconds(20) : _telling switch
+    private TimeSpan QuestionLength() => CampVote || EntranceVote ? TimeSpan.FromSeconds(20) : LootVote && _telling == StoryStates.Asking ? LootVoteLength : _telling switch
     {
         StoryStates.TieBreak => Tell.TieBreak,
         StoryStates.PickRoller => Tell.Roller,
@@ -832,6 +834,7 @@ public sealed partial class TacticsGame
         }
         var unanswered = _checking is { Check: { } check }
             ? (Func<ImmutableArray<string>, string>)(_ => SkillCheck.Best(Cards(check.Skill).Select(c => (c.Member, c.Bonus))))
+            : LootVote ? LootUnanswered     // whoever found it (USER DECISION 1)
             : _ => SceneRun.Unanswered(_offered, vote: true).Id;
         switch (VoteRules.Close(Tally(), _lead, FirstConnected(), unanswered))
         {
@@ -861,6 +864,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Decide(SceneOption option)
     {
+        if (LootVote) { TakeLoot(option.Id); return; }
         var (scene, beat) = (CurrentScene()!, CursorBeat());
         if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(scene, CurrentNode()!); return; }
         if (option.Check is not null)
@@ -981,12 +985,12 @@ public sealed partial class TacticsGame
         }
     }
 
-    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : Cursor is { Scene: { } id } c
+    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : LootVote ? LootScene() : Cursor is { Scene: { } id } c
         ? c.Person is not null ? Lore.Scene(id) : c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
         : null;
 
     /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
-    private ArcBeat CursorBeat() => Camp is not null || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
+    private ArcBeat CursorBeat() => Camp is not null || LootVote || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 
@@ -1104,7 +1108,8 @@ public sealed partial class TacticsGame
         var member = profile.Value;
         var scene = CurrentScene();
         if (Questioning && _checking is null)
-            return Custom(Screens.Vote, new
+        {
+            var vote = JsonSerializer.SerializeToNode(new
             {
                 party = PartyQuestion,
                 canChoose = Decider() is { } decider ? decider == member : true,
@@ -1115,7 +1120,15 @@ public sealed partial class TacticsGame
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),
                 vip = IsVip(player),
-            }) with { DeadlineUtc = _due };
+            }, ArcJson.Options)!.AsObject();
+            // The loot vote says what it asks, and which of the votes it is, so each item's is a new question (USER DECISION 1).
+            if (LootVote && scene is not null)
+            {
+                vote["question"] = scene.Title;
+                vote["vote"] = _doc.World!.Loot!.Seq;
+            }
+            return Custom(Screens.Vote, vote) with { DeadlineUtc = _due };
+        }
         if (scene is not null && (_checking is not null || _telling == StoryStates.Rolled))
         {
             var check = CheckView(scene);

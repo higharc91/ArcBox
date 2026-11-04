@@ -22,6 +22,15 @@ public sealed class InteractModelTests
     private static Dictionary<string, int> Bags(TacticsDocument doc)
         => doc.Members.Values.SelectMany(m => m.Character.Bag).GroupBy(b => b.Item.Value).ToDictionary(g => g.Key, g => g.Sum(b => b.Count));
 
+    /// <summary>Every item the party has: in the bags, and found but waiting for the party's vote on who takes it (the owner's decision 1).</summary>
+    private static Dictionary<string, int> Held(TacticsDocument doc)
+    {
+        var held = Bags(doc);
+        foreach (var item in doc.World?.Loot?.Items ?? [])
+            held[item.Item] = held.GetValueOrDefault(item.Item) + item.Count;
+        return held;
+    }
+
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -88,6 +97,7 @@ public sealed class InteractModelTests
                 var after = Doc(s);
                 Assert.Equal(Things(saved), Things(after));                                  // a restart changes nothing on its own
                 Assert.Equal(Bags(saved), Bags(after));
+                Assert.Equal(Held(saved), Held(after));
                 Assert.Equal(saved.World!.Flags.Order(), after.World!.Flags.Order());
                 what = "restart";
             }
@@ -132,13 +142,17 @@ public sealed class InteractModelTests
         var blocked = Interactables.Blocking(Defs, now.World.Things, flags);
         Assert.False(blocked.Contains(s.Host.Explore!.At), $"the party is on a blocked tile {s.Host.Explore.At} after {log}");
         Assert.True(Vault.Rules.Value.GroundFor(Vault.Id)!.Terrain.Walkable(s.Host.Explore.At));
-        // 4. Loot comes out of a thing once, the moment it's opened or taken.
+        // 4. Loot comes out of a thing once, the moment it's opened or taken, into a bag or the party's vote on whose (the owner's decision
+        //    1): never twice, never lost, across votes and restarts.
         var expected = new Dictionary<string, int>(start);
         foreach (var def in Defs)
             if (Interactables.StateOf(def, now.World.Things).State is InteractableKinds.Opened or InteractableKinds.Taken)
                 foreach (var loot in def.Loot)
                     expected[loot.Item.Value] = expected.GetValueOrDefault(loot.Item.Value) + loot.Count;
-        Assert.Equal(expected.Where(e => e.Value > 0).OrderBy(e => e.Key), Bags(now).Where(e => e.Value > 0).OrderBy(e => e.Key));
+        Assert.Equal(expected.Where(e => e.Value > 0).OrderBy(e => e.Key), Held(now).Where(e => e.Value > 0).OrderBy(e => e.Key));
+        // Walking, nothing waits for a vote: the vote comes before the walk.
+        if (s.Game.Phase == TacticsPhase.Exploration)
+            Assert.Null(now.World.Loot);
         // 5. An interaction's cursor is there only in the Story phase, and the TV is never sent what nobody has seen.
         if (now.World.Story?.Thing is not null && s.Game.Phase is not (TacticsPhase.Resuming or TacticsPhase.Muster))
             Assert.Equal(TacticsPhase.Story, s.Game.Phase);
