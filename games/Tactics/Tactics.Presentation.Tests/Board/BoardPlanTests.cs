@@ -360,7 +360,10 @@ public sealed class BoardPlanTests
 
         Assert.Equal(map.Width * map.Height, Tops(plan).Count());
         Assert.All(Faces(plan), f => Assert.NotNull(f.Image));
-        Assert.Equal(map.Props.Length, plan.Items.OfType<Sprite>().Count());
+        // A low prop wider than a tile (a bridge's deck) is drawn in pieces, one for each tile it lies over.
+        var spread = map.Props.Count(p => Pack.Art.Prop(p.Id, [p.Variant ?? ""])?.Shape is not null);
+        Assert.Equal(map.Props.Length - spread, plan.Items.OfType<Sprite>().Count());
+        Assert.Equal(spread, plan.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Prop).Select(f => f.Image!.Path).Distinct().Count());
         Assert.All(plan.Items.OfType<Sprite>(), s => Assert.True(File.Exists(Path.Combine(Pack.Root, s.Image.Path))));
         Assert.Equal(2, BoardFit.For(new BoardTerrain(map, null), Pack.Art).Scale);
     }

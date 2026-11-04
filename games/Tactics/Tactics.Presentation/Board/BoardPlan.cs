@@ -55,8 +55,8 @@ public static class BoardOrder
     }
 }
 
-/// <summary>What a <see cref="Face"/> is.</summary>
-public enum FaceKind { Under, Side, Lip, Top, Blend, Tint, Decal, Building, Shadow }
+/// <summary>What a <see cref="Face"/> is. A <see cref="Prop"/> face is a column of a low prop wider than a tile, a bridge's deck, on the tile it lies over.</summary>
+public enum FaceKind { Under, Side, Lip, Top, Blend, Tint, Decal, Building, Shadow, Prop }
 
 /// <summary>Which way a <see cref="Face"/> looks: up, or along +U (screen lower right) or +V (screen lower left).</summary>
 public enum Facing { Up, U, V }
@@ -521,11 +521,14 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null, bool world = false)
     {
         var mapVariants = terrain.Map.Materials.Select(m => MaterialLook.Of(m).Variant).ToArray();
-        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && within?.Contains(p.At) != false))
+        // A wide prop's columns can lie on tiles of a block its own tile isn't in, so props that near are read too.
+        var near = within is { } rect ? new TileRect(rect.X - SpreadReach, rect.Y - SpreadReach, rect.W + 2 * SpreadReach, rect.H + 2 * SpreadReach) : (TileRect?)null;
+        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && near?.Contains(p.At) != false))
         {
             // Living world creatures are drawn by the TV's actor layer. Battle maps keep the same art baked into the board.
             if (world && WorldAnimalIds.Contains(prop.Id))
                 continue;
+            var mine = within?.Contains(prop.At) != false;
             // A prop takes its variant if specified, then the colour of the ground under it, or failing that of anything on the map.
             var prefer = prop.Variant is not null
                 ? mapVariants.Prepend(terrain.Look(prop.At).Variant).Prepend(prop.Variant)
@@ -533,8 +536,72 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             if (art.Prop(prop.Id, prefer) is not { } sprite)
                 continue;
             var topLeft = terrain.Centre(prop.At) - new Vector2(sprite.AnchorX, sprite.AnchorY);
+            if (sprite.Shape is { } shape)
+            {
+                AddSpread(items, terrain, prop.At, sprite, shape, topLeft, within);
+                continue;
+            }
+            if (!mine)
+                continue;
             items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height),
                 terrain.Changes.Sunk.Contains(prop.At) ? null : sprite.Light, TileHeight: sprite.TileHeight));    // what went down with its tile has gone out, whatever the chasm is
+        }
+    }
+
+    /// <summary>How far, in tiles, a wide prop's columns can lie from its own tile.</summary>
+    private const int SpreadReach = 3;
+
+    /// <summary>
+    /// A low prop wider than a tile, a bridge's deck, cut into a piece for each tile of its run that it lies over, each sorted on that tile, so whoever stands on
+    /// the deck is over it and whoever is behind it is under it. Drawn whole on its own tile, it went over everyone on the tiles it reaches over: a unit on a
+    /// bridge was hidden under its planks. The run is along U or V, the way it reaches out from its tile and its foot rises (back) or falls (forward). A piece is
+    /// a column half a tile wide, from its tile's middle, between two edges of the run's diamonds at the deck's height, so it's a quad. Each samples the frame by
+    /// where it is in it, so art made at another size than its manifest's is drawn whole, at the manifest's size.
+    /// </summary>
+    private static void AddSpread(List<BoardItem> items, BoardTerrain terrain, Tile at, PropArt sprite, BuildingShape shape, Vector2 topLeft, TileRect? within)
+    {
+        const int Columns = BuildingPlan.ColumnWidth;
+        var height = terrain.Top(at);
+        var anchor = terrain.Centre(at);
+        var left = sprite.AnchorX > sprite.Width - sprite.AnchorX;
+        var far = left ? Array.FindIndex([.. shape.Tops], t => t >= 0) : Array.FindLastIndex([.. shape.Tops], t => t >= 0);
+        var rises = far >= 0 && shape.Bottoms[far] < sprite.AnchorY - BoardProjection.HalfHeight / 2;
+        var sign = left == rises ? 1 : -1;     // along U, a line of one U falls to the left; along V, to the right
+
+        // Where on the run a point is, in tiles at the deck's height, and the line where that's m.
+        float Along(float x, float y) => ((y + height * BoardProjection.HeightStep) / BoardProjection.HalfHeight + sign * x / BoardProjection.HalfWidth) / 2;
+        float Line(float x, int m) => BoardProjection.HalfHeight * (2 * m - sign * x / BoardProjection.HalfWidth) - height * BoardProjection.HeightStep;
+
+        var size = new Vector2(sprite.Width, sprite.Height);
+        var first = (int)MathF.Floor((topLeft.X - anchor.X) / Columns);
+        var last = (int)MathF.Floor((topLeft.X + sprite.Width - 1 - anchor.X) / Columns);
+        for (var column = first; column <= last; column++)
+        {
+            var (from, to) = (Math.Max(0, (int)(anchor.X + column * Columns - topLeft.X)), Math.Min(sprite.Width, (int)(anchor.X + (column + 1) * Columns - topLeft.X)));
+            var (top, bottom) = (-1, -1);
+            for (var x = from; x < to; x++)
+                if (shape.Tops[x] >= 0)
+                    (top, bottom) = (top < 0 ? shape.Tops[x] : Math.Min(top, shape.Tops[x]), Math.Max(bottom, shape.Bottoms[x]));
+            if (top < 0)
+                continue;
+            var (x0, x1, y0, y1) = (topLeft.X + from, topLeft.X + to, topLeft.Y + top, topLeft.Y + bottom + 1);
+            var corners = new[] { Along(x0, y0), Along(x1, y0), Along(x0, y1), Along(x1, y1) };
+            var (low, high) = ((int)MathF.Floor(corners.Min()), (int)MathF.Floor(corners.Max() - 1e-4f));
+            for (var m = low; m <= high; m++)
+            {
+                var tile = sign == 1 ? new Tile(m, at.Y) : new Tile(at.X, m);
+                if (!terrain.Map.InBounds(tile))
+                    tile = at;
+                if (within?.Contains(tile) == false)
+                    continue;
+                var (a0, a1) = (Math.Clamp(Line(x0, m), y0, y1), Math.Clamp(Line(x1, m), y0, y1));
+                var (b0, b1) = (Math.Clamp(Line(x0, m + 1), y0, y1), Math.Clamp(Line(x1, m + 1), y0, y1));
+                if (b0 - a0 < 0.5f && b1 - a1 < 0.5f)
+                    continue;
+                Vector2[] points = [new(x0, a0), new(x1, a1), new(x1, b1), new(x0, b0)];
+                items.Add(new Face(BoardOrder.Key(tile, BoardLayer.Prop), tile, FaceKind.Prop, Facing.U, [.. points],
+                    [.. points.Select(p => (p - topLeft) / size)], sprite.Image, null));
+            }
         }
     }
 

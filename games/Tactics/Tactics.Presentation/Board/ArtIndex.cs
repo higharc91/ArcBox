@@ -30,9 +30,12 @@ public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 
 
 /// <summary>
 /// A prop's sprite. The anchor is its ground contact pixel, which stands on the tile's centre. <see cref="Scale"/> is the manifest's
-/// <c>scale</c>: art made bigger than the world is drawn that much smaller (<see cref="World.SpriteShrink"/>); 1 for most props.
+/// <c>scale</c>: art made bigger than the world is drawn that much smaller (<see cref="World.WorldHerd.StripSprite"/>: at that pixel scale, about the same anchor); 1 for most props.
+/// <see cref="Shape"/> is where a low prop wider than a tile has pixels, in its own <see cref="Width"/> by <see cref="Height"/> (whatever the file's size), so
+/// <see cref="BoardPlan"/> can cut it into columns, each sorted on the tile it lies on, as a building is; null for any other prop.
 /// </summary>
-public sealed record PropArt(ArtImage Image, int Width, int Height, int AnchorX, int AnchorY, PropLight? Light = null, int TileHeight = 1, double Scale = 1);
+public sealed record PropArt(ArtImage Image, int Width, int Height, int AnchorX, int AnchorY, PropLight? Light = null, int TileHeight = 1, double Scale = 1,
+    BuildingShape? Shape = null);
 
 /// <summary>A hazard's sprites: <see cref="Ground"/> on the tile top, <see cref="Over"/>, if any, above the units.</summary>
 public sealed record HazardArt(ArtImage Ground, ArtImage? Over, Vector2 Frame, Vector2 Origin, Vector2 OverFrame, Vector2 OverOrigin);
@@ -112,9 +115,11 @@ public sealed class ArtIndex
             return null;
         var (name, path) = Pick(prop.Variants, prefer);
         var look = prop.Looks.GetValueOrDefault(name) ?? new PropLook(prop.Width, prop.Height, prop.AnchorX, prop.AnchorY);
+        // A low prop wider than a tile lies over the tiles beside its own: a bridge's deck, which a unit on those tiles stands on.
+        var spread = prop.TileHeight <= 1 && prop.Light is null && prop.Scale >= 1 && look.Width > 2 * BoardProjection.HalfWidth;
         return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, look.Height), look.Width, look.Height, look.AnchorX, look.AnchorY,
             prop.Light is { } light ? light with { Colour = prop.Colours.GetValueOrDefault(name, light.Colour) } : null,
-            prop.TileHeight, prop.Scale);
+            prop.TileHeight, prop.Scale, spread ? BuildingShape.OfProp(Path.Combine(_root, path), prop.Frames, look.Width, look.Height) : null);
     }
 
     /// <summary>The height of the prop in tiles, from the manifest (default 1).</summary>
