@@ -20,7 +20,7 @@
 {"$type":"TurnEnded","unit":"wet"},
 {"$type":"RoundStarted","round":2,"order":["shaman","mage","gob","wet"]},
 {"$type":"TurnStarted","unit":"shaman","round":2},
-{"$type":"AbilityUsed","source":"shaman","ability":"kobold_slinger.fire_pot","target":{"unit":null,"tile":[5,8]},"presentation":{"anim":"characters.shoot","fx":"fx.explosion","projectile":"projectiles.fireball"}},
+{"$type":"AbilityUsed","source":"shaman","ability":"kobold_slinger.fire_pot","target":{"unit":null,"tile":[5,8]},"presentation":{"anim":"characters.cast","fx":"fx.explosion","projectile":"projectiles.fireball"}},
 {"$type":"Rolled","roller":"mage","kind":"Save","result":{"d20s":[15],"kept":15,"modifier":-5,"total":10,"vs":13,"success":false,"crit":false,"fumble":false}},
 {"$type":"Damaged","unit":"mage","amount":8,"type":"fire","hpAfter":92},
 {"$type":"ConditionApplied","unit":"mage","condition":"burning"},
