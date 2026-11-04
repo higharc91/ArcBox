@@ -100,3 +100,12 @@ phone and real-walk regression checks. The cloud handoff has exact commands and 
 The approved Bree source pixels, directional frames, receipts and Windows TV shots were reused unchanged. Offline rebuilding and verification pass; no concept or animation was generated, and no credits were spent. Full-set/TV approval is still requested separately. PixelLab is not exposed by this cloud session's connected tools, so current balance and cost quotes cannot be checked; **30.75 is historical, not a live balance**. No subscription purchase or upgrade was attempted.
 
 OW-05 implementation and four-party measurements are in [the loading report](loading/report.md), with before/after native logs, gate output and an unchanged cold-pack hash. This independent performance work does not approve or install art, complete the remaining 25 sprites/portraits, or close issue #80.
+
+## Latest continuation: Aubrine integration and Tobin appearance review
+
+Aubrine's complete set and TV review are now owner-approved and installed.
+Fresh production four-party peaks:310.83MiB Ashen /192.37MiB Cinder, below512.
+111 focused tests pass; Debug/Release test-project builds zero warnings/errors.
+Tobin's first image-tool appearance sheet awaits owner review before animation.
+No PixelLab spend or rule/balance/phone changes. See
+[the installation report](aubrine-installed/report.md) for receipts and current next steps.

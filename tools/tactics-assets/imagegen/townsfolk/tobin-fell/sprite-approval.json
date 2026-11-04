@@ -1,0 +1,22 @@
+{
+  "stage": "appearance_candidate_pending_owner_review",
+  "generatedDate": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "originalPath": "/workspace/generated_images/exec-0175630f-f859-4b18-82a2-be6fc4c906de.png",
+  "candidateSha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01",
+  "inputSha256": {
+    "tools/tactics-assets/concepts/townsfolk/generated/character_tobin_fell.png": "2e915a413337500c77128cd72795e21375ea12c7d6e50e3e8762f2f466782f4e",
+    "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/rotations/south.png": "2a1edd0362dd14935480c1b9d98161be261a1d79d281ac7dcfec092f0aa2a000"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "notes": [
+    "Existing approved Tobin concept reused; no new concept.",
+    "Eight standing views in requested S,SW,W,NW / N,NE,E,SE order, manually inspected.",
+    "Review image only: native pixel grid, transparency, palette, scale and anchors remain unvalidated.",
+    "No motions or portraits generated; preserve appearance and full-set TV gates."
+  ]
+}

@@ -1,19 +1,19 @@
 {
-  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
+  "stage": "complete_set_approved",
   "ownerAppearanceApproval": {
     "date": "2026-11-04",
     "quote": "Looks good, continue so we can she her finished",
     "source": "candidate-1.png"
   },
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "completedSet": {
-    "status": "pending_owner_full_set_and_tv_approval",
+    "status": "approved",
     "sourceFrames": 144,
     "portraits": 6,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_aubrine.png": "a9f5fe5ae077f432194f189c5f5c08bf532b58b3a17c978eabf461835d8dc85f",
       "review-sprite.json": "b18838342ccb8e77b685fc09de8906aebf7ed9c356fdf8e7b2414d8b3972f72a",
@@ -32,5 +32,10 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/aubrine-imagegen/world-chapel.png",
       "sha256": "23cabd013b399e39a69086fe007886d7897d3253a1563cdba1a6464d0c7f0268"
     }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "She looks great! Who is next?",
+    "context": "Owner response after the complete directional motion, six portraits and native TV review shown in chat."
   }
 }

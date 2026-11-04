@@ -6,6 +6,9 @@ Do not merge, open a PR, close #80 or reset unrelated work. The owner requested 
 checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree’s
 full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
 complete eight-direction idle/walk/talk set is also now approved and installed.
+Mother Aubrine’s complete image-tool set and native TV review are now also approved
+and installed; Tobin’s first appearance candidate awaits approval. Read the latest
+[Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
 The original checkpoint details below are retained as provenance; current status
@@ -259,3 +262,24 @@ no rules/balance/phone changes. Other23 sprites and remaining portraits are ahea
 Use the new image-tool package (`npm ci --prefix tools/tactics-assets/imagegen/townsfolk`)
 for offline builders; no PixelLab helper/credential is needed. Pull with rebase
 before pushing; do not merge, open a PR, close #80 or purchase credits.
+
+## Current continuation — Aubrine approved, Tobin appearance candidate
+
+The owner approved Aubrine's complete set/TV review: **“She looks great! Who is next?”**.
+Approval is recorded and her exact existing atlas plus six portraits are installed.
+Do not ask for this approval again or regenerate any completed assets. Latest
+production gates: Ashen **310.83MiB**, Cinder **192.37MiB**, four actual heroes,
+512MiB cap; cold pack **202,137,516bytes /4,821files**.111 focused tests pass,
+Debug/Release test-project builds zero warnings/errors. Production typed import,
+portraits and bark stop/resume pass. Rules/balance/phone contracts unchanged.
+See the installation report linked at the top for logs, exact hashes and commands.
+
+The owner selected Tobin Fell next and authorized the image-tool approach.
+`tools/tactics-assets/imagegen/townsfolk/tobin-fell/` contains one first eight-view
+standing appearance sheet, exact request, input/output hashes and review notes.
+**Appearance approval is pending**; do not expand to full motions before it.
+No Tobin production content changed. Native grid/alpha/palette/anchors/height and
+full-set/portrait/TV approval remain separate gates. Other23 sprites, including
+Tobin, and remaining portraits are ahead. No PixelLab calls/spend; check fresh
+costs and balance before any future paid work. Never purchase credits. Pull with
+rebase before pushing townsfolk-art. Do not merge, open a PR or close issue80.

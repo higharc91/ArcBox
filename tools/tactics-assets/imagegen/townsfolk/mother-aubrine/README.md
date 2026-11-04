@@ -1,8 +1,9 @@
 # Mother Aubrine — complete image-tool review set
 
 The owner approved the appearance: **“Looks good, continue so we can she her finished”**.
-Her complete directional/motion/portrait set is now ready for **final owner TV review**.
-This is a separate review pack; production still contains approved Bree and Halden.
+The owner then approved the complete set and TV review: **“She looks great! Who is next?”**.
+Her exact atlas and six portraits are now installed alongside approved Bree and Halden.
+The separate review pack and all original frames remain available.
 No PixelLab API call, generation debit, purchase or upgrade was made.
 
 [Watch the 16.6-second review reel](aubrine-finished-review.mp4).
@@ -83,7 +84,12 @@ existing handoff/TV-host guide. Do not call software render timings a GPU benchm
 
 ## Approval gate
 
-`install-approved.cjs` is prepared but **refuses appearance approval alone**. It
+Full-set approval is recorded in `sprite-approval.json`, including the exact owner
+quote and unchanged preview hashes. Installation and fresh production gates are
+recorded in the [installation report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
+
+
+`install-approved.cjs` **refuses appearance approval alone**. It
 requires recorded complete-set/portrait/TV approval, verifies all approved hashes,
 then installs only body/portrait images and manifest entries while keeping legacy
 assets. Its pending-approval guard was tested against the full production inventory:
@@ -91,3 +97,9 @@ no file changed. Do not bypass this gate or ask for the already-granted appearan
 approval again. After full-set approval, integrate and rerun the production asset,
 portrait, talk/contact and 512 MiB gates; update exact per-character animation
 expectations without weakening the existing Bree/Halden checks. No PR or merge.
+
+Read-only production verification after installation:
+
+```sh
+dotnet run tools/tactics-assets/imagegen/townsfolk/mother-aubrine/verify-runtime.cs -- content/tactics/base --production
+```

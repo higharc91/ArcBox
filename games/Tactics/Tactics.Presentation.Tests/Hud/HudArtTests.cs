@@ -52,6 +52,25 @@ public sealed class HudArtTests
         Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
     }
 
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Aubrines_priest_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "priest", "mother_aubrine" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/mother_aubrine_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
     [Fact]
     public void Tactical_portraits_crop_the_face_instead_of_shrinking_the_padded_frame()
     {

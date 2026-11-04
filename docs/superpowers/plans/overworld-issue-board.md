@@ -53,7 +53,7 @@ The default route uses `route.cs` navigation between authored targets, with enou
 
 ## P1: bugs and problems
 
-### OW-05 · Character memory · `approved Bree/Halden pass; recheck later cast`
+### OW-05 · Character memory · `approved Bree/Halden/Aubrine pass; recheck later cast`
 Texture memory goes from 158 MB to 350 MB with the new characters, measured on the TV. A hero is about 37.5 MB of sheets by estimate, and the pack grows from 118 MB to 179 MB, so a cold TV download is 51% larger. Fine on an RTX 5080, unknown on a TV box. Options: load only the sheets a party uses, drop frames, or smaller atlases.
 **Owner decision (issue #80):** maximum **512 MiB (536,870,912 bytes)** of TV texture memory with four members.
 On `townsfolk-art`, world sheets now resolve the actual sprite path, queue uploads within the existing texture budget, and release unused party/battle sheets. Only the current region's placed people and actual drawn heroes/creatures are requested. Fauna share one texture per source; their navigation is prepared off-thread, and their uploads are budgeted. Approved Bree is now installed; legacy sheets remain available.
@@ -77,7 +77,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `Bree and Halden approved and integrated`
+### OW-10 · Heroes and townsfolk don't match · `Bree, Halden and Aubrine approved and integrated`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -257,3 +257,20 @@ rebuild, alpha/frame/height and four-party memory checks pass:310.65MiB Ashen,
 192.37MiB Cinder below512. No production/rules/phone changes or PixelLab spend.
 A guarded installer is prepared. Other23 sprites remain. Current review:
 `docs/superpowers/reports/2026-11-03-townsfolk-art/aubrine-imagegen/report.md`.
+
+### Issue #80 — Aubrine approved; Tobin appearance pass
+
+Aubrine's finished set/native TV review was approved: “She looks great! Who is next?”.
+Her exact144-frame atlas and six40×40 portraits are installed, with both priest
+and named aliases. No completed art was regenerated. Fresh four-member production
+memory peaks **310.83MiB Ashen /192.37MiB Cinder**, below512. Cold pack
+**202,137,516bytes**, +620,068 from Bree/Halden. **111 focused tests pass**, and
+Debug/Release test-project builds have zero warnings/errors. Rules, balance and
+phone contracts unchanged. Report: `reports/2026-11-03-townsfolk-art/aubrine-installed/report.md`.
+
+The owner chose Tobin Fell next. His first image-tool eight-view appearance
+candidate is in `tools/tactics-assets/imagegen/townsfolk/tobin-fell/`, reusing the
+approved concept with exact request/hashes. Await appearance approval before
+motion generation; retain final TV/native validation gates. No Tobin production
+installation. Zero PixelLab calls/credits; other23 sprites and remaining portraits
+ahead. Keep branch only; rebase before pushing, no PR/merge/issue closure.

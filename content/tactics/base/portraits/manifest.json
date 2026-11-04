@@ -432,12 +432,12 @@
       "surprised": "merchant_surprised.png"
     },
     "priest": {
-      "idle": "priest_idle.png",
-      "hurt": "priest_hurt.png",
-      "happy": "priest_happy.png",
-      "angry": "priest_angry.png",
-      "sad": "priest_sad.png",
-      "surprised": "priest_surprised.png"
+      "idle": "mother_aubrine_idle.png",
+      "hurt": "mother_aubrine_hurt.png",
+      "happy": "mother_aubrine_happy.png",
+      "angry": "mother_aubrine_angry.png",
+      "sad": "mother_aubrine_sad.png",
+      "surprised": "mother_aubrine_surprised.png"
     },
     "guard": {
       "idle": "guard_idle.png",
@@ -519,6 +519,14 @@
     },
     "kobold_foreman": {
       "idle": "grisk.png"
+    },
+    "mother_aubrine": {
+      "idle": "mother_aubrine_idle.png",
+      "hurt": "mother_aubrine_hurt.png",
+      "happy": "mother_aubrine_happy.png",
+      "angry": "mother_aubrine_angry.png",
+      "sad": "mother_aubrine_sad.png",
+      "surprised": "mother_aubrine_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

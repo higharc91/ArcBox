@@ -1,5 +1,5 @@
 #:project ../../../../../games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj
-// Read-only integration checks against an explicit separate review pack.
+// Read-only integration checks against an explicit review or production pack.
 using System.Numerics;
 using Tactics.Game;
 using Tactics.Logic;
@@ -7,11 +7,14 @@ using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
 using Tactics.Presentation.World;
 
-if (args.Length != 1) throw new ArgumentException("Pass the separate Aubrine review pack.");
+if (args.Length is < 1 or > 2 || (args.Length == 2 && args[1] != "--production"))
+    throw new ArgumentException("Pass the Aubrine review pack, or the production pack followed by --production.");
+var production = args.Length == 2;
+var fileStem = production ? "mother_aubrine" : "review_aubrine";
 var root = Path.GetFullPath(args[0]);
 var art = UnitArt.Load(root);
 var sprite = art.Sprite("characters.priest") ?? throw new InvalidDataException("Missing Aubrine.");
-Need(sprite.Path == "creatures/review_aubrine.png", "Review body is not selected for the priest.");
+Need(sprite.Path == $"creatures/{fileStem}.png", "Expected body is not selected for the priest.");
 Need(ReferenceEquals(sprite, art.Sprite("characters.mother_aubrine")), "Named alias differs.");
 Need(sprite.Width == 96 && sprite.Height == 96 && sprite.Columns == 18 && sprite.RowsPerDirection == 1, "Wrong frame layout.");
 Need(sprite.PixelScale == .5f && sprite.AnchorX == 48 && sprite.AnchorY == 84, "Wrong native scale/anchor.");
@@ -29,7 +32,7 @@ var hud = HudArt.Load(root, art);
 foreach (var mood in new[] { "idle", "hurt", "happy", "angry", "sad", "surprised" })
 {
     var face = hud.Speaker("priest", mood, "ally") ?? throw new InvalidDataException($"Missing {mood} portrait.");
-    Need(face.Path == $"portraits/review_aubrine_{mood}.png" && face.Source.Width == 40 && face.Source.Height == 40, "Wrong portrait selection or frame.");
+    Need(face.Path == $"portraits/{fileStem}_{mood}.png" && face.Source.Width == 40 && face.Source.Height == 40, "Wrong portrait selection or frame.");
     Need(File.Exists(Path.Combine(root, face.Path)), "Missing portrait file.");
 }
 var ground = RulesPack.Load([Path.Combine(root, "rules")], ArtManifests.Load(root)).GroundFor("ashen_ford")!;
@@ -47,5 +50,5 @@ Need(first.Anim == sprite.Anims["talk"] && held.Anim == first.Anim, "Bark did no
 Need(first.Row is >= 0 and < 8 && !first.Mirror, "Bark did not select a real facing.");
 var resumed = people.Units(time + 2.02, around, [], leader: new Tile(33, 58)).Single();
 Need(resumed.Anim == sprite.Anims["walk"] && Vector2.Distance(held.Feet, resumed.Feet) < 2, "Route did not resume smoothly.");
-Console.WriteLine("""{"result":"PASS","directions":8,"sourceFrames":144,"playback":"10 idle / 6 walk / 10 talk","portraits":6,"barkStopResume":"PASS","nativeScale":0.5,"productionInstalled":false}""");
+Console.WriteLine("""{"result":"PASS","directions":8,"sourceFrames":144,"playback":"10 idle / 6 walk / 10 talk","portraits":6,"barkStopResume":"PASS","nativeScale":0.5,"packMode":"PACK_MODE"}""".Replace("PACK_MODE", production ? "production" : "review"));
 static void Need(bool condition, string message) { if (!condition) throw new InvalidDataException(message); }
