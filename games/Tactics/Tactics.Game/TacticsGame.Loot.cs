@@ -79,7 +79,8 @@ public sealed partial class TacticsGame
             var player = PlayerName(m);
             return new SceneOption(m, player == character || player == m ? character : $"{character} ({player})", "taken", null, [], [], OptionTags.None, null);
         });
-        var line = new SceneLine($"{LootVoteId}.{loot.Seq}", SceneDef.Narrator, $"From the {item.From}: {LootLabel(item)}. {question}", SceneLine.DefaultMood);
+        var from = item.From.Length == 0 ? "" : $"{char.ToUpperInvariant(item.From[0])}{item.From[1..]}: {LootLabel(item)}. ";
+        var line = new SceneLine($"{LootVoteId}.{loot.Seq}", SceneDef.Narrator, from + question, SceneLine.DefaultMood);   // "Chest: Smoke Bomb. Who takes…?"
         return new SceneDef(LootVoteId, "", null, question, [], [], [SceneDef.Narrator], "ask",
             [new SceneNode("ask", [line], [], [.. options], true, null, false)], false);
     }
