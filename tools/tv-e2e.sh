@@ -431,6 +431,7 @@ DECISIONS_ENV=
 if [[ "$DECISIONS" == "1" ]]; then
   CONTENT="$OUT/content"
   BASE="$ROOT/content/tactics/base"
+  rm -rf "$CONTENT"     # a reused ARCBOX_E2E_OUT: the links are made again
   mkdir -p "$CONTENT/tactics/base/rules/interactables"
   for entry in "$ROOT/content"/*; do [[ "$(basename "$entry")" == "tactics" ]] || ln -s "$entry" "$CONTENT/"; done
   for entry in "$BASE"/*; do [[ "$(basename "$entry")" == "rules" ]] || ln -s "$entry" "$CONTENT/tactics/base/"; done

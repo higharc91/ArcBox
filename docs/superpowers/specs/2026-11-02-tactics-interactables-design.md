@@ -214,10 +214,11 @@ kind no longer has (a content change) reads as the start.
 
 **It never goes back** (`Interactables.Regressed`): found stays found, unlocked stays unlocked, a trap stays dealt with, a key used stays used,
 and the state only moves forward in its kind's order. Only a lever and the passages it works go both ways. **The one sanctioned way back is a
-long rest** (USER DECISION 2, decided): `Rest` is the long rest (`WorldSave.RestSeq`, which every camp and inn dawn counts up) its failed
-pick, force or seal and its failed search were spent in, so "spent" means "spent until the next rest". The game reads every thing through
-`Interactables.Rested`, which reopens them once a later rest has come, and stamps the rest they were reopened at. An old save reads as spent
-at rest 0, which the next rest clears. A failed disarm is never reopened (its trap went off).
+long rest** (USER DECISION 2, decided): `Rest` names the long rest (`WorldSave.RestSeq`, which every camp and inn dawn counts up) that
+reopens its failed pick, force or seal and its failed search: the one after they failed (`RestSeq + 1`), so "spent" means "spent until the
+next rest". The game reads every thing through `Interactables.Rested`, which reopens them once that rest has come and moves `Rest` on, so
+it only goes up. A save from before this names no rest (0): the document stamps it with the next rest as it's read
+(`Interactables.Stamped`), so what failed then reopens at the next rest, not at once. A failed disarm is never reopened (its trap went off).
 
 ### 2.4 Walking: the overlay
 
@@ -318,16 +319,22 @@ When a container, a cache, a pickup or a quest's reward (or a conversation's `gi
 (`LootSave`: the items in the order found, who found each, and the cursor the vote set aside), and once the scene that found it is over a
 short **party vote** asks "Who takes the Potion of Healing?" on the 5d vote screen (the phone's vote gains optional `question` and `vote`).
 The options are the players here who have a character, labelled by their character. **15 seconds**; nobody answering gives it to whoever
-found it (the opener, or for a quest whoever turned it in), else the leader; a tie goes to the leader's pick, as any vote's. **One vote per
+found it (the opener, or for a quest whoever turned it in), else the leader, else the first here; a tie goes to the leader's pick, else
+the leader, else the first tied. Only the players **here** with a character count, as votes and as takers: a vote from someone who left
+counts for nothing, and with nobody here the item waits for the next walk with someone in it. **One vote per
 loot line, in order** (a stack such as "2 × Potion of Healing" is one vote): one combined screen wasn't simpler, since the 5d vote is one
 question. A **party of one** takes it at once, with no vote. **Gold** is never voted on: it's split across the purses as before; the Ashmaw
 trinkets are per class and unchanged. An item leaves the waiting list in the same save that puts it in its taker's bag, so a restart, a
 reconnect or End session asks the same item again and never gives one twice (the interact model test checks bags plus waiting items).
+Items paid while walking (a quest finished by a step's flags) are asked about straight after that action, not at the end of the next scene.
+A world recovery mid-vote keeps the items and drops the vote and its cursor, and the next walk asks again. A conversation that gives an
+item and opens a shop, inn or temple opens it after the last item's vote (`LootSave.Service`, saved with the vote). A trap a roll sets off
+(a failed disarm) hurts whoever rolled, not whoever began the interaction.
 
 ### 3.2 USER DECISION 2, decided 2026-11-03: failed ways reopen after a rest
 
 A failed pick, force or seal on a lock, and a failed Search on a thing, are spent until the party's **next long rest** (a camp or an inn
-night): `InteractableSave.Rest` keeps the rest they were spent in (§2.3), and a later rest reopens them. A failed disarm still springs the
+night): `InteractableSave.Rest` names the rest that reopens them (§2.3). A failed disarm still springs the
 trap, which is then spent for good. The line for a lock with nothing left says "…until the party has rested."
 
 ### 3.3 USER DECISION 3, decided 2026-11-03: a trap's minor injury

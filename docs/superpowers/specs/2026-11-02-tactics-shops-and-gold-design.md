@@ -127,7 +127,8 @@ haggled; the haggle plays as a story scene over the open shop (the check is deci
 best bonus if nobody picks), and the shop comes back with its result. `ShopCursor` keeps `Haggle` (who rolled, the die, the bonus, the DC,
 pass or fail), `Haggling` while the check plays and `Under` (the story cursor it set aside), so a restart shows the saved roll or the pick
 again and never rolls twice, a reconnect holds the check while nobody is here, and End session keeps it for the next night. Prices:
-`ShopRules.Buy(item, shop, haggled)` is `ceil(price × priceMod × 0.9)`, and `Sell` is `floor(plain buy × sellRatio × 1.1)`. The phones get
+`ShopRules.Buy(item, shop, haggled)` is `ceil(price × priceMod × 0.9)`, and `Sell` is `floor(plain buy × sellRatio × 1.1)`, never more than
+that visit's buy price for the same item (at a sell ratio near 1 a haggle would otherwise pay out more than it charges). The phones get
 `haggle: { can, dc, result }` on the shop screen (the five shop fixtures gained it) and the adjusted prices; the TV's shop panel shows the
 result and its prices, and waits behind the check while it's rolled. An inn and a temple (services only) have nothing to haggle over, and
 service prices (rooms, cures) don't haggle. A new visit may haggle again.
