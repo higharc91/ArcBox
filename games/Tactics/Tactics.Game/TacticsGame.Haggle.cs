@@ -136,7 +136,7 @@ public sealed partial class TacticsGame
         {
             can = CanHaggle && profile.Value == _lead,
             dc = shop.Haggle ?? ShopRules.DefaultHaggleDc,
-            result = result is null ? null : new { member = result.Member, name = result.Name, die = result.Die, bonus = result.Bonus, total = result.Die + result.Bonus, passed = result.Passed },
+            result = result is null ? null : new { member = result.Member, name = result.Name, die = result.Die, bonus = result.Bonus, total = result.Die + result.Bonus, dc = result.Dc, passed = result.Passed },
         };
     }
 }

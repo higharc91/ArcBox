@@ -49,10 +49,10 @@ it("lets the leader haggle once a visit, and shows what came of it with the serv
   const { rerender } = render(<Shop data={{ ...data, haggle }} send={send} stream={send} viewId="one" />);
   fireEvent.click(screen.getByRole("button", { name: "Haggle · Persuasion DC 15" }));
   expect(send).toHaveBeenLastCalledWith("shopHaggle", { shop: "herbalist" });
-  const passed = { can: false, dc: 15, result: { member: "me", name: "Ana", die: 14, bonus: 3, total: 17, passed: true } };
+  const passed = { can: false, dc: 15, result: { member: "me", name: "Ana", die: 14, bonus: 3, total: 17, dc: 12, passed: true } };   // the DC it was rolled against
   rerender(<Shop data={{ ...data, haggle: passed, items: [{ ...data.items[0]!, price: 45 }] }} send={send} stream={send} viewId="two" />);
   expect(screen.queryByRole("button", { name: /Haggle/ })).toBeNull();
-  expect(screen.getByText(/Ana rolled 14 \+ 3 = 17 vs DC 15/)).toBeTruthy();
+  expect(screen.getByText(/Ana rolled 14 \+ 3 = 17 vs DC 12/)).toBeTruthy();
   expect(screen.getByText("45 gold each · 2 in stock")).toBeTruthy();
   rerender(<Shop data={{ ...data, leader: false, haggle: { ...haggle, can: false } }} send={send} stream={send} viewId="three" />);
   expect(screen.getByText("The leader can haggle once this visit (Persuasion DC 15).")).toBeTruthy();

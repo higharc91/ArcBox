@@ -10,7 +10,7 @@ interface ShopRow { item: string; name: string; price: number; count: number; ca
 /** This visit's haggle (the owner's decision E, 2026-11-03): whether this phone may start it, its DC, and what came of it. */
 interface HaggleData {
   can: boolean; dc: number;
-  result: { member: string; name: string; die: number; bonus: number; total: number; passed: boolean } | null;
+  result: { member: string; name: string; die: number; bonus: number; total: number; dc?: number; passed: boolean } | null;
 }
 interface ShopData extends ServiceData {
   shop: { id: string; name: string; keeper: string; greeting: string };
@@ -24,7 +24,7 @@ interface ShopData extends ServiceData {
 function Haggle({ haggle, send, shop, pending }: { haggle: HaggleData; send: CustomScreenProps["send"]; shop: string; pending: boolean }) {
   const r = haggle.result;
   return <div class="tx-shop-haggle" role="status">
-    {r ? <p><b>{r.passed ? "Haggled" : "No deal"}</b>{` · ${r.name} rolled ${r.die} + ${r.bonus} = ${r.total} vs DC ${haggle.dc}. `}
+    {r ? <p><b>{r.passed ? "Haggled" : "No deal"}</b>{` · ${r.name} rolled ${r.die} + ${r.bonus} = ${r.total} vs DC ${r.dc ?? haggle.dc}. `}
       {r.passed ? "A tenth off what you buy, a tenth more for what you sell, this visit." : "Prices stand. No harm done."}</p>
       : haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
         {`Haggle · Persuasion DC ${haggle.dc}`}</button>

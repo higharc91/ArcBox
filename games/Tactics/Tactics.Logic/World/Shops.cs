@@ -64,9 +64,12 @@ public static class ShopRules
         => checked((int)decimal.Ceiling((item.Price ?? throw new RulesInvariantException("An unpriced item cannot be traded.")) * shop.PriceMod
             * (haggled ? HaggleBuy : 1m)));
 
-    /// <summary>The sale price, rounded down to whole gold: the shop's ratio of its plain price, and a tenth more after a haggle that passed.</summary>
+    /// <summary>
+    /// The sale price, rounded down to whole gold: the shop's ratio of its plain price, and a tenth more after a haggle that passed; never more
+    /// than the shop asks for the same item on that visit, so nothing can be bought and sold back at a profit.
+    /// </summary>
     public static int Sell(ItemDef item, ShopDef shop, bool haggled = false)
-        => checked((int)decimal.Floor(Buy(item, shop) * shop.SellRatio * (haggled ? HaggleSell : 1m)));
+        => Math.Min(checked((int)decimal.Floor(Buy(item, shop) * shop.SellRatio * (haggled ? HaggleSell : 1m))), Buy(item, shop, haggled));
 
     /// <summary>Whether the shop exists with these flags.</summary>
     public static bool Present(ShopDef shop, IReadOnlySet<string> flags)

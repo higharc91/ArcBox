@@ -46,6 +46,29 @@ public sealed class ShopRulesTests
         Assert.Null(shop.Haggle);
     }
 
+    /// <summary>Nothing can be bought and sold back at a profit, haggled or not, at any sale ratio the loader takes (0 to 1) and any mark-up.</summary>
+    [Fact]
+    public void A_sale_never_pays_more_than_the_same_visit_asks_for_the_item()
+    {
+        foreach (var ratio in Enumerable.Range(0, 21).Select(i => i * 0.05m))
+            foreach (var mod in new[] { 0.5m, 0.75m, 1m, 1.25m, 2m })
+                for (var price = 1; price <= 300; price++)
+                {
+                    var item = new ItemDef(new("potion"), "Potion", new("use"), Ordinal.Set("potion"), Price: price);
+                    var shop = new ShopDef("test", "Test", new(Person: 0), [], ["potion"], PriceMod: mod, SellRatio: ratio);
+                    foreach (var haggled in new[] { false, true })
+                    {
+                        var (buy, sell) = (ShopRules.Buy(item, shop, haggled), ShopRules.Sell(item, shop, haggled));
+                        Assert.True(sell <= buy, $"price {price}, mod {mod}, ratio {ratio}, haggled {haggled}: sells for {sell}, buys for {buy}");
+                        Assert.True(sell >= 0);
+                    }
+                }
+        // The review's case: a ratio of 1 and a price of 10 would have sold for 11 against a buy of 9.
+        var ten = new ItemDef(new("potion"), "Potion", new("use"), Ordinal.Set("potion"), Price: 10);
+        var even = new ShopDef("test", "Test", new(Person: 0), [], ["potion"], SellRatio: 1m);
+        Assert.Equal((9, 9), (ShopRules.Buy(ten, even, true), ShopRules.Sell(ten, even, true)));
+    }
+
     [Theory]
     [InlineData("\"priceMod\": 0", "/priceMod")]
     [InlineData("\"priceMod\": 5", "/priceMod")]
