@@ -333,13 +333,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
     public override void _ExitTree()
     {
         _closing.Cancel();
-        if (!_adopted && _building is { IsCompletedSuccessfully: true } built)
+        if (!_adopted && _building is { } building)
         {
-            // Made for a world that never opened, out of the tree: nothing else frees them.
-            foreach (var node in built.Result.Blocks.Concat<Node>([built.Result.Over, built.Result.Ambient]))
-            {
-                node.QueueFree();
-            }
+            // Made for a world that never opened, out of the tree: nothing else frees them, whether the build is done or finishes later.
+            building.ContinueWith(t => Abandon(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
         }
         _blocks.Clear();
         _recording.Clear();
@@ -400,18 +397,49 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var herded = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
 
-        // Its nodes too, out of the tree, which Godot allows off the main thread: made there, their first use cost a frame twice over (OW-12).
-        // The main thread only adds them.
-        var blocks = plan.Blocks.Select(b => new WorldBlock(_painter, items[b.Index], b.Z * BlockDepth)).ToArray();
-        var overZ = plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
-        var over = new BoardCanvas(_painter) { ZIndex = overZ };
-        over.JoinWorld(plan.Lighting.Active ? plan.Lighting : null);
-        var light = plan.Lighting.Ambient;
-        var calls = new WorldAmbient(ambient, System.IO.Path.Combine(_painter.Root, "ambient"), _painter.Root, ground.Map, new Color(light.R, light.G, light.B), overZ,
-            home => herd.PlaceOf(home) is { } place ? new Vector2(place.Feet.X, place.Feet.Y) : null);
-        var noded = clock.Elapsed.TotalMilliseconds;
-        return new Built(ground, plan, items, new PropFade(plan), herd, blocks, over, calls,
-            $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, herd {herded - preparedTime:0} ms, nodes {noded - herded:0} ms, total {noded:0} ms");
+        // Its nodes too, out of the tree: made there, their first use cost a frame twice over (OW-12). The main thread only adds them.
+        // THE RULE (docs/tv-host.md, "The world's build thread"): under Godot's default "Safe" thread model this thread may create nodes,
+        // materials and canvas items that aren't in the tree, and set their properties. It must never call a RenderingServer getter, create or
+        // upload a texture, add to the tree, or rely on the "Unsafe" thread model. If the world closes meanwhile, or anything throws, what was
+        // made is freed here, and what's returned unadopted is freed by _ExitTree.
+        var made = new List<Node>();
+        try
+        {
+            var blocks = new WorldBlock[plan.Blocks.Length];
+            foreach (var b in plan.Blocks)
+            {
+                made.Add(blocks[b.Index] = new WorldBlock(_painter, items[b.Index], b.Z * BlockDepth));
+            }
+            var overZ = plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
+            var over = new BoardCanvas(_painter) { ZIndex = overZ };
+            made.Add(over);
+            over.JoinWorld(plan.Lighting.Active ? plan.Lighting : null);
+            var light = plan.Lighting.Ambient;
+            var calls = new WorldAmbient(ambient, System.IO.Path.Combine(_painter.Root, "ambient"), ground.Map, new Color(light.R, light.G, light.B), overZ,
+                home => herd.PlaceOf(home) is { } place ? new Vector2(place.Feet.X, place.Feet.Y) : null);
+            made.Add(calls);
+            closing.ThrowIfCancellationRequested();
+            var noded = clock.Elapsed.TotalMilliseconds;
+            return new Built(ground, plan, items, new PropFade(plan), herd, blocks, over, calls,
+                $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, herd {herded - preparedTime:0} ms, nodes {noded - herded:0} ms, total {noded:0} ms");
+        }
+        catch
+        {
+            foreach (var node in made)
+            {
+                node.Free();    // out of the tree, so freeing here is safe, and a node takes its children with it
+            }
+            throw;
+        }
+    }
+
+    /// <summary>Frees the nodes a build made for a world that never took them: on the main thread, at the frame's end.</summary>
+    private static void Abandon(Built built)
+    {
+        foreach (var node in built.Blocks.Concat<Node>([built.Over, built.Ambient]))
+        {
+            node.CallDeferred(Node.MethodName.QueueFree);
+        }
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
@@ -619,7 +647,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         else if (_ambient?.LoadNext() == true)
         {
-            // an animal's call
+            _texture++;     // an ambient image or an animal's call: it counts as progress, or the loading watch sees a stall
         }
         else
         {

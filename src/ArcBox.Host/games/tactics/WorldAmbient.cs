@@ -42,7 +42,8 @@ internal sealed partial class WorldAmbient : Node2D
     private AmbientItem[] _items = [];
 
     /// <param name="animalAt">Where the animal that lives on a tile is now, in art pixels, so its call comes from it.</param>
-    public WorldAmbient(AmbientPlan? plan, string ambientRoot, string packRoot, BattleMap map, Color light, int zIndex, Func<Tile, Vector2?> animalAt)
+    /// <param name="ambientRoot">The pack's <c>ambient</c> folder: the calls are in <c>sfx</c> beside it.</param>
+    public WorldAmbient(AmbientPlan? plan, string ambientRoot, BattleMap map, Color light, int zIndex, Func<Tile, Vector2?> animalAt)
     {
         _plan = plan;
         _ambientRoot = ambientRoot;
@@ -61,7 +62,7 @@ internal sealed partial class WorldAmbient : Node2D
                 "red_fox" => ("animal_fox_yip", -24f, 10, 15, 80, 60),
                 _ => throw new InvalidOperationException($"No ambient call for '{prop.Id}'."),
             };
-            var path = System.IO.Path.Combine(packRoot, "sfx", $"{id}.wav");
+            var path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(ambientRoot.TrimEnd(System.IO.Path.DirectorySeparatorChar)) ?? "", "sfx", $"{id}.wav");
             if (!System.IO.File.Exists(path) || !map.InBounds(prop.At))
                 continue;
 
@@ -80,17 +81,27 @@ internal sealed partial class WorldAmbient : Node2D
             _animalCalls.Add(new AnimalCall(player, path, prop.At, new Vector2(ground.X + 32, ground.Y + 16), HashCode.Combine(prop.At.X, prop.At.Y, prop.Id.GetHashCode(StringComparison.Ordinal)),
                 firstDelay, firstSpread, interval, intervalSpread));
         }
-    }
 
-    public override void _Ready()
-    {
+        // Its children are its own from the start, out of the tree: freed unadopted (the world closing as it was built), it takes them with it.
         AddChild(_glow);
-        _glow.Draw += () => DrawItems(_glow, add: true);
         foreach (var call in _animalCalls)
         {
             call.Player.Position = call.Position;
             AddChild(call.Player);
         }
+    }
+
+    public override void _Ready() => _glow.Draw += () => DrawItems(_glow, add: true);
+
+    /// <summary>Lets go of its images now, as the board's painter does, rather than when the collector comes round.</summary>
+    public override void _ExitTree()
+    {
+        foreach (var texture in _textures.Values.OfType<Texture2D>())
+        {
+            texture.Dispose();
+        }
+        _textures.Clear();
+        _paths = null;
     }
 
     /// <summary>Reads the next animal call's sound, once each; false when there's none left. The world calls it with its textures, within their budget.</summary>
