@@ -308,8 +308,11 @@ public sealed class AmbientPlan
         {
             foreach (var (tile, spot, h, _) in _steam)
             {
-                if (InView(spot, 48))
-                    result.Add(Strip(steamAsset, steamKind, steamVariant, tile, spot, (int)(clock * steamAsset.Fps) + h, steamKind == "river_steam" ? 1 : SteamAlpha, (h & 2) == 0));
+                if (!InView(spot, 48))
+                    continue;
+                var plume = Strip(steamAsset, steamKind, steamVariant, tile, spot, (int)(clock * steamAsset.Fps) + h, steamKind == "river_steam" ? 1 : SteamAlpha, (h & 2) == 0);
+                // The river's mist is faint by design (alpha at most 60 of 255): in the dusk's light it was lost on the water, so it catches the light as a glow does.
+                result.Add(steamKind == "river_steam" ? plume with { Add = true } : plume);
             }
         }
 
