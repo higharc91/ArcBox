@@ -1,5 +1,5 @@
 {
-  "status": "candidate 2 appearance approved; matching idle complete; motion and TV review pending",
+  "status": "candidate 1 appearance approved; existing idle reused; motion and TV review pending",
   "character": "character_bree_tallow",
   "approvedConceptAsset": "asset_5BTscGVgZiaVkGpPJb65F1X1",
   "conceptSha256": "9f4b30a04a1d4509b0beb53f3c216514ada18e5c34be85d9428a929225186ba5",
@@ -26,7 +26,7 @@
   },
   "integrationApproved": false,
   "staticJobId": "f4e7da2d-389f-40e7-8814-04e2e040dac0",
-  "idleJobId": "5ecd93c3-7b90-4a78-bbd8-c910593160e0",
-  "selectedCandidate": 2,
-  "previousIdleJobId": "67e30958-824f-4ac1-a27f-611943cd3617"
+  "idleJobId": "67e30958-824f-4ac1-a27f-611943cd3617",
+  "selectedCandidate": 1,
+  "previousIdleJobId": "5ecd93c3-7b90-4a78-bbd8-c910593160e0"
 }

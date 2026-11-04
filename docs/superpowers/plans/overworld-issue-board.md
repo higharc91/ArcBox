@@ -98,10 +98,10 @@ passes and the guarded resume reports zero missing primary sheets. The remaining
 17 character/preset designs and child-B supplement were approved on 2026-11-03
 (“yes, tthose look good. Proceed”). Paired-sheet view gaps still need directional
 pixel review. PixelLab is now authenticated via local owner-supplied configuration.
-Bree has four static candidates (15 generations); the owner selected candidate 2.
-The earlier candidate-1 idle cost 2 generations. A matching candidate-2 idle
-completed for 2 more generations (19 total). Motion/TV approval and integration remain
-pending. See
+Bree has four static candidates (15 generations); the owner switched back to
+candidate 1 after trying candidate 2. Both idle studies are retained (2 generations
+each, 19 total); the existing candidate-1 idle is reused without new spending.
+Motion/TV approval and integration remain pending. See
 `tools/tactics-assets/concepts/townsfolk/README.md` for prompts, receipts and comparison.
 **Done when:** both art stages are approved, the town reads as one style, optional
 variants round-trip through the editor, and OW-05's memory/download checks pass.
