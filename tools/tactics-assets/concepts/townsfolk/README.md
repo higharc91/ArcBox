@@ -46,7 +46,8 @@ finished pixel sprite's height or animation.
    [batch-prices.json](batch-prices.json) records all 18 quotes. The dry runs spent
    no credits and submitted no generation jobs. The owner approved the full
    234 CU batch: “Approve the full 234 CU batch.” See `approvals.json`.
-3. Owner approves concepts per character/preset, then PixelLab trials begin.
+3. All concepts, including the child-B supplement, are approved on 2026-11-03:
+   “yes, tthose look good. Proceed”. Prepare the Bree PixelLab pilot next.
 4. Review idle, walk and named gesture motion beside the party on the real TV.
 5. Integrate only approved sheets/portraits and optional placement variants.
 
@@ -98,14 +99,16 @@ consumption agrees with successful output receipts (`billing-final.json`).
   and costs for all 19 primary sheets and the supplemental views.
 - `resume-batch.cjs`: **zero missing sheets**, with existing images, results,
   recovered assets and outstanding jobs excluded from generation.
-- Bree and Mother Skarrow are approved; the remaining **17 character/preset
-  designs** await owner review. No NPC PixelLab jobs have run.
+- **All 19 primary designs and the child-B supplement are approved.** Approval
+  evidence and selected asset IDs are in `approvals.json`. No NPC PixelLab jobs
+  have run. [Bree pilot inputs](../../pixellab/townsfolk/README.md) are prepared;
+  PixelLab connection/sign-in is required to submit.
 
 ## Visual review notes and remaining work
 
-1. **Owner concept approval:** review named faces, ages and silhouettes. Several
-   adults inherited grey hair/braided silhouettes from the anchor; these are
-   proposals rather than new lore. Retain or change them explicitly before pixels.
+1. **Owner concept approval complete:** the displayed faces, ages and silhouettes
+   are approved. Several adults share grey hair/braided silhouettes with the
+   anchor; preserve the selected designs without making new lore claims.
 2. **Paired sheet coverage:** barmaid, farmer and merchant distribute views across
    the two variants rather than giving each a complete three-view turnaround.
    Their two designs are visible, but missing angles must be checked during the

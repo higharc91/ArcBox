@@ -17,6 +17,9 @@ for (const item of all) {
   const receipt = read(anchor ? 'bree-result.json' : `generated/${item.id}-result.json`);
   assert.equal(receipt.status, 'success', item.id);
   const assetId = anchor ? receipt.asset_id : receipt.assetIds[0];
+  if (approvals[item.id]?.status === 'approved') {
+    assert.equal(approvals[item.id].asset_id, assetId, `Approval refers to a different asset: ${item.id}`);
+  }
   assert(!assets.has(assetId), `One output reused for different people: ${item.id}`);
   assets.add(assetId);
   const bytes = fs.readFileSync(path.join(__dirname, imagePath));
@@ -39,6 +42,9 @@ for (const item of all) {
 }
 const supplement = read('supplements/child-b-result.json');
 assert.equal(supplement.status,'success');
+if (approvals.townsfolk_child_b_body?.status === 'approved') {
+  assert.equal(approvals.townsfolk_child_b_body.asset_id, supplement.assetIds[0], 'Child-B approval asset mismatch');
+}
 const supplementBytes = fs.readFileSync(path.join(__dirname,'supplements/child-b.png'));
 assert.equal(supplementBytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
 assert(Math.max(supplementBytes.readUInt32BE(16),supplementBytes.readUInt32BE(20))>=1024);
@@ -48,6 +54,7 @@ const result = { concepts:inventory.length, named:queue.named.length, paired_tow
   batchCU,totalWithAnchorCU:batchCU+read('bree-result.json').actualCU,
   unspentAuthorizedCU:approvals.concept_batch_2026_11_03.maximumCU-batchCU,
   supplemental_views:[{id:'townsfolk_child_b_body',asset_id:supplement.assetIds[0],output:'supplements/child-b.png',
-    sha256:crypto.createHash('sha256').update(supplementBytes).digest('hex'),issue80CU:supplement.cuCost}],inventory };
+    sha256:crypto.createHash('sha256').update(supplementBytes).digest('hex'),issue80CU:supplement.cuCost,
+    design_approval:approvals.townsfolk_child_b_body?.status??'pending'}],inventory };
 fs.writeFileSync(path.join(__dirname,'verified-inventory.json'),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify({concepts:result.concepts,batchCU,totalWithAnchorCU:result.totalWithAnchorCU,unspentAuthorizedCU:result.unspentAuthorizedCU}));

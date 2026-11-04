@@ -11,7 +11,8 @@
       "asset_id": "asset_47t1A6WA7xbnU5NVXxUg3uZK",
       "output": "supplements/child-b.png",
       "sha256": "74435f76394b0ad3b34ba3334da965284dc619eed7156786375392b19f3ca147",
-      "issue80CU": 9
+      "issue80CU": 9,
+      "design_approval": "approved"
     }
   ],
   "inventory": [
@@ -49,7 +50,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_tobin_fell",
@@ -61,7 +62,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_lark",
@@ -73,7 +74,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_corvin_ashby",
@@ -85,7 +86,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_pip_ashdown",
@@ -97,7 +98,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_halden_varrow",
@@ -109,7 +110,7 @@
       "reused": true,
       "issue80CU": 0,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_dagna_holt",
@@ -121,7 +122,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_celandine_marrowby",
@@ -133,7 +134,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_old_maud",
@@ -145,7 +146,7 @@
       "reused": true,
       "issue80CU": 0,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "character_rook",
@@ -157,7 +158,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_barmaid",
@@ -169,7 +170,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_child",
@@ -181,7 +182,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_farmer",
@@ -193,7 +194,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_farmhand",
@@ -205,7 +206,7 @@
       "reused": false,
       "issue80CU": 9,
       "resolution": "1K study",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_fisher",
@@ -217,7 +218,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_guard",
@@ -229,7 +230,7 @@
       "reused": false,
       "issue80CU": 9,
       "resolution": "1K study",
-      "design_approval": "pending"
+      "design_approval": "approved"
     },
     {
       "id": "townsfolk_merchant",
@@ -241,7 +242,7 @@
       "reused": false,
       "issue80CU": 13,
       "resolution": "2K",
-      "design_approval": "pending"
+      "design_approval": "approved"
     }
   ]
 }

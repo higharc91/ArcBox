@@ -38,7 +38,7 @@ foreach ($group in $groups) {
     }
 }
 if (Test-Path (Join-Path $PSScriptRoot 'supplements/child-b.png')) {
-    & (Join-Path $PSScriptRoot 'make-review.ps1') -Concept (Join-Path $PSScriptRoot 'supplements/child-b.png') -Preset child -Name 'Child variant B - missing body views completed' -ReviewStem child-b-supplement -DesignStatus pending
-    $index += @('', '## Child B body-view supplement', '', 'The original paired child sheet supplied only the face of variant B. This study completes the body views of that same character, using the original image as its reference. It requires owner design approval.', '', '![Child B supplement](child-b-supplement-review.jpg)')
+    & (Join-Path $PSScriptRoot 'make-review.ps1') -Concept (Join-Path $PSScriptRoot 'supplements/child-b.png') -Preset child -Name 'Child variant B - missing body views completed' -ReviewStem child-b-supplement -DesignStatus $approvals.townsfolk_child_b_body.status
+    $index += @('', '## Child B body-view supplement', '', 'The original paired child sheet supplied only the face of variant B. This study completes the body views of that same character, using the original image as its reference. Its design is approved; pixel art still requires owner review.', '', '![Child B supplement](child-b-supplement-review.jpg)')
 }
 [System.IO.File]::WriteAllText((Join-Path $PSScriptRoot 'review-index.md'), ([string]::Join([char]10,$index) + [char]10), [System.Text.UTF8Encoding]::new($false))

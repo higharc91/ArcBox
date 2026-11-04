@@ -1,0 +1,22 @@
+{
+  "status": "prepared; generation not submitted",
+  "character": "character_bree_tallow",
+  "approvedConceptAsset": "asset_5BTscGVgZiaVkGpPJb65F1X1",
+  "conceptSha256": "9f4b30a04a1d4509b0beb53f3c216514ada18e5c34be85d9428a929225186ba5",
+  "heroAtlas": "content/tactics/base/tactical/human_fighter.png",
+  "heroAtlasSha256": "68627c124f04b3ca6eec05bcdb5133a829aab16bc23308857625a52cea61bf5f",
+  "heroFrame": {
+    "width": 160,
+    "height": 160,
+    "anchor": [
+      80,
+      123
+    ]
+  },
+  "heroPixelScale": 0.5,
+  "heroHeadY": 51,
+  "heroHeadToFootWorldPixels": 36.0,
+  "pilotScope": "One static facing, then one short idle or walk only after static inspection. Live schema and price required before submission.",
+  "generationCost": null,
+  "integrationApproved": false
+}

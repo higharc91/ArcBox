@@ -23,5 +23,149 @@
     "owner_quote": "yes, her design looks correct",
     "asset_id": "asset_5BTscGVgZiaVkGpPJb65F1X1",
     "scope": "Bree's concept design and its use as the series style reference. Further generation spend and pixel art require separate approval."
+  },
+  "character_mother_aubrine": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_yRTrJMK4YQNcXqkSLGKz91TA",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_tobin_fell": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_X6bvcSHQJ1598T1R6cDJpXrn",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_lark": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_Gh8MqdXaNUNnsvkspxZaW99f",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_corvin_ashby": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_GxHJtN3bCUnNoKnKBtp4fTNN",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_pip_ashdown": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_M46H6Z81bjHjY8grk1Q1WDum",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_halden_varrow": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_D2Ptf1BdfWKJfpFussoh9prg",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_dagna_holt": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_7ZqC68RX7hGZYDYEGFHo9bG2",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_celandine_marrowby": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_YruSooVTggnKYckp9MCXFbLX",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_old_maud": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_5StWG7pyvVrtbPP99aYXWdjc",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "character_rook": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_3nDGGxN4MkZJLgNs5UrRfEgX",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_barmaid": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_n3dLtuKbbbp6LsZubx18uHXa",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_child": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_3T7wEASHCLbqu2Acf8bTFEFm",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_farmer": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_Xo52UhVbZCE1iszTTthJ2Neu",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_farmhand": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_mv9S9tjfZgKg6TQRXVGfxRpy",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_fisher": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_GidC2ZUuLboSNrTQjxANeGaz",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_guard": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_HmNMxvH1nHf4hKtCHriFAvEw",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_merchant": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_GD2G5XRcZk92X1tecdHy2KF3",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
+  },
+  "townsfolk_child_b_body": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, tthose look good. Proceed",
+    "asset_id": "asset_47t1A6WA7xbnU5NVXxUg3uZK",
+    "scope": "Displayed concept design, including paired variants where applicable. Proceed to PixelLab pilot; pixel art, animation and integration still require review."
   }
 }

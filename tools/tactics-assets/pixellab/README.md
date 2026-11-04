@@ -2,10 +2,11 @@
 
 Issue #80's NPC and townsfolk concepts are in
 [`../concepts/townsfolk/README.md`](../concepts/townsfolk/README.md).
-Bree and Mother Skarrow are approved. The other 17 character/preset concept
-designs await review; all primary sheets and a child-B body-view supplement are
-saved, including recovered existing Halden and Maud concepts. NPC PixelLab
-generation has not started. Use the current shipped tactical hero density and anchors for the
+All 19 character/preset concept designs and the child-B body-view supplement are
+approved as of 2026-11-03. Existing Halden and Maud concepts were reused. NPC
+PixelLab generation has not started: the connector is unavailable and the browser
+requires sign-in. The [Bree pilot inputs](townsfolk/README.md) are prepared.
+Use the current shipped tactical hero density and anchors for the
 production comparison, rather than assuming the older reference PNGs establish
 the current hero size.
 

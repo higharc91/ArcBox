@@ -78,7 +78,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `concept review; sprite work pending`
+### OW-10 · Heroes and townsfolk don't match · `concepts approved; PixelLab pilot pending connection`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -95,8 +95,10 @@ Farmhand and guard are simpler 1K studies after provider output-token failures;
 all four failed attempts were refunded in Scenario's usage ledger. Net issue spend
 including Bree is **221 CU**, leaving **25 CU unused**. The inventory verifier
 passes and the guarded resume reports zero missing primary sheets. The remaining
-17 character/preset designs need owner review, especially paired-sheet view gaps
-and repeated grey-haired silhouettes. No NPC PixelLab jobs have run. See
+17 character/preset designs and child-B supplement were approved on 2026-11-03
+(“yes, tthose look good. Proceed”). Paired-sheet view gaps still need directional
+pixel review. Bree pilot inputs are prepared, but PixelLab MCP is unavailable and
+the browser requires sign-in. No NPC PixelLab jobs have run. See
 `tools/tactics-assets/concepts/townsfolk/README.md` for prompts, receipts and comparison.
 **Done when:** both art stages are approved, the town reads as one style, optional
 variants round-trip through the editor, and OW-05's memory/download checks pass.
