@@ -8,6 +8,14 @@
     "sheets": 18,
     "scope": "Generate the 11 remaining named NPC sheets and seven paired townsfolk sheets. Design approval remains pending for every result."
   },
+  "character_mother_skarrow": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, make sure you don't generate concept art we already have. Also, the scenario limit is gone now",
+    "asset_id": "asset_ABjwLTpiPSESYp2UZVy6p5ap",
+    "scope": "Mother Skarrow's displayed concept design. Reuse existing concepts and resume only missing concepts within the approved batch budget."
+  },
   "character_bree_tallow": {
     "stage": "concept",
     "status": "approved",

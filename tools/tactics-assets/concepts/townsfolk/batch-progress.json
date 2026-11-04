@@ -1,21 +1,161 @@
 {
   "date": "2026-11-03",
-  "status": "paused_provider_cooldown",
+  "status": "concept_outputs_ready_for_review",
   "spend_approval": "approvals.json:concept_batch_2026_11_03",
   "approved_batchCU": 234,
-  "batch_spentCU": 13,
-  "remaining_authorizedCU": 221,
-  "total_with_breeCU": 25,
+  "batch_spentCU": 209,
+  "remaining_authorizedCU": 25,
+  "total_with_breeCU": 221,
   "completed": [
     {
       "id": "character_mother_skarrow",
       "job_id": "job_ZvddLGV8CXNNcNTBYG9HL8zz",
       "asset_id": "asset_ABjwLTpiPSESYp2UZVy6p5ap",
       "cuCost": 13,
+      "reused": false,
       "output": "generated/character_mother_skarrow.png"
+    },
+    {
+      "id": "character_mother_aubrine",
+      "job_id": "job_VFE6yQfgTe37BjpsJhTrEtDb",
+      "asset_id": "asset_yRTrJMK4YQNcXqkSLGKz91TA",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_mother_aubrine.png"
+    },
+    {
+      "id": "character_tobin_fell",
+      "job_id": "job_TUpve3iYrjSZdhE1JkKVzuRC",
+      "asset_id": "asset_X6bvcSHQJ1598T1R6cDJpXrn",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_tobin_fell.png"
+    },
+    {
+      "id": "character_lark",
+      "job_id": "job_Xw9q7KZgtgoMqzX7MNvm6fru",
+      "asset_id": "asset_Gh8MqdXaNUNnsvkspxZaW99f",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_lark.png"
+    },
+    {
+      "id": "character_corvin_ashby",
+      "job_id": "job_kyMev4kJeqvBF2BjA4AJ2hkj",
+      "asset_id": "asset_GxHJtN3bCUnNoKnKBtp4fTNN",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_corvin_ashby.png"
+    },
+    {
+      "id": "character_pip_ashdown",
+      "job_id": "job_QtrLEzWZ8vMmaNpkkzv9Jj9X",
+      "asset_id": "asset_M46H6Z81bjHjY8grk1Q1WDum",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_pip_ashdown.png"
+    },
+    {
+      "id": "character_halden_varrow",
+      "job_id": "job_Vor6cDeecP6ndBT2UB3m1UZa",
+      "asset_id": "asset_D2Ptf1BdfWKJfpFussoh9prg",
+      "cuCost": 0,
+      "reused": true,
+      "output": "generated/character_halden_varrow.png"
+    },
+    {
+      "id": "character_dagna_holt",
+      "job_id": "job_AXqNoey5HtWwhwdvHAWHSasD",
+      "asset_id": "asset_7ZqC68RX7hGZYDYEGFHo9bG2",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_dagna_holt.png"
+    },
+    {
+      "id": "character_celandine_marrowby",
+      "job_id": "job_ANy6N17mniq8ymjnBaTqkisf",
+      "asset_id": "asset_YruSooVTggnKYckp9MCXFbLX",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_celandine_marrowby.png"
+    },
+    {
+      "id": "character_old_maud",
+      "job_id": "job_6xAxowD5qZRcjNUFMXPGGYM9",
+      "asset_id": "asset_5StWG7pyvVrtbPP99aYXWdjc",
+      "cuCost": 0,
+      "reused": true,
+      "output": "generated/character_old_maud.png"
+    },
+    {
+      "id": "character_rook",
+      "job_id": "job_BPTp85AU4CBNcbNg6LGTZPvT",
+      "asset_id": "asset_3nDGGxN4MkZJLgNs5UrRfEgX",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/character_rook.png"
+    },
+    {
+      "id": "townsfolk_barmaid",
+      "job_id": "job_mYMZWoToTPLM6smRscyqBDFW",
+      "asset_id": "asset_n3dLtuKbbbp6LsZubx18uHXa",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/townsfolk_barmaid.png"
+    },
+    {
+      "id": "townsfolk_child",
+      "job_id": "job_U3xrPdeuMyh1JZVLbycQpXSt",
+      "asset_id": "asset_3T7wEASHCLbqu2Acf8bTFEFm",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/townsfolk_child.png"
+    },
+    {
+      "id": "townsfolk_farmer",
+      "job_id": "job_aLcrj5yGfrhhqe1H3UDC8tEr",
+      "asset_id": "asset_Xo52UhVbZCE1iszTTthJ2Neu",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/townsfolk_farmer.png"
+    },
+    {
+      "id": "townsfolk_farmhand",
+      "job_id": "job_b6Ujt6zRKbv7YquBMrPYZgRr",
+      "asset_id": "asset_mv9S9tjfZgKg6TQRXVGfxRpy",
+      "cuCost": 9,
+      "reused": false,
+      "output": "generated/townsfolk_farmhand.png"
+    },
+    {
+      "id": "townsfolk_fisher",
+      "job_id": "job_5zq92vwVWnvywa1iJsV59zVG",
+      "asset_id": "asset_GidC2ZUuLboSNrTQjxANeGaz",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/townsfolk_fisher.png"
+    },
+    {
+      "id": "townsfolk_guard",
+      "job_id": "job_LqqW6vNTjcqxYg4egEZQDmqW",
+      "asset_id": "asset_HmNMxvH1nHf4hKtCHriFAvEw",
+      "cuCost": 9,
+      "reused": false,
+      "output": "generated/townsfolk_guard.png"
+    },
+    {
+      "id": "townsfolk_merchant",
+      "job_id": "job_9b481c4PkiXCgup5DtYTdxT9",
+      "asset_id": "asset_GD2G5XRcZk92X1tecdHy2KF3",
+      "cuCost": 13,
+      "reused": false,
+      "output": "generated/townsfolk_merchant.png"
     }
   ],
-  "pending": [
+  "pending": [],
+  "inflight_job_ids": [],
+  "resume": "Run resume-batch.cjs before any new generation. Reconcile existing jobs and recover remote concepts first. Completed images must never be regenerated by a resume.",
+  "design_approvals_pending": [
     "character_mother_aubrine",
     "character_tobin_fell",
     "character_lark",
@@ -34,18 +174,24 @@
     "townsfolk_guard",
     "townsfolk_merchant"
   ],
-  "provider_refusal": {
-    "id": "character_mother_aubrine",
-    "http_status": 429,
-    "reason": "Too Many Requests. Please, wait 942 seconds before trying again.",
-    "remainingSeconds": 942,
-    "trace_id": "mcpt_vTsaTU9Hn5qrECmUv8X3H94H",
-    "job_created": false,
-    "chargedCU": 0
-  },
-  "inflight_job_ids": [],
-  "resume": "Only submit pending IDs after the provider cooldown, using the stored requests and remaining authorized budget. Do not regenerate completed sheets or silently retry failed submissions.",
-  "design_approvals_pending": [
-    "character_mother_skarrow"
+  "provider_refusal_history": [
+    {
+      "id": "character_mother_aubrine",
+      "http_status": 429,
+      "reason": "Too Many Requests. Please, wait 942 seconds before trying again.",
+      "remainingSeconds": 942,
+      "trace_id": "mcpt_vTsaTU9Hn5qrECmUv8X3H94H",
+      "job_created": false,
+      "chargedCU": 0
+    }
+  ],
+  "supplemental_views": [
+    {
+      "id": "townsfolk_child_b_body",
+      "asset_id": "asset_47t1A6WA7xbnU5NVXxUg3uZK",
+      "job_id": "job_TDcTfEpPAdqdX8nHZJMxJm9C",
+      "cuCost": 9,
+      "output": "supplements/child-b.png"
+    }
   ]
 }

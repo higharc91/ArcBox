@@ -1,0 +1,20 @@
+{
+  "id": "townsfolk_guard",
+  "jobId": "job_ZLbVXWoUP8WAYgtzVvpVHxtu",
+  "jobType": "custom",
+  "status": "failure",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:13:53.548Z",
+  "updatedAt": "2026-11-04T02:14:47.688Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [],
+  "cuCost": 13,
+  "error": "An internal error occurred. Please contact support and provide this id:  error_rLQfYxFKhCat43JGvDEXjn6j",
+  "hint": "The generation did not complete because the model reached its output token limit. Try again with a different aspect ratio or resolution to reduce complexity.",
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "townsfolk_guard.png",
+  "request_file": "recovery-requests.json"
+}

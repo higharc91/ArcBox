@@ -2,8 +2,10 @@
 
 Issue #80's NPC and townsfolk concepts are in
 [`../concepts/townsfolk/README.md`](../concepts/townsfolk/README.md).
-The first Scenario anchor, Bree, is approved; the remaining concept designs are
-pending and NPC PixelLab generation has not started. Use the current shipped tactical hero density and anchors for the
+Bree and Mother Skarrow are approved. The other 17 character/preset concept
+designs await review; all primary sheets and a child-B body-view supplement are
+saved, including recovered existing Halden and Maud concepts. NPC PixelLab
+generation has not started. Use the current shipped tactical hero density and anchors for the
 production comparison, rather than assuming the older reference PNGs establish
 the current hero size.
 

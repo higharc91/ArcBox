@@ -1,0 +1,19 @@
+{
+  "id": "townsfolk_farmhand",
+  "jobId": "job_caynfx7SqsiLcxt4Cq7Ba1pp",
+  "jobType": "custom",
+  "status": "failure",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:08:34.610Z",
+  "updatedAt": "2026-11-04T02:09:33.216Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [],
+  "cuCost": 13,
+  "error": "An internal error occurred. Please contact support and provide this id:  error_APRVaQRkYBh7wVkzV2A6AEXK",
+  "hint": "The generation did not complete because it reached the output token limit. Try again with a different aspect ratio or resolution to reduce the output size, or retry the same request.",
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "townsfolk_farmhand.png"
+}

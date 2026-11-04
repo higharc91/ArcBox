@@ -57,30 +57,70 @@ Bree's rendering language, while preserving each brief's own identity, species,
 proportions and clothing. Approval of Bree does not approve the other designs or
 their pixel animation.
 
-## Partial batch: Scenario cooldown
+## Completed concept outputs and reuse audit
 
 ![Mother Skarrow beside the current goblin shaman and a shipped hero](mother-skarrow-review.jpg)
 
 Mother Skarrow completed successfully for **13 CU** using Bree's approved sheet
 as its reference. Her front, three-quarter and rear views retain the staff, repaired
-hide/wool, food pouches and grey hair. Her design is **pending owner approval**;
+hide/wool, food pouches and grey hair. Her design is **approved by the owner**;
 the eventual goblin sprite must retain its own species proportions and world scale.
 The concept alone does not establish either.
 
-The concurrent Mother Aubrine submission was rejected with HTTP 429:
-“Too Many Requests. Please, wait 942 seconds before trying again.” It returned
-no job ID and incurred no charge. Generation stopped without retries; there are
-no outstanding jobs. The remaining **17 sheets** are not generated.
+The owner approved her design and asked to reuse existing concepts before resuming.
+The audit found **Halden and Old Maud already in Scenario**, although their files
+were absent locally. Their original images, prompt text and model/job metadata
+are recovered in `generated/` with **zero additional CU**. `reuse-inventory.json`
+also records older Bree/SkArrow alternatives and existing Maren/Stranger sheets
+outside this batch. The selected owner-approved Bree and Mother Skarrow designs
+remain authoritative. Exact-name searches alone missed these older concepts
+because their prompts were stored as text-asset IDs; semantic image search and
+inspection of those prompt records found them.
 
-- This batch: **13 CU spent of 234 CU authorized**, leaving **221 CU authorized**.
-- Including Bree: **25 CU spent**.
-- `generated/` holds Mother Skarrow's PNG, job receipt and result receipt.
-- [batch-progress.json](batch-progress.json) records every pending ID, the provider
-  cooldown refusal and the remaining budget. Resume only those IDs after the
-  cooldown; do not regenerate completed sheets or resubmit while throttled.
+All **19 primary sheets** are saved: 12 named and seven paired generic presets.
+The original paired child sheet supplied only the second child's face; a **9 CU
+1K supplement** completes that same child's three body views from the existing
+face reference, without rerolling the primary sheet. See
+[the complete review index](review-index.md) for four contact pages, individual
+comparisons, full-resolution originals and the child supplement.
 
-The completed cards were visually inspected, the queue generators ran successfully,
-and `git diff --check` passed. Game tests and runtime memory checks have not run:
+Two complex requests (farmhand and guard) each failed twice at the provider's
+output-token limit without producing assets. After a wider-layout retry also
+failed, simpler **1K front/rear studies** completed for 9 CU each. The other
+primary sheets are 2K. Requests and all failed-attempt receipts remain available
+under `failures/`, `recovery/` and `resolution-recovery/`; no completed concept
+was regenerated. Scenario's usage ledger reports four refunds, and its net
+consumption agrees with successful output receipts (`billing-final.json`).
+
+- Approved batch: **209 CU of 234 CU used**, including the child supplement.
+- Including Bree: **221 CU net**, with **25 CU authorized but unused**.
+- `verified-inventory.json`: dimensions, SHA-256 hashes, asset IDs, reuse status
+  and costs for all 19 primary sheets and the supplemental views.
+- `resume-batch.cjs`: **zero missing sheets**, with existing images, results,
+  recovered assets and outstanding jobs excluded from generation.
+- Bree and Mother Skarrow are approved; the remaining **17 character/preset
+  designs** await owner review. No NPC PixelLab jobs have run.
+
+## Visual review notes and remaining work
+
+1. **Owner concept approval:** review named faces, ages and silhouettes. Several
+   adults inherited grey hair/braided silhouettes from the anchor; these are
+   proposals rather than new lore. Retain or change them explicitly before pixels.
+2. **Paired sheet coverage:** barmaid, farmer and merchant distribute views across
+   the two variants rather than giving each a complete three-view turnaround.
+   Their two designs are visible, but missing angles must be checked during the
+   approved PixelLab directional pilot. The second child's previously missing
+   body has been completed separately. Farmhand and guard have front/rear 1K
+   studies; these are design references, not shippable atlases.
+3. **PixelLab and integration:** only after concept approval, build sprite pilots,
+   idle/walk and named gesture loops, portraits, optional region variants and TV
+   comparisons. Preserve each person's own scale, anatomy and identity.
+4. **OW-05 and final checks:** used-only loading, the 512 MB gate and before/after
+   download/memory measurement remain, followed by game/phone tests and live walks.
+
+The concept inventory verifier passed; the resume generator reports zero missing
+primary sheets; both review scripts ran and every contact page was inspected.
+`git diff --check` passed. Game tests and runtime memory checks have not run:
 this checkpoint contains concepts, comparison tooling and documentation only.
 
 The owner set **512 MB maximum TV texture memory at region open** in issue #80's

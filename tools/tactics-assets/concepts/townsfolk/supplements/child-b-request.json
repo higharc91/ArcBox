@@ -1,0 +1,17 @@
+{
+  "id": "townsfolk_child_b_body",
+  "purpose": "Complete missing body views of the already-created child variant B, preserving its existing face; no reroll of the existing concept.",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "prompt": "Complete an existing Wardenflame character concept. Reference image shows two child variants; use ONLY the auburn-haired, light freckled child head at the BOTTOM RIGHT as the exact identity for this study. Preserve that young face, auburn hair and fair freckled skin. Draw this SAME CHILD in front, three-quarter and rear full-body views, one consistent set of practical patched child-sized wool clothes: moss green tunic with subdued russet patches, trousers and soft brown boots. Clearly child proportions, short limbs and rounder youthful features; not an adult, no mature body. The child is a poor curious Emberwick local in autumn. Match the reference's restrained painted material planes, top-left light, warm highlights and cool shadows. All three full-body views aligned at the same height and foot baseline, clear space, complete feet and head. Plain parchment background, no labels, head insets, lettering, weapons or new characters. These are missing views of the existing child variant B, not a new character design.",
+    "referenceImages": [
+      "asset_3T7wEASHCLbqu2Acf8bTFEFm"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "1K",
+    "thinkingLevel": "MINIMAL",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  },
+  "quotedCU": 9
+}

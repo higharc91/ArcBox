@@ -1,0 +1,30 @@
+{
+  "quotes": [
+    {
+      "id": "townsfolk_farmhand",
+      "dry_run": true,
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job": {},
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_guard",
+      "dry_run": true,
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job": {},
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_merchant",
+      "dry_run": true,
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job": {},
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    }
+  ],
+  "totalCU": 39,
+  "grossMaximumIncludingFailedAttemptsCU": 234
+}

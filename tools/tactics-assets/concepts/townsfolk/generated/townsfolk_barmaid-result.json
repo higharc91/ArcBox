@@ -1,0 +1,19 @@
+{
+  "id": "townsfolk_barmaid",
+  "jobId": "job_mYMZWoToTPLM6smRscyqBDFW",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:06:32.949Z",
+  "updatedAt": "2026-11-04T02:07:28.019Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_n3dLtuKbbbp6LsZubx18uHXa"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "townsfolk_barmaid.png"
+}
