@@ -288,6 +288,8 @@ public partial class Main : Control
             _contentHttp?.Dispose();
             _contentHttp = null;
             _connectCts?.Cancel();
+            if (_client is { } client)
+                GD.Print($"HOST view patches applied {client.PatchCounts.Applied}, whole views asked for again {client.PatchCounts.Resent}");
             _ = _client?.DisposeAsync().AsTask();
             _client = null;
         }
@@ -977,6 +979,8 @@ public partial class Main : Control
         // checks for the "interrupted" note, the swap run that the swapped phone's player is listed once).
         string[] parts = [results.Message ?? "", string.Join(", ", results.Scores.Select(s => $"{s.Name} {s.Score}"))];
         GD.Print($"RESULTS {string.Join(" | ", parts.Where(p => p.Length > 0))}");
+        if (_client is { } patching)
+            GD.Print($"HOST view patches applied {patching.PatchCounts.Applied}, whole views asked for again {patching.PatchCounts.Resent}");
     }
 
     // ---- Reconnecting banner -------------------------------------------------------------------------------

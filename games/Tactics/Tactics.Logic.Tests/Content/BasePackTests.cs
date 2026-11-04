@@ -240,7 +240,6 @@ public sealed class BasePackTests
         var rules = RulesPack.InMemory("smoke", base_.Abilities.Values, base_.Passives.Values, base_.Conditions.Values, [map],
             base_.Injuries.Values, items: base_.Items.Values,
             monsters: base_.Monsters.Keys.Select(m => (m, SheetBuilder.ForMonster(m, base_))), environment: base_.Environment);
-        Invariants.Enabled = true;
         var owners = base_.Classes.Values
             .SelectMany(c => c.Subclasses.Select(s => (SubclassDef?)s).DefaultIfEmpty(null)
                 .Select(s => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(c.Id, "human", c.Id, s?.Id, 10, base_), base_)

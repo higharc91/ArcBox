@@ -47,6 +47,10 @@ public sealed partial class TacticsGame
 
     private Controller ControllerFor(ProfileId profile) => Online(profile) ? new PlayerControlled(profile) : new AiControlled(Companion);
 
+    /// <summary>Development harness settings; real sessions retain Normal difficulty and fresh random seeds.</summary>
+    public Difficulty BattleDifficulty { get; init; } = Difficulty.Normal;
+    public ulong? BattleSeed { get; init; }
+
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
     /// <summary>
@@ -57,6 +61,7 @@ public sealed partial class TacticsGame
     private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions,
         string? beat = null)
     {
+        seed = BattleSeed ?? seed;
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
@@ -92,7 +97,7 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        var setup = Encounters.Setup(encounter, party, Difficulty.Normal, Rules);
+        var setup = Encounters.Setup(encounter, party, BattleDifficulty, Rules);
         var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
         if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
             setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)

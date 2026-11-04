@@ -76,6 +76,14 @@ public sealed class ArcHub(RoomManager rooms) : Hub
     public Task SendInput(string viewId, JsonElement payload) =>
         WithHubErrors(() => CurrentRoom().SendInputAsync(Context.ConnectionId, viewId, payload));
 
+    /// <summary>The TV asks to be sent its view as patches against the view it has (issue #77). Host only.</summary>
+    public Task UseHostPatches() =>
+        WithHubErrors(() => CurrentRoom().UseHostPatchesAsync(Context.ConnectionId));
+
+    /// <summary>The TV couldn't apply a patch, and asks for its whole view again. Host only.</summary>
+    public Task ResendHostView() =>
+        WithHubErrors(() => CurrentRoom().ResendHostViewAsync(Context.ConnectionId));
+
     /// <summary>The TV tells the running game something, e.g. that an animation finished (spec §3.7). Host only.</summary>
     public Task HostSignal(string kind, JsonElement payload) =>
         WithHubErrors(() => CurrentRoom().HostSignalAsync(Context.ConnectionId, kind, payload));

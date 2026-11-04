@@ -30,7 +30,7 @@ REDLINE and anything that needs Playwright.
 | 7 | Story performance: `ARCBOX_CHAPTER=1 ARCBOX_SHOTS=0 TV_ARGS=--perf` | Frame times during scenes, votes, rolls and the scene cast walking in and out. Report the worst frames and where they happen. |
 | 8 | Real audio: run 3 again **without** `--audio-driver Dummy`, with speakers or headphones on | Music changes (explore, battle, victory, the boss track at Rime Tower if reached), voiced lines, captions only where a line has no clip, footsteps, and that nothing is too loud or clips. Note anything that sounds wrong. |
 | 9 | `--world-demo=things --res=1920x1080 --shots=<dir>` | Every interactable stand-in is readable on the TV. The new sounds play: door, gate, drawbridge, secret door, chest/crate/barrel/sack/cache, lever, lock open/fail, secret found, trap spotted/sprung/disarmed, pickup, page, shrine, well, altar (run once with real audio). |
-| 10 | `--world-demo --res=1920x1080 --shots=<dir>` and `--perf` | The merged Ashen Ford from the world-dressing branch: frame times on the full walk, world load time, texture memory. Check the animals (fox, mule, sheep, dog, crow) and the fences look right at 2× from the sofa. |
+| 10 | `--world-demo --res=1920x1080 --shots=<dir>` and `--perf` | Current main’s integrated Ashen Ford (197 buildings): frame times on the full walk, world load time, texture memory. Check the animals (fox, mule, goat, duck, crow) and the fences look right at 2× from the sofa. |
 | 11 | `ARCBOX_GAME=tactics ARCBOX_WALK=1 ARCBOX_SHOTS=0 TV_ARGS=--perf` in Ashen Ford | Walking past the things placed in Ashen Ford: a chest opened, a note read, a hidden cache found. Any hitch when a thing animates. |
 
 If a run fails, run it once more to see whether it repeats; don't fix anything.
@@ -41,3 +41,17 @@ Write `docs/superpowers/reports/2026-10-31-tactics-overworld/local-windows-check
 (on the `local-hw-checks` branch): the machine, the sha, a summary, one table per section, the numbers, and a numbered list of problems
 with file and line where you can find them. Add your best shots next to it. Commit it on a new branch `local-hw-checks-2` from the tested
 sha, with the trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`, and push that branch. Don't open a PR.
+
+
+## Chapter automation after issue 76
+
+Run in Git Bash from the repository root. Both branches must reach the Chapter 1 card:
+
+```bash
+export PATH="/c/Users/fatma/AppData/Local/Microsoft/dotnet:$PATH"
+export GODOT="/c/Users/fatma/AppData/Local/Microsoft/WinGet/Packages/GodotEngine.GodotEngine.Mono_Microsoft.Winget.Source_8wekyb3d8bbwe/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe"
+ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force ARCBOX_DIFFICULTY=Story ARCBOX_SHOTS=0 tools/tv-e2e.sh
+ARCBOX_CHAPTER=1 ARCBOX_BRANCH=parley ARCBOX_DIFFICULTY=Story ARCBOX_SHOTS=0 tools/tv-e2e.sh
+```
+
+Chapter battles use seed 76 by default. Screenshots are disabled to measure walking without capture stalls.

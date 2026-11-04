@@ -13,13 +13,9 @@ public sealed class RulesInvariantException(string message) : Exception(message)
 public static class Invariants
 {
     /// <summary>
-    /// Whether <see cref="Battle.Start"/> and <see cref="Battle.Apply"/> check every state they produce. On in Debug builds;
-    /// tests turn it on in any build.
+    /// Whether <see cref="Battle.Start"/> and <see cref="Battle.Apply"/> check every state they produce. Enabled in every build.
     /// </summary>
-    public static bool Enabled { get; set; }
-#if DEBUG
-        = true;
-#endif
+    public static bool Enabled { get; set; } = true;
 
     /// <summary>
     /// Throws <see cref="RulesInvariantException"/>, naming the first broken rule, unless:

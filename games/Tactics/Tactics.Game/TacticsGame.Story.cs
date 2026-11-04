@@ -717,6 +717,11 @@ public sealed partial class TacticsGame
     private void CloseQuestion()
     {
         _ctx.CancelTimer(Timers.Vote);
+        ResetQuestion();
+    }
+
+    private void ResetQuestion()
+    {
         _shopOptions = [];
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
         _span = null;

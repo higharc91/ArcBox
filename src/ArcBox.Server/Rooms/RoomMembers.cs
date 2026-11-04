@@ -21,7 +21,8 @@ public sealed class RoomMembers(RoomOptions options)
             _slots.Add(new PlayerSlot
             {
                 Id = s.Id, Name = s.Name, SecretHash = s.SecretHash, JoinOrder = s.JoinOrder, Profile = s.Profile,
-                ForAbsentMember = s.ForAbsentMember
+                ForAbsentMember = s.ForAbsentMember,
+                Vouched = s.Vouched is { } vouched ? [.. vouched] : [],
             });
         }
 

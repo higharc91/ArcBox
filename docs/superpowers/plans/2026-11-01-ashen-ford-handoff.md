@@ -4,7 +4,7 @@ You're taking over from a Claude session on the user's Windows PC. The user is t
 
 ## Where the work is
 
-All of it is on the **local** branch `world-dressing-design` in `C:\Users\fatma\Programming\dotnet\ArcBox`. **Most of it isn't pushed.** The remote branch of that name holds only the two early planning commits, and the local one was rebased on `ccr-18ad4510-q68nad`, so pushing needs `--force-with-lease`. Ask the user before pushing. Don't open or merge PRs unless asked. Don't touch `ccr-18ad4510-q68nad`: a cloud session pushes there.
+The world-dressing work is integrated into main through PR #75 (`9c41a7bd`). Use current main and the issue-specific branch; the earlier local-only branch and force-push instructions are historical.
 
 Confirm the state first:
 
@@ -41,7 +41,7 @@ Expect 0 warnings and no failures, with the exception of `A_rebuild_on_the_large
 
 **Nobody has looked at the latest state on the TV.** The `place-*.png` shots are from before the items above, and no e2e run has happened since the ground and people work.
 
-## What's left, in order
+## Historical work list (consult the current issue board for remaining work)
 
 1. **Look first.** Replace `place-*.png`, and add `place-square-with-people.png`. Then run all five `tv-e2e` modes and an `ARCBOX_SHOTS=0` walk. Battle draw calls haven't been re-measured either. People during an in-place fight are unverified on the TV: `WalkShow` keeps them when the party is hidden, and the fade uses walkers only. Put people in the picture sweep.
 2. **Finish the workspace:** the `BuildingMarker` footprint outline, snapping, and a Props, Buildings and People section in `tools/tactics-world/README.md`. Add people and the final numbers to `docs/tv-host.md`.

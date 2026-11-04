@@ -70,3 +70,5 @@ All gameplay values below are the approved values, in `content/tactics/base/rule
 
 No new balance values were chosen. There are no TV shots in this milestone: animation and board rendering are milestone E,
 phone risk/spread fields are F, and encounter opt-ins and balance simulations are G. Milestone C was gated on A review and merge when B was published. That gate is now fulfilled; see the [C report](milestone-c.md).
+
+Current integration update (issue #76): this milestone is merged into main via PR #72. Its default-off/held-content statements describe the milestone checkpoint; the completion report records five enabled encounters and the final balance verification.

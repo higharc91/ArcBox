@@ -364,7 +364,9 @@ public partial class LobbyScreen : Control
         _campaignCards.Clear();
         if (campaigns.Count == 0)
         {
-            _campaignList.AddChild(ArcTheme.Label("No campaigns yet", ArcTheme.SemiBold, 24, new Color(1, 1, 1, 0.22f)));
+            // A room lists only campaigns a phone here vouches for (issue #60), so an empty list usually means "join first".
+            _campaignList.AddChild(ArcTheme.Label("Your campaigns show here once a player joins on their phone", ArcTheme.SemiBold, 24,
+                new Color(1, 1, 1, 0.22f)));
             return;
         }
 

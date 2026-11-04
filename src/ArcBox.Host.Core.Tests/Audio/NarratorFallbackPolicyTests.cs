@@ -5,6 +5,15 @@ namespace ArcBox.Host.Core.Tests.Audio;
 
 public class NarratorFallbackPolicyTests
 {
+    [Theory]
+    [InlineData("tactics.story", false)]
+    [InlineData("tactics.narrator", false)]
+    [InlineData("tactics.npc.halden-varrow", false)]
+    [InlineData("redline.announcer", true)]
+    [InlineData("arcbox.host", true)]
+    public void Only_non_tactics_themes_allow_live_speech(string theme, bool allowed)
+        => Assert.Equal(allowed, NarratorFallbackPolicy.AllowsLiveSpeech(theme));
+
     private static NarratorFallbackPolicy Policy(bool server = true, bool voices = true) =>
         new() { HasServer = server, HasBuiltInVoice = voices };
 

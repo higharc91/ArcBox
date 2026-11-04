@@ -25,7 +25,7 @@ Almost everything was seen only in a cloud container, with software rendering. T
 | 20 | **Bree Tallow's portraits:** fix the angry one to match her other moods | Built, **but not through Scenario.** Her preset was built as a bald man with a moustache, so all six moods were wrong. The recipe now builds a stout woman with a chestnut bun, rebuilt with `build.py`. Please look at it | `3162074` |
 | — | **The VIP can end the session from inside a scene** (a review default the user accepted) | Built, server and phone | `1f11d7e`, `44e96b2`, `4f4f78e` |
 | 30 | **A second question in a row alerts again** | Built | `9afcc84`, `30057c1` |
-| 6 | **Environmental tiles:** a draft design, no code | Written, awaiting answers | `9514024` |
+| 6 | **Environmental tiles:** engine, AI, oil, TV and phone implementation | Merged in PR #72; five enabled encounters | See environmental completion report |
 | 13 | **The battle list is hidden from normal play** (`Tactics:BattleList`, Development only, off by default; a pack with no region keeps its list) | Built | `f681da2` |
 | 1 | No-clip lines: captions only (`StoryVoice.Fallback = Captions`) | Settled, the default | — |
 | 2 | Unanswered votes keep the first option at 45 s | Settled | — |
@@ -39,7 +39,7 @@ Almost everything was seen only in a cloud container, with software rendering. T
 |---|---|---|
 | 4 | `hall_of_the_flame` is 16 px too tall to draw at 2×, so the finale draws at half size | Use the top strip, or trim the map |
 | 5 | The balance decisions in the rules-engine tracker | Untouched |
-| 6 | Environmental tiles: the draft's [11 open questions](../specs/2026-11-01-tactics-environmental-tiles-draft.md#8-open-questions-for-the-user) | Nothing is built until they're answered |
+| 6 | Environmental tile decisions | Resolved and implemented; later tuning is recorded in the environmental completion report |
 | 10 | A battle the engine can't continue is called off with nothing won or lost, and the party goes back to the world. The alternative is to count it as a loss | `CallOffBattle` is the one place to change (`0eec931`) |
 | 11 | Rules invariants run only in Debug builds. On a Release server a broken state is kept and saved, not caught | The checks are cheap. The TV and `dotnet run` are Debug today |
 | 19, 31 | Ford Assault is hard for the bots: about 5 of 10 won from the "!" side, 4 of 20 from elsewhere. So a force-branch chapter run is about a coin toss | A balance question, if it matters. `ARCBOX_BRANCH=skip-assault` now runs the chapter without that fight. Keep chapter runs manual, or gate them? |
@@ -104,7 +104,7 @@ Almost everything was seen only in a cloud container, with software rendering. T
 - **Mobs in the overworld:** wild enemies away from the story's stamps. Open: how often, whether they pay XP, which maps they use (battles need a matching map), and whether the party can avoid them. A cheap visual step that changes no rules: the armed stamp's enemies idle or pace before the party arrives.
 - **Fog of war:** the region hidden until explored. Open: whether it stays revealed across sessions (it'd live in the campaign save), how far the party sees and whether heights block sight, and how it reads from the sofa.
 - **Environmental tiles:** [the draft](../specs/2026-11-01-tactics-environmental-tiles-draft.md) proposes lightning through water, fire on fuel, freezing shallow water, an oil flask, fire burning webs, and water putting out burning, on the engine's existing zones, opt-in per encounter. 11 open questions, milestones M1 to M6.
-- **The BG3 gap list:** the user's world-dressing spec (branch `world-dressing-design`, `816798f`, plan `7be3f75`) names four steps towards Baldur's Gate: world dressing (props, ground detail, ambient life), inventory with looting and Perception, NPCs and side quests, and reactive surfaces. Not on this branch. I didn't find a separate gap list beyond that spec's opening.
+- **BG3 gap work:** world dressing, looting/Perception, NPCs/side quests and reactive surfaces are now integrated into main through PR #75. Remaining items are tracked on the overworld issue board.
 
 ---
 
@@ -220,7 +220,7 @@ Ranked by how much they matter to a first real session.
 1. **Nothing has been played by people.** Sofa, real phones, sound and feel are all on the user's list above.
 2. **Ford Assault is close to a coin toss for the bots** (decisions 19 and 31). With the new loss rule, retries after a cheap loss were won 8 of 12. A real group may do better or worse.
 3. **Rules invariants are off in Release** (decision 11). A broken state would be saved, not caught.
-4. **The battle sweep wasn't rerun after the engine changes** (`96ea82e`, `b91b43a`, the loss rule). The handoff's 16,200-battle comparison was suggestive, not proof. The harness is `2026-10-31-tactics-overworld/battle-sweep-harness.cs.txt` (about 85 minutes on 14 threads).
+4. **Battle sweep update:** the environmental completion report records the later 32,400-case comparison and 16,200-case crash sweep, plus the final 5,760-case encounter comparison. The earlier handoff comparison remains historical.
 5. **About 1.4% of sweep battles hit the 1,500-iteration cap,** mostly a passive hero against archers that Dodge at range. Not a hang. Worth a line in the AI's notes.
 6. **Followers overlap on quick U-turns,** for a moment, while moving. At rest they fan out.
 7. **The Windows-only fixes are unseen on a GPU:** the mid-fight takeover hold (`584d9bd`), the walk-in that keeps heroes apart (`61f07e7`), the results' marks (`354d4cf`).
@@ -230,7 +230,7 @@ Ranked by how much they matter to a first real session.
 11. **REDLINE e2e:** not rerun since the TV start moved into a function; needs Playwright on Windows.
 12. **One press of 40 made no step** on Windows (`LATENCY press 0: no step`), probably the party against a wall. Unconfirmed.
 13. **`Unable to create shader cache directory`** appeared in some filled-cache runs here. Not seen on Windows. Uninvestigated.
-14. **Interactables** are being built in another session on this branch, in their own files. Not covered here.
+14. **Interactables:** integrated into main, including live things, shops, rest services and NPC interactions. See their milestone reports and issue 76 for remaining verification.
 
 ---
 
@@ -289,4 +289,4 @@ Built after the report was first written, at the user's request (engine only, no
   - secret doors draw as unbroken wall until found;
   - the leader's Interact names the nearest thing, with a picker when several are in reach.
 - **Verified:** 5,069 .NET and 474 web tests; independent reviews of both stages; real-TV shots in the scratchpad `things/` folder.
-- **Not verified:** sounds (none exist yet but `ui_loot`), a live session with things (no pack region has any), and the user's art.
+- **Verification update:** interactable sounds and authored Ashen Ford things are implemented; live validation is recorded in the environmental, shops, recovery and NPC reports. The owner’s real-audio hardware check remains separate.
