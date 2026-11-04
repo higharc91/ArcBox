@@ -255,7 +255,16 @@ public sealed partial class Room
     /// <summary>Takes a seat: either a new one under <c>NewName</c>, or an existing offline one.</summary>
     public Task<JoinResult> TakeSeatAsync(string connectionId, TakeSeatRequest request) => EnqueueAsync(() =>
     {
+        var campaignBefore = SelectedCampaign() is not null;
         var result = TakeSeat(connectionId, request);
+        // The seat is this phone's now: it vouches for what its keys prove, and for a member the room just made for it.
+        if (_members.FindByConnection(connectionId) is { } slot)
+        {
+            slot.Vouched = Proven(request.ProfileKeys ?? []);
+            if (request.NewName is not null && campaignBefore && slot.Profile is { } created)
+                slot.Vouched.Add(created);
+            BroadcastLobby();
+        }
         Save();
         return result;
     });
@@ -739,7 +748,7 @@ public sealed partial class Room
             CanStart: !inGame && CannotStart(campaign) is null,
             _lastResults,
             campaign is null ? null : new LobbyCampaign(campaign.Info.Id, campaign.Info.Code, campaign.Info.Name, Roster(campaign)),
-            SelectedManifest is { UsesCampaigns: true } ? _campaigns.ListForGame(_selectedGameId!) : null
+            SelectedManifest is { UsesCampaigns: true } ? VisibleCampaigns() : null
         );
     }
 

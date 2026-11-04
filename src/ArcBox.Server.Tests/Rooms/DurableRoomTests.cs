@@ -186,6 +186,41 @@ public sealed class DurableRoomTests
         }
     }
 
+    // Issue #60: what a seat's phone proved is kept with the seat, so after a restart the phone's Rejoin (its seat's
+    // secret, no keys) still lets the room see that member's campaigns.
+    [Fact]
+    public async Task A_seats_vouch_survives_a_restart_and_comes_back_with_its_phone()
+    {
+        using var db = new TempDb();
+        CreateRoomResult room;
+        JoinResult ann;
+        using (var a = new ArcServerFactory(db.File))
+        {
+            await using var host = await TestClient.ConnectAsync(a);
+            await using var p1 = await TestClient.ConnectAsync(a);
+            room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+            ann = await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+            await p1.InvokeAsync("SelectGame", "ledger");
+            await p1.InvokeAsync<ProfileKey>("CreateCampaign", "Embers");
+            await p1.InvokeAsync("SelectGame", "counter");
+            await p1.InvokeAsync("SelectGame", "ledger");    // the campaign is no longer selected, only listed
+            var listed = await host.WaitForAsync(ClientMethods.LobbyChanged, l => !l.TryGetProperty("campaign", out _)
+                && l.TryGetProperty("campaigns", out var c) && c.GetArrayLength() == 1);
+            Assert.Equal(1, listed.GetProperty("campaigns").GetArrayLength());
+        }
+
+        using var b = new ArcServerFactory(db.File);
+        await using var tv = await TestClient.ConnectAsync(b);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        var away = await tv.WaitForAsync(ClientMethods.LobbyChanged);
+        Assert.Equal(0, away.GetProperty("campaigns").GetArrayLength());    // Ann's phone isn't back yet
+
+        await using var phone = await TestClient.ConnectAsync(b);
+        await phone.InvokeAsync("Rejoin", room.Code, ann.PlayerId.Value, ann.Secret);
+        var back = await tv.WaitForAsync(ClientMethods.LobbyChanged, l => l.TryGetProperty("campaigns", out var c) && c.GetArrayLength() == 1);
+        Assert.Equal("Embers", back.GetProperty("campaigns")[0].GetProperty("name").GetString());
+    }
+
     [Fact]
     public async Task Restart_keeps_code_and_seats()
     {
@@ -378,8 +413,10 @@ public sealed class DurableRoomTests
         await using var ann2 = await TestClient.ConnectAsync(f);
         var second = await host2.InvokeAsync<CreateRoomResult>("CreateRoom");
         await host2.InvokeAsync("SelectGame", "ledger");
+        // Ann's phone joins first, with her key: only then may the room pick her campaign (issue #60).
+        await ann2.TakeSeatAsync(new TakeSeatRequest(second.Code, NewName: "Ann", ProfileKeys: [key.Key]));
         await host2.InvokeAsync("SelectCampaign", campaignId);
-        await ann2.TakeSeatAsync(new TakeSeatRequest(second.Code, Seat: new SeatRef(Member: key.Id), ProfileKeys: [key.Key]));
+        await ann2.InvokeAsync<ProfileKey?>("ClaimMember", new ClaimMemberRequest(new SeatRef(Member: key.Id), [key.Key]));
         await host2.InvokeAsync("StartGame");
         Assert.Equal(second.Code, campaigns.LeasedBy(campaignId));
 
