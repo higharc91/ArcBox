@@ -133,3 +133,8 @@ loading before and after integration. The old board's 350 MB and 179 MB figures
 are historical, not a fresh measurement of this main revision. A `--world-demo`
 `--perf` check remains to be implemented with the loading work. No new memory,
 download-size or game test results are claimed by this concept-only preparation.
+
+
+## Later cloud loading checkpoint
+
+The concept-only validation notes above describe that earlier checkpoint. The used-only loader and four-party 512 **MiB** gates are now implemented; current production and separate Bree review-pack measurements are in the [loading report](../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/loading/report.md). All existing concepts and source frames were reused, and no additional concept or animation generation was submitted. Full Bree directional/TV approval and the remaining cast/portraits are still pending; re-run the gate after the final approved assets are installed.

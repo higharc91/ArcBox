@@ -129,3 +129,14 @@ the atlas hash. The normalizer's older hero-canvas output is a staging source.
 Checkpoint checks: host Debug build 0 warnings/errors; all **2,450 presentation
 tests** pass; offline crop/import/height/contact/frame validation passes; real GPU
 TV renders pass. Full solution/web checks and the final memory gate are not done.
+
+
+## Cloud performance continuation after the Bree checkpoint
+
+OW-05 now has used-only, budgeted world-unit loading, explicit release on roster changes, shared fauna textures, and background fauna navigation preparation. Actual party sheets stay resident across hidden/formation/battle frames. The production assets and all approval/credit records remain unchanged.
+
+The new four-party `--world-demo=<region> --perf` check covers region open/walk, an all-four race change and restoration, with a **512 MiB** cap and a strict log verifier (`tools/tactics-playtest/world-memory.cjs`). Ashen Ford opens at **264.91 MiB**, Cinder Hollow at **154.87 MiB**; swap peaks are **302.58 / 192.37 MiB** on Linux software Vulkan. The separate Bree review pack opens at **267.56 MiB** with four heroes and passes too. The unchanged cold production pack is **200,832,616 bytes**. Detailed logs, native tour screenshots, limits and final checks are in [the loading report](../reports/2026-11-03-townsfolk-art/loading/report.md).
+
+Continue from the current branch rather than rebuilding these changes. Full-set Bree/TV owner approval remains pending. No further sprites/portraits were generated and nothing was installed in production. PixelLab MCP tools were not exposed in this cloud session, so no fresh balance or quote was obtained and **no credits were spent**. Check live schemas/costs/balance when that connection becomes available; 30.75 remains historical.
+
+On cloud, the offline review pack was rebuilt at `/workspace/artifacts/issue80-bree-review` using an explicit output argument to `build-review-pack.cjs`, and the existing pixel/atlas verifiers pass. Do not edit linked content files. Future optional variant integration must update the region preload selector and WorldPeople's sprite selection together, and rerun all memory gates after the final approved assets land. Keep the existing art approval gates; current memory results do not approve the remaining cast.

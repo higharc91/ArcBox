@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec cinder_hollow, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 473 ms, plan+light 260 ms, bake 19 ms, total 753 ms
+WORLD items 3,410 lit; 2,464 tiles, 12 blocks, block items median 293, most 587; 13 lights, active True; 14 images; route 87 tiles; spots behind-cliff@5,1 block-corner@32,32
+WORLD memory after build: managed 6.9 MB (+6.2), engine 38.5 MB (+1.7), textures 3.9 MB, buffers 7.6 MB, process 326 MB
+WORLD texture-budget region=cinder_hollow stage=open party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD textures 12 in 29 ms, worst 6.2 ms; binding items (and baking glows) 5 ms; 7 blocks still to record at reveal
+PERF 33 fps   30.4 ms (worst 38.9) | 618 draw calls   5.1 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 5 fps   205.6 ms (worst 372.1) | 477 draw calls   4.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=cinder_hollow stage=crossing party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD crossing 87 tiles at 6.7 tiles/s, 13.0 s, 319 frames: frame ms median 31.94, p95 66.67, p99 222.72, worst 861.10
+WORLD crossing after the first 1 s: frame ms median 32.49, p95 67.82, p99 319.54, worst 861.10
+WORLD frames over 16 ms: 318 of 319, at 0.00s=31.0 0.03s=32.9 0.06s=33.3 0.10s=31.7 0.13s=32.2 0.16s=35.5 0.20s=33.3 0.23s=33.3 0.26s=33.3 0.30s=33.3 0.33s=33.3 0.36s=33.3, 1 while recording
+WORLD recording during the walk: 1 frames, ms a frame median 3.39, p95 3.39, p99 3.39, worst 3.39
+WORLD frames while recording: frame ms median 30.95, p95 30.95, p99 30.95, worst 30.95
+WORLD _Draw per block, first time: median 0.49, p95 2.31, p99 2.31, worst 2.31, sum 7.2 ms
+WORLD render CPU ms median 0.49, p95 2.16, p99 4.29, worst 11.70; GPU ms median 17.01, p95 36.25, p99 73.26, worst 805.09; at most 679 draw calls
+WORLD overlay query ms median 1.13, p95 3.39, p99 6.13, worst 29.54; draw ms median 0.34, p95 1.33, p99 3.79, worst 9.62; items median 12.00, p95 32.00, p99 36.00, worst 40.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 1
+WORLD memory at end of crossing: managed 7.0 MB (+6.4), engine 39.6 MB (+2.8), textures 154.9 MB, buffers 7.6 MB, process 527 MB
+WORLD closed

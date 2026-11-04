@@ -84,3 +84,10 @@ Priority next: full-set/TV owner review; remaining 25 people and portraits;
 production swap plus talk/bark wiring; optional variants and export round-trip;
 OW-05 used-only loading and four-party/cold-download measurements; final solution,
 phone and real-walk regression checks. The cloud handoff has exact commands and paths.
+
+
+## Cloud continuation: loading and memory
+
+The approved Bree source pixels, directional frames, receipts and Windows TV shots were reused unchanged. Offline rebuilding and verification pass; no concept or animation was generated, and no credits were spent. Full-set/TV approval is still requested separately. PixelLab is not exposed by this cloud session's connected tools, so current balance and cost quotes cannot be checked; **30.75 is historical, not a live balance**. No subscription purchase or upgrade was attempted.
+
+OW-05 implementation and four-party measurements are in [the loading report](loading/report.md), with before/after native logs, gate output and an unchanged cold-pack hash. This independent performance work does not approve or install art, complete the remaining 25 sprites/portraits, or close issue #80.

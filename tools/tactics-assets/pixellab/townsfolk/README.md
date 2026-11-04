@@ -129,5 +129,11 @@ here are offline art tooling dependencies, not game/runtime or phone dependencie
 `credit-ledger.json` records **49.25 PixelLab generations total**, including the
 rejected edit and historical candidate-2 idle; **30.75 remained** at the last check.
 No paid jobs are still running. The separate Scenario concept total remains 221 CU.
-The rest of the sprites, portraits, variant editor support, production talk/bark
-wiring and the four-party OW-05 checks remain; do not treat this as issue completion.
+The rest of the sprites, portraits, variant editor support and production talk/bark
+wiring remain; do not treat this as issue completion. Four-party OW-05 checks are
+now implemented and measured below, and must be repeated after final art integration.
+
+
+## Cloud loading validation
+
+The complete review set was rebuilt and verified offline from the retained source frames with no new generation. The separate review pack also passes the new **four-member** OW-05 check: 267.56 MiB at region open, 305.24 MiB peak through roster replacement. It loads the compact Bree atlas without retaining the old innkeeper sheet. See the [loading report](../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/loading/report.md) for commands, receipts and limits. These are software-rendered memory checks; production integration and full-set/TV approval remain gated. No credit record or approval was changed. Current live PixelLab tools/costs/balance were unavailable; the 30.75 balance above is historical.

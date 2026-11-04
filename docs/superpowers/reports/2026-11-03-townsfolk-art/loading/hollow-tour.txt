@@ -1,0 +1,157 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Things demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/ArcBox/content/tactics/base
+THINGS demo: 16 views, 16 shots
+THINGS demo step hollow-bounty-board at 2.02 s
+TACTICS world opening ashen_ford
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/001-tactics.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/002-hollow-bounty-board.png
+TACTICS walk snapped to 37.5 61.5
+THINGS demo step hollow-cliff-entrance at 5.07 s
+TACTICS walk snapped to 131.5 99.5
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/003-hollow-cliff-entrance.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture characters/presets/innkeeper.png 6048x80
+WORLD unit-texture characters/presets/priest.png 6048x80
+WORLD unit-texture characters/presets/blacksmith.png 6048x80
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture characters/presets/minstrel.png 6048x80
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture characters/presets/mayor.png 6048x80
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD fauna 11 actors, 7 shared textures
+THINGS demo step hollow-arrival at 10.03 s
+WORLD closed
+TACTICS world opening cinder_hollow
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/004-tactics-world-loading.png
+TACTICS walk snapped to 5.5 2.5
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 0 actors, 0 shared textures
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/005-hollow-arrival.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/006-tactics-world-loading.png
+TACTICS world open: ground 131 ms, plan+light 36 ms, bake 7 ms, total 179 ms, 0 blocks to record, textures 197.3 MB, buffers 3.6 MB, engine 100.3 MB, managed 88.4 MB
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/007-tactics-exploration.png
+THINGS demo step hollow-grisk-world at 16.01 s
+TACTICS walk snapped to 41.5 10.5
+WORLD unit-texture creatures/grisk_bounty.png 1024x5120
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/008-hollow-grisk-world.png
+THINGS demo step hollow-grisk-walk at 19.01 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/009-hollow-grisk-walk.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/010-tactics-world-stopped-44-11.png
+THINGS demo step hollow-grisk-fight at 24.02 s
+TACTICS screen tactics-battle-hollow_diggings
+TACTICS stage Forming in place
+WORLD unit-texture creatures/kobold_refresh_worker.png 1024x4096
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/011-tactics-battle-hollow-diggings.png
+WORLD unit-texture creatures/kobold_refresh_slinger.png 1024x5120
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/012-tactics-beat-stage-forming.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/013-tactics-beat-stage-step-in.png
+TACTICS stage Fighting in place
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/014-tactics-beat-stage-step-in.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/015-tactics-beat-stage-fighting.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/016-hollow-grisk-fight.png
+THINGS demo step hollow-grisk-fight-action at 29.00 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/017-hollow-grisk-fight-action.png
+THINGS demo step hollow-grisk-fight-pick at 32.01 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/018-tactics-beat-attack-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/019-hollow-grisk-fight-pick.png
+THINGS demo step hollow-safe-fire at 35.03 s
+WORLD unit-release creatures/grisk_bounty.png
+WORLD unit-release creatures/kobold_refresh_worker.png
+WORLD unit-release creatures/kobold_refresh_slinger.png
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+TACTICS walk snapped to 28.5 33.5
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/020-tactics-beat-stage-walking-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/021-hollow-safe-fire.png
+THINGS demo step hollow-ashmaw-world at 40.03 s
+TACTICS walk snapped to 14.5 32.5
+WORLD unit-texture creatures/ashmaw_bounty.png 1536x9216
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/022-hollow-ashmaw-world.png
+THINGS demo step hollow-ashmaw-walk at 43.01 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/023-hollow-ashmaw-walk.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/024-tactics-world-stopped-17-33.png
+THINGS demo step hollow-ashmaw-fight at 48.03 s
+TACTICS screen tactics-battle-hollow_lair
+TACTICS stage Forming in place
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/025-tactics-battle-hollow-lair.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/026-tactics-beat-stage-forming-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/027-tactics-beat-stage-step-in-2.png
+TACTICS stage Fighting in place
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/028-tactics-beat-stage-step-in-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/029-tactics-beat-stage-fighting-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/030-hollow-ashmaw-fight.png
+THINGS demo step hollow-ashmaw-fight-action at 53.02 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/031-hollow-ashmaw-fight-action.png
+THINGS demo step hollow-ashmaw-fight-burning at 56.06 s
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/032-tactics-beat-zone-2.png
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/033-hollow-ashmaw-fight-burning.png
+THINGS demo step hollow-return-to-dagna at 58.53 s
+WORLD closed
+TACTICS world opening ashen_ford
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/034-tactics-beat-stage-walking-2.png
+TACTICS walk snapped to 44.5 64.5
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/035-hollow-return-to-dagna.png
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture characters/presets/innkeeper.png 6048x80
+WORLD unit-texture characters/presets/priest.png 6048x80
+WORLD unit-texture characters/presets/blacksmith.png 6048x80
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture characters/presets/minstrel.png 6048x80
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture characters/presets/mayor.png 6048x80
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD fauna 11 actors, 7 shared textures
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/036-tactics-world-loading.png
+TACTICS world open: ground 24 ms, plan+light 720 ms, bake 52 ms, total 1431 ms, 43 blocks to record, textures 345.4 MB, buffers 3.6 MB, engine 83.0 MB, managed 71.3 MB
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/037-tactics-exploration.png
+THINGS demo step hollow-trinkets-presented at 72.36 s
+THINGS demo done
+SHOT /workspace/artifacts/issue80-final-hollow-tour/shots/038-hollow-trinkets-presented.png
+WORLD closed
+TACTICS left: narrator cleared
