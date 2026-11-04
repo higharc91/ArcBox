@@ -174,7 +174,7 @@ strongbox).
 
 ## P3: later, needs design with the user
 
-Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
+Don't build these without the user: a true Warden bridge (changes the battle map), fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
 
 ## Decisions waiting for the user
 
@@ -214,3 +214,8 @@ Painting in the real editor, the pad on real phones, sound, sofa distance, a mod
 - Linux OpenGL compatibility cold TV reopening intermittently exceeded the loading watchdog on this software-rendered worker. Managed snapshots did not identify a managed deadlock; loader errors now include stage/progress. Default Vulkan/Mesa validation passed the cold reconnect. Further OpenGL/drawing investigation belongs with OW-12/the drawing issue; no opening timeout was increased.
 - The production phone build succeeds but reports the existing REDLINE flyover chunk at 537.65 kB. This is recorded for the REDLINE follow-up; its warning limit was not raised.
 - All five existing AI performance cases passed in an isolated Debug process with their original 250 ms p95 budgets. The final full-suite result is recorded in the issue #76 report.
+
+
+### OW-24 · Visible roaming enemies · `in progress`, issue #79
+
+Branch `overworld-mobs`, based on current main after #74/#77. Owner decisions and implementation contracts: [design](../specs/2026-11-03-tactics-overworld-mobs-design.md). Seven groups planned across Ashen Ford and Cinder Hollow; no PR until requested. Initial work: repository/lore/runtime review and design recorded. Runtime, painted arenas, balance simulations, phone/TV integration and end-to-end verification remain outstanding.
