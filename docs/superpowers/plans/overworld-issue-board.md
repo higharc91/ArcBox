@@ -53,7 +53,7 @@ The default route uses `route.cs` navigation between authored targets, with enou
 
 ## P1: bugs and problems
 
-### OW-05 · Character memory · `six approved NPCs pass; recheck later cast`
+### OW-05 · Character memory · `seven approved NPCs pass; recheck later cast`
 Texture memory goes from 158 MB to 350 MB with the new characters, measured on the TV. A hero is about 37.5 MB of sheets by estimate, and the pack grows from 118 MB to 179 MB, so a cold TV download is 51% larger. Fine on an RTX 5080, unknown on a TV box. Options: load only the sheets a party uses, drop frames, or smaller atlases.
 **Owner decision (issue #80):** maximum **512 MiB (536,870,912 bytes)** of TV texture memory with four members.
 On `townsfolk-art`, world sheets now resolve the actual sprite path, queue uploads within the existing texture budget, and release unused party/battle sheets. Only the current region's placed people and actual drawn heroes/creatures are requested. Fauna share one texture per source; their navigation is prepared off-thread, and their uploads are budgeted. Approved Bree is now installed; legacy sheets remain available.
@@ -77,7 +77,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `Bree, Halden, Aubrine, Tobin, Lark and Corvin approved and integrated`
+### OW-10 · Heroes and townsfolk don't match · `seven named NPCs approved and integrated`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -386,3 +386,17 @@ with finished-set approval then exact installation and production checks; other1
 sprite sets and remaining portraits are ahead. Include existing recorded voice
 samples in future reviews. Rebase before push, no PR/merge/issue closure.
 Evidence: `docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/report.md`.
+
+## Current checkpoint — Pip installed; Dagna appearance/voice draft
+
+Pip’s approved exact atlas/six portraits are installed as a named child_pip variant,
+preserving generic children.140 focused tests pass, Debug/Release test-project
+builds zero warnings/errors; typed import/bark/portrait/child-isolation checks pass.
+Region data differs only in Pip’s cosmetic variant. Four-party production peaks
+**322.73 MiB Ashen /192.37 MiB Cinder**, below512. Cold204,485,341 bytes /4,849 files.
+Evidence: `reports/2026-11-03-townsfolk-art/pip-installed/report.md`.
+
+Dagna’s first appearance draft and existing recorded voice sample are ready for
+appearance approval. Approved concept reused; initial southwest angle corrected.
+Two image-tool calls, zero PixelLab spend/new speech. No Dagna production change;
+retain appearance and full-set/TV gates. `tools/tactics-assets/imagegen/townsfolk/dagna-holt/`.

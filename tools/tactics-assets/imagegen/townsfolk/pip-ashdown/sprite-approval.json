@@ -1,6 +1,6 @@
 {
   "character": "Pip Ashdown",
-  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
+  "stage": "complete_set_approved_installed",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 1,
@@ -13,9 +13,9 @@
   },
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "nativeHeightTarget": 52,
   "worldHeightTarget": 26,
   "reviewNotes": [
@@ -32,14 +32,14 @@
     "source": "candidate-1.png"
   },
   "completedSet": {
-    "status": "pending_owner_full_set_and_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 143,
     "curatedHeldSlots": 1,
     "portraits": 6,
     "completionImageToolCalls": 9,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_pip.png": "f30cf3a5178e89425ef49ab0848639f3bda771c5c9065b31e461e617fd3f3df0",
       "review-sprite.json": "45498c19552f7b96b9a0627bf7665f2513b972cc962fdd0daeaf4b8a9d043c50",
@@ -61,5 +61,11 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/world-pip.png",
       "sha256": "2d104f7822bd238e3945d682b6433a1b0cb809f954a9d28a0fa121cf908b5016"
     }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks great, what's next",
+    "installationAuthorization": "OK proceed",
+    "context": "Owner approved finished review, then authorized installation and next character draft."
   }
 }

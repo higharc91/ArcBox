@@ -166,3 +166,13 @@ with finished-set approval then exact installation and production checks; other1
 sprite sets and remaining portraits are ahead. Include existing recorded voice
 samples in future reviews. Rebase before push, no PR/merge/issue closure.
 Evidence: `docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/report.md`.
+
+## Latest continuation: Pip installed; Dagna first appearance and recorded voice
+
+Pip’s exact approved set is installed as a named child variant.140 focused tests
+pass and Debug/Release test-project builds have zero warnings/errors. Four-party
+production peaks322.73 /192.37 MiB, below512; cold204,485,341 bytes.
+[Installation report](pip-installed/report.md). Dagna’s appearance draft and existing
+voice sample await approval, with southwest corrected. Two image-tool calls and
+zero PixelLab/new speech spend. [Draft report](dagna-imagegen-trial.md). No Dagna
+production or game-rule/balance/phone-contract changes.

@@ -35,6 +35,7 @@ public sealed class WorldPeopleTests
     [InlineData("blacksmith", "tobin_fell", "tobin_fell")]
     [InlineData("minstrel", "lark", "lark")]
     [InlineData("sage", "corvin_ashby", "corvin")]
+    [InlineData("child_pip", "pip_ashdown", "pip")]
     public void Approved_named_people_use_their_talk_clip_while_holding_ground_then_resume_walking(string preset, string id, string name)
     {
         var person = Person(preset, 5, 5, "se", (6, 5), (6, 6)) with { Id = id };
@@ -71,6 +72,7 @@ public sealed class WorldPeopleTests
     [InlineData("bree", "tallow", "creatures/bree_tallow.png")]
     [InlineData("innkeeper", "missing", "creatures/bree_tallow.png")]
     [InlineData("innkeeper", null, "creatures/bree_tallow.png")]
+    [InlineData("child", "pip", "creatures/pip.png")]
     public void Placed_art_variants_and_region_preloading_select_the_same_sheet(string preset, string? variant, string path)
     {
         var person = Person(preset, 5, 5) with { Variant = variant };

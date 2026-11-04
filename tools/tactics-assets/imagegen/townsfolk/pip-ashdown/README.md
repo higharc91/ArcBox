@@ -1,8 +1,8 @@
 # Pip Ashdown — completed review
 
-The owner approved the appearance: “Yep, she looks good”. The eight-direction
-idle/walk/talk set and six portraits are ready for finished-set/TV review.
-Production installation is pending that separate approval.
+The owner approved the appearance: “Yep, she looks good”. The owner then approved the finished review (“Looks great, what's next”) and
+authorized installation (“OK proceed”). The exact body and portraits are installed;
+the review pack remains available. See the installation report.
 
 [Watch the voiced review](pip-finished-review.mp4) · [Voice sample](voice-sample.mp3)
 · [Portraits](pip-portraits-review.png) · [Walk](pip-eight-direction-walk.gif)

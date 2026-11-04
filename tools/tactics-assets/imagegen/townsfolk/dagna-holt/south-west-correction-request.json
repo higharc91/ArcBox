@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/dagna-holt/candidate-1-source.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Correct ONLY the SECOND SPRITE in the TOP ROW of this exact 4-column2-row Dagna appearance sheet. It currently faces SCREEN RIGHT, duplicating southeast. It MUST be SOUTHWEST: front-three-quarter with nose/chest pointed diagonally SCREEN LEFT. Do NOT simply mirror it because equipment/anatomy must remain fixed. Anatomical LEFT hip sword is nearer viewer in this corrected front-left view; anatomicalRIGHT shoulder pauldron/pouch/horn stay on their correct farther side, cloak draped over anatomicalLEFT shoulder. Same approved older woman face, grey crown braid/lowbun, scale mail, patched green surcoat and boots, sheathed sword, empty hands, same palette/height/scale/baseline. Keep every OTHER seven sprites, image dimensions/layout and transparent background intact. No other redesign or cell swaps. Target second top cell only: FRONT THREE QUARTER LOOKING TOWARD SCREEN LEFT."
+}

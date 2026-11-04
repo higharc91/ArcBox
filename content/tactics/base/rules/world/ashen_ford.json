@@ -6427,7 +6427,8 @@
         ]
       ],
       "id": "pip_ashdown",
-      "character": "pip_ashdown"
+      "character": "pip_ashdown",
+      "variant": "pip"
     },
     {
       "preset": "child",

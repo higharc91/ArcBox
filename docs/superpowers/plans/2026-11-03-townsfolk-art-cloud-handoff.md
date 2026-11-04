@@ -481,3 +481,29 @@ with finished-set approval then exact installation and production checks; other1
 sprite sets and remaining portraits are ahead. Include existing recorded voice
 samples in future reviews. Rebase before push, no PR/merge/issue closure.
 Evidence: `docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/report.md`.
+
+## Latest checkpoint — Pip approved/installed, Dagna first draft
+
+The owner approved Pip’s finished set (“Looks great, what's next”) and authorized
+installation/next draft (“OK proceed”). Exact approved Pip atlas and six portraits
+are installed; do not request approval again or regenerate completed art/voice.
+Only Pip’s child preset uses variant pip; generic children retain their art.
+Body keys child_pip/pip_ashdown; portraits likewise.140 focused tests pass;
+Debug/Release test-project builds zero warnings/errors. Typed production import,
+bark, portraits and generic-child isolation pass. Region parsed equality holds
+once Pip’s cosmetic variant field is removed. Production four-party peaks322.73 /
+192.37 MiB, below512. Cold204,485,341 bytes /4,849 files; inventory SHA256
+`aa9191b3c40b055c36b83ba5b7f5c5601f4fcacd99fde2bbc758db6cbf0bc256`.
+Report: `../reports/2026-11-03-townsfolk-art/pip-installed/report.md`.
+
+Dagna Holt is next (preset guard_captain, character dagna_holt). Her first pixel
+appearance and existing town-bark MP3 are in `tools/tactics-assets/imagegen/townsfolk/dagna-holt/`.
+Existing approved concept reused. First wrong southwest angle corrected before
+presentation; both raw sources, requests/input/output hashes and voice provenance
+are retained. **Appearance approval pending** before motions/portraits; full-set/TV
+approval remains separate. No Dagna production content. Native alpha/grid/palette/
+body scale/anchor/equipment QA still ahead. Two image-tool calls, zero PixelLab
+spend or speech generation; no prices inferred or credits purchased. Rules,
+balance and phone contracts unchanged except Pip’s cosmetic placement variant.
+Include existing recorded voice samples with future drafts. Rebase before pushing
+townsfolk-art; no PR, merge or issue closure. Earlier pending-Pip notes are historical.

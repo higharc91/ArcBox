@@ -1,0 +1,23 @@
+{
+  "character": "Dagna Holt",
+  "characterId": "dagna_holt",
+  "presetReference": "guard_captain",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 2,
+  "originalPath": "/workspace/generated_images/exec-ee75e6fd-a92d-4b52-a549-ba7501f1bad4.png",
+  "candidateSha256": "70e1f5b7aa54ebd48a585298cb740760e12e415b56bda3d00899a2ffb490557a",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Approved concept reused; initial southwest angle was corrected before presenting the final draft.",
+    "All eight requested standing facings manually inspected; native grid/alpha/palette/size/anchors and equipment still require import QA.",
+    "Sword stays sheathed at anatomical left hip; pouch/horn at right; anatomical right shoulder pauldron.",
+    "No animations or portraits generated yet; preserve appearance and full-set/TV gates.",
+    "Existing recorded town bark included without speech generation."
+  ]
+}

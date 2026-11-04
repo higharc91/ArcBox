@@ -551,6 +551,22 @@
       "angry": "corvin_angry.png",
       "sad": "corvin_sad.png",
       "surprised": "corvin_surprised.png"
+    },
+    "child_pip": {
+      "idle": "pip_idle.png",
+      "hurt": "pip_hurt.png",
+      "happy": "pip_happy.png",
+      "angry": "pip_angry.png",
+      "sad": "pip_sad.png",
+      "surprised": "pip_surprised.png"
+    },
+    "pip_ashdown": {
+      "idle": "pip_idle.png",
+      "hurt": "pip_hurt.png",
+      "happy": "pip_happy.png",
+      "angry": "pip_angry.png",
+      "sad": "pip_sad.png",
+      "surprised": "pip_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

@@ -1,0 +1,28 @@
+{
+  "imageToolCalls": 2,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "requestSha256": "45a3e494a6925a7f8e96027bf00044fa05bf4db424bd5e2a9688baedcdc45556",
+      "output": "candidate-1-source.png",
+      "outputSha256": "2f436dd81da4799132380857824b3e68d6103f6faabf785137f3671ee7291d50",
+      "originalPath": "/workspace/generated_images/exec-cf10ce65-544c-48c2-b6f2-3f94e0c6a99d.png",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_dagna_holt.png": "31faa1b4ffd549f9cfa5b33c778e645a46103ff7be17856c2f27aa12519a729f",
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/rotations/south.png": "2a1edd0362dd14935480c1b9d98161be261a1d79d281ac7dcfec092f0aa2a000"
+      }
+    },
+    {
+      "request": "south-west-correction-request.json",
+      "requestSha256": "54e039fcd1a45a8bee29ee50b1b5efd4f09ef1013f2ba9effa838a4025c2624f",
+      "output": "candidate-1.png",
+      "outputSha256": "70e1f5b7aa54ebd48a585298cb740760e12e415b56bda3d00899a2ffb490557a",
+      "originalPath": "/workspace/generated_images/exec-ee75e6fd-a92d-4b52-a549-ba7501f1bad4.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/candidate-1-source.png": "2f436dd81da4799132380857824b3e68d6103f6faabf785137f3671ee7291d50"
+      }
+    }
+  ]
+}
