@@ -213,3 +213,15 @@ Other 24 sprites and portraits remain; obtain a fresh balance/quote before any
 future paid work and never buy credits automatically. Keep all existing approved
 source frames, receipts and approval gates. Pull with rebase before pushing this
 branch; no merge, PR or issue closure. Earlier review-only statements are historical.
+
+## Alternative art trial requested by the owner
+
+The owner requested trying the assistant’s image tool rather than PixelLab for
+the next character. Mother Aubrine has one new appearance candidate under
+`tools/tactics-assets/imagegen/townsfolk/mother-aubrine/`, from her existing
+approved concept and Bree/Halden pixel-style references. No PixelLab call/spend.
+The sheet’s compass order has repeats, transparency is imperfect, and the logical
+pixel grid/native scale are unvalidated. Await appearance review; do not install
+it as a finished eight-direction atlas. Keep the existing approval/TV/frame/memory
+gates. Production still uses approved Bree/Halden; no completed art was regenerated.
+See `reports/2026-11-03-townsfolk-art/imagegen-trial.md`.

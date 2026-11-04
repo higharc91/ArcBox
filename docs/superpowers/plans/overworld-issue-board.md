@@ -244,3 +244,8 @@ Cinder Hollow **192.37 MiB**, below **512 MiB**. Cold pack **201,517,448 bytes**
 (+370,856 from Bree-only). Other 24 sprites and portraits remain; 0.75 generations
 was the last observed balance, with no spend for this integration. Latest report:
 `docs/superpowers/reports/2026-11-03-townsfolk-art/halden-installed/report.md`.
+
+Issue #80 alternative-art trial: per owner request, Mother Aubrine now has one
+assistant-image-generation appearance candidate, reusing her approved concept.
+No PixelLab credits spent; not installed or approved. Facing duplication, alpha
+and native-grid/scale validation remain. See `reports/2026-11-03-townsfolk-art/imagegen-trial.md`.
