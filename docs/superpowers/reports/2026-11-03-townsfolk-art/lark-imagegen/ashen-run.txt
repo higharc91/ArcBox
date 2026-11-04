@@ -1,0 +1,82 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+PERF 11 fps   88.4 ms (worst 146.4) | 3 draw calls   184 primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD build ground 962 ms, plan+light 4166 ms, bake 730 ms, total 7417 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 2 tiles; spots songkeeper@29,58
+WORLD memory after build: managed 41.2 MB (+40.5), engine 39.8 MB (+3.0), textures 3.9 MB, buffers 7.6 MB, process 426 MB
+PERF 13 fps   79.1 ms (worst 98.3) | 411 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture creatures/review_lark.png 1728x768
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+PERF 5 fps   196.8 ms (worst 225.4) | 409 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 11 actors, 7 shared textures
+WORLD texture-budget region=ashen_ford stage=open party=4 textures-bytes=293167360 peak-bytes=293167360 limit-bytes=536870912 result=PASS
+WORLD textures 215 in 2453 ms, worst 238.4 ms; binding items (and baking glows) 45 ms; 74 blocks still to record at reveal
+WORLD texture-budget region=ashen_ford stage=crossing party=4 textures-bytes=293167360 peak-bytes=293167360 limit-bytes=536870912 result=PASS
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.3 s, 1 frames: frame ms median 333.33, p95 333.33, p99 333.33, worst 333.33
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 1 of 1, at 0.00s=333.3, 1 while recording
+WORLD recording during the walk: 1 frames, ms a frame median 6.38, p95 6.38, p99 6.38, worst 6.38
+WORLD frames while recording: frame ms median 333.33, p95 333.33, p99 333.33, worst 333.33
+WORLD _Draw per block, first time: median 2.35, p95 3.96, p99 3.96, worst 3.96, sum 22.4 ms
+WORLD render CPU ms median 4.29, p95 4.29, p99 4.29, worst 4.29; GPU ms median 251.34, p95 251.34, p99 251.34, worst 251.34; at most 2,179 draw calls
+WORLD overlay query ms median 96.33, p95 96.33, p99 96.33, worst 96.33; draw ms median 0.56, p95 0.56, p99 0.56, worst 0.56; items median 378.00, p95 378.00, p99 378.00, worst 378.00
+WORLD blocks recorded once, whatever the walk did: False; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 47.1 MB (+46.4), engine 53.1 MB (+16.4), textures 279.6 MB, buffers 7.6 MB, process 844 MB
+WORLD shot /workspace/artifacts/issue80-lark-tv/world-ashen_ford.png
+PERF 1 fps   2000.0 ms (worst 2000.0) | 2,187 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+PERF 1 fps   1992.8 ms (worst 1992.8) | 2,179 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-change party=4 textures-bytes=293167360 peak-bytes=332488960 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+PERF 0 fps   2015.7 ms (worst 2015.7) | 2,185 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-restored party=4 textures-bytes=293167360 peak-bytes=332488960 limit-bytes=536870912 result=PASS
+PERF 1 fps   1298.5 ms (worst 1298.5) | 2,908 draw calls   17.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 1 fps   1994.0 ms (worst 1994.0) | 2,905 draw calls   17.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 1 fps   1466.7 ms (worst 1466.7) | 2,902 draw calls   17.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 1 fps   1311.6 ms (worst 1311.6) | 2,912 draw calls   17.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 3 fps   383.3 ms (worst 566.7) | 2,898 draw calls   17.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD shot /workspace/artifacts/issue80-lark-tv/world-songkeeper.png
+WORLD closed

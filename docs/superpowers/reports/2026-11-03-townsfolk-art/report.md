@@ -117,3 +117,17 @@ Tobin's approved pixel appearance now has eight-direction idle/walk/talk animati
 is pending; production remains unchanged. Review memory peaks313.87 /192.37 MiB
 with four heroes, below512. Frame/import/bark/portrait/exact-rebuild checks pass.
 No PixelLab spend or gameplay/phone changes. [Current report](tobin-imagegen/report.md).
+
+## Latest continuation: Tobin installed, Lark finished review
+
+Tobin's exact approved body/six portraits are installed;118 focused tests pass,
+Debug/Release test-project builds have zero warnings/errors. Production peaks
+314.04 /192.37 MiB with four heroes, cold202,843,253 bytes. [Installation report](tobin-installed/report.md).
+
+Lark's appearance is approved and the complete eight-direction motion/portrait/TV
+review is ready. Finished-set approval remains pending, with guarded installation
+and no Lark production changes.144 native slots include one deliberately held
+peak; raw sources/curation/receipts are retained, with119 unrelated frames exact.
+Frame/foot/gait/portrait/import/bark/rebuild checks pass. Review memory peaks
+317.09 /192.37 MiB, below512 with four heroes. No PixelLab spend or gameplay/phone
+changes. [Current Lark report and previews](lark-imagegen/report.md).

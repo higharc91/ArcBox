@@ -1,6 +1,6 @@
 {
   "character": "Lark",
-  "stage": "appearance_candidate_pending_owner_review",
+  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 1,
@@ -14,13 +14,51 @@
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "productionInstalled": false,
-  "animationApproval": "pending_appearance_approval",
+  "animationApproval": "authorized_generation_complete",
   "fullSetTvApproval": "pending",
   "reviewNotes": [
-    "Existing approved concept reused; first pixel appearance sheet only.",
-    "All eight requested standing facings manually inspected in S,SW,W,NW / N,NE,E,SE order.",
-    "Rear concept defines consistent instrument carry: neck over anatomical right shoulder. Front concept had conflicting shoulder geometry.",
-    "Native pixel grid, alpha, palette, body size and anchors remain unvalidated.",
-    "No animations or portraits generated. Preserve appearance and full-set/TV approval gates."
-  ]
+    "Approved concept and pixel appearance reused.",
+    "Eight real facings with idle/walk/talk and six40x40 portraits.",
+    "144 native frame slots from143 selected source cells; one southwest talk peak is deliberately held instead of using a drifting pose.",
+    "Northwest paper satchel and south walk corrected; other119 native frames pixel-identical.",
+    "One regular grid and scale/offset per direction; shared96-colour exact-RGB palette, binary alpha, no per-frame recentering or mirroring.",
+    "Full-set/portrait/TV approval remains pending; review overlay only."
+  ],
+  "ownerAppearanceApproval": {
+    "date": "2026-11-04",
+    "quote": "Yes, looks great. Continue",
+    "source": "candidate-1.png",
+    "scope": "Appearance approved; separate full-set/portrait/TV review remains."
+  },
+  "completedSet": {
+    "status": "pending_owner_full_set_and_tv_approval",
+    "nativeFrameSlots": 144,
+    "selectedSourceCells": 143,
+    "curatedHeldSlots": 1,
+    "portraits": 6,
+    "completionImageToolCalls": 11,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": false,
+    "sha256": {
+      "review_lark.png": "c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b",
+      "review-sprite.json": "72884d6355a22834f16bccbbf1941c5633a8d293cef8b562ed0a394bfa0570e9",
+      "palette.json": "d9004161065a59cf2100533646a444ce41e2fb4acd3ba218d491e748c241cb99",
+      "atlas-validation.json": "9b32c9901db71d07cb23072d8cb6fdb7d1d2578304dc4833e64a0e3f8f767ca1",
+      "portraits-validation.json": "21a2d4cf6df58f04aa36c95ad31028eee40569daabb3af1e7b9afb0bd5ba22de",
+      "lark-eight-direction-idle.gif": "b1d7a6ee8ee078e82cf4a2b8c7ba76383e061c7001059290aedbdf775f8df526",
+      "lark-eight-direction-walk.gif": "fe66de2fab309037a75161da753f64426e2b03a531c6e982591878412a5b8e17",
+      "lark-eight-direction-talk.gif": "80a65c17882840c75f98ff847c37893be07118791fe1b1cff4f4a0906047e8f5",
+      "lark-portraits-review.png": "308375c7580fa49f04af1051ff72e7275d50bb7c61ee874473116f0de39d31d3",
+      "lark-directions-review.png": "7b5c3fe9072a2e75f1213976f1251b428d18f9478f03b940d5390854770faafb",
+      "lark-finished-review.mp4": "e18f3cae187928fecdc8de140390fcf7eedbbcea6261fc67dbca3c0413d2a212",
+      "review-validation.json": "cbca7cb962c515a29c7e860a9e4957fc44979b171b7931b2e917d3137d727396",
+      "lark-closeup-review.gif": "bcc4e99da207c61af527ce0083ceeb6bbe4552fd30a2cc06715917b942c2e675",
+      "directional/curation.json": "785c632597f9ee7a77aaf5cb56f9add694495f26de709507416fa83c4b3ec0f4",
+      "directional/preserved-frames.json": "96f05dd9d9502ddfac743d998f99590f37d29c149f54d00b85ed77909547114f"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/lark-imagegen/world-songkeeper.png",
+      "sha256": "eb00b51423cfdce3430028303c9385a8233a2593e6a7d1d9be39094a2be03633"
+    }
+  }
 }

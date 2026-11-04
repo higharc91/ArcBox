@@ -312,3 +312,17 @@ builds have zero warnings/errors. Fresh four-party production memory peaks:
 **202,843,253 bytes /4,828 files**, +705,737 bytes. Rules, balance and phone contracts
 unchanged. Evidence: `reports/2026-11-03-townsfolk-art/tobin-installed/report.md`.
 Lark's appearance approval has arrived; the completed-set/TV gate remains separate.
+
+### Issue #80 — Lark finished-set review ready
+
+Lark's pixel appearance was approved: “Yes, looks great. Continue”. The complete
+image-tool review now includes eight real idle/walk/talk facings,144 native slots
+from143 selected source cells (one valid talk peak is held), six40×40 portraits,
+a16.6-second reel and a native TV square screenshot. Full-set/portrait/TV approval
+remains pending; no Lark production installation. Northwest satchel/south walk
+corrections retain119 unrelated native frames exactly; frame/alpha/palette/height/
+foot/gait, typed importer/bark/portrait and exact-rebuild checks pass. Review peaks
+**317.09 MiB Ashen /192.37 MiB Cinder**, four heroes, cap512. Production remains
+202,843,253 bytes after approved Tobin installation.11 completion image-tool calls,
+zero PixelLab calls/spend; rules/balance/phone unchanged. Other21 sprite sets and
+remaining portraits are ahead. Report: `reports/2026-11-03-townsfolk-art/lark-imagegen/report.md`.

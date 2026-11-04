@@ -1,30 +1,93 @@
-# Lark — first pixel appearance review
+# Lark — completed image-tool review set
 
-The owner selected Lark next and authorized starting the appearance pass.
-The existing approved Scenario concept is reused; this is a pixel translation,
-not a new concept. No PixelLab connection or credit spend.
+The owner approved the pixel appearance: **“Yes, looks great. Continue”**.
+The finished directional/motion/portrait/native TV set is ready for review.
+It remains a separate overlay; production contains approved Bree, Halden,
+Aubrine and Tobin. No PixelLab API call, credit debit, purchase or upgrade.
 
-![First appearance candidate](candidate-1.png)
+[Watch the 16.6-second finished review](lark-finished-review.mp4).
+Actual sprite loops and portraits, ending with a **labelled native TV still**;
+the reel is silent, and its closing shot is not live video footage.
 
-Requested direction order: south, southwest, west, northwest; north, northeast,
-east, southeast. Practical patched olive/brown travelling layers, hood down,
-half-up hair bun, clean-shaven androgynous face, worn boots and song papers.
-Hands empty, with the worn pear-shaped instrument carried on the back.
+![Idle, walk and talk close-up](lark-closeup-review.gif)
 
-The concept's front and rear studies disagree on which shoulder the instrument
-neck rises over. The prompt uses the **rear carry view** to define one consistent
-geometry: neck over anatomical right shoulder, body toward left lower back.
-Satchel/papers at anatomical left hip; scroll tube at right hip. This resolves
-the angle mismatch without regenerating the approved concept. Equipment
-handedness remains part of directional QA; do not silently mirror the sprite.
+[Eight-direction idle](lark-eight-direction-idle.gif),
+[walk](lark-eight-direction-walk.gif), [talk](lark-eight-direction-talk.gif),
+[standing views](lark-directions-review.png), [portrait moods](lark-portraits-review.png),
+[native square TV](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/lark-imagegen/world-songkeeper.png),
+[2× square detail](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/lark-imagegen/square-detail.png).
+Directions: south, southwest, west, northwest; north, northeast, east, southeast.
+Portrait order: idle, hurt, happy; angry, sad, surprised.
 
-`appearance-request.json` retains the exact image-tool request. `sprite-approval.json`
-records the original generated path, source/output hashes and current review state.
-No monetary image-tool price is inferred. Completed Bree, Halden, Aubrine and
-Tobin assets are reused, not regenerated.
+## Assets and curation
 
-**Appearance approval is pending.** This enlarged sheet is not a validated native
-atlas. Check all eight facings, equipment, transparency, logical grid, palette,
-adult scale, anchors and ground contact during import. Idle/walk/talk, six portrait
-moods and the final full-set/TV approval gate remain ahead. Nothing is installed
-in production, and rules, balance and phone contracts remain unchanged.
+- Eight real facings and idle/walk/talk: **144 native frame slots** from143 selected
+  source cells. The southwest talk clip holds its valid peak pose in one slot,
+  replacing a raw pose with sideways foot drift. It does not invent a sixth pose
+  or move individual frames to hide the problem. Raw sources remain unchanged.
+- Atlas1728×768 / **5.0625 MiB RGBA**, frames96×96, anchor `[48,84]`, scale0.5.
+  Adult body target72 native /36 world pixels. Do not apply this height to children
+  or goblins. Idle/talk play ten indices over six slots; walk plays six once.
+- `normalized/` contains each final frame; `rotations/` the final native facings.
+  `directional/guides/` holds appearance inputs, not the completed runtime set.
+- The approved instrument stays on the back, neck over anatomical right shoulder,
+  pear body toward left lower back. Paper satchel left hip; scroll tube right hip.
+  The rear concept defines the shoulder geometry where front/rear studies disagreed.
+  Hands stay empty; no instrument-playing animation is implied by a talk gesture.
+- The northwest source put a scroll tube on the near left hip. One image-tool edit
+  corrects all18 poses to the paper satchel. A second edit repairs the south walk's
+  repeated planted boot; only that six-frame row is imported. **119 unrelated
+  native frames remain pixel-identical**, verified by `verify-preserved.cjs`.
+- One regular source-column grid is fitted per direction from six idle-foot centres;
+  one scale/offset is shared by all18 poses. No individual recentering or mirroring.
+  The locked96-colour palette uses exact RGB-keyed nearest lookup, avoiding the
+  reduced-colour bucket cache that changed unrelated ties in the Tobin trial.
+  Runtime alpha is binary. Horizontal/vertical foot, bounds, height and motion
+  checks pass; the front walk now changes both boot masks across its cycle.
+- Six native40×40 portraits, common scale/offset, shared64-colour palette.
+  Body keys: `characters.minstrel` / `characters.lark`; portrait aliases:
+  `minstrel` / `lark`. No civilian attack animation.
+
+`generation-receipts.json` records exact requests, input/output hashes and raw
+original paths:11 completion image-tool calls plus the prior appearance call,
+zero PixelLab calls/credits. No monetary image-tool price is inferred. Existing
+approved concepts and other completed character art were reused, not regenerated.
+
+## Reproduce offline
+
+From the repository root with Node/npm and .NET10:
+
+```sh
+npm ci --prefix tools/tactics-assets/imagegen/townsfolk
+npm run build-lark --prefix tools/tactics-assets/imagegen/townsfolk
+npm run verify-lark --prefix tools/tactics-assets/imagegen/townsfolk
+node tools/tactics-assets/imagegen/townsfolk/lark/build-receipts.cjs
+node tools/tactics-assets/imagegen/townsfolk/lark/build-review-pack.cjs /absolute/external/lark-review
+dotnet run tools/tactics-assets/imagegen/townsfolk/lark/verify-runtime.cs -- /absolute/external/lark-review
+```
+
+These are offline art utilities, not API/game/phone dependencies. The overlay
+refuses unrelated destinations and never writes production. Unchanged content is
+linked; never edit linked rules/content. Generated manifests and images are separate.
+After host setup/build with Godot4.7.2 .NET:
+
+```sh
+ARCBOX_TACTICS_ART_ROOT=/absolute/external/lark-review \
+  "$GODOT" --path src/ArcBox.Host -- --world-demo=ashen_ford \
+  '--world-looks=songkeeper@29,58@32,61' --shots=/absolute/shots \
+  --perf --res=1280x720 --preset=low --quit-after=150
+```
+
+Linux software Vulkan and Windows left-monitor/no-focus handling follow the
+handoff/TV-host guide. Cloud memory results are not a hardware timing benchmark.
+
+## Approval gate
+
+Appearance approval is complete. **Finished-set/portrait/TV approval is pending**.
+The approval record binds the finished review to15 exact asset/validation hashes
+and its native TV screenshot. The guarded installer refuses appearance approval
+alone, verified against the complete unchanged production inventory. After full
+approval, install these exact assets, add strict Lark playback/portrait/stop-resume
+cases and rerun production memory/cold-pack checks. Do not ask for appearance
+approval again or regenerate completed art. No PR or merge.
+[Report and receipts](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/lark-imagegen/report.md).

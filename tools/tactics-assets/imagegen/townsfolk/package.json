@@ -7,7 +7,9 @@
     "build-aubrine": "node mother-aubrine/build-review.cjs && node mother-aubrine/build-portraits.cjs",
     "verify-aubrine": "node mother-aubrine/verify-review.cjs",
     "build-tobin": "node tobin-fell/build-review.cjs && node tobin-fell/build-portraits.cjs && node tobin-fell/build-closeup.cjs",
-    "verify-tobin": "node tobin-fell/verify-review.cjs"
+    "verify-tobin": "node tobin-fell/verify-review.cjs",
+    "build-lark": "node lark/build-review.cjs && node lark/build-portraits.cjs && node lark/build-closeup.cjs",
+    "verify-lark": "node lark/verify-review.cjs && node lark/verify-preserved.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",

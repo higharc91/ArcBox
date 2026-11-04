@@ -8,7 +8,7 @@ full-set/TV approval arrived and her exact compact atlas is now installed. Halde
 complete eight-direction idle/walk/talk set is also now approved and installed.
 Mother Aubrine’s complete image-tool set and native TV review are now also approved
 and installed. Tobin’s approved body and six portraits are also installed. Lark’s
-appearance is approved and the complete-set review is being finished. Read the latest
+appearance is approved and the completed set awaits finished-set/TV approval. Read the latest
 [Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
@@ -357,3 +357,41 @@ See [the Tobin installation report](../reports/2026-11-03-townsfolk-art/tobin-in
 Rules/balance/phone contracts unchanged. Prior installation-pending notes are historical.
 Lark's appearance was approved: “Yes, looks great. Continue”; finish that separate
 review set, preserving the full-set/TV approval gate. No PixelLab spend or purchase.
+
+## Current checkpoint — Lark complete; final approval pending
+
+The owner approved Lark's appearance: **“Yes, looks great. Continue”**. Do not ask
+for that appearance approval again. All eight idle/walk/talk facings and six native
+40×40 portraits are finished under `tools/tactics-assets/imagegen/townsfolk/lark/`.
+Retained: exact requests, raw images, source receipts,144 native frame slots,
+143 selected source cells, shared palette, offline builders/verifiers, all-direction
+GIFs/contact sheets and a16.6-second silent reel ending with a labelled native TV
+still. Reuse them; do not regenerate completed concepts, motions or portraits.
+
+Read [the completed Lark report](../reports/2026-11-03-townsfolk-art/lark-imagegen/report.md).
+Final atlas SHA256:`c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b`.
+1728×768 /5.0625 MiB, frame96×96, anchor[48,84], scale0.5, playback10/6/10.
+One regular grid and shared scale/offset per direction; exact RGB-keyed locked96
+palette, binary alpha. No mirroring or per-frame recentering. Northwest near hip
+is corrected to paper satchel; south walk uses corrected opposite-leg poses.
+Southwest talk holds its valid peak instead of a rejected drifting raw frame.
+All119 unrelated native frames remain exact. Final native facings are `rotations/`,
+not the older `directional/guides/` appearance inputs. Adult human height must not
+be copied to children/goblins.
+
+**Lark finished-set/portrait/TV approval is pending.** Approval metadata binds15
+exact review/validation hashes and the TV screenshot. The guarded installer
+refuses the pending gate, with production inventory unchanged by Lark. After full
+approval, install the exact set, add strict Lark action-count/portrait/stop-resume
+cases and rerun production memory/cold-pack checks. Aliases are minstrel and lark.
+
+Frame/foot/gait/portrait checks, typed game importer/bark and exact offline rebuild
+pass. Four actual heroes review peaks: **317.09 MiB Ashen /192.37 MiB Cinder**, below512.
+Current production contains approved Bree, Halden, Aubrine and Tobin, cold pack
+202,843,253 bytes /4,828 files; inventory hash remains the Tobin-installed hash.
+Tobin's fresh118 focused tests and zero-warning Debug/Release test-project builds
+are in his installation report. Rules, balance and phone contracts unchanged.
+11 Lark completion image-tool calls, zero PixelLab calls/credits/purchases. Other21
+sprite sets and remaining portraits are ahead. Check live PixelLab costs/balance
+before future paid work; never purchase credits. Pull with rebase before pushing
+this branch; no PR, merge or issue closure. Earlier pending-state notes are historical.
