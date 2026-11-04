@@ -87,27 +87,42 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// The vote on the first item waiting begins: between the players here with a character now, saved with the cursor it sets aside (on the
-    /// first item; the next keeps it). With one or none left to choose, the items go at once, to them or else whoever found each.
+    /// first item; the next keeps it). With one left to choose, the items go at once, to them. With nobody here who has a character, they
+    /// keep waiting (a vote under way is set down, its cursor put back), and the next walk with someone here asks again.
     /// </summary>
     /// <returns>
-    /// False only when no vote was under way and the items went at once: the caller carries on as it would have. True when the vote began,
-    /// or it was under way and the party has gone back to walking.
+    /// False only when no vote was under way and none began: the caller carries on as it would have. True when the vote began, or it was
+    /// under way and the party has gone back to walking.
     /// </returns>
     private bool BeginLootVote()
     {
         var world = _doc.World!;
         var loot = world.Loot!;
         var choices = LootChoices();
-        if (choices.Length <= 1)
+        if (choices.IsEmpty)
         {
-            foreach (var item in loot.Items)
-                Stack(choices.FirstOrDefault() ?? item.By, [(new ItemId(item.Item), item.Count)]);
-            _doc = _doc with { World = _doc.World! with { Loot = null, Story = loot.Voting ? loot.Under : _doc.World.Story } };
-            KeepWorld();
-            Save();
             if (!loot.Voting)
                 return false;
+            EndTelling();
+            _doc = _doc with { World = world with { Loot = loot with { Voting = false, Choices = [], Under = null, Service = null }, Story = loot.Under } };
+            KeepWorld();
+            Save();
             ToExploration();
+            OpenService(loot.Service);
+            return true;
+        }
+        if (choices.Length == 1)
+        {
+            foreach (var item in loot.Items)
+                Stack(choices[0], [(new ItemId(item.Item), item.Count)]);
+            if (!loot.Voting)
+            {
+                _doc = _doc with { World = _doc.World! with { Loot = null } };
+                KeepWorld();
+                Save();
+                return false;
+            }
+            EndLoot(loot);
             return true;
         }
         if (_phase == TacticsPhase.Exploration)
@@ -128,11 +143,59 @@ public sealed partial class TacticsGame
         return true;
     }
 
-    /// <summary>Who takes the item nobody voted on: whoever found it, if they're one of the choices, else the leader, else the first.</summary>
-    private string LootUnanswered(ImmutableArray<string> options)
+    /// <summary>The last item is given: the vote's cursor goes, the one it set aside comes back, the party walks, and a service it put off opens.</summary>
+    private void EndLoot(LootSave loot)
     {
-        var item = _doc.World!.Loot!.Items[0];
-        return options.Contains(item.By) ? item.By : _lead is { } lead && options.Contains(lead) ? lead : options[0];
+        EndTelling();
+        _doc = _doc with { World = _doc.World! with { Loot = null, Story = loot.Under } };
+        KeepWorld();
+        Save();
+        ToExploration();
+        OpenService(loot.Service);
+    }
+
+    /// <summary>The shop, inn or temple a conversation opened while its items were voted on, if it's still there.</summary>
+    private void OpenService(string? service)
+    {
+        if (service is not null && _phase == TacticsPhase.Exploration
+            && RegionShops.FirstOrDefault(s => s.Id == service && ShopRules.Present(s, StoryFlags())) is { } shop)
+            StartShop(shop);
+    }
+
+    /// <summary>
+    /// The loot vote's clock ran out, or everyone here answered. Only the players here with a character count: the most votes among them
+    /// takes it, a tie going to the leader's vote, else the leader, else the first tied; with no vote, whoever found it if they're here, else
+    /// the leader, else the first here. With nobody here it waits.
+    /// </summary>
+    private void LootVoteDue()
+    {
+        var here = LootChoices();
+        if (here.IsEmpty)
+        {
+            Hold();
+            return;
+        }
+        var loot = _doc.World!.Loot!;
+        var options = loot.Choices.Where(here.Contains).ToImmutableArray();
+        if (options.IsEmpty)
+            options = here;
+        var counts = options.Select(o => (Option: o, Votes: _votes.Count(v => here.Contains(v.Key) && v.Value == o))).ToList();
+        var top = counts.Max(c => c.Votes);
+        string pick;
+        if (top > 0)
+        {
+            var tied = counts.Where(c => c.Votes == top).Select(c => c.Option).ToList();
+            pick = tied.Count == 1 ? tied[0]
+                : _lead is { } lead && _votes.TryGetValue(lead, out var own) && tied.Contains(own) ? own
+                : _lead is { } l2 && tied.Contains(l2) ? l2
+                : tied[0];
+        }
+        else
+        {
+            var by = loot.Items[0].By;
+            pick = here.Contains(by) ? by : _lead is { } lead && here.Contains(lead) ? lead : here[0];
+        }
+        TakeLoot(pick);
     }
 
     /// <summary>
@@ -148,19 +211,23 @@ public sealed partial class TacticsGame
         var taker = _doc.Members.ContainsKey(member) ? member : item.By;
         Stack(taker, [(new ItemId(item.Item), item.Count)]);
         var rest = loot.Items.RemoveAt(0);
-        _doc = _doc with { World = _doc.World! with { Loot = loot with { Items = rest, Seq = loot.Seq + 1 } } };
-        var line = $"{_doc.Members.GetValueOrDefault(taker)?.Character.Name ?? taker} takes the {LootLabel(item)}.";
+        loot = loot with { Items = rest, Seq = loot.Seq + 1 };
+        _doc = _doc with { World = _doc.World! with { Loot = loot } };
+        Say($"{_doc.Members.GetValueOrDefault(taker)?.Character.Name ?? taker} takes the {LootLabel(item)}.");
         if (!rest.IsEmpty)
-        {
             BeginLootVote();       // the next item's question is saved with its first line, with this one given
-            Say(line);
-            return;
-        }
-        _doc = _doc with { World = _doc.World! with { Loot = null, Story = loot.Under } };
-        KeepWorld();
-        Save();
-        ToExploration();
-        Say(line);
+        else
+            EndLoot(loot);
+    }
+
+    /// <summary>
+    /// After anything the party does in the world: found items waiting with no vote under way (a quest's reward paid as a step was saved,
+    /// say) are asked about now, not at the end of the next scene.
+    /// </summary>
+    private void LootAfterAction()
+    {
+        if (_phase == TacticsPhase.Exploration && LootWaiting && _doc.World!.Loot!.Voting is false && Camp is null && _doc.World.Shop is null)
+            BeginLootVote();
     }
 
     /// <summary>Back into the loot vote after a restart, Muster or a new session: the same item's question, asked again.</summary>

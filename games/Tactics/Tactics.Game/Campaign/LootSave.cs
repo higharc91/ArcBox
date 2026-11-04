@@ -16,13 +16,15 @@ public sealed record LootDue(string Item, int Count, string By, string From);
 /// it. <paramref name="Choices"/> are the members the vote on the first is between (the players here with a character as it opened), and
 /// <paramref name="Under"/> the story cursor the vote set aside (a battle beat waiting at its fight), which it puts back when it ends.
 /// <paramref name="Seq"/> counts the votes decided, so each item's question is a new one on the phones. One more optional field of
-/// <see cref="WorldSave"/> and no version bump: a document from before reads with none.
+/// <see cref="WorldSave"/> and no version bump: a document from before reads with none. <paramref name="Service"/> is the shop, inn or
+/// temple a conversation opened as it gave an item: it opens once the last item is given.
 /// </summary>
 public sealed record LootSave(ImmutableArray<LootDue> Items,
     ImmutableArray<string> Choices = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Under = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Voting = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Seq = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Seq = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Service = null)
 {
     /// <summary>The items waiting; never a default array.</summary>
     public ImmutableArray<LootDue> Items { get => field.IsDefault ? [] : field; init; } = Items;

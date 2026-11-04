@@ -820,6 +820,7 @@ public sealed partial class TacticsGame
     {
         if (CampVote) { RestVoteDue(); return; }
         if (EntranceVote) { EntranceVoteDue(); return; }
+        if (LootVote) { LootVoteDue(); return; }      // only the players here count (USER DECISION 1)
         if (!Questioning || CurrentNode() is null)
             return;
         switch (_telling)
@@ -835,7 +836,6 @@ public sealed partial class TacticsGame
         }
         var unanswered = _checking is { Check: { } check }
             ? (Func<ImmutableArray<string>, string>)(_ => SkillCheck.Best(Cards(check.Skill).Select(c => (c.Member, c.Bonus))))
-            : LootVote ? LootUnanswered     // whoever found it (USER DECISION 1)
             : _ => SceneRun.Unanswered(_offered, vote: true).Id;
         switch (VoteRules.Close(Tally(), _lead, FirstConnected(), unanswered))
         {

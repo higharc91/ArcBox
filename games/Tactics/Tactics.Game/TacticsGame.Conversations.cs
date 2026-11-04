@@ -31,8 +31,16 @@ public sealed partial class TacticsGame
         KeepWorld();
         Save();
         ToExploration();
-        if (_phase == TacticsPhase.Exploration && person.Service is { } service && RegionShops.FirstOrDefault(s => s.Id == service && ShopRules.Present(s, StoryFlags())) is { } shop)
-            StartShop(shop);
+        if (person.Service is not { } service)
+            return;
+        if (LootVote)
+        {
+            // It gave an item too: the party votes on it first, and the service opens after the last (saved with the vote).
+            _doc = _doc with { World = _doc.World! with { Loot = _doc.World.Loot! with { Service = service } } };
+            Save();
+        }
+        else
+            OpenService(service);
     }
 
     private void ResumeConversation(StorySave cursor)
