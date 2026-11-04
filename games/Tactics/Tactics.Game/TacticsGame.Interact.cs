@@ -245,7 +245,7 @@ public sealed partial class TacticsGame
     /// its loot to <paramref name="by"/> if this step opens it, its trap's effect on them if this step springs it, and a lever's passages.
     /// All of it goes in the document; the caller saves.
     /// </summary>
-    private string? Apply(InteractableDef def, InteractOutcome outcome, string by, string? line = null)
+    private string? Apply(InteractableDef def, InteractOutcome outcome, string by, string? line = null, string? sprungBy = null)
     {
         var before = ThingState(def);
         var after = outcome.Apply(before);
@@ -253,7 +253,7 @@ public sealed partial class TacticsGame
         AddFlags(outcome.Sets);
         if (InteractScenes.LootDue(before, outcome))
             GiveLoot(def, by);
-        var hurt = InteractScenes.SpringDue(before, outcome) ? Spring(def, by) : null;
+        var hurt = InteractScenes.SpringDue(before, outcome) ? Spring(def, sprungBy ?? by) : null;
         Event(def, outcome.Event, by, hurt is null ? line : line is null ? hurt : $"{line} {hurt}");
         if (Interactables.KindOf(def).Family == InteractableFamily.Switch && after.State != before.State)
             foreach (var target in def.Targets.Select(ThingNamed).OfType<InteractableDef>())
@@ -269,8 +269,8 @@ public sealed partial class TacticsGame
     {
         var world = _doc.World!;
         // A way that fails, or a search that misses, now is spent until the next long rest after this one.
-        if (save.Rest < world.RestSeq && (save.Searched || save.Spent.Any(Interactables.Reopens)))
-            save = save with { Rest = world.RestSeq };
+        if (save.Rest <= world.RestSeq && Interactables.HasReopenable(save))
+            save = save with { Rest = world.RestSeq + 1 };
         var things = world.Things ?? Ordinal.Map<InteractableSave>();
         if (things.TryGetValue(def.Id, out var kept) && kept == save)
             return;
@@ -595,7 +595,8 @@ public sealed partial class TacticsGame
         if (Cursor?.Thing is not { } cursor || ThingPlan(cursor) is not { } plan || !plan.Outcomes.TryGetValue(node.Id, out var outcome)
             || ThingNamed(cursor.Id) is not { } def)
             return;
-        if (Apply(def, outcome, cursor.By, node.Lines.Length > 0 ? node.Lines[^1].Text : null) is { } hurt)
+        // A trap a roll set off (a failed disarm) hurts whoever rolled it, not whoever began the interaction.
+        if (Apply(def, outcome, cursor.By, node.Lines.Length > 0 ? node.Lines[^1].Text : null, roll?.Member) is { } hurt)
             Say(hurt);      // the scene says the trap's words; the TV's notice says what it did
     }
 

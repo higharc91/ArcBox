@@ -317,16 +317,27 @@ public static class Interactables
     /// <summary>True for a way through a lock that a long rest reopens once it has failed: pick, force and seal (USER DECISION 2). A disarm isn't: failing it sprang the trap.</summary>
     public static bool Reopens(string approach) => approach is PickApproach or ForceApproach or SealApproach;
 
+    /// <summary>True when <paramref name="save"/> has a failed way or search that a long rest reopens.</summary>
+    public static bool HasReopenable(InteractableSave save) => save.Searched || save.Spent.Any(Reopens);
+
     /// <summary>
-    /// <paramref name="save"/> as it is after the party's long rest number <paramref name="restSeq"/> (USER DECISION 2, decided 2026-11-03): a
-    /// failed pick, force or seal, and a failed search, were spent until the next rest after the one they were spent in, so once a rest has
-    /// passed they're there to try again, and the save says they were reopened at this rest. A failed disarm stays spent (its trap went off).
-    /// Anything else is as it was.
+    /// <paramref name="save"/> as it is once the party's long rests number <paramref name="restSeq"/> (USER DECISION 2, decided 2026-11-03):
+    /// a failed pick, force or seal, and a failed search, are spent until the rest <see cref="InteractableSave.Rest"/> names, the one after
+    /// they failed, so once it has come they're there to try again, and the save is kept as of the next rest (<c>restSeq + 1</c>), so its
+    /// rest only goes up. A save that names no rest (0, written before this) stays as it is: the document stamps those as it's read
+    /// (<see cref="Stamped"/>). A failed disarm stays spent (its trap went off). Anything else is as it was.
     /// </summary>
     public static InteractableSave Rested(InteractableSave save, int restSeq)
-        => save.Rest < restSeq && (save.Searched || save.Spent.Any(Reopens))
-            ? save with { Spent = [.. save.Spent.Where(a => !Reopens(a))], Searched = false, Rest = restSeq }
+        => save.Rest != 0 && save.Rest <= restSeq && HasReopenable(save)
+            ? save with { Spent = [.. save.Spent.Where(a => !Reopens(a))], Searched = false, Rest = restSeq + 1 }
             : save;
+
+    /// <summary>
+    /// <paramref name="save"/> with its failed ways and search spent until the next long rest after <paramref name="restSeq"/>, if they name
+    /// no rest yet: a save from before USER DECISION 2 was built (<see cref="InteractableSave.Rest"/> 0), or one failing now.
+    /// </summary>
+    public static InteractableSave Stamped(InteractableSave save, int restSeq)
+        => save.Rest == 0 && HasReopenable(save) ? save with { Rest = restSeq + 1 } : save;
 
     /// <summary>
     /// True when <paramref name="after"/> has gone back on <paramref name="before"/>: something found lost, a lock locked again, a trap

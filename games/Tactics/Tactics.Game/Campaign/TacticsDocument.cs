@@ -244,6 +244,9 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
                 .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
         };
+        // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
+        if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
+            doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
         // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
         return doc.Gold > 0 && !doc.Members.IsEmpty
             ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;

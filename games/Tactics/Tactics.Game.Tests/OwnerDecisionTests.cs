@@ -141,9 +141,9 @@ public sealed class OwnerDecisionTests
         Vote(s, 0, "pick");
         Until(s, () => Cursor(s)?.Roll is not null, "the second pick's roll");
         Finish(s);
-        // Spent again, until the rest after this one; the save says which rest it was spent in.
+        // Spent again, until the rest after this one: the save names rest 2, the one that reopens it.
         Assert.Equal(["pick"], Saved(s, "door")!.Spent);
-        Assert.Equal(1, Saved(s, "door")!.Rest);
+        Assert.Equal(2, Saved(s, "door")!.Rest);
     }
 
     [Fact]
@@ -161,7 +161,7 @@ public sealed class OwnerDecisionTests
         s.Send(0, "search");
         Assert.Equal(["cache"], Cursor(s)!.Thing!.Search);
         Finish(s);
-        Assert.Equal((true, 1), (Saved(s, "cache")!.Searched, Saved(s, "cache")!.Rest));
+        Assert.Equal((true, 2), (Saved(s, "cache")!.Searched, Saved(s, "cache")!.Rest));
     }
 
     [Fact]

@@ -166,9 +166,10 @@ public sealed record InteractableDef(string Id, string Kind, [property: JsonRequ
 /// <param name="Searched">True once an active Search has failed to find it: it can't be searched for again until the party's next long rest, though passive skills still may.</param>
 /// <param name="Spent">The ways through its lock, or at its trap, that have failed (<see cref="Interactables.PickApproach"/> and the rest).</param>
 /// <param name="Rest">
-/// The long rest (<c>WorldSave.RestSeq</c>) its failed lock ways and failed search were spent in: they're spent until the next one, which
-/// reopens them (USER DECISION 2, decided 2026-11-03; <see cref="Interactables.Rested"/>). 0 isn't written, so a save from before reads as
-/// spent at rest 0, which the next rest clears. A failed disarm is never reopened: it sprang the trap.
+/// The long rest (<c>WorldSave.RestSeq</c>) that reopens its failed lock ways and failed search: the one after they failed (USER DECISION 2,
+/// decided 2026-11-03; <see cref="Interactables.Rested"/>). 0, not written, names none: a save from before is stamped with the next rest as
+/// the document is read (<see cref="Interactables.Stamped"/>), so what failed then reopens at the next rest. A failed disarm is never
+/// reopened: it sprang the trap.
 /// </param>
 /// <param name="Keyed">True once its lock was opened with its key: the key ring says the key's been used (USER DECISION 8, decided 2026-11-03).</param>
 public sealed record InteractableSave(string State,
