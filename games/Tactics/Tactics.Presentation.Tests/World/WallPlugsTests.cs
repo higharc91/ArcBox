@@ -97,6 +97,29 @@ public sealed class WallPlugsTests
         }
     }
 
+    private static readonly Lazy<WorldPlan> Ford = new(() => WorldPlan.Build(new BoardTerrain(Pack.Ground("ashen_ford").Map, null), Pack.Art));
+
+    /// <summary>
+    /// Only a plugged tile's ground is held back from the overlay: what stands on it still goes over whoever's behind. Here a plug is put, as a test, on a
+    /// tile of the ford that a piece of its bridge lies over, with a unit behind the piece: the piece is painted over the unit, the tile's top isn't.
+    /// </summary>
+    [Fact]
+    public void What_stands_on_a_plugged_tile_still_goes_over_a_unit_behind_it()
+    {
+        var plan = Ford.Value;
+        var pieces = plan.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Prop).ToArray();
+        var tile = pieces.Select(p => p.Face.Tile).Distinct().OrderBy(t => t.X).ElementAt(1);
+        var plug = WallPlugs.Items(plan, Pack.Art, [new WallPlug(tile, "sw")]);
+        var behind = tile with { Y = tile.Y - 1 };
+        var unit = UnitPlan.Walkers([new WalkerView("a", "a", "characters.class_rogue", true, true)],
+            new Dictionary<string, UnitPlace> { ["a"] = UnitPlace.On(plan.Terrain, behind) }, new Dictionary<string, UnitPose>(), UnitArt.Load(Pack.Root));
+
+        var over = plan.Overlay(unit, extra: plug).Select(at => plan.Blocks[at.Block].Lit.Items[at.Item]).OfType<LitFace>().Where(f => f.Face.Tile == tile).ToArray();
+
+        Assert.Contains(over, f => f.Face.Kind == FaceKind.Prop);
+        Assert.DoesNotContain(over, f => f.Face.Kind is FaceKind.Top or FaceKind.Side or FaceKind.Blend or FaceKind.Lip);
+    }
+
     [Fact]
     public void No_plugs_or_plugs_off_the_map_draw_nothing()
     {

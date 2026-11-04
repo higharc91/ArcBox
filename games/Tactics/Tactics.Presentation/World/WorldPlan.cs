@@ -203,12 +203,15 @@ public sealed class WorldPlan
         var (chosen, waiting) = (new HashSet<ItemAt>(), new Stack<ItemAt>());
         // A plug stands in for its tile's own ground, which the block draws open beneath it: that ground is never painted again over the plug.
         // It was: the open tile's top, later in the order than the plug's sides, went back over them, and the gap showed through as a notch.
+        // Only its ground, though: what stands on the tile (a building's column, a bridge's piece) still goes over whoever is behind it.
+        static bool Ground(FaceKind kind) => kind is FaceKind.Under or FaceKind.Side or FaceKind.Lip or FaceKind.Top or FaceKind.Blend or FaceKind.Tint
+            or FaceKind.Decal or FaceKind.Shadow;
         var plugged = extra?.OfType<LitFace>().Select(f => f.Face.Tile).ToHashSet();
         void Add(ItemAt at)
         {
             if (fade?.IsFaded(at) == true)
                 return;
-            if (plugged is { Count: > 0 } && Blocks[at.Block].Lit.Items[at.Item] is LitFace { Face: var face } && plugged.Contains(face.Tile))
+            if (plugged is { Count: > 0 } && Blocks[at.Block].Lit.Items[at.Item] is LitFace { Face: var face } && Ground(face.Kind) && plugged.Contains(face.Tile))
                 return;
             if (chosen.Add(at))
                 waiting.Push(at);
