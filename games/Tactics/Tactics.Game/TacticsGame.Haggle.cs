@@ -9,7 +9,7 @@ namespace Tactics.Game;
 /// Haggle; the party picks who rolls Persuasion against the shop's <c>haggle</c> DC (default 15), on the 5d check screen, and the roll is
 /// saved with the node it leads to, as every 5d roll is. A pass takes a tenth off what the party buys and adds a tenth to what it sells for
 /// the rest of the visit; a fail changes nothing and costs nothing. The visit's cursor keeps the result, so a restart neither rolls again nor
-/// forgets it, and the next visit starts fresh. Rooms and cures are services: their prices don't haggle.
+/// forgets it, and the next visit starts fresh. Rooms and cures haggle too (the owner, 2026-11-04): a tenth off, as for what the party buys.
 /// </summary>
 public sealed partial class TacticsGame
 {
@@ -22,8 +22,8 @@ public sealed partial class TacticsGame
     /// <summary>True while a shop is open and trading: open, and not haggling.</summary>
     private bool Trading => _doc.World?.Shop is not null && !Haggling;
 
-    /// <summary>True when the open shop sells or buys anything: a shop of only services (an inn, a temple) has nothing to haggle over.</summary>
-    private static bool Haggles(ShopDef shop) => !shop.Stock.IsEmpty || !shop.Buys.IsEmpty;
+    /// <summary>True when the open shop has a price to haggle over: it sells, buys, or offers rooms or cures.</summary>
+    private static bool Haggles(ShopDef shop) => !shop.Stock.IsEmpty || !shop.Buys.IsEmpty || !shop.Services.IsEmpty;
 
     /// <summary>True when the party may haggle now: at a shop that trades, not yet this visit, with no rest under way.</summary>
     private bool CanHaggle => OpenShop is { } shop && Haggles(shop) && _doc.World!.Shop is { Haggle: null, Haggling: false } && Camp is null;
@@ -45,7 +45,9 @@ public sealed partial class TacticsGame
         ImmutableArray<SceneNode> nodes =
         [
             new(HaggleId, [Line(HaggleId, $"The party haggles with {shop.Name}.")], [], [option], false, null, false),
-            new("haggled", [Line("haggled", $"{shop.Name} gives way: a tenth off what you buy, and a tenth more for what you sell, this visit.")], [], [], false, null, true),
+            new("haggled", [Line("haggled", shop.Stock.IsEmpty && shop.Buys.IsEmpty
+                ? $"{shop.Name} gives way: a tenth off, this visit."
+                : $"{shop.Name} gives way: a tenth off what you buy, and a tenth more for what you sell, this visit.")], [], [], false, null, true),
             new("refused", [Line("refused", $"{shop.Name} won't budge on price. No harm done.")], [], [], false, null, true),
         ];
         return new SceneDef(HaggleId, "", null, $"Haggle with {shop.Name}", [], [], [SceneDef.Narrator], HaggleId, nodes, false);

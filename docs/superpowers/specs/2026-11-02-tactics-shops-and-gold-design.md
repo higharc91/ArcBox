@@ -118,6 +118,10 @@ Default: **half** the price, rounded down (`SellRatio = 0.5` in a rules file, no
 items (keys, quest things — today these are flags, not bag items) can't be sold by construction.
 
 ### 3.3 A Persuasion discount — USER DECISION E (decided 2026-11-03: on, once per visit)
+
+**Rooms and cures haggle too (the owner, 2026-11-04).** A passed haggle also takes a tenth off a room or a cure, rounded up as item buys are
+(`ShopRules.Service`), and the inn and the temple offer Haggle like any shop. The server charges, phones show and the TV's panel lists the
+same price.
 BG3 moves prices by attitude/Persuasion. When a shop opens, the leader may try **Haggle** once per shop per visit: a 5d check
 (party picks who rolls Persuasion, DC from the shop's `haggle`, default 15). Pass: buy prices −10% and sell +10% (from the ratio) for this
 visit; fail: no change (no penalty). The roll is saved like every 5d roll.

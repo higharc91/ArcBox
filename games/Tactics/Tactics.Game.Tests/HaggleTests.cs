@@ -110,6 +110,55 @@ public sealed class HaggleTests
         Assert.True(Screen(s).GetProperty("haggle").GetProperty("can").GetBoolean());
     }
 
+    /// <summary>The herbalist as a temple (only cures, DC 1), or as a shop that also cures.</summary>
+    private static RulesPack Cures(bool onlyCures) => ExplorationTests.EditedRules(folder =>
+    {
+        var file = Path.Combine(folder, "shops", "ashen_ford.json");
+        var json = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(file))!;
+        foreach (var shop in json["shops"]!.AsArray())
+        {
+            if (shop!["id"]!.GetValue<string>() != Shop) continue;
+            shop["haggle"] = 1;
+            shop["services"] = System.Text.Json.Nodes.JsonNode.Parse("""[{"id":"cure","name":"Healing","kind":"cure","price":25}]""");
+            if (onlyCures)
+            {
+                shop["stock"] = new System.Text.Json.Nodes.JsonArray();
+                shop["buys"] = new System.Text.Json.Nodes.JsonArray();
+            }
+        }
+        File.WriteAllText(file, json.ToJsonString());
+    });
+
+    // The owner, 2026-11-04: rooms and cures haggle too.
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_pass_takes_a_tenth_off_rooms_and_cures_too_even_where_nothing_else_is_sold(bool onlyCures)
+    {
+        var rules = Cures(onlyCures);
+        var s = ShopTests.AtShop(200, rules);
+        var doc = s.Game.Document;
+        doc = doc with { Members = Ordinal.Map(doc.Members.Select(m => (m.Key, m.Value with { Character = m.Value.Character with { Injuries = [new("cracked_ribs")] } }))) };
+        s = RestTests.Again(doc, rules: rules);
+        s.Send(0, "interact", new { target = "shop:" + Shop });
+        int Cure() => Screen(s).GetProperty("services").EnumerateArray().Single().GetProperty("price").GetInt32();
+        Assert.Equal(25, Cure());
+        Assert.True(Screen(s).GetProperty("haggle").GetProperty("can").GetBoolean());
+
+        Haggle(s);
+        var roller = s.Profiles[0]!.Value.Value;
+        for (var i = 0; i < 4; i++) s.Send(i, "pickRoller", new { member = roller });
+        Until(s, () => Doc(s).World!.Shop!.Haggle is not null, "the roll");
+        BackInTheShop(s);
+
+        Assert.Equal(23, Cure());                                                   // 25 × 0.9 = 22.5, rounded up as buys are
+        Assert.Equal(23, s.Host.Shop!.Services!.Value.Single().Price);
+        var payer = s.Profiles[0]!.Value.Value;
+        s.Send(0, "shopService", new { shop = Shop, service = "cure", member = payer, injury = "cracked_ribs", trade = "haggled-cure" });
+        Assert.Equal(200 - 23, Doc(s).Members[payer].Gold);
+        Assert.DoesNotContain(new InjuryId("cracked_ribs"), Doc(s).Members[payer].Character.Injuries);
+    }
+
     [Fact]
     public void A_fail_changes_no_price_and_costs_nothing()
     {

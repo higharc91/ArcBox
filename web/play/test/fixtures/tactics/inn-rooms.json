@@ -243,7 +243,12 @@
     ],
     "restReady": true,
     "roomsOpen": true,
-    "canPropose": false
+    "canPropose": false,
+    "haggle": {
+      "can": false,
+      "dc": 15,
+      "result": null
+    }
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:00:33.72\u002B00:00",

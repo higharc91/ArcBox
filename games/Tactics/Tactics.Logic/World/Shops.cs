@@ -65,6 +65,13 @@ public static class ShopRules
             * (haggled ? HaggleBuy : 1m)));
 
     /// <summary>
+    /// A room's or a cure's price, rounded up to whole gold: a tenth less after a haggle that passed (the owner, 2026-11-04: rooms and cures
+    /// haggle too).
+    /// </summary>
+    public static int Service(ShopService service, bool haggled = false)
+        => haggled ? checked((int)decimal.Ceiling(service.Price * HaggleBuy)) : service.Price;
+
+    /// <summary>
     /// The sale price, rounded down to whole gold: the shop's ratio of its plain price, and a tenth more after a haggle that passed; never more
     /// than the shop asks for the same item on that visit, so nothing can be bought and sold back at a profit.
     /// </summary>

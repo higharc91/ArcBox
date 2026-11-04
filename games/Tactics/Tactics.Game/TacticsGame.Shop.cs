@@ -164,7 +164,7 @@ public sealed partial class TacticsGame
         [.. shop.Stock.Select(s => new ShopItemView(s.Item.Value, Rules.Items[s.Item].Name, ShopRules.Buy(Rules.Items[s.Item], shop, Haggled), StockOf(shop).Stock[s.Item.Value]))],
         [.. _tradeFeed], shop.Keeper.Person is { } person ? "characters." + _region!.Def.People[person].Preset : null,
         [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))],
-        shop.Services.IsEmpty ? null : shop.Services,
+        shop.Services.IsEmpty ? null : [.. shop.Services.Select(s => s with { Price = ShopRules.Service(s, Haggled) })],
         shop.Services.IsEmpty ? null : [.. _doc.Members.Select(m => new ServiceGuestView(m.Key, m.Value.Character.Name,
             [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))], shop.Services.IsEmpty ? null : RecoveryMembers(),
         _doc.World!.Shop?.Haggle is { } haggle ? new HaggleView(haggle.Name, haggle.Die, haggle.Bonus, haggle.Dc, haggle.Passed) : null);
