@@ -31,9 +31,10 @@ public static class KeyRing
             var opens = locks.Where(d => d.Lock!.Key == flag).ToList();
             if (opens.Count == 0)
                 continue;
+            // Only a thing the party has used (taken, opened, read…): a story that set the flag names no place, and never an unfound one.
             var (source, region) = rules.Interactables
                 .SelectMany(r => r.Value.Select(d => (Def: d, Region: r.Key)))
-                .FirstOrDefault(t => t.Def.Sets.Contains(flag));
+                .FirstOrDefault(t => t.Def.Sets.Contains(flag) && Done(t.Def, saves));
             var name = opens.Select(d => d.Lock!.KeyName).FirstOrDefault(n => n is not null)
                 ?? (source is not null && Interactables.KindOf(source).Family == InteractableFamily.Pickup ? Interactables.NameOf(source) : null)
                 ?? "key";
@@ -48,4 +49,9 @@ public static class KeyRing
         }
         return [.. keys];
     }
+
+    /// <summary>True when the party has done the thing's main outcome: it's no longer in its first state, or (a notice, a path) it was found.</summary>
+    private static bool Done(InteractableDef def, IReadOnlyDictionary<string, InteractableSave>? saves)
+        => saves is not null && saves.TryGetValue(def.Id, out var save)
+           && (save.State != Interactables.Initial(def).State || (Interactables.FoundIsItsOutcome(def) && save.Found));
 }
