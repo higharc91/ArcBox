@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "frames": 144,
+  "selectedSourceCells": 143,
+  "curatedHeldSlots": 1,
+  "portraits": 6,
+  "directions": 8,
+  "maximumVerticalFootDriftWorld": 1,
+  "typedReviewImporter": "PASS",
+  "bothBodyAndPortraitAliases": "PASS",
+  "barkStopHoldResume": "PASS",
+  "focusedTests": 147,
+  "testFailures": 0,
+  "hostBuildWarnings": 0,
+  "hostBuildErrors": 0,
+  "peakTextureMiB": {
+    "ashen_ford": 328.986572265625,
+    "cinder_hollow": 192.373291015625
+  },
+  "fourActualHeroes": true,
+  "allFourRaceReplacementAndRestoration": "PASS",
+  "actualTextureUploadsAndReleases": "PASS",
+  "boundReviewAssets": 19,
+  "pendingInstaller": "refused before production writes",
+  "productionChanged": false,
+  "rulesBalancePhoneContractsChanged": false,
+  "pixelLabCalls": 0,
+  "newSpeechGenerations": 0,
+  "completionImageToolCalls": 12
+}

@@ -495,3 +495,33 @@ Rules, lore, balance and phone contracts unchanged. Her voice sample must be
 included with future appearance and finished reviews. Rebase before pushing
 townsfolk-art; no PR, merge or issue closure. Earlier pending-Dagna notes are
 historical; continue with Celandine appearance approval.
+
+## Current checkpoint — Celandine completed review with recorded voice
+
+Appearance/voice approved: “Perfect, continue”. Eight real idle/walk/talk facings,
+six40×40 portraits and19.6-second voiced review are ready for **finished-set/TV
+approval before installation**. Reuse her existing town recording; no new speech.
+Do not seek appearance reapproval or regenerate completed concepts/art.
+
+Atlas1728×768 /5.0625 MiB,96×96 frame, anchor[48,84], scale0.5, adult72/36.
+144 slots from143 selected source cells; northeast talk slot5 holds valid slot4
+to avoid foot drift. Fixed transform per direction, binary alpha/shared96-colour
+palette, no mirroring/recentering. Northwest guide occlusion corrected; north/
+northeast motion sources corrected from wrong front views. Use final rotations
+and corrected sources, not superseded guides/exports. Twelve completion image
+calls plus two prior appearance calls, zero PixelLab spend or new speech.
+
+All frame/foot/motion/portrait checks and typed body/portrait aliases/bark hold-
+resume pass.147 focused presentation tests pass; TV host Debug build0 warnings/
+errors. Four-party review texture peaks328.99 /192.37 MiB below512 with real
+replacement/restoration/upload/release checks. Pending installer refuses before
+writing production. Exact offline rebuild retains19 review hashes and native TV
+shot;14 source receipts verify. Production unchanged:207649084 bytes /
+4922 files, inventory SHA256 6bf5e5410895a9f5d7355d97b721d1c9ab83d19fbebf7f6eb7f6d8ea0edd948f.
+
+Review and voice: tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/celandine-imagegen/report.md.
+Next: owner finished-set/TV approval, install exact bound assets, production checks.
+Rules/lore/balance/phone contracts unchanged. Include existing recorded voices in
+future reviews. Rebase before pushing townsfolk-art; no PR, merge or issue closure.
+Earlier pending-appearance notes are historical.
