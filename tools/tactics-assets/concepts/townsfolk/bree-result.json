@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-03",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "job_id": "job_ESXvCJcZwctuyfqTbJkHDSuP",
+  "asset_id": "asset_5BTscGVgZiaVkGpPJb65F1X1",
+  "status": "success",
+  "estimatedCU": 12,
+  "actualCU": 12,
+  "seed": null,
+  "reference_asset_ids": [],
+  "output": "bree-concept.png",
+  "owner_spend_approval": "Generate the 12 CU anchor",
+  "design_approval": "pending",
+  "pixel_art_approval": "not_started",
+  "review": {
+    "consistency": "Same braided grey hair, face, apron, boots and closed notebook across all three views; rear view has apron ties and no front buckle. Suitable as a proposed painted reference.",
+    "limit": "Concept approval does not establish final sprite density, animation or game scale."
+  }
+}

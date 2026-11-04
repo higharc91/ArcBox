@@ -1,5 +1,12 @@
 # Wardenflame PixelLab profile
 
+Issue #80's NPC and townsfolk concepts are in
+[`../concepts/townsfolk/README.md`](../concepts/townsfolk/README.md).
+The first Scenario anchor is awaiting approval; NPC PixelLab generation has not
+started. Use the current shipped tactical hero density and anchors for the
+production comparison, rather than assuming the older reference PNGs establish
+the current hero size.
+
 `wardenflame-style.json` is the reusable **local** generation profile. It contains
 the shared art brief, five biome palettes taken from the shipped material ramps,
 approved reference-image paths/hashes, intended canvas sizes and animation rules.

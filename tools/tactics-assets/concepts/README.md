@@ -1,5 +1,9 @@
 # Scenario concept series
 
+Issue #80's Ashen Ford people work is tracked in [townsfolk/README.md](townsfolk/README.md):
+12 named NPC briefs, seven paired townsfolk briefs, and a generated Bree anchor
+awaiting design approval (12 Scenario CU spent).
+
 `scenario-briefs.json` is the prepared, lore-linked request pack for **Scenario**.
 Generation receipts belong to their individual batches. See the
 [Ashmaw bounty batch](ashmaw/README.md) for its three generated concepts,

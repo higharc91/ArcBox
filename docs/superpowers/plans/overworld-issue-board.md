@@ -53,9 +53,15 @@ The default route uses `route.cs` navigation between authored targets, with enou
 
 ## P1: bugs and problems
 
-### OW-05 · Character memory · `needs user`
+### OW-05 · Character memory · `target set; implementation pending`
 Texture memory goes from 158 MB to 350 MB with the new characters, measured on the TV. A hero is about 37.5 MB of sheets by estimate, and the pack grows from 118 MB to 179 MB, so a cold TV download is 51% larger. Fine on an RTX 5080, unknown on a TV box. Options: load only the sheets a party uses, drop frames, or smaller atlases.
-**Done when:** the user agrees a target, and memory is under it.
+**Owner decision (issue #80):** maximum **512 MB TV texture memory at region open**.
+The target decision is resolved. Still load only the party's actual heroes and
+the region's used people/creatures, lazily on travel and party changes. Record
+fresh before/after memory with four party members in Ashen Ford and Cinder Hollow,
+plus cold pack download size. Add a `--world-demo --perf` check; fail the work if
+full-party Ashen Ford exceeds 512 MB. Historical numbers above are not a new baseline.
+**Done when:** those measurements and used-only loading pass the agreed target.
 
 ### OW-06 · A 273 ms frame with the new characters · `done`
 It was the screenshots. With `ARCBOX_SHOTS=0` no frame was over 16 ms. See the results table.
@@ -72,9 +78,16 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `needs user`
+### OW-10 · Heroes and townsfolk don't match · `in progress; concept approval pending`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
-**Done when:** the user picks regenerating NPCs the same way or scaling them, and a square of people reads as one style.
+**Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
+with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
+the queue covers 12 placed named NPCs (including Rook) and seven generic presets
+with two variants each. Bree's first 2K concept anchor cost 12 Scenario CU with
+explicit owner approval to spend; its design is awaiting approval. See
+`tools/tactics-assets/concepts/townsfolk/README.md` for prompts, receipts and comparison.
+**Done when:** both art stages are approved, the town reads as one style, optional
+variants round-trip through the editor, and OW-05's memory/download checks pass.
 
 ### OW-11 · Only battles survive an exception · `done`
 World inputs, timers and reconnect/resume operations now roll back failed actions and recover to safe walking, preserving purses, bags, stock and quest state. Broken active cursors, transient notifications and their timers are cleared; failed recovery saves bypass quest processing. The phones and TV show a recoverable notice. Invalid saved battles are checked before replay and called off without rewards/injuries, with structured engine-fault logs. The 30 focused checks passed (world paths, actual quest payout rollback, existing battle recovery and chapter settings), including a real subsequent walking step, reopening recovered saves and strictly advancing epochs for repeated recoveries.
@@ -152,8 +165,8 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 
 ## Decisions waiting for the user
 
-1. The new characters' memory and download size (OW-05).
-2. Hero and townsfolk art (OW-10).
+1. OW-05's memory target is resolved: 512 MB maximum at region open. Measurement and loading work remain.
+2. OW-10's regeneration route is resolved. Approval of Bree's proposed concept anchor is pending; later concepts and pixel art each need review.
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
 5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
