@@ -197,3 +197,19 @@ review must assess maturity, accent, exact words and command delivery.
 Retain appearance and full-set/TV gates. Keep authored-recordings-only playback;
 the handoff's old live-fallback instructions are historical. No live TTS is to be
 enabled. No rules, balance, phone contracts or production textures changed.
+
+## Current Dagna checkpoint — approved veteran voice installed
+
+The owner approved the Gacrux audition and authorized the remaining voice lines.
+All66 Dagna lines are now installed in that cast, with the approved veteran
+direction, no pitch/filter and unchanged captions.63 distinct renders cost232 CU
+quoted/billed (236 CU including the prior audition). No credits purchased.
+Original clips and paid provenance remain intact; the normal draft voice sample
+now plays the new production town bark. Future lines inherit the cast direction.
+Full voice inventory1443/1443; checker0 flags;20 Python,71 voice/scene and52
+story/bark playback tests pass. Exact re-import hashes match. Rules, balance,
+phone contracts, authored-recordings-only playback and textures unchanged.
+Appearance/full-set/TV artwork gates remain pending. Report:
+`docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-voice-recast/report.md`.
+Reuse these recordings; do not regenerate the approved voice. No PR or merge;
+rebase before pushing townsfolk-art. Earlier blocked voice notes are historical.

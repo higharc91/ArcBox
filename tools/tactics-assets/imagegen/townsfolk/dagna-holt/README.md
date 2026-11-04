@@ -21,3 +21,13 @@ Appearance approval is pending before motion/portrait generation; final full-set
 approval remains separate. Preset guard_captain, character dagna_holt. Nothing is
 installed in production. Two image-tool calls (initial +angle correction), zero
 PixelLab calls/credits/purchases; no image-tool monetary price inferred.
+
+## Approved voice recast
+
+The owner approved the Gacrux veteran audition. All66 Dagna lines now use that
+cast and delivery, with no post pitch/filter. `voice-sample.mp3` now plays the
+new production town bark; its JSON points to the new clip. The rejected preview
+and provenance are retained under `voice-recast/rejected-callirrhoe-*`.
+Batch source WAVs, exact line/render-text inventory, quotes and receipts are under
+`voice-recast/batch/`; old production files remain intact. Voice approval does
+not change the pending appearance/full-set/TV art gates.

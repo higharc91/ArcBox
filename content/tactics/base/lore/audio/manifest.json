@@ -38,8 +38,8 @@
       "preset": "Sadachbia"
     },
     "dagna_holt": {
-      "preset": "Callirrhoe",
-      "pitch": -1
+      "preset": "Gacrux",
+      "pitch": 0
     },
     "grisk": {
       "preset": "Algenib",
@@ -148,7 +148,7 @@
   },
   "lines": {
     "ashmaw_accepted": {
-      "main": "ashmaw_accepted.93693713.ogg"
+      "main": "ashmaw_accepted.7b2094b8.ogg"
     },
     "ashmaw_bounty_1": {
       "main": "ashmaw_bounty_1.3cfd0e65.ogg"
@@ -157,7 +157,7 @@
       "main": "ashmaw_bounty_2.37ac95a8.ogg"
     },
     "ashmaw_busy": {
-      "main": "ashmaw_busy.922760d5.ogg"
+      "main": "ashmaw_busy.9e9a9aeb.ogg"
     },
     "ashmaw_death": {
       "main": "ashmaw_death.df68b839.ogg"
@@ -166,13 +166,13 @@
       "main": "ashmaw_diggings_open.65724d3b.ogg"
     },
     "ashmaw_done": {
-      "main": "ashmaw_done.74badb62.ogg"
+      "main": "ashmaw_done.fa47da21.ogg"
     },
     "ashmaw_lair_open": {
       "main": "ashmaw_lair_open.4840edf3.ogg"
     },
     "ashmaw_later": {
-      "main": "ashmaw_later.406b4cff.ogg"
+      "main": "ashmaw_later.be53c235.ogg"
     },
     "ashmaw_leave": {
       "main": "ashmaw_leave.d9d0647e.ogg"
@@ -190,16 +190,16 @@
       "main": "ashmaw_notices.2616717b.ogg"
     },
     "ashmaw_offer": {
-      "main": "ashmaw_offer.fa64e1c4.ogg"
+      "main": "ashmaw_offer.0061d72d.ogg"
     },
     "ashmaw_presented": {
-      "main": "ashmaw_presented.bfb48d48.ogg"
+      "main": "ashmaw_presented.167e3765.ogg"
     },
     "ashmaw_progress": {
-      "main": "ashmaw_progress.73bbc710.ogg"
+      "main": "ashmaw_progress.800a02aa.ogg"
     },
     "ashmaw_proof": {
-      "main": "ashmaw_proof.b0ebb092.ogg"
+      "main": "ashmaw_proof.53b3925b.ogg"
     },
     "ashmaw_satchel": {
       "main": "ashmaw_satchel.aad805b1.ogg"
@@ -208,7 +208,7 @@
       "main": "ashmaw_throat_open.ee49d2bb.ogg"
     },
     "ashmaw_wait": {
-      "main": "ashmaw_wait.be377409.ogg"
+      "main": "ashmaw_wait.b9b16c30.ogg"
     },
     "bark_bree_tallow_ally_down_1": {
       "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
@@ -295,76 +295,76 @@
       "main": "bark_corvin_ashby_town_8.b3f5e0db.ogg"
     },
     "bark_dagna_holt_ally_down_1": {
-      "main": "bark_dagna_holt_ally_down_1.ff93315f.ogg"
+      "main": "bark_dagna_holt_ally_down_1.9f48f15b.ogg"
     },
     "bark_dagna_holt_ally_down_2": {
-      "main": "bark_dagna_holt_ally_down_2.41f6474b.ogg"
+      "main": "bark_dagna_holt_ally_down_2.b0883969.ogg"
     },
     "bark_dagna_holt_battle_start_1": {
-      "main": "bark_dagna_holt_battle_start_1.26ec0bc2.ogg"
+      "main": "bark_dagna_holt_battle_start_1.229764f9.ogg"
     },
     "bark_dagna_holt_battle_start_2": {
-      "main": "bark_dagna_holt_battle_start_2.147b8fa2.ogg"
+      "main": "bark_dagna_holt_battle_start_2.de9faf88.ogg"
     },
     "bark_dagna_holt_battle_start_3": {
-      "main": "bark_dagna_holt_battle_start_3.43d579f7.ogg"
+      "main": "bark_dagna_holt_battle_start_3.7b8ecace.ogg"
     },
     "bark_dagna_holt_camp_1": {
-      "main": "bark_dagna_holt_camp_1.6214915d.ogg"
+      "main": "bark_dagna_holt_camp_1.4fc7522c.ogg"
     },
     "bark_dagna_holt_camp_2": {
-      "main": "bark_dagna_holt_camp_2.7ac0db21.ogg"
+      "main": "bark_dagna_holt_camp_2.91193ef4.ogg"
     },
     "bark_dagna_holt_crit_1": {
-      "main": "bark_dagna_holt_crit_1.4c576aa2.ogg"
+      "main": "bark_dagna_holt_crit_1.113e6172.ogg"
     },
     "bark_dagna_holt_defeat_1": {
-      "main": "bark_dagna_holt_defeat_1.66e4f293.ogg"
+      "main": "bark_dagna_holt_defeat_1.8aac13d5.ogg"
     },
     "bark_dagna_holt_healed_1": {
-      "main": "bark_dagna_holt_healed_1.ff09c641.ogg"
+      "main": "bark_dagna_holt_healed_1.f3df214e.ogg"
     },
     "bark_dagna_holt_hit_1": {
-      "main": "bark_dagna_holt_hit_1.e4cfc937.ogg"
+      "main": "bark_dagna_holt_hit_1.1c393822.ogg"
     },
     "bark_dagna_holt_hit_2": {
-      "main": "bark_dagna_holt_hit_2.818d1d12.ogg"
+      "main": "bark_dagna_holt_hit_2.c92675f8.ogg"
     },
     "bark_dagna_holt_kill_1": {
-      "main": "bark_dagna_holt_kill_1.ec90a23c.ogg"
+      "main": "bark_dagna_holt_kill_1.636ce126.ogg"
     },
     "bark_dagna_holt_kill_2": {
-      "main": "bark_dagna_holt_kill_2.62cbb1d2.ogg"
+      "main": "bark_dagna_holt_kill_2.6d10259b.ogg"
     },
     "bark_dagna_holt_low_hp_1": {
-      "main": "bark_dagna_holt_low_hp_1.b78d5029.ogg"
+      "main": "bark_dagna_holt_low_hp_1.97b25ab9.ogg"
     },
     "bark_dagna_holt_miss_1": {
-      "main": "bark_dagna_holt_miss_1.4594bb4e.ogg"
+      "main": "bark_dagna_holt_miss_1.ae5cb45d.ogg"
     },
     "bark_dagna_holt_revived_1": {
-      "main": "bark_dagna_holt_revived_1.51964b23.ogg"
+      "main": "bark_dagna_holt_revived_1.13b0138a.ogg"
     },
     "bark_dagna_holt_town_1": {
-      "main": "bark_dagna_holt_town_1.7ac0db21.ogg"
+      "main": "bark_dagna_holt_town_1.91193ef4.ogg"
     },
     "bark_dagna_holt_town_2": {
-      "main": "bark_dagna_holt_town_2.26ec0bc2.ogg"
+      "main": "bark_dagna_holt_town_2.229764f9.ogg"
     },
     "bark_dagna_holt_town_3": {
-      "main": "bark_dagna_holt_town_3.43d579f7.ogg"
+      "main": "bark_dagna_holt_town_3.7b8ecace.ogg"
     },
     "bark_dagna_holt_turn_start_1": {
-      "main": "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
+      "main": "bark_dagna_holt_turn_start_1.a1f3d5fa.ogg"
     },
     "bark_dagna_holt_turn_start_2": {
-      "main": "bark_dagna_holt_turn_start_2.d24e2314.ogg"
+      "main": "bark_dagna_holt_turn_start_2.8fbf731b.ogg"
     },
     "bark_dagna_holt_victory_1": {
-      "main": "bark_dagna_holt_victory_1.58175f8b.ogg"
+      "main": "bark_dagna_holt_victory_1.40d4243b.ogg"
     },
     "bark_dagna_holt_victory_2": {
-      "main": "bark_dagna_holt_victory_2.a110d71f.ogg"
+      "main": "bark_dagna_holt_victory_2.76ad0105.ogg"
     },
     "bark_grisk_ally_down_1": {
       "main": "bark_grisk_ally_down_1.37f6eed4.ogg"
@@ -1024,16 +1024,16 @@
       "main": "ch1_bridge_cost_open_4.0d843dbc.ogg"
     },
     "ch1_bridge_cost_over_1": {
-      "main": "ch1_bridge_cost_over_1.5ccafd05.ogg"
+      "main": "ch1_bridge_cost_over_1.1b6f15a7.ogg"
     },
     "ch1_bridge_cost_over_2": {
-      "main": "ch1_bridge_cost_over_2.42da10f9.ogg"
+      "main": "ch1_bridge_cost_over_2.2263557f.ogg"
     },
     "ch1_bridge_cost_soldier_1": {
-      "main": "ch1_bridge_cost_soldier_1.8018ae7a.ogg"
+      "main": "ch1_bridge_cost_soldier_1.4f2c774e.ogg"
     },
     "ch1_bridge_cost_soldier_2": {
-      "main": "ch1_bridge_cost_soldier_2.d99efce8.ogg"
+      "main": "ch1_bridge_cost_soldier_2.478b3292.ogg"
     },
     "ch1_bridge_cost_song_1": {
       "main": "ch1_bridge_cost_song_1.ae48080d.ogg"
@@ -1042,7 +1042,7 @@
       "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
     },
     "ch1_camp_hunger_1": {
-      "main": "ch1_camp_hunger_1.506f828b.ogg"
+      "main": "ch1_camp_hunger_1.a925b2e9.ogg"
     },
     "ch1_camp_hunger_2": {
       "main": "ch1_camp_hunger_2.750c194a.ogg"
@@ -1051,10 +1051,10 @@
       "main": "ch1_camp_open_1.b7fd3291.ogg"
     },
     "ch1_camp_open_2": {
-      "main": "ch1_camp_open_2.43f35597.ogg"
+      "main": "ch1_camp_open_2.73f05588.ogg"
     },
     "ch1_camp_truth_1": {
-      "main": "ch1_camp_truth_1.c769024e.ogg"
+      "main": "ch1_camp_truth_1.8e17b167.ogg"
     },
     "ch1_camp_truth_2": {
       "main": "ch1_camp_truth_2.f40316a9.ogg"
@@ -1063,7 +1063,7 @@
       "main": "ch1_camp_warmth_1.3e92d833.ogg"
     },
     "ch1_camp_warmth_2": {
-      "main": "ch1_camp_warmth_2.8fe4d02a.ogg"
+      "main": "ch1_camp_warmth_2.788b7405.ogg"
     },
     "ch1_dawn_open_1": {
       "main": "ch1_dawn_open_1.57455db3.ogg"
@@ -1075,7 +1075,7 @@
       "main": "ch1_dawn_open_3.fe362e89.ogg"
     },
     "ch1_dawn_open_4": {
-      "main": "ch1_dawn_open_4.59bf8346.ogg"
+      "main": "ch1_dawn_open_4.7515dedd.ogg"
     },
     "ch1_docks_artisan_1": {
       "main": "ch1_docks_artisan_1.6bd5dc8e.ogg"
@@ -1129,10 +1129,10 @@
       "main": "ch1_docks_sailor_1.6d1f5c9a.ogg"
     },
     "ch1_ford_cases_1": {
-      "main": "ch1_ford_cases_1.2c529cf3.ogg"
+      "main": "ch1_ford_cases_1.e6e53880.ogg"
     },
     "ch1_ford_cases_2": {
-      "main": "ch1_ford_cases_2.58984b22.ogg"
+      "main": "ch1_ford_cases_2.76569cc2.ogg"
     },
     "ch1_ford_cases_3": {
       "main": "ch1_ford_cases_3.476edd31.ogg"
@@ -1144,7 +1144,7 @@
       "main": "ch1_ford_cases_5.c2e8f3e2.ogg"
     },
     "ch1_ford_force_1": {
-      "main": "ch1_ford_force_1.06892ef8.ogg"
+      "main": "ch1_ford_force_1.73b8bd59.ogg"
     },
     "ch1_ford_force_2": {
       "main": "ch1_ford_force_2.7d39c66c.ogg"
@@ -1162,13 +1162,13 @@
       "main": "ch1_ford_open_3.d955fd91.ogg"
     },
     "ch1_ford_open_4": {
-      "main": "ch1_ford_open_4.db2ad6b8.ogg"
+      "main": "ch1_ford_open_4.2b2a190e.ogg"
     },
     "ch1_ford_open_5": {
       "main": "ch1_ford_open_5.47bb98ad.ogg"
     },
     "ch1_ford_parley_1": {
-      "main": "ch1_ford_parley_1.075c5961.ogg"
+      "main": "ch1_ford_parley_1.a116cfdb.ogg"
     },
     "ch1_ford_parley_2": {
       "main": "ch1_ford_parley_2.d2d9390c.ogg"
@@ -1180,7 +1180,7 @@
       "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
     },
     "ch1_ford_pay_fail_2": {
-      "main": "ch1_ford_pay_fail_2.b0f2f3b1.ogg"
+      "main": "ch1_ford_pay_fail_2.6ca21a20.ogg"
     },
     "ch1_ford_pay_pass_1": {
       "main": "ch1_ford_pay_pass_1.7ad9feb7.ogg"
@@ -1189,13 +1189,13 @@
       "main": "ch1_ford_pay_pass_2.8f12827f.ogg"
     },
     "ch1_ford_truth_1": {
-      "main": "ch1_ford_truth_1.a7b52a99.ogg"
+      "main": "ch1_ford_truth_1.60a6b2de.ogg"
     },
     "ch1_ford_truth_2": {
-      "main": "ch1_ford_truth_2.f9b4967e.ogg"
+      "main": "ch1_ford_truth_2.d482b35e.ogg"
     },
     "ch1_ford_truth_3": {
-      "main": "ch1_ford_truth_3.e18a6ca5.ogg"
+      "main": "ch1_ford_truth_3.f9b54bfb.ogg"
     },
     "ch1_ford_truth_4": {
       "main": "ch1_ford_truth_4.d822333e.ogg"
@@ -1270,7 +1270,7 @@
       "main": "ch1_granary_confess_3.1f24e7e2.ogg"
     },
     "ch1_granary_confess_4": {
-      "main": "ch1_granary_confess_4.17e1447f.ogg"
+      "main": "ch1_granary_confess_4.d145315b.ogg"
     },
     "ch1_granary_confess_5": {
       "main": "ch1_granary_confess_5.09a5bde5.ogg"
@@ -1282,7 +1282,7 @@
       "main": "ch1_granary_doors_1.959ee1f1.ogg"
     },
     "ch1_granary_doors_2": {
-      "main": "ch1_granary_doors_2.8ea3074e.ogg"
+      "main": "ch1_granary_doors_2.b7e525b1.ogg"
     },
     "ch1_granary_lend_fail_1": {
       "main": "ch1_granary_lend_fail_1.466fef93.ogg"
@@ -1303,7 +1303,7 @@
       "main": "ch1_granary_open_2.145c5151.ogg"
     },
     "ch1_granary_open_3": {
-      "main": "ch1_granary_open_3.7467d3c4.ogg"
+      "main": "ch1_granary_open_3.348770e3.ogg"
     },
     "ch1_granary_open_4": {
       "main": "ch1_granary_open_4.24a2bbc1.ogg"
@@ -1318,7 +1318,7 @@
       "main": "ch1_granary_open_7.1a8d343f.ogg"
     },
     "ch1_granary_press_1": {
-      "main": "ch1_granary_press_1.3cbb3dec.ogg"
+      "main": "ch1_granary_press_1.89d11779.ogg"
     },
     "ch1_granary_sums_fail_1": {
       "main": "ch1_granary_sums_fail_1.2b3e5da8.ogg"
@@ -1450,7 +1450,7 @@
       "main": "ch1_mayor_goblins_1.6abdd4d0.ogg"
     },
     "ch1_mayor_goblins_2": {
-      "main": "ch1_mayor_goblins_2.b798fc89.ogg"
+      "main": "ch1_mayor_goblins_2.529013eb.ogg"
     },
     "ch1_mayor_goblins_3": {
       "main": "ch1_mayor_goblins_3.3d5c0336.ogg"
@@ -1465,7 +1465,7 @@
       "main": "ch1_mayor_halden_2.9a96527a.ogg"
     },
     "ch1_mayor_halden_3": {
-      "main": "ch1_mayor_halden_3.79860a20.ogg"
+      "main": "ch1_mayor_halden_3.c0a18099.ogg"
     },
     "ch1_mayor_halden_4": {
       "main": "ch1_mayor_halden_4.26b72526.ogg"
@@ -1477,7 +1477,7 @@
       "main": "ch1_mayor_hero_2.50e933ce.ogg"
     },
     "ch1_mayor_hero_3": {
-      "main": "ch1_mayor_hero_3.ace591b0.ogg"
+      "main": "ch1_mayor_hero_3.d0eba4c9.ogg"
     },
     "ch1_mayor_noble_1": {
       "main": "ch1_mayor_noble_1.f2109686.ogg"
@@ -1498,10 +1498,10 @@
       "main": "ch1_mayor_open_4.66fb5c56.ogg"
     },
     "ch1_mayor_soldier_1": {
-      "main": "ch1_mayor_soldier_1.4e1f4079.ogg"
+      "main": "ch1_mayor_soldier_1.56849c9a.ogg"
     },
     "ch1_mayor_soldier_2": {
-      "main": "ch1_mayor_soldier_2.ade6e018.ogg"
+      "main": "ch1_mayor_soldier_2.771bb153.ogg"
     },
     "ch1_mayor_soldier_3": {
       "main": "ch1_mayor_soldier_3.ff5e9760.ogg"
@@ -1582,13 +1582,13 @@
       "main": "ch1_road_east_open_2.65db2db4.ogg"
     },
     "ch1_road_east_open_3": {
-      "main": "ch1_road_east_open_3.1ff0c1e8.ogg"
+      "main": "ch1_road_east_open_3.83c877d3.ogg"
     },
     "ch1_road_east_open_4": {
-      "main": "ch1_road_east_open_4.562c7c3f.ogg"
+      "main": "ch1_road_east_open_4.cbf32ed1.ogg"
     },
     "ch1_road_east_open_5": {
-      "main": "ch1_road_east_open_5.7f710b38.ogg"
+      "main": "ch1_road_east_open_5.0f67bcd4.ogg"
     },
     "ch1_road_east_open_6": {
       "main": "ch1_road_east_open_6.9153deb0.ogg"
@@ -1657,7 +1657,7 @@
       "main": "ch1_young_ones_open_4.ba1bd52f.ogg"
     },
     "ch1_young_ones_open_5": {
-      "main": "ch1_young_ones_open_5.f6aa80d0.ogg"
+      "main": "ch1_young_ones_open_5.f5514a10.ogg"
     },
     "ch2_bree_book_1": {
       "main": "ch2_bree_book_1.85eabeef.ogg"
@@ -2908,13 +2908,13 @@
       "main": "ch5_epi_clan_slain_rekindled_open_2.2facfd63.ogg"
     },
     "ch5_epi_clan_slain_rekindled_open_3": {
-      "main": "ch5_epi_clan_slain_rekindled_open_3.659715ea.ogg"
+      "main": "ch5_epi_clan_slain_rekindled_open_3.78ea8dc8.ogg"
     },
     "ch5_epi_clan_slain_returned_open_1": {
       "main": "ch5_epi_clan_slain_returned_open_1.53eb5e74.ogg"
     },
     "ch5_epi_clan_slain_returned_open_2": {
-      "main": "ch5_epi_clan_slain_returned_open_2.248abc6c.ogg"
+      "main": "ch5_epi_clan_slain_returned_open_2.c35be44d.ogg"
     },
     "ch5_epi_clan_spared_extinguished_open_1": {
       "main": "ch5_epi_clan_spared_extinguished_open_1.542e1d62.ogg"

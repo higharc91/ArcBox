@@ -3,8 +3,9 @@ using ArcBox.Sdk.Speech;
 namespace Tactics.Logic;
 
 /// <summary>
-/// Wardenflame's voice themes: one per speaker, so a line with no pre-rendered clip is spoken live (<c>/api/tts</c>) in
-/// the same voice its clips use. The casting's source of truth is <c>tools/tactics-lore/voice-casting.json</c>; a test
+/// Wardenflame's voice themes: one per speaker, matching the authored recordings. Tactics playback uses recordings
+/// only; these registered themes do not enable live fallback. The casting's source of truth is
+/// <c>tools/tactics-lore/voice-casting.json</c>; a test
 /// keeps this list in step with it, and lore characters name their theme in <c>voice.theme</c>.
 /// </summary>
 /// <remarks>
@@ -55,7 +56,7 @@ public static class TacticsVoices
         new(Npc("bree_tallow"), "Bree Tallow: alto, brisk and kind", Voice("Zephyr"), Fallback: new FallbackVoice()),
         new(Npc("celandine_marrowby"), "Lady Celandine Marrowby: smooth, cultured alto", Voice("Autonoe"), Fallback: new FallbackVoice()),
         new(Npc("corvin_ashby"), "Corvin Ashby: light, quick, anxious", Voice("Sadachbia"), Fallback: new FallbackVoice()),
-        new(Npc("dagna_holt"), "Dagna Holt: low, flat, few words", Voice("Callirrhoe"), Fallback: new FallbackVoice()),
+        new(Npc("dagna_holt"), "Dagna Holt: mature veteran, low, flat Northern delivery", Voice("Gacrux"), Fallback: new FallbackVoice()),
         new(Npc("grisk"), "Grisk: nasal kobold foreman; rendered clips pitch +4", Voice("Algenib"), Fallback: new FallbackVoice(Pitch: 1.2599f)),
         new(Npc("halden_varrow"), "Halden Varrow: warm baritone, hoarse", Voice("Charon"), Fallback: new FallbackVoice()),
         new(Npc("halvard"), "Ser Halvard: deep and hollow inside the helm", Voice("Schedar"), Fallback: new FallbackVoice()),

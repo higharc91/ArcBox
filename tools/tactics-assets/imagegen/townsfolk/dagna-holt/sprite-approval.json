@@ -21,11 +21,14 @@
     "Existing recorded town bark included without speech generation."
   ],
   "voiceReview": {
-    "status": "replacement_audition_pending_owner_review",
+    "status": "approved_recast_installed",
     "reason": "Owner says existing voice sounds too young for a seasoned veteran.",
     "plan": "voice-recast-plan.json",
-    "sample": "voice-recast/audition-gacrux.mp3",
+    "sample": "voice-sample.mp3",
     "voice": "Gacrux",
-    "paidCU": 4
+    "paidCU": 236,
+    "installedLines": 66,
+    "distinctBatchRenders": 63,
+    "approval": "That's perfect, go ahead and fix her other voice lines with this same sound"
   }
 }

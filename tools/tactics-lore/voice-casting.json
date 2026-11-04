@@ -1,5 +1,5 @@
 {
-  "about": "One voice per speaker, everywhere: pre-rendered lines, and live TTS of any line without a clip (the TV's /api/tts with theme tactics.npc.<id>). Presets are Gemini TTS / Chirp3-HD voice names (en-US-Chirp3-HD-<preset>). Player voice sets have two casts each (low, high). NPCs have one; where two speakers must share a preset, a pitch shift (semitones) or a filter keeps them apart in the pre-rendered clips. Filters can't reach live TTS, so major speakers get presets of their own. The ArcBox host (lobby) is Puck, so Wardenflame keeps Puck off its speakers.",
+  "about": "One voice per speaker: authored pre-rendered lines and registered theme metadata (tactics.npc.<id>). Tactics uses recordings only; missing clips never enable live TTS. Presets are Gemini TTS / Chirp3-HD voice names (en-US-Chirp3-HD-<preset>). Player voice sets have two casts each (low, high). NPCs have one; where two speakers must share a preset, a pitch shift (semitones) or a filter keeps them apart in the pre-rendered clips. Filters can't reach live TTS, so major speakers get presets of their own. The ArcBox host (lobby) is Puck, so Wardenflame keeps Puck off its speakers.",
   "model": "model_google-gemini-3-8-flash-tts",
   "language": "en-US",
   "sets": {
@@ -101,9 +101,10 @@
       "note": "clear mezzo, measured"
     },
     "dagna_holt": {
-      "preset": "Callirrhoe",
-      "pitch": -1,
-      "note": "low, flat, few words"
+      "preset": "Gacrux",
+      "pitch": 0,
+      "note": "Owner-approved mature veteran captain: low, flat Northern delivery, grounded and lightly weathered. Shares grim.high preset; authored direction distinguishes her.",
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue."
     },
     "pip_ashdown": {
       "preset": "Leda",

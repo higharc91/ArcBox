@@ -140,6 +140,11 @@ def jobs() -> list[dict]:
             preset, pitch, filt = v["preset"], v.get("pitch", 0), v.get("filter", "")
             # The raw TTS clip depends only on preset and text: speakers sharing a preset can share a render.
             style = directed.get(line_id)
+            # A recast's approved delivery belongs to the speaker, including old battle barks
+            # without per-line directions. Include it in both raw and encoded identities.
+            if v.get("direction"):
+                style = {"direction": " ".join(filter(None, [v["direction"], (style or {}).get("direction")])),
+                         "mood": (style or {}).get("mood", "idle")}
             render_text = f"<{style['direction']} Mood: {style['mood']}.> {text}" if style else text
             raw = f"{preset}.{sha8(preset, render_text)}"
             file = f"{line_id}.{sha8(preset, pitch, filt, text, render_text) if style else sha8(preset, pitch, filt, text)}.ogg"
@@ -222,7 +227,7 @@ def check(report_path: Path | None = None) -> int:
     cache_path.parent.mkdir(exist_ok=True)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     assets = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text())
-    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", [])
+    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("voiceRecasts", [])
     new_raws = {r["raw"] for r in records}
     by = {}
     for j in jobs():

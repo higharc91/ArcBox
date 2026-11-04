@@ -8250,8 +8250,8 @@
       "asset": "asset_L53oWit8RwV48vbETX7rVUws",
       "job": "job_vb2Cov7goWiDgt8AgiLhvGUe",
       "preset": "Algenib",
-      "text": "Bear’s awake! Dig or die!",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
+      "text": "Bear\u2019s awake! Dig or die!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear\u2019s awake! Dig or die!",
       "creativeUnits": 2,
       "issue": 74,
       "derived": {
@@ -8267,7 +8267,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 0,
@@ -8281,8 +8281,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 8.98,
@@ -8301,7 +8301,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The pins have rusted into the old notices.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The pins have rusted into the old notices.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 27.34,
@@ -8316,7 +8316,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 29.8,
@@ -8346,7 +8346,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 44.96,
@@ -8361,7 +8361,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 50.96,
@@ -8376,7 +8376,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 59.68,
@@ -8390,8 +8390,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 71.8,
@@ -8466,8 +8466,8 @@
       "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
       "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
       "preset": "Callirrhoe",
-      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
-      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
       "batch": "ashmaw_dagna_holt_batch",
       "derived": {
         "start": 37.52,
@@ -8557,8 +8557,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Algenib",
-      "text": "The market pays! I’ll split it!",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
+      "text": "The market pays! I\u2019ll split it!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I\u2019ll split it!",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 3.18,
@@ -8602,8 +8602,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Algenib",
-      "text": "Tell them… I kept the tally.",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
+      "text": "Tell them\u2026 I kept the tally.",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them\u2026 I kept the tally.",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 12.12,
@@ -8617,8 +8617,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Achernar",
-      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
-      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 15.72,
@@ -8647,8 +8647,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 8.98,
@@ -8663,7 +8663,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 20.08,
@@ -10601,10 +10601,10 @@
     {
       "raw": "Algenib.915ae3ad",
       "preset": "Algenib",
-      "text": "Bear’s awake! Dig or die!",
+      "text": "Bear\u2019s awake! Dig or die!",
       "line": "bark_grisk_battle_start_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear\u2019s awake! Dig or die!",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "angry"
@@ -10627,9 +10627,9 @@
       "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "line": "ashmaw_notices",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10648,12 +10648,12 @@
     {
       "raw": "Algieba.e087bd73",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "line": "ashmaw_bounty",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10680,9 +10680,9 @@
       "text": "The pins have rusted into the old notices.",
       "line": "ashmaw_leave",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The pins have rusted into the old notices.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10704,9 +10704,9 @@
       "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "line": "ashmaw_throat_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10752,9 +10752,9 @@
       "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "line": "ashmaw_nest_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10776,9 +10776,9 @@
       "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "line": "ashmaw_lair_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10800,9 +10800,9 @@
       "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "line": "ashmaw_death",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10821,12 +10821,12 @@
     {
       "raw": "Algieba.92014549",
       "preset": "Algieba",
-      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
       "line": "ashmaw_satchel",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10943,10 +10943,10 @@
     {
       "raw": "Callirrhoe.00de6679",
       "preset": "Callirrhoe",
-      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
       "line": "ashmaw_progress",
       "speaker": "dagna_holt",
-      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
       "delivery": {
         "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
         "mood": "idle"
@@ -11089,10 +11089,10 @@
     {
       "raw": "Algenib.f7e6dda0",
       "preset": "Algenib",
-      "text": "The market pays! I’ll split it!",
+      "text": "The market pays! I\u2019ll split it!",
       "line": "bark_grisk_low_hp_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I\u2019ll split it!",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "sad"
@@ -11161,10 +11161,10 @@
     {
       "raw": "Algenib.7301ebb5",
       "preset": "Algenib",
-      "text": "Tell them… I kept the tally.",
+      "text": "Tell them\u2026 I kept the tally.",
       "line": "bark_grisk_defeat_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them\u2026 I kept the tally.",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "sad"
@@ -11185,10 +11185,10 @@
     {
       "raw": "Achernar.0fc80f43",
       "preset": "Achernar",
-      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
       "line": "ashmaw_maud_waiting",
       "speaker": "old_maud",
-      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
       "delivery": {
         "direction": "Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
         "mood": "sad"
@@ -11233,12 +11233,12 @@
     {
       "raw": "Algieba.0bb18d07",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
       "line": "ashmaw_bounty_1",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -11260,9 +11260,9 @@
       "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "line": "ashmaw_bounty_2",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -11419,6 +11419,1529 @@
         "Algenib.7301ebb5",
         "Achernar.0fc80f43",
         "Achernar.b2984b21"
+      ]
+    }
+  ],
+  "voiceRecasts": [
+    {
+      "raw": "Gacrux.2187f302",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Form up. Nobody dies stupid.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Form up. Nobody dies stupid.",
+      "lines": [
+        "bark_dagna_holt_battle_start_1",
+        "bark_dagna_holt_town_2"
+      ],
+      "files": [
+        "bark_dagna_holt_battle_start_1.229764f9.ogg",
+        "bark_dagna_holt_town_2.229764f9.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.2187f302.wav",
+      "sourceSha256": "1865d9ae4a4b47bcf3a089627c763fd4a5c2c252088482eaedae859a38c01155",
+      "asset": "asset_Xp381WTvQizkJ5ZPh291WHMD",
+      "job": "job_gbEKj5PR5osLa278cWayjDQa",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_battle_start_1.26ec0bc2.ogg",
+        "bark_dagna_holt_town_2.26ec0bc2.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.bd70e1d6",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Eyes front. Shields up.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Eyes front. Shields up.",
+      "lines": [
+        "bark_dagna_holt_battle_start_2"
+      ],
+      "files": [
+        "bark_dagna_holt_battle_start_2.de9faf88.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.bd70e1d6.wav",
+      "sourceSha256": "b4d811db27712812c2037d63c0441c5018b0b91d735f4b2b831769fbecfaa59d",
+      "asset": "asset_xLuY9ELdyMCgRaYfg84RN9zi",
+      "job": "job_QvUiSkyuSEcbzoDTkBSXCUkP",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_battle_start_2.147b8fa2.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.3dea3516",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Right. Let's earn our bread.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Right. Let's earn our bread.",
+      "lines": [
+        "bark_dagna_holt_battle_start_3",
+        "bark_dagna_holt_town_3"
+      ],
+      "files": [
+        "bark_dagna_holt_battle_start_3.7b8ecace.ogg",
+        "bark_dagna_holt_town_3.7b8ecace.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.3dea3516.wav",
+      "sourceSha256": "d5d683a013e1b6eb50f39aa347ed0fdae65a3c3831171d84852dd220dd2bab05",
+      "asset": "asset_nv9PxrN8ezgnDMgDRyNJSoPN",
+      "job": "job_ageMy1V8zpE6w1ZpChfbkM3z",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_battle_start_3.43d579f7.ogg",
+        "bark_dagna_holt_town_3.43d579f7.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.23c99db8",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Mine.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Mine.",
+      "lines": [
+        "bark_dagna_holt_turn_start_1"
+      ],
+      "files": [
+        "bark_dagna_holt_turn_start_1.a1f3d5fa.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.23c99db8.wav",
+      "sourceSha256": "62825a0440874c39e52230125d7f12aeaae4089595219921f52be019457e9d06",
+      "asset": "asset_Z7s7En4FyuUALkJPUJr7KWBy",
+      "job": "job_oHwimZcYWTUkwDStRnvNjHLp",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.341afda9",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Moving.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Moving.",
+      "lines": [
+        "bark_dagna_holt_turn_start_2"
+      ],
+      "files": [
+        "bark_dagna_holt_turn_start_2.8fbf731b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.341afda9.wav",
+      "sourceSha256": "d669a1a6ebd39b8cbf6b99e0e0f8e71425c30926b3e26583c188dbe42b272c4c",
+      "asset": "asset_bosGCeL18r7yaK85TxauVmUb",
+      "job": "job_uvfK2BuofGoqEeq1BQJFHLYu",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_turn_start_2.d24e2314.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.b1edf88d",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Down.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Down.",
+      "lines": [
+        "bark_dagna_holt_hit_1"
+      ],
+      "files": [
+        "bark_dagna_holt_hit_1.1c393822.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.b1edf88d.wav",
+      "sourceSha256": "7027dbe3601bee6931c2a27b62f212680c7a3717c6d670a59dcc26c859d93562",
+      "asset": "asset_DonkhkUCf5YtJ1iVySSfesTx",
+      "job": "job_gvpqd2HpqLFwXLs1bikZCoxL",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_hit_1.e4cfc937.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.282c1dcd",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Stay there.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Stay there.",
+      "lines": [
+        "bark_dagna_holt_hit_2"
+      ],
+      "files": [
+        "bark_dagna_holt_hit_2.c92675f8.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.282c1dcd.wav",
+      "sourceSha256": "22f827fd04d02f05d2537dcc9b93e19dbeaa16af57be67f17a44c8fe00ac58c0",
+      "asset": "asset_weVjLBP5dedYijnX7ytKEN8A",
+      "job": "job_uhNSZWbiDMQg85dBfUHDiaNB",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_hit_2.818d1d12.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.23e6de24",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Damn it.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Damn it.",
+      "lines": [
+        "bark_dagna_holt_miss_1"
+      ],
+      "files": [
+        "bark_dagna_holt_miss_1.ae5cb45d.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.23e6de24.wav",
+      "sourceSha256": "bf655ad08d4f84b5006792af30c2d647f574de78b70407b6f7ba608f54424820",
+      "asset": "asset_MGyXKRXKMCoJ23tHTkp1m4HZ",
+      "job": "job_mgx6ep76faCkktyPwyvZ8pmM",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_miss_1.4594bb4e.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.a2fc627e",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "That's for the bridge.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> That's for the bridge.",
+      "lines": [
+        "bark_dagna_holt_crit_1"
+      ],
+      "files": [
+        "bark_dagna_holt_crit_1.113e6172.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.a2fc627e.wav",
+      "sourceSha256": "33557ded187ca17420b2dec10ac0612358ddf24683d9e959f306c9908802a069",
+      "asset": "asset_ibFYK4Z4AGMDXaF4kyVd4j1c",
+      "job": "job_8xy28mvt3iLoXbJhRdVRcUQZ",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_crit_1.4c576aa2.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.6ee983ca",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Done.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Done.",
+      "lines": [
+        "bark_dagna_holt_kill_1"
+      ],
+      "files": [
+        "bark_dagna_holt_kill_1.636ce126.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.6ee983ca.wav",
+      "sourceSha256": "41b4cb3558d137d91fcd2a006ea66ea46e450557aff7450e211b6dc4e4eb0212",
+      "asset": "asset_Ti9HA8oRuU2f6DkphkVjAoH9",
+      "job": "job_wDk7AJFJu1JPVfSdCSSHYnry",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_kill_1.ec90a23c.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0812218e",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "One less.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> One less.",
+      "lines": [
+        "bark_dagna_holt_kill_2"
+      ],
+      "files": [
+        "bark_dagna_holt_kill_2.6d10259b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0812218e.wav",
+      "sourceSha256": "b8ea9a81a6b217a4a6373ef214e6afc2f7702706cf2e7d27e6b2a9b413f8ad44",
+      "asset": "asset_W782NsjwfWM6Fj2neqLRAdn7",
+      "job": "job_kMq7JFXqv82BvzYgyEN1ianS",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_kill_2.62cbb1d2.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0b435fba",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Someone's down! Cover them!",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Someone's down! Cover them!",
+      "lines": [
+        "bark_dagna_holt_ally_down_1"
+      ],
+      "files": [
+        "bark_dagna_holt_ally_down_1.9f48f15b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0b435fba.wav",
+      "sourceSha256": "f6694ab70057b9ef3abe55b364a0160858264c9cce1b4fe9f21c9ecb775f9957",
+      "asset": "asset_S5JyKiPKJKDgEAiDBPobdF4v",
+      "job": "job_EVjDXfNTywUH8xQr87X4u4YB",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_ally_down_1.ff93315f.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.c8bf5717",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Not again. Not on my watch.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not again. Not on my watch.",
+      "lines": [
+        "bark_dagna_holt_ally_down_2"
+      ],
+      "files": [
+        "bark_dagna_holt_ally_down_2.b0883969.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.c8bf5717.wav",
+      "sourceSha256": "2b5244720a47d19ec0fd02277103fedd410f2d945763a036e47197ad2c0141b8",
+      "asset": "asset_VKUo4Si9AF27gfuhJbwcuS6i",
+      "job": "job_xipGLWhnLqj7ns4W5pkwgUbL",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_ally_down_2.41f6474b.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.9c991cba",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Had worse. Not much worse.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Had worse. Not much worse.",
+      "lines": [
+        "bark_dagna_holt_low_hp_1"
+      ],
+      "files": [
+        "bark_dagna_holt_low_hp_1.97b25ab9.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.9c991cba.wav",
+      "sourceSha256": "0aa2b3810b5539a5c9b6cb773b2908d1cb9f590c560aa826de05f5bba661b914",
+      "asset": "asset_KQaTq4rEoTxwMRUxWWyXajY6",
+      "job": "job_51WnxeRoCDix88i1vaDM7PPZ",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_low_hp_1.b78d5029.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.f319508a",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Ta. Back in.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Ta. Back in.",
+      "lines": [
+        "bark_dagna_holt_healed_1"
+      ],
+      "files": [
+        "bark_dagna_holt_healed_1.f3df214e.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.f319508a.wav",
+      "sourceSha256": "a0aa6bcc0ba3bbc18ae818ff2ea342548d3b32959fabd92c0f451de648f4dbfd",
+      "asset": "asset_ZRKmSKtM7bBjurJHFFJ57q9B",
+      "job": "job_hSFqvL8B6XkxEXGskuByRPPy",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_healed_1.ff09c641.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.5694e90b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Still here. Don't fuss.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Still here. Don't fuss.",
+      "lines": [
+        "bark_dagna_holt_revived_1"
+      ],
+      "files": [
+        "bark_dagna_holt_revived_1.13b0138a.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.5694e90b.wav",
+      "sourceSha256": "6613f3996eddc0f1927220e9c13dd7f3a33f531b4d142920eeacf6acba28e825",
+      "asset": "asset_nrufwtznhB3HxUmCVNA1SDAV",
+      "job": "job_JVmvKtSjX9yStxQ7K3zhkN7i",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_revived_1.51964b23.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.f6dbebaf",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Count heads. Everyone? Good.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Count heads. Everyone? Good.",
+      "lines": [
+        "bark_dagna_holt_victory_1"
+      ],
+      "files": [
+        "bark_dagna_holt_victory_1.40d4243b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.f6dbebaf.wav",
+      "sourceSha256": "dfc8d943d322e1752c3e0b17b83055ab020e9a681762f2fbaa3f315e1d33d499",
+      "asset": "asset_QGQK78MV4xQSJ7CEu1v3F8Ld",
+      "job": "job_jTinR6R7CJyuvQXTZDHMTZeH",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_victory_1.58175f8b.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.4e12c52f",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "That'll do.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> That'll do.",
+      "lines": [
+        "bark_dagna_holt_victory_2"
+      ],
+      "files": [
+        "bark_dagna_holt_victory_2.76ad0105.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.4e12c52f.wav",
+      "sourceSha256": "7d5b802080a07a2a1c905cfe15a33885ea5a1b87f007b811460e5fe78c0e26f2",
+      "asset": "asset_8DobX8bVYPEDXfzCamwtrt7v",
+      "job": "job_pPdURXFZmPFxyUEM26s2tEu6",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_victory_2.a110d71f.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.545e70b8",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Fall back! Back, now!",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Fall back! Back, now!",
+      "lines": [
+        "bark_dagna_holt_defeat_1"
+      ],
+      "files": [
+        "bark_dagna_holt_defeat_1.8aac13d5.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.545e70b8.wav",
+      "sourceSha256": "9ebe7b0ab00ea6e6ed5c9334e3ae239a26668a8f6474773ba7fa9fab5998730a",
+      "asset": "asset_GE82YH495nLDZUMaDcm8CPYr",
+      "job": "job_Bs6q1VwgvVD7jpJwMsL4ETQk",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_defeat_1.66e4f293.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.6e49fdf9",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Sleep. I'll take the watch. Habit.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Sleep. I'll take the watch. Habit.",
+      "lines": [
+        "bark_dagna_holt_camp_1"
+      ],
+      "files": [
+        "bark_dagna_holt_camp_1.4fc7522c.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.6e49fdf9.wav",
+      "sourceSha256": "7046d4942228d50c729ce8a837d11669c65760a524e447db5ad0386d4cd16461",
+      "asset": "asset_AjkjD1dBwCEgHxzbYH9wAhhs",
+      "job": "job_fcjm5y5R7YdFXfuYZp2qTJfX",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_camp_1.6214915d.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.d2e7a3a9",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Don't tell me it'll be all right. Tell me what we're doing.",
+      "lines": [
+        "bark_dagna_holt_camp_2",
+        "bark_dagna_holt_town_1"
+      ],
+      "files": [
+        "bark_dagna_holt_camp_2.91193ef4.ogg",
+        "bark_dagna_holt_town_1.91193ef4.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.d2e7a3a9.wav",
+      "sourceSha256": "a0d720722dd55cb89a6f6276c2fc2576d75517ca824532aaa37764f22768ac05",
+      "asset": "asset_PSRiAWH6QaWwyCzop67161tg",
+      "job": "job_S4uSAhSHQkWKHH8Qe7VFK9Gs",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "bark_dagna_holt_camp_2.7ac0db21.ogg",
+        "bark_dagna_holt_town_1.7ac0db21.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.af843f81",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+      "lines": [
+        "ch1_camp_open_2"
+      ],
+      "files": [
+        "ch1_camp_open_2.73f05588.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.af843f81.wav",
+      "sourceSha256": "e4d01ae1e9cab848317448d44c11452220ed4f9ae53008b5f8cafa32a2e484a8",
+      "asset": "asset_vio5Cq5eP468b5VTtVLGJ9as",
+      "job": "job_oucxAyw87kFH7WPcFXQY5Wom",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_camp_open_2.43f35597.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0e4b83be",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+      "lines": [
+        "ch1_camp_hunger_1"
+      ],
+      "files": [
+        "ch1_camp_hunger_1.a925b2e9.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0e4b83be.wav",
+      "sourceSha256": "e19e95c4102f1623f4870c1b24dffe1e2dd7c1869aba11309dab9c56d6abbc5b",
+      "asset": "asset_oq2giw7856KyDWXgNvDFZSze",
+      "job": "job_QdAt25aFT4612NvPqqArpsK2",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_camp_hunger_1.506f828b.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0d49daf0",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+      "lines": [
+        "ch1_camp_truth_1"
+      ],
+      "files": [
+        "ch1_camp_truth_1.8e17b167.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0d49daf0.wav",
+      "sourceSha256": "8b7922adff809a73346fe7bb3a1f2b9cca383e335b1e542811e3da67c4bd6000",
+      "asset": "asset_cYmeavv9waKLkVapd7sRK28y",
+      "job": "job_hwR9RTcw7Sj1hVxxuKrSeZz1",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_camp_truth_1.c769024e.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.e49d3738",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Then we'd better learn how to give something back.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Then we'd better learn how to give something back.",
+      "lines": [
+        "ch1_camp_warmth_2"
+      ],
+      "files": [
+        "ch1_camp_warmth_2.788b7405.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.e49d3738.wav",
+      "sourceSha256": "c357ff8250c7a02b4dbe232b1ea7435d9f83a5b0a231b3f0818a70177714aec9",
+      "asset": "asset_5WwYauchSbJVtPmpBid5cmPz",
+      "job": "job_1zBwqg94oaKiyadHMWTqiLXT",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_camp_warmth_2.8fe4d02a.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.f8a4b6f0",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Killed two of my guards doing it. Coll and Annet. Good people.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Killed two of my guards doing it. Coll and Annet. Good people.",
+      "lines": [
+        "ch1_mayor_halden_3"
+      ],
+      "files": [
+        "ch1_mayor_halden_3.c0a18099.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.f8a4b6f0.wav",
+      "sourceSha256": "ec417592a2b83ed1846fcf18cf6ad5d3f4e34b9497fa98fae9dc4578aeccfba2",
+      "asset": "asset_wLByFJvfevxphNbA6g57C7Hg",
+      "job": "job_QwS9v6mc3V26pdcVmWEK23Vz",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_mayor_halden_3.79860a20.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.fe43a149",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Forty winters she's led them. Clever. She'll smile at you while her archers find the range.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Forty winters she's led them. Clever. She'll smile at you while her archers find the range.",
+      "lines": [
+        "ch1_mayor_goblins_2"
+      ],
+      "files": [
+        "ch1_mayor_goblins_2.529013eb.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.fe43a149.wav",
+      "sourceSha256": "d9140f2dda5cce0abec43d1cd25261720f0d142fe4f795f431c15e81acde1237",
+      "asset": "asset_FHf3ieDSwr6GMFebGfvdhYDm",
+      "job": "job_hvd2cAo6D6AUSs91j6as4kJz",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_mayor_goblins_2.b798fc89.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.4d3c3900",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Calm's for after. Bridge first.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Calm's for after. Bridge first.",
+      "lines": [
+        "ch1_mayor_hero_3"
+      ],
+      "files": [
+        "ch1_mayor_hero_3.d0eba4c9.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.4d3c3900.wav",
+      "sourceSha256": "16f6d5c57ec42ff6f7685a2a6430354b6847af676228c7cbe42525f978487228",
+      "asset": "asset_Xeo9wX7dmTZKqYnj9AQ4eR2t",
+      "job": "job_GjCsHwJgpfwafgB7r3jjxgWj",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_mayor_hero_3.ace591b0.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.5aa27a90",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Aye. You were. Not many of us walked off it.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Aye. You were. Not many of us walked off it.",
+      "lines": [
+        "ch1_mayor_soldier_1"
+      ],
+      "files": [
+        "ch1_mayor_soldier_1.56849c9a.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.5aa27a90.wav",
+      "sourceSha256": "88e7724a39707f084053902a99918071cc1e3ef385d8e0e877943544ecd4ad7f",
+      "asset": "asset_KNfKHNERKHUSguZZvAq2NRKT",
+      "job": "job_VbzaUAjcAt49MPgFYx6YES72",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_mayor_soldier_1.4e1f4079.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.bcdf11b1",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "You saw what they did. When the time comes, you tell them.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> You saw what they did. When the time comes, you tell them.",
+      "lines": [
+        "ch1_mayor_soldier_2"
+      ],
+      "files": [
+        "ch1_mayor_soldier_2.771bb153.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.bcdf11b1.wav",
+      "sourceSha256": "879262f5488eb72d57a2520a6fe7fc9972744deee2b9d50819f800d788d88051",
+      "asset": "asset_XZ1Bc3Uux2WFqjMHz5iwm9rj",
+      "job": "job_x3EDu6mJTk51XPegUd6dJdEg",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_mayor_soldier_2.ade6e018.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.2230937b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Hit them at dawn, from both banks. They'll break. Goblins always break.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Hit them at dawn, from both banks. They'll break. Goblins always break.",
+      "lines": [
+        "ch1_ford_open_4"
+      ],
+      "files": [
+        "ch1_ford_open_4.2b2a190e.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.2230937b.wav",
+      "sourceSha256": "fcc2d1267e811fa31a14ab244c13910bb6a42bb8d9a3063d22c1ccb73ef41aff",
+      "asset": "asset_HsvcQ8iQqEwUobXGPp1TcAC6",
+      "job": "job_acg4AqgXtgn8Tc8c1xibYU3y",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_open_4.db2ad6b8.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0e80a424",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Say that again.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Say that again.",
+      "lines": [
+        "ch1_ford_truth_1"
+      ],
+      "files": [
+        "ch1_ford_truth_1.60a6b2de.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0e80a424.wav",
+      "sourceSha256": "5d2d5766adb3dae3f6680daa70d135b9c4bfcc09c2f9dffb0db902c305e31b06",
+      "asset": "asset_Bocpar9jjFPQG175NwJPfZLW",
+      "job": "job_HXpVJ75LCCQhgocFefzoDunY",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_truth_1.a7b52a99.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.1b501a03",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children.",
+      "lines": [
+        "ch1_ford_truth_2"
+      ],
+      "files": [
+        "ch1_ford_truth_2.d482b35e.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.1b501a03.wav",
+      "sourceSha256": "d6d3f3ebcbf16a7166038b9e82f53dff0b0a2b284d0ba614b0d5130b9a348e32",
+      "asset": "asset_KiedLaenoSDViH4gNnDd2TMr",
+      "job": "job_rvviMzhhjkj5YDQx3dfA7LbU",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_truth_2.f9b4967e.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.2c8fb4cd",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one.",
+      "lines": [
+        "ch1_ford_truth_3"
+      ],
+      "files": [
+        "ch1_ford_truth_3.f9b54bfb.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.2c8fb4cd.wav",
+      "sourceSha256": "452f5d0d8cd67c9b4eb102e0ab53c691d87de5e66d842df86ef1f2834669ff95",
+      "asset": "asset_kEcb4iTSmaaMFGhh3xFwfMCk",
+      "job": "job_GBuWJHWUDpLYsHGGCv5TTArW",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_truth_3.e18a6ca5.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.a8c25da3",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it.",
+      "lines": [
+        "ch1_ford_cases_1"
+      ],
+      "files": [
+        "ch1_ford_cases_1.e6e53880.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.a8c25da3.wav",
+      "sourceSha256": "25eecb68f27bcb14222bc5cc6ee774d5ec518fb98736968ea009013c5b10dde2",
+      "asset": "asset_LDXm3hKpGZ14buCFFiGeeddM",
+      "job": "job_sWRAVjtxhAPrbC2DeVZy9J2J",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_cases_1.2c529cf3.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.1cc7d587",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs.",
+      "lines": [
+        "ch1_ford_cases_2"
+      ],
+      "files": [
+        "ch1_ford_cases_2.76569cc2.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.1cc7d587.wav",
+      "sourceSha256": "b937b0f0452b2bd365f3ddd231ae5dbac9c51f4f4f54c4aa34700193347ce3a5",
+      "asset": "asset_FK59WoqyzaYZKQz4pzkAJhsE",
+      "job": "job_J8GfZdmymFfcPstqyypqegdU",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_cases_2.58984b22.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.d0c9bfa7",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Twenty crowns. My own. Now choose.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twenty crowns. My own. Now choose.",
+      "lines": [
+        "ch1_ford_pay_fail_2"
+      ],
+      "files": [
+        "ch1_ford_pay_fail_2.6ca21a20.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.d0c9bfa7.wav",
+      "sourceSha256": "f436510daa820002ad0cccad8b28814f67a92324d953bede03775abb12f8bb88",
+      "asset": "asset_W4sTwiDYztJnhWb443gdyq7d",
+      "job": "job_SZydQJVNTWSe2MbxbmPhFzHQ",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_pay_fail_2.b0f2f3b1.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.a5f2519b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.",
+      "lines": [
+        "ch1_ford_force_1"
+      ],
+      "files": [
+        "ch1_ford_force_1.73b8bd59.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.a5f2519b.wav",
+      "sourceSha256": "9436bbe61a9d16aea91eb73fef35a4854d019ecde2ad5e9e387773d6c3f80d84",
+      "asset": "asset_LNx3FycxaTsyVNnCk4WG9t6F",
+      "job": "job_xLxyn5bwECtbcYcgdzVWq8d9",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_force_1.06892ef8.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.6ce2cdb6",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Talk, then. When she puts a spear through you, remember who told you she would.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Talk, then. When she puts a spear through you, remember who told you she would.",
+      "lines": [
+        "ch1_ford_parley_1"
+      ],
+      "files": [
+        "ch1_ford_parley_1.a116cfdb.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.6ce2cdb6.wav",
+      "sourceSha256": "67b7a647fb4ee23797bf059d40117617eed6837e1ef84977e73b08f1cbfb0c6b",
+      "asset": "asset_qXGvp6xzr6xQKDcVdE6tSEGS",
+      "job": "job_ehx2WpujaZKg7MVoU2qbf3wT",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_ford_parley_1.075c5961.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.b133b6f0",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Now. Before she says anything else.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Now. Before she says anything else.",
+      "lines": [
+        "ch1_dawn_open_4"
+      ],
+      "files": [
+        "ch1_dawn_open_4.7515dedd.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.b133b6f0.wav",
+      "sourceSha256": "2b8b8091d561ebbf659d425f40cc0e0d5596ec987eeece47e030b0f93da2242f",
+      "asset": "asset_yYCKwKPSni1CrPjz6cxHXt68",
+      "job": "job_yvpPXiwcYcQFP52qA7B5Dodn",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_dawn_open_4.59bf8346.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.67da7bb3",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Children. Our lads shot at children.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Children. Our lads shot at children.",
+      "lines": [
+        "ch1_bridge_cost_soldier_1"
+      ],
+      "files": [
+        "ch1_bridge_cost_soldier_1.4f2c774e.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.67da7bb3.wav",
+      "sourceSha256": "5a79358b3ecba7b28fdc62127437b11fcf765a986c7355f6b74815236215390d",
+      "asset": "asset_7p9A7N1wSfUrj8fpQpxeLAqK",
+      "job": "job_VZc9yphcucpF5XTFaNrdUgwo",
+      "creativeUnits": 3,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_bridge_cost_soldier_1.8018ae7a.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.465a990b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "And we've just finished what they started. Gods help me.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> And we've just finished what they started. Gods help me.",
+      "lines": [
+        "ch1_bridge_cost_soldier_2"
+      ],
+      "files": [
+        "ch1_bridge_cost_soldier_2.478b3292.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.465a990b.wav",
+      "sourceSha256": "87a2a6469120ab89819b6f5eea246d8a36cf3af9c739651309cdea28279c81d7",
+      "asset": "asset_KvXMhK1Dt7WGemqxfEb4YU21",
+      "job": "job_cxmbLahBehKEgBhsiJpdKLjA",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_bridge_cost_soldier_2.d99efce8.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.fb7b9683",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "The road's open. That's what we came for.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The road's open. That's what we came for.",
+      "lines": [
+        "ch1_bridge_cost_over_1"
+      ],
+      "files": [
+        "ch1_bridge_cost_over_1.1b6f15a7.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.fb7b9683.wav",
+      "sourceSha256": "b5898f08c1eded9233957e14ea0a26488083582d5b2f28d8629f1e23a032e70b",
+      "asset": "asset_f3LovLALr3LzH1tgZEwojouV",
+      "job": "job_2fHgqx2RWZ9qYQ4Cs5gmGmva",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_bridge_cost_over_1.5ccafd05.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.e446341a",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Funny. I thought this would feel like something.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Funny. I thought this would feel like something.",
+      "lines": [
+        "ch1_bridge_cost_over_2"
+      ],
+      "files": [
+        "ch1_bridge_cost_over_2.2263557f.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.e446341a.wav",
+      "sourceSha256": "ef522a6c469533806c03d6b09754cb5eab92f222b247636d3405fd9824089f55",
+      "asset": "asset_PUFkFZoarExA7C21CoKXpRZM",
+      "job": "job_7NHUdLwjqzvMWoEizgUba9GR",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_bridge_cost_over_2.42da10f9.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.cfd7204c",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Truce or no truce, they're on my bridge. Ready when you are.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Truce or no truce, they're on my bridge. Ready when you are.",
+      "lines": [
+        "ch1_young_ones_open_5"
+      ],
+      "files": [
+        "ch1_young_ones_open_5.f5514a10.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.cfd7204c.wav",
+      "sourceSha256": "d257e22a67b47632967b40848a5fa2278ad486d541d19b65b6f559109d57c6b4",
+      "asset": "asset_xywJwN6Ns3it2ebcJhRzJM3V",
+      "job": "job_Qgb6S9oVhMpNkbMqPnuDRptD",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_young_ones_open_5.f6aa80d0.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.e39666dc",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Bridge is clear. Carts can cross by noon.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Bridge is clear. Carts can cross by noon.",
+      "lines": [
+        "ch1_road_east_open_3"
+      ],
+      "files": [
+        "ch1_road_east_open_3.83c877d3.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.e39666dc.wav",
+      "sourceSha256": "365e191ffb6f85149cf94e867683b6d07d71fe51a29ba70152d5c0f3dfb342f7",
+      "asset": "asset_eCbHR6EB2GFaM1CZDh5VsXy1",
+      "job": "job_XqVU3nK8pu9ws7xsJkAMShru",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_road_east_open_3.1ff0c1e8.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.a4a23df5",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "I wanted her dead, you know. For Coll and Annet. I still might, some days.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I wanted her dead, you know. For Coll and Annet. I still might, some days.",
+      "lines": [
+        "ch1_road_east_open_4"
+      ],
+      "files": [
+        "ch1_road_east_open_4.cbf32ed1.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.a4a23df5.wav",
+      "sourceSha256": "b8d378a68050c38a5edb55058da5fff331a53decb892c24419c0137716686c57",
+      "asset": "asset_q46PbCJZTxwavX9iRtN4VMVj",
+      "job": "job_aq9FnDsQ83wuPnaaMJLCaHZ8",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_road_east_open_4.562c7c3f.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.60b6b895",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "But I've never seen goblins carry their own children off a bridge before. I'll think on it.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> But I've never seen goblins carry their own children off a bridge before. I'll think on it.",
+      "lines": [
+        "ch1_road_east_open_5"
+      ],
+      "files": [
+        "ch1_road_east_open_5.0f67bcd4.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.60b6b895.wav",
+      "sourceSha256": "530ecfafe6c269aaa2cc51a4d990e3bdd4303b9a717be3c25a3e1102ad6e895a",
+      "asset": "asset_o5nbZmMzYzYHzwqwzAoHaSEP",
+      "job": "job_ASVFo5QQWQPKTufonvfU4KBr",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_road_east_open_5.7f710b38.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.0660a3a9",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "The goblins, Halden. They want feeding. We gave our word.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The goblins, Halden. They want feeding. We gave our word.",
+      "lines": [
+        "ch1_granary_open_3"
+      ],
+      "files": [
+        "ch1_granary_open_3.348770e3.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.0660a3a9.wav",
+      "sourceSha256": "a2dd57ffb1d70723aae29f185c0412bb16f02b6b9cd0980ef696e7a8385e5eea",
+      "asset": "asset_E2NA83hurZujgwFDfxQ2378e",
+      "job": "job_rti1m3z1nwjRZGmTPyd2gChH",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_granary_open_3.7467d3c4.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.4b827e6b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Halden. You locked those gates in the spring, before the clan ever came down. I want to know why.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Halden. You locked those gates in the spring, before the clan ever came down. I want to know why.",
+      "lines": [
+        "ch1_granary_press_1"
+      ],
+      "files": [
+        "ch1_granary_press_1.89d11779.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.4b827e6b.wav",
+      "sourceSha256": "1904321ea67b5e86fad2dfb1f2938b99feb69aca12c66140b54e80909116e9e8",
+      "asset": "asset_Gz5uSG3KRjdf9g4zmtmDQuWx",
+      "job": "job_hKHpg8oYr7uR7BWaJcraFu3B",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_granary_press_1.3cbb3dec.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.fb4328cc",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Six years. I've sat at your table for six years.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Six years. I've sat at your table for six years.",
+      "lines": [
+        "ch1_granary_confess_4"
+      ],
+      "files": [
+        "ch1_granary_confess_4.d145315b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.fb4328cc.wav",
+      "sourceSha256": "80731a85d964de05a7e2037a41df2c1af0b2c1dd773fc4705fc79e9cd7ceb955",
+      "asset": "asset_baJYHYs78p925pYNQZtduLk7",
+      "job": "job_yBU611ToNhgSwushfJ29P2tu",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_granary_confess_4.17e1447f.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.1adf11cb",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Aye. Somebody has to count the sacks honestly.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Aye. Somebody has to count the sacks honestly.",
+      "lines": [
+        "ch1_granary_doors_2"
+      ],
+      "files": [
+        "ch1_granary_doors_2.b7e525b1.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.1adf11cb.wav",
+      "sourceSha256": "b4c8a58366c304bb13d1fab0ce94999a8e9ab9f8052dbb358cf625238864966e",
+      "asset": "asset_khzvKKjzQTz5CmTyQ5PAG9Su",
+      "job": "job_KqePME47zWigF9mSaCyisD5N",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch1_granary_doors_2.8ea3074e.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.55c465fd",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can.",
+      "lines": [
+        "ch5_epi_clan_slain_rekindled_open_3"
+      ],
+      "files": [
+        "ch5_epi_clan_slain_rekindled_open_3.78ea8dc8.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.55c465fd.wav",
+      "sourceSha256": "5b0b3bf9ba4d54ca423290d83b385ba8b1b984d99d75afc13003d4e193baeb1d",
+      "asset": "asset_1G8rLmaNc5j1qHRQMFEaYn8S",
+      "job": "job_nN1V1QbqNjBHh1MV5MPkoas8",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch5_epi_clan_slain_rekindled_open_3.659715ea.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.395d3398",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "They remember the bridge. So do I. That's the trouble with remembering. It works on both sides.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They remember the bridge. So do I. That's the trouble with remembering. It works on both sides.",
+      "lines": [
+        "ch5_epi_clan_slain_returned_open_2"
+      ],
+      "files": [
+        "ch5_epi_clan_slain_returned_open_2.c35be44d.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.395d3398.wav",
+      "sourceSha256": "3dacabb4e66eb4bc693ce514eff17d281037616fe65489be0c13e358138a8a8a",
+      "asset": "asset_GmM6MWq4nc4BU2u4hSG7MTW6",
+      "job": "job_2341dxJstwcEYUBN3wGfx8tE",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ch5_epi_clan_slain_returned_open_2.248abc6c.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.47b37507",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "The ford first. I have too few guards to bury another.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.",
+      "lines": [
+        "ashmaw_busy"
+      ],
+      "files": [
+        "ashmaw_busy.9e9a9aeb.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.47b37507.wav",
+      "sourceSha256": "1e5b471cbfcbbdf00fe433eea09f168f9342dbbc35d03d222c1dbea1cd3793d0",
+      "asset": "asset_dYqP5M1vZHUR1kALsj1ez1MN",
+      "job": "job_ZocQ5Yys84jtd77UQdzDsUTj",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_busy.922760d5.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.fe6c264d",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "lines": [
+        "ashmaw_offer"
+      ],
+      "files": [
+        "ashmaw_offer.0061d72d.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.fe6c264d.wav",
+      "sourceSha256": "0be5547f875dfef2a1ead0269cb5c89ef5543b000c6463e49b784c769303ddbf",
+      "asset": "asset_Aq1fbpQo6TKtAe374A3DEJfK",
+      "job": "job_pKb4kT4e7ZPZ8uj1atwpvWJU",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_offer.fa64e1c4.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.ec54291b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "lines": [
+        "ashmaw_accepted"
+      ],
+      "files": [
+        "ashmaw_accepted.7b2094b8.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.ec54291b.wav",
+      "sourceSha256": "7d403de132b7208698ba052353376ef80decf4c7087a28581206234d305f39df",
+      "asset": "asset_8dtx9MYdGizA62NGik4YyC72",
+      "job": "job_SPx1WPveEYRnmnvcyLv9JJ5y",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_accepted.93693713.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.aec53cd3",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Then take the time. Cold courage does nobody any good.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.",
+      "lines": [
+        "ashmaw_later"
+      ],
+      "files": [
+        "ashmaw_later.be53c235.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.aec53cd3.wav",
+      "sourceSha256": "ad3af7f26efdaf43e7666fc5722b8aff25f77a120448da0b8a7b1ef60d5fc70d",
+      "asset": "asset_tYWydSHHfnav1GLfknLK4ef6",
+      "job": "job_LUuiHJCsL2La1hzAZ73SkzJA",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_later.406b4cff.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.d5fc595e",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "lines": [
+        "ashmaw_progress"
+      ],
+      "files": [
+        "ashmaw_progress.800a02aa.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.d5fc595e.wav",
+      "sourceSha256": "f6096985c45d82532bbb0961683a1a41db352ae897ea50a5362570423ff54713",
+      "asset": "asset_uhAP3QTiZwcdv74MfQ8W6Duw",
+      "job": "job_NqgP8tJjX1YPk6M4i739bQu5",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_progress.73bbc710.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.9bb3f5a8",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "lines": [
+        "ashmaw_proof"
+      ],
+      "files": [
+        "ashmaw_proof.53b3925b.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.9bb3f5a8.wav",
+      "sourceSha256": "08e04b9a413a4a41adf5f9532abad595a80841f1cc6aaaf3c71cb4600424fb50",
+      "asset": "asset_mzDp8JESTPhgDdGpVzfSxrER",
+      "job": "job_Z6mRKPTyUDv6MCXNNVyYVAaf",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_proof.b0ebb092.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.783e8d78",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "They will stay here. A promise does not spoil overnight.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.",
+      "lines": [
+        "ashmaw_wait"
+      ],
+      "files": [
+        "ashmaw_wait.b9b16c30.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.783e8d78.wav",
+      "sourceSha256": "431b177712c45003d20a8c1593c74e0fc3dfd57ddb38e0ca7ba74ec3fe63e306",
+      "asset": "asset_bNnwtFkHECk6qSehxZFsmAVM",
+      "job": "job_pqVGgjrqWtRMdNmwJEC6SmJJ",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_wait.be377409.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.74854def",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "lines": [
+        "ashmaw_presented"
+      ],
+      "files": [
+        "ashmaw_presented.167e3765.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.74854def.wav",
+      "sourceSha256": "462d3e6838c6158929ef8cd8bc5186cbc8daa73f6b71a851a43a52f3741227e8",
+      "asset": "asset_hKff96ag6QeDgpWQqYvfVtzt",
+      "job": "job_5ZM5H7rdynyfCJTNtF4Af38o",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_presented.bfb48d48.ogg"
+      ]
+    },
+    {
+      "raw": "Gacrux.867a63f5",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "dagna_holt",
+      "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+      "lines": [
+        "ashmaw_done"
+      ],
+      "files": [
+        "ashmaw_done.fa47da21.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/dagna-holt/voice-recast/batch/raw/Gacrux.867a63f5.wav",
+      "sourceSha256": "89136b4350597f5688fdc845998fa1d0a00558bb04feb6e61d3bec12bb506efe",
+      "asset": "asset_E2epTBwVWRFZB9nYyMTaGqNR",
+      "job": "job_WiCpCyS8y7nh6qZL2SfSqPev",
+      "creativeUnits": 4,
+      "issue": 80,
+      "ownerApproval": "That's perfect, go ahead and fix her other voice lines with this same sound",
+      "replacesFiles": [
+        "ashmaw_done.74badb62.ogg"
       ]
     }
   ]

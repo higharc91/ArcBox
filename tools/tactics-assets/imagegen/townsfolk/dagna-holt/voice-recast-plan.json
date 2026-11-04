@@ -1,10 +1,10 @@
 {
-  "status": "audition_ready_pending_owner_voice_approval",
+  "status": "approved_voice_recast_installed",
   "ownerRequest": "Change her voice, it doesn't sound like a season veteran",
-  "currentPreset": "Callirrhoe",
-  "currentPitch": -1,
+  "currentPreset": "Gacrux",
+  "currentPitch": 0,
   "proposedPresetToAudition": "Gacrux",
-  "presetStatus": "candidate only; verify live availability and cost before rendering",
+  "presetStatus": "approved by owner: That's perfect, go ahead and fix her other voice lines with this same sound",
   "deliveryBrief": "Mature female guard captain, approximately late40s to50s. Low, flat Northern English delivery, few words, grounded chest resonance and lightly weathered texture. Twelve years of command and grief held under discipline. Calm authority, clipped practical phrasing, understated fatigue; no youthful brightness, theatrical growling, frailty, or cheerful sing-song. Preserve exact caption words.",
   "previewLines": [
     {
@@ -289,18 +289,20 @@
     ]
   },
   "workflow": [
-    "Obtain live model schema, quote and balance; never purchase credits.",
-    "Render the two sample lines for owner listening review.",
-    "After owner voice approval, recast all 66 Dagna lines consistently; preserve old recordings/provenance and update registered cast metadata. Keep authored-recordings-only playback and disabled live TTS unchanged.",
-    "Run voice import/check and verify clip/caption mappings."
+    "Completed: live schema, cap check and 232 CU batch estimate.",
+    "Completed: 63 renders cover66 lines, source WAVs and receipts retained.",
+    "Completed: targeted import, cast/theme metadata update; previous clips retained. Authored recordings only.",
+    "Verify coverage, decode, duration, voice drift and existing story/bark behavior."
   ],
   "liveCost": {
-    "quotedCU": 4,
-    "jobBilledCU": 4,
-    "balanceCheck": "No member/project cap; plan remaining balance unavailable from available tool."
+    "auditionCU": 4,
+    "batchQuotedCU": 232,
+    "batchBilledCU": 232,
+    "totalCU": 236,
+    "planBalance": "not reported; member/project cap check is unlimited"
   },
-  "creditsSpent": 4,
-  "newRecordingsGenerated": 1,
+  "creditsSpent": 236,
+  "newRecordingsGenerated": 64,
   "audition": {
     "voice": "Gacrux",
     "pitch": 0,
@@ -309,6 +311,10 @@
     "jobId": "job_XKMhe6TQ2AS48wqowWTEgLgR",
     "assetId": "asset_oGRAyjjXx2wJ9Z2NgYzxBn9A",
     "twoLinesCombined": true,
-    "approval": "pending_owner_listening_review"
-  }
+    "approval": "approved_by_owner"
+  },
+  "previousPreset": "Callirrhoe",
+  "previousPitch": -1,
+  "installedLineCount": 66,
+  "distinctBatchRenders": 63
 }

@@ -2,9 +2,10 @@
   "character": "dagna_holt",
   "barkId": "bark_dagna_holt_town_1",
   "text": "Don't tell me it'll be all right. Tell me what we're doing.",
-  "sourcePath": "content/tactics/base/lore/audio/bark_dagna_holt_town_1.7ac0db21.ogg",
-  "sourceSha256": "ac61fe22352fc92df57556db714d8452b214e58226ae43968558e56800082fe2",
+  "sourcePath": "content/tactics/base/lore/audio/bark_dagna_holt_town_1.91193ef4.ogg",
+  "sourceSha256": "5a747b4263944acb9ec0388f7a59e83125c48343f0fa2ea8232042adcb6c34bd",
   "reviewFile": "voice-sample.mp3",
-  "reviewSha256": "10f2da3e705788aeb653aabdd8fbe529f1c80bfb6eb4a7d1967332957e43742f",
-  "operation": "Existing recording transcoded to MP3; no new speech generation"
+  "reviewSha256": "65a35e5b32766b8f5c6efbf3562c4578b3c5c84c5077ea84e5c78cad8328c6c8",
+  "operation": "New owner-approved Gacrux veteran recast, rendered with approved direction, no post pitch/filter.",
+  "provenance": "voice-recast/batch/"
 }

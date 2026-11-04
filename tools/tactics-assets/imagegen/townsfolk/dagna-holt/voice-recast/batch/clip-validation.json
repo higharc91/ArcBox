@@ -1,0 +1,926 @@
+[
+  {
+    "line": "bark_dagna_holt_battle_start_1",
+    "file": "bark_dagna_holt_battle_start_1.229764f9.ogg",
+    "duration": 3.293417,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "8003719d29ed367b194ce1eb4295742176344a780a2a6ada2438e801cab39c24",
+    "sourcePeak": 27096,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 91.09080325995767
+  },
+  {
+    "line": "bark_dagna_holt_battle_start_2",
+    "file": "bark_dagna_holt_battle_start_2.de9faf88.ogg",
+    "duration": 2.3545,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "5608eb9df811888f6edc9e265e6eeb0730cb222a48b19d788a448851446961cf",
+    "sourcePeak": 27099,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 101.93246973879805
+  },
+  {
+    "line": "bark_dagna_holt_battle_start_3",
+    "file": "bark_dagna_holt_battle_start_3.7b8ecace.ogg",
+    "duration": 2.697208,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "7e6d57dabc381ea1b1c642dd457ad7d8e88d9bf0385ca5f08ebf36ab6e4981c5",
+    "sourcePeak": 28794,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 111.2261271655727
+  },
+  {
+    "line": "bark_dagna_holt_turn_start_1",
+    "file": "bark_dagna_holt_turn_start_1.a1f3d5fa.ogg",
+    "duration": 0.526875,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "c08f78dd159fb0f46d816cd515adb68f090ca80d9fc3381fee47b26efd3db51c",
+    "sourcePeak": 20692,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 113.87900355871886
+  },
+  {
+    "line": "bark_dagna_holt_turn_start_2",
+    "file": "bark_dagna_holt_turn_start_2.8fbf731b.ogg",
+    "duration": 1.638625,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "fb0b90837e76dd91cd4c49c7759688c5f995d32abd31813d3353aea964d2a429",
+    "sourcePeak": 16045,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 36.61606529864978
+  },
+  {
+    "line": "bark_dagna_holt_hit_1",
+    "file": "bark_dagna_holt_hit_1.1c393822.ogg",
+    "duration": 1.087042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "3effea1560795273908e46f3f3853cc6c3b449e5e88312736ed07d240d696d04",
+    "sourcePeak": 15830,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 55.19565941334373
+  },
+  {
+    "line": "bark_dagna_holt_hit_2",
+    "file": "bark_dagna_holt_hit_2.c92675f8.ogg",
+    "duration": 0.875333,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "41986526fc10b9f8d540a92d30f420e78231c71c0e8183546464d493f2ae80fa",
+    "sourcePeak": 19114,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 137.09068434527202
+  },
+  {
+    "line": "bark_dagna_holt_miss_1",
+    "file": "bark_dagna_holt_miss_1.ae5cb45d.ogg",
+    "duration": 1.441958,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "464d41e795e4e918d2dfd3d2ea55b4ae3244dac1129526ffefeeb3046cfcf0ae",
+    "sourcePeak": 7625,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 83.2201770093165
+  },
+  {
+    "line": "bark_dagna_holt_crit_1",
+    "file": "bark_dagna_holt_crit_1.113e6172.ogg",
+    "duration": 1.133375,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "02b464f7036683ee93ec77e9cc2de342da7ca87fee5ecffc33d231f754be7f98",
+    "sourcePeak": 26483,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 211.75692070144478
+  },
+  {
+    "line": "bark_dagna_holt_kill_1",
+    "file": "bark_dagna_holt_kill_1.636ce126.ogg",
+    "duration": 0.616167,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "2a60d2bd456eebbb549ea79f0e6c4b2e7c76254684e1af713f344f009dd24af2",
+    "sourcePeak": 26889,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 97.37619833584077
+  },
+  {
+    "line": "bark_dagna_holt_kill_2",
+    "file": "bark_dagna_holt_kill_2.6d10259b.ogg",
+    "duration": 1.243583,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "5654e4c306401e3d125698cceb3933ee0cdcbf6351322f889d42a7366fcebfe7",
+    "sourcePeak": 19642,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 96.49536862437006
+  },
+  {
+    "line": "bark_dagna_holt_ally_down_1",
+    "file": "bark_dagna_holt_ally_down_1.9f48f15b.ogg",
+    "duration": 2.006292,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "b8edd56b2e0534cb3c5c524ecab7f6d5fc8184a0fe1c202fceb3626872feb30f",
+    "sourcePeak": 26589,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 119.6236639532032
+  },
+  {
+    "line": "bark_dagna_holt_ally_down_2",
+    "file": "bark_dagna_holt_ally_down_2.b0883969.ogg",
+    "duration": 2.857583,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "b5848594f56381da5dd688c7b0dfe6b92f14d30c891c8d0e92b02f2c44f0442b",
+    "sourcePeak": 15328,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 125.98059268969615
+  },
+  {
+    "line": "bark_dagna_holt_low_hp_1",
+    "file": "bark_dagna_holt_low_hp_1.97b25ab9.ogg",
+    "duration": 2.817958,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ac5c77ef7eb5a28f47e4d75e322668c78186c99aabca170014aad5a4a613bb02",
+    "sourcePeak": 19794,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 106.46006789313397
+  },
+  {
+    "line": "bark_dagna_holt_healed_1",
+    "file": "bark_dagna_holt_healed_1.f3df214e.ogg",
+    "duration": 1.769167,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ab1464a236848e2eac5e89a79f030300e1e90a6ee48d7758a6be7dab7897fd69",
+    "sourcePeak": 27930,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 101.74279759909608
+  },
+  {
+    "line": "bark_dagna_holt_revived_1",
+    "file": "bark_dagna_holt_revived_1.13b0138a.ogg",
+    "duration": 2.133,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "bdd8b01c7e2a1dc642ce918eae6c8cc5bb79249c163d307d709b3505786f86b8",
+    "sourcePeak": 21148,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 112.51758087201125
+  },
+  {
+    "line": "bark_dagna_holt_victory_1",
+    "file": "bark_dagna_holt_victory_1.40d4243b.ogg",
+    "duration": 3.3,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "000229d7a3e0222bb0ffd08effd12f086a338831a546a9bcc929e3072cbf9d24",
+    "sourcePeak": 26809,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 72.72727272727273
+  },
+  {
+    "line": "bark_dagna_holt_victory_2",
+    "file": "bark_dagna_holt_victory_2.76ad0105.ogg",
+    "duration": 2.072,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "8e90e6015b26809898a84f346c6faf8afe04569438d2bec995cc406373460495",
+    "sourcePeak": 21146,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 57.915057915057915
+  },
+  {
+    "line": "bark_dagna_holt_defeat_1",
+    "file": "bark_dagna_holt_defeat_1.8aac13d5.ogg",
+    "duration": 1.829875,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "7cb1ac8ea9eb6f71755bedb1c7652cd1ab683f396e8d4e686730a46c871a1e53",
+    "sourcePeak": 27578,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 131.15649976091262
+  },
+  {
+    "line": "bark_dagna_holt_camp_1",
+    "file": "bark_dagna_holt_camp_1.4fc7522c.ogg",
+    "duration": 3.576333,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "c72e2497fed6228594ac2a9f447fd9ed086812c2f73256488d17fe77bf65c4e5",
+    "sourcePeak": 27207,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 100.66176723476254
+  },
+  {
+    "line": "bark_dagna_holt_camp_2",
+    "file": "bark_dagna_holt_camp_2.91193ef4.ogg",
+    "duration": 4.1,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "5a747b4263944acb9ec0388f7a59e83125c48343f0fa2ea8232042adcb6c34bd",
+    "sourcePeak": 20091,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 175.609756097561
+  },
+  {
+    "line": "bark_dagna_holt_town_1",
+    "file": "bark_dagna_holt_town_1.91193ef4.ogg",
+    "duration": 4.1,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "5a747b4263944acb9ec0388f7a59e83125c48343f0fa2ea8232042adcb6c34bd",
+    "sourcePeak": 20091,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 175.609756097561
+  },
+  {
+    "line": "bark_dagna_holt_town_2",
+    "file": "bark_dagna_holt_town_2.229764f9.ogg",
+    "duration": 3.293417,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "8003719d29ed367b194ce1eb4295742176344a780a2a6ada2438e801cab39c24",
+    "sourcePeak": 27096,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 91.09080325995767
+  },
+  {
+    "line": "bark_dagna_holt_town_3",
+    "file": "bark_dagna_holt_town_3.7b8ecace.ogg",
+    "duration": 2.697208,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "7e6d57dabc381ea1b1c642dd457ad7d8e88d9bf0385ca5f08ebf36ab6e4981c5",
+    "sourcePeak": 28794,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 111.2261271655727
+  },
+  {
+    "line": "ch1_camp_open_2",
+    "file": "ch1_camp_open_2.73f05588.ogg",
+    "duration": 7.6,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "7148b117b6696ebc61332c39b9de9c58891ac16e00dc736d32991e8cf3cc5f96",
+    "sourcePeak": 28058,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 134.21052631578948
+  },
+  {
+    "line": "ch1_camp_hunger_1",
+    "file": "ch1_camp_hunger_1.a925b2e9.ogg",
+    "duration": 11.3,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ea3e9ad3c210e2b187be0e1e3524b81f7a82e5141bdd53aa9950fe58bad07228",
+    "sourcePeak": 25139,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 148.6725663716814
+  },
+  {
+    "line": "ch1_camp_truth_1",
+    "file": "ch1_camp_truth_1.8e17b167.ogg",
+    "duration": 6.8,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "5549203ea3cee66e011a62938cee5e117779a818155dd8b0b3db5ea02b34ea0f",
+    "sourcePeak": 25604,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 158.8235294117647
+  },
+  {
+    "line": "ch1_camp_warmth_2",
+    "file": "ch1_camp_warmth_2.788b7405.ogg",
+    "duration": 2.482,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "d95d2b8d720e19610160ea40afb58a8c370d425b40214cfc5b88e01636c3978f",
+    "sourcePeak": 24454,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 217.56647864625302
+  },
+  {
+    "line": "ch1_mayor_halden_3",
+    "file": "ch1_mayor_halden_3.c0a18099.ogg",
+    "duration": 5.300042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "05f40295b037812faace81fc54c181dd900f1ca850f1d365c8a1d1947b610dc4",
+    "sourcePeak": 24920,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 135.84798007261074
+  },
+  {
+    "line": "ch1_mayor_goblins_2",
+    "file": "ch1_mayor_goblins_2.529013eb.ogg",
+    "duration": 6.4,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "a9ad6d01ed3b961aba2e2e885927f078766457722ff1700ea9c47be2e8e4ec21",
+    "sourcePeak": 27627,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 150.0
+  },
+  {
+    "line": "ch1_mayor_hero_3",
+    "file": "ch1_mayor_hero_3.d0eba4c9.ogg",
+    "duration": 2.537583,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "7f184703105342863ca9038edfe80adb2878f16856aceca6123e1d1462e4ace1",
+    "sourcePeak": 23154,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 118.22273399530182
+  },
+  {
+    "line": "ch1_mayor_soldier_1",
+    "file": "ch1_mayor_soldier_1.56849c9a.ogg",
+    "duration": 4.200042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "e6119a41a667071c65ebe553ac9b21076b85185769a035765ad14d231ec67af8",
+    "sourcePeak": 22472,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 142.85571429999987
+  },
+  {
+    "line": "ch1_mayor_soldier_2",
+    "file": "ch1_mayor_soldier_2.771bb153.ogg",
+    "duration": 4.3,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "f70d6769274680287d2601afc46dfdd06292f3665dd40d2b233d25138a8000ce",
+    "sourcePeak": 22900,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 167.4418604651163
+  },
+  {
+    "line": "ch1_ford_open_4",
+    "file": "ch1_ford_open_4.2b2a190e.ogg",
+    "duration": 6.2,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "22b31a3ff6340f97856c3e2ed371133bfe9803bdbc5e83ecc6d82abda1cb0d6f",
+    "sourcePeak": 26337,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 116.12903225806451
+  },
+  {
+    "line": "ch1_ford_truth_1",
+    "file": "ch1_ford_truth_1.60a6b2de.ogg",
+    "duration": 0.973625,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "1540ffd30148791f9408dc5e2413496597faf2a941f84d22ccc9e44b04ac7385",
+    "sourcePeak": 22056,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 184.8761073308512
+  },
+  {
+    "line": "ch1_ford_truth_2",
+    "file": "ch1_ford_truth_2.d482b35e.ogg",
+    "duration": 6.800042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ca6c70437cd1db71adbd2e8bf6a32aa3d838a070f284d923f7dacd94bf5147fd",
+    "sourcePeak": 22795,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 167.64602336279688
+  },
+  {
+    "line": "ch1_ford_truth_3",
+    "file": "ch1_ford_truth_3.f9b54bfb.ogg",
+    "duration": 6.200042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ca33c1863630fbc635cfbb9c8628b98e460eac72679063b5a52c759cd9d0ed2a",
+    "sourcePeak": 21382,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 193.54707597142084
+  },
+  {
+    "line": "ch1_ford_cases_1",
+    "file": "ch1_ford_cases_1.e6e53880.ogg",
+    "duration": 7.400042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "73486680dd2ab498b75c108551318379d17e75714ca63f075d96267c7234292f",
+    "sourcePeak": 24713,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 162.1612417875466
+  },
+  {
+    "line": "ch1_ford_cases_2",
+    "file": "ch1_ford_cases_2.76569cc2.ogg",
+    "duration": 6.8,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "043ebd9c2ce19ad04d335e7c2362ce2e5dde957b7c224bdc891edf8d0bcd9e40",
+    "sourcePeak": 27437,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 158.8235294117647
+  },
+  {
+    "line": "ch1_ford_pay_fail_2",
+    "file": "ch1_ford_pay_fail_2.6ca21a20.ogg",
+    "duration": 4.0,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "338fe7b7f1127906b420af14e7a7c76489f26cf8e26affae8a007a2a06a1a114",
+    "sourcePeak": 25734,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 90.0
+  },
+  {
+    "line": "ch1_ford_force_1",
+    "file": "ch1_ford_force_1.73b8bd59.ogg",
+    "duration": 7.100042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "78a2ae7a35ebe5a77ba4014847cdcdd73f8ae6dac02332c04df201b4d5ae67ba",
+    "sourcePeak": 26919,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 135.2104677690639
+  },
+  {
+    "line": "ch1_ford_parley_1",
+    "file": "ch1_ford_parley_1.a116cfdb.ogg",
+    "duration": 4.600042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "18823e27b7ad21ff0546c25daa4600f477e659fbba099fdba7cf18ebb04b0e7c",
+    "sourcePeak": 26812,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 195.65038753993986
+  },
+  {
+    "line": "ch1_dawn_open_4",
+    "file": "ch1_dawn_open_4.7515dedd.ogg",
+    "duration": 2.73375,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ed970b42fae9437c76147139d8712ad91e9630863ed0d8aa0b3caba2537608d0",
+    "sourcePeak": 23493,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 131.6872427983539
+  },
+  {
+    "line": "ch1_bridge_cost_soldier_1",
+    "file": "ch1_bridge_cost_soldier_1.4f2c774e.ogg",
+    "duration": 3.852417,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "820add0f95e5d0bd0e052a876e56088d6e0b8dbc64c1b430f182c03eac78c03b",
+    "sourcePeak": 19566,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 93.4478276884356
+  },
+  {
+    "line": "ch1_bridge_cost_soldier_2",
+    "file": "ch1_bridge_cost_soldier_2.478b3292.ogg",
+    "duration": 5.5,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "76b074d383b235f6b33d27a4cc24fe77431536360e4e4f30734072552497360d",
+    "sourcePeak": 19256,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 109.0909090909091
+  },
+  {
+    "line": "ch1_bridge_cost_over_1",
+    "file": "ch1_bridge_cost_over_1.1b6f15a7.ogg",
+    "duration": 3.400042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "dd268b5728be62f7bc76c9cae21e713e1f0c066517d71c633249095c2afaec18",
+    "sourcePeak": 29186,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 141.1747266651412
+  },
+  {
+    "line": "ch1_bridge_cost_over_2",
+    "file": "ch1_bridge_cost_over_2.2263557f.ogg",
+    "duration": 3.263917,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "bca124d2ce3ac78499cff94f9083c85411415b73d78c481db6c239a24202f964",
+    "sourcePeak": 24889,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 147.06256317179634
+  },
+  {
+    "line": "ch1_young_ones_open_5",
+    "file": "ch1_young_ones_open_5.f5514a10.ogg",
+    "duration": 5.100042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "4c2f780b02352f477121326cd4726d54d6415e917a39a07ce507910ad4d88d9a",
+    "sourcePeak": 24707,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 141.175307968052
+  },
+  {
+    "line": "ch1_road_east_open_3",
+    "file": "ch1_road_east_open_3.83c877d3.ogg",
+    "duration": 2.804083,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "9ab83ba764bf64245e0bfc38e3ea97173ed8dde7c5bbee06c5dca93c1bf4a8eb",
+    "sourcePeak": 27926,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 171.1789558297668
+  },
+  {
+    "line": "ch1_road_east_open_4",
+    "file": "ch1_road_east_open_4.cbf32ed1.ogg",
+    "duration": 6.4,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "a3901960591fe7c0ca505ac5b5e5fa1ed6c878bb6d3bb0cab9abec28291e2929",
+    "sourcePeak": 26243,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 140.625
+  },
+  {
+    "line": "ch1_road_east_open_5",
+    "file": "ch1_road_east_open_5.0f67bcd4.ogg",
+    "duration": 6.500042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "98e6fff8153fabfd14a89403a49a5a356aa20d699e25de4c3bb3878d561e9f02",
+    "sourcePeak": 26605,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 156.92206296513163
+  },
+  {
+    "line": "ch1_granary_open_3",
+    "file": "ch1_granary_open_3.348770e3.ogg",
+    "duration": 4.4,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ba3f204deedefb0cc1385796feffaa175d1e6a070078046c74289b72b2fee626",
+    "sourcePeak": 20257,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 136.36363636363635
+  },
+  {
+    "line": "ch1_granary_press_1",
+    "file": "ch1_granary_press_1.89d11779.ogg",
+    "duration": 7.500042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "da9d15d5e1d11b739fdce34e3a999739aec006d950ece887348d9e18b27334eb",
+    "sourcePeak": 22385,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 151.9991488047667
+  },
+  {
+    "line": "ch1_granary_confess_4",
+    "file": "ch1_granary_confess_4.d145315b.ogg",
+    "duration": 4.4,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "fef26f1aeae7b504171c7d3927b5e05c359b814c71289f37b37aa178b857106a",
+    "sourcePeak": 28851,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 136.36363636363635
+  },
+  {
+    "line": "ch1_granary_doors_2",
+    "file": "ch1_granary_doors_2.b7e525b1.ogg",
+    "duration": 3.388875,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "ab7baea9415ef2be7fb601df99b74c7c4f7e1e1e1d0895f958b5fa5d90445077",
+    "sourcePeak": 23676,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 141.63992475378998
+  },
+  {
+    "line": "ch5_epi_clan_slain_rekindled_open_3",
+    "file": "ch5_epi_clan_slain_rekindled_open_3.78ea8dc8.ogg",
+    "duration": 7.200042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "3408f1351b55e3b5dfc52cc300113718529411d366a86597e53731efd6b4b171",
+    "sourcePeak": 26226,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 158.33240972760993
+  },
+  {
+    "line": "ch5_epi_clan_slain_returned_open_2",
+    "file": "ch5_epi_clan_slain_returned_open_2.c35be44d.ogg",
+    "duration": 7.1,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "176f884b04d8de1a0b40683008bc2430f2d8553464425333d345fad02c8a51dc",
+    "sourcePeak": 26805,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 143.66197183098592
+  },
+  {
+    "line": "ashmaw_busy",
+    "file": "ashmaw_busy.9e9a9aeb.ogg",
+    "duration": 4.2,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "e34e0e3e6844a30f3a94d82f240c04a49059f99ec895078f405561046e99c99d",
+    "sourcePeak": 26479,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 157.14285714285714
+  },
+  {
+    "line": "ashmaw_offer",
+    "file": "ashmaw_offer.0061d72d.ogg",
+    "duration": 13.6,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "0b512b995c7ffd2e5f1c041786b901b900b99cebe434b5f38fd52cfbeded82e8",
+    "sourcePeak": 27387,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 163.23529411764707
+  },
+  {
+    "line": "ashmaw_accepted",
+    "file": "ashmaw_accepted.7b2094b8.ogg",
+    "duration": 12.600042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "a3e3feb87f2bd52c4faa303e3229456556536a72b211ef3547a34ef2caa9ef71",
+    "sourcePeak": 27789,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 142.85666666825395
+  },
+  {
+    "line": "ashmaw_later",
+    "file": "ashmaw_later.be53c235.ogg",
+    "duration": 4.200042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "2c74c553bbec4b1baeb965f93b77cdf0ba8b695500b0055e1e38c677871395f4",
+    "sourcePeak": 21474,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 142.85571429999987
+  },
+  {
+    "line": "ashmaw_progress",
+    "file": "ashmaw_progress.800a02aa.ogg",
+    "duration": 7.700042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "3cf4f47a771c6ae603da2796ddce9d5f0e6b5342c5248ea0dd85c5465586b821",
+    "sourcePeak": 22183,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 148.0511405002726
+  },
+  {
+    "line": "ashmaw_proof",
+    "file": "ashmaw_proof.53b3925b.ogg",
+    "duration": 14.0,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "984e7c25c7a4c91f9ca75bf22f7e6da664c82994a7e5558be05a7cd83d924fa7",
+    "sourcePeak": 27977,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 137.14285714285714
+  },
+  {
+    "line": "ashmaw_wait",
+    "file": "ashmaw_wait.b9b16c30.ogg",
+    "duration": 4.200042,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "bc55ba4cc5470c2f3b44b3038940ce427c17652f1bd856827d11d20b3c2fa19c",
+    "sourcePeak": 26351,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 142.85571429999987
+  },
+  {
+    "line": "ashmaw_presented",
+    "file": "ashmaw_presented.167e3765.ogg",
+    "duration": 6.9,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "814c4a4cef7ef61dc88f0ef9a32f73d9c699bafbcbdd7fdc82cfcc772c76b2a6",
+    "sourcePeak": 23659,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 156.52173913043478
+  },
+  {
+    "line": "ashmaw_done",
+    "file": "ashmaw_done.fa47da21.ogg",
+    "duration": 6.5,
+    "stream": {
+      "codec_name": "vorbis",
+      "sample_rate": "24000",
+      "channels": 1
+    },
+    "sha256": "d7b1414455d84e7623912f99ae63738f46a8f7b9c39327c5181d5dc192b5bb86",
+    "sourcePeak": 26164,
+    "sourceClippedSamples": 0,
+    "wordsPerMinute": 147.69230769230768
+  }
+]

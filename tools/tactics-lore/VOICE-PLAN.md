@@ -24,7 +24,7 @@ Named characters keep their existing preset, pitch and filter across main scenes
 | bree_tallow | Zephyr | +0 | — |
 | maren_sorrel | Sulafat | +0 | — |
 | mother_aubrine | Vindemiatrix | +0 | — |
-| dagna_holt | Callirrhoe | -1 | — |
+| dagna_holt | Gacrux | +0 | — |
 | pip_ashdown | Leda | +3 | — |
 | old_maud | Achernar | -1 | — |
 | celandine_marrowby | Autonoe | +0 | — |
@@ -69,3 +69,14 @@ Grisk uses **Algenib +4 semitones**, with a high nasal, raspy foreman delivery. 
 The candle line is an ordinary hit bark at weight 1 beside Grisk's weight-6 hit line. Low-health and defeat lines take priority. Its approved encoded file is `bark_grisk_candle_1.f31d8679.ogg`; preserve that exact take. Grisk never borrows Ashmaw's sounds; Ashmaw has creature SFX and no speech. The bounty drift report is `docs/superpowers/reports/2026-11-03-ashmaw-bounty/voice-check.json`, with zero flags at this checkpoint.
 
 Tobin retained Orus −2; natural directions improved spectral consistency. Vorga's existing ridge command had an octave-high take; the directed replacement retains Iapetus +1 and measured median F0 145.45 Hz. These repairs do not change captions or cast identity. All scene/bark lines are covered by rendered clips and duration tests; there are no failed-render caption-only exceptions in this delivery. Quest objectives/history are read silently and are not voiced.
+
+## Dagna veteran recast (#80)
+
+The owner approved the Gacrux audition on 2026-11-04. Keep its mature, low, flat
+Northern delivery and no post pitch/filter. Dagna's casting `direction` applies
+to every line, including legacy battle barks, and combines with any authored line
+direction. Direction enters both raw and encoded hashes so changes request a new
+take. Other speakers without a cast direction retain their existing hashes.
+Gacrux is also the grim.high player preset; Dagna's approved performance direction
+distinguishes her. Do not recast the player. Captions and authored-recordings-only
+playback remain unchanged. Retain superseded files and paid provenance.
