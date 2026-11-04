@@ -225,7 +225,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Story:
                 if (Camp is not null) { CampPresenceChanged(); break; }
-                if (_doc.World?.Shop is not null)
+                if (Trading)
                 {
                     if (_online.Count == 0) CloseShop();
                     break;
@@ -288,7 +288,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Story when Camp is not null:
                 CampInput(player, profile, custom);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is not null:
+            case TacticsPhase.Story when Trading:
                 ShopInput(player, profile, custom);
                 break;
             case TacticsPhase.Story:
@@ -353,7 +353,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Exploration:
                 WalkTimer(key);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is null:
+            case TacticsPhase.Story when !Trading:
                 StoryTimer(key);
                 break;
         }

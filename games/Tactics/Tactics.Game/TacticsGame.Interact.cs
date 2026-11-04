@@ -582,6 +582,11 @@ public sealed partial class TacticsGame
     /// </summary>
     private void ThingNodeEntered(SceneNode node, StoryRoll? roll)
     {
+        if (Haggling)
+        {
+            HaggleNodeEntered(node, roll);
+            return;
+        }
         if (Cursor?.Thing is { Searching: true } search)
         {
             SearchNodeEntered(search, node, roll);

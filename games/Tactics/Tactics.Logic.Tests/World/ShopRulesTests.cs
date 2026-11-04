@@ -32,6 +32,20 @@ public sealed class ShopRulesTests
         Assert.False(ShopRules.Accepts(item with { Price = null }, shop));
     }
 
+    /// <summary>The owner's decision E (2026-11-03): a haggle that passed takes a tenth off buys and adds a tenth to the sale ratio.</summary>
+    [Fact]
+    public void A_haggle_takes_a_tenth_off_buys_and_adds_a_tenth_to_sales_and_still_rounds_the_shops_way()
+    {
+        var item = new ItemDef(new("potion"), "Potion", new("use"), Ordinal.Set("potion"), Price: 50);
+        var shop = new ShopDef("test", "Test", new(Person: 0), [], ["potion"], SellRatio: 0.5m);
+        Assert.Equal((50, 25), (ShopRules.Buy(item, shop), ShopRules.Sell(item, shop)));
+        Assert.Equal((45, 27), (ShopRules.Buy(item, shop, haggled: true), ShopRules.Sell(item, shop, haggled: true)));
+        var odd = item with { Price = 25 };
+        Assert.Equal((23, 13), (ShopRules.Buy(odd, shop, true), ShopRules.Sell(odd, shop, true)));     // 22.5 up, 13.75 down
+        Assert.Equal(15, ShopRules.DefaultHaggleDc);
+        Assert.Null(shop.Haggle);
+    }
+
     [Theory]
     [InlineData("\"priceMod\": 0", "/priceMod")]
     [InlineData("\"priceMod\": 5", "/priceMod")]

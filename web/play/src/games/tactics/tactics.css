@@ -910,3 +910,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-controls-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:12px; padding-bottom:12px; }
 .tx-controls-scroll > * { flex-shrink:0; }
 .tx-controls-layout > .tx-foot { position:relative; flex:none; margin-top:0; margin-bottom:0; }
+
+.tx-shop-haggle { margin: 8px 0; padding: 10px 12px; border: 1px solid rgba(233, 187, 105, 0.5); border-radius: 8px; background: rgba(233, 187, 105, 0.08); }
+.tx-shop-haggle p { margin: 0; }
+.tx-shop-haggle .tx-btn { width: 100%; min-height: 48px; }

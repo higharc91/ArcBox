@@ -406,6 +406,7 @@ public sealed partial class TacticsGame
     private void StageDone()
     {
         if (CampTalk) { BeginSleep(); return; }
+        if (Haggling) { FinishHaggle(); return; }
         var c = Cursor!;
         if (c.Person is not null) { FinishConversation(); return; }
         if (c.Thing is not null)
@@ -773,7 +774,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StoryPresenceChanged()
     {
-        if (_doc.World?.Shop is not null && Camp is null) return;
+        if (Trading && Camp is null) return;
         if (!Questioning)
             return;
         if (!Voters().Any())
@@ -985,12 +986,12 @@ public sealed partial class TacticsGame
         }
     }
 
-    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : LootVote ? LootScene() : Cursor is { Scene: { } id } c
+    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : LootVote ? LootScene() : Haggling ? HaggleScene() : Cursor is { Scene: { } id } c
         ? c.Person is not null ? Lore.Scene(id) : c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
         : null;
 
     /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
-    private ArcBeat CursorBeat() => Camp is not null || LootVote || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
+    private ArcBeat CursorBeat() => Camp is not null || LootVote || Haggling || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 

@@ -408,7 +408,11 @@ public sealed record ShopView(string Id, string Name, string Keeper, string Gree
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ShopService>? Services = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ServiceGuestView>? Guests = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HaggleView? Haggle = null);
+
+/// <summary>This visit's haggle, for the TV (USER DECISION E, decided 2026-11-03): who rolled, the roll, the DC, and whether the prices moved.</summary>
+public sealed record HaggleView(string Name, int Die, int Bonus, int Dc, bool Passed);
 
 /// <summary>A recovery service's possible guest, including absent campaign members.</summary>
 public sealed record ServiceGuestView(string Member, string Name, ImmutableArray<string> Injuries, bool Room);
@@ -459,7 +463,7 @@ public sealed partial class TacticsGame
         var view = _phase switch
         {
             TacticsPhase.Story when Camp is not null => CampScreen(player, profile),
-            TacticsPhase.Story when OpenShop is not null => ShopScreen(player, profile),
+            TacticsPhase.Story when OpenShop is not null && !Haggling => ShopScreen(player, profile),
             TacticsPhase.Muster or TacticsPhase.Exploration or TacticsPhase.Story when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),

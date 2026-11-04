@@ -7,10 +7,29 @@ import { RecoveryMenu } from "./recovery";
 import { HostMenu } from "./walk";
 
 interface ShopRow { item: string; name: string; price: number; count: number; can?: boolean; member?: string; detail?: string }
+/** This visit's haggle (the owner's decision E, 2026-11-03): whether this phone may start it, its DC, and what came of it. */
+interface HaggleData {
+  can: boolean; dc: number;
+  result: { member: string; name: string; die: number; bonus: number; total: number; passed: boolean } | null;
+}
 interface ShopData extends ServiceData {
   shop: { id: string; name: string; keeper: string; greeting: string };
   gold: number; items: ShopRow[]; sell: ShopRow[];
   you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; feed: string[];
+  /** Only at a shop that trades: an inn or a temple has none. */
+  haggle?: HaggleData;
+}
+
+/** Haggling once a visit: the leader starts it, the party picks who rolls Persuasion, and a pass moves every price here by a tenth. */
+function Haggle({ haggle, send, shop, pending }: { haggle: HaggleData; send: CustomScreenProps["send"]; shop: string; pending: boolean }) {
+  const r = haggle.result;
+  return <div class="tx-shop-haggle" role="status">
+    {r ? <p><b>{r.passed ? "Haggled" : "No deal"}</b>{` · ${r.name} rolled ${r.die} + ${r.bonus} = ${r.total} vs DC ${haggle.dc}. `}
+      {r.passed ? "A tenth off what you buy, a tenth more for what you sell, this visit." : "Prices stand. No harm done."}</p>
+      : haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
+        {`Haggle · Persuasion DC ${haggle.dc}`}</button>
+      : <p class="tx-note">{`The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
+  </div>;
 }
 
 /** LAN phones can use HTTP, where randomUUID is unavailable but getRandomValues still works. */
@@ -46,6 +65,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
     {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" send={send} /> : <HostMenu canBattle={false} keep="Keep trading" send={send} />)}
     <header><span class="tx-eyebrow">{recovery ? inn ? "Inn" : "Temple" : `Trader · ${d.shop.keeper}`}</span><h1>{d.shop.name}</h1>
       {recovery ? <strong class="tx-recovery-purse" aria-label="Your purse" aria-live="polite">{d.gold} gold</strong> : <><span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></>}</header>
+    {d.haggle && <Haggle haggle={d.haggle} send={send} shop={d.shop.id} pending={pending} />}
     {inn && d.roomsOpen && <CampScene stage="rooms" mode="inn" members={d.members ?? []} you={d.you.member} />}
     {(!d.services?.length || d.items.length > 0) && <div class="tx-shop-tabs" role="tablist" aria-label="Trade">
       <button class="tx-btn" role="tab" aria-selected={tab === "buy"} onClick={() => setTab("buy")}>Buy</button>
