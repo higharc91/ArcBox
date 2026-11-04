@@ -44,8 +44,8 @@ public sealed class BasePackTests
         Assert.Equal(["aasimar", "dragonborn", "dwarf", "elf", "gnome", "goliath", "half_elf", "half_orc", "halfling", "human", "tiefling"],
             pack.Races.Keys);
         Assert.Equal(12, pack.Backgrounds.Count);
-        Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "shaken", "sprained_ankle", "wrenched_shoulder"],
-            pack.Injuries.Keys.Select(i => i.Value));
+        Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "scraped_hands", "shaken", "singed", "sprained_ankle",
+            "twisted_knee", "wrenched_shoulder"], pack.Injuries.Keys.Select(i => i.Value));
         Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [

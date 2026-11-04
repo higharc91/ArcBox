@@ -70,3 +70,16 @@ it("presents only this phone's trinket and opens its effects without pinning a c
  expect(screen.getByRole("dialog")).toBeTruthy();
  expect(send).not.toHaveBeenCalled();
 });
+
+it("lists the party's keys for everyone, with where each was found and whether it has been used", () => {
+ const send=vi.fn();
+ render(<Journal journal={{...data,canPin:false,keys:[{id:"brass_key",name:"brass key",found:"The Vault",used:false},{id:"reeve",name:"reeve's key",found:null,used:true}]}} send={send} />);
+ const ring=screen.getByRole("region",{name:"Keys"});
+ expect(ring.textContent).toContain("brass key"); expect(ring.textContent).toContain("Found: The Vault · Not used yet");
+ expect(ring.textContent).toContain("reeve's key"); expect(ring.textContent).toContain("Used");
+ expect(send).not.toHaveBeenCalled();
+});
+it("has no key ring while the party holds no key", () => {
+ render(<Journal journal={data} send={vi.fn()} />);
+ expect(screen.queryByRole("region",{name:"Keys"})).toBeNull();
+});

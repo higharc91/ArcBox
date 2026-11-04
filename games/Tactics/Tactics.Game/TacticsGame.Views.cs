@@ -231,7 +231,12 @@ public sealed record QuestHistoryView(string Log, bool Done, string? Objective);
 public sealed record QuestItemView(string Name, int Count);
 public sealed record QuestRewardView(int Gold, int Xp, ImmutableArray<QuestItemView> Items);
 public sealed record QuestEntryView(string Id, string Name, string Status, string Giver, string? Portrait, string Objective, ImmutableArray<QuestHistoryView> History, string? Result, QuestRewardView? Rewards);
-public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading);
+/// <summary>
+/// The quest journal. <see cref="Keys"/> is the party's key ring (USER DECISION 8, decided 2026-11-03), for everyone: written only once the
+/// party holds a key, so a journal with none is as it was.
+/// </summary>
+public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<KeyInfo>? Keys = null);
 
 public sealed record TrinketGiftView(string Member, string Name, string Class, string Trinket, string Title, bool Here);
 public sealed record QuestEventView(int Seq, string Quest, string Name, string Kind, DateTimeOffset Until, int Gold, int Xp,
@@ -403,7 +408,11 @@ public sealed record ShopView(string Id, string Name, string Keeper, string Gree
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ShopService>? Services = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ServiceGuestView>? Guests = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<RecoveryMemberView>? Members = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HaggleView? Haggle = null);
+
+/// <summary>This visit's haggle, for the TV (USER DECISION E, decided 2026-11-03): who rolled, the roll, the DC, and whether the prices moved.</summary>
+public sealed record HaggleView(string Name, int Die, int Bonus, int Dc, bool Passed);
 
 /// <summary>A recovery service's possible guest, including absent campaign members.</summary>
 public sealed record ServiceGuestView(string Member, string Name, ImmutableArray<string> Injuries, bool Room);
@@ -454,7 +463,7 @@ public sealed partial class TacticsGame
         var view = _phase switch
         {
             TacticsPhase.Story when Camp is not null => CampScreen(player, profile),
-            TacticsPhase.Story when OpenShop is not null => ShopScreen(player, profile),
+            TacticsPhase.Story when OpenShop is not null && !Haggling => ShopScreen(player, profile),
             TacticsPhase.Muster or TacticsPhase.Exploration or TacticsPhase.Story when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
@@ -514,7 +523,7 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
-        if (!RegionQuests.IsEmpty)
+        if (HasJournal)
         {
             data["journal"] = JsonSerializer.SerializeToNode(Journal(leads), ArcJson.Options);
             if (leads) data["canOpenLog"] = true;

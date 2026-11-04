@@ -442,3 +442,16 @@ describe("review fixes", () => {
     expect(readable("#0011cc", colors.grounds, colors.minContrast)).toBe("#b2b9ff");
   });
 });
+
+describe("key ring", () => {
+  it("shows the party's keys under the party, and nothing while there are none", () => {
+    const view = structuredClone(CLERIC);
+    view.keys = [{ id: "brass_key", name: "brass key", found: "The Vault", used: true }];
+    show(view, true);
+    expect(within(screen.getByRole("region", { name: "Keys" })).getByText("brass key")).toBeTruthy();
+    expect(screen.getByText("Found: The Vault · Used")).toBeTruthy();
+    cleanup();
+    show(CLERIC);
+    expect(screen.queryByRole("region", { name: "Keys" })).toBeNull();
+  });
+});

@@ -63,6 +63,12 @@
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
 //   --shop                    earn the council advance, walk to Wenna, buy from an own purse, retry its trade id, sell and leave.
+//   --decisions               the owner's rule decisions of issue #83, on a pack with an e2e strongbox (tools/tv-e2e.sh's
+//                             ARCBOX_DECISIONS=1 makes it; ARCBOX_CONTENT_RULES points route.cs at it): the reeve's key on every key
+//                             ring, the strongbox's unseen trap hurting the leader and its DC 30 lock failing, nothing left to try,
+//                             camp, the injury mended at dawn (the chapel's guest list) and the lock offered again, the reeve's chest
+//                             opened with the key and its items voted on (one by vote, one by silence), the key shown used, and a
+//                             haggle at Wenna's with the prices it gives.
 //
 // The story (overworld 5d), in place of the battle list:
 //
@@ -163,6 +169,9 @@ const bountyRun = opt('bounty', false) === true;
 const chapter = opt('chapter', false) === true || bountyRun;
 if (bountyRun && !asHost) throw new Error('--bounty needs --host so region transfers can be verified.');
 const shopRun = opt('shop', false) === true;
+const decisionsRun = opt('decisions', false) === true;
+/** --decisions: answers a vote or check screen in place of the usual (an [action, data] to send, null to send nothing); undefined: as usual. */
+let answerHook = null;
 const questRun = opt('quests', false) === true;
 const recoveryRun = opt('camp', false) === true;
 /** --branch=force|parley: the option the party votes for at the ford. */
@@ -196,7 +205,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const dist = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const { safestMoves, escapeBurning } = require('./hazards.cjs');
 
-const RULES = path.join(__dirname, '../../content/tactics/base/rules');
+const RULES = process.env.ARCBOX_CONTENT_RULES ?? path.join(__dirname, '../../content/tactics/base/rules');
 const [WATER, DIFFICULT, IMPASSABLE, DEEP] = [1, 2, 4, 16];
 /** Paths.StepCost's climb: a Jump of 2, the default. */
 const JUMP = 2;
@@ -654,6 +663,11 @@ class Bot {
         log(`${this.name} skips line ${view.data.line}`);
         return this.input('skip', { line: view.data.line });
       case 'vote': {
+        if (answerHook) {
+          const answer = answerHook(this, view);
+          if (answer === null) return;
+          if (answer) { this.acted = view.viewId; return this.input(...answer); }
+        }
         if (storyBeats) return this.storyAnswer(state);
         if (silent || !view.data.canChoose || view.data.mine || !view.data.options?.length) return;
         const ids = view.data.options.map((o) => o.id);
@@ -662,6 +676,11 @@ class Bot {
         return this.input('vote', { option: pick });
       }
       case 'check': {
+        if (answerHook) {
+          const answer = answerHook(this, view);
+          if (answer === null) return;
+          if (answer) { this.acted = view.viewId; return this.input(...answer); }
+        }
         if (storyBeats) return this.storyAnswer(state);
         if (silent) return;
         if (!view.data.canChoose || view.data.mine || !view.data.cards?.length) return;
@@ -681,7 +700,7 @@ class Bot {
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
-        if (walking || stampFights || chapter || shopRun || !view.data.vip) return;
+        if (walking || stampFights || chapter || shopRun || decisionsRun || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
@@ -1338,6 +1357,132 @@ async function playShop(bots, watch, state) {
   log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, remade without farming, left');
 }
 
+/**
+ * --decisions: the owner's rule decisions of issue #83 through real phones and the TV, on the shipped Ashen Ford with one e2e strongbox
+ * (an unseen trap, a lock of pick DC 30 and no other way) that tools/tv-e2e.sh adds to a copy of the pack. No flags or gold are injected.
+ */
+async function playDecisions(bots, watch, state) {
+  const region = 'ashen_ford';
+  const timer = setInterval(() => {
+    if (bots.some((b) => b.closed)) { console.error(`Room closed: ${bots.find((b) => b.closed).closed}`); process.exit(1); }
+    for (const bot of bots) void bot.act(state);
+  }, TICK_MS);
+  timer.unref();
+  idlePings(bots);
+  await until('the party to walk', () => onWalk(bots));
+  if (tvLog && !asHost) await until('the TV world', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  const leaderBot = () => bots.find((b) => b.view?.data?.leader);
+  const memberOf = (bot, view) => view.data.options.find((o) => o.label === bot.name || o.label.startsWith(`${bot.name} `))?.id;
+
+  // The mayor's request: a story beat, which earns the party a long rest, and the council advance.
+  await walkToBeat(bots, watch, region, { beat: 'ch1_mayors_request' });
+  await until('the council advance', () => onWalk(bots) && bots.reduce((sum, b) => sum + (b.view.data.gold ?? 0), 0) === 200);
+  log('DECISIONS the mayor\'s request is done: a rest is earned');
+
+  // Wenna's, before anything is found: what the second bot could sell her (its potions).
+  const potions = (bot) => (bot.view.data.sell ?? []).filter((r) => r.item === 'potion_of_healing').reduce((n, r) => n + r.count, 0);
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_market_herbalist' });
+  await until('the shop on every phone', () => bots.every((b) => b.view?.screen === 'shop'));
+  const taker = bots.find((b) => !b.view.data.leader);     // who the party votes the first found item to: not the opener
+  const potionsBefore = potions(taker);
+  const plainPrice = bots[0].view.data.items.find((i) => i.item === 'potion_of_healing').price;
+  if (!bots.every((b) => b.view.data.haggle?.can === Boolean(b.view.data.leader))) throw new Error('Only the leader should be offered Haggle');
+  await leaderBot().input('shopLeave', { shop: 'af_market_herbalist' });
+  await until('walking after the first visit', () => onWalk(bots));
+
+  // Decision 8: the reeve's key, on everyone's key ring.
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_reeves_key', instant: true });
+  await until('the reeve\'s key on every key ring', () => onWalk(bots)
+    && bots.every((b) => b.view.data.journal?.keys?.some((k) => k.id === 'af_reeves_key' && !k.used && k.found === 'The Ashen Ford')));
+  log('KEYS OK: the reeve\'s key is on every phone\'s key ring: found in The Ashen Ford, not used yet');
+
+  // Decisions 3 and 2: the strongbox's unseen trap goes off on the leader, and its only way, a DC 30 pick, fails.
+  const leaderName = leaderBot().name;
+  let offered = null;
+  answerHook = (bot, view) => {
+    if (view.screen !== 'vote' || view.data.party || !view.data.canChoose) return undefined;
+    offered = view.data.options.map((o) => o.id);
+    return ['vote', { option: offered.includes('pick') ? 'pick' : 'leave' }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:e2e_strongbox' });
+  await until('the failed pick to end', () => onWalk(bots));
+  if (!offered?.includes('pick')) throw new Error(`The strongbox offered ${offered}, not the pick`);
+  log('LOCK the pick failed (DC 30)');
+  offered = null;
+  await leaderBot().input('interact', { target: 'e2e_strongbox' });
+  await sleep(2000);
+  if (!onWalk(bots) || offered) throw new Error('A spent lock opened a question before a rest');
+  log('LOCK nothing left to try before a rest');
+
+  // Camp: the minor injury of the leader who sprang it is on the camp's party cards; dawn mends it.
+  answerHook = null;
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_ford_campfire' });
+  const hurt = await until('the camp\'s party cards', () => {
+    const job = bots.find((b) => b.view?.screen === 'camp-job' || b.view?.screen === 'camp-target' || b.view?.screen === 'camp-roll');
+    const me = job?.view.data.members?.find((m) => m.name === leaderName);
+    return me ? (me.injuries.find((i) => i.kind === 'rest') ?? 'none') : null;
+  });
+  if (hurt === 'none') throw new Error(`${leaderName} has no rest-kind injury from the trap at camp`);
+  log(`TRAP OK: ${leaderName} took a minor injury: ${hurt.name} (${hurt.kind} recovery)`);
+  await until('dawn and the walk', () => onWalk(bots));
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_chapel' });
+  await until('the chapel on every phone', () => bots.every((b) => b.view?.screen === 'shop'));
+  const guest = bots[0].view.data.guests?.find((g) => g.name === leaderName);
+  if (!guest || guest.injuries.some((i) => i.id === hurt.id)) throw new Error(`${hurt.name} wasn't mended at dawn: ${JSON.stringify(guest)}`);
+  log(`CAMP OK: dawn mended ${hurt.name}`);
+  await leaderBot().input('shopLeave', { shop: 'af_chapel' });
+  await until('walking after the chapel', () => onWalk(bots));
+
+  // Decision 2: after the rest the pick is offered again; the party leaves it.
+  offered = null;
+  answerHook = (bot, view) => {
+    if (view.screen !== 'vote' || view.data.party || !view.data.canChoose) return undefined;
+    offered = view.data.options.map((o) => o.id);
+    return ['vote', { option: 'leave' }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:e2e_strongbox' });
+  await until('leaving the strongbox', () => onWalk(bots));
+  if (!offered?.includes('pick')) throw new Error(`After the rest the strongbox offered ${offered}, not the pick again`);
+  log('RETRY OK: the failed pick was offered again after camping');
+
+  // Decision 1: the reeve's chest, opened with the key; the party votes who takes each item. The first goes to the second bot by vote,
+  // the second to the opener by silence.
+  const votes = [];
+  answerHook = (bot, view) => {
+    if (view.screen === 'vote' && !view.data.party && view.data.canChoose)
+      return ['vote', { option: view.data.options.some((o) => o.id === 'key') ? 'key' : view.data.options[0].id }];
+    if (view.screen !== 'vote' || !view.data.question) return undefined;
+    if (!votes.includes(view.data.question)) { votes.push(view.data.question); log(`LOOT vote ${view.data.vote}: ${view.data.question} between ${view.data.options.map((o) => o.label).join(', ')}`); }
+    if (view.data.vote !== 0 || view.data.mine) return null;      // the second item: silence
+    return ['vote', { option: memberOf(taker, view) }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_reeves_chest' });
+  await until('the loot votes to end', () => onWalk(bots) && votes.length >= 2);
+  answerHook = null;
+  if (votes[0] !== 'Who takes the Potion of Healing?' || votes[1] !== 'Who takes the Flask of Oil?') throw new Error(`Unexpected loot votes: ${votes}`);
+  await until('the reeve\'s key shown used', () => bots.every((b) => b.view.data.journal?.keys?.some((k) => k.id === 'af_reeves_key' && k.used)));
+  log('KEYS OK: the reeve\'s key is shown used');
+
+  // Decision E: haggle at Wenna's, then her prices; and the potion the vote gave is in the second bot's bag.
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_market_herbalist' });
+  await until('the shop again', () => bots.every((b) => b.view?.screen === 'shop'));
+  if (potions(taker) !== potionsBefore + 1) throw new Error(`${taker.name} has ${potions(taker)} potions to sell, not ${potionsBefore + 1}`);
+  log(`LOOT OK: ${taker.name} took the Potion of Healing by vote; the opener took the Flask of Oil by silence`);
+  await leaderBot().input('shopHaggle', { shop: 'af_market_herbalist' });
+  await until('the party\'s pick of who haggles', () => bots.some((b) => b.view?.screen === 'check'));
+  await until('back in the shop with the haggle\'s result', () => bots.every((b) => b.view?.screen === 'shop' && b.view.data.haggle?.result));
+  const result = bots[0].view.data.haggle.result;
+  const price = bots[0].view.data.items.find((i) => i.item === 'potion_of_healing').price;
+  const expected = result.passed ? Math.ceil(plainPrice * 0.9) : plainPrice;
+  if (price !== expected || bots[0].view.data.haggle.can) throw new Error(`After the haggle the potion costs ${price}, not ${expected}`);
+  log(`HAGGLE OK: ${result.name} rolled ${result.die} + ${result.bonus} = ${result.total} vs DC ${bots[0].view.data.haggle.dc}: ${result.passed ? 'passed' : 'failed'}; a potion is ${price} gold (was ${plainPrice})`);
+  await leaderBot().input('shopLeave', { shop: 'af_market_herbalist' });
+  await until('walking after the haggle', () => onWalk(bots));
+  await bots[0].input('endSession');
+  await until('the session to end', () => bots[0].ended);
+  log('DECISIONS OK: loot vote, trap injury mended at camp, lock retried after the rest, key ring, haggle');
+}
+
 (async () => {
   const host = asHost ? new HubConnectionBuilder().withUrl(`${server}/hub`).configureLogging(LogLevel.Critical).build() : null;
   const watch = new Watch(host);
@@ -1366,6 +1511,11 @@ async function playShop(bots, watch, state) {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (decisionsRun) {
+    await playDecisions(bots, watch, state);
+    await Promise.all(bots.map(b => b.conn.stop()));
+    process.exit(0);
+  }
   if (shopRun) {
     await playShop(bots, watch, state);
     await Promise.all(bots.map(b => b.conn.stop()));

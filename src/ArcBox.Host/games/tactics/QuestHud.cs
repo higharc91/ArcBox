@@ -93,6 +93,19 @@ public partial class QuestHud(string root, HudArt art) : Control
                 row += 116;
             }
         }
+        // The party's key ring (the owner's decision 8, 2026-11-03), under the quests, once the party holds a key.
+        if (journal.Keys is { Length: > 0 } keys)
+        {
+            row = Math.Min(row, 940 - 28 - keys.Length * 52);
+            Text("KEYS", new Vector2(240, row), 25, Muted, 640, true); row += 30;
+            foreach (var key in keys)
+            {
+                DrawCircle(new Vector2(255, row + 14), 13, new Color("8a641e"));
+                Text(key.Name, new Vector2(289, row + 18), 27, Ink, 590, true);
+                Text((key.Found is { } found ? $"Found: {found} · " : "") + (key.Used ? "Used" : "Not used yet"), new Vector2(289, row + 44), 22, Muted, 590);
+                row += 52;
+            }
+        }
         var selected = journal.Quests.FirstOrDefault(q => q.Id == journal.Selected);
         if (selected is null) { Text("Speak to the people of Ashen Ford.\nA promise is where every story begins.",new Vector2(1000,320),32,Ink,650); return; }
         if (art.Speaker(selected.Portrait,"idle",null) is { } face && Picture(face.Path) is { } picture)

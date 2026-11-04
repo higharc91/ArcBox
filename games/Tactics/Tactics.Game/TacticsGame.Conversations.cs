@@ -31,8 +31,16 @@ public sealed partial class TacticsGame
         KeepWorld();
         Save();
         ToExploration();
-        if (person.Service is { } service && RegionShops.FirstOrDefault(s => s.Id == service && ShopRules.Present(s, StoryFlags())) is { } shop)
-            StartShop(shop);
+        if (person.Service is not { } service)
+            return;
+        if (LootVote)
+        {
+            // It gave an item too: the party votes on it first, and the service opens after the last (saved with the vote).
+            _doc = _doc with { World = _doc.World! with { Loot = _doc.World.Loot! with { Service = service } } };
+            Save();
+        }
+        else
+            OpenService(service);
     }
 
     private void ResumeConversation(StorySave cursor)
@@ -59,13 +67,7 @@ public sealed partial class TacticsGame
             AddFlags(quest.Flags(action));
         }
         if (option.Give is { } item && Rules.Items.ContainsKey(new ItemId(item)) && RewardMember() is { } by)
-        {
-            var member = _doc.Members[by];
-            _doc = _doc with { Members = _doc.Members.SetItem(by, member with
-            {
-                Character = member.Character with { Bag = StackLoot(member.Character.Bag, [new LootDef(new ItemId(item), 1)]) },
-            }) };
-        }
+            GiveFound([(new ItemId(item), 1)], by, CurrentScene()?.Title is { Length: > 0 } title ? title : "conversation");
         if (option.Service is { } service && Cursor?.Person is { } person)
             SetCursor(Cursor with { Person = person with { Service = service } });
     }

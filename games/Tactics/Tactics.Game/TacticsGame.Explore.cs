@@ -268,6 +268,9 @@ public sealed partial class TacticsGame
     /// <summary>Into the world, from Muster, the battle list or Results.</summary>
     private void ToExploration()
     {
+        // Found items wait for the party to say who takes them (USER DECISION 1): the vote comes first, then the walk.
+        if (LootWaiting && _doc.World!.Loot!.Voting is false && Camp is null && _doc.World.Shop is null && BeginLootVote())
+            return;
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
         ShowPendingQuestNotice();

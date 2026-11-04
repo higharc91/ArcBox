@@ -14,3 +14,6 @@
 
 .tx-trinket-presented { margin:8px 0; padding:10px; border:1px solid #bf9b55; border-radius:8px; background:#32291f; }
 .tx-trinket-presented .tx-trinket { width:100%; max-width:100%; min-width:0; }
+
+.tx-keyring ul { list-style:none; margin:0; padding:0; display:grid; gap:8px; }.tx-keyring li { display:flex; gap:12px; align-items:center; min-height:56px; padding:10px 12px; border:1px dashed #ae8b5f; border-radius:5px; background:#fff4d930; }.tx-keyring b { display:block; font-size:19px; color:#382b24; }.tx-keyring small { display:block; font-size:16px; color:#624c35; margin-top:3px; }.tx-keyring-icon { flex:none; display:grid; place-items:center; width:32px; height:32px; border-radius:50%; background:#8a641e; color:#fff3d3; font-size:20px; }
+.tx-portal .tx-keyring li { border-color:rgba(255,255,255,.25); background:var(--wf-fill); }.tx-portal .tx-keyring b { color:inherit; }.tx-portal .tx-keyring small { color:inherit; opacity:.75; }

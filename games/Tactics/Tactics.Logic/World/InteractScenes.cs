@@ -39,7 +39,7 @@ public static class ThingEvents
 /// trap's effect are due only when the step changes the thing (<see cref="InteractScenes.LootDue"/>, <see cref="InteractScenes.SpringDue"/>).
 /// </summary>
 public sealed record InteractOutcome(string Event, string? State = null, bool Unlock = false, bool SpotTrap = false, string? Trap = null,
-    string? Spend = null, bool Loot = false, ImmutableArray<string> Sets = default)
+    string? Spend = null, bool Loot = false, ImmutableArray<string> Sets = default, bool Key = false)
 {
     /// <summary>The flags it sets; never a default array.</summary>
     public ImmutableArray<string> Sets { get => field.IsDefault ? [] : field; init; } = Sets;
@@ -52,6 +52,7 @@ public sealed record InteractOutcome(string Event, string? State = null, bool Un
         TrapSpotted = save.TrapSpotted || SpotTrap || Trap is not null,
         Trap = save.Trap ?? Trap,
         Spent = Spend is { } s && !save.Spent.Contains(s) ? save.Spent.Add(s) : save.Spent,
+        Keyed = save.Keyed || Key,
     };
 }
 
@@ -156,8 +157,14 @@ public static class InteractScenes
     private static InteractOutcome Sprung(TrapDef trap, string? spend = null)
         => new(ThingEvents.Sprung, SpotTrap: true, Trap: InteractableSave.Sprung, Spend: spend, Sets: trap.Sets);
 
+    /// <summary>
+    /// What a trap with no words of its own says as it goes off. It isn't harmless any more (USER DECISION 3, decided 2026-11-03): the game
+    /// says the minor injury it gave after it.
+    /// </summary>
+    public const string DefaultSprung = "Click. A trap goes off.";
+
     private static ImmutableArray<string> SprungText(InteractableDef def)
-        => def.Trap!.Text.IsDefaultOrEmpty ? ["Click. A trap goes off, but it does no harm."] : def.Trap.Text;
+        => def.Trap!.Text.IsDefaultOrEmpty ? [DefaultSprung] : def.Trap.Text;
 
     /// <summary>A notice's words, as one line: what was noticed.</summary>
     public static string NoticeText(InteractableDef def) => string.Join(" ", Interactables.TextOf(def));
@@ -222,7 +229,7 @@ public static class InteractScenes
         if (!trapSet && !locked)
             return new InstantPlan(open, openLine);
         if (!again && !trapSet && LockWays(def, save, flags).IsEmpty)
-            return new InstantPlan(null, $"The {Interactables.NameOf(def)} is locked, and there's nothing left to try.");
+            return new InstantPlan(null, $"The {Interactables.NameOf(def)} is locked, and there's nothing left to try until the party has rested.");
 
         var nodes = new List<Node>();
         var outcomes = new Dictionary<string, InteractOutcome>();
@@ -253,7 +260,7 @@ public static class InteractScenes
         {
             if (approach == Interactables.KeyApproach)
             {
-                options.Add(Option(approach, $"Use the {lk.KeyName ?? "key"}", "unlocked", requires: [lk.Key!]));
+                options.Add(Option(approach, $"Use the {lk.KeyName ?? "key"}", "keyed", requires: [lk.Key!]));
                 continue;
             }
             if (save.Spent.Contains(approach))
@@ -279,6 +286,8 @@ public static class InteractScenes
             : $"The {name} is locked."], Options: [.. options]));
         nodes.Add(new Node("unlocked", ["The lock gives."], Next: "open"));
         outcomes["unlocked"] = new InteractOutcome(ThingEvents.Unlocked, Unlock: true);
+        nodes.Add(new Node("keyed", [$"The {lk.KeyName ?? "key"} turns in the lock."], Next: "open"));
+        outcomes["keyed"] = new InteractOutcome(ThingEvents.Unlocked, Unlock: true, Key: true);
         AddLeave(nodes);
     }
 

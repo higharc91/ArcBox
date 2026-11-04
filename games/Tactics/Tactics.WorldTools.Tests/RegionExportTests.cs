@@ -820,7 +820,9 @@ public sealed class RegionExportTests : IDisposable
 
         Assert.Empty(Export(Field()).Problems);
 
-        Assert.Equal([.. before, RegionFile()], Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
+        // Both in name order: the directory lists its files in whatever order the file system keeps them.
+        Assert.Equal(before.Append(RegionFile()).OrderBy(f => f, StringComparer.Ordinal),
+            Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
     }
 
     [Fact]

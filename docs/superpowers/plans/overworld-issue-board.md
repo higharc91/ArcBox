@@ -146,6 +146,17 @@ Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford
 ### OW-36 · Ashmaw bounty · `doing`, issue #74
 Work is on `ashmaw-bounty`, based on merged #73. Both character concepts and the pixel direction are approved. All eight directions and action sets are generated and curated; actual TV world/battle motion is owner-approved, and dedicated atlases/portraits are installed. The quest, cave, travel, class trinkets, dormant remake behavior, private phone rewards and voiced dialogue are implemented. A six-player live run completed all four chambers and the return/reward flow. Final cave dressing adds candles, animal remains and dried blood. The owner retained level 2, with an explicit journal recommendation, and requested tougher fights only for 4+ players. Paired trinket comparisons are complete. Final tuning gives four-player wins of 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4; smaller-party results are unchanged. Verified: 6,191 .NET and 508 web tests, six phone viewports, zero-warning solution/editor builds. The owner’s follow-up requests matching concept art and a sprite overhaul for the remaining kobolds; that art follow-up is next. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
 
+### OW-37 · The owner's rule decisions · `done`, issue #83
+Built on `owner-decisions-rules` (not merged; no PR). The owner's answers of 2026-11-03, each recorded as decided in its design:
+found items go to the party's pick by a 15 s vote on the 5d vote screen, one per loot line, silence to the opener, a party of one at once
+([interactables §3.1](../specs/2026-11-02-tactics-interactables-design.md)); a sprung trap gives the leader a minor rest-kind injury
+(three new: scraped hands, singed, twisted knee; off the battle table) that any camp or inn mends (§3.3); a failed pick, force, seal or
+search reopens after the next long rest (`InteractableSave.Rest`, §3.2); the key ring in the quest journal and the portal (§3.8); and
+haggling, once per shop visit, Persuasion vs the shop's DC (default 15), −10% buys and +10% sells on a pass
+([shops §3.3](../specs/2026-11-02-tactics-shops-and-gold-design.md)). New phone fixture `vote-loot`; the five shop fixtures gained
+`haggle`; every other fixture is unchanged. e2e: `ARCBOX_DECISIONS=1 tools/tv-e2e.sh` (bots on the real TV, a copied pack with one
+strongbox).
+
 ## P3: later, needs design with the user
 
 Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
@@ -155,8 +166,11 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 1. The new characters' memory and download size (OW-05).
 2. Hero and townsfolk art (OW-10).
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
-4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
-5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
+4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded. Haggling (E) was answered on 2026-11-03 (OW-37).
+5. Handoff §8 items 4 and 5 and the interactable owner choices still open (4–7, 9 and 10–17 but 15) stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
+6. New from OW-37, for the owner: the three trap injuries' names, effects and weights (3, 3, 2) and whether a trap may also draw the old black eye; art for their icons (stand-ins now); whether a seal reopens after a rest like a pick or force (it does now); whether rooms and cures should haggle (they don't).
+
+**Answered 2026-11-03 (issue #83, OW-37), no longer waiting:** interactables decisions 1 (loot: the party's pick), 2 (failed ways reopen after a long rest), 3 (traps: a minor injury), 8 (keys: a key ring) and 15 (a missed search retries after a rest), and shops decision E (haggling on, once per visit).
 
 ## Only a person can check
 

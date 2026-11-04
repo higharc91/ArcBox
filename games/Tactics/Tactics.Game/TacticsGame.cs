@@ -162,7 +162,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         {
             // A scene under way waits for the party as a battle does (5d §8): nobody is connected yet, and a scene played to nobody would be
             // lost on them. A beat waiting at its fight, or no beat, has nothing to play, so the party is simply back in the world.
-            if (_region is null || (_doc.World?.Camp is null && _doc.World?.Shop is null && _doc.World?.Story is not { Stage: StorySave.Lead or StorySave.After }))
+            if (_region is null || (_doc.World?.Camp is null && _doc.World?.Shop is null && _doc.World?.Loot is null && _doc.World?.Story is not { Stage: StorySave.Lead or StorySave.After }))
             {
                 ToMusterOrPick();
                 return;
@@ -225,7 +225,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Story:
                 if (Camp is not null) { CampPresenceChanged(); break; }
-                if (_doc.World?.Shop is not null)
+                if (Trading)
                 {
                     if (_online.Count == 0) CloseShop();
                     break;
@@ -288,7 +288,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Story when Camp is not null:
                 CampInput(player, profile, custom);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is not null:
+            case TacticsPhase.Story when Trading:
                 ShopInput(player, profile, custom);
                 break;
             case TacticsPhase.Story:
@@ -353,7 +353,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Exploration:
                 WalkTimer(key);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is null:
+            case TacticsPhase.Story when !Trading:
                 StoryTimer(key);
                 break;
         }
@@ -416,7 +416,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (_phase == TacticsPhase.Muster && _players.Where(p => _online.Contains(p.Id)).All(p => _doc.For(p.Profile!.Value) is not null))
         {
             _toasts.Clear();
-            if (_region is not null && (_doc.World?.Story is not null || _doc.World?.Shop is not null || _doc.World?.Camp is not null))
+            if (_region is not null && (_doc.World?.Story is not null || _doc.World?.Shop is not null || _doc.World?.Camp is not null || _doc.World?.Loot is not null))
                 ResumeStory();
             else if (_region is not null)
                 ToExploration();

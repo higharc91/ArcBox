@@ -56,14 +56,6 @@ public sealed partial class TacticsGame
             if (state.Status != "done" || rewarded.Contains(quest.Id)) continue;
             ChangePartyGold(quest.Rewards.Gold);
             var members = _doc.Members;
-            if (RewardMember() is { } by && !quest.Rewards.Items.IsDefaultOrEmpty)
-            {
-                var member = members[by];
-                members = members.SetItem(by, member with { Character = member.Character with
-                {
-                    Bag = StackLoot(member.Character.Bag, [.. quest.Rewards.Items.Select(i => new LootDef(new ItemId(i.Item), i.Count))]),
-                } });
-            }
             members = Ordinal.Map(members.Select(m => (m.Key, m.Value with { Xp = checked(m.Value.Xp + quest.Rewards.Xp) })));
             if (quest.Rewards.Trinkets is { } trinkets)
                 members = Ordinal.Map(members.Select(m => (m.Key, m.Value with
@@ -80,6 +72,9 @@ public sealed partial class TacticsGame
                     Flags = [.. _doc.World.Flags.Concat(quest.Rewards.Sets.IsDefault ? [] : quest.Rewards.Sets).Distinct(StringComparer.Ordinal)],
                 },
             };
+            // Its items go to whoever the party picks (USER DECISION 1), in this same save: the one who turned it in, for a party of one.
+            if (!quest.Rewards.Items.IsDefaultOrEmpty)
+                GiveFound(quest.Rewards.Items.Select(i => (new ItemId(i.Item), i.Count)), RewardMember(), quest.Name);
         }
     }
 

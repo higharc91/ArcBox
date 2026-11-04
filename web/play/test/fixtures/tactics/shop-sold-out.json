@@ -46,7 +46,12 @@
     "feed": [
       "Player1 bought 3 \u00D7 Potion of Healing \u2014 150 gold"
     ],
-    "portal": "/c/ABCD"
+    "portal": "/c/ABCD",
+    "haggle": {
+      "can": true,
+      "dc": 15,
+      "result": null
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,
