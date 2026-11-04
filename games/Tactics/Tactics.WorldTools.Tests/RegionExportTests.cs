@@ -820,7 +820,8 @@ public sealed class RegionExportTests : IDisposable
 
         Assert.Empty(Export(Field()).Problems);
 
-        Assert.Equal([.. before, RegionFile()], Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
+        Assert.Equal(before.Append(RegionFile()).OrderBy(f => f, StringComparer.Ordinal),
+            Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
     }
 
     [Fact]
