@@ -2,9 +2,10 @@
 
 The owner approved his appearance: **“yeah that looks great. Proceed with finishing him”**.
 The owner then approved the finished set: **“Looks good. Who is next”**.
-His complete directional/motion/portrait/native TV set is approved; installation
-and follow-up production checks are pending.
-It remains a separate overlay; production contains approved Bree, Halden and Aubrine.
+His exact complete directional/motion/portrait set is now installed and its
+production checks pass. See the [installation report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/tobin-installed/report.md).
+The separate review overlay is retained; production contains approved Bree, Halden,
+Aubrine and Tobin.
 No PixelLab API call, credit debit, purchase or upgrade was made.
 
 [Watch the finished 16.6-second review](tobin-finished-review.mp4).

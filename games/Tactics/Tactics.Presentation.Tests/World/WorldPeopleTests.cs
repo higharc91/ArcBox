@@ -32,6 +32,7 @@ public sealed class WorldPeopleTests
     [InlineData("innkeeper", "bree", "bree_tallow")]
     [InlineData("mayor", "halden", "halden_varrow")]
     [InlineData("priest", "mother_aubrine", "mother_aubrine")]
+    [InlineData("blacksmith", "tobin_fell", "tobin_fell")]
     public void Approved_named_people_use_their_talk_clip_while_holding_ground_then_resume_walking(string preset, string id, string name)
     {
         var person = Person(preset, 5, 5, "se", (6, 5), (6, 6)) with { Id = id };

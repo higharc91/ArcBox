@@ -7,8 +7,8 @@ checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree
 full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
 complete eight-direction idle/walk/talk set is also now approved and installed.
 Mother Aubrine’s complete image-tool set and native TV review are now also approved
-and installed. Tobin’s finished set is now approved, awaiting production installation;
-Lark’s first pixel appearance candidate is awaiting approval. Read the latest
+and installed. Tobin’s approved body and six portraits are also installed. Lark’s
+appearance is approved and the complete-set review is being finished. Read the latest
 [Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
@@ -343,3 +343,17 @@ ahead. No production content changed. Tobin's finished-set approval is complete;
 his installation and strict production checks remain the independent next work.
 No PixelLab API calls/spend/purchases. Keep existing credit and512 MiB/four-member
 limits. Pull with rebase before pushing townsfolk-art; no PR, merge or issue closure.
+
+## Tobin integration completed after owner approval
+
+The exact approved Tobin atlas and six portraits are installed. Approval metadata
+records installation; no Tobin art was regenerated. Production body/portrait aliases
+are blacksmith and tobin_fell.118 focused tests pass, Debug/Release test-project
+builds zero warnings/errors, typed production importer/bark/portrait check passes.
+Fresh four-party production peaks **314.04 MiB Ashen /192.37 MiB Cinder**, cap512.
+Cold pack **202,843,253 bytes /4,828 files**, +705,737; inventory hash
+`2e6da18bde5ec8564430f04b4992bacdc49c5bd82d57d603d6ac618a7871d5f4`.
+See [the Tobin installation report](../reports/2026-11-03-townsfolk-art/tobin-installed/report.md).
+Rules/balance/phone contracts unchanged. Prior installation-pending notes are historical.
+Lark's appearance was approved: “Yes, looks great. Continue”; finish that separate
+review set, preserving the full-set/TV approval gate. No PixelLab spend or purchase.

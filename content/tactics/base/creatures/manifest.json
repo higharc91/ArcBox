@@ -5954,6 +5954,93 @@
         }
       },
       "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 a9f5fe5ae077f432194f189c5f5c08bf532b58b3a17c978eabf461835d8dc85f"
+    },
+    "tobin_fell": {
+      "file": "tobin_fell.png",
+      "family": "townsfolk",
+      "variant": "tobin_fell",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 18,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.blacksmith",
+        "characters.tobin_fell"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "talk": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            16,
+            15,
+            14,
+            13
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 d0b6a196f881238c2a5ea9928abe1a68abc5dc083a5c3a7491a3e9265a0bf11e"
     }
   },
   "legacyDistinctForms": [

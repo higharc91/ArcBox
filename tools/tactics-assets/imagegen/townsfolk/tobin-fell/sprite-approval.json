@@ -1,5 +1,5 @@
 {
-  "stage": "complete_set_approved_pending_production_installation",
+  "stage": "complete_set_approved_installed",
   "generatedDate": "2026-11-04",
   "tool": "image_gen.imagegen",
   "originalPath": "/workspace/generated_images/exec-0175630f-f859-4b18-82a2-be6fc4c906de.png",
@@ -10,7 +10,7 @@
   },
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
   "fullSetTvApproval": "approved",
   "notes": [
@@ -32,7 +32,7 @@
     "portraits": 6,
     "completionImageToolCalls": 10,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_tobin.png": "d0b6a196f881238c2a5ea9928abe1a68abc5dc083a5c3a7491a3e9265a0bf11e",
       "review-sprite.json": "9661fc1673739a9408af070cd3235a3b50c072eb10307d58f57de3515782da42",

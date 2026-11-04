@@ -400,12 +400,12 @@
       "surprised": "barmaid_surprised.png"
     },
     "blacksmith": {
-      "idle": "blacksmith_idle.png",
-      "hurt": "blacksmith_hurt.png",
-      "happy": "blacksmith_happy.png",
-      "angry": "blacksmith_angry.png",
-      "sad": "blacksmith_sad.png",
-      "surprised": "blacksmith_surprised.png"
+      "idle": "tobin_fell_idle.png",
+      "hurt": "tobin_fell_hurt.png",
+      "happy": "tobin_fell_happy.png",
+      "angry": "tobin_fell_angry.png",
+      "sad": "tobin_fell_sad.png",
+      "surprised": "tobin_fell_surprised.png"
     },
     "farmer": {
       "idle": "farmer_idle.png",
@@ -527,6 +527,14 @@
       "angry": "mother_aubrine_angry.png",
       "sad": "mother_aubrine_sad.png",
       "surprised": "mother_aubrine_surprised.png"
+    },
+    "tobin_fell": {
+      "idle": "tobin_fell_idle.png",
+      "hurt": "tobin_fell_hurt.png",
+      "happy": "tobin_fell_happy.png",
+      "angry": "tobin_fell_angry.png",
+      "sad": "tobin_fell_sad.png",
+      "surprised": "tobin_fell_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
