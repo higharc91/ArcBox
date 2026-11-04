@@ -1,6 +1,6 @@
 {
   "character": "Corvin Ashby",
-  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
+  "stage": "complete_set_approved_installed",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 1,
@@ -13,9 +13,9 @@
   },
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "reviewNotes": [
     "Approved concept reused; first pixel appearance pass only.",
     "Eight requested standing facings manually inspected in S,SW,W,NW / N,NE,E,SE order.",
@@ -31,13 +31,13 @@
     "source": "candidate-1.png"
   },
   "completedSet": {
-    "status": "pending_owner_full_set_and_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 143,
     "curatedHeldSlots": 1,
     "portraits": 6,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_corvin.png": "331b749b46377f66c7065164efb573d46cf5b3bccf53161ba47fa08a6b527818",
       "review-sprite.json": "e5a4d051e9f4c5e2bebb956ea58431bdea03ecda41fd9c33d8fa41f89ad9f470",
@@ -57,5 +57,10 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/corvin-imagegen/world-archive.png",
       "sha256": "0f91120d506661d94a4fc72dcce47241cf9aaac24a9393fc59c34cce532aff99"
     }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "OK, finish him",
+    "context": "Owner requested installation after reviewing the completed set."
   }
 }

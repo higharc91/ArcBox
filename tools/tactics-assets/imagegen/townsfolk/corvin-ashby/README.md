@@ -1,6 +1,6 @@
 # Corvin Ashby — completed review set
 
-The owner approved Corvin’s appearance: “OK, he looks good. Proceed”. His eight-direction idle/walk/talk set and six portrait moods are ready for finished-set and TV review. Production installation remains pending that separate approval.
+The owner approved Corvin’s appearance: “OK, he looks good. Proceed”. The owner approved installation: “OK, finish him”. His exact eight-direction idle/walk/talk set and six portrait moods are installed; the review pack remains available.
 
 [Finished review reel](corvin-finished-review.mp4) · [Walk](corvin-eight-direction-walk.gif) · [Talk](corvin-eight-direction-talk.gif) · [Portraits](corvin-portraits-review.png) · [Native TV](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/corvin-imagegen/world-archive.png)
 

@@ -433,3 +433,18 @@ playable sample of that character's existing recorded voice when available. Matc
 clips to the character's actual bark/story IDs and text under `content/tactics/base/lore/`;
 reuse the recorded audio rather than regenerating it. If no recording is found,
 state that clearly. Corvin example: `lore/audio/bark_corvin_ashby_town_1.43f67d33.ogg`.
+
+## Latest checkpoint — Corvin approved and installed
+
+The owner requested installation: **“OK, finish him”**. The exact reviewed atlas
+and six portraits are installed; do not ask for approval again or regenerate them.
+Production body keys are characters.sage and characters.corvin_ashby; portrait
+presets sage and corvin_ashby. Four-party production peaks **320.48 MiB Ashen /
+192.37 MiB Cinder**, below512. Cold pack **204,126,234 bytes /4,842 files**,
+inventory SHA256 `4298fd0489664ab01f7a4e3e23e8f117e5f32dd15bae3273b13b7986409d6ec0`.
+See the Corvin installation report for test/build receipts. Rules, balance and phone
+contracts remain unchanged. Earlier pending-installation notes are historical.
+Continue remaining named and generic cast with their own appearance/full-set gates.
+Include a playable existing recorded voice sample with each future character draft
+and completed review. Never purchase PixelLab credits. Pull with rebase before
+pushing townsfolk-art; no PR, merge or issue closure.

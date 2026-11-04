@@ -141,3 +141,9 @@ production peaks317.26 /192.37 MiB, below512; cold203,477,572 bytes /4,835 files
 appearance candidate reuses his approved concept and awaits appearance approval.
 No Corvin production change, no PixelLab spend, rules/balance/phone unchanged.
 [Corvin appearance report](corvin-imagegen-trial.md).
+
+## Latest continuation: Corvin approved and installed
+
+Corvin’s exact approved atlas and six portraits are installed. Four-party production
+peaks 320.48 /192.37 MiB, below512. Cold pack 204,126,234 bytes. Rules, balance and
+phone contracts are unchanged. See [the installation report](corvin-installed/report.md).

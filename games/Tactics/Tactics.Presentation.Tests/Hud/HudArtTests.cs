@@ -109,6 +109,25 @@ public sealed class HudArtTests
         }
     }
 
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Corvins_sage_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "sage", "corvin_ashby" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/corvin_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
     [Fact]
     public void Tactical_portraits_crop_the_face_instead_of_shrinking_the_padded_frame()
     {
