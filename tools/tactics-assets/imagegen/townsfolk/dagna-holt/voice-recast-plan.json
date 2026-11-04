@@ -1,5 +1,5 @@
 {
-  "status": "blocked_missing_speech_generator_connection",
+  "status": "audition_ready_pending_owner_voice_approval",
   "ownerRequest": "Change her voice, it doesn't sound like a season veteran",
   "currentPreset": "Callirrhoe",
   "currentPitch": -1,
@@ -291,10 +291,24 @@
   "workflow": [
     "Obtain live model schema, quote and balance; never purchase credits.",
     "Render the two sample lines for owner listening review.",
-    "Once the sample is approved, recast all Dagna lines and her live-TTS theme consistently; preserve old recordings/provenance.",
+    "After owner voice approval, recast all 66 Dagna lines consistently; preserve old recordings/provenance and update registered cast metadata. Keep authored-recordings-only playback and disabled live TTS unchanged.",
     "Run voice import/check and verify clip/caption mappings."
   ],
-  "liveCost": "unavailable without generator connection",
-  "creditsSpent": 0,
-  "newRecordingsGenerated": 0
+  "liveCost": {
+    "quotedCU": 4,
+    "jobBilledCU": 4,
+    "balanceCheck": "No member/project cap; plan remaining balance unavailable from available tool."
+  },
+  "creditsSpent": 4,
+  "newRecordingsGenerated": 1,
+  "audition": {
+    "voice": "Gacrux",
+    "pitch": 0,
+    "path": "voice-recast/audition-gacrux.mp3",
+    "source": "voice-recast/audition-gacrux-source.wav",
+    "jobId": "job_XKMhe6TQ2AS48wqowWTEgLgR",
+    "assetId": "asset_oGRAyjjXx2wJ9Z2NgYzxBn9A",
+    "twoLinesCombined": true,
+    "approval": "pending_owner_listening_review"
+  }
 }

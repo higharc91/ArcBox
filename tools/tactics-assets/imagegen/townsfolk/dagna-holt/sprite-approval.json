@@ -21,8 +21,11 @@
     "Existing recorded town bark included without speech generation."
   ],
   "voiceReview": {
-    "status": "existing_voice_rejected_recast_requested",
+    "status": "replacement_audition_pending_owner_review",
     "reason": "Owner says existing voice sounds too young for a seasoned veteran.",
-    "plan": "voice-recast-plan.json"
+    "plan": "voice-recast-plan.json",
+    "sample": "voice-recast/audition-gacrux.mp3",
+    "voice": "Gacrux",
+    "paidCU": 4
   }
 }

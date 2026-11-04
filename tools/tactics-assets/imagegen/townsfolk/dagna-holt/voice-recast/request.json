@@ -1,0 +1,12 @@
+{
+  "model": {
+    "modelId": "model_google-gemini-3-8-flash-tts",
+    "language": "en-US",
+    "text": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.> Don\u2019t tell me it\u2019ll be all right. Tell me what we\u2019re doing. <short pause> Form up. Nobody dies stupid.",
+    "voice": "Gacrux"
+  },
+  "quotedCU": 4,
+  "jobId": "job_XKMhe6TQ2AS48wqowWTEgLgR",
+  "scope": "two-line audition only; owner review before replacing all 66 lines",
+  "postPitchSemitones": 0
+}
