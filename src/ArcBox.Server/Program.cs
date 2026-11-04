@@ -62,11 +62,16 @@ builder.Services
 
 // The portal API (spec §3.4): a fixed window per remote IP. Portal:PermitsPerMinute lowers it, for tests.
 var portalPermits = Math.Max(1, builder.Configuration.GetValue("Portal:PermitsPerMinute", 60));
+// Behind a proxy every request comes from the proxy, so all clients would share one window. Portal:ClientIpHeader names the
+// header the proxy puts the client's address in (Fly.io: Fly-Client-IP). Set it only behind a proxy that overwrites that
+// header, or a client could pick its own window (issue #60's deploy note).
+var clientIpHeader = builder.Configuration.GetValue<string?>("Portal:ClientIpHeader");
 builder.Services.AddRateLimiter(o =>
 {
     o.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     o.AddPolicy(CampaignEndpoints.RateLimitPolicy, http => RateLimitPartition.GetFixedWindowLimiter(
-        http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        (string.IsNullOrEmpty(clientIpHeader) ? null : http.Request.Headers[clientIpHeader].FirstOrDefault() is { Length: > 0 } forwarded ? forwarded : null)
+            ?? http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
         _ => new FixedWindowRateLimiterOptions
         {
             PermitLimit = portalPermits,
