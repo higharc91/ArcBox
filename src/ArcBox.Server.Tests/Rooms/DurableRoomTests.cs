@@ -472,6 +472,30 @@ public sealed class DurableRoomTests
         Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
     }
 
+    // Issue #62: a TV and a phone that moved on to another room hear nothing when the room they left parks.
+    [Fact]
+    public async Task Parking_a_room_tells_nobody_who_has_moved_on_to_another_room()
+    {
+        using var f = new ArcServerFactory();
+        var rooms = f.Services.GetRequiredService<RoomManager>();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var phone = await TestClient.ConnectAsync(f);
+        var first = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await phone.TakeSeatAsync(new TakeSeatRequest(first.Code, NewName: "Ann"));
+
+        // The same connections move to a second room: the TV makes a new one, the phone takes a seat in it.
+        var second = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await phone.TakeSeatAsync(new TakeSeatRequest(second.Code, NewName: "Ann"));
+        await WaitUntilAsync(() => rooms.RoomFor(phone.ConnectionId!)?.Code == second.Code, "the phone to move rooms");
+
+        f.Time.Advance(new RoomOptions().IdleTimeout + TimeSpan.FromMinutes(1));
+        await WaitUntilAsync(() => rooms.FindLoaded(first.Code) is null, "the first room to park");
+
+        Assert.NotNull(rooms.FindLoaded(second.Code));
+        Assert.Equal(0, host.Unclaimed(ClientMethods.RoomClosed));
+        Assert.Equal(0, phone.Unclaimed(ClientMethods.RoomClosed));
+    }
+
     [Fact]
     public async Task Parked_non_resumable_game_says_room_was_idle()
     {
