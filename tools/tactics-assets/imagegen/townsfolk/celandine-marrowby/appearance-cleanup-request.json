@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Clean up this exact eight-view Lady Celandine pixel appearance sheet WITHOUT redesigning her. Preserve identical FOUR columns TWO rows, same facings/face/hair/ears/green gown/ochre underdress/brown mantle/gold trim/boot proportions/size/baseline and actual pixel clusters. Remove the entire grey/white cloudy translucent background and all noisy halo/shadow pixels. Output true clean TRANSPARENT alpha0 outside the eight character silhouettes, including all gutters. Do not replace it with any colour/checkerboard/noise/gradient. Pixels inside her silhouette remain unchanged. One equipment consistency fix only: her closed brown ledger and iron keyring attach to anatomical RIGHT hip. That is imageLEFT on the directfront, imageRIGHT on the directback. In the rear-three-quarter NORTHWEST view (toprow column4) the right-hip ledger should be hidden on the far side, not an obvious book hanging imageLEFT. Remove that wrongly visible near-side book/keyring from that one NW view, retaining belt/dress behind it. All other facings retain their present gear with natural occlusion. DirectBACK(row2col1) remains a plain back mantle/belt/dress, with no front brooch/buckle/face. Do not mirror any cell, shift the figures, change expressions or draw a new concept. No shadows, labels, text, frames or additional objects. Keep complete silhouettes and generous clear alpha0 margins."
+}

@@ -2,8 +2,9 @@
 
 The owner authorized finishing the existing appearance (“ok, finish those please”).
 Eight real facings,144 native idle/walk/talk cells and six40×40 dialogue portraits
-are ready for separate finished-set/TV approval. No Dagna art is installed in
-production yet; her approved66-line veteran voice is already installed.
+were approved by the owner (“Perfect, do the next character”). The exact reviewed
+body and portraits are installed in production, alongside her approved66-line
+veteran voice. The retained review pack is available for reproduction.
 
 [Watch the voiced review](dagna-finished-review.mp4) · [Voice sample](voice-sample.mp3)
 · [Portraits](dagna-portraits-review.png) · [Walk](dagna-eight-direction-walk.gif)
@@ -34,3 +35,5 @@ node tools/tactics-assets/imagegen/townsfolk/dagna-holt/build-review-pack.cjs /e
 Never edit linked files. The guarded installer requires the owner's full-set/TV
 approval and exact reviewed hashes before production integration. See the
 [delivery report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-imagegen/report.md).
+
+Production installation passed exact-asset hash checks and typed importer/portrait/bark stop-resume checks. Four-party production texture peaks325.77 /192.37 MiB, below512. See the installed report.

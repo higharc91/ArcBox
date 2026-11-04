@@ -469,3 +469,29 @@ Report: docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-imagegen/report.
 Next: owner finished-set/TV approval, exact installation, production checks.
 Reuse all completed assets/voice. Rebase before pushing townsfolk-art; no PR, merge
 or issue closure. Earlier pending-appearance and blocked-voice notes are historical.
+
+## Latest checkpoint — Dagna approved/installed; Celandine appearance draft
+
+The owner approved Dagna's finished set: “Perfect, do the next character”. Exact
+bound body and six portraits are installed; do not regenerate or seek approval
+again. Body/portrait aliases guard_captain/dagna_holt resolve correctly.147 focused
+presentation tests pass; Debug/Release test-project builds0 warnings/errors. Typed
+production importer/bark/portrait and exact approved hashes pass. Production
+four-party peaks325.77 /192.37 MiB below512 with full replacement/restoration and
+upload/release gates. Cold pack207649084 bytes /4922 files, inventory
+SHA256 6bf5e5410895a9f5d7355d97b721d1c9ab83d19fbebf7f6eb7f6d8ea0edd948f.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-installed/report.md.
+
+Lady Celandine Marrowby follows (noble, celandine_marrowby). First pixel appearance
+and existing recorded voice sample are under tools/tactics-assets/imagegen/townsfolk/
+celandine-marrowby/. Approved concept reused; background cleaned; original and
+exact requests/input/output hashes retained. Appearance approval pending before
+motion/portraits, then separate full-set/TV gate. Native grid/alpha/palette/size/
+anchor and equipment QA ahead; northwest near-side ledger/keyring should be
+occluded before motion guides. Two image-tool calls, zero PixelLab/new speech
+spend. No Celandine production content.
+
+Rules, lore, balance and phone contracts unchanged. Her voice sample must be
+included with future appearance and finished reviews. Rebase before pushing
+townsfolk-art; no PR, merge or issue closure. Earlier pending-Dagna notes are
+historical; continue with Celandine appearance approval.

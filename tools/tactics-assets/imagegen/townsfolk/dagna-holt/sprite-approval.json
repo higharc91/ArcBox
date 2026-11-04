@@ -2,7 +2,7 @@
   "character": "Dagna Holt",
   "characterId": "dagna_holt",
   "presetReference": "guard_captain",
-  "stage": "complete_set_pending_owner_tv_approval",
+  "stage": "complete_set_approved_installed",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 12,
@@ -10,16 +10,16 @@
   "candidateSha256": "70e1f5b7aa54ebd48a585298cb740760e12e415b56bda3d00899a2ffb490557a",
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "reviewNotes": [
     "Appearance continuation authorized by owner: ok, finish those please.",
-    "Eight real idle/walk/talk facings and six portraits complete; full-set/TV approval pending.",
+    "Eight real idle/walk/talk facings and six portraits complete; finished set approved and installed.",
     "Use final rotations and corrected north pauldron source; original north guide/source superseded.",
     "Fixed transform per direction, no per-frame recentering or mirroring;144 source cells, no held slots.",
     "Approved Gacrux production town bark included in finished reel; no new voice generation.",
-    "Native four-party peaks325.77/192.37 MiB below512; art remains review-only."
+    "Native four-party peaks325.77/192.37 MiB below512; exact reviewed art is installed."
   ],
   "voiceReview": {
     "status": "approved_recast_installed",
@@ -38,13 +38,13 @@
     "scope": "Continue the existing appearance into directional animations, portraits and finished TV review."
   },
   "completedSet": {
-    "status": "pending_owner_full_set_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 144,
     "portraits": 6,
     "completionImageToolCalls": 10,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_dagna.png": "af8f62f541bf973b4d20c527bdf8447a4142b3dbb23f93ea31593f9e81752100",
       "review-sprite.json": "6fd3e5caec41591186351c96043eec2f31e3ff3ba3284c824e78d577f0d5e3e7",
@@ -72,5 +72,10 @@
     }
   },
   "priorAppearanceCalls": 2,
-  "completionImageToolCalls": 10
+  "completionImageToolCalls": 10,
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Perfect, do the next character",
+    "scope": "Accepts the completed voiced directional/motion/portrait/TV review; install exact bound assets."
+  }
 }

@@ -448,12 +448,12 @@
       "surprised": "guard_surprised.png"
     },
     "guard_captain": {
-      "idle": "guard_captain_idle.png",
-      "hurt": "guard_captain_hurt.png",
-      "happy": "guard_captain_happy.png",
-      "angry": "guard_captain_angry.png",
-      "sad": "guard_captain_sad.png",
-      "surprised": "guard_captain_surprised.png"
+      "idle": "dagna_idle.png",
+      "hurt": "dagna_hurt.png",
+      "happy": "dagna_happy.png",
+      "angry": "dagna_angry.png",
+      "sad": "dagna_sad.png",
+      "surprised": "dagna_surprised.png"
     },
     "noble": {
       "idle": "noble_idle.png",
@@ -567,6 +567,14 @@
       "angry": "pip_angry.png",
       "sad": "pip_sad.png",
       "surprised": "pip_surprised.png"
+    },
+    "dagna_holt": {
+      "idle": "dagna_idle.png",
+      "hurt": "dagna_hurt.png",
+      "happy": "dagna_happy.png",
+      "angry": "dagna_angry.png",
+      "sad": "dagna_sad.png",
+      "surprised": "dagna_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

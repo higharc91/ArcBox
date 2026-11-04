@@ -11,6 +11,21 @@ public sealed class UnitArtTests
     private static bool OnDisk(string path) => File.Exists(Path.Combine(Pack.Root, path));
 
     [Fact]
+    public void Dagnas_named_and_captain_keys_select_the_approved_compact_sprite()
+    {
+        var captain = Art.Value.Sprite("characters.guard_captain")!;
+        Assert.Same(captain, Art.Value.Sprite("characters.dagna_holt"));
+        Assert.Equal("creatures/dagna.png", captain.Path);
+        Assert.True(OnDisk(captain.Path));
+        Assert.Equal((96, 96, 48, 84), (captain.Width, captain.Height, captain.AnchorX, captain.AnchorY));
+        Assert.Equal(.5f, captain.PixelScale);
+        Assert.Equal(8, captain.Directions.Distinct().Count());
+        Assert.Equal([0, 1, 2, 3, 4, 5, 4, 3, 2, 1], captain.Idle.Frames);
+        Assert.Equal([6, 7, 8, 9, 10, 11], captain.Anims["walk"].Frames);
+        Assert.Equal([12, 13, 14, 15, 16, 17, 16, 15, 14, 13], captain.Anims["talk"].Frames);
+    }
+
+    [Fact]
     public void A_sprite_has_its_sheets_animations_by_their_manifest_name_or_presentation_key()
     {
         var fighter = Art.Value.Sprite("characters.class_fighter")!;

@@ -1,0 +1,23 @@
+{
+  "character": "Lady Celandine Marrowby",
+  "characterId": "celandine_marrowby",
+  "presetReference": "noble",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 2,
+  "originalPath": "/workspace/generated_images/exec-7faa86ac-30b9-4e1d-bc7a-f61bd5f56cb0.png",
+  "candidateSha256": "52882bba836a94f9ff57f306c7876c20227facbd78173bd06c66bdeb811f239c",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Approved concept reused, not regenerated. Eight real standing facings; transparent background cleanup retained beside original.",
+    "Existing recorded town bark included; no speech generation.",
+    "Native grid/alpha/palette/size/anchor and handed equipment QA remain before motions.",
+    "Northwest near-side ledger/keyring occlusion still needs correction before motion guides; cleanup fixed background but did not resolve that requested detail.",
+    "No new costume or secret identity revealed."
+  ]
+}

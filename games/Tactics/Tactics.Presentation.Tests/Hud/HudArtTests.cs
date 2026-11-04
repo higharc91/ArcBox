@@ -7,6 +7,24 @@ namespace Tactics.Presentation.Tests.Hud;
 /// <summary><see cref="HudArt"/> against the real pack: ui/manifest.json's rectangles and each unit's portrait.</summary>
 public sealed class HudArtTests
 {
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Dagnas_captain_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "guard_captain", "dagna_holt" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/dagna_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
     private static readonly Lazy<UnitArt> Units = new(() => UnitArt.Load(Pack.Root));
     private static readonly Lazy<HudArt> Art = new(() => HudArt.Load(Pack.Root, Units.Value));
 

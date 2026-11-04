@@ -6302,6 +6302,93 @@
         }
       },
       "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 f30cf3a5178e89425ef49ab0848639f3bda771c5c9065b31e461e617fd3f3df0"
+    },
+    "dagna": {
+      "file": "dagna.png",
+      "family": "townsfolk",
+      "variant": "dagna",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 18,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.guard_captain",
+        "characters.dagna_holt"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "talk": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            16,
+            15,
+            14,
+            13
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 af8f62f541bf973b4d20c527bdf8447a4142b3dbb23f93ea31593f9e81752100"
     }
   },
   "legacyDistinctForms": [

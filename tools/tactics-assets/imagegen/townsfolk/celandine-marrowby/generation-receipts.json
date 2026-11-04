@@ -1,0 +1,32 @@
+{
+  "imageToolCalls": 2,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "speechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-source.png",
+      "originalPath": "/workspace/generated_images/exec-6d738ab7-d00e-43d1-8fb6-1bfc54453c7d.png",
+      "requestSha256": "6901735e5fd7d09bf73ed8ccb5e9f0f8d051ec56be8287ac7e12da732556fd3d",
+      "outputSha256": "cb234bcb01ee226bba1890835970d2950185570fbafc1416d513662ed218c6e9",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_celandine_marrowby.png": "f7d914938f1ccb8d8d32fb2ca1fcf2309b50bf9a714e30d35e70cf707dda5d9b",
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/rotations/south.png": "d0043caba4faff046b3860d9dbb4e66b5d91770e38f95185d55ecc5dc6cb2644"
+      }
+    },
+    {
+      "request": "appearance-cleanup-request.json",
+      "output": "candidate-1.png",
+      "originalPath": "/workspace/generated_images/exec-7faa86ac-30b9-4e1d-bc7a-f61bd5f56cb0.png",
+      "requestSha256": "1ff28da34d932d8a58cb16eec64298b41ae1cefa051cdec591d1b42f8ad6c5c6",
+      "outputSha256": "52882bba836a94f9ff57f306c7876c20227facbd78173bd06c66bdeb811f239c",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1-source.png": "cb234bcb01ee226bba1890835970d2950185570fbafc1416d513662ed218c6e9"
+      },
+      "inputPathAtGeneration": {
+        "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1.png": "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1-source.png"
+      }
+    }
+  ]
+}
