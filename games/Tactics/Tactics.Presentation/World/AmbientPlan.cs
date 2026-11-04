@@ -268,7 +268,7 @@ public sealed class AmbientPlan
                 var wy = MathF.Cos((float)(clock * 1.3 + phase)) * 3f - 2f;
                 var variant = _dusk ? "gold" : Pick(flitterAsset, h);
                 var path = flitterAsset.Variants.GetValueOrDefault(variant, "");
-                var frame = ((int)(clock * flitterAsset.Fps) + h) % flitterAsset.Frames;
+                var frame = (int)(((long)(clock * flitterAsset.Fps) + h) % flitterAsset.Frames);
                 var mirror = MathF.Cos((float)(clock * 1.7 + phase)) < 0;
                 result.Add(new AmbientItem(flitter, variant, path, tile, spot + new Vector2(wx, wy), frame, flitterAsset.Frames,
                     new Vector2(flitterAsset.FrameWidth, flitterAsset.FrameHeight), new Vector2(flitterAsset.AnchorX, flitterAsset.AnchorY), mirror,
@@ -379,7 +379,7 @@ public sealed class AmbientPlan
     }
 
     private static AmbientItem Strip(AmbientAsset asset, string kind, string variant, Tile tile, Vector2 at, int frame, float alpha, bool mirror)
-        => new(kind, variant, asset.Variants.GetValueOrDefault(variant, ""), tile, at, frame % asset.Frames, asset.Frames,
+        => new(kind, variant, asset.Variants.GetValueOrDefault(variant, ""), tile, at, (frame % asset.Frames + asset.Frames) % asset.Frames, asset.Frames,
             new Vector2(asset.FrameWidth, asset.FrameHeight), new Vector2(asset.AnchorX, asset.AnchorY), mirror, BoardOrder.Key(tile, BoardLayer.Over), alpha, asset.Blend == "add");
 
     private static string Pick(AmbientAsset asset, int hash)

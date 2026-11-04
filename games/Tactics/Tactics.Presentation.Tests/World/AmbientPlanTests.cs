@@ -264,6 +264,19 @@ public sealed class AmbientPlanTests
         Assert.True(Enumerable.Range(0, 480).Count(i => plan.ActiveAt(i * 0.25, view).Any(b => b.Kind is "bird" or "flock")) < 480);
     }
 
+    [Theory]
+    [InlineData(3e8)]
+    [InlineData(1e7 + 0.37)]
+    public void A_frame_is_never_negative_however_long_the_world_has_run(double clock)
+    {
+        // A clock this old times a strip's frame rate passes int's top, and a hash added to it wrapped round to a negative frame.
+        var (_, plan) = Ford.Value;
+        var items = plan.ActiveAt(clock, Everywhere);
+
+        Assert.NotEmpty(items);
+        Assert.All(items, i => Assert.InRange(i.Frame, 0, i.TotalFrames - 1));
+    }
+
     [Fact]
     public void Everything_it_draws_is_in_its_paths_and_on_disk()
     {
