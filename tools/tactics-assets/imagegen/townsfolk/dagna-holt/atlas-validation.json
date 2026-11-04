@@ -1,0 +1,3229 @@
+{
+  "reviewOnly": true,
+  "productionInstalled": false,
+  "pixelLabCreditsSpent": 0,
+  "frame": {
+    "width": 96,
+    "height": 96,
+    "anchor": [
+      48,
+      84
+    ]
+  },
+  "pixelScale": 0.5,
+  "paletteColors": 96,
+  "alphaThreshold": 128,
+  "perFrameRecentering": false,
+  "mirroring": false,
+  "directions": {
+    "south": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        280.9,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        56.38333333333338,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          196.5,
+          477.5,
+          759.5,
+          1040,
+          1319.5,
+          1601.5
+        ],
+        "intercept": 196.83333333333337,
+        "pitch": 280.9
+      },
+      "scale": 0.28346456692913385,
+      "fixedOffset": [
+        8.187401574803154,
+        4.062992125984252
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 84.61666666666662,
+                "top": 29,
+                "right": 198.61666666666662,
+                "bottom": 282
+              },
+              "outputBounds": [
+                33,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1747,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 82.71666666666664,
+                "top": 26,
+                "right": 196.71666666666664,
+                "bottom": 282
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                84
+              ],
+              "opaquePixels": 1780,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 83.8166666666666,
+                "top": 23,
+                "right": 200.8166666666666,
+                "bottom": 282
+              },
+              "outputBounds": [
+                32,
+                11,
+                65,
+                84
+              ],
+              "opaquePixels": 1779,
+              "heightWorld": 37,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 84.91666666666663,
+                "top": 29,
+                "right": 199.91666666666663,
+                "bottom": 282
+              },
+              "outputBounds": [
+                33,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1756,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 83.01666666666665,
+                "top": 32,
+                "right": 199.01666666666665,
+                "bottom": 282
+              },
+              "outputBounds": [
+                32,
+                14,
+                64,
+                84
+              ],
+              "opaquePixels": 1760,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 84.11666666666656,
+                "top": 30,
+                "right": 200.11666666666656,
+                "bottom": 282
+              },
+              "outputBounds": [
+                33,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1760,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 84.61666666666662,
+                "top": 24.333333333333314,
+                "right": 198.61666666666662,
+                "bottom": 279.3333333333333
+              },
+              "outputBounds": [
+                33,
+                11,
+                64,
+                83
+              ],
+              "opaquePixels": 1578,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 85.71666666666664,
+                "top": 25.333333333333314,
+                "right": 197.71666666666664,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                33,
+                12,
+                64,
+                82
+              ],
+              "opaquePixels": 1551,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 78.8166666666666,
+                "top": 21.333333333333314,
+                "right": 198.8166666666666,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                31,
+                11,
+                64,
+                82
+              ],
+              "opaquePixels": 1569,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 83.91666666666663,
+                "top": 25.333333333333314,
+                "right": 196.91666666666663,
+                "bottom": 279.3333333333333
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                83
+              ],
+              "opaquePixels": 1552,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 82.01666666666665,
+                "top": 26.333333333333314,
+                "right": 197.01666666666665,
+                "bottom": 270.3333333333333
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                80
+              ],
+              "opaquePixels": 1525,
+              "heightWorld": 34.5,
+              "footDeltaWorld": -2
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 81.11666666666656,
+                "top": 24.333333333333314,
+                "right": 203.11666666666656,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                32,
+                11,
+                66,
+                82
+              ],
+              "opaquePixels": 1592,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            }
+          ],
+          "maxFootDriftWorld": 2
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 84.61666666666662,
+                "top": 19.66666666666663,
+                "right": 198.61666666666662,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                33,
+                10,
+                64,
+                83
+              ],
+              "opaquePixels": 1814,
+              "heightWorld": 37,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 75.71666666666664,
+                "top": 21.66666666666663,
+                "right": 200.71666666666664,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                30,
+                11,
+                65,
+                83
+              ],
+              "opaquePixels": 1835,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 64.8166666666666,
+                "top": 19.66666666666663,
+                "right": 200.8166666666666,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                27,
+                10,
+                65,
+                83
+              ],
+              "opaquePixels": 1870,
+              "heightWorld": 37,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 73.91666666666663,
+                "top": 21.66666666666663,
+                "right": 201.91666666666663,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                30,
+                11,
+                65,
+                83
+              ],
+              "opaquePixels": 1840,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 78.01666666666665,
+                "top": 21.66666666666663,
+                "right": 201.01666666666665,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                31,
+                11,
+                65,
+                83
+              ],
+              "opaquePixels": 1833,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 83.11666666666656,
+                "top": 20.66666666666663,
+                "right": 200.11666666666656,
+                "bottom": 278.66666666666663
+              },
+              "outputBounds": [
+                32,
+                10,
+                65,
+                83
+              ],
+              "opaquePixels": 1830,
+              "heightWorld": 37,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        }
+      }
+    },
+    "south-west": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        290.4142857142857,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        16.673809523809553,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          161.5,
+          453.5,
+          742.5,
+          1032.5,
+          1322.5,
+          1615
+        ],
+        "intercept": 161.8809523809524,
+        "pitch": 290.4142857142857
+      },
+      "scale": 0.2868525896414343,
+      "fixedOffset": [
+        6.346955036994878,
+        2.2470119521912295
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 95.32619047619045,
+                "top": 35,
+                "right": 216.32619047619045,
+                "bottom": 285
+              },
+              "outputBounds": [
+                34,
+                13,
+                68,
+                84
+              ],
+              "opaquePixels": 1747,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 96.91190476190474,
+                "top": 35,
+                "right": 217.91190476190474,
+                "bottom": 285
+              },
+              "outputBounds": [
+                35,
+                13,
+                69,
+                84
+              ],
+              "opaquePixels": 1746,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 94.49761904761908,
+                "top": 28,
+                "right": 215.49761904761908,
+                "bottom": 285
+              },
+              "outputBounds": [
+                34,
+                11,
+                68,
+                84
+              ],
+              "opaquePixels": 1809,
+              "heightWorld": 37,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 94.08333333333337,
+                "top": 28,
+                "right": 213.08333333333337,
+                "bottom": 285
+              },
+              "outputBounds": [
+                34,
+                11,
+                67,
+                84
+              ],
+              "opaquePixels": 1800,
+              "heightWorld": 37,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 94.66904761904766,
+                "top": 36,
+                "right": 215.66904761904766,
+                "bottom": 285
+              },
+              "outputBounds": [
+                34,
+                13,
+                68,
+                84
+              ],
+              "opaquePixels": 1759,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 96.25476190476206,
+                "top": 35,
+                "right": 218.25476190476206,
+                "bottom": 285
+              },
+              "outputBounds": [
+                34,
+                13,
+                69,
+                84
+              ],
+              "opaquePixels": 1764,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 84.32619047619045,
+                "top": 30.333333333333314,
+                "right": 228.32619047619045,
+                "bottom": 277.3333333333333
+              },
+              "outputBounds": [
+                31,
+                11,
+                72,
+                82
+              ],
+              "opaquePixels": 1791,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 91.91190476190474,
+                "top": 29.333333333333314,
+                "right": 221.9119047619048,
+                "bottom": 277.3333333333333
+              },
+              "outputBounds": [
+                33,
+                11,
+                70,
+                82
+              ],
+              "opaquePixels": 1692,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 90.49761904761908,
+                "top": 30.333333333333314,
+                "right": 233.49761904761908,
+                "bottom": 277.3333333333333
+              },
+              "outputBounds": [
+                33,
+                11,
+                73,
+                82
+              ],
+              "opaquePixels": 1741,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 80.08333333333337,
+                "top": 30.333333333333314,
+                "right": 231.08333333333337,
+                "bottom": 278.3333333333333
+              },
+              "outputBounds": [
+                30,
+                11,
+                72,
+                82
+              ],
+              "opaquePixels": 1819,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 91.66904761904766,
+                "top": 29.333333333333314,
+                "right": 217.66904761904766,
+                "bottom": 277.3333333333333
+              },
+              "outputBounds": [
+                33,
+                11,
+                69,
+                82
+              ],
+              "opaquePixels": 1652,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 92.25476190476206,
+                "top": 32.333333333333314,
+                "right": 238.25476190476206,
+                "bottom": 277.3333333333333
+              },
+              "outputBounds": [
+                33,
+                12,
+                74,
+                82
+              ],
+              "opaquePixels": 1740,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            }
+          ],
+          "maxFootDriftWorld": 1
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 95.32619047619045,
+                "top": 28.66666666666663,
+                "right": 216.32619047619045,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                34,
+                11,
+                68,
+                82
+              ],
+              "opaquePixels": 1766,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 73.91190476190474,
+                "top": 28.66666666666663,
+                "right": 216.91190476190474,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                28,
+                11,
+                68,
+                82
+              ],
+              "opaquePixels": 1802,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 63.49761904761908,
+                "top": 27.66666666666663,
+                "right": 217.49761904761908,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                25,
+                11,
+                69,
+                82
+              ],
+              "opaquePixels": 1829,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 63.08333333333337,
+                "top": 27.66666666666663,
+                "right": 218.08333333333337,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                25,
+                11,
+                69,
+                82
+              ],
+              "opaquePixels": 1829,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 67.66904761904766,
+                "top": 27.66666666666663,
+                "right": 217.66904761904766,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                26,
+                11,
+                69,
+                82
+              ],
+              "opaquePixels": 1824,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 97.25476190476206,
+                "top": 28.66666666666663,
+                "right": 219.25476190476206,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                35,
+                11,
+                69,
+                82
+              ],
+              "opaquePixels": 1786,
+              "heightWorld": 36,
+              "footDeltaWorld": -1
+            }
+          ],
+          "maxFootDriftWorld": 1
+        }
+      }
+    },
+    "west": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        295.7142857142857,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        10.523809523809433,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          158,
+          454.5,
+          750,
+          1045.5,
+          1341,
+          1637
+        ],
+        "intercept": 158.3809523809523,
+        "pitch": 295.7142857142857
+      },
+      "scale": 0.2975206611570248,
+      "fixedOffset": [
+        4.009445100354192,
+        1.586776859504127
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 113.47619047619057,
+                "top": 36,
+                "right": 202.47619047619057,
+                "bottom": 277
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1344,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 113.76190476190487,
+                "top": 36,
+                "right": 203.76190476190487,
+                "bottom": 277
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1347,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 113.04761904761915,
+                "top": 33,
+                "right": 204.04761904761915,
+                "bottom": 277
+              },
+              "outputBounds": [
+                38,
+                12,
+                65,
+                84
+              ],
+              "opaquePixels": 1363,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 114.33333333333348,
+                "top": 36,
+                "right": 203.33333333333348,
+                "bottom": 277
+              },
+              "outputBounds": [
+                39,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1342,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 113.6190476190477,
+                "top": 36,
+                "right": 202.6190476190477,
+                "bottom": 277
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1346,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 113.90476190476193,
+                "top": 36,
+                "right": 202.90476190476193,
+                "bottom": 277
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1330,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 86.47619047619057,
+                "top": 36.333333333333314,
+                "right": 222.47619047619057,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                30,
+                13,
+                70,
+                83
+              ],
+              "opaquePixels": 1502,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 109.76190476190487,
+                "top": 33.333333333333314,
+                "right": 207.76190476190487,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                37,
+                12,
+                66,
+                83
+              ],
+              "opaquePixels": 1329,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 87.04761904761915,
+                "top": 36.333333333333314,
+                "right": 221.04761904761915,
+                "bottom": 273.3333333333333
+              },
+              "outputBounds": [
+                30,
+                13,
+                70,
+                83
+              ],
+              "opaquePixels": 1429,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 86.33333333333348,
+                "top": 36.333333333333314,
+                "right": 223.33333333333348,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                30,
+                13,
+                70,
+                83
+              ],
+              "opaquePixels": 1490,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 109.6190476190477,
+                "top": 36.333333333333314,
+                "right": 207.6190476190477,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                37,
+                13,
+                66,
+                83
+              ],
+              "opaquePixels": 1328,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 87.90476190476193,
+                "top": 36.333333333333314,
+                "right": 220.90476190476193,
+                "bottom": 273.3333333333333
+              },
+              "outputBounds": [
+                31,
+                13,
+                70,
+                83
+              ],
+              "opaquePixels": 1424,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 113.47619047619057,
+                "top": 37.66666666666663,
+                "right": 202.47619047619057,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1334,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 102.76190476190487,
+                "top": 37.66666666666663,
+                "right": 203.76190476190487,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                35,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1361,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 93.04761904761915,
+                "top": 37.66666666666663,
+                "right": 203.04761904761915,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                32,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1361,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 88.33333333333348,
+                "top": 35.66666666666663,
+                "right": 203.33333333333348,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                31,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1378,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 97.6190476190477,
+                "top": 37.66666666666663,
+                "right": 203.6190476190477,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                34,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1355,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 113.90476190476193,
+                "top": 37.66666666666663,
+                "right": 202.90476190476193,
+                "bottom": 277.66666666666663
+              },
+              "outputBounds": [
+                38,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1338,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        }
+      }
+    },
+    "north-west": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        285.54285714285714,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        31.538095238095167,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          175,
+          459.5,
+          746,
+          1029.5,
+          1315.5,
+          1603.5
+        ],
+        "intercept": 174.30952380952374,
+        "pitch": 285.54285714285714
+      },
+      "scale": 0.2926829268292683,
+      "fixedOffset": [
+        6.213240418118467,
+        3.2195121951219505
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 96.46190476190483,
+                "top": 31,
+                "right": 204.46190476190483,
+                "bottom": 276
+              },
+              "outputBounds": [
+                35,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1618,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 94.91904761904772,
+                "top": 31,
+                "right": 204.91904761904772,
+                "bottom": 276
+              },
+              "outputBounds": [
+                34,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1653,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 93.37619047619057,
+                "top": 27,
+                "right": 205.37619047619057,
+                "bottom": 276
+              },
+              "outputBounds": [
+                34,
+                12,
+                66,
+                84
+              ],
+              "opaquePixels": 1688,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 92.83333333333348,
+                "top": 31,
+                "right": 202.83333333333348,
+                "bottom": 276
+              },
+              "outputBounds": [
+                34,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1643,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 93.29047619047628,
+                "top": 31,
+                "right": 206.29047619047628,
+                "bottom": 276
+              },
+              "outputBounds": [
+                34,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1663,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 94.74761904761908,
+                "top": 31,
+                "right": 210.74761904761908,
+                "bottom": 276
+              },
+              "outputBounds": [
+                34,
+                13,
+                67,
+                84
+              ],
+              "opaquePixels": 1656,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 90.46190476190483,
+                "top": 33.333333333333314,
+                "right": 212.46190476190483,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                33,
+                13,
+                68,
+                84
+              ],
+              "opaquePixels": 1592,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 95.91904761904772,
+                "top": 30.333333333333314,
+                "right": 215.91904761904772,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                35,
+                13,
+                69,
+                84
+              ],
+              "opaquePixels": 1564,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 93.37619047619057,
+                "top": 30.333333333333314,
+                "right": 208.37619047619057,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                34,
+                13,
+                67,
+                84
+              ],
+              "opaquePixels": 1599,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 92.83333333333348,
+                "top": 30.333333333333314,
+                "right": 218.83333333333348,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                34,
+                13,
+                70,
+                84
+              ],
+              "opaquePixels": 1602,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 96.29047619047628,
+                "top": 30.333333333333314,
+                "right": 217.29047619047628,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                35,
+                13,
+                70,
+                84
+              ],
+              "opaquePixels": 1585,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 94.74761904761908,
+                "top": 30.333333333333314,
+                "right": 210.74761904761908,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                34,
+                13,
+                68,
+                84
+              ],
+              "opaquePixels": 1603,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 92.46190476190483,
+                "top": 31.66666666666663,
+                "right": 204.46190476190483,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                34,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1609,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 94.91904761904772,
+                "top": 31.66666666666663,
+                "right": 204.91904761904772,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                34,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1633,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 70.37619047619057,
+                "top": 30.66666666666663,
+                "right": 202.37619047619057,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                28,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1665,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 72.83333333333348,
+                "top": 30.66666666666663,
+                "right": 199.83333333333348,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                28,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1654,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 80.29047619047628,
+                "top": 31.66666666666663,
+                "right": 202.29047619047628,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                30,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1636,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 94.74761904761908,
+                "top": 31.66666666666663,
+                "right": 205.74761904761908,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                34,
+                13,
+                66,
+                84
+              ],
+              "opaquePixels": 1632,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        }
+      }
+    },
+    "north": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        287.85714285714283,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        25.595238095238102,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          169.5,
+          457.5,
+          745.5,
+          1032.5,
+          1321,
+          1609
+        ],
+        "intercept": 169.52380952380952,
+        "pitch": 287.85714285714283
+      },
+      "scale": 0.291497975708502,
+      "fixedOffset": [
+        6.0451127819548915,
+        2.9635627530364417
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 86.4047619047619,
+                "top": 32,
+                "right": 199.4047619047619,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1713,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 87.5476190476191,
+                "top": 32,
+                "right": 199.5476190476191,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                64,
+                84
+              ],
+              "opaquePixels": 1712,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 86.69047619047626,
+                "top": 29,
+                "right": 200.69047619047626,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                84
+              ],
+              "opaquePixels": 1739,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 86.83333333333348,
+                "top": 32,
+                "right": 201.83333333333348,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1737,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 86.9761904761906,
+                "top": 32,
+                "right": 201.9761904761906,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1752,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 87.1190476190477,
+                "top": 32,
+                "right": 202.1190476190477,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                65,
+                84
+              ],
+              "opaquePixels": 1733,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 85.4047619047619,
+                "top": 28.333333333333314,
+                "right": 195.4047619047619,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                31,
+                12,
+                63,
+                83
+              ],
+              "opaquePixels": 1614,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 87.5476190476191,
+                "top": 26.333333333333314,
+                "right": 195.5476190476191,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                32,
+                11,
+                63,
+                83
+              ],
+              "opaquePixels": 1592,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 83.69047619047626,
+                "top": 27.333333333333314,
+                "right": 200.69047619047626,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                31,
+                11,
+                64,
+                83
+              ],
+              "opaquePixels": 1621,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 84.83333333333348,
+                "top": 27.333333333333314,
+                "right": 198.83333333333348,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                31,
+                11,
+                64,
+                83
+              ],
+              "opaquePixels": 1616,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 88.9761904761906,
+                "top": 28.333333333333314,
+                "right": 196.9761904761906,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                32,
+                12,
+                63,
+                83
+              ],
+              "opaquePixels": 1599,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 84.1190476190477,
+                "top": 27.333333333333314,
+                "right": 198.1190476190477,
+                "bottom": 276.3333333333333
+              },
+              "outputBounds": [
+                31,
+                11,
+                64,
+                83
+              ],
+              "opaquePixels": 1628,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 86.4047619047619,
+                "top": 27.66666666666663,
+                "right": 198.4047619047619,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                83
+              ],
+              "opaquePixels": 1737,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 86.5476190476191,
+                "top": 27.66666666666663,
+                "right": 199.5476190476191,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                83
+              ],
+              "opaquePixels": 1729,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 70.69047619047626,
+                "top": 26.66666666666663,
+                "right": 201.69047619047626,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                27,
+                11,
+                65,
+                83
+              ],
+              "opaquePixels": 1756,
+              "heightWorld": 36.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 60.833333333333485,
+                "top": 27.66666666666663,
+                "right": 202.83333333333348,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                24,
+                12,
+                65,
+                83
+              ],
+              "opaquePixels": 1791,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 75.9761904761906,
+                "top": 27.66666666666663,
+                "right": 200.9761904761906,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                29,
+                12,
+                64,
+                83
+              ],
+              "opaquePixels": 1763,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 88.1190476190477,
+                "top": 27.66666666666663,
+                "right": 201.1190476190477,
+                "bottom": 276.66666666666663
+              },
+              "outputBounds": [
+                32,
+                12,
+                64,
+                83
+              ],
+              "opaquePixels": 1748,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        }
+      }
+    },
+    "north-east": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        281.1714285714286,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        52.485714285714266,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          193.5,
+          474,
+          755,
+          1036.5,
+          1318,
+          1599
+        ],
+        "intercept": 193.07142857142856,
+        "pitch": 281.1714285714286
+      },
+      "scale": 0.28402366863905326,
+      "fixedOffset": [
+        8.07032967032967,
+        2.7692307692307736
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 83.51428571428573,
+                "top": 33,
+                "right": 188.51428571428573,
+                "bottom": 286
+              },
+              "outputBounds": [
+                32,
+                13,
+                61,
+                84
+              ],
+              "opaquePixels": 1579,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 84.34285714285716,
+                "top": 33,
+                "right": 190.34285714285716,
+                "bottom": 286
+              },
+              "outputBounds": [
+                33,
+                13,
+                62,
+                84
+              ],
+              "opaquePixels": 1598,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 84.17142857142858,
+                "top": 31,
+                "right": 191.17142857142858,
+                "bottom": 283
+              },
+              "outputBounds": [
+                32,
+                12,
+                62,
+                83
+              ],
+              "opaquePixels": 1597,
+              "heightWorld": 36,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 84,
+                "top": 32,
+                "right": 191,
+                "bottom": 286
+              },
+              "outputBounds": [
+                32,
+                12,
+                62,
+                84
+              ],
+              "opaquePixels": 1620,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 83.82857142857142,
+                "top": 35,
+                "right": 191.82857142857142,
+                "bottom": 286
+              },
+              "outputBounds": [
+                32,
+                13,
+                62,
+                84
+              ],
+              "opaquePixels": 1606,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 83.65714285714284,
+                "top": 35,
+                "right": 190.65714285714284,
+                "bottom": 286
+              },
+              "outputBounds": [
+                32,
+                13,
+                62,
+                83
+              ],
+              "opaquePixels": 1582,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 61.514285714285734,
+                "top": 30.333333333333314,
+                "right": 198.51428571428573,
+                "bottom": 275.3333333333333
+              },
+              "outputBounds": [
+                26,
+                12,
+                64,
+                81
+              ],
+              "opaquePixels": 1578,
+              "heightWorld": 35,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 72.34285714285716,
+                "top": 30.333333333333314,
+                "right": 189.34285714285716,
+                "bottom": 268.3333333333333
+              },
+              "outputBounds": [
+                29,
+                12,
+                62,
+                79
+              ],
+              "opaquePixels": 1465,
+              "heightWorld": 34,
+              "footDeltaWorld": -2.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 72.17142857142858,
+                "top": 28.333333333333314,
+                "right": 190.17142857142858,
+                "bottom": 269.3333333333333
+              },
+              "outputBounds": [
+                29,
+                11,
+                62,
+                79
+              ],
+              "opaquePixels": 1462,
+              "heightWorld": 34.5,
+              "footDeltaWorld": -2.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 62,
+                "top": 30.333333333333314,
+                "right": 192,
+                "bottom": 270.3333333333333
+              },
+              "outputBounds": [
+                26,
+                12,
+                62,
+                79
+              ],
+              "opaquePixels": 1491,
+              "heightWorld": 34,
+              "footDeltaWorld": -2.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 67.82857142857142,
+                "top": 31.333333333333314,
+                "right": 187.82857142857142,
+                "bottom": 268.3333333333333
+              },
+              "outputBounds": [
+                28,
+                12,
+                61,
+                79
+              ],
+              "opaquePixels": 1448,
+              "heightWorld": 34,
+              "footDeltaWorld": -2.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 65.65714285714284,
+                "top": 30.333333333333314,
+                "right": 195.65714285714284,
+                "bottom": 271.3333333333333
+              },
+              "outputBounds": [
+                27,
+                12,
+                63,
+                80
+              ],
+              "opaquePixels": 1449,
+              "heightWorld": 34.5,
+              "footDeltaWorld": -2
+            }
+          ],
+          "maxFootDriftWorld": 2.5
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 84.51428571428573,
+                "top": 28.66666666666663,
+                "right": 190.51428571428573,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                33,
+                11,
+                62,
+                81
+              ],
+              "opaquePixels": 1560,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 84.34285714285716,
+                "top": 28.66666666666663,
+                "right": 202.34285714285716,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                33,
+                11,
+                65,
+                81
+              ],
+              "opaquePixels": 1566,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 85.17142857142858,
+                "top": 25.66666666666663,
+                "right": 218.17142857142858,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                33,
+                11,
+                70,
+                81
+              ],
+              "opaquePixels": 1610,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 84,
+                "top": 28.66666666666663,
+                "right": 216,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                32,
+                11,
+                69,
+                81
+              ],
+              "opaquePixels": 1613,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 83.82857142857142,
+                "top": 28.66666666666663,
+                "right": 206.82857142857142,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                32,
+                11,
+                67,
+                81
+              ],
+              "opaquePixels": 1586,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 83.65714285714284,
+                "top": 28.66666666666663,
+                "right": 190.65714285714284,
+                "bottom": 274.66666666666663
+              },
+              "outputBounds": [
+                32,
+                11,
+                62,
+                81
+              ],
+              "opaquePixels": 1565,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1.5
+            }
+          ],
+          "maxFootDriftWorld": 1.5
+        }
+      }
+    },
+    "east": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        282.9,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        45.88333333333338,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          188,
+          469.5,
+          753,
+          1036,
+          1319,
+          1602
+        ],
+        "intercept": 187.33333333333337,
+        "pitch": 282.9
+      },
+      "scale": 0.2962962962962963,
+      "fixedOffset": [
+        6.088888888888896,
+        1.6296296296296333
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 86.11666666666662,
+                "top": 36,
+                "right": 183.11666666666662,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1399,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 87.21666666666664,
+                "top": 33,
+                "right": 182.21666666666664,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                12,
+                60,
+                84
+              ],
+              "opaquePixels": 1408,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 87.3166666666666,
+                "top": 32,
+                "right": 181.3166666666666,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                12,
+                60,
+                84
+              ],
+              "opaquePixels": 1386,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 85.41666666666663,
+                "top": 36,
+                "right": 182.41666666666663,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1417,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 82.51666666666665,
+                "top": 38,
+                "right": 181.51666666666665,
+                "bottom": 278
+              },
+              "outputBounds": [
+                31,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1414,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 86.61666666666656,
+                "top": 39,
+                "right": 181.61666666666656,
+                "bottom": 278
+              },
+              "outputBounds": [
+                32,
+                14,
+                60,
+                84
+              ],
+              "opaquePixels": 1399,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 61.11666666666662,
+                "top": 37.333333333333314,
+                "right": 214.11666666666662,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                25,
+                13,
+                69,
+                83
+              ],
+              "opaquePixels": 1590,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 79.21666666666664,
+                "top": 37.333333333333314,
+                "right": 177.21666666666664,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                30,
+                13,
+                58,
+                83
+              ],
+              "opaquePixels": 1340,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 63.316666666666606,
+                "top": 37.333333333333314,
+                "right": 203.3166666666666,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                25,
+                13,
+                66,
+                83
+              ],
+              "opaquePixels": 1504,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 68.41666666666663,
+                "top": 37.333333333333314,
+                "right": 214.41666666666663,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                27,
+                13,
+                69,
+                83
+              ],
+              "opaquePixels": 1539,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 80.51666666666665,
+                "top": 37.333333333333314,
+                "right": 179.51666666666665,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                30,
+                13,
+                59,
+                83
+              ],
+              "opaquePixels": 1318,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 70.61666666666656,
+                "top": 37.333333333333314,
+                "right": 192.61666666666656,
+                "bottom": 274.3333333333333
+              },
+              "outputBounds": [
+                28,
+                13,
+                63,
+                83
+              ],
+              "opaquePixels": 1461,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -0.5
+            }
+          ],
+          "maxFootDriftWorld": 0.5
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 89.11666666666662,
+                "top": 40.66666666666663,
+                "right": 183.11666666666662,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                33,
+                14,
+                60,
+                84
+              ],
+              "opaquePixels": 1365,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 89.21666666666664,
+                "top": 37.66666666666663,
+                "right": 182.21666666666664,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                33,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1374,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 86.3166666666666,
+                "top": 36.66666666666663,
+                "right": 181.3166666666666,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                32,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1408,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 84.41666666666663,
+                "top": 38.66666666666663,
+                "right": 190.41666666666663,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                32,
+                14,
+                62,
+                84
+              ],
+              "opaquePixels": 1433,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 85.51666666666665,
+                "top": 36.66666666666663,
+                "right": 181.51666666666665,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                32,
+                13,
+                60,
+                84
+              ],
+              "opaquePixels": 1403,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 84.61666666666656,
+                "top": 39.66666666666663,
+                "right": 181.61666666666656,
+                "bottom": 279.66666666666663
+              },
+              "outputBounds": [
+                32,
+                14,
+                60,
+                84
+              ],
+              "opaquePixels": 1404,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        }
+      }
+    },
+    "south-east": {
+      "nativeSource": [
+        1774,
+        887
+      ],
+      "sourceGrid": [
+        6,
+        3
+      ],
+      "sourceCell": [
+        288.51428571428573,
+        295.6666666666667
+      ],
+      "sourceGridOrigin": [
+        27.623809523809427,
+        0
+      ],
+      "gridRegistration": {
+        "method": "one least-squares column pitch from six idle foot centres",
+        "perFrameOffsets": false,
+        "idleFootCentres": [
+          172.5,
+          460,
+          748.5,
+          1037.5,
+          1325.5,
+          1615
+        ],
+        "intercept": 171.8809523809523,
+        "pitch": 288.51428571428573
+      },
+      "scale": 0.29568788501026694,
+      "fixedOffset": [
+        5.344910530947487,
+        2.3901437371663263
+      ],
+      "actions": {
+        "idle": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 79.37619047619057,
+                "top": 33,
+                "right": 194.37619047619057,
+                "bottom": 276
+              },
+              "outputBounds": [
+                29,
+                13,
+                63,
+                84
+              ],
+              "opaquePixels": 1699,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 78.86190476190484,
+                "top": 33,
+                "right": 193.86190476190484,
+                "bottom": 276
+              },
+              "outputBounds": [
+                29,
+                13,
+                62,
+                84
+              ],
+              "opaquePixels": 1683,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 82.3476190476191,
+                "top": 33,
+                "right": 194.3476190476191,
+                "bottom": 276
+              },
+              "outputBounds": [
+                30,
+                13,
+                63,
+                84
+              ],
+              "opaquePixels": 1671,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 85.83333333333337,
+                "top": 34,
+                "right": 194.83333333333326,
+                "bottom": 276
+              },
+              "outputBounds": [
+                31,
+                13,
+                63,
+                84
+              ],
+              "opaquePixels": 1654,
+              "heightWorld": 36,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 83.31904761904752,
+                "top": 36,
+                "right": 194.31904761904752,
+                "bottom": 276
+              },
+              "outputBounds": [
+                30,
+                14,
+                63,
+                84
+              ],
+              "opaquePixels": 1654,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 80.80476190476179,
+                "top": 36,
+                "right": 194.8047619047618,
+                "bottom": 276
+              },
+              "outputBounds": [
+                30,
+                14,
+                63,
+                84
+              ],
+              "opaquePixels": 1674,
+              "heightWorld": 35.5,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        },
+        "walk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 67.37619047619057,
+                "top": 30.333333333333314,
+                "right": 204.37619047619057,
+                "bottom": 268.3333333333333
+              },
+              "outputBounds": [
+                26,
+                12,
+                65,
+                82
+              ],
+              "opaquePixels": 1675,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 75.86190476190484,
+                "top": 30.333333333333314,
+                "right": 190.86190476190484,
+                "bottom": 266.3333333333333
+              },
+              "outputBounds": [
+                28,
+                12,
+                62,
+                81
+              ],
+              "opaquePixels": 1535,
+              "heightWorld": 35,
+              "footDeltaWorld": -1.5
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 72.3476190476191,
+                "top": 30.333333333333314,
+                "right": 189.3476190476191,
+                "bottom": 268.3333333333333
+              },
+              "outputBounds": [
+                27,
+                12,
+                61,
+                82
+              ],
+              "opaquePixels": 1563,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 69.83333333333337,
+                "top": 31.333333333333314,
+                "right": 193.83333333333326,
+                "bottom": 268.3333333333333
+              },
+              "outputBounds": [
+                26,
+                12,
+                62,
+                82
+              ],
+              "opaquePixels": 1572,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 75.31904761904752,
+                "top": 31.333333333333314,
+                "right": 189.31904761904752,
+                "bottom": 269.3333333333333
+              },
+              "outputBounds": [
+                28,
+                12,
+                61,
+                82
+              ],
+              "opaquePixels": 1498,
+              "heightWorld": 35.5,
+              "footDeltaWorld": -1
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 74.80476190476179,
+                "top": 30.333333333333314,
+                "right": 194.8047619047618,
+                "bottom": 266.3333333333333
+              },
+              "outputBounds": [
+                28,
+                12,
+                63,
+                81
+              ],
+              "opaquePixels": 1583,
+              "heightWorld": 35,
+              "footDeltaWorld": -1.5
+            }
+          ],
+          "maxFootDriftWorld": 1.5
+        },
+        "talk": {
+          "frames": [
+            {
+              "frame": 0,
+              "sourceFrame": 0,
+              "sourceBounds": {
+                "left": 82.37619047619057,
+                "top": 31.66666666666663,
+                "right": 196.37619047619057,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                30,
+                12,
+                63,
+                84
+              ],
+              "opaquePixels": 1717,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 1,
+              "sourceFrame": 1,
+              "sourceBounds": {
+                "left": 80.86190476190484,
+                "top": 29.66666666666663,
+                "right": 195.86190476190484,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                30,
+                12,
+                63,
+                84
+              ],
+              "opaquePixels": 1711,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 2,
+              "sourceFrame": 2,
+              "sourceBounds": {
+                "left": 85.3476190476191,
+                "top": 31.66666666666663,
+                "right": 197.3476190476191,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                31,
+                12,
+                63,
+                84
+              ],
+              "opaquePixels": 1708,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 3,
+              "sourceFrame": 3,
+              "sourceBounds": {
+                "left": 82.83333333333337,
+                "top": 29.66666666666663,
+                "right": 217.83333333333326,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                30,
+                12,
+                70,
+                84
+              ],
+              "opaquePixels": 1765,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 4,
+              "sourceFrame": 4,
+              "sourceBounds": {
+                "left": 82.31904761904752,
+                "top": 31.66666666666663,
+                "right": 196.31904761904752,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                30,
+                12,
+                63,
+                84
+              ],
+              "opaquePixels": 1710,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            },
+            {
+              "frame": 5,
+              "sourceFrame": 5,
+              "sourceBounds": {
+                "left": 83.80476190476179,
+                "top": 29.66666666666663,
+                "right": 197.8047619047618,
+                "bottom": 275.66666666666663
+              },
+              "outputBounds": [
+                31,
+                12,
+                64,
+                84
+              ],
+              "opaquePixels": 1719,
+              "heightWorld": 36.5,
+              "footDeltaWorld": 0
+            }
+          ],
+          "maxFootDriftWorld": 0
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "directional/south-source.png",
+      "sha256": "77b6ed7ca6eafb2cf4199e2d48938047f5be757ba0973436fea5e72375080d18"
+    },
+    {
+      "path": "directional/south-west-source.png",
+      "sha256": "57eaff7fcb9e6f80d339304c621d48d665e5950ac911c7bc915e458a24e82e2d"
+    },
+    {
+      "path": "directional/west-source.png",
+      "sha256": "960718ecb430403560a8c2f216f7c4e3227dc75e509c5900e36b83f31fc18dd3"
+    },
+    {
+      "path": "directional/north-west-source.png",
+      "sha256": "b82eb48d6acca75ea2eff47c3defb86c046b50ff53980cbd9bebd0aba2e4ff68"
+    },
+    {
+      "path": "directional/north-corrected-source.png",
+      "sha256": "945e2a05dd9bb0ea6c419a56a5b9d914d2d3ae4c79d9602e4d376f1ab8febe63"
+    },
+    {
+      "path": "directional/north-east-source.png",
+      "sha256": "b922197512d771c0a3f1e41c18b0580149e5e9cf751305c8cde540dd500454fd"
+    },
+    {
+      "path": "directional/east-source.png",
+      "sha256": "8db41c12a047084b8cf876cf4867ed5c2fcda58c68214864bf6bc1f333508709"
+    },
+    {
+      "path": "directional/south-east-source.png",
+      "sha256": "faccb5397dbf06946da5aa503715de2e591837d45e3dfd62abf16efff56987cc"
+    }
+  ],
+  "paletteSha256": "f8d3eb1b8b2f1557a72f67b2fa75a128e145fabe330fcfa10ae751ef3179965c",
+  "atlas": {
+    "width": 1728,
+    "height": 768,
+    "uncompressedMiB": 5.0625,
+    "sha256": "af8f62f541bf973b4d20c527bdf8447a4142b3dbb23f93ea31593f9e81752100"
+  }
+}

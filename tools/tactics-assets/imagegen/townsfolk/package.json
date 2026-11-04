@@ -11,7 +11,9 @@
     "build-lark": "node lark/build-review.cjs && node lark/build-portraits.cjs && node lark/build-closeup.cjs",
     "verify-lark": "node lark/verify-review.cjs && node lark/verify-preserved.cjs",
     "build-pip": "node pip-ashdown/build-review.cjs && node pip-ashdown/build-portraits.cjs && node pip-ashdown/build-closeup.cjs",
-    "verify-pip": "node pip-ashdown/verify-review.cjs"
+    "verify-pip": "node pip-ashdown/verify-review.cjs",
+    "build-dagna": "node dagna-holt/build-review.cjs && node dagna-holt/build-portraits.cjs && node dagna-holt/build-closeup.cjs",
+    "verify-dagna": "node dagna-holt/verify-review.cjs && node dagna-holt/verify-receipts.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",

@@ -1,5 +1,5 @@
 {
-  "imageToolCalls": 2,
+  "imageToolCalls": 12,
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "records": [
@@ -23,6 +23,108 @@
       "inputSha256": {
         "tools/tactics-assets/imagegen/townsfolk/dagna-holt/candidate-1-source.png": "2f436dd81da4799132380857824b3e68d6103f6faabf785137f3671ee7291d50"
       }
+    },
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-source.png",
+      "originalPath": "/workspace/generated_images/exec-a89695df-6891-4546-8cb8-3b48471b95e3.png",
+      "requestSha256": "d1fda8fb0b901fb7e30ff2d2eae2a298a34ee5cda5a7c9ed22cd3a40da84dcd1",
+      "outputSha256": "77b6ed7ca6eafb2cf4199e2d48938047f5be757ba0973436fea5e72375080d18",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/south.png": "6e19160d99b1185a467063869e1a5310b348da56e8cc792e7fccba161ecdf1b5"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-source.png",
+      "originalPath": "/workspace/generated_images/exec-16bd6882-4291-4f39-beee-c14f4a51a28a.png",
+      "requestSha256": "ef6110bf7ef679cf7936eef5a1121eec8dc47f42935c32e628300eed46a3346b",
+      "outputSha256": "57eaff7fcb9e6f80d339304c621d48d665e5950ac911c7bc915e458a24e82e2d",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/south-west.png": "11d061d9b73abd6b6d3b4dd819d24acc5693a66ba99938c73fea70678408732f"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-source.png",
+      "originalPath": "/workspace/generated_images/exec-3c61764f-82bc-4e67-8cc3-8ad438952b7e.png",
+      "requestSha256": "e6e1de59556d979107c450b3a4f9edb5e8ee2cb7e8c56883a07276c87c247a7a",
+      "outputSha256": "960718ecb430403560a8c2f216f7c4e3227dc75e509c5900e36b83f31fc18dd3",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/west.png": "0d8ce6ca549b7f74fd0d00f1246f2e536a4a30dc3832b0f8bb5d43469d9e142b"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-source.png",
+      "originalPath": "/workspace/generated_images/exec-1d3e136b-9bcd-4840-b512-b4293e01da51.png",
+      "requestSha256": "da5ffbf00664974634f5935936b0467c77e36f03b407899bd626505140e4c98d",
+      "outputSha256": "b82eb48d6acca75ea2eff47c3defb86c046b50ff53980cbd9bebd0aba2e4ff68",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/north-west.png": "be076db647d148839fa5ae30fb0c3e58f8eabd5846dbdbcf64465e99aba640bc"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-source.png",
+      "originalPath": "/workspace/generated_images/exec-360a6684-4cb6-4aac-b018-0c47cbf997a8.png",
+      "requestSha256": "41b598c507673ae4f0bc92367a09fce859abb62b5e5ffde4062a2b96095587e7",
+      "outputSha256": "3a84cd25a217b9ce207ae0cccdd3770b1ad64eee9ae60440b6f32b218b726709",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/north.png": "41a53b2fe6bb6757357cc6306e4e3c104983e6e843254012b20a4656a0c66c0e"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-source.png",
+      "originalPath": "/workspace/generated_images/exec-d85c1840-1003-4bdd-a020-b6a46db68dc1.png",
+      "requestSha256": "f3d69721e061cb00dbea18b914f54ef2bb53f9ed0c1b5f8c8900d2f3f013df1e",
+      "outputSha256": "b922197512d771c0a3f1e41c18b0580149e5e9cf751305c8cde540dd500454fd",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/north-east.png": "371ade5df84f838e93bfc0d1fecaecc3a8c7a6cc993e7ccd87c992ee9efc63c3"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-source.png",
+      "originalPath": "/workspace/generated_images/exec-0d5a53ee-1684-4c19-80ee-ebbbdc2b88ba.png",
+      "requestSha256": "936bda87124d99066d7d5a2456319f760432beb190843a5280962c59a818142b",
+      "outputSha256": "8db41c12a047084b8cf876cf4867ed5c2fcda58c68214864bf6bc1f333508709",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/east.png": "f029b5aa71ac5a6fb292d9e2c1ad1b06bcf9373fea43a83d4a099ef1d0910910"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-source.png",
+      "originalPath": "/workspace/generated_images/exec-388211d2-43a8-4af4-a799-f692046f00f2.png",
+      "requestSha256": "2fbe4cfe57ab7c80aed4f176c8321198b1c3cfda3fd9f9a94ce058fedd6b7f84",
+      "outputSha256": "faccb5397dbf06946da5aa503715de2e591837d45e3dfd62abf16efff56987cc",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/guides/south-east.png": "686f41d4fd92a2fd0c084600727f1ec1cfffad98e9ea1dede025067bc55fda24"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-source.png",
+      "originalPath": "/workspace/generated_images/exec-dd25ccce-52f2-48c3-b650-c7346a75eb4a.png",
+      "requestSha256": "efb3ba50c2da2970fb8f1b0fcfb1084389da985042daf2e6457aea60935252aa",
+      "outputSha256": "b3b9b8e0228145b99612085d60a06a9d92fe2cdb4c37828b5485bf8703f73736",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/candidate-1.png": "70e1f5b7aa54ebd48a585298cb740760e12e415b56bda3d00899a2ffb490557a"
+      }
+    },
+    {
+      "request": "north-pauldron-correction-request.json",
+      "output": "directional/north-corrected-source.png",
+      "originalPath": "/workspace/generated_images/exec-0a023085-02ec-489b-afcd-c1941047faa0.png",
+      "requestSha256": "fa26accc7a5463b38b02260e485dbedd7adda3561c31045929b2f60289ecd444",
+      "outputSha256": "945e2a05dd9bb0ea6c419a56a5b9d914d2d3ae4c79d9602e4d376f1ab8febe63",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/north-source.png": "3a84cd25a217b9ce207ae0cccdd3770b1ad64eee9ae60440b6f32b218b726709"
+      }
     }
-  ]
+  ],
+  "priorAppearanceCalls": 2,
+  "completionImageToolCalls": 10
 }

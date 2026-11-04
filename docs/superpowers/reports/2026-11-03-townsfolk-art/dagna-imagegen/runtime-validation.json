@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "directions": 8,
+  "nativeFrameSlots": 144,
+  "playback": "10 idle /6 walk /10 talk",
+  "portraits": 6,
+  "barkStopResume": "PASS",
+  "nativeScale": 0.5,
+  "packMode": "review",
+  "commands": [
+    "dotnet run tools/tactics-assets/imagegen/townsfolk/dagna-holt/verify-runtime.cs -- /workspace/artifacts/issue80-dagna-review"
+  ],
+  "presentationTests": 140,
+  "presentationFailures": 0,
+  "hostBuild": {
+    "configuration": "Debug",
+    "warnings": 0,
+    "errors": 0
+  }
+}

@@ -558,3 +558,37 @@ Appearance/full-set/TV artwork gates remain pending. Report:
 `docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-voice-recast/report.md`.
 Reuse these recordings; do not regenerate the approved voice. No PR or merge;
 rebase before pushing townsfolk-art. Earlier blocked voice notes are historical.
+
+## Current checkpoint — Dagna completed review with approved voice
+
+The owner authorized finishing her existing appearance (“ok, finish those please”).
+Eight real idle/walk/talk directions,144 native cells, six40×40 portraits and a
+19.6-second voiced review are ready for **finished-set/TV approval before art
+installation**. Her66-line veteran voice recast remains approved and installed;
+the reel reuses its town bark, with no new speech generation. No appearance
+reapproval or concept regeneration is needed.
+
+Atlas1728×768 /5.0625 MiB,96×96 frames, anchor[48,84], scale0.5, adult72/36.
+Binary alpha/shared96-colour palette, fixed transform per direction, no mirroring
+or per-frame recentering. Straight-back pauldron corrected to anatomical right;
+use final rotations and north-corrected-source, not the superseded north guide.
+All144 source cells selected; native bounds/motion/foot checks and six portraits
+pass. Ten completion image calls plus two prior appearance calls; zero PixelLab
+calls/spend/purchases. Requests/raw outputs/input hashes/normalized frames retained.
+
+Typed import/portrait/bark stop-resume and140 focused presentation tests pass;
+TV host Debug build0 warnings/errors. Final review four-party texture peaks
+**325.77 MiB Ashen /192.37 MiB Cinder**, below512; native uploads/releases and
+all-four race replacement/restoration pass. Production unchanged:207,000,224 bytes /
+4,915 files; inventory hash544cebc50f4f92407ee35be5e2e7fb12fec42f45dbde3addfb7202fafd5addb8.
+No rules, balance or phone changes. Guarded installer refuses pending full-set
+approval before writing production.19 review hashes and native TV shot are bound
+in sprite-approval.json; offline exact rebuild verified.
+
+Review/video/voice: tools/tactics-assets/imagegen/townsfolk/dagna-holt/.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-imagegen/report.md.
+Next: owner finished-set/TV approval, exact installation, production checks.
+Reuse all completed assets/voice. Rebase before pushing townsfolk-art; no PR, merge
+or issue closure. Earlier pending-appearance and blocked-voice notes are historical.
+
+After Dagna's art approval and installation, the next approved named concept in the queue is Lady Celandine Marrowby (character_celandine_marrowby). Reuse her existing approved concept and include her existing recorded voice with the appearance draft. The owner asked who follows Dagna; no Celandine artwork has been generated in this checkpoint.
