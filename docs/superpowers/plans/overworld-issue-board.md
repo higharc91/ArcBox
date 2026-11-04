@@ -15,6 +15,7 @@ Issue #76 is being implemented on `stability-and-tooling`, cut from that main co
 |---|---|---|
 | `main` | Overworld, characters, environmental tiles, shops, recovery, NPCs and quests | Integrated through PR #75 |
 | `stability-and-tooling` | Issue #76 stability and tooling fixes | In progress |
+| `tv-drawing-polish` | Issue #78: OW-08, OW-12, OW-14, OW-21 and the wall-plug seam (OW-23) | Pushed for review, no PR yet |
 | `environmental-tiles`, `shops-and-gold`, `rest-and-recovery`, `feat/creature-overworld-integration`, `npcs-and-quests` | Earlier feature work | Integrated into main |
 | `overworld-issue-board`, `ccr-18ad4510-q68nad` | Historical review/session branches | Use current main and the issue branch for new work |
 
@@ -64,9 +65,12 @@ It was the screenshots. With `ARCBOX_SHOTS=0` no frame was over 16 ms. See the r
 People have stable IDs, optional lore identities and flag gates, round-tripped through the painting workspace. Goblin warriors leave after a won force or parley ending; Mother Skarrow leaves only after force. A failed attempt keeps them present. Departures fade over 0.35 seconds; arrivals wait off-screen or behind the party. Existing story flags remain unchanged.
 **Validation:** 6,048 .NET tests and 497 web tests pass; two actual Godot exports are byte-identical. Integrated on `npcs-and-quests` for issue #73.
 
-### OW-08 · The ford's bridge planks end in a straight cut · `todo`
+### OW-08 · The ford's bridge planks end in a straight cut · `done`, issue #78
 In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop in a vertical line, and a unit behind them is cut off with it. It's there without the new characters too. Probably a sorting or block-edge clip, or the bridge sprite against the stamp's edge. Add the case to `OverlayPictureTests`.
 **Done when:** the crossing reads as a whole structure from every side, with no clipped units.
+**What it was:** neither a block nor a stamp edge. `bridge_timber.png` is 192×128 for a 96×64 prop, and the painter took a sprite's size in texels as its source, so it drew the top-left quarter at twice the size, cut off straight down and across, and that quarter went over the unit beside it. Drawn whole, the deck then sorted on its own tile and went over anyone on the tiles it spans.
+**Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
+**Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
 ### OW-09 · The ford's ground looks soft and blotchy · `needs user`
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
@@ -81,9 +85,11 @@ World inputs, timers and reconnect/resume operations now roll back failed action
 
 Review follow-up: the recovery block itself is protected. If it fails, a direct minimal save clears all active cursors and moves the preserved party to the region start before callbacks or timer work. Two `EnterWorld` failure cases reproduce the original escape, then verify reopening/walking and phone/TV notices even with a throwing log sink. All 31 focused world/battle-fault checks pass, followed by all 638 gameplay and 411 server tests; the solution rebuild has zero warnings/errors.
 
-### OW-12 · World open stalls the main thread · `todo`
+### OW-12 · World open stalls the main thread · `done`, issue #78
 `FinishBuild` (`WorldCanvas.cs:~527`) runs `WorldFauna`'s constructor: about 440 ms in Debug by reading and timing. `FaunaRange.Pen` can be up to 18^4 rectangles. The title card hides it.
 **Done when:** the main-thread part of opening is under a frame's budget.
+**Fixed (`48589e34`):** `FaunaRange.Pen` keeps its rule but reads each side of a rectangle from running counts, four lookups each. The herd (`WorldHerd`), the ambient plan, the prop fade and the world's nodes (blocks, the overlay canvas, the ambient layer, made out of the tree) are built with the plan on the build thread, and the main thread only adds them. The animals' sheets, the ambient images and the animal calls' sounds load with the textures, within their 8 ms budget.
+**Measured** with `--world-demo --perf` on the cloud worker (Debug, lavapipe, one run each), as the new `WORLD open on the main thread` line: Ashen Ford **1,112.7 ms → 9.0 ms** (988 ms of it was the fauna); Cinder Hollow's demo, which opens the ford and then the cave, **1,094.9 and 15.9 ms → 11.2 and 1.1 ms**. The worst frame in the `PERF` window that holds the open went from 1,210 ms to 56 ms, about a lavapipe frame. **Proved by** `FaunaTests` (the pens are the same as counting tile by tile, on random fences and the ford's own; a field of fences is quick). Not measured on the RTX 5080.
 
 ### OW-13 · Explore view is too big for one packet · `done`, issue #77
 The whole TV view in Ashen Ford is about 4.3 KB, against one packet's 1,420 bytes, and it went out on every step. The TV now asks for **host view patches** (`HostViewPatch` in `ArcBox.Sdk.Protocol`). After a whole view on bind, a new game or a resend, it gets only what changed; arrays of things patch by id.
@@ -109,8 +115,9 @@ No game code changed: the TV's scenes still get whole views.
 
 None of the runs asked for a whole view again. Battles rarely patch: their views have no id-keyed arrays, so the whole view is usually as small, and it's sent whole.
 
-### OW-14 · Fauna draws over props · `todo`
+### OW-14 · Fauna draws over props · `done`, issue #78
 Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or keep them clear.
+**Fixed (`48589e34`):** `WorldHerd` gives the animals to the frame as units, sorted in with the people and walkers, so the overlay paints what stands in front of one over it. `Behind` is gone, so an animal may now go behind a prop. A figure walking along one axis could round into the next tile's slot (`UnitPlace.Over`), and that's fixed too. **Proved by** `OverlayPictureTests` (a goat behind a haystack is hidden by it from three sides, one in front is over it, both true painter's order), `FaunaTests` (the ford's herd wanders the same way twice and keeps to its ground) and the [farm](../reports/tv-drawing-polish/ow14-farm-animals-after.png).
 
 ## P2: tests, tools and tidying
 
@@ -120,8 +127,9 @@ Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or kee
 - **OW-18 · REDLINE e2e · `blocked`:** needs Playwright. The user said not now.
 - **OW-19 · Second hardware check · `todo`:** `local-hardware-check-2.md` hasn't run. `ARCBOX_RESTART=kill` and forced `ARCBOX_DROP_SIGNALS` have no confirmed pass.
 - **OW-20 · Stale docs · `done`:** cloud handoff §3, §5, §8 items 6, 9, 10. `2026-11-01-ashen-ford-handoff.md`. Report `2026-11-02-tactics-overworld.md` lines 28, 42, 107, 223, 233, 292. `environmental-tiles/README.md` and milestones B and C. `tools/tactics-world/README.md:176`. `docs/tv-host.md:353` (197 buildings now). The world dressing plan's `TallProps.cs`, which wasn't kept. `local-hardware-check-2.md:33`. The creature branch's `overworld-art-review` README "Current integration boundary". The named entries are updated, `PropFade` replaces obsolete `TallProps` references, and the painting guide documents `--edit-props`. See the stability report for verification.
-- **OW-21 · Ambient · `todo`:** birds, leaves, embers and motes aren't built. The chimney path in `AmbientPlan.cs` matches no prop, so it's dead code. The new `river_steam` art is unused.
+- **OW-21 · Ambient · `done`, issue #78:** birds, leaves, embers and motes weren't built, the chimney path in `AmbientPlan.cs` matched no prop, and the new `river_steam` art was unused. Now (`5eaad666`, wired in `48589e34`) leaves fall from leafy trees in their own colours, embers rise from campfires and torches, motes hang in lamplight at dusk, a bird or a flock crosses the sky now and then (crows at dusk), and the ford's river steams with `river_steam`. All of it is ambient-manifest art, chosen once by hash. The chimney path is gone, since the town kit's buildings smoke for themselves. **Proved by** `AmbientPlanTests` and shots of the [camp](../reports/tv-drawing-polish/ow21-ambient-camp-before-after.png), [river](../reports/tv-drawing-polish/ow21-ambient-river-before-after.png) and [trees](../reports/tv-drawing-polish/ow21-ambient-trees-before-after.png). **Frame time** on lavapipe (Debug, no shots, same machine, before and after): the ford's crossing had a median of 55.6 and 53.3 ms, with render CPU 1.29 both times; a town walk had a median of 96.5 and 97.8 ms, with render CPU 1.74 and 1.82. Lavapipe can't show 16 ms, so the RTX 5080 is still the check (OW-19). The `river_steam` mist is faint by design (alpha at most 60 of 255), so it's drawn at full strength.
 - **OW-22 · Place shots · `todo`:** replace `place-*.png` from a real walk after OW-09.
+- **OW-23 · Wall-plug seam · `done`, issue #78:** an unfound hidden path left a notch in its hedge, and a secret door left a faint seam (interactables design §7.8). There were two causes. The overlay painted the open tile's own top back over the plug's sides, and the plug wasn't graded as the world is. The earlier `world: true` changed nothing visible because the notch hid it. Fixed in `59586ff5`. **Proved by** `WallPlugsTests` (a plugged tile against its neighbour, for both) and the [path](../reports/tv-drawing-polish/plug-hedge-path-before-after.png) and [door](../reports/tv-drawing-polish/plug-secret-door-before-after.png) shots.
 
 ## P2: features under way
 
