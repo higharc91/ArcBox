@@ -109,9 +109,10 @@ public sealed class AmbientManifest
 }
 
 /// <summary>
-/// A small pure scheduler that picks ambient life on screen from the terrain and materials near the camera: a few butterflies over grass, or at dusk fireflies over the fields, fish
-/// jumping in deep water, chimney smoke rising from hearths, and steam off warm water. What's where is settled once, by hash, so a frame only asks what's in view.
-/// Pure and seeded per region: runs on the TV only, bounded strictly to the camera view.
+/// A small pure scheduler that picks ambient life on screen from the terrain, materials and props near the camera: a few butterflies over grass, or at dusk fireflies over the
+/// fields, fish jumping in deep water, the river's own steam off warm water, leaves falling from trees, embers over fires, motes in a lamp's light and now and then a bird or a
+/// flock across the sky. What's where is settled once, by hash, so a frame only asks what's in view. Chimney smoke isn't here: the town kit's buildings carry their own
+/// (<see cref="BuildingPlan"/>), sorted with the roof it rises from. Pure and seeded per region: runs on the TV only, bounded strictly to the camera view.
 /// </summary>
 public sealed class AmbientPlan
 {
@@ -121,16 +122,24 @@ public sealed class AmbientPlan
     private const int FishEvery = 10;           // of the deep water tiles
     private const int SteamEvery = 2;           // of the water tiles over the ember; it thins away from there
     private const float SteamReach = 34;        // tiles from the stamp's water by which it's down to almost nothing
-    private const float SteamAlpha = 0.5f;
+    private const float SteamAlpha = 0.5f;      // the smoke strip's steam, which is a plume; the river's own art is a faint mist already, drawn whole
     private const float FireflyAlpha = 0.7f;
+    private const int LeafEvery = 2;            // of the leafy trees
+    private const int MotesEvery = 2;           // of the lamps, lit at dusk
+    private const float MotesAlpha = 0.55f;
+    private const double BirdEvery = 26;        // seconds between birds across the sky
+    private const float LeafDrop = 44;          // px a leaf falls, from the canopy to about the ground
 
-    private readonly record struct Spot(Tile Tile, Vector2 Base, int Hash);
+    private readonly record struct Spot(Tile Tile, Vector2 Base, int Hash, string Variant = "");
 
     private readonly AmbientManifest? _manifest;
     private readonly ImmutableArray<Spot> _flitting;
     private readonly ImmutableArray<Spot> _fish;
     private readonly ImmutableArray<Spot> _steam;
-    private readonly ImmutableArray<Spot> _chimneys;
+    private readonly ImmutableArray<Spot> _leaves;
+    private readonly ImmutableArray<Spot> _embers;
+    private readonly ImmutableArray<Spot> _motes;
+    private readonly int _seed;
     private readonly bool _dusk;
 
     /// <param name="terrain">The ground.</param>
@@ -142,6 +151,7 @@ public sealed class AmbientPlan
     {
         _manifest = manifest;
         _dusk = dusk;
+        _seed = seed;
 
         Spot At(Tile tile, int salt) => new(tile, BoardProjection.Corner(tile.X, tile.Y, map[tile].Height) + new Vector2(16, 8), Hash(seed, tile.X, tile.Y, salt));
         var warm = map.StampedTiles.Where(t => (map[t].Flags & TileFlags.Water) != 0).ToArray();
@@ -175,14 +185,59 @@ public sealed class AmbientPlan
             }
         }
         (_flitting, _fish, _steam) = (flitting.ToImmutable(), fish.ToImmutable(), steam.ToImmutable());
-        _chimneys = [.. map.Props.Where(p => p.Id.Contains("chimney", StringComparison.OrdinalIgnoreCase)).Select(p => At(p.At, 4))];
+
+        // What props give: leaves from a leafy tree, in its own colours; embers over a fire; motes in a lamp's light once it's lit.
+        var props = map.Props.Where(p => map.InBounds(p.At)).ToArray();
+        _leaves = [.. props.Where(p => p.Id is "tree" or "tree_fruit" or "swamp_tree").Select(p => At(p.At, 5) with { Variant = LeafOf(p.Variant) })
+            .Where(s => s.Hash % LeafEvery == 0)];
+        _embers = [.. props.Where(p => p.Id is "campfire" or "brazier" or "torch" or "bonfire").Select(p => At(p.At, 6))];
+        _motes = dusk ? [.. props.Where(p => p.Id.StartsWith("lamp", StringComparison.Ordinal) || p.Id.StartsWith("lantern", StringComparison.Ordinal)).Select(p => At(p.At, 7))
+            .Where(s => s.Hash % MotesEvery == 0)] : [];
     }
+
+    /// <summary>The leaf colour that falls from a tree of <paramref name="variant"/>: the ambient manifest has green, autumn, red and blossom.</summary>
+    private static string LeafOf(string? variant) => variant switch
+    {
+        "green" or "light" or "cypress" => "green",
+        "red" => "red",
+        "blossom" or "apple" => "blossom",
+        _ => "autumn",
+    };
 
     /// <summary>How many steam plumes it has, for tests.</summary>
     public int SteamCount => _steam.Length;
 
     /// <summary>How many butterflies or fireflies it has, for tests.</summary>
     public int FlittingCount => _flitting.Length;
+
+    /// <summary>How many trees drop leaves, fires throw embers and lamps hold motes, for tests.</summary>
+    public (int Leaves, int Embers, int Motes) PropLife => (_leaves.Length, _embers.Length, _motes.Length);
+
+    /// <summary>Every image <see cref="ActiveAt"/> can draw, relative to the ambient folder, once each: the TV reads them as the world opens, not as they first show.</summary>
+    public ImmutableArray<string> Paths
+    {
+        get
+        {
+            if (_manifest is null)
+                return [];
+            IEnumerable<string> Of(string asset, IEnumerable<string>? variants = null)
+                => _manifest.Assets.TryGetValue(asset, out var a) ? (variants ?? a.Variants.Keys).Select(v => a.Variants.GetValueOrDefault(v, "")) : [];
+            return [.. new[]
+            {
+                _flitting.IsEmpty ? [] : Of(_dusk ? "fireflies" : "butterfly", _dusk ? ["gold"] : null),
+                _fish.IsEmpty ? [] : Of("fish"),
+                _steam.IsEmpty ? [] : _manifest.Assets.ContainsKey("river_steam") ? Of("river_steam") : Of("chimney_smoke", ["steam"]),
+                Of("leaf", _leaves.Select(l => l.Variant).Distinct()),
+                _embers.IsEmpty ? [] : Of("embers"),
+                _motes.IsEmpty ? [] : Of("motes", ["sun"]),
+                Of("bird", [BirdVariant]),
+                Of("flock", [BirdVariant]),
+            }.SelectMany(p => p).Where(p => p.Length > 0).Distinct(StringComparer.Ordinal)];
+        }
+    }
+
+    /// <summary>Crows over the ashen ford's dusk, swallows by day.</summary>
+    private string BirdVariant => _dusk ? "crow" : "swallow";
 
     /// <summary>The ambient creatures and particles active within <paramref name="view"/> at <paramref name="clock"/> seconds.</summary>
     public ImmutableArray<AmbientItem> ActiveAt(double clock, ArtArea view)
@@ -200,7 +255,7 @@ public sealed class AmbientPlan
         var flitter = _dusk ? "fireflies" : "butterfly";
         if (_manifest.Assets.TryGetValue(flitter, out var flitterAsset))
         {
-            foreach (var (tile, spot, h) in _flitting)
+            foreach (var (tile, spot, h, _) in _flitting)
             {
                 if (!InView(spot, 32))
                 {
@@ -224,7 +279,7 @@ public sealed class AmbientPlan
         // 2. Fish jumping in deep water
         if (_manifest.Assets.TryGetValue("fish", out var fishAsset))
         {
-            foreach (var (tile, spot, h) in _fish)
+            foreach (var (tile, spot, h, _) in _fish)
             {
                 if (!InView(spot, 16))
                 {
@@ -246,30 +301,83 @@ public sealed class AmbientPlan
             }
         }
 
-        // 3. Chimney smoke, and steam off the water, each on its own beat.
-        if (_manifest.Assets.TryGetValue("chimney_smoke", out var smokeAsset))
+        // 3. The river's steam (the lore has it steam at the ford), each plume on its own beat: its own art, or failing that the smoke strip's steam.
+        var (steamAsset, steamKind, steamVariant) = _manifest.Assets.TryGetValue("river_steam", out var river) ? (river, "river_steam", river.DefaultVariant is { Length: > 0 } d ? d : "mist")
+            : _manifest.Assets.TryGetValue("chimney_smoke", out var smoke) && smoke.Variants.ContainsKey("steam") ? (smoke, "chimney_smoke", "steam") : (null, "", "");
+        if (steamAsset is not null)
         {
-            foreach (var (tile, spot, h) in _chimneys)
+            foreach (var (tile, spot, h, _) in _steam)
             {
-                if (InView(spot, 32))
-                    result.Add(Smoke(smokeAsset, smokeAsset.DefaultVariant, tile, spot + new Vector2(0, -8), (int)(clock * smokeAsset.Fps) + h, 1));
+                if (InView(spot, 48))
+                    result.Add(Strip(steamAsset, steamKind, steamVariant, tile, spot, (int)(clock * steamAsset.Fps) + h, steamKind == "river_steam" ? 1 : SteamAlpha, (h & 2) == 0));
             }
-            if (smokeAsset.Variants.ContainsKey("steam"))
+        }
+
+        // 4. Leaves falling from trees, one at a time each, from the canopy to about the ground, drifting as they go.
+        if (_manifest.Assets.TryGetValue("leaf", out var leaf))
+        {
+            foreach (var (tile, spot, h, variant) in _leaves)
             {
-                foreach (var (tile, spot, h) in _steam)
-                {
-                    if (InView(spot, 48))
-                        result.Add(Smoke(smokeAsset, "steam", tile, spot, (int)(clock * smokeAsset.Fps) + h, SteamAlpha));
-                }
+                if (!InView(spot, 64))
+                    continue;
+                var period = 6.0 + h % 5;
+                var falling = (clock + h % 997 * 0.013) % period;
+                var fall = LeafDrop / MathF.Max(1, leaf.Vy);
+                if (falling >= fall)
+                    continue;
+                var t = (float)falling;
+                var start = spot + new Vector2(h % 17 - 8, -LeafDrop - 6);
+                var at = start + new Vector2(leaf.Vx * t + MathF.Sin(t * 2.2f + h % 7) * 7, leaf.Vy * t);
+                var alpha = Math.Clamp((fall - t) / 0.6f, 0, 1);
+                result.Add(Strip(leaf, "leaf", variant, tile, at, (int)(clock * leaf.Fps) + h, alpha, (h & 1) == 0));
+            }
+        }
+
+        // 5. Embers off a fire, which glow by themselves.
+        if (_manifest.Assets.TryGetValue("embers", out var embers))
+        {
+            foreach (var (tile, spot, h, _) in _embers)
+            {
+                if (InView(spot, 48))
+                    result.Add(Strip(embers, "embers", embers.DefaultVariant is { Length: > 0 } v ? v : "fire", tile, spot + new Vector2(0, -4), (int)(clock * embers.Fps) + h, 1, false));
+            }
+        }
+
+        // 6. Motes in the light of a lamp at dusk.
+        if (_manifest.Assets.TryGetValue("motes", out var motes))
+        {
+            foreach (var (tile, spot, h, _) in _motes)
+            {
+                if (InView(spot, 48))
+                    result.Add(Strip(motes, "motes", "sun", tile, spot + new Vector2(0, -26), (int)(clock * motes.Fps) + h, MotesAlpha, (h & 1) == 0));
+            }
+        }
+
+        // 7. Now and then a bird, or a flock, across the sky: high on the screen, wherever the camera is, as what's that high doesn't move with the ground.
+        var beat = (long)Math.Floor(clock / BirdEvery);
+        var birdHash = Hash(_seed, (int)beat, 0, 8);
+        var flies = (birdHash & 1) == 0 ? "bird" : "flock";
+        if (_manifest.Assets.TryGetValue(flies, out var bird))
+        {
+            var speed = MathF.Max(8, MathF.Abs(bird.Vx));
+            var across = view.Max.X - view.Min.X + 2 * bird.FrameWidth;
+            var flown = (float)(clock - beat * BirdEvery) * speed;
+            if (flown < across)
+            {
+                var leftward = (birdHash & 2) != 0;
+                var height = view.Min.Y + (view.Max.Y - view.Min.Y) * (0.08f + birdHash % 100 / 100f * 0.3f) + bird.Vy * flown / speed;
+                var x = leftward ? view.Max.X + bird.FrameWidth - flown : view.Min.X - bird.FrameWidth + flown;
+                var sway = MathF.Sin(flown / speed * 1.5f) * 2;
+                result.Add(Strip(bird, flies, BirdVariant, default, new Vector2(x, height + sway), (int)(clock * bird.Fps), 1, leftward));
             }
         }
 
         return [.. result];
     }
 
-    private static AmbientItem Smoke(AmbientAsset asset, string variant, Tile tile, Vector2 at, int frame, float alpha)
-        => new("chimney_smoke", variant, asset.Variants.GetValueOrDefault(variant, ""), tile, at, frame % asset.Frames, asset.Frames,
-            new Vector2(asset.FrameWidth, asset.FrameHeight), new Vector2(asset.AnchorX, asset.AnchorY), false, BoardOrder.Key(tile, BoardLayer.Over), alpha);
+    private static AmbientItem Strip(AmbientAsset asset, string kind, string variant, Tile tile, Vector2 at, int frame, float alpha, bool mirror)
+        => new(kind, variant, asset.Variants.GetValueOrDefault(variant, ""), tile, at, frame % asset.Frames, asset.Frames,
+            new Vector2(asset.FrameWidth, asset.FrameHeight), new Vector2(asset.AnchorX, asset.AnchorY), mirror, BoardOrder.Key(tile, BoardLayer.Over), alpha, asset.Blend == "add");
 
     private static string Pick(AmbientAsset asset, int hash)
     {
