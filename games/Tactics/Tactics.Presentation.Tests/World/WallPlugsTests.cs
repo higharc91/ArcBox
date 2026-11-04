@@ -52,6 +52,51 @@ public sealed class WallPlugsTests
         Assert.Contains(items.OfType<LitFace>(), f => f.Face.Kind == FaceKind.Side && f.Face.Facing == Facing.V);
     }
 
+    /// <summary>The hidden path's plug in the courtyard's hedge, one step high (design §7.8), and the secret door's in its wall of rock.</summary>
+    public static TheoryData<string> Plugged => ["path", "secret"];
+
+    private static WallPlug PlugOf(string which) => which == "secret"
+        ? Gap
+        : ThingsDemo.Steps().First(s => s.Label.StartsWith("path", StringComparison.Ordinal)).View.Explore!.Plugs!.Value.First(p => p.At != Gap.At);
+
+    /// <summary>
+    /// The picture of a plugged tile against the wall tile beside it (design §7.8's seam): every pixel of the plug's tile is the plug's, as the world draws, the
+    /// open ground the region has there is never painted back over it, and its top is the colour of its neighbour's, in the world's grade.
+    /// </summary>
+    [Theory]
+    [MemberData(nameof(Plugged))]
+    public void A_plugged_tile_is_drawn_like_the_wall_beside_it(string which)
+    {
+        var plug = PlugOf(which);
+        var plan = Plan.Value;
+        var items = WallPlugs.Items(plan, Pack.Art, [plug]);
+
+        // Nothing of the open tile goes back over the plug: its top, later in the order than the plug's sides, did, and showed as a notch.
+        var over = plan.Overlay([], extra: items);
+        var onTile = over.Select(at => plan.Blocks[at.Block].Lit.Items[at.Item]).OfType<LitFace>().Where(f => f.Face.Tile == plug.At).ToArray();
+        Assert.True(onTile.Length == 0, $"{onTile.Length} of the open tile's faces painted over the plug: {string.Join(", ", onTile.Select(f => f.Face.Kind))}");
+
+        // The plug's front faces are the wall's: the same art, lip and depth as its neighbour along the run.
+        var neighbour = plug.Facing is "se" or "nw" ? plug.At with { Y = plug.At.Y + 1 } : plug.At with { X = plug.At.X + 1 };
+        if (Ground.Value.Map[neighbour].Height != WallPlugs.WallFor(Ground.Value.Map, plug).Height)
+            neighbour = plug.Facing is "se" or "nw" ? plug.At with { Y = plug.At.Y - 1 } : plug.At with { X = plug.At.X - 1 };
+        var world = plan.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Face.Tile == neighbour).ToArray();
+        foreach (var kind in new[] { FaceKind.Top, FaceKind.Side, FaceKind.Lip })
+        {
+            var (mine, theirs) = (items.OfType<LitFace>().Where(f => f.Face.Kind == kind && f.Face.Facing != Facing.U).ToArray(), world.Where(f => f.Face.Kind == kind && f.Face.Facing != Facing.U).ToArray());
+            Assert.Equal(theirs.Select(f => f.Face.Image?.Path).Distinct(), mine.Select(f => f.Face.Image?.Path).Distinct());
+            if (theirs.Length == 0)
+                continue;     // rock has no lip
+            Assert.Equal(theirs.Sum(f => BoardPlan.Bounds(f.Face).Max.Y - BoardPlan.Bounds(f.Face).Min.Y), mine.Sum(f => BoardPlan.Bounds(f.Face).Max.Y - BoardPlan.Bounds(f.Face).Min.Y), 0.01);
+            // In the world's grade and drift: the plug took neither, and stood out lighter than the wall it's in.
+            for (var corner = 0; corner < 4; corner++)
+            {
+                var (a, b) = (mine.First().Face.TintAt(corner), theirs.First().Face.TintAt(corner));
+                Assert.True(Math.Abs(a.R - b.R) < 0.04f && Math.Abs(a.G - b.G) < 0.04f && Math.Abs(a.B - b.B) < 0.04f, $"{kind} corner {corner}: {a} against the wall's {b}");
+            }
+        }
+    }
+
     [Fact]
     public void No_plugs_or_plugs_off_the_map_draw_nothing()
     {

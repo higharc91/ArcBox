@@ -604,10 +604,12 @@ walk fixtures gained `search`, and `check-search`/`check-search-rolled` were add
 ### 7.8 Not done
 
 - **StoryOrder** (the export's replay) walks hidden paths as open, as it does doors (§5 "Not checked yet").
-- **The plug of a low wall** (a hedge one step high) doesn't quite hide the gap on the TV: the flat tile under it still shows as a lighter
-  notch without the hedge's front face (the shots of `--world-demo=things`, `path-0-unfound`). A secret door's plug in a tall wall shows a
-  faint seam too. It's the plug renderer's (`WallPlugs`): building the plug as a world block (grading, decals) didn't change it, so the cause
-  is deeper (likely how the plug's block is ordered against the world's own tile); left for a TV pass.
+- **The plug of a low wall** (a hedge one step high) showed a lighter notch without the hedge's front face, and a secret door's plug in a
+  tall wall a faint seam. Fixed in issue #78, and both causes were needed: the frame's overlay painted the open tile's own top, later in the
+  painter's order than the plug's sides, back over them (`WorldPlan.Overlay` now never repaints a plugged tile's own ground), and the plug
+  wasn't built as the world is (`world: true`: the region's grade and drift), so its faces were lighter than the wall's. With only the second
+  fixed, the notch hid the change, which is why the earlier attempt seemed to do nothing. `WallPlugsTests` holds a plugged tile against its
+  neighbour for both; see the `--world-demo=things` shots `path-0-unfound` and `secret-0-unfound`.
 - **A search ignores unseen traps** on what it finds (the coordinator's review note 5), for the user to decide.
 - **Ashen Ford** has no hidden things yet; the demo region shows each (`--world-demo=things`: a fourth gallery of the notices and the path,
   then tracks that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found by Survival, and
