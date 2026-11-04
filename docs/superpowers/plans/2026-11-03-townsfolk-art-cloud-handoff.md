@@ -425,3 +425,11 @@ before pushing townsfolk-art; no merge, PR or issue closure.
 ## Current checkpoint — Corvin finished review
 
 The owner approved Corvin’s appearance: “OK, he looks good. Proceed”. The complete eight-direction idle/walk/talk review and six portraits are under `tools/tactics-assets/imagegen/townsfolk/corvin-ashby/`. Do not request appearance approval again. North was corrected to a true rear view; one drifting west talk pose is held. All 144 native slots pass frame/alpha/palette/foot checks and the typed game importer/bark check. The 13 bound review hashes survive an offline rebuild. Four-party review peaks 320.30 MiB Ashen / 192.37 MiB Cinder, below 512 MiB. Full-set/portrait/TV approval remains pending; guarded production integration is not yet authorized. Rules/balance/phone unchanged, zero PixelLab spend. Reuse the retained images and receipts; pull with rebase before pushing, no PR or merge. Report: `../reports/2026-11-03-townsfolk-art/corvin-imagegen/report.md`.
+
+## Owner preference — include existing voice samples in character drafts
+
+When presenting each character's appearance draft and completed review, include a
+playable sample of that character's existing recorded voice when available. Match
+clips to the character's actual bark/story IDs and text under `content/tactics/base/lore/`;
+reuse the recorded audio rather than regenerating it. If no recording is found,
+state that clearly. Corvin example: `lore/audio/bark_corvin_ashby_town_1.43f67d33.ogg`.

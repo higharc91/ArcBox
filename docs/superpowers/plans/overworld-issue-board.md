@@ -346,3 +346,5 @@ remaining portraits are ahead. See `reports/2026-11-03-townsfolk-art/corvin-imag
 ### Issue #80 — Corvin finished review
 
 Corvin appearance approved: “OK, he looks good. Proceed”. The full directional motion and six portraits are ready for separate finished-set/TV approval. Native frame and typed importer/bark checks pass; four-party review peaks 320.30 MiB Ashen / 192.37 MiB Cinder, below 512 MiB. No Corvin production installation, rules/balance/phone change or PixelLab spend. See `reports/2026-11-03-townsfolk-art/corvin-imagegen/report.md`.
+
+Owner preference: include a playable existing character voice sample with future character drafts and completed reviews; reuse the matching recorded bark/story audio.
