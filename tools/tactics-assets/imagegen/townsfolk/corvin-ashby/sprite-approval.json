@@ -1,6 +1,6 @@
 {
   "character": "Corvin Ashby",
-  "stage": "appearance_candidate_pending_owner_review",
+  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 1,
@@ -14,7 +14,7 @@
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "productionInstalled": false,
-  "animationApproval": "pending_appearance_approval",
+  "animationApproval": "authorized_generation_complete",
   "fullSetTvApproval": "pending",
   "reviewNotes": [
     "Approved concept reused; first pixel appearance pass only.",
@@ -24,5 +24,38 @@
     "No motions or portraits generated; retain appearance and finished-set/TV approval gates."
   ],
   "presetReference": "sage",
-  "characterId": "corvin_ashby"
+  "characterId": "corvin_ashby",
+  "ownerAppearanceApproval": {
+    "date": "2026-11-04",
+    "quote": "OK, he looks good. Proceed",
+    "source": "candidate-1.png"
+  },
+  "completedSet": {
+    "status": "pending_owner_full_set_and_tv_approval",
+    "nativeFrameSlots": 144,
+    "selectedSourceCells": 143,
+    "curatedHeldSlots": 1,
+    "portraits": 6,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": false,
+    "sha256": {
+      "review_corvin.png": "331b749b46377f66c7065164efb573d46cf5b3bccf53161ba47fa08a6b527818",
+      "review-sprite.json": "e5a4d051e9f4c5e2bebb956ea58431bdea03ecda41fd9c33d8fa41f89ad9f470",
+      "palette.json": "3cb6882489bc5160c9985d6e55690f48b8053ede649c3598d2ef58b7026a2d8c",
+      "atlas-validation.json": "e16104f66ad7cde138ae8f9dbb44d4416e2698e2e0cc0af261acd7938f4d9483",
+      "portraits-validation.json": "6289ce45df1d9753acbe79846d182fd7b71a3817ae4fcd688cec0fc260431789",
+      "corvin-eight-direction-idle.gif": "ea7de13d9de3e0a7da02c087aa53ae4a7be1f4b053dbffb4fc4d3e2623f40f0c",
+      "corvin-eight-direction-walk.gif": "800f445e0e024e4956defd61145038b6d22727793543339ae0c259c1df5f554e",
+      "corvin-eight-direction-talk.gif": "993606932bc0dc184d56e42b559d4625721b8e1460c07834e8cac6a2e711f418",
+      "corvin-portraits-review.png": "0a1c492968c3143316f53142345eb446f02c94c0c925c508ceaeece5d3e24dc9",
+      "corvin-directions-review.png": "6f2cfcc49d3edf0ab4138267df962c62d6f5a31ee714fbbc20f8b87b8cfeb102",
+      "corvin-finished-review.mp4": "9abdb576631b6c29a1e16adf0f860fc1d4003aeea86425566607eba3feaedd58",
+      "review-validation.json": "d4e28962bdcff9950481614ede783474854ff5c79e3bb691a1f56d8d7314553a",
+      "corvin-closeup-review.gif": "5dbf765a2a3f1e0dd7c502803604aee75cff2a29362a5ca2c880b8b80e09ef8f"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/corvin-imagegen/world-archive.png",
+      "sha256": "0f91120d506661d94a4fc72dcce47241cf9aaac24a9393fc59c34cce532aff99"
+    }
+  }
 }

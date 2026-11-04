@@ -1,26 +1,7 @@
-# Corvin Ashby — first pixel appearance review
+# Corvin Ashby — completed review set
 
-The owner approved Lark's finished set and requested the next character.
-Corvin is next in the approved named queue. His existing approved Scenario
-concept is reused; no new concept or completed character art is regenerated.
+The owner approved Corvin’s appearance: “OK, he looks good. Proceed”. His eight-direction idle/walk/talk set and six portrait moods are ready for finished-set and TV review. Production installation remains pending that separate approval.
 
-![Corvin first appearance candidate](candidate-1.png)
+[Finished review reel](corvin-finished-review.mp4) · [Walk](corvin-eight-direction-walk.gif) · [Talk](corvin-eight-direction-talk.gif) · [Portraits](corvin-portraits-review.png) · [Native TV](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/corvin-imagegen/world-archive.png)
 
-Requested compass order: south, southwest, west, northwest; north, northeast,
-east, southeast. Older lean working archivist, round wire spectacles, loose grey
-hair and short beard, worried humane face, patched scholar layers and bare
-ink-stained hands. Satchel and keys at anatomical right hip; notebooks and small
-ink bottle at anatomical left. Simple strap crosses from left shoulder to right
-satchel. No staff, hat, magic effects, armour or blacksmith tools.
-
-`appearance-request.json` preserves the exact image-tool request.
-`sprite-approval.json` records original generated path and input/output hashes.
-One image-tool appearance call, zero PixelLab calls/credits. No monetary
-image-tool price is inferred.
-
-**Appearance approval is pending.** The enlarged sheet is not a native atlas.
-Actual eight facings, equipment sides, logical grid, alpha, palette, body scale,
-anchors and ground contact need native import QA. Idle/walk/talk and six portraits
-come after appearance approval, with final full-set/TV approval before production.
-Nothing from Corvin is installed in the game. Rules, balance and phone contracts
-remain unchanged. Reuse all approved concepts and completed art.
+The atlas has 144 native slots, 96×96 frames, anchor [48,84], scale 0.5 and eight directions. A corrected north source shows the true back; a drifting west talk pose was replaced with a hold on the preceding pose. Source images, requests and receipts are retained. Native frame and typed game import/bark checks pass; the Ashen Ford four-party review gate passes. Zero PixelLab calls or credits. Rules, balance and phone contracts are unchanged.

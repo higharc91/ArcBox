@@ -421,3 +421,7 @@ remain ahead. No Corvin production content. Other21 sprite sets and remaining
 portraits are ahead. One appearance image-tool call, zero PixelLab calls/credits.
 Check live costs/balance before future paid work; never purchase credits. Rebase
 before pushing townsfolk-art; no merge, PR or issue closure.
+
+## Current checkpoint — Corvin finished review
+
+The owner approved Corvin’s appearance: “OK, he looks good. Proceed”. The complete eight-direction idle/walk/talk review and six portraits are under `tools/tactics-assets/imagegen/townsfolk/corvin-ashby/`. Do not request appearance approval again. North was corrected to a true rear view; one drifting west talk pose is held. All 144 native slots pass frame/alpha/palette/foot checks and the typed game importer/bark check. The 13 bound review hashes survive an offline rebuild. Four-party review peaks 320.30 MiB Ashen / 192.37 MiB Cinder, below 512 MiB. Full-set/portrait/TV approval remains pending; guarded production integration is not yet authorized. Rules/balance/phone unchanged, zero PixelLab spend. Reuse the retained images and receipts; pull with rebase before pushing, no PR or merge. Report: `../reports/2026-11-03-townsfolk-art/corvin-imagegen/report.md`.

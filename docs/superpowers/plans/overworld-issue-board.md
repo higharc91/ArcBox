@@ -342,3 +342,7 @@ Appearance approval is pending before motions/portraits; finished-set/TV approva
 remains a separate gate. No Corvin production change. One image-tool appearance
 call; zero PixelLab calls/credits for this continuation. Other21 sprite sets and
 remaining portraits are ahead. See `reports/2026-11-03-townsfolk-art/corvin-imagegen-trial.md`.
+
+### Issue #80 — Corvin finished review
+
+Corvin appearance approved: “OK, he looks good. Proceed”. The full directional motion and six portraits are ready for separate finished-set/TV approval. Native frame and typed importer/bark checks pass; four-party review peaks 320.30 MiB Ashen / 192.37 MiB Cinder, below 512 MiB. No Corvin production installation, rules/balance/phone change or PixelLab spend. See `reports/2026-11-03-townsfolk-art/corvin-imagegen/report.md`.
