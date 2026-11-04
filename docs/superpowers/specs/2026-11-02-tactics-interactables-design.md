@@ -343,7 +343,7 @@ existing icons as stand-ins (`standIn: true` in `injury_icons/manifest.json`) un
 ### 3.8 USER DECISION 8, decided 2026-11-03: a key ring
 
 Keys stay story flags (§1.2). `KeyRing.Of` reads back as keys the flags a lock names: called by the lock's `keyName` (else the pickup's
-name), found where the thing that set it is ("Ashen Ford" for a pickup, "the reeve's desk, Ashen Ford" for a container), and used once a lock
+name), found where the thing that set it is ("The Ashen Ford" for a pickup there, "the reeve's desk, The Ashen Ford" for a container), and used once a lock
 was opened with it. The **quest journal** lists them under the quests, for everyone, on the phones and the TV (`QuestLogView.Keys`), and the
 journal is offered once the party holds a key even in a region with no quests; the **portal's party section** lists them too (`keys`). Both
 fields are written only while the party holds a key, so every screen without one is byte for byte as before.

@@ -14,6 +14,10 @@
 #                                                                                   in and fight it again (with ARCBOX_RECONNECT=1,
 #                                                                                   ARCBOX_RESTART=1 or ARCBOX_DROP_SIGNALS=1 too)
 #   ARCBOX_SHOP=1 GODOT=… tools/tv-e2e.sh                                          the herbalist shop, real phone trades and a duplicate id
+#   ARCBOX_DECISIONS=1 GODOT=… tools/tv-e2e.sh                                     the owner's rule decisions (issue #83): a loot vote, a
+#                                                                                   trap's injury mended at camp, a lock retried after the
+#                                                                                   rest, the key ring and a haggle, on a copy of the pack
+#                                                                                   with one e2e strongbox in Ashen Ford
 #   ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley|skip-assault GODOT=… tools/tv-e2e.sh all of Chapter 1 from a fresh campaign, on a branch
 #                                                                                   (with ARCBOX_RESTART=1 and ARCBOX_RECONNECT=1 mid-scene)
 #
@@ -188,6 +192,7 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 GODOT=${GODOT:-$(command -v godot || true)}
 SHOP=${ARCBOX_SHOP:-}
+DECISIONS=${ARCBOX_DECISIONS:-}
 STAGE=${ARCBOX_STAGE:-}
 CHAPTER=${ARCBOX_CHAPTER:-}
 CAMP=${ARCBOX_CAMP:-}
@@ -202,7 +207,7 @@ AT_LINE=${ARCBOX_AT_LINE:-3}
 RESTART_SCENE=${ARCBOX_RESTART_SCENE:-ch1_maud}
 RECONNECT_SCENE=${ARCBOX_RECONNECT_SCENE:-ch1_docks}
 DROP_SIGNALS=${ARCBOX_DROP_SIGNALS:-}
-GAME=${ARCBOX_GAME:-$([[ "$SHOP" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
+GAME=${ARCBOX_GAME:-$([[ "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
 PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
@@ -419,10 +424,33 @@ if [[ "$CHAPTER" == "1" && "$BRANCH" == "skip-assault" ]]; then
 fi
 # This run's own database, so a restart finds its rooms again (ARCBOX_RESTART) and no run sees another's.
 DB="$OUT/arcbox.db"
+# ARCBOX_DECISIONS=1: the server and route.cs read a copy of the content in which Ashen Ford has one more thing, an e2e strongbox by
+# the ford's campfire (an unseen trap, and a lock whose only way is a DC 30 pick), so a lock fails every time. Everything else is
+# linked, not copied; only the interactables file is written.
+DECISIONS_ENV=
+if [[ "$DECISIONS" == "1" ]]; then
+  CONTENT="$OUT/content"
+  BASE="$ROOT/content/tactics/base"
+  mkdir -p "$CONTENT/tactics/base/rules/interactables"
+  for entry in "$ROOT/content"/*; do [[ "$(basename "$entry")" == "tactics" ]] || ln -s "$entry" "$CONTENT/"; done
+  for entry in "$BASE"/*; do [[ "$(basename "$entry")" == "rules" ]] || ln -s "$entry" "$CONTENT/tactics/base/"; done
+  for entry in "$BASE/rules"/*; do [[ "$(basename "$entry")" == "interactables" ]] || ln -s "$entry" "$CONTENT/tactics/base/rules/"; done
+  for entry in "$BASE/rules/interactables"/*; do [[ "$(basename "$entry")" == "ashen_ford.json" ]] || ln -s "$entry" "$CONTENT/tactics/base/rules/interactables/"; done
+  node -e '
+    const fs = require("fs");
+    const [from, to, at] = process.argv.slice(1);
+    const file = JSON.parse(fs.readFileSync(from, "utf8"));
+    file.interactables.push({ id: "e2e_strongbox", kind: "chest", at: JSON.parse(at), name: "strongbox",
+      trap: { spot: 30, disarm: 30 }, lock: { pick: 30 }, loot: [{ item: "smoke_bomb", count: 1 }] });
+    fs.writeFileSync(to, JSON.stringify(file, null, 2) + "\n");
+  ' "$BASE/rules/interactables/ashen_ford.json" "$CONTENT/tactics/base/rules/interactables/ashen_ford.json" "${ARCBOX_STRONGBOX_AT:-[117,62]}"
+  DECISIONS_ENV="Content__Root=$CONTENT"
+  export ARCBOX_CONTENT_RULES="$CONTENT/tactics/base/rules"
+fi
 # start_server <log>: the server on $URL and $DB, in the background; returns once it answers.
 start_server() {
   local out=$1
-  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Tactics__Difficulty="$DIFFICULTY" ${BATTLE_SEED_ENV:-} Storage__Path="$DB" ${STAGE_ENV:-} ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
+  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Tactics__Difficulty="$DIFFICULTY" ${BATTLE_SEED_ENV:-} Storage__Path="$DB" ${STAGE_ENV:-} ${DECISIONS_ENV:-} ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
   SERVER_PID=$!
   for _ in $(seq 1 60); do
     curl -sf -o /dev/null "$URL/" && return 0
@@ -462,8 +490,8 @@ log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=$([[ "$CHAPTER" == "1" ]] && echo 7200 || echo 1800)
-  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
-    $([[ "$CHAPTER" == "1" || "$SHOP" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
+    $([[ "$CHAPTER" == "1" || "$SHOP" == "1" || "$DECISIONS" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -488,6 +516,26 @@ if [[ "$GAME" == "tactics" && "$SHOP" == "1" ]]; then
     log "FAILED: TV error"; exit 1
   fi
   log "OK: shop buy, idempotent retry, sell and leave"
+  exit 0
+fi
+
+# ---- The owner's rule decisions (issue #83): real bot phones and the TV, on the copied pack with its strongbox.
+if [[ "$GAME" == "tactics" && "$DECISIONS" == "1" ]]; then
+  log "decisions: key ring, trap injury mended at camp, lock retried after the rest, loot votes and a haggle"
+  set +e
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --decisions --hold=1 --line=0.1 --tv-log="$OUT/tv.log" --timeout=900 > "$OUT/phones.log" 2>&1
+  BOTS=$?
+  set -e
+  grep -E 'DECISIONS|KEYS|LOCK|TRAP|CAMP|RETRY|LOOT|HAGGLE' "$OUT/phones.log" || true
+  [[ $BOTS -eq 0 ]] && grep -q 'DECISIONS OK' "$OUT/phones.log" || { log "FAILED: the bots (exit $BOTS)"; tail -30 "$OUT/phones.log"; exit 1; }
+  sleep 2
+  grep -qE '^STORY [0-9]+ loot_vote\.' "$OUT/tv.log" || { log "FAILED: the TV never showed a loot vote"; exit 1; }
+  grep -qE '^STORY [0-9]+ haggle\.' "$OUT/tv.log" || { log "FAILED: the TV never showed the haggle"; exit 1; }
+  grep -qE '^SHOP haggle (passed|failed)' "$OUT/tv.log" || { log "FAILED: the TV's shop never showed the haggle's result"; exit 1; }
+  if grep -E 'SCRIPT ERROR|Unhandled exception|ERROR: ' "$OUT/tv.log" | grep -vE 'audio|ALSA|PulseAudio'; then
+    log "FAILED: TV error"; exit 1
+  fi
+  log "OK: the owner's rule decisions on the real TV"
   exit 0
 fi
 
