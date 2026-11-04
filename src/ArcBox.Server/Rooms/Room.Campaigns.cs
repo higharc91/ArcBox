@@ -24,7 +24,9 @@ public sealed partial class Room
         EnsureCampaignLobby();
 
         var info = _campaigns.Find(campaignId);
-        if (info is null || info.GameId != _selectedGameId)
+        // Only a campaign a phone here can vouch for (issue #60). Anything else reads as missing, so the room learns
+        // nothing about campaigns it can't see.
+        if (info is null || info.GameId != _selectedGameId || (info.Id != _campaignId && !Vouched(info)))
         {
             throw new RoomException("Campaign not found.");
         }
@@ -69,6 +71,7 @@ public sealed partial class Room
         var info = _campaigns.Create(_selectedGameId!, trimmed, owner);
 
         vip.Profile = owner.Id;
+        vip.Vouched.Add(owner.Id);
         SetCampaign(info.Id);
         BroadcastLobby();
         Save();
@@ -98,9 +101,13 @@ public sealed partial class Room
         var slot = _members.FindByConnection(connectionId) ?? throw new RoomException("Couldn't rejoin. Please join again.");
         var keys = request.ProfileKeys ?? [];
 
+        var before = slot.Profile;
         var key = seat is null
             ? ClaimNewMember(slot, campaign, keys, request.NewName)
             : ClaimExistingMember(slot, seat, campaign, keys);
+        slot.Vouched.UnionWith(Proven(keys));
+        if (seat is null && slot.Profile is { } created && created != before && !_profiles.ResolveAll(keys).Any(p => p.Id == created))
+            slot.Vouched.Add(created);    // "I'm new here": a profile made just now, for this phone
         BroadcastLobby();
         Save();
         return key;
@@ -343,6 +350,29 @@ public sealed partial class Room
             return new RosterEntry(m.Profile, campaign.Card(m.Profile), slot?.Id, slot?.Connected ?? false);
         })
     ];
+
+    /// <summary>The profiles <paramref name="keys"/> prove, read without counting as a use.</summary>
+    private HashSet<ProfileId> Proven(IReadOnlyList<string> keys) => keys.Count == 0 ? [] : [.. _profiles.ResolveAll(keys).Select(p => p.Id)];
+
+    /// <summary>What the phones connected here vouch for (<see cref="PlayerSlot.Vouched"/>).</summary>
+    private HashSet<ProfileId> VouchedHere() => [.. _members.All.Where(s => s.Connected).SelectMany(s => s.Vouched)];
+
+    private bool Vouched(CampaignInfo info)
+    {
+        var here = VouchedHere();
+        return info.Members.Any(m => here.Contains(m.Profile));
+    }
+
+    /// <summary>
+    /// The selected game's campaigns this room may see (issue #60): those with a member a phone here vouches for, and the
+    /// selected one. Not the whole server's: you have to be there, with a member's phone, to pick a campaign.
+    /// </summary>
+    private IReadOnlyList<CampaignSummary> VisibleCampaigns()
+    {
+        var here = VouchedHere();
+        return [.. _campaigns.ListForGame(_selectedGameId!).Where(c => c.Id == _campaignId
+            || _campaigns.Find(c.Id) is { } info && info.Members.Any(m => here.Contains(m.Profile)))];
+    }
 
     /// <summary>
     /// A key for <paramref name="profile"/> on this phone, or null when it has none or the phone already holds one

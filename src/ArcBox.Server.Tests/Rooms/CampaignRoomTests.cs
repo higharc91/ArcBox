@@ -46,12 +46,90 @@ public class CampaignRoomTests
         return (f.Campaigns.Find(Lobby(f).Campaign!.Id)!, key);
     }
 
+    /// <summary>
+    /// A phone joins <paramref name="room"/> holding <paramref name="profile"/>'s key, so the room may list and select that
+    /// profile's campaigns (issue #60: "you have to be there").
+    /// </summary>
+    private static Task VouchAsync(RoomFixture f, Room room, string conn, ProfileId profile, string? name = null) =>
+        room.TakeSeatAsync(conn, new TakeSeatRequest(room.Code, NewName: name ?? conn, ProfileKeys: [f.Profiles.IssueKey(profile).Key]));
+
     /// <summary>A member who has never been in this room.</summary>
     private static ProfileRecord AddMember(RoomFixture f, CampaignInfo campaign, string name)
     {
         var profile = f.Profiles.Create(name);
         f.Campaigns.AddMember(campaign.Id, profile);
         return profile;
+    }
+
+    // Issue #60: the room is the trust anchor, so a room sees only campaigns a phone in it can vouch for.
+    [Fact]
+    public async Task A_room_lists_and_selects_only_campaigns_a_phone_here_vouches_for()
+    {
+        await using var f = new RoomFixture();
+        var dave = f.Profiles.Create("Dave");
+        var ours = f.Campaigns.Create("ledger", "Ours", dave);
+        var theirs = f.Campaigns.Create("ledger", "Theirs", f.Profiles.Create("Stranger"));
+        await f.HostAsync();
+        await f.Room.SelectGameAsync("host", "ledger");
+
+        Assert.Empty(Lobby(f).Campaigns!);
+        Assert.Equal("Campaign not found.", await Fails(f.Room.SelectCampaignAsync("host", ours.Id)));
+
+        await VouchAsync(f, f.Room, "c1", dave.Id, "Dave");
+        Assert.Equal(["Ours"], Lobby(f).Campaigns!.Select(c => c.Name));
+        Assert.Equal(["Ours"], Lobby(f, "c1").Campaigns!.Select(c => c.Name));
+        // Another group's campaign reads as missing, from the TV and from the VIP's phone alike.
+        Assert.Equal("Campaign not found.", await Fails(f.Room.SelectCampaignAsync("host", theirs.Id)));
+        Assert.Equal("Campaign not found.", await Fails(f.Room.SelectCampaignAsync("c1", theirs.Id)));
+
+        await f.Room.SelectCampaignAsync("c1", ours.Id);
+        Assert.Equal(ours.Id, Lobby(f).Campaign!.Id);
+    }
+
+    [Fact]
+    public async Task A_vouch_lasts_while_its_phone_is_here_and_the_selected_campaign_stays()
+    {
+        await using var f = new RoomFixture();
+        var dave = f.Profiles.Create("Dave");
+        var ours = f.Campaigns.Create("ledger", "Ours", dave);
+        f.Campaigns.Create("ledger", "Also ours", dave);
+        await f.HostAsync();
+        await f.Room.SelectGameAsync("host", "ledger");
+        await VouchAsync(f, f.Room, "c1", dave.Id, "Dave");
+        await f.Room.SelectCampaignAsync("host", ours.Id);
+        Assert.Equal(2, Lobby(f).Campaigns!.Count);
+
+        await f.Room.ConnectionLostAsync("c1");
+        Assert.Equal(["Ours"], Lobby(f).Campaigns!.Select(c => c.Name));    // only the one already picked
+    }
+
+    [Fact]
+    public async Task A_key_handed_out_for_a_seat_on_the_grid_doesnt_vouch_for_that_members_other_campaigns()
+    {
+        await using var f = new RoomFixture();
+        var (embers, _) = await EmbersAsync(f);
+        var bob = AddMember(f, embers, "Bob");
+        f.Campaigns.Create("ledger", "Bob's other", bob);
+
+        // Zed sits down as Bob on the grid: the couch trusts him with Bob's seat here, and he gets a key for it.
+        var join = await f.Room.TakeSeatAsync("c2", Seat(new SeatRef(Member: bob.Id)));
+        Assert.NotNull(join.Profile);
+        Assert.Equal(["Embers"], Lobby(f).Campaigns!.Select(c => c.Name));
+    }
+
+    [Fact]
+    public async Task Another_phone_taking_a_seat_doesnt_inherit_its_vouch()
+    {
+        await using var f = new RoomFixture();
+        var dave = f.Profiles.Create("Dave");
+        f.Campaigns.Create("ledger", "Ours", dave);
+        await f.HostAsync();
+        await f.Room.SelectGameAsync("host", "ledger");
+        var dave1 = await f.Room.TakeSeatAsync("c1", new TakeSeatRequest(Code, NewName: "Dave", ProfileKeys: [f.Profiles.IssueKey(dave.Id).Key]));
+        await f.Room.ConnectionLostAsync("c1");
+
+        await f.Room.TakeSeatAsync("c2", new TakeSeatRequest(Code, Seat: new SeatRef(Slot: dave1.PlayerId)));
+        Assert.Empty(Lobby(f).Campaigns!);
     }
 
     [Fact]
@@ -69,6 +147,8 @@ public class CampaignRoomTests
         Assert.Null(Lobby(f).Campaigns);
 
         await f.Room.SelectGameAsync("host", "ledger");
+        Assert.Empty(Lobby(f).Campaigns!);    // nobody here can vouch for Dave's campaigns yet
+        await VouchAsync(f, f.Room, "c1", dave.Id, "Dave");
         Assert.Equal(["Frost", "Embers"], Lobby(f).Campaigns!.Select(c => c.Name));
         Assert.Null(Lobby(f).Campaign);
 
@@ -476,8 +556,11 @@ public class CampaignRoomTests
     public async Task Select_refused_when_leased_elsewhere_or_over_8_members()
     {
         await using var f = new RoomFixture(seed: db => InsertCampaign(db, "cm_crowd", "BBBB", "Crowd", members: 9));
-        var embers = f.Campaigns.Create("ledger", "Embers", f.Profiles.Create("Dave"));
+        var dave = f.Profiles.Create("Dave");
+        var embers = f.Campaigns.Create("ledger", "Embers", dave);
         await f.HostAsync();
+        await VouchAsync(f, f.Room, "c1", dave.Id, "Dave");
+        await VouchAsync(f, f.Room, "c2", new ProfileId("pr_m1"), "M1");
 
         Assert.Equal("Pick a game first.", await Fails(f.Room.SelectCampaignAsync("host", embers.Id)));
         await f.Room.SelectGameAsync("host", "plain-ledger");
@@ -499,9 +582,10 @@ public class CampaignRoomTests
     public async Task Lease_released_on_game_end_and_on_crash()
     {
         await using var f = new RoomFixture();
-        var (campaign, _) = await EmbersAsync(f);
+        var (campaign, ann) = await EmbersAsync(f);
         var other = await f.NewRoomAsync("OTHR");
         await other.SelectGameAsync("host-OTHR", "ledger");
+        await VouchAsync(f, other, "c8", ann.Id, "Ann");
 
         await f.Room.StartGameAsync("host");
         Assert.Equal("Embers is being played in room TEST.", await Fails(other.SelectCampaignAsync("host-OTHR", campaign.Id)));
@@ -627,15 +711,17 @@ public class CampaignRoomTests
         await f.JoinAsync("Ann", "c1");
         await f.JoinAsync("Cy", "c3");
         await f.Room.SelectGameAsync("host", "ledger");
-        await f.Room.CreateCampaignAsync("c1", "Embers");
+        var annKey = await f.Room.CreateCampaignAsync("c1", "Embers");
         var campaign = f.Campaigns.Find(Lobby(f).Campaign!.Id)!;
 
         var other = await f.NewRoomAsync("OTHR");
+        await VouchAsync(f, other, "c8", annKey.Id, "Ann");
         await other.JoinAsync("c9", "Zed");
         await other.SelectGameAsync("host-OTHR", "ledger");
         await other.SelectCampaignAsync("host-OTHR", campaign.Id);
+        await other.ClaimMemberAsync("c8", new ClaimMemberRequest(new SeatRef(Member: annKey.Id), [annKey.Key]));
         await other.ClaimMemberAsync("c9", new ClaimMemberRequest(null));
-        await other.StartGameAsync("c9");
+        await other.StartGameAsync("host-OTHR");
         const string playing = "Embers is being played in room OTHR.";
 
         Assert.Equal(playing, await Fails(f.Room.TakeSeatAsync("c2", NewName("Bea"))));
@@ -741,6 +827,7 @@ public class CampaignRoomTests
 
     private static void InsertCampaign(ArcDb db, string id, string code, string name, int members)
     {
+        db.Execute("INSERT INTO profiles (id, display_name, created_utc, last_seen_utc) VALUES ('pr_m1', 'M1', '2026-01-01T00:00:00Z', '2026-01-01T00:00:00Z')");
         var list = Enumerable.Range(1, members)
             .Select(i => new CampaignMember(new ProfileId($"pr_m{i}"), $"M{i}", i == 1 ? CampaignRole.Owner : CampaignRole.Player,
                 DateTimeOffset.UnixEpoch))
