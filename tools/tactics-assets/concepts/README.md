@@ -1,8 +1,10 @@
 # Scenario concept series
 
 Issue #80's Ashen Ford people work is tracked in [townsfolk/README.md](townsfolk/README.md):
-12 named NPC briefs, seven paired townsfolk briefs, and a generated Bree anchor
-awaiting design approval (12 Scenario CU spent).
+12 named NPC briefs, seven paired townsfolk briefs, and an approved Bree anchor
+(12 Scenario CU spent). The owner approved 234 CU for the remaining 18 sheets;
+Mother Skarrow completed for 13 CU before a provider cooldown stopped the batch.
+Total spend is 25 CU; 17 sheets remain with 221 CU authorized.
 
 `scenario-briefs.json` is the prepared, lore-linked request pack for **Scenario**.
 Generation receipts belong to their individual batches. See the

@@ -2,8 +2,8 @@
 
 Issue #80's NPC and townsfolk concepts are in
 [`../concepts/townsfolk/README.md`](../concepts/townsfolk/README.md).
-The first Scenario anchor is awaiting approval; NPC PixelLab generation has not
-started. Use the current shipped tactical hero density and anchors for the
+The first Scenario anchor, Bree, is approved; the remaining concept designs are
+pending and NPC PixelLab generation has not started. Use the current shipped tactical hero density and anchors for the
 production comparison, rather than assuming the older reference PNGs establish
 the current hero size.
 

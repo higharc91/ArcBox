@@ -78,13 +78,21 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `in progress; concept approval pending`
+### OW-10 · Heroes and townsfolk don't match · `in progress; anchor approved`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
 the queue covers 12 placed named NPCs (including Rook) and seven generic presets
 with two variants each. Bree's first 2K concept anchor cost 12 Scenario CU with
-explicit owner approval to spend; its design is awaiting approval. See
+explicit owner approval to spend; the owner approved its design on 2026-11-03
+(“yes, her design looks correct”). The remaining 11 named sheets and seven paired
+townsfolk sheets were individually priced at 13 CU each: 234 additional CU.
+The owner approved the 234 CU batch. Mother Skarrow completed for 13 CU, then
+Scenario rejected Mother Aubrine's submission with a 942-second cooldown (HTTP 429,
+no job created or charge). Generation stopped; 17 sheets remain and 221 CU remains
+authorized. Total spend including Bree is 25 CU. Mother Skarrow's design awaits
+review, and no NPC PixelLab jobs have run. The saved batch progress names the
+remaining IDs so completed sheets are not regenerated. See
 `tools/tactics-assets/concepts/townsfolk/README.md` for prompts, receipts and comparison.
 **Done when:** both art stages are approved, the town reads as one style, optional
 variants round-trip through the editor, and OW-05's memory/download checks pass.
@@ -166,7 +174,7 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 ## Decisions waiting for the user
 
 1. OW-05's memory target is resolved: 512 MB maximum at region open. Measurement and loading work remain.
-2. OW-10's regeneration route is resolved. Approval of Bree's proposed concept anchor is pending; later concepts and pixel art each need review.
+2. OW-10's route, Bree concept and 234 CU batch spend are approved. Mother Skarrow's concept awaits design review. Scenario's cooldown interrupted generation; 17 concepts remain with 221 CU authorized. Later designs and pixel art each need review.
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
 5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).

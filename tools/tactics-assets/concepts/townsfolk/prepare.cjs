@@ -6,6 +6,8 @@ const read = p => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
 const pack = read('tools/tactics-assets/concepts/scenario-briefs.json');
 const world = read('content/tactics/base/rules/world/ashen_ford.json');
 const people = world.people;
+const approvalsPath = path.join(__dirname, 'approvals.json');
+const approvals = fs.existsSync(approvalsPath) ? JSON.parse(fs.readFileSync(approvalsPath, 'utf8')) : {};
 const named = [...new Set(people.map(p => p.character).filter(Boolean))];
 const roles = {
   barmaid: 'An adult member of Bree’s inn staff, practical rolled sleeves, a clean but repeatedly mended apron, towel at the belt and sturdy shoes; capable and busy, without a sexualized tavern costume.',
@@ -19,7 +21,7 @@ const roles = {
 const namedBriefs = named.map(id => {
   const brief = pack.concepts.find(c => c.id === `character_${id}`);
   if (!brief) throw Error(`Missing existing brief: ${id}`);
-  return { ...brief, placed_count: people.filter(p => p.character === id).length, approval: 'pending' };
+  return { ...brief, placed_count: people.filter(p => p.character === id).length, approval: approvals[brief.id]?.status ?? 'pending' };
 });
 const presets = [...new Set(people.filter(p => !p.character && !p.preset.startsWith('goblin_')).map(p => p.preset))].sort();
 const townsfolk = presets.map(preset => {
@@ -45,5 +47,7 @@ const request = {
   source_brief: 'scenario-briefs.json:character_bree_tallow',
   parameters: { prompt: bree.prompt + ' Bree is a mature adult woman, warm and capable, with substantial practical work clothes. Plain muted parchment background. Keep the notebook closed and without readable text. This is the series anchor; subsequent sheets will reuse its rendering style. Use restrained large colour planes that remain readable in a detailed 36-pixel-tall world sprite.', aspectRatio: '3:2', resolution: '2K', thinkingLevel: 'HIGH', numOutputs: 1, useGoogleSearch: false }
 };
-fs.writeFileSync(path.join(__dirname, 'bree-request.json'), JSON.stringify(request, null, 2) + '\n');
+// Preserve the exact historical request once an anchor has been submitted.
+if (!fs.existsSync(path.join(__dirname, 'bree-request.json')))
+  fs.writeFileSync(path.join(__dirname, 'bree-request.json'), JSON.stringify(request, null, 2) + '\n');
 console.log(`${namedBriefs.length} named NPCs, ${townsfolk.length} generic presets, ${townsfolk.length * 2} generic variants.`);

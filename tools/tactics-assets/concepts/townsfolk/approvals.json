@@ -1,0 +1,19 @@
+{
+  "concept_batch_2026_11_03": {
+    "stage": "concept_generation_spend",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "Approve the full 234 CU batch",
+    "maximumCU": 234,
+    "sheets": 18,
+    "scope": "Generate the 11 remaining named NPC sheets and seven paired townsfolk sheets. Design approval remains pending for every result."
+  },
+  "character_bree_tallow": {
+    "stage": "concept",
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "yes, her design looks correct",
+    "asset_id": "asset_5BTscGVgZiaVkGpPJb65F1X1",
+    "scope": "Bree's concept design and its use as the series style reference. Further generation spend and pixel art require separate approval."
+  }
+}

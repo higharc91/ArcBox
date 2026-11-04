@@ -1,0 +1,19 @@
+{
+  "id": "character_mother_skarrow",
+  "jobId": "job_ZvddLGV8CXNNcNTBYG9HL8zz",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T01:44:47.772Z",
+  "updatedAt": "2026-11-04T01:45:23.767Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_ABjwLTpiPSESYp2UZVy6p5ap"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "character_mother_skarrow.png"
+}

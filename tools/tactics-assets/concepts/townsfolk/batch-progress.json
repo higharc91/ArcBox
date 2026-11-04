@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-03",
+  "status": "paused_provider_cooldown",
+  "spend_approval": "approvals.json:concept_batch_2026_11_03",
+  "approved_batchCU": 234,
+  "batch_spentCU": 13,
+  "remaining_authorizedCU": 221,
+  "total_with_breeCU": 25,
+  "completed": [
+    {
+      "id": "character_mother_skarrow",
+      "job_id": "job_ZvddLGV8CXNNcNTBYG9HL8zz",
+      "asset_id": "asset_ABjwLTpiPSESYp2UZVy6p5ap",
+      "cuCost": 13,
+      "output": "generated/character_mother_skarrow.png"
+    }
+  ],
+  "pending": [
+    "character_mother_aubrine",
+    "character_tobin_fell",
+    "character_lark",
+    "character_corvin_ashby",
+    "character_pip_ashdown",
+    "character_halden_varrow",
+    "character_dagna_holt",
+    "character_celandine_marrowby",
+    "character_old_maud",
+    "character_rook",
+    "townsfolk_barmaid",
+    "townsfolk_child",
+    "townsfolk_farmer",
+    "townsfolk_farmhand",
+    "townsfolk_fisher",
+    "townsfolk_guard",
+    "townsfolk_merchant"
+  ],
+  "provider_refusal": {
+    "id": "character_mother_aubrine",
+    "http_status": 429,
+    "reason": "Too Many Requests. Please, wait 942 seconds before trying again.",
+    "remainingSeconds": 942,
+    "trace_id": "mcpt_vTsaTU9Hn5qrECmUv8X3H94H",
+    "job_created": false,
+    "chargedCU": 0
+  },
+  "inflight_job_ids": [],
+  "resume": "Only submit pending IDs after the provider cooldown, using the stored requests and remaining authorized budget. Do not regenerate completed sheets or silently retry failed submissions.",
+  "design_approvals_pending": [
+    "character_mother_skarrow"
+  ]
+}

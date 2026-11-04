@@ -12,7 +12,8 @@
   "reference_asset_ids": [],
   "output": "bree-concept.png",
   "owner_spend_approval": "Generate the 12 CU anchor",
-  "design_approval": "pending",
+  "design_approval": "approved",
+  "design_approval_record": "approvals.json:character_bree_tallow",
   "pixel_art_approval": "not_started",
   "review": {
     "consistency": "Same braided grey hair, face, apron, boots and closed notebook across all three views; rear view has apron ties and no front buckle. Suitable as a proposed painted reference.",
