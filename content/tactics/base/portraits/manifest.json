@@ -456,12 +456,12 @@
       "surprised": "dagna_surprised.png"
     },
     "noble": {
-      "idle": "noble_idle.png",
-      "hurt": "noble_hurt.png",
-      "happy": "noble_happy.png",
-      "angry": "noble_angry.png",
-      "sad": "noble_sad.png",
-      "surprised": "noble_surprised.png"
+      "idle": "celandine_idle.png",
+      "hurt": "celandine_hurt.png",
+      "happy": "celandine_happy.png",
+      "angry": "celandine_angry.png",
+      "sad": "celandine_sad.png",
+      "surprised": "celandine_surprised.png"
     },
     "sage": {
       "idle": "corvin_idle.png",
@@ -575,6 +575,14 @@
       "angry": "dagna_angry.png",
       "sad": "dagna_sad.png",
       "surprised": "dagna_surprised.png"
+    },
+    "celandine_marrowby": {
+      "idle": "celandine_idle.png",
+      "hurt": "celandine_hurt.png",
+      "happy": "celandine_happy.png",
+      "angry": "celandine_angry.png",
+      "sad": "celandine_sad.png",
+      "surprised": "celandine_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

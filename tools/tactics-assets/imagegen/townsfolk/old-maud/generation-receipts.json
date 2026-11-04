@@ -1,0 +1,35 @@
+{
+  "imageToolCalls": 2,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-source.png",
+      "originalPath": "/workspace/generated_images/exec-700122ef-d152-4284-aa6d-0500db24417a.png",
+      "requestSha256": "efd02110511148fc00f5b1e8fedcc7d6d892f986f3cd559244b5b0e60cae6764",
+      "outputSha256": "3aafd2ec4550e112bfb989df7bbecd9cb0af44758def454565f8102f49d5051a",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_old_maud.png": "7b29d3e3f4b485b934233e4c685792ac669420f1678fb1df408fcd0eae36fb30",
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/rotations/south.png": "8c113b42abb005990f928ef090b6d26f160d00fec6c2d5d607a362a7b088063a"
+      }
+    },
+    {
+      "request": "appearance-cleanup-request.json",
+      "output": "candidate-1.png",
+      "originalPath": "/workspace/generated_images/exec-16c7eda3-a43c-46b9-892e-d4e123cb4146.png",
+      "requestSha256": "fb5bd623fe51402e0a2180cba3f47f68931bd2e1d592a0c0cfcab68bf62d49f7",
+      "outputSha256": "a40b8d016c9e55591f22048bed1b436c78aac7b5e7fef7a7a90a9b2c61e28fd1",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-source.png": "3aafd2ec4550e112bfb989df7bbecd9cb0af44758def454565f8102f49d5051a"
+      }
+    }
+  ],
+  "runtimeAlphaPreview": {
+    "script": "build-appearance.cjs",
+    "source": "candidate-1.png",
+    "output": "candidate-1-preview.png",
+    "operation": "Apply the same alpha128 threshold as native sprite import, zero transparent RGB; preserve shape/layout and source images."
+  }
+}

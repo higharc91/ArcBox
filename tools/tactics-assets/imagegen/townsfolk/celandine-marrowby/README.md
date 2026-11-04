@@ -2,7 +2,8 @@
 
 Appearance and existing voice approved: “Perfect, continue”. Eight real idle/walk/
 talk directions and six40×40 portraits are complete and ready for separate
-finished-set/TV approval. Nothing is installed in production yet.
+finished-set/TV approval. The owner then approved the full review (“Looks good.
+Do the next character”); the exact bound body and portraits are now installed.
 
 [Watch the voiced review](celandine-finished-review.mp4) · [Recorded voice](voice-sample.mp3)
 · [Portraits](celandine-portraits-review.png) · [Walk](celandine-eight-direction-walk.gif)
@@ -36,3 +37,5 @@ Never edit linked files. The guarded installer requires complete-set/TV owner
 approval and verifies the bound review hashes before production writes.
 
 [Validation report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/celandine-imagegen/report.md).
+
+Production installation and body/portrait aliases are verified; see the installed report. Earlier pending-set text describes the retained review checkpoint.

@@ -2,7 +2,7 @@
   "character": "Lady Celandine Marrowby",
   "characterId": "celandine_marrowby",
   "presetReference": "noble",
-  "stage": "complete_set_pending_owner_tv_approval",
+  "stage": "complete_set_approved_installed",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 14,
@@ -10,16 +10,16 @@
   "candidateSha256": "52882bba836a94f9ff57f306c7876c20227facbd78173bd06c66bdeb811f239c",
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "reviewNotes": [
     "Appearance and existing voice approved: Perfect, continue.",
-    "Eight real idle/walk/talk facings and six portraits complete; full-set/TV approval pending.",
+    "Eight real idle/walk/talk facings and six portraits complete; complete set approved and installed.",
     "Use corrected northwest guide and corrected north/northeast motion sources, not superseded exports.",
     "Northeast talk slot5 holds valid preceding pose;143 selected source cells across144 native slots; no per-frame recentering or mirroring.",
     "Existing recorded town bark accompanies finished reel; no new speech generated.",
-    "Production is unchanged; art installation requires the complete-set approval gate."
+    "Exact approved body/portraits installed after owner finished-set approval."
   ],
   "ownerAppearanceApproval": {
     "quote": "Perfect, continue",
@@ -29,14 +29,14 @@
   "priorAppearanceCalls": 2,
   "completionImageToolCalls": 12,
   "completedSet": {
-    "status": "pending_owner_full_set_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 143,
     "curatedHeldSlots": 1,
     "portraits": 6,
     "completionImageToolCalls": 12,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_celandine.png": "54bbf741e00705a84f06032e24b48cc44c1677ec5e0f2de6af88539bd830f248",
       "review-sprite.json": "566a4dbffc5022409588613361f5f9b5139cdf43f83e854ce5b7a9dea0a54802",
@@ -62,5 +62,10 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/celandine-imagegen/ashen_ford-shots/world-celandine.png",
       "sha256": "2c611facb42833258a0816cd45f06350f43bc22be40f0fab67f79d9cb42e06aa"
     }
+  },
+  "ownerFullSetApproval": {
+    "quote": "Looks good. Do the next character",
+    "date": "2026-11-04",
+    "scope": "Approved finished animation/portrait/voiced TV review; install the exact bound set and continue the queue."
   }
 }

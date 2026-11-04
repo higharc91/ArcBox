@@ -8,19 +8,25 @@ namespace Tactics.Presentation.Tests.Hud;
 public sealed class HudArtTests
 {
     [Theory]
-    [InlineData("idle")]
-    [InlineData("hurt")]
-    [InlineData("happy")]
-    [InlineData("angry")]
-    [InlineData("sad")]
-    [InlineData("surprised")]
-    public void Dagnas_captain_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    [InlineData("guard_captain", "dagna_holt", "dagna", "idle")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "hurt")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "happy")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "angry")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "sad")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "surprised")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "idle")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "hurt")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "happy")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "angry")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "sad")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "surprised")]
+    public void Approved_named_portrait_aliases_select_each_authored_mood(string preset, string character, string file, string mood)
     {
-        foreach (var preset in new[] { "guard_captain", "dagna_holt" })
+        foreach (var key in new[] { preset, character })
         {
-            var face = Art.Value.Speaker(preset, mood, "ally");
+            var face = Art.Value.Speaker(key, mood, "ally");
             Assert.NotNull(face);
-            Assert.Equal($"portraits/dagna_{mood}.png", face.Path);
+            Assert.Equal($"portraits/{file}_{mood}.png", face.Path);
             Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
             Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
         }

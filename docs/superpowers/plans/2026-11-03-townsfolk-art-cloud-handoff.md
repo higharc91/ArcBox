@@ -648,3 +648,29 @@ Next: owner finished-set/TV approval, install exact bound assets, production che
 Rules/lore/balance/phone contracts unchanged. Include existing recorded voices in
 future reviews. Rebase before pushing townsfolk-art; no PR, merge or issue closure.
 Earlier pending-appearance notes are historical.
+
+## Latest checkpoint — Celandine approved/installed; Old Maud appearance draft
+
+The owner approved the completed set: “Looks good. Do the next character”. Exact
+bound Celandine body and six portraits are installed; no regeneration or further
+approval needed for that set. Body/portrait aliases noble/celandine_marrowby resolve
+correctly.154 focused tests pass, Debug/Release test-project builds0 warnings/
+errors. Typed production importer/aliases/portrait/bark and exact approved hashes
+pass. Four-party production peaks328.99 /192.37 MiB below512; strict replacement/
+restoration/upload/release gates pass. Cold pack208260666 bytes /4929
+files, inventory SHA256 82f45b0cec3a2a190ef1e6211706aff7dd185bd30dc69d605e46fe457a12c1d4.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/celandine-installed/report.md.
+
+Old Maud is next (hermit, old_maud). First pixel appearance and existing recorded
+voice are under tools/tactics-assets/imagegen/townsfolk/old-maud/. Approved concept
+reused. Both raw outputs/requests/hashes retained; candidate-1-preview.png applies
+normal native alpha threshold and clears transparent RGB without redrawing.
+Eight standing-cell bounds checks pass. Appearance approval pending before
+motion/portraits; full-set/TV gate remains separate. Native grid/palette/body size/
+anchors, staff handedness/grip and staff/boot contact QA ahead. Two image-tool
+calls, zero PixelLab/new speech spend. No Old Maud production content.
+
+Rules, lore/captions, balance and phone contracts unchanged. Include existing
+recorded voice in future appearance and completed reviews. Rebase before pushing
+townsfolk-art; no PR, merge or issue closure. Earlier pending-Celandine notes are
+historical. Continue with Old Maud appearance approval.

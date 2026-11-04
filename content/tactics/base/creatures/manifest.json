@@ -6389,6 +6389,93 @@
         }
       },
       "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 af8f62f541bf973b4d20c527bdf8447a4142b3dbb23f93ea31593f9e81752100"
+    },
+    "celandine": {
+      "file": "celandine.png",
+      "family": "townsfolk",
+      "variant": "celandine",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 18,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.noble",
+        "characters.celandine_marrowby"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "talk": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            16,
+            15,
+            14,
+            13
+          ],
+          "fps": 6.666666666666667,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 54bbf741e00705a84f06032e24b48cc44c1677ec5e0f2de6af88539bd830f248"
     }
   },
   "legacyDistinctForms": [

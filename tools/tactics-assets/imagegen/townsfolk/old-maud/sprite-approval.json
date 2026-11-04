@@ -1,0 +1,25 @@
+{
+  "character": "Old Maud",
+  "characterId": "old_maud",
+  "presetReference": "hermit",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 2,
+  "originalPath": "/workspace/generated_images/exec-16c7eda3-a43c-46b9-892e-d4e123cb4146.png",
+  "candidateSha256": "a40b8d016c9e55591f22048bed1b436c78aac7b5e7fef7a7a90a9b2c61e28fd1",
+  "reviewPreview": "candidate-1-preview.png",
+  "previewSha256": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Existing approved concept reused, not regenerated. Eight full planted facings with complete hood/robe/boots and wooden walking stick.",
+    "Existing recorded town bark included; no speech generation.",
+    "Raw tool images retained; appearance preview applies the normal native alpha threshold and clears transparent RGB.",
+    "Native grid/palette/body height/anchors/staff grip-side and staff/boot contact QA remain before motions.",
+    "Appearance approval before motions/portraits; final full-set/TV approval separate."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-source.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Remove ONLY the entire brown/grey translucent cloudy backdrop, soft halos, ground shadow and noise from this exact approved-design Old Maud eight-view pixel sheet. Keep the same FOUR columns TWO rows, all eight different directions, every character pixel inside the silhouette, face, patched hood/shawl/robe, rope belt/charms/bottle, hands, wooden staff, boots, stance, scale and baseline UNCHANGED. All eight silhouettes and walking sticks remain complete with generous clear margins. Output TRUE CLEAN TRANSPARENCY: alpha0 outside each figure and staff, alpha0 throughout every gutter and all outer margins. No brown fill, gradient, fog, glow, shadow, paper texture or painted checkerboard; transparent means empty alpha. Do not redraw/design another character, mirror any cell, change the staff hand or rotate front/back views. Keep crisp square pixel clusters and selective dark outlines. No text/labels/borders/gridlines or added objects. This is a background cleanup only."
+}
