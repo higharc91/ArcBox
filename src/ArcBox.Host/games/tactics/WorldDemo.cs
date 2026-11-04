@@ -28,7 +28,7 @@ internal sealed partial class WorldDemo : Node
     private const int FadeFrames = 40;                  // before a shot, for a fade to have finished, which also has the overlay drawn
     private const double SecondLook = 0.3;              // between two shots of water, to see that it moved
 
-    private enum Stage { Loading, Crossing, Spots, Done }
+    private enum Stage { Loading, Crossing, ChangingParty, RestoringParty, Spots, Done }
 
     private readonly record struct Frame(double Seconds, double Ms, double RenderCpu, double RenderGpu, double Record, double Query, double Draw, int Items, double DrawCalls);
 
@@ -56,14 +56,20 @@ internal sealed partial class WorldDemo : Node
     private double _waited;
     private bool _secondShot;
     private bool _logged;
+    private readonly bool _perfGate;
+    private double _peakTextures;
+    private bool _gateFailed;
+    private ImmutableArray<string> _roster = WorldTextureBudget.Party;
+    private int _rosterFrames;
 
-    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null)
+    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null, bool perfGate = false)
     {
         _shots = shots;
         _looks = looks;
         _walk = walk;
         _spec = spec;
         _pack = packRoot;
+        _perfGate = perfGate;
     }
 
     public override void _Ready()
@@ -135,6 +141,8 @@ internal sealed partial class WorldDemo : Node
     public override void _Process(double delta)
     {
         _clock += delta;
+        if (_perfGate)
+            _peakTextures = Math.Max(_peakTextures, Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed));
         switch (_stage)
         {
             case Stage.Loading:
@@ -146,8 +154,12 @@ internal sealed partial class WorldDemo : Node
             case Stage.Spots:
                 Visit(delta);
                 break;
+            case Stage.ChangingParty:
+            case Stage.RestoringParty:
+                CheckPartyChange();
+                break;
             case Stage.Done:
-                GetTree().Quit();
+                GetTree().Quit(_gateFailed ? 1 : 0);
                 break;
         }
     }
@@ -156,6 +168,7 @@ internal sealed partial class WorldDemo : Node
     {
         if (_canvas.Now == WorldCanvas.Stage.Failed)
         {
+            _gateFailed = _perfGate;
             _stage = Stage.Done;
             return;
         }
@@ -171,6 +184,7 @@ internal sealed partial class WorldDemo : Node
         }
         if (_canvas.Now == WorldCanvas.Stage.Open)
         {
+            CheckTextures("open");
             var load = _canvas.LoadMs;
             Log($"textures {_canvas.Plan.Images.Length} in {load.Textures:0} ms, worst {load.Worst:0.0} ms; binding items (and baking glows) {load.Bind:0} ms; {_canvas.Waiting} blocks still to record at reveal");
             _stage = Stage.Crossing;
@@ -204,7 +218,9 @@ internal sealed partial class WorldDemo : Node
     private void Show(BoardTerrain terrain, UnitPlace place, System.Numerics.Vector2 heading, System.Numerics.Vector2? looking = null)
     {
         _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
-        var walkers = DemoRegion.StandIn(terrain, _art, place, heading, _clock);
+        var walkers = _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
+            : DemoRegion.StandIn(terrain, _art, place, heading, _clock);
+        _canvas.PartySheets(walkers.Select(u => u.Sprite.Path));
         ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [])).OrderBy(u => u.Order)];
         _canvas.ShowUnits(units, walkers, _art);
     }
@@ -225,11 +241,34 @@ internal sealed partial class WorldDemo : Node
         }
         LogCrossing();
         Shoot($"world-{_spec.Replace(':', '-')}.png");
-        _stage = _shots is null ? Stage.Done : Stage.Spots;
+        if (_perfGate)
+        {
+            _roster = WorldTextureBudget.ChangedParty;
+            _stage = Stage.ChangingParty;
+            _rosterFrames = 0;
+        }
+        else _stage = _shots is null ? Stage.Done : Stage.Spots;
+    }
+
+    private void CheckPartyChange()
+    {
+        Walk(_route.Length - 1);
+        // Submit the new roster, drain the upload budget, then allow two rendered frames for the monitor to settle.
+        if (_canvas.PendingUnitTextures > 0) { _rosterFrames = 0; return; }
+        if (++_rosterFrames < 3) return;
+        CheckTextures(_stage == Stage.ChangingParty ? "party-change" : "party-restored");
+        if (_stage == Stage.ChangingParty)
+        {
+            _roster = WorldTextureBudget.Party;
+            _rosterFrames = 0;
+            _stage = Stage.RestoringParty;
+        }
+        else _stage = _shots is null ? Stage.Done : Stage.Spots;
     }
 
     private void LogCrossing()
     {
+        CheckTextures("crossing");
         var all = _frames;
         var warm = all.Where(f => f.Seconds >= ColdSeconds).ToArray();
         var recording = all.Where(f => f.Record > 0).ToArray();
@@ -247,6 +286,16 @@ internal sealed partial class WorldDemo : Node
         Log($"overlay query ms {Spread(all.Select(f => f.Query))}; draw ms {Spread(all.Select(f => f.Draw))}; items {Spread(all.Select(f => (double)f.Items))}");
         Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}; recorded again for a fade: {_canvas.Rerecorded}");
         Log($"memory at end of crossing: {MemoryText()}");
+    }
+
+    private void CheckTextures(string stage)
+    {
+        if (!_perfGate) return;
+        var bytes = Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed);
+        _peakTextures = Math.Max(_peakTextures, bytes);
+        var passed = WorldTextureBudget.Passes(_peakTextures, WorldTextureBudget.Party.Length);
+        _gateFailed |= !passed;
+        Log(FormattableString.Invariant($"texture-budget region={_spec} stage={stage} party=4 textures-bytes={bytes:0} peak-bytes={_peakTextures:0} limit-bytes={WorldTextureBudget.LimitBytes} result={(passed ? "PASS" : "FAIL")}"));
     }
 
     private void Visit(double delta)

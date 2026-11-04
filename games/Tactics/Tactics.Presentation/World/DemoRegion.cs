@@ -179,17 +179,24 @@ public static class DemoRegion
     }
 
     /// <summary>One unit walking <paramref name="heading"/> at <paramref name="place"/>, <paramref name="seconds"/> into its stride: the party, until there is one.</summary>
-    public static ImmutableArray<BoardUnit> StandIn(BoardTerrain terrain, UnitArt art, UnitPlace place, Vector2 heading, double seconds)
+    public static ImmutableArray<BoardUnit> StandIn(BoardTerrain terrain, UnitArt art, UnitPlace place, Vector2 heading, double seconds,
+        string sprite = WalkerSprite, string identity = "walker")
     {
-        var id = new UnitId("walker");
+        var id = new UnitId(identity);
         var at = new Tile(Math.Clamp((int)place.Map.X, 0, terrain.Map.Width - 1), Math.Clamp((int)place.Map.Y, 0, terrain.Map.Height - 1));
-        var unit = new UnitView(id, id.Value, "Party", WalkerSprite, at, WalkerHp, WalkerHp, 0, "Up", 0, [], null);
+        var unit = new UnitView(id, id.Value, "Party", sprite, at, WalkerHp, WalkerHp, 0, "Up", 0, [], null);
         var battle = new BattleView(terrain.Map.Id, terrain.Map.Id, 1, [id], null, [unit], [], null, BoardChanges.None, ObjectivesDef.Default, null);
         var noStrip = new BoardFit(new Vector2(0, float.MaxValue / 4), 1);     // the world has no top strip for its marks to clear
         return UnitPlan.Build(battle, terrain, art, noStrip,
             new Dictionary<UnitId, UnitPlace> { [id] = place },
             new Dictionary<UnitId, UnitPose> { [id] = new UnitPose(BeatScript.WalkAnim, seconds, heading) });
     }
+
+    /// <summary>Four distinct heroes for the memory gate, spread across the road at a shared ground height.</summary>
+    public static ImmutableArray<BoardUnit> PerfParty(BoardTerrain terrain, UnitArt art, UnitPlace place, Vector2 heading, double seconds,
+        ImmutableArray<string> roster = default)
+        => [.. (roster.IsDefault ? WorldTextureBudget.Party : roster).SelectMany((sprite, i) => StandIn(terrain, art,
+            new UnitPlace(place.Map + new Vector2(-i * .6f, i * .6f), place.Height), heading, seconds, sprite, $"walker-{i}"))];
 
     /// <summary>A generated region with a river through rolling hills, thick with props and lights. The same every time.</summary>
     public static WorldGround Hilly(int width, int height)

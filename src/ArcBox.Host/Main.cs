@@ -162,7 +162,8 @@ public partial class Main : Control
             AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
             return;
         }
-        if (_args.WorldDemo is "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        if ((_args.WorldDemo is "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+            && !(_args.WorldDemo == "cinder_hollow" && _args.Perf))
         {
             // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
             GD.Print("Things demo: no server connection");
@@ -182,7 +183,7 @@ public partial class Main : Control
             GD.Print("World demo: no server connection");
             var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
             if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } artRoot) worldPack = System.IO.Path.GetFullPath(artRoot);
-            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks, _args.WorldRoute));
+            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks, _args.WorldRoute, _args.Perf));
             return;
         }
         if (_args.Demo == AppArgs.DemoCampaignLobby)
