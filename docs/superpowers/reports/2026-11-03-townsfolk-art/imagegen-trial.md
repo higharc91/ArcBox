@@ -1,3 +1,7 @@
+> The appearance is now approved and Aubrine's complete motion/portrait/native TV
+> review is ready. See [the completed review](aubrine-imagegen/report.md). The trial
+> defects below are historical and have been corrected in the retained final assets.
+
 # Mother Aubrine — alternative pixel-art trial
 
 The owner requested using the assistant image tool instead of PixelLab for the next

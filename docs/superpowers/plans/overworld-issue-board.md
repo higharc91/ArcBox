@@ -249,3 +249,11 @@ Issue #80 alternative-art trial: per owner request, Mother Aubrine now has one
 assistant-image-generation appearance candidate, reusing her approved concept.
 No PixelLab credits spent; not installed or approved. Facing duplication, alpha
 and native-grid/scale validation remain. See `reports/2026-11-03-townsfolk-art/imagegen-trial.md`.
+
+Issue #80 Aubrine completion: appearance approved; full eight-direction idle/walk/
+talk review (144 native frames) plus six portraits is finished with the image tool.
+Final full-set/TV approval remains separate. Typed import/bark/contact, exact
+rebuild, alpha/frame/height and four-party memory checks pass:310.65MiB Ashen,
+192.37MiB Cinder below512. No production/rules/phone changes or PixelLab spend.
+A guarded installer is prepared. Other23 sprites remain. Current review:
+`docs/superpowers/reports/2026-11-03-townsfolk-art/aubrine-imagegen/report.md`.

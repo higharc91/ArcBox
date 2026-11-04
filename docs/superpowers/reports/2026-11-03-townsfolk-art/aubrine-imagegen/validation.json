@@ -1,0 +1,22 @@
+{
+  "result": "PASS: complete review set ready, production installation remains gated",
+  "sourceFrames": 144,
+  "directions": 8,
+  "portraits": 6,
+  "frame": [
+    96,
+    96
+  ],
+  "pixelScale": 0.5,
+  "atlasMiB": 5.0625,
+  "maxFootDriftWorld": 1,
+  "runtimeSpritePortraitAndBarkChecks": "PASS",
+  "ashenPeakBytes": 325742848,
+  "hollowPeakBytes": 201718016,
+  "textureLimitBytes": 536870912,
+  "productionAssetsChanged": false,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "completionImageToolCalls": 13,
+  "fullSetOwnerApproval": "pending"
+}

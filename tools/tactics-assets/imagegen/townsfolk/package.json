@@ -1,0 +1,14 @@
+{
+  "name": "wardenflame-imagegen-townsfolk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline image-generated NPC review tooling; no game dependencies or API credentials",
+  "scripts": {
+    "build-aubrine": "node mother-aubrine/build-review.cjs && node mother-aubrine/build-portraits.cjs",
+    "verify-aubrine": "node mother-aubrine/verify-review.cjs"
+  },
+  "dependencies": {
+    "gifenc": "1.0.3",
+    "pngjs": "7.0.0"
+  }
+}

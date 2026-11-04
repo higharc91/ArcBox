@@ -1,0 +1,1 @@
+{"result":"PASS","directions":8,"sourceFrames":144,"playback":"10 idle / 6 walk / 10 talk","portraits":6,"barkStopResume":"PASS","nativeScale":0.5,"productionInstalled":false}

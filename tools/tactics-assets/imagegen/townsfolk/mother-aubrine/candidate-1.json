@@ -1,7 +1,7 @@
 {
   "character": "Mother Aubrine",
   "tool": "image_gen.imagegen",
-  "stage": "pixel-style candidate; not approved or installed",
+  "stage": "appearance approved; superseded for runtime by the complete directional/motion review",
   "source": "/workspace/generated_images/exec-d4ed7775-1941-4eaa-a334-795e804fc1db.png",
   "approvedConcept": "tools/tactics-assets/concepts/townsfolk/generated/character_mother_aubrine.png",
   "styleReferences": [
@@ -25,5 +25,10 @@
     "tools/tactics-assets/concepts/townsfolk/generated/character_mother_aubrine.png": "aff8f606f5cca2bfbc71df44e951e5a63a2c3c01fc6752bf81f9535a77c9f66b",
     "tools/tactics-assets/pixellab/townsfolk/halden/native/Idle/rotations/south.png": "1b932f395aea3e1ffdd1791793aedc473ac7f59cee6a4312ff6eec3c46f0010a",
     "tools/tactics-assets/pixellab/townsfolk/directional/approved-south-east.png": "4b978108451e0ee0407636435577bceca4c5fce555051cd51e9af915615b574c"
+  },
+  "ownerAppearanceApproval": {
+    "quote": "Looks good, continue so we can she her finished",
+    "date": "2026-11-04",
+    "scope": "Appearance only; completed motion/directional/portrait/TV set has a separate approval gate."
   }
 }

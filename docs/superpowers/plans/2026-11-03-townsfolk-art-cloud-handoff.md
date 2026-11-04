@@ -225,3 +225,37 @@ pixel grid/native scale are unvalidated. Await appearance review; do not install
 it as a finished eight-direction atlas. Keep the existing approval/TV/frame/memory
 gates. Production still uses approved Bree/Halden; no completed art was regenerated.
 See `reports/2026-11-03-townsfolk-art/imagegen-trial.md`.
+
+## Current Aubrine completion checkpoint
+
+The owner approved her appearance: “Looks good, continue so we can she her finished”.
+Aubrine now has a complete **eight-direction idle/walk/talk set (144 native frames)**
+and **six native 40×40 portrait moods**, built with the image tool and no PixelLab
+API/credit use. All requests, raw images, normalized frames, shared palettes,
+curation and receipts are committed under
+`tools/tactics-assets/imagegen/townsfolk/mother-aubrine/`. Do not regenerate them.
+
+Read [the completed review report](../reports/2026-11-03-townsfolk-art/aubrine-imagegen/report.md).
+`aubrine-finished-review.mp4` shows loops/portraits and a labelled native TV still.
+The left profile now correctly carries the cloth pouch; the other 126 native
+frames remain exact. Use `rotations/` for final native facings, not the older
+`directional/rotations/` input guides. The body atlas is 1728×768 / 5.0625 MiB,
+frame96×96, anchor[48,84], scale0.5; idle/talk play ten indices across six sources,
+walk six. Per-direction fixed import transforms, binary alpha, locked96-colour
+palette. Do not apply this adult human height blindly to children/goblins.
+
+Full-set/portrait/TV approval **is still pending**; appearance approval is already
+granted and must not be requested again. `sprite-approval.json` binds the complete
+review to exact hashes. A prepared `install-approved.cjs` refuses the pending gate;
+its refusal was verified against the unchanged production inventory. After full
+approval, update the per-character frame-count tests for Aubrine's10/6/10 clips,
+integrate the body/portraits, and rerun production gates. Keep Bree/Halden checks strict.
+
+Actual native review and typed game import/bark/portrait checks pass; all144 frames
+validate with <=1world-pixel foot variation. Review peaks with four heroes and
+roster replacement: **310.65 MiB Ashen**, **192.37 MiB Cinder**, below512. Offline
+rebuild hashes reproduce. Production stays at Bree/Halden, cold201,517,448bytes;
+no rules/balance/phone changes. Other23 sprites and remaining portraits are ahead.
+Use the new image-tool package (`npm ci --prefix tools/tactics-assets/imagegen/townsfolk`)
+for offline builders; no PixelLab helper/credential is needed. Pull with rebase
+before pushing; do not merge, open a PR, close #80 or purchase credits.

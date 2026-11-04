@@ -1,0 +1,7 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/west-source.png"
+  ],
+  "prompt": "CORRECT THE EQUIPMENT SIDE ONLY on this exact eighteen-frame Mother Aubrine WEST/LEFT-PROFILE animation sheet. All eighteen figures are looking screen LEFT, so we see her ANATOMICAL LEFT hip. That visible hip must have the small rough beige CLOTH POUCH from her approved design, not a round brass medallion. The brass flame token and keys belong on her anatomical RIGHT hip, which is the FAR HIDDEN SIDE in this left profile: do NOT show the brass token or keys on the visible left side. Replace the round brass token/keys at the visible hip with the plain coarse beige cloth pouch tethered to her rope belt in EVERY frame. Keep her older woman's face, braided grey hair and bun, brown cape, charcoal dress, rust tabard, boots, colours and all actual animation poses unchanged. Preserve the exact uniform six-column three-row grid: row1 six idle poses, row2 six walk poses, row3 six talk gestures. Do not change direction or turn her toward the viewer; every nose still points LEFT. No resizing, repositioning or per-frame zoom. Same body size and baseline. Keep genuine transparent alpha ZERO outside each silhouette and no background/white haze; opaque clothing/skin and clean pixel-art clusters. Change only this one equipment-side error across all eighteen frames."
+}

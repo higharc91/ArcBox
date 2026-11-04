@@ -1,0 +1,7 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/mother-aubrine/portraits-source.png"
+  ],
+  "prompt": "Fix the SPACING and TRANSPARENCY of this six-mood Mother Aubrine pixel portrait sheet. Preserve the exact same older woman's face, grey hair, bun, cape, palette and all six expressions: top neutral/hurt/happy; bottom angry/sad/surprised. Keep the same crisp pixel-art drawing style. Make an exact uniform THREE-COLUMN TWO-ROW square-cell grid. Each head-and-shoulders bust must be centered WITHIN its own square cell with a LARGE clear transparent gutter: at least 15 percent of cell width on BOTH left and right, and 8 percent above and below. Shrink all six portraits equally if needed to create that spacing. No portrait's shoulders, cape, hair, stray pixels or shadow may enter a neighbouring cell. All six heads have equal size, framing and baseline. Remove ALL the black/brown vignette, halo and background between portraits. Outside each bust silhouette must be genuine alpha ZERO, not dark translucent haze or a full-image matte. Keep each woman's skin, hair and cape solid opaque. No labels, grid lines or background. Return only this corrected six-mood portrait sheet on fully transparent background."
+}
