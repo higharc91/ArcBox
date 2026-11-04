@@ -7,6 +7,7 @@ import { DetailsSheet, modifier, Sheet as Panel, signed, STATS, Tags, type Conte
 import { canCompose, lookFor, RETRY_MS, type Look } from "./look";
 import { Section } from "./ui";
 import { TrinketSlot, type Trinket } from "./trinket";
+import { KeyRing, type KeyEntry } from "./quests";
 
 /**
  * Wardenflame between sessions (sub-project 4): the party, your character, and what you can do to it. With no character
@@ -38,6 +39,8 @@ interface Options {
 export interface TacticsPortalView {
   level: number; completed: string[]; party: { name: string; character: string; xp: number; you: boolean; color?: string | null }[];
   me: Me | null; options: Options | null; details?: PortalDetails;
+  /** The party's key ring, once it holds a key (the owner's decision 8). */
+  keys?: KeyEntry[];
 }
 
 export const pointsSpent = (scores: Record<StatKey, number>) => STATS.reduce((n, s) => n + (COST[scores[s]] ?? 99), 0);
@@ -76,6 +79,7 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
           );
         })}
       </ul>
+      <KeyRing keys={view.keys} />
       {making && view.options ? (
         <Create options={view.options} readOnly={readOnly} send={send} onCancel={view.me ? () => setMaking(false) : undefined}
           freeRemake={view.me?.freeRemake ?? false} start={view.me} explainWith={explainWith} details={details} />

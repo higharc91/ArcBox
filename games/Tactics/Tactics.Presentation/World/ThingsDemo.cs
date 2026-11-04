@@ -292,7 +292,7 @@ public static class ThingsDemo
             (trapped, ThingEvents.Spotted, new InteractableSave("closed", TrapSpotted: true)));
         Add("trap-spotted", "Ana spots a pressure plate. Ana spots a trap on the crate.", 2.2, Moment("trap-spotted"));
         Happen((pit, ThingEvents.Sprung, new InteractableSave("idle", Trap: InteractableSave.Sprung)));
-        Add("trap-sprung", "Click. A trap goes off, but it does no harm.", 2, Moment("trap-sprung"));
+        Add("trap-sprung", InteractScenes.DefaultSprung + " Ana takes a minor injury: Scraped hands.", 2, Moment("trap-sprung"));
         Happen((plate, ThingEvents.Disarmed, new InteractableSave("idle", TrapSpotted: true, Trap: InteractableSave.Disarmed)));
         Add("trap-disarmed", "Ana takes the pressure plate apart.", 2, Moment("trap-disarmed"));
 

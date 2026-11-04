@@ -231,7 +231,12 @@ public sealed record QuestHistoryView(string Log, bool Done, string? Objective);
 public sealed record QuestItemView(string Name, int Count);
 public sealed record QuestRewardView(int Gold, int Xp, ImmutableArray<QuestItemView> Items);
 public sealed record QuestEntryView(string Id, string Name, string Status, string Giver, string? Portrait, string Objective, ImmutableArray<QuestHistoryView> History, string? Result, QuestRewardView? Rewards);
-public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading);
+/// <summary>
+/// The quest journal. <see cref="Keys"/> is the party's key ring (USER DECISION 8, decided 2026-11-03), for everyone: written only once the
+/// party holds a key, so a journal with none is as it was.
+/// </summary>
+public sealed record QuestLogView(ImmutableArray<QuestEntryView> Quests, string? Selected, string? Pinned, bool CanPin, string? Reading,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<KeyInfo>? Keys = null);
 
 public sealed record TrinketGiftView(string Member, string Name, string Class, string Trinket, string Title, bool Here);
 public sealed record QuestEventView(int Seq, string Quest, string Name, string Kind, DateTimeOffset Until, int Gold, int Xp,
@@ -514,7 +519,7 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
-        if (!RegionQuests.IsEmpty)
+        if (HasJournal)
         {
             data["journal"] = JsonSerializer.SerializeToNode(Journal(leads), ArcJson.Options);
             if (leads) data["canOpenLog"] = true;

@@ -109,7 +109,29 @@ public sealed partial class TacticsGame
         return AllThings.Any(d => d.At == at && Interactables.Blocks(d, ThingState(d), flags) && !Interactables.Visible(d, ThingState(d), flags));
     }
 
-    private ImmutableSortedDictionary<string, InteractableSave>? ThingSaves => _doc.World?.Things;
+    /// <summary>
+    /// How each thing is now, by id: as saved, with what the party's last long rest reopened (USER DECISION 2, decided 2026-11-03): a failed
+    /// pick, force or seal, and a failed search, spent at an earlier rest are there to try again (<see cref="Interactables.Rested"/>). Every
+    /// read of a thing goes through here, so the next write of one keeps it reopened.
+    /// </summary>
+    private ImmutableSortedDictionary<string, InteractableSave>? ThingSaves
+    {
+        get
+        {
+            if (_doc.World?.Things is not { } saved)
+                return null;
+            var rest = _doc.World.RestSeq;
+            if (_rested is { } cached && ReferenceEquals(cached.Saved, saved) && cached.RestSeq == rest)
+                return cached.Now;
+            var now = saved.Values.Any(t => Interactables.Rested(t, rest) != t)
+                ? Ordinal.Map(saved.Select(t => (t.Key, Interactables.Rested(t.Value, rest))))
+                : saved;
+            _rested = (saved, rest, now);
+            return now;
+        }
+    }
+
+    private (ImmutableSortedDictionary<string, InteractableSave> Saved, int RestSeq, ImmutableSortedDictionary<string, InteractableSave> Now)? _rested;
 
     private InteractableSave ThingState(InteractableDef def) => def.Kind == "stall"
         ? new InteractableSave(RegionShops.Any(s => s.Keeper.Thing == def.Id && ShopRules.Present(s, StoryFlags())) ? "open" : "closed")
@@ -221,7 +243,7 @@ public sealed partial class TacticsGame
     /// its loot to <paramref name="by"/> if this step opens it, its trap's effect on them if this step springs it, and a lever's passages.
     /// All of it goes in the document; the caller saves.
     /// </summary>
-    private void Apply(InteractableDef def, InteractOutcome outcome, string by, string? line = null)
+    private string? Apply(InteractableDef def, InteractOutcome outcome, string by, string? line = null)
     {
         var before = ThingState(def);
         var after = outcome.Apply(before);
@@ -229,9 +251,8 @@ public sealed partial class TacticsGame
         AddFlags(outcome.Sets);
         if (InteractScenes.LootDue(before, outcome))
             GiveLoot(def, by);
-        if (InteractScenes.SpringDue(before, outcome))
-            Spring(def, by);
-        Event(def, outcome.Event, by, line);
+        var hurt = InteractScenes.SpringDue(before, outcome) ? Spring(def, by) : null;
+        Event(def, outcome.Event, by, hurt is null ? line : line is null ? hurt : $"{line} {hurt}");
         if (Interactables.KindOf(def).Family == InteractableFamily.Switch && after.State != before.State)
             foreach (var target in def.Targets.Select(ThingNamed).OfType<InteractableDef>())
             {
@@ -239,11 +260,15 @@ public sealed partial class TacticsGame
                 if (Interactables.Visible(target, ThingState(target), StoryFlags()))
                     Event(target, ThingEvents.Toggled, by, null);      // a passage that isn't there, or isn't found, moves unseen
             }
+        return hurt;
     }
 
     private void SetThing(InteractableDef def, InteractableSave save)
     {
         var world = _doc.World!;
+        // A way that fails, or a search that misses, now is spent until the next long rest after this one.
+        if (save.Rest < world.RestSeq && (save.Searched || save.Spent.Any(Interactables.Reopens)))
+            save = save with { Rest = world.RestSeq };
         var things = world.Things ?? Ordinal.Map<InteractableSave>();
         if (things.TryGetValue(def.Id, out var kept) && kept == save)
             return;
@@ -276,18 +301,26 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// A trap goes off on <paramref name="member"/> (design §3.2): its flags are set, and by default that's all. A trap the content gives an
-    /// injury or a lost item does that too; nothing in the base pack does yet (USER DECISION 3).
+    /// A trap goes off on <paramref name="member"/> (design §1.6): its flags are set, and they take a minor injury (USER DECISION 3, decided
+    /// by the owner on 2026-11-03): the trap's own, else one picked by weight among those any long rest mends (<see cref="TrapInjuries"/>),
+    /// rolled once and saved with the spring, so a restart never hurts anyone twice. A trap that takes an item takes one. Battle injuries are
+    /// as they were. Returns the line that says who was hurt, or null.
     /// </summary>
-    private void Spring(InteractableDef def, string member)
+    private string? Spring(InteractableDef def, string member)
     {
         var trap = def.Trap!;
         AddFlags(trap.Sets);
         if (!_doc.Members.TryGetValue(member, out var record))
-            return;
+            return null;
         var character = record.Character;
-        if (trap.Injury is { } injury && Rules.Injuries.ContainsKey(new InjuryId(injury)))
-            character = character with { Injuries = character.Injuries.Add(new InjuryId(injury)) };
+        var total = TrapInjuries.Total(Rules);
+        var roll = trap.Injury is null && total > 0 ? TrapRoll?.Invoke(total) ?? _ctx.Random.Next(1, total + 1) : 1;
+        string? hurt = null;
+        if (TrapInjuries.Pick(trap, Rules, roll) is { } injury)
+        {
+            character = character with { Injuries = character.Injuries.Add(injury) };
+            hurt = $"{character.Name} takes a minor injury: {Rules.Injuries[injury].Name}.";
+        }
         if (trap.Lose is { } lose && character.Bag.FirstOrDefault(s => s.Item == lose) is { } stack)
             character = character with
             {
@@ -295,7 +328,11 @@ public sealed partial class TacticsGame
             };
         if (character != record.Character)
             _doc = _doc with { Members = _doc.Members.SetItem(member, record with { Character = character }) };
+        return hurt;
     }
+
+    /// <summary>A test's roll for a trap's injury, from 1 to the total it's given; null rolls the game's die.</summary>
+    internal Func<int, int>? TrapRoll { get; set; }
 
     private void Event(InteractableDef def, string what, string? by, string? line)
     {
@@ -346,8 +383,8 @@ public sealed partial class TacticsGame
         foreach (var def in Things.Where(d => d.At == _at))
             if (InteractScenes.SteppedOn(def, ThingState(def), flags) is { Outcome: { } sprung } plan)
             {
-                Apply(def, sprung, _lead!, plan.Line);
-                Say(plan.Line);
+                var hurt = Apply(def, sprung, _lead!, plan.Line);
+                Say(hurt is null ? plan.Line : $"{plan.Line} {hurt}");
                 changed = true;
             }
         changed |= LookAround();
@@ -551,7 +588,8 @@ public sealed partial class TacticsGame
         if (Cursor?.Thing is not { } cursor || ThingPlan(cursor) is not { } plan || !plan.Outcomes.TryGetValue(node.Id, out var outcome)
             || ThingNamed(cursor.Id) is not { } def)
             return;
-        Apply(def, outcome, cursor.By, node.Lines.Length > 0 ? node.Lines[^1].Text : null);
+        if (Apply(def, outcome, cursor.By, node.Lines.Length > 0 ? node.Lines[^1].Text : null) is { } hurt)
+            Say(hurt);      // the scene says the trap's words; the TV's notice says what it did
     }
 
     /// <summary>The interaction's scene has ended: the cursor goes, and the party walks again.</summary>

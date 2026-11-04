@@ -260,13 +260,14 @@ public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray
 /// <see cref="Weight"/>. Its <see cref="Static"/> modifiers hold in later battles until healed in town, and its
 /// <see cref="Effects"/>, if any, run on its owner on <see cref="Hook"/> (Deep cut: bleeding at the start of each battle);
 /// both reach the battle as the passive <see cref="RulesPack.InjuryPassiveId"/>. <see cref="Replaces"/> lets a later pack
-/// override an id.
+/// override an id. <see cref="Battle"/> false keeps it out of the battle table: an out-of-battle trap's minor injury (owner decision
+/// of 2026-11-03, issue #83), which a sprung trap picks by weight among the rest-kind injuries (<see cref="TrapInjuries"/>).
 /// </summary>
 public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HookKind? Hook = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<EffectDef> Effects = default,
-    string Mends = "body");
+    string Mends = "body", bool Battle = true);
 
 /// <summary>A resource that refills during the battle: <see cref="Amount"/> every <see cref="EveryRounds"/> rounds.</summary>
 public sealed record ResourceRegenDef(string Resource, int Amount, int EveryRounds);

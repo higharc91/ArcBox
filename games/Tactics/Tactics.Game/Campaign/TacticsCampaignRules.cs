@@ -86,13 +86,17 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             creating ? rules.Classes.Values : rules.Classes.Values.Where(c => c.Id == own!.Class),
             creating ? rules.Backgrounds.Values : rules.Backgrounds.Values.Where(b => b.Id == own!.Background),
             own?.Level ?? doc.PartyLevel, rules, own?.Class);
-        return JsonSerializer.SerializeToElement(new
+        var view = JsonSerializer.SerializeToNode(new
         {
             level = doc.PartyLevel, completed = doc.Completed, party,
             me = mine is null ? null : Mine(mine, rules),
             options,
             details,
-        }, ArcJson.Options);
+        }, ArcJson.Options)!.AsObject();
+        // The party's key ring (USER DECISION 8, decided 2026-11-03), beside the party: only once it holds a key, so a portal with none is as it was.
+        if (doc.World is { } world && KeyRing.Of(rules, world.Flags, world.Things) is { IsEmpty: false } keys)
+            view["keys"] = JsonSerializer.SerializeToNode(keys, ArcJson.Options);
+        return JsonSerializer.SerializeToElement(view, ArcJson.Options);
     }
 
     /// <summary>

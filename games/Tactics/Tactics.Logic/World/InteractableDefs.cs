@@ -39,9 +39,9 @@ public sealed record LockDef(string? Key = null, string? KeyName = null, int? Pi
 /// <summary>
 /// A trap on a container, a door or the ground (design §1.6). The party's best passive Perception against <see cref="Spot"/> finds it as the
 /// leader passes within <see cref="Interactables.RevealRange"/>; <see cref="Disarm"/> is the Sleight of Hand DC to take it apart, null for
-/// a trap that can't be. Springing it says <see cref="Text"/> and sets <see cref="Sets"/>; by default that's all it does (design, USER
-/// DECISION 3). <see cref="Injury"/> gives the one who sprang it that injury, and <see cref="Lose"/> takes one of that item from their bag:
-/// both are supported and unused until the user decides.
+/// a trap that can't be. Springing it says <see cref="Text"/>, sets <see cref="Sets"/> and gives the one who sprang it a minor injury
+/// (USER DECISION 3, decided 2026-11-03): <see cref="Injury"/> if it names one, else one picked by weight among the rest-kind injuries
+/// (<see cref="TrapInjuries"/>), which any camp or inn night mends. <see cref="Lose"/> takes one of that item from their bag as well.
 /// </summary>
 public sealed record TrapDef([property: JsonRequired] int Spot, int? Disarm = null, ImmutableArray<string> Text = default,
     ImmutableArray<string> Sets = default, string? Injury = null, ItemId? Lose = null);
@@ -163,15 +163,23 @@ public sealed record InteractableDef(string Id, string Kind, [property: JsonRequ
 /// <param name="Unlocked">True once its lock is open.</param>
 /// <param name="TrapSpotted">True once its trap has been seen.</param>
 /// <param name="Trap">Null while its trap is set; <c>disarmed</c> or <c>sprung</c> after.</param>
-/// <param name="Searched">True once an active Search has failed to find it: it can't be searched for again, though passive skills still may.</param>
+/// <param name="Searched">True once an active Search has failed to find it: it can't be searched for again until the party's next long rest, though passive skills still may.</param>
 /// <param name="Spent">The ways through its lock, or at its trap, that have failed (<see cref="Interactables.PickApproach"/> and the rest).</param>
+/// <param name="Rest">
+/// The long rest (<c>WorldSave.RestSeq</c>) its failed lock ways and failed search were spent in: they're spent until the next one, which
+/// reopens them (USER DECISION 2, decided 2026-11-03; <see cref="Interactables.Rested"/>). 0 isn't written, so a save from before reads as
+/// spent at rest 0, which the next rest clears. A failed disarm is never reopened: it sprang the trap.
+/// </param>
+/// <param name="Keyed">True once its lock was opened with its key: the key ring says the key's been used (USER DECISION 8, decided 2026-11-03).</param>
 public sealed record InteractableSave(string State,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Found = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Unlocked = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool TrapSpotted = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trap = null,
     ImmutableArray<string> Spent = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Searched = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Searched = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Rest = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Keyed = false)
 {
     /// <summary>The ways that have failed; never a default array.</summary>
     public ImmutableArray<string> Spent { get => field.IsDefault ? [] : field; init; } = Spent;
