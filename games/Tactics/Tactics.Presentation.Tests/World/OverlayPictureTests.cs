@@ -443,6 +443,86 @@ public sealed class OverlayPictureTests
         Assert.Equal(0, drawn.Zip(truth).Count(p => p.First != p.Second));
     }
 
+    /// <summary>The ford's timber bridge (OW-08), in the world and on the fight's own map: its pieces, and the tiles of the map they lie over.</summary>
+    private static (BoardItem[] Pieces, BoardTerrain Terrain, Func<Tile, bool> Walkable) Bridge(bool world)
+    {
+        var map = world ? FordGround.Value.Map : Pack.Map("river_crossing");
+        var terrain = world ? Ford.Value.Plan.Terrain : new BoardTerrain(map, null);
+        var logic = world ? FordGround.Value.Terrain : new Terrain(map, ImmutableSortedDictionary<Tile, int>.Empty, []);
+        var items = world ? Ford.Value.Plan.Blocks.SelectMany(b => b.Plan.Items) : BoardPlan.Build(terrain, Pack.Art).Items;
+        var pieces = items.Where(i => (i is Face face ? face.Image : (i as Sprite)?.Image)?.Path.Contains("bridge_timber", StringComparison.Ordinal) == true).ToArray();
+        Assert.NotEmpty(pieces);
+        return (pieces, terrain, logic.Walkable);
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void The_fords_bridge_is_drawn_whole_at_its_manifests_size(bool world)
+    {
+        var (pieces, _, _) = Bridge(world);
+        var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
+        foreach (var piece in pieces)
+        {
+            var (from, to) = BoardPlan.Bounds(piece);
+            (min, max) = (Vector2.Min(min, from), Vector2.Max(max, to));
+            if (piece is Face face)
+                Assert.All(face.Uvs, uv => Assert.True(uv.X is >= 0 and <= 1 && uv.Y is >= 0 and <= 1, $"{uv}"));
+        }
+
+        // The art is 192 x 128 for a 96 x 64 prop: drawn as 96 x 64 of its texels, it showed a quarter, cut off straight down and across.
+        Assert.Equal(96, max.X - min.X, 0.01);
+        Assert.All(pieces, p => Assert.IsType<Face>(p));
+        var across = pieces.Cast<Face>().Select(f => (f.Uvs[0].X, f.Uvs[1].X)).Distinct().Sum(u => u.Item2 - u.Item1);
+        Assert.InRange(across, 0.97f, 1.0001f);
+        Assert.InRange(pieces.Cast<Face>().Max(f => f.Uvs.Max(uv => uv.Y)) - pieces.Cast<Face>().Min(f => f.Uvs.Min(uv => uv.Y)), 0.97f, 1.0001f);
+    }
+
+    /// <summary>Whether the bridge's art has a pixel at <paramref name="at"/> in <paramref name="piece"/>, which is 96 x 64 art pixels whole.</summary>
+    private static bool Covers(BoardItem piece, Vector2 at)
+    {
+        var size = new Vector2(96, 64);
+        var (quad, uv0, image) = piece is Face face ? ([.. face.Points], face.Uvs[0], face.Image!) : (new[] { ((Sprite)piece).TopLeft, ((Sprite)piece).TopLeft + new Vector2(96, 0), ((Sprite)piece).TopLeft + size, ((Sprite)piece).TopLeft + new Vector2(0, 64) }, Vector2.Zero, ((Sprite)piece).Image);
+        if (!Inside(quad, at))
+            return false;
+        var uv = (at - (quad[0] - uv0 * size)) / size;
+        var (solid, width) = Mask(image);
+        var height = solid!.Length / width;
+        var (x, y) = ((int)(uv.X * width), (int)(uv.Y * height));
+        return x >= 0 && y >= 0 && x < width && y < height && solid[y * width + x];
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_unit_on_the_fords_bridge_stands_on_it_and_one_behind_is_hidden_by_it(bool world)
+    {
+        var (pieces, terrain, walkable) = Bridge(world);
+        // It stands on its tile's middle and reaches back along U over the ford, from bank to bank.
+        var own = pieces.MaxBy(p => p.Tile.X)!.Tile;
+        var under = Enumerable.Range(0, 4).Select(k => own with { X = own.X - k }).Where(walkable).ToArray();
+        Assert.True(under.Length >= 3, $"the bridge lies over {under.Length} walkable tiles");
+
+        // What's at a unit's feet, in the middle of its tile, is under it, unless it's on the next tile in front and higher: the bank's ledge, with the bridge's end on it.
+        var party = Party(1);
+        foreach (var tile in under)
+        {
+            var unit = UnitPlan.Walkers(party, new Dictionary<string, UnitPlace> { ["a"] = UnitPlace.On(terrain, tile) }, new Dictionary<string, UnitPose>(), Art.Value)[0];
+            var feet = Enumerable.Range(-3, 7).SelectMany(dx => Enumerable.Range(-10, 11).Select(dy => unit.Feet + new Vector2(dx, dy))).ToArray();
+            bool Ledge(Tile t) => (t == tile with { X = tile.X + 1 } || t == tile with { Y = tile.Y + 1 }) && terrain.Top(t) > terrain.Top(tile);
+            var over = pieces.Where(p => p.Order > unit.Order && !Ledge(p.Tile) && feet.Any(f => Covers(p, f))).Select(p => p.Tile).ToArray();
+            Assert.True(over.Length == 0, $"a unit on {tile} is under the bridge's piece on {string.Join(", ", over)}");
+        }
+
+        // Behind it, a tile back from its middle, a unit is hidden where the bridge is in front: the planks still go over it.
+        var middle = under.OrderBy(t => t.X).ThenBy(t => t.Y).ElementAt(under.Length / 2);
+        var behind = new Tile(middle.X, middle.Y - 1);
+        var back = UnitPlan.Walkers(party, new Dictionary<string, UnitPlace> { ["a"] = UnitPlace.On(terrain, behind) }, new Dictionary<string, UnitPose>(), Art.Value)[0];
+        var area = WorldPlan.AreaOf(back);
+        var body = Enumerable.Range((int)area.Min.X, (int)(area.Max.X - area.Min.X)).SelectMany(x => Enumerable.Range((int)area.Min.Y, (int)(area.Max.Y - area.Min.Y)).Select(y => new Vector2(x + 0.5f, y + 0.5f))).ToArray();
+        Assert.Contains(pieces, p => p.Order > back.Order && body.Any(b => Covers(p, b)));
+    }
+
     [Fact]
     public void Without_the_closure_the_walk_goes_wrong_so_this_test_can_fail()
     {

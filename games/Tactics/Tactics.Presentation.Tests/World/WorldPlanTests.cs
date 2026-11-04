@@ -216,9 +216,19 @@ public sealed class WorldPlanTests
             var art = Pack.Art.Prop(prop.Id, [terrain.Look(at).Variant])!;
 
             var block = FordPlan.Value.Blocks.Single(b => b.Tiles.Contains(at));
+            var topLeft = terrain.Centre(at) - new Vector2(art.AnchorX, art.AnchorY);
+            if (art.Shape is not null)
+            {
+                // A bridge's deck, in pieces: the one on its own tile reaches its right edge, and the rest lie over the tiles behind it, where it reaches.
+                var pieces = FordPlan.Value.Blocks.SelectMany(b => b.Plan.Items).OfType<Face>().Where(f => f.Kind == FaceKind.Prop && f.Image == art.Image).ToArray();
+                Assert.Contains(pieces, p => p.Tile == at && p.Order == BoardOrder.Key(at, BoardLayer.Prop));
+                Assert.Equal(topLeft.X, pieces.Min(p => p.Points.Min(q => q.X)), 0.01);
+                Assert.Equal(topLeft.X + art.Width, pieces.Max(p => p.Points.Max(q => q.X)), 1);
+                continue;
+            }
             var sprite = block.Plan.Items.OfType<Sprite>().First(s => s.Tile == at);
 
-            Assert.Equal(terrain.Centre(at) - new Vector2(art.AnchorX, art.AnchorY), sprite.TopLeft);
+            Assert.Equal(topLeft, sprite.TopLeft);
             Assert.Equal(BoardOrder.Key(at, BoardLayer.Prop), sprite.Order);
         }
     }

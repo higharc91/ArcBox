@@ -197,8 +197,10 @@ public sealed class StagePlanTests(ITestOutputHelper output)
             {
                 var onBoard = Assert.Single(UnitPlan.Build(Battle(Unit("hero1", near.X, near.Y)), terrain, Units.Value, fit));
                 var onStage = Assert.Single(UnitPlan.Build(Battle(Unit("hero1", near.X, near.Y)), terrain, Units.Value, fit, worldOffset: stage.Origin));
-                var boardProp = Assert.Single(plain.Items, i => i is Sprite && i.Tile == prop.At);
-                var stageProp = Assert.Single(plan.Items, i => i is Sprite && i.Tile == stage.ToWorld(prop.At));
+                // A bridge's deck is in pieces, each on the tile it lies over: the one on its own tile stands for it here.
+                static bool Drawn(BoardItem i) => i is Sprite or Face { Kind: FaceKind.Prop };
+                var boardProp = plain.Items.First(i => Drawn(i) && i.Tile == prop.At);
+                var stageProp = plan.Items.First(i => Drawn(i) && i.Tile == stage.ToWorld(prop.At));
                 Assert.Equal(boardProp.Order < onBoard.Order, stageProp.Order < onStage.Order);
                 Assert.Equal(onBoard.Feet, onStage.Feet);
             }

@@ -351,6 +351,8 @@ public sealed class WorldPlan
             for (var i = 0; i < a.Length; i++)
             {
                 var edge = a[(i + 1) % a.Length] - a[i];
+                if (edge.LengthSquared() < Touch)
+                    continue;       // a quad with two corners at one point (a wide prop's piece cut to a triangle) has no side there to be apart by
                 var across = new Vector2(-edge.Y, edge.X);
                 var (minA, maxA) = Range(a, across);
                 var (minB, maxB) = Range(b, across);
