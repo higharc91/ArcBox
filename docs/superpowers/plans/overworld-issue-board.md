@@ -218,4 +218,4 @@ Painting in the real editor, the pad on real phones, sound, sofa distance, a mod
 
 ### OW-24 · Visible roaming enemies · `in progress`, issue #79
 
-Branch `overworld-mobs`, based on current main after #74/#77. Owner decisions and implementation contracts: [design](../specs/2026-11-03-tactics-overworld-mobs-design.md). Seven groups planned across Ashen Ford and Cinder Hollow; no PR until requested. Initial work: repository/lore/runtime review and design recorded. Runtime, painted arenas, balance simulations, phone/TV integration and end-to-end verification remain outstanding.
+Branch `overworld-mobs`, based on current main after #74/#77. Owner decisions and implementation contracts: [design](../specs/2026-11-03-tactics-overworld-mobs-design.md). Seven groups planned across Ashen Ford and Cinder Hollow; no PR until requested. Design recorded. First implementation: deterministic roaming-step/contact helper; seven focused tests pass and its build has zero warnings. Live runtime wiring, content validation, painted arenas, balance simulations, phone/TV integration and end-to-end verification remain outstanding.
