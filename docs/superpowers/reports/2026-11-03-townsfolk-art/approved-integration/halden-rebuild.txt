@@ -1,0 +1,1 @@
+{"atlas":{"width":1440,"height":768,"uncompressedMiB":4.21875,"sha256":"784a9ffc2ce4504bf23021e45df8409f0b3f5995c2b75a6dc06c42e49fea9081"},"warnings":["north static rotation touches top edge; inspect silhouette during owner review"],"productionInstalled":false}

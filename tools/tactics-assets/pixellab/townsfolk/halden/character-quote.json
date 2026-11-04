@@ -1,0 +1,328 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"name\": \"Pro Flash\",\n  \"revision\": \"pro-flash-presets-48-128-2026-09-29\",\n  \"grid_recovery\": \"Creation recovers the pixel grid the model drew with Unzoom. An exact grid is kept; drift of at most one pixel is recovered on the expected grid. Images with a background must fill the canvas, so any other size is redrawn with image-to-pixel-art on the generated box only. Sprites without a background keep their own pixels, centred on the canvas, while the drawn pixel is close to the requested one; coarser or oversized sprites are redrawn. Experimental 16x16 creation always uses image-to-pixel-art. Editing and inpainting start at 32x32 and never use image-to-pixel-art conversion.\",\n  \"operations\": {\n    \"create\": {\n      \"sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        },\n        {\n          \"width\": 24,\n          \"height\": 24\n        },\n        {\n          \"width\": 32,\n          \"height\": 32\n        },\n        {\n          \"width\": 32,\n          \"height\": 48\n        },\n        {\n          \"width\": 48,\n          \"height\": 48\n        },\n        {\n          \"width\": 64,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 96\n        },\n        {\n          \"width\": 128,\n          \"height\": 128\n        }\n      ],\n      \"experimental_sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        }\n      ],\n      \"custom_sizes\": {\n        \"enabled\": true,\n        \"min_width\": 16,\n        \"min_height\": 16,\n        \"max_width\": 256,\n        \"max_height\": 256,\n        \"step\": 4,\n        \"beta\": true\n      },\n      \"max_reference_images\": 0,\n      \"supports_no_background\": true,\n      \"supports_style_options\": true,\n      \"output_count\": 1\n    },\n    \"edit\": {\n      \"sizes\": [\n        {\n          \"width\": 32,\n          \"height\": 32\n        },\n        {\n          \"width\": 32,\n          \"height\": 48\n        },\n        {\n          \"width\": 64,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 96\n        },\n        {\n          \"width\": 128,\n          \"height\": 128\n        }\n      ],\n      \"experimental_sizes\": [],\n      \"custom_sizes\": {\n        \"enabled\": true,\n        \"min_width\": 32,\n        \"min_height\": 32,\n        \"max_width\": 256,\n        \"max_height\": 256,\n        \"step\": 4,\n        \"beta\": true\n      },\n      \"max_reference_images\": 1,\n      \"supports_no_background\": true,\n      \"supports_style_options\": false,\n      \"output_count\": 1,\n      \"edit_methods\": [\n        \"text\",\n        \"reference\"\n      ],\n      \"canvas_growth\": false,\n      \"reference_image_fit\": \"native dimensions must fit the edit canvas\"\n    },\n    \"inpaint\": {\n      \"sizes\": [\n        {\n          \"width\": 32,\n          \"height\": 32\n        },\n        {\n          \"width\": 32,\n          \"height\": 48\n        },\n        {\n          \"width\": 64,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 96\n        },\n        {\n          \"width\": 128,\n          \"height\": 128\n        }\n      ],\n      \"experimental_sizes\": [],\n      \"custom_sizes\": {\n        \"enabled\": true,\n        \"min_width\": 32,\n        \"min_height\": 32,\n        \"max_width\": 256,\n        \"max_height\": 256,\n        \"step\": 4,\n        \"beta\": true\n      },\n      \"max_reference_images\": 1,\n      \"supports_no_background\": true,\n      \"supports_style_options\": false,\n      \"output_count\": 1,\n      \"canvas_growth\": false,\n      \"crop_to_mask_values\": [\n        true\n      ],\n      \"output_methods\": [\n        \"New layer with changes\",\n        \"Modify current layer, only changes\",\n        \"Modify current layer\"\n      ],\n      \"mask\": {\n        \"white_rgb\": \"generate\",\n        \"black_rgb\": \"preserve\",\n        \"alpha\": \"ignored\",\n        \"binary_rgb_required\": true\n      },\n      \"context\": {\n        \"bounding_box_required\": true,\n        \"max_width_multiple\": 3,\n        \"max_height_multiple\": 3,\n        \"native_pixels\": true\n      }\n    },\n    \"character\": {\n      \"sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        },\n        {\n          \"width\": 24,\n          \"height\": 24\n        },\n        {\n          \"width\": 32,\n          \"height\": 32\n        },\n        {\n          \"width\": 32,\n          \"height\": 48\n        },\n        {\n          \"width\": 48,\n          \"height\": 48\n        },\n        {\n          \"width\": 64,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 96\n        },\n        {\n          \"width\": 128,\n          \"height\": 128\n        }\n      ],\n      \"experimental_sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        }\n      ],\n      \"custom_sizes\": {\n        \"enabled\": true,\n        \"min_width\": 16,\n        \"min_height\": 16,\n        \"max_width\": 256,\n        \"max_height\": 256,\n        \"step\": 4,\n        \"beta\": true\n      },\n      \"max_reference_images\": 0,\n      \"supports_no_background\": true,\n      \"supports_style_options\": true,\n      \"output_count\": 8,\n      \"n_directions\": [\n        8\n      ],\n      \"includes_first_direction\": true,\n      \"supports_existing_source\": true,\n      \"rotation_canvas\": \"Native source padded to a square, minimum 32 pixels, aligned to four pixels.\"\n    },\n    \"object\": {\n      \"sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        },\n        {\n          \"width\": 24,\n          \"height\": 24\n        },\n        {\n          \"width\": 32,\n          \"height\": 32\n        },\n        {\n          \"width\": 32,\n          \"height\": 48\n        },\n        {\n          \"width\": 48,\n          \"height\": 48\n        },\n        {\n          \"width\": 64,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 64\n        },\n        {\n          \"width\": 96,\n          \"height\": 96\n        },\n        {\n          \"width\": 128,\n          \"height\": 128\n        }\n      ],\n      \"experimental_sizes\": [\n        {\n          \"width\": 16,\n          \"height\": 16\n        }\n      ],\n      \"custom_sizes\": {\n        \"enabled\": true,\n        \"min_width\": 16,\n        \"min_height\": 16,\n        \"max_width\": 256,\n        \"max_height\": 256,\n        \"step\": 4,\n        \"beta\": true\n      },\n      \"max_reference_images\": 0,\n      \"supports_no_background\": true,\n      \"supports_style_options\": true,\n      \"output_count\": \"n_directions\",\n      \"n_directions\": [\n        1,\n        8\n      ],\n      \"includes_first_direction\": true,\n      \"supports_existing_source\": true,\n      \"rotation_canvas\": \"Eight views use the square V3 canvas; one direction keeps the native size.\"\n    }\n  },\n  \"style_reference_fit\": \"native dimensions must fit the target canvas; smaller references are centered without resizing\",\n  \"cost\": {\n    \"image\": 5,\n    \"rotations\": 1,\n    \"total\": 6,\n    \"provisional\": true\n  }\n}"
+      }
+    ],
+    "structuredContent": {
+      "name": "Pro Flash",
+      "revision": "pro-flash-presets-48-128-2026-09-29",
+      "grid_recovery": "Creation recovers the pixel grid the model drew with Unzoom. An exact grid is kept; drift of at most one pixel is recovered on the expected grid. Images with a background must fill the canvas, so any other size is redrawn with image-to-pixel-art on the generated box only. Sprites without a background keep their own pixels, centred on the canvas, while the drawn pixel is close to the requested one; coarser or oversized sprites are redrawn. Experimental 16x16 creation always uses image-to-pixel-art. Editing and inpainting start at 32x32 and never use image-to-pixel-art conversion.",
+      "operations": {
+        "create": {
+          "sizes": [
+            {
+              "width": 16,
+              "height": 16
+            },
+            {
+              "width": 24,
+              "height": 24
+            },
+            {
+              "width": 32,
+              "height": 32
+            },
+            {
+              "width": 32,
+              "height": 48
+            },
+            {
+              "width": 48,
+              "height": 48
+            },
+            {
+              "width": 64,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 96
+            },
+            {
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "experimental_sizes": [
+            {
+              "width": 16,
+              "height": 16
+            }
+          ],
+          "custom_sizes": {
+            "enabled": true,
+            "min_width": 16,
+            "min_height": 16,
+            "max_width": 256,
+            "max_height": 256,
+            "step": 4,
+            "beta": true
+          },
+          "max_reference_images": 0,
+          "supports_no_background": true,
+          "supports_style_options": true,
+          "output_count": 1
+        },
+        "edit": {
+          "sizes": [
+            {
+              "width": 32,
+              "height": 32
+            },
+            {
+              "width": 32,
+              "height": 48
+            },
+            {
+              "width": 64,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 96
+            },
+            {
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "experimental_sizes": [],
+          "custom_sizes": {
+            "enabled": true,
+            "min_width": 32,
+            "min_height": 32,
+            "max_width": 256,
+            "max_height": 256,
+            "step": 4,
+            "beta": true
+          },
+          "max_reference_images": 1,
+          "supports_no_background": true,
+          "supports_style_options": false,
+          "output_count": 1,
+          "edit_methods": [
+            "text",
+            "reference"
+          ],
+          "canvas_growth": false,
+          "reference_image_fit": "native dimensions must fit the edit canvas"
+        },
+        "inpaint": {
+          "sizes": [
+            {
+              "width": 32,
+              "height": 32
+            },
+            {
+              "width": 32,
+              "height": 48
+            },
+            {
+              "width": 64,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 96
+            },
+            {
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "experimental_sizes": [],
+          "custom_sizes": {
+            "enabled": true,
+            "min_width": 32,
+            "min_height": 32,
+            "max_width": 256,
+            "max_height": 256,
+            "step": 4,
+            "beta": true
+          },
+          "max_reference_images": 1,
+          "supports_no_background": true,
+          "supports_style_options": false,
+          "output_count": 1,
+          "canvas_growth": false,
+          "crop_to_mask_values": [
+            true
+          ],
+          "output_methods": [
+            "New layer with changes",
+            "Modify current layer, only changes",
+            "Modify current layer"
+          ],
+          "mask": {
+            "white_rgb": "generate",
+            "black_rgb": "preserve",
+            "alpha": "ignored",
+            "binary_rgb_required": true
+          },
+          "context": {
+            "bounding_box_required": true,
+            "max_width_multiple": 3,
+            "max_height_multiple": 3,
+            "native_pixels": true
+          }
+        },
+        "character": {
+          "sizes": [
+            {
+              "width": 16,
+              "height": 16
+            },
+            {
+              "width": 24,
+              "height": 24
+            },
+            {
+              "width": 32,
+              "height": 32
+            },
+            {
+              "width": 32,
+              "height": 48
+            },
+            {
+              "width": 48,
+              "height": 48
+            },
+            {
+              "width": 64,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 96
+            },
+            {
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "experimental_sizes": [
+            {
+              "width": 16,
+              "height": 16
+            }
+          ],
+          "custom_sizes": {
+            "enabled": true,
+            "min_width": 16,
+            "min_height": 16,
+            "max_width": 256,
+            "max_height": 256,
+            "step": 4,
+            "beta": true
+          },
+          "max_reference_images": 0,
+          "supports_no_background": true,
+          "supports_style_options": true,
+          "output_count": 8,
+          "n_directions": [
+            8
+          ],
+          "includes_first_direction": true,
+          "supports_existing_source": true,
+          "rotation_canvas": "Native source padded to a square, minimum 32 pixels, aligned to four pixels."
+        },
+        "object": {
+          "sizes": [
+            {
+              "width": 16,
+              "height": 16
+            },
+            {
+              "width": 24,
+              "height": 24
+            },
+            {
+              "width": 32,
+              "height": 32
+            },
+            {
+              "width": 32,
+              "height": 48
+            },
+            {
+              "width": 48,
+              "height": 48
+            },
+            {
+              "width": 64,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 64
+            },
+            {
+              "width": 96,
+              "height": 96
+            },
+            {
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "experimental_sizes": [
+            {
+              "width": 16,
+              "height": 16
+            }
+          ],
+          "custom_sizes": {
+            "enabled": true,
+            "min_width": 16,
+            "min_height": 16,
+            "max_width": 256,
+            "max_height": 256,
+            "step": 4,
+            "beta": true
+          },
+          "max_reference_images": 0,
+          "supports_no_background": true,
+          "supports_style_options": true,
+          "output_count": "n_directions",
+          "n_directions": [
+            1,
+            8
+          ],
+          "includes_first_direction": true,
+          "supports_existing_source": true,
+          "rotation_canvas": "Eight views use the square V3 canvas; one direction keeps the native size."
+        }
+      },
+      "style_reference_fit": "native dimensions must fit the target canvas; smaller references are centered without resizing",
+      "cost": {
+        "image": 5,
+        "rotations": 1,
+        "total": 6,
+        "provisional": true
+      }
+    },
+    "isError": false
+  }
+}

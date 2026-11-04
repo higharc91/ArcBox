@@ -1,0 +1,24 @@
+✔ old phone moves keep their order when no risk fields are present (105.034476ms)
+✔ advancing prefers a safe route, or the least damaging necessary crossing (1.940577ms)
+✔ a hero can leave fire after spending its action, using remaining movement (0.8872ms)
+✔ safe water is a valid fire exit even though its warning mentions conduction (5.53477ms)
+✔ escaping still pursues the objective instead of scattering toward the nearest map edge (0.311581ms)
+✔ ordinary ground, decorative oil and no reachable safe exit do not cause shuffling (9.385349ms)
+✔ a delayed first motion sample does not move the initial origin (129.0102ms)
+✔ a snap without any rendered motion does not prove movement (26.262099ms)
+✔ legacy logs without a snap retain their first motion sample as origin (112.98564ms)
+✔ fresh party tile and exact screen markers work with "\n" (7.999839ms)
+✔ fresh party tile and exact screen markers work with "\r\n" (0.40952ms)
+✔ default route tokens use navigation without opening a shop and retain restart pauses (24.619014ms)
+✔ a complete four-member run passes at the exact binary memory limit with CRLF logs (10.127745ms)
+✔ the claimed PASS cannot conceal excessive or missing memory measurements (79.389042ms)
+✔ a single stand-in or an incomplete timed-out run cannot pass (2.003813ms)
+✔ roster tests require actual uploads and releases, without Godot errors (15.259431ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3012.67491

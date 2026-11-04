@@ -1,0 +1,211 @@
+{
+  "group_id": "ee74f2d6-335a-4275-8148-eabd70fc6e68",
+  "states": [
+    {
+      "character": {
+        "id": "a25c93f8-7dcd-45fa-8db2-4b1539c19e6e",
+        "name": "Idle",
+        "prompt": "Halden Varrow, the approved middle-aged HUMAN MALE mayor of Emberwick. Kind deeply tired lined face, heavy grey eyebrows, receding swept-back GREY hair with bald crown visible from rear, short neatly worn grey beard. Sturdy ordinary middle-aged male proportions, not a heroic warrior. Worn warm russet-brown knee-length wool coat, muted taupe waistcoat, dark grey hood DOWN behind neck, short weathered brown shoulder mantle with plain fur collar. Modest large round DULL BRASS civic medallion on cord centered on chest. Brown leather belt, large iron KEYS hanging at his anatomical RIGHT hip, closed flat brown ledger/satchel at his anatomical LEFT hip; strap crosses his back diagonally. Grey-brown trousers and practical tall brown boots. Weathered bare hands relaxed at sides. No crown, armour, weapon, apron, braid, fancy gold trim or ornate royal costume. This is a different person from the female style reference: preserve his male face, beard, male build and approved mayor clothing. Match ONLY the reference's crisp pixel clusters, selective outlines, worn materials, restrained palette, top-left warm key light and pixel density. First view STRAIGHT SOUTH front-on, shoulders and feet square to viewer, not three-quarter. Low top-down tactical camera. Full body about 72 native pixels tall, complete boots grounded near y75 on 48x80 transparent canvas. Keep identical face, build, equipment sides and scale across ALL eight real directions; rear has bald crown, lowered hood and diagonal strap, no face, medallion, front keys or front coat buttons pasted on back.",
+        "size": {
+          "width": 80,
+          "height": 80
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-04T08:44:26.854258+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "halden_talk": {
+            "south-west": [
+              "Idle/animations/halden_talk/south-west/frame_000.png",
+              "Idle/animations/halden_talk/south-west/frame_001.png",
+              "Idle/animations/halden_talk/south-west/frame_002.png",
+              "Idle/animations/halden_talk/south-west/frame_003.png",
+              "Idle/animations/halden_talk/south-west/frame_004.png"
+            ],
+            "south": [
+              "Idle/animations/halden_talk/south/frame_000.png",
+              "Idle/animations/halden_talk/south/frame_001.png",
+              "Idle/animations/halden_talk/south/frame_002.png",
+              "Idle/animations/halden_talk/south/frame_003.png",
+              "Idle/animations/halden_talk/south/frame_004.png"
+            ],
+            "north": [
+              "Idle/animations/halden_talk/north/frame_000.png",
+              "Idle/animations/halden_talk/north/frame_001.png",
+              "Idle/animations/halden_talk/north/frame_002.png",
+              "Idle/animations/halden_talk/north/frame_003.png",
+              "Idle/animations/halden_talk/north/frame_004.png"
+            ],
+            "west": [
+              "Idle/animations/halden_talk/west/frame_000.png",
+              "Idle/animations/halden_talk/west/frame_001.png",
+              "Idle/animations/halden_talk/west/frame_002.png",
+              "Idle/animations/halden_talk/west/frame_003.png",
+              "Idle/animations/halden_talk/west/frame_004.png"
+            ],
+            "north-east": [
+              "Idle/animations/halden_talk/north-east/frame_000.png",
+              "Idle/animations/halden_talk/north-east/frame_001.png",
+              "Idle/animations/halden_talk/north-east/frame_002.png",
+              "Idle/animations/halden_talk/north-east/frame_003.png",
+              "Idle/animations/halden_talk/north-east/frame_004.png"
+            ],
+            "south-east": [
+              "Idle/animations/halden_talk/south-east/frame_000.png",
+              "Idle/animations/halden_talk/south-east/frame_001.png",
+              "Idle/animations/halden_talk/south-east/frame_002.png",
+              "Idle/animations/halden_talk/south-east/frame_003.png",
+              "Idle/animations/halden_talk/south-east/frame_004.png"
+            ],
+            "north-west": [
+              "Idle/animations/halden_talk/north-west/frame_000.png",
+              "Idle/animations/halden_talk/north-west/frame_001.png",
+              "Idle/animations/halden_talk/north-west/frame_002.png",
+              "Idle/animations/halden_talk/north-west/frame_003.png",
+              "Idle/animations/halden_talk/north-west/frame_004.png"
+            ],
+            "east": [
+              "Idle/animations/halden_talk/east/frame_000.png",
+              "Idle/animations/halden_talk/east/frame_001.png",
+              "Idle/animations/halden_talk/east/frame_002.png",
+              "Idle/animations/halden_talk/east/frame_003.png",
+              "Idle/animations/halden_talk/east/frame_004.png"
+            ]
+          },
+          "halden_walk": {
+            "south": [
+              "Idle/animations/halden_walk/south/frame_000.png",
+              "Idle/animations/halden_walk/south/frame_001.png",
+              "Idle/animations/halden_walk/south/frame_002.png",
+              "Idle/animations/halden_walk/south/frame_003.png",
+              "Idle/animations/halden_walk/south/frame_004.png",
+              "Idle/animations/halden_walk/south/frame_005.png"
+            ],
+            "north-west": [
+              "Idle/animations/halden_walk/north-west/frame_000.png",
+              "Idle/animations/halden_walk/north-west/frame_001.png",
+              "Idle/animations/halden_walk/north-west/frame_002.png",
+              "Idle/animations/halden_walk/north-west/frame_003.png",
+              "Idle/animations/halden_walk/north-west/frame_004.png",
+              "Idle/animations/halden_walk/north-west/frame_005.png"
+            ],
+            "south-west": [
+              "Idle/animations/halden_walk/south-west/frame_000.png",
+              "Idle/animations/halden_walk/south-west/frame_001.png",
+              "Idle/animations/halden_walk/south-west/frame_002.png",
+              "Idle/animations/halden_walk/south-west/frame_003.png",
+              "Idle/animations/halden_walk/south-west/frame_004.png",
+              "Idle/animations/halden_walk/south-west/frame_005.png"
+            ],
+            "north-east": [
+              "Idle/animations/halden_walk/north-east/frame_000.png",
+              "Idle/animations/halden_walk/north-east/frame_001.png",
+              "Idle/animations/halden_walk/north-east/frame_002.png",
+              "Idle/animations/halden_walk/north-east/frame_003.png",
+              "Idle/animations/halden_walk/north-east/frame_004.png",
+              "Idle/animations/halden_walk/north-east/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/halden_walk/east/frame_000.png",
+              "Idle/animations/halden_walk/east/frame_001.png",
+              "Idle/animations/halden_walk/east/frame_002.png",
+              "Idle/animations/halden_walk/east/frame_003.png",
+              "Idle/animations/halden_walk/east/frame_004.png",
+              "Idle/animations/halden_walk/east/frame_005.png"
+            ],
+            "west": [
+              "Idle/animations/halden_walk/west/frame_000.png",
+              "Idle/animations/halden_walk/west/frame_001.png",
+              "Idle/animations/halden_walk/west/frame_002.png",
+              "Idle/animations/halden_walk/west/frame_003.png",
+              "Idle/animations/halden_walk/west/frame_004.png",
+              "Idle/animations/halden_walk/west/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/halden_walk/north/frame_000.png",
+              "Idle/animations/halden_walk/north/frame_001.png",
+              "Idle/animations/halden_walk/north/frame_002.png",
+              "Idle/animations/halden_walk/north/frame_003.png",
+              "Idle/animations/halden_walk/north/frame_004.png",
+              "Idle/animations/halden_walk/north/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/halden_walk/south-east/frame_000.png",
+              "Idle/animations/halden_walk/south-east/frame_001.png",
+              "Idle/animations/halden_walk/south-east/frame_002.png",
+              "Idle/animations/halden_walk/south-east/frame_003.png",
+              "Idle/animations/halden_walk/south-east/frame_004.png",
+              "Idle/animations/halden_walk/south-east/frame_005.png"
+            ]
+          },
+          "halden_idle": {
+            "north": [
+              "Idle/animations/halden_idle/north/frame_000.png",
+              "Idle/animations/halden_idle/north/frame_001.png",
+              "Idle/animations/halden_idle/north/frame_002.png",
+              "Idle/animations/halden_idle/north/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/halden_idle/west/frame_000.png",
+              "Idle/animations/halden_idle/west/frame_001.png",
+              "Idle/animations/halden_idle/west/frame_002.png",
+              "Idle/animations/halden_idle/west/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/halden_idle/south-east/frame_000.png",
+              "Idle/animations/halden_idle/south-east/frame_001.png",
+              "Idle/animations/halden_idle/south-east/frame_002.png",
+              "Idle/animations/halden_idle/south-east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/halden_idle/south/frame_000.png",
+              "Idle/animations/halden_idle/south/frame_001.png",
+              "Idle/animations/halden_idle/south/frame_002.png",
+              "Idle/animations/halden_idle/south/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/halden_idle/north-east/frame_000.png",
+              "Idle/animations/halden_idle/north-east/frame_001.png",
+              "Idle/animations/halden_idle/north-east/frame_002.png",
+              "Idle/animations/halden_idle/north-east/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/halden_idle/south-west/frame_000.png",
+              "Idle/animations/halden_idle/south-west/frame_001.png",
+              "Idle/animations/halden_idle/south-west/frame_002.png",
+              "Idle/animations/halden_idle/south-west/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/halden_idle/north-west/frame_000.png",
+              "Idle/animations/halden_idle/north-west/frame_001.png",
+              "Idle/animations/halden_idle/north-west/frame_002.png",
+              "Idle/animations/halden_idle/north-west/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/halden_idle/east/frame_000.png",
+              "Idle/animations/halden_idle/east/frame_001.png",
+              "Idle/animations/halden_idle/east/frame_002.png",
+              "Idle/animations/halden_idle/east/frame_003.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-04T09:11:38.557765"
+}

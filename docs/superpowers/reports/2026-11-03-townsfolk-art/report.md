@@ -1,3 +1,9 @@
+> Continuation on 2026-11-04: Bree’s complete set and TV appearance are now owner-approved
+> and installed unchanged. Halden’s complete directional review is ready; 0.75
+> PixelLab generations remain. Current integration, memory gates and checks are in
+> [the integration report](approved-integration/report.md). The checkpoint below
+> preserves the earlier approval and validation history.
+
 # Bree Tallow sprite review checkpoint
 
 Issue #80, branch `townsfolk-art`, 2026-11-03. **Review art is complete for Bree;

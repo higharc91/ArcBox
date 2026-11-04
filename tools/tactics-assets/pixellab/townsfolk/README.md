@@ -1,5 +1,13 @@
 # Townsfolk sprite pilot — issue #80
 
+**Current:** the owner approved Bree’s complete directional/TV set in chat. Her exact
+4.5 MiB atlas is installed in production and world barks use authored talk clips
+with idle fallback. Cosmetic placed-person variants now round-trip through Godot.
+Halden’s complete eight-direction set is review-only; see [his review](halden/README.md)
+and the [integration report](../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/approved-integration/report.md).
+The following pilot sections retain the earlier approval/budget history. Current
+PixelLab balance is **0.75 generations**, after 30 for Halden; no credits purchased.
+
 All 19 primary concept designs and the child-B body-view supplement were approved
 on 2026-11-03: “yes, tthose look good. Proceed”. Exact asset IDs are recorded in
 `../../concepts/townsfolk/approvals.json`. Do not regenerate these concepts.

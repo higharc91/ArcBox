@@ -1,0 +1,16 @@
+{
+  "method": "ContentPackRegistry ordered path + SHA256 file inventory; raw cold pack bodies, excluding HTTP/index overhead",
+  "beforeBytes": 200832616,
+  "afterBytes": 201146592,
+  "deltaBytes": 313976,
+  "afterMiB": 191.82833862304688,
+  "files": 4813,
+  "beforePackHash": "e959665d9de30325c2a703a81c8e797935c8686cce3bce3b31cd97a822838636",
+  "afterPackHash": "c2d06696c35c8aa9d3cf2b3dac796cd49e697357254a78506af734b1bed752c9",
+  "productionChanges": [
+    "creatures/bree_tallow.png",
+    "creatures/manifest.json"
+  ],
+  "legacySheetsRetained": true,
+  "rulesAndPhoneContractsUnchanged": true
+}

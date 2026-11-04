@@ -1,0 +1,17 @@
+{
+  "status": "pending_owner_full_set_and_tv_approval",
+  "productionInstalled": false,
+  "sourceCharacter": "a25c93f8-7dcd-45fa-8db2-4b1539c19e6e",
+  "sha256": {
+    "halden-eight-direction-idle.gif": "71470ab03dd9e8bfc88c6c79483c359117a8a7b4736db80dbe793766abbbc8c7",
+    "halden-eight-direction-walk.gif": "484a3675ed2e89d6d3439804274c1b5b5de3038a32448e7505fdd74d5630e015",
+    "halden-eight-direction-talk.gif": "555a1714be47225bbb7fdfe8aeba7c310d8547bd41b7c6be9dddf635bc3104a6",
+    "review_halden.png": "784a9ffc2ce4504bf23021e45df8409f0b3f5995c2b75a6dc06c42e49fea9081",
+    "atlas-validation.json": "64fb691c36c5a64442ddf929b6322e23316004f86a674c82bc6c61abd6cfd1d5"
+  },
+  "tv": {
+    "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/approved-integration/halden-square.png",
+    "sha256": "67ca56b4c990335ed7056a08bb052364e70f4bcb03e8a4b9ecb65f97aa500b3f"
+  },
+  "reviewNote": "North static touches source top edge; inspect complete head silhouette. No direction mirroring, per-frame recentering or body rescaling. Ground drift and source hashes are measured in atlas-validation.json."
+}

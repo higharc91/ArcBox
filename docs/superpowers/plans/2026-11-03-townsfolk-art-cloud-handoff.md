@@ -3,7 +3,13 @@
 Work in `higharc91/ArcBox`, branch **`townsfolk-art`**. Fetch and check out that
 branch; inspect a dirty tree before changing it. Pull with rebase before pushing.
 Do not merge, open a PR, close #80 or reset unrelated work. The owner requested a
-checkpoint after Bree so a cloud AI can continue. Production art is unchanged.
+checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree’s
+full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
+complete eight-direction idle/walk/talk set is review-only. Current PixelLab balance
+is **0.75 generations**; do not submit more paid work or purchase credits.
+Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
+The original checkpoint details below are retained as provenance; current status
+and next steps at the end supersede its pending-approval statements.
 
 ## Read first
 
@@ -27,10 +33,11 @@ checkpoint after Bree so a cloud AI can continue. Production art is unchanged.
 - Bree has eight real directions, idle/walk/talk, retained native source frames,
   loop curation, compact atlas tooling, and real Windows TV inn/square/market shots.
   Exact approved southeast pixels are preserved. No frame is independently recentered.
-- The **new complete directional set and TV shots still need owner review** before
-  production installation. The earlier GIF approval alone does not approve all new frames.
+- The **complete Bree directional set and committed TV shots are now approved**
+  by the later chat reply “I approve or bree.” Her exact atlas is installed.
 - Other **25 sprites** (11 named + 14 generic variants), portraits and production
-  integration remain. Legacy goblin presets remain out of scope; named Mother
+  integration for those assets remain. Halden has a complete review-only set; the
+  other 24 have not been generated. Legacy goblin presets remain out of scope; named Mother
   Skarrow is part of the approved named queue. Respect species/child proportions.
 
 ## Reproduce Bree offline, without spending credits
@@ -49,7 +56,8 @@ destination; `build-motion-review.cjs` and `verify-review-pack.cjs` also accept 
 The builder links unchanged assets, with a file-copy fallback across filesystems.
 Never edit a linked rule/content file in this review pack: it points at production.
 Generated manifests and Bree's image are separate files. Only the demo override
-uses them; there is no production install script yet.
+uses them. The later approved `install-approved-bree.cjs` now installs only the
+verified Bree sprite, not linked content or the review hero.
 
 ```sh
 ARCBOX_TACTICS_ART_ROOT="$HOME/.codex/tmp/bree-tv-review" \
@@ -102,9 +110,10 @@ the atlas hash. The normalizer's older hero-canvas output is a staging source.
 
 ## Continue in this order
 
-1. Review the committed full-set GIFs/TV shots with the owner. Until full-set/TV
-   approval arrives, continue independent **OW-05 loading/perf work** rather than
-   installing or expanding unapproved pixel art. Do not redo approved concepts.
+1. Bree’s full-set/TV approval and integration are complete. Review Halden’s new
+   directional GIFs/TV shot with the owner before his production integration.
+   Continue independent free **OW-05 loading/perf/tooling work** while awaiting
+   approval or an available allowance. Do not redo approved concepts.
 2. After approval, finish the named/generic sprite pipeline from the existing
    designs, maintaining one art style and complete real directions. Keep prompts,
    source frames, hashes, curation, exact receipts and costs. Resolve incomplete
@@ -112,10 +121,9 @@ the atlas hash. The normalizer's older hero-canvas output is a staging source.
 3. Produce named portraits from approved concepts in the existing portrait frame.
    Add an optional placed-person variant that round-trips through the Godot editor.
    Keep old sheets available until the approved swap lands.
-4. Integrate approved assets. Named `talk` clips are currently authored but **not
-   wired to ordinary world barks**: `WorldPeople` still selects idle/walk. Add that
-   presentation wiring with idle fallback and meaningful stop/resume/contact tests.
-   Do not change game rules, balance or server-to-phone contracts.
+4. Integrate later assets only after their owner approval. Bree’s ordinary bark
+   talk/idle fallback and stop/resume/contact wiring is complete and tested; reuse
+   it. Do not change game rules, balance or server-to-phone contracts.
 5. Complete OW-05: load only the party's heroes and the current region's used
    people/creatures, lazily within the existing per-frame budget. Add the required
    `--world-demo --perf` gate for a full party of four, measure Ashen Ford and
@@ -131,7 +139,7 @@ tests** pass; offline crop/import/height/contact/frame validation passes; real G
 TV renders pass. Full solution/web checks and the final memory gate are not done.
 
 
-## Cloud performance continuation after the Bree checkpoint
+## Historical loading checkpoint before full-set approval
 
 OW-05 now has used-only, budgeted world-unit loading, explicit release on roster changes, shared fauna textures, and background fauna navigation preparation. Actual party sheets stay resident across hidden/formation/battle frames. The production assets and all approval/credit records remain unchanged.
 
@@ -140,3 +148,47 @@ The new four-party `--world-demo=<region> --perf` check covers region open/walk,
 Continue from the current branch rather than rebuilding these changes. Full-set Bree/TV owner approval remains pending. No further sprites/portraits were generated and nothing was installed in production. PixelLab MCP tools were not exposed in this cloud session, so no fresh balance or quote was obtained and **no credits were spent**. Check live schemas/costs/balance when that connection becomes available; 30.75 remains historical.
 
 On cloud, the offline review pack was rebuilt at `/workspace/artifacts/issue80-bree-review` using an explicit output argument to `build-review-pack.cjs`, and the existing pixel/atlas verifiers pass. Do not edit linked content files. Future optional variant integration must update the region preload selector and WorldPeople's sprite selection together, and rerun all memory gates after the final approved assets land. Keep the existing art approval gates; current memory results do not approve the remaining cast.
+
+
+## Continuation after owner’s Bree approval
+
+- The chat approval “I approve or bree.” authorizes Bree’s complete committed
+  directional set and TV appearance. `sprite-approval.json` binds that approval
+  to the existing GIF/plan/TV hashes. `install-approved-bree.cjs <review-pack>`
+  installs the exact atlas; no completed art was regenerated. Production keeps
+  legacy files. Portrait replacement remains a later phase.
+- Authored talk clips now play during ordinary world barks, with explicit idle
+  fallback for missing clips. Stops preserve contact and resume their route.
+- Optional `RegionPerson.Variant`/PersonMarker variant is cosmetic. Preset + suffix
+  selects `characters.<preset>_<variant>` if available, otherwise the preset.
+  World drawing and texture loading share `WorldPeople.SpriteKey`. Native Godot
+  save/load/export check: `--check-person-variants` in the world editor.
+- Four-party production gates pass with Bree: Ashen Ford open **267.56 MiB**,
+  roster peak **305.24 MiB**; Cinder Hollow open **154.87 MiB**, peak **192.37 MiB**.
+  Cold pack now **201,146,592 bytes**, **313,976 bytes** above the prior pack.
+- Halden character `a25c93f8-7dcd-45fa-8db2-4b1539c19e6e`: 6 generations for
+  eight directions, 8 idle, 8 walk, 8 talk = **30**. Retained sources/receipts in
+  `tools/tactics-assets/pixellab/townsfolk/halden/`; no new concept or reroll.
+  The 1440×768 compact atlas is **4.21875 MiB**, scale 0.5. Talk playback returns
+  through existing frames. No direction is mirrored or independently recentered.
+- API public Backblaze URLs were forbidden. The documented authenticated
+  `api.pixellab.ai/mcp/characters/<id>/download` ZIP worked after jobs completed
+  (423 while active); redirects strip credentials on host changes. Do not
+  regenerate art to work around a download failure. No credential is committed.
+- Next: owner review of Halden’s directional GIFs and TV shots, then integrate
+  only if approved. Static north touches its source canvas’s top edge; inspect
+  this during review. Other 24 sprites and portraits still need generation.
+  **0.75 generations remain**, so continue free loading/tooling/review work
+  until an allowance is available. Never purchase or upgrade automatically.
+- Rules, balance and phone contracts remain unchanged. Keep this branch only;
+  pull with rebase before pushing. Do not merge, open a PR or close #80.
+
+Current continuation checks: Debug/Release solution builds have zero warnings/errors;
+2,460 presentation, 676 game, 508 phone and 16 Node cases pass. The prior 397
+WorldTools cases and final 44 writer cases (including the new variant case) pass;
+native editor round-trip passes. Four-phone live walk/restart/cold reconnect/drop
+passes with `LP_NUM_THREADS=2`, 20/20 presses, 95 ms median against the unchanged
+100 ms budget. Default Mesa first missed at 136 ms; retain both receipts and do
+not claim GPU timing. The environment has a four-CPU quota. Whole-cast final
+regression and new-art Windows review remain ahead; prior full-solution/isolated
+logic and cave-tour evidence is in the loading report, not a fresh full rerun.

@@ -1,0 +1,114 @@
+[
+  {
+    "direction": "south",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      23,
+      2,
+      56,
+      75
+    ],
+    "height": 74
+  },
+  {
+    "direction": "south-west",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      25,
+      2,
+      54,
+      76
+    ],
+    "height": 75
+  },
+  {
+    "direction": "west",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      30,
+      4,
+      50,
+      78
+    ],
+    "height": 75
+  },
+  {
+    "direction": "north-west",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      24,
+      2,
+      53,
+      76
+    ],
+    "height": 75
+  },
+  {
+    "direction": "north",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      23,
+      0,
+      56,
+      74
+    ],
+    "height": 75
+  },
+  {
+    "direction": "north-east",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      25,
+      2,
+      53,
+      76
+    ],
+    "height": 75
+  },
+  {
+    "direction": "east",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      28,
+      4,
+      50,
+      78
+    ],
+    "height": 75
+  },
+  {
+    "direction": "south-east",
+    "canvas": [
+      80,
+      80
+    ],
+    "bounds": [
+      25,
+      2,
+      55,
+      76
+    ],
+    "height": 75
+  }
+]

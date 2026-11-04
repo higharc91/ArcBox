@@ -1,0 +1,33 @@
+{
+  "characterId": "a25c93f8-7dcd-45fa-8db2-4b1539c19e6e",
+  "concept": {
+    "path": "tools/tactics-assets/concepts/townsfolk/generated/character_halden_varrow.png",
+    "sha256": "718d42f49e058843a9938ad9d505ee0af580bfc11d0f2ec91b190156cc4a3317",
+    "reuse": "existing owner-approved Scenario concept; not regenerated"
+  },
+  "pixelStyleReference": {
+    "path": "tools/tactics-assets/pixellab/townsfolk/directional/approved-south-east.png",
+    "sha256": "4b978108451e0ee0407636435577bceca4c5fce555051cd51e9af915615b574c",
+    "scope": "approved Bree pixel style only; not identity"
+  },
+  "groups": {
+    "idle": "b4f721e6-4455-4aa2-b7d5-a765094d2149",
+    "walk": "6348e84e-3773-4372-a70f-5567f7915864",
+    "talk": "14fa5a87-394a-4287-822f-04de5e1d4571"
+  },
+  "cost": {
+    "character": 6,
+    "idle": 8,
+    "walk": 8,
+    "talk": 8,
+    "total": 30,
+    "initialRemaining": 30.75,
+    "finalRemaining": 0.75,
+    "purchase": false
+  },
+  "productionInstalled": false,
+  "ownerPixelTvApproval": "pending",
+  "nativeFrames": 128,
+  "directionMirroring": false,
+  "perFrameRecentering": false
+}
