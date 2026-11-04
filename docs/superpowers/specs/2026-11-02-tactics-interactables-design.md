@@ -3,6 +3,10 @@
 > **Status:** the engine core in §2 is built and tested (Tactics.Logic `World/`, Tactics.Game `TacticsGame.Interact.cs`). The TV's drawing and the
 > phone's list are a second stage, after the TV-colours work lands. Nothing here changes a rule or a balance number: every place that would is
 > a **USER DECISION** in §3 and §6, with the default the engine uses meanwhile. No art was made; §4 is the brief for the user's art AI.
+>
+> **Decided 2026-11-03 (issue #83, built on `owner-decisions-rules`):** the owner answered decisions 1, 2, 3 and 8 (§3). Found items go to
+> the party's pick by a short vote; a sprung trap gives a minor injury a rest mends; a failed lock way or search reopens after the next long
+> rest; and the party's keys are on a key ring. The sections below say what was built, and §3 records each answer.
 
 - **Builds on:** [the overworld design](2026-10-31-tactics-overworld-design.md) (regions, stamps, beats, walking), the
   [5d story runtime](../plans/2026-10-31-tactics-overworld-5d.md) (scenes, votes, checks, Interact, the cursor), and the user's decisions in
@@ -44,7 +48,7 @@ screen, or the 5d screens during a scene.
 |---|---|
 | Does | Opens once. A chest, crate or barrel stands in the way; a sack and a cache don't. |
 | Checks | Lock (§1.2) and trap (§1.6), if any, come first. None otherwise. |
-| Outcomes | `open`: its loot goes to the leader's bag (USER DECISION 1), its `sets` flags are set, the TV shows "Inside: 2 × Potion of Healing." or the kind's empty line ("Nothing but straw."). |
+| Outcomes | `open`: its gold is split across the purses, its items go to the party's pick (USER DECISION 1, decided: §3.1), its `sets` flags are set, the TV shows "Inside: 2 × Potion of Healing." or the kind's empty line ("Nothing but straw."). |
 | Kept | `state` closed → open, `unlocked`, `trap`, `spent`. |
 | TV | The thing in its state, `opened` event. `trapped: true` once its trap is seen. |
 | Phone | "Open the chest" on the walk screen; a vote screen for the lock or trap question; the check screen for the roll. |
@@ -56,10 +60,13 @@ Each way written is offered, in this order: **the key** (only when the party hol
 choice nobody makes takes the first way with no roll, which is the key if held and otherwise "Leave it": a timer never spends a roll.
 
 - A pass opens the lock ("The lock gives.") and goes straight on to opening the thing.
-- A fail is **spent** for that lock: the next try offers what's left (USER DECISION 2). With nothing left and no key, the button just says
-  "The door is locked, and there's nothing left to try."
+- A fail is **spent** for that lock until the party's next long rest: the next try offers what's left (USER DECISION 2, decided: §3.2).
+  With nothing left and no key, the button just says "The door is locked, and there's nothing left to try until the party has rested."
+  After a camp or an inn night, every failed pick, force and seal is offered again.
 - **Keys are story flags,** not items: a pickup, a container or a readable can set one, and a lock names it (`"key": "iron_key",
   "keyName": "iron key"`). The bag only holds the rules pack's consumables, and an unknown item there would fail the sheet builder.
+  The party's keys are shown on a **key ring** (USER DECISION 8, decided: §3.8): the quest journal and the portal's party section list each
+  key the party holds, where it was found, and whether it has opened a lock (`InteractableSave.Keyed`, set by the key's own "keyed" node).
 
 ### 1.3 Passages: door, gate, drawbridge, secret door. **Core now.**
 
@@ -97,8 +104,8 @@ On a container or passage, or on the ground (`kind: trap`).
 | Seen, on a thing | The leader's question: **Disarm** (Sleight of Hand vs `disarm`), **Leave it**, or **Open it anyway** (springs it, then carries on to the lock). |
 | Seen, on the ground | It stands in the way, so the party walks round it, and offers **Disarm** or **Leave it**. A floor trap must have a disarm DC, so a seen trap can always be cleared. |
 | Unseen | Opening the thing, or stepping on the tile, springs it. The party walks on. |
-| Disarm | A pass: `disarmed`. A fail springs it (D&D's "fail by 5" simplified to any fail; USER DECISION 2). |
-| Sprung | Its `text` ("Click. A trap goes off, but it does no harm." by default) and `trap.sets`. **Harmless by default** (USER DECISION 3). |
+| Disarm | A pass: `disarmed`. A fail springs it (D&D's "fail by 5" simplified to any fail; USER DECISION 2): the trap is spent, and no rest resets it. |
+| Sprung | Its `text` ("Click. A trap goes off." by default) and `trap.sets`, and **a minor injury** for whoever sprang it (the leader): the trap's `injury`, else one picked by weight among the rest-kind injuries, which any camp or inn night mends (USER DECISION 3, decided: §3.3). The TV's notice says "Ana takes a minor injury: Scraped hands." |
 | Kept | `trapSpotted`, `trap` null → disarmed or sprung, never back. |
 | TV | `spotted`, `disarmed`, `sprung` events; a floor trap's art state is `armed`, `disarmed` or `sprung`. |
 
@@ -113,8 +120,8 @@ may be hidden by any passive skill (`{ "dc": 14, "skill": "arcana" }`), the lead
 
 ### 1.8 Loot on the ground: pickup. **Core now.**
 
-Lies there until the leader picks it up: its `loot` goes to the leader's bag, its `sets` (a key) are set, `taken`. "Found: Smoke Bomb." or
-"You take the iron key." Never there twice.
+Lies there until the leader picks it up: its gold is split across the purses and its items go to the party's pick (USER DECISION 1, decided:
+§3.1), its `sets` (a key) are set, `taken`. "Found: Smoke Bomb." or "You take the iron key." Never there twice.
 
 ### 1.9 Shrines, wells, altars. **Core now (flags); blessings later.**
 
@@ -201,12 +208,16 @@ and overrides per thing. A pack-level `kinds` file is easy to add later if the u
 ### 2.3 Saved state
 
 `WorldSave.Things: { id → InteractableSave }`, written only once something changes, so documents from before read with none (no version
-bump, as 5b and 5d did). `InteractableSave(State, Found, Unlocked, TrapSpotted, Trap, Spent, Searched)` (`Searched` since §7.4, not written
-while false). A thing not in it is as it started; a state its
+bump, as 5b and 5d did). `InteractableSave(State, Found, Unlocked, TrapSpotted, Trap, Spent, Searched, Rest, Keyed)` (`Searched` since §7.4;
+`Rest` and `Keyed` since issue #83; none written while false or 0). A thing not in it is as it started; a state its
 kind no longer has (a content change) reads as the start.
 
-**It never goes back** (`Interactables.Regressed`): found stays found, unlocked stays unlocked, a trap stays dealt with, a failed way stays
-spent, and the state only moves forward in its kind's order. Only a lever and the passages it works go both ways.
+**It never goes back** (`Interactables.Regressed`): found stays found, unlocked stays unlocked, a trap stays dealt with, a key used stays used,
+and the state only moves forward in its kind's order. Only a lever and the passages it works go both ways. **The one sanctioned way back is a
+long rest** (USER DECISION 2, decided): `Rest` is the long rest (`WorldSave.RestSeq`, which every camp and inn dawn counts up) its failed
+pick, force or seal and its failed search were spent in, so "spent" means "spent until the next rest". The game reads every thing through
+`Interactables.Rested`, which reopens them once a later rest has come, and stamps the rest they were reopened at. An old save reads as spent
+at rest 0, which the next rest clears. A failed disarm is never reopened (its trap went off).
 
 ### 2.4 Walking: the overlay
 
@@ -290,16 +301,52 @@ Nothing below is decided. Each is what the engine supports, and the default it u
 
 | # | USER DECISION | Default now | The choice |
 |---|---|---|---|
-| 1 | **Loot.** Found items go into a character's bag, which is a balance change (more potions in fights). Whose bag? | The leader's (whoever opened it). The base pack places no loot. | Leader; split round the party; a shared stash; or no consumables from the world until sub-project 6. |
-| 2 | **Failing a check.** Can a lock or a disarm be tried again? | A failed way is spent for that lock, for good; a failed disarm springs the trap. A lock the story needs must have a sure way (§5). | Free retries (checks become a formality); a retry after leaving the region or a rest; retries that cost a consumable (thieves' tools). |
-| 3 | **Traps out of battle.** Battles start at full HP, so HP damage means nothing. | **Harmless:** a line and flags, as hazards are harmless (handoff default). | An injury from the table (`trap.injury`, built; injuries never heal yet, so this is harsh); losing a consumable (`trap.lose`, built); a condition at the next fight's start; a story flag only. |
+| 1 | **Loot.** Found items go into a character's bag, which is a balance change (more potions in fights). Whose bag? | **Decided 2026-11-03: the party picks whose bag** (§3.1). | Leader; split round the party; a shared stash; or no consumables from the world until sub-project 6. |
+| 2 | **Failing a check.** Can a lock or a disarm be tried again? | **Decided 2026-11-03: a failed pick, force or seal (and a failed Search) reopens after the party's next long rest** (§3.2); a failed disarm still springs the trap. A lock the story needs must have a sure way (§5). | Free retries (checks become a formality); a retry after leaving the region or a rest; retries that cost a consumable (thieves' tools). |
+| 3 | **Traps out of battle.** Battles start at full HP, so HP damage means nothing. | **Decided 2026-11-03: a minor injury that any rest mends** (§3.3). | An injury from the table (`trap.injury`, built); losing a consumable (`trap.lose`, built); a condition at the next fight's start; a story flag only. |
 | 4 | **Passive Perception.** | The party's best, away characters included (5d default 8), within 3 tiles along x and y, no line of sight. | Only those here; the leader's alone; a shorter range; sight blocked by walls. |
 | 5 | **Who rolls.** | The party picks, as 5d (20 s, best bonus if nobody picks). The leader picks the approach (30 s, "Leave it" if nobody does). | The leader rolls for speed on small checks. |
 | 6 | **Shrines and wells.** | Flags only. | A blessing with a rules effect: mend one injury (an answer to "injuries never heal"), temp HP at the next fight, a reroll. |
 | 7 | **Thieves' tools.** | Not modelled: Sleight of Hand. | Proficiency from the rogue's kit adding its bonus, or advantage. |
-| 8 | **Keys.** | Story flags, shown by name on the button only. | A key ring on the character sheet. |
+| 8 | **Keys.** | **Decided 2026-11-03: a key ring** (§3.8): still story flags, listed in the quest journal and the portal's party section. | A key ring on the character sheet. |
 | 9 | **A lever and the party.** | It won't shut a passage on the leader's tile. Followers are only on the TV, so they can't be checked. | Also refuse when any walker could be there (the trail). |
 | 10–17 | **Hidden things and passive checks** | See §7.7. | |
+
+### 3.1 USER DECISION 1, decided 2026-11-03: the party picks whose bag
+
+When a container, a cache, a pickup or a quest's reward (or a conversation's `give`) gives an **item**, it waits in `WorldSave.Loot`
+(`LootSave`: the items in the order found, who found each, and the cursor the vote set aside), and once the scene that found it is over a
+short **party vote** asks "Who takes the Potion of Healing?" on the 5d vote screen (the phone's vote gains optional `question` and `vote`).
+The options are the players here who have a character, labelled by their character. **15 seconds**; nobody answering gives it to whoever
+found it (the opener, or for a quest whoever turned it in), else the leader; a tie goes to the leader's pick, as any vote's. **One vote per
+loot line, in order** (a stack such as "2 × Potion of Healing" is one vote): one combined screen wasn't simpler, since the 5d vote is one
+question. A **party of one** takes it at once, with no vote. **Gold** is never voted on: it's split across the purses as before; the Ashmaw
+trinkets are per class and unchanged. An item leaves the waiting list in the same save that puts it in its taker's bag, so a restart, a
+reconnect or End session asks the same item again and never gives one twice (the interact model test checks bags plus waiting items).
+
+### 3.2 USER DECISION 2, decided 2026-11-03: failed ways reopen after a rest
+
+A failed pick, force or seal on a lock, and a failed Search on a thing, are spent until the party's **next long rest** (a camp or an inn
+night): `InteractableSave.Rest` keeps the rest they were spent in (§2.3), and a later rest reopens them. A failed disarm still springs the
+trap, which is then spent for good. The line for a lock with nothing left says "…until the party has rested."
+
+### 3.3 USER DECISION 3, decided 2026-11-03: a trap's minor injury
+
+A sprung trap gives whoever sprang it (the leader) a **minor injury, the kind any camp or inn night mends** (`"mends": "rest"`). Three new
+rest-kind injuries, with mild effects from the existing static mods: **Scraped hands** (attack −1), **Singed** (no mechanical effect),
+**Twisted knee** (move −1), weights 3, 3 and 2. They carry `"battle": false`, so the table a fallen hero draws from is exactly as it was. A
+trap's `injury` field names one (any injury); otherwise one is picked by weight among the rest-kind injuries (black eye and the three new
+ones, in id order), rolled once with the game's die and saved with the spring, so a restart never hurts anyone twice. The default trap line
+is now "Click. A trap goes off." and the TV's notice adds who was hurt. The owner may retune names, effects and weights. The three reuse
+existing icons as stand-ins (`standIn: true` in `injury_icons/manifest.json`) until their own are drawn.
+
+### 3.8 USER DECISION 8, decided 2026-11-03: a key ring
+
+Keys stay story flags (§1.2). `KeyRing.Of` reads back as keys the flags a lock names: called by the lock's `keyName` (else the pickup's
+name), found where the thing that set it is ("Ashen Ford" for a pickup, "the reeve's desk, Ashen Ford" for a container), and used once a lock
+was opened with it. The **quest journal** lists them under the quests, for everyone, on the phones and the TV (`QuestLogView.Keys`), and the
+journal is offered once the party holds a key even in a region with no quests; the **portal's party section** lists them too (`keys`). Both
+fields are written only while the party holds a key, so every screen without one is byte for byte as before.
 
 ## 4. Art brief, for the user's art AI
 
@@ -434,8 +481,8 @@ whose key comes from a later beat). When a region first has a door, `StoryOrder`
    cache (Perception 12 on its own, a Smoke Bomb) by the docks. No doors: a building's doorway opens onto its own blocked footprint, so a door thing would stand in the street.
    Every step's explore view now carries them, about 190 bytes each (2.9 KB), past the one-packet budget the walking tests keep for the
    walk's own part: sending things only when they change, or only near the party, would win it back.
-4. **The phone's list:** a second button row under Interact, or a picker that opens from it? And should the walk screen show the keys the
-   party holds?
+4. **The phone's list:** a second button row under Interact, or a picker that opens from it? (The keys the party holds are now on the key
+   ring in the quest journal and the portal: decision 8.)
 5. **Sound:** an `sfx` per event (chest creak, lock click, trap snap). The pack has 150 sounds; which to reuse is a listening job.
 6. **Story hooks** (§1.11): worth the lore schema change now, or after Chapter 1 is tuned?
 7. **Mobs and fog of war** (your later ideas) would both read things: fog would hide them until explored, and roaming mobs could guard a chest.
@@ -504,12 +551,14 @@ again: the option is decided as the scene starts, saved as a decided check), the
 up." or "Nothing turns up."
 
 - **What it looks for** is fixed as it begins and kept in the cursor (`ThingCursor.Search`): every hidden thing within **2 tiles** along x and
-  y, not found, not already searched for, not under the leader. A restart plays the same scene and judges the same things.
+  y, not found, not already searched for since the last long rest, not under the leader. A restart plays the same scene and judges the
+  same things.
 - **The roll** is compared with each thing's own `hidden` DC (whatever skill hides it), **as it was when the search began**
   (`ThingCursor.SearchDcs`, the same DCs the check routes by, so "Something turns up." always finds something even across a content
   update; if all it would have found was removed from the pack meanwhile, the notice says "It was nothing after all."): each it meets is found ("Bo finds a loose
-  flagstone.", a notice noticed and its reveals with it); each it misses is **searched** (`InteractableSave.Searched`) and is never searched
-  for again (as a failed lock is spent, USER DECISION 2), though the party's passive skills may still find it later.
+  flagstone.", a notice noticed and its reveals with it); each it misses is **searched** (`InteractableSave.Searched`) and isn't searched
+  for again until the party's next long rest (as a failed lock is spent, USER DECISION 2, decided 2026-11-03), though the party's passive
+  skills may still find it meanwhile.
 - **No DC is shown**, on the TV or a phone, before or after the roll (`StoryCheckView.Dc` and the phone's `dc` are null, the TV's roll has
   `Vs` 0): "DC hidden", then "11 + 5 = 16 · Found something" or "Nothing found". With nothing to find the scene plays exactly the same and
   fails. (The check routes by the lowest DC it looks for, or 99 with none, so it passes exactly when it finds something.)
@@ -541,7 +590,7 @@ walk fixtures gained `search`, and `check-search`/`check-search-rolled` were add
 | 12 | **Range.** | 3 tiles, or the thing's own 1–6. | One range for everything. |
 | 13 | **Hidden paths.** | Block until found; drawn as their surroundings meanwhile; can't be flag-gated; can't carry what the story needs. | Allow flags; a path that's always visible but "unsure" (a check to cross). |
 | 14 | **Search route.** | A 5d check scene: the party picks who rolls Investigation (20 s, best bonus if nobody picks). | An instant roll by the best Investigation, with no scene. |
-| 15 | **Search range and retries.** | 2 tiles; a thing a search missed can't be searched for again (passives still can). | Free retries; a retry after a rest; a larger range. |
+| 15 | **Search range and retries.** | 2 tiles; **decided 2026-11-03 (with decision 2): a thing a search missed can be searched for again after the party's next long rest** (passives still can meanwhile). | Free retries; a retry after a rest; a larger range. |
 | 16 | **Search cost.** | Nothing (no time model). | Time passing (once there's a clock), a wandering-monster roll, a limit per region. |
 | 17 | **Hidden DCs.** | No DC is shown for a search, ever. | Show "DC ?" with the roll's verdict per thing. |
 
