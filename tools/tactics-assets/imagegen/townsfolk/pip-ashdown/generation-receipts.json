@@ -1,0 +1,107 @@
+{
+  "completionImageToolCalls": 9,
+  "priorAppearanceCalls": 1,
+  "pixelLabCalls": 0,
+  "newSpeechCalls": 0,
+  "records": [
+    {
+      "request": "directional/south-request.json",
+      "requestSha256": "a6287bbfb3fd9dd384126de61c27124f3e16257990755a52f6a1a7b7446f31c4",
+      "output": "directional/south-source.png",
+      "outputSha256": "38aabe64f7d05abac41ed7cf5d6e8753bff0427e1af28a5f158e27436b5a27b9",
+      "originalPath": "/workspace/generated_images/exec-74b953ac-b8df-4e99-88ce-37dc945310b3.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/south.png": "88c2e68c9936c783cac61803e6aceb7ba863e6e7635a15a0f80e85530bd6a44c"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "requestSha256": "9c0ebd40d5c71b568d9deedb0eec86d779637126f8f7c69cbac44214a5b5409c",
+      "output": "directional/south-west-source.png",
+      "outputSha256": "82e2b81499e32d5f502a77693ece802a9bccade70e692c19fbb3033c43bb9ab5",
+      "originalPath": "/workspace/generated_images/exec-1337ab86-e292-4dc4-9325-af6ecc92cb6e.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/west.png": "32a9bd0c7ebd419ac88ecf93e54a8072dc3ab29ef73bf2256541c1fdb4e77eff"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "requestSha256": "2d3f9f4a9675a5ba3e003f4640b5b2470b55e4d1c382b9cf48cf2ff56975b783",
+      "output": "directional/west-source.png",
+      "outputSha256": "830226c45496c72595ab6ecac0c96dd087705ab44e798354486dfc6f53ccb126",
+      "originalPath": "/workspace/generated_images/exec-8dbbff6b-f1f7-4f46-ae58-216b486bba10.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/west.png": "32a9bd0c7ebd419ac88ecf93e54a8072dc3ab29ef73bf2256541c1fdb4e77eff"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "requestSha256": "e4ea2001950dbe07b334f553b5ffe0047346d29b2f8d22bacbf3eddede85607e",
+      "output": "directional/north-west-source.png",
+      "outputSha256": "3560f651de3eba0631203f5654a47f8ef9a548b1198002e6b767b8588a062e7e",
+      "originalPath": "/workspace/generated_images/exec-8598bb3d-c469-4afa-a0a3-37e98477bde8.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/north-west.png": "b5ffc734266577aea8ee5352198db7099b97ac3751370a3ad16bc7ec8c2c97e3"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "requestSha256": "0665a993e9a82bf9bfefa6005b2d3bd1014f29127e3f27190d56cef0e9cf2e02",
+      "output": "directional/north-source.png",
+      "outputSha256": "b67c8ce0bfc29d82455a40990f98b1ea15289de2a953b6030b7fee60bfc11c0f",
+      "originalPath": "/workspace/generated_images/exec-b49a7381-b545-4b27-88c7-15ad1fffd67d.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/north.png": "66f63720a6c4a76c59cccc2d5a72fcc37750a22095d158711c2437f8e67c1567"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "requestSha256": "f50dabc1262237e8faf60ffcb7a3a063824fd5901b93c27d3a5e5516e13f8215",
+      "output": "directional/north-east-source.png",
+      "outputSha256": "28077d115e8fbab5c7d58bebdb02b44671fda4fe520e75d49d57f12633d3bb73",
+      "originalPath": "/workspace/generated_images/exec-4032fcc3-d642-46b5-8a5b-908666f3ae63.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/north-east.png": "62d5f3eb4402ccba360bf493732aab3dc8aec5301f7353149b713f1c24431341"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "requestSha256": "5f21b99838d0aa4ec169c3d8d0b2a5884f7548bace54770ad67d734b3a8c2f53",
+      "output": "directional/east-source.png",
+      "outputSha256": "3434857434a13286dda00a8d109be551855cc20615d67b3542c3a069a7bfe6b9",
+      "originalPath": "/workspace/generated_images/exec-d148429c-7acf-479a-89eb-34e7a53145b5.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/east.png": "3895e29e72dfaa6d9ae3c8a28d67a842d0d23cc898db6a5d945e66bf31143afc"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "requestSha256": "194562798da8839277f85c59cc89e38b449eb4a4d00ecced4db1f25d6f1d1771",
+      "output": "directional/south-east-source.png",
+      "outputSha256": "fa9a15b4d8f899fc82ca892157bef3c0a43151b690aa27c6494cea5978571816",
+      "originalPath": "/workspace/generated_images/exec-83937972-c1c8-4811-8454-99bb06706266.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/directional/guides/south-east.png": "1af750cdd1aeb4cab5effa1b768206582f68d689b4e4e3676934d158ef2818b2"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "requestSha256": "edb7247198c37c0d9e858b81ea21c51249a4b26aae5f3858eb33306b33f1b792",
+      "output": "portraits-source.png",
+      "outputSha256": "a3b46b1b50df5ceb43ecf4b4aa7401fecf06cd09995ee59e9e19a72c25fedc9d",
+      "originalPath": "/workspace/generated_images/exec-4235e158-9a36-43e9-bfb1-f3778e716ad8.png",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+        "tools/tactics-assets/imagegen/townsfolk/lark/portraits/lark_idle.png": "595439b99427f7344c7028bb857250e8e630189937381d9716d15c0cad8f7f3f"
+      }
+    }
+  ]
+}

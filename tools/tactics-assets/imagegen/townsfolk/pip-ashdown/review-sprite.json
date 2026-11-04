@@ -1,0 +1,87 @@
+{
+  "file": "review_pip.png",
+  "family": "townsfolk",
+  "variant": "pip_review",
+  "frame": {
+    "width": 64,
+    "height": 64,
+    "anchor": [
+      32,
+      56
+    ]
+  },
+  "headTop": 4,
+  "pixelScale": 0.5,
+  "columns": 18,
+  "rowsPerDirection": 1,
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "footprintWidth": 12,
+  "footprintHeight": 26,
+  "keys": [
+    "characters.child_pip",
+    "characters.pip_ashdown"
+  ],
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "fps": 6.666666666666667,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "fps": 6.666666666666667,
+      "loop": true
+    },
+    "talk": {
+      "frames": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        16,
+        15,
+        14,
+        13
+      ],
+      "fps": 6.666666666666667,
+      "loop": true
+    },
+    "down": {
+      "frames": [
+        0
+      ],
+      "fps": 1,
+      "loop": false
+    }
+  },
+  "provenance": "REVIEW ONLY: image-generated Pip Ashdown; appearance approved, full directional/motion/TV review pending."
+}

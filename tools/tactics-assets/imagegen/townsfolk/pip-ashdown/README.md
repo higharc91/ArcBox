@@ -1,29 +1,36 @@
-# Pip Ashdown — first pixel appearance review
+# Pip Ashdown — completed review
 
-The owner authorized continuing with Pip. Her existing approved concept is reused;
-this is the first pixel appearance pass, with no new concept or completed-art regeneration.
+The owner approved the appearance: “Yep, she looks good”. The eight-direction
+idle/walk/talk set and six portraits are ready for finished-set/TV review.
+Production installation is pending that separate approval.
 
-![Pip appearance candidate](candidate-1.png)
+[Watch the voiced review](pip-finished-review.mp4) · [Voice sample](voice-sample.mp3)
+· [Portraits](pip-portraits-review.png) · [Walk](pip-eight-direction-walk.gif)
+· [Talk](pip-eight-direction-talk.gif)
 
-[Hear Pip's existing voice](voice-sample.mp3):
-“I can run that for you! Two coppers. One if you're nice. Three if you're not.”
-Source is the existing `bark_pip_ashdown_town_1.397e121f.ogg` recording; the MP3
-is a compatibility transcode, not a new performance. `voice-sample.json` records
-source/output hashes and the bark ID/text.
+The 19.6-second reel uses the actual sprite loops/portraits, followed by a labelled
+native TV still. Her existing “Two coppers” recording plays during the talk segment;
+this is a voice preview, not lip synchronization. No new speech was generated.
+Voice source/text/hash provenance remains in voice-sample.json.
 
-Requested directions: south, southwest, west, northwest; north, northeast, east,
-southeast. Pip is a nine-year-old human girl: child proportions, freckles, dark
-braided hair, patched rust coat/sage tunic/trousers, boots and an errand satchel.
-Child target is about52 native /26 world pixels versus72/36 for adults; native
-import/height validation remains ahead. Do not run the adult72-pixel guide/import
-scripts unchanged. Satchel at anatomical right hip, small pouch at left.
+Atlas1152×512 /2.25 MiB, 64×64 frames, anchor[32,56], scale0.5, child body52 native /
+26 world pixels. Footprint12×26, headTop4. There are144 slots from143 selected source
+cells: southeast talk holds its preceding pose instead of using a drifting cell.
+No per-frame recentering or mirroring. Binary alpha/shared64-colour palette;
+idle/walk/talk playback10/6/10. The wrong draft southwest angle is corrected in the
+motion set. Use rotations/ as final native facings; the older southwest guide is
+superseded. Do not switch back to adult72-pixel sizing.
 
-**Appearance approval is pending.** No animation/portrait generation or production
-installation yet. Native grid, alpha, palette, direction/equipment/age proportions,
-anchor and ground contact need QA. Retain the separate finished-set/TV gate.
-Pip shares the child preset with generic children: future integration must use
-the existing cosmetic variant mechanism for Pip rather than replace all children.
+Review uses the existing child_pip variant only for Pip. Generic child art and
+portraits stay intact. The review rules copy differs only by Pip’s cosmetic variant;
+its other data matches production. Prepared installation sets that same variant
+only after full-set approval, keeping child_pip/pip_ashdown aliases separate from child.
 
-Exact request and input/output hashes are retained. One image-tool appearance
-call, zero PixelLab calls/credits/purchases. No image-tool monetary price is
-inferred. Rules, balance and phone contracts are unchanged.
+Rebuild offline with npm run build-pip and npm run verify-pip using
+--prefix tools/tactics-assets/imagegen/townsfolk. Build the overlay with
+node tools/tactics-assets/imagegen/townsfolk/pip-ashdown/build-review-pack.cjs /external/path.
+Never edit linked overlay files. Typed import/variant isolation/portrait/bark checks
+and four-party memory gates pass. All raw requests/images and source-frame outputs
+are retained. Nine completion image-tool calls, zero PixelLab spend or purchases.
+Rules, balance and phone contracts unchanged in production. See the
+[report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/report.md).

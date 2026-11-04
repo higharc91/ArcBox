@@ -147,3 +147,22 @@ No Corvin production change, no PixelLab spend, rules/balance/phone unchanged.
 Corvin’s exact approved atlas and six portraits are installed. Four-party production
 peaks 320.48 /192.37 MiB, below512. Cold pack 204,126,234 bytes. Rules, balance and
 phone contracts are unchanged. See [the installation report](corvin-installed/report.md).
+
+## Current Pip completion checkpoint
+
+Appearance approved: “Yep, she looks good”. The completed eight-direction motion
+and six portraits, recorded voice MP3 and voiced review reel are in
+`tools/tactics-assets/imagegen/townsfolk/pip-ashdown/`. Full-set/TV approval is pending;
+do not request appearance approval again or regenerate completed assets. The compact
+child atlas is1152×512 /2.25 MiB, frames64×64, anchor[32,56], body52 native/26 world,
+scale0.5. Southwest is corrected; southeast talk holds a prior pose instead of the
+drifting last raw cell. Use final rotations/, not the old wrong southwest guide.
+Review uses Pip’s named child_pip variant; generic children remain unchanged.
+Frame/import/portrait/bark/variant isolation and exact-rebuild checks pass. Review
+peaks322.55 /192.37 MiB with four heroes, below512. Pending installer guard preserves
+production. All15 review hashes/TV screenshot are bound in the approval record.
+Nine completion image-tool calls, zero PixelLab spend/new voice generation. Continue
+with finished-set approval then exact installation and production checks; other19
+sprite sets and remaining portraits are ahead. Include existing recorded voice
+samples in future reviews. Rebase before push, no PR/merge/issue closure.
+Evidence: `docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/report.md`.

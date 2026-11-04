@@ -9,7 +9,9 @@
     "build-tobin": "node tobin-fell/build-review.cjs && node tobin-fell/build-portraits.cjs && node tobin-fell/build-closeup.cjs",
     "verify-tobin": "node tobin-fell/verify-review.cjs",
     "build-lark": "node lark/build-review.cjs && node lark/build-portraits.cjs && node lark/build-closeup.cjs",
-    "verify-lark": "node lark/verify-review.cjs && node lark/verify-preserved.cjs"
+    "verify-lark": "node lark/verify-review.cjs && node lark/verify-preserved.cjs",
+    "build-pip": "node pip-ashdown/build-review.cjs && node pip-ashdown/build-portraits.cjs && node pip-ashdown/build-closeup.cjs",
+    "verify-pip": "node pip-ashdown/verify-review.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",
