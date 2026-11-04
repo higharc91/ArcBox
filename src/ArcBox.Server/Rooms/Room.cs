@@ -552,6 +552,9 @@ public sealed partial class Room
 
     public Task ConnectionLostAsync(string connectionId) => EnqueueAsync(() =>
     {
+        // Gone, or moved to another room (the hub's LeaveAsync): it mustn't hear this room close later (issue #62).
+        _knownConnections.TryRemove(connectionId, out _);
+
         if (connectionId == _hostConnectionId)
         {
             _hostConnectionId = null;
