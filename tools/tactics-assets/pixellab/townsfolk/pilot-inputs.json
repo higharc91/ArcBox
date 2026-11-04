@@ -1,5 +1,5 @@
 {
-  "status": "prepared; generation not submitted",
+  "status": "static and idle pilots complete; owner pixel and TV review pending",
   "character": "character_bree_tallow",
   "approvedConceptAsset": "asset_5BTscGVgZiaVkGpPJb65F1X1",
   "conceptSha256": "9f4b30a04a1d4509b0beb53f3c216514ada18e5c34be85d9428a929225186ba5",
@@ -15,8 +15,16 @@
   },
   "heroPixelScale": 0.5,
   "heroHeadY": 51,
-  "heroHeadToFootWorldPixels": 36.0,
+  "heroHeadToFootWorldPixels": 36,
   "pilotScope": "One static facing, then one short idle or walk only after static inspection. Live schema and price required before submission.",
-  "generationCost": null,
-  "integrationApproved": false
+  "generationCost": {
+    "unit": "subscription generations",
+    "static": 15,
+    "idle": 2,
+    "total": 17
+  },
+  "integrationApproved": false,
+  "staticJobId": "f4e7da2d-389f-40e7-8814-04e2e040dac0",
+  "idleJobId": "67e30958-824f-4ac1-a27f-611943cd3617",
+  "selectedCandidate": 1
 }

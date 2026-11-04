@@ -28,4 +28,11 @@ $metadata = [ordered]@{
     generationCost = $null
     integrationApproved = $false
 }
+$existingPath = Join-Path $PSScriptRoot 'pilot-inputs.json'
+if (Test-Path -LiteralPath $existingPath) {
+    $existing = Get-Content $existingPath -Raw | ConvertFrom-Json
+    foreach ($key in @('status','generationCost','staticJobId','idleJobId','selectedCandidate')) {
+        if ($existing.PSObject.Properties[$key]) { $metadata[$key] = $existing.$key }
+    }
+}
 [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'pilot-inputs.json'), (($metadata | ConvertTo-Json -Depth 8).Replace("`r`n","`n") + "`n"), [Text.UTF8Encoding]::new($false))

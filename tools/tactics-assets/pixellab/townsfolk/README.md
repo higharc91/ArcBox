@@ -13,9 +13,10 @@ establish the current production scale.
 
 ## Submission and review
 
-1. Read the live PixelLab schema and quote the pilot's actual cost. No current
-   quote is available: PixelLab MCP is absent and the browser requires sign-in.
-   Historical generation costs are not a current quote. No pilot was submitted.
+1. PixelLab authenticated on 2026-11-03 using owner-supplied local MCP configuration.
+   The static Pro pilot returned four 160×160 candidates for **15 generations**.
+   Exact input and receipt are `bree-static-request.json` and
+   `bree-static-result.json`; no credentials are stored here.
 2. Generate one full-body facing of Bree: braided grey hair, substantial practical
    clothing, worn apron and boots, closed personal notebook. Preserve the approved
    face, build, clothing and handedness. Use restrained pixel clusters, selective
@@ -40,3 +41,30 @@ that variant's body. Preserve species/age proportions for Skarrow and children.
 No live manifest or gameplay contract has changed. OW-05's used-only loading,
 512 MB texture limit, Ashen Ford/Cinder Hollow memory and cold-download measurements
 remain required before final integration.
+
+## Pilot results
+
+![Four candidates beside the shipped hero](bree-normalized-review.png)
+
+![Hero beside Bree's idle](bree-idle-review.gif)
+
+The Pro model ignored the requested 72-pixel body height: raw candidates are
+115–117 pixels tall. `normalize-static.ps1` fits each static candidate once to
+the current hero's 36-world-pixel head-to-foot height with nearest-neighbour
+sampling and a shared foot anchor. No animation frames are individually moved or
+rescaled. Candidate 1 was selected for a four-frame idle trial, costing
+**2 generations**, giving **17 generations total** for this pilot.
+
+The animation delivers the unchanged source plus four generated frames. All five
+canvases are 160×160 and contain the complete sprite. The lowest opaque row stays
+at 123; the top moves by up to two source pixels during breathing. The last frame
+differs from the source by 41 pixels, so the pinned ending is close rather than
+identical. Source and generated frames, hashes, bounds and changed-pixel counts
+are retained. These checks do not establish walking contact or complete directions.
+
+`build-static-review.ps1` shows raw output; add `-Normalized` for the scale review.
+`build-idle-review.cjs` builds the contact sheet, GIF and measurements, using
+`pngjs` and `gifenc` supplied through `NODE_PATH` without adding game dependencies.
+The GIF plays at 300 ms per frame for review; no runtime timing has been chosen.
+Owner pixel/animation approval and a real TV review remain open. Nothing is
+installed in the game, and the rest of the NPC batch has not been generated.

@@ -100,9 +100,9 @@ consumption agrees with successful output receipts (`billing-final.json`).
 - `resume-batch.cjs`: **zero missing sheets**, with existing images, results,
   recovered assets and outstanding jobs excluded from generation.
 - **All 19 primary designs and the child-B supplement are approved.** Approval
-  evidence and selected asset IDs are in `approvals.json`. No NPC PixelLab jobs
-  have run. [Bree pilot inputs](../../pixellab/townsfolk/README.md) are prepared;
-  PixelLab connection/sign-in is required to submit.
+  evidence and selected asset IDs are in `approvals.json`. The first
+  [Bree PixelLab pilot](../../pixellab/townsfolk/README.md) is underway: four static
+  candidates and one short idle study, with no production integration.
 
 ## Visual review notes and remaining work
 
