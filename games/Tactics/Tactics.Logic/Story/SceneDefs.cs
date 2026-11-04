@@ -75,4 +75,8 @@ public sealed record SceneDef(string Id, string? Beat, string? Place, string Tit
 }
 
 /// <summary>A character of <c>lore/characters.json</c>, as a scene shows them: their name, the portrait preset and their role.</summary>
-public sealed record LoreCharacter(string Id, string Name, string Preset, string Role);
+public sealed record LoreCharacter(string Id, string Name, string Preset, string Role, string? Sprite = null, string? Portrait = null)
+{
+    public string SpriteKey => Sprite ?? $"characters.{Preset}";
+    public string PortraitKey => Portrait ?? Preset;
+}

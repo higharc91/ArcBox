@@ -26,6 +26,7 @@
           "id": { "$ref": "common.schema.json#/$defs/id" },
           "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
           "chapter": { "type": "integer", "minimum": 1 },
+          "sideAdventure": { "type": "boolean", "description": "Optional regional side story; does not end a main chapter or own main-story flags." },
           "region": { "$ref": "common.schema.json#/$defs/id" },
           "title": { "$ref": "common.schema.json#/$defs/text" },
           "levels": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 2, "description": "[first, last] character level." },

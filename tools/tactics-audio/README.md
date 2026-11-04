@@ -8,6 +8,7 @@ import script that turns the downloaded clips into the game's `sfx` and `music` 
 | `sfx-list.json` | Every sound effect and ambience loop: prompt, length, variants, group, what triggers it. |
 | `music-list.json` | The music cues, same format, plus a fixed `seed` per cue and `instrumental` (below). |
 | `sfx-assets.json`, `music-assets.json` | What was generated: model, team, project, and per clip its Scenario asset id and job. |
+| `external-sfx.json` | Existing positional world-animal WAV calls, preserved alongside generated clips on import. |
 | `audio.py` | `plan`, `status`, `check` and `import` (needs ffmpeg). |
 
 Output: `content/tactics/base/sfx/` and `content/tactics/base/music/`, each with Ogg files and a `manifest.json`.

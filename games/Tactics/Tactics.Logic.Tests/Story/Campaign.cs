@@ -30,6 +30,7 @@ internal static class Campaign
             yield break;
         }
         var arc = arcs[index];
+        if (arc.SideAdventure && !arc.Beats.IsEmpty && !arc.Beats.Any(b => done.Contains(b.Id))) flags = flags.Union(arc.Beats[0].Requires);
         if (StoryRules.Available(arc, flags, done) is not { } beat)
         {
             foreach (var rest in Play(arcs, index + 1, flags, done, path))

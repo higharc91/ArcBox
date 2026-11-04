@@ -25,6 +25,39 @@ const lastCall = (send: ReturnType<typeof show>) => send.mock.calls.at(-1) as un
 
 afterEach(cleanup);
 
+describe("worn trinket", () => {
+  const equipped = (active: boolean) => {
+    const view = structuredClone(CLERIC);
+    view.me!.trinket = { id: "hearthstone_pendant", name: "Hearthstone Pendant", text: "Advantage on Wisdom saves.", rarity: "rare", class: "cleric", className: "Cleric", active };
+    return view;
+  };
+
+  it("explains the worn reward even while the campaign is read-only", () => {
+    const send = show(equipped(true), true);
+    fireEvent.click(screen.getByRole("button", { name: "Trinket: Hearthstone Pendant, active" }));
+    expect(within(dialog()).getByText("Advantage on Wisdom saves.")).toBeTruthy();
+    expect(within(dialog()).getByText("This trinket is active for your class.")).toBeTruthy();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("explains why a kept reward is dormant", () => {
+    show(equipped(false));
+    fireEvent.click(screen.getByRole("button", { name: "Trinket: Hearthstone Pendant, dormant" }));
+    expect(within(dialog()).getByText(/effects are dormant.*Cleric again/)).toBeTruthy();
+  });
+
+  it("warns before a remake into another class leaves the reward dormant", () => {
+    const view = equipped(true);
+    view.options = FRESH.options;
+    show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Remake character" }));
+    fireEvent.click(screen.getByRole("button", { name: "Fighter defender" }));
+    expect(screen.getByText(/Hearthstone Pendant carries over, but stays dormant unless you choose Cleric/)).toBeTruthy();
+  });
+});
+
 describe("tactics portal", () => {
   it("point-buy costs match the server's table", () => {
     expect(pointsSpent({ str: 15, dex: 15, con: 15, int: 8, wis: 8, cha: 8 })).toBe(27);

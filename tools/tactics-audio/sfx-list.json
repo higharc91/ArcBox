@@ -1743,5 +1743,120 @@
   "loop": false,
   "use": "Altar used",
   "seed": 8268
+ },
+ "ashmaw_roar": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, immense low warning roar from an ancient cave bear, chest resonance and a faint dry ember crackle underneath, same natural bear family, not a dragon or demon",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 2.4,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Cinder Roar for Ashmaw",
+  "seed": 7248,
+  "voice": "bear"
+ },
+ "ashmaw_maul": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, short heavy bite-and-claw attack snarl, closer and deeper, tiny ember crackle under the natural animal voice",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Maul for Ashmaw",
+  "seed": 7248,
+  "voice": "bear"
+ },
+ "ashmaw_hurt": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, short wounded grunt and pained breath, an old real bear, low dry ember crackle, no human voice",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for Ashmaw",
+  "seed": 7248,
+  "voice": "bear"
+ },
+ "ashmaw_shake": {
+  "prompt": "A massive cave bear plants its paws with a heavy ground thump and shakes dry ash off its fur, one low impact followed by a broad soft ash whoosh and tiny ember crackles",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Ash Shake for Ashmaw",
+  "seed": 7474
+ },
+ "ashmaw_death": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, long fading exhausted growl sinking into a quiet dying ember hiss, sad and restrained, no explosion",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 3.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for Ashmaw",
+  "seed": 7248,
+  "voice": "bear"
+ },
+ "ashmaw_breath_loop": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, very slow deep resting breaths from a sleeping cave bear, faint smouldering fur crackles beneath, steady quiet loop with no roar or attack",
+  "negative": "music, speech, voices, distortion, abrupt edits",
+  "duration": 8.0,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Quiet idle breath in Ashmaw lair",
+  "seed": 7248,
+  "voice": "bear"
+ },
+ "kobold_pick": {
+  "prompt": "One small iron mining pick chips dry stone, sharp light metal-on-rock clink followed by a few falling pebbles; close practical mine work, no voices",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Kobold mining interaction in the Diggings",
+  "seed": 7474
+ },
+ "amb_cinder_hollow": {
+  "prompt": "Quiet warm cave ambience, sparse distant water drips, occasional faint small mining picks far away, low restrained warm rumble deeper in the cave; long steady seamless ambience, no monsters or speech, no lava roar, no music",
+  "negative": "music, speech, voices, distortion, abrupt edits",
+  "duration": 30.0,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Cinder Hollow region ambience",
+  "seed": 7474
+ },
+ "cave_enter": {
+  "prompt": "Soft sheltered cave transition, two light gravel footfalls passing from open air into a still stone chamber, a quiet air hush and short natural cavern reflection",
+  "negative": "music, speech, voices, distortion, abrupt edits",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Voted cave entrance travel",
+  "seed": 7474
+ },
+ "bounty_accept": {
+  "prompt": "A small sheet of aged parchment is lifted and settled, then one modest iron pin pressed into wood, crisp and warm, a single restrained interface acknowledgement",
+  "negative": "music, speech, voices, distortion, abrupt edits",
+  "duration": 0.7,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Dagna bounty accepted",
+  "seed": 7474
+ },
+ "trinket_presented": {
+  "prompt": "A single warm gentle hand-chime with a little bright upper shimmer and a soft rounded decay, intimate rewarding keepsake presentation, no triumphant fanfare or music",
+  "negative": "music, speech, voices, distortion, abrupt edits",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Each class trinket presented at turn-in",
+  "seed": 7474
  }
 }

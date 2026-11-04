@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 6ae31756-f31e-447b-8c00-67671cf0efa0\nanimation: walking-6-frames\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=d0fc5e50-304c-473c-807a-449b39e07801, south-west=47fc3d88-249b-408b-a1e9-36a4ce7bed50, west=052a1521-5320-4280-9ebd-a2187c745f1c, north-west=bb290c9e-f539-4daa-b3f9-156d8de2e4a0, north=f8479cab-4619-4b59-86e7-c3d86a0a4497, north-east=30021b8b-bea0-4b23-ba95-4ca061fddae8, east=e58ddde6-1aae-48c9-a586-63c895b05422, south-east=e72c4ad9-571f-45b5-b0cc-49fac6820a1e\ngroup: 39982d12-f73e-4392-a081-ab1969d760f4\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\", template_animation_id=\"walking-6-frames\", animation_group_id=\"39982d12-f73e-4392-a081-ab1969d760f4\", directions=[...])\n\nhint: get_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\")\nif poor: delete_animation(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

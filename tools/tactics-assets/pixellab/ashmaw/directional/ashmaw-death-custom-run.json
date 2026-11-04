@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (The exhausted grey bear slowly lowers its forequarters, folds its legs and settles onto its belly, head resting on its paws, ending completely motionless. Keep fur-covered anatomy and the same south facing. No rolling, no spinning, no fading, no resurrection.)\ndirections: south (1 jobs)\njob_ids: south=757f1ee7-3dd6-4325-865b-9d00bbcdf083\ngroup: ee409f4d-1652-4b0f-94ba-ab231d3fc7d8\nframes: 8 (reference stripped, keep_first_frame=false)\ncanvas: south 180x180 (frames are stored at this size: the character plus room to move)\ncost: 4 generations (4/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"The exhausted grey bear slowly lowers its forequarters, folds its legs and settles onto its belly, head resting on its paws, ending completely motionless. Keep fur-covered anatomy and the same south facing. No rolling, no spinning, no fading, no resurrection.\", animation_group_id=\"ee409f4d-1652-4b0f-94ba-ab231d3fc7d8\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

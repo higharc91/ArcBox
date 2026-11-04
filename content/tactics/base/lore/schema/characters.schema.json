@@ -13,6 +13,8 @@
           "id": { "$ref": "common.schema.json#/$defs/id" },
           "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
           "preset": { "$ref": "common.schema.json#/$defs/id", "description": "The characters/presets id for sprite and portraits. Defaults to the character id." },
+          "sprite": { "$ref": "common.schema.json#/$defs/artKey", "description": "Optional named creature sprite for a bespoke character; preset remains the fallback." },
+          "portrait": { "$ref": "common.schema.json#/$defs/id", "description": "Optional portrait preset for a bespoke character." },
           "name": { "$ref": "common.schema.json#/$defs/text" },
           "epithet": { "$ref": "common.schema.json#/$defs/text", "description": "e.g. 'the Unlit Lantern'." },
           "role": { "enum": ["companion", "ally", "npc", "rival", "villain"] },

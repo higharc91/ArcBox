@@ -1,0 +1,43 @@
+{
+  "reason": "Trim short opening sentences so offers and replacement confirmations fit the existing three-row TV caption. No new paid render.",
+  "parent": "ashmaw_dagna_holt_batch",
+  "sourceSha256": "9102a0ca7d3fe6276f9bd6198f0a0695ad9ee49474ad9963ee018f31c0d47d5b",
+  "segments": [
+    {
+      "raw": "Callirrhoe.c459c28d",
+      "preset": "Callirrhoe",
+      "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "line": "ashmaw_offer",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 8.06,
+      "end": 19.36,
+      "matchingCoverage": 0.8649,
+      "recognized": "Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+      "wavSha256": "0c1db255f19c8c5d5ad7428744c63e390d5a4b15107392c465155538375ccc96"
+    },
+    {
+      "raw": "Callirrhoe.a0ee05c2",
+      "preset": "Callirrhoe",
+      "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "line": "ashmaw_proof",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 46.18,
+      "end": 56.94,
+      "matchingCoverage": 0.9688,
+      "recognized": "Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "wavSha256": "eff1501ca2f70c587c0e9e13afacb9afd3dc5ac49cd614f81a4cfa976d274d5f"
+    }
+  ]
+}

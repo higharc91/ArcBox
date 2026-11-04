@@ -1,0 +1,18 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "template_animation_id": "taking-punch",
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "Brief restrained recoil from a hit, then return to guard. Keep the pick gripped in the right hand and helmet fixed to the head.",
+  "animation_name": "grisk_hurt_pilot",
+  "directions": [
+    "south-east",
+    "east",
+    "north-east",
+    "north",
+    "north-west",
+    "west",
+    "south-west"
+  ],
+  "animation_group_id": "cb052c08-ad0e-4e8e-8e6f-cf2f7f9325c6"
+}

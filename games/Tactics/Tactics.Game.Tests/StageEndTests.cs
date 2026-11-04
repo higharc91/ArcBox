@@ -185,6 +185,10 @@ public sealed class StageEndTests
         File.WriteAllText(mapPath, map.ToJsonString());
 
         var hither = region["spawns"]!["recovery"]!.DeepClone();
+        // This flood fixture relocates the new entrance too; production still validates both real banks.
+        region["spawns"]!["named"]!["cinder_hollow_return"] = hither.DeepClone();
+        list.Single(t => t!["id"]!.GetValue<string>() == "af_cinder_hollow_mouth")!["at"] = new JsonArray(32, 58);
+        File.WriteAllText(thingsPath, things.ToJsonString());
         foreach (var beat in region["beats"]!.AsArray())
             if (beat!["at"]![0]!.GetValue<int>() >= stage.Origin.X + 8)
                 beat["at"] = hither.DeepClone();
@@ -226,7 +230,7 @@ public sealed class StageEndTests
         var world = Saved(s);
         Assert.Equal(Force.Beats, world.Beats);
         Assert.Equal(new StorySave("ch1_ford_assault", StorySave.After, null, null, 0, world.Story!.Seq) with { Played = [] }, world.Story with { Played = [] });
-        Assert.Equal(["ch1_skarrow_slain", "bridge_held"], world.Flags);
+        Assert.Equal(["ch1_skarrow_slain", "bridge_held", "ch1_ford_settled"], world.Flags);
         Assert.Contains("ford_assault", TacticsDocument.Read(s.Lease.Document).Completed);
 
         s.Send(0, "next");

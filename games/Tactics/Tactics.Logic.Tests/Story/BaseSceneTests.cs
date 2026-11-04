@@ -17,13 +17,13 @@ public sealed class BaseSceneTests
     [Fact]
     public void Chapter_1_has_8_beats_and_13_scenes()
     {
-        var arc = Book.Arcs.Single(a => a.Chapter == 1);
+        var arc = Book.Arcs.Single(a => a.Chapter == 1 && !a.SideAdventure);
 
         Assert.Equal(8, arc.Beats.Length);
         Assert.Equal(13, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Where(s => s.Beat is not null).Select(ChapterOf).Distinct());
-        Assert.Equal(70, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
+        Assert.Equal(75, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
         Assert.Single(Book.Scenes.Where(s => s.Camp));
     }
 
@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(900, lines.Count);
+        Assert.Equal(921, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
@@ -69,7 +69,7 @@ public sealed class BaseSceneTests
         Assert.Empty(missing);
 
         // Flag 5 of the plan measured Chapter 1: its longest line is 11.0 s.
-        var chapter1 = Book.Arcs.Single(a => a.Chapter == 1).Beats.SelectMany(b => Book.ScenesOf(b.Id)).SelectMany(s => s.Lines);
+        var chapter1 = Book.Arcs.Single(a => a.Chapter == 1 && !a.SideAdventure).Beats.SelectMany(b => Book.ScenesOf(b.Id)).SelectMany(s => s.Lines);
         Assert.Equal(11.0, chapter1.Max(l => Book.ClipSeconds(l.Id)!.Value), 2);
         Assert.Equal(74401 / 24000.0, Book.ClipSeconds("ch1_ford_vote_2")!.Value, 6);
     }
@@ -104,7 +104,7 @@ public sealed class BaseSceneTests
     [Fact]
     public void Every_battle_beat_marks_its_aftermath()
     {
-        Assert.Equal(["ch1_bridge_cost", "ch1_road_east", "ch2_journal", "ch3_crypt_records", "ch4_caves_after", "ch4_rime_tower_after", "ch5_gate_duel_after", "ch5_ritual_after"],
+        Assert.Equal(["ch1_bridge_cost", "ch1_road_east", "ch2_journal", "ch3_crypt_records", "ch4_caves_after", "ch4_rime_tower_after", "ch5_gate_duel_after", "ch5_ritual_after", "ashmaw_lair_after"],
             Book.Scenes.Where(s => s.After).Select(s => s.Id));
         foreach (var scene in Book.Scenes.Where(s => s.After))
             Assert.Equal(ArcBeat.Battle, BeatOf(scene).Kind);
@@ -178,7 +178,8 @@ public sealed class BaseSceneTests
     [Fact]
     public void Every_flag_is_set_before_it_is_read()
     {
-        var before = new HashSet<string>();
+        // Side stories begin after their tested entrance has supplied its prerequisites.
+        var before = Book.Arcs.Where(a => a.SideAdventure).SelectMany(a => a.Beats.Take(1)).SelectMany(b => b.Requires).ToHashSet();
         var problems = new List<string>();
         foreach (var beat in Book.Arcs.OrderBy(a => a.Chapter).SelectMany(a => a.Beats))
         {

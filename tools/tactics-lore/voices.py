@@ -113,7 +113,7 @@ def delivery() -> dict[str, dict]:
     def walk(node):
         if isinstance(node, dict):
             if (isinstance(node.get("id"), str) and "text" in node and
-                    node["id"].startswith(("sq_", "town_", "bark_pip_whistle_"))):
+                    node["id"].startswith(("sq_", "town_", "bark_pip_whistle_", "ashmaw_", "bark_grisk_"))):
                 out[node["id"]] = {"direction": node.get("direction", ""), "mood": node.get("mood", "idle")}
             for value in node.values(): walk(value)
         elif isinstance(node, list):
@@ -215,13 +215,14 @@ def _features(ogg: Path) -> tuple[float, float]:
     return (float(np.median(pitches)) if pitches else math.nan), centroid
 
 
-def check() -> int:
+def check(report_path: Path | None = None) -> int:
     """Measure pitch AND brightness, including new-versus-existing identity drift; cache unchanged clips."""
     import statistics
     cache_path = ROOT / ".cache" / "tactics-voice-features.json"
     cache_path.parent.mkdir(exist_ok=True)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
-    records = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text()).get("npcsAndQuests", [])
+    assets = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text())
+    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", [])
     new_raws = {r["raw"] for r in records}
     by = {}
     for j in jobs():
@@ -259,7 +260,7 @@ def check() -> int:
         comparisons.append(comparison)
         print(json.dumps(comparison), flush=True)
     report = dict(comparisons=comparisons,flagged=flagged,thresholds=dict(clipSemitones=10,speakerSemitones=6,centroidRatio=[.6,1.65]))
-    report_path = ROOT / "docs/superpowers/reports/2026-11-03-npcs-quests/voice-check.json"
+    report_path = report_path or ROOT / ".cache/tactics-voice-check.json"
     report_path.parent.mkdir(parents=True,exist_ok=True)
     report_path.write_text(json.dumps(report,indent=2)+"\n")
     print(f"{len(flagged)} clip(s) or speaker group(s) flagged")
@@ -301,7 +302,7 @@ def main(argv: list[str]) -> int:
         print(f"imported {done}, {missing} still without a render; manifest covers {len(m['lines'])} lines")
         return 0
     if cmd == "check":
-        return check()
+        return check(Path(argv[2]) if len(argv) > 2 else None)
     if cmd == "status":
         js = jobs()
         raws = {j["raw"] for j in js if not j["done"]}

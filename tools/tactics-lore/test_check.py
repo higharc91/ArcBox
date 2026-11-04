@@ -149,6 +149,46 @@ class CheckTests(unittest.TestCase):
         self.assertTrue(any("outside" in e for e in errors), errors)
         self.assertTrue(any("main-story" in e for e in errors), errors)
 
+    def test_class_trinket_rewards_cover_every_class_with_its_own_known_item(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            path = content / "lore/quests.json"
+            data = json.loads(path.read_text())
+            trinkets = json.loads((content / "rules/trinkets.json").read_text())
+            valid = {t["class"]: t["id"] for t in trinkets}
+            data["quests"][0]["rewards"]["trinkets"] = valid
+            path.write_text(json.dumps(data))
+            self.assertEqual(check.check([content / "lore"]), [])
+            for kind in ["unknown_class", "unknown_trinket", "wrong_class", "missing_class"]:
+                with self.subTest(kind=kind):
+                    reward = dict(valid)
+                    if kind == "unknown_class": reward["invented"] = "ember_claw_gauntlet"
+                    elif kind == "unknown_trinket": reward["fighter"] = "missing"
+                    elif kind == "wrong_class": reward["fighter"] = "hearthstone_pendant"
+                    else: reward.pop("wizard")
+                    data["quests"][0]["rewards"]["trinkets"] = reward
+                    path.write_text(json.dumps(data))
+                    self.assertTrue(any("trinket" in e for e in check.check([content / "lore"])))
+
+    def test_quest_targets_accept_an_explicit_region_and_reject_unknown_regions(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            path = content / "lore/quests.json"
+            data = json.loads(path.read_text())
+            target = {"region": "ashen_ford", "tile": [4, 3]}
+            data["quests"][0]["stages"][0]["target"] = target
+            path.write_text(json.dumps(data))
+            self.assertEqual(check.check([content / "lore"]), [])
+            target["region"] = "missing"
+            path.write_text(json.dumps(data))
+            self.assertTrue(any("unknown target region" in e for e in check.check([content / "lore"])))
+
     def test_optional_beat_hooks_cannot_set_main_flags_or_be_aftermaths(self):
         def scene(id_, **kw):
             return dict(id=id_, cast=["narrator"], start="n", nodes=[dict(id="n", lines=[

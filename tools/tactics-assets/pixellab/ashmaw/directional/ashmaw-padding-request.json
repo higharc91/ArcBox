@@ -1,0 +1,17 @@
+{
+  "name": "Wardenflame Ashmaw padded directional master",
+  "mode": "v3",
+  "body_type": "quadruped",
+  "template": "bear",
+  "n_directions": 8,
+  "view": "low top-down",
+  "direction_images": {
+    "south-east": "upload:6b14a3bb-d709-4f0f-9490-82869cbd9cf8",
+    "south-west": "upload:55ec0f6e-6f8e-40f9-853f-543b6ddbfa2b",
+    "north-east": "upload:ac1a29ac-9810-42e0-90a4-51f2e73b537c",
+    "north": "upload:b08dc85c-c284-4486-b5bc-550d2ce7c1d6",
+    "north-west": "upload:e2a539eb-0891-42f9-a9f3-57107fe826a8"
+  },
+  "description": "Rotate the exact ash-grey bear into only the missing EAST and WEST views. Keep the original pixel scale and all anatomy; the extra transparent border is intentional room for the full muzzle and hindquarters. Do not enlarge the body to fill the border. Keep the entire body and every paw inside the canvas with transparent margin. SOUTH is the straight front-facing input. Preserve the tiny banked coal eyes and sparse dull ember fur tips.",
+  "reference_image_url": "upload:8a83f4ab-1526-42bf-bc1d-8d196b9f284a"
+}

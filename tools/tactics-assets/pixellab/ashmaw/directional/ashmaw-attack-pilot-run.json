@@ -1,0 +1,9 @@
+{
+  "status": "submitted; recovered from get_character after receipt write failed",
+  "noResubmit": true,
+  "animation_name": "ashmaw_attack_pilot",
+  "direction": "south",
+  "character": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "recovery": "/workspace/issue74/ashmaw-recovery-status.json",
+  "note": "One pending attack job confirmed by provider. Original tool succeeded but the client could not write its relative receipt path. Recover group and job ID from character metadata after completion."
+}

@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 4,
+  "keep_first_frame": false,
+  "animation_name": "ashmaw_idle_custom_pilot",
+  "directions": [
+    "south"
+  ],
+  "action_description": "Extremely subtle slow breathing only. Four bear paws planted and absolutely still, head holds the same facing, chest expands a tiny amount and relaxes. Identical anatomy, fur colours and body scale in every frame. No visible bones, no guides, no skeleton overlay, no turning, no stepping."
+}

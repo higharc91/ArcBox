@@ -64,6 +64,10 @@ public sealed class HudArt
     {
         var parts = sprite?.Split('.') ?? [];
         var figure = _units.Sprite(sprite) ?? _units.StandIn(tone);
+        if (parts is ["monsters", var monster, ..] && _portraits.TryGetValue(monster, out var monsterPortrait))
+            return new HudPortrait(monsterPortrait, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
+        if (parts is [CharacterSet, "kobold" or "kobold_slinger", ..] && _portraits.TryGetValue(parts[1], out var koboldPortrait))
+            return new HudPortrait(koboldPortrait, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
         if (figure.PortraitSource is { } authored)
             return new HudPortrait(figure.Path, authored, _backdrops[tone]);
         if (parts is [CharacterSet, ..] && figure.PixelScale < 1)

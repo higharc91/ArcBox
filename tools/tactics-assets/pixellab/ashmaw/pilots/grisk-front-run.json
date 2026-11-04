@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 9a126672-9cc0-4a9c-9c7d-984501f065ce\njob_id: 9a126672-9cc0-4a9c-9c7d-984501f065ce\nmode: text\nframes: 1\nsize: 96x96px\ntransparent: True\nedit: Repose this same kobold miner to face SOUTH: perfectly straight toward the viewer. Both eyes equally visible, snout centered, both shoulders and hips square to the camera. Do not retain the existing three-quarter angle. Keep the exact outfit, proportions, colors, low top-down pixel style, caged helmet lamp, tally cord and curved tail. Preserve the mining pick in his RIGHT hand (viewer LEFT) with the fingers physically wrapped around its shaft. Both feet planted at same ground baseline. One single full-body sprite centered, no text, no labels, no extra poses. Transparent background.\nseed: 7412\nasset_id: 2af55ebc-a609-5624-9abe-6750f7b2a2f4\nasset_status: pending (saved when generation completes)\ncost: ~10 generations\nstatus: processing (~30-90s)\n\nhint: get_image(job_id=\"9a126672-9cc0-4a9c-9c7d-984501f065ce\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/9a126672-9cc0-4a9c-9c7d-984501f065ce/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

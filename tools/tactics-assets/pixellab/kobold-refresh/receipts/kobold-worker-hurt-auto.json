@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 6ae31756-f31e-447b-8c00-67671cf0efa0\nanimation: taking-punch\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=749b1f49-646d-4748-a0ae-4b45f20e6f14, south-west=97767084-17f8-482f-a89b-98fc39e8de30, west=ae99b26e-999d-4dca-978f-49b19e71e412, north-west=1e7b820d-ecd7-4811-898c-86dbb8133c37, north=e7b8c0b5-e97a-4ca0-bbc7-80548717da14, north-east=04bdcbd4-2b23-4fe3-84a2-03751b72ab29, east=ded47a67-7ff8-448d-9cf6-caa9a9d9a1e0, south-east=ba71b925-b68e-43a5-873a-58aa6cf4764f\ngroup: 13bc1603-b1b0-47af-9f7c-38d8457d37cb\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\", template_animation_id=\"taking-punch\", animation_group_id=\"13bc1603-b1b0-47af-9f7c-38d8457d37cb\", directions=[...])\n\nhint: get_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\")\nif poor: delete_animation(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

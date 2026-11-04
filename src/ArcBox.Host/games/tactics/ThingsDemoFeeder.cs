@@ -42,7 +42,10 @@ public partial class ThingsDemoFeeder : Node
             var step = _steps[_next++];
             GD.Print($"THINGS demo step {step.Label} at {_clock:0.00} s");
             _captions(step.Captions);
-            _send(JsonSerializer.SerializeToElement(step.View, ArcJson.Options));
+            var view = step.View;
+            if (view.Explore?.QuestEvent is { Until: var until, Gifts: { Length: > 0 } gifts } notice && until == DateTimeOffset.MaxValue)
+                view = view with { Explore = view.Explore with { QuestEvent = notice with { Until = DateTimeOffset.UtcNow.AddSeconds(gifts.Length * 2.4 + 1) } } };
+            _send(JsonSerializer.SerializeToElement(view, ArcJson.Options));
             _due.AddRange(step.Shots.Select(s => (_clock + s.After, s.Name)));
         }
         for (var i = _due.Count - 1; i >= 0; i--)

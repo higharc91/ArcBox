@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import audio
@@ -65,6 +66,33 @@ class Plan(unittest.TestCase):
             with self.assertRaises(SystemExit) as e:
                 audio.plan_jobs(kinds(Path(d), {"brass": spec}))
         self.assertIn("brass", str(e.exception))
+
+
+class Manifests(unittest.TestCase):
+    def test_import_keeps_registered_external_animal_calls_alongside_generated_clips(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            table = kinds(root, {})["sfx"]
+            table["out"] = root / "sfx"
+            table["out"].mkdir()
+            table["external"] = root / "external-sfx.json"
+            external = {"files": ["crow.wav"], "loop": False, "group": "ambience", "use": "A nearby crow"}
+            table["external"].write_text(json.dumps({"sounds": {"animal_crow": external}}))
+            (table["out"] / "crow.wav").write_bytes(b"existing")
+            table["list"].write_text(json.dumps({"chime": cue()}))
+            (table["out"] / "chime.ogg").write_bytes(b"generated")
+            with patch.object(audio, "KINDS", {"sfx": table}):
+                self.assertEqual(audio.write_manifests(), {"sfx": 2})
+            result = json.loads((table["out"] / "manifest.json").read_text())
+            self.assertEqual(result["sounds"]["animal_crow"], external)
+            self.assertEqual(result["sounds"]["chime"]["files"], ["chime.ogg"])
+            # A later unrelated import must leave an unchanged manifest byte-identical, including its authored ordering.
+            manifest_path = table["out"] / "manifest.json"
+            authored = json.dumps(result, sort_keys=True, separators=(",", ":"))
+            manifest_path.write_text(authored)
+            with patch.object(audio, "KINDS", {"sfx": table}):
+                audio.write_manifests()
+            self.assertEqual(manifest_path.read_text(), authored)
 
 
 if __name__ == "__main__":

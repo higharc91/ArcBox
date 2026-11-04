@@ -135,6 +135,33 @@ internal sealed partial class Validation
                 Error(file, ptr, $"This couldn't be checked: {ex.Message}");
             }
         }
+        CheckEntrances(byId, thingsOf.SelectMany(g => g), maps);
+    }
+
+    private void CheckEntrances(IReadOnlyDictionary<string, RegionDef> regions, IEnumerable<Loaded<RegionThing>> things,
+        IReadOnlyDictionary<string, BattleMap> maps)
+    {
+        var all = things.ToList();
+        foreach (var source in all.Where(t => t.Def.Def.To is not null))
+        {
+            var to = source.Def.Def.To!;
+            var pointer = Pointer.Append(source.Pointer, "to");
+            if (!regions.TryGetValue(to.Region, out var destination))
+            { Error(source.File, Pointer.Append(pointer, "region"), $"Unknown destination region '{to.Region}'."); continue; }
+            if (destination.Spawns.Find(to.Spawn) is not { } spawn)
+            { Error(source.File, Pointer.Append(pointer, "spawn"), $"Unknown spawn '{to.Spawn}' in '{to.Region}'."); continue; }
+            var exits = all.Where(t => t.Def.Region == to.Region && t.Def.Def.To?.Region == source.Def.Region).ToList();
+            if (exits.Count == 0)
+            { Error(source.File, pointer, $"Region '{to.Region}' needs a return mouth to '{source.Def.Region}'."); continue; }
+            if (Art is null && WorldGround.NeedsArt(destination)) continue;
+            var world = WorldGround.Of(WorldRegion.From(destination), maps, Art ?? ArtManifest.None);
+            var ground = world.With([.. all.Where(t => t.Def.Region == to.Region && Interactables.Solid(t.Def.Def)).Select(t => t.Def.Def.At)]);
+            if (!ground.Walkable(spawn))
+            { Error(source.File, Pointer.Append(pointer, "spawn"), $"Spawn '{to.Spawn}' in '{to.Region}' can't be stood on."); continue; }
+            var reached = WorldWalk.Reach(ground, spawn, ClassDef.DefaultJump);
+            if (!exits.Any(e => reached.Contains(e.Def.Def.At)))
+                Error(source.File, pointer, $"Spawn '{to.Spawn}' in '{to.Region}' cannot reach a return mouth to '{source.Def.Region}'.");
+        }
     }
 
     /// <summary>The side that faces <paramref name="side"/> across an edge, or null if it isn't a side.</summary>
@@ -331,6 +358,14 @@ internal sealed partial class Validation
         private void Spawns(List<Placed> stamps)
         {
             var spawns = Pointer.Append(ptr, "spawns");
+            foreach (var (name, at) in _def.Spawns.Named ?? Ordinal.Map<Tile>())
+            {
+                var pointer = Pointer.Append(Pointer.Append(spawns, "named"), name);
+                if (string.IsNullOrWhiteSpace(name) || name is "start" or "recovery")
+                    v.Error(file, pointer, "A named spawn needs a nonempty name other than start or recovery.");
+                foreach (var stamp in stamps.Where(s => s.Stage.Holds(at)))
+                    v.Error(file, pointer, $"The named spawn '{name}' at {at} is inside the stamp '{stamp.Stamp.Map}'. Move it off the battlefield.");
+            }
             foreach (var (name, at, reason) in new[]
             {
                 ("start", _def.Spawns.Start, "a new campaign would begin on its battlefield"),
@@ -404,6 +439,13 @@ internal sealed partial class Validation
 
             if (!reached.Contains(_def.Spawns.Recovery))
                 Unreached("The recovery spawn", _def.Spawns.Recovery, Pointer.Append(spawns, "recovery"));
+            var trapped = WorldWalk.Trapped(_ground, start, ClassDef.DefaultJump);
+            foreach (var (name, at) in _def.Spawns.Named ?? Ordinal.Map<Tile>())
+            {
+                var pointer = Pointer.Append(Pointer.Append(spawns, "named"), name);
+                if (!reached.Contains(at)) Unreached($"The named spawn '{name}'", at, pointer);
+                else if (trapped.Contains(at)) v.Error(file, pointer, $"The named spawn '{name}' at {at} can't walk back to the start.");
+            }
             for (var i = 0; i < _def.Beats.Length; i++)
                 if (!reached.Contains(_def.Beats[i].At))
                     Unreached($"The beat '{_def.Beats[i].Beat}'", _def.Beats[i].At, Pointer.Append(At("beats", i), "at"));
@@ -420,7 +462,7 @@ internal sealed partial class Validation
             }
 
             // A beaten party wakes here at any point in the story. The order of everything else is StoryOrder's to judge: the loader can't read lore.
-            if (WorldWalk.Trapped(_ground, start, ClassDef.DefaultJump).Contains(_def.Spawns.Recovery))
+            if (trapped.Contains(_def.Spawns.Recovery))
                 v.Error(file, Pointer.Append(spawns, "recovery"), $"The recovery spawn at {_def.Spawns.Recovery} can't walk back to the start.");
         }
 

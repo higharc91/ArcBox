@@ -1,0 +1,24 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"background_job_id\": \"a9b99f5c-eaec-494f-9872-5b5b9b18ab16\",\n  \"object_id\": \"239eccc3-d03b-45b2-81e8-250e35430c67\",\n  \"status\": \"processing\",\n  \"first_direction_generated\": true,\n  \"estimated_generations\": 5,\n  \"job_id\": \"a9b99f5c-eaec-494f-9872-5b5b9b18ab16\",\n  \"n_directions\": 1,\n  \"poll_tool\": \"get_object\",\n  \"status_path\": \"/v2/background-jobs/a9b99f5c-eaec-494f-9872-5b5b9b18ab16\",\n  \"download_path\": \"/mcp/objects/239eccc3-d03b-45b2-81e8-250e35430c67/download\"\n}\nid: 239eccc3-d03b-45b2-81e8-250e35430c67\nPoll get_object(object_id=\"239eccc3-d03b-45b2-81e8-250e35430c67\") or /v2/background-jobs/a9b99f5c-eaec-494f-9872-5b5b9b18ab16; wait for the outer job to complete before downloading or animating. First-direction generation is included; actual image and rotation usage is itemized as billing_stages on the job record at the status path above (REST, not shown by the get_* tools) — get_balance before and after gives the total.",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "background_job_id": "a9b99f5c-eaec-494f-9872-5b5b9b18ab16",
+    "object_id": "239eccc3-d03b-45b2-81e8-250e35430c67",
+    "status": "processing",
+    "first_direction_generated": true,
+    "estimated_generations": 5,
+    "job_id": "a9b99f5c-eaec-494f-9872-5b5b9b18ab16",
+    "n_directions": 1,
+    "poll_tool": "get_object",
+    "status_path": "/v2/background-jobs/a9b99f5c-eaec-494f-9872-5b5b9b18ab16",
+    "download_path": "/mcp/objects/239eccc3-d03b-45b2-81e8-250e35430c67/download"
+  },
+  "isError": false
+}

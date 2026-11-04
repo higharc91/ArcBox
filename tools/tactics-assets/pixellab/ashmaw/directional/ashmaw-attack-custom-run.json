@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (A natural grounded cave bear attack: keep all hind paws grounded, head facing south. Lean forward into one short bite, make one compact right forepaw swipe, and recover to the exact starting stance. Solid living fur-covered anatomy in every frame; no exposed bones or guides. No turning, no spinning, no leaping.)\ndirections: south (1 jobs)\njob_ids: south=0c65f143-aae5-49f1-8fd5-844bfcd0c70d\ngroup: 8021517c-5aba-4495-887f-88ca83bc4836\nframes: 8 (reference stripped, keep_first_frame=false)\ncanvas: south 180x180 (frames are stored at this size: the character plus room to move)\ncost: 4 generations (4/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"A natural grounded cave bear attack: keep all hind paws grounded, head facing south. Lean forward into one short bite, make one compact right forepaw swipe, and recover to the exact starting stance. Solid living fur-covered anatomy in every frame; no exposed bones or guides. No turning, no spinning, no leaping.\", animation_group_id=\"8021517c-5aba-4495-887f-88ca83bc4836\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

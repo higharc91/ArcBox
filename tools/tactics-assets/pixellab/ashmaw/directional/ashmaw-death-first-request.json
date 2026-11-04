@@ -1,0 +1,13 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 8,
+  "keep_first_frame": false,
+  "animation_name": "ashmaw_death_custom_pilot",
+  "directions": [
+    "north",
+    "north-east"
+  ],
+  "action_description": "A heavy natural bear collapses onto its side, then lies still. Preserve the current viewing direction throughout the fall. Solid grey fur-covered anatomy and the same body proportions in every frame. No turning, spinning, exposed skeleton, guides or added marks. Final frame stays down and completely still.",
+  "animation_group_id": "ee409f4d-1652-4b0f-94ba-ab231d3fc7d8"
+}

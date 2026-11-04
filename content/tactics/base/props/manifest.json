@@ -2393,6 +2393,86 @@
         "animal",
         "animation"
       ]
+    },
+    "candle_stubs": {
+      "variants": {
+        "default": "candle_stubs.png"
+      },
+      "size": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        21
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "light",
+        "mine"
+      ],
+      "light": {
+        "at": [
+          [
+            11,
+            11
+          ]
+        ],
+        "radius": 1.25,
+        "flicker": "candle",
+        "colour": {
+          "default": "#b78243"
+        },
+        "emissive": "emissive/candle_stubs.png"
+      }
+    },
+    "animal_bones": {
+      "variants": {
+        "default": "animal_bones.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "cave",
+        "remains"
+      ]
+    },
+    "dried_blood": {
+      "variants": {
+        "default": "dried_blood.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "cave",
+        "decal"
+      ]
     }
   },
   "notes": {

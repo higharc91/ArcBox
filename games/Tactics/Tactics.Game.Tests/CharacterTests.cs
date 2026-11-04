@@ -32,6 +32,26 @@ public sealed class CharacterTests
 
     private static JsonElement Json(object o) => JsonSerializer.SerializeToElement(o, ArcJson.Options);
 
+    [Theory]
+    [InlineData("fighter", true)]
+    [InlineData("wizard", false)]
+    public void A_remake_keeps_the_awarded_trinket_and_the_portal_explains_dormancy(string cls, bool active)
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        var character = SheetBuilder.DefaultCharacter("Ana", "human", "fighter", null, 2, Rules) with { Trinket = "ember_claw_gauntlet" };
+        var doc = TacticsDocument.New with { PartyLevel = 2, Members = Ordinal.Map((Ana.Value, new MemberRecord(character, 1000))) };
+        var changed = rules.Handle(Info, doc.ToJson(), Ana, "createCharacter", Json(new { race = "human", @class = cls,
+            background = Background, scores = Scores(), trinket = "kobold_surveyors_lens" }));
+        Assert.Null(changed.Error);
+        var after = TacticsDocument.Read(changed.Document!.Value).For(Ana)!.Character;
+        Assert.Equal("ember_claw_gauntlet", after.Trinket);
+        var shown = rules.PortalView(Info, changed.Document.Value, Ana).GetProperty("me").GetProperty("trinket");
+        Assert.Equal("ember_claw_gauntlet", shown.GetProperty("id").GetString());
+        Assert.Equal(active, shown.GetProperty("active").GetBoolean());
+        Assert.Equal("Fighter", shown.GetProperty("className").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(shown.GetProperty("text").GetString()));
+    }
+
     [Fact]
     public void Point_buy_costs_and_limits()
     {

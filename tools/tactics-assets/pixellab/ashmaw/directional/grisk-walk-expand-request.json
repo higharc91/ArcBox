@@ -1,0 +1,18 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "template_animation_id": "walking-6-frames",
+  "animation_name": "grisk_walk_template_pilot",
+  "directions": [
+    "south-east",
+    "east",
+    "north-east",
+    "north",
+    "north-west",
+    "west",
+    "south-west"
+  ],
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "Walk in place directly toward viewer. Keep helmet fixed to head. Right hand holds pick shaft firmly; pick moves as one rigid object with gripping hand. Same front view and body proportions throughout the cycle.",
+  "animation_group_id": "ca790616-3e06-487c-b81e-35b79e79ce4a"
+}

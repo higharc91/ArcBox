@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (One tiny recoil of the existing single head and shoulders, then recover. Exactly one head and one body throughout. All four paws stay fixed. Keep the original viewing direction and silhouette; no turning or standing up. Do not add anything to the supplied sprite.)\ndirections: west (1 jobs)\njob_ids: west=209abeea-3faf-40ef-acc6-f75d49823aee\ngroup: 4bab5692-69ea-49ef-8b5d-90640096e98f\nframes: 4 (reference stripped, keep_first_frame=false)\ncanvas: west 208x164 (generated at this size; with custom frames the stored canvas is re-measured around the motion plus 40%, capped at 256 a side, so it often differs — read it off a saved frame)\ncost: 3 generations (3/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"One tiny recoil of the existing single head and shoulders, then recover. Exactly one head and one body throughout. All four paws stay fixed. Keep the original viewing direction and silhouette; no turning or standing up. Do not add anything to the supplied sprite.\", animation_group_id=\"4bab5692-69ea-49ef-8b5d-90640096e98f\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

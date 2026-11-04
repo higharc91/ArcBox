@@ -167,7 +167,7 @@ public sealed class ConversationQuestTests
             var s = new Session(document: DocumentAt(world), game: new TacticsGame(Rules, lore: Book.Value));
             s.Harness.StartCampaign(s.Lease); Talk(s,person); Choose(s,answer); WalkAgain(s);
             Assert.Contains(done,s.Game.Document.World!.Flags);
-            Assert.Equal([flag],s.Game.Document.World.Flags.Where(f => f.StartsWith("ch",StringComparison.Ordinal)));
+            Assert.Equal(ending == 2 ? [flag] : new[] { flag, "ch1_ford_settled" }, s.Game.Document.World.Flags.Where(f => f.StartsWith("ch",StringComparison.Ordinal)));
             Assert.Equal(under?.Beat,s.Game.Document.World.Story?.Beat);
         }
     }

@@ -1,0 +1,81 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"jobs\": [\n    {\n      \"jobId\": \"job_qygEvzpBxxYuKsnrK9wzKYHP\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T16:41:40.803Z\",\n      \"updatedAt\": \"2026-11-03T16:41:58.126Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_g6SRnFg7RyvzHZgayJVQqwvd\"\n      ],\n      \"cuCost\": 90\n    },\n    {\n      \"jobId\": \"job_KnutZPfbTGiYgkdNM3asyQUZ\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T16:41:42.398Z\",\n      \"updatedAt\": \"2026-11-03T16:41:52.682Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_bTd2BKgryGooaBd83SG1jWh9\"\n      ],\n      \"cuCost\": 24\n    },\n    {\n      \"jobId\": \"job_WYHziwvZR4FtSYNebcg75Rze\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T16:41:44.475Z\",\n      \"updatedAt\": \"2026-11-03T16:41:55.251Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_RWj7nADdeZcZUNmsHAWLacka\"\n      ],\n      \"cuCost\": 11\n    },\n    {\n      \"jobId\": \"job_9xnBYou9fJfm87bVGL7EiurH\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T16:41:45.749Z\",\n      \"updatedAt\": \"2026-11-03T16:41:55.177Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_PcB51fE4icDZQRAqVYpieqZN\",\n        \"asset_TzNmduA8joAg4NmnVqK2ni4p\"\n      ],\n      \"cuCost\": 5\n    },\n    {\n      \"jobId\": \"job_xY5yewPCKmEkWCJPKCQJte48\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T16:41:47.216Z\",\n      \"updatedAt\": \"2026-11-03T16:41:57.145Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_SJ7PmhnSsFFcSGzyckeFCtFL\",\n        \"asset_ePMpbvWZ5KG6hTT1TCCcs3m6\"\n      ],\n      \"cuCost\": 6\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_qygEvzpBxxYuKsnrK9wzKYHP",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T16:41:40.803Z",
+        "updatedAt": "2026-11-03T16:41:58.126Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_g6SRnFg7RyvzHZgayJVQqwvd"
+        ],
+        "cuCost": 90
+      },
+      {
+        "jobId": "job_KnutZPfbTGiYgkdNM3asyQUZ",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T16:41:42.398Z",
+        "updatedAt": "2026-11-03T16:41:52.682Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_bTd2BKgryGooaBd83SG1jWh9"
+        ],
+        "cuCost": 24
+      },
+      {
+        "jobId": "job_WYHziwvZR4FtSYNebcg75Rze",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T16:41:44.475Z",
+        "updatedAt": "2026-11-03T16:41:55.251Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_RWj7nADdeZcZUNmsHAWLacka"
+        ],
+        "cuCost": 11
+      },
+      {
+        "jobId": "job_9xnBYou9fJfm87bVGL7EiurH",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T16:41:45.749Z",
+        "updatedAt": "2026-11-03T16:41:55.177Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_PcB51fE4icDZQRAqVYpieqZN",
+          "asset_TzNmduA8joAg4NmnVqK2ni4p"
+        ],
+        "cuCost": 5
+      },
+      {
+        "jobId": "job_xY5yewPCKmEkWCJPKCQJte48",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T16:41:47.216Z",
+        "updatedAt": "2026-11-03T16:41:57.145Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_SJ7PmhnSsFFcSGzyckeFCtFL",
+          "asset_ePMpbvWZ5KG6hTT1TCCcs3m6"
+        ],
+        "cuCost": 6
+      }
+    ]
+  },
+  "isError": false
+}

@@ -45,8 +45,13 @@ public sealed class SimSmokeTests
         // defeating every enemy credits nearly all of the placed enemies' HP: only an unsourced kill (a fall, deep water) is
         // left out. (A battle won another way, by surviving, say, needn't have defeated anyone.)
         double Dealt(SimBattle b) => b.PerClass.Sum(p => p.Value.DamagePerRound * b.Classes.Count(c => c == p.Key) * b.Rounds);
-        double EnemyHp(SimBattle b) => rules.Encounters[b.Encounter].Enemies
-            .Sum(e => e.Count * SheetBuilder.ForMonster(e.Unit, rules, e.Level).MaxHp);
+        // Read the actual encounter setup: authored party-size HP and monster profiles can differ
+        // from the base stat block. This budget checks scoring against what really entered battle.
+        var enemyHp = battles.ToDictionary(b => b, b =>
+            Encounters.Setup(b.Encounter, [.. b.Classes.Select((cls, i) => new PartyMember(new UnitId($"hero{i + 1}"),
+                SheetBuilder.DefaultCharacter($"Hero {i + 1}", "human", cls, null, b.Level, rules), new AiControlled("companion")))],
+                config.Difficulty, rules).Units.Where(u => u.Sheet.Side == Side.Enemy).Sum(u => u.Sheet.MaxHp));
+        double EnemyHp(SimBattle b) => enemyHp[b];
         double SpawnHp(SimBattle b) => rules.Encounters[b.Encounter].Triggers.SelectMany(t => t.Do).Select(a => a.Spawn)
             .OfType<SpawnAction>().Sum(s => s.Count * SheetBuilder.ForMonster(s.Unit, rules, s.Level).MaxHp);
         Assert.All(battles, b => Assert.True(Dealt(b) <= EnemyHp(b) + SpawnHp(b) + 0.01,
@@ -87,6 +92,20 @@ public sealed class SimSmokeTests
 
         Assert.Equal(Report.Markdown([first], config), Report.Markdown([second], config));
         Assert.Equal((first.Outcome, first.Rounds, first.Downs, first.Outs), (second.Outcome, second.Rounds, second.Downs, second.Outs));
+    }
+
+    [Fact]
+    public void Reward_sweeps_reject_wrong_class_trinkets_and_record_the_equipment()
+    {
+        var rules = BasePackTests.Rules;
+        var config = new SimConfig([], [2], 1, [4], 1, Difficulty.Normal,
+            Trinkets: ImmutableDictionary<string, string>.Empty.Add("wizard", "ember_claw_gauntlet"));
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(config, rules));
+        config = config with { Trinkets = ImmutableDictionary<string, string>.Empty.Add("fighter", "ember_claw_gauntlet") };
+        Assert.Empty(SimRunner.Run(config, rules));
+        var report = Report.Markdown([], config);
+        Assert.Contains("--trinkets fighter:ember_claw_gauntlet", report, StringComparison.Ordinal);
+        Assert.Contains("fighter: `ember_claw_gauntlet`", report, StringComparison.Ordinal);
     }
 
     [Fact]

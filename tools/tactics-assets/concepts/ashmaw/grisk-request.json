@@ -1,0 +1,21 @@
+{
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "seed": null,
+  "seed_note": "Model schema does not expose seeds.",
+  "parameters": {
+    "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the supplied Ashmaw sheet's grounded humane tactical-fantasy rendering: clean separated material planes, restrained painted detail for later pixel translation, warm top-left highlights and cooler shadows, worn practical materials, a consistent original game art direction. Design GRISK, the Ash Market's wiry scarred kobold excavation foreman. The second image is the shipped kobold sprite: preserve that small orange-brown reptilian species, pointed snout, long balancing tail, two short horns and compact digitigrade body; do not make a green goblin or an adult human. Grisk is about 0.95 m high, a little over half an adult human's height. He is greedy, frightened and exhausted, not a cute pet or rich warlord. A patched rust-brown work vest, leather belt, sturdy battered miner's helmet adapted around his little horns; a small caged OIL lantern is firmly strapped to the helmet with a physical bracket. A notched tally stick hangs from a short cord at his chest; a simple worn pick has a wooden handle and is held naturally in his RIGHT hand, fingers firmly around the grip, wrist attached. No modern electric headlamp, giant axe, expensive jewelry or skull trophies. Show the same outfit, lantern mount, handedness and tail anatomy in separated full-body front, three-quarter and back views. Add a large head study with the forehead scar, one helmet/lantern/tally-stick construction inset, and a small side-view scale inset next to a neutral 1.75 m human. All views have one coherent anatomy and equipment placement; waist details face around correctly on the back view. Human scale figure is plain and secondary. Warm parchment background and generous margins, all feet, tail and helmet inside. No scenic background, labels, lettering, watermark, UI or franchise characters.",
+    "referenceImages": [
+      "asset_wynqsh1xvxktkt87JBqpupQN",
+      "asset_M8qZpuFWpVQL77Rx3Gkwps3S"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  },
+  "approval": "pending"
+}

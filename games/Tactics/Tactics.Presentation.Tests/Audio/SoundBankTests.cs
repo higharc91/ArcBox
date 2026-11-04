@@ -236,6 +236,7 @@ public sealed class SoundBankTests
     [InlineData("projectiles.arrow", "shortbow", "bow_release")]
     [InlineData("projectiles.arrow", "light_crossbow", "crossbow_release")]
     [InlineData("projectiles.arrow", null, "bow_release")]
+    [InlineData("projectiles.rock", "sling", "sling_release")]
     [InlineData("projectiles.rock", "claws", "throw")]
     [InlineData("projectiles.rock", null, "throw")]
     [InlineData("projectiles.fireball", "staff", "spell_cast")]

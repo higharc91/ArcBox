@@ -1,9 +1,9 @@
 # Scenario concept series
 
 `scenario-briefs.json` is the prepared, lore-linked request pack for **Scenario**.
-No concept images have been generated or submitted yet. No Scenario model or
-workspace ID is invented; those fields remain unset until the existing connection
-is available and its actual models can be inspected.
+Generation receipts belong to their individual batches. See the
+[Ashmaw bounty batch](ashmaw/README.md) for its three generated concepts,
+approved character designs, full-resolution files and credit accounting.
 
 The first series is 12 images:
 
@@ -13,7 +13,8 @@ The first series is 12 images:
   Mother Skarrow, Maren Sorrel and the Hooded Stranger.
 
 The pack additionally prepares sheets for the other 13 named NPCs, giving 25
-briefs in total. These are later briefs, not an instruction to submit 25 jobs
+original briefs in total. Three additional issue #74 briefs cover Ashmaw, Grisk
+and Cinder Hollow. These are later briefs, not an instruction to submit all jobs
 at once. All share an original, grounded tactical-fantasy design direction.
 
 Character sheets request matching front, three-quarter and back views, a head

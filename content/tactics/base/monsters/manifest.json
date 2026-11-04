@@ -1,0 +1,17 @@
+{
+  "about": "Owner-approved named creature art is registered by creatures/manifest.json. These aliases are legacy fallbacks only; production resolves the dedicated atlases first.",
+  "sprites": {
+    "ashmaw": {
+      "standIn": "beasts.bear.wildshape"
+    },
+    "kobold_foreman": {
+      "standIn": "characters.kobold"
+    }
+  },
+  "animations": [
+    "attack",
+    "roar",
+    "shake",
+    "shout"
+  ]
+}

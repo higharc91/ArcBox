@@ -567,6 +567,18 @@ node tools/tactics-playtest/phone-layout.cjs http://127.0.0.1:5173 /tmp/phone-la
 
 Use Godot 4.7.2 .NET. Import fonts before standalone launches. The dev-only `web/play/journal.html?screen=questlog-leader` preview accepts any Tactics fixture name and is excluded from production entry points. Phone walking, battle and encounter controls occupy a separate row from scrolling content. See the [design](superpowers/specs/2026-11-03-tactics-npcs-and-quests-design.md) and [report](superpowers/reports/2026-11-03-npcs-quests/README.md).
 
+### Cinder Hollow and the Ashmaw bounty
+
+`--world-demo=cinder_hollow` shows the actual bounty board, cliff entrance, cave, Grisk and Ashmaw beside a four-member party, their battle action poses, the safe fire and Dagna's reward presentation. It writes no campaign. During art review, `ARCBOX_CINDER_ART_ROOT=/path/to/review-pack` substitutes the separate generated character pack; the approved dedicated atlases and portraits are installed in production.
+
+```sh
+python tools/tactics-assets/pixellab/ashmaw/build-preview.py /tmp/hollow-review
+ARCBOX_CINDER_ART_ROOT=/tmp/hollow-review godot --path src/ArcBox.Host -- --world-demo=cinder_hollow --shots=/tmp/hollow-shots --audio-log
+# Real hub and phone inputs, including Chapter I, travel, all chambers, proof and private class rewards:
+node tools/tactics-playtest/bots.cjs --server=http://127.0.0.1:5080 --host --shown --players=6 --bounty --fight
+```
+
+The cave uses dark ambient light, small warm mining candles, the existing eerie `dungeon` music and cave ambience. Ashmaw's breathing layer is audible only near the living boss. Roar, shake, maul, hurt and death use separate creature recordings. Rewards show a TV presentation and a private class-bound phone gift sheet; dismissing it survives repeated snapshots.
 Screenshot directories passed with `--shots=<dir>` must be absolute paths. Relative paths are rejected with an explanatory startup warning to prevent output beneath the Godot project directory.
 
 Chapter automation (`ARCBOX_CHAPTER=1`) defaults to Story difficulty and battle seed 76. Override difficulty with `ARCBOX_DIFFICULTY=Normal` or `Hard`; balance testing remains the simulator’s responsibility. Non-chapter runs retain Normal difficulty and fresh seeds. These overrides are Development-only server settings.

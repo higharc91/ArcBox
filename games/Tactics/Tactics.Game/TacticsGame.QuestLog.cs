@@ -65,7 +65,14 @@ public sealed partial class TacticsGame
         Tile? target = null;
         if (state.Status == "active" && state.Current.Target is { } waypoint)
         {
-            if (waypoint.Person is { } person)
+            var region = waypoint.Region ?? state.Def.Region;
+            if (region != _region!.Def.Id)
+            {
+                var mouths = AllThings.Where(t => t.To?.Region == region).Select(t => t.Id).ToHashSet(StringComparer.Ordinal);
+                target = ThingViews()?.Where(t => mouths.Contains(t.Id)).OrderBy(t => Math.Abs(t.At.X - _at.X) + Math.Abs(t.At.Y - _at.Y))
+                    .ThenBy(t => t.Id, StringComparer.Ordinal).Select(t => (Tile?)t.At).FirstOrDefault();
+            }
+            else if (waypoint.Person is { } person)
                 target = PresentPeople().Where(p => RegionPeople.Id(p.Person, p.Index) == person).Select(p => (Tile?)p.Person.At).FirstOrDefault();
             else if (waypoint.Thing is { } thing)
                 target = ThingViews()?.Where(t => t.Id == thing).Select(t => (Tile?)t.At).FirstOrDefault();

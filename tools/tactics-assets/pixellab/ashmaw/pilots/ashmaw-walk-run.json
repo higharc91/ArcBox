@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 72d320c4-9996-43bc-bfd6-5ff4b3d23bb9\njob_id: 72d320c4-9996-43bc-bfd6-5ff4b3d23bb9\naction: Slow, heavy four-legged bear walking straight toward the viewer in place. Eight-frame seamless walking cycle. Alternating planted paw contacts, weight moving deliberately between shoulders, no ice skating or sideways swaying. Remain exactly SOUTH facing with centered muzzle; do not turn. Preserve the same scale, fur silhouette and attached limbs. Camera locked.\nframes: 8\nsize: 128x128px\ntransparent: True\nseed: 7414\nasset_id: fbee16b7-03b5-5e4b-b892-e2cbeb670840\nasset_status: pending (saved when generation completes)\ncost: 2 generations\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"72d320c4-9996-43bc-bfd6-5ff4b3d23bb9\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/72d320c4-9996-43bc-bfd6-5ff4b3d23bb9/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -1,0 +1,41 @@
+{
+  "localClientValidation": "The initial inline-base64 request exceeded the Unix socket reader limit before any provider call. No job or charge; replaced with uploaded image references.",
+  "inputs": [
+    {
+      "direction": "south",
+      "uploadRef": "upload:8a83f4ab-1526-42bf-bc1d-8d196b9f284a",
+      "file": "ashmaw-padded/south.png",
+      "sha256": "dcd8af8023eb844b37c78ec35383c327474b98f0e0dd38cd19b6ab0fc1baf2ab"
+    },
+    {
+      "direction": "south-east",
+      "uploadRef": "upload:6b14a3bb-d709-4f0f-9490-82869cbd9cf8",
+      "file": "ashmaw-padded/south-east.png",
+      "sha256": "323eb368b1fc3f4e63f00aac4de86b238319737373c3daba0004346038687536"
+    },
+    {
+      "direction": "south-west",
+      "uploadRef": "upload:55ec0f6e-6f8e-40f9-853f-543b6ddbfa2b",
+      "file": "ashmaw-padded/south-west.png",
+      "sha256": "8e3a83fcd7ca17ff7cb2b37bfa99c80fffb84dabf865e8ee00fbcac375ff15f6"
+    },
+    {
+      "direction": "north-east",
+      "uploadRef": "upload:ac1a29ac-9810-42e0-90a4-51f2e73b537c",
+      "file": "ashmaw-padded/north-east.png",
+      "sha256": "7f2e73b6f5805807944424cd986956d053c0ce79cfc85fbe3545c650e2f0a289"
+    },
+    {
+      "direction": "north",
+      "uploadRef": "upload:b08dc85c-c284-4486-b5bc-550d2ce7c1d6",
+      "file": "ashmaw-padded/north.png",
+      "sha256": "20385a85b07d2a19798c7318e8bf357d1566a52cce44b6e58f3b933fa24ce797"
+    },
+    {
+      "direction": "north-west",
+      "uploadRef": "upload:e2a539eb-0891-42f9-a9f3-57107fe826a8",
+      "file": "ashmaw-padded/north-west.png",
+      "sha256": "1415ee6672d97a9c5d24c260bd5590b0da3581860141ba71fef2ac1a8ebc7853"
+    }
+  ]
+}

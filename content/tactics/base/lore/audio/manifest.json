@@ -41,6 +41,10 @@
       "preset": "Callirrhoe",
       "pitch": -1
     },
+    "grisk": {
+      "preset": "Algenib",
+      "pitch": 4
+    },
     "halden_varrow": {
       "preset": "Charon"
     },
@@ -143,6 +147,69 @@
     }
   },
   "lines": {
+    "ashmaw_accepted": {
+      "main": "ashmaw_accepted.93693713.ogg"
+    },
+    "ashmaw_bounty_1": {
+      "main": "ashmaw_bounty_1.3cfd0e65.ogg"
+    },
+    "ashmaw_bounty_2": {
+      "main": "ashmaw_bounty_2.37ac95a8.ogg"
+    },
+    "ashmaw_busy": {
+      "main": "ashmaw_busy.922760d5.ogg"
+    },
+    "ashmaw_death": {
+      "main": "ashmaw_death.df68b839.ogg"
+    },
+    "ashmaw_diggings_open": {
+      "main": "ashmaw_diggings_open.65724d3b.ogg"
+    },
+    "ashmaw_done": {
+      "main": "ashmaw_done.74badb62.ogg"
+    },
+    "ashmaw_lair_open": {
+      "main": "ashmaw_lair_open.4840edf3.ogg"
+    },
+    "ashmaw_later": {
+      "main": "ashmaw_later.406b4cff.ogg"
+    },
+    "ashmaw_leave": {
+      "main": "ashmaw_leave.d9d0647e.ogg"
+    },
+    "ashmaw_maud_after": {
+      "main": "ashmaw_maud_after.3dc23202.ogg"
+    },
+    "ashmaw_maud_waiting": {
+      "main": "ashmaw_maud_waiting.a10ae239.ogg"
+    },
+    "ashmaw_nest_open": {
+      "main": "ashmaw_nest_open.4175425b.ogg"
+    },
+    "ashmaw_notices": {
+      "main": "ashmaw_notices.2616717b.ogg"
+    },
+    "ashmaw_offer": {
+      "main": "ashmaw_offer.fa64e1c4.ogg"
+    },
+    "ashmaw_presented": {
+      "main": "ashmaw_presented.bfb48d48.ogg"
+    },
+    "ashmaw_progress": {
+      "main": "ashmaw_progress.73bbc710.ogg"
+    },
+    "ashmaw_proof": {
+      "main": "ashmaw_proof.b0ebb092.ogg"
+    },
+    "ashmaw_satchel": {
+      "main": "ashmaw_satchel.aad805b1.ogg"
+    },
+    "ashmaw_throat_open": {
+      "main": "ashmaw_throat_open.ee49d2bb.ogg"
+    },
+    "ashmaw_wait": {
+      "main": "ashmaw_wait.be377409.ogg"
+    },
     "bark_bree_tallow_ally_down_1": {
       "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
     },
@@ -298,6 +365,27 @@
     },
     "bark_dagna_holt_victory_2": {
       "main": "bark_dagna_holt_victory_2.a110d71f.ogg"
+    },
+    "bark_grisk_ally_down_1": {
+      "main": "bark_grisk_ally_down_1.37f6eed4.ogg"
+    },
+    "bark_grisk_battle_start_1": {
+      "main": "bark_grisk_battle_start_1.a718e473.ogg"
+    },
+    "bark_grisk_candle_1": {
+      "main": "bark_grisk_candle_1.f31d8679.ogg"
+    },
+    "bark_grisk_defeat_1": {
+      "main": "bark_grisk_defeat_1.671d32dc.ogg"
+    },
+    "bark_grisk_hit_1": {
+      "main": "bark_grisk_hit_1.5a031862.ogg"
+    },
+    "bark_grisk_low_hp_1": {
+      "main": "bark_grisk_low_hp_1.4c78d900.ogg"
+    },
+    "bark_grisk_turn_start_1": {
+      "main": "bark_grisk_turn_start_1.e04277eb.ogg"
     },
     "bark_halden_varrow_town_1": {
       "main": "bark_halden_varrow_town_1.b8325026.ogg"

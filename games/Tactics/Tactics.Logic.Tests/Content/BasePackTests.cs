@@ -14,7 +14,7 @@ public sealed class BasePackTests
 
     private static readonly string[] Classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
 
-    private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
+    private static readonly string[] AiProfiles = ["archer", "ashmaw", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
     private static UnitId U(string id) => new(id);
 
@@ -49,18 +49,18 @@ public sealed class BasePackTests
         Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [
-            "air_elemental", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
+            "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
             "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
-            "ivo_rime", "kobold", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
+            "ivo_rime", "kobold", "kobold_foreman", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
             "orc_brute", "rime_spider", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
             "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "keep_gate", "river_crossing", "warlord_bridge"],
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "river_crossing", "warlord_bridge"],
             pack.Maps.Keys);
-        Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "keep_gate", "rime_tower",
+        Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "rime_tower",
             "river_crossing", "warlord_bridge"], pack.Encounters.Keys);
         Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
         Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);
@@ -253,7 +253,10 @@ public sealed class BasePackTests
             // An item's ability runs through common.use_item, with one of the item in the bag.
             var item = base_.Items.Values.FirstOrDefault(i => i.Use == ability.Id);
             var sheet = owners.FirstOrDefault(o => o.Abilities.Contains(ability.Id))
+                        ?? base_.Monsters.Values.Where(m => m.Abilities.Contains(ability.Id) || m.Phases.Any(p => p.Abilities.Contains(ability.Id)))
+                            .Select(m => SheetBuilder.ForMonster(m.Id, base_)).FirstOrDefault()
                         ?? owners[0] with { Abilities = item is null ? [ability.Id] : [] };
+            sheet = sheet with { Abilities = sheet.Abilities.Contains(ability.Id) ? sheet.Abilities : sheet.Abilities.Add(ability.Id) };
             var battle = new[] { ("user", sheet with { InitiativeBonus = 50, Side = Side.Party }, new Tile(1, 1)),
                 ("ally", owners[0] with { Side = Side.Party }, new Tile(1, 2)), ("enemy", ogre, new Tile(3, 1)) };
             ImmutableArray<ItemStack> bag = item is null ? [] : [new ItemStack(item.Id, 1)];

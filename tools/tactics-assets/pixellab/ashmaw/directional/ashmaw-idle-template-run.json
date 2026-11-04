@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "error: need 1 job slots but only 0 available (8/8 used)\n\nhint: wait_for_jobs(min_finished=1) returns once 1 job(s) have finished (~2-4 min each), then retry",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": true
+}

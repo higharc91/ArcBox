@@ -1,12 +1,12 @@
 {
   "title": "Wardenflame / Scenario concept references",
   "provider": "Scenario",
-  "status": "Briefs prepared; Scenario tools are not exposed to this execution session. No images have been generated.",
+  "status": "Prepared lore briefs; generation receipts and approval records live with each generated batch.",
   "workspace_id": null,
   "model_id": null,
   "shared_style": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface.",
   "first_series_count": 12,
-  "total_prepared": 25,
+  "total_prepared": 28,
   "generation_policy": {
     "provider_required": "Scenario; do not silently substitute PixelLab or the built-in image generator.",
     "consistency": "Generate one environment anchor and one character sheet first, inspect them, then reuse the accepted style/reference settings across the series. Keep model/seed/reference/job IDs and prompts with every returned image.",
@@ -463,6 +463,48 @@
       "design_proposal": "An ageless masked traveller, practical charcoal and weathered earth-colour layers, opaque mask and deep hood, gloved hands, sparse unidentifiable travel equipment. Preserve the mystery in every view and close-up: do not reveal face, species, gender, patron, identity, age changes or a new faction crest.",
       "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
       "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for The Hooded Stranger. Canon: A masked traveller who knows far too much about the embers and keeps turning up where the party is going. The Stranger appears in Emberwick in the first week of the campaign and is never far from the party after that, sometimes helping, sometimes not. They know things nobody in the Vale should know: where the embers lie, what the flame costs, what lies beyond the Greywall. They were present on the night of the Fall, a hundred years ago, and they do not look a day older. Their goal is revealed in Chapter V: they want the Hearthflame carried back over the Greywall. Who they are, and who they serve, the first campaign does not answer. Visual direction: An ageless masked traveller, practical charcoal and weathered earth-colour layers, opaque mask and deep hood, gloved hands, sparse unidentifiable travel equipment. Preserve the mystery in every view and close-up: do not reveal face, species, gender, patron, identity, age changes or a new faction crest. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim."
+    },
+    {
+      "id": "ashmaw",
+      "kind": "character",
+      "title": "Ashmaw, the banked-coal bear",
+      "batch": "ashmaw-bounty",
+      "lore": [
+        "bestiary.json:ashmaw",
+        "regions.json:cinder_hollow"
+      ],
+      "prompt": "Original production character concept sheet for Wardenflame, Embers of the Vale. Match the supplied approved brown-bear reference in grounded painted tactical-fantasy design, believable bear anatomy, clean separated material planes and restrained warm parchment presentation. Design ASHMAW, an ancient enormous cave bear that slept against a fading ember sliver for a century. This is the same animal family as the reference, grown larger: a massive low neck, broad heavy shoulders, a deep ash-grey coat, worn muzzle and eyes glowing like tiny banked coals. Only a few dry fur tips and the longest foreclaw hold a dull ember-orange warmth, with a little smoke at the shoulder. Most fur is cool grey, charcoal and pale ash. It is hungry, cold, old and magnificent, deserving mercy rather than a demonic monster. No lava cracks, molten flesh, crystal growths, spikes, armor, horns or flames replacing its body. Preserve a strong recognisable bear silhouette for tiny later game sprites. Four anatomically coherent legs, weight-bearing paws, consistent scar/coat pattern on every view, and firmly attached claws. Lay out full-body front, large three-quarter and back views of the same quadrupedal bear, with generous separation and all paws/ears inside the canvas. Include a head study, a small fur-tip and warm foreclaw material study, and a SIDE-VIEW scale inset with the same bear rearing upright beside a practical human adventurer. Human height 1.75 m; bear shoulder height on four paws about 1.8 m, reared height about 3.5 m, approximately twice the human. Put them on the same baseline. Human is a neutral scale reference with simple worn clothing, not a second hero design. Top-left light, warm highlights and cooler shadows, humane melancholy, painterly but clean not photorealistic, clear contours suitable for later pixel translation. Plain warm parchment background, no scenic landscape. No lettering, labels, captions, watermarks, UI or franchise references.",
+      "request": "ashmaw/ashmaw-request.json",
+      "output": "ashmaw/ashmaw-concept.png",
+      "approval": "approved"
+    },
+    {
+      "id": "grisk",
+      "kind": "character",
+      "title": "Grisk, Ash Market foreman",
+      "batch": "ashmaw-bounty",
+      "lore": [
+        "characters.json:grisk",
+        "bestiary.json:kobold_foreman",
+        "regions.json:cinder_hollow"
+      ],
+      "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the supplied Ashmaw sheet's grounded humane tactical-fantasy rendering: clean separated material planes, restrained painted detail for later pixel translation, warm top-left highlights and cooler shadows, worn practical materials, a consistent original game art direction. Design GRISK, the Ash Market's wiry scarred kobold excavation foreman. The second image is the shipped kobold sprite: preserve that small orange-brown reptilian species, pointed snout, long balancing tail, two short horns and compact digitigrade body; do not make a green goblin or an adult human. Grisk is about 0.95 m high, a little over half an adult human's height. He is greedy, frightened and exhausted, not a cute pet or rich warlord. A patched rust-brown work vest, leather belt, sturdy battered miner's helmet adapted around his little horns; a small caged OIL lantern is firmly strapped to the helmet with a physical bracket. A notched tally stick hangs from a short cord at his chest; a simple worn pick has a wooden handle and is held naturally in his RIGHT hand, fingers firmly around the grip, wrist attached. No modern electric headlamp, giant axe, expensive jewelry or skull trophies. Show the same outfit, lantern mount, handedness and tail anatomy in separated full-body front, three-quarter and back views. Add a large head study with the forehead scar, one helmet/lantern/tally-stick construction inset, and a small side-view scale inset next to a neutral 1.75 m human. All views have one coherent anatomy and equipment placement; waist details face around correctly on the back view. Human scale figure is plain and secondary. Warm parchment background and generous margins, all feet, tail and helmet inside. No scenic background, labels, lettering, watermark, UI or franchise characters.",
+      "request": "ashmaw/grisk-request.json",
+      "output": "ashmaw/grisk-concept.png",
+      "approval": "approved"
+    },
+    {
+      "id": "cinder_hollow",
+      "kind": "environment",
+      "title": "Cinder Hollow: entrance, Diggings and warm lair",
+      "batch": "ashmaw-bounty",
+      "lore": [
+        "regions.json:cinder_hollow"
+      ],
+      "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the supplied Ashmaw sheet's grounded humane tactical-fantasy rendering: clean separated material planes, restrained painted detail for later pixel translation, warm top-left highlights and cooler shadows, worn practical materials, a consistent original game art direction. Create ONE environmental development concept sheet for THE CINDER HOLLOW, a small winding cave in the old burned east bank of the Ashen Ford. The supplied bear sheet is ONLY a style and Ashmaw creature-design reference. Compose three spacious connected isometric studies on one sheet: the exterior entrance under a layered dark stone cliff near a hermit's modest hut; the DIGGINGS, a poor kobold-worked chamber with worn timber braces, planked walkways, rope, low ore carts and scattered picks; and ASHMAW'S BED, a rounded deep cave with a tiny dim coal seam in the rock and a huge ash-grey bear resting beside it. The entrance is in golden autumn, cold old grey ash and dry grass, not an active volcano. Inside, a readable winding traversable floor leads from a narrow bat-filled throat, through the workings, a webbed warm nest, then to the round lair. Show believable head clearance, human-sized routes and a tiny neutral adventurer for scale. Charcoal-grey layered rock, earth-brown timber, pale dry ash, muted rusty iron, dim amber oil lanterns and tiny localized ember-orange warmth near the lair. Existing Ashen Ford stone/wood/ember material language only: no new neon hue scheme. The cave is cooling: warm pools are few and small; most stone is dark and quiet. No lava river, giant sellable crystals, shining treasure palace, impossible floating platforms or elaborate dwarven machinery. Keep environment detail quieter than the characters, with clearly readable floor and wall planes. Add a restrained bottom material strip of cave stone, old ash, worn plank and warm coal; leave room between studies. No lettering, labels, map icons, UI, watermark or franchise references.",
+      "request": "ashmaw/cinder_hollow-request.json",
+      "output": "ashmaw/cinder_hollow-concept.png",
+      "approval": "shown for review"
     }
   ]
 }

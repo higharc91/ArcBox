@@ -53,3 +53,20 @@ it("completion banners cannot be pinned", () => {
  const banner=screen.getByRole("button",{name:/Quest complete/});fireEvent.pointerDown(banner);vi.advanceTimersByTime(900);fireEvent.pointerUp(banner);
  expect(send).not.toHaveBeenCalled();vi.useRealTimers();
 });
+it("presents only this phone's trinket and opens its effects without pinning a completed bounty", () => {
+ const send=vi.fn(), stop=vi.fn();const notice={
+  id:"sq_ashmaw",name:"The Cinder Hollow Bounty",kind:"complete",objective:"Quest complete",canPin:false,
+  trinket:{id:"ember_claw_gauntlet",name:"Ember-Claw Gauntlet",text:"Your attacks gain +1.",rarity:"rare",class:"fighter",className:"Fighter",active:true},
+ };const {rerender}=render(<WalkJournal journal={{...data,quests:[]}} send={send} stop={stop} notice={notice} />);
+ expect(screen.getByText("Presented to you")).toBeTruthy();
+ expect(screen.getByRole("dialog")).toBeTruthy();
+ expect(screen.getByText("Your attacks gain +1.")).toBeTruthy();
+ // A snapshot refresh must not reopen a dismissed gift or stop walking again.
+ fireEvent.click(screen.getByRole("button",{name:"Close"}));
+ rerender(<WalkJournal journal={{...data,quests:[]}} send={send} stop={stop} notice={{...notice}} />);
+ expect(screen.queryByRole("dialog")).toBeNull();
+ expect(stop).toHaveBeenCalledOnce();
+ fireEvent.click(screen.getByRole("button",{name:/Trinket: Ember-Claw Gauntlet/}));
+ expect(screen.getByRole("dialog")).toBeTruthy();
+ expect(send).not.toHaveBeenCalled();
+});

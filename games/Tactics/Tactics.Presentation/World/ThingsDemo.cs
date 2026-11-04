@@ -37,12 +37,13 @@ public static class ThingsDemo
     public static readonly ImmutableArray<string> Kinds =
         ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone",
          "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "hidden_path",
-         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "stall", "campfire"];
+         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "stall", "campfire", "cave_mouth", "bounty_board"];
 
     /// <summary>The first 21 kinds fill the first three galleries as they always have; these go where there's room.</summary>
     private static readonly ImmutableDictionary<string, (int Gallery, int Column, int Row)> Placed = new Dictionary<string, (int, int, int)>
     {
         ["hidden_path"] = (2, 1, 3), ["stall"] = (4, 0, 0), ["campfire"] = (4, 0, 1),
+        ["cave_mouth"] = (4, 0, 2), ["bounty_board"] = (4, 0, 3),
         ["tracks"] = (3, 0, 0), ["scratches"] = (3, 0, 1), ["disturbed_earth"] = (3, 0, 2), ["bloodstain"] = (3, 0, 3),
         ["draft"] = (3, 1, 0), ["carving"] = (3, 1, 1), ["rune"] = (3, 1, 2), ["remains"] = (3, 1, 3),
     }.ToImmutableDictionary(StringComparer.Ordinal);

@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: cbb9f46d-b896-49c1-a981-a5344be6a411\nname: Wardenflame Ashmaw padded directional master\nmode: v3 reference (4 generations, 8 directions, 6 yours)\nbody: quadruped (bear)\nsize: 160x160px\nview: low top-down\nstyle: from reference image (outline/detail hints ignored)\nstatus: processing (~3-5 min)\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

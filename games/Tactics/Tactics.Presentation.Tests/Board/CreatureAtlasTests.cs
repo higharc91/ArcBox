@@ -31,7 +31,8 @@ public sealed class CreatureAtlasTests
                         Assert.InRange(source.Y, 0, height - source.Height);
                     }
             Assert.Equal(4, sprite.Idle.Frames.Length);
-            Assert.Equal(8, sprite.Anim("walk").Frames.Length);
+            Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
+                sprite.Anim("walk").Frames.Length);
             Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
         }
     }
@@ -57,12 +58,14 @@ public sealed class CreatureAtlasTests
         Assert.Equal(normal.Directions, dire.Directions);
     }
     [Fact]
-    public void All_twenty_one_primary_families_have_real_compass_views_and_stable_ground_contact()
+    public void All_twenty_one_world_creature_families_have_real_compass_views_and_stable_ground_contact()
     {
         using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "creatures", "manifest.json")));
         var art = UnitArt.Load(Pack.Root);
         var primaries = doc.RootElement.GetProperty("sprites").EnumerateObject()
-            .Where(e => e.Value.GetProperty("keys").EnumerateArray().Any(k => k.GetString()!.Split('.').Length == 2)).ToArray();
+            .Where(e => e.Value.GetProperty("keys").EnumerateArray().Any(k => k.GetString()!.Split('.').Length == 2
+                && !k.GetString()!.StartsWith("monsters.", StringComparison.Ordinal)
+                && !k.GetString()!.StartsWith("characters.", StringComparison.Ordinal))).ToArray();
         Assert.Equal(21, primaries.Length);
         foreach (var primary in primaries)
         {

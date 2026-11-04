@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: Subtle slow breathing in place. Feet stay planted; right hand grips the pick firmly, helmet fixed to head. No side sway.\nmode: template\ndirections: south (1 jobs)\njob_ids: south=89c164f0-122b-421a-914c-64b016b3ada0\ngroup: 5deaa263-69b9-4a51-9bce-4c5f477c17cb\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", template_animation_id=\"breathing-idle\", animation_group_id=\"5deaa263-69b9-4a51-9bce-4c5f477c17cb\", directions=[...])\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nif poor: delete_animation(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

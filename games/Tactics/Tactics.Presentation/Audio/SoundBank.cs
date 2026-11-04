@@ -112,7 +112,7 @@ public sealed partial class SoundBank
         var (layer, torso) = parts is ["characters", var preset, ..] ? Preset(preset) : (null, null);
         var ids = monsters.Select(m => m.Id).ToArray();
         return new UnitGear(monsters.Select(m => m.Weapon).FirstOrDefault(w => w is not null) ?? layer, torso is not null && Armour.Contains(torso),
-            ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
+            ids.Contains("ashmaw") ? "ashmaw" : ids.Contains("kobold_foreman") ? "goblin" : ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
     }
 
     private (string? Weapon, string? Torso) Preset(string id)

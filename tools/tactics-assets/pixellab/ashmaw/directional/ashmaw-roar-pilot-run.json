@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (The bear plants both hind paws and rises slowly onto its hind legs, lifts its muzzle in a deep roar, then lowers to its original quadruped stance. Facing stays straight south. Solid connected anatomy, no turning or sliding, sparse ember flecks.)\ndirections: south (1 jobs)\njob_ids: south=cfe374c5-0ade-46d3-88ac-f164602c246f\ngroup: d9716f04-0bc1-4e9f-9bb6-52ea22c1b352\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south 180x180 (frames are stored at this size: the character plus room to move)\ncost: 3 generations (3/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"The bear plants both hind paws and rises slowly onto its hind legs, lifts its muzzle in a deep roar, then lowers to its original quadruped stance. Facing stays straight south. Solid connected anatomy, no turning or sliding, sparse ember flecks.\", animation_group_id=\"d9716f04-0bc1-4e9f-9bb6-52ea22c1b352\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

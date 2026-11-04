@@ -1,0 +1,220 @@
+{
+  "model": "model_mirelo-sfx-2-0-text-to-audio",
+  "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "clipCount": 15,
+  "noCubs": true,
+  "status": "All 11 paid jobs completed; 15 clips imported. No cubs generated.",
+  "estimatedCU": 174,
+  "jobs": [
+    {
+      "kind": "sfx",
+      "id": "amb_cinder_hollow",
+      "clips": [
+        "amb_cinder_hollow"
+      ],
+      "prompt": "Quiet warm cave ambience, sparse distant water drips, occasional faint small mining picks far away, low restrained warm rumble deeper in the cave; long steady seamless ambience, no monsters or speech, no lava roar, no music",
+      "negative": "music, speech, voices, distortion, abrupt edits",
+      "duration": 30.0,
+      "numOutputs": 1,
+      "seed": 7474,
+      "loop": true,
+      "status": "completed",
+      "assets": [
+        "asset_g6SRnFg7RyvzHZgayJVQqwvd"
+      ],
+      "jobId": "job_qygEvzpBxxYuKsnrK9wzKYHP"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_breath_loop",
+      "clips": [
+        "ashmaw_breath_loop"
+      ],
+      "prompt": "huge brown bear, deep heavy chesty bellow, very slow deep resting breaths from a sleeping cave bear, faint smouldering fur crackles beneath, steady quiet loop with no roar or attack",
+      "negative": "music, speech, voices, distortion, abrupt edits",
+      "duration": 8.0,
+      "numOutputs": 1,
+      "seed": 7248,
+      "loop": true,
+      "status": "completed",
+      "assets": [
+        "asset_bTd2BKgryGooaBd83SG1jWh9"
+      ],
+      "jobId": "job_KnutZPfbTGiYgkdNM3asyQUZ"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_death",
+      "clips": [
+        "ashmaw_death"
+      ],
+      "prompt": "huge brown bear, deep heavy chesty bellow, long fading exhausted growl sinking into a quiet dying ember hiss, sad and restrained, no explosion",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 3.5,
+      "numOutputs": 1,
+      "seed": 7248,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_RWj7nADdeZcZUNmsHAWLacka"
+      ],
+      "jobId": "job_WYHziwvZR4FtSYNebcg75Rze"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_hurt",
+      "clips": [
+        "ashmaw_hurt.1",
+        "ashmaw_hurt.2"
+      ],
+      "prompt": "huge brown bear, deep heavy chesty bellow, short wounded grunt and pained breath, an old real bear, low dry ember crackle, no human voice",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 0.8,
+      "numOutputs": 2,
+      "seed": 7248,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_PcB51fE4icDZQRAqVYpieqZN",
+        "asset_TzNmduA8joAg4NmnVqK2ni4p"
+      ],
+      "jobId": "job_9xnBYou9fJfm87bVGL7EiurH"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_maul",
+      "clips": [
+        "ashmaw_maul.1",
+        "ashmaw_maul.2"
+      ],
+      "prompt": "huge brown bear, deep heavy chesty bellow, short heavy bite-and-claw attack snarl, closer and deeper, tiny ember crackle under the natural animal voice",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 0.9,
+      "numOutputs": 2,
+      "seed": 7248,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_SJ7PmhnSsFFcSGzyckeFCtFL",
+        "asset_ePMpbvWZ5KG6hTT1TCCcs3m6"
+      ],
+      "jobId": "job_xY5yewPCKmEkWCJPKCQJte48"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_roar",
+      "clips": [
+        "ashmaw_roar.1",
+        "ashmaw_roar.2"
+      ],
+      "prompt": "huge brown bear, deep heavy chesty bellow, immense low warning roar from an ancient cave bear, chest resonance and a faint dry ember crackle underneath, same natural bear family, not a dragon or demon",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 2.4,
+      "numOutputs": 2,
+      "seed": 7248,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_GE2CEz3yM6GB2nHmH3bqcU9S",
+        "asset_9QXQbuHTryrD9v5UN7iZRXjc"
+      ],
+      "jobId": "job_ZyZB1Z54QcBpFjg3jjeGmq4u"
+    },
+    {
+      "kind": "sfx",
+      "id": "ashmaw_shake",
+      "clips": [
+        "ashmaw_shake"
+      ],
+      "prompt": "A massive cave bear plants its paws with a heavy ground thump and shakes dry ash off its fur, one low impact followed by a broad soft ash whoosh and tiny ember crackles",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 1.5,
+      "numOutputs": 1,
+      "seed": 7474,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_DfLNggehFXPatYZgJtiswQZx"
+      ],
+      "jobId": "job_WFLmaT2T5GL8G25FFa3TKUq7"
+    },
+    {
+      "kind": "sfx",
+      "id": "bounty_accept",
+      "clips": [
+        "bounty_accept"
+      ],
+      "prompt": "A small sheet of aged parchment is lifted and settled, then one modest iron pin pressed into wood, crisp and warm, a single restrained interface acknowledgement",
+      "negative": "music, speech, voices, distortion, abrupt edits",
+      "duration": 0.7,
+      "numOutputs": 1,
+      "seed": 7474,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_xC6jDkRKbcAHz2jqZ4GRGsj6"
+      ],
+      "jobId": "job_Qu2aqXpG6zpo6x1EnChnDyNj"
+    },
+    {
+      "kind": "sfx",
+      "id": "cave_enter",
+      "clips": [
+        "cave_enter"
+      ],
+      "prompt": "Soft sheltered cave transition, two light gravel footfalls passing from open air into a still stone chamber, a quiet air hush and short natural cavern reflection",
+      "negative": "music, speech, voices, distortion, abrupt edits",
+      "duration": 1.5,
+      "numOutputs": 1,
+      "seed": 7474,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_W8yp4LVSrX3RSJMhgSh69Yhg"
+      ],
+      "jobId": "job_Xb2ZVRVD4EFwBgdp793johgE"
+    },
+    {
+      "kind": "sfx",
+      "id": "kobold_pick",
+      "clips": [
+        "kobold_pick.1",
+        "kobold_pick.2"
+      ],
+      "prompt": "One small iron mining pick chips dry stone, sharp light metal-on-rock clink followed by a few falling pebbles; close practical mine work, no voices",
+      "negative": "music, speech, words, reverb tail, background noise",
+      "duration": 0.8,
+      "numOutputs": 2,
+      "seed": 7474,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_GBvqvxzEezxXVe15ak6WyrHF",
+        "asset_bmp8PheXBZSFU4JMCZLJyPKg"
+      ],
+      "jobId": "job_qHYcvC4tm11PbR9mZ2EYFHrz"
+    },
+    {
+      "kind": "sfx",
+      "id": "trinket_presented",
+      "clips": [
+        "trinket_presented"
+      ],
+      "prompt": "A single warm gentle hand-chime with a little bright upper shimmer and a soft rounded decay, intimate rewarding keepsake presentation, no triumphant fanfare or music",
+      "negative": "music, speech, voices, distortion, abrupt edits",
+      "duration": 1.4,
+      "numOutputs": 1,
+      "seed": 7474,
+      "loop": false,
+      "status": "completed",
+      "assets": [
+        "asset_9x7QZ1Eao7DsN6FJmnZk2L4x"
+      ],
+      "jobId": "job_TkBS4C6SybjgaVLrMVYHvcmq"
+    }
+  ],
+  "submittedEstimateCU": 174,
+  "remainingEstimateCU": 0,
+  "actualCU": 174
+}

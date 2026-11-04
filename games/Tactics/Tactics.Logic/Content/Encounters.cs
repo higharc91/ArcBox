@@ -42,6 +42,13 @@ public static class Encounters
         if (party.Select(m => m.Id).Distinct().Count() != party.Length)
             throw new ArgumentException("Two party members have the same id.", nameof(party));
 
+        // Select the authored group variant before resolving tags and phases. Keep the placement's
+        // stable identity and original trigger tag; all older encounters omit this optional mapping.
+        EncounterUnitDef ForParty(EncounterUnitDef unit) => unit.UnitByParty is { } variants
+            ? unit with { Unit = variants.GetValueOrDefault(party.Length, unit.Unit), Tag = unit.UnitTag }
+            : unit;
+        def = def with { Enemies = [.. def.Enemies.Select(ForParty)], Npcs = [.. def.Npcs.Select(ForParty)] };
+
         var map = rules.MapFor(def.Map);
         if (map is null)
             problems.Add("/map", $"Unknown map '{def.Map}'.");
@@ -63,7 +70,8 @@ public static class Encounters
         var numbers = new Dictionary<string, int>(StringComparer.Ordinal);
         foreach (var (units, name, isNpc) in new[] { (def.Enemies, "enemies", false), (def.Npcs, "npcs", true) })
             for (var i = 0; i < units.Length; i++)
-                PlaceUnits(units[i], $"/{name}/{i}", isNpc, rules, placer, numbers);
+                PlaceUnits(units[i] with { Count = units[i].CountByParty?.GetValueOrDefault(party.Length, units[i].Count) ?? units[i].Count },
+                    $"/{name}/{i}", isNpc, rules, placer, numbers, party.Length);
         problems.ThrowIfAny();
 
         return new BattleSetup(map, placer.Units.ToImmutable(), def.Objectives ?? ObjectivesDef.Default, WithPhases(def, rules), d,
@@ -95,7 +103,7 @@ public static class Encounters
     }
 
     private static void PlaceUnits(EncounterUnitDef unit, string at, bool isNpc, RulesPack rules, Placer placer,
-        Dictionary<string, int> numbers)
+        Dictionary<string, int> numbers, int partySize)
     {
         var tiles = placer.TilesFor(unit, at);
         if (tiles.IsDefault)
@@ -117,9 +125,12 @@ public static class Encounters
             if (!placer.Claim(id, tile, unit.Id is null ? at : Pointer.Append(at, "id"),
                     Pointer.Append(at, unit.At is null ? "zone" : "at")))
                 continue;
-            var sheet = SheetBuilder.ForMonster(unit.Unit, rules, unit.Level) with
+            var basis = SheetBuilder.ForMonster(unit.Unit, rules, unit.Level);
+            var sheet = basis with
             {
                 AiProfile = profile,
+                MaxHp = unit.HpByParty?.GetValueOrDefault(partySize, basis.MaxHp)
+                    ?? basis.MaxHp,
                 Sprite = unit.Variant is { } variant ? WithVariant(monster.Sprite, variant) : monster.Sprite,
                 Tags = SheetTags(monster, unit),
                 Side = isNpc ? Side.Party : Side.Enemy,

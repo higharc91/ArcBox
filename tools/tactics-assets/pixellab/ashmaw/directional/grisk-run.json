@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 87f7effb-96de-402f-90ae-a37905475882\nname: Wardenflame Grisk approved pilot\nmode: v3 reference (2 generations, 8 directions)\nbody: humanoid\nsize: 96x96px\nview: low top-down\nstyle: from reference image (outline/detail hints ignored)\nstatus: processing (~3-5 min)\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -195,6 +195,19 @@ public sealed class ValidationTests
     }
 
     [Theory]
+    [InlineData("""{ "1": "wolf" }""", "/enemies/0/unitByParty", "every supported party size")]
+    [InlineData("""{ "1": "wolf", "2": "missing" }""", "/enemies/0/unitByParty/2", "Unknown monster")]
+    [InlineData("""{ "1": "wolf", "2": "" }""", "/enemies/0/unitByParty/2", "monster id is empty")]
+    public void Party_monster_profiles_require_complete_valid_references(string mapping, string pointer, string message)
+    {
+        var errors = ErrorsOfChapter(("encounters/e.json", $$"""
+            { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 2 },
+              "enemies": [ { "unit": "wolf", "at": [5, 4], "unitByParty": {{mapping}} } ] }
+            """));
+        Assert.Contains(errors, e => e.Pointer == pointer && e.Message.Contains(message, StringComparison.Ordinal));
+    }
+
+    [Theory]
     [InlineData("""{ "win": null }""", "/triggers/0/do/0/setObjective", "setObjective needs \"win\" or \"lose\".")]
     [InlineData("""{ "win": { "any": [null] } }""", "/triggers/0/do/0/setObjective/win/any/0", "A value is missing.")]
     public void A_null_in_a_trigger_objective_is_a_content_error(string setObjective, string pointer, string message)

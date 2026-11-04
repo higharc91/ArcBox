@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/trinkets.schema.json",
+  "title": "Class trinkets",
+  "description": "One class-bound rare trinket per character. Uses the existing injury static modifiers and passive hooks.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "static": {
+        "$ref": "common.schema.json#/$defs/staticMods"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      },
+      "hook": {
+        "$ref": "common.schema.json#/$defs/passive/properties/hook",
+        "description": "When the trinket effects run on its owner."
+      },
+      "effects": {
+        "$ref": "common.schema.json#/$defs/effects",
+        "description": "Uses the same passive effect system as injuries."
+      },
+      "class": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "rarity": {
+        "const": "rare"
+      },
+      "text": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "class",
+      "rarity",
+      "static",
+      "text"
+    ],
+    "additionalProperties": false
+  }
+}

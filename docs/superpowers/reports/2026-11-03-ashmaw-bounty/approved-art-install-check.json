@@ -1,0 +1,13 @@
+{
+  "repeatInstallIdentical": true,
+  "sha256": {
+    "creatures/manifest.json": "8138abfae8781950dc6dfd794748056ccb9ea47a65c21d1cd6e4c1aa3b958aac",
+    "creatures/ashmaw_bounty.png": "8ba4b5560a47bfc0d854ba9f36c80531c3d12981324b955338d1e5ae197ad6c8",
+    "creatures/grisk_bounty.png": "09de4e3804163a78f3b0730c6b2669574dbc13a549727c9223a0c1aeacdb46f5",
+    "portraits/manifest.json": "8e7addde601752a1031ab067e805f689063f27083c78c398e6c6b87571a2c036",
+    "portraits/ashmaw.png": "775250afe09f75313316fd0685275144ca9fb1c2cbda87fa3a6aea37d2089bef",
+    "portraits/grisk.png": "73879d58d2e9de3d43e0db0af039d3b8fde349a86f4fe6ff1e7f616b8b0455ab",
+    "lore/characters.json": "f12c557a1a9211c2e444574fa2810652862f3dd84febe9d0afd08fac4a308ec8",
+    "monsters/manifest.json": "ea87b5c8bd43d87245fce4588c0d1230d08e3ad21a1adc11c484272d38bba5ee"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "reason": "Two readable TV caption beats cut from the original paid poster performance. No additional generation.",
+  "parent": "ashmaw_narrator_batch",
+  "sourceSha256": "fc0b923788416776f524b72ffe9a03883e9862463556629233a4e3855f418247",
+  "segments": [
+    {
+      "raw": "Algieba.0bb18d07",
+      "preset": "Algieba",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "line": "ashmaw_bounty_1",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 8.98,
+      "end": 19.14,
+      "matchingCoverage": 0.9655,
+      "recognized": "By order of Captain Dagna Holt, a great grey bear hunts the southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the forward watch.",
+      "wavSha256": "ae629f91dc84f2d02463e5fb4f281c3f959b5787aba70b6c0474658c5d1bf12a"
+    },
+    {
+      "raw": "Algieba.c43db8c1",
+      "preset": "Algieba",
+      "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "line": "ashmaw_bounty_2",
+      "speaker": "narrator",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "delivery": {
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 20.08,
+      "end": 26.5,
+      "matchingCoverage": 0.9474,
+      "recognized": "Sixty gold and a fitted watch gift for each companion. Speak to the captain before entering the center hollow.",
+      "wavSha256": "bcb10c88b7798ccb65e48155ec58731856836862a0e8aa90bbb5c06475a835a8"
+    }
+  ]
+}

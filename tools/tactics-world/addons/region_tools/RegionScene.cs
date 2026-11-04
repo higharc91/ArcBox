@@ -88,6 +88,7 @@ public static class RegionScene
                 PersonText.Optional(p.Id), PersonText.Optional(p.Character), PersonText.Flags(p.Requires), PersonText.Flags(p.Unless), PersonText.Optional(p.Bark), PersonText.Optional(p.Voice)))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
+            NamedSpawns = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Named).Select(s => (s.SpawnName, s.Tile))],
             OldStamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().SelectMany(s => s.Pending)],
             MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNodeOrNull<Node2D>(name)?.Transform != Transform2D.Identity && root.GetNodeOrNull<Node2D>(name) is not null)],
             Strays = Strays(root),
@@ -158,6 +159,8 @@ public static class RegionScene
         var spawns = AddGroup(root, Spawns);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Start }, "Start", source.Start);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Recovery }, "Recovery", source.Recovery);
+        foreach (var (name, at) in source.NamedSpawns)
+            AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Named, SpawnName = name }, name, at);
         var buildings = AddGroup(root, Buildings);
         for (var i = 0; i < source.Buildings.Count; i++)
             AddMarker(root, buildings, new BuildingMarker { Building = source.Buildings[i].Id, Variant = source.Buildings[i].Variant }, $"{source.Buildings[i].Id}_{i}", source.Buildings[i].At);

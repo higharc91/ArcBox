@@ -101,6 +101,16 @@ public static class InteractScenes
         var kind = Interactables.KindOf(def);
         var name = Interactables.NameOf(def);
         var text = Interactables.TextOf(def);
+        if (def.To is not null)
+        {
+            var scene = new SceneDef("entrance:" + def.Id, null, null, $"Enter {name}?", [], [], [SceneDef.Narrator], "ask",
+                [new SceneNode("ask", [new SceneLine("entrance_" + def.Id + "_ask", SceneDef.Narrator, $"Enter {name}, or stay here?", "idle")], [],
+                    [new SceneOption("enter", "Enter", "enter", null, [], [], OptionTags.None, null),
+                     new SceneOption("later", "Not yet", "later", null, [], [], OptionTags.None, null)], true, null, false),
+                 new SceneNode("enter", [], [], [], false, null, true),
+                 new SceneNode("later", [], [], [], false, null, true)], false);
+            return new ScenePlan(scene, ImmutableDictionary<string, InteractOutcome>.Empty);
+        }
         switch (kind.Family)
         {
             case InteractableFamily.Trade:

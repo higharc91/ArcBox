@@ -80,6 +80,26 @@
       "body": "A great red dragon came to Ember Keep in the decade after the Fall, drawn by the heat of the flame's heart, and has slept coiled around it ever since. The Last Watch has never tried to move it. The Kindled are counting on it waking.",
       "unlock": { "chapter": 5 },
       "related": ["codex_ember_keep"]
+    },
+    {
+      "id": "bestiary_ashmaw",
+      "title": "Ashmaw",
+      "category": "bestiary",
+      "subject": "ashmaw",
+      "body": "A vast grey cave bear with coal-bright eyes and smouldering fur tips. Old warmth kept it sleeping; picks woke it, and hunger drove it out. A creature to pity, once it can no longer hurt the town.",
+      "unlock": {
+        "flag": "sq_ashmaw_slain"
+      }
+    },
+    {
+      "id": "bestiary_grisk",
+      "title": "Grisk of the Diggings",
+      "category": "bestiary",
+      "subject": "kobold_foreman",
+      "body": "Helmet lamp, tally cord and a pick held like a promise. Grisk’s crew is paid by the pound. He shouts loudest when the stone behind him growls.",
+      "unlock": {
+        "flag": "sq_ashmaw_diggings_won"
+      }
     }
   ]
 }

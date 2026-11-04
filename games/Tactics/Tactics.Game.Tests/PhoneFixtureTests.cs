@@ -301,6 +301,11 @@ public sealed class PhoneFixtureTests
             ["portal-new"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), bo).GetRawText())!,
             ["portal-character"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!,
         };
+        var equipped = doc.Members[ana.Value];
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "hearthstone_pendant" } }) };
+        views["portal-trinket"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "ember_claw_gauntlet" } }) };
+        views["portal-trinket-dormant"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
         Check(views);
     }
 
@@ -334,6 +339,17 @@ public sealed class PhoneFixtureTests
         s.Send(leader, "skip");
         screens["walk-pinned-done"] = Node(s.Harness.PlayerView(leader));
         Check(screens);
+    }
+
+    [Fact]
+    public void The_bounty_presents_only_the_receiving_phones_class_trinket()
+    {
+        var s = ConversationQuestTests.At("dagna_holt", "ch1_ford_settled", "sq_ashmaw_posted", "sq_ashmaw_accepted", "sq_ashmaw_slain", "sq_ashmaw_claw");
+        ConversationQuestTests.Talk(s, "dagna_holt");
+        ConversationQuestTests.Choose(s, "present");
+        ConversationQuestTests.WalkAgain(s);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
     }
 
     private static void Check(SortedDictionary<string, JsonNode> screens)

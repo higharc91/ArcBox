@@ -17,6 +17,7 @@ public sealed class VoiceClips
     private const string Cast = "main";
 
     private readonly Dictionary<(string Encounter, string Speaker, string Line), VoiceClip> _clips = [];
+    private readonly Dictionary<(string Speaker, string Text), VoiceClip> _barks = [];
     private readonly Dictionary<string, VoiceClip> _lines = new(StringComparer.Ordinal);
 
     private VoiceClips()
@@ -46,11 +47,19 @@ public sealed class VoiceClips
                     clips._clips.TryAdd((id, say.GetProperty("speaker").GetString() ?? "", say.GetProperty("line").GetString() ?? ""), new VoiceClip(line, $"lore/audio/{clip.GetString()}"));
             }
         }
+        foreach (var file in Directory.GetFiles(Path.Combine(packRoot, "lore", "barks"), "*.json"))
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(file));
+            if (!doc.RootElement.TryGetProperty("speaker", out var speaker) || !doc.RootElement.TryGetProperty("events", out var events)) continue;
+            foreach (var line in events.EnumerateObject().SelectMany(e => e.Value.EnumerateArray()))
+                if (clips.ForLine(line.GetProperty("id").GetString()!) is { } clip)
+                    clips._barks.TryAdd((speaker.GetString()!, line.GetProperty("text").GetString()!), clip);
+        }
         return clips;
     }
 
     /// <summary>The recording of <paramref name="speaker"/> saying <paramref name="line"/> in <paramref name="encounter"/>, or null: then the voice chain reads it.</summary>
-    public VoiceClip? For(string encounter, string speaker, string line) => _clips.GetValueOrDefault((encounter, speaker, line));
+    public VoiceClip? For(string encounter, string speaker, string line) => _clips.GetValueOrDefault((encounter, speaker, line)) ?? _barks.GetValueOrDefault((speaker, line));
 
     /// <summary>
     /// The recording of the scene line <paramref name="id"/> (<see cref="Tactics.Game.StoryLineView.Id"/>), or null when it has none, or its

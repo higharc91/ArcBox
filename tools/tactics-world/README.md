@@ -81,7 +81,7 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 |---|---|---|
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
-| `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
+| `Spawns` | `SpawnMarker`, one Start and one Recovery, plus optional named destinations | `Kind`: `Start`, `Recovery` (where a beaten party wakes), or `Named` with a unique `SpawnName` |
 | `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
 | `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
 
@@ -95,6 +95,12 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.
+
+**Region entrances (#74 foundation):** a `Named` spawn exports under optional `spawns.named`, sorted by destination name. Existing scenes without named markers export without that field. Names must be nonempty and cannot replace `start` or `recovery`. Keep destinations off battle stamps and on walkable ground that can reach the start and return.
+
+A hand-authored `cave_mouth` interactable links to `{ "to": { "region": "cinder_hollow", "spawn": "entrance" } }`. The mouth is always open; `requires` controls when it is available. Put a return mouth in the destination region and its named return spawn beside the source mouth. The loader checks destination names and return reachability, including passages that might otherwise strand the party. Only the leader proposes travel, followed by a 20-second party vote. Unanswered votes count as Enter; a strict majority is required. Travel preserves a paused regional story cursor, saves the destination and uses the existing epoch/fade presentation.
+
+`regions/cinder_hollow.tscn` now contains the 56×44 Hollow with four forced battle stamps, a safe fire after the Nest and two clearings reserved for later wandering encounters. The Ford mouth is at 131,98, with its named return at 131,99. The cave starts at its named `entrance` (5,2). Plain candles mark the mine; animal remains and dried stains gather near Ashmaw. These decorations do not block the route. Rebuilding the props atlas requires remapping Ashen Ford's painted prop cells with the previous manifest before exporting; the cave draft uses the current atlas. The final cave exported identically twice, and the Ford remap preserved its world JSON byte for byte.
 
 **A stamp is a tuned battle,** so its tiles must match the map exactly. Don't paint inside its outline.
 
@@ -252,6 +258,7 @@ Copy-Item content/tactics/base/rules $env:TEMP\rules-copy -Recurse
 scene. `--draft=ashen_ford` writes the scene only if it isn't there. No command replaces a scene: `--draft`, `--new` and `--sample` all
 say so, change nothing and exit 2, so re-drafting means deleting the scene by hand.
 
+**Party-specific monster profiles (#74):** encounter placements may provide `unitByParty`, with a valid monster id for every supported party size. Selection happens before placement and phase resolution; the placement id and original trigger tag remain stable. Hollow Lair uses the original Ashmaw for 1–3 members and a stronger, visually identical profile for 4–6. Both remain level 2, so gaining XP helps. Older encounters omit the mapping.
 ## Editing existing props without repainting
 
 Use `--edit-props=<region>` to change individual props while preserving the scene’s terrain paint. Repeat `--clear-prop=<x>,<y>` and `--place-prop=<id>@<variant>@<x>,<y>` for each edit, then export and check the region. Do not regenerate the region from its draft.

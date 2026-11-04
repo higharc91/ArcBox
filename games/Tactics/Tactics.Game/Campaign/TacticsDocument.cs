@@ -192,7 +192,9 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedDictionary<string, long>? BarkCounters = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> QuestsRewarded = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PinnedQuest = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PinnedQuest = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
+    ImmutableSortedDictionary<string, StorySave>? RegionStories = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;

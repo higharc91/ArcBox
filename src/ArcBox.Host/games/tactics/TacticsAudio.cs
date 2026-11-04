@@ -23,6 +23,7 @@ public partial class TacticsAudio : Node
         new() { Name = "MusicB", Bus = AudioBuses.Music, VolumeDb = QuietDb },
     ];
     private readonly AudioStreamPlayer _bed = new() { Name = "Ambience", Bus = AudioBuses.Sfx, VolumeDb = BedDb };
+    private readonly AudioStreamPlayer _creatureBed = new() { Name = "CreatureAmbience", Bus = AudioBuses.Sfx, VolumeDb = -18 };
     private readonly List<AudioStreamPlayer> _effects = [];
     private readonly Dictionary<string, AudioStreamOggVorbis?> _streams = new(StringComparer.Ordinal);
     private readonly Dictionary<AudioStreamPlayer, Tween> _fades = [];
@@ -32,6 +33,7 @@ public partial class TacticsAudio : Node
     private SoundPicker? _picker;
     private MusicCue? _cue;
     private string? _bedId;
+    private string? _creatureBedId;
     private int _front;
     private readonly Dictionary<AudioStreamPlayer, long> _startedAt = [];
     private long _started;
@@ -46,6 +48,7 @@ public partial class TacticsAudio : Node
             AddChild(player);
         }
         AddChild(_bed);
+        AddChild(_creatureBed);
         // A timer of its own, not Finished, which never comes on a machine with no sound device, and not one of the tree's,
         // which would outlive this scene.
         AddChild(_stingEnds);
@@ -82,6 +85,7 @@ public partial class TacticsAudio : Node
     /// <summary>Runs the ambience bed <paramref name="id"/>, or none for null.</summary>
     public void Ambience(string? id)
     {
+        if (id == "amb_cinder_hollow" && _bank?.Has(id) == false) id = "amb_dungeon";
         if (id == _bedId || _bank is null)
         {
             return;
@@ -95,6 +99,18 @@ public partial class TacticsAudio : Node
         _bed.Stream = stream;
         _bed.Play();
         AudioLog.Play(AudioBuses.Sfx, $"ambience {id}");
+    }
+
+    /// <summary>Runs a quiet creature loop independently of the cave ambience; null stops it immediately.</summary>
+    public void CreatureAmbience(string? id)
+    {
+        if (id == _creatureBedId || _bank is null) return;
+        _creatureBedId = id;
+        _creatureBed.Stop();
+        if (id is null || _picker?.Next(id) is not { } file || Stream(file, loop: true) is not { } stream) return;
+        _creatureBed.Stream = stream;
+        _creatureBed.Play();
+        AudioLog.Play(AudioBuses.Sfx, $"creature ambience {id}");
     }
 
     /// <summary>Plays the sound <paramref name="id"/>, next of its files, at its group's level and <paramref name="db"/> more, on a free voice, or over the oldest if all twelve are busy.</summary>

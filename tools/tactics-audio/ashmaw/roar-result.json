@@ -1,0 +1,28 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"jobs\": [\n    {\n      \"jobId\": \"job_ZyZB1Z54QcBpFjg3jjeGmq4u\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T17:00:25.235Z\",\n      \"updatedAt\": \"2026-11-03T17:00:34.482Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_GE2CEz3yM6GB2nHmH3bqcU9S\",\n        \"asset_9QXQbuHTryrD9v5UN7iZRXjc\"\n      ],\n      \"cuCost\": 15\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_ZyZB1Z54QcBpFjg3jjeGmq4u",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T17:00:25.235Z",
+        "updatedAt": "2026-11-03T17:00:34.482Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_GE2CEz3yM6GB2nHmH3bqcU9S",
+          "asset_9QXQbuHTryrD9v5UN7iZRXjc"
+        ],
+        "cuCost": 15
+      }
+    ]
+  },
+  "isError": false
+}

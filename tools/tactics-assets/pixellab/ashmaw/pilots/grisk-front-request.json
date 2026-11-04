@@ -1,0 +1,10 @@
+{
+  "image_urls": [
+    "https://api.pixellab.ai/mcp/images/c83af08e-8eb8-448c-ad3c-1924c8aed1bf/download?index=0"
+  ],
+  "description": "Repose this same kobold miner to face SOUTH: perfectly straight toward the viewer. Both eyes equally visible, snout centered, both shoulders and hips square to the camera. Do not retain the existing three-quarter angle. Keep the exact outfit, proportions, colors, low top-down pixel style, caged helmet lamp, tally cord and curved tail. Preserve the mining pick in his RIGHT hand (viewer LEFT) with the fingers physically wrapped around its shaft. Both feet planted at same ground baseline. One single full-body sprite centered, no text, no labels, no extra poses. Transparent background.",
+  "width": 96,
+  "height": 96,
+  "no_background": true,
+  "seed": 7412
+}

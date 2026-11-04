@@ -203,6 +203,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void EnterWorld()
     {
+        RestoreFordSettlement();
         WorldEntering?.Invoke();
         var saved = _doc.World;
         var region = saved?.Region is { } id && Rules.RegionFor(id) is { } named ? named : Rules.Regions.Values.MinBy(r => r.Def.Chapter);

@@ -1,0 +1,11 @@
+{
+  "submittedAt": "2026-11-03T19:43:07Z",
+  "model": "model_mirelo-sfx-2-0-text-to-audio",
+  "jobId": "job_qHYcvC4tm11PbR9mZ2EYFHrz",
+  "clips": ["kobold_pick.1", "kobold_pick.2"],
+  "duration": 0.8,
+  "numOutputs": 2,
+  "seed": 7474,
+  "estimatedCU": 5,
+  "status": "queued"
+}

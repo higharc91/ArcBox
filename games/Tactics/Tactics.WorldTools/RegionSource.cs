@@ -48,6 +48,9 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// <summary>Where the party recovers after a defeat.</summary>
     public Tile Recovery { get; set; }
 
+    /// <summary>Authored entrance destinations, ordered by name for deterministic export.</summary>
+    public SortedDictionary<string, Tile> NamedSpawns { get; } = new(StringComparer.Ordinal);
+
     /// <summary>The painted tiles.</summary>
     public IReadOnlyDictionary<Tile, TileInfoNamed> Tiles => _tiles;
 

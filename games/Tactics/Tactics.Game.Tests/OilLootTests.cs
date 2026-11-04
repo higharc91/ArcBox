@@ -24,7 +24,7 @@ public sealed class OilLootTests
     }
 
     [Fact]
-    public void The_placed_chest_is_the_only_other_flask_and_starting_kits_have_none()
+    public void Only_the_authored_chest_and_Hollow_cache_add_flasks_and_starting_kits_have_none()
     {
         var rules = Rules;
         Assert.Equal(10, rules.Items[new ItemId("oil_flask")].Price);
@@ -32,7 +32,7 @@ public sealed class OilLootTests
         Assert.Equal(1, Assert.Single(encounters).Count);
         Assert.Equal("ford_assault", Assert.Single(rules.Encounters.Values, e => !e.ItemLoot.IsDefaultOrEmpty).Id);
         var chests = rules.Interactables.Values.SelectMany(t => t).Where(t => t.Loot.Any(s => s.Item.Value == "oil_flask")).ToArray();
-        Assert.Equal("af_reeves_chest", Assert.Single(chests).Id);
+        Assert.Equal(new[] { "af_reeves_chest", "hollow_hidden_cache" }, chests.Select(c => c.Id).Order());
         Assert.Equal(1, chests[0].Loot.Single(s => s.Item.Value == "oil_flask").Count);
         foreach (var cls in rules.Classes.Keys)
             Assert.DoesNotContain(SheetBuilder.DefaultCharacter("kit", "human", cls, null, 1, rules).Bag, s => s.Item.Value == "oil_flask");
