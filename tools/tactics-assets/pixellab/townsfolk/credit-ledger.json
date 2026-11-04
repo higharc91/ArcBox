@@ -1,0 +1,17 @@
+{
+  "unit": "PixelLab subscription generations",
+  "initialPilotAndAlternativeIdle": 19,
+  "extension": {
+    "rejectedFrontEdit": 1,
+    "proFlashFirstAndEightDirections": 6,
+    "curatedImport": 0.25,
+    "walkEightDirections": 8,
+    "idleSevenDirections": 7,
+    "talkEightDirections": 8
+  },
+  "extensionTotal": 30.25,
+  "breeTotal": 49.25,
+  "observedRemaining": 30.75,
+  "scenarioCUSeparate": 221,
+  "note": "Slot-rejected idle/talk attempts queued no jobs and incurred no generation spend. Reused approved southeast idle; no concept regenerated."
+}

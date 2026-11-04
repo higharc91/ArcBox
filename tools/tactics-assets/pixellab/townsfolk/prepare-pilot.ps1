@@ -31,7 +31,8 @@ $metadata = [ordered]@{
 $existingPath = Join-Path $PSScriptRoot 'pilot-inputs.json'
 if (Test-Path -LiteralPath $existingPath) {
     $existing = Get-Content $existingPath -Raw | ConvertFrom-Json
-    foreach ($key in @('status','generationCost','staticJobId','idleJobId','selectedCandidate')) {
+    if ($existing.staticJobId -and $existing.heroAtlasSha256 -ne $metadata.heroAtlasSha256) { throw 'Hero atlas changed since generation; review pilot provenance before rebuilding.' }
+    foreach ($key in @('status','generationCost','staticJobId','idleJobId','previousIdleJobId','selectedCandidate','directionalCharacterId','directionalCoverage','tvReview','pilotScope')) {
         if ($existing.PSObject.Properties[$key]) { $metadata[$key] = $existing.$key }
     }
 }

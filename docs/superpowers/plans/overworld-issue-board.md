@@ -78,7 +78,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `concepts approved; PixelLab pilot review`
+### OW-10 · Heroes and townsfolk don't match · `Bree review art complete; cloud handoff`
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -101,7 +101,13 @@ pixel review. PixelLab is now authenticated via local owner-supplied configurati
 Bree has four static candidates (15 generations); the owner switched back to
 candidate 1 after trying candidate 2. Both idle studies are retained (2 generations
 each, 19 total); the existing candidate-1 idle is reused without new spending.
-Motion/TV approval and integration remain pending. See
+The owner approved candidate 1's original idle. Its full eight-direction idle, walk
+and talk review set is now complete, with real Windows TV shots at the inn, square
+and market. The compact atlas is 4.5 MiB; that one-actor demo measured 190.5 →
+195.0 MiB textures, not the required four-party OW-05 gate. PixelLab spend is
+49.25 generations total, with 30.75 observed remaining. Production integration,
+full directional/TV approval, the other 25 people, portraits and OW-05 remain.
+Handoff: `docs/superpowers/plans/2026-11-03-townsfolk-art-cloud-handoff.md`. See
 `tools/tactics-assets/concepts/townsfolk/README.md` for prompts, receipts and comparison.
 **Done when:** both art stages are approved, the town reads as one style, optional
 variants round-trip through the editor, and OW-05's memory/download checks pass.

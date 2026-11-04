@@ -5,8 +5,10 @@ Issue #80's Ashen Ford people work is tracked in [townsfolk/README.md](townsfolk
 (12 Scenario CU spent). The owner approved 234 CU for the remaining 18 sheets;
 the batch now has all primary outputs. Halden and Maud were recovered from existing
 Scenario concepts. Total net spend including Bree and a child body-view supplement
-is 221 CU, leaving 25 CU unused. Bree and Mother Skarrow are approved; the other
-17 character/preset designs await review in `townsfolk/review-index.md`.
+is 221 CU, leaving 25 CU unused. All 19 primary designs and the child-B supplement
+are approved. Bree candidate 1's pixel appearance and displayed idle are also
+approved; the complete directional review pack and real TV shots are ready. See
+`townsfolk/review-index.md` and `../pixellab/townsfolk/README.md`.
 
 `scenario-briefs.json` is the prepared, lore-linked request pack for **Scenario**.
 Generation receipts belong to their individual batches. See the

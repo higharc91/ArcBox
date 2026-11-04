@@ -1,5 +1,5 @@
 {
-  "status": "candidate 1 appearance approved; existing idle reused; motion and TV review pending",
+  "status": "Bree eight-direction review art complete; original candidate 1 + idle approved; full directional/TV approval pending",
   "character": "character_bree_tallow",
   "approvedConceptAsset": "asset_5BTscGVgZiaVkGpPJb65F1X1",
   "conceptSha256": "9f4b30a04a1d4509b0beb53f3c216514ada18e5c34be85d9428a929225186ba5",
@@ -16,17 +16,49 @@
   "heroPixelScale": 0.5,
   "heroHeadY": 51,
   "heroHeadToFootWorldPixels": 36,
-  "pilotScope": "One static facing, then one short idle or walk only after static inspection. Live schema and price required before submission.",
+  "pilotScope": "Original pilot approved. Full eight-direction idle/walk/talk review set prepared in separate pack; production integration remains pending.",
   "generationCost": {
-    "unit": "subscription generations",
-    "static": 15,
-    "candidate1Idle": 2,
-    "candidate2Idle": 2,
-    "total": 19
+    "unit": "PixelLab subscription generations",
+    "initialPilot": 19,
+    "directionalExtension": 30.25,
+    "total": 49.25
   },
   "integrationApproved": false,
   "staticJobId": "f4e7da2d-389f-40e7-8814-04e2e040dac0",
   "idleJobId": "67e30958-824f-4ac1-a27f-611943cd3617",
   "selectedCandidate": 1,
-  "previousIdleJobId": "5ecd93c3-7b90-4a78-bbd8-c910593160e0"
+  "previousIdleJobId": "5ecd93c3-7b90-4a78-bbd8-c910593160e0",
+  "directionalCharacterId": "808551e2-cb8d-471b-a5be-6ed59b28e7a7",
+  "directionalCoverage": {
+    "directions": 8,
+    "idle": 5,
+    "walk": 6,
+    "talkSourceFrames": 5,
+    "talkPlaybackIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      3,
+      2,
+      1
+    ],
+    "reviewFrame": {
+      "width": 96,
+      "height": 96,
+      "anchor": [
+        48,
+        84
+      ]
+    },
+    "worldPixelScale": 0.5
+  },
+  "tvReview": {
+    "status": "captured; owner approval pending",
+    "report": "docs/superpowers/reports/2026-11-03-townsfolk-art/report.md",
+    "textureMiBBefore": 190.5,
+    "textureMiBWithBree": 195,
+    "fullPartyMemoryGateVerified": false
+  }
 }

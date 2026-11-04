@@ -7,7 +7,7 @@
   "owner_quote": "nvm back to cndiate 1",
   "source": "normalized/candidate-1.png",
   "sourceSha256": "f24f6be283612a1ae81783d443bc31e75134853bd7e7362a5317bbbc790e474a",
-  "scope": "Bree static appearance only. Idle and TV review remain pending; no production integration.",
+  "scope": "Bree candidate 1 static appearance and displayed idle motion approved. Continue directional/walk/gesture work and separate TV review; production integration remains gated on TV review.",
   "history": [
     {
       "candidate": 2,
@@ -16,5 +16,13 @@
       "source": "normalized/candidate-2.png",
       "sourceSha256": "a782fa6126d49553472b482c460e100b8b04199e757a65eaa966ae55c8383c7f"
     }
-  ]
+  ],
+  "idleApproval": {
+    "status": "approved",
+    "date": "2026-11-03",
+    "owner_quote": "nice, I'm good with that. Proceed",
+    "jobId": "67e30958-824f-4ac1-a27f-611943cd3617",
+    "preview": "bree-idle-review.gif",
+    "previewSha256": "12d37639348b644bc214d982c259153ab87d789dc530e27b2e80ec214cd26cb4"
+  }
 }

@@ -168,7 +168,8 @@ public partial class Main : Control
             GD.Print("Things demo: no server connection");
             ShowGame("tactics");
             var thingsPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
-            if (_args.WorldDemo == "cinder_hollow" && System.Environment.GetEnvironmentVariable("ARCBOX_CINDER_ART_ROOT") is { Length: > 0 } previewRoot) thingsPack = System.IO.Path.GetFullPath(previewRoot);
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } artRoot) thingsPack = System.IO.Path.GetFullPath(artRoot);
+            else if (_args.WorldDemo == "cinder_hollow" && System.Environment.GetEnvironmentVariable("ARCBOX_CINDER_ART_ROOT") is { Length: > 0 } previewRoot) thingsPack = System.IO.Path.GetFullPath(previewRoot);
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
             var tactics = _scene as Games.Tactics.TacticsScene;
             AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
@@ -180,6 +181,7 @@ public partial class Main : Control
             // Dev only: a whole region in blocks, measured; the art comes from the repository.
             GD.Print("World demo: no server connection");
             var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } artRoot) worldPack = System.IO.Path.GetFullPath(artRoot);
             AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks, _args.WorldRoute));
             return;
         }

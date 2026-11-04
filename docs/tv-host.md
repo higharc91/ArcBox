@@ -370,6 +370,15 @@ In Exploration the TV shows the world instead of the header and table, and the s
 
 **The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
 
+### Separate art review packs
+
+For dev-only `--world-demo` runs, set `ARCBOX_TACTICS_ART_ROOT` to an absolute
+review-pack directory to render proposed art through the normal TV pipeline
+without replacing production content. This applies to ordinary region walks and
+the scripted NPC/camp/shop/cave demos. The older `ARCBOX_CINDER_ART_ROOT` still
+works for Cinder Hollow when the general override is absent. Neither variable
+changes the pack downloaded for a live room.
+
 ## Fights in the world
 
 A battle on a stamped map (overworld 5c) is drawn where it stands. `StageDirector` (Tactics.Presentation) has every host view and says

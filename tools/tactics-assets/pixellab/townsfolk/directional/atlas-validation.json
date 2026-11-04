@@ -1,0 +1,184 @@
+{
+  "atlas": [
+    1536,
+    768
+  ],
+  "uncompressedMiB": 4.5,
+  "actions": {
+    "idle": [
+      {
+        "direction": "south",
+        "frames": 5,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "south-west",
+        "frames": 5,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "west",
+        "frames": 5,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "north-west",
+        "frames": 5,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "north",
+        "frames": 5,
+        "maxFootDriftWorld": 0.5,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "north-east",
+        "frames": 5,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 35,
+        "maxHeightWorld": 35
+      },
+      {
+        "direction": "east",
+        "frames": 5,
+        "maxFootDriftWorld": 0.5,
+        "minHeightWorld": 33,
+        "maxHeightWorld": 33.5
+      },
+      {
+        "direction": "south-east",
+        "frames": 5,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 36,
+        "maxHeightWorld": 37
+      }
+    ],
+    "walk": [
+      {
+        "direction": "south",
+        "frames": 6,
+        "maxFootDriftWorld": 1.5,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35.5
+      },
+      {
+        "direction": "south-west",
+        "frames": 6,
+        "maxFootDriftWorld": 2,
+        "minHeightWorld": 34,
+        "maxHeightWorld": 35.5
+      },
+      {
+        "direction": "west",
+        "frames": 6,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 33,
+        "maxHeightWorld": 33.5
+      },
+      {
+        "direction": "north-west",
+        "frames": 6,
+        "maxFootDriftWorld": 2,
+        "minHeightWorld": 35,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "north",
+        "frames": 6,
+        "maxFootDriftWorld": 2,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "north-east",
+        "frames": 6,
+        "maxFootDriftWorld": 2,
+        "minHeightWorld": 35,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "east",
+        "frames": 6,
+        "maxFootDriftWorld": 1,
+        "minHeightWorld": 34,
+        "maxHeightWorld": 34
+      },
+      {
+        "direction": "south-east",
+        "frames": 6,
+        "maxFootDriftWorld": 1.5,
+        "minHeightWorld": 34.5,
+        "maxHeightWorld": 35
+      }
+    ],
+    "talk": [
+      {
+        "direction": "south",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36.5
+      },
+      {
+        "direction": "south-west",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36.5
+      },
+      {
+        "direction": "west",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "north-west",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36.5
+      },
+      {
+        "direction": "north",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "north-east",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 36,
+        "maxHeightWorld": 36
+      },
+      {
+        "direction": "east",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 35.5,
+        "maxHeightWorld": 35.5
+      },
+      {
+        "direction": "south-east",
+        "frames": 8,
+        "maxFootDriftWorld": 0,
+        "minHeightWorld": 36,
+        "maxHeightWorld": 36
+      }
+    ]
+  },
+  "approvedSoutheastIdle": "pixel exact after transparent padding crop"
+}
