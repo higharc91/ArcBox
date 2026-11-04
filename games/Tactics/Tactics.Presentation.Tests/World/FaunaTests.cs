@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tactics.Presentation.Tests.World;
 
-/// <summary>The world's animals: drawn at the world's scale, and kept to ground that makes sense (<see cref="SpriteShrink"/>, <see cref="FaunaRange"/>).</summary>
+/// <summary>The world's animals: drawn at the world's scale, and kept to ground that makes sense (<see cref="WorldHerd"/>, <see cref="FaunaRange"/>).</summary>
 public sealed class FaunaTests
 {
     private static readonly ImmutableSortedDictionary<string, ImmutableArray<Tile>> NoZones =
@@ -29,7 +29,6 @@ public sealed class FaunaTests
     private static PropPlacement Prop(string id, int x, int y) => new(id, new Tile(x, y), true, Cover.Half);
 
     private static int Low(string id) => 1;
-
     [Fact]
     public void Every_animal_in_the_pack_is_drawn_at_about_its_size_beside_a_person()
     {
@@ -49,49 +48,31 @@ public sealed class FaunaTests
         foreach (var (id, variant, least, most) in animals)
         {
             var prop = art.Prop(id, [variant])!;
+            var sprite = WorldHerd.StripSprite(prop);
             var (rgba, width, height) = PngPixels.Read(Path.Combine(Pack.Root, prop.Image.Path));
-            var strip = SpriteShrink.Shrink(rgba, width, height, prop.Image.Frames, prop.Scale);
-            var rows = Enumerable.Range(0, strip.Height).Where(y => Enumerable.Range(0, strip.Width).Any(x => strip.Rgba[(y * strip.Width + x) * 4 + 3] != 0)).ToArray();
-            Assert.InRange(rows.Max() - rows.Min() + 1, (int)MathF.Round(least * referenceScale), (int)MathF.Ceiling(most * referenceScale));
-            Assert.Equal(SpriteShrink.Anchor(prop.AnchorX, prop.AnchorY, prop.Width, prop.Height, prop.Scale).Y, rows.Max());   // feet on the ground
+            var rows = Enumerable.Range(0, height).Where(y => Enumerable.Range(0, prop.Width).Any(x => rgba[(y * width + x) * 4 + 3] != 0)).ToArray();
+            var drawn = (rows.Max() - rows.Min() + 1) * sprite.PixelScale;
+            Assert.InRange(drawn, MathF.Round(least * referenceScale) - 0.5f, MathF.Ceiling(most * referenceScale) + 0.5f);
+            Assert.InRange(sprite.AnchorY - rows.Max(), 0, 1);      // feet on the ground
         }
     }
 
     [Fact]
-    public void A_shrunk_strip_keeps_its_frames_apart_and_its_alpha_whole()
+    public void A_strip_made_bigger_than_the_world_is_drawn_smaller_about_its_feet()
     {
-        // Two 4x4 frames: the first solid red, the second clear but for one blue pixel.
-        var rgba = new byte[8 * 4 * 4];
-        for (var y = 0; y < 4; y++)
-            for (var x = 0; x < 4; x++)
-                (rgba[(y * 8 + x) * 4], rgba[(y * 8 + x) * 4 + 3]) = (255, 255);
-        (rgba[(0 * 8 + 7) * 4 + 2], rgba[(0 * 8 + 7) * 4 + 3]) = (255, 255);
+        var art = ArtIndex.Load(Pack.Root);
+        var prop = art.Prop("pack_mule_anim", ["grey"])! with { Scale = 0.5 };
+        var sprite = WorldHerd.StripSprite(prop);
+        var place = new UnitPlace(new System.Numerics.Vector2(10.5f, 10.5f), 0);
+        var unit = UnitPlan.Animal("mule", sprite, place, 0, 0, false);
+        var area = WorldPlan.AreaOf(unit);
 
-        var strip = SpriteShrink.Shrink(rgba, 8, 4, 2, 0.5);
-
-        Assert.Equal((2, 2, 4), (strip.FrameWidth, strip.Height, strip.Width));
-        for (var y = 0; y < 2; y++)
-            for (var x = 0; x < 4; x++)
-            {
-                var i = (y * 4 + x) * 4;
-                Assert.True(strip.Rgba[i + 3] is 0 or 255);
-                Assert.Equal(x < 2 ? 255 : 0, (int)strip.Rgba[i + 3]);      // red stays red, and one pixel of four is too little to draw
-                if (x < 2)
-                    Assert.Equal((255, 0, 0), (strip.Rgba[i], strip.Rgba[i + 1], strip.Rgba[i + 2]));
-            }
-    }
-
-    [Fact]
-    public void The_matte_fringe_is_dropped_and_an_anchor_on_the_bottom_row_stays_there()
-    {
-        Assert.True(SpriteShrink.Matte(255, 0, 255));
-        Assert.True(SpriteShrink.Matte(180, 20, 160));
-        Assert.False(SpriteShrink.Matte(40, 0, 40));        // dark: it reads as outline
-        Assert.False(SpriteShrink.Matte(200, 120, 60));     // a fox
-        Assert.False(SpriteShrink.Matte(60, 100, 60));      // a duck's head
-
-        Assert.Equal((9, 22), SpriteShrink.Anchor(44, 103, 88, 104, 0.22));
-        Assert.Equal(SpriteShrink.Size(88, 104, 0.38).Height - 1, SpriteShrink.Anchor(44, 103, 88, 104, 0.38).Y);
+        Assert.Equal(0.5f, sprite.PixelScale);
+        Assert.Equal(prop.Width / 2f, sprite.WorldWidth);
+        Assert.Equal(prop.Height / 2f, sprite.WorldHeight);
+        // The anchor stays the file's, and lands on the feet: the drawn box is half the size, its anchor pixel where the feet are.
+        Assert.Equal(place.Feet.Y - prop.AnchorY / 2f, area.Min.Y, 0.01);
+        Assert.Equal(1f, WorldHerd.StripSprite(prop with { Scale = 1 }).PixelScale);
     }
 
     [Fact]

@@ -91,15 +91,18 @@ public sealed class WorldHerd
         return new WorldHerd(terrain, animals);
     }
 
-    /// <summary>A props strip as a sheet of one row: idle is its first frame, and walking plays it there and back, so there's no snap between its ends.</summary>
-    private static UnitSprite StripSprite(PropArt strip)
+    /// <summary>
+    /// A props strip as a sheet of one row: idle is its first frame, and walking plays it there and back, so there's no snap between its ends. Art made bigger than
+    /// the world (the manifest's <c>scale</c>, below 1) is drawn that much smaller, about the same anchor: its size and anchor stay the file's.
+    /// </summary>
+    public static UnitSprite StripSprite(PropArt strip)
     {
         var frames = Math.Max(1, strip.Image.Frames);
         ImmutableArray<int> there = [.. Enumerable.Range(0, frames), .. Enumerable.Range(1, Math.Max(0, frames - 2)).Reverse()];
         var walk = new UnitAnim(there, strip.Image.Fps > 0 ? strip.Image.Fps : 8, true);
         var idle = new UnitAnim([0], 1, true);
         return new UnitSprite(strip.Image.Path, strip.Width, strip.Height, strip.AnchorX, strip.AnchorY, 0, idle, idle, 0,
-            ImmutableDictionary<string, UnitAnim>.Empty.Add("walk", walk));
+            ImmutableDictionary<string, UnitAnim>.Empty.Add("walk", walk)) { PixelScale = strip.Scale is > 0 and < 1 ? (float)strip.Scale : 1 };
     }
 
     /// <summary>Moves every animal on by <paramref name="delta"/> seconds.</summary>

@@ -2482,7 +2482,7 @@
     "height": "in height steps (16 px), for line of sight",
     "layer": "absent = over (a billboard, sorted with units); ground = lies flat under units",
     "light": "a point light: see lighting",
-    "scale": "optional, below 1: art drawn bigger than the world, shrunk to whole pixels by that much when drawn (size and anchor stay the file's). Only the world's animals (the *_anim strips) use it, until their art is redrawn at game scale"
+    "scale": "optional, below 1: art drawn bigger than the world, drawn that much smaller, about its anchor (size and anchor stay the file's). Only read for the world's animals (the *_anim strips, WorldHerd), and none uses it now: their strips are drawn at game scale"
   },
   "lighting": {
     "light": "at: image px of the light's source in frame 0 (or one list per frame for animated props, since flames sway); radius: in tiles; colour: per variant, hex; flicker: a curve name in lighting.flicker; emissive: an L8 mask strip (same frames as the sprite) of the pixels that glow by themselves",

@@ -30,7 +30,7 @@ public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 
 
 /// <summary>
 /// A prop's sprite. The anchor is its ground contact pixel, which stands on the tile's centre. <see cref="Scale"/> is the manifest's
-/// <c>scale</c>: art made bigger than the world is drawn that much smaller (<see cref="World.SpriteShrink"/>); 1 for most props.
+/// <c>scale</c>: art made bigger than the world is drawn that much smaller (<see cref="World.WorldHerd.StripSprite"/>: at that pixel scale, about the same anchor); 1 for most props.
 /// <see cref="Shape"/> is where a low prop wider than a tile has pixels, in its own <see cref="Width"/> by <see cref="Height"/> (whatever the file's size), so
 /// <see cref="BoardPlan"/> can cut it into columns, each sorted on the tile it lies on, as a building is; null for any other prop.
 /// </summary>
