@@ -7,7 +7,8 @@ checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree
 full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
 complete eight-direction idle/walk/talk set is also now approved and installed.
 Mother Aubrine’s complete image-tool set and native TV review are now also approved
-and installed; Tobin’s appearance is approved and his finished set awaits TV approval. Read the latest
+and installed. Tobin’s finished set is now approved, awaiting production installation;
+Lark’s first pixel appearance candidate is awaiting approval. Read the latest
 [Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
@@ -326,3 +327,19 @@ strict action/portrait/stop-resume and production memory/cold-pack checks.
 Lark, the travelling minstrel, is next in the approved named concept queue after
 Tobin. Do not regenerate Lark's existing approved concept. No new generation
 has been authorized by this status question.
+
+## Latest appearance candidate — Lark
+
+The owner authorized starting Lark with the image tool. One eight-view standing
+candidate is saved under `tools/tactics-assets/imagegen/townsfolk/lark/`, with exact
+request/input/output hashes. The approved concept was reused; no concepts or
+completed character assets were regenerated. The rear concept defines instrument
+carry geometry to resolve its conflicting front/rear shoulder position. Preserve
+anatomical equipment sides; no mechanical mirroring.
+
+**Lark appearance approval is pending.** Do not expand to full motions before it.
+Native grid/alpha/palette/scale/anchor import and full-set/portrait/TV review remain
+ahead. No production content changed. Tobin's finished-set approval is complete;
+his installation and strict production checks remain the independent next work.
+No PixelLab API calls/spend/purchases. Keep existing credit and512 MiB/four-member
+limits. Pull with rebase before pushing townsfolk-art; no PR, merge or issue closure.

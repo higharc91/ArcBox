@@ -292,3 +292,13 @@ and remaining portraits are ahead. See `reports/2026-11-03-townsfolk-art/tobin-i
 Tobin's finished-set/TV approval has now arrived: “Looks good. Who is next”.
 Approval is recorded against unchanged review hashes; production installation
 and its follow-up checks are pending. Lark is next in the named concept queue.
+
+### Issue #80 — Lark appearance trial
+
+The owner authorized starting Lark. One image-tool eight-view pixel appearance
+candidate reuses the approved concept, under `tools/tactics-assets/imagegen/townsfolk/lark/`.
+Appearance approval is pending; no motions, portraits or production installation.
+The rear concept defines one consistent instrument carry where front/rear studies
+had disagreed. Exact request/input/output hashes are retained. Zero PixelLab calls
+or credits; rules, balance and phone contracts unchanged. Tobin's full-set approval
+is recorded, with production integration and its checks still pending.

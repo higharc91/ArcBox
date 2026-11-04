@@ -1,0 +1,26 @@
+{
+  "character": "Lark",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 1,
+  "originalPath": "/workspace/generated_images/exec-90e928b2-f2c4-4828-9b99-e1bbb2b6e5d4.png",
+  "candidateSha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72",
+  "requestSha256": "e0ce0d77d06113aee863fa464ade31b3ad6128b313b83657432035d795a8d65c",
+  "inputSha256": {
+    "tools/tactics-assets/concepts/townsfolk/generated/character_lark.png": "590a1916f744ac67d24902564c17fa89b9591f7f6b53053f3a7c8c9e55e46b33",
+    "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/rotations/south.png": "2a1edd0362dd14935480c1b9d98161be261a1d79d281ac7dcfec092f0aa2a000"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Existing approved concept reused; first pixel appearance sheet only.",
+    "All eight requested standing facings manually inspected in S,SW,W,NW / N,NE,E,SE order.",
+    "Rear concept defines consistent instrument carry: neck over anatomical right shoulder. Front concept had conflicting shoulder geometry.",
+    "Native pixel grid, alpha, palette, body size and anchors remain unvalidated.",
+    "No animations or portraits generated. Preserve appearance and full-set/TV approval gates."
+  ]
+}
