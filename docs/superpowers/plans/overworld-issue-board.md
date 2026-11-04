@@ -357,3 +357,13 @@ six portraits are installed. Fresh four-party production peaks: **320.48 MiB Ash
 +648,662 bytes. Rules, balance and phone contracts unchanged. Existing voice clips
 should be included in future character reviews as recorded in the handoff.
 Evidence: `reports/2026-11-03-townsfolk-art/corvin-installed/report.md`.
+
+### Issue #80 — Pip appearance and voice draft
+
+Pip’s first image-tool appearance candidate reuses the approved concept. An existing
+recorded town bark is included as a phone-friendly MP3 with source/output hashes.
+Appearance approval is pending. Child target52 native /26 world pixels; do not use
+the adult importer unchanged. Correct the draft’s duplicated right-facing second
+cell before deriving southwest motion guides. Pip needs a named child variant so
+other children keep their own art. No production/rules/balance/phone changes or
+PixelLab spend. Assets: `tools/tactics-assets/imagegen/townsfolk/pip-ashdown/`.

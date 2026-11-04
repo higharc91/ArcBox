@@ -448,3 +448,17 @@ Continue remaining named and generic cast with their own appearance/full-set gat
 Include a playable existing recorded voice sample with each future character draft
 and completed review. Never purchase PixelLab credits. Pull with rebase before
 pushing townsfolk-art; no PR, merge or issue closure.
+
+## Latest draft — Pip Ashdown
+
+The owner authorized continuing with Pip. Her first pixel appearance and existing
+recorded voice sample are in `tools/tactics-assets/imagegen/townsfolk/pip-ashdown/`.
+Exact request, input/output hashes and voice provenance are retained. Appearance
+approval remains pending; no animations/portraits or production installation.
+The top-row second view incorrectly faces right; correct it to southwest before
+motion guides. Target child52 native /26 world pixels, not adult72/36. Pip is nine;
+preserve child proportions and the approved ordinary patched autumn clothing.
+Future integration must use the named cosmetic child variant mechanism, preserving
+other generic children. Include the existing voice sample with future reviews.
+No PixelLab calls/spend/purchases, no gameplay or phone-contract changes. Reuse
+completed assets. Rebase before pushing townsfolk-art; no PR, merge or issue closure.
