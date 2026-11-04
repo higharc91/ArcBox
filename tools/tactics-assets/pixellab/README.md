@@ -6,7 +6,8 @@ All 19 character/preset concept designs and the child-B body-view supplement are
 approved as of 2026-11-03. Existing Halden and Maud concepts were reused. NPC
 PixelLab authenticated through the owner-supplied local MCP configuration.
 The [Bree pilot](townsfolk/README.md) has four static candidates (15 generations)
-and a completed short idle study (2 generations). Pixel art and TV approval remain pending.
+and two short idle studies (2 generations each). The owner selected candidate 2;
+its motion and TV approval remain pending.
 Use the current shipped tactical hero density and anchors for the
 production comparison, rather than assuming the older reference PNGs establish
 the current hero size.

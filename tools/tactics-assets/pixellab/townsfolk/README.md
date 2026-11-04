@@ -46,7 +46,13 @@ remain required before final integration.
 
 ![Four candidates beside the shipped hero](bree-normalized-review.png)
 
-![Hero beside Bree's idle](bree-idle-review.gif)
+The owner selected **candidate 2** on 2026-11-03: “I like candiate 2”.
+`sprite-approval.json` records the exact source hash and approval scope.
+Its matching idle is complete. The candidate-1 study is retained as history.
+
+![Selected candidate-2 idle beside the hero](candidate-2-idle/bree-idle-review.gif)
+
+![Earlier candidate-1 idle study](bree-idle-review.gif)
 
 The Pro model ignored the requested 72-pixel body height: raw candidates are
 115–117 pixels tall. `normalize-static.ps1` fits each static candidate once to
@@ -68,3 +74,18 @@ are retained. These checks do not establish walking contact or complete directio
 The GIF plays at 300 ms per frame for review; no runtime timing has been chosen.
 Owner pixel/animation approval and a real TV review remain open. Nothing is
 installed in the game, and the rest of the NPC batch has not been generated.
+
+## Candidate 2 follow-up
+
+The owner-selected sprite is `normalized/candidate-2.png`. Its matching four-frame
+idle plus unchanged source cost **2 additional generations**, bringing the complete
+Bree pilot to **19 generations**. Inputs, receipts and original frames are preserved
+in `candidate-2-idle/`. Rebuild its preview with `build-idle-review.cjs 2`.
+
+All five frames have the same visible bounds, including the lowest row at 123;
+the foot silhouette in rows 118–123 is unchanged. The motion is very subtle:
+generated frames differ from the source at 21–31 visible pixels. Comparison ignores
+RGB differences underneath fully transparent pixels. The last frame is close rather
+than identical to the start (21 visible pixels differ). No frame was recentered.
+Motion, full directions, walking and TV approval remain pending. Static selection
+does not approve the historical candidate-1 animation or install either in game.

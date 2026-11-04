@@ -1,0 +1,11 @@
+{
+  "character": "character_bree_tallow",
+  "stage": "static_candidate_selection",
+  "status": "approved",
+  "candidate": 2,
+  "date": "2026-11-03",
+  "owner_quote": "I like candiate 2",
+  "source": "normalized/candidate-2.png",
+  "sourceSha256": "a782fa6126d49553472b482c460e100b8b04199e757a65eaa966ae55c8383c7f",
+  "scope": "Bree static appearance only. Idle and TV review remain pending; no production integration."
+}
