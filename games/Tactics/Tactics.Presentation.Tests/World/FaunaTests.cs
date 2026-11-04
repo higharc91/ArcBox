@@ -130,18 +130,19 @@ public sealed class FaunaTests
     }
 
     [Fact]
-    public void An_animal_never_stands_on_a_prop_or_just_behind_one()
+    public void An_animal_never_stands_on_a_prop_but_may_go_behind_one()
     {
-        // A haystack at (4, 4), and a building's blocked tile at (8, 8), which is tall.
+        // A haystack at (4, 4), and a building's blocked tile at (8, 8). Animals are drawn in painter's order now (OW-14), so what's in front hides them.
         var map = Map(12, 12, (x, y) => (0, TileFlags.None), Prop("haystack", 4, 4), Prop("building:cottage", 8, 8));
         var free = FaunaRange.Free(map, Low);
 
         Assert.DoesNotContain(new Tile(4, 4), free);
-        Assert.DoesNotContain(new Tile(3, 4), free);     // behind it along x
-        Assert.DoesNotContain(new Tile(4, 3), free);     // along y
-        Assert.DoesNotContain(new Tile(3, 3), free);     // and both
-        Assert.Contains(new Tile(5, 5), free);           // in front is fine
-        Assert.DoesNotContain(new Tile(6, 6), free);     // two tiles behind a building
+        Assert.Contains(new Tile(3, 4), free);           // behind it along x
+        Assert.Contains(new Tile(4, 3), free);           // along y
+        Assert.Contains(new Tile(3, 3), free);           // and both
+        Assert.Contains(new Tile(5, 5), free);           // in front
+        Assert.DoesNotContain(new Tile(7, 7), free);     // within a tile of a building
+        Assert.Contains(new Tile(6, 6), free);           // two tiles behind it
         Assert.Contains(new Tile(10, 10), free);
     }
 
@@ -182,5 +183,119 @@ public sealed class FaunaTests
             Assert.Equal(animal.Id == "river_duck", water);
             Assert.True(FaunaRange.Domain(map, free, animal.At, 3, water).Length > 1, $"{animal.Id} has nowhere to wander");
         }
+    }
+
+    private static readonly Lazy<UnitArt> Units = new(() => UnitArt.Load(Pack.Root));
+
+    [Fact]
+    public void The_fords_herd_wanders_the_same_way_every_time_and_keeps_to_its_ground()
+    {
+        var ground = Pack.Ground("ashen_ford");
+        var terrain = new BoardTerrain(ground.Map, null);
+        var (one, two) = (WorldHerd.Build(terrain, Pack.Art, Units.Value), WorldHerd.Build(terrain, Pack.Art, Units.Value));
+        var homes = ground.Map.Props.Where(p => WorldAnimalIds.Contains(p.Id)).ToArray();
+        var free = FaunaRange.Free(ground.Map, Pack.Art.PropHeight);
+        Assert.Equal(homes.Length, one.Count);
+        var moved = 0;
+        for (var frame = 0; frame < 60 * 40; frame++)
+        {
+            one.Step(1 / 60.0);
+            two.Step(1 / 60.0);
+            if (frame % 30 != 0)
+                continue;
+            var (a, b) = (one.Units(), two.Units());
+            Assert.Equal(a.Select(u => (u.Feet, u.Order, u.Anim.Frames[0])), b.Select(u => (u.Feet, u.Order, u.Anim.Frames[0])));
+            moved += homes.Count(h => one.PlaceOf(h.At) is { } place && place.Over != h.At);
+            foreach (var home in homes)
+            {
+                var at = one.PlaceOf(home.At)!.Value.Over;
+                var water = (ground.Map[at].Flags & TileFlags.Water) != 0;
+                Assert.True(at == home.At || free.Contains(at) && water == (home.Id == "river_duck"), $"{home.Id} from {home.At} is at {at}, off its ground: free {free.Contains(at)}, flags {ground.Map[at].Flags}");
+            }
+        }
+        Assert.True(moved > 0, "nothing wandered");
+    }
+
+    [Fact]
+    public void A_pen_is_found_quickly_however_much_fence_is_about()
+    {
+        // A field of fences in rows, as a farm drawn without care might have: the pen search tries every rectangle within reach.
+        var fences = new List<PropPlacement>();
+        for (var y = 0; y < 40; y += 3)
+            for (var x = 0; x < 40; x++)
+                fences.Add(Prop("fence", x, y));
+        var map = Map(40, 40, (x, y) => (0, TileFlags.None), [.. fences]);
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+
+        for (var i = 0; i < 10; i++)
+            FaunaRange.Pen(new Tile(20, 20), fences.Select(f => f.At).ToHashSet(), map);
+
+        Assert.True(clock.ElapsedMilliseconds < 2000, $"{clock.ElapsedMilliseconds} ms for ten pens");
+    }
+
+    /// <summary>The pen as it was found before OW-12, counting each side tile by tile: what the running counts have to agree with.</summary>
+    private static HashSet<Tile>? SlowPen(Tile animal, HashSet<Tile> fences, BattleMap map)
+    {
+        (int Left, int Top, int Right, int Bottom, int Area)? best = null;
+        int Count(int fromX, int toX, int fromY, int toY)
+        {
+            var n = 0;
+            for (var y = fromY; y <= toY; y++)
+                for (var x = fromX; x <= toX; x++)
+                    n += fences.Contains(new Tile(x, y)) ? 1 : 0;
+            return n;
+        }
+        for (var left = Math.Max(0, animal.X - 18); left < animal.X; left++)
+            for (var right = animal.X + 1; right <= Math.Min(map.Width - 1, animal.X + 18); right++)
+                for (var top = Math.Max(0, animal.Y - 18); top < animal.Y; top++)
+                    for (var bottom = animal.Y + 1; bottom <= Math.Min(map.Height - 1, animal.Y + 18); bottom++)
+                    {
+                        var (w, h) = (right - left - 1, bottom - top - 1);
+                        if (w < 3 || h < 3 || best is { Area: var area } && w * h >= area)
+                            continue;
+                        var (across, along) = ((right - left + 1) * 0.62, (bottom - top + 1) * 0.62);
+                        if (Count(left, right, top, top) < across || Count(left, right, bottom, bottom) < across
+                            || Count(left, left, top, bottom) < along || Count(right, right, top, bottom) < along)
+                            continue;
+                        best = (left, top, right, bottom, w * h);
+                    }
+        if (best is not { } pen)
+            return null;
+        var inside = new HashSet<Tile>();
+        for (var y = pen.Top + 1; y < pen.Bottom; y++)
+            for (var x = pen.Left + 1; x < pen.Right; x++)
+                inside.Add(new Tile(x, y));
+        return inside;
+    }
+
+    [Fact]
+    public void Pens_are_the_same_as_counting_tile_by_tile_found()
+    {
+        var random = new Random(78);
+        for (var trial = 0; trial < 12; trial++)
+        {
+            var fences = new HashSet<Tile>();
+            for (var pen = 0; pen < 3; pen++)
+            {
+                var (x0, y0) = (random.Next(0, 18), random.Next(0, 18));
+                var (x1, y1) = (x0 + random.Next(3, 9), y0 + random.Next(3, 9));
+                for (var x = x0; x <= x1; x++)
+                    for (var y = y0; y <= y1; y++)
+                        if ((x == x0 || x == x1 || y == y0 || y == y1) && random.NextDouble() < 0.85)
+                            fences.Add(new Tile(x, y));
+            }
+            var map = Map(30, 30, (x, y) => (0, TileFlags.None), [.. fences.Select(f => Prop("fence", f.X, f.Y))]);
+            for (var i = 0; i < 6; i++)
+            {
+                var animal = new Tile(random.Next(1, 28), random.Next(1, 28));
+                var (slow, fast) = (SlowPen(animal, fences, map), FaunaRange.Pen(animal, fences, map));
+                Assert.Equal(slow?.Order().ToArray(), fast?.Order().ToArray());
+            }
+        }
+        // And the region's own pens.
+        var ford = Pack.Ground("ashen_ford").Map;
+        var fordFences = ford.Props.Where(p => FaunaRange.IsFence(p.Id)).Select(p => p.At).ToHashSet();
+        foreach (var animal in ford.Props.Where(p => WorldAnimalIds.Contains(p.Id)))
+            Assert.Equal(SlowPen(animal.At, fordFences, ford)?.Order().ToArray(), FaunaRange.Pen(animal.At, fordFences, ford)?.Order().ToArray());
     }
 }

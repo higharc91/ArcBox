@@ -55,7 +55,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         Failed,
     }
 
-    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string Times);
+    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, PropFade Fade, WorldHerd Herd, WorldBlock[] Blocks, BoardCanvas Over, WorldAmbient Ambient, string Times);
 
     private const int BelowUi = -1;
     private const int BlockDepth = 64;
@@ -78,6 +78,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private Node2D _world = null!;
     private PropFade? _propFade;
     private WorldAmbient? _ambient;
+    private WorldHerd? _herd;
+    private string[] _animals = [];
+    private bool _adopted;      // the built nodes are in the tree
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
@@ -330,6 +333,14 @@ internal sealed partial class WorldCanvas : CanvasLayer
     public override void _ExitTree()
     {
         _closing.Cancel();
+        if (!_adopted && _building is { IsCompletedSuccessfully: true } built)
+        {
+            // Made for a world that never opened, out of the tree: nothing else frees them.
+            foreach (var node in built.Result.Blocks.Concat<Node>([built.Result.Over, built.Result.Ambient]))
+            {
+                node.QueueFree();
+            }
+        }
         _blocks.Clear();
         _recording.Clear();
         _items = [];
@@ -383,7 +394,24 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         plan.DropProbes();
         var preparedTime = clock.Elapsed.TotalMilliseconds;
-        return new Built(ground, plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, total {preparedTime:0} ms");
+        // The animals, where each may go, here too: worked out on the main thread as the world opened, it took most of a second (OW-12).
+        var herd = WorldHerd.Build(plan.Terrain, art, UnitArt.Load(_painter.Root));
+        var ambient = new AmbientPlan(plan.Terrain, ground.Map, AmbientManifest.Load(_painter.Root), seed: ground.Map.Id.Sum(c => c), dusk: plan.Lighting.Ambient == BoardLighting.Dusk);
+        var herded = clock.Elapsed.TotalMilliseconds;
+        closing.ThrowIfCancellationRequested();
+
+        // Its nodes too, out of the tree, which Godot allows off the main thread: made there, their first use cost a frame twice over (OW-12).
+        // The main thread only adds them.
+        var blocks = plan.Blocks.Select(b => new WorldBlock(_painter, items[b.Index], b.Z * BlockDepth)).ToArray();
+        var overZ = plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
+        var over = new BoardCanvas(_painter) { ZIndex = overZ };
+        over.JoinWorld(plan.Lighting.Active ? plan.Lighting : null);
+        var light = plan.Lighting.Ambient;
+        var calls = new WorldAmbient(ambient, System.IO.Path.Combine(_painter.Root, "ambient"), _painter.Root, ground.Map, new Color(light.R, light.G, light.B), overZ,
+            home => herd.PlaceOf(home) is { } place ? new Vector2(place.Feet.X, place.Feet.Y) : null);
+        var noded = clock.Elapsed.TotalMilliseconds;
+        return new Built(ground, plan, items, new PropFade(plan), herd, blocks, over, calls,
+            $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, herd {herded - preparedTime:0} ms, nodes {noded - herded:0} ms, total {noded:0} ms");
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
@@ -435,6 +463,16 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
+        if (_herd is { Count: > 0 } herd)
+        {
+            // The animals among everyone else, so what stands in front of one is painted over it (OW-14).
+            var margin = new System.Numerics.Vector2(ViewMargin);
+            var animals = herd.Units(new ArtArea(_view.Min - margin, _view.Max + margin));
+            if (!animals.IsEmpty)
+            {
+                units = [.. units.Concat(animals).OrderBy(u => u.Order)];
+            }
+        }
         _propFade?.Update(walkers, _delta);
         _propFade?.TakeChanges(_leave);
         var over = plan.PaintOver(units, _propFade, _plugs);
@@ -473,6 +511,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _delta = delta;
         _clock += delta;
         _frames.Step(_clock);
+        _herd?.Step(delta);
         _ambient?.Update(_view, _clock);
         SwapRepainted();
         if (_stage is { Visible: true } stage)
@@ -521,42 +560,37 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     private void FinishBuild()
     {
+        var opening = Stopwatch.GetTimestamp();
         var built = _building.Result;
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
-        _propFade = new PropFade(Plan);
+        _propFade = built.Fade;
         _sheets = [.. Ground.People.Select(p => p.Preset).Distinct().Select(UnitArt.SheetOf)];
         _items = built.Items;
         _queue = new BlockQueue(Plan.Blocks);
-        foreach (var block in Plan.Blocks)
+        foreach (var node in built.Blocks)
         {
-            var node = new WorldBlock(_painter, _items[block.Index], block.Z * BlockDepth);
             _blocks.Add(node);
             _world.AddChild(node);
         }
 
         _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
-        var overZ = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
-        var fauna = new WorldFauna(_painter.Root, Ground.Map, Plan.Lighting)
-        {
-            ZIndex = 0,
-        };
-        _world.AddChild(fauna);
-        _over = new BoardCanvas(_painter) { ZIndex = overZ };
+        // The animals are drawn with the people, in painter's order (ShowUnits); their sheets load with the textures.
+        _herd = built.Herd;
+        _animals = [.. _herd.Paths];
+        _over = built.Over;
         _world.AddChild(_over);
-        _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
-
-        var ambientManifest = AmbientManifest.Load(_painter.Root);
-        var dusk = Plan.Lighting.Ambient == BoardLighting.Dusk;
-        var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.Sum(c => c), dusk: dusk);
-        var light = Plan.Lighting.Ambient;
-        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), _painter.Root, Ground.Map, new Color(light.R, light.G, light.B), overZ, fauna);
+        _ambient = built.Ambient;
         _world.AddChild(_ambient);
+        _adopted = true;
 
         if (_view.Max == _view.Min)
         {
             Place(WorldView.Centred(BoardProjection.Corner(0, 0, 0)));
         }
+        var mainMs = Stopwatch.GetElapsedTime(opening).TotalMilliseconds;
+        BuildTimes += $", main thread {mainMs:0.0} ms";
+        GD.Print($"WORLD open on the main thread {mainMs:0.0} ms");
         Now = Stage.Textures;
     }
 
@@ -578,6 +612,14 @@ internal sealed partial class WorldCanvas : CanvasLayer
         {
             // Someone's sheet is 100 ms of a decoded image if it's first needed as they come into view.
             _painter.Load(_sheets[_texture++ - images - plan.Halos.Length]);
+        }
+        else if (_texture < images + plan.Halos.Length + _sheets.Length + _animals.Length)
+        {
+            _painter.Load(_animals[_texture++ - images - plan.Halos.Length - _sheets.Length]);
+        }
+        else if (_ambient?.LoadNext() == true)
+        {
+            // an animal's call
         }
         else
         {

@@ -523,6 +523,49 @@ public sealed class OverlayPictureTests
         Assert.Contains(pieces, p => p.Order > back.Order && body.Any(b => Covers(p, b)));
     }
 
+    /// <summary>A field with a haystack at (8, 8) and a goat at <paramref name="goat"/>, which never leaves home in a test that doesn't step the herd.</summary>
+    private static (Sheet Sheet, WorldHerd Herd) Haystack(Tile goat)
+    {
+        const int side = 16;
+        ImmutableArray<PropPlacement> props = [new("haystack", new Tile(8, 8), true, Cover.Half, "hay"), new("farm_goat", goat, false, Cover.None)];
+        var map = BattleMap.FromBytes("field", side, side, new byte[side * side * 3], ["grass/autumn"], props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, null);
+        var plan = WorldPlan.Build(new BoardTerrain(map, null), Pack.Art);
+        return (Read(plan, masked: true), WorldHerd.Build(plan.Terrain, Pack.Art, Art.Value));
+    }
+
+    [Theory]
+    [InlineData(7, 8)]
+    [InlineData(8, 7)]
+    [InlineData(7, 7)]
+    public void A_goat_behind_a_haystack_is_hidden_by_it_in_painters_order(int x, int y)
+    {
+        var (sheet, herd) = Haystack(new Tile(x, y));
+        var goat = Assert.Single(herd.Units());
+        var hay = sheet.All.Single(s => sheet.Plan.Blocks[s.At.Block].Lit.Items[s.At.Item] is LitSprite { Sprite.Image.Path: var path } && path.Contains("haystack", StringComparison.Ordinal));
+
+        var over = sheet.Plan.Overlay([goat]);
+        var (drawn, truth) = (new int[800 * 800], new int[800 * 800]);
+
+        Assert.True(hay.Order > goat.Order);
+        Assert.Contains(hay.At, over);      // it goes again over the goat
+        Assert.Equal(0, Wrong(sheet, [goat], over, drawn, truth));
+        Assert.Contains(hay.Id, drawn);
+    }
+
+    [Fact]
+    public void A_goat_in_front_of_a_haystack_is_over_it()
+    {
+        var (sheet, herd) = Haystack(new Tile(9, 9));
+        var goat = Assert.Single(herd.Units());
+        var hay = sheet.All.Single(s => sheet.Plan.Blocks[s.At.Block].Lit.Items[s.At.Item] is LitSprite { Sprite.Image.Path: var path } && path.Contains("haystack", StringComparison.Ordinal));
+
+        var over = sheet.Plan.Overlay([goat]);
+
+        Assert.True(hay.Order < goat.Order);
+        Assert.DoesNotContain(hay.At, over);
+        Assert.Equal(0, Wrong(sheet, [goat], over, new int[800 * 800], new int[800 * 800]));
+    }
+
     [Fact]
     public void Without_the_closure_the_walk_goes_wrong_so_this_test_can_fail()
     {
