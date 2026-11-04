@@ -147,7 +147,7 @@ Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford
 Work is on `ashmaw-bounty`, based on merged #73. Both character concepts and the pixel direction are approved. All eight directions and action sets are generated and curated; actual TV world/battle motion is owner-approved, and dedicated atlases/portraits are installed. The quest, cave, travel, class trinkets, dormant remake behavior, private phone rewards and voiced dialogue are implemented. A six-player live run completed all four chambers and the return/reward flow. Final cave dressing adds candles, animal remains and dried blood. The owner retained level 2, with an explicit journal recommendation, and requested tougher fights only for 4+ players. Paired trinket comparisons are complete. Final tuning gives four-player wins of 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4; smaller-party results are unchanged. Verified: 6,191 .NET and 508 web tests, six phone viewports, zero-warning solution/editor builds. The owner’s follow-up requests matching concept art and a sprite overhaul for the remaining kobolds; that art follow-up is next. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
 
 ### OW-37 · The owner's rule decisions · `done`, issue #83
-Built on `owner-decisions-rules` (not merged; no PR). The owner's answers of 2026-11-03, each recorded as decided in its design:
+Merged in PR #89. The owner's answers of 2026-11-03, each recorded as decided in its design:
 found items go to the party's pick by a 15 s vote on the 5d vote screen, one per loot line, silence to the opener, a party of one at once
 ([interactables §3.1](../specs/2026-11-02-tactics-interactables-design.md)); a sprung trap gives the leader a minor rest-kind injury
 (three new: scraped hands, singed, twisted knee; off the battle table) that any camp or inn mends (§3.3); a failed pick, force, seal or
@@ -156,6 +156,13 @@ haggling, once per shop visit, Persuasion vs the shop's DC (default 15), −10% 
 ([shops §3.3](../specs/2026-11-02-tactics-shops-and-gold-design.md)). New phone fixture `vote-loot`; the five shop fixtures gained
 `haggle`; every other fixture is unchanged. e2e: `ARCBOX_DECISIONS=1 tools/tv-e2e.sh` (bots on the real TV, a copied pack with one
 strongbox).
+
+
+**Follow-up answers (the owner, 2026-11-04):**
+- Keep the trap injuries as built, with black eye included.
+- A failed Arcana seal reopens after a rest, like pick and force.
+- Search may be retried once per rest.
+- **Rooms and cures haggle too:** a tenth off, rounded up. The inn and temple offer Haggle (`haggle-services`).
 
 ## P3: later, needs design with the user
 
