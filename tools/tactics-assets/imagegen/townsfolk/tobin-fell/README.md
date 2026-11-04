@@ -1,7 +1,9 @@
 # Tobin Fell — completed image-tool review set
 
 The owner approved his appearance: **“yeah that looks great. Proceed with finishing him”**.
-His complete directional/motion/portrait/native TV set is ready for final review.
+The owner then approved the finished set: **“Looks good. Who is next”**.
+His complete directional/motion/portrait/native TV set is approved; installation
+and follow-up production checks are pending.
 It remains a separate overlay; production contains approved Bree, Halden and Aubrine.
 No PixelLab API call, credit debit, purchase or upgrade was made.
 
@@ -79,7 +81,8 @@ existing handoff/TV-host guide. Review memory is not a hardware timing benchmark
 
 ## Approval gate
 
-Appearance approval is complete. **Full-set/portrait/TV approval is pending**.
+Appearance and **full-set/portrait/TV approvals are complete**.
+The earlier pending-state guard verification below is retained as history.
 `sprite-approval.json` binds the finished previews to exact hashes.
 `install-approved.cjs` refuses appearance approval alone; this refusal was tested
 against the complete production inventory and left every byte unchanged. After

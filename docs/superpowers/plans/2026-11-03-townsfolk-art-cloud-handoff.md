@@ -315,3 +315,14 @@ Ten completion image-tool calls, zero PixelLab calls/credits; no purchase. Other
 sprite sets and remaining portraits are ahead. Check fresh PixelLab costs/balance
 before future paid work. Pull with rebase before pushing townsfolk-art; no merge,
 PR or issue closure. Earlier appearance-pending notes are historical.
+
+## Latest owner approval — Tobin
+
+The owner approved the finished set: **“Looks good. Who is next”**.
+`sprite-approval.json` records full-set/TV approval with all existing hashes intact.
+Production installation is still pending; do not ask for Tobin approval again.
+Next integration should install the exact approved set and rerun the recorded
+strict action/portrait/stop-resume and production memory/cold-pack checks.
+Lark, the travelling minstrel, is next in the approved named concept queue after
+Tobin. Do not regenerate Lark's existing approved concept. No new generation
+has been authorized by this status question.

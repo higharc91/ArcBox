@@ -288,3 +288,7 @@ frame/rebuild checks pass. Four-party review memory peaks **313.87 MiB Ashen /
 192.37 MiB Cinder**, below512. Production cold pack remains202,137,516 bytes.
 Zero PixelLab calls/spend; rules/balance/phone unchanged. Other22 sprite sets
 and remaining portraits are ahead. See `reports/2026-11-03-townsfolk-art/tobin-imagegen/report.md`.
+
+Tobin's finished-set/TV approval has now arrived: “Looks good. Who is next”.
+Approval is recorded against unchanged review hashes; production installation
+and its follow-up checks are pending. Lark is next in the named concept queue.

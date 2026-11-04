@@ -1,5 +1,5 @@
 {
-  "stage": "appearance_approved_complete_set_ready_for_owner_tv_review",
+  "stage": "complete_set_approved_pending_production_installation",
   "generatedDate": "2026-11-04",
   "tool": "image_gen.imagegen",
   "originalPath": "/workspace/generated_images/exec-0175630f-f859-4b18-82a2-be6fc4c906de.png",
@@ -12,7 +12,7 @@
   "pixelLabCreditsSpent": 0,
   "productionInstalled": false,
   "animationApproval": "authorized_generation_complete",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "notes": [
     "Approved concept and appearance preserved.",
     "Complete eight-direction idle/walk/talk set, 144 native frames, six native40x40 portraits.",
@@ -27,7 +27,7 @@
     "scope": "Appearance approved; complete motion/portrait/TV set retains its separate approval gate."
   },
   "completedSet": {
-    "status": "pending_owner_full_set_and_tv_approval",
+    "status": "approved",
     "sourceFrames": 144,
     "portraits": 6,
     "completionImageToolCalls": 10,
@@ -52,5 +52,10 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/tobin-imagegen/world-forge.png",
       "sha256": "8b6ffa5cc774deafaba5b80b1040574205cc5bedb3b2094578451365c37610af"
     }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks good. Who is next",
+    "context": "Owner response to the completed eight-direction motion, six portraits and native forge TV review shown in chat."
   }
 }
