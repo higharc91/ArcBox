@@ -143,6 +143,36 @@
     }
   },
   "lines": {
+    "af_bank_claw_marks": {
+      "main": "af_bank_claw_marks.eb0e3450.ogg"
+    },
+    "af_bank_claw_marks_use": {
+      "main": "af_bank_claw_marks_use.eb0e3450.ogg"
+    },
+    "af_bridge_carving": {
+      "main": "af_bridge_carving.36b04b27.ogg"
+    },
+    "af_bridge_carving_use": {
+      "main": "af_bridge_carving_use.36b04b27.ogg"
+    },
+    "af_market_cellar_draft": {
+      "main": "af_market_cellar_draft.35028fe8.ogg"
+    },
+    "af_market_cellar_draft_use": {
+      "main": "af_market_cellar_draft_use.35028fe8.ogg"
+    },
+    "af_market_cellar_hatch_use": {
+      "main": "af_market_cellar_hatch_use.16859b58.ogg"
+    },
+    "af_market_cellar_store_use": {
+      "main": "af_market_cellar_store_use.adfdbcfc.ogg"
+    },
+    "af_southfield_goat_tracks": {
+      "main": "af_southfield_goat_tracks.82ea1e7b.ogg"
+    },
+    "af_southfield_goat_tracks_use": {
+      "main": "af_southfield_goat_tracks_use.82ea1e7b.ogg"
+    },
     "bark_bree_tallow_ally_down_1": {
       "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
     },
@@ -3682,6 +3712,12 @@
     },
     "sq_tobin_fell_008": {
       "main": "sq_tobin_fell_008.463aa699.ogg"
+    },
+    "thing.af_market_cellar_ledger.words.0": {
+      "main": "thing.af_market_cellar_ledger.words.0.3af6f197.ogg"
+    },
+    "thing.af_market_cellar_ledger.words.1": {
+      "main": "thing.af_market_cellar_ledger.words.1.a006a30c.ogg"
     },
     "town_barmaid_1": {
       "main": "town_barmaid_1.ae904edb.ogg"

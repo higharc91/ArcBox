@@ -10131,5 +10131,15 @@
       "file": "bark_dagna_holt_town_3.43d579f7.ogg",
       "asset": "asset_NxgmpDQwVv9vcjTDecJk6yG2"
     }
+  ],
+  "ashenFordSecrets": [
+    { "raw": "Algieba.e9dcb904", "line": "af_market_cellar_draft", "asset": "asset_unbSBj3k5XEQooE571YkrsUU", "job": "job_E6RKCDpD5RB6x6oxStbTv5ov", "issue": 81 },
+    { "raw": "Algieba.68c99301", "line": "af_bank_claw_marks", "asset": "asset_pQYFA2KA5Pj7hCf5djHnvrtC", "job": "job_VXUCMcRYmxxaw3UksUy9ewrU", "issue": 81 },
+    { "raw": "Algieba.365b87ca", "line": "af_bridge_carving", "asset": "asset_LqJjXpycLGLGmNLRCUMpg98x", "job": "job_iYfEdJ5B8QUHKD8YFHoXG9Ex", "issue": 81 },
+    { "raw": "Algieba.4566afef", "line": "af_southfield_goat_tracks", "asset": "asset_JCfVG6Gyyim1M4xg8pLNusYw", "job": "job_aLXZEapgkSVAceydQffQNFZ7", "issue": 81 },
+    { "raw": "Algieba.0c6f32d2", "line": "thing.af_market_cellar_ledger.words.0", "asset": "asset_YuQtwXaavbWnwPfb9EQ5fvda", "job": "job_2rLaHha7tZLR9ivX8hmEeT9R", "issue": 81 },
+    { "raw": "Algieba.9514971f", "line": "thing.af_market_cellar_ledger.words.1", "asset": "asset_5HhkiETFJPWesUPYsSbJ8m3z", "job": "job_V4JHKGE55jc5w7PTAzemb5FE", "issue": 81 },
+    { "raw": "Algieba.8aa6cd21", "line": "af_market_cellar_hatch_use", "asset": "asset_GkUstZkE56SGfMLmfd2RdfAh", "job": "job_s9updAVur8rgQp6du1ZBsD9V", "issue": 81 },
+    { "raw": "Algieba.0bc1c652", "line": "af_market_cellar_store_use", "asset": "asset_BnYeqEmk7UnnE789yMUdcyep", "job": "job_TtSD572rwKbvrSCLfzfB1ChW", "issue": 81 }
   ]
 }

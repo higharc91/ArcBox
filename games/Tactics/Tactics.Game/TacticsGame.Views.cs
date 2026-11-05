@@ -219,6 +219,7 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Morning = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<string>? PeopleFlags = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] BarkView? Bark = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] BarkView? ThingSpeech = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestEventView? QuestEvent = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestTrackerView? Pinned = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestLogView? QuestLog = null,
@@ -546,7 +547,7 @@ public sealed partial class TacticsGame
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
         Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
-            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags(), Bark: CurrentBark(), QuestEvent: _questEvent, Pinned: QuestTracker(), QuestLog: QuestLogOpen ? Journal(true) : null, QuestMarkers: QuestPersonMarkers());
+            [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags(), Bark: CurrentBark(), ThingSpeech: _thingSpeech is { } speech && speech.Until > _ctx.Now ? speech : null, QuestEvent: _questEvent, Pinned: QuestTracker(), QuestLog: QuestLogOpen ? Journal(true) : null, QuestMarkers: QuestPersonMarkers());
 
     private ControllerView BattleScreen(ProfileId profile)
     {

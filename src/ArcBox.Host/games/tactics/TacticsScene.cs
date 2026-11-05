@@ -369,6 +369,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     /// <summary>Gives the walk the view the director lets it follow, and after a fight's new epoch, where the followers stood.</summary>
     private (int Epoch, string Person, long Seq)? _spokenBark;
+    private (int Epoch, long Seq)? _spokenThing;
 
     private void FeedWalk()
     {
@@ -396,6 +397,14 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _spokenBark = (next.View.Epoch, bark.Person, bark.Seq);
             if (StoryVoice.For(bark.Line, _voices, SpeechFallback.Speech) is { } say)
                 _narrator?.Say(say.Text, "tactics.npc." + bark.Line.Speaker.Replace('_', '-'), NarrationPriority.Question,
+                    clip: say.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
+        }
+        if (next.View.ThingSpeech is { } thing && thing.Until > DateTimeOffset.UtcNow
+            && _spokenThing != (next.View.Epoch, thing.Seq))
+        {
+            _spokenThing = (next.View.Epoch, thing.Seq);
+            if (StoryVoice.For(thing.Line, _voices, SpeechFallback.Speech) is { } say)
+                _narrator?.Say(say.Text, TacticsVoices.Narrator, NarrationPriority.Question,
                     clip: say.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
         }
         _fed = next.View;

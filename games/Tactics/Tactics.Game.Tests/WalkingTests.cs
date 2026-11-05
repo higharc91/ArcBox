@@ -877,7 +877,7 @@ public sealed class WalkingTests
     }
 
     /// <summary>The view without the region's things and their events: what walking itself costs a step.</summary>
-    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, Gold = null, Traders = null };
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, ThingSpeech = null, Plugs = null, Gold = null, Traders = null };
 
     [Fact]
     public void Ashen_fords_things_cost_the_explore_view_a_known_amount()
@@ -915,7 +915,8 @@ public sealed class WalkingTests
         var party = h.HostView<TacticsHostView>().Explore!;
         Assert.Equal(12, party.Legs.Length);
         Assert.Equal(6, party.Party.Length);
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(party), ArcJson.Options).Length < 1300 + 6 * 20);     // and each colour
+        var bytes = JsonSerializer.SerializeToUtf8Bytes(WalkingPart(party), ArcJson.Options).Length;
+        Assert.True(bytes < 1300 + 6 * 20, $"walking view is {bytes} bytes");     // and each colour
     }
 
     [Fact]

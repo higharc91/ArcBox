@@ -285,6 +285,78 @@
         "sq_forge_done"
       ],
       "scene": "sq_forge_docks"
+    },
+    {
+      "id": "af_reed_bank_track",
+      "kind": "hidden_path",
+      "at": [118, 86],
+      "facing": "se",
+      "name": "reed-bank track",
+      "hidden": { "dc": 12, "skill": "survival" }
+    },
+    {
+      "id": "af_market_cellar_hatch",
+      "kind": "secret_door",
+      "at": [92, 101],
+      "facing": "sw",
+      "name": "cellar hatch",
+      "hidden": { "dc": 13, "skill": "investigation" },
+      "sets": ["af_cellar_open"]
+    },
+    {
+      "id": "af_market_cellar_draft",
+      "kind": "draft",
+      "at": [93, 101],
+      "name": "cold draft",
+      "hidden": 10,
+      "text": ["Cold air slips through a seam behind the tally scrap. The boards lift at one edge."],
+      "reveals": ["af_market_cellar_hatch"]
+    },
+    {
+      "id": "af_market_cellar_store",
+      "kind": "crate",
+      "at": [92, 100],
+      "name": "smugglers' cellar store",
+      "requires": ["af_cellar_open"],
+      "loot": [{ "item": "smoke_bomb", "count": 1 }]
+    },
+    {
+      "id": "af_market_cellar_ledger",
+      "kind": "note",
+      "at": [93, 100],
+      "name": "cellar ledger",
+      "text": [
+        "A few wrapped parcels and an empty ledger box sit below the boards. Someone has kept the store small enough to abandon in a hurry.",
+        "Three deliveries crossed out, no names. A margin note reads: keep the parcels dry and the hatch shut."
+      ],
+      "requires": ["af_cellar_open"]
+    },
+    {
+      "id": "af_bank_claw_marks",
+      "kind": "scratches",
+      "at": [121, 80],
+      "name": "claw marks",
+      "hidden": 11,
+      "text": ["Long claws scored the ash. The trail turns north toward a hollow in the cinders."],
+      "requires": ["ch1_met_maud"]
+    },
+    {
+      "id": "af_bridge_carving",
+      "kind": "carving",
+      "at": [94, 67],
+      "name": "bridge-stub carving",
+      "hidden": 11,
+      "text": ["A child carved two figures holding hands across the broken span. The ash has settled into the cuts."],
+      "requires": ["ch1_skarrow_spared"]
+    },
+    {
+      "id": "af_southfield_goat_tracks",
+      "kind": "tracks",
+      "at": [23, 86],
+      "name": "goat tracks",
+      "hidden": 10,
+      "text": ["Small hoofprints circle the pen twice, then stop beside a gap in the fence."],
+      "requires": ["ch1_met_maud"]
     }
   ]
 }

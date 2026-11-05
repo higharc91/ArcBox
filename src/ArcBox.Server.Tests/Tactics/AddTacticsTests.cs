@@ -101,7 +101,20 @@ public class AddTacticsTests
             var pack = Path.Combine(root, TacticsGame.Id, "base");
             Directory.CreateDirectory(pack);
             foreach (var dir in Directory.EnumerateDirectories(real).Where(d => Path.GetFileName(d) != "lore"))
-                Directory.CreateSymbolicLink(Path.Combine(pack, Path.GetFileName(dir)), dir);
+            {
+                var target = Path.Combine(pack, Path.GetFileName(dir));
+                try { Directory.CreateSymbolicLink(target, dir); }
+                catch (IOException)
+                {
+                    Directory.CreateDirectory(target);
+                    foreach (var file in Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories))
+                    {
+                        var copy = Path.Combine(target, Path.GetRelativePath(dir, file));
+                        Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
+                        File.Copy(file, copy);
+                    }
+                }
+            }
             var lore = Directory.CreateDirectory(Path.Combine(pack, "lore", "scenes")).Parent!.FullName;
             File.WriteAllText(Path.Combine(lore, "pack.json"), """{ "id": "base", "loreVersion": 1, "files": ["arcs.json", "scenes/s.json"] }""");
             File.WriteAllText(Path.Combine(lore, "arcs.json"), """

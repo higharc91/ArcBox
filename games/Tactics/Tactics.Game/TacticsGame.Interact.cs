@@ -186,7 +186,7 @@ public sealed partial class TacticsGame
                     Apply(def, o, _lead!, instant.Line);
                 else
                     Event(def, ThingEvents.Looked, _lead, instant.Line);
-                Say(instant.Line);
+                Say(instant.Line, def.Id + "_use");
                 KeepWorld();
                 Save();
                 break;
@@ -202,11 +202,18 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>Puts a line up on the TV, in place of whatever the last thing said.</summary>
-    private void Say(string line)
+    private BarkView? _thingSpeech;
+    private long _thingSpeechSeq;
+
+    private void Say(string line, string? voiceId = null, string? voiceText = null)
     {
         Unnote(_thingNote);
         _thingNote = line;
         Note(line);
+        _thingSpeech = new BarkView("thing", ++_thingSpeechSeq,
+            _ctx.Now.AddSeconds(Math.Max(4, line.Length / 14d)),
+            new StoryLineView(voiceId ?? "thing.live", SceneDef.Narrator, null, null,
+                SceneLine.DefaultMood, voiceText ?? line));
     }
 
     private string? _thingNote;
@@ -390,8 +397,17 @@ public sealed partial class TacticsGame
             any = true;
         }
         if (lines.Count > 0)
-            Say(string.Join(" ", lines));
+            SayFinds(lines);
         return any;
+    }
+
+    private void SayFinds(IReadOnlyList<string> lines)
+    {
+        var notice = lines.Count == 1
+            ? Things.FirstOrDefault(d => Interactables.KindOf(d).Family == InteractableFamily.Notice
+                && lines[0].EndsWith(InteractScenes.NoticeText(d), StringComparison.Ordinal))
+            : null;
+        Say(string.Join(" ", lines), notice?.Id, notice is null ? null : InteractScenes.NoticeText(notice));
     }
 
     /// <summary>How a thing came to be found, for its line: by a passive skill, by a search's roll, led to by a notice, or by a notice later.</summary>
@@ -511,7 +527,7 @@ public sealed partial class TacticsGame
         if (node.Id == InteractScenes.SearchFound && lines.Count == 0)
             lines.Add("It was nothing after all.");
         if (lines.Count > 0)
-            Say(string.Join(" ", lines));
+            SayFinds(lines);
     }
 
     /// <summary>The DC of the <paramref name="i"/>th thing a search looks for, as it was when it began; a search saved before DCs were kept uses today's.</summary>

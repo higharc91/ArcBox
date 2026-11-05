@@ -115,8 +115,8 @@ Merged in #70. Check the remake fix and the Chapter 1 gold source on the TV and 
 ### OW-32 · Rest and recovery · `integrated`, issue #71
 Camp, inn and temple implementations from `rest-and-recovery` are merged into `npcs-and-quests` as an issue #73 prerequisite. Main has not been changed by this integration. NPC conversations will reuse these services.
 
-### OW-33 · Hidden things · `todo`
-Ashen Ford has scuffs and a cache, but no hidden path or door. The open items are in the interactables design §7.8.
+### OW-33 · Hidden things · `doing`, issue #81 part 1
+Ashen Ford now has a Survival reed-bank track, an Investigation cellar hatch revealed by a draft, a small cellar store, and bank, bridge, and Southfield notices. The narrator clips, Search and passive checks, route test, and TV stand-ins are present. Final full-suite verification remains; the interactables design §7.8 records the general renderer and unseen-trap decisions.
 
 ### OW-34 · Places still short of the lore · `todo`
 No granary building, because the kit has none: (42,70) is sacks and crates. Maud's hut is a plain cottage with no charms. Both are art requests, so ask before generating.

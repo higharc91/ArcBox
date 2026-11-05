@@ -362,12 +362,12 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void Ashen_fords_things_are_sent_but_the_hidden_one_and_none_is_saved_until_one_changes()
+    public void Ashen_fords_visible_things_are_sent_but_hidden_secrets_are_not()
     {
         var s = new Session();
         s.ToWalking();
         var placed = Rules.InteractablesIn("ashen_ford");
-        Assert.Equal(20, placed.Length);
+        Assert.Equal(28, placed.Length);
         Assert.Equal(placed.Where(t => t.Hidden is null && Interactables.Present(t, s.Game.Document.World!.Flags.ToHashSet())).Select(t => t.Id), s.Host.Explore!.Things!.Value.Select(t => t.Id));    // the cache isn't found yet
         Assert.Empty(s.Host.Explore!.ThingEvents!.Value);                   // nothing has happened to one yet
         Assert.True(Walk(s).TryGetProperty("targets", out _));            // a region with things gives the leader's walk screen its list

@@ -192,7 +192,7 @@ public sealed class PhoneFixtureTests
                 (name.StartsWith("conversations/", StringComparison.Ordinal) || name is "quests.json" or "scenes/side_quests.json" or "barks/townsfolk.json")).ToArray()) files.Remove(file);
             File.WriteAllText(indexPath, index.ToJsonString());
             foreach (var file in Directory.EnumerateFiles(Path.Combine(source, "audio"), "*.ogg"))
-                File.CreateSymbolicLink(Path.Combine(folder.FullName, "lore", "audio", Path.GetFileName(file)), file);
+                File.Copy(file, Path.Combine(folder.FullName, "lore", "audio", Path.GetFileName(file)));
             var book = LoreBook.Load(folder.FullName);
             foreach (var line in book.Scenes.SelectMany(sc => sc.Lines)) _ = book.ClipSeconds(line.Id);
             return book;
