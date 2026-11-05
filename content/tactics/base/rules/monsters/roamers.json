@@ -6,7 +6,7 @@
     "xp": 25,
     "scores": {
       "str": 7,
-      "dex": 14,
+      "dex": 16,
       "con": 9,
       "int": 8,
       "wis": 7,
@@ -35,7 +35,7 @@
       "humanoid",
       "kobold"
     ],
-    "aiProfile": "coward",
+    "aiProfile": "brute",
     "sprite": "characters.kobold",
     "level": 1
   },
@@ -47,7 +47,7 @@
     "level": 1,
     "scores": {
       "str": 8,
-      "dex": 12,
+      "dex": 14,
       "con": 11,
       "int": 10,
       "wis": 10,
@@ -58,7 +58,7 @@
     "armor": "Light",
     "weapon": {
       "id": "sling",
-      "damage": "1d4",
+      "damage": "1d6",
       "damageType": "bludgeoning",
       "stat": "dex",
       "finesse": false,
@@ -78,7 +78,7 @@
       "humanoid",
       "kobold"
     ],
-    "aiProfile": "archer",
+    "aiProfile": "roaming_slinger",
     "sprite": "characters.kobold_slinger"
   },
   {
@@ -134,7 +134,7 @@
     "level": 1,
     "move": 3,
     "scores": {
-      "str": 14,
+      "str": 16,
       "dex": 6,
       "con": 16,
       "int": 1,
@@ -145,7 +145,7 @@
     "ac": 10,
     "weapon": {
       "id": "pseudopod",
-      "damage": "1d4",
+      "damage": "1d8",
       "damageType": "acid",
       "stat": "str",
       "finesse": false,
@@ -209,5 +209,713 @@
     ],
     "aiProfile": "skirmisher",
     "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "wolf_roamer",
+    "name": "Wolf",
+    "level": 1,
+    "cr": "1/4",
+    "xp": 50,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": {
+      "1": 14,
+      "3": 26
+    },
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [
+      "wolf.knockdown"
+    ],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.wolf.wildshape"
+  },
+  {
+    "id": "boar_roamer",
+    "name": "Boar",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 1,
+    "move": 5,
+    "scores": {
+      "str": 15,
+      "dex": 11,
+      "con": 14,
+      "int": 2,
+      "wis": 9,
+      "cha": 5
+    },
+    "hp": 20,
+    "ac": 12,
+    "weapon": {
+      "id": "tusk",
+      "damage": "1d8",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "boar.gore_charge"
+    ],
+    "passives": [],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.boar.brown"
+  },
+  {
+    "id": "kobold_roamer_lone",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 12,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d4",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "wolf_roamer_lone",
+    "name": "Wolf",
+    "level": 1,
+    "cr": "1/4",
+    "xp": 50,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 12,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": {
+      "1": 14,
+      "3": 26
+    },
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d4",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.wolf.wildshape"
+  },
+  {
+    "id": "boar_roamer_lone",
+    "name": "Boar",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 1,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 11,
+      "con": 14,
+      "int": 2,
+      "wis": 9,
+      "cha": 5
+    },
+    "hp": 20,
+    "ac": 12,
+    "weapon": {
+      "id": "tusk",
+      "damage": "1d4",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.boar.brown"
+  },
+  {
+    "id": "boar_roamer_pair",
+    "name": "Boar",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 1,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 11,
+      "con": 14,
+      "int": 2,
+      "wis": 9,
+      "cha": 5
+    },
+    "hp": 20,
+    "ac": 12,
+    "weapon": {
+      "id": "tusk",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.boar.brown"
+  },
+  {
+    "id": "bandit_roamer_lone",
+    "name": "Roadside Tough",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 12,
+      "dex": 12,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "hp": 12,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "handaxe",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "bandit"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "characters.bandit"
+  },
+  {
+    "id": "hollow_bat_lone",
+    "name": "Hollow Bat",
+    "cr": "1/4",
+    "xp": 25,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 12,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 8,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d4",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "river_slime_lone",
+    "name": "River Slime",
+    "cr": "1",
+    "xp": 25,
+    "level": 1,
+    "move": 3,
+    "scores": {
+      "str": 12,
+      "dex": 6,
+      "con": 16,
+      "int": 1,
+      "wis": 6,
+      "cha": 1
+    },
+    "hp": 12,
+    "ac": 10,
+    "weapon": {
+      "id": "pseudopod",
+      "damage": "1d4",
+      "damageType": "acid",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "resist": [
+      "acid",
+      "slashing"
+    ],
+    "tags": [
+      "ooze"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.slime.green"
+  },
+  {
+    "id": "river_slime_pair",
+    "name": "River Slime",
+    "cr": "1",
+    "xp": 25,
+    "level": 1,
+    "move": 3,
+    "scores": {
+      "str": 14,
+      "dex": 6,
+      "con": 16,
+      "int": 1,
+      "wis": 6,
+      "cha": 1
+    },
+    "hp": 12,
+    "ac": 10,
+    "weapon": {
+      "id": "pseudopod",
+      "damage": "1d4",
+      "damageType": "acid",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "resist": [
+      "acid",
+      "slashing"
+    ],
+    "tags": [
+      "ooze"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.slime.green"
+  },
+  {
+    "id": "kobold_roamer_slinger_lone",
+    "name": "Kobold Scout Slinger",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 8,
+      "dex": 10,
+      "con": 11,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "hp": 8,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "sling",
+      "damage": "1d4",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": false,
+      "ranged": true,
+      "range": 6,
+      "reach": false,
+      "tags": [
+        "simple"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "roaming_slinger",
+    "sprite": "characters.kobold_slinger"
+  },
+  {
+    "id": "hollow_bat_swarm",
+    "name": "Hollow Bat",
+    "cr": "1/4",
+    "xp": 25,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 8,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d4",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "boar_roamer_sounder",
+    "name": "Boar",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 1,
+    "move": 5,
+    "scores": {
+      "str": 16,
+      "dex": 11,
+      "con": 14,
+      "int": 2,
+      "wis": 9,
+      "cha": 5
+    },
+    "hp": 20,
+    "ac": 12,
+    "weapon": {
+      "id": "tusk",
+      "damage": "1d10",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "boar.gore_charge"
+    ],
+    "passives": [],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.boar.brown"
+  },
+  {
+    "id": "kobold_roamer_patrol",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 18,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d8",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "kobold_roamer_slinger_patrol",
+    "name": "Kobold Scout Slinger",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 8,
+      "dex": 16,
+      "con": 11,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "hp": 8,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "sling",
+      "damage": "1d6",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": false,
+      "ranged": true,
+      "range": 6,
+      "reach": false,
+      "tags": [
+        "simple"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "roaming_slinger",
+    "sprite": "characters.kobold_slinger"
+  },
+  {
+    "id": "bandit_roamer_gang",
+    "name": "Roadside Tough",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 12,
+      "dex": 18,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "hp": 12,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "handaxe",
+      "damage": "1d8",
+      "damageType": "slashing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [
+      "bandit.dirty_strike"
+    ],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "bandit"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "characters.bandit"
+  },
+  {
+    "id": "kobold_roamer_diggers",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 16,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d8",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
   }
 ]

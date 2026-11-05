@@ -22,12 +22,20 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 7,
-        "2": 11,
-        "3": 17,
-        "4": 22,
-        "5": 28,
-        "6": 34
+        "1": 29,
+        "2": 24,
+        "3": 48,
+        "4": 68,
+        "5": 85,
+        "6": 102
+      },
+      "unitByParty": {
+        "1": "kobold_roamer_lone",
+        "2": "kobold_roamer",
+        "3": "kobold_roamer",
+        "4": "kobold_roamer_diggers",
+        "5": "kobold_roamer_diggers",
+        "6": "kobold_roamer_diggers"
       }
     }
   ],

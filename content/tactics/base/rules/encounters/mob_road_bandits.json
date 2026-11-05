@@ -22,12 +22,20 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 12,
-        "2": 19,
-        "3": 29,
-        "4": 38,
-        "5": 48,
-        "6": 58
+        "1": 32,
+        "2": 24,
+        "3": 46,
+        "4": 65,
+        "5": 81,
+        "6": 98
+      },
+      "unitByParty": {
+        "1": "bandit_roamer_lone",
+        "2": "bandit_roamer",
+        "3": "bandit_roamer",
+        "4": "bandit_roamer_gang",
+        "5": "bandit_roamer_gang",
+        "6": "bandit_roamer_gang"
       }
     }
   ],

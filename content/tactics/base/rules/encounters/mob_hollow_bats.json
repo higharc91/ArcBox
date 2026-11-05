@@ -22,12 +22,20 @@
         "6": 3
       },
       "hpByParty": {
-        "1": 8,
-        "2": 13,
-        "3": 19,
-        "4": 26,
-        "5": 32,
-        "6": 38
+        "1": 10,
+        "2": 14,
+        "3": 27,
+        "4": 38,
+        "5": 48,
+        "6": 57
+      },
+      "unitByParty": {
+        "1": "hollow_bat_lone",
+        "2": "hollow_bat",
+        "3": "hollow_bat",
+        "4": "hollow_bat_swarm",
+        "5": "hollow_bat_swarm",
+        "6": "hollow_bat_swarm"
       }
     }
   ],

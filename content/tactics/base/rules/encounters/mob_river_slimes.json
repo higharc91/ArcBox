@@ -22,12 +22,20 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 12,
-        "2": 19,
-        "3": 29,
-        "4": 38,
-        "5": 48,
-        "6": 58
+        "1": 28,
+        "2": 25,
+        "3": 45,
+        "4": 70,
+        "5": 88,
+        "6": 105
+      },
+      "unitByParty": {
+        "1": "river_slime_lone",
+        "2": "river_slime_pair",
+        "3": "river_slime",
+        "4": "river_slime",
+        "5": "river_slime",
+        "6": "river_slime"
       }
     }
   ],

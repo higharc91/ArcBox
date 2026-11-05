@@ -18,6 +18,16 @@ public sealed class SimCollection;
 public sealed class SimSmokeTests
 {
     [Fact]
+    public void A_roaming_slinger_repositions_instead_of_stalling_behind_cover()
+    {
+        var config = new SimConfig(["mob_kobold_scouts"], [1], 6, [1], 2, Difficulty.Normal);
+        var battle = Assert.Single(SimRunner.Run(config, BasePackTests.Rules),
+            b => b.Seed == 2 && b.Classes.SequenceEqual(["cleric"]));
+        Assert.False(battle.Capped);
+        Assert.InRange(battle.Rounds, 1, 15);
+    }
+
+    [Fact]
     public void Every_encounter_ends_with_3_seeds()
     {
         var rules = BasePackTests.Rules;

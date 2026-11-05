@@ -1,6 +1,6 @@
 # Visible overworld mobs (#79)
 
-Status: implemented on `overworld-mobs` from current main, including merged #74 and #77; implementation and verification complete. No PR until requested.
+Status: implementation and fixed-enemy balance pass complete on `overworld-mobs`. No PR until requested.
 
 ## USER DECISIONs
 
@@ -9,7 +9,7 @@ Status: implemented on `overworld-mobs` from current main, including merged #74 
 - Default XP is 25% of region story-fight XP (roughly 60–75 in Chapter I); gold is 5–15 per group, distributed among present players.
 - Five groups in Ashen Ford: wolves, boars, kobold scouts, river slimes, and bandits gated by `ch1_ford_settled`. Two groups in Cinder Hollow: bats and kobolds. Preserve the safe route from the Nest to the campfire.
 - Existing monsters first; lore-consistent variants are allowed if balance needs them. No new named characters.
-- Sim each encounter at levels 1–3 and party sizes 1–4. Target 85–95% wins and 4–8 rounds. Report outcomes and full-sweep XP against chapter-end thresholds; do not silently change the owner's balance target.
+- **Updated owner decision:** keep roaming enemies fixed so leveling up makes fights easier. Tune the level-1 arrival to 85–95% wins and 4–8 rounds for party sizes 1–4. Sim levels 2–3 as progression checks, reporting their easier results rather than automatically scaling enemies. Keep the original all-level report as historical evidence.
 
 ## Implementation contracts
 
@@ -36,3 +36,12 @@ The route check reserves the whole roaming patch plus cardinal contact distance,
 The grey wolf coat shares the existing wolf sound family. TV rings use art-pixel radii, matching the normal unit renderer. The two cave arenas use Cinder Hollow's darkness and room tone. Dynamic extraction of battle maps and Chapter II content remain outside this issue.
 
 Roaming stamps retain the region's natural terrain art, tint, decals and edge blending in both exploration and the in-place battle stage. They still use the same explicit map tiles, props, collision and stage bounds. This removes the rectangular arena-colour patches without repainting the world or changing the story ford's authored battle art. Renderer regression checks compare staged terrain faces with the surrounding world's faces.
+
+
+## Fixed-enemy balance confirmation
+
+The owner explicitly chose fixed enemies so leveling up helps. The [follow-up report](../reports/2026-11-04-overworld-mobs/balance-fixed-enemies.md) covers 24,150 Normal-difficulty battles. All 28 level-1 arrival cells meet 85–95% wins and 4–8 mean rounds, compared with 6/28 in the historical level-1 baseline. Arrival wins span 87.3–95.0%, with durations of 4.10–7.61 rounds. Pooled wins rise from 91.79% at level 1 to 99.57% at level 2 and 99.95% at level 3. Enemy stats remain identical as heroes level up; party-size profiles still support 1–6 members.
+
+Roaming-only profiles reduce solo burst damage and add enough endurance to avoid one- or two-turn fights. The new `roaming_slinger` combat profile moves out of blocked sightlines without changing existing AI profiles. Original story and wildshape monsters, map layouts, art, rewards, and XP thresholds are unchanged. Seven of 8,050 arrival autoplay fights reached the 30-round cap and count as losses; levels 2–3 had none. The report preserves those caveats and the standard role diagnostics.
+
+Validation: 1,287 logic tests, 725 game tests and 135 sound checks pass; zero-warning builds. The balanced live wolf flow passes wandering, phone reconnect, server restart, ambush, victory, reward and defeated-group persistence.

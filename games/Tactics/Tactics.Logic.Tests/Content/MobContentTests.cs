@@ -48,4 +48,26 @@ public sealed class MobContentTests
         var errors = Assert.Throws<ContentException>(() => Load(Valid.Replace(before, after))).Errors;
         Assert.Contains(errors, e => e.Pointer.EndsWith(pointer, StringComparison.Ordinal));
     }
+    [Fact]
+    public void Gaining_levels_does_not_raise_roaming_enemy_stats()
+    {
+        var rules = BasePackTests.Rules;
+        foreach (var mob in rules.Mobs.Values.SelectMany(m => m))
+            for (var size = 1; size <= 6; size++)
+            {
+                UnitSheet[] Enemies(int level) => [.. Encounters.Setup(mob.Encounter,
+                    [.. Enumerable.Range(0, size).Select(i => new PartyMember(new UnitId("hero" + i),
+                        SheetBuilder.DefaultCharacter("Hero " + i, "human", "fighter", null, level, rules), new AiControlled("companion")))],
+                    Difficulty.Normal, rules).Units.Where(u => u.Sheet.Side == Side.Enemy).Select(u => u.Sheet)];
+                var arrival = Enemies(1);
+                foreach (var level in new[] { 2, 3 })
+                {
+                    var later = Enemies(level);
+                    Assert.Equal(System.Text.Json.JsonSerializer.Serialize(arrival, ArcBox.Sdk.ArcJson.Options),
+                        System.Text.Json.JsonSerializer.Serialize(later, ArcBox.Sdk.ArcJson.Options));
+                    Assert.All(later, enemy => Assert.Equal(1, enemy.Level));
+                }
+            }
+    }
+
 }

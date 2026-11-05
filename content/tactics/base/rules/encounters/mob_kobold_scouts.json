@@ -22,12 +22,20 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 7,
-        "2": 11,
-        "3": 17,
-        "4": 22,
-        "5": 28,
-        "6": 34
+        "1": 8,
+        "2": 12,
+        "3": 24,
+        "4": 34,
+        "5": 42,
+        "6": 51
+      },
+      "unitByParty": {
+        "1": "kobold_roamer_lone",
+        "2": "kobold_roamer",
+        "3": "kobold_roamer",
+        "4": "kobold_roamer_patrol",
+        "5": "kobold_roamer_patrol",
+        "6": "kobold_roamer_patrol"
       }
     },
     {
@@ -44,12 +52,20 @@
         "6": 1
       },
       "hpByParty": {
-        "1": 8,
-        "2": 13,
-        "3": 19,
-        "4": 26,
-        "5": 32,
-        "6": 38
+        "1": 10,
+        "2": 15,
+        "3": 26,
+        "4": 34,
+        "5": 42,
+        "6": 51
+      },
+      "unitByParty": {
+        "1": "kobold_roamer_slinger_lone",
+        "2": "kobold_roamer_slinger",
+        "3": "kobold_roamer_slinger",
+        "4": "kobold_roamer_slinger_patrol",
+        "5": "kobold_roamer_slinger_patrol",
+        "6": "kobold_roamer_slinger_patrol"
       }
     }
   ],

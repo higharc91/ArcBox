@@ -9,7 +9,7 @@
   },
   "enemies": [
     {
-      "unit": "wolf",
+      "unit": "wolf_roamer",
       "zone": "enemy_spawn",
       "count": 2,
       "level": 1,
@@ -22,14 +22,22 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 12,
+        "1": 25,
         "2": 22,
-        "3": 34,
-        "4": 45,
-        "5": 56,
-        "6": 67
+        "3": 36,
+        "4": 64,
+        "5": 80,
+        "6": 96
       },
-      "variant": "grey"
+      "variant": "grey",
+      "unitByParty": {
+        "1": "wolf_roamer_lone",
+        "2": "wolf_roamer",
+        "3": "wolf_roamer",
+        "4": "wolf_roamer",
+        "5": "wolf_roamer",
+        "6": "wolf_roamer"
+      }
     }
   ],
   "xp": 75,

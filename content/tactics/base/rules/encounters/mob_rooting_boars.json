@@ -9,7 +9,7 @@
   },
   "enemies": [
     {
-      "unit": "boar",
+      "unit": "boar_roamer",
       "zone": "enemy_spawn",
       "count": 2,
       "level": 1,
@@ -22,12 +22,20 @@
         "6": 2
       },
       "hpByParty": {
-        "1": 17,
-        "2": 32,
+        "1": 30,
+        "2": 34,
         "3": 48,
-        "4": 64,
-        "5": 80,
-        "6": 96
+        "4": 70,
+        "5": 88,
+        "6": 105
+      },
+      "unitByParty": {
+        "1": "boar_roamer_lone",
+        "2": "boar_roamer_pair",
+        "3": "boar_roamer",
+        "4": "boar_roamer_sounder",
+        "5": "boar_roamer_sounder",
+        "6": "boar_roamer_sounder"
       }
     }
   ],
