@@ -53,6 +53,7 @@ public sealed partial class TacticsGame
         var state = KnownQuests().FirstOrDefault(q => q.Def.Id == quest);
         switch (action)
         {
+            case "keepOpen" when QuestLogOpen: return;
             case "open":
                 Halt();
                 _questLogLeader = _lead;

@@ -23,7 +23,7 @@ public sealed class BasePackTests
     {
         var region = Rules.RegionFor("ashen_ford")!.Def;
         Assert.Equal(1, region.Chapter);
-        Assert.Equal("river_crossing", Assert.Single(region.Stamps).Map);
+        Assert.Equal(["mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "river_crossing"], region.Stamps.Select(s => s.Map).Order(StringComparer.Ordinal));
     }
 
     [Fact]
@@ -49,18 +49,18 @@ public sealed class BasePackTests
         Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [
-            "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
+            "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bandit_roamer", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
-            "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
-            "ivo_rime", "kobold", "kobold_foreman", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
-            "orc_brute", "rime_spider", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
+            "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hollow_bat", "hound", "imp",
+            "ivo_rime", "kobold", "kobold_foreman", "kobold_roamer", "kobold_roamer_slinger", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
+            "orc_brute", "rime_spider", "river_slime", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
             "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "river_crossing", "warlord_bridge"],
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "river_crossing", "warlord_bridge"],
             pack.Maps.Keys);
-        Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "rime_tower",
+        Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "rime_tower",
             "river_crossing", "warlord_bridge"], pack.Encounters.Keys);
         Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
         Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);

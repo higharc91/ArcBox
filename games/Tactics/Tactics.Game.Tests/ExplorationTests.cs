@@ -45,7 +45,7 @@ public sealed class ExplorationTests
         var files = node["files"]!.AsArray();
         // A region's things go with it: a things file for a region that isn't loaded is an error.
         foreach (var file in files.Where(f => f!.GetValue<string>() is var name
-                     && (name.StartsWith("world/", StringComparison.Ordinal) || name.StartsWith("interactables/", StringComparison.Ordinal) || name.StartsWith("shops/", StringComparison.Ordinal))).ToArray())
+                     && (name.StartsWith("world/", StringComparison.Ordinal) || name.StartsWith("interactables/", StringComparison.Ordinal) || name.StartsWith("shops/", StringComparison.Ordinal) || name.StartsWith("mobs/", StringComparison.Ordinal))).ToArray())
             files.Remove(file);
         File.WriteAllText(manifest, node.ToJsonString());
         Directory.Delete(Path.Combine(rules, "world"), recursive: true);

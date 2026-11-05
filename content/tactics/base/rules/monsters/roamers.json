@@ -1,0 +1,213 @@
+[
+  {
+    "id": "kobold_roamer",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 14,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d6",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "coward",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "kobold_roamer_slinger",
+    "name": "Kobold Scout Slinger",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 8,
+      "dex": 12,
+      "con": 11,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "hp": 8,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "sling",
+      "damage": "1d4",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": false,
+      "ranged": true,
+      "range": 6,
+      "reach": false,
+      "tags": [
+        "simple"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "archer",
+    "sprite": "characters.kobold_slinger"
+  },
+  {
+    "id": "bandit_roamer",
+    "name": "Roadside Tough",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 12,
+      "dex": 14,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "hp": 12,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "handaxe",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [
+      "bandit.dirty_strike"
+    ],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "bandit"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "characters.bandit"
+  },
+  {
+    "id": "river_slime",
+    "name": "River Slime",
+    "cr": "1",
+    "xp": 25,
+    "level": 1,
+    "move": 3,
+    "scores": {
+      "str": 14,
+      "dex": 6,
+      "con": 16,
+      "int": 1,
+      "wis": 6,
+      "cha": 1
+    },
+    "hp": 12,
+    "ac": 10,
+    "weapon": {
+      "id": "pseudopod",
+      "damage": "1d4",
+      "damageType": "acid",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "resist": [
+      "acid",
+      "slashing"
+    ],
+    "tags": [
+      "ooze"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.slime.green"
+  },
+  {
+    "id": "hollow_bat",
+    "name": "Hollow Bat",
+    "cr": "1/4",
+    "xp": 25,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 14,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 8,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d4",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  }
+]

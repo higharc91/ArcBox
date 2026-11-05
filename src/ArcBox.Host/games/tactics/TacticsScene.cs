@@ -141,6 +141,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, a <c>WALKAT</c> line with where the party is shown, and how smooth the walking was.</summary>
     public bool LogWalks { get; set; }
+    private string? _mobLog;
 
     /// <summary><c>--story-log</c>: print a <c>STORY &lt;seq&gt; &lt;line&gt; said|shown</c> line for each line of a scene the TV takes.</summary>
     public bool LogStory { get; set; }
@@ -533,6 +534,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _audio.Play(sound, ThingSounds.Db);
         }
+        if (frame.MobCry is { } cry) _audio.Play(cry, -8);
         if (frame.Footstep is { } step)
         {
             _audio.Play(step, WorldTuning.FootstepDb);
@@ -1021,6 +1023,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             CloseWorld();
         }
         _explore = explore;
+        if (LogWalks)
+        {
+            var mobs = JsonSerializer.Serialize(explore.Mobs ?? [], ArcJson.Options);
+            if (mobs != _mobLog) { GD.Print("MOBS " + mobs); _mobLog = mobs; }
+        }
         if (_world is null)
         {
             OpenWorld(root, explore.Region);

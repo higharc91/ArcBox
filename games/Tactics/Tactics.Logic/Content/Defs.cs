@@ -394,7 +394,8 @@ public sealed record ArmorDef(string Id, string Name, ArmorKind Kind, int BaseAc
 /// A prop as written in a map file. <see cref="Cover"/> is <c>"none"</c>, <c>"half"</c> or <c>"three_quarters"</c>
 /// (total cover comes only from line of sight, never from content).
 /// </summary>
-public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none");
+public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none",
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null);
 
 /// <summary>
 /// A battle map as written in <c>maps/&lt;id&gt;.json</c> (spec §4.8): <see cref="Size"/> is <c>[w, h]</c> and
@@ -408,7 +409,7 @@ public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, I
 {
     /// <summary>The cover names content may use, by name.</summary>
     public static ImmutableSortedDictionary<string, Cover> CoverNames { get; } =
-        Ordinal.Map(("none", Cover.None), ("half", Cover.Half), ("three_quarters", Cover.ThreeQuarters));
+        Ordinal.Map(("none", Cover.None), ("half", Cover.Half), ("three_quarters", Cover.ThreeQuarters), ("full", Cover.Total));
 
     /// <summary>
     /// The engine's map. Throws <see cref="FormatException"/> or <see cref="ArgumentException"/> on bad tiles, size or
@@ -419,7 +420,7 @@ public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, I
         if (Size.Length != 2)
             throw new ArgumentException($"Map '{Id}' needs a size of [w, h].");
         var props = Props.Select(p => new PropPlacement(p.Id, p.At, p.Blocks,
-                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'.")))
+                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'."), p.Variant))
             .ToImmutableArray();
         return BattleMap.FromBytes(Id, Size[0], Size[1], Convert.FromBase64String(Tiles), Materials, props, Zones);
     }

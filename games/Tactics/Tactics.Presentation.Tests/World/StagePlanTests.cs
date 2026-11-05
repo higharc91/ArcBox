@@ -31,6 +31,32 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         _ => throw new InvalidOperationException(),
     };
 
+    [Theory]
+    [InlineData("ashen_ford", "mob_kobold_scouts")]
+    [InlineData("ashen_ford", "mob_river_slimes")]
+    [InlineData("cinder_hollow", "mob_hollow_kobolds")]
+    public void Roaming_arenas_keep_world_terrain_art_and_the_stage_matches_it(string regionId, string arena)
+    {
+        var ground = DemoRegion.FromPack(Pack.Root, regionId);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")], Pack.Manifests);
+        var map = rules.Maps[arena];
+        var region = rules.RegionFor(regionId)!;
+        var stage = BattleStage.Of(region, map)!.Value;
+        var rect = new TileRect(stage.Origin.X, stage.Origin.Y, stage.Width, stage.Depth);
+        Assert.DoesNotContain(ground.Map.StampedTiles, rect.Contains);
+        Assert.Equal(rules.GroundFor(regionId)!.Map.StampedTiles, ground.Map.StampedTiles);
+        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, rect, grid: true, world: true)
+            .Shifted(-BoardFit.StageOffset(stage));
+        var staged = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+        foreach (var face in world.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Top))
+        {
+            var actual = Assert.Single(staged.Items.OfType<Face>(), f => f.Tile == face.Tile && f.Kind == FaceKind.Top);
+            Assert.Equal(Whole(face), Whole(actual));
+        }
+        if (regionId == "ashen_ford")
+            Assert.NotEmpty(ground.Map.StampedTiles); // The story ford retains its deliberately authored battle art.
+    }
+
     private static Tile Local(BattleStage stage, Tile world) => stage.ToBattle(world);
 
     private static BattleView Battle(params UnitView[] units) => new("test", "test", 1, [], null, [.. units], [], null);
@@ -379,7 +405,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // sits near 0.8, and under the solution's parallel load both grow tenfold (local-windows-checks.md, problem 1). What keeps the rebuild
         // quick is that it reads a window round what's drawn, not the region, and that is asserted on the work itself, the same on any machine.
         var region = ground.Map.Width * ground.Map.Height;
-        var most = (plan.Drawn.W + 5) * (plan.Drawn.H + 5);     // a tile round, and up to 3 more to start on a whole texture
+        var most = (plan.Drawn.W + 9) * (plan.Drawn.H + 9);     // a tile round, and up to 7 more to align an 8-tile regional texture
         Assert.True(plan.Read <= most, $"a stage rebuild read {plan.Read} tiles, against at most {most} round what it draws");
         Assert.True(plan.Read * 10 < region, $"a stage rebuild read {plan.Read} of the region's {region} tiles");
     }

@@ -290,6 +290,7 @@ public sealed partial class TacticsGame
     private void LeaveExploration()
     {
         _ctx.CancelTimer(MobTimer);
+        _ctx.CancelTimer(MobAmbushTimer);
         Halt();
         _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
         Unnote(_leadNote);                 // the walk's own notes would mean nothing over a battle
@@ -531,6 +532,7 @@ public sealed partial class TacticsGame
         ReconsiderLeader();
         if (!connected)
             SaveWorld();
+        ArmMobs();
     }
 
     /// <summary>

@@ -18,10 +18,10 @@
       "id": "hollow_supply_crate",
       "kind": "crate",
       "at": [
-        30,
-        7
+        35,
+        18
       ],
-      "name": "miners’ supply crate",
+      "name": "miners\u2019 supply crate",
       "loot": [
         {
           "item": "potion_of_healing",
@@ -36,7 +36,7 @@
         45,
         20
       ],
-      "name": "foreman’s hidden cache",
+      "name": "foreman\u2019s hidden cache",
       "hidden": 12,
       "loot": [
         {
@@ -55,7 +55,7 @@
         25,
         34
       ],
-      "name": "fisher’s boy’s satchel",
+      "name": "fisher\u2019s boy\u2019s satchel",
       "scene": "ashmaw_satchel",
       "text": [
         "A small satchel with a scrap of charcoal writing."
@@ -77,7 +77,7 @@
         10,
         33
       ],
-      "name": "Ashmaw’s ember-claw",
+      "name": "Ashmaw\u2019s ember-claw",
       "requires": [
         "sq_ashmaw_slain"
       ],
@@ -88,7 +88,7 @@
         "sq_ashmaw_claw"
       ],
       "text": [
-        "Ashmaw’s claw is warm against your palm. Dagna will know it."
+        "Ashmaw\u2019s claw is warm against your palm. Dagna will know it."
       ]
     }
   ]

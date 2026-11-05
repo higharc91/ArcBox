@@ -1,6 +1,6 @@
 # Visible overworld mobs (#79)
 
-Status: implementation started on `overworld-mobs` from current main, including merged #74 and #77. No PR until requested.
+Status: implemented on `overworld-mobs` from current main, including merged #74 and #77; implementation and verification complete. No PR until requested.
 
 ## USER DECISIONs
 
@@ -24,3 +24,15 @@ TV uses depth-sorted creature units, idle/walk clips, subtle hostile rings, exis
 ## Verification
 
 Determinism/restart, both contact directions, follower exclusion, paused movement, victories/losses/chapter reset, invalid content, unchanged no-mob fixtures and packet budgets. Bot coverage includes defeating wolves, reconnect/restart, and Chapter I force/parley completion. Capture TV wandering, contact and battle. Complete all relevant suites and document existing environment limitations separately.
+
+## Authored implementation
+
+Seven groups and their stamped maps are listed in the [review report](../reports/2026-11-04-overworld-mobs/README.md). Each pays 75 XP per member under the existing battle convention, 10 gold divided among present members, and no loot. A full seven-group sweep adds 525 XP per member. This can raise an otherwise level-1 chapter-end party to level 2 when combined with all Chapter I side quests; the report gives both story branches against the current 1,000-XP threshold.
+
+`MobActors` stores each actor's position, cursor and original seed. `MobAmbush` saves the one-second contact transition; reconnecting cannot cancel or duplicate it. `MobChapter` separates a genuine chapter advance from revisiting a region. These fields and `MobsBeaten` are optional. Empty mob/danger view fields remain absent. No fleeing action was added.
+
+The route check reserves the whole roaming patch plus cardinal contact distance, including currently gated groups, then compares reachability with the unobstructed world. This deliberately preserves safe routes even at the worst possible roaming position. Named arrival spawns, ordinary spawns, beat markers, NPC home/walk tiles, interactables and road materials are protected. Arena party spawns must connect to a walkable edge. Existing map/region checks also validate each spawn and stamped tile.
+
+The grey wolf coat shares the existing wolf sound family. TV rings use art-pixel radii, matching the normal unit renderer. The two cave arenas use Cinder Hollow's darkness and room tone. Dynamic extraction of battle maps and Chapter II content remain outside this issue.
+
+Roaming stamps retain the region's natural terrain art, tint, decals and edge blending in both exploration and the in-place battle stage. They still use the same explicit map tiles, props, collision and stage bounds. This removes the rectangular arena-colour patches without repainting the world or changing the story ford's authored battle art. Renderer regression checks compare staged terrain faces with the surrounding world's faces.

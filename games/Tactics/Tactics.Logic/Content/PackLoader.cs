@@ -167,7 +167,7 @@ internal static class PackLoader
         v.CheckRegions(regions.Values, battleMaps, things.Values, injuries.Keys.ToHashSet(StringComparer.Ordinal));
 
         v.CheckShops(shops.Values, regions.Values, battleMaps, things.Values, items.Values);
-        v.CheckMobs(mobs.Values, regions.Values, battleMaps, encounters.Values.ToDictionary(e => e.Id, e => e.Def, StringComparer.Ordinal));
+        v.CheckMobs(mobs.Values, regions.Values, battleMaps, encounters.Values.ToDictionary(e => e.Id, e => e.Def, StringComparer.Ordinal), things.Values);
         if (v.Errors.Count > 0)
             throw new ContentException([.. v.Errors]);
 

@@ -195,19 +195,20 @@ SHOP=${ARCBOX_SHOP:-}
 DECISIONS=${ARCBOX_DECISIONS:-}
 STAGE=${ARCBOX_STAGE:-}
 CHAPTER=${ARCBOX_CHAPTER:-}
+MOBS=${ARCBOX_MOBS:-}
 CAMP=${ARCBOX_CAMP:-}
 QUESTS=${ARCBOX_QUESTS:-}
 SILENT=${ARCBOX_SILENT:-}
 BRANCH=${ARCBOX_BRANCH:-force}
 # Chapter automation uses Story difficulty and a reproducible battle seed; balance belongs in the simulator.
-DIFFICULTY=${ARCBOX_DIFFICULTY:-$([[ "$CHAPTER" == "1" ]] && echo Story || echo Normal)}
-BATTLE_SEED_ENV=$([[ "$CHAPTER" == "1" ]] && echo Tactics__BattleSeed=76 || true)
+DIFFICULTY=${ARCBOX_DIFFICULTY:-$([[ "$CHAPTER" == "1" || "$MOBS" == "1" ]] && echo Story || echo Normal)}
+BATTLE_SEED_ENV=$([[ "$CHAPTER" == "1" || "$MOBS" == "1" ]] && echo Tactics__BattleSeed=76 || true)
 LINE_S=${ARCBOX_LINE:-2.5}
 AT_LINE=${ARCBOX_AT_LINE:-3}
 RESTART_SCENE=${ARCBOX_RESTART_SCENE:-ch1_maud}
 RECONNECT_SCENE=${ARCBOX_RECONNECT_SCENE:-ch1_docks}
 DROP_SIGNALS=${ARCBOX_DROP_SIGNALS:-}
-GAME=${ARCBOX_GAME:-$([[ "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
+GAME=${ARCBOX_GAME:-$([[ "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" || "$MOBS" == "1" ]] && echo tactics || echo redline)}
 PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
@@ -322,6 +323,7 @@ SERVER_PID=""
 XVFB_PID=""
 TV_PID=""
 PHONES_PID=""
+VIDEO_PID=""
 signal_pid() {   # signal_pid <TERM|KILL> <pid>: Windows has no TERM for a program that isn't Git Bash's own, so there it's taskkill, with its children
   if [[ -n "$WINDOWS" ]]; then
     local winpid
@@ -377,6 +379,7 @@ cleanup() {
     stop_pid "$PHONES_PID" "phones"
   fi
   stop_pid "${SHOTS_PID:-}" "shots"
+  stop_pid "${VIDEO_PID:-}" "video recorder"
   local old
   for old in $OLD_TVS; do stop_pid "$old" "old TV"; done
   OLD_TVS=""
@@ -491,7 +494,7 @@ log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=$([[ "$CHAPTER" == "1" ]] && echo 7200 || echo 1800)
-  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$SHOP" == "1" || "$DECISIONS" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" || "$MOBS" == "1" ]] && echo --walk-log) \
     $([[ "$CHAPTER" == "1" || "$SHOP" == "1" || "$DECISIONS" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
@@ -506,6 +509,48 @@ for _ in $(seq 1 360); do
 done
 [[ -n "$CODE" ]] || { log "no ROOM line from the TV after 180 s"; tail -30 "$OUT/tv.log"; exit 1; }
 log "TV opened room $CODE"
+
+# ---- Visible roaming mobs: real TV, phones, reconnect and optional server restart.
+if [[ "$GAME" == "tactics" && "$MOBS" == "1" ]]; then
+  GO="$OUT/go"
+  mkdir -p "$GO"
+  if [[ -z "$WINDOWS" ]]; then
+  ffmpeg -nostdin -hide_banner -loglevel warning -y -f x11grab -video_size "$RES" -framerate 12 -i ":$DISPLAY_NUM" -an -c:v libx264 -threads 1 -preset ultrafast -crf 23 -pix_fmt yuv420p "$OUT/mobs.mp4" > "$OUT/video.log" 2>&1 &
+  VIDEO_PID=$!
+  fi
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --mobs --fight --hold=1 --line=0.1 --tv-log="$OUT/tv.log" --go="$GO" --timeout=900 > "$OUT/phones.log" 2>&1 &
+  PHONES_PID=$!
+  for _ in $(seq 1 900); do
+    grep -q 'PAUSE mobs-visible' "$OUT/phones.log" && break
+    kill -0 "$PHONES_PID" 2>/dev/null || { cat "$OUT/phones.log"; exit 1; }
+    sleep 1
+  done
+  grep -q 'PAUSE mobs-visible' "$OUT/phones.log"
+  if [[ "$RESTART" == "1" ]]; then
+    log "mobs: restarting with living wolves on screen and the journal open"
+    stop_server_for_restart
+    start_server "$OUT/server-restarted.log"
+    sleep 3
+  fi
+  touch "$GO/mobs-visible"
+  wait "$PHONES_PID"
+  PHONES_PID=""
+  grep -q 'MOBS OK' "$OUT/phones.log"
+  stop_pid "$VIDEO_PID" "video recorder"
+  VIDEO_PID=""
+  # Match the other TV flows: headless Linux may have no ALSA/Pulse device.
+  ERRORS=$(awk '
+    pending != "" { if (tolower($0) !~ /^ *at: .*(alsa|audio|pulse)/) print pending; pending = "" }
+    /^ *\[[0-9]+\] / { next }
+    tolower($0) ~ /exception|error/ && tolower($0) !~ /alsa|audio|pulse/ { pending = $0 }
+    END { if (pending != "") print pending }' "$OUT/tv.log")
+  if [[ -n "$ERRORS" ]]; then
+    echo "$ERRORS"
+    log "FAILED: TV error"; exit 1
+  fi
+  log "OK: mobs wander, reconnect/restart, ambush, win, reward and disappear"
+  exit 0
+fi
 
 # ---- Shop: real bot phones walk to the herbalist, buy, retry, sell and leave.
 if [[ "$GAME" == "tactics" && "$SHOP" == "1" ]]; then

@@ -983,6 +983,7 @@ public sealed partial class TacticsGame
         if (all.Length != world.Flags.Length)
         {
             _doc = _doc with { World = world with { Flags = all } };
+            if (_phase == TacticsPhase.Exploration) ArmMobs();
         }
     }
 

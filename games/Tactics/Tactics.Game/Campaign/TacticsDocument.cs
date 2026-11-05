@@ -200,7 +200,8 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> MobsBeaten = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedDictionary<string, MobActorSave>? MobActors = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MobChapter = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MobChapter = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? MobAmbush = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;

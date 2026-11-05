@@ -124,7 +124,7 @@ public sealed class ValidationTests
             new(map, "/tiles", "Tile (1, 0) uses material 4, but the map has 2 materials."),
             new(map, "/tiles", "Tile (2, 1) has undefined flag bits 0x40."),
             new(map, "/props/0/at", "Prop 'crate' at (5, 0) is outside the 3x2 map."),
-            new(map, "/props/0/cover", "Cover 'total' isn't allowed in content (use \"none\", \"half\" or \"three_quarters\")."),
+            new(map, "/props/0/cover", "Cover 'total' isn't allowed in content (use \"none\", \"half\", \"three_quarters\" or \"full\")."),
             new(map, "/zones/spawn/1", "Tile (3, 1) is outside the 3x2 map."),
             new(monk, "/features", "Class 'monk' has no features at level 7."),
             new(monk, "/features/1/0/passive", "Unknown passive 'monk.ki'."),

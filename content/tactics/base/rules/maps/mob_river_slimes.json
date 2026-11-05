@@ -1,0 +1,160 @@
+{
+  "id": "mob_river_slimes",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "AgAAAgAAAgAAAgAAAgAAARMDARMDARMDARMRARMRARMRARMRARMRARMRAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMDARMRARMRARMRARMRARMRAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMDARMRARMRARMRARMRARMRAgAAAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMRARMRARMRARMRARMRAgAAAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMDARMRARMRARMRARMRAgUAAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMDARMRARMRARMRARMRAgUAAgAAAgAAAgAAAgAAAgAAAgAAAgAAARMDARMDARMRARMRARMRARMRAgUAAgUAAgUAAgAAAgAAAgAAAgAAAgAAARMDARMDARMRARMRARMRARMRAgUAAgUAAgUAAgUAAgUAAgUAAgUAAgUAARMDARMDARMRARMRARMRARMRAgUAAgUAAgUAAgUAAgUAAgUAAgUAAgUAARMDARMDARMRARMRARMRARMRAg8AAgUAAgUAAgUAAgUAAgUAAgUAAgUAARMDARMDARMRARMRARMRARMRAg8AAgUAAgUAAgUAAgUAAgUAAgUAAgUAARMDARMDARMDARMRARMRARMR",
+  "materials": [
+    "ash/grey",
+    "cave_floor/cool",
+    "cobble/grey",
+    "cobble/warm",
+    "dirt/brown",
+    "dirt/dark",
+    "dirt_ford/wet",
+    "flagstone/grey",
+    "ford_water/clear",
+    "forest_needles/pine",
+    "grass/autumn",
+    "grass/dry",
+    "grass/frost",
+    "grass_ford/autumn",
+    "mine_gravel/brown",
+    "path/packed",
+    "planks/dark",
+    "planks/oak",
+    "rock_ford/bank",
+    "water/clear"
+  ],
+  "props": [
+    {
+      "id": "reeds",
+      "at": [
+        4,
+        0
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "swamp"
+    },
+    {
+      "id": "reeds",
+      "at": [
+        5,
+        1
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "swamp"
+    },
+    {
+      "id": "reeds",
+      "at": [
+        6,
+        4
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "swamp"
+    },
+    {
+      "id": "reeds",
+      "at": [
+        7,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "swamp"
+    },
+    {
+      "id": "reeds",
+      "at": [
+        7,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "swamp"
+    }
+  ],
+  "zones": {
+    "party_spawn": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "enemy_spawn": [
+      [
+        7,
+        5
+      ],
+      [
+        7,
+        4
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        8,
+        5
+      ],
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        9,
+        5
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        8,
+        6
+      ]
+    ]
+  }
+}

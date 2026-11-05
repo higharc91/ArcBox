@@ -1,0 +1,49 @@
+{
+  "build": {
+    "solution": "passed",
+    "warnings": 0,
+    "errors": 0
+  },
+  "dotnet": {
+    "solutionCasesBeforeFinalRendererCases": 6357,
+    "solutionCasesPassedOnFirstFinalRun": 6356,
+    "correctedHarnessFailure": "Live-server rate-limit fixture must allow its ordinary start route; quiet routes remain required for packet fanout fixtures.",
+    "fullServerSuiteRerun": {
+      "passed": 425,
+      "failed": 0
+    },
+    "stageRendererRerun": {
+      "passed": 65,
+      "failed": 0,
+      "newCases": 3
+    },
+    "otherSolutionModules": "all passed"
+  },
+  "phone": {
+    "passed": 517,
+    "failed": 0,
+    "viewports": 6,
+    "screens": 2
+  },
+  "simulation": {
+    "difficulty": "Normal",
+    "battles": 9660,
+    "wins": 9482,
+    "roundCapLosses": 15,
+    "meanRounds": 4.4,
+    "cellsWithinBothTargets": 7,
+    "cells": 84
+  },
+  "live": {
+    "wolfWanderReconnectRestartAmbushVictoryRemoval": "passed",
+    "wolfRewards": "75 XP per member, 10 group gold",
+    "difficulty": "Story",
+    "seed": 76,
+    "chapterForce": "passed",
+    "chapterParley": "passed"
+  },
+  "sceneExports": {
+    "ashen_ford": "two byte-identical exports, zero warnings",
+    "cinder_hollow": "two byte-identical exports, zero warnings"
+  }
+}

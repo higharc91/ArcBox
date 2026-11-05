@@ -41,7 +41,7 @@ public sealed partial class RulesPack
         Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
         Mobs = catalog.Mobs ?? ImmutableSortedDictionary.Create<string, ImmutableArray<MobDef>>(StringComparer.Ordinal);
         Shops = catalog.Shops ?? ImmutableSortedDictionary.Create<string, ImmutableArray<ShopDef>>(StringComparer.Ordinal);
-        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None)), StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None, [.. MobsIn(r.Key).Select(m => m.Arena)])), StringComparer.Ordinal);
         _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
             r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
             StringComparer.Ordinal);

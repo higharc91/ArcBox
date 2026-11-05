@@ -40,6 +40,7 @@
           "at": {
             "$ref": "common.schema.json#/$defs/tile"
           },
+          "variant": { "type": "string" },
           "blocks": {
             "type": "boolean"
           },
@@ -47,7 +48,8 @@
             "enum": [
               "none",
               "half",
-              "three_quarters"
+              "three_quarters",
+              "full"
             ]
           }
         },

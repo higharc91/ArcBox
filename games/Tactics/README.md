@@ -149,3 +149,9 @@ Tap an injury to inspect its effect or confirm treatment. Ordinary shop/controll
 ## NPCs and side quests
 
 Ashen Ford has flag-gated people, rotating voiced town barks, eight named conversations and three side quests. Conversations reuse the story vote/check/restart system. Rewards are paid atomically once; away members receive quest XP. Everyone can read the parchment journal privately; the leader opens it on the TV and pins one active quest. Visible targets get a waypoint, with no secret coordinates sent. See the [NPC/quest design](../../docs/superpowers/specs/2026-11-03-tactics-npcs-and-quests-design.md), [voice plan](../../tools/tactics-lore/VOICE-PLAN.md) and [validation report](../../docs/superpowers/reports/2026-11-03-npcs-quests/README.md).
+
+### Optional roaming encounters (#79)
+
+Seven manifest-listed groups inhabit Ashen Ford and Cinder Hollow. They wander connected patches without chasing; leader contact triggers the matching painted arena. Followers do not trigger fights. Wins pay 75 XP per member and split 10 gold among present players, with no loot or same-chapter respawn. Full sweep: 525 XP per member and 70 gold total. Groups reset only on a later chapter. Story-only routes remain avoidable; validation reserves the entire roaming area and contact distance when proving safe routes.
+
+The mob-specific balance target is **85–95% wins, 4–8 rounds**, levels 1–3 and sizes 1–4. `Tactics.Sim` reports that assessment separately when all selected encounter IDs begin with `mob_`; its ordinary story diagnostics follow. See the [review and balance report](../../docs/superpowers/reports/2026-11-04-overworld-mobs/README.md) for target deviations and Chapter I XP impact. Do not substitute story-fight bands or scale enemy levels automatically.

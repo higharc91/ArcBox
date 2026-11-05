@@ -42,10 +42,10 @@ public sealed class WalkShowTests
         show.Receive(script.Now(false) with { Mobs = [new("wolf:0", "wolves", "beasts.wolf.grey", new(82, 60), 0)] });
         var mob = Assert.Single(show.Frame(Frame).Units.Where(u => u.Id.Value == "wolf:0"));
         Assert.Equal(UnitTone.Enemy, mob.Tone);
-        Assert.True(mob.Ring > 0);
+        Assert.InRange(mob.Ring, 8f, 22.6f);
         Assert.StartsWith("creatures/", mob.Sprite.Path);
         show.Receive(script.Now(false) with { Mobs = null });
-        Assert.DoesNotContain(show.Frame(Frame).Units, u => u.Id.Value == "wolf:0");
+        Assert.DoesNotContain(show.Frame(0.4).Units, u => u.Id.Value == "wolf:0");
     }
 
     [Fact]

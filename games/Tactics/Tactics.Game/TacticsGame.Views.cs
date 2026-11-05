@@ -226,7 +226,8 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<MobView>? Mobs = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Danger = null);
 
-public sealed record MobView(string Id, string Group, string Sprite, Tile At, long Step);
+public sealed record MobView(string Id, string Group, string Sprite, Tile At, long Step,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<WalkLeg> Legs = default);
 
 public sealed record QuestPersonMarker(Tile At, bool TurnIn);
 
@@ -525,6 +526,7 @@ public sealed partial class TacticsGame
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
         }, ArcJson.Options)!.AsObject();
+        if (_doc.World?.MobAmbush is { } ambush) data["ambush"] = Rules.Mobs.Values.SelectMany(m => m).Where(m => m.Id == ambush).Select(m => Rules.Encounters[m.Encounter].Name).FirstOrDefault();
         if (leads && NearbyMob() is { } danger) data["danger"] = danger;
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.

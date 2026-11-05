@@ -1,0 +1,41 @@
+{
+  "id": "mob_rooting_boars",
+  "name": "Rooting Boars",
+  "map": "mob_rooting_boars",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "boar",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      },
+      "hpByParty": {
+        "1": 17,
+        "2": 32,
+        "3": 48,
+        "4": 64,
+        "5": 80,
+        "6": 96
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}
