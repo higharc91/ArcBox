@@ -2,7 +2,7 @@
   "issue": 81,
   "part": 2,
   "branch": "ashen-ford-secrets",
-  "status": "concepts generated and shown; awaiting owner approval before PixelLab",
+  "status": "concepts approved; PixelLab generation awaiting credit top-up",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -180,8 +180,10 @@
     }
   ],
   "owner_approval": {
-    "status": "pending",
-    "requested_for": "PixelLab concept-to-pixel-art stage"
+    "status": "approved",
+    "user_message": "Looks good",
+    "date": "2026-11-05",
+    "approved_for": "PixelLab concept-to-pixel stage"
   },
   "production_notes": [
     "The garden detail inset contains a roof/chimney fragment; generate a separate garden-bed prop from the clean ground region, never bake that fragment into the prop.",

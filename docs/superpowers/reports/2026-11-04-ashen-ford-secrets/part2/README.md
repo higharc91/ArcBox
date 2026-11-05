@@ -2,7 +2,7 @@
 
 Concept stage on `ashen-ford-secrets`. Part 1's verified game content is unchanged. The two new lore-linked briefs are in `tools/tactics-assets/concepts/scenario-briefs.json`; exact prompts, references, job/asset IDs and costs are in `tools/tactics-assets/concepts/ashen-ford-secrets/generation-records.json`.
 
-The concepts reuse the existing Emberwick Scenario anchor, an actual Chapter 1 town screenshot, and the actual `cottage_thatch_green` sprite used for Maud's cottage. Scenario Nano Banana 2.1 is the same model recorded for the earlier approved village/animal concept series. All three jobs succeeded: **13 CU each, 39 CU total**, matching the dry-run estimates. The images were displayed inline for review. Owner approval is pending before PixelLab; no runtime assets or placement changed.
+The concepts reuse the existing Emberwick Scenario anchor, an actual Chapter 1 town screenshot, and the actual `cottage_thatch_green` sprite used for Maud's cottage. Scenario Nano Banana 2.1 is the same model recorded for the earlier approved village/animal concept series. All three jobs succeeded: **13 CU each, 39 CU total**, matching the dry-run estimates. The images were displayed inline for review. The owner approved both concepts with “Looks good” on 2026-11-05. PixelLab generation is authorized; no runtime assets or placement changed.
 
 | Concept | Original image | Scenario asset |
 | --- | --- | --- |
@@ -26,7 +26,30 @@ Maud has never used ember-fire. Do not add magical windows, glowing crystals, bu
 
 ## Next stages
 
-Issue #81 explicitly requires owner approval after the Scenario concepts, then PixelLab art from those approved references, then TV shots and a second owner approval before final placement. Both contact sheets have been shown inline with the approval question; no approval has been assumed. Concept paintings are reference material, not shipped sprites.
+Issue #81 explicitly requires owner approval after the Scenario concepts, then PixelLab art from those approved references, then TV shots and a second owner approval before final placement. Both contact sheets were shown inline and approved. Concept paintings are reference material, not shipped sprites.
+
+## Pixel-stage preflight
+
+The existing configured PixelLab MCP connection was successfully initialized through a local client (107 tools); no new key or connection is needed. The live account reports **0.75 subscription generations remaining, $0 credit, and a daily bonus of 5**. The owner was asked to add around 60 generations. Six planned requests total **40 generations before revisions**: one 256×224 Pro granary, a localized 188×155 edit of the existing cottage for chimney soot, and four Pro Flash dressing groups (herbs, twig/cord charms, cold-ash garden, stool/pots). No paid jobs have been started.
+
+[The native-size plan](../../../../../tools/tactics-assets/concepts/ashen-ford-secrets/pixel-plan.json) records prompts, source files, costs, footprints and attachment policies. The [request preparer](../../../../../tools/tactics-assets/concepts/ashen-ford-secrets/prepare-pixels.py) resolves fresh upload references, applies explicit `ashen_ford` palette/style settings where the selected tool supports them, and validates against PixelLab's actual current schemas without submitting jobs. `edit_image` has no palette argument: the cottage edit retains the native kit colors. The shared small-prop style reference is the shipped 26×28 oak crate, which fits every target canvas. [Six-request validation result](pixel-request-preflight.json).
+
+```sh
+python tools/tactics-assets/concepts/ashen-ford-secrets/prepare-pixels.py \
+  --uploads /path/to/fresh-upload-refs.json \
+  --catalog /path/to/current-pixellab-tools.json \
+  --out /path/to/scratch-requests
+```
+
+Reference upload URLs expire after 15 minutes; uploaded `upload:<id>` inputs last three days. Refresh them if needed. Generated request JSON contains inline small source sprites and belongs in scratch output; the checked-in plan records source paths and hashes rather than expiring URLs or credentials. The approved granary sheet has already been uploaded for the current preparation.
+
+The actual Godot world demo captured [the granary area before](before-granary.png) and [Maud's hut before](before-maud.png); [TV output](before-tv.txt) completed successfully. These are unchanged live-map baseline views, not pixel-art candidates. A [read-only collision preflight](placement-preflight.json) adds a blocking 3×2 placeholder at [43,72], replacing the space of `cottage_39` and the overlapping `clutter_barrels_41` for a future preview. All six foundation cells are level height 3, and all 12 story legs and two recovery routes remain reachable with hidden shortcuts closed. The production map was not edited. Art anchors, door orientation, roof occlusion and final placement still require generated pixels and TV review.
+
+Reproduce that collision check from the repository root:
+
+```sh
+dotnet run tools/tactics-assets/concepts/ashen-ford-secrets/placement-preflight.cs -- content/tactics/base
+```
 
 Once concepts are approved, use the town/props profiles and explicit `ashen_ford` palette. Preserve 2:1 isometric projection, top-left lighting, native pixel scale, ground anchors, footprint/collision contracts, and separate shadow/light masks. Keep small dressing pieces separate so their locations and depth order can be tuned. Do not add baked-in terrain or smoke effects to a building sprite; retain existing environmental effects where appropriate.
 
