@@ -626,3 +626,48 @@ approval from the appearance or voice approvals. Do not regenerate completed art
 
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or environment
 publication. Earlier pending-appearance notes are historical and superseded.
+
+
+## Latest checkpoint — Mother Skarrow approved and installed
+
+Owner full-set/TV approval: “looks good, I approvee” (2026-11-05).
+Installed the exact approved288-frame, eight-direction body atlas and six40×40
+portraits after validating all25 review asset hashes and the approved TV still.
+No new art or voice generation, credits, purchases or upgrades. All67 approved
+Kore voice lines retained. Eleven named townsfolk artwork sets now installed.
+
+Mother uses a placed goblin_shaman_mother_skarrow variant, named battle sprite
+characters.mother_skarrow and named lore portrait preset. Generic goblin_shaman
+and separate Skarrow Stormcaller remain unchanged. Staff attack/cast/hurt/down
+playback included; lying down frame35 is held. Slain presence gate unchanged.
+Added two registered cosmetic aliases, seven art files and six cosmetic document
+edits only. Installer preserves compact existing JSON formatting. Every other
+5021 baseline content file is byte-identical to9a208878. No gameplay, balance,
+phone contract, caption or voice changes; all old assets preserved.
+
+170 focused presentation tests pass, including named body/portrait/region preload
+and generic shaman separation. All-atlas coverage now covers Mother’s authored
+combat clips without treating other civilians as combatants. Typed production
+checks verify eight facings/source rectangles/combat/down, six portraits,
+bark stop/resume, named battle alias and original slain gate. Host/test Debug
+builds have0warnings/errors. Native installed-pack software Vulkan four-party
+peaks340.48MiB Ashen Ford /192.37MiB Cinder Hollow, below512MiB; strict memory
+checks cover open/crossing/party-change/restored and all8human/elf class texture
+uploads/releases. Software renderer figures establish memory, not GPU timing.
+
+Production pack216586388bytes /5034files, inventory SHA256
+728704ed27106c3fe7818874f4d3537882c8ba9bb9c1aead254cf0435a4f8147.
+`mother-skarrow/verify-installed.cjs` verifies exact approved art, all retained
+assets and cosmetic-only differences against the committed pre-install baseline.
+It needs local Git subprocess access. Historical private-review isolation
+artifacts remain frozen as pre-install evidence, including their old inventory.
+Use verify-installed for the current installed checkpoint instead.
+
+Native production screenshots/logs/memory/test/runtime evidence are retained at
+docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/production/.
+Do not regenerate completed assets or ask for Mother approval again. Old Maud’s
+appearance and24-line voice are already approved; her completion animations and
+portraits are next queued work, with a separate finished-set/TV gate.
+
+Rebase before pushing townsfolk-art. No PR, merge, closure or environment publish.
+Earlier pending-Mother approval/installation notes are historical and superseded.

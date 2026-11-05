@@ -339,7 +339,7 @@
     },
     {
       "id": "mother_skarrow",
-      "preset": "goblin_shaman",
+      "preset": "mother_skarrow",
       "name": "Mother Skarrow",
       "epithet": "Chief of the Skarrow Clan",
       "role": "npc",

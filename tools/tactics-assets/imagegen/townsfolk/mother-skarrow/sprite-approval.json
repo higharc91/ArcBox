@@ -2,7 +2,7 @@
   "character": "Mother Skarrow",
   "characterId": "mother_skarrow",
   "presetReference": "goblin_shaman",
-  "stage": "completed_review_pending_owner_full_set_tv_approval",
+  "stage": "owner_full_set_tv_approved_installed",
   "date": "2026-11-05",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 11,
@@ -13,9 +13,9 @@
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
-  "productionInstalled": false,
-  "animationApproval": "motions_authorized_completed_set_pending",
-  "fullSetTvApproval": "pending",
+  "productionInstalled": true,
+  "animationApproval": "owner_full_set_approved",
+  "fullSetTvApproval": "approved",
   "speciesScale": {
     "proposedBodyNative": 50,
     "proposedBodyWorld": 25,
@@ -59,7 +59,7 @@
     "scope": "Approve existing Mother Skarrow appearance; authorize animations and portraits. Full-set/TV approval remains separate."
   },
   "completedSet": {
-    "status": "pending_owner_full_set_tv_approval",
+    "status": "approved",
     "date": "2026-11-05",
     "sha256": {
       "review_mother_skarrow.png": "f25cdd72d781c9e3785e5cd6423ec3e983b7a064abb6086c70fc2758f39d033d",
@@ -92,6 +92,24 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/ashen_ford-shots/world-mother-skarrow.png",
       "sha256": "baf5b07956be2e70581fd73afcd6d3a3a71483aa36e5c23d0c1c964ab3f22e4a"
     },
-    "productionInstalled": false
+    "productionInstalled": true
+  },
+  "ownerFullSetApproval": {
+    "quote": "looks good, I approvee",
+    "date": "2026-11-05",
+    "scope": "Approve the completed Mother Skarrow directional animations, six portraits, approved-voice reel and native TV review; authorize production installation of this exact hash-bound set."
+  },
+  "installation": {
+    "date": "2026-11-05",
+    "baselineCommit": "9a208878",
+    "atlasSha256": "f25cdd72d781c9e3785e5cd6423ec3e983b7a064abb6086c70fc2758f39d033d",
+    "validation": "installation-validation.json",
+    "productionInventorySha256": "728704ed27106c3fe7818874f4d3537882c8ba9bb9c1aead254cf0435a4f8147",
+    "productionFiles": 5034,
+    "productionBytes": 216586388,
+    "texturePeaksMiB": {
+      "ashen_ford": 340.482666015625,
+      "cinder_hollow": 192.373291015625
+    }
   }
 }

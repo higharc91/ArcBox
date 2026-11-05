@@ -6169,7 +6169,8 @@
       "character": "mother_skarrow",
       "unless": [
         "ch1_skarrow_slain"
-      ]
+      ],
+      "variant": "mother_skarrow"
     },
     {
       "preset": "goblin_spear",

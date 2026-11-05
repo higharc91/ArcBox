@@ -8,6 +8,12 @@ namespace Tactics.Presentation.Tests.Hud;
 public sealed class HudArtTests
 {
     [Theory]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "idle")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "hurt")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "happy")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "angry")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "sad")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "surprised")]
     [InlineData("guard_captain", "dagna_holt", "dagna", "idle")]
     [InlineData("guard_captain", "dagna_holt", "dagna", "hurt")]
     [InlineData("guard_captain", "dagna_holt", "dagna", "happy")]

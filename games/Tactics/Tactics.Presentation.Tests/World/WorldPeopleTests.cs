@@ -73,6 +73,8 @@ public sealed class WorldPeopleTests
     [InlineData("innkeeper", "missing", "creatures/bree_tallow.png")]
     [InlineData("innkeeper", null, "creatures/bree_tallow.png")]
     [InlineData("child", "pip", "creatures/pip.png")]
+    [InlineData("goblin_shaman", "mother_skarrow", "creatures/mother_skarrow.png")]
+    [InlineData("goblin_shaman", null, "characters/presets/goblin_shaman.png")]
     public void Placed_art_variants_and_region_preloading_select_the_same_sheet(string preset, string? variant, string path)
     {
         var person = Person(preset, 5, 5) with { Variant = variant };

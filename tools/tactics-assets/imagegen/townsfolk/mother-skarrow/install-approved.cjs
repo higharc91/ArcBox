@@ -27,5 +27,14 @@ const lore=read('lore/characters.json'),character=lore.characters.find(c=>c.id==
 for(const [mood,bytes]of Object.entries(portraits)){const file=`mother_skarrow_${mood}.png`;moods[mood]=file;fs.writeFileSync(path.join(content,'portraits',file),bytes);}
 faces.presets.mother_skarrow=moods;
 fs.writeFileSync(path.join(content,'creatures/mother_skarrow.png'),atlas);fs.writeFileSync(creaturesPath,JSON.stringify(creatures,null,2)+'\n');fs.writeFileSync(portraitsPath,JSON.stringify(faces,null,2)+'\n');
-for(const [rel,doc] of Object.entries(documents))fs.writeFileSync(path.join(content,rel),JSON.stringify(doc,null,2)+'\n');
+for(const [rel,doc] of Object.entries(documents)){
+ const file=path.join(content,rel),original=fs.readFileSync(file,'utf8');let text;
+ if(rel==='lore/characters.json')text=original.replace(/("id":\s*"mother_skarrow",\s*"preset":\s*)"[^"]+"/,'$1"mother_skarrow"');
+ else if(rel==='rules/monsters/villains.json')text=original.replace(/("id":\s*"mother_skarrow"[\s\S]*?"sprite":\s*)"[^"]+"/,'$1"characters.mother_skarrow"');
+ else if(rel==='characters/manifest.json'){
+  const missing=doc.presets.filter(key=>!JSON.parse(original).presets.includes(key));
+  const at=original.lastIndexOf('\n  ]');assert(at>=0);text=original.slice(0,at)+missing.map(key=>',\n    '+JSON.stringify(key)).join('')+original.slice(at);
+ }else text=JSON.stringify(doc,null,2)+'\n';
+ assert.deepEqual(JSON.parse(text),doc,'Formatting-preserving document differs');fs.writeFileSync(file,text);
+}
 console.log(JSON.stringify({installed:'mother_skarrow',creditsSpent:0,legacyFilesRetained:true,atlasSha256:hash(atlas)}));

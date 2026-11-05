@@ -32,11 +32,18 @@ public sealed class CreatureAtlasTests
                     }
             if (entry.GetProperty("family").GetString() == "townsfolk")
             {
-                // Approved civilian clips retain their authored counts and never need a combat attack.
-                Assert.Equal(item.Name switch { "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" => 10, "bree_tallow" => 5, _ => 4 }, sprite.Idle.Frames.Length);
+                // Named townsfolk retain their authored counts; Skarrow also appears in battle.
+                Assert.Equal(item.Name switch { "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" or "mother_skarrow" => 10, "bree_tallow" => 5, _ => 4 }, sprite.Idle.Frames.Length);
                 Assert.Equal(6, sprite.Anims["walk"].Frames.Length);
-                Assert.Equal(item.Name is "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" ? 10 : 8, sprite.Anims["talk"].Frames.Length);
-                Assert.False(sprite.Anims.ContainsKey("attack"));
+                Assert.Equal(item.Name is "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" or "mother_skarrow" ? 10 : 8, sprite.Anims["talk"].Frames.Length);
+                if (item.Name == "mother_skarrow")
+                {
+                    Assert.Equal(6, sprite.Anims["attack"].Frames.Length);
+                    Assert.Equal(6, sprite.Anims["cast"].Frames.Length);
+                    Assert.Equal([33, 34, 35], sprite.Down.Frames);
+                    Assert.False(sprite.Down.Loop);
+                }
+                else Assert.False(sprite.Anims.ContainsKey("attack"));
             }
             else
             {

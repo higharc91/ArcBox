@@ -1,7 +1,8 @@
 import subprocess,os,sys,select,json
 from pathlib import Path
-root=Path('/workspace/ArcBox');report=root/'docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen';report.mkdir(exist_ok=True)
-region=sys.argv[1];env=os.environ.copy();env.update(VK_ICD_FILENAMES='/workspace/.arcbox/vulkan/lvp-local.json',LP_NUM_THREADS='2',LD_LIBRARY_PATH='/workspace/.arcbox/system/root/usr/lib/x86_64-linux-gnu:'+env.get('LD_LIBRARY_PATH',''),ARCBOX_TACTICS_ART_ROOT='/workspace/artifacts/issue80-mother-skarrow-review')
+production='--production' in sys.argv[2:]
+root=Path('/workspace/ArcBox');report=root/'docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen';report=report/'production' if production else report;report.mkdir(exist_ok=True)
+region=sys.argv[1];env=os.environ.copy();env.update(VK_ICD_FILENAMES='/workspace/.arcbox/vulkan/lvp-local.json',LP_NUM_THREADS='2',LD_LIBRARY_PATH='/workspace/.arcbox/system/root/usr/lib/x86_64-linux-gnu:'+env.get('LD_LIBRARY_PATH',''),ARCBOX_TACTICS_ART_ROOT=str(root/'content/tactics/base') if production else '/workspace/artifacts/issue80-mother-skarrow-review')
 r,w=os.pipe();xlog=open(report/(region+'-xvfb.log'),'w');x=subprocess.Popen(['/workspace/.arcbox/bin/Xvfb','-displayfd',str(w),'-screen','0','1280x720x24','-nolisten','tcp'],env=env,pass_fds=(w,),stdout=xlog,stderr=xlog);os.close(w)
 try:
  if not select.select([r],[],[],10)[0]:raise RuntimeError('Xvfb did not become ready')

@@ -19,7 +19,8 @@
     "build-rook": "node rook/build-review.cjs && node rook/build-portraits.cjs && node rook/build-closeup.cjs",
     "verify-rook": "node rook/verify-review.cjs && node rook/verify-receipts.cjs",
     "build-mother-skarrow": "node mother-skarrow/build-review.cjs && node mother-skarrow/build-portraits.cjs && node mother-skarrow/build-closeup.cjs",
-    "verify-mother-skarrow": "node mother-skarrow/verify-review.cjs && node mother-skarrow/verify-receipts.cjs"
+    "verify-mother-skarrow": "node mother-skarrow/verify-review.cjs && node mother-skarrow/verify-receipts.cjs",
+    "verify-mother-skarrow-installed": "node mother-skarrow/verify-installed.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",
