@@ -38,3 +38,7 @@ contact sheet with full-resolution individual files.
 These are painted concept references for later pixel-art work, not drop-in game
 textures, sprites, collision data or animation sheets. The prepared pack explicitly
 requires Scenario; do not silently substitute another provider.
+
+## Issue #81 part 2: Ashen Ford lore places
+
+The owner authorized a new concept stage on 2026-11-05 for Emberwick's locked granary and Old Maud's hut dressing. Their briefs are appended to `scenario-briefs.json`; the historical initial-series status above is not a claim about these new jobs. Live Scenario prompts, references, IDs and costs are recorded in `ashen-ford-secrets/generation-records.json`. Approval is pending before pixel-art generation or runtime placement. See the [part 2 report](../../../docs/superpowers/reports/2026-11-04-ashen-ford-secrets/part2/README.md).

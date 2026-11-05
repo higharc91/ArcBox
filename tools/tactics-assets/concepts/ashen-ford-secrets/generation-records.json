@@ -1,0 +1,195 @@
+{
+  "issue": 81,
+  "part": 2,
+  "branch": "ashen-ford-secrets",
+  "status": "concepts generated and shown; awaiting owner approval before PixelLab",
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "scope": {
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
+  },
+  "references": [
+    "asset_j5wC1LrjrchvvM2NNv2si3PX",
+    "asset_2zof2BhfHLJ3WiVmQ2TWdKR2",
+    "asset_oA1ygBMxTUi6g4zPsD2RaKu3"
+  ],
+  "reference_sources": [
+    {
+      "asset_id": "asset_j5wC1LrjrchvvM2NNv2si3PX",
+      "source": "Existing Emberwick Scenario style anchor"
+    },
+    {
+      "asset_id": "asset_2zof2BhfHLJ3WiVmQ2TWdKR2",
+      "source": "docs/superpowers/reports/2026-11-04-ashen-ford-secrets/verification/chapter-force-walking-after.png"
+    },
+    {
+      "asset_id": "asset_oA1ygBMxTUi6g4zPsD2RaKu3",
+      "source": "content/tactics/base/town/buildings/cottage_thatch_green.png"
+    }
+  ],
+  "cost": {
+    "estimate_cu_per_image": 13,
+    "planned_images": 3,
+    "estimated_total_cu": 39,
+    "actual_total_cu": 39,
+    "actual_cu_by_image": {
+      "shared-anchor": 13,
+      "granary-sheet": 13,
+      "maud-hut-sheet": 13
+    }
+  },
+  "shared_style": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. ",
+  "concepts": [
+    {
+      "id": "environment_ashen_ford_granary",
+      "kind": "environment",
+      "title": "Emberwick's Locked Granary",
+      "batch": "issue81-part2",
+      "lore": [
+        "scenes/ch1.json:ch1_granary",
+        "characters.json:halden_varrow",
+        "codex/vale.json:emberwick"
+      ],
+      "composition": "One clear primary orthographic isometric architectural view, with secondary construction and door/lock details.",
+      "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. Emberwick's council granary is a compact stone-and-timber grain barn, a little larger than an ordinary cottage, roughly a provisional 3-by-2-tile footprint. Cold grey fieldstone lower walls, weathered dark oak framing and modest ochre plaster above, repaired grey-brown shake roof, a small storage loft with narrow screened vents, a restrained timber hoist beam and short raised stone sill. Its most readable feature is one closed heavy oak double door, iron straps and a real stout padlock joining a central iron hasp: the council has locked food away during hunger. Show the padlock structurally connected to both door leaves. A few modest tied grain sacks and a worn empty handcart may sit at one side, leaving a clear entrance apron and walking space. Functional, sober and slightly guarded; no overflowing harvest, banners, luxury merchant facade, tavern sign, glowing magic, chapel tower or modern silo. Never include a visible ember, shards or any later story revelation. ",
+      "integration_constraints": [
+        "Preserve ch1_granary beat reachability at [42,70]; provisional footprint maximum 3x2 tiles must be checked against the saved map before placement.",
+        "Match town-kit geometry, ground anchors, palette ashen_ford, shadow/light masks and material scale.",
+        "No new story flags, narrative spoilers or interactable mechanics."
+      ]
+    },
+    {
+      "id": "environment_old_maud_hut_dressing",
+      "kind": "environment",
+      "title": "Old Maud's Burned-Bank Cottage",
+      "batch": "issue81-part2",
+      "lore": [
+        "characters.json:old_maud",
+        "scenes/ch1.json:ch1_maud",
+        "codex/vale.json:ashen_ford"
+      ],
+      "composition": "Existing cottage enriched with modular dressing, plus separate prop studies for charms, herb bundles, chimney soot and cold-ash garden.",
+      "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. Old Maud's hut stands on the burned east riverbank, the home of a very old, lucid, practical woman who refuses ember-fire. Keep the existing small cottage architecture and footprint; dress it rather than inventing a grand new witch house. Weathered green shutters, patched earth-brown/grey thatch, warm grey stone footing, a short chimney with believable black soot around its top and smoke stains on nearby thatch, simple sage and rosemary bundles hanging under the eaves, three or four modest twig/cord/wood/bead charms at the door, a weathered stool and clay pots, a small carefully tended kitchen/herb bed in cold scorched-grey soil edged with rough stones. A few hardy plants are alive among old ash; the ground is not burning. Her home is austere but cared for and welcoming enough to sit outside. No skulls, bones, pentagrams, runic writing, occult altar, magic glow, crystals, ember-fire stove, brilliant green witch windows, grotesque crooked roof, giant mushrooms or deep snow. The garden and hanging ornaments should read as separate placeable prop groups and leave the door, Maud's standing spot and visitor approach clear. ",
+      "integration_constraints": [
+        "Preserve existing cottage_193 at tile [130,88], thatch_green variant, 2x2 building footprint.",
+        "Leave Old Maud, her story marker and approach clear; do not obstruct the reed-bank shortcut.",
+        "Keep cold ash non-emissive; Maud does not use ember-fire.",
+        "Author separate placeable prop groups and match the props/town profiles."
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "shared-anchor",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. Create one 16:9 shared design anchor with TWO clean, balanced, separate isometric vignettes on neutral warm parchment. LEFT HALF: Emberwick's council granary is a compact stone-and-timber grain barn, a little larger than an ordinary cottage, roughly a provisional 3-by-2-tile footprint. Cold grey fieldstone lower walls, weathered dark oak framing and modest ochre plaster above, repaired grey-brown shake roof, a small storage loft with narrow screened vents, a restrained timber hoist beam and short raised stone sill. Its most readable feature is one closed heavy oak double door, iron straps and a real stout padlock joining a central iron hasp: the council has locked food away during hunger. Show the padlock structurally connected to both door leaves. A few modest tied grain sacks and a worn empty handcart may sit at one side, leaving a clear entrance apron and walking space. Functional, sober and slightly guarded; no overflowing harvest, banners, luxury merchant facade, tavern sign, glowing magic, chapel tower or modern silo. Never include a visible ember, shards or any later story revelation. RIGHT HALF: Old Maud's hut stands on the burned east riverbank, the home of a very old, lucid, practical woman who refuses ember-fire. Keep the existing small cottage architecture and footprint; dress it rather than inventing a grand new witch house. Weathered green shutters, patched earth-brown/grey thatch, warm grey stone footing, a short chimney with believable black soot around its top and smoke stains on nearby thatch, simple sage and rosemary bundles hanging under the eaves, three or four modest twig/cord/wood/bead charms at the door, a weathered stool and clay pots, a small carefully tended kitchen/herb bed in cold scorched-grey soil edged with rough stones. A few hardy plants are alive among old ash; the ground is not burning. Her home is austere but cared for and welcoming enough to sit outside. No skulls, bones, pentagrams, runic writing, occult altar, magic glow, crystals, ember-fire stove, brilliant green witch windows, grotesque crooked roof, giant mushrooms or deep snow. The garden and hanging ornaments should read as separate placeable prop groups and leave the door, Maud's standing spot and visitor approach clear. Each complete building occupies its own half, with a thin breathing gap rather than a continuous joined village. Both are viewed at the same camera and visual scale. Add just one small neutral adult scale silhouette near each entrance, subordinate to the architecture, and keep foliage sparse. This is an approval image for the two lore-place designs, emphasizing their different stories within one consistent town style.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX",
+          "asset_2zof2BhfHLJ3WiVmQ2TWdKR2",
+          "asset_oA1ygBMxTUi6g4zPsD2RaKu3"
+        ],
+        "aspectRatio": "16:9",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_joq2TJsyQoXmgEDPgRhPJGgq",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_joq2TJsyQoXmgEDPgRhPJGgq' (one call waits on up to 32 jobs)."
+      },
+      "asset_id": "asset_hbuwhcmNdF6WKw5jhMAJpeto",
+      "status": "success",
+      "cu_cost": 13,
+      "output_file": "shared-anchor.png",
+      "dimensions": [
+        2752,
+        1536
+      ],
+      "sha256": "49c5e1ce430431c0d89bf24e2b8bdf367865c5359b74f59327ccb8bc02211c14",
+      "bytes": 6851702
+    },
+    {
+      "id": "granary-sheet",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. Reference image 1 is the proposed shared anchor just generated for these two places. Preserve its designs exactly, using image 2 only to keep game-world materials/proportions consistent, and image 3 for the cottage's underlying shell. Emberwick's council granary is a compact stone-and-timber grain barn, a little larger than an ordinary cottage, roughly a provisional 3-by-2-tile footprint. Cold grey fieldstone lower walls, weathered dark oak framing and modest ochre plaster above, repaired grey-brown shake roof, a small storage loft with narrow screened vents, a restrained timber hoist beam and short raised stone sill. Its most readable feature is one closed heavy oak double door, iron straps and a real stout padlock joining a central iron hasp: the council has locked food away during hunger. Show the padlock structurally connected to both door leaves. A few modest tied grain sacks and a worn empty handcart may sit at one side, leaving a clear entrance apron and walking space. Functional, sober and slightly guarded; no overflowing harvest, banners, luxury merchant facade, tavern sign, glowing magic, chapel tower or modern silo. Never include a visible ember, shards or any later story revelation. Make a clean 3:2 architectural design CONTACT SHEET for the granary ONLY. Main upper-left/centre panel takes 65% of the sheet: the SAME granary from the anchor, complete at identical front-left isometric angle, closed locked doors and an uncluttered entrance apron. The lower/right 35% contains exactly three clearly separated smaller studies: (1) close view of the single centre hasp and padlock with correct working attachment to both wooden door leaves, iron straps and weathered planks; (2) the same building's rear/side construction showing narrow loft ventilation, practical fieldstone footing and closed wall, no second main door; (3) a side-view scale study of the same barn beside one 1.7m neutral adult, building ridge approximately 4.5m tall. Sparse props only: three tied grain sacks and a small worn handcart, drawn separately away from the door. Keep the roof pitch, stone-to-timber height, footprint, roof repairs, vent count and main door consistent across studies. This is one selected design, not an assortment of alternative barns. Broad material shapes, no tiny decorative clutter. Blank pale parchment background and clean gaps between studies, no drawn frames or captions, no roof cropping.",
+        "referenceImages": [
+          "asset_hbuwhcmNdF6WKw5jhMAJpeto",
+          "asset_2zof2BhfHLJ3WiVmQ2TWdKR2",
+          "asset_oA1ygBMxTUi6g4zPsD2RaKu3"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_Cf9obwatJVDCRVon23DNJ7cT",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Cf9obwatJVDCRVon23DNJ7cT' (one call waits on up to 32 jobs)."
+      },
+      "status": "success",
+      "asset_id": "asset_YwU2o6XytMjAbX4nZBFTdUeG",
+      "cu_cost": 13,
+      "completed_at": "2026-11-05T09:41:27.002Z",
+      "output_file": "granary-sheet.png",
+      "dimensions": [
+        2528,
+        1696
+      ],
+      "sha256": "8afb990fda7f12b1da07b04ed7f657bd7c84fab2d99fb70a4040baefddfb7d77",
+      "bytes": 6208325
+    },
+    {
+      "id": "maud-hut-sheet",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, practical repaired buildings, readable silhouettes and distinct material planes. Restrained painted architectural reference for later pixel-art translation, not a finished sprite. Match reference image 1's worn timber, muted ochre plaster, cool grey stone and slate, restrained autumn warmth and simple clean brush shapes. Reference image 2 is the actual game's town: preserve its compact building proportions, 2:1 orthographic isometric camera, clear roof/wall planes and top-left lighting; ignore its UI, characters and text. Reference image 3 is Old Maud's existing cottage: preserve its modest two-by-two-tile shell and roof/door/chimney layout when depicting her hut. The same palette, camera, light and material handling must cover both designs. Human doors are roughly 1.8m tall; buildings must remain plausible beside a 1.7m adult. No lettering, labels, text, watermark, logos or interface. No extreme perspective, cinematic blur, photorealistic microtexture, saturated neon or bloom. Keep all roof tips, chimneys and ground dressing inside generous margins. Reference image 1 is the proposed shared anchor just generated for these two places. Preserve its designs exactly, using image 2 only to keep game-world materials/proportions consistent, and image 3 for the cottage's underlying shell. Old Maud's hut stands on the burned east riverbank, the home of a very old, lucid, practical woman who refuses ember-fire. Keep the existing small cottage architecture and footprint; dress it rather than inventing a grand new witch house. Weathered green shutters, patched earth-brown/grey thatch, warm grey stone footing, a short chimney with believable black soot around its top and smoke stains on nearby thatch, simple sage and rosemary bundles hanging under the eaves, three or four modest twig/cord/wood/bead charms at the door, a weathered stool and clay pots, a small carefully tended kitchen/herb bed in cold scorched-grey soil edged with rough stones. A few hardy plants are alive among old ash; the ground is not burning. Her home is austere but cared for and welcoming enough to sit outside. No skulls, bones, pentagrams, runic writing, occult altar, magic glow, crystals, ember-fire stove, brilliant green witch windows, grotesque crooked roof, giant mushrooms or deep snow. The garden and hanging ornaments should read as separate placeable prop groups and leave the door, Maud's standing spot and visitor approach clear. Make a clean 3:2 environmental asset CONTACT SHEET for OLD MAUD'S HUT ONLY. Main upper-left/centre panel takes 65% of the sheet: the SAME cottage shown in the shared anchor, with the same compact massing, patched thatch, green shutters, front-left door and rear-right chimney. Improve the dressing's readability without making it busy: exactly three hanging herb bundles with recognizable stems and tied cords, one simple twig/wood/bead charm cluster attached near the door (plain handmade objects, no letterlike or occult symbols), one worn low stool, three clay pots, and a small cold-grey ash garden with a few hardy kitchen plants and rough stone edging. Door stays closed and readable in muted green wood; one shutter can be open naturally. The chimney cap and upper stones are blackened by ordinary woodsmoke, with a short localized soot streak down the masonry and adjacent thatch; no active fire, no baked-in smoke, no ash-cloud effects. Lower/right 35% contains separate small modular prop studies at consistent relative scale: herb bundle cluster; plain twig/cord charm cluster; small cold-ash garden bed with stone edging; stool and pots; chimney soot/material detail. Include one small neutral 1.7m adult silhouette beside the main doorway for scale. Props must not cover the door threshold or visitor standing place. Maintain the same roof, window positions, stone footing and timber/plaster proportions as the anchor across all views. Clear broad shapes that remain readable as small game sprites. Blank warm parchment and generous clean spaces, no drawn frames, labels, lettering or captions, no roof cropping.",
+        "referenceImages": [
+          "asset_hbuwhcmNdF6WKw5jhMAJpeto",
+          "asset_2zof2BhfHLJ3WiVmQ2TWdKR2",
+          "asset_oA1ygBMxTUi6g4zPsD2RaKu3"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_sHXoGof9A1ZeX1Zw3cpwsk8b",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_sHXoGof9A1ZeX1Zw3cpwsk8b' (one call waits on up to 32 jobs)."
+      },
+      "status": "success",
+      "asset_id": "asset_K2XK6wqLUJZu7jXdkCzUDZHX",
+      "cu_cost": 13,
+      "completed_at": "2026-11-05T09:41:37.051Z",
+      "output_file": "maud-hut-sheet.png",
+      "dimensions": [
+        2528,
+        1696
+      ],
+      "sha256": "b6dbf6a2158b01bb3dc525937bbb45a042da6e74b49694bacb17da9549d3badf",
+      "bytes": 6030834
+    }
+  ],
+  "owner_approval": {
+    "status": "pending",
+    "requested_for": "PixelLab concept-to-pixel-art stage"
+  },
+  "production_notes": [
+    "The garden detail inset contains a roof/chimney fragment; generate a separate garden-bed prop from the clean ground region, never bake that fragment into the prop.",
+    "Concept reference backgrounds, scale silhouettes, decorative ground patches and contact-sheet insets must not enter production sprites.",
+    "No model seed parameter is exposed by this model's schema; prompts, input references, model ID, job IDs, outputs and hashes preserve provenance."
+  ],
+  "references_source_hashes": {
+    "docs/superpowers/reports/2026-11-04-ashen-ford-secrets/verification/chapter-force-walking-after.png": "06f5515bf47705da1c002c7ee35d93ac8657f05b1750854d837f93d0547b7e66",
+    "content/tactics/base/town/buildings/cottage_thatch_green.png": "503e0cba6f765629d1fafc9b7c3080b34c72bcb986775f081b28d18c5995f8f3"
+  }
+}
