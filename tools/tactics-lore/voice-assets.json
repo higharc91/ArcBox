@@ -8250,8 +8250,8 @@
       "asset": "asset_L53oWit8RwV48vbETX7rVUws",
       "job": "job_vb2Cov7goWiDgt8AgiLhvGUe",
       "preset": "Algenib",
-      "text": "Bear\u2019s awake! Dig or die!",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear\u2019s awake! Dig or die!",
+      "text": "Bear’s awake! Dig or die!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
       "creativeUnits": 2,
       "issue": 74,
       "derived": {
@@ -8267,7 +8267,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 0,
@@ -8281,8 +8281,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 8.98,
@@ -8301,7 +8301,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The pins have rusted into the old notices.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 27.34,
@@ -8316,7 +8316,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 29.8,
@@ -8346,7 +8346,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 44.96,
@@ -8361,7 +8361,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 50.96,
@@ -8376,7 +8376,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 59.68,
@@ -8390,8 +8390,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 71.8,
@@ -8466,8 +8466,8 @@
       "asset": "asset_QrGko9enHQNsrfwJPCX2UGSV",
       "job": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
       "preset": "Callirrhoe",
-      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
-      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
       "batch": "ashmaw_dagna_holt_batch",
       "derived": {
         "start": 37.52,
@@ -8557,8 +8557,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Algenib",
-      "text": "The market pays! I\u2019ll split it!",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I\u2019ll split it!",
+      "text": "The market pays! I’ll split it!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 3.18,
@@ -8602,8 +8602,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Algenib",
-      "text": "Tell them\u2026 I kept the tally.",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them\u2026 I kept the tally.",
+      "text": "Tell them… I kept the tally.",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 12.12,
@@ -8617,8 +8617,8 @@
       "asset": "asset_gmpnQRBPke49aHn4GJ4Y3SyP",
       "job": "job_W4VWS5a459iQdfwYWyBhiSUL",
       "preset": "Achernar",
-      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
-      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
       "batch": "ashmaw_grisk_maud_batch",
       "derived": {
         "start": 15.72,
@@ -8647,8 +8647,8 @@
       "asset": "asset_HFc4L15wcWEZkKhg332sRkAN",
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 8.98,
@@ -8663,7 +8663,7 @@
       "job": "job_mNwDwf8k4dN8TQMs2wW7KwHE",
       "preset": "Algieba",
       "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "batch": "ashmaw_narrator_batch",
       "derived": {
         "start": 20.08,
@@ -10601,10 +10601,10 @@
     {
       "raw": "Algenib.915ae3ad",
       "preset": "Algenib",
-      "text": "Bear\u2019s awake! Dig or die!",
+      "text": "Bear’s awake! Dig or die!",
       "line": "bark_grisk_battle_start_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear\u2019s awake! Dig or die!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Bear’s awake! Dig or die!",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "angry"
@@ -10627,9 +10627,9 @@
       "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "line": "ashmaw_notices",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10648,12 +10648,12 @@
     {
       "raw": "Algieba.e087bd73",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "line": "ashmaw_bounty",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch. Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10680,9 +10680,9 @@
       "text": "The pins have rusted into the old notices.",
       "line": "ashmaw_leave",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The pins have rusted into the old notices.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The pins have rusted into the old notices.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10704,9 +10704,9 @@
       "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "line": "ashmaw_throat_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10752,9 +10752,9 @@
       "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "line": "ashmaw_nest_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10776,9 +10776,9 @@
       "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "line": "ashmaw_lair_open",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10800,9 +10800,9 @@
       "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "line": "ashmaw_death",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10821,12 +10821,12 @@
     {
       "raw": "Algieba.92014549",
       "preset": "Algieba",
-      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
+      "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
       "line": "ashmaw_satchel",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: \u201cMaud, I got out. I\u2019ll wait by your fire. Please tell Da.\u201d",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -10943,10 +10943,10 @@
     {
       "raw": "Callirrhoe.00de6679",
       "preset": "Callirrhoe",
-      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
       "line": "ashmaw_progress",
       "speaker": "dagna_holt",
-      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
       "delivery": {
         "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
         "mood": "idle"
@@ -11089,10 +11089,10 @@
     {
       "raw": "Algenib.f7e6dda0",
       "preset": "Algenib",
-      "text": "The market pays! I\u2019ll split it!",
+      "text": "The market pays! I’ll split it!",
       "line": "bark_grisk_low_hp_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I\u2019ll split it!",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "sad"
@@ -11161,10 +11161,10 @@
     {
       "raw": "Algenib.7301ebb5",
       "preset": "Algenib",
-      "text": "Tell them\u2026 I kept the tally.",
+      "text": "Tell them… I kept the tally.",
       "line": "bark_grisk_defeat_1",
       "speaker": "grisk",
-      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them\u2026 I kept the tally.",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
       "delivery": {
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
         "mood": "sad"
@@ -11185,10 +11185,10 @@
     {
       "raw": "Achernar.0fc80f43",
       "preset": "Achernar",
-      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
       "line": "ashmaw_maud_waiting",
       "speaker": "old_maud",
-      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
       "delivery": {
         "direction": "Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
         "mood": "sad"
@@ -11233,12 +11233,12 @@
     {
       "raw": "Algieba.0bb18d07",
       "preset": "Algieba",
-      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
+      "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
       "line": "ashmaw_bounty_1",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher\u2019s boy is missing. Bring proof of the beast\u2019s death to the Ford Watch.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -11260,9 +11260,9 @@
       "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "line": "ashmaw_bounty_2",
       "speaker": "narrator",
-      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
+      "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
       "delivery": {
-        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave\u2019s silence linger.",
+        "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
         "mood": "idle"
       },
       "scene": false,
@@ -12829,8 +12829,8 @@
       "preset": "Gacrux",
       "pitch": 0,
       "speaker": "dagna_holt",
-      "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
-      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
       "lines": [
         "ashmaw_progress"
       ],
@@ -12952,7 +12952,7 @@
       "pitch": 0,
       "speaker": "old_maud",
       "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
-      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I’ve waited a hundred years, I can wait while you sit.",
       "lines": [
         "bark_old_maud_town_1"
       ],
@@ -13523,8 +13523,8 @@
       "preset": "Gacrux",
       "pitch": 0,
       "speaker": "old_maud",
-      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
-      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
       "lines": [
         "ashmaw_maud_waiting"
       ],
@@ -15427,6 +15427,64 @@
       "reason": "Explicit prose instructions were narrated; same Kore cast with dialogue and supported pause tags only.",
       "speaker": "mother_skarrow",
       "issue": 80
+    }
+  ],
+  "ashenFordSecrets": [
+    {
+      "raw": "Algieba.e9dcb904",
+      "line": "af_market_cellar_draft",
+      "asset": "asset_unbSBj3k5XEQooE571YkrsUU",
+      "job": "job_E6RKCDpD5RB6x6oxStbTv5ov",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.68c99301",
+      "line": "af_bank_claw_marks",
+      "asset": "asset_pQYFA2KA5Pj7hCf5djHnvrtC",
+      "job": "job_VXUCMcRYmxxaw3UksUy9ewrU",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.365b87ca",
+      "line": "af_bridge_carving",
+      "asset": "asset_LqJjXpycLGLGmNLRCUMpg98x",
+      "job": "job_iYfEdJ5B8QUHKD8YFHoXG9Ex",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.4566afef",
+      "line": "af_southfield_goat_tracks",
+      "asset": "asset_JCfVG6Gyyim1M4xg8pLNusYw",
+      "job": "job_aLXZEapgkSVAceydQffQNFZ7",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.0c6f32d2",
+      "line": "thing.af_market_cellar_ledger.words.0",
+      "asset": "asset_YuQtwXaavbWnwPfb9EQ5fvda",
+      "job": "job_2rLaHha7tZLR9ivX8hmEeT9R",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.9514971f",
+      "line": "thing.af_market_cellar_ledger.words.1",
+      "asset": "asset_5HhkiETFJPWesUPYsSbJ8m3z",
+      "job": "job_V4JHKGE55jc5w7PTAzemb5FE",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.8aa6cd21",
+      "line": "af_market_cellar_hatch_use",
+      "asset": "asset_GkUstZkE56SGfMLmfd2RdfAh",
+      "job": "job_s9updAVur8rgQp6du1ZBsD9V",
+      "issue": 81
+    },
+    {
+      "raw": "Algieba.0bc1c652",
+      "line": "af_market_cellar_store_use",
+      "asset": "asset_BnYeqEmk7UnnE789yMUdcyep",
+      "job": "job_TtSD572rwKbvrSCLfzfB1ChW",
+      "issue": 81
     }
   ]
 }

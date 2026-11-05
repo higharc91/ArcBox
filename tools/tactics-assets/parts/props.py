@@ -1732,3 +1732,5 @@ def build() -> None:
                                 "says what blocks movement, what gives cover, how tall each prop is and, for light "
                                 "sources, where the light sits, its colour, radius and flicker."),
          PREVIEWS / "13-props.png")
+    from . import lore_places
+    lore_places.export(PACK, families=("props",))

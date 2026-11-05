@@ -75,7 +75,28 @@ def lines() -> list[tuple[str, str, str]]:
         elif kind == "scenes":
             out += [(f"char:{ln['speaker']}", ln["id"], ln["text"])
                     for s in doc["scenes"] for n in s["nodes"] for ln in n["lines"]]
-    return out + say_lines()
+    return out + say_lines() + ashen_ford_thing_lines()
+
+
+def ashen_ford_thing_lines() -> list[tuple[str, str, str]]:
+    """The new Ashen Ford notices and cellar narration use the existing narrator cast.
+
+    A notice has two delivery moments: the passive/Search find and a later Look. They
+    share one TTS render, though their stable line IDs differ.
+    """
+    path = ROOT / "content/tactics/base/rules/interactables/ashen_ford.json"
+    things = {thing["id"]: thing for thing in json.loads(path.read_text(encoding="utf-8"))["interactables"]}
+    out = []
+    for id in ("af_market_cellar_draft", "af_bank_claw_marks", "af_bridge_carving", "af_southfield_goat_tracks"):
+        spoken = " ".join(things[id]["text"])
+        out.extend([("char:narrator", id, spoken), ("char:narrator", id + "_use", spoken)])
+    for index, spoken in enumerate(things["af_market_cellar_ledger"]["text"]):
+        out.append(("char:narrator", f"thing.af_market_cellar_ledger.words.{index}", spoken))
+    out.extend([
+        ("char:narrator", "af_market_cellar_hatch_use", "The cellar hatch opens."),
+        ("char:narrator", "af_market_cellar_store_use", "Inside: Smoke Bomb."),
+    ])
+    return out
 
 
 def say_lines() -> list[tuple[str, str, str]]:
@@ -233,7 +254,7 @@ def check(report_path: Path | None = None) -> int:
     cache_path.parent.mkdir(exist_ok=True)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     assets = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text())
-    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("voiceRecasts", [])
+    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("voiceRecasts", []) + assets.get("ashenFordSecrets", [])
     new_raws = {r["raw"] for r in records}
     by = {}
     for j in jobs():
@@ -272,6 +293,7 @@ def check(report_path: Path | None = None) -> int:
         print(json.dumps(comparison), flush=True)
     report = dict(comparisons=comparisons,flagged=flagged,thresholds=dict(clipSemitones=10,speakerSemitones=6,centroidRatio=[.6,1.65]))
     report_path = report_path or ROOT / ".cache/tactics-voice-check.json"
+
     report_path.parent.mkdir(parents=True,exist_ok=True)
     report_path.write_text(json.dumps(report,indent=2)+"\n")
     print(f"{len(flagged)} clip(s) or speaker group(s) flagged")

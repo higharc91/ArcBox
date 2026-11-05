@@ -155,6 +155,8 @@ export interface WalkMember {
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  danger?: string;
+  ambush?: string;
   journal?: import("./quests").JournalData;
   pinned?: { id: string; name: string; objective: string };
   canOpenLog?: boolean;
@@ -233,6 +235,10 @@ export interface VoteData {
   away: string[];
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** What a loot vote asks ("Who takes the Potion of Healing?"), the owner's decision 1; absent for a story's vote. */
+  question?: string;
+  /** Which of a run of loot votes this is, so each item's question is a new one. */
+  vote?: number;
 }
 
 export interface CheckCard {

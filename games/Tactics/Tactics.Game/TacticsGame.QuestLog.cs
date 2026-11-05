@@ -27,20 +27,33 @@ public sealed partial class TacticsGame
             s.Status == "active" ? null : s.Log, s.Status == "done" ? new QuestRewardView(s.Def.Rewards.Gold, s.Def.Rewards.Xp,
                 [.. s.Def.Rewards.Items.Select(i => new QuestItemView(ItemName(new ItemId(i.Item)), i.Count))]) : null)).ToImmutableArray();
         var selected = entries.Any(q => q.Id == _questSelection) ? _questSelection : entries.FirstOrDefault(q => q.Id == _doc.World?.PinnedQuest)?.Id ?? entries.FirstOrDefault()?.Id;
-        return new QuestLogView(entries, selected, _doc.World?.PinnedQuest, canPin, QuestLogOpen ? Leader?.Name : null);
+        return new QuestLogView(entries, selected, _doc.World?.PinnedQuest, canPin, QuestLogOpen ? Leader?.Name : null, KeyRingView());
     }
+
+    /// <summary>The party's key ring (USER DECISION 8, decided 2026-11-03), or null while it holds no key.</summary>
+    private ImmutableArray<KeyInfo>? KeyRingView()
+    {
+        if (_doc.World is not { } world)
+            return null;
+        var keys = KeyRing.Of(Rules, world.Flags, ThingSaves);
+        return keys.IsEmpty ? null : keys;
+    }
+
+    /// <summary>True when the journal has something to show: the region's quests, or a key on the ring.</summary>
+    private bool HasJournal => !RegionQuests.IsEmpty || KeyRingView() is not null;
 
     private CustomView QuestLogScreen(Player player, ProfileId profile)
         => Custom("questLog", JsonSerializer.SerializeToNode(Journal(profile.Value == _lead), ArcJson.Options)!);
 
     private void QuestLogInput(Player player, ProfileId profile, JsonElement? data)
     {
-        if (_phase != TacticsPhase.Exploration || profile.Value != _lead || !RegionQuests.Any()) return;
+        if (_phase != TacticsPhase.Exploration || profile.Value != _lead || !HasJournal) return;
         var action = Str(data, "action");
         var quest = Str(data, "quest");
         var state = KnownQuests().FirstOrDefault(q => q.Def.Id == quest);
         switch (action)
         {
+            case "keepOpen" when QuestLogOpen: return;
             case "open":
                 Halt();
                 _questLogLeader = _lead;

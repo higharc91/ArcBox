@@ -1,0 +1,79 @@
+{
+  "id": "mob_kobold_scouts",
+  "name": "Ash Market Scouts",
+  "map": "mob_kobold_scouts",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "kobold_roamer",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      },
+      "hpByParty": {
+        "1": 8,
+        "2": 12,
+        "3": 24,
+        "4": 34,
+        "5": 42,
+        "6": 51
+      },
+      "unitByParty": {
+        "1": "kobold_roamer_lone",
+        "2": "kobold_roamer",
+        "3": "kobold_roamer",
+        "4": "kobold_roamer_patrol",
+        "5": "kobold_roamer_patrol",
+        "6": "kobold_roamer_patrol"
+      }
+    },
+    {
+      "unit": "kobold_roamer_slinger",
+      "zone": "enemy_spawn",
+      "count": 1,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1
+      },
+      "hpByParty": {
+        "1": 10,
+        "2": 15,
+        "3": 26,
+        "4": 34,
+        "5": 42,
+        "6": 51
+      },
+      "unitByParty": {
+        "1": "kobold_roamer_slinger_lone",
+        "2": "kobold_roamer_slinger",
+        "3": "kobold_roamer_slinger",
+        "4": "kobold_roamer_slinger_patrol",
+        "5": "kobold_roamer_slinger_patrol",
+        "6": "kobold_roamer_slinger_patrol"
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

@@ -1,0 +1,1 @@
+PASS: 14 eight-facing atlases, 672 source slots, 84 portraits, 28 placed variants, all named bodies preserved.

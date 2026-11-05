@@ -43,3 +43,21 @@ it("lets the VIP end a shop session through the existing confirmation menu", () 
   fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
   expect(send).toHaveBeenCalledWith("endSession");
 });
+it("lets the leader haggle once a visit, and shows what came of it with the server's prices", () => {
+  const send = vi.fn();
+  const haggle = { can: true, dc: 15, result: null };
+  const { rerender } = render(<Shop data={{ ...data, haggle }} send={send} stream={send} viewId="one" />);
+  fireEvent.click(screen.getByRole("button", { name: "Haggle · Persuasion DC 15" }));
+  expect(send).toHaveBeenLastCalledWith("shopHaggle", { shop: "herbalist" });
+  const passed = { can: false, dc: 15, result: { member: "me", name: "Ana", die: 14, bonus: 3, total: 17, dc: 12, passed: true } };   // the DC it was rolled against
+  rerender(<Shop data={{ ...data, haggle: passed, items: [{ ...data.items[0]!, price: 45 }] }} send={send} stream={send} viewId="two" />);
+  expect(screen.queryByRole("button", { name: /Haggle/ })).toBeNull();
+  expect(screen.getByText(/Ana rolled 14 \+ 3 = 17 vs DC 12/)).toBeTruthy();
+  expect(screen.getByText("45 gold each · 2 in stock")).toBeTruthy();
+  rerender(<Shop data={{ ...data, leader: false, haggle: { ...haggle, can: false } }} send={send} stream={send} viewId="three" />);
+  expect(screen.getByText("The leader can haggle once this visit (Persuasion DC 15).")).toBeTruthy();
+});
+it("has no haggling at an inn or a temple", () => {
+  render(<Shop data={data} send={vi.fn()} stream={vi.fn()} viewId="one" />);
+  expect(screen.queryByText(/haggle/i)).toBeNull();
+});

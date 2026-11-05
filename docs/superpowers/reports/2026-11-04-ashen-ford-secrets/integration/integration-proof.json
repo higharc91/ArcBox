@@ -1,0 +1,25 @@
+{
+  "source_commit": "d7583d80",
+  "branch": "ashen-ford-secrets",
+  "owner_approval": "I approve",
+  "headless_export_1_sha256": "a24d4d4ad2907c4924a4ded5ea22123ba91649fb3756f35255fbba357749d3bf",
+  "headless_export_2_sha256": "a24d4d4ad2907c4924a4ded5ea22123ba91649fb3756f35255fbba357749d3bf",
+  "approved_pngs_match": true,
+  "previous_shipped_pngs_unchanged": true,
+  "previous_props_retained": true,
+  "layout_matches_approved_preview": true,
+  "terrain_spawns_stamps_beats_people_unchanged": true,
+  "interactables_changed": false,
+  "scene_props_before": 988,
+  "scene_props_after": 990,
+  "new_palette_slots": [
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      11
+    ]
+  ]
+}

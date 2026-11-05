@@ -1,0 +1,240 @@
+{
+  "id": "mob_kobold_scouts",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "AgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgUAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgUAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAgUAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwAAAwUAAwAAAwAAAwAAAwAAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAwUABAAABAAABAAABAAA",
+  "materials": [
+    "ash/grey",
+    "cave_floor/cool",
+    "cobble/grey",
+    "cobble/warm",
+    "dirt/brown",
+    "dirt/dark",
+    "dirt_ford/wet",
+    "flagstone/grey",
+    "ford_water/clear",
+    "forest_needles/pine",
+    "grass/autumn",
+    "grass/dry",
+    "grass/frost",
+    "grass_ford/autumn",
+    "mine_gravel/brown",
+    "path/packed",
+    "planks/dark",
+    "planks/oak",
+    "rock_ford/bank",
+    "water/clear"
+  ],
+  "props": [
+    {
+      "id": "dead_tree",
+      "at": [
+        2,
+        2
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "dark"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        3,
+        4
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "dark"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        5,
+        11
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "dark"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        6,
+        11
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "dark"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        11,
+        8
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "dark"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        0,
+        11
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        2,
+        7
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        5,
+        1
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        5,
+        4
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        6,
+        8
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        11,
+        5
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "dead_tree",
+      "at": [
+        12,
+        11
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "grey"
+    },
+    {
+      "id": "rubble",
+      "at": [
+        2,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "ashen"
+    }
+  ],
+  "zones": {
+    "party_spawn": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "enemy_spawn": [
+      [
+        7,
+        5
+      ],
+      [
+        7,
+        4
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        8,
+        5
+      ],
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        9,
+        5
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        8,
+        6
+      ]
+    ]
+  }
+}

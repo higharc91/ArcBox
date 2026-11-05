@@ -11,6 +11,40 @@ public sealed class HiddenThingsTests
 {
     private static readonly HashSet<string> NoFlags = [];
 
+    [Fact]
+    public void Ashen_ford_secrets_are_found_only_by_their_checks_or_the_draft()
+    {
+        var rules = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
+        var all = rules.InteractablesIn("ashen_ford");
+        InteractableDef Named(string id) => Assert.Single(all, d => d.Id == id);
+        var path = Named("af_reed_bank_track");
+        var hatch = Named("af_market_cellar_hatch");
+        var draft = Named("af_market_cellar_draft");
+        var store = Named("af_market_cellar_store");
+
+        Assert.Equal(new HiddenDef(12, "survival"), path.Hidden);
+        Assert.Equal(new HiddenDef(13, "investigation"), hatch.Hidden);
+        Assert.Equal("se", path.Facing);
+        Assert.Equal("sw", hatch.Facing);
+        Assert.True(Interactables.Blocks(path, S(path), NoFlags));
+        Assert.True(Interactables.Blocks(hatch, S(hatch), NoFlags));
+        Assert.False(Interactables.Visible(path, S(path), NoFlags));
+        Assert.False(Interactables.Visible(hatch, S(hatch), NoFlags));
+        Assert.False(Interactables.Visible(draft, S(draft), NoFlags));
+        Assert.False(Interactables.Present(store, NoFlags));
+
+        int Survival(string skill) => skill == "survival" ? 12 : 9;
+        Assert.Contains(Interactables.Finds(all, null, NoFlags, new Tile(118, 84), Survival), f => f.Def.Id == path.Id);
+        Assert.Contains(Interactables.Searchable(all, null, NoFlags, new Tile(118, 84)), d => d.Id == path.Id);
+
+        int Investigation(string skill) => skill == "investigation" ? 13 : 9;
+        Assert.Contains(Interactables.Finds(all, null, NoFlags, new Tile(91, 101), Investigation), f => f.Def.Id == hatch.Id);
+        Assert.Contains(Interactables.Searchable(all, null, NoFlags, new Tile(91, 101)), d => d.Id == hatch.Id);
+        Assert.Contains(Interactables.Revealing(draft, all, null, NoFlags), f => f.Def.Id == hatch.Id);
+        Assert.True(Interactables.Present(store, new HashSet<string> { "af_cellar_open" }));
+        Assert.DoesNotContain(all, d => d.Sets.Any(s => s.StartsWith("ch1_", StringComparison.Ordinal)));
+    }
+
     private static InteractableSave S(InteractableDef d) => Interactables.Initial(d);
 
     private static Dictionary<string, InteractableSave> Saves(params (string Id, InteractableSave Save)[] saves)

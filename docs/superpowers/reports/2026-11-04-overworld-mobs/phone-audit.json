@@ -1,0 +1,212 @@
+[
+  {
+    "screen": "walk-danger",
+    "name": "small",
+    "width": 320,
+    "height": 568,
+    "scrollWidth": 320,
+    "scrollHeight": 568,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 91,
+        "y": 108.09375,
+        "w": 202,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 16,
+        "y": 266.171875,
+        "w": 288,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "small",
+    "width": 320,
+    "height": 568,
+    "scrollWidth": 320,
+    "scrollHeight": 568,
+    "buttons": []
+  },
+  {
+    "screen": "walk-danger",
+    "name": "iphone",
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 145,
+        "y": 99,
+        "w": 218,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 16,
+        "y": 478,
+        "w": 358,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "iphone",
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "buttons": []
+  },
+  {
+    "screen": "walk-danger",
+    "name": "android",
+    "width": 412,
+    "height": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 915,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 167,
+        "y": 99,
+        "w": 218,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 16,
+        "y": 549,
+        "w": 380,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "android",
+    "width": 412,
+    "height": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 915,
+    "buttons": []
+  },
+  {
+    "screen": "walk-danger",
+    "name": "landscape",
+    "width": 844,
+    "height": 390,
+    "scrollWidth": 844,
+    "scrollHeight": 390,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 263,
+        "y": 89,
+        "w": 218,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 16,
+        "y": 342,
+        "w": 476,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "landscape",
+    "width": 844,
+    "height": 390,
+    "scrollWidth": 844,
+    "scrollHeight": 390,
+    "buttons": []
+  },
+  {
+    "screen": "walk-danger",
+    "name": "tablet",
+    "width": 768,
+    "height": 1024,
+    "scrollWidth": 768,
+    "scrollHeight": 1024,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 399,
+        "y": 99,
+        "w": 218,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 140,
+        "y": 658,
+        "w": 488,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "tablet",
+    "width": 768,
+    "height": 1024,
+    "scrollWidth": 768,
+    "scrollHeight": 1024,
+    "buttons": []
+  },
+  {
+    "screen": "walk-danger",
+    "name": "wide",
+    "width": 1024,
+    "height": 768,
+    "scrollWidth": 1024,
+    "scrollHeight": 768,
+    "buttons": [
+      {
+        "text": "End session",
+        "x": 527,
+        "y": 99,
+        "w": 218,
+        "h": 44,
+        "outside": false
+      },
+      {
+        "text": "Search",
+        "x": 268,
+        "y": 402,
+        "w": 488,
+        "h": 48,
+        "outside": false
+      }
+    ]
+  },
+  {
+    "screen": "walk-ambush",
+    "name": "wide",
+    "width": 1024,
+    "height": 768,
+    "scrollWidth": 1024,
+    "scrollHeight": 768,
+    "buttons": []
+  }
+]

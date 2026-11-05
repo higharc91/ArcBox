@@ -155,7 +155,8 @@ public sealed class StageEndTests
         var thingsPath = Path.Combine(rules, "interactables", "ashen_ford.json");
         var things = JsonNode.Parse(File.ReadAllText(thingsPath))!;
         var list = things["interactables"]!.AsArray();
-        list.Remove(list.Single(t => t!["id"]!.GetValue<string>() == "af_ford_campfire"));
+        foreach (var id in new[] { "af_ford_campfire", "af_bank_claw_marks", "af_reed_bank_track" })
+            list.Remove(list.Single(t => t!["id"]!.GetValue<string>() == id));
         File.WriteAllText(thingsPath, things.ToJsonString());
         var mapPath = Path.Combine(rules, "maps", "river_crossing.json");
         var map = JsonNode.Parse(File.ReadAllText(mapPath))!;
@@ -164,6 +165,14 @@ public sealed class StageEndTests
         var stage = Stage;
         var regionPath = Path.Combine(rules, "world", "ashen_ford.json");
         var region = JsonNode.Parse(File.ReadAllText(regionPath))!;
+        // This isolated flood scenario predates optional roaming arenas on the far bank.
+        var stamps = region["stamps"]!.AsArray();
+        foreach (var stamp in stamps.Where(s => s!["map"]!.GetValue<string>().StartsWith("mob_", StringComparison.Ordinal)).ToArray()) stamps.Remove(stamp);
+        var manifestPath = Path.Combine(rules, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(manifestPath))!;
+        var files = manifest["files"]!.AsArray();
+        files.Remove(files.Single(f => f!.GetValue<string>() == "mobs/ashen_ford.json"));
+        File.WriteAllText(manifestPath, manifest.ToJsonString());
         byte[] Chunk(Tile at, out JsonNode chunk)
         {
             var (cx, cy) = (at.X / WorldRegion.ChunkSize, at.Y / WorldRegion.ChunkSize);

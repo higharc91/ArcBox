@@ -1,0 +1,56 @@
+{
+  "status": "collision-only candidate passed",
+  "proposedGranaryAt": [
+    43,
+    72
+  ],
+  "footprint": [
+    3,
+    2
+  ],
+  "replacement": "cottage_39 at [43,72]; remove overlapping clutter_barrels_41 at [45,73] for actual preview",
+  "storyLegs": 12,
+  "retryLegs": 2,
+  "allStoryLegsReachable": true,
+  "allRetriesReachable": true,
+  "problems": [],
+  "foundation": [
+    {
+      "x": 43,
+      "y": 72,
+      "height": 3,
+      "material": "grass/dry"
+    },
+    {
+      "x": 44,
+      "y": 72,
+      "height": 3,
+      "material": "grass/dry"
+    },
+    {
+      "x": 45,
+      "y": 72,
+      "height": 3,
+      "material": "grass/dry"
+    },
+    {
+      "x": 43,
+      "y": 73,
+      "height": 3,
+      "material": "grass/dry"
+    },
+    {
+      "x": 44,
+      "y": 73,
+      "height": 3,
+      "material": "grass/dry"
+    },
+    {
+      "x": 45,
+      "y": 73,
+      "height": 3,
+      "material": "grass/dry"
+    }
+  ],
+  "caveat": "Read-only collision simulation over the current region. Art anchors, doorway orientation, roof occlusion and final placement still require generated pixels and TV review; production map was not changed."
+}

@@ -8,6 +8,10 @@ review-stage instructions and frozen isolation evidence below describe the
 pre-installation checkpoint; pending-approval statements are superseded.
 
 
+After integrating newer main, use `verify-integration.py` and the
+[main integration report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/main-integration/report.md).
+The older installation-only verifier targets the pre-integration baseline.
+
 All seven approved concept pairs are translated into eight-facing pixel sprites:
 barmaid, child, farmer, farmhand, fisher, guard and merchant. Each variant has two
 native idle poses and four native walking poses per direction (48 source frames),

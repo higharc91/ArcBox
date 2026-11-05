@@ -10,6 +10,10 @@ public sealed partial class TacticsGame
     internal Action? WorldEntering { get; set; }
     private string? _worldRecoveryNotice;
 
+    /// <summary>Found items kept through a recovery, with no vote under way and no cursor to put back: the next walk asks again.</summary>
+    private static LootSave? SetDown(LootSave? loot)
+        => loot is null || loot.Items.IsEmpty ? null : loot with { Voting = false, Under = null, Choices = [], Service = null };
+
     private void WorldCall(string path, Action action)
     {
         var before = _doc;
@@ -21,6 +25,7 @@ public sealed partial class TacticsGame
         try
         {
             action();
+            LootAfterAction();
             WorldActionCompleted?.Invoke(path);
             // Keep the header stable while the thumb is held; clear it on the next deliberate action.
             if (path.StartsWith("input:", StringComparison.Ordinal) && path != "input:walk") _worldRecoveryNotice = null;
@@ -40,7 +45,7 @@ public sealed partial class TacticsGame
                 foreach (var timer in RecoveryTimers)
                     _ctx.CancelTimer(timer);
                 // Roll back purchases/rewards as well as the cursor. Never reopen a broken active cursor.
-                _doc = before with { Battle = null, World = before.World with { Story = null, Shop = null, Camp = null } };
+                _doc = before with { Battle = null, World = before.World with { Story = null, Shop = null, Camp = null, MobAmbush = null, Loot = SetDown(before.World.Loot) } };
                 ResetWorldRecoveryState();
                 _questObservedFlags = StoryFlags();
                 EnterWorld(); // validates the saved tile, or uses the region's start
@@ -56,6 +61,7 @@ public sealed partial class TacticsGame
                 // Do not re-enter quest/reward processing while recovering from its exception.
                 _lease.Save(_doc.ToJson());
                 LeadClock();
+                ArmMobs();
                 const string notice = "The story has changed. The party is safely back on the road; try again.";
                 _worldRecoveryNotice = before.Battle is null ? notice : BattleCalledOff;
                 Note(_worldRecoveryNotice);
@@ -72,7 +78,7 @@ public sealed partial class TacticsGame
                     World = world with
                     {
                         Region = region?.Def.Id ?? world.Region, At = at, Facing = new(at.X + 1, at.Y),
-                        Story = null, Shop = null, Camp = null,
+                        Story = null, Shop = null, Camp = null, MobAmbush = null, Loot = SetDown(world.Loot),
                     },
                 };
                 _lease.Save(_doc.ToJson()); // Persist first: even a later host failure cannot reopen the broken cursor.
@@ -102,11 +108,13 @@ public sealed partial class TacticsGame
         }
     }
 
-    private static readonly string[] RecoveryTimers = [Timers.Step, Timers.Save, Timers.Lead, Timers.Line, Timers.Vote, Timers.Pace, Timers.Turn, Timers.React, CampTimerKey, "questResult", "townBark"];
+    private static readonly string[] RecoveryTimers = [MobTimer, MobAmbushTimer, Timers.Step, Timers.Save, Timers.Lead, Timers.Line, Timers.Vote, Timers.Pace, Timers.Turn, Timers.React, CampTimerKey, "questResult", "townBark"];
 
     // Pure in-memory cleanup, also usable when host callbacks or world initialization have failed.
     private void ResetWorldRecoveryState()
     {
+        _mobActors.Clear();
+        _mobDirty = false;
         (_dir, _blocked, _owed, _latched) = (null, false, false, false);
         _legs = [];
         (_saveBy, _saveAt) = (null, null);

@@ -119,10 +119,21 @@ and day/night state; use the manifest's common size, origin and anchor. Ordinary
 mist anchored to warm water, with no emitted light. `worldmap.placeIcons` overrides
 generic map icons for specific lore place ids and must inherit their lore unlocks.
 
-Ashen Ford's saved region currently has terrain and markers, not detailed prop or
-building placements. The walking renderer is not yet implemented in this checkout.
-The detailed town/effect/landmark art is a library for that work; the shared terrain
-and prop refinements also apply to the live battle renderer.
+Ashen Ford's detailed buildings, props and people are authored in
+`tools/tactics-world/regions/ashen_ford.tscn` and exported into the live region.
+The owner-approved granary and Maud's hut/dressing use the native town renderer
+in `parts/lore_places.py`, with shared materials, pixel scale, anchors and shadows.
+Rebuild these four families additively with:
+
+```bash
+python3 tools/tactics-assets/build.py lore_places
+```
+
+This preserves the other curated/imported assets. The legacy full-set generators
+and imported art have separate authoring pipelines; use the targeted command for
+the lore-place art. Town/props generation also appends the corresponding lore-place
+families. Paint placement changes in the saved scene and re-export headless; do not
+maintain a separate hand-edited runtime region. See the [integration report](../../docs/superpowers/reports/2026-11-04-ashen-ford-secrets/integration/README.md).
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,
   `hair`, `cloth1`, `metal`, and so on. A *shade* indexes a 6-step, hue-shifted ramp (`arcpix/palette.py`).

@@ -86,7 +86,7 @@ foreach (var battle in SimRunner.Run(config, rules))
 }
 Console.Error.WriteLine($"{battles.Count} battles in {watch.Elapsed.TotalSeconds:0}s.");
 
-var report = Report.Markdown(battles, config);
+var report = (config.Encounters.All(e => e.StartsWith("mob_", StringComparison.Ordinal)) ? MobReport.Markdown(battles) : "") + Report.Markdown(battles, config);
 if (outPath is null)
     Console.Write(report);
 else

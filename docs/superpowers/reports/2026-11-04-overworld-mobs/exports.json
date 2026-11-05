@@ -1,0 +1,14 @@
+{
+  "ashen_ford": {
+    "identical": true,
+    "sameAsCommittedWork": true,
+    "sha256": "f93c4be2d34dc58a4238a4abfdfb0557101e75fc4491d358d7126e2d706df28a",
+    "warnings": 0
+  },
+  "cinder_hollow": {
+    "identical": true,
+    "sameAsCommittedWork": true,
+    "sha256": "07a959d40e89341eb6560072762df07ee4fa68319242d2702174ed7390c9fdcc",
+    "warnings": 0
+  }
+}

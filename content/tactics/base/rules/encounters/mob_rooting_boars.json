@@ -1,0 +1,49 @@
+{
+  "id": "mob_rooting_boars",
+  "name": "Rooting Boars",
+  "map": "mob_rooting_boars",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "boar_roamer",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      },
+      "hpByParty": {
+        "1": 30,
+        "2": 34,
+        "3": 48,
+        "4": 70,
+        "5": 88,
+        "6": 105
+      },
+      "unitByParty": {
+        "1": "boar_roamer_lone",
+        "2": "boar_roamer_pair",
+        "3": "boar_roamer",
+        "4": "boar_roamer_sounder",
+        "5": "boar_roamer_sounder",
+        "6": "boar_roamer_sounder"
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

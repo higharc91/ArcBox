@@ -10,7 +10,18 @@ export interface QuestEntry {
   objective: string; history: { log: string; done: boolean; objective?: string }[]; result?: string;
   rewards?: { gold: number; xp: number; items: { name: string; count: number }[] };
 }
-export interface JournalData { quests: QuestEntry[]; selected?: string; pinned?: string; canPin: boolean; reading?: string }
+/** A key on the party's key ring (the owner's decision 8, 2026-11-03): its name, where it was found, and whether it has opened a lock. */
+export interface KeyEntry { id: string; name: string; found: string | null; used: boolean }
+export interface JournalData { quests: QuestEntry[]; selected?: string; pinned?: string; canPin: boolean; reading?: string; keys?: KeyEntry[] }
+
+/** The party's key ring, as a list: only shown once the party holds a key. */
+export function KeyRing({ keys }: { keys?: KeyEntry[] }) {
+  if (!keys?.length) return null;
+  return <section class="tx-keyring" aria-label="Keys"><h3>Keys</h3><ul>
+    {keys.map(k => <li key={k.id}><span class="tx-keyring-icon" aria-hidden="true">⚷</span><span><b>{k.name}</b>
+      <small>{[k.found ? `Found: ${k.found}` : null, k.used ? "Used" : "Not used yet"].filter(Boolean).join(" · ")}</small></span></li>)}
+  </ul></section>;
+}
 type Send = CustomScreenProps["send"];
 
 export function Journal({ journal, send, shared = false, onClose, initial }: {
@@ -18,6 +29,13 @@ export function Journal({ journal, send, shared = false, onClose, initial }: {
 }) {
   const [selection, setSelection] = useState(initial ?? journal.selected ?? journal.quests[0]?.id);
   const sfx = useSfx();
+  const latestSend = useRef(send);
+  latestSend.current = send;
+  useEffect(() => {
+    if (!shared || !journal.canPin) return;
+    const timer = setInterval(() => latestSend.current("questLog", { action: "keepOpen" }), 2500);
+    return () => clearInterval(timer);
+  }, [shared, journal.canPin]);
   const selected = journal.quests.find(q => q.id === (shared && journal.canPin ? journal.selected : selection)) ?? journal.quests[0];
   const close = () => { sfx("questlogClose"); if (shared && journal.canPin) send("questLog", { action: "close" }); else onClose?.(); };
   return <section class="tx-journal" aria-label="Quest journal">
@@ -32,7 +50,7 @@ export function Journal({ journal, send, shared = false, onClose, initial }: {
           <span class={`tx-seal ${q.status}`} aria-label={q.status}>{q.status === "done" ? "✓" : q.status === "failed" ? "×" : "✦"}</span>
           <span><b>{q.name}</b><small>{q.objective}</small></span>
           {journal.pinned === q.id ? <span class="tx-pin-ribbon" aria-label="Pinned">◆</span> : null}</button>)}</section> : null;
-    })}</nav>
+    })}<KeyRing keys={journal.keys} /></nav>
     {selected ? <article class="tx-journal-entry" aria-label={selected.name}>
       <div class="tx-journal-giver">{selected.portrait ? <MoodPortrait preset={selected.portrait} mood="idle" name={selected.giver} size={80} /> : null}
         <div><span class="tx-eyebrow">{selected.giver}</span><h2>{selected.name}</h2></div></div>

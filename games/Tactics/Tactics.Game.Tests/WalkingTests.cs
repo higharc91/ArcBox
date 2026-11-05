@@ -52,7 +52,10 @@ public sealed class WalkingTests
     /// <summary>A session already in the world at <paramref name="at"/>, everyone here, with player 0 leading.</summary>
     private static Session At(Tile at)
     {
-        var s = new Session(document: DocumentAt(Saved(at)));
+        // These tests measure the walking controller after optional encounters have been cleared.
+        // Mob timers, contact and packet costs are covered in MobRuntimeTests.
+        var world = Saved(at) with { MobChapter = 1, MobsBeaten = [.. Rules.Mobs.Values.SelectMany(m => m).Select(m => m.Id)] };
+        var s = new Session(document: DocumentAt(world));
         s.Harness.StartCampaign(s.Lease);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
@@ -879,8 +882,8 @@ public sealed class WalkingTests
         Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(Party(s)), ArcJson.Options).Length < 1024 + 4 * 20);
     }
 
-    /// <summary>The view without the region's things and their events: what walking itself costs when the whole view is sent.</summary>
-    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, Gold = null, Traders = null };
+    /// <summary>The core walking cost without region things, discovery speech and wall plugs. The real patch budgets below include them all.</summary>
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, ThingSpeech = null, Plugs = null, Gold = null, Traders = null };
 
     /// <summary>One network packet's payload: a 1,500-byte frame less the IP, TCP and TLS headers (issue #77).</summary>
     private const int Packet = 1420;
@@ -1771,11 +1774,13 @@ public sealed class WalkingTests
 
     private static IEnumerable<Tile> Route(Tile from, Tile to)
     {
+        var danger = Rules.MobsIn("ashen_ford").SelectMany(m => m.Patch).SelectMany(t => new[]
+            { t, new Tile(t.X + 1, t.Y), new Tile(t.X - 1, t.Y), new Tile(t.X, t.Y + 1), new Tile(t.X, t.Y - 1) }).ToHashSet();
         var back = new Dictionary<Tile, Tile> { [from] = from };
         var open = new Queue<Tile>([from]);
         while (open.TryDequeue(out var tile) && tile != to)
             foreach (var next in WorldWalk.Steps(Ground, tile, ClassDef.DefaultJump))
-                if (back.TryAdd(next, tile))
+                if (!danger.Contains(next) && back.TryAdd(next, tile))
                     open.Enqueue(next);
         Assert.True(back.ContainsKey(to), $"No way from {from} to {to}.");
         var route = new List<Tile>();

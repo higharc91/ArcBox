@@ -80,7 +80,8 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Mob = null);
 
 /// <summary>Where a battle was drawn in the world (<see cref="BattleStage"/>), as saved with it: its map's tile (0, 0) and the height added.</summary>
 public sealed record SavedStage(Tile Origin, int Height);
@@ -194,7 +195,13 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> QuestsRewarded = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PinnedQuest = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
-    ImmutableSortedDictionary<string, StorySave>? RegionStories = null)
+    ImmutableSortedDictionary<string, StorySave>? RegionStories = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] LootSave? Loot = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> MobsBeaten = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
+    ImmutableSortedDictionary<string, MobActorSave>? MobActors = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MobChapter = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? MobAmbush = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
@@ -243,6 +250,9 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
                 .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
         };
+        // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
+        if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
+            doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
         // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
         return doc.Gold > 0 && !doc.Members.IsEmpty
             ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
@@ -302,3 +312,6 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         return Math.Clamp(table.Thresholds.Count(t => t <= lowest), 1, 10);
     }
 }
+
+/// <summary>A roaming actor cursor, persisted so restart never chooses another random step.</summary>
+public sealed record MobActorSave(Tile At, long Step, int Seed);

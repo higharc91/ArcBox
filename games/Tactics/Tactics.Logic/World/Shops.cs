@@ -44,15 +44,39 @@ public sealed class StockCountConverter : JsonConverter<int>
     }
 }
 
-/// <summary>Pure pricing and presence rules. Haggling is deliberately disabled by default.</summary>
+/// <summary>
+/// Pure pricing and presence rules. Haggling is on, once per visit (shops design §3.3, USER DECISION E, decided by the owner on 2026-11-03):
+/// a pass takes <see cref="HaggleBuy"/> off what the party buys and adds <see cref="HaggleSell"/> to the ratio it sells at, for that visit.
+/// </summary>
 public static class ShopRules
 {
-    /// <summary>The purchase price, rounded up to whole gold.</summary>
-    public static int Buy(ItemDef item, ShopDef shop)
-        => checked((int)decimal.Ceiling((item.Price ?? throw new RulesInvariantException("An unpriced item cannot be traded.")) * shop.PriceMod));
+    /// <summary>The Persuasion DC of a shop whose content doesn't set <c>haggle</c>.</summary>
+    public const int DefaultHaggleDc = 15;
 
-    /// <summary>The sale price, rounded down to whole gold.</summary>
-    public static int Sell(ItemDef item, ShopDef shop) => checked((int)decimal.Floor(Buy(item, shop) * shop.SellRatio));
+    /// <summary>What a haggle that passed leaves of a buy price: a tenth off.</summary>
+    public const decimal HaggleBuy = 0.9m;
+
+    /// <summary>What a haggle that passed makes of the sell ratio: a tenth more.</summary>
+    public const decimal HaggleSell = 1.1m;
+
+    /// <summary>The purchase price, rounded up to whole gold: a tenth less after a haggle that passed.</summary>
+    public static int Buy(ItemDef item, ShopDef shop, bool haggled = false)
+        => checked((int)decimal.Ceiling((item.Price ?? throw new RulesInvariantException("An unpriced item cannot be traded.")) * shop.PriceMod
+            * (haggled ? HaggleBuy : 1m)));
+
+    /// <summary>
+    /// A room's or a cure's price, rounded up to whole gold: a tenth less after a haggle that passed (the owner, 2026-11-04: rooms and cures
+    /// haggle too).
+    /// </summary>
+    public static int Service(ShopService service, bool haggled = false)
+        => haggled ? checked((int)decimal.Ceiling(service.Price * HaggleBuy)) : service.Price;
+
+    /// <summary>
+    /// The sale price, rounded down to whole gold: the shop's ratio of its plain price, and a tenth more after a haggle that passed; never more
+    /// than the shop asks for the same item on that visit, so nothing can be bought and sold back at a profit.
+    /// </summary>
+    public static int Sell(ItemDef item, ShopDef shop, bool haggled = false)
+        => Math.Min(checked((int)decimal.Floor(Buy(item, shop) * shop.SellRatio * (haggled ? HaggleSell : 1m))), Buy(item, shop, haggled));
 
     /// <summary>Whether the shop exists with these flags.</summary>
     public static bool Present(ShopDef shop, IReadOnlySet<string> flags)

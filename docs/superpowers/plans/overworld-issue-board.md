@@ -15,6 +15,7 @@ Issue #76 is being implemented on `stability-and-tooling`, cut from that main co
 |---|---|---|
 | `main` | Overworld, characters, environmental tiles, shops, recovery, NPCs and quests | Integrated through PR #75 |
 | `stability-and-tooling` | Issue #76 stability and tooling fixes | In progress |
+| `tv-drawing-polish` | Issue #78: OW-08, OW-12, OW-14, OW-21 and the wall-plug seam (OW-23) | Pushed for review, no PR yet |
 | `environmental-tiles`, `shops-and-gold`, `rest-and-recovery`, `feat/creature-overworld-integration`, `npcs-and-quests` | Earlier feature work | Integrated into main |
 | `overworld-issue-board`, `ccr-18ad4510-q68nad` | Historical review/session branches | Use current main and the issue branch for new work |
 
@@ -69,9 +70,12 @@ It was the screenshots. With `ARCBOX_SHOTS=0` no frame was over 16 ms. See the r
 People have stable IDs, optional lore identities and flag gates, round-tripped through the painting workspace. Goblin warriors leave after a won force or parley ending; Mother Skarrow leaves only after force. A failed attempt keeps them present. Departures fade over 0.35 seconds; arrivals wait off-screen or behind the party. Existing story flags remain unchanged.
 **Validation:** 6,048 .NET tests and 497 web tests pass; two actual Godot exports are byte-identical. Integrated on `npcs-and-quests` for issue #73.
 
-### OW-08 · The ford's bridge planks end in a straight cut · `todo`
+### OW-08 · The ford's bridge planks end in a straight cut · `done`, issue #78
 In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop in a vertical line, and a unit behind them is cut off with it. It's there without the new characters too. Probably a sorting or block-edge clip, or the bridge sprite against the stamp's edge. Add the case to `OverlayPictureTests`.
 **Done when:** the crossing reads as a whole structure from every side, with no clipped units.
+**What it was:** neither a block nor a stamp edge. `bridge_timber.png` is 192×128 for a 96×64 prop, and the painter took a sprite's size in texels as its source, so it drew the top-left quarter at twice the size, cut off straight down and across, and that quarter went over the unit beside it. Drawn whole, the deck then sorted on its own tile and went over anyone on the tiles it spans.
+**Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
+**Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after, and the [fight in place](../reports/tv-drawing-polish/ow08-fight-in-place-after.png) from an `ARCBOX_STAGE=1` run. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
 ### OW-09 · The ford's ground looks soft and blotchy · `needs user`
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
@@ -138,9 +142,11 @@ World inputs, timers and reconnect/resume operations now roll back failed action
 
 Review follow-up: the recovery block itself is protected. If it fails, a direct minimal save clears all active cursors and moves the preserved party to the region start before callbacks or timer work. Two `EnterWorld` failure cases reproduce the original escape, then verify reopening/walking and phone/TV notices even with a throwing log sink. All 31 focused world/battle-fault checks pass, followed by all 638 gameplay and 411 server tests; the solution rebuild has zero warnings/errors.
 
-### OW-12 · World open stalls the main thread · `todo`
+### OW-12 · World open stalls the main thread · `done`, issue #78
 `FinishBuild` (`WorldCanvas.cs:~527`) runs `WorldFauna`'s constructor: about 440 ms in Debug by reading and timing. `FaunaRange.Pen` can be up to 18^4 rectangles. The title card hides it.
 **Done when:** the main-thread part of opening is under a frame's budget.
+**Fixed (`48589e34`):** `FaunaRange.Pen` keeps its rule but reads each side of a rectangle from running counts, four lookups each. The herd (`WorldHerd`), the ambient plan, the prop fade and the world's nodes (blocks, the overlay canvas, the ambient layer, made out of the tree) are built with the plan on the build thread, and the main thread only adds them. The animals' sheets, the ambient images and the animal calls' sounds load with the textures, within their 8 ms budget.
+**Measured** with `--world-demo --perf` on the cloud worker (Debug, lavapipe, one run each), as the new `WORLD open on the main thread` line: Ashen Ford **1,112.7 ms → 9.0 ms** (988 ms of it was the fauna); Cinder Hollow's demo, which opens the ford and then the cave, **1,094.9 and 15.9 ms → 11.2 and 1.1 ms**. The worst frame in the `PERF` window that holds the open went from 1,210 ms to 56 ms, about a lavapipe frame. **Proved by** `FaunaTests` (the pens are the same as counting tile by tile, on random fences and the ford's own; a field of fences is quick). Not measured on the RTX 5080.
 
 ### OW-13 · Explore view is too big for one packet · `done`, issue #77
 The whole TV view in Ashen Ford is about 4.3 KB, against one packet's 1,420 bytes, and it went out on every step. The TV now asks for **host view patches** (`HostViewPatch` in `ArcBox.Sdk.Protocol`). After a whole view on bind, a new game or a resend, it gets only what changed; arrays of things patch by id.
@@ -166,8 +172,9 @@ No game code changed: the TV's scenes still get whole views.
 
 None of the runs asked for a whole view again. Battles rarely patch: their views have no id-keyed arrays, so the whole view is usually as small, and it's sent whole.
 
-### OW-14 · Fauna draws over props · `todo`
+### OW-14 · Fauna draws over props · `done`, issue #78
 Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or keep them clear.
+**Fixed (`48589e34`):** `WorldHerd` gives the animals to the frame as units, sorted in with the people and walkers, so the overlay paints what stands in front of one over it. `Behind` is gone, so an animal may now go behind a prop. A figure walking along one axis could round into the next tile's slot (`UnitPlace.Over`), and that's fixed too. **Proved by** `OverlayPictureTests` (a goat behind a haystack is hidden by it from three sides, one in front is over it, both true painter's order), `FaunaTests` (the ford's herd wanders the same way twice and keeps to its ground) and the [farm](../reports/tv-drawing-polish/ow14-farm-animals-after.png).
 
 ## P2: tests, tools and tidying
 
@@ -177,8 +184,9 @@ Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or kee
 - **OW-18 · REDLINE e2e · `blocked`:** needs Playwright. The user said not now.
 - **OW-19 · Second hardware check · `todo`:** `local-hardware-check-2.md` hasn't run. `ARCBOX_RESTART=kill` and forced `ARCBOX_DROP_SIGNALS` have no confirmed pass.
 - **OW-20 · Stale docs · `done`:** cloud handoff §3, §5, §8 items 6, 9, 10. `2026-11-01-ashen-ford-handoff.md`. Report `2026-11-02-tactics-overworld.md` lines 28, 42, 107, 223, 233, 292. `environmental-tiles/README.md` and milestones B and C. `tools/tactics-world/README.md:176`. `docs/tv-host.md:353` (197 buildings now). The world dressing plan's `TallProps.cs`, which wasn't kept. `local-hardware-check-2.md:33`. The creature branch's `overworld-art-review` README "Current integration boundary". The named entries are updated, `PropFade` replaces obsolete `TallProps` references, and the painting guide documents `--edit-props`. See the stability report for verification.
-- **OW-21 · Ambient · `todo`:** birds, leaves, embers and motes aren't built. The chimney path in `AmbientPlan.cs` matches no prop, so it's dead code. The new `river_steam` art is unused.
+- **OW-21 · Ambient · `done`, issue #78:** birds, leaves, embers and motes weren't built, the chimney path in `AmbientPlan.cs` matched no prop, and the new `river_steam` art was unused. Now (`5eaad666`, wired in `48589e34`) leaves fall from leafy trees in their own colours, embers rise from campfires and torches, motes hang in lamplight at dusk, a bird or a flock crosses the sky now and then (crows at dusk), and the ford's river steams with `river_steam`. All of it is ambient-manifest art, chosen once by hash. The chimney path is gone, since the town kit's buildings smoke for themselves. **Proved by** `AmbientPlanTests` and shots of the [camp](../reports/tv-drawing-polish/ow21-ambient-camp-before-after.png), [river](../reports/tv-drawing-polish/ow21-ambient-river-before-after.png) and [trees](../reports/tv-drawing-polish/ow21-ambient-trees-before-after.png). **Frame time** on lavapipe (Debug, no shots, same machine, before and after): the ford's crossing had a median of 55.6 and 53.3 ms, with render CPU 1.29 both times; a town walk had a median of 96.5 and 97.8 ms, with render CPU 1.74 and 1.82. Lavapipe can't show 16 ms, so the RTX 5080 is still the check (OW-19). The `river_steam` mist is faint by design (alpha at most 60 of 255) and was lost on the water in the dusk's light, so it's drawn whole and additively, catching the light as a glow does.
 - **OW-22 · Place shots · `todo`:** replace `place-*.png` from a real walk after OW-09.
+- **OW-23 · Wall-plug seam · `done`, issue #78:** an unfound hidden path left a notch in its hedge, and a secret door left a faint seam (interactables design §7.8). There were two causes. The overlay painted the open tile's own top back over the plug's sides, and the plug wasn't graded as the world is. The earlier `world: true` changed nothing visible because the notch hid it. Fixed in `59586ff5`. **Proved by** `WallPlugsTests` (a plugged tile against its neighbour, for both) and the [path](../reports/tv-drawing-polish/plug-hedge-path-before-after.png) and [door](../reports/tv-drawing-polish/plug-secret-door-before-after.png) shots.
 
 ## P2: features under way
 
@@ -191,11 +199,11 @@ The live TV/phone run earned the shipped council advance (200 gold, four 50-gold
 ### OW-32 · Rest and recovery · `done`, issue #71
 Camp, inn and temple services are integrated into main. The issue #76 force run completed camp and inn through dawn on TV and phones; NPC conversations reuse these services.
 
-### OW-33 · Hidden things · `todo`
-Ashen Ford has scuffs and a cache, but no hidden path or door. The open items are in the interactables design §7.8.
+### OW-33 · Hidden things · `done`, issue #81 part 1
+Survival reed-bank track, Investigation cellar hatch/draft, gated ledger and one Smoke Bomb, and three story-gated notices with narrator audio. Integrated with current main and its bounty, roaming arenas and bridge/plug fixes. The claw notice moves from [121,80] to [118,80] outside the newer kobold arena; its text/audio/gate are unchanged. A native rock at [117,84] preserves the shortcut advantage with the original test threshold, path/check positions and ordinary route intact. Final combined-source verification `183d16a9`: clean build, all 6,376 .NET tests and 517 phone tests, plus a fresh four-phone force run that won its fight, said all 94 selected lines once, reached the end card and walked afterward. No TV errors. [Release evidence](../reports/2026-11-04-ashen-ford-secrets/merge/README.md). Owner authorized push and merge, superseding the earlier no-PR restriction.
 
-### OW-34 · Places still short of the lore · `todo`
-No granary building, because the kit has none: (42,70) is sacks and crates. Maud's hut is a plain cottage with no charms. Both are art requests, so ask before generating.
+### OW-34 · Places still short of the lore · `done`, issue #81 part 2
+Owner-approved native granary, Maud cottage, cold-ash herb bed and stool/pots are integrated in live manifests and the saved scene. Granary at [39,71]; Maud retains her original 2×2 frame/origin/anchor at [130,88]. Quest sack and story markers remain reachable. Main's 927 Ashen Ford and four Cinder Hollow prop cells were remapped by identity; the approved yard changes plus bank rock leave 930 cells in Ashen Ford. All existing main sprite/audio bytes and the approved native sprite hashes are preserved. Both region exports are deterministic; Cinder Hollow's scene/world are unchanged from main. Five art checks account for all 651 environment PNGs. Fresh merged-pack captures and the actual Maud story scene were visually reviewed. [Art, checks and integration evidence](../reports/2026-11-04-ashen-ford-secrets/merge/README.md). No new generation credits used for native art. Owner authorized publication.
 
 ### OW-35 · NPCs and side quests · `done`, issue #73
 Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, atomic rewards and the shared/private pinned quest journal. Completed on `npcs-and-quests`; main integration is tracked in [PR #75](https://github.com/higharc91/ArcBox/pull/75). Rest/recovery and the character/palette board are integrated as prerequisites; OW-07 is complete. Full suite: 6,081 .NET and 504 phone tests. Mobile layout audit: 264 cases, including movement-wheel clearance. Actual force/parley chapter runs and the grain quest passed. [Report](../reports/2026-11-03-npcs-quests/README.md).
@@ -203,17 +211,38 @@ Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford
 ### OW-36 · Ashmaw bounty · `doing`, issue #74
 Work is on `ashmaw-bounty`, based on merged #73. Both character concepts and the pixel direction are approved. All eight directions and action sets are generated and curated; actual TV world/battle motion is owner-approved, and dedicated atlases/portraits are installed. The quest, cave, travel, class trinkets, dormant remake behavior, private phone rewards and voiced dialogue are implemented. A six-player live run completed all four chambers and the return/reward flow. Final cave dressing adds candles, animal remains and dried blood. The owner retained level 2, with an explicit journal recommendation, and requested tougher fights only for 4+ players. Paired trinket comparisons are complete. Final tuning gives four-player wins of 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4; smaller-party results are unchanged. Verified: 6,191 .NET and 508 web tests, six phone viewports, zero-warning solution/editor builds. The owner’s follow-up requests matching concept art and a sprite overhaul for the remaining kobolds; that art follow-up is next. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
 
+### OW-37 · The owner's rule decisions · `done`, issue #83
+Merged in PR #89. The owner's answers of 2026-11-03, each recorded as decided in its design:
+found items go to the party's pick by a 15 s vote on the 5d vote screen, one per loot line, silence to the opener, a party of one at once
+([interactables §3.1](../specs/2026-11-02-tactics-interactables-design.md)); a sprung trap gives the leader a minor rest-kind injury
+(three new: scraped hands, singed, twisted knee; off the battle table) that any camp or inn mends (§3.3); a failed pick, force, seal or
+search reopens after the next long rest (`InteractableSave.Rest`, §3.2); the key ring in the quest journal and the portal (§3.8); and
+haggling, once per shop visit, Persuasion vs the shop's DC (default 15), −10% buys and +10% sells on a pass
+([shops §3.3](../specs/2026-11-02-tactics-shops-and-gold-design.md)). New phone fixture `vote-loot`; the five shop fixtures gained
+`haggle`; every other fixture is unchanged. e2e: `ARCBOX_DECISIONS=1 tools/tv-e2e.sh` (bots on the real TV, a copied pack with one
+strongbox).
+
+
+**Follow-up answers (the owner, 2026-11-04):**
+- Keep the trap injuries as built, with black eye included.
+- A failed Arcana seal reopens after a rest, like pick and force.
+- Search may be retried once per rest.
+- **Rooms and cures haggle too:** a tenth off, rounded up. The inn and temple offer Haggle (`haggle-services`).
+
 ## P3: later, needs design with the user
 
-Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
+Don't build these without the user: a true Warden bridge (changes the battle map), fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
 
 ## Decisions waiting for the user
 
 1. OW-05 is complete for the final installed cast: the 512 MiB/four-member gate passes at 423.56 MiB in Ashen Ford and 208.41 MiB in Cinder Hollow. Recheck future art additions.
 2. OW-10 / issue #80 cast is complete on `townsfolk-art`: all 12 named sets and 14 generic variants, including matching portraits, are approved and installed. No further approval or generation is needed for this cast. No PR, merge or issue closure has been requested.
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
-4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
-5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
+4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded. Haggling (E) was answered on 2026-11-03 (OW-37).
+5. Handoff §8 items 4 and 5 and the interactable owner choices still open (4–7, 9 and 10–17 but 15) stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
+6. New from OW-37, for the owner: the three trap injuries' names, effects and weights (3, 3, 2) and whether a trap may also draw the old black eye; art for their icons (stand-ins now); whether a seal reopens after a rest like a pick or force (it does now); whether rooms and cures should haggle (they don't).
+
+**Answered 2026-11-03 (issue #83, OW-37), no longer waiting:** interactables decisions 1 (loot: the party's pick), 2 (failed ways reopen after a long rest), 3 (traps: a minor injury), 8 (keys: a key ring) and 15 (a missed search retries after a rest), and shops decision E (haggling on, once per visit).
 
 ## Only a person can check
 
@@ -1024,3 +1053,25 @@ gameplay/phone implementation changes. See the final generic installation report
 at `docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md`.
 Use `generic/verify-installed.cjs` for the current checkpoint; the old review-only
 isolation receipts stay frozen. No PR, merge, issue closure or publication.
+
+
+### OW-24 · Visible roaming enemies · `done`, issue #79
+
+Branch `overworld-mobs`, based on current main after #74/#77. Owner decisions: [design](../specs/2026-11-03-tactics-overworld-mobs-design.md). Seven groups, matching 14×12 maps, painted stamps and bestiary notes are implemented. Movement is deterministic and persisted, pauses in panels/scenes and without connected phones, and never chases. Leader contact saves an ambush transition before the stamped battle; wins pay 75 XP/member and 10 group gold, remove the group, and persist until a later chapter. Loss/recovery and direct-ID farming protection are covered. TV uses eight-facing sprites, readable red rings, movement legs, fades and existing creature sounds; phones have optional danger and ambush screens. Validation reserves the whole patch/contact area and proves safe routes. Both scene exports are byte-identical with zero warnings. Fifteen runtime checks and 517 phone tests pass; six phone viewports were rendered. The original simulation remains historical evidence; the fixed-enemy follow-up results are recorded below. Full sweep adds 525 XP/member and can shift full-side-quest Chapter I completion to level 2. Force and parley e2es both reached the card and resumed walking. Final live wolves passed wandering, reconnect/restart, ambush, rewards and removal. The 6,357-case solution run plus the corrected 425-test server rerun and final 65-test stage rerun close all failures; zero-warning builds. Final review removed mismatched rectangular arena art and verified texture alignment through the battle stage. [Review, balance and evidence](../reports/2026-11-04-overworld-mobs/README.md). No PR until requested.
+
+
+**Follow-up balance pass · complete:** the owner confirmed fixed enemies so XP gains help. All 28 level-1 arrival cells now meet 85–95% wins and 4–8 rounds over fifty seeds: 87.3–95.0% wins, 4.10–7.61 mean rounds. The combined 24,150-battle report gives pooled wins of 91.79% / 99.57% / 99.95% at levels 1 / 2 / 3; enemy stats remain fixed. Seven arrival autoplay caps count as losses and remain explicitly flagged. Original story/wildshape monsters, maps, art, XP and gold are unchanged. All 1,287 logic, 725 game and 135 sound checks pass, including fixed-stat and slinger-cover regressions; zero-warning builds. The balanced live wolf reconnect/restart/win/removal flow passes. [Final balance report](../reports/2026-11-04-overworld-mobs/balance-fixed-enemies.md).
+
+
+## Main integration authorized and verified
+
+Owner: “ok, merge this branch”. Integrated main `00490381` with approved townsfolk
+`8656e414`. Preserved main's herd/depth sorting, off-thread lifecycle, roaming mobs
+and secrets while retaining budgeted unit texture uploads and all approved art.
+The full solution passes 6,466 tests; all 517 phone tests pass; host build has zero
+warnings/errors. Final combined memory peaks: 424.66 MiB Ashen Ford and 210.18 MiB
+Cinder Hollow, below 512 MiB. All 1,455 clips are present. Art/audio union and 256
+approved review hashes pass. Use `generic/verify-integration.py` for this combined
+checkpoint; earlier installation-only checkers target historical baselines.
+See `docs/superpowers/reports/2026-11-03-townsfolk-art/main-integration/report.md`.
+The owner's merge instruction supersedes prior no-PR/no-merge/no-closure notes.

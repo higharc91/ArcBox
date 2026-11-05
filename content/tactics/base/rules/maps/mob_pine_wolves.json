@@ -1,0 +1,270 @@
+{
+  "id": "mob_pine_wolves",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "CAEECAEECAEECAEECAEECQEECQEECQEECQEECAEECAEECAEECQEECAEEBwEEBgEEBgEEBwEEBwEEBwEEBwEEBwEECAEECAEEAwoAAwoAAwoAAwoABwEEBgEEBgEEBgEEBgEEBgEEBgEEBgEEBwEEBwEEAwoAAwoAAwoAAwoABgEEBQEEBQEEBQEEBQEEBgEEBgEEBgEEBgEEBgEEAwoAAwoAAwoAAwoABAEEBgEEBgEEBgEEBgEEBgEEBgEEBQEEBQEEBQEEAwoAAwoAAwoAAwoABQEEBQEEBQEEBQEEBQEEBQEEBQEEAwsAAwsAAwsAAwoAAwoAAwoAAwoAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwoAAwoAAwoAAwoAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwoAAwoAAwoAAwoAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwoAAwoAAwoAAwoAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwoAAwoAAwoAAwoABgEEAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsABgEEAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsAAwsA",
+  "materials": [
+    "ash/grey",
+    "cave_floor/cool",
+    "cobble/grey",
+    "cobble/warm",
+    "dirt/brown",
+    "dirt/dark",
+    "dirt_ford/wet",
+    "flagstone/grey",
+    "ford_water/clear",
+    "forest_needles/pine",
+    "grass/autumn",
+    "grass/dry",
+    "grass/frost",
+    "grass_ford/autumn",
+    "mine_gravel/brown",
+    "path/packed",
+    "planks/dark",
+    "planks/oak",
+    "rock_ford/bank",
+    "water/clear"
+  ],
+  "props": [
+    {
+      "id": "crop_wheat_stubble",
+      "at": [
+        10,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "gold"
+    },
+    {
+      "id": "fence",
+      "at": [
+        10,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        12,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        13,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        5
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        7
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        8
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        9
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence_join",
+      "at": [
+        9,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "sw"
+    },
+    {
+      "id": "haystack",
+      "at": [
+        13,
+        4
+      ],
+      "blocks": true,
+      "cover": "full",
+      "variant": "hay"
+    },
+    {
+      "id": "tree",
+      "at": [
+        8,
+        11
+      ],
+      "blocks": true,
+      "cover": "full",
+      "variant": "autumn"
+    },
+    {
+      "id": "pine",
+      "variant": "green",
+      "at": [
+        2,
+        2
+      ],
+      "blocks": true,
+      "cover": "full"
+    },
+    {
+      "id": "pine",
+      "variant": "green",
+      "at": [
+        5,
+        1
+      ],
+      "blocks": true,
+      "cover": "full"
+    },
+    {
+      "id": "pine",
+      "variant": "green",
+      "at": [
+        8,
+        2
+      ],
+      "blocks": true,
+      "cover": "full"
+    }
+  ],
+  "zones": {
+    "party_spawn": [
+      [
+        0,
+        6
+      ],
+      [
+        0,
+        7
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        9
+      ],
+      [
+        1,
+        11
+      ],
+      [
+        2,
+        11
+      ]
+    ],
+    "enemy_spawn": [
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        5
+      ],
+      [
+        7,
+        6
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        8,
+        6
+      ],
+      [
+        7,
+        7
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        7
+      ]
+    ]
+  }
+}

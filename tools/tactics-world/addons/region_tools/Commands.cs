@@ -58,6 +58,8 @@ public partial class Commands : Node
     {
         if (Flag("check-person-variants"))
             return PersonVariantCheck.Run();
+
+        if (Arg("apply-mob-arenas") is { } mobEdits) return ApplyMobArenas(mobEdits);
         if (Arg("export") is { } export)
             return Export(export);
         if (Arg("remap-props") is { } remap)
@@ -97,6 +99,55 @@ public partial class Commands : Node
             GD.Print($"PROBLEM: {problem}");
         GD.Print(result.Status);
         return result.Written is null ? 1 : 0;
+    }
+
+    private static int ApplyMobArenas(string instructions)
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(System.IO.File.ReadAllText(instructions));
+        foreach (var edit in doc.RootElement.GetProperty("regions").EnumerateArray())
+        {
+            var path = RegionPaths.Scene(edit.GetProperty("region").GetString()!);
+            if (ResourceLoader.Load<PackedScene>(path)?.Instantiate() is not Region root) return 2;
+            try
+            {
+                var material = root.GetNode<TileMapLayer>(RegionScene.MaterialLayer);
+                var height = root.GetNode<TileMapLayer>(RegionScene.HeightLayer);
+                var flags = root.GetNode<TileMapLayer>(RegionScene.FlagsLayer);
+                foreach (var paint in edit.GetProperty("paint").EnumerateArray())
+                {
+                    var at = paint.GetProperty("at"); var tile = new Vector2I(at[0].GetInt32(), at[1].GetInt32());
+                    var name = paint.GetProperty("material").GetString();
+                    var source = Enumerable.Range(0, material.TileSet.GetSourceCount()).Select(material.TileSet.GetSourceId)
+                        .Single(id => material.TileSet.GetSource(id).ResourceName == name);
+                    material.SetCell(tile, source, Vector2I.Zero);
+                    height.EraseCell(tile); flags.EraseCell(tile);
+                }
+                var stamps = root.GetNode(RegionScene.Stamps);
+                foreach (var stamp in edit.GetProperty("stamps").EnumerateArray())
+                {
+                    var name = stamp.GetProperty("map").GetString()!;
+                    if (stamps.GetChildren().OfType<StampMarker>().Any(s => s.Map == name)) continue;
+                    var at = stamp.GetProperty("at"); var tile = new Tile(at[0].GetInt32(), at[1].GetInt32());
+                    var marker = new StampMarker { Name = name, Map = name, AppliedMap = name, AppliedAt = new Vector2I(tile.X, tile.Y),
+                        HeightOffset = stamp.GetProperty("height").GetInt32(), AppliedHeightOffset = stamp.GetProperty("height").GetInt32() };
+                    marker.Position = marker.PlaceOn(tile); stamps.AddChild(marker); marker.Owner = root;
+                }
+                // Extracted map props own the dressing inside a stamp; retaining scene props too would draw them twice.
+                var props = root.GetNodeOrNull<TileMapLayer>(RegionScene.PropsLayer);
+                if (props is not null)
+                    foreach (var stamp in edit.GetProperty("stamps").EnumerateArray())
+                    {
+                        var at = stamp.GetProperty("at");
+                        for (var y = 0; y < 12; y++)
+                            for (var x = 0; x < 14; x++) props.EraseCell(new Vector2I(at[0].GetInt32() + x, at[1].GetInt32() + y));
+                    }
+                var packed = new PackedScene(); var error = packed.Pack(root);
+                if (error != Error.Ok || ResourceSaver.Save(packed, path) != Error.Ok) return 2;
+                GD.Print($"Updated mob arenas in {path}; existing paint preserved.");
+            }
+            finally { root.Free(); }
+        }
+        return 0;
     }
 
     private static int EditProps(string idOrPath)

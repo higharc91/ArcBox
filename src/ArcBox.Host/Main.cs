@@ -162,7 +162,7 @@ public partial class Main : Control
             AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
             return;
         }
-        if ((_args.WorldDemo is "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        if ((_args.WorldDemo is "mobs" or "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
             && !(_args.WorldDemo == "cinder_hollow" && _args.Perf))
         {
             // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
@@ -174,7 +174,7 @@ public partial class Main : Control
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
             var tactics = _scene as Games.Tactics.TacticsScene;
             AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
-                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, steps: _args.WorldDemo == "cinder_hollow" ? global::Tactics.Presentation.World.HollowDemo.Steps(thingsPack) : _args.WorldDemo == "npcs" ? global::Tactics.Presentation.World.NpcsDemo.Steps(thingsPack) : null, shop: _args.WorldDemo == "shop", camp: _args.WorldDemo is "npcs" or "camp" or "camp-ford", packRoot: thingsPack, campId: _args.WorldDemo == "camp-ford" ? "af_ford_campfire" : "af_road_campfire"));
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, steps: _args.WorldDemo == "mobs" ? global::Tactics.Presentation.World.MobsDemo.Steps(thingsPack) : _args.WorldDemo == "cinder_hollow" ? global::Tactics.Presentation.World.HollowDemo.Steps(thingsPack) : _args.WorldDemo == "npcs" ? global::Tactics.Presentation.World.NpcsDemo.Steps(thingsPack) : null, shop: _args.WorldDemo == "shop", camp: _args.WorldDemo is "npcs" or "camp" or "camp-ford", packRoot: thingsPack, campId: _args.WorldDemo == "camp-ford" ? "af_ford_campfire" : "af_road_campfire"));
             return;
         }
         if (_args.WorldDemo is { } region)

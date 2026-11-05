@@ -117,10 +117,25 @@ fixtures that don't set it are unchanged. Weapons and armour get the same field 
 Default: **half** the price, rounded down (`SellRatio = 0.5` in a rules file, not code). Items without a price can't be sold. Story
 items (keys, quest things — today these are flags, not bag items) can't be sold by construction.
 
-### 3.3 A Persuasion discount — USER DECISION E (default off)
-BG3 moves prices by attitude/Persuasion. Optional: when a shop opens, the party may try **Haggle** once per shop per visit: a 5d check
-(party picks who rolls Persuasion, DC from the shop, default 15). Pass: buy prices −10% and sell +10% (from the ratio) for this visit;
-fail: no change (no penalty). The roll is saved like every 5d roll. Off by default: it's balance.
+### 3.3 A Persuasion discount — USER DECISION E (decided 2026-11-03: on, once per visit)
+
+**Rooms and cures haggle too (the owner, 2026-11-04).** A passed haggle also takes a tenth off a room or a cure, rounded up as item buys are
+(`ShopRules.Service`), and the inn and the temple offer Haggle like any shop. The server charges, phones show and the TV's panel lists the
+same price.
+BG3 moves prices by attitude/Persuasion. When a shop opens, the leader may try **Haggle** once per shop per visit: a 5d check
+(party picks who rolls Persuasion, DC from the shop's `haggle`, default 15). Pass: buy prices −10% and sell +10% (from the ratio) for this
+visit; fail: no change (no penalty). The roll is saved like every 5d roll.
+
+**Built (issue #83, `owner-decisions-rules`):** the shop screen offers the leader "Haggle · Persuasion DC 15" while the visit hasn't
+haggled; the haggle plays as a story scene over the open shop (the check is decided at once, so the party goes straight to who rolls; 20 s,
+best bonus if nobody picks), and the shop comes back with its result. `ShopCursor` keeps `Haggle` (who rolled, the die, the bonus, the DC,
+pass or fail), `Haggling` while the check plays and `Under` (the story cursor it set aside), so a restart shows the saved roll or the pick
+again and never rolls twice, a reconnect holds the check while nobody is here, and End session keeps it for the next night. Prices:
+`ShopRules.Buy(item, shop, haggled)` is `ceil(price × priceMod × 0.9)`, and `Sell` is `floor(plain buy × sellRatio × 1.1)`, never more than
+that visit's buy price for the same item (at a sell ratio near 1 a haggle would otherwise pay out more than it charges). The phones get
+`haggle: { can, dc, result }` on the shop screen (the five shop fixtures gained it) and the adjusted prices; the TV's shop panel shows the
+result and its prices, and waits behind the check while it's rolled. An inn and a temple (services only) have nothing to haggle over, and
+service prices (rooms, cures) don't haggle. A new visit may haggle again.
 
 ## 4. Shops
 
@@ -273,7 +288,7 @@ small bell"), `ui_shop_close` ("the bell again, softer").
 | B2 | Starting gold | **0** |
 | C | Item prices | **SRD-ish table in §3.1** |
 | D | Sell price | **50%** of price |
-| E | Haggling (Persuasion) | **Off** |
+| E | Haggling (Persuasion) | **Off** → **decided 2026-11-03: on, once per shop visit** (§3.3) |
 | F | Who may trade while a shop is open | **Anyone present** |
 | G | Whose bag gets a bought item | **The buyer's own character** |
 | H | Sell from companions' bags | **No, only your own** |
@@ -322,7 +337,7 @@ Built on `shops-and-gold`. The following **USER DECISION** defaults from the iss
 | B / B2 | Content-defined loot, winning encounters and story rewards/payments; Chapter 1 reward amounts above; zero starting gold; no per-kill gold. |
 | C | Healing 50 gp; greater healing 150 gp; alchemist's fire 50 gp; smoke bomb 25 gp. Oil remains absent; its future default is 10 gp. |
 | D | Content sellRatio 0.5, rounded down after the shop's rounded-up buy price. |
-| E | Haggling off. The DC is validated content metadata; no haggle input or discount is enabled. |
+| E | Haggling off. The DC is validated content metadata; no haggle input or discount is enabled. **Superseded 2026-11-03 (issue #83): on, once per visit, as §3.3 says.** |
 | F / G / H | Every connected player with a character trades from their own phone once the keeper opens; purchases use their own purse and go to their own bag; selling companions' bags is refused. |
 | I | No gameplay bag limit; integer overflow is refused. |
 | J | Per-line chapter restock or never. Rest is reserved content metadata; no rest mechanic exists. |

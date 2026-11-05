@@ -209,6 +209,19 @@ describe("votes and choices", () => {
     expect(within(option(/Make your cases/)).queryByText("The party's choice")).toBeNull();
   });
 
+  it("asks who takes a found item, with a vote for each player here (the owner's decision 1)", () => {
+    const { send, again } = show("vote-loot");
+    expect(screen.getByRole("heading", { name: "Who takes the Smoke Bomb?" })).toBeTruthy();
+    expect(screen.getByText("Party vote")).toBeTruthy();
+    expect(within(option(/Player3/)).getByText("Your vote")).toBeTruthy();
+    fireEvent.click(option(/Player2/));
+    expect(send).toHaveBeenLastCalledWith({ action: "vote", data: { option: "pr_member2" } });
+    // The next item's vote is a new question, even between the same players: nothing tapped carries over.
+    again(view("vote-loot", (d) => { d.question = "Who takes the Potion of Healing?"; d.vote = 1; d.mine = null; }, "v2"));
+    expect(screen.getByRole("heading", { name: "Who takes the Potion of Healing?" })).toBeTruthy();
+    expect(screen.queryByText("Your vote")).toBeNull();
+  });
+
   it("offers only the tied options on a tie-break, and names who's away", () => {
     const { send } = show("vote-tie");
     expect(screen.getByText("Tied: you break it")).toBeTruthy();

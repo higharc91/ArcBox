@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (0, 0), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 222 ms, plan+light 655 ms, bake 130 ms, total 1007 ms
+WORLD items 34,348 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 82 lights, active True; 164 images; route 2 tiles; spots granary-after@41,71 granary-marker@42,70 maud-after@130,90
+WORLD memory after build: managed 41.1 MB (+40.5), engine 33.5 MB (+1.7), textures 28.0 MB, buffers 8.1 MB, process 382 MB
+WORLD textures 221 in 748 ms, worst 45.4 ms; binding items (and baking glows) 10 ms; 68 blocks still to record at reveal
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.2 s, 4 frames: frame ms median 41.16, p95 42.80, p99 42.80, worst 42.80
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 4 of 4, at 0.00s=37.2 0.04s=42.8 0.08s=40.8 0.12s=41.2, 4 while recording
+WORLD recording during the walk: 4 frames, ms a frame median 3.85, p95 4.22, p99 4.22, worst 4.22
+WORLD frames while recording: frame ms median 41.16, p95 42.80, p99 42.80, worst 42.80
+WORLD _Draw per block, first time: median 0.30, p95 0.89, p99 1.14, worst 1.14, sum 23.3 ms
+WORLD render CPU ms median 24.77, p95 33.98, p99 33.98, worst 33.98; GPU ms median 24.64, p95 34.13, p99 34.13, worst 34.13; at most 2,165 draw calls
+WORLD overlay query ms median 7.53, p95 15.19, p99 15.19, worst 15.19; draw ms median 0.48, p95 0.51, p99 0.51, worst 0.51; items median 371.00, p95 371.00, p99 371.00, worst 371.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 47.0 MB (+46.4), engine 49.3 MB (+17.5), textures 210.9 MB, buffers 8.1 MB, process 606 MB
+WORLD shot /workspace/issue81/local-art/review/tv/world-ashen_ford.png
+WORLD shot /workspace/issue81/local-art/review/tv/world-granary-after.png
+WORLD shot /workspace/issue81/local-art/review/tv/world-granary-marker.png
+WORLD shot /workspace/issue81/local-art/review/tv/world-maud-after.png
+WORLD closed

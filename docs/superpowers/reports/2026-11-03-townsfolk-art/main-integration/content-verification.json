@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "binaryContentFilesPreserved": 4902,
+  "mainParent": "00490381ba6d66a87f297ebd68163cfb566a8581",
+  "townsfolkParent": "8656e414ad3a7a89d8df942121b2f7640ceb9f0a",
+  "mergeBase": "2e64b9df016449724fbb5a03c5352c9033c81c1d",
+  "ashenFordChangesBeyondCosmeticVariants": 0,
+  "approvedReviewHashesVerified": 256,
+  "approvedInstalledArtFiles": 98
+}

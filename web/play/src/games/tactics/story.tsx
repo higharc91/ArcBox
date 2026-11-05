@@ -147,7 +147,8 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
  */
 const questionKey = (kind: string, tie: boolean, parts: string[]) => [kind, tie ? "tie" : "open", ...parts].join("\n");
 /** Option ids repeat across a story's questions, so the words go in too. */
-const voteKey = (d: VoteData) => questionKey(d.party ? "vote" : "choice", d.tie, d.options.map((o) => `${o.id}=${o.label}`));
+const voteKey = (d: VoteData) => questionKey(d.party ? "vote" : "choice", d.tie,
+  [...(d.question === undefined ? [] : [`${d.vote ?? 0}:${d.question}`]), ...d.options.map((o) => `${o.id}=${o.label}`)]);
 /**
  * A check is what it tests (skill, DC, the option's words), and whether it's rolled or tied; not who can roll it. Someone getting a
  * character mid-check adds a card, and that mustn't remount every phone's check (an alert again, a tap in flight dropped).
@@ -238,6 +239,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
   const eyebrow = d.tie ? "Tie-break" : d.party ? "Party vote" : "The leader's choice";
   const title = d.tie
     ? d.canChoose ? "Tied: you break it" : `Tied: ${d.decider ?? "the leader"} breaks it`
+    : d.question ? d.question
     : d.party
       ? d.canChoose ? "Cast your vote" : "The party is voting"
       : d.canChoose ? "You choose for the party" : `${d.decider ?? "The leader"} chooses for the party`;

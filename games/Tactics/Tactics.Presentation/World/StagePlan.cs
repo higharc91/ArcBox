@@ -170,7 +170,7 @@ public sealed class StagePlan
 /// </summary>
 internal sealed class GroundWindow
 {
-    private const int TextureSpan = 4;      // BoardPlan's: a texture covers 4 x 4 tiles
+    private const int TextureSpan = 8;      // Align the 8-tile regional textures as well as the 4-tile battle textures.
 
     private readonly BoardTerrain _terrain;
     private readonly int _x;

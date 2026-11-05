@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "mainParent": "00490381ba6d66a87f297ebd68163cfb566a8581",
+  "townsfolkParent": "8656e414ad3a7a89d8df942121b2f7640ceb9f0a",
+  "dotnetTests": 6466,
+  "phoneTests": 517,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "voiceClipsPresent": 1455,
+  "approvedReviewHashes": 256,
+  "binaryContentFilesPreserved": 4902,
+  "textureLimitMiB": 512,
+  "texturePeaksMiB": {
+    "ashen_ford": 424.66,
+    "cinder_hollow": 210.18
+  },
+  "contentFiles": 5187,
+  "contentBytes": 220920720
+}

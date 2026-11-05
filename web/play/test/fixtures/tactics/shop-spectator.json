@@ -36,7 +36,12 @@
     "leader": false,
     "vip": false,
     "feed": [],
-    "portal": "/c/ABCD"
+    "portal": "/c/ABCD",
+    "haggle": {
+      "can": false,
+      "dc": 15,
+      "result": null
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

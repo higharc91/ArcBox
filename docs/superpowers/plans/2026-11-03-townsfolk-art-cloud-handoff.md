@@ -2,7 +2,7 @@
 
 Work in `higharc91/ArcBox`, branch **`townsfolk-art`**. Fetch and check out that
 branch; inspect a dirty tree before changing it. Pull with rebase before pushing.
-Do not merge, open a PR, close #80 or reset unrelated work. The owner requested a
+The owner has authorized PR/merge integration and closure of #80; preserve unrelated work. The owner requested a
 checkpoint after Bree so a cloud AI can continue. **Current continuation:** all
 12 named NPCs and all 14 generic townsfolk variants now have owner-approved bodies
 and matching portraits installed. The final batch approval is “looks good, do
@@ -1140,3 +1140,17 @@ gameplay/phone implementation changes. See the final generic installation report
 at `docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md`.
 Use `generic/verify-installed.cjs` for the current checkpoint; the old review-only
 isolation receipts stay frozen. No PR, merge, issue closure or publication.
+
+
+## Main integration authorized and verified
+
+Owner: “ok, merge this branch”. Integrated main `00490381` with approved townsfolk
+`8656e414`. Preserved main's herd/depth sorting, off-thread lifecycle, roaming mobs
+and secrets while retaining budgeted unit texture uploads and all approved art.
+The full solution passes 6,466 tests; all 517 phone tests pass; host build has zero
+warnings/errors. Final combined memory peaks: 424.66 MiB Ashen Ford and 210.18 MiB
+Cinder Hollow, below 512 MiB. All 1,455 clips are present. Art/audio union and 256
+approved review hashes pass. Use `generic/verify-integration.py` for this combined
+checkpoint; earlier installation-only checkers target historical baselines.
+See `docs/superpowers/reports/2026-11-03-townsfolk-art/main-integration/report.md`.
+The owner's merge instruction supersedes prior no-PR/no-merge/no-closure notes.

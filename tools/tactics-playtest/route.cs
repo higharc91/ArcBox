@@ -14,7 +14,7 @@
 // (unless there's no way to the "!" but across one).
 using Tactics.Logic;
 
-if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" or "shop" or "thing" or "person")))
+if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] is not ("beat" or "shop" or "thing" or "person" or "mob" or "at")))
 {
     Console.Error.WriteLine("usage: route.cs <rules dir> <region> <map> <x> <y>  |  route.cs <rules dir> <region> beat <beat id> <x> <y>");
     return 2;
@@ -29,7 +29,18 @@ var start = new Tile(int.Parse(args[^2]), int.Parse(args[^1]));
 
 Func<Tile, bool> goal;
 Func<Tile, bool>? avoid = null;
-if (args.Length == 6 && args[2] == "thing")
+if (args.Length == 6 && args[2] == "at")
+{
+    var xy = args[3].Split(',').Select(int.Parse).ToArray();
+    var target = new Tile(xy[0], xy[1]);
+    goal = t => MobMotion.Contact(t, target);
+}
+else if (args.Length == 6 && args[2] == "mob")
+{
+    var mob = rules.MobsIn(region.Def.Id).Single(m => m.Id == args[3]);
+    goal = t => mob.Patch.Any(p => MobMotion.Contact(t, p));
+}
+else if (args.Length == 6 && args[2] == "thing")
 {
     var target = rules.InteractablesIn(region.Def.Id).Single(t => t.Id == args[3]);
     goal = t => Interactables.InReach(terrain, t, target);
@@ -67,6 +78,14 @@ else
     goal = stage.Holds;
 }
 
+// Story/shop routes avoid roaming danger; explicit mob/coordinate targets deliberately make contact.
+if (!(args.Length == 6 && args[2] is "mob" or "at") && !args[2].StartsWith("mob_", StringComparison.Ordinal))
+{
+    var danger = rules.MobsIn(region.Def.Id).SelectMany(m => m.Patch).SelectMany(t => new[]
+        { t, new Tile(t.X + 1, t.Y), new Tile(t.X - 1, t.Y), new Tile(t.X, t.Y + 1), new Tile(t.X, t.Y - 1) }).ToHashSet();
+    var previous = avoid;
+    avoid = t => danger.Contains(t) || previous?.Invoke(t) == true;
+}
 var route = WorldWalk.Route(terrain, start, goal, ClassDef.DefaultJump, avoid);
 if (route is not { } taps)
 {

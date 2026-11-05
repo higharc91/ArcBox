@@ -72,22 +72,25 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void An_unlocked_chest_opens_at_once_and_its_loot_is_the_leaders_once()
+    public void An_unlocked_chest_opens_at_once_and_its_loot_is_the_openers_once_nobody_votes_otherwise()
     {
         var s = Vault.At(new Tile(6, 1));
         var before = Count(s, Leader(s), "potion_of_healing");
 
         Interact(s);
 
-        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        // It opens at once; who takes what was inside is the party's vote (the owner's decision 1), and silence leaves it with the opener.
         Assert.Equal("open", Saved(s, "chest")!.State);
+        Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+        Assert.Equal("Inside: 2 × Potion of Healing.", s.Host.Notice);
+        Until(s, () => s.Game.Phase == TacticsPhase.Exploration, "the loot vote's close", TimeSpan.FromSeconds(30));
         Assert.Equal(before + 2, Count(s, Leader(s), "potion_of_healing"));
         Assert.Contains("chest_looted", Doc(s).World!.Flags);
         Assert.Equal(("open", "props.chest_open"), (Thing(s, "chest")!.State, Thing(s, "chest")!.StandIn));
         var e = s.Host.Explore!.ThingEvents!.Value[^1];
         Assert.Equal(("chest", ThingEvents.Opened), (e.Id, e.What));
         Assert.Equal(Doc(s).Members[Leader(s)].Character.Name, e.By);
-        Assert.Equal("Inside: 2 × Potion of Healing.", s.Host.Notice);
+        Assert.Equal($"{e.By} takes the 2 × Potion of Healing.", s.Host.Notice);
         Assert.Empty(Targets(s));
 
         Interact(s);
@@ -151,7 +154,7 @@ public sealed class InteractTests
         Choose(s, "key");
         Finish(s);
 
-        Assert.Equal(new InteractableSave("open", Unlocked: true) with { Spent = Saved(s, "door")!.Spent }, Saved(s, "door"));
+        Assert.Equal(new InteractableSave("open", Unlocked: true, Keyed: true) with { Spent = Saved(s, "door")!.Spent }, Saved(s, "door"));
         Assert.Null(Doc(s).World!.Story);
         Assert.False(Thing(s, "door")!.Blocks);
         Step(s, "sw");
@@ -289,21 +292,26 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void A_pit_nobody_saw_goes_off_underfoot_harmlessly_and_once()
+    public void A_pit_nobody_saw_goes_off_underfoot_once_and_gives_the_leader_one_minor_injury()
     {
         var s = Vault.At(new Tile(3, 8), world: w => w with { Things = Ordinal.Map(("gate", new InteractableSave("open")), ("lever", new InteractableSave("on"))) });
+        s.Game.TrapRoll = total => total;       // the last of the rest-kind table: twisted knee
         var injuries = Doc(s).Members[Leader(s)].Character.Injuries;
         Assert.Null(Thing(s, "pit"));
         Step(s, "nw");      // (2, 8)
         Assert.Equal(new Tile(2, 8), s.Host.Explore!.At);
         Assert.Equal(InteractableSave.Sprung, Saved(s, "pit")!.Trap);
         Assert.Contains("fell_in", Doc(s).World!.Flags);
-        Assert.Equal("The floor gives way, but only a foot.", s.Host.Notice);
-        Assert.Equal(injuries, Doc(s).Members[Leader(s)].Character.Injuries);       // harmless: the user's decision 3
+        var name = Doc(s).Members[Leader(s)].Character.Name;
+        Assert.Equal($"The floor gives way, but only a foot. {name} takes a minor injury: Twisted knee.", s.Host.Notice);
+        Assert.Equal([.. injuries, new InjuryId("twisted_knee")], Doc(s).Members[Leader(s)].Character.Injuries);   // the owner's decision 3
+        Assert.Equal("rest", TacticsGameTests.Rules.Injuries[new InjuryId("twisted_knee")].Mends);
         Assert.Equal("sprung", Thing(s, "pit")!.State);
         Step(s, "se");
         Step(s, "nw");
         Assert.Single(s.Host.Explore!.ThingEvents!.Value, e => e.Id == "pit" && e.What == ThingEvents.Sprung);
+        Assert.Single(Doc(s).Members[Leader(s)].Character.Injuries, i => i.Value == "twisted_knee");     // once, however often it's crossed
+        Assert.Single(Again(s).Game.Document.Members[Leader(s)].Character.Injuries, i => i.Value == "twisted_knee");  // and a restart doesn't hurt again
     }
 
     [Fact]
@@ -362,12 +370,12 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void Ashen_fords_things_are_sent_but_the_hidden_one_and_none_is_saved_until_one_changes()
+    public void Ashen_fords_visible_things_are_sent_but_hidden_secrets_are_not()
     {
         var s = new Session();
         s.ToWalking();
         var placed = Rules.InteractablesIn("ashen_ford");
-        Assert.Equal(22, placed.Length);
+        Assert.Equal(30, placed.Length);
         Assert.Equal(placed.Where(t => t.Hidden is null && Interactables.Present(t, s.Game.Document.World!.Flags.ToHashSet())).Select(t => t.Id), s.Host.Explore!.Things!.Value.Select(t => t.Id));    // the cache isn't found yet
         Assert.Empty(s.Host.Explore!.ThingEvents!.Value);                   // nothing has happened to one yet
         Assert.True(Walk(s).TryGetProperty("targets", out _));            // a region with things gives the leader's walk screen its list

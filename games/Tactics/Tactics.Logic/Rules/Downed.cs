@@ -112,7 +112,7 @@ public static class DownedRules
 
     /// <summary>
     /// A Downed <paramref name="unit"/>'s countdown has run out: it is Out. It gains an injury from
-    /// <see cref="RulesPack.Injuries"/>, picked by weight with one roll of the battle's RNG (the table in
+    /// <see cref="RulesPack.Injuries"/> (those on the battle table, <see cref="InjuryDef.Battle"/>), picked by weight with one roll of the battle's RNG (the table in
     /// <see cref="InjuryId"/> order), recorded in <see cref="BattleState.Injuries"/>; emits <see cref="UnitOut"/> and leaves
     /// the turn order.
     /// </summary>
@@ -170,7 +170,7 @@ public static class DownedRules
 
     private static InjuryId PickInjury(BattleWriter w)
     {
-        var injuries = w.Rules.Injuries.Values;
+        var injuries = w.Rules.Injuries.Values.Where(i => i.Battle).ToList();     // a trap's minor injuries aren't on the battle table
         var total = injuries.Sum(i => Math.Max(0, i.Weight));
         if (total <= 0)
             throw new RulesInvariantException("The rules pack has no injury to give a unit going Out.");

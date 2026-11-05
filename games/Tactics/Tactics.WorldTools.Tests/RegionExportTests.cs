@@ -121,6 +121,7 @@ public sealed class RegionExportTests : IDisposable
     internal static void WithoutThings(string rules, string id)
     {
         WithoutShops(rules, id);
+        WithoutMobs(rules, id);
         var path = Path.Combine(rules, "manifest.json");
         var manifest = JsonNode.Parse(File.ReadAllText(path))!;
         var files = manifest["files"]!.AsArray();
@@ -137,6 +138,16 @@ public sealed class RegionExportTests : IDisposable
             foreach (var thing in things.Where(t => t?["to"]?["region"]?.GetValue<string>() == id).ToArray()) things.Remove(thing);
             File.WriteAllText(target, data.ToJsonString());
         }
+    }
+
+    // Synthetic and historical drafts do not contain the current painted mob arenas.
+    internal static void WithoutMobs(string rules, string id)
+    {
+        var path = Path.Combine(rules, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        var files = manifest["files"]!.AsArray();
+        foreach (var file in files.Where(f => f!.GetValue<string>() == $"mobs/{id}.json").ToArray()) files.Remove(file);
+        File.WriteAllText(path, manifest.ToJsonString());
     }
 
     // Synthetic maps replace the town's people, so their test packs omit the real town's shops too.
@@ -321,7 +332,12 @@ public sealed class RegionExportTests : IDisposable
     {
         var map = Base.Value.MapFor(id)!;
 
-        var result = Export(Stamped(map) with { Starts = PartySpawn(map), Recoveries = PartySpawn(map) });
+        // Authored overworld stamps can sit high above zero. Match the surrounding test field
+        // to the entry height so this checks stamp export rather than an artificial cliff.
+        var field = Stamped(map);
+        var entryHeight = map[map.Zones["party_spawn"][0]].Height;
+        var heights = field.Materials.Keys.ToDictionary(t => t, t => field.Heights.TryGetValue(t, out var h) ? h : entryHeight);
+        var result = Export(field with { Heights = heights, Starts = PartySpawn(map), Recoveries = PartySpawn(map) });
 
         Assert.Empty(result.Problems);
         Assert.NotNull(result.Written);
@@ -820,6 +836,7 @@ public sealed class RegionExportTests : IDisposable
 
         Assert.Empty(Export(Field()).Problems);
 
+        // Both in name order: the directory lists its files in whatever order the file system keeps them.
         Assert.Equal(before.Append(RegionFile()).OrderBy(f => f, StringComparer.Ordinal),
             Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
     }

@@ -23,6 +23,16 @@ public sealed class SoundBankTests
     }
 
     [Fact]
+    public void Creature_coat_variants_keep_their_species_voice_and_weapon()
+    {
+        var baseGear = Bank.Value.Gear("beasts.wolf.wildshape");
+        var grey = Bank.Value.Gear("beasts.wolf.grey");
+        Assert.NotNull(baseGear.Family);
+        Assert.Equal(baseGear.Family, grey.Family);
+        Assert.Equal(baseGear.Weapon, grey.Weapon);
+    }
+
+    [Fact]
     public void Every_sounds_files_are_on_disk()
     {
         Assert.NotEmpty(Bank.Value.Ids);

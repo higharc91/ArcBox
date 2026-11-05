@@ -42,7 +42,14 @@ public static class DemoRegion
             ?? throw new FormatException($"Region {id} is empty.");
         var maps = def.Stamps.Select(s => s.Map).Distinct(StringComparer.Ordinal)
             .ToDictionary(m => m, m => BoardMap.Parse(File.ReadAllText(Path.Combine(rules, "maps", $"{m}.json"))), StringComparer.Ordinal);
-        return WorldGround.Of(WorldRegion.From(def), maps, ArtManifests.Load(packRoot));
+        // Mob arenas are painted world terrain: retain the region's art, tint and blending.
+        // Read only manifest-listed definitions, matching the server's pack contract.
+        using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(rules, "manifest.json")));
+        var natural = manifest.RootElement.GetProperty("files").EnumerateArray().Select(f => f.GetString()!)
+            .Where(f => f.StartsWith("mobs/", StringComparison.Ordinal))
+            .Select(f => JsonSerializer.Deserialize<MobsFile>(File.ReadAllText(Path.Combine(rules, f)), ArcJson.Options))
+            .Where(f => f?.Region == id).SelectMany(f => f!.Mobs).Select(m => m.Arena).ToArray();
+        return WorldGround.Of(WorldRegion.From(def), maps, ArtManifests.Load(packRoot), natural);
     }
 
     /// <summary>

@@ -19,7 +19,8 @@ public sealed partial class TacticsGame
         if (stock.Trades.Contains(trade)) return;
         var target = Str(input.Data, "member");
         if (target is null || !_doc.Members.TryGetValue(target, out var patient)) return;
-        if (buyer.Gold < service.Price) { Toast(player.Id, "Not enough gold"); return; }
+        var price = ShopRules.Service(service, Haggled);
+        if (buyer.Gold < price) { Toast(player.Id, "Not enough gold"); return; }
         if (service.Kind == "room")
         {
             if (Camp is not { Mode: "inn", Stage: "rooms" } || Camp.Source != shop.Id) { Toast(player.Id, "The party must agree to take rooms first."); return; }
@@ -36,7 +37,7 @@ public sealed partial class TacticsGame
         stock = stock with { Seq = checked(stock.Seq + 1), Trades = [.. stock.Trades.TakeLast(31), trade] };
         _doc = _doc with
         {
-            Members = _doc.Members.SetItem(profile.Value, buyer with { Gold = ShopRules.Gold(buyer.Gold, -service.Price) }),
+            Members = _doc.Members.SetItem(profile.Value, buyer with { Gold = ShopRules.Gold(buyer.Gold, -price) }),
             Shops = new ShopsSave((_doc.Shops?.Shops ?? Ordinal.Map<ShopSave>()).SetItem(shop.Id, stock), stock.Chapter),
             World = _doc.World! with
             {
@@ -45,7 +46,7 @@ public sealed partial class TacticsGame
             },
         };
         Save();
-        _tradeFeed.Add($"{buyer.Character.Name} paid for {patient.Character.Name}: {service.Name} — {service.Price} gold");
+        _tradeFeed.Add($"{buyer.Character.Name} paid for {patient.Character.Name}: {service.Name} — {price} gold");
         if (_tradeFeed.Count > 4) _tradeFeed.RemoveAt(0);
     }
 
@@ -54,7 +55,7 @@ public sealed partial class TacticsGame
         var shop = OpenShop!;
         if (shop.Services.IsEmpty) return view;
         var data = JsonNode.Parse(view.Data.GetRawText())!.AsObject();
-        data["services"] = JsonSerializer.SerializeToNode(shop.Services.Select(s => new { id = s.Id, name = s.Name, kind = s.Kind, price = s.Price }), ArcJson.Options);
+        data["services"] = JsonSerializer.SerializeToNode(shop.Services.Select(s => new { id = s.Id, name = s.Name, kind = s.Kind, price = ShopRules.Service(s, Haggled) }), ArcJson.Options);
         data["guests"] = JsonSerializer.SerializeToNode(_doc.Members.Select(m => new { member = m.Key, name = m.Value.Character.Name,
             room = Camp?.Rooms.Contains(m.Key) == true, wellFed = m.Value.WellFed,
             injuries = m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)).OfType<InjuryDef>()

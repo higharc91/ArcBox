@@ -62,6 +62,9 @@ public sealed class BoardLightingTests
         ["river_crossing"] = Dusk,
         ["warlord_bridge"] = null,
         ["ashen_ford"] = Dusk,
+        ["mob_pine_wolves"] = Dusk, ["mob_rooting_boars"] = Dusk, ["mob_kobold_scouts"] = Dusk,
+        ["mob_river_slimes"] = Dusk, ["mob_road_bandits"] = Dusk,
+        ["mob_hollow_bats"] = "hollow", ["mob_hollow_kobolds"] = "hollow",
         ["cinder_hollow"] = "hollow", ["hollow_throat"] = "hollow", ["hollow_diggings"] = "hollow",
         ["hollow_nest"] = "hollow", ["hollow_lair"] = "hollow",
     };

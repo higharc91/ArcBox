@@ -1,0 +1,49 @@
+{
+  "id": "mob_hollow_bats",
+  "name": "Bats of the Hollow",
+  "map": "mob_hollow_bats",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "hollow_bat",
+      "zone": "enemy_spawn",
+      "count": 3,
+      "level": 1,
+      "countByParty": {
+        "1": 2,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "5": 3,
+        "6": 3
+      },
+      "hpByParty": {
+        "1": 10,
+        "2": 14,
+        "3": 27,
+        "4": 38,
+        "5": 48,
+        "6": 57
+      },
+      "unitByParty": {
+        "1": "hollow_bat_lone",
+        "2": "hollow_bat",
+        "3": "hollow_bat",
+        "4": "hollow_bat_swarm",
+        "5": "hollow_bat_swarm",
+        "6": "hollow_bat_swarm"
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

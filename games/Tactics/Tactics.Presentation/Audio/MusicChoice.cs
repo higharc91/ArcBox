@@ -45,6 +45,10 @@ public static class MusicChoice
     private static readonly ImmutableDictionary<string, string> Beds = new Dictionary<string, string>
     {
         ["river_crossing"] = "amb_river",
+        ["mob_pine_wolves"] = "amb_forest", ["mob_rooting_boars"] = "amb_forest",
+        ["mob_kobold_scouts"] = "amb_plains_wind", ["mob_river_slimes"] = "amb_river",
+        ["mob_road_bandits"] = "amb_plains_wind",
+        ["mob_hollow_bats"] = "amb_cinder_hollow", ["mob_hollow_kobolds"] = "amb_cinder_hollow",
         ["forest_ruins"] = "amb_forest",
         ["crypt_hall"] = "amb_dungeon",
         ["crystal_cave"] = "amb_dungeon",

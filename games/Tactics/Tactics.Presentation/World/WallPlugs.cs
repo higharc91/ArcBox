@@ -57,7 +57,7 @@ public static class WallPlugs
         if (inside.Count == 0)
             return [];
         var terrain = new BoardTerrain(With(map, inside), null);
-        return [.. inside.SelectMany(p => LitBoard.Build(BoardPlan.BuildBlock(terrain, art, new TileRect(p.At.X, p.At.Y, 1, 1), grid: false), plan.Lighting).Items)
+        return [.. inside.SelectMany(p => LitBoard.Build(BoardPlan.BuildBlock(terrain, art, new TileRect(p.At.X, p.At.Y, 1, 1), grid: false, world: true), plan.Lighting).Items)
             .OrderBy(i => i.Order)];
     }
 }

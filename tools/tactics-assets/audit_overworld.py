@@ -21,11 +21,20 @@ REPORT=Path(__file__).resolve().parents[2]/'docs/superpowers/reports/overworld-a
 
 def inventory():
     records=[]
+    by_path={}
     def add(section,name,variant,path,size,frames=1,anchor=None,role='',**extra):
         where,note=assessment(section,name,variant,extra.get('replaces'))
-        records.append(dict(id=f'{section}/{name}/{variant}'.rstrip('/'),section=section,
+        record=dict(id=f'{section}/{name}/{variant}'.rstrip('/'),section=section,
             family=name,variant=variant,path=f'{section}/{path}',size=size,frames=frames,
-            anchor=anchor,role=role,where=where,assessment=note,**extra))
+            anchor=anchor,role=role,where=where,assessment=note,**extra)
+        if record['path'] in by_path:
+            original=by_path[record['path']]
+            if original['size']!=size or original['frames']!=frames or original['anchor']!=anchor:
+                raise ValueError(f'Conflicting image alias metadata: {record["path"]}')
+            original.setdefault('aliases',[]).append(record['id'])
+        else:
+            by_path[record['path']]=record
+            records.append(record)
     for section in ('terrain','props','town','ambient','worldmap'):
         m=json.loads((PACK/section/'manifest.json').read_text())
         if section in ('terrain','town'):
@@ -35,7 +44,8 @@ def inventory():
         if section=='props':
             for name,item in m['props'].items():
                 for var,path in item['variants'].items():
-                    add(section,name,var,path,item['size'],item['frames'],item['anchor'],
+                    look=item.get('looks',{}).get(var,{})
+                    add(section,name,var,path,look.get('size',item['size']),item['frames'],look.get('anchor',item['anchor']),
                         role='sprite',blocks=item['blocks'],cover=item['cover'])
                 if item.get('light',{}).get('emissive'):
                     add(section,name,'emissive-mask',item['light']['emissive'],item['size'],item['frames'],role='emissive mask')
@@ -59,6 +69,10 @@ def inventory():
             for name,path in (('parchment',m['parchment']['file']),('sample_map',m['sample'])):
                 with Image.open(PACK/section/path) as im:size=list(im.size)
                 add(section,name,'',path,size,role='style specimen')
+    # Earlier crow sheets remain shipped for provenance but are no longer manifest entries.
+    for name,frames in (('wild_crow',1),('wild_crow_anim',4)):
+        add('props',name,'retired',name+'.png',[34,32],frames,
+            role='retired wildlife sheet',runtime=False)
     return records
 
 
@@ -78,12 +92,16 @@ def review(before=None,output=REPORT):
         path=PACK/record['path'];covered.add(record['path'])
         w,h=record['size'];frames=record['frames']
         with Image.open(path) as im:
-            if im.size!=(w*frames,h):raise ValueError(f'{path}: {im.size} != {(w*frames,h)}')
+            # Rendering uses logical sizes with full-frame UVs; imported textures may be denser.
+            density=im.height/h
+            if density<1 or density!=int(density) or im.width!=w*frames*density:
+                raise ValueError(f'{path}: {im.size} is not a uniform integer-density strip of {(w*frames,h)}')
+            record['textureDensity']=int(density)
             if not im.convert('RGBA').getchannel('A').getbbox():raise ValueError(f'Empty asset: {path}')
             if record['anchor']:
                 ax,ay=record['anchor']
                 if not (0<=ax<w and 0<=ay<h):raise ValueError(f'{path}: anchor outside frame')
-            thumb=im.crop((0,0,w,h)).convert('RGBA')
+            thumb=im.crop((0,0,int(w*density),int(h*density))).convert('RGBA')
             scale=min(3,280/w,150/h)
             if scale>=1:scale=int(scale)
             thumb=thumb.resize((max(1,round(w*scale)),max(1,round(h*scale))),Image.Resampling.NEAREST)
@@ -98,7 +116,8 @@ def review(before=None,output=REPORT):
         if section=='terrain' and record['role']=='top':
             record['placement']=f'{usage[material]} tiles in saved regions; battle maps may also use it.'
         elif section=='terrain':record['placement']='Selected by material renderer or explicitly placed decal; not a standalone region prop.'
-        else:record['placement']='Library asset. Saved overworld has no prop/building/effect placement layer or walking renderer yet.'
+        else:record['placement']='Library asset; placement must be checked in the saved region and live walking renderer.'
+        if record.get('runtime') is False:record['placement']='Retained source sheet, unreferenced by live manifests; current wildlife uses field_crow.'
         if record.get('replaces'):
             record['assessment']+=' Animated replacement: geometry/anchor must agree with the named static prop.'
             static=json.loads((PACK/'props/manifest.json').read_text())['props'][record['replaces']]
@@ -116,7 +135,7 @@ def review(before=None,output=REPORT):
     (output/'assets.json').write_text(json.dumps(records,indent=2)+'\n')
     template='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Wardenflame · overworld asset review</title><style>
     body{background:#101827;color:#dce2ed;font:16px system-ui;margin:24px}header{max-width:1000px}h1{color:#f3dfae}h2{font-size:15px;overflow-wrap:anywhere}h3{font-size:13px;color:#e4bb68;margin-bottom:0}p{line-height:1.5;font-size:13px}nav{position:sticky;top:0;background:#101827;padding:15px 0;z-index:2;display:flex;gap:12px;flex-wrap:wrap}input,select{padding:10px;background:#243348;color:white;border:1px solid #62718a;border-radius:5px}#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}article{background:#1a2639;border:1px solid #384860;border-radius:8px;padding:16px}article[hidden]{display:none}.preview{height:155px;display:flex;align-items:center;justify-content:center;background:#26344a}.preview img{max-width:100%;max-height:150px;image-rendering:pixelated}b{color:#d8bf86;font-size:13px}</style>
-    <header><h1>Wardenflame · overworld asset review</h1><p>One card per shipped PNG, including animation strips, shadow/light masks, town attachments and map icons. Decisions follow the asset-by-asset visual review against the characters and Embers of the Vale lore.</p><p><strong>Integration gap:</strong> Ashen Ford currently saves terrain and markers. Detailed props, buildings, effects and literal map-place overrides are library-ready; the walking renderer and authored placement layer are not implemented. Placement recommendations below are not live map changes. Gameplay heights, flags, battle stamps and painted region layouts are preserved.</p></header>
+    <header><h1>Wardenflame · overworld asset review</h1><p>One card per shipped PNG, including animation strips, shadow/light masks, town attachments and map icons. Decisions follow the asset-by-asset visual review against the characters and Embers of the Vale lore.</p><p><strong>Scope:</strong> This inventory validates library art and metadata. Ashen Ford has authored props, buildings, effects and a live walking renderer; recommendations below do not prove scene placement. Check the saved region and in-game views for actual use. Retired source sheets are identified explicitly.</p></header>
     <nav><input id="search" type="search" placeholder="Find asset, region or issue" aria-label="Find assets"><select id="section" aria-label="Asset set"><option value="">All sets</option><option>terrain</option><option>props</option><option>town</option><option>ambient</option><option>worldmap</option></select><select id="change" aria-label="Change"><option value="">All changes</option><option>refined</option><option>added</option><option>kept</option></select><span id="count"></span></nav><main id="grid">CARDS</main><script>
     const cards=[...document.querySelectorAll('article')],search=document.getElementById('search'),section=document.getElementById('section'),change=document.getElementById('change');function filter(){let n=0;for(const c of cards){c.hidden=!(c.dataset.search.includes(search.value.toLowerCase())&&(!section.value||c.dataset.section===section.value)&&(!change.value||c.dataset.change===change.value));if(!c.hidden)n++}document.querySelector('#count').textContent=n+' / '+cards.length+' assets'}for(const id of ['search','section','change'])document.getElementById(id).addEventListener('input',filter);filter();</script></html>'''
     (output/'index.html').write_text(template.replace('CARDS','\n'.join(cards)))

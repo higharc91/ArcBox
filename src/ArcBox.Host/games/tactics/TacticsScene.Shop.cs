@@ -37,7 +37,8 @@ public partial class TacticsScene
             _goldGain.Position = new Vector2(44, 180);
             AddChild(_goldGain);
         }
-        _shopPanel.Visible = view.Shop is not null && !CampScene.Active(view.Camp);
+        // While the party haggles, its check is the story's on the TV (decision E): the shop panel waits behind it.
+        _shopPanel.Visible = view.Shop is not null && !CampScene.Active(view.Camp) && view.Story is null;
         _shopPurse!.Visible = false;
         _shopPurse.Text = view.Explore?.Gold is { } gold ? $"◆ {gold} gold" : "";
         if (_lastPurse is { } before && view.Explore?.Gold is { } after && after > before)
@@ -50,7 +51,7 @@ public partial class TacticsScene
         }
         _lastPurse = view.Explore?.Gold;
         var shop = view.Shop;
-        if (shop is not null && (_lastShop?.Id != shop.Id || _lastShop.Seq != shop.Seq))
+        if (shop is not null && (_lastShop?.Id != shop.Id || _lastShop.Seq != shop.Seq || _lastShop.Haggle != shop.Haggle))
         {
             foreach (var child in _shopRows!.GetChildren()) { _shopRows.RemoveChild(child); child.QueueFree(); }
             var recovery = shop.Services is { IsEmpty: false } && shop.Members is not null;
@@ -93,6 +94,15 @@ public partial class TacticsScene
                 var greeting = ArcTheme.Label(shop.Greeting, ArcTheme.SemiBold, 23);
                 greeting.AutowrapMode = TextServer.AutowrapMode.WordSmart;
                 _shopRows.AddChild(greeting);
+                if (shop.Haggle is { } haggle)
+                {
+                    var deal = ArcTheme.Label(haggle.Passed
+                            ? $"Haggled · {haggle.Name} {haggle.Die} + {haggle.Bonus} vs DC {haggle.Dc} · a tenth off buys, a tenth more for sales"
+                            : $"No deal · {haggle.Name} {haggle.Die} + {haggle.Bonus} vs DC {haggle.Dc} · prices stand",
+                        ArcTheme.Bold, 22, haggle.Passed ? ArcTheme.Gold : new Color(.75f, .75f, .75f));
+                    deal.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+                    _shopRows.AddChild(deal);
+                }
                 foreach (var item in shop.Items)
                 {
                     var row = ArcTheme.Label($"{item.Name}\n{item.Price} gold · {(item.Count == -1 ? "Unlimited" : item.Count == 0 ? "Sold out" : item.Count + " in stock")}", ArcTheme.SemiBold, 26,
@@ -116,8 +126,10 @@ public partial class TacticsScene
             var action = _lastShop is null ? "open" : shop.Gold < _lastShop.Gold ? "buy" : "sell";
             if (_lastShop is not null && shop.Services is { } soundServices && shop.Seq != _lastShop.Seq)
                 PlayRecovery(soundServices.Any(s => s.Kind == "cure") ? "temple_heal" : "inn_room");
-            if (ShopSounds.For(action, _sound) is { } sound) _audio.Play(sound, ThingSounds.Db);
+            var traded = _lastShop is null || _lastShop.Id != shop.Id || _lastShop.Seq != shop.Seq;     // not a haggle's redraw alone
+            if (traded && ShopSounds.For(action, _sound) is { } sound) _audio.Play(sound, ThingSounds.Db);
             if (_lastShop?.Id != shop.Id) _narrator?.Say(shop.Greeting, "tactics.narrator", NarrationPriority.Question);
+            if (_lastShop?.Id == shop.Id && _lastShop.Haggle is null && shop.Haggle is not null) GD.Print($"SHOP haggle {(shop.Haggle.Passed ? "passed" : "failed")}");
         }
         if (shop is null && _lastShop is not null && ShopSounds.For("close", _sound) is { } close) _audio.Play(close, ThingSounds.Db);
         if (shop is not null && (_lastShop?.Id != shop.Id || _lastShop.Seq != shop.Seq)) _shots?.Capture("shop-" + (shop.Seq == 0 ? "open" : "trade-" + shop.Seq));
