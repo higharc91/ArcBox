@@ -6753,7 +6753,8 @@
       ],
       "face": "sw",
       "id": "old_maud",
-      "character": "old_maud"
+      "character": "old_maud",
+      "variant": "old_maud"
     },
     {
       "preset": "fisher",

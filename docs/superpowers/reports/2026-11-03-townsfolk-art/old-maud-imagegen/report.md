@@ -78,3 +78,8 @@ node tools/tactics-assets/imagegen/townsfolk/old-maud/build-video.cjs docs/super
 First standalone restore needs the configured proxy for NuGet vulnerability
 metadata. Native launcher needs Xvfb/software Vulkan capabilities. Do not rerun
 native screenshots over the approved hash-bound TV evidence after owner approval.
+
+
+## Latest checkpoint — Old Maud approved and installed
+
+Owner approved the finished set: “I approve”. Installed the hash-verified eight-direction animations and six portraits with named-only hermit art aliases; approved voice remains in place. Previous pending approval notes are historical. Rebase before pushing townsfolk-art; no PR, merge or publication.

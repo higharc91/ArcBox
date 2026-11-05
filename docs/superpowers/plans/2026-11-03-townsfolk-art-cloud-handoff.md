@@ -1073,3 +1073,8 @@ monetary estimate inferred. Next: owner finished-set/TV approval, then install
 exact reviewed art and verify production; do not infer approval from appearance
 or previous voice approval. Rebase before pushing townsfolk-art. No PR, merge,
 issue closure or environment publication.
+
+
+## Latest checkpoint — Old Maud approved and installed
+
+Owner approved the finished set: “I approve”. Installed the hash-verified eight-direction animations and six portraits with named-only hermit art aliases; approved voice remains in place. Previous pending approval notes are historical. Rebase before pushing townsfolk-art; no PR, merge or publication.

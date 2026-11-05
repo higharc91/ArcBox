@@ -599,6 +599,14 @@
       "angry": "mother_skarrow_angry.png",
       "sad": "mother_skarrow_sad.png",
       "surprised": "mother_skarrow_surprised.png"
+    },
+    "old_maud": {
+      "idle": "old_maud_idle.png",
+      "hurt": "old_maud_hurt.png",
+      "happy": "old_maud_happy.png",
+      "angry": "old_maud_angry.png",
+      "sad": "old_maud_sad.png",
+      "surprised": "old_maud_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

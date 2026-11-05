@@ -28,7 +28,7 @@
         4,
         5
       ],
-      "fps": 5.0,
+      "fps": 5,
       "loop": true
     },
     "ready": {
@@ -40,7 +40,7 @@
         10,
         11
       ],
-      "fps": 6.0,
+      "fps": 6,
       "loop": true
     },
     "walk": {
@@ -54,7 +54,7 @@
         18,
         19
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": true
     },
     "attack": {
@@ -67,7 +67,7 @@
         25,
         26
       ],
-      "fps": 14.0,
+      "fps": 14,
       "loop": false
     },
     "thrust": {
@@ -79,7 +79,7 @@
         31,
         32
       ],
-      "fps": 14.0,
+      "fps": 14,
       "loop": false
     },
     "shoot": {
@@ -91,7 +91,7 @@
         37,
         38
       ],
-      "fps": 10.0,
+      "fps": 10,
       "loop": false
     },
     "cast": {
@@ -104,7 +104,7 @@
         44,
         45
       ],
-      "fps": 10.0,
+      "fps": 10,
       "loop": false
     },
     "slam": {
@@ -117,7 +117,7 @@
         51,
         52
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "spin": {
@@ -128,7 +128,7 @@
         56,
         57
       ],
-      "fps": 14.0,
+      "fps": 14,
       "loop": false
     },
     "flurry": {
@@ -141,7 +141,7 @@
         63,
         64
       ],
-      "fps": 14.0,
+      "fps": 14,
       "loop": false
     },
     "bash": {
@@ -152,7 +152,7 @@
         68,
         69
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "block": {
@@ -161,7 +161,7 @@
         71,
         72
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "dodge": {
@@ -171,7 +171,7 @@
         75,
         76
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "jump": {
@@ -182,7 +182,7 @@
         80,
         81
       ],
-      "fps": 10.0,
+      "fps": 10,
       "loop": false
     },
     "item": {
@@ -193,7 +193,7 @@
         85,
         86
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "victory": {
@@ -203,7 +203,7 @@
         89,
         90
       ],
-      "fps": 6.0,
+      "fps": 6,
       "loop": true
     },
     "hurt": {
@@ -212,7 +212,7 @@
         92,
         93
       ],
-      "fps": 10.0,
+      "fps": 10,
       "loop": false
     },
     "down": {
@@ -222,7 +222,7 @@
         96,
         97
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "rise": {
@@ -232,7 +232,7 @@
         100,
         101
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "sit": {
@@ -242,7 +242,7 @@
         104,
         105
       ],
-      "fps": 3.0,
+      "fps": 3,
       "loop": true
     },
     "doze": {
@@ -250,7 +250,7 @@
         106,
         107
       ],
-      "fps": 2.0,
+      "fps": 2,
       "loop": true
     },
     "talk": {
@@ -260,7 +260,7 @@
         110,
         111
       ],
-      "fps": 5.0,
+      "fps": 5,
       "loop": true
     },
     "wave": {
@@ -270,7 +270,7 @@
         114,
         115
       ],
-      "fps": 6.0,
+      "fps": 6,
       "loop": true
     },
     "run": {
@@ -282,7 +282,7 @@
         120,
         121
       ],
-      "fps": 14.0,
+      "fps": 14,
       "loop": true
     },
     "knockback": {
@@ -293,7 +293,7 @@
         125,
         126
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "stagger": {
@@ -304,7 +304,7 @@
         130,
         131
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "death": {
@@ -316,7 +316,7 @@
         136,
         137
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "pray": {
@@ -328,7 +328,7 @@
         142,
         143
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     },
     "channel": {
@@ -338,7 +338,7 @@
         146,
         147
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": true
     },
     "summon": {
@@ -351,7 +351,7 @@
         153,
         154
       ],
-      "fps": 9.0,
+      "fps": 9,
       "loop": false
     },
     "point": {
@@ -361,7 +361,7 @@
         157,
         158
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "buff": {
@@ -373,7 +373,7 @@
         163,
         164
       ],
-      "fps": 9.0,
+      "fps": 9,
       "loop": false
     },
     "kneel": {
@@ -382,7 +382,7 @@
         166,
         167
       ],
-      "fps": 6.0,
+      "fps": 6,
       "loop": false
     },
     "cheer": {
@@ -392,7 +392,7 @@
         170,
         171
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": true
     },
     "crouch": {
@@ -400,7 +400,7 @@
         172,
         173
       ],
-      "fps": 3.0,
+      "fps": 3,
       "loop": true
     },
     "sneak": {
@@ -412,7 +412,7 @@
         178,
         179
       ],
-      "fps": 9.0,
+      "fps": 9,
       "loop": true
     },
     "hop": {
@@ -422,7 +422,7 @@
         182,
         183
       ],
-      "fps": 12.0,
+      "fps": 12,
       "loop": false
     },
     "climb": {
@@ -433,7 +433,7 @@
         187,
         188
       ],
-      "fps": 8.0,
+      "fps": 8,
       "loop": false
     }
   },
@@ -785,6 +785,8 @@
     "minstrel",
     "fisher",
     "mother_skarrow",
-    "goblin_shaman_mother_skarrow"
+    "goblin_shaman_mother_skarrow",
+    "old_maud",
+    "hermit_old_maud"
   ]
 }

@@ -2,7 +2,7 @@
   "character": "Old Maud",
   "characterId": "old_maud",
   "presetReference": "hermit",
-  "stage": "completed_review_pending_owner_full_set_tv_approval",
+  "stage": "owner_full_set_tv_approved_installed",
   "date": "2026-11-05",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 11,
@@ -12,9 +12,9 @@
   "previewSha256": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a",
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "completion_authorized_full_set_pending",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "approved",
   "reviewNotes": [
     "Appearance already approved; latest completion authorization: ok, do those.",
     "All eight facings authored without mirroring; six source frames each idle/walk/talk. Slower5fps walk, blink and small empty-LEFT-hand talk gestures. Stick anatomicalRIGHT.",
@@ -57,7 +57,7 @@
     "validated": true
   },
   "completedSet": {
-    "status": "pending_owner_full_set_tv_approval",
+    "status": "approved",
     "date": "2026-11-05",
     "sha256": {
       "review_old_maud.png": "4517c9a2594a09d116a4a033e8d3d7fa4c81df46ef65485a32a5c1b7125ab4b3",
@@ -86,6 +86,11 @@
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/old-maud-imagegen/ashen_ford-shots/world-old-maud.png",
       "sha256": "18eac72c57424167e4fdd64ab37e18710ab0d1dd50d6da67292e94545f04389d"
     },
-    "productionInstalled": false
+    "productionInstalled": true
+  },
+  "ownerFullSetApproval": {
+    "quote": "I approve",
+    "date": "2026-11-05",
+    "scope": "Completed Old Maud animation, portrait and TV review"
   }
 }
