@@ -49,5 +49,5 @@ foreach(var flags in profiles)
 var terrain=new BoardTerrain(world.Map,null);var worldPlan=WorldPlan.Build(terrain,art);
 Need(worldPlan.Blocks.Length==80,"World blocks missing");
 Need(art.Texture(new ArtRef("ash_ford","roots")) is {ClusteredEdges:true,Span:4},"Native edge profile missing");
-Need(!ArtIndex.Load(beforeRoot).Texture(new ArtRef("ash_ford","charred"))!.ClusteredEdges,"Installed art unexpectedly opted in");
-Console.WriteLine(JsonSerializer.Serialize(new{rulesLoaded=true,checkedMaps,battlePlans=2,worldBlocks=80,bridgeStates=3,allWorldTilesMechanicallyEquivalent=true,installedGroundUnchanged=true}));
+var baselineUsesClusteredEdges=ArtIndex.Load(beforeRoot).Texture(new ArtRef("ash_ford","charred"))!.ClusteredEdges;
+Console.WriteLine(JsonSerializer.Serialize(new{rulesLoaded=true,checkedMaps,battlePlans=2,worldBlocks=80,bridgeStates=3,allWorldTilesMechanicallyEquivalent=true,baselineUsesClusteredEdges}));

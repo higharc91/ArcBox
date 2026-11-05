@@ -1,4 +1,8 @@
-# Crisp ground: native pixel and TV approval
+# Crisp ground: native pixel and TV review checkpoints
+
+**Approved and installed:** the owner selected the greener revision: “much better, let's go with that”.
+See the [installation and final checks](../ground-installed/README.md). The sections below retain the earlier review
+checkpoint and its then-pending approval status as historical evidence.
 
 **Latest revision:** [farm and riverbank greens](green-revision/README.md), requested after the wider map review.
 These pairs compare the earlier brown native preview against the revised olive farm turf and local bankside greenery.

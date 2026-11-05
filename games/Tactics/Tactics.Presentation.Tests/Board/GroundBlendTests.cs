@@ -281,7 +281,7 @@ public sealed class GroundBlendTests
         Assert.Equal(new Tile(1, 0), blend.Tile);
         Assert.Equal(tops[1].Points, blend.Points);
         Assert.Equal(tops[1].Uvs, blend.Uvs);
-        Assert.Equal("terrain/top/ash_ford.png", blend.Image!.Path);      // Ashen Ford's own ash (MaterialLook.ArtMaterial)
+        Assert.Equal("terrain/top/native_ash_ford_charred.png", blend.Image!.Path); // Ashen Ford's own ash
         Assert.Equal(MaskOf(-1, 0), blend.Image.Blend);
         Assert.Null(blend.Image.Glow);
 

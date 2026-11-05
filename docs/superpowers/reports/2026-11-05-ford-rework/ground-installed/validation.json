@@ -1,0 +1,71 @@
+{
+  "approved_revision": "e1c0204832942d00c3a554be6e2d5197668beda5",
+  "owner_approval": "much better, let's go with that",
+  "installed": true,
+  "dotnet": {
+    "initial_full_run": {
+      "total": 6787,
+      "passed": 6785,
+      "failed": 2,
+      "skipped": 0
+    },
+    "failures": [
+      "Old cliff filename and eight-tile UV expectation",
+      "Old west-bank grass material in stamp-rejection message"
+    ],
+    "corrected_targeted_reruns": {
+      "passed": 2,
+      "failed": 0
+    },
+    "remaining_known_failures": 0,
+    "full_suite_repeated_after_fixture_corrections": false
+  },
+  "phone": {
+    "passed": 517,
+    "failed": 0
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "world_exports": {
+    "regions": 2,
+    "twice_byte_identical": true
+  },
+  "content": {
+    "installedMatchesApprovedPreview": true,
+    "worldCells": 17408,
+    "allMapsMatchApprovedPreview": true,
+    "cinderHollowUnchanged": true,
+    "sceneNodesAndMarkersPreserved": 274,
+    "existingMaterialSourceIdsPreserved": 105,
+    "newMaterialSourceIds": 4,
+    "approvedAssetsMatch": 13,
+    "legacyTerrainImagesPreserved": 100,
+    "exportsByteIdentical": true,
+    "worldSha256": "31b7cfb77229fecae2640bd84a9e61cb30f074369f3a76320d02cca2f9cf1e06",
+    "worldMetadataPeoplePropsBuildingsStampsSpawnsUnchanged": true
+  },
+  "mechanics": {
+    "rulesLoaded": true,
+    "checkedMaps": 18,
+    "battlePlans": 2,
+    "worldBlocks": 80,
+    "bridgeStates": 3,
+    "allWorldTilesMechanicallyEquivalent": true,
+    "baselineUsesClusteredEdges": false
+  },
+  "captures": {
+    "places": 10,
+    "bridge_states": 3,
+    "battle": 1,
+    "runtime_errors": 0
+  },
+  "chapter_campaigns_rerun_for_ground": false,
+  "balance_retuned": false,
+  "credits": {
+    "native": 0,
+    "pixellab": 0,
+    "scenario_total": 65
+  }
+}

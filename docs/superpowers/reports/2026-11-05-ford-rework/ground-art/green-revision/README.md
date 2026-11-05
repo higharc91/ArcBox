@@ -1,5 +1,8 @@
 # Farm and riverbank greens
 
+**Approved and installed:** owner response: “much better, let's go with that”.
+See the [installation report](../../ground-installed/README.md). These images retain the approved preview checkpoint.
+
 The owner requested greens near farms and water after the wider map review. **Previous brown native preview is on the left; revised greenery is on the right.** Both sides remain isolated previews, not installed content.
 
 ![Farm and riverbank greens](overview.jpg)

@@ -62,13 +62,13 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
-    public void A_ford_cliff_face_uses_its_full_eight_tile_span()
+    public void A_ford_cliff_face_uses_its_full_four_tile_span()
     {
         var plan = Plan(Map(["rock_ford/bank"], [], "1:0:0 0:0:0"));
         var side = Assert.Single(SidesOf(plan, new Tile(0, 0)), face => face.Facing == Facing.U);
 
-        Assert.Equal("cliff_ford_grey.png", Path.GetFileName(side.Image!.Path));
-        Assert.Equal(1f / 8, side.Uvs[1].X);
+        Assert.Equal("native_cliff_ford.png", Path.GetFileName(side.Image!.Path));
+        Assert.Equal(1f / 4, side.Uvs[1].X);
     }
 
     [Fact]

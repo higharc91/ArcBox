@@ -55,14 +55,16 @@
     "path_ford": {
       "kind": "top",
       "variants": {
-        "packed": "top/path_ford.png"
+        "packed": "top/native_path_ford_packed.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "sand": {
       "kind": "top",
@@ -182,14 +184,16 @@
     "ford_water": {
       "kind": "top",
       "variants": {
-        "clear": "top/ford_water_clear.png"
+        "clear": "top/native_ford_water_clear.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "lava": {
       "kind": "top",
@@ -322,52 +326,64 @@
     "ash_ford": {
       "kind": "top",
       "variants": {
-        "charred": "top/ash_ford.png"
+        "charred": "top/native_ash_ford_charred.png",
+        "roots": "top/native_ash_ford_roots.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "grass_ford": {
       "kind": "top",
       "variants": {
-        "autumn": "top/grass_ford.png",
-        "dry": "top/grass_ford_dry.png"
+        "autumn": "top/native_grass_ford_autumn.png",
+        "dry": "top/native_grass_ford_dry.png",
+        "pasture": "top/native_grass_ford_pasture.png",
+        "moist": "top/native_grass_ford_moist.png",
+        "moist_earth": "top/native_grass_ford_moist_earth.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "dirt_ford": {
       "kind": "top",
       "variants": {
-        "wet": "top/dirt_ford.png",
-        "dry": "top/dirt_ford_dry.png"
+        "wet": "top/native_dirt_ford_wet.png",
+        "dry": "top/native_dirt_ford_dry.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "rock_ford": {
       "kind": "top",
       "variants": {
-        "bank": "top/rock_ford.png"
+        "bank": "top/native_rock_ford_bank.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
-        256
-      ]
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
     },
     "planks_ford": {
       "kind": "top",
@@ -412,15 +428,15 @@
     "cliff_ford": {
       "kind": "side",
       "variants": {
-        "grey": "side/cliff_ford_grey.png"
+        "grey": "side/native_cliff_ford.png"
       },
       "frames": 1,
       "fps": 0.0,
       "size": [
-        256,
+        128,
         32
       ],
-      "span": 8
+      "span": 4
     },
     "brick_side": {
       "kind": "side",

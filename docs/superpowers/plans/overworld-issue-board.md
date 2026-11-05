@@ -77,7 +77,11 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 **Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
 **Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after, and the [fight in place](../reports/tv-drawing-polish/ow08-fight-in-place-after.png) from an `ARCBOX_STAGE=1` run. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
-### OW-09 · The ford's ground looks soft and blotchy · `in progress on ford-rework; bridge installed, native ground pixel/TV review awaits owner`
+### OW-09 · The ford's ground looks soft and blotchy · `done on ford-rework; greener native ground approved and installed`
+Owner: “much better, let's go with that”. The selected native pass has olive-green farms, local low-bank vegetation,
+charcoal ash, dry hills and opaque pixel boundaries. The editable scene and battle stamps match the approved preview.
+[Installation and verification](../reports/2026-11-05-ford-rework/ground-installed/README.md).
+The original problem below is retained for context.
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
@@ -1133,3 +1137,13 @@ all 19,200 world cells preserve height, collision, flags and fuel in all three b
 rewards or objectives change. All 2,852 presentation tests pass; host build has zero warnings/errors. Native Godot
 world, real-encounter battle and TV overview pairs are [ready for pixel/TV approval](../reports/2026-11-05-ford-rework/ground-art/README.md).
 Installed content is unchanged until approval. No extra credits: Scenario remains 65 CU, native/PixelLab zero.
+
+
+### #82 greener native ground approved and installed
+
+Owner: “much better, let's go with that”. The approved farm and riverbank greens are installed with charcoal ash,
+dry hills and clustered opaque edges. The original scene is painted through the native editor; 274 nodes/markers
+and 105 existing material source IDs are preserved. Both regions export twice identically, and all 18 maps retain
+height, flags and fuel. Installed art hashes match the approved preview. Updated exploration, real encounter and
+three-state bridge captures are in the [installation report](../reports/2026-11-05-ford-rework/ground-installed/README.md).
+No art approval remains for OW-09. Four-hero force balance remains the existing owner decision for #82.

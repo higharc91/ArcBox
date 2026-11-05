@@ -1,0 +1,12 @@
+{
+  "approved_assets": 13,
+  "scene_paint_cells": 1629,
+  "changed_maps": [
+    "mob_pine_wolves",
+    "mob_river_slimes",
+    "mob_rooting_boars",
+    "river_crossing"
+  ],
+  "scene_rebuilt": false,
+  "legacy_pngs_preserved": true
+}

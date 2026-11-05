@@ -1,5 +1,5 @@
 """Run the existing TV renderer in an isolated software OpenGL display."""
-import argparse, json, os, select, signal, subprocess, time
+import argparse, json, os, select, shutil, signal, subprocess, time
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -10,7 +10,7 @@ parser.add_argument('--name', required=True)
 parser.add_argument('--report', type=Path)
 parser.add_argument('--flags', default='')
 parser.add_argument('--walk')
-parser.add_argument('--looks', default='bridge-west@106,61@110,64;bridge-east@109,62@110,64')
+parser.add_argument('--looks', default='bridge-west@106,61@104,61;bridge-east@109,62@109,62')
 parser.add_argument('--seconds', type=int, default=40)
 parser.add_argument('--party-walk', action='store_true')
 parser.add_argument('--record', action='store_true')
@@ -40,15 +40,11 @@ try:
         cmd = [c for c in cmd if not c.startswith(('--world-demo=', '--world-looks='))]
         cmd += ['--tactics-demo=' + args.battle]
     with (report / 'tv.txt').open('w') as log:
-        started=time.monotonic();movie=None;battle_shot=False
+        started=time.monotonic();movie=None
         process=subprocess.Popen(cmd,env=env,stdout=log,stderr=subprocess.STDOUT)
         try:
             while process.poll() is None:
                 if time.monotonic()-started>190:raise TimeoutError('TV exceeded 190 seconds')
-                if args.battle and not battle_shot and time.monotonic()-started>15 and 'TACTICS screen' in (report/'tv.txt').read_text():
-                    subprocess.run(['ffmpeg','-y','-loglevel','error','-f','x11grab','-video_size','1280x720','-i',env['DISPLAY'],
-                        '-frames:v','1',str(report/'battle.png')],env=env,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-                    battle_shot=True
                 if args.record and movie is None and 'textures ' in (report/'tv.txt').read_text():
                     movie=subprocess.Popen(['ffmpeg','-y','-loglevel','error','-f','x11grab','-video_size','1280x720','-framerate','30','-i',env['DISPLAY'],
                         '-c:v','libx264','-threads','2','-preset','ultrafast','-crf','24','-pix_fmt','yuv420p',str(report/'walk.mp4')],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -61,7 +57,11 @@ try:
     if result.returncode or 'ERROR:' in log_text:
         raise RuntimeError(f'TV exit {result.returncode}; inspect {report}')
     if args.battle:
-        if not (report/'battle.png').is_file():raise RuntimeError('Missing battle capture')
+        # Use the game's post-render screenshot. A wall-clock grab can capture
+        # the boot splash while a busy renderer is still drawing its first frame.
+        shots=sorted((report/'shots').glob('*-tactics-battle-*.png'))
+        if not shots:raise RuntimeError('Missing rendered battle capture')
+        shutil.copyfile(shots[-1],report/'battle.png')
     elif args.mode == 'views':
         for shot in ('world-bridge-west.png', 'world-bridge-east.png'):
             if not (report / 'shots' / shot).is_file():

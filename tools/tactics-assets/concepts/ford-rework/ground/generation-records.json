@@ -1,7 +1,7 @@
 {
   "issue": 82,
   "kind": "crisp-ground-concept",
-  "status": "Concept approved; native pixel and TV review ready for owner",
+  "status": "Ground concept and revised native pixel/TV approved; installed",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -81,7 +81,7 @@
     "hashes": "native-art/assets.json"
   },
   "native_green_revision": {
-    "status": "Ready for owner visual review; not installed",
+    "status": "Owner approved and installed",
     "request": "Add greens around farms and water while retaining charcoal ash and dry hills",
     "authoring": "parts/ford_terrain.py",
     "preview": "ground/render-preview.py",
@@ -89,6 +89,8 @@
     "review": "docs/superpowers/reports/2026-11-05-ford-rework/ground-art/green-revision/README.md",
     "native_spend": 0,
     "maps_checked": 18,
-    "matched_locations": 10
+    "matched_locations": 10,
+    "approval": "much better, let's go with that",
+    "installation_report": "docs/superpowers/reports/2026-11-05-ford-rework/ground-installed/README.md"
   }
 }

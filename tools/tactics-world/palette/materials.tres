@@ -105,6 +105,10 @@
 [ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_v1.png" id="76_ota18"]
 [ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_v2.png" id="77_vvvmm"]
 [ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_west.png" id="78_rects"]
+[ext_resource type="Texture2D" path="res://palette/materials/ash_ford_roots.png" id="105_5sd35"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford_moist.png" id="106_yi8fa"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford_moist_earth.png" id="107_37uif"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford_pasture.png" id="108_0f83w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7yja"]
 resource_name = "ash/grey"
@@ -730,6 +734,30 @@ texture = ExtResource("39_kfubj")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_38evc"]
+resource_name = "ash_ford/roots"
+texture = ExtResource("105_5sd35")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tq5ox"]
+resource_name = "grass_ford/moist"
+texture = ExtResource("106_yi8fa")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_645sf"]
+resource_name = "grass_ford/moist_earth"
+texture = ExtResource("107_37uif")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xu72g"]
+resource_name = "grass_ford/pasture"
+texture = ExtResource("108_0f83w")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lvhu"]
 resource_name = "dunes/pale"
 texture = ExtResource("40_2r8ai")
@@ -843,3 +871,7 @@ sources/125 = SubResource("TileSetAtlasSource_cu0ik")
 sources/126 = SubResource("TileSetAtlasSource_hp62w")
 sources/127 = SubResource("TileSetAtlasSource_408sc")
 sources/128 = SubResource("TileSetAtlasSource_moiwf")
+sources/80 = SubResource("TileSetAtlasSource_38evc")
+sources/81 = SubResource("TileSetAtlasSource_tq5ox")
+sources/82 = SubResource("TileSetAtlasSource_645sf")
+sources/83 = SubResource("TileSetAtlasSource_xu72g")

@@ -1,0 +1,63 @@
+Running tests from /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+failed Tactics.Presentation.Tests.Board.BoardPlanTests.A_ford_cliff_face_uses_its_full_eight_tile_span (6ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Strings differ
+             ↓ (pos 0)
+  Expected: "cliff_ford_grey.png"
+  Actual:   "native_cliff_ford.png"
+             ↑ (pos 0)
+    at Tactics.Presentation.Tests.Board.BoardPlanTests.A_ford_cliff_face_uses_its_full_eight_tile_span() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/Board/BoardPlanTests.cs:70
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+/workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (3s 839ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (2m 40s 065ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (3m 39s 236ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 365ms)
+Running tests from /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (487ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (6m 11s 348ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (12s 508ms)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 1 error(s) (6m 29s 554ms)
+Exit code: 2
+/workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (4m 04s 480ms)
+failed Tactics.WorldTools.Tests.RegionExportTests.A_stamped_tile_painted_over_is_refused_and_nothing_is_written (812ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Collections differ at index 0
+                                         ↓ (pos 109)
+  Expected: ···"'ash/grey', the map has 'grass_ford/autumn'. Selec"···
+  Actual:   ···"'ash/grey', the map has 'ash_ford/roots'. Select i"···
+                                         ↑ (pos 109)
+    at Tactics.WorldTools.Tests.RegionExportTests.A_stamped_tile_painted_over_is_refused_and_nothing_is_written()
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+/workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) failed with 1 error(s) (5m 35s 196ms)
+Exit code: 2
+
+Test run summary: Failed!
+  /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (6m 11s 348ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 1 error(s) (6m 29s 554ms)
+  /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (3s 839ms)
+  /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 365ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (4m 04s 480ms)
+  /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (12s 508ms)
+  /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) failed with 1 error(s) (5m 35s 196ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (3m 39s 236ms)
+  /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (487ms)
+  /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (2m 40s 065ms)
+
+  total: 6787
+  failed: 2
+  succeeded: 6785
+  skipped: 0
+  duration: 8m 17s 389ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

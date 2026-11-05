@@ -31,13 +31,16 @@ manifest['textures']['cliff_ford']={'kind':'side','variants':{'grey':'side/nativ
 # The battle stamp's west-bank grass rectangle must read as part of the burned
 # bank. Its remaining dry roots keep exactly the original fuel classification.
 mapfile=pack/'rules/maps/river_crossing.json';m=json.loads(mapfile.read_text());raw=bytearray(base64.b64decode(m['tiles']));old=bytes(raw)
-m['materials'].append('ash_ford/roots');rootmat=len(m['materials'])-1;paint=[]
+if 'ash_ford/roots' not in m['materials']:m['materials'].append('ash_ford/roots')
+rootmat=m['materials'].index('ash_ford/roots');paint=[]
 for y in range(m['size'][1]):
     for x in range(6):
         i=(y*m['size'][0]+x)*3
         if m['materials'][raw[i+1]]=='grass_ford/autumn':raw[i+1]=rootmat;paint.append((x,y))
 m['tiles']=base64.b64encode(raw).decode();mapfile.write_text(json.dumps(m,indent=2)+'\n')
-worldfile=pack/'rules/world/ashen_ford.json';world=json.loads(worldfile.read_text());world['materials'].append('ash_ford/roots');worldmat=len(world['materials'])-1
+worldfile=pack/'rules/world/ashen_ford.json';world=json.loads(worldfile.read_text())
+if 'ash_ford/roots' not in world['materials']:world['materials'].append('ash_ford/roots')
+worldmat=world['materials'].index('ash_ford/roots')
 for chunk in world['chunks']:
     b=bytearray(base64.b64decode(chunk['tiles']))
     for x,y in paint:
@@ -47,7 +50,8 @@ for chunk in world['chunks']:
 # Moisture-led vegetation is local to low banks, never ash, roads or water.
 # Separate aliases preserve the original fuel classification of every cell.
 envfile=pack/'rules/environment.json';env=json.loads(envfile.read_text());before=list(env['fuel'])
-env['fuel'] += ['ash_ford/roots','grass_ford/pasture','grass_ford/moist']
+for alias in ['ash_ford/roots','grass_ford/pasture','grass_ford/moist']:
+    if alias not in env['fuel']:env['fuel'].append(alias)
 cells={}; buffers=[]
 for chunk in world['chunks']:
     b=bytearray(base64.b64decode(chunk['tiles']));buffers.append((chunk,b))
