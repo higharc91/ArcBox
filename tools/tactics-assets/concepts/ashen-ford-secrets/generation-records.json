@@ -2,7 +2,7 @@
   "issue": 81,
   "part": 2,
   "branch": "ashen-ford-secrets",
-  "status": "concepts approved; PixelLab generation awaiting credit top-up",
+  "status": "concepts approved; locally authored pixel art and TV candidates ready for second approval",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -193,5 +193,10 @@
   "references_source_hashes": {
     "docs/superpowers/reports/2026-11-04-ashen-ford-secrets/verification/chapter-force-walking-after.png": "06f5515bf47705da1c002c7ee35d93ac8657f05b1750854d837f93d0547b7e66",
     "content/tactics/base/town/buildings/cottage_thatch_green.png": "503e0cba6f765629d1fafc9b7c3080b34c72bcb986775f081b28d18c5995f8f3"
+  },
+  "pixel_stage_provider": "Local deterministic authoring, as requested by owner",
+  "pixel_art_approval": {
+    "status": "pending",
+    "stage": "native assets and TV preview; final placement not yet approved"
   }
 }

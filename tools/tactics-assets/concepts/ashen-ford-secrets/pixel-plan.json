@@ -2,7 +2,7 @@
   "issue": 81,
   "part": 2,
   "branch": "ashen-ford-secrets",
-  "status": "concepts approved; pixel generation awaiting PixelLab credit top-up",
+  "status": "superseded: owner requested local authoring instead of PixelLab",
   "concept_approval": {
     "status": "approved",
     "user_message": "Looks good",
@@ -175,5 +175,10 @@
     "Resolve local input_files into each tool's supported URL/base64 fields; input_files/profile/footprint metadata are not API arguments.",
     "Validate actual balance before starting paid jobs; do not silently substitute Scenario or another provider.",
     "Show pixel assets in temporary TV previews and obtain issue #81's second approval before final map placement."
-  ]
+  ],
+  "provider_override": {
+    "user_message": "We don't have access to pixal lab, you make it.",
+    "replacement": "parts/lore_places.py and render-local.py",
+    "paid_jobs_started": 0
+  }
 }

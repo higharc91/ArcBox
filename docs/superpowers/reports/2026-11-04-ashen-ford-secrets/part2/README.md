@@ -1,6 +1,8 @@
 # Lore places · issue #81 part 2
 
-Concept stage on `ashen-ford-secrets`. Part 1's verified game content is unchanged. The two new lore-linked briefs are in `tools/tactics-assets/concepts/scenario-briefs.json`; exact prompts, references, job/asset IDs and costs are in `tools/tactics-assets/concepts/ashen-ford-secrets/generation-records.json`.
+Pixel-art review stage on `ashen-ford-secrets`. **The owner replaced PixelLab with local authoring. The funding request and PixelLab instructions below are historical and no longer block the work.** Four native assets and actual TV previews are ready for the second owner review. See [the current local-art report](local-art/README.md) for originals, screenshots, source, verification and the reviewed [39,71] granary layout. Part 1's live game content and the saved scene are unchanged pending art approval.
+
+The two lore-linked briefs are in `tools/tactics-assets/concepts/scenario-briefs.json`; exact Scenario prompts, references, job/asset IDs and costs are in `tools/tactics-assets/concepts/ashen-ford-secrets/generation-records.json`.
 
 The concepts reuse the existing Emberwick Scenario anchor, an actual Chapter 1 town screenshot, and the actual `cottage_thatch_green` sprite used for Maud's cottage. Scenario Nano Banana 2.1 is the same model recorded for the earlier approved village/animal concept series. All three jobs succeeded: **13 CU each, 39 CU total**, matching the dry-run estimates. The images were displayed inline for review. The owner approved both concepts with “Looks good” on 2026-11-05. PixelLab generation is authorized; no runtime assets or placement changed.
 

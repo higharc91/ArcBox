@@ -1,0 +1,226 @@
+{
+  "provider": "Local deterministic pixel authoring, using production town renderer",
+  "user_override": "We don't have access to pixal lab, you make it.",
+  "paid_generation_jobs": 0,
+  "new_generation_cost": 0,
+  "pixel_art_approval": "pending",
+  "production_map_changed": false,
+  "assets": {
+    "granary": {
+      "image": "town/buildings/granary_ashen_ford.png",
+      "variants": {
+        "ashen_ford": {
+          "image": "buildings/granary_ashen_ford.png",
+          "shadow": "buildings/granary_ashen_ford_shadow.png"
+        }
+      },
+      "size": [
+        222,
+        194
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        3,
+        2
+      ],
+      "origin": [
+        68,
+        102
+      ],
+      "anchor": [
+        84,
+        142
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "lore",
+        "storage"
+      ],
+      "attach": {
+        "door": [
+          [
+            52,
+            157
+          ]
+        ]
+      },
+      "sha256": "bf344d4a86d7450535b5de5ebdccd5168422a0079c34a26377d3f801f63a6ea2"
+    },
+    "maud_hut": {
+      "image": "town/buildings/maud_hut_ashen_ford.png",
+      "variants": {
+        "ashen_ford": {
+          "image": "buildings/maud_hut_ashen_ford.png",
+          "shadow": "buildings/maud_hut_ashen_ford_shadow.png"
+        }
+      },
+      "size": [
+        188,
+        155
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        70,
+        81
+      ],
+      "anchor": [
+        70,
+        113
+      ],
+      "height": 7,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "lore",
+        "home"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            110,
+            18
+          ]
+        ],
+        "door": [
+          [
+            30,
+            120
+          ]
+        ]
+      },
+      "sha256": "99a9898e0dedec8d7b8f0ac9b76c60ed3694547aec78f31669cdc4543f7a8504"
+    },
+    "maud_ash_garden": {
+      "image": "props/maud_ash_garden_ashen_ford.png",
+      "variants": {
+        "ashen_ford": "maud_ash_garden_ashen_ford.png"
+      },
+      "size": [
+        98,
+        57
+      ],
+      "anchor": [
+        49,
+        30
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "lore",
+        "dressing"
+      ],
+      "sha256": "d4ed49d18144dc500906b2055b3c44dc43ffcb0b1d6c1d112240d2429d2fac31"
+    },
+    "maud_stool_pots": {
+      "image": "props/maud_stool_pots_ashen_ford.png",
+      "variants": {
+        "ashen_ford": "maud_stool_pots_ashen_ford.png"
+      },
+      "size": [
+        33,
+        35
+      ],
+      "anchor": [
+        12,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "lore",
+        "dressing"
+      ],
+      "sha256": "fa2097851aff3f8ea940653df6be4988e1c30499ba52e1dec1591257e09281ee"
+    }
+  },
+  "sources": {
+    "tools/tactics-assets/parts/lore_places.py": "679382bac8adfccae9b783794139df17d486955300772c71c69b20a2f97709f7",
+    "tools/tactics-assets/parts/town.py": "d91da221ddd998018e5a5db6b5f7b83d42d917cde9a3095b77014ed4a9a32acd",
+    "tools/tactics-assets/concepts/ashen-ford-secrets/render-local.py": "032b7a0ae189d2d2496a7fdc9a8d970d0d4faeac48cea8df30f2c5ff83d9aff6"
+  },
+  "preview_placement": {
+    "replace_cottage": [
+      40,
+      72
+    ],
+    "granary": [
+      39,
+      71
+    ],
+    "footprint": [
+      3,
+      2
+    ],
+    "maud_hut": [
+      130,
+      88
+    ],
+    "remove_clutter": [
+      [
+        42,
+        73
+      ],
+      [
+        45,
+        73
+      ]
+    ],
+    "remove_near_maud": "four skull-pike props only",
+    "garden": [
+      132,
+      88
+    ],
+    "stool_pots": [
+      129,
+      90
+    ],
+    "story_markers_unchanged": [
+      [
+        42,
+        70
+      ],
+      [
+        132,
+        93
+      ]
+    ],
+    "interactables_unchanged": true,
+    "saved_scene_unchanged": true
+  }
+}
