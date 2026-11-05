@@ -80,7 +80,8 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Mob = null);
 
 /// <summary>Where a battle was drawn in the world (<see cref="BattleStage"/>), as saved with it: its map's tile (0, 0) and the height added.</summary>
 public sealed record SavedStage(Tile Origin, int Height);
@@ -195,7 +196,11 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PinnedQuest = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedDictionary<string, StorySave>? RegionStories = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] LootSave? Loot = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] LootSave? Loot = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> MobsBeaten = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
+    ImmutableSortedDictionary<string, MobActorSave>? MobActors = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MobChapter = 0)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
@@ -306,3 +311,6 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         return Math.Clamp(table.Thresholds.Count(t => t <= lowest), 1, 10);
     }
 }
+
+/// <summary>A roaming actor cursor, persisted so restart never chooses another random step.</summary>
+public sealed record MobActorSave(Tile At, long Step, int Seed);

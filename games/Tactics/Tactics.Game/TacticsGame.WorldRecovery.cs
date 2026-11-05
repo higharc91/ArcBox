@@ -107,7 +107,7 @@ public sealed partial class TacticsGame
         }
     }
 
-    private static readonly string[] RecoveryTimers = [Timers.Step, Timers.Save, Timers.Lead, Timers.Line, Timers.Vote, Timers.Pace, Timers.Turn, Timers.React, CampTimerKey, "questResult", "townBark"];
+    private static readonly string[] RecoveryTimers = [MobTimer, Timers.Step, Timers.Save, Timers.Lead, Timers.Line, Timers.Vote, Timers.Pace, Timers.Turn, Timers.React, CampTimerKey, "questResult", "townBark"];
 
     // Pure in-memory cleanup, also usable when host callbacks or world initialization have failed.
     private void ResetWorldRecoveryState()

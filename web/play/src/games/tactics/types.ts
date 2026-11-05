@@ -155,6 +155,7 @@ export interface WalkMember {
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  danger?: string;
   journal?: import("./quests").JournalData;
   pinned?: { id: string; name: string; objective: string };
   canOpenLog?: boolean;

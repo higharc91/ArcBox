@@ -179,7 +179,7 @@ public sealed partial class TacticsGame
     /// seat in the party (an absent member is given a character, and played by the AI), and companions up to the encounter's smallest
     /// party, as the battle list does. If it won't start, the party is back to walking where it stopped, with a notice.
     /// </summary>
-    private void StartFight(string encounter, string? beat)
+    private void StartFight(string encounter, string? beat, string? mob = null)
     {
         var def = Rules.Encounters.GetValueOrDefault(encounter);
         // Characters first, while the party is still walking: giving one out can settle the lead, and anything the lead arms has to go
@@ -189,7 +189,7 @@ public sealed partial class TacticsGame
         LeaveExploration();
         _toasts.Clear();
         if (def is not null && _players.Count <= def.Party.Max
-            && StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat))
+            && StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat, mob))
             return;
         Note(def is not null && _players.Count > def.Party.Max ? FightTooBig(def) : FightWontStart);
         ToExploration();
@@ -283,11 +283,13 @@ public sealed partial class TacticsGame
         ReconsiderLeader();
         _heardAt = _ctx.Now;     // the pad has only just come back
         LeadClock();
+        ArmMobs();
     }
 
     /// <summary>Out of the world, to anywhere: everything walking runs on ends here, and the place is saved at once.</summary>
     private void LeaveExploration()
     {
+        _ctx.CancelTimer(MobTimer);
         Halt();
         _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
         Unnote(_leadNote);                 // the walk's own notes would mean nothing over a battle
@@ -428,6 +430,7 @@ public sealed partial class TacticsGame
             (_notice, _leadNote, _thingNote) = (null, null, null);      // whatever it said, the party has moved on
             SteppedOnto();      // a trap underfoot, or something hidden near (interactables design §2.6)
         }
+        if (_phase == TacticsPhase.Exploration && ContactMob()) return;
         SaveSoon();
         ArmStep();
     }
@@ -729,7 +732,7 @@ public sealed partial class TacticsGame
 
     /// <summary>Whether the document is behind the party.</summary>
     private bool WorldChanged => _region is not null
-        && (_doc.World is not { } saved || saved.Region != _region.Def.Id || saved.At != _at || saved.Facing != _facing
+        && (_mobDirty || _doc.World is not { } saved || saved.Region != _region.Def.Id || saved.At != _at || saved.Facing != _facing
             || _sessionLead is not null && saved.LastLeader != _sessionLead);
 
     /// <summary>Brings the document up to the party, without saving it.</summary>
@@ -785,5 +788,6 @@ public sealed partial class TacticsGame
             return;
         KeepWorld();
         Save();
+        _mobDirty = false;
     }
 }

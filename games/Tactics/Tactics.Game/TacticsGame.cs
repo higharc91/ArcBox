@@ -124,6 +124,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _questLogLeader = null;
         _questObservedFlags = null;
         EnterWorld();
+        _mobActors.Clear();
         ElectAtStart();
         KeepWorld();
         Save();
@@ -330,6 +331,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     private void TimerCore(string key)
     {
+        if (key == MobTimer) { StepMobs(); return; }
         if (key == "questResult") { QuestResultDone(); return; }
         if (key == "townBark")
         {
@@ -543,8 +545,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             return;
         }
         _lastBattle = BattleViewOf();
+        var mob = save.Mob is { } mobId ? Rules.Mobs.Values.SelectMany(m => m).FirstOrDefault(m => m.Id == mobId) : null;
         var members = _doc.Members;
-        var rewards = result.Outcome == BattleOutcome.Won
+        var rewards = result.Outcome == BattleOutcome.Won && mob is null
             ? Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot ?? [] : [];
         var rewardGiven = false;
         for (var i = 0; i < save.Members.Length; i++)
@@ -560,7 +563,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             }
             members = members.SetItem(save.Members[i].Value, record with
             {
-                Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
+                Xp = record.Xp + (mob is null ? result.Xp.GetValueOrDefault(unit) : result.Outcome == BattleOutcome.Won ? mob.Xp / save.Members.Length : 0),
                 Fought = true,
                 WellFed = false,
                 Character = record.Character with
@@ -584,9 +587,11 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             World = StoryAfter(save, result),
         };
         if (result.Outcome == BattleOutcome.Won)
-            _doc = _doc.ChangeGold(Rules.Encounters[save.Encounter].Gold, save.Members.Select(m => m.Value));
+            _doc = _doc.ChangeGold(mob?.Gold ?? Rules.Encounters[save.Encounter].Gold, save.Members.Select(m => m.Value));
         if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost && _doc.World is { } resting)
             _doc = _doc with { World = resting with { RestReady = true } };
+        if (mob is not null && result.Outcome == BattleOutcome.Won && _doc.World is { } mobWorld)
+            _doc = _doc with { World = mobWorld with { MobsBeaten = (mobWorld.MobsBeaten.IsDefault ? [] : mobWorld.MobsBeaten).Add(mob.Id) } };
         // The story first, then the place, so that the place keeps clear of a stamp the story has just armed; both before the checkpoint,
         // so a restart at Results resumes on the new tile with the beat done.
         Land(save, result.Outcome);

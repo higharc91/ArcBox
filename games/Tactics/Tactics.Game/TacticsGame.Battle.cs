@@ -59,7 +59,7 @@ public sealed partial class TacticsGame
     /// AI until it's shown, or for <see cref="TacticsTiming.FormUp"/> (5c §5): a player whose turn is first can still act.
     /// </summary>
     private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions,
-        string? beat = null)
+        string? beat = null, string? mob = null)
     {
         seed = BattleSeed ?? seed;
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
@@ -71,7 +71,7 @@ public sealed partial class TacticsGame
         _doc = _doc with
         {
             Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
-                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null),
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob),
         };
         _seq = 0;
         if (AddBeat(null, resolution.Events) is { } opening && stage is not null)

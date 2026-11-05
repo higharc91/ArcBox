@@ -105,13 +105,19 @@ public sealed class WalkShow
     }
 
     /// <summary>Takes a new view, and gives back the steps in it that this TV hadn't heard of. A view older than the last changes nothing.</summary>
+    private ImmutableArray<MobView> _mobs = [];
+    private readonly Dictionary<string, (UnitPlace From, UnitPlace To, double Start)> _mobTracks = new(StringComparer.Ordinal);
+
     public IReadOnlyList<WalkLeg> Receive(ExploreView view)
     {
         if (_started && view.Epoch == _epoch && view.Seq < _seq)
             return [];
 
         if (!_started || view.Epoch != _epoch)
-            _told = view.Seq;        // what's in a first view was walked before this TV came
+        {
+            _mobTracks.Clear();
+            _told = view.Seq;
+        }        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
         _markers = view.Markers is { IsDefault: false } markers ? markers : [];
         if (view.Traders is { } traders)
@@ -119,6 +125,14 @@ public sealed class WalkShow
                 .Where(t => !t.Open).Select(t => new StoryMarker("shop:" + t.Id, t.At, null, "shop"))];
         _cast = view.Cast is { IsDefault: false } cast ? cast : [];
         _bark = view.Bark;
+        _mobs = view.Mobs ?? [];
+        foreach (var mob in _mobs)
+        {
+            var target = UnitPlace.On(_terrain, mob.At);
+            if (!_mobTracks.TryGetValue(mob.Id, out var track)) _mobTracks[mob.Id] = (target, target, Clock);
+            else if (track.To != target) _mobTracks[mob.Id] = (track.To, target, Clock);
+        }
+        foreach (var id in _mobTracks.Keys.Except(_mobs.Select(m => m.Id)).ToArray()) _mobTracks.Remove(id);
         if (view.PeopleFlags is { } flags && !_peopleFlags.SetEquals(flags)) _peopleFlags = flags.ToImmutableHashSet(StringComparer.Ordinal);
         if (view.PeopleFlags is null) _peopleFlags = ImmutableHashSet<string>.Empty;
         if (view.Traders is { } openTraders)
@@ -191,7 +205,16 @@ public sealed class WalkShow
             .Concat(StoryMarks.Cast(_cast, _terrain, _art, _pixels)).OrderBy(u => u.Order)];
         var people = _people?.Units(Clock, focus.Feet, _markers, _pixels, _cast, _peopleFlags,
             new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y)), _bark) ?? [];
-        ImmutableArray<BoardUnit> units = people.IsEmpty ? walkers : [.. walkers.Concat(people).OrderBy(u => u.Order)];
+        var mobs = _mobs.Where(m => _art.Sprite(m.Sprite) is not null).Select(m =>
+        {
+            var track = _mobTracks[m.Id];
+            var share = Math.Clamp((float)((Clock - track.Start) / 0.35), 0, 1);
+            var place = new UnitPlace(Vector2.Lerp(track.From.Map, track.To.Map, share), track.From.Height + (track.To.Height - track.From.Height) * share);
+            var heading = track.To.Map - track.From.Map;
+            if (heading == Vector2.Zero) heading = new Vector2(0, 1);
+            return UnitPlan.Person(m.Id, m.Sprite, place, heading, share < 1 ? "walk" : null, _art, _pixels) with { Tone = UnitTone.Enemy, Ring = 0.45f };
+        });
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(people).Concat(mobs).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
         return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump) { Walkers = walkers };
     }

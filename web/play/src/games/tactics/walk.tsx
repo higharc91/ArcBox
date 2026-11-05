@@ -462,6 +462,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
           </div>
           <p>{d.objective}</p>
+          {d.leader && d.danger ? <p class="tx-hint" role="status">Danger nearby: {d.danger}</p> : null}
         </div>
         {d.leader ? null : (
           <div class="tx-me" style={d.me.color ? ({ "--c": d.me.color } as JSX.CSSProperties) : undefined} data-color={d.me.color ? "" : undefined}>
