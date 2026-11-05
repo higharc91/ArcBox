@@ -30,7 +30,7 @@ public sealed class PhoneFixtureTests
         {
             var source = Path.Combine(content, "rules");
             var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(source, "manifest.json")))!.AsObject();
-            var files = manifest["files"]!.AsArray().Select(x => x!.GetValue<string>()).Where(x => !x.StartsWith("shops/", StringComparison.Ordinal)).ToArray();
+            var files = manifest["files"]!.AsArray().Select(x => x!.GetValue<string>()).Where(x => !x.StartsWith("shops/", StringComparison.Ordinal) && !x.StartsWith("mobs/", StringComparison.Ordinal)).ToArray();
             manifest["files"] = new JsonArray(files.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
             foreach (var file in files)
             {
@@ -42,6 +42,34 @@ public sealed class PhoneFixtureTests
             return RulesPack.Load([folder.FullName], ArtManifests.Load(content));
         }
         finally { folder.Delete(true); }
+    }
+
+    [Fact]
+    public void Roaming_danger_and_ambush_screens_match_their_fixtures()
+    {
+        var rules = TacticsGameTests.Rules;
+        var wolf = rules.MobsIn("ashen_ford").Single(m => m.Id == "mob_pine_wolves");
+        var at = wolf.Patch[0];
+        var ground = rules.GroundFor("ashen_ford")!.Terrain;
+        Tile Beside(int distance) => (from y in Enumerable.Range(at.Y - distance, distance * 2 + 1)
+            from x in Enumerable.Range(at.X - distance, distance * 2 + 1)
+            let tile = new Tile(x, y)
+            where Math.Abs(x - at.X) + Math.Abs(y - at.Y) == distance && ground.Walkable(tile) && rules.ReachFor("ashen_ford")!.Contains(tile)
+            select tile).First();
+        TacticsGameTests.Session At(int distance)
+        {
+            var session = new TacticsGameTests.Session(document: ExplorationTests.DocumentAt(ExplorationTests.Saved(Beside(distance))), game: new TacticsGame(rules));
+            session.Harness.StartCampaign(session.Lease);
+            return session;
+        }
+        var danger = At(3);
+        var ambush = At(1);
+        ambush.Harness.Advance(TimeSpan.FromMilliseconds(300));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["walk-danger"] = Node(danger.Harness.PlayerView(0)),
+            ["walk-ambush"] = Node(ambush.Harness.PlayerView(0)),
+        });
     }
 
     [Fact]

@@ -165,6 +165,7 @@ const losing = () => fightsDone < loseFights;
 /** --story[=<n>] and --story-pick=<ids>: walk to the "!" and play n beats, choosing these options where offered. */
 const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
+const mobRun = opt("mobs", false) === true;
 const bountyRun = opt('bounty', false) === true;
 const chapter = opt('chapter', false) === true || bountyRun;
 if (bountyRun && !asHost) throw new Error('--bounty needs --host so region transfers can be verified.');
@@ -700,7 +701,7 @@ class Bot {
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
-        if (walking || stampFights || chapter || shopRun || decisionsRun || !view.data.vip) return;
+        if (walking || stampFights || chapter || shopRun || decisionsRun || mobRun || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
@@ -723,7 +724,7 @@ class Bot {
         log(`${view.data.outcome} at ${view.data.encounter}: ${view.data.lines.map((l) => `${l.name} +${l.xp} XP`).join(', ')}`);
         resultsLeft = Date.now();
         fightsDone++;
-        return this.input(then === 'next' || stampFights || chapter ? 'next' : 'end');
+        return this.input(then === 'next' || stampFights || chapter || mobRun ? 'next' : 'end');
     }
   }
 }
@@ -732,6 +733,8 @@ class Bot {
 class Watch {
   constructor(host) {
     this.host = host;
+    this.mobs = [];
+    this.mobMoves = new Set();
     this.seq = 0;
     this.at = 0;
     this.shown = [];
@@ -748,12 +751,21 @@ class Watch {
       const e = v?.explore;
       if (!e) return;
       this.region = e.region;
+      this.seeMobs(e.mobs ?? []);
       const marks = (e.markers ?? []).map((m) => ({ beat: m.beat, at: m.at, emote: m.emote ?? null }));
       if (JSON.stringify(marks) !== JSON.stringify(this.markers)) [this.markers, this.markersSeen] = [marks, Date.now()];
       this.held = e.held;
       if (String(e.at) !== String(this.tile) || e.epoch !== this.epoch) [this.tile, this.epoch, this.placed] = [e.at, e.epoch, Date.now()];
       if (e.seq !== this.seq) [this.seq, this.at] = [e.seq, Date.now()];
     });
+  }
+
+  seeMobs(mobs) {
+    for (const mob of mobs) {
+      const old = this.mobs.find(m => m.id === mob.id);
+      if (old && String(old.at) !== String(mob.at)) this.mobMoves.add(mob.group);
+    }
+    this.mobs = mobs;
   }
 
   /** Reads what the TV has added to its log since the last read. */
@@ -770,6 +782,7 @@ class Watch {
     const lines = ((this.rest ?? '') + chunk.toString('utf8')).split(/\r?\n/);
     this.rest = lines.pop();
     for (const line of lines) {
+      if (line.startsWith('MOBS ')) this.seeMobs(JSON.parse(line.slice(5)));
       // STORY marker lines come one a beat, together: a run of them is the whole set
       this.lineNo = (this.lineNo ?? 0) + (/^STORY marker /.test(line) ? 0 : 1);
       let m = /^WALK (\d+) (-?\d+) (-?\d+) (\d+)/.exec(line);
@@ -985,7 +998,7 @@ function stampOf(id) {
  */
 async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : beat.startsWith('person:') ? ['person', beat.slice(7)] : ['beat', beat] : [stamp.map];
+  const goal = beat ? beat.startsWith('mob-at:') ? ['at', beat.slice(7)] : beat.startsWith('mob:') ? ['mob', beat.slice(4)] : beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : beat.startsWith('person:') ? ['person', beat.slice(7)] : ['beat', beat] : [stamp.map];
   const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
@@ -1209,6 +1222,72 @@ async function playBounty(bots, watch) {
   if (paid !== 60) throw new Error('Bounty paid ' + paid + ' gold, expected 60');
   bountyChoice = null;
   log('BOUNTY OK: posted, accepted, travelled, won all four chambers, rested, took proof, returned, received 60 gold and private class trinkets');
+}
+
+/** Real wandering, reconnect, optional restart, contact and one-time wolf rewards. */
+async function playMobs(bots, watch, state) {
+  const timer = setInterval(() => { for (const bot of bots) void bot.act(state); }, TICK_MS);
+  idlePings(bots);
+  await until('the walk screen', () => onWalk(bots) && bots.some(b => b.view.data.leader));
+  await until('the TV world position', () => { watch.read(); return watch.tile; });
+  const group = 'mob_pine_wolves';
+  const definition = JSON.parse(fs.readFileSync(path.join(RULES, 'mobs/ashen_ford.json'), 'utf8')).mobs.find(m => m.id === group);
+  const purse = bots.reduce((n, b) => n + (b.view.data.gold ?? 0), 0);
+  let paused = false;
+  for (let attempt = 0; attempt < 12 && !inBattle(bots) && fightsDone === 0; attempt++) {
+    watch.read();
+    if (bots.some(b => b.view?.data?.ambush)) break;
+    const target = watch.mobs.find(m => m.group === group)?.at ?? definition.patch[0];
+    const dirs = await routeFrom({ region: 'ashen_ford' }, watch.tile, 'mob-at:' + target.join(','));
+    for (const dir of dirs) {
+      watch.read();
+      if (inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush || b.view?.screen === 'results')) break;
+      const wolf = watch.mobs.find(m => m.group === group);
+      if (!paused && wolf && Math.abs(wolf.at[0] - watch.tile[0]) + Math.abs(wolf.at[1] - watch.tile[1]) <= 10) {
+        await until('visible wolves to take a roaming step', () => { watch.read(); return watch.mobMoves.has(group); });
+        log('MOBS WANDER OK');
+        await sleep(3000);
+        const reconnect = bots.at(-1); reconnect.view = null;
+        await reconnect.conn.stop(); await reconnect.conn.start(); await reconnect.rejoin();
+        await until('the reconnected phone', () => reconnect.view?.screen === 'walk');
+        log('MOBS RECONNECT OK');
+        if (goDir) {
+          const leader = await leaderOf(bots);
+          await leader.input('questLog', { action: 'open' });
+          await sleep(1500);
+          log('PAUSE mobs-visible');
+          await until('mobs restart release', () => fs.existsSync(path.join(goDir, 'mobs-visible')));
+          for (const b of bots) if (b.view?.screen === 'questLog') await b.input('questLog', { action: 'close' });
+          await leaderOf(bots);
+          log('MOBS RESTART RESUMED');
+        }
+        paused = true;
+        break;
+      }
+      const was = watch.seq;
+      const next = await until('a leader or the ambush', () => {
+        if (inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush || b.view?.screen === 'results')) return { fight: true };
+        const leader = bots.find(b => b.view?.screen === 'walk' && b.view.data.leader);
+        return leader ? { leader } : null;
+      });
+      if (next.fight) break;
+      await walkTo(next.leader, dir); await walkTo(next.leader, null);
+      await within(4000, () => { watch.read(); return watch.seq !== was || inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush); });
+      if (inBattle(bots) || bots.some(b => b.view?.data?.ambush)) break;
+    }
+  }
+  await until('the wolves ambush', () => inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.screen === 'results'));
+  log('MOBS AMBUSH OK');
+  await until('the wolf fight to finish', () => fightsDone > 0 && onWalk(bots));
+  if (lastFightOutcome !== 'Won') throw new Error('The mob fight was ' + lastFightOutcome);
+  await until('defeated sprites gone', () => { watch.read(); return !watch.mobs.some(m => m.group === group); });
+  const after = bots.reduce((n, b) => n + (b.view.data.gold ?? 0), 0);
+  if (after - purse !== definition.gold) throw new Error('Wrong mob gold: ' + (after - purse));
+  log('MOBS WIN AND REMOVAL OK');
+  await bots[0].input('endSession');
+  await until('the session to end', () => bots[0].ended);
+  clearInterval(timer);
+  log('MOBS OK');
 }
 
 async function playChapter(bots, watch, state) {
@@ -1518,6 +1597,11 @@ async function playDecisions(bots, watch, state) {
   }
   if (shopRun) {
     await playShop(bots, watch, state);
+    await Promise.all(bots.map(b => b.conn.stop()));
+    process.exit(0);
+  }
+  if (mobRun) {
+    await playMobs(bots, watch, state);
     await Promise.all(bots.map(b => b.conn.stop()));
     process.exit(0);
   }

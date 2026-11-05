@@ -1,0 +1,210 @@
+{
+  "region": "ashen_ford",
+  "mobs": [
+    {
+      "id": "mob_pine_wolves",
+      "encounter": "mob_pine_wolves",
+      "arena": "mob_pine_wolves",
+      "patch": [
+        [
+          15,
+          37
+        ],
+        [
+          16,
+          37
+        ],
+        [
+          15,
+          38
+        ],
+        [
+          16,
+          38
+        ],
+        [
+          14,
+          38
+        ],
+        [
+          15,
+          39
+        ],
+        [
+          16,
+          39
+        ],
+        [
+          13,
+          38
+        ]
+      ],
+      "show": [
+        "beasts.wolf.grey"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    },
+    {
+      "id": "mob_rooting_boars",
+      "encounter": "mob_rooting_boars",
+      "arena": "mob_rooting_boars",
+      "patch": [
+        [
+          42,
+          32
+        ],
+        [
+          42,
+          31
+        ]
+      ],
+      "show": [
+        "beasts.boar.brown"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    },
+    {
+      "id": "mob_kobold_scouts",
+      "encounter": "mob_kobold_scouts",
+      "arena": "mob_kobold_scouts",
+      "patch": [
+        [
+          126,
+          79
+        ],
+        [
+          127,
+          79
+        ],
+        [
+          125,
+          79
+        ],
+        [
+          126,
+          80
+        ],
+        [
+          126,
+          78
+        ],
+        [
+          128,
+          79
+        ],
+        [
+          127,
+          80
+        ],
+        [
+          127,
+          78
+        ]
+      ],
+      "show": [
+        "characters.kobold",
+        "characters.kobold_slinger"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    },
+    {
+      "id": "mob_river_slimes",
+      "encounter": "mob_river_slimes",
+      "arena": "mob_river_slimes",
+      "patch": [
+        [
+          103,
+          81
+        ],
+        [
+          104,
+          81
+        ],
+        [
+          102,
+          81
+        ],
+        [
+          103,
+          82
+        ],
+        [
+          103,
+          80
+        ],
+        [
+          105,
+          81
+        ],
+        [
+          104,
+          82
+        ],
+        [
+          104,
+          80
+        ]
+      ],
+      "show": [
+        "beasts.slime.green"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    },
+    {
+      "id": "mob_road_bandits",
+      "encounter": "mob_road_bandits",
+      "arena": "mob_road_bandits",
+      "patch": [
+        [
+          148,
+          68
+        ],
+        [
+          149,
+          68
+        ],
+        [
+          147,
+          68
+        ],
+        [
+          148,
+          69
+        ],
+        [
+          148,
+          67
+        ],
+        [
+          150,
+          68
+        ],
+        [
+          149,
+          69
+        ],
+        [
+          149,
+          67
+        ]
+      ],
+      "show": [
+        "characters.bandit"
+      ],
+      "pace": 2.5,
+      "requires": [
+        "ch1_ford_settled"
+      ],
+      "xp": 75,
+      "gold": 10
+    }
+  ]
+}

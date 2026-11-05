@@ -174,7 +174,7 @@ strongbox).
 
 ## P3: later, needs design with the user
 
-Don't build these without the user: a true Warden bridge (changes the battle map), mobs in the overworld, fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
+Don't build these without the user: a true Warden bridge (changes the battle map), fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
 
 ## Decisions waiting for the user
 
@@ -214,3 +214,11 @@ Painting in the real editor, the pad on real phones, sound, sofa distance, a mod
 - Linux OpenGL compatibility cold TV reopening intermittently exceeded the loading watchdog on this software-rendered worker. Managed snapshots did not identify a managed deadlock; loader errors now include stage/progress. Default Vulkan/Mesa validation passed the cold reconnect. Further OpenGL/drawing investigation belongs with OW-12/the drawing issue; no opening timeout was increased.
 - The production phone build succeeds but reports the existing REDLINE flyover chunk at 537.65 kB. This is recorded for the REDLINE follow-up; its warning limit was not raised.
 - All five existing AI performance cases passed in an isolated Debug process with their original 250 ms p95 budgets. The final full-suite result is recorded in the issue #76 report.
+
+
+### OW-24 · Visible roaming enemies · `done`, issue #79
+
+Branch `overworld-mobs`, based on current main after #74/#77. Owner decisions: [design](../specs/2026-11-03-tactics-overworld-mobs-design.md). Seven groups, matching 14×12 maps, painted stamps and bestiary notes are implemented. Movement is deterministic and persisted, pauses in panels/scenes and without connected phones, and never chases. Leader contact saves an ambush transition before the stamped battle; wins pay 75 XP/member and 10 group gold, remove the group, and persist until a later chapter. Loss/recovery and direct-ID farming protection are covered. TV uses eight-facing sprites, readable red rings, movement legs, fades and existing creature sounds; phones have optional danger and ambush screens. Validation reserves the whole patch/contact area and proves safe routes. Both scene exports are byte-identical with zero warnings. Fifteen runtime checks and 517 phone tests pass; six phone viewports were rendered. The original simulation remains historical evidence; the fixed-enemy follow-up results are recorded below. Full sweep adds 525 XP/member and can shift full-side-quest Chapter I completion to level 2. Force and parley e2es both reached the card and resumed walking. Final live wolves passed wandering, reconnect/restart, ambush, rewards and removal. The 6,357-case solution run plus the corrected 425-test server rerun and final 65-test stage rerun close all failures; zero-warning builds. Final review removed mismatched rectangular arena art and verified texture alignment through the battle stage. [Review, balance and evidence](../reports/2026-11-04-overworld-mobs/README.md). No PR until requested.
+
+
+**Follow-up balance pass · complete:** the owner confirmed fixed enemies so XP gains help. All 28 level-1 arrival cells now meet 85–95% wins and 4–8 rounds over fifty seeds: 87.3–95.0% wins, 4.10–7.61 mean rounds. The combined 24,150-battle report gives pooled wins of 91.79% / 99.57% / 99.95% at levels 1 / 2 / 3; enemy stats remain fixed. Seven arrival autoplay caps count as losses and remain explicitly flagged. Original story/wildshape monsters, maps, art, XP and gold are unchanged. All 1,287 logic, 725 game and 135 sound checks pass, including fixed-stat and slinger-cover regressions; zero-warning builds. The balanced live wolf reconnect/restart/win/removal flow passes. [Final balance report](../reports/2026-11-04-overworld-mobs/balance-fixed-enemies.md).

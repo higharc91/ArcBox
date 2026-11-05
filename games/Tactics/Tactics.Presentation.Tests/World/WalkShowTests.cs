@@ -35,6 +35,20 @@ public sealed class WalkShowTests
     }
 
     [Fact]
+    public void Visible_mobs_use_the_depth_sorted_enemy_unit_path_and_disappear_when_removed()
+    {
+        var show = Show();
+        var script = new Script(Start);
+        show.Receive(script.Now(false) with { Mobs = [new("wolf:0", "wolves", "beasts.wolf.grey", new(82, 60), 0)] });
+        var mob = Assert.Single(show.Frame(Frame).Units.Where(u => u.Id.Value == "wolf:0"));
+        Assert.Equal(UnitTone.Enemy, mob.Tone);
+        Assert.InRange(mob.Ring, 8f, 22.6f);
+        Assert.StartsWith("creatures/", mob.Sprite.Path);
+        show.Receive(script.Now(false) with { Mobs = null });
+        Assert.DoesNotContain(show.Frame(0.4).Units, u => u.Id.Value == "wolf:0");
+    }
+
+    [Fact]
     public void A_footstep_goes_by_the_distance_walked()
     {
         var show = Show();

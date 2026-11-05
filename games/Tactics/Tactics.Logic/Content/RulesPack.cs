@@ -39,8 +39,9 @@ public sealed partial class RulesPack
         Xp = catalog.Xp;
         Regions = catalog.Regions;
         Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
+        Mobs = catalog.Mobs ?? ImmutableSortedDictionary.Create<string, ImmutableArray<MobDef>>(StringComparer.Ordinal);
         Shops = catalog.Shops ?? ImmutableSortedDictionary.Create<string, ImmutableArray<ShopDef>>(StringComparer.Ordinal);
-        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None)), StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None, [.. MobsIn(r.Key).Select(m => m.Arena)])), StringComparer.Ordinal);
         _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
             r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
             StringComparer.Ordinal);
@@ -127,6 +128,10 @@ public sealed partial class RulesPack
     public ImmutableArray<InteractableDef> InteractablesIn(string region) => Interactables.GetValueOrDefault(region, []);
 
     /// <summary>Traders by region.</summary>
+    public ImmutableSortedDictionary<string, ImmutableArray<MobDef>> Mobs { get; }
+
+    public ImmutableArray<MobDef> MobsIn(string region) => Mobs.GetValueOrDefault(region, []);
+
     public ImmutableSortedDictionary<string, ImmutableArray<ShopDef>> Shops { get; }
 
     /// <summary>Traders in a region, or none.</summary>
@@ -201,7 +206,8 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>>? Interactables = null,
         ImmutableSortedDictionary<string, ImmutableArray<ShopDef>>? Shops = null,
         EnvironmentDef? Environment = null, ImmutableArray<ContentError> Warnings = default,
-        ImmutableSortedDictionary<string, TrinketDef>? Trinkets = null)
+        ImmutableSortedDictionary<string, TrinketDef>? Trinkets = null,
+        ImmutableSortedDictionary<string, ImmutableArray<MobDef>>? Mobs = null)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),

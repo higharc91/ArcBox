@@ -266,3 +266,9 @@ Use `--edit-props=<region>` to change individual props while preserving the scen
 ```bash
 godot --headless --path tools/tactics-world -- --edit-props=ashen_ford --clear-prop=26,58
 ```
+
+## Roaming arenas (#79)
+
+Mob groups live in manifest-listed `rules/mobs/<region>.json`; see `rules/schema/mobs.schema.json`. Each arena is an explicitly painted 14×12 battle-map stamp. Keep the patch and its cardinal contact tiles clear of required routes. The loader validates bounds, connected walkable tiles, roads, NPCs, things, spawns and route reachability. Export twice and compare bytes.
+
+The development command `--apply-mob-arenas=<absolute JSON path>` can register stamps and apply a small set of explicitly supplied tiles to an existing scene. The JSON has a `regions` array; each entry has `region`, `stamps` (`map`, `at`, `height`) and `paint` (`at`, `material`). Painted additions use height zero and clear flags; untouched terrain keeps its original height and flags. It removes scene props inside those stamps because the battle map owns their props. This is an authoring operation, not a runtime extraction mechanism; review its scene diff before exporting. `--world-demo=mobs` in the TV previews all seven current placements.

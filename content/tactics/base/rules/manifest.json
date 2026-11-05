@@ -79,6 +79,23 @@
     "maps/hollow_lair.json",
     "encounters/hollow_lair.json",
     "world/cinder_hollow.json",
-    "interactables/cinder_hollow.json"
+    "interactables/cinder_hollow.json",
+    "maps/mob_pine_wolves.json",
+    "encounters/mob_pine_wolves.json",
+    "maps/mob_rooting_boars.json",
+    "encounters/mob_rooting_boars.json",
+    "maps/mob_kobold_scouts.json",
+    "encounters/mob_kobold_scouts.json",
+    "maps/mob_river_slimes.json",
+    "encounters/mob_river_slimes.json",
+    "maps/mob_road_bandits.json",
+    "encounters/mob_road_bandits.json",
+    "maps/mob_hollow_bats.json",
+    "encounters/mob_hollow_bats.json",
+    "maps/mob_hollow_kobolds.json",
+    "encounters/mob_hollow_kobolds.json",
+    "mobs/ashen_ford.json",
+    "mobs/cinder_hollow.json",
+    "monsters/roamers.json"
   ]
 }

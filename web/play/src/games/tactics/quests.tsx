@@ -29,6 +29,13 @@ export function Journal({ journal, send, shared = false, onClose, initial }: {
 }) {
   const [selection, setSelection] = useState(initial ?? journal.selected ?? journal.quests[0]?.id);
   const sfx = useSfx();
+  const latestSend = useRef(send);
+  latestSend.current = send;
+  useEffect(() => {
+    if (!shared || !journal.canPin) return;
+    const timer = setInterval(() => latestSend.current("questLog", { action: "keepOpen" }), 2500);
+    return () => clearInterval(timer);
+  }, [shared, journal.canPin]);
   const selected = journal.quests.find(q => q.id === (shared && journal.canPin ? journal.selected : selection)) ?? journal.quests[0];
   const close = () => { sfx("questlogClose"); if (shared && journal.canPin) send("questLog", { action: "close" }); else onClose?.(); };
   return <section class="tx-journal" aria-label="Quest journal">

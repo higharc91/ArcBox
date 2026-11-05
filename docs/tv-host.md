@@ -584,3 +584,11 @@ The cave uses dark ambient light, small warm mining candles, the existing eerie 
 Screenshot directories passed with `--shots=<dir>` must be absolute paths. Relative paths are rejected with an explanatory startup warning to prevent output beneath the Godot project directory.
 
 Chapter automation (`ARCBOX_CHAPTER=1`) defaults to Story difficulty and battle seed 76. Override difficulty with `ARCBOX_DIFFICULTY=Normal` or `Hard`; balance testing remains the simulator’s responsibility. Non-chapter runs retain Normal difficulty and fresh seeds. These overrides are Development-only server settings.
+
+### Visible roaming groups (#79)
+
+`ExploreView.Mobs` contains only active, nearby mob representatives with stable IDs, sprite keys, tile positions and movement legs. It is absent when none are in view; `Danger` is absent without a group within four tiles. Server-owned deterministic wandering pauses during scenes and interaction panels, and with nobody connected. The TV interpolates the normal eight-facing idle/walk sprites through the depth-sorted unit path, with a small red ground ring and an existing species sound on first appearance. Removed figures fade out. Roaming arena stamps retain the region’s material aliases, tint, decals and blending; the stage draws those same faces during battle, avoiding rectangular terrain patches. Story stamps retain their existing authored art.
+
+Leader contact saves a brief ambush transition, halts the party and shows the group attack notice before the existing stamped walk-in. Followers do not trigger contact. The active group is hidden from exploration while its battle units are drawn. Wins persist in `WorldSave.MobsBeaten`; losses follow the normal recovery flow. A later chapter clears defeated groups. Mob movement uses host patches and is covered by the 1,420-byte packet regression check.
+
+For the seven authored placements, captures, XP impact and simulation assessment, see the [issue #79 review](superpowers/reports/2026-11-04-overworld-mobs/README.md). `--world-demo=mobs --shots=<absolute path>` previews their real locations without connecting to a server. `ARCBOX_MOBS=1 ARCBOX_RESTART=1 tools/tv-e2e.sh` runs the live wolf/reconnect/restart flow.

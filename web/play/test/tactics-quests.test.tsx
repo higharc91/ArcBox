@@ -83,3 +83,13 @@ it("has no key ring while the party holds no key", () => {
  render(<Journal journal={data} send={vi.fn()} />);
  expect(screen.queryByRole("region",{name:"Keys"})).toBeNull();
 });
+it("keeps a shared leader journal open while reading and stops its heartbeat on close", () => {
+ vi.useFakeTimers();
+ try {
+  const send=vi.fn(); const {unmount}=render(<Journal journal={data} send={send} shared />);
+  vi.advanceTimersByTime(2500);
+  expect(send).toHaveBeenLastCalledWith("questLog",{action:"keepOpen"});
+  unmount(); send.mockClear(); vi.advanceTimersByTime(5000);
+  expect(send).not.toHaveBeenCalled();
+ } finally { vi.useRealTimers(); }
+});
