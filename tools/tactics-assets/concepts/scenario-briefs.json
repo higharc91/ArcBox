@@ -545,7 +545,7 @@
     }
   ],
   "issue81_part2": {
-    "status": "Complete: approved native art integrated; current-main merge authorized by owner",
+    "status": "Complete: approved art integrated and verified with current main; owner authorized publication",
     "records": "ashen-ford-secrets/generation-records.json"
   }
 }
