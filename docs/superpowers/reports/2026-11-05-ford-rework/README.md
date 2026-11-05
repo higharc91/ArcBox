@@ -3,7 +3,13 @@
 Issue [#82](https://github.com/higharc91/ArcBox/issues/82), branch `ford-rework`.
 Based on merged main `da796d97f5613732b6446e4a66b7b4d4c719b81b`.
 
-## Current review: revision 2
+## Current review: native pixel art
+
+Revision 2 concepts are approved. The owner selected native art authoring.
+The [pixel-art and TV checkpoint](native-art/README.md) is now ready for approval.
+No extra generation spend; Scenario remains 52 CU. Live content is unchanged.
+
+## Approved concept: revision 2
 
 The owner found revision 1's differences too subtle. The new
 [comparison](../../../../tools/tactics-assets/concepts/ford-rework/revision-2-review.jpg)
@@ -17,7 +23,7 @@ Its original 3168×1344 PNG, prompt, references, job/asset IDs and SHA-256 are r
 in the concept batch. The labels on the JPG are review annotations only.
 The revised near-approach gates and scorch dressing are design proposals; final
 module placement must preserve the stamp's route and both story outcomes.
-Owner approval is still pending before production pixel art or map changes.
+Owner concept approval was subsequently given; see the native pixel-art checkpoint above.
 No runtime code changed in this revision; the baseline test results below belong
 to the preceding checkpoint, and have not been rerun for this art-only revision.
 

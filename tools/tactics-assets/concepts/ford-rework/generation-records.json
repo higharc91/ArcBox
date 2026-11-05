@@ -8,7 +8,7 @@
     "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
     "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
   },
-  "status": "Revision 1 changes too subtle per owner; revision 2 awaiting concept approval",
+  "status": "Native bridge pixel art and TV previews ready; pixel-stage approval pending",
   "concepts": [
     {
       "id": "environment_ford_bridge_fortified",
@@ -215,9 +215,11 @@
     }
   ],
   "owner_approval": {
-    "status": "pending",
-    "revision_1_feedback": "The differences are not really noticeable, to be honest.",
-    "current_review": "revision-2.png"
+    "status": "approved",
+    "revision": "revision-2.png",
+    "user_message": "that looks much better",
+    "date": "2026-11-05",
+    "approved_for": "Native pixel-art review stage"
   },
   "cost": {
     "planned_images": 3,
@@ -291,5 +293,27 @@
       "bytes": 6394235
     }
   ],
-  "current_review": "revision-2.png"
+  "current_review": "revision-2.png",
+  "pixel_stage_provider": "Local deterministic native town/prop tools",
+  "pixel_stage_authorization": {
+    "user_message": "Use native art tools",
+    "date": "2026-11-05"
+  },
+  "pixel_art_approval": {
+    "status": "pending",
+    "review": "docs/superpowers/reports/2026-11-05-ford-rework/native-art/native-states.png",
+    "tv_review": "docs/superpowers/reports/2026-11-05-ford-rework/native-art/tv-comparison.jpg",
+    "owner_feedback": "There are no roads or stairs going up to this ford, it look rough as it is higher than the ground, and there is no road connecting to it. This does not match the concept art"
+  },
+  "native_art": {
+    "source": "tools/tactics-assets/parts/ford_bridge.py",
+    "pixel_spend": 0,
+    "scenario_total_cu": 52,
+    "modules": 26,
+    "states": 3,
+    "palette": "wardenflame-style.json#palettes.ashen_ford",
+    "runtime_packs_loaded": 3,
+    "preview_only": true,
+    "approach_revision": "Stone-supported ramps and continuous curbs; west apron joins town cobbles; east road turns into the existing east-bank road; gatehouse lowered to bank level."
+  }
 }

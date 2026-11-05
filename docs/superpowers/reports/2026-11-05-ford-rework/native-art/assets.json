@@ -1,0 +1,418 @@
+{
+  "warden_bridge_support": {
+    "file": "warden_bridge_support.png",
+    "size": [
+      169,
+      121
+    ],
+    "origin": [
+      68,
+      4
+    ],
+    "anchor": [
+      68,
+      20
+    ],
+    "sha256": "11f03bcca5f68744548f90153fa32931c5b90bed0aa6cb5b3ee483aaff171c20"
+  },
+  "warden_bridge_deck": {
+    "file": "warden_bridge_deck.png",
+    "size": [
+      173,
+      97
+    ],
+    "origin": [
+      70,
+      4
+    ],
+    "anchor": [
+      70,
+      20
+    ],
+    "sha256": "1544ea773391a9a25fe36fbcdb34b875bbb914e4765c82bc27bf1e39ea09836b"
+  },
+  "warden_bridge_deck_tile": {
+    "file": "warden_bridge_deck_tile.png",
+    "size": [
+      73,
+      43
+    ],
+    "origin": [
+      36,
+      4
+    ],
+    "anchor": [
+      36,
+      20
+    ],
+    "sha256": "ef84150db99a21402090d731df84e619c867afd81f3415626d1fd838e34160d1"
+  },
+  "warden_bridge_parapet": {
+    "file": "warden_bridge_parapet.png",
+    "size": [
+      57,
+      42
+    ],
+    "origin": [
+      24,
+      10
+    ],
+    "anchor": [
+      24,
+      26
+    ],
+    "sha256": "682a1145e930d2de361015a6bc40d19bd3d6ae33a99687e5060ddca1181ce036"
+  },
+  "warden_hide_screen": {
+    "file": "warden_hide_screen.png",
+    "size": [
+      64,
+      67
+    ],
+    "origin": [
+      20,
+      35
+    ],
+    "anchor": [
+      20,
+      51
+    ],
+    "sha256": "2d715ee58f3e33007045ac23c5bf1291f5267e6792e3965c5d395692dc06afc2"
+  },
+  "warden_barricade": {
+    "file": "warden_barricade.png",
+    "size": [
+      96,
+      72
+    ],
+    "origin": [
+      60,
+      23
+    ],
+    "anchor": [
+      60,
+      39
+    ],
+    "sha256": "a06a9d4d061e046f7f5df75232b47495213398679a2663a42d9bfc0c5a39f705"
+  },
+  "warden_open_gate": {
+    "file": "warden_open_gate.png",
+    "size": [
+      109,
+      76
+    ],
+    "origin": [
+      64,
+      25
+    ],
+    "anchor": [
+      64,
+      41
+    ],
+    "sha256": "584ffcdf217fdc7adb89f046ce2afaeb3c63f48c26d0d61f0f730cf9fdbb5755"
+  },
+  "warden_wreckage": {
+    "file": "warden_wreckage.png",
+    "size": [
+      79,
+      60
+    ],
+    "origin": [
+      46,
+      9
+    ],
+    "anchor": [
+      46,
+      25
+    ],
+    "sha256": "7815f50ae60035b9642065cbb111dbabb6711f3b112e1bbd2e1845178ef9e0ea"
+  },
+  "warden_hide_roll": {
+    "file": "warden_hide_roll.png",
+    "size": [
+      46,
+      34
+    ],
+    "origin": [
+      21,
+      4
+    ],
+    "anchor": [
+      21,
+      20
+    ],
+    "sha256": "ee423f23d03e11c18d40184ee105eede8c07865e70209820a6edf1918a94ee19"
+  },
+  "warden_stake_bundle": {
+    "file": "warden_stake_bundle.png",
+    "size": [
+      51,
+      37
+    ],
+    "origin": [
+      21,
+      6
+    ],
+    "anchor": [
+      21,
+      22
+    ],
+    "sha256": "9859fc9a9b77cb1e6befdb70230dc8f6f31468a1379efb607b2137bfcdc68a4e"
+  },
+  "warden_approach_west": {
+    "file": "warden_approach_west.png",
+    "size": [
+      161,
+      84
+    ],
+    "origin": [
+      68,
+      11
+    ],
+    "anchor": [
+      68,
+      27
+    ],
+    "sha256": "c252dae6d2e9f654b559d743862ab0e46e2f7a13e0d5f0182e5db83d3d2be107"
+  },
+  "warden_approach_east": {
+    "file": "warden_approach_east.png",
+    "size": [
+      142,
+      97
+    ],
+    "origin": [
+      68,
+      27
+    ],
+    "anchor": [
+      68,
+      43
+    ],
+    "sha256": "099739aef3cea4d42ee043e2def464aba348825e6fbd6e4a7c60881c7a64c69c"
+  },
+  "warden_road_apron": {
+    "file": "warden_road_apron.png",
+    "size": [
+      105,
+      57
+    ],
+    "origin": [
+      68,
+      4
+    ],
+    "anchor": [
+      68,
+      20
+    ],
+    "sha256": "43658b839899c115fa41839ccb1104879db3a1001ab898a65894a8ef0268ab64"
+  },
+  "warden_bridge_span": {
+    "file": "warden_bridge_span.png",
+    "size": [
+      173,
+      121
+    ],
+    "origin": [
+      70,
+      4
+    ],
+    "anchor": [
+      70,
+      20
+    ],
+    "sha256": "41170502eea14c37bf4cefeb54073420356edc26818da8bb023735aff83e18a5"
+  },
+  "warden_bridge_parapet_rear": {
+    "file": "warden_bridge_parapet_rear.png",
+    "size": [
+      57,
+      42
+    ],
+    "origin": [
+      8,
+      18
+    ],
+    "anchor": [
+      8,
+      34
+    ],
+    "sha256": "1962d9f73f47e355b83bc5734a68bada414c343e7ebbe7a51f1eb4ff1e6c830a"
+  },
+  "warden_bridge_parapet_front": {
+    "file": "warden_bridge_parapet_front.png",
+    "size": [
+      57,
+      44
+    ],
+    "origin": [
+      40,
+      4
+    ],
+    "anchor": [
+      40,
+      20
+    ],
+    "sha256": "673a1c2036bb8664a2f31b7cc587dedda39d615cf7511d5559b2bf10b5ecb807"
+  },
+  "warden_hide_screen_rear": {
+    "file": "warden_hide_screen_rear.png",
+    "size": [
+      64,
+      67
+    ],
+    "origin": [
+      4,
+      43
+    ],
+    "anchor": [
+      4,
+      59
+    ],
+    "sha256": "2d715ee58f3e33007045ac23c5bf1291f5267e6792e3965c5d395692dc06afc2"
+  },
+  "warden_hide_screen_front": {
+    "file": "warden_hide_screen_front.png",
+    "size": [
+      64,
+      67
+    ],
+    "origin": [
+      36,
+      27
+    ],
+    "anchor": [
+      36,
+      43
+    ],
+    "sha256": "2d715ee58f3e33007045ac23c5bf1291f5267e6792e3965c5d395692dc06afc2"
+  },
+  "warden_hide_roll_rear": {
+    "file": "warden_hide_roll_rear.png",
+    "size": [
+      46,
+      34
+    ],
+    "origin": [
+      5,
+      12
+    ],
+    "anchor": [
+      5,
+      28
+    ],
+    "sha256": "ee423f23d03e11c18d40184ee105eede8c07865e70209820a6edf1918a94ee19"
+  },
+  "warden_hide_roll_front": {
+    "file": "warden_hide_roll_front.png",
+    "size": [
+      46,
+      42
+    ],
+    "origin": [
+      37,
+      4
+    ],
+    "anchor": [
+      37,
+      20
+    ],
+    "sha256": "bd705a84f3f0b160a8ed63cf723f8f3c457c54ad1a37cdee1c1374ff0e507d4f"
+  },
+  "warden_gatehouse_fortified": {
+    "file": "warden_gatehouse_fortified.png",
+    "size": [
+      158,
+      148
+    ],
+    "origin": [
+      62,
+      77
+    ],
+    "anchor": [
+      62,
+      93
+    ],
+    "sha256": "a3d8cd2ddc260da81bfb0a0047b51db86adbd7dc422ac316ee8964dc6dd9667d"
+  },
+  "warden_gatehouse_force": {
+    "file": "warden_gatehouse_force.png",
+    "size": [
+      158,
+      148
+    ],
+    "origin": [
+      62,
+      77
+    ],
+    "anchor": [
+      62,
+      93
+    ],
+    "sha256": "f0fd23bc29631267bd4bbce56f7279c223b1d564b9ef0c8a65a9645933a93aea"
+  },
+  "warden_gatehouse_parley": {
+    "file": "warden_gatehouse_parley.png",
+    "size": [
+      158,
+      148
+    ],
+    "origin": [
+      62,
+      77
+    ],
+    "anchor": [
+      62,
+      93
+    ],
+    "sha256": "a3d8cd2ddc260da81bfb0a0047b51db86adbd7dc422ac316ee8964dc6dd9667d"
+  },
+  "warden_shelter_fortified": {
+    "file": "warden_shelter_fortified.png",
+    "size": [
+      91,
+      76
+    ],
+    "origin": [
+      33,
+      38
+    ],
+    "anchor": [
+      33,
+      54
+    ],
+    "sha256": "639c53f6604c16ec2e26df3ecf29cab2f6a4f2b778e683d5c23f4466bd5e3cb2"
+  },
+  "warden_shelter_force": {
+    "file": "warden_shelter_force.png",
+    "size": [
+      91,
+      76
+    ],
+    "origin": [
+      33,
+      38
+    ],
+    "anchor": [
+      33,
+      54
+    ],
+    "sha256": "513492802f7220a85b8532f81e483ba5bb91a1b2d7ae34ece60fdde2bb966ca9"
+  },
+  "warden_shelter_parley": {
+    "file": "warden_shelter_parley.png",
+    "size": [
+      91,
+      76
+    ],
+    "origin": [
+      33,
+      38
+    ],
+    "anchor": [
+      33,
+      54
+    ],
+    "sha256": "1bc94461e808ebbc2e94de1862f225229a4e55c3fdaba986116b2618376449b0"
+  }
+}

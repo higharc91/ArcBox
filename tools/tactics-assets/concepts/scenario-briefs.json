@@ -597,9 +597,10 @@
     "records": "ashen-ford-secrets/generation-records.json"
   },
   "issue82": {
-    "status": "Revision 1 changes too subtle per owner; revision 2 awaiting concept approval",
+    "status": "Concepts approved; native pixel-art and TV review awaiting owner",
     "records": "ford-rework/generation-records.json",
     "current_review": "ford-rework/revision-2.png",
-    "revision_2_prompt": "ford-rework/revision-2-run.json"
+    "revision_2_prompt": "ford-rework/revision-2-run.json",
+    "pixel_review": "../../../docs/superpowers/reports/2026-11-05-ford-rework/native-art/README.md"
   }
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "state": "fortified",
+    "packLoaded": true,
+    "worldBlocks": 80,
+    "battleItems": 242,
+    "onlyFordCrosses": true,
+    "northernRuinsUnwalkable": true,
+    "deckTiles": 6,
+    "shallowRowPreserved": true,
+    "approachesConnected": true,
+    "productionSortingVerified": false
+  },
+  {
+    "state": "force",
+    "packLoaded": true,
+    "worldBlocks": 80,
+    "battleItems": 242,
+    "onlyFordCrosses": true,
+    "northernRuinsUnwalkable": true,
+    "deckTiles": 6,
+    "shallowRowPreserved": true,
+    "approachesConnected": true,
+    "productionSortingVerified": false
+  },
+  {
+    "state": "parley",
+    "packLoaded": true,
+    "worldBlocks": 80,
+    "battleItems": 242,
+    "onlyFordCrosses": true,
+    "northernRuinsUnwalkable": true,
+    "deckTiles": 6,
+    "shallowRowPreserved": true,
+    "approachesConnected": true,
+    "productionSortingVerified": false
+  }
+]
