@@ -1,0 +1,12 @@
+{
+  "ttsQuotedCU": 2,
+  "ttsBilledCU": 2,
+  "asrQuotedCU": 4,
+  "asrBilledCU": 4,
+  "totalBilledCU": 6,
+  "creditsPurchased": false,
+  "planUpgraded": false,
+  "ttsJobId": "job_2vogLvZjzqAdoEtQ6Q78eein",
+  "ttsAssetId": "asset_k2gEoLwCvM2QmTHdynGdV5pU",
+  "asrJobId": "job_eaBVHYR3F14xy2Kbm34LRpBs"
+}

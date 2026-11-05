@@ -31,5 +31,18 @@
     "Existing Laomedeia town2 recording included; no new speech or voice approval inferred.",
     "Named Mother Skarrow only; generic goblin refresh stays outside scope.",
     "Before later integration, audit named-only sprite selection and battle attack/cast/hurt/down playback; preserve generic goblin combat art and rules/contracts."
-  ]
+  ],
+  "voiceReview": {
+    "status": "alternative_audition_pending_owner_review",
+    "reason": "Owner rejected the existing voice: let's draft another voice, it's not great",
+    "priorPreset": "Laomedeia",
+    "priorPitch": -2,
+    "candidate": "Kore",
+    "replacementLineCount": 67,
+    "productionVoiceChanged": false,
+    "plan": "voice-recast-plan.json",
+    "sample": "voice-recast/audition-kore.mp3",
+    "paidCU": 6,
+    "validation": "voice-recast/validation.json"
+  }
 }

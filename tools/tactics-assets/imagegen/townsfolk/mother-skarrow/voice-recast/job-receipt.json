@@ -1,0 +1,39 @@
+{
+  "jobId": "job_2vogLvZjzqAdoEtQ6Q78eein",
+  "jobType": "custom",
+  "billing": {
+    "cuCost": 2,
+    "cuDiscount": 0
+  },
+  "metadata": {
+    "input": {
+      "modelId": "model_google-gemini-3-8-flash-tts",
+      "language": "en-US",
+      "text": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+      "voice": "Kore"
+    },
+    "assetIds": [
+      "asset_k2gEoLwCvM2QmTHdynGdV5pU"
+    ]
+  },
+  "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "authorId": "user_9378dDd1b8d6e376eC44bB68",
+  "createdAt": "2026-11-05T01:48:14.706Z",
+  "updatedAt": "2026-11-05T01:48:32.211Z",
+  "status": "success",
+  "statusHistory": [
+    {
+      "status": "pending",
+      "date": "2026-11-05T01:48:14.706Z"
+    },
+    {
+      "status": "in-progress",
+      "date": "2026-11-05T01:48:14.871Z"
+    },
+    {
+      "status": "success",
+      "date": "2026-11-05T01:48:32.211Z"
+    }
+  ],
+  "progress": 1
+}

@@ -1,0 +1,18 @@
+{
+  "channels": 1,
+  "sampleRate": 24000,
+  "sampleWidthBytes": 2,
+  "seconds": 7.84,
+  "clippedSamples": 0,
+  "sourceSha256": "e1fdd0baf759a182de9bc670a01d21a8c09fcac5fae1060f3f89b8741e112da8",
+  "mp3Sha256": "8b775631f8b590c4aa04f4a57aa268b6c86bf39e760f93a06d2fd96bca0954ae",
+  "requestSha256": "c377f31050bd661ee6f53bb311257691e1d869e93797c3052531b20cf136b7a7",
+  "decode": "pass",
+  "postPitchSemitones": 0,
+  "filter": null,
+  "ownerListeningApproval": "pending",
+  "transcript": "For to you winters I have held this clan do not ask me if I can hold it one more",
+  "asrJobId": "job_eaBVHYR3F14xy2Kbm34LRpBs",
+  "captionCheck": "ASR recognises all remaining words; opening Forty is transcribed as For to you. No direction narration detected. Listening check of the number remains before exact audition reuse.",
+  "speakingPerformanceJudgment": "Owner listening review pending; no acoustic maturity claim from mechanical metrics."
+}

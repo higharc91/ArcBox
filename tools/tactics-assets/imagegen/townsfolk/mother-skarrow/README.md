@@ -6,7 +6,7 @@ forty winters: wary, dignified and practical, with dry humour. No new lore.
 
 ![Appearance review](candidate-1-preview.png)
 
-[Hear her existing recorded voice](voice-sample.mp3): “Forty winters I have held
+[Original recorded voice — rejected by owner](voice-sample.mp3): “Forty winters I have held
 this clan. Do not ask me if I can hold it one more.” Existing Laomedeia town2
 recording, already pitch−2 in production; compatibility MP3 transcode only, no
 new speech or additional pitch/filter. Source/text/hashes in voice-sample.json.
@@ -36,3 +36,18 @@ legacy generic goblin art/rules/contracts stay unchanged.
 Zero PixelLab calls/credits/purchases and zero new speech. No image-tool monetary
 price inferred. Production content, rules, balance and phone contracts unchanged.
 Include the existing recorded voice in subsequent reviews; reuse these sources.
+
+## Alternative voice audition
+
+The owner requested another voice. A one-line Kore audition uses the same town2
+caption, aiming for an elderly goblin matriarch with a low husky female register,
+dry rasp, measured authority and tired warmth. No post pitch/filter. Production
+casting/recordings and normal voice sample stay unchanged until listening approval.
+All67 Mother Skarrow lines are inventoried in voice-recast-plan.json for a
+consistent recast after that approval. Artwork gates remain separate.
+
+[Hear the alternative Kore audition](voice-recast/audition-kore.mp3). TTS2CU +
+transcript check4CU =6CU; no purchases/upgrades. Mono24kHz,7.84seconds,0 clipped
+samples, WAV/MP3 decode pass. ASR records the caption without direction narration,
+with the opening “Forty” misheard as “For to you”; listening verification of that
+number remains before exact-take reuse. Owner performance approval is pending.

@@ -852,3 +852,32 @@ Last native4-party peaks332.20 /192.37MiB below512, not rerun for review-only fi
 Rules/lore/balance/phone contracts unchanged. Include existing recorded voices in
 future reviews. Report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/report.md.
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
+
+
+## Latest Mother Skarrow direction — alternative voice audition pending
+
+Owner rejected the existing voice: “let's draft another voice, it's not great”.
+One-line Kore audition uses unchanged town2 caption with an elderly goblin
+matriarch brief: low husky female contralto, dry age-creak, measured authority
+and tired warmth. Fresh synthesis, no post pitch/filter. Hear mother-skarrow/
+voice-recast/audition-kore.mp3 under tools/tactics-assets/imagegen/townsfolk/.
+
+Live schema/cap check/quotes and paid sources/receipts/hashes retained.2CU speech
++4CU transcript check =6CU quoted/billed, no purchases/upgrades/PixelLab. Mono24kHz,
+7.84s,0 clipping; WAV/MP3 decode pass. ASR detects no spoken direction notes and
+matches remaining words but hears opening “Forty” as “For to you”; verify that
+number before exact-take reuse. Owner acting/voice approval pending; do not claim
+ASR proves maturity or perfectly matching words.
+
+All67 Skarrow lines inventoried in mother-skarrow/voice-recast-plan.json. Production
+casting/recordings/captions and normal original sample unchanged; rejected old
+sample archived. After voice approval, replace all67 consistently with live quotes
+and verification, retaining provenance/old files. Do not use the rejected normal
+sample for the finished art review. Appearance/full-set/TV gates remain separate;
+no Skarrow art approval inferred. Maud appearance already approved, motions queued.
+
+No art/rules/balance/phone changes. Production inventory SHA256
+0990d66b04817b51942e119dd35ecbb7273dcedcfa06144c53a2bc7e902f547a unchanged.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-voice-recast/report.md.
+Rebase before pushing townsfolk-art; no PR, merge, closure or publication.
+Earlier existing-voice draft notes are historical.
