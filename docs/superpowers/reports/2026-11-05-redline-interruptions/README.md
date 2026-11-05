@@ -36,6 +36,8 @@ Phone-swap previews: [seat picker](swap/swap-pick-P2.png), [current question on 
 
 Phone previews: [interrupted results](question/restart-results.png), [same-room lobby](question/restart-lobby.png), [new race](question/restart-new-race.png).
 
+Archived logs have trailing whitespace normalized; original files remain in `/workspace/issue24`.
+
 Connection-refused/SignalR negotiation messages during the deliberate server outage are expected. The harness checks recovery and rejects page exceptions and TV engine errors.
 
 ## Reproduce

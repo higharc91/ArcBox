@@ -1,0 +1,57 @@
+[   1.4s] room VGXS, 3 phone(s), game redline (until the first Reveal)
+[   2.0s] waiting for the host to start the game
+[  26.3s] P1 driver-select
+[  31.8s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "In which sport would you perform a slam dunk? Answers in a moment…"
+[  39.2s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  39.7s] RESTART now: P1 on quali-question [QUALIFYING · LAP 1/3]
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=o110b8WKSjNJK7QeYv1BVA' failed: Error in connection establishment: net::ERR_CONNECTION_RESET
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:50.731Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:50.731Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=33yYeqe5ssk_La6klWWfig' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:50.762Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=xOF1JsBwTcM3tJI9e12vXQ' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:50.762Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:50.766Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:50.766Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:51.735Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:51.735Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:51.766Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:51.767Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:51.768Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:51.768Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  42.8s] P1 lap 1: right "Basketball" after 3.6 s
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:53.765Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:53.766Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:53.772Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:53.772Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:53.779Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:53.779Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  44.5s] P2 lap 1: right "Basketball" after 5.3 s
+[  46.0s] P3 lap 1: right "Basketball" after 7.0 s
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:58.770Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:58.770Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:58.786Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:58.786Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:58.790Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:58.790Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  58.4s] restart: every phone shows "Game interrupted: the server restarted."
+[  58.6s] P1 lobby
+[  58.6s] restart: every phone back in room VGXS's lobby
+[  60.3s] qualifying plan: P1 ? 3/3 laps, 10.50 s; P2 HAM 3/3 laps, 15.75 s; P3 BOR 2/3 laps, 14.00 s
+[  60.3s] QUALI order ? HAM BOR
+[  60.3s] phases seen on P1: driver-select, quali-reading, quali-question, lobby
+
+OK
+Screenshots: /workspace/issue24/qualifying/phones
