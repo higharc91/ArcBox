@@ -1,0 +1,111 @@
+{
+  "captures": [
+    {
+      "location": "town-square",
+      "side": "before",
+      "sha256": "3c6c85fbe85abc103e2211779dfe34ddddd3985608a0a79c71b0cc9224b27f88"
+    },
+    {
+      "location": "town-square",
+      "side": "after",
+      "sha256": "1eea9d0b76402dfc1971bc610f38d602016263ca7eb40683fe9720ecda1d60af"
+    },
+    {
+      "location": "granary-yard",
+      "side": "before",
+      "sha256": "bdcf403efeecb846fe9d67c81536c1c372812dcfaeae6dec21cdc6e8209de2fc"
+    },
+    {
+      "location": "granary-yard",
+      "side": "after",
+      "sha256": "c819576d99219921535f1dad9f0f960f0a1e0681099ae804b257cd437bf4bad4"
+    },
+    {
+      "location": "autumn-fields",
+      "side": "before",
+      "sha256": "5939965a1b952232e2fd9c00e04e1a4c61a242472a205278fe60258c7b4682e9"
+    },
+    {
+      "location": "autumn-fields",
+      "side": "after",
+      "sha256": "c046020b799ab3f9325ce8493dae44d090be417034eedb5d04381da1fa147d41"
+    },
+    {
+      "location": "windmill-road",
+      "side": "before",
+      "sha256": "2a5ba38dcffb826fb5fec5b9dd4e698a28e517c2cda8da2c21b3b29bad5e7847"
+    },
+    {
+      "location": "windmill-road",
+      "side": "after",
+      "sha256": "dbb2e4a8773d5b2dd25f4de9b0b6bec93a952074ff57465abc0c864bddbbf9cd"
+    },
+    {
+      "location": "burned-ruins",
+      "side": "before",
+      "sha256": "d5b3de28461700b82696ac06d47eaf436f1127aab6d6427475c8ef0b58ff4b28"
+    },
+    {
+      "location": "burned-ruins",
+      "side": "after",
+      "sha256": "d8305404986c909982b77b42ff828ee4b00d7b54804f26e54fd5ddc697ead83e"
+    },
+    {
+      "location": "riverbank",
+      "side": "before",
+      "sha256": "c2e1dc89d725ec6600fbf945eb570ab71df9eaaccbb7baaf71f23050f7cd6b74"
+    },
+    {
+      "location": "riverbank",
+      "side": "after",
+      "sha256": "de4f805d3f05ffec1fed2f9b44c31b8f6f3b10b55d089d0aa93fbfdfb33cdfcb"
+    },
+    {
+      "location": "mauds-hut",
+      "side": "before",
+      "sha256": "27595754c43f44980192da589e2479b273392225ff3cbb2c982a78772d6de6c3"
+    },
+    {
+      "location": "mauds-hut",
+      "side": "after",
+      "sha256": "2e7da3c73b9926c9b7793fcf1e285d3d7e26800ad1b385048df09afe5a5aa8fa"
+    },
+    {
+      "location": "docks",
+      "side": "before",
+      "sha256": "7b40a767c0130ff1acf9002f2610833da745a83c379a9b9ea84faaa499389dd9"
+    },
+    {
+      "location": "docks",
+      "side": "after",
+      "sha256": "c6a9d99139cc127dfb1aa9b26c2d542330a1cf2f9003debe073c121130eb4106"
+    },
+    {
+      "location": "high-hills",
+      "side": "before",
+      "sha256": "7a89d84d4a9c810d569c9f949e6fa6662a235875d13f7ed89510e04ad346fbd6"
+    },
+    {
+      "location": "high-hills",
+      "side": "after",
+      "sha256": "bba64769ba217f70996cefbc4913f08761e8228e560395f754994fb7e0c06022"
+    },
+    {
+      "location": "skarrow-camp",
+      "side": "before",
+      "sha256": "4a1808ca36c1ceb1f5220945341e91fe07f8f1486f76d185e41e6dafb1887229"
+    },
+    {
+      "location": "skarrow-camp",
+      "side": "after",
+      "sha256": "b87680a6c9c31bf28f9d5e7b0326182d061a80f4b353cf465b968890c2c22c63"
+    }
+  ],
+  "locations": 10,
+  "runtimeErrors": 0,
+  "sourcePreview": "d7aa0d65",
+  "storyFlags": [
+    "ch1_ford_settled",
+    "ch1_skarrow_spared"
+  ]
+}

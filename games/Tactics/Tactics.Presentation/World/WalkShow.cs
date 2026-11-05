@@ -50,7 +50,9 @@ public sealed class WalkShow
 {
     private const float TilesPerSecond = 1 / 0.3f;      // the server's walking pace: only for how far ahead to load
 
-    private readonly BoardTerrain _terrain;
+    private BoardTerrain _terrain;
+    private readonly BoardTerrain _baseTerrain;
+    private ImmutableHashSet<string> _groundFlags = ImmutableHashSet<string>.Empty;
     private readonly UnitArt _art;
     private readonly SoundBank? _sounds;
     private readonly WalkTrack _track = new();
@@ -99,7 +101,7 @@ public sealed class WalkShow
     /// <summary>A show on <paramref name="terrain"/>. With no <paramref name="sounds"/>, it's a silent one.</summary>
     public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds, ImmutableArray<RegionPerson> people = default)
     {
-        (_terrain, _art, _sounds) = (terrain, art, sounds);
+        (_terrain, _baseTerrain, _art, _sounds) = (terrain, terrain, art, sounds);
         _people = people.IsDefaultOrEmpty ? null : new WorldPeople(people, terrain, art);
         _camera = new WorldCamera(terrain.Map.Width, terrain.Map.Height);
         _pixels = (feet, standing) => standing ? WorldCamera.OnGround(feet) : _camera.OnPixels(feet);
@@ -117,6 +119,12 @@ public sealed class WalkShow
         if (_started && view.Epoch == _epoch && view.Seq < _seq)
             return [];
 
+        var incomingFlags = (view.PeopleFlags ?? []).ToImmutableHashSet(StringComparer.Ordinal);
+        if (!_groundFlags.SetEquals(incomingFlags))
+        {
+            _groundFlags = incomingFlags;
+            _terrain = new BoardTerrain(_baseTerrain.Map.WithStoryFlags(incomingFlags), null);
+        }
         if (!_started || view.Epoch != _epoch)
         {
             _mobTracks.Clear();
@@ -226,6 +234,7 @@ public sealed class WalkShow
             var track = _mobTracks[m.Id];
             var share = Math.Clamp((float)((Clock - track.Start) / track.Duration), 0, 1);
             var place = new UnitPlace(Vector2.Lerp(track.From.Map, track.To.Map, share), track.From.Height + (track.To.Height - track.From.Height) * share);
+            if (RoadSurface.TryHeight(_terrain, place.Map, out var surface)) place = place with { Height = surface };
             var heading = track.To.Map - track.From.Map;
             if (heading == Vector2.Zero) heading = new Vector2(0, 1);
             return UnitPlan.Person(m.Id, m.Sprite, place, heading, share < 1 ? "walk" : null, _art, _pixels) with { Tone = UnitTone.Enemy, Ring = 12f, Opacity = entry.Opacity };

@@ -1,0 +1,14 @@
+{
+  "installedMatchesApprovedPreview": true,
+  "worldCells": 17408,
+  "allMapsMatchApprovedPreview": true,
+  "cinderHollowUnchanged": true,
+  "sceneNodesAndMarkersPreserved": 274,
+  "existingMaterialSourceIdsPreserved": 105,
+  "newMaterialSourceIds": 4,
+  "approvedAssetsMatch": 13,
+  "legacyTerrainImagesPreserved": 100,
+  "exportsByteIdentical": true,
+  "worldSha256": "31b7cfb77229fecae2640bd84a9e61cb30f074369f3a76320d02cca2f9cf1e06",
+  "worldMetadataPeoplePropsBuildingsStampsSpawnsUnchanged": true
+}

@@ -456,7 +456,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// Draws wall over each gap the server says a secret door nobody has found stands in (<see cref="WallPlugs"/>): built off the main thread
     /// when the plugs change, which is only when a door is found, and swapped in when it's ready. Meanwhile the last stay.
     /// </summary>
-    private void Plug(WorldCanvas world, ImmutableArray<WallPlug> plugs)
+    private void Plug(WorldCanvas world, ImmutableArray<WallPlug> plugs, IReadOnlyList<string> storyFlags)
     {
         if (_plugBuild is { IsCompleted: true } done)
         {
@@ -470,16 +470,21 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
                 GD.PushError($"Tactics world: the wall over a gap can't be built: {done.Exception?.GetBaseException().Message}");
             }
         }
-        if (_plugBuild is not null || plugs.SequenceEqual(_plugsAsked) || world.Plan is not { } plan || world.Art is not { } art)
+        if (_plugBuild is not null || (plugs.SequenceEqual(_plugsAsked) && storyFlags.SequenceEqual(_sceneryFlagsAsked)) || world.Plan is not { } plan || world.Art is not { } art)
         {
             return;
         }
         _plugsAsked = plugs;
-        _plugBuild = Task.Run(() => (world, WallPlugs.Items(plan, art, plugs)));
+        _sceneryFlagsAsked = [.. storyFlags];
+        var flags = storyFlags.ToHashSet(StringComparer.Ordinal);
+        _plugBuild = Task.Run(() => (world, WallPlugs.Items(plan, art, plugs)
+            .AddRange(LitBoard.Build(BoardPlan.StoryProps(plan.Terrain, art, flags), plan.Lighting).Items)
+            .OrderBy(i => i.Order).ToImmutableArray()));
     }
 
     private Task<(WorldCanvas World, ImmutableArray<LitItem> Items)>? _plugBuild;
     private ImmutableArray<WallPlug> _plugsAsked = [];
+    private ImmutableArray<string> _sceneryFlagsAsked = ["__initial__"];
 
     /// <summary>Gives the things each new view of this region, whatever the walk is following: they're drawn as the server says, all through a fight.</summary>
     private void FeedThings()
@@ -517,7 +522,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _walk = new WalkShow(plan.Terrain, art, _sound, world.Ground?.People ?? default);
             _fed = null;
             _things = ThingsFor(plan.Terrain, art);
-            (_thingsFed, _plugsAsked) = (null, []);
+            (_thingsFed, _plugsAsked, _sceneryFlagsAsked) = (null, [], ["__initial__"]);
         }
         world.CampLight(_camp, _campPhaseSeconds, _explore?.Morning == true, delta);
         var campActive = CampScene.Active(_camp);
@@ -536,7 +541,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
         var things = _things?.Frame(delta, _walk.Pixels, world.View);
-        Plug(world, things?.Plugs ?? []);
+        Plug(world, things?.Plugs ?? [], _fed?.PeopleFlags ?? []);
         world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, [.. shown.Units.Where(u => !CampScene.Active(_camp) || u.Id.Value != "thing:" + _camp!.Source)]) : frame.Units, frame.Walkers, art);
         world.ShowEffects([.. things?.Effects ?? [], .. MendDraws()]);
         foreach (var sound in things?.Sounds ?? [])

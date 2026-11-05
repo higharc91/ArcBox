@@ -84,7 +84,7 @@ public sealed class BoardTerrain
             _deep[i] = deep;
             _tops[i] = height + (_looks[i].Void ? -VoidSink
                 : _looks[i].Water && deep ? -WaterSink
-                : map[tile].Flags.HasFlag(TileFlags.Impassable) ? WallRise
+                : map[tile].Flags.HasFlag(TileFlags.Impassable) && !_looks[i].OpenSpan ? WallRise
                 : 0);
         }
         Base = skirt ?? lowest - 1;

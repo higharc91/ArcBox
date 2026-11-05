@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "prompt": "Original production concept art for Wardenflame: Embers of the Vale. Grounded humane tactical fantasy, melancholy with warmth, restrained painted architectural reference for later pixel-art translation. Reference image 1 is the exact bridge design to preserve, including its three arched openings, gatehouse and deck geometry. References 2 and 3 establish Ashen Ford and Emberwick's approved materials. Use a 2:1 orthographic isometric camera, coherent top-left light, warm grey cut stone, cool stone shadows, weathered brown timber, muted ochre, repaired slate-grey shingles and restrained autumn colour. Clear separate material planes, no photographic microtexture, blur, bloom, text, lettering, labels, watermark, UI or copied franchise symbols. This is a modest practical cart bridge at a shallow ford, not a giant castle, rope suspension bridge, ruin or decorative walkway. Create a continuous low stone-and-timber bridge with old Warden stone abutments and two short stone-supported openings below a level timber deck. The usable road is two adult figures wide, broad enough for one small farm cart. Broad flat deck boards form an unbroken walking surface from approach to approach; load-bearing timber crossbeams sit on the stone piers. Low solid stone parapets border the deck without blocking the lane. At the far-bank landing place a single small Warden stone gatehouse with patched timber/slate roof BESIDE the lane, with a hinged timber road barrier attached at the entrance. No tower over the walking lane, roof over the deck, huge defensive walls or magical glow. The bridge deck, piers, parapets, gatehouse and removable barricades must read as separable buildable modules. Keep a narrow wadeable shallow-water strip beside the deck within the same ford, clearly distinct from dry planks; beyond this local crossing the river is deep and impassable. One modest neutral adult and one small empty handcart on the near approach establish scale, not characters or story outcomes. Show the entire structure and both bank contacts with generous margins on a neutral warm parchment field. The main view occupies the upper 75 percent; a small lower row gives a reverse isometric view and distinct construction studies of a pier, timber deck joint, parapet segment and gatehouse/barrier, all consistent with the main geometry. No second usable river crossing, town scene, distant northern ruins, heavy steam obscuring construction or painted grid. Proposed bank terrain is cold ash-grey on the burned side, worn brown track and restrained autumn grass on the town side, with crisp stones and small reed clumps; no orange/olive camouflage or snow. Depict the EXACT SAME bridge, camera, stone piers, parapet layout, timber deck, gatehouse and dimensions as reference image 1. Change ONLY removable dressing for the immediate aftermath of reopening the crossing by force: the road barrier and movable barricade have been pulled completely off the walking lane onto the far-bank verge; a few snapped stake ends, torn hide strips and two damaged boards sit beside the gatehouse. The load-bearing deck, parapets and gatehouse remain intact and fully usable by carts. Sober silence, no triumphant decoration, magical repair, fire, blood, gore, bodies, graves or new fortification. Do not depict Mother Skarrow's death; this is an environment state, not a story illustration. The crossing must read as reopened, with a continuous completely unobstructed cart lane.",
+    "referenceImages": [
+      "asset_US8C4mCjEVnWbi59vRauLHhr",
+      "asset_MYEpW3ehPXzXWCoFNKhQdbSb",
+      "asset_j5wC1LrjrchvvM2NNv2si3PX"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1
+  },
+  "quote": {
+    "dry_run": true,
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job": {},
+    "creativeUnitsCost": 13,
+    "creativeUnitsDiscount": 0
+  },
+  "run": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_mZGQVjDD6DpxYQMpZ5Xzyrut",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mZGQVjDD6DpxYQMpZ5Xzyrut' (one call waits on up to 32 jobs)."
+  }
+}

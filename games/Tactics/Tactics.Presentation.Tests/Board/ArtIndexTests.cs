@@ -102,20 +102,21 @@ public sealed class ArtIndexTests
     }
 
     [Theory]
-    [InlineData("grass_ford/autumn", "grass_ford.png")]
-    [InlineData("dirt_ford/wet", "dirt_ford.png")]
-    [InlineData("rock_ford/bank", "rock_ford.png")]
-    [InlineData("ash_ford/charred", "ash_ford.png")]
-    [InlineData("ford_water/clear", "ford_water_clear.png")]
-    [InlineData("path_ford/packed", "path_ford.png")]
-    [InlineData("planks_ford/oak", "planks_ford_oak.png")]
-    public void The_ford_materials_resolve_to_their_local_art(string material, string file)
+    [InlineData("grass_ford/autumn", "native_grass_ford_autumn.png", 4)]
+    [InlineData("dirt_ford/wet", "native_dirt_ford_wet.png", 4)]
+    [InlineData("rock_ford/bank", "native_rock_ford_bank.png", 4)]
+    [InlineData("ash_ford/charred", "native_ash_ford_charred.png", 4)]
+    [InlineData("ford_water/clear", "native_ford_water_clear.png", 4)]
+    [InlineData("path_ford/packed", "native_path_ford_packed.png", 4)]
+    [InlineData("planks_ford/oak", "planks_ford_oak.png", 8)]
+    public void The_ford_materials_resolve_to_their_local_art(string material, string file, int span)
     {
         var look = MaterialLook.Of(material);
 
         var top = Pack.Art.Texture(look.Top)!;
         Assert.EndsWith(file, top.Path);
-        Assert.Equal(8, top.Span);
+        Assert.Equal(span, top.Span);
+        Assert.Equal(span == 4, top.ClusteredEdges);
         AssertExists(Pack.Art.Texture(look.Side), $"{material} side");
         AssertExists(Pack.Art.Texture(look.Chasm), $"{material} chasm side");
         if (look.Lip is { } lip)

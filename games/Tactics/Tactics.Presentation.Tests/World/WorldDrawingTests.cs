@@ -183,7 +183,7 @@ public sealed class WorldDrawingTests
         var plan = Ford.Value;
 
         Assert.Equal(plan.Images.Length, plan.Images.Select(i => (i.Image.Key, i.Flat)).Distinct().Count());
-        Assert.Contains(plan.Images, i => i.Flat && i.Image.Path.EndsWith("ash_ford.png", StringComparison.Ordinal));     // the ford's own ash
+        Assert.Contains(plan.Images, i => i.Flat && i.Image.Path.EndsWith("native_ash_ford_charred.png", StringComparison.Ordinal)); // the ford's own ash
         Assert.Contains(plan.Images, i => !i.Flat && i.Image.Frames == 1);
         Assert.Contains(plan.Images, i => i.Image.Frames > 1);
         Assert.Equal(plan.Paths, plan.Images.Select(i => i.Image.Path).Concat(plan.Halos).Distinct().Order(StringComparer.Ordinal));

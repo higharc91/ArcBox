@@ -141,7 +141,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // Against the world, everything the stage draws is the world's own item, moved: no seam in texture, shade, light or order.
         var world = new BoardTerrain(ground.Map, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp));
         var drawn = new TileRect(stamp.X, stamp.Y, stamp.W + StagePlan.Reach, stamp.H + StagePlan.Reach);
-        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true, world: true).Shifted(-BoardFit.StageOffset(stage)).Items
+        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true, world: true, storyFlags: new HashSet<string>()).Shifted(-BoardFit.StageOffset(stage)).Items
             .Select(i => i is Face f && !stamp.Contains(f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
         Assert.All(stagePlan.Plan.Items, i => Assert.Contains(Whole(i), worldItems));
     }
@@ -218,7 +218,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         var fit = BoardFit.For(terrain, Pack.Art);
 
         Assert.NotEmpty(map.Props);
-        foreach (var prop in map.Props)
+        foreach (var prop in map.Props.Where(p => p.Present()))
             foreach (var near in new[] { new Tile(prop.At.X + 1, prop.At.Y), new Tile(prop.At.X - 1, prop.At.Y), new Tile(prop.At.X, prop.At.Y + 1), new Tile(prop.At.X, prop.At.Y - 1) }.Where(map.InBounds))
             {
                 var onBoard = Assert.Single(UnitPlan.Build(Battle(Unit("hero1", near.X, near.Y)), terrain, Units.Value, fit));
@@ -445,7 +445,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
 
         var plan = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
 
-        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, new TileRect(0, 0, ground.Map.Width, ground.Map.Height), grid: true, world: true)
+        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, new TileRect(0, 0, ground.Map.Width, ground.Map.Height), grid: true, world: true, storyFlags: new HashSet<string>())
             .Shifted(-BoardFit.StageOffset(stage)).Items.Select(i => i is Face f && !StampHolds(stage, f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
         Assert.Contains(plan.Items, i => i is Face { Kind: FaceKind.Building });
         Assert.All(plan.Items, i => Assert.Contains(Whole(i), world));

@@ -93,6 +93,7 @@ public sealed class WorldPeople
         var (from, to) = (UnitPlace.On(_terrain, route[step]), UnitPlace.On(_terrain, route[(step + 1) % route.Length]));
         var share = along - step;
         var place = new UnitPlace(Vector2.Lerp(from.Map, to.Map, share), from.Height + (to.Height - from.Height) * share);
+        if (RoadSurface.TryHeight(_terrain, place.Map, out var surface)) place = place with { Height = surface };
         return new Stance(place, true, to.Map - from.Map);
     }
 

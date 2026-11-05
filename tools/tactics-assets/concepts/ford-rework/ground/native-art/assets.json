@@ -1,0 +1,132 @@
+[
+  {
+    "family": "ash_ford",
+    "variant": "charred",
+    "kind": "top",
+    "seed": 820,
+    "path": "top/native_ash_ford_charred.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 5,
+    "sha256": "b8373698b810b7fa09c3ffe00591c628f6c351a64ebd5d4350cdb726be1111a6"
+  },
+  {
+    "family": "ash_ford",
+    "variant": "roots",
+    "kind": "top",
+    "seed": 828,
+    "path": "top/native_ash_ford_roots.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 5,
+    "sha256": "9fb5a6012dae2d0bd4d356084c25099190ad9010fab0227e393f0f781e455c85"
+  },
+  {
+    "family": "grass_ford",
+    "variant": "autumn",
+    "kind": "top",
+    "seed": 821,
+    "path": "top/native_grass_ford_autumn.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 4,
+    "sha256": "405d5334e423d8f5ad618648dd8414ea306ecd30175fa6b2d1851edb67168d0c"
+  },
+  {
+    "family": "grass_ford",
+    "variant": "dry",
+    "kind": "top",
+    "seed": 822,
+    "path": "top/native_grass_ford_dry.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 3,
+    "sha256": "4d7ebd053ac18b1dd6a725ab492db0831557276c241bdcda99ca31ecf31797e8"
+  },
+  {
+    "family": "dirt_ford",
+    "variant": "wet",
+    "kind": "top",
+    "seed": 823,
+    "path": "top/native_dirt_ford_wet.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 2,
+    "sha256": "dccb202d62c7f31b88d7c1152674f2cda88a9f1213406bae8089b1fb86713c58"
+  },
+  {
+    "family": "dirt_ford",
+    "variant": "dry",
+    "kind": "top",
+    "seed": 824,
+    "path": "top/native_dirt_ford_dry.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 3,
+    "sha256": "8fae3c097b06cf5576d87c68fa88cad381ee14281f985c91d34eb7ffbc1aa5af"
+  },
+  {
+    "family": "path_ford",
+    "variant": "packed",
+    "kind": "top",
+    "seed": 825,
+    "path": "top/native_path_ford_packed.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 2,
+    "sha256": "a86b23550b1ced5063fa4944165d9a3b5670c7ec8d010ee846215f7345b69be4"
+  },
+  {
+    "family": "rock_ford",
+    "variant": "bank",
+    "kind": "top",
+    "seed": 826,
+    "path": "top/native_rock_ford_bank.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 3,
+    "sha256": "90eef2cff56aa3739b4dc253a9cf8e9b6b663a4983159a564d30ff48af2cb156"
+  },
+  {
+    "family": "ford_water",
+    "variant": "clear",
+    "kind": "top",
+    "seed": 827,
+    "path": "top/native_ford_water_clear.png",
+    "size": [
+      128,
+      128
+    ],
+    "colours": 3,
+    "sha256": "fc38d9ddf20d5dd7100ae535aa9e80cae433b55d65e1762a692fdec6f778e652"
+  },
+  {
+    "family": "cliff_ford",
+    "variant": "grey",
+    "kind": "side",
+    "seed": 822,
+    "path": "side/native_cliff_ford.png",
+    "size": [
+      128,
+      32
+    ],
+    "colours": 6,
+    "sha256": "3acf542940a8d0b12f5df7d00d1774ef392174dcdee11f95e7de21aa6931e24d"
+  }
+]

@@ -162,7 +162,8 @@ public sealed class WorldHerd
         if (animal.Progress <= 0)
             return from;
         var t = animal.Progress * animal.Progress * (3 - 2 * animal.Progress);
-        return new UnitPlace(from.Map + (to.Map - from.Map) * t, from.Height + (to.Height - from.Height) * t);
+        var at = from.Map + (to.Map - from.Map) * t;
+        return new UnitPlace(at, RoadSurface.TryHeight(_terrain, at, out var height) ? height : from.Height + (to.Height - from.Height) * t);
     }
 
     /// <summary>The column of its sheet it shows now: walking, flapping now and then for a crow at rest, bobbing for a bird on a strip, or standing.</summary>

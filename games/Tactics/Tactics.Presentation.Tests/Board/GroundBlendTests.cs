@@ -164,6 +164,29 @@ public sealed class GroundBlendTests
     }
 
     [Fact]
+    public void Opted_in_native_edges_use_whole_pixel_clusters_without_feathering_or_checker_dither()
+    {
+        var top = Enumerable.Repeat((byte)127, GroundBlend.Size * GroundBlend.Size * 4).ToArray();
+        for (var i = 3; i < top.Length; i += 4) top[i] = 255;
+        foreach (var way in Enumerable.Range(0, 16))
+        {
+            var result = GroundBlend.Masked(top, way, clustered: true);
+            var alphas = Enumerable.Range(0, result.Length / 4).Select(i => result[i * 4 + 3]).ToHashSet();
+            Assert.Equal(new byte[] { 0, 255 }, alphas.Order().ToArray());
+            for (var y = 0; y < GroundBlend.Size; y += 2)
+                for (var x = 0; x < GroundBlend.Size; x += 2)
+                {
+                    var i = (y * GroundBlend.Size + x) * 4;
+                    Assert.Equal(result[i + 3], result[i + 7]);
+                    Assert.Equal(result[i + 3], result[i + GroundBlend.Size * 4 + 3]);
+                    Assert.Equal(127, result[i]);
+                }
+        }
+        Assert.NotEqual(new ArtImage("ground.png", 1, 0, Blend: 0).Key,
+            new ArtImage("ground.png", 1, 0, Blend: 0, ClusteredEdges: true).Key);
+    }
+
+    [Fact]
     public void Only_the_looser_ground_runs_into_the_other()
     {
         var map = Map("test", ["ash/grey", "dirt/dark"], null, "01");
@@ -258,7 +281,7 @@ public sealed class GroundBlendTests
         Assert.Equal(new Tile(1, 0), blend.Tile);
         Assert.Equal(tops[1].Points, blend.Points);
         Assert.Equal(tops[1].Uvs, blend.Uvs);
-        Assert.Equal("terrain/top/ash_ford.png", blend.Image!.Path);      // Ashen Ford's own ash (MaterialLook.ArtMaterial)
+        Assert.Equal("terrain/top/native_ash_ford_charred.png", blend.Image!.Path); // Ashen Ford's own ash
         Assert.Equal(MaskOf(-1, 0), blend.Image.Blend);
         Assert.Null(blend.Image.Glow);
 

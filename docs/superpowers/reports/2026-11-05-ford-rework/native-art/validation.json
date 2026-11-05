@@ -1,0 +1,241 @@
+{
+  "assets": {
+    "warden_bridge_support": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 18,
+      "anchor": [
+        68,
+        20
+      ]
+    },
+    "warden_bridge_deck": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 9,
+      "anchor": [
+        70,
+        20
+      ]
+    },
+    "warden_bridge_deck_tile": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 8,
+      "anchor": [
+        36,
+        20
+      ]
+    },
+    "warden_bridge_parapet": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 20,
+      "anchor": [
+        24,
+        26
+      ]
+    },
+    "warden_hide_screen": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 6,
+      "anchor": [
+        20,
+        51
+      ]
+    },
+    "warden_barricade": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 12,
+      "anchor": [
+        60,
+        39
+      ]
+    },
+    "warden_open_gate": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 5,
+      "anchor": [
+        64,
+        41
+      ]
+    },
+    "warden_wreckage": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 8,
+      "anchor": [
+        46,
+        25
+      ]
+    },
+    "warden_hide_roll": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 20,
+      "anchor": [
+        21,
+        20
+      ]
+    },
+    "warden_stake_bundle": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 7,
+      "anchor": [
+        21,
+        22
+      ]
+    },
+    "warden_approach_west": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 23,
+      "anchor": [
+        68,
+        27
+      ]
+    },
+    "warden_approach_east": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 21,
+      "anchor": [
+        68,
+        43
+      ]
+    },
+    "warden_road_apron": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 8,
+      "anchor": [
+        68,
+        20
+      ]
+    },
+    "warden_bridge_span": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 25,
+      "anchor": [
+        70,
+        20
+      ]
+    },
+    "warden_bridge_parapet_rear": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 20,
+      "anchor": [
+        8,
+        34
+      ]
+    },
+    "warden_bridge_parapet_front": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 21,
+      "anchor": [
+        40,
+        20
+      ]
+    },
+    "warden_hide_screen_rear": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 6,
+      "anchor": [
+        4,
+        59
+      ]
+    },
+    "warden_hide_screen_front": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 6,
+      "anchor": [
+        36,
+        43
+      ]
+    },
+    "warden_hide_roll_rear": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 20,
+      "anchor": [
+        5,
+        28
+      ]
+    },
+    "warden_hide_roll_front": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 20,
+      "anchor": [
+        37,
+        20
+      ]
+    },
+    "warden_gatehouse_fortified": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 42,
+      "anchor": [
+        62,
+        93
+      ]
+    },
+    "warden_gatehouse_force": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 41,
+      "anchor": [
+        62,
+        93
+      ]
+    },
+    "warden_gatehouse_parley": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 42,
+      "anchor": [
+        62,
+        93
+      ]
+    },
+    "warden_shelter_fortified": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 9,
+      "anchor": [
+        33,
+        54
+      ]
+    },
+    "warden_shelter_force": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 9,
+      "anchor": [
+        33,
+        54
+      ]
+    },
+    "warden_shelter_parley": {
+      "binary_alpha": true,
+      "transparent_margins": true,
+      "palette_colours": 12,
+      "anchor": [
+        33,
+        54
+      ]
+    }
+  },
+  "live_png_json_unchanged": 3253,
+  "palette_source": "wardenflame-style.json#palettes.ashen_ford",
+  "production_ready": false
+}

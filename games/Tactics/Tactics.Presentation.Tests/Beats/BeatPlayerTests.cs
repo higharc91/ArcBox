@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
@@ -34,6 +35,25 @@ public sealed class BeatPlayerTests
         for (var t = 0.0; t < seconds; t += Frame)
             shown.AddRange(player.Tick(Frame).Shown);
         return shown;
+    }
+
+    [Fact]
+    public void A_battle_walk_follows_the_ramp_plane_every_frame_without_a_synthetic_hop()
+    {
+        byte[] bytes=[0,0,0,0,1,0,1,1,0,2,0,0];
+        var t=new BoardTerrain(BattleMap.FromBytes("ramp",4,1,bytes,["cobble/grey","warden_ramp/west"],[],ImmutableSortedDictionary<string,ImmutableArray<Tile>>.Empty),null);
+        var player=Player();
+        player.Receive(new BattleView("e","ramp",1,[],null,[Unit(Hero,"Party",1,0)],[],null,BoardChanges.None));
+        player.Receive(new BattleView("e","ramp",1,[],null,[Unit(Hero,"Party",2,0)],
+            [new Beat(1,Hero,[new Moved(Hero,[new Tile(1,0),new Tile(2,0)])])],null,BoardChanges.None));
+        var samples=0;
+        for(var frame=0;frame<200;frame++)
+        {
+            player.Tick(.005);
+            if(player.Frame(t).Places.TryGetValue(Hero,out var place))
+            {Assert.Equal(place.Map.X-1,place.Height,3);samples++;}
+        }
+        Assert.True(samples>10);
     }
 
     [Fact]

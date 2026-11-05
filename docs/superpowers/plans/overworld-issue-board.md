@@ -77,7 +77,11 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 **Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
 **Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after, and the [fight in place](../reports/tv-drawing-polish/ow08-fight-in-place-after.png) from an `ARCBOX_STAGE=1` run. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
-### OW-09 · The ford's ground looks soft and blotchy · `needs user`
+### OW-09 · The ford's ground looks soft and blotchy · `done on ford-rework; greener native ground approved and installed`
+Owner: “much better, let's go with that”. The selected native pass has olive-green farms, local low-bank vegetation,
+charcoal ash, dry hills and opaque pixel boundaries. The editable scene and battle stamps match the approved preview.
+[Installation and verification](../reports/2026-11-05-ford-rework/ground-installed/README.md).
+The original problem below is retained for context.
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
@@ -185,7 +189,7 @@ Animals avoid props only through `FaunaRange.Behind`. Sort them properly, or kee
 - **OW-19 · Second hardware check · `todo`:** `local-hardware-check-2.md` hasn't run. `ARCBOX_RESTART=kill` and forced `ARCBOX_DROP_SIGNALS` have no confirmed pass.
 - **OW-20 · Stale docs · `done`:** cloud handoff §3, §5, §8 items 6, 9, 10. `2026-11-01-ashen-ford-handoff.md`. Report `2026-11-02-tactics-overworld.md` lines 28, 42, 107, 223, 233, 292. `environmental-tiles/README.md` and milestones B and C. `tools/tactics-world/README.md:176`. `docs/tv-host.md:353` (197 buildings now). The world dressing plan's `TallProps.cs`, which wasn't kept. `local-hardware-check-2.md:33`. The creature branch's `overworld-art-review` README "Current integration boundary". The named entries are updated, `PropFade` replaces obsolete `TallProps` references, and the painting guide documents `--edit-props`. See the stability report for verification.
 - **OW-21 · Ambient · `done`, issue #78:** birds, leaves, embers and motes weren't built, the chimney path in `AmbientPlan.cs` matched no prop, and the new `river_steam` art was unused. Now (`5eaad666`, wired in `48589e34`) leaves fall from leafy trees in their own colours, embers rise from campfires and torches, motes hang in lamplight at dusk, a bird or a flock crosses the sky now and then (crows at dusk), and the ford's river steams with `river_steam`. All of it is ambient-manifest art, chosen once by hash. The chimney path is gone, since the town kit's buildings smoke for themselves. **Proved by** `AmbientPlanTests` and shots of the [camp](../reports/tv-drawing-polish/ow21-ambient-camp-before-after.png), [river](../reports/tv-drawing-polish/ow21-ambient-river-before-after.png) and [trees](../reports/tv-drawing-polish/ow21-ambient-trees-before-after.png). **Frame time** on lavapipe (Debug, no shots, same machine, before and after): the ford's crossing had a median of 55.6 and 53.3 ms, with render CPU 1.29 both times; a town walk had a median of 96.5 and 97.8 ms, with render CPU 1.74 and 1.82. Lavapipe can't show 16 ms, so the RTX 5080 is still the check (OW-19). The `river_steam` mist is faint by design (alpha at most 60 of 255) and was lost on the water in the dusk's light, so it's drawn whole and additively, catching the light as a glow does.
-- **OW-22 · Place shots · `todo`:** replace `place-*.png` from a real walk after OW-09.
+- **OW-22 · Place shots · `done` on ford-rework:** the approved installed ground has a refreshed eleven-image `place-*.png` set: overview, square, Emberwick, road, Maud, hills, ford, fields, docks, camp and burned ground. [Current gallery and provenance](../reports/2026-11-05-ford-rework/ground-installed/README.md). The bridge and road-grade captures remain in the #82 integration report.
 - **OW-23 · Wall-plug seam · `done`, issue #78:** an unfound hidden path left a notch in its hedge, and a secret door left a faint seam (interactables design §7.8). There were two causes. The overlay painted the open tile's own top back over the plug's sides, and the plug wasn't graded as the world is. The earlier `world: true` changed nothing visible because the notch hid it. Fixed in `59586ff5`. **Proved by** `WallPlugsTests` (a plugged tile against its neighbour, for both) and the [path](../reports/tv-drawing-polish/plug-hedge-path-before-after.png) and [door](../reports/tv-drawing-polish/plug-secret-door-before-after.png) shots.
 
 ## P2: features under way
@@ -237,7 +241,7 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 
 1. OW-05 is complete for the final installed cast: the 512 MiB/four-member gate passes at 423.56 MiB in Ashen Ford and 208.41 MiB in Cinder Hollow. Recheck future art additions.
 2. OW-10 / issue #80 cast is complete on `townsfolk-art`: all 12 named sets and 14 generic variants, including matching portraits, are approved and installed. No further approval or generation is needed for this cast. No PR, merge or issue closure has been requested.
-3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
+3. The ford's crisp-ground concept (OW-09) and the reported encounter balance shifts; the true bridge is approved and installed.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded. Haggling (E) was answered on 2026-11-03 (OW-37).
 5. Handoff §8 items 4 and 5 and the interactable owner choices still open (4–7, 9 and 10–17 but 15) stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
 6. New from OW-37, for the owner: the three trap injuries' names, effects and weights (3, 3, 2) and whether a trap may also draw the old black eye; art for their icons (stand-ins now); whether a seal reopens after a rest like a pick or force (it does now); whether rooms and cures should haggle (they don't).
@@ -1075,3 +1079,80 @@ approved review hashes pass. Use `generic/verify-integration.py` for this combin
 checkpoint; earlier installation-only checkers target historical baselines.
 See `docs/superpowers/reports/2026-11-03-townsfolk-art/main-integration/report.md`.
 The owner's merge instruction supersedes prior no-PR/no-merge/no-closure notes.
+
+
+## Issue #82 concept checkpoint · 2026-11-05
+
+`ford-rework` includes current main and three new Scenario bridge design sheets:
+fortified, reopened after force and reopened after parley. Actual cost: 39 CU.
+Owner concept approval is pending as required by #82; production art, map geometry
+and balance are unchanged. The existing #78 OW-08 fix remains in place.
+Fresh native ford/ash baseline views and the ground-source diagnosis are saved.
+Three crossing/world-plan tests and all 49 overlay picture tests pass.
+See [the checkpoint report](../reports/2026-11-05-ford-rework/README.md).
+
+### Issue #82 revision 2
+
+The owner found the first bridge state differences too subtle. A new comparison
+uses tall hide screens and a closed spiked barricade, smashed defenses and localized
+scorching after force, and orderly open gates with a pale grain shelter after parley.
+The state silhouettes remain legible at 200px per panel. Added cost: 13 Scenario CU;
+concept total: 52 CU. See `tools/tactics-assets/concepts/ford-rework/revision-2-review.jpg`.
+Concept approval remains pending; no production art, maps or encounter rules changed.
+
+
+### Issue #82 native pixel checkpoint
+
+Revision 2 concepts approved; owner selected native art tools. Twenty-six module/variant
+PNGs and three consistent states are authored with the town kit and Ashen Ford palette.
+Native TV previews and three runtime pack/plan checks pass; live content is unchanged.
+The single assembled TV review sprite is not production art installation: per-tile
+sorting, stamp/building placement, story gates, balance simulations and final export
+remain after pixel approval. No further generation spend (Scenario total 52 CU).
+See [native art and TV review](../reports/2026-11-05-ford-rework/native-art/README.md).
+
+The native preview was revised after owner feedback about missing roads and the
+raised platform: supported ramps and continuous curbs now connect the deck to
+both banks, with the west road joined to town and the east road joined to the
+existing exit route. Approach material/height/reach checks pass in all three
+preview states. Pixel approval remains pending.
+
+
+## Issue #82 installed bridge and ramp movement · 2026-11-05
+
+Owner approved the native bridge and connected approaches, then requested ramps at every road elevation change and characters that climb them without clipping. The bridge is installed as physical tile pieces with fortified/force/parley gates. The northern ruins stay deep and unwalkable; the ford remains the only crossing. Six deck cells remain fuel and the shallows remain water. All 13 authored road elevation edges in Ashen Ford now have 38 native ramp tiles; Cinder Hollow has no road elevation edges. Leaders, followers, NPCs, fauna, mobs and battle motion sample the same sloped planes as the art. Original #78 picture thresholds are retained. Both scenes export twice identically and original people/props/markers are preserved.
+
+[Integration, movement recording and live views](../reports/2026-11-05-ford-rework/integration/README.md). [Paired balance results](../reports/2026-11-05-ford-rework/integration/balance.md) keep the encounter numbers unchanged for owner review: fights are longer and caps increase. The canonical four-hero force bot campaign lost six attempts; a supported six-hero force campaign won and passed the strict chapter/card checker. Ground concept approval remains pending under #82; total Scenario spend is 65 CU (52 bridge + 13 ground), native/PixelLab zero. No PR or merge requested.
+
+
+**#82 bridge verification complete:** all 6,779 .NET and 517 phone tests pass, with a zero-warning build. The strict force (six heroes) and parley (four heroes, normal 2.5-second dialogue) chapter checks both reach the card and walk afterward. Both exports are deterministic. Four-hero force balance and the separate crisp-ground concept remain for owner review. [Final receipts](../reports/2026-11-05-ford-rework/integration/validation.json).
+
+
+### #82 ground concept approved; native pixel/TV review ready
+
+Owner: “Approve ground concept”. The native terrain pass now proposes nine 128×128 tops and one 128×32 cliff side,
+at the same 32 source pixels per tile as the town kit. Clustered opaque boundaries replace feathering only in the
+isolated candidate. Fifty-six west-bank grass cells become matching charred-root ground with equivalent fuel;
+all 19,200 world cells preserve height, collision, flags and fuel in all three bridge states. No enemy numbers,
+rewards or objectives change. All 2,852 presentation tests pass; host build has zero warnings/errors. Native Godot
+world, real-encounter battle and TV overview pairs are [ready for pixel/TV approval](../reports/2026-11-05-ford-rework/ground-art/README.md).
+Installed content is unchanged until approval. No extra credits: Scenario remains 65 CU, native/PixelLab zero.
+
+
+### #82 greener native ground approved and installed
+
+Owner: “much better, let's go with that”. The approved farm and riverbank greens are installed with charcoal ash,
+dry hills and clustered opaque edges. The original scene is painted through the native editor; 274 nodes/markers
+and 105 existing material source IDs are preserved. Both regions export twice identically, and all 18 maps retain
+height, flags and fuel. Installed art hashes match the approved preview. Updated exploration, real encounter and
+three-state bridge captures are in the [installation report](../reports/2026-11-05-ford-rework/ground-installed/README.md).
+No art approval remains for OW-09. Four-hero force balance remains the existing owner decision for #82.
+
+
+### #82 final merge verification
+
+The owner requested push and merge after approving the installed ground. The complete .NET rerun passes all
+6,787 tests; the phone rerun passes all 517 tests. The solution build has zero warnings/errors, both scene exports
+are deterministic, the eleven named place shots are refreshed, and the required balance report and chapter-card
+checks are retained. OW-08/OW-09/OW-22 work for #82 is complete. Proposed balance tuning remains a separate follow-up.
+[Final ground and merge receipts](../reports/2026-11-05-ford-rework/ground-installed/validation.json).

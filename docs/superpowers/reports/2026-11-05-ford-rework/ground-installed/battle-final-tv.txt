@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/ArcBox/content/tactics/base
+TACTICS screen tactics-battle-river_crossing
+SHOT /workspace/work/ford82-ground-installed/tv/battle-final/shots/001-tactics.png
+SHOT /workspace/work/ford82-ground-installed/tv/battle-final/shots/002-tactics-battle-river-crossing.png
+TACTICS left: narrator cleared

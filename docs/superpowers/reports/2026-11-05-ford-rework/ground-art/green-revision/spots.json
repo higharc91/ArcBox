@@ -1,0 +1,132 @@
+[
+  {
+    "name": "town-square",
+    "label": "Emberwick square",
+    "look": [
+      30,
+      59
+    ],
+    "stand": [
+      30,
+      59
+    ],
+    "ground": "cobble/grey"
+  },
+  {
+    "name": "granary-yard",
+    "label": "Granary and yard",
+    "look": [
+      40,
+      72
+    ],
+    "stand": [
+      40,
+      73
+    ],
+    "ground": "grass/dry"
+  },
+  {
+    "name": "autumn-fields",
+    "label": "Autumn fields",
+    "look": [
+      38,
+      19
+    ],
+    "stand": [
+      38,
+      19
+    ],
+    "ground": "grass/autumn"
+  },
+  {
+    "name": "windmill-road",
+    "label": "Windmill road and ramp",
+    "look": [
+      57,
+      30
+    ],
+    "stand": [
+      57,
+      30
+    ],
+    "ground": "road_ramp/q_0_3_1_0_d1"
+  },
+  {
+    "name": "burned-ruins",
+    "label": "Burned ground and ruins",
+    "look": [
+      85,
+      61
+    ],
+    "stand": [
+      85,
+      61
+    ],
+    "ground": "ash/grey"
+  },
+  {
+    "name": "riverbank",
+    "label": "Lower riverbank",
+    "look": [
+      99,
+      80
+    ],
+    "stand": [
+      99,
+      80
+    ],
+    "ground": "ash/grey"
+  },
+  {
+    "name": "mauds-hut",
+    "label": "Maud's hut",
+    "look": [
+      130,
+      89
+    ],
+    "stand": [
+      129,
+      89
+    ],
+    "ground": "ash/grey"
+  },
+  {
+    "name": "docks",
+    "label": "Docks and water",
+    "look": [
+      98,
+      99
+    ],
+    "stand": [
+      98,
+      99
+    ],
+    "ground": "flagstone/grey"
+  },
+  {
+    "name": "high-hills",
+    "label": "High hills",
+    "look": [
+      125,
+      35
+    ],
+    "stand": [
+      125,
+      35
+    ],
+    "ground": "grass/frost"
+  },
+  {
+    "name": "skarrow-camp",
+    "label": "Skarrow camp",
+    "look": [
+      133,
+      25
+    ],
+    "stand": [
+      133,
+      25
+    ],
+    "ground": "dirt/dark"
+  }
+]

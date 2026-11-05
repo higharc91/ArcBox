@@ -17,7 +17,8 @@ public enum UnitTone { Party, Enemy, Neutral }
 public readonly record struct UnitPlace(Vector2 Map, float Height)
 {
     /// <summary>The middle of <paramref name="tile"/> as the board draws it.</summary>
-    public static UnitPlace On(BoardTerrain terrain, Tile tile) => new(new Vector2(tile.X + 0.5f, tile.Y + 0.5f), terrain.Top(tile));
+    public static UnitPlace On(BoardTerrain terrain, Tile tile) => new(new Vector2(tile.X + 0.5f, tile.Y + 0.5f),
+        RoadSurface.TryHeight(terrain, new Vector2(tile.X + 0.5f, tile.Y + 0.5f), out var height) ? height : terrain.Top(tile));
 
     /// <summary>
     /// The tile whose slot it sorts in. Between two tiles that's the nearer one: otherwise that tile's top, painted later,

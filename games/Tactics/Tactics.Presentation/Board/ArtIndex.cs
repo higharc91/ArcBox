@@ -16,10 +16,11 @@ public sealed record ArtRef(string Family, string Variant);
 /// <param name="Phase">How many frames ahead it runs, so that one strip can loop out of step with itself. Each phase is a texture of its own on the TV.</param>
 /// <param name="Blend">A top laid over its neighbour (<see cref="GroundBlend"/>): which mask it goes through, or -1. Each is a texture of its own on the TV.</param>
 /// <param name="Span">How many world tiles a terrain top covers on each side.</param>
-public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0, int Blend = -1, int Span = 4)
+/// <param name="ClusteredEdges">Opt-in opaque pixel boundaries for native ground; legacy textures retain their masks.</param>
+public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0, int Blend = -1, int Span = 4, bool ClusteredEdges = false)
 {
     /// <summary>What tells it from the same strip in another phase, or the same top through another mask.</summary>
-    public string Key => Blend >= 0 ? $"{Path}~{Blend}" : Phase == 0 ? Path : $"{Path}#{Phase}";
+    public string Key => Blend >= 0 ? $"{Path}~{Blend}{(ClusteredEdges ? "~clustered" : "")}" : Phase == 0 ? Path : $"{Path}#{Phase}";
 
     /// <summary>The frame showing <paramref name="seconds"/> into the loop.</summary>
     public int FrameAt(double seconds) => Frames <= 1 ? 0 : ((int)(seconds * Fps) + Phase) % Frames;
@@ -48,11 +49,11 @@ public sealed record HazardArt(ArtImage Ground, ArtImage? Over, Vector2 Frame, V
 public sealed class ArtIndex
 {
     private sealed record Family(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps, int Height, int Span,
-        ImmutableDictionary<string, TextureGlow> Glows);
+        ImmutableDictionary<string, TextureGlow> Glows, bool ClusteredEdges);
 
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
         int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours,
-        ImmutableDictionary<string, PropLook> Looks, double Scale);
+        ImmutableDictionary<string, PropLook> Looks, double Scale, bool Spread);
 
     /// <summary>A variant drawn at a size and anchor of its own (the manifest's <c>looks</c>): a new look added beside older, smaller art.</summary>
     private sealed record PropLook(int Width, int Height, int AnchorX, int AnchorY);
@@ -105,7 +106,7 @@ public sealed class ArtIndex
         if (!_textures.TryGetValue(art.Family, out var family))
             return null;
         var (name, path) = Pick(family.Variants, [art.Variant]);
-        return new ArtImage(path, family.Frames, family.Fps, family.Height, family.Glows.GetValueOrDefault(name), Span: family.Span);
+        return new ArtImage(path, family.Frames, family.Fps, family.Height, family.Glows.GetValueOrDefault(name), Span: family.Span, ClusteredEdges: family.ClusteredEdges);
     }
 
     /// <summary>The prop in the first of <paramref name="prefer"/>'s variants it has, else its first; null if there's no such prop.</summary>
@@ -116,7 +117,7 @@ public sealed class ArtIndex
         var (name, path) = Pick(prop.Variants, prefer);
         var look = prop.Looks.GetValueOrDefault(name) ?? new PropLook(prop.Width, prop.Height, prop.AnchorX, prop.AnchorY);
         // A low prop wider than a tile lies over the tiles beside its own: a bridge's deck, which a unit on those tiles stands on.
-        var spread = prop.TileHeight <= 1 && prop.Light is null && prop.Scale >= 1 && look.Width > 2 * BoardProjection.HalfWidth;
+        var spread = prop.Spread && prop.TileHeight <= 1 && prop.Light is null && prop.Scale >= 1 && look.Width > 2 * BoardProjection.HalfWidth;
         return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, look.Height), look.Width, look.Height, look.AnchorX, look.AnchorY,
             prop.Light is { } light ? light with { Colour = prop.Colours.GetValueOrDefault(name, light.Colour) } : null,
             prop.TileHeight, prop.Scale, spread ? BuildingShape.OfProp(Path.Combine(_root, path), prop.Frames, look.Width, look.Height) : null);
@@ -211,7 +212,7 @@ public sealed class ArtIndex
             var size = e.GetProperty("size");
             var span = e.TryGetProperty("span", out var spanValue) ? spanValue.GetInt32() : e.GetProperty("kind").GetString() == "top" ? size[0].GetInt32() / 32 : 4;
             _textures[entry.Name] = new Family(Variants(e, prefix), e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(),
-                size[1].GetInt32(), span, Glows(e));
+                size[1].GetInt32(), span, Glows(e), e.TryGetProperty("edges", out var edges) && edges.GetString() == "clustered");
         }
     }
 
@@ -232,7 +233,8 @@ public sealed class ArtIndex
                     ? looks.EnumerateObject().ToImmutableDictionary(l => l.Name, l => new PropLook(l.Value.GetProperty("size")[0].GetInt32(), l.Value.GetProperty("size")[1].GetInt32(),
                         l.Value.GetProperty("anchor")[0].GetInt32(), l.Value.GetProperty("anchor")[1].GetInt32()), StringComparer.Ordinal)
                     : ImmutableDictionary<string, PropLook>.Empty,
-                e.TryGetProperty("scale", out var scale) ? scale.GetDouble() : 1);
+                e.TryGetProperty("scale", out var scale) ? scale.GetDouble() : 1,
+                !e.TryGetProperty("spread", out var spread) || spread.GetBoolean());
         }
     }
 

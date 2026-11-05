@@ -184,6 +184,11 @@ public sealed class WalkTrack
             if (off > 0)
                 walker.Fall = -1;
             var height = off >= 1 ? GroundAt(terrain, walker.At) : off > 0 ? float.Lerp(trail, GroundAt(terrain, walker.At), off) : trail;
+            if (RoadSurface.TryHeight(terrain, walker.At, out var surface))
+            {
+                height = surface;
+                walker.Fall = -1;
+            }
             _places[walker.Id] = new UnitPlace(walker.At, height);
             walker.Placed = true;
         }
@@ -191,6 +196,8 @@ public sealed class WalkTrack
             Focus = new UnitPlace(_walkers[0].At, HeightAt(terrain, _walkers[0].Along, 0, out _));
         else
             Focus = new UnitPlace(_path[^1].At, terrain.Top(_path[^1].Tile));
+        if (RoadSurface.TryHeight(terrain, Focus.Map, out var focusHeight))
+            Focus = Focus with { Height = focusHeight };
         return _places;
     }
 

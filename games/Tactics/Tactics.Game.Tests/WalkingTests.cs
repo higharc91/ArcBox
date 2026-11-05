@@ -2,6 +2,7 @@ using ArcBox.Sdk.Protocol;
 using System.Text.Json.Nodes;
 using System.Text;
 using System.Text.Json;
+using System.Collections.Immutable;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
@@ -1774,12 +1775,18 @@ public sealed class WalkingTests
 
     private static IEnumerable<Tile> Route(Tile from, Tile to)
     {
+        // Route around authored interactables too: the new bridge approach passes
+        // the ford campfire, which is blocked in the actual walking session.
+        var flags = ImmutableHashSet<string>.Empty;
+        var blocked = Interactables.Blocking(Rules.InteractablesIn("ashen_ford"),
+            ImmutableSortedDictionary<string, InteractableSave>.Empty, flags);
+        var ground = Rules.GroundFor("ashen_ford")!.With(blocked, flags);
         var danger = Rules.MobsIn("ashen_ford").SelectMany(m => m.Patch).SelectMany(t => new[]
             { t, new Tile(t.X + 1, t.Y), new Tile(t.X - 1, t.Y), new Tile(t.X, t.Y + 1), new Tile(t.X, t.Y - 1) }).ToHashSet();
         var back = new Dictionary<Tile, Tile> { [from] = from };
         var open = new Queue<Tile>([from]);
         while (open.TryDequeue(out var tile) && tile != to)
-            foreach (var next in WorldWalk.Steps(Ground, tile, ClassDef.DefaultJump))
+            foreach (var next in WorldWalk.Steps(ground, tile, ClassDef.DefaultJump))
                 if (!danger.Contains(next) && back.TryAdd(next, tile))
                     open.Enqueue(next);
         Assert.True(back.ContainsKey(to), $"No way from {from} to {to}.");

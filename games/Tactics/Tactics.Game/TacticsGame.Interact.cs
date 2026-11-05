@@ -25,7 +25,7 @@ public sealed partial class TacticsGame
     private ImmutableArray<ThingEventView> _thingEvents = [];
 
     /// <summary>The ground walked, and what's blocked on it, so the ground is built again only when that changes.</summary>
-    private (string Region, ImmutableSortedSet<Tile> Blocked, Terrain Ground)? _walkGround;
+    private (string Region, ImmutableSortedSet<Tile> Blocked, ImmutableHashSet<string> Flags, Terrain Ground)? _walkGround;
 
     /// <summary>The party's best passive score in each skill a thing may be hidden by and whose it is, and the members and players it was worked out for.</summary>
     private (ImmutableSortedDictionary<string, MemberRecord> Members, IReadOnlyList<Player> Players, ImmutableDictionary<string, (int Passive, string? Who)> Best)? _passive;
@@ -148,11 +148,12 @@ public sealed partial class TacticsGame
     private Terrain WalkGround()
     {
         var region = _region!.Def.Id;
-        var blocked = Interactables.Blocking(Things, ThingSaves, StoryFlags());
-        if (_walkGround is { } cached && cached.Region == region && cached.Blocked.SetEquals(blocked))
+        var flags = StoryFlags();
+        var blocked = Interactables.Blocking(Things, ThingSaves, flags);
+        if (_walkGround is { } cached && cached.Region == region && cached.Blocked.SetEquals(blocked) && cached.Flags.SetEquals(flags))
             return cached.Ground;
-        var ground = Rules.GroundFor(region)!.With(blocked);
-        _walkGround = (region, blocked, ground);
+        var ground = Rules.GroundFor(region)!.With(blocked, flags);
+        _walkGround = (region, blocked, flags.ToImmutableHashSet(StringComparer.Ordinal), ground);
         return ground;
     }
 

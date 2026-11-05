@@ -62,13 +62,13 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
-    public void A_ford_cliff_face_uses_its_full_eight_tile_span()
+    public void A_ford_cliff_face_uses_its_full_four_tile_span()
     {
         var plan = Plan(Map(["rock_ford/bank"], [], "1:0:0 0:0:0"));
         var side = Assert.Single(SidesOf(plan, new Tile(0, 0)), face => face.Facing == Facing.U);
 
-        Assert.Equal("cliff_ford_grey.png", Path.GetFileName(side.Image!.Path));
-        Assert.Equal(1f / 8, side.Uvs[1].X);
+        Assert.Equal("native_cliff_ford.png", Path.GetFileName(side.Image!.Path));
+        Assert.Equal(1f / 4, side.Uvs[1].X);
     }
 
     [Fact]
@@ -358,11 +358,14 @@ public sealed class BoardPlanTests
         var map = Pack.Map(id);
         var plan = Plan(map);
 
-        Assert.Equal(map.Width * map.Height, Tops(plan).Count());
+        var terrain = new BoardTerrain(map, null);
+        // Native bridge pieces own their surfaces instead of a duplicate flat terrain top.
+        Assert.Equal(terrain.Tiles.Count(t => !terrain.Look(t).OpenSpan), Tops(plan).Count());
         Assert.All(Faces(plan), f => Assert.NotNull(f.Image));
         // A low prop wider than a tile (a bridge's deck) is drawn in pieces, one for each tile it lies over.
-        var spread = map.Props.Count(p => Pack.Art.Prop(p.Id, [p.Variant ?? ""])?.Shape is not null);
-        Assert.Equal(map.Props.Length - spread, plan.Items.OfType<Sprite>().Count());
+        var present = map.Props.Where(p => p.Present()).ToArray();
+        var spread = present.Count(p => Pack.Art.Prop(p.Id, [p.Variant ?? ""])?.Shape is not null);
+        Assert.Equal(present.Length - spread, plan.Items.OfType<Sprite>().Count());
         Assert.Equal(spread, plan.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Prop).Select(f => f.Image!.Path).Distinct().Count());
         Assert.All(plan.Items.OfType<Sprite>(), s => Assert.True(File.Exists(Path.Combine(Pack.Root, s.Image.Path))));
         Assert.Equal(2, BoardFit.For(new BoardTerrain(map, null), Pack.Art).Scale);
