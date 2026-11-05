@@ -8,6 +8,10 @@ Review [before and after](comparison.jpg), then the full-resolution pairs below.
 renderer, camera positions, bridge geometry, party and scene state. The battle pair uses the real River Crossing
 encounter setup with five heroes, not the mixed-creature demo. These are static visual captures, not new balance runs.
 
+The requested [wider map gallery](places/README.md) adds ten matched locations: Emberwick square, the granary,
+autumn fields, windmill road and ramp, burned ruins, lower riverbank, Maud's hut, docks, high hills and Skarrow camp.
+Every pair has the installed ground on the left and native preview on the right, with original captures available.
+
 | View | Installed ground | Native candidate |
 |---|---|---|
 | World crossing | [Before](before/world-bridge-west.png) | [After](after/world-bridge-west.png) |
