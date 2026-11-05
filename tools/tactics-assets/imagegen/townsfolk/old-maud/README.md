@@ -21,8 +21,9 @@ Eight-cell bounds/alpha-preview checks pass. Full native grid/palette/body-size/
 anchor/staff handedness and ground-contact checks remain before motion import;
 this enlarged sheet is not a validated native atlas.
 
-Appearance approval is pending before motions/portraits, with separate full-set/TV
-approval before installation. No Old Maud production art. Two image-tool calls,
+Appearance is approved (“I approve Old Mauds, start Mother Skarrow”); motion and
+portrait work is authorized and queued while Mother Skarrow starts. Separate
+finished-set/TV approval is still required before installation. No Old Maud production art. Two image-tool calls,
 zero PixelLab calls/spend/purchases; voice spending is detailed below. No image-tool monetary price
 is inferred. Reuse these sources rather than regenerating the approved concept.
 
@@ -45,4 +46,4 @@ Live quotes, cap checks, sources, job/asset IDs and hashes are under voice-recas
 Total274CU:150 speech (including the previous5CU audition) and124 transcription.
 This continuation spent269CU; no purchases/upgrades. Rebuild/validate offline with
 batch/import-recordings.py and batch/validate-recordings.py inside voice-recast/.
-Artwork appearance and full-set/TV approval remain pending and separate.
+Artwork appearance is approved; completed-set/TV approval remains pending.

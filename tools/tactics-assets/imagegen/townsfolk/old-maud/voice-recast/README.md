@@ -3,7 +3,8 @@
 Owner approval: “perfect, let's go with that”. All24 Maud lines now use Gacrux
 at pitch0 without a filter. The approved town audition is reused byte-for-byte;
 23 selected new renders cover the rest. Captions and recordings-only playback
-remain unchanged. Artwork approval remains separate and pending.
+remain unchanged. Artwork appearance was subsequently approved; motions/portraits are queued and
+finished-set/TV approval remains separate.
 
 Hear ../voice-sample.mp3 or approved-voice-reel.mp3 (three installed clips).
 The original audition/source/request/5CU receipt remain here. Rejected Achernar

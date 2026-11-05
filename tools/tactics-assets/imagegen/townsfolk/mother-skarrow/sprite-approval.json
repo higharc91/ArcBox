@@ -1,0 +1,35 @@
+{
+  "character": "Mother Skarrow",
+  "characterId": "mother_skarrow",
+  "presetReference": "goblin_shaman",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-05",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 1,
+  "candidate": "candidate-1-export.png",
+  "candidateSha256": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6",
+  "reviewPreview": "candidate-1-preview.png",
+  "previewSha256": "97c6305834ccf0037181520bbe6a595ee3ae1206939cf6edcbbe6bce3b2ec463",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "speciesScale": {
+    "proposedBodyNative": 50,
+    "proposedBodyWorld": 25,
+    "humanReferenceNative": 72,
+    "humanReferenceWorld": 36,
+    "validated": false
+  },
+  "staffHand": "anatomical_left",
+  "reviewNotes": [
+    "Existing owner-approved concept reused, not regenerated; old goblin chief with repaired hide/wool, grey hair and ordinary staff.",
+    "Eight complete standing cells. Native grid/palette/body scale/anchors, ear/boot/staff contact and handedness QA remain before motions.",
+    "Appearance approval before animation/portraits; finished-set/TV approval remains separate.",
+    "Existing Laomedeia town2 recording included; no new speech or voice approval inferred.",
+    "Named Mother Skarrow only; generic goblin refresh stays outside scope.",
+    "Before later integration, audit named-only sprite selection and battle attack/cast/hurt/down playback; preserve generic goblin combat art and rules/contracts."
+  ]
+}

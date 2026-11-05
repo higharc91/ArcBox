@@ -1,0 +1,24 @@
+{
+  "imageToolCalls": 1,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-export.png",
+      "originalPath": "/workspace/generated_images/exec-4be38607-6a20-4264-ad3d-330a59c83e32.png",
+      "requestSha256": "59be1f9ff077a07831fdb32ef9501ca5d84a438c064ca02851106227a0da2ed8",
+      "outputSha256": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_mother_skarrow.png": "47c0116de6ca9323a531146f1782ac3679fc1cea6fcac352c66609126a858ccd",
+        "tools/tactics-assets/imagegen/townsfolk/rook/rotations/south.png": "435a69161cc43a8ee5bf114de247103dcaaa7f1174f512dc017348dcba3a3d54"
+      }
+    }
+  ],
+  "runtimePreview": {
+    "script": "build-appearance.cjs",
+    "output": "candidate-1-preview.png",
+    "operation": "Remove magenta key, preserve non-key RGB, binary alpha, no redraw/rescale/recenter/mirror."
+  }
+}

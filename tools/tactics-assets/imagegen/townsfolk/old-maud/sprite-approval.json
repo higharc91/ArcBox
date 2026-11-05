@@ -2,7 +2,7 @@
   "character": "Old Maud",
   "characterId": "old_maud",
   "presetReference": "hermit",
-  "stage": "appearance_candidate_pending_owner_review",
+  "stage": "appearance_approved_motion_work_queued",
   "date": "2026-11-04",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 2,
@@ -13,14 +13,14 @@
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "productionInstalled": false,
-  "animationApproval": "pending_appearance_approval",
+  "animationApproval": "owner_approved",
   "fullSetTvApproval": "pending",
   "reviewNotes": [
     "Existing approved concept reused, not regenerated. Eight full planted facings with complete hood/robe/boots and wooden walking stick.",
     "Owner-approved ancient-voice town recording included; all24 Maud lines recast. See voiceReview.",
     "Raw tool images retained; appearance preview applies the normal native alpha threshold and clears transparent RGB.",
     "Native grid/palette/body height/anchors/staff grip-side and staff/boot contact QA remain before motions.",
-    "Appearance approval before motions/portraits; final full-set/TV approval separate."
+    "Appearance approved; motions/portraits authorized and queued. Finished-set/TV approval remains separate."
   ],
   "voiceReview": {
     "status": "owner_approved_recast_installed",
@@ -35,5 +35,10 @@
     "plan": "voice-recast-plan.json",
     "ownerApproval": "perfect, let's go with that",
     "validation": "voice-recast/batch/validation.json"
+  },
+  "ownerAppearanceApproval": {
+    "quote": "I approve Old Mauds, start Mother Skarrow",
+    "date": "2026-11-05",
+    "scope": "Approve existing Old Maud appearance; animation/portrait work authorized, queued while starting Mother Skarrow as requested."
   }
 }

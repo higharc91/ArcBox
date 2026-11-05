@@ -697,3 +697,35 @@ generic goblin refresh remains outside scope. Maud appearance still awaits
 approval independently before motions/portraits. Do not regenerate completed art.
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
 Earlier pending-Rook approval notes are historical.
+
+
+## Latest checkpoint — Maud appearance approved; Mother Skarrow first draft
+
+Owner: “I approve Old Mauds, start Mother Skarrow”. **Old Maud appearance is now
+approved**; exact existing appearance and approved voice retained. Her native QA,
+motions and portraits are authorized and queued while Mother Skarrow starts.
+Do not request Maud appearance/voice approval again. Her finished-set/TV gate
+remains separate before art installation. Earlier pending-Maud appearance notes
+are historical.
+
+Mother Skarrow’s first eight-view pixel appearance and existing recorded town2
+voice are under tools/tactics-assets/imagegen/townsfolk/mother-skarrow/. Approved
+concept reused, not regenerated. Elderly female goblin chief, short adult goblin
+proportions (proposed50 native body /25 world vs humans72/36), weathered green face,
+long ears/greying braids, patched hide/wool, food pouches and plain LEFT-hand staff.
+Appearance/voice review pending before motions/portraits, then separate finished-
+set/TV gate before integration. Native grid/palette/body scale/anchors, ear/staff/
+boot contact and handedness QA ahead; enlarged review sheet is not a native atlas.
+Audit named-only aliases and required battle playback before later integration;
+generic goblin refresh/contracts remain outside scope.
+
+One image-tool call, zero PixelLab/new speech/purchases. Original opaque magenta
+export/request/input/output hashes retained; deterministic key removal preserves
+non-key RGB/layout, no redraw/rescale/mirror. Eight standing-cell bounds/binary-
+alpha checks and existing voice decoding pass. No production art changes or game
+test rerun. Production210914068bytes /4960files, inventory SHA256
+0990d66b04817b51942e119dd35ecbb7273dcedcfa06144c53a2bc7e902f547a unchanged.
+Last native4-party peaks332.20 /192.37MiB below512, not rerun for review-only files.
+Rules/lore/balance/phone contracts unchanged. Include existing recorded voices in
+future reviews. Report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/report.md.
+Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
