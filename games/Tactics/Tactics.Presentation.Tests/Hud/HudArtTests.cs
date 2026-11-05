@@ -32,6 +32,18 @@ public sealed class HudArtTests
     [InlineData("noble", "celandine_marrowby", "celandine", "angry")]
     [InlineData("noble", "celandine_marrowby", "celandine", "sad")]
     [InlineData("noble", "celandine_marrowby", "celandine", "surprised")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "idle")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "hurt")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "happy")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "angry")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "sad")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "surprised")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "idle")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "hurt")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "happy")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "angry")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "sad")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "surprised")]
     public void Approved_named_portrait_aliases_select_each_authored_mood(string preset, string character, string file, string mood)
     {
         foreach (var key in new[] { preset, character })

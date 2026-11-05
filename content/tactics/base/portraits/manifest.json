@@ -376,20 +376,20 @@
       "surprised": "cult_leader_surprised.png"
     },
     "mayor": {
-      "idle": "mayor_idle.png",
-      "hurt": "mayor_hurt.png",
-      "happy": "mayor_happy.png",
-      "angry": "mayor_angry.png",
-      "sad": "mayor_sad.png",
-      "surprised": "mayor_surprised.png"
+      "idle": "halden_varrow_idle.png",
+      "hurt": "halden_varrow_hurt.png",
+      "happy": "halden_varrow_happy.png",
+      "angry": "halden_varrow_angry.png",
+      "sad": "halden_varrow_sad.png",
+      "surprised": "halden_varrow_surprised.png"
     },
     "innkeeper": {
-      "idle": "innkeeper_idle.png",
-      "hurt": "innkeeper_hurt.png",
-      "happy": "innkeeper_happy.png",
-      "angry": "innkeeper_angry.png",
-      "sad": "innkeeper_sad.png",
-      "surprised": "innkeeper_surprised.png"
+      "idle": "bree_tallow_idle.png",
+      "hurt": "bree_tallow_hurt.png",
+      "happy": "bree_tallow_happy.png",
+      "angry": "bree_tallow_angry.png",
+      "sad": "bree_tallow_sad.png",
+      "surprised": "bree_tallow_surprised.png"
     },
     "barmaid": {
       "idle": "barmaid_idle.png",
@@ -607,6 +607,22 @@
       "angry": "old_maud_angry.png",
       "sad": "old_maud_sad.png",
       "surprised": "old_maud_surprised.png"
+    },
+    "bree_tallow": {
+      "idle": "bree_tallow_idle.png",
+      "hurt": "bree_tallow_hurt.png",
+      "happy": "bree_tallow_happy.png",
+      "angry": "bree_tallow_angry.png",
+      "sad": "bree_tallow_sad.png",
+      "surprised": "bree_tallow_surprised.png"
+    },
+    "halden_varrow": {
+      "idle": "halden_varrow_idle.png",
+      "hurt": "halden_varrow_hurt.png",
+      "happy": "halden_varrow_happy.png",
+      "angry": "halden_varrow_angry.png",
+      "sad": "halden_varrow_sad.png",
+      "surprised": "halden_varrow_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

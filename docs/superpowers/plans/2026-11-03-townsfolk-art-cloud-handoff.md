@@ -1078,3 +1078,17 @@ issue closure or environment publication.
 ## Latest checkpoint — Old Maud approved and installed
 
 Owner approved the finished set: “I approve”. Installed the hash-verified eight-direction animations and six portraits with named-only hermit art aliases; approved voice remains in place. Previous pending approval notes are historical. Rebase before pushing townsfolk-art; no PR, merge or publication.
+
+
+## Latest checkpoint — Bree and Halden portraits installed
+
+Owner request: “Fix Bree and Halden's portraits”. Added six matching 40×40 moods
+for each from their approved concepts and installed sprites; preset and named
+portrait aliases now use the new sets. No separate visual approval is claimed.
+All twelve named NPCs now have replacement bodies and portrait sets installed.
+The seven generic presets (two variants each) remain to finish.
+See `tools/tactics-assets/imagegen/townsfolk/bree-halden-portraits/README.md` for
+sources, reproducible normalization, native TV review and validation limitations.
+81 HUD art and 14 host contract tests pass; host build has zero warnings/errors.
+Full presentation suite: 2,536 pass, three failures reproduced against the original
+portrait manifest (Dagna filename, cast facing, story marker geometry).

@@ -35,8 +35,8 @@ public sealed class StoryScreenTests
         var happy = Screen(Showing(1, Line("ch1_mayor_halden_1"))).Caption!;     // Halden, happy
         var sad = Screen(Showing(1, Line("ch1_mayor_halden_4"))).Caption!;       // Halden, sad
 
-        Assert.Equal("portraits/mayor_happy.png", happy.Portrait!.Path);
-        Assert.Equal("portraits/mayor_sad.png", sad.Portrait!.Path);
+        Assert.Equal("portraits/halden_varrow_happy.png", happy.Portrait!.Path);
+        Assert.Equal("portraits/halden_varrow_sad.png", sad.Portrait!.Path);
         Assert.Equal("Halden Varrow", happy.Speaker);
         Assert.StartsWith("“Friends.", Words(happy));
         Assert.EndsWith("”", Words(happy));
@@ -57,7 +57,7 @@ public sealed class StoryScreenTests
 
     [Fact]
     public void A_mood_the_preset_lacks_falls_back_to_idle()
-        => Assert.Equal("portraits/mayor_idle.png", Art.Speaker("mayor", "smug", "ally")!.Path);
+        => Assert.Equal("portraits/halden_varrow_idle.png", Art.Speaker("mayor", "smug", "ally")!.Path);
 
     [Fact]
     public void A_preset_the_pack_lacks_has_no_face()

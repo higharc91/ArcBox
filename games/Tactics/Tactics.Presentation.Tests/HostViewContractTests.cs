@@ -390,7 +390,7 @@ public sealed class HostViewContractTests
         Assert.Equal(["ch1_mayor_open_1", "ch1_mayor_open_2", "ch1_mayor_open_3", "ch1_mayor_open_4", "ch1_mayor_halden_1", "ch1_mayor_halden_2", "ch1_mayor_halden_3",
             "ch1_mayor_halden_4"], said);
         Assert.Equal("Halden Varrow", tick.Screen!.Caption!.Speaker);
-        Assert.Equal("portraits/mayor_sad.png", tick.Screen.Caption.Portrait!.Path);
+        Assert.Equal("portraits/halden_varrow_sad.png", tick.Screen.Caption.Portrait!.Path);
         var vote = tick.Screen.Vote!;
         Assert.Equal("Leader's choice", vote.Heading);
         Assert.Equal($"{game.Leader!.Name} chooses for the party", vote.Tally);

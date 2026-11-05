@@ -1,0 +1,15 @@
+{
+  "character": "Bree Tallow",
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-05",
+  "transparent_background": true,
+  "references": [
+    "tools/tactics-assets/concepts/townsfolk/bree-concept.png",
+    "tools/tactics-assets/pixellab/townsfolk/normalized/candidate-1.png"
+  ],
+  "source": "bree-source.png",
+  "sourceSha256": "aa95d37c09cba4e78fe9c9120b1934b7b588b59b082d8c05d1cca0fbe4267fc1",
+  "requestSummary": "Six consistent head-and-shoulders pixel portraits, 3 columns by 2 rows: idle, hurt, happy / angry, sad, surprised. Preserve approved concept and installed sprite identity, age, hair and clothing; restrained 40x40 logical detail, top-left light, transparent gutters, no text or frames.",
+  "authorization": "User: Fix Bree and Halden's portraits",
+  "approvalStatus": "Generated and installed in response to requested fix; no separate visual approval claimed."
+}
