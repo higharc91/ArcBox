@@ -6879,6 +6879,930 @@
         }
       },
       "provenance": "Image tool; complete directional/motion/portrait/TV set approved by owner. Exact atlas SHA256 4517c9a2594a09d116a4a033e8d3d7fa4c81df46ef65485a32a5c1b7125ab4b3"
+    },
+    "generic_barmaid_a": {
+      "file": "generic_barmaid_a.png",
+      "family": "townsfolk",
+      "variant": "barmaid_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.barmaid_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_barmaid_b": {
+      "file": "generic_barmaid_b.png",
+      "family": "townsfolk",
+      "variant": "barmaid_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.barmaid_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_child_a": {
+      "file": "generic_child_a.png",
+      "family": "townsfolk",
+      "variant": "child_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 32,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 26,
+      "keys": [
+        "characters.child_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_child_b": {
+      "file": "generic_child_b.png",
+      "family": "townsfolk",
+      "variant": "child_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 32,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 26,
+      "keys": [
+        "characters.child_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_farmer_a": {
+      "file": "generic_farmer_a.png",
+      "family": "townsfolk",
+      "variant": "farmer_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.farmer_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_farmer_b": {
+      "file": "generic_farmer_b.png",
+      "family": "townsfolk",
+      "variant": "farmer_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.farmer_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_farmhand_a": {
+      "file": "generic_farmhand_a.png",
+      "family": "townsfolk",
+      "variant": "farmhand_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.farmhand_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_farmhand_b": {
+      "file": "generic_farmhand_b.png",
+      "family": "townsfolk",
+      "variant": "farmhand_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.farmhand_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_fisher_a": {
+      "file": "generic_fisher_a.png",
+      "family": "townsfolk",
+      "variant": "fisher_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.fisher_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_fisher_b": {
+      "file": "generic_fisher_b.png",
+      "family": "townsfolk",
+      "variant": "fisher_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.fisher_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_guard_a": {
+      "file": "generic_guard_a.png",
+      "family": "townsfolk",
+      "variant": "guard_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.guard_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_guard_b": {
+      "file": "generic_guard_b.png",
+      "family": "townsfolk",
+      "variant": "guard_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.guard_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_merchant_a": {
+      "file": "generic_merchant_a.png",
+      "family": "townsfolk",
+      "variant": "merchant_a",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.merchant_a"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "generic_merchant_b": {
+      "file": "generic_merchant_b.png",
+      "family": "townsfolk",
+      "variant": "merchant_b",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          84
+        ]
+      },
+      "headTop": 12,
+      "pixelScale": 0.5,
+      "columns": 6,
+      "rowsPerDirection": 1,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "footprintWidth": 16,
+      "footprintHeight": 36,
+      "keys": [
+        "characters.merchant_b"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "down": {
+          "frames": [
+            0
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
     }
   },
   "legacyDistinctForms": [

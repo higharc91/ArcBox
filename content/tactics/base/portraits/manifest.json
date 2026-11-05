@@ -392,12 +392,12 @@
       "surprised": "bree_tallow_surprised.png"
     },
     "barmaid": {
-      "idle": "barmaid_idle.png",
-      "hurt": "barmaid_hurt.png",
-      "happy": "barmaid_happy.png",
-      "angry": "barmaid_angry.png",
-      "sad": "barmaid_sad.png",
-      "surprised": "barmaid_surprised.png"
+      "idle": "generic_barmaid_a_idle.png",
+      "hurt": "generic_barmaid_a_hurt.png",
+      "happy": "generic_barmaid_a_happy.png",
+      "angry": "generic_barmaid_a_angry.png",
+      "sad": "generic_barmaid_a_sad.png",
+      "surprised": "generic_barmaid_a_surprised.png"
     },
     "blacksmith": {
       "idle": "tobin_fell_idle.png",
@@ -408,28 +408,28 @@
       "surprised": "tobin_fell_surprised.png"
     },
     "farmer": {
-      "idle": "farmer_idle.png",
-      "hurt": "farmer_hurt.png",
-      "happy": "farmer_happy.png",
-      "angry": "farmer_angry.png",
-      "sad": "farmer_sad.png",
-      "surprised": "farmer_surprised.png"
+      "idle": "generic_farmer_a_idle.png",
+      "hurt": "generic_farmer_a_hurt.png",
+      "happy": "generic_farmer_a_happy.png",
+      "angry": "generic_farmer_a_angry.png",
+      "sad": "generic_farmer_a_sad.png",
+      "surprised": "generic_farmer_a_surprised.png"
     },
     "farmhand": {
-      "idle": "farmhand_idle.png",
-      "hurt": "farmhand_hurt.png",
-      "happy": "farmhand_happy.png",
-      "angry": "farmhand_angry.png",
-      "sad": "farmhand_sad.png",
-      "surprised": "farmhand_surprised.png"
+      "idle": "generic_farmhand_a_idle.png",
+      "hurt": "generic_farmhand_a_hurt.png",
+      "happy": "generic_farmhand_a_happy.png",
+      "angry": "generic_farmhand_a_angry.png",
+      "sad": "generic_farmhand_a_sad.png",
+      "surprised": "generic_farmhand_a_surprised.png"
     },
     "merchant": {
-      "idle": "merchant_idle.png",
-      "hurt": "merchant_hurt.png",
-      "happy": "merchant_happy.png",
-      "angry": "merchant_angry.png",
-      "sad": "merchant_sad.png",
-      "surprised": "merchant_surprised.png"
+      "idle": "generic_merchant_a_idle.png",
+      "hurt": "generic_merchant_a_hurt.png",
+      "happy": "generic_merchant_a_happy.png",
+      "angry": "generic_merchant_a_angry.png",
+      "sad": "generic_merchant_a_sad.png",
+      "surprised": "generic_merchant_a_surprised.png"
     },
     "priest": {
       "idle": "mother_aubrine_idle.png",
@@ -440,12 +440,12 @@
       "surprised": "mother_aubrine_surprised.png"
     },
     "guard": {
-      "idle": "guard_idle.png",
-      "hurt": "guard_hurt.png",
-      "happy": "guard_happy.png",
-      "angry": "guard_angry.png",
-      "sad": "guard_sad.png",
-      "surprised": "guard_surprised.png"
+      "idle": "generic_guard_a_idle.png",
+      "hurt": "generic_guard_a_hurt.png",
+      "happy": "generic_guard_a_happy.png",
+      "angry": "generic_guard_a_angry.png",
+      "sad": "generic_guard_a_sad.png",
+      "surprised": "generic_guard_a_surprised.png"
     },
     "guard_captain": {
       "idle": "dagna_idle.png",
@@ -472,12 +472,12 @@
       "surprised": "corvin_surprised.png"
     },
     "child": {
-      "idle": "child_idle.png",
-      "hurt": "child_hurt.png",
-      "happy": "child_happy.png",
-      "angry": "child_angry.png",
-      "sad": "child_sad.png",
-      "surprised": "child_surprised.png"
+      "idle": "generic_child_a_idle.png",
+      "hurt": "generic_child_a_hurt.png",
+      "happy": "generic_child_a_happy.png",
+      "angry": "generic_child_a_angry.png",
+      "sad": "generic_child_a_sad.png",
+      "surprised": "generic_child_a_surprised.png"
     },
     "hermit": {
       "idle": "hermit_idle.png",
@@ -504,12 +504,12 @@
       "surprised": "lark_surprised.png"
     },
     "fisher": {
-      "idle": "fisher_idle.png",
-      "hurt": "fisher_hurt.png",
-      "happy": "fisher_happy.png",
-      "angry": "fisher_angry.png",
-      "sad": "fisher_sad.png",
-      "surprised": "fisher_surprised.png"
+      "idle": "generic_fisher_a_idle.png",
+      "hurt": "generic_fisher_a_hurt.png",
+      "happy": "generic_fisher_a_happy.png",
+      "angry": "generic_fisher_a_angry.png",
+      "sad": "generic_fisher_a_sad.png",
+      "surprised": "generic_fisher_a_surprised.png"
     },
     "ashmaw": {
       "idle": "ashmaw.png"
@@ -623,6 +623,118 @@
       "angry": "halden_varrow_angry.png",
       "sad": "halden_varrow_sad.png",
       "surprised": "halden_varrow_surprised.png"
+    },
+    "barmaid_a": {
+      "idle": "generic_barmaid_a_idle.png",
+      "hurt": "generic_barmaid_a_hurt.png",
+      "happy": "generic_barmaid_a_happy.png",
+      "angry": "generic_barmaid_a_angry.png",
+      "sad": "generic_barmaid_a_sad.png",
+      "surprised": "generic_barmaid_a_surprised.png"
+    },
+    "barmaid_b": {
+      "idle": "generic_barmaid_b_idle.png",
+      "hurt": "generic_barmaid_b_hurt.png",
+      "happy": "generic_barmaid_b_happy.png",
+      "angry": "generic_barmaid_b_angry.png",
+      "sad": "generic_barmaid_b_sad.png",
+      "surprised": "generic_barmaid_b_surprised.png"
+    },
+    "child_a": {
+      "idle": "generic_child_a_idle.png",
+      "hurt": "generic_child_a_hurt.png",
+      "happy": "generic_child_a_happy.png",
+      "angry": "generic_child_a_angry.png",
+      "sad": "generic_child_a_sad.png",
+      "surprised": "generic_child_a_surprised.png"
+    },
+    "child_b": {
+      "idle": "generic_child_b_idle.png",
+      "hurt": "generic_child_b_hurt.png",
+      "happy": "generic_child_b_happy.png",
+      "angry": "generic_child_b_angry.png",
+      "sad": "generic_child_b_sad.png",
+      "surprised": "generic_child_b_surprised.png"
+    },
+    "farmer_a": {
+      "idle": "generic_farmer_a_idle.png",
+      "hurt": "generic_farmer_a_hurt.png",
+      "happy": "generic_farmer_a_happy.png",
+      "angry": "generic_farmer_a_angry.png",
+      "sad": "generic_farmer_a_sad.png",
+      "surprised": "generic_farmer_a_surprised.png"
+    },
+    "farmer_b": {
+      "idle": "generic_farmer_b_idle.png",
+      "hurt": "generic_farmer_b_hurt.png",
+      "happy": "generic_farmer_b_happy.png",
+      "angry": "generic_farmer_b_angry.png",
+      "sad": "generic_farmer_b_sad.png",
+      "surprised": "generic_farmer_b_surprised.png"
+    },
+    "farmhand_a": {
+      "idle": "generic_farmhand_a_idle.png",
+      "hurt": "generic_farmhand_a_hurt.png",
+      "happy": "generic_farmhand_a_happy.png",
+      "angry": "generic_farmhand_a_angry.png",
+      "sad": "generic_farmhand_a_sad.png",
+      "surprised": "generic_farmhand_a_surprised.png"
+    },
+    "farmhand_b": {
+      "idle": "generic_farmhand_b_idle.png",
+      "hurt": "generic_farmhand_b_hurt.png",
+      "happy": "generic_farmhand_b_happy.png",
+      "angry": "generic_farmhand_b_angry.png",
+      "sad": "generic_farmhand_b_sad.png",
+      "surprised": "generic_farmhand_b_surprised.png"
+    },
+    "fisher_a": {
+      "idle": "generic_fisher_a_idle.png",
+      "hurt": "generic_fisher_a_hurt.png",
+      "happy": "generic_fisher_a_happy.png",
+      "angry": "generic_fisher_a_angry.png",
+      "sad": "generic_fisher_a_sad.png",
+      "surprised": "generic_fisher_a_surprised.png"
+    },
+    "fisher_b": {
+      "idle": "generic_fisher_b_idle.png",
+      "hurt": "generic_fisher_b_hurt.png",
+      "happy": "generic_fisher_b_happy.png",
+      "angry": "generic_fisher_b_angry.png",
+      "sad": "generic_fisher_b_sad.png",
+      "surprised": "generic_fisher_b_surprised.png"
+    },
+    "guard_a": {
+      "idle": "generic_guard_a_idle.png",
+      "hurt": "generic_guard_a_hurt.png",
+      "happy": "generic_guard_a_happy.png",
+      "angry": "generic_guard_a_angry.png",
+      "sad": "generic_guard_a_sad.png",
+      "surprised": "generic_guard_a_surprised.png"
+    },
+    "guard_b": {
+      "idle": "generic_guard_b_idle.png",
+      "hurt": "generic_guard_b_hurt.png",
+      "happy": "generic_guard_b_happy.png",
+      "angry": "generic_guard_b_angry.png",
+      "sad": "generic_guard_b_sad.png",
+      "surprised": "generic_guard_b_surprised.png"
+    },
+    "merchant_a": {
+      "idle": "generic_merchant_a_idle.png",
+      "hurt": "generic_merchant_a_hurt.png",
+      "happy": "generic_merchant_a_happy.png",
+      "angry": "generic_merchant_a_angry.png",
+      "sad": "generic_merchant_a_sad.png",
+      "surprised": "generic_merchant_a_surprised.png"
+    },
+    "merchant_b": {
+      "idle": "generic_merchant_b_idle.png",
+      "hurt": "generic_merchant_b_hurt.png",
+      "happy": "generic_merchant_b_happy.png",
+      "angry": "generic_merchant_b_angry.png",
+      "sad": "generic_merchant_b_sad.png",
+      "surprised": "generic_merchant_b_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

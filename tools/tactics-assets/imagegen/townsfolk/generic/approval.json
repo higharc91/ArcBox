@@ -1,9 +1,13 @@
 {
-  "status": "pending_owner_full_set_tv_approval",
+  "status": "approved",
   "issue": "https://github.com/higharc91/ArcBox/issues/80",
   "requiredGate": "Show TV shots of the square, inn and market; stop for owner approval before production integration.",
   "baseCommit": "facbaceb",
-  "ownerApproval": null,
+  "ownerApproval": {
+    "date": "2026-11-05",
+    "quote": "looks good, do whatever is next",
+    "scope": "Complete displayed fourteen-variant generic townsfolk animation/portrait/TV batch; install exact reviewed assets and validate production."
+  },
   "variants": 14,
   "sourceFrames": 672,
   "portraits": 84,
@@ -269,5 +273,15 @@
     "creatures/manifest.json": "c5210577c3d23208a189940bb9c31aaf1b7b79a0e1e5ea25b3dd1785ec1aba34",
     "portraits/manifest.json": "4313f0ab2a456edc7c9e33fa26cbe1ef45e78b11afa4c478188e904afa11123b",
     "rules/world/ashen_ford.json": "a10a0dc230e7fbecc7324b57f9514e561be32e525c95809dcf68a2e5623a78b8"
+  },
+  "productionInstalled": true,
+  "installation": {
+    "productionFiles": 5151,
+    "productionBytes": 220219831,
+    "artFiles": 98,
+    "variants": 14,
+    "portraits": 84,
+    "placedGenericPeople": 28,
+    "report": "docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md"
   }
 }

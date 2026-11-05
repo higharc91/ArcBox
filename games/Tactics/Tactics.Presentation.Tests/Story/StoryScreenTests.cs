@@ -77,7 +77,8 @@ public sealed class StoryScreenTests
                 continue;
             }
             Assert.True(face is not null, $"{line.Id}: {line.Speaker} has no portrait");
-            Assert.Equal($"portraits/{view.Portrait}_{view.Mood}.png", face.Path);     // the mood's own face, not the idle fallback
+            // Named aliases may share a preset's face; still require the authored mood, not idle fallback.
+            Assert.EndsWith($"_{view.Mood}.png", face.Path);
             Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)), face.Path);
             Assert.True(File.Exists(Path.Combine(Pack.Root, face.Backdrop)), face.Backdrop);
             speakers++;

@@ -24,7 +24,8 @@ namespace Tactics.Game.Tests;
 public sealed class StoryModelTests
 {
     private const int EventsPerSeed = 250;
-    private const int DefaultSeeds = 32;
+    // Current voiced line timings need more runs to cover a restart during the rare tie-break state.
+    private const int DefaultSeeds = 64;
     private static readonly TimeSpan MaxLate = TimeSpan.FromMilliseconds(700);
 
     private static readonly string[] Backgrounds =

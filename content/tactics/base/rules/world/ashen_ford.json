@@ -6142,7 +6142,8 @@
       ],
       "face": "sw",
       "id": "af_farmer_1",
-      "voice": "townsfolk_farmer"
+      "voice": "townsfolk_farmer",
+      "variant": "a"
     },
     {
       "preset": "goblin_cutthroat",
@@ -6236,7 +6237,8 @@
       ],
       "face": "se",
       "id": "af_merchant_1",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "a"
     },
     {
       "preset": "farmhand",
@@ -6246,7 +6248,8 @@
       ],
       "face": "se",
       "id": "af_farmhand_1",
-      "voice": "townsfolk_farmhand"
+      "voice": "townsfolk_farmhand",
+      "variant": "a"
     },
     {
       "preset": "guard",
@@ -6286,7 +6289,8 @@
         ]
       ],
       "id": "af_guard_1",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "a"
     },
     {
       "preset": "goblin_cutthroat",
@@ -6354,7 +6358,8 @@
       ],
       "face": "nw",
       "id": "af_child_1",
-      "voice": "townsfolk_child"
+      "voice": "townsfolk_child",
+      "variant": "a"
     },
     {
       "preset": "minstrel",
@@ -6439,7 +6444,8 @@
       ],
       "face": "sw",
       "id": "af_child_3",
-      "voice": "townsfolk_child"
+      "voice": "townsfolk_child",
+      "variant": "b"
     },
     {
       "preset": "farmhand",
@@ -6463,7 +6469,8 @@
         ]
       ],
       "id": "af_farmhand_2",
-      "voice": "townsfolk_farmhand"
+      "voice": "townsfolk_farmhand",
+      "variant": "b"
     },
     {
       "preset": "guard",
@@ -6473,7 +6480,8 @@
       ],
       "face": "sw",
       "id": "af_guard_2",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "b"
     },
     {
       "preset": "farmer",
@@ -6505,7 +6513,8 @@
         ]
       ],
       "id": "af_farmer_2",
-      "voice": "townsfolk_farmer"
+      "voice": "townsfolk_farmer",
+      "variant": "b"
     },
     {
       "preset": "guard",
@@ -6515,7 +6524,8 @@
       ],
       "face": "sw",
       "id": "af_guard_3",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "a"
     },
     {
       "preset": "goblin_spear",
@@ -6561,7 +6571,8 @@
         ]
       ],
       "id": "af_barmaid_1",
-      "voice": "townsfolk_barmaid"
+      "voice": "townsfolk_barmaid",
+      "variant": "a"
     },
     {
       "preset": "mayor",
@@ -6581,7 +6592,8 @@
       ],
       "face": "ne",
       "id": "af_guard_4",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "b"
     },
     {
       "preset": "goblin_spear",
@@ -6619,7 +6631,8 @@
       ],
       "face": "sw",
       "id": "af_merchant_2",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "b"
     },
     {
       "preset": "merchant",
@@ -6629,7 +6642,8 @@
       ],
       "face": "sw",
       "id": "af_merchant_3",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "a"
     },
     {
       "preset": "merchant",
@@ -6639,7 +6653,8 @@
       ],
       "face": "sw",
       "id": "af_merchant_4",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "b"
     },
     {
       "preset": "guard_captain",
@@ -6673,7 +6688,8 @@
       ],
       "face": "ne",
       "id": "af_farmer_3",
-      "voice": "townsfolk_farmer"
+      "voice": "townsfolk_farmer",
+      "variant": "a"
     },
     {
       "preset": "barmaid",
@@ -6683,7 +6699,8 @@
       ],
       "face": "ne",
       "id": "af_barmaid_2",
-      "voice": "townsfolk_barmaid"
+      "voice": "townsfolk_barmaid",
+      "variant": "b"
     },
     {
       "preset": "noble",
@@ -6703,7 +6720,8 @@
       ],
       "face": "se",
       "id": "af_guard_5",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "a"
     },
     {
       "preset": "guard",
@@ -6713,7 +6731,8 @@
       ],
       "face": "sw",
       "id": "af_guard_6",
-      "voice": "townsfolk_guard"
+      "voice": "townsfolk_guard",
+      "variant": "b"
     },
     {
       "preset": "farmhand",
@@ -6723,7 +6742,8 @@
       ],
       "face": "sw",
       "id": "af_farmhand_3",
-      "voice": "townsfolk_farmhand"
+      "voice": "townsfolk_farmhand",
+      "variant": "a"
     },
     {
       "preset": "farmer",
@@ -6733,7 +6753,8 @@
       ],
       "face": "se",
       "id": "af_farmer_4",
-      "voice": "townsfolk_farmer"
+      "voice": "townsfolk_farmer",
+      "variant": "b"
     },
     {
       "preset": "farmer",
@@ -6743,7 +6764,8 @@
       ],
       "face": "ne",
       "id": "af_farmer_5",
-      "voice": "townsfolk_farmer"
+      "voice": "townsfolk_farmer",
+      "variant": "a"
     },
     {
       "preset": "hermit",
@@ -6764,7 +6786,8 @@
       ],
       "face": "sw",
       "id": "af_fisher_1",
-      "voice": "townsfolk_fisher"
+      "voice": "townsfolk_fisher",
+      "variant": "a"
     },
     {
       "preset": "merchant",
@@ -6774,7 +6797,8 @@
       ],
       "face": "sw",
       "id": "af_merchant_5",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "a"
     },
     {
       "preset": "fisher",
@@ -6784,7 +6808,8 @@
       ],
       "face": "se",
       "id": "af_fisher_2",
-      "voice": "townsfolk_fisher"
+      "voice": "townsfolk_fisher",
+      "variant": "b"
     },
     {
       "preset": "fisher",
@@ -6794,7 +6819,8 @@
       ],
       "face": "se",
       "id": "af_fisher_3",
-      "voice": "townsfolk_fisher"
+      "voice": "townsfolk_fisher",
+      "variant": "a"
     },
     {
       "preset": "merchant",
@@ -6804,7 +6830,8 @@
       ],
       "face": "sw",
       "id": "af_merchant_6",
-      "voice": "townsfolk_merchant"
+      "voice": "townsfolk_merchant",
+      "variant": "b"
     },
     {
       "preset": "fisher",
@@ -6814,7 +6841,8 @@
       ],
       "face": "se",
       "id": "af_fisher_4",
-      "voice": "townsfolk_fisher"
+      "voice": "townsfolk_fisher",
+      "variant": "b"
     },
     {
       "preset": "bandit_captain",

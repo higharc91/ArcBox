@@ -1,12 +1,20 @@
 # Generic townsfolk — fourteen finished review sets
 
+**Latest: owner-approved and installed.** Approval: “looks good, do whatever is next”.
+All 14 reviewed atlases, 84 portraits and 28 placement variants are installed in
+production. See [the installation report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md)
+and run `verify-installed.cjs` for the current production checkpoint. The
+review-stage instructions and frozen isolation evidence below describe the
+pre-installation checkpoint; pending-approval statements are superseded.
+
+
 All seven approved concept pairs are translated into eight-facing pixel sprites:
 barmaid, child, farmer, farmhand, fisher, guard and merchant. Each variant has two
 native idle poses and four native walking poses per direction (48 source frames),
 plus six 40×40 portrait moods. The children are 26 world pixels tall; adults are
 36, matching the shipped human hero. No concept was regenerated.
 
-**Current stage: finished-set/TV review, not installed in production.** Issue #80
+**Historical preparation stage: finished-set/TV review, before production installation.** Issue #80
 requires the owner to review the TV shots and “Stop for approval” before swapping
 the production sheets. The owner's instruction to do the generic townsfolk
 started this work; no approval of these new finished sets is inferred.
@@ -118,7 +126,7 @@ or add `--mode perf` and a distinct name for strict memory gates; use
 screenshots after approval.
 
 `approval.json` binds the exact source/atlas/motion/portrait/TV review files.
-It is pending. After explicit approval of this displayed finished batch, record
+The owner has now approved this batch and it is installed. For a fresh pre-installation baseline, record
 the owner's quote and change its status to approved, then run
 `install-approved.cjs` with the rebuilt review pack. It refuses pending approval,
 changed review bytes or a changed production baseline before writing. It copies

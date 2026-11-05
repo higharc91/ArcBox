@@ -53,7 +53,7 @@ The default route uses `route.cs` navigation between authored targets, with enou
 
 ## P1: bugs and problems
 
-### OW-05 · Character memory · `seven approved NPCs pass; recheck later cast`
+### OW-05 · Character memory · `done on townsfolk-art; final cast passes 512 MiB`
 Texture memory goes from 158 MB to 350 MB with the new characters, measured on the TV. A hero is about 37.5 MB of sheets by estimate, and the pack grows from 118 MB to 179 MB, so a cold TV download is 51% larger. Fine on an RTX 5080, unknown on a TV box. Options: load only the sheets a party uses, drop frames, or smaller atlases.
 **Owner decision (issue #80):** maximum **512 MiB (536,870,912 bytes)** of TV texture memory with four members.
 On `townsfolk-art`, world sheets now resolve the actual sprite path, queue uploads within the existing texture budget, and release unused party/battle sheets. Only the current region's placed people and actual drawn heroes/creatures are requested. Fauna share one texture per source; their navigation is prepared off-thread, and their uploads are budgeted. Approved Bree is now installed; legacy sheets remain available.
@@ -77,7 +77,16 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
-### OW-10 · Heroes and townsfolk don't match · `seven named NPCs approved and integrated`
+### OW-10 · Heroes and townsfolk don't match · `done on townsfolk-art; all named and generic art approved and installed`
+**Current:** all 12 named NPCs and 14 generic variants have replacement bodies and
+matching portraits installed. The owner approved the final generic batch:
+“looks good, do whatever is next”. All 28 generic placements use variants, and
+all 31 placed named/generic suffixes are preserved by the painting scene. Final
+production texture peaks: Ashen Ford 423.56 MiB; Cinder Hollow 208.41 MiB, both
+below 512 MiB with four members and roster changes. No art approval remains for
+issue #80's cast. [Installation report](../reports/2026-11-03-townsfolk-art/generic-installed/report.md).
+The paragraphs below retain the earlier checkpoints.
+
 The new heroes are detailed and about 36 px tall, while townsfolk still use chunky 32×40 sheets at about 29 px. The new work only covers race × class.
 **Owner decision (issue #80):** regenerate through Scenario concepts then PixelLab,
 with owner approval between stages. On `townsfolk-art`, updated to main `2e64b9df`,
@@ -200,8 +209,8 @@ Don't build these without the user: a true Warden bridge (changes the battle map
 
 ## Decisions waiting for the user
 
-1. OW-05's target is resolved: 512 MiB with four members. Used-only loading and fresh production/Bree-review memory gates pass. Recheck after final approved art integration.
-2. All concepts and Bree’s complete set/TV appearance are approved; Bree is installed. Halden’s complete directional/motion set and TV preview are approved and installed. Other 24 sprites and portraits remain. Live PixelLab balance is 0.75 generations after 30 for Halden; no purchase or upgrade. Scenario remains 221 CU. See the approved-integration report.
+1. OW-05 is complete for the final installed cast: the 512 MiB/four-member gate passes at 423.56 MiB in Ashen Ford and 208.41 MiB in Cinder Hollow. Recheck future art additions.
+2. OW-10 / issue #80 cast is complete on `townsfolk-art`: all 12 named sets and 14 generic variants, including matching portraits, are approved and installed. No further approval or generation is needed for this cast. No PR, merge or issue closure has been requested.
 3. The ford's look (OW-09), and whether a true bridge is worth changing the map.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), haggling off (E), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded.
 5. Handoff §8 items 4 and 5 and remaining interactable owner choices stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
@@ -998,3 +1007,20 @@ then install exact reviewed art, repeat production memory/runtime validation and
 required game/phone checks. `approval.json` remains pending; no production install,
 PR, merge, issue closure or publication has occurred. Do not regenerate these
 completed source sets or infer finished-set approval from concept approval.
+
+
+## Latest checkpoint — final generic batch approved, installed and verified
+
+Owner: “looks good, do whatever is next”. All fourteen exact reviewed generic
+atlases, 84 portraits and 28 placement variants are installed. All twelve named
+sets and generic pairs in issue #80 are now approved and installed. No more cast
+artwork or approval is pending. Production hashes/runtime and 512 MiB gates pass:
+423.56 MiB Ashen Ford; 208.41 MiB Cinder Hollow. Pack: 220,219,831 bytes /5,151 files.
+All 31 painted scene variant fields round-trip and export byte-identically.
+6,338 .NET cases pass across the solution run and affected-project reruns; all
+508 phone cases pass. Host build has zero warnings/errors. Stale art expectations,
+five deadline snapshots and rare model restart coverage were refreshed without
+gameplay/phone implementation changes. See the final generic installation report
+at `docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md`.
+Use `generic/verify-installed.cjs` for the current checkpoint; the old review-only
+isolation receipts stay frozen. No PR, merge, issue closure or publication.

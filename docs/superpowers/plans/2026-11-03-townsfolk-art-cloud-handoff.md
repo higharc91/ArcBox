@@ -1,16 +1,18 @@
-# Issue #80 — cloud handoff after Bree
+# Issue #80 — final cast installed on townsfolk-art
 
 Work in `higharc91/ArcBox`, branch **`townsfolk-art`**. Fetch and check out that
 branch; inspect a dirty tree before changing it. Pull with rebase before pushing.
 Do not merge, open a PR, close #80 or reset unrelated work. The owner requested a
-checkpoint after Bree so a cloud AI can continue. **Current continuation:** Bree’s
-full-set/TV approval arrived and her exact compact atlas is now installed. Halden’s
-complete eight-direction idle/walk/talk set is also now approved and installed.
-Mother Aubrine’s complete image-tool set and native TV review are now also approved
-and installed. Tobin’s approved body and six portraits are also installed. Lark’s
-finished set is now approved and installed. Corvin’s first pixel appearance
-candidate awaits approval. Read the latest
-[Aubrine installation report](../reports/2026-11-03-townsfolk-art/aubrine-installed/report.md).
+checkpoint after Bree so a cloud AI can continue. **Current continuation:** all
+12 named NPCs and all 14 generic townsfolk variants now have owner-approved bodies
+and matching portraits installed. The final batch approval is “looks good, do
+whatever is next”. All 28 generic placements select their variants, and the
+painting scene retains all 31 named/generic variant fields. Production texture
+gates pass at 423.56 MiB Ashen Ford and 208.41 MiB Cinder Hollow (512 MiB cap).
+Read the [final installation report](../reports/2026-11-03-townsfolk-art/generic-installed/report.md)
+and use `tools/tactics-assets/imagegen/townsfolk/generic/verify-installed.cjs`.
+Do not regenerate approved art or ask for these approvals again. Earlier pending
+statements below are historical. No PR, merge or issue closure has been requested.
 Last observed PixelLab balance was **0.75 generations**; do not submit more paid work or purchase credits.
 Read the [approved-integration report](../reports/2026-11-03-townsfolk-art/approved-integration/report.md) first.
 The original checkpoint details below are retained as provenance; current status
@@ -1121,3 +1123,20 @@ then install exact reviewed art, repeat production memory/runtime validation and
 required game/phone checks. `approval.json` remains pending; no production install,
 PR, merge, issue closure or publication has occurred. Do not regenerate these
 completed source sets or infer finished-set approval from concept approval.
+
+
+## Latest checkpoint — final generic batch approved, installed and verified
+
+Owner: “looks good, do whatever is next”. All fourteen exact reviewed generic
+atlases, 84 portraits and 28 placement variants are installed. All twelve named
+sets and generic pairs in issue #80 are now approved and installed. No more cast
+artwork or approval is pending. Production hashes/runtime and 512 MiB gates pass:
+423.56 MiB Ashen Ford; 208.41 MiB Cinder Hollow. Pack: 220,219,831 bytes /5,151 files.
+All 31 painted scene variant fields round-trip and export byte-identically.
+6,338 .NET cases pass across the solution run and affected-project reruns; all
+508 phone cases pass. Host build has zero warnings/errors. Stale art expectations,
+five deadline snapshots and rare model restart coverage were refreshed without
+gameplay/phone implementation changes. See the final generic installation report
+at `docs/superpowers/reports/2026-11-03-townsfolk-art/generic-installed/report.md`.
+Use `generic/verify-installed.cjs` for the current checkpoint; the old review-only
+isolation receipts stay frozen. No PR, merge, issue closure or publication.

@@ -90,7 +90,7 @@ public sealed class HudArtTests
 
     [Theory]
     [InlineData("characters.goblin_cutthroat", UnitTone.Enemy, "portraits/goblin_cutthroat_idle.png", "portraits/backdrops/enemy.png")]
-    [InlineData("characters.farmer", UnitTone.Neutral, "portraits/farmer_idle.png", "portraits/backdrops/neutral.png")]
+    [InlineData("characters.farmer", UnitTone.Neutral, "portraits/generic_farmer_a_idle.png", "portraits/backdrops/neutral.png")]
     public void A_character_has_its_portrait_on_its_sides_backdrop(string sprite, UnitTone tone, string path, string backdrop)
     {
         var portrait = Art.Value.Portrait(sprite, tone);

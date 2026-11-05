@@ -32,6 +32,15 @@ public sealed class CreatureAtlasTests
                     }
             if (entry.GetProperty("family").GetString() == "townsfolk")
             {
+                if (item.Name.StartsWith("generic_", StringComparison.Ordinal))
+                {
+                    Assert.Equal([0, 0, 0, 0, 0, 0, 0, 1], sprite.Idle.Frames);
+                    Assert.Equal([2, 3, 4, 5], sprite.Anims["walk"].Frames);
+                    Assert.False(sprite.Anims.ContainsKey("talk"));
+                    Assert.False(sprite.Anims.ContainsKey("attack"));
+                    Assert.Equal(item.Name.StartsWith("generic_child_", StringComparison.Ordinal) ? 26f : 36f, sprite.HeadLift);
+                    continue;
+                }
                 // Named townsfolk retain their authored counts; Skarrow also appears in battle.
                 Assert.Equal(item.Name switch { "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" or "mother_skarrow" or "old_maud" => 10, "bree_tallow" => 5, _ => 4 }, sprite.Idle.Frames.Length);
                 Assert.Equal(6, sprite.Anims["walk"].Frames.Length);
