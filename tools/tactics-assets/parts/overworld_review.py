@@ -31,6 +31,23 @@ group('props','crate barrel sack cart chest chest_open','Store, granary, docks a
     'Wood and metal match the town kit. Keep access lanes clear. Crates/sacks support the grain shortage; gold-filled chests are rewards, not street furniture.')
 group('props','maud_ash_garden maud_stool_pots',"Old Maud's burned-bank home",
     'Owner-approved kitchen-herb bed in cold ash and knee-high stool/pots. Keep the cottage approach and reed track clear; no magical glow or occult trophies.')
+group('props','fishing_skiff','Ashen Ford riverbank and working docks',
+    'A small practical fishing boat, grounded or moored at water. Keep boarding and pedestrian routes clear; its artwork does not create a traversable crossing.')
+group('props','bridge_span_damaged bridge_span_stone bridge_span_timber','Authored ford crossings',
+    'Keep spans aligned to the river and their road. Damaged timber and old stone must match the actual stamp and bridge state; a decorative sprite alone is not walkable ground.')
+group('props','fence_join','Ashen Ford fields and livestock pens',
+    'Corner/tee pieces complete the matching fence segments. Preserve the correct facing and gate gaps; do not place joins as freestanding posts on roads.')
+group('props','crop_wheat_stubble','Cooling Southfield farmland',
+    'Sparse harvested stubble supports the grain shortage. Keep the field subdued rather than suggesting an abundant unharvested crop.')
+group('props','lantern_iron','Occupied town, docks and rural doorsteps',
+    'Practical iron lantern with local warm light. Keep it attached to its support and avoid treating it as unexplained magical illumination.')
+group('props','farm_goat farm_goat_anim farm_sheep farm_sheep_anim farm_dog farm_dog_anim pack_mule pack_mule_anim',
+    'Ashen Ford farms, pens and working streets',
+    'Existing approved animal art and directional animations. Keep species scale and harness details consistent, ground feet on their anchors, and leave entrances clear. These are local animals, not hostile mobs.')
+group('props','field_crow field_crow_anim red_fox red_fox_anim river_duck river_duck_anim','Fields, woodland edge and river',
+    'Existing approved wildlife art and animation. Crows remain small, foxes belong at the woodland/field edge, ducks by water. Preserve their established world scale and motion anchors.')
+group('props','wild_crow wild_crow_anim','Retained pre-overhaul wildlife source',
+    'Unreferenced legacy crow sheets, retained unchanged for provenance. Do not place these alongside the current approved field_crow sprites; they use different scale and animation metadata.')
 group('props','fence fence_stone fence_picket fence_iron palisade','Fields, town boundary and defensible sites',
     'Match segments to their axis and material. Plain wood suits fields, stone suits Warden work, iron suits a formal courtyard, palisades suit a guarded camp.')
 group('props','campfire torch lamp_post lantern','Occupied camp, street and shrine',
@@ -82,6 +99,12 @@ group('terrain','lava lava_side','Active infernal sites',
     'Keep animated channels and emissive light. This visibly active material is distinct from the old Ashen Ford burn scar.')
 group('terrain','ash','Century-old burned bank',
     'Removed glowing coals and automatic firelight. The Fall was a century ago; warm soil does not make every ash tile a burning hazard.')
+group('terrain','path_ford grass_ford dirt_ford rock_ford planks_ford cliff_ford','Authored Ashen Ford ground and crossing',
+    'Ford-specific shipped material overlays share the region palette. Keep roads/woodwork aligned to the authored walkable ground, and preserve real heights and cliff transitions.')
+group('terrain','ford_water','Ashen Ford river and crossing',
+    'Readable water at its authored shallow/deep cells. Local steam belongs to warm river water; the material must not imply a safe crossing where the map is deep.')
+group('terrain','ash_ford','Cold burned east bank',
+    'Shipped ford ash remains old and cold. Its grey texture is not an active fire or magical emitter; keep it quieter than the party and usable routes.')
 group('terrain','flowers_0 flowers_1 flowers_2 pebbles_0 pebbles_1 leaves_0 leaves_1','Sparse ground dressing',
     'Keep small clustered marks. Prefer fallen autumn leaves in Chapter I; leave quiet ground around characters and interactable locations.')
 group('terrain','bones blood cracks puddle scorch','Localized history / recent action',
