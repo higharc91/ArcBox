@@ -1,0 +1,73 @@
+[tv-e2e 12:48:31] starting the server on http://127.0.0.1:42769
+[tv-e2e 12:48:35] starting the TV (1280x720, preset low)
+[tv-e2e 12:48:37] TV opened room SMXS
+[tv-e2e 12:48:37] phones: 4 bots walk: route:af_market_herbalist,route:af_inn,route:af_market_herbalist,stop:2,pause:restart,route:af_inn,stop:2,pause:tv,route:af_market_herbalist,stop:2, then 20 timed presses, then the leader's phone is cut
+12:48:37 Ana joined SMXS
+12:48:37 Bo joined SMXS
+12:48:37 Cy joined SMXS
+12:48:37 Dee joined SMXS
+12:48:38 Game on
+12:48:39 Ana picks fighter
+12:48:40 Bo picks cleric
+12:48:41 Cy picks rogue
+12:48:42 Dee picks wizard
+12:48:42 Dee leads
+12:48:52 CHAPTER Dee walks 5 steps from 26,58 to shop:af_market_herbalist
+12:48:53 WALK route arrived at shop:af_market_herbalist
+12:48:57 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+12:48:59 WALK route arrived at shop:af_inn
+12:49:03 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+12:49:05 WALK route arrived at shop:af_market_herbalist
+12:49:05 WALK stop for 2 s
+12:49:07 PAUSE restart
+[tv-e2e 12:49:07] restart: the party stopped on 27 63; stopping the server (TV log line 148)
+12:49:08 Dee: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Cy: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Bo: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Ana: walk failed: Invocation canceled due to the underlying connection being closed.
+[tv-e2e 12:49:13] server stopped
+[tv-e2e 12:49:18] restart: the server is back; waiting for the TV to put the party somewhere
+12:49:19 Dee rejoined SMXS
+12:49:19 Bo rejoined SMXS
+12:49:19 Cy rejoined SMXS
+12:49:19 Ana rejoined SMXS
+12:49:21 GO restart: Dee leads
+12:49:25 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+12:49:27 WALK route arrived at shop:af_inn
+12:49:27 WALK stop for 2 s
+12:49:29 PAUSE tv
+[tv-e2e 12:49:29] reconnect: the party stopped on 24 56; killing the TV (log line 189)
+tools/tv-e2e.sh: line 353: 182965 Killed                  DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver "${TV_RENDERING_DRIVER:-vulkan}" -- "${shots[@]}" --preset="$PRESET" --res="$RES" --server="$URL" --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1
+12:49:40 GO tv: Dee leads
+12:49:44 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+12:49:46 WALK route arrived at shop:af_market_herbalist
+12:49:46 WALK stop for 2 s
+12:50:06 LATENCY 20 of 20 presses, ms: median 36 p90 53 worst 58
+12:50:07 DROP kill at 1793883007546
+12:50:07 Dee: walk failed: WebSocket closed with status code: 1006 (no reason given).
+12:50:08 DROP party stopped after 721 ms
+12:50:15 DROP lead passed after 7775 ms
+12:50:22 DROP disconnect after 15019 ms
+12:50:22 DROP last step 497 ms after the cut
+12:50:22 DROP the TV drew the party stopped 712 ms after the cut, by its clock
+12:50:22 WALK done
+[tv-e2e 12:50:22] letting the TV finish its shots (2 s)
+[tv-e2e 12:50:25] TV stopped
+[tv-e2e 12:50:25] Xvfb stopped
+[tv-e2e 12:50:26] server stopped
+[tv-e2e 12:50:26] the TV was told of 19 steps before the restart, 58 in all
+[tv-e2e 12:50:26] the TV drew the leader 5 tiles from where it started, before the restart
+[tv-e2e 12:50:26] restart: the TV is back in room SMXS
+[tv-e2e 12:50:26] restart: saved on 27 63; the TV put the party on 27.5 63.5
+[tv-e2e 12:50:26] restart: the first step after it went to 26 62
+[tv-e2e 12:50:26] reconnect: the new TV is in room SMXS
+[tv-e2e 12:50:26] reconnect: the party stood on 24 56; the new TV snapped to 24.5 56.5
+[tv-e2e 12:50:26] drop: the last step reached the TV 497 ms after the cut; the TV heard the party had stopped 712 ms after it
+[tv-e2e 12:50:26] drop: DROP party stopped after 721 ms
+[tv-e2e 12:50:26] drop: DROP lead passed after 7775 ms
+[tv-e2e 12:50:26] drop: DROP disconnect after 15019 ms
+[tv-e2e 12:50:26] latency: LATENCY 20 of 20 presses, ms: median 36 p90 53 worst 58
+[tv-e2e 12:50:26] the TV's frames while walking: median of the walks' median frame times 50.00 ms
+[tv-e2e 12:50:26] a shot of the party walking: /workspace/ow04/default-walk/tv-relaunched/008-tactics-world-walking-29-63.png
+[tv-e2e 12:50:26] a shot of the party stopped: /workspace/ow04/default-walk/tv/022-tactics-world-stopped-28-64.png
+[tv-e2e 12:50:26] OK

@@ -1,0 +1,36 @@
+{
+  "source_commit": "b5a552ec034fe57db0207249ae732860f6f4e1d7",
+  "existing_merge_pr": 91,
+  "game_or_harness_changes": false,
+  "issue81_merged": false,
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "node_tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "default_walk": {
+    "exit_code": 0,
+    "steps_before_restart": 19,
+    "steps_total": 58,
+    "rendered_displacement_tiles": 5,
+    "timed_presses": 20,
+    "delivered_presses": 20,
+    "latency_median_ms": 36,
+    "latency_p90_ms": 53,
+    "latency_worst_ms": 58,
+    "restart_saved_tile": [
+      27,
+      63
+    ],
+    "tv_reconnect_tile": [
+      24,
+      56
+    ],
+    "last_step_after_cut_ms": 497,
+    "stop_after_cut_ms": 712,
+    "tv_errors": 0
+  }
+}

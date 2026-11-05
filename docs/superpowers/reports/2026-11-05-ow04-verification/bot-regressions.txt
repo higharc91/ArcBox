@@ -1,0 +1,14 @@
+✔ a delayed first motion sample does not move the initial origin (37.307635ms)
+✔ a snap without any rendered motion does not prove movement (2.626068ms)
+✔ legacy logs without a snap retain their first motion sample as origin (5.666981ms)
+✔ fresh party tile and exact screen markers work with "\n" (2.145567ms)
+✔ fresh party tile and exact screen markers work with "\r\n" (0.439862ms)
+✔ default route tokens use navigation without opening a shop and retain restart pauses (3.936028ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 265.874012

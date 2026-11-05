@@ -1,0 +1,44 @@
+12:48:37 Ana joined SMXS
+12:48:37 Bo joined SMXS
+12:48:37 Cy joined SMXS
+12:48:37 Dee joined SMXS
+12:48:38 Game on
+12:48:39 Ana picks fighter
+12:48:40 Bo picks cleric
+12:48:41 Cy picks rogue
+12:48:42 Dee picks wizard
+12:48:42 Dee leads
+12:48:52 CHAPTER Dee walks 5 steps from 26,58 to shop:af_market_herbalist
+12:48:53 WALK route arrived at shop:af_market_herbalist
+12:48:57 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+12:48:59 WALK route arrived at shop:af_inn
+12:49:03 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+12:49:05 WALK route arrived at shop:af_market_herbalist
+12:49:05 WALK stop for 2 s
+12:49:07 PAUSE restart
+12:49:08 Dee: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Cy: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Bo: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:08 Ana: walk failed: Invocation canceled due to the underlying connection being closed.
+12:49:19 Dee rejoined SMXS
+12:49:19 Bo rejoined SMXS
+12:49:19 Cy rejoined SMXS
+12:49:19 Ana rejoined SMXS
+12:49:21 GO restart: Dee leads
+12:49:25 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+12:49:27 WALK route arrived at shop:af_inn
+12:49:27 WALK stop for 2 s
+12:49:29 PAUSE tv
+12:49:40 GO tv: Dee leads
+12:49:44 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+12:49:46 WALK route arrived at shop:af_market_herbalist
+12:49:46 WALK stop for 2 s
+12:50:06 LATENCY 20 of 20 presses, ms: median 36 p90 53 worst 58
+12:50:07 DROP kill at 1793883007546
+12:50:07 Dee: walk failed: WebSocket closed with status code: 1006 (no reason given).
+12:50:08 DROP party stopped after 721 ms
+12:50:15 DROP lead passed after 7775 ms
+12:50:22 DROP disconnect after 15019 ms
+12:50:22 DROP last step 497 ms after the cut
+12:50:22 DROP the TV drew the party stopped 712 ms after the cut, by its clock
+12:50:22 WALK done
