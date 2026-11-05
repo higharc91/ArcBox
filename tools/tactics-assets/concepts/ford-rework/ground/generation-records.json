@@ -1,7 +1,7 @@
 {
   "issue": 82,
   "kind": "crisp-ground-concept",
-  "status": "Awaiting owner concept approval; production ground unchanged",
+  "status": "Concept approved; native pixel and TV review ready for owner",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -57,5 +57,27 @@
     2528,
     1696
   ],
-  "sha256": "fe98c149b1f5fb1d29980e86f4cde654a32bd87483b76248992d20d5abb0b736"
+  "sha256": "fe98c149b1f5fb1d29980e86f4cde654a32bd87483b76248992d20d5abb0b736",
+  "owner_approval": {
+    "status": "approved",
+    "user_message": "Approve ground concept",
+    "date": "2026-11-05",
+    "scope": "Ash, grass, roads and shores; native pixel authoring"
+  },
+  "pixel_art_approval": {
+    "status": "awaiting owner",
+    "production_installed": false,
+    "review": "docs/superpowers/reports/2026-11-05-ford-rework/ground-art/README.md"
+  },
+  "native_art": {
+    "source": "tools/tactics-assets/parts/ford_terrain.py",
+    "tops": 9,
+    "sides": 1,
+    "source_pixels_per_tile": 32,
+    "period_tiles": 4,
+    "credits": 0,
+    "palette": "wardenflame-style.json#palettes.ashen_ford",
+    "mechanics_equivalent": true,
+    "hashes": "native-art/assets.json"
+  }
 }

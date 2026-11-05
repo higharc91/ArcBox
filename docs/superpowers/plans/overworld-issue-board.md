@@ -77,7 +77,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 **Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
 **Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after, and the [fight in place](../reports/tv-drawing-polish/ow08-fight-in-place-after.png) from an `ARCBOX_STAGE=1` run. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
-### OW-09 · The ford's ground looks soft and blotchy · `in progress on ford-rework; bridge installed, crisp ground concept awaits owner`
+### OW-09 · The ford's ground looks soft and blotchy · `in progress on ford-rework; bridge installed, native ground pixel/TV review awaits owner`
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
@@ -1122,3 +1122,14 @@ Owner approved the native bridge and connected approaches, then requested ramps 
 
 
 **#82 bridge verification complete:** all 6,779 .NET and 517 phone tests pass, with a zero-warning build. The strict force (six heroes) and parley (four heroes, normal 2.5-second dialogue) chapter checks both reach the card and walk afterward. Both exports are deterministic. Four-hero force balance and the separate crisp-ground concept remain for owner review. [Final receipts](../reports/2026-11-05-ford-rework/integration/validation.json).
+
+
+### #82 ground concept approved; native pixel/TV review ready
+
+Owner: “Approve ground concept”. The native terrain pass now proposes nine 128×128 tops and one 128×32 cliff side,
+at the same 32 source pixels per tile as the town kit. Clustered opaque boundaries replace feathering only in the
+isolated candidate. Fifty-six west-bank grass cells become matching charred-root ground with equivalent fuel;
+all 19,200 world cells preserve height, collision, flags and fuel in all three bridge states. No enemy numbers,
+rewards or objectives change. All 2,852 presentation tests pass; host build has zero warnings/errors. Native Godot
+world, real-encounter battle and TV overview pairs are [ready for pixel/TV approval](../reports/2026-11-05-ford-rework/ground-art/README.md).
+Installed content is unchanged until approval. No extra credits: Scenario remains 65 CU, native/PixelLab zero.

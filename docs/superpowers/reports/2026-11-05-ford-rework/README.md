@@ -9,8 +9,10 @@ The owner approved the native bridge and connected approaches. The [installed br
 includes physical tile pieces, three story states, character slope sampling, saved-scene exports and paired battle results.
 All 13 authored road elevation changes have ramps. No encounter stats or rewards are retuned. All **6,779 .NET** and **517 phone** tests pass, with zero build warnings/errors; both chapter branches reach the card. Four-hero force balance is explicitly held for owner review.
 
-The separate [crisp-ground concept](../../../../tools/tactics-assets/concepts/ford-rework/ground/README.md) awaits approval
-before native terrain authoring. Its 13 CU bring the Scenario total to **65 CU**; native authoring and PixelLab spend remain zero.
+The owner approved the [crisp-ground concept](../../../../tools/tactics-assets/concepts/ford-rework/ground/README.md).
+The [native pixel and TV review](ground-art/README.md) now awaits approval before installation: nine top textures, one cliff side,
+and matched before/after views. All 2,852 presentation tests pass and all world tiles retain their mechanics.
+Scenario remains **65 CU**; native authoring and PixelLab spend remain zero.
 The concept and preview records below are historical checkpoints, retained as provenance.
 
 ## Approved concept: revision 2

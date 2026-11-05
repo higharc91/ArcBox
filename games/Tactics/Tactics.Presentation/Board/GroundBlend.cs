@@ -45,6 +45,7 @@ public static class GroundBlend
     private static readonly Lazy<float[]> HighResolutionNoise = new(() => BuildNoise(Size * 2, NoiseCells * 2));
 
     private static readonly Lazy<byte[]>[] Masks = [.. Enumerable.Range(0, 16).Select(mask => new Lazy<byte[]>(() => Build(Ways[mask % 8], mask < 8 ? 1 : Tight, Size, Tiles, Noise.Value)))];
+    private static readonly Lazy<byte[]>[] ClusteredMasks = [.. Enumerable.Range(0, 16).Select(mask => new Lazy<byte[]>(() => BuildClustered(Ways[mask % 8], mask < 8 ? 1 : Tight)))];
     private static readonly Lazy<byte[]>[] HighResolutionMasks = [.. Enumerable.Range(0, 16).Select(mask => new Lazy<byte[]>(() => BuildSoft(Ways[mask % 8], mask < 8 ? 1 : Tight, Size * 2, Tiles * 2, HighResolutionNoise.Value)))];
     private static readonly Lazy<byte[]>[] FordMasks = [.. Enumerable.Range(0, 16).Select(mask => new Lazy<byte[]>(() => BuildSoft(Ways[mask % 8], mask < 8 ? 1 : Tight, Size * 2, Tiles * 2, HighResolutionNoise.Value, FordSolid, FordSparse, FordWobble)))];
 
@@ -140,13 +141,15 @@ public static class GroundBlend
     };
 
     /// <summary><paramref name="rgba"/>, a doubled top masked to what shows for <paramref name="way"/>, with alpha from the mask.</summary>
-    public static byte[] Masked(ReadOnlySpan<byte> rgba, int way, int span = Tiles)
+    public static byte[] Masked(ReadOnlySpan<byte> rgba, int way, int span = Tiles, bool clustered = false)
     {
         var texelCount = rgba.Length / sizeof(uint);
         var size = (int)Math.Sqrt(texelCount);
         if (size * size != texelCount || rgba.Length != texelCount * sizeof(uint))
             throw new ArgumentException("A blended top must be a square RGBA image.", nameof(rgba));
-        var mask = Mask(way, size, span);
+        if (clustered && (size != Size || span != Tiles))
+            throw new ArgumentException("Clustered edges require native 128-pixel tops across four tiles.", nameof(rgba));
+        var mask = clustered ? ClusteredMasks[way].Value : Mask(way, size, span);
         var masked = rgba.ToArray();
         var texels = MemoryMarshal.Cast<byte, uint>(masked.AsSpan());
         for (var i = 0; i < texels.Length; i++)
@@ -188,6 +191,21 @@ public static class GroundBlend
                 var t = Math.Clamp((distance - solid) / (sparse - solid), 0, 1);
                 var fade = t * t * (3 - 2 * t);
                 mask[v * size + u] = (byte)MathF.Round((1 - fade) * byte.MaxValue);
+            }
+        return mask;
+    }
+
+    private static byte[] BuildClustered((int Dx, int Dy) way, float reach)
+    {
+        var mask = new byte[Size * Size];
+        for (var v = 0; v < Size; v += 2)
+            for (var u = 0; u < Size; u += 2)
+            {
+                // One complete source pixel at a time: a shaped, opaque boundary.
+                var shown = Across(u, v, way, Size, Tiles, Noise.Value, .34f) / reach < .42f;
+                var value = (byte)(shown ? 255 : 0);
+                mask[v * Size + u] = mask[v * Size + u + 1] = value;
+                mask[(v + 1) * Size + u] = mask[(v + 1) * Size + u + 1] = value;
             }
         return mask;
     }

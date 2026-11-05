@@ -14,6 +14,7 @@ parser.add_argument('--looks', default='bridge-west@106,61@110,64;bridge-east@10
 parser.add_argument('--seconds', type=int, default=40)
 parser.add_argument('--party-walk', action='store_true')
 parser.add_argument('--record', action='store_true')
+parser.add_argument('--battle', help='Capture the standalone battle demo instead of the world')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[5]
 report = args.report or (Path(args.pack).resolve().parents[3] / 'tv' / args.name)
@@ -35,12 +36,19 @@ try:
         cmd += ['--world-looks=' + args.looks, '--shots=' + str(report / 'shots'), '--quit-after=' + str(args.seconds)]
     else:
         cmd += ['--perf', '--quit-after=150']
+    if args.battle:
+        cmd = [c for c in cmd if not c.startswith(('--world-demo=', '--world-looks='))]
+        cmd += ['--tactics-demo=' + args.battle]
     with (report / 'tv.txt').open('w') as log:
-        started=time.monotonic();movie=None
+        started=time.monotonic();movie=None;battle_shot=False
         process=subprocess.Popen(cmd,env=env,stdout=log,stderr=subprocess.STDOUT)
         try:
             while process.poll() is None:
                 if time.monotonic()-started>190:raise TimeoutError('TV exceeded 190 seconds')
+                if args.battle and not battle_shot and time.monotonic()-started>15 and 'TACTICS screen' in (report/'tv.txt').read_text():
+                    subprocess.run(['ffmpeg','-y','-loglevel','error','-f','x11grab','-video_size','1280x720','-i',env['DISPLAY'],
+                        '-frames:v','1',str(report/'battle.png')],env=env,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                    battle_shot=True
                 if args.record and movie is None and 'textures ' in (report/'tv.txt').read_text():
                     movie=subprocess.Popen(['ffmpeg','-y','-loglevel','error','-f','x11grab','-video_size','1280x720','-framerate','30','-i',env['DISPLAY'],
                         '-c:v','libx264','-threads','2','-preset','ultrafast','-crf','24','-pix_fmt','yuv420p',str(report/'walk.mp4')],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -52,7 +60,9 @@ try:
     log_text = (report / 'tv.txt').read_text()
     if result.returncode or 'ERROR:' in log_text:
         raise RuntimeError(f'TV exit {result.returncode}; inspect {report}')
-    if args.mode == 'views':
+    if args.battle:
+        if not (report/'battle.png').is_file():raise RuntimeError('Missing battle capture')
+    elif args.mode == 'views':
         for shot in ('world-bridge-west.png', 'world-bridge-east.png'):
             if not (report / 'shots' / shot).is_file():
                 raise RuntimeError('Missing TV view: ' + shot)

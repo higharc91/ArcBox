@@ -2,7 +2,7 @@
 
 Owner-approved native bridge art is installed on `ford-rework` for [#82](https://github.com/higharc91/ArcBox/issues/82).
 The owner also requested ramps at every authored road elevation change and characters that follow their actual slopes.
-The separate crisp-ground concept is [awaiting approval](../../../../../tools/tactics-assets/concepts/ford-rework/ground/README.md).
+The separate crisp-ground concept is approved; its [native pixel/TV review](../ground-art/README.md) awaits installation approval.
 
 ## What is installed
 

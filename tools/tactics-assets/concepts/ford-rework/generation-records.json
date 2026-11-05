@@ -8,7 +8,7 @@
     "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
     "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
   },
-  "status": "Approved bridge and all-road ramps installed; character motion verified; ground concept awaits approval",
+  "status": "Bridge installed; ground concept approved; native ground pixel and TV review awaits owner",
   "concepts": [
     {
       "id": "environment_ford_bridge_fortified",
@@ -295,7 +295,7 @@
       "bytes": 6394235
     }
   ],
-  "current_review": "ground/ground-concept.png",
+  "current_review": "ground/art-review.jpg",
   "pixel_stage_provider": "Local deterministic native town/prop tools",
   "pixel_stage_authorization": {
     "user_message": "Use native art tools",
@@ -327,7 +327,16 @@
   ],
   "ground_concept": {
     "receipt": "ground/generation-records.json",
-    "approval": "awaiting owner",
+    "approval": "approved: Approve ground concept",
     "production_ground_changed": false
+  },
+  "ground_native_art": {
+    "approval": "awaiting owner pixel/TV approval",
+    "production_installed": false,
+    "source": "tools/tactics-assets/parts/ford_terrain.py",
+    "tops": 9,
+    "sides": 1,
+    "credits": 0,
+    "report": "docs/superpowers/reports/2026-11-05-ford-rework/ground-art/README.md"
   }
 }

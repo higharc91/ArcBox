@@ -251,7 +251,7 @@ internal sealed class BoardPainter
         }
         var doubled = DitherTexels.Always(art.GetData(), art.GetWidth(), art.GetHeight());
         art.Dispose();
-        var masked = GroundBlend.Masked(doubled, image.Blend, image.Span);
+        var masked = GroundBlend.Masked(doubled, image.Blend, image.Span, image.ClusteredEdges);
         var size = (int)Math.Sqrt(masked.Length / sizeof(uint));
         return _tops[image.Key] = Upload(Image.CreateFromData(size, size, false, Image.Format.Rgba8, masked));
     }
