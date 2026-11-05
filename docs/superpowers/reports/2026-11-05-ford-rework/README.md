@@ -3,6 +3,24 @@
 Issue [#82](https://github.com/higharc91/ArcBox/issues/82), branch `ford-rework`.
 Based on merged main `da796d97f5613732b6446e4a66b7b4d4c719b81b`.
 
+## Current review: revision 2
+
+The owner found revision 1's differences too subtle. The new
+[comparison](../../../../tools/tactics-assets/concepts/ford-rework/revision-2-review.jpg)
+uses large state silhouettes with matching architecture: closed spiked defenses
+and tall hides; smashed defenses and localized scorch marks; orderly open gates,
+rolled hides and a pale grain shelter. All three read distinctly at approximately
+200 pixels per state. Revision 1 remains archived as provenance, not approved art.
+
+One new Scenario comparison image cost **13 CU**; total concept spend is **52 CU**.
+Its original 3168×1344 PNG, prompt, references, job/asset IDs and SHA-256 are recorded
+in the concept batch. The labels on the JPG are review annotations only.
+The revised near-approach gates and scorch dressing are design proposals; final
+module placement must preserve the stamp's route and both story outcomes.
+Owner approval is still pending before production pixel art or map changes.
+No runtime code changed in this revision; the baseline test results below belong
+to the preceding checkpoint, and have not been rerun for this art-only revision.
+
 ## Scope and approval boundary
 
 The first stage proposes one continuous Warden stone-and-timber bridge in three

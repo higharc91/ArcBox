@@ -597,7 +597,9 @@
     "records": "ashen-ford-secrets/generation-records.json"
   },
   "issue82": {
-    "status": "Three bridge concepts complete; awaiting owner concept approval",
-    "records": "ford-rework/generation-records.json"
+    "status": "Revision 1 changes too subtle per owner; revision 2 awaiting concept approval",
+    "records": "ford-rework/generation-records.json",
+    "current_review": "ford-rework/revision-2.png",
+    "revision_2_prompt": "ford-rework/revision-2-run.json"
   }
 }

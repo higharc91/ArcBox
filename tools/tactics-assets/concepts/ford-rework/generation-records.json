@@ -8,7 +8,7 @@
     "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
     "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
   },
-  "status": "Three bridge concepts complete; awaiting owner concept approval",
+  "status": "Revision 1 changes too subtle per owner; revision 2 awaiting concept approval",
   "concepts": [
     {
       "id": "environment_ford_bridge_fortified",
@@ -215,20 +215,81 @@
     }
   ],
   "owner_approval": {
-    "status": "pending"
+    "status": "pending",
+    "revision_1_feedback": "The differences are not really noticeable, to be honest.",
+    "current_review": "revision-2.png"
   },
   "cost": {
     "planned_images": 3,
-    "actual_total_cu": 39,
+    "actual_total_cu": 52,
     "quoted_cu_per_image": 13,
-    "estimated_total_cu": 39
+    "estimated_total_cu": 39,
+    "initial_actual_cu": 39,
+    "revision_2_actual_cu": 13
   },
   "seed": "Not exposed by this model schema; prompts, references, model/job/asset IDs and output hashes retained.",
   "review_notes": [
     "The fortified proposal uses three stone arch openings, rather than the initial two-opening brief. Force and parley retain this three-opening structure. Final dimensions remain a proposal for owner review.",
     "The construction-joint inset shows an open timber frame for explanation only. Production deck tiles must be continuously filled and walkable.",
     "People, cart, parchment, inset frames and atmospheric river painting are concept context, not sprite content.",
-    "Terrain shown in concepts is not the part 2 ground-art approval."
+    "Terrain shown in concepts is not the part 2 ground-art approval.",
+    "Revision 2 deliberately emphasizes big dressing silhouettes at a 200px-per-state review scale.",
+    "Revision 2 reframes the bridge vertically and places conspicuous gate leaves at the near approach as well as the gatehouse checkpoint; final module positions must fit the approved stamp and leave the post-battle route clear.",
+    "Blackening is a visual proposal for force aftermath, not a new scripted fire or balance change."
   ],
-  "collection_id": "col_gJqxhKM8iejSw98UodkpcuUz"
+  "collection_id": "col_gJqxhKM8iejSw98UodkpcuUz",
+  "revisions": [
+    {
+      "owner_feedback": "The differences are not really noticeable, to be honest.",
+      "scope": {
+        "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+        "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
+      },
+      "parameters": {
+        "prompt": "Create a revised production concept comparison sheet for Wardenflame. The previous state changes were much too subtle: the three states MUST read differently immediately as 200-pixel-wide thumbnails. Use reference image 1 ONLY as the fixed underlying architecture and restrained painted material style: the exact same low three-arched Warden stone bridge, continuous timber deck, stone parapets and small slate-roof gatehouse beside the far landing. Orthographic 2:1 isometric view, top-left light. Three equal LARGE separate panels from LEFT to RIGHT, same camera, same scale, same crop and same plain warm parchment background. Each panel shows the COMPLETE bridge and gatehouse with generous margins; eliminate scenic river valley, distant trees, tiny inset details, people and carts so the bridge occupies most of each panel. Narrow strip of water under the bridge only. No text, labels, frames, UI, symbols, letters or watermark. LEFT: SKARROW FORTIFIED. A conspicuous improvised checkpoint: tall ragged rusty-brown hide screens lashed to wooden posts along the far half of the parapets, well ABOVE parapet height; a broad dark timber spiked barricade visibly CLOSED ACROSS THE FAR LANDING road, waist to chest high; clusters of long sharpened stakes fanning out either side of the approach. One large patched dark brown hide awning projects from gatehouse side, visibly different in silhouette from the bare stone building. Preserve a visible broad clear deck before the closed checkpoint. Poor practical materials, not an evil skull fortress. MIDDLE: AFTER FORCE. The SAME stone bridge, piers, full safe timber walking deck and gatehouse. Every tall hide screen has been ripped down: exposed short snapped posts, no high screens. The barricade is visibly smashed into one large recognizable heap of crossbeams and broken stakes pushed fully off the road beside the gatehouse. The large side awning is collapsed into the debris; one torn dark hide hangs DOWN outside the parapet. The gatehouse roof edge and side wall carry a distinct localized charcoal-black scorch patch, no active fire; main roof structure remains intact. Clear uninterrupted cart lane across the entire bridge. No new buildings, missing parapets, broken load-bearing bridge, gore, bodies, victory banners or magical repairs. RIGHT: AFTER PARLEY AND THE HOTHEAD FIGHT. The SAME stone bridge, piers, unbroken deck and gatehouse, undamaged. The tall screens are removed and tied as bulky hide rolls LOW against the outside parapet. The two large timber checkpoint leaves stand OPEN and folded back along the banks, visibly upright, orderly and out of the lane. The big hide awning beside the gatehouse is re-tied into a neat pale tan shelter, with three modest tied grain sacks underneath; no overflowing harvest. Stakes neatly bundled on the verge, no broken pile, no scorch marks. Clear uninterrupted cart lane. The silhouette should read as an open staffed checkpoint or shared crossing without needing characters or text. Main architecture MUST stay identical across the three panels: same three arches, same deck length and width, same gatehouse location. Make the CLOSED SPIKED FORTIFICATION / SMASHED REMNANTS / ORDERLY OPEN GATE and PALE SIDE SHELTER large bold forms, not tiny dressing details. Strong readable material planes in warm grey stone, dark oak, slate and hide, restrained grounded humane tactical fantasy. Distinct states must survive downscaling; no fog, soft blur, cosmetic-only recolours or big surrounding landscape.",
+        "referenceImages": [
+          "asset_US8C4mCjEVnWbi59vRauLHhr"
+        ],
+        "aspectRatio": "21:9",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1
+      },
+      "quote": {
+        "dry_run": true,
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job": {},
+        "creativeUnitsCost": 13,
+        "creativeUnitsDiscount": 0
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_3ytBatGzzgkJqSeNbJygQWYx",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_3ytBatGzzgkJqSeNbJygQWYx' (one call waits on up to 32 jobs)."
+      },
+      "id": "state-comparison-revision-2",
+      "completion": {
+        "jobId": "job_3ytBatGzzgkJqSeNbJygQWYx",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-05T15:57:12.295Z",
+        "updatedAt": "2026-11-05T15:57:59.992Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_L9XjeDEC2BrGdxB6odFoqB7n"
+        ],
+        "cuCost": 13
+      },
+      "output_file": "revision-2.png",
+      "dimensions": [
+        3168,
+        1344
+      ],
+      "sha256": "df20f08a673b17104151d49491132d20e0cd2c62964b3fcd4dc29e7285b96b2a",
+      "bytes": 6394235
+    }
+  ],
+  "current_review": "revision-2.png"
 }

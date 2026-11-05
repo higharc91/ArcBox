@@ -1086,3 +1086,12 @@ and balance are unchanged. The existing #78 OW-08 fix remains in place.
 Fresh native ford/ash baseline views and the ground-source diagnosis are saved.
 Three crossing/world-plan tests and all 49 overlay picture tests pass.
 See [the checkpoint report](../reports/2026-11-05-ford-rework/README.md).
+
+### Issue #82 revision 2
+
+The owner found the first bridge state differences too subtle. A new comparison
+uses tall hide screens and a closed spiked barricade, smashed defenses and localized
+scorching after force, and orderly open gates with a pale grain shelter after parley.
+The state silhouettes remain legible at 200px per panel. Added cost: 13 Scenario CU;
+concept total: 52 CU. See `tools/tactics-assets/concepts/ford-rework/revision-2-review.jpg`.
+Concept approval remains pending; no production art, maps or encounter rules changed.
