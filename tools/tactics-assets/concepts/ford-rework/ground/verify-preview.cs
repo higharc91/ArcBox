@@ -10,6 +10,17 @@ var before=RulesPack.Load([Path.Combine(beforeRoot,"rules")],ArtManifests.Load(b
 var after=RulesPack.Load([Path.Combine(afterRoot,"rules")],ArtManifests.Load(afterRoot));
 var art=ArtIndex.Load(afterRoot);
 void Need(bool value,string message){if(!value)throw new InvalidDataException(message);}
+var checkedMaps=0;
+foreach(var (id,a) in before.Maps)
+{
+    var b=after.Maps[id];
+    for(var y=0;y<a.Height;y++)for(var x=0;x<a.Width;x++)
+    {
+        var p=new Tile(x,y);Need(a[p].Height==b[p].Height&&a[p].Flags==b[p].Flags,$"Map height/flags changed: {id}");
+        Need(before.Environment.IsFuelMaterial(a.Materials[a[p].Material])==after.Environment.IsFuelMaterial(b.Materials[b[p].Material]),$"Map fuel changed: {id}");
+    }
+    checkedMaps++;
+}
 foreach(var id in new[]{"river_crossing","ford_assault"})
 {
     Need(JsonSerializer.Serialize(before.Encounters[id])==JsonSerializer.Serialize(after.Encounters[id]),"Encounter definition changed");
@@ -39,4 +50,4 @@ var terrain=new BoardTerrain(world.Map,null);var worldPlan=WorldPlan.Build(terra
 Need(worldPlan.Blocks.Length==80,"World blocks missing");
 Need(art.Texture(new ArtRef("ash_ford","roots")) is {ClusteredEdges:true,Span:4},"Native edge profile missing");
 Need(!ArtIndex.Load(beforeRoot).Texture(new ArtRef("ash_ford","charred"))!.ClusteredEdges,"Installed art unexpectedly opted in");
-Console.WriteLine(JsonSerializer.Serialize(new{rulesLoaded=true,battlePlans=2,worldBlocks=80,bridgeStates=3,allWorldTilesMechanicallyEquivalent=true,installedGroundUnchanged=true}));
+Console.WriteLine(JsonSerializer.Serialize(new{rulesLoaded=true,checkedMaps,battlePlans=2,worldBlocks=80,bridgeStates=3,allWorldTilesMechanicallyEquivalent=true,installedGroundUnchanged=true}));

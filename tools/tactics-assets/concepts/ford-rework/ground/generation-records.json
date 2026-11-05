@@ -79,5 +79,16 @@
     "palette": "wardenflame-style.json#palettes.ashen_ford",
     "mechanics_equivalent": true,
     "hashes": "native-art/assets.json"
+  },
+  "native_green_revision": {
+    "status": "Ready for owner visual review; not installed",
+    "request": "Add greens around farms and water while retaining charcoal ash and dry hills",
+    "authoring": "parts/ford_terrain.py",
+    "preview": "ground/render-preview.py",
+    "art": "green-revision/native-art",
+    "review": "docs/superpowers/reports/2026-11-05-ford-rework/ground-art/green-revision/README.md",
+    "native_spend": 0,
+    "maps_checked": 18,
+    "matched_locations": 10
   }
 }

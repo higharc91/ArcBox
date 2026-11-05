@@ -1,5 +1,9 @@
 # Crisp ground: native pixel and TV approval
 
+**Latest revision:** [farm and riverbank greens](green-revision/README.md), requested after the wider map review.
+These pairs compare the earlier brown native preview against the revised olive farm turf and local bankside greenery.
+The older captures below remain as the original checkpoint.
+
 The owner approved the ground concept: **“Approve ground concept”**. This checkpoint authors that direction with the
 native terrain canvas and palette. Installed terrain and rules remain unchanged until the pixel/TV approval required by
 [#82](https://github.com/higharc91/ArcBox/issues/82).
