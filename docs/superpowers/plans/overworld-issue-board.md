@@ -115,8 +115,8 @@ Merged in #70. Check the remake fix and the Chapter 1 gold source on the TV and 
 ### OW-32 · Rest and recovery · `integrated`, issue #71
 Camp, inn and temple implementations from `rest-and-recovery` are merged into `npcs-and-quests` as an issue #73 prerequisite. Main has not been changed by this integration. NPC conversations will reuse these services.
 
-### OW-33 · Hidden things · `doing`, issue #81 part 1
-Ashen Ford now has a Survival reed-bank track, an Investigation cellar hatch revealed by a draft, a small cellar store, and bank, bridge, and Southfield notices. The narrator clips, Search and passive checks, route test, and TV stand-ins are present. Final full-suite verification remains; the interactables design §7.8 records the general renderer and unseen-trap decisions.
+### OW-33 · Hidden things · `done`, issue #81 part 1 (stand-in art)
+Ashen Ford has a Survival reed-bank track, an Investigation cellar hatch revealed by a draft, a small cellar store, and bank, bridge, and Southfield notices. Narrator clips, Search/passive checks, route tests, and TV stand-ins are present. Final committed-state verification on 2026-11-05: all 6,084 .NET tests and 504 phone tests passed; the full solution built with zero warnings/errors. The live force route won its fight, reached Chapter 1's end card, and walked afterward; the gated claw-mark narrator clip played after Maud. Optional live parley verification was stopped after two River Crossing defeats, so that run did not reach its card; the full suite's Chapter 1 companion cases passed. [Evidence and limits](../reports/2026-11-04-ashen-ford-secrets/verification/README.md). No PR opened. OW-34/part 2 art remains separate; interactables design §7.8 still records the general renderer and unseen-trap decisions.
 
 ### OW-34 · Places still short of the lore · `todo`
 No granary building, because the kit has none: (42,70) is sacks and crates. Maud's hut is a plain cottage with no charms. Both are art requests, so ask before generating.

@@ -1,0 +1,59 @@
+{
+  "verifiedAt": "2026-11-05",
+  "branch": "ashen-ford-secrets",
+  "sourceCommit": "36e4530cbfc3ed8fe2945ef00c86f05942bc5253",
+  "codeOrContentChanged": false,
+  "dotnet": {
+    "projects": 10,
+    "passed": 6084,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "duration": "10m 16s 094ms"
+  },
+  "solutionBuild": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "phoneTests": {
+    "files": 24,
+    "passed": 504,
+    "exitCode": 0
+  },
+  "phoneBuild": {
+    "exitCode": 0,
+    "bundleSizeAdvisory": true
+  },
+  "liveForce": {
+    "exitCode": 0,
+    "chapterCard": true,
+    "walkingAfterCard": true,
+    "linesSaidOnce": 94,
+    "fightsWon": 1,
+    "gatedNoticeAudio": "af_bank_claw_marks.eb0e3450.ogg"
+  },
+  "liveParley": {
+    "status": "incomplete",
+    "exitCode": 130,
+    "chapterCard": false,
+    "fightsLost": 2,
+    "recoveryAndRetry": true,
+    "reason": "Deliberately stopped before a third fight after two defeats; not claimed as an end-card pass."
+  },
+  "prOpened": false,
+  "part2Art": "separate",
+  "reports": {
+    "README.md": 4432,
+    "chapter-force-card.png": 453659,
+    "chapter-force-tv.txt": 119502,
+    "chapter-force-walking-after.png": 855181,
+    "chapter-force.txt": 13044,
+    "chapter-parley-tv.txt": 144738,
+    "chapter-parley.txt": 11110,
+    "dotnet-suite.txt": 4209,
+    "solution-build.txt": 3036,
+    "web-build.txt": 9681,
+    "web-tests.txt": 31167
+  }
+}
