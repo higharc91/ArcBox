@@ -1,0 +1,13 @@
+
+> wardenflame-imagegen-townsfolk@1.0.0 build-rook
+> node rook/build-review.cjs && node rook/build-portraits.cjs && node rook/build-closeup.cjs
+
+{"atlas":{"width":1728,"height":768,"uncompressedMiB":5.0625,"sha256":"74bf2987f7a5da9563c9834c022f4de1a6a2d15126a7f402cd5d407adea6ba53"},"footDrift":{"south":{"idle":0,"walk":0,"talk":0},"south-west":{"idle":0,"walk":0.5,"talk":0},"west":{"idle":0,"walk":1,"talk":0},"north-west":{"idle":0,"walk":0,"talk":0},"north":{"idle":0,"walk":0.5,"talk":0},"north-east":{"idle":0,"walk":1,"talk":0.5},"east":{"idle":0,"walk":0.5,"talk":0},"south-east":{"idle":0,"walk":0.5,"talk":0.5}},"productionInstalled":false}
+{"portraits":["idle","hurt","happy","angry","sad","surprised"],"size":40,"uniformScale":0.07072691552062868,"reviewOnly":true}
+{"facing":"south-east","sequence":["idle","walk","walk","talk"],"nearestNeighbourScale":4,"seconds":4.8}
+
+> wardenflame-imagegen-townsfolk@1.0.0 verify-rook
+> node rook/verify-review.cjs && node rook/verify-receipts.cjs
+
+{"result":"PASS","frames":144,"directions":8,"colors":96,"portraits":6,"maximumFootDriftWorld":1}
+{"result":"PASS","generationRecords":12,"completionImageToolCalls":9,"boundReviewAssets":19,"nativeTvHash":"PASS","pixelLabSpend":0}

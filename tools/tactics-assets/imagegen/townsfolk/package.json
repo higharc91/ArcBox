@@ -15,7 +15,9 @@
     "build-dagna": "node dagna-holt/build-review.cjs && node dagna-holt/build-portraits.cjs && node dagna-holt/build-closeup.cjs",
     "verify-dagna": "node dagna-holt/verify-review.cjs && node dagna-holt/verify-receipts.cjs",
     "build-celandine": "node celandine-marrowby/build-review.cjs && node celandine-marrowby/build-portraits.cjs && node celandine-marrowby/build-closeup.cjs",
-    "verify-celandine": "node celandine-marrowby/verify-review.cjs && node celandine-marrowby/verify-receipts.cjs"
+    "verify-celandine": "node celandine-marrowby/verify-review.cjs && node celandine-marrowby/verify-receipts.cjs",
+    "build-rook": "node rook/build-review.cjs && node rook/build-portraits.cjs && node rook/build-closeup.cjs",
+    "verify-rook": "node rook/verify-review.cjs && node rook/verify-receipts.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",

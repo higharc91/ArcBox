@@ -408,3 +408,40 @@ No rules/balance/phone changes. Last native four-party peaks328.99 /192.37MiB,
 not rerun for review-only files. Include existing recorded voice in future reviews.
 Report: docs/superpowers/reports/2026-11-03-townsfolk-art/rook-imagegen/report.md.
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
+
+
+## Latest checkpoint — Rook completed set awaiting finished-set/TV approval
+
+Appearance and existing voice approved: “sounds and looks good”. Eight real
+idle/walk/talk facings, six40×40 portraits, phone-friendly close-up and19.6-second
+voiced native-TV review are complete under tools/tactics-assets/imagegen/townsfolk/
+rook/. Reuse approved concept/appearance and existing Umbriel recording; no new
+speech. Do not regenerate completed art or request appearance approval again.
+
+Atlas1728×768 /5.0625MiB,96×96 frame, anchor[48,84], scale0.5, adult72/36.144
+selected source cells/slots, no held replacements. Shared96-colour sprite palette,
+binary alpha, fixed per-direction grid transform, no mirroring or per-frame shifts.
+All native bounds/scale/foot/unique-motion/portrait checks pass, max vertical drift
+1 world pixel. Nine completion image calls plus three prior appearance calls;
+zero PixelLab spend/purchases. Raw exports/requests/inputs/hashes retained;
+opaque colour-key exports avoid the prior alpha defect.
+
+Typed body/portrait aliases bandit_captain/rook, six moods, original quest-gated
+presence and bark stop/hold/resume pass.154 focused presentation tests pass,
+host/test-project Debug builds0warnings/errors. Four actual heroes pass strict
+open/crossing/roster replacement/restoration/upload/release budget checks in both
+regions:332.20 /192.37MiB below512. Native TV at104,104 dock, party102,104; a private
+review-only presence clone shows gated Rook without changing original flags or
+production rules. Never edit linked review files.
+
+Offline atlas/portrait/GIF rebuild preserves19 bound review hashes +native TV
+still; all12 generation receipts verify. Pending installer rejects before writes.
+Production unchanged:210288327bytes /4953files, inventory SHA256
+87870feadf6bf4355fc9187ff04997e7fa505215927bc29f938ef0a5424f96c4.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/rook-imagegen/report.md.
+
+**Next: owner finished-set/TV approval before exact Rook installation**, then
+production checks. Maud appearance remains pending independently. Rules/lore/
+balance/phone contracts unchanged. Include recorded voices in future reviews.
+Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
+Earlier Rook pending-appearance notes are historical.

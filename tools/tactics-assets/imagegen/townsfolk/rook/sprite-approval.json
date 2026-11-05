@@ -2,10 +2,10 @@
   "character": "Rook",
   "characterId": "rook",
   "presetReference": "bandit_captain",
-  "stage": "appearance_candidate_pending_owner_review",
+  "stage": "completed_review_pending_owner_full_set_tv_approval",
   "date": "2026-11-05",
   "tool": "image_gen.imagegen",
-  "imageToolCalls": 3,
+  "imageToolCalls": 12,
   "candidate": "candidate-1-export.png",
   "candidateSha256": "236eb5325a722e8b934c4427bd7a010d45379170ffa891bb3337d2f6264a874e",
   "reviewPreview": "candidate-1-preview.png",
@@ -14,14 +14,59 @@
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
   "productionInstalled": false,
-  "animationApproval": "pending_appearance_approval",
+  "animationApproval": "appearance_approved_animation_work_completed",
   "fullSetTvApproval": "pending",
   "reviewNotes": [
-    "Approved Rook concept reused, not regenerated; appearance proposal does not establish gender/species/age as new canon.",
-    "Eight planted views; southwest corrected and ledger strap/hip corrected in rear views. Native-grid/body-size/palette/equipment occlusion/anchor QA remain before motions.",
-    "Two earlier transparent exports retained as superseded technical sources; opaque magenta export and deterministic colour-key preview selected. Native edge/palette cleanup remains, including residual colour-key fringe.",
-    "Include existing recorded town bark; no new speech.",
-    "Owner appearance approval before motions/portraits, separate finished-set/TV gate before installation.",
-    "Maud appearance approval remains outstanding; owner requested moving to next character."
-  ]
+    "Owner approved appearance and existing recorded voice: sounds and looks good.",
+    "Eight real idle/walk/talk directions,144 selected source cells, six40x40 portraits. No mirroring/per-frame recentering; native grid, palette, alpha, body-size, anchors and drift checks pass.",
+    "Native TV dock review uses an isolated presence clone, preserving original Rook quest gates and every production file. Original quest visibility and bark hold/resume checks pass.",
+    "Full-set/TV approval remains pending before installation.",
+    "Previous appearance exports retained; opaque magenta sources are colour-keyed deterministically before import.",
+    "Maud appearance approval remains outstanding."
+  ],
+  "ownerAppearanceApproval": {
+    "quote": "sounds and looks good",
+    "date": "2026-11-05",
+    "scope": "Approve Rook appearance and existing recorded voice; authorize animation and portrait work. Finished-set/TV approval remains separate."
+  },
+  "ownerVoiceApproval": {
+    "quote": "sounds and looks good",
+    "sample": "voice-sample.mp3"
+  },
+  "nativeAtlasValidated": true,
+  "completedSet": {
+    "status": "pending_owner_full_set_tv_approval",
+    "nativeFrameSlots": 144,
+    "selectedSourceCells": 144,
+    "curatedHeldSlots": 0,
+    "portraits": 6,
+    "completionImageToolCalls": 9,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": false,
+    "sha256": {
+      "review_rook.png": "74bf2987f7a5da9563c9834c022f4de1a6a2d15126a7f402cd5d407adea6ba53",
+      "review-sprite.json": "7e0627be8df249bff7c395c233e56f49d378bc1d40848397a56ff84d3e1db055",
+      "palette.json": "8781a921dac0e0b116ceac7dd91ae7de2258417e4b7488be4bf1ff9c13a12676",
+      "atlas-validation.json": "ee0d2da91d7e141ea2635a9a32d1e93c9d42c7d0e0480662c466cd2ca8fdf6ec",
+      "portraits-validation.json": "e5c376fc0a469a4d6f905e15283f21d4089764f4ae683a73ca51c8102b187898",
+      "review-validation.json": "126abd066bcb2036ae1cff7a4022696c3ad7c7136ad1508260cab9f919678828",
+      "rook-directions-review.png": "eb2f87633c29f2e26ecf11791fad3d1191be6de05343f55b087cb45eb2818b18",
+      "rook-portraits-review.png": "d544166353bf28e9cb514cac864b353749e07cac555af76762d311e01eb28cef",
+      "rook-closeup-review.gif": "e361cffa05db18e946e4a44882bfe31b3a4672ebf1c6bf0ed7c0f783434fdf98",
+      "rook-finished-review.mp4": "4b92c51a3eac0212e50438c5594e286af7d03d9bef8994e9146ec4f13b1c9852",
+      "rook-eight-direction-idle.gif": "ccf2b998762a6c6f788ba6c050f6cbc1f53cbfee13a0a3f766e71ec8af230c8a",
+      "rook-eight-direction-walk.gif": "f8ea21ae9ebeec2ed2872a26018be50dec47afdccd0f0d6a7b8d29fc28073617",
+      "rook-eight-direction-talk.gif": "df338e15cc1410b78e85e2aec892350c7bae22d491d6f032c648dc0b94076c26",
+      "portraits/rook_idle.png": "8fe71422ec0557be975e1d9a2da89eec29694822f8699ebb4039338dde1f437f",
+      "portraits/rook_hurt.png": "2f9d4ddd5b42b62f81654f32e33c08a8340691d5816e6b879eeae769df1406c7",
+      "portraits/rook_happy.png": "95e1474975e293517e8b7826d6b36490269c9b7ac78adeb8331556144dbb382f",
+      "portraits/rook_angry.png": "915ea966d9a7a44796184363615c03000080c71c046756c14e7bc523b32d9988",
+      "portraits/rook_sad.png": "fd704fb9212c06cf34e233dcbed531c5a95eb8abaaf8ea8e824b0608f76c80a6",
+      "portraits/rook_surprised.png": "cdbf56c52bc3f17ac9a8263fb3a84a9c4b30ef65887900dd783ede81cbf2c16f"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/rook-imagegen/ashen_ford-shots/world-rook.png",
+      "sha256": "710f234b7e183289f54c097720c315bf5d07d222ffbb22537d00f3ebf3b41aab"
+    }
+  }
 }
