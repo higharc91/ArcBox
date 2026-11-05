@@ -5,7 +5,7 @@
 
  RUN  v4.1.12 /workspace/ArcBox/web/play
 
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -30,7 +30,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -55,7 +55,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -80,7 +80,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -110,4 +110,3 @@ AggregateError:
       Tests  80 passed (80)
    Start at  14:41:50
    Duration  8.36s (transform 2.66s, setup 0ms, import 2.07s, tests 4.84s, environment 936ms)
-

@@ -5,7 +5,7 @@
 
  RUN  v4.1.12 /workspace/ArcBox/web/play
 
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -41,7 +41,7 @@ DOMException [AbortError]: The operation was aborted.
     at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
     at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
     at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -66,7 +66,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -91,7 +91,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -116,7 +116,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -141,7 +141,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -166,7 +166,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -356,7 +356,7 @@ DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3
     at HTMLDivElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
     at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
     at L (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:1905)
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1339:18)
     at afterConnectMultiple (node:net:1942:7) {
   code: 'ECONNREFUSED',
@@ -397,4 +397,3 @@ DOMException [AbortError]: The operation was aborted.
       Tests  508 passed (508)
    Start at  14:34:59
    Duration  70.05s (transform 6.56s, setup 0ms, import 13.49s, tests 27.81s, environment 17.79s)
-
