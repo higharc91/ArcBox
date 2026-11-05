@@ -2,7 +2,7 @@
   "character": "Rook",
   "characterId": "rook",
   "presetReference": "bandit_captain",
-  "stage": "completed_review_pending_owner_full_set_tv_approval",
+  "stage": "approved_installed",
   "date": "2026-11-05",
   "tool": "image_gen.imagegen",
   "imageToolCalls": 12,
@@ -13,14 +13,14 @@
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
-  "productionInstalled": false,
+  "productionInstalled": true,
   "animationApproval": "appearance_approved_animation_work_completed",
-  "fullSetTvApproval": "pending",
+  "fullSetTvApproval": "owner_approved",
   "reviewNotes": [
     "Owner approved appearance and existing recorded voice: sounds and looks good.",
     "Eight real idle/walk/talk directions,144 selected source cells, six40x40 portraits. No mirroring/per-frame recentering; native grid, palette, alpha, body-size, anchors and drift checks pass.",
     "Native TV dock review uses an isolated presence clone, preserving original Rook quest gates and every production file. Original quest visibility and bark hold/resume checks pass.",
-    "Full-set/TV approval remains pending before installation.",
+    "Owner approved the finished set/TV review; exact atlas and six portraits are now installed.",
     "Previous appearance exports retained; opaque magenta sources are colour-keyed deterministically before import.",
     "Maud appearance approval remains outstanding."
   ],
@@ -35,14 +35,14 @@
   },
   "nativeAtlasValidated": true,
   "completedSet": {
-    "status": "pending_owner_full_set_tv_approval",
+    "status": "approved",
     "nativeFrameSlots": 144,
     "selectedSourceCells": 144,
     "curatedHeldSlots": 0,
     "portraits": 6,
     "completionImageToolCalls": 9,
     "pixelLabCreditsSpent": 0,
-    "productionInstalled": false,
+    "productionInstalled": true,
     "sha256": {
       "review_rook.png": "74bf2987f7a5da9563c9834c022f4de1a6a2d15126a7f402cd5d407adea6ba53",
       "review-sprite.json": "7e0627be8df249bff7c395c233e56f49d378bc1d40848397a56ff84d3e1db055",
@@ -67,6 +67,20 @@
     "tv": {
       "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/rook-imagegen/ashen_ford-shots/world-rook.png",
       "sha256": "710f234b7e183289f54c097720c315bf5d07d222ffbb22537d00f3ebf3b41aab"
+    }
+  },
+  "ownerFullSetApproval": {
+    "quote": "looks good. What's neext",
+    "date": "2026-11-05",
+    "scope": "Approve the completed animations, six portraits and voiced native TV review; install the exact bound set."
+  },
+  "productionValidation": {
+    "report": "docs/superpowers/reports/2026-11-03-townsfolk-art/rook-installed/report.md",
+    "focusedTests": 161,
+    "textureLimitMiB": 512,
+    "fourPartyPeakMiB": {
+      "ashen_ford": 332.203369140625,
+      "cinder_hollow": 192.373291015625
     }
   }
 }

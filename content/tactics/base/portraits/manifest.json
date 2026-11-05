@@ -360,12 +360,12 @@
       "surprised": "necromancer_surprised.png"
     },
     "bandit_captain": {
-      "idle": "bandit_captain_idle.png",
-      "hurt": "bandit_captain_hurt.png",
-      "happy": "bandit_captain_happy.png",
-      "angry": "bandit_captain_angry.png",
-      "sad": "bandit_captain_sad.png",
-      "surprised": "bandit_captain_surprised.png"
+      "idle": "rook_idle.png",
+      "hurt": "rook_hurt.png",
+      "happy": "rook_happy.png",
+      "angry": "rook_angry.png",
+      "sad": "rook_sad.png",
+      "surprised": "rook_surprised.png"
     },
     "cult_leader": {
       "idle": "cult_leader_idle.png",
@@ -583,6 +583,14 @@
       "angry": "celandine_angry.png",
       "sad": "celandine_sad.png",
       "surprised": "celandine_surprised.png"
+    },
+    "rook": {
+      "idle": "rook_idle.png",
+      "hurt": "rook_hurt.png",
+      "happy": "rook_happy.png",
+      "angry": "rook_angry.png",
+      "sad": "rook_sad.png",
+      "surprised": "rook_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

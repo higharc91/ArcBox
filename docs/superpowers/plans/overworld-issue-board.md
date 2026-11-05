@@ -669,3 +669,31 @@ production checks. Maud appearance remains pending independently. Rules/lore/
 balance/phone contracts unchanged. Include recorded voices in future reviews.
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
 Earlier Rook pending-appearance notes are historical.
+
+
+## Latest checkpoint — Rook approved and installed
+
+Owner full-set/TV approval: “looks good. What's neext”. Exact approved Rook atlas
+and six portraits installed; no regeneration. Both body/portrait aliases
+bandit_captain/rook pass.161 focused presentation tests pass, Debug/Release
+builds0warnings/errors. Typed production importer/source rects, original Rook
+contact/completion quest gates and bark stop/hold/resume pass. All19 review hashes
+and12 source receipts remain verified. Body SHA256
+74bf2987f7a5da9563c9834c022f4de1a6a2d15126a7f402cd5d407adea6ba53.
+
+Four actual party members pass strict production open/crossing/roster replacement/
+restoration/upload/release gates:332.20 /192.37MiB below512. Production uses no
+preview-presence clone; default demo correctly hides quest-gated Rook. Typed
+checks explicitly exercise real contact/completion flags. No rule changes.
+Cold pack210914068bytes /4960files, inventory SHA256
+0990d66b04817b51942e119dd35ecbb7273dcedcfa06144c53a2bc7e902f547a.
+All unrelated manifest data, rules/lore/balance/phone contracts unchanged.
+No new image/speech/PixelLab calls, credits or purchases.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/rook-installed/report.md.
+
+Next named appearance: Mother Skarrow (elderly goblin chief); reuse approved
+concept and existing recorded voice, respecting species proportions. Legacy
+generic goblin refresh remains outside scope. Maud appearance still awaits
+approval independently before motions/portraits. Do not regenerate completed art.
+Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
+Earlier pending-Rook approval notes are historical.

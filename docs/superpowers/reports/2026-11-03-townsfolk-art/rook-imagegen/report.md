@@ -1,5 +1,8 @@
 # Rook — completed directional art, portraits and voiced TV review
 
+Historical review checkpoint: the owner subsequently approved the full set and
+exact assets are now installed. Current production results: ../rook-installed/report.md.
+
 Owner appearance/voice approval: “sounds and looks good”. The approved concept
 and appearance were reused to finish eight real idle/walk/talk facings and six
 40×40 dialogue portraits. The complete set is ready for separate finished-set/TV

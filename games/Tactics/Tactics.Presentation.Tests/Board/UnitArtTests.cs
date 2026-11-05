@@ -13,6 +13,7 @@ public sealed class UnitArtTests
     [Theory]
     [InlineData("guard_captain", "dagna_holt", "dagna")]
     [InlineData("noble", "celandine_marrowby", "celandine")]
+    [InlineData("bandit_captain", "rook", "rook")]
     public void Approved_named_adults_and_their_preset_keys_select_the_compact_sprite(string preset, string character, string file)
     {
         var sprite = Art.Value.Sprite($"characters.{preset}")!;
