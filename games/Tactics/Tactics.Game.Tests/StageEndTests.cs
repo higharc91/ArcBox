@@ -182,7 +182,9 @@ public sealed class StageEndTests
         int WorldIndex(Tile at) => (at.Y % WorldRegion.ChunkSize * WorldRegion.ChunkSize + at.X % WorldRegion.ChunkSize) * 3;
 
         var deep = new Tile(6, 6);     // the river beside the ford, on the map
-        foreach (var ford in map["zones"]!["ford"]!.AsArray().Select(t => new Tile(t![0]!.GetValue<int>(), t[1]!.GetValue<int>())))
+        // This fixture has no crossing, even after the story flag opens the new bridge gate.
+        var deck = from y in new[] { 9, 10 } from x in Enumerable.Range(5, 3) select new Tile(x, y);
+        foreach (var ford in map["zones"]!["ford"]!.AsArray().Select(t => new Tile(t![0]!.GetValue<int>(), t[1]!.GetValue<int>())).Concat(deck))
         {
             Array.Copy(tiles, (deep.Y * width + deep.X) * 3, tiles, (ford.Y * width + ford.X) * 3, 3);
             var source = Chunk(stage.ToWorld(deep), out _);

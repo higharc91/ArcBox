@@ -8,31 +8,56 @@
 [ext_resource type="Texture2D" path="res://palette/materials/forest_floor_leafy.png" id="6_x524c"]
 [ext_resource type="Texture2D" path="res://palette/materials/forest_floor_mossy.png" id="7_msc7k"]
 [ext_resource type="Texture2D" path="res://palette/materials/forest_needles_pine.png" id="8_444ej"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_-1_0_-2_-3_d1.png" id="8_xifr2"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_-1_0_0_-3_d1.png" id="9_of5to"]
 [ext_resource type="Texture2D" path="res://palette/materials/forest_needles_snowy.png" id="9_ydl3l"]
 [ext_resource type="Texture2D" path="res://palette/materials/grass_autumn.png" id="10_w2lna"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_-2_0_0_-2_d2.png" id="10_xbi54"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_-2_-2_0_d1.png" id="11_5xi2e"]
 [ext_resource type="Texture2D" path="res://palette/materials/grass_dry.png" id="11_qjyqp"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_-3_-2_0_d1.png" id="12_0hseh"]
 [ext_resource type="Texture2D" path="res://palette/materials/grass_frost.png" id="12_0kv8j"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-1_-2_d1.png" id="13_en7vb"]
 [ext_resource type="Texture2D" path="res://palette/materials/bog_duckweed.png" id="13_pweyj"]
 [ext_resource type="Texture2D" path="res://palette/materials/grass_green.png" id="14_5amqg"]
 [ext_resource type="Texture2D" path="res://palette/materials/grass_lush.png" id="15_g6rh4"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-1_0_d1.png" id="15_j516d"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-2_-1_d1.png" id="16_rwq1n"]
 [ext_resource type="Texture2D" path="res://palette/materials/ice_clear.png" id="16_wk7xm"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-2_-3_d1.png" id="17_abomx"]
 [ext_resource type="Texture2D" path="res://palette/materials/lava_molten.png" id="17_t4cys"]
 [ext_resource type="Texture2D" path="res://palette/materials/mud_swamp.png" id="18_hn5ws"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-3_-1_d1.png" id="18_t6nph"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_-3_-2_d1.png" id="19_15wg4"]
 [ext_resource type="Texture2D" path="res://palette/materials/path_packed.png" id="19_xuq3w"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_0_-1_d1.png" id="20_u7k5l"]
 [ext_resource type="Texture2D" path="res://palette/materials/pavers_dark.png" id="20_wve4q"]
 [ext_resource type="Texture2D" path="res://palette/materials/pavers_grey.png" id="21_24omw"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_0_0_1_d1.png" id="21_rpuuc"]
 [ext_resource type="Texture2D" path="res://palette/materials/pavers_warm.png" id="22_acfjv"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_1_0_0_d1.png" id="22_bbofs"]
 [ext_resource type="Texture2D" path="res://palette/materials/planks_dark.png" id="23_fx5pb"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_2_2_0_d1.png" id="23_tbqrg"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_0_3_1_0_d1.png" id="24_38evc"]
 [ext_resource type="Texture2D" path="res://palette/materials/bog_murk.png" id="24_xnbp8"]
 [ext_resource type="Texture2D" path="res://palette/materials/planks_oak.png" id="25_ikmad"]
 [ext_resource type="Texture2D" path="res://palette/materials/rock_dark.png" id="26_fu31y"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_1_0_0_0_d1.png" id="26_tq5ox"]
 [ext_resource type="Texture2D" path="res://palette/materials/rock_grey.png" id="27_31ls7"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_1_0_0_2_d1.png" id="27_645sf"]
 [ext_resource type="Texture2D" path="res://palette/materials/sand_desert.png" id="28_aqfcl"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_1_2_0_0_d1.png" id="28_xu72g"]
 [ext_resource type="Texture2D" path="res://palette/materials/sandstone_ochre.png" id="29_52jmy"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_2_0_0_2_d1.png" id="29_dw0nh"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_2_1_0_0_d1.png" id="30_8kdma"]
 [ext_resource type="Texture2D" path="res://palette/materials/sandstone_red.png" id="30_seu6d"]
 [ext_resource type="Texture2D" path="res://palette/materials/snow_fresh.png" id="31_7g6o2"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_2_3_1_0_d1.png" id="31_86t3i"]
 [ext_resource type="Texture2D" path="res://palette/materials/water_bog.png" id="32_2rbut"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_3_1_0_0_d1.png" id="32_bofja"]
+[ext_resource type="Texture2D" path="res://palette/materials/road_ramp_q_3_2_0_0_d1.png" id="33_munoa"]
 [ext_resource type="Texture2D" path="res://palette/materials/water_clear.png" id="33_vlr00"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_edge_stone.png" id="34_4545d"]
 [ext_resource type="Texture2D" path="res://palette/materials/water_swamp.png" id="34_tsff1"]
 [ext_resource type="Texture2D" path="res://palette/materials/cobble_grey.png" id="35_j1yf7"]
 [ext_resource type="Texture2D" path="res://palette/materials/cave_floor_cool.png" id="36_g6rh4"]
@@ -68,6 +93,18 @@
 [ext_resource type="Texture2D" path="res://palette/materials/rock_ford_bank.png" id="63_vlr00"]
 [ext_resource type="Texture2D" path="res://palette/materials/planks_ford_dark.png" id="64_52jmy"]
 [ext_resource type="Texture2D" path="res://palette/materials/planks_ford_oak.png" id="65_seu6d"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_deck_oak.png" id="66_k7yja"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_east_high.png" id="67_k3sb1"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_east_low.png" id="69_ryacp"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_nu1.png" id="70_d5g7a"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_nu2.png" id="71_owffp"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_nv1.png" id="72_ixhju"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_nv2.png" id="73_nafwt"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_u1.png" id="74_l58b2"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_u2.png" id="75_qbcuw"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_v1.png" id="76_ota18"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_v2.png" id="77_vvvmm"]
+[ext_resource type="Texture2D" path="res://palette/materials/warden_ramp_west.png" id="78_rects"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7yja"]
 resource_name = "ash/grey"
@@ -87,15 +124,165 @@ texture = ExtResource("3_2db1o")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nin25"]
+resource_name = "road_ramp/q_-1_0_-2_-3_d1"
+texture = ExtResource("8_xifr2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oorxo"]
+resource_name = "road_ramp/q_-1_0_0_-3_d1"
+texture = ExtResource("9_of5to")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qotfd"]
+resource_name = "road_ramp/q_-2_0_0_-2_d2"
+texture = ExtResource("10_xbi54")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rdx4h"]
+resource_name = "road_ramp/q_0_-2_-2_0_d1"
+texture = ExtResource("11_5xi2e")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_885vr"]
+resource_name = "road_ramp/q_0_-3_-2_0_d1"
+texture = ExtResource("12_0hseh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7ipu"]
+resource_name = "road_ramp/q_0_0_-1_-2_d1"
+texture = ExtResource("13_en7vb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d5g7a"]
 resource_name = "flagstone/grey"
 texture = ExtResource("4_0fh6j")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g8g3t"]
+resource_name = "road_ramp/q_0_0_-1_0_d1"
+texture = ExtResource("15_j516d")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vfnlu"]
+resource_name = "road_ramp/q_0_0_-2_-1_d1"
+texture = ExtResource("16_rwq1n")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hdami"]
+resource_name = "road_ramp/q_0_0_-2_-3_d1"
+texture = ExtResource("17_abomx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gawi"]
+resource_name = "road_ramp/q_0_0_-3_-1_d1"
+texture = ExtResource("18_t6nph")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tgoc5"]
+resource_name = "road_ramp/q_0_0_-3_-2_d1"
+texture = ExtResource("19_15wg4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_id5wy"]
+resource_name = "road_ramp/q_0_0_0_-1_d1"
+texture = ExtResource("20_u7k5l")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8y2v"]
+resource_name = "road_ramp/q_0_0_0_1_d1"
+texture = ExtResource("21_rpuuc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86yoe"]
+resource_name = "road_ramp/q_0_1_0_0_d1"
+texture = ExtResource("22_bbofs")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pv7t1"]
+resource_name = "road_ramp/q_0_2_2_0_d1"
+texture = ExtResource("23_tbqrg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnhje"]
+resource_name = "road_ramp/q_0_3_1_0_d1"
+texture = ExtResource("24_38evc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owffp"]
 resource_name = "flagstone/warm"
 texture = ExtResource("5_yputj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4j5ni"]
+resource_name = "road_ramp/q_1_0_0_0_d1"
+texture = ExtResource("26_tq5ox")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2d28j"]
+resource_name = "road_ramp/q_1_0_0_2_d1"
+texture = ExtResource("27_645sf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h0fad"]
+resource_name = "road_ramp/q_1_2_0_0_d1"
+texture = ExtResource("28_xu72g")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exgeb"]
+resource_name = "road_ramp/q_2_0_0_2_d1"
+texture = ExtResource("29_dw0nh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2oaht"]
+resource_name = "road_ramp/q_2_1_0_0_d1"
+texture = ExtResource("30_8kdma")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cu0ik"]
+resource_name = "road_ramp/q_2_3_1_0_d1"
+texture = ExtResource("31_86t3i")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hp62w"]
+resource_name = "road_ramp/q_3_1_0_0_d1"
+texture = ExtResource("32_bofja")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_408sc"]
+resource_name = "road_ramp/q_3_2_0_0_d1"
+texture = ExtResource("33_munoa")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moiwf"]
+resource_name = "warden_edge/stone"
+texture = ExtResource("34_4545d")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -459,9 +646,81 @@ texture = ExtResource("65_seu6d")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5xi2e"]
+resource_name = "warden_deck/oak"
+texture = ExtResource("66_k7yja")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hseh"]
+resource_name = "warden_ramp/east_high"
+texture = ExtResource("67_k3sb1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pp4c2"]
 resource_name = "dirt/dark"
 texture = ExtResource("38_ncsiy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_en7vb"]
+resource_name = "warden_ramp/east_low"
+texture = ExtResource("69_ryacp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j516d"]
+resource_name = "warden_ramp/nu1"
+texture = ExtResource("70_d5g7a")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwq1n"]
+resource_name = "warden_ramp/nu2"
+texture = ExtResource("71_owffp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_abomx"]
+resource_name = "warden_ramp/nv1"
+texture = ExtResource("72_ixhju")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t6nph"]
+resource_name = "warden_ramp/nv2"
+texture = ExtResource("73_nafwt")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15wg4"]
+resource_name = "warden_ramp/u1"
+texture = ExtResource("74_l58b2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7k5l"]
+resource_name = "warden_ramp/u2"
+texture = ExtResource("75_qbcuw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rpuuc"]
+resource_name = "warden_ramp/v1"
+texture = ExtResource("76_ota18")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bbofs"]
+resource_name = "warden_ramp/v2"
+texture = ExtResource("77_vvvmm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbqrg"]
+resource_name = "warden_ramp/west"
+texture = ExtResource("78_rects")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -547,3 +806,40 @@ sources/64 = SubResource("TileSetAtlasSource_e6pxb")
 sources/65 = SubResource("TileSetAtlasSource_xifr2")
 sources/66 = SubResource("TileSetAtlasSource_of5to")
 sources/67 = SubResource("TileSetAtlasSource_xbi54")
+sources/68 = SubResource("TileSetAtlasSource_5xi2e")
+sources/69 = SubResource("TileSetAtlasSource_0hseh")
+sources/70 = SubResource("TileSetAtlasSource_en7vb")
+sources/71 = SubResource("TileSetAtlasSource_j516d")
+sources/72 = SubResource("TileSetAtlasSource_rwq1n")
+sources/73 = SubResource("TileSetAtlasSource_abomx")
+sources/74 = SubResource("TileSetAtlasSource_t6nph")
+sources/75 = SubResource("TileSetAtlasSource_15wg4")
+sources/76 = SubResource("TileSetAtlasSource_u7k5l")
+sources/77 = SubResource("TileSetAtlasSource_rpuuc")
+sources/78 = SubResource("TileSetAtlasSource_bbofs")
+sources/79 = SubResource("TileSetAtlasSource_tbqrg")
+sources/104 = SubResource("TileSetAtlasSource_nin25")
+sources/105 = SubResource("TileSetAtlasSource_oorxo")
+sources/106 = SubResource("TileSetAtlasSource_qotfd")
+sources/107 = SubResource("TileSetAtlasSource_rdx4h")
+sources/108 = SubResource("TileSetAtlasSource_885vr")
+sources/109 = SubResource("TileSetAtlasSource_t7ipu")
+sources/110 = SubResource("TileSetAtlasSource_g8g3t")
+sources/111 = SubResource("TileSetAtlasSource_vfnlu")
+sources/112 = SubResource("TileSetAtlasSource_hdami")
+sources/113 = SubResource("TileSetAtlasSource_6gawi")
+sources/114 = SubResource("TileSetAtlasSource_tgoc5")
+sources/115 = SubResource("TileSetAtlasSource_id5wy")
+sources/116 = SubResource("TileSetAtlasSource_k8y2v")
+sources/117 = SubResource("TileSetAtlasSource_86yoe")
+sources/118 = SubResource("TileSetAtlasSource_pv7t1")
+sources/119 = SubResource("TileSetAtlasSource_rnhje")
+sources/120 = SubResource("TileSetAtlasSource_4j5ni")
+sources/121 = SubResource("TileSetAtlasSource_2d28j")
+sources/122 = SubResource("TileSetAtlasSource_h0fad")
+sources/123 = SubResource("TileSetAtlasSource_exgeb")
+sources/124 = SubResource("TileSetAtlasSource_2oaht")
+sources/125 = SubResource("TileSetAtlasSource_cu0ik")
+sources/126 = SubResource("TileSetAtlasSource_hp62w")
+sources/127 = SubResource("TileSetAtlasSource_408sc")
+sources/128 = SubResource("TileSetAtlasSource_moiwf")

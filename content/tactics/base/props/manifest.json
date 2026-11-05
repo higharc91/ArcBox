@@ -2517,6 +2517,3176 @@
         "lore",
         "dressing"
       ]
+    },
+    "warden_fortified_2_9": {
+      "variants": {
+        "default": "ford/warden_fortified_2_9.png"
+      },
+      "size": [
+        67,
+        41
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_2_10": {
+      "variants": {
+        "default": "ford/warden_fortified_2_10.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        36,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_3_9": {
+      "variants": {
+        "default": "ford/warden_fortified_3_9.png"
+      },
+      "size": [
+        70,
+        33
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_3_10": {
+      "variants": {
+        "default": "ford/warden_fortified_3_10.png"
+      },
+      "size": [
+        70,
+        25
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_3_11": {
+      "variants": {
+        "default": "ford/warden_fortified_3_11.png"
+      },
+      "size": [
+        40,
+        32
+      ],
+      "anchor": [
+        4,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_4_9": {
+      "variants": {
+        "default": "ford/warden_fortified_4_9.png"
+      },
+      "size": [
+        66,
+        33
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_4_10": {
+      "variants": {
+        "default": "ford/warden_fortified_4_10.png"
+      },
+      "size": [
+        55,
+        25
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_4_11": {
+      "variants": {
+        "default": "ford/warden_fortified_4_11.png"
+      },
+      "size": [
+        40,
+        48
+      ],
+      "anchor": [
+        4,
+        43
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_5_8": {
+      "variants": {
+        "default": "ford/warden_fortified_5_8.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        35,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_5_9": {
+      "variants": {
+        "default": "ford/warden_fortified_5_9.png"
+      },
+      "size": [
+        60,
+        57
+      ],
+      "anchor": [
+        25,
+        39
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_5_10": {
+      "variants": {
+        "default": "ford/warden_fortified_5_10.png"
+      },
+      "size": [
+        59,
+        75
+      ],
+      "anchor": [
+        35,
+        38
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_5_11": {
+      "variants": {
+        "default": "ford/warden_fortified_5_11.png"
+      },
+      "size": [
+        44,
+        69
+      ],
+      "anchor": [
+        8,
+        64
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_6_8": {
+      "variants": {
+        "default": "ford/warden_fortified_6_8.png"
+      },
+      "size": [
+        38,
+        80
+      ],
+      "anchor": [
+        33,
+        75
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_6_9": {
+      "variants": {
+        "default": "ford/warden_fortified_6_9.png"
+      },
+      "size": [
+        67,
+        79
+      ],
+      "anchor": [
+        32,
+        59
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_6_10": {
+      "variants": {
+        "default": "ford/warden_fortified_6_10.png"
+      },
+      "size": [
+        38,
+        76
+      ],
+      "anchor": [
+        33,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_6_11": {
+      "variants": {
+        "default": "ford/warden_fortified_6_11.png"
+      },
+      "size": [
+        44,
+        95
+      ],
+      "anchor": [
+        8,
+        90
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_7_8": {
+      "variants": {
+        "default": "ford/warden_fortified_7_8.png"
+      },
+      "size": [
+        40,
+        80
+      ],
+      "anchor": [
+        33,
+        75
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_7_9": {
+      "variants": {
+        "default": "ford/warden_fortified_7_9.png"
+      },
+      "size": [
+        70,
+        79
+      ],
+      "anchor": [
+        35,
+        59
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_7_10": {
+      "variants": {
+        "default": "ford/warden_fortified_7_10.png"
+      },
+      "size": [
+        68,
+        76
+      ],
+      "anchor": [
+        33,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_7_11": {
+      "variants": {
+        "default": "ford/warden_fortified_7_11.png"
+      },
+      "size": [
+        44,
+        95
+      ],
+      "anchor": [
+        8,
+        90
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_8_8": {
+      "variants": {
+        "default": "ford/warden_fortified_8_8.png"
+      },
+      "size": [
+        41,
+        40
+      ],
+      "anchor": [
+        36,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_8_9": {
+      "variants": {
+        "default": "ford/warden_fortified_8_9.png"
+      },
+      "size": [
+        70,
+        60
+      ],
+      "anchor": [
+        35,
+        32
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_8_10": {
+      "variants": {
+        "default": "ford/warden_fortified_8_10.png"
+      },
+      "size": [
+        71,
+        57
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_8_11": {
+      "variants": {
+        "default": "ford/warden_fortified_8_11.png"
+      },
+      "size": [
+        44,
+        53
+      ],
+      "anchor": [
+        8,
+        48
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_6": {
+      "variants": {
+        "default": "ford/warden_fortified_9_6.png"
+      },
+      "size": [
+        60,
+        97
+      ],
+      "anchor": [
+        28,
+        92
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 6,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_7": {
+      "variants": {
+        "default": "ford/warden_fortified_9_7.png"
+      },
+      "size": [
+        62,
+        94
+      ],
+      "anchor": [
+        28,
+        78
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_8": {
+      "variants": {
+        "default": "ford/warden_fortified_9_8.png"
+      },
+      "size": [
+        40,
+        51
+      ],
+      "anchor": [
+        5,
+        41
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_9": {
+      "variants": {
+        "default": "ford/warden_fortified_9_9.png"
+      },
+      "size": [
+        71,
+        56
+      ],
+      "anchor": [
+        35,
+        36
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_10": {
+      "variants": {
+        "default": "ford/warden_fortified_9_10.png"
+      },
+      "size": [
+        70,
+        48
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_9_11": {
+      "variants": {
+        "default": "ford/warden_fortified_9_11.png"
+      },
+      "size": [
+        40,
+        40
+      ],
+      "anchor": [
+        4,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_10_6": {
+      "variants": {
+        "default": "ford/warden_fortified_10_6.png"
+      },
+      "size": [
+        69,
+        114
+      ],
+      "anchor": [
+        34,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_10_7": {
+      "variants": {
+        "default": "ford/warden_fortified_10_7.png"
+      },
+      "size": [
+        72,
+        110
+      ],
+      "anchor": [
+        36,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_10_8": {
+      "variants": {
+        "default": "ford/warden_fortified_10_8.png"
+      },
+      "size": [
+        46,
+        59
+      ],
+      "anchor": [
+        24,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_10_9": {
+      "variants": {
+        "default": "ford/warden_fortified_10_9.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_10_10": {
+      "variants": {
+        "default": "ford/warden_fortified_10_10.png"
+      },
+      "size": [
+        72,
+        41
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_11_6": {
+      "variants": {
+        "default": "ford/warden_fortified_11_6.png"
+      },
+      "size": [
+        41,
+        76
+      ],
+      "anchor": [
+        36,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_fortified_11_7": {
+      "variants": {
+        "default": "ford/warden_fortified_11_7.png"
+      },
+      "size": [
+        37,
+        77
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_2_9": {
+      "variants": {
+        "default": "ford/warden_force_2_9.png"
+      },
+      "size": [
+        67,
+        41
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_2_10": {
+      "variants": {
+        "default": "ford/warden_force_2_10.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        36,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_3_9": {
+      "variants": {
+        "default": "ford/warden_force_3_9.png"
+      },
+      "size": [
+        70,
+        33
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_3_10": {
+      "variants": {
+        "default": "ford/warden_force_3_10.png"
+      },
+      "size": [
+        70,
+        25
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_3_11": {
+      "variants": {
+        "default": "ford/warden_force_3_11.png"
+      },
+      "size": [
+        40,
+        32
+      ],
+      "anchor": [
+        4,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_4_7": {
+      "variants": {
+        "default": "ford/warden_force_4_7.png"
+      },
+      "size": [
+        51,
+        32
+      ],
+      "anchor": [
+        23,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_4_9": {
+      "variants": {
+        "default": "ford/warden_force_4_9.png"
+      },
+      "size": [
+        68,
+        33
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_4_10": {
+      "variants": {
+        "default": "ford/warden_force_4_10.png"
+      },
+      "size": [
+        70,
+        25
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_4_11": {
+      "variants": {
+        "default": "ford/warden_force_4_11.png"
+      },
+      "size": [
+        40,
+        48
+      ],
+      "anchor": [
+        4,
+        43
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_5_8": {
+      "variants": {
+        "default": "ford/warden_force_5_8.png"
+      },
+      "size": [
+        42,
+        56
+      ],
+      "anchor": [
+        35,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_5_9": {
+      "variants": {
+        "default": "ford/warden_force_5_9.png"
+      },
+      "size": [
+        70,
+        53
+      ],
+      "anchor": [
+        35,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_5_10": {
+      "variants": {
+        "default": "ford/warden_force_5_10.png"
+      },
+      "size": [
+        70,
+        57
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_5_11": {
+      "variants": {
+        "default": "ford/warden_force_5_11.png"
+      },
+      "size": [
+        44,
+        69
+      ],
+      "anchor": [
+        8,
+        64
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_6_8": {
+      "variants": {
+        "default": "ford/warden_force_6_8.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        33,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_6_9": {
+      "variants": {
+        "default": "ford/warden_force_6_9.png"
+      },
+      "size": [
+        70,
+        55
+      ],
+      "anchor": [
+        35,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_6_10": {
+      "variants": {
+        "default": "ford/warden_force_6_10.png"
+      },
+      "size": [
+        68,
+        54
+      ],
+      "anchor": [
+        33,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_6_11": {
+      "variants": {
+        "default": "ford/warden_force_6_11.png"
+      },
+      "size": [
+        44,
+        72
+      ],
+      "anchor": [
+        8,
+        67
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_7_8": {
+      "variants": {
+        "default": "ford/warden_force_7_8.png"
+      },
+      "size": [
+        40,
+        57
+      ],
+      "anchor": [
+        33,
+        52
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_7_9": {
+      "variants": {
+        "default": "ford/warden_force_7_9.png"
+      },
+      "size": [
+        70,
+        55
+      ],
+      "anchor": [
+        35,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_7_10": {
+      "variants": {
+        "default": "ford/warden_force_7_10.png"
+      },
+      "size": [
+        68,
+        54
+      ],
+      "anchor": [
+        33,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_7_11": {
+      "variants": {
+        "default": "ford/warden_force_7_11.png"
+      },
+      "size": [
+        44,
+        72
+      ],
+      "anchor": [
+        8,
+        67
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_8_8": {
+      "variants": {
+        "default": "ford/warden_force_8_8.png"
+      },
+      "size": [
+        41,
+        40
+      ],
+      "anchor": [
+        36,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_8_9": {
+      "variants": {
+        "default": "ford/warden_force_8_9.png"
+      },
+      "size": [
+        70,
+        60
+      ],
+      "anchor": [
+        35,
+        32
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_8_10": {
+      "variants": {
+        "default": "ford/warden_force_8_10.png"
+      },
+      "size": [
+        71,
+        57
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_8_11": {
+      "variants": {
+        "default": "ford/warden_force_8_11.png"
+      },
+      "size": [
+        44,
+        53
+      ],
+      "anchor": [
+        8,
+        48
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_6": {
+      "variants": {
+        "default": "ford/warden_force_9_6.png"
+      },
+      "size": [
+        60,
+        97
+      ],
+      "anchor": [
+        28,
+        92
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 6,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_7": {
+      "variants": {
+        "default": "ford/warden_force_9_7.png"
+      },
+      "size": [
+        62,
+        96
+      ],
+      "anchor": [
+        28,
+        78
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_8": {
+      "variants": {
+        "default": "ford/warden_force_9_8.png"
+      },
+      "size": [
+        38,
+        24
+      ],
+      "anchor": [
+        4,
+        11
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_9": {
+      "variants": {
+        "default": "ford/warden_force_9_9.png"
+      },
+      "size": [
+        71,
+        56
+      ],
+      "anchor": [
+        35,
+        36
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_10": {
+      "variants": {
+        "default": "ford/warden_force_9_10.png"
+      },
+      "size": [
+        70,
+        48
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_9_11": {
+      "variants": {
+        "default": "ford/warden_force_9_11.png"
+      },
+      "size": [
+        40,
+        40
+      ],
+      "anchor": [
+        4,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_10_6": {
+      "variants": {
+        "default": "ford/warden_force_10_6.png"
+      },
+      "size": [
+        69,
+        114
+      ],
+      "anchor": [
+        34,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_10_7": {
+      "variants": {
+        "default": "ford/warden_force_10_7.png"
+      },
+      "size": [
+        71,
+        110
+      ],
+      "anchor": [
+        35,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_10_8": {
+      "variants": {
+        "default": "ford/warden_force_10_8.png"
+      },
+      "size": [
+        42,
+        27
+      ],
+      "anchor": [
+        24,
+        22
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_10_9": {
+      "variants": {
+        "default": "ford/warden_force_10_9.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_10_10": {
+      "variants": {
+        "default": "ford/warden_force_10_10.png"
+      },
+      "size": [
+        72,
+        41
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_11_6": {
+      "variants": {
+        "default": "ford/warden_force_11_6.png"
+      },
+      "size": [
+        41,
+        76
+      ],
+      "anchor": [
+        36,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_force_11_7": {
+      "variants": {
+        "default": "ford/warden_force_11_7.png"
+      },
+      "size": [
+        37,
+        77
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_2_9": {
+      "variants": {
+        "default": "ford/warden_parley_2_9.png"
+      },
+      "size": [
+        67,
+        41
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_2_10": {
+      "variants": {
+        "default": "ford/warden_parley_2_10.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        36,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_3_9": {
+      "variants": {
+        "default": "ford/warden_parley_3_9.png"
+      },
+      "size": [
+        70,
+        33
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_3_10": {
+      "variants": {
+        "default": "ford/warden_parley_3_10.png"
+      },
+      "size": [
+        70,
+        25
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_3_11": {
+      "variants": {
+        "default": "ford/warden_parley_3_11.png"
+      },
+      "size": [
+        40,
+        41
+      ],
+      "anchor": [
+        4,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_4_8": {
+      "variants": {
+        "default": "ford/warden_parley_4_8.png"
+      },
+      "size": [
+        29,
+        41
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_4_9": {
+      "variants": {
+        "default": "ford/warden_parley_4_9.png"
+      },
+      "size": [
+        68,
+        46
+      ],
+      "anchor": [
+        35,
+        41
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_4_10": {
+      "variants": {
+        "default": "ford/warden_parley_4_10.png"
+      },
+      "size": [
+        70,
+        31
+      ],
+      "anchor": [
+        35,
+        26
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_4_11": {
+      "variants": {
+        "default": "ford/warden_parley_4_11.png"
+      },
+      "size": [
+        62,
+        53
+      ],
+      "anchor": [
+        26,
+        43
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_5_8": {
+      "variants": {
+        "default": "ford/warden_parley_5_8.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        35,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_5_9": {
+      "variants": {
+        "default": "ford/warden_parley_5_9.png"
+      },
+      "size": [
+        70,
+        53
+      ],
+      "anchor": [
+        35,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_5_10": {
+      "variants": {
+        "default": "ford/warden_parley_5_10.png"
+      },
+      "size": [
+        70,
+        57
+      ],
+      "anchor": [
+        35,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_5_11": {
+      "variants": {
+        "default": "ford/warden_parley_5_11.png"
+      },
+      "size": [
+        44,
+        69
+      ],
+      "anchor": [
+        8,
+        64
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 3,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_6_8": {
+      "variants": {
+        "default": "ford/warden_parley_6_8.png"
+      },
+      "size": [
+        38,
+        62
+      ],
+      "anchor": [
+        33,
+        57
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_6_9": {
+      "variants": {
+        "default": "ford/warden_parley_6_9.png"
+      },
+      "size": [
+        70,
+        60
+      ],
+      "anchor": [
+        35,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_6_10": {
+      "variants": {
+        "default": "ford/warden_parley_6_10.png"
+      },
+      "size": [
+        68,
+        58
+      ],
+      "anchor": [
+        33,
+        24
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_6_11": {
+      "variants": {
+        "default": "ford/warden_parley_6_11.png"
+      },
+      "size": [
+        44,
+        76
+      ],
+      "anchor": [
+        8,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_7_8": {
+      "variants": {
+        "default": "ford/warden_parley_7_8.png"
+      },
+      "size": [
+        40,
+        62
+      ],
+      "anchor": [
+        33,
+        57
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_7_9": {
+      "variants": {
+        "default": "ford/warden_parley_7_9.png"
+      },
+      "size": [
+        70,
+        60
+      ],
+      "anchor": [
+        35,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_7_10": {
+      "variants": {
+        "default": "ford/warden_parley_7_10.png"
+      },
+      "size": [
+        68,
+        58
+      ],
+      "anchor": [
+        33,
+        24
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_7_11": {
+      "variants": {
+        "default": "ford/warden_parley_7_11.png"
+      },
+      "size": [
+        44,
+        76
+      ],
+      "anchor": [
+        8,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_8_8": {
+      "variants": {
+        "default": "ford/warden_parley_8_8.png"
+      },
+      "size": [
+        41,
+        40
+      ],
+      "anchor": [
+        36,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_8_9": {
+      "variants": {
+        "default": "ford/warden_parley_8_9.png"
+      },
+      "size": [
+        70,
+        60
+      ],
+      "anchor": [
+        35,
+        32
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_8_10": {
+      "variants": {
+        "default": "ford/warden_parley_8_10.png"
+      },
+      "size": [
+        71,
+        57
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_8_11": {
+      "variants": {
+        "default": "ford/warden_parley_8_11.png"
+      },
+      "size": [
+        44,
+        53
+      ],
+      "anchor": [
+        8,
+        48
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_6": {
+      "variants": {
+        "default": "ford/warden_parley_9_6.png"
+      },
+      "size": [
+        60,
+        97
+      ],
+      "anchor": [
+        28,
+        92
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 6,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_7": {
+      "variants": {
+        "default": "ford/warden_parley_9_7.png"
+      },
+      "size": [
+        62,
+        94
+      ],
+      "anchor": [
+        28,
+        78
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_8": {
+      "variants": {
+        "default": "ford/warden_parley_9_8.png"
+      },
+      "size": [
+        40,
+        51
+      ],
+      "anchor": [
+        5,
+        41
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_9": {
+      "variants": {
+        "default": "ford/warden_parley_9_9.png"
+      },
+      "size": [
+        71,
+        56
+      ],
+      "anchor": [
+        35,
+        36
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_10": {
+      "variants": {
+        "default": "ford/warden_parley_9_10.png"
+      },
+      "size": [
+        70,
+        48
+      ],
+      "anchor": [
+        35,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_9_11": {
+      "variants": {
+        "default": "ford/warden_parley_9_11.png"
+      },
+      "size": [
+        40,
+        40
+      ],
+      "anchor": [
+        4,
+        35
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_10_6": {
+      "variants": {
+        "default": "ford/warden_parley_10_6.png"
+      },
+      "size": [
+        69,
+        114
+      ],
+      "anchor": [
+        34,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_10_7": {
+      "variants": {
+        "default": "ford/warden_parley_10_7.png"
+      },
+      "size": [
+        72,
+        110
+      ],
+      "anchor": [
+        36,
+        95
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 5,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_10_8": {
+      "variants": {
+        "default": "ford/warden_parley_10_8.png"
+      },
+      "size": [
+        46,
+        59
+      ],
+      "anchor": [
+        24,
+        51
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 2,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_10_9": {
+      "variants": {
+        "default": "ford/warden_parley_10_9.png"
+      },
+      "size": [
+        71,
+        42
+      ],
+      "anchor": [
+        35,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_10_10": {
+      "variants": {
+        "default": "ford/warden_parley_10_10.png"
+      },
+      "size": [
+        72,
+        41
+      ],
+      "anchor": [
+        36,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 1,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_11_6": {
+      "variants": {
+        "default": "ford/warden_parley_11_6.png"
+      },
+      "size": [
+        41,
+        76
+      ],
+      "anchor": [
+        36,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_parley_11_7": {
+      "variants": {
+        "default": "ford/warden_parley_11_7.png"
+      },
+      "size": [
+        37,
+        77
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 4,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "warden",
+        "tile-owned"
+      ]
+    },
+    "warden_gate_collision": {
+      "variants": {
+        "default": "ford/gate_collision.png"
+      },
+      "size": [
+        1,
+        1
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "height": 0,
+      "spread": false,
+      "blocks": true,
+      "cover": "half"
+    },
+    "road_ramp_q_0_0_-1_-2_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-1_-2_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_2_3_1_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_2_3_1_0_d1.png"
+      },
+      "size": [
+        64,
+        65
+      ],
+      "anchor": [
+        32,
+        28
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_1_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_1_0_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_0_-1_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_0_-1_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_-1_0_-2_-3_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_-1_0_-2_-3_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_1_2_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_1_2_0_0_d1.png"
+      },
+      "size": [
+        64,
+        61
+      ],
+      "anchor": [
+        32,
+        24
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_3_1_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_3_1_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_-1_0_0_-3_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_-1_0_0_-3_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_-2_-3_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-2_-3_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_-1_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-1_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_-3_-1_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-3_-1_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_3_1_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_3_1_0_0_d1.png"
+      },
+      "size": [
+        64,
+        69
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_1_0_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_1_0_0_0_d1.png"
+      },
+      "size": [
+        64,
+        61
+      ],
+      "anchor": [
+        32,
+        24
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_-3_-2_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-3_-2_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_2_1_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_2_1_0_0_d1.png"
+      },
+      "size": [
+        64,
+        65
+      ],
+      "anchor": [
+        32,
+        28
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_-2_-1_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_-2_-1_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_3_2_0_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_3_2_0_0_d1.png"
+      },
+      "size": [
+        64,
+        69
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_-3_-2_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_-3_-2_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_-2_-2_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_-2_-2_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_0_0_1_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_0_0_1_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_1_0_0_2_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_1_0_0_2_d1.png"
+      },
+      "size": [
+        64,
+        61
+      ],
+      "anchor": [
+        32,
+        24
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_2_0_0_2_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_2_0_0_2_d1.png"
+      },
+      "size": [
+        64,
+        65
+      ],
+      "anchor": [
+        32,
+        28
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_0_2_2_0_d1": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_0_2_2_0_d1.png"
+      },
+      "size": [
+        64,
+        57
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
+    },
+    "road_ramp_q_-2_0_0_-2_d2": {
+      "variants": {
+        "default": "road-ramps/road_ramp_q_-2_0_0_-2_d2.png"
+      },
+      "size": [
+        64,
+        73
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "height": 1,
+      "frames": 1,
+      "fps": 0.0,
+      "spread": false,
+      "blocks": false,
+      "cover": "none",
+      "tags": [
+        "road",
+        "ramp"
+      ]
     }
   },
   "notes": {

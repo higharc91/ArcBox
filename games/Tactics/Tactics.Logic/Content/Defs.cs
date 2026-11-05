@@ -395,7 +395,9 @@ public sealed record ArmorDef(string Id, string Name, ArmorKind Kind, int BaseAc
 /// (total cover comes only from line of sight, never from content).
 /// </summary>
 public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none",
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default);
 
 /// <summary>
 /// A battle map as written in <c>maps/&lt;id&gt;.json</c> (spec §4.8): <see cref="Size"/> is <c>[w, h]</c> and
@@ -420,7 +422,8 @@ public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, I
         if (Size.Length != 2)
             throw new ArgumentException($"Map '{Id}' needs a size of [w, h].");
         var props = Props.Select(p => new PropPlacement(p.Id, p.At, p.Blocks,
-                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'."), p.Variant))
+                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'."), p.Variant,
+                p.Requires.IsDefaultOrEmpty ? default : p.Requires, p.Unless.IsDefaultOrEmpty ? default : p.Unless))
             .ToImmutableArray();
         return BattleMap.FromBytes(Id, Size[0], Size[1], Convert.FromBase64String(Tiles), Materials, props, Zones);
     }

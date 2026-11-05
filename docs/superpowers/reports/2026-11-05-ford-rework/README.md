@@ -1,13 +1,17 @@
-# Ford rework: concept checkpoint
+# Ford rework: bridge integration and ground concept
 
 Issue [#82](https://github.com/higharc91/ArcBox/issues/82), branch `ford-rework`.
 Based on merged main `da796d97f5613732b6446e4a66b7b4d4c719b81b`.
 
-## Current review: native pixel art
+## Current status
 
-Revision 2 concepts are approved. The owner selected native art authoring.
-The [pixel-art and TV checkpoint](native-art/README.md) is now ready for approval.
-No extra generation spend; Scenario remains 52 CU. Live content is unchanged.
+The owner approved the native bridge and connected approaches. The [installed bridge and road-ramp report](integration/README.md)
+includes physical tile pieces, three story states, character slope sampling, saved-scene exports and paired battle results.
+All 13 authored road elevation changes have ramps. No encounter stats or rewards are retuned.
+
+The separate [crisp-ground concept](../../../../tools/tactics-assets/concepts/ford-rework/ground/README.md) awaits approval
+before native terrain authoring. Its 13 CU bring the Scenario total to **65 CU**; native authoring and PixelLab spend remain zero.
+The concept and preview records below are historical checkpoints, retained as provenance.
 
 ## Approved concept: revision 2
 

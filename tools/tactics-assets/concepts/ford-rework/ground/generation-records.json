@@ -1,0 +1,61 @@
+{
+  "issue": 82,
+  "kind": "crisp-ground-concept",
+  "status": "Awaiting owner concept approval; production ground unchanged",
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "scope": {
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
+  },
+  "parameters": {
+    "prompt": "Original terrain design approval sheet for Wardenflame: Embers of the Vale, Ashen Ford. Reference 1 establishes the APPROVED Warden bridge architecture and its force/parley silhouettes; keep the same modest stone-and-timber bridge with three short arches, a two-person cart lane, low stone parapets, bank-side compact gatehouse, supported sloping road approaches and usable connected roads. Reference 2 establishes Ashen Ford's humane autumn setting, old cold ash and steaming river; reference 3 establishes the approved Emberwick town's crisp readable material planes. This sheet proposes ONLY A NEW GROUND ART DIRECTION beside that existing bridge, for later native pixel-art authoring. Main upper three-quarters: a close 2:1 orthographic isometric tactical game-view study of the whole crossing and both road approaches, with bridge, road and shore clearly separated and two small neutral human scale figures. The dry burned bank is COOL CHARCOAL, slate grey and restrained pale grey ash in BROAD ANGULAR PIXEL CLUSTERS; sharp broken charred stems, occasional flat stone chips, sparse separated tufts. Ash is old and cold, never fire, lava or snow. The unburned bank is muted dry olive-brown and straw autumn grass in coherent small tuft clusters, with clear soil openings; reduce saturation so it is a QUIET GROUND PLANE under the architecture. The road is a continuous warm worn earth cart track with crisp packed ruts and small stones, becoming modest weathered stone paving on the supported approach ramps. The water stays deep muted blue-grey with a narrow sharp readable shallow-water/reed margin and faint localized steam. Clean material boundaries shaped as irregular deliberate clusters, no continuous soft airbrush blending. LARGE DISTINCT MATERIAL REGIONS, never orange-and-olive camouflage patches. Use the existing town kit's visible pixel density: discrete square pixels and restrained stepped highlight clusters, crisp silhouettes, approximately two or three clean tonal groups per material plane. Absolutely no smeared painted gradients, gaussian blur, photographic noise, dithering, bloom, excessive tiny flecks or giant repetitive grid patterns. Coherent top-left light, warm stone highlights and cool shadows; ground should remain quieter and lower contrast than characters and architectural edges. Bottom quarter: four separated enlarged ground-detail studies on a neutral backing, showing cold ash and charred debris; restrained autumn grass over soil; packed dirt path meeting stone road ramp; shallow blue-grey water meeting wet pebbled shore. No text, labels, lettering, watermark, UI, battle grid, arrows or diagram symbols. No change to the bridge architecture, no new usable crossing, no distant northern bridge, no gigantic fortress, no new buildings, no cinematic camera. One coherent clear art direction, not multiple competing style options. This is an approval concept sheet, not a texture atlas or a production game asset.",
+    "referenceImages": [
+      "asset_L9XjeDEC2BrGdxB6odFoqB7n",
+      "asset_MYEpW3ehPXzXWCoFNKhQdbSb",
+      "asset_j5wC1LrjrchvvM2NNv2si3PX"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1
+  },
+  "quote": {
+    "dry_run": true,
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job": {},
+    "creativeUnitsCost": 13,
+    "creativeUnitsDiscount": 0
+  },
+  "run": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_vwXjnK2ejBNVfTQE7hoS3h1J",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_vwXjnK2ejBNVfTQE7hoS3h1J' (one call waits on up to 32 jobs)."
+  },
+  "completion": {
+    "jobId": "job_vwXjnK2ejBNVfTQE7hoS3h1J",
+    "jobType": "custom",
+    "status": "success",
+    "progress": 1,
+    "createdAt": "2026-11-05T18:15:59.657Z",
+    "updatedAt": "2026-11-05T18:16:42.871Z",
+    "modelId": "model_google-gemini-nano-banana-2-1",
+    "assetIds": [
+      "asset_KEfHdsj7taHFRHDryZpQUKaj"
+    ],
+    "cuCost": 13
+  },
+  "output_file": "ground-concept.png",
+  "credits": {
+    "this_concept": 13,
+    "bridge_concepts": 52,
+    "scenario_total": 65,
+    "native_art": 0
+  },
+  "dimensions": [
+    2528,
+    1696
+  ],
+  "sha256": "fe98c149b1f5fb1d29980e86f4cde654a32bd87483b76248992d20d5abb0b736"
+}

@@ -1,0 +1,5028 @@
+{
+  "Environment": true,
+  "Difficulty": "Normal",
+  "Seeds": 20,
+  "RoundCap": 30,
+  "CompanionFill": true,
+  "UnsupportedSmallPartyStress": false,
+  "Summary": [
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 15,
+      "MeanRounds": 10.75,
+      "Caps": 1
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 9,
+      "MeanRounds": 11.9,
+      "Caps": 1
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 13,
+      "MeanRounds": 12.1,
+      "Caps": 1
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 13,
+      "MeanRounds": 9.2,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 8.25,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 19,
+      "MeanRounds": 7.55,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 7.75,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 6.75,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 6.4,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 8,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 6.6,
+      "Caps": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 6.85,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 14,
+      "MeanRounds": 14,
+      "Caps": 3
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 13,
+      "MeanRounds": 12.85,
+      "Caps": 2
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 18,
+      "MeanRounds": 12.25,
+      "Caps": 2
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 14,
+      "MeanRounds": 11.35,
+      "Caps": 1
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 19,
+      "MeanRounds": 10.8,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 18,
+      "MeanRounds": 10.75,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 10.3,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 10.3,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 8.25,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 7.4,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 8.25,
+      "Caps": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Battles": 20,
+      "Wins": 20,
+      "MeanRounds": 8.2,
+      "Caps": 0
+    }
+  ],
+  "Cases": [
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Lost",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Lost",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Lost",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Lost",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Lost",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Lost",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 23,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 17,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Lost",
+      "Rounds": 17,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Lost",
+      "Rounds": 17,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Lost",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Lost",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Lost",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Lost",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Lost",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 19,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 3,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 4,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "ford_assault",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Lost",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 25,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 17,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Lost",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Lost",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 26,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Lost",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Capped",
+      "Rounds": 30,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Lost",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 1,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 19,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Lost",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 18,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 14,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 15,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 13,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 17,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 2,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 1,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 2,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 3,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 4,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 5,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 6,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 7,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 8,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 9,
+      "Classes": "rogue,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 10,
+      "Classes": "sorcerer,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 12,
+      "Classes": "wizard,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 13,
+      "Classes": "barbarian,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 14,
+      "Classes": "bard,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 15,
+      "Classes": "cleric,barbarian,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 12,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 16,
+      "Classes": "druid,bard,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 17,
+      "Classes": "fighter,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 18,
+      "Classes": "monk,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 19,
+      "Classes": "paladin,bard,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 1,
+      "Seed": 20,
+      "Classes": "ranger,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 1,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 2,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 3,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 4,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 5,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 6,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 9,
+      "Classes": "rogue,wizard,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 11,
+      "Classes": "warlock,bard,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 12,
+      "Classes": "wizard,cleric,barbarian,monk",
+      "Outcome": "Won",
+      "Rounds": 16,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 13,
+      "Classes": "barbarian,druid,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 14,
+      "Classes": "bard,fighter,monk,druid",
+      "Outcome": "Won",
+      "Rounds": 3,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 15,
+      "Classes": "cleric,monk,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 16,
+      "Classes": "druid,paladin,bard,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 17,
+      "Classes": "fighter,ranger,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 18,
+      "Classes": "monk,rogue,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,bard,druid",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 2,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,barbarian",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,bard",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,druid",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,druid",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,barbarian",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,bard",
+      "Outcome": "Won",
+      "Rounds": 5,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,bard",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 3,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 1,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 2,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 3,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 4,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 5,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 6,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 7,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 8,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 9,
+      "Classes": "rogue,wizard,cleric,monk",
+      "Outcome": "Won",
+      "Rounds": 6,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 10,
+      "Classes": "sorcerer,barbarian,druid,paladin",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 11,
+      "Classes": "warlock,bard,fighter,ranger",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 12,
+      "Classes": "wizard,cleric,monk,rogue",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 13,
+      "Classes": "barbarian,druid,paladin,sorcerer",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 14,
+      "Classes": "bard,fighter,ranger,warlock",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 15,
+      "Classes": "cleric,monk,rogue,wizard",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 16,
+      "Classes": "druid,paladin,sorcerer,barbarian",
+      "Outcome": "Won",
+      "Rounds": 8,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 17,
+      "Classes": "fighter,ranger,warlock,bard",
+      "Outcome": "Won",
+      "Rounds": 11,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 18,
+      "Classes": "monk,rogue,wizard,cleric",
+      "Outcome": "Won",
+      "Rounds": 9,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 19,
+      "Classes": "paladin,sorcerer,barbarian,druid",
+      "Outcome": "Won",
+      "Rounds": 10,
+      "Rejected": 0
+    },
+    {
+      "Encounter": "river_crossing",
+      "Level": 3,
+      "Players": 4,
+      "Seed": 20,
+      "Classes": "ranger,warlock,bard,fighter",
+      "Outcome": "Won",
+      "Rounds": 7,
+      "Rejected": 0
+    }
+  ]
+}

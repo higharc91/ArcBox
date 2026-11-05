@@ -150,6 +150,28 @@ public sealed class WalkModelTests
         private double _slackMs;
         private bool _over;
 
+        private HashSet<string> _groundFlags = [];
+        private Terrain _ground = WalkModelTests.Ground;
+        private JsonElement _groundDocument;
+        // A won story battle opens the authored checkpoint. The oracle must use
+        // the saved story flags while continuing to check every tile and step.
+        private Terrain CurrentGround
+        {
+            get
+            {
+                if (_groundDocument.Equals(_lease.Document)) return _ground;
+                _groundDocument = _lease.Document;
+                var flags = _lease.World?.Flags.ToHashSet(StringComparer.Ordinal) ?? [];
+                if (!_groundFlags.SetEquals(flags))
+                {
+                    _groundFlags = flags;
+                    _ground = Rules.GroundFor("ashen_ford")!.With(
+                        [.. Interactables.Blocking(Rules.InteractablesIn("ashen_ford"), null, flags)], flags);
+                }
+                return _ground;
+            }
+        }
+
         // What the model expects.
         private DateTimeOffset? _heldUntil;
         private string? _dir;
@@ -570,14 +592,14 @@ public sealed class WalkModelTests
                 // the fight is still on offer.
                 Must(party.Epoch == _epoch + 1, $"the epoch went {_epoch} to {party.Epoch} after a fight");
                 Must(party.Legs.IsEmpty, "legs across a teleport");
-                Must(Tiles.Value.Contains(party.At), $"the party was put back where it can't walk from the start, {party.At}");
+                Must(WorldWalk.Reach(CurrentGround, Rules.RegionFor("ashen_ford")!.Def.Spawns.Start, ClassDef.DefaultJump).Contains(party.At), $"the party was put back where it can't walk from the start, {party.At}");
                 Must(ArmedStage()?.Holds(party.At) != true, $"the party was put back inside the armed stamp, at {party.At}");
                 Must(party.Arrived is TacticsGame.FellIn or TacticsGame.Woke, $"put back with Arrived {party.Arrived}");
                 Must(party.Arrived != TacticsGame.Woke || party.At == Rules.RegionFor("ashen_ford")!.Def.Spawns.Recovery, "woke away from the recovery spawn");
                 _epoch = party.Epoch;
             }
             Must(party.Epoch == _epoch, "the epoch changed");
-            Must(Ground.Map.InBounds(party.At) && Ground.Walkable(party.At), $"the party is on a bad tile, {party.At}");
+            Must(CurrentGround.Map.InBounds(party.At) && CurrentGround.Walkable(party.At), $"the party is on a bad tile, {party.At}");
             Must(party.Legs.Length <= 12, "more than 12 legs");
             for (var i = 1; i < party.Legs.Length; i++)
                 Must(party.Legs[i].Seq == party.Legs[i - 1].Seq + 1, "the legs have a gap");
@@ -593,7 +615,7 @@ public sealed class WalkModelTests
                 if (after.Party.Seq == before.Party.Seq)
                 {
                     var (dx, dy) = WorldWalk.Delta(Enum.Parse<WalkDir>(_dir!, ignoreCase: true));
-                    Must(WorldWalk.Next(Ground, before.Party.At, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX) is null,
+                    Must(WorldWalk.Next(CurrentGround, before.Party.At, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX) is null,
                         $"a quick tap was let go and dropped, after {e}");
                     Must(after.Party.Facing == new Tile(before.Party.At.X + dx, before.Party.At.Y + dy), "a quick tap into a wall didn't turn the party");
                 }
@@ -661,13 +683,13 @@ public sealed class WalkModelTests
         {
             var (from, leg) = (before.Party.At, after.Party.Legs[^1]);
             Must(_dir is not null, "stepped with nothing held");
-            var step = WorldWalk.Next(Ground, from, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX);
+            var step = WorldWalk.Next(CurrentGround, from, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX);
             Must(step?.To == leg.To, $"the leg {from} to {leg.To} isn't Next, {step?.To}");
             var move = step!.Value;
-            Must(Ground.Walkable(move.To) && (move.Diagonal || WorldWalk.Legal(Ground, from, move.To, ClassDef.DefaultJump)), $"a step onto a blocked tile, {move.To}");
+            Must(CurrentGround.Walkable(move.To) && (move.Diagonal || WorldWalk.Legal(CurrentGround, from, move.To, ClassDef.DefaultJump)), $"a step onto a blocked tile, {move.To}");
             if (_latched)
                 Must(!after.Timers.Contains(TacticsGame.Timers.Step), "a quick tap took more than one step");
-            var drop = Ground.HeightAt(from) - Ground.HeightAt(move.To);
+            var drop = CurrentGround.HeightAt(from) - CurrentGround.HeightAt(move.To);
             var ms = (int)Math.Round(300.0 * move.Cost * (move.Diagonal ? Math.Sqrt(2) : 1) + 60.0 * Math.Max(0, drop - 2));
             Must(leg.Ms == ms, $"the leg took {leg.Ms} ms, not {ms}");
             if (!move.Diagonal)

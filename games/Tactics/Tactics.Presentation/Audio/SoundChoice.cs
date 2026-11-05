@@ -38,7 +38,8 @@ public static class SoundChoice
     [
         ("grass_ford", "step_grass"), ("grass", "step_grass"), ("dirt_ford", "step_dirt"), ("dirt", "step_dirt"), ("path_ford", "step_dirt"), ("path", "step_dirt"), ("cave_floor", "step_dirt"), ("mine_gravel", "step_dirt"),
         ("ford_water", "step_water"), ("water", "step_water"), ("mud", "step_mud"), ("bog", "step_mud"), ("sand", "step_sand"), ("dunes", "step_sand"), ("snow", "step_snow"), ("ice", "step_ice"),
-        ("lava", "step_lava"), ("mine_boards", "step_wood"), ("planks", "step_wood"),
+        ("lava", "step_lava"), ("mine_boards", "step_wood"), ("planks", "step_wood"), ("warden_deck", "step_wood"),
+        ("warden_ramp", "step_stone"), ("road_ramp", "step_stone"),
         ("cobble", "step_stone"), ("flagstone", "step_stone"), ("rock_ford", "step_stone"), ("rock", "step_stone"), ("ash_ford", "step_dirt"), ("dungeon", "step_stone"), ("crypt", "step_stone"), ("wet_stone", "step_stone"), ("basalt", "step_stone"),
     ];
 

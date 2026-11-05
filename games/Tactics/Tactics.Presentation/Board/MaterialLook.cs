@@ -15,9 +15,10 @@ namespace Tactics.Presentation.Board;
 /// <param name="Lip">What hangs over the top of its sides, or null.</param>
 /// <param name="Void">Nothing to stand on: drawn sunk, with chasm walls around it.</param>
 /// <param name="Water">Water, which lies a little below its banks when deep.</param>
+/// <param name="OpenSpan">Native structure art supplies this surface and its sides; do not fill its arches with terrain columns.</param>
 /// <param name="Deck">Planks: a thin deck, not a solid column, where they span a void.</param>
 public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRef Chasm, ArtRef? Lip = null,
-    bool Void = false, bool Water = false, bool Deck = false)
+    bool Void = false, bool Water = false, bool Deck = false, bool OpenSpan = false)
 {
     private static readonly ArtRef EarthChasm = new("chasm_side", "brown");
     private static readonly ArtRef CaveChasm = new("chasm_side", "cool");
@@ -68,6 +69,8 @@ public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRe
             "sandstone" => With(new ArtRef("sandstone_side", variant), EarthChasm),
             "snow" => With(new ArtRef("ice_side", "glacier"), EarthChasm) with { Lip = new ArtRef("snow_lip", "fresh") },
             "ice" => With(new ArtRef("ice_side", "clear"), EarthChasm),
+            "warden_deck" => With(new ArtRef("plank_side", "oak"), EarthChasm) with { Deck = true, OpenSpan = true },
+            "warden_edge" or "road_ramp" or "warden_approach" or "warden_ramp" => With(ashlar, EarthChasm) with { OpenSpan = true },
             "planks" => With(new ArtRef("plank_side", variant == "dark" ? "dark" : "oak"), EarthChasm) with { Deck = true },
             "pavers" => With(ashlar, EarthChasm),
             "grass_ford" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", "autumn") },

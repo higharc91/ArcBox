@@ -41,6 +41,19 @@ internal sealed partial class WorldDemo : Node
 
     private WorldCanvas _canvas = null!;
     private WorldPeople? _people;
+    private readonly HashSet<string> _storyFlags = (OS.GetCmdlineUserArgs().FirstOrDefault(a => a.StartsWith("--world-story-flags=", StringComparison.Ordinal))?["--world-story-flags=".Length..] ?? "")
+        .Split(',', StringSplitOptions.RemoveEmptyEntries).ToHashSet(StringComparer.Ordinal);
+    private Task<ImmutableArray<LitItem>>? _scenery;
+    private bool _scenerySet;
+    private readonly bool _partyWalk = OS.GetCmdlineUserArgs().Contains("--world-party-walk");
+    private float WalkSpeed => _partyWalk ? 1 / .3f : StepsPerSecond;
+    private WalkShow? _proof;
+    private int _proofTarget = -1;
+    private bool _proofHeld;
+    private ImmutableArray<string> _proofRoster = [];
+    private float _proofSteps;
+    private double _frameDelta;
+
     private UnitArt _art = null!;
     private WorldGround? _ground;
     private ImmutableArray<Tile> _route = [];
@@ -113,7 +126,7 @@ internal sealed partial class WorldDemo : Node
             _ when _looks is not null || region == SwatchSpec => [start, start],
             TavernSpec => DemoRegion.TavernWalk(),
             TownSpec => DemoRegion.TownWalk(),
-            _ => WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump),
+            _ => WorldRoute.Across(ground.With([], _storyFlags), start, ClassDef.DefaultJump),
         };
         _spots = region switch
         {
@@ -140,6 +153,7 @@ internal sealed partial class WorldDemo : Node
 
     public override void _Process(double delta)
     {
+        _frameDelta = delta;
         _clock += delta;
         if (_perfGate)
             _peakTextures = Math.Max(_peakTextures, Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed));
@@ -205,6 +219,7 @@ internal sealed partial class WorldDemo : Node
     /// <summary>Puts the walker <paramref name="steps"/> along the route and the camera on it.</summary>
     private UnitPlace Walk(float steps)
     {
+        _proofSteps = steps;
         var terrain = _canvas.Plan!.Terrain;
         var place = WorldRoute.At(terrain, _route, steps);
         var heading = WorldRoute.Heading(_route, steps);
@@ -217,12 +232,40 @@ internal sealed partial class WorldDemo : Node
     /// <summary>The stand-in, and the region's people round where the camera is, as the TV has them.</summary>
     private void Show(BoardTerrain terrain, UnitPlace place, System.Numerics.Vector2 heading, System.Numerics.Vector2? looking = null)
     {
+        if (_scenery is null)
+            _scenery = Task.Run(() => LitBoard.Build(BoardPlan.StoryProps(terrain, _canvas.Art!, _storyFlags), _canvas.Plan!.Lighting).Items);
+        if (!_scenerySet && _scenery.IsCompletedSuccessfully)
+        {
+            _canvas.SetPlugs(_scenery.Result);
+            _scenerySet = true;
+        }
         _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
-        var walkers = _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
+        var walkers = _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
             : DemoRegion.StandIn(terrain, _art, place, heading, _clock);
         _canvas.PartySheets(walkers.Select(u => u.Sprite.Path));
-        ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [])).OrderBy(u => u.Order)];
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [], flags: _storyFlags)).OrderBy(u => u.Order)];
         _canvas.ShowUnits(units, walkers, _art);
+    }
+
+    // Development-only evidence uses the real walking/formation presenter, not
+    // four sprites offset at a shared height. Inputs have the server's view shape.
+    private ImmutableArray<BoardUnit> ProofWalkers(BoardTerrain terrain, UnitPlace place)
+    {
+        _proof ??= new WalkShow(new BoardTerrain(terrain.Map.WithStoryFlags(_storyFlags), null), _art, null);
+        var epoch = _stage == Stage.Spots ? 100 + _spot : 1;
+        var moving = _route.Length > 1 && _route.Zip(_route.Skip(1)).Any(p => p.First != p.Second);
+        var target = _stage == Stage.Spots || !moving ? 0 : Math.Clamp((int)MathF.Floor(_proofSteps) + 1, 0, _route.Length - 1);
+        var held = moving && _stage != Stage.Spots && _proofSteps < _route.Length - 1;
+        var at = _stage == Stage.Spots ? new Tile((int)MathF.Floor(place.Map.X), (int)MathF.Floor(place.Map.Y)) : _route[target];
+        ImmutableArray<WalkLeg> legs = _stage == Stage.Spots || !moving ? [] : [.. Enumerable.Range(Math.Max(1, target - 11), Math.Min(12, target))
+            .Select(i => new WalkLeg(i, _route[i], (int)(1000 / WalkSpeed)))];
+        ImmutableArray<WalkerView> party = [.. _roster.Select((sprite, i) => new WalkerView("proof-" + i, "Hero " + (i + 1), sprite, true, i == 0))];
+        if (_proofTarget < 0)
+            _proof.Receive(new ExploreView(terrain.Map.Id, "Road proof", 1, 0, _route[0], _route[0] with { X = _route[0].X + 1 }, false, [], party, "proof-0") { PeopleFlags = [.. _storyFlags] });
+        if (_stage == Stage.Spots || target != _proofTarget || held != _proofHeld || !_proofRoster.SequenceEqual(_roster))
+            _proof.Receive(new ExploreView(terrain.Map.Id, "Road proof", epoch, target, at, at with { X = at.X + 1 }, held, legs, party, "proof-0") { PeopleFlags = [.. _storyFlags] });
+        (_proofTarget, _proofHeld, _proofRoster) = (target, held, _roster);
+        return _proof.Frame(_frameDelta).Walkers;
     }
 
     private void Cross(double delta)
@@ -233,7 +276,7 @@ internal sealed partial class WorldDemo : Node
             RenderingServer.ViewportGetMeasuredRenderTimeGpu(rid), _canvas.RecordMs, query, draw, _canvas.OverItems,
             Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)));
         _crossing += delta;
-        _steps = (float)_crossing * StepsPerSecond;
+        _steps = (float)_crossing * WalkSpeed;
         Walk(_steps);
         if (_steps < _route.Length - 1)
         {

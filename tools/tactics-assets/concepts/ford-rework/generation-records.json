@@ -8,12 +8,12 @@
     "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
     "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
   },
-  "status": "Native bridge pixel art and TV previews ready; pixel-stage approval pending",
+  "status": "Approved bridge and all-road ramps installed; character motion verified; ground concept awaits approval",
   "concepts": [
     {
       "id": "environment_ford_bridge_fortified",
       "kind": "environment",
-      "title": "Warden bridge — Skarrow fortified",
+      "title": "Warden bridge \u2014 Skarrow fortified",
       "batch": "issue82-bridge",
       "lore": [
         "arcs.json:arc_ashen_ford",
@@ -29,7 +29,7 @@
     {
       "id": "environment_ford_bridge_after_force",
       "kind": "environment",
-      "title": "Warden bridge — reopened after force",
+      "title": "Warden bridge \u2014 reopened after force",
       "batch": "issue82-bridge",
       "lore": [
         "arcs.json:arc_ashen_ford",
@@ -45,7 +45,7 @@
     {
       "id": "environment_ford_bridge_after_parley",
       "kind": "environment",
-      "title": "Warden bridge — reopened after parley",
+      "title": "Warden bridge \u2014 reopened after parley",
       "batch": "issue82-bridge",
       "lore": [
         "arcs.json:arc_ashen_ford",
@@ -223,11 +223,13 @@
   },
   "cost": {
     "planned_images": 3,
-    "actual_total_cu": 52,
+    "actual_total_cu": 65,
     "quoted_cu_per_image": 13,
     "estimated_total_cu": 39,
     "initial_actual_cu": 39,
-    "revision_2_actual_cu": 13
+    "revision_2_actual_cu": 13,
+    "bridge_actual_total_cu": 52,
+    "ground_actual_cu": 13
   },
   "seed": "Not exposed by this model schema; prompts, references, model/job/asset IDs and output hashes retained.",
   "review_notes": [
@@ -293,17 +295,17 @@
       "bytes": 6394235
     }
   ],
-  "current_review": "revision-2.png",
+  "current_review": "ground/ground-concept.png",
   "pixel_stage_provider": "Local deterministic native town/prop tools",
   "pixel_stage_authorization": {
     "user_message": "Use native art tools",
     "date": "2026-11-05"
   },
   "pixel_art_approval": {
-    "status": "pending",
-    "review": "docs/superpowers/reports/2026-11-05-ford-rework/native-art/native-states.png",
-    "tv_review": "docs/superpowers/reports/2026-11-05-ford-rework/native-art/tv-comparison.jpg",
-    "owner_feedback": "There are no roads or stairs going up to this ford, it look rough as it is higher than the ground, and there is no road connecting to it. This does not match the concept art"
+    "status": "approved",
+    "user_message": "That looks much better",
+    "scope": "Native bridge art, ramps and connected approaches",
+    "date": "2026-11-05"
   },
   "native_art": {
     "source": "tools/tactics-assets/parts/ford_bridge.py",
@@ -313,7 +315,19 @@
     "states": 3,
     "palette": "wardenflame-style.json#palettes.ashen_ford",
     "runtime_packs_loaded": 3,
-    "preview_only": true,
-    "approach_revision": "Stone-supported ramps and continuous curbs; west apron joins town cobbles; east road turns into the existing east-bank road; gatehouse lowered to bank level."
+    "preview_only": false,
+    "approach_revision": "Stone-supported ramps and continuous curbs; west apron joins town cobbles; east road turns into the existing east-bank road; gatehouse lowered to bank level.",
+    "installed_state_pieces": 113,
+    "road_ramp_tiles": 38,
+    "integration_report": "docs/superpowers/reports/2026-11-05-ford-rework/integration/README.md"
+  },
+  "additional_owner_requests": [
+    "Ensure anywhere with elevation change on roads has matching ramps",
+    "Characters must go up over ramps without clipping and follow their actual surface"
+  ],
+  "ground_concept": {
+    "receipt": "ground/generation-records.json",
+    "approval": "awaiting owner",
+    "production_ground_changed": false
   }
 }

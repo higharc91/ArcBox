@@ -24,7 +24,9 @@
       {
         "name": "Player4",
         "xp": 250,
-        "injuries": []
+        "injuries": [
+          "Cracked ribs"
+        ]
       }
     ],
     "note": null,

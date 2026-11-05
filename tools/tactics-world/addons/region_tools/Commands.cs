@@ -17,6 +17,7 @@ public partial class Commands : Node
           --new=<id>               make an empty region scene in regions/; --chapter=<n> --size=<w>x<h> --name=<name> are optional
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
           --remap-props=<id>       remap a scene's prop atlas after a rebuild; requires --old-props=<manifest>; repeat --replace-prop=old@variant=new@variant to change painted variants
+          --paint-region=<json>   paint explicit material/height/flags cells, preserving markers and unrelated paint
           --edit-props=<id>        change single props in a scene and leave its paint alone; repeat --clear-prop=<x>,<y> and --place-prop=<id>@<variant>@<x>,<y>
           --check-person-variants   verify native editor variant save/load/export in a temporary scene
           --swatches               write the palette's images (then run Godot's --import)
@@ -59,6 +60,7 @@ public partial class Commands : Node
         if (Flag("check-person-variants"))
             return PersonVariantCheck.Run();
 
+        if (Arg("paint-region") is { } edits) return ApplyMobArenas(edits);
         if (Arg("apply-mob-arenas") is { } mobEdits) return ApplyMobArenas(mobEdits);
         if (Arg("export") is { } export)
             return Export(export);
@@ -121,6 +123,19 @@ public partial class Commands : Node
                         .Single(id => material.TileSet.GetSource(id).ResourceName == name);
                     material.SetCell(tile, source, Vector2I.Zero);
                     height.EraseCell(tile); flags.EraseCell(tile);
+                    if (paint.TryGetProperty("height", out var level))
+                    {
+                        var value = level.GetInt32();
+                        if (value is < 0 or > WorldRegion.MaxHeight) throw new ArgumentOutOfRangeException("height");
+                        height.SetCell(tile, 0, new Vector2I(value, 0));
+                    }
+                    if (paint.TryGetProperty("flags", out var bits))
+                    {
+                        var value = bits.GetInt32();
+                        if (value is < 0 or > 31) throw new ArgumentOutOfRangeException("flags");
+                        var atlas = PaletteBuilder.FlagsAtlas((TileFlags)value);
+                        flags.SetCell(tile, 0, new Vector2I(atlas.X, atlas.Y));
+                    }
                 }
                 var stamps = root.GetNode(RegionScene.Stamps);
                 foreach (var stamp in edit.GetProperty("stamps").EnumerateArray())

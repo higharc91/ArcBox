@@ -133,7 +133,8 @@ public sealed class WorldPlanTests
     {
         var terrain = new BoardTerrain(GroundOf(name).Map, null);
         var whole = BoardPlan.Build(terrain, Pack.Art);
-        var blocks = PlanOf(name).Blocks.SelectMany(b => b.Plan.Items).OrderBy(i => i.Order).ToArray();
+        var blocks = PlanOf(name).Blocks.SelectMany(b => b.Plan.Items)
+            .Concat(BoardPlan.StoryProps(terrain, Pack.Art, new HashSet<string>()).Items).OrderBy(i => i.Order).ToArray();
         var baseBlocks = blocks.Where(i => i is not Face { Kind: FaceKind.Decal or FaceKind.Blend }).ToArray();
 
         Assert.DoesNotContain(baseBlocks, i => i is Face { Grid: true });
@@ -210,7 +211,8 @@ public sealed class WorldPlanTests
         var stamp = new Tile(100, 52);
 
         Assert.NotEmpty(Pack.Map("river_crossing").Props);
-        foreach (var prop in Pack.Map("river_crossing").Props)
+        var story = BoardPlan.StoryProps(terrain, Pack.Art, new HashSet<string>());
+        foreach (var prop in Pack.Map("river_crossing").Props.Where(p => p.Present()))
         {
             var at = new Tile(prop.At.X + stamp.X, prop.At.Y + stamp.Y);
             var art = Pack.Art.Prop(prop.Id, [terrain.Look(at).Variant])!;
@@ -226,7 +228,7 @@ public sealed class WorldPlanTests
                 Assert.Equal(topLeft.X + art.Width, pieces.Max(p => p.Points.Max(q => q.X)), 1);
                 continue;
             }
-            var sprite = block.Plan.Items.OfType<Sprite>().First(s => s.Tile == at);
+            var sprite = block.Plan.Items.Concat(story.Items).OfType<Sprite>().First(s => s.Tile == at && s.Image.Path == art.Image.Path);
 
             Assert.Equal(topLeft, sprite.TopLeft);
             Assert.Equal(BoardOrder.Key(at, BoardLayer.Prop), sprite.Order);

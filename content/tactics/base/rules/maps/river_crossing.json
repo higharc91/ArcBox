@@ -1,17 +1,1598 @@
-{ "id": "river_crossing", "size": [14, 12],
-  "tiles": "AAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAgMAAgMAAgMAAgMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAEAAAIDAAIDAQEAAQEAAQEAAQEAAQAAAQAAAAAAAAAAAAAAAAAAAAEAAAEAAAIDAAIDAQEAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAEAAAEAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAA",
-  "materials": ["grass_ford/autumn", "dirt_ford/wet", "ford_water/clear", "rock_ford/bank"],
+{
+  "id": "river_crossing",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "AAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAgMAAgMAAgMAAgMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQUAAQUAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQkEAQkEAQEAAQUAAQUAAAAAAAAAAAAAAAAAAAAAAAEAAAIDAAIDAQEAAQkEAQkEAQEAAQUAAQUAAAAAAAAAAAAAAAAAAAEAAAkEAAkHAAkHAQEAAQkEAQkEAQAAAQUAAQUAAAUAAAUAAAUAAAYAAQYAAgQAAgQAAgQAAgcAAQgAAQUAAQUAAQUAAQUAAAUAAAUAAAUAAAYAAQYAAgQAAgQAAgQAAgcAAQgAAQUAAQUAAQUAAQUAAAAAAAAAAAAAAAAAAAAAAAkEAAkVAAkVAQAAAQAAAQAAAQAAAQAAAQAA",
+  "materials": [
+    "grass_ford/autumn",
+    "dirt_ford/wet",
+    "ford_water/clear",
+    "rock_ford/bank",
+    "warden_deck/oak",
+    "cobble/grey",
+    "warden_ramp/west",
+    "warden_ramp/east_high",
+    "warden_ramp/east_low",
+    "warden_edge/stone"
+  ],
   "props": [
-    { "id": "crate", "at": [5, 4], "blocks": true, "cover": "three_quarters" },
-    { "id": "crate", "at": [4, 6], "blocks": true, "cover": "three_quarters" },
-    { "id": "crate", "at": [9, 9], "blocks": true, "cover": "three_quarters" },
-    { "id": "rock_large", "at": [11, 4], "blocks": true, "cover": "three_quarters" },
-    { "id": "bridge_span_timber", "at": [8, 8], "blocks": false, "cover": "none" }
+    {
+      "id": "crate",
+      "at": [
+        5,
+        4
+      ],
+      "blocks": true,
+      "cover": "three_quarters"
+    },
+    {
+      "id": "crate",
+      "at": [
+        4,
+        6
+      ],
+      "blocks": true,
+      "cover": "three_quarters"
+    },
+    {
+      "id": "crate",
+      "at": [
+        11,
+        8
+      ],
+      "blocks": true,
+      "cover": "three_quarters"
+    },
+    {
+      "id": "rock_large",
+      "at": [
+        11,
+        4
+      ],
+      "blocks": true,
+      "cover": "three_quarters"
+    },
+    {
+      "id": "warden_fortified_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_fortified_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_force_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_4_7",
+      "at": [
+        4,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_force_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_slain"
+      ]
+    },
+    {
+      "id": "warden_parley_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_4_8",
+      "at": [
+        4,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_parley_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "blocks": false,
+      "cover": "none",
+      "requires": [
+        "ch1_ford_settled",
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "warden_gate_collision",
+      "at": [
+        5,
+        9
+      ],
+      "blocks": true,
+      "cover": "half",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "id": "warden_gate_collision",
+      "at": [
+        5,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "unless": [
+        "ch1_ford_settled"
+      ]
+    }
   ],
   "zones": {
-    "party_spawn": [[1, 9], [2, 9], [1, 10], [2, 10], [3, 10], [2, 11]],
-    "ridge_spawn": [[11, 2], [12, 2]],
-    "goblin_camp": [[9, 5], [10, 5], [9, 6], [10, 6], [9, 8], [10, 8]],
-    "ford": [[6, 7], [7, 7], [6, 8], [7, 8]],
-    "exit": [[13, 5], [13, 6]]
-  } }
+    "party_spawn": [
+      [
+        1,
+        9
+      ],
+      [
+        2,
+        9
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        3,
+        10
+      ],
+      [
+        2,
+        11
+      ]
+    ],
+    "ridge_spawn": [
+      [
+        11,
+        2
+      ],
+      [
+        12,
+        2
+      ]
+    ],
+    "goblin_camp": [
+      [
+        9,
+        5
+      ],
+      [
+        10,
+        5
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        12,
+        5
+      ],
+      [
+        11,
+        6
+      ],
+      [
+        12,
+        6
+      ]
+    ],
+    "ford": [
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        7
+      ]
+    ],
+    "exit": [
+      [
+        13,
+        5
+      ],
+      [
+        13,
+        6
+      ]
+    ]
+  }
+}

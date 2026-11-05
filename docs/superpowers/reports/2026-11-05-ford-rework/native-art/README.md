@@ -1,4 +1,6 @@
-# Native bridge pixel-art review
+# Native bridge pixel-art review (approved checkpoint)
+
+**Approved by the owner: “That looks much better”.** The bridge is now installed with per-tile sorting, real road ramps and character slope sampling; see [production integration](../integration/README.md). The isolated preview boundary below describes this earlier checkpoint.
 
 The owner approved revision 2 concepts (“that looks much better”) and chose
 “Use native art tools” on 2026-11-05. PixelLab is superseded for this bridge.

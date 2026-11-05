@@ -22,7 +22,7 @@ public sealed partial class TacticsGame
         if (destination?.Def.Spawns.Find(to.Spawn) is not { } at)
         { Note(StoryChanged); return false; }
         var blocking = Interactables.Blocking(Rules.InteractablesIn(to.Region), _doc.World!.Things, StoryFlags());
-        var ground = Rules.GroundFor(to.Region)!.With(blocking);
+        var ground = Rules.GroundFor(to.Region)!.With(blocking, StoryFlags());
         if (!ground.Walkable(at) || !Rules.ReachFor(to.Region)!.Contains(at))
         { Note("The passage's destination is blocked. The party stays here."); return false; }
 

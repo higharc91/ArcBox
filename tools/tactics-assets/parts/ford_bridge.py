@@ -251,21 +251,21 @@ def assembly(state):
     join(m,road_apron(),(-96,0,-32));join(m,road_apron(),(160,0,-16))
     for x in (0,32,64):
         for y in (-16,48):join(m,parapet(),(x,y,0))
-    join(m,gatehouse(state),(99,-64,-16));join(m,shelter(state),(115,-9,-16))
+    join(m,gatehouse(state),(131,-96,-16));join(m,shelter(state),(147,-41,-16))
     if state=='fortified':
         for x in (32,64):
             for y in (-16,48):join(m,hide_screen(),(x,y,0))
         join(m,barricade(),(0,0,0))
     elif state=='force':
-        join(m,wreckage(),(-30,70,-32))
+        join(m,wreckage(),(-32,-64,-32))
         for x in (34,66):
             for y in (0,64):_rod(m,(x,y,0),(x,y,16),radius=.8)
     else:
-        join(m,gate_open(),(-25,0,-12));join(m,stake_bundle(),(-30,82,-32))
+        join(m,gate_open(),(-25,0,-12));join(m,stake_bundle(),(-40,65,-32))
         for x in (32,64):
             for y in (-16,48):join(m,rolled_hide(),(x,y,12))
         # A modest grain share, beside rather than across the road.
-        for x,y in ((107,-5),(115,-2),(110,5)):
+        for x,y in ((139,-37),(147,-34),(142,-27)):
             m.blobs.append(T.Blob((x,y,-10),5,T._ref('prop/hay'),part=m.part(),squash=1.35))
     return m
 

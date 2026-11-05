@@ -23,7 +23,7 @@ public sealed class WorldGround
     {
         Map = map;
         People = people;
-        Terrain = new Terrain(map, ImmutableSortedDictionary<Tile, int>.Empty, []);
+        Terrain = new Terrain(map.WithProps([.. map.Props.Where(p => p.Present())]), ImmutableSortedDictionary<Tile, int>.Empty, []);
     }
 
     /// <summary>The people the TV draws. They don't touch the ground: nothing here reads them.</summary>
@@ -43,11 +43,11 @@ public sealed class WorldGround
     /// (interactables design §2.4). Walking, reach, landing and the checks use this over the plain ground; the plain ground stays the region
     /// with every passage open, which is how it's painted. With nothing blocked it's <see cref="Terrain"/> itself.
     /// </summary>
-    public Terrain With(IReadOnlyCollection<Tile> blocked)
+    public Terrain With(IReadOnlyCollection<Tile> blocked, IReadOnlySet<string>? flags = null)
     {
-        if (blocked.Count == 0)
+        if (blocked.Count == 0 && (!Map.Props.Any(p => p.Conditional) || flags is null))
             return Terrain;
-        ImmutableArray<PropPlacement> props = [.. Map.Props, .. blocked.Where(Map.InBounds).Select(t => new PropPlacement(ThingProp, t, true, Cover.None))];
+        ImmutableArray<PropPlacement> props = [.. Map.Props.Where(p => p.Present(flags)), .. blocked.Where(Map.InBounds).Select(t => new PropPlacement(ThingProp, t, true, Cover.None))];
         return new Terrain(Map.WithProps(props), ImmutableSortedDictionary<Tile, int>.Empty, []);
     }
 

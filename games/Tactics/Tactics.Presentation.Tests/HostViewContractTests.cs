@@ -60,7 +60,7 @@ public sealed class HostViewContractTests
         Assert.Equal(classes.Select(c => $"characters.human_{c}"), party.Select(u => u.Sprite));
         Assert.Equal(["goblin.1", "goblin.2", "goblin.3", "goblin.4", "goblin_archer.1", "goblin_archer.2"],
             battle.Units.Where(u => u.Side == "Enemy").Select(u => u.Id.Value));
-        Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(9, 6), new Tile(10, 6)],
+        Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(11, 5), new Tile(12, 5)],
             battle.Units.Where(u => u.Sprite == "characters.goblin_cutthroat").Select(u => u.At));
         Assert.Equal([new Tile(11, 2), new Tile(12, 2)], battle.Units.Where(u => u.Sprite == "characters.goblin_archer").Select(u => u.At));
         Assert.All(units, u => Assert.DoesNotContain("presets/bandit", u.Sprite.Path));   // nobody needed a stand-in
@@ -284,7 +284,7 @@ public sealed class HostViewContractTests
     public void A_tv_joining_a_real_battle_half_way_plays_one_beat_and_lands_on_the_state()
     {
         var (game, h) = AiBattle("river_crossing", 3);
-        for (var step = 0; step < 40; step++)
+        for (var step = 0; step < 40 && (OverTheWire(game).Battle?.Beats.LastOrDefault()?.Seq ?? 0) <= 20; step++)
             h.Advance(TimeSpan.FromSeconds(7));
         var live = OverTheWire(game).Battle!;
         Assert.True(live.Beats[^1].Seq > 20);

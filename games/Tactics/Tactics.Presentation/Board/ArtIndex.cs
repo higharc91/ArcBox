@@ -52,7 +52,7 @@ public sealed class ArtIndex
 
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
         int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours,
-        ImmutableDictionary<string, PropLook> Looks, double Scale);
+        ImmutableDictionary<string, PropLook> Looks, double Scale, bool Spread);
 
     /// <summary>A variant drawn at a size and anchor of its own (the manifest's <c>looks</c>): a new look added beside older, smaller art.</summary>
     private sealed record PropLook(int Width, int Height, int AnchorX, int AnchorY);
@@ -116,7 +116,7 @@ public sealed class ArtIndex
         var (name, path) = Pick(prop.Variants, prefer);
         var look = prop.Looks.GetValueOrDefault(name) ?? new PropLook(prop.Width, prop.Height, prop.AnchorX, prop.AnchorY);
         // A low prop wider than a tile lies over the tiles beside its own: a bridge's deck, which a unit on those tiles stands on.
-        var spread = prop.TileHeight <= 1 && prop.Light is null && prop.Scale >= 1 && look.Width > 2 * BoardProjection.HalfWidth;
+        var spread = prop.Spread && prop.TileHeight <= 1 && prop.Light is null && prop.Scale >= 1 && look.Width > 2 * BoardProjection.HalfWidth;
         return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, look.Height), look.Width, look.Height, look.AnchorX, look.AnchorY,
             prop.Light is { } light ? light with { Colour = prop.Colours.GetValueOrDefault(name, light.Colour) } : null,
             prop.TileHeight, prop.Scale, spread ? BuildingShape.OfProp(Path.Combine(_root, path), prop.Frames, look.Width, look.Height) : null);
@@ -232,7 +232,8 @@ public sealed class ArtIndex
                     ? looks.EnumerateObject().ToImmutableDictionary(l => l.Name, l => new PropLook(l.Value.GetProperty("size")[0].GetInt32(), l.Value.GetProperty("size")[1].GetInt32(),
                         l.Value.GetProperty("anchor")[0].GetInt32(), l.Value.GetProperty("anchor")[1].GetInt32()), StringComparer.Ordinal)
                     : ImmutableDictionary<string, PropLook>.Empty,
-                e.TryGetProperty("scale", out var scale) ? scale.GetDouble() : 1);
+                e.TryGetProperty("scale", out var scale) ? scale.GetDouble() : 1,
+                !e.TryGetProperty("spread", out var spread) || spread.GetBoolean());
         }
     }
 
