@@ -77,7 +77,7 @@ In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop i
 **Fixed (`799e8f70`):** the painter samples one whole frame of a texture, whatever its size. A low prop wider than a tile (the three bridge spans) is cut into quads half a tile wide, split along its run's tile edges, each sorted on the tile it lies over: in the world, a fight in place and a plain board. A quad clamped to a triangle no longer crosses nothing in `WorldPlan`'s test.
 **Proved by:** `OverlayPictureTests`: the bridge is drawn whole, a unit on each of its tiles stands over it and one behind it is under it, on the region and on the map, and the ford's walks are still true painter's order. Shots: [ford](../reports/tv-drawing-polish/ow08-ford-bridge-before-after.png) and [fight](../reports/tv-drawing-polish/ow08-fight-bridge-before-after.png), before and after, and the [fight in place](../reports/tv-drawing-polish/ow08-fight-in-place-after.png) from an `ARCBOX_STAGE=1` run. Issue #82 replaces the bridge, and nothing here repaints it. Its banks are at different heights, so a unit wading the ford beside the high bank's abutment is partly behind it, which is right for that art.
 
-### OW-09 · The ford's ground looks soft and blotchy · `needs user`
+### OW-09 · The ford's ground looks soft and blotchy · `in progress on ford-rework; bridge concepts await owner`
 Against the crisp town kit, the ash reads as an airbrushed smear, and the fight's ground is orange and olive camouflage. It's the worst-looking part of the region. Check whether the `*_ford` materials are too soft or too low in contrast, then repaint with crisper tops. Show the user a before and after.
 **Done when:** the user is happy with the ford, at the same pixel density as the town.
 
@@ -1075,3 +1075,14 @@ approved review hashes pass. Use `generic/verify-integration.py` for this combin
 checkpoint; earlier installation-only checkers target historical baselines.
 See `docs/superpowers/reports/2026-11-03-townsfolk-art/main-integration/report.md`.
 The owner's merge instruction supersedes prior no-PR/no-merge/no-closure notes.
+
+
+## Issue #82 concept checkpoint · 2026-11-05
+
+`ford-rework` includes current main and three new Scenario bridge design sheets:
+fortified, reopened after force and reopened after parley. Actual cost: 39 CU.
+Owner concept approval is pending as required by #82; production art, map geometry
+and balance are unchanged. The existing #78 OW-08 fix remains in place.
+Fresh native ford/ash baseline views and the ground-source diagnosis are saved.
+Three crossing/world-plan tests and all 49 overlay picture tests pass.
+See [the checkpoint report](../reports/2026-11-05-ford-rework/README.md).
