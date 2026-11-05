@@ -1,5 +1,7 @@
 # Locally authored pixel art · owner review
 
+**Approved by the owner (“I approve”) and integrated on 2026-11-05.** This page archives the reviewed candidates and preview checks. See [final integration](../../integration/README.md) for the live pack/scene and final verification.
+
 The owner replaced the PixelLab stage with “We don't have access to pixal lab, you make it.” These sprites are authored locally with the production town renderer and its existing materials. No PixelLab access, balance top-up or paid generation is needed. This stage used **zero new generation credits**; the earlier approved Scenario concepts remain the design references.
 
 ## Art and TV captures
@@ -20,7 +22,7 @@ The [art checks](art-validation.json) confirm four deterministic image/shadow re
 
 An initial northern granary position would have covered the existing `af_granary_sack`. The content validator caught it, and the reviewed candidate instead uses **[39,71]**. The quest sack stays at [40,70], the granary story marker stays at [42,70], and Maud's marker stays at [132,93]. No interactable coordinates, flags, rewards or voiced text changed. The granary's earlier [43,72] collision-only preflight is historical, not this final review candidate.
 
-All candidate content is in a disposable cloned pack. **The live content pack and saved region scene are unchanged.** No full game-suite pass is claimed for final integration: that happens after art approval and actual scene/manifest integration. Part 1's earlier full-suite evidence remains in the parent report.
+These review captures used a disposable cloned pack. The owner subsequently approved them, and the same PNG bytes and layout are now integrated into the live pack and saved scene. Current full-suite results and fresh live-pack captures are in the [integration report](../../integration/README.md).
 
 ## Source and reproduction
 
@@ -34,6 +36,6 @@ python tools/tactics-assets/concepts/ashen-ford-secrets/preview-local.py --stage
 
 The capture helper uses Xvfb on Linux when no display is selected, or the existing display/window otherwise. The preview builder copies the pack, stages the candidate layout and clones the already-built host beside it. It checks the live manifests/world file hashes remain unchanged. It does not silently install the art into the live game.
 
-## Next after review
+## Approval and integration
 
-Issue #81 calls for a second owner approval of pixel art and TV previews before final placement. That approval is pending. Once approved, integrate the additive town/props exports into the normal asset build, add the new art-family review entries, paint this layout in `ashen_ford.tscn`, export twice with byte-identical results, run the affected content/rendering/authoring checks and Chapter 1 integration checks, and update OW-34. Do not open a PR unless asked.
+The owner approved this art and the TV previews with “I approve” on 2026-11-05. The native build hooks, manifests, palette and scene are integrated. Two headless exports are byte-identical; final checks are recorded in the [integration report](../../integration/README.md). No PR is to be opened.

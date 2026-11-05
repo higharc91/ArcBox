@@ -503,7 +503,7 @@
     }
   ],
   "issue81_part2": {
-    "status": "Concepts approved; local native pixel-art and TV previews ready for owner review (PixelLab requirement superseded)",
+    "status": "Complete: native art and TV previews approved, integrated and verified; no PR",
     "records": "ashen-ford-secrets/generation-records.json"
   }
 }

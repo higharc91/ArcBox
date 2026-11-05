@@ -2,7 +2,7 @@
   "issue": 81,
   "part": 2,
   "branch": "ashen-ford-secrets",
-  "status": "concepts approved; locally authored pixel art and TV candidates ready for second approval",
+  "status": "Complete: owner-approved native art integrated and fully verified; no PR",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -196,7 +196,19 @@
   },
   "pixel_stage_provider": "Local deterministic authoring, as requested by owner",
   "pixel_art_approval": {
-    "status": "pending",
-    "stage": "native assets and TV preview; final placement not yet approved"
+    "status": "approved",
+    "user_message": "I approve",
+    "date": "2026-11-05",
+    "scope": "Native pixel art, TV previews and final placement"
+  },
+  "integration": {
+    "source_commit": "d7583d80",
+    "art_audit_commit": "a2fc91f3",
+    "report": "docs/superpowers/reports/2026-11-04-ashen-ford-secrets/integration/README.md",
+    "dotnet_tests": 6092,
+    "phone_tests": 504,
+    "art_checks": 5,
+    "environment_pngs": 647,
+    "chapter_force": "passed: won fight, 94 lines, end card, walking afterward"
   }
 }
