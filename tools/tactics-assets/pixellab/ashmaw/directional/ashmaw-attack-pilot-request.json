@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "template_animation_id": "attack-left",
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "A heavy bear swipes one forepaw forward, then settles its weight back on the ground. Keep head facing forward.",
+  "animation_name": "ashmaw_attack_pilot",
+  "directions": [
+    "south"
+  ]
+}

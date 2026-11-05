@@ -1,0 +1,40 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"jobs\": [\n    {\n      \"jobId\": \"job_vb2Cov7goWiDgt8AgiLhvGUe\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T18:02:06.836Z\",\n      \"updatedAt\": \"2026-11-03T18:02:18.616Z\",\n      \"modelId\": \"model_google-gemini-3-8-flash-tts\",\n      \"assetIds\": [\n        \"asset_L53oWit8RwV48vbETX7rVUws\"\n      ],\n      \"cuCost\": 2\n    },\n    {\n      \"jobId\": \"job_Qu2aqXpG6zpo6x1EnChnDyNj\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T17:37:29.164Z\",\n      \"updatedAt\": \"2026-11-03T17:37:36.141Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_xC6jDkRKbcAHz2jqZ4GRGsj6\"\n      ],\n      \"cuCost\": 3\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_vb2Cov7goWiDgt8AgiLhvGUe",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T18:02:06.836Z",
+        "updatedAt": "2026-11-03T18:02:18.616Z",
+        "modelId": "model_google-gemini-3-8-flash-tts",
+        "assetIds": [
+          "asset_L53oWit8RwV48vbETX7rVUws"
+        ],
+        "cuCost": 2
+      },
+      {
+        "jobId": "job_Qu2aqXpG6zpo6x1EnChnDyNj",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T17:37:29.164Z",
+        "updatedAt": "2026-11-03T17:37:36.141Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_xC6jDkRKbcAHz2jqZ4GRGsj6"
+        ],
+        "cuCost": 3
+      }
+    ]
+  },
+  "isError": false
+}

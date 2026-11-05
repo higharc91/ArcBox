@@ -16,6 +16,7 @@ public static class MusicChoice
 {
     private const string Title = "title";
     private const string Explore = "explore";
+    private const string Dungeon = "dungeon";
     private const string Fight = "battle";
     private const string Boss = "boss";
     private const string Finale = "finale";
@@ -29,6 +30,7 @@ public static class MusicChoice
     private static readonly ImmutableDictionary<string, string> Fights = new Dictionary<string, string>
     {
         ["warlord_bridge"] = Boss,
+        ["hollow_lair"] = Boss,
         ["keep_gate"] = Boss,
         ["rime_tower"] = Boss,          // Ivo Rime, Chapter 4's climax: the user's call, 2026-11-01 (Ford Assault stays ordinary)
         ["hall_of_the_flame"] = Finale,
@@ -37,21 +39,30 @@ public static class MusicChoice
     private static readonly ImmutableDictionary<string, string> Regions = new Dictionary<string, string>
     {
         ["ashen_ford"] = Emberwick,
+        ["cinder_hollow"] = Dungeon,
     }.ToImmutableDictionary();
 
     private static readonly ImmutableDictionary<string, string> Beds = new Dictionary<string, string>
     {
         ["river_crossing"] = "amb_river",
+        ["mob_pine_wolves"] = "amb_forest", ["mob_rooting_boars"] = "amb_forest",
+        ["mob_kobold_scouts"] = "amb_plains_wind", ["mob_river_slimes"] = "amb_river",
+        ["mob_road_bandits"] = "amb_plains_wind",
+        ["mob_hollow_bats"] = "amb_cinder_hollow", ["mob_hollow_kobolds"] = "amb_cinder_hollow",
         ["forest_ruins"] = "amb_forest",
         ["crypt_hall"] = "amb_dungeon",
         ["crystal_cave"] = "amb_dungeon",
         ["warlord_bridge"] = "amb_plains_wind",
         ["keep_gate"] = "amb_plains_wind",
         ["hall_of_the_flame"] = "amb_lava",
+        ["hollow_throat"] = "amb_cinder_hollow",
+        ["hollow_diggings"] = "amb_cinder_hollow",
+        ["hollow_nest"] = "amb_cinder_hollow",
+        ["hollow_lair"] = "amb_cinder_hollow",
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn, Emberwick];
+    public static IEnumerable<string> Ids => [Title, Explore, Dungeon, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn, Emberwick];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
@@ -82,8 +93,19 @@ public static class MusicChoice
     private static bool IsBoss(BattleView? battle) => battle is not null && Fights.ContainsKey(battle.Encounter);
 
     /// <summary>The bed under <paramref name="view"/>'s fight, or null away from one.</summary>
-    public static string? AmbienceOf(TacticsHostView view) => view.Camp is { Mode: "camp", Stage: not ("vote" or "dawn") } ? "amb_campfire" : view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : null;
+    public static string? AmbienceOf(TacticsHostView view) => view.Camp is { Mode: "camp", Stage: not ("vote" or "dawn") } ? "amb_campfire" : view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : view.Explore?.Region == "cinder_hollow" ? "amb_cinder_hollow" : null;
 
     /// <summary>The bed for a map, by its id in <c>sfx/manifest.json</c>, or null.</summary>
     public static string? Ambience(string map) => Beds.GetValueOrDefault(map);
+
+    /// <summary>A quiet creature bed near the lair, separate from the cave's room tone. Never plays after the kill.</summary>
+    public static string? CreatureAmbienceOf(TacticsHostView view)
+    {
+        if (view.Battle is { Encounter: "hollow_lair" } battle)
+            return battle.Units.Any(u => u.Id.Value == "ashmaw" && u.Hp > 0) ? "ashmaw_breath_loop" : null;
+        if (view.Phase is not (nameof(TacticsPhase.Exploration) or nameof(TacticsPhase.Story))
+            || view.Story?.Scene == "ashmaw_lair_after" || view.Explore is not { Region: "cinder_hollow" } explore
+            || explore.PeopleFlags?.Contains("sq_ashmaw_slain") == true) return null;
+        return Math.Abs(explore.At.X - 10) + Math.Abs(explore.At.Y - 32) <= 8 ? "ashmaw_breath_loop" : null;
+    }
 }

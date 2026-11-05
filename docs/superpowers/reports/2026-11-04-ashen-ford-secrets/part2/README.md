@@ -1,5 +1,7 @@
 # Lore places · issue #81 part 2
 
+> Historical review checkpoint. The owner subsequently authorized push and merge; [current-main integration and release checks](../merge/README.md) supersede earlier no-PR instructions below.
+
 The native art and TV previews are approved and integrated on `ashen-ford-secrets`; see [final integration](../integration/README.md) for the live pack/scene and final verification. **The owner replaced PixelLab with local authoring. The funding request and PixelLab instructions below are historical and no longer block the work.** The [local-art report](local-art/README.md) archives originals, screenshots, source and preview checks for the approved [39,71] granary layout.
 
 The two lore-linked briefs are in `tools/tactics-assets/concepts/scenario-briefs.json`; exact Scenario prompts, references, job/asset IDs and costs are in `tools/tactics-assets/concepts/ashen-ford-secrets/generation-records.json`.

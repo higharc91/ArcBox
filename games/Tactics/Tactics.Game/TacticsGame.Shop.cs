@@ -51,7 +51,10 @@ public sealed partial class TacticsGame
     private void CloseShop()
     {
         var farewell = OpenShop?.Farewell;
-        _doc = _doc with { World = _doc.World! with { Shop = null } };
+        var visit = _doc.World!.Shop;
+        if (visit is { Haggling: true })
+            EndTelling();
+        _doc = _doc with { World = _doc.World! with { Shop = null, Story = visit is { Haggling: true } ? visit.Under : _doc.World.Story } };
         Save();
         ToExploration();
         if (farewell is not null) Say(farewell);
@@ -61,6 +64,8 @@ public sealed partial class TacticsGame
     {
         if (OpenShop is null) { CloseShop(); return; }
         _phase = TacticsPhase.Story;
+        if (_doc.World!.Shop is { Haggling: true })
+            ResumeHaggle();
     }
 
     private ShopSave StockOf(ShopDef shop)
@@ -85,6 +90,7 @@ public sealed partial class TacticsGame
         if (input.Action == "restPropose") { if (profile.Value == _lead && shop.Services.Any(s => s.Kind == "room") && Camp is null) ProposeRest("inn", shop.Id, KeeperTile(shop)); return; }
         if (input.Action == "shopService") { ShopService(player, profile, input); return; }
         if (input.Action == "shopLeave") { if (profile.Value == _lead && Camp is null) CloseShop(); return; }
+        if (input.Action == "shopHaggle") { StartHaggle(player); return; }
         if (input.Action is not ("shopBuy" or "shopSell")) return;
         var trade = Str(input.Data, "trade");
         if (string.IsNullOrWhiteSpace(trade) || trade.Length > 128) { Toast(player.Id, "A trade id is required."); return; }
@@ -102,7 +108,7 @@ public sealed partial class TacticsGame
         if (buy && (!stock.Stock.ContainsKey(itemId) || available != -1 && available < count)) { Toast(player.Id, "Sold out"); return; }
         if (!buy && (Str(input.Data, "member") != profile.Value || stack is null || stack.Count < count)) { Toast(player.Id, "You may only sell items in your own bag."); return; }
         if (!buy && !ShopRules.Accepts(item, shop)) { Toast(player.Id, "The keeper does not buy that item."); return; }
-        var total = (long)(buy ? ShopRules.Buy(item, shop) : ShopRules.Sell(item, shop)) * count;
+        var total = (long)(buy ? ShopRules.Buy(item, shop, Haggled) : ShopRules.Sell(item, shop, Haggled)) * count;
         if (total > int.MaxValue || !buy && (long)member.Gold + total > int.MaxValue) { Toast(player.Id, "That trade exceeds the gold limit."); return; }
         if (buy && member.Gold < total) { Toast(player.Id, "Not enough gold"); return; }
         var newCount = (long)(stack?.Count ?? 0) + (buy ? count : -count);
@@ -129,29 +135,37 @@ public sealed partial class TacticsGame
         var shop = OpenShop!;
         var stock = StockOf(shop);
         var member = _doc.For(profile);
-        return WithServices(Custom("shop", new
+        var haggled = Haggled;
+        var view = WithServices(Custom("shop", new
         {
             shop = new { id = shop.Id, name = shop.Name, keeper = shop.Name, greeting = shop.Greeting },
             gold = member?.Gold ?? 0,
-            items = shop.Stock.Select(s => new { item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Buy(Rules.Items[s.Item], shop),
-                count = stock.Stock[s.Item.Value], can = member is not null && _online.Contains(player.Id) && stock.Stock[s.Item.Value] != 0 && member.Gold >= ShopRules.Buy(Rules.Items[s.Item], shop),
+            items = shop.Stock.Select(s => new { item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Buy(Rules.Items[s.Item], shop, haggled),
+                count = stock.Stock[s.Item.Value], can = member is not null && _online.Contains(player.Id) && stock.Stock[s.Item.Value] != 0 && member.Gold >= ShopRules.Buy(Rules.Items[s.Item], shop, haggled),
                 detail = Tooltips.For(Rules.Abilities[Rules.Items[s.Item].Use], _doc.PartyLevel, Rules) }),
             sell = member is null ? [] : member.Character.Bag.Where(s => ShopRules.Accepts(Rules.Items[s.Item], shop))
-                .Select(s => new { member = profile.Value, item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Sell(Rules.Items[s.Item], shop), count = s.Count }).ToArray(),
+                .Select(s => new { member = profile.Value, item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Sell(Rules.Items[s.Item], shop, haggled), count = s.Count }).ToArray(),
             you = new { member = member is null ? null : profile.Value, canBuy = member is not null && _online.Contains(player.Id) },
             leader = profile.Value == _lead,
             vip = IsVip(player),
             feed = _tradeFeed.ToArray(),
             portal = PortalPath(),
         }), profile);
+        // Haggling (USER DECISION E, decided 2026-11-03): only at a shop that trades, so an inn's or a temple's screen is as it was.
+        if (HaggleScreen(shop, profile) is not { } haggle)
+            return view;
+        var data = System.Text.Json.Nodes.JsonNode.Parse(view.Data.GetRawText())!.AsObject();
+        data["haggle"] = JsonSerializer.SerializeToNode(haggle, ArcJson.Options);
+        return view with { Data = JsonSerializer.SerializeToElement(data, ArcJson.Options) };
     }
 
     private ShopView? ShopViewOf() => CampVote || CampTalk || OpenShop is not { } shop ? null : new ShopView(shop.Id, shop.Name, shop.Name,
         shop.Greeting, TotalGold, StockOf(shop).Seq,
-        [.. shop.Stock.Select(s => new ShopItemView(s.Item.Value, Rules.Items[s.Item].Name, ShopRules.Buy(Rules.Items[s.Item], shop), StockOf(shop).Stock[s.Item.Value]))],
+        [.. shop.Stock.Select(s => new ShopItemView(s.Item.Value, Rules.Items[s.Item].Name, ShopRules.Buy(Rules.Items[s.Item], shop, Haggled), StockOf(shop).Stock[s.Item.Value]))],
         [.. _tradeFeed], shop.Keeper.Person is { } person ? "characters." + _region!.Def.People[person].Preset : null,
         [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))],
-        shop.Services.IsEmpty ? null : shop.Services,
+        shop.Services.IsEmpty ? null : [.. shop.Services.Select(s => s with { Price = ShopRules.Service(s, Haggled) })],
         shop.Services.IsEmpty ? null : [.. _doc.Members.Select(m => new ServiceGuestView(m.Key, m.Value.Character.Name,
-            [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))], shop.Services.IsEmpty ? null : RecoveryMembers());
+            [.. m.Value.Character.Injuries.Select(i => Rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value)], Camp?.Rooms.Contains(m.Key) == true))], shop.Services.IsEmpty ? null : RecoveryMembers(),
+        _doc.World!.Shop?.Haggle is { } haggle ? new HaggleView(haggle.Name, haggle.Die, haggle.Bonus, haggle.Dc, haggle.Passed) : null);
 }

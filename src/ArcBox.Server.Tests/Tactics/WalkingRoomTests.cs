@@ -36,11 +36,12 @@ public sealed class WalkingRoomTests
     /// A direction with at least <paramref name="steps"/> plain, straight steps ahead of <paramref name="from"/>: 300 ms each. None brings a
     /// thing to interact with into reach (a tile away), which rightly changes the leader's screen (its <c>targets</c>).
     /// </summary>
-    private static string OpenWay(JsonElement from, int steps = 12)
+    private static string OpenWay(JsonElement from, int steps = 12, bool quiet = true)
     {
         var terrain = Pack.Value.GroundFor("ashen_ford")!.Terrain;
         var things = Pack.Value.InteractablesIn("ashen_ford").Select(t => t.At).ToArray();
-        bool Clear(Tile t) => things.All(at => Math.Max(Math.Abs(at.X - t.X), Math.Abs(at.Y - t.Y)) > 1);
+        bool Clear(Tile t) => things.All(at => Math.Max(Math.Abs(at.X - t.X), Math.Abs(at.Y - t.Y)) > 1)
+            && (!quiet || Quiet(t));
         foreach (var dir in Enum.GetValues<WalkDir>())
         {
             var at = new Tile(from[0].GetInt32(), from[1].GetInt32());
@@ -57,11 +58,25 @@ public sealed class WalkingRoomTests
         throw new InvalidOperationException("The party's start has no open way.");
     }
 
+    // Packet fanout tests need a quiet stretch: autonomous mob motion is legitimate host news.
+    private static bool Quiet(Tile tile) => Pack.Value.MobsIn("ashen_ford").SelectMany(m => m.Patch)
+        .All(at => Math.Max(Math.Abs(at.X - tile.X), Math.Abs(at.Y - tile.Y)) > 20);
+
+    private static Tile QuietStart()
+    {
+        foreach (var tile in Pack.Value.ReachFor("ashen_ford")!.Where(Quiet).OrderBy(t => Math.Abs(t.X - 33) + Math.Abs(t.Y - 60)).ThenBy(t => t))
+        {
+            try { OpenWay(JsonSerializer.SerializeToElement(new[] { tile.X, tile.Y })); return tile; }
+            catch (InvalidOperationException) { }
+        }
+        throw new InvalidOperationException("No quiet walking fixture in Ashen Ford.");
+    }
+
     /// <summary>The TV and <paramref name="phones"/> phones, c1 to cN, a campaign, and everyone out in the world with a class.</summary>
     private static async Task<RoomFixture> WorldAsync(int phones = 3)
     {
         var rules = Pack.Value;
-        var f = new RoomFixture(rules: new TacticsCampaignRules(rules), game: new GameRegistration(() => new TacticsGame(rules)));
+        var f = new RoomFixture(rules: new TacticsCampaignRules(rules), game: new GameRegistration(() => new TacticsGame(rules, seed: new TacticsSeed([], [], "ashen_ford", QuietStart()))));
         await f.HostAsync();
         for (var i = 1; i <= phones; i++)
             await f.JoinAsync($"P{i}", $"c{i}");
@@ -292,7 +307,7 @@ public sealed class WalkingRoomTests
         var lead = annLeads ? ann : bob;
         var viewId = (annLeads ? annView : bobView).GetProperty("viewId").GetString();
         var start = await tv.WaitForAsync(ClientMethods.HostView, v => v.GetProperty("phase").GetString() == "Exploration");
-        var way = OpenWay(start.GetProperty("explore").GetProperty("at"));
+        var way = OpenWay(start.GetProperty("explore").GetProperty("at"), quiet: false);
 
         // Far past 20 a second, the stop last of all, as a phone whose bucket has run dry would lose it.
         string? refused = null;

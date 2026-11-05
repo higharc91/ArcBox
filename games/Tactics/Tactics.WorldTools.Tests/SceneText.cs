@@ -91,6 +91,7 @@ internal static partial class SceneText
             Stamps = [.. stamps.Select(n => new RegionStamp(Text(n["Map"]), n.Tile, int.Parse(n["HeightOffset"] ?? "0", CultureInfo.InvariantCulture)))],
             Starts = [.. spawns.Where(n => (n["Kind"] ?? "0") == "0").Select(n => n.Tile)],
             Recoveries = [.. spawns.Where(n => n["Kind"] == "1").Select(n => n.Tile)],
+            NamedSpawns = [.. spawns.Where(n => n["Kind"] == "2").Select(n => (Text(n["SpawnName"]), n.Tile))],
             OldStamps = [.. stamps.SelectMany(OldAreas)],
             MovedNodes = [.. Layers.Concat(MarkerGroups.Values.Order(StringComparer.Ordinal)).Where(name => nodes.SingleOrDefault(n => n.Parent == "." && n.Name == name)?.Moved == true)],
             Strays = Strays(nodes),

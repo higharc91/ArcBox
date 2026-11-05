@@ -26,6 +26,7 @@
               "sack",
               "cache",
               "door",
+              "cave_mouth",
               "gate",
               "drawbridge",
               "secret_door",
@@ -51,7 +52,8 @@
               "remains",
               "hidden_path",
               "stall",
-              "campfire"
+              "campfire",
+              "bounty_board"
             ]
           },
           "at": {
@@ -300,6 +302,22 @@
           "blocks": {
             "type": "boolean",
             "description": "Whether it stands in the way; the kind's when left out. Not for passages or floor traps."
+          },
+          "to": {
+            "type": "object",
+            "properties": {
+              "region": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "spawn": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
+            },
+            "required": [
+              "region",
+              "spawn"
+            ],
+            "additionalProperties": false
           },
           "scene": {
             "type": "string",

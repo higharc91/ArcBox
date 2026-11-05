@@ -40,23 +40,7 @@ an explicit decision in `tools/tactics-assets/parts/overworld_review.py`.
 
 ## Current integration boundary
 
-Ashen Ford's saved region and its Godot painting scene currently contain terrain,
-battle stamps, story spots and spawns. Buildings, boats and tents are represented
-by terrain blocks; there is no authored region prop/building/effect placement
-layer, and the walking exploration renderer is not implemented in this checkout.
-The live TV renderer consumes the shared terrain/prop art in **battles**.
-
-Consequently the material fixes improve those live maps immediately, but the town
-building, steam and landmark work is **asset-library ready**. The new `placeIcons`
-metadata is an art override for existing lore place ids; a future map consumer
-must honor each place's existing unlock conditions. It does not change lore kinds,
-story state or visibility by itself. The generic parchment sample is a style
-specimen, not canonical Vale geography.
-
-The [context comparison](../../../../tools/tactics-assets/previews/overworld-context-comparison.png)
-shows proposed dressing at the game's pixel density. It is a software composition,
-not a screenshot of a playable walking overworld. Terrain layout, heights, flags,
-battle stamps, beat positions, navigation and narrative are preserved.
+Main now includes the authored prop/building placement layers and the live walking renderer, together with battle stamps, story spots, fauna and interactions. The asset-library-only boundary described by the original review is superseded by the integration through PR #75. Historical compositions below remain art references; they are not evidence of a live gameplay run. Place metadata does not change lore unlock conditions.
 
 ## Validation
 

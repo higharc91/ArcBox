@@ -37,12 +37,13 @@ public static class ThingsDemo
     public static readonly ImmutableArray<string> Kinds =
         ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone",
          "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "hidden_path",
-         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "stall", "campfire"];
+         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "stall", "campfire", "cave_mouth", "bounty_board"];
 
     /// <summary>The first 21 kinds fill the first three galleries as they always have; these go where there's room.</summary>
     private static readonly ImmutableDictionary<string, (int Gallery, int Column, int Row)> Placed = new Dictionary<string, (int, int, int)>
     {
         ["hidden_path"] = (2, 1, 3), ["stall"] = (4, 0, 0), ["campfire"] = (4, 0, 1),
+        ["cave_mouth"] = (4, 0, 2), ["bounty_board"] = (4, 0, 3),
         ["tracks"] = (3, 0, 0), ["scratches"] = (3, 0, 1), ["disturbed_earth"] = (3, 0, 2), ["bloodstain"] = (3, 0, 3),
         ["draft"] = (3, 1, 0), ["carving"] = (3, 1, 1), ["rune"] = (3, 1, 2), ["remains"] = (3, 1, 3),
     }.ToImmutableDictionary(StringComparer.Ordinal);
@@ -291,7 +292,7 @@ public static class ThingsDemo
             (trapped, ThingEvents.Spotted, new InteractableSave("closed", TrapSpotted: true)));
         Add("trap-spotted", "Ana spots a pressure plate. Ana spots a trap on the crate.", 2.2, Moment("trap-spotted"));
         Happen((pit, ThingEvents.Sprung, new InteractableSave("idle", Trap: InteractableSave.Sprung)));
-        Add("trap-sprung", "Click. A trap goes off, but it does no harm.", 2, Moment("trap-sprung"));
+        Add("trap-sprung", InteractScenes.DefaultSprung + " Ana takes a minor injury: Scraped hands.", 2, Moment("trap-sprung"));
         Happen((plate, ThingEvents.Disarmed, new InteractableSave("idle", TrapSpotted: true, Trap: InteractableSave.Disarmed)));
         Add("trap-disarmed", "Ana takes the pressure plate apart.", 2, Moment("trap-disarmed"));
 

@@ -1,0 +1,11 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "template_animation_id": "breathing-idle",
+  "animation_name": "grisk_idle_template_pilot",
+  "directions": [
+    "south"
+  ],
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "Subtle slow breathing in place. Feet stay planted; right hand grips the pick firmly, helmet fixed to head. No side sway."
+}

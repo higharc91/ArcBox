@@ -41,6 +41,15 @@ internal sealed partial class Validation
             return;
         }
         var family = kind.Family;
+        if (def.Kind == "cave_mouth" && def.To is null) At("to", "A cave mouth needs a destination region and spawn.");
+        if (def.To is { } destination)
+        {
+            if (def.Kind != "cave_mouth") At("to", "Only a cave mouth travels to another region.");
+            if (string.IsNullOrWhiteSpace(destination.Region)) At("to/region", "The destination region is empty.");
+            if (string.IsNullOrWhiteSpace(destination.Spawn)) At("to/spawn", "The destination spawn is empty.");
+            if (def.Lock is not null || def.Trap is not null || def.Hidden is not null || def.Scene is not null)
+                At("to", "A travel passage is always open, with no lock, trap, hidden gate or alternate scene. Gate its availability with requires.");
+        }
         if (def.Facing is { } facing && !Facings.Contains(facing))
             At("facing", $"The facing '{facing}' must be ne, se, sw or nw.");
         if (def.Art is { } art)
@@ -202,11 +211,13 @@ internal sealed partial class Validation
                     ok = false;
                     continue;
                 }
-                if (stamps.Where(s => s.Holds(at)).Select(s => s.Map).FirstOrDefault() is { } map)
+                // A gated nonblocking pickup may appear after a stamped battle is won. Other things never overlap fights.
+                if (!(def.Kind == "pickup" && !def.Requires.IsDefaultOrEmpty && !def.Unless.IsDefaultOrEmpty && def.Blocks != true)
+                    && stamps.Where(s => s.Holds(at)).Select(s => s.Map).FirstOrDefault() is { } map)
                     Error(t, "at", $"'{def.Id}' at {at} is inside the stamp '{map}': a fight there would play over it.");
                 if (!byTile.TryAdd(at, def.Id))
                     Error(t, "at", $"'{def.Id}' at {at} shares its tile with '{byTile[at]}'.");
-                if (at == _def.Spawns.Start || at == _def.Spawns.Recovery)
+                if (at == _def.Spawns.Start || at == _def.Spawns.Recovery || _def.Spawns.Named?.Values.Contains(at) == true)
                     Error(t, "at", $"'{def.Id}' at {at} is on a spawn, where the party stands.");
                 if (spots.TryGetValue(at, out var beat))
                     Error(t, "at", $"'{def.Id}' at {at} is on the spot of the beat '{beat}', where its figure stands.");
@@ -237,6 +248,8 @@ internal sealed partial class Validation
                         Error(lever, field, $"The lever '{lever.Def.Id}' works '{id}', which isn't a passage.");
                         continue;
                     }
+                    if (target.Def.To is not null)
+                    { Error(lever, field, $"'{id}' is a travel entrance and is always open; a lever cannot close it."); continue; }
                     if (!workedBy.TryAdd(id, lever.Def.Id))
                         Error(lever, field, $"'{id}' is worked by '{workedBy[id]}' already: two levers would fight over it.");
                     if (target.Def.Open != lever.Def.Open)
@@ -289,7 +302,7 @@ internal sealed partial class Validation
             var worked = Interactables.Worked(_things.Select(t => t.Def));
             // A hidden path is shut until it's found, which may never be: it counts as a hidden door does (design §7.3).
             var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Path
-                    || (Family(t.Def) == InteractableFamily.Passage && (!t.Def.Open || worked.Contains(t.Def.Id))))
+                    || (Family(t.Def) == InteractableFamily.Passage && t.Def.To is null && (!t.Def.Open || worked.Contains(t.Def.Id))))
                 .Select(t => t.Def).ToList();
             var keys = new HashSet<string>(StringComparer.Ordinal);
             var levers = _things.Where(t => Family(t.Def) == InteractableFamily.Switch).Select(t => t.Def).ToList();
@@ -334,6 +347,8 @@ internal sealed partial class Validation
                 ("the recovery spawn", _def.Spawns.Recovery),
             };
             required.AddRange(_def.Beats.Select(b => ($"the beat '{b.Beat}'", b.At)));
+            required.AddRange((_def.Spawns.Named ?? Ordinal.Map<Tile>()).Select(s => ($"the named spawn '{s.Key}'", s.Value)));
+            required.AddRange(_things.Where(t => t.Def.To is not null).Select(t => ($"the exit '{t.Def.Id}'", t.Def.At)));
             foreach (var stamp in stamps)
                 if (maps.GetValueOrDefault(stamp.Map)?.Zones.GetValueOrDefault("party_spawn") is { IsDefault: false } zone)
                     required.AddRange(zone.Select(z => ($"the party spawn of the stamp '{stamp.Map}'", stamp.ToWorld(z))));
@@ -356,6 +371,7 @@ internal sealed partial class Validation
             // The places the party is put without walking there: it wakes at the recovery spawn, lands by a stamp after a fight, and travels to a
             // beat's spot for a scene set there. From each, whatever the levers and locks are by then, it must be sure to walk back to the start.
             var dropped = new List<(string What, Tile At)> { ("The recovery spawn", _def.Spawns.Recovery) };
+            dropped.AddRange((_def.Spawns.Named ?? Ordinal.Map<Tile>()).Select(s => ($"The named spawn '{s.Key}'", s.Value)));
             dropped.AddRange(_def.Beats.Select(b => ($"The spot of the beat '{b.Beat}'", b.At)));
             foreach (var stamp in stamps)
                 dropped.Add(($"The landing by the stamp '{stamp.Map}'",

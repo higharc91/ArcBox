@@ -24,6 +24,9 @@ public sealed class HostClient : IAsyncDisposable
     private volatile CreateRoomResult? _room;
     private volatile DropHandler? _dropHandler;
     private int _disposed;
+    private readonly Lock _viewLock = new();
+    private JsonElement? _view;
+    private string? _viewGame;
 
     /// <param name="server">Server base URL, e.g. <c>http://localhost:5080</c>; the hub is at <c>/hub</c>.</param>
     /// <param name="handler">Tests: an in-memory handler. When given, the client uses LongPolling through it.</param>
@@ -46,12 +49,23 @@ public sealed class HostClient : IAsyncDisposable
             .Build();
 
         _connection.On<LobbyState>(ClientMethods.LobbyChanged, l => Raise(new LobbyEvent(l)));
-        _connection.On<string, JsonElement>(ClientMethods.HostView, (game, view) => Raise(new HostViewEvent(game, view)));
-        _connection.On<GameResults>(ClientMethods.GameEnded, r => Raise(new GameEndedEvent(r)));
+        _connection.On<string, JsonElement>(ClientMethods.HostView, (game, view) =>
+        {
+            lock (_viewLock)
+                (_view, _viewGame) = (view, game);
+            Raise(new HostViewEvent(game, view));
+        });
+        _connection.On<string, JsonElement>(ClientMethods.HostViewPatch, OnHostViewPatch);
+        _connection.On<GameResults>(ClientMethods.GameEnded, r =>
+        {
+            ForgetView();
+            Raise(new GameEndedEvent(r));
+        });
         _connection.On<string, PackRef[]>(ClientMethods.ContentRequired, (game, packs) => Raise(new ContentRequiredEvent(game, packs)));
         _connection.On<string>(ClientMethods.RoomClosed, reason =>
         {
             _room = null;
+            ForgetView();
             Raise(new RoomClosedEvent(reason));
         });
 
@@ -78,6 +92,17 @@ public sealed class HostClient : IAsyncDisposable
 
     /// <summary>The room this client hosts (after <see cref="CreateRoomAsync"/> or <see cref="ResumeHostAsync"/>).</summary>
     public CreateRoomResult? Room => _room;
+
+    /// <summary>
+    /// Whether to ask the server for the view as patches against the one this client has (issue #77), which keeps an overworld
+    /// step in one network packet. <see cref="Event"/> still raises whole views either way. On by default.
+    /// </summary>
+    public bool UsePatches { get; init; } = true;
+
+    /// <summary>Patches applied and whole views asked for again since this client started: for tests and the TV's perf log.</summary>
+    public (int Applied, int Resent) PatchCounts => (Volatile.Read(ref _patchesApplied), Volatile.Read(ref _patchesResent));
+    private int _patchesApplied;
+    private int _patchesResent;
 
     /// <summary>How long <see cref="ConnectAsync"/> waits between failed attempts.</summary>
     public TimeSpan ConnectRetryDelay { get; init; } = TimeSpan.FromSeconds(5);
@@ -119,6 +144,7 @@ public sealed class HostClient : IAsyncDisposable
     {
         var room = await CallAsync(() => _connection.InvokeAsync<CreateRoomResult>("CreateRoom"));
         _room = room;
+        await AskForPatchesAsync();
         return room;
     }
 
@@ -127,6 +153,7 @@ public sealed class HostClient : IAsyncDisposable
     {
         await CallAsync(() => _connection.InvokeAsync("ResumeHost", code, hostToken));
         _room = new CreateRoomResult(code.ToUpperInvariant(), hostToken);
+        await AskForPatchesAsync();
     }
 
     public Task SelectGameAsync(string id) => CallAsync(() => _connection.InvokeAsync("SelectGame", id));
@@ -167,6 +194,65 @@ public sealed class HostClient : IAsyncDisposable
             return;
         }
         await _connection.DisposeAsync();
+    }
+
+    /// <summary>
+    /// Asks for patches. Sent without waiting for an answer, so binding as host takes no longer than it did: the room handles it after
+    /// the bind, in order. A server that doesn't offer patches keeps sending whole views, which works the same.
+    /// </summary>
+    private async Task AskForPatchesAsync()
+    {
+        if (!UsePatches)
+            return;
+        try { await _connection.SendAsync("UseHostPatches"); }
+        catch (Exception ex) when (ex is HubException or InvalidOperationException) { /* Not connected: the next bind asks again. */ }
+    }
+
+    private void ForgetView()
+    {
+        lock (_viewLock)
+            (_view, _viewGame) = (null, null);
+    }
+
+    /// <summary>
+    /// Applies a patch to the view this client has and raises the whole view. One it can't apply (no view for that game yet, or a
+    /// malformed patch) asks the server for the whole view again; the next <see cref="ClientMethods.HostView"/> puts things right.
+    /// </summary>
+    private void OnHostViewPatch(string game, JsonElement patch)
+    {
+        JsonElement? whole = null;
+        lock (_viewLock)
+        {
+            if (_view is { } view && _viewGame == game)
+            {
+                try
+                {
+                    whole = HostViewPatch.Apply(view, patch);
+                    (_view, _viewGame) = (whole, game);
+                }
+                catch (Exception ex) when (ex is InvalidOperationException or KeyNotFoundException or JsonException or FormatException)
+                {
+                    (_view, _viewGame) = (null, null);
+                }
+            }
+        }
+
+        if (whole is { } next)
+        {
+            Interlocked.Increment(ref _patchesApplied);
+            Raise(new HostViewEvent(game, next));
+            return;
+        }
+
+        Interlocked.Increment(ref _patchesResent);
+        _ = ResendAsync();
+
+        async Task ResendAsync()
+        {
+            try { await _connection.InvokeAsync("ResendHostView"); }
+            catch (Exception) when (Volatile.Read(ref _disposed) == 0) { /* The reconnect's ResumeHost sends the whole view anyway. */ }
+            catch (Exception) { }
+        }
     }
 
     private async Task ResumeAfterReconnectAsync()

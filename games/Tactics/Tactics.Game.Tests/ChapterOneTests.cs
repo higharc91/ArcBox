@@ -175,6 +175,10 @@ public abstract class ChapterOne
             var marker = Assert.Single(Host.Explore!.Markers!.Value);
             Assert.Equal("alert", marker.Emote);
             var ground = Rules.GroundFor(Host.Explore.Region)!.Terrain;
+            // The chapter route deliberately walks around visible, optional fights.
+            var danger = Rules.MobsIn(Host.Explore.Region).SelectMany(m => m.Patch).SelectMany(t => new[]
+                { t, new Tile(t.X + 1, t.Y), new Tile(t.X - 1, t.Y), new Tile(t.X, t.Y + 1), new Tile(t.X, t.Y - 1) }).ToHashSet();
+            ground = Rules.GroundFor(Host.Explore.Region)!.With(danger);
             var taps = WorldWalk.Route(ground, Host.Explore.At, t => StoryRules.InReach(ground, t, marker.At), ClassDef.DefaultJump)
                 ?? throw new InvalidOperationException($"No way from {Host.Explore.At} to {marker.Beat} at {marker.At}.");
             foreach (var dir in taps)

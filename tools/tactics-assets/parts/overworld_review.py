@@ -31,6 +31,10 @@ group('props','crate barrel sack cart chest chest_open','Store, granary, docks a
     'Wood and metal match the town kit. Keep access lanes clear. Crates/sacks support the grain shortage; gold-filled chests are rewards, not street furniture.')
 group('props','maud_ash_garden maud_stool_pots',"Old Maud's burned-bank home",
     'Owner-approved kitchen-herb bed in cold ash and knee-high stool/pots. Keep the cottage approach and reed track clear; no magical glow or occult trophies.')
+group('props','candle_stubs','Occupied kobold passages in Cinder Hollow',
+    'Existing approved cave dressing: small practical wax candles with local warm light. Preserve their floor anchors and keep traversal and encounter staging clear; these are not ember-fire.')
+group('props','animal_bones dried_blood','Ashmaw nest and cave feeding sites',
+    'Existing approved signs of predation. Keep bones and old blood localized to the cave and nest, grounded at their native scale; they do not belong at Maud\'s cared-for cottage.')
 group('props','fishing_skiff','Ashen Ford riverbank and working docks',
     'A small practical fishing boat, grounded or moored at water. Keep boarding and pedestrian routes clear; its artwork does not create a traversable crossing.')
 group('props','bridge_span_damaged bridge_span_stone bridge_span_timber','Authored ford crossings',

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using Tactics.Logic;
@@ -14,6 +15,18 @@ namespace Tactics.Game.Tests;
 /// </summary>
 public sealed class WalkModelTests
 {
+    // This model describes walking and story-stamp battles. Roaming contact and its clocks
+    // have their own model/runtime tests, so keep ambient encounters out of this fixture.
+    private static readonly Lazy<RulesPack> ModelRules = new(() => EditedRules(folder =>
+    {
+        var path = Path.Combine(folder, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        var files = manifest["files"]!.AsArray();
+        foreach (var file in files.Where(f => f!.GetValue<string>().StartsWith("mobs/", StringComparison.Ordinal)).ToArray()) files.Remove(file);
+        File.WriteAllText(path, manifest.ToJsonString());
+    }));
+    private static RulesPack Rules => ModelRules.Value;
+
     private const int EventsPerSeed = 300;
     private const int DefaultEvents = 6_000;
 

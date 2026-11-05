@@ -1,0 +1,17 @@
+{
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "parameters": {
+    "prompt": "Original production character concept sheet for Wardenflame, Embers of the Vale. The reference is the APPROVED GRISK sheet: use exactly its orange-brown reptilian kobold species, pointed snout, modest two horns, long balancing tail, compact digitigrade legs, amber eyes, practical worn materials, grounded humane tactical-fantasy drawing and restrained warm top-left light with cool shadows. These are two ordinary adult kobold workers from the same excavation crew, visibly related to Grisk, about 0.8-0.9 m tall against his 0.95 m. Do not copy his helmet, headlamp, pick, scar or foreman's tally gear; those distinguish his rank. Not green goblins, humans, baby dragons, cute pets or rich warriors.\nCreate ONE cohesive comparison sheet with TWO CLEAR ROWS. TOP ROW is the KOBOLD KNIFE WORKER: patched rust-brown sleeveless work vest over a worn pale undershirt, practical wraps, bare small horns, little ore pouch, ordinary leather belt. Holds a short worn iron utility DAGGER naturally in his anatomical RIGHT hand, fingers firmly around the handle and wrist connected. BOTTOM ROW is the KOBOLD SLINGER: same species and body proportions, a short dust-stained dark umber cowl around the shoulders with horns visible, simple crossed leather harness, a stone pouch on his anatomical left hip, and one small clay fire pot secured at the belt. The right hand holds a genuine two-cord leather SLING with a little stone cradle; no bow, arrows, crossbow or Y-shaped modern slingshot. The fire pot is a small practical pottery vessel, not a bomb or glowing fantasy orb.\nEach row has SEPARATED consistent full-body FRONT, BACK and THREE-QUARTER views plus one small face/equipment study. Keep the same anatomy, weapon handedness, clothing construction, tail and pouch placement across that role's views. The back belt is a plain strap with seam and pouch backs; its front buckle must not face backwards. The head's back must not show a face. All hands, feet, tails and equipment fully inside generous margins, no overlapping characters. Quiet expressive wary adult faces, small readable pupils with restrained eye whites, clean material planes and detail that will translate into matching tiny pixel sprites. No extra limbs, floating weapons, modern equipment, skull trophies, scenery or UI. Warm parchment backing matching the reference; simple role headings only, no paragraphs or branding. This is concept art, not a pixel sprite sheet.",
+    "referenceImages": [
+      "asset_TXx2ypS9LjXJ3uPfmPB353fr"
+    ],
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  },
+  "status": "Submitted and completed; see concept-run.json and concept-result.json."
+}

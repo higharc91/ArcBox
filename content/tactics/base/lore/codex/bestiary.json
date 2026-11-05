@@ -6,21 +6,27 @@
       "category": "bestiary",
       "subject": "goblin",
       "body": "Small, quick and hungry. The hill clans fight with spears, short bows and ambushes, and they fight hardest for their children. A goblin who surrenders expects to be fed; a goblin who is not fed remembers.",
-      "related": ["codex_skarrow"]
+      "related": [
+        "codex_skarrow"
+      ]
     },
     {
       "id": "bestiary_emberwick_stock",
       "title": "The Stock of Emberwick",
       "category": "bestiary",
       "body": "The farms around Emberwick keep patient mules for the grain road and small goats to browse the rough field edges. The mules carry sacks between the outlying steads, the mill and the town granary; a little brass bell muffled in leather lets a handler find one in the dusk without ringing across the river. The goats know every gate in the fences and crowd close to the reeve's warm-walled cottage when the evening turns cold. They are ordinary, stubborn creatures, and the people who tend them count them as carefully as the last good sheaves.",
-      "related": ["codex_ashen_ford"]
+      "related": [
+        "codex_ashen_ford"
+      ]
     },
     {
       "id": "bestiary_ashen_ford_wildlife",
       "title": "Wild Neighbours of the Ford",
       "category": "bestiary",
       "body": "Rooks work the cut fields behind the scarecrows, turning over stubble for grubs after the harvest. Mallards settle in the quieter bends below the ford, well away from the toll bridge. At dusk a red fox comes down from Scarpfoot Wood to hunt mice along the old field edges. The farmers say the foxes have been seen closer to town since the hills began sending game down and the fields stopped holding warmth. None of them are omens; they are hungry neighbours, like everyone else in the Vale.",
-      "related": ["codex_ashen_ford"]
+      "related": [
+        "codex_ashen_ford"
+      ]
     },
     {
       "id": "bestiary_hobgoblin",
@@ -28,7 +34,9 @@
       "category": "bestiary",
       "subject": "hobgoblin",
       "body": "Larger, disciplined cousins of the hill goblins, who join the clans in war years. Vorga's Host is built around them: shield walls, drilled archers, and no patience for bargaining.",
-      "unlock": { "chapter": 3 }
+      "unlock": {
+        "chapter": 3
+      }
     },
     {
       "id": "bestiary_cultist",
@@ -36,8 +44,12 @@
       "category": "bestiary",
       "subject": "cultist",
       "body": "Farmers, millers and widows from the hungry towns, armed with knives and faith. Most have never fought before. They are not afraid to die, because they believe the flame will remember them.",
-      "unlock": { "chapter": 2 },
-      "related": ["codex_kindled"]
+      "unlock": {
+        "chapter": 2
+      },
+      "related": [
+        "codex_kindled"
+      ]
     },
     {
       "id": "bestiary_risen",
@@ -45,7 +57,9 @@
       "category": "bestiary",
       "subject": "zombie",
       "body": "The dead of the pass, raised by the cold ember: Warden pilgrims, dwarven road-builders and goliaths of the lost holds. They walk the old roads they walked in life, without any memory of who they were. They are not cruel. They are empty.",
-      "unlock": { "chapter": 4 }
+      "unlock": {
+        "chapter": 4
+      }
     },
     {
       "id": "bestiary_skeleton",
@@ -53,7 +67,9 @@
       "category": "bestiary",
       "subject": "skeleton",
       "body": "The oldest dead of the Wardens' crypts, still in the remnants of their uniforms, still keeping watch. Something in the crypts' wards keeps them at their posts.",
-      "unlock": { "chapter": 3 }
+      "unlock": {
+        "chapter": 3
+      }
     },
     {
       "id": "bestiary_wraith",
@@ -61,8 +77,12 @@
       "category": "bestiary",
       "subject": "wraith",
       "body": "What is left when ember-fire burns away every memory a person had. A wraith is cold, hungry, and drawn to the living, because the living still remember.",
-      "unlock": { "chapter": 4 },
-      "related": ["codex_ember_cost"]
+      "unlock": {
+        "chapter": 4
+      },
+      "related": [
+        "codex_ember_cost"
+      ]
     },
     {
       "id": "bestiary_elementals",
@@ -70,7 +90,9 @@
       "category": "bestiary",
       "subject": "fire_elemental",
       "body": "Fragments of the Hearthflame that have woken. Near a burning ember they rise as fire; near water, earth and wind they take those shapes instead, though they always remember being fire. They are not hostile so much as homesick.",
-      "unlock": { "chapter": 2 }
+      "unlock": {
+        "chapter": 2
+      }
     },
     {
       "id": "bestiary_red_dragon",
@@ -78,8 +100,81 @@
       "category": "bestiary",
       "subject": "dragon",
       "body": "A great red dragon came to Ember Keep in the decade after the Fall, drawn by the heat of the flame's heart, and has slept coiled around it ever since. The Last Watch has never tried to move it. The Kindled are counting on it waking.",
-      "unlock": { "chapter": 5 },
-      "related": ["codex_ember_keep"]
+      "unlock": {
+        "chapter": 5
+      },
+      "related": [
+        "codex_ember_keep"
+      ]
+    },
+    {
+      "id": "bestiary_ashmaw",
+      "title": "Ashmaw",
+      "category": "bestiary",
+      "subject": "ashmaw",
+      "body": "A vast grey cave bear with coal-bright eyes and smouldering fur tips. Old warmth kept it sleeping; picks woke it, and hunger drove it out. A creature to pity, once it can no longer hurt the town.",
+      "unlock": {
+        "flag": "sq_ashmaw_slain"
+      }
+    },
+    {
+      "id": "bestiary_grisk",
+      "title": "Grisk of the Diggings",
+      "category": "bestiary",
+      "subject": "kobold_foreman",
+      "body": "Helmet lamp, tally cord and a pick held like a promise. Grisk’s crew is paid by the pound. He shouts loudest when the stone behind him growls.",
+      "unlock": {
+        "flag": "sq_ashmaw_diggings_won"
+      }
+    },
+    {
+      "id": "bestiary_mob_pine_wolves",
+      "title": "Wolves in the Pines",
+      "category": "bestiary",
+      "subject": "wolf",
+      "body": "When the river freezes, the pine packs nose closer to tilled ground; a traveller who leaves them room is seldom worth a chase."
+    },
+    {
+      "id": "bestiary_mob_rooting_boars",
+      "title": "Rooting Boars",
+      "category": "bestiary",
+      "subject": "boar",
+      "body": "The farm edges still hide roots beneath the frost, and the boars defend each patch as fiercely as any deed-holder."
+    },
+    {
+      "id": "bestiary_mob_kobold_scouts",
+      "title": "Ash Market Scouts",
+      "category": "bestiary",
+      "subject": "kobold_roamer",
+      "body": "Ash Market diggers search the burned bank for salvage, with one eye on the road and the other on their candle flame."
+    },
+    {
+      "id": "bestiary_mob_river_slimes",
+      "title": "River Slimes",
+      "category": "bestiary",
+      "subject": "river_slime",
+      "body": "Thin river slimes gather where ash and reed-water settle, feeding on the refuse the ford washes downstream."
+    },
+    {
+      "id": "bestiary_mob_road_bandits",
+      "title": "Roadside Toughs",
+      "category": "bestiary",
+      "subject": "bandit_roamer",
+      "body": "An open ford brings trade, and trade brings hungry toughs who mistake a frayed coat and a stolen axe for a toll-keeper’s warrant."
+    },
+    {
+      "id": "bestiary_mob_hollow_bats",
+      "title": "Bats of the Hollow",
+      "category": "bestiary",
+      "subject": "hollow_bat",
+      "body": "The quieter pockets of Cinder Hollow shelter roosts of bats that burst into wing when lantern-light troubles their sleep."
+    },
+    {
+      "id": "bestiary_mob_hollow_kobolds",
+      "title": "Off-Shift Diggers",
+      "category": "bestiary",
+      "subject": "kobold_roamer",
+      "body": "Away from the foreman’s pick, tired diggers search the side galleries for scraps they can claim as their own."
     }
   ]
 }

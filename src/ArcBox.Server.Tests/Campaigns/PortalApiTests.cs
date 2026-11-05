@@ -493,6 +493,28 @@ public class PortalApiTests
         Assert.Equal(HttpStatusCode.TooManyRequests, limited.StatusCode);
     }
 
+    // Behind Fly.io's proxy every request has the proxy's address: the client's is in Fly-Client-IP.
+    [Fact]
+    public async Task Behind_a_proxy_the_rate_limit_is_per_client_from_the_configured_header()
+    {
+        using var f = new ArcServerFactory().WithWebHostBuilder(b => b
+            .UseSetting("Portal:PermitsPerMinute", "2")
+            .UseSetting("Portal:ClientIpHeader", "Fly-Client-IP"));
+        using var http = f.CreateClient();
+
+        async Task<HttpStatusCode> From(string ip)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/me");
+            request.Headers.Add("Fly-Client-IP", ip);
+            return (await http.SendAsync(request, Ct)).StatusCode;
+        }
+
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.TooManyRequests, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.2"));    // another client has its own window
+    }
+
     [Fact]
     public async Task Rate_limit_is_configurable()
     {

@@ -21,9 +21,12 @@ public readonly record struct UnitPlace(Vector2 Map, float Height)
 
     /// <summary>
     /// The tile whose slot it sorts in. Between two tiles that's the nearer one: otherwise that tile's top, painted later,
-    /// would cover the unit's feet.
+    /// would cover the unit's feet. A hair past a tile's middle still counts as on it: a lerp along one axis rounds the other a hair off, and a walker going
+    /// across the screen was put in the next tile's slot, over what stands in front of it.
     /// </summary>
-    public Tile Over => new((int)MathF.Ceiling(Map.X - 0.5f), (int)MathF.Ceiling(Map.Y - 0.5f));
+    public Tile Over => new((int)MathF.Ceiling(Map.X - 0.5f - Hair), (int)MathF.Ceiling(Map.Y - 0.5f - Hair));
+
+    private const float Hair = 1e-3f;
 
     /// <summary>Where it lands, in art pixels.</summary>
     public Vector2 Feet => BoardProjection.Corner(Map.X, Map.Y, Height);
@@ -235,6 +238,14 @@ public static class UnitPlan
         return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, walking is null ? drawn.Idle : drawn.Anim(walking), PhaseOf(unit), row, mirror, 0, false, [], [], null,
             null, [], feet, null) { Dressing = true };
     }
+
+    /// <summary>
+    /// One of the world's animals (<see cref="World.WorldHerd"/>): showing <paramref name="column"/> of its sheet in <paramref name="row"/>, with no ring and no marks,
+    /// sorted among the people by its tile, so what stands in front of it hides it.
+    /// </summary>
+    public static BoardUnit Animal(string id, UnitSprite sprite, UnitPlace place, int column, int row, bool mirror)
+        => new(OrderOf(place.Over, sprite), new UnitId(id), UnitTone.Neutral, place.Feet, sprite, new UnitAnim([column], 1, false), 0, row, mirror, 0, false, [], [], null,
+            null, [], place.Feet, null) { Dressing = true };
 
     /// <summary>Where the tail of an emote over a standing figure goes: a crown's or a "!"'s, just over the head of <paramref name="sprite"/> at <paramref name="feet"/>.</summary>
     public static Vector2 Overhead(Vector2 feet, UnitSprite sprite) => new(feet.X, feet.Y - sprite.HeadLift - Gap);

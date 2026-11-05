@@ -86,13 +86,17 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             creating ? rules.Classes.Values : rules.Classes.Values.Where(c => c.Id == own!.Class),
             creating ? rules.Backgrounds.Values : rules.Backgrounds.Values.Where(b => b.Id == own!.Background),
             own?.Level ?? doc.PartyLevel, rules, own?.Class);
-        return JsonSerializer.SerializeToElement(new
+        var view = JsonSerializer.SerializeToNode(new
         {
             level = doc.PartyLevel, completed = doc.Completed, party,
             me = mine is null ? null : Mine(mine, rules),
             options,
             details,
-        }, ArcJson.Options);
+        }, ArcJson.Options)!.AsObject();
+        // The party's key ring (USER DECISION 8, decided 2026-11-03), beside the party: only once it holds a key, so a portal with none is as it was.
+        if (doc.World is { } world && KeyRing.Of(rules, world.Flags, world.Things) is { IsEmpty: false } keys)
+            view["keys"] = JsonSerializer.SerializeToNode(keys, ArcJson.Options);
+        return JsonSerializer.SerializeToElement(view, ArcJson.Options);
     }
 
     /// <summary>
@@ -128,7 +132,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         var choices = cls is null ? [] : SheetBuilder.PickChoices(cls, subclass, c.Level);
         var placed = SheetBuilder.AssignPicks(picks, choices);
         var sheet = Sheet(c, rules);
-        return new
+        var view = JsonSerializer.SerializeToNode(new
         {
             name = c.Name, describe = Describe(c), race = c.Race, @class = c.Class, subclass = c.Subclass, background = c.Background,
             level = c.Level, xp = record.Xp, scores, picks, freeRemake = record.RemakeIsTheFreeOne,
@@ -147,7 +151,14 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             saves = sheet?.SaveProficiencies ?? [],
             // Each skill's bonus in a story check, as SkillCheck rolls it.
             bonuses = sheet is null ? null : SkillCheck.Skills.Keys.ToImmutableSortedDictionary(s => s, s => SkillCheck.Bonus(sheet, s), StringComparer.Ordinal),
-        };
+        }, ArcJson.Options)!.AsObject();
+        if (c.Trinket is { } id && rules.Trinkets.TryGetValue(id, out var trinket))
+            view["trinket"] = JsonSerializer.SerializeToNode(new
+            {
+                id, trinket.Name, trinket.Text, trinket.Rarity, @class = trinket.Class,
+                className = rules.Classes[trinket.Class].Name, active = trinket.ActiveFor(c),
+            }, ArcJson.Options);
+        return view;
     }
 
     /// <summary>The character's battle sheet, for its skills and saves; null for a record the pack can't build (an old or damaged one).</summary>
@@ -238,7 +249,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 : type == "createCharacter"
                     // Every remake keeps the existing inventory, injuries and purse. Starting kits are granted only
                     // on first creation, so selling a kit then remaking cannot refill it. Only post-battle remakes use the free one.
-                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag }, Remade = mine.Remade || mine.HasFought }
+                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag, Trinket = mine.Character.Trinket }, Remade = mine.Remade || mine.HasFought }
                     : mine with { Character = character };
             if (color is not null)
                 record = record with { Color = color };

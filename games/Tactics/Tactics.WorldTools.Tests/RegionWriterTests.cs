@@ -21,6 +21,19 @@ public sealed class RegionWriterTests
 
     private static RegionSource Source(int width = 64, int height = 64) => new("r", "Region", 1, width, height);
 
+    [Fact]
+    public void Named_destinations_export_in_ordinal_order_and_survive_repair()
+    {
+        var source = Source();
+        source.NamedSpawns.Add("return", new Tile(3, 2));
+        source.NamedSpawns.Add("entrance", new Tile(2, 2));
+        var def = Written(source);
+        Assert.Equal(["entrance", "return"], def.Spawns.Named!.Keys);
+        Assert.Equal(new Tile(3, 2), def.Spawns.Find("return"));
+        var repaired = RegionWriter.Repair(source, Known, new Dictionary<Tile, TileInfoNamed>());
+        Assert.Equal(JsonSerializer.Serialize(def.Spawns, ArcJson.Options), JsonSerializer.Serialize(Written(repaired).Spawns, ArcJson.Options));
+    }
+
     private static RegionDef Written(RegionSource source)
     {
         var result = RegionWriter.Write(source, Known);

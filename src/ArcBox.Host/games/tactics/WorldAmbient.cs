@@ -6,7 +6,8 @@ using Tactics.Presentation.World;
 namespace ArcBox.Host.Games.Tactics;
 
 /// <summary>
-/// Draws and plays pure ambient life on the world: butterflies or fireflies, fish jumping in deep water, smoke from chimneys, steam off the river,
+/// Draws and plays pure ambient life on the world (<see cref="AmbientPlan"/>): butterflies or fireflies, fish jumping in deep water, steam off the river, falling leaves,
+/// embers, motes in lamplight and birds across the sky,
 /// and quiet positional calls from nearby farm animals.
 /// It stands in the world's light, all but what glows by itself, which goes through its own additive layer.
 /// TV-only: no gameplay logic, no view data, no network inputs.
@@ -15,9 +16,10 @@ internal sealed partial class WorldAmbient : Node2D
 {
     private const float AnimalReach = 440;
 
-    private sealed class AnimalCall(AudioStreamPlayer2D player, Tile home, Vector2 position, int seed, int firstDelay, int firstSpread, int interval, int intervalSpread)
+    private sealed class AnimalCall(AudioStreamPlayer2D player, string sound, Tile home, Vector2 position, int seed, int firstDelay, int firstSpread, int interval, int intervalSpread)
     {
         public AudioStreamPlayer2D Player { get; } = player;
+        public string Sound { get; } = sound;
         public Tile Home { get; } = home;
         public Vector2 Position { get; set; } = position;
         public int Seed { get; } = seed;
@@ -32,19 +34,21 @@ internal sealed partial class WorldAmbient : Node2D
 
     private readonly AmbientPlan? _plan;
     private readonly string _ambientRoot;
-    private readonly Dictionary<string, Texture2D> _textures = [];
+    private readonly Dictionary<string, Texture2D?> _textures = [];
     private readonly Color _light;
-    private readonly WorldFauna _fauna;
+    private readonly Func<Tile, Vector2?> _animalAt;
     private readonly Node2D _glow = new() { Material = new CanvasItemMaterial { BlendMode = CanvasItemMaterial.BlendModeEnum.Add } };
     private readonly List<AnimalCall> _animalCalls = [];
     private AmbientItem[] _items = [];
 
-    public WorldAmbient(AmbientPlan? plan, string ambientRoot, string packRoot, BattleMap map, Color light, int zIndex = 0, WorldFauna? fauna = null)
+    /// <param name="animalAt">Where the animal that lives on a tile is now, in art pixels, so its call comes from it.</param>
+    /// <param name="ambientRoot">The pack's <c>ambient</c> folder: the calls are in <c>sfx</c> beside it.</param>
+    public WorldAmbient(AmbientPlan? plan, string ambientRoot, BattleMap map, Color light, int zIndex, Func<Tile, Vector2?> animalAt)
     {
         _plan = plan;
         _ambientRoot = ambientRoot;
         _light = light;
-        _fauna = fauna ?? new WorldFauna(packRoot, map, light);
+        _animalAt = animalAt;
         ZIndex = zIndex;
 
         foreach (var prop in map.Props.Where(p => p.Id is "farm_goat" or "pack_mule" or "field_crow" or "river_duck" or "red_fox"))
@@ -58,18 +62,15 @@ internal sealed partial class WorldAmbient : Node2D
                 "red_fox" => ("animal_fox_yip", -24f, 10, 15, 80, 60),
                 _ => throw new InvalidOperationException($"No ambient call for '{prop.Id}'."),
             };
-            var path = System.IO.Path.Combine(packRoot, "sfx", $"{id}.wav");
+            var path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(ambientRoot.TrimEnd(System.IO.Path.DirectorySeparatorChar)) ?? "", "sfx", $"{id}.wav");
             if (!System.IO.File.Exists(path) || !map.InBounds(prop.At))
                 continue;
 
-            var stream = AudioStreamWav.LoadFromFile(path);
-            if (stream is null)
-                continue;
 
+            // Its sound is read later, a file a frame (LoadNext), not as the world opens.
             var player = new AudioStreamPlayer2D
             {
                 Name = $"{id}_{prop.At.X}_{prop.At.Y}",
-                Stream = stream,
                 Bus = ArcBox.Host.Audio.AudioBuses.Sfx,
                 VolumeDb = volume,
                 MaxDistance = AnimalReach,
@@ -77,20 +78,69 @@ internal sealed partial class WorldAmbient : Node2D
                 PanningStrength = 0.85f,
             };
             var ground = BoardProjection.Corner(prop.At.X, prop.At.Y, map[prop.At].Height);
-            _animalCalls.Add(new AnimalCall(player, prop.At, new Vector2(ground.X + 32, ground.Y + 16), HashCode.Combine(prop.At.X, prop.At.Y, prop.Id.GetHashCode(StringComparison.Ordinal)),
+            _animalCalls.Add(new AnimalCall(player, path, prop.At, new Vector2(ground.X + 32, ground.Y + 16), HashCode.Combine(prop.At.X, prop.At.Y, prop.Id.GetHashCode(StringComparison.Ordinal)),
                 firstDelay, firstSpread, interval, intervalSpread));
         }
-    }
 
-    public override void _Ready()
-    {
+        // Its children are its own from the start, out of the tree: freed unadopted (the world closing as it was built), it takes them with it.
         AddChild(_glow);
-        _glow.Draw += () => DrawItems(_glow, add: true);
         foreach (var call in _animalCalls)
         {
             call.Player.Position = call.Position;
             AddChild(call.Player);
         }
+    }
+
+    public override void _Ready() => _glow.Draw += () => DrawItems(_glow, add: true);
+
+    /// <summary>Lets go of its images now, as the board's painter does, rather than when the collector comes round.</summary>
+    public override void _ExitTree()
+    {
+        foreach (var texture in _textures.Values.OfType<Texture2D>())
+        {
+            texture.Dispose();
+        }
+        _textures.Clear();
+        _paths = null;
+    }
+
+    /// <summary>Reads the next animal call's sound, once each; false when there's none left. The world calls it with its textures, within their budget.</summary>
+    public bool LoadNext()
+    {
+        // Its images first: read as one first came into view, a strip cost that frame a file read and an upload.
+        _paths ??= new Queue<string>(_plan?.Paths ?? []);
+        if (_paths.TryDequeue(out var image))
+        {
+            Texture(System.IO.Path.Combine(_ambientRoot, image));
+            return true;
+        }
+        var call = _animalCalls.FirstOrDefault(c => c.Player.Stream is null && !_unreadable.Contains(c.Sound));
+        if (call is null)
+            return false;
+        _sounds.TryGetValue(call.Sound, out var stream);
+        stream ??= _sounds[call.Sound] = AudioStreamWav.LoadFromFile(call.Sound);
+        if (stream is null)
+            _unreadable.Add(call.Sound);
+        call.Player.Stream = stream;
+        return true;
+    }
+
+    private readonly Dictionary<string, AudioStreamWav?> _sounds = [];
+    private readonly HashSet<string> _unreadable = [];
+    private Queue<string>? _paths;
+
+    /// <summary>The texture of an ambient image, read once; null if there's no such file.</summary>
+    private Texture2D? Texture(string fullPath)
+    {
+        if (_textures.TryGetValue(fullPath, out var known))
+            return known;
+        Texture2D? texture = null;
+        if (System.IO.File.Exists(fullPath))
+        {
+            using var image = Image.LoadFromFile(fullPath);
+            texture = ImageTexture.CreateFromImage(image);
+        }
+        return _textures[fullPath] = texture;
     }
 
     /// <summary>Updates active ambient creatures for the camera's view.</summary>
@@ -114,7 +164,7 @@ internal sealed partial class WorldAmbient : Node2D
         var center = new Vector2((view.Min.X + view.Max.X) * 0.5f, (view.Min.Y + view.Max.Y) * 0.5f);
         foreach (var call in _animalCalls)
         {
-            call.Position = _fauna.PositionOf(call.Home) ?? call.Position;
+            call.Position = _animalAt(call.Home) ?? call.Position;
             call.Player.Position = call.Position;
             var near = call.Position.DistanceTo(center) <= AnimalReach;
             if (!near)
@@ -129,7 +179,7 @@ internal sealed partial class WorldAmbient : Node2D
                 call.NextAt = clock + call.FirstDelay + Math.Abs(call.Seed % call.FirstSpread);
             }
 
-            if (clock < call.NextAt || call.Player.Playing)
+            if (clock < call.NextAt || call.Player.Playing || call.Player.Stream is null)
                 continue;
 
             call.Player.Play();
@@ -148,18 +198,7 @@ internal sealed partial class WorldAmbient : Node2D
                 continue;
             }
 
-            var fullPath = System.IO.Path.Combine(_ambientRoot, item.Path);
-            if (!_textures.TryGetValue(fullPath, out var texture))
-            {
-                if (System.IO.File.Exists(fullPath))
-                {
-                    var img = Image.LoadFromFile(fullPath);
-                    texture = ImageTexture.CreateFromImage(img);
-                    _textures[fullPath] = texture;
-                }
-            }
-
-            if (texture is not null)
+            if (Texture(System.IO.Path.Combine(_ambientRoot, item.Path)) is { } texture)
             {
                 var srcRect = new Rect2(item.Frame * item.FrameSize.X, 0, item.FrameSize.X, item.FrameSize.Y);
                 var corner = new Vector2(

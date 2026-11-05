@@ -62,6 +62,11 @@ public sealed class BoardLightingTests
         ["river_crossing"] = Dusk,
         ["warlord_bridge"] = null,
         ["ashen_ford"] = Dusk,
+        ["mob_pine_wolves"] = Dusk, ["mob_rooting_boars"] = Dusk, ["mob_kobold_scouts"] = Dusk,
+        ["mob_river_slimes"] = Dusk, ["mob_road_bandits"] = Dusk,
+        ["mob_hollow_bats"] = "hollow", ["mob_hollow_kobolds"] = "hollow",
+        ["cinder_hollow"] = "hollow", ["hollow_throat"] = "hollow", ["hollow_diggings"] = "hollow",
+        ["hollow_nest"] = "hollow", ["hollow_lair"] = "hollow",
     };
 
     private static LitBoard LitOf(BattleMap map, BoardChanges? changes = null) => LitBoard.Build(Plan(map, changes), Lit(map, changes));
@@ -454,7 +459,7 @@ public sealed class BoardLightingTests
         foreach (var id in maps.Concat(regions))
         {
             float Lifted(JsonElement a, int c) => a[c].GetSingle() + (1 - a[c].GetSingle()) * BoardLighting.AmbientLift;
-            var stated = StatedLight[id] == Dusk ? BoardLighting.Dusk : StatedLight[id] is { } room
+            var stated = StatedLight[id] == "hollow" ? new Rgb(.28f, .27f, .34f) : StatedLight[id] == Dusk ? BoardLighting.Dusk : StatedLight[id] is { } room
                 ? new Rgb(Lifted(rooms.GetProperty(room), 0), Lifted(rooms.GetProperty(room), 1), Lifted(rooms.GetProperty(room), 2))
                 : new Rgb(1, 1, 1);
 

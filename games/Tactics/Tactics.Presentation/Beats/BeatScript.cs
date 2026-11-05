@@ -216,6 +216,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
     private sealed class Builder(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds)
     {
+        private double _creaturePoseUntil;
         private readonly List<Cue> _cues = [];
         private BattleView _view = shown;
         private double _t;
@@ -265,7 +266,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             Flush();
             var cues = _cues.OrderBy(c => c.At).ToImmutableArray();
             var last = cues.IsEmpty ? 0 : cues[^1].At;
-            return new BeatScript(beat.Seq, cues, Math.Max(Math.Max(_t, last), BeatTiming.Least));
+            return new BeatScript(beat.Seq, cues, Math.Max(Math.Max(Math.Max(_t, last), _creaturePoseUntil), BeatTiming.Least));
         }
 
         // What the ground going takes with it happens together with it, not after the dust has settled.
@@ -345,7 +346,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private UnitGear GearOf(UnitId id) => sounds?.Gear(_view.Units.FirstOrDefault(u => u.Id == id)?.Sprite) ?? new UnitGear(null, false, null, false, false);
 
-        private void Cry(UnitId id, string what) => Sound(GearOf(id).Family is { } family ? $"{family}_{what}" : null);
+        private void Cry(UnitId id, string what) => Sound(GearOf(id).Family is { } family ? family == "ashmaw" && what == "attack" ? "ashmaw_maul" : $"{family}_{what}" : null);
 
         private void Play(BattleEvent e)
         {
@@ -596,6 +597,18 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         // A blow is the weapon's sound; anything else is a spell gathering, then the sound of what it makes.
         private void SwingSound(AbilityUsed used, string anim)
         {
+            if (used.Ability.Value == "grisk.dig_faster") return; // his authored voice bark carries the order
+            if (used.Ability.Value is "ashmaw.cinder_roar" or "ashmaw.ash_shake")
+            {
+                Sound(used.Ability.Value == "ashmaw.cinder_roar" ? "ashmaw_roar" : "ashmaw_shake");
+                return;
+            }
+            if (_view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman"
+                && used.Ability.Value == "common.attack")
+            {
+                Sound(sounds?.Has("kobold_pick") == true ? "kobold_pick" : "swing_blunt");
+                return;
+            }
             var blow = used.Presentation?.Fx is null && used.Presentation?.Projectile is null || Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]);
             Cry(used.Source, "attack");
             Sound(blow ? SoundChoice.Swing(GearOf(used.Source).Weapon) : SoundChoice.IsSpell(used.Presentation?.Fx) ? "spell_cast" : null);
@@ -625,18 +638,26 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             if (aim is not { } target || target == source)
             {
-                _cues.Add(new PoseCue(_t, BeatTiming.Cast, used.Source, anim));
-                Sound(SoundChoice.IsSpell(effect) ? "spell_cast" : null);
+                var length = used.Ability.Value switch
+                {
+                    "ashmaw.cinder_roar" => 1.2, // six frames at five fps
+                    "ashmaw.ash_shake" => 1.0,
+                    "grisk.dig_faster" => 0.7,
+                    _ => BeatTiming.Cast,
+                };
+                _cues.Add(new PoseCue(_t, length, used.Source, anim));
+                if (length != BeatTiming.Cast) SwingSound(used, anim);
+                else Sound(SoundChoice.IsSpell(effect) ? "spell_cast" : null);
                 EffectSound(effect);
                 Burst(effect, source);
-                _t += BeatTiming.Cast;
+                _t += length;
                 return;
             }
 
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
-            // The basic Attack names no projectile, whatever the weapon, and only a bow reaches that far with it.
+            // Basic ranged attacks infer their projectile from the equipped weapon.
             var plain = reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
-            if ((plain ? Arrow : used.Presentation?.Projectile ?? (flies ? used.Presentation?.Fx : null)) is { } key && fx.Shot(key) is { } shot)
+            if ((plain ? GearOf(used.Source).Weapon == "sling" ? "projectiles.rock" : Arrow : used.Presentation?.Projectile ?? (flies ? used.Presentation?.Fx : null)) is { } key && fx.Shot(key) is { } shot)
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
@@ -651,9 +672,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
-                _cues.Add(new LungeCue(_t, BeatTiming.Lunge, used.Source, source, target, anim));
+                var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
+                    : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman" ? 0.75 : BeatTiming.Lunge;
+                _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
+                if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
-                _t += BeatTiming.Windup;
+                _t += length != BeatTiming.Lunge ? 0.4 : BeatTiming.Windup;
             }
             else
             {
@@ -702,7 +726,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);
-            _cues.Add(new PoseCue(_t, BeatTiming.Impact, hit.Unit, Hurt));
+            var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch
+            {
+                "monsters.ashmaw" => 0.5,
+                "monsters.kobold_foreman" => 2.0 / 3,
+                _ => BeatTiming.Impact,
+            };
+            _cues.Add(new PoseCue(_t, length, hit.Unit, Hurt));
+            if (length != BeatTiming.Impact) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
             Sound(SoundChoice.Impact(hit.Type, GearOf(hit.Unit).Armoured, _shot));
             Cry(hit.Unit, "hurt");
             Moment("hit", 0.08);
@@ -742,8 +773,15 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void PlayLoss(BattleEvent e, UnitId unit)
         {
-            _cues.Add(new PoseCue(_t, BeatTiming.Down, unit, Down));
-            var fallen = _t + (_reaction is not null ? BeatTiming.Condition : BeatTiming.Down);
+            var length = _view.Units.FirstOrDefault(u => u.Id == unit)?.Sprite switch
+            {
+                "monsters.ashmaw" => 4.0 / 3,
+                "monsters.kobold_foreman" => 1.0,
+                _ => BeatTiming.Down,
+            };
+            _cues.Add(new PoseCue(_t, length, unit, Down));
+            var fallen = _t + (length != BeatTiming.Down ? length : _reaction is not null ? BeatTiming.Condition : BeatTiming.Down);
+            if (length != BeatTiming.Down) _creaturePoseUntil = Math.Max(_creaturePoseUntil, fallen);
             Cry(unit, "death");
             Sound("died", fallen);
             Burst(Puff, TileOf(unit), fallen);

@@ -1,5 +1,7 @@
 # Issue #81 · final integration
 
+> Historical review checkpoint. The owner subsequently authorized push and merge; [current-main integration and release checks](../merge/README.md) supersede earlier no-PR instructions below.
+
 The owner approved both Scenario concepts, replaced PixelLab with local authoring, then approved the native art and TV previews with **“I approve”** on 2026-11-05. Integration source commit: `d7583d80` on `ashen-ford-secrets`. No additional approval is needed for these assets or their reviewed layout. No PR is to be opened.
 
 The locked granary, Maud's dressed cottage, cold-ash herb bed and stool/pots are now in the live town/props manifests. Every installed sprite matches its approved PNG bytes. The authoring scene places the 3×2 granary at [39,71] and retains Maud's 2×2 cottage at [130,88]. Existing sacks/cart furnish the storage yard; four skull pikes are removed near Maud. Quest interactables, both story markers, terrain, stamps, spawns, people, flags, rewards and voiced lines remain unchanged.

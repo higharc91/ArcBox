@@ -54,6 +54,10 @@
     "conversations/celandine_marrowby.json",
     "conversations/rook.json",
     "quests.json",
-    "scenes/side_quests.json"
+    "scenes/side_quests.json",
+    "scenes/ashmaw.json",
+    "conversations/dagna_holt.json",
+    "barks/grisk.json",
+    "conversations/old_maud.json"
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (A restrained shoulder-fur shudder while the feet, hips and tail remain absolutely fixed. Keep the exact original single bear silhouette and its short stub tail unchanged. The shoulders quiver slightly and settle, with head direction unchanged. No standing up, no turning, no added appendages, symbols or particles.)\ndirections: south-west (1 jobs)\njob_ids: south-west=299f91c6-2efb-4f11-bb15-4f9d7c4e8913\ngroup: a424c69c-70f3-4911-9040-ae6dbdf2fe96\nframes: 4 (reference stripped, keep_first_frame=false)\ncanvas: south-west 160x180 (generated at this size; with custom frames the stored canvas is re-measured around the motion plus 40%, capped at 256 a side, so it often differs — read it off a saved frame)\ncost: 2 generations (2/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"A restrained shoulder-fur shudder while the feet, hips and tail remain absolutely fixed. Keep the exact original single bear silhouette and its short stub tail unchanged. The shoulders quiver slightly and settle, with head direction unchanged. No standing up, no turning, no added appendages, symbols or particles.\", animation_group_id=\"a424c69c-70f3-4911-9040-ae6dbdf2fe96\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -21,6 +21,9 @@ public sealed class RecordingSender : IClientSender
         return _messages.Where(m => m.ConnectionId == connectionId && m.Method == method).ToList();
     }
 
+    /// <summary>Everything sent to <paramref name="connectionId"/>, in order.</summary>
+    public IReadOnlyList<SentMessage> All(string connectionId) => _messages.Where(m => m.ConnectionId == connectionId).ToList();
+
     public string LastViewId(string conn)
     {
         var msg = Of(conn, ClientMethods.ControllerView).Last();

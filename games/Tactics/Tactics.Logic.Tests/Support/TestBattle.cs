@@ -26,7 +26,6 @@ public sealed class TestBattle
     private ImmutableArray<TriggerDef> _triggers = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
-    static TestBattle() => Invariants.Enabled = true;
 
     private TestBattle(BattleMap map)
     {

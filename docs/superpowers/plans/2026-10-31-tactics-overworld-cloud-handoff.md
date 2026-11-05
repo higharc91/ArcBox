@@ -12,9 +12,9 @@ git checkout ccr-18ad4510-q68nad
 git pull --rebase origin ccr-18ad4510-q68nad
 ```
 
-Work and push on `ccr-18ad4510-q68nad`. Run `git pull --rebase` before every push, because other sessions push here too.
+For issue #76, work and push on `stability-and-tooling`, cut from current main `9c41a7bd`. The older session-branch instructions are historical.
 
-PR #67 was merged by the user, so everything up to `3894cad` is on `main`. Later commits on this branch aren't, and **no PR is open. Don't open or merge one unless the user asks.**
+Main includes PRs #67, #70, #72 and #75, plus the recovery integration and watchdog update. Do not open a PR or merge this issue branch unless the user asks.
 
 Before anything else, confirm the build is green:
 
@@ -44,28 +44,9 @@ The user's standard for this work, in their words: "Spend a ton of time on makin
 
 ## 3. Where things stand
 
-Expect 3,603 .NET tests and 335 web tests, all passing, with 0 warnings. If they don't, stop and find out why before building on it.
+Current baseline: main `9c41a7bd` (PR #75). Walking, staged battles, Chapter 1 story, authored props/buildings, interactables, shops, recovery, NPC conversations and side quests are integrated. The historical 3,603 .NET and 335 web counts below are superseded by the [issue 76 verification report](../reports/2026-11-03-stability-tooling.md); use its measured results rather than an old expected count.
 
-**What works now:** after Muster the party stands in Ashen Ford. The leader steers from an 8-way pad on their phone, and the party walks the real TV world with the camera following. Leader rotation, handover, saved position, a stop that survives a lost release, and TV drops are all done. The battle list is still reached with `battles`, and a list fight returns to the world. **The world has no story and no fights on the spot yet.**
-
-| Milestone | State | Where |
-|---|---|---|
-| 5a: world format, painting workspace, export, checks, Ashen Ford draft | Done | [plan](2026-10-31-tactics-overworld.md), `tools/tactics-world/README.md` |
-| 5b: walking | Tasks 1 to 10 done, Task 11 partial, interaction fixes to do | [plan](2026-10-31-tactics-overworld-5b.md) |
-| 5c: fights on the spot | Planned, not started | [plan](2026-10-31-tactics-overworld-5c.md) |
-| 5d: the story runtime | Planned, not started | [plan](2026-10-31-tactics-overworld-5d.md) |
-| 5e: tuning and a real session | Needs the user | [spec](../specs/2026-10-31-tactics-overworld-design.md) §6 |
-
-**Also done on this branch:** board lighting (baked vertex colours, see `docs/tv-host.md`), and the fresh-install crash fix: `audio/general/text_to_speech` is off in `src/ArcBox.Host/project.godot`, because loading speech at startup collided with the cold shader compile. Crashes went from 12 of 43 to 0 of 30 launches. `ProjectSettingsTests` fails if it comes back.
-
-Reports and proof shots are in `docs/superpowers/reports/2026-10-31-tactics-overworld/`.
-
-**World dressing (merged from the user's local session, 2026-11-02):** props, buildings and people in the world, the woods, Ashen Ford
-rebuilt and dressed, the props painting layer, tall-prop fading and dusk light. Its design is
-[the world-dressing spec](../specs/2026-11-01-tactics-world-dressing-design.md) and [plan](2026-11-01-tactics-world-dressing.md); where
-Ashen Ford stood at that handoff, and what's left there, is [the Ashen Ford handoff](2026-11-01-ashen-ford-handoff.md). Painted props and
-things to interact with both block walking through `WorldGround`; the loader refuses a painted prop on a thing's tile, and the export
-warns about a blocking prop beside a door or lever ([interactables design](../specs/2026-11-02-tactics-interactables-design.md), last section).
+Milestones 5a–5d are implemented. Remaining stability/tooling work is tracked on the [issue board](overworld-issue-board.md), with owner hardware validation in [the second hardware check](2026-11-02-local-hardware-check-2.md). The drawing issue owns remaining visual work.
 
 ## 4. What to do, in order
 
@@ -88,8 +69,8 @@ Each milestone's plan is complete: read everything above its "### Task 1" first,
 
 ## 5. Known bugs and open threads
 
-- **Do this early: an engine failure can end a room and poison a save.** Nothing catches a `RulesInvariantException`, so `GameSession.Guard` reports "Game crashed" and the room returns to the lobby. Rules-engine spec §8 says the adapter should catch it, keep the prior state and show "Something went wrong with that move", and that was never built. The fatal command is lost, `EndBattle` never runs, and a save can stay poisoned: on seed 108, without the fix below, reopening with one player crashed 3 times out of 3, because the AI replayed the same move. Build what §8 says, with a test, and make sure an AI that hits it can't loop forever: skip or end its turn.
-- **Fixed, the "share the tile" crash** (`Objectives.End` dropped queued `MoveStep`s without running `Halt`, leaving a walker on a Downed ally's tile). An engine fix with regression tests in `ReactionTests.cs`. Invariants run only in Debug, and the TV and `dotnet run` are Debug. The final beat gains one existing `Moved` event.
+- **Battle recovery is implemented:** `TryApply` retains the prior state, logs failures and lets players retry. AI failures skip bounded steps; battles that cannot continue are called off with nothing won or lost. Issue 76 extends recovery to world paths and resume.
+- **The shared-tile crash is fixed:** regression tests cover halting queued walks. Invariants now default to enabled in Debug and Release; invalid resumed battles return safely to the world.
 - **The sweep isn't finished.** Across 16,200 battles each, 5 crashes without the fix and 0 with it, but those runs used different battles, so that's suggestive and not proof. All 5 were this bug, on river_crossing (2), crypt_hall, ford_assault and forest_ruins. The deterministic harness is `docs/superpowers/reports/2026-10-31-tactics-overworld/battle-sweep-harness.cs.txt`. It needs two temporary patches, not committed: a `public static bool ZzNoFix` in Objectives with `while (!ZzNoFix && ...)` in `End`, and an `e.Data["outcome"]` catch around `Invariants.Check` in `Battle.Settled`. Run with `SWEEP_BOTH=1 SWEEP_SEEDS=100 SWEEP_OUT=<path>`: about 85 minutes on 14 threads. Run it after your own engine changes if you have the cores.
 - **A second overlap remains:** `LastFree` can go stale if something spawns onto the tile a walker just left. Only `dragon_wakes` in `hall_of_the_flame`, with its `hpBelow` branch, might do this in the base pack. Choosing a fallback tile is a rules decision, so it's on the user's list.
 - **Battles that don't end:** about 1.4% of sweep battles hit the 1,500-iteration cap, mostly a passive hero against archers that Dodge forever at range. Not a hang, because a player who moves ends it. Worth a line in the AI's notes.
@@ -134,8 +115,10 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 ## 8. The user's list
 
+**2026-11-03 Ashmaw bounty update (#74, `ashmaw-bounty`):** the board, Dagna's bounty, four forced Hollow chambers, safe fire, proof pickup, return travel and private class-trinket rewards are implemented. A real six-player session completed the entire flow. Both Chapter I force and parley routes reached their chapter card; the parley run recovered from an initial lost fight. The cave now has plain mining candles, animal bones, dried blood, darker light and fitting existing dungeon music. All new dialogue and 15 SFX are rendered; Grisk's exact candle take is owner-approved. Full .NET regression: 6,191 passing after production art integration, zero failures. World/battle character motion is owner-approved, and dedicated character atlases/portraits are installed. The owner retained the level-2 target; the journal recommends that level. The owner requested about 60% four-player wins and harder fights only for 4+: the installed profile yields 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4. One-to-three-member fights retain their original stats and replay results. See [design and remaining work](../specs/2026-11-03-tactics-ashmaw-bounty-design.md). No PR unless asked.
 
-**2026-11-03 NPC/quest update (#73, `npcs-and-quests`):** conversations, voiced town barks, three side quests, people gates and the leader's TV/private-phone journal are implemented. Prerequisites were merged into that branch; the owner later authorized [PR #75](https://github.com/higharc91/ArcBox/pull/75) to integrate the delivery into main. The [design](../specs/2026-11-03-tactics-npcs-and-quests-design.md) records USER DECISION Q1–Q12: 100 XP, grain 30 gold, starter bag, away XP, explicit-choice failures only, eligible markers, private everyone/shared leader, saved bark rotation, one cast per preset, one pin, auto-pin only if empty, visible-target waypoint without a path. These authorized defaults are reviewable, not blockers. Voice speech fallback now uses each speaker's registered theme, with the Chirp post-processing limit documented in [VOICE-PLAN](../../../tools/tactics-lore/VOICE-PLAN.md). No art/SFX generated; prompts and procedural stand-ins are delivered. See [test, phone and TV evidence](../reports/2026-11-03-npcs-quests/README.md). Older pending entries below remain historical where superseded by this update.
+
+**2026-11-03 NPC/quest update (#73, `npcs-and-quests`):** conversations, voiced town barks, three side quests, people gates and the leader's TV/private-phone journal are implemented. Prerequisites were merged into that branch; the owner later authorized [PR #75](https://github.com/higharc91/ArcBox/pull/75) to integrate the delivery into main. The [design](../specs/2026-11-03-tactics-npcs-and-quests-design.md) records USER DECISION Q1–Q12: 100 XP, grain 30 gold, starter bag, away XP, explicit-choice failures only, eligible markers, private everyone/shared leader, saved bark rotation, one cast per preset, one pin, auto-pin only if empty, visible-target waypoint without a path. These authorized defaults are reviewable, not blockers. The owner superseded live speech fallback on issue #76: missing recordings show captions only, with no live TTS. Voice themes remain registered; the earlier Chirp post-processing work is documented in [VOICE-PLAN](../../../tools/tactics-lore/VOICE-PLAN.md). No art/SFX generated; prompts and procedural stand-ins are delivered. See [test, phone and TV evidence](../reports/2026-11-03-npcs-quests/README.md). Older pending entries below remain historical where superseded by this update.
 
 **Rest and recovery (#71), USER DECISION defaults implemented:** R1 black eye→rest, bruised pride/shaken→spirit, other injuries→body;
 R2 Tend Medicine 12, Rally better Performance/Persuasion 12, Cook Survival 10; R3 healing-spell Tend advantage;
@@ -205,12 +188,12 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 3. ~~Losing pays half XP every time, so retrying can be farmed.~~ Settled by the user, 2026-11-01: a lost fight pays no XP, its injuries heal (earlier ones stay) and the consumables used in it stay spent.
 4. `hall_of_the_flame` is 16 px short of drawing at 2×, on the darkest map.
 5. The balance decisions in the rules-engine tracker.
-6. **Environmental tiles:** the user wants tiles with effects that interact with spells, such as water and lightning. Hazards stay harmless until this is designed with them. Bring it up when 5d finishes.
+6. **Environmental tiles:** implemented and merged in PR #72; five encounters opt into surfaces. See the environmental completion report for engine, AI, oil, TV and phone verification.
 7. A deployed region export makes each TV re-download all 125 MB. Per-file caching would fix it.
 8. If a spawn lands on the tile a walker just left, where should the walker go: the nearest free tile, or stay and allow the overlap?
-9. "Back to walking" is a dead button on a pack with no region. (Results' "Next battle" is now "Carry on", a label only, `51505fc`.)
-10. **A battle the engine can't continue is called off with nothing won or lost**: no XP, injuries, Results or checkpoint, and the party goes back to the world. The alternative is counting it as a loss: `CallOffBattle` is the one place to change. (`0eec931`)
-11. **Rules invariants run only in Debug builds.** On a Release server a broken state (the share-the-tile bug, say) won't throw: it's kept and saved. The checks are cheap; turning them on for production is the user's call.
+9. **Back to walking:** hidden for packs with no region via `canWalk`; implemented.
+10. **A battle the engine can't continue is called off with nothing won or lost**: no XP, injuries, Results or checkpoint, and the party goes back to the world. The owner confirmed this behavior on issue #76: keep `CallOffBattle` unchanged. (`0eec931`)
+11. **Release invariants:** the owner approved enabling checks in every build on issue #76. They are now enabled by default. Invalid resumed battles are called off without rewards or injuries; the stability report records Release corruption tests and measured check cost.
 12. **The pad from e/w:** a thumb already holding e or w keeps it out to 72°, so sliding round onto a road switches 8.6° off the road rather than 10°. Guaranteeing 10° would shrink e/w from 24° to about 21°. (`51505fc`)
 13. **The battle list hidden from normal play**, as the user asked: `Tactics:BattleList`, Development only, off by default. A pack with no region keeps its list. The bots and `tv-e2e.sh` turn it on. (`f681da2`)
 14. **Seat colours: superseded.** Each player now picks a colour at character creation, drawn on the TV (walker and battle rings, vote pips, check-card stripes; ac7a937) and phones. History: The room has no stable seat to share (`PlayerSlot.JoinOrder` repeats after a leave and never reaches the game), so the TV's walker rings stay the party green with a dark outline. Giving the TV and phone one seat number needs an SDK and lobby protocol change; 5d's vote dots need the same thing. The phone's palette is also weak for deuteranopia (sky against violet) and tritanopia (sky against green).
@@ -218,7 +201,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 16. **A player whose turn comes first** gets their 60 s only after the walk-in (at most 3 s).
 17. **Losing a lead to a blip:** a stand-in always keeps the lead at least 3 s after it's handed over, and the session leader takes it back after the party has been stopped for 3 s.
 18. **A lost fight leaves the party weaker for the retry.** Injuries stack and potions stay spent. After one loss of Ford Assault, the bots lost most retries (14 of 15 seen; one drop-signals run won its retry), so "a loss re-arms the stamp" is a soft net and a real group could spiral. Settled with decision 3 (2026-11-01): a loss now pays no XP and heals its own injuries; consumables stay spent.
-19. **Ford Assault is hard for bots:** they win River Crossing 40 of 40 fresh, but Ford Assault about 5 of 10 from the "!" side, 4 of 20 from elsewhere. A balance question, if it matters.
+19. **Chapter automation:** issue #76 settles automated battles on Story difficulty with fixed seed 76. `ARCBOX_DIFFICULTY` can override it. Real-difficulty balance belongs to the simulator; the older win-rate observations are historical.
 20. **Bree Tallow's `innkeeper_angry` portrait reads as a bald man.** It needs new Scenario art, which needs the user's OK.
 21. **Scenes with no one standing in the world:** only the beat with the "!" puts its figure in the world (default 12), so Mother Skarrow isn't shown during the parley, and nobody is at the bridge in "Mother Skarrow lies where she fell".
 22. **Story wording and choices the night made:**
@@ -240,7 +223,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 28. **The vote countdown can run up to the network delay behind the server.** The server still owns the deadline. Acceptable, or should the server also send its own "now"?
 29. **"Back to walking"** shows on the battle list even in a pack with no region, where it does nothing. Hiding it needs a new field in the screen's data (a contract change).
 30. **Two questions in a row:** after the fix wave, the second question plays the "your turn" sound and arrival again. Say if it should stay quiet.
-31. **Chapter e2e runs on the force branch are about a coin toss** (the bots lose most Ford Assault retries). Keep them manual, or gate them somewhere?
+31. **Force chapter e2e:** use seeded Story-difficulty bots, as authorized on issue #76. The Linux force run reaches the card; the hardware-check document contains exact Windows commands for both branches.
 
 **Defaults the review fix wave adds:** the VIP can end the session from inside a scene (the cursor is saved on every line); a resumed battle keeps the stage it was saved with, and a repainted region that no longer matches puts it on the plain board.
 

@@ -2,7 +2,7 @@
   "issue": 81,
   "part": 2,
   "branch": "ashen-ford-secrets",
-  "status": "Complete: owner-approved native art integrated and fully verified; no PR",
+  "status": "Complete: approved native art integrated; current-main merge authorized by owner",
   "provider": "Scenario",
   "model_id": "model_google-gemini-nano-banana-2-1",
   "scope": {
@@ -209,6 +209,7 @@
     "phone_tests": 504,
     "art_checks": 5,
     "environment_pngs": 647,
-    "chapter_force": "passed: won fight, 94 lines, end card, walking afterward"
+    "chapter_force": "passed: won fight, 94 lines, end card, walking afterward",
+    "release_report": "docs/superpowers/reports/2026-11-04-ashen-ford-secrets/merge/README.md"
   }
 }

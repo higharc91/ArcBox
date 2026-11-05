@@ -1,0 +1,8 @@
+{
+  "action": "Subtle breathing idle loop, facing exactly straight toward viewer without turning. Feet stay planted. Helmet and hair stay fixed on the head. His RIGHT hand stays wrapped around the pick shaft on viewer LEFT; pick and hand move together as one, no floating equipment. Slight chest breathing only. Return to starting pose. No swaying, no stepping or bouncing.",
+  "frame_count": 4,
+  "first_frame_url": "https://api.pixellab.ai/mcp/images/9a126672-9cc0-4a9c-9c7d-984501f065ce/download",
+  "last_frame_url": "https://api.pixellab.ai/mcp/images/9a126672-9cc0-4a9c-9c7d-984501f065ce/download",
+  "seed": 7413,
+  "no_background": true
+}

@@ -6,6 +6,8 @@ import { colorName, readable, type ColorOptions, type PaletteColor } from "./col
 import { DetailsSheet, modifier, Sheet as Panel, signed, STATS, Tags, type Context, type PortalDetails, type StatKey, type Topic } from "./details";
 import { canCompose, lookFor, RETRY_MS, type Look } from "./look";
 import { Section } from "./ui";
+import { TrinketSlot, type Trinket } from "./trinket";
+import { KeyRing, type KeyEntry } from "./quests";
 
 /**
  * Wardenflame between sessions (sub-project 4): the party, your character, and what you can do to it. With no character
@@ -27,6 +29,7 @@ interface Me {
   freeRemake?: boolean;
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
   color?: string; skills?: string[]; saves?: string[]; bonuses?: Record<string, number> | null;
+  trinket?: Trinket;
 }
 interface Options {
   races: { id: string; name: string }[]; classes: { id: string; name: string; role: string }[];
@@ -36,6 +39,8 @@ interface Options {
 export interface TacticsPortalView {
   level: number; completed: string[]; party: { name: string; character: string; xp: number; you: boolean; color?: string | null }[];
   me: Me | null; options: Options | null; details?: PortalDetails;
+  /** The party's key ring, once it holds a key (the owner's decision 8). */
+  keys?: KeyEntry[];
 }
 
 export const pointsSpent = (scores: Record<StatKey, number>) => STATS.reduce((n, s) => n + (COST[scores[s]] ?? 99), 0);
@@ -74,6 +79,7 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
           );
         })}
       </ul>
+      <KeyRing keys={view.keys} />
       {making && view.options ? (
         <Create options={view.options} readOnly={readOnly} send={send} onCancel={view.me ? () => setMaking(false) : undefined}
           freeRemake={view.me?.freeRemake ?? false} start={view.me} explainWith={explainWith} details={details} />
@@ -158,6 +164,7 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
           This is your one free remake. Your XP, injuries, gold and bag carry over, and after this the character is yours for good.
         </p>
       ) : start ? <p class="tx-note">Your gold, bag and injuries carry over. Remaking does not refill starting supplies.</p> : null}
+      {start?.trinket ? <p class="tx-note">{start.trinket.name} carries over{cls !== start.trinket.class ? `, but stays dormant unless you choose ${start.trinket.className}` : " and is active for this class"}.</p> : null}
 
       <LookPreview race={race} cls={cls} color={color} title={`${raceName} ${clsName}`} />
 
@@ -372,6 +379,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
           <span class="tx-note">{me.xp} XP{me.injuries.length ? ` · ${me.injuries.join(", ")}` : ""}</span>
         </div>
       </div>
+      {me.trinket ? <TrinketSlot trinket={me.trinket} /> : null}
       {explain ? (
         <div class="tx-chips" aria-label="About your character">
           <button type="button" class="tx-chipbtn" onClick={() => explain({ kind: "race", id: me.race })}>{details?.races[me.race]?.name ?? me.race}</button>

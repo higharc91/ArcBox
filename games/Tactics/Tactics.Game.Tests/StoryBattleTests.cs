@@ -46,6 +46,38 @@ public sealed class StoryBattleTests
 
     private static WorldSave World(Session s) => TacticsDocument.Read(s.Lease.Document).World!;
 
+    [Theory]
+    [InlineData(true, BattleOutcome.Won)]
+    [InlineData(false, BattleOutcome.Won)]
+    [InlineData(true, BattleOutcome.Lost)]
+    [InlineData(false, BattleOutcome.Lost)]
+    [InlineData(true, BattleOutcome.Fled)]
+    [InlineData(false, BattleOutcome.Fled)]
+    public void Only_winning_either_ford_branch_settles_the_ford(bool force, BattleOutcome outcome)
+    {
+        var beat = force ? Assault : Crossing;
+        var s = NearBeat(beat, force ? StageBattleTests.Force : StageBattleTests.Parley);
+        Assert.DoesNotContain("ch1_ford_settled", World(s).Flags);
+        s.Send(StageBattleTests.Lead(s), "interact");
+        ToTheFight(s);
+        Assert.DoesNotContain("ch1_ford_settled", World(s).Flags);
+        StageEndTests.Ended(s, outcome);
+        Assert.Equal(outcome == BattleOutcome.Won, World(s).Flags.Contains("ch1_ford_settled"));
+        s.Send(0, "next");
+        if (outcome == BattleOutcome.Won) PlayOut(s);
+        Assert.Equal(outcome == BattleOutcome.Won, World(s).Flags.Contains("ch1_ford_settled"));
+    }
+
+    [Theory]
+    [InlineData(Assault)]
+    [InlineData(Crossing)]
+    public void A_pre_bounty_save_with_a_completed_ford_beat_unlocks_the_bounty(string beat)
+    {
+        var seed = new TacticsSeed([], [Mayor, FordChoice, beat]);
+        var s = NearBeat(OldMaud, seed);
+        Assert.Contains("ch1_ford_settled", World(s).Flags);
+    }
+
     // ---- The lead-in, the fight, the aftermath ------------------------------------------------------------------------------------
 
     [Fact]
@@ -181,6 +213,7 @@ public sealed class StoryBattleTests
 
         Assert.Equal((Assault, StorySave.Fight), (World(list).Story!.Beat, World(list).Story!.Stage));
         Assert.DoesNotContain(Assault, World(list).Beats);
+        Assert.DoesNotContain("ch1_ford_settled", World(list).Flags);
     }
 
     /// <summary>

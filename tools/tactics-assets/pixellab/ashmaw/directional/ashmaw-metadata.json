@@ -1,0 +1,36 @@
+{
+  "group_id": "c4b6f5cb-a404-4aaf-9ad8-c37cb2416d19",
+  "states": [
+    {
+      "character": {
+        "id": "4ee216f2-2bce-4a6e-9801-00e1cf57fc82",
+        "name": "Idle",
+        "prompt": "The exact ash-grey enormous cave bear in the reference. Rotate its unchanged identity, heavy four-legged anatomy, banked coal eyes and subdued ember fur tips. Front input is straight SOUTH toward viewer. Every view must show correct anatomy, back of head when north, same coat pattern and scale, all paws on a common ground plane, no new effects.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "bear",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-03T16:22:32.011393+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {}
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-03T16:30:28.374423"
+}

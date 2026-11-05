@@ -39,8 +39,26 @@ public class AddTacticsTests
         return services.BuildServiceProvider();
     }
 
+    [Theory]
+    [InlineData("Development", null, Difficulty.Normal)]
+    [InlineData("Development", "Story", Difficulty.Story)]
+    [InlineData("Development", "Hard", Difficulty.Hard)]
+    [InlineData("Production", "Story", Difficulty.Normal)]
+    [InlineData("Test", "Story", Difficulty.Normal)]
+    public void Harness_settings_keep_normal_defaults_and_stay_development_only(string environment, string? difficulty, Difficulty expected)
+    {
+        using var sp = Build(environment: environment, settings: new Dictionary<string, string?>
+        {
+            ["Tactics:Difficulty"] = difficulty,
+            ["Tactics:BattleSeed"] = "76",
+        });
+        var game = Assert.IsType<TacticsGame>(sp.GetRequiredService<IGameRegistry>().Create(TacticsGame.Id));
+        Assert.Equal(expected, game.BattleDifficulty);
+        Assert.Equal(environment == "Development" ? 76UL : (ulong?)null, game.BattleSeed);
+    }
+
     /// <summary>
-    /// The pack loads as the server starts, not in the first room's game call: a call over the rooms' 2 s watchdog closes the room as
+    /// The pack loads as the server starts, not in the first room's game call: a call over the rooms' watchdog closes the room as
     /// hung, and the pack takes about 1.4 s to load on an idle machine, which a loaded one ran over in the end-to-end runs.
     /// </summary>
     [Fact]
@@ -103,17 +121,11 @@ public class AddTacticsTests
             foreach (var dir in Directory.EnumerateDirectories(real).Where(d => Path.GetFileName(d) != "lore"))
             {
                 var target = Path.Combine(pack, Path.GetFileName(dir));
-                try { Directory.CreateSymbolicLink(target, dir); }
-                catch (IOException)
-                {
-                    Directory.CreateDirectory(target);
-                    foreach (var file in Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories))
-                    {
-                        var copy = Path.Combine(target, Path.GetRelativePath(dir, file));
-                        Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
-                        File.Copy(file, copy);
-                    }
-                }
+                Directory.CreateDirectory(target);
+                foreach (var child in Directory.EnumerateDirectories(dir, "*", SearchOption.AllDirectories))
+                    Directory.CreateDirectory(Path.Combine(target, Path.GetRelativePath(dir, child)));
+                foreach (var file in Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories))
+                    File.Copy(file, Path.Combine(target, Path.GetRelativePath(dir, file)));
             }
             var lore = Directory.CreateDirectory(Path.Combine(pack, "lore", "scenes")).Parent!.FullName;
             File.WriteAllText(Path.Combine(lore, "pack.json"), """{ "id": "base", "loreVersion": 1, "files": ["arcs.json", "scenes/s.json"] }""");
@@ -142,9 +154,6 @@ public class AddTacticsTests
         }
         finally
         {
-            // The links first, on their own, so nothing of the real content can go with the copy.
-            foreach (var link in Directory.EnumerateDirectories(Path.Combine(root, TacticsGame.Id, "base")).Where(d => new DirectoryInfo(d).LinkTarget is not null))
-                Directory.Delete(link);
             Directory.Delete(root, recursive: true);
         }
     }

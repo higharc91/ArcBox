@@ -69,6 +69,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-eyebrow { display: block; font: 700 11px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-note { display: block; color: var(--wf-muted); font-size: 15px; line-height: 1.35; }
 .tx-note.center { text-align: center; }
+.tx .tx-trinket { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; margin: 12px 0; padding: 12px; border-color: var(--wf-gold, #e6bd5c); }
+.tx-trinket > span:nth-child(2) { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.tx-trinket small, .tx-trinket strong { display: block; }
 .tx-tip { display: block; color: var(--wf-muted); font-size: 14px; font-weight: 400; line-height: 1.3; }
 .tx-link { color: var(--wf-gold-hi); text-decoration: underline; text-underline-offset: 3px; }
 .tx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -907,3 +910,18 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-controls-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:12px; padding-bottom:12px; }
 .tx-controls-scroll > * { flex-shrink:0; }
 .tx-controls-layout > .tx-foot { position:relative; flex:none; margin-top:0; margin-bottom:0; }
+
+.tx-shop-haggle { margin: 8px 0; padding: 10px 12px; border: 1px solid rgba(233, 187, 105, 0.5); border-radius: 8px; background: rgba(233, 187, 105, 0.08); }
+.tx-shop-haggle p { margin: 0; }
+.tx-shop-haggle .tx-btn { width: 100%; min-height: 48px; }
+
+/* Roaming encounters keep the pad clear while the party takes its battle positions. */
+.tx-walk-goal p.tx-mob-danger { display: inline-flex; align-items: center; gap: 7px; width: fit-content; max-width: 100%; margin-top: 8px; padding: 6px 10px; border: 1px solid #bd655d88; border-radius: 999px; background: #4c232a88; color: #ffd4ad; font-size: 13px; }
+.tx-mob-danger::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: #ee8b64; box-shadow: 0 0 8px #ee6c4b66; }
+.tx-mob-ambush { align-items: center; justify-content: center; text-align: center; padding: 24px var(--gutter); border: 1px solid #bd655d77; border-radius: 16px; background: radial-gradient(ellipse at 50% 35%, #68273088, #170f25 70%); }
+.tx-mob-ambush h1 { margin: 0; color: var(--wf-ink); font: 800 clamp(28px, 7vw, 42px)/1.15 var(--wf-serif); letter-spacing: .06em; }
+.tx-mob-ambush p { margin: 0; max-width: 28ch; font-size: 20px; line-height: 1.35; }
+.tx-mob-warning { display: grid; place-items: center; width: 76px; height: 76px; margin-bottom: 10px; border: 1px solid #ef9d72aa; border-radius: 50%; color: #ffd0a4; background: #3d1f2c; box-shadow: 0 0 28px #ec694a33; animation: tx-mob-pulse 1.4s ease-in-out infinite; }
+.tx-mob-warning svg { width: 38px; height: 38px; }
+@keyframes tx-mob-pulse { 50% { transform: scale(1.06); box-shadow: 0 0 42px #ec694a66; } }
+@media (prefers-reduced-motion: reduce) { .tx-mob-warning { animation: none; } }

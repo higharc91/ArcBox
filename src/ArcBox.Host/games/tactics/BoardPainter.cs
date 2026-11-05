@@ -36,6 +36,9 @@ internal sealed class BoardPainter
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
         public bool OneFrame { get; set; }
+
+        /// <summary>One frame of its texture, in texels: art made at another size than its manifest's is drawn whole into <see cref="Target"/>, not cut to <see cref="Size"/> texels of it.</summary>
+        public Vector2 Source { get; set; } = size;
     }
 
     private static readonly Color GridLine = new(0, 0, 0, 0.22f);
@@ -91,6 +94,11 @@ internal sealed class BoardPainter
             sprite.Texture = Texture(lit.Sprite.Image, false);
             sprite.Glow = lit.Glow && lit.Sprite.Light is { } light ? Glow(lit.Sprite.Image, light.Mask, light.Colour) : null;
             sprite.OneFrame = Moves(lit.Sprite.Image);
+            if (sprite.Texture is { } texture)
+            {
+                var frames = sprite.OneFrame && Frames!.Of(lit.Sprite.Image.Key) == texture ? 1 : Math.Max(1, lit.Sprite.Image.Frames);
+                sprite.Source = new Vector2(texture.GetWidth() / frames, texture.GetHeight());
+            }
         }
     }
 
@@ -310,7 +318,7 @@ internal sealed class BoardPainter
     {
         if (drawn.Texture is not null)
         {
-            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
+            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Source.X, 0), drawn.Source);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
             if (alpha < 1f)
             {

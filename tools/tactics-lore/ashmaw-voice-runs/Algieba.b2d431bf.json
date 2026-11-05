@@ -1,0 +1,31 @@
+{
+  "request": {
+    "raw": "Algieba.b2d431bf",
+    "preset": "Algieba",
+    "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+    "line": "ashmaw_notices",
+    "speaker": "narrator",
+    "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger. Mood: idle.> Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
+    "delivery": {
+      "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger.",
+      "mood": "idle"
+    },
+    "scene": false
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "⚠ Scenario error (trace_id: mcpt_K1tXHbugn2KKfG4DQWHc3K11). For a diagnostic report, run diagnostics_run."
+      },
+      {
+        "type": "text",
+        "text": "Error: 429 {\"reason\":\"Too Many Requests. Please, wait 245 seconds before trying again.\",\"name\":\"RateLimitError\",\"details\":{\"cooldownSeconds\":\"973\",\"remainingSeconds\":\"245\"}}"
+      }
+    ],
+    "structuredContent": {
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  }
+}

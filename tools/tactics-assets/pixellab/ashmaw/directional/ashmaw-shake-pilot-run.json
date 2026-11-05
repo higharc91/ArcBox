@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (The bear braces all four paws, rolls a heavy shudder through its shoulders and shakes loose a few tiny grey ash flecks, then settles back into the exact starting stance. No hopping or turning, feet remain in contact.)\ndirections: south (1 jobs)\njob_ids: south=342684dc-0e33-4cc4-8c38-88bc5133f807\ngroup: e1fa035d-3cc8-42b4-af76-159109a9f06c\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south 180x180 (frames are stored at this size: the character plus room to move)\ncost: 3 generations (3/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"The bear braces all four paws, rolls a heavy shudder through its shoulders and shakes loose a few tiny grey ash flecks, then settles back into the exact starting stance. No hopping or turning, feet remain in contact.\", animation_group_id=\"e1fa035d-3cc8-42b4-af76-159109a9f06c\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

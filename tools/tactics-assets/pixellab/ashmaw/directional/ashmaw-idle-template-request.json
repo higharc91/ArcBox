@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "template_animation_id": "idle-resting",
+  "animation_name": "ashmaw_idle_template_pilot",
+  "directions": [
+    "south"
+  ],
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "Very slow heavy bear breathing with paws planted. No stepping, hopping or turning; tiny chest expansion only."
+}

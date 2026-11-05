@@ -1,0 +1,10 @@
+{
+  "mode": "v3",
+  "n_directions": 8,
+  "view": "low top-down",
+  "name": "Wardenflame Ashmaw approved pilot",
+  "body_type": "quadruped",
+  "template": "bear",
+  "reference_image_url": "https://api.pixellab.ai/mcp/images/6aa463e8-3262-4e50-99dd-46aaa0c56769/download?index=0",
+  "description": "The exact ash-grey enormous cave bear in the reference. Rotate its unchanged identity, heavy four-legged anatomy, banked coal eyes and subdued ember fur tips. Front input is straight SOUTH toward viewer. Every view must show correct anatomy, back of head when north, same coat pattern and scale, all paws on a common ground plane, no new effects."
+}

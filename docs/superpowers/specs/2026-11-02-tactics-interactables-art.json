@@ -1037,6 +1037,51 @@
         "interactable",
         "rest"
       ]
+    },
+    "cave_mouth": {
+      "variants": {
+        "idle": "cave_mouth_idle.png"
+      },
+      "size": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        88
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "travel"
+      ]
+    },
+    "bounty_board": {
+      "variants": {
+        "unread": "bounty_board_empty.png",
+        "read": "bounty_board_posted.png"
+      },
+      "size": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        88
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "travel"
+      ]
     }
   },
   "notes": {
@@ -1061,6 +1106,7 @@
       "remains": "interactables.remains.noticed, 32x20, anchor [16, 19]: a small scatter of old bones half-sunk in the ground, a skull on its side, a few ribs and a long bone, bleached and chipped, a scrap of rotted cloth. Lies flat; the stand-in until it's drawn is props.ribcage. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
       "hidden_path": "interactables.hidden_path.found, 32x16, anchor [16, 15]: a narrow, trodden way through the tile once it has been found: a goat track of flattened grass and bare earth, or stepping stones through reeds, running diagonally across the diamond from bottom-left to top-right. Its edges are parted stems bent outwards, so it reads as a gap in whatever hid it (a hedge, reeds, scrub). Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
       "fx_notice": "fx.notice (fx/manifest.json, an effect like fx.poof): 24x24 frames, 6 frames at 12 fps, played once over a notice the moment it's noticed. A quiet glint, not a puff: a small four-point sparkle that grows from one pixel, flares pale clue-blue (#7fc8e8) with a warm centre, and fades out with two specks drifting up. Additive blend, anchored at the tile centre. Until it exists the TV plays fx.poof."
-    }
+    },
+    "ashmaw_bounty": "cave_mouth.idle and bounty_board.idle are prompts-only metadata. The board uses the existing signpost until approved prop art exists; posted/empty concepts remain in 2026-11-03-tactics-ashmaw-art.json. No new prop image has been generated."
   }
 }

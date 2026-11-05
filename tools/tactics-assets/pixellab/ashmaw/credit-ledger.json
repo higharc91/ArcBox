@@ -1,0 +1,112 @@
+{
+  "provider": "PixelLab",
+  "startingSubscriptionGenerations": 554,
+  "note": "Read run receipts for job, group and asset IDs. Rejected motion is retained, never silently discarded or resubmitted. No charge for the initial style_copy/palette validation failures or local inline request failure. Only the design direction is owner-approved; production TV motion approval remains pending.",
+  "entries": [
+    {
+      "id": "ashmaw-static",
+      "generations": 10,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-static",
+      "generations": 10,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-front-correction",
+      "generations": 10,
+      "status": "completed"
+    },
+    {
+      "id": "ashmaw-idle",
+      "generations": 1,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-idle",
+      "generations": 1,
+      "status": "completed"
+    },
+    {
+      "id": "ashmaw-walk",
+      "generations": 2,
+      "status": "rejected motion"
+    },
+    {
+      "id": "ashmaw-walk-loop",
+      "generations": 2,
+      "status": "rejected motion"
+    },
+    {
+      "id": "grisk-walk",
+      "generations": 2,
+      "status": "completed pilot"
+    },
+    {
+      "id": "ashmaw-directions",
+      "generations": 2,
+      "status": "superseded canvas"
+    },
+    {
+      "id": "grisk-directions",
+      "generations": 2,
+      "status": "completed"
+    },
+    {
+      "id": "ashmaw-padding",
+      "generations": 4,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-template-south",
+      "generations": 1,
+      "status": "completed"
+    },
+    {
+      "id": "grisk-template-other-directions",
+      "generations": 7,
+      "status": "completed"
+    },
+    {
+      "id": "ashmaw-template-south",
+      "generations": 2,
+      "status": "completed"
+    }
+  ],
+  "historicalCheckpoint": {
+    "completedGenerations": 136,
+    "submittedRemainingCeiling": 8,
+    "totalCeiling": 144,
+    "note": "Earlier partial receipt tally, retained as history; not the final cost."
+  },
+  "accountObservation": {
+    "at": "2026-11-03T19:59:00Z",
+    "startingRemaining": 554,
+    "observedRemaining": 216,
+    "observedUsed": 1784,
+    "cycleTotal": 2000,
+    "netDecrease": 338,
+    "scope": "Observed account delta across character/portrait revisions, cave prop attempts and candle animation. Includes retained rejected takes; failed jobs may be refunded by provider."
+  },
+  "motionApproval": {
+    "status": "approved",
+    "askedAt": "2026-11-03T19:49:00Z",
+    "evidence": [
+      "grisk-world-battle-v7.gif",
+      "ashmaw-world-battle-v7.gif"
+    ],
+    "note": "Owner approved both actual TV motion previews; production integration is authorized.",
+    "ownerResponse": "Approve both",
+    "approvedOn": "2026-11-03"
+  },
+  "historicalAccountCheck": {
+    "at": "2026-11-03T18:37:00Z",
+    "remaining": 418,
+    "cycleUsed": 1582,
+    "startingRemaining": 554,
+    "issueUsage": 136
+  },
+  "initialReceiptCoverage": "The initial itemized entries cover 56 generations. An additional 80 completed generations are recorded in directional/*-run.json; 8 more were submitted after the account check (Grisk idle/shout diagonals).",
+  "generationStatus": "All requested character facings/actions, portraits and cave props have completed. No paid jobs pending. Retained rejected takes are described in curation.json and cave-props-review.json."
+}

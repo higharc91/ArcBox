@@ -72,6 +72,36 @@
       ],
       "name": "Shaken",
       "kind": "spirit"
+    },
+    "scraped_hands": {
+      "file": "wrenched_shoulder.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Scraped hands",
+      "kind": "rest",
+      "standIn": true
+    },
+    "singed": {
+      "file": "black_eye.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Singed",
+      "kind": "rest",
+      "standIn": true
+    },
+    "twisted_knee": {
+      "file": "sprained_ankle.png",
+      "size": [
+        32,
+        32
+      ],
+      "name": "Twisted knee",
+      "kind": "rest",
+      "standIn": true
     }
   }
 }

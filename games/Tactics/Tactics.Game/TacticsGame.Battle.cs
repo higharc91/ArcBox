@@ -47,6 +47,10 @@ public sealed partial class TacticsGame
 
     private Controller ControllerFor(ProfileId profile) => Online(profile) ? new PlayerControlled(profile) : new AiControlled(Companion);
 
+    /// <summary>Development harness settings; real sessions retain Normal difficulty and fresh random seeds.</summary>
+    public Difficulty BattleDifficulty { get; init; } = Difficulty.Normal;
+    public ulong? BattleSeed { get; init; }
+
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
     /// <summary>
@@ -55,8 +59,9 @@ public sealed partial class TacticsGame
     /// AI until it's shown, or for <see cref="TacticsTiming.FormUp"/> (5c §5): a player whose turn is first can still act.
     /// </summary>
     private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions,
-        string? beat = null)
+        string? beat = null, string? mob = null)
     {
+        seed = BattleSeed ?? seed;
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
@@ -66,7 +71,7 @@ public sealed partial class TacticsGame
         _doc = _doc with
         {
             Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
-                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null),
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob),
         };
         _seq = 0;
         if (AddBeat(null, resolution.Events) is { } opening && stage is not null)
@@ -92,7 +97,7 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        var setup = Encounters.Setup(encounter, party, Difficulty.Normal, Rules);
+        var setup = Encounters.Setup(encounter, party, BattleDifficulty, Rules);
         var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
         if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
             setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)
@@ -459,6 +464,7 @@ public sealed partial class TacticsGame
             Save();
             return null;
         }
+        events = GriskBarks.Enrich(State, events, Lore.Barks, _seq + 1);
         var beat = new Beat(++_seq, actor, events, activeBefore);
         var log = Save_.Log.IsDefault ? [] : Save_.Log;
         log = log.Add(beat);

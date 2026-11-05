@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (A compact four-footed shoulder shake. All paws remain planted as the shoulders roll briefly left then right and settle back to the starting posture. Maintain the current viewing direction. Preserve the solid grey fur and body proportions; no standing up, turning, spinning, skeletal guides or added marks.)\ndirections: south-east, north-east, north, north-west, west, south-west (6 jobs)\njob_ids: south-east=28daf903-1493-4ce7-8b32-262e4df7c09c, north-east=380030db-f00a-47c7-8d68-55a558b3f300, north=45045834-5b69-4eec-a850-10210f3345ad, north-west=7bfa88b7-2ff9-44d9-adfb-e05d647eb08a, west=0ed6df9e-1885-4f4a-a5a1-5205b695a777, south-west=97e75a12-c472-4353-b948-5359c6b76baa\ngroup: e1fa035d-3cc8-42b4-af76-159109a9f06c\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south-east 180x180, north-east 176x176, north 176x176, north-west 176x176, west 208x208, south-west 180x180 (frames are stored at this size: the character plus room to move)\ncost: 19 generations (south-east=3, north-east=3, north=3, north-west=3, west=4, south-west=3)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"A compact four-footed shoulder shake. All paws remain planted as the shoulders roll briefly left then right and settle back to the starting posture. Maintain the current viewing direction. Preserve the solid grey fur and body proportions; no standing up, turning, spinning, skeletal guides or added marks.\", animation_group_id=\"e1fa035d-3cc8-42b4-af76-159109a9f06c\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -7,6 +7,9 @@
   { "id": "wrenched_shoulder", "mends": "body", "name": "Wrenched shoulder", "weight": 2, "static": { "attack": -1 } },
   { "id": "black_eye", "mends": "rest", "name": "Black eye", "weight": 3, "static": {} },
   { "id": "bruised_pride", "mends": "spirit", "name": "Bruised pride", "weight": 3, "static": { "initiative": -1 } },
+  { "id": "scraped_hands", "mends": "rest", "name": "Scraped hands", "weight": 3, "static": { "attack": -1 }, "battle": false },
+  { "id": "singed", "mends": "rest", "name": "Singed", "weight": 3, "static": {}, "battle": false },
+  { "id": "twisted_knee", "mends": "rest", "name": "Twisted knee", "weight": 2, "static": { "move": -1 }, "battle": false },
   { "id": "shaken", "mends": "spirit", "name": "Shaken", "weight": 2, "static": {},
     "hook": "onBattleStart", "effects": [ { "apply": "frightened", "rounds": 0 } ] }
 ]

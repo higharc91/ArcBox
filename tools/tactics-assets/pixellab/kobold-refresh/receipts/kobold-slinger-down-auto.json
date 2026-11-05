@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: aa983ed4-fd89-4e61-85cd-93b185bd2f40\nanimation: falling-back-death\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=8d196055-c1a3-4094-b59c-f5b59720d414, south-west=c4a8bdbe-56d5-48fd-95f0-ea5bab00ec02, west=3a1c8b51-36d9-4a7a-ac4e-e4c603135dd4, north-west=444ffb79-d364-4a99-a829-ce0ddf25d3e8, north=c53c818b-81ac-4ea2-ba4d-e060bb38328d, north-east=59d8e259-5938-4ca9-a135-716de4844496, east=3a0f2d28-3e5f-4d6e-b114-2daada0a3bf6, south-east=7ab66634-4138-4f51-bbbf-e6d806af3e2b\ngroup: 9f4a748c-f715-4f78-88e5-34864c16cfff\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", template_animation_id=\"falling-back-death\", animation_group_id=\"9f4a748c-f715-4f78-88e5-34864c16cfff\", directions=[...])\n\nhint: get_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\")\nif poor: delete_animation(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

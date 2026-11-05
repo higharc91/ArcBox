@@ -1,0 +1,15 @@
+{
+  "status": "concepts and pixel direction approved",
+  "asset": "asset_KjfNSxvbUAkbd9hz5CF7YyZE",
+  "job": "job_74r4jXVHiVRL9Vf99y1iD6KZ",
+  "cu": 13,
+  "sourceSha256": "803c6a834455ae53e1e3f18696a6920c2dfe1f94b3a2962bc5943910ab3416b9",
+  "roles": [
+    "kobold",
+    "kobold_slinger"
+  ],
+  "scope": "Concept approval precedes PixelLab sprites/animations. Actual world/battle motion review precedes production replacement.",
+  "askedOn": "2026-11-03",
+  "ownerFeedback": "Perfect, that looks great. Just let me know when everything is done",
+  "integrationAuthorization": "Well integrate them, and do not stop"
+}

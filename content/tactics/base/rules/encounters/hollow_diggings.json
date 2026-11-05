@@ -1,0 +1,61 @@
+{
+  "id": "hollow_diggings",
+  "name": "The Diggings",
+  "map": "hollow_diggings",
+  "level": 2,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "kobold_foreman",
+      "zone": "enemy_spawn",
+      "count": 1,
+      "level": 2,
+      "id": "grisk",
+      "hpByParty": {
+        "1": 14,
+        "2": 20,
+        "3": 26,
+        "4": 32,
+        "5": 38,
+        "6": 44
+      }
+    },
+    {
+      "unit": "kobold",
+      "zone": "enemy_spawn",
+      "count": 3,
+      "level": 2,
+      "countByParty": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 3,
+        "5": 3,
+        "6": 3
+      }
+    },
+    {
+      "unit": "kobold_slinger",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 2,
+      "countByParty": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      }
+    }
+  ],
+  "xp": 0,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

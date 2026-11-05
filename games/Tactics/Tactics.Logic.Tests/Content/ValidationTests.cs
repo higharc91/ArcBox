@@ -124,7 +124,7 @@ public sealed class ValidationTests
             new(map, "/tiles", "Tile (1, 0) uses material 4, but the map has 2 materials."),
             new(map, "/tiles", "Tile (2, 1) has undefined flag bits 0x40."),
             new(map, "/props/0/at", "Prop 'crate' at (5, 0) is outside the 3x2 map."),
-            new(map, "/props/0/cover", "Cover 'total' isn't allowed in content (use \"none\", \"half\" or \"three_quarters\")."),
+            new(map, "/props/0/cover", "Cover 'total' isn't allowed in content (use \"none\", \"half\", \"three_quarters\" or \"full\")."),
             new(map, "/zones/spawn/1", "Tile (3, 1) is outside the 3x2 map."),
             new(monk, "/features", "Class 'monk' has no features at level 7."),
             new(monk, "/features/1/0/passive", "Unknown passive 'monk.ki'."),
@@ -192,6 +192,19 @@ public sealed class ValidationTests
 
         var error = Assert.Single(errors);
         Assert.Equal("/abilities/0/effects/0/zone/passives/0/static/maxHp", error.Pointer);
+    }
+
+    [Theory]
+    [InlineData("""{ "1": "wolf" }""", "/enemies/0/unitByParty", "every supported party size")]
+    [InlineData("""{ "1": "wolf", "2": "missing" }""", "/enemies/0/unitByParty/2", "Unknown monster")]
+    [InlineData("""{ "1": "wolf", "2": "" }""", "/enemies/0/unitByParty/2", "monster id is empty")]
+    public void Party_monster_profiles_require_complete_valid_references(string mapping, string pointer, string message)
+    {
+        var errors = ErrorsOfChapter(("encounters/e.json", $$"""
+            { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 2 },
+              "enemies": [ { "unit": "wolf", "at": [5, 4], "unitByParty": {{mapping}} } ] }
+            """));
+        Assert.Contains(errors, e => e.Pointer == pointer && e.Message.Contains(message, StringComparison.Ordinal));
     }
 
     [Theory]

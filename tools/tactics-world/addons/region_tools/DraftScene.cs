@@ -14,6 +14,7 @@ public static class DraftScene
     private static readonly Dictionary<string, Func<RulesPack, RegionSource>> Drafts = new(StringComparer.Ordinal)
     {
         ["ashen_ford"] = AshenFordDraft.Build,
+        ["cinder_hollow"] = CinderHollowDraft.Build,
     };
 
     /// <summary>The dressers there are, by region id.</summary>

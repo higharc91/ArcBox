@@ -209,13 +209,18 @@ public static class Report
         Line(md, "dotnet run -c Release --project games/Tactics/Tactics.Sim -- \\");
         Line(md, $"  --encounters {string.Join(",", config.Encounters)} --levels {string.Join(",", config.Levels)} "
                  + $"--sizes {string.Join(",", config.PartySizes)} --parties {config.PartiesPerSize} \\");
-        Line(md, $"  --seeds {config.Seeds} --difficulty {config.Difficulty} --round-cap {config.RoundCap}");
+        var trinkets = config.Trinkets is { Count: > 0 }
+            ? " --trinkets " + string.Join(",", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
+        Line(md, $"  --seeds {config.Seeds} --difficulty {config.Difficulty} --round-cap {config.RoundCap}{trinkets}");
         Line(md, "```");
         Line(md);
         Line(md, $"- **Encounters:** {string.Join(", ", config.Encounters)}.");
         Line(md, $"- **Levels:** {Join(config.Levels)}. **Party sizes:** {Join(config.PartySizes)} ({config.PartiesPerSize} sampled parties per size).");
         Line(md, $"- **Seeds:** {(config.Seeds == 1 ? "1" : $"1–{config.Seeds}")} for every encounter, level and party (the battle's `Battle.Start` seed).");
         Line(md, $"- **Difficulty:** {config.Difficulty}. **Round cap:** {config.RoundCap} (a battle still going after it counts as lost).");
+        Line(md, config.Trinkets is { Count: > 0 }
+            ? "- **Trinkets:** " + string.Join(", ", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => $"{p.Key}: `{p.Value}`")) + "."
+            : "- **Trinkets:** none.");
         Line(md, $"- **Parties:** human characters from `SheetBuilder.DefaultCharacter` (no subclass, default picks), playing the "
                  + "profile their class's `aiTags` name (healer → `healer`, caster or control → `caster`, ranged → `archer`, striker "
                  + "→ `skirmisher`, otherwise `brute`) with items off; enemies play their monster's profile. Party compositions "

@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 4ee216f2-2bce-4a6e-9801-00e1cf57fc82\nname: Wardenflame Ashmaw approved pilot\nmode: v3 reference (2 generations, 8 directions)\nbody: quadruped (bear)\nsize: 128x128px\nview: low top-down\nstyle: from reference image (outline/detail hints ignored)\nstatus: processing (~3-5 min)\n\nhint: get_character(character_id=\"4ee216f2-2bce-4a6e-9801-00e1cf57fc82\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

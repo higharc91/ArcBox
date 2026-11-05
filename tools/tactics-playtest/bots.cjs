@@ -37,6 +37,7 @@
 //                        lead-in, its aftermath) play through: the leader skips each line after 1.5 s, and every bot that may answer a
 //                        vote takes the first option, and a check the best bonus, so no run waits on a 45 s vote
 //   --timeout=<seconds>  give up after this long (default 900)
+//   --bounty --host     play Chapter 1, then the complete Ashmaw bounty through real hub/phone inputs; verify travel and class gifts
 //
 // Phone views have no position and bots answer each view once, so walking is a scripted loop of its own. Without these modes the
 // VIP leaves the walk screen with `battles`, and the run is the battle it always was. With any of them the party walks, and then the
@@ -62,6 +63,12 @@
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
 //   --shop                    earn the council advance, walk to Wenna, buy from an own purse, retry its trade id, sell and leave.
+//   --decisions               the owner's rule decisions of issue #83, on a pack with an e2e strongbox (tools/tv-e2e.sh's
+//                             ARCBOX_DECISIONS=1 makes it; ARCBOX_CONTENT_RULES points route.cs at it): the reeve's key on every key
+//                             ring, the strongbox's unseen trap hurting the leader and its DC 30 lock failing, nothing left to try,
+//                             camp, the injury mended at dawn (the chapel's guest list) and the lock offered again, the reeve's chest
+//                             opened with the key and its items voted on (one by vote, one by silence), the key shown used, and a
+//                             haggle at Wenna's with the prices it gives.
 //
 // The story (overworld 5d), in place of the battle list:
 //
@@ -150,14 +157,22 @@ const loseFights = count('lose', Infinity);
 const stampFights = count('walk-to-stamp', 1);
 /** Fights over so far: the VIP counts them as it leaves each results screen. */
 let fightsDone = 0;
+let lastFightOutcome = null;
+let bountyChoice = null;
 /** When the VIP last went on from a results screen. */
 let resultsLeft = 0;
 const losing = () => fightsDone < loseFights;
 /** --story[=<n>] and --story-pick=<ids>: walk to the "!" and play n beats, choosing these options where offered. */
 const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
 /** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
-const chapter = opt('chapter', false) === true;
+const mobRun = opt("mobs", false) === true;
+const bountyRun = opt('bounty', false) === true;
+const chapter = opt('chapter', false) === true || bountyRun;
+if (bountyRun && !asHost) throw new Error('--bounty needs --host so region transfers can be verified.');
 const shopRun = opt('shop', false) === true;
+const decisionsRun = opt('decisions', false) === true;
+/** --decisions: answers a vote or check screen in place of the usual (an [action, data] to send, null to send nothing); undefined: as usual. */
+let answerHook = null;
 const questRun = opt('quests', false) === true;
 const recoveryRun = opt('camp', false) === true;
 /** --branch=force|parley: the option the party votes for at the ford. */
@@ -191,7 +206,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const dist = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const { safestMoves, escapeBurning } = require('./hazards.cjs');
 
-const RULES = path.join(__dirname, '../../content/tactics/base/rules');
+const RULES = process.env.ARCBOX_CONTENT_RULES ?? path.join(__dirname, '../../content/tactics/base/rules');
 const [WATER, DIFFICULT, IMPASSABLE, DEEP] = [1, 2, 4, 16];
 /** Paths.StepCost's climb: a Jump of 2, the default. */
 const JUMP = 2;
@@ -469,6 +484,9 @@ class Bot {
   /** The player's move on a `turn` screen: one command per view. */
   turn() {
     const { me, units, choices } = this.view.data;
+    // The Hollow's rooms have no distant riverbank to defend against. Pursue survivors so
+    // a damaged caster pair does not return home while the kobolds retreat across the mine.
+    if (bountyRun && String(this.view.data.map).startsWith('hollow_')) tactic.advance = true;
     const foes = units.filter((u) => u.side === 'Enemy' && u.life === 'Up');
     if (process.env.BOTS_DEBUG && this.debugSeen !== this.view.viewId) {
       this.debugSeen = this.view.viewId;
@@ -646,14 +664,24 @@ class Bot {
         log(`${this.name} skips line ${view.data.line}`);
         return this.input('skip', { line: view.data.line });
       case 'vote': {
+        if (answerHook) {
+          const answer = answerHook(this, view);
+          if (answer === null) return;
+          if (answer) { this.acted = view.viewId; return this.input(...answer); }
+        }
         if (storyBeats) return this.storyAnswer(state);
         if (silent || !view.data.canChoose || view.data.mine || !view.data.options?.length) return;
         const ids = view.data.options.map((o) => o.id);
-        const pick = storyPick.find((id) => ids.includes(id)) ?? ids[0];
+        const pick = (bountyChoice && ids.includes(bountyChoice) ? bountyChoice : null) ?? storyPick.find((id) => ids.includes(id)) ?? ids[0];
         log(`${this.name} votes ${pick}`);
         return this.input('vote', { option: pick });
       }
       case 'check': {
+        if (answerHook) {
+          const answer = answerHook(this, view);
+          if (answer === null) return;
+          if (answer) { this.acted = view.viewId; return this.input(...answer); }
+        }
         if (storyBeats) return this.storyAnswer(state);
         if (silent) return;
         if (!view.data.canChoose || view.data.mine || !view.data.cards?.length) return;
@@ -673,7 +701,7 @@ class Bot {
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
-        if (walking || stampFights || chapter || shopRun || !view.data.vip) return;
+        if (walking || stampFights || chapter || shopRun || decisionsRun || mobRun || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
@@ -692,10 +720,11 @@ class Bot {
         state.resultsAt ??= Date.now() + holdMs;
         if (Date.now() < state.resultsAt) return;
         [state.resultsAt, state.resultsSince] = [undefined, undefined];
+        lastFightOutcome = view.data.outcome;
         log(`${view.data.outcome} at ${view.data.encounter}: ${view.data.lines.map((l) => `${l.name} +${l.xp} XP`).join(', ')}`);
         resultsLeft = Date.now();
         fightsDone++;
-        return this.input(then === 'next' || stampFights || chapter ? 'next' : 'end');
+        return this.input(then === 'next' || stampFights || chapter || mobRun ? 'next' : 'end');
     }
   }
 }
@@ -704,6 +733,8 @@ class Bot {
 class Watch {
   constructor(host) {
     this.host = host;
+    this.mobs = [];
+    this.mobMoves = new Set();
     this.seq = 0;
     this.at = 0;
     this.shown = [];
@@ -719,12 +750,22 @@ class Watch {
       if (v?.chapter && !this.card) this.card = Date.now();
       const e = v?.explore;
       if (!e) return;
+      this.region = e.region;
+      this.seeMobs(e.mobs ?? []);
       const marks = (e.markers ?? []).map((m) => ({ beat: m.beat, at: m.at, emote: m.emote ?? null }));
       if (JSON.stringify(marks) !== JSON.stringify(this.markers)) [this.markers, this.markersSeen] = [marks, Date.now()];
       this.held = e.held;
       if (String(e.at) !== String(this.tile) || e.epoch !== this.epoch) [this.tile, this.epoch, this.placed] = [e.at, e.epoch, Date.now()];
       if (e.seq !== this.seq) [this.seq, this.at] = [e.seq, Date.now()];
     });
+  }
+
+  seeMobs(mobs) {
+    for (const mob of mobs) {
+      const old = this.mobs.find(m => m.id === mob.id);
+      if (old && String(old.at) !== String(mob.at)) this.mobMoves.add(mob.group);
+    }
+    this.mobs = mobs;
   }
 
   /** Reads what the TV has added to its log since the last read. */
@@ -738,9 +779,10 @@ class Watch {
     fs.readSync(fd, chunk, 0, chunk.length, this.pos ?? 0);
     fs.closeSync(fd);
     this.pos = size;
-    const lines = ((this.rest ?? '') + chunk.toString('utf8')).split('\n');
+    const lines = ((this.rest ?? '') + chunk.toString('utf8')).split(/\r?\n/);
     this.rest = lines.pop();
     for (const line of lines) {
+      if (line.startsWith('MOBS ')) this.seeMobs(JSON.parse(line.slice(5)));
       // STORY marker lines come one a beat, together: a run of them is the whole set
       this.lineNo = (this.lineNo ?? 0) + (/^STORY marker /.test(line) ? 0 : 1);
       let m = /^WALK (\d+) (-?\d+) (-?\d+) (\d+)/.exec(line);
@@ -825,10 +867,15 @@ async function pause(bots, name) {
   return leader;
 }
 
-async function runScript(bots, leader) {
+async function runScript(bots, leader, watch) {
   for (const [dir, seconds] of walkScript) {
     if (dir === 'pause') {
       leader = await pause(bots, seconds);
+      continue;
+    }
+    if (dir === 'route') {
+      await walkToBeat(bots, watch, 'ashen_ford', { beat: `shop:${seconds}` }, false);
+      leader = await leaderOf(bots);
       continue;
     }
     log(`WALK ${dir} for ${seconds} s`);
@@ -909,7 +956,7 @@ async function walkAbout(bots, lines, watch) {
   let leader = await leaderOf(bots);
   log(`${leader.name} leads`);
   if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
-  if (walkScript) leader = await runScript(bots, leader);
+  if (walkScript) leader = await runScript(bots, leader, watch);
   if (latencyPresses) await runLatency(leader, watch);
   if (floodSeconds) await runFlood(leader);
   if (dropMode) await runDrop(leader, lines[bots.indexOf(leader)], bots.filter((b) => b !== leader), watch);
@@ -951,7 +998,7 @@ function stampOf(id) {
  */
 async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const goal = beat ? beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : beat.startsWith('person:') ? ['person', beat.slice(7)] : ['beat', beat] : [stamp.map];
+  const goal = beat ? beat.startsWith('mob-at:') ? ['at', beat.slice(7)] : beat.startsWith('mob:') ? ['mob', beat.slice(4)] : beat.startsWith('shop:') ? ['shop', beat.slice(5)] : beat.startsWith('thing:') ? ['thing', beat.slice(6)] : beat.startsWith('person:') ? ['person', beat.slice(7)] : ['beat', beat] : [stamp.map];
   const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
@@ -1056,7 +1103,7 @@ const onWalk = (bots) => bots.every((b) => b.view?.screen === 'walk');
  * (a party put somewhere the bots didn't know of is routed again from where the step went), and taps Interact once it's offered. A
  * step into an armed stamp on the way starts the beat as well. Gives back once the beat has begun.
  */
-async function walkToBeat(bots, watch, region, marker) {
+async function walkToBeat(bots, watch, region, marker, interact = true) {
   for (let attempt = 1; attempt <= 6; attempt++) {
     const tile = await until('where the party stands', () => {
       watch.read();
@@ -1091,8 +1138,10 @@ async function walkToBeat(bots, watch, region, marker) {
       log(`CHAPTER no Interact at ${at}: routing again`);
       continue;
     }
+    if (!interact) { log(`WALK route arrived at ${marker.beat}`); return; }
     log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
     await lead.input('interact', marker.beat.startsWith('shop:') || marker.beat.startsWith('person:') ? { target: marker.beat } : marker.beat.startsWith('thing:') ? { target: marker.beat.slice(6) } : undefined);
+    if (marker.instant) return log(`BOUNTY instant interaction sent: ${marker.beat}`);
     if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
     log('CHAPTER the tap started nothing: trying again');
   }
@@ -1131,6 +1180,114 @@ async function playGrainQuest(bots, watch, region) {
   await until('the completed grain quest', () => onWalk(bots) && bots.some(b => b.view.data.journal?.quests.some(q => q.id === 'sq_missing_grain' && q.status === 'done')));
   await until('the completed pin to clear', () => bots.every(b => !b.view.data.pinned));
   log('QUEST OK: talked, voted, opened journal, pinned, followed both clues, completed, auto-unpinned');
+}
+
+/** Full shipped bounty after the normal chapter: real travel, fights, rest, proof and class rewards. No injected flags or gold. */
+async function playBounty(bots, watch) {
+  const interact = async (region, beat, choice, instant = false) => {
+    bountyChoice = choice;
+    await walkToBeat(bots, watch, region, { beat, instant });
+    await until(beat + ' to finish', () => onWalk(bots));
+  };
+  const quest = bot => bot.view?.data.journal?.quests.find(q => q.id === 'sq_ashmaw');
+  await interact('ashen_ford', 'thing:af_bounty_board', 'bounty');
+  await until('the posted bounty in the journal', () => bots.every(b => quest(b)?.objective === 'Speak to Captain Dagna'));
+  await interact('ashen_ford', 'person:dagna_holt', 'accept');
+  await until('the accepted bounty', () => bots.every(b => quest(b)?.objective === 'Find the Cinder Hollow'));
+  // The bounty is a fresh level-two adventure; recover the spell slots and wounds spent settling the ford first.
+  await interact('ashen_ford', 'thing:af_ford_campfire', 'rest');
+  await interact('ashen_ford', 'thing:af_cinder_hollow_mouth', 'enter');
+  await until('the saved Hollow arrival', () => watch.region === 'cinder_hollow' && onWalk(bots));
+  for (const encounter of ['hollow_throat', 'hollow_diggings', 'hollow_nest', 'hollow_lair']) {
+    if (encounter === 'hollow_lair') await interact('cinder_hollow', 'thing:hollow_safe_fire', 'rest');
+    const before = fightsDone;
+    bountyChoice = null;
+    await walkToBeat(bots, watch, 'cinder_hollow', { beat: encounter });
+    await until(encounter + ' won and its aftermath finished', () => fightsDone > before && onWalk(bots));
+    if (lastFightOutcome !== 'Won') throw new Error(`Bounty stopped: ${encounter} was ${lastFightOutcome}`);
+    log('BOUNTY won ' + encounter);
+  }
+  await interact('cinder_hollow', 'thing:hollow_ember_claw', null, true);
+  await until('the claw proof objective', () => bots.every(b => quest(b)?.objective === 'Bring the claw to Dagna'));
+  await interact('cinder_hollow', 'thing:hollow_exit', 'enter');
+  await until('the named Ford return', () => watch.region === 'ashen_ford' && onWalk(bots));
+  const purses = bots.map(b => b.view.data.gold ?? 0);
+  await interact('ashen_ford', 'person:dagna_holt', 'present');
+  await until('each private class gift', () => bots.every(b => quest(b)?.status === 'done' && b.view.data.questNotice?.trinket));
+  for (const [i, bot] of bots.entries()) {
+    const notice = bot.view.data.questNotice;
+    if (notice.trinket.class !== CLASSES[i] || notice.gifts) throw new Error('Wrong or shared private trinket: ' + bot.name);
+  }
+  const paid = bots.reduce((sum, b, i) => sum + (b.view.data.gold ?? 0) - purses[i], 0);
+  if (paid !== 60) throw new Error('Bounty paid ' + paid + ' gold, expected 60');
+  bountyChoice = null;
+  log('BOUNTY OK: posted, accepted, travelled, won all four chambers, rested, took proof, returned, received 60 gold and private class trinkets');
+}
+
+/** Real wandering, reconnect, optional restart, contact and one-time wolf rewards. */
+async function playMobs(bots, watch, state) {
+  const timer = setInterval(() => { for (const bot of bots) void bot.act(state); }, TICK_MS);
+  idlePings(bots);
+  await until('the walk screen', () => onWalk(bots) && bots.some(b => b.view.data.leader));
+  await until('the TV world position', () => { watch.read(); return watch.tile; });
+  const group = 'mob_pine_wolves';
+  const definition = JSON.parse(fs.readFileSync(path.join(RULES, 'mobs/ashen_ford.json'), 'utf8')).mobs.find(m => m.id === group);
+  const purse = bots.reduce((n, b) => n + (b.view.data.gold ?? 0), 0);
+  let paused = false;
+  for (let attempt = 0; attempt < 12 && !inBattle(bots) && fightsDone === 0; attempt++) {
+    watch.read();
+    if (bots.some(b => b.view?.data?.ambush)) break;
+    const target = watch.mobs.find(m => m.group === group)?.at ?? definition.patch[0];
+    const dirs = await routeFrom({ region: 'ashen_ford' }, watch.tile, 'mob-at:' + target.join(','));
+    for (const dir of dirs) {
+      watch.read();
+      if (inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush || b.view?.screen === 'results')) break;
+      const wolf = watch.mobs.find(m => m.group === group);
+      if (!paused && wolf && Math.abs(wolf.at[0] - watch.tile[0]) + Math.abs(wolf.at[1] - watch.tile[1]) <= 10) {
+        await until('visible wolves to take a roaming step', () => { watch.read(); return watch.mobMoves.has(group); });
+        log('MOBS WANDER OK');
+        await sleep(3000);
+        const reconnect = bots.at(-1); reconnect.view = null;
+        await reconnect.conn.stop(); await reconnect.conn.start(); await reconnect.rejoin();
+        await until('the reconnected phone', () => reconnect.view?.screen === 'walk');
+        log('MOBS RECONNECT OK');
+        if (goDir) {
+          const leader = await leaderOf(bots);
+          await leader.input('questLog', { action: 'open' });
+          await sleep(1500);
+          log('PAUSE mobs-visible');
+          await until('mobs restart release', () => fs.existsSync(path.join(goDir, 'mobs-visible')));
+          for (const b of bots) if (b.view?.screen === 'questLog') await b.input('questLog', { action: 'close' });
+          await leaderOf(bots);
+          log('MOBS RESTART RESUMED');
+        }
+        paused = true;
+        break;
+      }
+      const was = watch.seq;
+      const next = await until('a leader or the ambush', () => {
+        if (inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush || b.view?.screen === 'results')) return { fight: true };
+        const leader = bots.find(b => b.view?.screen === 'walk' && b.view.data.leader);
+        return leader ? { leader } : null;
+      });
+      if (next.fight) break;
+      await walkTo(next.leader, dir); await walkTo(next.leader, null);
+      await within(4000, () => { watch.read(); return watch.seq !== was || inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.data?.ambush); });
+      if (inBattle(bots) || bots.some(b => b.view?.data?.ambush)) break;
+    }
+  }
+  await until('the wolves ambush', () => inBattle(bots) || fightsDone > 0 || bots.some(b => b.view?.screen === 'results'));
+  log('MOBS AMBUSH OK');
+  await until('the wolf fight to finish', () => fightsDone > 0 && onWalk(bots));
+  if (lastFightOutcome !== 'Won') throw new Error('The mob fight was ' + lastFightOutcome);
+  await until('defeated sprites gone', () => { watch.read(); return !watch.mobs.some(m => m.group === group); });
+  const after = bots.reduce((n, b) => n + (b.view.data.gold ?? 0), 0);
+  if (after - purse !== definition.gold) throw new Error('Wrong mob gold: ' + (after - purse));
+  log('MOBS WIN AND REMOVAL OK');
+  await bots[0].input('endSession');
+  await until('the session to end', () => bots[0].ended);
+  clearInterval(timer);
+  log('MOBS OK');
 }
 
 async function playChapter(bots, watch, state) {
@@ -1193,6 +1350,7 @@ async function playChapter(bots, watch, state) {
   if (recoveryRun && (!camped || !inn)) throw new Error('The chapter did not complete both camp and inn recovery');
   log(`CHAPTER the card: ${fs.existsSync(String(tvLog)) ? (fs.readFileSync(tvLog, 'utf8').match(/^STORY card (.*)$/m)?.[1] ?? '') : ''}`);
   await until('walking after the card', () => onWalk(bots) && bots.some((b) => b.view.data.leader));
+  if (bountyRun) await playBounty(bots, watch);
   await sleep(holdMs);
   await walkOn(bots, watch, 'CHAPTER');
   const vip = bots[0];
@@ -1241,11 +1399,167 @@ async function playShop(bots, watch, state) {
   const sale = buyer.view.data.sell.find(x => x.item === row.item);
   await trade(buyer, 'shopSell', sale, 1);
   if (purse() !== before - row.price + sale.price) throw new Error('Sale did not credit the purse');
+  // Empty the buyer's starting kit before exercising the real between-session remake API.
+  for (const remaining of [...buyer.view.data.sell]) if (remaining.count > 0) await trade(buyer, 'shopSell', remaining, remaining.count);
+  const earned = purse();
+  const campaign = bots[0].lobby.campaign.code;
   await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
   await until('walking after trade', () => onWalk(bots));
   await bots[0].input('endSession');
   await until('the session to end', () => bots[0].ended);
-  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
+  await sleep(250);
+  const headers = { Authorization: `Profile ${buyer.profileKey.key}`, 'Content-Type': 'application/json' };
+  const url = `${server}/api/campaigns/${campaign}`;
+  let response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`Remake portal GET failed: ${response.status}`);
+  let portal = await response.json();
+  for (const cls of ['wizard', 'cleric', 'fighter']) {
+    response = await fetch(`${url}/commands`, { method: 'POST', headers, body: JSON.stringify({
+      type: 'createCharacter', version: portal.info.version,
+      data: { race: 'human', class: cls, background: 'soldier', scores: { str: 15, dex: 15, con: 15, int: 8, wis: 8, cha: 8 } },
+    }) });
+    if (!response.ok) throw new Error(`Remake ${cls} failed: ${response.status}`);
+    portal = await response.json();
+  }
+  for (const bot of bots) bot.ended = null;
+  const previous = bots[0].view.viewId;
+  await bots[0].conn.invoke('StartGame');
+  await until('the remade party to walk', () => bots[0].view.viewId !== previous && onWalk(bots));
+  await walkToBeat(bots, watch, 'ashen_ford', { beat: 'shop:af_market_herbalist' });
+  await until('the shop after remaking', () => bots.every(b => b.view?.screen === 'shop'));
+  if (buyer.view.data.gold !== earned || buyer.view.data.sell.some(row => row.count > 0)) throw new Error('Remaking refilled a sold kit or minted gold');
+  log('SHOP remake OK: sold kit stayed empty and gold unchanged after three portal remakes');
+  await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
+  await until('walking after remake check', () => onWalk(bots));
+  await bots[0].input('endSession');
+  await until('the remade session to end', () => bots[0].ended);
+  log('SHOP OK: council reward split evenly, own purse and bag, other purses unchanged, bought, replayed the trade id, sold, remade without farming, left');
+}
+
+/**
+ * --decisions: the owner's rule decisions of issue #83 through real phones and the TV, on the shipped Ashen Ford with one e2e strongbox
+ * (an unseen trap, a lock of pick DC 30 and no other way) that tools/tv-e2e.sh adds to a copy of the pack. No flags or gold are injected.
+ */
+async function playDecisions(bots, watch, state) {
+  const region = 'ashen_ford';
+  const timer = setInterval(() => {
+    if (bots.some((b) => b.closed)) { console.error(`Room closed: ${bots.find((b) => b.closed).closed}`); process.exit(1); }
+    for (const bot of bots) void bot.act(state);
+  }, TICK_MS);
+  timer.unref();
+  idlePings(bots);
+  await until('the party to walk', () => onWalk(bots));
+  if (tvLog && !asHost) await until('the TV world', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  const leaderBot = () => bots.find((b) => b.view?.data?.leader);
+  const memberOf = (bot, view) => view.data.options.find((o) => o.label === bot.name || o.label.startsWith(`${bot.name} `))?.id;
+
+  // The mayor's request: a story beat, which earns the party a long rest, and the council advance.
+  await walkToBeat(bots, watch, region, { beat: 'ch1_mayors_request' });
+  await until('the council advance', () => onWalk(bots) && bots.reduce((sum, b) => sum + (b.view.data.gold ?? 0), 0) === 200);
+  log('DECISIONS the mayor\'s request is done: a rest is earned');
+
+  // Wenna's, before anything is found: what the second bot could sell her (its potions).
+  const potions = (bot) => (bot.view.data.sell ?? []).filter((r) => r.item === 'potion_of_healing').reduce((n, r) => n + r.count, 0);
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_market_herbalist' });
+  await until('the shop on every phone', () => bots.every((b) => b.view?.screen === 'shop'));
+  const taker = bots.find((b) => !b.view.data.leader);     // who the party votes the first found item to: not the opener
+  const potionsBefore = potions(taker);
+  const plainPrice = bots[0].view.data.items.find((i) => i.item === 'potion_of_healing').price;
+  if (!bots.every((b) => b.view.data.haggle?.can === Boolean(b.view.data.leader))) throw new Error('Only the leader should be offered Haggle');
+  await leaderBot().input('shopLeave', { shop: 'af_market_herbalist' });
+  await until('walking after the first visit', () => onWalk(bots));
+
+  // Decision 8: the reeve's key, on everyone's key ring.
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_reeves_key', instant: true });
+  await until('the reeve\'s key on every key ring', () => onWalk(bots)
+    && bots.every((b) => b.view.data.journal?.keys?.some((k) => k.id === 'af_reeves_key' && !k.used && k.found === 'The Ashen Ford')));
+  log('KEYS OK: the reeve\'s key is on every phone\'s key ring: found in The Ashen Ford, not used yet');
+
+  // Decisions 3 and 2: the strongbox's unseen trap goes off on the leader, and its only way, a DC 30 pick, fails.
+  const leaderName = leaderBot().name;
+  let offered = null;
+  answerHook = (bot, view) => {
+    if (view.screen !== 'vote' || view.data.party || !view.data.canChoose) return undefined;
+    offered = view.data.options.map((o) => o.id);
+    return ['vote', { option: offered.includes('pick') ? 'pick' : 'leave' }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:e2e_strongbox' });
+  await until('the failed pick to end', () => onWalk(bots));
+  if (!offered?.includes('pick')) throw new Error(`The strongbox offered ${offered}, not the pick`);
+  log('LOCK the pick failed (DC 30)');
+  offered = null;
+  await leaderBot().input('interact', { target: 'e2e_strongbox' });
+  await sleep(2000);
+  if (!onWalk(bots) || offered) throw new Error('A spent lock opened a question before a rest');
+  log('LOCK nothing left to try before a rest');
+
+  // Camp: the minor injury of the leader who sprang it is on the camp's party cards; dawn mends it.
+  answerHook = null;
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_ford_campfire' });
+  const hurt = await until('the camp\'s party cards', () => {
+    const job = bots.find((b) => b.view?.screen === 'camp-job' || b.view?.screen === 'camp-target' || b.view?.screen === 'camp-roll');
+    const me = job?.view.data.members?.find((m) => m.name === leaderName);
+    return me ? (me.injuries.find((i) => i.kind === 'rest') ?? 'none') : null;
+  });
+  if (hurt === 'none') throw new Error(`${leaderName} has no rest-kind injury from the trap at camp`);
+  log(`TRAP OK: ${leaderName} took a minor injury: ${hurt.name} (${hurt.kind} recovery)`);
+  await until('dawn and the walk', () => onWalk(bots));
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_chapel' });
+  await until('the chapel on every phone', () => bots.every((b) => b.view?.screen === 'shop'));
+  const guest = bots[0].view.data.guests?.find((g) => g.name === leaderName);
+  if (!guest || guest.injuries.some((i) => i.id === hurt.id)) throw new Error(`${hurt.name} wasn't mended at dawn: ${JSON.stringify(guest)}`);
+  log(`CAMP OK: dawn mended ${hurt.name}`);
+  await leaderBot().input('shopLeave', { shop: 'af_chapel' });
+  await until('walking after the chapel', () => onWalk(bots));
+
+  // Decision 2: after the rest the pick is offered again; the party leaves it.
+  offered = null;
+  answerHook = (bot, view) => {
+    if (view.screen !== 'vote' || view.data.party || !view.data.canChoose) return undefined;
+    offered = view.data.options.map((o) => o.id);
+    return ['vote', { option: 'leave' }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:e2e_strongbox' });
+  await until('leaving the strongbox', () => onWalk(bots));
+  if (!offered?.includes('pick')) throw new Error(`After the rest the strongbox offered ${offered}, not the pick again`);
+  log('RETRY OK: the failed pick was offered again after camping');
+
+  // Decision 1: the reeve's chest, opened with the key; the party votes who takes each item. The first goes to the second bot by vote,
+  // the second to the opener by silence.
+  const votes = [];
+  answerHook = (bot, view) => {
+    if (view.screen === 'vote' && !view.data.party && view.data.canChoose)
+      return ['vote', { option: view.data.options.some((o) => o.id === 'key') ? 'key' : view.data.options[0].id }];
+    if (view.screen !== 'vote' || !view.data.question) return undefined;
+    if (!votes.includes(view.data.question)) { votes.push(view.data.question); log(`LOOT vote ${view.data.vote}: ${view.data.question} between ${view.data.options.map((o) => o.label).join(', ')}`); }
+    if (view.data.vote !== 0 || view.data.mine) return null;      // the second item: silence
+    return ['vote', { option: memberOf(taker, view) }];
+  };
+  await walkToBeat(bots, watch, region, { beat: 'thing:af_reeves_chest' });
+  await until('the loot votes to end', () => onWalk(bots) && votes.length >= 2);
+  answerHook = null;
+  if (votes[0] !== 'Who takes the Potion of Healing?' || votes[1] !== 'Who takes the Flask of Oil?') throw new Error(`Unexpected loot votes: ${votes}`);
+  await until('the reeve\'s key shown used', () => bots.every((b) => b.view.data.journal?.keys?.some((k) => k.id === 'af_reeves_key' && k.used)));
+  log('KEYS OK: the reeve\'s key is shown used');
+
+  // Decision E: haggle at Wenna's, then her prices; and the potion the vote gave is in the second bot's bag.
+  await walkToBeat(bots, watch, region, { beat: 'shop:af_market_herbalist' });
+  await until('the shop again', () => bots.every((b) => b.view?.screen === 'shop'));
+  if (potions(taker) !== potionsBefore + 1) throw new Error(`${taker.name} has ${potions(taker)} potions to sell, not ${potionsBefore + 1}`);
+  log(`LOOT OK: ${taker.name} took the Potion of Healing by vote; the opener took the Flask of Oil by silence`);
+  await leaderBot().input('shopHaggle', { shop: 'af_market_herbalist' });
+  await until('the party\'s pick of who haggles', () => bots.some((b) => b.view?.screen === 'check'));
+  await until('back in the shop with the haggle\'s result', () => bots.every((b) => b.view?.screen === 'shop' && b.view.data.haggle?.result));
+  const result = bots[0].view.data.haggle.result;
+  const price = bots[0].view.data.items.find((i) => i.item === 'potion_of_healing').price;
+  const expected = result.passed ? Math.ceil(plainPrice * 0.9) : plainPrice;
+  if (price !== expected || bots[0].view.data.haggle.can) throw new Error(`After the haggle the potion costs ${price}, not ${expected}`);
+  log(`HAGGLE OK: ${result.name} rolled ${result.die} + ${result.bonus} = ${result.total} vs DC ${bots[0].view.data.haggle.dc}: ${result.passed ? 'passed' : 'failed'}; a potion is ${price} gold (was ${plainPrice})`);
+  await leaderBot().input('shopLeave', { shop: 'af_market_herbalist' });
+  await until('walking after the haggle', () => onWalk(bots));
+  await bots[0].input('endSession');
+  await until('the session to end', () => bots[0].ended);
+  log('DECISIONS OK: loot vote, trap injury mended at camp, lock retried after the rest, key ring, haggle');
 }
 
 (async () => {
@@ -1266,8 +1580,8 @@ async function playShop(bots, watch, state) {
   // The lobby's campaign step, as the phones do it.
   await vip.conn.invoke('SelectGame', 'tactics');
   await until('Tactics selected', () => vip.lobby.selectedGameId === 'tactics');
-  await vip.conn.invoke('CreateCampaign', `Bots ${Date.now() % 100000}`);
-  for (const bot of rest) await bot.conn.invoke('ClaimMember', { member: null, profileKeys: [] });
+  vip.profileKey = await vip.conn.invoke('CreateCampaign', `Bots ${Date.now() % 100000}`);
+  for (const bot of rest) bot.profileKey = await bot.conn.invoke('ClaimMember', { member: null, profileKeys: [] });
   if (people > 0) log(`Waiting for ${people} more to join room ${code}`);
   await until(`${people} more to join`, () => vip.lobby.players.filter((p) => p.connected && p.profile).length >= players + people);
   await until('the room to be able to start', () => vip.lobby.canStart || vip.lobby.inGame);
@@ -1276,8 +1590,18 @@ async function playShop(bots, watch, state) {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (decisionsRun) {
+    await playDecisions(bots, watch, state);
+    await Promise.all(bots.map(b => b.conn.stop()));
+    process.exit(0);
+  }
   if (shopRun) {
     await playShop(bots, watch, state);
+    await Promise.all(bots.map(b => b.conn.stop()));
+    process.exit(0);
+  }
+  if (mobRun) {
+    await playMobs(bots, watch, state);
     await Promise.all(bots.map(b => b.conn.stop()));
     process.exit(0);
   }

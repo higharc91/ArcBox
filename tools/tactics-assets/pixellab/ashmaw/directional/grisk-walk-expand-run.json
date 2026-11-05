@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: Walk in place directly toward viewer. Keep helmet fixed to head. Right hand holds pick shaft firmly; pick moves as one rigid object with gripping hand. Same front view and body proportions throughout the cycle.\nmode: template\ndirections: south-east, east, north-east, north, north-west, west, south-west (7 jobs)\njob_ids: south-east=1074e091-d954-456c-b433-517bf8366f03, east=476d6219-5172-4ed1-82eb-8ffc18f0f336, north-east=1e4a6080-4f63-46ac-aef6-bee8261f21e9, north=aefed0a6-7327-41d8-a618-1e90ce8342e0, north-west=c6d18456-5493-4b64-aebc-6f934f23a3eb, west=2b9482ba-2acb-4316-9a16-86224c6cc5a6, south-west=e33d12fd-189d-4659-adc2-cbef5336de58\ngroup: ca790616-3e06-487c-b81e-35b79e79ce4a\ncost: 7 generations (1/dir x 7)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", template_animation_id=\"walking-6-frames\", animation_group_id=\"ca790616-3e06-487c-b81e-35b79e79ce4a\", directions=[...])\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nif poor: delete_animation(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

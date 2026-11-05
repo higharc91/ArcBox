@@ -26,6 +26,11 @@ The owner also requested cozy campfire music. Use the existing acoustic `camp` l
 
 These are the issue's recommended defaults, open to owner override; no additional economy values are introduced.
 
+**Issue #83 (owner decisions of 2026-11-03):** three more rest-kind injuries, Scraped hands (attack −1), Singed (no effect) and Twisted
+knee (move −1), are a trap's minor injury out of battle; they carry `"battle": false`, so a fallen hero's table is unchanged, and any camp
+or inn dawn mends them as it does a black eye. Each long rest (`RestSeq`) also reopens the failed lock ways and searches of the
+[interactables design](2026-11-02-tactics-interactables-design.md) §3.2.
+
 ## Save and transaction design
 
 WorldSave adds optional RestReady, Camp, RestSeq and seen camp scenes; MemberRecord adds optional WellFed. Defaults are omitted,

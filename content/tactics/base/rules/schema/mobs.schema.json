@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/mobs.schema.json",
+  "title": "Visible roaming mob groups",
+  "description": "Documentation only. The C# loader also checks arena stamps, walkability, roads, protected places and safe routes.",
+  "type": "object",
+  "required": ["region", "mobs"],
+  "additionalProperties": false,
+  "properties": {
+    "region": {"type": "string", "minLength": 1},
+    "mobs": {"type": "array", "items": {"$ref": "#/$defs/group"}}
+  },
+  "$defs": {
+    "tile": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+    "flags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "group": {
+      "type": "object",
+      "required": ["id", "encounter", "arena", "patch", "show"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "encounter": {"type": "string", "minLength": 1},
+        "arena": {"type": "string", "minLength": 1},
+        "patch": {"type": "array", "items": {"$ref": "#/$defs/tile"}, "minItems": 1, "uniqueItems": true},
+        "show": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "maxItems": 3},
+        "pace": {"type": "number", "exclusiveMinimum": 0, "default": 2},
+        "requires": {"$ref": "#/$defs/flags"},
+        "unless": {"$ref": "#/$defs/flags"},
+        "xp": {"type": "integer", "minimum": 0, "default": 75},
+        "gold": {"type": "integer", "minimum": 0, "default": 10}
+      }
+    }
+  }
+}

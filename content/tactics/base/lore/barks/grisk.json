@@ -1,0 +1,61 @@
+{
+  "speaker": "grisk",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_grisk_battle_start_1",
+        "text": "Bear’s awake! Dig or die!",
+        "mood": "angry",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_grisk_hit_1",
+        "text": "That was my good side!",
+        "mood": "angry",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "weight": 6
+      },
+      {
+        "id": "bark_grisk_candle_1",
+        "speaker": "grisk",
+        "text": "You no take candle!",
+        "mood": "angry",
+        "direction": "High nasal kobold rasp, quick and greedy; a sharp, possessive protest. Keep every word clear."
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_grisk_low_hp_1",
+        "text": "The market pays! I’ll split it!",
+        "mood": "sad",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_grisk_ally_down_1",
+        "text": "Up! I counted you in the wages!",
+        "mood": "angry",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
+      }
+    ],
+    "turn_start": [
+      {
+        "id": "bark_grisk_turn_start_1",
+        "text": "Dig faster!",
+        "mood": "angry",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_grisk_defeat_1",
+        "text": "Tell them… I kept the tally.",
+        "mood": "sad",
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
+      }
+    ]
+  }
+}

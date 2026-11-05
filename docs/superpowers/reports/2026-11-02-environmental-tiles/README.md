@@ -13,6 +13,4 @@
 
 ## Current status — 2026-11-03 (UTC)
 
-After user review and authorization, A–C landed on the overworld branch and are now in `main`. D–G are implemented on `environmental-tiles`, including the final balance pass for River Crossing, Ford Assault, Warlord Bridge, Forest Ruins and Crystal Cave. The shops/gold changes from PR #70 are merged into this branch, and oil has its agreed price of 10.
-
-The user authorized the remaining tuning, polish and PR on 2026-11-03; the [plan addendum](../../plans/2026-11-02-tactics-environmental-tiles.md) records that authorization. The completion report is the current source for validation and remaining-scope status. The PR targets `main`.
+All milestones A–G, including final balance and presentation work, were merged into main in PR #72. Shops/gold landed in PR #70 and oil has its agreed price of 10. The completion report remains the validation source; the feature branch is historical. Main subsequently integrated recovery and NPC/quest work through PR #75.

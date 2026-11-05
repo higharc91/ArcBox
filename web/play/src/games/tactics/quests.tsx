@@ -3,13 +3,25 @@ import type { CustomScreenProps } from "../module";
 import { MoodPortrait } from "./art";
 import { useSfx } from "./sfx";
 import "./quests.css";
+import { TrinketSlot, type Trinket } from "./trinket";
 
 export interface QuestEntry {
   id: string; name: string; status: "active" | "done" | "failed"; giver: string; portrait?: string;
   objective: string; history: { log: string; done: boolean; objective?: string }[]; result?: string;
   rewards?: { gold: number; xp: number; items: { name: string; count: number }[] };
 }
-export interface JournalData { quests: QuestEntry[]; selected?: string; pinned?: string; canPin: boolean; reading?: string }
+/** A key on the party's key ring (the owner's decision 8, 2026-11-03): its name, where it was found, and whether it has opened a lock. */
+export interface KeyEntry { id: string; name: string; found: string | null; used: boolean }
+export interface JournalData { quests: QuestEntry[]; selected?: string; pinned?: string; canPin: boolean; reading?: string; keys?: KeyEntry[] }
+
+/** The party's key ring, as a list: only shown once the party holds a key. */
+export function KeyRing({ keys }: { keys?: KeyEntry[] }) {
+  if (!keys?.length) return null;
+  return <section class="tx-keyring" aria-label="Keys"><h3>Keys</h3><ul>
+    {keys.map(k => <li key={k.id}><span class="tx-keyring-icon" aria-hidden="true">⚷</span><span><b>{k.name}</b>
+      <small>{[k.found ? `Found: ${k.found}` : null, k.used ? "Used" : "Not used yet"].filter(Boolean).join(" · ")}</small></span></li>)}
+  </ul></section>;
+}
 type Send = CustomScreenProps["send"];
 
 export function Journal({ journal, send, shared = false, onClose, initial }: {
@@ -17,6 +29,13 @@ export function Journal({ journal, send, shared = false, onClose, initial }: {
 }) {
   const [selection, setSelection] = useState(initial ?? journal.selected ?? journal.quests[0]?.id);
   const sfx = useSfx();
+  const latestSend = useRef(send);
+  latestSend.current = send;
+  useEffect(() => {
+    if (!shared || !journal.canPin) return;
+    const timer = setInterval(() => latestSend.current("questLog", { action: "keepOpen" }), 2500);
+    return () => clearInterval(timer);
+  }, [shared, journal.canPin]);
   const selected = journal.quests.find(q => q.id === (shared && journal.canPin ? journal.selected : selection)) ?? journal.quests[0];
   const close = () => { sfx("questlogClose"); if (shared && journal.canPin) send("questLog", { action: "close" }); else onClose?.(); };
   return <section class="tx-journal" aria-label="Quest journal">
@@ -31,7 +50,7 @@ export function Journal({ journal, send, shared = false, onClose, initial }: {
           <span class={`tx-seal ${q.status}`} aria-label={q.status}>{q.status === "done" ? "✓" : q.status === "failed" ? "×" : "✦"}</span>
           <span><b>{q.name}</b><small>{q.objective}</small></span>
           {journal.pinned === q.id ? <span class="tx-pin-ribbon" aria-label="Pinned">◆</span> : null}</button>)}</section> : null;
-    })}</nav>
+    })}<KeyRing keys={journal.keys} /></nav>
     {selected ? <article class="tx-journal-entry" aria-label={selected.name}>
       <div class="tx-journal-giver">{selected.portrait ? <MoodPortrait preset={selected.portrait} mood="idle" name={selected.giver} size={80} /> : null}
         <div><span class="tx-eyebrow">{selected.giver}</span><h2>{selected.name}</h2></div></div>
@@ -61,12 +80,13 @@ export function QuestLog({ data, send }: CustomScreenProps) {
   </>}</div>;
 }
 
-export interface QuestNoticeData { id: string; name: string; kind: string; objective: string; canPin: boolean }
-function QuestNotice({ notice, send, read }: { notice: QuestNoticeData; send: Send; read: (quest: string) => void }) {
+export interface QuestNoticeData { id: string; name: string; kind: string; objective: string; canPin: boolean; trinket?: Trinket }
+function QuestNotice({ notice, send, read, stop }: { notice: QuestNoticeData; send: Send; read: (quest: string) => void; stop: () => void }) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const held = useRef(false); const sfx = useSfx();
   const cancel = () => { if (timer.current !== null) clearTimeout(timer.current); timer.current = null; };
   useEffect(() => cancel, []);
+  useEffect(() => { if (notice.trinket) stop(); }, [notice.id, notice.trinket?.id]);
   const label = notice.kind === "start" ? "Quest started" : notice.kind === "update" ? "Quest updated" : notice.kind === "complete" ? "Quest complete" : "Quest failed";
   return <div role="status"><button type="button" class="tx-tracker-chip tx-quest-notice" onContextMenu={e => e.preventDefault()}
     onPointerDown={() => { cancel(); held.current = false; if (notice.canPin) timer.current = setTimeout(() => {
@@ -75,7 +95,7 @@ function QuestNotice({ notice, send, read }: { notice: QuestNoticeData; send: Se
     onClick={() => { if (!held.current) read(notice.id); held.current = false; }}>
       <span aria-hidden="true">✦</span><span><span class="tx-quest-notice-label">{label}{notice.canPin ? " · Hold to pin" : ""}</span>
       <b>{notice.name}</b>{notice.kind === "start" || notice.kind === "update" ? <small>{notice.objective}</small> : null}</span>
-    </button></div>;
+    </button>{notice.trinket ? <div class="tx-trinket-presented"><span class="tx-eyebrow">Presented to you</span><TrinketSlot key={`${notice.id}:${notice.trinket.id}`} trinket={notice.trinket} presented /></div> : null}</div>;
 }
 
 export function WalkJournal({ journal, pinned, notice, send, stop }: {
@@ -84,7 +104,7 @@ export function WalkJournal({ journal, pinned, notice, send, stop }: {
   const [open, setOpen] = useState(false); const [initial, setInitial] = useState<string>();
   const read = (quest?: string) => { stop(); setInitial(quest); setOpen(true); };
   return <div class="tx-walk-journal">
-    {notice ? <QuestNotice notice={notice} send={send} read={read} /> : null}
+    {notice ? <QuestNotice notice={notice} send={send} read={read} stop={stop} /> : null}
     {pinned && notice?.id !== pinned.id ? <button type="button" class="tx-tracker-chip" onClick={() => read(pinned.id)}><span aria-hidden="true">◆</span><span><b>{pinned.name}</b><small>{pinned.objective}</small></span></button> : null}
     <button type="button" class="tx-btn ghost" onClick={() => { stop(); if (journal.canPin) send("questLog", { action: "open" }); else read(); }}>{journal.canPin ? "Quest log" : "Read quest journal"}</button>
     {open ? <div class="tx-journal-modal" role="dialog" aria-modal="true" aria-label="Private quest journal" onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}>

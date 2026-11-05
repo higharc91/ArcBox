@@ -61,7 +61,8 @@ public static class StoryOrder
         {
             var beats = arc.GetProperty("beats").EnumerateArray().Select(ReadBeat).ToImmutableArray();
             var scenes = ReadScenes(contentBase, arc.GetProperty("chapter").GetInt32());
-            var start = new Progress("", region.Def.Spawns.Start, null, [], [], [], []);
+            var prerequisite = arc.TryGetProperty("sideAdventure", out var side) && side.GetBoolean() && !beats.IsEmpty ? beats[0].Requires.ToImmutableHashSet(StringComparer.Ordinal) : ImmutableHashSet<string>.Empty;
+            var start = new Progress("", region.Def.Spawns.Start, null, prerequisite, [], [], []);
             foreach (var finished in new Replay(region, rules, walk, beats, scenes, problems).Run(start))
             {
                 legs.AddRange(finished.Legs);

@@ -1,0 +1,27 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"jobs\": [\n    {\n      \"jobId\": \"job_mUbkmMnRbe7XjGGGRbNTT7Eg\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T19:25:50.971Z\",\n      \"updatedAt\": \"2026-11-03T19:26:04.605Z\",\n      \"modelId\": \"model_google-gemini-3-8-flash-tts\",\n      \"assetIds\": [\n        \"asset_s4q1aEdaj3MtiGbKu7WjXfd1\"\n      ],\n      \"cuCost\": 2\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_mUbkmMnRbe7XjGGGRbNTT7Eg",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T19:25:50.971Z",
+        "updatedAt": "2026-11-03T19:26:04.605Z",
+        "modelId": "model_google-gemini-3-8-flash-tts",
+        "assetIds": [
+          "asset_s4q1aEdaj3MtiGbKu7WjXfd1"
+        ],
+        "cuCost": 2
+      }
+    ]
+  },
+  "isError": false
+}

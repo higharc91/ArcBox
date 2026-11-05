@@ -69,6 +69,39 @@
           "id": {
             "type": "string",
             "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
+          },
+          "countByParty": {
+            "type": "object",
+            "description": "Explicit positive values for every supported party size; count remains the maximum placement capacity.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "hpByParty": {
+            "type": "object",
+            "description": "Explicit positive values for every supported party size; count remains the maximum placement capacity.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "unitByParty": {
+            "type": "object",
+            "description": "Explicit monster profile for every supported party size; placement identity and trigger tag remain stable.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
           }
         },
         "required": [
@@ -113,6 +146,39 @@
           "id": {
             "type": "string",
             "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
+          },
+          "countByParty": {
+            "type": "object",
+            "description": "Explicit positive values for every supported party size; count remains the maximum placement capacity.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "hpByParty": {
+            "type": "object",
+            "description": "Explicit positive values for every supported party size; count remains the maximum placement capacity.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "unitByParty": {
+            "type": "object",
+            "description": "Explicit monster profile for every supported party size; placement identity and trigger tag remain stable.",
+            "patternProperties": {
+              "^[1-9][0-9]*$": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
           }
         },
         "required": [
@@ -210,6 +276,10 @@
       "type": "integer",
       "minimum": 0,
       "maximum": 2147483647
+    },
+    "storyOnly": {
+      "type": "boolean",
+      "description": "Only offered by its regional story. Omitted from the standalone encounter picker; defaults false."
     }
   },
   "required": [

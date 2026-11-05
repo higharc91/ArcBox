@@ -1,5 +1,7 @@
 # Locally authored pixel art · owner review
 
+> Historical review checkpoint. The owner subsequently authorized push and merge; [current-main integration and release checks](../../merge/README.md) supersede earlier no-PR instructions below.
+
 **Approved by the owner (“I approve”) and integrated on 2026-11-05.** This page archives the reviewed candidates and preview checks. See [final integration](../../integration/README.md) for the live pack/scene and final verification.
 
 The owner replaced the PixelLab stage with “We don't have access to pixal lab, you make it.” These sprites are authored locally with the production town renderer and its existing materials. No PixelLab access, balance top-up or paid generation is needed. This stage used **zero new generation credits**; the earlier approved Scenario concepts remain the design references.

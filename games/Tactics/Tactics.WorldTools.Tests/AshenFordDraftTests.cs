@@ -63,6 +63,7 @@ public sealed class AshenFordDraftTests
         Stamps = [.. source.Stamps],
         Starts = [source.Start],
         Recoveries = [source.Recovery],
+        NamedSpawns = [.. source.NamedSpawns.Select(s => (s.Key, s.Value))],
     };
 
     /// <summary>Exports the draft into a copy of the pack, over the region the pack lists, and loads the copy, which runs every check the game does.</summary>
@@ -81,6 +82,7 @@ public sealed class AshenFordDraftTests
             }
 
             RegionExportTests.WithoutShops(rules, Id); // The historical draft predates the painted market keeper.
+            RegionExportTests.WithoutMobs(rules, Id); // The historical draft predates the painted roaming arenas.
             var export = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
             Assert.True(export.Written is not null, string.Join("\n", export.Problems));
             Assert.True(export.Listed);
@@ -99,7 +101,7 @@ public sealed class AshenFordDraftTests
         using var lore = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "lore", "arcs.json")));
         return
         [
-            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("chapter").GetInt32() == 1)
+            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("region").GetString() == "ashen_ford")
                 .SelectMany(arc => arc.GetProperty("beats").EnumerateArray())
                 .Select(beat => (beat.GetProperty("id").GetString()!, beat.GetProperty("place").GetString()!)),
         ];
@@ -426,6 +428,7 @@ public sealed class AshenFordDraftTests
         Pit(source, pit);
         var rules = RegionExportTests.CopyRules();
         RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
         try
         {
             var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
@@ -450,6 +453,7 @@ public sealed class AshenFordDraftTests
         source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_mayors_request")] = new BeatSpot("ch1_mayors_request", pit);
         var rules = RegionExportTests.CopyRules();
         RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
         RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' own check refuses a beat it can't walk back from: this is the story's warning
         try
         {
@@ -492,6 +496,7 @@ public sealed class AshenFordDraftTests
         source.Recovery = pit;
         var rules = RegionExportTests.CopyRules();
         RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
         RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' check says the same in its own words: this is the region's
         try
         {
@@ -1059,6 +1064,7 @@ public sealed class AshenFordDraftTests
         Assert.NotEmpty(source.Props);
         var rules = RegionExportTests.CopyRules();
         RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
         try
         {
             var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);

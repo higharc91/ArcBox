@@ -1,0 +1,11 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "animation_name": "grisk_shout_pilot",
+  "directions": [
+    "south"
+  ],
+  "mode": "v3",
+  "frame_count": 4,
+  "keep_first_frame": false,
+  "action_description": "Kobold foreman barks an order: feet stay planted, mouth opens, free left fist lifts briefly and drops. Right hand keeps the mining pick gripped firmly throughout. Helmet lamp and tally cord stay attached; return to original stance without turning."
+}

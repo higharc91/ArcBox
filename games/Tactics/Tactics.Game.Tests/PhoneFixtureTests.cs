@@ -30,7 +30,7 @@ public sealed class PhoneFixtureTests
         {
             var source = Path.Combine(content, "rules");
             var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(source, "manifest.json")))!.AsObject();
-            var files = manifest["files"]!.AsArray().Select(x => x!.GetValue<string>()).Where(x => !x.StartsWith("shops/", StringComparison.Ordinal)).ToArray();
+            var files = manifest["files"]!.AsArray().Select(x => x!.GetValue<string>()).Where(x => !x.StartsWith("shops/", StringComparison.Ordinal) && !x.StartsWith("mobs/", StringComparison.Ordinal)).ToArray();
             manifest["files"] = new JsonArray(files.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
             foreach (var file in files)
             {
@@ -42,6 +42,34 @@ public sealed class PhoneFixtureTests
             return RulesPack.Load([folder.FullName], ArtManifests.Load(content));
         }
         finally { folder.Delete(true); }
+    }
+
+    [Fact]
+    public void Roaming_danger_and_ambush_screens_match_their_fixtures()
+    {
+        var rules = TacticsGameTests.Rules;
+        var wolf = rules.MobsIn("ashen_ford").Single(m => m.Id == "mob_pine_wolves");
+        var at = wolf.Patch[0];
+        var ground = rules.GroundFor("ashen_ford")!.Terrain;
+        Tile Beside(int distance) => (from y in Enumerable.Range(at.Y - distance, distance * 2 + 1)
+            from x in Enumerable.Range(at.X - distance, distance * 2 + 1)
+            let tile = new Tile(x, y)
+            where Math.Abs(x - at.X) + Math.Abs(y - at.Y) == distance && ground.Walkable(tile) && rules.ReachFor("ashen_ford")!.Contains(tile)
+            select tile).First();
+        TacticsGameTests.Session At(int distance)
+        {
+            var session = new TacticsGameTests.Session(document: ExplorationTests.DocumentAt(ExplorationTests.Saved(Beside(distance))), game: new TacticsGame(rules));
+            session.Harness.StartCampaign(session.Lease);
+            return session;
+        }
+        var danger = At(3);
+        var ambush = At(1);
+        ambush.Harness.Advance(TimeSpan.FromMilliseconds(300));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["walk-danger"] = Node(danger.Harness.PlayerView(0)),
+            ["walk-ambush"] = Node(ambush.Harness.PlayerView(0)),
+        });
     }
 
     [Fact]
@@ -301,6 +329,11 @@ public sealed class PhoneFixtureTests
             ["portal-new"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), bo).GetRawText())!,
             ["portal-character"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!,
         };
+        var equipped = doc.Members[ana.Value];
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "hearthstone_pendant" } }) };
+        views["portal-trinket"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
+        doc = doc with { Members = doc.Members.SetItem(ana.Value, equipped with { Character = equipped.Character with { Trinket = "ember_claw_gauntlet" } }) };
+        views["portal-trinket-dormant"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!;
         Check(views);
     }
 
@@ -334,6 +367,28 @@ public sealed class PhoneFixtureTests
         s.Send(leader, "skip");
         screens["walk-pinned-done"] = Node(s.Harness.PlayerView(leader));
         Check(screens);
+    }
+
+    [Fact]
+    public void The_bounty_presents_only_the_receiving_phones_class_trinket()
+    {
+        var s = ConversationQuestTests.At("dagna_holt", "ch1_ford_settled", "sq_ashmaw_posted", "sq_ashmaw_accepted", "sq_ashmaw_slain", "sq_ashmaw_claw");
+        ConversationQuestTests.Talk(s, "dagna_holt");
+        ConversationQuestTests.Choose(s, "present");
+        ConversationQuestTests.WalkAgain(s);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
+    }
+
+    /// <summary>Who takes a found item (the owner's decision 1): the 5d vote screen, with what it asks.</summary>
+    [Fact]
+    public void The_loot_vote_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(2, 1), LootVoteTests.Hoard.Value);
+        s.Send(0, "interact", new { target = "bomb" });
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.Asking, "the loot vote");
+        s.Send(1, "vote", new { option = s.Profiles[2]!.Value.Value });
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["vote-loot"] = Node(s.Harness.PlayerView(1)) });
     }
 
     private static void Check(SortedDictionary<string, JsonNode> screens)

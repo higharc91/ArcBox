@@ -25,10 +25,10 @@ public sealed record StorySay(string Line, string Text, string? Clip, string The
 public static class StoryVoice
 {
     /// <summary>
-    /// The NPC/quest slice explicitly enables a speaker-matched live voice for a failed or unavailable recording.
+    /// Missing recordings remain captions only; Tactics never synthesizes a replacement voice.
     /// Captions remain visible, and callers can still opt into captions-only playback.
     /// </summary>
-    public const SpeechFallback Fallback = SpeechFallback.Speech;
+    public const SpeechFallback Fallback = SpeechFallback.Captions;
 
     /// <summary>The voice theme the voice chain reads a line with no clip in.</summary>
     public const string Theme = "tactics.story";

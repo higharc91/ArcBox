@@ -27,20 +27,33 @@ public sealed partial class TacticsGame
             s.Status == "active" ? null : s.Log, s.Status == "done" ? new QuestRewardView(s.Def.Rewards.Gold, s.Def.Rewards.Xp,
                 [.. s.Def.Rewards.Items.Select(i => new QuestItemView(ItemName(new ItemId(i.Item)), i.Count))]) : null)).ToImmutableArray();
         var selected = entries.Any(q => q.Id == _questSelection) ? _questSelection : entries.FirstOrDefault(q => q.Id == _doc.World?.PinnedQuest)?.Id ?? entries.FirstOrDefault()?.Id;
-        return new QuestLogView(entries, selected, _doc.World?.PinnedQuest, canPin, QuestLogOpen ? Leader?.Name : null);
+        return new QuestLogView(entries, selected, _doc.World?.PinnedQuest, canPin, QuestLogOpen ? Leader?.Name : null, KeyRingView());
     }
+
+    /// <summary>The party's key ring (USER DECISION 8, decided 2026-11-03), or null while it holds no key.</summary>
+    private ImmutableArray<KeyInfo>? KeyRingView()
+    {
+        if (_doc.World is not { } world)
+            return null;
+        var keys = KeyRing.Of(Rules, world.Flags, ThingSaves);
+        return keys.IsEmpty ? null : keys;
+    }
+
+    /// <summary>True when the journal has something to show: the region's quests, or a key on the ring.</summary>
+    private bool HasJournal => !RegionQuests.IsEmpty || KeyRingView() is not null;
 
     private CustomView QuestLogScreen(Player player, ProfileId profile)
         => Custom("questLog", JsonSerializer.SerializeToNode(Journal(profile.Value == _lead), ArcJson.Options)!);
 
     private void QuestLogInput(Player player, ProfileId profile, JsonElement? data)
     {
-        if (_phase != TacticsPhase.Exploration || profile.Value != _lead || !RegionQuests.Any()) return;
+        if (_phase != TacticsPhase.Exploration || profile.Value != _lead || !HasJournal) return;
         var action = Str(data, "action");
         var quest = Str(data, "quest");
         var state = KnownQuests().FirstOrDefault(q => q.Def.Id == quest);
         switch (action)
         {
+            case "keepOpen" when QuestLogOpen: return;
             case "open":
                 Halt();
                 _questLogLeader = _lead;
@@ -65,7 +78,14 @@ public sealed partial class TacticsGame
         Tile? target = null;
         if (state.Status == "active" && state.Current.Target is { } waypoint)
         {
-            if (waypoint.Person is { } person)
+            var region = waypoint.Region ?? state.Def.Region;
+            if (region != _region!.Def.Id)
+            {
+                var mouths = AllThings.Where(t => t.To?.Region == region).Select(t => t.Id).ToHashSet(StringComparer.Ordinal);
+                target = ThingViews()?.Where(t => mouths.Contains(t.Id)).OrderBy(t => Math.Abs(t.At.X - _at.X) + Math.Abs(t.At.Y - _at.Y))
+                    .ThenBy(t => t.Id, StringComparer.Ordinal).Select(t => (Tile?)t.At).FirstOrDefault();
+            }
+            else if (waypoint.Person is { } person)
                 target = PresentPeople().Where(p => RegionPeople.Id(p.Person, p.Index) == person).Select(p => (Tile?)p.Person.At).FirstOrDefault();
             else if (waypoint.Thing is { } thing)
                 target = ThingViews()?.Where(t => t.Id == thing).Select(t => (Tile?)t.At).FirstOrDefault();

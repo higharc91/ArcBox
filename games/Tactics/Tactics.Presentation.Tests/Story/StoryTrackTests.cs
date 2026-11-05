@@ -108,13 +108,13 @@ public sealed class StoryTrackTests
         foreach (var speaker in new[] { "halden_varrow", "townsfolk_farmer", "townsfolk_goblin_spear" })
         {
             var line = new StoryLineView("missing_clip", speaker, speaker, null, "idle", "Hello.");
-            Assert.Equal(TacticsVoices.Npc(speaker), StoryVoice.For(line, null)!.Theme);
+            Assert.Equal(TacticsVoices.Npc(speaker), StoryVoice.For(line, null, SpeechFallback.Speech)!.Theme);
         }
     }
 
     [Fact]
     public void The_npc_slice_uses_live_speech_for_an_unavailable_clip()
-        => Assert.Equal(SpeechFallback.Speech, StoryVoice.Fallback);
+        => Assert.Equal(SpeechFallback.Captions, StoryVoice.Fallback);
 
     [Fact]
     public void A_fresh_track_shows_the_line_and_doesnt_speak()

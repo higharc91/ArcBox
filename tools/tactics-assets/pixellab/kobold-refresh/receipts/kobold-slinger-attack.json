@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: aa983ed4-fd89-4e61-85cd-93b185bd2f40\nanimation: v3 custom (Swing a two-cord sling held securely in the hand and release a stone, then return to stance. Keep the hand connected to the sling throughout.)\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=c1fdca2b-4812-441d-87a6-92f444aaf958, south-west=d6b09bda-ce06-4968-9a91-cba1465113b2, west=5e5e17a6-6341-491b-b087-16fb4907f907, north-west=ad17b073-ea96-47e6-9835-a96bed657533, north=2b284f84-5a1d-48e8-bfd6-ad269db6ab8a, north-east=ada8ce4c-f05e-4ed2-a40e-72fe7ee9c9a3, east=d9f3ff57-79ae-43a7-bbcc-9e562e353764, south-east=4810b1aa-6315-4fa8-86b4-c3bb4ff68fff\ngroup: 4f1d418e-afd8-4196-9572-6267f3ca7d31\nframes: 7 (1 reference + 6 animated)\ncanvas: south 108x108, south-west 112x112, west 112x112, north-west 112x112, north 112x112, north-east 112x112, east 116x116, south-east 112x112 (frames are stored at this size: the character plus room to move)\ncost: 16 generations (2/dir x 8)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\")\nadd more directions to this group: animate_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", action_description=\"Swing a two-cord sling held securely in the hand and release a stone, then return to stance. Keep the hand connected to the sling throughout.\", animation_group_id=\"4f1d418e-afd8-4196-9572-6267f3ca7d31\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

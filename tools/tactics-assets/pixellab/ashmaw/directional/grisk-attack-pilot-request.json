@@ -1,0 +1,11 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "mode": "v3",
+  "frame_count": 6,
+  "keep_first_frame": false,
+  "action_description": "A short right-handed mining-pick chop: right hand grips the pick shaft at all times, raises it beside the right shoulder, chops down forward, and returns to the starting guard. Left hand stays free. Helmet lantern and tally cord remain attached; feet planted, facing straight south.",
+  "animation_name": "grisk_attack_pilot",
+  "directions": [
+    "south"
+  ]
+}

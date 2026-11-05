@@ -51,7 +51,7 @@ public sealed class AmbientPlanTests
         var map = BattleMap.FromBytes("test", 32, 96, bytes, ["grass/lush", "dirt/brown", "water/clear"], [], NoZones, warm);
         var ambient = new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: 42, dusk: true);
 
-        var steam = ambient.ActiveAt(1, new ArtArea(new Vector2(-8000), new Vector2(8000))).Where(i => i.Variant == "steam").ToArray();
+        var steam = ambient.ActiveAt(1, new ArtArea(new Vector2(-8000), new Vector2(8000))).Where(i => i.Kind == "river_steam").ToArray();
 
         Assert.NotEmpty(steam);
         Assert.True(steam.Count(s => s.Tile.Y < 32) > steam.Count(s => s.Tile.Y >= 32) * 2);
@@ -185,5 +185,105 @@ public sealed class AmbientPlanTests
         var items = ambient.ActiveAt(1.0, view);
 
         Assert.Empty(items);
+    }
+
+    private static readonly Lazy<(BattleMap Map, AmbientPlan Plan)> Ford = new(() =>
+    {
+        var map = Pack.Ground("ashen_ford").Map;
+        return (map, new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: map.Id.Sum(c => c), dusk: true));
+    });
+
+    private static IEnumerable<AmbientItem> Watched(AmbientPlan plan, double seconds, ArtArea view)
+    {
+        for (var t = 0.0; t < seconds; t += 0.25)
+            foreach (var item in plan.ActiveAt(t, view))
+                yield return item;
+    }
+
+    private static readonly ArtArea Everywhere = new(new Vector2(-20000), new Vector2(20000));
+
+    [Fact]
+    public void The_fords_river_steams_with_its_own_art()
+    {
+        var (map, plan) = Ford.Value;
+        var steam = plan.ActiveAt(3, Everywhere).Where(i => i.Kind == "river_steam").ToArray();
+
+        Assert.NotEmpty(steam);
+        Assert.All(steam, s => Assert.True((map[s.Tile].Flags & TileFlags.Water) != 0, $"steam on {s.Tile}"));
+        Assert.All(steam, s => Assert.Equal("terrain/river_steam_mist.png", s.Path));
+        Assert.DoesNotContain(plan.ActiveAt(3, Everywhere), i => i.Kind == "chimney_smoke");     // the town kit's chimneys smoke for themselves
+    }
+
+    [Fact]
+    public void Leaves_fall_from_the_fords_trees_in_their_colours_and_land_near_them()
+    {
+        var (map, plan) = Ford.Value;
+        var leaves = Watched(plan, 12, Everywhere).Where(i => i.Kind == "leaf").ToArray();
+        var trees = map.Props.Where(p => p.Id == "tree").ToDictionary(p => p.At);
+
+        Assert.True(plan.PropLife.Leaves > 0);
+        Assert.NotEmpty(leaves);
+        foreach (var leaf in leaves)
+        {
+            Assert.True(trees.ContainsKey(leaf.Tile), $"a leaf from {leaf.Tile}, which has no tree");
+            Assert.Equal("autumn", leaf.Variant);
+            var foot = BoardProjection.Corner(leaf.Tile.X, leaf.Tile.Y, map[leaf.Tile].Height) + new Vector2(16, 8);
+            Assert.InRange(leaf.Position.Y, foot.Y - 60, foot.Y + 4);
+            Assert.InRange(leaf.Position.X, foot.X - 40, foot.X + 40);
+        }
+    }
+
+    [Fact]
+    public void Fires_throw_embers_that_glow_and_lamps_hold_motes_only_at_dusk()
+    {
+        var (map, plan) = Ford.Value;
+        var items = plan.ActiveAt(2, Everywhere);
+        var fires = map.Props.Where(p => p.Id is "campfire" or "torch").Select(p => p.At).ToHashSet();
+
+        Assert.Equal(fires.Count, items.Count(i => i.Kind == "embers"));
+        Assert.All(items.Where(i => i.Kind is "embers" or "motes"), i => Assert.True(i.Add));
+        Assert.All(items.Where(i => i.Kind == "embers"), i => Assert.Contains(i.Tile, fires));
+        Assert.Contains(items, i => i.Kind == "motes");
+
+        var day = new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: 1, dusk: false);
+        Assert.DoesNotContain(day.ActiveAt(2, Everywhere), i => i.Kind == "motes");
+    }
+
+    [Fact]
+    public void Birds_cross_the_sky_now_and_then_crows_at_dusk_and_stay_by_the_view()
+    {
+        var (_, plan) = Ford.Value;
+        var view = new ArtArea(new Vector2(1000, 2000), new Vector2(1640, 2360));
+        var birds = Watched(plan, 120, view).Where(i => i.Kind is "bird" or "flock").ToArray();
+
+        Assert.NotEmpty(birds);
+        Assert.All(birds, b => Assert.Equal("crow", b.Variant));
+        Assert.All(birds, b => Assert.InRange(b.Position.X, view.Min.X - 128, view.Max.X + 128));
+        Assert.All(birds, b => Assert.InRange(b.Position.Y, view.Min.Y, view.Min.Y + (view.Max.Y - view.Min.Y) * 0.5f));
+        // Not all the time: a crossing takes a few seconds of each beat.
+        Assert.True(Enumerable.Range(0, 480).Count(i => plan.ActiveAt(i * 0.25, view).Any(b => b.Kind is "bird" or "flock")) < 480);
+    }
+
+    [Theory]
+    [InlineData(3e8)]
+    [InlineData(1e7 + 0.37)]
+    public void A_frame_is_never_negative_however_long_the_world_has_run(double clock)
+    {
+        // A clock this old times a strip's frame rate passes int's top, and a hash added to it wrapped round to a negative frame.
+        var (_, plan) = Ford.Value;
+        var items = plan.ActiveAt(clock, Everywhere);
+
+        Assert.NotEmpty(items);
+        Assert.All(items, i => Assert.InRange(i.Frame, 0, i.TotalFrames - 1));
+    }
+
+    [Fact]
+    public void Everything_it_draws_is_in_its_paths_and_on_disk()
+    {
+        var (_, plan) = Ford.Value;
+        var drawn = Watched(plan, 60, Everywhere).Select(i => i.Path).Distinct().ToArray();
+
+        Assert.All(drawn, p => Assert.Contains(p, plan.Paths));
+        Assert.All(plan.Paths, p => Assert.True(File.Exists(Path.Combine(Pack.Root, "ambient", p)), p));
     }
 }

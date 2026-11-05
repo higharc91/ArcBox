@@ -38,6 +38,11 @@
           "spirit",
           "body"
         ]
+      },
+      "battle": {
+        "type": "boolean",
+        "default": true,
+        "description": "False keeps it off the battle table: a minor injury only an out-of-battle trap gives (owner decision, issue #83)."
       }
     },
     "required": [

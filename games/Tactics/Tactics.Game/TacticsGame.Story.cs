@@ -13,6 +13,16 @@ namespace Tactics.Game;
 /// </summary>
 public sealed partial class TacticsGame
 {
+    /// <summary>Older saves predate the bounty flag; a completed main-story battle is already proof of victory.</summary>
+    private void RestoreFordSettlement()
+    {
+        const string settled = "ch1_ford_settled";
+        if (_doc.World is not { } world || world.Flags.Contains(settled)) return;
+        var ford = Lore.ArcFor("ashen_ford");
+        if (ford is null || !ford.Beats.Any(b => b.Kind == ArcBeat.Battle && b.Sets.Contains(settled) && world.Beats.Contains(b.Id))) return;
+        _doc = _doc with { World = world with { Flags = world.Flags.Add(settled) } };
+    }
+
     /// <summary>What a scene is doing: the values of <see cref="StoryView.State"/>.</summary>
     public static class StoryStates
     {
@@ -150,7 +160,7 @@ public sealed partial class TacticsGame
         var waiting = Cursor?.Beat != beat.Id || AtTheFight(beat) && _phase == TacticsPhase.Exploration;
         // While one of its scenes plays, the scene's cast stands in the figure's place (CastOf), so nobody is shown twice.
         var playing = _phase == TacticsPhase.Story && Cursor?.Beat == beat.Id && CurrentScene() is not null;
-        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
+        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : figure.SpriteKey, waiting ? "alert" : null)];
     }
 
     /// <summary>
@@ -174,7 +184,7 @@ public sealed partial class TacticsGame
         var reached = WalkReach();      // on the ground as it is, things and painted props in the way
         var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
         return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
-            .Select(c => new CastView(c.Who.Id, c.Who.Name, $"characters.{c.Who.Preset}", c.Tile, _at))];
+            .Select(c => new CastView(c.Who.Id, c.Who.Name, c.Who.SpriteKey, c.Tile, _at))];
     }
 
     /// <summary>
@@ -196,7 +206,7 @@ public sealed partial class TacticsGame
     /// chapter's last beat, that the next chapter isn't here yet (5d default 13).
     /// </summary>
     private string Objective() => OnOffer() is { Place: { } place } ? $"Go to {Lore.PlaceName(place) ?? place}"
-        : ChapterOver ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
+        : ChapterOver && StoryArc is { SideAdventure: false } ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
         : "Explore the region";
 
     /// <summary>A chapter's number as the cards write it.</summary>
@@ -301,6 +311,8 @@ public sealed partial class TacticsGame
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
         ThingNodeEntered(node, c.Roll);     // an interaction's outcome, saved with this node's first line; the roll that led here, for a search
+        if (node.End && node.Lines.IsEmpty)
+        { KeepWorld(); Save(); StageDone(); return; }
         PlayLine(scene, node, 0);
     }
 
@@ -394,6 +406,7 @@ public sealed partial class TacticsGame
     private void StageDone()
     {
         if (CampTalk) { BeginSleep(); return; }
+        if (Haggling) { FinishHaggle(); return; }
         var c = Cursor!;
         if (c.Person is not null) { FinishConversation(); return; }
         if (c.Thing is not null)
@@ -449,7 +462,7 @@ public sealed partial class TacticsGame
         };
         PrepareQuestSave();
         KeepWorld();
-        if (ChapterOver)
+        if (ChapterOver && StoryArc is { SideAdventure: false })
         {
             _lease.Checkpoint(_doc.ToJson(), $"End of Chapter {Numeral(StoryArc!.Chapter)}");
             ShowCard();
@@ -545,6 +558,8 @@ public sealed partial class TacticsGame
     {
         if (Camp is not null) { ResumeCamp(); return; }
         if (_doc.World?.Shop is not null) { ResumeShop(); return; }
+        // Found items the party was voting on, or that wait with nothing else under way: the vote, asked again.
+        if (_doc.World?.Loot is { } loot && (loot.Voting || Cursor is null or { Stage: StorySave.Fight })) { ResumeLoot(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
         if (c.Person is not null) { ResumeConversation(c); return; }
@@ -640,7 +655,7 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>How long the open question has (5d default 4).</summary>
-    private TimeSpan QuestionLength() => CampVote ? TimeSpan.FromSeconds(20) : _telling switch
+    private TimeSpan QuestionLength() => CampVote || EntranceVote ? TimeSpan.FromSeconds(20) : LootVote && _telling == StoryStates.Asking ? LootVoteLength : _telling switch
     {
         StoryStates.TieBreak => Tell.TieBreak,
         StoryStates.PickRoller => Tell.Roller,
@@ -705,6 +720,11 @@ public sealed partial class TacticsGame
     private void CloseQuestion()
     {
         _ctx.CancelTimer(Timers.Vote);
+        ResetQuestion();
+    }
+
+    private void ResetQuestion()
+    {
         _shopOptions = [];
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
         _span = null;
@@ -754,7 +774,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StoryPresenceChanged()
     {
-        if (_doc.World?.Shop is not null && Camp is null) return;
+        if (Trading && Camp is null) return;
         if (!Questioning)
             return;
         if (!Voters().Any())
@@ -799,6 +819,8 @@ public sealed partial class TacticsGame
     private void QuestionDue()
     {
         if (CampVote) { RestVoteDue(); return; }
+        if (EntranceVote) { EntranceVoteDue(); return; }
+        if (LootVote) { LootVoteDue(); return; }      // only the players here count (USER DECISION 1)
         if (!Questioning || CurrentNode() is null)
             return;
         switch (_telling)
@@ -843,6 +865,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Decide(SceneOption option)
     {
+        if (LootVote) { TakeLoot(option.Id); return; }
         var (scene, beat) = (CurrentScene()!, CursorBeat());
         if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(scene, CurrentNode()!); return; }
         if (option.Check is not null)
@@ -960,15 +983,16 @@ public sealed partial class TacticsGame
         if (all.Length != world.Flags.Length)
         {
             _doc = _doc with { World = world with { Flags = all } };
+            if (_phase == TacticsPhase.Exploration) ArmMobs();
         }
     }
 
-    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : Cursor is { Scene: { } id } c
+    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : LootVote ? LootScene() : Haggling ? HaggleScene() : Cursor is { Scene: { } id } c
         ? c.Person is not null ? Lore.Scene(id) : c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
         : null;
 
     /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
-    private ArcBeat CursorBeat() => Camp is not null || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
+    private ArcBeat CursorBeat() => Camp is not null || LootVote || Haggling || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 
@@ -988,7 +1012,7 @@ public sealed partial class TacticsGame
     private StoryLineView LineView(SceneLine line)
     {
         var who = Lore.Character(line.Speaker);
-        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.Preset, line.Mood, line.Text, who?.Role);
+        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.PortraitKey, line.Mood, line.Text, who?.Role);
     }
 
     /// <summary>The scene for the TV, in the Story phase, with the live tally: the TV's alone (5d flag 7).</summary>
@@ -1086,7 +1110,8 @@ public sealed partial class TacticsGame
         var member = profile.Value;
         var scene = CurrentScene();
         if (Questioning && _checking is null)
-            return Custom(Screens.Vote, new
+        {
+            var vote = JsonSerializer.SerializeToNode(new
             {
                 party = PartyQuestion,
                 canChoose = Decider() is { } decider ? decider == member : true,
@@ -1097,7 +1122,15 @@ public sealed partial class TacticsGame
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),
                 vip = IsVip(player),
-            }) with { DeadlineUtc = _due };
+            }, ArcJson.Options)!.AsObject();
+            // The loot vote says what it asks, and which of the votes it is, so each item's is a new question (USER DECISION 1).
+            if (LootVote && scene is not null)
+            {
+                vote["question"] = scene.Title;
+                vote["vote"] = _doc.World!.Loot!.Seq;
+            }
+            return Custom(Screens.Vote, vote) with { DeadlineUtc = _due };
+        }
         if (scene is not null && (_checking is not null || _telling == StoryStates.Rolled))
         {
             var check = CheckView(scene);
@@ -1128,7 +1161,7 @@ public sealed partial class TacticsGame
             title = scene?.Title ?? _card,
             line = line?.Id,
             speaker = who?.Name,
-            portrait = who?.Preset,
+            portrait = who?.PortraitKey,
             mood = line?.Mood,
             text = line?.Text,
             canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,

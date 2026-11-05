@@ -54,6 +54,7 @@ public static class Interactables
         var kind = KindOf(def);
         var state = kind.Family switch
         {
+            InteractableFamily.Passage when def.Kind == "cave_mouth" => InteractableKinds.Idle,
             InteractableFamily.Passage => def.Open ? InteractableKinds.Opened : InteractableKinds.Closed,
             InteractableFamily.Switch => def.Open ? InteractableKinds.On : InteractableKinds.Off,
             _ => kind.States[0],
@@ -189,6 +190,7 @@ public static class Interactables
             return null;
         var name = NameOf(def);
         var kind = KindOf(def);
+        if (def.To is not null) return $"Enter {name}";
         return kind.Family switch
         {
             InteractableFamily.Container when save.State == InteractableKinds.Closed => $"Open the {name}",
@@ -302,7 +304,7 @@ public static class Interactables
 
     /// <summary>
     /// What an active Search from <paramref name="at"/> looks for (design §7.4): every hidden thing there, not found, not already searched
-    /// for, within <see cref="SearchRange"/> tiles along x and y, and not on the leader's own tile (found there it would stand on them), in
+    /// for since the last long rest (the caller passes saves <see cref="Rested"/>), within <see cref="SearchRange"/> tiles along x and y, and not on the leader's own tile (found there it would stand on them), in
     /// id order. The scene doesn't say how many: it plays the same with none.
     /// </summary>
     public static ImmutableArray<InteractableDef> Searchable(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
@@ -312,15 +314,44 @@ public static class Interactables
                 && StateOf(d, saves) is { Found: false, Searched: false })
             .OrderBy(d => d.Id, StringComparer.Ordinal)];
 
+    /// <summary>True for a way through a lock that a long rest reopens once it has failed: pick, force and seal (USER DECISION 2). A disarm isn't: failing it sprang the trap.</summary>
+    public static bool Reopens(string approach) => approach is PickApproach or ForceApproach or SealApproach;
+
+    /// <summary>True when <paramref name="save"/> has a failed way or search that a long rest reopens.</summary>
+    public static bool HasReopenable(InteractableSave save) => save.Searched || save.Spent.Any(Reopens);
+
+    /// <summary>
+    /// <paramref name="save"/> as it is once the party's long rests number <paramref name="restSeq"/> (USER DECISION 2, decided 2026-11-03):
+    /// a failed pick, force or seal, and a failed search, are spent until the rest <see cref="InteractableSave.Rest"/> names, the one after
+    /// they failed, so once it has come they're there to try again, and the save is kept as of the next rest (<c>restSeq + 1</c>), so its
+    /// rest only goes up. A save that names no rest (0, written before this) stays as it is: the document stamps those as it's read
+    /// (<see cref="Stamped"/>). A failed disarm stays spent (its trap went off). Anything else is as it was.
+    /// </summary>
+    public static InteractableSave Rested(InteractableSave save, int restSeq)
+        => save.Rest != 0 && save.Rest <= restSeq && HasReopenable(save)
+            ? save with { Spent = [.. save.Spent.Where(a => !Reopens(a))], Searched = false, Rest = restSeq + 1 }
+            : save;
+
+    /// <summary>
+    /// <paramref name="save"/> with its failed ways and search spent until the next long rest after <paramref name="restSeq"/>, if they name
+    /// no rest yet: a save from before USER DECISION 2 was built (<see cref="InteractableSave.Rest"/> 0), or one failing now.
+    /// </summary>
+    public static InteractableSave Stamped(InteractableSave save, int restSeq)
+        => save.Rest == 0 && HasReopenable(save) ? save with { Rest = restSeq + 1 } : save;
+
     /// <summary>
     /// True when <paramref name="after"/> has gone back on <paramref name="before"/>: something found lost, a lock locked again, a trap
     /// reset or seen no more, a failed way forgotten, or a state further back in its kind's order. Only a lever, and a passage a lever works
-    /// (<paramref name="worked"/>), may change state both ways (design §2.3).
+    /// (<paramref name="worked"/>), may change state both ways (design §2.3). The one sanctioned way back for anything else is a long rest
+    /// (USER DECISION 2, decided 2026-11-03): a failed pick, force or seal and a failed search may be forgotten when <paramref name="after"/>
+    /// was reopened at a later rest than <paramref name="before"/> (<see cref="Rested"/>); the rest it's kept at never goes back.
     /// </summary>
     public static bool Regressed(InteractableDef def, InteractableSave before, InteractableSave after, bool worked)
     {
+        var rested = after.Rest > before.Rest;
         if ((before.Found && !after.Found) || (before.Unlocked && !after.Unlocked) || (before.TrapSpotted && !after.TrapSpotted)
-            || (before.Trap is not null && after.Trap != before.Trap) || before.Spent.Except(after.Spent).Any() || (before.Searched && !after.Searched))
+            || (before.Trap is not null && after.Trap != before.Trap) || before.Spent.Except(after.Spent).Any(a => !(rested && Reopens(a)))
+            || (before.Searched && !after.Searched && !rested) || after.Rest < before.Rest || (before.Keyed && !after.Keyed))
             return true;
         var kind = KindOf(def);
         if (kind.Family == InteractableFamily.Switch || (kind.Family == InteractableFamily.Passage && worked))

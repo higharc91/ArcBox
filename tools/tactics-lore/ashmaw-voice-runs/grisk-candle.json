@@ -1,0 +1,28 @@
+{
+  "request": {
+    "model_id": "model_google-gemini-3-8-flash-tts",
+    "parameters": {
+      "text": "<High nasal kobold rasp, quick and greedy; a sharp, possessive protest. Keep every word clear. Mood: angry.> You no take candle!",
+      "voice": "Algenib",
+      "language": "en-US"
+    },
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "wait": false
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job_id\": \"job_mUbkmMnRbe7XjGGGRbNTT7Eg\",\n  \"status\": \"in-progress\",\n  \"message\": \"Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mUbkmMnRbe7XjGGGRbNTT7Eg' (one call waits on up to 32 jobs).\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "model_id": "model_google-gemini-3-8-flash-tts",
+      "job_id": "job_mUbkmMnRbe7XjGGGRbNTT7Eg",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mUbkmMnRbe7XjGGGRbNTT7Eg' (one call waits on up to 32 jobs)."
+    },
+    "isError": false
+  }
+}

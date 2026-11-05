@@ -201,9 +201,17 @@ public sealed class WorldPlan
     public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units, PropFade? fade = null, IEnumerable<LitItem>? extra = null)
     {
         var (chosen, waiting) = (new HashSet<ItemAt>(), new Stack<ItemAt>());
+        // A plug stands in for its tile's own ground, which the block draws open beneath it: that ground is never painted again over the plug.
+        // It was: the open tile's top, later in the order than the plug's sides, went back over them, and the gap showed through as a notch.
+        // Only its ground, though: what stands on the tile (a building's column, a bridge's piece) still goes over whoever is behind it.
+        static bool Ground(FaceKind kind) => kind is FaceKind.Under or FaceKind.Side or FaceKind.Lip or FaceKind.Top or FaceKind.Blend or FaceKind.Tint
+            or FaceKind.Decal or FaceKind.Shadow;
+        var plugged = extra?.OfType<LitFace>().Select(f => f.Face.Tile).ToHashSet();
         void Add(ItemAt at)
         {
             if (fade?.IsFaded(at) == true)
+                return;
+            if (plugged is { Count: > 0 } && Blocks[at.Block].Lit.Items[at.Item] is LitFace { Face: var face } && Ground(face.Kind) && plugged.Contains(face.Tile))
                 return;
             if (chosen.Add(at))
                 waiting.Push(at);
@@ -351,6 +359,8 @@ public sealed class WorldPlan
             for (var i = 0; i < a.Length; i++)
             {
                 var edge = a[(i + 1) % a.Length] - a[i];
+                if (edge.LengthSquared() < Touch)
+                    continue;       // a quad with two corners at one point (a wide prop's piece cut to a triangle) has no side there to be apart by
                 var across = new Vector2(-edge.Y, edge.X);
                 var (minA, maxA) = Range(a, across);
                 var (minB, maxB) = Range(b, across);

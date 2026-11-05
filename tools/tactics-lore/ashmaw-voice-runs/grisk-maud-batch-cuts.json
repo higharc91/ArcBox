@@ -1,0 +1,135 @@
+{
+  "batch": "ashmaw_grisk_maud_batch",
+  "source": "grisk-maud-batch.wav",
+  "sourceSha256": "d57ec727301869b2cdf987b5fc37e4aeac6c71208adb53f88c56b610f7cd31f9",
+  "transcriptSha256": "e7f93435d41792373cb68815568abb54a9d40121b8a73d3d2f4a9c343958dbe4",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. ASR is a timing aid; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Algenib.aa780356",
+      "preset": "Algenib",
+      "text": "That was my good side!",
+      "line": "bark_grisk_hit_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> That was my good side!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "start": 0.72,
+      "end": 2.3,
+      "matchingCoverage": 1.0,
+      "recognized": "that was my good side.",
+      "wavSha256": "86de38245c3a3a1474ede1a0c10beb0a8d10568b513b04ce0b6ea8718195c452"
+    },
+    {
+      "raw": "Algenib.f7e6dda0",
+      "preset": "Algenib",
+      "text": "The market pays! I’ll split it!",
+      "line": "bark_grisk_low_hp_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> The market pays! I’ll split it!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "start": 3.18,
+      "end": 6.16,
+      "matchingCoverage": 1.0,
+      "recognized": "The market pays. I'll split it.",
+      "wavSha256": "5cdb13a495a5a2d840d7e7f5697140444036626eabbc1898eb1ef4a14008b845"
+    },
+    {
+      "raw": "Algenib.1a961fcd",
+      "preset": "Algenib",
+      "text": "Up! I counted you in the wages!",
+      "line": "bark_grisk_ally_down_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Up! I counted you in the wages!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "start": 6.6,
+      "end": 9.18,
+      "matchingCoverage": 0.8571,
+      "recognized": "I counted you in the wages.",
+      "wavSha256": "b716417b9684f45f274fe2bc96d32a070a8ebac6b052189d2434b689941a8604"
+    },
+    {
+      "raw": "Algenib.f5a41e31",
+      "preset": "Algenib",
+      "text": "Dig faster!",
+      "line": "bark_grisk_turn_start_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: angry.> Dig faster!",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "angry"
+      },
+      "scene": false,
+      "start": 9.74,
+      "end": 10.94,
+      "matchingCoverage": 1.0,
+      "recognized": "Dig faster.",
+      "wavSha256": "7d3599628cba6276a66bce1bb8f8ac80123872154cd5be45de71c8629dc83c18"
+    },
+    {
+      "raw": "Algenib.7301ebb5",
+      "preset": "Algenib",
+      "text": "Tell them… I kept the tally.",
+      "line": "bark_grisk_defeat_1",
+      "speaker": "grisk",
+      "renderText": "<High nasal kobold rasp, quick and greedy; fear catches under each order. Mood: sad.> Tell them… I kept the tally.",
+      "delivery": {
+        "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "start": 12.12,
+      "end": 14.94,
+      "matchingCoverage": 1.0,
+      "recognized": "Tell them I kept the tally.",
+      "wavSha256": "36e65705951a41f1cea00f79290e1365ca315e978873c25e8843916bfebeca33"
+    },
+    {
+      "raw": "Achernar.0fc80f43",
+      "preset": "Achernar",
+      "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "line": "ashmaw_maud_waiting",
+      "speaker": "old_maud",
+      "renderText": "<Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+      "delivery": {
+        "direction": "Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "start": 15.72,
+      "end": 27.5,
+      "matchingCoverage": 1.0,
+      "recognized": "The boy is by my fire. Let his father know. As for that old bear, hunger wakes before a creature does. Go gently, if you can.",
+      "wavSha256": "c73b1dcdf57cbb96ab7d4c4c9ab3c73eaf1d98de80636123ec7b3325e9c2aa26"
+    },
+    {
+      "raw": "Achernar.b2984b21",
+      "preset": "Achernar",
+      "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "line": "ashmaw_maud_after",
+      "speaker": "old_maud",
+      "renderText": "<Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "delivery": {
+        "direction": "Ancient, papery, unhurried; a small grief, without explaining its cause.",
+        "mood": "sad"
+      },
+      "scene": false,
+      "start": 28.22,
+      "end": 41.6,
+      "matchingCoverage": 1.0,
+      "recognized": "Poor old thing. A hundred winters. And the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "wavSha256": "c95853b3e846b72b6fac44dec342e4c7ce64ef8bf1fcb806451d67f198e40812"
+    }
+  ]
+}

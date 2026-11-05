@@ -86,7 +86,7 @@ public static class RegionWriter
             : source.People.DistinctBy(PersonText.Key).OrderBy(p => p.At.Y).ThenBy(p => p.At.X).ThenBy(p => p.Preset, StringComparer.Ordinal).ThenBy(p => p.Face, StringComparer.Ordinal).ToImmutableArray();
         var def = new RegionDef(source.Id, source.Name, source.Chapter, [source.Width, source.Height],
             [.. materials.OrderBy(m => m.Value).Select(m => m.Key)], [.. chunks], [.. source.Stamps], [.. source.Beats],
-            new RegionSpawns(source.Start, source.Recovery), [], props, buildings, people);
+            new RegionSpawns(source.Start, source.Recovery, source.NamedSpawns.Count == 0 ? null : source.NamedSpawns.ToImmutableSortedDictionary(StringComparer.Ordinal)), [], props, buildings, people);
         return new WriteResult(def, []);
     }
 
@@ -111,6 +111,7 @@ public static class RegionWriter
         repaired.Props.AddRange(source.Props);
         repaired.Buildings.AddRange(source.Buildings);
         repaired.People.AddRange(source.People);
+        foreach (var (name, at) in source.NamedSpawns) repaired.NamedSpawns.Add(name, at);
         foreach (var stamp in source.Stamps)
             repaired.AddStamp(stamp);
         return repaired;

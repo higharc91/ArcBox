@@ -43,6 +43,9 @@ public enum TtsFailure
 /// </summary>
 public sealed class NarratorFallbackPolicy
 {
+    /// <summary>Tactics uses authored recordings and captions, never synthesized replacement speech.</summary>
+    public static bool AllowsLiveSpeech(string theme) => !theme.StartsWith("tactics.", StringComparison.Ordinal);
+
     public static readonly TimeSpan Timeout = TimeSpan.FromSeconds(2.5);
     public static readonly TimeSpan CoolDown = TimeSpan.FromSeconds(60);
 

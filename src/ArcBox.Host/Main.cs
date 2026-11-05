@@ -162,16 +162,17 @@ public partial class Main : Control
             AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
             return;
         }
-        if (_args.WorldDemo is "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        if (_args.WorldDemo is "mobs" or "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
         {
             // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
             GD.Print("Things demo: no server connection");
             ShowGame("tactics");
             var thingsPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            if (_args.WorldDemo == "cinder_hollow" && System.Environment.GetEnvironmentVariable("ARCBOX_CINDER_ART_ROOT") is { Length: > 0 } previewRoot) thingsPack = System.IO.Path.GetFullPath(previewRoot);
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
             var tactics = _scene as Games.Tactics.TacticsScene;
             AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
-                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, steps: _args.WorldDemo == "npcs" ? global::Tactics.Presentation.World.NpcsDemo.Steps(thingsPack) : null, shop: _args.WorldDemo == "shop", camp: _args.WorldDemo is "npcs" or "camp" or "camp-ford", packRoot: thingsPack, campId: _args.WorldDemo == "camp-ford" ? "af_ford_campfire" : "af_road_campfire"));
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, steps: _args.WorldDemo == "mobs" ? global::Tactics.Presentation.World.MobsDemo.Steps(thingsPack) : _args.WorldDemo == "cinder_hollow" ? global::Tactics.Presentation.World.HollowDemo.Steps(thingsPack) : _args.WorldDemo == "npcs" ? global::Tactics.Presentation.World.NpcsDemo.Steps(thingsPack) : null, shop: _args.WorldDemo == "shop", camp: _args.WorldDemo is "npcs" or "camp" or "camp-ford", packRoot: thingsPack, campId: _args.WorldDemo == "camp-ford" ? "af_ford_campfire" : "af_road_campfire"));
             return;
         }
         if (_args.WorldDemo is { } region)
@@ -287,6 +288,8 @@ public partial class Main : Control
             _contentHttp?.Dispose();
             _contentHttp = null;
             _connectCts?.Cancel();
+            if (_client is { } client)
+                GD.Print($"HOST view patches applied {client.PatchCounts.Applied}, whole views asked for again {client.PatchCounts.Resent}");
             _ = _client?.DisposeAsync().AsTask();
             _client = null;
         }
@@ -628,7 +631,7 @@ public partial class Main : Control
             }
             else if (load.Ready)
             {
-                (_scene as IContentScene)?.SetContentRoots(load.Roots);
+            (_scene as IContentScene)?.SetContentRoots(load.Roots);
                 _sceneContent = load;
             }
             else
@@ -715,7 +718,7 @@ public partial class Main : Control
     {
         if (_client is not { } client)
         {
-            if (_args.TacticsDemo is not null)
+            if (_args.TacticsDemo is not null || _args.WorldDemo is not null)
                 return;     // Dev boards acknowledge beats locally; they have no server to report to.
             GD.PushWarning($"Host signal '{kind}' dropped: not connected");
             return;
@@ -976,6 +979,8 @@ public partial class Main : Control
         // checks for the "interrupted" note, the swap run that the swapped phone's player is listed once).
         string[] parts = [results.Message ?? "", string.Join(", ", results.Scores.Select(s => $"{s.Name} {s.Score}"))];
         GD.Print($"RESULTS {string.Join(" | ", parts.Where(p => p.Length > 0))}");
+        if (_client is { } patching)
+            GD.Print($"HOST view patches applied {patching.PatchCounts.Applied}, whole views asked for again {patching.PatchCounts.Resent}");
     }
 
     // ---- Reconnecting banner -------------------------------------------------------------------------------

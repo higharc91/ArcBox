@@ -439,6 +439,8 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
     mounted.current = true;
   }, [d.leader]);
 
+  if (d.ambush) return <div class="tx tx-mob-ambush" role="alert"><span class="tx-mob-warning" aria-hidden="true"><LineIcon name="sword" /></span><span class="tx-eyebrow">Danger on the road</span><h1>Ambush!</h1><p>{d.ambush} attack!</p><span class="tx-note">Watch the TV—the party is taking position.</span></div>;
+
   return (
     <div class={`tx tx-walk ${d.leader ? "lead" : "follow"}${arrived.current ? " arrived" : ""}`}>
       <div class="tx-walk-sidebar">
@@ -462,6 +464,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
           </div>
           <p>{d.objective}</p>
+          {d.leader && d.danger ? <p class="tx-mob-danger" role="status">Danger nearby: {d.danger}</p> : null}
         </div>
         {d.leader ? null : (
           <div class="tx-me" style={d.me.color ? ({ "--c": d.me.color } as JSX.CSSProperties) : undefined} data-color={d.me.color ? "" : undefined}>

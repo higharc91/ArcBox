@@ -37,6 +37,29 @@ public sealed record BuildingShape(ImmutableArray<int> Tops, ImmutableArray<int>
         return new BuildingShape([.. tops], [.. bottoms]);
     });
 
+    /// <summary>
+    /// The shape of a prop's strip in <paramref name="file"/>, of <paramref name="frames"/> frames, as it's drawn: <paramref name="width"/> by <paramref name="height"/> a frame,
+    /// which needn't be the file's own size, as art made at twice the size is drawn whole at the size its manifest gives.
+    /// </summary>
+    public static BuildingShape OfProp(string file, int frames, int width, int height) => Shapes.GetOrAdd($"{file}|{frames}|{width}x{height}", _ =>
+    {
+        var (rgba, fileWidth, fileHeight) = PngPixels.Read(file);
+        var frameWidth = fileWidth / Math.Max(1, frames);
+        var (tops, bottoms) = (new int[width], new int[width]);
+        Array.Fill(tops, -1);
+        Array.Fill(bottoms, -1);
+        for (var y = 0; y < fileHeight; y++)
+            for (var x = 0; x < fileWidth; x++)
+                if (rgba[(y * fileWidth + x) * 4 + 3] > 0)
+                {
+                    var column = Math.Min(width - 1, x % frameWidth * width / frameWidth);
+                    var row = Math.Min(height - 1, y * height / fileHeight);
+                    tops[column] = tops[column] < 0 ? row : Math.Min(tops[column], row);
+                    bottoms[column] = Math.Max(bottoms[column], row);
+                }
+        return new BuildingShape([.. tops], [.. bottoms]);
+    });
+
     /// <summary>The tiles, from a building's back corner, with any of the shadow in <paramref name="file"/> on them, with <paramref name="origin"/> that corner's pixel.</summary>
     public static ImmutableArray<(int X, int Y)> ShadowTiles(string file, Vector2 origin) => Shadows.GetOrAdd(file, f =>
     {

@@ -14,6 +14,9 @@ public static class QuestSounds
         "open" => ["questlog_open", "page_turn"],
         "close" => ["questlog_close", "page_turn"],
         "pin" => ["questlog_pin", "ui_select"],
+        "accept" => ["bounty_accept", "quest_start", "secret_found"],
+        "present" => ["trinket_presented", "quest_complete", "ui_level_up"],
+        "enter" => ["cave_enter", "door_open"],
         _ => [],
     };
 }

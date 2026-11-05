@@ -256,7 +256,7 @@ internal sealed partial class Validation
                     Error(file, Pointer.Append(at, "at"), $"Prop '{prop.Id}' at {prop.At} is outside the {w}x{h} map.");
                 if (!MapDef.CoverNames.ContainsKey(prop.Cover))
                     Error(file, Pointer.Append(at, "cover"),
-                        $"Cover '{prop.Cover}' isn't allowed in content (use \"none\", \"half\" or \"three_quarters\").");
+                        $"Cover '{prop.Cover}' isn't allowed in content (use \"none\", \"half\", \"three_quarters\" or \"full\").");
             }
             foreach (var (zone, zoneTiles) in def.Zones)
                 for (var i = 0; i < zoneTiles.Length; i++)

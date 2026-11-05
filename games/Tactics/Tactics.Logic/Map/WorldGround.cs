@@ -58,8 +58,11 @@ public sealed class WorldGround
     /// Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>. What its props and buildings block comes from
     /// <paramref name="art"/>, and throws <see cref="ArgumentException"/> for one that isn't there: the server and the TV have to agree on every tile, so a missing definition
     /// can't be taken to mean walkable.
+    /// Roaming arenas listed in <paramref name="naturalArenas"/> keep the region's terrain art and blending;
+    /// their map tiles, props, collisions and battle-stage bounds are unchanged.
     /// </summary>
-    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art)
+    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art,
+        IReadOnlyCollection<string>? naturalArenas = null)
     {
         var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
         var materials = region.Def.Materials;
@@ -98,7 +101,7 @@ public sealed class WorldGround
                 return def.Blocked(b.At).Where(t => t.X >= 0 && t.Y >= 0 && t.X < width && t.Y < height).Select(t => new PropPlacement(BuildingProp + b.Id, t, true, def.Cover));
             }),
         ];
-        var stampedTiles = region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
+        var stampedTiles = region.Def.Stamps.Where(s => maps.ContainsKey(s.Map) && naturalArenas?.Contains(s.Map) != true)
             .SelectMany(s =>
             {
                 var map = maps[s.Map];

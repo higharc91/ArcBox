@@ -83,7 +83,8 @@ public sealed class BasePackRegionTests
             .Where(b => b.TryGetProperty("choices", out _))
             .SelectMany(b => b.GetProperty("choices").EnumerateArray())
             .Select(c => c.GetProperty("id").GetString()!).ToList();
-        Assert.NotEmpty(choices);
+        if (choices.Count == 0)
+            Assert.True(lore.RootElement.GetProperty("arcs").EnumerateArray().Single(a => a.GetProperty("region").GetString() == id).TryGetProperty("sideAdventure", out var side) && side.GetBoolean(), "Only a linear side adventure has no main-story vote.");
         return choices;
     }
 

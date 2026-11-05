@@ -1,0 +1,157 @@
+[
+  {
+    "id": "ashmaw_mantle",
+    "name": "Ashmaw’s Mantle",
+    "class": "barbarian",
+    "rarity": "rare",
+    "static": {
+      "maxHp": 4,
+      "resist": [
+        "fire"
+      ]
+    },
+    "text": "A strip of ash-grey hide, offered for the shoulders that stood their ground. +4 maximum HP; resistance to fire."
+  },
+  {
+    "id": "bat_bone_flute",
+    "name": "Bat-Bone Flute",
+    "class": "bard",
+    "rarity": "rare",
+    "static": {
+      "initiative": 2,
+      "saves": {
+        "cha": 1
+      }
+    },
+    "text": "A clean, hollow note that carries through stone. +2 initiative; +1 Charisma saving throws."
+  },
+  {
+    "id": "hearthstone_pendant",
+    "name": "Hearthstone Pendant",
+    "class": "cleric",
+    "rarity": "rare",
+    "static": {
+      "saveEdges": {
+        "wis": "advantage"
+      }
+    },
+    "text": "A smooth stone from the cold edge of the lair. Advantage on Wisdom saving throws."
+  },
+  {
+    "id": "ashwood_totem",
+    "name": "Ashwood Totem",
+    "class": "druid",
+    "rarity": "rare",
+    "static": {
+      "resist": [
+        "fire"
+      ],
+      "move": 1
+    },
+    "text": "A carved sprig from timber that endured the heat. Resistance to fire; +1 movement."
+  },
+  {
+    "id": "ember_claw_gauntlet",
+    "name": "Ember-Claw Gauntlet",
+    "class": "fighter",
+    "rarity": "rare",
+    "static": {
+      "attack": 1
+    },
+    "text": "A small claw set into a watchman’s leather wrist-guard. +1 to attack rolls."
+  },
+  {
+    "id": "cinder_wraps",
+    "name": "Cinder Wraps",
+    "class": "monk",
+    "rarity": "rare",
+    "static": {
+      "ac": 1
+    },
+    "text": "Soft ash-dyed bands, wound with the patience of a long watch. +1 AC."
+  },
+  {
+    "id": "wardens_ember_badge",
+    "name": "Warden’s Ember Badge",
+    "class": "paladin",
+    "rarity": "rare",
+    "static": {
+      "saves": {
+        "wis": 1,
+        "cha": 1
+      }
+    },
+    "text": "An old watch badge polished for one more promise. +1 Wisdom and Charisma saving throws."
+  },
+  {
+    "id": "ashmaw_tooth_arrowheads",
+    "name": "Ashmaw-Tooth Arrowheads",
+    "class": "ranger",
+    "rarity": "rare",
+    "static": {
+      "damage": 1
+    },
+    "text": "Carefully shaped points from the beast’s broken teeth. +1 damage."
+  },
+  {
+    "id": "kobold_delvers_ring",
+    "name": "Kobold Delver’s Ring",
+    "class": "rogue",
+    "rarity": "rare",
+    "static": {
+      "initiative": 2,
+      "saves": {
+        "dex": 1
+      }
+    },
+    "text": "A plain brass ring worn smooth against a pick handle. +2 initiative; +1 Dexterity saving throws."
+  },
+  {
+    "id": "smouldering_eye",
+    "name": "Smouldering Eye",
+    "class": "sorcerer",
+    "rarity": "rare",
+    "static": {
+      "saves": {
+        "con": 1
+      }
+    },
+    "text": "A polished amber-glass charm, not an ember shard. +1 Constitution saving throws; begin each battle with 3 temporary HP.",
+    "hook": "onBattleStart",
+    "effects": [
+      {
+        "tempHp": {
+          "dice": "3"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ash_black_sigil",
+    "name": "Ash-Black Sigil",
+    "class": "warlock",
+    "rarity": "rare",
+    "static": {
+      "saves": {
+        "wis": 1
+      },
+      "resist": [
+        "necrotic"
+      ]
+    },
+    "text": "A ward scratched into soot-dark iron. +1 Wisdom saving throws; resistance to necrotic damage."
+  },
+  {
+    "id": "kobold_surveyors_lens",
+    "name": "Kobold Surveyor’s Lens",
+    "class": "wizard",
+    "rarity": "rare",
+    "static": {
+      "saves": {
+        "int": 1
+      },
+      "initiative": 1
+    },
+    "text": "A scratched lens that still measures a true line. +1 Intelligence saving throws; +1 initiative."
+  }
+]

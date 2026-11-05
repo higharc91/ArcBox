@@ -108,6 +108,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Start(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign);
+        _doc = TacticsDocument.Read(campaign.Document);
+        WorldCall("start", () => StartCore(ctx, players, campaign));
+    }
+
+    private void StartCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
+    {
+        (_ctx, _players, _lease) = (ctx, players, campaign);
         foreach (var p in players)
             _online.Add(p.Id);
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
@@ -117,6 +124,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _questLogLeader = null;
         _questObservedFlags = null;
         EnterWorld();
+        _mobActors.Clear();
+        _mobDirty = false;
         ElectAtStart();
         KeepWorld();
         Save();
@@ -137,6 +146,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
+        _doc = TacticsDocument.Read(_lease.Document);
+        WorldCall("resume", () => ResumeCore(ctx, players, campaign));
+    }
+
+    private void ResumeCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
+    {
+        (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
         _doc = Coloured(TacticsDocument.Read(_lease.Document));
         _questLogLeader = null;
         _questObservedFlags = null;
@@ -148,7 +164,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         {
             // A scene under way waits for the party as a battle does (5d §8): nobody is connected yet, and a scene played to nobody would be
             // lost on them. A beat waiting at its fight, or no beat, has nothing to play, so the party is simply back in the world.
-            if (_region is null || (_doc.World?.Camp is null && _doc.World?.Shop is null && _doc.World?.Story is not { Stage: StorySave.Lead or StorySave.After }))
+            if (_region is null || (_doc.World?.Camp is null && _doc.World?.Shop is null && _doc.World?.Loot is null && _doc.World?.Story is not { Stage: StorySave.Lead or StorySave.After }))
             {
                 ToMusterOrPick();
                 return;
@@ -164,6 +180,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 if (!RestartBattle(save))
                     return;
             }
+            if (Invariants.Enabled) Invariants.Check(_doc.Battle!.State, Rules);
             foreach (var unit in _doc.Battle!.State.Units.Values)
                 if (unit.Controller is PlayerControlled { Owner: var owner } && _players.Any(p => p.Profile == owner))
                     _awaited.Add(owner);
@@ -189,6 +206,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnPlayerConnectionChanged(PlayerId id, bool connected)
+        => WorldCall("connection", () => ConnectionCore(id, connected));
+
+    private void ConnectionCore(PlayerId id, bool connected)
     {
         if (connected ? !_online.Add(id) : !_online.Remove(id))
             return;
@@ -207,7 +227,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Story:
                 if (Camp is not null) { CampPresenceChanged(); break; }
-                if (_doc.World?.Shop is not null)
+                if (Trading)
                 {
                     if (_online.Count == 0) CloseShop();
                     break;
@@ -223,6 +243,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnInput(PlayerId from, PlayerInput input)
+        => WorldCall(input.Payload.ValueKind == JsonValueKind.Object && input.Payload.TryGetProperty("action", out var action) ? "input:" + action.ToString() : "input", () => InputCore(from, input));
+
+    private void InputCore(PlayerId from, PlayerInput input)
     {
         var player = _players.FirstOrDefault(p => p.Id == from);
         if (player?.Profile is not { } profile)
@@ -238,6 +261,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         if (custom.Action is null)
             return;
+        if (_doc.World?.MobAmbush is not null && custom.Action != "endSession") return;
         HeardFrom(profile);
         if (custom.Action == "questLog") { QuestLogInput(player, profile, custom.Data); return; }
         if (QuestLogOpen && custom.Action is not ("endSession" or "pickClass")) return;
@@ -267,7 +291,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Story when Camp is not null:
                 CampInput(player, profile, custom);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is not null:
+            case TacticsPhase.Story when Trading:
                 ShopInput(player, profile, custom);
                 break;
             case TacticsPhase.Story:
@@ -305,7 +329,12 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     /// <inheritdoc />
     public void OnTimer(string key)
+        => WorldCall("timer:" + key, () => TimerCore(key));
+
+    private void TimerCore(string key)
     {
+        if (key == MobAmbushTimer) { BeginMobBattle(); return; }
+        if (key == MobTimer) { StepMobs(); return; }
         if (key == "questResult") { QuestResultDone(); return; }
         if (key == "townBark")
         {
@@ -329,7 +358,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Exploration:
                 WalkTimer(key);
                 break;
-            case TacticsPhase.Story when _doc.World?.Shop is null:
+            case TacticsPhase.Story when !Trading:
                 StoryTimer(key);
                 break;
         }
@@ -392,7 +421,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (_phase == TacticsPhase.Muster && _players.Where(p => _online.Contains(p.Id)).All(p => _doc.For(p.Profile!.Value) is not null))
         {
             _toasts.Clear();
-            if (_region is not null && (_doc.World?.Story is not null || _doc.World?.Shop is not null || _doc.World?.Camp is not null))
+            if (_region is not null && (_doc.World?.Story is not null || _doc.World?.Shop is not null || _doc.World?.Camp is not null || _doc.World?.Loot is not null))
                 ResumeStory();
             else if (_region is not null)
                 ToExploration();
@@ -486,7 +515,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     private void PickEncounter(Player vip, JsonElement? data)
     {
         var id = Str(data, "encounter");
-        if (id is null || !Rules.Encounters.TryGetValue(id, out var encounter))
+        if (id is null || !Rules.Encounters.TryGetValue(id, out var encounter) || Rules.Mobs.Values.SelectMany(m => m).Any(m => m.Encounter == id))
         {
             Toast(vip.Id, "Pick one of the battles.");
             return;
@@ -519,8 +548,11 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             return;
         }
         _lastBattle = BattleViewOf();
+        var mob = save.Mob is { } mobId ? Rules.Mobs.Values.SelectMany(m => m).FirstOrDefault(m => m.Id == mobId) : null;
+        if (mob is not null)
+            result = result with { Xp = result.Xp.ToImmutableSortedDictionary(x => x.Key, x => result.Outcome == BattleOutcome.Won ? mob.Xp : 0), Loot = [] };
         var members = _doc.Members;
-        var rewards = result.Outcome == BattleOutcome.Won
+        var rewards = result.Outcome == BattleOutcome.Won && mob is null
             ? Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot ?? [] : [];
         var rewardGiven = false;
         for (var i = 0; i < save.Members.Length; i++)
@@ -560,9 +592,11 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             World = StoryAfter(save, result),
         };
         if (result.Outcome == BattleOutcome.Won)
-            _doc = _doc.ChangeGold(Rules.Encounters[save.Encounter].Gold, save.Members.Select(m => m.Value));
+            _doc = _doc.ChangeGold(mob?.Gold ?? Rules.Encounters[save.Encounter].Gold, save.Members.Where(m => mob is null || _players.Any(p => p.Profile == m && _online.Contains(p.Id))).Select(m => m.Value));
         if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost && _doc.World is { } resting)
             _doc = _doc with { World = resting with { RestReady = true } };
+        if (mob is not null && result.Outcome == BattleOutcome.Won && _doc.World is { } mobWorld)
+            _doc = _doc with { World = mobWorld with { MobsBeaten = (mobWorld.MobsBeaten.IsDefault ? [] : mobWorld.MobsBeaten).Add(mob.Id) } };
         // The story first, then the place, so that the place keeps clear of a stamp the story has just armed; both before the checkpoint,
         // so a restart at Results resumes on the new tile with the beat done.
         Land(save, result.Outcome);

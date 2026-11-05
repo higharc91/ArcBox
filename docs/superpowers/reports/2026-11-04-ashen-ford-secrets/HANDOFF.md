@@ -1,12 +1,12 @@
 # Issue #81 handoff
 
-Branch: `ashen-ford-secrets`; cloud worktree `/workspace/arcbox-secrets`. The original Windows worktree is `C:\Users\fatma\Programming\dotnet\ArcBox\.claude\worktrees\ashen-ford-secrets`; fetch the branch there to receive cloud changes. **Do not open a PR.**
+Branch: `ashen-ford-secrets`; cloud worktree `/workspace/arcbox-secrets`. The original Windows worktree is `C:\Users\fatma\Programming\dotnet\ArcBox\.claude\worktrees\ashen-ford-secrets`; fetch the branch there to receive cloud changes. **The owner now requests push and merge.** The earlier no-PR instruction is superseded. See [current-main integration](merge/README.md) for merge resolution and release verification.
 
 ## Part 1 · complete
 
 Ashen Ford has a DC 12 Survival reed-bank path at [118,86], a DC 13 Investigation cellar hatch revealed by a nearby draft, a ledger and one Smoke Bomb behind the open flag, and three Chapter 1 gated notices. `StoryOrder.cs` treats undiscovered paths/doors as shut. Narrator discovery speech, twelve Ogg clips, tests and TV stand-ins are committed. No early ember disclosure was added. OW-33 is done.
 
-The [part 1 verification](verification/README.md) records 6,084 passing .NET tests, 504 phone tests, a clean solution build and an actual force-route Chapter 1 end-card pass. The optional parley run lost River Crossing twice and was stopped; no live parley end-card pass is claimed. Companion tests cover both routes. The broader low-wall plug renderer and Search/unseen-trap decisions remain in interactables design §7.8, outside this work.
+The [part 1 verification](verification/README.md) records 6,084 passing .NET tests, 504 phone tests, a clean solution build and an actual force-route Chapter 1 end-card pass. The optional parley run lost River Crossing twice and was stopped; no live parley end-card pass is claimed. Companion tests cover both routes. Current main includes the low-wall plug rendering fix from PR #91; broader interaction decisions are recorded in interactables design §7.8.
 
 ## Part 2 · approved and integrated
 
@@ -19,3 +19,7 @@ The quest sack [40,70], story markers [42,70]/[132,93], reed-bank shortcut [118,
 Rebuild only these assets safely with `python tools/tactics-assets/build.py lore_places`. Two successive builds preserved all 4,758 live pack files byte-for-byte. The legacy full prop generator is not the source for curated imported extras; see [integration details and current verification](integration/README.md). All pre-existing shipped PNGs and prop definitions are retained unchanged.
 
 The integrated source `d7583d80` passed all 6,092 .NET tests and 504 phone tests, and built with zero warnings/errors. The Python art audit now passes all five checks and accounts for all 647 environment PNGs. Fresh live-pack TV captures show the granary, normal marker fade and Maud's home without TV errors. The final fresh Chapter 1 force run passed: Storming the Ford won, all 94 selected lines said once in order, end card displayed, four walking steps afterward. The gated narrator clip played after Maud; TV reported no errors. OW-34 is done. Nothing remains for issue #81 on this branch; no PR is open.
+
+## Current release continuation
+
+Current main is being integrated for the owner-authorized merge. Preserve the newer bounty/cave, roaming mobs and bridge/plug fixes. The claw-mark notice moves to [118,80] because the newer kobold arena covers [121,80]. A native dark medium rock at [117,84] restores the shortcut advantage required by its existing test; the path and its standing/check tile remain unchanged. All other issue #81 positions and the approved PNG bytes are preserved. Both editor prop layers have been remapped and both regions export deterministically. This section supersedes earlier branch-only statements about no PR, unchanged notice coordinates and no main integration. [Merge evidence and current checks](merge/README.md).

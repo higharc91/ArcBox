@@ -184,7 +184,7 @@ public sealed class HostViewContractTests
         Assert.Equal(1, walking.World!.Seq);
         Assert.Equal([1], show.Receive(walking.World).Select(l => l.Seq));
         var frame = show.Frame(1 / 60.0);
-        Assert.Equal(2, frame.Units.Length);
+        Assert.Equal(2 + (walking.World.Mobs?.Length ?? 0), frame.Units.Length);
         Assert.Single(frame.Units, u => u.CrownAt is not null);
         Assert.Empty(walking.Rows);
     }

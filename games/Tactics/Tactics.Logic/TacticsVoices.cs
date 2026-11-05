@@ -56,6 +56,7 @@ public static class TacticsVoices
         new(Npc("celandine_marrowby"), "Lady Celandine Marrowby: smooth, cultured alto", Voice("Autonoe"), Fallback: new FallbackVoice()),
         new(Npc("corvin_ashby"), "Corvin Ashby: light, quick, anxious", Voice("Sadachbia"), Fallback: new FallbackVoice()),
         new(Npc("dagna_holt"), "Dagna Holt: low, flat, few words", Voice("Callirrhoe"), Fallback: new FallbackVoice()),
+        new(Npc("grisk"), "Grisk: nasal kobold foreman; rendered clips pitch +4", Voice("Algenib"), Fallback: new FallbackVoice(Pitch: 1.2599f)),
         new(Npc("halden_varrow"), "Halden Varrow: warm baritone, hoarse", Voice("Charon"), Fallback: new FallbackVoice()),
         new(Npc("halvard"), "Ser Halvard: deep and hollow inside the helm", Voice("Schedar"), Fallback: new FallbackVoice()),
         new(Npc("hooded_stranger"), "The Hooded Stranger: shares scholarly.low; pitch and echo keep them apart", Voice("Sadaltager"), Fallback: new FallbackVoice()),

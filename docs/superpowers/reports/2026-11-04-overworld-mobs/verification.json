@@ -1,0 +1,99 @@
+{
+  "build": {
+    "solution": "passed",
+    "warnings": 0,
+    "errors": 0
+  },
+  "dotnet": {
+    "solutionCasesBeforeFinalRendererCases": 6357,
+    "solutionCasesPassedOnFirstFinalRun": 6356,
+    "correctedHarnessFailure": "Live-server rate-limit fixture must allow its ordinary start route; quiet routes remain required for packet fanout fixtures.",
+    "fullServerSuiteRerun": {
+      "passed": 425,
+      "failed": 0
+    },
+    "stageRendererRerun": {
+      "passed": 65,
+      "failed": 0,
+      "newCases": 3
+    },
+    "otherSolutionModules": "all passed"
+  },
+  "phone": {
+    "passed": 517,
+    "failed": 0,
+    "viewports": 6,
+    "screens": 2
+  },
+  "simulation": {
+    "difficulty": "Normal",
+    "battles": 9660,
+    "wins": 9482,
+    "roundCapLosses": 15,
+    "meanRounds": 4.4,
+    "cellsWithinBothTargets": 7,
+    "cells": 84
+  },
+  "live": {
+    "wolfWanderReconnectRestartAmbushVictoryRemoval": "passed",
+    "wolfRewards": "75 XP per member, 10 group gold",
+    "difficulty": "Story",
+    "seed": 76,
+    "chapterForce": "passed",
+    "chapterParley": "passed"
+  },
+  "sceneExports": {
+    "ashen_ford": "two byte-identical exports, zero warnings",
+    "cinder_hollow": "two byte-identical exports, zero warnings"
+  },
+  "balanceFollowUp": {
+    "ownerDecision": "Fixed enemies; leveling up helps. Targets apply at level 1; levels 2\u20133 are progression checks.",
+    "battles": 24150,
+    "seeds": 50,
+    "level1": {
+      "battles": 8050,
+      "wins": 7389,
+      "allTargetCells": 28,
+      "targetCells": 28,
+      "winRange": [
+        87.3,
+        95.0
+      ],
+      "meanRoundRange": [
+        4.1,
+        7.61
+      ],
+      "roundCaps": 7
+    },
+    "level2": {
+      "battles": 8050,
+      "wins": 8015,
+      "roundCaps": 0
+    },
+    "level3": {
+      "battles": 8050,
+      "wins": 8046,
+      "roundCaps": 0
+    },
+    "gameTests": {
+      "passed": 725,
+      "failed": 0
+    },
+    "liveBalancedWolf": "passed (wander, phone reconnect, server restart, ambush, win, 75 XP/member, 10 gold, removal)",
+    "build": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "logicTests": {
+      "passed": 1287,
+      "failed": 0
+    },
+    "soundTests": {
+      "passed": 135,
+      "failed": 0
+    },
+    "totalTargetedRegressionCases": 2147,
+    "enemyLevelInvariant": "Passed for all seven groups and party sizes 1\u20136 at party levels 1, 2 and 3.",
+    "slingerCoverRegression": "Passed for the formerly stalled solo-cleric seed."
+  }
+}

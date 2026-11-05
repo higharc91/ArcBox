@@ -67,7 +67,7 @@ public static class SoundChoice
     }
 
     /// <summary>The sound of swinging <paramref name="weapon"/> (a rules id or a preset's layer), or null for claws and the like, whose sound is the creature's bark.</summary>
-    public static string? Swing(string? weapon) => weapon is not null && Swings.TryGetValue(weapon, out var sound) ? sound : null;
+    public static string? Swing(string? weapon) => weapon == "mining_pick" ? "kobold_pick" : weapon is not null && Swings.TryGetValue(weapon, out var sound) ? sound : null;
 
     /// <summary>The sound of a weapon that's only fired, or null for one that's swung.</summary>
     public static string? Release(string? weapon) => weapon switch
@@ -88,7 +88,7 @@ public static class SoundChoice
     public static string Launch(string key, string? weapon) => key switch
     {
         ArrowKey => Shot(weapon),
-        RockKey => "throw",
+        RockKey => weapon == "sling" ? "sling_release" : "throw",
         _ => "spell_cast",
     };
 

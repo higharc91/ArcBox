@@ -179,6 +179,11 @@
       "preset": "Orus",
       "pitch": -4,
       "note": "goblin spear: shares Orus with a distinct -4 semitone register; rasping, narrow throat, hungry and wary; distinct from Mother Skarrow"
+    },
+    "grisk": {
+      "preset": "Algenib",
+      "pitch": 4,
+      "note": "High nasal raspy kobold foreman. Shares grim.low Algenib at +4 semitones, distinct from every existing named NPC/player tuple; fisher Algenib is -2. Existing casts unchanged. Chirp live TTS cannot apply pitch; rendered coverage is required."
     }
   }
 }

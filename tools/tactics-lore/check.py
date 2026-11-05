@@ -132,6 +132,9 @@ def rules_ids(content: Path) -> dict[str, set[str]] | None:
                                 "classes": set(), "flags": set()}
     for file in json.loads(manifest.read_text(encoding="utf-8"))["files"]:
         kind = file.split("/")[0].removesuffix(".json")
+        if kind == "interactables":
+            doc = json.loads((content / "rules" / file).read_text(encoding="utf-8"))
+            ids["flags"].update(f for key, value, _ in _walk(doc) if key == "sets" for f in value)
         if kind in ids:
             doc = json.loads((content / "rules" / file).read_text(encoding="utf-8"))
             ids[kind].update(d["id"] for d in (doc if isinstance(doc, list) else [doc]))
@@ -293,7 +296,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         if not person.get("character") and person["preset"] not in townsfolk:
                             errors.add("townsfolk", "/presets", f"placed preset '{person['preset']}' has no bark set")
     rules = rules_ids(content)
-    _references(defs, barks, art, rules, errors)
+    _references(defs, barks, art, rules, errors, set(json.loads((content / "portraits/manifest.json").read_text())["presets"]))
     _side_content(defs, docs, scenes, content, errors)
     _scenes(defs, scenes, rules, errors)
     if defs["arc"]:
@@ -342,7 +345,7 @@ def _define(table: dict, entry: dict, where: str, ptr: str, kind: str, errors: E
         table[id_] = (entry, f"{where}#{ptr}")
 
 
-def _references(defs: dict, barks: list, art: set[str], rules: dict | None, errors: Errors) -> None:
+def _references(defs: dict, barks: list, art: set[str], rules: dict | None, errors: Errors, portraits: set[str] | None = None) -> None:
     def at(location: str) -> tuple[str, str]:
         where, _, ptr = location.partition("#")
         return where, ptr
@@ -359,6 +362,10 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
 
     for id_, (c, loc) in defs["character"].items():
         need_art(f"characters.{c.get('preset', id_)}", loc, "/preset" if "preset" in c else "/id")
+        if "sprite" in c:
+            need_art(c["sprite"], loc, "/sprite")
+        if "portrait" in c and portraits is not None and c["portrait"] not in portraits:
+            errors.add(*at(loc + "/portrait"), f"unknown portrait preset '{c['portrait']}'")
         if "faction" in c:
             need("faction", c["faction"], loc, "/faction", "faction")
         for i, r in enumerate(c.get("relationships", [])):
@@ -415,16 +422,18 @@ def _side_content(defs, docs, scenes, content, errors):
     quests = {q["id"]: q for q in listed}
     if len(quests) != len(listed): errors.add("quests.json", "/quests", "duplicate quest ID")
     convos = {d["character"]: (d, w) for d, w in docs if "/conversations/" in w}
-    main_flags = {f for beat, _ in defs["beat"].values() for f in beat.get("sets", [])}
-    main_flags.update(f for b, _ in defs["beat"].values() for c in b.get("choices", []) for f in c.get("sets", []))
-    setters = set(main_flags)
+    side_beats = {b["id"] for a, _ in defs["arc"].values() if a.get("sideAdventure") for b in a["beats"]}
+    main_flags = {f for beat, _ in defs["beat"].values() if beat["id"] not in side_beats for f in beat.get("sets", [])}
+    main_flags.update(f for b, _ in defs["beat"].values() if b["id"] not in side_beats for c in b.get("choices", []) for f in c.get("sets", []))
+    setters = {f for b, _ in defs["beat"].values() for f in b.get("sets", []) + [f for c in b.get("choices", []) for f in c.get("sets", [])]}
     for scene, _ in scenes:
         for key, value, _ in _walk(scene):
             if key == "sets" and isinstance(value, list):
                 setters.update(value)
-                if scene.get("beat") and not scene.get("camp"):
+                if scene.get("beat") and scene["beat"] not in side_beats and not scene.get("camp"):
                     main_flags.update(value)
     people, things, regions, items, services = {}, {}, {}, set(), set()
+    classes, trinkets = set(), {}
     manifest = content / "rules" / "manifest.json"
     if manifest.exists():
         for file in json.loads(manifest.read_text())["files"]:
@@ -441,6 +450,10 @@ def _side_content(defs, docs, scenes, content, errors):
                 items.update(x["id"] for x in (data if isinstance(data,list) else [data]))
             if file.startswith("shops/"):
                 services.update(s["id"] for s in data["shops"])
+            if file.startswith("classes/"):
+                classes.add(data["id"])
+            if file == "trinkets.json":
+                trinkets.update({t["id"]: t["class"] for t in data})
     for scene, loc in scenes:
         for node in scene["nodes"]:
             for option in node.get("options", []):
@@ -489,15 +502,24 @@ def _side_content(defs, docs, scenes, content, errors):
             if not stage["when"] or set(stage["when"]) - setters:
                 errors.add(where, "/stages", f"stage '{stage['id']}' has flags nothing in the pack can set")
             target = stage.get("target", {})
-            if target and len(target) != 1: errors.add(where,"/target","target must name one person, thing or tile")
+            target_region = target.get("region", q["region"])
+            if target and len(set(target) - {"region"}) != 1: errors.add(where,"/target","target must name one person, thing or tile")
+            if target and target_region not in regions: errors.add(where,"/target",f"unknown target region '{target_region}'")
             for kind, value in target.items():
-                if kind == "person" and value not in people.get(q["region"], {}): errors.add(where,"/target",f"unknown person '{value}'")
-                if kind == "thing" and value not in things.get(q["region"], {}): errors.add(where,"/target",f"unknown thing '{value}'")
-                if kind == "tile" and q["region"] in regions:
-                    width,height = regions[q["region"]]["size"]
+                if kind == "person" and value not in people.get(target_region, {}): errors.add(where,"/target",f"unknown person '{value}'")
+                if kind == "thing" and value not in things.get(target_region, {}): errors.add(where,"/target",f"unknown thing '{value}'")
+                if kind == "tile" and target_region in regions:
+                    width,height = regions[target_region]["size"]
                     if len(value)!=2 or not (0<=value[0]<width and 0<=value[1]<height): errors.add(where,"/target","target is outside the quest region")
         for item in q["rewards"].get("items", []):
             if item["item"] not in items: errors.add(where,"/rewards",f"unknown item '{item['item']}'")
+        if manifest.exists() and "trinkets" in q["rewards"]:
+            reward_map = q["rewards"]["trinkets"]
+            for cls, item in reward_map.items():
+                if cls not in classes or trinkets.get(item) != cls:
+                    errors.add(where, "/rewards/trinkets", f"invalid trinket '{item}' for class '{cls}'")
+            for cls in sorted(classes - set(reward_map)):
+                errors.add(where, "/rewards/trinkets", f"no trinket reward for class '{cls}'")
         if set(q["rewards"].get("sets", [])) & main_flags: errors.add(where,"/rewards","side rewards cannot set main-story flags")
     # Only complete game packs opt into people coverage; small validator fixtures have no townsfolk file.
     if any(w.endswith("/barks/townsfolk.json") for _, w in docs):
@@ -524,13 +546,15 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                 arc_flags.update(node.get("sets", []))
                 for option in node.get("options", []):
                     arc_flags.update(option.get("sets", []))
+    side_beats = {b["id"] for a, _ in defs["arc"].values() if a.get("sideAdventure") for b in a["beats"]}
     main_flags = set()
     for entry, _ in defs["beat"].values():
+        if entry["id"] in side_beats: continue
         main_flags.update(entry.get("sets", []))
         for choice in entry.get("choices", []):
             main_flags.update(choice.get("sets", []))
     for scene, _ in scenes:
-        if "beat" in scene and not scene.get("camp"):
+        if "beat" in scene and scene["beat"] not in side_beats and not scene.get("camp"):
             for node in scene.get("nodes", []):
                 main_flags.update(node.get("sets", []))
                 for option in node.get("options", []):

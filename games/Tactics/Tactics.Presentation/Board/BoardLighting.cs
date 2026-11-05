@@ -148,7 +148,13 @@ public sealed class BoardLighting
 
     /// <summary>What's lit at <see cref="Dusk"/> rather than at noon: the ford, and its fight when a fight has no world to stand in.</summary>
     private static readonly ImmutableDictionary<string, Rgb> Grades = ImmutableDictionary<string, Rgb>.Empty.WithComparers(StringComparer.Ordinal)
-        .Add("ashen_ford", Dusk).Add("river_crossing", Dusk);
+        .Add("ashen_ford", Dusk).Add("river_crossing", Dusk)
+        .Add("mob_pine_wolves", Dusk).Add("mob_rooting_boars", Dusk).Add("mob_kobold_scouts", Dusk)
+        .Add("mob_river_slimes", Dusk).Add("mob_road_bandits", Dusk)
+        .Add("mob_hollow_bats", new Rgb(.28f, .27f, .34f)).Add("mob_hollow_kobolds", new Rgb(.28f, .27f, .34f))
+        .Add("cinder_hollow", new Rgb(.28f, .27f, .34f))
+        .Add("hollow_throat", new Rgb(.28f, .27f, .34f)).Add("hollow_diggings", new Rgb(.28f, .27f, .34f))
+        .Add("hollow_nest", new Rgb(.28f, .27f, .34f)).Add("hollow_lair", new Rgb(.28f, .27f, .34f));
 
     /// <summary>What a building's forge and doors give, once it's dark enough to see: warm, and well under a lamp, or a town's walls stand in a rim of fire.</summary>
     private static readonly Rgb Hearth = Rgb.Hex("#ffb35c");

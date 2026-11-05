@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: v3 custom (A short right-handed mining-pick chop: right hand grips the pick shaft at all times, raises it beside the right shoulder, chops down forward, and returns to the starting guard. Left hand stays free. Helmet lantern and tally cord remain attached; feet planted, facing straight south.)\ndirections: south (1 jobs)\njob_ids: south=624ce49c-ef6c-48a0-81b3-6dc8c1714e62\ngroup: 081ffb68-72c9-4c53-9bb3-43deb1133e0c\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south 112x112 (frames are stored at this size: the character plus room to move)\ncost: 2 generations (2/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", action_description=\"A short right-handed mining-pick chop: right hand grips the pick shaft at all times, raises it beside the right shoulder, chops down forward, and returns to the starting guard. Left hand stays free. Helmet lantern and tally cord remain attached; feet planted, facing straight south.\", animation_group_id=\"081ffb68-72c9-4c53-9bb3-43deb1133e0c\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}
