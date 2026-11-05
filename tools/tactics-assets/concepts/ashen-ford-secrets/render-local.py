@@ -42,12 +42,17 @@ def main():
     for group in world['props']:
         if group['id'] == 'skull_pike':
             group['at'] = [p for p in group['at'] if not (126 <= p[0] <= 135 and 86 <= p[1] <= 95)]
-    world['props'].extend([
+    additions = [
         {'id': 'sack', 'variant': 'burlap', 'at': [[38, 72], [42, 72], [42, 73]]},
         {'id': 'cart', 'variant': 'oak', 'at': [[38, 73]]},
         {'id': 'maud_ash_garden', 'variant': 'ashen_ford', 'at': [[132, 88]]},
         {'id': 'maud_stool_pots', 'variant': 'ashen_ford', 'at': [[129, 90]]},
-    ])
+    ]
+    occupied = {(group['id'], group.get('variant'), tuple(at)) for group in world['props'] for at in group['at']}
+    for group in additions:
+        group['at'] = [at for at in group['at'] if (group['id'], group['variant'], tuple(at)) not in occupied]
+        if group['at']:
+            world['props'].append(group)
     world_path.write_text(json.dumps(world, indent=2) + '\n')
     # The dev TV resolves its repository pack relative to res://. Clone its already-built host beside this pack.
     host = stage / 'src/ArcBox.Host'

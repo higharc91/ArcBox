@@ -29,6 +29,8 @@ group('props','mushrooms mushroom_cluster crystals crystal_large', 'Forest / emb
     'Natural red/brown mushrooms fit woods. Glowing caps and crystals need a specific magical site; do not scatter them as ordinary village decorations.')
 group('props','crate barrel sack cart chest chest_open','Store, granary, docks and earned loot',
     'Wood and metal match the town kit. Keep access lanes clear. Crates/sacks support the grain shortage; gold-filled chests are rewards, not street furniture.')
+group('props','maud_ash_garden maud_stool_pots',"Old Maud's burned-bank home",
+    'Owner-approved kitchen-herb bed in cold ash and knee-high stool/pots. Keep the cottage approach and reed track clear; no magical glow or occult trophies.')
 group('props','fence fence_stone fence_picket fence_iron palisade','Fields, town boundary and defensible sites',
     'Match segments to their axis and material. Plain wood suits fields, stone suits Warden work, iron suits a formal courtyard, palisades suit a guarded camp.')
 group('props','campfire torch lamp_post lantern','Occupied camp, street and shrine',
@@ -101,6 +103,8 @@ group('town','ivy crack wall_lantern arrow_slit notices', 'Purposeful facade det
     'Keep wall-local scale and anchoring. Ivy fits damp/older facades, arrow slits defensive masonry, notices the square; do not cover every wall with every decal.')
 group('town','cottage house tavern smithy store stall windmill', 'Emberwick / river settlements',
     'Keep the detailed modular buildings. The Last Coal needs its mug sign; smithy its forge/anvil; the store its bag sign. Modest market stock fits the shortage.')
+group('town','granary maud_hut','Ashen Ford lore places, owner-approved issue #81',
+    'Locked grain barn with central hasp and modest stores; Maud retains her cottage footprint, attached herbs/charms and ordinary chimney soot. Shared town materials, top-left light and shadow projection. No ember-fire or new story disclosure.')
 group('town','chapel','Emberwick Church of the Hearth',
     'Replaced the generic cross finial with a gilded flame/brazier shape. Keep stone buttresses and warm windows; the finial is metal, not a magical beacon.')
 group('town','watchtower wall_u wall_v wall_tower gate_u gate_v', 'Town defences / old Warden sites',

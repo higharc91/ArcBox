@@ -530,7 +530,7 @@ SETS["tactical"] = build_tactical
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
                "ambient", "bosses", "bestiary", "emotes", "town", "status", "pickups", "worldmap",
-               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "sheet_icons", "chapters", "camp", "showcase", "gallery")   # these read the others: keep them last
+               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "sheet_icons", "chapters", "camp", "showcase", "gallery", "lore_places")   # these read the others: keep them last
 for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")

@@ -201,13 +201,13 @@ BUILDERS = {"granary": granary, "maud_hut": maud_hut}
 PROP_BUILDERS = {"maud_ash_garden": ash_garden, "maud_stool_pots": stool_pots}
 
 
-def export(pack: Path):
-    """Add just these assets to an existing pack. Call on a preview copy before approval."""
+def export(pack: Path, *, families=("town", "props")):
+    """Export the approved additions; a single-family rebuild must not touch the other set."""
     town_path, props_path = pack / 'town/manifest.json', pack / 'props/manifest.json'
-    town = json.loads(town_path.read_text())
-    props = json.loads(props_path.read_text())
+    town = json.loads(town_path.read_text()) if "town" in families else None
+    props = json.loads(props_path.read_text()) if "props" in families else None
     outputs = {}
-    for name, make in BUILDERS.items():
+    for name, make in (BUILDERS.items() if town is not None else []):
         model = make()
         rendered = T.render(model)
         image = f'buildings/{name}_ashen_ford.png'
@@ -224,7 +224,7 @@ def export(pack: Path):
         # The granary has no artificial glow; Maud's shutters stay dark, with external ordinary light.
         town['buildings'][name] = entry
         outputs[name] = {"image": str(pack / 'town' / image), **entry}
-    for name, make in PROP_BUILDERS.items():
+    for name, make in (PROP_BUILDERS.items() if props is not None else []):
         model = make()
         rendered = T.render(model)
         filename = f'{name}_ashen_ford.png'
@@ -234,6 +234,14 @@ def export(pack: Path):
                  "cover": "none", "height": 1, "tags": ["lore", "dressing"]}
         props['props'][name] = entry
         outputs[name] = {"image": str(pack / 'props' / filename), **entry}
-    write_json(town, town_path)
-    write_json(props, props_path)
+    if town is not None:
+        write_json(town, town_path)
+    if props is not None:
+        write_json(props, props_path)
     return outputs
+
+
+def build():
+    """Safe additive build: preserve all curated/imported assets outside these four families."""
+    from arcpix.out import PACK
+    export(PACK)

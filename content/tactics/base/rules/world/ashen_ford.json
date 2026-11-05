@@ -505,6 +505,10 @@
       "variant": "oak",
       "at": [
         [
+          38,
+          73
+        ],
+        [
           53,
           30
         ],
@@ -3063,6 +3067,26 @@
       ]
     },
     {
+      "id": "maud_ash_garden",
+      "variant": "ashen_ford",
+      "at": [
+        [
+          132,
+          88
+        ]
+      ]
+    },
+    {
+      "id": "maud_stool_pots",
+      "variant": "ashen_ford",
+      "at": [
+        [
+          129,
+          90
+        ]
+      ]
+    },
+    {
       "id": "mushroom_cluster",
       "variant": "brown",
       "at": [
@@ -3983,6 +4007,10 @@
       "variant": "burlap",
       "at": [
         [
+          38,
+          72
+        ],
+        [
           39,
           70
         ],
@@ -3993,6 +4021,14 @@
         [
           42,
           71
+        ],
+        [
+          42,
+          72
+        ],
+        [
+          42,
+          73
         ],
         [
           43,
@@ -4081,24 +4117,8 @@
           60
         ],
         [
-          128,
-          90
-        ],
-        [
           129,
           26
-        ],
-        [
-          129,
-          87
-        ],
-        [
-          133,
-          88
-        ],
-        [
-          134,
-          91
         ],
         [
           137,
@@ -5575,6 +5595,14 @@
       ]
     },
     {
+      "id": "granary",
+      "variant": "ashen_ford",
+      "at": [
+        39,
+        71
+      ]
+    },
+    {
       "id": "wall_v",
       "variant": "warm",
       "at": [
@@ -5626,14 +5654,6 @@
       "id": "cottage",
       "variant": "shakes_oak",
       "at": [
-        40,
-        72
-      ]
-    },
-    {
-      "id": "cottage",
-      "variant": "shakes_oak",
-      "at": [
         43,
         72
       ]
@@ -5651,22 +5671,6 @@
       "variant": "warm",
       "at": [
         14,
-        73
-      ]
-    },
-    {
-      "id": "clutter_crates",
-      "variant": "oak",
-      "at": [
-        42,
-        73
-      ]
-    },
-    {
-      "id": "clutter_barrels",
-      "variant": "oak",
-      "at": [
-        45,
         73
       ]
     },
@@ -6023,8 +6027,8 @@
       ]
     },
     {
-      "id": "cottage",
-      "variant": "thatch_green",
+      "id": "maud_hut",
+      "variant": "ashen_ford",
       "at": [
         130,
         88
