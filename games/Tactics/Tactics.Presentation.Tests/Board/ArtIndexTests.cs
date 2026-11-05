@@ -229,4 +229,18 @@ public sealed class ArtIndexTests
     [InlineData(0.5f, 3, 0.4375f)]
     public void A_frames_u_lands_inside_its_part_of_the_strip(float u, int frame, float expected)
         => Assert.Equal(expected, new ArtImage("x.png", 8, 6).FrameU(u, frame));
+
+    [Theory]
+    [InlineData(96, 64, 1, 0, 100, false, 0, 96)]
+    [InlineData(192, 128, 1, 0, 100, false, 0, 192)]
+    [InlineData(768, 128, 4, 2, 0.5, false, 192, 192)]
+    [InlineData(768, 128, 4, 2, 2.0, false, 0, 192)]
+    [InlineData(192, 128, 4, 2, 0.5, true, 0, 192)]
+    public void Sprite_sources_use_texture_pixels_for_native_dense_strips_and_cached_frames(
+        int width, int height, int frames, double fps, double clock, bool cached, int x, int frameWidth)
+    {
+        var image = new ArtImage("sprite.png", frames, fps, Height: 64);
+
+        Assert.Equal(new ArtRect(x, 0, frameWidth, height), image.Source(width, height, clock, cached));
+    }
 }

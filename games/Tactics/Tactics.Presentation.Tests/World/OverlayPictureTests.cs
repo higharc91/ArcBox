@@ -34,7 +34,7 @@ public sealed class OverlayPictureTests
             {
                 var item = block.Lit.Items[i];
                 var (min, max) = BoardPlan.Bounds(item is LitFace f ? f.Face : ((LitSprite)item).Sprite);
-                var (solid, width) = masked && item is LitSprite sprite ? Mask(sprite.Sprite.Image) : (null, 0);
+                var (solid, width) = masked && item is LitSprite sprite ? Mask(sprite.Sprite) : (null, 0);
                 var shape = new Shape(all.Count + 1, item.Order, min, max, item is LitFace face ? [.. face.Face.Points] : null, new ItemAt(block.Index, i), solid, width);
                 all.Add(shape);
                 of[new ItemAt(block.Index, i)] = shape;
@@ -42,20 +42,28 @@ public sealed class OverlayPictureTests
         return new Sheet(plan, [.. all], of);
     }
 
-    private static readonly Dictionary<string, (bool[] Solid, int Width)> Masks = [];
+    private static readonly Dictionary<(string Path, Vector2 Size), (bool[] Solid, int Width)> Masks = [];
 
     /// <summary>Which pixels of an image's first frame have anything in them.</summary>
-    private static (bool[]? Solid, int Width) Mask(ArtImage image)
+    private static (bool[]? Solid, int Width) Mask(Sprite sprite)
     {
         lock (Masks)
         {
-            if (Masks.TryGetValue(image.Path, out var known))
+            var key = (sprite.Image.Path, sprite.Size);
+            if (Masks.TryGetValue(key, out var known))
                 return known;
-            var (rgba, width, height) = PngTexels.Read(Path.Combine(Pack.Root, image.Path));
+            var (rgba, textureWidth, textureHeight) = PngTexels.Read(Path.Combine(Pack.Root, sprite.Image.Path));
+            var source = sprite.Image.Source(textureWidth, textureHeight, 0);
+            var (width, height) = ((int)sprite.Size.X, (int)sprite.Size.Y);
             var solid = new bool[width * height];
-            for (var i = 0; i < solid.Length; i++)
-                solid[i] = rgba[i * 4 + 3] >= 128;
-            return Masks[image.Path] = (solid, width);
+            for (var y = 0; y < height; y++)
+                for (var x = 0; x < width; x++)
+                {
+                    var sx = source.X + (int)((x + 0.5) * source.Width / width);
+                    var sy = source.Y + (int)((y + 0.5) * source.Height / height);
+                    solid[y * width + x] = rgba[(sy * textureWidth + sx) * 4 + 3] >= 128;
+                }
+            return Masks[key] = (solid, width);
         }
     }
 
@@ -228,6 +236,36 @@ public sealed class OverlayPictureTests
         var route = WorldRoute.Across(FordGround.Value.Terrain, new Tile(30, 65), ClassDef.DefaultJump);
 
         var (wrong, worst, mean, most) = Sweep(Ford.Value, route, 0.5f, _output, u => Ford.Value.Plan.Overlay(u));
+
+        _output.WriteLine($"{wrong} wrong frames, worst {worst} px, mean {mean:0.0} items, most {most}");
+        Assert.Equal(0, wrong);
+    }
+
+    [Fact]
+    public void The_ford_bridge_samples_its_whole_image_instead_of_cutting_off_the_far_bank()
+    {
+        var bridge = Assert.Single(Ford.Value.Plan.Blocks.SelectMany(b => b.Plan.Items).OfType<Sprite>(),
+            s => s.Image.Path == "props/bridge_timber.png");
+        var (_, width, height) = PngTexels.Read(Path.Combine(Pack.Root, bridge.Image.Path));
+
+        Assert.True(width > bridge.Size.X && height > bridge.Size.Y, "Keep this regression on higher-density art.");
+        Assert.Equal(new ArtRect(0, 0, width, height), bridge.Image.Source(width, height, 0));
+        Assert.Equal(new Vector2(96, 64), bridge.Size);  // destination size and ground anchor are preserved
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Walking_both_ford_lanes_in_both_directions_keeps_units_and_bridge_in_painters_order(bool reverse)
+    {
+        ImmutableArray<Tile> route = [new(105, 58), new(105, 59), new(106, 59), new(107, 59), new(108, 59), new(108, 60),
+            new(108, 61), new(108, 60), new(107, 60), new(106, 60), new(105, 60), new(105, 59), new(105, 58)];
+        if (reverse)
+            route = [.. route.Reverse()];
+        var sheet = Read(Ford.Value.Plan, masked: true);
+        Assert.All(route, tile => Assert.True(FordGround.Value.Terrain.Walkable(tile), $"{tile}"));
+
+        var (wrong, worst, mean, most) = Sweep(sheet, route, 0.125f, _output, units => sheet.Plan.Overlay(units));
 
         _output.WriteLine($"{wrong} wrong frames, worst {worst} px, mean {mean:0.0} items, most {most}");
         Assert.Equal(0, wrong);

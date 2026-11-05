@@ -26,6 +26,16 @@ public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 
 
     /// <summary>A U in one frame (0 to 1), as a U in the whole strip.</summary>
     public float FrameU(float u, int frame) => (u + frame) / Frames;
+
+    /// <summary>
+    /// The source pixels of the current frame in a loaded texture, independently of its destination size.
+    /// With <paramref name="singleFrame"/>, the world has already cut the strip into a texture updated in place.
+    /// </summary>
+    public ArtRect Source(int textureWidth, int textureHeight, double seconds, bool singleFrame = false)
+    {
+        var width = textureWidth / (singleFrame ? 1 : Frames);
+        return new ArtRect(singleFrame ? 0 : FrameAt(seconds) * width, 0, width, textureHeight);
+    }
 }
 
 /// <summary>

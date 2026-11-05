@@ -67,7 +67,7 @@ It was the screenshots. With `ARCBOX_SHOTS=0` no frame was over 16 ms. See the r
 People have stable IDs, optional lore identities and flag gates, round-tripped through the painting workspace. Goblin warriors leave after a won force or parley ending; Mother Skarrow leaves only after force. A failed attempt keeps them present. Departures fade over 0.35 seconds; arrivals wait off-screen or behind the party. Existing story flags remain unchanged.
 **Validation:** 6,048 .NET tests and 497 web tests pass; two actual Godot exports are byte-identical. Integrated on `npcs-and-quests` for issue #73.
 
-### OW-08 · The ford's bridge planks end in a straight cut · `todo`
+### OW-08 · The ford's bridge planks end in a straight cut · `doing`
 In `fight-bridge-cut-and-soft-ground.png` and both ford shots, the planks stop in a vertical line, and a unit behind them is cut off with it. It's there without the new characters too. Probably a sorting or block-edge clip, or the bridge sprite against the stamp's edge. Add the case to `OverlayPictureTests`.
 **Done when:** the crossing reads as a whole structure from every side, with no clipped units.
 

@@ -27,11 +27,11 @@ internal sealed class BoardPainter
         public bool OneFrame { get; set; }
     }
 
-    private sealed class DrawnSprite(LitSprite lit, Rect2 target, Vector2 size, Color baked)
+    private sealed class DrawnSprite(LitSprite lit, Rect2 target, Color baked)
     {
         public LitSprite Lit { get; } = lit;
         public Rect2 Target { get; } = target;
-        public Vector2 Size { get; } = size;
+        public Vector2I TextureSize { get; set; }
         public Color Baked { get; } = baked;
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
@@ -89,6 +89,7 @@ internal sealed class BoardPainter
         {
             var lit = sprite.Lit;
             sprite.Texture = Texture(lit.Sprite.Image, false);
+            sprite.TextureSize = sprite.Texture is { } texture ? new Vector2I(texture.GetWidth(), texture.GetHeight()) : default;
             sprite.Glow = lit.Glow && lit.Sprite.Light is { } light ? Glow(lit.Sprite.Image, light.Mask, light.Colour) : null;
             sprite.OneFrame = Moves(lit.Sprite.Image);
         }
@@ -238,7 +239,7 @@ internal sealed class BoardPainter
     {
         var sprite = lit.Sprite;
         var size = new Vector2(sprite.Size.X, sprite.Size.Y);
-        return new DrawnSprite(baked is null ? lit : lit with { Probe = null }, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size,
+        return new DrawnSprite(baked is null ? lit : lit with { Probe = null }, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size),
             baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
@@ -310,7 +311,8 @@ internal sealed class BoardPainter
     {
         if (drawn.Texture is not null)
         {
-            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
+            var frame = drawn.Lit.Sprite.Image.Source(drawn.TextureSize.X, drawn.TextureSize.Y, clock, drawn.OneFrame);
+            var source = new Rect2(frame.X, frame.Y, frame.Width, frame.Height);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
             if (alpha < 1f)
             {
