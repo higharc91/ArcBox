@@ -68,10 +68,13 @@ longer and capped cases rise. Encounter numbers remain unchanged for the owner's
 The canonical four-hero force bot campaign lost six attempts before being stopped. A separate supported six-hero
 force campaign won its first fight and reached the chapter card, then walked four more steps. Its strict checker passes.
 This proves that branch's story/bridge transition, and does not claim four-hero balance acceptance.
-The four-hero parley campaign won and reached the card; its accelerated 0.5-second dialogue run missed one early
-mayor line on the TV. A normal 2.5-second dialogue run is being checked separately.
+The four-hero parley campaign at normal 2.5-second dialogue timing won its first fight, said all 129 selected lines once,
+reached the card and walked four steps afterward. Its strict checker passes. An earlier accelerated 0.5-second run
+reached the card but missed one early mayor line on the TV, so it is not the final acceptance run.
 
-Final validation results and chapter receipts are recorded in `validation.json` when the remaining checks finish.
+Final verification: **6,779 .NET tests and 517 phone tests pass; build has zero warnings/errors.**
+See [validation.json](validation.json), [force checker](chapter-force/check.txt), [parley checker](chapter-parley/check.txt),
+[force card](chapter-force/card.png) and [parley card](chapter-parley/card.png).
 The crisp ground repaint and its pixel/TV approval are not part of this installed bridge checkpoint. No PR or merge is requested.
 
 ## Reviewed test changes

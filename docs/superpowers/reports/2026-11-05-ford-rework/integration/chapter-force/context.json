@@ -1,0 +1,13 @@
+{
+  "players": 6,
+  "difficulty": "Story",
+  "line_seconds": 0.5,
+  "fight_attempts": 1,
+  "won": true,
+  "card_and_post_card_walk": true,
+  "canonical_four_hero_diagnostic": {
+    "losses": 6,
+    "stopped": true,
+    "balance_acceptance": false
+  }
+}
