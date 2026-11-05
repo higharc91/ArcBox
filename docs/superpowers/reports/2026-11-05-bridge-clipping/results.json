@@ -1,0 +1,35 @@
+{
+  "source_commit": "38d57465",
+  "base_commit": "42699a2a",
+  "branch": "ow-08-bridge-clipping",
+  "solution_build": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "targeted_tests": {
+    "passed": 333,
+    "failed": 0,
+    "skipped": 0
+  },
+  "presentation_tests": {
+    "passed": 2446,
+    "failed": 0,
+    "skipped": 0
+  },
+  "lane_sweeps": {
+    "directions": 2,
+    "party_size": 3,
+    "wrong_pixels": 0
+  },
+  "live_chapter": {
+    "passed": true,
+    "phones": 4,
+    "fight": "Won at Storming the Ford",
+    "lines_said_once": 93,
+    "end_card": true,
+    "walking_after_steps": 4,
+    "tv_errors": 0
+  },
+  "content_and_scene_unchanged": true,
+  "pr_opened": false
+}

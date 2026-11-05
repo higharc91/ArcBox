@@ -1,0 +1,296 @@
+[tv-e2e 12:27:29] starting the server on http://127.0.0.1:38085
+[tv-e2e 12:27:33] starting the TV (1280x720, preset low)
+[tv-e2e 12:27:34] TV opened room HQMZ
+[tv-e2e 12:27:34] chapter: 4 bots play Chapter 1 by force
+12:27:34 Ana joined HQMZ
+12:27:34 Bo joined HQMZ
+12:27:34 Cy joined HQMZ
+12:27:34 Dee joined HQMZ
+12:27:34 Game on
+12:27:40 Ana picks fighter
+12:27:46 Bo picks cleric
+12:27:52 Cy picks rogue
+12:27:58 Dee picks wizard
+12:28:05 CHAPTER 1: ch1_mayors_request at 33,59
+12:28:17 CHAPTER Ana walks 5 steps from 26,58 to ch1_mayors_request
+12:28:19 CHAPTER Ana taps Talk: ch1_mayors_request
+12:28:19 CHAPTER ch1_mayors_request begins
+12:28:19 LINE ch1_mayor_open_1 narrator
+12:28:19 Ana skips line ch1_mayor_open_1
+12:28:20 LINE ch1_mayor_open_2 narrator
+12:28:20 Ana skips line ch1_mayor_open_2
+12:28:20 LINE ch1_mayor_open_3 Pip Ashdown
+12:28:20 Ana skips line ch1_mayor_open_3
+12:28:21 LINE ch1_mayor_open_4 Bree Tallow
+12:28:21 Ana skips line ch1_mayor_open_4
+12:28:21 LINE ch1_mayor_halden_1 Halden Varrow
+12:28:22 Ana skips line ch1_mayor_halden_1
+12:28:22 LINE ch1_mayor_halden_2 Halden Varrow
+12:28:22 Ana skips line ch1_mayor_halden_2
+12:28:22 LINE ch1_mayor_halden_3 Dagna Holt
+12:28:23 Ana skips line ch1_mayor_halden_3
+12:28:23 Ana votes goblins
+12:28:31 LINE ch1_mayor_goblins_1 Halden Varrow
+12:28:31 Ana skips line ch1_mayor_goblins_1
+12:28:31 LINE ch1_mayor_goblins_2 Dagna Holt
+12:28:32 Ana skips line ch1_mayor_goblins_2
+12:28:32 LINE ch1_mayor_goblins_3 Bree Tallow
+12:28:32 Ana skips line ch1_mayor_goblins_3
+12:28:33 LINE ch1_mayor_goblins_4 Halden Varrow
+12:28:33 Ana skips line ch1_mayor_goblins_4
+12:28:33 LINE ch1_mayor_close_1 narrator
+12:28:33 Ana skips line ch1_mayor_close_1
+12:28:34 LINE ch1_mayor_close_2 Pip Ashdown
+12:28:34 Ana skips line ch1_mayor_close_2
+12:28:34 LINE ch1_mayor_close_3 The Hooded Stranger
+12:28:34 Ana skips line ch1_mayor_close_3
+12:28:35 LINE ch1_mayor_close_4 Halden Varrow
+12:28:35 Ana skips line ch1_mayor_close_4
+12:28:35 CHAPTER ch1_mayors_request is over
+12:28:37 CHAPTER 2: ch1_the_ford_choice at 94,59
+12:28:41 CHAPTER Ana walks 109 steps from 31,57 to ch1_the_ford_choice
+12:29:22 CHAPTER Ana taps Talk: ch1_the_ford_choice
+12:29:22 CHAPTER ch1_the_ford_choice begins
+12:29:22 LINE ch1_ford_open_1 narrator
+12:29:22 Ana skips line ch1_ford_open_1
+12:29:23 LINE ch1_ford_open_2 narrator
+12:29:23 Ana skips line ch1_ford_open_2
+12:29:23 LINE ch1_ford_open_3 Halden Varrow
+12:29:23 Ana skips line ch1_ford_open_3
+12:29:24 LINE ch1_ford_open_4 Dagna Holt
+12:29:24 Ana skips line ch1_ford_open_4
+12:29:24 Ana votes why
+12:29:30 LINE ch1_ford_why_1 Halden Varrow
+12:29:30 Ana skips line ch1_ford_why_1
+12:29:30 Ana votes insight
+12:29:36 Ana picks Bo to roll insight
+12:29:36 Bo picks Bo to roll insight
+12:29:36 Cy picks Bo to roll insight
+12:29:36 Dee picks Bo to roll insight
+12:29:43 LINE ch1_ford_why_fail_1 Halden Varrow
+12:29:43 Ana skips line ch1_ford_why_fail_1
+12:29:43 LINE ch1_ford_cases_1 Dagna Holt
+12:29:44 Ana skips line ch1_ford_cases_1
+12:29:44 LINE ch1_ford_cases_2 Dagna Holt
+12:29:44 Ana skips line ch1_ford_cases_2
+12:29:44 LINE ch1_ford_cases_3 Bree Tallow
+12:29:45 Ana skips line ch1_ford_cases_3
+12:29:45 LINE ch1_ford_cases_4 Bree Tallow
+12:29:45 Ana skips line ch1_ford_cases_4
+12:29:45 LINE ch1_ford_cases_5 Halden Varrow
+12:29:46 Ana skips line ch1_ford_cases_5
+12:29:46 LINE ch1_ford_vote_1 Halden Varrow
+12:29:46 Ana skips line ch1_ford_vote_1
+12:29:46 Ana votes force
+12:29:46 Bo votes force
+12:29:46 Cy votes force
+12:29:46 Dee votes force
+12:29:50 LINE ch1_ford_force_1 Dagna Holt
+12:29:50 Ana skips line ch1_ford_force_1
+12:29:50 LINE ch1_ford_force_2 Bree Tallow
+12:29:51 Ana skips line ch1_ford_force_2
+12:29:51 LINE ch1_ford_force_3 Halden Varrow
+12:29:51 Ana skips line ch1_ford_force_3
+12:29:53 LINE ch1_dawn_open_1 narrator
+12:29:54 Ana skips line ch1_dawn_open_1
+12:29:54 LINE ch1_dawn_open_2 Mother Skarrow
+12:29:54 Ana skips line ch1_dawn_open_2
+12:29:54 LINE ch1_dawn_open_3 Mother Skarrow
+12:29:55 Ana skips line ch1_dawn_open_3
+12:29:55 LINE ch1_dawn_open_4 Dagna Holt
+12:29:55 Ana skips line ch1_dawn_open_4
+12:29:56 Cy: pursue the defeat objective Mother Skarrow
+12:29:56 Cy moves
+12:29:56 Cy ends the turn
+12:30:07 Dee moves
+12:30:07 Dee ends the turn
+12:30:07 Bo moves
+12:30:07 Bo uses Toll the Dead on Goblin
+12:30:08 Bo ends the turn
+12:30:11 Ana moves
+12:30:11 Ana ends the turn
+12:30:11 Cy moves
+12:30:12 Cy ends the turn
+12:30:24 Dee moves
+12:30:24 Dee uses Magic Missile on Mother Skarrow
+12:30:24 Dee ends the turn
+12:30:25 Bo moves
+12:30:25 Bo uses Toll the Dead on Mother Skarrow
+12:30:25 Bo ends the turn
+12:30:30 Ana moves
+12:30:30 Ana ends the turn
+12:30:30 Cy moves
+12:30:30 Cy ends the turn
+12:30:44 Dee uses Potion of Healing on Dee
+12:30:44 Dee leaves burning ground
+12:30:44 Dee ends the turn
+12:30:44 Bo moves
+12:30:45 Bo uses Guiding Bolt on Mother Skarrow
+12:30:45 Bo ends the turn
+12:30:48 Ana moves
+12:30:48 Ana ends the turn
+12:30:49 Cy moves
+12:30:49 Cy ends the turn
+12:31:03 Dee moves
+12:31:03 Dee uses Magic Missile on Goblin
+12:31:03 Dee ends the turn
+12:31:04 Bo uses Healing Word on Cy
+12:31:04 Bo uses Toll the Dead on Goblin
+12:31:04 Bo ends the turn
+12:31:08 Ana moves
+12:31:08 Ana ends the turn
+12:31:09 Cy uses Attack on Goblin
+12:31:09 Cy ends the turn
+12:31:18 Dee moves
+12:31:19 Dee ends the turn
+12:31:19 Bo uses Cure Wounds on Bo
+12:31:19 Bo leaves burning ground
+12:31:19 Bo ends the turn
+12:31:23 Ana moves
+12:31:23 Ana ends the turn
+12:31:24 Cy uses Potion of Healing on Cy
+12:31:24 Cy leaves burning ground
+12:31:24 Cy uses Attack on Mother Skarrow
+12:31:24 Cy ends the turn
+12:31:34 Dee moves
+12:31:34 Dee ends the turn
+12:31:34 Bo uses Healing Word on Cy
+12:31:34 Bo uses Guiding Bolt on Mother Skarrow
+12:31:35 Bo ends the turn
+12:31:36 Ana moves
+12:31:36 Ana ends the turn
+12:31:37 Cy uses Attack on Mother Skarrow
+12:31:48 Won at Storming the Ford: Ana +300 XP, Bo +300 XP, Cy +300 XP, Dee +300 XP
+12:31:50 LINE ch1_bridge_cost_open_1 narrator
+12:31:50 Ana skips line ch1_bridge_cost_open_1
+12:31:51 LINE ch1_bridge_cost_open_2 Mother Skarrow
+12:31:51 Ana skips line ch1_bridge_cost_open_2
+12:31:51 LINE ch1_bridge_cost_open_3 Mother Skarrow
+12:31:51 Ana skips line ch1_bridge_cost_open_3
+12:31:52 Ana votes song
+12:31:59 LINE ch1_bridge_cost_song_1 Mother Skarrow
+12:31:59 Ana skips line ch1_bridge_cost_song_1
+12:31:59 LINE ch1_bridge_cost_song_2 narrator
+12:31:59 Ana skips line ch1_bridge_cost_song_2
+12:32:00 LINE ch1_bridge_cost_over_1 Dagna Holt
+12:32:00 Ana skips line ch1_bridge_cost_over_1
+12:32:00 LINE ch1_bridge_cost_over_2 Dagna Holt
+12:32:00 Ana skips line ch1_bridge_cost_over_2
+12:32:01 CHAPTER ch1_the_ford_choice is over
+12:32:03 CHAPTER 3: ch1_old_maud at 132,93
+12:32:07 CHAPTER Ana walks 45 steps from 95,57 to ch1_old_maud
+12:32:07 CHAPTER step 1 (e) went to 111,54, not 96,56: routing again
+12:32:11 CHAPTER Ana walks 37 steps from 111,54 to ch1_old_maud (route 2)
+12:32:26 CHAPTER Ana taps Look around: ch1_old_maud
+12:32:26 CHAPTER ch1_old_maud begins
+12:32:26 LINE ch1_maud_open_1 narrator
+12:32:26 Ana skips line ch1_maud_open_1
+12:32:26 LINE ch1_maud_open_2 narrator
+12:32:26 Ana skips line ch1_maud_open_2
+12:32:27 LINE ch1_maud_open_3 Old Maud
+12:32:27 Ana skips line ch1_maud_open_3
+12:32:27 Ana votes fell
+12:32:33 LINE ch1_maud_fell_1 Old Maud
+12:32:33 Ana skips line ch1_maud_fell_1
+12:32:34 LINE ch1_maud_fell_2 Old Maud
+12:32:34 Ana skips line ch1_maud_fell_2
+12:32:34 LINE ch1_maud_fell_3 Old Maud
+12:32:34 Ana skips line ch1_maud_fell_3
+12:32:35 LINE ch1_maud_fell_4 Old Maud
+12:32:35 Ana skips line ch1_maud_fell_4
+12:32:35 LINE ch1_maud_fell_5 narrator
+12:32:35 Ana skips line ch1_maud_fell_5
+12:32:36 LINE ch1_maud_fell_6 Old Maud
+12:32:36 Ana skips line ch1_maud_fell_6
+12:32:36 LINE ch1_maud_fell_7 The Hooded Stranger
+12:32:36 Ana skips line ch1_maud_fell_7
+12:32:37 Ana votes who
+12:32:43 LINE ch1_maud_who_1 Old Maud
+12:32:43 Ana skips line ch1_maud_who_1
+12:32:43 LINE ch1_maud_bye_1 Old Maud
+12:32:44 Ana skips line ch1_maud_bye_1
+12:32:44 LINE ch1_maud_bye_2 Old Maud
+12:32:44 Ana skips line ch1_maud_bye_2
+12:32:44 CHAPTER ch1_old_maud is over
+12:32:46 CHAPTER 4: ch1_the_ember at 99,99
+12:32:50 CHAPTER Ana walks 74 steps from 132,91 to ch1_the_ember
+12:33:26 CHAPTER Ana taps Talk: ch1_the_ember
+12:33:26 CHAPTER ch1_the_ember begins
+12:33:26 LINE ch1_docks_open_1 narrator
+12:33:26 Ana skips line ch1_docks_open_1
+12:33:26 LINE ch1_docks_open_2 Pip Ashdown
+12:33:26 Ana skips line ch1_docks_open_2
+12:33:27 LINE ch1_docks_open_3 narrator
+12:33:27 Ana skips line ch1_docks_open_3
+12:33:27 Ana votes cut
+12:33:35 LINE ch1_docks_rook_1 Rook
+12:33:35 Ana skips line ch1_docks_rook_1
+12:33:35 LINE ch1_docks_rook_2 narrator
+12:33:36 Ana skips line ch1_docks_rook_2
+12:33:36 LINE ch1_docks_rook_3 Rook
+12:33:36 Ana skips line ch1_docks_rook_3
+12:33:36 Ana votes killing
+12:33:46 LINE ch1_docks_killing_1 Rook
+12:33:46 Ana skips line ch1_docks_killing_1
+12:33:46 LINE ch1_docks_killing_2 Rook
+12:33:46 Ana skips line ch1_docks_killing_2
+12:33:47 LINE ch1_docks_killing_3 Rook
+12:33:47 Ana skips line ch1_docks_killing_3
+12:33:47 LINE ch1_docks_close_1 Pip Ashdown
+12:33:47 Ana skips line ch1_docks_close_1
+12:33:48 LINE ch1_docks_close_2 Pip Ashdown
+12:33:48 Ana skips line ch1_docks_close_2
+12:33:50 LINE ch1_kindler_open_1 narrator
+12:33:50 Ana skips line ch1_kindler_open_1
+12:33:51 LINE ch1_kindler_open_2 Maren Sorrel
+12:33:51 Ana skips line ch1_kindler_open_2
+12:33:51 LINE ch1_kindler_open_3 Maren Sorrel
+12:33:51 Ana skips line ch1_kindler_open_3
+12:33:52 LINE ch1_kindler_open_4 Mother Aubrine
+12:33:52 Ana skips line ch1_kindler_open_4
+12:33:52 LINE ch1_kindler_open_5 Maren Sorrel
+12:33:52 Ana skips line ch1_kindler_open_5
+12:33:53 LINE ch1_kindler_open_6 narrator
+12:33:53 Ana skips line ch1_kindler_open_6
+12:33:53 Ana votes slain
+12:34:01 LINE ch1_kindler_slain_1 Maren Sorrel
+12:34:01 Ana skips line ch1_kindler_slain_1
+12:34:01 LINE ch1_kindler_pitch_1 Maren Sorrel
+12:34:02 Ana skips line ch1_kindler_pitch_1
+12:34:02 Ana votes careful
+12:34:07 LINE ch1_kindler_done_1 narrator
+12:34:07 Ana skips line ch1_kindler_done_1
+12:34:09 LINE ch1_four_more_open_1 narrator
+12:34:10 Ana skips line ch1_four_more_open_1
+12:34:10 LINE ch1_four_more_open_2 The Hooded Stranger
+12:34:10 Ana skips line ch1_four_more_open_2
+12:34:10 Ana votes who
+12:34:17 LINE ch1_four_more_who_1 The Hooded Stranger
+12:34:17 Ana skips line ch1_four_more_who_1
+12:34:18 LINE ch1_four_more_where_1 The Hooded Stranger
+12:34:18 Ana skips line ch1_four_more_where_1
+12:34:18 LINE ch1_four_more_where_2 The Hooded Stranger
+12:34:18 Ana skips line ch1_four_more_where_2
+12:34:19 LINE ch1_four_more_where_4 The Hooded Stranger
+12:34:19 Ana skips line ch1_four_more_where_4
+12:34:19 LINE ch1_four_more_where_3 narrator
+12:34:19 Ana skips line ch1_four_more_where_3
+12:34:20 CHAPTER ch1_the_ember is over
+12:34:22 CHAPTER the card: Chapter I · The Bridge at the Ford
+12:34:34 CHAPTER walking on: 4 steps w
+12:34:34 Session over: The party is level 1; 1 battles won.
+[tv-e2e 12:34:34] letting the TV finish its shots (2 s)
+[tv-e2e 12:34:36] shots stopped
+[tv-e2e 12:34:37] TV stopped
+[tv-e2e 12:34:37] Xvfb stopped
+[tv-e2e 12:34:38] server stopped
+[tv-e2e 12:34:38] chapter: scenes: ch1_mayor (16), ch1_ford (18), ch1_dawn (4), ch1_bridge_cost (8), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 12:34:38] chapter: lines: 93, said 93
+[tv-e2e 12:34:38] chapter: the fight: TACTICS screen tactics-battle-river_crossing (line 574)
+[tv-e2e 12:34:38] chapter: the card: Chapter I · The Bridge at the Ford (line 1670)
+[tv-e2e 12:34:38] chapter: the fights: Won at Storming the Ford
+[tv-e2e 12:34:38] chapter: 4 walks to a "!", 1 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 12:34:38] a shot of the chapter-card: /workspace/ow08/chapter-force/chapter/24-chapter-card.png
+[tv-e2e 12:34:38] a shot of the walking-after: /workspace/ow08/chapter-force/chapter/25-walking-after.png
+[tv-e2e 12:34:38] chapter: 25 shots in /workspace/ow08/chapter-force/chapter
+[tv-e2e 12:34:38] OK
