@@ -2,10 +2,10 @@
   "character": "Mother Skarrow",
   "characterId": "mother_skarrow",
   "presetReference": "goblin_shaman",
-  "stage": "appearance_candidate_pending_owner_review",
+  "stage": "completed_review_pending_owner_full_set_tv_approval",
   "date": "2026-11-05",
   "tool": "image_gen.imagegen",
-  "imageToolCalls": 1,
+  "imageToolCalls": 11,
   "candidate": "candidate-1-export.png",
   "candidateSha256": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6",
   "reviewPreview": "candidate-1-preview.png",
@@ -14,23 +14,27 @@
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
   "productionInstalled": false,
-  "animationApproval": "pending_appearance_approval",
+  "animationApproval": "motions_authorized_completed_set_pending",
   "fullSetTvApproval": "pending",
   "speciesScale": {
     "proposedBodyNative": 50,
     "proposedBodyWorld": 25,
     "humanReferenceNative": 72,
     "humanReferenceWorld": 36,
-    "validated": false
+    "validated": true,
+    "idleBodyWorldRange": [
+      24.5,
+      25.5
+    ]
   },
   "staffHand": "anatomical_left",
   "reviewNotes": [
-    "Existing owner-approved concept reused, not regenerated; old goblin chief with repaired hide/wool, grey hair and ordinary staff.",
-    "Eight complete standing cells. Native grid/palette/body scale/anchors, ear/boot/staff contact and handedness QA remain before motions.",
-    "Appearance approval before animation/portraits; finished-set/TV approval remains separate.",
-    "Owner-approved Kore recast installed across all67 lines; town2 sample now uses the installed number-clarified clip.",
-    "Named Mother Skarrow only; generic goblin refresh stays outside scope.",
-    "Before later integration, audit named-only sprite selection and battle attack/cast/hurt/down playback; preserve generic goblin combat art and rules/contracts."
+    "Appearance approved: she looks good, do the animations.",
+    "All eight directions authored without mirroring; idle/walk/talk/quarterstaff attack/cast/hurt/down. Compact goblin50-native body, staff in anatomicalLEFT hand.",
+    "Six40x40 portraits and voiced31.6s review include approved installed Kore town2.",
+    "Private review aliases only: Mother overworld variant +named battle sprite +named lore portrait; generic shaman and Skarrow Stormcaller unchanged.",
+    "Four-party native texture peaks340.48MiB /192.37MiB below512. Software Vulkan memory evidence, not GPU timing.",
+    "Production pack inventory unchanged. Full-set/TV approval required before artwork installation; installer rejects before any production write."
   ],
   "voiceReview": {
     "status": "owner_approved_recast_installed",
@@ -48,5 +52,46 @@
     "voice": "Kore",
     "pitch": 0,
     "newCU": 218
+  },
+  "ownerAppearanceApproval": {
+    "quote": "she looks good, do the animations",
+    "date": "2026-11-05",
+    "scope": "Approve existing Mother Skarrow appearance; authorize animations and portraits. Full-set/TV approval remains separate."
+  },
+  "completedSet": {
+    "status": "pending_owner_full_set_tv_approval",
+    "date": "2026-11-05",
+    "sha256": {
+      "review_mother_skarrow.png": "f25cdd72d781c9e3785e5cd6423ec3e983b7a064abb6086c70fc2758f39d033d",
+      "review-sprite.json": "50b9666d169ff748901129118028440f4c775301611c07905a4c6d157c869790",
+      "palette.json": "14f3dfb6aeccb01ba764882d2b39b13a552ea238471b711e68aa2c89df674965",
+      "atlas-validation.json": "90df4cf90491b0d991320aab50dd064502359e832ea548857a8b5038e4c3fd66",
+      "portraits-validation.json": "bd75a80c31ad522c694c7ae83855dc6e9d4ad2c8fc75850b9a84c5140f14f5b4",
+      "review-validation.json": "aaa3544b92855cfe4c165cd0dbddc0d51036b6fe879fddbe7526995ae903f8e1",
+      "mother_skarrow-directions-review.png": "20dfe576e1e9a90ad2419e08ca625cc1a357394abe2c5c5ea67be6d22eca58eb",
+      "mother_skarrow-closeup-review.gif": "e62c8f8508e1b47244d121e73177d48679de8caa1e18d0ba553b0facb795bfa1",
+      "mother_skarrow-finished-review.mp4": "9362e86d299408f6de8d1dd71edcd9e7335589a86048062b96d8ff941ad80111",
+      "mother_skarrow-portraits-review.png": "9e5960a600ba66e03d5021cc52170d7d1bd57e6e9a273238f3ad6c8bb8ae704b",
+      "voice-sample.mp3": "5bbfaca8352fcbb946bd6e4d7cf4d2b377b7e3900aa179297faf57ee9e40c028",
+      "voice-sample.json": "1625b8ed50585e75304730d5d7a9a687276f11ee36e0431a6fb48e35b7954647",
+      "mother_skarrow-eight-direction-idle.gif": "0f88755ff6a9a8797988e87c81397233c540b839bf129402ad7c542296379b0d",
+      "mother_skarrow-eight-direction-walk.gif": "ad77def4e2d03355f75ce1dfcb1bc310d635ac9f477fd3ecd21790621224ee32",
+      "mother_skarrow-eight-direction-talk.gif": "ec9b15fafb434ee9dce7e6eeec42e427ada54ed89c32aa3d908084fe07ea5aab",
+      "mother_skarrow-eight-direction-attack.gif": "03528579a8e3bdc75a4d1f2c93b3412384ff3bfa0116f501d9fdfe84f2df5b44",
+      "mother_skarrow-eight-direction-cast.gif": "889c5321097898bd079c1de46816ce3ac5613766976e133fe8888e99e3a51967",
+      "mother_skarrow-eight-direction-hurt.gif": "a7a21f60fe5a69bc318478453d30e1a6445d75d989d34e2fd7cf2c771647f32d",
+      "mother_skarrow-eight-direction-down.gif": "62b265865da4e749287c23f79bf7e596fed084e7b155c80648c4526ac09e807a",
+      "portraits/mother_skarrow_idle.png": "546a0e9a731147cbe072ffa98acc51a06f180d618a8bfc481dac93179923dab0",
+      "portraits/mother_skarrow_hurt.png": "8bff9c21765337e16b9cc990025481b216f0d40befd640a1d1e36f99846973c6",
+      "portraits/mother_skarrow_happy.png": "babee0013280f9d45ac9ea7ae25585f3d97add5bc64e3d6e92b2459b5ec9ba46",
+      "portraits/mother_skarrow_angry.png": "8c5a65d01916eef29d6bdfd1b4c3617edef419b61ff8ef09c5860473c13a0b41",
+      "portraits/mother_skarrow_sad.png": "54f900eb7e3fca85429efec11b311a879dc58a0ed7921338b5c4aa73ae4c52ac",
+      "portraits/mother_skarrow_surprised.png": "efad30d6ef94863ab9af603e578eaaa77483ecf4bbc6381bd506773c03800f4e"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/ashen_ford-shots/world-mother-skarrow.png",
+      "sha256": "baf5b07956be2e70581fd73afcd6d3a3a71483aa36e5c23d0c1c964ab3f22e4a"
+    },
+    "productionInstalled": false
   }
 }

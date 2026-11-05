@@ -1,5 +1,5 @@
 {
-  "imageToolCalls": 1,
+  "imageToolCalls": 11,
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
@@ -14,11 +14,125 @@
         "tools/tactics-assets/concepts/townsfolk/generated/character_mother_skarrow.png": "47c0116de6ca9323a531146f1782ac3679fc1cea6fcac352c66609126a858ccd",
         "tools/tactics-assets/imagegen/townsfolk/rook/rotations/south.png": "435a69161cc43a8ee5bf114de247103dcaaa7f1174f512dc017348dcba3a3d54"
       }
+    },
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-export.png",
+      "originalPath": "/workspace/generated_images/exec-6e2f4695-1030-4d23-85ad-091038869bdb.png",
+      "requestSha256": "b41817643ae204fd2bad7e7349a60d8b9dedcd1b07c52f89661b03acff948435",
+      "outputSha256": "1adae2fe880dd7ec95dbf46898a3490a7ff7da0e2c4ea25cc634d8ccfb555447",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/south.png": "63029933bbdd39bc6c9a40215ee75f6c7b4323483c260402140951f150040e1d",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-export.png",
+      "originalPath": "/workspace/generated_images/exec-6018fbb8-a7b8-448b-bb41-d7d98582f9fe.png",
+      "requestSha256": "39a28fd0efdd4771221e1c5f346e8fd0818071f2ba72e7d87d080c05a9719f75",
+      "outputSha256": "1d7ab5f9586eee08fb775573b895407ff31e0fbca09e74ef17215919dc5cc980",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-95c52d23-5f36-4626-b88c-ec011c988207.png",
+      "requestSha256": "09edad365400d5314e7e48f3055af8e8a2587bae7a3e37083f48e6e29028693e",
+      "outputSha256": "78caa903dccaa6cb08de5e5f95c841c00a1e0191feb3ab0a85e9cfc3bc69ed7b",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/south-west.png": "fc03840442c269b4b7f984d5a6ea8b91499457995e661d39a51f56fb82d3073d",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-export.png",
+      "originalPath": "/workspace/generated_images/exec-f8bde289-9bbd-4bda-a3cf-18e141ef3d03.png",
+      "requestSha256": "ad89084c843f800b1d503ad2de0919b1436e854d2813e885dc262e86fb2a4033",
+      "outputSha256": "a10227816f61ca268709c3c8cd09d7355d1a4fc6a6c0cc8fcc94038945dfe3b2",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/west.png": "f4caa0445432fec26d3a98524b0cbb69f0ef35a0452bac8624204ac7dbca41c4",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-6eed6a17-a327-46f3-a68d-00a9979c1dae.png",
+      "requestSha256": "27c7c1dc51cd5a285ee7a02c0ceda478c13d645f0774716cadf93c02a2f69bfa",
+      "outputSha256": "17179f96ab3e94d867767c71ae044b7b0ca59fdd5d7f8e9e830b81e3995e6547",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/north-west.png": "da706285c828033b98aa9a42c74a4161f6bfc011a4859e468334ed316e0313b8",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-export.png",
+      "originalPath": "/workspace/generated_images/exec-f974be9c-fbf9-44ca-9c92-73bf2ab35322.png",
+      "requestSha256": "8d34175307058c72979bea4949ca13c1977c208a4aa417d508730a005517192e",
+      "outputSha256": "4143fcb56d8df07e6ee6a6ed23a6b0dba0b944d4eca52e598ffb02cd351603f2",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/north.png": "023ce0cd9ff4556719246549ba97af861d567d9a5bed523a8520cb0d650339d4",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-aac0d5cc-eaf2-4a12-b00f-a3e682d0d38e.png",
+      "requestSha256": "845c0e3688b80e0871d98ee77e290a45118afb28e6c925f742d4319407a5a610",
+      "outputSha256": "9e60e397241e6b77f220eef23f5fd3971aac13b9dd9ace8e01eb24ca8c53d117",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/north-east.png": "1e9c8dec7dc5416552e6e822e9b550ca3be011521d97dae3a9a66ed9b776b47a",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-export.png",
+      "originalPath": "/workspace/generated_images/exec-6242626e-0c38-4d4f-9124-bfd89337be05.png",
+      "requestSha256": "461e6f9f774479fb8b9542356c86be7a4c49ae8461a3bd47253ebae32f2d7148",
+      "outputSha256": "a35e58e6a76546964f66715ac7a3c74b71d5ba0fab696a2ebabd7a2bfe64743d",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/east.png": "be3b6621d3cc40aa13a5d542a5d5f967b9df6b76cd27201f1ce07102fce59194",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-bb0dfcfa-8f10-4827-9f41-ce6496679de7.png",
+      "requestSha256": "ee897e88a85c6a3a18494ba9e39d4c4d41c69adce9147eb8f68832ffdfa49e57",
+      "outputSha256": "0492346eb8c839842f4a87627001453d93a48216d38c73e6f10fbf75b9a6fe38",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/guides/south-east.png": "cf4b438222f2ce968167a8106413782235ef769e7ca7682435d678f34459906f",
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/candidate-1-export.png": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6"
+      }
+    },
+    {
+      "request": "directional/west-correction-request.json",
+      "output": "directional/west-corrected-export.png",
+      "originalPath": "/workspace/generated_images/exec-00e8d201-dfdc-4725-b7ac-60c116996d8b.png",
+      "requestSha256": "f54ae10f6d9884174333355d34abe8089284225151c605794196ef833b9ce002",
+      "outputSha256": "c6732728ba4d0eb2b735105927546a1100ecae6b46722c9beb71943b443c6774",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/west-export.png": "a10227816f61ca268709c3c8cd09d7355d1a4fc6a6c0cc8fcc94038945dfe3b2"
+      }
     }
   ],
   "runtimePreview": {
     "script": "build-appearance.cjs",
     "output": "candidate-1-preview.png",
     "operation": "Remove magenta key, preserve non-key RGB, binary alpha, no redraw/rescale/recenter/mirror."
-  }
+  },
+  "completionImageToolCalls": 10,
+  "notes": [
+    "Existing approved concept/appearance/voice reused. Eight directional6x6 sheets +six-expression portrait sheet +one west staff repair.",
+    "Opaque magenta exports retained; deterministic keying/connected-component frame extraction/shared palettes/nearest import. No PixelLab or speech calls, no purchases.",
+    "Image-tool billing is not exposed; no credit-cost estimate invented."
+  ]
 }

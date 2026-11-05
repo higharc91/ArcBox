@@ -1,14 +1,17 @@
-# Mother Skarrow — appearance draft and approved production voice
+# Mother Skarrow — finished artwork awaiting full-set/TV approval
 
-Mother Skarrow’s first eight-view pixel appearance translates her already approved
-concept: elderly goblin clan chief, short adult goblin proportions, weathered
-olive-green face/long ears, greying braids, repaired hide/wool and LEFT-hand staff.
-Appearance approval remains pending before motion/portraits; finished-set/TV
-approval is separate. Old Maud’s appearance is approved and completion art queued.
+Appearance approved: “she looks good, do the animations”. All eight directions
+and288 frames are complete: idle, walk, talk, staff attack, cast, hurt and down.
+Six expression portraits; short50-native-pixel goblin body and LEFT-hand staff.
+Artwork remains in an isolated review pack until the separate finished-set/TV
+approval. Generic goblin shamans and Skarrow Stormcaller are unchanged.
 
-![Appearance review](candidate-1-preview.png)
+[Watch the voiced review](mother_skarrow-finished-review.mp4) ·
+[Close-up animation](mother_skarrow-closeup-review.gif) ·
+[Portraits](mother_skarrow-portraits-review.png) ·
+[Approved voice](voice-sample.mp3)
 
-[Hear the approved production voice](voice-sample.mp3) · [Three-line voice reel](voice-recast/approved-voice-reel.mp3)
+![Eight directions](mother_skarrow-directions-review.png)
 
 The owner approved Kore: “sounds good, use it”. All67 Mother Skarrow lines now use
 Kore at pitch0 without a filter, from64 selected sources. Same canonical captions,
@@ -41,14 +44,9 @@ is in voice-recast/batch/cost-summary.json; no image-tool price inferred.
 No image generation during recast. The single appearance image-tool call and
 original concept/source/request/input/output hashes remain preserved.
 
-Rebuild the appearance from repo root (npm dependencies under parent townsfolk):
 
-    node tools/tactics-assets/imagegen/townsfolk/mother-skarrow/build-appearance.cjs
-
-For offline voice import/validation, see voice-recast/batch/README.md. Native
-art-grid/palette/goblin scale/anchors and staff/boot/ear/handedness QA remain before
-motion work. Proposed goblin body50 native /25 world versus humans72/36 is subject
-to native/TV validation. Audit named-only art aliases and required battle playback
-before art integration; generic goblin art/contracts stay unchanged.
-
-Voice report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-voice-recast/report.md.
+Offline build/validation/native commands and results:
+[Art report](../../../../../docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-imagegen/report.md).
+`install-approved.cjs` guards exact full-set/TV approval before production writes.
+All requests/raw exports,11 generation receipts, native captures, shared palettes
+and normalized frames are retained. No PixelLab or new speech generation.

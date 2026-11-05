@@ -17,7 +17,9 @@
     "build-celandine": "node celandine-marrowby/build-review.cjs && node celandine-marrowby/build-portraits.cjs && node celandine-marrowby/build-closeup.cjs",
     "verify-celandine": "node celandine-marrowby/verify-review.cjs && node celandine-marrowby/verify-receipts.cjs",
     "build-rook": "node rook/build-review.cjs && node rook/build-portraits.cjs && node rook/build-closeup.cjs",
-    "verify-rook": "node rook/verify-review.cjs && node rook/verify-receipts.cjs"
+    "verify-rook": "node rook/verify-review.cjs && node rook/verify-receipts.cjs",
+    "build-mother-skarrow": "node mother-skarrow/build-review.cjs && node mother-skarrow/build-portraits.cjs && node mother-skarrow/build-closeup.cjs",
+    "verify-mother-skarrow": "node mother-skarrow/verify-review.cjs && node mother-skarrow/verify-receipts.cjs"
   },
   "dependencies": {
     "gifenc": "1.0.3",
