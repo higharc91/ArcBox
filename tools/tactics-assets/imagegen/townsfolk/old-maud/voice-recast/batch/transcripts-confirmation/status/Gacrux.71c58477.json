@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_wPNrLKWHpmStENaMSg8wJd5T",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_6T9JAVuJxZw1LVbesa8g9Zg4",
+        "language": "en",
+        "modelSize": "medium.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_g6xQGBdgEVpiKPPLaRpsBJUM"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 7.68,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 7.08,
+            "start": 0,
+            "text": " Never touched a shard not once that's why they're still all of me",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:38:21.588Z",
+    "updatedAt": "2026-11-05T00:38:31.853Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:38:21.588Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:38:21.699Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:38:31.853Z"
+      }
+    ],
+    "progress": 1
+  }
+}

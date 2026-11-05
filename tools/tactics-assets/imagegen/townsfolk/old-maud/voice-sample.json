@@ -2,9 +2,10 @@
   "character": "old_maud",
   "barkId": "bark_old_maud_town_1",
   "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
-  "sourcePath": "content/tactics/base/lore/audio/bark_old_maud_town_1.ab5a6e1e.ogg",
-  "sourceSha256": "58c8855b5d7667dcd94185ea2cf33316331b26c2c79e0d21952a65b31617bb62",
+  "sourcePath": "content/tactics/base/lore/audio/bark_old_maud_town_1.7c28e676.ogg",
+  "sourceSha256": "9bddaa75d32e98ae737c6ab3c6074d2252fcfdba88d875b812dcd64dcd1109b6",
   "reviewFile": "voice-sample.mp3",
-  "reviewSha256": "ee9889254750816a9de309a516e5a95ddd455bde57695eb43e44e94821be731b",
-  "operation": "Existing recording transcoded to MP3 for browser playback; no new speech generation."
+  "reviewSha256": "acca375b2219c6ce5926c8717d9683d7088fa09779fa37a2ff96078fc1dfddd8",
+  "operation": "New owner-approved Gacrux ancient-voice recast, rendered with approved direction, no post pitch/filter.",
+  "provenance": "voice-recast/batch/"
 }

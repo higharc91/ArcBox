@@ -17,21 +17,23 @@
   "fullSetTvApproval": "pending",
   "reviewNotes": [
     "Existing approved concept reused, not regenerated. Eight full planted facings with complete hood/robe/boots and wooden walking stick.",
-    "Existing recorded town bark included; no speech generation.",
+    "Owner-approved ancient-voice town recording included; all24 Maud lines recast. See voiceReview.",
     "Raw tool images retained; appearance preview applies the normal native alpha threshold and clears transparent RGB.",
     "Native grid/palette/body height/anchors/staff grip-side and staff/boot contact QA remain before motions.",
     "Appearance approval before motions/portraits; final full-set/TV approval separate."
   ],
   "voiceReview": {
-    "status": "replacement_audition_pending_owner_review",
+    "status": "owner_approved_recast_installed",
     "reason": "Owner says her voice sounds too young. Maud is over100 and should sound ancient, papery, unhurried and lucid.",
     "priorPreset": "Achernar",
     "priorPitch": -1,
     "replacementLineCount": 24,
-    "productionVoiceChanged": false,
-    "sample": "voice-recast/audition-gacrux.mp3",
+    "productionVoiceChanged": true,
+    "sample": "voice-sample.mp3",
     "voice": "Gacrux",
-    "paidCU": 5,
-    "plan": "voice-recast-plan.json"
+    "paidCU": 274,
+    "plan": "voice-recast-plan.json",
+    "ownerApproval": "perfect, let's go with that",
+    "validation": "voice-recast/batch/validation.json"
   }
 }

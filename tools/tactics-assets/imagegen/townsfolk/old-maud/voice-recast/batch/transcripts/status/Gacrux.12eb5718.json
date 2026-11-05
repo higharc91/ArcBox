@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_hMUo1JRDKzaWHpQ2gpMJ7XiL",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_RZnkuEtb1JkSZDVcUD81VGDC",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_xY76JGZFyuM1Xg7RioyRhKVj"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 9.76,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 7.94,
+            "start": 0,
+            "text": " I told you a name once, you wrote it down, I watched you.",
+            "words": null
+          },
+          {
+            "end": 9.42,
+            "start": 7.94,
+            "text": " Kept it safe, have you?",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:55.299Z",
+    "updatedAt": "2026-11-05T00:36:58.357Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:55.299Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:55.398Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:58.357Z"
+      }
+    ],
+    "progress": 1
+  }
+}

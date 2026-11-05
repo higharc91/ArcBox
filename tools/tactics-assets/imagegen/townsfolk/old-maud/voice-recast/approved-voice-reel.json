@@ -1,0 +1,18 @@
+{
+  "operation": "Concatenation of installed clips with0.6-second pauses; no speech generation.",
+  "lines": [
+    {
+      "line": "bark_old_maud_town_1",
+      "file": "bark_old_maud_town_1.7c28e676.ogg"
+    },
+    {
+      "line": "ch1_maud_who_1",
+      "file": "ch1_maud_who_1.640e18bf.ogg"
+    },
+    {
+      "line": "ashmaw_maud_after",
+      "file": "ashmaw_maud_after.4189c88e.ogg"
+    }
+  ],
+  "sha256": "49c25c97c8978c79d4eb145f6086d6ebb2db9ffa67f7e7b1ae46250b03cefb26"
+}

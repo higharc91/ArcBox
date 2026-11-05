@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_pWFFjm2xSgQc7dqCjBFnaZTY",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_72euxjgJgHuDUrE4xrJ3jEjj",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_qLJLKFb7qGbsHJvfu3WckWAH"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 7.56,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 5,
+            "start": 0,
+            "text": " Oh, you've the right sort of face for questions.",
+            "words": null
+          },
+          {
+            "end": 7,
+            "start": 5,
+            "text": " Ask me a better one.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:39.981Z",
+    "updatedAt": "2026-11-05T00:36:53.230Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:39.981Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:40.083Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:53.230Z"
+      }
+    ],
+    "progress": 1
+  }
+}

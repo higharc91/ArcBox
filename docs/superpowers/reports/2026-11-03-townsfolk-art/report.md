@@ -349,3 +349,36 @@ PixelLab spend, rules/balance/phone changes.
 Report: docs/superpowers/reports/2026-11-03-townsfolk-art/maud-voice-recast/report.md.
 Rebase before pushing townsfolk-art; no PR, merge or issue closure. Earlier
 existing-voice draft notes are historical.
+
+
+## Latest checkpoint — Maud approved ancient voice installed
+
+The owner approved the Gacrux audition: “perfect, let's go with that”. All24
+Maud lines are now installed at pitch0 without a filter; exact approved town
+source reused and normal voice-sample.mp3 updated. Three-line listening reel:
+tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/approved-voice-reel.mp3.
+Captions, other speakers, rules, balance, phone contracts and authored-recordings-
+only playback unchanged. Old24 clips and six rejected new paid takes preserved.
+
+Long direction narration and three lexical substitutions were found by ASR and
+repaired; all24 final captions checked, accepting only documented leading ah/oh,
+punctuation and neighbour spelling differences. Exact request overrides guarded
+against caption/cast/delivery edits; sources/receipts/quotes/provenance and offline
+reimport/validation tools retained in old-maud/voice-recast/batch/.24 source/clip
+checks, full1443/1443 coverage,0 pitch/brightness flags,23 tooling +71 logic +52
+story/bark presentation tests pass. Both Debug test-project builds0warnings/errors.
+Old11-second chapter maximum snapshot replaced with existing30-second budget;
+independent exact decoder and per-line bounds retained.
+
+Cost274CU including previous5CU audition; continuation269CU.150 speechCU and124
+transcriptionCU across61 unique jobs; no purchases/upgrades, no PixelLab calls.
+Cold pack210288327bytes /4953files, inventory SHA256
+87870feadf6bf4355fc9187ff04997e7fa505215927bc29f938ef0a5424f96c4.
+No textures changed; last native4-party peaks328.99 /192.37MiB below512, not rerun.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/maud-voice-recast/report.md.
+
+**Maud artwork appearance remains pending approval** before motions/portraits;
+full-set/TV approval is separate. Voice approval does not approve her artwork.
+Reuse the existing appearance/concept; no regeneration of completed assets.
+Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
+Earlier pending-voice notes are historical.

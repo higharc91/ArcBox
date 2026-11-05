@@ -1,18 +1,30 @@
-# Old Maud older-voice audition
+# Old Maud approved ancient-voice recast
 
-The owner rejected the existing Achernar −1 recording as too young. This new
-Gacrux take requests an ancient105-year-old woman: dry, papery, lightly quavering
-and unhurried, with warmth and perfect lucidity. No post pitch shift or filter.
-The same unchanged town caption is used for direct comparison.
+Owner approval: “perfect, let's go with that”. All24 Maud lines now use Gacrux
+at pitch0 without a filter. The approved town audition is reused byte-for-byte;
+23 selected new renders cover the rest. Captions and recordings-only playback
+remain unchanged. Artwork approval remains separate and pending.
 
-Audition: audition-gacrux.mp3. Raw source: audition-gacrux-source.wav.
-Exact request, live model schema, quote, sanitized cap check, paid job/asset
-receipt, source hashes and mechanical validation are retained here. Quoted5 CU;
-job billing5 CU. No credits purchased. No member/project cap applied; this does
-not establish the remaining team-plan balance.
+Hear ../voice-sample.mp3 or approved-voice-reel.mp3 (three installed clips).
+The original audition/source/request/5CU receipt remain here. Rejected Achernar
+sample archived as rejected-achernar-voice-sample.*. All old24 Ogg files remain.
 
-Owner listening approval pending. Production cast, all24 Maud recordings,
-captions and normal old voice sample are unchanged. Recast all24 consistently
-and update the normal draft sample only after approval. Gacrux is shared with
-Dagna/player grim.high; assess the distinct old/papery performance when listening.
-Artwork gates remain separate. No art was regenerated in this voice checkpoint.
+batch/ contains live quotes/cap checks, selected WAVs/receipts, exact planned
+requests, six rejected takes with provenance, paid transcript checks and validation.
+Long instructions were spoken in three takes; three other takes were replaced
+for word substitutions reported by two ASR models. Short vocal cues repaired them.
+No rejected take is active. All selected words match after punctuation/spelling
+normalisation and explicitly listed leading ah/oh interjections. ASR cannot judge
+acting quality. The owner approved the audition's performance.
+
+Total274CU:150 speech including previous5CU audition;124 transcription.
+Continuation269CU. Final consumption5820 vs5551 before; no purchases/upgrades.
+Member/project have no cap; this is not a remaining-credit balance.
+
+Offline commands from repo root (no service calls or spend):
+
+    python3 tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/import-recordings.py
+    python3 tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/validate-recordings.py
+
+23 Python tooling tests,71 logic and52 story/bark presentation tests pass.
+See docs/superpowers/reports/2026-11-03-townsfolk-art/maud-voice-recast/report.md.

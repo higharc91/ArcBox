@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_EwVRxS9HjfPLmpUrfY6CpBSm",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_tN3bLoAk9kNwFWW7tLeQhWwS",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_fxXsoHxmyXFh4jsQTCoPrciH"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 15,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 11.24,
+            "start": 0.08,
+            "text": " That one, same hood, same face under it, a hundred years and not one day older.",
+            "words": null
+          },
+          {
+            "end": 14.48,
+            "start": 11.24,
+            "text": " I was seven, dearie, not blind.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:00.580Z",
+    "updatedAt": "2026-11-05T00:37:02.376Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:00.580Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:00.675Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:02.376Z"
+      }
+    ],
+    "progress": 1
+  }
+}

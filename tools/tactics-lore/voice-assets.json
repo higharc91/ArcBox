@@ -12943,6 +12943,704 @@
       "replacesFiles": [
         "ashmaw_done.74badb62.ogg"
       ]
+    },
+    {
+      "reusedApprovedAudition": true,
+      "originalAuditionCU": 5,
+      "raw": "Gacrux.efbfe52d",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit.",
+      "lines": [
+        "bark_old_maud_town_1"
+      ],
+      "files": [
+        "bark_old_maud_town_1.7c28e676.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.efbfe52d.wav",
+      "sourceSha256": "7d88c072b065ff885391b6ae235ee3b5faef07ac801701cd245f052dd488db6d",
+      "asset": "asset_JyX7gkJmsDA5hwqQA9UZ7TiS",
+      "job": "job_hrJPAVUNz1C47HaDcdMxx82G",
+      "creativeUnits": 0,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_1.ab5a6e1e.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.9910a786",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Warm hands and empty heads. Ask yourself why, dearie.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Warm hands and empty heads. Ask yourself why, dearie.",
+      "lines": [
+        "bark_old_maud_town_2"
+      ],
+      "files": [
+        "bark_old_maud_town_2.3ae00f41.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.9910a786.wav",
+      "sourceSha256": "42e69e11295f02d50ae3efb074d868981e2683c654d7cf9d4e3f4d7b8d76d500",
+      "asset": "asset_CeQc9zxmJXZoQxyLCS2YHv7t",
+      "job": "job_uCF4s84PYcsz8R3ntufyn6MD",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_2.3350ad53.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.1301f872",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "The river remembers. Ask it nicely and it might tell you.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> The river remembers. Ask it nicely and it might tell you.",
+      "lines": [
+        "bark_old_maud_town_3"
+      ],
+      "files": [
+        "bark_old_maud_town_3.e853ed96.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.1301f872.wav",
+      "sourceSha256": "a8550d8f4460089563c12ead18bb771c792ca989f36eec41d117d9a2b31f39b9",
+      "asset": "asset_4Vzak6dwktvDmVMwNwwtLXDt",
+      "job": "job_gELoH9Zox1Tq3kSWPhrWJXd2",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_3.caaa9ec4.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.8a7ed9f1",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "You've the right sort of face for questions. Ask me a better one.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> You've the right sort of face for questions. Ask me a better one.",
+      "lines": [
+        "bark_old_maud_town_4"
+      ],
+      "files": [
+        "bark_old_maud_town_4.5a3ed168.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.8a7ed9f1.wav",
+      "sourceSha256": "151614245c4eb3197bcb6b6f7167c99ccb83a9bf965a3a58ae5e114609579ac8",
+      "asset": "asset_72euxjgJgHuDUrE4xrJ3jEjj",
+      "job": "job_Dmk2e6bhUkUZ5YqFcYnZP71R",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_4.75eff5ec.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.fe518c25",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+      "lines": [
+        "bark_old_maud_town_5"
+      ],
+      "files": [
+        "bark_old_maud_town_5.6bb37cf4.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.fe518c25.wav",
+      "sourceSha256": "aa6e359125d0e0ac982c0b8002086fa4eeb0a936cc0cb316cc37dce9bb91eeb8",
+      "asset": "asset_pEAZYBrsc8N5R5KK65nndqfp",
+      "job": "job_1m9SqM8pMVpsJv7SdzKKZQh4",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_5.f2770b4d.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.b991c53b",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Mind the bank. It's softer than it was. Everything's softer than it was.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Mind the bank. It's softer than it was. Everything's softer than it was.",
+      "lines": [
+        "bark_old_maud_town_6"
+      ],
+      "files": [
+        "bark_old_maud_town_6.a66615bc.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.b991c53b.wav",
+      "sourceSha256": "0028ef906dadb5e19cb5f4a2e029b88da7352f4a1316a7b18efc07e0401918c8",
+      "asset": "asset_CyuhtbBfFPxxpbWwFWjZZsvH",
+      "job": "job_yvopyYVKAcuijyh57DPpAXJX",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_6.928c5d0e.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.6978016c",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Never touched a shard. Not once. That's why there's still all of me.",
+      "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Never touched a shard. Not once. That's why there's still all of me.",
+      "lines": [
+        "bark_old_maud_town_7"
+      ],
+      "files": [
+        "bark_old_maud_town_7.38f9cbcc.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.6978016c.wav",
+      "sourceSha256": "3c72fe3fb30e05e6293049c584e6c84a286a69b54abfe8087de1fa9c6744eaf3",
+      "asset": "asset_9xLDN8VyB5rwTfcHBwPi96RV",
+      "job": "job_obm7j6hX86p7niHimQeJUZHo",
+      "creativeUnits": 2,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "bark_old_maud_town_7.ee04a66b.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.7c0d6f39",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+      "lines": [
+        "ch1_maud_open_3"
+      ],
+      "files": [
+        "ch1_maud_open_3.927ec861.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.7c0d6f39.wav",
+      "sourceSha256": "31b604e625722ff7e4ef3ff316f13e3a897b8dce56324defdc39263b562061ca",
+      "asset": "asset_kigTDiS7xQXozg8VCzDeBxYU",
+      "job": "job_PkhJxmbX1nVPPWB7Z9MJijB6",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_open_3.fad9008b.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.23e29fc8",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.",
+      "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.",
+      "lines": [
+        "ch1_maud_open_4"
+      ],
+      "files": [
+        "ch1_maud_open_4.e9dd8825.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.23e29fc8.wav",
+      "sourceSha256": "5f092e89301e718f0ec03786d43ef64cb1a83f3eb71023b6dc24781ae59b7ea0",
+      "asset": "asset_XA3Q4e5eD4Um51oosCXPv2VU",
+      "job": "job_RiH57Ec29fbJVzqEBdqACiJ9",
+      "creativeUnits": 2,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_open_4.50070cac.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.c268972a",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think.",
+      "lines": [
+        "ch1_maud_hermit_1"
+      ],
+      "files": [
+        "ch1_maud_hermit_1.f0cb1c4a.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.c268972a.wav",
+      "sourceSha256": "be91d9661d69478c55c96d104f1a7a8c84c2debfe0d79ad107dad1536e227cda",
+      "asset": "asset_WKiYzxJ7TkSQtGxgNuUgCBE2",
+      "job": "job_Q3XQqPegvkJrte99idQPSSFR",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_hermit_1.4e0ec949.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.12eb5718",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "I told you a name once. You wrote it down, I watched you. Kept it safe, have you?",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> I told you a name once. You wrote it down, I watched you. Kept it safe, have you?",
+      "lines": [
+        "ch1_maud_hermit_2"
+      ],
+      "files": [
+        "ch1_maud_hermit_2.b50cfd5a.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.12eb5718.wav",
+      "sourceSha256": "2cec8c3fdc7a6cda056b75eae506ef9aa446ab18a8e9aaa111c97353fbb59aa3",
+      "asset": "asset_RZnkuEtb1JkSZDVcUD81VGDC",
+      "job": "job_d8UYn9t3SzuLUJEPiSVGcXUe",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_hermit_2.97a47809.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.3ef00573",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy.",
+      "lines": [
+        "ch1_maud_sage_1"
+      ],
+      "files": [
+        "ch1_maud_sage_1.552d5ea8.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.3ef00573.wav",
+      "sourceSha256": "3ac83c00b28ee8071c4cfc825f798b35219cbc210603f9c798ef1e1a296de6b7",
+      "asset": "asset_JSVN8jBLW5TMDz8GTxLWgKHj",
+      "job": "job_YN6K4TxX9RC8ZKSAAyBeYjUP",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_sage_1.b7bdb0d5.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.d115ece0",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing.",
+      "lines": [
+        "ch1_maud_spared_1"
+      ],
+      "files": [
+        "ch1_maud_spared_1.300aac3f.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.d115ece0.wav",
+      "sourceSha256": "7704afd5cff6262ca90f3974353ee9f8a2543eddd1db72d3a7799a8f27efad4a",
+      "asset": "asset_S8CrTGYQ5htgFYgcKiYgc2E1",
+      "job": "job_1c5Rz4woWXX5eTA2vkF8U82Z",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_spared_1.53cb3c98.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.e4c426f1",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired.",
+      "lines": [
+        "ch1_maud_slain_1"
+      ],
+      "files": [
+        "ch1_maud_slain_1.c75da1db.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.e4c426f1.wav",
+      "sourceSha256": "d4d311d016747a16da4ff3197c3a5001e4df36c2c6b790e414a2ad412f6bfc40",
+      "asset": "asset_JjMTTHDNpd26QVsMx6pWioS5",
+      "job": "job_ja7ZzEav6bHFdeoWuENuNkWh",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_slain_1.6ed84455.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.a84958f3",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down.",
+      "lines": [
+        "ch1_maud_fell_1"
+      ],
+      "files": [
+        "ch1_maud_fell_1.614d2c97.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.a84958f3.wav",
+      "sourceSha256": "2dc8e145d367347db253a88c55452a7e192ecc07a287e4a6883023c96306daaa",
+      "asset": "asset_CzsqsASTB7cMxmZPFXyUn3Ko",
+      "job": "job_eHL9vo5H8eSW9XdgA94nYerw",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_fell_1.703e251a.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.e0cb33fa",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "It didn't fall, dearie. It was thrown.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> It didn't fall, dearie. It was thrown.",
+      "lines": [
+        "ch1_maud_fell_2"
+      ],
+      "files": [
+        "ch1_maud_fell_2.f8502c5f.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.e0cb33fa.wav",
+      "sourceSha256": "79b1e9e11c2844d0de171ff54dc9763308b1c878d82f08e917d99aacde5cfb0b",
+      "asset": "asset_HLLuw45Vyfv6FVr28jPWHTtG",
+      "job": "job_eQn5tavwc7L73BypZoMv8jfi",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_fell_2.bfc49e76.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.5de8135f",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long.",
+      "lines": [
+        "ch1_maud_fell_3"
+      ],
+      "files": [
+        "ch1_maud_fell_3.230d4f24.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.5de8135f.wav",
+      "sourceSha256": "af8411cf177be1f6e46de48b0bac6e931d9dd8a002d29a1a810da53a2d4d80c9",
+      "asset": "asset_egFcdXAAdmEKVTGiki9oBqMr",
+      "job": "job_Qe2SYpgkecegpo7YrRkf2CuP",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_fell_3.66ed66ae.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.234295ba",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down.",
+      "lines": [
+        "ch1_maud_fell_4"
+      ],
+      "files": [
+        "ch1_maud_fell_4.cf876833.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.234295ba.wav",
+      "sourceSha256": "837634c1943d6bfce0776996ca14fecf0b0a238d9145bf545ac53c538cac503a",
+      "asset": "asset_xNyQhJqLvZGQGaGwbFENRhBj",
+      "job": "job_RFhaN71h7zxQEztTPrVJPZxp",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_fell_4.138bba78.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.f73509f9",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind.",
+      "lines": [
+        "ch1_maud_fell_6"
+      ],
+      "files": [
+        "ch1_maud_fell_6.b060e280.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.f73509f9.wav",
+      "sourceSha256": "36d3688cfee82257240da5ffaa10d7b9182c0bcc2f320f7317a9767ce1592c0c",
+      "asset": "asset_tN3bLoAk9kNwFWW7tLeQhWwS",
+      "job": "job_czCwMkMQNLL2w6KcwaoFcMNJ",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_fell_6.cbfe4efa.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.d5f0b89d",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+      "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+      "lines": [
+        "ch1_maud_who_1"
+      ],
+      "files": [
+        "ch1_maud_who_1.640e18bf.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.d5f0b89d.wav",
+      "sourceSha256": "09a2eb1c569346a75c98d068cb30b38827b2fbe87270a7f1ced83a5e4dec9beb",
+      "asset": "asset_ttyRtgjHtA76gCuB99H7S35N",
+      "job": "job_HXn1dLcAFyR8uNhyNBXbsniz",
+      "creativeUnits": 2,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_who_1.bb5f5e61.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.893a8eea",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers.",
+      "lines": [
+        "ch1_maud_bye_1"
+      ],
+      "files": [
+        "ch1_maud_bye_1.625caf26.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.893a8eea.wav",
+      "sourceSha256": "cca8fac634a333e98df911f36166031d91e271c75de37c8ae87f47ec9c8b22bd",
+      "asset": "asset_jWMdZEu8TsHfy8yTFZXmYLLH",
+      "job": "job_Z18d68Ea3uGYXc7PFE5bVydt",
+      "creativeUnits": 5,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_bye_1.b24b49d6.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.0d199064",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.",
+      "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.",
+      "lines": [
+        "ch1_maud_bye_2"
+      ],
+      "files": [
+        "ch1_maud_bye_2.8897ef7c.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.0d199064.wav",
+      "sourceSha256": "35bf90be4567a4c884b16a0f0d0330f198b40b2849d723c3e5574537527c231e",
+      "asset": "asset_X7kLanznBprVVmnvXJisMzti",
+      "job": "job_GnxPozUaMBBi6dQQsevQu6iG",
+      "creativeUnits": 2,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ch1_maud_bye_2.1c65ab25.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.b194bf38",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+      "lines": [
+        "ashmaw_maud_waiting"
+      ],
+      "files": [
+        "ashmaw_maud_waiting.2a9e0989.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.b194bf38.wav",
+      "sourceSha256": "f220254e5f54eb3117867cc9aeca7032186065cef4c9a5a7920c3b0da6b45381",
+      "asset": "asset_EJQA5a1nY7ukNxzckbwxkR69",
+      "job": "job_P4vAZKLfwaZkHgjVnzAmjPwo",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ashmaw_maud_waiting.a10ae239.ogg"
+      ]
+    },
+    {
+      "reusedApprovedAudition": false,
+      "originalAuditionCU": null,
+      "raw": "Gacrux.b12d0052",
+      "preset": "Gacrux",
+      "pitch": 0,
+      "speaker": "old_maud",
+      "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+      "lines": [
+        "ashmaw_maud_after"
+      ],
+      "files": [
+        "ashmaw_maud_after.4189c88e.ogg"
+      ],
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/raw/Gacrux.b12d0052.wav",
+      "sourceSha256": "11c0a47242bc644dbf813c78360beef28db9be6233facb387f674b88cfb0d419",
+      "asset": "asset_BGczxr3hfPEn9BVASpP9QsiF",
+      "job": "job_qmroC9U2zsh3GQjeG2sHeftT",
+      "creativeUnits": 6,
+      "issue": 80,
+      "ownerApproval": "perfect, let's go with that",
+      "replacesFiles": [
+        "ashmaw_maud_after.3dc23202.ogg"
+      ]
+    }
+  ],
+  "voiceRecastSuperseded": [
+    {
+      "speaker": "old_maud",
+      "line": "ch1_maud_open_3",
+      "raw": "Gacrux.7c0d6f39",
+      "job": "job_23YvdT122jJcJgtQfeUuGZqb",
+      "asset": "asset_wgL5nmMe6713YZmJF3Qe5GWy",
+      "creativeUnits": 6,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.7c0d6f39/source.wav",
+      "sourceSha256": "a80a14d4992a595e7cc9a4b9074b97bfae334467281180813c5ae325fb77ee65",
+      "reason": "Model read vocal direction notes aloud; rejected, never installed.",
+      "issue": 80
+    },
+    {
+      "speaker": "old_maud",
+      "line": "ch1_maud_who_1",
+      "raw": "Gacrux.8b16311a",
+      "job": "job_VsRKtPs9oHePfwkcSS1MYwh1",
+      "asset": "asset_eYcZF2gj8jzAcjFKC4N9TYHz",
+      "creativeUnits": 6,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.8b16311a/source.wav",
+      "sourceSha256": "3976a30722e70397b4f363ea1ab4eb67e3b82f3e52cf27640a46cb73e7dfdc48",
+      "reason": "Model read vocal direction notes aloud; rejected, never installed.",
+      "issue": 80
+    },
+    {
+      "speaker": "old_maud",
+      "line": "ch1_maud_who_1",
+      "raw": "Gacrux.8b16311a",
+      "job": "job_CeGDH6Z7DkqibN43TQpdWpYJ",
+      "asset": "asset_yrsxedvjjvvRVUSPUf2PE2ut",
+      "creativeUnits": 6,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-1/raw/Gacrux.8b16311a.wav",
+      "sourceSha256": "b03482e430e3338b4143289a96264119ad67238be679884a666faa1ad4720a89",
+      "reason": "Model read vocal direction notes aloud; rejected, never installed.",
+      "issue": 80
+    },
+    {
+      "speaker": "old_maud",
+      "line": "bark_old_maud_town_7",
+      "raw": "Gacrux.71c58477",
+      "job": "job_LuUMw2hw3pAejGyfhou7KajC",
+      "asset": "asset_6T9JAVuJxZw1LVbesa8g9Zg4",
+      "creativeUnits": 5,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.71c58477/source.wav",
+      "sourceSha256": "307a84abf15c9edd886b402795a894c4cca59a1cd3de2660253e9abd511bf38e",
+      "reason": "Two ASR models report caption word substitution; replaced conservatively.",
+      "issue": 80
+    },
+    {
+      "speaker": "old_maud",
+      "line": "ch1_maud_open_4",
+      "raw": "Gacrux.26ace490",
+      "job": "job_zgB9WU5vA6cQgBu1QeVF1kBG",
+      "asset": "asset_SP4reek5chqwqCVFKYmd5P8t",
+      "creativeUnits": 5,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.26ace490/source.wav",
+      "sourceSha256": "6b692d6a6ede8e4043a2db1c17f9cea71613832be6913fff628796be64f12fdf",
+      "reason": "Two ASR models report caption word substitution; replaced conservatively.",
+      "issue": 80
+    },
+    {
+      "speaker": "old_maud",
+      "line": "ch1_maud_bye_2",
+      "raw": "Gacrux.584d871b",
+      "job": "job_y9CamWQDQmtNkfnZz9gVWgay",
+      "asset": "asset_vkCUDwP7TEmom2nEcLF7dM9J",
+      "creativeUnits": 5,
+      "sourcePath": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.584d871b/source.wav",
+      "sourceSha256": "0ade2b385b0c31f371fcc3d178abbd3caf8ca6422233dd162882a6f8d8cd8821",
+      "reason": "Two ASR models report caption word substitution; replaced conservatively.",
+      "issue": 80
     }
   ]
 }

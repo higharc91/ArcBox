@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_FYK4QPB3kK77Q3i1vxpNV6hA",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_CeQc9zxmJXZoQxyLCS2YHv7t",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_cQ5SXGTgHf46DxgYQEkySQzk"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 7.72,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 5.28,
+            "start": 0,
+            "text": " Ah, warm hands and empty heads.",
+            "words": null
+          },
+          {
+            "end": 7.12,
+            "start": 5.28,
+            "text": " Ask yourself why, dearie.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:38.803Z",
+    "updatedAt": "2026-11-05T00:36:55.405Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:38.803Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:38.896Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:55.405Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -26,7 +26,7 @@ Named characters keep their existing preset, pitch and filter across main scenes
 | mother_aubrine | Vindemiatrix | +0 | — |
 | dagna_holt | Gacrux | +0 | — |
 | pip_ashdown | Leda | +3 | — |
-| old_maud | Achernar | -1 | — |
+| old_maud | Gacrux | +0 | — |
 | celandine_marrowby | Autonoe | +0 | — |
 | mother_skarrow | Laomedeia | -2 | — |
 | ysolde | Despina | +1 | fey |
@@ -80,3 +80,22 @@ take. Other speakers without a cast direction retain their existing hashes.
 Gacrux is also the grim.high player preset; Dagna's approved performance direction
 distinguishes her. Do not recast the player. Captions and authored-recordings-only
 playback remain unchanged. Retain superseded files and paid provenance.
+
+## Old Maud ancient-voice recast (#80)
+
+The owner approved the papery, unhurried Gacrux audition. Use its105-year-old
+performance direction across all24 Maud lines, without post pitch/filter. The
+existing town audition is reused exactly. Casting approvedRenderText retains
+that paid take's exact request while its caption/preset/character direction/line
+delivery remain unchanged; editing any of those requests a new take. Caption text
+and authored-recordings-only playback stay unchanged. Preserve older recordings
+and paid provenance. Gacrux is shared with Dagna/grim.high; Maud's approved ancient
+performance direction is distinct from their deliveries.
+
+Installed all24 lines; full1443/1443 coverage. The approved town request and four
+shortened vocal-cue repair requests are recorded as approvedRenderText overrides;
+the latter avoid direction narration or repeated lexical substitutions. Their
+caption, preset, character direction and authored delivery guards still apply.
+Six rejected paid takes are in voiceRecastSuperseded; active voiceRecasts contain
+only selected takes. Reproduction and caption-check tools/receipts are in
+old-maud/voice-recast/batch. Total274CU including5CU earlier audition; no purchase.

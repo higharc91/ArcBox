@@ -66,7 +66,7 @@ public static class TacticsVoices
         new(Npc("maren_sorrel"), "Maren Sorrel: warm, persuasive alto", Voice("Sulafat"), Fallback: new FallbackVoice()),
         new(Npc("mother_aubrine"), "Mother Aubrine: clear mezzo, measured", Voice("Vindemiatrix"), Fallback: new FallbackVoice()),
         new(Npc("mother_skarrow"), "Mother Skarrow: cracked, rasping", Voice("Laomedeia"), Fallback: new FallbackVoice()),
-        new(Npc("old_maud"), "Old Maud: ancient, papery", Voice("Achernar"), Fallback: new FallbackVoice()),
+        new(Npc("old_maud"), "Old Maud: ancient, papery, unhurried", Voice("Gacrux"), Fallback: new FallbackVoice()),
         new(Npc("oswin_hale"), "Oswin Hale: dry, cold, very old", Voice("Rasalgethi"), Fallback: new FallbackVoice()),
         new(Npc("pip_ashdown"), "Pip Ashdown: a child; shares earnest.high, pitched up", Voice("Leda"), Fallback: new FallbackVoice()),
         new(Npc("rook"), "Rook: dry, low, unhurried", Voice("Umbriel"), Fallback: new FallbackVoice()),

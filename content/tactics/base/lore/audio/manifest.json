@@ -78,8 +78,8 @@
       "preset": "Algieba"
     },
     "old_maud": {
-      "preset": "Achernar",
-      "pitch": -1
+      "preset": "Gacrux",
+      "pitch": 0
     },
     "oswin_hale": {
       "preset": "Rasalgethi",
@@ -178,10 +178,10 @@
       "main": "ashmaw_leave.d9d0647e.ogg"
     },
     "ashmaw_maud_after": {
-      "main": "ashmaw_maud_after.3dc23202.ogg"
+      "main": "ashmaw_maud_after.4189c88e.ogg"
     },
     "ashmaw_maud_waiting": {
-      "main": "ashmaw_maud_waiting.a10ae239.ogg"
+      "main": "ashmaw_maud_waiting.2a9e0989.ogg"
     },
     "ashmaw_nest_open": {
       "main": "ashmaw_nest_open.4175425b.ogg"
@@ -787,25 +787,25 @@
       "main": "bark_narrator_victory_4.06e871a9.ogg"
     },
     "bark_old_maud_town_1": {
-      "main": "bark_old_maud_town_1.ab5a6e1e.ogg"
+      "main": "bark_old_maud_town_1.7c28e676.ogg"
     },
     "bark_old_maud_town_2": {
-      "main": "bark_old_maud_town_2.3350ad53.ogg"
+      "main": "bark_old_maud_town_2.3ae00f41.ogg"
     },
     "bark_old_maud_town_3": {
-      "main": "bark_old_maud_town_3.caaa9ec4.ogg"
+      "main": "bark_old_maud_town_3.e853ed96.ogg"
     },
     "bark_old_maud_town_4": {
-      "main": "bark_old_maud_town_4.75eff5ec.ogg"
+      "main": "bark_old_maud_town_4.5a3ed168.ogg"
     },
     "bark_old_maud_town_5": {
-      "main": "bark_old_maud_town_5.f2770b4d.ogg"
+      "main": "bark_old_maud_town_5.6bb37cf4.ogg"
     },
     "bark_old_maud_town_6": {
-      "main": "bark_old_maud_town_6.928c5d0e.ogg"
+      "main": "bark_old_maud_town_6.a66615bc.ogg"
     },
     "bark_old_maud_town_7": {
-      "main": "bark_old_maud_town_7.ee04a66b.ogg"
+      "main": "bark_old_maud_town_7.38f9cbcc.ogg"
     },
     "bark_oswin_hale_battle_start_1": {
       "main": "bark_oswin_hale_battle_start_1.2a7f35c1.ogg"
@@ -1369,28 +1369,28 @@
       "main": "ch1_kindler_spared_1.e9581c34.ogg"
     },
     "ch1_maud_bye_1": {
-      "main": "ch1_maud_bye_1.b24b49d6.ogg"
+      "main": "ch1_maud_bye_1.625caf26.ogg"
     },
     "ch1_maud_bye_2": {
-      "main": "ch1_maud_bye_2.1c65ab25.ogg"
+      "main": "ch1_maud_bye_2.8897ef7c.ogg"
     },
     "ch1_maud_fell_1": {
-      "main": "ch1_maud_fell_1.703e251a.ogg"
+      "main": "ch1_maud_fell_1.614d2c97.ogg"
     },
     "ch1_maud_fell_2": {
-      "main": "ch1_maud_fell_2.bfc49e76.ogg"
+      "main": "ch1_maud_fell_2.f8502c5f.ogg"
     },
     "ch1_maud_fell_3": {
-      "main": "ch1_maud_fell_3.66ed66ae.ogg"
+      "main": "ch1_maud_fell_3.230d4f24.ogg"
     },
     "ch1_maud_fell_4": {
-      "main": "ch1_maud_fell_4.138bba78.ogg"
+      "main": "ch1_maud_fell_4.cf876833.ogg"
     },
     "ch1_maud_fell_5": {
       "main": "ch1_maud_fell_5.0d313f98.ogg"
     },
     "ch1_maud_fell_6": {
-      "main": "ch1_maud_fell_6.cbfe4efa.ogg"
+      "main": "ch1_maud_fell_6.b060e280.ogg"
     },
     "ch1_maud_fell_7": {
       "main": "ch1_maud_fell_7.cafa5695.ogg"
@@ -1399,10 +1399,10 @@
       "main": "ch1_maud_fell_8.43794a78.ogg"
     },
     "ch1_maud_hermit_1": {
-      "main": "ch1_maud_hermit_1.4e0ec949.ogg"
+      "main": "ch1_maud_hermit_1.f0cb1c4a.ogg"
     },
     "ch1_maud_hermit_2": {
-      "main": "ch1_maud_hermit_2.97a47809.ogg"
+      "main": "ch1_maud_hermit_2.b50cfd5a.ogg"
     },
     "ch1_maud_lost_1": {
       "main": "ch1_maud_lost_1.a5c4977d.ogg"
@@ -1414,25 +1414,25 @@
       "main": "ch1_maud_open_2.38feb09d.ogg"
     },
     "ch1_maud_open_3": {
-      "main": "ch1_maud_open_3.fad9008b.ogg"
+      "main": "ch1_maud_open_3.927ec861.ogg"
     },
     "ch1_maud_open_4": {
-      "main": "ch1_maud_open_4.50070cac.ogg"
+      "main": "ch1_maud_open_4.e9dd8825.ogg"
     },
     "ch1_maud_sage_1": {
-      "main": "ch1_maud_sage_1.b7bdb0d5.ogg"
+      "main": "ch1_maud_sage_1.552d5ea8.ogg"
     },
     "ch1_maud_slain_1": {
-      "main": "ch1_maud_slain_1.6ed84455.ogg"
+      "main": "ch1_maud_slain_1.c75da1db.ogg"
     },
     "ch1_maud_spared_1": {
-      "main": "ch1_maud_spared_1.53cb3c98.ogg"
+      "main": "ch1_maud_spared_1.300aac3f.ogg"
     },
     "ch1_maud_track_1": {
       "main": "ch1_maud_track_1.9494f47c.ogg"
     },
     "ch1_maud_who_1": {
-      "main": "ch1_maud_who_1.bb5f5e61.ogg"
+      "main": "ch1_maud_who_1.640e18bf.ogg"
     },
     "ch1_mayor_close_1": {
       "main": "ch1_mayor_close_1.bfddf799.ogg"

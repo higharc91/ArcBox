@@ -8,9 +8,10 @@ No ember glow or magical staff.
 
 ![Appearance preview](candidate-1-preview.png)
 
-[Original recorded voice — rejected as too young](voice-sample.mp3): “Sit down, dearie. I've waited
-a hundred years, I can wait while you sit.” Exact source/text/hashes are retained
-in voice-sample.json. Compatibility transcode only; no speech generation.
+[Approved recorded voice](voice-sample.mp3): “Sit down, dearie. I've waited
+a hundred years, I can wait while you sit.” This is the installed Gacrux town clip,
+reusing the exact owner-approved audition. [Three-line listening reel](voice-recast/approved-voice-reel.mp3).
+The rejected Achernar sample is archived under voice-recast/rejected-achernar-voice-sample.*.
 
 Both raw image-tool results, requests and input/output hashes are retained. The
 preview applies the native import alpha128 threshold and clears transparent RGB;
@@ -22,19 +23,26 @@ this enlarged sheet is not a validated native atlas.
 
 Appearance approval is pending before motions/portraits, with separate full-set/TV
 approval before installation. No Old Maud production art. Two image-tool calls,
-zero PixelLab calls/spend/purchases, zero new speech; no image-tool monetary price
+zero PixelLab calls/spend/purchases; voice spending is detailed below. No image-tool monetary price
 is inferred. Reuse these sources rather than regenerating the approved concept.
 
-## Older voice audition
+## Approved ancient voice installed
 
-The owner rejected the original recording as too young.
-[Hear the new ancient/papery audition](voice-recast/audition-gacrux.mp3), using
-Gacrux with an explicit105-year-old, frail but lucid delivery. Exact request,
-live model schema/quote/cap check, source WAV, paid receipt and hashes are under
-voice-recast/.5 CU quoted/billed. No credits purchased. No pitch shift/filter.
+The owner approved the papery, unhurried Gacrux audition: “perfect, let's go with
+that”. All24 lines now use that voice at pitch0, with no filter. The exact audition
+source is reused for town1;23 selected new recordings cover the remaining lines.
+Captions are unchanged. Old production recordings and six rejected new takes are
+preserved. Long direction notes leaked into three takes; three other takes had
+word substitutions reported by two ASR models. All were replaced.
 
-Owner voice approval is pending before replacing all24 Maud lines. Production
-casting/recordings and the original normal voice sample remain unchanged; after
-approval, recast all lines consistently and update that normal sample. Do not
-reuse the rejected voice for the finished review. Artwork appearance/full-set
-gates remain separate.
+All selected sources/encoded clips decode; mono24kHz sources,5.6–17.52seconds,
+zero clipped samples. All24 have paid ASR caption checks; punctuation, neighbour
+spelling and listed leading ah/oh interjections are accepted, no other word
+changes. ASR does not establish acting quality. Full1443/1443 clip coverage,
+23 tooling tests,71 logic and52 story/bark presentation tests pass.
+
+Live quotes, cap checks, sources, job/asset IDs and hashes are under voice-recast/.
+Total274CU:150 speech (including the previous5CU audition) and124 transcription.
+This continuation spent269CU; no purchases/upgrades. Rebuild/validate offline with
+batch/import-recordings.py and batch/validate-recordings.py inside voice-recast/.
+Artwork appearance and full-set/TV approval remain pending and separate.
