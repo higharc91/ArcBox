@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.6130eaca.wav",
+  "sourceSha256": "bc30a90beef8d778d49efe7946b41d797b8eba88d653b61fb4919a13dff00e19",
+  "duration": 9.4,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 9.0,
+      "text": " Hmm, do what you must, but I have buried enough of them this year, leave me some to scold."
+    }
+  ],
+  "text": "Hmm, do what you must, but I have buried enough of them this year, leave me some to scold.",
+  "secondsToTranscribe": 2.265
+}

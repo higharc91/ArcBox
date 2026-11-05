@@ -1,0 +1,529 @@
+{
+  "totalCU": 224,
+  "previousAuditionAndAsrCU": 6,
+  "newCU": 218,
+  "ttsCU": 220,
+  "paidAsrCU": 4,
+  "batchAsrServiceCU": 0,
+  "localAsrPerClipCharge": 0,
+  "consumptionBefore": 5826,
+  "consumptionAfter": 6044,
+  "creditsPurchased": false,
+  "planUpgraded": false,
+  "jobs": [
+    {
+      "job": "job_15mjGyBRoMZZxuhGJFdLgSxg",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.d5c0ff43.json"
+    },
+    {
+      "job": "job_17g2MssvV61FpnU9GnJnmfNC",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.b0d6d6b2.json"
+    },
+    {
+      "job": "job_1DRAfYFupZYxYVuKD7WNNEJX",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.bf716c56.json"
+    },
+    {
+      "job": "job_1PjuzcCt8u8GoQkNreQGp5ty",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.3ce50eba.json"
+    },
+    {
+      "job": "job_2494bRWSiK8hRH5CgU2EQkZD",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.8cf1a688.json"
+    },
+    {
+      "job": "job_2uBVvGjRSoe8AXBxBV1xJJDb",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.4d300437.json"
+    },
+    {
+      "job": "job_2vogLvZjzqAdoEtQ6Q78eein",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/job-receipt.json"
+    },
+    {
+      "job": "job_3DYLeaGP5wGXkGcHBb35hLJH",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.0ea8ced9.json"
+    },
+    {
+      "job": "job_3du4B9L5h52gKTfvGYSJsGFq",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.76cbc88d.json"
+    },
+    {
+      "job": "job_44LH4W9FtLpjxHuWWcVHNXwi",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.48b90e00.json"
+    },
+    {
+      "job": "job_58h4tx7pBbafoYbBDtQ8JtLT",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.6130eaca.json"
+    },
+    {
+      "job": "job_5PVBpEGBxSZnHgja3cwJWBFw",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-3/status/Kore.b06084ee.json"
+    },
+    {
+      "job": "job_5QJpKyt1cmvjBFsvAjgXHVE7",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.e8a430b6.json"
+    },
+    {
+      "job": "job_5WVZGeozaYBhLuB8Q7k293c5",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.4abd13c6.json"
+    },
+    {
+      "job": "job_8bKeXAfqzFkUKciwgXNjD96E",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.f904ff29.json"
+    },
+    {
+      "job": "job_9SFMDKsMTybfoBXhBvccQU8t",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-5/status/Kore.e56a7dc5.json"
+    },
+    {
+      "job": "job_9VDcH884bmfNnei5RYTKzm9K",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.57a2c66f.json"
+    },
+    {
+      "job": "job_9gkkbfJyBLqwSSLEyRjh626K",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.0a0c9d4d.json"
+    },
+    {
+      "job": "job_9uTXYQJZTrKPW3hSfA51iDoY",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-2/status/Kore.5685703c.json"
+    },
+    {
+      "job": "job_A3StwqikHPRkRR4Ls45pqCnH",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.284a1397.json"
+    },
+    {
+      "job": "job_AXozm5M5AKCNhYz8kW4HwMqX",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-2/status/Kore.697dc16a.json"
+    },
+    {
+      "job": "job_B7oEnXbqY9Guco1NNYzaPMRA",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.eee98b8e.json"
+    },
+    {
+      "job": "job_BVQfB5YDCm8ow2ayiQ5vRp6d",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-5/status/Kore.aa300f5c.json"
+    },
+    {
+      "job": "job_Bz8vv9ch3n2QhTrw5hdKMfeg",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.a67c3bd5.json"
+    },
+    {
+      "job": "job_D3XNauxKN8GyEVZ3iAXKour1",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-3/status/Kore.cd28c42d.json"
+    },
+    {
+      "job": "job_FW5RWTR6YC8Ekxqs7ouHpzUK",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.62a84f24.json"
+    },
+    {
+      "job": "job_GaAnaJCrTWuiS9JxdyKDkL28",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.da537c99/status.json"
+    },
+    {
+      "job": "job_JDcscDfw8zbUffzFWxRfpLWf",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.1136f44e.json"
+    },
+    {
+      "job": "job_Kg5DWwxgMPsk1n9YYyPeBUuC",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.66ce164a.json"
+    },
+    {
+      "job": "job_KvPGJ1r7E5Lc1Cpn9t3ECGDF",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.1ab7b8b2.json"
+    },
+    {
+      "job": "job_LJiJVonzVKuUvN52FEZ6Aivg",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.2f798a4e.json"
+    },
+    {
+      "job": "job_Lsp4uxeCUJoHsV7VXVfCUQKZ",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-2/status/Kore.64b8623c.json"
+    },
+    {
+      "job": "job_M4F24FPsYxtcdMUgCt2Kx8bk",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-1/status/Kore.9b2e912e.json"
+    },
+    {
+      "job": "job_MyvnbqNLXkW7yJn9v9fXsZRf",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.c66c6a3f.json"
+    },
+    {
+      "job": "job_NJCQ792N4E5gHmuUw65dNMak",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.03b85bde.json"
+    },
+    {
+      "job": "job_NPA9e3k1Q8ASpuqDdGK2WjkL",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.4229712d.json"
+    },
+    {
+      "job": "job_NzKn3bTQKcFQHAsaP4w7bWn5",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.020a9c88/status.json"
+    },
+    {
+      "job": "job_PSaF4m4NduGidzXF6Nwm8LtE",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.04af4e85.json"
+    },
+    {
+      "job": "job_QvJoXzCWwnLufpE1LQeLyc4J",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.8f627eeb.json"
+    },
+    {
+      "job": "job_QwnnepxVWUdZPMtKfj3CrBQ8",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-2/status/Kore.273a3e65.json"
+    },
+    {
+      "job": "job_REQUipYJGVMdV6vK8LQgR6KU",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.53bc9c9e.json"
+    },
+    {
+      "job": "job_S1uj4vbv7PRaoUzU4m9EjTV3",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.6739e2c7.json"
+    },
+    {
+      "job": "job_T1G4NZcPt34bVA9Wpfwys1oa",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.d86b1e8e.json"
+    },
+    {
+      "job": "job_TjPyiiVaAPWPw1wqbx7XJcH1",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.bbace059.json"
+    },
+    {
+      "job": "job_UoTQWT3CWTGU5ZC8EhtZZy8Y",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.ae1a0f6e.json"
+    },
+    {
+      "job": "job_Uv67HbxYvRgCB7n9MVNsrvkT",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.42f80b44.json"
+    },
+    {
+      "job": "job_VfLAadansW8HSRPqWUxNR1Vr",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.ff068f53.json"
+    },
+    {
+      "job": "job_WGpYTdRisfE9p9Kr7CnCsjdn",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.0aa2cecb.json"
+    },
+    {
+      "job": "job_Wzaqr83Ww848NFvQctpUvaMg",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.ce754f98.json"
+    },
+    {
+      "job": "job_X8dScjMRdeN44cdA4HeRC9ZD",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-3/status/Kore.a61e4327.json"
+    },
+    {
+      "job": "job_XKRcVxVnJPZapdGjVu6EMT8T",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-4/status/Kore.d21bec2e.json"
+    },
+    {
+      "job": "job_Xa6JCzTm7N4iQyf4B59paWMG",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-6/status/Kore.e7786839.json"
+    },
+    {
+      "job": "job_auZ7qLm3Y6uyG8CywopcfcRJ",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.a090bbf0.json"
+    },
+    {
+      "job": "job_ckbyFtB4SnHDhDwibAhaxF5e",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.0042a09d.json"
+    },
+    {
+      "job": "job_eEf1QBtTTURpf2LAiXV9KaCC",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.491ca49e.json"
+    },
+    {
+      "job": "job_eaBVHYR3F14xy2Kbm34LRpBs",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/asr-job-receipt.json"
+    },
+    {
+      "job": "job_fm3FrSNv2TjPC5QdE5dc2wLB",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.92a08fe4.json"
+    },
+    {
+      "job": "job_gZe1xrUT5cCTL4e9a3Gkfka8",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.bda9a816.json"
+    },
+    {
+      "job": "job_hB577nHJBQ7w1pjm3nU662Xj",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-3/status/Kore.610ed4be.json"
+    },
+    {
+      "job": "job_hBvn8itzwKpJq3HXVLF9uDgV",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-4/status/Kore.e1f9b192.json"
+    },
+    {
+      "job": "job_hKksxsxtKXQXGpZug2Zo9zRj",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.c6c6abab.json"
+    },
+    {
+      "job": "job_i1NZJMa2JafiJ3QWEjYkRfi2",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-2/status/Kore.e278948d.json"
+    },
+    {
+      "job": "job_jydSSmfPsE7ikBWdovfuGh8B",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.cd6d6069/status.json"
+    },
+    {
+      "job": "job_kWpXzTod79tG5ARXqmNR29jP",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-4/status/Kore.6711100b.json"
+    },
+    {
+      "job": "job_kXe72kGmczRfVhyVm58TYsjP",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.cbad0dfd.json"
+    },
+    {
+      "job": "job_m52Ecxw59kejjnLa6wVpFe5V",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.1937e783.json"
+    },
+    {
+      "job": "job_mFJNF3bUfRBNQtHfMS3GHUWu",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.b1518070.json"
+    },
+    {
+      "job": "job_miQyqk9RbdqJmHXgBPUwmHmR",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.52258660/status.json"
+    },
+    {
+      "job": "job_nDi7Q5jjQReLjuBmCHWp2wZ2",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.61d086d5/status.json"
+    },
+    {
+      "job": "job_p5HUYkoz3zEVWoPG1a3fjPhv",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.76644b6f.json"
+    },
+    {
+      "job": "job_qSvV2cyeARfeuiQ2rHv367yg",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-4/status/Kore.3ed0c02c.json"
+    },
+    {
+      "job": "job_rMXTQ2ycr3defZZBo7DA6N6n",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.a7d90663.json"
+    },
+    {
+      "job": "job_spuMvrbPwNERS9JB1fFgJERF",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.a6581767/status.json"
+    },
+    {
+      "job": "job_stBZprFQ174S7Wgt3Wi6dryo",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-4/status/Kore.a449ab24.json"
+    },
+    {
+      "job": "job_t2aXG9HsS5HGMYxzbQJCFG2K",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.8dc00faa/status.json"
+    },
+    {
+      "job": "job_u31eB2SQrjLYuzs2qPqAbqWo",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.107f9bf4/status.json"
+    },
+    {
+      "job": "job_uStAugUe73LrdLGNqp6bnqBT",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.ce41b93e.json"
+    },
+    {
+      "job": "job_uijqVMhAqHV8LhptRTQhEeES",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.cfe8012d/status.json"
+    },
+    {
+      "job": "job_vntqBqjEbovzmXBtEQRn2BNA",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.7cf884ee.json"
+    },
+    {
+      "job": "job_woSM9sYnPxGmemv9KxQvm876",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.e9ac3f30.json"
+    },
+    {
+      "job": "job_wyubzncRFQaGN5c1BqycYAYA",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.e49ea999.json"
+    },
+    {
+      "job": "job_x5BHyLz1cQXcPw8iWGq8tjMz",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.d548cd2a.json"
+    },
+    {
+      "job": "job_yBQYP623meosPtWVti8etSnp",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.4ad9ac77/status.json"
+    },
+    {
+      "job": "job_yVqbgyRM3uU6vveG5Vw23cfD",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/repairs/round-6/status/Kore.36110c89.json"
+    },
+    {
+      "job": "job_zRKv3sYLXjpP2tawjJndxRac",
+      "creativeUnits": 3,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/status/Kore.563e7c8c.json"
+    }
+  ],
+  "selectedSpeechCU": 169,
+  "supersededSpeechCU": 51,
+  "selectedSourceTakes": 64,
+  "supersededSpeechTakes": 20
+}

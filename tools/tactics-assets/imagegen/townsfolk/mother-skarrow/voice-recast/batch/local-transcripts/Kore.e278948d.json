@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.e278948d.wav",
+  "sourceSha256": "11c2714bff0bd92b04dd6ca4fd87aa4dd2c2ae4eb09737ee10690ee5d8ec603a",
+  "duration": 13.8,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.4,
+      "text": " You've fed my children, Valley people."
+    },
+    {
+      "start": 4.4,
+      "end": 11.040000000000001,
+      "text": " So I give you what I do not give to strangers, not all of it."
+    },
+    {
+      "start": 11.040000000000001,
+      "end": 13.68,
+      "text": " The last verse stays with the clan."
+    },
+    {
+      "start": 13.68,
+      "end": 15.68,
+      "text": " You"
+    }
+  ],
+  "text": "You've fed my children, Valley people. So I give you what I do not give to strangers, not all of it. The last verse stays with the clan. You",
+  "secondsToTranscribe": 4.902
+}

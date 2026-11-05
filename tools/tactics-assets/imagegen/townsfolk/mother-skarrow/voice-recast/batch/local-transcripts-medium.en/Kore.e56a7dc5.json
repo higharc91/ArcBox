@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.e56a7dc5.wav",
+  "sourceSha256": "e61704b883c2eb9bd6cb2355c9a45049f7122b18f162dc694129d7f3bb2c73c0",
+  "duration": 19.96,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.62,
+      "text": " Read the dialogue with an elderly woman's low, husky contralto,"
+    },
+    {
+      "start": 5.92,
+      "end": 8.8,
+      "text": " dry rasp and quiet authority."
+    },
+    {
+      "start": 9.92,
+      "end": 12.84,
+      "text": " Your warden's saying that it was given."
+    },
+    {
+      "start": 13.48,
+      "end": 17.14,
+      "text": " We never warmed our hands at it, so we never forgot."
+    },
+    {
+      "start": 17.84,
+      "end": 19.84,
+      "text": " It was stolen."
+    }
+  ],
+  "text": "Read the dialogue with an elderly woman's low, husky contralto, dry rasp and quiet authority. Your warden's saying that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+  "secondsToTranscribe": 8.625
+}

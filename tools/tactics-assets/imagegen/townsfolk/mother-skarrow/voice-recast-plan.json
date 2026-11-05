@@ -1,5 +1,5 @@
 {
-  "status": "audition_ready_pending_owner_voice_approval",
+  "status": "owner_approved_voice_installed_all_67_lines",
   "ownerRequest": "let's draft another voice, it's not great",
   "previousPreset": "Laomedeia",
   "previousPitch": -2,
@@ -280,13 +280,14 @@
       }
     ]
   },
-  "productionVoiceChanged": false,
+  "productionVoiceChanged": true,
   "workflow": [
-    "Owner listens to the concrete alternative audition before any full recast.",
-    "After owner voice approval, preserve and apply the approved performance to all67 Mother Skarrow recordings consistently; preserve captions and previous sources.",
-    "Obtain live schema/cap checks and cost quotes before spending; never purchase credits or upgrade.",
-    "Run targeted recording/coverage/caption and story/bark/combat checks; keep authored-recordings-only playback.",
-    "Artwork appearance and full-set/TV approvals remain separate."
+    "Completed: all67 lines installed from64 selected takes; unchanged captions, other speakers and recordings-only playback.",
+    "Original67 clips and20 superseded paid takes retained with provenance; no rejected take is active.",
+    "Live schema/cap checks/quotes and85 unique paid-job receipts retained;224CU overall including previous6CU audition/ASR; continuation218CU, no purchases/upgrades.",
+    "Unbiased local small.en/medium.en checks plus64 source/67 clip validation pass; full1443/1443 coverage and no pitch/brightness flags.",
+    "23 tooling +71 logic +52 story/bark presentation tests pass; Debug builds0warnings/errors.",
+    "Mother Skarrow artwork appearance approval is still pending; finished-set/TV gate separate. Old Maud appearance is approved and completion art queued."
   ],
   "audition": {
     "path": "voice-recast/audition-kore.mp3",
@@ -295,6 +296,17 @@
     "assetId": "asset_k2gEoLwCvM2QmTHdynGdV5pU",
     "caption": "Forty winters I have held this clan. Do not ask me if I can hold it one more."
   },
-  "paidCU": 6,
-  "sourceQualityFollowup": "ASR opening-number transcription is ambiguous; check Forty before exact take reuse after voice approval."
+  "paidCU": 224,
+  "sourceQualityFollowup": "Resolved: selected fresh numeric40 source verified by small.en and medium.en. Original audition performance retained but exact take not reused.",
+  "ownerApproval": "sounds good, use it",
+  "presetStatus": "Owner-approved Kore cast and older goblin-matriarch performance; no post pitch/filter.",
+  "newCU": 218,
+  "batch": "voice-recast/batch/",
+  "voiceSample": "voice-sample.mp3",
+  "listeningReel": "voice-recast/approved-voice-reel.mp3",
+  "selectedTownTake": {
+    "raw": "Kore.9b2e912e",
+    "jobId": "job_M4F24FPsYxtcdMUgCt2Kx8bk",
+    "assetId": "asset_nPuik6BKruvp1wTLfTdiyPaE"
+  }
 }

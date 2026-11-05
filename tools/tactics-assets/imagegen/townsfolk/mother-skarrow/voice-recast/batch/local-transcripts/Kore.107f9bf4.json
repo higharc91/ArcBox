@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.107f9bf4.wav",
+  "sourceSha256": "5ca11607d711244fb1a4d3d2f6e964165a0254ae37468384c6fe96fbdd464e40",
+  "duration": 26.24,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 11.6,
+      "text": " Do not kill him, low female contralto, husky dry rasp and age creek, measured, wary, quietly"
+    },
+    {
+      "start": 11.6,
+      "end": 17.92,
+      "text": " commanding, with tired warmth, mood idle."
+    },
+    {
+      "start": 17.92,
+      "end": 21.84,
+      "text": " Do not kill him if you can help it."
+    },
+    {
+      "start": 21.84,
+      "end": 24.12,
+      "text": " Beat him if you must."
+    },
+    {
+      "start": 24.12,
+      "end": 26.12,
+      "text": " then send him home to me."
+    }
+  ],
+  "text": "Do not kill him, low female contralto, husky dry rasp and age creek, measured, wary, quietly commanding, with tired warmth, mood idle. Do not kill him if you can help it. Beat him if you must. then send him home to me.",
+  "secondsToTranscribe": 4.996
+}

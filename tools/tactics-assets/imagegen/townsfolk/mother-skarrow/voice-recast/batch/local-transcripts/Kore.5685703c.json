@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.5685703c.wav",
+  "sourceSha256": "a8ff9736ac36978d15074aa277e04ca33d8a7334ab17bd456bc1bc201997e8b7",
+  "duration": 8.88,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.64,
+      "text": " Do not kill him if you can help it beat him if you must"
+    },
+    {
+      "start": 6.16,
+      "end": 8.24,
+      "text": " Then send him home to me"
+    }
+  ],
+  "text": "Do not kill him if you can help it beat him if you must Then send him home to me",
+  "secondsToTranscribe": 2.098
+}

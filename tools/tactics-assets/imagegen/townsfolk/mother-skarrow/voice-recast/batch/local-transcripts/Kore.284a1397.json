@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.284a1397.wav",
+  "sourceSha256": "46dcc2fa0f129ae52274737ea632d6f5883ae00691b9be570304c5aad666457c",
+  "duration": 10.8,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.0,
+      "text": " You fed my children."
+    },
+    {
+      "start": 3.0,
+      "end": 9.0,
+      "text": " That makes you something, but not family, not yet."
+    },
+    {
+      "start": 9.0,
+      "end": 11.0,
+      "text": " Come back when you are."
+    }
+  ],
+  "text": "You fed my children. That makes you something, but not family, not yet. Come back when you are.",
+  "secondsToTranscribe": 2.26
+}

@@ -2,11 +2,12 @@
   "character": "mother_skarrow",
   "barkId": "bark_mother_skarrow_town_2",
   "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
-  "preset": "Laomedeia",
-  "pitch": -2,
-  "sourcePath": "content/tactics/base/lore/audio/bark_mother_skarrow_town_2.833a159c.ogg",
-  "sourceSha256": "ef1bc41264b356964b585dad00b5ec5de3dfc09540d178e5c68b5c2ae7f929df",
+  "preset": "Kore",
+  "pitch": 0,
+  "sourcePath": "content/tactics/base/lore/audio/bark_mother_skarrow_town_2.fb22946e.ogg",
+  "sourceSha256": "1cc0119d2735333216180622d863a6cdbbcacdec54891f1c7700d2d9221f29c4",
   "reviewFile": "voice-sample.mp3",
-  "reviewSha256": "3dc9d7f6fac0df0cf23b228dc87e445807536b44948c9a81af242af44290b597",
-  "operation": "MP3 compatibility transcode of existing installed recording. No new speech or additional pitch/filter."
+  "reviewSha256": "5bbfaca8352fcbb946bd6e4d7cf4d2b377b7e3900aa179297faf57ee9e40c028",
+  "operation": "Owner-approved Kore recast with no pitch/filter; sample from installed number-clarified production town2 clip.",
+  "provenance": "voice-recast/batch/"
 }

@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.4229712d.wav",
+  "sourceSha256": "2d4164ba9e03ff87bc71087940789dd58833fa45fefc36a727002ac4171c862e",
+  "duration": 4.4,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.0,
+      "text": " Not yet. The little ones have not eaten."
+    }
+  ],
+  "text": "Not yet. The little ones have not eaten.",
+  "secondsToTranscribe": 1.637
+}

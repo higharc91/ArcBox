@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.020a9c88.wav",
+  "sourceSha256": "ee802a1773d5f8115bcc0f60f940dadf56c4a988953b4bccf18ba644a0d5d3cc",
+  "duration": 26.6,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 10.24,
+      "text": " Elderly goblin matriarch, low female contralto, husky, dry, rasp, and age creek, measured,"
+    },
+    {
+      "start": 10.24,
+      "end": 18.12,
+      "text": " wary, quietly commanding, with tired warmth, mood idle."
+    },
+    {
+      "start": 18.12,
+      "end": 23.0,
+      "text": " Seven came down when the snow was still falling."
+    },
+    {
+      "start": 23.0,
+      "end": 26.4,
+      "text": " came down with their hands full of gold."
+    }
+  ],
+  "text": "Elderly goblin matriarch, low female contralto, husky, dry, rasp, and age creek, measured, wary, quietly commanding, with tired warmth, mood idle. Seven came down when the snow was still falling. came down with their hands full of gold.",
+  "secondsToTranscribe": 4.819
+}

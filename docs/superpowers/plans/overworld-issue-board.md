@@ -758,3 +758,46 @@ No art/rules/balance/phone changes. Production inventory SHA256
 Report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-voice-recast/report.md.
 Rebase before pushing townsfolk-art; no PR, merge, closure or publication.
 Earlier existing-voice draft notes are historical.
+
+
+## Latest checkpoint — Mother Skarrow approved voice installed across all67 lines
+
+Owner voice approval: “sounds good, use it”. All67 Skarrow lines installed as
+Kore, pitch0, no filter,64 selected source takes. Canonical captions, other
+speaker jobs/manifests and recordings-only playback unchanged. Normal town2
+voice-sample.mp3 updated; three-line reel at mother-skarrow/voice-recast/
+approved-voice-reel.mp3 under tools/tactics-assets/imagegen/townsfolk/.
+
+Original67 clips and20 superseded paid speech takes preserved. Original audition
+performance approved, but opening number unclear; verified numeric40 source
+serves both identical “Forty” captions. Direction narration/word substitutions
+were caught and repaired, never trimmed. Two stubborn chapter3 takes use only
+documented pause tags with same Kore speaker/language/zero pitch/filter because
+descriptive cues were narrated. Actual requests guarded in approvedRenderText;
+all source/receipt/quote/hash/provenance and offline import/local-ASR tools retained.
+Local unbiased small.en/medium.en checks are per-clip service-fee-free; model
+weights stay outside the pack. Documented spelling/homophone/number/vocalization
+normalizations and physically near-silent out-of-duration ASR artifacts only.
+
+67 source/clip/word checks pass; mono24kHz16bit,4.4–15.16s,0 source clipping.
+Full1443/1443 coverage,0 pitch/brightness flags.23 tooling +71 logic +52 story/
+bark presentation tests pass; both Debug builds0warnings/errors. Original files
+and all other speaker jobs/manifest data verified unchanged. Acting maturity is
+owner listening judgment, not established by ASR/acoustic metrics.
+
+Total224CU across85 unique successful jobs:220 speech +4 prior ASR. Continuation
+218CU; selected speech169CU, superseded speech51CU incl original2CU audition.
+Consumption5826→6044 matches; no purchases/upgrades/PixelLab/new images. Unused
+quotes unbilled; cap status is not remaining plan-credit balance.
+Cold pack215550416bytes /5027files, inventory SHA256
+1373f33f5c9b56f62bd26015f3a87fe6bc23c8793fc587e5246d7d0f8fb99a3d.
+Textures unchanged; last native four-party peaks332.20 /192.37MiB below512, not
+rerun for audio-only work. No rules/balance/phone contract changes.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-voice-recast/report.md.
+
+Skarrow **appearance approval remains pending** before motions/portraits; separate
+finished-set/TV gate before artwork installation. No art approval inferred from
+voice approval. Maud appearance already approved, completion art queued. Reuse
+completed assets; include new approved production voices in future reviews.
+Rebase before pushing townsfolk-art; no PR, merge, closure or publication.
+Earlier pending-Skarrow voice notes are historical.

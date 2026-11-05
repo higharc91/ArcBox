@@ -1,53 +1,54 @@
-# Mother Skarrow — first pixel appearance and existing voice
+# Mother Skarrow — appearance draft and approved production voice
 
-This draft translates her existing owner-approved concept into eight standing
-pixel views. She is the elderly goblin chief who has led her starving clan for
-forty winters: wary, dignified and practical, with dry humour. No new lore.
+Mother Skarrow’s first eight-view pixel appearance translates her already approved
+concept: elderly goblin clan chief, short adult goblin proportions, weathered
+olive-green face/long ears, greying braids, repaired hide/wool and LEFT-hand staff.
+Appearance approval remains pending before motion/portraits; finished-set/TV
+approval is separate. Old Maud’s appearance is approved and completion art queued.
 
 ![Appearance review](candidate-1-preview.png)
 
-[Original recorded voice — rejected by owner](voice-sample.mp3): “Forty winters I have held
-this clan. Do not ask me if I can hold it one more.” Existing Laomedeia town2
-recording, already pitch−2 in production; compatibility MP3 transcode only, no
-new speech or additional pitch/filter. Source/text/hashes in voice-sample.json.
+[Hear the approved production voice](voice-sample.mp3) · [Three-line voice reel](voice-recast/approved-voice-reel.mp3)
 
-Front, southwest, west, northwest; north, northeast, east, southeast. Muted green
-skin, long ears/hooked nose, deeply weathered face, greying hair/front braids/back
-braid, patched olive/brown hide and wool, modest food pouches and worn boots.
-Plain LEFT-hand wooden staff (imageRIGHT front /imageLEFT back), no magic flame.
-Short adult goblin proportions: proposed50 native body pixels /25 world, against
-human72/36. Scale remains subject to native and TV review, not inferred from
-concept painting dimensions. She is an elder, not a human-sized mage or child.
+The owner approved Kore: “sounds good, use it”. All67 Mother Skarrow lines now use
+Kore at pitch0 without a filter, from64 selected sources. Same canonical captions,
+other speakers and recordings-only playback. Town2 sample: “Forty winters I have
+held this clan. Do not ask me if I can hold it one more.” It uses the verified
+number-clarified production take, with exact source/encoded/review hashes.
+Rejected Laomedeia sample and all original67 Ogg files remain preserved.
 
-One image-tool call; original opaque magenta export/request/input/output hashes
-retained. build-appearance.cjs removes only key pixels, preserves non-key RGB,
-clears transparent RGB and produces binary alpha, without redraw/resize/mirroring.
-After npm ci --prefix tools/tactics-assets/imagegen/townsfolk, rebuild from root:
+Raw paid sources, exact model requests, live schema/cap checks/quotes, job/asset/
+billing receipts and local caption checks are under voice-recast/.20 superseded
+paid speech takes remain with reasons and hashes. Narrated instructions and word
+substitutions were replaced. Two stubborn chapter3 lines use only documented
+pause tags with the same Kore speaker, language and zero pitch/filter; descriptive
+prose was repeatedly spoken there. No narration was cut from an audio take.
+The original audition is retained as performance approval, while production uses
+a fresh “40” render for the unchanged “Forty” caption.
+
+All67 source/installed clip checks pass; source mono24kHz16bit /4.4–15.16seconds,
+zero clipped source samples. Unbiased local small.en/medium.en ASR matches words
+after documented spelling/number/homophone/vocalization differences and physically
+near-silent out-of-duration tail artifacts. No per-clip transcription service
+charge; optional checker packages/models are dev tools outside the content pack.
+Full1443/1443 coverage;0 pitch/brightness outliers;23 tooling +71 logic +52
+story/bark presentation tests pass. Both test-project Debug builds0warnings/errors.
+ASR/acoustic checks do not establish acting maturity; the owner approved the voice.
+
+Total224CU including prior6CU audition/ASR; this continuation218CU.220 speechCU
+and4 prior paid ASRCU. No purchases/upgrades/PixelLab. Full cost/receipt accounting
+is in voice-recast/batch/cost-summary.json; no image-tool price inferred.
+No image generation during recast. The single appearance image-tool call and
+original concept/source/request/input/output hashes remain preserved.
+
+Rebuild the appearance from repo root (npm dependencies under parent townsfolk):
 
     node tools/tactics-assets/imagegen/townsfolk/mother-skarrow/build-appearance.cjs
 
-Eight complete standing-cell bounds and voice decoding pass. This is an enlarged
-appearance sheet, not a validated native atlas. Native grid/palette/goblin size/
-anchors/ear and staff handedness/boot-contact QA remain before motions. Owner
-appearance approval before animations/portraits; separate finished-set/TV approval
-before integration. Preserve named-only scope and required battle presentation;
-legacy generic goblin art/rules/contracts stay unchanged.
+For offline voice import/validation, see voice-recast/batch/README.md. Native
+art-grid/palette/goblin scale/anchors and staff/boot/ear/handedness QA remain before
+motion work. Proposed goblin body50 native /25 world versus humans72/36 is subject
+to native/TV validation. Audit named-only art aliases and required battle playback
+before art integration; generic goblin art/contracts stay unchanged.
 
-Zero PixelLab calls/credits/purchases and zero new speech. No image-tool monetary
-price inferred. Production content, rules, balance and phone contracts unchanged.
-Include the existing recorded voice in subsequent reviews; reuse these sources.
-
-## Alternative voice audition
-
-The owner requested another voice. A one-line Kore audition uses the same town2
-caption, aiming for an elderly goblin matriarch with a low husky female register,
-dry rasp, measured authority and tired warmth. No post pitch/filter. Production
-casting/recordings and normal voice sample stay unchanged until listening approval.
-All67 Mother Skarrow lines are inventoried in voice-recast-plan.json for a
-consistent recast after that approval. Artwork gates remain separate.
-
-[Hear the alternative Kore audition](voice-recast/audition-kore.mp3). TTS2CU +
-transcript check4CU =6CU; no purchases/upgrades. Mono24kHz,7.84seconds,0 clipped
-samples, WAV/MP3 decode pass. ASR records the caption without direction narration,
-with the opening “Forty” misheard as “For to you”; listening verification of that
-number remains before exact-take reuse. Owner performance approval is pending.
+Voice report: docs/superpowers/reports/2026-11-03-townsfolk-art/mother-skarrow-voice-recast/report.md.

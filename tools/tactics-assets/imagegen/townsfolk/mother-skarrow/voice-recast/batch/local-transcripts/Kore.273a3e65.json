@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.273a3e65.wav",
+  "sourceSha256": "aa3563c97e0f34e6c1bd131f514878d6421fd12ad016eb4ec7b34d553c55f3a1",
+  "duration": 16.96,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.36,
+      "text": " Old female goblin, low husky contralto, dry rasp, calm authority."
+    },
+    {
+      "start": 8.56,
+      "end": 12.88,
+      "text": " Seven came down when the snow was still falling."
+    },
+    {
+      "start": 12.88,
+      "end": 16.72,
+      "text": " Seven came down with their hands full of gold."
+    },
+    {
+      "start": 16.72,
+      "end": 18.72,
+      "text": " You"
+    }
+  ],
+  "text": "Old female goblin, low husky contralto, dry rasp, calm authority. Seven came down when the snow was still falling. Seven came down with their hands full of gold. You",
+  "secondsToTranscribe": 5.681
+}

@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.491ca49e.wav",
+  "sourceSha256": "e2179a14accc0bfa203536b64a808c5ecacf011841be0405b0532ccbdd622bc0",
+  "duration": 7.08,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.0,
+      "text": " That is the next verse, and the next verse is not for strangers."
+    }
+  ],
+  "text": "That is the next verse, and the next verse is not for strangers.",
+  "secondsToTranscribe": 1.758
+}

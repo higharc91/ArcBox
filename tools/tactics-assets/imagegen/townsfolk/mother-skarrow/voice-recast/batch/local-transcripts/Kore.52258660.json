@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.52258660.wav",
+  "sourceSha256": "6b4440740353a466b509e19551af677daf11d0d6c6b3fe1e3285075de4ba64b6",
+  "duration": 30.8,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 8.040000000000001,
+      "text": " Most of them, some of the young ones belong to my grandson now in their hearts."
+    },
+    {
+      "start": 8.040000000000001,
+      "end": 14.96,
+      "text": " Measured, wary, quietly commanding, with tired warmth."
+    },
+    {
+      "start": 14.96,
+      "end": 25.240000000000002,
+      "text": " Mood idle, most of them, some of the young ones belong to my grandson now in their hearts."
+    },
+    {
+      "start": 25.240000000000002,
+      "end": 30.480000000000004,
+      "text": " Vorga, he left us to take instead of ask."
+    }
+  ],
+  "text": "Most of them, some of the young ones belong to my grandson now in their hearts. Measured, wary, quietly commanding, with tired warmth. Mood idle, most of them, some of the young ones belong to my grandson now in their hearts. Vorga, he left us to take instead of ask.",
+  "secondsToTranscribe": 5.001
+}

@@ -28,7 +28,7 @@ Named characters keep their existing preset, pitch and filter across main scenes
 | pip_ashdown | Leda | +3 | — |
 | old_maud | Gacrux | +0 | — |
 | celandine_marrowby | Autonoe | +0 | — |
-| mother_skarrow | Laomedeia | -2 | — |
+| mother_skarrow | Kore | +0 | — |
 | ysolde | Despina | +1 | fey |
 | townsfolk_farmer | Charon | -2 | — |
 | townsfolk_farmhand | Achird | +2 | — |
@@ -99,3 +99,28 @@ caption, preset, character direction and authored delivery guards still apply.
 Six rejected paid takes are in voiceRecastSuperseded; active voiceRecasts contain
 only selected takes. Reproduction and caption-check tools/receipts are in
 old-maud/voice-recast/batch. Total274CU including5CU earlier audition; no purchase.
+
+
+## Mother Skarrow approved elder-voice recast (#80)
+
+Owner approval: “sounds good, use it”. Kore at pitch0 with no filter; keep the
+approved low husky elderly goblin-matriarch direction, measured wary authority
+and tired warmth across all67 lines. Preserve captions and recordings-only
+playback. ApprovedRenderText guards capture actual render requests, including
+numeric40 for an ambiguous opening number, the approved cue without Mood prose,
+and supported pauses for clarity; they do not alter canonical caption words.
+
+Retain original67 recordings and all superseded paid takes. Sources, live
+quotes/cap checks, receipts, source hashes and offline import/local speech-check
+tools live in mother-skarrow/voice-recast/batch. Local small.en/medium.en ASR is
+unbiased and free of per-clip service charges; it is a wording check, not acting
+judgment. Generic goblin art and battle/phone contracts are unchanged. Artwork
+approval gates remain separate from the approved voice.
+
+All67 clips are now installed from64 selected takes; full1443/1443 coverage.
+Two chapter3 takes use only documented pause tags with the same Kore speaker,
+language and zero pitch/filter because descriptive instructions were repeatedly
+narrated. Exact alternate requests are guarded and retained; source/caption and
+pitch/brightness checks pass. Original67 clips and20 superseded new paid takes
+are preserved. Continuation218CU, total224CU including prior6CU audition/ASR;
+local full-set transcription carries no per-clip service fee. No purchases.

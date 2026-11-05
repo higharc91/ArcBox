@@ -28,21 +28,25 @@
     "Existing owner-approved concept reused, not regenerated; old goblin chief with repaired hide/wool, grey hair and ordinary staff.",
     "Eight complete standing cells. Native grid/palette/body scale/anchors, ear/boot/staff contact and handedness QA remain before motions.",
     "Appearance approval before animation/portraits; finished-set/TV approval remains separate.",
-    "Existing Laomedeia town2 recording included; no new speech or voice approval inferred.",
+    "Owner-approved Kore recast installed across all67 lines; town2 sample now uses the installed number-clarified clip.",
     "Named Mother Skarrow only; generic goblin refresh stays outside scope.",
     "Before later integration, audit named-only sprite selection and battle attack/cast/hurt/down playback; preserve generic goblin combat art and rules/contracts."
   ],
   "voiceReview": {
-    "status": "alternative_audition_pending_owner_review",
+    "status": "owner_approved_recast_installed",
     "reason": "Owner rejected the existing voice: let's draft another voice, it's not great",
     "priorPreset": "Laomedeia",
     "priorPitch": -2,
     "candidate": "Kore",
     "replacementLineCount": 67,
-    "productionVoiceChanged": false,
+    "productionVoiceChanged": true,
     "plan": "voice-recast-plan.json",
-    "sample": "voice-recast/audition-kore.mp3",
-    "paidCU": 6,
-    "validation": "voice-recast/validation.json"
+    "sample": "voice-sample.mp3",
+    "paidCU": 224,
+    "validation": "voice-recast/batch/validation.json",
+    "ownerApproval": "sounds good, use it",
+    "voice": "Kore",
+    "pitch": 0,
+    "newCU": 218
   }
 }

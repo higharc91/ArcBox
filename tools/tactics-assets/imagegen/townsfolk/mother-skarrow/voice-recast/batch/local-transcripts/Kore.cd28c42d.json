@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.cd28c42d.wav",
+  "sourceSha256": "14b5bbc44152eb79562ec957827b1572cb11d121f2b8b14220c6c8b73b9829af",
+  "duration": 18.56,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.24,
+      "text": " Old female goblin, low husky contralto, dry rasp, calm authority."
+    },
+    {
+      "start": 7.24,
+      "end": 11.36,
+      "text": " Your warden sang that it was given."
+    },
+    {
+      "start": 11.36,
+      "end": 18.2,
+      "text": " We never warmed our hands at it, so we never forgot, it was stolen."
+    },
+    {
+      "start": 18.2,
+      "end": 20.259999999999998,
+      "text": " you"
+    }
+  ],
+  "text": "Old female goblin, low husky contralto, dry rasp, calm authority. Your warden sang that it was given. We never warmed our hands at it, so we never forgot, it was stolen. you",
+  "secondsToTranscribe": 11.624
+}

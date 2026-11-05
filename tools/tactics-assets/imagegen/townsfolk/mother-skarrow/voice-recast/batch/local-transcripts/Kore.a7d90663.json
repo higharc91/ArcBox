@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.a7d90663.wav",
+  "sourceSha256": "146d0304d074397282340e84b755092f2b3c398c0c0001b3c592425a263c3697",
+  "duration": 7.2,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.48,
+      "text": " Go home tell them the bridge stays ours until the grain comes"
+    }
+  ],
+  "text": "Go home tell them the bridge stays ours until the grain comes",
+  "secondsToTranscribe": 1.805
+}

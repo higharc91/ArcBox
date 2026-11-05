@@ -1,0 +1,51 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.3ed0c02c.wav",
+  "sourceSha256": "2825b37345076b15be88734acd88a05421e9f29b63ff39d84e06c15da384e86b",
+  "duration": 26.36,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.8,
+      "text": " Elderly goblin matriarch, low female contralto,"
+    },
+    {
+      "start": 4.8,
+      "end": 10.040000000000001,
+      "text": " husky dry rasp and age creek, measured, wary,"
+    },
+    {
+      "start": 10.040000000000001,
+      "end": 14.08,
+      "text": " quietly commanding with tired warmth."
+    },
+    {
+      "start": 14.08,
+      "end": 18.56,
+      "text": " Your wardens saying that it was given,"
+    },
+    {
+      "start": 18.56,
+      "end": 24.48,
+      "text": " we never warmed our hands at it, so we never forgot."
+    },
+    {
+      "start": 24.48,
+      "end": 26.080000000000002,
+      "text": " It was stolen."
+    },
+    {
+      "start": 26.080000000000002,
+      "end": 28.080000000000002,
+      "text": " you"
+    }
+  ],
+  "text": "Elderly goblin matriarch, low female contralto, husky dry rasp and age creek, measured, wary, quietly commanding with tired warmth. Your wardens saying that it was given, we never warmed our hands at it, so we never forgot. It was stolen. you",
+  "secondsToTranscribe": 13.303
+}

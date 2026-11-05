@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.ff068f53.wav",
+  "sourceSha256": "2c2c08fe8586476b18824b6784621bc4784cde1465d809c353aa58565e4ef046",
+  "duration": 13.72,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 11.22,
+      "text": " Not coin, coin does not boil, a share of the grain your mayor keeps behind his locks, every"
+    },
+    {
+      "start": 11.22,
+      "end": 13.280000000000001,
+      "text": " week until the thaw."
+    }
+  ],
+  "text": "Not coin, coin does not boil, a share of the grain your mayor keeps behind his locks, every week until the thaw.",
+  "secondsToTranscribe": 2.41
+}

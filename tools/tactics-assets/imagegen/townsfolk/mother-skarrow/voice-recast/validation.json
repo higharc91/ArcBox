@@ -10,9 +10,15 @@
   "decode": "pass",
   "postPitchSemitones": 0,
   "filter": null,
-  "ownerListeningApproval": "pending",
+  "ownerListeningApproval": "sounds good, use it",
   "transcript": "For to you winters I have held this clan do not ask me if I can hold it one more",
   "asrJobId": "job_eaBVHYR3F14xy2Kbm34LRpBs",
   "captionCheck": "ASR recognises all remaining words; opening Forty is transcribed as For to you. No direction narration detected. Listening check of the number remains before exact audition reuse.",
-  "speakingPerformanceJudgment": "Owner listening review pending; no acoustic maturity claim from mechanical metrics."
+  "speakingPerformanceJudgment": "Owner listening review pending; no acoustic maturity claim from mechanical metrics.",
+  "selectedProductionTake": {
+    "raw": "Kore.9b2e912e",
+    "jobId": "job_M4F24FPsYxtcdMUgCt2Kx8bk",
+    "exactAuditionReused": false,
+    "reason": "Opening number clarified with numeric40, same actor; canonical caption unchanged."
+  }
 }

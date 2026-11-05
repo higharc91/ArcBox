@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.610ed4be.wav",
+  "sourceSha256": "5bfeb227d0804d127016b849014cf011444a4ea0a4ab1366dbbf7e7373605979",
+  "duration": 13.44,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.0,
+      "text": " Old female goblin, low husky control toe, dry rasp, calm authority."
+    },
+    {
+      "start": 8.0,
+      "end": 13.0,
+      "text": " Small kindness, small stomachs, it is not nothing."
+    }
+  ],
+  "text": "Old female goblin, low husky control toe, dry rasp, calm authority. Small kindness, small stomachs, it is not nothing.",
+  "secondsToTranscribe": 4.343
+}

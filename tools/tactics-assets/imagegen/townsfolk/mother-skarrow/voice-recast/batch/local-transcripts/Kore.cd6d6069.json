@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.cd6d6069.wav",
+  "sourceSha256": "b615c10a90176139038bc116cfb3eadfdc9edaff6507c9060d1e10ed1741df22",
+  "duration": 23.24,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.36,
+      "text": " Whatever you think of me, low female contralto, husky, dry,"
+    },
+    {
+      "start": 6.36,
+      "end": 10.56,
+      "text": " rasp, and age creek, measured, wary,"
+    },
+    {
+      "start": 10.56,
+      "end": 15.88,
+      "text": " quietly commanding, with tired, warmth, mood, idle."
+    },
+    {
+      "start": 16.88,
+      "end": 22.96,
+      "text": " Whatever you think of me, feed the little ones, feed them."
+    }
+  ],
+  "text": "Whatever you think of me, low female contralto, husky, dry, rasp, and age creek, measured, wary, quietly commanding, with tired, warmth, mood, idle. Whatever you think of me, feed the little ones, feed them.",
+  "secondsToTranscribe": 5.383
+}

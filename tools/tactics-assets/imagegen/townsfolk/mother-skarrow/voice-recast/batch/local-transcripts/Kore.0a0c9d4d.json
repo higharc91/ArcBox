@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.0a0c9d4d.wav",
+  "sourceSha256": "4c2f07a30e99aa71c2a922c615da4fb0939d748c1b1a0861267a6ea4f4b8a35a",
+  "duration": 11.52,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": " Neighbours."
+    },
+    {
+      "start": 2.0,
+      "end": 8.0,
+      "text": " That is your word for people you shout at and still feed."
+    },
+    {
+      "start": 8.0,
+      "end": 11.0,
+      "text": " Good. We will be neighbours."
+    }
+  ],
+  "text": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+  "secondsToTranscribe": 2.277
+}
