@@ -1,0 +1,27 @@
+{
+  "character": "Rook",
+  "characterId": "rook",
+  "presetReference": "bandit_captain",
+  "stage": "appearance_candidate_pending_owner_review",
+  "date": "2026-11-05",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 3,
+  "candidate": "candidate-1-export.png",
+  "candidateSha256": "236eb5325a722e8b934c4427bd7a010d45379170ffa891bb3337d2f6264a874e",
+  "reviewPreview": "candidate-1-preview.png",
+  "previewSha256": "269a8946b5127b0ffc981956ce0e477909346aa1ce55f27169610a7e45f52ef7",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "productionInstalled": false,
+  "animationApproval": "pending_appearance_approval",
+  "fullSetTvApproval": "pending",
+  "reviewNotes": [
+    "Approved Rook concept reused, not regenerated; appearance proposal does not establish gender/species/age as new canon.",
+    "Eight planted views; southwest corrected and ledger strap/hip corrected in rear views. Native-grid/body-size/palette/equipment occlusion/anchor QA remain before motions.",
+    "Two earlier transparent exports retained as superseded technical sources; opaque magenta export and deterministic colour-key preview selected. Native edge/palette cleanup remains, including residual colour-key fringe.",
+    "Include existing recorded town bark; no new speech.",
+    "Owner appearance approval before motions/portraits, separate finished-set/TV gate before installation.",
+    "Maud appearance approval remains outstanding; owner requested moving to next character."
+  ]
+}

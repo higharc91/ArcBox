@@ -606,3 +606,29 @@ full-set/TV approval is separate. Voice approval does not approve her artwork.
 Reuse the existing appearance/concept; no regeneration of completed assets.
 Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.
 Earlier pending-voice notes are historical.
+
+
+## Latest checkpoint — Rook appearance draft with recorded voice
+
+Owner accepted Maud’s voice and requested the next character. Rook (Ash Market
+broker, bandit_captain/rook) has an eight-view first pixel appearance proposal
+under tools/tactics-assets/imagegen/townsfolk/rook/. Existing approved concept
+reused; existing Umbriel town clip included as voice-sample.mp3, no new speech.
+Appearance does not create new gender/species/age canon.
+
+Three image-tool calls, zero PixelLab spend/purchases. Sources/requests/hashes
+retained. Southwest facing and rear ledger-satchel side corrected. Two defective
+transparent exports retained; selected opaque magenta export is deterministically
+colour-keyed by build-appearance.cjs. Eight standing-cell bounds/binary-alpha
+checks and voice decode pass. Native grid/palette/body-size/anchors, gear occlusion
+and residual key-fringe cleanup remain before motions; not a native atlas yet.
+**Rook appearance approval pending** before animations/portraits, then separate
+finished-set/TV gate before installation. Maud’s appearance approval remains
+outstanding; do not infer it from the request to move to Rook.
+
+Production unchanged:210288327bytes /4953files, inventory SHA256
+87870feadf6bf4355fc9187ff04997e7fa505215927bc29f938ef0a5424f96c4.
+No rules/balance/phone changes. Last native four-party peaks328.99 /192.37MiB,
+not rerun for review-only files. Include existing recorded voice in future reviews.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/rook-imagegen/report.md.
+Rebase before pushing townsfolk-art; no PR, merge, issue closure or publication.

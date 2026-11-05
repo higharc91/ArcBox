@@ -1,0 +1,11 @@
+{
+  "character": "rook",
+  "barkId": "bark_rook_town_1",
+  "text": "Shards, word, a boat at midnight. All for sale. Which do you need?",
+  "preset": "Umbriel",
+  "sourcePath": "content/tactics/base/lore/audio/bark_rook_town_1.84d37d2d.ogg",
+  "sourceSha256": "bbb865b4d9d4e68c3132a7741d7fde526aad3977896e1c95d472c5fec1dd5692",
+  "reviewFile": "voice-sample.mp3",
+  "reviewSha256": "848efae03c5dfd4aa89d1280f987af55b7d125f024677a10b15cbfffa7b80b70",
+  "operation": "Compatibility MP3 transcode of existing installed recording. No new synthesis, pitch or filter."
+}

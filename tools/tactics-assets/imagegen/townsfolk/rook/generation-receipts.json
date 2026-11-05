@@ -1,0 +1,47 @@
+{
+  "imageToolCalls": 3,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-source.png",
+      "originalPath": "/workspace/generated_images/exec-ee539088-3926-4366-b6a3-275f33fe2d40.png",
+      "requestSha256": "4a303346ffc7955e5234a4d7f1056e1cbb3f9fa6ea8de9ae448cc4497a50a46d",
+      "outputSha256": "0c825df2311da6fc0f0680c53c8238196b80f8aacb622a488df7f130cce39b23",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_rook.png": "85bce522affb8cc34139d6f362134ca2eb43675f9288aaa89c46e900f4ba6d3c",
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/rotations/south.png": "8c113b42abb005990f928ef090b6d26f160d00fec6c2d5d607a362a7b088063a"
+      }
+    },
+    {
+      "request": "appearance-cleanup-request.json",
+      "output": "candidate-1.png",
+      "originalPath": "/workspace/generated_images/exec-b5523cc3-1956-4b5c-a163-97aedf485ec1.png",
+      "requestSha256": "c1bc1f50f180a7543043b9d7d08383a3fabc428bd582d605c95fe9f48d4e5581",
+      "outputSha256": "e778a06fe64438be6d6573a8df7e85f12b9513d06c2eb0563d4762fa94e2b349",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/candidate-1-source.png": "0c825df2311da6fc0f0680c53c8238196b80f8aacb622a488df7f130cce39b23"
+      }
+    },
+    {
+      "request": "appearance-export-repair-request.json",
+      "output": "candidate-1-export.png",
+      "originalPath": "/workspace/generated_images/exec-fb38453a-ae76-46da-ac00-ef39beb57062.png",
+      "requestSha256": "dbb078032cbbc2600351afd606f9ae6f4b56eb327ac70ac5d9ae469acdae5ef6",
+      "outputSha256": "236eb5325a722e8b934c4427bd7a010d45379170ffa891bb3337d2f6264a874e",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_rook.png": "85bce522affb8cc34139d6f362134ca2eb43675f9288aaa89c46e900f4ba6d3c",
+        "tools/tactics-assets/imagegen/townsfolk/rook/candidate-1.png": "e778a06fe64438be6d6573a8df7e85f12b9513d06c2eb0563d4762fa94e2b349"
+      }
+    }
+  ],
+  "runtimeAlphaPreview": {
+    "script": "build-appearance.cjs",
+    "source": "candidate-1-export.png",
+    "output": "candidate-1-preview.png",
+    "operation": "Remove magenta colour-key pixels, clear transparent RGB, preserve non-key RGB; no redraw/rescale/mirror.",
+    "reason": "Prior transparent output erased some dark coat/gear pixels. Opaque colour-key export retained instead."
+  }
+}
