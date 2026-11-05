@@ -21,5 +21,17 @@
     "Raw tool images retained; appearance preview applies the normal native alpha threshold and clears transparent RGB.",
     "Native grid/palette/body height/anchors/staff grip-side and staff/boot contact QA remain before motions.",
     "Appearance approval before motions/portraits; final full-set/TV approval separate."
-  ]
+  ],
+  "voiceReview": {
+    "status": "replacement_audition_pending_owner_review",
+    "reason": "Owner says her voice sounds too young. Maud is over100 and should sound ancient, papery, unhurried and lucid.",
+    "priorPreset": "Achernar",
+    "priorPitch": -1,
+    "replacementLineCount": 24,
+    "productionVoiceChanged": false,
+    "sample": "voice-recast/audition-gacrux.mp3",
+    "voice": "Gacrux",
+    "paidCU": 5,
+    "plan": "voice-recast-plan.json"
+  }
 }

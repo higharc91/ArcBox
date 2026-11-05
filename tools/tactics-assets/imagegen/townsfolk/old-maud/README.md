@@ -8,7 +8,7 @@ No ember glow or magical staff.
 
 ![Appearance preview](candidate-1-preview.png)
 
-[Hear her existing recorded voice](voice-sample.mp3): “Sit down, dearie. I've waited
+[Original recorded voice — rejected as too young](voice-sample.mp3): “Sit down, dearie. I've waited
 a hundred years, I can wait while you sit.” Exact source/text/hashes are retained
 in voice-sample.json. Compatibility transcode only; no speech generation.
 
@@ -24,3 +24,17 @@ Appearance approval is pending before motions/portraits, with separate full-set/
 approval before installation. No Old Maud production art. Two image-tool calls,
 zero PixelLab calls/spend/purchases, zero new speech; no image-tool monetary price
 is inferred. Reuse these sources rather than regenerating the approved concept.
+
+## Older voice audition
+
+The owner rejected the original recording as too young.
+[Hear the new ancient/papery audition](voice-recast/audition-gacrux.mp3), using
+Gacrux with an explicit105-year-old, frail but lucid delivery. Exact request,
+live model schema/quote/cap check, source WAV, paid receipt and hashes are under
+voice-recast/.5 CU quoted/billed. No credits purchased. No pitch shift/filter.
+
+Owner voice approval is pending before replacing all24 Maud lines. Production
+casting/recordings and the original normal voice sample remain unchanged; after
+approval, recast all lines consistently and update that normal sample. Do not
+reuse the rejected voice for the finished review. Artwork appearance/full-set
+gates remain separate.

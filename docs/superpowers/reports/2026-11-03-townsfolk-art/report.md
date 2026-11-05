@@ -327,3 +327,25 @@ Rules, lore/captions, balance and phone contracts unchanged. Include existing
 recorded voice in future appearance and completed reviews. Rebase before pushing
 townsfolk-art; no PR, merge or issue closure. Earlier pending-Celandine notes are
 historical. Continue with Old Maud appearance approval.
+
+## Latest Maud direction — older voice audition pending
+
+The owner rejected the existing voice: “her voice is too young sounding”. A new
+Gacrux audition requests an ancient105-year-old, papery, lightly quavering,
+unhurried but lucid woman. Hear tools/tactics-assets/imagegen/townsfolk/old-maud/
+voice-recast/audition-gacrux.mp3. Same caption, fresh synthesis, no post pitch or
+filter. Quoted5 CU /job billing5 CU, no credits purchased. Live schema/cap check
+and paid source/receipt/hashes retained. Mono24 kHz /9.36 seconds;0 source clipping
+and MP3 decode passes. Owner listening approval pending before replacing all24
+Maud lines. Full inventory/plan: old-maud/voice-recast-plan.json.
+
+Production cast/clips, normal old sample and art remain unchanged. Do not reuse
+the rejected young-sounding sample for a finished review. After voice approval,
+apply the approved cast/direction to all24 lines consistently and replace the
+normal draft voice sample with the approved production town clip. Gacrux is
+shared with Dagna/player grim.high; listening review must judge identity separation.
+Artwork appearance/full-set/TV gates remain separate. No art regeneration,
+PixelLab spend, rules/balance/phone changes.
+Report: docs/superpowers/reports/2026-11-03-townsfolk-art/maud-voice-recast/report.md.
+Rebase before pushing townsfolk-art; no PR, merge or issue closure. Earlier
+existing-voice draft notes are historical.

@@ -1,0 +1,39 @@
+{
+  "jobId": "job_hrJPAVUNz1C47HaDcdMxx82G",
+  "jobType": "custom",
+  "billing": {
+    "cuCost": 5,
+    "cuDiscount": 0
+  },
+  "metadata": {
+    "input": {
+      "modelId": "model_google-gemini-3-8-flash-tts",
+      "language": "en-US",
+      "text": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit.",
+      "voice": "Gacrux"
+    },
+    "assetIds": [
+      "asset_JyX7gkJmsDA5hwqQA9UZ7TiS"
+    ]
+  },
+  "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "authorId": "user_9378dDd1b8d6e376eC44bB68",
+  "createdAt": "2026-11-05T00:10:14.763Z",
+  "updatedAt": "2026-11-05T00:10:24.205Z",
+  "status": "success",
+  "statusHistory": [
+    {
+      "status": "pending",
+      "date": "2026-11-05T00:10:14.763Z"
+    },
+    {
+      "status": "in-progress",
+      "date": "2026-11-05T00:10:14.908Z"
+    },
+    {
+      "status": "success",
+      "date": "2026-11-05T00:10:24.205Z"
+    }
+  ],
+  "progress": 1
+}
