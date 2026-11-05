@@ -1,0 +1,256 @@
+{
+  "source": "/workspace/ArcBox/content/tactics/base",
+  "reviewOnly": true,
+  "productionInstalled": false,
+  "baseCommit": "facbaceb",
+  "variants": 14,
+  "sourceFrames": 672,
+  "portraits": 84,
+  "cosmeticDocuments": [
+    "creatures/manifest.json",
+    "portraits/manifest.json",
+    "rules/world/ashen_ford.json"
+  ],
+  "placements": [
+    {
+      "id": "af_barmaid_1",
+      "preset": "barmaid",
+      "variant": "a"
+    },
+    {
+      "id": "af_barmaid_2",
+      "preset": "barmaid",
+      "variant": "b"
+    },
+    {
+      "id": "af_child_1",
+      "preset": "child",
+      "variant": "a"
+    },
+    {
+      "id": "af_child_3",
+      "preset": "child",
+      "variant": "b"
+    },
+    {
+      "id": "af_farmer_1",
+      "preset": "farmer",
+      "variant": "a"
+    },
+    {
+      "id": "af_farmer_2",
+      "preset": "farmer",
+      "variant": "b"
+    },
+    {
+      "id": "af_farmer_3",
+      "preset": "farmer",
+      "variant": "a"
+    },
+    {
+      "id": "af_farmer_4",
+      "preset": "farmer",
+      "variant": "b"
+    },
+    {
+      "id": "af_farmer_5",
+      "preset": "farmer",
+      "variant": "a"
+    },
+    {
+      "id": "af_farmhand_1",
+      "preset": "farmhand",
+      "variant": "a"
+    },
+    {
+      "id": "af_farmhand_2",
+      "preset": "farmhand",
+      "variant": "b"
+    },
+    {
+      "id": "af_farmhand_3",
+      "preset": "farmhand",
+      "variant": "a"
+    },
+    {
+      "id": "af_fisher_1",
+      "preset": "fisher",
+      "variant": "a"
+    },
+    {
+      "id": "af_fisher_2",
+      "preset": "fisher",
+      "variant": "b"
+    },
+    {
+      "id": "af_fisher_3",
+      "preset": "fisher",
+      "variant": "a"
+    },
+    {
+      "id": "af_fisher_4",
+      "preset": "fisher",
+      "variant": "b"
+    },
+    {
+      "id": "af_guard_1",
+      "preset": "guard",
+      "variant": "a"
+    },
+    {
+      "id": "af_guard_2",
+      "preset": "guard",
+      "variant": "b"
+    },
+    {
+      "id": "af_guard_3",
+      "preset": "guard",
+      "variant": "a"
+    },
+    {
+      "id": "af_guard_4",
+      "preset": "guard",
+      "variant": "b"
+    },
+    {
+      "id": "af_guard_5",
+      "preset": "guard",
+      "variant": "a"
+    },
+    {
+      "id": "af_guard_6",
+      "preset": "guard",
+      "variant": "b"
+    },
+    {
+      "id": "af_merchant_1",
+      "preset": "merchant",
+      "variant": "a"
+    },
+    {
+      "id": "af_merchant_2",
+      "preset": "merchant",
+      "variant": "b"
+    },
+    {
+      "id": "af_merchant_3",
+      "preset": "merchant",
+      "variant": "a"
+    },
+    {
+      "id": "af_merchant_4",
+      "preset": "merchant",
+      "variant": "b"
+    },
+    {
+      "id": "af_merchant_5",
+      "preset": "merchant",
+      "variant": "a"
+    },
+    {
+      "id": "af_merchant_6",
+      "preset": "merchant",
+      "variant": "b"
+    }
+  ],
+  "assetHashes": {
+    "creatures/generic_barmaid_a.png": "94dc0ab1657235ac65e91c5685bd37d84fcfd0db6da97ff536c701b623a94a55",
+    "portraits/generic_barmaid_a_idle.png": "15f645d4e0160a69e3ce8d1d86c8aead6ca224dafc24557508ff2d64dab14a34",
+    "portraits/generic_barmaid_a_hurt.png": "5113cded3c87c55a0604a5d06b4a9a06819caee347886ea589d0b8af79202c01",
+    "portraits/generic_barmaid_a_happy.png": "10fe8a9fa924705b69ac658c6c45b84997dcc0e8f0a4e1e7aac6b3e084852ee3",
+    "portraits/generic_barmaid_a_angry.png": "cf8a6fa412cf985ebb9a445461a4cd46253048f92c5cf204df97d1693b50cd9c",
+    "portraits/generic_barmaid_a_sad.png": "1ce4d57a8cfefc134c5220c576b6680109781b235b7985f9a45727d732dc82c2",
+    "portraits/generic_barmaid_a_surprised.png": "fe426d749b2dd32660db94c062a2ff862ffbfd51bf8b193633f3ef92b7533afa",
+    "creatures/generic_barmaid_b.png": "a22f301e54af0e11bc44ab9acd4c45bc23510afea2f0b5b0bc4cadc89c3641aa",
+    "portraits/generic_barmaid_b_idle.png": "bb24d0f9444dfbccc6f9a00b5e693ea3d5f31821a8ff9211048cc149bffeb5d6",
+    "portraits/generic_barmaid_b_hurt.png": "242c6723e11254ab3af236be6892645788af1803fa8d08007aa5719eee7d7905",
+    "portraits/generic_barmaid_b_happy.png": "19f8fdd075f4481e7576353fc48ff2ac3504767ca969b8af618c058a25dc1ce2",
+    "portraits/generic_barmaid_b_angry.png": "1025b97d48e78bafabbef0ab92082046835cfbe09e707a69db0169a213423b83",
+    "portraits/generic_barmaid_b_sad.png": "f55eb9c9f0cf0ded2087eb45405836041f13abafec3392f5384c689eadc76d9f",
+    "portraits/generic_barmaid_b_surprised.png": "0e4ce866d7307f512eb71c6d6078d46c298d62297e80ca5c7a14751385cd1ec8",
+    "creatures/generic_child_a.png": "00d3db2348152881e9a01efb5f1cd9b2c229580f96b5c8f0309bb1bf2993b0c2",
+    "portraits/generic_child_a_idle.png": "a83caf1c5863581c490013f2ef5345c492d0b8594732cecbce59ae0f73621dbe",
+    "portraits/generic_child_a_hurt.png": "90ead919b85e273dbfa15086c58b203594e8d89965cacd7681ec3dbe21f1f120",
+    "portraits/generic_child_a_happy.png": "0e7832d3b7538a1145e46c8ff4a57551a52d54bf318c8c0871501e415bab3cfe",
+    "portraits/generic_child_a_angry.png": "4e25f66a4499ce27f90135b40039f6b66c76469c2b477d9207a09152e16d7d5c",
+    "portraits/generic_child_a_sad.png": "cf4ee07dfecc23cfd3ea961f97afd3f51b7b0043a15e30ac4c1a358b1ac738b3",
+    "portraits/generic_child_a_surprised.png": "013720192ed2816460d3d55b819d17d4c7846c6cc9db04313a5938a947a9b7c5",
+    "creatures/generic_child_b.png": "3f16748629f254aeddae854c328b1735395d98b35bfe74e8f10fe6a5365ebe76",
+    "portraits/generic_child_b_idle.png": "c2b8099b934c30e25cb64cc26aae23c1a04200e98be82f38602ec05638bd7de7",
+    "portraits/generic_child_b_hurt.png": "a84ad5ea8f8475fb348fc684c2f2f41715f22602a7335eaadf9443d702b8527e",
+    "portraits/generic_child_b_happy.png": "9f9a583549804b3c43521758edf100e60c22f25495c13069017d4c782d43914c",
+    "portraits/generic_child_b_angry.png": "fcff5a0b4587230e28affa943c9de97d8ac29e3a42e354b55a4cca9ca9403b2e",
+    "portraits/generic_child_b_sad.png": "bb6d0ebb80ffc49851eef7591ec8b89626f982e45c42078134db52a632dfc062",
+    "portraits/generic_child_b_surprised.png": "a155a218714130b634a06e48cd695482d5994b03909f22a3d7af59942505f876",
+    "creatures/generic_farmer_a.png": "b32f36bb90e10da7afc25d5e507db579b4608c0caa28fc3a2998b1c1cc95d200",
+    "portraits/generic_farmer_a_idle.png": "29e5320924247059175679bbc543bc4383726a32f2268307d103cffa1fec2d52",
+    "portraits/generic_farmer_a_hurt.png": "d6adef32ba168d19d102004d0fde246805e2e2941bb775029fe98657f0e937de",
+    "portraits/generic_farmer_a_happy.png": "a794f72b2bf839d4ef2c9a6c7b904727f3151b6ec9d72ba5b0c8d8a743c5f004",
+    "portraits/generic_farmer_a_angry.png": "4513f9485dd2fedecb2e6f5b37adb6949a04209c010fe062b6e3245ad01b3200",
+    "portraits/generic_farmer_a_sad.png": "9187be5db7ebfef89272d403232b0adf634a553ec536e09721b9aed210ecb0e7",
+    "portraits/generic_farmer_a_surprised.png": "62594943b9f66b8a43a8cc9f226dd38421f58faedd4a039fa2387dda582dcb89",
+    "creatures/generic_farmer_b.png": "c223c01dd46321539ebac573dbe14db5b7b9a427a5bf9053b0c27c0171ce2dc9",
+    "portraits/generic_farmer_b_idle.png": "1528745fbcdfd62286120c372661c6814d328b3222608806adcb1db2e6e47ea7",
+    "portraits/generic_farmer_b_hurt.png": "99e82af2e31d430cde1e2c2ecbbeb94efcb05b274c89a7931d6fe9d5893a6d59",
+    "portraits/generic_farmer_b_happy.png": "0c120378381debe863c034b131cd5c045616abae3af76992a3927933c314e6fd",
+    "portraits/generic_farmer_b_angry.png": "6622b58c4769b18103627be67af1fa7ef763e875ce507701a664b31e6e67eb85",
+    "portraits/generic_farmer_b_sad.png": "dff55ed9f73d37de55b0c62075547bca0cda5468ba45ac2fd16da29b4959b9ec",
+    "portraits/generic_farmer_b_surprised.png": "3e27bda0d413277f50d89526ad63c4182c7566a580dcd6273a629ebeb72f1069",
+    "creatures/generic_farmhand_a.png": "89df1e0df376c102871e763264bde13bb294534963572ddaa8e9ba603088ea26",
+    "portraits/generic_farmhand_a_idle.png": "f4bc8e4d36b96902b80723df6f9d694d02391d012d032e9f5a0f03a08d11372a",
+    "portraits/generic_farmhand_a_hurt.png": "cd5105134287a7a262f3d5848703a196bc162a59763b3ebcd05946eb00450df4",
+    "portraits/generic_farmhand_a_happy.png": "3c96fb4e2ee71f5b4fc2be6ae91c234494cc41721a52185eb6f1ae44b8b17c33",
+    "portraits/generic_farmhand_a_angry.png": "1e473a0554f816e5cf9acfbdcaab131cfdbf1bc148c4165e9799e4c2825dbd58",
+    "portraits/generic_farmhand_a_sad.png": "89e53939a03f03263533157113ce149cf156c10f4a3bc0a6d49ebb68a9317b88",
+    "portraits/generic_farmhand_a_surprised.png": "ddde4b82689ea4f4dbf76d659898a6cb00a343e014d140f431b3e4a6122117ab",
+    "creatures/generic_farmhand_b.png": "4e9df4e99e8a19ea2d7b89bc58414c2726fd0e9f59d8314b2737d3f0a452aae9",
+    "portraits/generic_farmhand_b_idle.png": "bba587bb149a3325026a182fdf5d0ea70372c570d2574c98be93f73e91383093",
+    "portraits/generic_farmhand_b_hurt.png": "855cc9e970ed979da37541836e7f222e53e741b21bdf8f8c82ff0f8a128cc100",
+    "portraits/generic_farmhand_b_happy.png": "95f0895eed79293f191e5237678737b36cd1b818325df6b7d97cc76b25a4b629",
+    "portraits/generic_farmhand_b_angry.png": "bb11c011adbb920f13193fb05f4243ece6ce16fc128ff911987c997556202f3a",
+    "portraits/generic_farmhand_b_sad.png": "7abfeff8436a85a29423e6b21d3f41b5effd5dc36eb6a8276c99c0a67aa2d923",
+    "portraits/generic_farmhand_b_surprised.png": "05720d904583a4a228bacdd99ef2fb37aced1e609f68b942609d733fc41ad6fd",
+    "creatures/generic_fisher_a.png": "327f163ed6673295530d72dc22ebdb7134376d2d0a5a98a4227426aae7c19644",
+    "portraits/generic_fisher_a_idle.png": "42501b9e07728de2621594c8d3dd494434a2e3bd3879bb0dcd28d2a3cea3c4c1",
+    "portraits/generic_fisher_a_hurt.png": "13f78138f758ac3d1888c7f5e200fd37af990be1467f65fac2d3d4f87f1d76ac",
+    "portraits/generic_fisher_a_happy.png": "f08e021d75e811901eb67b7588f36161e5398c590b9cf54123441bd46ed3cb51",
+    "portraits/generic_fisher_a_angry.png": "0d50a99e75e170da02a62f1e1b0252b69092f9762228c80d356374a4c7db3589",
+    "portraits/generic_fisher_a_sad.png": "59f25b1ef17bdf3cf9db104f56bb151daf1b20df2271cb2ae1f31ec289a0421a",
+    "portraits/generic_fisher_a_surprised.png": "f771d5646310be938cf0a74987d6b64e460d51bc2012cc0dc561aff38ecfe7d9",
+    "creatures/generic_fisher_b.png": "5ed942f4e65b87504357504dfb5f3f6fb2efb638bc20a47714f67e1a11c5b284",
+    "portraits/generic_fisher_b_idle.png": "6e9c76f552cbd0414942ef68d34b1d420297e3294314c381613e76693881afc1",
+    "portraits/generic_fisher_b_hurt.png": "0ddc739c19e6e1e86175da0ba0afe79e6fa1972aa26d7ffff63e1b2ecf179dc3",
+    "portraits/generic_fisher_b_happy.png": "17a46c7866c7a8009c6f48167110fdf2dd51325e961cea2aa92d7123b993f998",
+    "portraits/generic_fisher_b_angry.png": "d0a414c01987074d0b9b86424bbde813247228a358b2d914908923195f6e1b59",
+    "portraits/generic_fisher_b_sad.png": "aab905965d61ba1cc75e41e35eb5a23c46754206f58d8bdc1dbab056b591bf78",
+    "portraits/generic_fisher_b_surprised.png": "c61e127d76e5a4de9d375f83587e98d6bf53d78a89a30656766666ef94f1c3e7",
+    "creatures/generic_guard_a.png": "9b3722d374222c16b7c9267de1198151ddfaef5553347ab73a149e67a988fe6b",
+    "portraits/generic_guard_a_idle.png": "d73b82cd1ec516c7ddce365dec8d01c820c9a4bce2221dda5eaa81d6554a85bc",
+    "portraits/generic_guard_a_hurt.png": "c1d2d7163705e8bfaabec8d4639f17864a4af29dd6a13b5d726dd7370684020b",
+    "portraits/generic_guard_a_happy.png": "7b55db60880f728bbc6de3bfc8183018e1463c44c55b5e17f3017599b7f9b65b",
+    "portraits/generic_guard_a_angry.png": "f219635a91323043e1d38f9f6c0103297ae179e830dc3309387f20108794293c",
+    "portraits/generic_guard_a_sad.png": "7d90e66f614c43fc0d8e85acf7bb53412129a8005b67728686aaa343b6b2bf66",
+    "portraits/generic_guard_a_surprised.png": "f9be7df70c8daf38e0f375b92682e24e7907cc5f7e2f94ea05398b81fe48cc15",
+    "creatures/generic_guard_b.png": "db06202e622d1e0febd060c4501ae17b6bf019c77dcb7f46be7af70ae3f3e53d",
+    "portraits/generic_guard_b_idle.png": "67a74475e3a3a99ecce8059909eec259f74effb9cb97f07313403a1660bb3788",
+    "portraits/generic_guard_b_hurt.png": "3003a11da828ae6a8503a73919b5474d658247457c59f7a5d202a0405fe3e3a8",
+    "portraits/generic_guard_b_happy.png": "e2c9c8873364125f272fb6114b75c870ca3555f9172520ad5ec46be2cf213827",
+    "portraits/generic_guard_b_angry.png": "08f67ce24ae5431604f753d54c17e9c0949d3db28c4d7f9ffd7f770882d7613f",
+    "portraits/generic_guard_b_sad.png": "cfbe1656bf3afc8b2827e98b9b2cdfd77903bc6b9c62ee055d099e8222c5e3f1",
+    "portraits/generic_guard_b_surprised.png": "63ce3d2b063f17dc68559f1ab877883a2ca3ca14ea5d0c4e84421b32d3e118ab",
+    "creatures/generic_merchant_a.png": "16505f0170415de9227e1728381393234385fd4dca94677ae84888ab9e3055a4",
+    "portraits/generic_merchant_a_idle.png": "f9ba995d1a9bb881b7a6a6eb86ace9a70342b7dca86bf0dd9320c601d50eba83",
+    "portraits/generic_merchant_a_hurt.png": "7a030a175987eac3cf94ad1a5ddda6486823fbc5e7ce30eb7fceface15545199",
+    "portraits/generic_merchant_a_happy.png": "35780d7b56b72eb78a8e864912efd72cc3053dfbd5655fd74b23412a13d60475",
+    "portraits/generic_merchant_a_angry.png": "1030b3e22eea5c4abf4334f782a09335bf5a337703bdaabc46a546bab188e977",
+    "portraits/generic_merchant_a_sad.png": "7a3a8fd8dc01bfa0167a074459e12930ebdf972efbbf594aa382e28c95449e06",
+    "portraits/generic_merchant_a_surprised.png": "7e92b24a68247dd1dbd660bc085100540cdcfc0de05bb3e9f99bd44b547c61ee",
+    "creatures/generic_merchant_b.png": "6b4d96d3c64cce4166e04617a4e4e32f7eb43c19b9a0172e2917bdc2fa085bc4",
+    "portraits/generic_merchant_b_idle.png": "abe6b951183434b8289f3c8ebb41871d2faa2cdbc230f7cf03c52f891f36a6ef",
+    "portraits/generic_merchant_b_hurt.png": "f8c2762368016412d7bfeb1754288853567c645c90305f291305f8a553dbb922",
+    "portraits/generic_merchant_b_happy.png": "5e3bfda8d66238d0be902f9ecf4f56454cc2ac7a7831ba5c2186e6056592d2ad",
+    "portraits/generic_merchant_b_angry.png": "a03345d74bd528ce3c589e2400b86b87223eaa65417c102ac57ddc94176c1d95",
+    "portraits/generic_merchant_b_sad.png": "f7039344d397d636cb0a6b125160025c61d1974c299d637b8f903658cabc872f",
+    "portraits/generic_merchant_b_surprised.png": "c4d066b4a55c8415f881ecff0cd096c40233fc611ec1a356af922de8107d6f54"
+  }
+}

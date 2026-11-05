@@ -1092,3 +1092,32 @@ sources, reproducible normalization, native TV review and validation limitations
 81 HUD art and 14 host contract tests pass; host build has zero warnings/errors.
 Full presentation suite: 2,536 pass, three failures reproduced against the original
 portrait manifest (Dagna filename, cast facing, story marker geometry).
+
+
+## Latest checkpoint — all generic townsfolk finished, pending batch/TV approval
+
+Owner: “ok those look good, do the generic townsfolk next”. This approves Bree
+and Halden's displayed portrait sets and authorizes the generic continuation.
+All seven approved generic concept pairs now have finished eight-direction pixel
+art: 14 variants, 672 native idle/walk source frames, and 84 mood portraits.
+A separate review pack assigns variants to the existing 28 unnamed townsfolk;
+all named characters, source production content and gameplay remain unchanged.
+
+Read `tools/tactics-assets/imagegen/townsfolk/generic/README.md` for the labelled
+comparison, action GIFs, portraits and real four-party TV shots. Exact requests,
+source pixels, the rejected/corrected fisher braid, validators and a pending-approval
+guarded installer are retained. No concept regeneration or Scenario/PixelLab
+spend; 22 image-tool calls, no purchases/upgrades, tool pricing unavailable.
+
+Frame/hash/source/isolation checks and the real loaders pass. Editor build has
+zero warnings/errors; native variant save/load, painted export and JSON round-trip
+pass. Four-party software OpenGL texture gates: Ashen Ford 423.56 MiB peak versus
+409.28 MiB original; Cinder Hollow review 208.41 MiB. All below 512 MiB, including
+party replacement/restoration and human/elf texture uploads/releases.
+Deployable pack-file bytes: 217,274,314 before / 220,219,831 review.
+
+Next: the owner's finished motion/portrait/TV batch approval required by #80,
+then install exact reviewed art, repeat production memory/runtime validation and
+required game/phone checks. `approval.json` remains pending; no production install,
+PR, merge, issue closure or publication has occurred. Do not regenerate these
+completed source sets or infer finished-set approval from concept approval.

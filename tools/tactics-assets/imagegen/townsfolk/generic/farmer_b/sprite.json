@@ -1,0 +1,66 @@
+{
+  "file": "generic_farmer_b.png",
+  "family": "townsfolk",
+  "variant": "farmer_b",
+  "frame": {
+    "width": 96,
+    "height": 96,
+    "anchor": [
+      48,
+      84
+    ]
+  },
+  "headTop": 12,
+  "pixelScale": 0.5,
+  "columns": 6,
+  "rowsPerDirection": 1,
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "footprintWidth": 16,
+  "footprintHeight": 36,
+  "keys": [
+    "characters.farmer_b"
+  ],
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "fps": 6,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "fps": 6,
+      "loop": true
+    },
+    "down": {
+      "frames": [
+        0
+      ],
+      "fps": 1,
+      "loop": false
+    }
+  },
+  "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+}

@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "productionFiles": 5053,
+  "productionBytes": 217274314,
+  "productionInventorySha256": "5f39f3b0a1a21656b1d8f51172f843fa96bbd2ca6dd88795fffe73c44cdd0f97",
+  "reviewBytes": 220219831,
+  "addedArtFiles": 98,
+  "sourceFrames": 672,
+  "variants": 14,
+  "portraits": 84,
+  "placedPeople": 28,
+  "cosmeticDocuments": [
+    "creatures/manifest.json",
+    "portraits/manifest.json",
+    "rules/world/ashen_ford.json"
+  ],
+  "productionUnchanged": true
+}

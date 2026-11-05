@@ -1,0 +1,27 @@
+{
+  "region": "cinder_hollow",
+  "limitBytes": 536870912,
+  "stages": [
+    {
+      "stage": "open",
+      "bytes": 218531207,
+      "peakBytes": 218533131
+    },
+    {
+      "stage": "crossing",
+      "bytes": 218531207,
+      "peakBytes": 218533131
+    },
+    {
+      "stage": "party-change",
+      "bytes": 218531207,
+      "peakBytes": 218533131
+    },
+    {
+      "stage": "party-restored",
+      "bytes": 218531207,
+      "peakBytes": 218533131
+    }
+  ],
+  "rosterUploadsAndReleases": "verified"
+}

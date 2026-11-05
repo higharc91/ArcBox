@@ -1,0 +1,37 @@
+{
+  "sourceSha256": "2404a93103ed3a20dfa2fbdf32417138503b3479b856cc766c2ee984f453a72f",
+  "outputSize": 40,
+  "paletteColors": 64,
+  "uniformScale": 0.10324483775811209,
+  "fixedOffset": [
+    1.519174041297937,
+    2.6902654867256643
+  ],
+  "perMoodRecentering": false,
+  "moods": {
+    "idle": {
+      "sha256": "1528745fbcdfd62286120c372661c6814d328b3222608806adcb1db2e6e47ea7",
+      "opaquePixels": 659
+    },
+    "hurt": {
+      "sha256": "99e82af2e31d430cde1e2c2ecbbeb94efcb05b274c89a7931d6fe9d5893a6d59",
+      "opaquePixels": 664
+    },
+    "happy": {
+      "sha256": "0c120378381debe863c034b131cd5c045616abae3af76992a3927933c314e6fd",
+      "opaquePixels": 661
+    },
+    "angry": {
+      "sha256": "6622b58c4769b18103627be67af1fa7ef763e875ce507701a664b31e6e67eb85",
+      "opaquePixels": 654
+    },
+    "sad": {
+      "sha256": "dff55ed9f73d37de55b0c62075547bca0cda5468ba45ac2fd16da29b4959b9ec",
+      "opaquePixels": 659
+    },
+    "surprised": {
+      "sha256": "3e27bda0d413277f50d89526ad63c4182c7566a580dcd6273a629ebeb72f1069",
+      "opaquePixels": 665
+    }
+  }
+}

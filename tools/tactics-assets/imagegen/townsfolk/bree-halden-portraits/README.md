@@ -42,3 +42,5 @@ expects Dagna's old filename, a cast-facing assertion expects the legacy row,
 and a story-marker assertion expects the old figure geometry. These pre-existing
 checks were left outside this portrait fix. The native run logs an existing
 ObjectDB cleanup warning; it is not a GPU performance measurement.
+
+Owner visual approval subsequently received: “ok those look good, do the generic townsfolk next”. The displayed Bree and Halden portrait sets are approved; exact quote is in both provenance records.
