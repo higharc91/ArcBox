@@ -41,8 +41,12 @@ public static class StoryOrder
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        // The painted ground, with the things that always stand in the way (a chest, a barrel) and every passage open, as the content check judges reach.
-        var solid = rules.Interactables.GetValueOrDefault(region.Def.Id, []).Where(Interactables.Solid).Select(d => d.At).ToList();
+        // Replay cannot assume the party finds a hidden shortcut or door. Those stay shut; the ordinary passages
+        // are handled by the loader's sure-reachability check before export.
+        var solid = rules.Interactables.GetValueOrDefault(region.Def.Id, [])
+            .Where(d => Interactables.Solid(d) || d.Hidden is not null &&
+                Interactables.KindOf(d).Family is InteractableFamily.Passage or InteractableFamily.Path)
+            .Select(d => d.At).ToList();
         var walk = new RegionWalk(WorldGround.Of(region, rules.Maps, rules.Art ?? ArtManifest.None).With(solid));
         var trapped = walk.Trapped(region.Def.Spawns.Start);
         if (trapped.Count > 0)

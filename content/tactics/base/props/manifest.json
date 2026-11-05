@@ -2473,6 +2473,50 @@
         "cave",
         "decal"
       ]
+    },
+    "maud_ash_garden": {
+      "variants": {
+        "ashen_ford": "maud_ash_garden_ashen_ford.png"
+      },
+      "size": [
+        98,
+        57
+      ],
+      "anchor": [
+        49,
+        30
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "lore",
+        "dressing"
+      ]
+    },
+    "maud_stool_pots": {
+      "variants": {
+        "ashen_ford": "maud_stool_pots_ashen_ford.png"
+      },
+      "size": [
+        33,
+        35
+      ],
+      "anchor": [
+        12,
+        20
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "lore",
+        "dressing"
+      ]
     }
   },
   "notes": {

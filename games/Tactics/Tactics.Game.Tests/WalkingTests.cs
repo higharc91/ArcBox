@@ -882,8 +882,8 @@ public sealed class WalkingTests
         Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(Party(s)), ArcJson.Options).Length < 1024 + 4 * 20);
     }
 
-    /// <summary>The view without the region's things and their events: what walking itself costs when the whole view is sent.</summary>
-    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, Gold = null, Traders = null };
+    /// <summary>The core walking cost without region things, discovery speech and wall plugs. The real patch budgets below include them all.</summary>
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, ThingSpeech = null, Plugs = null, Gold = null, Traders = null };
 
     /// <summary>One network packet's payload: a 1,500-byte frame less the IP, TCP and TLS headers (issue #77).</summary>
     private const int Packet = 1420;

@@ -1,0 +1,12 @@
+{
+  "packLoaded": true,
+  "storyLegs": 12,
+  "recoveryLegs": 2,
+  "problems": [],
+  "allStoryLegsReachable": true,
+  "allRecoveryLegsReachable": true,
+  "granaryReviewStandWalkable": true,
+  "maudReviewStandWalkable": true,
+  "granaryMarkerWalkable": true,
+  "maudMarkerWalkable": true
+}

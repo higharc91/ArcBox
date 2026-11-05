@@ -155,7 +155,8 @@ public sealed class StageEndTests
         var thingsPath = Path.Combine(rules, "interactables", "ashen_ford.json");
         var things = JsonNode.Parse(File.ReadAllText(thingsPath))!;
         var list = things["interactables"]!.AsArray();
-        list.Remove(list.Single(t => t!["id"]!.GetValue<string>() == "af_ford_campfire"));
+        foreach (var id in new[] { "af_ford_campfire", "af_bank_claw_marks", "af_reed_bank_track" })
+            list.Remove(list.Single(t => t!["id"]!.GetValue<string>() == id));
         File.WriteAllText(thingsPath, things.ToJsonString());
         var mapPath = Path.Combine(rules, "maps", "river_crossing.json");
         var map = JsonNode.Parse(File.ReadAllText(mapPath))!;

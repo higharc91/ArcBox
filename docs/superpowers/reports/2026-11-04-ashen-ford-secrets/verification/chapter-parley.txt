@@ -1,0 +1,318 @@
+[tv-e2e 04:06:53] starting the server on http://127.0.0.1:34851
+[tv-e2e 04:06:56] starting the TV (1280x720, preset low)
+[tv-e2e 04:06:57] TV opened room CNQD
+[tv-e2e 04:06:58] chapter: 4 bots play Chapter 1 by parley
+04:06:58 Ana joined CNQD
+04:06:58 Bo joined CNQD
+04:06:58 Cy joined CNQD
+04:06:58 Dee joined CNQD
+04:06:58 Game on
+04:07:04 Ana picks fighter
+04:07:10 Bo picks cleric
+04:07:16 Cy picks rogue
+04:07:22 Dee picks wizard
+04:07:29 CHAPTER 1: ch1_mayors_request at 33,59
+04:07:32 CHAPTER Dee walks 5 steps from 26,58 to ch1_mayors_request
+04:07:34 CHAPTER Dee taps Talk: ch1_mayors_request
+04:07:34 CHAPTER ch1_mayors_request begins
+04:07:34 LINE ch1_mayor_open_1 narrator
+04:07:34 Dee skips line ch1_mayor_open_1
+04:07:34 LINE ch1_mayor_open_2 narrator
+04:07:34 Dee skips line ch1_mayor_open_2
+04:07:35 LINE ch1_mayor_open_3 Pip Ashdown
+04:07:35 Dee skips line ch1_mayor_open_3
+04:07:35 LINE ch1_mayor_open_4 Bree Tallow
+04:07:35 Dee skips line ch1_mayor_open_4
+04:07:36 LINE ch1_mayor_halden_1 Halden Varrow
+04:07:36 Dee skips line ch1_mayor_halden_1
+04:07:36 LINE ch1_mayor_halden_2 Halden Varrow
+04:07:36 Dee skips line ch1_mayor_halden_2
+04:07:37 LINE ch1_mayor_halden_3 Dagna Holt
+04:07:37 Dee skips line ch1_mayor_halden_3
+04:07:37 Dee votes goblins
+04:07:45 LINE ch1_mayor_goblins_1 Halden Varrow
+04:07:45 Dee skips line ch1_mayor_goblins_1
+04:07:46 LINE ch1_mayor_goblins_2 Dagna Holt
+04:07:46 Dee skips line ch1_mayor_goblins_2
+04:07:46 LINE ch1_mayor_goblins_3 Bree Tallow
+04:07:46 Dee skips line ch1_mayor_goblins_3
+04:07:47 LINE ch1_mayor_goblins_4 Halden Varrow
+04:07:47 Dee skips line ch1_mayor_goblins_4
+04:07:47 LINE ch1_mayor_close_1 narrator
+04:07:47 Dee skips line ch1_mayor_close_1
+04:07:48 LINE ch1_mayor_close_2 Pip Ashdown
+04:07:48 Dee skips line ch1_mayor_close_2
+04:07:48 LINE ch1_mayor_close_3 The Hooded Stranger
+04:07:48 Dee skips line ch1_mayor_close_3
+04:07:49 LINE ch1_mayor_close_4 Halden Varrow
+04:07:49 Dee skips line ch1_mayor_close_4
+04:07:49 CHAPTER ch1_mayors_request is over
+04:07:51 CHAPTER 2: ch1_the_ford_choice at 94,59
+04:07:55 CHAPTER Dee walks 109 steps from 31,57 to ch1_the_ford_choice
+04:08:36 CHAPTER Dee taps Talk: ch1_the_ford_choice
+04:08:36 CHAPTER ch1_the_ford_choice begins
+04:08:36 LINE ch1_ford_open_1 narrator
+04:08:36 Dee skips line ch1_ford_open_1
+04:08:36 LINE ch1_ford_open_2 narrator
+04:08:37 Dee skips line ch1_ford_open_2
+04:08:37 LINE ch1_ford_open_3 Halden Varrow
+04:08:37 Dee skips line ch1_ford_open_3
+04:08:37 LINE ch1_ford_open_4 Dagna Holt
+04:08:38 Dee skips line ch1_ford_open_4
+04:08:38 Dee votes why
+04:08:43 LINE ch1_ford_why_1 Halden Varrow
+04:08:44 Dee skips line ch1_ford_why_1
+04:08:44 Dee votes insight
+04:08:50 Ana picks Bo to roll insight
+04:08:50 Bo picks Bo to roll insight
+04:08:50 Cy picks Bo to roll insight
+04:08:50 Dee picks Bo to roll insight
+04:08:57 LINE ch1_ford_why_pass_1 narrator
+04:08:57 Dee skips line ch1_ford_why_pass_1
+04:08:57 LINE ch1_ford_why_pass_2 Halden Varrow
+04:08:57 Dee skips line ch1_ford_why_pass_2
+04:08:58 LINE ch1_ford_cases_1 Dagna Holt
+04:08:58 Dee skips line ch1_ford_cases_1
+04:08:58 LINE ch1_ford_cases_2 Dagna Holt
+04:08:58 Dee skips line ch1_ford_cases_2
+04:08:59 LINE ch1_ford_cases_3 Bree Tallow
+04:08:59 Dee skips line ch1_ford_cases_3
+04:08:59 LINE ch1_ford_cases_4 Bree Tallow
+04:08:59 Dee skips line ch1_ford_cases_4
+04:09:00 LINE ch1_ford_cases_5 Halden Varrow
+04:09:00 Dee skips line ch1_ford_cases_5
+04:09:00 LINE ch1_ford_vote_1 Halden Varrow
+04:09:00 Dee skips line ch1_ford_vote_1
+04:09:01 Ana votes parley
+04:09:01 Bo votes parley
+04:09:01 Cy votes parley
+04:09:01 Dee votes parley
+04:09:04 LINE ch1_ford_parley_1 Dagna Holt
+04:09:04 Dee skips line ch1_ford_parley_1
+04:09:05 LINE ch1_ford_parley_2 Halden Varrow
+04:09:05 Dee skips line ch1_ford_parley_2
+04:09:05 LINE ch1_ford_parley_3 Bree Tallow
+04:09:05 Dee skips line ch1_ford_parley_3
+04:09:08 LINE ch1_parley_open_1 narrator
+04:09:08 Dee skips line ch1_parley_open_1
+04:09:08 LINE ch1_parley_open_2 narrator
+04:09:08 Dee skips line ch1_parley_open_2
+04:09:09 LINE ch1_parley_open_3 Mother Skarrow
+04:09:09 Dee skips line ch1_parley_open_3
+04:09:09 Dee votes bread
+04:09:16 LINE ch1_parley_bread_1 Mother Skarrow
+04:09:16 Dee skips line ch1_parley_bread_1
+04:09:16 LINE ch1_parley_bread_2 Mother Skarrow
+04:09:17 Dee skips line ch1_parley_bread_2
+04:09:17 LINE ch1_parley_terms_1 Mother Skarrow
+04:09:17 Dee skips line ch1_parley_terms_1
+04:09:17 Dee votes word
+04:09:26 LINE ch1_parley_deal_1 Mother Skarrow
+04:09:26 Dee skips line ch1_parley_deal_1
+04:09:26 LINE ch1_parley_deal_2 narrator
+04:09:27 Dee skips line ch1_parley_deal_2
+04:09:27 CHAPTER ch1_the_ford_choice is over
+04:09:29 CHAPTER 3: ch1_river_crossing at 117,58
+04:09:32 CHAPTER Dee walks 32 steps from 133,24 to ch1_river_crossing
+04:09:44 CHAPTER Dee taps Begin: ch1_river_crossing
+04:09:44 CHAPTER ch1_river_crossing begins
+04:09:44 LINE ch1_young_ones_open_1 narrator
+04:09:45 Dee skips line ch1_young_ones_open_1
+04:09:45 LINE ch1_young_ones_open_2 narrator
+04:09:45 Dee skips line ch1_young_ones_open_2
+04:09:45 LINE ch1_young_ones_open_3 Mother Skarrow
+04:09:46 Dee skips line ch1_young_ones_open_3
+04:09:46 LINE ch1_young_ones_open_4 Mother Skarrow
+04:09:46 Dee skips line ch1_young_ones_open_4
+04:09:46 LINE ch1_young_ones_open_5 Dagna Holt
+04:09:47 Dee skips line ch1_young_ones_open_5
+04:09:47 Cy ends the turn
+04:10:03 Dee uses Magic Missile on Goblin
+04:10:03 Dee ends the turn
+04:10:03 Bo uses Guiding Bolt on Goblin
+04:10:04 Bo ends the turn
+04:10:04 Ana moves
+04:10:04 Ana ends the turn
+04:10:04 Cy moves
+04:10:05 Cy ends the turn
+04:10:19 Dee uses Magic Missile on Goblin
+04:10:19 Dee ends the turn
+04:10:19 Bo ends the turn
+04:10:20 Ana moves back
+04:10:20 Ana ends the turn
+04:10:20 Cy moves back
+04:10:20 Cy ends the turn
+04:10:32 Dee uses Magic Missile on Goblin
+04:10:32 Dee ends the turn
+04:10:32 Bo uses Toll the Dead on Goblin
+04:10:32 Bo ends the turn
+04:10:33 Ana moves
+04:10:33 Ana ends the turn
+04:10:33 Cy moves
+04:10:33 Cy ends the turn
+04:10:46 Dee uses Burning Hands
+04:10:46 Dee ends the turn
+04:10:46 Bo uses Sacred Flame on Goblin
+04:10:46 Bo ends the turn
+04:10:47 Ana moves
+04:10:47 Ana ends the turn
+04:10:47 Cy moves
+04:10:47 Cy ends the turn
+04:11:00 Dee uses Potion of Healing on Dee
+04:11:00 Dee leaves burning ground
+04:11:00 Dee ends the turn
+04:11:00 Bo ends the turn
+04:11:01 Ana moves back
+04:11:01 Ana ends the turn
+04:11:01 Cy moves back
+04:11:01 Cy ends the turn
+04:11:14 Dee uses Burning Hands
+04:11:14 Dee ends the turn
+04:11:14 Bo leaves burning ground
+04:11:14 Bo ends the turn
+04:11:15 Ana moves
+04:11:15 Ana ends the turn
+04:11:15 Cy moves
+04:11:15 Cy ends the turn
+04:11:28 Bo uses Cure Wounds on Dee
+04:11:28 Bo uses Healing Word on Cy
+04:11:29 Bo ends the turn
+04:11:29 Ana uses Attack on Goblin
+04:11:29 Ana ends the turn
+04:11:29 Cy uses Potion of Healing on Cy
+04:11:30 Cy leaves burning ground
+04:11:30 Cy ends the turn
+04:11:42 Dee uses Fire Bolt on Goblin
+04:11:42 Dee leaves burning ground
+04:11:42 Dee: 2 foes left, so the party goes after them
+04:11:42 Dee ends the turn
+04:11:43 Bo uses Healing Word on Cy
+04:11:43 Bo leaves burning ground
+04:11:43 Bo ends the turn
+04:11:43 Ana moves
+04:11:44 Ana ends the turn
+04:11:44 Cy moves
+04:11:44 Cy ends the turn
+04:11:51 Dee moves
+04:11:51 Dee ends the turn
+04:11:52 Bo uses Healing Word on Dee
+04:11:52 Bo moves
+04:11:52 Bo ends the turn
+04:11:52 Ana moves
+04:11:53 Ana ends the turn
+04:11:53 Cy moves
+04:11:53 Cy ends the turn
+04:12:00 Dee moves
+04:12:00 Dee uses Fire Bolt on Goblin Archer
+04:12:00 Dee ends the turn
+04:12:00 Bo moves
+04:12:01 Bo uses Toll the Dead on Goblin Archer
+04:12:01 Bo ends the turn
+04:12:01 Ana moves
+04:12:01 Ana ends the turn
+04:12:06 Bo moves
+04:12:07 Bo ends the turn
+04:12:07 Ana moves
+04:12:07 Ana ends the turn
+04:12:14 Ana moves
+04:12:14 Ana ends the turn
+04:12:20 Ana moves
+04:12:20 Ana ends the turn
+04:12:35 Lost at River Crossing: Ana +0 XP, Bo +0 XP, Cy +0 XP, Dee +0 XP
+04:12:35 CHAPTER ch1_river_crossing is over
+04:12:37 CHAPTER 4: ch1_river_crossing at 117,58
+04:12:42 CHAPTER Dee walks 122 steps from 31,57 to ch1_river_crossing
+04:13:21 CHAPTER ch1_river_crossing begins at step 104 of 122: a stamp
+04:13:21 Cy ends the turn
+04:13:36 Dee uses Magic Missile on Goblin
+04:13:36 Dee ends the turn
+04:13:37 Bo uses Guiding Bolt on Goblin
+04:13:37 Bo ends the turn
+04:13:37 Ana moves
+04:13:37 Ana ends the turn
+04:13:38 Cy moves
+04:13:38 Cy ends the turn
+04:13:48 Dee uses Magic Missile on Goblin
+04:13:48 Dee ends the turn
+04:13:49 Bo uses Toll the Dead on Goblin
+04:13:49 Bo ends the turn
+04:13:49 Ana moves back
+04:13:49 Ana ends the turn
+04:13:50 Cy moves back
+04:13:50 Cy ends the turn
+04:13:59 Dee uses Magic Missile on Goblin
+04:14:00 Dee ends the turn
+04:14:00 Bo uses Toll the Dead on Goblin
+04:14:00 Bo ends the turn
+04:14:00 Ana moves
+04:14:01 Ana ends the turn
+04:14:01 Cy moves
+04:14:01 Cy ends the turn
+04:14:11 Dee uses Burning Hands
+04:14:11 Dee ends the turn
+04:14:12 Bo ends the turn
+04:14:12 Ana moves back
+04:14:12 Ana ends the turn
+04:14:12 Cy moves back
+04:14:13 Cy ends the turn
+04:14:22 Dee uses Magic Missile on Goblin
+04:14:23 Dee leaves burning ground
+04:14:23 Dee ends the turn
+04:14:23 Bo uses Healing Word on Dee
+04:14:23 Bo uses Guiding Bolt on Goblin
+04:14:24 Bo ends the turn
+04:14:24 Ana moves
+04:14:24 Ana ends the turn
+04:14:36 Bo uses Healing Word on Cy
+04:14:36 Bo uses Cure Wounds on Bo
+04:14:36 Bo leaves burning ground
+04:14:36 Bo ends the turn
+04:14:37 Ana uses Trip Attack on Goblin
+04:14:37 Ana ends the turn
+04:14:37 Cy leaves burning ground
+04:14:37 Cy ends the turn
+04:14:45 Bo uses Potion of Healing on Dee
+04:14:46 Bo uses Toll the Dead on Goblin
+04:14:46 Bo ends the turn
+04:14:46 Ana uses Potion of Healing on Cy
+04:14:46 Ana uses Trip Attack on Goblin
+04:14:47 Ana: 2 foes left, so the party goes after them
+04:14:47 Ana ends the turn
+04:14:47 Cy leaves burning ground
+04:14:47 Cy ends the turn
+04:14:54 Dee moves
+04:14:54 Dee uses Fire Bolt on Goblin Archer
+04:14:54 Dee ends the turn
+04:14:55 Bo leaves burning ground
+04:14:55 Bo uses Toll the Dead on Goblin Archer
+04:14:55 Bo ends the turn
+04:14:55 Ana moves
+04:14:56 Ana ends the turn
+04:14:56 Cy moves
+04:14:56 Cy ends the turn
+04:15:04 Dee moves
+04:15:04 Dee ends the turn
+04:15:05 Bo moves
+04:15:05 Bo ends the turn
+04:15:05 Ana moves
+04:15:05 Ana ends the turn
+04:15:11 Bo moves
+04:15:11 Bo ends the turn
+04:15:12 Ana uses Second Wind
+04:15:12 Ana moves
+04:15:12 Ana ends the turn
+04:15:19 Bo moves
+04:15:20 Bo ends the turn
+04:15:25 Bo uses Toll the Dead on Goblin Archer
+04:15:26 Bo ends the turn
+04:15:30 Bo uses Toll the Dead on Goblin Archer
+04:15:31 Bo ends the turn
+04:15:42 Lost at River Crossing: Ana +0 XP, Bo +0 XP, Cy +0 XP, Dee +0 XP
+04:15:42 CHAPTER ch1_river_crossing is over
+04:15:44 CHAPTER 5: ch1_river_crossing at 117,58
+04:15:48 CHAPTER Dee walks 122 steps from 31,57 to ch1_river_crossing
+[tv-e2e 04:15:51] phones stopped
+[tv-e2e 04:15:52] shots stopped
+[tv-e2e 04:15:52] TV stopped
+[tv-e2e 04:15:53] Xvfb stopped
+[tv-e2e 04:15:53] server stopped

@@ -1,0 +1,317 @@
+[tv-e2e 14:03:13] starting the server on http://127.0.0.1:41685
+[tv-e2e 14:03:17] starting the TV (1280x720, preset low)
+[tv-e2e 14:03:19] TV opened room HWSX
+[tv-e2e 14:03:19] chapter: 4 bots play Chapter 1 by force
+14:03:19 Ana joined HWSX
+14:03:19 Bo joined HWSX
+14:03:19 Cy joined HWSX
+14:03:19 Dee joined HWSX
+14:03:19 Game on
+14:03:25 Ana picks fighter
+14:03:31 Bo picks cleric
+14:03:37 Cy picks rogue
+14:03:43 Dee picks wizard
+14:03:52 CHAPTER 1: ch1_mayors_request at 33,59
+14:03:59 CHAPTER Dee walks 5 steps from 26,58 to ch1_mayors_request
+14:04:00 CHAPTER Dee taps Talk: ch1_mayors_request
+14:04:00 CHAPTER ch1_mayors_request begins
+14:04:01 LINE ch1_mayor_open_1 narrator
+14:04:01 Dee skips line ch1_mayor_open_1
+14:04:01 LINE ch1_mayor_open_2 narrator
+14:04:01 Dee skips line ch1_mayor_open_2
+14:04:02 LINE ch1_mayor_open_3 Pip Ashdown
+14:04:02 Dee skips line ch1_mayor_open_3
+14:04:02 LINE ch1_mayor_open_4 Bree Tallow
+14:04:02 Dee skips line ch1_mayor_open_4
+14:04:03 LINE ch1_mayor_halden_1 Halden Varrow
+14:04:03 Dee skips line ch1_mayor_halden_1
+14:04:03 LINE ch1_mayor_halden_2 Halden Varrow
+14:04:03 Dee skips line ch1_mayor_halden_2
+14:04:04 LINE ch1_mayor_halden_3 Dagna Holt
+14:04:04 Dee skips line ch1_mayor_halden_3
+14:04:04 Dee votes goblins
+14:04:12 LINE ch1_mayor_goblins_1 Halden Varrow
+14:04:12 Dee skips line ch1_mayor_goblins_1
+14:04:13 LINE ch1_mayor_goblins_2 Dagna Holt
+14:04:13 Dee skips line ch1_mayor_goblins_2
+14:04:13 LINE ch1_mayor_goblins_3 Bree Tallow
+14:04:13 Dee skips line ch1_mayor_goblins_3
+14:04:14 LINE ch1_mayor_goblins_4 Halden Varrow
+14:04:14 Dee skips line ch1_mayor_goblins_4
+14:04:14 LINE ch1_mayor_close_1 narrator
+14:04:14 Dee skips line ch1_mayor_close_1
+14:04:15 LINE ch1_mayor_close_2 Pip Ashdown
+14:04:15 Dee skips line ch1_mayor_close_2
+14:04:15 LINE ch1_mayor_close_3 The Hooded Stranger
+14:04:15 Dee skips line ch1_mayor_close_3
+14:04:16 LINE ch1_mayor_close_4 Halden Varrow
+14:04:16 Dee skips line ch1_mayor_close_4
+14:04:16 CHAPTER ch1_mayors_request is over
+14:04:18 CHAPTER 2: ch1_the_ford_choice at 94,59
+14:04:30 CHAPTER Dee walks 109 steps from 31,57 to ch1_the_ford_choice
+14:05:11 CHAPTER Dee taps Talk: ch1_the_ford_choice
+14:05:11 CHAPTER ch1_the_ford_choice begins
+14:05:11 LINE ch1_ford_open_1 narrator
+14:05:11 Dee skips line ch1_ford_open_1
+14:05:11 LINE ch1_ford_open_2 narrator
+14:05:11 Dee skips line ch1_ford_open_2
+14:05:12 LINE ch1_ford_open_3 Halden Varrow
+14:05:12 Dee skips line ch1_ford_open_3
+14:05:12 LINE ch1_ford_open_4 Dagna Holt
+14:05:12 Dee skips line ch1_ford_open_4
+14:05:13 Dee votes why
+14:05:18 LINE ch1_ford_why_1 Halden Varrow
+14:05:18 Dee skips line ch1_ford_why_1
+14:05:19 Dee votes insight
+14:05:25 Ana picks Bo to roll insight
+14:05:25 Bo picks Bo to roll insight
+14:05:25 Cy picks Bo to roll insight
+14:05:25 Dee picks Bo to roll insight
+14:05:31 LINE ch1_ford_why_pass_1 narrator
+14:05:32 Dee skips line ch1_ford_why_pass_1
+14:05:32 LINE ch1_ford_why_pass_2 Halden Varrow
+14:05:32 Dee skips line ch1_ford_why_pass_2
+14:05:32 LINE ch1_ford_cases_1 Dagna Holt
+14:05:33 Dee skips line ch1_ford_cases_1
+14:05:33 LINE ch1_ford_cases_2 Dagna Holt
+14:05:33 Dee skips line ch1_ford_cases_2
+14:05:33 LINE ch1_ford_cases_3 Bree Tallow
+14:05:34 Dee skips line ch1_ford_cases_3
+14:05:34 LINE ch1_ford_cases_4 Bree Tallow
+14:05:34 Dee skips line ch1_ford_cases_4
+14:05:34 LINE ch1_ford_cases_5 Halden Varrow
+14:05:35 Dee skips line ch1_ford_cases_5
+14:05:35 LINE ch1_ford_vote_1 Halden Varrow
+14:05:35 Dee skips line ch1_ford_vote_1
+14:05:35 Ana votes force
+14:05:35 Bo votes force
+14:05:35 Cy votes force
+14:05:35 Dee votes force
+14:05:39 LINE ch1_ford_force_1 Dagna Holt
+14:05:39 Dee skips line ch1_ford_force_1
+14:05:40 LINE ch1_ford_force_2 Bree Tallow
+14:05:40 Dee skips line ch1_ford_force_2
+14:05:40 LINE ch1_ford_force_3 Halden Varrow
+14:05:40 Dee skips line ch1_ford_force_3
+14:05:43 LINE ch1_dawn_open_1 narrator
+14:05:43 Dee skips line ch1_dawn_open_1
+14:05:43 LINE ch1_dawn_open_2 Mother Skarrow
+14:05:43 Dee skips line ch1_dawn_open_2
+14:05:44 LINE ch1_dawn_open_3 Mother Skarrow
+14:05:44 Dee skips line ch1_dawn_open_3
+14:05:44 LINE ch1_dawn_open_4 Dagna Holt
+14:05:44 Dee skips line ch1_dawn_open_4
+14:05:45 Cy: pursue the defeat objective Mother Skarrow
+14:05:45 Cy moves
+14:05:45 Cy ends the turn
+14:05:58 Dee uses Magic Missile on Goblin
+14:05:58 Dee ends the turn
+14:05:58 Bo uses Toll the Dead on Goblin
+14:05:59 Bo ends the turn
+14:06:03 Ana moves
+14:06:03 Ana ends the turn
+14:06:03 Cy moves
+14:06:03 Cy uses Attack on Goblin
+14:06:04 Cy ends the turn
+14:06:11 Dee uses Magic Missile on Goblin
+14:06:11 Dee ends the turn
+14:06:12 Bo uses Healing Word on Cy
+14:06:12 Bo uses Toll the Dead on Goblin
+14:06:12 Bo ends the turn
+14:06:16 Ana moves
+14:06:16 Ana uses Attack on Goblin
+14:06:16 Ana ends the turn
+14:06:17 Cy uses Attack on Goblin
+14:06:17 Cy ends the turn
+14:06:23 Dee leaves burning ground
+14:06:24 Dee uses Magic Missile on Mother Skarrow
+14:06:24 Dee ends the turn
+14:06:24 Bo uses Cure Wounds on Bo
+14:06:24 Bo leaves burning ground
+14:06:25 Bo ends the turn
+14:06:27 Ana moves
+14:06:27 Ana ends the turn
+14:06:27 Cy moves
+14:06:28 Cy ends the turn
+14:06:35 Dee uses Potion of Healing on Cy
+14:06:35 Dee uses Magic Missile on Mother Skarrow
+14:06:36 Dee ends the turn
+14:06:36 Bo uses Guiding Bolt on Mother Skarrow
+14:06:36 Bo ends the turn
+14:06:40 Ana moves
+14:06:41 Ana ends the turn
+14:06:41 Cy uses Potion of Healing on Dee
+14:06:41 Cy moves
+14:06:41 Cy ends the turn
+14:06:47 Dee leaves burning ground
+14:06:47 Dee ends the turn
+14:06:47 Bo uses Healing Word on Dee
+14:06:47 Bo moves
+14:06:48 Bo ends the turn
+14:06:51 Ana uses Attack on Skarrow Stormcaller
+14:06:51 Ana ends the turn
+14:06:51 Cy moves
+14:06:52 Cy ends the turn
+14:06:59 Dee moves
+14:07:00 Dee ends the turn
+14:07:00 Bo uses Healing Word on Cy
+14:07:00 Bo moves
+14:07:00 Bo ends the turn
+14:07:05 Ana moves
+14:07:05 Ana ends the turn
+14:07:14 Dee uses Magic Missile on Skarrow Stormcaller
+14:07:14 Dee ends the turn
+14:07:15 Bo moves
+14:07:15 Bo ends the turn
+14:07:18 Ana moves
+14:07:19 Ana uses Attack on Mother Skarrow
+14:07:19 Ana ends the turn
+14:07:26 Bo uses Potion of Healing on Dee
+14:07:26 Bo uses Toll the Dead on Goblin Archer
+14:07:27 Bo ends the turn
+14:07:29 Ana uses Attack on Mother Skarrow
+14:07:29 Ana ends the turn
+14:07:36 Dee moves
+14:07:36 Dee uses Fire Bolt on Goblin Archer
+14:07:36 Dee ends the turn
+14:07:39 Ana uses Attack on Mother Skarrow
+14:07:40 Ana ends the turn
+14:07:40 Dee uses Fire Bolt on Mother Skarrow
+14:07:40 Dee ends the turn
+14:07:43 Ana uses Trip Attack on Mother Skarrow
+14:07:43 Ana ends the turn
+14:07:43 Dee uses Fire Bolt on Mother Skarrow
+14:08:01 Won at Storming the Ford: Ana +300 XP, Bo +300 XP, Cy +300 XP, Dee +300 XP
+14:08:03 LINE ch1_bridge_cost_open_1 narrator
+14:08:04 Dee skips line ch1_bridge_cost_open_1
+14:08:04 LINE ch1_bridge_cost_open_2 Mother Skarrow
+14:08:04 Dee skips line ch1_bridge_cost_open_2
+14:08:04 LINE ch1_bridge_cost_open_3 Mother Skarrow
+14:08:05 Dee skips line ch1_bridge_cost_open_3
+14:08:05 Dee votes song
+14:08:12 LINE ch1_bridge_cost_song_1 Mother Skarrow
+14:08:12 Dee skips line ch1_bridge_cost_song_1
+14:08:13 LINE ch1_bridge_cost_song_2 narrator
+14:08:13 Dee skips line ch1_bridge_cost_song_2
+14:08:13 LINE ch1_bridge_cost_over_1 Dagna Holt
+14:08:13 Dee skips line ch1_bridge_cost_over_1
+14:08:14 LINE ch1_bridge_cost_over_2 Dagna Holt
+14:08:14 Dee skips line ch1_bridge_cost_over_2
+14:08:14 CHAPTER ch1_the_ford_choice is over
+14:08:16 CHAPTER 3: ch1_old_maud at 132,93
+14:08:21 CHAPTER Dee walks 45 steps from 95,57 to ch1_old_maud
+14:08:21 CHAPTER step 1 (e) went to 109,55, not 96,56: routing again
+14:08:26 CHAPTER Dee walks 37 steps from 109,55 to ch1_old_maud (route 2)
+14:08:39 CHAPTER Dee taps Look around: ch1_old_maud
+14:08:39 CHAPTER ch1_old_maud begins
+14:08:39 LINE ch1_maud_open_1 narrator
+14:08:39 Dee skips line ch1_maud_open_1
+14:08:40 LINE ch1_maud_open_2 narrator
+14:08:40 Dee skips line ch1_maud_open_2
+14:08:40 LINE ch1_maud_open_3 Old Maud
+14:08:40 Dee skips line ch1_maud_open_3
+14:08:41 Dee votes fell
+14:08:47 LINE ch1_maud_fell_1 Old Maud
+14:08:47 Dee skips line ch1_maud_fell_1
+14:08:47 LINE ch1_maud_fell_2 Old Maud
+14:08:47 Dee skips line ch1_maud_fell_2
+14:08:48 LINE ch1_maud_fell_3 Old Maud
+14:08:48 Dee skips line ch1_maud_fell_3
+14:08:48 LINE ch1_maud_fell_4 Old Maud
+14:08:48 Dee skips line ch1_maud_fell_4
+14:08:49 LINE ch1_maud_fell_5 narrator
+14:08:49 Dee skips line ch1_maud_fell_5
+14:08:49 LINE ch1_maud_fell_6 Old Maud
+14:08:49 Dee skips line ch1_maud_fell_6
+14:08:50 LINE ch1_maud_fell_7 The Hooded Stranger
+14:08:50 Dee skips line ch1_maud_fell_7
+14:08:50 Dee votes who
+14:08:56 LINE ch1_maud_who_1 Old Maud
+14:08:57 Dee skips line ch1_maud_who_1
+14:08:57 LINE ch1_maud_bye_1 Old Maud
+14:08:57 Dee skips line ch1_maud_bye_1
+14:08:57 LINE ch1_maud_bye_2 Old Maud
+14:08:58 Dee skips line ch1_maud_bye_2
+14:08:58 CHAPTER ch1_old_maud is over
+14:09:00 CHAPTER 4: ch1_the_ember at 99,99
+14:09:04 CHAPTER Dee walks 72 steps from 130,91 to ch1_the_ember
+14:09:38 CHAPTER Dee taps Talk: ch1_the_ember
+14:09:38 CHAPTER ch1_the_ember begins
+14:09:38 LINE ch1_docks_open_1 narrator
+14:09:39 Dee skips line ch1_docks_open_1
+14:09:39 LINE ch1_docks_open_2 Pip Ashdown
+14:09:39 Dee skips line ch1_docks_open_2
+14:09:39 LINE ch1_docks_open_3 narrator
+14:09:40 Dee skips line ch1_docks_open_3
+14:09:40 Dee votes cut
+14:09:48 LINE ch1_docks_rook_1 Rook
+14:09:48 Dee skips line ch1_docks_rook_1
+14:09:48 LINE ch1_docks_rook_2 narrator
+14:09:48 Dee skips line ch1_docks_rook_2
+14:09:49 LINE ch1_docks_rook_3 Rook
+14:09:49 Dee skips line ch1_docks_rook_3
+14:09:49 Dee votes killing
+14:09:58 LINE ch1_docks_killing_1 Rook
+14:09:59 Dee skips line ch1_docks_killing_1
+14:09:59 LINE ch1_docks_killing_2 Rook
+14:09:59 Dee skips line ch1_docks_killing_2
+14:09:59 LINE ch1_docks_killing_3 Rook
+14:10:00 Dee skips line ch1_docks_killing_3
+14:10:00 LINE ch1_docks_close_1 Pip Ashdown
+14:10:00 Dee skips line ch1_docks_close_1
+14:10:00 LINE ch1_docks_close_2 Pip Ashdown
+14:10:01 Dee skips line ch1_docks_close_2
+14:10:03 LINE ch1_kindler_open_1 narrator
+14:10:03 Dee skips line ch1_kindler_open_1
+14:10:03 LINE ch1_kindler_open_2 Maren Sorrel
+14:10:04 Dee skips line ch1_kindler_open_2
+14:10:04 LINE ch1_kindler_open_3 Maren Sorrel
+14:10:04 Dee skips line ch1_kindler_open_3
+14:10:04 LINE ch1_kindler_open_4 Mother Aubrine
+14:10:05 Dee skips line ch1_kindler_open_4
+14:10:05 LINE ch1_kindler_open_5 Maren Sorrel
+14:10:05 Dee skips line ch1_kindler_open_5
+14:10:05 LINE ch1_kindler_open_6 narrator
+14:10:06 Dee skips line ch1_kindler_open_6
+14:10:06 Dee votes slain
+14:10:14 LINE ch1_kindler_slain_1 Maren Sorrel
+14:10:14 Dee skips line ch1_kindler_slain_1
+14:10:14 LINE ch1_kindler_pitch_1 Maren Sorrel
+14:10:14 Dee skips line ch1_kindler_pitch_1
+14:10:15 Dee votes careful
+14:10:20 LINE ch1_kindler_done_1 narrator
+14:10:20 Dee skips line ch1_kindler_done_1
+14:10:22 LINE ch1_four_more_open_1 narrator
+14:10:22 Dee skips line ch1_four_more_open_1
+14:10:23 LINE ch1_four_more_open_2 The Hooded Stranger
+14:10:23 Dee skips line ch1_four_more_open_2
+14:10:23 Dee votes who
+14:10:30 LINE ch1_four_more_who_1 The Hooded Stranger
+14:10:30 Dee skips line ch1_four_more_who_1
+14:10:30 LINE ch1_four_more_where_1 The Hooded Stranger
+14:10:31 Dee skips line ch1_four_more_where_1
+14:10:31 LINE ch1_four_more_where_2 The Hooded Stranger
+14:10:31 Dee skips line ch1_four_more_where_2
+14:10:31 LINE ch1_four_more_where_4 The Hooded Stranger
+14:10:32 Dee skips line ch1_four_more_where_4
+14:10:32 LINE ch1_four_more_where_3 narrator
+14:10:32 Dee skips line ch1_four_more_where_3
+14:10:32 CHAPTER ch1_the_ember is over
+14:10:34 CHAPTER the card: Chapter I · The Bridge at the Ford
+14:10:47 CHAPTER walking on: 4 steps w
+14:10:47 Session over: The party is level 1; 1 battles won.
+[tv-e2e 14:10:47] letting the TV finish its shots (2 s)
+[tv-e2e 14:10:49] shots stopped
+[tv-e2e 14:10:50] TV stopped
+[tv-e2e 14:10:50] Xvfb stopped
+[tv-e2e 14:10:51] server stopped
+[tv-e2e 14:10:51] chapter: scenes: ch1_mayor (16), ch1_ford (19), ch1_dawn (4), ch1_bridge_cost (8), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 14:10:51] chapter: lines: 94, said 94
+[tv-e2e 14:10:51] chapter: the fight: TACTICS screen tactics-battle-river_crossing (line 602)
+[tv-e2e 14:10:51] chapter: the card: Chapter I · The Bridge at the Ford (line 1820)
+[tv-e2e 14:10:51] chapter: the fights: Won at Storming the Ford
+[tv-e2e 14:10:51] chapter: 4 walks to a "!", 1 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 14:10:51] a shot of the chapter-card: /workspace/issue81/merge/chapter-force/chapter/24-chapter-card.png
+[tv-e2e 14:10:51] a shot of the walking-after: /workspace/issue81/merge/chapter-force/chapter/25-walking-after.png
+[tv-e2e 14:10:51] chapter: 25 shots in /workspace/issue81/merge/chapter-force/chapter
+[tv-e2e 14:10:51] OK

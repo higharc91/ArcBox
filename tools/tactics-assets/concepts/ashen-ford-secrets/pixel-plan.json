@@ -1,0 +1,184 @@
+{
+  "issue": 81,
+  "part": 2,
+  "branch": "ashen-ford-secrets",
+  "status": "superseded: owner requested local authoring instead of PixelLab",
+  "concept_approval": {
+    "status": "approved",
+    "user_message": "Looks good",
+    "date": "2026-11-05",
+    "scope": "shared anchor, granary and Maud hut/dressing concepts; PixelLab stage authorized"
+  },
+  "provider": "PixelLab",
+  "connection": "existing configured MCP connection verified through local client; no credential values stored",
+  "budget": {
+    "estimated_base_and_props_generations": 40,
+    "revision_headroom": 20,
+    "requested_top_up": 60,
+    "observed_subscription_generations_remaining": 0.75,
+    "observed_daily_bonus": 5,
+    "observed_usd_credits": 0,
+    "paid_jobs_started": 0
+  },
+  "palette_source": "tools/tactics-assets/pixellab/wardenflame-style.json#palettes.ashen_ford",
+  "style_options": {
+    "color_palette": true,
+    "outline": true,
+    "detail": true,
+    "shading": true
+  },
+  "items": [
+    {
+      "id": "granary",
+      "tool": "create_image_pro",
+      "estimated_generations": 10,
+      "input_files": {
+        "references": [
+          {
+            "path": "tools/tactics-assets/concepts/ashen-ford-secrets/granary-sheet.png",
+            "usage": "Approved granary concept identity. Use only the main large building; ignore rear studies, enlarged lock, scale people and loose prop insets. Preserve the locked timber/stone barn design."
+          }
+        ],
+        "style": "content/tactics/base/town/buildings/cottage_thatch_green.png"
+      },
+      "arguments": {
+        "description": "Wardenflame grounded tactical RPG pixel art. Match supplied game sprite style: true 2:1 orthographic isometric camera, top-left light, warm highlights and cool shadows, crisp one-pixel clusters, separated material planes. ONE subject on transparency. No scene, terrain base, human scale figure, captions, contact sheet, shadow painted on ground, smoke particles or magic glow. A complete compact locked grain barn, cool grey fieldstone ground storey and dark oak timber/ochre plaster grain loft, repaired grey-brown shakes, three narrow loft vents and a short hoist beam. Heavy wooden DOUBLE door on the front-left visible wall, one clear central working iron hasp/padlock and iron straps. Modest practical proportions, not a tower, tavern or palace. Two visible walls at the same 2:1 slopes as the style building. Planned foundation is a 3x2 game-tile diamond, about 160x80 native pixels. Whole building visible within 256x224 frame, foundation front corner near (112,205), roof apex above it; generous transparent margin, nothing cropped. Keep all loose sacks, cart, people, parchment and ground patches OUT; these are separate map props. No open doors, light in windows or active effects. Reserve room to the right for a separately authored cast-shadow mask.",
+        "width": 256,
+        "height": 224,
+        "no_background": true,
+        "style_copy": [
+          "outline",
+          "detail",
+          "shading"
+        ],
+        "max_colors": 64,
+        "seed": 810201
+      },
+      "profile": "town",
+      "footprint": [
+        3,
+        2
+      ],
+      "origin_status": "Calibrate from generated foundation; provisional front point is a request, not a trusted manifest anchor."
+    },
+    {
+      "id": "maud-cottage-soot",
+      "tool": "edit_image",
+      "estimated_generations": 10,
+      "input_files": {
+        "image": "content/tactics/base/town/buildings/cottage_thatch_green.png"
+      },
+      "arguments": {
+        "description": "Preserve this cottage's exact 188x155 frame, entire alpha silhouette, pixels' alignment, camera, foundation, green shutters, door location, roof/chimney geometry and lighting. Make only a subtle localized surface-wear edit: ordinary black woodsmoke soot around the chimney cap, a short irregular soot streak down its upper masonry and the immediately adjoining thatch. Keep the existing cottage intact; no new objects, extension, garden, glowing windows, magical marks, active smoke or particles. Match Old Maud's humane, practical cold-ash-bank home; she never uses ember-fire. Hanging herbs, simple twig charms, pots and garden will be separate sprites. Do not repaint the roof as charred or burn the whole house.",
+        "width": 188,
+        "height": 155,
+        "no_background": true,
+        "seed": 810202
+      },
+      "profile": "town",
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        70,
+        81
+      ],
+      "anchor": [
+        70,
+        113
+      ],
+      "preserve_exact_geometry": true,
+      "palette_policy": "edit_image has no palette argument; retain the existing town sprite's native colors and inspect the localized edit."
+    },
+    {
+      "id": "maud-herbs",
+      "tool": "create_image_pro_flash",
+      "estimated_generations": 5,
+      "input_files": {
+        "style": "content/tactics/base/props/crate_oak.png"
+      },
+      "arguments": {
+        "description": "Wardenflame grounded tactical RPG pixel art. Match supplied game sprite style: true 2:1 orthographic isometric camera, top-left light, warm highlights and cool shadows, crisp one-pixel clusters, separated material planes. ONE subject on transparency. No scene, terrain base, human scale figure, captions, contact sheet, shadow painted on ground, smoke particles or magic glow. A small hanging cluster of three humble kitchen-herb bundles, sage/rosemary shapes, olive and dull sage-green leaves, tied tan cords at the TOP. Hung flat against the front-left wall plane of an isometric cottage, upright vertical stems; no wall included. Three readable separate bundles attached to one short cord, restrained broad leaf clusters, no flowers or ornaments. Visible cluster about 24x35 pixels within this 32x48 frame. Top attachment near (16,5), full leaves inside margins. Do not draw a crate; use style only for pixel edge/detail and light.",
+        "width": 32,
+        "height": 48,
+        "no_background": true,
+        "max_colors": 24,
+        "seed": 810203
+      },
+      "profile": "wall-attached-prop",
+      "attachment": "eaves; mount point at top; keep off doorway"
+    },
+    {
+      "id": "maud-charms",
+      "tool": "create_image_pro_flash",
+      "estimated_generations": 5,
+      "input_files": {
+        "style": "content/tactics/base/props/crate_oak.png"
+      },
+      "arguments": {
+        "description": "Wardenflame grounded tactical RPG pixel art. Match supplied game sprite style: true 2:1 orthographic isometric camera, top-left light, warm highlights and cool shadows, crisp one-pixel clusters, separated material planes. ONE subject on transparency. No scene, terrain base, human scale figure, captions, contact sheet, shadow painted on ground, smoke particles or magic glow. One tiny plain handmade hanging charm cluster for an old practical hermit's cottage: three short crooked wooden twigs, small clay/wood beads and tied worn tan cord. Vertically suspended from one visible top loop, oriented on the front-left isometric cottage wall plane. Simple recognizable physical objects with clear spaces between twigs. Visible object only 17x24 pixels in this 32x32 frame, top loop near (16,3). No lettering, runes, pentagram, cross, skull, crystals, occult sigils, metal weapons, leaves or magic. No wall or crate; use style only for wood pixel texture and lighting.",
+        "width": 32,
+        "height": 32,
+        "no_background": true,
+        "max_colors": 16,
+        "seed": 810204
+      },
+      "profile": "wall-attached-prop",
+      "attachment": "door jamb/eaves; mount point at top; clear threshold"
+    },
+    {
+      "id": "maud-ash-garden",
+      "tool": "create_image_pro_flash",
+      "estimated_generations": 5,
+      "input_files": {
+        "style": "content/tactics/base/props/crate_oak.png"
+      },
+      "arguments": {
+        "description": "Wardenflame grounded tactical RPG pixel art. Match supplied game sprite style: true 2:1 orthographic isometric camera, top-left light, warm highlights and cool shadows, crisp one-pixel clusters, separated material planes. ONE subject on transparency. No scene, terrain base, human scale figure, captions, contact sheet, shadow painted on ground, smoke particles or magic glow. One small low kitchen-herb garden bed on cold scorched-grey ash soil with rough muted grey stone edging, a few hardy thin sage/rosemary plants and sparse dead stubble. True 2:1 isometric rectangular ground bed, long diagonal edges slope 1 pixel vertically per 2 horizontally. Footprint about 1x2 game tiles. Low and quiet, outer silhouette roughly 80x40 pixels inside a 96x64 transparent frame. Ground-contact centre near (48,42). Ash is cold and non-emissive. Only contained bed soil/stone edging/plants; no surrounding terrain, roof, chimney, house, soot cloud, mushrooms, skull, glowing fire or figures. No crate; style controls only pixel clusters and materials.",
+        "width": 96,
+        "height": 64,
+        "no_background": true,
+        "max_colors": 32,
+        "seed": 810205
+      },
+      "profile": "low-ground-prop",
+      "footprint": [
+        1,
+        2
+      ],
+      "blocks_policy": "Keep visitor route and hidden shortcut clear; finalize after preview."
+    },
+    {
+      "id": "maud-stool-pots",
+      "tool": "create_image_pro_flash",
+      "estimated_generations": 5,
+      "input_files": {
+        "style": "content/tactics/base/props/crate_oak.png"
+      },
+      "arguments": {
+        "description": "Wardenflame grounded tactical RPG pixel art. Match supplied game sprite style: true 2:1 orthographic isometric camera, top-left light, warm highlights and cool shadows, crisp one-pixel clusters, separated material planes. ONE subject on transparency. No scene, terrain base, human scale figure, captions, contact sheet, shadow painted on ground, smoke particles or magic glow. One compact doorstep group: a worn low three-legged wooden stool with an oval seat, one modest brown clay herb pot with a small dull-green sprig, and two smaller empty clay pots. Plausible adult-human scale; stool only knee high. Seen from same low top-down 2:1 isometric camera as game props. Muted oak, terracotta and grey-brown surfaces, restrained top-left light. Entire group about 34x30 pixels in a 48x48 transparent canvas; ground feet around y=40. Every stool leg attached to its seat; pots rest on ground, do not merge into legs. No paving, person, doorway, cottage, crate, large chair, magic or smoke.",
+        "width": 48,
+        "height": 48,
+        "no_background": true,
+        "max_colors": 32,
+        "seed": 810206
+      },
+      "profile": "ground-prop-group",
+      "placement_policy": "Beside Maud's door; no overlap with actor/visitor standing space."
+    }
+  ],
+  "execution_notes": [
+    "Upload labelled concept references with get_upload_url; do not paste multi-megabyte base64 payloads into tool calls.",
+    "Small native style images may use inline base64 from the source file; retain their source hash.",
+    "Pass explicit ashen_ford palette and palette_name only to tools whose current schema supports them. edit_image must retain source town colors.",
+    "Resolve local input_files into each tool's supported URL/base64 fields; input_files/profile/footprint metadata are not API arguments.",
+    "Validate actual balance before starting paid jobs; do not silently substitute Scenario or another provider.",
+    "Show pixel assets in temporary TV previews and obtain issue #81's second approval before final map placement."
+  ],
+  "provider_override": {
+    "user_message": "We don't have access to pixal lab, you make it.",
+    "replacement": "parts/lore_places.py and render-local.py",
+    "paid_jobs_started": 0
+  }
+}

@@ -1716,6 +1716,116 @@
         "interior"
       ],
       "attach": {}
+    },
+    "granary": {
+      "variants": {
+        "ashen_ford": {
+          "image": "buildings/granary_ashen_ford.png",
+          "shadow": "buildings/granary_ashen_ford_shadow.png"
+        }
+      },
+      "size": [
+        222,
+        194
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        3,
+        2
+      ],
+      "origin": [
+        68,
+        102
+      ],
+      "anchor": [
+        84,
+        142
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "lore",
+        "storage"
+      ],
+      "attach": {
+        "door": [
+          [
+            52,
+            157
+          ]
+        ]
+      }
+    },
+    "maud_hut": {
+      "variants": {
+        "ashen_ford": {
+          "image": "buildings/maud_hut_ashen_ford.png",
+          "shadow": "buildings/maud_hut_ashen_ford_shadow.png"
+        }
+      },
+      "size": [
+        188,
+        155
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        70,
+        81
+      ],
+      "anchor": [
+        70,
+        113
+      ],
+      "height": 7,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "lore",
+        "home"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            110,
+            18
+          ]
+        ],
+        "door": [
+          [
+            30,
+            120
+          ]
+        ]
+      }
     }
   },
   "overlays": {

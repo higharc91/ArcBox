@@ -74,6 +74,9 @@ public sealed class HiddenThingsGameTests
         Assert.Equal(who, e.By);
         Assert.Equal($"{who} notices: A ward-rune, still faintly warm.", e.Line);
         Assert.Contains(e.Line!, s.Host.Notice);
+        Assert.Equal("rune", s.Host.Explore.ThingSpeech?.Line.Id);
+        Assert.Equal("narrator", s.Host.Explore.ThingSpeech?.Line.Speaker);
+        Assert.Equal("A ward-rune, still faintly warm.", s.Host.Explore.ThingSpeech?.Line.Text);
         Assert.Equal(("rune", InteractableKinds.Noticed, false), (Thing(s, "rune")!.Kind, Thing(s, "rune")!.State, Thing(s, "rune")!.Blocks));
         // A DC 30 nobody's passive History meets: not found, and not sent anywhere.
         Assert.True(Saved(s, "deep") is null or { Found: false });

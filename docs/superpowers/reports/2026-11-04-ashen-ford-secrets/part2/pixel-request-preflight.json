@@ -1,0 +1,71 @@
+{
+  "concept_approval": {
+    "status": "approved",
+    "user_message": "Looks good",
+    "date": "2026-11-05",
+    "scope": "shared anchor, granary and Maud hut/dressing concepts; PixelLab stage authorized"
+  },
+  "paid_jobs_submitted": 0,
+  "estimated_generations": 40,
+  "source_sha256": {
+    "content/tactics/base/town/buildings/cottage_thatch_green.png": "503e0cba6f765629d1fafc9b7c3080b34c72bcb986775f081b28d18c5995f8f3",
+    "tools/tactics-assets/concepts/ashen-ford-secrets/granary-sheet.png": "8afb990fda7f12b1da07b04ed7f657bd7c84fab2d99fb70a4040baefddfb7d77",
+    "content/tactics/base/props/crate_oak.png": "a52803d1846af776cb5c62b3c7b632a7b1a2c4d0873c810d709c15cbe7fad0ce"
+  },
+  "requests": [
+    {
+      "id": "granary",
+      "tool": "create_image_pro",
+      "canvas": [
+        256,
+        224
+      ],
+      "estimated_generations": 10
+    },
+    {
+      "id": "maud-cottage-soot",
+      "tool": "edit_image",
+      "canvas": [
+        188,
+        155
+      ],
+      "estimated_generations": 10
+    },
+    {
+      "id": "maud-herbs",
+      "tool": "create_image_pro_flash",
+      "canvas": [
+        32,
+        48
+      ],
+      "estimated_generations": 5
+    },
+    {
+      "id": "maud-charms",
+      "tool": "create_image_pro_flash",
+      "canvas": [
+        32,
+        32
+      ],
+      "estimated_generations": 5
+    },
+    {
+      "id": "maud-ash-garden",
+      "tool": "create_image_pro_flash",
+      "canvas": [
+        96,
+        64
+      ],
+      "estimated_generations": 5
+    },
+    {
+      "id": "maud-stool-pots",
+      "tool": "create_image_pro_flash",
+      "canvas": [
+        48,
+        48
+      ],
+      "estimated_generations": 5
+    }
+  ]
+}

@@ -603,7 +603,7 @@ walk fixtures gained `search`, and `check-search`/`check-search-rolled` were add
 
 ### 7.8 Not done
 
-- **StoryOrder** (the export's replay) walks hidden paths as open, as it does doors (§5 "Not checked yet").
+- **StoryOrder:** the export's replay now treats hidden paths and secret doors as shut, so the story route cannot use an unfound shortcut. The broader §5 work for ordinary keyed doors remains open.
 - **The plug of a low wall** (a hedge one step high) showed a lighter notch without the hedge's front face, and a secret door's plug in a
   tall wall a faint seam. Fixed in issue #78, and both causes were needed: the frame's overlay painted the open tile's own top, later in the
   painter's order than the plug's sides, back over them (`WorldPlan.Overlay` now never repaints a plugged tile's own ground), and the plug
@@ -611,7 +611,7 @@ walk fixtures gained `search`, and `check-search`/`check-search-rolled` were add
   fixed, the notch hid the change, which is why the earlier attempt seemed to do nothing. `WallPlugsTests` holds a plugged tile against its
   neighbour for both; see the `--world-demo=things` shots `path-0-unfound` and `secret-0-unfound`.
 - **A search ignores unseen traps** on what it finds (the coordinator's review note 5), for the user to decide.
-- **Ashen Ford** has no hidden things yet; the demo region shows each (`--world-demo=things`: a fourth gallery of the notices and the path,
+- **Ashen Ford:** issue #81 places a reed-bank path, an Ash Market hatch and draft, and three lived-in notices; the demo region still shows each kind (`--world-demo=things`: a fourth gallery of the notices and the path,
   then tracks that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found by Survival, and
   a Search finding a loose flagstone hidden by Investigation).
 
