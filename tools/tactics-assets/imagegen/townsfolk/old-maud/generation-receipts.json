@@ -1,5 +1,5 @@
 {
-  "imageToolCalls": 2,
+  "imageToolCalls": 11,
   "pixelLabCalls": 0,
   "pixelLabCreditsSpent": 0,
   "newSpeechGenerations": 0,
@@ -24,6 +24,104 @@
       "inputSha256": {
         "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-source.png": "3aafd2ec4550e112bfb989df7bbecd9cb0af44758def454565f8102f49d5051a"
       }
+    },
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-export.png",
+      "originalPath": "/workspace/generated_images/exec-74dfa3d2-33c1-4de2-b33e-bfd9a171b8ad.png",
+      "requestSha256": "a0b259c5bac98cc33046434cfca648bb161699bc5c3304e7b2fa1e4fa2660a19",
+      "outputSha256": "256bfdc2731f895df1e2fabc817350f772da2841fa5ee7952f586de7ba23a1e9",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/south.png": "c57c4dde787d2031cd1ff4abc694d1b22624fd215340ecb093abaf857c22563d",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-export.png",
+      "originalPath": "/workspace/generated_images/exec-aa81cf3b-43d9-45cc-9c9f-a1a43c30f4bb.png",
+      "requestSha256": "5b0e51155c2224727bbd3e4ef04382224752574c0f36327f25ae0b9cf4e6cad1",
+      "outputSha256": "69a003f2ff35255feb4b0215a375e58dd9e0d8b45007ec623a063cfb48635505",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-9d37dec8-2d71-490f-98fd-f0768f69ae86.png",
+      "requestSha256": "a175440842c1ed2e7a6f4dbad6c3edb154a87818100a41144e0032a002104c24",
+      "outputSha256": "2328a43b14866432436eaa8625d010b198dadfa5c14f6d7f0def7bbfe5c67b5d",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/south-west.png": "62671251b1b2bcd3206acb39e8fd34a6cf1fcafac02a77dbb3ec08b528f13524",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-export.png",
+      "originalPath": "/workspace/generated_images/exec-40ba0589-91ca-4852-9b9b-29145ac5d207.png",
+      "requestSha256": "ce7ab0aef5a5bbeb6182b0dccbe47e037abb04252f263c51319f96b5d3f9d4a6",
+      "outputSha256": "52d58f5816bd50584373d7c4d8ed534c556a599e21d5626690828a1745bcbd7d",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/west.png": "f33062c8ac3fe8124aba5c847fcff3fed837df3f57618455ae6edb61c75558d8",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-cdf2ad30-2300-4d53-8a67-fa3c45ca6539.png",
+      "requestSha256": "d8584987772908bde19a89d2e1a9406ecc9073c339f58fe6d8793f1dad338850",
+      "outputSha256": "bc7ef6bfa75bc11ab2ae8bb8d9c7222373686392f7c44e46dd7b7f74f7da1d46",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/north-west.png": "8eaa83d22c4d3d162012224c9a7f5a781920dd451f8b55bf8b8b602c6eff4c4c",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-export.png",
+      "originalPath": "/workspace/generated_images/exec-d17b8805-d4ba-4440-9f82-041fe3727d43.png",
+      "requestSha256": "93e0794be264fdc2b89d24763deeeaed0436a78e2b9a2daadad4a723ad835188",
+      "outputSha256": "e18e407eb5260cc8c41d89d72e396dd43d7e94bfbb739af06d95b39454970b31",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/north.png": "22adcfadb11edac47640cbd063c5ac77f3726f96a8fa21701d1cf80b1db0ea0d",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-c229a763-394e-47bf-8bda-a90066b9b215.png",
+      "requestSha256": "840bac82c2f61ddc68981c960967ceff342188b22c7fc38e5642c847ff991dbc",
+      "outputSha256": "0046e2c36616eb06e1a9275f8537209a6b723130015911914c55717457da19f4",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/north-east.png": "64eace66cea28c29824ac827ccd27dced82b1ab0199182e224bbc9c181256bdd",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-export.png",
+      "originalPath": "/workspace/generated_images/exec-e0dfaa47-f16d-48cc-bf7a-e5ae907b9cb6.png",
+      "requestSha256": "fd447f6d5113559ff4e1a4a44abfd1ea7deb8dd3c9ad07048cd0577837c403a2",
+      "outputSha256": "5420d9382063aaba44ebf8f2e0aa958b217de63cd26246d6a3b9cd1445f8ed7b",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/east.png": "2c5446db9db14343f1295957f850adbab000b15cb9518a2d3716c1cc495950c3",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-16293bb1-596f-489a-99bd-b222443e5ebd.png",
+      "requestSha256": "9348fa29344b9f5177983b20937372ad6802fa1a42b3810442dea327edbb37e1",
+      "outputSha256": "96d31fdb23264b0da609a6fa6a065aab1fb0dcf76dc895e2bad4f9f6a4d5a0a6",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/directional/guides/south-east.png": "17f1966e39eebe1904c1796ff7dbdbb031a99949bd83fe3d1ec27adf9666568b",
+        "tools/tactics-assets/imagegen/townsfolk/old-maud/candidate-1-preview.png": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a"
+      }
     }
   ],
   "runtimeAlphaPreview": {
@@ -31,5 +129,11 @@
     "source": "candidate-1.png",
     "output": "candidate-1-preview.png",
     "operation": "Apply the same alpha128 threshold as native sprite import, zero transparent RGB; preserve shape/layout and source images."
-  }
+  },
+  "completionImageToolCalls": 9,
+  "notes": [
+    "Approved concept/appearance and all24 installed Gacrux voice lines reused. Eight directional6x3 sheets plus six-expression portrait sheet.",
+    "All opaque magenta exports retained; deterministic keying/connected-component frame extraction/shared palette/nearest import only, no redrawing or synthetic poses.",
+    "No PixelLab or new speech calls or purchases. Image tool price unavailable; no cost estimate inferred."
+  ]
 }

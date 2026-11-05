@@ -1018,3 +1018,58 @@ portraits are next queued work, with a separate finished-set/TV gate.
 
 Rebase before pushing townsfolk-art. No PR, merge, closure or environment publish.
 Earlier pending-Mother approval/installation notes are historical and superseded.
+
+
+## Latest checkpoint — Old Maud completed animation/portrait/voiced TV review
+
+Owner completion authorization: “ok, do those”. Appearance was already approved
+(“I approve Old Mauds, start Mother Skarrow”); Gacrux voice already approved and
+installed across all24 lines. Reused both plus the approved concept. **Separate
+finished-set/TV approval remains required before Old Maud artwork installation.**
+Mother Skarrow is already approved/installed; do not ask her approval again.
+
+Maud has eight real facings,144 native frames: six source poses each idle/walk/
+talk,10-frame ping-pong idle/talk playback, slower5fps six-frame walk. Small blink/
+breath, careful alternating steps, restrained emptyLEFT-hand gestures; ordinary
+walking stick remains anatomicalRIGHT. Six40×40 mood portraits. Human century-old
+stoop normalized to64native/32world pixels versus upright human72/36.96×96 frames,
+anchor48/84, headTop20, pixelScale0.5,1728×768 atlas5.0625MiB,96 shared colours,
+binary alpha. One fixed registration per direction, no per-frame recentering or
+mirroring; maximum vertical foot drift1.5world pixels. Component-based cell
+extraction preserves source pixels and excludes neighbouring sprites. No redraw
+or synthetic posed frames. Automated geometry checks complement owner visual QA.
+
+Review video: tools/tactics-assets/imagegen/townsfolk/old-maud/
+old_maud-finished-review.mp4 (19.6s). Includes approved installed Gacrux town1:
+“Sit down, dearie. I've waited a hundred years, I can wait while you sit.”
+Close-up GIF, three eight-facing action GIFs, portrait/contact sheets, every
+normalized frame, source exports, guides and native TV still retained.21 assets
+and the TV still are hash-bound in sprite-approval.json. Complete-set status is
+pending_owner_full_set_tv_approval; guarded installer refuses before writes.
+
+Private /workspace/artifacts/issue80-old-maud-review uses a hermit_old_maud
+placed variant plus named old_maud sprite/portrait and art aliases. Generic
+hermit art untouched. No battle role or new gameplay behavior. Rules/balance/
+phone contracts/voices/captions and production content unchanged. Isolation
+checks compare all5034 files, allowing only five named review cosmetic documents.
+Current production pack216586388bytes, inventory SHA256
+728704ed27106c3fe7818874f4d3537882c8ba9bb9c1aead254cf0435a4f8147.
+
+Checks:170 focused presentation tests pass. Typed review runtime validates real
+facings/atlas rectangles, named body and six portraits,32world-pixel head lift,
+slow walk, generic-hermit separation and bark stop/resume. Frame/palette/source/
+receipt/bound-review hash and offline rebuild checks pass. Native software Vulkan
+four-party peaks **343.70MiB Ashen Ford /192.37MiB Cinder Hollow**, below512MiB;
+strict memory checker covers open/crossing/party-change/restored and all8human/
+elf class texture uploads/releases. These are memory results, not GPU timings.
+Host/game code unchanged; prior installed checkpoint builds passed. New standalone
+runtime verifier compiles and passes. Existing native host reused for these runs.
+
+Nine new image-tool calls: eight directional6×3 sheets and one portrait sheet.
+11 total including two original appearance calls. Raw exports/exact requests/
+input-output hashes retained; no completed art regenerated. No PixelLab or new
+speech calls, credit purchases or upgrades. Image-tool pricing unavailable; no
+monetary estimate inferred. Next: owner finished-set/TV approval, then install
+exact reviewed art and verify production; do not infer approval from appearance
+or previous voice approval. Rebase before pushing townsfolk-art. No PR, merge,
+issue closure or environment publication.
