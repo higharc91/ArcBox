@@ -18,7 +18,13 @@
       "failed": 0
     },
     "remaining_known_failures": 0,
-    "full_suite_repeated_after_fixture_corrections": false
+    "full_suite_repeated_after_fixture_corrections": true,
+    "final_full_run": {
+      "total": 6787,
+      "passed": 6787,
+      "failed": 0,
+      "skipped": 0
+    }
   },
   "phone": {
     "passed": 517,
@@ -67,5 +73,12 @@
     "native": 0,
     "pixellab": 0,
     "scenario_total": 65
+  },
+  "merge_verification": {
+    "tested_code_commit": "ac79e092e539f4085ecebbf210f0a3c0574047ff",
+    "base_main": "da796d97f5613732b6446e4a66b7b4d4c719b81b",
+    "phone_passed": 517,
+    "all_eleven_place_shots_refreshed": true,
+    "owner_requested_push_and_merge": true
   }
 }

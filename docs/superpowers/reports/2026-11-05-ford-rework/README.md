@@ -13,6 +13,8 @@ The owner approved the [greener ground revision](ground-art/green-revision/READM
 Twelve top textures and one cliff side are now installed, including olive farm turf and local riverbank greens.
 The [ground installation report](ground-installed/README.md) records the saved-scene export, approved asset hashes,
 mechanical equivalence and final checks. All world tiles retain their heights, collision, flags and fuel classification.
+Final merge verification passes all **6,787 .NET** and **517 phone** tests. The solution build has zero warnings/errors,
+and the eleven named place shots are refreshed after ground approval.
 Scenario remains **65 CU**; native authoring and PixelLab spend remain zero.
 The concept and preview records below are historical checkpoints, retained as provenance.
 

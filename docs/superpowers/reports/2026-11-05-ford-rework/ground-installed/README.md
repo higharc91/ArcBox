@@ -33,6 +33,13 @@ encounter stamps. Cinder Hollow's scene and exported world are unchanged.
 | After parley | [West](parley-west.png), [east](parley-east.png) |
 | Real encounter setup | [River Crossing](battle.png) |
 
+The refreshed OW-22 named place set is also complete: [overview](place-overview.png),
+[square](place-square-with-people.png), [Emberwick](place-emberwick.png), [road](place-road.png),
+[Maud](place-maud.png), [hills](place-hills.png), [ford](place-ford.png), [fields](place-fields.png),
+[docks](place-docks.png), [camp](place-camp.png) and [burned ground](place-burned.png).
+`place-shots.json` records the sources and hashes. The overview is a fresh installed-content capture;
+the other images retain the full-resolution installed views above under their canonical place names.
+
 These are actual installed-content Godot captures at 1280×720. The battle image comes from the game's post-render
 screenshot queue; the capture helper now uses that image to avoid grabbing the boot splash during a slow first frame.
 Default review standing positions also avoid the gatehouse footprint. All final captures have no runtime errors.
@@ -47,10 +54,10 @@ Every map cell preserves height, flags and fuel classification. All 19,200 world
 height, flags and fuel in fortified, force and parley states. Separate material aliases retain the original
 combustibility of grass versus damp earth. No collision props, enemy stats, counts, rewards or objectives are changed.
 
-The solution build has zero warnings/errors, and all **517 phone tests pass**. The full .NET run executes 6,787
-tests: 6,785 pass and two retain stale art expectations. After correcting those fixtures, each passes its targeted
-rerun. There are no remaining known failures. The entire suite was not repeated after those fixture-only corrections;
-the original full-run log and both passing reruns are retained in `validation.json` and adjacent test logs.
+Final merge verification: all **6,787 .NET tests and 517 phone tests pass**, with no failures or skips.
+The solution build has zero warnings/errors. The complete .NET suite was repeated after correcting the two stale
+art fixtures, and the phone suite was repeated too. `merge-dotnet-tests.txt`, `merge-phone-tests.txt` and
+`validation.json` retain the final receipts. The earlier failed checkpoint and targeted corrections remain archived.
 
 Asset expectations follow the approved native filenames, four-tile spans and clustered edges. The stamped-tile
 rejection fixture follows the new charred-root material while retaining its exact error and refusal assertions.
