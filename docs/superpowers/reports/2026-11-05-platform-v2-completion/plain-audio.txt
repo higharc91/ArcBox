@@ -1,0 +1,70 @@
+AUDIO Music lobby-loop
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+AUDIO Voice redline.questions: What is the name of Mario's younger brother?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Russell goes purple!
+AUDIO Voice redline.announcer: Provisional pole for Russell.
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which gas do plants absorb from the air for photosynthesis?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Russell goes purple!
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many players does one football (soccer) team have on the pitch?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+AUDIO Voice redline.announcer: Pole position for Russell, 5.34 seconds in total!
+AUDIO Sfx engine RUS
+AUDIO Sfx engine HAM
+AUDIO Sfx engine PIA
+AUDIO Sfx start-beep #1
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #2
+AUDIO Sfx start-beep #3
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+AUDIO Sfx lights-out
+AUDIO Sfx engine HUL
+AUDIO Voice redline.announcer: And it's lights out!
+AUDIO Voice redline.announcer: Round 1. Science & Nature, easy.
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx lock
+AUDIO Sfx countdown 1
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which planet is known as the Red Planet?
+AUDIO Sfx engine LIN
+AUDIO Sfx engine HUL
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Mars.
+AUDIO Sfx screech HUL
+AUDIO Sfx engine HUL
+AUDIO Sfx engine LEC
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot1 spins the Audi!

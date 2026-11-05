@@ -1,0 +1,21 @@
+{
+  "issue": 42,
+  "audited_main": "00490381ba6d66a87f297ebd68163cfb566a8581",
+  "child_issues_closed": 16,
+  "child_prs_merged_and_ancestors": 16,
+  "reused_identical_runtime_verification": {
+    "source": "183d16a9",
+    "dotnet_tests": 6376,
+    "phone_tests": 517,
+    "builds": "passed"
+  },
+  "fresh_tv_browser_checks": {
+    "plain": 0,
+    "restart": 0,
+    "swap": 0
+  },
+  "renderer": "OpenGL compatibility",
+  "initial_vulkan_attempt": "startup warm-up timed out; retained separately",
+  "runtime_changes": false,
+  "manual_physical_phone_or_audible_playback_claimed": false
+}

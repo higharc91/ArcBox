@@ -1,0 +1,205 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+Autostart: redline once 3 player(s) are in
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+SHOT /workspace/issue42/restart/tv/001-connect.png
+LOBBY FBHV
+NARRATOR Google
+ROOM FBHV
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+SHOT /workspace/issue42/restart/tv/002-lobby.png
+SHOT /workspace/issue42/restart/tv/003-lobby.png
+SHOT /workspace/issue42/restart/tv/004-lobby.png
+SHOT /workspace/issue42/restart/tv/005-lobby.png
+SHOT /workspace/issue42/restart/tv/006-lobby.png
+REDLINE model landmarks/grandstand_main.glb: imported scene
+REDLINE model landmarks/pit_station.glb: imported scene
+REDLINE model landmarks/pit_building.glb: imported scene
+REDLINE model landmarks/grandstand_t1.glb: imported scene
+REDLINE model landmarks/tower.glb: imported scene
+REDLINE model landmarks/grandstand_corner.glb: imported scene
+REDLINE model landmarks/start_gantry.glb: imported scene
+REDLINE model landmarks/trees.glb: imported scene
+REDLINE surroundings planned in 866 ms, built in 1244 ms: 9 car parks, 990 cars, 6 compounds, 46 tents, 24 roads, 1300 shrubs, 750 groves, 3600 far clumps, 25 plaza props, 41 trees cleared
+REDLINE model surroundings/amphitheatre.glb: imported scene
+REDLINE model surroundings/plaza_props.glb: imported scene
+REDLINE model surroundings/tents.glb: imported scene
+REDLINE model surroundings/parked_cars.glb: imported scene
+REDLINE model surroundings/shrubs.glb: imported scene
+REDLINE model surroundings/groves.glb: imported scene
+REDLINE model surroundings/far_clumps.glb: imported scene
+REDLINE model surroundings/skyline.glb: imported scene
+REDLINE trackside planned in 101 ms: 921 TecPro blocks, 921 tyre modules, 1584 armco posts, 2669 fence posts, 18 marshal posts, 20 corner boards, 15 brake boards, 4 camera platforms
+REDLINE model trackside/barriers.glb: imported scene
+REDLINE model trackside/furniture.glb: imported scene
+REDLINE model trackside/big_screen.glb: imported scene
+REDLINE model car_2026.glb: imported scene
+REDLINE model car_2026_lod1.glb: imported scene
+REDLINE model helmets/NOR.glb: imported scene
+REDLINE model helmets/PIA.glb: imported scene
+REDLINE model helmets/LEC.glb: imported scene
+REDLINE model helmets/HAM.glb: imported scene
+REDLINE model helmets/VER.glb: imported scene
+REDLINE model helmets/HAD.glb: imported scene
+REDLINE model helmets/RUS.glb: imported scene
+REDLINE model helmets/ANT.glb: imported scene
+REDLINE model helmets/ALO.glb: imported scene
+REDLINE model helmets/STR.glb: imported scene
+REDLINE model helmets/GAS.glb: imported scene
+REDLINE model helmets/COL.glb: imported scene
+REDLINE model helmets/ALB.glb: imported scene
+REDLINE model helmets/SAI.glb: imported scene
+REDLINE model helmets/LAW.glb: imported scene
+REDLINE model helmets/LIN.glb: imported scene
+REDLINE model helmets/OCO.glb: imported scene
+REDLINE model helmets/BEA.glb: imported scene
+REDLINE model helmets/HUL.glb: imported scene
+REDLINE model helmets/BOR.glb: imported scene
+REDLINE model helmets/PER.glb: imported scene
+REDLINE model helmets/BOT.glb: imported scene
+REDLINE model podium.glb: imported scene
+REDLINE world ready in 1871 ms (geometry 0 ms: circuit:cota 3140 ms; preset Low)
+REDLINE warming up behind the lobby
+REDLINE sounds ready (17 effects and 2 music loops synthesised in 4104 ms)
+AUDIO Music lobby-loop
+REDLINE model drivers/NOR.glb: imported scene
+REDLINE model drivers/LEC.glb: imported scene
+REDLINE model drivers/ANT.glb: imported scene
+REDLINE warm-up done
+Autostart: starting redline with 3 player(s)
+REDLINE DriverSelect round 0
+SHOT /workspace/issue42/restart/tv/007-redline.png
+SHOT /workspace/issue42/restart/tv/008-driverselect.png
+SHOT /workspace/issue42/restart/tv/009-driverselect-claim.png
+SHOT /workspace/issue42/restart/tv/010-driverselect-claim.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+NARRATOR Off
+SHOT /workspace/issue42/restart/tv/011-qualifyingreading-lap1.png
+AUDIO Voice redline.questions: Which gas do plants absorb from the air for photosynthesis?
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue42/restart/tv/012-qualifyingquestion-lap1.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Hamilton goes purple!
+SHOT /workspace/issue42/restart/tv/013-qualifyingresult-lap1.png
+AUDIO Voice redline.announcer: Provisional pole for Hamilton.
+SHOT /workspace/issue42/restart/tv/014-qualifyingresult-lap1-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: On which continent is the Sahara Desert found?
+SHOT /workspace/issue42/restart/tv/015-qualifyingreading-lap2.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue42/restart/tv/016-qualifyingquestion-lap2.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Leclerc goes purple!
+SHOT /workspace/issue42/restart/tv/017-qualifyingresult-lap2.png
+AUDIO Voice redline.announcer: Provisional pole for Lawson.
+SHOT /workspace/issue42/restart/tv/018-qualifyingresult-lap2-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many rings are there on the Olympic flag?
+SHOT /workspace/issue42/restart/tv/019-qualifyingreading-lap3.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue42/restart/tv/020-qualifyingquestion-lap3.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Norris goes purple!
+SHOT /workspace/issue42/restart/tv/021-qualifyingresult-lap3.png
+AUDIO Voice redline.announcer: Pole position for Norris, 6.15 seconds in total!
+SHOT /workspace/issue42/restart/tv/022-qualifyingresult-lap3-card.png
+REDLINE Grid round 0
+REDLINE grid NOR LEC HAD HAM GAS PIA COL LAW ANT STR SAI PER BOR RUS HUL ALB BOT LIN VER BEA OCO ALO
+AUDIO Sfx engine NOR
+AUDIO Sfx engine LEC
+AUDIO Sfx engine HAD
+AUDIO Sfx start-beep #1
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #2
+SHOT /workspace/issue42/restart/tv/023-grid.png
+AUDIO Sfx start-beep #3
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+REDLINE Throttle round 1
+AUDIO Sfx lights-out
+AUDIO Sfx engine ANT
+AUDIO Voice redline.announcer: And it's lights out!
+SHOT /workspace/issue42/restart/tv/024-throttle.png
+AUDIO Sfx lock
+NARRATOR Google
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Round 1. Geography, hard.
+NARRATOR Off
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+AUDIO Sfx countdown 2
+REDLINE Reading round 1
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the capital city of Australia?
+AUDIO Sfx engine LAW
+AUDIO Sfx engine ANT
+SHOT /workspace/issue42/restart/tv/025-reading.png
+REDLINE Question round 1
+SHOT /workspace/issue42/restart/tv/026-question.png
+AUDIO Sfx tick
+REDLINE Reveal round 1
+AUDIO Sfx correct
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: The answer is Canberra.
+AUDIO Sfx engine ANT
+AUDIO Sfx engine LAW
+SHOT /workspace/issue42/restart/tv/027-reveal.png
+AUDIO Voice redline.announcer: Bot1 takes the lead!
+SHOT /workspace/issue42/restart/tv/028-reveal-2s.png
+SHOT /workspace/issue42/restart/tv/029-reveal-4s.png
+SHOT /workspace/issue42/restart/tv/030-reveal-6s.png
+REDLINE Throttle round 2
+AUDIO Voice redline.announcer: Round 2. Sports, easy.
+ROOM FBHV
+SHOT /workspace/issue42/restart/tv/031-reconnecting.png
+SHOT /workspace/issue42/restart/tv/032-throttle.png
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+SHOT /workspace/issue42/restart/tv/033-reconnecting.png
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Music lobby-loop
+REDLINE parked for the next race (interrupted)
+LOBBY FBHV
+ROOM FBHV
+RESULTS Game interrupted: the server restarted.
+HOST view patches applied 32, whole views asked for again 0
+SHOT /workspace/issue42/restart/tv/034-lobby.png
+SHOT /workspace/issue42/restart/tv/035-results.png
+LOBBY FBHV
+SHOT /workspace/issue42/restart/tv/036-lobby.png

@@ -1,0 +1,42 @@
+[   0.9s] room RCXZ, 3 phone(s), game redline (until the first Reveal)
+[   1.3s] waiting for the host to start the game
+[  70.5s] P1 driver-select
+[  75.2s] P1 seated  "You're Nico Hülkenberg. Waiting for the grid…"
+[  82.0s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "What is the name of Mario's younger brother? Answers in a moment…"
+[  89.3s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  92.8s] P1 lap 1: right "Luigi" after 3.5 s
+[  93.0s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.82 s — checking…"
+[  94.6s] P2 lap 1: right "Luigi" after 5.3 s
+[  96.0s] P3 lap 1: right "Luigi" after 7.0 s
+[  96.1s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.82 s P7 so far"
+[ 101.1s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "Which gas do plants absorb from the air for photosynthesis? Answers in a moment…"
+[ 105.3s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[ 108.8s] P1 lap 2: right "Carbon dioxide" after 3.5 s
+[ 109.0s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.54 s — checking…"
+[ 110.8s] P2 lap 2: right "Carbon dioxide" after 5.3 s
+[ 112.6s] P3 lap 2: WRONG (planned) "Nitrogen" after 7.0 s
+[ 112.6s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.54 s P6 so far"
+[ 117.7s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "How many players does one football (soccer) team have on the pitch? Answers in a moment…"
+[ 122.6s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[ 126.1s] P1 lap 3: right "11" after 3.5 s
+[ 126.3s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.54 s — checking…"
+[ 127.9s] P2 lap 3: right "11" after 5.3 s
+[ 129.8s] P3 lap 3: right "11" after 7.0 s
+[ 129.9s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.54 s P5 so far"
+[ 134.8s] P1 grid  "You're Nico Hülkenberg, #27, Audi. Lights out in a moment… · Qualified P5"
+[ 140.8s] P1 throttle  [P5 ROUND 1/15]
+[ 141.0s] rejoin: reloading P2 during throttle [P7 ROUND 1/15]
+[ 141.1s] rejoin: P2 back on throttle [P7 ROUND 1/15]
+[ 145.5s] P1 throttle-locked  [P5 ROUND 1/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 149.8s] P1 reading  [REDLINE P5 ROUND 1/15]  "Which planet is known as the Red Planet? Answers open in a moment…"
+[ 153.1s] P1 question  [REDLINE P5 ROUND 1/15]
+[ 153.1s] P3 sits out question: the phase timer decides
+[ 153.2s] P2 sits out question: the phase timer decides
+[ 157.8s] P1 answered  [P5 ROUND 1/15]  "Answer locked. Eyes on the TV!"
+[ 173.3s] P1 reveal  [P16 ROUND 1/15]  "Spun out! Pit limiter next round · P16"
+[ 174.5s] qualifying plan: P1 HUL 3/3 laps, 10.50 s; P2 LEC 3/3 laps, 15.75 s; P3 COL 2/3 laps, 14.00 s
+[ 174.5s] QUALI order HUL LEC COL
+[ 174.5s] phases seen on P1: driver-select, seated, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, answered, reveal
+
+OK
+Screenshots: /workspace/issue42/plain/phones

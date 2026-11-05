@@ -1,0 +1,22 @@
+[tv-e2e 14:19:33] starting the server on http://127.0.0.1:35627
+[tv-e2e 14:19:37] starting the TV (1280x720, preset low)
+[tv-e2e 14:19:41] TV opened room VHGX
+[tv-e2e 14:19:41] phones: 3 bots
+[   0.9s] room VHGX, 3 phone(s), game redline (until the first Reveal)
+[   1.1s] waiting for the host to start the game
+[ 301.2s] PROBLEM: crashed: Error: timed out waiting for the host to start the game
+    at until (file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:740:9)
+    at async run (file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:446:5)
+    at async file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:390:14
+
+FAILED (1):
+- crashed: Error: timed out waiting for the host to start the game
+    at until (file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:740:9)
+    at async run (file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:446:5)
+    at async file:///workspace/arcbox-secrets/web/play/e2e/redline.e2e.mjs:390:14
+Screenshots: /workspace/issue42/plain/phones
+[tv-e2e 14:24:44] letting the TV finish its shots (2 s)
+[tv-e2e 14:24:46] TV stopped
+[tv-e2e 14:24:47] Xvfb stopped
+[tv-e2e 14:24:47] server stopped
+[tv-e2e 14:24:47] screenshots: 3 from the TV in /workspace/issue42/plain/tv, 1 from phone 1 in /workspace/issue42/plain/phones

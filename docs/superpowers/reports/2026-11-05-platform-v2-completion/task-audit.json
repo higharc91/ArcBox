@@ -1,0 +1,266 @@
+{
+  "issue": 42,
+  "audited_main": "00490381ba6d66a87f297ebd68163cfb566a8581",
+  "tasks": [
+    {
+      "number": 26,
+      "title": "Platform v2 task 1: Storage: database, migrations and the background writer",
+      "state": "closed",
+      "closed_at": "2026-10-29T21:05:29Z",
+      "pr": {
+        "pr": 44,
+        "title": "Platform v2 task 1: SQLite storage, migrations and the background writer",
+        "merged": true,
+        "sha": "ef1eb874f89afbe61287ea67cbc6591ef8d489df",
+        "closes": [
+          26
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/44"
+      }
+    },
+    {
+      "number": 27,
+      "title": "Platform v2 task 2: Hashed secrets",
+      "state": "closed",
+      "closed_at": "2026-10-29T21:09:36Z",
+      "pr": {
+        "pr": 45,
+        "title": "Platform v2 task 2: store player secrets and host tokens only as hashes",
+        "merged": true,
+        "sha": "1fc6ac59eec154db140fcbab168b424653c5279e",
+        "closes": [
+          27
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/45"
+      }
+    },
+    {
+      "number": 28,
+      "title": "Platform v2 task 3: SDK contracts, harness and the wire contract",
+      "state": "closed",
+      "closed_at": "2026-10-29T21:16:31Z",
+      "pr": {
+        "pr": 46,
+        "title": "Platform v2 task 3: SDK contracts, harness and the wire contract",
+        "merged": true,
+        "sha": "bed7167de37122b9c2140e0a96fe5e41b26ef005",
+        "closes": [
+          28
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/46"
+      }
+    },
+    {
+      "number": 29,
+      "title": "Platform v2 task 4: Profiles and taking seats (`Peek`, `TakeSeat`, offline seats)",
+      "state": "closed",
+      "closed_at": "2026-10-29T21:29:36Z",
+      "pr": {
+        "pr": 47,
+        "title": "Platform v2 task 4: profiles, Peek/TakeSeat and taking offline seats",
+        "merged": true,
+        "sha": "ac4c17987008c9d3b1047b00317dd7521c475157",
+        "closes": [
+          29
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/47"
+      }
+    },
+    {
+      "number": 30,
+      "title": "Platform v2 task 5: Campaign service",
+      "state": "closed",
+      "closed_at": "2026-10-29T21:38:10Z",
+      "pr": {
+        "pr": 48,
+        "title": "Platform v2 task 5: campaign service with leases, snapshots and game-owned rules",
+        "merged": true,
+        "sha": "a7f2a49ec273b95c16c77b5df687e0e2d40a0c2a",
+        "closes": [
+          30
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/48"
+      }
+    },
+    {
+      "number": 31,
+      "title": "Platform v2 task 6: Campaign rooms",
+      "state": "closed",
+      "closed_at": "2026-10-29T22:07:06Z",
+      "pr": {
+        "pr": 49,
+        "title": "Platform v2 task 6: campaign rooms (pick or create a campaign, roster, seats for every member)",
+        "merged": true,
+        "sha": "69dcbce091bd3818ef1ee7f46f4448c76ceb8342",
+        "closes": [
+          31
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/49"
+      }
+    },
+    {
+      "number": 32,
+      "title": "Platform v2 task 7: Portal HTTP API",
+      "state": "closed",
+      "closed_at": "2026-10-29T22:21:11Z",
+      "pr": {
+        "pr": 50,
+        "title": "Platform v2 task 7: portal API for campaigns, authenticated by profile keys",
+        "merged": true,
+        "sha": "2bc25a35cdaa12771a3c72a7bd6a9570d1587e28",
+        "closes": [
+          32
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/50"
+      }
+    },
+    {
+      "number": 33,
+      "title": "Platform v2 task 8: Durable rooms",
+      "state": "closed",
+      "closed_at": "2026-10-29T22:46:51Z",
+      "pr": {
+        "pr": 51,
+        "title": "Platform v2 task 8: durable rooms (persisted membership, rebuild after restart, parking idle rooms)",
+        "merged": true,
+        "sha": "be57d674c46748bcbd6d1fef7c738539026c4446",
+        "closes": [
+          33
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/51"
+      }
+    },
+    {
+      "number": 34,
+      "title": "Platform v2 task 9: Host signals",
+      "state": "closed",
+      "closed_at": "2026-10-29T22:51:38Z",
+      "pr": {
+        "pr": 52,
+        "title": "Platform v2 task 9: host signals from the TV to IHostAware games",
+        "merged": true,
+        "sha": "3d0e8ca42783ce552c2a5cc2adca600ca22dcd6a",
+        "closes": [
+          34
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/52"
+      }
+    },
+    {
+      "number": 35,
+      "title": "Platform v2 task 10: Content packs on the server",
+      "state": "closed",
+      "closed_at": "2026-10-29T22:58:20Z",
+      "pr": {
+        "pr": 53,
+        "title": "Platform v2 task 10: content packs with hashed, immutable URLs and ContentRequired",
+        "merged": true,
+        "sha": "33c9508ead8133f83b06ac921a29b971bd138912",
+        "closes": [
+          35
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/53"
+      }
+    },
+    {
+      "number": 36,
+      "title": "Platform v2 task 11: TV content cache (Host.Core)",
+      "state": "closed",
+      "closed_at": "2026-10-29T23:05:28Z",
+      "pr": {
+        "pr": 54,
+        "title": "Platform v2 task 11: TV content cache with verified atomic installs",
+        "merged": true,
+        "sha": "562449ad170fa230ae18da1a69216756999ffa14",
+        "closes": [
+          36
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/54"
+      }
+    },
+    {
+      "number": 37,
+      "title": "Platform v2 task 12: Phone game modules and `CustomView`",
+      "state": "closed",
+      "closed_at": "2026-10-29T23:12:29Z",
+      "pr": {
+        "pr": 55,
+        "title": "Platform v2 task 12: lazy phone game modules, CustomView, REDLINE skin as a module",
+        "merged": true,
+        "sha": "477b790fd8f2cc958eda596957c3162f6272dcf7",
+        "closes": [
+          37,
+          23
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/55"
+      }
+    },
+    {
+      "number": 38,
+      "title": "Platform v2 task 13: Phone join flow: the picker",
+      "state": "closed",
+      "closed_at": "2026-10-29T23:30:45Z",
+      "pr": {
+        "pr": 56,
+        "title": "Platform v2 task 13: Who are you? picker, one-tap rejoin and offline-seat takeover on the phone",
+        "merged": true,
+        "sha": "a51a36e5fe40c1bc266afed5b3e80ea298b0a3cf",
+        "closes": [
+          38
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/56"
+      }
+    },
+    {
+      "number": 39,
+      "title": "Platform v2 task 14: Phone portal shell",
+      "state": "closed",
+      "closed_at": "2026-10-29T23:38:49Z",
+      "pr": {
+        "pr": 57,
+        "title": "Platform v2 task 14: campaign portal shell at /c/&lt;code&gt;",
+        "merged": true,
+        "sha": "a0e6efeb9754f3335a986afc3d25c07df97c4db1",
+        "closes": [
+          39
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/57"
+      }
+    },
+    {
+      "number": 40,
+      "title": "Platform v2 task 15: TV shell: campaigns in the lobby, content loading, signals",
+      "state": "closed",
+      "closed_at": "2026-10-29T23:59:55Z",
+      "pr": {
+        "pr": 58,
+        "title": "Platform v2 task 15: TV campaign lobby, content loading card and scene signals",
+        "merged": true,
+        "sha": "f021cffc17a52b7665d3ef8becd5f9c19d237829",
+        "closes": [
+          40
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/58"
+      }
+    },
+    {
+      "number": 41,
+      "title": "Platform v2 task 16: REDLINE across a restart and a phone swap",
+      "state": "closed",
+      "closed_at": "2026-10-30T00:44:43Z",
+      "pr": {
+        "pr": 59,
+        "title": "Platform v2 task 16: REDLINE across a server restart and a phone swap",
+        "merged": true,
+        "sha": "0556f6233fc57292084eec92af9bbb12d3ed48fa",
+        "closes": [
+          41,
+          24
+        ],
+        "url": "https://github.com/higharc91/ArcBox/pull/59"
+      }
+    }
+  ],
+  "all_tasks_closed": true,
+  "all_merge_commits_in_main": true
+}

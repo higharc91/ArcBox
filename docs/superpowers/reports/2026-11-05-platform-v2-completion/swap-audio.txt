@@ -1,0 +1,406 @@
+AUDIO Music lobby-loop
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+AUDIO Voice redline.questions: On which continent is the Sahara Desert found?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+AUDIO Voice redline.announcer: Provisional pole for Antonelli.
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which 1993 Spielberg film is about a theme park of cloned dinosaurs?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Leclerc goes purple!
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many rings are there on the Olympic flag?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+AUDIO Voice redline.announcer: Pole position for Antonelli, 5.01 seconds in total!
+AUDIO Sfx engine ANT
+AUDIO Sfx engine PIA
+AUDIO Sfx engine RUS
+AUDIO Sfx start-beep #1
+AUDIO Sfx start-beep #2
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #3
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+AUDIO Sfx lights-out
+AUDIO Sfx engine BOT
+AUDIO Voice redline.announcer: And it's lights out!
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Voice redline.announcer: Round 1. Geography, hard.
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which is the longest river in Europe?
+AUDIO Sfx engine LAW
+AUDIO Sfx engine BOT
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Volga.
+AUDIO Sfx screech NOR
+AUDIO Sfx engine NOR
+AUDIO Sfx engine LEC
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot2 spins the McLaren!
+AUDIO Sfx engine BOT
+AUDIO Voice redline.announcer: Round 2. Music, easy.
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which band recorded the song "Hey Jude"?
+AUDIO Sfx engine HAM
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is The Beatles.
+AUDIO Sfx engine OCO
+AUDIO Sfx engine HAD
+AUDIO Voice redline.announcer: Round 3. Video Games, easy.
+AUDIO Sfx engine BOT
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: In Minecraft, which green mob sneaks up and explodes near the player?
+AUDIO Sfx engine OCO
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx wrong
+AUDIO Sfx screech BOT
+AUDIO Sfx screech OCO
+AUDIO Voice redline.announcer: The answer is Creeper.
+AUDIO Sfx crunch
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot1 spins the Cadillac!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 4. Music, medium.
+AUDIO Sfx engine BOT
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which composer wrote The Four Seasons violin concertos?
+AUDIO Sfx engine ALB
+AUDIO Sfx engine BOT
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Antonio Vivaldi.
+AUDIO Sfx engine BOT
+AUDIO Sfx engine LAW
+AUDIO Voice redline.announcer: Bot2 storms up 4 places!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 5. Music, hard.
+AUDIO Sfx engine BOT
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which 1975 Queen single contains a famous operatic middle section?
+AUDIO Sfx engine LAW
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Bohemian Rhapsody.
+AUDIO Sfx screech BOT
+AUDIO Sfx engine HAM
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot1 spins the Cadillac!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 6. Geography, hard.
+AUDIO Sfx engine NOR
+AUDIO Sfx whoosh
+AUDIO Sfx engine OCO
+AUDIO Sfx engine NOR
+AUDIO Voice redline.questions: What is the capital city of Australia?
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Canberra.
+AUDIO Sfx engine NOR
+AUDIO Sfx engine PER
+AUDIO Voice redline.announcer: Bot2 storms up 5 places!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 7. Science & Nature, medium.
+AUDIO Sfx engine NOR
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which part of a cell is often called its powerhouse?
+AUDIO Sfx engine HAD
+AUDIO Sfx engine NOR
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Mitochondria.
+AUDIO Sfx screech NOR
+AUDIO Sfx engine NOR
+AUDIO Sfx engine BOT
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot2 spins the McLaren!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 8. Science & Nature, hard.
+AUDIO Sfx engine NOR
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx whoosh
+AUDIO Sfx engine ALB
+AUDIO Sfx engine NOR
+AUDIO Voice redline.questions: Roughly how fast does light travel in a vacuum?
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is 300,000 km/s.
+AUDIO Sfx engine BOT
+AUDIO Sfx engine ALO
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 9. Sports, easy.
+AUDIO Sfx engine BOT
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx lock
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many players does one football (soccer) team have on the pitch?
+AUDIO Sfx engine ALO
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is 11.
+AUDIO Sfx screech BOT
+AUDIO Sfx screech ALO
+AUDIO Sfx crunch
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot1 spins the Cadillac!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 10. General Knowledge, hard.
+AUDIO Sfx engine NOR
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which currency was launched as an electronic currency in 1999, with notes following in 2002?
+AUDIO Sfx engine SAI
+AUDIO Sfx engine NOR
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Sfx engine NOR
+AUDIO Sfx engine LAW
+AUDIO Voice redline.announcer: The answer is Euro.
+AUDIO Voice redline.announcer: Bot2 storms up 7 places!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 11. Video Games, easy.
+AUDIO Sfx engine NOR
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the name of Mario's younger brother?
+AUDIO Sfx engine HAD
+AUDIO Sfx engine NOR
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Luigi.
+AUDIO Sfx engine BOT
+AUDIO Sfx engine ALB
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 12. History, medium.
+AUDIO Sfx engine NOR
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which city was divided by a wall from 1961 until 1989?
+AUDIO Sfx engine LIN
+AUDIO Sfx engine NOR
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Berlin.
+AUDIO Sfx engine VER
+AUDIO Sfx engine BOT
+AUDIO Voice redline.announcer: Bot3 storms up 3 places!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 13. General Knowledge, medium.
+AUDIO Sfx engine NOR
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Sfx engine ANT
+AUDIO Sfx engine NOR
+AUDIO Voice redline.questions: Which language has the most native speakers in the world?
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Mandarin Chinese.
+AUDIO Sfx screech VER
+AUDIO Sfx screech BEA
+AUDIO Sfx engine VER
+AUDIO Sfx engine BEA
+AUDIO Sfx crunch
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot3 spins the Red Bull!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 14. Science & Nature, medium.
+AUDIO Sfx engine NOR
+AUDIO Sfx countdown 5
+AUDIO Sfx lock
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the chemical symbol for gold?
+AUDIO Sfx engine HAM
+AUDIO Sfx engine NOR
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Au.
+AUDIO Sfx screech BOT
+AUDIO Sfx engine BOT
+AUDIO Sfx engine VER
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot1 spins the Cadillac!
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Round 15. General Knowledge, easy.
+AUDIO Sfx engine NOR
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx whoosh
+AUDIO Sfx engine ANT
+AUDIO Sfx engine NOR
+AUDIO Voice redline.questions: How many days are there in a leap year?
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+AUDIO Sfx wrong
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: The answer is 366.
+AUDIO Sfx screech BEA
+AUDIO Sfx screech VER
+AUDIO Sfx engine VER
+AUDIO Sfx engine BEA
+AUDIO Sfx crunch
+AUDIO Sfx crunch
+AUDIO Voice redline.announcer: Bot3 spins the Red Bull!
+AUDIO Sfx engine PIA
+AUDIO Sfx fanfare
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: Piastri takes the win. Best of the players, Bot2 in P18.
+AUDIO Voice redline.announcer: The national anthem of Great Britain, for Bot2 in the McLaren!
+AUDIO Music anthem gb
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: Let the champagne fly!
+AUDIO Sfx victory-sting
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 1.00
+AUDIO Music victory-theme
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 1.00
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 1.00
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.35
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.45
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.65
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.30
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.45
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.35
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.70
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.45
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.35
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.65
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.35
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.50
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.25
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.75
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.55
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.30
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.65
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.50
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.25
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 0.45
+AUDIO Sfx cork-pop step 3
+AUDIO Sfx spray-hiss step 3 0.35
+AUDIO Sfx cork-pop step 2
+AUDIO Sfx spray-hiss step 2 0.70
+AUDIO Music lobby-loop
