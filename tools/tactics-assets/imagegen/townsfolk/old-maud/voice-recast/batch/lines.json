@@ -1,0 +1,434 @@
+[
+  {
+    "id": "bark_old_maud_town_1.main",
+    "line": "bark_old_maud_town_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.efbfe52d",
+    "file": "bark_old_maud_town_1.7c28e676.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_2.main",
+    "line": "bark_old_maud_town_2",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Warm hands and empty heads. Ask yourself why, dearie.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Warm hands and empty heads. Ask yourself why, dearie.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.9910a786",
+    "file": "bark_old_maud_town_2.3ae00f41.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_3.main",
+    "line": "bark_old_maud_town_3",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The river remembers. Ask it nicely and it might tell you.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> The river remembers. Ask it nicely and it might tell you.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.1301f872",
+    "file": "bark_old_maud_town_3.e853ed96.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_4.main",
+    "line": "bark_old_maud_town_4",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "You've the right sort of face for questions. Ask me a better one.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> You've the right sort of face for questions. Ask me a better one.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.8a7ed9f1",
+    "file": "bark_old_maud_town_4.5a3ed168.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_5.main",
+    "line": "bark_old_maud_town_5",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.fe518c25",
+    "file": "bark_old_maud_town_5.6bb37cf4.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_6.main",
+    "line": "bark_old_maud_town_6",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Mind the bank. It's softer than it was. Everything's softer than it was.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Mind the bank. It's softer than it was. Everything's softer than it was.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.b991c53b",
+    "file": "bark_old_maud_town_6.a66615bc.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_old_maud_town_7.main",
+    "line": "bark_old_maud_town_7",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Never touched a shard. Not once. That's why there's still all of me.",
+    "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Never touched a shard. Not once. That's why there's still all of me.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.6978016c",
+    "file": "bark_old_maud_town_7.38f9cbcc.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_open_3.main",
+    "line": "ch1_maud_open_3",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.7c0d6f39",
+    "file": "ch1_maud_open_3.927ec861.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_open_4.main",
+    "line": "ch1_maud_open_4",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.",
+    "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.23e29fc8",
+    "file": "ch1_maud_open_4.e9dd8825.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_hermit_1.main",
+    "line": "ch1_maud_hermit_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.c268972a",
+    "file": "ch1_maud_hermit_1.f0cb1c4a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_hermit_2.main",
+    "line": "ch1_maud_hermit_2",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "I told you a name once. You wrote it down, I watched you. Kept it safe, have you?",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> I told you a name once. You wrote it down, I watched you. Kept it safe, have you?",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.12eb5718",
+    "file": "ch1_maud_hermit_2.b50cfd5a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_sage_1.main",
+    "line": "ch1_maud_sage_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.3ef00573",
+    "file": "ch1_maud_sage_1.552d5ea8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_spared_1.main",
+    "line": "ch1_maud_spared_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d115ece0",
+    "file": "ch1_maud_spared_1.300aac3f.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_slain_1.main",
+    "line": "ch1_maud_slain_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.e4c426f1",
+    "file": "ch1_maud_slain_1.c75da1db.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_fell_1.main",
+    "line": "ch1_maud_fell_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.a84958f3",
+    "file": "ch1_maud_fell_1.614d2c97.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_fell_2.main",
+    "line": "ch1_maud_fell_2",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "It didn't fall, dearie. It was thrown.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> It didn't fall, dearie. It was thrown.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.e0cb33fa",
+    "file": "ch1_maud_fell_2.f8502c5f.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_fell_3.main",
+    "line": "ch1_maud_fell_3",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.5de8135f",
+    "file": "ch1_maud_fell_3.230d4f24.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_fell_4.main",
+    "line": "ch1_maud_fell_4",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.234295ba",
+    "file": "ch1_maud_fell_4.cf876833.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_fell_6.main",
+    "line": "ch1_maud_fell_6",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.f73509f9",
+    "file": "ch1_maud_fell_6.b060e280.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_who_1.main",
+    "line": "ch1_maud_who_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d5f0b89d",
+    "file": "ch1_maud_who_1.640e18bf.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_bye_1.main",
+    "line": "ch1_maud_bye_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.893a8eea",
+    "file": "ch1_maud_bye_1.625caf26.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_bye_2.main",
+    "line": "ch1_maud_bye_2",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.",
+    "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0d199064",
+    "file": "ch1_maud_bye_2.8897ef7c.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_maud_waiting.main",
+    "line": "ashmaw_maud_waiting",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
+      "mood": "sad"
+    },
+    "raw": "Gacrux.b194bf38",
+    "file": "ashmaw_maud_waiting.2a9e0989.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_maud_after.main",
+    "line": "ashmaw_maud_after",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; a small grief, without explaining its cause.",
+      "mood": "sad"
+    },
+    "raw": "Gacrux.b12d0052",
+    "file": "ashmaw_maud_after.4189c88e.ogg",
+    "done": false
+  }
+]

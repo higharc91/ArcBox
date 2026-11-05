@@ -1,0 +1,21 @@
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+failed Tactics.Presentation.Tests.Board.CreatureAtlasTests.Every_registered_creature_view_and_action_stays_inside_its_runtime_atlas (441ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: 4
+  Actual:   5
+    at Tactics.Presentation.Tests.Board.CreatureAtlasTests.Every_registered_creature_view_and_action_stays_inside_its_runtime_atlas() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/Board/CreatureAtlasTests.cs:33
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 1 error(s) (11m 10s 430ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 2460
+  failed: 1
+  succeeded: 2459
+  skipped: 0
+  duration: 11m 14s 559ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

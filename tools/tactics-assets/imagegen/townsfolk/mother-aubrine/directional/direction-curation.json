@@ -1,0 +1,15 @@
+{
+  "source": "rotations-source.png",
+  "mapping": {
+    "south": 0,
+    "south-west": 1,
+    "west": 6,
+    "north-west": 3,
+    "north": 4,
+    "north-east": 5,
+    "east": 2,
+    "south-east": 7
+  },
+  "mirroring": false,
+  "note": "Provider swapped profile cells; identify real directions from facing, reorder without mirroring."
+}

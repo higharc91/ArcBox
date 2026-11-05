@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.48b90e00.wav",
+  "sourceSha256": "c82ddf9e7ef14598efff1e35f0b4f3c91de19771bd46b9b0e6633d1b572a1bbd",
+  "duration": 9.68,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "text": " Oh, your song was made by the ones who came home."
+    },
+    {
+      "start": 5.64,
+      "end": 9.48,
+      "text": " Ours was made by the ones who watched them come."
+    }
+  ],
+  "text": "Oh, your song was made by the ones who came home. Ours was made by the ones who watched them come.",
+  "secondsToTranscribe": 2.3
+}

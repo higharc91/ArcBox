@@ -1,0 +1,23 @@
+{
+  "approval": "Owner chat: OK, he looks good",
+  "atlasSha256": "784a9ffc2ce4504bf23021e45df8409f0b3f5995c2b75a6dc06c42e49fea9081",
+  "creditsSpent": 0,
+  "builds": {
+    "presentationTestsDebug": "0 warnings, 0 errors",
+    "presentationTestsRelease": "0 warnings, 0 errors"
+  },
+  "tests": {
+    "worldPeople": 30,
+    "creatureAtlas": 5,
+    "unitArt": 54,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fourPartyTextureGates": {
+    "limitBytes": 536870912,
+    "ashenPeakBytes": 322551040,
+    "hollowPeakBytes": 201718016,
+    "result": "PASS"
+  },
+  "scope": "Asset-only integration plus corresponding test coverage; rules, balance and phone contracts unchanged. Earlier complete regression/live-walk receipts remain historical in ../approved-integration."
+}

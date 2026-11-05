@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_KLxKtuyn6ukPyDXPfQSwdjjb",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_CzsqsASTB7cMxmZPFXyUn3Ko",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_nyWvvB9XfxBnXnWz4dUiCAgQ"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 13.84,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 12.34,
+            "start": 0.18,
+            "text": " Seven years old I was, and up past my bedtime, the sky went red over the keep, and the stars",
+            "words": null
+          },
+          {
+            "end": 13.54,
+            "start": 12.34,
+            "text": " came down.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:58.079Z",
+    "updatedAt": "2026-11-05T00:36:59.585Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:58.079Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:58.185Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:59.585Z"
+      }
+    ],
+    "progress": 1
+  }
+}

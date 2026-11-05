@@ -1,0 +1,19 @@
+{
+  "id": "character_rook",
+  "jobId": "job_BPTp85AU4CBNcbNg6LGTZPvT",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:06:30.464Z",
+  "updatedAt": "2026-11-04T02:07:09.639Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_3nDGGxN4MkZJLgNs5UrRfEgX"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "character_rook.png"
+}

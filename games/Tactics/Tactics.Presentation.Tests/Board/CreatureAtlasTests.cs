@@ -30,10 +30,37 @@ public sealed class CreatureAtlasTests
                         Assert.InRange(source.X, 0, width - source.Width);
                         Assert.InRange(source.Y, 0, height - source.Height);
                     }
-            Assert.Equal(4, sprite.Idle.Frames.Length);
-            Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
-                sprite.Anim("walk").Frames.Length);
-            Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
+            if (entry.GetProperty("family").GetString() == "townsfolk")
+            {
+                if (item.Name.StartsWith("generic_", StringComparison.Ordinal))
+                {
+                    Assert.Equal([0, 0, 0, 0, 0, 0, 0, 1], sprite.Idle.Frames);
+                    Assert.Equal([2, 3, 4, 5], sprite.Anims["walk"].Frames);
+                    Assert.False(sprite.Anims.ContainsKey("talk"));
+                    Assert.False(sprite.Anims.ContainsKey("attack"));
+                    Assert.Equal(item.Name.StartsWith("generic_child_", StringComparison.Ordinal) ? 26f : 36f, sprite.HeadLift);
+                    continue;
+                }
+                // Named townsfolk retain their authored counts; Skarrow also appears in battle.
+                Assert.Equal(item.Name switch { "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" or "mother_skarrow" or "old_maud" => 10, "bree_tallow" => 5, _ => 4 }, sprite.Idle.Frames.Length);
+                Assert.Equal(6, sprite.Anims["walk"].Frames.Length);
+                Assert.Equal(item.Name is "mother_aubrine" or "tobin_fell" or "lark" or "corvin" or "pip" or "dagna" or "celandine" or "rook" or "mother_skarrow" or "old_maud" ? 10 : 8, sprite.Anims["talk"].Frames.Length);
+                if (item.Name == "mother_skarrow")
+                {
+                    Assert.Equal(6, sprite.Anims["attack"].Frames.Length);
+                    Assert.Equal(6, sprite.Anims["cast"].Frames.Length);
+                    Assert.Equal([33, 34, 35], sprite.Down.Frames);
+                    Assert.False(sprite.Down.Loop);
+                }
+                else Assert.False(sprite.Anims.ContainsKey("attack"));
+            }
+            else
+            {
+                Assert.Equal(4, sprite.Idle.Frames.Length);
+                Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
+                    sprite.Anim("walk").Frames.Length);
+                Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
+            }
         }
     }
 

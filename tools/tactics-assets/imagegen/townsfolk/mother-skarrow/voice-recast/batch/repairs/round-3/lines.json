@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ch1_parley_bread_2.main",
+    "line": "ch1_parley_bread_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Small kindness. Small stomachs. It is not nothing.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Small kindness. <short pause> Small stomachs. It is not nothing.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.610ed4be",
+    "file": "ch1_parley_bread_2.88276c0c.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_crumb_1.main",
+    "line": "ch1_song_crumb_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> You ask well. So. <short pause> A crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.b06084ee",
+    "file": "ch1_song_crumb_1.4833ebbc.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_4.main",
+    "line": "ch3_skarrow_messenger_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Your Wardens <short pause> sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.cd28c42d",
+    "file": "ch3_skarrow_messenger_song_4.ac2d986c.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_grandson_2.main",
+    "line": "ch3_skarrow_messenger_grandson_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> My grandson Vorga holds the bridge you need. He is a fool and a thief. <short pause> And he is mine.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a61e4327",
+    "file": "ch3_skarrow_messenger_grandson_2.adbab612.ogg",
+    "done": false
+  }
+]

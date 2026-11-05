@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.04af4e85.wav",
+  "sourceSha256": "b479a22061d1a4708ebc789180d697df012dfd3758ed080b6e9262eb72eb8945",
+  "duration": 10.28,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 10.0,
+      "text": " My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children."
+    }
+  ],
+  "text": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children.",
+  "secondsToTranscribe": 2.061
+}

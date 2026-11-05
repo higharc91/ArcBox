@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.1136f44e.wav",
+  "sourceSha256": "9d4dacc929b863b06ccfd99eafae846dcc4bf2ad5cc1810e13cbe3d9c2f8aea3",
+  "duration": 11.64,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.2800000000000002,
+      "text": " Then, listen close."
+    },
+    {
+      "start": 3.2800000000000002,
+      "end": 8.52,
+      "text": " This song is about your side of the mountain, a little."
+    },
+    {
+      "start": 8.52,
+      "end": 11.040000000000001,
+      "text": " Perhaps it is about you."
+    }
+  ],
+  "text": "Then, listen close. This song is about your side of the mountain, a little. Perhaps it is about you.",
+  "secondsToTranscribe": 2.317
+}

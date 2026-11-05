@@ -1,0 +1,14 @@
+{
+  "sampleRate": 24000,
+  "channels": 1,
+  "sampleWidth": 2,
+  "frames": 179520,
+  "durationSeconds": 7.48,
+  "peak": 27138,
+  "clippedSamples": 0,
+  "sha256": {
+    "audition-gacrux-source.wav": "77e634e83509de39493b67319a91557774973de62d7c3027eac3cd7bfaa414e3",
+    "audition-gacrux.mp3": "a4e168a53e6250633e623d4e62b6abaa441c29e4155799a5d4083592189cd0b0"
+  },
+  "listeningReview": "Pending owner review; mechanical checks do not establish performance, accent or transcript correctness."
+}

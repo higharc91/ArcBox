@@ -1,0 +1,182 @@
+Running tests from /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 342ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (2s 266ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (3s 233ms)
+Running tests from /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (19s 289ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+failed Tactics.Presentation.Tests.Hud.HudArtTests.A_character_has_its_portrait_on_its_sides_backdrop(sprite: "characters.farmer", tone: Neutral, path: "portraits/farmer_idle.png", backdrop: "portraits/backdrops/neutral.png") (3ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Strings differ
+                       ↓ (pos 10)
+  Expected: "portraits/farmer_idle.png"
+  Actual:   "portraits/generic_farmer_a_idle.png"
+                       ↑ (pos 10)
+    at Tactics.Presentation.Tests.Hud.HudArtTests.A_character_has_its_portrait_on_its_sides_backdrop(String sprite, UnitTone tone, String path, String backdrop) in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/Hud/HudArtTests.cs:98
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+failed Tactics.Presentation.Tests.Board.CreatureAtlasTests.Every_registered_creature_view_and_action_stays_inside_its_runtime_atlas (220ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: 4
+  Actual:   8
+    at Tactics.Presentation.Tests.Board.CreatureAtlasTests.Every_registered_creature_view_and_action_stays_inside_its_runtime_atlas() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/Board/CreatureAtlasTests.cs:36
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in (0ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Strings differ
+                       ↓ (pos 10)
+  Expected: "portraits/guard_captain_idle.png"
+  Actual:   "portraits/dagna_idle.png"
+                       ↑ (pos 10)
+    at Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/Story/StoryScreenTests.cs:80
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Presentation.Tests.World.SceneCastShowTests.The_cast_looks_towards_the_leader (441ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: Tuple (1, False)
+  Actual:   Tuple (3, False)
+    at Tactics.Presentation.Tests.World.SceneCastShowTests.The_cast_looks_towards_the_leader() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/World/SceneCastShowTests.cs:57
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Presentation.Tests.World.StoryMarksTests.The_marker_over_the_beat_spot_is_a_figure_with_a_bang_over_their_head (0ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.True() Failure
+  Expected: True
+  Actual:   False
+    at Tactics.Presentation.Tests.World.StoryMarksTests.The_marker_over_the_beat_spot_is_a_figure_with_a_bang_over_their_head() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/World/StoryMarksTests.cs:32
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Game.Tests.PhoneFixtureTests.Every_story_screen_matches_its_fixture (4s 314ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+  check-pick.json differs from what the game sends; run with UPDATE_FIXTURES=1 and check the diff.
+    at Tactics.Game.Tests.PhoneFixtureTests.Check(SortedDictionary`2 screens) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs:369
+    at Tactics.Game.Tests.PhoneFixtureTests.Every_story_screen_matches_its_fixture() in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs:137
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Game.Tests.StoryModelTests.Scenes_hold_up_against_their_model (1m 25s 979ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+  Assert.Empty() Failure: Collection was not empty
+  Collection: ["tieBreak"]
+    at Tactics.Game.Tests.StoryModelTests.Scenes_hold_up_against_their_model() in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/StoryModelTests.cs:754
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+/workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (3m 31s 394ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+failed Tactics.WorldTools.Tests.BasePackRegionTests.A_region_file_is_what_its_scene_exports(id: "ashen_ford") (8s 388ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+  rules/world/ashen_ford.json isn't what regions/ashen_ford.tscn exports. It's generated, so don't edit it: open the scene and press Export region.
+    at Tactics.WorldTools.Tests.BasePackRegionTests.A_region_file_is_what_its_scene_exports(String id) in /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/BasePackRegionTests.cs:90
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+/workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) failed with 2 error(s) (5m 13s 327ms)
+Exit code: 2
+  Error output: TACTICS world recovery (resume): Tactics.Logic.RulesInvariantException: hero3 has -1 zz_broken.
+     at Tactics.Logic.Invariants.Fail(String message) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 131
+     at Tactics.Logic.Invariants.CheckNumbers(UnitState u) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 123
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules, Terrain terrain) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 48
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 37
+     at Tactics.Game.TacticsGame.ResumeCore(IGameContext ctx, IReadOnlyList`1 players, ICampaignLease campaign) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 181
+     at Tactics.Game.TacticsGame.<>c__DisplayClass94_0.<Resume>b__0() in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 148
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 23
+  TACTICS world recovery (resume): Tactics.Logic.RulesInvariantException: hero3 has -1 zz_broken.
+     at Tactics.Logic.Invariants.Fail(String message) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 131
+     at Tactics.Logic.Invariants.CheckNumbers(UnitState u) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 123
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules, Terrain terrain) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 48
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 37
+     at Tactics.Game.TacticsGame.ResumeCore(IGameContext ctx, IReadOnlyList`1 players, ICampaignLease campaign) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 181
+     at Tactics.Game.TacticsGame.<>c__DisplayClass94_0.<Resume>b__0() in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 148
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 23
+  TACTICS world recovery (timer:vote): System.InvalidOperationException: quest payout failed
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass4_0.<A_failed_quest_payout_does_not_keep_gold_xp_or_the_paid_marker>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 118
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:interact): System.InvalidOperationException: injected interact
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (timer:lead): System.InvalidOperationException: injected timer
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:walk): System.InvalidOperationException: injected walk
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:questLog): System.InvalidOperationException: injected quest
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:vote): System.InvalidOperationException: injected story
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:shopBuy): System.InvalidOperationException: injected shop
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:campJob): System.InvalidOperationException: injected rest
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c__DisplayClass0_0.<Failed_world_actions_keep_members_and_return_to_a_usable_world>b__0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 30
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (resume): Tactics.Logic.RulesInvariantException: goblin.1 has -1 HP, outside 0–16.
+     at Tactics.Logic.Invariants.Fail(String message) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 131
+     at Tactics.Logic.Invariants.CheckNumbers(UnitState u) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 120
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules, Terrain terrain) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 48
+     at Tactics.Logic.Invariants.Check(BattleState s, RulesPack rules) in /workspace/ArcBox/games/Tactics/Tactics.Logic/Rules/Invariants.cs:line 37
+     at Tactics.Game.TacticsGame.ResumeCore(IGameContext ctx, IReadOnlyList`1 players, ICampaignLease campaign) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 181
+     at Tactics.Game.TacticsGame.<>c__DisplayClass94_0.<Resume>b__0() in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.cs:line 148
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 23
+  TACTICS world recovery (start): System.InvalidOperationException: session reopen failure
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c.<A_failed_normal_session_reopen_also_recovers_the_saved_world>b__2_0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 84
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (resume): System.InvalidOperationException: resume failure
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c.<A_failed_resume_saves_a_safe_fallback_that_can_be_reopened>b__1_0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 69
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:walk): System.InvalidOperationException: repeat failure
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c.<Repeated_recoveries_in_one_clock_tick_always_advance_the_epoch>b__5_0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 134
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+  TACTICS world recovery (input:questLog): System.InvalidOperationException: repeat failure
+     at Tactics.Game.Tests.WorldRecoveryTests.<>c.<Repeated_recoveries_in_one_clock_tick_always_advance_the_epoch>b__5_0(String _) in /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/WorldRecoveryTests.cs:line 134
+     at Tactics.Game.TacticsGame.WorldCall(String path, Action action) in /workspace/ArcBox/games/Tactics/Tactics.Game/TacticsGame.WorldRecovery.cs:line 24
+Running tests from /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (5m 37s 964ms)
+/workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (41s 545ms)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 5 error(s) (6m 46s 170ms)
+Exit code: 2
+/workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) failed with 1 error(s) (3m 24s 276ms)
+Exit code: 2
+
+Test run summary: Failed!
+  /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (41s 545ms)
+  /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) failed with 1 error(s) (3m 24s 276ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 5 error(s) (6m 46s 170ms)
+  /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (3s 233ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (3m 31s 394ms)
+  /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (2s 266ms)
+  /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (5m 37s 964ms)
+  /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 342ms)
+  /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (19s 289ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) failed with 2 error(s) (5m 13s 327ms)
+
+  total: 6338
+  failed: 8
+  succeeded: 6330
+  skipped: 0
+  duration: 7m 20s 516ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

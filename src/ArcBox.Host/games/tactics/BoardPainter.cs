@@ -1,6 +1,7 @@
 using Godot;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
 
@@ -47,6 +48,48 @@ internal sealed class BoardPainter
     private readonly Dictionary<string, Texture2D?> _textures = [];
     private readonly Dictionary<string, Texture2D?> _tops = [];
     private readonly Dictionary<string, Texture2D?> _glows = [];
+    private readonly UnitTextureQueue _unitQueue = new();
+    private readonly Dictionary<ulong, HashSet<string>> _unitOwners = [];
+    private readonly HashSet<string> _pinned = new(StringComparer.Ordinal);
+    private string[] _regionUnits = [];
+
+    public bool StreamUnits { get; set; }
+    public int PendingUnits => _unitQueue.Pending;
+
+    public void RegionUnits(IEnumerable<string> paths)
+    {
+        _regionUnits = paths.Distinct(StringComparer.Ordinal).ToArray();
+        RetainUnits();
+    }
+
+    public void RequestUnits(ulong owner, IEnumerable<string> paths)
+    {
+        if (!StreamUnits) return;
+        if (_unitOwners.TryGetValue(owner, out var previous) && previous.SetEquals(paths)) return;
+        _unitOwners[owner] = paths.ToHashSet(StringComparer.Ordinal);
+        RetainUnits();
+    }
+
+    private void RetainUnits()
+    {
+        foreach (var path in _unitQueue.Retain(_regionUnits.Concat(_unitOwners.Values.SelectMany(paths => paths))))
+            if (!_pinned.Contains(path) && _textures.Remove(path, out var texture))
+            {
+                texture?.Dispose();
+                GD.Print($"WORLD unit-release {path}");
+            }
+    }
+
+    public bool LoadOneUnit()
+    {
+        if (!_unitQueue.TryTake(out var path)) return false;
+        var texture = LoadFile(path, pin: false);
+        GD.Print($"WORLD unit-texture {path} {(texture is null ? "missing" : $"{texture.GetWidth()}x{texture.GetHeight()}")}");
+        return true;
+    }
+
+    // A world draw never performs a synchronous image decode; pending figures wait for the frame-budgeted upload.
+    public Texture2D? UnitTexture(string path) => StreamUnits ? _textures.GetValueOrDefault(path) : Load(path);
 
     /// <summary>The pack's root, which files are read from.</summary>
     public string Root { get; set; } = "";
@@ -67,6 +110,9 @@ internal sealed class BoardPainter
         _textures.Clear();
         _tops.Clear();
         _glows.Clear();
+        _pinned.Clear();
+        _unitOwners.Clear();
+        _unitQueue.Retain([]);
     }
 
     /// <summary>
@@ -123,11 +169,15 @@ internal sealed class BoardPainter
 
     /// <summary>A file of the pack, relative to its root, or null if there's none or it can't be read.</summary>
     public Texture2D? Load(string? file)
+        => LoadFile(file, pin: true);
+
+    private Texture2D? LoadFile(string? file, bool pin)
     {
         if (file is null)
         {
             return null;
         }
+        if (pin) _pinned.Add(file);
         if (_textures.TryGetValue(file, out var known))
         {
             return known;

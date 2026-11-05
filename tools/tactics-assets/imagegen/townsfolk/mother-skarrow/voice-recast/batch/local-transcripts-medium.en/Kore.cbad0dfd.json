@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.cbad0dfd.wav",
+  "sourceSha256": "5c850733d60503ec8f07f0cdcbf66a72591e638b6baa02b9dab50be4d9305184",
+  "duration": 11.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.04,
+      "text": " Warm again, good for the children, but watch."
+    },
+    {
+      "start": 6.04,
+      "end": 11.48,
+      "text": " In ten winters, you valley folk will forget you owe us grain."
+    }
+  ],
+  "text": "Warm again, good for the children, but watch. In ten winters, you valley folk will forget you owe us grain.",
+  "secondsToTranscribe": 8.379
+}

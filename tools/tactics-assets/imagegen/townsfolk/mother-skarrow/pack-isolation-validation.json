@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "productionFiles": 5027,
+  "productionBytes": 215550416,
+  "productionInventorySha256": "1373f33f5c9b56f62bd26015f3a87fe6bc23c8793fc587e5246d7d0f8fb99a3d",
+  "gameplayChanges": 0,
+  "phoneContractChanges": 0,
+  "cosmeticDocuments": 6
+}

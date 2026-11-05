@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_MX1oJarjktPa5zxE8dmTKvWk",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_CyuhtbBfFPxxpbWwFWjZZsvH",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_QfntnTKxQj6s2A9UzT3U4PEH"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 8.8,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 7.52,
+            "start": 0,
+            "text": " Mind the bank. It's softer than it was. Everything's softer",
+            "words": null
+          },
+          {
+            "end": 7.84,
+            "start": 7.52,
+            "text": " than it",
+            "words": null
+          },
+          {
+            "end": 8.52,
+            "start": 7.84,
+            "text": " was.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:41.308Z",
+    "updatedAt": "2026-11-05T00:36:55.884Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:41.308Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:41.404Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:55.884Z"
+      }
+    ],
+    "progress": 1
+  }
+}

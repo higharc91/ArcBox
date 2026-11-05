@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_cRt4hww9VuN1gUDxbd9ShNEV",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_HLLuw45Vyfv6FVr28jPWHTtG",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_DYadyxZjWvMbhj6WfgAYqBtr"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 5.6,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 5.5,
+            "start": 0,
+            "text": " It didn't fall, dearie. It was thrown.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:58.879Z",
+    "updatedAt": "2026-11-05T00:37:01.004Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:58.879Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:58.976Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:01.004Z"
+      }
+    ],
+    "progress": 1
+  }
+}

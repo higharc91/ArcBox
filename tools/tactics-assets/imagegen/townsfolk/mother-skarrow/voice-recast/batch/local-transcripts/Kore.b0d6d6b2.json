@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.b0d6d6b2.wav",
+  "sourceSha256": "ce73c4e6dffb60841af61adc90a20de91690af66f2b95d638bc32f9cb070781a",
+  "duration": 10.0,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.16,
+      "text": " There was a song I meant to teach somebody."
+    },
+    {
+      "start": 5.16,
+      "end": 9.64,
+      "text": " Too late now, it goes into the river with me."
+    }
+  ],
+  "text": "There was a song I meant to teach somebody. Too late now, it goes into the river with me.",
+  "secondsToTranscribe": 2.18
+}

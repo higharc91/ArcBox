@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.ce41b93e.wav",
+  "sourceSha256": "91741953794eaa4b05febd2285ea9c01356e118df5ebebb3891fd54d8e15d14a",
+  "duration": 5.92,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.04,
+      "text": " They are in the water."
+    },
+    {
+      "start": 3.04,
+      "end": 5.5,
+      "text": " Shoot them while they wade, children."
+    }
+  ],
+  "text": "They are in the water. Shoot them while they wade, children.",
+  "secondsToTranscribe": 1.896
+}

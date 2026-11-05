@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/dagna-holt/directional/north-source.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Correct ONLY the shoulder armour asymmetry in this eighteen-frame NORTH/BACK-facing animation sheet of Dagna Holt. Keep the exact same SIX columns by THREE rows, same cell layout, every pose/frame/face direction, native pixel style, scale, feet baseline, braid lowbun, cloak, sword, hands, colours and transparent background. All eighteen figures face directly AWAY from viewer. The captain has ONE prominent anatomical RIGHT shoulder pauldron: in a direct BACK view this must be on IMAGE RIGHT, never image left. Move the currently oversized plate from IMAGE LEFT shoulder to IMAGE RIGHT in ALL18 frames. IMAGE LEFT shoulder is the dark olive cloak fabric and small ordinary underarm mail, no prominent plate. Do NOT mirror the figure or swap the other asymmetrical equipment: her sheathed sword stays at anatomical LEFT hip=IMAGE LEFT back; horn/pouch anatomical RIGHT=IMAGE RIGHT back, naturally occluded by cloak. No chest insignia on back. Keep both hands, boots, hairbun, walking legs and conversational gestures in their original positions; edit just the oversized pauldron side and its immediately underlying fabric. Preserve all existing smooth subtle breathing/planted talking and alternate walk phases. No faces, front views, grid lines, labels, background/shadows or new equipment. Output alpha0 outside all silhouettes, completely transparent gutters."
+}

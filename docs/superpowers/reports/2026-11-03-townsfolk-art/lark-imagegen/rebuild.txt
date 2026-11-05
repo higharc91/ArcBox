@@ -1,0 +1,14 @@
+
+> wardenflame-imagegen-townsfolk@1.0.0 build-lark
+> node lark/build-review.cjs && node lark/build-portraits.cjs && node lark/build-closeup.cjs
+
+{"atlas":{"width":1728,"height":768,"uncompressedMiB":5.0625,"sha256":"c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b"},"footDrift":{"south":{"idle":0,"walk":0.5,"talk":0},"south-west":{"idle":0,"walk":0.5,"talk":0.5},"west":{"idle":0,"walk":1,"talk":0},"north-west":{"idle":0,"walk":1,"talk":0.5},"north":{"idle":0,"walk":0.5,"talk":0},"north-east":{"idle":0,"walk":1,"talk":0},"east":{"idle":0,"walk":1.5,"talk":0},"south-east":{"idle":0,"walk":0.5,"talk":0}},"productionInstalled":false}
+{"portraits":["idle","hurt","happy","angry","sad","surprised"],"size":40,"uniformScale":0.10315186246418338,"reviewOnly":true}
+{"facing":"south-east","sequence":["idle","walk","walk","talk"],"nearestNeighbourScale":4,"seconds":4.8}
+
+> wardenflame-imagegen-townsfolk@1.0.0 verify-lark
+> node lark/verify-review.cjs && node lark/verify-preserved.cjs
+
+{"result":"PASS","frames":144,"directions":8,"colors":96,"portraits":6,"maximumFootDriftWorld":1.5}
+{"result":"PASS","preservedNativeFrames":119,"correctedNorthWestSlots":18,"correctedSouthWalkSlots":6,"curatedHeldTalkSlots":1,"priorAtlasSha256":"e7605c553a1e6561a119d2beb062bb04787e40b14a615ac095f15868bb151017","currentAtlasSha256":"c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b"}
+{"completionImageToolCalls":11,"pixelLabCalls":0}

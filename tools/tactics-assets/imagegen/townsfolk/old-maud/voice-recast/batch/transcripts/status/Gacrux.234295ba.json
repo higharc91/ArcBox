@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_92pWVKSq27gmTwWwgQy6oYYp",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_xNyQhJqLvZGQGaGwbFENRhBj",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_zo8wHuii9j9WfuDNgf2egWsJ"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 13.8,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 10.32,
+            "start": 0,
+            "text": " Oh, and I'll tell you something else, since you've a sensible face, I saw who was standing",
+            "words": null
+          },
+          {
+            "end": 13.28,
+            "start": 10.32,
+            "text": " on the hill when it came down.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:00.031Z",
+    "updatedAt": "2026-11-05T00:37:02.673Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:00.031Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:00.121Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:02.673Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 5ecd93c3-7b90-4a78-bbd8-c910593160e0\njob_id: 5ecd93c3-7b90-4a78-bbd8-c910593160e0\naction: Seamless quiet standing idle loop. Very subtle breathing of chest and shoulders, one gentle blink. Both boot soles remain planted in their exact starting positions. Keep this exact down-right three-quarter facing, pixel density, body size, braided grey hair, dress and apron silhouette. Keep the closed brown notebook and the hand resting against it in the SAME position; do not move the book, swap hands, open it, or add accessories. Other hand stays relaxed. No stepping, turning, waving, sliding, camera motion, zoom or flickering outlines. Return smoothly to the identical starting pose.\nframes: 4\nsize: 160x160px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 80303\nasset_id: 98500bd1-5052-577f-8d39-c784735cf04f\nasset_status: pending (saved when generation completes)\ncost: 2 generations\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"5ecd93c3-7b90-4a78-bbd8-c910593160e0\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/5ecd93c3-7b90-4a78-bbd8-c910593160e0/download (423 + Retry-After until ready; ?index=N for the Nth of several images)"
+    }
+  ],
+  "isError": false
+}

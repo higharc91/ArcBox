@@ -1,0 +1,1231 @@
+{
+  "result": "PASS",
+  "nativeFrame": [
+    96,
+    96
+  ],
+  "alpha": "binary",
+  "colors": 96,
+  "directions": 8,
+  "nativeFrameSlots": 144,
+  "originalRawSourceCells": 144,
+  "retainedRawAnimationSourceCells": 180,
+  "selectedSourceCells": 143,
+  "curatedHeldSlots": 1,
+  "perFrameRecentering": false,
+  "mirroring": false,
+  "actions": {
+    "idle": [
+      {
+        "direction": "south",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "bf8f6238c3639a9519137047d8830ebace7c5577f610519e0f153764c41a2300"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "411e3cfde65e8550dd6c5ba3dcc8989feceb19cbc1aeae347f934d7fa10efb84"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "ac7ddd516a20c42ef0f47223b882ef35366464278cfdc9af2f7ed8127ed62b70"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "e76a3f0f8ddb2736f54c7e1e3061c4e1ad490eb0068090cc9e703beeda3fe856"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "c56bef6beb88535e0baaae780d70c7e4e0590caff7fde39fa01a6cd6d4080b5d"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "53280317c38eb42c1b62bee7cd622a339242c04e551d13708db649a751183d77"
+          }
+        ]
+      },
+      {
+        "direction": "south-west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "a3846ef3533a9c0659b470bdfa5e85f8237ada3acc5feb9cc7788b6a640eeb3d"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "7e02bd9f13b3815dd27d6259a91dc95f29edbe3daa67f0b28598733bab9e776c"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "680b333e539bb640076e22459d1b4712b4f8d16301679ad7e38cac0ae783100e"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "a4b1e887e384f3e6dee393bf2c63cdbcd0a91b97a8c3e0cbb03da503a28dd6d5"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "62857cdb43f0792f6bd032902aa9396f38ff1d82720fff5b2f0d2ced1579da2d"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "d66b14ca22df38d73752c0a7b704fed29b201de4cbef62da031a3cfc83a88ee6"
+          }
+        ]
+      },
+      {
+        "direction": "west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "442a2b021d08e82307c527f1e087592d825d99cea03384ceec82a2243c395eed"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "eb79974931a07006616355c97bab70fa43fbfa245ffca646c6609d97a702eae4"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "39e396c830101de008afbf263a44ccd947c9c97b355295575f9374d97a9f8205"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "a41cdc154c282b35ced19804b632190b3a7a82fd5633ab3a1e8e47a136cf0a29"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "b2f8c414958bd7d1450ab04b90e21117cf1bfe8db980e2af782a8e75faa0aa8f"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "3319092a43db8b992cac471a051b1cb879ce9388f58b73e274e0c9b073b9abb5"
+          }
+        ]
+      },
+      {
+        "direction": "north-west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "23387c9e943a75b3587b8662dd0d45bb5842ce110ad0477ba6635054df425aa4"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "eec3ec3a7a645d71566478fd0e182ba9498d169c8461d562b6aa7bd1051c1282"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "8edd11c0376211b2303f69e74a6330799b25bd85cffad9e72a1f93fd7c3e4fb3"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "def3866f520035a3962e613f0abc62f97f3289238366ef282bd96726a17f0850"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "2b1f01234a9fb02f89feb76612948390939110e45ee85c8ff98b94b3e75f9607"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "5b899ec64c8d836a61699f85e8df1308cc7ad1910cfcbfda4c9b768024e91cce"
+          }
+        ]
+      },
+      {
+        "direction": "north",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "7d496f84039952ac54c9b4b44bca213416091a7aceda97a1ad403f697bf26921"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "a87988352ce1182c6342b139a380c5c4f2feee02682a8f9066308e1b071761f3"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "93c104a2b0e52de3946836c3a40d7047abf6aebcd3cf5caaef0188bf1a16a20d"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "110d890330bc7eeb7a6e3ac2ce917ba7f3b15e6d3b8ca9f9e36b3f0b0609042e"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "eb5e1a93d633c935b1ccaa707e474cf0d28785867555f9d4c0cb2da8272a2519"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "ba26d387598b365d3928661e679bfb23e891a652b166a2f40f295412758b3a15"
+          }
+        ]
+      },
+      {
+        "direction": "north-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "0913bca2266b4705c1646513547ce500d930c5146a244e995c2d51b7ba63dbf5"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "0012a4ed118c09518b70a6befd06e9c188676b6d0bf61e495b3bcf1c35e83218"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "4dce9cf6846bdfbac91424098dfc1a2ddb3cb1b2b5bd4dc975b64c056e68ede4"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "94e1aac967e6e1af274d07d0501c7bd1de9935c6f424b62c55b8eb9dedd466fd"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "5c21af3534e9ce83a90b0369f12f37d15b15d947d887fbbd9bfd48bf748faeb1"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "7968251af1e9ba2eef4c53dac37bfb8e2600a581f4f11a561985ebd7856e7d51"
+          }
+        ]
+      },
+      {
+        "direction": "east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "2ee32b6c83547f84bfac7af44014dedea58c9c0c3bc3dc18ede49e8581bcf19e"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "94cd477355002ddb4579a210dd043f4dcc4e7b31115904791c598115c8cbd095"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "af36401da804b6a9e378f4647a84681c40761ea69a394e817f3a17bd592045ff"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "0efde3f862570733b201b881fefec43bfc9b7b2330f2df459ef3f2239c4e6066"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "e3e3a9114b7eb51d41c4073dcf4cbeedad846c7980b4b5681f8bb0cfa4061a35"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "d5116c16481ebe0c4a0146342f85c7bc3e8295cbd42131270602b422048fb1f7"
+          }
+        ]
+      },
+      {
+        "direction": "south-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "8287795ca7acec451c3ddf1cc5269de4eba725368375a987f02811dfc2e35ea8"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "73d790d18a53499e0abf91905ad1779804a49dcca9c1c03a2b87b1fad62c95b0"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "4873202354e00f75e49da32572c8183d26791cd8b353f1b0847a40feac697e28"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "153befbbf0cf8b3aeaf2db2710702055c726cbf2a7be19ad6cc403169c4ee7ad"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "538af4d4982f3ad3cde6c65519a0072927a0e9f6f6b1df628750e2c15ce2b9f2"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "af2b8b216c44ee1681243ac568af6f65de885b6e00b8f7a6f24acce4d12c9b1b"
+          }
+        ]
+      }
+    ],
+    "walk": [
+      {
+        "direction": "south",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 1.75,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "4fc8f7ea1dbe5ea4d375c7849145d0d5f6aa1f526087210e15a7e7249aba2835"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 37,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.75,
+            "sha256": "c782e92ec1fdafc7cc0cd6791f0c3d68d1d43f0cfe244cd77baae02d18c2bbe6"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 37,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "4765f9e59e34dc83c7c77809f6f889e4918659ddc37124a9a401005df85dbcbc"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "c195a25f8c9cecd82fa81f2407ad28ce645950248010310c583675d9e0fe2e41"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "23b03ed53d1bee3c13c5ab18c320e6b846ee4aa481a56e4e45fe189c78f8ddcb"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1.75,
+            "sha256": "83bbd0b76de0560dc728b38684d454cce408ff946b2196ca74e538f735fe83c1"
+          }
+        ]
+      },
+      {
+        "direction": "south-west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 0.75,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "10e2e55c860c5a2f8bbd138d1b96b1eca6fee484b8d6d95107afdf2facf5cb97"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "4ba59b72b78a8c4b30b6e72f2d628d67115564c185ac575231473bc6e734df62"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "b41dd21e4905c1f132e8674b7fcd55a4fb7497593efe381ca8b8552587094a27"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "589ec617c6a2d515093683828e44178f4d8074b14ffc85d8f2fb695eaf2d52ff"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "24935853fc460c33857f14807c37901d2939f9a1116528b455eef7e0f6536635"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "9b5e4a57a34715c82298b0c7d3af7ebda154434926acd8dcb225c1a2eed5f435"
+          }
+        ]
+      },
+      {
+        "direction": "west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 1,
+        "maxHorizontalFootDriftWorld": 1.5,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 1.5,
+            "sha256": "e01f7a2d281b311c507060725d29e9e6a622128e0eda47640ef691eeec46659e"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "c23e4f635b84150e3d74992d45f5b9415336a5ed573c4ce740d32ed01326d7fe"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "3115bf701bdfe1a5e0ca9e914a75018f8a92927dfecc58d6598bf890edb501f9"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "8d2620615289490aea89635579a1b723b3bdcf2eab08fdb4260116da7c6dd9c8"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "b3a684ec6b47453ef45a84d497d2c4b7fa967d72266ae3396666357068aa2bd7"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "6f7e8cb8d75ece5a8aa6d221c467f639b111207b86140eea8413499e356fbc7c"
+          }
+        ]
+      },
+      {
+        "direction": "north-west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 1,
+        "maxHorizontalFootDriftWorld": 0.5,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "31075e967fdc9218fe685b0f21b75106b825243d37cb920d6c6d127cd6f531c6"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "c0940be3ff51d0d259681aa6d512ec08d3372bba423cab77593d98db8a89fb12"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "507e66aff9a090e0797120b3fe4f685b2b08960c9c37a22890eea965d17150ec"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "afdb0f439ffbb173af07c9b29c5c4f892bc5f9216e4e2b773e9f8a053b1be855"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "2e38cf9c2e9a8e7dca63df5b3b271d2531c7de4e3f30084f84a90a1450ec5c71"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "3eb4284146fc01a75a58db0f185790b1701f20a82f0d22d45d66598646b3aad0"
+          }
+        ]
+      },
+      {
+        "direction": "north",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 0.75,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "b7d90ab7084d2e6190113ef617dadf2d474511ec1b1c8765eeffb6acde40ff8b"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "f57c79b9cf6ce911f9e83d6454110ca1609076287dc9dbfa8bdfaf2ed5f4a15e"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "106cc76ad966b1befd3ca90df65ece805ef53c5cca265681e265c2e97b38af8f"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "5631f843fc98ba6ba2332d7a4fe63d9fdd321504ce4181369384966edc51c354"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "1c66062062cb1c68d8156abc42e86aed568ce533a107e6b46ff46d20d4521b24"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "bf5f27251db27624c8e747312ee853429b5a04efd48db54df7d70885846b9a35"
+          }
+        ]
+      },
+      {
+        "direction": "north-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 1,
+        "maxHorizontalFootDriftWorld": 1.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "a14648433f86851ac76a22693ac11c676caef5f4e2ae161858e7448a685f5752"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "aa9473aed4d3cc67904942b1dc13bd835aa310b5fab05c233e78994294c8f268"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 34.5,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "a67c2472fe960433e4c6fd9155527917f20abc9354ccc6f71ec4c19fcca111e7"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "60671a5428f707a401e4fcdbcf66ee46231f11ac37d12f9f3d5a4bedf033a5e4"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "f0fbeea8ecea27b49a2cb35653fd488cb5eb7eef5d349d3e766fbc182710cd45"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "2ca5859e76ef9c2d1132ab9edd7ee716cc57c523f91a527eb192e1f98a9f9646"
+          }
+        ]
+      },
+      {
+        "direction": "east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 1.5,
+        "maxHorizontalFootDriftWorld": 2,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 34.5,
+            "footDriftWorld": 1.5,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "f173eb63e14b876e42c8086de9ccfeedda5148e074a7e5305d04bd0fe65ebcba"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.75,
+            "sha256": "13cfa4b60951e752e5190a6086104963bb37ff85e1c037768e45e6d8c5b296f4"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 34.5,
+            "footDriftWorld": 1.5,
+            "horizontalFootDriftWorld": 1.75,
+            "sha256": "3eb7710afd6c0c65c5487cd4b954d2bbbacfcd0bfb2f614135a67fa8178d7096"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "594b26bf041ad199eaadf25b3ae109242e263fbb0f105b8b874bb2fad4f2ef11"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "9d54c4c8f753a6866ab8ca603df7734928fcd5014b5110ae7d6ec62c4e32242c"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35,
+            "footDriftWorld": 1,
+            "horizontalFootDriftWorld": 2,
+            "sha256": "e040f9419524e588f6ee48b5db68570a4f9ec837c7e2ed5524afb5f149caef62"
+          }
+        ]
+      },
+      {
+        "direction": "south-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 2,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "4adaf1ab7fb7b9eea8f139a791d200942bd7ef35344d9642d8d7708ea71f905d"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.5,
+            "sha256": "ac57b0223ab94f99f9e124a4adf2485e9bb8c92d1ef6ec8de2bdcdddf248b722"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "27451dbd1126d76093bed8005de1cb0d600498c306e766c2f27d1c7587bf9306"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "59eaa9039323f3af8940b5b2f0ed4fef0c66bd8196cd657822abcfa58da56ab1"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 1.25,
+            "sha256": "969995e7941d69a9cac01fe3d5085adb5fc56ba44df270621c8d42c0176cb9bd"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 2,
+            "sha256": "1fb51be966b752f1680b877befed1333bf1d3ab2b52f5557f2ca4534f302237f"
+          }
+        ]
+      }
+    ],
+    "talk": [
+      {
+        "direction": "south",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "faac293a40730bc2647ee86cacaeb51e4c9dce920dbc500de9ea1a30ffef3360"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "15abb2c10e1635c7664b1fc4cbb5d461a731ff72e2a0a2245864abf49a670366"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "0422fbd2f622e5a8d5c60d255fc9e8e229ee1db75cc9d2efac0cb00d1deb9d3b"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "0fd8c9a00e1d1a1b7ac8a535590d96ac1dd6068000200d1243dff282b9f3cf8b"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "c1e06d58f4ec3a825e7f2a605b35668792fa267e39af7b8b3489f2d09ee0dd10"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "3062b41b34b5fc6c9b2cfe532cc83e6fce9680081ce85040cef447f2149bd301"
+          }
+        ]
+      },
+      {
+        "direction": "south-west",
+        "uniqueFrames": 5,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "88557bcf1fdabfbbcbc2e96f0fec0ae2c6cf000b8de86dc95b0439ca8e565824"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "3c90903f2c2d46a82dcae2106b2a7225ac87d1b0a42462ea95af2444a9c578cc"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "1b7045bcdc2d0e8eff4ab9ebce63ed8f646eb09055edc5e5e781852051dddef6"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "288ff404d770b041eb98a9f4c9cbd71ad86cfc8b9f5757aa37ce50d154223108"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "8d3a8ff1b1205faec8e7e5af7668af0495f7f8bcd6c45249587573191c4bce6e"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "8d3a8ff1b1205faec8e7e5af7668af0495f7f8bcd6c45249587573191c4bce6e"
+          }
+        ]
+      },
+      {
+        "direction": "west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "3d61e25ed1a676bcaff0e78bf8952fc6af2e916f9bbd11908323728c673fc0f3"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "b5655d054132114c59c35d94adde3878e8035360cf1201fae6f5baca7bfb5e04"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "6f7f848093b4f5ce9ec8963f538c918a8e9f6c3b2410df29f89433ea4b48c44e"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "0870f613466d13a10c4365e36e5a047d28789fa2c4e01f3d9a6b0fe5f39ff097"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "93ad44d5614c0d9c92940866641671ef1a9500269da568b2c58cf029a0626f4f"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "3c6aa091ee3cc0ebade3db9bd69c11f7744d1c7345208b52d79e616ab4243bfe"
+          }
+        ]
+      },
+      {
+        "direction": "north-west",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0.5,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "853f5bc5f047bfe34d27a3fd0c36645c9490dc5818311403d498101e284af000"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "28e62bfb40f4cc3b8bec27bca0fad620d28afcffa0f3927e5d2eb075ecbcb609"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "8e175104f82cf171cf00ed65a833a1264906cc0176b2e5df32a17e80160fe7b6"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "d8846c2f85554878b7c077a1416fcb72479b1652393acd553ef3c54d9203f129"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "d783cfc264945eecaf6ae48694ba69e1f9db1af2c722a98a24e1ddff38a32a6e"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0.5,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "30e002bd0616903db854e08506eb155298bf20a24e74ffdceeb28fee02c73f68"
+          }
+        ]
+      },
+      {
+        "direction": "north",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "e394f036b24c3845c9c7d8b5d1faf19357d429b2390d6bec905c56cb49fc2cf7"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "8abc434ecf30756db6d458bcee8366f209bdc7db12a6ad335a9624790ef1cca0"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "5154b998492efb7d319502bae0fcef85ddccd7e9234f84b6511372450e5e7f10"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "0136bd623715d2e33de28feb9825272340e6d6397614cec2670830fcbfd021b4"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "d57d0cfabc374403bcbd9406f2c8a78b1515201cf8912a447bf72bdfefb150aa"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "22c29db1dc2bd845ad8235fd72423633f5506997944a8b4bc8e896aa7f045210"
+          }
+        ]
+      },
+      {
+        "direction": "north-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.5,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "e341becb3916975aac1ce21af9d5d2bc1ce9c4eabbce6a9d60794675085de04a"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "bd1d10bff1fc9028e1eaa875828ce9be9d8b13dce2fe94c45a2010dd24553f2a"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "a7012ccb52dbce315be412db3494df7b5d7d4db55297d6af4ed27d7e806e2a4f"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "ef593d87430bc0f3375cc6753fa310c7f029ae77d691089e5c15cc786a323a99"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "1bfb506091feb171b2d16bf87483afa4f3f6d1b58dd0e19519d68033ee06aa57"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 35.5,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.5,
+            "sha256": "f70d61b86807ea4f0944d8547d0c024ccf591377a82ea94624f20dfbb87926aa"
+          }
+        ]
+      },
+      {
+        "direction": "east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 0.25,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "a3aa55150f4d97186b504879c25a68d61f185ba947f8cbe9317e9fc0c52d8748"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0,
+            "sha256": "16d675e3d690d661efae59e717e9b61c57496976a004f5f3c665cc092aab51e9"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "de6204ae4e4711e1d40d67c24fc61f8e16af20debc9b314f7e6d2d20858cc87f"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "f9d79e98b71eac6165bd43913494ce539ddc4fe8fcc4f4d71c759de463c81131"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "118bf4bdaa4b1bc3111ff1aa16f64781aa0d5b3e79029644700042cdd5cea7fb"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 0.25,
+            "sha256": "d3aacd714fb8c3e49b8979e059140e0f290a216f90376678a790f968b99a3d16"
+          }
+        ]
+      },
+      {
+        "direction": "south-east",
+        "uniqueFrames": 6,
+        "maxFootDriftWorld": 0,
+        "maxHorizontalFootDriftWorld": 1,
+        "frames": [
+          {
+            "frame": 0,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "582595329d6aa3b491bd7a5bb4db3b32790249636342cdb4ec1b3df21e3ee897"
+          },
+          {
+            "frame": 1,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "12639124c652c6b3771f4e64dd747a9b28d12a3af87e3d9a6965d3a00a025c73"
+          },
+          {
+            "frame": 2,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "fcb7cca6baa39747540a53d5d856782b83670da6e260cff228551a35aead99d3"
+          },
+          {
+            "frame": 3,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "5eb3a9e453d2babfa8babe0076d2c9aa812491669bf04f4b876f6af6965783b9"
+          },
+          {
+            "frame": 4,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "c8ac9cf706aeb50bc19a884c55ddd7ad05dc2e972186e9ab2d2908507b0d1eae"
+          },
+          {
+            "frame": 5,
+            "heightWorld": 36,
+            "footDriftWorld": 0,
+            "horizontalFootDriftWorld": 1,
+            "sha256": "81f98a6ef42f19771128e79c4312e4daee4b95b1660ff93cfd000c770467b28d"
+          }
+        ]
+      }
+    ]
+  },
+  "portraits": 6,
+  "productionInstalled": false,
+  "frontWalkBootVerticalRange": [
+    6,
+    2
+  ]
+}

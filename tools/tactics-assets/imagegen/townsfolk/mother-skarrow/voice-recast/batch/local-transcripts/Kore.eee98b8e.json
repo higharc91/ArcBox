@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.eee98b8e.wav",
+  "sourceSha256": "1d30bba66a75cd941ce129cb4ad0c573bdf51884e3e93daec583cb6ac3993228",
+  "duration": 6.96,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.44,
+      "text": " But you climbed the hill so sit down again and agree with me"
+    }
+  ],
+  "text": "But you climbed the hill so sit down again and agree with me",
+  "secondsToTranscribe": 1.796
+}

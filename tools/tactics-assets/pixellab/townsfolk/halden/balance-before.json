@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "credits: $0.00\ngenerations_remaining: 30.75\ngenerations_used: 1969.25\ngenerations_total: 2000\nnote: fractions come from small steps billed per use \u2014 prompt enhancement 0.05, skeleton estimation and colour reduction 0.1, sprite import 0.25, /chat builder model calls \u2014 most are not jobs, so list_jobs does not show them\nsubscription: active (Tier 1: Pixel Apprentice)\ngenerations_reset: 2026-12-02\nnote: generations_total is this cycle's allowance (prorated on a mid-cycle upgrade); it refills on generations_reset"
+      }
+    ],
+    "isError": false
+  }
+}

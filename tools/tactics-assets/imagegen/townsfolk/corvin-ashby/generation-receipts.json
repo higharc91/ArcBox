@@ -1,0 +1,78 @@
+{
+  "completionImageToolCalls": 10,
+  "priorAppearanceCalls": 1,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "records": [
+    {
+      "request": "directional/south-request.json",
+      "requestSha256": "8d401f1b79ca346cf8dadcaf1234d836d4a26766e55d00697a59fc5596f11cc4",
+      "output": "directional/south-source.png",
+      "outputSha256": "3d984bd2b14942e4a5e2f6da2287410e86e818ade1e6a1555d56fce502ad1ff1",
+      "originalPath": "/workspace/generated_images/exec-fa32084a-0677-4955-974f-abc5c380897b.png"
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "requestSha256": "e71fdd0b26adb195e0a66361149e95c1079bfb66028cd070ae8a1c7521c0bffe",
+      "output": "directional/south-west-source.png",
+      "outputSha256": "3ce84e8832cf091e172a0df586a007b0db65e92a57021875e40891664f75d217",
+      "originalPath": "/workspace/generated_images/exec-b5021a38-7dc7-4700-98f7-0500f4f462d4.png"
+    },
+    {
+      "request": "directional/west-request.json",
+      "requestSha256": "e94f6fcd0eb82d07b75fbb06708a891c365f64fc35c08c5fe95b514a92f7c9f8",
+      "output": "directional/west-source.png",
+      "outputSha256": "1550cfa95f9f8d95234b612df913440031d44180195d5f7c8fba3ae44c9f698e",
+      "originalPath": "/workspace/generated_images/exec-bc8c82b2-3638-4569-9a93-3a15f3c192e2.png"
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "requestSha256": "1806d4c689c35029789430abaca49263ed26ead6f90f1879473874a64a303fe0",
+      "output": "directional/north-west-source.png",
+      "outputSha256": "82667d63d7d27f7e7838ca3fdcfea02027e98f7f901dbbcc6e0acf45fdc67abc",
+      "originalPath": "/workspace/generated_images/exec-9f2caf00-0a65-405f-92a8-3dbdfae83881.png"
+    },
+    {
+      "request": "directional/north-request.json",
+      "requestSha256": "090bdc71da0a67811945154097847f073744acb1a7ab2effbb75984b5463e469",
+      "output": "directional/north-source.png",
+      "outputSha256": "78128b645d927a5863583ef57f1397f8eba99a80494ebae8e3b4aa0976f042e6",
+      "originalPath": "/workspace/generated_images/exec-94a5ec90-8236-489b-90a2-5c3474922af1.png"
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "requestSha256": "1c5c83da109d6e0e8f0262b3ca7bbc8d1587da378accf11b34ab1aa04e065c98",
+      "output": "directional/north-east-source.png",
+      "outputSha256": "32293a173638ff19b5286b2c2a8e3ee53f504034368f69232406189936887499",
+      "originalPath": "/workspace/generated_images/exec-12e07200-4194-4b11-ac21-0f068502bdd4.png"
+    },
+    {
+      "request": "directional/east-request.json",
+      "requestSha256": "128c8e109d4b74c4e5fa40f7d065d48ecfecad815b924edfd495863af8450f8f",
+      "output": "directional/east-source.png",
+      "outputSha256": "e3584d42df2e233e92ed8c47375b7b03509ba846e61234cb98e6a1e5cd375035",
+      "originalPath": "/workspace/generated_images/exec-ff7ae59d-6968-42a8-99fa-da72afa801db.png"
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "requestSha256": "84dc2b4a6357d991a3c102dac71affa2c5f5b69b132900fa3806ee24a6a842f8",
+      "output": "directional/south-east-source.png",
+      "outputSha256": "29ae5e5b47563d9c20757453a1b3e5dea7cfc9705509047cb49b54180ac43b3a",
+      "originalPath": "/workspace/generated_images/exec-d5ff9396-ad03-418d-aa04-f90e9d1b1ed8.png"
+    },
+    {
+      "request": "north-correction-request.json",
+      "requestSha256": "2e5db3b98a81582babcbf016a76df2c09b520dbadeb2f2633baf76e2dfebe102",
+      "output": "directional/north-corrected-source.png",
+      "outputSha256": "b9f6571c7caefa3824a9670e96dde56fc8e90ea82eeef6c131640684cd8c0fd7",
+      "originalPath": "/workspace/generated_images/exec-ca56f481-39c4-4a69-b05a-60fd72a9045c.png"
+    },
+    {
+      "request": "portraits-request.json",
+      "requestSha256": "40830fa285252d139155af94c07b4e7ff7ee2f9eb5da2bf42ba688078e174320",
+      "output": "portraits-source.png",
+      "outputSha256": "1b34c147a6dcebf668538c502fdf432c019e1c72b0047d233205ba831ac25c51",
+      "originalPath": "/workspace/generated_images/exec-92cc723a-6d35-49c4-98ab-8140a2d7e0af.png"
+    }
+  ]
+}

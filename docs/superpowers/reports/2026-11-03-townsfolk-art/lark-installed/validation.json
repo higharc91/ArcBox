@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "focusedTests": {
+    "WorldPeople": 33,
+    "CreatureAtlas": 5,
+    "UnitArt": 54,
+    "HudArt": 33
+  },
+  "totalTests": 125,
+  "builds": {
+    "Debug": "0 warnings/errors",
+    "Release": "0 warnings/errors"
+  },
+  "additionalLarkGenerations": 0,
+  "pixelLabCalls": 0,
+  "rulesBalancePhoneContractsChanged": false
+}

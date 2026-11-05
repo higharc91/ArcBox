@@ -173,12 +173,26 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void Cosmetic_variants_remain_distinct_and_export_in_a_stable_order()
+    {
+        var first = Source();
+        var second = Source();
+        var person = new RegionPerson("farmer", new Tile(3, 9), "se");
+        RegionPerson[] people = [person with { Variant = "b" }, person, person with { Variant = "a" }];
+        first.People.AddRange(people);
+        second.People.AddRange(people.Reverse());
+        Assert.Equal(Json(first), Json(second));
+        Assert.Equal(new string?[] { null, "a", "b" }, Written(first).People.Select(p => p.Variant));
+        Assert.DoesNotContain("variant", JsonSerializer.Serialize(person, ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Named_people_keep_identity_voice_and_flag_gates_through_the_painting_file()
     {
         var source = Source();
         source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
         var person = new RegionPerson("merchant", new Tile(3, 9), "se", Id: "trader", Character: "rook",
-            Requires: ["sq_forge_contact"], Unless: ["gone"], Bark: "dock", Voice: "townsfolk_merchant");
+            Requires: ["sq_forge_contact"], Unless: ["gone"], Bark: "dock", Voice: "townsfolk_merchant", Variant: "b");
         source.People.Add(person);
         var json = JsonSerializer.Serialize(Written(source), ArcJson.Options);
         var back = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options)!;
@@ -190,6 +204,7 @@ public sealed class RegionWriterTests
         Assert.Equal(person.Unless, read.Unless);
         Assert.Equal("townsfolk_merchant", read.Voice);
         Assert.Equal("dock", read.Bark);
+        Assert.Equal("b", read.Variant);
     }
 
     [Theory]

@@ -1,0 +1,80 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (0, 0), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 625 ms, plan+light 946 ms, bake 92 ms, total 2928 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 177 tiles; spots behind-cliff@157,60 behind-crate@104,55 water-block-edge@112,6 block-corner@80,64 region-edge@159,60 void-near@31,95 void-far@32,0
+WORLD memory after build: managed 41.5 MB (+40.8), engine 33.8 MB (+2.0), textures 7.2 MB, buffers 8.1 MB, process 386 MB
+PERF 22 fps   45.3 ms (worst 54.4) | 456 draw calls   1.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture creatures/mother_skarrow.png 1728x1536
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/corvin.png 1728x768
+WORLD unit-texture creatures/pip.png 1152x512
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture creatures/dagna.png 1728x768
+WORLD unit-texture creatures/celandine.png 1728x768
+WORLD unit-texture creatures/old_maud.png 1728x768
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture creatures/rook.png 1728x768
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 11 actors, 7 shared textures
+WORLD texture-budget region=ashen_ford stage=open party=4 textures-bytes=428927091 peak-bytes=428928699 limit-bytes=536870912 result=PASS
+WORLD textures 215 in 1621 ms, worst 128.5 ms; binding items (and baking glows) 15 ms; 60 blocks still to record at reveal
+PERF 11 fps   93.4 ms (worst 100.0) | 2,132 draw calls   12.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 22 fps   44.7 ms (worst 45.8) | 2,358 draw calls   9.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 29 fps   34.0 ms (worst 39.8) | 2,402 draw calls   7.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 37 fps   26.8 ms (worst 28.3) | 1,702 draw calls   8.1 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 52 fps   19.3 ms (worst 27.0) | 1,254 draw calls   6.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=ashen_ford stage=crossing party=4 textures-bytes=429164191 peak-bytes=429164191 limit-bytes=536870912 result=PASS
+WORLD crossing 177 tiles at 6.7 tiles/s, 26.4 s, 881 frames: frame ms median 24.24, p95 97.76, p99 113.89, worst 122.03
+WORLD crossing after the first 1 s: frame ms median 23.89, p95 93.49, p99 113.47, worst 118.95
+WORLD frames over 16 ms: 856 of 881, at 0.00s=63.0 0.06s=111.3 0.17s=122.0 0.30s=97.8 0.39s=84.7 0.48s=91.1 0.57s=82.0 0.65s=85.2 0.74s=99.8 0.84s=91.7 0.93s=114.2 1.04s=104.9, 4 while recording
+WORLD recording during the walk: 4 frames, ms a frame median 3.95, p95 4.33, p99 4.33, worst 4.33
+WORLD frames while recording: frame ms median 111.29, p95 122.03, p99 122.03, worst 122.03
+WORLD _Draw per block, first time: median 0.25, p95 0.93, p99 4.36, worst 4.36, sum 29.0 ms
+WORLD render CPU ms median 19.65, p95 43.55, p99 51.97, worst 59.03; GPU ms median 17.89, p95 43.31, p99 51.86, worst 58.05; at most 3,369 draw calls
+WORLD overlay query ms median 1.34, p95 44.13, p99 54.01, worst 82.11; draw ms median 0.06, p95 0.41, p99 0.65, worst 2.12; items median 13.00, p95 386.00, p99 434.00, worst 482.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 89
+WORLD memory at end of crossing: managed 43.8 MB (+43.1), engine 49.8 MB (+17.9), textures 409.3 MB, buffers 10.2 MB, process 746 MB
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-change party=4 textures-bytes=429164191 peak-bytes=429164191 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-restored party=4 textures-bytes=429164191 peak-bytes=429164191 limit-bytes=536870912 result=PASS
+WORLD closed

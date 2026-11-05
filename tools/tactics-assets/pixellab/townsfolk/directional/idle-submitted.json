@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 808551e2-cb8d-471b-a5be-6ed59b28e7a7\nanimation: breathing-idle\nmode: template\ndirections: south, south-west, west, north-west, north (5 jobs)\njob_ids: south=0a84748c-7b2d-4826-a757-c607bec1ed80, south-west=47d02ae2-750f-4463-83aa-2269ab1d060f, west=a74d1cdf-c090-4676-98f4-572f1e67520e, north-west=dd459f62-1fd8-477d-8075-5d182e05a0d1, north=4c899444-de60-4cba-a05d-41ab1d27cba7\ngroup: 3ef17b07-2db8-4403-9958-af10f1c4ca11\ncost: 5 generations (1/dir x 5)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\", template_animation_id=\"breathing-idle\", animation_group_id=\"3ef17b07-2db8-4403-9958-af10f1c4ca11\", directions=[...])\n\nhint: get_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\")\nif poor: delete_animation(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\", animation_type=\"...\") then retry with mode=\"v3\""
+    }
+  ],
+  "isError": false
+}

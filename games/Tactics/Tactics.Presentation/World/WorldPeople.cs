@@ -47,8 +47,8 @@ public sealed class WorldPeople
     public WorldPeople(ImmutableArray<RegionPerson> people, BoardTerrain terrain, UnitArt art)
     {
         (_terrain, _art) = (terrain, art);
-        _people = [.. people.Where(p => art.Sprite(SpriteOf(p)) is not null && terrain.Map.InBounds(p.At))];
-        _sprites = [.. _people.Select(SpriteOf)];
+        _people = [.. people.Where(p => art.Sprite(SpriteKey(p, art)) is not null && terrain.Map.InBounds(p.At))];
+        _sprites = [.. _people.Select(p => SpriteKey(p, art))];
         _ids = [.. _people.Select((p, i) => RegionPeople.Id(p, i))];
         _feet = [.. _people.Select(p => UnitPlace.On(terrain, p.At).Feet)];
         _present = new bool?[_people.Length];
@@ -59,7 +59,13 @@ public sealed class WorldPeople
     /// <summary>Where someone is, and whether they're on their way.</summary>
     public readonly record struct Stance(UnitPlace Place, bool Walking, Vector2 Heading);
 
-    private static string SpriteOf(RegionPerson person) => $"characters.{person.Preset}";
+    /// <summary>The same cosmetic selection used by drawing and region texture loading; unknown variants retain the preset.</summary>
+    public static string SpriteKey(RegionPerson person, UnitArt art)
+    {
+        var preset = $"characters.{person.Preset}";
+        var variant = string.IsNullOrWhiteSpace(person.Variant) ? null : $"{preset}_{person.Variant}";
+        return variant is not null && art.Sprite(variant) is not null ? variant : preset;
+    }
 
     private static ImmutableArray<Tile> Route(RegionPerson person) => person.Walk.IsDefaultOrEmpty ? [person.At] : [person.At, .. person.Walk];
 
@@ -129,7 +135,10 @@ public sealed class WorldPeople
             var stance = PlaceAt(person, clock + Phase(person) - _paused[i]);
             if (speaking && leader is { } party)
                 stance = new Stance(stance.Place, false, new Vector2(party.X + .5f - stance.Place.Map.X, party.Y + .5f - stance.Place.Map.Y));
-            var unit = UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels) with { Opacity = _opacity[i] };
+            // A missing named action falls back to attack in UnitSprite.Anim; barks must stay peaceful.
+            var action = speaking ? (_art.Sprite(_sprites[i])!.Anims.ContainsKey("talk") ? "talk" : null)
+                : stance.Walking ? Walk : null;
+            var unit = UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, action, _art, pixels) with { Opacity = _opacity[i] };
             if (speaking && _art.Emote("question") is { } emote)
                 unit = unit with { Emote = emote, EmoteAt = UnitPlan.Overhead(unit.Feet, unit.Sprite) };
             units.Add(unit);

@@ -1,0 +1,196 @@
+{
+  "date": "2026-11-04",
+  "completionImageToolCalls": 10,
+  "priorAppearanceImageToolCalls": 1,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "monetaryImageToolCost": "not quoted by tool; no price inferred",
+  "records": [
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-af63e014-bff0-4136-811f-8db7c10365ec.png",
+      "requestSha256": "613ceb2ebc802ede5e561f0383bd3e3f01f4ff9f8912fb41eac3196793a4484c",
+      "outputSha256": "f5dc875855a3664f21bd33f9631ee4793df1c30981a922ce5301a7bbb16dcba1",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/south.png",
+          "sha256": "c7dfde96de16503ead46f3563f0f6a62d8424dc0e3200bdf32dcd2d893321d7e"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-270fdbb3-46f0-4bca-b912-fb143199d03f.png",
+      "requestSha256": "2ae619a4eea054ca1360e28c2edcf9400158339d70461eef062b6691860f282e",
+      "outputSha256": "e95fe791b7ba4af7422308bba4b43ef7be36eb3f9d897bb05414a02047456b97",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/south-west.png",
+          "sha256": "3b6026c869d483491c5a30fb8c514be29502e9d609c7efb5b47f0977c297c623"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-1f15480c-bc7b-4f86-9c16-4aeeeb5c3c07.png",
+      "requestSha256": "15b2fbe6fcb19f56c885ad8881d6c118cc2074cb59ef754a6d9ec09e7e59d1fd",
+      "outputSha256": "8ef38863fc66ce0ecee767303997ca0c973085535c19e6e0d1a38527310d0925",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/west.png",
+          "sha256": "2e53b657fc24effa337735f33cf4ec4b1e9d22c3dab609aa8246a5ec3e2da96d"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-f5adedd8-f165-48d3-9776-962f006e986c.png",
+      "requestSha256": "432c01bdb47dedabe9265547e8f0a647301afb87e32c2f092d3d63dd6f9bbb95",
+      "outputSha256": "399aa13d229843b9ff7dd8f019dc0698fb2b8bf327f7f3d531e3686a58004962",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/north-west.png",
+          "sha256": "4a11e43019ea4c5517e7903c1530b6ffb78dd614c74f4dd998a86f42e6c2a38e"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-67e6a1cd-30ba-46d6-b898-65b9997cb20e.png",
+      "requestSha256": "5435abd6cd8b3b205a06611e7cbcc8b08470b2e481dae752973a03b39b0f79cb",
+      "outputSha256": "943fc268d766a7e9261d8a3bda9ffc6182ab0d60768f66bab58f972cb8ff3589",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/north.png",
+          "sha256": "73932d47d224385e5616ee385298c4178f6362413fd0c466f0603db91ed816b3"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-4942090c-36c6-4b2a-97e1-d9cfb7f2bb3c.png",
+      "requestSha256": "0ca51218131c979e86d8ee99615e015a02b2380400d543ac3a006fff149bf059",
+      "outputSha256": "822b34ee98be4eed1f9a7d71b57df7699327ddb29ca4fe2d7ce222b4bbb99554",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/north-east.png",
+          "sha256": "618c1fd3ef4b199a400f0b942c529d6731f94b2e715c32f7c34ffebaadfbbbb5"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-02b6bff9-7c3d-420b-b035-c4cab3f5ea00.png",
+      "requestSha256": "ca940c30dfbc8973e93622be821da9a7f4a57936cd0340bd27c942a44def2281",
+      "outputSha256": "c5394d5d20f4fce0e2e07d3ac27b6444699f071eb6d571ac82e9e0311225cebf",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/east.png",
+          "sha256": "79993322ba934fd227a8200b1a016ff63441ad9858375133d59edef6c21e492f"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-55572bfa-954f-40b4-97d5-dab2461f5e24.png",
+      "requestSha256": "d3a21ed11c6f42da93cf34a442b837a5bea978342eedd363bdb5074190954203",
+      "outputSha256": "b9eb351db55b3d7480e55eb9ce031e61609ba94704ca4915faaa4ae108da5284",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/guides/south-east.png",
+          "sha256": "1e6a3e47e62350c29db5f5ccf9bcd8e0ca54674605ef947cf6b5cc17e29e777d"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-1bf3a818-9ebc-465d-bc6f-3f905aff1915.png",
+      "requestSha256": "92a327d994ae0c3411e18259c0c3dbf5db63fd6acbc0e6015a1fd8f2d1a86c87",
+      "outputSha256": "10ed04337a56aa19571f8f1ed8a20f4e58aa8f8cd82970facf3ee038f05f9534",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/candidate-1.png",
+          "sha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/portraits/aubrine_idle.png",
+          "sha256": "0680c9aa2f4051c1d91a830d31dc06c1a3f2975af84d90796698b40cc79834e6"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-walk-correction-request.json",
+      "output": "directional/south-walk-corrected-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-09b70043-6d99-465d-95a4-8718404dbf8b.png",
+      "requestSha256": "ae743cbe7ae2108ceb0202e232834d5b5c561c1234acdc76cd08ec8e38087044",
+      "outputSha256": "aa540c9b0894fa457ea27ac15a771199b4006fd980b510706c3e10209cec56cb",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/tobin-fell/directional/south-source.png",
+          "sha256": "f5dc875855a3664f21bd33f9631ee4793df1c30981a922ce5301a7bbb16dcba1"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    }
+  ]
+}

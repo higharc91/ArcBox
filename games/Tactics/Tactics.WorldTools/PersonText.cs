@@ -9,8 +9,8 @@ public static class PersonText
 {
     /// <summary>What tells two people apart: one standing on a tile, doing one thing.</summary>
     public static string Key(RegionPerson person) => $"{person.Preset} {person.At} {person.Face} {Walk(person.Walk)}"
-        + (person.Id is null && person.Character is null && person.Requires.IsDefault && person.Unless.IsDefault && person.Bark is null && person.Voice is null
-            ? "" : $" {person.Id} {person.Character} {Flags(person.Requires)} {Flags(person.Unless)} {person.Bark} {person.Voice}");
+        + (person.Id is null && person.Character is null && person.Requires.IsDefault && person.Unless.IsDefault && person.Bark is null && person.Voice is null && person.Variant is null
+            ? "" : $" {person.Id} {person.Character} {Flags(person.Requires)} {Flags(person.Unless)} {person.Bark} {person.Voice} {person.Variant}");
 
     public static ImmutableArray<string> Flags(string text)
     {

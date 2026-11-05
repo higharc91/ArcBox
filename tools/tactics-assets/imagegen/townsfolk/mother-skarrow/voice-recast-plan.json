@@ -1,0 +1,312 @@
+{
+  "status": "owner_approved_voice_installed_all_67_lines",
+  "ownerRequest": "let's draft another voice, it's not great",
+  "previousPreset": "Laomedeia",
+  "previousPitch": -2,
+  "proposedPreset": "Kore",
+  "proposedPitch": 0,
+  "deliveryBrief": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+  "replacementScope": {
+    "speaker": "mother_skarrow",
+    "lineCount": 67,
+    "lines": [
+      {
+        "id": "bark_mother_skarrow_battle_start_1",
+        "text": "So. The valley sends swords instead of grain. I expected it."
+      },
+      {
+        "id": "bark_mother_skarrow_battle_start_2",
+        "text": "Come, then. My grandchildren are watching, and they are hungry."
+      },
+      {
+        "id": "bark_mother_skarrow_battle_start_3",
+        "text": "You lock your grain and call us thieves. Now you come to finish it."
+      },
+      {
+        "id": "bark_mother_skarrow_hit_1",
+        "text": "Old, yes. Soft, no."
+      },
+      {
+        "id": "bark_mother_skarrow_miss_1",
+        "text": "Hah. The hill is crooked. Like your mayor."
+      },
+      {
+        "id": "bark_mother_skarrow_crit_1",
+        "text": "Forty winters I have bled for this clan. Your turn."
+      },
+      {
+        "id": "bark_mother_skarrow_kill_1",
+        "text": "Go down to the river. Tell it Skarrow sent you."
+      },
+      {
+        "id": "bark_mother_skarrow_ally_down_1",
+        "text": "Up, little one. Up. Ah. No."
+      },
+      {
+        "id": "bark_mother_skarrow_low_hp_1",
+        "text": "Not yet. The little ones have not eaten."
+      },
+      {
+        "id": "bark_mother_skarrow_low_hp_2",
+        "text": "I have buried better than you. I will not be buried by you."
+      },
+      {
+        "id": "bark_mother_skarrow_victory_1",
+        "text": "Go home. Tell them the bridge stays ours until the grain comes."
+      },
+      {
+        "id": "bark_mother_skarrow_defeat_1",
+        "text": "Whatever you think of me, feed the little ones. Feed them."
+      },
+      {
+        "id": "bark_mother_skarrow_town_1",
+        "text": "Valley people. Walking. Not running at me with spears. This is new."
+      },
+      {
+        "id": "bark_mother_skarrow_town_2",
+        "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more."
+      },
+      {
+        "id": "bark_mother_skarrow_town_3",
+        "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed."
+      },
+      {
+        "id": "ch1_parley_open_3",
+        "text": "Valley people. Walking. Not running at me with spears. This is new."
+      },
+      {
+        "id": "ch1_parley_open_4",
+        "text": "You lock your grain and call us thieves. Sit. We will talk about who stole what."
+      },
+      {
+        "id": "ch1_parley_bread_1",
+        "text": "Two-day bread. From the innkeeper, yes? The one who feeds anybody."
+      },
+      {
+        "id": "ch1_parley_bread_2",
+        "text": "Small kindness. Small stomachs. It is not nothing."
+      },
+      {
+        "id": "ch1_parley_hill_1",
+        "text": "Ha! Somebody's mother taught you properly. You say my name like you have been scolded with it."
+      },
+      {
+        "id": "ch1_parley_hill_2",
+        "text": "Then you know a hill word the valley does not have. It means a debt that both sides pretend is a gift."
+      },
+      {
+        "id": "ch1_parley_soldier_1",
+        "text": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them."
+      },
+      {
+        "id": "ch1_parley_soldier_2",
+        "text": "We took the bridge after. Not before. Tell your captain that, if she will hear it."
+      },
+      {
+        "id": "ch1_parley_terms_1",
+        "text": "Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge."
+      },
+      {
+        "id": "ch1_parley_terms_2",
+        "text": "Not coin. Coin does not boil. A share of the grain your mayor keeps behind his locks. Every week, until the thaw."
+      },
+      {
+        "id": "ch1_parley_haggle_pass_1",
+        "text": "Half now, half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you."
+      },
+      {
+        "id": "ch1_parley_haggle_fail_1",
+        "text": "Half? My children do not eat half. All of it, every week, or go home and fetch your captain."
+      },
+      {
+        "id": "ch1_parley_haggle_fail_2",
+        "text": "But you climbed the hill. So. Sit down again, and agree with me."
+      },
+      {
+        "id": "ch1_parley_young_pass_1",
+        "text": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask."
+      },
+      {
+        "id": "ch1_parley_young_pass_2",
+        "text": "His friends will not like a truce. If they bare their teeth on the bridge, do not kill more of them than you must."
+      },
+      {
+        "id": "ch1_parley_young_fail_1",
+        "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more."
+      },
+      {
+        "id": "ch1_parley_deal_1",
+        "text": "Then it is agreed. Tell your mayor the old mother will give back his bridge. Tell him she is counting the sacks."
+      },
+      {
+        "id": "ch1_dawn_open_2",
+        "text": "I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope."
+      },
+      {
+        "id": "ch1_dawn_open_3",
+        "text": "Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased."
+      },
+      {
+        "id": "ch1_bridge_cost_open_2",
+        "text": "Hm. Well fought. My grandson always said the valley would never share. I should have listened to him."
+      },
+      {
+        "id": "ch1_bridge_cost_open_3",
+        "text": "There was a song I meant to teach somebody. Too late now. It goes into the river with me."
+      },
+      {
+        "id": "ch1_bridge_cost_song_1",
+        "text": "Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears."
+      },
+      {
+        "id": "ch1_young_ones_open_3",
+        "text": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children."
+      },
+      {
+        "id": "ch1_young_ones_open_4",
+        "text": "Do what you must. But I have buried enough of them this year. Leave me some to scold."
+      },
+      {
+        "id": "ch1_road_east_open_2",
+        "text": "They will go to him. He will tell them they were brave. They were. Brave is cheap this winter."
+      },
+      {
+        "id": "ch1_road_east_open_6",
+        "text": "Your captain thinks. Good. Tell her to think about the grain."
+      },
+      {
+        "id": "ch1_song_open_3",
+        "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed."
+      },
+      {
+        "id": "ch1_song_open_4",
+        "text": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should."
+      },
+      {
+        "id": "ch1_song_ent_1",
+        "text": "The valley song. Seven went over, seven came home, they brought something heavy. Yes. Pretty."
+      },
+      {
+        "id": "ch1_song_ent_2",
+        "text": "Your song was made by the ones who came home. Ours was made by the ones who watched them come."
+      },
+      {
+        "id": "ch1_song_outl_1",
+        "text": "Hm. I thought you smelled wrong. Not bad. Only far. Like snow from the other side."
+      },
+      {
+        "id": "ch1_song_outl_2",
+        "text": "Then listen close. This song is about your side of the mountain, a little. Perhaps it is about you."
+      },
+      {
+        "id": "ch1_song_song_2",
+        "text": "Seven went up where the wall meets the sky, seven with nothing, and hungry, and cold."
+      },
+      {
+        "id": "ch1_song_song_3",
+        "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold."
+      },
+      {
+        "id": "ch1_song_song_4",
+        "text": "But nobody runs when they carry a fortune. Seven came down, and the seven came running."
+      },
+      {
+        "id": "ch1_song_rest_1",
+        "text": "That is the next verse. And the next verse is not for strangers."
+      },
+      {
+        "id": "ch1_song_rest_2",
+        "text": "You fed my children. That makes you something. Not family. Not yet. Come back when you are."
+      },
+      {
+        "id": "ch1_song_crumb_1",
+        "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad."
+      },
+      {
+        "id": "ch1_song_crumb_2",
+        "text": "The rest when you are family. Not before. Now eat. You are too thin for valley people."
+      },
+      {
+        "id": "ch3_skarrow_messenger_song_1",
+        "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan."
+      },
+      {
+        "id": "ch3_skarrow_messenger_song_2",
+        "text": "Seven went over the Greywall in the long winters, and seven came back with fire. They came back running."
+      },
+      {
+        "id": "ch3_skarrow_messenger_song_3",
+        "text": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take."
+      },
+      {
+        "id": "ch3_skarrow_messenger_song_4",
+        "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen."
+      },
+      {
+        "id": "ch3_skarrow_messenger_grandson_2",
+        "text": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine."
+      },
+      {
+        "id": "ch3_skarrow_messenger_grandson_3",
+        "text": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me."
+      },
+      {
+        "id": "ch5_epi_clan_spared_rekindled_open_2",
+        "text": "Warm again. Good for the children. But watch. In ten winters you valley folk will forget you owe us grain."
+      },
+      {
+        "id": "ch5_epi_clan_spared_rekindled_open_3",
+        "text": "We never used your fire, so we will remember for you. Somebody has to sing it."
+      },
+      {
+        "id": "ch5_epi_clan_spared_returned_open_2",
+        "text": "Cold again, like the old songs. Now you valley folk learn what we know. Sit. We will teach you how to winter."
+      },
+      {
+        "id": "ch5_epi_clan_spared_extinguished_open_2",
+        "text": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours."
+      },
+      {
+        "id": "say_ford_assault_1",
+        "text": "You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman."
+      },
+      {
+        "id": "say_ford_assault_2",
+        "text": "They are in the water! Shoot them while they wade, children!"
+      },
+      {
+        "id": "say_ford_assault_3",
+        "text": "Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!"
+      }
+    ]
+  },
+  "productionVoiceChanged": true,
+  "workflow": [
+    "Completed: all67 lines installed from64 selected takes; unchanged captions, other speakers and recordings-only playback.",
+    "Original67 clips and20 superseded paid takes retained with provenance; no rejected take is active.",
+    "Live schema/cap checks/quotes and85 unique paid-job receipts retained;224CU overall including previous6CU audition/ASR; continuation218CU, no purchases/upgrades.",
+    "Unbiased local small.en/medium.en checks plus64 source/67 clip validation pass; full1443/1443 coverage and no pitch/brightness flags.",
+    "23 tooling +71 logic +52 story/bark presentation tests pass; Debug builds0warnings/errors.",
+    "Mother Skarrow artwork appearance approval is still pending; finished-set/TV gate separate. Old Maud appearance is approved and completion art queued."
+  ],
+  "audition": {
+    "path": "voice-recast/audition-kore.mp3",
+    "source": "voice-recast/audition-kore-source.wav",
+    "jobId": "job_2vogLvZjzqAdoEtQ6Q78eein",
+    "assetId": "asset_k2gEoLwCvM2QmTHdynGdV5pU",
+    "caption": "Forty winters I have held this clan. Do not ask me if I can hold it one more."
+  },
+  "paidCU": 224,
+  "sourceQualityFollowup": "Resolved: selected fresh numeric40 source verified by small.en and medium.en. Original audition performance retained but exact take not reused.",
+  "ownerApproval": "sounds good, use it",
+  "presetStatus": "Owner-approved Kore cast and older goblin-matriarch performance; no post pitch/filter.",
+  "newCU": 218,
+  "batch": "voice-recast/batch/",
+  "voiceSample": "voice-sample.mp3",
+  "listeningReel": "voice-recast/approved-voice-reel.mp3",
+  "selectedTownTake": {
+    "raw": "Kore.9b2e912e",
+    "jobId": "job_M4F24FPsYxtcdMUgCt2Kx8bk",
+    "assetId": "asset_nPuik6BKruvp1wTLfTdiyPaE"
+  }
+}

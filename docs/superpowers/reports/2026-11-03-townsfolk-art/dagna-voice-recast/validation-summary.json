@@ -1,0 +1,20 @@
+{
+  "pythonTests": 20,
+  "logicVoiceSceneTests": 71,
+  "presentationStoryBarkTests": 52,
+  "failures": 0,
+  "voiceCheckFlags": 0,
+  "inventoryClips": 1443,
+  "outstandingRenders": 0,
+  "dagnaLines": 66,
+  "distinctPaidRenders": 63,
+  "quotedCU": 232,
+  "billedCU": 232,
+  "creditPurchase": false,
+  "exactReimportHashesMatch": true,
+  "previousFilesPreserved": 66,
+  "unrelatedManifestMappingsUnchanged": true,
+  "historicalPaidRecordsUnchanged": true,
+  "textureAssetsChanged": false,
+  "rulesBalancePhoneContractsChanged": false
+}

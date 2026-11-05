@@ -1,0 +1,2251 @@
+{
+  "reviewOnly": true,
+  "productionInstalled": false,
+  "characterId": "a25c93f8-7dcd-45fa-8db2-4b1539c19e6e",
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "frame": {
+    "width": 96,
+    "height": 96,
+    "anchor": [
+      48,
+      84
+    ]
+  },
+  "pixelScale": 0.5,
+  "actions": {
+    "idle": {
+      "south": {
+        "fixedOffset": [
+          8,
+          9
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 24,
+              "top": 10,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 25,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 25,
+              "top": 7,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 25,
+              "top": 10,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35
+          }
+        ]
+      },
+      "south-west": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 28,
+              "top": 10,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 29,
+              "top": 9,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 30,
+              "top": 8,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 29,
+              "top": 9,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "west": {
+        "fixedOffset": [
+          8,
+          6
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 30,
+              "top": 9,
+              "right": 49,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 30,
+              "top": 9,
+              "right": 50,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 31,
+              "top": 8,
+              "right": 51,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 31,
+              "top": 9,
+              "right": 50,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "north-west": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 27,
+              "top": 8,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 27,
+              "top": 10,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35
+          }
+        ]
+      },
+      "north": {
+        "fixedOffset": [
+          8,
+          10
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "north-east": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 27,
+              "top": 8,
+              "right": 51,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 51,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 28,
+              "top": 9,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "east": {
+        "fixedOffset": [
+          8,
+          6
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 29,
+              "top": 9,
+              "right": 49,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 28,
+              "top": 8,
+              "right": 48,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 28,
+              "top": 7,
+              "right": 49,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 28,
+              "top": 8,
+              "right": 48,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 36
+          }
+        ]
+      },
+      "south-east": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 25,
+              "top": 12,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 34
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 25,
+              "top": 11,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 34.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 50,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 25,
+              "top": 11,
+              "right": 51,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 34.5
+          }
+        ]
+      }
+    },
+    "walk": {
+      "south": {
+        "fixedOffset": [
+          8,
+          9
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 22,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "south-west": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 22,
+              "top": 8,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 21,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 52,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 21,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 28,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "west": {
+        "fixedOffset": [
+          8,
+          6
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 31,
+              "top": 9,
+              "right": 50,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 21,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 27,
+              "top": 9,
+              "right": 59,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 31,
+              "top": 9,
+              "right": 49,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 20,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 26,
+              "top": 9,
+              "right": 57,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "north-west": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 24,
+              "top": 7,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 22,
+              "top": 7,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 26,
+              "top": 7,
+              "right": 58,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 24,
+              "top": 7,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 21,
+              "top": 6,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 37
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 22,
+              "top": 7,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36.5
+          }
+        ]
+      },
+      "north": {
+        "fixedOffset": [
+          8,
+          10
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 23,
+              "top": 8,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 23,
+              "top": 8,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 23,
+              "top": 8,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 24,
+              "top": 8,
+              "right": 57,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 27,
+              "top": 8,
+              "right": 57,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 25,
+              "top": 8,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 44.5,
+            "heightWorld": 36
+          }
+        ]
+      },
+      "north-east": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 26,
+              "top": 8,
+              "right": 57,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 25,
+              "top": 8,
+              "right": 58,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 36
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 26,
+              "top": 9,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 26,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 25,
+              "top": 9,
+              "right": 58,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "east": {
+        "fixedOffset": [
+          8,
+          6
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 28,
+              "top": 9,
+              "right": 48,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 60,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 21,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 28,
+              "top": 9,
+              "right": 48,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 23,
+              "top": 9,
+              "right": 59,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 21,
+              "top": 9,
+              "right": 53,
+              "bottom": 79
+            },
+            "footWorld": 42.5,
+            "heightWorld": 35.5
+          }
+        ]
+      },
+      "south-east": {
+        "fixedOffset": [
+          8,
+          8
+        ],
+        "nativeCanvas": [
+          80,
+          80
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 26,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 25,
+              "top": 9,
+              "right": 59,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 22,
+              "top": 9,
+              "right": 54,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 26,
+              "top": 9,
+              "right": 55,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 24,
+              "top": 9,
+              "right": 57,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          },
+          {
+            "frame": 5,
+            "bounds": {
+              "left": 25,
+              "top": 9,
+              "right": 56,
+              "bottom": 79
+            },
+            "footWorld": 43.5,
+            "heightWorld": 35.5
+          }
+        ]
+      }
+    },
+    "talk": {
+      "south": {
+        "fixedOffset": [
+          -6,
+          -5
+        ],
+        "nativeCanvas": [
+          108,
+          108
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 37,
+              "top": 16,
+              "right": 70,
+              "bottom": 89
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 35,
+              "top": 17,
+              "right": 71,
+              "bottom": 89
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 35,
+              "top": 18,
+              "right": 73,
+              "bottom": 89
+            },
+            "footWorld": 42,
+            "heightWorld": 36
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 36,
+              "top": 18,
+              "right": 74,
+              "bottom": 89
+            },
+            "footWorld": 42,
+            "heightWorld": 36
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 36,
+              "top": 17,
+              "right": 75,
+              "bottom": 89
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          }
+        ]
+      },
+      "south-west": {
+        "fixedOffset": [
+          -6,
+          -6
+        ],
+        "nativeCanvas": [
+          108,
+          108
+        ],
+        "maxFootDriftWorld": 0.5,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 68,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 35,
+              "top": 17,
+              "right": 69,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 32,
+              "top": 17,
+              "right": 70,
+              "bottom": 91
+            },
+            "footWorld": 42.5,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 30,
+              "top": 18,
+              "right": 71,
+              "bottom": 91
+            },
+            "footWorld": 42.5,
+            "heightWorld": 37
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 30,
+              "top": 17,
+              "right": 70,
+              "bottom": 91
+            },
+            "footWorld": 42.5,
+            "heightWorld": 37.5
+          }
+        ]
+      },
+      "west": {
+        "fixedOffset": [
+          -8,
+          -10
+        ],
+        "nativeCanvas": [
+          112,
+          112
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 46,
+              "top": 20,
+              "right": 66,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 42,
+              "top": 21,
+              "right": 66,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 37,
+              "top": 22,
+              "right": 66,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 32,
+              "top": 21,
+              "right": 68,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 34,
+              "top": 20,
+              "right": 69,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          }
+        ]
+      },
+      "north-west": {
+        "fixedOffset": [
+          -6,
+          -6
+        ],
+        "nativeCanvas": [
+          108,
+          108
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 38,
+              "top": 16,
+              "right": 67,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 32,
+              "top": 17,
+              "right": 69,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 28,
+              "top": 18,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 26,
+              "top": 17,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 32,
+              "top": 17,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          }
+        ]
+      },
+      "north": {
+        "fixedOffset": [
+          -8,
+          -6
+        ],
+        "nativeCanvas": [
+          112,
+          112
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 72,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 37,
+              "top": 17,
+              "right": 74,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 39,
+              "top": 18,
+              "right": 72,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 40,
+              "top": 18,
+              "right": 70,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 41,
+              "top": 18,
+              "right": 70,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          }
+        ]
+      },
+      "north-east": {
+        "fixedOffset": [
+          -6,
+          -6
+        ],
+        "nativeCanvas": [
+          108,
+          108
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 67,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 72,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 39,
+              "top": 17,
+              "right": 72,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 39,
+              "top": 17,
+              "right": 69,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37
+          }
+        ]
+      },
+      "east": {
+        "fixedOffset": [
+          -8,
+          -10
+        ],
+        "nativeCanvas": [
+          112,
+          112
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 44,
+              "top": 20,
+              "right": 66,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 44,
+              "top": 20,
+              "right": 71,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 44,
+              "top": 20,
+              "right": 72,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 43,
+              "top": 19,
+              "right": 72,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 38
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 44,
+              "top": 19,
+              "right": 70,
+              "bottom": 94
+            },
+            "footWorld": 42,
+            "heightWorld": 38
+          }
+        ]
+      },
+      "south-east": {
+        "fixedOffset": [
+          -6,
+          -6
+        ],
+        "nativeCanvas": [
+          108,
+          108
+        ],
+        "maxFootDriftWorld": 0,
+        "frames": [
+          {
+            "frame": 0,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 69,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 1,
+            "bounds": {
+              "left": 39,
+              "top": 16,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 37.5
+          },
+          {
+            "frame": 2,
+            "bounds": {
+              "left": 39,
+              "top": 18,
+              "right": 73,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36.5
+          },
+          {
+            "frame": 3,
+            "bounds": {
+              "left": 39,
+              "top": 19,
+              "right": 73,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36
+          },
+          {
+            "frame": 4,
+            "bounds": {
+              "left": 39,
+              "top": 19,
+              "right": 71,
+              "bottom": 90
+            },
+            "footWorld": 42,
+            "heightWorld": 36
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "file": "Idle/rotations/south.png",
+      "sha256": "1b932f395aea3e1ffdd1791793aedc473ac7f59cee6a4312ff6eec3c46f0010a"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south/frame_000.png",
+      "sha256": "ae30d1233582608725a4793b5c8d52d24cd21f64781e9501297b1b0593878a3e"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south/frame_001.png",
+      "sha256": "39720a579070ffb5cedeed0ce37288be5830aef73a2a0d6273ba64778a9eb960"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south/frame_002.png",
+      "sha256": "6aaafa58cdebd0abff76280535f4bde8800d800553191002a3768895667f071e"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south/frame_003.png",
+      "sha256": "c26727426a6282a1f886a8891889a98a47f0189786ea022d56cf2147cbc428e8"
+    },
+    {
+      "file": "Idle/rotations/south-west.png",
+      "sha256": "a4b322d04ab8e21598245ab135fbc8059a0de6517d4a733a879d6dc74bdfa523"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-west/frame_000.png",
+      "sha256": "2cddf7ce6df74e973f6f5e9d6310db94b4dc6803b8aea58ae1582036b15be04c"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-west/frame_001.png",
+      "sha256": "5bebf06ed80ecc2fe7a6ea03d561574ab20ba1ec07ba387b09df201853df4519"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-west/frame_002.png",
+      "sha256": "b8427185d5ebc249a11f8584e252ac5f32290508391ad39bde944b02d3598721"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-west/frame_003.png",
+      "sha256": "35e9c7513cde24f6e4098222324779a20513e70bfb18e5c73987a6823a7e3cce"
+    },
+    {
+      "file": "Idle/rotations/west.png",
+      "sha256": "b654f3341fa5b169cf06040579c31d4276da230d8dc5f6dc0cf4b68089e5f918"
+    },
+    {
+      "file": "Idle/animations/halden_idle/west/frame_000.png",
+      "sha256": "fd7dcbf9f35780ef53d68a70394694121e11b8c1febd7194d20e4036bb8b7e35"
+    },
+    {
+      "file": "Idle/animations/halden_idle/west/frame_001.png",
+      "sha256": "2e6a7e9bfb7884dd46d1bb89f6e8bcfd93e325dee30ab0dec0f12a6c9a16da06"
+    },
+    {
+      "file": "Idle/animations/halden_idle/west/frame_002.png",
+      "sha256": "213b8fef47fbf88a7a39b1c0d5da666b487af926aba8c8ebf87bf50b526b5a12"
+    },
+    {
+      "file": "Idle/animations/halden_idle/west/frame_003.png",
+      "sha256": "38679aef908f8e80040151c94637cadf66cef25f4ebec6b610ebd8f286f2ca07"
+    },
+    {
+      "file": "Idle/rotations/north-west.png",
+      "sha256": "cfda0095d3fce4c100e79f6729d36d07d12a5ba4bcd6b401879770c1923c2428"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-west/frame_000.png",
+      "sha256": "1954475340e0673ce6c1e1738a1a734ab9bf017e70d012ec0732a0e2b0e4651a"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-west/frame_001.png",
+      "sha256": "9b9611c76c26a58ce08f7992a5beb449eda7352a24afb3c3e77250072f939851"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-west/frame_002.png",
+      "sha256": "e3383e0d9980f366cae4f7a1f48f1e7e2ba73b1b1129a6da7309588b6927158f"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-west/frame_003.png",
+      "sha256": "f0ffbcf3bfa9461ebd0726d9da480c489cff7c9752bce2d75ad9878042514fe0"
+    },
+    {
+      "file": "Idle/rotations/north.png",
+      "sha256": "f4999510f1c12885ba710753a37fcaf7f06c68ba99fde368455282093c351172"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north/frame_000.png",
+      "sha256": "1200569df0b765221c6dc11426cda3aaf10f65adca4aea548e14eb7b65fc47e1"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north/frame_001.png",
+      "sha256": "487fc3051a3525f03e99ebe21e0c07bec6c02ae0efd6de80fd1b1f79394ae23a"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north/frame_002.png",
+      "sha256": "50670c4ec62bba7940745dd547b7b7cfc2d584144da479ad1d622acea4cae36f"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north/frame_003.png",
+      "sha256": "242da6a442d64703c5bf51e3005604802267200be216f9c6384c4995a4262c58"
+    },
+    {
+      "file": "Idle/rotations/north-east.png",
+      "sha256": "ea3968893589d7bee66e226c3606d4bcb5267ad900e7d806731d66ab9ba83cf9"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-east/frame_000.png",
+      "sha256": "901ee772d849e0566c40a66edc3c0f9ba3acd44c35aa505802b605b3a9aeb59e"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-east/frame_001.png",
+      "sha256": "eb1a920a353a8bd7c87c66f7edf92cc906f9630b15a262693a5d5b80f4cb8ae3"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-east/frame_002.png",
+      "sha256": "bc7d107b72019a90728831a0af77d49344a964cf6e4bcff4873359fd1cf74396"
+    },
+    {
+      "file": "Idle/animations/halden_idle/north-east/frame_003.png",
+      "sha256": "5744178e2323a47f883e1080a156f390c33a5d7e2807326f32a82953e2876f81"
+    },
+    {
+      "file": "Idle/rotations/east.png",
+      "sha256": "3c3baffcb7200acdcf1b6f51fc9e5ddc73c6cf82b668d5bde345ba4092dca6a2"
+    },
+    {
+      "file": "Idle/animations/halden_idle/east/frame_000.png",
+      "sha256": "1d0315d9161233000fc75297332b3986364606f68c94c608d39e4a4c2fd6eb8f"
+    },
+    {
+      "file": "Idle/animations/halden_idle/east/frame_001.png",
+      "sha256": "c8010c3cbbeb4ba30c950a441f59ce70c896202ea80d841e085e5ce091f9bcfc"
+    },
+    {
+      "file": "Idle/animations/halden_idle/east/frame_002.png",
+      "sha256": "c282f95efefe85a2218793407b7cc190e91beba1769f6d30d93f129da3fa52d3"
+    },
+    {
+      "file": "Idle/animations/halden_idle/east/frame_003.png",
+      "sha256": "36d1efbf1eaa5b53ec0ed3df57f76ca51d8416746bcf4336473e8be58fd4b1e4"
+    },
+    {
+      "file": "Idle/rotations/south-east.png",
+      "sha256": "bd03999df9d6c15e90eb0279b48667f1f44d5f441b1cfe160058fb7f6e166e6a"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-east/frame_000.png",
+      "sha256": "d8242efa9dc99afc916ebe8dc6bbb82766b6abb892059b7848667edc333f2585"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-east/frame_001.png",
+      "sha256": "d90f22d28e51aec1f054bc80d0e66978f63e35c07874e9bcc07e835b46b9995f"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-east/frame_002.png",
+      "sha256": "48e1857589c04ce5f5612f44850a8519ababfca971b33be41969f3f68a21e35e"
+    },
+    {
+      "file": "Idle/animations/halden_idle/south-east/frame_003.png",
+      "sha256": "9adddaa4e12e116abb43eea5b081c669061daa86967048cd4c9163284b9c1c40"
+    },
+    {
+      "file": "Idle/rotations/south.png",
+      "sha256": "1b932f395aea3e1ffdd1791793aedc473ac7f59cee6a4312ff6eec3c46f0010a"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_000.png",
+      "sha256": "29f266a68d26712cffd6587d38a2ab74bbecee97e926fd85efdbf5bb13c824bf"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_001.png",
+      "sha256": "5eaf4c0ee46737969002de0a78f10791a415d5b9ffae9fb41fa2211afaf6820a"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_002.png",
+      "sha256": "b033ae169bf780967ab2fbfac3f53d6a3565d85a9115db5d00dcda2f7b173402"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_003.png",
+      "sha256": "267124ee67260d33388813041b56ea55d62f3c6e5a4f10fe499c2d431718f389"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_004.png",
+      "sha256": "878bc94000063b9cd3f7b829512dfedca72443d8604cea25b4f0d414b49ce0ba"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south/frame_005.png",
+      "sha256": "bd06b4b258c2a3d5edfce57c1b801dd9f3dbcd621734df45423744b66461bb3d"
+    },
+    {
+      "file": "Idle/rotations/south-west.png",
+      "sha256": "a4b322d04ab8e21598245ab135fbc8059a0de6517d4a733a879d6dc74bdfa523"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_000.png",
+      "sha256": "88beb71cc866eea290b47918c7519df87304af52423cfb4b0d73b7fcc56a90c0"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_001.png",
+      "sha256": "89e15c067666b2d1ca4994f1f10b5d790c3287a5069d42c69dcc9f8b21950de8"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_002.png",
+      "sha256": "539440c0880b5c1f6482cc115045ceef5cb854fb7b03aac0fc74325c201be3ec"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_003.png",
+      "sha256": "8deacfa9790e88d01140e6e719b9124c879bd31621296366fff06257a228bfca"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_004.png",
+      "sha256": "a0341cb61ac8080a6edc5462925b20ffc56b4864b8b09c3ee0a20c915666b488"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-west/frame_005.png",
+      "sha256": "9eeca4dbc4e2a276b5175b9d8165d2af37c13f9578fd23b17857db0d6211caba"
+    },
+    {
+      "file": "Idle/rotations/west.png",
+      "sha256": "b654f3341fa5b169cf06040579c31d4276da230d8dc5f6dc0cf4b68089e5f918"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_000.png",
+      "sha256": "1b58c2197aec1299bc7b9fdb2b13a8a658b131cbaf7072f60f9a1b4858ceb58c"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_001.png",
+      "sha256": "3b06862562ca2a0995d3b06e3920b8781abde42c4df075e6a17b90d63e503f7f"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_002.png",
+      "sha256": "b75afad031bd36ae3f957325668b8b05b36f27110a4b559066894ed43b0d3d30"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_003.png",
+      "sha256": "9979251a874c1a0e21945e7c7d31a21356389d658e20d11e28ab7a19f0493a53"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_004.png",
+      "sha256": "acc7218a11bbb15906fd1e1a101ec8560a57e7716a8c97d187fbbbfb76c3d449"
+    },
+    {
+      "file": "Idle/animations/halden_walk/west/frame_005.png",
+      "sha256": "9f9c7a6d7e28da2bad705fe3fff8d8420747d70ed59c65387e70bdb9b900b91b"
+    },
+    {
+      "file": "Idle/rotations/north-west.png",
+      "sha256": "cfda0095d3fce4c100e79f6729d36d07d12a5ba4bcd6b401879770c1923c2428"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_000.png",
+      "sha256": "3bb4af16b54dec2f0966e305e0d2b03b1a3e2b31d2de16cc86624ea00f45aa10"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_001.png",
+      "sha256": "62c3080d0701a55456ae05566630376d485bd55d342049514511da52cf93b21e"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_002.png",
+      "sha256": "417fcace7fdc9095b9ac00efc9c7ad0fd0beb9d22bf6c068a7240ae70f8813e8"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_003.png",
+      "sha256": "6ae2a86b7f692e3e0408c2ce880db7cfc1cd0ddabd747b2e793d4a50552e7c23"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_004.png",
+      "sha256": "1bab0dddb62458bc9a140bb3459d5fa52aa7822587e2827b616ed1c3fca03d0d"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-west/frame_005.png",
+      "sha256": "e4be213a6a274b9016fd95d415f960035f2573da3218793bdf48021b1aa41e39"
+    },
+    {
+      "file": "Idle/rotations/north.png",
+      "sha256": "f4999510f1c12885ba710753a37fcaf7f06c68ba99fde368455282093c351172"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_000.png",
+      "sha256": "6f37d05ca0ffff44eedaf9afa03c7198f67c96b1f25821f81fdea3277e4096d9"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_001.png",
+      "sha256": "7337c5fc95744aa6acec206cfb779f9ac3f78c35cc45c7a017988babdf80e115"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_002.png",
+      "sha256": "1649bef23876f8625527c7d92cf16a66311470b718cf65e795c7d3074b95e7ed"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_003.png",
+      "sha256": "8cdb5a45905b46e51002ac3ee853c1e44848b272bd26038ac6fb83515b5a07a3"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_004.png",
+      "sha256": "ecf33300a18bd6bcffa033177d197395d54eabde247abb1695fbe56aacceb6be"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north/frame_005.png",
+      "sha256": "e7865620de12a693848e782c97c7142c08bce840d373a9c176b6360af2267645"
+    },
+    {
+      "file": "Idle/rotations/north-east.png",
+      "sha256": "ea3968893589d7bee66e226c3606d4bcb5267ad900e7d806731d66ab9ba83cf9"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_000.png",
+      "sha256": "dd3d7db2320d888d081da21c35a6aa6253efb9b44f0ea897097fd23ce171f0c5"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_001.png",
+      "sha256": "f194196643652b077a2eda58f299f3eebd78d860deaddabf1503fbb8c98414c5"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_002.png",
+      "sha256": "0f6bf16e65c2501d4b16d172cf2e854cbfb76ec4055ae27b74ca868992ed91e6"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_003.png",
+      "sha256": "b3a5e6994c73bcd72dbe0808be86457d02fcaaa3c1534d2fbaf6946c74c1f8aa"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_004.png",
+      "sha256": "08a224f6571d67eeb0d5751c5a531560c6ace6bdee8bd4361b2b4893e9145f2c"
+    },
+    {
+      "file": "Idle/animations/halden_walk/north-east/frame_005.png",
+      "sha256": "d4d8fec22e7c6570bbc05f3f730c3b992d4430e53eefcc1de5d4ad15df77446d"
+    },
+    {
+      "file": "Idle/rotations/east.png",
+      "sha256": "3c3baffcb7200acdcf1b6f51fc9e5ddc73c6cf82b668d5bde345ba4092dca6a2"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_000.png",
+      "sha256": "4b069eb2c6e6ed7a87ecde4812ceb9e9c634b9985007d22420e1a67882f46dfd"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_001.png",
+      "sha256": "e2cdb534e1faeea02bae5c23601dddad2414ede4e13f8bfb4aa0830c69d00778"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_002.png",
+      "sha256": "0e25109d565a9ae7af3986b66594878a05bf575e3fa79023d722f1ed9a08df68"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_003.png",
+      "sha256": "e8ab69e403da973a10a15d4ef89a70dd3c096deb8209b51b2ee5a7b31581675f"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_004.png",
+      "sha256": "fe253778b2964bf9ec55ab3d05b2490ebcbd13d3d0428458a15a898cf59432dd"
+    },
+    {
+      "file": "Idle/animations/halden_walk/east/frame_005.png",
+      "sha256": "a0b4d0244b6eb3082e9b1326e022deaecbcbf8a26272a638ce020b006c66ac84"
+    },
+    {
+      "file": "Idle/rotations/south-east.png",
+      "sha256": "bd03999df9d6c15e90eb0279b48667f1f44d5f441b1cfe160058fb7f6e166e6a"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_000.png",
+      "sha256": "db9205d8cacece6bc7727c415c4df2c0d300902f2fb88dad13c0639619b648cf"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_001.png",
+      "sha256": "314ff91167867c74a880b1cee5a4418b1f0bae0ee5b6a0c4f5c31bd7e5e814ea"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_002.png",
+      "sha256": "788d08eb172b6f10c57c3b6bc4c86f5d1a0722f1a673e362723cc69b5b0bb7f2"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_003.png",
+      "sha256": "3a60cd1dea051d3126b763b8891082b508b535d6dba7d848495f06aa54a11102"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_004.png",
+      "sha256": "8a0a2d688f10db349fcd74dec23bb687616413e532626540f44f36dc352cc4fd"
+    },
+    {
+      "file": "Idle/animations/halden_walk/south-east/frame_005.png",
+      "sha256": "e49eb77481a3c2ea3700a0cfa8480b9dba361cbea50b030550d9aaf22dbe7024"
+    },
+    {
+      "file": "Idle/rotations/south.png",
+      "sha256": "1b932f395aea3e1ffdd1791793aedc473ac7f59cee6a4312ff6eec3c46f0010a"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south/frame_000.png",
+      "sha256": "e9d1b57ec0e61228f6577c5cf227c93b87710874d78eabd0045d01c653112dca"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south/frame_001.png",
+      "sha256": "2b87c39683fda347fe06cb98fadf98a3f9760f7726c15c1fe34599a98adeb355"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south/frame_002.png",
+      "sha256": "49c9ab2558e0963649defb03f565050af8cfdb4d4709b9ad31733e3b4d9d0b8b"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south/frame_003.png",
+      "sha256": "a9681781a8cdf645d472cee78aca9da868f73af48b9b0a57476d6c373be8e401"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south/frame_004.png",
+      "sha256": "6ef1e8a217540718a40d59445e9e63f18cc3e686efd9e3a2577371f0fc9a73b7"
+    },
+    {
+      "file": "Idle/rotations/south-west.png",
+      "sha256": "a4b322d04ab8e21598245ab135fbc8059a0de6517d4a733a879d6dc74bdfa523"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-west/frame_000.png",
+      "sha256": "3a1a409aa2784cca7de083dcb21e0e72ecf308fa26cd5fbc4e277f158b4e8d56"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-west/frame_001.png",
+      "sha256": "58582700aaffe9a54c72b2313b595f2deb7bb8ce132eeb99158b17b4f2286879"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-west/frame_002.png",
+      "sha256": "7c17d4e4b8cc09e1afb1ac83a909e4a6da3274b5325d27ddd859ede0309e7291"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-west/frame_003.png",
+      "sha256": "a6204a5ccc449e66834457fc3e8b02d2c5debb5f44e7c77f63889aa2f937f3f3"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-west/frame_004.png",
+      "sha256": "19a19698220af77dd6d0fb034f008d763712f0b04d584c4bf3bece505d77133f"
+    },
+    {
+      "file": "Idle/rotations/west.png",
+      "sha256": "b654f3341fa5b169cf06040579c31d4276da230d8dc5f6dc0cf4b68089e5f918"
+    },
+    {
+      "file": "Idle/animations/halden_talk/west/frame_000.png",
+      "sha256": "0d100d22a2b581a7765ee87b2679fcb4b2c0ed22880bee1c1396aff3a9eac880"
+    },
+    {
+      "file": "Idle/animations/halden_talk/west/frame_001.png",
+      "sha256": "6c19d9a3eeadeff0ce953df6dac8ed05b89534b5a7790d6722614fdcc857e2ab"
+    },
+    {
+      "file": "Idle/animations/halden_talk/west/frame_002.png",
+      "sha256": "5b5c10bd2df075042fe4e96260cc9e5b0e557b80da84a59b66caf4be8026e909"
+    },
+    {
+      "file": "Idle/animations/halden_talk/west/frame_003.png",
+      "sha256": "6f72f7c48f8641b82e8bf05872f01c91ac0b8ba992288879b995612147fb8f1e"
+    },
+    {
+      "file": "Idle/animations/halden_talk/west/frame_004.png",
+      "sha256": "ddea7a323b7330ed7fd815345e96e4a977277658eec7b9307f9b8a3c28ba606c"
+    },
+    {
+      "file": "Idle/rotations/north-west.png",
+      "sha256": "cfda0095d3fce4c100e79f6729d36d07d12a5ba4bcd6b401879770c1923c2428"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-west/frame_000.png",
+      "sha256": "a97ea25156621a742ef723b30dc95e9647e4cf4c7da9ca4c75e3045d8c45067a"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-west/frame_001.png",
+      "sha256": "9ae515bb3b32623b11b79cc237178ec821605d4f1d3478a179e1da5b3ee9b4e3"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-west/frame_002.png",
+      "sha256": "c6acd0dd0ef8911cec4fd1c590d44f50ed30b90c545ab2c43ffe53d452e9cd69"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-west/frame_003.png",
+      "sha256": "82f629a82baea04b4b847b8066914af2be7159a541576822f360a3c68c06d80b"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-west/frame_004.png",
+      "sha256": "8c17172ce8258ab9aa96a6712742fa00989a7b148f18105f5de2784eb6ca8399"
+    },
+    {
+      "file": "Idle/rotations/north.png",
+      "sha256": "f4999510f1c12885ba710753a37fcaf7f06c68ba99fde368455282093c351172"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north/frame_000.png",
+      "sha256": "673c2a7bf1ebe0363fe88f58312a87b423b501c15581bbfbd87cefe967a4c9e5"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north/frame_001.png",
+      "sha256": "9efac24d682f7a05f7ce9a7cd6a2a2ef90f849c4b25f41b068f1511df82c9f54"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north/frame_002.png",
+      "sha256": "4a17d102472e9afe07f753bb6209beccdcb634f6070f335144d9d2bb0c7d1a9e"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north/frame_003.png",
+      "sha256": "c024bd6ffbd768cefebedb5f1e3b3e3bb9d064e8e0923fa4a15374b11b311021"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north/frame_004.png",
+      "sha256": "c8fb848d9395b94c59cfde321ba1cc37e329e60991acf72dba6dfad35eb278ea"
+    },
+    {
+      "file": "Idle/rotations/north-east.png",
+      "sha256": "ea3968893589d7bee66e226c3606d4bcb5267ad900e7d806731d66ab9ba83cf9"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-east/frame_000.png",
+      "sha256": "acefdb9cd3f2d7680fbf6e8caca77170dcd776f7d19f7b98c0c17264ea871e1f"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-east/frame_001.png",
+      "sha256": "236cf7691eb2d5a7d868b71e68aa3423223580f3e41a7fc31f04683104377e60"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-east/frame_002.png",
+      "sha256": "7ce131598989f13c47393f72304e82962b2c994287c05ca8712ec30a31f6842b"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-east/frame_003.png",
+      "sha256": "345f89d278f6048defd0b613c47450d12723d833f0bdc47c927ab54b3032d6c7"
+    },
+    {
+      "file": "Idle/animations/halden_talk/north-east/frame_004.png",
+      "sha256": "4d42c24f42647a0d43188dfda6f7eabd55f049c56d76452d511c79cf99ef4a72"
+    },
+    {
+      "file": "Idle/rotations/east.png",
+      "sha256": "3c3baffcb7200acdcf1b6f51fc9e5ddc73c6cf82b668d5bde345ba4092dca6a2"
+    },
+    {
+      "file": "Idle/animations/halden_talk/east/frame_000.png",
+      "sha256": "c73e645c83db6e62c6e8540ea3a6ad05c34fdf3f50a938e0d6fa08cc53684e37"
+    },
+    {
+      "file": "Idle/animations/halden_talk/east/frame_001.png",
+      "sha256": "f804a5b8f421a1c21ddc601e37543fc3cb65d814690da5e7ef47344645bb2186"
+    },
+    {
+      "file": "Idle/animations/halden_talk/east/frame_002.png",
+      "sha256": "1dee4f04a2474f541ec2ef73880ced42e041a318b04a8e95f5d1902b1a6cae5a"
+    },
+    {
+      "file": "Idle/animations/halden_talk/east/frame_003.png",
+      "sha256": "658a76f305505dc8e9c4c8725a504f6addf976ec981b4087e0bc786d684c7661"
+    },
+    {
+      "file": "Idle/animations/halden_talk/east/frame_004.png",
+      "sha256": "c8e33438a7e8ecc7d7ec1a847ef4892831aad7afaa2f2947e2f0368535a392aa"
+    },
+    {
+      "file": "Idle/rotations/south-east.png",
+      "sha256": "bd03999df9d6c15e90eb0279b48667f1f44d5f441b1cfe160058fb7f6e166e6a"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-east/frame_000.png",
+      "sha256": "ff7493c4e0f32892ecadb9c553ec275b3b3ea310b89d3fbe153a35d77c2fd609"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-east/frame_001.png",
+      "sha256": "e0d48eaae5e2525b4079041820044e2bd178cf2ebf9725f45e1dd0f3008a1511"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-east/frame_002.png",
+      "sha256": "a4084508f5358359529edf4b2c84e30e3744a99e1a0cc37f46d62e1424976636"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-east/frame_003.png",
+      "sha256": "a8f0f904a848dadbee1b5db1f20aaac720f9a8e74758a470063101251a5ba5e4"
+    },
+    {
+      "file": "Idle/animations/halden_talk/south-east/frame_004.png",
+      "sha256": "9d10ee738e299edac600287dda9fe46e996df233320ad6b719d78419a7506638"
+    }
+  ],
+  "warnings": [
+    "north static rotation touches top edge; inspect silhouette during owner review"
+  ],
+  "atlas": {
+    "width": 1440,
+    "height": 768,
+    "uncompressedMiB": 4.21875,
+    "sha256": "784a9ffc2ce4504bf23021e45df8409f0b3f5995c2b75a6dc06c42e49fea9081"
+  }
+}

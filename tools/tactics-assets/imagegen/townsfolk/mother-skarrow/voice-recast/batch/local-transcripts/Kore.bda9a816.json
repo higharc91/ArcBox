@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.bda9a816.wav",
+  "sourceSha256": "2a41bb4f20b6584df070c4d05a4da7446d9ee1ea069e83545e0d59bb0b6ad0c7",
+  "duration": 9.92,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 9.52,
+      "text": " Hm, I thought you smelled wrong, not bad, only far, like snow from the other side."
+    }
+  ],
+  "text": "Hm, I thought you smelled wrong, not bad, only far, like snow from the other side.",
+  "secondsToTranscribe": 2.202
+}

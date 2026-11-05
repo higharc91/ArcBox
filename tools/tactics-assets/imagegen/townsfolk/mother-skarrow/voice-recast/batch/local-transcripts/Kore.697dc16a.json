@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.697dc16a.wav",
+  "sourceSha256": "463d6748a8a0be10801b331c9d9edd86ebe816ba1da99c0d65e63a347b1afdf4",
+  "duration": 6.0,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.8,
+      "text": " Whatever you think of me, feed the little ones, feed them."
+    }
+  ],
+  "text": "Whatever you think of me, feed the little ones, feed them.",
+  "secondsToTranscribe": 2.191
+}

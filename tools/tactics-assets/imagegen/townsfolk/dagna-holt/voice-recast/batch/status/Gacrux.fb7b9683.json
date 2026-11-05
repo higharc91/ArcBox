@@ -1,0 +1,15 @@
+{
+  "job": {
+    "jobId": "job_2fHgqx2RWZ9qYQ4Cs5gmGmva",
+    "jobType": "custom",
+    "status": "success",
+    "progress": 1,
+    "createdAt": "2026-11-04T21:41:28.527Z",
+    "updatedAt": "2026-11-04T21:41:34.881Z",
+    "modelId": "model_google-gemini-3-8-flash-tts",
+    "assetIds": [
+      "asset_f3LovLALr3LzH1tgZEwojouV"
+    ],
+    "cuCost": 4
+  }
+}

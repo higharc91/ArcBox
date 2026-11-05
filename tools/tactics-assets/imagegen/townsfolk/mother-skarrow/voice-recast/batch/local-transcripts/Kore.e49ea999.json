@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.e49ea999.wav",
+  "sourceSha256": "47e3e933b64d929ecfde224ca1676145ec880fa3ec6aa240a097ebb39a91b756",
+  "duration": 9.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.2,
+      "text": " His friends will not like a truce if they bear their teeth on the bridge"
+    },
+    {
+      "start": 6.44,
+      "end": 9.08,
+      "text": " Do not kill more of them than you must"
+    }
+  ],
+  "text": "His friends will not like a truce if they bear their teeth on the bridge Do not kill more of them than you must",
+  "secondsToTranscribe": 2.262
+}

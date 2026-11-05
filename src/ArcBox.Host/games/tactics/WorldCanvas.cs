@@ -55,7 +55,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         Failed,
     }
 
-    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, PropFade Fade, WorldHerd Herd, WorldBlock[] Blocks, BoardCanvas Over, WorldAmbient Ambient, string Times);
+    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string[] UnitSheets, PropFade Fade, WorldHerd Herd, WorldBlock[] Blocks, BoardCanvas Over, WorldAmbient Ambient, string Times);
 
     private const int BelowUi = -1;
     private const int BlockDepth = 64;
@@ -79,14 +79,14 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private PropFade? _propFade;
     private WorldAmbient? _ambient;
     private WorldHerd? _herd;
-    private string[] _animals = [];
     private bool _adopted;      // the built nodes are in the tree
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
     private BlockQueue _queue = null!;
     private object[][] _items = [];
-    private string[] _sheets = [];
+    private string[] _regionSheets = [];
+    private HashSet<string> _partySheets = new(StringComparer.Ordinal);
     private int _texture;
     private double _clock;
     private double _delta;
@@ -108,6 +108,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     {
         _painter.Root = packRoot;
         _painter.Frames = _frames;
+        _painter.StreamUnits = true;
         _ground = ground;
         _blockSize = blockSize;
         _leave = (at, left) => _blocks[at.Block].Leave(at.Item, left);
@@ -116,6 +117,15 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     /// <summary>How far it's got.</summary>
     public Stage Now { get; private set; } = Stage.Building;
+    public int PendingUnitTextures => _painter.PendingUnits;
+
+    /// <summary>Keep the actual party resident across hidden/form-up/battle frames, until its roster changes.</summary>
+    public void PartySheets(IEnumerable<string> paths)
+    {
+        if (_partySheets.SetEquals(paths)) return;
+        _partySheets = paths.ToHashSet(StringComparer.Ordinal);
+        _painter.RegionUnits(_regionSheets.Concat(_partySheets));
+    }
 
     /// <summary>Monotonic opening work: stage changes, textures loaded and visible blocks recorded.</summary>
     public long LoadingProgress => Now switch
@@ -180,6 +190,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
             return;
         }
         stage.Visible = false;
+        _painter.RequestUnits(stage.GetInstanceId(), []);
         _staged = null;
         if (_propFade is not null)
         {
@@ -345,6 +356,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _frames.Release();
         _propFade = null;
         _ambient = null;
+        _herd = null;
         Plan = null;
         GD.Print("WORLD closed");
     }
@@ -392,7 +404,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
         plan.DropProbes();
         var preparedTime = clock.Elapsed.TotalMilliseconds;
         // The animals, where each may go, here too: worked out on the main thread as the world opened, it took most of a second (OW-12).
-        var herd = WorldHerd.Build(plan.Terrain, art, UnitArt.Load(_painter.Root));
+        var units = UnitArt.Load(_painter.Root);
+        var herd = WorldHerd.Build(plan.Terrain, art, units);
+        var sheets = ground.People.Where(p => ground.Map.InBounds(p.At))
+            .Select(p => units.Sprite(WorldPeople.SpriteKey(p, units))?.Path).OfType<string>()
+            .Concat(herd.Paths).Distinct(StringComparer.Ordinal).ToArray();
         var ambient = new AmbientPlan(plan.Terrain, ground.Map, AmbientManifest.Load(_painter.Root), seed: ground.Map.Id.Sum(c => c), dusk: plan.Lighting.Ambient == BoardLighting.Dusk);
         var herded = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
@@ -420,7 +436,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
             made.Add(calls);
             closing.ThrowIfCancellationRequested();
             var noded = clock.Elapsed.TotalMilliseconds;
-            return new Built(ground, plan, items, new PropFade(plan), herd, blocks, over, calls,
+            return new Built(ground, plan, items, sheets, new PropFade(plan), herd, blocks, over, calls,
                 $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, herd {herded - preparedTime:0} ms, nodes {noded - herded:0} ms, total {noded:0} ms");
         }
         catch
@@ -570,14 +586,16 @@ internal sealed partial class WorldCanvas : CanvasLayer
                 while (Now == Stage.Textures && Stopwatch.GetElapsedTime(started).TotalMilliseconds < WorldTuning.TextureBudgetMs);
                 break;
             case Stage.Near:
+                LoadUnitsWithinBudget();
                 Tally();
                 RecordWithinBudget();
-                if (Plan!.BlocksIn(_view).All(b => _blocks[b.Index].Recorded > 0))
+                if (_painter.PendingUnits == 0 && Plan!.BlocksIn(_view).All(b => _blocks[b.Index].Recorded > 0))
                 {
                     Now = Stage.Open;
                 }
                 break;
             case Stage.Open:
+                LoadUnitsWithinBudget();
                 Tally();
                 RecordWithinBudget();
                 NoteLate();
@@ -593,7 +611,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
         _propFade = built.Fade;
-        _sheets = [.. Ground.People.Select(p => p.Preset).Distinct().Select(UnitArt.SheetOf)];
+        _regionSheets = built.UnitSheets;
+        _painter.RegionUnits(_regionSheets.Concat(_partySheets));
         _items = built.Items;
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var node in built.Blocks)
@@ -605,7 +624,6 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
         // The animals are drawn with the people, in painter's order (ShowUnits); their sheets load with the textures.
         _herd = built.Herd;
-        _animals = [.. _herd.Paths];
         _over = built.Over;
         _world.AddChild(_over);
         _ambient = built.Ambient;
@@ -636,14 +654,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
         {
             _painter.Load(plan.Halos[_texture++ - images]);
         }
-        else if (_texture < images + plan.Halos.Length + _sheets.Length)
+        else if (_painter.LoadOneUnit())
         {
-            // Someone's sheet is 100 ms of a decoded image if it's first needed as they come into view.
-            _painter.Load(_sheets[_texture++ - images - plan.Halos.Length]);
-        }
-        else if (_texture < images + plan.Halos.Length + _sheets.Length + _animals.Length)
-        {
-            _painter.Load(_animals[_texture++ - images - plan.Halos.Length - _sheets.Length]);
+            _texture++;
         }
         else if (_ambient?.LoadNext() == true)
         {
@@ -661,6 +674,15 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var ms = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         LoadMs = LoadMs with { Textures = LoadMs.Textures + ms, Worst = Math.Max(LoadMs.Worst, ms) };
+    }
+
+    private void LoadUnitsWithinBudget()
+    {
+        var started = Stopwatch.GetTimestamp();
+        while (_painter.LoadOneUnit())
+        {
+            if (Stopwatch.GetElapsedTime(started).TotalMilliseconds >= WorldTuning.TextureBudgetMs) break;
+        }
     }
 
     /// <summary>A block is recorded when the frame ends, so this queues what the last blocks' cost per item says will fit, and always one.</summary>

@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.8f627eeb.wav",
+  "sourceSha256": "a57ef7a9d814bd1f0a593651b482c208044269bd3ea2735ace397dfeb3407c5e",
+  "duration": 10.92,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.92,
+      "text": " Come then, every one of us you kill is one less mouth this winter."
+    },
+    {
+      "start": 7.92,
+      "end": 10.68,
+      "text": " Your mayor will be so pleased."
+    },
+    {
+      "start": 10.68,
+      "end": 17.68,
+      "text": " it."
+    }
+  ],
+  "text": "Come then, every one of us you kill is one less mouth this winter. Your mayor will be so pleased. it.",
+  "secondsToTranscribe": 9.868
+}

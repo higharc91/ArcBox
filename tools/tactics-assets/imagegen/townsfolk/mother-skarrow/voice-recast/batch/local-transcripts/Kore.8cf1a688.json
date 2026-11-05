@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.8cf1a688.wav",
+  "sourceSha256": "720e03c9eab1279efa58b4d68052a78d7d7c08afff0f2828067286845b3f1325",
+  "duration": 8.88,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.94,
+      "text": " Hah, somebody's mother taught you properly."
+    },
+    {
+      "start": 4.94,
+      "end": 8.64,
+      "text": " You say my name like you have been scolded with it."
+    }
+  ],
+  "text": "Hah, somebody's mother taught you properly. You say my name like you have been scolded with it.",
+  "secondsToTranscribe": 2.199
+}

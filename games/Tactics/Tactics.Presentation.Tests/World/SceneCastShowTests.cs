@@ -52,12 +52,12 @@ public sealed class SceneCastShowTests
             return Assert.Single(CastOf(show.Frame(1 / 60.0)));
         }
 
-        // The art's four facings: towards the viewer (row 0) or away (row 1), mirrored or not. Each side of the leader looks back at them.
+        // Halden now has eight real facings. Each map-axis approach looks diagonally back at the leader.
         var (east, west, south, north) = (Looking(new Tile(12, 10)), Looking(new Tile(8, 10)), Looking(new Tile(10, 12)), Looking(new Tile(10, 8)));
-        Assert.Equal((1, false), (east.Row, east.Mirror));          // looking along -x
-        Assert.Equal((0, false), (west.Row, west.Mirror));          // along +x
-        Assert.Equal((1, true), (south.Row, south.Mirror));         // along -y
-        Assert.Equal((0, true), (north.Row, north.Mirror));         // along +y
+        Assert.Equal((3, false), (east.Row, east.Mirror));          // northwest along -x
+        Assert.Equal((7, false), (west.Row, west.Mirror));          // southeast along +x
+        Assert.Equal((5, false), (south.Row, south.Mirror));        // northeast along -y
+        Assert.Equal((1, false), (north.Row, north.Mirror));        // southwest along +y
         Assert.Equal(4, new[] { east, west, south, north }.Select(u => (u.Row, u.Mirror)).Distinct().Count());
     }
 

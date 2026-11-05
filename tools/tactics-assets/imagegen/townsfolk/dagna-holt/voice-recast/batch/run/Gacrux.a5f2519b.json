@@ -1,0 +1,6 @@
+{
+  "model_id": "model_google-gemini-3-8-flash-tts",
+  "job_id": "job_xLxyn5bwECtbcYcgdzVWq8d9",
+  "status": "in-progress",
+  "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_xLxyn5bwECtbcYcgdzVWq8d9' (one call waits on up to 32 jobs)."
+}

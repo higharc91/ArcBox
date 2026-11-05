@@ -18,6 +18,7 @@ public partial class Commands : Node
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
           --remap-props=<id>       remap a scene's prop atlas after a rebuild; requires --old-props=<manifest>; repeat --replace-prop=old@variant=new@variant to change painted variants
           --edit-props=<id>        change single props in a scene and leave its paint alone; repeat --clear-prop=<x>,<y> and --place-prop=<id>@<variant>@<x>,<y>
+          --check-person-variants   verify native editor variant save/load/export in a temporary scene
           --swatches               write the palette's images (then run Godot's --import)
           --tilesets               write the palette's tile sets
           --sample=<scene>         write a small test scene with a stamp; --map=<id> picks the map, --tamper paints over a stamped tile
@@ -55,6 +56,9 @@ public partial class Commands : Node
 
     private static int Run()
     {
+        if (Flag("check-person-variants"))
+            return PersonVariantCheck.Run();
+
         if (Arg("apply-mob-arenas") is { } mobEdits) return ApplyMobArenas(mobEdits);
         if (Arg("export") is { } export)
             return Export(export);

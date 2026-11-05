@@ -1,0 +1,1208 @@
+[
+  {
+    "id": "bark_mother_skarrow_battle_start_1.main",
+    "line": "bark_mother_skarrow_battle_start_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "So. The valley sends swords instead of grain. I expected it.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> So. The valley sends swords instead of grain. I expected it.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e9ac3f30",
+    "file": "bark_mother_skarrow_battle_start_1.21029d6f.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_battle_start_2.main",
+    "line": "bark_mother_skarrow_battle_start_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Come, then. My grandchildren are watching, and they are hungry.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Come, then. My grandchildren are watching, and they are hungry.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.0042a09d",
+    "file": "bark_mother_skarrow_battle_start_2.b1a68813.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_battle_start_3.main",
+    "line": "bark_mother_skarrow_battle_start_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You lock your grain and call us thieves. Now you come to finish it.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You lock your grain and call us thieves. Now you come to finish it.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.03b85bde",
+    "file": "bark_mother_skarrow_battle_start_3.f87d9d9b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_hit_1.main",
+    "line": "bark_mother_skarrow_hit_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Old, yes. Soft, no.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Old, yes. Soft, no.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.b1518070",
+    "file": "bark_mother_skarrow_hit_1.fb99e7b7.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_miss_1.main",
+    "line": "bark_mother_skarrow_miss_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Hah. The hill is crooked. Like your mayor.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hah. The hill is crooked. Like your mayor.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.1937e783",
+    "file": "bark_mother_skarrow_miss_1.8865d18d.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_crit_1.main",
+    "line": "bark_mother_skarrow_crit_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters I have bled for this clan. Your turn.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Forty winters I have bled for this clan. Your turn.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.d548cd2a",
+    "file": "bark_mother_skarrow_crit_1.c1f83a79.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_kill_1.main",
+    "line": "bark_mother_skarrow_kill_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Go down to the river. Tell it Skarrow sent you.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go down to the river. Tell it Skarrow sent you.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.76cbc88d",
+    "file": "bark_mother_skarrow_kill_1.905f9c3b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_ally_down_1.main",
+    "line": "bark_mother_skarrow_ally_down_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Up, little one. Up. Ah. No.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Up, little one. Up. Ah. No.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.ce754f98",
+    "file": "bark_mother_skarrow_ally_down_1.0aaf554c.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_low_hp_1.main",
+    "line": "bark_mother_skarrow_low_hp_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Not yet. The little ones have not eaten.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Not yet. The little ones have not eaten.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.4229712d",
+    "file": "bark_mother_skarrow_low_hp_1.7bf36e62.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_low_hp_2.main",
+    "line": "bark_mother_skarrow_low_hp_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "I have buried better than you. I will not be buried by you.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> I have buried better than you. I will not be buried by you.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a090bbf0",
+    "file": "bark_mother_skarrow_low_hp_2.d872aded.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_victory_1.main",
+    "line": "bark_mother_skarrow_victory_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Go home. Tell them the bridge stays ours until the grain comes.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go home. Tell them the bridge stays ours until the grain comes.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a7d90663",
+    "file": "bark_mother_skarrow_victory_1.86f78549.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_defeat_1.main",
+    "line": "bark_mother_skarrow_defeat_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Whatever you think of me, feed the little ones. Feed them.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Whatever you think of me, feed the little ones. Feed them.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.697dc16a",
+    "file": "bark_mother_skarrow_defeat_1.a4127dd7.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_town_1.main",
+    "line": "bark_mother_skarrow_town_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Valley people. Walking. Not running at me with spears. This is new.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Walking. Not running at me with spears. This is new.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.53bc9c9e",
+    "file": "bark_mother_skarrow_town_1.94e41642.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_town_2.main",
+    "line": "bark_mother_skarrow_town_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> 40 winters I have held this clan. Do not ask me if I can hold it one more.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.9b2e912e",
+    "file": "bark_mother_skarrow_town_2.fb22946e.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_mother_skarrow_town_3.main",
+    "line": "bark_mother_skarrow_town_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.bf716c56",
+    "file": "bark_mother_skarrow_town_3.d0c8ade6.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_open_3.main",
+    "line": "ch1_parley_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Valley people. Walking. Not running at me with spears. This is new.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Walking. Not running at me with spears. This is new.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.53bc9c9e",
+    "file": "ch1_parley_open_3.94e41642.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_open_4.main",
+    "line": "ch1_parley_open_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You lock your grain and call us thieves. Sit. We will talk about who stole what.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You lock your grain and call us thieves. Sit. We will talk about who stole what.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.42f80b44",
+    "file": "ch1_parley_open_4.4b67b2cd.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_bread_1.main",
+    "line": "ch1_parley_bread_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Two-day bread. From the innkeeper, yes? The one who feeds anybody.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Two-day bread. From the innkeeper, yes? The one who feeds anybody.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.0aa2cecb",
+    "file": "ch1_parley_bread_1.f4afec83.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_bread_2.main",
+    "line": "ch1_parley_bread_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Small kindness. Small stomachs. It is not nothing.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Small kindness. <short pause> Small stomachs. It is not nothing.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e1f9b192",
+    "file": "ch1_parley_bread_2.3c9d8de9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_hill_1.main",
+    "line": "ch1_parley_hill_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Ha! Somebody's mother taught you properly. You say my name like you have been scolded with it.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Ha! Somebody's mother taught you properly. You say my name like you have been scolded with it.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.8cf1a688",
+    "file": "ch1_parley_hill_1.335a90a0.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_hill_2.main",
+    "line": "ch1_parley_hill_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then you know a hill word the valley does not have. It means a debt that both sides pretend is a gift.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Then you know a hill word the valley does not have. It means a debt that both sides pretend is a gift.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.563e7c8c",
+    "file": "ch1_parley_hill_2.77a07ca9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_soldier_1.main",
+    "line": "ch1_parley_soldier_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Then you saw. My little ones were down on the bank, digging roots. Your people shot at them.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a67c3bd5",
+    "file": "ch1_parley_soldier_1.b8a1391e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_soldier_2.main",
+    "line": "ch1_parley_soldier_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "We took the bridge after. Not before. Tell your captain that, if she will hear it.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> We took the bridge after. Not before. Tell your captain that, if she will hear it.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.2f798a4e",
+    "file": "ch1_parley_soldier_2.950e84f3.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_terms_1.main",
+    "line": "ch1_parley_terms_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.ae1a0f6e",
+    "file": "ch1_parley_terms_1.13aea2ae.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_terms_2.main",
+    "line": "ch1_parley_terms_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Not coin. Coin does not boil. A share of the grain your mayor keeps behind his locks. Every week, until the thaw.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Not coin. Coin does not boil. A share of the grain your mayor keeps behind his locks. Every week, until the thaw.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.ff068f53",
+    "file": "ch1_parley_terms_2.5293bdb8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_haggle_pass_1.main",
+    "line": "ch1_parley_haggle_pass_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Half now, half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Half now, half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.66ce164a",
+    "file": "ch1_parley_haggle_pass_1.9fa766a4.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_haggle_fail_1.main",
+    "line": "ch1_parley_haggle_fail_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Half? My children do not eat half. All of it, every week, or go home and fetch your captain.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Half? My children do not eat half. All of it, every week, or go home and fetch your captain.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.c6c6abab",
+    "file": "ch1_parley_haggle_fail_1.3c08fcfe.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_haggle_fail_2.main",
+    "line": "ch1_parley_haggle_fail_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "But you climbed the hill. So. Sit down again, and agree with me.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> But you climbed the hill. So. Sit down again, and agree with me.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.eee98b8e",
+    "file": "ch1_parley_haggle_fail_2.8eea32e2.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_young_pass_1.main",
+    "line": "ch1_parley_young_pass_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.64b8623c",
+    "file": "ch1_parley_young_pass_1.e95c782e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_young_pass_2.main",
+    "line": "ch1_parley_young_pass_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "His friends will not like a truce. If they bare their teeth on the bridge, do not kill more of them than you must.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> His friends will not like a truce. If they bare their teeth on the bridge, do not kill more of them than you must.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e49ea999",
+    "file": "ch1_parley_young_pass_2.fd7c01c4.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_young_fail_1.main",
+    "line": "ch1_parley_young_fail_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> 40 winters I have held this clan. Do not ask me if I can hold it one more.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.9b2e912e",
+    "file": "ch1_parley_young_fail_1.fb22946e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_deal_1.main",
+    "line": "ch1_parley_deal_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then it is agreed. Tell your mayor the old mother will give back his bridge. Tell him she is counting the sacks.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Then it is agreed. Tell your mayor the old mother will give back his bridge. Tell him she is counting the sacks.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.d5c0ff43",
+    "file": "ch1_parley_deal_1.72d391bd.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_dawn_open_2.main",
+    "line": "ch1_dawn_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.92a08fe4",
+    "file": "ch1_dawn_open_2.e2c80851.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_dawn_open_3.main",
+    "line": "ch1_dawn_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.8f627eeb",
+    "file": "ch1_dawn_open_3.9c5b542e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_open_2.main",
+    "line": "ch1_bridge_cost_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.6739e2c7",
+    "file": "ch1_bridge_cost_open_2.8b0254e2.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_open_3.main",
+    "line": "ch1_bridge_cost_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "There was a song I meant to teach somebody. Too late now. It goes into the river with me.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> There was a song I meant to teach somebody. Too late now. It goes into the river with me.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.b0d6d6b2",
+    "file": "ch1_bridge_cost_open_3.5f8c3a70.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_song_1.main",
+    "line": "ch1_bridge_cost_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.4abd13c6",
+    "file": "ch1_bridge_cost_song_1.7103969b.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_young_ones_open_3.main",
+    "line": "ch1_young_ones_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.04af4e85",
+    "file": "ch1_young_ones_open_3.33a3f783.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_young_ones_open_4.main",
+    "line": "ch1_young_ones_open_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Do what you must. But I have buried enough of them this year. Leave me some to scold.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Do what you must. But I have buried enough of them this year. Leave me some to scold.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.6130eaca",
+    "file": "ch1_young_ones_open_4.dff0427a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_road_east_open_2.main",
+    "line": "ch1_road_east_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "They will go to him. He will tell them they were brave. They were. Brave is cheap this winter.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> They will go to him. He will tell them they were brave. They were. Brave is cheap this winter.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.62a84f24",
+    "file": "ch1_road_east_open_2.aaa4fa51.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_road_east_open_6.main",
+    "line": "ch1_road_east_open_6",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your captain thinks. Good. Tell her to think about the grain.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Your captain thinks. Good. Tell her to think about the grain.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.c66c6a3f",
+    "file": "ch1_road_east_open_6.90f5d914.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_open_3.main",
+    "line": "ch1_song_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.bf716c56",
+    "file": "ch1_song_open_3.d0c8ade6.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_open_4.main",
+    "line": "ch1_song_open_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.7cf884ee",
+    "file": "ch1_song_open_4.921f090c.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_ent_1.main",
+    "line": "ch1_song_ent_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "The valley song. Seven went over, seven came home, they brought something heavy. Yes. Pretty.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> The valley song. Seven went over, seven came home, they brought something heavy. Yes. Pretty.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.f904ff29",
+    "file": "ch1_song_ent_1.32f78208.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_ent_2.main",
+    "line": "ch1_song_ent_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your song was made by the ones who came home. Ours was made by the ones who watched them come.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Your song was made by the ones who came home. Ours was made by the ones who watched them come.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.48b90e00",
+    "file": "ch1_song_ent_2.420a44de.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_outl_1.main",
+    "line": "ch1_song_outl_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Hm. I thought you smelled wrong. Not bad. Only far. Like snow from the other side.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. I thought you smelled wrong. Not bad. Only far. Like snow from the other side.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.bda9a816",
+    "file": "ch1_song_outl_1.0068cfbe.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_outl_2.main",
+    "line": "ch1_song_outl_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then listen close. This song is about your side of the mountain, a little. Perhaps it is about you.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Then listen close. This song is about your side of the mountain, a little. Perhaps it is about you.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.1136f44e",
+    "file": "ch1_song_outl_2.a6080384.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_song_2.main",
+    "line": "ch1_song_song_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven went up where the wall meets the sky, seven with nothing, and hungry, and cold.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Seven went up where the wall meets the sky, seven with nothing, and hungry, and cold.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.76644b6f",
+    "file": "ch1_song_song_2.59324d97.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_song_3.main",
+    "line": "ch1_song_song_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a449ab24",
+    "file": "ch1_song_song_3.97cbdbe8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_song_4.main",
+    "line": "ch1_song_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "But nobody runs when they carry a fortune. Seven came down, and the seven came running.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> But nobody runs when they carry a fortune. Seven came down, and the seven came running.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.0ea8ced9",
+    "file": "ch1_song_song_4.3d6910c0.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_rest_1.main",
+    "line": "ch1_song_rest_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "That is the next verse. And the next verse is not for strangers.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> That is the next verse. And the next verse is not for strangers.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.491ca49e",
+    "file": "ch1_song_rest_1.ccffd9ea.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_rest_2.main",
+    "line": "ch1_song_rest_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children. That makes you something. Not family. Not yet. Come back when you are.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You fed my children. That makes you something. Not family. Not yet. Come back when you are.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.284a1397",
+    "file": "ch1_song_rest_2.809fd71a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_crumb_1.main",
+    "line": "ch1_song_crumb_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> You ask well. So. <short pause> A crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.d21bec2e",
+    "file": "ch1_song_crumb_1.5b969918.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_crumb_2.main",
+    "line": "ch1_song_crumb_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "The rest when you are family. Not before. Now eat. You are too thin for valley people.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> The rest when you are family. Not before. Now eat. You are too thin for valley people.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.3ce50eba",
+    "file": "ch1_song_crumb_2.0ae8a3fc.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_1.main",
+    "line": "ch3_skarrow_messenger_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "renderText": "You fed my children, valley people. <short pause> So I give you what I do not give to strangers. <short pause> Not all of it. <short pause> The last verse stays with the clan.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e7786839",
+    "file": "ch3_skarrow_messenger_song_1.fb5a0a21.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_2.main",
+    "line": "ch3_skarrow_messenger_song_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven went over the Greywall in the long winters, and seven came back with fire. They came back running.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Seven went over the Greywall in the long winters, and seven came back with fire. They came back running.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.bbace059",
+    "file": "ch3_skarrow_messenger_song_2.3e232dab.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_3.main",
+    "line": "ch3_skarrow_messenger_song_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.d86b1e8e",
+    "file": "ch3_skarrow_messenger_song_3.d1e94f6e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_4.main",
+    "line": "ch3_skarrow_messenger_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "renderText": "Your Wardens sang that it was given. <short pause> We never warmed our hands at it, so we never forgot. <short pause> It was stolen.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.36110c89",
+    "file": "ch3_skarrow_messenger_song_4.6f5979c9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_grandson_2.main",
+    "line": "ch3_skarrow_messenger_grandson_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> My grandson Vorga holds the bridge you need. He is a fool and a thief. <short pause> And he is mine.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a61e4327",
+    "file": "ch3_skarrow_messenger_grandson_2.adbab612.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_grandson_3.main",
+    "line": "ch3_skarrow_messenger_grandson_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.5685703c",
+    "file": "ch3_skarrow_messenger_grandson_3.a4c27e64.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_spared_rekindled_open_2.main",
+    "line": "ch5_epi_clan_spared_rekindled_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Warm again. Good for the children. But watch. In ten winters you valley folk will forget you owe us grain.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Warm again. Good for the children. But watch. In ten winters you valley folk will forget you owe us grain.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.cbad0dfd",
+    "file": "ch5_epi_clan_spared_rekindled_open_2.fbdcb75f.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_spared_rekindled_open_3.main",
+    "line": "ch5_epi_clan_spared_rekindled_open_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "We never used your fire, so we will remember for you. Somebody has to sing it.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> We never used your fire, so we will remember for you. Somebody has to sing it.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.57a2c66f",
+    "file": "ch5_epi_clan_spared_rekindled_open_3.707dcae7.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_spared_returned_open_2.main",
+    "line": "ch5_epi_clan_spared_returned_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Cold again, like the old songs. Now you valley folk learn what we know. Sit. We will teach you how to winter.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Cold again, like the old songs. Now you valley folk learn what we know. Sit. We will teach you how to winter.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.1ab7b8b2",
+    "file": "ch5_epi_clan_spared_returned_open_2.0c91127f.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_spared_extinguished_open_2.main",
+    "line": "ch5_epi_clan_spared_extinguished_open_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.0a0c9d4d",
+    "file": "ch5_epi_clan_spared_extinguished_open_2.66456fc5.ogg",
+    "done": false
+  },
+  {
+    "id": "say_ford_assault_1.main",
+    "line": "say_ford_assault_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.4d300437",
+    "file": "say_ford_assault_1.fba9424c.ogg",
+    "done": false
+  },
+  {
+    "id": "say_ford_assault_2.main",
+    "line": "say_ford_assault_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "They are in the water! Shoot them while they wade, children!",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> They are in the water! Shoot them while they wade, children!",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.ce41b93e",
+    "file": "say_ford_assault_2.1c750113.ogg",
+    "done": false
+  },
+  {
+    "id": "say_ford_assault_3.main",
+    "line": "say_ford_assault_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e8a430b6",
+    "file": "say_ford_assault_3.e3ff1147.ogg",
+    "done": false
+  }
+]

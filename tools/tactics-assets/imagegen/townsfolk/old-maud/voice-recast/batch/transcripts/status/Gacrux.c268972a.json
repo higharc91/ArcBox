@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_KSdKHjgs17KA6Ne58nN5gotK",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_WKiYzxJ7TkSQtGxgNuUgCBE2",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_3DAtnv9qqqwzVoqYzHAJtaC7"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 12.64,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 5,
+            "start": 0,
+            "text": " Ah, there's my quiet neighbor.",
+            "words": null
+          },
+          {
+            "end": 10.08,
+            "start": 5,
+            "text": " Never warmed your hands at the wrong fire, did you?",
+            "words": null
+          },
+          {
+            "end": 12,
+            "start": 10.08,
+            "text": " That's why you can still think.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:54.660Z",
+    "updatedAt": "2026-11-05T00:37:01.649Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:54.660Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:54.748Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:01.649Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -10,6 +10,25 @@ public sealed class UnitArtTests
 
     private static bool OnDisk(string path) => File.Exists(Path.Combine(Pack.Root, path));
 
+    [Theory]
+    [InlineData("guard_captain", "dagna_holt", "dagna")]
+    [InlineData("noble", "celandine_marrowby", "celandine")]
+    [InlineData("bandit_captain", "rook", "rook")]
+    [InlineData("goblin_shaman_mother_skarrow", "mother_skarrow", "mother_skarrow")]
+    public void Approved_named_adults_and_their_preset_keys_select_the_compact_sprite(string preset, string character, string file)
+    {
+        var sprite = Art.Value.Sprite($"characters.{preset}")!;
+        Assert.Same(sprite, Art.Value.Sprite($"characters.{character}"));
+        Assert.Equal($"creatures/{file}.png", sprite.Path);
+        Assert.True(OnDisk(sprite.Path));
+        Assert.Equal((96, 96, 48, 84), (sprite.Width, sprite.Height, sprite.AnchorX, sprite.AnchorY));
+        Assert.Equal(.5f, sprite.PixelScale);
+        Assert.Equal(8, sprite.Directions.Distinct().Count());
+        Assert.Equal([0, 1, 2, 3, 4, 5, 4, 3, 2, 1], sprite.Idle.Frames);
+        Assert.Equal([6, 7, 8, 9, 10, 11], sprite.Anims["walk"].Frames);
+        Assert.Equal([12, 13, 14, 15, 16, 17, 16, 15, 14, 13], sprite.Anims["talk"].Frames);
+    }
+
     [Fact]
     public void A_sprite_has_its_sheets_animations_by_their_manifest_name_or_presentation_key()
     {

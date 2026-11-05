@@ -1,0 +1,72 @@
+{
+  "requests": [
+    {
+      "id": "townsfolk_farmhand",
+      "preset_reference": "farmhand",
+      "provider": "Scenario",
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+      "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+      "seed": null,
+      "seed_note": "The inspected model schema exposes no seed parameter.",
+      "design_approval": "pending",
+      "parameters": {
+        "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct farmhand townsfolk for Emberwick at the Ashen Ford. A young adult agricultural worker, rolled sleeves over substantial work clothes, simple kerchief and scuffed boots; tired and underpaid, carrying no giant tool that could obscure neighbouring sprites. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon. Use the supplied approved Bree concept only as the rendering-style reference: match its restrained painted material planes, top-left lighting, clear silhouettes and muted parchment background. Preserve this brief's own face, age, gender, species, proportions, outfit, equipment and identity; do not copy Bree's face, apron, notebook or hair. If a child or goblin is specified, keep its distinct scale and anatomy. All full-body views share one ground baseline and consistent size. Use a wide two-row layout: variant A across the top with front, three-quarter, rear and head; variant B across the bottom with front, three-quarter, rear and head. Keep all six full-body figures complete, with matching scale and each variant's own consistent hair, skin and clothes. No text.",
+        "aspectRatio": "16:9",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false,
+        "referenceImages": [
+          "asset_5BTscGVgZiaVkGpPJb65F1X1"
+        ]
+      }
+    },
+    {
+      "id": "townsfolk_guard",
+      "preset_reference": "guard",
+      "provider": "Scenario",
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+      "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+      "seed": null,
+      "seed_note": "The inspected model schema exposes no seed parameter.",
+      "design_approval": "pending",
+      "parameters": {
+        "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct guard townsfolk for Emberwick at the Ashen Ford. An ordinary member of Dagna’s town guard, modest worn mail beneath a practical dull-red wool tabard, simple open-faced helmet, leather belt and boots. Loyal but nervous; consistent uniform across variants, without a royal crown or ornate plate. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon. Use the supplied approved Bree concept only as the rendering-style reference: match its restrained painted material planes, top-left lighting, clear silhouettes and muted parchment background. Preserve this brief's own face, age, gender, species, proportions, outfit, equipment and identity; do not copy Bree's face, apron, notebook or hair. If a child or goblin is specified, keep its distinct scale and anatomy. All full-body views share one ground baseline and consistent size. Use a wide two-row layout: variant A across the top with front, three-quarter, rear and head; variant B across the bottom with front, three-quarter, rear and head. Keep all six full-body figures complete, with matching scale and each variant's own consistent hair, skin and clothes. No text.",
+        "aspectRatio": "16:9",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false,
+        "referenceImages": [
+          "asset_5BTscGVgZiaVkGpPJb65F1X1"
+        ]
+      }
+    },
+    {
+      "id": "townsfolk_merchant",
+      "preset_reference": "merchant",
+      "provider": "Scenario",
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+      "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+      "seed": null,
+      "seed_note": "The inspected model schema exposes no seed parameter.",
+      "design_approval": "pending",
+      "parameters": {
+        "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct merchant townsfolk for Emberwick at the Ashen Ford. An adult market stallholder, modest layered wool and linen, practical apron or short overcoat, a small coin pouch and sturdy boots. Stock is scarce; no luxurious aristocratic finery or overflowing wealth. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon. Use the supplied approved Bree concept only as the rendering-style reference: match its restrained painted material planes, top-left lighting, clear silhouettes and muted parchment background. Preserve this brief's own face, age, gender, species, proportions, outfit, equipment and identity; do not copy Bree's face, apron, notebook or hair. If a child or goblin is specified, keep its distinct scale and anatomy. All full-body views share one ground baseline and consistent size.",
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false,
+        "referenceImages": [
+          "asset_5BTscGVgZiaVkGpPJb65F1X1"
+        ]
+      }
+    }
+  ],
+  "reason": "Two provider output-token failures with no assets; a wider ratio follows the provider recovery hint. Merchant was not submitted previously.",
+  "maximumAdditionalCU": 39
+}

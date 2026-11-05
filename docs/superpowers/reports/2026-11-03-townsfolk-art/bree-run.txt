@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 5080
+
+Render preset ultra
+NARRATOR built-in voice Microsoft David (en_US)
+NARRATOR Fallback
+World demo: no server connection
+WORLD window 1920x1080 at (160, 100), spec ashen_ford, optimised False, adapter NVIDIA GeForce RTX 5080
+WORLD build ground 102 ms, plan+light 330 ms, bake 58 ms, total 490 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 2 tiles; spots inn@25,55 square@29,62 market@28,64
+WORLD memory after build: managed 41.5 MB (+40.6), engine 49.8 MB (+2.8), textures 26.6 MB, buffers 7.8 MB, process 535 MB
+WORLD textures 215 in 404 ms, worst 20.8 ms; binding items (and baking glows) 7 ms; 62 blocks still to record at reveal
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.2 s, 23 frames: frame ms median 6.67, p95 8.33, p99 8.96, worst 8.96
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 0 of 23
+WORLD recording during the walk: 3 frames, ms a frame median 3.91, p95 4.25, p99 4.25, worst 4.25
+WORLD frames while recording: frame ms median 8.33, p95 8.96, p99 8.96, worst 8.96
+WORLD _Draw per block, first time: median 0.19, p95 0.61, p99 1.20, worst 1.20, sum 18.0 ms
+WORLD render CPU ms median 0.95, p95 1.12, p99 1.18, worst 1.18; GPU ms median 0.09, p95 0.09, p99 0.26, worst 0.26; at most 2,177 draw calls
+WORLD overlay query ms median 4.29, p95 5.04, p99 9.12, worst 9.12; draw ms median 0.23, p95 0.24, p99 0.26, worst 0.26; items median 373.00, p95 373.00, p99 379.00, worst 379.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 47.4 MB (+46.5), engine 67.2 MB (+20.2), textures 195.0 MB, buffers 7.8 MB, process 723 MB
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/bree\world-ashen_ford.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/bree\world-inn.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/bree\world-square.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/bree\world-market.png
+WORLD closed

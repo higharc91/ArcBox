@@ -1052,6 +1052,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
         }
+        if (_unitArt is { } partyArt)
+            _world?.PartySheets(explore.Party.Select(p => partyArt.Sprite(p.Sprite)?.Path).OfType<string>());
         FeedWalk();
         _worldHud.Show(hud, notice);
         return true;

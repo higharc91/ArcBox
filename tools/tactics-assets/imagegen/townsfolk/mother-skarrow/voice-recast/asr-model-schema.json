@@ -1,0 +1,72 @@
+{
+  "model_id": "model_scenario-audio-to-text",
+  "name": "Speech to Text",
+  "capabilities": [
+    "audio2txt"
+  ],
+  "parameters": [
+    {
+      "name": "file",
+      "type": "file",
+      "description": "Input audio or video file. Video inputs have their audio extracted.",
+      "required": true,
+      "kind": [
+        "audio",
+        "video"
+      ],
+      "cost_impact": true
+    },
+    {
+      "name": "modelSize",
+      "type": "string",
+      "description": "Whisper model size. Larger is more accurate but slower.",
+      "default": "small",
+      "allowed_values": [
+        "tiny",
+        "tiny.en",
+        "base",
+        "base.en",
+        "small",
+        "small.en",
+        "medium",
+        "medium.en",
+        "large-v2",
+        "large-v3"
+      ],
+      "cost_impact": true,
+      "required": false
+    },
+    {
+      "name": "language",
+      "type": "string",
+      "description": "ISO 639-1 language code (e.g. 'en', 'fr'). Leave empty for auto-detection.",
+      "default": "",
+      "required": false
+    },
+    {
+      "name": "task",
+      "type": "string",
+      "description": "'transcribe' keeps the original language, 'translate' targets English.",
+      "default": "transcribe",
+      "allowed_values": [
+        "transcribe",
+        "translate"
+      ],
+      "required": false
+    },
+    {
+      "name": "initialPrompt",
+      "type": "string",
+      "description": "Optional text prompt to bias the model's style/vocabulary.",
+      "max_length": 2048,
+      "required": false
+    },
+    {
+      "name": "vadFilter",
+      "type": "boolean",
+      "description": "Run silero VAD to skip non-speech regions (recommended).",
+      "default": true,
+      "required": false
+    }
+  ]
+}

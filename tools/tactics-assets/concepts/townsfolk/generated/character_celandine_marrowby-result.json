@@ -1,0 +1,19 @@
+{
+  "id": "character_celandine_marrowby",
+  "jobId": "job_ANy6N17mniq8ymjnBaTqkisf",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:05:49.645Z",
+  "updatedAt": "2026-11-04T02:06:24.162Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_YruSooVTggnKYckp9MCXFbLX"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "character_celandine_marrowby.png"
+}

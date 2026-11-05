@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.0042a09d.wav",
+  "sourceSha256": "c52ff3e464291488228d904ec4055941d17ea06a25fbdaf0cc03640f397c5429",
+  "duration": 5.56,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0600000000000005,
+      "text": " Come then my grandchildren are watching and they are hungry"
+    }
+  ],
+  "text": "Come then my grandchildren are watching and they are hungry",
+  "secondsToTranscribe": 1.69
+}

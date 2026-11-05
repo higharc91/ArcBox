@@ -1,0 +1,9 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/fisher-portraits-rejected-braid.png",
+    "/workspace/ArcBox/tools/tactics-assets/concepts/townsfolk/generated/townsfolk_fisher.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/fisher_a/sprite-source.png"
+  ],
+  "prompt": "Correct ONLY the hairstyle of the woman in the TOP SIX portraits (first two rows) of the FIRST reference expression sheet. She must have the approved short dark tightly-curled hair gathered into a SMALL LOW BUN behind the head, exactly as in the second concept reference and third sprite sheet. REMOVE the invented long thick braid hanging over her shoulder in ALL SIX top portraits. Her shoulder and indigo coat/ochre collar should be visible where that braid was. Preserve her face, age, brown skin, six facial expressions, all coat details, pixel art style, same3column4row grid layout. Preserve the BOTTOM SIX red-bearded man's portraits exactly. Exactly12busts total, row1 woman idle/hurt/happy,row2woman angry/sad/surprised,row3man idle/hurt/happy,row4man angry/sad/surprised. Crisp pixel art, consistent scale and generous empty gutters, no text. Transparent background alpha0 outside silhouettes, fully opaque bust interiors. No long braids, no new hairstyles or accessories."
+}

@@ -1,0 +1,11 @@
+{
+  "bytes": 203477572,
+  "files": 4835,
+  "inventorySha256": "ddc6d04e5211f70321235e691f88d540d43b7044fc37d4a69ac99a13702d0d1f",
+  "before": {
+    "bytes": 202843253,
+    "files": 4828,
+    "inventorySha256": "2e6da18bde5ec8564430f04b4992bacdc49c5bd82d57d603d6ac618a7871d5f4"
+  },
+  "deltaBytes": 634319
+}

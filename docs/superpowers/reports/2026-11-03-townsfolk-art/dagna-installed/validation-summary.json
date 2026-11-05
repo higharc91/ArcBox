@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "focusedTests": 147,
+  "failures": 0,
+  "skipped": 0,
+  "testGroups": {
+    "WorldPeople": 36,
+    "CreatureAtlas": 5,
+    "UnitArt": 55,
+    "HudArt": 51
+  },
+  "debugBuildWarnings": 0,
+  "debugBuildErrors": 0,
+  "releaseBuildWarnings": 0,
+  "releaseBuildErrors": 0,
+  "typedProductionImporter": "PASS",
+  "barkStopHoldResume": "PASS",
+  "exactApprovedAssetHashes": "PASS",
+  "peakTextureMiB": {
+    "ashen_ford": 325.769775390625,
+    "cinder_hollow": 192.373291015625
+  },
+  "fourActualHeroes": true,
+  "allFourRaceReplacementAndRestoration": "PASS",
+  "rulesLoreBalancePhoneContractsChanged": false
+}

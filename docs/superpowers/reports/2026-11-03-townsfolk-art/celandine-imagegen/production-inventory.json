@@ -1,0 +1,8 @@
+{
+  "files": 4922,
+  "bytes": 207649084,
+  "sha256": "6bf5e5410895a9f5d7355d97b721d1c9ab83d19fbebf7f6eb7f6d8ea0edd948f",
+  "method": "SHA256 of compact JSON array sorted by relative path, entries path/bytes/sha256",
+  "beforeAfterPendingInstaller": "identical",
+  "productionChanged": false
+}

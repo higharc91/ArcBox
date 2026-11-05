@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "character: a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\nanimation: v3 custom (Standing quietly and speaking kindly, a tiny restrained nod and small waist-height right-hand gesture, then settle into the starting rest. Both feet stay planted at exactly the same position. Keep the closed ledger at anatomical LEFT hip and keys at anatomical RIGHT hip; no equipment changes or hand swaps. Preserve the same face, grey beard, bald crown, coat and dull brass medallion. No steps, large arm swings, extra objects, camera motion or zoom.)\ndirections: south-east (1 jobs)\njob_ids: south-east=92de9361-3714-413f-8c63-1baaf30bd4f7\ngroup: 14fa5a87-394a-4287-822f-04de5e1d4571\nframes: 5 (1 reference + 4 animated)\ncanvas: south-east 108x108 (frames are stored at this size: the character plus room to move)\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\")\nadd more directions to this group: animate_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\", action_description=\"Standing quietly and speaking kindly, a tiny restrained nod and small waist-height right-hand gesture, then settle into the starting rest. Both feet stay planted at exactly the same position. Keep the closed ledger at anatomical LEFT hip and keys at anatomical RIGHT hip; no equipment changes or hand swaps. Preserve the same face, grey beard, bald crown, coat and dull brass medallion. No steps, large arm swings, extra objects, camera motion or zoom.\", animation_group_id=\"14fa5a87-394a-4287-822f-04de5e1d4571\", directions=[...])"
+      }
+    ],
+    "isError": false
+  }
+}

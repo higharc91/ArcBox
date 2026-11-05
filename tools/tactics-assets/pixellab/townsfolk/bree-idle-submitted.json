@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 67e30958-824f-4ac1-a27f-611943cd3617\njob_id: 67e30958-824f-4ac1-a27f-611943cd3617\naction: Seamless quiet standing idle loop. Very subtle breathing of chest and shoulders, one gentle blink. Both boot soles stay planted in their exact positions. Keep the same down-right three-quarter facing, body size, pixel density, apron silhouette, grey braided bun, notebook and belt keys. Hands remain relaxed by sides. No stepping, turning, waving, sliding, camera motion, zoom or flickering outlines. Return smoothly to the identical starting pose.\nframes: 4\nsize: 160x160px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 80302\nasset_id: 68ab46b1-70dd-5bde-9a75-43c996c85b87\nasset_status: pending (saved when generation completes)\ncost: 2 generations\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"67e30958-824f-4ac1-a27f-611943cd3617\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/67e30958-824f-4ac1-a27f-611943cd3617/download (423 + Retry-After until ready; ?index=N for the Nth of several images)"
+    }
+  ],
+  "isError": false
+}

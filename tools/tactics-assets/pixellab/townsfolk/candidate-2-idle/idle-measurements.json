@@ -1,0 +1,68 @@
+{
+  "candidate": 2,
+  "displayFrameMs": 300,
+  "sourcePlusGeneratedFrames": 5,
+  "individualFrameTransforms": false,
+  "frames": [
+    {
+      "frame": 0,
+      "bounds": [
+        65,
+        52,
+        94,
+        123
+      ],
+      "changedPixels": 0,
+      "footSilhouetteChangedPixels": 0,
+      "sha256": "1c717aee1ff6e5ca2be1878a6e5e3aec68dad2f1ab188f9277694e6c140d489e"
+    },
+    {
+      "frame": 1,
+      "bounds": [
+        65,
+        52,
+        94,
+        123
+      ],
+      "changedPixels": 29,
+      "footSilhouetteChangedPixels": 0,
+      "sha256": "486417a1b31419eaadf2512ac37855cec4708541b76a51dde87dd8f7db236de6"
+    },
+    {
+      "frame": 2,
+      "bounds": [
+        65,
+        52,
+        94,
+        123
+      ],
+      "changedPixels": 31,
+      "footSilhouetteChangedPixels": 0,
+      "sha256": "b0040cb7c6c8ca28db3141b25570f5108253c9b0f9b3863c2465330dae5c6f34"
+    },
+    {
+      "frame": 3,
+      "bounds": [
+        65,
+        52,
+        94,
+        123
+      ],
+      "changedPixels": 25,
+      "footSilhouetteChangedPixels": 0,
+      "sha256": "e0ce914eaefabbb62a5fab6da39a2e65f4433492f22732af0602236bfbe1ff8b"
+    },
+    {
+      "frame": 4,
+      "bounds": [
+        65,
+        52,
+        94,
+        123
+      ],
+      "changedPixels": 21,
+      "footSilhouetteChangedPixels": 0,
+      "sha256": "dd9fc853c7fa23a8b1114d7e1f0c19b70df6a376cd5b3780eed26f8212c6a61a"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-04",
+  "completionImageToolCalls": 11,
+  "priorAppearanceImageToolCalls": 1,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "monetaryImageToolCost": "not quoted by tool; no price inferred",
+  "records": [
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-2c6f876f-5ef5-4408-82b0-d2d6e2192c21.png",
+      "requestSha256": "6282ff21713875398e72d0d495a571eee8388f75699dc4022123a72058b4b599",
+      "outputSha256": "bfc7d83553800c61a4ca5e256055762a477fe3212b970c06dd19e3a3e101f99f",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/south.png",
+          "sha256": "88a2da96a682ccde51ca3b16e96644d144dd3bde314fd83aaaa69e983ccdda9b"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-8dcc528d-adb1-4abc-a9f9-c5450f3bfbce.png",
+      "requestSha256": "45b9f7d3caaabc4e7676d4b4a443d49454feed7c0be0de468fdd65efb5ee2c1d",
+      "outputSha256": "cf6170d270949bb730e881a2c3b36d0ef64de1303f05548d95fa8b8ef865d7e2",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/south-west.png",
+          "sha256": "9593d67c2a7c9c87d85dd62c31381e04720ff4d33a4731d5cd53e2ecd766cb8e"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-7064e38d-3725-4fe1-b970-2c7a371ab06e.png",
+      "requestSha256": "8b3fe67a43b0026844a9242ac5d1ce6e7142c608bcd3d3825c2757de49545ce5",
+      "outputSha256": "6fa4a099b23e3ea4dc02bd4830866a7a698a0ad742986e086d0b46412e37a374",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/west.png",
+          "sha256": "6830e228fa3be5e51b779432cbb7a8f0319d40b9c283d73c39e61e5107272666"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-abacc151-3e91-4378-958a-080180211635.png",
+      "requestSha256": "a376934e7ef7fce3b489465a45dcf337f7463453d53de4eb0e53eb71facb0a7f",
+      "outputSha256": "fb7a610d9f4c65f622f0cae9b8b12d74d7b5968836e948955c81b77174cba0c7",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/north-west.png",
+          "sha256": "ff828944ce398be9e6625ef1f7377435c4872d79b1c13007e46a95f5de1c8d08"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-84e7ba7f-822e-4d1e-bea5-88c45d9f22d6.png",
+      "requestSha256": "5a27991988ef9e47acd9a57aa48d4d56dcda824a24525c04665e8e0e4b5a6037",
+      "outputSha256": "d887d8a4fa1803c69d4d256add547e81cd60f6f9bcf01dfdb1512adec22a70dd",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/north.png",
+          "sha256": "ec2afca14f36b9737159930eb183b12f3d19a17df328629434e246458fe1f0b1"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-901493f6-848e-4fc0-ba5e-168e1d475660.png",
+      "requestSha256": "47f5ea292b933ad67c08f14ef7e210961532e4b48a92048fd2895f599b6bca98",
+      "outputSha256": "ac19f8437d85becd2090e84c9a2370ec928fba7342c6b4adde9f28e1c6cd0bd8",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/north-east.png",
+          "sha256": "76ebaee62e7c708482733dd74a11a56e8a2114a9a4d47f8b0114ab818fb2ec1e"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-dc797c7e-1841-4a4e-8091-f5cc2df7dc35.png",
+      "requestSha256": "42fe4c43bbba71294120a7b49acfb29f65a8ceb052017a89d66539c84caf36d2",
+      "outputSha256": "26d7391910408ce93b1e9f27653bcd9838881cd3460d3c732fc112f9ef3824eb",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/east.png",
+          "sha256": "60e6aa459173efa47b90522e08633dee6937327bfe982f77542f3a8779e17f71"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-3ae1dc0b-dab9-4d25-801c-3b0ddea8c25c.png",
+      "requestSha256": "388b0d417abb3c1aab469d2829a7e2cf6ff3e4883870bfbce6240a1d1ba34672",
+      "outputSha256": "c8ef60a45b70cfab636a35b8d36da6ee44c0fa4846de26cd53a1569107d1f9b2",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/south-east.png",
+          "sha256": "b1562f548318497272d55881bc04faffd1c3b9afd93a871df4c3a18203b6593b"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-738d044d-e377-44d1-ad15-03b3ad62821e.png",
+      "requestSha256": "33d146be31c1ed3eba1d51b0fe68063cb23b7f39cfead381d96db349f0fe7a8e",
+      "outputSha256": "7143f1044b302ea475991f6415483cb147a1a26a4f7fe8026daba9e0c1975f68",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/candidate-1.png",
+          "sha256": "eb88185dbde89e5058b6bef1dc46128f2fa7cda54b3eda7cd4bf111fcdba7b72"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/portraits/aubrine_idle.png",
+          "sha256": "0680c9aa2f4051c1d91a830d31dc06c1a3f2975af84d90796698b40cc79834e6"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/north-west-correction-request.json",
+      "output": "directional/north-west-corrected-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-5c950cbb-6bbf-4908-84f0-88a21595b63b.png",
+      "requestSha256": "3e9b992f6d18b6ba9186e3d312cc9950e2411ebd373808dd288865fd311602be",
+      "outputSha256": "5a1d720d6c1bb9ee880b7b6644d8f315cb22ac67321e105663407e8280bfc783",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/north-west-source.png",
+          "sha256": "fb7a610d9f4c65f622f0cae9b8b12d74d7b5968836e948955c81b77174cba0c7"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/north-west.png",
+          "sha256": "ff828944ce398be9e6625ef1f7377435c4872d79b1c13007e46a95f5de1c8d08"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    },
+    {
+      "request": "directional/south-walk-correction-request.json",
+      "output": "directional/south-walk-corrected-source.png",
+      "originalGeneratedPath": "/workspace/generated_images/exec-a0d018e0-c9e7-4d2f-be28-a0a22e218303.png",
+      "requestSha256": "5f4a8291db771f60d11bb41e44d0d50bc5ea24973f4bbb316ed29e89575b8376",
+      "outputSha256": "a6977225af3785f446db0dac96ed81d6711134997ac80fb3e5633dae6822046e",
+      "inputs": [
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/south-source.png",
+          "sha256": "bfc7d83553800c61a4ca5e256055762a477fe3212b970c06dd19e3a3e101f99f"
+        },
+        {
+          "path": "tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/south.png",
+          "sha256": "88a2da96a682ccde51ca3b16e96644d144dd3bde314fd83aaaa69e983ccdda9b"
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "pixelLabCalls": 0
+    }
+  ]
+}

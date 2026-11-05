@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_wmBnzHVbS7ozjbzUXeyPztnL",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_vkCUDwP7TEmom2nEcLF7dM9J",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_GBJ5Z5kWufk4vkH4ABMMUNwF"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 12.36,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 7,
+            "start": 0,
+            "text": " Go on, come back when you've better questions.",
+            "words": null
+          },
+          {
+            "end": 9,
+            "start": 7,
+            "text": " I'll still be here.",
+            "words": null
+          },
+          {
+            "end": 12,
+            "start": 9,
+            "text": " That's the one thing I'm good at.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:02.428Z",
+    "updatedAt": "2026-11-05T00:37:08.893Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:02.428Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:02.527Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:08.893Z"
+      }
+    ],
+    "progress": 1
+  }
+}

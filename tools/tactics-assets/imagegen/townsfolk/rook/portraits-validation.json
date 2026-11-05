@@ -1,0 +1,73 @@
+{
+  "sourceSha256": "301d1cb359c8611ec6e641d57c860eccea89b7289085eace54787a278e24cce0",
+  "sourceGrid": [
+    3,
+    2
+  ],
+  "outputSize": 40,
+  "alphaThreshold": 128,
+  "paletteColors": 64,
+  "fixedScale": 0.07072691552062868,
+  "fixedOffset": [
+    5.253438113948921,
+    -3.445972495088405
+  ],
+  "perMoodRecentering": false,
+  "moods": {
+    "idle": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 79,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "8fe71422ec0557be975e1d9a2da89eec29694822f8699ebb4039338dde1f437f"
+    },
+    "hurt": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 79,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "2f9d4ddd5b42b62f81654f32e33c08a8340691d5816e6b879eeae769df1406c7"
+    },
+    "happy": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 79,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "95e1474975e293517e8b7826d6b36490269c9b7ac78adeb8331556144dbb382f"
+    },
+    "angry": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 79,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "915ea966d9a7a44796184363615c03000080c71c046756c14e7bc523b32d9988"
+    },
+    "sad": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 79,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "fd704fb9212c06cf34e233dcbed531c5a95eb8abaaf8ea8e824b0608f76c80a6"
+    },
+    "surprised": {
+      "sourceBounds": {
+        "left": 14,
+        "top": 78,
+        "right": 403,
+        "bottom": 586
+      },
+      "sha256": "cdbf56c52bc3f17ac9a8263fb3a84a9c4b30ef65887900dd783ede81cbf2c16f"
+    }
+  },
+  "reviewOnly": true
+}

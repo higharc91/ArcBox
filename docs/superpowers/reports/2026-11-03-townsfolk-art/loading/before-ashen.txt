@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 846 ms, plan+light 1036 ms, bake 113 ms, total 1996 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 177 tiles; spots behind-cliff@157,60 behind-crate@104,55 water-block-edge@112,6 block-corner@80,64 region-edge@159,60 void-near@31,95 void-far@32,0
+WORLD memory after build: managed 41.5 MB (+40.8), engine 39.8 MB (+3.1), textures 19.6 MB, buffers 7.6 MB, process 481 MB
+PERF 1 fps   2000.0 ms (worst 2000.0) | 404 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=ashen_ford stage=open party=4 textures-bytes=282712320 peak-bytes=282712320 limit-bytes=536870912 result=PASS
+WORLD textures 215 in 1235 ms, worst 66.9 ms; binding items (and baking glows) 20 ms; 64 blocks still to record at reveal
+PERF 9 fps   107.5 ms (worst 155.0) | 2,177 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 6 fps   175.1 ms (worst 183.5) | 2,602 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 16 fps   61.5 ms (worst 68.1) | 2,468 draw calls   7.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 23 fps   43.6 ms (worst 49.4) | 1,893 draw calls   7.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 18 fps   55.3 ms (worst 95.1) | 1,399 draw calls   7.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 25 fps   39.9 ms (worst 54.6) | 848 draw calls   4.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=ashen_ford stage=crossing party=4 textures-bytes=282893568 peak-bytes=282893568 limit-bytes=536870912 result=PASS
+WORLD crossing 177 tiles at 6.7 tiles/s, 26.4 s, 394 frames: frame ms median 52.91, p95 141.34, p99 180.77, worst 654.12
+WORLD crossing after the first 1 s: frame ms median 52.54, p95 139.32, p99 180.77, worst 654.12
+WORLD frames over 16 ms: 394 of 394, at 0.00s=72.8 0.07s=155.0 0.23s=141.3 0.37s=130.0 0.50s=138.7 0.64s=144.6 0.78s=140.0 0.92s=125.3 1.05s=121.3 1.17s=122.3 1.29s=126.7 1.42s=125.0, 9 while recording
+WORLD recording during the walk: 9 frames, ms a frame median 3.55, p95 9.38, p99 9.38, worst 9.38
+WORLD frames while recording: frame ms median 138.72, p95 154.99, p99 154.99, worst 154.99
+WORLD _Draw per block, first time: median 0.47, p95 2.05, p99 3.40, worst 3.40, sum 53.6 ms
+WORLD render CPU ms median 1.38, p95 4.46, p99 7.92, worst 10.77; GPU ms median 31.90, p95 56.97, p99 84.54, worst 144.47; at most 3,348 draw calls
+WORLD overlay query ms median 2.16, p95 64.07, p99 87.93, worst 117.35; draw ms median 1.37, p95 5.98, p99 9.92, worst 24.60; items median 12.00, p95 367.00, p99 452.00, worst 490.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 69
+WORLD memory at end of crossing: managed 43.6 MB (+42.9), engine 58.0 MB (+21.2), textures 269.8 MB, buffers 9.6 MB, process 826 MB
+WORLD closed

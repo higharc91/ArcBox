@@ -1,0 +1,36 @@
+{
+  "id": "character_old_maud",
+  "status": "success",
+  "reused": true,
+  "assetIds": [
+    "asset_5StWG7pyvVrtbPP99aYXWdjc"
+  ],
+  "jobId": "job_6xAxowD5qZRcjNUFMXPGGYM9",
+  "cuCost": 0,
+  "historical_cost": "Not charged to issue #80; original generation predates this batch.",
+  "source_createdAt": "2026-11-02T15:04:53.725Z",
+  "metadata": {
+    "type": "image-prompt-editing",
+    "referenceImages": [
+      "asset_j5wC1LrjrchvvM2NNv2si3PX"
+    ],
+    "rootParentId": "asset_Y1rv2UzbMYsc7hY5D7krVF9G",
+    "modelId": "model_google-gemini-nano-banana-2-1",
+    "kind": "image",
+    "aspectRatio": "3:2",
+    "modelType": "custom",
+    "numOutputs": 1,
+    "resolution": "2K",
+    "parentId": "asset_j5wC1LrjrchvvM2NNv2si3PX",
+    "useGoogleSearch": false,
+    "parentJobId": "job_6xAxowD5qZRcjNUFMXPGGYM9",
+    "baseModelId": "custom",
+    "prompt": "asset_Tz9hM5jymWVX1tRCm1xtBvso",
+    "thinkingLevel": "HIGH",
+    "size": 6170719,
+    "width": 2528,
+    "height": 1696
+  },
+  "design_approval": "pending",
+  "output": "character_old_maud.png"
+}

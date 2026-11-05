@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ch1_maud_open_3.main",
+    "line": "ch1_maud_open_3",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.7c0d6f39",
+    "file": "ch1_maud_open_3.927ec861.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_maud_who_1.main",
+    "line": "ch1_maud_who_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.8b16311a",
+    "file": "ch1_maud_who_1.3c9450a6.ogg",
+    "done": false
+  }
+]

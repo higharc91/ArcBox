@@ -1,0 +1,7 @@
+{
+  "dry_run": true,
+  "model_id": "model_google-gemini-3-8-flash-tts",
+  "job": {},
+  "creativeUnitsCost": 5,
+  "creativeUnitsDiscount": 0
+}

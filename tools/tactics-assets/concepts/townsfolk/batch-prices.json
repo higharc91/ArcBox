@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-03",
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "request_file": "batch-requests.json",
+  "dry_run": true,
+  "credits_spent_by_pricing": 0,
+  "quotedCU": 234,
+  "prior_anchor_spendCU": 12,
+  "spend_approval": "approved",
+  "quotes": [
+    {
+      "id": "character_mother_skarrow",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_mother_aubrine",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_tobin_fell",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_lark",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_corvin_ashby",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_pip_ashdown",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_halden_varrow",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_dagna_holt",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_celandine_marrowby",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_old_maud",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "character_rook",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_barmaid",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_child",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_farmer",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_farmhand",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_fisher",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_guard",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    },
+    {
+      "id": "townsfolk_merchant",
+      "creativeUnitsCost": 13,
+      "creativeUnitsDiscount": 0
+    }
+  ]
+}

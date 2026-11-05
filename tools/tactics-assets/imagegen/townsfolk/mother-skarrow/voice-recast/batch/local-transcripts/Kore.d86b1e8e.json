@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.d86b1e8e.wav",
+  "sourceSha256": "b580a9e64085bd8eabead8e5a6abf218e129e721001294bda43a875344613e35",
+  "duration": 11.68,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.0,
+      "text": " The song says the fire had a home on the far side of the mountains."
+    },
+    {
+      "start": 7.0,
+      "end": 9.0,
+      "text": " The seven took it."
+    },
+    {
+      "start": 9.0,
+      "end": 12.0,
+      "text": " It was not theirs to take."
+    }
+  ],
+  "text": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+  "secondsToTranscribe": 2.461
+}

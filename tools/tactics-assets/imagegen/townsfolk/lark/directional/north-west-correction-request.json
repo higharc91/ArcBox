@@ -1,0 +1,8 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/lark/directional/north-west-source.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/lark/directional/guides/north-west.png"
+  ],
+  "transparent_background": true,
+  "prompt": "EDIT reference1's exact 6-column3-row animation sheet, keeping ALL18 poses, same size, camera, spacing, back-three-quarter facing SCREEN LEFT, body/cloak/hair/instrument/face and leg/hand animations. Correct ONE equipment error in EVERY pose: the VISIBLE NEAR HIP is anatomical LEFT. It must have the brown SONG-PAPER SATCHEL with several cream FLAT RECTANGULAR SHEETS protruding, as the approved reference2 guide. Current reference1 wrongly puts a hollow cylindrical rolled SCROLL TUBE on this visible hip. REMOVE that round open-topped tube and replace it with the approved PAPER SATCHEL on the SAME LEFT hip, attached to existing belt/strap. Papers must be flat sheet corners sticking out, no cylindrical hole/roll. Anatomical RIGHT-hip scroll tube is on FAR side and should be HIDDEN in this BACK-LEFT facing. Instrument stays EXACTLY strapped on BACK with neck over anatomical RIGHT/far shoulder and pear body lower back, never in hands/chest. Leave everything else intact, no newly invented gear, no mirroring or pose swaps. All18 frames fullbody inside identical equal cells, baseline/body size unchanged. Crisp pixels in same olive/brown palette. TRUE alpha0 background outside silhouettes (remove any semi-transparent background haze), no text, frame or shadow. Preserve direction and motions; ONLY equipment correction."
+}

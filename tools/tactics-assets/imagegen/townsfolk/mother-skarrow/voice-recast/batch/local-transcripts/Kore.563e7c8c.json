@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.563e7c8c.wav",
+  "sourceSha256": "d7b2b1dc7546ddf8631bc981cd1fb8cf20c178e3607bd9a7d83d18f3d5c5288a",
+  "duration": 10.08,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.88,
+      "text": " Then you know a hill-word the valley does not have."
+    },
+    {
+      "start": 4.88,
+      "end": 9.8,
+      "text": " It means a debt that both sides pretend is a gift."
+    }
+  ],
+  "text": "Then you know a hill-word the valley does not have. It means a debt that both sides pretend is a gift.",
+  "secondsToTranscribe": 2.309
+}

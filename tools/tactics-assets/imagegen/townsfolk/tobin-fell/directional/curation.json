@@ -1,0 +1,32 @@
+{
+  "compassOrder": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "sourceGrid": "6 columns x 3 rows: idle/walk/talk",
+  "registration": "One regular column grid fit per direction from all six planted idle-foot centres; one scale/offset shared across all18 poses. No per-frame offsets.",
+  "southWalk": {
+    "source": "south-walk-corrected-source.png",
+    "sourceColumns": [
+      0,
+      5,
+      4,
+      2,
+      1,
+      3
+    ],
+    "reason": "Original row repeated one lead leg; corrected row supplies opposite-leg contacts. Curated contact/settle/passing sequence.",
+    "preservedOtherFrames": 138,
+    "changedFrames": 6,
+    "previousAtlasSha256": "5923fcb685d64ac0e65c5e7e053ce47cfe14c9e0d2eaedfdfb8a057545526eeb"
+  },
+  "northEastAlpha": "Raw RGB contains colourful low-alpha background artifacts. Binary128 import discards these; runtime backgrounds are transparent.",
+  "mirroring": false,
+  "perFrameRecentering": false
+}

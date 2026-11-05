@@ -1,0 +1,10 @@
+{
+  "character": "dagna_holt",
+  "barkId": "bark_dagna_holt_town_1",
+  "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+  "sourcePath": "content/tactics/base/lore/audio/bark_dagna_holt_town_1.7ac0db21.ogg",
+  "sourceSha256": "ac61fe22352fc92df57556db714d8452b214e58226ae43968558e56800082fe2",
+  "reviewFile": "voice-sample.mp3",
+  "reviewSha256": "10f2da3e705788aeb653aabdd8fbe529f1c80bfb6eb4a7d1967332957e43742f",
+  "operation": "Existing recording transcoded to MP3; no new speech generation"
+}

@@ -1,0 +1,377 @@
+{
+  "totalCU": 274,
+  "previousAuditionCU": 5,
+  "newCU": 269,
+  "ttsCU": 150,
+  "transcriptionCU": 124,
+  "creditsPurchased": false,
+  "planUpgraded": false,
+  "jobs": [
+    {
+      "job": "job_1UjBS4RTSFU7RcpiLZe9hKSP",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.3ef00573.json"
+    },
+    {
+      "job": "job_1c5Rz4woWXX5eTA2vkF8U82Z",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.d115ece0.json"
+    },
+    {
+      "job": "job_1m9SqM8pMVpsJv7SdzKKZQh4",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.fe518c25.json"
+    },
+    {
+      "job": "job_23YvdT122jJcJgtQfeUuGZqb",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.7c0d6f39/status.json"
+    },
+    {
+      "job": "job_92pWVKSq27gmTwWwgQy6oYYp",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.234295ba.json"
+    },
+    {
+      "job": "job_BJ8jJwke5Jb4TTuWtf6MqidB",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-replacements/status/Gacrux.6978016c.json"
+    },
+    {
+      "job": "job_C8XZQFb8AcdiLMbPcTd4WChP",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-replacements/status/Gacrux.23e29fc8.json"
+    },
+    {
+      "job": "job_CeGDH6Z7DkqibN43TQpdWpYJ",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-1/status/Gacrux.8b16311a.json"
+    },
+    {
+      "job": "job_Dmk2e6bhUkUZ5YqFcYnZP71R",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.8a7ed9f1.json"
+    },
+    {
+      "job": "job_EwVRxS9HjfPLmpUrfY6CpBSm",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.f73509f9.json"
+    },
+    {
+      "job": "job_FYK4QPB3kK77Q3i1vxpNV6hA",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.9910a786.json"
+    },
+    {
+      "job": "job_GnxPozUaMBBi6dQQsevQu6iG",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-3/status/Gacrux.0d199064.json"
+    },
+    {
+      "job": "job_HXn1dLcAFyR8uNhyNBXbsniz",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-2/status/Gacrux.d5f0b89d.json"
+    },
+    {
+      "job": "job_Jc6Fjr2mq7UGHPgfttnNAYQw",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.893a8eea.json"
+    },
+    {
+      "job": "job_KLxKtuyn6ukPyDXPfQSwdjjb",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.a84958f3.json"
+    },
+    {
+      "job": "job_KSdKHjgs17KA6Ne58nN5gotK",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.c268972a.json"
+    },
+    {
+      "job": "job_LuUMw2hw3pAejGyfhou7KajC",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.71c58477/status.json"
+    },
+    {
+      "job": "job_MX1oJarjktPa5zxE8dmTKvWk",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.b991c53b.json"
+    },
+    {
+      "job": "job_NG6GQujJT7gv94MxVMKfnj8j",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.b194bf38.json"
+    },
+    {
+      "job": "job_NLmkymPpPjdTSR5wH7mQeLtR",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-confirmation/status/Gacrux.584d871b.json"
+    },
+    {
+      "job": "job_P4vAZKLfwaZkHgjVnzAmjPwo",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.b194bf38.json"
+    },
+    {
+      "job": "job_PRGFYkVNmNS6TZgjPV36P6oj",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-replacements/status/Gacrux.0d199064.json"
+    },
+    {
+      "job": "job_PkhJxmbX1nVPPWB7Z9MJijB6",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-1/status/Gacrux.7c0d6f39.json"
+    },
+    {
+      "job": "job_Q3XQqPegvkJrte99idQPSSFR",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.c268972a.json"
+    },
+    {
+      "job": "job_Q8D5DxgrY8nYf5rbmBaFmUek",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.d115ece0.json"
+    },
+    {
+      "job": "job_QB49dUbGfGJjDFhnGEWkcTGk",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-confirmation/status/Gacrux.26ace490.json"
+    },
+    {
+      "job": "job_QSjVHnFTWGWQQbWR6S3LY8RT",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.b12d0052.json"
+    },
+    {
+      "job": "job_Qe2SYpgkecegpo7YrRkf2CuP",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.5de8135f.json"
+    },
+    {
+      "job": "job_RFhaN71h7zxQEztTPrVJPZxp",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.234295ba.json"
+    },
+    {
+      "job": "job_RcHg4vJkinPrnNUNQEgoULao",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.e4c426f1.json"
+    },
+    {
+      "job": "job_RiH57Ec29fbJVzqEBdqACiJ9",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-3/status/Gacrux.23e29fc8.json"
+    },
+    {
+      "job": "job_S6qiTwjb3d9eCGVkTn1sKs2M",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.fe518c25.json"
+    },
+    {
+      "job": "job_VsRKtPs9oHePfwkcSS1MYwh1",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.8b16311a/status.json"
+    },
+    {
+      "job": "job_YN6K4TxX9RC8ZKSAAyBeYjUP",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.3ef00573.json"
+    },
+    {
+      "job": "job_Z18d68Ea3uGYXc7PFE5bVydt",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.893a8eea.json"
+    },
+    {
+      "job": "job_aPFJzeo8vwMgMoYwRgRZPAMj",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.7c0d6f39.json"
+    },
+    {
+      "job": "job_bSkvBYk7rRBKU3zB4ZsYxJqj",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.26ace490.json"
+    },
+    {
+      "job": "job_cRt4hww9VuN1gUDxbd9ShNEV",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.e0cb33fa.json"
+    },
+    {
+      "job": "job_czCwMkMQNLL2w6KcwaoFcMNJ",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.f73509f9.json"
+    },
+    {
+      "job": "job_d8UYn9t3SzuLUJEPiSVGcXUe",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.12eb5718.json"
+    },
+    {
+      "job": "job_eHL9vo5H8eSW9XdgA94nYerw",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.a84958f3.json"
+    },
+    {
+      "job": "job_eQn5tavwc7L73BypZoMv8jfi",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.e0cb33fa.json"
+    },
+    {
+      "job": "job_gELoH9Zox1Tq3kSWPhrWJXd2",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.1301f872.json"
+    },
+    {
+      "job": "job_h2SCC7AmmwRGYh2UDc4xHW1F",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.1301f872.json"
+    },
+    {
+      "job": "job_hMUo1JRDKzaWHpQ2gpMJ7XiL",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.12eb5718.json"
+    },
+    {
+      "job": "job_hrJPAVUNz1C47HaDcdMxx82G",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/job-receipt.json"
+    },
+    {
+      "job": "job_ja7ZzEav6bHFdeoWuENuNkWh",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.e4c426f1.json"
+    },
+    {
+      "job": "job_obm7j6hX86p7niHimQeJUZHo",
+      "creativeUnits": 2,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/repairs/round-3/status/Gacrux.6978016c.json"
+    },
+    {
+      "job": "job_pWFFjm2xSgQc7dqCjBFnaZTY",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.8a7ed9f1.json"
+    },
+    {
+      "job": "job_qamtRPYLAjRjsUN5XxNzaMN7",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.5de8135f.json"
+    },
+    {
+      "job": "job_qmroC9U2zsh3GQjeG2sHeftT",
+      "creativeUnits": 6,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.b12d0052.json"
+    },
+    {
+      "job": "job_t3poaWUX9PLtzfwAq6hP7uRe",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/diagnostics/diagnosis-job.json"
+    },
+    {
+      "job": "job_tTCWq9NJ6Z29CFdsFE4h7gLu",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.efbfe52d.json"
+    },
+    {
+      "job": "job_uCF4s84PYcsz8R3ntufyn6MD",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.9910a786.json"
+    },
+    {
+      "job": "job_uZ3jwigsboNMmYHTxWdESYVb",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.71c58477.json"
+    },
+    {
+      "job": "job_wPNrLKWHpmStENaMSg8wJd5T",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts-confirmation/status/Gacrux.71c58477.json"
+    },
+    {
+      "job": "job_wb9ofCp9A5Z2Hqz4qV37ZVDN",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.d5f0b89d.json"
+    },
+    {
+      "job": "job_wmBnzHVbS7ozjbzUXeyPztnL",
+      "creativeUnits": 4,
+      "model": "model_scenario-audio-to-text",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/transcripts/status/Gacrux.584d871b.json"
+    },
+    {
+      "job": "job_y9CamWQDQmtNkfnZz9gVWgay",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.584d871b/status.json"
+    },
+    {
+      "job": "job_yvopyYVKAcuijyh57DPpAXJX",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/status/Gacrux.b991c53b.json"
+    },
+    {
+      "job": "job_zgB9WU5vA6cQgBu1QeVF1kBG",
+      "creativeUnits": 5,
+      "model": "model_google-gemini-3-8-flash-tts",
+      "receipt": "tools/tactics-assets/imagegen/townsfolk/old-maud/voice-recast/batch/superseded/Gacrux.26ace490/status.json"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "character": "celandine_marrowby",
+  "barkId": "bark_celandine_marrowby_town_1",
+  "text": "Of course you may. Everything has a price. Shall we discuss yours?",
+  "sourcePath": "content/tactics/base/lore/audio/bark_celandine_marrowby_town_1.0c429f1c.ogg",
+  "sourceSha256": "eb4ac549e3238a7a260f72cc2406369cd386a6469151c39f8f2e8c96f055446e",
+  "reviewFile": "voice-sample.mp3",
+  "reviewSha256": "44c51f6436d8ec2d1b6859ca67f16417900fd9c41544687d9ef233ad09d331d9",
+  "operation": "Existing approved recording transcoded for browser playback; no new speech generation."
+}

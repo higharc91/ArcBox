@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "tests": {
+    "WorldPeopleTests": 31,
+    "CreatureAtlasTests": 5,
+    "UnitArtTests": 54,
+    "HudArtTests": 21
+  },
+  "totalTests": 111,
+  "builds": {
+    "Debug": "0 warnings/errors",
+    "Release": "0 warnings/errors"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "rulesBalancePhoneContractsChanged": false
+}

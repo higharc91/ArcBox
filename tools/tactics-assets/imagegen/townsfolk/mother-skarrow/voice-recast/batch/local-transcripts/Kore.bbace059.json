@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.bbace059.wav",
+  "sourceSha256": "01b7cf19b1d925976f11e87c69883b72500be0b1086a39c0f8e1c231f2992800",
+  "duration": 10.4,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "text": " Seven went over the gray wall in the long winters,"
+    },
+    {
+      "start": 5.0,
+      "end": 8.0,
+      "text": " and seven came back with fire."
+    },
+    {
+      "start": 8.0,
+      "end": 10.0,
+      "text": " They came back running."
+    }
+  ],
+  "text": "Seven went over the gray wall in the long winters, and seven came back with fire. They came back running.",
+  "secondsToTranscribe": 2.27
+}

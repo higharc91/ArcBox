@@ -1,0 +1,70 @@
+[tv-e2e 04:30:22] starting the server on http://127.0.0.1:45399
+[tv-e2e 04:30:27] starting the TV (640x360, preset low)
+[tv-e2e 04:30:29] TV opened room HTFM
+[tv-e2e 04:30:29] phones: 4 bots walk: route:af_market_herbalist,route:af_inn,route:af_market_herbalist,stop:2,pause:restart,route:af_inn,stop:2,pause:tv,route:af_market_herbalist,stop:2, then 20 timed presses, then the leader's phone is cut
+04:30:30 Ana joined HTFM
+04:30:30 Bo joined HTFM
+04:30:30 Cy joined HTFM
+04:30:30 Dee joined HTFM
+04:30:31 Game on
+04:30:32 Ana picks fighter
+04:30:33 Bo picks cleric
+04:30:34 Cy picks rogue
+04:30:35 Dee picks wizard
+04:30:35 Dee leads
+04:30:55 CHAPTER Dee walks 5 steps from 26,58 to shop:af_market_herbalist
+04:30:57 WALK route arrived at shop:af_market_herbalist
+04:31:03 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+04:31:05 WALK route arrived at shop:af_inn
+04:31:11 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+04:31:13 WALK route arrived at shop:af_market_herbalist
+04:31:13 WALK stop for 2 s
+04:31:15 PAUSE restart
+[tv-e2e 04:31:15] restart: the party stopped on 27 63; stopping the server (TV log line 132)
+04:31:15 Bo: walk failed: Invocation canceled due to the underlying connection being closed.
+04:31:15 Ana: walk failed: Invocation canceled due to the underlying connection being closed.
+04:31:16 Cy: walk failed: Invocation canceled due to the underlying connection being closed.
+[tv-e2e 04:31:21] server stopped
+[tv-e2e 04:31:28] restart: the server is back; waiting for the TV to put the party somewhere
+04:31:30 Bo rejoined HTFM
+04:31:30 Ana rejoined HTFM
+04:31:30 Cy rejoined HTFM
+04:31:30 Dee rejoined HTFM
+04:31:38 GO restart: Dee leads
+04:31:44 CHAPTER Dee walks 7 steps from 27,63 to shop:af_inn
+04:31:46 WALK route arrived at shop:af_inn
+04:31:46 WALK stop for 2 s
+04:31:48 PAUSE tv
+[tv-e2e 04:31:48] reconnect: the party stopped on 24 56; killing the TV (log line 167)
+tools/tv-e2e.sh: line 346: 131770 Killed                  DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver "${TV_RENDERING_DRIVER:-vulkan}" -- "${shots[@]}" --preset="$PRESET" --res="$RES" --server="$URL" --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1
+04:32:14 GO tv: Dee leads
+04:32:19 CHAPTER Dee walks 7 steps from 24,56 to shop:af_market_herbalist
+04:32:21 WALK route arrived at shop:af_market_herbalist
+04:32:21 WALK stop for 2 s
+04:32:43 LATENCY 20 of 20 presses, ms: median 81 p90 145 worst 165
+04:32:44 DROP kill at 1793766764161
+04:32:44 Dee: walk failed: WebSocket closed with status code: 1006 (no reason given).
+04:32:44 DROP party stopped after 684 ms
+04:32:51 DROP lead passed after 7781 ms
+04:32:59 DROP disconnect after 15293 ms
+04:32:59 DROP last step 466 ms after the cut
+04:32:59 DROP the TV drew the party stopped 680 ms after the cut, by its clock
+04:32:59 WALK done
+[tv-e2e 04:32:59] letting the TV finish its shots (12 s)
+[tv-e2e 04:33:12] TV stopped
+[tv-e2e 04:33:12] Xvfb stopped
+[tv-e2e 04:33:13] server stopped
+[tv-e2e 04:33:13] the TV was told of 19 steps before the restart, 58 in all
+[tv-e2e 04:33:13] the TV drew the leader 5 tiles from where it started, before the restart
+[tv-e2e 04:33:13] restart: the TV is back in room HTFM
+[tv-e2e 04:33:13] restart: saved on 27 63; the TV put the party on 27.5 63.5
+[tv-e2e 04:33:13] restart: the first step after it went to 26 62
+[tv-e2e 04:33:13] reconnect: the new TV is in room HTFM
+[tv-e2e 04:33:13] reconnect: the party stood on 24 56; the new TV snapped to 24.5 56.5
+[tv-e2e 04:33:13] drop: the last step reached the TV 466 ms after the cut; the TV heard the party had stopped 680 ms after it
+[tv-e2e 04:33:13] drop: DROP party stopped after 684 ms
+[tv-e2e 04:33:13] drop: DROP lead passed after 7781 ms
+[tv-e2e 04:33:13] drop: DROP disconnect after 15293 ms
+[tv-e2e 04:33:13] latency: LATENCY 20 of 20 presses, ms: median 81 p90 145 worst 165
+[tv-e2e 04:33:13] the TV's frames while walking: median of the walks' median frame times 130.14 ms
+[tv-e2e 04:33:13] OK

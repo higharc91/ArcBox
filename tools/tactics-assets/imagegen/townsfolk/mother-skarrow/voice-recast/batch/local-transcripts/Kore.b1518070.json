@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.b1518070.wav",
+  "sourceSha256": "0f2db516e29b97e7f9a77897917c786c0b7190472188e6e55e5f5f3474bf6dc3",
+  "duration": 4.84,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.64,
+      "text": " Old, yes. Soft, no."
+    }
+  ],
+  "text": "Old, yes. Soft, no.",
+  "secondsToTranscribe": 1.54
+}

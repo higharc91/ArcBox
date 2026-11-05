@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ch3_skarrow_messenger_song_1.main",
+    "line": "ch3_skarrow_messenger_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "renderText": "You fed my children, valley people. <short pause> So I give you what I do not give to strangers. <short pause> Not all of it. <short pause> The last verse stays with the clan.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e7786839",
+    "file": "ch3_skarrow_messenger_song_1.fb5a0a21.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_4.main",
+    "line": "ch3_skarrow_messenger_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "renderText": "Your Wardens sang that it was given. <short pause> We never warmed our hands at it, so we never forgot. <short pause> It was stolen.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.36110c89",
+    "file": "ch3_skarrow_messenger_song_4.6f5979c9.ogg",
+    "done": false
+  }
+]

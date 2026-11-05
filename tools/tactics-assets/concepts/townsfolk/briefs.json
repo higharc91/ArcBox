@@ -1,0 +1,403 @@
+{
+  "issue": 80,
+  "based_on": "2e64b9df",
+  "stage": "concepts",
+  "anchor": "character_bree_tallow",
+  "named": [
+    {
+      "id": "character_mother_skarrow",
+      "kind": "character_sheet",
+      "title": "Mother Skarrow",
+      "batch": 1,
+      "lore": [
+        "characters.json:mother_skarrow",
+        "factions.json:skarrow_clan"
+      ],
+      "preset_reference": "goblin_shaman",
+      "canon": {
+        "summary": "The goblin chief who holds the bridge at the ford, because her clan is starving.",
+        "bio": "Mother Skarrow has led her clan for forty winters and is the oldest goblin in the hills. She took the bridge because Emberwick locked its granaries, and she will give it back for food, not coin. Her clan never used ember-fire, so its songs remember the Vale before the Hearthflame and the seven who crossed the Greywall. Whether the party talks to her or kills her is the first choice of the campaign, and it is remembered.",
+        "wants": "To feed her clan through the winter.",
+        "flaw": "Has buried too many grandchildren to trust anyone from the valley."
+      },
+      "design_proposal": "An elderly female goblin, the clan chief who has led for forty winters. Green-toned goblin anatomy, aged face, long greying hair, layered repaired hide and wool, useful staff, modest food pouch. Dignified, suspicious and capable of dry humour. No skull throne, torture trophies or rich crimson military costume: her clan is starving and bargains for food.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Mother Skarrow. Canon: The goblin chief who holds the bridge at the ford, because her clan is starving. Mother Skarrow has led her clan for forty winters and is the oldest goblin in the hills. She took the bridge because Emberwick locked its granaries, and she will give it back for food, not coin. Her clan never used ember-fire, so its songs remember the Vale before the Hearthflame and the seven who crossed the Greywall. Whether the party talks to her or kills her is the first choice of the campaign, and it is remembered. Visual direction: An elderly female goblin, the clan chief who has led for forty winters. Green-toned goblin anatomy, aged face, long greying hair, layered repaired hide and wool, useful staff, modest food pouch. Dignified, suspicious and capable of dry humour. No skull throne, torture trophies or rich crimson military costume: her clan is starving and bargains for food. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_bree_tallow",
+      "kind": "character_sheet",
+      "title": "Bree Tallow",
+      "batch": 1,
+      "lore": [
+        "characters.json:bree_tallow",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "innkeeper",
+      "canon": {
+        "summary": "The innkeeper who hears everything and feeds anyone who sits at her hearth.",
+        "bio": "Bree runs the Last Coal, Emberwick's inn, and has done since her husband, Ned, drowned at the ford eleven years ago. The inn's hearth burns on an ember shard her grandmother bought from a Warden. She feeds the party between chapters, passes on rumours, and is the closest thing the town has to a conscience.",
+        "wants": "For the people at her tables to be fed, warm and honest with each other.",
+        "flaw": "She protects people from the truth when she thinks they cannot bear it."
+      },
+      "design_proposal": "A capable, kind working innkeeper, worn apron over substantial practical clothing, sturdy sleeves, small personal notebook kept close; warmth comes from her expression and ordinary work. No regal gown or exaggerated fantasy tavern costume.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Bree Tallow. Canon: The innkeeper who hears everything and feeds anyone who sits at her hearth. Bree runs the Last Coal, Emberwick's inn, and has done since her husband, Ned, drowned at the ford eleven years ago. The inn's hearth burns on an ember shard her grandmother bought from a Warden. She feeds the party between chapters, passes on rumours, and is the closest thing the town has to a conscience. Visual direction: A capable, kind working innkeeper, worn apron over substantial practical clothing, sturdy sleeves, small personal notebook kept close; warmth comes from her expression and ordinary work. No regal gown or exaggerated fantasy tavern costume. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_mother_aubrine",
+      "kind": "character_sheet",
+      "title": "Mother Aubrine",
+      "batch": 2,
+      "lore": [
+        "characters.json:mother_aubrine",
+        "factions.json:church_of_the_hearth"
+      ],
+      "preset_reference": "priest",
+      "canon": {
+        "summary": "Emberwick's priest: sincere, generous, and about to have her faith tested.",
+        "bio": "Mother Aubrine has run Emberwick's chapel for thirty years, feeding the poor and burying the dead. She believes the Hearthflame was a gift and its loss a test the Vale can pass. She is not a hypocrite; she has never been shown the church's oldest scriptures. When the party brings her the truth, she has to decide whether her faith was in the flame or in the people around it.",
+        "wants": "To keep her flock together and believing through the cold.",
+        "flaw": "She mistakes certainty for courage."
+      },
+      "design_proposal": "An older woman, sincere and generous, in modest Hearth clergy vestments. Hearth/flame symbolism, practical wool layers, a small warm metal token; no generic demonic imagery. Her legacy priest preset is not authority for her gender.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Mother Aubrine. Canon: Emberwick's priest: sincere, generous, and about to have her faith tested. Mother Aubrine has run Emberwick's chapel for thirty years, feeding the poor and burying the dead. She believes the Hearthflame was a gift and its loss a test the Vale can pass. She is not a hypocrite; she has never been shown the church's oldest scriptures. When the party brings her the truth, she has to decide whether her faith was in the flame or in the people around it. Visual direction: An older woman, sincere and generous, in modest Hearth clergy vestments. Hearth/flame symbolism, practical wool layers, a small warm metal token; no generic demonic imagery. Her legacy priest preset is not authority for her gender. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_tobin_fell",
+      "kind": "character_sheet",
+      "title": "Tobin Fell",
+      "batch": 2,
+      "lore": [
+        "characters.json:tobin_fell",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "blacksmith",
+      "canon": {
+        "summary": "The town smith, whose ember-forge is going cold.",
+        "bio": "Tobin's forge has run on an ember shard for four generations, and it is fading. He makes and mends the party's gear between chapters. He is gruff, practical and frightened of what he'll be without his fire, more than he will ever say.",
+        "wants": "To keep his forge lit.",
+        "flaw": "Would buy a shard from anyone, no questions asked."
+      },
+      "design_proposal": "A working smith with sturdy practical proportions, leather apron, repaired gloves, hammer and tools; worn clothing and cooling forge soot. Do not make the body or tools magically luminous.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Tobin Fell. Canon: The town smith, whose ember-forge is going cold. Tobin's forge has run on an ember shard for four generations, and it is fading. He makes and mends the party's gear between chapters. He is gruff, practical and frightened of what he'll be without his fire, more than he will ever say. Visual direction: A working smith with sturdy practical proportions, leather apron, repaired gloves, hammer and tools; worn clothing and cooling forge soot. Do not make the body or tools magically luminous. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_lark",
+      "kind": "character_sheet",
+      "title": "Lark",
+      "batch": 2,
+      "lore": [
+        "characters.json:lark"
+      ],
+      "preset_reference": "minstrel",
+      "canon": {
+        "summary": "A travelling minstrel who keeps the Wardens' songs, the only history the fire couldn't burn.",
+        "bio": "Lark travels the Vale singing the old Warden songs, which have survived because nobody needs ember-fire to remember a tune. The songs hold the Vale's real history, half-hidden in verses nobody listens to. Lark turns up wherever the party is going next, which is no coincidence: Lark is following the Hooded Stranger. In Lark's Warden version of the Song of the Seven, the seven 'came home'; the Skarrow clan sings that they 'came back running'. Same seven, seen from different doorsteps.",
+        "wants": "To find the last verse of the Song of the Seven, which no one has sung in two centuries.",
+        "flaw": "Treats everything as a story, including other people's pain."
+      },
+      "design_proposal": "An androgynous travelling songkeeper, worn musical instrument, practical layered travelling clothes and song papers; warmth and curiosity. Preserve ambiguity; no jester caricature or luxurious court-performer wardrobe.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Lark. Canon: A travelling minstrel who keeps the Wardens' songs, the only history the fire couldn't burn. Lark travels the Vale singing the old Warden songs, which have survived because nobody needs ember-fire to remember a tune. The songs hold the Vale's real history, half-hidden in verses nobody listens to. Lark turns up wherever the party is going next, which is no coincidence: Lark is following the Hooded Stranger. In Lark's Warden version of the Song of the Seven, the seven 'came home'; the Skarrow clan sings that they 'came back running'. Same seven, seen from different doorsteps. Visual direction: An androgynous travelling songkeeper, worn musical instrument, practical layered travelling clothes and song papers; warmth and curiosity. Preserve ambiguity; no jester caricature or luxurious court-performer wardrobe. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_corvin_ashby",
+      "kind": "character_sheet",
+      "title": "Corvin Ashby",
+      "batch": 2,
+      "lore": [
+        "characters.json:corvin_ashby",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "sage",
+      "canon": {
+        "summary": "The town's scholar, who has noticed that whole years are missing from the records.",
+        "bio": "Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He reads ember-lamps by night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.",
+        "wants": "The whole history of the Vale, written down where nothing can burn it.",
+        "flaw": "He will trade anyone's safety, including his own, for one more answer."
+      },
+      "design_proposal": "An anxious working archivist, layered scholar clothing, ink-stained fingers, patched satchel and heavily used notebooks; alert humane face. Do not depict him as an omnipotent wizard or cover him in magic effects.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Corvin Ashby. Canon: The town's scholar, who has noticed that whole years are missing from the records. Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He reads ember-lamps by night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past. Visual direction: An anxious working archivist, layered scholar clothing, ink-stained fingers, patched satchel and heavily used notebooks; alert humane face. Do not depict him as an omnipotent wizard or cover him in magic effects. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_pip_ashdown",
+      "kind": "character_sheet",
+      "title": "Pip Ashdown",
+      "batch": 2,
+      "lore": [
+        "characters.json:pip_ashdown",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "child",
+      "canon": {
+        "summary": "An orphan born on the warm ground who remembers things nobody ever taught her.",
+        "bio": "Pip is nine, a human orphan who lives in Bree's back room and runs errands for coin. She was born on the burned bank of the ford, close to the ember, and she is ember-touched: she knows old songs, a dead man's way home, the layout of a keep she has never seen. She attaches herself to the party early, and follows it all the way to Ember Keep. She is the first proof that the fire keeps what it takes.",
+        "wants": "To know whose memories she has.",
+        "flaw": "Lies easily and well, to protect herself."
+      },
+      "design_proposal": "A nine-year-old human girl, ordinary patched autumn clothes, sensible boots and a small errand satchel; quick observant expression, child proportions. No adult styling, glowing superhero costume or visual revelation of whose memories she carries.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Pip Ashdown. Canon: An orphan born on the warm ground who remembers things nobody ever taught her. Pip is nine, a human orphan who lives in Bree's back room and runs errands for coin. She was born on the burned bank of the ford, close to the ember, and she is ember-touched: she knows old songs, a dead man's way home, the layout of a keep she has never seen. She attaches herself to the party early, and follows it all the way to Ember Keep. She is the first proof that the fire keeps what it takes. Visual direction: A nine-year-old human girl, ordinary patched autumn clothes, sensible boots and a small errand satchel; quick observant expression, child proportions. No adult styling, glowing superhero costume or visual revelation of whose memories she carries. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_halden_varrow",
+      "kind": "character_sheet",
+      "title": "Halden Varrow",
+      "batch": 1,
+      "lore": [
+        "characters.json:halden_varrow",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "mayor",
+      "canon": {
+        "summary": "Emberwick's tired, decent mayor, who has to decide who goes hungry this winter.",
+        "bio": "Halden inherited the mayoralty from his mother and has spent twenty years keeping Emberwick together with compromise, charm and borrowed grain. He is a good man who has made one terrible decision: years ago he learned the ember under the ford was fading and chose to say nothing, so that people would not leave. Now the goblins hold the bridge and he cannot hide it much longer.",
+        "wants": "To get Emberwick through the winter without anyone learning what he knew.",
+        "flaw": "He will always pick the lie that keeps the peace."
+      },
+      "design_proposal": "A tired, decent middle-aged town mayor; practical layered wool and a modest civic token, weathered hands, restrained warm russet and dull brass. No royal crown or luxurious throne. Appearance details not specified by the lore are design proposals.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Halden Varrow. Canon: Emberwick's tired, decent mayor, who has to decide who goes hungry this winter. Halden inherited the mayoralty from his mother and has spent twenty years keeping Emberwick together with compromise, charm and borrowed grain. He is a good man who has made one terrible decision: years ago he learned the ember under the ford was fading and chose to say nothing, so that people would not leave. Now the goblins hold the bridge and he cannot hide it much longer. Visual direction: A tired, decent middle-aged town mayor; practical layered wool and a modest civic token, weathered hands, restrained warm russet and dull brass. No royal crown or luxurious throne. Appearance details not specified by the lore are design proposals. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_dagna_holt",
+      "kind": "character_sheet",
+      "title": "Dagna Holt",
+      "batch": 2,
+      "lore": [
+        "characters.json:dagna_holt",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "guard_captain",
+      "canon": {
+        "summary": "The captain of Emberwick's eight guards, who lost the bridge and wants it back.",
+        "bio": "Dagna has commanded Emberwick's guard for twelve years, most of them spent breaking up tavern fights. When the Skarrow clan took the bridge she lost two guards and her nerve, and has not forgiven herself for either. She wants the bridge back by force, and she will be furious if the party makes peace instead, until she isn't.",
+        "wants": "To make Emberwick safe, and to stop feeling like she failed it.",
+        "flaw": "She wants someone to blame, and goblins are easiest."
+      },
+      "design_proposal": "A practical woman guard captain with worn service armour, cloak and carefully maintained functional weapon. A small town has eight guards, not a royal legion. Tension and professional restraint, not heroic posing or ornamental oversized armour.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Dagna Holt. Canon: The captain of Emberwick's eight guards, who lost the bridge and wants it back. Dagna has commanded Emberwick's guard for twelve years, most of them spent breaking up tavern fights. When the Skarrow clan took the bridge she lost two guards and her nerve, and has not forgiven herself for either. She wants the bridge back by force, and she will be furious if the party makes peace instead, until she isn't. Visual direction: A practical woman guard captain with worn service armour, cloak and carefully maintained functional weapon. A small town has eight guards, not a royal legion. Tension and professional restraint, not heroic posing or ornamental oversized armour. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_celandine_marrowby",
+      "kind": "character_sheet",
+      "title": "Lady Celandine Marrowby",
+      "batch": 2,
+      "lore": [
+        "characters.json:celandine_marrowby",
+        "factions.json:emberwick"
+      ],
+      "preset_reference": "noble",
+      "canon": {
+        "summary": "The richest woman in Emberwick, an elf whose family has been rich since the night the Keep fell.",
+        "bio": "Celandine owns the granaries, the mill and half of Emberwick's debts. She is charming, generous in public, and entirely willing to let the goblins and the poor starve so long as the town owes her for the winter. The Marrowby fortune began on the night of the Fall, more than a century ago. Celandine is old enough to remember that night, and she does not. She has lit her halls with ember-lamps for a hundred years.",
+        "wants": "To own Emberwick outright by spring.",
+        "flaw": "Cannot imagine a problem money will not solve."
+      },
+      "design_proposal": "An elven grain-landowner, controlled elegant silhouette and prosperous but practical wool/silk layers, muted refined colours and a grain-ledger or keys. Her public appearance is generous and cultivated; do not reveal her forgotten Warden identity on the public-facing sheet.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Lady Celandine Marrowby. Canon: The richest woman in Emberwick, an elf whose family has been rich since the night the Keep fell. Celandine owns the granaries, the mill and half of Emberwick's debts. She is charming, generous in public, and entirely willing to let the goblins and the poor starve so long as the town owes her for the winter. The Marrowby fortune began on the night of the Fall, more than a century ago. Celandine is old enough to remember that night, and she does not. She has lit her halls with ember-lamps for a hundred years. Visual direction: An elven grain-landowner, controlled elegant silhouette and prosperous but practical wool/silk layers, muted refined colours and a grain-ledger or keys. Her public appearance is generous and cultivated; do not reveal her forgotten Warden identity on the public-facing sheet. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_old_maud",
+      "kind": "character_sheet",
+      "title": "Old Maud",
+      "batch": 1,
+      "lore": [
+        "characters.json:old_maud"
+      ],
+      "preset_reference": "hermit",
+      "canon": {
+        "summary": "A hermit on the burned bank who was there the night the ember fell, a hundred years ago.",
+        "bio": "Maud was a child of seven on the night of the Fall and watched the ember drop into the river. She is now more than a hundred years old and has never used ember-fire, and so she remembers that night better than anyone alive. The town thinks she is mad. She has been waiting for someone to ask her the right question.",
+        "wants": "For someone to listen, before she dies.",
+        "flaw": "Speaks in riddles out of a century of habit."
+      },
+      "design_proposal": "An extremely elderly woman who was seven at the Fall a century ago; frail but lucid and self-possessed, many repaired layers, simple walking staff and personal charm strings. She has never used ember-fire: no flaming staff, magical youth or glowing ember jewellery. Human-looking appearance is a design proposal rather than a new lore fact.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Old Maud. Canon: A hermit on the burned bank who was there the night the ember fell, a hundred years ago. Maud was a child of seven on the night of the Fall and watched the ember drop into the river. She is now more than a hundred years old and has never used ember-fire, and so she remembers that night better than anyone alive. The town thinks she is mad. She has been waiting for someone to ask her the right question. Visual direction: An extremely elderly woman who was seven at the Fall a century ago; frail but lucid and self-possessed, many repaired layers, simple walking staff and personal charm strings. She has never used ember-fire: no flaming staff, magical youth or glowing ember jewellery. Human-looking appearance is a design proposal rather than a new lore fact. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    },
+    {
+      "id": "character_rook",
+      "kind": "character_sheet",
+      "title": "Rook",
+      "batch": 2,
+      "lore": [
+        "characters.json:rook",
+        "factions.json:the_ash_market"
+      ],
+      "preset_reference": "bandit_captain",
+      "canon": {
+        "summary": "The smuggler who runs the trade in ember shards, and who sells to everyone.",
+        "bio": "Rook runs the Ash Market from Emberwick's docks with a crew of river smugglers. Practical and unsentimental, Rook will sell the party information, shards and favours, and the Kindled exactly the same. Rook knows the market is selling more shards than exist in the Vale, and is starting to be afraid of whoever is supplying them.",
+        "wants": "To be on the winning side when the embers run out.",
+        "flaw": "Loyal only to the deal."
+      },
+      "design_proposal": "A river smuggler and market broker with practical waterproof outerwear, discreet pouches and a river-trade ledger or knotted tally cord. Avoid cartoon pirate accessories; do not assign a definite gender or new species as canon.",
+      "composition": "Single coherent character sheet on a neutral muted background: matching front, three-quarter and back full-body views at identical scale and ground line, plus a head and one equipment/material close-up.",
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Rook. Canon: The smuggler who runs the trade in ember shards, and who sells to everyone. Rook runs the Ash Market from Emberwick's docks with a crew of river smugglers. Practical and unsentimental, Rook will sell the party information, shards and favours, and the Kindled exactly the same. Rook knows the market is selling more shards than exist in the Vale, and is starting to be afraid of whoever is supplying them. Visual direction: A river smuggler and market broker with practical waterproof outerwear, discreet pouches and a river-trade ledger or knotted tally cord. Avoid cartoon pirate accessories; do not assign a definite gender or new species as canon. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim.",
+      "placed_count": 1,
+      "approval": "approved"
+    }
+  ],
+  "townsfolk": [
+    {
+      "id": "townsfolk_barmaid",
+      "preset_reference": "barmaid",
+      "placed_count": 2,
+      "design_proposal": "An adult member of Bree’s inn staff, practical rolled sleeves, a clean but repeatedly mended apron, towel at the belt and sturdy shoes; capable and busy, without a sexualized tavern costume.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct barmaid townsfolk for Emberwick at the Ashen Ford. An adult member of Bree’s inn staff, practical rolled sleeves, a clean but repeatedly mended apron, towel at the belt and sturdy shoes; capable and busy, without a sexualized tavern costume. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_child",
+      "preset_reference": "child",
+      "placed_count": 2,
+      "design_proposal": "An ordinary Emberwick child, short child proportions, patched wool tunic, practical trousers and soft boots; curious and wary. Distinct from named Pip, without weapons or adult anatomy.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct child townsfolk for Emberwick at the Ashen Ford. An ordinary Emberwick child, short child proportions, patched wool tunic, practical trousers and soft boots; curious and wary. Distinct from named Pip, without weapons or adult anatomy. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_farmer",
+      "preset_reference": "farmer",
+      "placed_count": 5,
+      "design_proposal": "An adult working the warm fields as winter approaches, substantial patched wool, practical trousers, weathered boots, a work belt and a modest cap. Worried, experienced and plain-spoken.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct farmer townsfolk for Emberwick at the Ashen Ford. An adult working the warm fields as winter approaches, substantial patched wool, practical trousers, weathered boots, a work belt and a modest cap. Worried, experienced and plain-spoken. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_farmhand",
+      "preset_reference": "farmhand",
+      "placed_count": 3,
+      "design_proposal": "A young adult agricultural worker, rolled sleeves over substantial work clothes, simple kerchief and scuffed boots; tired and underpaid, carrying no giant tool that could obscure neighbouring sprites.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct farmhand townsfolk for Emberwick at the Ashen Ford. A young adult agricultural worker, rolled sleeves over substantial work clothes, simple kerchief and scuffed boots; tired and underpaid, carrying no giant tool that could obscure neighbouring sprites. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_fisher",
+      "preset_reference": "fisher",
+      "placed_count": 4,
+      "design_proposal": "An adult river worker beside the steaming ford, mended short waterproof coat, rolled trousers, river boots, simple rope belt and small tackle pouch. Practical, superstitious and worn by the weather.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct fisher townsfolk for Emberwick at the Ashen Ford. An adult river worker beside the steaming ford, mended short waterproof coat, rolled trousers, river boots, simple rope belt and small tackle pouch. Practical, superstitious and worn by the weather. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_guard",
+      "preset_reference": "guard",
+      "placed_count": 6,
+      "design_proposal": "An ordinary member of Dagna’s town guard, modest worn mail beneath a practical dull-red wool tabard, simple open-faced helmet, leather belt and boots. Loyal but nervous; consistent uniform across variants, without a royal crown or ornate plate.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct guard townsfolk for Emberwick at the Ashen Ford. An ordinary member of Dagna’s town guard, modest worn mail beneath a practical dull-red wool tabard, simple open-faced helmet, leather belt and boots. Loyal but nervous; consistent uniform across variants, without a royal crown or ornate plate. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    },
+    {
+      "id": "townsfolk_merchant",
+      "preset_reference": "merchant",
+      "placed_count": 6,
+      "design_proposal": "An adult market stallholder, modest layered wool and linen, practical apron or short overcoat, a small coin pouch and sturdy boots. Stock is scarce; no luxurious aristocratic finery or overflowing wealth.",
+      "approval": "approved",
+      "variants": [
+        {
+          "id": "a",
+          "proposal": "Warm brown skin, dark tightly curled hair, muted ochre and indigo clothing accents."
+        },
+        {
+          "id": "b",
+          "proposal": "Light freckled skin, auburn hair, muted moss and russet clothing accents."
+        }
+      ],
+      "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Design two distinct merchant townsfolk for Emberwick at the Ashen Ford. An adult market stallholder, modest layered wool and linen, practical apron or short overcoat, a small coin pouch and sturdy boots. Stock is scarce; no luxurious aristocratic finery or overflowing wealth. The people live in a poor autumn market town whose warm ground is cooling. Variant A has warm brown skin and dark tightly curled hair; variant B has light freckled skin and auburn hair. Distinguish their clothes with muted ochre/indigo versus moss/russet accents while preserving the occupational silhouette and a coherent town palette. For guards keep the same dull-red uniform in both variants. Show each variant in separated matching front, three-quarter and back full-body views, on the same ground line and scale, plus one head study each. Preserve consistent anatomy, clothing construction, handedness and rear garment details. Clear silhouettes for later sprites of about 36 world pixels adult height; children remain visibly shorter. Full feet and head inside every view, generous margins, neutral muted background, no labels or text. These appearances are proposals, not additions to character canon."
+    }
+  ],
+  "excluded_goblin_presets": [
+    "goblin_cutthroat",
+    "goblin_spear",
+    "goblin_archer"
+  ]
+}
