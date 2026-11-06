@@ -1,3 +1,5 @@
+[Run the game and develop Wardenflame](DEVELOPING.md) — prerequisites, TV/phone quick start, checks and asset tools.
+
 # ArcBox Tactics
 
 ## View and phone load byte budgets (#201)
