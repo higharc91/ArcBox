@@ -318,6 +318,7 @@ public sealed class CharacterScreenTests
 
         var rogue = CharacterGuide.Class(Rules.Classes["rogue"], upTo: 2, subclassesTo: 2, Rules);
         Assert.Equal(2, rogue.Levels[0].Attacks);     // at most two since #108
+        Assert.Equal(1, rogue.Levels[0].RangedAttacks);
         Assert.DoesNotContain(rogue.Facts, f => f.StartsWith("Spellcasting", StringComparison.Ordinal));
         Assert.All(rogue.Subclasses, s => Assert.Empty(s.Levels));      // nothing before level 3
     }

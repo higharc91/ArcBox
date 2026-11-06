@@ -139,7 +139,7 @@
     { "id": "rogue.sneak_attack", "hook": "onAttackHit", "oncePerTurn": true,
       "when": { "all": [ { "weapon": ["finesse", "ranged"] },
                         { "any": [ { "advantage": true }, { "all": [ { "allyBesideTarget": true }, { "disadvantage": false } ] } ] } ] },
-      "effects": [ { "damage": { "dice": { "byLevel": { "1": "2d6", "3": "3d6", "5": "5d6", "9": "7d6" } } } } ] },
+      "effects": [ { "damage": { "dice": { "byLevel": { "1": "2d6", "3": "2d6+2", "5": "5d6", "9": "7d6" } } } } ] },
     { "id": "rogue.vex", "hook": "onAttackHit", "when": { "weapon": ["dart", "rapier", "shortbow", "shortsword"] },
       "effects": [ { "mark": { "rounds": 1, "condition": "vexed" } } ] },
     { "id": "rogue.evasion", "static": { "evasion": true } },

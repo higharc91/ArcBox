@@ -93,10 +93,10 @@ internal sealed partial class Validation
 
     private void Feature(FeatureRef f, string file, string ptr)
     {
-        var kinds = new object?[] { f.Ability, f.Passive, f.Choose, f.ResourceRegen, f.Attacks }.Count(k => k is not null);
+        var kinds = new object?[] { f.Ability, f.Passive, f.Choose, f.ResourceRegen, f.Attacks, f.RangedAttacks }.Count(k => k is not null);
         if (kinds != 1 || (!f.From.IsEmpty && f.Choose is null))
         {
-            Error(file, ptr, "A feature has exactly one of \"ability\", \"passive\", \"choose\" (with \"from\"), \"resourceRegen\" or \"attacks\".");
+            Error(file, ptr, "A feature has exactly one of \"ability\", \"passive\", \"choose\" (with \"from\"), \"resourceRegen\", \"attacks\" or \"rangedAttacks\".");
             return;
         }
         if (f.Ability is { } ability)
@@ -110,6 +110,8 @@ internal sealed partial class Validation
         }
         if (f.Attacks is < 1)
             Error(file, Pointer.Append(ptr, "attacks"), "'attacks' must be at least 1.");
+        if (f.RangedAttacks is < 1)
+            Error(file, Pointer.Append(ptr, "rangedAttacks"), "'rangedAttacks' must be at least 1.");
         if (f.ResourceRegen is { } regen && (regen.Amount < 1 || regen.EveryRounds < 1))
             Error(file, Pointer.Append(ptr, "resourceRegen"), "'amount' and 'everyRounds' must be at least 1.");
     }
