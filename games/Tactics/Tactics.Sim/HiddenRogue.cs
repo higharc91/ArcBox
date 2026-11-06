@@ -67,13 +67,14 @@ internal static class HiddenRogue
             var on = Walks(after, unit, terrain, rules);
             var cover = on.Reachable.Where(b => CanHide(Moved(after, unit, b, on.CostTo(b)), unit, rules))
                 .OrderBy(b => on.CostTo(b)).ThenBy(b => b).Cast<Tile?>().FirstOrDefault();
+            IEnumerable<Command> hideAfter = cover is { } b ? [.. WalkTo(unit, on, b), new Use(unit, Hide, new Target())] : [];
+            var opportunities = cover is { } c ? Opportunities(after, unit, [a, .. on.PathTo(c)]) : 0;
+            var walk = here.CostTo(a) + (cover is { } d ? on.CostTo(d) : 0);
             foreach (var foe in foes)
             {
-                ImmutableArray<Command> commands = [.. WalkTo(unit, here, a), attack with { Target = new Target(Unit: foe.Id) },
-                    .. cover is { } b ? [.. WalkTo(unit, on, b), new Use(unit, Hide, new Target())] : Array.Empty<Command>(), new EndTurn(unit)];
-                options.Add(new Option(commands, StrikeWorth + (Advantage(atA, unit, foe.Id, rules) ? AdvantageWorth : 0) + (cover is null ? 0 : HiddenWorth),
-                    foe.Hp, cover is { } c ? Opportunities(after, unit, [a, .. on.PathTo(c)]) : 0,
-                    here.CostTo(a) + (cover is { } d ? on.CostTo(d) : 0)));
+                var score = StrikeWorth + (Advantage(atA, unit, foe.Id, rules) ? AdvantageWorth : 0) + (cover is null ? 0 : HiddenWorth);
+                options.Add(new Option([.. WalkTo(unit, here, a), attack with { Target = new Target(Unit: foe.Id) }, .. hideAfter,
+                    new EndTurn(unit)], score, foe.Hp, opportunities, walk));
             }
         }
 
