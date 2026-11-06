@@ -95,5 +95,20 @@ class Manifests(unittest.TestCase):
             self.assertEqual(manifest_path.read_text(), authored)
 
 
+class ShippedLoudness(unittest.TestCase):
+    def test_every_manifest_clip_meets_its_group_target_and_true_peak_ceiling(self):
+        measurements = audio.audit_shipped()
+        self.assertTrue(measurements)
+        failures = [f"{row['file']}: {row['level']:.1f} {row['metric']} vs {row['target']:.1f}, "
+                    f"true peak {row['true_peak']:.1f} dBTP"
+                    for row in measurements
+                    if abs(row["level"] - row["target"]) > audio.LOUDNESS_TOLERANCE
+                    or row["true_peak"] > audio.TRUE_PEAK_CEILING]
+        self.assertEqual([], failures)
+        dungeon = next(row for row in measurements if row["file"] == "music/dungeon.ogg")
+        self.assertLessEqual(dungeon["true_peak"], -5.0)
+        self.assertEqual("RMS dBFS", next(row for row in measurements if row["file"] == "sfx/ui_cancel.ogg")["metric"])
+
+
 if __name__ == "__main__":
     unittest.main()
