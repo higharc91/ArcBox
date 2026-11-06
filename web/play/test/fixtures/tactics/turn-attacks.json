@@ -738,6 +738,36 @@
           "aim": "self"
         },
         {
+          "ability": "common.extinguish",
+          "item": null,
+          "name": "Put out flames",
+          "tooltip": "1 tile: ends Burning on target \u2014 Spend your Action to put out burning on yourself or an adjacent ally.",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "hero1",
+                "tile": null
+              },
+              "aim": [
+                0,
+                0
+              ],
+              "affected": [
+                {
+                  "unit": "hero1",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
           "ability": "fighter.precision_attack",
           "item": null,
           "name": "Precision Attack",
@@ -843,7 +873,7 @@
           "ability": "fighter.second_wind",
           "item": null,
           "name": "Second Wind",
-          "tooltip": "Self: heals 1d4 \u002B level",
+          "tooltip": "Self: heals 1d4 \u002B level \u2014 Game balance: one use per battle, restoring 1d4 plus your level HP.",
           "cost": {
             "bonus": 1,
             "resource": {

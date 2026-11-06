@@ -360,9 +360,7 @@ public static partial class Battle
         }
 
         // Charm protects its source, including from aimed area effects. Helpful abilities remain legal.
-        var harmful = ability.Target.Kind == TargetKind.Enemy
-            || EffectTree.All(ability.Effects).Any(e => e is AttackEffect or DamageEffect or PushEffect or PullEffect
-                || e is ApplyEffect && ability.Target.Kind is not TargetKind.Ally and not TargetKind.DownedAlly);
+        var harmful = IsHarmful(ability);
         var victims = affected;
         if (harmful && Conditions.Active(user, w.Rules).Any(c => c.Def.Id.Value == "charmed"
                 && c.From.Source is { } charmer && victims.Contains(charmer)))
@@ -611,4 +609,9 @@ public static partial class Battle
         Resources: p.Sheet.Resources.WithComparers(StringComparer.Ordinal), Conditions: [], Economy: Economy.Fresh(p.Sheet),
         Life: LifeState.Up, Countdown: 0, UsesLeft: Ordinal.Map<int>(), Concentrating: null, Bag: p.Bag.IsDefault ? [] : p.Bag,
         ItemsUsedByAi: 0, SummonedBy: null, Protected: p.Protected, UsedThisTurn: Ordinal.Set(), UsedThisRound: Ordinal.Set());
+    /// <summary>Abilities that can harm their affected units, shared by targeting and reaction offers.</summary>
+    internal static bool IsHarmful(AbilityDef ability) => ability.Target.Kind == TargetKind.Enemy
+        || EffectTree.All(ability.Effects).Any(e => e is AttackEffect or DamageEffect or PushEffect or PullEffect
+            || e is ApplyEffect && ability.Target.Kind is not TargetKind.Ally and not TargetKind.DownedAlly);
+
 }

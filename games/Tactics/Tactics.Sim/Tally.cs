@@ -43,11 +43,17 @@ internal sealed class Tally(RulesPack rules)
         public double Damage { get; set; }
         // Each own turn accumulates all its hits on each victim, including effects that tick off-turn.
         public List<SortedDictionary<UnitId, double>> DamageTurns { get; } = [];
-        public void NewDamageTurn() => DamageTurns.Add([]);
+        private int _lastOwnRound;
+        public void NewDamageTurn(int round)
+        {
+            if (_lastOwnRound == round) return; // a delayed turn resumes the same turn
+            if (_lastOwnRound != 0 || DamageTurns.Count == 0) DamageTurns.Add([]);
+            _lastOwnRound = round;
+        }
         public void RecordDamage(UnitId target, int lost)
         {
             if (lost <= 0) return;
-            if (DamageTurns.Count == 0) NewDamageTurn();
+            if (DamageTurns.Count == 0) DamageTurns.Add([]); // pre-turn reactions join the first own turn
             var turn = DamageTurns[^1];
             turn[target] = turn.GetValueOrDefault(target) + lost;
         }
@@ -121,7 +127,7 @@ internal sealed class Tally(RulesPack rules)
                 (_source, _hitTarget) = (null, null);
                 break;
             case TurnStarted t:
-                if (_members.TryGetValue(t.Unit, out var starter)) starter.NewDamageTurn();
+                if (_members.TryGetValue(t.Unit, out var starter)) starter.NewDamageTurn(t.Round);
                 (_source, _hitTarget) = (t.Unit, null);
                 break;
             case TurnSkipped skipped:

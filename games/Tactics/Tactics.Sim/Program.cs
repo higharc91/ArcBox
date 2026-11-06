@@ -27,6 +27,7 @@ const string Usage = """
       --with-class CLS       play only the sampled parties that include this class
       --weapons cls:id,...   give the listed classes this weapon instead of their starting kit's
       --policy hidden-rogue  party rogues play the scripted rogue that hides whenever it may and strikes from hiding
+      --rotate-formation    rotate spawn seats across seeds (default: fixed class order)
       --rules DIR            the rules pack (default content/tactics/base/rules under the repository root)
       --out PATH             write the report to PATH (default: print it)
       -h, --help             this text
@@ -46,6 +47,7 @@ string? race = null;
 string? withClass = null;
 ImmutableDictionary<string, string>? weapons = null;
 string? policy = null;
+var rotateFormation = false;
 string? rulesDir = null;
 string? outPath = null;
 
@@ -76,6 +78,7 @@ try
             case "--with-class": withClass = Next(); break;
             case "--weapons": weapons = Pairs("Weapons"); break;
             case "--policy": policy = Next(); break;
+            case "--rotate-formation": rotateFormation = true; break;
             case "--rules": rulesDir = Next(); break;
             case "--out": outPath = Next(); break;
             default: throw new ArgumentException($"Unknown option '{args[i]}'.");
@@ -92,7 +95,7 @@ catch (Exception e) when (e is ArgumentException or FormatException or OverflowE
 rulesDir ??= Path.Combine(RepoRoot(), "content", "tactics", "base", "rules");
 var rules = RulesPack.Load([rulesDir]);
 var config = new SimConfig(encounters ?? [.. rules.Encounters.Keys], levels, parties, sizes, seeds, difficulty, roundCap, trinkets, companions,
-    subclasses, race, withClass, weapons, policy);
+    subclasses, race, withClass, weapons, policy, rotateFormation);
 
 var watch = Stopwatch.StartNew();
 var battles = new List<SimBattle>();

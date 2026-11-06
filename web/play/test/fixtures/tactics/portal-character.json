@@ -1551,7 +1551,7 @@
           "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
           "Weapons: simple weapons and martial weapons (not used in battles yet).",
           "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
-          "Second wind: 2 per battle at level 4, 2 by level 10.",
+          "Second wind: 1 per battle at level 4, 1 by level 10.",
           "Superiority: 2 per battle at level 4, 5 by level 10.",
           "Starts with: longsword, chain mail, a shield."
         ],
@@ -1706,7 +1706,8 @@
             "level": 1,
             "features": [
               "monk.unarmed_strike",
-              "monk.martial_arts"
+              "monk.martial_arts",
+              "monk.unarmored_movement"
             ],
             "attacks": 2,
             "choices": []
@@ -1715,8 +1716,7 @@
             "level": 2,
             "features": [
               "monk.flurry_of_blows",
-              "monk.step_of_the_wind",
-              "monk.unarmored_movement"
+              "monk.step_of_the_wind"
             ],
             "attacks": null,
             "choices": []
@@ -1742,7 +1742,7 @@
             "features": [
               "monk.stunning_strike"
             ],
-            "attacks": 3,
+            "attacks": 2,
             "choices": []
           }
         ],
@@ -2213,7 +2213,7 @@
           "Weapons: simple weapons (not used in battles yet).",
           "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
-          "Mana: 5 per battle at level 4, 9 by level 10.",
+          "Mana: 6 per battle at level 4, 8 by level 10.",
           "Sorcery: 2 per battle at level 4, 5 by level 10.",
           "Starts with: quarterstaff."
         ],
@@ -3099,7 +3099,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "1 tile: heals 3d8 \u002B casting modifier"
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
       },
       "bard.dispel_magic": {
         "name": "Dispel Magic",
@@ -3143,7 +3143,7 @@
           "Bonus action",
           "1 mana"
         ],
-        "text": "6 tiles: heals 3d4 \u002B casting modifier"
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
       },
       "bard.heroism": {
         "name": "Heroism",
@@ -3884,7 +3884,7 @@
           "Bonus action",
           "1 second wind"
         ],
-        "text": "Self: heals 1d4 \u002B level"
+        "text": "Self: heals 1d4 \u002B level \u2014 Game balance: one use per battle, restoring 1d4 plus your level HP."
       },
       "fighter.style_defense": {
         "name": "Style defense",
@@ -4111,14 +4111,14 @@
           "Bonus action",
           "1 ki"
         ],
-        "text": "1 tile: 2 times: weapon attack (1d10 \u002B DEX modifier bludgeoning)"
+        "text": "1 tile: 2 times: weapon attack (1d8 \u002B DEX modifier bludgeoning)"
       },
       "monk.martial_arts": {
         "name": "Martial Arts",
         "tags": [
           "Bonus action"
         ],
-        "text": "Weapon attack, 1 tile: 1d10 \u002B DEX modifier bludgeoning \u2014 A quick unarmed strike as a bonus action."
+        "text": "Weapon attack, 1 tile: 1d8 \u002B DEX modifier bludgeoning \u2014 A quick unarmed strike as a bonus action."
       },
       "monk.patient_defense": {
         "name": "Patient Defense",
@@ -4140,16 +4140,16 @@
         "name": "Stunning Strike",
         "tags": [
           "Action",
-          "1 ki"
+          "2 ki"
         ],
-        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round). With more than one attack, only the first hit gets this; the rest are plain hits \u2014 A strike at the body\u0027s flow of ki: on a hit, a CON save or the target is stunned until your next turn ends."
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round). With more than one attack, only the first hit gets this; the rest are plain hits \u2014 Game balance: spend 2 Ki for the stunning rider, which applies on the first hit only; later attacks keep the unarmed strike damage."
       },
       "monk.unarmed_strike": {
         "name": "Unarmed Strike",
         "tags": [
           "Action"
         ],
-        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning \u2014 Martial Arts: fists and feet, with DEX, for your martial arts die (2d8 at levels 1 and 2, then d10)."
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning \u2014 Game balance: a 1d8 martial arts die at every level, with two attacks per Attack action. Ki and other features provide progression."
       },
       "monk.unarmored_movement": {
         "name": "Unarmored movement",
@@ -4342,7 +4342,7 @@
           "1 focus",
           "Concentration"
         ],
-        "text": "6 tiles: target is Hunted \u2014 You mark your quarry: every hit you land on it deals an extra 1d6 force damage."
+        "text": "6 tiles: target is Hunted \u2014 Hits on a Hunted target deal an extra 1d4 force at levels 1 and 2, then 1d6 from level 3: a game balance progression."
       },
       "ranger.hunters_mark_bonus": {
         "name": "Hunters mark bonus",
@@ -4419,7 +4419,7 @@
         "tags": [
           "Reaction"
         ],
-        "text": "Self: you gain 1d6 \u002B level temporary HP \u2014 When a blow is about to land, you roll with it and take far less of it."
+        "text": "Self: halves the triggering hit\u0027s damage, including riders (rounded down) \u2014 Use your Reaction to halve the triggering hit\u2019s damage, including its riders, rounded down. Other hits are unaffected."
       },
       "rogue.vex": {
         "name": "Vex",
@@ -4545,7 +4545,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, 6 tiles, burst 2: 3d6 fire; half damage on a save"
+        "text": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6."
       },
       "sorcerer.font_of_magic_mana": {
         "name": "Font of Magic: Create Mana",
@@ -4598,7 +4598,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, self, line 10: 3d6 lightning; half damage on a save"
+        "text": "Dex save, self, line 10: 6d6 lightning; half damage on a save \u2014 Game balance: 6d6 per target, matching Fireball."
       },
       "sorcerer.magic_missile": {
         "name": "Magic Missile",
@@ -4936,7 +4936,7 @@
         "tags": [
           "Action"
         ],
-        "text": "8 tiles: 1 times: spell attack (1d10 force)"
+        "text": "8 tiles: 1 times: spell attack (1d12 force) \u2014 Game balance: each beam deals 1d12 at every level; two beams from level 5 and three from level 7. Dice never decrease."
       },
       "warlock.fiendish_vigor": {
         "name": "Fiendish Vigor",
@@ -5190,7 +5190,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, 6 tiles, burst 2: 3d6 fire; half damage on a save"
+        "text": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6."
       },
       "wizard.grease": {
         "name": "Grease",
@@ -5248,7 +5248,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, self, line 10: 3d6 lightning; half damage on a save"
+        "text": "Dex save, self, line 10: 6d6 lightning; half damage on a save \u2014 Game balance: 6d6 per target, matching Fireball."
       },
       "wizard.mage_armor": {
         "name": "Mage Armor",

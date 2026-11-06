@@ -35,7 +35,7 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
         : "brute";
 
     /// <summary>The weights of a content profile.</summary>
-    public static AiProfile From(AiProfileDef def) => new(def.Id, def.Damage, def.Kill, def.Control, def.Heal, def.Revive,
+    public static AiProfile From(AiProfileDef def, int level = 1) => new(def.Id, def.Damage, def.Kill, def.ControlByLevel?.At(level) ?? def.Control, def.Heal, def.Revive,
         def.Caution, def.FocusFire, def.Objective, def.Hoard, def.Cruel, def.FleeBelowHp);
 
     /// <summary>
@@ -61,7 +61,7 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
     {
         var u = state.Units[unit];
         var id = overrideId ?? (u.Controller as AiControlled)?.Profile ?? u.Sheet.AiProfile;
-        var profile = id is not null && rules.AiProfiles.TryGetValue(id, out var def) ? From(def)
+        var profile = id is not null && rules.AiProfiles.TryGetValue(id, out var def) ? From(def, u.Sheet.Level)
             : Default with { Id = id ?? Default.Id };
         if (Companion.Is(profile))
             profile = Companion.Weigh(profile, u, rules);

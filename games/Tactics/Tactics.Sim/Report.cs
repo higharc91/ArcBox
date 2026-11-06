@@ -220,7 +220,8 @@ public static class Report
                  + (config.Companions > 0 ? $" --companions {config.Companions}" : "") + subclasses
                  + (config.Race is { } race ? $" --race {race}" : "")
                  + (config.WithClass is { } only ? $" --with-class {only}" : "") + weapons
-                 + (config.Policy is { } policy ? $" --policy {policy}" : ""));
+                 + (config.Policy is { } policy ? $" --policy {policy}" : "")
+                 + (config.RotateFormation ? " --rotate-formation" : ""));
         Line(md, "```");
         Line(md);
         Line(md, $"- **Encounters:** {string.Join(", ", config.Encounters)}.");
@@ -230,6 +231,9 @@ public static class Report
         Line(md, config.Trinkets is { Count: > 0 }
             ? "- **Trinkets:** " + string.Join(", ", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => $"{p.Key}: `{p.Value}`")) + "."
             : "- **Trinkets:** none.");
+        Line(md, config.RotateFormation
+            ? "- **Formation:** spawn seats rotate cyclically across seeds; roster ids and companion selection stay fixed. No RNG is consumed."
+            : "- **Formation:** fixed class order (legacy default).");
         Line(md, config.Companions > 0
             ? $"- **Companions:** the first {config.Companions} members of every party (class order) play the `companion` profile."
             : "- **Companions:** none.");

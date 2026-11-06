@@ -136,4 +136,18 @@ public sealed class SrdConditionTests
         Assert.Equal(0, after.Units[Hero].TempHp);
     }
 
+    [Fact]
+    public void Charmed_units_are_not_offered_an_opportunity_attack_against_the_charmer()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        (state, _) = battle.Apply(state, new EndTurn(Hero));
+        state = state.Give("hero", TestConditions.Lasting(BasePackTests.Rules.Conditions[new("charmed")], Foe));
+        var (after, events) = battle.Apply(state, new Move(Foe, [new Tile(1, 0), new Tile(2, 0)]));
+        Assert.Null(after.Pending);
+        Assert.DoesNotContain(events, e => e is ReactionOffered);
+        Assert.True(after.Units[Hero].Economy.Reaction);
+        Assert.Equal(new Tile(2, 0), after.Units[Foe].Pos);
+    }
+
 }

@@ -500,12 +500,14 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value
-/// Downed targets; <see cref="FleeBelowHp"/> is a fraction of max HP. <see cref="Replaces"/> lets a later pack override an id.
+/// Downed targets; <see cref="FleeBelowHp"/> is a fraction of max HP. Optional <see cref="AiProfileDef.ControlByLevel"/>
+/// overrides the scalar control weight at the unit's level. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record AiProfileDef(string Id, double Damage = 0, double Kill = 0, double Control = 0, double Heal = 0,
     double Revive = 0, double Caution = 0, double FocusFire = 0, double Objective = 0, double Hoard = 0, bool Cruel = false,
     double FleeBelowHp = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ByLevel<double>? ControlByLevel = null);
 
 /// <summary>
 /// The XP needed to reach each level (<c>xp.json</c>): <see cref="Thresholds"/>[n] is the cumulative XP for level n + 1,

@@ -14,7 +14,7 @@ public sealed class BasePackTests
 
     private static readonly string[] Classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
 
-    private static readonly string[] AiProfiles = ["archer", "ashmaw", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "roaming_slinger", "skirmisher"];
+    private static readonly string[] AiProfiles = ["archer", "ashmaw", "boss", "boss_cruel", "brute", "caster", "companion", "controller", "coward", "guardian", "healer", "roaming_slinger", "skirmisher"];
 
     private static UnitId U(string id) => new(id);
 
@@ -339,20 +339,21 @@ public sealed class BasePackTests
     [Fact]
     public void Resourceful_survives_arcane_recovery()
     {
-        // A human wizard starts with one Mana over her pool of 4; Arcane Recovery (+1 at level 1) mustn't take it away.
+        // A human wizard starts with one Mana over her configured pool; Arcane Recovery (+1 at level 1) mustn't take it away.
         var rules = Rules;
+        var wizardPool = rules.Classes["wizard"].Resources["mana"].At(1);
         var setup = Encounters.Setup("river_crossing", Party(4, rules), Difficulty.Normal, rules);
         var state = Battle.Start(setup, rules, seed: 7).State;
-        Assert.Equal(5, state.Units[U("wizard")].Resources["mana"]);
+        Assert.Equal(wizardPool + 1, state.Units[U("wizard")].Resources["mana"]);
         Assert.Equal(3, state.Units[U("fighter")].Resources["superiority"]);   // the declared primary, not second_wind
-        Assert.Equal(2, state.Units[U("fighter")].Resources["second_wind"]);
+        Assert.Equal(1, state.Units[U("fighter")].Resources["second_wind"]);
 
         while (state.Active != U("wizard"))
             state = Battle.Apply(state, new EndTurn(state.Active!.Value), rules).State;
         var recovered = Battle.Apply(state, new Use(U("wizard"), new AbilityId("wizard.arcane_recovery"), new Target(Unit: U("wizard"))), rules);
 
         Assert.Null(recovered.Rejected);
-        Assert.Equal(5, recovered.State.Units[U("wizard")].Resources["mana"]);
+        Assert.Equal(wizardPool + 1, recovered.State.Units[U("wizard")].Resources["mana"]);
     }
 
     [Fact]

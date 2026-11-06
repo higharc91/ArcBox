@@ -18,7 +18,7 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
     ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30,
     ImmutableDictionary<string, string>? Trinkets = null, int Companions = 0,
     ImmutableDictionary<string, string>? Subclasses = null, string? Race = null, string? WithClass = null,
-    ImmutableDictionary<string, string>? Weapons = null, string? Policy = null);
+    ImmutableDictionary<string, string>? Weapons = null, string? Policy = null, bool RotateFormation = false);
 
 /// <summary>
 /// One simulated battle: the encounter, the party's level and classes (one entry per member, ordinal order), the seed,
@@ -187,6 +187,15 @@ public static class SimRunner
         return jobs.AsParallel().AsOrdered().Select(j => Play(config, rules, j.Encounter, j.Level, j.Party, j.Seed));
     }
 
+    /// <summary>Spawn-seat order; the legacy default keeps class order and consumes no RNG.</summary>
+    internal static ImmutableArray<T> Formation<T>(ImmutableArray<T> members, ulong seed, bool rotate)
+    {
+        if (!rotate || members.IsDefaultOrEmpty)
+            return members;
+        var offset = (int)((seed == 0 ? 0 : seed - 1) % (ulong)members.Length);
+        return [.. members.Skip(offset), .. members.Take(offset)];
+    }
+
     /// <summary>One battle, played to its end or to the round cap.</summary>
     private static SimBattle Play(SimConfig config, RulesPack rules, string encounter, int level, ImmutableArray<string> classes,
         ulong seed)
@@ -198,6 +207,7 @@ public static class SimRunner
             return new PartyMember(id, Character(config, rules, id.Value, cls, level),
                 new AiControlled(i < config.Companions ? "companion" : ProfileFor(rules.Classes[cls])));
         })];
+        party = Formation(party, seed, config.RotateFormation);
         var setup = Encounters.Setup(encounter, party, config.Difficulty, rules);
 
         var tally = new Tally(rules);

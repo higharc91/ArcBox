@@ -68,7 +68,8 @@
       ],
       "group": null
     },
-    "vip": true
+    "vip": true,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": null,

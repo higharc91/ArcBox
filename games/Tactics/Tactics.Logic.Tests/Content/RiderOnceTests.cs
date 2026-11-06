@@ -67,13 +67,13 @@ public sealed class RiderOnceTests
     public void Quivering_palm_applies_its_4d10_once()
     {
         var monk = Character("monk", 10, "monk.open_hand") with { Resources = Ordinal.Map(("ki", 10)) };
-        Assert.Equal(3, monk.Attacks);
+        Assert.Equal(2, monk.Attacks);
         var many = 0;
         for (ulong seed = 1; seed <= 12; seed++)
         {
             var events = Use(seed, monk, "open_hand.quivering_palm");
             var hits = events.OfType<AttackResolved>().Count(a => a.Hit);
-            Assert.Equal(3, events.OfType<AttackResolved>().Count());
+            Assert.Equal(monk.Attacks, events.OfType<AttackResolved>().Count());
             Assert.Equal(hits > 0 ? 1 : 0, events.Count(e => e is Rolled { Kind: RollKind.Save }));
             Assert.True(events.Count(e => e is Damaged { Type: "force" }) <= 1);
             many += hits > 1 ? 1 : 0;

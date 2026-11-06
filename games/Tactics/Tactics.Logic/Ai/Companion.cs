@@ -48,7 +48,7 @@ internal static class Companion
     {
         var roles = RoleTags(unit, rules);
         if (roles.Count > 0 && rules.AiProfiles.TryGetValue(AiProfile.IdForRoles(roles), out var tuned))
-            profile = AiProfile.From(tuned) with { Id = profile.Id, Hoard = profile.Hoard };
+            profile = AiProfile.From(tuned, unit.Sheet.Level) with { Id = profile.Id, Hoard = profile.Hoard };
         var top = new[] { profile.Damage, profile.Kill, profile.Control, profile.Heal, profile.Caution, profile.FocusFire, profile.Objective }.Max();
         return profile with { Revive = Math.Max(profile.Revive, 1.25 * top) };
     }

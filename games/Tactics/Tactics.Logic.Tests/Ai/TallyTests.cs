@@ -27,6 +27,29 @@ public sealed class TallyTests
     }
 
     [Fact]
+    public void Damage_before_the_first_own_turn_joins_that_turn_instead_of_creating_extra_credit()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new PassiveTriggered(U("wiz"), "test.rebuke"), new Damaged(U("gob"), 3, "fire", hp - 3),
+            new TurnStarted(U("wiz"), 1), new Damaged(U("gob2"), 3, "fire", hp - 3)], state);
+        Assert.Equal(6, tally.PerClass(1)["wizard"].DamagePerRound);
+        Assert.Equal(3, tally.PerClass(1)["wizard"].TargetDamagePerRound);
+    }
+
+    [Fact]
+    public void Resuming_a_delayed_turn_does_not_split_its_target_average()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new TurnStarted(U("wiz"), 1), new Damaged(U("gob"), 3, "fire", hp - 3),
+            new TurnStarted(U("gob2"), 1), new TurnStarted(U("wiz"), 1),
+            new Damaged(U("gob2"), 3, "fire", hp - 3)], state);
+        Assert.Equal(6, tally.PerClass(1)["wizard"].DamagePerRound);
+        Assert.Equal(3, tally.PerClass(1)["wizard"].TargetDamagePerRound);
+    }
+
+    [Fact]
     public void Bleeding_cleanup_does_not_steal_later_targets_of_a_group_heal()
     {
         var (tally, state) = Fresh();

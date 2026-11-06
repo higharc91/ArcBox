@@ -19,6 +19,10 @@
       "control": {
         "type": "number"
       },
+      "controlByLevel": {
+        "description": "Optional level progression overriding control; starts at level 1. Applied to class and companion AI alike.",
+        "anyOf": [ { "type": "number" }, { "$ref": "common.schema.json#/$defs/byLevel" } ]
+      },
       "heal": {
         "type": "number"
       },

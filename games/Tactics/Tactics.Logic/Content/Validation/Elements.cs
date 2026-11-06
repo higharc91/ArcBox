@@ -193,7 +193,13 @@ internal sealed partial class Validation
         });
 
     /// <summary>An AI profile.</summary>
-    public AiProfileDef? AiProfile(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<AiProfileDef>(e, file, ptr));
+    public AiProfileDef? AiProfile(JsonElement e, string file, string ptr) => Guarded(file, ptr, () =>
+    {
+        var def = Deserialize<AiProfileDef>(e, file, ptr);
+        if (def?.ControlByLevel is { } control)
+            Levels(control, file, Pointer.Append(ptr, "controlByLevel"));
+        return def;
+    });
 
     /// <summary>The XP table: thresholds that start at 0 and rise.</summary>
     public XpTable? Xp(JsonElement e, string file, string ptr)
