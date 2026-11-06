@@ -195,8 +195,9 @@
         },
         "check": {
           "type": "object",
-          "description": "A skill check: the party picks who rolls. Pass and fail each go to a node.",
+          "description": "A skill check: one picked roller, or every present hero when group is true. Pass and fail each go to a node.",
           "properties": {
+            "group": { "type": "boolean", "default": false, "description": "Every present hero rolls; half or more must succeed." },
             "skill": {
               "enum": [
                 "acrobatics",

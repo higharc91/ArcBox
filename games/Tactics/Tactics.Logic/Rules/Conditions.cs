@@ -41,9 +41,16 @@ public static class Conditions
     /// <see cref="Transforms.Marker"/> turns the unit back (<see cref="Transforms.Revert"/>).
     /// </summary>
     public static void Remove(BattleWriter w, UnitId unit, ConditionId condition)
+        => RemoveWhere(w, unit, condition, _ => true);
+
+    /// <summary>Ends only the named source's copy, preserving other sources' marks.</summary>
+    internal static void RemoveFrom(BattleWriter w, UnitId unit, ConditionId condition, UnitId? source)
+        => RemoveWhere(w, unit, condition, c => c.Source == source);
+
+    private static void RemoveWhere(BattleWriter w, UnitId unit, ConditionId condition, Func<ActiveCondition, bool> matches)
     {
         var u = w.Unit(unit);
-        var kept = u.Conditions.RemoveAll(c => c.Id == condition);
+        var kept = u.Conditions.RemoveAll(c => c.Id == condition && matches(c));
         if (kept.Length == u.Conditions.Length)
             return;
         w.Set(u with { Conditions = kept });
@@ -128,7 +135,7 @@ public static class Conditions
             if (!u.Conditions.Any(c => c.RoundsLeft is not null && TickedBy(w.State, id, c) == unit))
                 continue;
             var ticked = ImmutableArray.CreateBuilder<ActiveCondition>();
-            var expired = new List<ConditionId>();
+            var expired = new List<ActiveCondition>();
             foreach (var c in u.Conditions)
             {
                 if (c.RoundsLeft is not { } left || TickedBy(w.State, id, c) != unit)
@@ -136,14 +143,14 @@ public static class Conditions
                 else if (left <= 0 || !c.AppliedThisTurn && left == 1)
                 {
                     ticked.Add(c with { RoundsLeft = 0, AppliedThisTurn = false });
-                    expired.Add(c.Id);
+                    expired.Add(c);
                 }
                 else
                     ticked.Add(c.AppliedThisTurn ? c with { AppliedThisTurn = false } : c with { RoundsLeft = left - 1 });
             }
             w.Set(u with { Conditions = ticked.ToImmutable() });
             foreach (var condition in expired)
-                Remove(w, id, condition);
+                RemoveFrom(w, id, condition.Id, condition.Source);
         }
 
         ZoneRules.EndTurn(w, unit);

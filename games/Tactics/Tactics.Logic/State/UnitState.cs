@@ -21,7 +21,8 @@ public sealed record ActiveCondition(ConditionId Id, UnitId? Source, int? Rounds
     Stat SaveStat, bool Concentration,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StaticMods? Mods = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Mark = false);
 
 /// <summary>A stack of one item in a unit's bag.</summary>
 public sealed record ItemStack(ItemId Item, int Count);
@@ -51,4 +52,12 @@ public sealed record UnitState(UnitId Id, UnitSheet Sheet, Controller Controller
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool Helper { get; init; }
+
+    /// <summary>The numbered attack hit halved by a defensive reaction; absent in older saves.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? HalvedHit { get; init; }
+
+    /// <summary>Damage seen for HalvedHit, for rounding once across all its damage blocks.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public int HalvedHitDamage { get; init; }
 }

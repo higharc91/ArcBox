@@ -122,13 +122,19 @@ public sealed class EngineFaultTests
     public void A_save_whose_next_ai_step_fails_moves_on_the_same_way_each_time_it_is_opened()
     {
         // The seed-108 shape: the save is good, but the AI's next step fails, and it would make the same step on every open.
+        // Six beats in, then on a beat at a time until the AI's next step is more than ending the turn (ending a turn never
+        // fails here), however many steps the AI's turns happen to take.
         var first = new Session();
         first.ToBattle(everyoneAway: true);
         for (var i = 0; i < 6; i++)
             first.Harness.Advance(TimeSpan.FromSeconds(7));
+        bool OnlyEndsTurn(BattleState s) => s.Pending is null && s.Active is { } unit && first.Game.PlanAi(s, unit).Commands is [EndTurn];
+        for (var i = 0; i < 20 && OnlyEndsTurn(TacticsDocument.Read(first.Lease.Document).Battle!.State); i++)
+            first.Harness.Advance(TimeSpan.FromSeconds(7));
         Assert.Equal(TacticsPhase.Battle, first.Game.Phase);
         var save = first.Lease.Document;
         var at = TacticsDocument.Read(save).Battle!.State;
+        Assert.False(OnlyEndsTurn(at));
 
         string Open()
         {
@@ -147,6 +153,28 @@ public sealed class EngineFaultTests
         }
 
         Assert.Equal(Open(), Open());
+    }
+
+    [Fact]
+    public async Task A_save_with_a_zeroed_rng_is_called_off_when_opened_instead_of_hanging_the_room()
+    {
+        var first = new Session();
+        first.ToBattle(everyoneAway: true);
+        var doc = TacticsDocument.Read(first.Lease.Document);
+        var zeroed = (doc with { Battle = doc.Battle! with { State = doc.Battle.State with { Rng = default } } }).ToJson();
+        var (game, faults) = Watched();
+        var s = new Session(document: zeroed, game: game);
+
+        var opened = Task.Run(() => s.Harness.Resume(s.Lease), TestContext.Current.CancellationToken);
+        var finished = await Task.WhenAny(opened, Task.Delay(TimeSpan.FromSeconds(20), TestContext.Current.CancellationToken));
+        Assert.True(finished == opened, "resuming a save with a zeroed Rng hung");
+        await opened;
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Contains(TacticsGame.BattleCalledOff, s.Host.Notice);
+        Assert.Null(TacticsDocument.Read(s.Lease.Document).Battle);
+        Assert.Contains(faults, f => f.Where == "resume" && f.Error is RulesInvariantException);
     }
 
     [Fact]

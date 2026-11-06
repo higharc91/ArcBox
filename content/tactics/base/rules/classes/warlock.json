@@ -106,6 +106,6 @@
            "warlock.hunger_of_hadar", "warlock.counterspell", "warlock.blight", "warlock.shadow_of_moil",
            "warlock.lifedrinker", "warlock.synaptic_static", "warlock.hold_monster"]
   },
-  "aiTags": { "tags": ["striker", "caster", "ranged"], "priority": ["cha", "con", "dex", "wis", "int", "str"] },
+  "aiTags": { "tags": ["striker", "ranged"], "priority": ["cha", "con", "dex", "wis", "int", "str"] },
   "castingStat": "cha"
 }

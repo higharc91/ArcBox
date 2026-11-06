@@ -117,8 +117,8 @@ public static class Report
         Line(md);
         Line(md, "Each class's band measure at each level (the mean over the battles it fought, per member), against the mean of "
                  + $"its band's classes at that level; **FLAG** beyond ±{Pct(BandTolerance)}. Measures: Defender, damage mitigated per "
-                 + "round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, damage per round "
-                 + "(HP taken off foes: no overkill, and temporary HP soaked doesn't count); Healer, healing and revives per round; "
+                 + "round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, target-normalized damage per round "
+                 + "(mean HP damage per victim within each member turn, summed over turns; off-turn effects belong to the owner’s latest turn; no overkill or temporary HP); Healer, healing and revives per round; "
                  + "Control, enemy turns denied per battle. A band with one class present sits on its own mean.");
         Line(md);
         Line(md, "| Level | Band | Measure | Class | Value | Band mean | Deviation | Flag |");
@@ -135,15 +135,16 @@ public static class Report
         Line(md);
         Line(md, "Every measure, by class and level:");
         Line(md);
-        Line(md, "| Class | Band | Level | Battles | Damage / round | Healing / round | Mitigated / round | Turns denied |");
-        Line(md, "|---|---|---:|---:|---:|---:|---:|---:|");
+        Line(md, "| Class | Band | Level | Battles | Damage / round | Target damage / round | Healing / round | Mitigated / round | Turns denied |");
+        Line(md, "|---|---|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var g in battles.SelectMany(b => b.PerClass.Select(p => (b.Level, Class: p.Key, Stats: p.Value)))
                      .GroupBy(x => (x.Class, x.Level))
                      .OrderBy(g => g.Key.Class, StringComparer.Ordinal).ThenBy(g => g.Key.Level))
             Line(md, $"| {g.Key.Class} | {SimRunner.BandOf(g.Key.Class)} | {g.Key.Level} | {g.Count()} | {Num(g.Average(x => x.Stats.DamagePerRound))} | "
-                     + $"{Num(g.Average(x => x.Stats.HealingPerRound))} | {Num(g.Average(x => x.Stats.MitigatedPerRound))} | "
+                     + $"{Num(g.Average(x => x.Stats.TargetDamagePerRound ?? x.Stats.DamagePerRound))} | {Num(g.Average(x => x.Stats.HealingPerRound))} | {Num(g.Average(x => x.Stats.MitigatedPerRound))} | "
                      + $"{Num(g.Average(x => x.Stats.TurnsDenied))} |");
         Line(md);
+        RogueSetUps(md, battles);
 
         // 5. Abilities
         Line(md, Headings[4]);
@@ -211,7 +212,16 @@ public static class Report
                  + $"--sizes {string.Join(",", config.PartySizes)} --parties {config.PartiesPerSize} \\");
         var trinkets = config.Trinkets is { Count: > 0 }
             ? " --trinkets " + string.Join(",", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
-        Line(md, $"  --seeds {config.Seeds} --difficulty {config.Difficulty} --round-cap {config.RoundCap}{trinkets}");
+        var subclasses = config.Subclasses is { Count: > 0 }
+            ? " --subclasses " + string.Join(",", config.Subclasses.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
+        var weapons = config.Weapons is { Count: > 0 }
+            ? " --weapons " + string.Join(",", config.Weapons.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
+        Line(md, $"  --seeds {config.Seeds} --difficulty {config.Difficulty} --round-cap {config.RoundCap}{trinkets}"
+                 + (config.Companions > 0 ? $" --companions {config.Companions}" : "") + subclasses
+                 + (config.Race is { } race ? $" --race {race}" : "")
+                 + (config.WithClass is { } only ? $" --with-class {only}" : "") + weapons
+                 + (config.Policy is { } policy ? $" --policy {policy}" : "")
+                 + (config.RotateFormation ? " --rotate-formation" : ""));
         Line(md, "```");
         Line(md);
         Line(md, $"- **Encounters:** {string.Join(", ", config.Encounters)}.");
@@ -221,14 +231,59 @@ public static class Report
         Line(md, config.Trinkets is { Count: > 0 }
             ? "- **Trinkets:** " + string.Join(", ", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => $"{p.Key}: `{p.Value}`")) + "."
             : "- **Trinkets:** none.");
-        Line(md, $"- **Parties:** human characters from `SheetBuilder.DefaultCharacter` (no subclass, default picks), playing the "
-                 + "profile their class's `aiTags` name (healer → `healer`, caster or control → `caster`, ranged → `archer`, striker "
+        Line(md, config.RotateFormation
+            ? "- **Formation:** spawn seats rotate cyclically across seeds; roster ids and companion selection stay fixed. No RNG is consumed."
+            : "- **Formation:** fixed class order (legacy default).");
+        Line(md, config.Companions > 0
+            ? $"- **Companions:** the first {config.Companions} members of every party (class order) play the `companion` profile."
+            : "- **Companions:** none.");
+        var withSubclasses = config.Subclasses is { Count: > 0 };
+        if (withSubclasses)
+            Line(md, "- **Subclasses:** " + string.Join(", ", config.Subclasses!.OrderBy(p => p.Key, StringComparer.Ordinal)
+                .Select(p => $"{p.Key}: `{p.Value}`")) + ".");
+        Line(md, $"- **Parties:** {config.Race ?? SimRunner.Race} characters from `SheetBuilder.DefaultCharacter` "
+                 + $"({(withSubclasses ? "the subclasses above, otherwise none" : "no subclass")}, default picks), playing the "
+                 + "profile their class's `aiTags` name (controller → `controller`, guardian → `guardian`, healer → `healer`, caster or control → `caster`, ranged → `archer`, striker "
                  + "→ `skirmisher`, otherwise `brute`) with items off; enemies play their monster's profile. Party compositions "
                  + $"are drawn from every combination with at least one healer or defender and at most {SimRunner.MaxCopies} of a class, "
                  + $"by a generator seeded {SimRunner.PartySeed}:");
         foreach (var party in battles.Select(b => b.Classes).DistinctBy(Party).OrderBy(p => p.Length).ThenBy(Party, StringComparer.Ordinal))
             Line(md, $"  - {party.Length}: {string.Join(", ", party)}");
+        if (config.WithClass is { } withClass)
+            Line(md, $"- **Only the parties with a {withClass}** of those sampled.");
+        if (config.Weapons is { Count: > 0 })
+            Line(md, "- **Weapons:** " + string.Join(", ", config.Weapons.OrderBy(p => p.Key, StringComparer.Ordinal)
+                .Select(p => $"{p.Key}: `{p.Value}`")) + " instead of the starting kit's.");
+        if (config.Policy == HiddenRogue.Name)
+            Line(md, $"- **Policy `{HiddenRogue.Name}`:** party rogues play the scripted rogue that hides whenever the rules let it and "
+                     + "strikes from hiding (`HiddenRogue`), not the AI.");
         return md.ToString();
+    }
+
+    /// <summary>
+    /// The party rogues' Sneak Attack set-up by level (<see cref="RogueSetUp"/>), when any rogue had a turn: the share of
+    /// their turns with Hide, with Sneak Attack and with a weapon attack, and of those attacks the share from hiding and,
+    /// in melee, flanking; and the scripted rogue's refused commands (<see cref="RogueSetUp.Refused"/>).
+    /// </summary>
+    private static void RogueSetUps(StringBuilder md, IReadOnlyList<SimBattle> battles)
+    {
+        var levels = battles.Where(b => b.Rogue is { Turns: > 0 }).GroupBy(b => b.Level).OrderBy(g => g.Key)
+            .Select(g => (Level: g.Key, SetUp: g.Aggregate(RogueSetUp.None, (sum, b) => sum.Add(b.Rogue!)))).ToArray();
+        if (levels.Length == 0)
+            return;
+        Line(md, "### Sneak Attack set-up (rogues)");
+        Line(md);
+        Line(md, "How the party's rogues set up Sneak Attack (#108), over their own turns: the share of turns in which they used Hide, "
+                 + "landed Sneak Attack and made a weapon attack; and of those weapon attacks, the share made from hiding and the "
+                 + "share made in melee flanking the target (an ally that can act on the far side of it). Scripted refusals are the "
+                 + "commands of a scripted rogue (`--policy hidden-rogue`) the engine refused; each hands the rest of that turn to the AI.");
+        Line(md);
+        Line(md, "| Level | Rogue turns | Hide | Sneak Attack | Attacking | From hiding | Flanking | Scripted refusals |");
+        Line(md, "|---:|---:|---:|---:|---:|---:|---:|---:|");
+        foreach (var (level, r) in levels)
+            Line(md, $"| {level} | {r.Turns} | {Pct(r.HideTurns, r.Turns)} | {Pct(r.SneakTurns, r.Turns)} | {Pct(r.AttackTurns, r.Turns)} | "
+                     + $"{Pct(r.FromHiding, r.AttackTurns)} | {Pct(r.Flanking, r.AttackTurns)} | {r.Refused} |");
+        Line(md);
     }
 
     // ---- Tables -------------------------------------------------------------------------------------------------------
@@ -281,7 +336,7 @@ public static class Report
     private static double Measure(RoleBand band, ClassStats s) => band switch
     {
         RoleBand.Defender => s.MitigatedPerRound,
-        RoleBand.Striker => s.DamagePerRound,
+        RoleBand.Striker => s.TargetDamagePerRound ?? s.DamagePerRound,
         RoleBand.Healer => s.HealingPerRound,
         RoleBand.Control => s.TurnsDenied,
         _ => 0,
@@ -290,7 +345,7 @@ public static class Report
     private static string MeasureName(RoleBand band) => band switch
     {
         RoleBand.Defender => "mitigated / round",
-        RoleBand.Striker => "damage / round",
+        RoleBand.Striker => "damage / target-turn",
         RoleBand.Healer => "healing / round",
         RoleBand.Control => "turns denied / battle",
         _ => "",

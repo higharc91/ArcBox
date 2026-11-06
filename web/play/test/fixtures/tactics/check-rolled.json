@@ -44,6 +44,12 @@
         "here": false
       }
     ],
+    "help": {
+      "can": false,
+      "member": null,
+      "name": null
+    },
+    "group": false,
     "mine": null,
     "canChoose": false,
     "tie": false,
@@ -51,13 +57,16 @@
     "tied": [],
     "roll": {
       "member": "pr_member3",
-      "die": 6,
+      "die": 16,
       "bonus": 0,
-      "total": 6,
+      "total": 16,
       "dc": 15,
-      "success": false
+      "success": true,
+      "dice": null,
+      "group": null
     },
-    "vip": false
+    "vip": false,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": null,

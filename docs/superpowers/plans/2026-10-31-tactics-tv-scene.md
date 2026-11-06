@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # ArcBox Tactics TV scene: plan (milestone 3b)
 
 - **Spec:** [adapter design](../specs/2026-10-31-tactics-battle-adapter-design.md), milestone 3b, and §4.3 / §8.

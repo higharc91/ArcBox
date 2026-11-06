@@ -43,10 +43,12 @@
     },
     "leader": false,
     "vip": false,
+    "difficulty": "Normal",
     "feed": [],
     "portal": "/c/ABCD",
     "haggle": {
       "can": false,
+      "spent": false,
       "dc": 15,
       "result": null
     }

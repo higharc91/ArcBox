@@ -10,9 +10,14 @@ internal sealed partial class Planner
     /// An ability the unit may use on its turn: its definition (an item's own ability), the command's ability id
     /// (<see cref="Battle.UseItem"/> for an item) and item, whether it takes the action or the bonus action, whether it is
     /// a disengage (<see cref="Escape"/>) or a dash, and whether it leaves the map as it is (<see cref="Stable"/>), so a
-    /// move planned before it still holds after it.
+    /// move planned before it still holds after it. <see cref="Moves"/> marks one that moves units or changes the ground
+    /// (not just one that stops someone moving): after it, only an action on the unit itself is sure to still hold.
+    /// <see cref="Surge"/> marks one that gives the unit an extra action (Action Surge); <see cref="Hop"/> is how far one
+    /// that moves the unit to an empty tile (a teleport or a leap) takes it, 0 for any other; <see cref="Meta"/> is the kind of
+    /// a metamagic ability (<c>twinned</c>, <c>careful</c>, …), null for any other.
     /// </summary>
-    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable, bool Reacts);
+    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable,
+        bool Reacts, bool Surge, int Hop, string? Meta, bool Moves);
 
     /// <summary>
     /// What the unit can use: its sheet's abilities and the built-in <c>common.*</c> actions it can pay for (in id order),
@@ -45,11 +50,20 @@ internal sealed partial class Planner
         var top = ability.Effects.IsDefault ? [] : ability.Effects;
         var escape = self && top.Any(e => e is ApplyEffect { Condition: var c } && c == Movement.Disengaged);
         var dash = self && top.Any(e => e is ExtraActionEffect { Kind: "move" });
-        var stable = !Scorer.All(top).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect or DashEffect
-            or JumpToEffect or ZoneEffect or HazardEffect or AlterTerrainEffect or SummonEffect or TransformEffect or TurnOrderEffect
-            || e is ApplyEffect a && Halts(a.Condition) || e is StatModEffect m && (m.Mods.CantMove || m.Mods.Incapacitated));
-        return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash,
-            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet));
+        var surge = self && top.Any(e => e is ExtraActionEffect { Kind: "action" });
+        var hop = ability.Target is { Kind: TargetKind.EmptyTile, Area.Shape: AreaShape.Single }
+            ? Math.Min(ability.Target.Range, top.Select(e => e switch { TeleportEffect { Self: true } t => t.Range, JumpToEffect j => j.Range, _ => 0 })
+                .DefaultIfEmpty(0).Max())
+            : 0;
+        var moves = Scorer.All(top).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect or DashEffect
+            or JumpToEffect or ZoneEffect or HazardEffect or AlterTerrainEffect or SummonEffect or TransformEffect or TurnOrderEffect)
+            || _scorer.ChangesSurface(ability, _me.Sheet);
+        var halts = Scorer.All(top).Any(e => e is ApplyEffect a && Halts(a.Condition)
+                                             || e is StatModEffect m && (m.Mods.CantMove || m.Mods.Incapacitated));
+        var meta = top.OfType<TransformEffect>().Where(t => t.Hook == "metamagic").Select(t => NamedHooks.String(t.Args, "kind"))
+            .FirstOrDefault(k => k is not null);
+        return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash, !moves && !halts,
+            _scorer.Reacts(ability, _me.Sheet), surge, Math.Max(0, hop), meta, moves);
     }
 
     /// <summary>True when the condition (or one it implies) stops its holder moving or acting.</summary>
@@ -93,28 +107,39 @@ internal sealed partial class Planner
         return _hypo[t] = (state, new BattleWriter(state, _rules));
     }
 
-    /// <summary>One way to use an ability from a tile: the target, the aim, whom it affects and what that is worth.</summary>
-    private sealed record Action(Target Target, Tile Aim, ImmutableArray<UnitId> Affected, double Value);
+    /// <summary>
+    /// One way to use an ability from a tile: the target, the aim, whom it affects and what that is worth; for a weapon
+    /// attack that spreads its attacks, the target of each (<see cref="Use.Targets"/>, default when they all go to
+    /// <see cref="Target"/>).
+    /// </summary>
+    private sealed record Action(Target Target, Tile Aim, ImmutableArray<UnitId> Affected, double Value,
+        ImmutableArray<UnitId> Targets = default);
 
-    private IEnumerable<Action> Actions(Usable usable, Tile from) => Actions(usable, from, Hypo(from).State);
+    private IEnumerable<Action> Actions(Usable usable, Tile from) => Actions(usable, from, Hypo(from).State, Hypo(from).W);
 
     /// <summary>
     /// Every legal target or aim for <paramref name="usable"/> by the unit on <paramref name="from"/> in
-    /// <paramref name="state"/>, with its worth. Single-target unit abilities try each unit; area abilities aim only at tiles
-    /// whose area covers a unit they are meant for (a foe; an ally for ally abilities); self lines and cones try the four
-    /// directions. Legality is the engine's own (<see cref="Battle.ResolveTarget"/>).
+    /// <paramref name="state"/> (<paramref name="w"/>, a working copy of it, if there is one), with its worth. Single-target
+    /// unit abilities try each unit; area abilities aim only at tiles whose area covers a unit they are meant for (a foe; an
+    /// ally for ally abilities); self lines and cones try the four directions. A teleport or leap (<see cref="Usable.Hop"/>)
+    /// on its own is an escape: it aims at the best landing tiles with less threat on them than where it is used from
+    /// (<see cref="Landings"/>) and is worth what landing there gains on staying (<see cref="Land"/> less <see cref="Place"/>);
+    /// to close in, the unit walks (or teleports and then acts, <see cref="HopThenAct"/>). A summon aims at the empty tiles
+    /// beside its foes and next to the user, the ones nearer a foe first. Legality is the engine's own
+    /// (<see cref="Battle.ResolveTarget"/>).
     /// </summary>
-    private IEnumerable<Action> Actions(Usable usable, Tile from, BattleState state)
+    private IEnumerable<Action> Actions(Usable usable, Tile from, BattleState state, BattleWriter? w = null)
     {
         var ability = usable.Ability;
         var def = ability.Target;
         var area = def.Area;
         var me = state.Units[_me.Id];
-        var w = ReferenceEquals(state, Hypo(from).State) ? Hypo(from).W : new BattleWriter(state, _rules);
+        w ??= new BattleWriter(state, _rules);
         var everywhere = area.Shape is AreaShape.AllAllies or AreaShape.AllEnemies;
         var forAllies = def.Kind is TargetKind.Ally or TargetKind.DownedAlly;
         var units = state.Units.Values.Where(DownedRules.InBattle).ToArray();
         var meant = units.Where(u => forAllies ? !Scorer.Hostile(me, u) : Scorer.Hostile(me, u)).ToArray();
+        var summons = def.Kind == TargetKind.EmptyTile && Scorer.All(ability.Effects).Any(e => e is SummonEffect);
         // A weapon attack reaches as far as the sheet's weapon, not the ability's nominal range of 1 (Battle.Check decides
         // exactly; this only bounds the candidates, with room for the high-ground bonus).
         var maxRange = (ability.IsWeaponAttack && me.Sheet.Weapon.Ranged ? Math.Max(def.Range, me.Sheet.Weapon.Range) : def.Range) + 5;
@@ -130,8 +155,15 @@ internal sealed partial class Planner
             targets = units.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Unit: u.Id));
         else if (area.Shape == AreaShape.Single && def.Kind == TargetKind.Tile)
             targets = meant.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Tile: u.Pos));
+        else if (area.Shape == AreaShape.Single && usable.Hop > 0)
+            targets = Landings(from, usable.Hop, escape: true).Select(t => new Target(Tile: t));
         else if (area.Shape == AreaShape.Single)
-            targets = [];   // empty-tile abilities move the user or place something; the planner leaves them be
+            targets = summons
+                ? meant.SelectMany(u => Neighbours(u.Pos)).Concat(Neighbours(from))
+                    .Where(t => Reach.Distance(from, t) <= maxRange && _scorer.Terrain.Map.InBounds(t) && _scorer.Terrain.Walkable(t)
+                                && !units.Any(u => u.Pos == t))
+                    .Distinct().Order().Select(t => new Target(Tile: t))
+                : [];   // other empty-tile abilities: nothing the planner knows how to value
         else if (area.Shape is AreaShape.Line or AreaShape.Cone)
             targets = meant.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Tile: u.Pos));
         else
@@ -150,14 +182,21 @@ internal sealed partial class Planner
             if (Battle.ResolveTarget(w, me, ability, target, out var aim, out var affected) is not null)
                 continue;
             double value;
+            ImmutableArray<UnitId> listed = default;
             if (fixedAim && _aimValues.TryGetValue((usable.Command, usable.Item, aim), out var known))
                 value = known;
+            else if (Strikes.Aimed(ability) && me.Sheet.Attacks > 1 && affected.Length == 1)
+                (value, listed, affected) = Aimed(usable, w, me, w.State.Units[affected[0]]);
             else
             {
                 value = Value(usable, w, me, aim, affected);
                 if (fixedAim)
                     _aimValues[(usable.Command, usable.Item, aim)] = value;
             }
+            if (usable.Hop > 0)
+                value += Land(aim) - Place(from);
+            else if (summons)
+                value -= 0.01 * meant.Select(u => Reach.Distance(u.Pos, aim)).DefaultIfEmpty(0).Min();
             if (usable.Reacts)
             {
                 var reaction = _scorer.ReactionWorth(new Strike(w, me, ability, aim, neutral: false), aim, affected, _p);
@@ -165,8 +204,60 @@ internal sealed partial class Planner
                     continue;
                 value += reaction.Value;
             }
-            yield return new Action(target, aim, affected, value);
+            yield return new Action(target, aim, affected, value, listed);
         }
+    }
+
+    /// <summary>
+    /// A share of the first target's HP at which it is "predicted" dead: once the attacks so far drop it at least this
+    /// likely, the rest may go to another foe.
+    /// </summary>
+    private const double PredictedKill = 0.5;
+
+    /// <summary>
+    /// What an aimed weapon attack of several attacks (<see cref="Strikes.Aimed"/>) at <paramref name="first"/> is worth, and
+    /// where its attacks go. All of them at <paramref name="first"/> is the default. Once the first k attacks are expected to
+    /// drop it at least <see cref="PredictedKill"/> likely, the other attacks may go to another foe the ability can reach
+    /// from here (<see cref="Battle.ResolveTarget"/>; plain attacks after a <see cref="AbilityDef.RiderOnce"/> rider,
+    /// <see cref="Scorer.FollowUps"/>): every such k and foe is tried, and the split worth most is kept when it beats all of
+    /// them at <paramref name="first"/>. Ties keep the fewer attacks moved, then the lower unit id.
+    /// </summary>
+    private (double Value, ImmutableArray<UnitId> Targets, ImmutableArray<UnitId> Affected) Aimed(Usable usable, BattleWriter w,
+        UnitState me, UnitState first)
+    {
+        var ability = usable.Ability;
+        var count = me.Sheet.Attacks;
+        var st = new Strike(w, me, ability, first.Pos, neutral: false);
+        var onFirst = _scorer.StrikeOutcomes(ability, count, st, first);
+        var best = _scorer.Worth(me, first, onFirst[^1], _p);
+        ImmutableArray<UnitId> targets = default;
+        ImmutableArray<UnitId> affected = [first.Id];
+
+        var hp = Math.Max(1, first.Hp + first.TempHp);
+        var from = Enumerable.Range(1, count - 1).FirstOrDefault(k => onFirst[k - 1].Damage.AtLeast(hp) >= PredictedKill);
+        if (from == 0 || !Scorer.Hostile(me, first))
+            return (best, targets, affected);
+        var others = w.State.Units.Values
+            .Where(u => u.Id != first.Id && DownedRules.InBattle(u) && Scorer.Hostile(me, u) && u.Sheet.Side != Side.Neutral
+                        && Battle.ResolveTarget(w, me, ability, new Target(Unit: u.Id), out _, out var hit) is null && hit.Contains(u.Id))
+            .ToArray();
+        var fired = st.Fired.ToArray();
+        foreach (var other in others)
+        {
+            st.Fired.Clear();
+            st.Fired.UnionWith(fired);
+            var follow = _scorer.FollowUps(ability, count - from, st, other);
+            for (var k = count - 1; k >= from; k--)
+            {
+                var value = _scorer.Worth(me, first, onFirst[k - 1], _p) + _scorer.Worth(me, other, follow[count - k - 1], _p);
+                if (Round(value) <= Round(best))
+                    continue;
+                best = value;
+                targets = [.. Enumerable.Repeat(first.Id, k), .. Enumerable.Repeat(other.Id, count - k)];
+                affected = [first.Id, other.Id];
+            }
+        }
+        return (best, targets, affected);
     }
 
     private readonly Dictionary<AbilityId, ImmutableArray<Tile>> _reactionAims = [];
@@ -200,13 +291,13 @@ internal sealed partial class Planner
 
     /// <summary>
     /// What using <paramref name="usable"/> at <paramref name="aim"/> is worth: for each affected unit, what the ability's
-    /// unit blocks (all its attacks, for the Attack action) are expected to do to it (<see cref="Scorer.Worth"/>); plus its
+    /// unit blocks (all its attacks, for a weapon attack: <see cref="Expected"/>) are expected to do to it (<see cref="Scorer.Worth"/>); plus its
     /// tile blocks at the aim (a zone's effects on the units in it, a summon); less a little for dropping a concentration.
     /// </summary>
     private double Value(Usable usable, BattleWriter w, UnitState me, Tile aim, ImmutableArray<UnitId> affected)
     {
         var ability = usable.Ability;
-        var unitEffects = UnitEffects(ability, me);
+        var unitEffects = Scorer.UnitBlocks(ability.Effects);
         var tileEffects = (ability.Effects.IsDefault ? [] : ability.Effects).Where(e => e.OnTile).ToImmutableArray();
 
         var st = new Strike(w, me, ability, aim, neutral: false);
@@ -215,7 +306,7 @@ internal sealed partial class Planner
             foreach (var id in affected)
             {
                 var target = w.State.Units[id];
-                value += _scorer.Worth(me, target, _scorer.Walk(unitEffects, st, target), _p);
+                value += _scorer.Worth(me, target, Expected(ability, me, st, target), _p);
             }
         foreach (var effect in tileEffects)
             value += _scorer.TileWorth(effect, st, aim, _p);
@@ -225,24 +316,33 @@ internal sealed partial class Planner
     }
 
     /// <summary>
-    /// The ability's blocks that run on each unit it affects, in order: all of them for each attack of the Attack action.
+    /// What <paramref name="ability"/>'s unit blocks are expected to do to <paramref name="target"/>: once, or for a weapon
+    /// attack all of the user's attacks at it (<see cref="Scorer.StrikeOutcomes"/>, a <see cref="AbilityDef.RiderOnce"/>
+    /// rider counted once).
     /// </summary>
-    private static ImmutableArray<EffectDef> UnitEffects(AbilityDef ability, UnitState user)
+    private Outcome Expected(AbilityDef ability, UnitState me, Strike st, UnitState target)
+        => ability.IsWeaponAttack
+            ? _scorer.StrikeOutcomes(ability, me.Sheet.Attacks, st, target)[^1]
+            : _scorer.Walk(Scorer.UnitBlocks(ability.Effects), st, target);
+
+    /// <summary>
+    /// True when <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
+    /// may drop <paramref name="unit"/>: its damage can reach the HP left.
+    /// </summary>
+    private bool MayDrop(Usable usable, Action action, (BattleState State, BattleWriter W) at, UnitId unit)
     {
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
-        return [.. effects.Where(e => !e.OnTile)];
+        var target = at.State.Units[unit];
+        return DamageOn(usable, action, at, unit).AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
     }
 
-    /// <summary>True when <paramref name="c"/>'s action may drop <paramref name="unit"/>: its damage can reach the HP left.</summary>
-    private bool MayDrop(Candidate c, UnitId unit)
+    /// <summary>
+    /// The damage <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
+    /// is expected to deal <paramref name="unit"/>.
+    /// </summary>
+    private DamageDist DamageOn(Usable usable, Action action, (BattleState State, BattleWriter W) at, UnitId unit)
     {
-        var (state, w) = Hypo(c.ActTile);
-        var me = state.Units[_me.Id];
-        var target = state.Units[unit];
-        var outcome = _scorer.Walk(UnitEffects(c.Usable!.Ability, me), new Strike(w, me, c.Usable.Ability, c.Action!.Aim, neutral: false),
-            target);
-        return outcome.Damage.AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
+        var me = at.State.Units[_me.Id];
+        var target = at.State.Units[unit];
+        return Expected(usable.Ability, me, new Strike(at.W, me, usable.Ability, action.Aim, neutral: false), target).Damage;
     }
 }

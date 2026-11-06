@@ -25,8 +25,8 @@ public static class Ai
     /// <item>A defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
     /// on the reactor, when it turns the pending hit into a miss against the known roll (the AC it adds, from
     /// <c>statMod</c>s and applied conditions, lifts the AC above the roll's total; never against a natural 20), or when it
-    /// prevents at least 25% of the reactor's max HP of the hit's expected damage (its expected temporary HP, beyond what
-    /// the reactor has, up to that damage). The one that turns the hit into a miss first, then the one preventing most.</item>
+    /// prevents at least 25% of the reactor's max HP of the hit's expected damage (temporary HP beyond what
+    /// the reactor has, resistance or halving, capped at that damage). The one that turns the hit into a miss first, then the one preventing most.</item>
     /// <item>The opportunity attack, or another reaction aimed at the actor (a rebuke, a counterspell), when its expected
     /// value is above 0: what it is worth to the reactor's profile (<see cref="AiProfile.For"/>) less what its resources
     /// cost (<see cref="AiProfile.Spend"/>). A counterspell is worth what the spell being cast (the cause's ability) is worth
@@ -76,8 +76,52 @@ public static class Ai
     }
 
     /// <summary>
+    /// Whether taking <paramref name="option"/> of <paramref name="offer"/> changes how the pending event turns out for the reactor: the
+    /// question behind a player's "only when it matters" reaction preference (issue #113). Per reaction, so a rule is one more case
+    /// here. Today that is a defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
+    /// on the reactor that turns this hit into a miss: the AC it adds lifts the AC above the roll's total (never against a natural 20),
+    /// or Uncanny Dodge when halving this hit prevents Downing (an isolated replay using copies of state and RNG).
+    /// Judged on the offer's own cause, so each attack of a multi-attack is its own question. Rolls nothing. False for the pass, for an
+    /// offer without a cause, and for any reaction with no rule yet.
+    /// </summary>
+    public static bool ChangesOutcome(BattleState s, ReactionOffer offer, ReactionChoice option, RulesPack rules)
+    {
+        if (option.Id == Reactions.Pass || option.Id == Reactions.Opportunity || option.Ability is not { } id
+            || !rules.Abilities.TryGetValue(id, out var ability) || ability.Target.Kind != TargetKind.Self
+            || offer.Cause is not { Kind: ReactionTriggerKind.BeforeHit } trigger || trigger.Target != offer.Reactor
+            || !s.Units.TryGetValue(offer.Reactor, out var reactor) || !s.Units.TryGetValue(trigger.Actor, out var actor))
+            return false;
+        if (Scorer.All(ability.Effects).Any(e => e is HalveHitEffect))
+        {
+            var hit = s.Queue.OfType<AttackStep>().FirstOrDefault(step => step.Source == actor.Id
+                && step.Target == reactor.Id && step.Roll is not null && step.Resolution is not null);
+            return hit is not null && SurvivesHit(s, hit, reactor.Id, false, rules) == false
+                && SurvivesHit(s, hit, reactor.Id, true, rules) == true;
+        }
+        return Defends(new Scorer(s, rules), ability, reactor, actor, trigger).Miss;
+    }
+
+    // Replay only this hit and its hooks on immutable copies. A further player decision makes the result unknown;
+    // it is never evidence of Downing. The battle's RNG and queued future attacks stay untouched.
+    private static bool? SurvivesHit(BattleState state, AttackStep hit, UnitId defender, bool halve, RulesPack rules)
+    {
+        var w = new BattleWriter(state with { Pending = null, Queue = [hit] }, rules);
+        if (halve)
+            w.Set(w.Unit(defender) with { HalvedHit = hit.Resolution, HalvedHitDamage = 0,
+                Economy = w.Unit(defender).Economy with { Reaction = false } });
+        for (var steps = 0; steps < Battle.MaxStepsPerCommand && w.State.Pending is null; steps++)
+        {
+            if (w.PopFront() is not { } step)
+                return w.Unit(defender).Life == LifeState.Up;
+            w.HookDepth = 0;
+            step.Run(w, rules);
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Whether <paramref name="ability"/> turns the hit <paramref name="trigger"/> describes into a miss, and how much of
-    /// its expected damage it prevents otherwise (its temporary HP).
+    /// its expected damage it prevents otherwise (temporary HP, resistance or halving).
     /// </summary>
     private static (bool Miss, double Prevented) Defends(Scorer scorer, AbilityDef ability, UnitState reactor, UnitState actor,
         ReactionTrigger trigger)
@@ -107,7 +151,8 @@ public static class Ai
             return (true, hit);
         var temp = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, reactor.Pos, neutral: false), reactor).TempHp;
         var resists = Scorer.All(ability.Effects).Any(e => e is StatModEffect { Mods.Resist.IsEmpty: false });
-        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists ? 0.5 * hit : 0.0));
+        var halves = Scorer.All(ability.Effects).Any(e => e is HalveHitEffect);
+        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists || halves ? 0.5 * hit : 0.0));
         return (false, prevented);
     }
 
@@ -144,12 +189,15 @@ public static class Ai
     /// <summary>
     /// What countering <paramref name="caster"/>'s <paramref name="spellId"/> is worth: its effects still queued (its unit
     /// runs as their worth to the caster on each unit, its tile runs as <see cref="Scorer.TileWorth"/> at their aim), times
-    /// the chance <paramref name="reactor"/> counters it.
+    /// the chance <paramref name="reactor"/> counters it. The worth is what the spell does, whatever the reactor's own
+    /// fair-play rule (#110): a hit on a Downed unit counts as a cruel profile's gain (it takes the countdown down), never as
+    /// the cost it is to a profile that won't hit the Downed itself.
     /// </summary>
     private static double Countering(Scorer scorer, AiProfile profile, UnitState reactor, UnitState caster, AbilityId spellId)
     {
         if (!scorer.Rules.Abilities.TryGetValue(spellId, out var spell) || spell.Tier < 1)
             return 0;
+        profile = profile with { Cruel = true };
         var units = scorer.State.Units;
         var worth = 0.0;
         foreach (var step in scorer.State.Queue.OfType<RunEffectsStep>())

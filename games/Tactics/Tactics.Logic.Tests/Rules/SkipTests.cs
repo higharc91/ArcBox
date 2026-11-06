@@ -30,7 +30,8 @@ public sealed class SkipTests
         var (after, events) = battle.Apply(state, new EndTurn(U("kara")));
 
         Assert.Equal(
-            [new TurnEnded(U("kara")), new TurnSkipped(U("vex"), "downed"), new TurnStarted(U("gob"), 1)],
+            [new TurnEnded(U("kara")), new TurnSkipped(U("vex"), "downed"), new CountdownTicked(U("vex"), 2),
+                new TurnStarted(U("gob"), 1)],
             events);
         Assert.Equal(U("gob"), after.Active);
     }

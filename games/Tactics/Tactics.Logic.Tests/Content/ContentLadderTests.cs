@@ -133,6 +133,44 @@ public sealed class ContentLadderTests
         Assert.True(problems.Count == 0, string.Join("\n", problems));
     }
 
+    [Fact]
+    public void Fireball_and_cone_of_cold_each_gain_at_least_half_per_target()
+    {
+        foreach (var cls in new[] { "wizard", "sorcerer" })
+        for (var level = 1; level <= 10; level++)
+        {
+            double Damage(string id) => DirectDamage(Rules.Abilities[new($"{cls}.{id}")].Effects, level);
+            Assert.True(Damage("fireball") >= 1.5 * Damage("burning_hands"), $"{cls} Fireball at {level}");
+            Assert.True(Damage("cone_of_cold") >= 1.5 * Damage("fireball"), $"{cls} Cone of Cold at {level}");
+        }
+    }
+
+    [Fact]
+    public void Primary_attack_and_bard_heal_dice_never_fall_on_level_up()
+    {
+        foreach (var cls in Rules.Classes.Keys)
+        {
+            UnitSheet Sheet(int level) => SheetBuilder.ForCharacter(
+                SheetBuilder.DefaultCharacter("Test", "human", cls, null, level, Rules), Rules);
+            for (var level = 2; level <= 10; level++)
+                Assert.True(Sheet(level).Weapon.Damage.Average * Sheet(level).Attacks
+                    >= Sheet(level - 1).Weapon.Damage.Average * Sheet(level - 1).Attacks,
+                    $"{cls} primary weapon loses dice at level {level}");
+        }
+        foreach (var ability in Rules.Abilities.Values)
+        {
+            // Every attack's direct dice are checked, including subclass variants and the monk's bonus attacks.
+            if (!ability.IsWeaponAttack && !ability.Id.Value.StartsWith("monk.", StringComparison.Ordinal)
+                && ability.Id.Value != "warlock.eldritch_blast" && ability.Id.Value != "bard.healing_word"
+                && ability.Id.Value != "bard.cure_wounds")
+                continue;
+            double DiceAt(int level) => DirectDamage(ability.Effects, level)
+                + ability.Effects.OfType<HealEffect>().Sum(e => e.Dice.At(level).Average);
+            for (var level = 2; level <= 10; level++)
+                Assert.True(DiceAt(level) >= DiceAt(level - 1), $"{ability.Id} loses dice at level {level}");
+        }
+    }
+
     /// <summary>Tiles an area covers on open ground, aimed one tile east of the caster (the direction for lines and cones).</summary>
     private static int Footprint(AreaDef area)
         => Areas.Tiles(area, Centre, new Tile(Centre.X + 1, Centre.Y), Open).Length;

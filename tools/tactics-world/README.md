@@ -187,7 +187,7 @@ week is realistic (spec section 7). Write it here when it's done:
 
 ## Checking that a change walks
 
-You can't walk it yet: milestone 5b isn't built. Three things tell you today.
+Walking is implemented. Use the [TV/two-phone quick start](../../games/Tactics/DEVELOPING.md#tv-plus-two-bot-phones) to try the exported map in game; the walk automation also checks server restart, TV reconnect and a dropped phone. Three additional checks validate the export.
 
 1. **The export's reach check,** a problem: every marker can be reached on foot from the start, by the rules' climbing limit.
 2. **`StoryOrder`, at export,** a warning: it replays Chapter 1 branch by branch, with each battle's stamp shut until it's won, and proves
@@ -199,7 +199,7 @@ You can't walk it yet: milestone 5b isn't built. Three things tell you today.
    ```
 
 `AshenFordDraftTests` in that project test the original draft's code, not your paint, so they pass whatever you do. `BasePackRegionTests` are
-the ones that look at your work. None of these tell you how it looks or feels: for that you need the game, from 5b on.
+the ones that look at your work. The export checks cannot establish how walking looks or feels; play the map on the TV and phones as well.
 
 ## Exporting from a command line
 

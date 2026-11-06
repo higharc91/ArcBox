@@ -38,6 +38,19 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
         AssertWithinBudget(setup, rules, $"{encounter}, level {level}");
     }
 
+    /// <summary>
+    /// #110: elves (every hero has Fey Step) with a Shadow rogue (Shadowstep), so the melee heroes' teleport routes beside
+    /// each foe are timed as well as the casters' landings.
+    /// </summary>
+    [Fact]
+    [Trait("Category", "Perf")]
+    public void P95_under_250ms_with_teleporting_melee_heroes()
+    {
+        var rules = BasePackTests.Rules;
+        var setup = Encounters.Setup("crystal_cave", Party(rules, 7, "elf", ("rogue", "rogue.shadow")), Difficulty.Normal, rules);
+        AssertWithinBudget(setup, rules, "crystal_cave, level 7, elves with a Shadow rogue");
+    }
+
     [Fact]
     [Trait("Category", "Perf")]
     public void P95_under_250ms_with_overlapping_hazard_paths_on_6_vs_10()
@@ -89,10 +102,11 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
     }
 
     /// <summary>
-    /// 6 heroes (fighter, cleric, rogue, wizard, fighter, cleric; the last three absent, so companions) at
-    /// <paramref name="level"/>.
+    /// 6 heroes (fighter, cleric, rogue, wizard, fighter, cleric; the last three absent, so companions) of
+    /// <paramref name="race"/> at <paramref name="level"/>, with the <paramref name="subclasses"/> given (class, subclass).
     /// </summary>
-    private static ImmutableArray<PartyMember> Party(RulesPack rules, int level)
+    private static ImmutableArray<PartyMember> Party(RulesPack rules, int level, string race = "human",
+        params (string Class, string Subclass)[] subclasses)
     {
         string[] classes = ["fighter", "cleric", "rogue", "wizard", "fighter", "cleric"];
         var profiles = new Dictionary<string, string>
@@ -102,7 +116,8 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
         return [.. classes.Select((cls, i) =>
         {
             var id = $"{cls}{i + 1}";
-            return new PartyMember(new UnitId(id), SheetBuilder.DefaultCharacter(id, "human", cls, null, level, rules),
+            var subclass = subclasses.Where(s => s.Class == cls).Select(s => s.Subclass).FirstOrDefault();
+            return new PartyMember(new UnitId(id), SheetBuilder.DefaultCharacter(id, race, cls, subclass, level, rules),
                 new AiControlled(i < 3 ? profiles[cls] : "companion"));
         })];
     }

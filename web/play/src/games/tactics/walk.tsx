@@ -1,3 +1,4 @@
+import { Give } from "./give";
 import { WalkJournal } from "./quests";
 import type { JSX } from "preact";
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
@@ -180,12 +181,28 @@ function Pad({ sender }: { sender: WalkSender }) {
   );
 }
 
+const DIFFICULTIES = ["Story", "Normal", "Hard"] as const;
+
+/** The campaign's difficulty, set by the VIP any time outside a battle; the server refuses it in one. */
+function DifficultyPicker({ current, send }: { current: string; send: CustomScreenProps["send"] }) {
+  const sfx = useSfx();
+  return (
+    <div class="tx-difficulty" role="group" aria-label="Difficulty">
+      <span class="tx-difficulty-label">Difficulty</span>
+      {DIFFICULTIES.map((level) => (
+        <button type="button" class={`tx-btn ghost${level === current ? " on" : ""}`} aria-pressed={level === current} key={level}
+          onClick={() => { if (level !== current) { sfx("select"); send("difficulty", { level }); } }}>{level}</button>
+      ))}
+    </div>
+  );
+}
+
 /** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
 /**
  * The VIP's menu: Choose a battle (with the battle list) and End session, each behind a confirm. The story's screens show it
  * too, with no battle and "Keep playing" (`keep`), as the server takes End session in a scene.
  */
-export function HostMenu({ canBattle, send, keep = "Keep walking" }: { canBattle: boolean; send: CustomScreenProps["send"]; keep?: string }) {
+export function HostMenu({ canBattle, send, keep = "Keep walking", difficulty }: { canBattle: boolean; send: CustomScreenProps["send"]; keep?: string; difficulty?: string }) {
   // Both take the whole table out of the walk, and the leader's pad with it, so both ask first.
   const [asked, setSure] = useState<"battles" | "endSession" | null>(null);
   // A battle confirm outlives no battles: it goes at once, and stays gone if they come back.
@@ -219,6 +236,7 @@ export function HostMenu({ canBattle, send, keep = "Keep walking" }: { canBattle
     <div class="tx-walk-host">
       {canBattle ? <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure("battles"); }}>Choose a battle</button> : <span />}
       <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure("endSession"); }}>End session</button>
+      {difficulty ? <DifficultyPicker current={difficulty} send={send} /> : null}   {/* below the two buttons, so they stay where the confirm expects them */}
     </div>
   );
 }
@@ -450,13 +468,14 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>
-        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Session actions">•••</summary><HostMenu canBattle={d.canBattle} send={send} /></details> : null}
+        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Session actions">•••</summary><HostMenu canBattle={d.canBattle} difficulty={d.difficulty} send={send} /></details> : null}
         </div>
         <div class="tx-walk-info">
         {d.leader || d.leaderName
           ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
           : null}
         {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
+        {(d.canGive || d.give) && <Give data={d.give} gold={d.gold ?? 0} send={send} viewId={viewId} stop={() => sender.release()} />}
         <div class="tx-walk-goal">
           <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}

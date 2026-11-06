@@ -46,6 +46,19 @@ public sealed class TrapInjuriesTests
     }
 
     [Fact]
+    public void Traps_never_duplicate_held_injuries_and_exhausted_tables_give_none()
+    {
+        var rules = Base.Value;
+        InjuryId[] held = [new("singed")];
+        Assert.Null(TrapInjuries.Pick(new TrapDef(1, Injury: "singed"), rules, 1, held));
+        Assert.DoesNotContain(TrapInjuries.Table(rules, held), i => i.Id == held[0]);
+        Assert.Equal(8, TrapInjuries.Total(rules, held));
+        var all = TrapInjuries.Table(rules).Select(i => i.Id).ToArray();
+        Assert.Equal(0, TrapInjuries.Total(rules, all));
+        Assert.Null(TrapInjuries.Pick(new TrapDef(1), rules, 1, all));
+    }
+
+    [Fact]
     public void A_trap_that_names_its_injury_gives_that_one_whatever_the_roll()
     {
         var rules = Base.Value;

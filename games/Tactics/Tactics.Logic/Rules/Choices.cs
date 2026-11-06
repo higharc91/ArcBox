@@ -17,10 +17,13 @@ public sealed record TargetChoice(Target Target, Tile Aim, ImmutableArray<UnitPr
 
 /// <summary>
 /// An ability or item the unit can use now, with its tooltip, its cost and every legal target. <see cref="Item"/> is set
-/// for an item, used as <see cref="Battle.UseItem"/>.
+/// for an item, used as <see cref="Battle.UseItem"/>. <see cref="Attacks"/> is set (above 1) for a weapon attack aimed at
+/// one foe that makes several attacks: each may go to any of its <see cref="Targets"/> (<see cref="Use.Targets"/>), and its
+/// previews are for all of them at that one.
 /// </summary>
 public sealed record AbilityChoice(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
-    ImmutableArray<TargetChoice> Targets);
+    ImmutableArray<TargetChoice> Targets,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
 
 /// <summary>Everything a unit can do on its turn as things stand (<see cref="Choices.For"/>).</summary>
 public sealed record TurnChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
@@ -105,7 +108,7 @@ public static class Choices
                 continue;
             var name = item is { } i ? rules.Items[i].Name : ability.Name;
             choices.Add(new AbilityChoice(command, item, name, Tooltips.For(ability, me.Sheet.Level, rules, state.Environment), ability.Cost,
-                targets.ToImmutable()));
+                targets.ToImmutable(), Strikes.Aimed(ability) && me.Sheet.Attacks > 1 ? me.Sheet.Attacks : null));
         }
         return choices.ToImmutable();
     }
@@ -142,14 +145,13 @@ public static class Choices
     private static ImmutableArray<UnitPreview> Previews(AbilityDef ability, UnitState me, Tile aim, ImmutableArray<UnitId> affected,
         BattleWriter w, Scorer scorer)
     {
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, me.Sheet.Attacks)).SelectMany(e => e)];
-        var unitEffects = effects.Where(e => !e.OnTile).ToImmutableArray();
+        var unitEffects = Scorer.UnitBlocks(ability.Effects);
         var strike = new Strike(w, me, ability, aim, neutral: true);
         return [.. affected.Select(id =>
         {
-            var outcome = scorer.Walk(unitEffects, strike, w.State.Units[id]);
+            var outcome = ability.IsWeaponAttack
+                ? scorer.StrikeOutcomes(ability, me.Sheet.Attacks, strike, w.State.Units[id])[^1]
+                : scorer.Walk(unitEffects, strike, w.State.Units[id]);
             return new UnitPreview(id, Math.Round(outcome.Damage.Mean, 1), Math.Round(outcome.Heal, 1));
         })];
     }

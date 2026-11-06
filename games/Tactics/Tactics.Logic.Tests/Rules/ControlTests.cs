@@ -42,6 +42,25 @@ public sealed class ControlTests
     }
 
     [Fact]
+    public void A_party_members_summon_changes_hands_but_an_enemys_does_not()
+    {
+        var (state, _) = Battle_().Start();
+        var kara = state.Units[U("kara")];
+        var hound = kara with { Id = U("kara.hound.1"), SummonedBy = U("kara"), Pos = T(0, 0) };
+        state = state with { Units = state.Units.Add(hound.Id, hound) };
+
+        var ai = new AiControlled("companion");
+        var handed = Battle.Hand(state, hound.Id, ai);
+        Assert.Equal(ai, handed.Units[hound.Id].Controller);
+        var player = new PlayerControlled(new ArcBox.Sdk.ProfileId("p1"));
+        Assert.Equal(player, Battle.Hand(handed, hound.Id, player).Units[hound.Id].Controller);
+
+        var imp = state.Units[U("gob")] with { Id = U("gob.imp.1"), SummonedBy = U("gob") };
+        state = state with { Units = state.Units.Add(imp.Id, imp) };
+        Assert.Throws<ArgumentException>(() => Battle.Hand(state, imp.Id, ai));
+    }
+
+    [Fact]
     public void Only_party_members_change_hands_and_nothing_else_changes()
     {
         var (state, _) = Battle_().Start();

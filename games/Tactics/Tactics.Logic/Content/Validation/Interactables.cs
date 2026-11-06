@@ -182,6 +182,7 @@ internal sealed partial class Validation
             var placed = Placement();
             Levers();
             Reveals();
+            CampWatch();
             Injuries();
             if (placed && _world is not null)
                 Reach();
@@ -227,6 +228,14 @@ internal sealed partial class Validation
                     Error(t, "at", $"'{def.Id}' at {at} isn't on ground that can be walked: a thing stands on open ground, and a passage is open ground while it's open.");
             }
             return ok;
+        }
+
+        private void CampWatch()
+        {
+            foreach (var fire in _things.Where(t => t.Def.Kind == "campfire"))
+                if (!_things.Any(t => t.Def.Hidden is not null && RecoveryRules.InWatchRange(fire.Def.At, t.Def.At)))
+                    v.Warnings.Add(new ContentError(fire.File, fire.Ptr,
+                        $"Campfire '{fire.Def.Id}' has no hidden find within watch range ({RecoveryRules.WatchRange} tiles)."));
         }
 
         private void Levers()

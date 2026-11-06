@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ArcBox.Sdk;
 
 namespace Redline.Logic;
@@ -14,7 +15,10 @@ public sealed record RedlineHostView(
     string Attribution,                 // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
     Payouts Payouts,                    // the throttle payouts from RedlineRules, for the TV rules strip
     Podium? Podium = null,              // Anthem and Champagne only (podium spec §2)
-    QualifyingSession? Qualifying = null);   // the three Qualifying phases only (qualifying spec §5)
+    QualifyingSession? Qualifying = null,    // the three Qualifying phases only (qualifying spec §5)
+    // Reading and QualifyingReading only: the read-out the TV acknowledges with NarrationDone {seq} (issue #25). Left out of
+    // the JSON in every other phase, so those views are unchanged.
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? ReadSeq = null);
 
 /// <summary>
 /// Qualifying spec §5: the session's timing board. Spec §5 names this record <c>Qualifying</c>; that name is the
@@ -109,7 +113,7 @@ internal static class HostViews
     public static RedlineHostView Build(
         RacePhase phase, int round, RedlineRules rules, QuestionCard? question, int? correctIndex,
         IEnumerable<Driver> standings, DateTimeOffset? deadline, FinishSummary? finish, string attribution, Podium? podium = null,
-        (int Lap, string? FastestLap)? qualifying = null)
+        (int Lap, string? FastestLap)? qualifying = null, int? readSeq = null)
     {
         var cars = standings.ToList();
         return new(phase, round, rules.MaxRounds, rules.FinishLine, rules.CircuitId,
@@ -119,7 +123,8 @@ internal static class HostViews
             phase is RacePhase.Anthem or RacePhase.Champagne ? podium : null,
             IsQualifying(phase) && qualifying is var (lap, fastest)
                 ? new QualifyingSession(lap, rules.QualifyingLaps, [.. cars.Select(d => QualifyingRow(d, phase, fastest))])
-                : null);
+                : null,
+            phase is RacePhase.Reading or RacePhase.QualifyingReading ? readSeq : null);
     }
 
     /// <summary>

@@ -204,6 +204,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private const string Crit = "fx.crit.gold";
     private const string Pillar = "fx.pillar.shadow";
     private const string Miss = "MISS";
+    private const string Braced = "BRACED";
     private const string CritWord = "CRIT";
 
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
@@ -280,13 +281,16 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         /// -1. The events don't say which of their units the ability was aimed at, as a passive's effects run inline with nothing
         /// to mark their end, so only what can't be a side effect counts: the units other than the caster that a roll was made
         /// against. A passive's save lands on the target it was triggered by, so it can't add one. An ability with no rolls at all
-        /// (a mass heal) is judged by whom it touched before anything else could join in: a passive, or a collision.
+        /// (a mass heal) is judged by whom it touched before anything else could join in: a passive, or a collision. A weapon
+        /// attack whose attacks turn to another foe (<see cref="Retargeted"/>) is never an area: its attacks are swung one by one.
         /// </summary>
         private int AreaEnd(int start)
         {
             var source = ((AbilityUsed)beat.Events[start]).Source;
             var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded or TileReacted)).ToArray();
-            var rolled = window.Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
+            if (window.Any(e => e is Retargeted turned && turned.Unit == source))
+                return -1;   // one attack after another, each at its own foe (#107)
+            var rolled = window.Where((e, i) => !IsConcentrationCheck(window, i)).Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
             var targets = rolled.Count > 0
                 ? rolled
                 : window.TakeWhile(e => e is not (PassiveTriggered or Collided)).Select(Touched).OfType<UnitId>().Where(u => u != source).ToHashSet();
@@ -295,6 +299,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var last = Array.FindLastIndex(window, e => (RolledAgainst(e) ?? Touched(e)) is { } unit && targets.Contains(unit));
             return start + 1 + last;
         }
+
+        /// <summary>
+        /// True when <c>window[i]</c> is the save a unit makes to keep its concentration after a collision hurt it
+        /// (<see cref="Collided"/> for it, then its <see cref="Damaged"/>, then the roll): a side effect of a push, not a target.
+        /// </summary>
+        private static bool IsConcentrationCheck(BattleEvent[] window, int i)
+            => i >= 2 && window[i] is Rolled { Kind: RollKind.Save } save && window[i - 1] is Damaged hurt && hurt.Unit == save.Roller
+               && window[i - 2] is Collided hit && hit.Unit == save.Roller;
 
         private static UnitId? RolledAgainst(BattleEvent e) => e switch
         {
@@ -364,6 +376,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case Fell fell:
                     PlayFall(fell);
                     break;
+                case PushResisted resisted:
+                    Pop(resisted.Unit, Braced, PopStyle.Damage);
+                    Sound("collided");
+                    _cues.Add(new ShakeCue(_t, BeatTiming.Slide));
+                    _t += BeatTiming.Slide;
+                    break;
                 case Collided collided:
                     Burst(Spark, TileOf(collided.Unit));
                     Sound("collided");
@@ -380,6 +398,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case AbilityUsed used:
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
+                    break;
+                case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
+                    _ability = aimed with { Target = new Target(Unit: turned.Target) };   // the next swing goes at it
                     break;
                 case Rolled { Kind: RollKind.Attack } when _ability is { } again:
                     if (_swings > 0 && !InArea)
@@ -443,7 +464,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case CountdownTicked:
                     Sound("ui_countdown_tick");
                     Apply(e);
-                    _t += BeatTiming.Condition;
+                    _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
@@ -455,7 +476,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case Despawned or Transformed:
                     Burst(Puff, TileOf(e is Despawned gone ? gone.Unit : ((Transformed)e).Unit));
                     Apply(e);
-                    _t += BeatTiming.Puff;
+                    _t += InArea ? 0 : BeatTiming.Puff;
                     break;
                 case TileReacted reaction:
                     PlayReaction(reaction);
@@ -468,7 +489,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += _reaction is null ? BeatTiming.Condition : 0;
+                    _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);

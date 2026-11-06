@@ -43,7 +43,7 @@ public sealed class RecoveryServiceTests
         s.Send(1, "shopService", trade);
         Assert.Equal(75, s.Game.Document.Members[payer].Gold);
         var healedCard = s.Host.Shop!.Members!.Value.Single(m => m.Member == guest);
-        Assert.Equal(beforeCard.MaxHp + 5, healedCard.MaxHp);
+        Assert.Equal(Math.Max(1, healedCard.MaxHp * 15 / 100), healedCard.MaxHp - beforeCard.MaxHp);   // Cracked ribs: −15% of max HP
         Assert.DoesNotContain(healedCard.Injuries, i => i.Id == "cracked_ribs");
         Assert.Equal(100, s.Game.Document.Members[guest].Gold);
         Assert.DoesNotContain(new InjuryId("cracked_ribs"), s.Game.Document.Members[guest].Character.Injuries);

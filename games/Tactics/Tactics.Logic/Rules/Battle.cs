@@ -32,7 +32,7 @@ public static partial class Battle
             Counters: Ordinal.Map<int>(), FiredTriggers: Ordinal.Set(), Outcome: null, Injuries: [], ItemsUsed: [],
             NextSerial: 0, StartedThisRound: [], DelayedThisRound: [], Xp: setup.Xp,
             Loot: setup.Loot.IsDefault ? [] : setup.Loot, Difficulty: setup.Difficulty,
-            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment };
+            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment, NoRetreat = setup.NoRetreat };
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);
@@ -101,6 +101,8 @@ public static partial class Battle
         var state = w.State;
         if (state.Outcome is not null)
             return Rejection.Of(RejectCode.BattleOver);
+        if (command is Retreat retreat)
+            return PrepareRetreat(w, retreat);
         if (command is React react)
             return PrepareReact(w, react);
         if (state.Pending is not null)
@@ -125,6 +127,25 @@ public static partial class Battle
             default:
                 throw new ArgumentException($"Unknown command {command.GetType().Name}.", nameof(command));
         }
+    }
+
+    /// <summary>The round from which the party may fall back (<see cref="Retreat"/>).</summary>
+    public const int RetreatRound = 3;
+
+    /// <summary>
+    /// A party unit's <see cref="Retreat"/>, on anyone's turn and even with a reaction offer pending (the offer goes with the battle):
+    /// <see cref="RejectCode.InvalidTarget"/> for a unit that isn't on the party's side, <see cref="RejectCode.CantRetreat"/> before
+    /// round <see cref="RetreatRound"/> or when the encounter forbids it. Ends the battle <see cref="BattleOutcome.Fled"/>.
+    /// </summary>
+    private static Rejection? PrepareRetreat(BattleWriter w, Retreat retreat)
+    {
+        var state = w.State;
+        if (!state.Units.TryGetValue(retreat.Actor, out var unit) || unit.Sheet.Side != Side.Party)
+            return Rejection.Of(RejectCode.InvalidTarget);
+        if (state.NoRetreat || state.Round < RetreatRound)
+            return Rejection.Of(RejectCode.CantRetreat);
+        Objectives.End(w, BattleOutcome.Fled);
+        return null;
     }
 
     /// <summary>
@@ -170,7 +191,10 @@ public static partial class Battle
     /// runs of consecutive blocks: a run of tile blocks (<see cref="EffectDef.OnTile"/>) runs once at the aim with no target
     /// unit, even when the area holds no units; a run of other blocks runs once per affected unit in sorted
     /// <see cref="UnitId"/> order (one <see cref="RunEffectsStep"/> each). So <c>[attack, teleport]</c> attacks every target,
-    /// then teleports. Returns the rejection otherwise, leaving the queue untouched. An item use is the AI's
+    /// then teleports. A weapon attack (<see cref="AbilityDef.IsWeaponAttack"/>) instead queues its
+    /// <see cref="UnitSheet.Attacks"/> attacks as <see cref="StrikeStep"/>s (<see cref="Strikes.Plan"/>), aimed at
+    /// <see cref="Use.Targets"/> when the command lists them (checked by <see cref="ListRefusal"/>), else all at its target.
+    /// Returns the rejection otherwise, leaving the queue untouched. An item use is the AI's
     /// (<see cref="PayCostStep.ByAi"/>) when the user is AI-controlled or <paramref name="aiFinished"/> is set.
     /// </summary>
     private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules, bool aiFinished)
@@ -195,13 +219,21 @@ public static partial class Battle
             return cost;
         if (ResolveTarget(w, user, ability, use.Target, out var aim, out var targets) is { } target)
             return target;
-
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
+        if (!use.Targets.IsDefaultOrEmpty)
+        {
+            if (ListRefusal(w, user, ability, use, targets) is { } listed)
+                return listed;
+            targets = use.Targets;
+        }
 
         var byAi = use.Item is not null && (aiFinished || user.Controller is AiControlled);
         var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target, use.Item, byAi) };
+        if (ability.IsWeaponAttack)
+        {
+            steps.AddRange(Strikes.Plan(user, ability, aim, targets, Math.Max(1, user.Sheet.Attacks)));
+            targets = [.. targets.Distinct()];
+        }
+        var effects = ability.IsWeaponAttack || ability.Effects.IsDefault ? [] : ability.Effects;
         for (var start = 0; start < effects.Length;)
         {
             var onTile = effects[start].OnTile;
@@ -222,10 +254,34 @@ public static partial class Battle
     }
 
     /// <summary>
+    /// Why <paramref name="use"/>'s <see cref="Use.Targets"/> is refused, or null: only an aimed weapon attack
+    /// (<see cref="Strikes.Aimed"/>) takes a list, of at most one entry per attack, starting with the unit the command's
+    /// target picks (<paramref name="aimed"/>), and every unit in it must be one the ability could be used on now
+    /// (<see cref="ResolveTarget"/>'s rejection otherwise).
+    /// </summary>
+    private static Rejection? ListRefusal(BattleWriter w, UnitState user, AbilityDef ability, Use use, ImmutableArray<UnitId> aimed)
+    {
+        var invalid = Rejection.Of(RejectCode.InvalidTarget);
+        var list = use.Targets;
+        if (!Strikes.Aimed(ability) || list.Length > Math.Max(1, user.Sheet.Attacks) || aimed.Length != 1 || list[0] != aimed[0])
+            return invalid;
+        foreach (var id in list.Distinct().Skip(1))
+        {
+            if (ResolveTarget(w, user, ability, new Target(Unit: id), out _, out var affected) is { } refused)
+                return refused;
+            if (!affected.Contains(id))
+                return invalid;
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Where <paramref name="ability"/> lands and whom it affects, or why <paramref name="target"/> is refused
-    /// (<see cref="RejectCode.InvalidTarget"/>, then <see cref="RejectCode.OutOfRange"/>, then
-    /// <see cref="RejectCode.NoLineOfSight"/>).
+    /// (<see cref="RejectCode.Unmet"/>, then <see cref="RejectCode.InvalidTarget"/>, then <see cref="RejectCode.OutOfRange"/>,
+    /// then <see cref="RejectCode.NoLineOfSight"/>).
     /// <list type="bullet">
+    /// <item>The ability's own test on the user (<see cref="AbilityDef.Requires"/>) must hold wherever it is aimed: Hide out
+    /// of plain view. It is checked here so the AI and the phone, which ask this for every aim, never offer it otherwise.</item>
     /// <item>The aim is <see cref="Target.Tile"/>, else the target unit's tile. A <c>self</c> ability aims at the user's own
     /// tile (a line or cone at <see cref="Target.Tile"/>, which only sets its direction), and an <c>all_allies</c> or
     /// <c>all_enemies</c> area needs no aim; both skip the range and sight checks.</item>
@@ -251,6 +307,8 @@ public static partial class Battle
         var area = def.Area;
         var everywhere = area.Shape is AreaShape.AllAllies or AreaShape.AllEnemies;
         var invalid = Rejection.Of(RejectCode.InvalidTarget);
+        if (ability.Requires is { } requires && !Hooks.Holds(requires, w, new HookArgs(user.Id), w.Rules))
+            return new Rejection(RejectCode.Unmet, $"Only when {TooltipText.When(requires, w.Rules)}.");
 
         UnitState? picked = null;
         if (target.Unit is { } id)
@@ -301,6 +359,16 @@ public static partial class Battle
                 return invalid;
         }
 
+        // Charm protects its source, including from aimed area effects. Helpful abilities remain legal.
+        var harmful = IsHarmful(ability);
+        var charmers = harmful
+            ? Conditions.Active(user, w.Rules).Where(c => c.Def.Id.Value == "charmed")
+                .Select(c => c.From.Source).OfType<UnitId>().ToImmutableSortedSet()
+            : ImmutableSortedSet<UnitId>.Empty;
+        var victims = affected;
+        if (victims.Any(charmers.Contains))
+            return new Rejection(RejectCode.InvalidTarget, "You can't harm your charmer.");
+
         if (self || everywhere)
             return null;
 
@@ -349,6 +417,7 @@ public static partial class Battle
             var obscured = los ? ZoneRules.Obscured(s) : ImmutableSortedSet<Tile>.Empty;
             var second = s.Units.Values
                 .Where(u => u.Id != first.Id && u.Id != user.Id && DownedRules.InBattle(u) && u.Sheet.Side == first.Sheet.Side)
+                .Where(u => !charmers.Contains(u.Id))
                 .Where(u =>
                 {
                     var d = Reach.Distance(user.Pos, u.Pos);
@@ -413,7 +482,7 @@ public static partial class Battle
     /// More steps than this in one command means the battle can't settle (e.g. every unit is incapacitated for good);
     /// <see cref="Settle"/> throws <see cref="RulesInvariantException"/> rather than loop forever.
     /// </summary>
-    private const int MaxStepsPerCommand = 100_000;
+    internal const int MaxStepsPerCommand = 100_000;
 
     /// <summary>
     /// Settles the queue; once it is empty, the hit numbering (<see cref="BattleState.NextResolution"/>,
@@ -424,7 +493,11 @@ public static partial class Battle
     {
         Settle(w, rules);
         if (w.State.Queue.IsEmpty && (w.State.NextResolution != 0 || !w.State.DownedHits.IsEmpty))
+        {
             w.State = w.State with { NextResolution = 0, DownedHits = [] };
+            foreach (var unit in w.State.Units.Values.Where(u => u.HalvedHit is not null || u.HalvedHitDamage != 0).ToArray())
+                w.Set(unit with { HalvedHit = null, HalvedHitDamage = 0 });
+        }
         if (Invariants.Enabled)
             Invariants.Check(w.State, rules, w.Terrain);
         return new Resolution(w.Freeze(), w.Events, null);
@@ -458,8 +531,7 @@ public static partial class Battle
     /// order is re-sorted (taking in the units <see cref="BattleState.Joining"/> it), <see cref="BattleState.Joining"/>,
     /// <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every unit's
     /// <see cref="UnitState.UsedThisRound"/> are cleared, <see cref="RoundStarted"/> is emitted, zones whose owner has left
-    /// the battle tick (<see cref="ZoneRules.TickOrphans"/>) and every Downed unit's countdown ticks
-    /// (<see cref="DownedRules.TickRound"/>; if that decides the battle, nothing else happens).
+    /// the battle tick (<see cref="ZoneRules.TickOrphans"/>).
     /// Every turn start clears every unit's <see cref="UnitState.UsedThisTurn"/>.
     /// <para>A unit that can't act (<see cref="SkipReason"/>) has its turn skipped: <see cref="TurnSkipped"/>, then a
     /// <see cref="SkipTurnStep"/> ends it (conditions still tick) and hands on to the next unit.</para>
@@ -485,7 +557,6 @@ public static partial class Battle
             w.Emit(new RoundStarted(round, order));
             ZoneRules.TickOrphans(w);
             Surfaces.RoundStart(w);
-            DownedRules.TickRound(w);
             if (Objectives.Check(w))
                 return;
         }
@@ -546,4 +617,9 @@ public static partial class Battle
         Resources: p.Sheet.Resources.WithComparers(StringComparer.Ordinal), Conditions: [], Economy: Economy.Fresh(p.Sheet),
         Life: LifeState.Up, Countdown: 0, UsesLeft: Ordinal.Map<int>(), Concentrating: null, Bag: p.Bag.IsDefault ? [] : p.Bag,
         ItemsUsedByAi: 0, SummonedBy: null, Protected: p.Protected, UsedThisTurn: Ordinal.Set(), UsedThisRound: Ordinal.Set());
+    /// <summary>Abilities that can harm their affected units, shared by targeting and reaction offers.</summary>
+    internal static bool IsHarmful(AbilityDef ability) => ability.Target.Kind == TargetKind.Enemy
+        || EffectTree.All(ability.Effects).Any(e => e is AttackEffect or DamageEffect or PushEffect or PullEffect
+            || e is ApplyEffect && ability.Target.Kind is not TargetKind.Ally and not TargetKind.DownedAlly);
+
 }

@@ -9,13 +9,14 @@ import { HostMenu } from "./walk";
 interface ShopRow { item: string; name: string; price: number; count: number; can?: boolean; member?: string; detail?: string }
 /** This visit's haggle (the owner's decision E, 2026-11-03): whether this phone may start it, its DC, and what came of it. */
 interface HaggleData {
+  spent?: boolean;
   can: boolean; dc: number;
   result: { member: string; name: string; die: number; bonus: number; total: number; dc?: number; passed: boolean } | null;
 }
 interface ShopData extends ServiceData {
   shop: { id: string; name: string; keeper: string; greeting: string };
   gold: number; items: ShopRow[]; sell: ShopRow[];
-  you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; feed: string[];
+  you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; difficulty?: string; feed: string[];
   /** Only at a shop that trades: an inn or a temple has none. */
   haggle?: HaggleData;
 }
@@ -28,7 +29,7 @@ function Haggle({ haggle, send, shop, pending }: { haggle: HaggleData; send: Cus
       {r.passed ? "A tenth off what you buy, a tenth more for what you sell, this visit." : "Prices stand. No harm done."}</p>
       : haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
         {`Haggle · Persuasion DC ${haggle.dc}`}</button>
-      : <p class="tx-note">{`The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
+      : <p class="tx-note">{haggle.spent ? "Haggle spent. Try again after a long rest." : `The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
   </div>;
 }
 
@@ -62,7 +63,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
     });
   };
   return <section class={`tx tx-shop${recovery ? " tx-recovery" : ""}`}>
-    {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" send={send} /> : <HostMenu canBattle={false} keep="Keep trading" send={send} />)}
+    {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" difficulty={d.difficulty} send={send} /> : <HostMenu canBattle={false} keep="Keep trading" difficulty={d.difficulty} send={send} />)}
     <header><span class="tx-eyebrow">{recovery ? inn ? "Inn" : "Temple" : `Trader · ${d.shop.keeper}`}</span><h1>{d.shop.name}</h1>
       {recovery ? <strong class="tx-recovery-purse" aria-label="Your purse" aria-live="polite">{d.gold} gold</strong> : <><span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></>}</header>
     {d.haggle && <Haggle haggle={d.haggle} send={send} shop={d.shop.id} pending={pending} />}

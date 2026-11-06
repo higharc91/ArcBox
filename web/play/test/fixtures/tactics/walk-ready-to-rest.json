@@ -44,9 +44,11 @@
       }
     ],
     "vip": true,
+    "difficulty": "Normal",
     "canBattle": true,
     "portal": "/c/ABCD",
     "interact": "Trade with The Last Coal",
+    "canGive": true,
     "restReady": true,
     "gold": 100,
     "targets": [

@@ -39,7 +39,9 @@ public sealed record HudSlot(UnitId Id, string Name, string? Sprite, UnitTone To
 /// <param name="More">How many more there are than <see cref="Slots"/> shows.</param>
 /// <param name="Prompt">The game's banner while a reaction shown on screen waits on a player's phone, else null.</param>
 /// <param name="Lead">The unit the strip starts from, which outlasts the gap between two turns.</param>
-public sealed record BattleHud(string Title, string Round, string? Turn, string? Objective, ImmutableArray<HudSlot> Order, int More, string? Prompt, UnitId? Lead)
+/// <param name="Tag">"Story" or "Hard", the small tag on a battle that isn't at Normal difficulty; null at Normal.</param>
+public sealed record BattleHud(string Title, string Round, string? Turn, string? Objective, ImmutableArray<HudSlot> Order, int More, string? Prompt, UnitId? Lead,
+    string? Tag = null)
 {
     /// <summary>The most units on the strip: as many as the mockup's fit in the corner the board leaves free.</summary>
     public const int Slots = 9;
@@ -88,7 +90,8 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
 
         return new BattleHud(Words.Encounter(shown), $"Round {shown.Round.ToString(CultureInfo.InvariantCulture)}", TurnOf(shown, aiFinished),
             ObjectiveWords.Of(shown.Objectives, shown.Units), [.. slots.Take(Slots).Select(u => Slot(u, shown.Active))], Math.Max(0, slots.Length - Slots),
-            live.Reacting is { } reacting && reacting == shown.Reacting ? banner : null, lead);
+            live.Reacting is { } reacting && reacting == shown.Reacting ? banner : null, lead,
+            shown.Difficulty is "Story" or "Hard" ? shown.Difficulty : null);
     }
 
     /// <summary>

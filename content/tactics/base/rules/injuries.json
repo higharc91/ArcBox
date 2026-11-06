@@ -1,5 +1,5 @@
 [
-  { "id": "cracked_ribs", "mends": "body", "name": "Cracked ribs", "weight": 3, "static": { "maxHp": -5 } },
+  { "id": "cracked_ribs", "mends": "body", "name": "Cracked ribs", "weight": 3, "static": { "maxHpPercent": -15 } },
   { "id": "sprained_ankle", "mends": "body", "name": "Sprained ankle", "weight": 3, "static": { "move": -1 } },
   { "id": "concussion", "mends": "body", "name": "Concussion", "weight": 2, "static": { "saves": { "int": -1, "wis": -1 } } },
   { "id": "deep_cut", "mends": "body", "name": "Deep cut", "weight": 2, "static": {},

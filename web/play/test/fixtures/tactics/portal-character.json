@@ -1551,7 +1551,7 @@
           "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
           "Weapons: simple weapons and martial weapons (not used in battles yet).",
           "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
-          "Second wind: 2 per battle at level 4, 2 by level 10.",
+          "Second wind: 1 per battle at level 4, 1 by level 10.",
           "Superiority: 2 per battle at level 4, 5 by level 10.",
           "Starts with: longsword, chain mail, a shield."
         ],
@@ -1706,7 +1706,8 @@
             "level": 1,
             "features": [
               "monk.unarmed_strike",
-              "monk.martial_arts"
+              "monk.martial_arts",
+              "monk.unarmored_movement"
             ],
             "attacks": 2,
             "choices": []
@@ -1715,8 +1716,7 @@
             "level": 2,
             "features": [
               "monk.flurry_of_blows",
-              "monk.step_of_the_wind",
-              "monk.unarmored_movement"
+              "monk.step_of_the_wind"
             ],
             "attacks": null,
             "choices": []
@@ -1742,7 +1742,7 @@
             "features": [
               "monk.stunning_strike"
             ],
-            "attacks": 3,
+            "attacks": 2,
             "choices": []
           }
         ],
@@ -2110,16 +2110,16 @@
             "level": 1,
             "features": [
               "rogue.sneak_attack",
+              "rogue.vex",
               "rogue.cunning_hide"
             ],
-            "attacks": 3,
+            "attacks": 2,
             "choices": []
           },
           {
             "level": 2,
             "features": [
-              "rogue.cunning_dash",
-              "rogue.cunning_disengage"
+              "rogue.cunning_dash"
             ],
             "attacks": null,
             "choices": []
@@ -2127,7 +2127,7 @@
           {
             "level": 3,
             "features": [
-              "rogue.steady_aim"
+              "rogue.cunning_disengage"
             ],
             "attacks": null,
             "choices": []
@@ -2152,7 +2152,7 @@
             "features": [
               "rogue.uncanny_dodge"
             ],
-            "attacks": 4,
+            "attacks": null,
             "choices": []
           }
         ],
@@ -2213,7 +2213,7 @@
           "Weapons: simple weapons (not used in battles yet).",
           "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
-          "Mana: 5 per battle at level 4, 9 by level 10.",
+          "Mana: 6 per battle at level 4, 8 by level 10.",
           "Sorcery: 2 per battle at level 4, 5 by level 10.",
           "Starts with: quarterstaff."
         ],
@@ -3030,7 +3030,7 @@
           "Bonus action",
           "1 oath"
         ],
-        "text": "4 tiles: marks target for 3 rounds \u2014 You swear a vow of enmity: your attacks against the marked foe have advantage for 3 rounds."
+        "text": "4 tiles: marks target for 3 rounds (your attacks on it have advantage) \u2014 You swear a vow of enmity against one foe."
       },
       "barbarian.cleaving_blow": {
         "name": "Cleaving Blow",
@@ -3099,7 +3099,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "1 tile: heals 3d8 \u002B casting modifier"
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
       },
       "bard.dispel_magic": {
         "name": "Dispel Magic",
@@ -3143,7 +3143,7 @@
           "Bonus action",
           "1 mana"
         ],
-        "text": "6 tiles: heals 3d4 \u002B casting modifier"
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
       },
       "bard.heroism": {
         "name": "Heroism",
@@ -3270,7 +3270,7 @@
           "Bonus action",
           "1 focus"
         ],
-        "text": "6 tiles: marks target for 2 rounds; target is Lit for 1 round"
+        "text": "6 tiles: marks target for 2 rounds (your attacks on it have advantage); target is Lit for 1 round"
       },
       "berserker.frenzy_strike": {
         "name": "Frenzy Strike",
@@ -3541,7 +3541,7 @@
           "Action",
           "1 oath"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; 2d6 radiant; target is Burning for 2 rounds"
+        "text": "Weapon attack, weapon range: weapon damage; 2d6 radiant; target is Burning for 2 rounds. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "draconic.dragon_breath": {
         "name": "Draconic Breath",
@@ -3760,7 +3760,7 @@
           "Reaction",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "dwarf.stoneskin": {
         "name": "Stoneskin",
@@ -3844,7 +3844,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "fighter.menacing_attack": {
         "name": "Menacing Attack",
@@ -3852,7 +3852,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "fighter.precision_attack": {
         "name": "Precision Attack",
@@ -3860,7 +3860,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u2014 Your superiority die steadies the blow: \u002B4 to hit."
+        "text": "Weapon attack, weapon range: weapon damage. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit."
       },
       "fighter.pushing_attack": {
         "name": "Pushing Attack",
@@ -3868,7 +3868,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "fighter.rally": {
         "name": "Rally",
@@ -3884,7 +3884,7 @@
           "Bonus action",
           "1 second wind"
         ],
-        "text": "Self: heals 1d4 \u002B level"
+        "text": "Self: heals 1d4 \u002B level \u2014 Game balance: one use per battle, restoring 1d4 plus your level HP."
       },
       "fighter.style_defense": {
         "name": "Style defense",
@@ -3913,7 +3913,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "geomancer.raise_earth": {
         "name": "Raise Earth",
@@ -4004,7 +4004,7 @@
           "Bonus action",
           "Once per battle"
         ],
-        "text": "6 tiles: marks target for 5 rounds; target is Hexed for 5 rounds"
+        "text": "6 tiles: marks target for 5 rounds (your attacks on it have advantage); target is Hexed for 5 rounds"
       },
       "human.resourceful": {
         "name": "Resourceful",
@@ -4111,14 +4111,14 @@
           "Bonus action",
           "1 ki"
         ],
-        "text": "1 tile: 2 times: weapon attack (1d10 \u002B DEX modifier bludgeoning)"
+        "text": "1 tile: 2 times: weapon attack (1d8 \u002B DEX modifier bludgeoning)"
       },
       "monk.martial_arts": {
         "name": "Martial Arts",
         "tags": [
           "Bonus action"
         ],
-        "text": "Weapon attack, 1 tile: 1d10 \u002B DEX modifier bludgeoning \u2014 A quick unarmed strike as a bonus action."
+        "text": "Weapon attack, 1 tile: 1d8 \u002B DEX modifier bludgeoning \u2014 A quick unarmed strike as a bonus action."
       },
       "monk.patient_defense": {
         "name": "Patient Defense",
@@ -4140,16 +4140,16 @@
         "name": "Stunning Strike",
         "tags": [
           "Action",
-          "1 ki"
+          "2 ki"
         ],
-        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round) \u2014 A strike at the body\u0027s flow of ki: on a hit, a CON save or the target is stunned until your next turn ends."
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Game balance: spend 2 Ki for the stunning rider, which applies on the first hit only; later attacks keep the unarmed strike damage."
       },
       "monk.unarmed_strike": {
         "name": "Unarmed Strike",
         "tags": [
           "Action"
         ],
-        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning \u2014 Martial Arts: fists and feet, with DEX, for your martial arts die (2d8 at levels 1 and 2, then d10)."
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning \u2014 Game balance: a 1d8 martial arts die at every level, with two attacks per Attack action. Ki and other features provide progression."
       },
       "monk.unarmored_movement": {
         "name": "Unarmored movement",
@@ -4164,7 +4164,7 @@
           "Action",
           "1 ki"
         ],
-        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; Str save (pushes target 3 tiles away; target is Prone)"
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; Str save (pushes target 3 tiles away; target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "open_hand.sweeping_kick": {
         "name": "Sweeping Kick",
@@ -4342,7 +4342,7 @@
           "1 focus",
           "Concentration"
         ],
-        "text": "6 tiles: target is Hunted \u2014 You mark your quarry: every hit you land on it deals an extra 1d6 force damage."
+        "text": "6 tiles: target is Hunted \u2014 Hits on a Hunted target deal an extra 1d4 force at levels 1 and 2, then 1d6 from level 3: a game balance progression."
       },
       "ranger.hunters_mark_bonus": {
         "name": "Hunters mark bonus",
@@ -4389,7 +4389,7 @@
         "tags": [
           "Bonus action"
         ],
-        "text": "Self: you are Hidden for 1 round"
+        "text": "Self: you are Hiding for 1 round. Only when you aren\u0027t in plain view \u2014 Plain view: a foe next to you, or one that sees you with no cover between (walls, crates, height, smoke). While you\u0027re hiding, attacks against you have disadvantage and your next attack has advantage (this is Steady Aim too). It ends when you attack or end your turn in plain view."
       },
       "rogue.poison_strike": {
         "name": "Cunning Strike: Poison",
@@ -4397,21 +4397,14 @@
           "Action",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; Con save (target is Poisoned until saved)"
+        "text": "Weapon attack, weapon range: weapon damage; Con save (target is Poisoned until saved). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "rogue.sneak_attack": {
         "name": "Sneak attack",
         "tags": [
           "Always on"
         ],
-        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or you are flanking the target): 6d6 damage (once per turn)"
-      },
-      "rogue.steady_aim": {
-        "name": "Steady Aim",
-        "tags": [
-          "Bonus action"
-        ],
-        "text": "Self: you can\u0027t move and have advantage on your attack rolls until the end of your turn"
+        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or (an ally is next to the target and you don\u0027t have disadvantage)): 3d6 damage (once per turn)"
       },
       "rogue.trip": {
         "name": "Cunning Strike: Trip",
@@ -4419,14 +4412,21 @@
           "Action",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; Dex save (target is Prone)"
+        "text": "Weapon attack, weapon range: weapon damage; Dex save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "rogue.uncanny_dodge": {
         "name": "Uncanny Dodge",
         "tags": [
           "Reaction"
         ],
-        "text": "Self: you gain 1d6 \u002B level temporary HP \u2014 When a blow is about to land, you roll with it and take far less of it."
+        "text": "Self: halves the triggering hit\u0027s damage, including riders (rounded down) \u2014 Use your Reaction to halve the triggering hit\u2019s damage, including its riders, rounded down. Other hits are unaffected."
+      },
+      "rogue.vex": {
+        "name": "Vex",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a dart or rapier or shortbow or shortsword weapon: marks target as Vexed for 1 round (your attacks on it have advantage)"
       },
       "rogue.withdraw": {
         "name": "Cunning Strike: Withdraw",
@@ -4473,7 +4473,7 @@
           "Action",
           "1 focus"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "sharpshooter.high_ground_mastery": {
         "name": "High ground mastery",
@@ -4545,7 +4545,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, 6 tiles, burst 2: 3d6 fire; half damage on a save"
+        "text": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6."
       },
       "sorcerer.font_of_magic_mana": {
         "name": "Font of Magic: Create Mana",
@@ -4598,7 +4598,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, self, line 10: 3d6 lightning; half damage on a save"
+        "text": "Dex save, self, line 10: 6d6 lightning; half damage on a save \u2014 Game balance: 6d6 per target, matching Fireball."
       },
       "sorcerer.magic_missile": {
         "name": "Magic Missile",
@@ -4936,7 +4936,7 @@
         "tags": [
           "Action"
         ],
-        "text": "8 tiles: 1 times: spell attack (1d10 force)"
+        "text": "8 tiles: 1 times: spell attack (1d12 force) \u2014 Game balance: each beam deals 1d12 at every level; two beams from level 5 and three from level 7. Dice never decrease."
       },
       "warlock.fiendish_vigor": {
         "name": "Fiendish Vigor",
@@ -5084,7 +5084,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range, burst 1: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range, burst 1: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
       },
       "weaponmaster.keen_edge": {
         "name": "Keen edge",
@@ -5190,7 +5190,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, 6 tiles, burst 2: 3d6 fire; half damage on a save"
+        "text": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6."
       },
       "wizard.grease": {
         "name": "Grease",
@@ -5248,7 +5248,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "Dex save, self, line 10: 3d6 lightning; half damage on a save"
+        "text": "Dex save, self, line 10: 6d6 lightning; half damage on a save \u2014 Game balance: 6d6 per target, matching Fireball."
       },
       "wizard.mage_armor": {
         "name": "Mage Armor",

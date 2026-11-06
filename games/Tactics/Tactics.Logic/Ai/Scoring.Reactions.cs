@@ -181,9 +181,6 @@ internal sealed partial class Scorer
                 default: return Empty();
             }
         }
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, st.User.Sheet.Attacks)).SelectMany(e => e)];
-        return WalkTree(effects);
+        return WalkTree(Strikes.Sequence(ability, st.User.Sheet.Attacks));
     }
 }

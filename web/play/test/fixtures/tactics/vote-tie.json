@@ -26,7 +26,8 @@
     "away": [
       "Player4"
     ],
-    "vip": true
+    "vip": true,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:02:14.3001664\u002B00:00",

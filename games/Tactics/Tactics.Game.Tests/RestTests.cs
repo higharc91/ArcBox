@@ -147,7 +147,7 @@ public sealed class RestTests
     [Theory]
     [InlineData(BattleOutcome.Won, true)]
     [InlineData(BattleOutcome.Lost, true)]
-    [InlineData(BattleOutcome.Fled, false)]
+    [InlineData(BattleOutcome.Fled, true)]
     public void Battle_end_earns_one_rest_and_consumes_well_fed(BattleOutcome outcome, bool ready)
     {
         var s = ShopTests.AtShop(0);

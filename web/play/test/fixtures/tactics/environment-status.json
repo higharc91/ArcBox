@@ -25,7 +25,11 @@
     "aiPlaying": false,
     "surfaces": [
       "water"
-    ]
+    ],
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

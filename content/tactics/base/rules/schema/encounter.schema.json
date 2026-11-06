@@ -277,6 +277,11 @@
       "minimum": 0,
       "maximum": 2147483647
     },
+    "retreat": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the party may vote to fall back (from round 3), ending the battle as a flight. false disables it for a scripted fight; absent is true."
+    },
     "storyOnly": {
       "type": "boolean",
       "description": "Only offered by its regional story. Omitted from the standalone encounter picker; defaults false."

@@ -44,9 +44,11 @@
       }
     ],
     "vip": false,
+    "difficulty": "Normal",
     "canBattle": false,
     "portal": "/c/ABCD",
     "interact": null,
+    "canGive": true,
     "targets": [],
     "beat": false,
     "search": false

@@ -108,6 +108,25 @@ public sealed class AiReactionTests
     }
 
     [Fact]
+    public void A_reaction_changes_the_outcome_only_when_it_turns_this_attacks_hit_into_a_miss()
+    {
+        // The question behind a player's "only when it turns a hit into a miss" setting (#113), asked of each offered attack on its own roll.
+        var (battle, state) = MageAttacked();
+        var shield = new ReactionChoice("wizard.shield", new AbilityId("wizard.shield"), U("mage"));
+        bool Changes(RollResult roll, bool pass = false)
+        {
+            var trigger = new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("kara"), U("mage"), Attack, roll);
+            var offer = OfferTo("mage", state, trigger, battle.Rules);
+            return Ai.ChangesOutcome(state, offer, pass ? offer.Options[0] : shield, battle.Rules);
+        }
+
+        Assert.True(Changes(Hit(10, 5, 12)));      // 15 against AC 12: Shield's +5 makes 17, a miss
+        Assert.False(Changes(Hit(12, 5, 12)));     // 17 against AC 12: 17 against 17 still hits
+        Assert.False(Changes(Hit(20, 5, 12)));     // a natural 20 hits whatever
+        Assert.False(Changes(Hit(10, 5, 12), pass: true));     // declining changes nothing
+    }
+
+    [Fact]
     public void Passes_when_shield_wouldnt_matter()
     {
         var (battle, state) = MageAttacked();
@@ -169,7 +188,7 @@ public sealed class AiReactionTests
     [Fact]
     public void Uncanny_dodge_when_it_saves_a_quarter_of_max_hp()
     {
-        // Uncanny Dodge at level 5: 1d6 + 5 temporary HP (8.5 on average) against a rogue with 32 HP (a quarter is 8).
+        // AI Dodge halves the hit; it is worthwhile when it prevents a quarter of this rogue's 32 max HP (8).
         var dodge = A("rogue.uncanny_dodge");
         var rogue = TestSheets.Rogue with { Level = 5, MaxHp = 32, Abilities = [dodge.Id], AiProfile = "skirmisher" };
         TestBattle Battle(string weapon) => On().With(dodge)
@@ -186,8 +205,8 @@ public sealed class AiReactionTests
             return Ai.React(state, OfferTo("vex", state, trigger, battle.Rules), battle.Rules);
         }
 
-        // A longsword hit (1d8 + 3, 7.5) is less than 8 HP saved: pass. A greataxe-sized blow (2d12 + 3, 16) loses 8.5 of
-        // it to the temporary HP: take it.
+        // Half a longsword hit (1d8 + 3, mean 7.5) saves less than 8 HP: pass.
+        // Half a large hit (2d12 + 3, mean 16) saves 8 HP: take it.
         Assert.Equal(Reactions.Pass, React("1d8").Id);
         Assert.Equal("rogue.uncanny_dodge", React("2d12").Id);
     }
@@ -221,5 +240,34 @@ public sealed class AiReactionTests
         Assert.Contains(events, e => e is Countered);
         Assert.Equal(7, after.Units[U("gob")].Hp);
         Assert.Equal(8, after.Units[U("mage")].Resources["mana"]);
+    }
+
+    [Fact]
+    public void Counterspells_a_cruel_foes_spell_that_would_take_a_Downed_hero_Out()
+    {
+        // #110: a hit takes Aldo (Downed, countdown 1) Out. Countering is worth what the spell is worth to its cruel caster,
+        // not what the party mage's own fair-play profile would make of hitting a Downed unit (that is a cost to it).
+        var bolt = A("cleric.guiding_bolt");
+        var counter = A("wizard.counterspell");
+        var mage = TestSheets.Cleric with
+        {
+            Level = 5, CastingStat = "Int", Scores = TestSheets.Scores(8, 14, 12, 16, 10, 10),
+            Resources = Ordinal.Map(("mana", 11)), Abilities = [counter.Id],
+        };
+        var battle = TestBattle.On("""
+            0. 0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0. 0.
+            """).WithAiProfiles(Base.AiProfiles.Values).With(bolt, counter)
+            .WithConditions(Base.Conditions[new ConditionId("lit")])
+            .Enemy("lich", TestSheets.Cleric.Knowing(bolt) with { InitiativeBonus = 10, Resources = Ordinal.Map(("devotion", 2)) }, T(0, 0),
+                new AiControlled("boss_cruel"))
+            .Party("aldo", TestSheets.Fighter, T(3, 0))
+            .Party("mage", mage, T(5, 1), new AiControlled("caster"));
+        var state = battle.Start().State.Change("aldo", u => u with { Hp = 0, Life = LifeState.Downed, Countdown = 1 });
+
+        var (after, events) = battle.Apply(state, new Use(U("lich"), bolt.Id, new Target(Unit: U("aldo"))));
+
+        Assert.Contains(new Reacted(U("mage"), "wizard.counterspell"), events);
+        Assert.Equal(LifeState.Downed, after.Units[U("aldo")].Life);
     }
 }

@@ -1,3 +1,5 @@
+> Status: live overworld backlog; GitHub issue states are canonical. Historical measurements below are dated evidence. See [tracker index](../README.md).
+
 # Overworld issue board
 
 The running list of what's left on Wardenflame's overworld. **Keep this file current:** when you start an item, set it to `doing`. When you finish, set it to `done`, say what proved it, and add anything new you found. Don't delete done items until the user has seen them.
@@ -8,16 +10,16 @@ The running list of what's left on Wardenflame's overworld. **Keep this file cur
 
 ## Where the code is
 
-All integrated overworld, character, environment, shop, rest and NPC/quest work is on `main` as of `9c41a7bd` (PR #75).
-Issue #76 is being implemented on `stability-and-tooling`, cut from that main commit.
+Current integrated work is on `main`. Use [GitHub issues](https://github.com/higharc91/ArcBox/issues) for current state and the [tracker index](../README.md) to find the right spec. Completed branches do not need another merge.
 
-| Branch | What it holds | State |
-|---|---|---|
-| `main` | Overworld, characters, environmental tiles, shops, recovery, NPCs and quests | Integrated through PR #75 |
-| `stability-and-tooling` | Issue #76 stability and tooling fixes | In progress |
-| `tv-drawing-polish` | Issue #78: OW-08, OW-12, OW-14, OW-21 and the wall-plug seam (OW-23) | Pushed for review, no PR yet |
-| `environmental-tiles`, `shops-and-gold`, `rest-and-recovery`, `feat/creature-overworld-integration`, `npcs-and-quests` | Earlier feature work | Integrated into main |
-| `overworld-issue-board`, `ccr-18ad4510-q68nad` | Historical review/session branches | Use current main and the issue branch for new work |
+| Work | Merged evidence |
+|---|---|
+| Integrated overworld and earlier features | PR #75 and subsequent feature PRs on main |
+| Stability/tooling #76 | PR #84; issue closed |
+| TV drawing #78 | PR #91; issue closed |
+| Townsfolk #80 | PR #94; approved cast installed, issue closed |
+| Ford and ground #82 | PR #96; issue closed |
+| Ashmaw #74 | PR #88; issue closed |
 
 ## Historical review results (2026-11-02)
 
@@ -212,8 +214,8 @@ Owner-approved native granary, Maud cottage, cold-ash herb bed and stool/pots ar
 ### OW-35 · NPCs and side quests · `done`, issue #73
 Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, atomic rewards and the shared/private pinned quest journal. Completed on `npcs-and-quests`; main integration is tracked in [PR #75](https://github.com/higharc91/ArcBox/pull/75). Rest/recovery and the character/palette board are integrated as prerequisites; OW-07 is complete. Full suite: 6,081 .NET and 504 phone tests. Mobile layout audit: 264 cases, including movement-wheel clearance. Actual force/parley chapter runs and the grain quest passed. [Report](../reports/2026-11-03-npcs-quests/README.md).
 
-### OW-36 · Ashmaw bounty · `doing`, issue #74
-Work is on `ashmaw-bounty`, based on merged #73. Both character concepts and the pixel direction are approved. All eight directions and action sets are generated and curated; actual TV world/battle motion is owner-approved, and dedicated atlases/portraits are installed. The quest, cave, travel, class trinkets, dormant remake behavior, private phone rewards and voiced dialogue are implemented. A six-player live run completed all four chambers and the return/reward flow. Final cave dressing adds candles, animal remains and dried blood. The owner retained level 2, with an explicit journal recommendation, and requested tougher fights only for 4+ players. Paired trinket comparisons are complete. Final tuning gives four-player wins of 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4; smaller-party results are unchanged. Verified: 6,191 .NET and 508 web tests, six phone viewports, zero-warning solution/editor builds. The owner’s follow-up requests matching concept art and a sprite overhaul for the remaining kobolds; that art follow-up is next. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
+### OW-36 · Ashmaw bounty · `done`, issue #74
+Merged in [PR #88](https://github.com/higharc91/ArcBox/pull/88); #74 is closed. The following records the implementation and review evidence. Both character concepts and the pixel direction are approved. All eight directions and action sets are generated and curated; actual TV world/battle motion is owner-approved, and dedicated atlases/portraits are installed. The quest, cave, travel, class trinkets, dormant remake behavior, private phone rewards and voiced dialogue are implemented. A six-player live run completed all four chambers and the return/reward flow. Final cave dressing adds candles, animal remains and dried blood. The owner retained level 2, with an explicit journal recommendation, and requested tougher fights only for 4+ players. Paired trinket comparisons are complete. Final tuning gives four-player wins of 59.4% at level 2, 82.7% at level 3 and 97.5% at level 4; smaller-party results are unchanged. Verified: 6,191 .NET and 508 web tests, six phone viewports, zero-warning solution/editor builds. The historical matching-concept/kobold follow-up has [refresh receipts](../reports/2026-11-03-ashmaw-bounty/kobold-refresh/README.md); current work is tracked on GitHub. [Concepts and receipts](../../../tools/tactics-assets/concepts/ashmaw/README.md).
 
 ### OW-37 · The owner's rule decisions · `done`, issue #83
 Merged in PR #89. The owner's answers of 2026-11-03, each recorded as decided in its design:
@@ -235,16 +237,16 @@ strongbox).
 
 ## P3: later, needs design with the user
 
-Don't build these without the user: a true Warden bridge (changes the battle map), fog of war, hazards that hurt on the overworld (`TileFlags.Hazard` is read by no rule), inventory beyond shops, Chapter II, and regenerating the remaining weak art.
+Further battle-map redesign, fog of war, overworld damage hazards, Chapter II, and new art directions need an explicit task or owner decision. The ford/ramps are merged in PR #96; walk-screen gifting is merged in #234. Broader inventory/equipment work remains separate.
 
-## Decisions waiting for the user
+## Decisions and approval records (pending items say so)
 
 1. OW-05 is complete for the final installed cast: the 512 MiB/four-member gate passes at 423.56 MiB in Ashen Ford and 208.41 MiB in Cinder Hollow. Recheck future art additions.
-2. OW-10 / issue #80 cast is complete on `townsfolk-art`: all 12 named sets and 14 generic variants, including matching portraits, are approved and installed. No further approval or generation is needed for this cast. No PR, merge or issue closure has been requested.
-3. The ford's crisp-ground concept (OW-09) and the reported encounter balance shifts; the true bridge is approved and installed.
+2. OW-10 / issue #80 cast is complete on `townsfolk-art`: all 12 named sets and 14 generic variants, including matching portraits, are approved and installed. Merged in PR #94; #80 is closed. No further approval or generation is needed for this cast.
+3. The ground/ford art is approved and merged in PR #96. The reported encounter balance shifts remain a separate owner-review topic in their source tracker.
 4. Shops #68 defaults still available for owner override: SRD-style prices (C), 50% sell value (D), no bag limit (I), and restocking policy (J: current stock is per-entry—potions restock each chapter, smoke bombs never restock; the original question proposed chapter restocking). Starting gold remains 0 (B2). Per-character purses/inventories, even splitting of all gold rewards, phone trading after keeper interaction and purchases into the buyer’s own bag were explicitly answered. Inn/temple spending was subsequently authorized in #71; the initial “no other uses” default is superseded. Haggling (E) was answered on 2026-11-03 (OW-37).
 5. Handoff §8 items 4 and 5 and the interactable owner choices still open (4–7, 9 and 10–17 but 15) stay in their source designs. Issue #76 settled 10 (called off, nothing won/lost), 11 (Release invariants), 19/31 (seeded Story chapter bots), and missing-clip speech (captions only).
-6. New from OW-37, for the owner: the three trap injuries' names, effects and weights (3, 3, 2) and whether a trap may also draw the old black eye; art for their icons (stand-ins now); whether a seal reopens after a rest like a pick or force (it does now); whether rooms and cures should haggle (they don't).
+6. **Answered 2026-11-04, no longer waiting:** keep the trap injuries as built, including black eye; Arcana seals reopen after a long rest; Search retries once per rest; rooms and cures haggle too, with a tenth off rounded up. See the follow-up answers in OW-37 above. Any future icon replacement remains an art task, not an unanswered rule decision.
 
 **Answered 2026-11-03 (issue #83, OW-37), no longer waiting:** interactables decisions 1 (loot: the party's pick), 2 (failed ways reopen after a long rest), 3 (traps: a minor injury), 8 (keys: a key ring) and 15 (a missed search retries after a rest), and shops decision E (haggling on, once per visit).
 
@@ -255,8 +257,8 @@ Painting in the real editor, the pad on real phones, sound, sofa distance, a mod
 ## Rules for whoever works from this
 
 - Don't change game rules, balance numbers or the server-to-phone contract without asking the user.
-- Don't merge to `main`, open PRs, or spend Scenario credits without asking.
-- Pull with rebase before pushing to the issue's designated branch: **`townsfolk-art` for #80**. Do not merge or open a PR for that issue. The earlier `ccr-18ad4510-q68nad` cloud branch is historical.
+- Open or merge PRs only within the current task’s authorization. This historical review does not add a new approval requirement. Asset-generation spending still requires authorization.
+- Start new work from current `origin/main` on a fresh issue branch. #80 is already merged in PR #94; its old branch and the earlier review-session branches are historical.
 - **The user games on their right monitor.** Godot windows open on the left and never take focus: `--position 160,100` before the `--`, `--audio-driver Dummy`, and an uncommitted `src/ArcBox.Host/override.cfg` with `[display]` then `window/size/no_focus=true`, deleted afterwards. Always `--quit-after`, and stop what you start.
 - Windows tools: `export PATH="/c/Users/fatma/AppData/Local/Microsoft/dotnet:$PATH"`. Godot is at `/c/Users/fatma/AppData/Local/Microsoft/WinGet/Packages/GodotEngine.GodotEngine.Mono_Microsoft.Winget.Source_8wekyb3d8bbwe/Godot_v4.7.2-stable_mono_win64/Godot_v4.7.2-stable_mono_win64_console.exe`. Python isn't installed.
 - Measure frames with `ARCBOX_SHOTS=0`: screenshots stall frames.

@@ -7,6 +7,7 @@ import { Pick } from "./screens/Pick";
 import { Results } from "./screens/Results";
 import type { Session, SessionState } from "./session/session";
 import { loadSeat, type KeyValueStore } from "./session/storage";
+import { ConnectionBanner } from "./widgets/ConnectionBanner";
 import { ControllerScreen } from "./widgets/ControllerScreen";
 
 /**
@@ -37,7 +38,10 @@ export function App({ session, feedback = null }: { session: Session; feedback?:
 
   return (
     <FeedbackContext.Provider value={feedback}>
-      <Screen state={state} session={session} />
+      <ConnectionBanner connection={state.connection} retry={() => void session.retryConnection()} />
+      <fieldset class="session-content" inert={!!state.connection && state.connection !== "recovered"} disabled={!!state.connection && state.connection !== "recovered"}>
+        <Screen state={state} session={session} />
+      </fieldset>
     </FeedbackContext.Provider>
   );
 }
@@ -59,7 +63,8 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
       return (
         <div class="screen connecting">
           <div class="spinner" aria-hidden="true" />
-          <p>Connecting…</p>
+          <p>Connecting… waiting for your room.</p>
+          <p>If this takes long, the AI will play your hero. You’ll regain control when you reconnect.</p>
         </div>
       );
     case "pick":

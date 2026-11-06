@@ -28,8 +28,8 @@ const LETTERS = "ABCDEFGHIJ";
  * The VIP's End session in a scene, walk's menu with its confirm. It heads the screen, above the words and the question, so it's
  * never where the thumb that skips a line or answers a question is.
  */
-function StoryHost({ vip, send }: { vip: boolean; send: CustomScreenProps["send"] }) {
-  return vip ? <HostMenu canBattle={false} keep="Keep playing" send={send} /> : null;
+function StoryHost({ vip, difficulty, send }: { vip: boolean; difficulty?: string; send: CustomScreenProps["send"] }) {
+  return vip ? <HostMenu canBattle={false} keep="Keep playing" difficulty={difficulty} send={send} /> : null;
 }
 
 /** The question's clock, in its heading, from the shell's countdown (which the CSS hides on these screens). */
@@ -82,7 +82,7 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
   const narration = !d.speaker;
   return (
     <div class="tx tx-story">
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       {d.title ? <p class="tx-story-title"><span class="tx-eyebrow">The story</span><b>{d.title}</b></p> : null}
       {/* Live, and never remounted, so a screen reader says each new line as it comes. */}
@@ -257,7 +257,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
 
   return (
     <div class={`tx tx-ask${alerted ? " arrived" : ""}`}>
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       <AskHead eyebrow={eyebrow} title={title} tie={d.tie} />
       <ul class={`tx-options${d.canChoose ? "" : " static"}`} aria-label="Options">
@@ -330,6 +330,7 @@ function RollPanel({ roll, by, question }: { roll: CheckRoll; by: CheckCard | un
     <div class={`tx-roll ${roll.success ? "ok" : "bad"}${fresh ? " fresh" : ""}`} role="status"
       aria-label={`${by?.name ?? "The party"} rolled ${roll.die}, ${signed(roll.bonus)}, ${roll.total}${against}: ${verdict}`}>
       <D20 value={roll.die} />
+      {roll.dice?.length === 2 && <p class="tx-note">Advantage: {roll.dice.join(" and ")} · kept {roll.die}</p>}
       <div class="tx-roll-text">
         <p class="tx-roll-sum">
           {roll.die} {roll.bonus < 0 ? "−" : "+"} {Math.abs(roll.bonus)} = <b>{roll.total}</b>
@@ -371,13 +372,13 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
   const heading = d.tie
     ? d.canChoose ? "Tied: you break it" : `Tied: ${d.decider ?? "the leader"} breaks it`
     : d.canChoose ? "Who rolls? Vote for one" : "The party is picking who rolls";
-  const pickable = (c: CheckCard) => d.canChoose && (!d.tie || d.tied.includes(c.id));
+  const pickable = (c: CheckCard) => !d.group && d.canChoose && (!d.tie || d.tied.includes(c.id));
   const tagOf = (c: CheckCard): Tag | null =>
     c.id === mine ? { text: "Your pick" } : c.id === earlier ? { text: "Your pick earlier", earlier: true } : null;
 
   return (
     <div class={`tx tx-check${roll ? " rolled" : ""}${alerted ? " arrived" : ""}`}>
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       <div class="tx-check-head">
         <span class="tx-eyebrow">Skill check</span>
@@ -385,9 +386,16 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
         <p class="tx-check-for"><span class="tx-dc">{d.dc === null ? "DC hidden" : `DC ${d.dc}`}</span><span>“{d.title}”</span></p>
         {roll ? null : <Clock />}
       </div>
-      {roll ? <Rolled roll={roll} by={d.cards.find((c) => c.id === roll.member)} question={question} /> : (
+      {d.help?.name && <p class="tx-note" role="status">{d.help.name} helps · advantage</p>}
+      {!roll && d.help?.can && <button class="tx-btn" type="button" onClick={() => send("help")}>Help the roller · advantage</button>}
+      {roll?.group?.length ? <div role="status">
+        <h3>{roll.group.filter(r => r.success).length} of {roll.group.length} succeeded · {roll.success ? "Success" : "Failure"}</h3>
+        <p class="tx-note">Half or more must succeed.</p>
+        <ul>{roll.group.map(r => <li key={r.member}>{r.name}: {r.die} {signed(r.bonus)} = {r.die + r.bonus} · {r.success ? "Success" : "Failure"}</li>)}</ul>
+      </div> : roll ? <Rolled roll={roll} by={d.cards.find((c) => c.id === roll.member)} question={question} /> : (
         <>
-          <h3 class={`tx-sect${d.tie ? " tie" : ""}`}>{heading}</h3>
+          <h3 class={`tx-sect${d.tie ? " tie" : ""}`}>{d.group ? "Everyone present rolls. Half or more must succeed." : heading}</h3>
+          {d.group && d.canChoose && <button class="tx-btn gold" type="button" onClick={() => send("groupRoll")}>Roll with the party</button>}
           <ul class="tx-rcards" aria-label="Who rolls">
             {d.cards.map((c) => {
               const tag = tagOf(c);
@@ -395,7 +403,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
               const label = `${c.name}, ${signed(c.bonus)}, ${c.note}${c.here ? "" : ", away"}${tag ? `, ${tag.text.toLowerCase()}` : ""}`;
               return (
                 <li key={c.id}>
-                  {d.canChoose ? (
+                  {d.canChoose && !d.group ? (
                     <button type="button" class={cls} aria-pressed={c.id === mine} aria-label={label} disabled={!pickable(c)}
                       onClick={() => pickable(c) && pick(c.id)}>
                       <CardBody card={c} tag={tag} />
@@ -407,7 +415,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
               );
             })}
           </ul>
-          <p class="tx-note">{d.canChoose ? "If nobody picks, the best bonus rolls." : "Watch the TV."}</p>
+          <p class="tx-note">{d.group ? "Every present hero rolls once. Half or more must succeed." : d.canChoose ? "If nobody picks, the best bonus rolls." : "Watch the TV."}</p>
         </>
       )}
     </div>

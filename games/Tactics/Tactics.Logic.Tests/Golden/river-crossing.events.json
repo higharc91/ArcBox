@@ -123,7 +123,7 @@
 {"$type":"Moved","unit":"fighter","path":[[4,7],[5,7]]},
 {"$type":"TurnEnded","unit":"fighter"},
 {"$type":"RoundStarted","round":3,"order":["rogue","goblin.2","goblin.3","goblin.4","goblin_archer.1","goblin_archer.2","wizard","cleric","fighter"]},
-{"$type":"CountdownTicked","unit":"rogue","left":2},
 {"$type":"TurnSkipped","unit":"rogue","reason":"downed"},
+{"$type":"CountdownTicked","unit":"rogue","left":2},
 {"$type":"TurnStarted","unit":"goblin.2","round":3}
 ]

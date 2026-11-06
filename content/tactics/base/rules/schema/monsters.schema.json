@@ -126,6 +126,10 @@
       "castingStat": {
         "$ref": "common.schema.json#/$defs/stat"
       },
+      "steadfast": {
+        "type": "boolean",
+        "description": "A boss guard: a forced move that would end the unit on a deep tile stops on the last tile that isn't deep (or doesn't move it). Units with an hpBelow phase trigger are guarded too."
+      },
       "aiProfile": {
         "type": "string"
       },

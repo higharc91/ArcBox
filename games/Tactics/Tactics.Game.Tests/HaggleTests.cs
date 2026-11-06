@@ -176,6 +176,35 @@ public sealed class HaggleTests
     }
 
     [Fact]
+    public void A_failed_haggle_stays_spent_after_reopen_and_restart_until_the_next_long_rest()
+    {
+        var s = Open(pass: false);
+        Haggle(s);
+        Until(s, () => Doc(s).World!.Shop!.Haggle is not null, "the failed roll", TimeSpan.FromSeconds(60));
+        // Restart on the result too: its failed attempt must be saved atomically with that roll.
+        s = Again(s, Hard.Value);
+        BackInTheShop(s);
+        s.Send(0, "shopLeave", new { shop = Shop });
+        s = Again(s, Hard.Value);
+        s.Send(0, "interact", new { target = "shop:" + Shop });
+        Assert.False(Screen(s).GetProperty("haggle").GetProperty("can").GetBoolean());
+        s.Send(0, "shopHaggle", new { shop = Shop });
+        Assert.Null(s.Host.Story);
+        // A normal buy must not erase the spent-at-rest stamp.
+        s.Send(0, "shopBuy", new { shop = Shop, item = "potion_of_healing", count = 1, trade = "after-refusal" });
+        s.Send(0, "shopLeave", new { shop = Shop });
+        s = Again(s, Hard.Value);
+        s.Send(0, "interact", new { target = "shop:" + Shop });
+        Assert.False(Screen(s).GetProperty("haggle").GetProperty("can").GetBoolean());
+        s.Send(0, "shopLeave", new { shop = Shop });
+        var doc = Doc(s);
+        // Dawn increments RestSeq; this test isolates the shop's consumption of that counter.
+        s = RestTests.Again(doc with { World = doc.World! with { RestSeq = doc.World.RestSeq + 1 } }, rules: Hard.Value);
+        s.Send(0, "interact", new { target = "shop:" + Shop });
+        Assert.True(Screen(s).GetProperty("haggle").GetProperty("can").GetBoolean());
+    }
+
+    [Fact]
     public void A_restart_during_the_haggle_shows_the_saved_roll_and_never_rolls_again()
     {
         var s = Open(pass: true);

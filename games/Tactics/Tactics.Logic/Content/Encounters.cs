@@ -75,7 +75,7 @@ public static class Encounters
         problems.ThrowIfAny();
 
         return new BattleSetup(map, placer.Units.ToImmutable(), def.Objectives ?? ObjectivesDef.Default, WithPhases(def, rules), d,
-            def.Xp, def.Loot, def.Environment);
+            def.Xp, def.Loot, def.Environment, NoRetreat: !def.Retreat);
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ public static class Encounters
         }
     }
 
-    private static ImmutableSortedSet<string> SheetTags(MonsterDef monster, EncounterUnitDef unit) => monster.Tags.Add(unit.UnitTag);
+    private static ImmutableSortedSet<string> SheetTags(MonsterDef monster, EncounterUnitDef unit) => monster.SheetTags.Add(unit.UnitTag);
 
     /// <summary><c>"beasts.wolf.grey"</c> with the variant <c>"dire"</c> is <c>"beasts.wolf.dire"</c>; a key without a variant gets one.</summary>
     private static string WithVariant(string sprite, string variant)

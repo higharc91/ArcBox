@@ -13,7 +13,9 @@ namespace Tactics.Logic;
 /// ability with no roll has just <c>"{range} tiles"</c>, or <c>"Self"</c> for a self target), then <c>", {shape} {size}"</c>
 /// for an area (nothing for a single target or the caster). A range of 1 reads <c>"1 tile"</c>; the basic weapon attack
 /// reads <c>"weapon range"</c>, as its reach is the weapon's. Effects are joined with "; ". A roll further down the
-/// list is described inline: <c>"Con save (target is Stunned for 1 round)"</c>.</item>
+/// list is described inline: <c>"Con save (target is Stunned for 1 round)"</c>. A <see cref="AbilityDef.RiderOnce"/>
+/// ability explains that bonuses and riders apply until the first hit, with later attacks plain hits (#107), and one
+/// with <see cref="AbilityDef.Requires"/> <c>". Only when {test}"</c> (Hide: <c>"you aren't in plain view"</c>, #108).</item>
 /// <item>Durations: <c>"for 1 round"</c>, <c>"for N rounds"</c>, <c>"until the end of your turn"</c> (0 rounds),
 /// <c>"until saved"</c>. Condition names come from the pack, else the capitalised id.</item>
 /// <item>Passive: the hook (<c>"When you hit"</c>), <c>", if {when}"</c>, <c>", on yourself"</c> for a self target, then
@@ -50,6 +52,10 @@ public static class Tooltips
         if (a.Target.Kind == TargetKind.Self && a.Target.Area.Shape is AreaShape.Self or AreaShape.Single)
             parts = [.. parts.Select(SecondPerson)];
         var text = parts.Count == 0 ? header : $"{header}: {string.Join("; ", parts)}";
+        if (a.RiderOnce)
+            text += ". With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits";
+        if (a.Requires is { } requires)
+            text += $". Only when {TooltipText.When(requires, rules)}";
         if (environment)
         {
             var types = EffectTree.All(effects).OfType<DamageEffect>().Select(d => d.Type).ToHashSet();
@@ -145,6 +151,8 @@ public static class Tooltips
     {
         List<string> parts = [];
         parts.AddRange(TooltipText.Clauses(c.Static, rules));
+        if (c.Id.Value == "charmed")
+            parts.Add("can't target its charmer with harmful abilities");
         if (c.DamageTaken is { } damage)
             parts.Add(damage.Consume ? $"the next {damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}, then this ends"
                 : $"{damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}");
@@ -206,6 +214,7 @@ public static class Tooltips
             HookKind.OnAttackHit => "When you hit",
             HookKind.OnAttackMiss => "When you miss",
             HookKind.OnDamaged => "When you take damage",
+            HookKind.OnHealed => "When healing restores HP",
             HookKind.OnSave => "When you roll a save",
             HookKind.OnMove => "When you move",
             HookKind.OnEnterTile => "When you enter a tile",

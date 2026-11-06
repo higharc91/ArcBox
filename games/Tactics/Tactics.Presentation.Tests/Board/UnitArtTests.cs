@@ -237,6 +237,8 @@ public sealed class UnitArtTests
     [InlineData("hasted", "hasted", true)]
     [InlineData("paralysed", "paralysed", true)]
     [InlineData("invisible", "hidden", true)]
+    [InlineData("hiding", "hidden", true)]          // the rogue's Hide (#108)
+    [InlineData("vexed", "marked", true)]           // the rogue's Vex (#108)
     [InlineData("hunters_mark", "marked", true)]
     [InlineData("mage_armor", "shielded", true)]
     [InlineData("unconscious", "sleeping", false)]    // the pack has the effect, but no icon of it

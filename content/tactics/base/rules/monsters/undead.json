@@ -31,7 +31,7 @@
     "abilities": ["wraith.life_drain"], "passives": [], "resist": ["acid", "cold", "fire", "lightning", "thunder"],
     "immune": ["necrotic", "poison"], "tags": ["undead", "incorporeal"],
     "aiProfile": "skirmisher", "sprite": "bosses.wraith.wraith" },
-  { "id": "lich", "name": "Lich", "cr": "8", "xp": 3900, "level": 9, "castingStat": "int",
+  { "id": "lich", "steadfast": true, "name": "Lich", "cr": "8", "xp": 3900, "level": 9, "castingStat": "int",
     "scores": { "str": 11, "dex": 16, "con": 16, "int": 20, "wis": 14, "cha": 16 }, "hp": 95, "ac": 17,
     "weapon": { "id": "lich_staff", "damage": "2d6", "damageType": "necrotic", "stat": "int", "finesse": false, "ranged": false,
                 "range": 1, "reach": false, "tags": ["simple"] },

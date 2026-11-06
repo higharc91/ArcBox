@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using ArcBox.Sdk;
@@ -99,7 +100,41 @@ public sealed class DocumentTests
     [InlineData(2)]
     [InlineData(-1)]
     public void An_unknown_version_is_still_refused(int version)
-        => Assert.Throws<JsonException>(() => TacticsDocument.Read(Json($$"""{ "version": {{version}}, "partyLevel": 1, "members": {}, "completed": [] }""")));
+        => Assert.Throws<CampaignDocumentException>(() => TacticsDocument.Read(Json($$"""{ "version": {{version}}, "partyLevel": 1, "members": {}, "completed": [] }""")));
+
+    [Fact]
+    public void A_battle_saved_with_an_ability_since_removed_starts_again_without_it()
+    {
+        // #108 removed rogue.steady_aim, a level-3 rogue feature. A battle saved before then, with it on the rogue's sheet, is
+        // under older rules: it starts again from the party's records (level 3 here), which never named it (it wasn't a pick).
+        var steadyAim = new AbilityId("rogue.steady_aim");
+        var saved = new TacticsGameTests.Session();
+        saved.ToBattle(everyoneAway: true);
+        var doc = TacticsDocument.Read(saved.Lease.Document);
+        var units = doc.Battle!.State.Units;
+        var rogue = units.Values.Single(u => u.Sheet.Tags.Contains(SheetBuilder.ClassTag + "rogue"));
+        var old = doc with
+        {
+            Members = doc.Members.ToImmutableSortedDictionary(m => m.Key, m => m.Value with { Character = m.Value.Character with { Level = 3 } },
+                StringComparer.Ordinal),
+            Battle = doc.Battle with
+            {
+                State = doc.Battle.State with
+                {
+                    ContentHash = "before-108",
+                    Units = units.SetItem(rogue.Id, rogue with { Sheet = rogue.Sheet with { Abilities = rogue.Sheet.Abilities.Add(steadyAim) } }),
+                },
+            },
+        };
+
+        var resumed = new TacticsGameTests.Session(document: old.ToJson());
+        resumed.Harness.Resume(resumed.Lease);
+
+        Assert.Equal("The rules changed since this battle began, so it starts again.", resumed.Host.Notice);
+        var restarted = TacticsDocument.Read(resumed.Lease.Document).Battle!.State.Units[rogue.Id];
+        Assert.DoesNotContain(steadyAim, restarted.Sheet.Abilities);
+        Assert.Contains(new AbilityId("rogue.cunning_hide"), restarted.Sheet.Abilities);
+    }
 
     [Fact]
     public void The_portal_reads_a_version_0_document()

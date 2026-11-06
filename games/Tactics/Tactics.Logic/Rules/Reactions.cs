@@ -75,6 +75,8 @@ public static class Reactions
             return null;
 
         var actor = w.Unit(trigger.Actor);
+        var charmedByActor = Conditions.Active(reactor, rules)
+            .Any(c => c.Def.Id.Value == "charmed" && c.From.Source == actor.Id);
         var options = ImmutableArray.CreateBuilder<ReactionChoice>();
         options.Add(new ReactionChoice(Pass, null, null));
 
@@ -83,7 +85,7 @@ public static class Reactions
         {
             case ReactionTriggerKind.LeavesReach:
                 eligible = actor.Life == LifeState.Up && actor.Hp > 0 && Movement.Hostile(reactor, actor) && LeavesReach(w.Terrain, reactor, actor.Pos, trigger.To);
-                if (eligible)
+                if (eligible && !charmedByActor)
                     options.Add(new ReactionChoice(Opportunity, RulesPack.CommonAttack.Id, actor.Id));
                 break;
             case ReactionTriggerKind.BeforeHit:
@@ -107,7 +109,10 @@ public static class Reactions
                 continue;
             if (trigger.Kind == ReactionTriggerKind.SpellCast && Reach.Distance(reactor.Pos, actor.Pos) > ability.Target.Range)
                 continue;
-            options.Add(new ReactionChoice(id.Value, id, ability.Target.Kind == TargetKind.Self ? reactor.Id : actor.Id));
+            var target = ability.Target.Kind == TargetKind.Self ? reactor.Id : actor.Id;
+            if (charmedByActor && target == actor.Id && Battle.IsHarmful(ability))
+                continue;
+            options.Add(new ReactionChoice(id.Value, id, target));
         }
 
         return options.Count > 1 ? new ReactionOffer(reactor.Id, options.ToImmutable(), NameOf(trigger.Kind), trigger) : null;
@@ -170,7 +175,8 @@ public sealed record ReactionStep(UnitId Reactor, ReactionChoice Choice) : Step
             ? rules.Abilities[RulesPack.CommonAttack.Id]
             : rules.Abilities[Choice.Ability ?? throw new InvalidOperationException($"Reaction '{Choice.Id}' names no ability.")];
         var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        var run = new RunEffectsStep(Reactor, target.Id, target.Pos, ability.Id, effects);
+        var hit = w.State.Queue.OfType<AttackStep>().FirstOrDefault(s => s.Target == Reactor && s.Roll is not null)?.Resolution;
+        var run = new RunEffectsStep(Reactor, target.Id, target.Pos, ability.Id, effects, Resolution: hit);
 
         if (Choice.Id != Reactions.Opportunity)
         {

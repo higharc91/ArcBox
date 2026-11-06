@@ -3,6 +3,11 @@ namespace Tactics.Logic;
 /// <summary>Pure camp job rules; dice are supplied by the caller and saved with their results.</summary>
 public static class RecoveryRules
 {
+    /// <summary>Watch covers a night's patrol around the fire, including the shipped distant clues.</summary>
+    public const int WatchRange = 32;
+    public static bool InWatchRange(Tile fire, Tile thing)
+        => Math.Max(Math.Abs(thing.X - fire.X), Math.Abs(thing.Y - fire.Y)) <= WatchRange;
+
     /// <summary>The five available jobs.</summary>
     public static readonly string[] Jobs = ["tend", "rally", "cook", "watch", "rest"];
     /// <summary>A job's skill; Rally uses the better social skill, with Persuasion on a tie.</summary>

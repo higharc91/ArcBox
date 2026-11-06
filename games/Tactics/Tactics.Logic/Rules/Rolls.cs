@@ -41,6 +41,45 @@ public static class Rolls
         };
 
     /// <summary>
+    /// The edge of an attack roll (spec §3.4, <see cref="AttackStep"/>): each of the attacker's sources counts its own-attack
+    /// edge and invisibility (advantage); each of the target's its attacked-at-range or attacked-in-melee edge and
+    /// invisibility (disadvantage); then the situation: a flank (melee only: the caller passes it), the attacker's mark on the
+    /// target and help (advantage), a taunt drawing the attacker to someone else (disadvantage). The engine, the AI's odds and
+    /// the simulator all count with this; they differ only in where the sources and the situation come from.
+    /// </summary>
+    public static Edge AttackEdge(IEnumerable<StaticMods> attacker, IEnumerable<StaticMods> target, bool ranged, bool flanked,
+        bool marked, bool tauntedAway, bool helped)
+    {
+        var (advantages, disadvantages) = (0, 0);
+        foreach (var mods in attacker)
+        {
+            advantages += (mods.OwnAttacks == Edge.Advantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
+            disadvantages += mods.OwnAttacks == Edge.Disadvantage ? 1 : 0;
+        }
+        foreach (var mods in target)
+        {
+            var against = ranged ? mods.AttackedRanged : mods.AttackedMelee;
+            advantages += against == Edge.Advantage ? 1 : 0;
+            disadvantages += (against == Edge.Disadvantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
+        }
+        advantages += (flanked ? 1 : 0) + (marked ? 1 : 0) + (helped ? 1 : 0);
+        disadvantages += tauntedAway ? 1 : 0;
+        return Combine(advantages, disadvantages);
+    }
+
+    /// <summary>
+    /// The edge <paramref name="attacker"/>'s attack on <paramref name="target"/> would roll with in <paramref name="state"/>
+    /// (<see cref="AttackEdge(IEnumerable{StaticMods}, IEnumerable{StaticMods}, bool, bool, bool, bool, bool)"/> with the
+    /// state's sources and situation), without spending the help.
+    /// </summary>
+    public static Edge AttackEdge(BattleState state, UnitId attacker, UnitId target, bool ranged, RulesPack rules)
+        => AttackEdge(Modifiers.Sources(state, attacker, rules), Modifiers.Sources(state, target, rules), ranged,
+            flanked: !ranged && Modifiers.Flanked(state, attacker, target, rules),
+            marked: MarkBlock.MarkedBy(state.Units[target], attacker),
+            tauntedAway: TauntBlock.TauntedAway(state, attacker, target),
+            helped: state.Units[attacker].Conditions.Any(c => c.Id == RulesPack.Helped.Id));
+
+    /// <summary>
     /// d20 + <paramref name="modifier"/> against <paramref name="vs"/>: a success when the total reaches it. With
     /// <paramref name="critOn20"/> a natural 20 always succeeds and crits; with <paramref name="autoMissOn1"/> a natural 1
     /// always fails (a fumble).

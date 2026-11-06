@@ -89,12 +89,11 @@ public static class DownedRules
         Tick(w, unit, crit ? 2 : 1);
     }
 
-    /// <summary>The start of a new round: every Downed unit's countdown drops by 1, in <see cref="UnitId"/> order.</summary>
-    public static void TickRound(BattleWriter w)
-    {
-        foreach (var id in w.State.Units.Values.Where(u => u.Life == LifeState.Downed).Select(u => u.Id).ToArray())
-            Tick(w, id, 1);
-    }
+    /// <summary>
+    /// The start of a Downed <paramref name="unit"/>'s own (skipped) turn: its countdown drops by 1 (<see cref="CountdownTicked"/>),
+    /// and at 0 it goes Out. So it is Out at the start of its third own turn however late in a round it dropped.
+    /// </summary>
+    public static void TickTurn(BattleWriter w, UnitId unit) => Tick(w, unit, 1);
 
     /// <summary>
     /// A Downed <paramref name="unit"/> gets up with <paramref name="hp"/> HP (at least 1, at most its max): its countdown
@@ -113,14 +112,15 @@ public static class DownedRules
     /// <summary>
     /// A Downed <paramref name="unit"/>'s countdown has run out: it is Out. It gains an injury from
     /// <see cref="RulesPack.Injuries"/> (those on the battle table, <see cref="InjuryDef.Battle"/>), picked by weight with one roll of the battle's RNG (the table in
-    /// <see cref="InjuryId"/> order), recorded in <see cref="BattleState.Injuries"/>; emits <see cref="UnitOut"/> and leaves
+    /// <see cref="InjuryId"/> order) among those it doesn't already hold (none when it holds them all), recorded in <see cref="BattleState.Injuries"/>; emits <see cref="UnitOut"/> and leaves
     /// the turn order.
     /// </summary>
     public static void GoOut(BattleWriter w, UnitId unit)
     {
-        var injury = PickInjury(w);
+        var injury = PickInjury(w, w.Unit(unit));
         w.Set(w.Unit(unit) with { Life = LifeState.Out, Hp = 0, TempHp = 0, Countdown = 0 });
-        w.State = w.State with { Injuries = w.State.Injuries.Add(new RecordedInjury(unit, injury)) };
+        if (injury is { } gained)
+            w.State = w.State with { Injuries = w.State.Injuries.Add(new RecordedInjury(unit, gained)) };
         w.Emit(new UnitOut(unit, injury));
         Conditions.BreakConcentration(w, unit);
         LeaveOrder(w, unit);
@@ -153,7 +153,8 @@ public static class DownedRules
         => w.State = w.State with
         {
             Queue = w.State.Queue.RemoveAll(step => (step is RunEffectsStep { HookDepth: 0 } run && run.Source == unit)
-                                                    || (step is AttackStep { HookDepth: 0 } attack && attack.Source == unit)),
+                                                    || (step is AttackStep { HookDepth: 0 } attack && attack.Source == unit)
+                                                    || (step is StrikeStep strike && strike.Source == unit)),
         };
 
     private static void Tick(BattleWriter w, UnitId unit, int by)
@@ -168,12 +169,21 @@ public static class DownedRules
             GoOut(w, unit);
     }
 
-    private static InjuryId PickInjury(BattleWriter w)
+    /// <summary>
+    /// One roll over the battle table without the injuries <paramref name="unit"/> already holds (from an earlier battle, or
+    /// this one), so nobody holds two copies of an injury; null, with no roll, when it holds them all.
+    /// </summary>
+    private static InjuryId? PickInjury(BattleWriter w, UnitState unit)
     {
-        var injuries = w.Rules.Injuries.Values.Where(i => i.Battle).ToList();     // a trap's minor injuries aren't on the battle table
+        var table = w.Rules.Injuries.Values.Where(i => i.Battle).ToList();     // a trap's minor injuries aren't on the battle table
+        if (table.Sum(i => Math.Max(0, i.Weight)) <= 0)
+            throw new RulesInvariantException("The rules pack has no injury to give a unit going Out.");
+        var held = unit.Sheet.Passives.ToHashSet(StringComparer.Ordinal);
+        var injuries = table.Where(i => !held.Contains(RulesPack.InjuryPassiveId(i.Id))
+                                        && !w.State.Injuries.Any(r => r.Unit == unit.Id && r.Injury == i.Id)).ToList();
         var total = injuries.Sum(i => Math.Max(0, i.Weight));
         if (total <= 0)
-            throw new RulesInvariantException("The rules pack has no injury to give a unit going Out.");
+            return null;
         var roll = w.Roll(total);
         foreach (var injury in injuries)
         {

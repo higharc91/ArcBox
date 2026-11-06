@@ -53,7 +53,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// <summary>The timer keys.</summary>
     public static class Timers
     {
-        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save", Line = "line", Vote = "vote";
+        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save", Line = "line", Vote = "vote", Retreat = "retreat";
     }
 
     private readonly TacticsTiming _timing = timing ?? TacticsTiming.Default;
@@ -108,7 +108,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Start(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign);
-        _doc = TacticsDocument.Read(campaign.Document);
+        _doc = TacticsDocument.Read(campaign.Document, Rules);
         WorldCall("start", () => StartCore(ctx, players, campaign));
     }
 
@@ -117,11 +117,12 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         (_ctx, _players, _lease) = (ctx, players, campaign);
         foreach (var p in players)
             _online.Add(p.Id);
-        _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
+        _doc = TacticsDocument.Read(campaign.Document, Rules) with { RulesHash = Rules.Hash };
         if (seed is not null)
             _doc = seed.SeedInto(_doc, Rules);
         _doc = Coloured(_doc);
         _questLogLeader = null;
+        _giving.Clear();
         _questObservedFlags = null;
         EnterWorld();
         _mobActors.Clear();
@@ -146,15 +147,16 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
-        _doc = TacticsDocument.Read(_lease.Document);
+        _doc = TacticsDocument.Read(_lease.Document, Rules);
         WorldCall("resume", () => ResumeCore(ctx, players, campaign));
     }
 
     private void ResumeCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
-        _doc = Coloured(TacticsDocument.Read(_lease.Document));
+        _doc = Coloured(TacticsDocument.Read(_lease.Document, Rules));
         _questLogLeader = null;
+        _giving.Clear();
         _questObservedFlags = null;
         EnterWorld();
         _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
@@ -263,6 +265,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             return;
         if (_doc.World?.MobAmbush is not null && custom.Action != "endSession") return;
         HeardFrom(profile);
+        if (custom.Action == "difficulty") { if (IsVip(player)) SetDifficulty(custom.Data); return; }
         if (custom.Action == "questLog") { QuestLogInput(player, profile, custom.Data); return; }
         if (QuestLogOpen && custom.Action is not ("endSession" or "pickClass")) return;
         switch (_phase)
@@ -278,6 +281,15 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Exploration when custom.Action == "interact":
                 Interact(player, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "giveOpen":
+                if (_online.Contains(player.Id)) _giving.Add(profile.Value);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "giveClose":
+                _giving.Remove(profile.Value);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "give":
+                Give(player, profile, custom.Data);
                 break;
             case TacticsPhase.Exploration when custom.Action == "search":
                 Search(player);
@@ -377,6 +389,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case Timers.React:
                 ReactionTimedOut();
+                break;
+            case Timers.Retreat:
+                RetreatTimedOut();
                 break;
         }
     }
@@ -593,7 +608,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         };
         if (result.Outcome == BattleOutcome.Won)
             _doc = _doc.ChangeGold(mob?.Gold ?? Rules.Encounters[save.Encounter].Gold, save.Members.Where(m => mob is null || _players.Any(p => p.Profile == m && _online.Contains(p.Id))).Select(m => m.Value));
-        if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost && _doc.World is { } resting)
+        if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost or BattleOutcome.Fled && _doc.World is { } resting)
             _doc = _doc with { World = resting with { RestReady = true } };
         if (mob is not null && result.Outcome == BattleOutcome.Won && _doc.World is { } mobWorld)
             _doc = _doc with { World = mobWorld with { MobsBeaten = (mobWorld.MobsBeaten.IsDefault ? [] : mobWorld.MobsBeaten).Add(mob.Id) } };

@@ -85,12 +85,12 @@ export function useShellClock(anchor: { current: HTMLElement | null }): { text: 
 }
 
 /** The YOUR TURN banner with the turn clock. */
-export function TurnBanner() {
+export function TurnBanner({ summon }: { summon?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const clock = useShellClock(ref);
   return (
     <div class="tx-banner" ref={ref}>
-      <b>Your turn</b>
+      <b>{summon ? `${summon}'s turn` : "Your turn"}</b>
       {clock ? <span class={`tx-clock${clock.urgent ? " urgent" : ""}`} role="timer">{clock.text}</span> : null}
     </div>
   );

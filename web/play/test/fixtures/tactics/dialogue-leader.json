@@ -10,7 +10,8 @@
     "mood": "idle",
     "text": "There. Forty of them, perhaps. Dagna has eight guards left. And she has you.",
     "canSkip": true,
-    "vip": true
+    "vip": true,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": null,

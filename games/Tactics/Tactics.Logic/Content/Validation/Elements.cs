@@ -7,7 +7,10 @@ internal sealed partial class Validation
 {
     // ---- Elements -------------------------------------------------------------------------------------------------
 
-    /// <summary>An ability: its effects, then the whole; range, area and presentation keys.</summary>
+    /// <summary>
+    /// An ability: its effects, then the whole; range, area, its <c>requires</c> (the conditions it names, and no leaf that
+    /// reads a hook's situation: <see cref="UserOnly"/>) and presentation keys.
+    /// </summary>
     public AbilityDef? Ability(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
@@ -25,6 +28,11 @@ internal sealed partial class Validation
             if (def.Target.Area.Size > MaxAreaSize)
                 Error(file, Pointer.Append(Pointer.Append(target, "area"), "size"),
                     $"Area size {def.Target.Area.Size} is over the limit of {MaxAreaSize}.");
+            if (def.Requires is { } requires)
+            {
+                When(requires, file, Pointer.Append(ptr, "requires"));
+                UserOnly(requires, file, Pointer.Append(ptr, "requires"));
+            }
             if (def.Presentation is { } p)
             {
                 var at = Pointer.Append(ptr, "presentation");
@@ -50,6 +58,7 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<PassiveDef>(e, file, ptr);
+            RejectHpPercent(def?.Static, file, Pointer.Append(ptr, "static"));
             if (def?.When is { } when)
                 When(when, file, Pointer.Append(ptr, "when"));
             return def;
@@ -73,6 +82,7 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<ConditionDef>(e, file, ptr);
+            RejectHpPercent(def?.Static, file, Pointer.Append(ptr, "static"));
             if (def?.DamageTaken is { } damage)
             {
                 var at = Pointer.Append(ptr, "damageTaken");
@@ -91,6 +101,12 @@ internal sealed partial class Validation
         });
 
     private const string NoMaxHp = "A condition can't change max HP (only passives and injuries do, when a character's sheet is built).";
+
+    private void RejectHpPercent(StaticMods? mods, string file, string ptr)
+    {
+        if (mods is { MaxHpPercent: not 0 })
+            Error(file, Pointer.Append(ptr, "maxHpPercent"), "Only injuries support percentage max HP modifiers.");
+    }
 
     /// <summary>A race: its racial ability and trait passives.</summary>
     public RaceDef? Race(JsonElement e, string file, string ptr)
@@ -185,7 +201,13 @@ internal sealed partial class Validation
         });
 
     /// <summary>An AI profile.</summary>
-    public AiProfileDef? AiProfile(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<AiProfileDef>(e, file, ptr));
+    public AiProfileDef? AiProfile(JsonElement e, string file, string ptr) => Guarded(file, ptr, () =>
+    {
+        var def = Deserialize<AiProfileDef>(e, file, ptr);
+        if (def?.ControlByLevel is { } control)
+            Levels(control, file, Pointer.Append(ptr, "controlByLevel"));
+        return def;
+    });
 
     /// <summary>The XP table: thresholds that start at 0 and rise.</summary>
     public XpTable? Xp(JsonElement e, string file, string ptr)
@@ -282,5 +304,31 @@ internal sealed partial class Validation
             When(not, file, Pointer.Append(ptr, "not"));
         if (when.TargetHasCondition is { } condition)
             Ref(RefKind.Condition, condition.Value, file, Pointer.Append(ptr, "targetHasCondition"));
+    }
+
+    /// <summary>
+    /// An ability's <c>requires</c> is a test on the user alone, checked before anything is aimed or rolled
+    /// (<see cref="AbilityDef.Requires"/>): a leaf that reads an attack, a roll, a damage or another unit (the target) has
+    /// nothing to read, so it is refused wherever it sits.
+    /// </summary>
+    private void UserOnly(WhenDef when, string file, string ptr)
+    {
+        for (var i = 0; i < when.All.Length; i++)
+            UserOnly(when.All[i], file, Pointer.Append(Pointer.Append(ptr, "all"), i));
+        for (var i = 0; i < when.Any.Length; i++)
+            UserOnly(when.Any[i], file, Pointer.Append(Pointer.Append(ptr, "any"), i));
+        if (when.Not is { } not)
+            UserOnly(not, file, Pointer.Append(ptr, "not"));
+        foreach (var (present, key) in new[]
+                 {
+                     (!when.Weapon.IsDefaultOrEmpty, "weapon"), (when.Advantage is not null, "advantage"),
+                     (when.Disadvantage is not null, "disadvantage"), (when.Flanked is not null, "flanked"),
+                     (when.AllyBesideTarget is not null, "allyBesideTarget"), (when.HeightAbove is not null, "heightAbove"),
+                     (when.IsSpell is not null, "isSpell"), (when.DamageType is not null, "damageType"),
+                     (when.Success is not null, "success"),
+                 })
+            if (present)
+                Error(file, Pointer.Append(ptr, key),
+                    $"An ability's requirement is a test on the user alone: '{key}' reads an attack, a roll or a target, which it doesn't have.");
     }
 }

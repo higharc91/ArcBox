@@ -8,7 +8,7 @@ import { usePackBase } from "./pack";
 import { RecoveryMenu, RecoveryParty, type RecoveryMember } from "./recovery";
 
 interface CampData {
-  stage: string; mode?: string; job?: string; canPick: boolean; leader: boolean; vip: boolean; you: string;
+  stage: string; mode?: string; job?: string; canPick: boolean; leader: boolean; vip: boolean; difficulty?: string; you: string;
   jobs: { id: string; name: string; skill: string; dc: number; can?: boolean }[];
   targets: { member: string; name: string; injury: string; label: string; detail: string; kind?: string; can: boolean; selected: boolean }[];
   party: { member: string; name: string; job?: string }[];
@@ -37,7 +37,7 @@ export function Camp(props: CustomScreenProps) {
           disabled: !d.canPick || !target.can, run: () => send("campJob", { job: d.job, target: m.member, injury: i.id }) } : undefined;
       }} />;
   return <section class={`tx tx-camp tx-recovery${rolled ? " tx-recovery-roll" : ""}`}>
-    {d.vip && <RecoveryMenu keep={d.mode === "inn" ? "Stay at the inn" : "Stay by the fire"} send={send} />}
+    {d.vip && <RecoveryMenu keep={d.mode === "inn" ? "Stay at the inn" : "Stay by the fire"} difficulty={d.difficulty} send={send} />}
     <header><span class="tx-eyebrow">{d.mode === "inn" ? "At the inn" : "By the fire"}</span><h1>{d.stage === "dawn" ? "A new dawn" : rolled ? "A moment by the fire" : d.stage === "sleep" ? "A quiet night" : d.stage === "results" ? "A quiet moment" : "Make yourself useful"}</h1></header>
     <CampScene stage={d.stage} mode={d.mode} members={members} party={d.party} you={d.you} />
     {d.stage === "jobs" ? <>

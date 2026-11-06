@@ -45,6 +45,29 @@ public sealed class PhoneFixtureTests
     }
 
     [Fact]
+    public void Help_and_group_checks_match_their_fixtures()
+    {
+        var help = PartyCheckTests.Waiting();
+        help.Send(3, "help");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-help"] = Node(help.Harness.PlayerView(0)) });
+        PartyCheckTests.Pick(help);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-help-rolled"] = Node(help.Harness.PlayerView(0)) });
+        var group = PartyCheckTests.Waiting(true);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-group"] = Node(group.Harness.PlayerView(0)) });
+        group.Send(0, "groupRoll");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-group-rolled"] = Node(group.Harness.PlayerView(0)) });
+    }
+
+    [Fact]
+    public void Giving_to_an_absent_member_matches_the_walk_fixture()
+    {
+        var s = ShopTests.AtShop(100);
+        s.Harness.SetConnected(3, false);
+        s.Send(0, "giveOpen");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["walk-give-away"] = Node(s.Harness.PlayerView(0)) });
+    }
+
+    [Fact]
     public void Roaming_danger_and_ambush_screens_match_their_fixtures()
     {
         var rules = TacticsGameTests.Rules;
@@ -296,6 +319,10 @@ public sealed class PhoneFixtureTests
         Assert.True(screens.Remove("pickEncounter", out var list));
         Assert.False(list["data"]!["canWalk"]!.GetValue<bool>());
         screens["pickEncounter-noWalk"] = list;
+        // The captured battle is lost (#108's rogue; the phone tests set a win themselves), and with no region there is no
+        // recovery point to wake at, so its note differs.
+        Assert.True(screens.Remove("results", out var results));
+        screens["results-noRegion"] = results;
         Check(screens);
     }
 
@@ -380,6 +407,17 @@ public sealed class PhoneFixtureTests
         { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
     }
 
+    /// <summary>
+    /// #107: the turn of a hero who makes two attacks, with foes in reach: its Attack says how many (<c>attacks</c>), so the
+    /// phone can aim each one ("Attack 2 of 2").
+    /// </summary>
+    [Fact]
+    public void The_turn_of_a_hero_with_two_attacks_matches_its_fixture()
+    {
+        var (s, _, _) = MultiAttackPhoneTests.Arranged(new UnitId("hero1"));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["turn-attacks"] = Node(s.Harness.PlayerView(0)) });
+    }
+
     /// <summary>Who takes a found item (the owner's decision 1): the 5d vote screen, with what it asks.</summary>
     [Fact]
     public void The_loot_vote_matches_its_fixture()
@@ -447,6 +485,29 @@ public sealed class PhoneFixtureTests
             ["environment-turn"] = Node(resumed.Screen(3)!),
             ["environment-status"] = Node(resumed.Screen(0)!),
         });
+    }
+
+    /// <summary>The retreat button, the vote under way and the flight's results (#111), each a real view from a real session.</summary>
+    [Fact]
+    public void Retreat_screens_match_real_views()
+    {
+        var s = RetreatVoteTests.Fight(round: 3);
+        var waiting = Enumerable.Range(0, 4).First(p => s.Screen(p)!.Screen == TacticsGame.Screens.Status);
+        var acting = Enumerable.Range(0, 4).First(p => s.Screen(p)!.Screen == TacticsGame.Screens.Turn);
+        var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["retreat-status"] = Node(s.Screen(waiting)!),
+            ["retreat-turn"] = Node(s.Screen(acting)!),
+        };
+        s.Send(waiting, "fallBack");
+        seen["retreat-vote"] = Node(s.Screen(acting)!);
+        seen["retreat-vote-proposer"] = Node(s.Screen(waiting)!);
+        var others = Enumerable.Range(0, 4).Where(p => p != waiting).ToArray();
+        s.Send(others[0], "fallBackVote", new { yes = true });
+        s.Send(others[1], "fallBackVote", new { yes = true });
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+        seen["results-fled"] = Node(s.Screen(0)!);
+        Check(seen);
     }
 
     private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)

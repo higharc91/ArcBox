@@ -32,6 +32,14 @@ public sealed class BattleHudTests
     private static BattleHud Hud(BattleView shown, BattleView? live = null, string banner = "", BattleHud? previous = null, UnitId? aiFinished = null)
         => BattleHud.Of(shown, live ?? shown, banner, previous, aiFinished);
 
+    [Theory]
+    [InlineData("Story", "Story")]
+    [InlineData("Hard", "Hard")]
+    [InlineData("Normal", null)]
+    [InlineData(null, null)]
+    public void A_small_tag_names_a_difficulty_that_is_not_Normal(string? difficulty, string? tag)
+        => Assert.Equal(tag, Hud(Battle(Id("hero1"), 1, Four) with { Difficulty = difficulty }).Tag);
+
     [Fact]
     public void The_order_starts_with_the_active_unit_and_wraps()
     {

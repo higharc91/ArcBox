@@ -22,7 +22,11 @@
     },
     "active": "Player3",
     "upIn": 9,
-    "aiPlaying": false
+    "aiPlaying": false,
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

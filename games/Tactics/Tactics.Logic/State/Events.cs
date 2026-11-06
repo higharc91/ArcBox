@@ -19,6 +19,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Pushed), nameof(Pushed))]
 [JsonDerivedType(typeof(Fell), nameof(Fell))]
 [JsonDerivedType(typeof(Collided), nameof(Collided))]
+[JsonDerivedType(typeof(PushResisted), nameof(PushResisted))]
 [JsonDerivedType(typeof(Teleported), nameof(Teleported))]
 [JsonDerivedType(typeof(ReactionOffered), nameof(ReactionOffered))]
 [JsonDerivedType(typeof(Reacted), nameof(Reacted))]
@@ -26,6 +27,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(ConcentrationBroken), nameof(ConcentrationBroken))]
 [JsonDerivedType(typeof(PassiveTriggered), nameof(PassiveTriggered))]
 [JsonDerivedType(typeof(AttackResolved), nameof(AttackResolved))]
+[JsonDerivedType(typeof(Retargeted), nameof(Retargeted))]
 [JsonDerivedType(typeof(Downed), nameof(Downed))]
 [JsonDerivedType(typeof(CountdownTicked), nameof(CountdownTicked))]
 [JsonDerivedType(typeof(Revived), nameof(Revived))]
@@ -104,6 +106,12 @@ public sealed record Fell(UnitId Unit, int Levels, int Damage, bool IntoDeep) : 
 /// <summary>A pushed unit hit a wall, the map edge or another unit (<see cref="With"/>) and took <see cref="Damage"/> (rolled).</summary>
 public sealed record Collided(UnitId Unit, UnitId? With, int Damage) : BattleEvent;
 
+/// <summary>
+/// A guarded unit (<see cref="Steadfast"/>) was pushed toward a deep tile and braced at the edge: it stays on <see cref="At"/>,
+/// the last tile of the push that isn't deep, which is where it was when the push began if it had not moved.
+/// </summary>
+public sealed record PushResisted(UnitId Unit, Tile At) : BattleEvent;
+
 /// <summary>A unit was moved without walking (a teleport or a swap).</summary>
 public sealed record Teleported(UnitId Unit, Tile From, Tile To) : BattleEvent;
 
@@ -132,17 +140,28 @@ public sealed record PassiveTriggered(UnitId Owner, string Passive,
 /// </summary>
 public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent;
 
+/// <summary>
+/// The next attack of <see cref="Unit"/>'s multi-attack goes to <see cref="Target"/>, not to the unit its last attack (or,
+/// for the first, the ability's aim) went to: the player listed another target for it (<see cref="Use.Targets"/>), or the
+/// one it was meant for has fallen or is out of reach (<see cref="StrikeStep"/>). The TV turns the next swing to it.
+/// </summary>
+public sealed record Retargeted(UnitId Unit, UnitId Target) : BattleEvent;
+
 /// <summary>A unit dropped to 0 HP and is Downed: prone, unable to act, with a countdown of 3 (spec §3.8).</summary>
 public sealed record Downed(UnitId Unit) : BattleEvent;
 
-/// <summary>A Downed unit's countdown dropped (a new round, or a hit) to <see cref="Left"/>; at 0 the unit goes Out.</summary>
+/// <summary>A Downed unit's countdown dropped (its own turn starts, or a hit) to <see cref="Left"/>; at 0 the unit goes Out.</summary>
 public sealed record CountdownTicked(UnitId Unit, int Left) : BattleEvent;
 
 /// <summary>A Downed unit got back up with <see cref="Hp"/> HP (healing, or Help at 1 HP).</summary>
 public sealed record Revived(UnitId Unit, int Hp) : BattleEvent;
 
-/// <summary>A Downed unit's countdown ran out: it has left the battle with <see cref="Injury"/>.</summary>
-public sealed record UnitOut(UnitId Unit, InjuryId Injury) : BattleEvent;
+/// <summary>
+/// A Downed unit's countdown ran out: it has left the battle with <see cref="Injury"/>, or with none (null) when it already
+/// held every injury on the battle table.
+/// </summary>
+public sealed record UnitOut(UnitId Unit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Injury) : BattleEvent;
 
 /// <summary>A unit that doesn't go Downed (an enemy, a summon) dropped to 0 HP and died.</summary>
 public sealed record Died(UnitId Unit) : BattleEvent;

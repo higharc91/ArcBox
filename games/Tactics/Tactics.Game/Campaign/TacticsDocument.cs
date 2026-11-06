@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
 using Tactics.Logic;
 
 namespace Tactics.Game;
@@ -16,12 +17,17 @@ namespace Tactics.Game;
 /// dots and phone. Null when they never picked, and then <see cref="PlayerColors.Default"/> by join order. One more optional field and no
 /// version bump: a document from before reads with none, and a null isn't written.
 /// </param>
+/// <param name="Reactions">
+/// The player's reaction preferences (<see cref="ReactionPrefs"/>, issue #113), set from the phone's battle screen. Null when they never set
+/// any, which reads as ask-about-everything; a null isn't written, so a document from before reads unchanged.
+/// </param>
 public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ReactionPrefs? Reactions = null)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
@@ -90,7 +96,26 @@ public sealed record SavedStage(Tile Origin, int Height);
 /// A roll made in a scene (overworld 5d §6), kept with the node it leads to so a restart never rolls again: who rolled, for which option
 /// and skill, the DC, the die, their bonus and whether it passed.
 /// </summary>
-public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed);
+/// <summary>One present hero’s d20 and bonus in a group check.</summary>
+public sealed record StoryGroupRoll(string Member, int Die, int Bonus, bool Passed);
+/// <summary>A saved result. For groups, Die counts successes, Bonus is zero, and Group retains the actual d20s.</summary>
+public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Helper = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<int> Dice = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<StoryGroupRoll> Group = default)
+{
+    public bool Equals(StoryRoll? other) => other is not null && Member == other.Member && Option == other.Option
+        && Skill == other.Skill && Dc == other.Dc && Die == other.Die && Bonus == other.Bonus && Passed == other.Passed
+        && Helper == other.Helper && Dice.AsSpan().SequenceEqual(other.Dice.AsSpan()) && Group.AsSpan().SequenceEqual(other.Group.AsSpan());
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(Member); hash.Add(Option); hash.Add(Skill); hash.Add(Dc); hash.Add(Die); hash.Add(Bonus); hash.Add(Passed); hash.Add(Helper);
+        if (!Dice.IsDefault) foreach (var die in Dice) hash.Add(die);
+        if (!Group.IsDefault) foreach (var roll in Group) hash.Add(roll);
+        return hash.ToHashCode();
+    }
+}
 
 /// <summary>
 /// Where a story beat is (overworld 5d §7), saved on every line so that a restart resumes on the same line. Votes aren't kept: a restart
@@ -121,7 +146,9 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ThingCursor? Thing = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PersonCursor? Person = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PersonCursor? Person = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? CheckSeed = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Helper = null)
 {
     /// <summary>The scenes before a fight, and all of a story beat's.</summary>
     public const string Lead = "lead";
@@ -219,7 +246,9 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, MemberRecord> Members,
     ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null,
+    Difficulty Difficulty = Difficulty.Normal,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> GiftTrades = default)
 {
     /// <summary>The document version this code reads and writes.</summary>
     public const int CurrentVersion = 1;
@@ -242,29 +271,50 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         return Math.Max(Members.Values.Min(m => m.Xp), threshold);
     }
 
-    /// <summary>Reads a document of any version up to <see cref="CurrentVersion"/>, as that version; an empty or unreadable one is a new campaign's.</summary>
-    public static TacticsDocument Read(JsonElement json)
+    /// <summary>Reads supported documents. Only the store's empty-object marker starts a new campaign; unreadable data is refused.</summary>
+    public static TacticsDocument Read(JsonElement json, RulesPack? rules = null)
     {
-        if (json.ValueKind != JsonValueKind.Object || !json.EnumerateObject().Any())
-            return New;
-        var doc = json.Deserialize<TacticsDocument>(ArcJson.Options)
-                  ?? throw new JsonException("The campaign document is null.");
-        if (doc.Version is < 0 or > CurrentVersion)
-            throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads 0 to {CurrentVersion}).");
-        doc = doc with
+        try
         {
-            Version = CurrentVersion,
-            Gold = Math.Max(0, doc.Gold),
-            Completed = doc.Completed.IsDefault ? [] : doc.Completed,
-            Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
-                .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
-        };
-        // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
-        if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
-            doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
-        // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
-        return doc.Gold > 0 && !doc.Members.IsEmpty
-            ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
+            if (json.ValueKind != JsonValueKind.Object)
+                throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            if (!json.EnumerateObject().Any()) return New;
+            if (json.TryGetProperty("version", out var version) && version.ValueKind == JsonValueKind.Number &&
+                version.TryGetInt64(out var number) && number > CurrentVersion)
+                throw new CampaignDocumentException(CampaignDocumentException.NewerVersion);
+            var doc = json.Deserialize<TacticsDocument>(ArcJson.Options)
+                      ?? throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            if (doc.Version > CurrentVersion)
+                throw new CampaignDocumentException(CampaignDocumentException.NewerVersion);
+            if (doc.Version < 0)
+                throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            doc = doc with
+            {
+                Version = CurrentVersion,
+                Gold = Math.Max(0, doc.Gold),
+                Completed = doc.Completed.IsDefault ? [] : doc.Completed,
+                Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
+                    .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
+            };
+            // Validate every saved member, including absent members, before Start/Resume can save anything.
+            if (rules is not null && doc.Members.Values.Any(m =>
+                !rules.Classes.ContainsKey(m.Character.Class) ||
+                m.Character.Bag.Any(s => string.IsNullOrEmpty(s.Item.Value) || !rules.Items.ContainsKey(s.Item)) ||
+                (!string.IsNullOrEmpty(m.Character.Weapon) && !rules.Weapons.ContainsKey(m.Character.Weapon)) ||
+                (!string.IsNullOrEmpty(m.Character.Armor) && !rules.Armors.ContainsKey(m.Character.Armor))))
+                throw new CampaignDocumentException(CampaignDocumentException.MissingContent);
+            // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
+            if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
+                doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
+            // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
+            return doc.Gold > 0 && !doc.Members.IsEmpty
+                ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
+        }
+        catch (CampaignDocumentException) { throw; }
+        catch (JsonException error)
+        {
+            throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention, error);
+        }
     }
 
     /// <summary>

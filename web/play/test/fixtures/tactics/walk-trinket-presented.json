@@ -44,9 +44,11 @@
       }
     ],
     "vip": true,
+    "difficulty": "Normal",
     "canBattle": false,
     "portal": "/c/ABCD",
     "interact": "Talk to Dagna Holt",
+    "canGive": true,
     "journal": {
       "quests": [
         {

@@ -209,6 +209,36 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    public void An_area_spell_keeps_off_a_Downed_hero_when_an_equal_aim_exists_unless_the_caster_is_cruel()
+    {
+        // #110: every blast that catches Aldo and Bree is worth the same; the ones centred at (4, 2) and (5, 2) also catch Cass,
+        // who is Downed. Fair play keeps the fireball off her; a cruel caster aims at her too.
+        var fireball = A("wizard.fireball");
+        var mage = First(TestSheets.Cleric) with
+        {
+            Level = 5, CastingStat = "Int", Scores = TestSheets.Scores(8, 14, 12, 16, 10, 10), Resources = Ordinal.Map(("mana", 3)),
+            Abilities = [fireball.Id], Move = 0,
+        };
+        Tile Aim(string profile)
+        {
+            var battle = On(string.Join('\n', Enumerable.Repeat(string.Join(' ', Enumerable.Repeat("0.", 12)), 5))).With(fireball)
+                .Enemy("mage", mage, T(6, 4), new AiControlled(profile))
+                .Party("aldo", TestSheets.Fighter, T(5, 2))
+                .Party("bree", TestSheets.Fighter, T(6, 2))
+                .Party("cass", TestSheets.Fighter, T(3, 2));
+            var state = battle.Start().State.Change("cass", u => u with { Hp = 0, Life = LifeState.Downed, Countdown = 3 });
+            var plan = Ai.Plan(state, U("mage"), battle.Rules);
+            var aim = UseOf(plan, "wizard.fireball")?.Target.Tile;
+            Assert.True(aim is { } a && Reach.Distance(a, T(5, 2)) <= 2 && Reach.Distance(a, T(6, 2)) <= 2, plan.Explain);
+            ApplyAll(state, plan, battle.Rules);
+            return aim!.Value;
+        }
+
+        Assert.True(Reach.Distance(Aim("caster"), T(3, 2)) > 2);
+        Assert.True(Reach.Distance(Aim("boss_cruel"), T(3, 2)) <= 2);
+    }
+
+    [Fact]
     public void Bonus_action_never_strikes_a_player_the_main_action_may_have_downed()
     {
         // The priest's mace can down Kara (1 HP); its spiritual weapon (a bonus action) must then go to Vex (sturdy, so no

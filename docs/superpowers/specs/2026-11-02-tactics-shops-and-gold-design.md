@@ -134,8 +134,7 @@ again and never rolls twice, a reconnect holds the check while nobody is here, a
 `ShopRules.Buy(item, shop, haggled)` is `ceil(price × priceMod × 0.9)`, and `Sell` is `floor(plain buy × sellRatio × 1.1)`, never more than
 that visit's buy price for the same item (at a sell ratio near 1 a haggle would otherwise pay out more than it charges). The phones get
 `haggle: { can, dc, result }` on the shop screen (the five shop fixtures gained it) and the adjusted prices; the TV's shop panel shows the
-result and its prices, and waits behind the check while it's rolled. An inn and a temple (services only) have nothing to haggle over, and
-service prices (rooms, cures) don't haggle. A new visit may haggle again.
+result and its prices, and waits behind the check while it's rolled. Rooms and cures also haggle: service prices receive the same tenth-off discount, rounded up (owner answer, 2026-11-04). A successful discount lasts for the visit. A failed attempt stays spent at that shop until the next long rest advances RestSeq (#157).
 
 ## 4. Shops
 
@@ -302,7 +301,7 @@ Record these in the doc as **USER DECISION**s with the defaults, like the intera
 ## 9. Later, noted (don't build now)
 - Weapons and armour for sale and equipping (changes AC, attacks: a rules change and an equip screen).
 - Need/greed loot rolls and a shared stash screen.
-- Player-to-player trades and gifting.
+- Direct exchange/barter between players remains deferred. Gifting shipped in #153: the walk screen gives bag items and/or gold to any saved member, including absent heroes, in one atomic save. Receipts are scoped to the sender and retained across restarts so retrying an old gift cannot duplicate it. Gifts are announced on the TV.
 - Stealing (Sleight of Hand) and a fence.
 - A rest model (restock on rest; inns that cost gold).
 - Gold sinks: injury healing at a temple (ties into "injuries never heal"), training, a ferry fare.
@@ -349,3 +348,5 @@ Gold and prices are integers. Positive fractional modified buy prices round up; 
 All prior phone fixtures are retained byte-for-byte. Their pre-shop contract is exercised using a test pack without shops; six new fixtures exercise the real base shop. Item-price and manifest changes update `Rules.Hash`, so a saved battle is restarted once by the existing compatibility path.
 
 Art and audio remain stand-ins. The new art brief is `2026-11-02-tactics-shops-art.json`; no generated files or sfx-list additions are included. `--world-demo=shop` shows the marker, panel, buy, sell, gold pop and departure. The actual town-stall sprites are supported as the stall's fallback. The existing gallery includes the new stall states.
+
+The herbalist has no market-burning guard: the removed `af_market_burned` condition had no authoring source that could set it. Future plot gates need an authored event and a corresponding content check.

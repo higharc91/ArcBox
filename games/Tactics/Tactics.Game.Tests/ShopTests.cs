@@ -238,7 +238,7 @@ public sealed class ShopTests
             json["gold"] = 37;
             File.WriteAllText(file, json.ToJsonString());
         });
-        var s = new Session(game: new TacticsGame(rules, battleList: true));
+        var s = new Session(seed: 2, game: new TacticsGame(rules, battleList: true));     // a seed the party wins (#108)
         s.ToBattle(everyoneAway: true);
         s.PlayOut();
         Assert.Equal(TacticsPhase.Results, s.Game.Phase);

@@ -19,10 +19,83 @@ public sealed class TallyTests
             .Party("wiz", Member(TestSheets.Fighter, "wizard"), T(0, 0))
             .Party("kara", Member(TestSheets.Fighter, "fighter"), T(1, 0))
             .Enemy("gob", TestSheets.Goblin, T(4, 0))
+            .Enemy("gob2", TestSheets.Goblin, T(3, 0))
             .Start();
         var tally = new Tally(BasePackTests.Rules);
         tally.Read([], state);
         return (tally, state);
+    }
+
+    [Fact]
+    public void Damage_before_the_first_own_turn_joins_that_turn_instead_of_creating_extra_credit()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new PassiveTriggered(U("wiz"), "test.rebuke"), new Damaged(U("gob"), 3, "fire", hp - 3),
+            new TurnStarted(U("wiz"), 1), new Damaged(U("gob2"), 3, "fire", hp - 3)], state);
+        Assert.Equal(6, tally.PerClass(1)["wizard"].DamagePerRound);
+        Assert.Equal(3, tally.PerClass(1)["wizard"].TargetDamagePerRound);
+    }
+
+    [Fact]
+    public void Resuming_a_delayed_turn_does_not_split_its_target_average()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new TurnStarted(U("wiz"), 1), new Damaged(U("gob"), 3, "fire", hp - 3),
+            new TurnStarted(U("gob2"), 1), new TurnStarted(U("wiz"), 1),
+            new Damaged(U("gob2"), 3, "fire", hp - 3)], state);
+        Assert.Equal(6, tally.PerClass(1)["wizard"].DamagePerRound);
+        Assert.Equal(3, tally.PerClass(1)["wizard"].TargetDamagePerRound);
+    }
+
+    [Fact]
+    public void Bleeding_cleanup_does_not_steal_later_targets_of_a_group_heal()
+    {
+        var (tally, state) = Fresh();
+        state = state.Change("wiz", u => u with { Hp = u.Hp - 2 }).Change("kara", u => u with { Hp = u.Hp - 2 });
+        tally.Read([], state);
+        tally.Read([new TurnStarted(U("wiz"), 1), new AbilityUsed(U("wiz"), new("bard.mass_healing_word"), new Target(), null),
+            new Healed(U("wiz"), 2, state.Units[U("wiz")].Hp + 2),
+            new PassiveTriggered(U("wiz"), "bleeding.healed", Source: U("gob")),
+            new ConditionRemoved(U("wiz"), new("bleeding")),
+            new Healed(U("kara"), 2, state.Units[U("kara")].Hp + 2)], state);
+        Assert.Equal(4, tally.PerClass(1)["wizard"].HealingPerRound);
+    }
+
+    [Fact]
+    public void Area_damage_is_averaged_per_target_in_the_casters_turn_without_losing_raw_damage()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new TurnStarted(U("wiz"), 1), new AbilityUsed(U("wiz"), new("wizard.fireball"), new Target(Unit: U("gob")), null),
+            new Damaged(U("gob"), 3, "fire", hp - 3), new Damaged(U("gob2"), 3, "fire", hp - 3)], state);
+        var stats = tally.PerClass(1)["wizard"];
+        Assert.Equal(6, stats.DamagePerRound);
+        Assert.Equal(3, stats.TargetDamagePerRound);
+    }
+
+    [Fact]
+    public void Multiple_hits_on_one_target_accumulate_before_normalizing()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new TurnStarted(U("kara"), 1), new AbilityUsed(U("kara"), new("common.attack"), new Target(Unit: U("gob")), null),
+            new Damaged(U("gob"), 2, "slashing", hp - 2), new Damaged(U("gob"), 2, "slashing", hp - 4)], state);
+        Assert.Equal(4, tally.PerClass(1)["fighter"].TargetDamagePerRound);
+    }
+
+    [Fact]
+    public void Off_turn_damage_stays_with_its_owners_turn_and_new_turns_are_distinct()
+    {
+        var (tally, state) = Fresh();
+        var hp = state.Units[U("gob")].Hp;
+        tally.Read([new TurnStarted(U("wiz"), 1), new Damaged(U("gob"), 3, "fire", hp - 3),
+            new TurnStarted(U("gob2"), 1), new PassiveTriggered(U("gob2"), "zone", Source: U("wiz")),
+            new Damaged(U("gob2"), 3, "fire", hp - 3),
+            new TurnStarted(U("wiz"), 2), new Damaged(U("gob"), 1, "fire", hp - 4)], state);
+        Assert.Equal(2, tally.PerClass(2)["wizard"].TargetDamagePerRound);
+        Assert.Equal(3.5, tally.PerClass(2)["wizard"].DamagePerRound);
     }
 
     [Fact]

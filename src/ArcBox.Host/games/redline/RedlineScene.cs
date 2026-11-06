@@ -37,7 +37,7 @@ namespace ArcBox.Host.Games.Redline;
 /// (<see cref="SprayTracker"/>) fires on its step's bottle and in the sound.
 /// </para>
 /// </summary>
-public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene, IAudioScene
+public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene, IAudioScene, ISignalingScene
 {
     /// <summary>Seconds into Reveal when the camera cuts to the follow-up shot.</summary>
     public const double FollowUpSeconds = 3.5;
@@ -102,6 +102,12 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     public void SetShots(Screenshotter? shots) => _shots = shots;
 
     public void SetNarrator(Narrator narrator) => _audio.SetNarrator(narrator);
+
+    /// <summary>The shell's signal sender: the audio director says when a question's read-out has ended (issue #25).</summary>
+    public Action<string, object> Signal
+    {
+        set => _audio.Signal = value;
+    }
 
     /// <summary>Takes effect at once when the world is built (F2), else when it is.</summary>
     public void SetRenderPreset(string preset)

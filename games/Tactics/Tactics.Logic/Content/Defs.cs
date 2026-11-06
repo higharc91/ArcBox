@@ -56,8 +56,13 @@ public sealed record AiHints(ImmutableArray<string> Tags);
 
 /// <summary>
 /// An ability from the content: what it costs, how it is aimed and the effect blocks it runs on each target.
-/// <see cref="IsWeaponAttack"/> marks the basic Attack action, which uses the sheet's weapon for range and damage and
-/// repeats its effects <see cref="UnitSheet.Attacks"/> times. <see cref="Replaces"/> lets a later pack override an id.
+/// <see cref="IsWeaponAttack"/> marks the basic Attack action and the manoeuvres built on it, which use the sheet's weapon
+/// for range and damage and make <see cref="UnitSheet.Attacks"/> attacks, each running the effects on its own target
+/// (<see cref="StrikeStep"/>). With <see cref="RiderOnce"/>, only the attacks up to and including the first that hits run
+/// the whole list; the attacks after it are plain hits (<see cref="Strikes.Plain"/>), so a rider bought with one resource
+/// lands once. <see cref="Replaces"/> lets a later pack override an id. <see cref="Requires"/> is a test on the user that
+/// must hold for the ability to be used at all (<see cref="Hooks.Holds"/> with the user as owner and no other unit; refused
+/// with <see cref="RejectCode.Unmet"/> otherwise): Hide's <c>{"seen": false}</c> (#108).
 /// </summary>
 public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cost, TargetDef Target,
     ImmutableArray<EffectDef> Effects,
@@ -65,7 +70,9 @@ public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cos
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] AiHints? Ai = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Flavor = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] AbilityId? Replaces = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IsWeaponAttack = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IsWeaponAttack = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RiderOnce = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] WhenDef? Requires = null);
 
 /// <summary>
 /// When a passive's effects run (spec §4.4). JSON: <c>"onBattleStart"</c>, <c>"onAttackHit"</c>, …. Each hook fires for one
@@ -103,6 +110,8 @@ public enum HookKind
     [JsonStringEnumMemberName("onKill")] OnKill,
     /// <summary>An ally of the owner (<see cref="HookArgs.Other"/>) was Downed; fires for standing allies.</summary>
     [JsonStringEnumMemberName("onAllyDowned")] OnAllyDowned,
+    /// <summary>The owner regained HP; Other is the healer when known, and Amount is the HP actually restored.</summary>
+    [JsonStringEnumMemberName("onHealed")] OnHealed,
 }
 
 /// <summary>
@@ -126,7 +135,8 @@ public enum HookKind
 /// actions to each turn's economy.</item>
 /// <item><see cref="MaxHp"/> adds to the sheet's maximum HP. It is applied once, by <see cref="SheetBuilder"/>, from the
 /// passives and injuries a character's sheet is built with (Cracked ribs: −5); a battle never re-reads it, so a condition
-/// can't carry it (the loader rejects that).</item>
+/// can't carry it (the loader rejects that). <see cref="MaxHpPercent"/> is the same for an injury, as a percentage of the max
+/// HP before injuries (Cracked ribs: −15), rounded down, at least 1 either way, so it scales with the level.</item>
 /// </list>
 /// </summary>
 public sealed record StaticMods(
@@ -153,7 +163,8 @@ public sealed record StaticMods(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedDictionary<Stat, Edge>? SaveEdges = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedSet<Stat>? SaveProficiencies = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Evasion = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int SpellDc = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int SpellDc = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHpPercent = 0)
 {
     /// <summary>No modifiers.</summary>
     public static StaticMods None { get; } = new();
@@ -166,8 +177,10 @@ public sealed record StaticMods(
 /// <list type="bullet">
 /// <item><see cref="Weapon"/>: a weapon attack whose weapon is any of these (<c>"finesse"</c>, <c>"ranged"</c>,
 /// <c>"melee"</c>, <c>"reach"</c>, its id or one of its tags).</item>
-/// <item><see cref="Advantage"/>: whether the roll had advantage. <see cref="Flanked"/>: whether the owner flanks the target
-/// (an ally that can act stands directly opposite).</item>
+/// <item><see cref="Advantage"/>, <see cref="Disadvantage"/>: whether the roll had advantage, disadvantage.
+/// <see cref="Flanked"/>: whether the owner flanks the target (an ally that can act stands directly opposite).
+/// <see cref="AllyBesideTarget"/>: whether an ally of the owner that can act (not the owner) stands next to the target, as
+/// SRD 5.2's Sneak Attack asks.</item>
 /// <item><see cref="TargetHasCondition"/>, <see cref="TargetTag"/>: the target has the condition (implied ones included) or
 /// the sheet tag. <see cref="HpBelow"/>: the target's HP is below this percentage of its max.</item>
 /// <item><see cref="HeightAbove"/>: the owner stands at least this many levels above the target.</item>
@@ -176,6 +189,8 @@ public sealed record StaticMods(
 /// <item><see cref="Success"/>: whether the roll the effect follows succeeded (an attack hit, a save was made).</item>
 /// <item><see cref="RoundEven"/>: whether the current round number is even. <see cref="RoundAtLeast"/>: the current round is at
 /// least this number.</item>
+/// <item><see cref="Seen"/>: whether the owner stands in plain view (<see cref="Stealth.InPlainView"/>: a foe that can act is
+/// next to it, or sees it with no cover).</item>
 /// </list>
 /// Every key present must hold.
 /// </summary>
@@ -194,7 +209,10 @@ public sealed record WhenDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Success = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? RoundEven = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RoundAtLeast = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RoundAtLeast = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Seen = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Disadvantage = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? AllyBesideTarget = null);
 
 /// <summary>Whom a passive's effects land on. JSON: <c>"other"</c> (the default) or <c>"self"</c>.</summary>
 public enum PassiveTarget
@@ -356,7 +374,8 @@ public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, 
 /// rating (<c>"1/4"</c>, <c>"3"</c>), the XP it is worth, its AI profile, its sprite (an art key such as
 /// <c>"beasts.wolf.grey"</c>) and, for bosses, phases. Its <see cref="Weapon"/> is written inline in the stat block (a monster's
 /// natural weapons are its own; <c>weapons.json</c> holds the gear characters carry). <see cref="Hp"/> is its maximum HP.
-/// <see cref="Replaces"/> lets a later pack override an id.
+/// <see cref="Replaces"/> lets a later pack override an id. <see cref="Steadfast"/> guards the unit against deep-tile pushes
+/// (<see cref="Tactics.Logic.Steadfast"/>): it is the tag <c>steadfast</c> on its sheet.
 /// </summary>
 public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, ByLevel<int> Hp, int Ac,
     WeaponDef Weapon, string AiProfile, string Sprite, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
@@ -370,7 +389,13 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
     ImmutableArray<PhaseDef> Phases,
     int Level = 1, ArmorKind Armor = ArmorKind.None, int Move = 4, int Jump = 2, int InitiativeBonus = 0, int Attacks = 1,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Steadfast = false)
+{
+    /// <summary>The tags its unit's sheet carries: <see cref="Tags"/>, plus <see cref="Tactics.Logic.Steadfast.Tag"/> when it is steadfast.</summary>
+    [JsonIgnore]
+    public ImmutableSortedSet<string> SheetTags => Steadfast ? Tags.Add(Tactics.Logic.Steadfast.Tag) : Tags;
+}
 
 /// <summary>
 /// A consumable item (<c>items.json</c>): using it runs the ability <see cref="Use"/>. <see cref="Tags"/> such as
@@ -459,7 +484,7 @@ public sealed record EncounterUnitDef(string Unit,
 
 /// <summary>
 /// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, optional intended party
-/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, objectives (the default lose is
+/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, <see cref="Retreat"/> (false forbids falling back), objectives (the default lose is
 /// <c>party_out</c>) and triggers. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
@@ -470,16 +495,19 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool StoryOnly = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool StoryOnly = false,
+    bool Retreat = true);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value
-/// Downed targets; <see cref="FleeBelowHp"/> is a fraction of max HP. <see cref="Replaces"/> lets a later pack override an id.
+/// Downed targets; <see cref="FleeBelowHp"/> is a fraction of max HP. Optional <see cref="AiProfileDef.ControlByLevel"/>
+/// overrides the scalar control weight at the unit's level. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record AiProfileDef(string Id, double Damage = 0, double Kill = 0, double Control = 0, double Heal = 0,
     double Revive = 0, double Caution = 0, double FocusFire = 0, double Objective = 0, double Hoard = 0, bool Cruel = false,
     double FleeBelowHp = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ByLevel<double>? ControlByLevel = null);
 
 /// <summary>
 /// The XP needed to reach each level (<c>xp.json</c>): <see cref="Thresholds"/>[n] is the cumulative XP for level n + 1,

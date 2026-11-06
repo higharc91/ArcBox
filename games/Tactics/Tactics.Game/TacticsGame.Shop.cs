@@ -81,7 +81,7 @@ public sealed partial class TacticsGame
             stock = stock.SetItem(line.Item.Value, count);
         }
         return new ShopSave(stock, chapter, saved?.Seq ?? 0, saved is null || saved.Trades.IsDefault ? [] : saved.Trades,
-            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))), _doc.World?.RestSeq ?? 0);
+            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))), _doc.World?.RestSeq ?? 0, saved?.FailedHaggleRest);
     }
 
     private void ShopInput(Player player, ProfileId profile, CustomInput input)
@@ -148,6 +148,7 @@ public sealed partial class TacticsGame
             you = new { member = member is null ? null : profile.Value, canBuy = member is not null && _online.Contains(player.Id) },
             leader = profile.Value == _lead,
             vip = IsVip(player),
+            difficulty = CampaignDifficulty.ToString(),
             feed = _tradeFeed.ToArray(),
             portal = PortalPath(),
         }), profile);

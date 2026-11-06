@@ -96,6 +96,12 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
     public StoryTiming Story { get; init; } = Story ?? StoryTiming.Default;
 
     /// <summary>
+    /// The most a player's turn clock has left once they have spent both their Move and their Action (issue #113): it drops to the
+    /// shorter of what's left and this, so the table isn't kept waiting on a player who has nothing left to do but tap End turn.
+    /// </summary>
+    public TimeSpan SpentTurn { get; init; } = TimeSpan.FromSeconds(15);
+
+    /// <summary>
     /// How long the TV's "Something went wrong with that move" stays up at least: it comes down with the first command that
     /// applies normally after this.
     /// </summary>
@@ -106,6 +112,9 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
     /// TV walks the party to its places and steps the enemies in first, which takes at most 2.6 s. The players can act all the while.
     /// </summary>
     public TimeSpan FormUp { get; init; } = TimeSpan.FromSeconds(3);
+
+    /// <summary>How long a vote to fall back runs before it fails (issue #111).</summary>
+    public TimeSpan RetreatVote { get; init; } = TimeSpan.FromSeconds(20);
 
     /// <summary>The fallback wait for a beat of <paramref name="events"/> events.</summary>
     public TimeSpan Pace(int events)
