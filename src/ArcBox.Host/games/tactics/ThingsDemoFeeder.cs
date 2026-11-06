@@ -62,7 +62,12 @@ public partial class ThingsDemoFeeder : Node
             SetProcess(false);
             if (_shots is not null)
             {
-                GetTree().CreateTimer(1).Timeout += () => GetTree().Quit();     // the last shot is saved two frames on
+                var tree = GetTree();
+                tree.CreateTimer(1).Timeout += () =>
+                {
+                    GetParent().QueueFree(); // save the last shot, then stop the scene's loops before the audio server shuts down
+                    tree.CreateTimer(0.1).Timeout += () => tree.Quit();
+                };
             }
         }
     }

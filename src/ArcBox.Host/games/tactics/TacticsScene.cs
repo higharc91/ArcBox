@@ -1020,6 +1020,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private bool ShowWorld(PhaseScreen screen)
     {
         var drawn = screen.World is { } explore && screen.Walk is { } hud && _unreadableWorld != explore.Region && DrawWorld(explore, hud, screen.Notice);
+        if (drawn && _world is not null)
+            _world.Weather = screen.Ambience == "amb_rain" ? screen.World?.Weather : null;
         if (!drawn && _world is { Suspended: false } world)
         {
             world.Suspend();

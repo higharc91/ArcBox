@@ -11,6 +11,11 @@
     "name": {
       "type": "string"
     },
+    "weather": {
+      "type": ["string", "null"],
+      "enum": ["rain", "storm", "drizzle", null],
+      "description": "Optional authored rain layer and matching ambience. Omit for dry weather; does not change battle rules."
+    },
     "chapter": {
       "type": "integer",
       "minimum": 1
