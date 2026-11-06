@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_S6qiTwjb3d9eCGVkTn1sKs2M",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_pEAZYBrsc8N5R5KK65nndqfp",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_n9gx8FkwuETrt7H3MndV3b4h"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 9.76,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 7,
+            "start": 0,
+            "text": " Oh. Never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:40.585Z",
+    "updatedAt": "2026-11-05T00:36:54.507Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:40.585Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:40.695Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:54.507Z"
+      }
+    ],
+    "progress": 1
+  }
+}

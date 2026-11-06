@@ -1,0 +1,17 @@
+{
+  "dotnet-suite": 0,
+  "chapter-force": 0,
+  "source_commit": "183d16a99ad1d6ab0b96a5bfc70193e17c060ad0",
+  "dotnet_tests": {
+    "passed": 6376,
+    "failed": 0,
+    "skipped": 0
+  },
+  "phone_tests": 517,
+  "art_checks": 5,
+  "environment_pngs": 651,
+  "chapter_story_lines": 94,
+  "chapter_battles_won": 1,
+  "chapter_card": true,
+  "walking_after_steps": 4
+}

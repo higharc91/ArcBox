@@ -21,6 +21,70 @@ public sealed class WorldPlanTests
 
     public static TheoryData<string> Regions => ["ashen_ford", "hills"];
 
+    [Fact]
+    public void Ashen_ford_old_bridge_is_broken_and_its_river_cant_be_walked()
+    {
+        var ground = FordGround.Value;
+        var underTheBridge = Enumerable.Range(105, 4).Select(x => new Tile(x, 48)).ToArray();
+
+        Assert.All(underTheBridge, tile => Assert.False(ground.Terrain.Walkable(tile), $"The river under the old bridge at {tile} can be walked."));
+        Assert.All(underTheBridge, tile => Assert.True(ground.Terrain.Deep(tile), $"The river under the old bridge at {tile} isn't deep."));
+    }
+
+    [Fact]
+    public void Ashen_ford_the_ford_is_the_only_way_across_the_river()
+    {
+        var ground = FordGround.Value;
+        var (westBank, eastBank) = (new Tile(104, 48), new Tile(109, 48));
+
+        // Through the ford's stamp, one bank reaches the other; with the stamp closed, nothing does.
+        Assert.Contains(eastBank, WorldWalk.Reach(ground.Terrain, westBank, ClassDef.DefaultJump));
+        Assert.DoesNotContain(eastBank, WorldWalk.Reach(ground.Terrain, westBank, ClassDef.DefaultJump, ground.Map.StampedTiles));
+        Assert.DoesNotContain(westBank, WorldWalk.Reach(ground.Terrain, eastBank, ClassDef.DefaultJump, ground.Map.StampedTiles));
+    }
+
+    [Fact]
+    public void Ashen_ford_repaints_legacy_hills_and_calmly_blends_the_ground()
+    {
+        var map = FordGround.Value.Map;
+        Tile Find(string name) => Enumerable.Range(0, map.Height)
+            .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Tile(x, y)))
+            .First(tile => !map.StampedTiles.Contains(tile) && map.Materials[map[tile].Material] == name);
+        var terrain = FordPlan.Value.Terrain;
+        var oldGrass = Find("grass/frost");
+        var oldRock = Find("cave_floor/cool");
+        var oldWater = Find("water/clear");
+        var oldPlanks = Find("planks/oak");
+
+        Assert.Equal("grass_ford", terrain.Look(oldGrass).Top.Family);
+        Assert.Equal("rock_ford", terrain.Look(oldRock).Top.Family);
+        Assert.Equal("ford_water", terrain.Look(oldWater).Top.Family);
+        Assert.Equal("planks_ford", terrain.Look(oldPlanks).Top.Family);
+        Assert.DoesNotContain(FordPlan.Value.Blocks.SelectMany(block => block.Plan.Items).OfType<Face>(),
+            face => face.Tile == oldGrass && face.Kind == FaceKind.Decal);
+        Assert.DoesNotContain(FordPlan.Value.Blocks.SelectMany(block => block.Plan.Items).OfType<Face>(),
+            face => face.Tile == oldRock && face.Kind == FaceKind.Decal);
+    }
+
+    [Fact]
+    public void Wood_region_has_at_least_1500_tall_props_in_view_and_walkable_trail()
+    {
+        var ground = DemoRegion.Wood(160, 120);
+        Assert.True(ground.Map.Props.Length >= 6000, $"Expected >=6000 props, got {ground.Map.Props.Length}");
+
+        var tallIds = new HashSet<string> { "tree", "pine", "dead_tree", "lamp_post", "lantern" };
+        Assert.All(ground.Map.Props, p => Assert.Contains(p.Id, tallIds));
+
+        var start = DemoRegion.WoodStart(160, 120);
+        Assert.True(ground.Terrain.Walkable(start));
+        var route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
+        Assert.True(route.Length >= 100, $"Expected route >= 100 tiles, got {route.Length}");
+
+        // In a view-sized area (e.g. 80x60 tiles), there should be >= 1500 tall props
+        var viewProps = ground.Map.Props.Count(p => p.At.X >= 10 && p.At.X < 90 && p.At.Y >= 20 && p.At.Y < 80);
+        Assert.True(viewProps >= 1500, $"Expected >= 1500 tall props in view, got {viewProps}");
+    }
+
     private static WorldGround GroundOf(string name) => name == "hills" ? HillsGround.Value : FordGround.Value;
 
     private static WorldPlan PlanOf(string name) => name == "hills" ? HillsPlan.Value : FordPlan.Value;
@@ -69,10 +133,16 @@ public sealed class WorldPlanTests
     {
         var terrain = new BoardTerrain(GroundOf(name).Map, null);
         var whole = BoardPlan.Build(terrain, Pack.Art);
-        var blocks = PlanOf(name).Blocks.SelectMany(b => b.Plan.Items).OrderBy(i => i.Order).ToArray();
+        var blocks = PlanOf(name).Blocks.SelectMany(b => b.Plan.Items)
+            .Concat(BoardPlan.StoryProps(terrain, Pack.Art, new HashSet<string>()).Items).OrderBy(i => i.Order).ToArray();
+        var baseBlocks = blocks.Where(i => i is not Face { Kind: FaceKind.Decal or FaceKind.Blend }).ToArray();
 
-        Assert.DoesNotContain(blocks, i => i is Face { Grid: true });
-        Assert.Equal(whole.Items.Select(i => i is Face f ? Key(f with { Grid = false }) : Key(i)), blocks.Select(Key));
+        Assert.DoesNotContain(baseBlocks, i => i is Face { Grid: true });
+        // The world's creatures are drawn by the TV's actor layer (WorldAnimalIds), not baked into its blocks; a battle board keeps them.
+        var animals = terrain.Map.Props.Where(p => WorldAnimalIds.Contains(p.Id)).Select(p => p.At).ToHashSet();
+        Assert.Equal(whole.Items.Where(i => i is not Sprite s || !animals.Contains(s.Tile)).Select(i => i is Face f ? Key(f with { Grid = false }) : Key(i)),
+            baseBlocks.Select(Key));
+        Assert.Contains(blocks, i => i is Face { Kind: FaceKind.Decal });
     }
 
     [Fact]
@@ -141,15 +211,26 @@ public sealed class WorldPlanTests
         var stamp = new Tile(100, 52);
 
         Assert.NotEmpty(Pack.Map("river_crossing").Props);
-        foreach (var prop in Pack.Map("river_crossing").Props)
+        var story = BoardPlan.StoryProps(terrain, Pack.Art, new HashSet<string>());
+        foreach (var prop in Pack.Map("river_crossing").Props.Where(p => p.Present()))
         {
             var at = new Tile(prop.At.X + stamp.X, prop.At.Y + stamp.Y);
             var art = Pack.Art.Prop(prop.Id, [terrain.Look(at).Variant])!;
 
             var block = FordPlan.Value.Blocks.Single(b => b.Tiles.Contains(at));
-            var sprite = block.Plan.Items.OfType<Sprite>().First(s => s.Tile == at);
+            var topLeft = terrain.Centre(at) - new Vector2(art.AnchorX, art.AnchorY);
+            if (art.Shape is not null)
+            {
+                // A bridge's deck, in pieces: the one on its own tile reaches its right edge, and the rest lie over the tiles behind it, where it reaches.
+                var pieces = FordPlan.Value.Blocks.SelectMany(b => b.Plan.Items).OfType<Face>().Where(f => f.Kind == FaceKind.Prop && f.Image == art.Image).ToArray();
+                Assert.Contains(pieces, p => p.Tile == at && p.Order == BoardOrder.Key(at, BoardLayer.Prop));
+                Assert.Equal(topLeft.X, pieces.Min(p => p.Points.Min(q => q.X)), 0.01);
+                Assert.Equal(topLeft.X + art.Width, pieces.Max(p => p.Points.Max(q => q.X)), 1);
+                continue;
+            }
+            var sprite = block.Plan.Items.Concat(story.Items).OfType<Sprite>().First(s => s.Tile == at && s.Image.Path == art.Image.Path);
 
-            Assert.Equal(terrain.Centre(at) - new Vector2(art.AnchorX, art.AnchorY), sprite.TopLeft);
+            Assert.Equal(topLeft, sprite.TopLeft);
             Assert.Equal(BoardOrder.Key(at, BoardLayer.Prop), sprite.Order);
         }
     }
@@ -301,6 +382,23 @@ public sealed class WorldPlanTests
     }
 
     [Fact]
+    public void The_tvs_ground_and_the_servers_agree_on_every_tile_of_the_ford()
+    {
+        var tv = DemoRegion.FromPack(Pack.Root, "ashen_ford");
+        var server = RulesPack.Load([Path.Combine(Pack.Root, "rules")], ArtManifests.Load(Pack.Root)).GroundFor("ashen_ford")!;
+        var blocked = 0;
+
+        for (var y = 0; y < server.Map.Height; y++)
+            for (var x = 0; x < server.Map.Width; x++)
+            {
+                var tile = new Tile(x, y);
+                Assert.True(server.Terrain.Walkable(tile) == tv.Terrain.Walkable(tile), $"{tile}");
+                blocked += server.Terrain.PropAt(tile) is { Blocks: true } ? 1 : 0;
+            }
+        Assert.True(blocked > 0);
+    }
+
+    [Fact]
     public void The_pack_region_loads_from_its_file_as_the_rules_build_it()
     {
         var loaded = DemoRegion.FromPack(Pack.Root, "ashen_ford");
@@ -308,5 +406,94 @@ public sealed class WorldPlanTests
         Assert.Equal(FordGround.Value.Map.Width, loaded.Map.Width);
         Assert.Equal(FordGround.Value.Map.Props, loaded.Map.Props);
         Assert.Equal(FordGround.Value.Map.Materials, loaded.Map.Materials);
+    }
+
+    [Fact]
+    public void A_region_prop_is_drawn_on_its_tile_with_its_variant()
+    {
+        var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Props = [new RegionProps("tree", "autumn", [new Tile(10, 10)])] });
+        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty, Pack.Manifests);
+        var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
+        var block = plan.Blocks.Single(b => b.Tiles.Contains(new Tile(10, 10)));
+        var sprite = block.Plan.Items.OfType<Sprite>().Single(s => s.Tile == new Tile(10, 10));
+
+        Assert.Contains("autumn", sprite.Image.Path);
+    }
+
+    [Fact]
+    public void A_prop_with_light_data_lights_the_ground()
+    {
+        var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Props = [new RegionProps("torch", "fire", [new Tile(10, 10)])] });
+        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty, Pack.Manifests);
+        var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
+        var block = plan.Blocks.Single(b => b.Tiles.Contains(new Tile(10, 10)));
+
+        Assert.NotEmpty(plan.Lighting.Lights);
+        var topFace = block.Lit.Items.OfType<LitFace>().First(f => f.Face.Tile == new Tile(10, 10) && f.Face.Kind == FaceKind.Top);
+        Assert.NotEmpty(topFace.Probes);
+        var mean = topFace.MeanColourAt(0, plan.Lighting);
+        Assert.True(mean.R > topFace.Face.Tint.R || mean.G > topFace.Face.Tint.G, "Ground should be lit by torch");
+    }
+
+    [Fact]
+    public void Decals_are_the_same_on_every_build()
+    {
+        var terrain1 = new BoardTerrain(FordGround.Value.Map, null);
+        var terrain2 = new BoardTerrain(FordGround.Value.Map, null);
+        var plan1 = WorldPlan.Build(terrain1, Pack.Art);
+        var plan2 = WorldPlan.Build(terrain2, Pack.Art);
+
+        var decals1 = plan1.Blocks.SelectMany(b => b.Plan.Items).OfType<Face>().Where(f => f.Kind == FaceKind.Decal).Select(Key).ToArray();
+        var decals2 = plan2.Blocks.SelectMany(b => b.Plan.Items).OfType<Face>().Where(f => f.Kind == FaceKind.Decal).Select(Key).ToArray();
+
+        Assert.NotEmpty(decals1);
+        Assert.Equal(decals1, decals2);
+    }
+
+    [Fact]
+    public void A_stamped_tile_gets_no_decal()
+    {
+        var plan = FordPlan.Value;
+        var stampOrigin = new Tile(100, 52);
+        var stampMap = Pack.Map("river_crossing");
+        var stampRect = new TileRect(stampOrigin.X, stampOrigin.Y, stampMap.Width, stampMap.Height);
+
+        var decals = plan.Blocks.SelectMany(b => b.Plan.Items).OfType<Face>()
+            .Where(f => f.Kind == FaceKind.Decal && stampRect.Contains(f.Tile)).ToArray();
+
+        Assert.Empty(decals);
+    }
+
+    [Fact]
+    public void Tint_is_continuous_across_a_block_edge()
+    {
+        var plan = FordPlan.Value;
+        var left = plan.Blocks.Single(b => b.Tiles.X == 0 && b.Tiles.Y == 0);
+        var right = plan.Blocks.Single(b => b.Tiles.X == 16 && b.Tiles.Y == 0);
+
+        var checkedCount = 0;
+        for (var y = 0; y < 16; y++)
+        {
+            var leftFace = left.Plan.Items.OfType<Face>().FirstOrDefault(f => f.Tile == new Tile(15, y) && f.Kind == FaceKind.Top);
+            var rightFace = right.Plan.Items.OfType<Face>().FirstOrDefault(f => f.Tile == new Tile(16, y) && f.Kind == FaceKind.Top);
+            if (leftFace is not null && rightFace is not null && !leftFace.VertexTints.IsDefaultOrEmpty && !rightFace.VertexTints.IsDefaultOrEmpty)
+            {
+                Assert.Equal(leftFace.VertexTints[1], rightFace.VertexTints[0]);
+                Assert.Equal(leftFace.VertexTints[2], rightFace.VertexTints[3]);
+                checkedCount++;
+            }
+        }
+        Assert.True(checkedCount > 0, "Should have checked tint continuity on shared block edge faces");
+    }
+
+    [Fact]
+    public void A_battle_board_is_unchanged()
+    {
+        var map = Pack.Map("river_crossing");
+        var terrain = new BoardTerrain(map, null);
+        var plan = BoardPlan.Build(terrain, Pack.Art);
+
+        Assert.DoesNotContain(plan.Items, i => i is Face { Kind: FaceKind.Decal });
+        Assert.All(plan.Items.OfType<Face>(), f => Assert.True(f.VertexTints.IsDefaultOrEmpty));
     }
 }

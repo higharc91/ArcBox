@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.c6c6abab.wav",
+  "sourceSha256": "1fc09b8cb2fe90974978c9f071dba999e164f9484e2635a95fed343e87166224",
+  "duration": 10.6,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.0,
+      "text": " Half? My children do not eat half, all of it, every week."
+    },
+    {
+      "start": 7.0,
+      "end": 10.0,
+      "text": " Or go home and fetch your captain."
+    }
+  ],
+  "text": "Half? My children do not eat half, all of it, every week. Or go home and fetch your captain.",
+  "secondsToTranscribe": 2.193
+}

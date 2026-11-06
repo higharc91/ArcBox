@@ -1,0 +1,39 @@
+[
+  {
+    "direction": "south",
+    "path": "/workspace/generated_images/exec-af63e014-bff0-4136-811f-8db7c10365ec.png"
+  },
+  {
+    "direction": "south-west",
+    "path": "/workspace/generated_images/exec-270fdbb3-46f0-4bca-b912-fb143199d03f.png"
+  },
+  {
+    "direction": "west",
+    "path": "/workspace/generated_images/exec-1f15480c-bc7b-4f86-9c16-4aeeeb5c3c07.png"
+  },
+  {
+    "direction": "north-west",
+    "path": "/workspace/generated_images/exec-f5adedd8-f165-48d3-9776-962f006e986c.png"
+  },
+  {
+    "direction": "north",
+    "path": "/workspace/generated_images/exec-67e6a1cd-30ba-46d6-b898-65b9997cb20e.png"
+  },
+  {
+    "direction": "north-east",
+    "path": "/workspace/generated_images/exec-4942090c-36c6-4b2a-97e1-d9cfb7f2bb3c.png"
+  },
+  {
+    "direction": "east",
+    "path": "/workspace/generated_images/exec-02b6bff9-7c3d-420b-b035-c4cab3f5ea00.png"
+  },
+  {
+    "direction": "south-east",
+    "path": "/workspace/generated_images/exec-55572bfa-954f-40b4-97d5-dab2461f5e24.png"
+  },
+  {
+    "direction": "portraits",
+    "path": "/workspace/generated_images/exec-1bf3a818-9ebc-465d-bc6f-3f905aff1915.png",
+    "hint": "Generated images are saved to /workspace/generated_images as /workspace/generated_images/exec-1bf3a818-9ebc-465d-bc6f-3f905aff1915.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+]

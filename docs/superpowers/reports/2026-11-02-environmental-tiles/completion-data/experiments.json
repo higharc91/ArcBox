@@ -1,0 +1,3692 @@
+[
+  {
+    "trial": "ford-1",
+    "battles": 360,
+    "wins": 255,
+    "winRate": "70.8%",
+    "meanRounds": "8.3",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-2",
+    "battles": 360,
+    "wins": 248,
+    "winRate": "68.9%",
+    "meanRounds": "7.9",
+    "flags": "**SHORT**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            11,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 10,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-3",
+    "battles": 360,
+    "wins": 238,
+    "winRate": "66.1%",
+    "meanRounds": "8.2",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            11,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-4",
+    "battles": 360,
+    "wins": 245,
+    "winRate": "68.1%",
+    "meanRounds": "8.2",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            12,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 10,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-5",
+    "battles": 360,
+    "wins": 268,
+    "winRate": "74.4%",
+    "meanRounds": "7.5",
+    "flags": "**SHORT** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-6",
+    "battles": 360,
+    "wins": 264,
+    "winRate": "73.3%",
+    "meanRounds": "8.2",
+    "flags": "",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-7",
+    "battles": 360,
+    "wins": 298,
+    "winRate": "82.8%",
+    "meanRounds": "7.1",
+    "flags": "**SHORT**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-8",
+    "battles": 360,
+    "wins": 280,
+    "winRate": "77.8%",
+    "meanRounds": "7.6",
+    "flags": "**SHORT**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-9",
+    "battles": 360,
+    "wins": 257,
+    "winRate": "71.4%",
+    "meanRounds": "7.9",
+    "flags": "**SHORT** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-10",
+    "battles": 360,
+    "wins": 257,
+    "winRate": "71.4%",
+    "meanRounds": "8.0",
+    "flags": "**SHORT**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-11",
+    "battles": 360,
+    "wins": 264,
+    "winRate": "73.3%",
+    "meanRounds": "8.2",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-12",
+    "battles": 360,
+    "wins": 291,
+    "winRate": "80.8%",
+    "meanRounds": "7.3",
+    "flags": "**SHORT** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-13",
+    "battles": 360,
+    "wins": 302,
+    "winRate": "83.9%",
+    "meanRounds": "7.3",
+    "flags": "**SHORT**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-14",
+    "battles": 360,
+    "wins": 252,
+    "winRate": "70.0%",
+    "meanRounds": "8.3",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d8",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-15",
+    "battles": 360,
+    "wins": 268,
+    "winRate": "74.4%",
+    "meanRounds": "8.2",
+    "flags": "",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 44,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d8",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-18",
+    "battles": 360,
+    "wins": 271,
+    "winRate": "75.3%",
+    "meanRounds": "8.6",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 3,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 60,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-19",
+    "battles": 360,
+    "wins": 301,
+    "winRate": "83.6%",
+    "meanRounds": "7.7",
+    "flags": "**SHORT** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 60,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-20",
+    "battles": 360,
+    "wins": 281,
+    "winRate": "78.1%",
+    "meanRounds": "8.4",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 72,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-21",
+    "battles": 360,
+    "wins": 264,
+    "winRate": "73.3%",
+    "meanRounds": "8.6",
+    "flags": "",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 60,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-22",
+    "battles": 360,
+    "wins": 281,
+    "winRate": "78.1%",
+    "meanRounds": "8.0",
+    "flags": "",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 56,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-23",
+    "battles": 360,
+    "wins": 269,
+    "winRate": "74.7%",
+    "meanRounds": "8.4",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 58,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-24",
+    "battles": 360,
+    "wins": 287,
+    "winRate": "79.7%",
+    "meanRounds": "8.3",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 68,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "ford-25",
+    "battles": 360,
+    "wins": 287,
+    "winRate": "79.7%",
+    "meanRounds": "8.1",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "mother_skarrow",
+          "at": [
+            12,
+            3
+          ],
+          "id": "mother_skarrow",
+          "tag": "mother_skarrow"
+        },
+        {
+          "unit": "goblin",
+          "zone": "goblin_camp",
+          "count": 2,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_archer",
+          "zone": "ridge_spawn",
+          "count": 1,
+          "tag": "skarrow_clan"
+        },
+        {
+          "unit": "goblin_ford_shaman",
+          "at": [
+            9,
+            7
+          ],
+          "id": "ford_shaman",
+          "tag": "skarrow_clan"
+        }
+      ],
+      "motherHp": 66,
+      "motherCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "shamanHp": 18,
+      "shamanCinder": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-1",
+    "battles": 360,
+    "wins": 347,
+    "winRate": "96.4%",
+    "meanRounds": "11.0",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "giant_spider",
+          "zone": "spider_nest",
+          "count": 3,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": "ordinary giant_spider",
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-2",
+    "battles": 360,
+    "wins": 345,
+    "winRate": "95.8%",
+    "meanRounds": "11.5",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 44
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-3",
+    "battles": 360,
+    "wins": 343,
+    "winRate": "95.3%",
+    "meanRounds": "11.9",
+    "flags": "**HIGH** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 48
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-4",
+    "battles": 360,
+    "wins": 346,
+    "winRate": "96.1%",
+    "meanRounds": "11.4",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 44
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10+1",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-5",
+    "battles": 360,
+    "wins": 347,
+    "winRate": "96.4%",
+    "meanRounds": "11.4",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 44
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10+2",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-6",
+    "battles": 360,
+    "wins": 343,
+    "winRate": "95.3%",
+    "meanRounds": "11.6",
+    "flags": "**HIGH** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            8,
+            7
+          ],
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            10,
+            7
+          ],
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            9,
+            8
+          ],
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": "ordinary giant_spider",
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-7",
+    "battles": 360,
+    "wins": 347,
+    "winRate": "96.4%",
+    "meanRounds": "11.7",
+    "flags": "**HIGH** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            8,
+            7
+          ],
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            10,
+            8
+          ],
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "giant_spider",
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "at": [
+            8,
+            9
+          ],
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": "ordinary giant_spider",
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-8",
+    "battles": 360,
+    "wins": 330,
+    "winRate": "91.7%",
+    "meanRounds": "12.5",
+    "flags": "**LONG**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "giant_spider",
+          "zone": "spider_nest",
+          "count": 4,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": "ordinary giant_spider",
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-9",
+    "battles": 360,
+    "wins": 349,
+    "winRate": "96.9%",
+    "meanRounds": "11.7",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 32
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-10",
+    "battles": 360,
+    "wins": 330,
+    "winRate": "91.7%",
+    "meanRounds": "12.2",
+    "flags": "**LONG** **CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 36
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-11",
+    "battles": 360,
+    "wins": 346,
+    "winRate": "96.1%",
+    "meanRounds": "11.8",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 3,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 34
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-12",
+    "battles": 360,
+    "wins": 342,
+    "winRate": "95.0%",
+    "meanRounds": "11.5",
+    "flags": "",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 2,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 36
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-12-40",
+    "battles": 720,
+    "wins": 685,
+    "winRate": "95.1%",
+    "meanRounds": "11.6",
+    "flags": "**HIGH**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 2,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 36
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "trial": "rime-13-40",
+    "battles": 720,
+    "wins": 674,
+    "winRate": "93.6%",
+    "meanRounds": "11.7",
+    "flags": "**CAPPED**",
+    "parameters": {
+      "enemies": [
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.1"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.2"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.3"
+        },
+        {
+          "unit": "rime_spider",
+          "zone": "spider_nest",
+          "count": 1,
+          "level": 7,
+          "variant": "red",
+          "tag": "rime_nest_spider",
+          "id": "giant_spider.4"
+        },
+        {
+          "unit": "kobold_slinger",
+          "zone": "crystal_ridge",
+          "count": 4,
+          "level": 7
+        },
+        {
+          "unit": "kobold",
+          "zone": "chasm_ledge",
+          "count": 2,
+          "level": 7,
+          "aiProfile": "skirmisher"
+        }
+      ],
+      "spider": [
+        {
+          "id": "rime_spider",
+          "name": "Giant Spider",
+          "cr": "1",
+          "xp": 200,
+          "level": 2,
+          "jump": 4,
+          "scores": {
+            "str": 14,
+            "dex": 16,
+            "con": 12,
+            "int": 2,
+            "wis": 11,
+            "cha": 4
+          },
+          "hp": {
+            "1": 26,
+            "7": 38
+          },
+          "ac": 14,
+          "weapon": {
+            "id": "bite",
+            "damage": "1d10",
+            "damageType": "piercing",
+            "stat": "dex",
+            "finesse": true,
+            "ranged": false,
+            "range": 1,
+            "reach": false,
+            "tags": [
+              "natural"
+            ]
+          },
+          "abilities": [
+            "spider.web"
+          ],
+          "passives": [
+            "spider.venom"
+          ],
+          "skills": [
+            "stealth"
+          ],
+          "tags": [
+            "beast"
+          ],
+          "aiProfile": "skirmisher",
+          "sprite": "beasts.spider.black"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "spider_webs",
+          "when": {
+            "round": 1
+          },
+          "do": [
+            {
+              "effects": [
+                {
+                  "zone": {
+                    "kind": "web",
+                    "area": {
+                      "shape": "single"
+                    },
+                    "rounds": null,
+                    "difficult": true,
+                    "passives": [
+                      {
+                        "id": "rime.web",
+                        "hook": "onEnterTile",
+                        "target": "self",
+                        "effects": [
+                          {
+                            "save": {
+                              "stat": "dex",
+                              "dc": 13
+                            },
+                            "onFail": [
+                              {
+                                "apply": "restrained",
+                                "untilSave": true
+                              }
+                            ]
+                          }
+                        ],
+                        "when": {
+                          "not": {
+                            "targetTag": "rime_nest_spider"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "zone": "spider_nest",
+              "source": "rime_nest_spider"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

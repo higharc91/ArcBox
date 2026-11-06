@@ -1,0 +1,49 @@
+{
+  "id": "mob_road_bandits",
+  "name": "Roadside Toughs",
+  "map": "mob_road_bandits",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "bandit_roamer",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      },
+      "hpByParty": {
+        "1": 32,
+        "2": 24,
+        "3": 46,
+        "4": 65,
+        "5": 81,
+        "6": 98
+      },
+      "unitByParty": {
+        "1": "bandit_roamer_lone",
+        "2": "bandit_roamer",
+        "3": "bandit_roamer",
+        "4": "bandit_roamer_gang",
+        "5": "bandit_roamer_gang",
+        "6": "bandit_roamer_gang"
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bark_mother_skarrow_town_2.main",
+    "line": "bark_mother_skarrow_town_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> 40 winters I have held this clan. Do not ask me if I can hold it one more.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.9b2e912e",
+    "file": "bark_mother_skarrow_town_2.fb22946e.ogg",
+    "done": false
+  }
+]

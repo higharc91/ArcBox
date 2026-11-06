@@ -196,6 +196,42 @@ public sealed class ReactionTests
         Assert.DoesNotContain(after.Queue, s => s is MoveStep);
     }
 
+    /// <summary>
+    /// Decision 8 (the user's, 2026-11-01): a unit arrives on the tile the walker left (as <c>dragon_wakes</c>'s spawn could), and then
+    /// the walk halts on an ally's tile. The walker can't go back, so it steps to the nearest free walkable tile to the one it left:
+    /// (0, 1) is a wall and (1, 0) comes before (1, 2) in tile order. Nobody shares a tile.
+    /// </summary>
+    [Fact]
+    public void Mover_whose_last_free_tile_was_taken_steps_to_the_nearest_free_tile()
+    {
+        var battle = TestBattle.On("""
+                0. 0. 0. 0. 0. 0.
+                0# 0. 0. 0. 0. 0.
+                0. 0. 0. 0. 0. 0.
+                """)
+            .Party("kara", Fighter, T(2, 0))
+            .Enemy("gob", Goblin with { MaxHp = 1 }, T(1, 1))
+            .Enemy("pal", Goblin, T(2, 1));
+        var (state, _) = battle.Start(seed: 1);
+        state = state.Change("gob", u => u with { Protected = true });
+        var (paused, _) = battle.Apply(state, new Move(U("gob"), [T(1, 1), T(2, 1), T(3, 1), T(4, 1)]));
+        Assert.Equal(T(2, 1), paused.Units[U("gob")].Pos);
+        var imp = U("imp.1");       // spawned on the tile gob just left, while the walk waits on kara's reaction
+        paused = paused with
+        {
+            Units = paused.Units.Add(imp, paused.Units[U("pal")] with { Id = imp, Pos = T(1, 1) }),
+            Joining = paused.Joining.Add(imp),
+        };
+
+        var (after, reacted) = battle.Apply(paused, new React(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))));
+
+        Assert.Equal(LifeState.Downed, after.Units[U("gob")].Life);
+        Assert.Equal(T(1, 0), after.Units[U("gob")].Pos);
+        Assert.Contains(Json<BattleEvent>(new Moved(U("gob"), [T(2, 1), T(1, 0)])), reacted.Select(Json));
+        Assert.Equal((T(1, 1), T(2, 1)), (after.Units[imp].Pos, after.Units[U("pal")].Pos));
+        Assert.Equal(after.Units.Count, after.Units.Values.Select(u => u.Pos).Distinct().Count());
+    }
+
     [Fact]
     public void Mover_dropped_on_an_allys_tile_by_the_blow_that_ends_the_battle_still_returns()
     {

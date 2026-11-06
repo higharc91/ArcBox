@@ -163,6 +163,83 @@ public class HostClientTests
     }
 
     [Fact]
+    public async Task A_running_game_reaches_the_tv_as_patches_and_raises_whole_views()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        var room = await host.CreateRoomAsync();
+        var (phone, _) = await f.JoinAsync(room.Code, "Ann");
+        await using var _phone = phone;
+        await host.SelectGameAsync(SignalEchoGame.Id);
+        await events.WaitForAsync<LobbyEvent>(e => e.Lobby.CanStart);
+        await host.StartGameAsync();
+        await events.WaitForAsync<HostViewEvent>();
+
+        for (var i = 1; i <= 5; i++)
+            await host.SignalAsync("done", new { seq = i });
+
+        var view = await events.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 5);
+        Assert.Equal("done:{\"seq\":5}", view.View.GetProperty("signals")[4].GetString());
+        Assert.Equal(20, view.View.GetProperty("things").GetArrayLength());
+        Assert.True(host.PatchCounts.Applied >= 4, $"applied {host.PatchCounts.Applied} patches");
+        Assert.Equal(0, host.PatchCounts.Resent);
+    }
+
+    [Fact]
+    public async Task A_tv_that_doesnt_ask_for_patches_gets_whole_views()
+    {
+        using var f = new HostServerFactory();
+        await using var host = new HostClient(f.Server.BaseAddress, () => f.Server.CreateHandler()) { UsePatches = false };
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        var room = await host.CreateRoomAsync();
+        var (phone, _) = await f.JoinAsync(room.Code, "Ann");
+        await using var _phone = phone;
+        await host.SelectGameAsync(SignalEchoGame.Id);
+        await events.WaitForAsync<LobbyEvent>(e => e.Lobby.CanStart);
+        await host.StartGameAsync();
+        await events.WaitForAsync<HostViewEvent>();
+
+        await host.SignalAsync("done", new { seq = 1 });
+        await host.SignalAsync("done", new { seq = 2 });
+
+        await events.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 2);
+        Assert.Equal((0, 0), host.PatchCounts);
+    }
+
+    [Fact]
+    public async Task A_resumed_tv_gets_a_whole_view_and_then_patches_again()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        var room = await host.CreateRoomAsync();
+        var (phone, _) = await f.JoinAsync(room.Code, "Ann");
+        await using var _phone = phone;
+        await host.SelectGameAsync(SignalEchoGame.Id);
+        await events.WaitForAsync<LobbyEvent>(e => e.Lobby.CanStart);
+        await host.StartGameAsync();
+        await host.SignalAsync("done", new { seq = 1 });
+        await events.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 1);
+
+        // A second TV takes the room over, as a relaunched TV does: it has no view, so it's sent the whole one first.
+        await using var tv2 = f.CreateHostClient();
+        var events2 = new EventRecorder(tv2);
+        await tv2.ConnectAsync(Ct);
+        await tv2.ResumeHostAsync(room.Code, room.HostToken);
+        await events2.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 1);
+        await tv2.SignalAsync("done", new { seq = 2 });
+        await tv2.SignalAsync("done", new { seq = 3 });
+
+        await events2.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 3);
+        Assert.True(tv2.PatchCounts.Applied >= 1);
+        Assert.Equal(0, tv2.PatchCounts.Resent);
+    }
+
+    [Fact]
     public async Task SelectCampaignAsync_selects_one_of_the_games_campaigns()
     {
         using var f = new HostServerFactory();

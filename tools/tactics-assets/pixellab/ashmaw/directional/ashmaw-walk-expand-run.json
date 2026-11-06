@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: Slow heavy quadruped bear walking in place toward viewer, alternating forepaws and opposing hind paws, planted supporting paws throughout. No hopping, no head turning. Preserve the ash-grey bear and tiny ember fur tips.\nmode: template\ndirections: south-east, east, north-east, north, north-west, west, south-west (7 jobs)\njob_ids: south-east=17dfa6df-d80f-45fc-9f30-16c49164bea7, east=62e63abc-9ef8-43d7-adf9-b9c60808d3bc, north-east=d096b794-56a6-499c-9458-7ea96b6cfd97, north=82ee4dbd-9a26-421d-8361-c5c8409e485c, north-west=5c94d7ef-3926-465a-81a1-5978e67b7ee3, west=762962cd-2689-4653-9fff-c1cde3951d2c, south-west=68765932-5958-45af-a01c-39491bb8c3b3\ngroup: 565a2bc8-5fdc-4532-99c0-145d12439cc1\ncost: up to 14 generations (2/dir x 7 at most). On a 160x160 canvas this 6-frame clip runs in up to 2 batches per direction, 1 generation per batch, charged as each batch finishes\neta: ~2-10 min per batch, one batch at a time (up to 2 per direction)\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", template_animation_id=\"walk-6-frames\", animation_group_id=\"565a2bc8-5fdc-4532-99c0-145d12439cc1\", directions=[...])\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nif poor: delete_animation(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

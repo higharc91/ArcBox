@@ -1,0 +1,16 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "⚠ Scenario error (trace_id: mcpt_AHvSDTnvLEC6KNxiWY7c3wN5). For a diagnostic report, run diagnostics_run."
+    },
+    {
+      "type": "text",
+      "text": "Error: 429 {\"reason\":\"Too Many Requests. Please, wait 982 seconds before trying again.\",\"name\":\"RateLimitError\",\"details\":{\"cooldownSeconds\":\"985\",\"remainingSeconds\":\"982\"}}"
+    }
+  ],
+  "structuredContent": {
+    "error_code": "INVALID_ARGUMENT"
+  },
+  "isError": true
+}

@@ -76,4 +76,19 @@ public sealed class WorldSpotsTests
         Assert.True(Terrain.Value.Look(new Tile(near.X + 1, near.Y)).Void || Terrain.Value.Look(new Tile(near.X, near.Y + 1)).Void);
         Assert.True(Terrain.Value.Look(new Tile(far.X - 1, far.Y)).Void || Terrain.Value.Look(new Tile(far.X, far.Y - 1)).Void);
     }
+
+    [Fact]
+    public void A_look_names_a_place_and_who_stands_there()
+    {
+        var spots = WorldSpots.Parse("square@31,60@27,58;gate@50,63");
+        Assert.Equal(new WorldSpot("square", new Tile(31, 60), new Tile(27, 58)), spots[0]);
+        Assert.Equal(new WorldSpot("gate", new Tile(50, 63), new Tile(50, 63)), spots[1]);
+    }
+
+    [Fact]
+    public void A_route_goes_from_corner_to_corner_a_tile_at_a_time()
+    {
+        var route = WorldSpots.Route("1,1;3,1;4,4");
+        Assert.Equal([new Tile(1, 1), new Tile(2, 1), new Tile(3, 1), new Tile(4, 2), new Tile(4, 3), new Tile(4, 4)], route);
+    }
 }

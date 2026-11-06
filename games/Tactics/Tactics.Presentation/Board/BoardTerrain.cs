@@ -67,6 +67,7 @@ public sealed class BoardTerrain
 
         var chasmLook = MaterialLook.Of(chasm ?? ChasmMaterial(map));
         var looks = map.Materials.Select(MaterialLook.Of).ToArray();
+        Ranks = [.. map.Materials.Select(GroundBlend.Rank)];
         var lowest = int.MaxValue;
         foreach (var tile in Tiles)
         {
@@ -74,15 +75,23 @@ public sealed class BoardTerrain
             var height = terrain.HeightAt(tile);
             var deep = terrain.Deep(tile);
             lowest = Math.Min(lowest, map[tile].Height);
-            _looks[i] = sunk.Contains(tile) ? chasmLook : looks[map[tile].Material];
+            var stamped = map.StampedTiles.Contains(tile);
+            _looks[i] = sunk.Contains(tile)
+                ? chasmLook
+                : stamped
+                    ? looks[map[tile].Material]
+                    : MaterialLook.Of(MaterialLook.ArtMaterial(map.Id, map.Materials[map[tile].Material]));
             _deep[i] = deep;
             _tops[i] = height + (_looks[i].Void ? -VoidSink
                 : _looks[i].Water && deep ? -WaterSink
-                : map[tile].Flags.HasFlag(TileFlags.Impassable) ? WallRise
+                : map[tile].Flags.HasFlag(TileFlags.Impassable) && !_looks[i].OpenSpan ? WallRise
                 : 0);
         }
         Base = skirt ?? lowest - 1;
     }
+
+    /// <summary>How firmly each of the map's materials lies (<see cref="GroundBlend.Rank"/>).</summary>
+    public ImmutableArray<int> Ranks { get; }
 
     /// <summary>The map file.</summary>
     public BattleMap Map { get; }

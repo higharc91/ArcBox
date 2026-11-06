@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ch1_maud_who_1.main",
+    "line": "ch1_maud_who_1",
+    "cast": "main",
+    "speaker": "old_maud",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+    "delivery": {
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d5f0b89d",
+    "file": "ch1_maud_who_1.640e18bf.ogg",
+    "done": false
+  }
+]

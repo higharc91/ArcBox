@@ -161,6 +161,13 @@ def _finish(c: Canvas) -> Canvas:
     return c
 
 
+def _material_line(c: Canvas, a, b, slot: str, shade: int) -> None:
+    """A surface detail clipped to its material, preserving silhouettes/metalwork."""
+    stencil=Canvas(c.w,c.h,SLOTS);stencil.line(*a,*b,slot,shade)
+    mask=(stencil.slot>0)&(c.slot==SLOTS.id(slot))
+    c.shade[mask]=shade
+
+
 # ------------------------------------------------------------------------------------------------------ nature
 def leaf_mass(c: Canvas, slot: str, cx: float, cy: float, rx: float, ry: float, r: np.random.Generator, *,
               base: float = 3.0, k: float = 2.4, lobes: int = 3) -> None:
@@ -454,6 +461,12 @@ def chest(seed: int = 23, *, open_: bool = False) -> Canvas:
         c.line(13, 6, 24, 12, "metal", 3)
         c.rect(12, 19, 14, 21, "gold", 4)                           # lock
         c.px(13, 21, "dark", 0)
+    for a,b,shade in (((4,16),(11,20),2),((15,20),(22,16),1),
+                       ((4,19),(11,23),4),((15,23),(22,19),3),
+                       ((7,16),(9,17),4),((18,17),(20,16),2)):
+        _material_line(c,a,b,'wood',shade)
+    for x,y in ((5,17),(21,17)):
+        c.px(x,y,'metal',4);c.px(x,y+1,'metal',1)
     return _finish(c)
 
 
@@ -569,6 +582,14 @@ def well(seed: int = 30) -> Canvas:
     c.line(17, 14, 33, 9, "wood", 1)
     c.line(17, 12, 17, 22, "dark", 1)                               # rope
     c.rect(16, 21, 18, 23, "wood", 3)                               # bucket
+    # Masonry courses follow the two visible faces, with a worn top rim.
+    for y in (28,32):
+        c.line(4,y,17,y+6,'stone',2)
+        c.line(17,y+6,30,y,'stone',1)
+    c.line(5,25,16,30,'stone',4)
+    c.line(18,30,29,25,'stone',3)
+    c.line(8,28,8,31,'stone',2);c.line(24,31,24,34,'stone',1)
+    c.line(16,22,18,22,'wood',4)
     return _finish(c)
 
 
@@ -581,6 +602,15 @@ def tent(seed: int = 31) -> Canvas:
     c.line(24, 2, 24, 0, "wood", 3)
     c.line(4, 30, 2, 33, "dark", 1)
     c.line(40, 30, 43, 33, "dark", 1)
+    # Broad canvas tension folds, seams and a repaired panel: a working camp,
+    # rather than pristine triangular colour planes.
+    c.polygon([(21,7),(19,17),(13,29),(10,30),(17,18)],'cloth1',3)
+    c.polygon([(25,8),(29,19),(36,28),(33,29),(27,20)],'cloth1',1)
+    c.line(25,10,31,25,'cloth1',3)
+    c.polygon([(10,24),(14,22),(16,26),(12,29)],'cloth2',2)
+    c.line(11,24,13,23,'cloth2',4)
+    c.px(12,26,'dark',2);c.px(14,25,'dark',2)
+    c.line(5,30,17,32,'cloth1',2)
     return _finish(c)
 
 
@@ -640,6 +670,12 @@ def altar(seed: int = 35) -> Canvas:
     c.polygon([(9, 13), (16, 16), (23, 13), (16, 10)], "cloth1", 3)  # altar cloth
     c.rect(15, 2, 16, 9, "gold", 4)                                  # candle-holder / idol
     c.px(15, 1, "glow", 5)
+    c.line(3,16,15,22,'stone',2);c.line(17,22,28,17,'stone',1)
+    c.line(7,18,7,21,'stone',1);c.line(24,19,24,22,'stone',1)
+    # The cloth turns over the edge; the underside and hem read as thickness.
+    c.polygon([(10,14),(16,17),(16,25),(11,22)],'cloth1',2)
+    c.line(11,16,12,21,'cloth1',4)
+    c.line(12,22,15,23,'gold',3)
     return _finish(c)
 
 
@@ -1490,8 +1526,9 @@ CATALOGUE: list[Prop] = [
     Prop("signpost", signpost, {"oak": _v(wood="wood/oak", dark="cloth/charcoal")}, blocks=False),
     Prop("well", well, {"stone": _v(stone="terrain/stone", wood="wood/oak", dark="cloth/navy", glow="magic/frost")},
          cover="full", height=2),
-    Prop("tent", tent, {"canvas": _v(cloth1="prop/canvas", dark="cloth/charcoal", wood="wood/oak"),
-                        "red": _v(cloth1="cloth/crimson", dark="cloth/charcoal", wood="wood/oak")},
+    Prop("tent", tent, {"canvas": _v(cloth1="prop/canvas", cloth2="prop/hide", dark="cloth/charcoal", wood="wood/oak"),
+                        "red": _v(cloth1="cloth/crimson", cloth2="cloth/rust", dark="cloth/charcoal", wood="wood/oak"),
+                        "hide": _v(cloth1="prop/hide", cloth2="prop/canvas", dark="cloth/charcoal", wood="wood/oak")},
          cover="full", height=3),
     Prop("haystack", haystack, {"hay": _v(straw="prop/hay")}, cover="full", height=2),
     Prop("gravestone", gravestone, _STONE, cover="half"),
@@ -1683,7 +1720,8 @@ def build() -> None:
                              "curve name in lighting.flicker; emissive: an L8 mask strip (same frames as the "
                              "sprite) of the pixels that glow by themselves",
                     "place": "world position = the prop's anchor on its tile + (at - anchor) in sprite px, one "
-                             "sprite px = 1/16 tile across and 1/8 height step up the screen (sprites draw at 2x)",
+                             "sprite px = one screen art pixel; the current board draws props at native density. "
+                             "Use the owning renderer's projection when converting screen offsets into world space",
                     "godot": "an OmniLight3D per light at that point: light_color = colour, omni_range = radius "
                              "tiles, light_energy = base energy x flicker[(frame + phase) % 8] where phase varies "
                              "per instance; on the sprite material, emission = albedo x emissive mask, so the "
@@ -1694,3 +1732,5 @@ def build() -> None:
                                 "says what blocks movement, what gives cover, how tall each prop is and, for light "
                                 "sources, where the light sits, its colour, radius and flicker."),
          PREVIEWS / "13-props.png")
+    from . import lore_places
+    lore_places.export(PACK, families=("props",))

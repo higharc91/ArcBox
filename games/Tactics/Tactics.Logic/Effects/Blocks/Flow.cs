@@ -42,9 +42,9 @@ public sealed class ChainBlock : EffectBlock<ChainEffect>
             return;
         ctx.W.PushFront([
             new RunEffectsStep(ctx.Source, first.Id, ctx.Aim, ctx.Ability?.Id, effects, ctx.Last, ctx.HalfDamage, ctx.SaveStat,
-                ctx.W.HookDepth, Resolution: ctx.Resolution),
+                ctx.W.HookDepth, Resolution: ctx.Resolution, SourceZone: ctx.SourceZone),
             .. picked.Skip(1).Select(u => new RunEffectsStep(ctx.Source, u.Id, u.Pos, ctx.Ability?.Id, effects,
-                HookDepth: ctx.W.HookDepth)),
+                HookDepth: ctx.W.HookDepth, SourceZone: ctx.SourceZone)),
         ]);
     }
 }
@@ -66,7 +66,7 @@ public sealed class RepeatBlock : EffectBlock<RepeatEffect>
         if (def.Effects.IsDefaultOrEmpty || times < 1)
             return;
         ctx.W.PushFront([.. Enumerable.Range(0, times).Select(_ => new RunEffectsStep(ctx.Source, ctx.Target, ctx.Aim,
-            ctx.Ability?.Id, def.Effects, ctx.Last, ctx.HalfDamage, ctx.SaveStat, ctx.W.HookDepth))]);
+            ctx.Ability?.Id, def.Effects, ctx.Last, ctx.HalfDamage, ctx.SaveStat, ctx.W.HookDepth, SourceZone: ctx.SourceZone))]);
     }
 }
 

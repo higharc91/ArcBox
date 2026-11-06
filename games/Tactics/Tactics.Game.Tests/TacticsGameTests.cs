@@ -9,9 +9,9 @@ namespace Tactics.Game.Tests;
 /// <summary><see cref="TacticsGame"/> on the platform harness: muster, encounter pick, the battle loop, results and resume.</summary>
 public sealed class TacticsGameTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")]));
+    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")], ArtManifests.Load(ContentBase())));
 
-    private static string ContentBase()
+    internal static string ContentBase()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
@@ -245,7 +245,7 @@ public sealed class TacticsGameTests
             Assert.NotEqual(before, after);
             File.WriteAllText(region, after);
 
-            var resumed = new Session(document: saved.ToJson(), game: new TacticsGame(RulesPack.Load([rules.FullName])));
+            var resumed = new Session(document: saved.ToJson(), game: new TacticsGame(RulesPack.Load([rules.FullName], ArtManifests.Load(ContentBase()))));
             resumed.Harness.Resume(resumed.Lease);
 
             Assert.Null(resumed.Host.Notice);

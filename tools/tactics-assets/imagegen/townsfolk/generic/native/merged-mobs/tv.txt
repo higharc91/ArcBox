@@ -1,0 +1,117 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Things demo: no server connection
+Tactics content: 
+Tactics content: base at /workspace/ArcBox/content/tactics/base
+THINGS demo: 16 views, 16 shots
+THINGS demo step mob_kobold_scouts at 2.01 s
+TACTICS world opening ashen_ford
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/001-tactics.png
+PERF 3 fps   314.0 ms (worst 314.0) | 13 draw calls   382 primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD open on the main thread 12.0 ms
+TACTICS walk snapped to 122.5 79.5
+PERF 4 fps   241.7 ms (worst 250.0) | 71 draw calls   1.1 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 3 fps   336.4 ms (worst 336.4) | 71 draw calls   1.1 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/002-mob-kobold-scouts.png
+THINGS demo step mob_kobold_scouts-walking at 18.21 s
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/003-mob-kobold-scouts-walking.png
+PERF 3 fps   397.4 ms (worst 397.4) | 69 draw calls   1.1 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_pine_wolves at 24.18 s
+TACTICS walk snapped to 10.5 38.5
+PERF 0 fps   2010.3 ms (worst 2010.3) | 1,465 draw calls   3.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 1 fps   851.0 ms (worst 851.0) | 1,466 draw calls   3.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 2 fps   641.8 ms (worst 641.8) | 1,466 draw calls   3.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/004-mob-pine-wolves.png
+THINGS demo step mob_pine_wolves-walking at 42.07 s
+PERF 2 fps   517.2 ms (worst 517.2) | 1,466 draw calls   3.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/005-mob-pine-wolves-walking.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+PERF 1 fps   1033.3 ms (worst 1033.3) | 1,466 draw calls   3.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_river_slimes at 48.22 s
+TACTICS walk snapped to 99.5 81.5
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture creatures/generic_farmer_a.png 576x768
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture creatures/mother_skarrow.png 1728x1536
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture creatures/generic_merchant_a.png 576x768
+WORLD unit-texture creatures/generic_farmhand_a.png 576x768
+WORLD unit-texture creatures/generic_guard_a.png 576x768
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture creatures/generic_child_a.png 576x768
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/corvin.png 1728x768
+WORLD unit-texture creatures/pip.png 1152x512
+WORLD unit-texture creatures/generic_child_b.png 576x768
+WORLD unit-texture creatures/generic_farmhand_b.png 576x768
+WORLD unit-texture creatures/generic_guard_b.png 576x768
+WORLD unit-texture creatures/generic_farmer_b.png 576x768
+WORLD unit-texture creatures/generic_barmaid_a.png 576x768
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture creatures/generic_merchant_b.png 576x768
+WORLD unit-texture creatures/dagna.png 1728x768
+WORLD unit-texture creatures/generic_barmaid_b.png 576x768
+PERF 8 fps   129.3 ms (worst 166.7) | 64 draw calls   1.0 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture creatures/celandine.png 1728x768
+WORLD unit-texture creatures/old_maud.png 1728x768
+WORLD unit-texture creatures/generic_fisher_a.png 576x768
+WORLD unit-texture creatures/generic_fisher_b.png 576x768
+WORLD unit-texture creatures/rook.png 1728x768
+WORLD unit-texture creatures/fauna_crow.png 352x1248
+WORLD unit-texture creatures/fauna_dog.png 448x928
+WORLD unit-texture creatures/fauna_goat.png 400x768
+WORLD unit-texture creatures/fauna_sheep.png 448x832
+WORLD unit-texture creatures/fauna_mule.png 592x1312
+WORLD unit-texture creatures/fauna_fox.png 416x1088
+WORLD unit-texture creatures/fauna_duck.png 256x448
+WORLD unit-texture creatures/slime_green.png 1000x2376
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/006-tactics-world-loading.png
+TACTICS world open: ground 266 ms, plan+light 3628 ms, bake 260 ms, herd 407 ms, nodes 52 ms, total 4614 ms, main thread 12.0 ms, 51 blocks to record, textures 491.8 MB, buffers 8.2 MB, engine 101.9 MB, managed 57.8 MB
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/007-tactics-exploration.png
+PERF 2 fps   473.8 ms (worst 845.0) | 1,519 draw calls   8.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/008-mob-river-slimes.png
+PERF 8 fps   117.9 ms (worst 126.2) | 1,519 draw calls   8.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_river_slimes-walking at 66.01 s
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/009-mob-river-slimes-walking.png
+PERF 5 fps   189.3 ms (worst 207.2) | 1,516 draw calls   8.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_road_bandits at 72.07 s
+TACTICS walk snapped to 144.5 68.5
+WORLD unit-release creatures/slime_green.png
+WORLD unit-texture characters/presets/bandit.png 6048x80
+PERF 8 fps   125.9 ms (worst 138.9) | 1,328 draw calls   6.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 7 fps   136.2 ms (worst 169.8) | 1,327 draw calls   6.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 15 fps   68.8 ms (worst 83.3) | 1,328 draw calls   6.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/010-mob-road-bandits.png
+PERF 10 fps   100.8 ms (worst 112.9) | 1,328 draw calls   6.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_road_bandits-walking at 90.00 s
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/011-mob-road-bandits-walking.png
+PERF 17 fps   58.2 ms (worst 85.2) | 1,327 draw calls   6.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_rooting_boars at 96.06 s
+TACTICS walk snapped to 39.5 31.5
+WORLD unit-release characters/presets/bandit.png
+WORLD unit-texture creatures/boar_brown.png 1128x2616
+PERF 15 fps   67.2 ms (worst 81.2) | 1,948 draw calls   10.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 8 fps   128.3 ms (worst 152.1) | 1,947 draw calls   10.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/012-mob-rooting-boars.png
+PERF 1 fps   1233.0 ms (worst 1233.0) | 1,947 draw calls   10.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_rooting_boars-walking at 114.07 s
+SHOT /workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/native/merged-mobs/shots/013-mob-rooting-boars-walking.png
+PERF 6 fps   173.6 ms (worst 193.9) | 1,947 draw calls   10.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+THINGS demo step mob_kobold_scouts-settled at 120.12 s
+WORLD closed
+TACTICS left: narrator cleared

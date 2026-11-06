@@ -21,6 +21,19 @@ public sealed class RegionWriterTests
 
     private static RegionSource Source(int width = 64, int height = 64) => new("r", "Region", 1, width, height);
 
+    [Fact]
+    public void Named_destinations_export_in_ordinal_order_and_survive_repair()
+    {
+        var source = Source();
+        source.NamedSpawns.Add("return", new Tile(3, 2));
+        source.NamedSpawns.Add("entrance", new Tile(2, 2));
+        var def = Written(source);
+        Assert.Equal(["entrance", "return"], def.Spawns.Named!.Keys);
+        Assert.Equal(new Tile(3, 2), def.Spawns.Find("return"));
+        var repaired = RegionWriter.Repair(source, Known, new Dictionary<Tile, TileInfoNamed>());
+        Assert.Equal(JsonSerializer.Serialize(def.Spawns, ArcJson.Options), JsonSerializer.Serialize(Written(repaired).Spawns, ArcJson.Options));
+    }
+
     private static RegionDef Written(RegionSource source)
     {
         var result = RegionWriter.Write(source, Known);
@@ -95,6 +108,186 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void A_region_with_no_props_loads_as_before()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        var def = Written(source);
+        Assert.True(def.Props.IsDefaultOrEmpty);
+        var loaded = WithPack(def, dirs => RulesPack.Load(dirs));
+        Assert.NotNull(loaded.RegionFor(def.Id));
+        Assert.True(loaded.RegionFor(def.Id)!.Def.Props.IsDefaultOrEmpty);
+    }
+
+    [Fact]
+    public void A_region_with_no_buildings_writes_none()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+
+        Assert.DoesNotContain("buildings", JsonSerializer.Serialize(Written(source), ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void People_sort_by_where_they_stand_so_a_reexport_is_byte_identical()
+    {
+        RegionPerson[] people =
+        [
+            new("guard", new Tile(20, 4), "sw"), new("merchant", new Tile(3, 9), "se", [new Tile(4, 9), new Tile(4, 10), new Tile(3, 10)]), new("child", new Tile(8, 4), "ne"),
+        ];
+        var (first, second) = (Source(), Source());
+        foreach (var source in new[] { first, second })
+            source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        first.People.AddRange(people);
+        second.People.AddRange(people.Reverse());
+
+        var def = Written(first);
+
+        Assert.Equal([new Tile(8, 4), new Tile(20, 4), new Tile(3, 9)], def.People.Select(p => p.At));
+        Assert.Equal(JsonSerializer.Serialize(def, ArcJson.Options), JsonSerializer.Serialize(Written(second), ArcJson.Options));
+    }
+
+    [Fact]
+    public void A_region_with_nobody_in_it_writes_no_people_at_all()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+
+        Assert.True(Written(source).People.IsDefault);
+        Assert.DoesNotContain("people", JsonSerializer.Serialize(Written(source), ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_person_goes_through_the_file_and_back_as_they_were()
+    {
+        var person = new RegionPerson("merchant", new Tile(3, 9), "se", [new Tile(4, 9), new Tile(3, 9)]);
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        source.People.Add(person);
+
+        var back = JsonSerializer.Deserialize<RegionDef>(JsonSerializer.Serialize(Written(source), ArcJson.Options), ArcJson.Options)!;
+
+        var read = Assert.Single(back.People);
+        Assert.Equal((person.Preset, person.At, person.Face), (read.Preset, read.At, read.Face));
+        Assert.Equal(person.Walk, read.Walk);
+    }
+
+    [Fact]
+    public void Cosmetic_variants_remain_distinct_and_export_in_a_stable_order()
+    {
+        var first = Source();
+        var second = Source();
+        var person = new RegionPerson("farmer", new Tile(3, 9), "se");
+        RegionPerson[] people = [person with { Variant = "b" }, person, person with { Variant = "a" }];
+        first.People.AddRange(people);
+        second.People.AddRange(people.Reverse());
+        Assert.Equal(Json(first), Json(second));
+        Assert.Equal(new string?[] { null, "a", "b" }, Written(first).People.Select(p => p.Variant));
+        Assert.DoesNotContain("variant", JsonSerializer.Serialize(person, ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Named_people_keep_identity_voice_and_flag_gates_through_the_painting_file()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        var person = new RegionPerson("merchant", new Tile(3, 9), "se", Id: "trader", Character: "rook",
+            Requires: ["sq_forge_contact"], Unless: ["gone"], Bark: "dock", Voice: "townsfolk_merchant", Variant: "b");
+        source.People.Add(person);
+        var json = JsonSerializer.Serialize(Written(source), ArcJson.Options);
+        var back = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options)!;
+        Assert.Equal(json, JsonSerializer.Serialize(back, ArcJson.Options));
+        var read = Assert.Single(back.People);
+        Assert.Equal("trader", read.Id);
+        Assert.Equal("rook", read.Character);
+        Assert.Equal(person.Requires, read.Requires);
+        Assert.Equal(person.Unless, read.Unless);
+        Assert.Equal("townsfolk_merchant", read.Voice);
+        Assert.Equal("dock", read.Bark);
+        Assert.Equal("b", read.Variant);
+    }
+
+    [Theory]
+    [InlineData("", 0)]
+    [InlineData("31,59", 1)]
+    [InlineData("31,59 32,59 32,60", 3)]
+    public void A_walk_reads_back_from_the_text_a_marker_holds(string text, int tiles)
+    {
+        var walk = PersonText.Walk(text);
+
+        Assert.Equal(tiles, walk.IsDefault ? 0 : walk.Length);
+        Assert.Equal(text, PersonText.Walk(walk));
+    }
+
+    [Fact]
+    public void Repairing_a_source_keeps_its_people()
+    {
+        var source = Source();
+        source.People.Add(new RegionPerson("guard", new Tile(3, 9), "sw"));
+
+        Assert.Equal(source.People, RegionWriter.Repair(source, new HashSet<string> { Grass }, new Dictionary<Tile, TileInfoNamed>()).People);
+    }
+
+    [Fact]
+    public void Buildings_sort_by_where_they_stand_so_a_reexport_is_byte_identical()
+    {
+        var first = Source();
+        first.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        first.Buildings.AddRange([new RegionBuilding("tavern", "red", new Tile(20, 4)), new RegionBuilding("house", "blue", new Tile(3, 9)), new RegionBuilding("cottage", "shakes_oak", new Tile(8, 4))]);
+        var second = Source();
+        second.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        second.Buildings.AddRange([new RegionBuilding("house", "blue", new Tile(3, 9)), new RegionBuilding("cottage", "shakes_oak", new Tile(8, 4)), new RegionBuilding("tavern", "red", new Tile(20, 4))]);
+
+        var def = Written(first);
+
+        Assert.Equal([new Tile(8, 4), new Tile(20, 4), new Tile(3, 9)], def.Buildings.Select(b => b.At));
+        var json = JsonSerializer.Serialize(def, ArcJson.Options);
+        Assert.Equal(json, JsonSerializer.Serialize(Written(second), ArcJson.Options));
+        Assert.Equal(json, JsonSerializer.Serialize(JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options), ArcJson.Options));
+    }
+
+    [Fact]
+    public void A_repair_keeps_the_buildings()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Buildings.Add(new RegionBuilding("house", "blue", new Tile(3, 9)));
+
+        Assert.Equal(source.Buildings, RegionWriter.Repair(source, new HashSet<string> { Grass }, new Dictionary<Tile, TileInfoNamed>()).Buildings);
+    }
+
+    [Fact]
+    public void A_props_group_round_trips_byte_identical()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Props.Add(new RegionProps("tree", "autumn", [new Tile(10, 12), new Tile(14, 16)]));
+        var def = Written(source);
+        var json = JsonSerializer.Serialize(def, ArcJson.Options);
+        var deserialized = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options);
+        var jsonAgain = JsonSerializer.Serialize(deserialized, ArcJson.Options);
+        Assert.Equal(json, jsonAgain);
+    }
+
+    [Fact]
+    public void Props_sort_by_id_variant_and_tile()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Props.Add(new RegionProps("tree", "green", [new Tile(20, 20), new Tile(10, 10)]));
+        source.Props.Add(new RegionProps("pine", null, [new Tile(5, 5), new Tile(2, 2)]));
+        source.Props.Add(new RegionProps("tree", "autumn", [new Tile(8, 8)]));
+        var def = Written(source);
+        Assert.Equal(3, def.Props.Length);
+        Assert.Equal(("pine", (string?)null), (def.Props[0].Id, def.Props[0].Variant));
+        Assert.Equal([new Tile(2, 2), new Tile(5, 5)], def.Props[0].At);
+        Assert.Equal(("tree", (string?)"autumn"), (def.Props[1].Id, def.Props[1].Variant));
+        Assert.Equal([new Tile(8, 8)], def.Props[1].At);
+        Assert.Equal(("tree", (string?)"green"), (def.Props[2].Id, def.Props[2].Variant));
+        Assert.Equal([new Tile(10, 10), new Tile(20, 20)], def.Props[2].At);
+    }
+
+    [Fact]
     public void A_chunk_with_no_tiles_is_left_out()
     {
         var source = Source(128, 64);
@@ -111,7 +304,7 @@ public sealed class RegionWriterTests
 
         var region = Region(source);
 
-        var ground = WorldGround.Of(region, new Dictionary<string, BattleMap>()).Terrain;
+        var ground = WorldGround.Of(region, new Dictionary<string, BattleMap>(), ArtManifest.None).Terrain;
 
         Assert.True(ground.Walkable(new Tile(5, 5)));
         Assert.Equal(new TileInfo(0, 0, TileFlags.Impassable), region.TileAt(new Tile(5, 6)));

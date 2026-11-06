@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.03b85bde.wav",
+  "sourceSha256": "fef47841371f63a8eb3614a1f778ed8ec2a00bcd2daf3ef0c52b951ad7046332",
+  "duration": 7.64,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.32,
+      "text": " You lock your grain and call us thieves, now you come to finish it."
+    }
+  ],
+  "text": "You lock your grain and call us thieves, now you come to finish it.",
+  "secondsToTranscribe": 1.838
+}

@@ -1,0 +1,28 @@
+{
+  "status": "Concept sheet generated and shown; awaiting owner concept approval before PixelLab.",
+  "ownerRequest": "Once this is done, overhaul the other Kobolds to look correct with concept art. They look odd beside Grist who has the new art.",
+  "scope": [
+    "kobold",
+    "kobold_slinger"
+  ],
+  "anchor": {
+    "character": "Grisk",
+    "approvedScenarioAsset": "asset_TXx2ypS9LjXJ3uPfmPB353fr",
+    "concept": "../ashmaw/grisk-concept.png"
+  },
+  "sharedDirection": "Same small orange-brown reptilian species, pointed snout, short horns, digitigrade feet and long balancing tail as approved Grisk. Practical worn mining-camp clothes, amber eyes with restrained pupils and quiet top-left lighting. Keep Grisk distinct as the helmeted foreman.",
+  "roles": {
+    "kobold": {
+      "rulesSprite": "characters.kobold",
+      "weapon": "dagger",
+      "look": "Bare little horns, patched worker vest and wraps, plain back belt and small ore pouch; short worn utility knife held firmly in anatomical right hand."
+    },
+    "kobold_slinger": {
+      "rulesSprite": "characters.kobold_slinger",
+      "weapon": "leather sling",
+      "special": "fire pot",
+      "look": "Dust-stained short hood/cowl, crossed practical harness, stone pouch and one secured clay fire pot; a leather cord sling, never a bow or modern slingshot."
+    }
+  },
+  "review": "Show the actual concept art alongside the review question before the pixel stage. Match the approved foreman, and preserve current combat roles and world scale."
+}

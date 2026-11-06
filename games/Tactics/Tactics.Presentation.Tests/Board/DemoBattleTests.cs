@@ -54,4 +54,14 @@ public sealed class DemoBattleTests
         Assert.Equal("Battle", view.Phase);
         Assert.NotNull(PhaseScreen.Of(view).Board);
     }
+    [Fact]
+    public void The_creature_art_review_uses_the_real_battle_view_without_adding_live_encounters()
+    {
+        var battle = DemoBattle.View("forest_ruins:creatures").Battle!;
+        Assert.Equal("forest_ruins", battle.Map);
+        Assert.Equal(15, battle.Units.Length);
+        Assert.Single(battle.Units, u => u.Side == "Party");
+        var art = UnitArt.Load(Pack.Root);
+        Assert.All(battle.Units, u => Assert.NotNull(art.Sprite(u.Sprite)));
+    }
 }

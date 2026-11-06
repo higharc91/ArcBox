@@ -1,0 +1,49 @@
+{
+  "id": "mob_river_slimes",
+  "name": "River Slimes",
+  "map": "mob_river_slimes",
+  "level": 1,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "river_slime",
+      "zone": "enemy_spawn",
+      "count": 2,
+      "level": 1,
+      "countByParty": {
+        "1": 1,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2
+      },
+      "hpByParty": {
+        "1": 28,
+        "2": 25,
+        "3": 45,
+        "4": 70,
+        "5": 88,
+        "6": 105
+      },
+      "unitByParty": {
+        "1": "river_slime_lone",
+        "2": "river_slime_pair",
+        "3": "river_slime",
+        "4": "river_slime",
+        "5": "river_slime",
+        "6": "river_slime"
+      }
+    }
+  ],
+  "xp": 75,
+  "gold": 10,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "storyOnly": true
+}

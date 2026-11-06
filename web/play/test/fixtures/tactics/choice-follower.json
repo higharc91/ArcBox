@@ -29,9 +29,10 @@
     "chosen": "cases",
     "tie": false,
     "decider": "Player1",
-    "away": []
+    "away": [],
+    "vip": false
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:00:57.7000416\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:00:58.8000416\u002B00:00",
   "header": null
 }

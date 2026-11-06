@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.a449ab24.wav",
+  "sourceSha256": "cb604d1fb3d7a91bd867992312ba1367d5d4f25f3cab1d4d6c10a925e437154e",
+  "duration": 10.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.4,
+      "text": " Seven came down when the snow was still falling."
+    },
+    {
+      "start": 5.4,
+      "end": 10.72,
+      "text": " Seven came down with their hands full of gold."
+    }
+  ],
+  "text": "Seven came down when the snow was still falling. Seven came down with their hands full of gold.",
+  "secondsToTranscribe": 7.167
+}

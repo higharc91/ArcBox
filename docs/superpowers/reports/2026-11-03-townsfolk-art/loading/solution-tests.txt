@@ -1,0 +1,54 @@
+Running tests from /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (2s 551ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 26s 456ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (3m 45s 877ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (7s 686ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 542ms)
+Running tests from /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 022ms)
+Running tests from /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (4m 06s 514ms)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+failed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_on_6_vs_10 (44s 805ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  river_crossing stress, level 10: p95 384.0 ms is over the 250 ms budget (median 28.1 ms).
+    at Tactics.Logic.Tests.AiPerformanceTests.AssertWithinBudget(BattleSetup setup, RulesPack rules, String label, Boolean hazards, Boolean coatings) in /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/Ai/AiPerformanceTests.cs:88
+    at Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_on_6_vs_10() in /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/Ai/AiPerformanceTests.cs:22
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Standard output
+    river_crossing stress, level 10: 64 turn states; plan times (ms): median 28.1, p95 384.0, max 3062.3
+
+  Error output
+/workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) failed with 1 error(s) (3m 02s 217ms)
+Exit code: 2
+  Standard output: INVARIANTS 0.085032 ms/check (14 units, 10000 checks)
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (3m 54s 473ms)
+Running tests from /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (43s 046ms)
+
+Test run summary: Failed!
+  /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (7s 686ms)
+  /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 022ms)
+  /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (2s 551ms)
+  /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (4m 06s 514ms)
+  /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 542ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 26s 456ms)
+  /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (43s 046ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) failed with 1 error(s) (3m 02s 217ms)
+  /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (3m 54s 473ms)
+  /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (3m 45s 877ms)
+
+  total: 6253
+  failed: 1
+  succeeded: 6252
+  skipped: 0
+  duration: 19m 16s 683ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

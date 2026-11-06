@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: c83af08e-8eb8-448c-ad3c-1924c8aed1bf\njob_id: c83af08e-8eb8-448c-ad3c-1924c8aed1bf\nmodel: pro\ndescription: Original grounded tactical fantasy pixel art for Wardenflame, Embers of the Vale. Three-quarter 2:1 isometric presentation, top-left light, warm highlights and cooler material shadows, selective coloured outlines, restrained clustered detail, clear silhouettes, worn practical materials. Match the supplied approved reference. Transparent background for standalone sprites. Preserve a clear ground-contact point. Background terrain must remain quieter than the characters. Grisk, the approved small wiry orange-brown reptilian kobold foreman: pointed muzzle, little horns, long balancing tail, a scarred tired face, patched rust-brown work vest and battered metal miner's helmet. A tiny caged OIL lantern is firmly bracketed to the FRONT of his helmet. A notched tally stick hangs from a cord at his chest. A worn pick is held by its wooden grip in his RIGHT hand (viewer-left), every finger and wrist physically connected; the other arm relaxed. Watchful greedy fear, not a cute mascot. Low top-down camera, facing straight SOUTH toward the viewer, both eyes/shoulders equally visible, no three-quarter turn. Both feet planted, entire tail and helmet in frame. No electric lamp, rich armor, skulls, detached gear, scene, labels or sheet. Preserve all approved equipment placements. Crisp native pixels, warm top-left light, selective outline and clustered material detail. Use the attached fighter for rendering style only, never its anatomy or costume. Transparent background.\nsize: 96x96px\ntransparent: True\ncandidates: 4\nreferences: 1\nstyle_image: yes (outline, detail, shading)\npalette: 97 colours (Wardenflame / Ashen Ford)\nmax colours: 48 per image\nseed: 7402\nasset_id: 805d62fe-5f8a-5566-ad4b-f56a0e66fef7\nasset_status: pending (saved when generation completes)\ncost: 10 generations\nstatus: processing (~1-10 min)\n\nhint: get_image(job_id=\"c83af08e-8eb8-448c-ad3c-1924c8aed1bf\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/c83af08e-8eb8-448c-ad3c-1924c8aed1bf/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

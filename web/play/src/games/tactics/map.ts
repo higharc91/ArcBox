@@ -47,7 +47,8 @@ export function useMap(id: string | undefined | null): MapData | null {
 
 const MATERIALS: Record<string, string> = {
   grass: "#2f5d2f", dirt: "#5a4632", water: "#1f4f7a", rock: "#555b61", stone: "#4b4f55", sand: "#7a6a45", wood: "#5b3d22",
-  snow: "#9aa4ad",
+  snow: "#9aa4ad", grass_ford: "#69572f", dirt_ford: "#64513a", ford_water: "#1f4f7a", rock_ford: "#555b61",
+  planks: "#5b3d22", mine_boards: "#5b3d22",
 };
 
 /** A tile's colour: its material's family ("water/clear" → water), darker when impassable, lighter with height. */

@@ -10,38 +10,46 @@
     "me": {
       "name": "Player1",
       "cls": "Fighter",
-      "level": 1
+      "level": 1,
+      "color": "#ffd23f"
     },
     "party": [
       {
         "name": "Player1",
         "cls": "Fighter",
         "here": true,
-        "leads": true
+        "leads": true,
+        "color": "#ffd23f"
       },
       {
         "name": "Player2",
         "cls": "Cleric",
         "here": true,
-        "leads": false
+        "leads": false,
+        "color": "#7ccbff"
       },
       {
         "name": "Player3",
         "cls": "Rogue",
         "here": true,
-        "leads": false
+        "leads": false,
+        "color": "#ffab94"
       },
       {
         "name": "Player4",
         "cls": "Wizard",
         "here": true,
-        "leads": false
+        "leads": false,
+        "color": "#8ff0c4"
       }
     ],
     "vip": true,
     "canBattle": false,
     "portal": "/c/ABCD",
-    "interact": "Talk"
+    "interact": "Talk",
+    "targets": [],
+    "beat": true,
+    "search": true
   },
   "viewId": "v1",
   "deadlineUtc": null,

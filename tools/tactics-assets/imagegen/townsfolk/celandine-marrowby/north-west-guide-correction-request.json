@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-west.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Correct only the equipment occlusion in this one NORTHWEST/back-three-quarter pixel sprite of Lady Celandine. She faces AWAY toward SCREEN LEFT; preserve this exact facing and the same full-body woman, planted stance, size/proportions, grey braided crown and low bun, pointed elf ear, green gold-edged long overdress, ochre underdress, brown shoulder mantle, belt and brown boots. Remove ALL ledger/book and hanging KEYS/keyring currently visible near the IMAGE LEFT hand/hip. That is the wrong near side: her ledger and keys are on her anatomical RIGHT hip, which is on the FAR SIDE and fully OCCLUDED in this northwest view. The near-side hip under her empty left hand must have only uninterrupted green dress fabric and plain brown belt, no shiny hanging metal or book. Both hands empty and relaxed. Do not mirror or rotate the character, change clothing/face/hairstyle/age or add accessories. Single complete sprite centred with generous clear margins, suitable for96x96 import with a72-pixel body. Match crisp native pixel clusters and selective dark outlines, enlarged nearest neighbour, no smoothing/painting/blur. Transparent alpha0 outside silhouette, no shadows, background, text or grid. This is a narrow corrective edit of the existing approved design, not a new concept."
+}

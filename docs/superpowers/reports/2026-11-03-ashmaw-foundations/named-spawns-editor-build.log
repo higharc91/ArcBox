@@ -1,0 +1,12 @@
+  ArcBox.Sdk -> /workspace/arcbox-npcs/src/ArcBox.Sdk/bin/Debug/net10.0/ArcBox.Sdk.dll
+  Tactics.Logic -> /workspace/arcbox-npcs/games/Tactics/Tactics.Logic/bin/Debug/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/arcbox-npcs/games/Tactics/Tactics.Game/bin/Debug/net10.0/Tactics.Game.dll
+  Tactics.Presentation -> /workspace/arcbox-npcs/games/Tactics/Tactics.Presentation/bin/Debug/net10.0/Tactics.Presentation.dll
+  Tactics.WorldTools -> /workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools/bin/Debug/net10.0/Tactics.WorldTools.dll
+  Tactics.World.Editor -> /workspace/arcbox-npcs/tools/tactics-world/.godot/mono/temp/bin/Debug/Tactics.World.Editor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:08.55

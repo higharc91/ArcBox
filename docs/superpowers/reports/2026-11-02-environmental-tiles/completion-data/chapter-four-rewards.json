@@ -1,0 +1,33 @@
+{
+  "rulesHash": "0e7f3ae3dfb571e8e0fc824321a284f39069959eb00114b76d0d41223636a9be",
+  "members": [
+    {
+      "name": "Bo",
+      "cls": "cleric",
+      "xp": 300,
+      "gold": 80,
+      "oilFlasks": 0
+    },
+    {
+      "name": "Cy",
+      "cls": "rogue",
+      "xp": 300,
+      "gold": 80,
+      "oilFlasks": 0
+    },
+    {
+      "name": "Dee",
+      "cls": "wizard",
+      "xp": 300,
+      "gold": 80,
+      "oilFlasks": 0
+    },
+    {
+      "name": "Ana",
+      "cls": "fighter",
+      "xp": 300,
+      "gold": 80,
+      "oilFlasks": 1
+    }
+  ]
+}

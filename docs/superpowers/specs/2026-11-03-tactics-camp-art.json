@@ -1,0 +1,116 @@
+{
+  "about": "Owner authorized the complete camp vignette and new art. PixelLab generated these native props, fire/pot loops and inn interior. The cold ring uses exact PixelLab workbench pixel edits after reviewing two unsuitable generated variants.",
+  "date": "2026-11-03",
+  "jobs": {
+    "fire": {
+      "tool": "create_image_pixen",
+      "id": "b3d5e50f-6498-4aaf-a2da-abd6decc9253",
+      "request": {
+        "description": "Wardenflame fantasy RPG prop, clean hand-drawn pixel art at native size, 2:1 isometric low top-down view, consistent top-left light, dark one-pixel outline, warm ivory, muted woodland green, tan and rust palette, transparent background, no text or icons. Ground-contact feet anchor at bottom center. A cozy stone-ring campfire, small golden flames above crossed wood logs, warm amber glow, compact and inviting.",
+        "width": 48,
+        "height": 48,
+        "no_background": true,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7114
+      }
+    },
+    "pot": {
+      "tool": "create_image_pixen",
+      "id": "3b97194e-6e38-41b7-a141-0eccf19c13e2",
+      "request": {
+        "description": "Wardenflame fantasy RPG prop, clean hand-drawn pixel art at native size, 2:1 isometric low top-down view, consistent top-left light, dark one-pixel outline, warm ivory, muted woodland green, tan and rust palette, transparent background, no text or icons. Ground-contact feet anchor at bottom center. A small black iron cooking pot on a low tripod over a few coals, thick warm soup, wooden spoon resting on rim, no giant flames.",
+        "width": 48,
+        "height": 48,
+        "no_background": true,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7114
+      }
+    },
+    "bedroll": {
+      "tool": "create_image_pixen",
+      "id": "a1b51997-9e41-418e-b259-662961d93b24",
+      "request": {
+        "description": "Wardenflame fantasy RPG prop, clean hand-drawn pixel art at native size, 2:1 isometric low top-down view, consistent top-left light, dark one-pixel outline, warm ivory, muted woodland green, tan and rust palette, transparent background, no text or icons. Ground-contact feet anchor at bottom center. A laid-out moss-green camping bedroll with a cream pillow and small brown travel pack beside it, peaceful tidy arrangement.",
+        "width": 48,
+        "height": 32,
+        "no_background": true,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7114
+      }
+    },
+    "shelter": {
+      "tool": "create_image_pixen",
+      "id": "dca5b360-4648-4b8f-9bbf-a1d3d292a8dc",
+      "request": {
+        "description": "Wardenflame fantasy RPG prop, clean hand-drawn pixel art at native size, 2:1 isometric low top-down view, consistent top-left light, dark one-pixel outline, warm ivory, muted woodland green, tan and rust palette, transparent background, no text or icons. Ground-contact feet anchor at bottom center. A small canvas lean-to tent with dark green roof, two wooden poles, folded blankets just inside, a tiny warm lantern at entrance. Cozy roadside shelter.",
+        "width": 64,
+        "height": 64,
+        "no_background": true,
+        "outline": "single color black outline",
+        "detail": "medium detail",
+        "seed": 7114
+      }
+    },
+    "fire_loop": {
+      "tool": "animate_image",
+      "id": "70fe7b40-d3c9-4f7b-b7d8-b7a2be88943d",
+      "request": {
+        "first_frame_url": "https://api.pixellab.ai/mcp/images/b3d5e50f-6498-4aaf-a2da-abd6decc9253/download",
+        "action": "Small golden campfire flames flicker gently in a seamless idle loop. Stone ring and logs stay perfectly still. Tiny embers rise. Keep the exact framing and transparent background.",
+        "frame_count": 4,
+        "no_background": true,
+        "seed": 7114
+      }
+    },
+    "pot_loop": {
+      "tool": "animate_image",
+      "id": "a7f540cc-5527-418a-82d5-2821c0bd79d8",
+      "request": {
+        "first_frame_url": "https://api.pixellab.ai/mcp/images/3b97194e-6e38-41b7-a141-0eccf19c13e2/download",
+        "action": "The soup bubbles softly while a little steam curls upward and the wooden spoon gently stirs. The pot, tripod and framing stay fixed. Cozy seamless idle loop on transparency.",
+        "frame_count": 4,
+        "no_background": true,
+        "seed": 7114
+      }
+    },
+    "hearth": {
+      "tool": "create_image_pixen",
+      "id": "7f766157-d749-4149-8ac6-338d362f6823",
+      "request": {
+        "description": "Cozy medieval fantasy inn common room, wide 16:9 establishing view, clean hand drawn pixel art at native 320x180, Wardenflame palette midnight navy shadows, muted moss green, warm rust wood and amber hearth light. Interior seen from a slightly elevated front view. Large stone fireplace on left, long table and low benches across middle for six adventurers, blankets and travel packs, candles, two clear windows on back wall with dark blue night outside, stairs or closed room doors at right. Keep the center foreground open for game characters. No people, no letters, no UI, no text. Crisp pixels, no blur.",
+        "width": 320,
+        "height": 180,
+        "no_background": false,
+        "detail": "highly detailed",
+        "seed": 7114
+      }
+    },
+    "fire_cold_exact": {
+      "tool": "pixelart_workbench",
+      "id": "314cd7cf-f2e3-430b-8106-0e4618dc47fb",
+      "request": {
+        "argv": [
+          "edit",
+          "https://api.pixellab.ai/mcp/images/b3d5e50f-6498-4aaf-a2da-abd6decc9253/download",
+          "--changes",
+          "[{\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [0, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [6, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [12, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [18, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [24, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [30, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [36, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}, {\"operation\": \"copy_region\", \"layer\": \"image\", \"frames\": [1], \"source_layer\": \"image\", \"source_frame\": 1, \"region\": [0, 0, 5, 30], \"at\": [42, 0], \"reason\": \"Copy the transparent left margin over flame pixels, preserving the stone ring below row 30.\"}]"
+        ]
+      }
+    },
+    "bowl": {
+      "tool": "create_image_pixen",
+      "id": "7a766fa2-dcdf-4b61-af06-4adf0947f7d2",
+      "request": {
+        "description": "A tiny inviting wooden bowl of golden vegetable stew with one small curl of steam, original fantasy RPG pixel art, muted brown bowl, warm golden broth and two green herb leaves, clean one-pixel dark outline, 24x24 native canvas, transparent background, low isometric top-down view, no letters, no utensils, no border.",
+        "width": 24,
+        "height": 24,
+        "no_background": true,
+        "detail": "low detail",
+        "seed": 7114
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+
+> wardenflame-imagegen-townsfolk@1.0.0 build-pip
+> node pip-ashdown/build-review.cjs && node pip-ashdown/build-portraits.cjs && node pip-ashdown/build-closeup.cjs
+
+{"atlas":{"width":1152,"height":512,"uncompressedMiB":2.25,"sha256":"f30cf3a5178e89425ef49ab0848639f3bda771c5c9065b31e461e617fd3f3df0"},"footDrift":{"south":{"idle":0,"walk":0.5,"talk":0.5},"south-west":{"idle":0,"walk":0.5,"talk":0},"west":{"idle":0,"walk":0.5,"talk":0.5},"north-west":{"idle":0,"walk":1,"talk":0.5},"north":{"idle":0,"walk":0.5,"talk":0.5},"north-east":{"idle":0,"walk":0,"talk":0},"east":{"idle":0,"walk":0,"talk":0},"south-east":{"idle":0,"walk":0.5,"talk":0.5}},"productionInstalled":false}
+{"portraits":["idle","hurt","happy","angry","sad","surprised"],"size":40,"uniformScale":0.09230769230769231,"reviewOnly":true}
+{"facing":"south-east","sequence":["idle","walk","walk","talk"],"nearestNeighbourScale":4,"seconds":4.8}
+
+> wardenflame-imagegen-townsfolk@1.0.0 verify-pip
+> node pip-ashdown/verify-review.cjs
+
+{"result":"PASS","frames":144,"directions":8,"colors":64,"portraits":6,"maximumFootDriftWorld":1}

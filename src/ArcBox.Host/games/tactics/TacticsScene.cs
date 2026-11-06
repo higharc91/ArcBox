@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Text.Json;
 using ArcBox.Host.Audio;
 using ArcBox.Host.Core.Audio;
@@ -12,6 +14,7 @@ using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
 using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -39,9 +42,6 @@ namespace ArcBox.Host.Games.Tactics;
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene, IConnectionScene
 {
-    /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
-    private const int RowSlots = 6;
-
     private const string BasePack = "base";
 
     /// <summary>How many screenshots <c>--shots</c> takes of each kind of moment.</summary>
@@ -66,6 +66,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private string? _worldRegion;
     private string? _unreadableWorld;
     private WalkShow? _walk;
+    private ThingShow? _things;
+    private ThingArt? _thingArt;
+    private ExploreView? _thingsFed;    // the last view the things were given
+    private bool _thingsOff;            // the pack's art for things can't be read: they're left out, and nothing else stops
+    private QuestHud? _questHud;
     private WorldHud? _worldHud;
     private ExploreView? _explore;
     private WalkStats? _walkStats;
@@ -122,6 +127,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private BoardChanges? _stageTerrainFor;
     private bool _inPlace;              // the fight's board is on the world now
     private bool _overWorld;
+    private ulong? _takeoverHeldSince;     // when the world began waiting to take a fight over, for its blocks at the stage (TellWorld)
+    private bool _takeoverHeldSaid;
     private ExploreView? _fed;          // the last view the walk was given
     private (WorldState State, BoardTerrain? Terrain)? _worldSaid;
     private WalkFrame? _lastWalk;       // the camera, as of the last frame of the world
@@ -134,13 +141,26 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, a <c>WALKAT</c> line with where the party is shown, and how smooth the walking was.</summary>
     public bool LogWalks { get; set; }
+    private string? _mobLog;
+
+    /// <summary><c>--story-log</c>: print a <c>STORY &lt;seq&gt; &lt;line&gt; said|shown</c> line for each line of a scene the TV takes.</summary>
+    public bool LogStory { get; set; }
+
+    private StoryLayer? _story;
+    private readonly Dictionary<string, int> _storyShots = new(StringComparer.Ordinal);
+    private (string Label, double Since)? _storyMoment;
+    private bool _markerShot;
 
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
 
     /// <summary>The connection dropped: walls refused while the TV was away are old news, so the next view doesn't bump anyone.</summary>
-    public void ConnectionLost() => _walk?.Rebase();
+    public void ConnectionLost()
+    {
+        _walk?.Rebase();
+        _story?.Rejoin();       // the first view back only shows: no line is started partway
+    }
 
     public void SetContentRoots(IReadOnlyDictionary<string, string> rootsByPackId)
     {
@@ -215,6 +235,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     public override void _Process(double delta)
     {
+        GiftAudio();
         if (_director is { } director)
         {
             TellWorld(director);
@@ -245,6 +266,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             painting.Repaint(() => job.Plan.WorldBlocks(worldPlan, job.Tiles, job.Changes));
         }
+        if (_story is { } story)
+        {
+            PresentStory(story.Step(delta));
+            StoryShot(delta);
+        }
         if (_inPlace)
         {
             _loop?.Guard(Redraw);       // the walk-in moves units every frame, and the camera moves the HUD's marks
@@ -254,8 +280,31 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>Tells the director whether the world can be drawn, when that changes.</summary>
     private void TellWorld(StageDirector director)
     {
+        var stageShown = true;
+        if (_world is { Now: WorldCanvas.Stage.Open, Plan: { } plan } open && director.TakeoverOn(plan.Terrain) is { } camera)
+        {
+            var size = GetViewport().GetVisibleRect().Size;
+            var map = plan.Terrain.Map;
+            stageShown = open.Shows(WorldCamera.CutSeen(map.Width, map.Height, camera.Map, camera.Height, new System.Numerics.Vector2(size.X, size.Y)), camera.Map);
+            var clock = Time.GetTicksMsec();
+            _takeoverHeldSince ??= clock;
+            if (stageShown)
+            {
+                GD.Print($"TACTICS takeover: the stage's blocks recorded, after {clock - _takeoverHeldSince} ms held");
+                (_takeoverHeldSince, _takeoverHeldSaid) = (null, false);
+            }
+            else if (!_takeoverHeldSaid && clock - _takeoverHeldSince > 1000)
+            {
+                _takeoverHeldSaid = true;
+                GD.Print($"TACTICS takeover held over 1 s: {open.Waiting} blocks still to record");
+            }
+        }
+        else
+        {
+            (_takeoverHeldSince, _takeoverHeldSaid) = (null, false);    // no takeover waits (the fight ended, or took over): the next counts from its own start
+        }
         var state = StageLayout.WorldOf(new WorldSeen(_world is not null, _world?.Now == WorldCanvas.Stage.Open,
-            _world is { Plan: not null, Ground: not null }, _world?.Now == WorldCanvas.Stage.Failed, _unreadableWorld is not null));
+            _world is { Plan: not null, Ground: not null }, _world?.Now == WorldCanvas.Stage.Failed, _unreadableWorld is not null, stageShown));
         (WorldState, BoardTerrain?) now = (state, state == WorldState.Ready ? _world!.Plan!.Terrain : null);
         if (_worldSaid is { } said && said.State == now.Item1 && ReferenceEquals(said.Terrain, now.Item2))
         {
@@ -321,6 +370,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     }
 
     /// <summary>Gives the walk the view the director lets it follow, and after a fight's new epoch, where the followers stood.</summary>
+    private (int Epoch, string Person, long Seq)? _spokenBark;
+    private (int Epoch, long Seq)? _spokenThing;
+
     private void FeedWalk()
     {
         if (_walk is not { } walk)
@@ -341,7 +393,107 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             walk.Seed(seed);
         }
+        if (next.View.Bark is { } bark && bark.Until > DateTimeOffset.UtcNow
+            && _spokenBark != (next.View.Epoch, bark.Person, bark.Seq))
+        {
+            _spokenBark = (next.View.Epoch, bark.Person, bark.Seq);
+            if (StoryVoice.For(bark.Line, _voices, SpeechFallback.Speech) is { } say)
+                _narrator?.Say(say.Text, "tactics.npc." + bark.Line.Speaker.Replace('_', '-'), NarrationPriority.Question,
+                    clip: say.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
+        }
+        if (next.View.ThingSpeech is { } thing && thing.Until > DateTimeOffset.UtcNow
+            && _spokenThing != (next.View.Epoch, thing.Seq))
+        {
+            _spokenThing = (next.View.Epoch, thing.Seq);
+            if (StoryVoice.For(thing.Line, _voices, SpeechFallback.Speech) is { } say)
+                _narrator?.Say(say.Text, TacticsVoices.Narrator, NarrationPriority.Question,
+                    clip: say.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
+        }
         _fed = next.View;
+    }
+
+    /// <summary>
+    /// The things to interact with, for a newly opened world: drawn with the pack's art for them, its effects and its sounds. With the art
+    /// check (<c>--world-demo=things</c>), each is labelled with its key and where its picture came from.
+    /// </summary>
+    private ThingShow? ThingsFor(BoardTerrain terrain, UnitArt art)
+    {
+        if (_thingsOff || !_content.TryGetValue(BasePack, out var root))
+        {
+            return null;
+        }
+        try
+        {
+            _thingArt ??= ThingArt.Load(root);
+            _fx ??= FxArt.Load(root);
+        }
+        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException or InvalidOperationException or KeyNotFoundException)
+        {
+            _thingsOff = true;
+            GD.PushError($"Tactics world: can't read the art for things, so they're left out: {ex.Message}");
+            return null;
+        }
+        return new ThingShow(terrain, art, _thingArt, _fx, _sound, _thingCaptions);
+    }
+
+    /// <summary>Labels every thing with its art key and source: the art check's (<see cref="ThingsDemo"/>).</summary>
+    public bool ThingCaptions
+    {
+        get => _thingCaptions;
+        set
+        {
+            _thingCaptions = value;
+            if (_things is { } things)
+            {
+                things.Captions = value;
+            }
+        }
+    }
+
+    private bool _thingCaptions;
+
+    /// <summary>
+    /// Draws wall over each gap the server says a secret door nobody has found stands in (<see cref="WallPlugs"/>): built off the main thread
+    /// when the plugs change, which is only when a door is found, and swapped in when it's ready. Meanwhile the last stay.
+    /// </summary>
+    private void Plug(WorldCanvas world, ImmutableArray<WallPlug> plugs, IReadOnlyList<string> storyFlags)
+    {
+        if (_plugBuild is { IsCompleted: true } done)
+        {
+            _plugBuild = null;
+            if (done.IsCompletedSuccessfully && ReferenceEquals(done.Result.World, world))
+            {
+                world.SetPlugs(done.Result.Items);
+            }
+            else if (!done.IsCompletedSuccessfully)
+            {
+                GD.PushError($"Tactics world: the wall over a gap can't be built: {done.Exception?.GetBaseException().Message}");
+            }
+        }
+        if (_plugBuild is not null || (plugs.SequenceEqual(_plugsAsked) && storyFlags.SequenceEqual(_sceneryFlagsAsked)) || world.Plan is not { } plan || world.Art is not { } art)
+        {
+            return;
+        }
+        _plugsAsked = plugs;
+        _sceneryFlagsAsked = [.. storyFlags];
+        var flags = storyFlags.ToHashSet(StringComparer.Ordinal);
+        _plugBuild = Task.Run(() => (world, WallPlugs.Items(plan, art, plugs)
+            .AddRange(LitBoard.Build(BoardPlan.StoryProps(plan.Terrain, art, flags), plan.Lighting).Items)
+            .OrderBy(i => i.Order).ToImmutableArray()));
+    }
+
+    private Task<(WorldCanvas World, ImmutableArray<LitItem> Items)>? _plugBuild;
+    private ImmutableArray<WallPlug> _plugsAsked = [];
+    private ImmutableArray<string> _sceneryFlagsAsked = ["__initial__"];
+
+    /// <summary>Gives the things each new view of this region, whatever the walk is following: they're drawn as the server says, all through a fight.</summary>
+    private void FeedThings()
+    {
+        if (_things is { } things && _explore is { } explore && !ReferenceEquals(explore, _thingsFed) && explore.Region == _worldRegion)
+        {
+            things.Receive(explore);
+            _thingsFed = explore;
+        }
     }
 
     /// <summary>A frame of walking: everything that moves, moved. It touches no node that isn't moving, and it doesn't wait for anything.</summary>
@@ -351,7 +503,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             if (world.Now != WorldCanvas.Stage.Failed)
             {
-                GD.PushError($"Tactics world: '{_worldRegion}' didn't open in {WorldTuning.OpenTimeout} s; going on without it");
+                GD.PushError($"Tactics world: '{_worldRegion}' stalled or exceeded {WorldTuning.OpenMaxWait} s while opening (stage {world.Now}, progress {world.LoadingProgress}); going on without it");
             }
             _unreadableWorld = _worldRegion;
             CloseWorld();
@@ -367,19 +519,36 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         if (_walk is null)
         {
-            _walk = new WalkShow(plan.Terrain, art, _sound);
+            _walk = new WalkShow(plan.Terrain, art, _sound, world.Ground?.People ?? default);
             _fed = null;
+            _things = ThingsFor(plan.Terrain, art);
+            (_thingsFed, _plugsAsked, _sceneryFlagsAsked) = (null, [], ["__initial__"]);
         }
+        world.CampLight(_camp, _campPhaseSeconds, _explore?.Morning == true, delta);
+        var campActive = CampScene.Active(_camp);
+        var coverLook = _cover.Look(_walking, _battle, _overWorld);
+        _header.Visible = _table.Visible = !campActive && coverLook.HeaderAndTable;
+        if (_worldHud is { } campWorldHud) campWorldHud.Visible = !campActive && coverLook.PanelsShown;
         FeedWalk();
+        FeedThings();
 
-        var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, _director is { } director ? WalkStage.Of(director, _stageShake) : null);
+        var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, CampStage(plan.Terrain, delta, _director is { } director ? WalkStage.Of(director, _stageShake) : null));
         if (frame.Cut)
         {
             GD.Print(FormattableString.Invariant($"TACTICS walk snapped to {frame.Tile.X:0.0} {frame.Tile.Y:0.0}"));
         }
+        frame = frame with { Units = CampScene.Pose(frame.Units, _camp, _campPhaseSeconds), Walkers = CampScene.Pose(frame.Walkers, _camp, _campPhaseSeconds) };
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
-        world.ShowUnits(frame.Units, art);
+        var things = _things?.Frame(delta, _walk.Pixels, world.View);
+        Plug(world, things?.Plugs ?? [], _fed?.PeopleFlags ?? []);
+        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, [.. shown.Units.Where(u => !CampScene.Active(_camp) || u.Id.Value != "thing:" + _camp!.Source)]) : frame.Units, frame.Walkers, art);
+        world.ShowEffects([.. things?.Effects ?? [], .. MendDraws()]);
+        foreach (var sound in things?.Sounds ?? [])
+        {
+            _audio.Play(sound, ThingSounds.Db);
+        }
+        if (frame.MobCry is { } cry) _audio.Play(cry, -8);
         if (frame.Footstep is { } step)
         {
             _audio.Play(step, WorldTuning.FootstepDb);
@@ -388,7 +557,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             Bumped(frame);
         }
-        _worldHud?.Clear(frame.Units, frame.Fit);
+        _worldHud?.Clear(frame.Walkers, frame.Fit);
+        _questHud?.Frame(_explore, _walking && !_battle && !campActive, plan.Terrain, frame.Fit, delta, frame.Walkers);
         WalkMoments(world, frame, delta);
     }
 
@@ -404,7 +574,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             WorldCanvas.Stage.Failed => WorldStage.Failed,
             _ => WorldStage.Building,
         };
-        if (!_cover.Frame(delta, stage, world.Lifted))
+        if (!_cover.Frame(delta, stage, world.Lifted, world.LoadingProgress))
         {
             return false;
         }
@@ -587,6 +757,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _director.Receive(v, _walk?.Places);
         var director = _director;
         var screen = PhaseScreen.Of(v, director);
+        TellStory(v);
+        LogQuestState(v);
+        QuestAudio(v);
 
         // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
         if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null && _loop is not null)
@@ -596,7 +769,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             {
                 _loop.Held = () =>
                 {
-                    Show(screen);
+                    // Made again as the stage is now: the world may have taken the fight over while the blows played, and the
+                    // screen made when the results came would take it off again (StageScreenTests, results held for the last blow).
+                    Show(PhaseScreen.Of(v, director));
                     director.LastBlowPlayed();
                 };
                 return;
@@ -607,7 +782,175 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _loop.Held = null;
         }
         Show(screen);
+        ShowShop(v);
+        ShowCamp(v);
         director.LastBlowPlayed();      // nothing if the results aren't up, or have had it
+    }
+
+    /// <summary>
+    /// Gives the story every host view, so it knows whether the TV watched the party walk up to a scene (overworld 5d §10). The layer is
+    /// made with the pack's art the first time there's a world to tell a story in.
+    /// </summary>
+    private string? _questLogged;
+    private void LogQuestState(TacticsHostView view)
+    {
+        if (!LogStory || view.Explore is not { } explore) return;
+        var key = $"{explore.Pinned?.Id}|{explore.Pinned?.Objective}|{explore.QuestLog?.Selected}|{string.Join(',', explore.PeopleFlags ?? [])}";
+        if (key == _questLogged) return;
+        _questLogged = key;
+        GD.Print(explore.Pinned is { } pin ? $"QUEST tracker {pin.Id} {pin.Status} {pin.Objective}" : "QUEST tracker none");
+        GD.Print(explore.QuestLog is { } log ? $"QUEST journal {log.Selected}" : "QUEST journal closed");
+        if (explore.PeopleFlags is { } flags) GD.Print($"QUEST people {string.Join(',', flags)}");
+        if (explore.QuestLog is not null) _shots?.Capture("npcs-e2e-journal");
+    }
+
+    private void TellStory(TacticsHostView view)
+    {
+        if (_story is null)
+        {
+            if (view.Explore is null || !_content.TryGetValue(BasePack, out var root))
+            {
+                return;
+            }
+            LoadSound();
+            try
+            {
+                _unitArt ??= UnitArt.Load(root);
+                _story = new StoryLayer(root, _unitArt, _voices);
+            }
+            catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException or InvalidOperationException or KeyNotFoundException)
+            {
+                GD.PushError($"Tactics story: can't draw it: {ex.Message}");
+                return;
+            }
+            AddChild(_story);
+        }
+        if (StoryOrder.Move(_story.GetIndex(), _caption.GetIndex()) is { } to)
+        {
+            MoveChild(_story, to);      // just under the fight's caption, over the world and its panels, which the check and the card dim
+        }
+        if (!_markerShot && view.Explore?.Markers is { IsDefaultOrEmpty: false } marks && marks.Any(m => m.Emote is not null) && view.Story is null)
+        {
+            _markerShot = true;
+            _storyMoment = ("story-marker", 0);
+        }
+        PresentStory(_story.Receive(view, DateTimeOffset.UtcNow));
+        if (view.Chapter is not null && _storyMoment?.Label != "story-card")
+        {
+            _storyMoment = ("story-card", 0);
+        }
+        if (LogStory)
+        {
+            LogMarks(view);
+        }
+    }
+
+    private string? _marksLogged;
+    private string? _cardLogged;
+
+    /// <summary>
+    /// <c>--story-log</c>: a <c>STORY marker &lt;beat&gt; &lt;x&gt; &lt;y&gt; &lt;emote|-&gt;</c> line for each beat on offer whenever they
+    /// change (<c>STORY marker none</c> for none), and <c>STORY card &lt;chapter&gt;</c> as a chapter's card comes up: for the bots to
+    /// walk to the "!" and the e2e run to see the chapter end.
+    /// </summary>
+    private void LogMarks(TacticsHostView view)
+    {
+        if (view.Explore?.Markers is { IsDefault: false } marks)
+        {
+            var key = marks.IsEmpty ? "none" : string.Join(" | ", marks.Select(m => $"{m.Beat} {m.At.X} {m.At.Y} {m.Emote ?? "-"}"));
+            if (key != _marksLogged)
+            {
+                _marksLogged = key;
+                foreach (var line in key.Split(" | "))
+                {
+                    GD.Print($"STORY marker {line}");
+                }
+            }
+        }
+        if (view.Chapter != _cardLogged)
+        {
+            _cardLogged = view.Chapter;
+            if (view.Chapter is not null)
+            {
+                GD.Print($"STORY card {view.Chapter}");
+            }
+        }
+    }
+
+    /// <summary>What a story tick asks: the voice cut, a line said, a sound played, a line logged with <c>--story-log</c>, and a shot.</summary>
+    private void PresentStory(StoryTick tick)
+    {
+        if (tick.Cut && _narrator is { } narrator && StoryVoice.Owns(narrator.Speaking, narrator.LastLine, tick.Stopping))
+        {
+            narrator.StopAll();     // only the story's own line: commentary after it isn't the story's to stop
+        }
+        if (tick.Say is { } say)
+        {
+            var clip = say.Clip is { } file && _content.TryGetValue(BasePack, out var root) ? Path.Combine(root, file) : null;
+            _narrator?.Say(say.Text, say.Theme, NarrationPriority.Question, clip: clip);
+        }
+        if (tick.Sound is { } sound)
+        {
+            _audio.Play(sound);
+        }
+        if (tick.Screen is not { } screen)
+        {
+            return;
+        }
+        if (screen.Seq != _missingStoryVoiceSeq && screen.Caption is { } caption && _voices?.ForLine(caption.Line) is null)
+        {
+            _missingStoryVoiceSeq = screen.Seq;
+            GD.Print($"TACTICS missing voice clip: {caption.Line}");
+        }
+        if (LogStory && (tick.Say is not null || screen.Seq != _storyLogged))
+        {
+            _storyLogged = screen.Seq;
+            GD.Print($"STORY {screen.Seq} {screen.Caption?.Line ?? "-"} {(tick.Say is null ? "shown" : "said")} {screen.State}");
+        }
+        if (Moment(screen, tick) is { } moment && moment != _storyMoment?.Label)
+        {
+            _storyMoment = (moment, 0);
+        }
+    }
+
+    private int _storyLogged = -1;
+    private int _missingStoryVoiceSeq = -1;
+
+    /// <summary>The screenshot a story screen is worth, by what it shows: once or twice each, so a run's shots cover every panel.</summary>
+    private static string? Moment(StoryScreen screen, StoryTick tick) => screen switch
+    {
+        { Check.Roll: { Landed: true } roll } => roll.Success ? "story-roll-pass" : "story-roll-fail",
+        { Check.Roll: not null } => tick.Tumbled ? "story-roll-tumbling" : null,
+        { Check: not null } => "story-check",
+        { Vote.Tie: true } => "story-tie",
+        { Vote: { Party: false } vote } => vote.Rows.Any(r => r.Voters.Length > 0) ? "story-choice-made" : "story-choice",
+        { Vote: { Rows.Length: > 4 } } => "story-vote-many",
+        { Vote: { } vote } => vote.Rows.Any(r => r.Voters.Length > 0) ? "story-vote-tally" : "story-vote",
+        { Interlude: not null } => "story-gap",
+        { Caption: { Narrator: true } } => "story-line-narrator",
+        { Caption: not null } => "story-line-speaker",
+        _ => null,
+    };
+
+    /// <summary>Takes the moment's shot once the screen has had a moment to settle, and the world is there to see behind it.</summary>
+    private void StoryShot(double delta)
+    {
+        if (_shots is null || _storyMoment is not { } moment)
+        {
+            return;
+        }
+        _storyMoment = moment with { Since = moment.Since + delta };
+        if (moment.Since < 0.8 || (_world is not null && !_cover.Reveal.Revealed) || (moment.Label == "story-marker" && _world is null))
+        {
+            return;
+        }
+        var taken = _storyShots.GetValueOrDefault(moment.Label);
+        if (taken < 2)
+        {
+            _storyShots[moment.Label] = taken + 1;
+            _shots.Capture($"tactics-{moment.Label}");
+        }
+        _storyMoment = (moment.Label, double.NegativeInfinity);
     }
 
     private void Show(PhaseScreen screen, bool again = false)
@@ -625,6 +968,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _empty.Visible = screen.Empty is not null;
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
+        _table.SizeFlagsVertical = _rows.SizeFlagsVertical = _empty.SizeFlagsVertical = screen.TableFills ? SizeFlags.ExpandFill : SizeFlags.ShrinkBegin;
         ShowRows(screen);
         _overWorld = screen.OverWorld;
         var walking = ShowWorld(screen);
@@ -676,6 +1020,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
                 _worldHud = new WorldHud(root, HudArt.Load(root, _unitArt)) { Visible = false };
                 _coverShown = null;
                 AddChild(_worldHud);
+                _questHud ??= new QuestHud(root, HudArt.Load(root, _unitArt));
+                AddChild(_questHud);
                 MoveChild(_worldHud, _caption.GetIndex());
             }
         }
@@ -691,6 +1037,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             CloseWorld();
         }
         _explore = explore;
+        if (LogWalks)
+        {
+            var mobs = JsonSerializer.Serialize(explore.Mobs ?? [], ArcJson.Options);
+            if (mobs != _mobLog) { GD.Print("MOBS " + mobs); _mobLog = mobs; }
+        }
         if (_world is null)
         {
             OpenWorld(root, explore.Region);
@@ -706,6 +1057,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
         }
+        if (_unitArt is { } partyArt)
+            _world?.PartySheets(explore.Party.Select(p => partyArt.Sprite(p.Sprite)?.Path).OfType<string>());
         FeedWalk();
         _worldHud.Show(hud, notice);
         return true;
@@ -714,11 +1067,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private void OpenWorld(string root, string region)
     {
         _worldRegion = region;
-        _walk = null;
+        (_walk, _things) = (null, null);
         (_revealed, _loadingShot) = (false, false);
         _walkStats = LogWalks ? new WalkStats() : null;
         _walkLog = LogWalks ? new WalkLog() : null;
-        _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
+        _world = new WorldCanvas(root, () => DemoRegion.Load(root, region));
         (_stagePlan, _worldSaid, _fed) = (null, null, null);
         _groundShown = new StageGround();
         _repaints.Take();       // the old world's blocks are gone with it
@@ -734,7 +1087,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             RemoveChild(world);
             world.QueueFree();
         }
-        (_world, _walk, _worldRegion) = (null, null, null);
+        (_world, _walk, _things, _worldRegion) = (null, null, null, null);
     }
 
     /// <summary>
@@ -808,6 +1161,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _inPlace = true;      // so the board's first redraw is on the world, not the plain board's
             var staged = screen.Board is not { } fight || DrawBoard(fight, layout.FeedBoard);
             _board.Visible = false;
+            if (staged && _board.Planned)
+            {
+                _board.LetGo();     // the world has its own copy of the fight's art: a TV back mid-fight drew it on the plain board first
+                GD.Print($"TACTICS plain board let go: {WorldCanvas.MemoryText()}");
+            }
             _inPlace = staged;
             if (!staged)
             {
@@ -914,7 +1272,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             return;
         }
-        if (_terrain is null || !DisplayedBattle.SameBoard(_planned, shown.Board))
+        if (_terrain is null || !_board.Planned || !DisplayedBattle.SameBoard(_planned, shown.Board))
         {
             _terrain = new BoardTerrain(_map, shown.Board);
             _planned = shown.Board;
@@ -923,8 +1281,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         var frame = _player.Frame(_terrain);
         var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);
-        _board.SetUnits(units, _unitArt);
-        _board.SetEffects(frame.Draws, frame.Shake);
+        var (marked, draws) = MarkRule.Apply(units, frame, _unitArt, MarkRule.Shown(StageStep.Off, covered: false));
+        _board.SetUnits(marked, _unitArt);
+        _board.SetEffects(draws, frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, fit, _player.AiFinished);
     }
@@ -966,8 +1325,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var beat = _player.Frame(_terrain);
         var stage = StageFrame.Of(beat, director, where, walk.Fit, _stageShake);
         var units = stage.Shown(UnitPlan.Build(shown, _terrain, _unitArt, stage.Fit, stage.Places, stage.Poses, where.Origin));
-        board.SetUnits(units, _unitArt);
-        board.SetEffects(beat.Draws, System.Numerics.Vector2.Zero);
+        var (marked, draws) = MarkRule.Apply(units, beat, _unitArt, MarkRule.Shown(director.Stage, _overWorld));
+        board.SetUnits(marked, _unitArt);
+        board.SetEffects([.. draws.Select(d => d.AtWorldOrigin(where.Origin))], System.Numerics.Vector2.Zero);
         board.GridAlpha = director.GridAlpha;
         _stageShake = beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
@@ -989,10 +1349,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _rows.AddChild(Row(row, Accent(screen.Tone, ArcTheme.Gold)));
         }
-        if (!screen.Rows.IsEmpty && screen.Rows.Length < RowSlots)
+        if (screen.EmptySlots > 0)
         {
             var filler = ArcTheme.Spacer(false, true);
-            filler.SizeFlagsStretchRatio = RowSlots - screen.Rows.Length;
+            filler.SizeFlagsStretchRatio = screen.EmptySlots;
             _rows.AddChild(filler);
         }
     }

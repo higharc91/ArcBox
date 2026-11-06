@@ -25,6 +25,15 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>The Flags layer.</summary>
     public IReadOnlyDictionary<Tile, TileFlags> Flags { get; init; } = ImmutableDictionary<Tile, TileFlags>.Empty;
 
+    /// <summary>The Props layer: a prop id and its variant on each painted tile.</summary>
+    public IReadOnlyDictionary<Tile, (string Id, string? Variant)> Props { get; init; } = ImmutableDictionary<Tile, (string Id, string? Variant)>.Empty;
+
+    /// <summary>The building markers, each on its footprint's back corner.</summary>
+    public IReadOnlyList<RegionBuilding> Buildings { get; init; } = [];
+
+    /// <summary>The person markers.</summary>
+    public IReadOnlyList<RegionPerson> People { get; init; } = [];
+
     /// <summary>The beat markers.</summary>
     public IReadOnlyList<BeatSpot> Beats { get; init; } = [];
 
@@ -36,6 +45,9 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
 
     /// <summary>The tile of every recovery spawn marker.</summary>
     public IReadOnlyList<Tile> Recoveries { get; init; } = [];
+
+    /// <summary>Named markers, kept as a list so duplicate names are reported rather than overwritten.</summary>
+    public IReadOnlyList<(string Name, Tile At)> NamedSpawns { get; init; } = [];
 
     /// <summary>The layers and marker groups that have been moved off the origin, which would shift what's drawn but not what's exported.</summary>
     public IReadOnlyList<string> MovedNodes { get; init; } = [];
@@ -68,16 +80,26 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
         foreach (var (tile, material) in Materials)
             source.Set(tile, Heights.GetValueOrDefault(tile), material, Flags.GetValueOrDefault(tile));
         source.Beats.AddRange(Beats);
+        source.Buildings.AddRange(Buildings);
+        source.People.AddRange(People);
         foreach (var stamp in Stamps)
             source.AddStamp(stamp);
+        foreach (var group in Props.GroupBy(p => (p.Value.Id, p.Value.Variant)))
+            source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Distinct().Order()]));
 
         var problems = new List<string>();
+        foreach (var (name, at) in NamedSpawns)
+            if (string.IsNullOrWhiteSpace(name) || name is "start" or "recovery")
+                problems.Add($"The named spawn at {at} needs a name other than start or recovery.");
+            else if (!source.NamedSpawns.TryAdd(name, at))
+                problems.Add($"The named spawn '{name}' is repeated. Give each destination a unique name.");
         if (SceneFile is { } file && file != Id)
             problems.Add($"The scene is named '{file}' but its region Id is '{Id}', and two scenes with one Id would overwrite each other's file. Rename the scene or change Id.");
         problems.AddRange(MovedNodes.Select(node => $"The {node} node has been moved, so its markers aren't on the tiles they show. Set its Position back to zero."));
         problems.AddRange(Strays.Select(s => $"The {s.Node} at {s.At} is under {s.Parent}, so it isn't exported. {s.Fix}."));
         AddBare(Heights.Keys, "a height", "Height");
         AddBare(Flags.Keys, "flags", "Flags");
+        AddBare(Props.Keys, "a prop", "Props");
         AddHoles();
         AddSpawn(Starts, "start", "Start");
         AddSpawn(Recoveries, "recovery", "Recovery");

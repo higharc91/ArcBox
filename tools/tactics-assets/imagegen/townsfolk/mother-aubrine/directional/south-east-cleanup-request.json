@@ -1,0 +1,7 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/south-east-source.png"
+  ],
+  "prompt": "BACKGROUND REMOVAL ONLY. Preserve all eighteen Mother Aubrine pixel-art animation sprites in this exact six-column three-row sprite sheet, their exact poses, positions, dimensions, colours, face, outfit and orientation. Remove the white background and white haze completely. Return a genuine transparent PNG: alpha ZERO between and around all sprites, alpha255 inside solid skin/clothes. No replacement background, no grey matte, no checkerboard baked into pixels, no translucent full-image rectangle. Do not redraw the sprite poses, resize or recenter any frames, add/remove frames, change grid layout or alter character design. All characters face lower-right; keep that. Output only this same eighteen-frame sprite sheet with the background removed."
+}

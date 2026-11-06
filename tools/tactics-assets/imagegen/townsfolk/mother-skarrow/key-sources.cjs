@@ -1,0 +1,3 @@
+const fs=require('node:fs'),path=require('node:path'),{PNG}=require('pngjs');
+const root=__dirname,files=process.argv.slice(2);if(!files.length)throw Error('Pass retained export filenames');
+for(const file of files){const source=path.resolve(root,file),target=source.replace(/-export\.png$/,'-source.png');if(source===target)throw Error('Expected -export.png');const img=PNG.sync.read(fs.readFileSync(source));for(let p=0;p<img.data.length;p+=4){const key=img.data[p]>img.data[p+1]+35&&img.data[p+2]>img.data[p+1]+35&&img.data[p]+img.data[p+2]>150;if(key||img.data[p+3]<128)img.data.fill(0,p,p+4);else img.data[p+3]=255;}fs.writeFileSync(target,PNG.sync.write(img));console.log(path.relative(root,target));}

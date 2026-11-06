@@ -1,0 +1,44 @@
+{
+  "main_parent": "b5a552ec034fe57db0207249ae732860f6f4e1d7",
+  "secret_branch_parent": "42699a2ae1d8f92b19b1bfb8f4c39392e2dbdd85",
+  "main_prop_families_preserved": 92,
+  "main_interactables_preserved": 22,
+  "merged_interactables": 30,
+  "main_voice_lines_preserved": 1341,
+  "merged_voice_lines": 1353,
+  "main_world_fields_preserved": [
+    "chunks",
+    "materials",
+    "stamps",
+    "spawns",
+    "beats",
+    "people",
+    "edges"
+  ],
+  "roaming_arena_stamps": 6,
+  "cinder_hollow_world_and_scene_unchanged": true,
+  "existing_main_png_and_ogg_bytes_preserved": true,
+  "approved_sprite_bytes_preserved": true,
+  "claw_notice_old_at": [
+    121,
+    80
+  ],
+  "claw_notice_merged_at": [
+    118,
+    80
+  ],
+  "headless_export_hashes": {
+    "ashen_ford": "58f349242bf6eb1f01e699a71e223662fc7731d88418daed715212557edd82e1",
+    "cinder_hollow": "07a959d40e89341eb6560072762df07ee4fa68319242d2702174ed7390c9fdcc"
+  },
+  "bank_rock": {
+    "id": "rock_medium",
+    "variant": "dark",
+    "at": [
+      117,
+      84
+    ],
+    "reason": "Preserve the existing shortcut-utility threshold on newer terrain"
+  },
+  "ashen_ford_painted_props": 930
+}

@@ -1,0 +1,21 @@
+{
+  "id": "townsfolk_merchant",
+  "jobId": "job_9b481c4PkiXCgup5DtYTdxT9",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:18:23.872Z",
+  "updatedAt": "2026-11-04T02:19:17.226Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_GD2G5XRcZk92X1tecdHy2KF3"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "townsfolk_merchant.png",
+  "request_file": "resolution-recovery-requests.json",
+  "resolution": "2K"
+}

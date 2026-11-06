@@ -167,6 +167,16 @@
       "subject": "hooded_stranger",
       "body": "A masked traveller who arrived in Emberwick the week the goblins took the bridge. The Stranger knows where the embers lie and what they cost, and seems to be everywhere the party is going next. Old Maud says she saw them on the night of the Fall, a hundred years ago, looking exactly the same.",
       "unlock": { "flag": "ch1_met_maud" }
+    },
+    {
+      "id": "codex_cinder_hollow",
+      "title": "The Cinder Hollow",
+      "category": "places",
+      "subject": "cinder_hollow",
+      "body": "A cave below Maud’s hut on the burned east bank. The entrance is cool and wet; deeper in, old warmth clings to the ash. Ash Market diggers have opened more than a new seam.",
+      "unlock": {
+        "flag": "sq_ashmaw_entered"
+      }
     }
   ]
 }

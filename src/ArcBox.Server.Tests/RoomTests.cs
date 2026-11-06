@@ -155,6 +155,23 @@ public class RoomTests
         Assert.True(await f.Room.IsExpiredAsync());
     }
 
+    // Issue #62: a connection that left (or moved to another room) isn't told when this room closes; those still here are.
+    [Fact]
+    public async Task ForceClose_skips_connections_that_have_left()
+    {
+        await using var f = await RoomFixture.InGameAsync("counter", players: 2);
+        await f.Room.ConnectionLostAsync("c1");
+        await f.Room.BindHostAsync("tv2", "host-token");
+        await f.Room.ConnectionLostAsync("host");
+
+        f.Room.ForceClose("game stopped responding");
+
+        Assert.Empty(f.Sender.Of("c1", ClientMethods.RoomClosed));
+        Assert.Empty(f.Sender.Of("host", ClientMethods.RoomClosed));
+        Assert.Single(f.Sender.Of("c2", ClientMethods.RoomClosed));
+        Assert.Single(f.Sender.Of("tv2", ClientMethods.RoomClosed));
+    }
+
     [Fact]
     public async Task ForceClose_notifies_everyone_and_rejects_further_calls()
     {

@@ -95,6 +95,7 @@ public sealed class StoryCheckTests
             var sheet = SheetBuilder.ForCharacter(s.Game.Document.Members[card.Member].Character, Rules);
             var score = $"CHA {sheet.Score(Stat.Cha)}";
             Assert.Equal(SkillCheck.Proficient(sheet, "persuasion") ? $"Proficient · {score}" : score, card.Note);
+            Assert.Equal(Rules.Classes[s.Game.Document.Members[card.Member].Character.Class].Name, card.Class);   // for the TV's card, as the phone's has it
         }
     }
 
@@ -210,6 +211,50 @@ public sealed class StoryCheckTests
         Assert.Equal((roll.Die, roll.Die + roll.Bonus), (Story(again).Check!.Roll!.Kept, Story(again).Check!.Roll!.Total));
         again.Harness.Advance(StoryTiming.Default.Reveal);
         Assert.Equal(roll.Passed ? "pay_pass" : "pay_fail", Cursor(again)!.Node);
+    }
+
+    /// <summary>
+    /// Review (adapter FIX-SOON 1): the vote for a check is decided once the settle passes, so a restart while the party picks who rolls
+    /// comes back to the pick, for the same check: the ford vote never reopens to be decided again.
+    /// </summary>
+    [Fact]
+    public void A_restart_while_picking_who_rolls_keeps_the_decided_vote()
+    {
+        var s = Paying();
+        var saved = Cursor(s)!;
+        Assert.Equal(("vote", "pay"), (saved.Node, saved.Checking));       // saved as it was decided
+
+        var again = StoryResumeTests.Restarted(s, seed: 99);
+        StoryResumeTests.AllBack(again);
+
+        Assert.Equal(TacticsPhase.Story, again.Game.Phase);
+        Assert.Equal(TacticsGame.StoryStates.PickRoller, Story(again).State);
+        Assert.Null(Story(again).Ask);
+        Assert.Equal(("persuasion", 15), (Check(again).Skill, Check(again).Dc));
+        Assert.Equal(SceneNamed("ch1_ford").Node("vote")!.Options.Single(o => o.Id == "pay").Label, Check(again).Title);
+        Assert.Equal(TacticsGame.Screens.Check, again.Screen(0)!.Screen);
+        Assert.True(Data(again, 0).GetProperty("canChoose").GetBoolean());
+
+        for (var p = 0; p < 4; p++)
+            Pick(again, p, Member(again, 1));
+        Until(again, () => Cursor(again)!.Roll is not null, "the roll");       // the line asking it is said again first
+        Assert.Equal(Member(again, 1), Cursor(again)!.Roll!.Member);
+        Assert.Null(Cursor(again)!.Checking);          // the roll takes it: a later restart shows the roll, not the pick
+    }
+
+    [Fact]
+    public void A_saved_check_that_is_no_longer_offered_reopens_the_question()
+    {
+        var s = Paying();
+        var doc = TacticsDocument.Read(s.Lease.Document);
+        var edited = doc with { World = doc.World! with { Story = doc.World.Story! with { Checking = "no_such_option" } } };
+
+        var again = new Session(seed: 99, document: edited.ToJson(), game: new TacticsGame(Rules, lore: Lore));
+        again.Harness.Resume(again.Lease);
+        StoryResumeTests.AllBack(again);
+
+        Assert.Equal(TacticsGame.StoryStates.Asking, Story(again).State);      // the question again, as before this was saved
+        Assert.Contains("pay", Ask(again).Options.Select(o => o.Id));
     }
 
     [Fact]

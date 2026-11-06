@@ -1,0 +1,7 @@
+{
+  "tool": "image_gen.imagegen",
+  "request": "directional/west-cleanup-request.json",
+  "retainedCopy": "directional/west-clean-source.png",
+  "generatedOriginal": "/workspace/generated_images/exec-396e8f20-4889-4f64-b979-212eba429cf5.png",
+  "pixelLabCreditsSpent": 0
+}

@@ -243,6 +243,10 @@ function Campaigns({ lobby, text, onSelect, onCreate }: {
   return (
     <div class="campaigns">
       <small>{text.pickCampaign}</small>
+      {/* A room lists only the campaigns of players whose phones are here (issue #60). */}
+      {(lobby.campaigns ?? []).length === 0 && (
+        <small class="campaign-hint">Your campaigns show here once a player in them joins on their phone.</small>
+      )}
       <div class="campaign-list">
         {(lobby.campaigns ?? []).map((c) => {
           const on = c.id === lobby.campaign?.id;

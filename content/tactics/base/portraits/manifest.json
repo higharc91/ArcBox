@@ -288,20 +288,20 @@
       "surprised": "cultist_surprised.png"
     },
     "kobold": {
-      "idle": "kobold_idle.png",
-      "hurt": "kobold_hurt.png",
-      "happy": "kobold_happy.png",
-      "angry": "kobold_angry.png",
-      "sad": "kobold_sad.png",
-      "surprised": "kobold_surprised.png"
+      "idle": "kobold_refresh.png",
+      "hurt": "kobold_refresh.png",
+      "happy": "kobold_refresh.png",
+      "angry": "kobold_refresh.png",
+      "sad": "kobold_refresh.png",
+      "surprised": "kobold_refresh.png"
     },
     "kobold_slinger": {
-      "idle": "kobold_slinger_idle.png",
-      "hurt": "kobold_slinger_hurt.png",
-      "happy": "kobold_slinger_happy.png",
-      "angry": "kobold_slinger_angry.png",
-      "sad": "kobold_slinger_sad.png",
-      "surprised": "kobold_slinger_surprised.png"
+      "idle": "kobold_slinger_refresh.png",
+      "hurt": "kobold_slinger_refresh.png",
+      "happy": "kobold_slinger_refresh.png",
+      "angry": "kobold_slinger_refresh.png",
+      "sad": "kobold_slinger_refresh.png",
+      "surprised": "kobold_slinger_refresh.png"
     },
     "hobgoblin": {
       "idle": "hobgoblin_idle.png",
@@ -360,12 +360,12 @@
       "surprised": "necromancer_surprised.png"
     },
     "bandit_captain": {
-      "idle": "bandit_captain_idle.png",
-      "hurt": "bandit_captain_hurt.png",
-      "happy": "bandit_captain_happy.png",
-      "angry": "bandit_captain_angry.png",
-      "sad": "bandit_captain_sad.png",
-      "surprised": "bandit_captain_surprised.png"
+      "idle": "rook_idle.png",
+      "hurt": "rook_hurt.png",
+      "happy": "rook_happy.png",
+      "angry": "rook_angry.png",
+      "sad": "rook_sad.png",
+      "surprised": "rook_surprised.png"
     },
     "cult_leader": {
       "idle": "cult_leader_idle.png",
@@ -376,108 +376,108 @@
       "surprised": "cult_leader_surprised.png"
     },
     "mayor": {
-      "idle": "mayor_idle.png",
-      "hurt": "mayor_hurt.png",
-      "happy": "mayor_happy.png",
-      "angry": "mayor_angry.png",
-      "sad": "mayor_sad.png",
-      "surprised": "mayor_surprised.png"
+      "idle": "halden_varrow_idle.png",
+      "hurt": "halden_varrow_hurt.png",
+      "happy": "halden_varrow_happy.png",
+      "angry": "halden_varrow_angry.png",
+      "sad": "halden_varrow_sad.png",
+      "surprised": "halden_varrow_surprised.png"
     },
     "innkeeper": {
-      "idle": "innkeeper_idle.png",
-      "hurt": "innkeeper_hurt.png",
-      "happy": "innkeeper_happy.png",
-      "angry": "innkeeper_angry.png",
-      "sad": "innkeeper_sad.png",
-      "surprised": "innkeeper_surprised.png"
+      "idle": "bree_tallow_idle.png",
+      "hurt": "bree_tallow_hurt.png",
+      "happy": "bree_tallow_happy.png",
+      "angry": "bree_tallow_angry.png",
+      "sad": "bree_tallow_sad.png",
+      "surprised": "bree_tallow_surprised.png"
     },
     "barmaid": {
-      "idle": "barmaid_idle.png",
-      "hurt": "barmaid_hurt.png",
-      "happy": "barmaid_happy.png",
-      "angry": "barmaid_angry.png",
-      "sad": "barmaid_sad.png",
-      "surprised": "barmaid_surprised.png"
+      "idle": "generic_barmaid_a_idle.png",
+      "hurt": "generic_barmaid_a_hurt.png",
+      "happy": "generic_barmaid_a_happy.png",
+      "angry": "generic_barmaid_a_angry.png",
+      "sad": "generic_barmaid_a_sad.png",
+      "surprised": "generic_barmaid_a_surprised.png"
     },
     "blacksmith": {
-      "idle": "blacksmith_idle.png",
-      "hurt": "blacksmith_hurt.png",
-      "happy": "blacksmith_happy.png",
-      "angry": "blacksmith_angry.png",
-      "sad": "blacksmith_sad.png",
-      "surprised": "blacksmith_surprised.png"
+      "idle": "tobin_fell_idle.png",
+      "hurt": "tobin_fell_hurt.png",
+      "happy": "tobin_fell_happy.png",
+      "angry": "tobin_fell_angry.png",
+      "sad": "tobin_fell_sad.png",
+      "surprised": "tobin_fell_surprised.png"
     },
     "farmer": {
-      "idle": "farmer_idle.png",
-      "hurt": "farmer_hurt.png",
-      "happy": "farmer_happy.png",
-      "angry": "farmer_angry.png",
-      "sad": "farmer_sad.png",
-      "surprised": "farmer_surprised.png"
+      "idle": "generic_farmer_a_idle.png",
+      "hurt": "generic_farmer_a_hurt.png",
+      "happy": "generic_farmer_a_happy.png",
+      "angry": "generic_farmer_a_angry.png",
+      "sad": "generic_farmer_a_sad.png",
+      "surprised": "generic_farmer_a_surprised.png"
     },
     "farmhand": {
-      "idle": "farmhand_idle.png",
-      "hurt": "farmhand_hurt.png",
-      "happy": "farmhand_happy.png",
-      "angry": "farmhand_angry.png",
-      "sad": "farmhand_sad.png",
-      "surprised": "farmhand_surprised.png"
+      "idle": "generic_farmhand_a_idle.png",
+      "hurt": "generic_farmhand_a_hurt.png",
+      "happy": "generic_farmhand_a_happy.png",
+      "angry": "generic_farmhand_a_angry.png",
+      "sad": "generic_farmhand_a_sad.png",
+      "surprised": "generic_farmhand_a_surprised.png"
     },
     "merchant": {
-      "idle": "merchant_idle.png",
-      "hurt": "merchant_hurt.png",
-      "happy": "merchant_happy.png",
-      "angry": "merchant_angry.png",
-      "sad": "merchant_sad.png",
-      "surprised": "merchant_surprised.png"
+      "idle": "generic_merchant_a_idle.png",
+      "hurt": "generic_merchant_a_hurt.png",
+      "happy": "generic_merchant_a_happy.png",
+      "angry": "generic_merchant_a_angry.png",
+      "sad": "generic_merchant_a_sad.png",
+      "surprised": "generic_merchant_a_surprised.png"
     },
     "priest": {
-      "idle": "priest_idle.png",
-      "hurt": "priest_hurt.png",
-      "happy": "priest_happy.png",
-      "angry": "priest_angry.png",
-      "sad": "priest_sad.png",
-      "surprised": "priest_surprised.png"
+      "idle": "mother_aubrine_idle.png",
+      "hurt": "mother_aubrine_hurt.png",
+      "happy": "mother_aubrine_happy.png",
+      "angry": "mother_aubrine_angry.png",
+      "sad": "mother_aubrine_sad.png",
+      "surprised": "mother_aubrine_surprised.png"
     },
     "guard": {
-      "idle": "guard_idle.png",
-      "hurt": "guard_hurt.png",
-      "happy": "guard_happy.png",
-      "angry": "guard_angry.png",
-      "sad": "guard_sad.png",
-      "surprised": "guard_surprised.png"
+      "idle": "generic_guard_a_idle.png",
+      "hurt": "generic_guard_a_hurt.png",
+      "happy": "generic_guard_a_happy.png",
+      "angry": "generic_guard_a_angry.png",
+      "sad": "generic_guard_a_sad.png",
+      "surprised": "generic_guard_a_surprised.png"
     },
     "guard_captain": {
-      "idle": "guard_captain_idle.png",
-      "hurt": "guard_captain_hurt.png",
-      "happy": "guard_captain_happy.png",
-      "angry": "guard_captain_angry.png",
-      "sad": "guard_captain_sad.png",
-      "surprised": "guard_captain_surprised.png"
+      "idle": "dagna_idle.png",
+      "hurt": "dagna_hurt.png",
+      "happy": "dagna_happy.png",
+      "angry": "dagna_angry.png",
+      "sad": "dagna_sad.png",
+      "surprised": "dagna_surprised.png"
     },
     "noble": {
-      "idle": "noble_idle.png",
-      "hurt": "noble_hurt.png",
-      "happy": "noble_happy.png",
-      "angry": "noble_angry.png",
-      "sad": "noble_sad.png",
-      "surprised": "noble_surprised.png"
+      "idle": "celandine_idle.png",
+      "hurt": "celandine_hurt.png",
+      "happy": "celandine_happy.png",
+      "angry": "celandine_angry.png",
+      "sad": "celandine_sad.png",
+      "surprised": "celandine_surprised.png"
     },
     "sage": {
-      "idle": "sage_idle.png",
-      "hurt": "sage_hurt.png",
-      "happy": "sage_happy.png",
-      "angry": "sage_angry.png",
-      "sad": "sage_sad.png",
-      "surprised": "sage_surprised.png"
+      "idle": "corvin_idle.png",
+      "hurt": "corvin_hurt.png",
+      "happy": "corvin_happy.png",
+      "angry": "corvin_angry.png",
+      "sad": "corvin_sad.png",
+      "surprised": "corvin_surprised.png"
     },
     "child": {
-      "idle": "child_idle.png",
-      "hurt": "child_hurt.png",
-      "happy": "child_happy.png",
-      "angry": "child_angry.png",
-      "sad": "child_sad.png",
-      "surprised": "child_surprised.png"
+      "idle": "generic_child_a_idle.png",
+      "hurt": "generic_child_a_hurt.png",
+      "happy": "generic_child_a_happy.png",
+      "angry": "generic_child_a_angry.png",
+      "sad": "generic_child_a_sad.png",
+      "surprised": "generic_child_a_surprised.png"
     },
     "hermit": {
       "idle": "hermit_idle.png",
@@ -496,21 +496,264 @@
       "surprised": "stranger_surprised.png"
     },
     "minstrel": {
-      "idle": "minstrel_idle.png",
-      "hurt": "minstrel_hurt.png",
-      "happy": "minstrel_happy.png",
-      "angry": "minstrel_angry.png",
-      "sad": "minstrel_sad.png",
-      "surprised": "minstrel_surprised.png"
+      "idle": "lark_idle.png",
+      "hurt": "lark_hurt.png",
+      "happy": "lark_happy.png",
+      "angry": "lark_angry.png",
+      "sad": "lark_sad.png",
+      "surprised": "lark_surprised.png"
     },
     "fisher": {
-      "idle": "fisher_idle.png",
-      "hurt": "fisher_hurt.png",
-      "happy": "fisher_happy.png",
-      "angry": "fisher_angry.png",
-      "sad": "fisher_sad.png",
-      "surprised": "fisher_surprised.png"
-    }
+      "idle": "generic_fisher_a_idle.png",
+      "hurt": "generic_fisher_a_hurt.png",
+      "happy": "generic_fisher_a_happy.png",
+      "angry": "generic_fisher_a_angry.png",
+      "sad": "generic_fisher_a_sad.png",
+      "surprised": "generic_fisher_a_surprised.png"
+    },
+    "ashmaw": {
+      "idle": "ashmaw.png"
+    },
+    "grisk": {
+      "idle": "grisk.png"
+    },
+    "kobold_foreman": {
+      "idle": "grisk.png"
+    },
+    "mother_aubrine": {
+      "idle": "mother_aubrine_idle.png",
+      "hurt": "mother_aubrine_hurt.png",
+      "happy": "mother_aubrine_happy.png",
+      "angry": "mother_aubrine_angry.png",
+      "sad": "mother_aubrine_sad.png",
+      "surprised": "mother_aubrine_surprised.png"
+    },
+    "tobin_fell": {
+      "idle": "tobin_fell_idle.png",
+      "hurt": "tobin_fell_hurt.png",
+      "happy": "tobin_fell_happy.png",
+      "angry": "tobin_fell_angry.png",
+      "sad": "tobin_fell_sad.png",
+      "surprised": "tobin_fell_surprised.png"
+    },
+    "lark": {
+      "idle": "lark_idle.png",
+      "hurt": "lark_hurt.png",
+      "happy": "lark_happy.png",
+      "angry": "lark_angry.png",
+      "sad": "lark_sad.png",
+      "surprised": "lark_surprised.png"
+    },
+    "corvin_ashby": {
+      "idle": "corvin_idle.png",
+      "hurt": "corvin_hurt.png",
+      "happy": "corvin_happy.png",
+      "angry": "corvin_angry.png",
+      "sad": "corvin_sad.png",
+      "surprised": "corvin_surprised.png"
+    },
+    "child_pip": {
+      "idle": "pip_idle.png",
+      "hurt": "pip_hurt.png",
+      "happy": "pip_happy.png",
+      "angry": "pip_angry.png",
+      "sad": "pip_sad.png",
+      "surprised": "pip_surprised.png"
+    },
+    "pip_ashdown": {
+      "idle": "pip_idle.png",
+      "hurt": "pip_hurt.png",
+      "happy": "pip_happy.png",
+      "angry": "pip_angry.png",
+      "sad": "pip_sad.png",
+      "surprised": "pip_surprised.png"
+    },
+    "dagna_holt": {
+      "idle": "dagna_idle.png",
+      "hurt": "dagna_hurt.png",
+      "happy": "dagna_happy.png",
+      "angry": "dagna_angry.png",
+      "sad": "dagna_sad.png",
+      "surprised": "dagna_surprised.png"
+    },
+    "celandine_marrowby": {
+      "idle": "celandine_idle.png",
+      "hurt": "celandine_hurt.png",
+      "happy": "celandine_happy.png",
+      "angry": "celandine_angry.png",
+      "sad": "celandine_sad.png",
+      "surprised": "celandine_surprised.png"
+    },
+    "rook": {
+      "idle": "rook_idle.png",
+      "hurt": "rook_hurt.png",
+      "happy": "rook_happy.png",
+      "angry": "rook_angry.png",
+      "sad": "rook_sad.png",
+      "surprised": "rook_surprised.png"
+    },
+    "mother_skarrow": {
+      "idle": "mother_skarrow_idle.png",
+      "hurt": "mother_skarrow_hurt.png",
+      "happy": "mother_skarrow_happy.png",
+      "angry": "mother_skarrow_angry.png",
+      "sad": "mother_skarrow_sad.png",
+      "surprised": "mother_skarrow_surprised.png"
+    },
+    "old_maud": {
+      "idle": "old_maud_idle.png",
+      "hurt": "old_maud_hurt.png",
+      "happy": "old_maud_happy.png",
+      "angry": "old_maud_angry.png",
+      "sad": "old_maud_sad.png",
+      "surprised": "old_maud_surprised.png"
+    },
+    "bree_tallow": {
+      "idle": "bree_tallow_idle.png",
+      "hurt": "bree_tallow_hurt.png",
+      "happy": "bree_tallow_happy.png",
+      "angry": "bree_tallow_angry.png",
+      "sad": "bree_tallow_sad.png",
+      "surprised": "bree_tallow_surprised.png"
+    },
+    "halden_varrow": {
+      "idle": "halden_varrow_idle.png",
+      "hurt": "halden_varrow_hurt.png",
+      "happy": "halden_varrow_happy.png",
+      "angry": "halden_varrow_angry.png",
+      "sad": "halden_varrow_sad.png",
+      "surprised": "halden_varrow_surprised.png"
+    },
+    "barmaid_a": {
+      "idle": "generic_barmaid_a_idle.png",
+      "hurt": "generic_barmaid_a_hurt.png",
+      "happy": "generic_barmaid_a_happy.png",
+      "angry": "generic_barmaid_a_angry.png",
+      "sad": "generic_barmaid_a_sad.png",
+      "surprised": "generic_barmaid_a_surprised.png"
+    },
+    "barmaid_b": {
+      "idle": "generic_barmaid_b_idle.png",
+      "hurt": "generic_barmaid_b_hurt.png",
+      "happy": "generic_barmaid_b_happy.png",
+      "angry": "generic_barmaid_b_angry.png",
+      "sad": "generic_barmaid_b_sad.png",
+      "surprised": "generic_barmaid_b_surprised.png"
+    },
+    "child_a": {
+      "idle": "generic_child_a_idle.png",
+      "hurt": "generic_child_a_hurt.png",
+      "happy": "generic_child_a_happy.png",
+      "angry": "generic_child_a_angry.png",
+      "sad": "generic_child_a_sad.png",
+      "surprised": "generic_child_a_surprised.png"
+    },
+    "child_b": {
+      "idle": "generic_child_b_idle.png",
+      "hurt": "generic_child_b_hurt.png",
+      "happy": "generic_child_b_happy.png",
+      "angry": "generic_child_b_angry.png",
+      "sad": "generic_child_b_sad.png",
+      "surprised": "generic_child_b_surprised.png"
+    },
+    "farmer_a": {
+      "idle": "generic_farmer_a_idle.png",
+      "hurt": "generic_farmer_a_hurt.png",
+      "happy": "generic_farmer_a_happy.png",
+      "angry": "generic_farmer_a_angry.png",
+      "sad": "generic_farmer_a_sad.png",
+      "surprised": "generic_farmer_a_surprised.png"
+    },
+    "farmer_b": {
+      "idle": "generic_farmer_b_idle.png",
+      "hurt": "generic_farmer_b_hurt.png",
+      "happy": "generic_farmer_b_happy.png",
+      "angry": "generic_farmer_b_angry.png",
+      "sad": "generic_farmer_b_sad.png",
+      "surprised": "generic_farmer_b_surprised.png"
+    },
+    "farmhand_a": {
+      "idle": "generic_farmhand_a_idle.png",
+      "hurt": "generic_farmhand_a_hurt.png",
+      "happy": "generic_farmhand_a_happy.png",
+      "angry": "generic_farmhand_a_angry.png",
+      "sad": "generic_farmhand_a_sad.png",
+      "surprised": "generic_farmhand_a_surprised.png"
+    },
+    "farmhand_b": {
+      "idle": "generic_farmhand_b_idle.png",
+      "hurt": "generic_farmhand_b_hurt.png",
+      "happy": "generic_farmhand_b_happy.png",
+      "angry": "generic_farmhand_b_angry.png",
+      "sad": "generic_farmhand_b_sad.png",
+      "surprised": "generic_farmhand_b_surprised.png"
+    },
+    "fisher_a": {
+      "idle": "generic_fisher_a_idle.png",
+      "hurt": "generic_fisher_a_hurt.png",
+      "happy": "generic_fisher_a_happy.png",
+      "angry": "generic_fisher_a_angry.png",
+      "sad": "generic_fisher_a_sad.png",
+      "surprised": "generic_fisher_a_surprised.png"
+    },
+    "fisher_b": {
+      "idle": "generic_fisher_b_idle.png",
+      "hurt": "generic_fisher_b_hurt.png",
+      "happy": "generic_fisher_b_happy.png",
+      "angry": "generic_fisher_b_angry.png",
+      "sad": "generic_fisher_b_sad.png",
+      "surprised": "generic_fisher_b_surprised.png"
+    },
+    "guard_a": {
+      "idle": "generic_guard_a_idle.png",
+      "hurt": "generic_guard_a_hurt.png",
+      "happy": "generic_guard_a_happy.png",
+      "angry": "generic_guard_a_angry.png",
+      "sad": "generic_guard_a_sad.png",
+      "surprised": "generic_guard_a_surprised.png"
+    },
+    "guard_b": {
+      "idle": "generic_guard_b_idle.png",
+      "hurt": "generic_guard_b_hurt.png",
+      "happy": "generic_guard_b_happy.png",
+      "angry": "generic_guard_b_angry.png",
+      "sad": "generic_guard_b_sad.png",
+      "surprised": "generic_guard_b_surprised.png"
+    },
+    "merchant_a": {
+      "idle": "generic_merchant_a_idle.png",
+      "hurt": "generic_merchant_a_hurt.png",
+      "happy": "generic_merchant_a_happy.png",
+      "angry": "generic_merchant_a_angry.png",
+      "sad": "generic_merchant_a_sad.png",
+      "surprised": "generic_merchant_a_surprised.png"
+    },
+    "merchant_b": {
+      "idle": "generic_merchant_b_idle.png",
+      "hurt": "generic_merchant_b_hurt.png",
+      "happy": "generic_merchant_b_happy.png",
+      "angry": "generic_merchant_b_angry.png",
+      "sad": "generic_merchant_b_sad.png",
+      "surprised": "generic_merchant_b_surprised.png"
+    },
+    "archived_bandit_captain": {"idle": "bandit_captain_idle.png", "hurt": "bandit_captain_hurt.png", "happy": "bandit_captain_happy.png", "angry": "bandit_captain_angry.png", "sad": "bandit_captain_sad.png", "surprised": "bandit_captain_surprised.png"},
+    "archived_barmaid": {"idle": "barmaid_idle.png", "hurt": "barmaid_hurt.png", "happy": "barmaid_happy.png", "angry": "barmaid_angry.png", "sad": "barmaid_sad.png", "surprised": "barmaid_surprised.png"},
+    "archived_blacksmith": {"idle": "blacksmith_idle.png", "hurt": "blacksmith_hurt.png", "happy": "blacksmith_happy.png", "angry": "blacksmith_angry.png", "sad": "blacksmith_sad.png", "surprised": "blacksmith_surprised.png"},
+    "archived_child": {"idle": "child_idle.png", "hurt": "child_hurt.png", "happy": "child_happy.png", "angry": "child_angry.png", "sad": "child_sad.png", "surprised": "child_surprised.png"},
+    "archived_farmer": {"idle": "farmer_idle.png", "hurt": "farmer_hurt.png", "happy": "farmer_happy.png", "angry": "farmer_angry.png", "sad": "farmer_sad.png", "surprised": "farmer_surprised.png"},
+    "archived_farmhand": {"idle": "farmhand_idle.png", "hurt": "farmhand_hurt.png", "happy": "farmhand_happy.png", "angry": "farmhand_angry.png", "sad": "farmhand_sad.png", "surprised": "farmhand_surprised.png"},
+    "archived_fisher": {"idle": "fisher_idle.png", "hurt": "fisher_hurt.png", "happy": "fisher_happy.png", "angry": "fisher_angry.png", "sad": "fisher_sad.png", "surprised": "fisher_surprised.png"},
+    "archived_guard": {"idle": "guard_idle.png", "hurt": "guard_hurt.png", "happy": "guard_happy.png", "angry": "guard_angry.png", "sad": "guard_sad.png", "surprised": "guard_surprised.png"},
+    "archived_guard_captain": {"idle": "guard_captain_idle.png", "hurt": "guard_captain_hurt.png", "happy": "guard_captain_happy.png", "angry": "guard_captain_angry.png", "sad": "guard_captain_sad.png", "surprised": "guard_captain_surprised.png"},
+    "archived_innkeeper": {"idle": "innkeeper_idle.png", "hurt": "innkeeper_hurt.png", "happy": "innkeeper_happy.png", "angry": "innkeeper_angry.png", "sad": "innkeeper_sad.png", "surprised": "innkeeper_surprised.png"},
+    "archived_kobold": {"idle": "kobold_idle.png", "hurt": "kobold_hurt.png", "happy": "kobold_happy.png", "angry": "kobold_angry.png", "sad": "kobold_sad.png", "surprised": "kobold_surprised.png"},
+    "archived_kobold_slinger": {"idle": "kobold_slinger_idle.png", "hurt": "kobold_slinger_hurt.png", "happy": "kobold_slinger_happy.png", "angry": "kobold_slinger_angry.png", "sad": "kobold_slinger_sad.png", "surprised": "kobold_slinger_surprised.png"},
+    "archived_mayor": {"idle": "mayor_idle.png", "hurt": "mayor_hurt.png", "happy": "mayor_happy.png", "angry": "mayor_angry.png", "sad": "mayor_sad.png", "surprised": "mayor_surprised.png"},
+    "archived_merchant": {"idle": "merchant_idle.png", "hurt": "merchant_hurt.png", "happy": "merchant_happy.png", "angry": "merchant_angry.png", "sad": "merchant_sad.png", "surprised": "merchant_surprised.png"},
+    "archived_minstrel": {"idle": "minstrel_idle.png", "hurt": "minstrel_hurt.png", "happy": "minstrel_happy.png", "angry": "minstrel_angry.png", "sad": "minstrel_sad.png", "surprised": "minstrel_surprised.png"},
+    "archived_noble": {"idle": "noble_idle.png", "hurt": "noble_hurt.png", "happy": "noble_happy.png", "angry": "noble_angry.png", "sad": "noble_sad.png", "surprised": "noble_surprised.png"},
+    "archived_priest": {"idle": "priest_idle.png", "hurt": "priest_hurt.png", "happy": "priest_happy.png", "angry": "priest_angry.png", "sad": "priest_sad.png", "surprised": "priest_surprised.png"},
+    "archived_sage": {"idle": "sage_idle.png", "hurt": "sage_hurt.png", "happy": "sage_happy.png", "angry": "sage_angry.png", "sad": "sage_sad.png", "surprised": "sage_surprised.png"}
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
 }

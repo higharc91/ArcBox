@@ -1,0 +1,28 @@
+{
+  "request": {
+    "model_id": "model_google-gemini-3-8-flash-tts",
+    "parameters": {
+      "text": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.\n<long pause>\n<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+      "voice": "Callirrhoe",
+      "language": "en-US"
+    },
+    "wait": false,
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"model_id\": \"model_google-gemini-3-8-flash-tts\",\n  \"job_id\": \"job_Jhx1ThHLJEt1DzvWPNfUegDQ\",\n  \"status\": \"in-progress\",\n  \"message\": \"Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Jhx1ThHLJEt1DzvWPNfUegDQ' (one call waits on up to 32 jobs).\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "model_id": "model_google-gemini-3-8-flash-tts",
+      "job_id": "job_Jhx1ThHLJEt1DzvWPNfUegDQ",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Jhx1ThHLJEt1DzvWPNfUegDQ' (one call waits on up to 32 jobs)."
+    },
+    "isError": false
+  }
+}

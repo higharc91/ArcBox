@@ -1,0 +1,61 @@
+{
+  "id": "hollow_lair",
+  "name": "Ashmaw\u2019s Bed",
+  "map": "hollow_lair",
+  "level": 2,
+  "party": {
+    "min": 1,
+    "max": 6
+  },
+  "enemies": [
+    {
+      "unit": "ashmaw",
+      "zone": "enemy_spawn",
+      "count": 1,
+      "level": 2,
+      "id": "ashmaw",
+      "hpByParty": {
+        "1": 32,
+        "2": 60,
+        "3": 90,
+        "4": 240,
+        "5": 320,
+        "6": 400
+      },
+      "unitByParty": {
+        "1": "ashmaw",
+        "2": "ashmaw",
+        "3": "ashmaw",
+        "4": "ashmaw_party",
+        "5": "ashmaw_party",
+        "6": "ashmaw_party"
+      }
+    }
+  ],
+  "xp": 0,
+  "loot": [],
+  "objectives": {
+    "win": "defeat_all"
+  },
+  "environment": true,
+  "triggers": [
+    {
+      "id": "ashmaw_half_health",
+      "when": {
+        "hpBelow": {
+          "tag": "ashmaw",
+          "percent": 50
+        }
+      },
+      "do": [
+        {
+          "phase": {
+            "tag": "ashmaw",
+            "number": 1
+          }
+        }
+      ]
+    }
+  ],
+  "storyOnly": true
+}

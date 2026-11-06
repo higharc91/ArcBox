@@ -1,0 +1,34 @@
+[
+  {
+    "dir": "south",
+    "path": "/workspace/generated_images/exec-fa32084a-0677-4955-974f-abc5c380897b.png"
+  },
+  {
+    "dir": "south-west",
+    "path": "/workspace/generated_images/exec-b5021a38-7dc7-4700-98f7-0500f4f462d4.png"
+  },
+  {
+    "dir": "west",
+    "path": "/workspace/generated_images/exec-bc8c82b2-3638-4569-9a93-3a15f3c192e2.png"
+  },
+  {
+    "dir": "north-west",
+    "path": "/workspace/generated_images/exec-9f2caf00-0a65-405f-92a8-3dbdfae83881.png"
+  },
+  {
+    "dir": "north",
+    "path": "/workspace/generated_images/exec-94a5ec90-8236-489b-90a2-5c3474922af1.png"
+  },
+  {
+    "dir": "north-east",
+    "path": "/workspace/generated_images/exec-12e07200-4194-4b11-ac21-0f068502bdd4.png"
+  },
+  {
+    "dir": "east",
+    "path": "/workspace/generated_images/exec-ff7ae59d-6968-42a8-99fa-da72afa801db.png"
+  },
+  {
+    "dir": "south-east",
+    "path": "/workspace/generated_images/exec-d5ff9396-ad03-418d-aa04-f90e9d1b1ed8.png"
+  }
+]

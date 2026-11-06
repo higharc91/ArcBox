@@ -1,0 +1,27 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"jobs\": [\n    {\n      \"jobId\": \"job_Xb2ZVRVD4EFwBgdp793johgE\",\n      \"jobType\": \"custom\",\n      \"status\": \"success\",\n      \"progress\": 1,\n      \"createdAt\": \"2026-11-03T19:09:06.625Z\",\n      \"updatedAt\": \"2026-11-03T19:09:15.059Z\",\n      \"modelId\": \"model_mirelo-sfx-2-0-text-to-audio\",\n      \"assetIds\": [\n        \"asset_W8yp4LVSrX3RSJMhgSh69Yhg\"\n      ],\n      \"cuCost\": 5\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_Xb2ZVRVD4EFwBgdp793johgE",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-03T19:09:06.625Z",
+        "updatedAt": "2026-11-03T19:09:15.059Z",
+        "modelId": "model_mirelo-sfx-2-0-text-to-audio",
+        "assetIds": [
+          "asset_W8yp4LVSrX3RSJMhgSh69Yhg"
+        ],
+        "cuCost": 5
+      }
+    ]
+  },
+  "isError": false
+}

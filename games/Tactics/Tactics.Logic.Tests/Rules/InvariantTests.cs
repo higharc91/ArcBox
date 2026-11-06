@@ -2,6 +2,21 @@ namespace Tactics.Logic.Tests;
 
 public sealed class InvariantTests
 {
+    [Fact]
+    public void Enabled_by_default_and_check_cost_is_reported()
+    {
+        Assert.True(Invariants.Enabled);
+        var battle = TestBattle.On(string.Join("\n", Enumerable.Repeat(string.Join(" ", Enumerable.Repeat("0.", 16)), 16)));
+        for (var i = 0; i < 6; i++) battle.Party($"hero{i}", TestSheets.Fighter, T(i, 0));
+        for (var i = 0; i < 8; i++) battle.Enemy($"enemy{i}", TestSheets.Goblin, T(i, 10));
+        var (state, _) = battle.Start(seed: 2);
+        for (var i = 0; i < 100; i++) Invariants.Check(state, battle.Rules);
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        const int steps = 10000;
+        for (var i = 0; i < steps; i++) Invariants.Check(state, battle.Rules);
+        Console.WriteLine($"INVARIANTS {clock.Elapsed.TotalMilliseconds / steps:0.000000} ms/check ({state.Units.Count} units, {steps} checks)");
+    }
+
     private const string Field = """
         0. 0. 0# 0.
         0. 0x 0. 0.

@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.6711100b.wav",
+  "sourceSha256": "30317754ba262c46bf1d7940f712cb69db6f8dab69a2d64c13a4aadf0be86bec",
+  "duration": 26.64,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.2,
+      "text": " You fed my children, low female control toe, husky, dry rasp, and age creek."
+    },
+    {
+      "start": 8.16,
+      "end": 12.200000000000001,
+      "text": " Measured, wary, quietly commanding, with tired warmth."
+    },
+    {
+      "start": 13.36,
+      "end": 17.0,
+      "text": " You fed my children, valley people."
+    },
+    {
+      "start": 17.52,
+      "end": 21.48,
+      "text": " So I give you what I do not give to strangers."
+    },
+    {
+      "start": 22.0,
+      "end": 26.2,
+      "text": " Not all of it. The last verse stays with the clan."
+    }
+  ],
+  "text": "You fed my children, low female control toe, husky, dry rasp, and age creek. Measured, wary, quietly commanding, with tired warmth. You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+  "secondsToTranscribe": 7.32
+}

@@ -1,0 +1,11 @@
+{
+  "character_id": "cbb9f46d-b896-49c1-a981-a5344be6a411",
+  "mode": "v3",
+  "frame_count": 6,
+  "keep_first_frame": false,
+  "action_description": "The bear plants both hind paws and rises slowly onto its hind legs, lifts its muzzle in a deep roar, then lowers to its original quadruped stance. Facing stays straight south. Solid connected anatomy, no turning or sliding, sparse ember flecks.",
+  "animation_name": "ashmaw_roar_pilot",
+  "directions": [
+    "south"
+  ]
+}

@@ -42,6 +42,8 @@ export interface PropEntry {
   fps: number;
   layer?: "ground";
   light?: PropLight;
+  /** A variant drawn at a size and anchor of its own: a new look beside older, smaller art. */
+  looks?: Record<string, { size: [number, number]; anchor: [number, number] }>;
 }
 
 export interface PropsManifest { props: Record<string, PropEntry>; lighting: { flicker: Record<string, number[]> } }
@@ -249,7 +251,8 @@ export function resolveProp(
     if (!entry) continue;
     const picked = variant && entry.variants[variant] ? variant : Object.keys(entry.variants)[0]!;
     const emissive = entry.light?.emissive;
-    return { entry, url: m.base + dir + entry.variants[picked], variant: picked, emissiveUrl: emissive ? m.base + dir + emissive : null };
+    const look = entry.looks?.[picked];
+    return { entry: look ? { ...entry, ...look } : entry, url: m.base + dir + entry.variants[picked], variant: picked, emissiveUrl: emissive ? m.base + dir + emissive : null };
   }
   return null;
 }

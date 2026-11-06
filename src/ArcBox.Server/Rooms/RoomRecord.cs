@@ -8,8 +8,10 @@ namespace ArcBox.Server.Rooms;
 /// <see cref="PlayerSlot.ForAbsentMember"/>: the room made the seat for a campaign member who has never been here. Left
 /// out of the JSON when false, so older rows read as false.
 /// </param>
+/// <param name="Vouched"><see cref="PlayerSlot.Vouched"/>; left out when empty, so older rows read as none.</param>
 public sealed record SlotRecord(PlayerId Id, string Name, string SecretHash, int JoinOrder, ProfileId? Profile,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool ForAbsentMember = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool ForAbsentMember = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] IReadOnlyList<ProfileId>? Vouched = null);
 
 /// <summary>
 /// A room's membership as stored in the <c>rooms</c> table (spec §3.5); never its game state. Built on the room's actor by

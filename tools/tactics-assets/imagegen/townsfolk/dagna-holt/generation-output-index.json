@@ -1,0 +1,52 @@
+[
+  {
+    "request": "directional/south-request.json",
+    "output": "directional/south-source.png",
+    "originalPath": "/workspace/generated_images/exec-a89695df-6891-4546-8cb8-3b48471b95e3.png"
+  },
+  {
+    "request": "directional/south-west-request.json",
+    "output": "directional/south-west-source.png",
+    "originalPath": "/workspace/generated_images/exec-16bd6882-4291-4f39-beee-c14f4a51a28a.png"
+  },
+  {
+    "request": "directional/west-request.json",
+    "output": "directional/west-source.png",
+    "originalPath": "/workspace/generated_images/exec-3c61764f-82bc-4e67-8cc3-8ad438952b7e.png"
+  },
+  {
+    "request": "directional/north-west-request.json",
+    "output": "directional/north-west-source.png",
+    "originalPath": "/workspace/generated_images/exec-1d3e136b-9bcd-4840-b512-b4293e01da51.png"
+  },
+  {
+    "request": "directional/north-request.json",
+    "output": "directional/north-source.png",
+    "originalPath": "/workspace/generated_images/exec-360a6684-4cb6-4aac-b018-0c47cbf997a8.png"
+  },
+  {
+    "request": "directional/north-east-request.json",
+    "output": "directional/north-east-source.png",
+    "originalPath": "/workspace/generated_images/exec-d85c1840-1003-4bdd-a020-b6a46db68dc1.png"
+  },
+  {
+    "request": "directional/east-request.json",
+    "output": "directional/east-source.png",
+    "originalPath": "/workspace/generated_images/exec-0d5a53ee-1684-4c19-80ee-ebbbdc2b88ba.png"
+  },
+  {
+    "request": "directional/south-east-request.json",
+    "output": "directional/south-east-source.png",
+    "originalPath": "/workspace/generated_images/exec-388211d2-43a8-4af4-a799-f692046f00f2.png"
+  },
+  {
+    "request": "portraits-request.json",
+    "output": "portraits-source.png",
+    "originalPath": "/workspace/generated_images/exec-dd25ccce-52f2-48c3-b650-c7346a75eb4a.png"
+  },
+  {
+    "request": "north-pauldron-correction-request.json",
+    "output": "directional/north-corrected-source.png",
+    "originalPath": "/workspace/generated_images/exec-0a023085-02ec-489b-afcd-c1941047faa0.png"
+  }
+]

@@ -19,7 +19,12 @@ namespace Tactics.Presentation.World;
 /// <param name="Bumped">The leader bumped a wall this frame (<see cref="WalkBump"/>).</param>
 /// <param name="Bump">The bump's sound, the step of the leader's tile, to play at <see cref="WorldTuning.BumpDb"/>; null with no bump or no sound.</param>
 public sealed record WalkFrame(ImmutableArray<BoardUnit> Units, BoardFit Fit, Vector2 Tile, Vector2 Velocity, string? Footstep, bool Cut, double Walked, Vector2 Leader,
-    bool Bumped = false, string? Bump = null);
+    bool Bumped = false, string? Bump = null)
+{
+    /// <summary>Those of <see cref="Units"/> who aren't <see cref="BoardUnit.Dressing"/>: the party and the story's figures, who are what's kept in view.</summary>
+    public ImmutableArray<BoardUnit> Walkers { get; init; } = Units;
+    public string? MobCry { get; init; }
+}
 
 /// <summary>
 /// What a fight in the world (<see cref="StageDirector"/>) asks of the walk this frame.
@@ -45,15 +50,22 @@ public sealed class WalkShow
 {
     private const float TilesPerSecond = 1 / 0.3f;      // the server's walking pace: only for how far ahead to load
 
-    private readonly BoardTerrain _terrain;
+    private BoardTerrain _terrain;
+    private readonly BoardTerrain _baseTerrain;
+    private ImmutableHashSet<string> _groundFlags = ImmutableHashSet<string>.Empty;
     private readonly UnitArt _art;
     private readonly SoundBank? _sounds;
     private readonly WalkTrack _track = new();
+    private readonly WorldPeople? _people;
+    private BarkView? _bark;
+    private ImmutableHashSet<string> _peopleFlags = ImmutableHashSet<string>.Empty;
     private readonly WalkBump _bump = new();
     private readonly WorldCamera _camera;
     private readonly Func<Vector2, bool, Vector2> _pixels;
 
     private ImmutableArray<WalkerView> _party = [];
+    private ImmutableArray<StoryMarker> _markers = [];
+    private ImmutableArray<CastView> _cast = [];
     private bool _started;
     private int _epoch;
     private int _seq;
@@ -65,11 +77,20 @@ public sealed class WalkShow
     private bool _bumped;
     private IReadOnlyDictionary<string, UnitPlace> _places = new Dictionary<string, UnitPlace>();
 
+    /// <summary>Where feet go on the screen's pixels (<see cref="WorldCamera.OnGround"/>): for what stands in the world beside the party.</summary>
+    public Func<Vector2, bool, Vector2> Pixels => _pixels;
+
+    /// <summary>The seconds it's been moved on by, which is the people's clock.</summary>
+    public double Clock { get; private set; }
+
     /// <summary>The newest step this show has heard of.</summary>
     public int Seq => _seq;
 
     /// <summary>Whether the newest view had a direction held.</summary>
     public bool Held { get; private set; }
+
+    /// <summary>The scene's cast standing in the world, as the newest view has it (<see cref="ExploreView.Cast"/>).</summary>
+    public IReadOnlyList<CastView> Cast => _cast;
 
     /// <summary>The party, in the newest view's order.</summary>
     public IReadOnlyList<WalkerView> Party => _party;
@@ -78,22 +99,65 @@ public sealed class WalkShow
     public IReadOnlyDictionary<string, UnitPlace> Places => _places;
 
     /// <summary>A show on <paramref name="terrain"/>. With no <paramref name="sounds"/>, it's a silent one.</summary>
-    public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds)
+    public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds, ImmutableArray<RegionPerson> people = default)
     {
-        (_terrain, _art, _sounds) = (terrain, art, sounds);
+        (_terrain, _baseTerrain, _art, _sounds) = (terrain, terrain, art, sounds);
+        _people = people.IsDefaultOrEmpty ? null : new WorldPeople(people, terrain, art);
         _camera = new WorldCamera(terrain.Map.Width, terrain.Map.Height);
         _pixels = (feet, standing) => standing ? WorldCamera.OnGround(feet) : _camera.OnPixels(feet);
     }
 
     /// <summary>Takes a new view, and gives back the steps in it that this TV hadn't heard of. A view older than the last changes nothing.</summary>
+    private ImmutableArray<MobView> _mobs = [];
+    private string? _mobCry;
+    private readonly Dictionary<string, (MobView Mob, double Start)> _fadingMobs = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _heardMobs = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, (UnitPlace From, UnitPlace To, double Start, double Duration)> _mobTracks = new(StringComparer.Ordinal);
+
     public IReadOnlyList<WalkLeg> Receive(ExploreView view)
     {
         if (_started && view.Epoch == _epoch && view.Seq < _seq)
             return [];
 
+        var incomingFlags = (view.PeopleFlags ?? []).ToImmutableHashSet(StringComparer.Ordinal);
+        if (!_groundFlags.SetEquals(incomingFlags))
+        {
+            _groundFlags = incomingFlags;
+            _terrain = new BoardTerrain(_baseTerrain.Map.WithStoryFlags(incomingFlags), null);
+        }
         if (!_started || view.Epoch != _epoch)
-            _told = view.Seq;        // what's in a first view was walked before this TV came
+        {
+            _mobTracks.Clear();
+            _fadingMobs.Clear();
+            _mobs = [];
+            _told = view.Seq;
+        }
+        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
+        _markers = view.Markers is { IsDefault: false } markers ? markers : [];
+        if (view.Traders is { } traders)
+            _markers = [.. _markers, .. traders.Where(t => Math.Max(Math.Abs(t.At.X - view.At.X), Math.Abs(t.At.Y - view.At.Y)) <= 1)
+                .Where(t => !t.Open).Select(t => new StoryMarker("shop:" + t.Id, t.At, null, "shop"))];
+        _cast = view.Cast is { IsDefault: false } cast ? cast : [];
+        _bark = view.Bark;
+        var incomingMobs = view.Mobs ?? [];
+        foreach (var old in _mobs.Where(m => !incomingMobs.Any(n => n.Id == m.Id))) _fadingMobs[old.Id] = (old, Clock);
+        _mobs = incomingMobs;
+        foreach (var mob in _mobs)
+        {
+            if (_heardMobs.Add(mob.Group) && _sounds?.Gear(mob.Sprite).Family is { } family && _sounds.Has(family + "_attack"))
+                _mobCry ??= family + "_attack";
+            _fadingMobs.Remove(mob.Id);
+            var target = UnitPlace.On(_terrain, mob.At);
+            if (!_mobTracks.TryGetValue(mob.Id, out var track)) _mobTracks[mob.Id] = (target, target, Clock, 0.35);
+            else if (track.To != target) _mobTracks[mob.Id] = (track.To, target, Clock, mob.Legs.IsDefaultOrEmpty ? 0.35 : Math.Max(0.001, mob.Legs[^1].Ms / 1000.0));
+        }
+
+        if (view.PeopleFlags is { } flags && !_peopleFlags.SetEquals(flags)) _peopleFlags = flags.ToImmutableHashSet(StringComparer.Ordinal);
+        if (view.PeopleFlags is null) _peopleFlags = ImmutableHashSet<string>.Empty;
+        if (view.Traders is { } openTraders)
+            _cast = [.. _cast, .. openTraders.Where(t => t.Open && t.Sprite is not null).Select(t => new CastView("trader:" + t.Id, t.Id, t.Sprite!, t.At, view.At))];
+        _track.Keep([.. _cast.Select(c => c.At)]);      // followers stand clear of the scene's cast
         _track.Receive(view);       // a press into a wall turns the leader to face it there
         _bumped |= _bump.Receive(view);     // and leans them into it, in Frame
 
@@ -122,6 +186,7 @@ public sealed class WalkShow
     /// </para>
     public WalkFrame Frame(double seconds, bool revealed = true, WalkStage? stage = null)
     {
+        Clock += seconds;
         _track.Advance(seconds);
         var places = _places = _track.Places(_terrain);
         var focus = _track.Focus;
@@ -155,9 +220,30 @@ public sealed class WalkShow
         _bumped = false;
         var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
 
-        ImmutableArray<BoardUnit> units = stage?.Hidden == true ? [] : UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels);
+        ImmutableArray<BoardUnit> walkers = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
+            .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>())
+            .Concat(StoryMarks.Cast(_cast, _terrain, _art, _pixels)).OrderBy(u => u.Order)];
+        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels, _cast, _peopleFlags,
+            new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y)), _bark) ?? [];
+        foreach (var id in _fadingMobs.Where(m => Clock - m.Value.Start >= 0.35).Select(m => m.Key).ToArray())
+        { _fadingMobs.Remove(id); _mobTracks.Remove(id); }
+        var visibleMobs = _mobs.Select(m => (Mob: m, Opacity: 1f)).Concat(_fadingMobs.Values.Select(m => (Mob: m.Mob, Opacity: 1f - (float)((Clock - m.Start) / 0.35))));
+        var mobs = visibleMobs.Where(m => _art.Sprite(m.Mob.Sprite) is not null).Select(entry =>
+        {
+            var m = entry.Mob;
+            var track = _mobTracks[m.Id];
+            var share = Math.Clamp((float)((Clock - track.Start) / track.Duration), 0, 1);
+            var place = new UnitPlace(Vector2.Lerp(track.From.Map, track.To.Map, share), track.From.Height + (track.To.Height - track.From.Height) * share);
+            if (RoadSurface.TryHeight(_terrain, place.Map, out var surface)) place = place with { Height = surface };
+            var heading = track.To.Map - track.From.Map;
+            if (heading == Vector2.Zero) heading = new Vector2(0, 1);
+            return UnitPlan.Person(m.Id, m.Sprite, place, heading, share < 1 ? "walk" : null, _art, _pixels) with { Tone = UnitTone.Enemy, Ring = 12f, Opacity = entry.Opacity };
+        });
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(people).Concat(mobs).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
-        return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
+        var cry = revealed && stage is null ? _mobCry : null;
+        if (cry is not null) _mobCry = null;
+        return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump) { Walkers = walkers, MobCry = cry };
     }
 
     /// <summary>

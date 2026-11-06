@@ -4,9 +4,11 @@ using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
 using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests;
@@ -21,7 +23,7 @@ public sealed class HostViewContractTests
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
@@ -55,13 +57,51 @@ public sealed class HostViewContractTests
         Assert.Equal(10, units.Length);
         var party = battle.Units.Where(u => u.Side == "Party").ToArray();
         Assert.Equal([.. map.Zones["party_spawn"].Take(4)], party.Select(u => u.At));
-        Assert.Equal(classes.Select(c => $"characters.class_{c}"), party.Select(u => u.Sprite));
+        Assert.Equal(classes.Select(c => $"characters.human_{c}"), party.Select(u => u.Sprite));
         Assert.Equal(["goblin.1", "goblin.2", "goblin.3", "goblin.4", "goblin_archer.1", "goblin_archer.2"],
             battle.Units.Where(u => u.Side == "Enemy").Select(u => u.Id.Value));
-        Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(9, 6), new Tile(10, 6)],
+        Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(11, 5), new Tile(12, 5)],
             battle.Units.Where(u => u.Sprite == "characters.goblin_cutthroat").Select(u => u.At));
         Assert.Equal([new Tile(11, 2), new Tile(12, 2)], battle.Units.Where(u => u.Sprite == "characters.goblin_archer").Select(u => u.At));
         Assert.All(units, u => Assert.DoesNotContain("presets/bandit", u.Sprite.Path));   // nobody needed a stand-in
+    }
+
+    // The user's answer 14: a hero's ring in a fight is their player's colour, the one their walker wears. It's the TV's alone: a phone's
+    // view of the same units never carries it.
+    [Fact]
+    public void A_heros_ring_in_a_fight_is_their_walkers_colour_and_no_phone_hears_of_it()
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo"), new ProfileId("pr_cy"), new ProfileId("pr_di")];
+        var game = new TacticsGame(rules, battleList: true);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        foreach (var (cls, i) in new[] { "fighter", "cleric", "wizard", "rogue" }.Select((c, i) => (c, i)))
+            h.Input(i, new { action = "pickClass", data = new { @class = cls } });
+        var walkers = OverTheWire(game).Explore!.Party;
+        h.Input(0, new { action = "battles" });
+        h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
+
+        var battle = OverTheWire(game).Battle!;
+        var heroes = battle.Units.Where(u => u.Id.Value.StartsWith("hero", StringComparison.Ordinal)).OrderBy(u => u.Id.Value).ToArray();
+        Assert.Equal(walkers.Select(w => w.Color), heroes.Select(u => u.Color));
+        Assert.Equal(4, heroes.Select(u => u.Color).Distinct().Count());
+        Assert.All(battle.Units.Except(heroes), u => Assert.Null(u.Color));     // companions and goblins keep their side's ring
+
+        var units = UnitPlan.Build(battle, new BoardTerrain(Board.Pack.Map("river_crossing"), battle.Board), UnitArt.Load(Board.Pack.Root),
+            BoardFit.For(new BoardTerrain(Board.Pack.Map("river_crossing"), null), Board.Pack.Art));
+        foreach (var hero in heroes)
+        {
+            var unit = units.Single(u => u.Id == hero.Id);
+            Assert.True(unit.Outlined);
+            Assert.Equal(Rgb.Hex(hero.Color!), unit.Colour);
+        }
+        Assert.All(units.Where(u => u.Id.Value.StartsWith("ally", StringComparison.Ordinal)), u => Assert.Equal(UnitPlan.PartyRing, u.RingColour));
+
+        for (var i = 0; i < 4; i++)
+            Assert.DoesNotContain("\"color\"", JsonSerializer.Serialize(h.PlayerView(i), ArcJson.Options), StringComparison.Ordinal);
     }
 
     [Fact]
@@ -144,7 +184,7 @@ public sealed class HostViewContractTests
         Assert.Equal(1, walking.World!.Seq);
         Assert.Equal([1], show.Receive(walking.World).Select(l => l.Seq));
         var frame = show.Frame(1 / 60.0);
-        Assert.Equal(2, frame.Units.Length);
+        Assert.Equal(2 + (walking.World.Mobs?.Length ?? 0), frame.Units.Length);
         Assert.Single(frame.Units, u => u.CrownAt is not null);
         Assert.Empty(walking.Rows);
     }
@@ -244,7 +284,7 @@ public sealed class HostViewContractTests
     public void A_tv_joining_a_real_battle_half_way_plays_one_beat_and_lands_on_the_state()
     {
         var (game, h) = AiBattle("river_crossing", 3);
-        for (var step = 0; step < 40; step++)
+        for (var step = 0; step < 40 && (OverTheWire(game).Battle?.Beats.LastOrDefault()?.Seq ?? 0) <= 20; step++)
             h.Advance(TimeSpan.FromSeconds(7));
         var live = OverTheWire(game).Battle!;
         Assert.True(live.Beats[^1].Seq > 20);
@@ -289,6 +329,73 @@ public sealed class HostViewContractTests
         for (var i = 0; i < classes.Length; i++)
             h.SetConnected(i, false);
         return (game, h);
+    }
+
+    /// <summary>
+    /// The mayor's request as the TV takes it (overworld 5d §9, §10): the "!" over the mayor in the world, the narrator's opening shown on a
+    /// fresh track and not said, Pip's line said with its own clip, and the question that ends the node on the panel, all from real views.
+    /// </summary>
+    [Fact]
+    public void A_real_scene_reads_as_a_story_view()
+    {
+        var rules = Pack.Value;
+        var lore = LoreBook.Load(ContentRoot);
+        var ground = rules.GroundFor("ashen_ford")!;
+        var region = rules.RegionFor("ashen_ford")!.Def;
+        var spot = region.Beats.Single(b => b.Beat == "ch1_mayors_request").At;
+        var near = WorldWalk.Reach(ground.Terrain, region.Spawns.Start, ClassDef.DefaultJump)
+            .Where(t => t != spot && StoryRules.InReach(ground.Terrain, t, spot)).OrderBy(t => Math.Abs(t.X - spot.X) + Math.Abs(t.Y - spot.Y)).ThenBy(t => t).First();
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo")];
+        var game = new TacticsGame(rules, lore: lore, seed: new TacticsSeed([], []) with { At = near });
+        var h = new GameHarness<TacticsGame>(game, playerCount: 2, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        h.Input(0, new { action = "pickClass", data = new { @class = "fighter" } });
+        h.Input(1, new { action = "pickClass", data = new { @class = "cleric" } });
+        var units = UnitArt.Load(ContentRoot);
+        var track = new StoryTrack(VoiceClips.Load(ContentRoot), HudArt.Load(ContentRoot, units));
+
+        var walking = OverTheWire(game);
+        var mark = Assert.Single(StoryMarks.Of(walking.Explore!, new BoardTerrain(ground.Map, null), units));
+        Assert.Equal(spot, mark.At);
+        Assert.Equal("characters.child", walking.Explore!.Markers!.Value[0].Sprite);       // Pip, the first of the cast who isn't the narrator
+        Assert.Equal(units.Sprite("characters.child"), mark.Figure!.Sprite);
+        Assert.Equal(units.Emote("alert"), mark.Emote);
+        Assert.Null(track.Receive(walking, DateTimeOffset.UnixEpoch).Screen);                // the TV watches the party walk up
+
+        var leader = h.Players.ToList().FindIndex(p => p.Id == game.Leader!.Id);
+        h.Input(leader, new { action = "interact" });
+        var opening = OverTheWire(game);
+        var first = track.Receive(opening, h.Now);
+        Assert.Equal("ch1_mayor_open_1", first.Say!.Line);                // it watched the walk up, so the first line is said
+        Assert.True(first.Screen!.Caption!.Narrator);
+        Assert.StartsWith("Emberwick, at the Ashen Ford.", string.Concat(first.Screen.Caption.Rows[0].Select(r => r.Text)));
+        Assert.Null(Assert.Single(StoryMarks.Of(opening.Explore!, new BoardTerrain(ground.Map, null), units)).Emote);   // its scene plays: no "!"
+
+        var said = new List<string> { first.Say.Line };
+        StoryTick tick = first;
+        for (var guard = 0; guard < 20 && tick.Screen?.Vote is null; guard++)
+        {
+            h.Advance(OverTheWire(game).Story!.Until!.Value - h.Now);
+            tick = track.Receive(OverTheWire(game), h.Now);
+            if (tick.Say is { } say)
+            {
+                Assert.Equal(OverTheWire(game).Story!.Line!.Id, say.Line);
+                Assert.Equal(VoiceClips.Load(ContentRoot).ForLine(say.Line)!.Path, say.Clip);
+                said.Add(say.Line);
+            }
+        }
+
+        Assert.Equal(["ch1_mayor_open_1", "ch1_mayor_open_2", "ch1_mayor_open_3", "ch1_mayor_open_4", "ch1_mayor_halden_1", "ch1_mayor_halden_2", "ch1_mayor_halden_3",
+            "ch1_mayor_halden_4"], said);
+        Assert.Equal("Halden Varrow", tick.Screen!.Caption!.Speaker);
+        Assert.Equal("portraits/halden_varrow_sad.png", tick.Screen.Caption.Portrait!.Path);
+        var vote = tick.Screen.Vote!;
+        Assert.Equal("Leader's choice", vote.Heading);
+        Assert.Equal($"{game.Leader!.Name} chooses for the party", vote.Tally);
+        Assert.Equal("“Who are these goblins?”", Assert.Single(vote.Rows[0].Label));
+        Assert.NotNull(vote.Clock);
     }
 
     private static void AssertSame(BattleView live, BattleView shown)

@@ -6,8 +6,9 @@ import script that turns the downloaded clips into the game's `sfx` and `music` 
 | File | What it is |
 | --- | --- |
 | `sfx-list.json` | Every sound effect and ambience loop: prompt, length, variants, group, what triggers it. |
-| `music-list.json` | The music cues, same format, plus a fixed `seed` per cue. |
+| `music-list.json` | The music cues, same format, plus a fixed `seed` per cue and `instrumental` (below). |
 | `sfx-assets.json`, `music-assets.json` | What was generated: model, team, project, and per clip its Scenario asset id and job. |
+| `external-sfx.json` | Existing positional world-animal WAV calls, preserved alongside generated clips on import. |
 | `audio.py` | `plan`, `status`, `check` and `import` (needs ffmpeg). |
 
 Output: `content/tactics/base/sfx/` and `content/tactics/base/music/`, each with Ogg files and a `manifest.json`.
@@ -32,6 +33,12 @@ Output: `content/tactics/base/sfx/` and `content/tactics/base/music/`, each with
 }
 ```
 
+Every music cue also says `"instrumental": true` or `false`: whether its generation forces an instrumental take.
+A cue written for voices (the title's monks, the finale's ritual choir, victory_boss's wordless choir) is `false`, so
+the model may sing; `plan` refuses a music cue without it and passes it on in each music job. The `duration` is the
+length asked for; a one-shot sting comes out shorter once `import` trims its silence (victory and defeat are about
+7.8 s, victory_boss about 13.3 s), so read the encoded file for its real length.
+
 Creature prompts are the family's `voices[family].description` word for word plus an action ("short pained yelp when
 struck"), all generated with the family's seed, so a goblin's attack, hurt and death cries sound like the same goblin.
 To add a creature sound, reuse that prefix and seed. A sound with `variants: 1` has one clip, `<id>`; with n it has
@@ -42,10 +49,12 @@ To add a creature sound, reuse that prefix and seed. A sound with `variants: 1` 
 ```bash
 python3 tools/tactics-audio/audio.py plan                # clips listed but not yet in *-assets.json (JSON jobs)
 # generate each job with Scenario (SFX: model_mirelo-sfx-2-0-text-to-audio, wav; music: model_elevenlabs-music-v2-5),
+# with a music job's "instrumental" as the model's instrumental-only setting,
 # record the asset ids in *-assets.json, download each clip to <dir>/<clip id>.wav (or .mp3)
 python3 tools/tactics-audio/audio.py check  <dir>        # length, loudness, peak; flags silent, clipped, off-length clips
 python3 tools/tactics-audio/audio.py import <dir>        # encode everything found, drop stale files, write manifests
 python3 tools/tactics-audio/audio.py status [<dir>]
+python3 -m unittest discover -s tools/tactics-audio      # the lists' and plan's tests
 ```
 
 `import` trims silence from one-shots (with 5 ms edge fades) and leaves loops at full length, crossfading each loop's
@@ -66,3 +75,25 @@ input gives byte-identical files.
 The music manifest uses `tracks` in place of `sounds`. The art loader turns every entry of a top-level object into a
 key `<set>.<id>`, so `sfx.swing_sword` and `music.battle` are valid presentation keys. Keep any other top-level value a
 string, or it creates stray keys.
+
+
+## Original sunrise cue
+
+`camp_dawn` is a brief original G-major flute, harp and chime score, synthesized without external samples or quoted melodies.
+It plays once at camp/inn sunrise, then the regional track resumes. Reproduce it with NumPy and the standard encoder:
+
+```sh
+python3 tools/tactics-audio/compose_dawn.py /tmp/camp_dawn.wav
+python3 - <<'PYCODE'
+import json, sys
+from pathlib import Path
+sys.path.insert(0, "tools/tactics-audio")
+import audio
+spec = json.loads(Path("tools/tactics-audio/music-list.json").read_text())["camp_dawn"]
+audio.encode(Path("/tmp/camp_dawn.wav"), Path("content/tactics/base/music/camp_dawn.ogg"), spec, "music")
+audio.write_manifests()
+PYCODE
+```
+
+The encoded sting is about 5.83 seconds after silence trimming, at the existing −19 LUFS sting target.
+`music-assets.json` records its original-score provenance; the manifest preserves its per-track `source` rather than attributing it to Scenario.

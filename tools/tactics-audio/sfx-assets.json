@@ -2062,6 +2062,442 @@
       "duration": 1.4,
       "group": "battle",
       "loop": false
+    },
+    "door_open.1": {
+      "asset": "asset_CkaYNkfd2bJQPgRXAHUC17wG",
+      "job": "job_kdXdGfQg5ZRLyMYtG7kDEsxh",
+      "cu": 4.0,
+      "duration": 1.2,
+      "group": "world",
+      "loop": false
+    },
+    "door_open.2": {
+      "asset": "asset_AQjBSdsZi1qMWquWC13JWozi",
+      "job": "job_kdXdGfQg5ZRLyMYtG7kDEsxh",
+      "cu": 4.0,
+      "duration": 1.2,
+      "group": "world",
+      "loop": false
+    },
+    "door_close.1": {
+      "asset": "asset_A9o1gXSBNGzS5Kws9REb1yBj",
+      "job": "job_YrkKo6xdM2i5XsCJsDfDcS1S",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "door_close.2": {
+      "asset": "asset_EvrFnR6Dd8pd7XkKAmLYPKkC",
+      "job": "job_YrkKo6xdM2i5XsCJsDfDcS1S",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "gate_open": {
+      "asset": "asset_GNyywZ3VpYn9fCs8KT3VzLNy",
+      "job": "job_3cqLiRYLSX8suinDQZDBKbks",
+      "cu": 5.0,
+      "duration": 1.4,
+      "group": "world",
+      "loop": false
+    },
+    "gate_close": {
+      "asset": "asset_AioCPy7qap1Xu2GxvXZGJreD",
+      "job": "job_k8WAPRtZfJwsBVEyBd2FLHL8",
+      "cu": 3.0,
+      "duration": 1.0,
+      "group": "world",
+      "loop": false
+    },
+    "drawbridge_lower": {
+      "asset": "asset_2sbqpjAEZ9WNtwkRwdCAY91a",
+      "job": "job_yPhQUeRwFeUp5k7TQssp7zDm",
+      "cu": 9.0,
+      "duration": 3.0,
+      "group": "world",
+      "loop": false
+    },
+    "drawbridge_raise": {
+      "asset": "asset_1wY4MbSaNiFWYpR4fXB3Jqzt",
+      "job": "job_msTfkufWZt2xys7ngsGNgaoi",
+      "cu": 9.0,
+      "duration": 3.0,
+      "group": "world",
+      "loop": false
+    },
+    "secret_door_open": {
+      "asset": "asset_SS9uytzP1XfgDqUM5mxhp3mB",
+      "job": "job_JwyvH9JzDLyse17AssNPgp53",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "world",
+      "loop": false
+    },
+    "secret_door_close": {
+      "asset": "asset_b7VLK74x7rK8aTC6FdAU9ojM",
+      "job": "job_PkD6wfrea997cDNqreTtuvfE",
+      "cu": 5.0,
+      "duration": 1.6,
+      "group": "world",
+      "loop": false
+    },
+    "chest_open.1": {
+      "asset": "asset_L7hns5B3As3xSWTp8vPDQUzE",
+      "job": "job_xifRyXyYc7vcHfVsvWNJ9nTP",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "chest_open.2": {
+      "asset": "asset_FK3mMPM5r3F7eHstDA5ffB9H",
+      "job": "job_xifRyXyYc7vcHfVsvWNJ9nTP",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "crate_open.1": {
+      "asset": "asset_motkkRNu3cMY5zE7wxaz2pi1",
+      "job": "job_TXDLppotB7PNtdEdWEm1eh2J",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "world",
+      "loop": false
+    },
+    "crate_open.2": {
+      "asset": "asset_eRJp4ndjSsDw2MqHv5b9rDjW",
+      "job": "job_TXDLppotB7PNtdEdWEm1eh2J",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "world",
+      "loop": false
+    },
+    "barrel_open.1": {
+      "asset": "asset_XVMYfWT5T9LSE8Q8ivcqvoyg",
+      "job": "job_XGAjNvN9jAbjri9cZe1PkhgU",
+      "cu": 2.5,
+      "duration": 0.7,
+      "group": "world",
+      "loop": false
+    },
+    "barrel_open.2": {
+      "asset": "asset_oAquMD7SSc2Sfdke96UJy7BH",
+      "job": "job_XGAjNvN9jAbjri9cZe1PkhgU",
+      "cu": 2.5,
+      "duration": 0.7,
+      "group": "world",
+      "loop": false
+    },
+    "sack_open": {
+      "asset": "asset_nMRPUoocHij5RMGB2nXkYLoE",
+      "job": "job_fjrLSfGQNFYgTC5XhKsPZxEP",
+      "cu": 3.0,
+      "duration": 0.7,
+      "group": "world",
+      "loop": false
+    },
+    "cache_open": {
+      "asset": "asset_Rz7pnKJtV3NCQxUWu1199waM",
+      "job": "job_dS5hPEkS7F1qBjhuc6jQoYkG",
+      "cu": 3.0,
+      "duration": 1.0,
+      "group": "world",
+      "loop": false
+    },
+    "lever_pull.1": {
+      "asset": "asset_UDNsoJKETqekYoSdKktWK5ge",
+      "job": "job_sLAQDrdhRrEoC26xA4jLuVds",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "world",
+      "loop": false
+    },
+    "lever_pull.2": {
+      "asset": "asset_fLJxAvXjmuifF7VL4fsZCwE4",
+      "job": "job_sLAQDrdhRrEoC26xA4jLuVds",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "world",
+      "loop": false
+    },
+    "lock_open": {
+      "asset": "asset_5CeLwYgR62KNSdKHqgJ6gBqQ",
+      "job": "job_9rRUgUesnj8Wjb5vKYkm5L1L",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "world",
+      "loop": false
+    },
+    "lock_fail.1": {
+      "asset": "asset_vDPqvyxUzhr4ZbtB8e8VTuJc",
+      "job": "job_b8N9y1H6Rp6DEVc9EFg9QQS5",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "world",
+      "loop": false
+    },
+    "lock_fail.2": {
+      "asset": "asset_dHX1vZNDqFaGfc9gwu6HbZRm",
+      "job": "job_b8N9y1H6Rp6DEVc9EFg9QQS5",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "world",
+      "loop": false
+    },
+    "secret_found": {
+      "asset": "asset_UibSm6wvUjw2t4qgT97UfWDa",
+      "job": "job_1BCde4FdNDL5HbHTaVAWaosq",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "trap_spotted": {
+      "asset": "asset_yY4CSzLJFMKtWwVKHtZqLwjM",
+      "job": "job_q1WZ5tFDJQ9vJ8vbeVEsyx2D",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "world",
+      "loop": false
+    },
+    "trap_spring": {
+      "asset": "asset_2HRErNCE4AJaZARreWKr7C8b",
+      "job": "job_u69wRP73Y6Y9xYExqpNgj8yZ",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "world",
+      "loop": false
+    },
+    "trap_disarm": {
+      "asset": "asset_m5KyogLqk7FQ3DoK5YfY3b9X",
+      "job": "job_TkHf3mRjngHSUeNSCUWpm3yF",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "world",
+      "loop": false
+    },
+    "item_pickup.1": {
+      "asset": "asset_xMCpnLPJwAY5X7LSoCxrBQWt",
+      "job": "job_5czB9zUzvcFzwbcadJMbd1fF",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "world",
+      "loop": false
+    },
+    "item_pickup.2": {
+      "asset": "asset_ZHbAzF2kUzt7WbM4FqsRfEGg",
+      "job": "job_5czB9zUzvcFzwbcadJMbd1fF",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "world",
+      "loop": false
+    },
+    "page_turn.1": {
+      "asset": "asset_s49fGLkLEMWn8LgHbS63dUeT",
+      "job": "job_Ni9BotZe7VveVQeub5EXN8in",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "world",
+      "loop": false
+    },
+    "page_turn.2": {
+      "asset": "asset_SjEXfusJynM94RP6doALjLrT",
+      "job": "job_Ni9BotZe7VveVQeub5EXN8in",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "world",
+      "loop": false
+    },
+    "shrine_use": {
+      "asset": "asset_wsuoHzLKn8xCYaanrFtFv7HX",
+      "job": "job_cEMTf3FJAujGP7ZsA91gBkeJ",
+      "cu": 5.0,
+      "duration": 1.6,
+      "group": "world",
+      "loop": false
+    },
+    "well_draw": {
+      "asset": "asset_rsb2NTDs1J1ksdgdC3PeK8Ye",
+      "job": "job_VjmzZM5A5h5Wr7e7z6fTq7DW",
+      "cu": 6.0,
+      "duration": 1.8,
+      "group": "world",
+      "loop": false
+    },
+    "altar_use": {
+      "asset": "asset_QqKyN2ePezJAAwrvjE1AGwwG",
+      "job": "job_o7W1rf76y6uc9xGpGAv3Vtjv",
+      "cu": 6.0,
+      "duration": 1.8,
+      "group": "world",
+      "loop": false
+    },
+    "amb_cinder_hollow": {
+      "asset": "asset_g6SRnFg7RyvzHZgayJVQqwvd",
+      "job": "job_qygEvzpBxxYuKsnrK9wzKYHP",
+      "cu": 90.0,
+      "duration": 30.0,
+      "group": "ambience",
+      "loop": true,
+      "seed": 7474
+    },
+    "ashmaw_breath_loop": {
+      "asset": "asset_bTd2BKgryGooaBd83SG1jWh9",
+      "job": "job_KnutZPfbTGiYgkdNM3asyQUZ",
+      "cu": 24.0,
+      "duration": 8.0,
+      "group": "ambience",
+      "loop": true,
+      "seed": 7248
+    },
+    "ashmaw_death": {
+      "asset": "asset_RWj7nADdeZcZUNmsHAWLacka",
+      "job": "job_WYHziwvZR4FtSYNebcg75Rze",
+      "cu": 11.0,
+      "duration": 3.5,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_hurt.1": {
+      "asset": "asset_PcB51fE4icDZQRAqVYpieqZN",
+      "job": "job_9xnBYou9fJfm87bVGL7EiurH",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_hurt.2": {
+      "asset": "asset_TzNmduA8joAg4NmnVqK2ni4p",
+      "job": "job_9xnBYou9fJfm87bVGL7EiurH",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
+    },
+    "ashmaw_maul.1": {
+      "asset": "asset_SJ7PmhnSsFFcSGzyckeFCtFL",
+      "job": "job_xY5yewPCKmEkWCJPKCQJte48",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_maul.2": {
+      "asset": "asset_ePMpbvWZ5KG6hTT1TCCcs3m6",
+      "job": "job_xY5yewPCKmEkWCJPKCQJte48",
+      "cu": 3.0,
+      "duration": 0.9,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
+    },
+    "ashmaw_roar.1": {
+      "asset": "asset_GE2CEz3yM6GB2nHmH3bqcU9S",
+      "job": "job_ZyZB1Z54QcBpFjg3jjeGmq4u",
+      "cu": 7.5,
+      "duration": 2.4,
+      "group": "creature",
+      "loop": false,
+      "seed": 7248
+    },
+    "ashmaw_roar.2": {
+      "asset": "asset_9QXQbuHTryrD9v5UN7iZRXjc",
+      "job": "job_ZyZB1Z54QcBpFjg3jjeGmq4u",
+      "cu": 7.5,
+      "duration": 2.4,
+      "group": "creature",
+      "loop": false,
+      "seed": 7249
+    },
+    "ashmaw_shake": {
+      "asset": "asset_DfLNggehFXPatYZgJtiswQZx",
+      "job": "job_WFLmaT2T5GL8G25FFa3TKUq7",
+      "cu": 5.0,
+      "duration": 1.5,
+      "group": "creature",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.08:ratio=3:attack=3:release=120:makeup=2",
+        "sourceSha256": "1c1bda03da101f80d25353626b3f7eaa01b6bd4a4da56ddd6fa56be39de5fd7b",
+        "outputSha256": "052e68918f0badca997b18904cd0ef9cb845ed20d1002ee12945c311ab5fba68"
+      }
+    },
+    "bounty_accept": {
+      "asset": "asset_xC6jDkRKbcAHz2jqZ4GRGsj6",
+      "job": "job_Qu2aqXpG6zpo6x1EnChnDyNj",
+      "cu": 3,
+      "duration": 0.7,
+      "group": "ui",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.03:ratio=4:attack=1:release=80:makeup=2",
+        "sourceSha256": "8d143377f2f2886403acffc99c8cbf0c698f74ce1b4de2fb24b4b52f45f3f8c9",
+        "outputSha256": "57e9ffae63b43131d3f3845c60f3a23a5c9a40114c51e5026f8d5da24cedd362"
+      }
+    },
+    "cave_enter": {
+      "asset": "asset_W8yp4LVSrX3RSJMhgSh69Yhg",
+      "job": "job_Xb2ZVRVD4EFwBgdp793johgE",
+      "sourceSha256": "421f695325cd2244112aee2d3b46b6d193ffb4ca7275d9fe9c872bb2712e2797",
+      "cu": 5,
+      "duration": 1.5,
+      "group": "foley",
+      "loop": false,
+      "seed": 7474,
+      "postprocess": {
+        "filter": "acompressor=threshold=0.03:ratio=4:attack=1:release=80:makeup=2",
+        "sourceSha256": "421f695325cd2244112aee2d3b46b6d193ffb4ca7275d9fe9c872bb2712e2797",
+        "outputSha256": "c729df480ab4689d02def4afce17fe6290e1540d592e9f5e890459a97b0bb050"
+      }
+    },
+    "kobold_pick.1": {
+      "asset": "asset_GBvqvxzEezxXVe15ak6WyrHF",
+      "job": "job_qHYcvC4tm11PbR9mZ2EYFHrz",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "f6b61450f0d892194d5a4f6f1fc927cd0e6c97f68ee06cd9d9fede21eb57d54f",
+      "postprocess": {
+        "filter": "acompressor=threshold=0.008:ratio=12:attack=0.1:release=70:makeup=4",
+        "sourceSha256": "f6b61450f0d892194d5a4f6f1fc927cd0e6c97f68ee06cd9d9fede21eb57d54f",
+        "outputSha256": "176d8e476ae721bb8bdc215635272195c195a397f82a49245bdb01ff6d4c2fe2"
+      }
+    },
+    "kobold_pick.2": {
+      "asset": "asset_bmp8PheXBZSFU4JMCZLJyPKg",
+      "job": "job_qHYcvC4tm11PbR9mZ2EYFHrz",
+      "cu": 2.5,
+      "duration": 0.8,
+      "group": "creature",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "a6d5a5517ab6d22b4075f4506cd9e30146a765f33cbe7ad30bf66ad2a73de246",
+      "postprocess": {
+        "filter": "acompressor=threshold=0.01:ratio=8:attack=0.1:release=70:makeup=4",
+        "sourceSha256": "a6d5a5517ab6d22b4075f4506cd9e30146a765f33cbe7ad30bf66ad2a73de246",
+        "outputSha256": "cd558c09ba401a3c6c96bcc6b30d756168a0be096a5188f4ba7ba621cd7e1863"
+      }
+    },
+    "trinket_presented": {
+      "asset": "asset_9x7QZ1Eao7DsN6FJmnZk2L4x",
+      "job": "job_TkBS4C6SybjgaVLrMVYHvcmq",
+      "cu": 5,
+      "duration": 1.4,
+      "group": "ui",
+      "loop": false,
+      "seed": 7474,
+      "sourceSha256": "92dd7ef28a1af2966cd8d1c5acb5445e408d7f0de2df5966e6834afff9aef803"
     }
   }
 }

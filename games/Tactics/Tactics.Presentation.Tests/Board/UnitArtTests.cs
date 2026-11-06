@@ -10,6 +10,25 @@ public sealed class UnitArtTests
 
     private static bool OnDisk(string path) => File.Exists(Path.Combine(Pack.Root, path));
 
+    [Theory]
+    [InlineData("guard_captain", "dagna_holt", "dagna")]
+    [InlineData("noble", "celandine_marrowby", "celandine")]
+    [InlineData("bandit_captain", "rook", "rook")]
+    [InlineData("goblin_shaman_mother_skarrow", "mother_skarrow", "mother_skarrow")]
+    public void Approved_named_adults_and_their_preset_keys_select_the_compact_sprite(string preset, string character, string file)
+    {
+        var sprite = Art.Value.Sprite($"characters.{preset}")!;
+        Assert.Same(sprite, Art.Value.Sprite($"characters.{character}"));
+        Assert.Equal($"creatures/{file}.png", sprite.Path);
+        Assert.True(OnDisk(sprite.Path));
+        Assert.Equal((96, 96, 48, 84), (sprite.Width, sprite.Height, sprite.AnchorX, sprite.AnchorY));
+        Assert.Equal(.5f, sprite.PixelScale);
+        Assert.Equal(8, sprite.Directions.Distinct().Count());
+        Assert.Equal([0, 1, 2, 3, 4, 5, 4, 3, 2, 1], sprite.Idle.Frames);
+        Assert.Equal([6, 7, 8, 9, 10, 11], sprite.Anims["walk"].Frames);
+        Assert.Equal([12, 13, 14, 15, 16, 17, 16, 15, 14, 13], sprite.Anims["talk"].Frames);
+    }
+
     [Fact]
     public void A_sprite_has_its_sheets_animations_by_their_manifest_name_or_presentation_key()
     {
@@ -31,7 +50,10 @@ public sealed class UnitArtTests
     [InlineData("characters.bash", "attack")]
     [InlineData("nonsense", "attack")]
     public void An_animation_a_sheet_lacks_falls_back_to_one_it_has(string key, string anim)
-        => Assert.Equal(Pack.Frames("beasts", anim), Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames);
+    {
+        var wolf = Art.Value.Sprite("beasts.wolf.grey")!;
+        Assert.Same(wolf.Anims[anim], wolf.Anim(key));
+    }
 
     [Fact]
     public void A_dodge_on_a_sheet_with_none_stands_still_rather_than_swinging()
@@ -72,11 +94,75 @@ public sealed class UnitArtTests
         Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
         Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
         Assert.Equal(8, Art.Value.Sprite("characters.bandit")!.HeadTop);
-        Assert.Equal(4, fighter.HeadTop);
+        Assert.Equal(.5f, fighter.PixelScale);
+        Assert.Equal(32, fighter.FootprintWidth);
+    }
+
+    [Fact]
+    public void Tactical_atlas_rows_wrap_and_the_rear_facing_starts_after_all_front_rows()
+    {
+        var sprite = Art.Value.Sprite("characters.tiefling_warlock")!;
+        Assert.Equal("tactical/tiefling_warlock.png", sprite.Path);
+        Assert.True(OnDisk(sprite.Path));
+        Assert.Equal(new ArtRect(0, 160, 160, 160), sprite.Source(24, 0));
+        Assert.Equal(new ArtRect(0, 1280, 160, 160), sprite.Source(0, 1));
+        Assert.Equal(32, sprite.FootprintWidth);
+        Assert.Equal(80, sprite.WorldWidth);
+        Assert.Equal(80, sprite.WorldHeight);
+        Assert.Equal(Pack.Frames("characters", "walk"), sprite.Anim("walk").Frames);
+    }
+
+    [Fact]
+    public void Every_tactical_race_class_sheet_resolves_and_has_its_final_rear_frame_in_bounds()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "tactical", "manifest.json")));
+        var presets = doc.RootElement.GetProperty("presets").EnumerateArray().ToArray();
+        Assert.Equal(132, presets.Length);
+        foreach (var preset in presets)
+        {
+            var sprite = Art.Value.Sprite("characters." + preset.GetString())!;
+            Assert.True(OnDisk(sprite.Path));
+            var last = sprite.Source(188, 1);
+            Assert.InRange(last.X + last.Width, 1, 3840);
+            Assert.InRange(last.Y + last.Height, 1, 2560);
+            Assert.Equal(32, sprite.FootprintWidth);
+        }
+    }
+
+    [Fact]
+    public void A_pack_without_tactical_art_keeps_its_classic_character_format()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "arcbox-classic-art-" + Guid.NewGuid());
+        try
+        {
+            foreach (var set in new[] { "characters", "beasts", "bosses", "status", "icons", "ui" })
+            {
+                Directory.CreateDirectory(Path.Combine(root, set));
+                File.Copy(Path.Combine(Pack.Root, set, "manifest.json"), Path.Combine(root, set, "manifest.json"));
+            }
+            Directory.CreateDirectory(Path.Combine(root, "characters", "presets"));
+            File.Copy(Path.Combine(Pack.Root, "characters", "presets", "class_fighter.json"),
+                Path.Combine(root, "characters", "presets", "class_fighter.json"));
+            var sprite = UnitArt.Load(root).Sprite("characters.class_fighter")!;
+            Assert.Equal("characters/presets/class_fighter.png", sprite.Path);
+            Assert.Equal((32, 40, 1f), (sprite.Width, sprite.Height, sprite.PixelScale));
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, true);
+        }
+    }
+
+    [Fact]
+    public void Named_party_presets_use_their_race_and_class_without_replacing_enemy_art()
+    {
+        Assert.Equal("tactical/human_fighter.png", Art.Value.Sprite("characters.kara")!.Path);
+        Assert.Equal("tactical/elf_wizard.png", Art.Value.Sprite("characters.ilyra")!.Path);
+        Assert.Equal("characters/presets/goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
     }
 
     [Theory]
-    [InlineData("beasts.wolf.dire", "beasts/wolf_dire.png", 48, 48, 24, 44)]
     [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60)]
     [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90)]
     [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30)]
@@ -91,8 +177,9 @@ public sealed class UnitArtTests
     [Fact]
     public void A_monster_key_with_no_or_an_unknown_variant_takes_the_first()
     {
-        Assert.Equal("beasts/wolf_grey.png", Art.Value.Sprite("beasts.wolf")!.Path);
-        Assert.Equal("beasts/wolf_grey.png", Art.Value.Sprite("beasts.wolf.nonsense")!.Path);
+        var primary = Art.Value.Sprite("beasts.wolf.grey");
+        Assert.Same(primary, Art.Value.Sprite("beasts.wolf"));
+        Assert.Same(primary, Art.Value.Sprite("beasts.wolf.nonsense"));
     }
 
     [Theory]
@@ -198,7 +285,10 @@ public sealed class UnitArtTests
     public void Overhead_effects_follow_the_head_a_tall_sprite_lifts_them_a_small_one_lowers_them()
     {
         Assert.Equal(0, Art.Value.Sprite("characters.bandit")!.EffectShift);                // standard build
-        Assert.Equal(-4, Art.Value.Sprite("characters.class_fighter")!.EffectShift);        // large build
+        var fighter = Art.Value.Sprite("characters.class_fighter")!;
+        var dwarf = Art.Value.Sprite("characters.dwarf_fighter")!;
+        Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);
+        Assert.True(dwarf.EffectShift > fighter.EffectShift);
         Assert.Equal(-23, Art.Value.Sprite("bosses.troll.troll")!.EffectShift);
         Assert.Equal(7, Art.Value.Sprite("bosses.imp.crimson")!.EffectShift);
     }

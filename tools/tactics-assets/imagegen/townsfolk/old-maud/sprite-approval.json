@@ -1,0 +1,96 @@
+{
+  "character": "Old Maud",
+  "characterId": "old_maud",
+  "presetReference": "hermit",
+  "stage": "owner_full_set_tv_approved_installed",
+  "date": "2026-11-05",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 11,
+  "originalPath": "/workspace/generated_images/exec-16c7eda3-a43c-46b9-892e-d4e123cb4146.png",
+  "candidateSha256": "a40b8d016c9e55591f22048bed1b436c78aac7b5e7fef7a7a90a9b2c61e28fd1",
+  "reviewPreview": "candidate-1-preview.png",
+  "previewSha256": "803568e5bfe667511b823d7d7e6a2a70acc496f36068eb68b8bd92fe8b3a7c2a",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": true,
+  "animationApproval": "completion_authorized_full_set_pending",
+  "fullSetTvApproval": "approved",
+  "reviewNotes": [
+    "Appearance already approved; latest completion authorization: ok, do those.",
+    "All eight facings authored without mirroring; six source frames each idle/walk/talk. Slower5fps walk, blink and small empty-LEFT-hand talk gestures. Stick anatomicalRIGHT.",
+    "144 native frames,96x96 fixed frame/48,84anchor/0.5scale; stooped64-native body, shared96-colour palette, no per-frame recentering.",
+    "Six40x40 portraits and19.6s voiced TV review reuse the approved installed Gacrux town1.",
+    "Private hermit_old_maud variant plus named lore portrait only; generic hermit art and production pack unchanged.",
+    "170 focused tests, native memory343.70MiB/192.37MiB with4party under512. Full-set/TV approval before production installation."
+  ],
+  "voiceReview": {
+    "status": "owner_approved_recast_installed",
+    "reason": "Owner says her voice sounds too young. Maud is over100 and should sound ancient, papery, unhurried and lucid.",
+    "priorPreset": "Achernar",
+    "priorPitch": -1,
+    "replacementLineCount": 24,
+    "productionVoiceChanged": true,
+    "sample": "voice-sample.mp3",
+    "voice": "Gacrux",
+    "paidCU": 274,
+    "plan": "voice-recast-plan.json",
+    "ownerApproval": "perfect, let's go with that",
+    "validation": "voice-recast/batch/validation.json"
+  },
+  "ownerAppearanceApproval": {
+    "quote": "I approve Old Mauds, start Mother Skarrow",
+    "date": "2026-11-05",
+    "scope": "Approve existing Old Maud appearance; animation/portrait work authorized, queued while starting Mother Skarrow as requested."
+  },
+  "completionAuthorization": {
+    "quote": "ok, do those",
+    "date": "2026-11-05",
+    "scope": "Finish Old Maud animations and portraits; separate finished-set/TV approval before installation."
+  },
+  "speciesScale": {
+    "species": "human",
+    "pose": "stooped",
+    "bodyNative": 64,
+    "bodyWorld": 32,
+    "humanUprightReferenceNative": 72,
+    "humanUprightReferenceWorld": 36,
+    "validated": true
+  },
+  "completedSet": {
+    "status": "approved",
+    "date": "2026-11-05",
+    "sha256": {
+      "review_old_maud.png": "4517c9a2594a09d116a4a033e8d3d7fa4c81df46ef65485a32a5c1b7125ab4b3",
+      "review-sprite.json": "87013609bc1817bc5ac7e18e1a67cc0bb57eaa3a4ee9d49cc2a776a756f3991d",
+      "palette.json": "4983c7fc0806a2dc388c092a00cac2811cfa5c985ce52fce756521e856ee1eea",
+      "atlas-validation.json": "3e529cb02dd6bae01e0d5af034c9d620235db15e728144cf1b042dbb647c25f2",
+      "portraits-validation.json": "1505544abbe94df70f3f547bd8d2cd500838c7882ecd0d7f32cd7e6ee5749274",
+      "review-validation.json": "39cf1acca29fcc42238d7b1c20a9158ffab93f2c54331045b01b137aa51ecb0e",
+      "old_maud-directions-review.png": "3d75deae034715a763609182453b7a5c679178c18deaec9d44f75583de8365d3",
+      "old_maud-closeup-review.gif": "1f89ba4d682902bff6d0e6d9c81768c62498132a71dff65b5049e71eba749a78",
+      "old_maud-finished-review.mp4": "2a85bfb5b3f061cb9ad2bd639a660278d6fb574e90f781b691a9261fde712ef5",
+      "old_maud-portraits-review.png": "1c7c8a80afda61eea150f84073b0d5937b5720485a95edf0b16974646070133e",
+      "voice-sample.mp3": "acca375b2219c6ce5926c8717d9683d7088fa09779fa37a2ff96078fc1dfddd8",
+      "voice-sample.json": "65aad48d7422f13c7d3614a4598ba70e603c894c9d7917f7ffb82dbfc77425ab",
+      "old_maud-eight-direction-idle.gif": "0ba52c39d91b28c2cecba1c04a5338af77f482e865182763f444da641a8a7278",
+      "old_maud-eight-direction-walk.gif": "4866d0694a98b4a7d456e28ba2ec33e2715cd86350166c8d40b8767997c5963f",
+      "old_maud-eight-direction-talk.gif": "0c8f799ab63d39e0708f8d356f4a7307e5338274a44b2fe4ccf91bf0792ebe7a",
+      "portraits/old_maud_idle.png": "ef924a7b67d648d862a5da2cbfdf90521809788b6a135b821511a3a78a3a420f",
+      "portraits/old_maud_hurt.png": "97abde132d685888098a80a9a62c418b38e12da394d2918887e2f5d08aaca3df",
+      "portraits/old_maud_happy.png": "cdcfff679d811212a09c81f7a41c0d183eb218d112d79ab6285642065b6d79b5",
+      "portraits/old_maud_angry.png": "7c483c017287a1e6b363d8436d62362afb9cc6e9c4b63fe155fda3d1c98e13ee",
+      "portraits/old_maud_sad.png": "ff9fed4428da5c09df81b0ec72dbbb501cf2c40092914846e6a864d1407704fc",
+      "portraits/old_maud_surprised.png": "c5b489abd2dfaa2a618df40c1be0f69121998c617ad5ef5b743db5fe9088f8b8"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/old-maud-imagegen/ashen_ford-shots/world-old-maud.png",
+      "sha256": "18eac72c57424167e4fdd64ab37e18710ab0d1dd50d6da67292e94545f04389d"
+    },
+    "productionInstalled": true
+  },
+  "ownerFullSetApproval": {
+    "quote": "I approve",
+    "date": "2026-11-05",
+    "scope": "Completed Old Maud animation, portrait and TV review"
+  }
+}

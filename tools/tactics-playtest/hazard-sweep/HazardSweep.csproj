@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../games/Tactics/Tactics.Game/Tactics.Game.csproj" />
+    <ProjectReference Include="../../../src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj" />
+  </ItemGroup>
+</Project>

@@ -13,7 +13,7 @@ public sealed class CharacterTests
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
@@ -31,6 +31,26 @@ public sealed class CharacterTests
     private static string Background => Rules.Backgrounds.Keys.First();
 
     private static JsonElement Json(object o) => JsonSerializer.SerializeToElement(o, ArcJson.Options);
+
+    [Theory]
+    [InlineData("fighter", true)]
+    [InlineData("wizard", false)]
+    public void A_remake_keeps_the_awarded_trinket_and_the_portal_explains_dormancy(string cls, bool active)
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        var character = SheetBuilder.DefaultCharacter("Ana", "human", "fighter", null, 2, Rules) with { Trinket = "ember_claw_gauntlet" };
+        var doc = TacticsDocument.New with { PartyLevel = 2, Members = Ordinal.Map((Ana.Value, new MemberRecord(character, 1000))) };
+        var changed = rules.Handle(Info, doc.ToJson(), Ana, "createCharacter", Json(new { race = "human", @class = cls,
+            background = Background, scores = Scores(), trinket = "kobold_surveyors_lens" }));
+        Assert.Null(changed.Error);
+        var after = TacticsDocument.Read(changed.Document!.Value).For(Ana)!.Character;
+        Assert.Equal("ember_claw_gauntlet", after.Trinket);
+        var shown = rules.PortalView(Info, changed.Document.Value, Ana).GetProperty("me").GetProperty("trinket");
+        Assert.Equal("ember_claw_gauntlet", shown.GetProperty("id").GetString());
+        Assert.Equal(active, shown.GetProperty("active").GetBoolean());
+        Assert.Equal("Fighter", shown.GetProperty("className").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(shown.GetProperty("text").GetString()));
+    }
 
     [Fact]
     public void Point_buy_costs_and_limits()
@@ -138,6 +158,33 @@ public sealed class CharacterTests
         Assert.Equal("You've used your free remake; this character is yours now.",
             rules.Handle(Info, remade.Document!.Value, Ana, "createCharacter", create).Error);
         Assert.Equal(JsonValueKind.Null, rules.PortalView(Info, remade.Document!.Value, Ana).GetProperty("options").ValueKind);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Remakes_keep_purchased_items_injuries_and_gold_before_and_after_fighting(bool fought)
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        var create = Json(new { race = "human", @class = "fighter", background = Background,
+            scores = new { str = 15, dex = 15, con = 15, @int = 8, wis = 8, cha = 8 } });
+        var made = rules.Handle(Info, rules.NewDocument(Info), Ana, "createCharacter", create);
+        var doc = TacticsDocument.Read(made.Document!.Value);
+        var mine = doc.For(Ana)!;
+        doc = doc with { Members = doc.Members.SetItem(Ana.Value, mine with
+        {
+            Gold = 75, Fought = fought,
+            Character = mine.Character with { Bag = [new ItemStack(new ItemId("smoke_bomb"), 2)], Injuries = [new InjuryId("black_eye")] },
+        }) };
+        var changed = rules.Handle(Info, doc.ToJson(), Ana, "createCharacter", Json(new { race = "elf", @class = "wizard",
+            background = Background, scores = new { str = 8, dex = 15, con = 15, @int = 15, wis = 8, cha = 8 } }));
+        Assert.Null(changed.Error);
+        var after = TacticsDocument.Read(changed.Document!.Value).For(Ana)!;
+        Assert.Equal("wizard", after.Character.Class);
+        Assert.Equal([new ItemStack(new ItemId("smoke_bomb"), 2)], after.Character.Bag);
+        Assert.Equal([new InjuryId("black_eye")], after.Character.Injuries);
+        Assert.Equal(75, after.Gold);
+        Assert.Equal(fought, after.Remade);
     }
 
     [Fact]

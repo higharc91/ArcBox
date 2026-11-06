@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.d5c0ff43.wav",
+  "sourceSha256": "2e8026a608487af8fbd41edde997144de492c6d8d3e81e244e67fcec21fca7ee",
+  "duration": 12.36,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.640000000000001,
+      "text": " Then it is agreed tell your mayor the old mother will give back his bridge"
+    },
+    {
+      "start": 8.6,
+      "end": 11.6,
+      "text": " Tell him she is counting the sacks"
+    }
+  ],
+  "text": "Then it is agreed tell your mayor the old mother will give back his bridge Tell him she is counting the sacks",
+  "secondsToTranscribe": 2.229
+}

@@ -7,7 +7,7 @@
     "trigger": "beforeHit",
     "cause": {
       "kind": "beforeHit",
-      "actor": "goblin.4",
+      "actor": "goblin.1",
       "target": "hero4",
       "ability": "common.attack",
       "roll": {
@@ -43,6 +43,6 @@
     ]
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:01:26.05\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:01:22.95\u002B00:00",
   "header": null
 }

@@ -1,0 +1,46 @@
+{
+  "place-square-with-people.png": {
+    "source": "world-town-square.png",
+    "sha256": "5df122a3abe127a984477f4eda9a97ff1b380a9921d6626946cc1ce2b5468312"
+  },
+  "place-emberwick.png": {
+    "source": "world-granary-yard.png",
+    "sha256": "4e46b6ea266bdde29dc29317c6fdc2fff34deed0582fba7ca94bdfa6632d6bd7"
+  },
+  "place-road.png": {
+    "source": "world-windmill-road.png",
+    "sha256": "4679c20bfc530012404de6c24de3eb0a75e725567c16103078e4731c54430529"
+  },
+  "place-maud.png": {
+    "source": "world-mauds-hut.png",
+    "sha256": "9fd80d096be32725827115212ea3a93ee224373a304c4dec235898e653dddbdc"
+  },
+  "place-hills.png": {
+    "source": "world-high-hills.png",
+    "sha256": "f760fb8a0c98723a29bb37fc0da2f81cdadae6a8a16b54f2de574673ef0d4a91"
+  },
+  "place-ford.png": {
+    "source": "parley-west.png",
+    "sha256": "237c6bc3cbd61bf59a1ecc30be21c9df7337d6f2a066448c0f8442b4d9c80298"
+  },
+  "place-fields.png": {
+    "source": "world-autumn-fields.png",
+    "sha256": "2469244ceab1be399c0c249feb0d3dcf34383d21a8e9b1409d46034e37d84098"
+  },
+  "place-docks.png": {
+    "source": "world-docks.png",
+    "sha256": "96d603ff8013a2cbb1618a5502d99be08f4d5e1a4a5072e4e9455715171599fd"
+  },
+  "place-camp.png": {
+    "source": "world-skarrow-camp.png",
+    "sha256": "0e77b186abf5839206d0612bf3fa962a65b3128d4c9f88cff038afb7b68eabf0"
+  },
+  "place-burned.png": {
+    "source": "world-burned-ruins.png",
+    "sha256": "1ec48ba8e69d4a556c7f135779ad4fdad2641c8738d8cb7cc235c0da6e1c48cd"
+  },
+  "place-overview.png": {
+    "source": "Native Godot, approved installed content, look 101,58; stand 104,61; parley state",
+    "sha256": "f9b665ec5a48ab53805dbec4e5ef145738d23dad9df4f2a5edc7b7d7e20dc3a4"
+  }
+}

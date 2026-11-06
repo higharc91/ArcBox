@@ -1,4 +1,6 @@
+using System.IO.Compression;
 using System.Text.Json;
+using System.Threading.RateLimiting;
 using ArcBox.Sdk;
 using ArcBox.Server;
 using ArcBox.Server.Campaigns;
@@ -12,8 +14,8 @@ using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
 using ArcBox.Server.Storage;
 using Counter.Logic;
-using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
@@ -60,11 +62,16 @@ builder.Services
 
 // The portal API (spec §3.4): a fixed window per remote IP. Portal:PermitsPerMinute lowers it, for tests.
 var portalPermits = Math.Max(1, builder.Configuration.GetValue("Portal:PermitsPerMinute", 60));
+// Behind a proxy every request comes from the proxy, so all clients would share one window. Portal:ClientIpHeader names the
+// header the proxy puts the client's address in (Fly.io: Fly-Client-IP). Set it only behind a proxy that overwrites that
+// header, or a client could pick its own window (issue #60's deploy note).
+var clientIpHeader = builder.Configuration.GetValue<string?>("Portal:ClientIpHeader");
 builder.Services.AddRateLimiter(o =>
 {
     o.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     o.AddPolicy(CampaignEndpoints.RateLimitPolicy, http => RateLimitPartition.GetFixedWindowLimiter(
-        http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        (string.IsNullOrEmpty(clientIpHeader) ? null : http.Request.Headers[clientIpHeader].FirstOrDefault() is { Length: > 0 } forwarded ? forwarded : null)
+            ?? http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
         _ => new FixedWindowRateLimiterOptions
         {
             PermitLimit = portalPermits,
@@ -73,8 +80,20 @@ builder.Services.AddRateLimiter(o =>
         }));
 });
 
+// The campaign portal's views run to tens of kilobytes of JSON (Wardenflame's character details), sent on every command's reply too.
+builder.Services.AddResponseCompression(o =>
+{
+    o.EnableForHttps = true;
+    o.Providers.Add<BrotliCompressionProvider>();
+    o.Providers.Add<GzipCompressionProvider>();
+    o.MimeTypes = ["application/json"];
+});
+builder.Services.Configure<BrotliCompressionProviderOptions>(o => o.Level = CompressionLevel.Fastest);
+builder.Services.Configure<GzipCompressionProviderOptions>(o => o.Level = CompressionLevel.Fastest);
+
 var app = builder.Build();
 
+app.UseWhen(c => c.Request.Path.StartsWithSegments("/api/campaigns"), b => b.UseResponseCompression());
 app.UsePhoneApp();
 app.UseRateLimiter();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);

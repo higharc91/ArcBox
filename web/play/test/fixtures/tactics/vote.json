@@ -29,9 +29,10 @@
     "chosen": null,
     "tie": false,
     "decider": null,
-    "away": []
+    "away": [],
+    "vip": false
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:02:03.4001248\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:02:04.3001664\u002B00:00",
   "header": null
 }

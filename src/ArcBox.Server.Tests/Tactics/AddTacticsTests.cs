@@ -11,13 +11,15 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Tactics.Game;
+using Tactics.Logic;
 
 namespace ArcBox.Server.Tests.Tactics;
 
 public class AddTacticsTests
 {
     /// <summary>The server's own wiring, with the content root at the repository's <c>content</c> folder.</summary>
-    private static ServiceProvider Build(LogSink? log = null, string environment = "Test", Dictionary<string, string?>? settings = null)
+    private static ServiceProvider Build(LogSink? log = null, string environment = "Test", Dictionary<string, string?>? settings = null,
+        string? contentRoot = null)
     {
         var repo = AppContext.BaseDirectory;
         while (!File.Exists(Path.Combine(repo, "ArcBox.slnx")))
@@ -28,13 +30,132 @@ public class AddTacticsTests
             if (log is not null)
                 b.AddProvider(log).SetMinimumLevel(LogLevel.Debug);
         });
-        services.AddOptions<ContentOptions>().Configure(o => o.Root = Path.Combine(repo, "content"));
+        services.AddOptions<ContentOptions>().Configure(o => o.Root = contentRoot ?? Path.Combine(repo, "content"));
         services.AddSingleton<IHostEnvironment>(new Env(repo) { EnvironmentName = environment });
         if (settings is not null)
             services.AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection(settings).Build());
         services.AddTactics();
         services.AddSingleton<IGameRegistry, GameRegistry>();
         return services.BuildServiceProvider();
+    }
+
+    [Theory]
+    [InlineData("Development", null, Difficulty.Normal)]
+    [InlineData("Development", "Story", Difficulty.Story)]
+    [InlineData("Development", "Hard", Difficulty.Hard)]
+    [InlineData("Production", "Story", Difficulty.Normal)]
+    [InlineData("Test", "Story", Difficulty.Normal)]
+    public void Harness_settings_keep_normal_defaults_and_stay_development_only(string environment, string? difficulty, Difficulty expected)
+    {
+        using var sp = Build(environment: environment, settings: new Dictionary<string, string?>
+        {
+            ["Tactics:Difficulty"] = difficulty,
+            ["Tactics:BattleSeed"] = "76",
+        });
+        var game = Assert.IsType<TacticsGame>(sp.GetRequiredService<IGameRegistry>().Create(TacticsGame.Id));
+        Assert.Equal(expected, game.BattleDifficulty);
+        Assert.Equal(environment == "Development" ? 76UL : (ulong?)null, game.BattleSeed);
+    }
+
+    /// <summary>
+    /// The pack loads as the server starts, not in the first room's game call: a call over the rooms' watchdog closes the room as
+    /// hung, and the pack takes about 1.4 s to load on an idle machine, which a loaded one ran over in the end-to-end runs.
+    /// </summary>
+    [Fact]
+    public async Task The_pack_and_lore_load_as_the_server_starts()
+    {
+        using var sp = Build();
+        var (pack, lore) = (sp.GetRequiredService<Lazy<RulesPack>>(), sp.GetRequiredService<Lazy<LoreBook>>());
+        Assert.False(pack.IsValueCreated);
+
+        foreach (var service in sp.GetServices<IHostedService>())
+            await service.StartAsync(TestContext.Current.CancellationToken);
+
+        for (var waited = 0; waited < 300 && !(pack.IsValueCreated && lore.IsValueCreated); waited++)
+            await Task.Delay(100, TestContext.Current.CancellationToken);
+        Assert.True(pack.IsValueCreated && lore.IsValueCreated);
+    }
+
+    [Fact]
+    public async Task A_pack_that_wont_load_is_only_logged_at_start_and_still_fails_the_first_room()
+    {
+        var log = new LogSink();
+        var empty = Directory.CreateTempSubdirectory("arcbox-no-content").FullName;
+        try
+        {
+            using var sp = Build(log, contentRoot: empty);
+            var hosted = sp.GetServices<IHostedService>().ToList();
+            foreach (var service in hosted)
+                await service.StartAsync(TestContext.Current.CancellationToken);
+            for (var waited = 0; waited < 300 && !log.Entries.Any(e => e.Level == LogLevel.Warning); waited++)
+                await Task.Delay(100, TestContext.Current.CancellationToken);
+
+            Assert.Contains(log.Entries, e => e.Level == LogLevel.Warning && e.Text.Contains("Tactics content", StringComparison.Ordinal));
+            Assert.ThrowsAny<Exception>(() => sp.GetRequiredService<Lazy<RulesPack>>().Value);
+            foreach (var service in hosted)
+                await service.StopAsync(TestContext.Current.CancellationToken);
+        }
+        finally
+        {
+            Directory.Delete(empty, recursive: true);
+        }
+    }
+
+    /// <summary>
+    /// Review (rules NOTE 2 and 3): lore the game would play but never show (<see cref="LoreBook.Warnings"/>) is logged as the server
+    /// starts, as <c>tools/tactics-lore/check.py</c> refuses it. Here the base pack's art and rules, with a lore pack of one such scene.
+    /// </summary>
+    [Fact]
+    public async Task Lore_that_can_never_show_an_option_is_logged_at_start()
+    {
+        var log = new LogSink();
+        var repo = AppContext.BaseDirectory;
+        while (!File.Exists(Path.Combine(repo, "ArcBox.slnx")))
+            repo = Path.GetDirectoryName(repo)!;
+        var real = Path.Combine(repo, "content", TacticsGame.Id, "base");
+        var root = Directory.CreateTempSubdirectory("arcbox-lore-warning").FullName;
+        try
+        {
+            var pack = Path.Combine(root, TacticsGame.Id, "base");
+            Directory.CreateDirectory(pack);
+            foreach (var dir in Directory.EnumerateDirectories(real).Where(d => Path.GetFileName(d) != "lore"))
+            {
+                var target = Path.Combine(pack, Path.GetFileName(dir));
+                Directory.CreateDirectory(target);
+                foreach (var child in Directory.EnumerateDirectories(dir, "*", SearchOption.AllDirectories))
+                    Directory.CreateDirectory(Path.Combine(target, Path.GetRelativePath(dir, child)));
+                foreach (var file in Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories))
+                    File.Copy(file, Path.Combine(target, Path.GetRelativePath(dir, file)));
+            }
+            var lore = Directory.CreateDirectory(Path.Combine(pack, "lore", "scenes")).Parent!.FullName;
+            File.WriteAllText(Path.Combine(lore, "pack.json"), """{ "id": "base", "loreVersion": 1, "files": ["arcs.json", "scenes/s.json"] }""");
+            File.WriteAllText(Path.Combine(lore, "arcs.json"), """
+                { "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "talk", "kind": "story" }] }] }
+                """);
+            File.WriteAllText(Path.Combine(lore, "scenes", "s.json"), """
+                { "scenes": [{ "id": "s", "beat": "talk", "cast": ["narrator"], "start": "hub", "nodes": [
+                    { "id": "hub", "lines": [{ "id": "l1", "speaker": "narrator", "text": "Hub." }], "options": [
+                      { "id": "again", "label": "Again.", "to": "hub" }, { "id": "on", "label": "On.", "to": "done" } ] },
+                    { "id": "done", "lines": [{ "id": "l2", "speaker": "narrator", "text": "Done." }], "end": true } ] }] }
+                """);
+
+            using var sp = Build(log, contentRoot: root);
+            var hosted = sp.GetServices<IHostedService>().ToList();
+            foreach (var service in hosted)
+                await service.StartAsync(TestContext.Current.CancellationToken);
+            for (var waited = 0; waited < 300 && !log.Entries.Any(e => e.Text.Contains("content loaded", StringComparison.Ordinal)); waited++)
+                await Task.Delay(100, TestContext.Current.CancellationToken);
+
+            var warning = Assert.Single(log.Entries, e => e.Level == LogLevel.Warning);
+            Assert.Contains("Tactics lore:", warning.Text, StringComparison.Ordinal);
+            Assert.Contains("the option 'again' of the node 'hub' of the scene 's' leads back to its own node", warning.Text, StringComparison.Ordinal);
+            foreach (var service in hosted)
+                await service.StopAsync(TestContext.Current.CancellationToken);
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
     }
 
     [Fact]

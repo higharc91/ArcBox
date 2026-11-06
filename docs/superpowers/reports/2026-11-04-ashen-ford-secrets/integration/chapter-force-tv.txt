@@ -1,0 +1,1711 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+SHOT /workspace/issue81/integration/chapter-force/tv/001-connect.png
+NARRATOR Google
+ROOM WKFN
+LOBBY WKFN
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+SHOT /workspace/issue81/integration/chapter-force/tv/002-lobby.png
+Content for tactics: loading base@26f50687
+SHOT /workspace/issue81/integration/chapter-force/tv/003-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/004-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/005-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/006-lobby.png
+Content for tactics: loading base@26f50687
+SHOT /workspace/issue81/integration/chapter-force/tv/007-lobby.png
+Waiting for tactics content
+SHOT /workspace/issue81/integration/chapter-force/tv/008-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/009-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/010-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/011-lobby.png
+SHOT /workspace/issue81/integration/chapter-force/tv/012-tactics-loading.png
+Content tactics/base@26f50687 installed: fetched 9 of 4758 files, 279374 bytes + 647741 bytes of index; reused 4749 files, 194395472 bytes; evicted tactics/base/35e39829
+Content for tactics ready
+Tactics content: base at /home/agent/.local/share/godot/app_userdata/ArcBox/content/tactics/base/26f506870079191d989d659727b0ae3f3dadb3211d1625e0992d68949d39d439
+STORY marker ch1_mayors_request 33 59 alert
+QUEST tracker none
+QUEST journal closed
+AUDIO Music title
+TACTICS screen tactics-muster-0
+TACTICS stage Walking
+SHOT /workspace/issue81/integration/chapter-force/tv/013-tactics.png
+SHOT /workspace/issue81/integration/chapter-force/tv/014-tactics-muster-0.png
+TACTICS screen tactics-muster-1
+SHOT /workspace/issue81/integration/chapter-force/tv/015-tactics-muster-1.png
+TACTICS screen tactics-muster-2
+SHOT /workspace/issue81/integration/chapter-force/tv/016-tactics-muster-2.png
+TACTICS screen tactics-muster-3
+SHOT /workspace/issue81/integration/chapter-force/tv/017-tactics-muster-3.png
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+TACTICS screen tactics-exploration
+TACTICS walk snapped to 26.5 58.5
+WALKAT 1793880364956 0 0 26.50 58.50 2.24 Bo 26.50 58.50 Ana 25.36 59.36 Dee 26.45 57.41 Cy 24.57 58.52
+SHOT /workspace/issue81/integration/chapter-force/tv/018-tactics-world-loading.png
+TACTICS world open: ground 138 ms, plan+light 772 ms, bake 91 ms, total 1000 ms, 0 blocks to record, textures 421.3 MB, buffers 8.2 MB, engine 121.3 MB, managed 61.4 MB
+SHOT /workspace/issue81/integration/chapter-force/tv/019-tactics-exploration.png
+SHOT /workspace/issue81/integration/chapter-force/tv/020-tactics-story-marker.png
+WALK 1 27 57 1793880382905
+WALKAT 1793880382914 1 0 26.72 58.28 2.24 Bo 26.72 58.28 Ana 25.36 59.36 Dee 26.45 57.41 Cy 24.57 58.52
+AUDIO Sfx step_stone
+WALKAT 1793880383184 1 1 27.37 57.63 2.44 Bo 27.37 57.63 Ana 25.52 59.24 Dee 26.45 57.41 Cy 24.57 58.52
+WALK 2 28 56 1793880383280
+AUDIO Sfx step_stone
+WALKAT 1793880383469 2 1 28.17 56.83 2.70 Bo 28.17 56.83 Ana 26.23 58.70 Dee 26.47 57.82 Cy 24.57 58.52
+WALK 3 29 55 1793880383710
+AUDIO Sfx step_stone
+WALKAT 1793880383795 3 1 28.89 56.11 3.13 Bo 28.89 56.11 Ana 26.68 58.31 Dee 26.49 58.36 Cy 25.46 58.51
+WALK 4 30 56 1793880384073
+WALKAT 1793880384084 4 0 29.59 55.61 2.63 Bo 29.59 55.61 Ana 27.63 57.37 Dee 27.05 57.92 Cy 26.22 58.50
+AUDIO Sfx step_stone
+WALKAT 1793880384350 4 1 30.31 56.31 1.88 Bo 30.31 56.31 Ana 28.62 56.38 Dee 28.04 56.95 Cy 26.69 58.25
+AUDIO Sfx step_stone
+WALK 5 31 57 1793880384511
+AUDIO Voice clip ch1_mayor_open_1.15c4e800.ogg tactics.story: Emberwick, at the Ashen Ford. The ground is warm underfoot, and the river steams in the evening cold.
+STORY 1 ch1_mayor_open_1 said lines
+STORY marker ch1_mayors_request 33 59 -
+TACTICS screen tactics-story
+WALKAT 1793880384678 5 0 30.90 56.90 1.94 Bo 30.90 56.90 Ana 29.65 55.65 Dee 29.07 55.93 Cy 27.69 57.30
+AUDIO Sfx step_stone
+WALKAT 1793880384937 5 0 31.50 57.50 1.55 Bo 31.50 57.50 Ana 30.41 56.41 Dee 29.83 55.83 Cy 28.45 56.54
+WALKSTATS frames 27 ms median 78.43 p99 117.20 worst 117.20 over16 27; screen px a frame: raw median 11.0 worst 44.9 flips 2+3; drawn median 11.0 worst 44.6 flips 2+6; ground median 26.2 worst 47.4 flips 1+0
+AUDIO Voice clip ch1_mayor_open_2.8b0008a1.ogg tactics.story: It used to be warmer. Nobody in town will say so.
+STORY 2 ch1_mayor_open_2 said lines
+WALKAT 1793880385215 5 0 31.50 57.50 1.33 Bo 31.50 57.50 Ana 30.39 56.77 Dee 30.45 56.05 Cy 29.26 56.54
+WALKAT 1793880385504 5 0 31.50 57.50 1.19 Bo 31.50 57.50 Ana 30.37 57.10 Dee 31.02 56.25 Cy 30.00 56.53
+SHOT /workspace/issue81/integration/chapter-force/tv/021-tactics-story-line-narrator.png
+AUDIO Voice clip ch1_mayor_open_3.193c7bc1.ogg tactics.story: You came! I told Bree you'd come. The mayor's been asking for you all day, and he's ever so cross.
+STORY 3 ch1_mayor_open_3 said lines
+WALKAT 1793880385883 5 0 31.50 57.50 1.34 Bo 31.50 57.50 Ana 30.36 57.29 Dee 31.33 56.36 Cy 30.41 56.52
+WALKAT 1793880386177 5 0 31.50 57.50 1.41 Bo 31.50 57.50 Ana 30.36 57.34 Dee 31.41 56.39 Cy 30.52 56.52
+AUDIO Voice clip ch1_mayor_open_4.66fb5c56.ogg tactics.story: Pip, let them breathe. You lot, there's stew when he's done with you. Don't let him talk it cold.
+STORY 4 ch1_mayor_open_4 said lines
+WALKAT 1793880386478 5 0 31.50 57.50 1.44 Bo 31.50 57.50 Ana 30.36 57.35 Dee 31.44 56.40 Cy 30.55 56.52
+SHOT /workspace/issue81/integration/chapter-force/tv/022-tactics-story-line-speaker.png
+AUDIO Voice clip ch1_mayor_halden_1.a28a68d2.ogg tactics.story: Friends. Thank you for coming. I'd shake every hand, but the light's going, and so is our grain.
+STORY 5 ch1_mayor_halden_1 said lines
+WALKAT 1793880386927 5 0 31.50 57.50 1.45 Bo 31.50 57.50 Ana 30.36 57.36 Dee 31.45 56.41 Cy 30.57 56.52
+SHOT /workspace/issue81/integration/chapter-force/tv/023-tactics-world-stopped-32-58.png
+AUDIO Voice clip ch1_mayor_halden_2.9a96527a.ogg tactics.story: The Skarrow goblins took the ford bridge nine days ago. Every cart of winter flour comes over it.
+STORY 6 ch1_mayor_halden_2 said lines
+AUDIO Voice clip ch1_mayor_halden_3.79860a20.ogg tactics.story: Killed two of my guards doing it. Coll and Annet. Good people.
+STORY 7 ch1_mayor_halden_3 said lines
+AUDIO Voice clip ch1_mayor_halden_4.26b72526.ogg tactics.story: The new moon is eleven days off. After that the last carts stop running, and Emberwick starts eating its seed corn.
+STORY 8 ch1_mayor_halden_4 said asking
+SHOT /workspace/issue81/integration/chapter-force/tv/024-tactics-story-choice-made.png
+AUDIO Voice clip ch1_mayor_goblins_1.6abdd4d0.ogg tactics.story: A hill clan. Their chief is an old woman they call Mother Skarrow. I've never met her, and I don't need to.
+STORY 9 ch1_mayor_goblins_1 said lines
+AUDIO Voice clip ch1_mayor_goblins_2.b798fc89.ogg tactics.story: Forty winters she's led them. Clever. She'll smile at you while her archers find the range.
+STORY 10 ch1_mayor_goblins_2 said lines
+AUDIO Voice clip ch1_mayor_goblins_3.3d5c0336.ogg tactics.story: She sent a little one down for bread in the spring. Asked at the granary gate, polite as you like.
+STORY 11 ch1_mayor_goblins_3 said lines
+SHOT /workspace/issue81/integration/chapter-force/tv/025-tactics-story-line-speaker.png
+AUDIO Voice clip ch1_mayor_goblins_4.f3a0d422.ogg tactics.story: Bree. Not now.
+STORY 12 ch1_mayor_goblins_4 said lines
+AUDIO Voice clip ch1_mayor_close_1.bfddf799.ogg tactics.story: Across the square, someone in a deep hood leans in the doorway of the Last Coal. They have not touched the cup in their hand.
+STORY 13 ch1_mayor_close_1 said lines
+AUDIO Voice clip ch1_mayor_close_2.b7ee95c8.ogg tactics.story: That one came the same week as the goblins. Never eats. Never sleeps that I've seen. Bree says it's rude to stare.
+STORY 14 ch1_mayor_close_2 said lines
+AUDIO Voice clip ch1_mayor_close_3.a49692f1.ogg tactics.story: Go and look at your bridge. It's older than your town, and it has seen this before.
+STORY 15 ch1_mayor_close_3 said lines
+AUDIO Voice clip ch1_mayor_close_4.7cdbfd11.ogg tactics.story: Come down to the bridge end with me. You should see what we're up against before you tell me anything.
+STORY 16 ch1_mayor_close_4 said lines
+STORY marker ch1_the_ford_choice 94 59 alert
+TACTICS screen tactics-exploration
+WALK 6 32 56 1793880406561
+WALKAT 1793880406570 6 0 31.59 57.41 1.36 Bo 31.59 57.41 Ana 30.39 57.33 Dee 31.38 56.40 Cy 30.51 56.47
+AUDIO Sfx step_stone
+WALKAT 1793880406847 6 1 32.24 56.76 1.55 Bo 32.24 56.76 Ana 30.71 57.03 Dee 30.63 56.29 Cy 29.91 55.91
+WALK 7 33 57 1793880406961
+AUDIO Sfx step_stone
+WALKAT 1793880407141 7 1 32.93 56.93 1.78 Bo 32.93 56.93 Ana 31.17 57.24 Dee 30.43 56.36 Cy 29.78 55.77
+WALK 8 34 58 1793880407385
+AUDIO Sfx step_stone
+WALKAT 1793880407396 8 0 33.58 57.58 1.62 Bo 33.58 57.58 Ana 32.12 56.88 Dee 31.13 57.11 Cy 30.49 56.49
+WALKAT 1793880407652 8 1 34.18 58.18 1.60 Bo 34.18 58.18 Ana 33.05 57.05 Dee 32.03 56.97 Cy 31.39 57.39
+AUDIO Sfx step_stone
+WALK 9 35 59 1793880407809
+WALKAT 1793880407914 9 1 34.80 58.80 1.44 Bo 34.80 58.80 Ana 33.97 57.97 Dee 32.95 56.95 Cy 32.32 56.68
+AUDIO Sfx step_stone
+WALKAT 1793880408203 9 1 35.45 59.45 1.26 Bo 35.45 59.45 Ana 34.81 58.81 Dee 33.92 57.92 Cy 33.28 57.28
+WALK 10 36 60 1793880408242
+AUDIO Sfx step_stone
+WALKAT 1793880408479 10 1 36.13 60.13 0.90 Bo 36.13 60.13 Ana 35.49 59.49 Dee 34.86 58.86 Cy 34.22 58.22
+WALK 11 37 60 1793880408655
+AUDIO Sfx step_stone
+WALKAT 1793880408751 11 1 36.87 60.50 0.90 Bo 36.87 60.50 Ana 36.07 60.07 Dee 35.44 59.44 Cy 34.80 58.80
+WALK 12 38 61 1793880408977
+WALKAT 1793880409031 12 1 37.68 60.68 0.90 Bo 37.68 60.68 Ana 36.80 60.50 Dee 36.03 60.03 Cy 35.39 59.39
+AUDIO Sfx step_stone
+WALKAT 1793880409310 12 1 38.31 61.31 0.90 Bo 38.31 61.31 Ana 37.67 60.67 Dee 36.79 60.50 Cy 36.02 60.02
+WALK 13 39 61 1793880409396
+AUDIO Sfx step_stone
+WALKAT 1793880409588 13 1 39.14 61.50 0.90 Bo 39.14 61.50 Ana 38.27 61.27 Dee 37.64 60.64 Cy 36.75 60.50
+WALK 14 40 61 1793880409676
+AUDIO Sfx step_stone
+WALKAT 1793880409840 14 1 40.01 61.50 0.90 Bo 40.01 61.50 Ana 39.11 61.50 Dee 38.25 61.25 Cy 37.61 60.61
+WALK 15 41 61 1793880409995
+AUDIO Sfx step_stone
+WALKAT 1793880410116 15 1 40.95 61.50 0.90 Bo 40.95 61.50 Ana 40.05 61.50 Dee 39.15 61.50 Cy 38.27 61.27
+WALK 16 42 61 1793880410281
+AUDIO Sfx step_stone
+WALKAT 1793880410417 16 1 42.00 61.50 0.90 Bo 42.00 61.50 Ana 41.10 61.50 Dee 40.20 61.50 Cy 39.30 61.50
+WALK 17 43 61 1793880410585
+WALKAT 1793880410702 17 1 43.02 61.50 0.90 Bo 43.02 61.50 Ana 42.12 61.50 Dee 41.22 61.50 Cy 40.32 61.50
+AUDIO Sfx step_stone
+WALK 18 44 61 1793880410907
+WALKAT 1793880410968 18 1 43.84 61.50 0.90 Bo 43.84 61.50 Ana 42.94 61.50 Dee 42.04 61.50 Cy 41.14 61.50
+AUDIO Sfx step_stone
+WALK 19 45 61 1793880411170
+WALKAT 1793880411227 19 1 44.70 61.50 0.90 Bo 44.70 61.50 Ana 43.80 61.50 Dee 42.90 61.50 Cy 42.00 61.50
+AUDIO Sfx step_stone
+WALK 20 46 62 1793880411513
+WALKAT 1793880411520 20 0 45.61 61.61 0.90 Bo 45.61 61.61 Ana 44.72 61.50 Dee 43.82 61.50 Cy 42.92 61.50
+AUDIO Sfx step_stone
+WALKAT 1793880411782 20 1 46.18 62.18 0.90 Bo 46.18 62.18 Ana 45.54 61.54 Dee 44.65 61.50 Cy 43.75 61.50
+WALK 21 47 62 1793880411919
+WALKAT 1793880412079 21 1 47.05 62.50 0.90 Bo 47.05 62.50 Ana 46.20 62.20 Dee 45.57 61.57 Cy 44.67 61.50
+AUDIO Sfx step_stone
+WALK 22 48 62 1793880412230
+WALKAT 1793880412331 22 1 47.92 62.50 0.90 Bo 47.92 62.50 Ana 47.02 62.50 Dee 46.18 62.18 Cy 45.54 61.54
+AUDIO Sfx step_dirt
+WALK 23 48 61 1793880412506
+WALKAT 1793880412617 23 1 48.50 62.13 0.90 Bo 48.50 62.13 Ana 47.68 62.50 Dee 46.78 62.50 Cy 46.02 62.02
+AUDIO Sfx step_dirt
+WALK 24 48 60 1793880412810
+WALKAT 1793880412915 24 1 48.50 61.14 0.95 Bo 48.50 61.14 Ana 48.50 62.08 Dee 47.73 62.50 Cy 46.83 62.50
+WALK 25 48 59 1793880413110
+AUDIO Sfx step_dirt
+WALKAT 1793880413166 25 1 48.50 60.30 0.98 Bo 48.50 60.30 Ana 48.50 61.20 Dee 48.50 62.19 Cy 47.69 62.50
+WALK 26 48 58 1793880413398
+AUDIO Sfx step_dirt
+WALKAT 1793880413449 26 1 48.50 59.31 0.95 Bo 48.50 59.31 Ana 48.50 60.21 Dee 48.50 61.11 Cy 48.50 62.06
+WALK 27 48 57 1793880413700
+WALKAT 1793880413707 27 0 48.50 58.43 0.90 Bo 48.50 58.43 Ana 48.50 59.33 Dee 48.50 60.23 Cy 48.50 61.13
+AUDIO Sfx step_grass
+SHOT /workspace/issue81/integration/chapter-force/tv/026-tactics-world-walking-49-58.png
+WALK 28 48 56 1793880414155
+AUDIO Sfx step_grass
+WALKAT 1793880414166 28 0 48.50 56.50 2.55 Bo 48.50 56.50 Ana 48.50 59.05 Dee 48.50 59.95 Cy 48.50 60.85
+WALKSTATS frames 145 ms median 50.00 p99 64.41 worst 354.39 over16 145; screen px a frame: raw median 5.1 worst 121.6 flips 8+10; drawn median 5.1 worst 122.7 flips 8+27; ground median 12.0 worst 86.7 flips 3+1
+WALK 29 48 55 1793880414304
+AUDIO Sfx step_grass
+WALKAT 1793880414449 29 1 48.50 55.97 1.59 Bo 48.50 55.97 Ana 48.50 57.55 Dee 48.50 58.45 Cy 48.50 59.35
+WALK 30 48 54 1793880414616
+WALKAT 1793880414725 30 1 48.50 55.11 1.12 Bo 48.50 55.11 Ana 48.50 56.23 Dee 48.50 57.13 Cy 48.50 58.03
+AUDIO Sfx step_grass
+WALK 31 48 53 1793880414891
+WALKAT 1793880414992 31 1 48.50 54.23 0.90 Bo 48.50 54.23 Ana 48.50 55.13 Dee 48.50 56.03 Cy 48.50 56.93
+AUDIO Sfx step_grass
+WALK 32 48 52 1793880415224
+WALKAT 1793880415277 32 1 48.50 53.26 0.90 Bo 48.50 53.26 Ana 48.50 54.16 Dee 48.50 55.06 Cy 48.50 55.96
+AUDIO Sfx step_grass
+WALK 33 48 51 1793880415516
+WALKAT 1793880415563 33 1 48.50 52.29 0.90 Bo 48.50 52.29 Ana 48.50 53.19 Dee 48.50 54.09 Cy 48.50 54.99
+AUDIO Sfx step_grass
+WALK 34 48 50 1793880415828
+WALKAT 1793880415834 34 0 48.50 51.46 0.90 Bo 48.50 51.46 Ana 48.50 52.36 Dee 48.50 53.26 Cy 48.50 54.16
+AUDIO Sfx step_grass
+WALK 35 48 49 1793880416112
+WALKAT 1793880416118 35 0 48.50 50.48 0.90 Bo 48.50 50.48 Ana 48.50 51.38 Dee 48.50 52.28 Cy 48.50 53.18
+WALK 36 48 48 1793880416387
+WALKAT 1793880416392 36 0 48.50 49.55 0.90 Bo 48.50 49.55 Ana 48.50 50.45 Dee 48.50 51.35 Cy 48.50 52.25
+AUDIO Sfx step_grass
+WALKAT 1793880416673 36 1 48.50 48.60 0.90 Bo 48.50 48.60 Ana 48.50 49.50 Dee 48.50 50.40 Cy 48.50 51.30
+WALK 37 48 47 1793880416710
+AUDIO Sfx step_grass
+WALKAT 1793880416954 37 1 48.50 47.69 0.90 Bo 48.50 47.69 Ana 48.50 48.59 Dee 48.50 49.49 Cy 48.50 50.39
+WALK 38 48 46 1793880416988
+AUDIO Sfx step_grass
+WALKAT 1793880417242 38 1 48.50 46.73 0.90 Bo 48.50 46.73 Ana 48.50 47.63 Dee 48.50 48.53 Cy 48.50 49.43
+WALK 39 48 45 1793880417313
+AUDIO Sfx step_grass
+WALKAT 1793880417520 39 1 48.50 45.81 0.90 Bo 48.50 45.81 Ana 48.50 46.71 Dee 48.50 47.61 Cy 48.50 48.51
+WALK 40 48 44 1793880417606
+AUDIO Sfx step_grass
+WALKAT 1793880417817 40 1 48.50 44.78 0.90 Bo 48.50 44.78 Ana 48.50 45.68 Dee 48.50 46.58 Cy 48.50 47.48
+WALK 41 48 43 1793880417891
+AUDIO Sfx step_grass
+WALKAT 1793880418097 41 1 48.50 43.84 0.90 Bo 48.50 43.84 Ana 48.50 44.74 Dee 48.50 45.64 Cy 48.50 46.54
+WALK 42 47 42 1793880418195
+WALKAT 1793880418384 42 1 48.04 43.04 0.90 Bo 48.04 43.04 Ana 48.50 43.82 Dee 48.50 44.72 Cy 48.50 45.62
+AUDIO Sfx step_grass
+WALK 43 47 41 1793880418610
+WALKAT 1793880418666 43 1 47.50 42.35 0.90 Bo 47.50 42.35 Ana 48.06 43.06 Dee 48.50 43.84 Cy 48.50 44.74
+AUDIO Sfx step_grass
+WALK 44 48 40 1793880418927
+WALKAT 1793880418928 44 0 47.53 41.47 0.90 Bo 47.53 41.47 Ana 47.50 42.37 Dee 48.07 43.07 Cy 48.50 43.86
+AUDIO Sfx step_grass
+WALKAT 1793880419180 44 1 48.09 40.91 0.90 Bo 48.09 40.91 Ana 47.50 41.59 Dee 47.52 42.49 Cy 48.13 43.13
+WALK 45 49 39 1793880419339
+AUDIO Sfx step_grass
+WALKAT 1793880419453 45 1 48.75 40.25 0.91 Bo 48.75 40.25 Ana 48.12 40.88 Dee 47.50 41.54 Cy 47.51 42.45
+AUDIO Sfx step_grass
+WALKAT 1793880419732 45 1 49.44 39.56 0.90 Bo 49.44 39.56 Ana 48.80 40.20 Dee 48.16 40.84 Cy 47.53 41.48
+WALK 46 50 38 1793880419763
+WALKAT 1793880419985 46 1 50.03 38.97 0.90 Bo 50.03 38.97 Ana 49.40 39.60 Dee 48.76 40.24 Cy 48.12 40.88
+AUDIO Sfx step_grass
+WALK 47 51 37 1793880420200
+WALKAT 1793880420274 47 1 50.65 38.35 0.90 Bo 50.65 38.35 Ana 50.02 38.98 Dee 49.38 39.62 Cy 48.75 40.25
+AUDIO Sfx step_grass
+WALKAT 1793880420531 47 1 51.24 37.76 0.90 Bo 51.24 37.76 Ana 50.60 38.40 Dee 49.97 39.03 Cy 49.33 39.67
+WALK 48 51 36 1793880420608
+AUDIO Sfx step_grass
+WALKAT 1793880420798 48 1 51.50 36.92 0.90 Bo 51.50 36.92 Ana 51.23 37.77 Dee 50.59 38.41 Cy 49.95 39.05
+WALK 49 51 35 1793880420930
+SHOT /workspace/issue81/integration/chapter-force/tv/027-tactics-world-walking-52-36.png
+WALK 50 51 34 1793880421345
+AUDIO Sfx step_grass
+WALKAT 1793880421347 50 0 51.50 34.62 0.90 Bo 51.50 34.62 Ana 51.50 35.52 Dee 51.50 36.42 Cy 51.50 37.31
+WALKSTATS frames 172 ms median 40.00 p99 51.69 worst 345.20 over16 172; screen px a frame: raw median 2.2 worst 12.0 flips 9+19; drawn median 2.2 worst 11.0 flips 3+27; ground median 10.2 worst 112.4 flips 0+2
+WALK 51 52 33 1793880421508
+WALKAT 1793880421602 51 1 51.74 34.26 0.90 Bo 51.74 34.26 Ana 51.50 35.13 Dee 51.50 36.03 Cy 51.50 36.93
+AUDIO Sfx step_grass
+WALKAT 1793880421867 51 1 52.32 33.68 0.90 Bo 52.32 33.68 Ana 51.68 34.32 Dee 51.50 35.20 Cy 51.50 36.10
+WALK 52 53 32 1793880421961
+AUDIO Sfx step_grass
+WALKAT 1793880422139 52 1 52.91 33.09 0.90 Bo 52.91 33.09 Ana 52.28 33.72 Dee 51.64 34.36 Cy 51.50 35.25
+WALK 53 54 31 1793880422355
+AUDIO Sfx step_grass
+WALKAT 1793880422416 53 1 53.57 32.43 0.90 Bo 53.57 32.43 Ana 52.93 33.07 Dee 52.30 33.70 Cy 51.66 34.34
+WALKAT 1793880422679 53 1 54.20 31.80 0.90 Bo 54.20 31.80 Ana 53.57 32.43 Dee 52.93 33.07 Cy 52.29 33.71
+AUDIO Sfx step_grass
+WALK 54 54 30 1793880422779
+WALKAT 1793880422958 54 1 54.50 31.00 0.90 Bo 54.50 31.00 Ana 54.16 31.84 Dee 53.53 32.47 Cy 52.89 33.11
+AUDIO Sfx step_grass
+WALK 55 54 29 1793880423094
+WALKAT 1793880423243 55 1 54.50 30.05 0.90 Bo 54.50 30.05 Ana 54.50 30.95 Dee 54.20 31.80 Cy 53.56 32.44
+WALK 56 54 28 1793880423398
+AUDIO Sfx step_grass
+WALKAT 1793880423528 56 1 54.50 29.09 0.90 Bo 54.50 29.09 Ana 54.50 29.99 Dee 54.50 30.89 Cy 54.25 31.75
+WALK 57 55 27 1793880423683
+AUDIO Sfx step_grass
+WALKAT 1793880423779 57 1 54.68 28.32 0.90 Bo 54.68 28.32 Ana 54.50 29.21 Dee 54.50 30.11 Cy 54.50 31.01
+WALKAT 1793880424046 57 1 55.29 27.71 0.90 Bo 55.29 27.71 Ana 54.65 28.35 Dee 54.50 29.23 Cy 54.50 30.13
+AUDIO Sfx step_grass
+WALK 58 56 26 1793880424112
+WALKAT 1793880424313 58 1 55.93 27.07 0.90 Bo 55.93 27.07 Ana 55.29 27.71 Dee 54.66 28.34 Cy 54.50 29.23
+AUDIO Sfx step_grass
+WALK 59 57 25 1793880424545
+WALKAT 1793880424579 59 1 56.56 26.44 0.90 Bo 56.56 26.44 Ana 55.92 27.08 Dee 55.29 27.71 Cy 54.65 28.35
+AUDIO Sfx step_grass
+WALKAT 1793880424850 59 1 57.18 25.82 0.90 Bo 57.18 25.82 Ana 56.55 26.45 Dee 55.91 27.09 Cy 55.27 27.73
+WALK 60 58 24 1793880424987
+AUDIO Sfx step_grass
+WALKAT 1793880425132 60 1 57.83 25.17 0.90 Bo 57.83 25.17 Ana 57.19 25.81 Dee 56.56 26.44 Cy 55.92 27.08
+WALK 61 59 23 1793880425387
+WALKAT 1793880425389 61 0 58.46 24.54 0.90 Bo 58.46 24.54 Ana 57.83 25.17 Dee 57.19 25.81 Cy 56.55 26.45
+AUDIO Sfx step_dirt
+WALKAT 1793880425664 61 1 59.08 23.92 0.90 Bo 59.08 23.92 Ana 58.45 24.55 Dee 57.81 25.19 Cy 57.17 25.83
+AUDIO Sfx step_dirt
+WALK 62 60 22 1793880425821
+WALKAT 1793880425944 62 1 59.74 23.26 0.90 Bo 59.74 23.26 Ana 59.10 23.90 Dee 58.46 24.54 Cy 57.83 25.17
+AUDIO Sfx step_dirt
+WALKAT 1793880426200 62 1 60.34 22.66 0.90 Bo 60.34 22.66 Ana 59.70 23.30 Dee 59.07 23.94 Cy 58.43 24.57
+WALK 63 61 21 1793880426235
+AUDIO Sfx step_dirt
+WALKAT 1793880426476 63 1 61.05 21.95 0.90 Bo 61.05 21.95 Ana 60.42 22.58 Dee 59.78 23.22 Cy 59.14 23.86
+WALK 64 62 20 1793880426675
+AUDIO Sfx step_dirt
+WALKAT 1793880426737 64 1 61.64 21.36 0.90 Bo 61.64 21.36 Ana 61.00 22.00 Dee 60.37 22.63 Cy 59.73 23.27
+AUDIO Sfx step_dirt
+WALKAT 1793880427050 64 1 62.45 20.55 0.90 Bo 62.45 20.55 Ana 61.81 21.19 Dee 61.17 21.83 Cy 60.54 22.46
+WALK 65 63 19 1793880427087
+WALKAT 1793880427318 65 1 63.08 19.92 0.90 Bo 63.08 19.92 Ana 62.45 20.55 Dee 61.81 21.19 Cy 61.17 21.83
+AUDIO Sfx step_dirt
+WALK 66 64 18 1793880427527
+WALKAT 1793880427576 66 1 63.64 19.36 0.90 Bo 63.64 19.36 Ana 63.01 19.99 Dee 62.37 20.63 Cy 61.73 21.27
+AUDIO Sfx step_dirt
+WALKAT 1793880427844 66 1 64.29 18.71 0.90 Bo 64.29 18.71 Ana 63.66 19.34 Dee 63.02 19.98 Cy 62.38 20.62
+WALK 67 65 17 1793880427948
+AUDIO Sfx step_dirt
+WALKAT 1793880428127 67 1 64.91 18.09 0.90 Bo 64.91 18.09 Ana 64.27 18.73 Dee 63.64 19.36 Cy 63.00 20.00
+SHOT /workspace/issue81/integration/chapter-force/tv/028-tactics-world-walking-65-18.png
+WALK 68 66 16 1793880428607
+AUDIO Sfx step_dirt
+WALKAT 1793880428608 68 0 66.35 16.65 0.90 Bo 66.35 16.65 Ana 65.72 17.28 Dee 65.08 17.92 Cy 64.44 18.56
+WALKSTATS frames 192 ms median 33.33 p99 123.12 worst 348.64 over16 192; screen px a frame: raw median 1.4 worst 42.2 flips 19+7; drawn median 1.4 worst 42.8 flips 11+26; ground median 10.0 worst 104.0 flips 0+5
+WALK 69 67 15 1793880428787
+WALKAT 1793880428872 69 1 66.79 16.21 0.90 Bo 66.79 16.21 Ana 66.15 16.85 Dee 65.51 17.49 Cy 64.88 18.12
+AUDIO Sfx step_dirt
+WALKAT 1793880429136 69 1 67.35 15.65 0.90 Bo 67.35 15.65 Ana 66.71 16.29 Dee 66.08 16.92 Cy 65.44 17.56
+WALK 70 68 14 1793880429235
+AUDIO Sfx step_dirt
+WALKAT 1793880429479 70 1 68.23 14.77 0.90 Bo 68.23 14.77 Ana 67.59 15.41 Dee 66.95 16.05 Cy 66.32 16.68
+WALK 71 69 14 1793880429666
+AUDIO Sfx step_dirt
+WALKAT 1793880429785 71 1 69.11 14.50 0.90 Bo 69.11 14.50 Ana 68.25 14.75 Dee 67.61 15.39 Cy 66.97 16.03
+WALK 72 70 15 1793880429987
+AUDIO Sfx step_dirt
+WALKAT 1793880430117 72 1 70.09 15.09 0.90 Bo 70.09 15.09 Ana 69.41 14.51 Dee 68.52 14.50 Cy 67.87 15.13
+WALK 73 71 16 1793880430345
+AUDIO Sfx step_dirt
+WALKAT 1793880430379 73 1 70.60 15.60 0.90 Bo 70.60 15.60 Ana 69.96 14.96 Dee 69.19 14.50 Cy 68.31 14.69
+WALKAT 1793880430643 73 1 71.21 16.21 0.90 Bo 71.21 16.21 Ana 70.58 15.58 Dee 69.94 14.94 Cy 69.15 14.50
+AUDIO Sfx step_dirt
+WALK 74 72 17 1793880430798
+WALKAT 1793880430908 74 1 71.80 16.80 0.90 Bo 71.80 16.80 Ana 71.16 16.16 Dee 70.53 15.53 Cy 69.89 14.89
+AUDIO Sfx step_dirt
+WALK 75 73 18 1793880431209
+WALKAT 1793880431211 75 0 72.58 17.58 0.90 Bo 72.58 17.58 Ana 71.94 16.94 Dee 71.30 16.30 Cy 70.67 15.67
+AUDIO Sfx step_dirt
+WALKAT 1793880431464 75 1 73.20 18.20 0.90 Bo 73.20 18.20 Ana 72.56 17.56 Dee 71.93 16.93 Cy 71.29 16.29
+WALK 76 74 19 1793880431649
+AUDIO Sfx step_dirt
+WALKAT 1793880431741 76 1 73.74 18.74 0.90 Bo 73.74 18.74 Ana 73.10 18.10 Dee 72.46 17.46 Cy 71.83 16.83
+WALKAT 1793880431997 76 1 74.34 19.34 0.90 Bo 74.34 19.34 Ana 73.71 18.71 Dee 73.07 18.07 Cy 72.43 17.43
+WALK 77 75 20 1793880432084
+AUDIO Sfx step_grass
+WALKAT 1793880432283 77 1 75.01 20.01 0.90 Bo 75.01 20.01 Ana 74.37 19.37 Dee 73.74 18.74 Cy 73.10 18.10
+AUDIO Sfx step_grass
+WALK 78 76 21 1793880432471
+WALKAT 1793880432575 78 1 75.72 20.72 0.90 Bo 75.72 20.72 Ana 75.09 20.09 Dee 74.45 19.45 Cy 73.82 18.82
+AUDIO Sfx step_grass
+WALKAT 1793880432859 78 1 76.45 21.45 0.90 Bo 76.45 21.45 Ana 75.82 20.82 Dee 75.18 20.18 Cy 74.55 19.55
+WALK 79 77 22 1793880432905
+AUDIO Sfx step_grass
+WALKAT 1793880433157 79 1 77.13 22.13 0.90 Bo 77.13 22.13 Ana 76.49 21.49 Dee 75.86 20.86 Cy 75.22 20.22
+WALK 80 78 23 1793880433324
+AUDIO Sfx step_grass
+WALKAT 1793880433433 80 1 77.78 22.78 0.90 Bo 77.78 22.78 Ana 77.14 22.14 Dee 76.51 21.51 Cy 75.87 20.87
+WALKAT 1793880433687 80 1 78.37 23.37 0.90 Bo 78.37 23.37 Ana 77.73 22.73 Dee 77.10 22.10 Cy 76.46 21.46
+AUDIO Sfx step_grass
+WALK 81 79 24 1793880433784
+WALKAT 1793880433945 81 1 78.98 23.98 0.90 Bo 78.98 23.98 Ana 78.35 23.35 Dee 77.71 22.71 Cy 77.08 22.08
+AUDIO Sfx step_grass
+WALK 82 80 25 1793880434195
+WALKAT 1793880434196 82 0 79.53 24.53 0.90 Bo 79.53 24.53 Ana 78.89 23.89 Dee 78.26 23.26 Cy 77.62 22.62
+AUDIO Sfx step_dirt
+WALKAT 1793880434446 82 1 80.11 25.11 0.90 Bo 80.11 25.11 Ana 79.47 24.47 Dee 78.84 23.84 Cy 78.20 23.20
+WALK 83 81 26 1793880434590
+WALKAT 1793880434714 83 1 80.73 25.73 0.90 Bo 80.73 25.73 Ana 80.09 25.09 Dee 79.46 24.46 Cy 78.82 23.82
+AUDIO Sfx step_dirt
+WALKAT 1793880434974 83 1 81.36 26.36 0.90 Bo 81.36 26.36 Ana 80.72 25.72 Dee 80.09 25.09 Cy 79.45 24.45
+WALK 84 82 27 1793880435013
+AUDIO Sfx step_dirt
+WALKAT 1793880435259 84 1 82.04 27.04 0.90 Bo 82.04 27.04 Ana 81.41 26.41 Dee 80.77 25.77 Cy 80.13 25.13
+AUDIO Sfx step_dirt
+WALK 85 83 28 1793880435447
+SHOT /workspace/issue81/integration/chapter-force/tv/029-tactics-world-walking-82-27.png
+AUDIO Sfx step_dirt
+WALKAT 1793880435752 85 1 83.39 28.39 0.90 Bo 83.39 28.39 Ana 82.75 27.75 Dee 82.12 27.12 Cy 81.48 26.48
+WALK 86 84 29 1793880435851
+AUDIO Sfx step_dirt
+WALKAT 1793880436024 86 1 83.94 28.94 0.90 Bo 83.94 28.94 Ana 83.30 28.30 Dee 82.66 27.66 Cy 82.03 27.03
+WALK 87 85 30 1793880436290
+WALKAT 1793880436291 87 0 84.51 29.51 0.90 Bo 84.51 29.51 Ana 83.88 28.88 Dee 83.24 28.24 Cy 82.60 27.60
+AUDIO Sfx step_dirt
+WALKAT 1793880436550 87 1 85.13 30.13 0.90 Bo 85.13 30.13 Ana 84.50 29.50 Dee 83.86 28.86 Cy 83.22 28.22
+WALK 88 86 31 1793880436706
+AUDIO Sfx step_dirt
+WALKAT 1793880436824 88 1 85.76 30.76 0.90 Bo 85.76 30.76 Ana 85.13 30.13 Dee 84.49 29.49 Cy 83.85 28.85
+AUDIO Sfx step_dirt
+WALKAT 1793880437078 88 1 86.39 31.39 0.90 Bo 86.39 31.39 Ana 85.76 30.76 Dee 85.12 30.12 Cy 84.48 29.48
+WALK 89 87 32 1793880437155
+WALKAT 1793880437337 89 1 86.97 31.97 0.90 Bo 86.97 31.97 Ana 86.34 31.34 Dee 85.70 30.70 Cy 85.06 30.06
+AUDIO Sfx step_dirt
+WALK 90 88 33 1793880437547
+WALKAT 1793880437617 90 1 87.62 32.62 0.90 Bo 87.62 32.62 Ana 86.99 31.99 Dee 86.35 31.35 Cy 85.71 30.71
+AUDIO Sfx step_dirt
+WALKAT 1793880437877 90 1 88.22 33.22 0.90 Bo 88.22 33.22 Ana 87.58 32.58 Dee 86.94 31.94 Cy 86.31 31.31
+WALK 91 89 34 1793880437998
+AUDIO Sfx step_dirt
+WALKAT 1793880438148 91 1 88.84 33.84 0.90 Bo 88.84 33.84 Ana 88.21 33.21 Dee 87.57 32.57 Cy 86.93 31.93
+WALK 92 90 35 1793880438405
+AUDIO Sfx step_dirt
+WALKAT 1793880438407 92 0 89.46 34.46 0.90 Bo 89.46 34.46 Ana 88.82 33.82 Dee 88.19 33.19 Cy 87.55 32.55
+WALKAT 1793880438667 92 1 90.10 35.10 0.90 Bo 90.10 35.10 Ana 89.46 34.46 Dee 88.82 33.82 Cy 88.19 33.19
+AUDIO Sfx step_dirt
+WALK 93 91 36 1793880438842
+WALKAT 1793880438947 93 1 90.76 35.76 0.90 Bo 90.76 35.76 Ana 90.13 35.13 Dee 89.49 34.49 Cy 88.85 33.85
+AUDIO Sfx step_dirt
+WALKAT 1793880439228 93 1 91.39 36.39 0.90 Bo 91.39 36.39 Ana 90.76 35.76 Dee 90.12 35.12 Cy 89.48 34.48
+WALK 94 92 37 1793880439258
+AUDIO Sfx step_dirt
+WALKAT 1793880439483 94 1 91.97 36.97 0.90 Bo 91.97 36.97 Ana 91.33 36.33 Dee 90.69 35.69 Cy 90.06 35.06
+WALK 95 93 38 1793880439687
+AUDIO Sfx step_dirt
+WALKAT 1793880439744 95 1 92.62 37.62 0.90 Bo 92.62 37.62 Ana 91.98 36.98 Dee 91.35 36.35 Cy 90.71 35.71
+WALKAT 1793880440011 95 1 93.24 38.24 0.90 Bo 93.24 38.24 Ana 92.61 37.61 Dee 91.97 36.97 Cy 91.33 36.33
+AUDIO Sfx step_dirt
+WALK 96 94 39 1793880440103
+WALKAT 1793880440263 96 1 93.84 38.84 0.90 Bo 93.84 38.84 Ana 93.21 38.21 Dee 92.57 37.57 Cy 91.93 36.93
+AUDIO Sfx step_dirt
+WALK 97 95 40 1793880440529
+WALKAT 1793880440530 97 0 94.45 39.45 0.90 Bo 94.45 39.45 Ana 93.82 38.82 Dee 93.18 38.18 Cy 92.54 37.54
+AUDIO Sfx step_dirt
+WALKAT 1793880440788 97 1 95.05 40.05 0.90 Bo 95.05 40.05 Ana 94.42 39.42 Dee 93.78 38.78 Cy 93.14 38.14
+WALK 98 96 41 1793880440958
+WALKSTATS frames 288 ms median 37.88 p99 133.33 worst 292.95 over16 288; screen px a frame: raw median 1.0 worst 28.8 flips 2+54; drawn median 1.0 worst 28.2 flips 2+42; ground median 6.0 worst 53.0 flips 1+0
+AUDIO Sfx step_dirt
+WALKAT 1793880441049 98 1 95.71 40.71 0.90 Bo 95.71 40.71 Ana 95.07 40.07 Dee 94.43 39.43 Cy 93.80 38.80
+WALKAT 1793880441322 98 1 96.31 41.31 0.90 Bo 96.31 41.31 Ana 95.67 40.67 Dee 95.04 40.04 Cy 94.40 39.40
+WALK 99 97 42 1793880441362
+AUDIO Sfx step_dirt
+WALKAT 1793880441587 99 1 97.01 42.01 0.90 Bo 97.01 42.01 Ana 96.37 41.37 Dee 95.74 40.74 Cy 95.10 40.10
+AUDIO Sfx step_dirt
+WALK 100 98 43 1793880441799
+WALKAT 1793880441868 100 1 97.65 42.65 0.90 Bo 97.65 42.65 Ana 97.02 42.02 Dee 96.38 41.38 Cy 95.74 40.74
+AUDIO Sfx step_dirt
+WALKAT 1793880442157 100 1 98.30 43.30 0.90 Bo 98.30 43.30 Ana 97.66 42.66 Dee 97.02 42.02 Cy 96.39 41.39
+WALK 101 99 44 1793880442234
+AUDIO Sfx step_dirt
+WALKAT 1793880442426 101 1 98.96 43.96 0.90 Bo 98.96 43.96 Ana 98.32 43.32 Dee 97.68 42.68 Cy 97.05 42.05
+WALK 102 100 45 1793880442671
+SHOT /workspace/issue81/integration/chapter-force/tv/030-tactics-world-walking-99-44.png
+AUDIO Sfx step_dirt
+WALKAT 1793880442982 102 1 100.46 45.46 0.90 Bo 100.46 45.46 Ana 99.83 44.83 Dee 99.19 44.19 Cy 98.56 43.56
+WALKSTATS frames 50 ms median 35.04 p99 318.21 worst 318.21 over16 50; screen px a frame: raw median 0.0 worst 4.0 flips 0+16; drawn median 1.0 worst 4.0 flips 0+8; ground median 5.0 worst 57.0 flips 0+0
+WALK 103 101 46 1793880443071
+WALKAT 1793880443254 103 1 100.95 45.95 0.90 Bo 100.95 45.95 Ana 100.32 45.32 Dee 99.68 44.68 Cy 99.04 44.04
+AUDIO Sfx step_dirt
+WALK 104 100 47 1793880443487
+WALKAT 1793880443523 104 1 101.43 46.54 0.90 Bo 101.43 46.54 Ana 100.86 45.86 Dee 100.23 45.23 Cy 99.59 44.59
+AUDIO Sfx step_dirt
+WALKAT 1793880443794 104 1 100.77 47.23 1.02 Bo 100.77 47.23 Ana 101.43 46.45 Dee 100.81 45.81 Cy 100.18 45.18
+WALK 105 99 48 1793880443914
+AUDIO Sfx step_dirt
+WALKAT 1793880444049 105 1 100.19 47.81 0.97 Bo 100.19 47.81 Ana 100.83 47.17 Dee 101.37 46.37 Cy 100.73 45.73
+WALKAT 1793880444320 105 1 99.59 48.41 0.94 Bo 99.59 48.41 Ana 100.22 47.78 Dee 100.86 47.14 Cy 101.32 46.32
+WALK 106 99 49 1793880444359
+AUDIO Sfx step_dirt
+WALKAT 1793880444600 106 1 99.50 49.29 0.90 Bo 99.50 49.29 Ana 99.60 48.40 Dee 100.24 47.76 Cy 100.88 47.12
+WALK 107 99 50 1793880444647
+AUDIO Sfx step_dirt
+WALKAT 1793880444864 107 1 99.50 50.26 0.90 Bo 99.50 50.26 Ana 99.50 49.36 Dee 99.55 48.46 Cy 100.18 47.82
+WALK 108 100 51 1793880444939
+AUDIO Sfx step_dirt
+WALKAT 1793880445160 108 1 99.98 50.98 0.90 Bo 99.98 50.98 Ana 99.50 50.22 Dee 99.50 49.32 Cy 99.58 48.43
+WALK 109 99 52 1793880445359
+AUDIO Sfx step_dirt
+WALKAT 1793880445443 109 1 100.31 51.69 0.90 Bo 100.31 51.69 Ana 99.89 50.89 Dee 99.50 50.08 Cy 99.50 49.18
+AUDIO Sfx step_dirt
+WALKAT 1793880445720 109 1 99.66 52.34 1.02 Bo 99.66 52.34 Ana 100.38 51.62 Dee 99.90 50.90 Cy 99.50 50.09
+WALK 110 99 53 1793880445803
+WALKAT 1793880445994 110 1 99.50 53.17 1.04 Bo 99.50 53.17 Ana 99.70 52.30 Dee 100.44 51.56 Cy 99.88 50.88
+AUDIO Sfx step_dirt
+WALK 111 98 54 1793880446103
+WALKAT 1793880446256 111 1 99.15 53.85 0.97 Bo 99.15 53.85 Ana 99.50 53.02 Dee 99.82 52.18 Cy 100.40 51.40
+AUDIO Sfx step_dirt
+WALK 112 97 55 1793880446527
+WALKAT 1793880446528 112 0 98.52 54.48 0.90 Bo 98.52 54.48 Ana 99.16 53.84 Dee 99.50 53.01 Cy 99.83 52.17
+AUDIO Sfx step_dirt
+WALKAT 1793880446782 112 1 97.91 55.09 0.90 Bo 97.91 55.09 Ana 98.55 54.45 Dee 99.18 53.82 Cy 99.50 52.97
+WALK 113 96 56 1793880446949
+AUDIO Sfx step_dirt
+WALKAT 1793880447051 113 1 97.30 55.70 0.90 Bo 97.30 55.70 Ana 97.93 55.07 Dee 98.57 54.43 Cy 99.20 53.80
+WALKAT 1793880447302 113 1 96.68 56.32 0.90 Bo 96.68 56.32 Ana 97.31 55.69 Dee 97.95 55.05 Cy 98.58 54.42
+WALK 114 95 57 1793880447364
+AUDIO Sfx step_dirt
+AUDIO Voice clip ch1_ford_open_1.f64e0d29.ogg tactics.story: At the town's end of the ford bridge, the old Warden stones are slick with steam. Goblin fires burn on the far bank.
+STORY 17 ch1_ford_open_1 said lines
+STORY marker ch1_the_ford_choice 94 59 -
+TACTICS screen tactics-story
+WALKAT 1793880447565 114 0 96.06 56.94 0.90 Bo 96.06 56.94 Ana 96.70 56.30 Dee 97.33 55.67 Cy 97.97 55.03
+AUDIO Sfx step_dirt
+AUDIO Voice clip ch1_ford_open_2.cde95fe7.ogg tactics.story: Small figures move between them. Fewer than you expected. Thinner.
+STORY 18 ch1_ford_open_2 said lines
+WALKAT 1793880447819 114 0 95.52 57.48 0.90 Bo 95.52 57.48 Ana 96.15 56.85 Dee 96.79 56.21 Cy 97.42 55.58
+WALKSTATS frames 135 ms median 34.13 p99 47.99 worst 48.18 over16 135; screen px a frame: raw median 3.2 worst 12.6 flips 5+12; drawn median 3.2 worst 14.3 flips 5+9; ground median 10.0 worst 20.0 flips 0+5
+WALKAT 1793880448089 114 0 95.50 57.50 0.90 Bo 95.50 57.50 Ana 95.92 56.71 Dee 96.69 56.56 Cy 97.18 55.85
+AUDIO Voice clip ch1_ford_open_3.d955fd91.ogg tactics.story: There. Forty of them, perhaps. Dagna has eight guards left. And she has you.
+STORY 19 ch1_ford_open_3 said lines
+SHOT /workspace/issue81/integration/chapter-force/tv/031-tactics-story-line-narrator.png
+WALKAT 1793880448568 114 0 95.50 57.50 1.28 Bo 95.50 57.50 Ana 95.49 56.44 Dee 96.51 57.21 Cy 96.71 56.37
+AUDIO Voice clip ch1_ford_open_4.db2ad6b8.ogg tactics.story: Hit them at dawn, from both banks. They'll break. Goblins always break.
+STORY 20 ch1_ford_open_4 said lines
+WALKAT 1793880448850 114 0 95.50 57.50 1.43 Bo 95.50 57.50 Ana 95.41 56.39 Dee 96.47 57.34 Cy 96.62 56.47
+WALKAT 1793880449124 114 0 95.50 57.50 1.48 Bo 95.50 57.50 Ana 95.38 56.37 Dee 96.46 57.38 Cy 96.59 56.50
+AUDIO Voice clip ch1_ford_open_5.47bb98ad.ogg tactics.story: And the ones who don't break, Dagna? The ones with nowhere left to run to?
+STORY 21 ch1_ford_open_5 said asking
+WALKAT 1793880449389 114 0 95.50 57.50 1.50 Bo 95.50 57.50 Ana 95.37 56.36 Dee 96.46 57.40 Cy 96.58 56.52
+SHOT /workspace/issue81/integration/chapter-force/tv/032-tactics-world-stopped-96-58.png
+WALKAT 1793880449829 114 0 95.50 57.50 1.51 Bo 95.50 57.50 Ana 95.36 56.36 Dee 96.45 57.41 Cy 96.57 56.52
+SHOT /workspace/issue81/integration/chapter-force/tv/033-tactics-story-choice-made.png
+AUDIO Voice clip ch1_ford_why_1.4cba83d7.ogg tactics.story: Hunger, I expect. It's been a lean year for everyone, and the hills are always harder than the valley.
+STORY 22 ch1_ford_why_1 said lines
+AUDIO Voice clip ch1_ford_why_2.ef4aa655.ogg tactics.story: Leaner for them. We had the warm fields. They had snow on their fires by the Harvest Month.
+STORY 23 ch1_ford_why_2 said asking
+SHOT /workspace/issue81/integration/chapter-force/tv/034-tactics-story-check.png
+AUDIO Sfx ui_dice_roll
+SHOT /workspace/issue81/integration/chapter-force/tv/035-tactics-story-roll-tumbling.png
+AUDIO Sfx ui_confirm
+SHOT /workspace/issue81/integration/chapter-force/tv/036-tactics-story-roll-pass.png
+AUDIO Voice clip ch1_ford_why_pass_1.3c609d91.ogg tactics.story: He answers a heartbeat too fast, and he does not look at the granary roofs behind him.
+STORY 24 ch1_ford_why_pass_1 said lines
+AUDIO Voice clip ch1_ford_why_pass_2.9cb5a78c.ogg tactics.story: Whatever you think you see, it can wait until the bridge is ours. Please.
+STORY 25 ch1_ford_why_pass_2 said lines
+AUDIO Voice clip ch1_ford_cases_1.2c529cf3.ogg tactics.story: Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it.
+STORY 26 ch1_ford_cases_1 said lines
+AUDIO Voice clip ch1_ford_cases_2.58984b22.ogg tactics.story: They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs.
+STORY 27 ch1_ford_cases_2 said lines
+AUDIO Voice clip ch1_ford_cases_3.476edd31.ogg tactics.story: And here's mine. That's a whole people up there, and they're hungry for the same reason we are, only worse.
+STORY 28 ch1_ford_cases_3 said lines
+AUDIO Voice clip ch1_ford_cases_4.51adb33d.ogg tactics.story: Kill their mother and you've bought a bridge for one winter. Her grandsons will remember it for fifty.
+STORY 29 ch1_ford_cases_4 said lines
+AUDIO Voice clip ch1_ford_cases_5.c2e8f3e2.ogg tactics.story: Either way, I need that road. I'd like it quick, and I'd like it cheap. I'm not sure I can have both.
+STORY 30 ch1_ford_cases_5 said lines
+AUDIO Voice clip ch1_ford_vote_1.dd5dbbab.ogg tactics.story: The ford is the only road east. If those goblins hold the bridge past the new moon, Emberwick goes hungry this winter.
+STORY 31 ch1_ford_vote_1 said lines
+AUDIO Voice clip ch1_ford_vote_2.1ee49baf.ogg tactics.story: Will you clear them out, or will you talk to their chief?
+STORY 32 ch1_ford_vote_2 said asking
+SHOT /workspace/issue81/integration/chapter-force/tv/037-tactics-story-vote-tally.png
+AUDIO Voice clip ch1_ford_force_1.06892ef8.ogg tactics.story: Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.
+STORY 33 ch1_ford_force_1 said lines
+AUDIO Voice clip ch1_ford_force_2.7d39c66c.ogg tactics.story: I'll keep the stew warm. For whoever comes back across.
+STORY 34 ch1_ford_force_2 said lines
+AUDIO Voice clip ch1_ford_force_3.f6922cc9.ogg tactics.story: Thank you. Truly. Emberwick won't forget this.
+STORY 35 ch1_ford_force_3 said lines
+STORY marker ch1_ford_assault 96 63 -
+SHOT /workspace/issue81/integration/chapter-force/tv/038-tactics-story-gap.png
+AUDIO Voice clip ch1_dawn_open_1.57455db3.ogg tactics.story: Dawn. Mist lies thick on the steaming river, and Dagna's guards wait in the reeds of both banks.
+STORY 36 ch1_dawn_open_1 said lines
+AUDIO Voice clip ch1_dawn_open_2.7f6f3b2d.ogg tactics.story: I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope.
+STORY 37 ch1_dawn_open_2 said lines
+AUDIO Voice clip ch1_dawn_open_3.fe362e89.ogg tactics.story: Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased.
+STORY 38 ch1_dawn_open_3 said lines
+AUDIO Voice clip ch1_dawn_open_4.59bf8346.ogg tactics.story: Now. Before she says anything else.
+STORY 39 ch1_dawn_open_4 said lines
+AUDIO Music battle
+AUDIO Sfx ambience amb_river
+TACTICS screen tactics-battle-river_crossing
+TACTICS stage Forming in place
+SHOT /workspace/issue81/integration/chapter-force/tv/039-tactics-battle-river-crossing.png
+SHOT /workspace/issue81/integration/chapter-force/tv/040-tactics-beat-stage-forming.png
+SHOT /workspace/issue81/integration/chapter-force/tv/041-tactics-beat-stage-walk-in.png
+SHOT /workspace/issue81/integration/chapter-force/tv/042-tactics-beat-stage-walk-in.png
+SHOT /workspace/issue81/integration/chapter-force/tv/043-tactics-beat-stage-step-in.png
+TACTICS stage Fighting in place
+AUDIO Sfx battle_start
+AUDIO Sfx ui_your_turn
+SHOT /workspace/issue81/integration/chapter-force/tv/044-tactics-beat-stage-step-in.png
+AUDIO Voice clip say_ford_assault_1.e8adbccb.ogg tactics.npc.mother-skarrow: You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman.
+SHOT /workspace/issue81/integration/chapter-force/tv/045-tactics-beat-stage-fighting.png
+SHOT /workspace/issue81/integration/chapter-force/tv/046-tactics-beat-trigger-skarrow-greeting-1.png
+BEAT 1 from 143.621 to 145.312 took 1.691 scripted 1.100 swings 0 waiting 3 [RoundStarted,TurnStarted,CameraHint,PassiveTriggered]
+AUDIO Sfx step_grass
+TACTICS screen tactics-battle-river_crossing-conditions
+AUDIO Sfx step_grass
+SHOT /workspace/issue81/integration/chapter-force/tv/047-tactics-battle-river-crossing-conditions.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 2 from 145.460 to 146.454 took 0.994 scripted 0.800 swings 0 waiting 3 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 3 from 146.627 to 146.793 took 0.166 scripted 0.200 swings 0 waiting 3 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_dirt
+AUDIO Sfx step_dirt
+BEAT 4 from 146.955 to 147.535 took 0.580 scripted 0.600 swings 0 waiting 3 [Moved]
+BEAT 5 from 147.706 to 148.086 took 0.381 scripted 0.420 swings 0 waiting 3 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/048-tactics-beat-condition-5.png
+AUDIO Sfx ui_turn_start
+BEAT 6 from 148.495 to 148.670 took 0.176 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+BEAT 7 from 148.834 to 149.019 took 0.186 scripted 0.200 swings 0 waiting 2 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 8 from 149.208 to 149.370 took 0.162 scripted 0.200 swings 0 waiting 1 [TurnEnded,TurnStarted]
+AUDIO Sfx dust_burst
+BEAT 9 from 149.542 to 149.826 took 0.284 scripted 0.300 swings 0 waiting 1 []
+AUDIO Sfx step_stone
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 10 from 150.004 to 150.968 took 0.964 scripted 1.000 swings 0 waiting 0 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 11 from 151.139 to 151.317 took 0.179 scripted 0.200 swings 0 waiting 0 [TurnEnded,TurnStarted]
+BEAT 12 from 151.481 to 151.834 took 0.353 scripted 0.420 swings 0 waiting 0 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/049-tactics-beat-condition-12.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 13 from 152.249 to 152.591 took 0.342 scripted 0.400 swings 0 waiting 0 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 14 from 152.774 to 152.952 took 0.177 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 15 from 153.097 to 153.901 took 0.803 scripted 0.800 swings 0 waiting 4 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 16 from 154.056 to 154.260 took 0.204 scripted 0.200 swings 0 waiting 3 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 17 from 154.404 to 155.201 took 0.797 scripted 0.800 swings 0 waiting 3 [Moved]
+AUDIO Sfx spell_cast
+SHOT /workspace/issue81/integration/chapter-force/tv/050-tactics-beat-attack-18.png
+AUDIO Sfx spell_shadow
+AUDIO Sfx ui_dice_roll
+SHOT /workspace/issue81/integration/chapter-force/tv/051-tactics-beat-save-18.png
+BEAT 18 from 155.372 to 156.242 took 0.869 scripted 0.420 swings 0 waiting 3 []
+AUDIO Sfx ui_turn_start
+BEAT 19 from 156.390 to 156.569 took 0.179 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 20 from 156.719 to 157.509 took 0.789 scripted 0.800 swings 0 waiting 5 [Moved]
+BEAT 21 from 157.683 to 158.075 took 0.392 scripted 0.420 swings 0 waiting 5 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/052-tactics-beat-condition-21.png
+AUDIO Sfx ui_your_turn
+BEAT 22 from 158.433 to 158.616 took 0.183 scripted 0.200 swings 0 waiting 4 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_dirt
+BEAT 23 from 158.805 to 159.574 took 0.768 scripted 0.800 swings 0 waiting 4 [Moved]
+AUDIO Sfx round_start
+AUDIO Sfx ui_your_turn
+BEAT 24 from 159.718 to 159.897 took 0.179 scripted 0.200 swings 0 waiting 3 [TurnEnded,RoundStarted,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_dirt
+BEAT 25 from 160.038 to 160.648 took 0.610 scripted 0.600 swings 0 waiting 3 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 26 from 160.793 to 161.106 took 0.314 scripted 0.320 swings 0 waiting 2 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/053-tactics-beat-condition-ends-26.png
+BEAT 27 from 161.522 to 161.923 took 0.401 scripted 0.420 swings 0 waiting 2 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/054-tactics-beat-condition-27.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_dirt
+AUDIO Sfx step_dirt
+BEAT 28 from 162.296 to 162.885 took 0.589 scripted 0.600 swings 0 waiting 2 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 29 from 163.046 to 163.245 took 0.199 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+BEAT 30 from 163.402 to 163.824 took 0.422 scripted 0.420 swings 0 waiting 1 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/055-tactics-beat-condition-30.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 31 from 164.175 to 164.763 took 0.589 scripted 0.600 swings 0 waiting 1 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 32 from 164.918 to 165.118 took 0.200 scripted 0.200 swings 0 waiting 1 [TurnEnded,TurnStarted]
+AUDIO Sfx goblin_attack
+AUDIO Sfx bow_release
+SHOT /workspace/issue81/integration/chapter-force/tv/056-tactics-beat-attack-33.png
+AUDIO Sfx arrow_flesh
+SHOT /workspace/issue81/integration/chapter-force/tv/057-tactics-beat-hit-33.png
+BEAT 33 from 165.301 to 166.415 took 1.114 scripted 0.650 swings 1 waiting 1 [Damaged]
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 34 from 166.581 to 167.353 took 0.772 scripted 0.800 swings 0 waiting 0 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 35 from 167.524 to 167.857 took 0.333 scripted 0.320 swings 0 waiting 0 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/058-tactics-beat-condition-ends-35.png
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+SHOT /workspace/issue81/integration/chapter-force/tv/059-tactics-beat-attack-36.png
+AUDIO Sfx spell_lightning
+AUDIO Sfx attack_miss
+BEAT 36 from 168.264 to 169.151 took 0.887 scripted 0.710 swings 1 waiting 1 []
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 37 from 169.318 to 170.079 took 0.761 scripted 0.800 swings 0 waiting 0 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 38 from 170.254 to 170.451 took 0.197 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx step_dirt
+AUDIO Sfx step_grass
+BEAT 39 from 170.608 to 171.172 took 0.564 scripted 0.600 swings 0 waiting 4 [Moved]
+AUDIO Sfx spell_cast
+SHOT /workspace/issue81/integration/chapter-force/tv/060-tactics-beat-attack-40.png
+AUDIO Sfx spell_eldritch
+AUDIO Sfx dmg_force
+AUDIO Sfx goblin_hurt
+SHOT /workspace/issue81/integration/chapter-force/tv/061-tactics-beat-hit-40.png
+AUDIO Sfx dmg_force
+AUDIO Sfx goblin_hurt
+BEAT 40 from 171.337 to 172.543 took 1.206 scripted 0.790 swings 1 waiting 4 [Damaged]
+SHOT /workspace/issue81/integration/chapter-force/tv/062-tactics-beat-hit-40.png
+SHOT /workspace/issue81/integration/chapter-force/tv/063-tactics-beat-hit-40.png
+AUDIO Sfx ui_your_turn
+BEAT 41 from 173.155 to 173.279 took 0.124 scripted 0.200 swings 0 waiting 4 [TurnEnded,TurnStarted]
+AUDIO Sfx step_dirt
+AUDIO Sfx step_water
+AUDIO Voice clip say_ford_assault_2.a64dbc0f.ogg tactics.npc.mother-skarrow: They are in the water! Shoot them while they wade, children!
+SHOT /workspace/issue81/integration/chapter-force/tv/064-tactics-beat-trigger-skarrow-ford-42.png
+BEAT 42 from 173.424 to 174.916 took 1.492 scripted 1.300 swings 0 waiting 5 [Moved,CameraHint]
+AUDIO Sfx spell_cast
+SHOT /workspace/issue81/integration/chapter-force/tv/065-tactics-beat-attack-43.png
+AUDIO Sfx spell_shadow
+AUDIO Sfx ui_dice_roll
+SHOT /workspace/issue81/integration/chapter-force/tv/066-tactics-beat-save-43.png
+BEAT 43 from 175.074 to 175.940 took 0.866 scripted 0.420 swings 0 waiting 6 []
+AUDIO Sfx ui_turn_start
+BEAT 44 from 176.071 to 176.355 took 0.283 scripted 0.320 swings 0 waiting 6 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/067-tactics-beat-condition-ends-44.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+BEAT 45 from 176.756 to 177.334 took 0.579 scripted 0.600 swings 0 waiting 8 [Moved]
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+SHOT /workspace/issue81/integration/chapter-force/tv/068-tactics-beat-attack-46.png
+AUDIO Sfx ui_reaction_prompt
+BEAT 46 from 177.484 to 178.191 took 0.707 scripted 0.470 swings 1 waiting 7 [ReactionOffered]
+SHOT /workspace/issue81/integration/chapter-force/tv/069-tactics-beat-reaction-46.png
+AUDIO Sfx dmg_fire
+SHOT /workspace/issue81/integration/chapter-force/tv/070-tactics-beat-hit-47.png
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/071-tactics-beat-reaction-ignite-47.png
+SHOT /workspace/issue81/integration/chapter-force/tv/072-tactics-beat-zone-47.png
+BEAT 47 from 178.588 to 180.318 took 1.730 scripted 1.097 swings 0 waiting 8 [Reacted,Damaged,TileReacted,ZoneCreated]
+AUDIO Sfx ui_your_turn
+BEAT 48 from 180.468 to 180.665 took 0.197 scripted 0.200 swings 0 waiting 8 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+BEAT 49 from 180.815 to 180.997 took 0.182 scripted 0.200 swings 0 waiting 7 [Moved]
+AUDIO Sfx round_start
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/073-tactics-beat-reaction-spread-50.png
+SHOT /workspace/issue81/integration/chapter-force/tv/074-tactics-beat-zone-50.png
+AUDIO Sfx ui_your_turn
+BEAT 50 from 181.143 to 182.642 took 1.499 scripted 1.097 swings 0 waiting 8 [TurnEnded,RoundStarted,TileReacted,ZoneCreated,TurnStarted]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_nature_heal
+BEAT 51 from 182.789 to 183.241 took 0.452 scripted 0.460 swings 0 waiting 7 [Healed]
+AUDIO Sfx step_water
+AUDIO Sfx step_water
+BEAT 52 from 183.410 to 183.786 took 0.375 scripted 0.400 swings 0 waiting 7 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 53 from 183.959 to 184.276 took 0.317 scripted 0.320 swings 0 waiting 7 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/075-tactics-beat-condition-ends-53.png
+BEAT 54 from 184.627 to 185.040 took 0.413 scripted 0.420 swings 0 waiting 7 [ConditionApplied]
+SHOT /workspace/issue81/integration/chapter-force/tv/076-tactics-beat-condition-54.png
+AUDIO Sfx ui_turn_start
+BEAT 55 from 185.394 to 185.704 took 0.310 scripted 0.320 swings 0 waiting 6 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/077-tactics-beat-condition-ends-55.png
+BEAT 56 from 186.081 to 186.460 took 0.379 scripted 0.420 swings 0 waiting 6 [ConditionApplied]
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 57 from 186.614 to 187.000 took 0.385 scripted 0.400 swings 0 waiting 6 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 58 from 187.154 to 187.330 took 0.176 scripted 0.200 swings 0 waiting 5 [TurnEnded,TurnStarted]
+BEAT 59 from 187.495 to 187.869 took 0.374 scripted 0.420 swings 0 waiting 7 [ConditionApplied]
+AUDIO Sfx step_stone
+BEAT 60 from 188.021 to 188.213 took 0.192 scripted 0.200 swings 0 waiting 8 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 61 from 188.364 to 188.546 took 0.183 scripted 0.200 swings 0 waiting 8 [TurnEnded,TurnStarted]
+BEAT 62 from 188.701 to 189.131 took 0.431 scripted 0.420 swings 0 waiting 8 [ConditionApplied]
+AUDIO Sfx step_stone
+BEAT 63 from 189.283 to 189.512 took 0.229 scripted 0.200 swings 0 waiting 7 [Moved]
+AUDIO Sfx ui_your_turn
+AUDIO Sfx dmg_fire
+SHOT /workspace/issue81/integration/chapter-force/tv/078-tactics-beat-hit-64.png
+BEAT 64 from 189.659 to 190.283 took 0.624 scripted 0.440 swings 0 waiting 7 [TurnEnded,TurnStarted,PassiveTriggered,Damaged]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_nature_heal
+BEAT 65 from 190.434 to 190.935 took 0.500 scripted 0.540 swings 0 waiting 7 [Healed]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 66 from 191.102 to 191.663 took 0.561 scripted 0.600 swings 0 waiting 6 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 67 from 191.807 to 192.027 took 0.220 scripted 0.200 swings 0 waiting 7 [TurnEnded,TurnStarted]
+AUDIO Sfx step_water
+AUDIO Sfx step_dirt
+AUDIO Sfx step_grass
+BEAT 68 from 192.225 to 192.798 took 0.574 scripted 0.600 swings 0 waiting 9 [Moved]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_holy_pillar
+AUDIO Sfx dmg_radiant
+AUDIO Sfx goblin_hurt
+BEAT 69 from 192.989 to 193.676 took 0.688 scripted 0.740 swings 1 waiting 8 [Damaged,ConditionApplied]
+AUDIO Sfx ui_turn_start
+BEAT 70 from 193.839 to 194.010 took 0.171 scripted 0.200 swings 0 waiting 7 [TurnEnded,TurnStarted]
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_shadow
+AUDIO Sfx ui_dice_roll
+SHOT /workspace/issue81/integration/chapter-force/tv/079-tactics-beat-save-71.png
+BEAT 71 from 194.175 to 194.839 took 0.664 scripted 0.420 swings 0 waiting 7 []
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 72 from 194.987 to 195.759 took 0.771 scripted 0.800 swings 0 waiting 7 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 73 from 195.909 to 196.108 took 0.200 scripted 0.200 swings 0 waiting 6 [TurnEnded,TurnStarted]
+AUDIO Sfx step_dirt
+BEAT 74 from 196.267 to 196.452 took 0.185 scripted 0.200 swings 0 waiting 6 [Moved]
+AUDIO Sfx round_start
+AUDIO Sfx zone_created
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/080-tactics-beat-zone-75.png
+SHOT /workspace/issue81/integration/chapter-force/tv/081-tactics-beat-reaction-spread-75.png
+SHOT /workspace/issue81/integration/chapter-force/tv/082-tactics-beat-zone-75.png
+AUDIO Sfx ui_your_turn
+BEAT 75 from 196.621 to 198.843 took 2.222 scripted 1.577 swings 0 waiting 6 [TurnEnded,RoundStarted,ZoneEnded,ZoneCreated,TileReacted,TurnStarted]
+AUDIO Sfx step_dirt
+AUDIO Sfx step_grass
+TACTICS screen tactics-battle-river_crossing-downed
+SHOT /workspace/issue81/integration/chapter-force/tv/083-tactics-battle-river-crossing-downed.png
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 76 from 199.016 to 199.996 took 0.980 scripted 0.800 swings 0 waiting 6 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 77 from 200.142 to 200.452 took 0.310 scripted 0.320 swings 0 waiting 5 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+SHOT /workspace/issue81/integration/chapter-force/tv/084-tactics-beat-condition-ends-77.png
+BEAT 78 from 200.798 to 201.195 took 0.397 scripted 0.420 swings 0 waiting 5 [ConditionApplied]
+AUDIO Sfx step_dirt
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 79 from 201.345 to 202.115 took 0.770 scripted 0.800 swings 0 waiting 4 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 80 from 202.267 to 202.567 took 0.299 scripted 0.320 swings 0 waiting 4 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 81 from 202.743 to 203.510 took 0.767 scripted 0.800 swings 0 waiting 3 [Moved]
+AUDIO Sfx goblin_attack
+AUDIO Sfx swing_sword
+AUDIO Sfx blade_flesh
+AUDIO Sfx downed
+AUDIO Sfx debuff_applied
+SHOT /workspace/issue81/integration/chapter-force/tv/085-tactics-beat-downed-82.png
+BEAT 82 from 203.656 to 204.759 took 1.103 scripted 0.880 swings 1 waiting 3 [Damaged,Downed,ConditionApplied]
+AUDIO Sfx ui_turn_start
+BEAT 83 from 204.914 to 205.206 took 0.292 scripted 0.320 swings 0 waiting 3 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+AUDIO Sfx goblin_attack
+AUDIO Sfx bow_release
+AUDIO Sfx attack_miss
+BEAT 84 from 205.382 to 206.046 took 0.664 scripted 0.680 swings 1 waiting 2 []
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 85 from 206.223 to 206.793 took 0.570 scripted 0.600 swings 0 waiting 2 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 86 from 206.938 to 207.264 took 0.326 scripted 0.320 swings 0 waiting 3 [TurnEnded,TurnStarted,PassiveTriggered,ConditionRemoved]
+BEAT 87 from 207.422 to 207.840 took 0.419 scripted 0.420 swings 0 waiting 4 [ConditionApplied]
+TACTICS screen tactics-battle-river_crossing-conditions
+AUDIO Sfx ui_your_turn
+SHOT /workspace/issue81/integration/chapter-force/tv/086-tactics-battle-river-crossing-conditions.png
+BEAT 88 from 208.030 to 208.427 took 0.397 scripted 0.200 swings 0 waiting 5 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx dmg_fire
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 89 from 208.574 to 209.434 took 0.860 scripted 0.840 swings 0 waiting 5 [Moved,PassiveTriggered,Damaged]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_eldritch
+AUDIO Sfx dmg_force
+AUDIO Sfx goblin_hurt
+AUDIO Sfx dmg_force
+AUDIO Sfx goblin_hurt
+BEAT 90 from 209.609 to 210.423 took 0.814 scripted 0.820 swings 1 waiting 5 [Damaged]
+AUDIO Sfx ui_your_turn
+BEAT 91 from 210.590 to 210.786 took 0.195 scripted 0.200 swings 0 waiting 5 [TurnEnded,TurnStarted]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_holy_heal
+AUDIO Sfx revived
+BEAT 92 from 210.944 to 211.631 took 0.688 scripted 0.710 swings 0 waiting 4 [Healed,Revived]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_shadow
+AUDIO Sfx ui_dice_roll
+SHOT /workspace/issue81/integration/chapter-force/tv/087-tactics-beat-save-93.png
+AUDIO Sfx dmg_necrotic
+AUDIO Sfx goblin_hurt
+AUDIO Sfx goblin_death
+AUDIO Sfx died
+BEAT 93 from 211.784 to 212.966 took 1.182 scripted 0.960 swings 0 waiting 7 [Damaged,Died]
+AUDIO Sfx ui_turn_start
+BEAT 94 from 213.146 to 213.401 took 0.255 scripted 0.320 swings 0 waiting 7 [ConditionRemoved,TurnEnded,TurnStarted]
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 95 from 213.550 to 213.945 took 0.395 scripted 0.400 swings 0 waiting 7 [Moved]
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+AUDIO Sfx dmg_fire
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/088-tactics-beat-reaction-ignite-96.png
+SHOT /workspace/issue81/integration/chapter-force/tv/089-tactics-beat-zone-96.png
+BEAT 96 from 214.096 to 216.050 took 1.954 scripted 1.507 swings 1 waiting 8 [Damaged,TileReacted,ZoneCreated]
+AUDIO Sfx ui_your_turn
+BEAT 97 from 216.204 to 216.385 took 0.181 scripted 0.200 swings 0 waiting 7 [TurnEnded,TurnStarted]
+AUDIO Sfx step_water
+AUDIO Sfx step_water
+BEAT 98 from 216.573 to 216.915 took 0.342 scripted 0.400 swings 0 waiting 6 [Moved]
+AUDIO Sfx round_start
+AUDIO Sfx zone_created
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/090-tactics-beat-zone-99.png
+SHOT /workspace/issue81/integration/chapter-force/tv/091-tactics-beat-reaction-spread-99.png
+AUDIO Sfx ui_your_turn
+BEAT 99 from 217.073 to 219.218 took 2.145 scripted 1.697 swings 0 waiting 7 [TurnEnded,RoundStarted,ZoneEnded,ZoneCreated,TileReacted,TurnStarted,PassiveTriggered,ConditionRemoved]
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 100 from 219.371 to 219.920 took 0.548 scripted 0.600 swings 0 waiting 7 [Moved]
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+TACTICS screen tactics-battle-river_crossing
+SHOT /workspace/issue81/integration/chapter-force/tv/092-tactics-battle-river-crossing.png
+AUDIO Sfx attack_miss
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+AUDIO Voice clip say_ford_assault_3.111d469f.ogg tactics.npc.mother-skarrow: Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!
+SHOT /workspace/issue81/integration/chapter-force/tv/093-tactics-beat-trigger-skarrow-song-101.png
+SHOT /workspace/issue81/integration/chapter-force/tv/094-tactics-beat-phase-101.png
+BEAT 101 from 220.116 to 223.842 took 3.726 scripted 3.080 swings 3 waiting 13 [Damaged]
+TACTICS catch-up to beat 115, 13 skipped
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+AUDIO Sfx step_grass
+BEAT 115 from 223.987 to 224.738 took 0.751 scripted 0.800 swings 0 waiting 1 [Moved]
+AUDIO Sfx ui_turn_start
+BEAT 116 from 224.920 to 225.105 took 0.185 scripted 0.200 swings 0 waiting 0 [TurnEnded,TurnStarted]
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+AUDIO Sfx attack_miss
+BEAT 117 from 225.272 to 225.873 took 0.602 scripted 0.620 swings 1 waiting 0 []
+AUDIO Sfx ui_your_turn
+BEAT 118 from 226.048 to 226.222 took 0.174 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx step_dirt
+AUDIO Sfx step_dirt
+AUDIO Sfx step_dirt
+BEAT 119 from 226.383 to 226.984 took 0.600 scripted 0.600 swings 0 waiting 3 [Moved]
+AUDIO Sfx round_start
+AUDIO Sfx zone_created
+TACTICS screen tactics-battle-river_crossing-conditions
+AUDIO Sfx zone_created
+SHOT /workspace/issue81/integration/chapter-force/tv/095-tactics-battle-river-crossing-conditions.png
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/096-tactics-beat-reaction-spread-120.png
+AUDIO Sfx ui_your_turn
+BEAT 120 from 227.147 to 229.542 took 2.395 scripted 1.997 swings 0 waiting 5 [TurnEnded,RoundStarted,ZoneEnded,ZoneCreated,TileReacted,TurnStarted]
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+TACTICS screen tactics-battle-river_crossing
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+SHOT /workspace/issue81/integration/chapter-force/tv/097-tactics-battle-river-crossing.png
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+BEAT 121 from 229.697 to 231.290 took 1.593 scripted 1.380 swings 3 waiting 5 [Damaged]
+AUDIO Sfx ui_turn_start
+BEAT 122 from 231.448 to 231.628 took 0.179 scripted 0.200 swings 0 waiting 5 [TurnEnded,TurnStarted]
+BEAT 123 from 231.788 to 232.167 took 0.379 scripted 0.420 swings 0 waiting 4 [ConditionApplied]
+AUDIO Sfx step_grass
+BEAT 124 from 232.321 to 232.519 took 0.198 scripted 0.200 swings 0 waiting 3 [Moved]
+AUDIO Sfx goblin_attack
+AUDIO Sfx swing_sword
+AUDIO Sfx attack_miss
+BEAT 125 from 232.676 to 233.099 took 0.422 scripted 0.460 swings 1 waiting 3 []
+AUDIO Sfx ui_turn_start
+TACTICS screen tactics-battle-river_crossing-conditions
+BEAT 126 from 233.265 to 233.561 took 0.296 scripted 0.320 swings 0 waiting 3 [ConditionRemoved,TurnEnded,TurnStarted]
+SHOT /workspace/issue81/integration/chapter-force/tv/098-tactics-battle-river-crossing-conditions.png
+AUDIO Sfx goblin_attack
+AUDIO Sfx bow_release
+AUDIO Sfx attack_miss
+BEAT 127 from 233.934 to 234.567 took 0.633 scripted 0.650 swings 1 waiting 3 []
+AUDIO Sfx ui_turn_start
+BEAT 128 from 234.718 to 234.904 took 0.186 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+BEAT 129 from 235.068 to 235.445 took 0.376 scripted 0.420 swings 0 waiting 2 [ConditionApplied]
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+BEAT 130 from 235.645 to 236.039 took 0.394 scripted 0.400 swings 0 waiting 4 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 131 from 236.172 to 236.359 took 0.187 scripted 0.200 swings 0 waiting 4 [TurnEnded,TurnStarted]
+AUDIO Sfx step_water
+AUDIO Sfx step_water
+BEAT 132 from 236.531 to 236.904 took 0.373 scripted 0.400 swings 0 waiting 3 [Moved]
+AUDIO Sfx ui_your_turn
+BEAT 133 from 237.062 to 237.224 took 0.161 scripted 0.200 swings 0 waiting 3 [TurnEnded,TurnStarted]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_holy_pillar
+AUDIO Sfx attack_miss
+BEAT 134 from 237.375 to 238.000 took 0.625 scripted 0.620 swings 1 waiting 2 []
+AUDIO Sfx ui_turn_start
+BEAT 135 from 238.149 to 238.346 took 0.197 scripted 0.200 swings 0 waiting 2 [TurnEnded,TurnStarted]
+AUDIO Sfx goblin_attack
+AUDIO Sfx spell_cast
+AUDIO Sfx attack_miss
+BEAT 136 from 238.501 to 239.126 took 0.625 scripted 0.620 swings 1 waiting 4 []
+AUDIO Sfx ui_your_turn
+BEAT 137 from 239.290 to 239.452 took 0.162 scripted 0.200 swings 0 waiting 4 [TurnEnded,TurnStarted]
+AUDIO Sfx step_grass
+AUDIO Sfx dmg_fire
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+BEAT 138 from 239.601 to 240.433 took 0.831 scripted 0.840 swings 0 waiting 3 [Moved,PassiveTriggered,Damaged]
+AUDIO Sfx spell_cast
+AUDIO Sfx spell_nature_heal
+BEAT 139 from 240.599 to 241.106 took 0.506 scripted 0.540 swings 0 waiting 2 [Healed]
+AUDIO Sfx round_start
+AUDIO Sfx zone_created
+AUDIO Sfx spell_fire_aura
+SHOT /workspace/issue81/integration/chapter-force/tv/099-tactics-beat-reaction-spread-140.png
+AUDIO Sfx ui_your_turn
+BEAT 140 from 241.267 to 243.080 took 1.813 scripted 1.577 swings 0 waiting 1 [TurnEnded,RoundStarted,ZoneEnded,ZoneCreated,TileReacted,TurnStarted]
+AUDIO Sfx pierce_flesh
+AUDIO Sfx goblin_hurt
+AUDIO Sfx goblin_death
+AUDIO Sfx died
+BEAT 141 from 243.275 to 244.908 took 1.633 scripted 1.660 swings 1 waiting 0 [Damaged,Died,BattleEnded]
+AUDIO Music victory
+TACTICS screen tactics-results
+TACTICS stage Fading in place
+SHOT /workspace/issue81/integration/chapter-force/tv/100-tactics-results.png
+SHOT /workspace/issue81/integration/chapter-force/tv/101-tactics-beat-stage-fading-141.png
+TACTICS stage Results in place
+SHOT /workspace/issue81/integration/chapter-force/tv/102-tactics-beat-stage-results-141.png
+SHOT /workspace/issue81/integration/chapter-force/tv/103-tactics-results-banner.png
+AUDIO Music town_emberwick
+TACTICS screen tactics-story
+TACTICS stage FallingIn
+WALKAT 1793880590963 114 0 109.50 55.50 5.00 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 110.50 55.50
+SHOT /workspace/issue81/integration/chapter-force/tv/104-tactics-beat-stage-fallingin-141.png
+TACTICS stage Walking
+SHOT /workspace/issue81/integration/chapter-force/tv/105-tactics-beat-stage-walking-141.png
+SHOT /workspace/issue81/integration/chapter-force/tv/106-tactics-story-gap.png
+AUDIO Voice clip ch1_bridge_cost_open_1.d261d7f3.ogg tactics.story: The fighting is over. On the old stones of the bridge, Mother Skarrow lies where she fell.
+STORY 40 ch1_bridge_cost_open_1 said lines
+WALKAT 1793880592939 114 0 109.50 55.50 4.98 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 110.48 55.51
+WALKAT 1793880593191 114 0 109.50 55.50 4.31 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 109.81 55.87
+AUDIO Voice clip ch1_bridge_cost_open_2.6044701c.ogg tactics.story: Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.
+STORY 41 ch1_bridge_cost_open_2 said lines
+WALKAT 1793880593445 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 109.15 56.21
+WALKAT 1793880593723 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.81 56.40
+AUDIO Voice clip ch1_bridge_cost_open_3.cd87c5a7.ogg tactics.story: There was a song I meant to teach somebody. Too late now. It goes into the river with me.
+STORY 42 ch1_bridge_cost_open_3 said lines
+WALKAT 1793880593992 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.66 56.48
+WALKAT 1793880594244 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.60 56.50
+AUDIO Voice clip ch1_bridge_cost_open_4.0d843dbc.ogg tactics.story: The last of the clan fall back into the hills, carrying their small ones. None of them look back.
+STORY 43 ch1_bridge_cost_open_4 said asking
+WALKAT 1793880594519 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.58 56.52
+WALKAT 1793880594872 114 0 109.50 55.50 4.24 Bo 109.50 55.50 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.57 56.52
+AUDIO Voice clip ch1_bridge_cost_song_1.ae48080d.ogg tactics.story: Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears.
+STORY 44 ch1_bridge_cost_song_1 said lines
+AUDIO Voice clip ch1_bridge_cost_song_2.2cb50e78.ogg tactics.story: She does not speak again.
+STORY 45 ch1_bridge_cost_song_2 said lines
+AUDIO Voice clip ch1_bridge_cost_over_1.5ccafd05.ogg tactics.story: The road's open. That's what we came for.
+STORY 46 ch1_bridge_cost_over_1 said lines
+AUDIO Voice clip ch1_bridge_cost_over_2.42da10f9.ogg tactics.story: Funny. I thought this would feel like something.
+STORY 47 ch1_bridge_cost_over_2 said lines
+STORY marker ch1_old_maud 132 93 alert
+QUEST tracker none
+QUEST journal closed
+QUEST people ch1_skarrow_slain
+TACTICS screen tactics-exploration
+WALK 115 110 54 1793880612471
+WALKAT 1793880612473 115 0 109.53 55.47 4.24 Bo 109.53 55.47 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.57 56.52
+WALKAT 1793880612727 115 0 109.80 55.20 4.24 Bo 109.80 55.20 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.57 56.52
+AUDIO Sfx step_stone
+WALKAT 1793880613003 115 0 110.13 54.87 4.24 Bo 110.13 54.87 Ana 110.50 56.50 Dee 107.50 59.50 Cy 108.57 56.52
+WALKAT 1793880613267 115 0 110.46 54.54 4.32 Bo 110.46 54.54 Ana 109.92 55.92 Dee 107.50 59.50 Cy 108.57 56.52
+WALKSTATS frames 21 ms median 43.88 p99 52.13 worst 52.13 over16 21; screen px a frame: raw median 2.0 worst 4.5 flips 3+3; drawn median 1.4 worst 4.2 flips 1+1; ground median 6.7 worst 8.9 flips 0+0
+WALKAT 1793880613534 115 0 110.50 54.50 4.02 Bo 110.50 54.50 Ana 109.95 55.74 Dee 108.07 59.29 Cy 108.78 56.10
+WALKAT 1793880613799 115 0 110.50 54.50 3.61 Bo 110.50 54.50 Ana 110.15 55.56 Dee 109.02 58.94 Cy 109.17 55.33
+WALKAT 1793880614063 115 0 110.50 54.50 3.80 Bo 110.50 54.50 Ana 110.27 55.44 Dee 109.78 58.66 Cy 109.40 54.87
+WALKAT 1793880614344 115 0 110.50 54.50 3.92 Bo 110.50 54.50 Ana 110.33 55.39 Dee 110.21 58.50 Cy 109.51 54.64
+WALKAT 1793880614603 115 0 110.50 54.50 3.96 Bo 110.50 54.50 Ana 110.35 55.37 Dee 110.36 58.44 Cy 109.55 54.57
+WALKAT 1793880614856 115 0 110.50 54.50 3.97 Bo 110.50 54.50 Ana 110.36 55.36 Dee 110.41 58.42 Cy 109.56 54.54
+SHOT /workspace/issue81/integration/chapter-force/tv/107-tactics-world-stopped-111-55.png
+WALKAT 1793880615359 115 0 110.50 54.50 3.98 Bo 110.50 54.50 Ana 110.36 55.36 Dee 110.45 58.41 Cy 109.57 54.53
+WALK 116 111 54 1793880616163
+WALKAT 1793880616164 116 0 110.57 54.50 3.98 Bo 110.57 54.50 Ana 110.35 55.35 Dee 110.45 58.41 Cy 109.57 54.52
+AUDIO Sfx step_stone
+WALKAT 1793880616435 116 1 111.36 54.50 3.46 Bo 111.36 54.50 Ana 110.08 55.20 Dee 110.29 57.90 Cy 109.57 54.52
+WALK 117 112 55 1793880616468
+AUDIO Sfx step_stone
+WALKAT 1793880616702 117 1 112.03 55.03 2.25 Bo 112.03 55.03 Ana 110.28 54.80 Dee 109.96 56.89 Cy 109.56 54.67
+WALK 118 113 56 1793880616902
+WALKAT 1793880616969 118 1 112.65 55.65 2.29 Bo 112.65 55.65 Ana 111.42 54.51 Dee 109.66 55.98 Cy 109.52 55.23
+AUDIO Sfx step_stone
+WALKAT 1793880617235 118 1 113.28 56.28 2.82 Bo 113.28 56.28 Ana 112.39 55.39 Dee 109.57 55.58 Cy 109.76 55.18
+WALK 119 114 57 1793880617335
+AUDIO Sfx step_stone
+WALKAT 1793880617502 119 1 113.89 56.89 3.39 Bo 113.89 56.89 Ana 113.25 56.25 Dee 110.16 54.88 Cy 110.68 54.49
+AUDIO Sfx step_stone
+WALK 120 115 58 1793880617737
+WALKAT 1793880617769 120 1 114.51 57.51 3.47 Bo 114.51 57.51 Ana 113.88 56.88 Dee 111.34 54.50 Cy 111.86 54.86
+AUDIO Sfx step_stone
+WALKAT 1793880618035 120 1 115.16 58.16 3.10 Bo 115.16 58.16 Ana 114.52 57.52 Dee 112.33 55.33 Cy 112.81 55.81
+WALK 121 116 59 1793880618176
+WALKAT 1793880618309 121 1 115.81 58.81 2.64 Bo 115.81 58.81 Ana 115.18 58.18 Dee 113.31 56.31 Cy 113.79 56.79
+AUDIO Sfx step_stone
+WALKAT 1793880618569 121 1 116.44 59.44 2.19 Bo 116.44 59.44 Ana 115.80 58.80 Dee 114.26 57.26 Cy 114.53 57.53
+WALK 122 117 60 1793880618602
+AUDIO Sfx step_stone
+WALKAT 1793880618835 122 1 117.05 60.05 1.72 Bo 117.05 60.05 Ana 116.41 59.41 Dee 115.20 58.20 Cy 115.14 58.14
+AUDIO Sfx step_dirt
+WALK 123 117 61 1793880619035
+WALKAT 1793880619102 123 1 117.50 60.73 1.20 Bo 117.50 60.73 Ana 116.99 59.99 Dee 116.14 59.14 Cy 115.72 58.72
+WALK 124 117 62 1793880619309
+AUDIO Sfx step_dirt
+WALKAT 1793880619369 124 1 117.50 61.61 0.90 Bo 117.50 61.61 Ana 117.50 60.71 Dee 116.98 59.98 Cy 116.34 59.34
+WALK 125 118 63 1793880619635
+WALKAT 1793880619636 125 0 117.52 62.51 0.90 Bo 117.52 62.51 Ana 117.50 61.62 Dee 117.50 60.72 Cy 116.98 59.98
+AUDIO Sfx step_dirt
+WALKAT 1793880619902 125 1 118.13 63.13 0.90 Bo 118.13 63.13 Ana 117.51 62.47 Dee 117.50 61.58 Cy 117.50 60.68
+AUDIO Sfx step_dirt
+WALK 126 119 64 1793880620035
+WALKAT 1793880620169 126 1 118.76 63.76 0.90 Bo 118.76 63.76 Ana 118.12 63.12 Dee 117.51 62.47 Cy 117.50 61.57
+AUDIO Sfx step_dirt
+WALKAT 1793880620435 126 1 119.40 64.40 0.90 Bo 119.40 64.40 Ana 118.76 63.76 Dee 118.12 63.12 Cy 117.51 62.47
+WALK 127 120 65 1793880620468
+AUDIO Sfx step_dirt
+WALKAT 1793880620704 127 1 120.02 65.02 0.90 Bo 120.02 65.02 Ana 119.39 64.39 Dee 118.75 63.75 Cy 118.11 63.11
+WALK 128 121 66 1793880620902
+WALKAT 1793880620971 128 1 120.65 65.65 0.90 Bo 120.65 65.65 Ana 120.01 65.01 Dee 119.37 64.37 Cy 118.74 63.74
+AUDIO Sfx step_dirt
+WALKAT 1793880621244 128 1 121.28 66.28 0.90 Bo 121.28 66.28 Ana 120.65 65.65 Dee 120.01 65.01 Cy 119.37 64.37
+WALK 129 122 67 1793880621302
+AUDIO Sfx step_dirt
+WALKAT 1793880621502 129 1 121.91 66.91 0.90 Bo 121.91 66.91 Ana 121.27 66.27 Dee 120.64 65.64 Cy 120.00 65.00
+AUDIO Sfx step_dirt
+WALK 130 123 68 1793880621735
+WALKAT 1793880621772 130 1 122.53 67.53 0.90 Bo 122.53 67.53 Ana 121.89 66.89 Dee 121.26 66.26 Cy 120.62 65.62
+AUDIO Sfx step_dirt
+WALKAT 1793880622022 130 1 123.14 68.14 0.90 Bo 123.14 68.14 Ana 122.50 67.50 Dee 121.87 66.87 Cy 121.23 66.23
+WALK 131 124 69 1793880622150
+WALKAT 1793880622280 131 1 123.77 68.77 0.90 Bo 123.77 68.77 Ana 123.14 68.14 Dee 122.50 67.50 Cy 121.86 66.86
+AUDIO Sfx step_dirt
+WALKAT 1793880622535 131 1 124.36 69.36 0.90 Bo 124.36 69.36 Ana 123.72 68.72 Dee 123.09 68.09 Cy 122.45 67.45
+WALK 132 125 70 1793880622603
+AUDIO Sfx step_dirt
+WALKAT 1793880622803 132 1 124.97 69.97 0.90 Bo 124.97 69.97 Ana 124.34 69.34 Dee 123.70 68.70 Cy 123.06 68.06
+WALK 133 126 71 1793880623003
+AUDIO Sfx step_dirt
+WALKAT 1793880623088 133 1 125.62 70.62 0.90 Bo 125.62 70.62 Ana 124.98 69.98 Dee 124.35 69.35 Cy 123.71 68.71
+AUDIO Sfx step_dirt
+WALKAT 1793880623368 133 1 126.34 71.34 0.90 Bo 126.34 71.34 Ana 125.70 70.70 Dee 125.07 70.07 Cy 124.43 69.43
+WALK 134 127 72 1793880623424
+SHOT /workspace/issue81/integration/chapter-force/tv/108-tactics-world-walking-126-71.png
+AUDIO Sfx step_dirt
+WALKAT 1793880623764 134 1 127.47 72.47 0.90 Bo 127.47 72.47 Ana 126.84 71.84 Dee 126.20 71.20 Cy 125.56 70.56
+WALKSTATS frames 221 ms median 33.33 p99 40.97 worst 329.55 over16 221; screen px a frame: raw median 1.4 worst 7.1 flips 5+21; drawn median 1.4 worst 7.0 flips 5+25; ground median 5.4 worst 59.0 flips 2+0
+WALK 135 128 73 1793880623859
+AUDIO Sfx step_dirt
+WALKAT 1793880624039 135 1 127.93 72.93 0.90 Bo 127.93 72.93 Ana 127.29 72.29 Dee 126.66 71.66 Cy 126.02 71.02
+WALK 136 129 74 1793880624284
+AUDIO Sfx step_dirt
+WALKAT 1793880624321 136 1 128.58 73.58 0.90 Bo 128.58 73.58 Ana 127.94 72.94 Dee 127.30 72.30 Cy 126.67 71.67
+WALKAT 1793880624583 136 1 129.16 74.16 0.90 Bo 129.16 74.16 Ana 128.52 73.52 Dee 127.89 72.89 Cy 127.25 72.25
+AUDIO Sfx step_dirt
+WALK 137 130 75 1793880624721
+WALKAT 1793880624854 137 1 129.79 74.79 0.90 Bo 129.79 74.79 Ana 129.15 74.15 Dee 128.52 73.52 Cy 127.88 72.88
+AUDIO Sfx step_dirt
+WALKAT 1793880625123 137 1 130.41 75.41 0.90 Bo 130.41 75.41 Ana 129.77 74.77 Dee 129.14 74.14 Cy 128.50 73.50
+WALK 138 131 76 1793880625152
+AUDIO Sfx step_dirt
+WALKAT 1793880625384 138 1 131.03 76.03 0.90 Bo 131.03 76.03 Ana 130.39 75.39 Dee 129.76 74.76 Cy 129.12 74.12
+WALK 139 132 77 1793880625552
+WALKAT 1793880625651 139 1 131.67 76.67 0.90 Bo 131.67 76.67 Ana 131.03 76.03 Dee 130.40 75.40 Cy 129.76 74.76
+AUDIO Sfx step_dirt
+WALKAT 1793880625923 139 1 132.31 77.31 0.90 Bo 132.31 77.31 Ana 131.68 76.68 Dee 131.04 76.04 Cy 130.40 75.40
+WALK 140 133 78 1793880625991
+AUDIO Sfx step_dirt
+WALKAT 1793880626183 140 1 132.94 77.94 0.90 Bo 132.94 77.94 Ana 132.30 77.30 Dee 131.67 76.67 Cy 131.03 76.03
+AUDIO Sfx step_dirt
+WALK 141 134 79 1793880626416
+WALKAT 1793880626450 141 1 133.57 78.57 0.90 Bo 133.57 78.57 Ana 132.93 77.93 Dee 132.29 77.29 Cy 131.66 76.66
+AUDIO Sfx step_dirt
+WALKAT 1793880626722 141 1 134.19 79.19 0.90 Bo 134.19 79.19 Ana 133.55 78.55 Dee 132.91 77.91 Cy 132.28 77.28
+WALK 142 135 80 1793880626816
+AUDIO Sfx step_dirt
+WALKAT 1793880626987 142 1 134.83 79.83 0.90 Bo 134.83 79.83 Ana 134.19 79.19 Dee 133.56 78.56 Cy 132.92 77.92
+WALK 143 136 81 1793880627249
+WALKAT 1793880627250 143 0 135.47 80.47 0.90 Bo 135.47 80.47 Ana 134.83 79.83 Dee 134.20 79.20 Cy 133.56 78.56
+AUDIO Sfx step_dirt
+WALKAT 1793880627516 143 1 136.10 81.10 0.90 Bo 136.10 81.10 Ana 135.46 80.46 Dee 134.83 79.83 Cy 134.19 79.19
+AUDIO Sfx step_dirt
+WALK 144 137 82 1793880627683
+WALKAT 1793880627788 144 1 136.72 81.72 0.90 Bo 136.72 81.72 Ana 136.09 81.09 Dee 135.45 80.45 Cy 134.81 79.81
+AUDIO Sfx step_dirt
+WALKAT 1793880628052 144 1 137.34 82.34 0.90 Bo 137.34 82.34 Ana 136.71 81.71 Dee 136.07 81.07 Cy 135.43 80.43
+WALK 145 137 83 1793880628125
+AUDIO Sfx step_dirt
+WALKAT 1793880628317 145 1 137.50 83.16 0.90 Bo 137.50 83.16 Ana 137.29 82.29 Dee 136.65 81.65 Cy 136.02 81.02
+WALK 146 136 84 1793880628416
+WALKAT 1793880628591 146 1 137.12 83.88 0.90 Bo 137.12 83.88 Ana 137.50 83.06 Dee 137.21 82.21 Cy 136.57 81.57
+AUDIO Sfx step_dirt
+WALK 147 135 85 1793880628819
+WALKAT 1793880628849 147 1 136.48 84.52 0.90 Bo 136.48 84.52 Ana 137.12 83.88 Dee 137.50 83.07 Cy 137.21 82.21
+AUDIO Sfx step_dirt
+WALKAT 1793880629122 147 1 135.85 85.15 0.90 Bo 135.85 85.15 Ana 136.49 84.51 Dee 137.12 83.88 Cy 137.50 83.06
+WALK 148 134 86 1793880629245
+AUDIO Sfx step_dirt
+WALKAT 1793880629374 148 1 135.24 85.76 0.90 Bo 135.24 85.76 Ana 135.88 85.12 Dee 136.51 84.49 Cy 137.15 83.85
+WALKAT 1793880629635 148 1 134.63 86.37 0.90 Bo 134.63 86.37 Ana 135.27 85.73 Dee 135.91 85.09 Cy 136.54 84.46
+WALK 149 133 87 1793880629674
+AUDIO Sfx step_dirt
+WALKAT 1793880629901 149 1 134.00 87.00 0.90 Bo 134.00 87.00 Ana 134.63 86.37 Dee 135.27 85.73 Cy 135.90 85.10
+AUDIO Sfx step_dirt
+WALK 150 133 88 1793880630101
+WALKAT 1793880630168 150 1 133.50 87.69 0.90 Bo 133.50 87.69 Ana 134.03 86.97 Dee 134.67 86.33 Cy 135.31 85.69
+AUDIO Sfx step_dirt
+WALK 151 132 89 1793880630401
+WALKAT 1793880630435 151 1 133.44 88.55 0.90 Bo 133.44 88.55 Ana 133.50 87.65 Dee 134.05 86.95 Cy 134.69 86.31
+AUDIO Sfx step_dirt
+SHOT /workspace/issue81/integration/chapter-force/tv/109-tactics-world-walking-133-89.png
+WALK 152 132 90 1793880630995
+AUDIO Sfx step_dirt
+WALKAT 1793880630997 152 0 132.50 90.45 0.90 Bo 132.50 90.45 Ana 132.53 89.56 Dee 133.11 88.89 Cy 133.50 88.08
+WALKSTATS frames 207 ms median 33.33 p99 46.29 worst 327.83 over16 207; screen px a frame: raw median 0.0 worst 12.1 flips 3+21; drawn median 1.0 worst 16.5 flips 3+26; ground median 5.0 worst 108.7 flips 1+2
+WALK 153 132 91 1793880631133
+AUDIO Voice clip ch1_maud_open_1.f0bbacc3.ogg tactics.story: Downstream of the bridge, the bank is grey and bare for a mile. Nothing has grown here in a hundred years but one crooked hut.
+STORY 48 ch1_maud_open_1 said lines
+STORY marker ch1_old_maud 132 93 -
+TACTICS screen tactics-story
+WALKAT 1793880631265 153 0 132.50 90.95 0.90 Bo 132.50 90.95 Ana 132.50 90.05 Dee 132.80 89.20 Cy 133.43 88.56
+AUDIO Sfx step_dirt
+AUDIO Voice clip ch1_maud_open_2.38feb09d.ogg tactics.story: It is hung with charms of bone and river glass that click in the steam. Someone inside is laughing at you.
+STORY 49 ch1_maud_open_2 said lines
+WALKSTATS frames 11 ms median 33.30 p99 36.30 worst 36.30 over16 11; screen px a frame: raw median 1.4 worst 3.2 flips 4+1; drawn median 1.4 worst 3.2 flips 2+1; ground median 7.3 worst 8.5 flips 0+0
+WALKAT 1793880631539 153 0 132.50 91.50 0.96 Bo 132.50 91.50 Ana 132.45 90.54 Dee 132.50 89.69 Cy 133.03 88.97
+WALKAT 1793880631796 153 0 132.50 91.50 1.16 Bo 132.50 91.50 Ana 131.98 90.47 Dee 132.48 90.00 Cy 132.84 89.21
+AUDIO Voice clip ch1_maud_open_3.fad9008b.ogg tactics.story: Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.
+STORY 50 ch1_maud_open_3 said lines
+WALKAT 1793880632062 153 0 132.50 91.50 1.39 Bo 132.50 91.50 Ana 131.64 90.41 Dee 132.47 90.22 Cy 132.69 89.38
+WALKAT 1793880632329 153 0 132.50 91.50 1.52 Bo 132.50 91.50 Ana 131.47 90.38 Dee 132.46 90.33 Cy 132.62 89.47
+AUDIO Voice clip ch1_maud_open_4.50070cac.ogg tactics.story: Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.
+STORY 51 ch1_maud_open_4 said asking
+WALKAT 1793880632596 153 0 132.50 91.50 1.58 Bo 132.50 91.50 Ana 131.40 90.37 Dee 132.46 90.38 Cy 132.59 89.50
+WALKAT 1793880632867 153 0 132.50 91.50 1.60 Bo 132.50 91.50 Ana 131.37 90.36 Dee 132.45 90.40 Cy 132.58 89.52
+SHOT /workspace/issue81/integration/chapter-force/tv/110-tactics-world-stopped-133-92.png
+WALKAT 1793880633387 153 0 132.50 91.50 1.61 Bo 132.50 91.50 Ana 131.36 90.36 Dee 132.45 90.41 Cy 132.57 89.52
+AUDIO Voice clip ch1_maud_fell_1.703e251a.ogg tactics.story: Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down.
+STORY 52 ch1_maud_fell_1 said lines
+AUDIO Voice clip ch1_maud_fell_2.bfc49e76.ogg tactics.story: It didn't fall, dearie. It was thrown.
+STORY 53 ch1_maud_fell_2 said lines
+AUDIO Voice clip ch1_maud_fell_3.66ed66ae.ogg tactics.story: Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long.
+STORY 54 ch1_maud_fell_3 said lines
+AUDIO Voice clip ch1_maud_fell_4.138bba78.ogg tactics.story: And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down.
+STORY 55 ch1_maud_fell_4 said lines
+AUDIO Voice clip ch1_maud_fell_5.0d313f98.ogg tactics.story: Her finger, crooked as a root, points past you across the steaming water. Someone in a deep hood stands on the far bank.
+STORY 56 ch1_maud_fell_5 said lines
+AUDIO Voice clip ch1_maud_fell_6.cbfe4efa.ogg tactics.story: That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind.
+STORY 57 ch1_maud_fell_6 said lines
+AUDIO Voice clip ch1_maud_fell_7.cafa5695.ogg tactics.story: You remember well, Maud. Better than anyone. That was always going to be a problem for somebody.
+STORY 58 ch1_maud_fell_7 said lines
+AUDIO Voice clip ch1_maud_fell_8.43794a78.ogg tactics.story: Steam rolls up off the river. When it clears, the far bank is empty.
+STORY 59 ch1_maud_fell_8 said asking
+AUDIO Voice clip ch1_maud_who_1.bb5f5e61.ogg tactics.story: If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.
+STORY 60 ch1_maud_who_1 said lines
+AUDIO Voice clip ch1_maud_bye_1.b24b49d6.ogg tactics.story: I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers.
+STORY 61 ch1_maud_bye_1 said lines
+AUDIO Voice clip ch1_maud_bye_2.1c65ab25.ogg tactics.story: Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.
+STORY 62 ch1_maud_bye_2 said lines
+STORY marker ch1_the_ember 99 99 alert
+TACTICS screen tactics-exploration
+WALK 154 131 90 1793880655933
+WALKAT 1793880655934 154 0 132.45 91.45 1.52 Bo 132.45 91.45 Ana 131.39 90.36 Dee 132.45 90.39 Cy 132.58 89.51
+AUDIO Sfx step_dirt
+WALKAT 1793880656204 154 1 131.85 90.85 0.87 Bo 131.85 90.85 Ana 132.08 90.48 Dee 132.49 89.93 Cy 132.88 89.16
+WALK 155 130 91 1793880656337
+WALKAT 1793880656471 155 1 131.26 90.74 1.13 Bo 131.26 90.74 Ana 132.39 90.62 Dee 132.49 89.95 Cy 132.85 89.16
+AUDIO Sfx step_dirt
+WALKAT 1793880656737 155 1 130.63 91.37 1.78 Bo 130.63 91.37 Ana 132.40 91.42 Dee 132.50 91.03 Cy 132.49 90.09
+WALK 156 129 90 1793880656770
+AUDIO Sfx step_dirt
+WALKAT 1793880657004 156 1 129.99 90.99 1.54 Bo 129.99 90.99 Ana 131.48 90.57 Dee 131.90 90.90 Cy 132.50 91.34
+AUDIO Sfx step_dirt
+WALK 157 128 89 1793880657203
+WALKAT 1793880657271 157 1 129.36 90.36 1.59 Bo 129.36 90.36 Ana 130.54 91.43 Dee 130.96 91.04 Cy 131.74 90.74
+AUDIO Sfx step_dirt
+WALKAT 1793880657537 157 1 128.74 89.74 1.21 Bo 128.74 89.74 Ana 129.60 90.60 Dee 130.01 91.01 Cy 130.91 91.09
+WALK 158 128 88 1793880657603
+AUDIO Sfx step_dirt
+WALKAT 1793880657806 158 1 128.50 88.92 0.90 Bo 128.50 88.92 Ana 128.78 89.78 Dee 129.41 90.41 Cy 130.05 91.05
+WALK 159 128 87 1793880657937
+WALKAT 1793880658072 159 1 128.50 88.04 0.90 Bo 128.50 88.04 Ana 128.50 88.94 Dee 128.79 89.79 Cy 129.43 90.43
+AUDIO Sfx step_dirt
+WALK 160 127 86 1793880658211
+WALKAT 1793880658338 160 1 128.23 87.23 0.90 Bo 128.23 87.23 Ana 128.50 88.09 Dee 128.50 88.99 Cy 128.83 89.83
+AUDIO Sfx step_dirt
+WALKAT 1793880658611 160 1 127.59 86.59 0.90 Bo 127.59 86.59 Ana 128.22 87.22 Dee 128.50 88.08 Cy 128.50 88.98
+WALK 161 126 85 1793880658637
+AUDIO Sfx step_dirt
+WALKAT 1793880658872 161 1 126.97 85.97 0.90 Bo 126.97 85.97 Ana 127.60 86.60 Dee 128.24 87.24 Cy 128.50 88.10
+WALK 162 126 84 1793880659070
+AUDIO Sfx step_dirt
+WALKAT 1793880659155 162 1 126.50 85.27 0.90 Bo 126.50 85.27 Ana 127.01 86.01 Dee 127.65 86.65 Cy 128.28 87.28
+WALK 163 125 83 1793880659397
+WALKAT 1793880659427 163 1 126.40 84.40 0.90 Bo 126.40 84.40 Ana 126.50 85.30 Dee 127.03 86.03 Cy 127.66 86.66
+AUDIO Sfx step_dirt
+WALKAT 1793880659705 163 1 125.76 83.76 0.90 Bo 125.76 83.76 Ana 126.40 84.40 Dee 126.50 85.30 Cy 127.03 86.03
+WALK 164 124 83 1793880659815
+AUDIO Voice clip af_bank_claw_marks.eb0e3450.ogg tactics.narrator: Long claws scored the ash. The trail turns north toward a hollow in the cinders.
+AUDIO Sfx secret_found
+AUDIO Sfx step_dirt
+WALKAT 1793880659971 164 1 124.97 83.50 0.90 Bo 124.97 83.50 Ana 125.82 83.82 Dee 126.45 84.45 Cy 126.50 85.35
+WALK 165 123 82 1793880660103
+AUDIO Sfx step_dirt
+WALKAT 1793880660238 165 1 124.22 83.22 0.90 Bo 124.22 83.22 Ana 125.07 83.50 Dee 125.89 83.89 Cy 126.50 84.55
+WALK 166 122 81 1793880660503
+AUDIO Sfx step_dirt
+WALKAT 1793880660505 166 0 123.59 82.59 0.90 Bo 123.59 82.59 Ana 124.23 83.23 Dee 125.08 83.50 Cy 125.89 83.89
+WALKAT 1793880660771 166 1 122.93 81.93 0.90 Bo 122.93 81.93 Ana 123.57 82.57 Dee 124.21 83.21 Cy 125.06 83.50
+AUDIO Sfx step_dirt
+WALK 167 122 80 1793880660937
+WALKAT 1793880661037 167 1 122.50 81.21 0.90 Bo 122.50 81.21 Ana 122.98 81.98 Dee 123.61 82.61 Cy 124.25 83.25
+AUDIO Sfx step_dirt
+WALK 168 121 79 1793880661237
+WALKAT 1793880661304 168 1 122.38 80.38 0.90 Bo 122.38 80.38 Ana 122.50 81.27 Dee 123.01 82.01 Cy 123.65 82.65
+AUDIO Sfx step_dirt
+WALKAT 1793880661571 168 1 121.75 79.75 0.90 Bo 121.75 79.75 Ana 122.38 80.38 Dee 122.50 81.27 Cy 123.01 82.01
+WALK 169 120 78 1793880661670
+AUDIO Sfx step_dirt
+WALKAT 1793880661837 169 1 121.12 79.12 0.90 Bo 121.12 79.12 Ana 121.76 79.76 Dee 122.40 80.40 Cy 122.50 81.29
+WALK 170 119 77 1793880662103
+WALKAT 1793880662104 170 0 120.50 78.50 0.90 Bo 120.50 78.50 Ana 121.14 79.14 Dee 121.78 79.78 Cy 122.41 80.41
+AUDIO Sfx step_dirt
+WALKAT 1793880662370 170 1 119.89 77.89 0.90 Bo 119.89 77.89 Ana 120.52 78.52 Dee 121.16 79.16 Cy 121.79 79.79
+WALK 171 118 76 1793880662503
+AUDIO Sfx step_dirt
+WALKAT 1793880662637 171 1 119.25 77.25 0.90 Bo 119.25 77.25 Ana 119.88 77.88 Dee 120.52 78.52 Cy 121.16 79.16
+AUDIO Sfx step_dirt
+WALKAT 1793880662904 171 1 118.61 76.61 0.90 Bo 118.61 76.61 Ana 119.24 77.24 Dee 119.88 77.88 Cy 120.52 78.52
+WALK 172 117 75 1793880662937
+AUDIO Sfx step_dirt
+WALKAT 1793880663170 172 1 117.98 75.98 0.90 Bo 117.98 75.98 Ana 118.62 76.62 Dee 119.25 77.25 Cy 119.89 77.89
+SHOT /workspace/issue81/integration/chapter-force/tv/111-tactics-world-walking-118-76.png
+WALK 173 116 74 1793880663505
+AUDIO Sfx step_dirt
+WALKAT 1793880663506 173 0 116.86 74.86 0.90 Bo 116.86 74.86 Ana 117.49 75.49 Dee 118.13 76.13 Cy 118.77 76.77
+AUDIO Sfx step_dirt
+WALKSTATS frames 225 ms median 33.33 p99 39.37 worst 327.71 over16 225; screen px a frame: raw median 3.2 worst 9.2 flips 7+21; drawn median 3.2 worst 9.2 flips 7+27; ground median 5.4 worst 64.1 flips 4+0
+WALK 174 115 73 1793880663771
+WALKAT 1793880663772 174 0 116.45 74.45 0.90 Bo 116.45 74.45 Ana 117.09 75.09 Dee 117.72 75.72 Cy 118.36 76.36
+WALKAT 1793880664038 174 1 115.86 73.86 0.90 Bo 115.86 73.86 Ana 116.50 74.50 Dee 117.14 75.14 Cy 117.77 75.77
+AUDIO Sfx step_dirt
+WALK 175 114 72 1793880664204
+WALKAT 1793880664305 175 1 115.25 73.25 0.90 Bo 115.25 73.25 Ana 115.89 73.89 Dee 116.52 74.52 Cy 117.16 75.16
+AUDIO Sfx step_dirt
+WALKAT 1793880664571 175 1 114.64 72.64 0.90 Bo 114.64 72.64 Ana 115.28 73.28 Dee 115.92 73.91 Cy 116.55 74.55
+WALK 176 113 71 1793880664638
+AUDIO Sfx step_dirt
+WALKAT 1793880664838 176 1 114.03 72.03 0.90 Bo 114.03 72.03 Ana 114.67 72.67 Dee 115.30 73.30 Cy 115.94 73.94
+WALK 177 112 70 1793880665043
+WALKAT 1793880665105 177 1 113.39 71.39 0.90 Bo 113.39 71.39 Ana 114.03 72.03 Dee 114.66 72.66 Cy 115.30 73.30
+AUDIO Sfx step_dirt
+WALKAT 1793880665371 177 1 112.75 70.74 0.90 Bo 112.75 70.74 Ana 113.38 71.38 Dee 114.02 72.02 Cy 114.65 72.65
+WALK 178 111 69 1793880665471
+AUDIO Sfx step_dirt
+WALKAT 1793880665638 178 1 112.12 70.12 0.90 Bo 112.12 70.12 Ana 112.76 70.76 Dee 113.39 71.39 Cy 114.03 72.03
+AUDIO Sfx step_dirt
+WALK 179 110 68 1793880665904
+WALKAT 1793880665905 179 0 111.50 69.50 0.90 Bo 111.50 69.50 Ana 112.14 70.14 Dee 112.77 70.77 Cy 113.41 71.41
+AUDIO Sfx step_dirt
+WALKAT 1793880666171 179 1 110.88 68.88 0.90 Bo 110.88 68.88 Ana 111.52 69.52 Dee 112.16 70.16 Cy 112.79 70.79
+WALK 180 109 67 1793880666338
+WALKAT 1793880666438 180 1 110.27 68.27 0.90 Bo 110.27 68.27 Ana 110.90 68.90 Dee 111.54 69.54 Cy 112.18 70.18
+AUDIO Sfx step_dirt
+WALKAT 1793880666705 180 1 109.65 67.65 0.90 Bo 109.65 67.65 Ana 110.29 68.29 Dee 110.92 68.92 Cy 111.56 69.56
+WALK 181 109 66 1793880666738
+AUDIO Sfx step_dirt
+WALKAT 1793880666973 181 1 109.50 66.80 0.90 Bo 109.50 66.80 Ana 109.68 67.68 Dee 110.32 68.32 Cy 110.95 68.95
+WALK 182 109 65 1793880667038
+AUDIO Sfx step_dirt
+WALKAT 1793880667238 182 1 109.50 65.90 0.90 Bo 109.50 65.90 Ana 109.50 66.80 Dee 109.68 67.68 Cy 110.31 68.31
+WALK 183 108 64 1793880667348
+AUDIO Sfx step_dirt
+WALKAT 1793880667511 183 1 109.13 65.13 0.90 Bo 109.13 65.13 Ana 109.50 65.94 Dee 109.50 66.84 Cy 109.72 67.72
+WALK 184 108 63 1793880667771
+WALKAT 1793880667772 184 0 108.54 64.52 0.90 Bo 108.54 64.52 Ana 109.16 65.16 Dee 109.50 66.00 Cy 109.50 66.90
+AUDIO Sfx step_dirt
+WALKAT 1793880668045 184 1 108.50 63.65 0.90 Bo 108.50 63.65 Ana 108.56 64.55 Dee 109.19 65.19 Cy 109.50 66.03
+WALK 185 108 62 1793880668074
+AUDIO Sfx step_grass
+WALKAT 1793880668305 185 1 108.50 62.77 0.90 Bo 108.50 62.77 Ana 108.50 63.67 Dee 108.57 64.57 Cy 109.21 65.21
+WALK 186 108 61 1793880668375
+AUDIO Sfx step_grass
+WALKAT 1793880668575 186 1 108.50 61.86 0.90 Bo 108.50 61.86 Ana 108.50 62.76 Dee 108.50 63.66 Cy 108.56 64.55
+WALK 187 108 60 1793880668671
+AUDIO Sfx step_grass
+WALKAT 1793880668838 187 1 108.50 61.00 0.90 Bo 108.50 61.00 Ana 108.50 61.90 Dee 108.50 62.80 Cy 108.50 63.70
+WALK 188 107 59 1793880668972
+WALKAT 1793880669112 188 1 108.36 60.36 0.90 Bo 108.36 60.36 Ana 108.50 61.25 Dee 108.50 62.15 Cy 108.50 63.05
+AUDIO Sfx step_dirt
+WALKAT 1793880669375 188 1 108.04 60.04 0.90 Bo 108.04 60.04 Ana 108.50 60.82 Dee 108.50 61.72 Cy 108.50 62.62
+WALKAT 1793880669638 188 1 107.73 59.73 0.90 Bo 107.73 59.73 Ana 108.37 60.37 Dee 108.50 61.26 Cy 108.50 62.16
+WALK 189 106 60 1793880669838
+WALKAT 1793880669905 189 1 107.42 59.58 0.90 Bo 107.42 59.58 Ana 108.13 60.13 Dee 108.50 60.95 Cy 108.50 61.85
+AUDIO Sfx step_water
+WALKAT 1793880670183 189 1 107.11 59.89 0.90 Bo 107.11 59.89 Ana 108.00 60.00 Dee 108.50 60.75 Cy 108.50 61.65
+WALKAT 1793880670438 189 1 106.80 60.20 0.90 Bo 106.80 60.20 Ana 107.44 59.56 Dee 108.13 60.13 Cy 108.50 60.96
+AUDIO Sfx step_water
+WALK 190 105 60 1793880670671
+WALKAT 1793880670705 190 1 106.47 60.49 0.90 Bo 106.47 60.49 Ana 107.12 59.88 Dee 108.01 60.01 Cy 108.50 60.77
+WALK 191 105 61 1793880670979
+WALKAT 1793880670979 191 0 105.58 60.52 0.99 Bo 105.58 60.52 Ana 106.46 60.49 Dee 107.18 59.82 Cy 108.01 60.01
+AUDIO Sfx step_dirt
+WALKAT 1793880671242 191 1 105.50 61.33 1.07 Bo 105.50 61.33 Ana 105.87 60.50 Dee 106.74 60.26 Cy 107.58 59.58
+SHOT /workspace/issue81/integration/chapter-force/tv/112-tactics-world-walking-106-61.png
+WALK 192 105 62 1793880671580
+AUDIO Sfx step_grass
+WALKAT 1793880671583 192 0 105.50 62.50 2.03 Bo 105.50 62.50 Ana 105.87 60.50 Dee 106.74 60.26 Cy 107.58 59.58
+WALK 193 105 63 1793880671612
+AUDIO Sfx step_grass
+WALKAT 1793880671847 193 1 105.50 63.29 1.83 Bo 105.50 63.29 Ana 105.50 61.47 Dee 105.55 60.54 Cy 106.63 60.37
+WALK 194 105 64 1793880671914
+AUDIO Sfx step_grass
+WALKAT 1793880672115 194 1 105.50 64.13 1.38 Bo 105.50 64.13 Ana 105.50 62.76 Dee 105.50 61.78 Cy 105.51 60.61
+WALK 195 105 65 1793880672213
+AUDIO Sfx step_dirt
+WALKAT 1793880672391 195 1 105.50 65.05 1.18 Bo 105.50 65.05 Ana 105.50 64.14 Dee 105.50 63.16 Cy 105.50 61.99
+WALK 196 104 66 1793880672513
+WALKAT 1793880672647 196 1 105.20 65.80 0.90 Bo 105.20 65.80 Ana 105.50 64.96 Dee 105.50 64.06 Cy 105.50 63.16
+AUDIO Sfx step_dirt
+WALKAT 1793880672914 196 1 104.58 66.42 0.90 Bo 104.58 66.42 Ana 105.21 65.79 Dee 105.50 64.93 Cy 105.50 64.03
+WALK 197 104 67 1793880672947
+AUDIO Sfx step_dirt
+WALKAT 1793880673181 197 1 104.50 67.26 0.90 Bo 104.50 67.26 Ana 104.63 66.37 Dee 105.26 65.74 Cy 105.50 64.87
+WALK 198 104 68 1793880673247
+AUDIO Sfx step_dirt
+WALKAT 1793880673461 198 1 104.50 67.83 0.90 Bo 104.50 67.83 Ana 104.50 66.93 Dee 104.89 66.11 Cy 105.49 65.45
+WALKSTATS frames 288 ms median 33.33 p99 40.21 worst 342.23 over16 288; screen px a frame: raw median 2.0 worst 82.2 flips 8+29; drawn median 2.2 worst 79.8 flips 6+37; ground median 5.7 worst 161.2 flips 2+3
+WALKAT 1793880673714 198 1 104.50 68.27 0.90 Bo 104.50 68.27 Ana 104.50 67.37 Dee 104.54 66.47 Cy 105.17 65.83
+WALK 199 103 69 1793880673853
+WALKAT 1793880673981 199 1 104.35 68.65 0.90 Bo 104.35 68.65 Ana 104.50 67.76 Dee 104.50 66.86 Cy 104.93 66.07
+AUDIO Sfx step_water
+WALKAT 1793880674247 199 1 104.04 68.96 0.90 Bo 104.04 68.96 Ana 104.50 68.18 Dee 104.50 67.28 Cy 104.61 66.39
+WALKAT 1793880674514 199 1 103.73 69.27 0.90 Bo 103.73 69.27 Ana 104.36 68.64 Dee 104.50 67.75 Cy 104.50 66.85
+WALK 200 103 70 1793880674680
+AUDIO Sfx step_water
+WALKAT 1793880674783 200 1 103.50 69.63 0.90 Bo 103.50 69.63 Ana 104.07 68.93 Dee 104.50 68.14 Cy 104.50 67.24
+WALKAT 1793880675047 200 1 103.50 70.08 0.90 Bo 103.50 70.08 Ana 103.78 69.22 Dee 104.41 68.59 Cy 104.50 67.69
+WALK 201 103 71 1793880675280
+WALKAT 1793880675314 201 1 103.50 70.53 0.90 Bo 103.50 70.53 Ana 103.50 69.63 Dee 104.07 68.93 Cy 104.50 68.14
+AUDIO Sfx step_water
+WALKAT 1793880675592 201 1 103.50 70.98 0.90 Bo 103.50 70.98 Ana 103.50 70.08 Dee 103.78 69.22 Cy 104.42 68.58
+WALK 202 103 72 1793880675907
+WALKAT 1793880675907 202 0 103.50 71.52 0.90 Bo 103.50 71.52 Ana 103.50 70.62 Dee 103.50 69.72 Cy 104.02 68.98
+AUDIO Sfx step_water
+WALKAT 1793880676163 202 1 103.50 71.97 0.90 Bo 103.50 71.97 Ana 103.50 71.07 Dee 103.50 70.17 Cy 103.71 69.29
+WALKAT 1793880676415 202 1 103.50 72.38 0.90 Bo 103.50 72.38 Ana 103.50 71.48 Dee 103.50 70.58 Cy 103.50 69.68
+WALK 203 103 73 1793880676508
+WALKAT 1793880676675 203 1 103.50 72.80 0.90 Bo 103.50 72.80 Ana 103.50 71.90 Dee 103.50 71.00 Cy 103.50 70.10
+AUDIO Sfx step_water
+WALKAT 1793880676942 203 1 103.50 73.22 0.90 Bo 103.50 73.22 Ana 103.50 72.32 Dee 103.50 71.42 Cy 103.50 70.52
+WALK 204 103 74 1793880677075
+WALKAT 1793880677211 204 1 103.50 73.67 0.90 Bo 103.50 73.67 Ana 103.50 72.77 Dee 103.50 71.87 Cy 103.50 70.97
+AUDIO Sfx step_water
+WALKAT 1793880677476 204 1 103.50 74.13 0.90 Bo 103.50 74.13 Ana 103.50 73.23 Dee 103.50 72.33 Cy 103.50 71.43
+WALK 205 103 75 1793880677675
+WALKAT 1793880677742 205 1 103.50 74.58 0.90 Bo 103.50 74.58 Ana 103.50 73.68 Dee 103.50 72.78 Cy 103.50 71.88
+WALKAT 1793880678009 205 1 103.50 75.03 0.90 Bo 103.50 75.03 Ana 103.50 74.13 Dee 103.50 73.23 Cy 103.50 72.33
+AUDIO Sfx step_water
+WALK 206 103 76 1793880678275
+WALKAT 1793880678275 206 0 103.50 75.47 0.90 Bo 103.50 75.47 Ana 103.50 74.57 Dee 103.50 73.67 Cy 103.50 72.77
+WALKAT 1793880678542 206 1 103.50 75.92 0.90 Bo 103.50 75.92 Ana 103.50 75.02 Dee 103.50 74.12 Cy 103.50 73.22
+AUDIO Sfx step_water
+WALKAT 1793880678809 206 1 103.50 76.37 0.90 Bo 103.50 76.37 Ana 103.50 75.47 Dee 103.50 74.57 Cy 103.50 73.67
+WALK 207 103 77 1793880678875
+WALKAT 1793880679075 207 1 103.50 76.81 0.90 Bo 103.50 76.81 Ana 103.50 75.91 Dee 103.50 75.01 Cy 103.50 74.11
+WALKAT 1793880679342 207 1 103.50 77.26 0.90 Bo 103.50 77.26 Ana 103.50 76.36 Dee 103.50 75.46 Cy 103.50 74.56
+AUDIO Sfx step_water
+WALK 208 104 78 1793880679475
+WALKAT 1793880679609 208 1 103.64 77.64 0.90 Bo 103.64 77.64 Ana 103.50 76.75 Dee 103.50 75.85 Cy 103.50 74.95
+WALKAT 1793880679875 208 1 103.96 77.96 0.90 Bo 103.96 77.96 Ana 103.50 77.18 Dee 103.50 76.28 Cy 103.50 75.38
+AUDIO Sfx step_water
+WALKAT 1793880680142 208 1 104.27 78.27 0.90 Bo 104.27 78.27 Ana 103.63 77.63 Dee 103.50 76.74 Cy 103.50 75.84
+WALK 209 104 79 1793880680341
+WALKAT 1793880680408 209 1 104.50 78.61 0.90 Bo 104.50 78.61 Ana 103.92 77.92 Dee 103.50 77.13 Cy 103.50 76.23
+WALKAT 1793880680675 209 1 104.50 79.05 0.90 Bo 104.50 79.05 Ana 104.20 78.20 Dee 103.56 77.56 Cy 103.50 76.66
+AUDIO Sfx step_water
+WALK 210 104 80 1793880680941
+WALKAT 1793880680942 210 0 104.50 79.49 0.90 Bo 104.50 79.49 Ana 104.50 78.59 Dee 103.91 77.91 Cy 103.50 77.11
+WALKAT 1793880681209 210 1 104.50 79.93 0.90 Bo 104.50 79.93 Ana 104.50 79.03 Dee 104.18 78.18 Cy 103.55 77.55
+AUDIO Sfx step_water
+WALKAT 1793880681475 210 1 104.50 80.37 0.90 Bo 104.50 80.37 Ana 104.50 79.47 Dee 104.50 78.57 Cy 103.90 77.90
+WALK 211 105 81 1793880681541
+WALKAT 1793880681742 211 1 104.72 80.72 0.90 Bo 104.72 80.72 Ana 104.50 79.85 Dee 104.50 78.95 Cy 104.13 78.13
+WALKAT 1793880682015 211 1 105.04 81.04 0.90 Bo 105.04 81.04 Ana 104.50 80.33 Dee 104.50 79.43 Cy 104.50 78.53
+AUDIO Sfx step_water
+WALKAT 1793880682275 211 1 105.36 81.36 0.90 Bo 105.36 81.36 Ana 104.72 80.72 Dee 104.50 79.85 Cy 104.50 78.95
+WALK 212 105 82 1793880682375
+WALKAT 1793880682542 212 1 105.50 81.75 0.90 Bo 105.50 81.75 Ana 105.00 81.00 Dee 104.50 80.25 Cy 104.50 79.35
+AUDIO Sfx step_water
+WALKAT 1793880682809 212 1 105.50 82.20 0.90 Bo 105.50 82.20 Ana 105.31 81.31 Dee 104.68 80.68 Cy 104.50 79.80
+WALK 213 105 83 1793880682975
+WALKAT 1793880683075 213 1 105.50 82.64 0.90 Bo 105.50 82.64 Ana 105.50 81.74 Dee 105.00 81.00 Cy 104.50 80.25
+WALKSTATS frames 288 ms median 33.33 p99 38.85 worst 76.09 over16 288; screen px a frame: raw median 1.0 worst 4.5 flips 29+33; drawn median 1.0 worst 3.6 flips 7+21; ground median 3.6 worst 9.8 flips 0+0
+WALKAT 1793880683342 213 1 105.50 83.09 0.90 Bo 105.50 83.09 Ana 105.50 82.19 Dee 105.31 81.31 Cy 104.67 80.67
+AUDIO Sfx step_water
+WALK 214 105 84 1793880683575
+WALKAT 1793880683609 214 1 105.50 83.53 0.90 Bo 105.50 83.53 Ana 105.50 82.63 Dee 105.50 81.73 Cy 104.99 80.99
+SHOT /workspace/issue81/integration/chapter-force/tv/113-tactics-world-walking-106-84.png
+WALKAT 1793880683977 214 1 105.50 84.26 0.90 Bo 105.50 84.26 Ana 105.50 83.36 Dee 105.50 82.46 Cy 105.50 81.56
+AUDIO Sfx step_water
+WALKSTATS frames 19 ms median 33.33 p99 294.34 worst 294.34 over16 19; screen px a frame: raw median 1.0 worst 6.0 flips 3+4; drawn median 1.0 worst 4.0 flips 1+3; ground median 3.6 worst 38.9 flips 0+0
+WALK 215 105 85 1793880684195
+WALKAT 1793880684228 215 1 105.50 84.58 0.90 Bo 105.50 84.58 Ana 105.50 83.68 Dee 105.50 82.78 Cy 105.50 81.88
+WALKAT 1793880684484 215 1 105.50 84.98 0.90 Bo 105.50 84.98 Ana 105.50 84.08 Dee 105.50 83.18 Cy 105.50 82.28
+WALKAT 1793880684744 215 1 105.50 85.41 0.90 Bo 105.50 85.41 Ana 105.50 84.51 Dee 105.50 83.61 Cy 105.50 82.71
+WALK 216 105 86 1793880684776
+AUDIO Sfx step_water
+WALKAT 1793880685010 216 1 105.50 85.86 0.90 Bo 105.50 85.86 Ana 105.50 84.96 Dee 105.50 84.06 Cy 105.50 83.16
+WALKAT 1793880685277 216 1 105.50 86.31 0.90 Bo 105.50 86.31 Ana 105.50 85.41 Dee 105.50 84.51 Cy 105.50 83.61
+WALK 217 105 87 1793880685376
+AUDIO Sfx step_water
+WALKAT 1793880685544 217 1 105.50 86.75 0.90 Bo 105.50 86.75 Ana 105.50 85.85 Dee 105.50 84.95 Cy 105.50 84.05
+WALKAT 1793880685811 217 1 105.50 87.20 0.90 Bo 105.50 87.20 Ana 105.50 86.30 Dee 105.50 85.40 Cy 105.50 84.50
+WALK 218 105 88 1793880685976
+AUDIO Sfx step_water
+WALKAT 1793880686078 218 1 105.50 87.64 0.90 Bo 105.50 87.64 Ana 105.50 86.74 Dee 105.50 85.84 Cy 105.50 84.94
+WALKAT 1793880686344 218 1 105.50 88.09 0.90 Bo 105.50 88.09 Ana 105.50 87.19 Dee 105.50 86.29 Cy 105.50 85.39
+WALK 219 105 89 1793880686576
+WALKAT 1793880686611 219 1 105.50 88.53 0.90 Bo 105.50 88.53 Ana 105.50 87.63 Dee 105.50 86.73 Cy 105.50 85.83
+AUDIO Sfx step_water
+WALKAT 1793880686877 219 1 105.50 88.98 0.90 Bo 105.50 88.98 Ana 105.50 88.08 Dee 105.50 87.18 Cy 105.50 86.28
+WALKAT 1793880687144 219 1 105.50 89.42 0.90 Bo 105.50 89.42 Ana 105.50 88.52 Dee 105.50 87.62 Cy 105.50 86.72
+WALK 220 105 90 1793880687176
+AUDIO Sfx trap_spotted
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice tactics.narrator: Bo spots a trap.
+NARRATOR Off
+AUDIO Sfx step_water
+WALKAT 1793880687411 220 1 105.50 89.87 0.90 Bo 105.50 89.87 Ana 105.50 88.97 Dee 105.50 88.07 Cy 105.50 87.17
+WALKAT 1793880687683 220 1 105.50 90.33 0.90 Bo 105.50 90.33 Ana 105.50 89.43 Dee 105.50 88.53 Cy 105.50 87.63
+WALK 221 104 91 1793880687795
+WALKAT 1793880687950 221 1 105.30 90.70 0.90 Bo 105.30 90.70 Ana 105.50 89.82 Dee 105.50 88.92 Cy 105.50 88.02
+AUDIO Sfx step_water
+WALKAT 1793880688211 221 1 104.99 91.01 0.90 Bo 104.99 91.01 Ana 105.50 90.26 Dee 105.50 89.36 Cy 105.50 88.46
+WALKAT 1793880688477 221 1 104.68 91.32 0.90 Bo 104.68 91.32 Ana 105.32 90.68 Dee 105.50 89.80 Cy 105.50 88.90
+WALK 222 103 92 1793880688655
+AUDIO Sfx step_water
+WALKAT 1793880688747 222 1 104.24 91.76 0.90 Bo 104.24 91.76 Ana 104.88 91.12 Dee 105.50 90.47 Cy 105.50 89.57
+WALKAT 1793880689010 222 1 103.64 92.36 0.90 Bo 103.64 92.36 Ana 104.28 91.72 Dee 104.92 91.09 Cy 105.50 90.40
+WALK 223 102 93 1793880689043
+AUDIO Sfx step_wood
+WALKAT 1793880689277 223 1 103.00 93.00 0.90 Bo 103.00 93.00 Ana 103.64 92.36 Dee 104.27 91.73 Cy 104.91 91.09
+AUDIO Sfx step_wood
+WALK 224 102 94 1793880689483
+WALKAT 1793880689544 224 1 102.50 93.59 0.90 Bo 102.50 93.59 Ana 103.09 92.91 Dee 103.72 92.28 Cy 104.36 91.64
+WALKAT 1793880689810 224 1 102.50 94.04 0.90 Bo 102.50 94.04 Ana 102.81 93.19 Dee 103.45 92.55 Cy 104.08 91.92
+AUDIO Sfx step_water
+WALK 225 102 95 1793880690076
+WALKAT 1793880690077 225 0 102.50 94.48 0.90 Bo 102.50 94.48 Ana 102.51 93.58 Dee 103.10 92.90 Cy 103.73 92.27
+WALKAT 1793880690345 225 1 102.50 94.92 0.90 Bo 102.50 94.92 Ana 102.50 94.02 Dee 102.82 93.18 Cy 103.46 92.55
+AUDIO Sfx step_water
+WALKAT 1793880690610 225 1 102.50 95.37 0.90 Bo 102.50 95.37 Ana 102.50 94.47 Dee 102.51 93.57 Cy 103.10 92.90
+WALK 226 102 96 1793880690676
+WALKAT 1793880690877 226 1 102.50 95.81 0.90 Bo 102.50 95.81 Ana 102.50 94.91 Dee 102.50 94.01 Cy 102.83 93.17
+WALKAT 1793880691144 226 1 102.50 96.26 0.90 Bo 102.50 96.26 Ana 102.50 95.36 Dee 102.50 94.46 Cy 102.51 93.56
+AUDIO Sfx step_water
+WALK 227 101 97 1793880691276
+AUDIO Voice clip ch1_docks_open_1.c9c576bb.ogg tactics.story: By night the river docks belong to the Ash Market. Lanterns float on the water, and nobody uses their real name.
+STORY 63 ch1_docks_open_1 said lines
+STORY marker ch1_the_ember 99 99 -
+TACTICS screen tactics-story
+WALKAT 1793880691410 227 0 102.36 96.64 0.90 Bo 102.36 96.64 Ana 102.50 95.75 Dee 102.50 94.85 Cy 102.50 93.95
+WALKAT 1793880691680 227 0 102.04 96.96 0.90 Bo 102.04 96.96 Ana 102.50 96.18 Dee 102.50 95.28 Cy 102.50 94.38
+AUDIO Voice clip ch1_docks_open_2.a8fabc65.ogg tactics.story: Down here. Under the third pier, past the eel traps. I don't know how I know that. I've never been under here.
+STORY 64 ch1_docks_open_2 said lines
+AUDIO Sfx step_water
+WALKAT 1793880691944 227 0 101.73 97.27 0.90 Bo 101.73 97.27 Ana 102.37 96.63 Dee 102.50 95.74 Cy 102.50 94.84
+WALKAT 1793880692215 227 0 101.50 97.50 0.92 Bo 101.50 97.50 Ana 102.15 96.86 Dee 102.49 96.03 Cy 102.50 95.14
+WALKSTATS frames 241 ms median 33.33 p99 38.43 worst 40.78 over16 241; screen px a frame: raw median 1.0 worst 7.2 flips 28+36; drawn median 1.0 worst 6.4 flips 6+19; ground median 4.5 worst 13.2 flips 0+3
+AUDIO Voice clip ch1_docks_open_3.9243975a.ogg tactics.story: Beneath the pier the river runs shallow over black stone. Something glows in the riverbed, dull red, like a coal at the bottom of a grate.
+STORY 65 ch1_docks_open_3 said lines
+WALKAT 1793880692486 227 0 101.50 97.50 0.89 Bo 101.50 97.50 Ana 102.23 97.05 Dee 102.09 96.17 Cy 102.53 95.67
+WALKAT 1793880692744 227 0 101.50 97.50 1.07 Bo 101.50 97.50 Ana 102.30 97.22 Dee 101.74 96.30 Cy 102.55 96.14
+AUDIO Voice clip ch1_docks_open_4.f1cefa64.ogg tactics.story: The ford's ember. It is no bigger than a loaf, and cracked and chipped all over, as if something has been gnawing it.
+STORY 66 ch1_docks_open_4 said asking
+WALKAT 1793880693011 227 0 101.50 97.50 1.21 Bo 101.50 97.50 Ana 102.34 97.30 Dee 101.57 96.36 Cy 102.56 96.37
+WALKAT 1793880693272 227 0 101.50 97.50 1.27 Bo 101.50 97.50 Ana 102.35 97.34 Dee 101.50 96.39 Cy 102.57 96.46
+WALKAT 1793880693548 227 0 101.50 97.50 1.30 Bo 101.50 97.50 Ana 102.36 97.35 Dee 101.47 96.40 Cy 102.57 96.50
+WALKAT 1793880693836 227 0 101.50 97.50 1.31 Bo 101.50 97.50 Ana 102.36 97.36 Dee 101.46 96.40 Cy 102.57 96.52
+SHOT /workspace/issue81/integration/chapter-force/tv/114-tactics-world-stopped-102-98.png
+AUDIO Voice clip ch1_docks_rook_1.b1f33729.ogg tactics.story: Careful. You're standing on my livelihood.
+STORY 67 ch1_docks_rook_1 said lines
+AUDIO Voice clip ch1_docks_rook_2.2602e063.ogg tactics.story: A lean figure steps off a skiff onto the black stone, lantern in hand. A river coat, and an easy smile that costs extra.
+STORY 68 ch1_docks_rook_2 said lines
+AUDIO Voice clip ch1_docks_rook_3.1a81a2c3.ogg tactics.story: Rook. I run the Ash Market. You've bought from me, or your grandmother did. Everyone has.
+STORY 69 ch1_docks_rook_3 said lines
+AUDIO Voice clip ch1_docks_rook_4.76ee6b8b.ogg tactics.story: Yes, we chip her. A shard here, a shard there, and somebody's hearth stays warm. Shame to let it go to waste in the mud.
+STORY 70 ch1_docks_rook_4 said asking
+AUDIO Voice clip ch1_docks_killing_1.cac21874.ogg tactics.story: She was dying long before I came. I sell the pieces before they're worth nothing. That's not murder. That's timing.
+STORY 71 ch1_docks_killing_1 said lines
+AUDIO Voice clip ch1_docks_killing_2.ef1b1e27.ogg tactics.story: Here's something for free, since I'm feeling generous. I sell more shards than this ember has to give.
+STORY 72 ch1_docks_killing_2 said lines
+AUDIO Voice clip ch1_docks_killing_3.75a5ec4f.ogg tactics.story: Somebody else supplies the difference. I don't know who. I'd like to, before they decide they don't need me.
+STORY 73 ch1_docks_killing_3 said lines
+AUDIO Voice clip ch1_docks_close_1.8e8b613b.ogg tactics.story: It's so cold now. It was warm here, once. I remember it being warm.
+STORY 74 ch1_docks_close_1 said lines
+AUDIO Voice clip ch1_docks_close_2.315171bc.ogg tactics.story: No. I don't. Somebody does.
+STORY 75 ch1_docks_close_2 said lines
+AUDIO Voice clip ch1_kindler_open_1.ffa11b97.ogg tactics.story: Next morning a crowd gathers by the chapel steps. A woman in a plain grey coat is speaking, and nobody is leaving.
+STORY 76 ch1_kindler_open_1 said lines
+AUDIO Voice clip ch1_kindler_open_2.6fdcd5c8.ogg tactics.story: You've felt how cold it's getting. The fields. The forges. Your own hearths, a little lower every year.
+STORY 77 ch1_kindler_open_2 said lines
+AUDIO Voice clip ch1_kindler_open_3.a317dc49.ogg tactics.story: It doesn't have to be this way. The Hearthflame can burn again. It wants to. It only needs us to be brave enough to feed it.
+STORY 78 ch1_kindler_open_3 said lines
+AUDIO Voice clip ch1_kindler_open_4.169e13b7.ogg tactics.story: Maren Sorrel. I put you out of my chapel once. Don't make me do it to the whole square.
+STORY 79 ch1_kindler_open_4 said lines
+AUDIO Voice clip ch1_kindler_open_5.945d93b9.ogg tactics.story: Mother Aubrine. You fed half this town last winter, and you'll bury the other half this one. I'm offering more than prayers.
+STORY 80 ch1_kindler_open_5 said lines
+AUDIO Voice clip ch1_kindler_open_6.fa622d29.ogg tactics.story: Maren's eyes find you in the crowd. She smiles as if you are old friends.
+STORY 81 ch1_kindler_open_6 said lines
+AUDIO Voice clip ch1_kindler_open_7.2758db33.ogg tactics.story: You found it, didn't you? Under the docks. I can see it on you. Tell me, what did the ford cost you?
+STORY 82 ch1_kindler_open_7 said asking
+AUDIO Voice clip ch1_kindler_slain_1.ee3f162a.ogg tactics.story: Then you understand already. Sometimes one life buys a winter for a thousand. That isn't cruelty. It's arithmetic.
+STORY 83 ch1_kindler_slain_1 said lines
+AUDIO Voice clip ch1_kindler_pitch_1.311e5486.ogg tactics.story: Come and find me when you're ready to save the Vale, and not only this town. I'll be wherever the embers are.
+STORY 84 ch1_kindler_pitch_1 said lines
+AUDIO Voice clip ch1_kindler_pitch_2.3c14cb52.ogg tactics.story: Be careful of her. The worst of it is that she believes every word.
+STORY 85 ch1_kindler_pitch_2 said asking
+AUDIO Voice clip ch1_kindler_done_1.4c49ace5.ogg tactics.story: The crowd breaks up slowly. More than a few of them keep looking back the way Maren went.
+STORY 86 ch1_kindler_done_1 said lines
+AUDIO Voice clip ch1_four_more_open_1.69b16b57.ogg tactics.story: That night the docks are quiet. The hooded figure waits at the end of the third pier, as if you had arranged to meet.
+STORY 87 ch1_four_more_open_1 said lines
+AUDIO Voice clip ch1_four_more_open_2.e7c6ba76.ogg tactics.story: You found her. Good. She hasn't long, you know. Cracked and chipped, and cold at the heart. Like most things in this valley.
+STORY 88 ch1_four_more_open_2 said lines
+AUDIO Voice clip ch1_four_more_open_3.4e18c8be.ogg tactics.story: She isn't the only one. There are four more. You'll want to reach them before the woman in grey does.
+STORY 89 ch1_four_more_open_3 said asking
+AUDIO Voice clip ch1_four_more_who_1.3a1f4eeb.ogg tactics.story: Someone who has watched a great many rivers. You're asking the right questions. You're just asking the wrong people.
+STORY 90 ch1_four_more_who_1 said lines
+AUDIO Voice clip ch1_four_more_where_1.438a7616.ogg tactics.story: The nearest lies in Mirewood, where the marsh began to dream. The Court there will want something for it.
+STORY 91 ch1_four_more_where_1 said lines
+AUDIO Voice clip ch1_four_more_where_2.f93db736.ogg tactics.story: Whatever they ask for, think before you say yes. Things given in Mirewood stay given.
+STORY 92 ch1_four_more_where_2 said lines
+AUDIO Voice clip ch1_four_more_where_4.7125d168.ogg tactics.story: She'll keep better near her sisters than in the mud. Leave her here, and the Ash Market will have her in chips by spring.
+STORY 93 ch1_four_more_where_4 said lines
+AUDIO Voice clip ch1_four_more_where_3.17166954.ogg tactics.story: The lantern on the pier gutters. When it steadies you are alone, and the ford's ember sits warm in your pack.
+STORY 94 ch1_four_more_where_3 said lines
+STORY marker none
+STORY card Chapter I · The Bridge at the Ford
+SHOT /workspace/issue81/integration/chapter-force/tv/115-tactics-story-card.png
+NARRATOR Google
+TACTICS screen tactics-exploration
+WALK 228 100 98 1793880757400
+WALKAT 1793880757401 228 1 101.45 97.55 1.29 Bo 101.45 97.55 Ana 102.35 97.35 Dee 101.48 96.40 Cy 102.57 96.49
+AUDIO Sfx step_wood
+WALKAT 1793880757667 228 1 100.86 98.14 1.70 Bo 100.86 98.14 Ana 102.19 97.08 Dee 102.10 96.22 Cy 102.53 95.71
+WALK 229 99 99 1793880757800
+WALKAT 1793880757934 229 1 100.24 98.76 2.01 Bo 100.24 98.76 Ana 101.69 97.38 Dee 102.40 96.24 Cy 102.51 95.38
+AUDIO Sfx step_wood
+WALKAT 1793880758201 229 1 99.60 99.40 1.79 Bo 99.60 99.40 Ana 100.74 98.28 Dee 101.99 97.00 Cy 102.50 96.15
+WALK 230 98 100 1793880758235
+AUDIO Sfx step_wood
+WALKAT 1793880758470 230 1 98.98 100.02 1.80 Bo 98.98 100.02 Ana 99.79 99.21 Dee 101.06 97.94 Cy 101.82 97.18
+AUDIO Sfx step_stone
+WALK 231 98 101 1793880758667
+WALKAT 1793880758734 231 1 98.50 100.71 1.55 Bo 98.50 100.71 Ana 99.02 99.98 Dee 100.12 98.88 Cy 100.88 98.12
+AUDIO Sfx step_stone
+WALKAT 1793880759003 231 0 98.50 101.50 1.16 Bo 98.50 101.50 Ana 98.51 100.55 Dee 99.30 99.70 Cy 100.05 98.95
+WALKSTATS frames 49 ms median 33.33 p99 33.33 worst 33.33 over16 49; screen px a frame: raw median 4.0 worst 6.4 flips 1+2; drawn median 4.2 worst 6.7 flips 1+4; ground median 11.0 worst 16.0 flips 0+1
+WALKAT 1793880759267 231 0 98.50 101.50 1.34 Bo 98.50 101.50 Ana 98.12 100.48 Dee 99.35 99.94 Cy 99.55 99.14
+WALKAT 1793880759536 231 0 98.50 101.50 1.71 Bo 98.50 101.50 Ana 97.71 100.42 Dee 99.41 100.19 Cy 99.02 99.35
+WORLD closed
+TACTICS left: narrator cleared
+RESULTS The party is level 1; 1 battles won.
+SHOT /workspace/issue81/integration/chapter-force/tv/116-results.png

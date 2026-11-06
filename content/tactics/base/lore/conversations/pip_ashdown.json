@@ -1,0 +1,185 @@
+{
+  "id": "talk_pip_ashdown",
+  "character": "pip_ashdown",
+  "title": "Pip Ashdown",
+  "cast": [
+    "pip_ashdown"
+  ],
+  "start": "offer",
+  "entries": [
+    {
+      "node": "brought",
+      "requires": [
+        "sq_whistle_found"
+      ],
+      "unless": [
+        "sq_whistle_done"
+      ]
+    },
+    {
+      "node": "left",
+      "requires": [
+        "sq_whistle_left"
+      ],
+      "unless": []
+    },
+    {
+      "node": "done",
+      "requires": [
+        "sq_whistle_done"
+      ],
+      "unless": []
+    },
+    {
+      "node": "waiting",
+      "requires": [
+        "sq_whistle_asked"
+      ],
+      "unless": []
+    },
+    {
+      "node": "offer",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "offer",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_001",
+          "speaker": "pip_ashdown",
+          "text": "Annet was a guard. She had a whistle, a proper one. I think it is by her stone. Would you look? I do not want somebody treading on it.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "options": [
+        {
+          "id": "accept",
+          "label": "We will look at Annet's grave.",
+          "to": "accepted",
+          "quest": {
+            "start": "sq_guards_whistle"
+          }
+        },
+        {
+          "id": "leave",
+          "label": "Not just now, Pip.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "accepted",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_002",
+          "speaker": "pip_ashdown",
+          "text": "Thank you. Do not make it into a dare. It is her place.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "waiting",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_003",
+          "speaker": "pip_ashdown",
+          "text": "Annet's stone, near the other graves. You will know it.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "brought",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_004",
+          "speaker": "pip_ashdown",
+          "text": "You found it. May I hold it? I will not blow it here.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "options": [
+        {
+          "id": "return",
+          "label": "Give Pip the whistle.",
+          "to": "received",
+          "quest": {
+            "complete": "sq_guards_whistle"
+          },
+          "sets": [
+            "sq_whistle_brought"
+          ]
+        },
+        {
+          "id": "wait",
+          "label": "Keep it safe until later.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "received",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_005",
+          "speaker": "pip_ashdown",
+          "text": "It is heavier than I thought. I will take it back when I visit her. Promise.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "left",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_006",
+          "speaker": "pip_ashdown",
+          "text": "You left it with her? Good. I could come with you next time. Just to sit a little.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "done",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_007",
+          "speaker": "pip_ashdown",
+          "text": "I know where it belongs now. Thank you for being careful.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_pip_ashdown_008",
+          "speaker": "pip_ashdown",
+          "text": "Mind the puddles. The deep one looks just like the others.",
+          "mood": "idle",
+          "direction": "Bright, quick child voice; curious and earnest, small pauses when something hurts."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

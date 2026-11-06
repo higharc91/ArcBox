@@ -1,0 +1,2050 @@
+{
+  "status": "complete",
+  "expected_loops": 120,
+  "complete_loops": 120,
+  "pending": [],
+  "errors": [],
+  "policy": "Exact rest endpoint, original pixels and fixed palette; one anchor for all facings and frames, no frame recentering; duplicate closing omitted from loop playback.",
+  "loops": [
+    {
+      "key": "mule/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "mule/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "mule/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "goat/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "goat/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "fox/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 7,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "fox/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "duck/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "duck/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "pixel_scale": 0.5,
+      "method": "authored fixed-pose buoyancy",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south-west/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/west/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north-west/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 1,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 2,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/north-east/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/east/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 2,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "crow/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "crow/animations/south-east/flap",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 28,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "dog/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "dog/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/south/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/south/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/south-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/south-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/north-west/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/north-west/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/north/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/north/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/north-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/north-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    },
+    {
+      "key": "sheep/animations/south-east/idle",
+      "frames": 4,
+      "downloaded_frames": 5,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 180
+    },
+    {
+      "key": "sheep/animations/south-east/move",
+      "frames": 8,
+      "downloaded_frames": 9,
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "pixel_scale": 0.5,
+      "method": "PixelLab motion with palette and endpoint cleanup",
+      "removed_stray_pixels": 0,
+      "frame_duration_ms": 110
+    }
+  ]
+}

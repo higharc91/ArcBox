@@ -1,0 +1,67 @@
+{
+  "about": "Explicitly selected clean paid frames. Reject anatomy/weapon artifacts; retain every original take for audit. Use fixed canvas padding only, never per-frame recentering.",
+  "ashmaw": {
+    "hurt": {
+      "south": {
+        "group": "ashmaw_hurt_pinned_clean",
+        "frames": [
+          3,
+          0,
+          0,
+          3
+        ],
+        "reason": "Frames1/2 duplicate the head. Clean recoil0 and recovered3 preserve one head and planted paws."
+      },
+      "south-west": {
+        "group": "ashmaw_hurt_pinned_clean",
+        "frames": [
+          3,
+          0,
+          0,
+          3
+        ],
+        "reason": "Frames1/2 invent an elongated tail; keep clean recoil and recovery."
+      },
+      "south-east": {
+        "group": "ashmaw_hurt_pinned_clean",
+        "frames": [
+          3,
+          0,
+          0,
+          3
+        ],
+        "reason": "Frames1/2 invent an elongated tail; keep clean recoil and recovery."
+      }
+    },
+    "shake": {
+      "south-west": {
+        "group": "ashmaw_shake_sw_fixed",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          2,
+          3
+        ],
+        "reason": "Reviewed pinned shoulder shudder preserves planted paws, one head, and the original short tail; rejected long-tail take retained separately."
+      }
+    }
+  },
+  "kobold_foreman": {
+    "attack": {
+      "east": {
+        "group": "grisk_attack_pilot",
+        "frames": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          5
+        ],
+        "reason": "Original frame3 loses the pick. The pinned retake changes its blade size; use only the clean held-pick poses."
+      }
+    }
+  }
+}

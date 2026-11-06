@@ -1,0 +1,8 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/pip-ashdown/candidate-1.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/lark/portraits/lark_idle.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Create SIX matching pixel-art dialogue portraits of APPROVED PIP, the NINE-YEAR-OLD girl in reference1. Reference2 only native40x40 pixel-cluster style, not adult age. Round child face, brown eyes/freckles, messy dark brown hair and right-shoulder braid, rust patched coat/sage tunic. Same child identity/face size/pose in all moods, no aging. Exactly THREE equal columns by TWO equal rows, large transparent gutters around each complete head/shoulder silhouette. Row1 neutral quick observant, hurt wince no wounds, happy bright smile; row2 angry frown, sad downcast, surprised wide eyes/small open mouth. Crisp native40x40-style enlarged nearest-neighbour pixels, earthy palette, upper-left warm light, no smoothing. Transparent background, no labels/frames/scenery/props. All hair/braid/shoulders inside cells, no overlaps or clipping."
+}

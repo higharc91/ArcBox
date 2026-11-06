@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_Q8D5DxgrY8nYf5rbmBaFmUek",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_S8CrTGYQ5htgFYgcKiYgc2E1",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_jpr6caJhG5Psdhd4AWg4jJ7S"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 12.2,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 3.47,
+            "start": 0.05,
+            "text": " Ah, did you now?",
+            "words": null
+          },
+          {
+            "end": 10.43,
+            "start": 3.47,
+            "text": " She and I are the last two in this valley who remember what we were told.",
+            "words": null
+          },
+          {
+            "end": 11.83,
+            "start": 10.43,
+            "text": " Mind you, keep her breathing.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:56.648Z",
+    "updatedAt": "2026-11-05T00:36:58.113Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:56.648Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:56.765Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:58.113Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -36,6 +36,10 @@ The app prints `ROOM <CODE>` on stdout whenever it creates or resumes a room, so
 `tools/tv-e2e.sh` uses that to run the TV, the server and bot phones together and collect screenshots from both
 ([`redline-tv.md`](redline-tv.md#toolstv-e2esh-tv-server-and-phones-together)).
 
+Saving a shot stalls the frame it's taken on, so don't judge hitches or frame times from a run with `--shots`: on an RTX 5080 a
+fight's start took 216 ms with shots and 2 to 5 ms without. `ARCBOX_SHOTS=0 tools/tv-e2e.sh` runs the TV without them (and skips
+the checks for them); add `TV_ARGS=--perf` for the frame times.
+
 ## Arguments
 
 Everything after `--` on the Godot command line; all optional.
@@ -55,8 +59,13 @@ Everything after `--` on the Godot command line; all optional.
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
-| `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
-| `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds, and a `WALKSTATS` line every 288 frames of walking: frame times, and how many pixels the leader and the ground moved a frame. See [walking](#walking). |
+| `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in (four distinct heroes with `--perf`) the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
+| `--world-demo=things` | Dev only: the art check for things to interact with (`ThingsDemo` in Tactics.Presentation), without a server: a generated courtyard with every kind in every state the art brief draws, on four labelled gallery screens (each label is the art key, without `interactables.`, and where its picture came from: `art`, `stand-in: <key>` or `marker`), then a chest opened, a hidden cache found, traps seen, set off and disarmed, a lever working a gate both ways, a locked door unlocked and opened, a secret door found and opened, a key picked up, a note read and a shrine used; then the hidden things (design §7): tracks noticed that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found, and a Search with its hidden DC finding a loose flagstone. Use `--res=1920x1080`; with `--shots` it saves a `things-*` shot of each moment, then quits. See [things to interact with](#things-to-interact-with). |
+| `--world-looks=<name>@<x>,<y>[@<x>,<y>];…` | Dev only: with `--world-demo` and `--shots`, go to these places instead of walking, and save `world-<name>.png` of each, with the figure on the second tile if there is one. It's how `place-*.png` were taken. |
+| `--world-route=<x>,<y>;…` | Dev only: with `--world-demo`, time a walk along these corners in place of the demo's own: a walk through a town, say. |
+| `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds; `WALKAT <ms> <seq> <held 0\|1> <leader x> <leader y> <widest gap> <name> <x> <y> …`, where the TV drew each walker, at most every 0.25 s while anything moves and once when it comes to rest; `BUMP <ms> <x> <y>` when the leader bumps a wall; `TACTICS walk snapped to <x> <y>` when the party is put somewhere rather than walked there (a first view, a new epoch, a reconnect); and a `WALKSTATS` line every 288 frames of walking and once more when the party stops: frame times, and how many pixels the leader and the ground moved a frame. The formats are in [the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end). See [walking](#walking). |
+| `--story-demo[=<step>]` | Dev only: play the story over the world without a server (`StoryDemo` in Tactics.Presentation), from the real lore and region: the "!" over Pip, the narrator and speakers with their faces and clips, a leader's choice, a party vote that ties and is broken, eleven long options, six roller cards, a pass and a fail, the gap between scenes and the chapter card. `<step>` starts at `marker`, `line`, `choice`, `gap`, `vote`, `tie`, `many`, `check`, `pass`, `fail` or `card`. With `--shots` it saves a `tactics-story-*` shot of each. |
+| `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it; `STORY marker <beat> <x> <y> <emote\|->` for each beat on offer whenever they change (`STORY marker none` for none); and `STORY card <chapter>` as a chapter's card comes up. See [the story](#the-story). |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -74,7 +83,14 @@ the lobby exactly as before.
 The server sends `ContentRequired(gameId, packs)` when a game is selected, when it starts and on resume (spec §3.6). The TV
 caches each pack under `user://content/<gameId>/<packId>/<hash>/` (on Linux
 `~/.local/share/godot/app_userdata/ArcBox/content/`), downloading it from the server it's connected to and verifying every
-file; the newest 3 hashes of each pack are kept. A game with no packs (REDLINE, Counter) is shown at once, as before.
+file. A new hash (a new export) downloads only the files that changed: a file an installed version of the pack already
+has, at the same path and with the SHA-256 the server's index lists, is copied from disk and checked instead
+(`ContentPlan.Sources`). Changing one region file of the Tactics pack fetches that file and the index (about 0.66 MB)
+rather than all 4,309 files (122 MB); an unchanged pack fetches nothing, not even the index. This needs nothing from the
+server that it didn't already send, so old servers and old caches work. Up to 3 hashes of each pack are kept, and the
+least recently used go first once the cache is over 1 GiB, though never a pack's newest hash or the one before it, which a
+running game may still read (`ContentPlan.Evict`). Each install logs a `Content <game>/<pack>@<hash> installed: fetched
+… reused …` line. A game with no packs (REDLINE, Counter) is shown at once, as before.
 Otherwise, if a pack isn't cached yet when the game starts, the TV shows a "Loading content… 42%" card (the average
 across the game's packs) and shows the game once every pack is in, with the newest view it was sent meanwhile. If a
 download or its verification fails, the card says "Couldn't load game content" with **Retry** (click or Enter), and the
@@ -85,7 +101,7 @@ error is logged; **Esc** ends the game as usual.
 After creating a room the host writes `user://session.json` = `{serverUrl, code, hostToken}`
 (on Linux `~/.local/share/godot/app_userdata/ArcBox/session.json`). On the next launch it calls `ResumeHost` with
 it, so killing and relaunching the TV keeps the room, its players and any game in progress: the server re-sends the
-lobby (and the current host view), and the TV redraws from that snapshot. If the resume fails (the server restarted,
+lobby (and the current host view), and the TV redraws from that snapshot. While a game runs, the TV asks for **patches**: after the first whole view it's sent only what changed, which keeps a Tactics overworld step in one network packet. A walking step patch is about 450 bytes, against a whole view of about 4.3 KB in Ashen Ford. `HostClient` applies them and hands the scene whole views as before, and any rebind, new game or unreadable patch brings a whole view again. See [the platform spec](superpowers/specs/2026-10-18-arcbox-platform-design.md) §4.1, "Host view patches", and issue #77. If the resume fails (the server restarted,
 or the room expired), the file is deleted and a new room is created. A session saved for a different server URL is
 ignored.
 
@@ -267,11 +283,19 @@ seam or skirt) that share one `BoardLighting`, and `WorldBlock` records each one
 block column + row, with the column breaking ties. That agrees with `BoardOrder` for anything up to two tiles wide, and the pack's widest prop is 56 px. `BlockQueue` hands out unrecorded blocks
 nearest first, around where the party will be in 2 s.
 
-`WorldCanvas` is a `CanvasLayer` under the UI, because a block's Z sorts across its whole layer. It opens behind a fade: the plan and its baked colours off the main thread, then a texture a frame, then the blocks in view. Only then does the fade lift, and the rest go at 4 ms a frame, while the party is already moving. A block seen before its turn logs `WORLD late block`. Colours are baked at each light's mean, and the probes are then dropped, so floors don't flicker; flicker stays on halos and units, and halos are limited to the view. Water and flames go on moving in blocks recorded once because `FrameTextures` rewrites a single-frame texture in place, with a second one for what glows.
+`WorldCanvas` is a `CanvasLayer` under the UI, because a block's Z sorts across its whole layer. It opens behind a fade: the plan and its baked colours off the main thread, then a texture a frame, then the blocks in view. Only then does the fade lift, and the rest go at 4 ms a frame, while the party is already moving. The loading watchdog allows slow machines to keep loading while textures or visible blocks advance; it gives up after 10 seconds without progress or 60 seconds overall. A block seen before its turn logs `WORLD late block`. Colours are baked at each light's mean, and the probes are then dropped, so floors don't flicker; flicker stays on halos and units, and halos are limited to the view. Water and flames go on moving in blocks recorded once because `FrameTextures` rewrites a single-frame texture in place, with a second one for what glows.
 
 Over the blocks, a `BoardCanvas` (`SetDrawn`) paints each frame's units with what stands in front of them (`WorldPlan.Overlay`), the same pixels in the same baked light. That's what sorts after a unit and crosses it, and then, because an item is repainted whole, what sorts after a repainted item and crosses that, until nothing more does. Without those, a tile repainted for one corner would go over its neighbour in front. Items cross by the shapes they cover: on open ground every tile's box overlaps the next one's, so going by boxes would run away across the map, where diamonds only meet. It comes to a mean of 1.0 items a frame and at most 23 on a walk across Ashen Ford with three walkers, and 8.5 and 55 on `hilly`. `OverlayPictureTests` rasters such walks, blocks then overlay, against true painter's order: no pixel differs. Painting something twice would show if it were half see-through, but no lip or prop in the pack has a partly clear pixel. A unit's marks stand above everything, so a bar or the crown stays visible over a figure hidden by a cliff.
 
 The pack's tops are square and lie turned 45 degrees on a tile, so a checker dither's diagonals run straight down the screen, and at scale 2 every patch of dither was a comb of vertical stripes. `DitherTexels` keeps a top's dither a checker: the TV gets the top at twice its size, which samples exactly as it did at any scale, and only texels that are part of a checker get a pattern that lands upright, in the same two colours. No filter or UV can do this, because outlines must stay where the turn puts them. A top with no dither (cobble, planks, water) is drawn as it is. See [the proof](superpowers/reports/2026-10-31-tactics-overworld/stripes-art-before-after.png): the art, then before, then after. A tall side clamps as the manifest says, so a drop deeper than `chasm_side` shows its art at its own size and goes on as its last row. Doubling costs four times the memory, so it's for tops with real dither: a frame needs `LeastPatch` (8) texels of dither touching, and the art's real dither comes in patches of 80 and up, while specks in sand, flagstone and dungeon floors, and the crypt's runes, are 7 at most.
+
+**Ground dressing and props:** In the world, `WorldPlan` adds decals and vertex tint to ground tiles. Decals (`flowers`, `leaves`, `pebbles`, `scorch_burnt`, `bones_bone`, `cracks_dark`, `puddle_water`, `puddle_swamp`, `blood_red`) are placed at ~1 tile in 6 by deterministic hash of tile coordinates and material. Ordinary ground skips blood and bones. Stamped tiles get no decals and no tint, ensuring a battle stage draws identically to its battle map. Ground tint is a slow continuous sine drift baked into vertex colours across block boundaries, stopping ash and water repeating every 4 tiles with no new art and zero draw calls. Region props are drawn with their specified variants on their tiles, in the static blocks in painter's order, tall or low, and props with light data light up the ground via the shared `BoardLighting`. What they block comes from the pack's art manifest, read explicitly by the server (`RulesPack.Load`) and the TV (`DemoRegion.FromPack`) alike: `WorldGround.Of` refuses a prop or building it has no definition for, so a missing definition can't mean walkable, and the two can't disagree on a tile. `StagePlan` draws region props near the fight so a fight retains its surroundings. Battle boards built with `BoardPlan.Build` remain completely unchanged.
+
+**Buildings** (`town/manifest.json`, placed by a region's `buildings`) are planned by `BuildingPlan`, pure, and drawn by the same painter as everything else, so the blocks, the overlay, the stage and the light all take them with no new path. A building is cut into the manifest's 32 px screen columns from its origin, each a quad sorted at the frontmost footprint tile it crosses (`BuildingArt.FrontOf`), at 1 px = 1 texel. A quad, and not a sprite, so a lamp lights a wall smoothly across columns. Over a tile that's walked under, as a gate's arch is, a column sorts after whoever's on that tile; steps and bridge decks sort under them, by the manifest's `walkable`. The manifest doesn't say where the art has pixels, and a frame leaves its right side to the shadow, so `BuildingShape` reads each PNG once: columns are trimmed to their pixels and empty ones aren't drawn, which also stops a walker in clear air fading anything. The shadow is one face a tile at the ground's own place in the order, sampled pixel for pixel, so it's under whatever stands on the tile and goes down steps with the ground. It's in cells as a lit top is, because it's see-through and may only be repainted over what's repainted. Smoke and signs are pinned to `attach` with their `anchor`, and loop at their `fps` through `FrameTextures`, so every chimney of a kind smokes in step.
+
+A building in front of a walker fades whole, with its smoke and sign. Column by column was tried and looked at: a walker's two or three columns gone from a house leave a hard vertical cut down it, which moves as they walk, and the house reads as torn. The whole of it going see-through reads at once, as a tree's fade does. See [whole](superpowers/reports/2026-10-31-tactics-overworld/building-fade-whole.png) and [columns](superpowers/reports/2026-10-31-tactics-overworld/building-fade-columns.png). `--world-demo=tavern` walks twice round one tavern, across the corner of four blocks, and shoots it from each side.
+
+**Dusk.** Ashen Ford and its fight (`river_crossing`, for a fight with no world to stand in) stand in `BoardLighting.Dusk`, stated by id: warm, low and a little purple, (0.56, 0.44, 0.54), and not lifted as a room's light is, since the map's own lights do the rest. It goes through the same `art x light` as everything else, in vertex colours, so there's no shader and no extra pass. Lamp posts, lanterns and fires light their surroundings from their props' light data, baked at the mean. A building's `lights` image goes over it, unlit, in the same quad, and only below daylight (`LitFace.Glow`). Its forge (`attach.light`) and each door of a building with lights throw a short warm pool with a halo, which stands in for bloom: no shader. `--world-demo=town` is a small square in that light for judging it against mockup 02. Figures keep `FigureFloor`, and rings, bars and the HUD aren't lit. The stage shares the world's light by the region's id and bakes from the same items, so a fight on the spot has no seam.
 
 Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, so 6.94 ms is the floor, with the owner's other programs running), on a full walk at twice walking pace that starts as the fade lifts. `_Draw` is a first recording, while the JIT is cold.
 
@@ -296,6 +320,44 @@ The overlay query's worst is about 6.5 ms, once, on its first call behind the fa
 
 So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 
+### Fading
+
+A prop of height 2 or more that stands in front of a walker fades, and comes back when the walker has gone. Every prop is in its block, in painter's order, so it's right against the ground and against everything else, and a block never has to be sorted against a layer of its own. `PropFade` says what's faded. A faded prop is left out of its recorded block (`WorldBlock.Leave`), which records that block again, once as the fade starts and once as it ends, never as the alpha eases (`PropFade.TakeChanges`). It's painted in its sorted place in the frame's overlay at its alpha, with the units (`WorldPlan.PaintOver`): over a walker behind it and under one in front. What stands in front of a faded prop goes over it as it goes over a unit, so a crate in front of a faded tree stays clear. In a fight nothing fades: `PropFade.InFight` makes what's faded solid at once, as a fight's frames don't read it.
+
+`OverlayPictureTests` holds all this to true painter's order, in rastered pixels: the whole region as its blocks record it, a walk across Ashen Ford, 25 walks past trees one tile beside them, a party stopped behind a tree and a party split across one, with what fades in play: 0 wrong pixels. A separate layer for tall props, at a block's Z, can't pass: it drew over terrain and low props in front (4,169 pixels on 38 of 153 props of Ashen Ford, worst 951 on one boulder), and faded trees above everything lay over walkers in front of them.
+
+Measured with no `--shots` (2026-11-01, RTX 5080, 1920×1080, Debug build, capped at 144 fps, one run each, on a crossing at twice walking pace). This repeats the fading spike, which predated decals and measured a layer that's gone: its best of 1,954 draw calls on `wood` isn't comparable, as that layer got them by drawing trees out of order.
+
+| | Ashen Ford (171 tiles, 153 tall props) | `wood` (230 tiles, 7,200 tall props) | `hilly` (120 tiles, 3,840 props, 960 lights) |
+|---|---|---|---|
+| Items, lit | 33,435 | 75,758 | 88,554 |
+| Off-thread build, with bake | 341 ms | 435 ms | 507 ms |
+| Frame ms after the first second: median, p95, p99, worst | 6.94, 6.94, 6.94, 6.94 | 6.94, 7.14, 8.33, 9.90 | 6.94, 6.94, 6.94, 6.94 |
+| Frames over 16 ms | 0 of 3,671 | 1 of 4,916, the first frame | 0 of 2,571 |
+| Render CPU ms: median, worst | 0.87, 1.83 | 1.11, 2.22 | 1.46, 2.31 |
+| GPU ms: median, worst | 0.07, 0.28 | 0.14, 0.53 | 0.13, 0.59 |
+| Draw calls, at most | 3,430 | 3,829 | 4,359 |
+| Blocks recorded again for a fade | 16 | 231 | 49 |
+| Overlay: query ms median, p99, worst | 0.03, 0.42, 2.98 | 0.31, 5.63, 6.95 | 0.11, 1.91, 7.83 |
+| Items over the blocks: p99, worst | 18, 19 | 182, 204 | 58, 67 |
+| Added engine memory at end | +12.3 MB | +15.9 MB | +19.2 MB |
+
+Dusk changed none of the Ashen Ford row: 3,430 draw calls and 0 frames over 16 ms of 3,673, the same 16 blocks recorded again, and battles hold at 420 draw calls (`river_crossing`) and 521 (`hall_of_the_flame:fight`). `--world-demo=town`, 21 buildings: 961 draw calls at most, 0 frames over 16 ms of 1,319, 25 blocks recorded again, overlay 0.31 ms median, 1.42 p99, 5.66 worst, 78 items at most. The overlay is what a dense town costs: `wood`'s p99 of 5.63 ms shows where it goes with hundreds of items, and it runs on the main thread.
+
+### Ambient life (2026-11-01)
+
+**The ground at dusk.** `GroundGrade` multiplies a material's art by region, which is how Ashen Ford's autumn loses its red, its ash stays grey in a purple light and the stamp's green burns out without a tile of the stamp changing. It's for the world and fights in it: a fight on a plain board is drawn as its map was tuned. `--world-demo=swatches` shows the materials in that light.
+
+**Where two grounds meet.** The pack has no transition art: `terrain/manifest.json` has tops, sides, lips and decals, and nothing between two tops. So in the world, and only there, a looser ground runs over a firmer one's tile in the pack's own upright dither (`GroundBlend`): solid at the seam, checker, sparse, gone, with a slow wobble, along eight masks over a top's four by four tiles. Each is the neighbour's own top again, in its own grade and drift, through a mask, baked once per ground and way the region uses (`BoardPainter.LoadBlend`), so no art changed and no top changed for a battle. Ground only blends at one level. What was laid by hand, or flows, keeps its hard edge. A stamp's tile never takes one, but a stamp's ground runs out into the world round it, so its outline softens and its tiles don't change. Measured when it went in, on the same region as the row below: 3,178 faces more (42,088 items, up 8%), 61 masked tops, 3,431 to 4,026 draw calls at most, 0 frames over 16 ms of 3,704, median 6.94, p99 7.97, worst 8.72, render CPU 1.12 ms median, and textures 43.0 MB in all, of which the masked tops are about 16 MB.
+
+**The rebuilt Ford, measured** (2026-11-01, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at 144 fps, one walker, no shots): 197 buildings now (the historical measurement below used 194), of which 132 are pieces of the town wall, 446 props, 433 lights, 38,910 items. The demo's walk across the region, 173 tiles: 0 frames over 16 ms of 3,713, median 6.94, p99 7.41, worst 10.26, overlay 0.07 ms median, 5.30 p99, 8.15 worst, 3,431 draw calls at most. A walk down every street of Emberwick (`--world-route`), 206 tiles: 0 frames over 16 ms of 4,364, median 6.94, p99 9.09, worst 12.99, overlay 0.79 median, 6.87 p99, 10.17 worst, 329 items at most. So the query isn't indexed yet. It's the closure of what a walker stands behind that costs, and it's shared, so a party costs little more than one, but the people of step 6 walk in the same town: measure again then.
+
+Ambient life (a few butterflies over grass, or at dusk fireflies over the fields, fish jumping in deep water, the river's own steam (`river_steam`) off stamped water, thinning up and down the river, leaves falling from leafy trees in their own colours, embers over campfires and torches, motes in the light of lamps and lanterns at dusk, and now and then a bird or a flock across the sky, crows at dusk) is chosen once, by hash, by `AmbientPlan`, bounded strictly to the camera view, and drawn by `WorldAmbient` in the world's light, all but what glows. It uses only art the ambient manifest has, and the TV reads all of it (`AmbientPlan.Paths`) with the world's textures, within their budget, not as each first shows. Chimney smoke isn't `AmbientPlan`'s: the town kit's buildings carry their own (`BuildingPlan`), so its old path for props named `chimney`, which matched none, is gone. Measured with `--world-demo=wood` at 1920×1080 with ambient on: walking median frame time holds at 6.94 ms, 0 frames over 16 ms, and render CPU remains ~0.98 ms. With leaves, embers, motes, birds and the river's steam added (issue #78), on this cloud worker's lavapipe (one run each, same machine, Debug, no shots), the ford's crossing and a walk through the town (`--world-route=12,60;48,60;48,85;20,85`) cost the same as before: crossing median 55.6 ms before and 53.3 after, render CPU median 1.29 both; town median 96.5 and 97.8, render CPU 1.74 and 1.82. Lavapipe can't show 16 ms; the RTX 5080 is the check.
+
+**Animals** (2026-11-02, drawn in order since issue #78). The region's `pack_mule`, `farm_goat`, `red_fox`, `river_duck`, `field_crow`, `farm_dog` and `farm_sheep` props (`WorldAnimalIds`) aren't baked: `WorldHerd` lets each wander, from its creature sheet (`fauna.<id>`) or its `*_anim` strip, and gives them to the frame as units, so they're drawn among the people and walkers in painter's order and what stands in front of one is painted over it: a goat behind a haystack is hidden by it (`OverlayPictureTests`). Where they go is `FaunaRange`: a step of at most one level, so nothing runs up a cliff; land animals stay off water and ducks on it; nothing stands on a prop or within a tile of a big one; and an animal placed in a fenced pen stays in it. The old rule that kept them out of the tile just behind a prop, since their layer couldn't be painted over, is gone with that layer. The herd is worked out with the world's plan, off the main thread: its pens took most of a second on the main thread as the world opened (OW-12).
+
+**The world's build thread** (issue #78). `WorldCanvas.Build` runs off the main thread, and it makes the world's nodes there as well as its plan: the blocks, the overlay canvas and the ambient layer, with their materials and children. The main thread only adds them to the tree. The rule is: under Godot's default "Safe" thread model, the build thread may create nodes, materials and canvas items that aren't in the tree and set their properties. It must never call a `RenderingServer` getter, create or upload a texture, add anything to the tree, or depend on the "Unsafe" thread model. Textures, sheets and sounds load on the main thread, in the texture stage, within its budget. Nodes the world never adopts are freed: if the build is cancelled or throws partway, it frees them itself, and if it finishes after the world has closed, `_ExitTree` frees them.
+
 A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
 
 ## Walking
@@ -309,6 +371,15 @@ In Exploration the TV shows the world instead of the header and table, and the s
 **The panels** (`WorldHud`, worded by `WalkHud`) are the chapter and region at the top left and the leader at the top right, in the battle HUD's glass and gold. They go see-through over the party, as the battle's do. The chapter comes in the host view's `ExploreView.Chapter`, which phones don't get.
 
 **The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
+
+### Separate art review packs
+
+For dev-only `--world-demo` runs, set `ARCBOX_TACTICS_ART_ROOT` to an absolute
+review-pack directory to render proposed art through the normal TV pipeline
+without replacing production content. This applies to ordinary region walks and
+the scripted NPC/camp/shop/cave demos. The older `ARCBOX_CINDER_ART_ROOT` still
+works for Cinder Hollow when the general override is absent. Neither variable
+changes the pack downloaded for a live room.
 
 ## Fights in the world
 
@@ -332,6 +403,35 @@ director every fight is on the plain board, as before the world.
   `tactics-beat-stage-*` shots of the walk-in, the grid and each step of the timeline.
 - **The world isn't ready**: the plain board plays the fight and the stage takes over, with a 0.25 s fade, once the world opens. A world
   that can't be drawn leaves the fight on the plain board. A world brought back for a fight comes back with no card and no fade.
+- **End to end**: `ARCBOX_STAGE=1 tools/tv-e2e.sh` has bot phones walk into River Crossing's stamp, lose, wake at the recovery spawn,
+  walk back and fight it again (won or lost: a retry after a loss is often lost too), with `ARCBOX_RECONNECT=1`, `ARCBOX_RESTART=1` or `ARCBOX_DROP_SIGNALS=1` for a TV killed, a server restarted or
+  no signals at all ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)). A TV that falls behind the
+  game (bots play faster than software rendering draws) skips a results screen the game has already left: the bots' VIP waits for
+  the TV's `TACTICS screen tactics-results` before going on, as someone watching the TV would.
+
+## The story
+
+A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation) has every host view and decides what's said and shown;
+`StoryLayer` and its panels only draw `StoryScreen`:
+
+- **The voice**: a new line on a running track says its clip at Question priority, cutting the last. A TV that watched the party walk up
+  says the scene's first line; one that joins mid-line, mid-question or mid-roll, or while a story waits to resume, shows it silently. A
+  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. A TV that had the story and watched it wait at Resuming says the saved line as it starts again if it never heard it (the server may have moved on to it just before it stopped). No view is dropped: a lower Seq means the server went back, and is shown, question and all. After a reconnect the first view only shows. A cut stops the voice only while it's still the story's own line (`StoryVoice.Owns`). A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
+- **The panels** (1920×1080 layout, the HUD's pieces): `StoryPanel`, the caption at the bottom left with the speaker's face in the line's
+  mood and their name on the dialogue tab, the question lit in gold; `VoteBoard`, the question at the bottom right, growing upward, its rows
+  sized by `VoteLayout` so eleven fit; `CheckBoard`, the skill check full over the dimmed world, with a card for each roller and the d20
+  that tumbles for 1.2 s and lands on the roll; `ChapterBoard`, the chapter's card. The countdown reads the server's deadline against
+  `StoryAskView.Span`, so a skewed TV clock can't show the wrong time.
+- **The world**: the beat on offer has its figure at the spot, with the `alert` emote over them until its scene starts (`StoryMarks`,
+  drawn among the party by `WalkShow`). While a scene plays, its speakers stand there instead (`ExploreView.Cast`, the user's answer to
+  item 21): the server picks their tiles (`SceneCast`), each looks at the leader, and `WalkTrack.Keep` keeps followers off them. The dice and the verdict play `ui_dice_roll`, then `ui_confirm` or `ui_error`.
+- **Shots**: `tactics-story-marker`, `-line-narrator`, `-line-speaker`, `-choice`, `-vote`, `-vote-tally`, `-tie`, `-vote-many`, `-check`,
+  `-roll-tumbling`, `-roll-pass`, `-roll-fail`, `-gap` and `-card`, at most two of each.
+
+The bots play it with `node tools/tactics-playtest/bots.cjs --story[=<scenes>] [--story-pick=<option ids>]` against a server seeded by the
+beat (`Tactics__Seed__At__0`/`__1`, and `Tactics__Seed__Beats__0` for a later beat). All of Chapter 1, from a fresh campaign to the card on
+either branch, is `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley tools/tv-e2e.sh`, which the bots play with `--chapter` from the TV's
+`STORY marker` lines ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)).
 
 ## Adding a game scene
 
@@ -356,3 +456,163 @@ director every fight is on the plain board, as before the world.
    for, and should carry the sequence number of the event it acknowledges.
 
 Until the scene exists, the TV shows a "scene not installed" screen with the raw view JSON, and nothing crashes.
+
+## Things to interact with
+
+The region's chests, doors, levers, traps and the rest (interactables design, `docs/superpowers/specs/2026-11-02-tactics-interactables-design.md`)
+come in `ExploreView.Things`, each in its state, and what happens to them in `ExploreView.ThingEvents`. `ThingShow` (Tactics.Presentation)
+decides everything: it turns each thing into a figure sorted among the walkers and the props (`BoardUnit.Thing`), so the world's overlay paints
+what stands in front of it, and it plays a moment from each event newer than the last it saw, never from a change of state, so a TV that joins
+or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMarks` only draw what it gives.
+
+- **Its picture** (`ThingArt`): its own art, `interactables.<kind>.<state>`, whenever the pack has that very variant; else the stand-in the
+  server names for that state (`props.chest`, `pickups.loot_sack`…); else the plain marker: a gold diamond on the tile with its name, filled
+  while it stands in the way, a slab standing along its wall for a shut passage, and a post and handle for a lever. A shut passage sorts after
+  the next tile of its wall, so the wall's raised top doesn't cut it.
+- **The art drops in by key.** Copy the art brief's manifest (`docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`) to
+  `content/tactics/base/interactables/manifest.json` and put its files beside it: the TV uses each state it finds, and a transition strip
+  (`<kind>_opening`, tagged `transition`, `from:` and `to:`) plays once as the state changes, backwards for the other way (a gate shutting, a
+  lever going off), and holds its last frame. A missing state falls back to the stand-in, never to another state. No code changes.
+  Check it with `--world-demo=things --shots=<dir>`.
+- **Moments** (each under a second, but a find's "!?" at 1.6 s): an opening squashes and glows (a passage puffs dust), an unlock flashes, a
+  failed way shakes, a find pops in with a puff and the `surprise` emote, a seen trap flashes red and keeps the `skull` emote while it's set, a
+  trap going off shakes red in smoke, a disarm flashes, a lever's handle swings and its passage's slab sinks or rises a stagger later, a taken
+  pickup or emptied cache rises and fades where it was, a shrine glows with the `bless` effect, and a read or a look hops. Events in one view
+  play `ThingShow.Stagger` (0.2 s) apart, and a thing waits in its old state for its turn.
+- **Sound** (`ThingSounds`): each event names the sfx ids it wants, the best first, at -8 dB. The pack has none of them yet but `ui_loot`
+  (a pickup), so the rest are silent until sounds with these ids are added to `sfx/manifest.json`: `door_open`, `door_close`, `gate_open`,
+  `gate_close`, `drawbridge_lower`, `drawbridge_raise`, `secret_door_open`, `secret_door_close`, `chest_open`, `crate_open`, `barrel_open`,
+  `sack_open`, `cache_open`, `lever_pull`, `lock_open`, `lock_fail`, `secret_found`, `trap_spotted`, `trap_spring`, `trap_disarm`,
+  `item_pickup`, `page_turn`, `shrine_use`, `well_draw`, `altar_use`.
+- **Cost:** nothing for a region with no things; otherwise only the things near the view are built (`ThingShow.Frame`'s view), pictures,
+  markers and labels are kept between frames, and the things join the walkers by a merge, not a sort: 50 things cost about 0.09 ms and
+  27 KB a frame (a Debug test, `Fifty_things_cost_a_frame_little_and_allocate_little`).
+- **Secret doors.** A hidden thing isn't sent until it's found. The region is painted with a secret door's gap open, so the server sends a
+  plug instead (`ExploreView.Plugs`: the tile and which way the wall runs, nothing else), and `WallPlugs` draws it as the wall beside it
+  (the taller neighbour along the run: its height, material and flags), built off the main thread and lit as the world's blocks are, with
+  what stands in front painted over it. When the door is found the plug goes as the door pops in (`ThingShow` holds it until then).
+- **Hidden things** (design §7). A notice (tracks, a bloodstain, a rune…) pops in with the `question` emote and `fx.notice` (the find's
+  `fx.poof` until the pack has it), and is drawn flat as the marker in clue blue (`ThingShow.Clue`) until its art exists; `noticed` wants the
+  sound `notice`, else `secret_found`. A hidden path is sent as a plug until it's found, as a secret door is, so it's drawn as the hedge or
+  water along its facing's run; found, it's the marker in trail green (`ThingShow.Trail`), flat. A search's check has no DC (`Dc` null):
+  "DC hidden", and its roll "Found something" or "Nothing found", with no "vs DC".
+- **Numbers.** `ThingEvents` numbers go on across a server restart (`WorldSave.ThingSeq`), so a TV that stayed up plays what's new to it
+  and nothing it played. Numbers that go back (an older server) start the count again, with nothing played.
+- **A strip plays once**, for the event that changes what's drawn (an opening, not the unlock before it), and only between two states
+  drawn with the thing's own art.
+
+
+## Wardenflame shops (issue #68)
+
+The walk banner shows the total across individual player purses when gold or shops are relevant. A reachable trader has a stand-in notice marker; while trading, the keeper faces the party. The TV's separate shop panel shows the keeper's existing portrait, greeting, stock, prices, individual character balances and recent trades. Each phone shows "Your purse", selects quantities and buys/sells using only its own saved purse and bag; the leader leaves. Purchases are confirmed by the server, never applied optimistically. Gold gains produce a fading `+N gold` label. Sound keys `ui_coin_buy`, `ui_coin_sell`, `ui_shop_open`, `ui_shop_close` fall back to existing `ui_loot`/`ui_confirm` sounds. No new art or audio is required. Since issue #83 the leader can **haggle** once a visit: the TV shows the party's Persuasion check as any story check (the shop panel waits behind it), then the panel shows the result ("Haggled · Ana 14 + 3 vs DC 15 …" or "No deal …") and its prices, and logs `SHOP haggle passed|failed`.
+
+Art review: `godot --path src/ArcBox.Host -- --world-demo=shop --shots=/tmp/arcbox-shop-shots --preset=low --res=1280x720`. It uses the existing demo courtyard and exits after its shots. Live check: `ARCBOX_SHOP=1 tools/tv-e2e.sh --skip-build`; bot phones walk to Wenna, sell starting consumables to fund a potion, buy, replay the trade ID, sell, and leave. Chapter regression: `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force tools/tv-e2e.sh --skip-build`. On machines without Vulkan, use `TV_RENDERING_DRIVER=opengl3 TV_ENGINE_ARGS='--rendering-method gl_compatibility --audio-driver Dummy'`; this selects supported software rendering rather than starting a failing Vulkan driver.
+
+
+## Wardenflame camp and recovery (issue #71)
+
+A won/lost fight or completed story beat earns one non-stacking rest. At either Ashen Ford campfire the leader proposes a night,
+then the existing story vote gives present players 20 seconds for Rest / Not yet. Unanswered votes count as Rest; a tie continues walking.
+Each present character chooses Tend wounds, Rally, Cook, Keep watch or Rest easy within 30 seconds, and chooses an exact injury when needed.
+The TV gathers the party on clear tiles, darkens the existing world canvas, displays jobs and saved results, then fades back at dawn.
+No world plans or lighting bakes are rebuilt for the night. Away characters can receive tending, food and dawn healing.
+
+The existing looping `camp` track supplies the cozy guitar/lute/fiddle/cello music during jobs, results, camp talks and the inn night.
+Outdoor camp also plays the existing `amb_campfire` bed (fire and crickets). Votes retain the region's music; dawn plays the original `camp_dawn` flute/harp/chime sting once, then returns to regional music.
+The usual Music/Sfx volume controls and voice ducking apply. The sunrise score is synthesized from the original score in `tools/tactics-audio/compose_dawn.py`.
+Recovery sound keys use existing fallbacks: camp_start→spell_fire_aura, camp_mend→ui_level_up, camp_cook→ui_confirm,
+camp_dawn→ui_menu_open, temple_heal→shrine_use, inn_room→door_open. Successful tending uses a green-tinted `fx.poof`.
+Well fed uses the bowl glyph and grants 3 temporary HP at the next battle start, ending after that battle.
+
+The Last Coal inn and Chapel of the Hearth reuse shops and individual purses. The inn proposes the same rest vote, then offers rooms
+for 30 seconds at 10 gold per character; anyone can sponsor another character, including someone away. Paid guests mend all injuries
+and gain Well fed; unpaid guests receive ordinary dawn healing. Temple healing costs 25 gold per selected injury and needs no rest.
+Each service purchase shares the shop's atomic save and trade-ID protection.
+
+Visual check: `godot --path src/ArcBox.Host -- --world-demo=camp --shots=/tmp/arcbox-camp-shots --preset=low --res=1280x720`.
+It shows the authored east-road camp, all six jobs, sleep, sunrise, walking in morning light, and the inn. `--world-demo=camp-ford` uses the old-chapel campsite. Add `--audio-log` to inspect music and ambience transitions.
+Live regression: `ARCBOX_CHAPTER=1 ARCBOX_CAMP=1 ARCBOX_BRANCH=force ARCBOX_PHONES=6 tools/tv-e2e.sh --skip-build`.
+The bots camp after the ford, take a paid room after the next earned rest, then continue to the Chapter 1 card.
+See the [design and owner defaults](superpowers/specs/2026-11-03-tactics-rest-and-recovery-design.md) and
+[art/audio prompt brief](superpowers/specs/2026-11-03-tactics-rest-art.json).
+
+
+**Compact recovery follow-up.** The TV's camp/inn cards show each character's HP and class-resource bars, with injury badges beside
+the name. Phone menus use the same data and badges, with treatment details on tap, one room-booking action per character, and a
+small session menu. HP/resources are the next battle's ready values; injuries remain until mended. The owner authorized PixelLab
+generation of eight native 32×32 injury icons; both clients resolve stable injury ids through `injury_icons/manifest.json`.
+The reusable phone `InjuryIcon` supports future menus. Prompts and generation provenance are in
+[the injury icon brief](superpowers/specs/2026-11-03-tactics-injury-icons.json).
+
+
+**Cozy camp vignette follow-up.** Camping now eases the cached world into a close view with real class job/rest animations,
+PixelLab shelter, bedrolls, bowls and animated fire/pot. One local warm light keeps the party readable under a much darker blue night.
+The phase strip and job counts derive from saved choices/results; the compact bottom ribbon shows HP/resources and injury badges.
+A saved 3-second sleep leads into an 8-second sunrise, both skippable by the leader. Morning persists outside camp using `RestSeq`;
+this does not implement a continuous day/night clock. The inn has a native pixel interior with seated class sprites and window light.
+See the [accepted presentation design](superpowers/specs/2026-11-03-tactics-camp-presentation-proposal.md) and
+[verification/preview](superpowers/reports/2026-11-03-camp-presentation/README.md).
+
+
+**Animated phone camp.** Each phone now shows a compact camp scene with the current participant's class sprite marked by a heart,
+saved job poses, native fire/prop art, sleep and sunrise. The inn room screen uses the hearth art. A compact version remains on the
+optional camp conversation, vote and story check screens; ordinary story packets are untouched. Phone art loads through the normal
+hashed content-pack URLs, has a non-interactive fallback, and honors reduced-motion. TV headings, embers, sleep marks, failed-cook
+smoke, sunrise rays and inn hearth flicker add atmosphere without changing recovery rules.
+
+## NPCs and the quest journal (issue #73)
+
+The leader's **Interact** target starts named conversations or an instant voiced town bark. Conversations use the existing story voting and party-picked checks. **Quest log** opens a shared TV book; the leader's selection mirrors on the TV and stops walking until closed. Other phones can read privately. A leader can pin one active quest; the tracker, visible target waypoint and edge arrow return after scenes and fights. Completion remains visible for seven walking seconds before unpinning. A phone banner long-press pins an active quest. Since issue #83 the journal's left page lists the party's **keys** under the quests (name, where found, used or not) once it holds one, and a **loot vote** ("Who takes the Potion of Healing?") plays on the TV as any party vote, its line id `loot_vote.<n>` in the `--story-log`.
+
+```sh
+# Standalone visual demonstration: markers, speech, book, tracker, target, gates.
+godot --path src/ArcBox.Host -- --world-demo=npcs --shots=/tmp/npcs --audio-log --story-log
+# Real phones + TV, grain quest then Chapter 1. Repeat with ARCBOX_BRANCH=parley.
+ARCBOX_GAME=tactics ARCBOX_CHAPTER=1 ARCBOX_QUESTS=1 ARCBOX_BRANCH=force tools/tv-e2e.sh
+# Vite fixture preview and browser layout regression (44 screens × 6 viewports).
+# Requires Playwright + Chromium, with require("playwright") resolving as for play.cjs.
+cd web/play && npm run dev -- --host 127.0.0.1
+# From repository root in another terminal:
+node tools/tactics-playtest/phone-layout.cjs http://127.0.0.1:5173 /tmp/phone-layout
+```
+
+Use Godot 4.7.2 .NET. Import fonts before standalone launches. The dev-only `web/play/journal.html?screen=questlog-leader` preview accepts any Tactics fixture name and is excluded from production entry points. Phone walking, battle and encounter controls occupy a separate row from scrolling content. See the [design](superpowers/specs/2026-11-03-tactics-npcs-and-quests-design.md) and [report](superpowers/reports/2026-11-03-npcs-quests/README.md).
+
+### Cinder Hollow and the Ashmaw bounty
+
+`--world-demo=cinder_hollow` shows the actual bounty board, cliff entrance, cave, Grisk and Ashmaw beside a four-member party, their battle action poses, the safe fire and Dagna's reward presentation. It writes no campaign. During art review, `ARCBOX_CINDER_ART_ROOT=/path/to/review-pack` substitutes the separate generated character pack; the approved dedicated atlases and portraits are installed in production.
+
+```sh
+python tools/tactics-assets/pixellab/ashmaw/build-preview.py /tmp/hollow-review
+ARCBOX_CINDER_ART_ROOT=/tmp/hollow-review godot --path src/ArcBox.Host -- --world-demo=cinder_hollow --shots=/tmp/hollow-shots --audio-log
+# Real hub and phone inputs, including Chapter I, travel, all chambers, proof and private class rewards:
+node tools/tactics-playtest/bots.cjs --server=http://127.0.0.1:5080 --host --shown --players=6 --bounty --fight
+```
+
+The cave uses dark ambient light, small warm mining candles, the existing eerie `dungeon` music and cave ambience. Ashmaw's breathing layer is audible only near the living boss. Roar, shake, maul, hurt and death use separate creature recordings. Rewards show a TV presentation and a private class-bound phone gift sheet; dismissing it survives repeated snapshots.
+Screenshot directories passed with `--shots=<dir>` must be absolute paths. Relative paths are rejected with an explanatory startup warning to prevent output beneath the Godot project directory.
+
+Chapter automation (`ARCBOX_CHAPTER=1`) defaults to Story difficulty and battle seed 76. Override difficulty with `ARCBOX_DIFFICULTY=Normal` or `Hard`; balance testing remains the simulator’s responsibility. Non-chapter runs retain Normal difficulty and fresh seeds. These overrides are Development-only server settings.
+
+
+### Four-party texture-memory gate (OW-05)
+
+For region demos, `--world-demo=ashen_ford --perf` and `--world-demo=cinder_hollow --perf` run the same budgeted world renderer with four distinct human heroes, walk the region, replace them with four elf heroes, then restore them. The limit is **512 MiB = 536,870,912 bytes**. Each completed stage prints a `WORLD texture-budget` record with the current and peak byte counts. An over-limit completed run exits unsuccessfully. Validate the log as well: a forced/early exit without every stage is not a pass.
+
+```bash
+"$GODOT" --path src/ArcBox.Host --audio-driver Dummy --position 160,100 -- \
+  --world-demo=ashen_ford --perf --res=1920x1080 --quit-after=150 > ashen-memory.log 2>&1
+node tools/tactics-playtest/world-memory.cjs ashen-memory.log
+```
+
+Repeat with `cinder_hollow`. Without `--perf`, Cinder Hollow retains its scripted bounty/creature/battle art tour. With `--perf`, it selects the whole-region memory benchmark. These checks use shipped art; `ARCBOX_TACTICS_ART_ROOT` may still select a separate review pack. Do not change linked production files in such a pack.
+
+The verifier requires all four stages, four members, valid byte counts, the fixed limit, eight real hero uploads and their releases. Native resources may retire a frame later, so the peak includes roster-swap overlap. Frame uploads retain the existing 8 ms budget and always allow one image; a single image decode can itself take longer. No upload is performed in the world's unit draw callback. Screenshots are unnecessary for this memory gate and must stay off when timing frames. Linux software-rendering commands and measurements are in the townsfolk loading report; they are not a GPU benchmark.
+
+### Visible roaming groups (#79)
+
+`ExploreView.Mobs` contains only active, nearby mob representatives with stable IDs, sprite keys, tile positions and movement legs. It is absent when none are in view; `Danger` is absent without a group within four tiles. Server-owned deterministic wandering pauses during scenes and interaction panels, and with nobody connected. The TV interpolates the normal eight-facing idle/walk sprites through the depth-sorted unit path, with a small red ground ring and an existing species sound on first appearance. Removed figures fade out. Roaming arena stamps retain the region’s material aliases, tint, decals and blending; the stage draws those same faces during battle, avoiding rectangular terrain patches. Story stamps retain their existing authored art.
+
+Leader contact saves a brief ambush transition, halts the party and shows the group attack notice before the existing stamped walk-in. Followers do not trigger contact. The active group is hidden from exploration while its battle units are drawn. Wins persist in `WorldSave.MobsBeaten`; losses follow the normal recovery flow. A later chapter clears defeated groups. Mob movement uses host patches and is covered by the 1,420-byte packet regression check.
+
+For the seven authored placements, captures, XP impact and simulation assessment, see the [issue #79 review](superpowers/reports/2026-11-04-overworld-mobs/README.md). `--world-demo=mobs --shots=<absolute path>` previews their real locations without connecting to a server. `ARCBOX_MOBS=1 ARCBOX_RESTART=1 tools/tv-e2e.sh` runs the live wolf/reconnect/restart flow.

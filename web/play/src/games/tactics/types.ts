@@ -32,6 +32,8 @@ export interface MoveChoice {
   to: Tile;
   cost: number;
   path: Tile[];
+  risk?: number;
+  warn?: string;
 }
 
 export interface Target {
@@ -49,6 +51,7 @@ export interface TargetChoice {
   target: Target;
   aim: Tile;
   affected: UnitPreview[];
+  spread?: Tile[];
 }
 
 export interface Cost {
@@ -84,6 +87,7 @@ export interface TurnChoices {
 }
 
 export interface TurnData {
+  surfaces?: string[];
   me: UnitView;
   /** The map id, for its terrain from the content pack. */
   map?: string;
@@ -100,6 +104,7 @@ export interface ReactOption {
 }
 
 export interface ReactData {
+  surfaces?: string[];
   unit: string;
   trigger: string;
   cause: {
@@ -114,6 +119,7 @@ export interface ReactData {
 }
 
 export interface StatusData {
+  surfaces?: string[];
   me: UnitView;
   active: string | null;
   upIn: number | null;
@@ -143,15 +149,26 @@ export interface WalkMember {
   cls: string;
   here: boolean;
   leads: boolean;
+  /** Their colour, "#rrggbb"; absent from an older server. */
+  color?: string;
 }
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  danger?: string;
+  ambush?: string;
+  journal?: import("./quests").JournalData;
+  pinned?: { id: string; name: string; objective: string };
+  canOpenLog?: boolean;
+  questNotice?: import("./quests").QuestNoticeData;
+  restReady?: boolean;
+  gold?: number;
   leader: boolean;
   leaderName: string | null;
   region: string | null;
   objective: string;
-  me: { name: string; cls: string; level: number };
+  /** `color`: the player's colour, "#rrggbb" (their pick, else their join order's); absent from an older server. */
+  me: { name: string; cls: string; level: number; color?: string };
   party: WalkMember[];
   vip: boolean;
   canBattle: boolean;
@@ -159,6 +176,19 @@ export interface WalkData {
   portal?: string | null;
   /** The leader's Interact button ("Talk", "Look around"…), while a beat's spot is in reach; null or absent otherwise. */
   interact?: string | null;
+  /**
+   * The leader's things to interact with in reach (chests, doors, levers…), nearest first, each with its button's words: `interact`
+   * sent with `{ target: id }` uses one. Empty for everyone else; absent in a region with no things, and from an older server. The Interact
+   * button uses the first, unless a beat is in reach (then `interact` is the beat's word); with more than one choice, a list beside it has them all.
+   */
+  targets?: { id: string; label: string }[];
+  /** With `targets`: true when the leader's button is a beat's (`interact` is its word, sent with no target); false when it's the first thing's. */
+  beat?: boolean;
+  /**
+   * With `targets`: true on the leader's screen, where a Search button sends `search` (interactables design §7.4): the party's
+   * Investigation check for what's hidden nearby. False for everyone else; absent in a region with no things.
+   */
+  search?: boolean;
 }
 
 /**
@@ -174,9 +204,13 @@ export interface DialogueData {
   mood: string | null;
   text: string | null;
   canSkip: boolean;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
 }
 
 export interface StoryOption {
+  can?: boolean;
+  needs?: string;
   id: string;
   label: string;
   /** The skill check picking it starts, if any. */
@@ -199,6 +233,12 @@ export interface VoteData {
   decider: string | null;
   /** The players away when it was asked, by name. */
   away: string[];
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
+  /** What a loot vote asks ("Who takes the Potion of Healing?"), the owner's decision 1; absent for a story's vote. */
+  question?: string;
+  /** Which of a run of loot votes this is, so each item's question is a new one. */
+  vote?: number;
 }
 
 export interface CheckCard {
@@ -219,14 +259,16 @@ export interface CheckRoll {
   die: number;
   bonus: number;
   total: number;
-  dc: number;
+  /** Null for a search, whose DC isn't shown. */
+  dc: number | null;
   success: boolean;
 }
 
 /** A skill check: the party picks who rolls, by a vote on the same rules, then the roll. */
 export interface CheckData {
   skill: string;
-  dc: number;
+  /** Null for a search (interactables design §7.4): each thing it looks for has its own DC, and it mustn't say whether there are any. */
+  dc: number | null;
   /** The option it's for. */
   title: string;
   cards: CheckCard[];
@@ -237,12 +279,16 @@ export interface CheckData {
   /** On a tie, the members it's between. */
   tied: string[];
   roll: CheckRoll | null;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
 }
 
 export interface ResultsData {
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
   lines: { name: string; xp: number; injuries: string[] }[];
+  /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
+  note?: string | null;
   vip: boolean;
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */

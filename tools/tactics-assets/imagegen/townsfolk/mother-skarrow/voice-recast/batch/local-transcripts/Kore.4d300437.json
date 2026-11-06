@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.4d300437.wav",
+  "sourceSha256": "e007efa864b11767a5550e619c1721be51c2ee104e82326bb9903d5f51b9b1bb",
+  "duration": 10.2,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.4,
+      "text": " You lock your grain and call us thieves."
+    },
+    {
+      "start": 4.4,
+      "end": 10.0,
+      "text": " Come then, valley folk, take the bridge from an old woman."
+    }
+  ],
+  "text": "You lock your grain and call us thieves. Come then, valley folk, take the bridge from an old woman.",
+  "secondsToTranscribe": 2.188
+}

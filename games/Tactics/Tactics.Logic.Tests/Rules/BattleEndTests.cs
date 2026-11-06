@@ -125,7 +125,7 @@ public sealed class BattleEndTests
     }
 
     [Fact]
-    public void Result_on_a_loss_or_flight_gives_half_xp_rounded_down()
+    public void Result_on_a_loss_gives_no_xp_and_on_a_flight_half_rounded_down()
     {
         var battle = TestBattle.On(Field)
             .Enemy("gob", (TestSheets.Goblin with { InitiativeBonus = 10 }).Knowing(DownedTests.Smite), T(3, 1))
@@ -141,7 +141,7 @@ public sealed class BattleEndTests
         Assert.Equal(new BattleEnded(BattleOutcome.Lost), events[^1]);
         var result = Battle.Result(lost, battle.Rules)!;
         Assert.Equal(BattleOutcome.Lost, result.Outcome);
-        Assert.Equal([(U("comp"), 125), (U("kara"), 125)], result.Xp.Select(p => (p.Key, p.Value)));
+        Assert.Equal([(U("comp"), 0), (U("kara"), 0)], result.Xp.Select(p => (p.Key, p.Value)));
         Assert.Empty(result.Loot);
 
         var fled = Battle.Result(state with { Outcome = BattleOutcome.Fled }, battle.Rules)!;

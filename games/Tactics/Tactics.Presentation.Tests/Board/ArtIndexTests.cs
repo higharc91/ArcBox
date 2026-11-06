@@ -27,6 +27,35 @@ public sealed class ArtIndexTests
             AssertExists(Pack.Art.Texture(lip), $"{material} lip");
     }
 
+    public static TheoryData<string, string> PropVariants()
+    {
+        using var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllBytes(Path.Combine(Pack.Root, "props", "manifest.json")));
+        var data = new TheoryData<string, string>();
+        foreach (var prop in manifest.RootElement.GetProperty("props").EnumerateObject())
+            foreach (var variant in prop.Value.GetProperty("variants").EnumerateObject())
+                data.Add(prop.Name, variant.Name);
+        return data;
+    }
+
+    /// <summary>
+    /// What draws a prop is the size its manifest gives it, or its variant's own look: an image that isn't that size, or a whole multiple of it, is
+    /// stretched and stands off its tile. A new look beside older, smaller art needs a look of its own (<c>looks</c>).
+    /// </summary>
+    [Theory]
+    [MemberData(nameof(PropVariants))]
+    public void Every_prop_image_is_the_size_its_manifest_draws_it_at(string id, string variant)
+    {
+        var art = Pack.Art.Prop(id, [variant])!;
+        var path = Path.Combine(Pack.Root, art.Image.Path);
+        Span<byte> header = stackalloc byte[24];
+        using (var file = File.OpenRead(path))
+            file.ReadExactly(header);
+        var (width, height) = (System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(header[16..]), System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(header[20..]));
+        var scale = height / art.Height;
+        Assert.True(scale >= 1 && height == art.Height * scale && width == art.Width * art.Image.Frames * scale,
+            $"{id}/{variant}: {art.Image.Path} is {width}x{height}, drawn as {art.Image.Frames} frame(s) of {art.Width}x{art.Height}");
+    }
+
     [Theory]
     [InlineData("lava/molten", "lava_side")]
     [InlineData("basalt/dark", "basalt_side")]
@@ -38,6 +67,90 @@ public sealed class ArtIndexTests
     [Fact]
     public void Fel_crypt_tiles_stand_on_dark_walls_as_the_pack_has_no_fel_ones()
         => Assert.Equal(new ArtRef("dungeon_wall", "dark"), MaterialLook.Of("crypt_tiles/fel").Side);
+
+    [Theory]
+    [InlineData("path/packed", "dirt_side", "brown")]
+    [InlineData("ash/grey", "dirt_side", "dark")]
+    [InlineData("mud/swamp", "dirt_side", "dark")]
+    [InlineData("bog/duckweed", "dirt_side", "dark")]
+    [InlineData("forest_floor/leafy", "dirt_side", "brown")]
+    [InlineData("forest_needles/pine", "dirt_side", "brown")]
+    [InlineData("sand/desert", "sandstone_side", "desert")]
+    [InlineData("dunes/gold", "sandstone_side", "desert")]
+    [InlineData("sandstone/red", "sandstone_side", "red")]
+    [InlineData("snow/fresh", "ice_side", "glacier")]
+    [InlineData("ice/clear", "ice_side", "clear")]
+    [InlineData("planks/dark", "plank_side", "dark")]
+    [InlineData("cobble/warm", "ashlar_side", "warm")]
+    [InlineData("flagstone/warm", "ashlar_side", "warm")]
+    [InlineData("pavers/warm", "ashlar_side", "warm")]
+    public void Landscape_surfaces_keep_their_own_material_at_exposed_edges(string material, string family, string variant)
+    {
+        var look=MaterialLook.Of(material);
+        Assert.Equal(new ArtRef(family,variant),look.Side);
+        AssertExists(Pack.Art.Texture(look.Side),material);
+    }
+
+    [Fact]
+    public void Wooden_walkways_are_decks_and_snow_keeps_its_cap()
+    {
+        Assert.True(MaterialLook.Of("planks/oak").Deck);
+        Assert.True(MaterialLook.Of("planks/dark").Deck);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("snow/fresh").Lip);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("grass/frost").Lip);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("forest_needles/snowy").Lip);
+    }
+
+    [Theory]
+    [InlineData("grass_ford/autumn", "native_grass_ford_autumn.png", 4)]
+    [InlineData("dirt_ford/wet", "native_dirt_ford_wet.png", 4)]
+    [InlineData("rock_ford/bank", "native_rock_ford_bank.png", 4)]
+    [InlineData("ash_ford/charred", "native_ash_ford_charred.png", 4)]
+    [InlineData("ford_water/clear", "native_ford_water_clear.png", 4)]
+    [InlineData("path_ford/packed", "native_path_ford_packed.png", 4)]
+    [InlineData("planks_ford/oak", "planks_ford_oak.png", 8)]
+    public void The_ford_materials_resolve_to_their_local_art(string material, string file, int span)
+    {
+        var look = MaterialLook.Of(material);
+
+        var top = Pack.Art.Texture(look.Top)!;
+        Assert.EndsWith(file, top.Path);
+        Assert.Equal(span, top.Span);
+        Assert.Equal(span == 4, top.ClusteredEdges);
+        AssertExists(Pack.Art.Texture(look.Side), $"{material} side");
+        AssertExists(Pack.Art.Texture(look.Chasm), $"{material} chasm side");
+        if (look.Lip is { } lip)
+            AssertExists(Pack.Art.Texture(lip), $"{material} lip");
+    }
+
+    [Fact]
+    public void Ford_water_keeps_the_sunk_water_rendering()
+        => Assert.True(MaterialLook.Of("ford_water/clear").Water);
+
+    [Fact]
+    public void Ford_rock_uses_the_painted_cliff_face()
+    {
+        var side = MaterialLook.Of("rock_ford/bank").Side;
+        Assert.Equal("cliff_ford", side.Family);
+        AssertExists(Pack.Art.Texture(side), "Ford rock cliff face");
+        Assert.Equal("cliff_ford", MaterialLook.Of("rock_ford/bank").Chasm.Family);
+    }
+
+    [Theory]
+    [InlineData("ash/grey", "ash_ford/charred")]
+    [InlineData("dirt/dark", "dirt_ford/wet")]
+    [InlineData("grass/frost", "grass_ford/dry")]
+    [InlineData("cave_floor/cool", "rock_ford/bank")]
+    [InlineData("mine_gravel/brown", "rock_ford/bank")]
+    [InlineData("planks/oak", "planks_ford/oak")]
+    [InlineData("planks/dark", "planks_ford/dark")]
+    [InlineData("water/clear", "ford_water/clear")]
+    public void Ashen_ford_gives_legacy_surfaces_its_local_art(string source, string expected)
+        => Assert.Equal(expected, MaterialLook.ArtMaterial("ashen_ford", source));
+
+    [Fact]
+    public void Other_regions_keep_their_material_art()
+        => Assert.Equal("grass/frost", MaterialLook.ArtMaterial("skarrow_hills", "grass/frost"));
 
     public static TheoryData<string> Props()
         => new(Pack.Maps.SelectMany(id => Pack.Map(id).Props).Select(p => p.Id).Distinct());
@@ -58,6 +171,10 @@ public sealed class ArtIndexTests
         Assert.Equal("dungeon/textures/top/mine_boards_mine.png", Pack.Art.Texture(new ArtRef("mine_boards", "oak"))!.Path);
         Assert.Equal("terrain/top/flagstone_grey.png", Pack.Art.Texture(new ArtRef("flagstone", "mossy"))!.Path);
     }
+
+    [Fact]
+    public void Ashen_ford_fishing_skiff_has_art()
+        => AssertExists(Pack.Art.Prop("fishing_skiff", ["oak"])?.Image, "Ashen Ford fishing skiff");
 
     [Fact]
     public void Art_the_pack_does_not_have_is_null()

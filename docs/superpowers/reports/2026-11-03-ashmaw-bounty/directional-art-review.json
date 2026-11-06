@@ -1,0 +1,236 @@
+{
+  "reviewOnly": false,
+  "coverage": "Every required action has eight real facings; missing or miscounted clips fail the build.",
+  "characters": {
+    "ashmaw": {
+      "canvas": 192,
+      "anchor": [
+        96,
+        171
+      ],
+      "pixelScale": 0.65,
+      "actualAnimatedFacings": {
+        "idle": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "walk": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "attack": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "hurt": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "down": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "roar": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "shake": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ]
+      },
+      "curation": {
+        "hurt": {
+          "south": {
+            "group": "ashmaw_hurt_pinned_clean",
+            "frames": [
+              3,
+              0,
+              0,
+              3
+            ],
+            "reason": "Frames1/2 duplicate the head. Clean recoil0 and recovered3 preserve one head and planted paws."
+          },
+          "south-west": {
+            "group": "ashmaw_hurt_pinned_clean",
+            "frames": [
+              3,
+              0,
+              0,
+              3
+            ],
+            "reason": "Frames1/2 invent an elongated tail; keep clean recoil and recovery."
+          },
+          "south-east": {
+            "group": "ashmaw_hurt_pinned_clean",
+            "frames": [
+              3,
+              0,
+              0,
+              3
+            ],
+            "reason": "Frames1/2 invent an elongated tail; keep clean recoil and recovery."
+          }
+        },
+        "shake": {
+          "south-west": {
+            "group": "ashmaw_shake_sw_fixed",
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              2,
+              3
+            ],
+            "reason": "Reviewed pinned shoulder shudder preserves planted paws, one head, and the original short tail; rejected long-tail take retained separately."
+          }
+        }
+      }
+    },
+    "kobold_foreman": {
+      "canvas": 128,
+      "anchor": [
+        64,
+        110
+      ],
+      "pixelScale": 0.34,
+      "actualAnimatedFacings": {
+        "idle": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "walk": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "attack": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "hurt": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "down": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ],
+        "shout": [
+          "south",
+          "south-west",
+          "west",
+          "north-west",
+          "north",
+          "north-east",
+          "east",
+          "south-east"
+        ]
+      },
+      "curation": {
+        "attack": {
+          "east": {
+            "group": "grisk_attack_pilot",
+            "frames": [
+              0,
+              1,
+              2,
+              4,
+              5,
+              5
+            ],
+            "reason": "Original frame3 loses the pick. The pinned retake changes its blade size; use only the clean held-pick poses."
+          }
+        }
+      }
+    }
+  },
+  "inspected": {
+    "ashmaw": "All 8 directional action contact sheets inspected; duplicated-head and long-tail poses excluded through curation. Clean pinned south-west shake selected.",
+    "grisk": "All 8 attack contact sheets inspected. East frame losing the pick excluded; alternate retake rejected for oversized blade.",
+    "normalization": "Fixed reference/canvas padding only; every normalized frame passed clipping guards. Never re-center feet per-frame.",
+    "motionReview": "Owner approved both actual world/battle motion previews: Approve both. Dedicated atlases, portraits and Grisk lore sprite installed, then captured without ARCBOX_CINDER_ART_ROOT.",
+    "loopReview": "Breathing idles and walk loops reviewed in actual TV capture. Ashmaw uses a slower walk and 4-second breathing idle.",
+    "additionalActions": "Grisk held-pick attack and Ashmaw burning floor inspected in production capture."
+  },
+  "ownerApprovedMotion": true,
+  "productionInstalled": true,
+  "validation": {
+    "productionFullSuitePassed": 6182,
+    "productionArtAndContentChecksPassed": 358,
+    "repeatInstallationIdentical": true,
+    "productionOverrideUsed": false
+  }
+}

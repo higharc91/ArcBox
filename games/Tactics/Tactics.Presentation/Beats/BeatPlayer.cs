@@ -18,14 +18,38 @@ public sealed record SpokenLine(string? Speaker, string Text, string Theme, stri
 /// <param name="Rotation">Radians around its centre.</param>
 /// <param name="Additive">Blended by adding light.</param>
 /// <param name="Alpha">How opaque.</param>
-public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector2 Size, float Rotation, bool Additive, float Alpha);
+public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector2 Size, float Rotation, bool Additive, float Alpha)
+{
+    /// <summary>It's a mark for the people watching, a number or a die badge, rather than part of the scene: it goes when the units' marks do (<see cref="MarkRule"/>).</summary>
+    public bool Mark { get; init; }
+    /// <summary>An optional tint for recovery effects; ordinary effects retain their existing white modulation.</summary>
+    public Rgb? Tint { get; init; }
+
+    /// <summary>A transient surface sorts into the board here; other effects draw over the scene.</summary>
+    public long? Order { get; init; }
+
+    /// <summary>Stage art stays in battle pixels, but sorts beside figures and scenery on the region's tiles.</summary>
+    public FxDraw AtWorldOrigin(Tile origin) => Order is { } order
+        ? this with { Order = order + BoardOrder.Key(origin, BoardLayer.Under) }
+        : this;
+}
+
+/// <summary>Where a number that pops up over a unit is drawn this moment, in art pixels.</summary>
+/// <param name="Unit">The unit it's about.</param>
+/// <param name="TopLeft">Its top left.</param>
+/// <param name="Size">How big, all its glyphs together.</param>
+public sealed record PopBox(UnitId Unit, Vector2 TopLeft, Vector2 Size);
 
 /// <summary>What one moment of a beat looks like, for the units and over them.</summary>
 /// <param name="Places">Units not standing squarely on a tile.</param>
 /// <param name="Poses">Units doing something.</param>
 /// <param name="Draws">Effects, numbers and badges.</param>
 /// <param name="Shake">How far the board is off its place, in art pixels.</param>
-public sealed record BeatFrame(ImmutableDictionary<UnitId, UnitPlace> Places, ImmutableDictionary<UnitId, UnitPose> Poses, ImmutableArray<FxDraw> Draws, Vector2 Shake);
+public sealed record BeatFrame(ImmutableDictionary<UnitId, UnitPlace> Places, ImmutableDictionary<UnitId, UnitPose> Poses, ImmutableArray<FxDraw> Draws, Vector2 Shake)
+{
+    /// <summary>The numbers popping up now, for <see cref="MarkRule.ClearOfPops"/>: a Downed count beside one would read as part of it.</summary>
+    public ImmutableArray<PopBox> Pops { get; init; } = [];
+}
 
 /// <summary>The TV dropped back to the newest beat.</summary>
 /// <param name="Seq">The beat it went to.</param>
@@ -247,7 +271,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             case SoundCue sound:
                 heard.Add(sound.Id);
                 break;
-            case BurstCue or PopCue or BadgeCue or FlightCue:
+            case BurstCue or PopCue or BadgeCue or FlightCue or HazardCue:
                 _fading.Add((cue, _now - (_clock - cue.At)));
                 break;
         }
@@ -313,22 +337,39 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             }
 
         var draws = ImmutableArray.CreateBuilder<FxDraw>();
+        var pops = ImmutableArray.CreateBuilder<PopBox>();
         foreach (var (cue, start) in _fading)
-            Draw(cue, _now - start, terrain, draws);
-        return new BeatFrame(places.ToImmutable(), poses.ToImmutable(), draws.ToImmutable(), shake);
+            Draw(cue, _now - start, terrain, draws, pops);
+        return new BeatFrame(places.ToImmutable(), poses.ToImmutable(), draws.ToImmutable(), shake) { Pops = pops.ToImmutable() };
     }
 
     private static UnitPlace Between(BoardTerrain terrain, Tile from, Tile to, float share, float hop)
     {
         var (a, b) = (UnitPlace.On(terrain, from), UnitPlace.On(terrain, to));
-        return new UnitPlace(Vector2.Lerp(a.Map, b.Map, share), a.Height + (b.Height - a.Height) * share + hop);
+        var at = Vector2.Lerp(a.Map, b.Map, share);
+        return new UnitPlace(at, RoadSurface.TryHeight(terrain, at, out var height)
+            ? height : a.Height + (b.Height - a.Height) * share + hop);
     }
 
-    private void Draw(Cue cue, double into, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
+    private void Draw(Cue cue, double into, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws, ImmutableArray<PopBox>.Builder pops)
     {
         var share = (float)(into / cue.Length);
         switch (cue)
         {
+            case HazardCue hazard when fx.Hazard(hazard.Hazard) is { } art:
+                var centre = terrain.Centre(hazard.Tile);
+                // A quick arrival and a soft release avoid the whole water patch blinking off together.
+                var alpha = (float)Math.Min(1, Math.Min(into / 0.04, (hazard.Length - into) / 0.18));
+                void Layer(ArtImage image, Vector2 size, Vector2 origin, BoardLayer layer)
+                {
+                    var frame = (int)(into * image.Fps) % image.Frames;
+                    draws.Add(new FxDraw(image.Path, new ArtRect(frame * (int)size.X, 0, (int)size.X, (int)size.Y),
+                        centre - origin, size, 0, false, Math.Clamp(alpha, 0, 1)) { Order = BoardOrder.Key(hazard.Tile, layer) });
+                }
+                Layer(art.Ground, art.Frame, art.Origin, BoardLayer.Ground);
+                if (art.Over is { } over)
+                    Layer(over, art.OverFrame, art.OverOrigin, BoardLayer.Over);
+                break;
             case BurstCue burst:
                 DrawBurst(burst, into, terrain, draws);
                 break;
@@ -336,7 +377,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
                 DrawFlight(flight, into, share, terrain, draws);
                 break;
             case PopCue pop:
-                DrawPop(pop, share, terrain, draws);
+                DrawPop(pop, share, terrain, draws, pops);
                 break;
             case BadgeCue badge:
                 DrawBadge(badge, share, terrain, draws);
@@ -351,11 +392,18 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var way = burst.Toward is { } toward ? terrain.Centre(toward) - from : Vector2.UnitX;
         var angle = MathF.Atan2(way.Y, way.X);
 
+        var progress = (float)Math.Clamp(into / burst.Length, 0, 1);
+        var scale = burst.Scale * (burst.Steam ? 1 + 0.18f * progress : 1);
+        var fade = Math.Clamp((progress - 0.15f) / 0.85f, 0, 1);
+        var alpha = burst.Alpha * (burst.Steam ? 1 - fade * fade * (3 - 2 * fade) : 1);
+        var rise = burst.Steam ? 12 * progress : 0;
+        var seconds = burst.Steam ? into * clip.Seconds / burst.Length : into;
+
         // Drawing turns around the frame's middle, so its anchor is put where it should land after the turn.
-        var size = new Vector2(clip.Width, clip.Height);
-        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) - size / 2, Matrix3x2.CreateRotation(angle));
-        var at = from - new Vector2(0, clip.Lift) - anchor - size / 2;
-        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, 1));
+        var size = new Vector2(clip.Width, clip.Height) * scale;
+        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) * scale - size / 2, Matrix3x2.CreateRotation(angle));
+        var at = from - new Vector2(0, clip.Lift + rise) - anchor - size / 2;
+        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(seconds) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, alpha));
     }
 
     private static void DrawFlight(FlightCue flight, double into, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
@@ -374,7 +422,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             shot.Headings > 1 ? 0 : angle, shot.Additive, 1));
     }
 
-    private void DrawPop(PopCue pop, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
+    private void DrawPop(PopCue pop, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws, ImmutableArray<PopBox>.Builder pops)
     {
         var style = pop.Style switch
         {
@@ -387,12 +435,16 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var centre = terrain.Centre(pop.Tile) - new Vector2(0, UnitReach + PopRise + PopFloat * share + pop.Row * PopRow);
         var alpha = share < 0.7f ? 1 : (1 - share) / 0.3f;
         var pen = centre.X - width / 2;
+        var (right, height) = (pen, 0f);
         foreach (var (rect, advance) in glyphs)
         {
             var size = new Vector2(rect.Width, rect.Height) * NumberScale;
-            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - size.Y / 2), size, 0, false, alpha));
+            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - size.Y / 2), size, 0, false, alpha) { Mark = true });
+            (right, height) = (MathF.Max(right, pen + size.X), MathF.Max(height, size.Y));
             pen += advance * NumberScale;
         }
+        var left = centre.X - width / 2;
+        pops.Add(new PopBox(pop.Unit, new Vector2(left, centre.Y - height / 2), new Vector2(right - left, height)));
     }
 
     private void DrawBadge(BadgeCue badge, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
@@ -401,14 +453,14 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var size = new Vector2(die.Width, die.Height) * BadgeScale;
         var alpha = share < 0.8f ? 1 : (1 - share) / 0.2f;
         var centre = terrain.Centre(badge.Tile) - new Vector2(0, BadgeRise);
-        draws.Add(new FxDraw(UnitArt.DicePath, die, centre - size / 2, size, 0, false, alpha));
+        draws.Add(new FxDraw(UnitArt.DicePath, die, centre - size / 2, size, 0, false, alpha) { Mark = true });
 
         var digits = badge.Die.ToString(System.Globalization.CultureInfo.InvariantCulture);
         var pen = centre.X - digits.Length * 4;
         foreach (var digit in digits)
         {
             var (rect, advance) = art.Digit(digit);
-            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - rect.Height / 2f + 1), new Vector2(rect.Width, rect.Height), 0, false, alpha));
+            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - rect.Height / 2f + 1), new Vector2(rect.Width, rect.Height), 0, false, alpha) { Mark = true });
             pen += advance;
         }
     }

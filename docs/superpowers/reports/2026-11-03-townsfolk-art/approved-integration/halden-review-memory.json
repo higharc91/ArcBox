@@ -1,0 +1,27 @@
+{
+  "region": "ashen_ford",
+  "limitBytes": 536870912,
+  "stages": [
+    {
+      "stage": "open",
+      "bytes": 283048192,
+      "peakBytes": 283048192
+    },
+    {
+      "stage": "crossing",
+      "bytes": 283048192,
+      "peakBytes": 283048192
+    },
+    {
+      "stage": "party-change",
+      "bytes": 283048192,
+      "peakBytes": 322369792
+    },
+    {
+      "stage": "party-restored",
+      "bytes": 283048192,
+      "peakBytes": 322369792
+    }
+  ],
+  "rosterUploadsAndReleases": "verified"
+}

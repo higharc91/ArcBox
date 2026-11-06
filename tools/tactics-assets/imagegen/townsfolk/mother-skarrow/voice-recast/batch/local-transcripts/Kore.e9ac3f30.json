@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.e9ac3f30.wav",
+  "sourceSha256": "ee0588b874d9b0939ce76801d993e650289cf6eafa116f380083362a813a9747",
+  "duration": 8.52,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 7.16,
+      "text": " So, the valley sends swords instead of grain."
+    },
+    {
+      "start": 7.16,
+      "end": 8.28,
+      "text": " I expected it."
+    }
+  ],
+  "text": "So, the valley sends swords instead of grain. I expected it.",
+  "secondsToTranscribe": 1.876
+}

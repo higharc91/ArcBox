@@ -65,12 +65,16 @@ public sealed class StagePlan
     private readonly ArtIndex _art;
     private readonly float _skirt;
 
-    private StagePlan(WorldGround ground, ArtIndex art, float skirt, BattleStage stage, BoardChanges changes, BoardPlan plan, BoardLighting lighting)
+    private StagePlan(WorldGround ground, ArtIndex art, float skirt, BattleStage stage, BoardChanges changes, BoardPlan plan, BoardLighting lighting,
+        int read)
     {
         (_ground, _art, _skirt) = (ground, art, skirt);
-        (Stage, Changes, Plan, Lighting) = (stage, changes, plan, lighting);
+        (Stage, Changes, Plan, Lighting, Read) = (stage, changes, plan, lighting, read);
         Lit = LitBoard.Build(plan, lighting);
     }
+
+    /// <summary>How many of the region's tiles the last build read: the window round <see cref="Drawn"/>, never the whole region.</summary>
+    public int Read { get; }
 
     /// <summary>Where the battle stands.</summary>
     public BattleStage Stage { get; }
@@ -126,20 +130,20 @@ public sealed class StagePlan
         var (x1, y1) = (blocks.Max(b => b.Tiles.X + b.Tiles.W), blocks.Max(b => b.Tiles.Y + b.Tiles.H));
         var window = GroundWindow.Of(_ground, new TileRect(x0, y0, x1 - x0, y1 - y0), BoardChangesOnWorld.Of(changes, Stage),
             BoardTerrain.ChasmMaterial(_ground.Map, Stamp), _skirt);
-        return [.. blocks.Select(b => world.Relit(b, window.Block(_art, b.Tiles, grid: false)))];
+        return [.. blocks.Select(b => world.Relit(b, window.Block(_art, b.Tiles, grid: false, world: true)))];
     }
 
     private static StagePlan Draw(WorldGround ground, ArtIndex art, float skirt, BattleStage stage, BoardChanges changes, BoardLighting lighting)
     {
         var stamp = new TileRect(stage.Origin.X, stage.Origin.Y, stage.Width, stage.Depth);
         var drawn = new TileRect(stamp.X, stamp.Y, stamp.W + Reach, stamp.H + Reach);
-        var built = GroundWindow.Of(ground, drawn, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp), skirt)
-            .Block(art, drawn, grid: true).Shifted(-BoardFit.StageOffset(stage));
+        var window = GroundWindow.Of(ground, drawn, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp), skirt);
+        var built = window.Block(art, drawn, grid: true, world: true, storyFlags: ImmutableHashSet<string>.Empty).Shifted(-BoardFit.StageOffset(stage));
 
         // What's in front matters only where it can cover the stage: the stamp and a tile round it, which walkers step in from, and above it.
         var near = new TileRect(stamp.X - 1, stamp.Y - 1, stamp.W + 2, stamp.H + 2);
         var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
-        foreach (var item in built.Items.Where(i => near.Contains(i.Tile)))
+        foreach (var item in built.Items.Where(i => near.Contains(i.Tile) && i is not Face { Kind: FaceKind.Building }))
         {
             var (from, to) = BoardPlan.Bounds(item);
             (min, max) = (Vector2.Min(min, from), Vector2.Max(max, to));
@@ -148,7 +152,7 @@ public sealed class StagePlan
         var plan = BoardPlan.Of([.. built.Items
             .Where(i => stamp.Contains(i.Tile) || Overlaps(i, room))
             .Select(i => i is Face { Grid: true } face && !stamp.Contains(face.Tile) ? face with { Grid = false } : i)]);
-        return new StagePlan(ground, art, skirt, stage, changes, plan, lighting);
+        return new StagePlan(ground, art, skirt, stage, changes, plan, lighting, window.Tiles);
     }
 
     private static bool Overlaps(BoardItem item, ArtArea room)
@@ -166,13 +170,16 @@ public sealed class StagePlan
 /// </summary>
 internal sealed class GroundWindow
 {
-    private const int TextureSpan = 4;      // BoardPlan's: a texture covers 4 x 4 tiles
+    private const int TextureSpan = 8;      // Align the 8-tile regional textures as well as the 4-tile battle textures.
 
     private readonly BoardTerrain _terrain;
     private readonly int _x;
     private readonly int _y;
 
-    private GroundWindow(BoardTerrain terrain, int x, int y) => (_terrain, _x, _y) = (terrain, x, y);
+    private GroundWindow(BoardTerrain terrain, int x, int y, int tiles) => (_terrain, _x, _y, Tiles) = (terrain, x, y, tiles);
+
+    /// <summary>How many of the region's tiles this window reads.</summary>
+    public int Tiles { get; }
 
     /// <summary>
     /// The window of <paramref name="ground"/> that can build <paramref name="need"/>, with <paramref name="changes"/> (in world tiles), a sunk tile
@@ -184,13 +191,13 @@ internal sealed class GroundWindow
         var (x0, y0) = (Math.Max(0, Align(need.X - 1)), Math.Max(0, Align(need.Y - 1)));
         var (x1, y1) = (Math.Min(world.Width, need.X + need.W + 1), Math.Min(world.Height, need.Y + need.H + 1));
         var map = Cut(world, x0, y0, Math.Max(0, x1 - x0), Math.Max(0, y1 - y0));
-        return new GroundWindow(new BoardTerrain(map, BoardChangesOnWorld.Moved(changes, -x0, -y0), chasm, skirt), x0, y0);
+        return new GroundWindow(new BoardTerrain(map, BoardChangesOnWorld.Moved(changes, -x0, -y0), chasm, skirt), x0, y0, map.Width * map.Height);
     }
 
     /// <summary><see cref="BoardPlan.BuildBlock"/> of the region's tiles <paramref name="rect"/>, at the region's tiles, keys and art pixels.</summary>
-    public BoardPlan Block(ArtIndex art, TileRect rect, bool grid)
+    public BoardPlan Block(ArtIndex art, TileRect rect, bool grid, bool world = false, IReadOnlySet<string>? storyFlags = null)
     {
-        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid);
+        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid, world, new Tile(_x, _y), storyFlags);
         return BoardPlan.Of([.. built.Items.Select(Rekey)]).Shifted(BoardProjection.Corner(_x, _y, 0));
     }
 
@@ -245,6 +252,14 @@ internal sealed class GroundWindow
             .. world.Props.Where(p => p.At.X >= x && p.At.Y >= y && p.At.X < x + width && p.At.Y < y + height)
                 .Select(p => p with { At = new Tile(p.At.X - x, p.At.Y - y) }),
         ];
-        return BattleMap.FromBytes(world.Id, width, height, bytes, world.Materials, props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
+        ImmutableHashSet<Tile> stamped =
+        [
+            .. world.StampedTiles.Where(t => t.X >= x && t.Y >= y && t.X < x + width && t.Y < y + height)
+                .Select(t => new Tile(t.X - x, t.Y - y)),
+        ];
+        // All of them, in their order: a building stands on tiles outside a window, and its place in the list says which pieces go together.
+        ImmutableArray<BuildingPlacement> buildings = [.. world.Buildings.Select(b => b with { At = new Tile(b.At.X - x, b.At.Y - y) })];
+        return BattleMap.FromBytes(world.Id, width, height, bytes, world.Materials, props,
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stamped, buildings);
     }
 }

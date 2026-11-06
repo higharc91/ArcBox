@@ -16,7 +16,8 @@ public enum ArmorKind { None, Light, Medium, Heavy }
 /// </summary>
 public sealed record WeaponDef(string Id, Dice Damage, string DamageType, Stat Stat, bool Finesse, bool Ranged,
     int Range, bool Reach, [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
 
 /// <summary>
 /// A unit's built character sheet, snapshotted into the battle at start. <see cref="Resources"/> holds each resource's

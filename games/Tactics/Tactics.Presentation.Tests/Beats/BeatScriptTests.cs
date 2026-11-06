@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Tests.Board;
 
@@ -34,7 +35,35 @@ public sealed class BeatScriptTests
     private static AbilityUsed Used(string? anim, string? fx, string? projectile, UnitId target)
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
 
+    [Theory]
+    [InlineData("ashmaw.cinder_roar", "monsters.roar", 1.2, "ashmaw_roar")]
+    [InlineData("ashmaw.ash_shake", "monsters.shake", 1.0, "ashmaw_shake")]
+    [InlineData("grisk.dig_faster", "monsters.shout", 0.7, null)]
+    public void Creature_self_actions_show_the_whole_clip_and_play_their_own_sound(string ability, string anim, double length, string? sound)
+    {
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), new PresentationDef(anim, null, null));
+        var script = BeatScript.Of(new Beat(1, Hero, [used]), Near, Near, Fx.Value, SoundBank.Load(Pack.Root));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>());
+        Assert.Equal(anim, pose.Anim);
+        Assert.Equal(length, pose.Length);
+        Assert.True(script.Length >= pose.At + pose.Length);
+        if (sound is not null) Assert.Contains(script.Cues.OfType<SoundCue>(), c => c.Id == sound);
+        Assert.DoesNotContain(script.Cues.OfType<SoundCue>(), c => c.Id == "spell_cast");
+    }
+
     private static RollResult Roll(int die, bool success, bool crit = false) => new([die], die, 3, die + 3, 12, success, crit, false);
+
+    [Theory]
+    [InlineData("ashmaw.maul")]
+    [InlineData("ashmaw.party_maul")]
+    public void Both_bear_profiles_keep_the_whole_attack_clip(string ability)
+    {
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Foe), new("beasts.attack", null, null));
+        var script = Script(Near, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "slashing", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        Assert.Equal(1.0, lunge.Length);
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+    }
 
     private static BattleEvent[] Hit(int amount, int after, string? anim = "characters.attack", string? fx = "fx.slash.steel", string? projectile = null,
         bool crit = false) =>
@@ -44,6 +73,68 @@ public sealed class BeatScriptTests
         new AttackResolved(Hero, Foe, true, crit),
         new Damaged(Foe, amount, "slashing", after),
     ];
+
+    [Theory]
+    [InlineData("ignite", "fx/flames_fire.png")]
+    [InlineData("spread", "fx/flames_fire.png")]
+    [InlineData("burn_web", "fx/flames_fire.png")]
+    [InlineData("freeze", "fx/ice_frost.png")]
+    [InlineData("thaw", "fx/misty_mist.png")]
+    [InlineData("douse", "fx/poof_white.png")]
+    public void Surface_reactions_use_pack_clips_and_keep_the_action_under_a_second(string rule, string path)
+    {
+        var tiles = Enumerable.Range(0, 60).Select(x => new Tile(x, 3)).ToImmutableArray();
+        var script = Script(Near, new TileReacted(rule, Hero, tiles),
+            new ZoneCreated(new Zone(1, null, "burning", tiles, 2, false, false, [])));
+        var bursts = script.Cues.OfType<BurstCue>().Where(c => c.Clip.Path == path).ToArray();
+        Assert.Equal(tiles, bursts.Select(c => c.Tile));
+        Assert.All(bursts, c => Assert.InRange(c.At + c.Length, 0.01, rule is "thaw" or "douse" ? 2.5 : 0.999));
+        Assert.InRange(script.Length, 0.5, 0.999);
+        Assert.Contains(script.Cues.OfType<MomentCue>(), c => c.Label == "reaction-" + rule);
+    }
+
+    [Fact]
+    public void Conduct_ripples_in_event_order_and_its_saves_and_damage_land_with_each_tile()
+    {
+        var tiles = new[] { new Tile(3, 3), new Tile(4, 3), new Tile(5, 3) }.ToImmutableArray();
+        var script = Script(Near, new TileReacted("conduct", Hero, tiles),
+            new Rolled(Foe, RollKind.Save, Roll(8, false)), new Damaged(Foe, 4, "lightning", 6));
+        var ripple = script.Cues.OfType<HazardCue>().ToArray();
+        Assert.Equal(tiles, ripple.Select(c => c.Tile));
+        Assert.Equal(new[] { 0.0, 0.04, 0.08 }, ripple.Select(c => c.At));
+        Assert.Equal(0.04, Assert.Single(script.Cues.OfType<BadgeCue>()).At, 3);
+        Assert.Equal(0.04, Assert.Single(script.Cues.OfType<PopCue>()).At, 3);
+        Assert.Contains(script.Cues.OfType<BurstCue>(), c => c.Clip.Path == "fx/shock_storm.png" && c.Tile == tiles[1]);
+        Assert.InRange(script.Length, 0.5, 0.999);
+    }
+
+    [Fact]
+    public void A_large_conducted_front_keeps_all_victims_concurrent_including_lethal_hits()
+    {
+        var units = Enumerable.Range(0, 60).Select(i => Unit(new UnitId("foe" + i), "Enemy", i, 3)).ToArray();
+        var tiles = units.Select(u => u.At).ToImmutableArray();
+        BattleEvent[] events = [new TileReacted("conduct", Hero, tiles), .. units.SelectMany(u => new BattleEvent[]
+            { new Rolled(u.Id, RollKind.Save, Roll(8, false)), new Damaged(u.Id, 10, "lightning", 0), new Died(u.Id) })];
+        var script = Script(View(units), events);
+        Assert.Equal(60, script.Cues.OfType<PopCue>().Count());
+        Assert.Equal(60, script.Cues.OfType<BadgeCue>().Count());
+        Assert.All(script.Cues.Where(c => c is not (PopCue or BadgeCue)), c => Assert.InRange(c.At + c.Length, 0, 0.999));
+        Assert.InRange(script.Length, 0.6, 0.999);
+        Assert.All(script.Cues.OfType<PopCue>(), c => Assert.InRange(c.At, 0, 0.24));
+    }
+
+    [Fact]
+    public void Reaction_sound_is_once_per_front_and_the_next_turn_waits_for_it()
+    {
+        var sounds = Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
+        var beat = new Beat(1, null, [new RoundStarted(2, []), new TileReacted("spread", null, [new Tile(3, 3), new Tile(4, 3)]),
+            new ZoneCreated(new Zone(1, null, "burning", [new Tile(3, 3)], 2, false, false, [])), new TurnStarted(Hero, 2)]);
+        var script = BeatScript.Of(beat, Near, Near, Fx.Value, sounds);
+        Assert.Single(script.Cues.OfType<SoundCue>(), c => c.Id == "spell_fire_aura");
+        Assert.DoesNotContain(script.Cues.OfType<SoundCue>(), c => c.Id == "zone_created");
+        var turn = Assert.Single(script.Cues.OfType<ApplyCue>(), c => c.Event is TurnStarted);
+        Assert.InRange(turn.At, 0.85, 0.999);
+    }
 
     [Theory]
     [InlineData("characters.cast")]

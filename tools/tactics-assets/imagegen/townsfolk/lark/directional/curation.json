@@ -1,0 +1,39 @@
+{
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "northWestCorrection": "Replace erroneous near left-hip scroll tube with paper satchel in all18 poses; original source retained.",
+  "southWestTalk": {
+    "sourceRow": 2,
+    "sourceColumns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      4
+    ],
+    "rejectedRawCell": {
+      "row": 2,
+      "column": 5,
+      "horizontalFootDriftWorld": 5.25
+    },
+    "reason": "Last raw pose slides sideways; hold the preceding valid peak pose, then return through the authored poses. No per-frame recentering or test-limit change."
+  },
+  "perDirectionGridRegistration": "One regular grid fitted from six idle-foot centres, one scale/offset shared by18 poses.",
+  "palette": "Locked96 colours; exact RGB-keyed nearest lookup, stable across local source corrections.",
+  "mirroring": false,
+  "perFrameRecentering": false,
+  "southWalkCorrection": {
+    "source": "south-walk-corrected-source.png",
+    "appliesTo": "walk row only; original south idle/talk unchanged",
+    "reason": "First row kept image-right boot planted through the gait; corrected second half swings the opposite leg."
+  }
+}

@@ -18,6 +18,8 @@ using Microsoft.Extensions.Time.Testing;
 namespace ArcBox.Server.Tests.Rooms;
 
 /// <summary>Durable rooms (spec §3.5): membership survives a restart or an idle break; game state does not.</summary>
+// These tests share HangerGame's static gate and must not reset it concurrently.
+[Collection("Hanger game")]
 public sealed class DurableRoomTests
 {
     private const string Restarted = "Game interrupted: the server restarted.";
@@ -88,6 +90,47 @@ public sealed class DurableRoomTests
         return [.. Enumerable.Range(0, reader.FieldCount).Select(i => reader.IsDBNull(i) ? "" : Convert.ToString(reader.GetValue(i))!)];
     }
 
+    /// <summary>
+    /// A disk that fails with SQLite's "disk I/O error" while a game runs (the chapter e2e that hung on a full disk): the room goes on
+    /// taking input and sending views, its saves wait in the writer, which backs off, and once the disk recovers the newest of them lands.
+    /// </summary>
+    [Fact]
+    public async Task A_failing_disk_never_holds_up_the_room_and_its_saves_land_once_it_recovers()
+    {
+        await using var h = new Harness(db => new StorageWriterTests.FailingDisk(db) { Broken = true });
+        await h.Writer.StartAsync(Ct);
+        await using var m = new RoomManager(h.Services);
+        var (room, created) = await m.CreateRoomAsync("h1");
+        await room.JoinAsync("c1", "Ann");
+        await room.SelectGameAsync("h1", "counter");
+        await room.StartGameAsync("h1");
+        await WaitUntilAsync(() =>
+        {
+            h.Time.Advance(TimeSpan.FromMilliseconds(250));
+            return h.Writer.Failing;
+        }, "the writer to find the disk failing");
+
+        for (var i = 0; i < 5; i++)
+            await room.SendInputAsync("c1", h.Sender.LastViewId("c1"), Json(new { pressed = "press" }));
+
+        var host = (JsonElement)h.Sender.Of("h1", ClientMethods.HostView).Last().Args[1]!;
+        Assert.Equal(5, host.GetProperty("rows")[0].GetProperty("count").GetInt32());     // the game went on
+        Assert.Equal(RoomStatus.InGame, await room.GetStatusAsync());
+        Assert.Equal(0, h.RowCount(created.Code));
+        Assert.True(h.Writer.Failing);
+
+        h.Disk!.Broken = false;
+        await WaitUntilAsync(() =>
+        {
+            h.Time.Advance(TimeSpan.FromMilliseconds(250));
+            return !h.Writer.Failing;
+        }, "the writer to write again");
+
+        Assert.Equal(1, h.RowCount(created.Code));
+        Assert.Equal(TimeSpan.Zero, h.Writer.OldestPendingAge);
+        await h.Writer.StopAsync(Ct);
+    }
+
     /// <summary>A database file in its own temp directory, deleted (with its WAL files) on dispose.</summary>
     private sealed class TempDb : IDisposable
     {
@@ -106,9 +149,11 @@ public sealed class DurableRoomTests
     {
         private readonly ArcDb _db = StorageTestSupport.NewMemoryDb();
 
-        public Harness()
+        /// <summary>A harness whose writer opens its connections through <paramref name="disk"/>, if given: a disk that can fail.</summary>
+        public Harness(Func<ArcDb, StorageWriterTests.FailingDisk>? disk = null)
         {
-            Writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance);
+            Disk = disk?.Invoke(_db);
+            Writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance) { Connect = Disk is { } d ? d.Open : null };
             Store = new RoomStore(_db, Writer, Time);
             var registry = new GameRegistry([new(() => new CounterGame()), new(() => new HangerGame())]);
             var rules = new CampaignRulesRegistry([]);
@@ -120,6 +165,7 @@ public sealed class DurableRoomTests
         public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
         public RecordingSender Sender { get; } = new();
         public StorageWriter Writer { get; }
+        public StorageWriterTests.FailingDisk? Disk { get; }
         public RoomStore Store { get; }
         public RoomServices Services { get; }
 
@@ -138,6 +184,41 @@ public sealed class DurableRoomTests
             _db.Dispose();
             return ValueTask.CompletedTask;
         }
+    }
+
+    // Issue #60: what a seat's phone proved is kept with the seat, so after a restart the phone's Rejoin (its seat's
+    // secret, no keys) still lets the room see that member's campaigns.
+    [Fact]
+    public async Task A_seats_vouch_survives_a_restart_and_comes_back_with_its_phone()
+    {
+        using var db = new TempDb();
+        CreateRoomResult room;
+        JoinResult ann;
+        using (var a = new ArcServerFactory(db.File))
+        {
+            await using var host = await TestClient.ConnectAsync(a);
+            await using var p1 = await TestClient.ConnectAsync(a);
+            room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+            ann = await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+            await p1.InvokeAsync("SelectGame", "ledger");
+            await p1.InvokeAsync<ProfileKey>("CreateCampaign", "Embers");
+            await p1.InvokeAsync("SelectGame", "counter");
+            await p1.InvokeAsync("SelectGame", "ledger");    // the campaign is no longer selected, only listed
+            var listed = await host.WaitForAsync(ClientMethods.LobbyChanged, l => !l.TryGetProperty("campaign", out _)
+                && l.TryGetProperty("campaigns", out var c) && c.GetArrayLength() == 1);
+            Assert.Equal(1, listed.GetProperty("campaigns").GetArrayLength());
+        }
+
+        using var b = new ArcServerFactory(db.File);
+        await using var tv = await TestClient.ConnectAsync(b);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        var away = await tv.WaitForAsync(ClientMethods.LobbyChanged);
+        Assert.Equal(0, away.GetProperty("campaigns").GetArrayLength());    // Ann's phone isn't back yet
+
+        await using var phone = await TestClient.ConnectAsync(b);
+        await phone.InvokeAsync("Rejoin", room.Code, ann.PlayerId.Value, ann.Secret);
+        var back = await tv.WaitForAsync(ClientMethods.LobbyChanged, l => l.TryGetProperty("campaigns", out var c) && c.GetArrayLength() == 1);
+        Assert.Equal("Embers", back.GetProperty("campaigns")[0].GetProperty("name").GetString());
     }
 
     [Fact]
@@ -332,8 +413,10 @@ public sealed class DurableRoomTests
         await using var ann2 = await TestClient.ConnectAsync(f);
         var second = await host2.InvokeAsync<CreateRoomResult>("CreateRoom");
         await host2.InvokeAsync("SelectGame", "ledger");
+        // Ann's phone joins first, with her key: only then may the room pick her campaign (issue #60).
+        await ann2.TakeSeatAsync(new TakeSeatRequest(second.Code, NewName: "Ann", ProfileKeys: [key.Key]));
         await host2.InvokeAsync("SelectCampaign", campaignId);
-        await ann2.TakeSeatAsync(new TakeSeatRequest(second.Code, Seat: new SeatRef(Member: key.Id), ProfileKeys: [key.Key]));
+        await ann2.InvokeAsync<ProfileKey?>("ClaimMember", new ClaimMemberRequest(new SeatRef(Member: key.Id), [key.Key]));
         await host2.InvokeAsync("StartGame");
         Assert.Equal(second.Code, campaigns.LeasedBy(campaignId));
 
@@ -426,6 +509,30 @@ public sealed class DurableRoomTests
         Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
     }
 
+    // Issue #62: a TV and a phone that moved on to another room hear nothing when the room they left parks.
+    [Fact]
+    public async Task Parking_a_room_tells_nobody_who_has_moved_on_to_another_room()
+    {
+        using var f = new ArcServerFactory();
+        var rooms = f.Services.GetRequiredService<RoomManager>();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var phone = await TestClient.ConnectAsync(f);
+        var first = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await phone.TakeSeatAsync(new TakeSeatRequest(first.Code, NewName: "Ann"));
+
+        // The same connections move to a second room: the TV makes a new one, the phone takes a seat in it.
+        var second = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await phone.TakeSeatAsync(new TakeSeatRequest(second.Code, NewName: "Ann"));
+        await WaitUntilAsync(() => rooms.RoomFor(phone.ConnectionId!)?.Code == second.Code, "the phone to move rooms");
+
+        f.Time.Advance(new RoomOptions().IdleTimeout + TimeSpan.FromMinutes(1));
+        await WaitUntilAsync(() => rooms.FindLoaded(first.Code) is null, "the first room to park");
+
+        Assert.NotNull(rooms.FindLoaded(second.Code));
+        Assert.Equal(0, host.Unclaimed(ClientMethods.RoomClosed));
+        Assert.Equal(0, phone.Unclaimed(ClientMethods.RoomClosed));
+    }
+
     [Fact]
     public async Task Parked_non_resumable_game_says_room_was_idle()
     {
@@ -467,7 +574,7 @@ public sealed class DurableRoomTests
 
             _ = room.SendInputAsync("c1", h.Sender.LastViewId("c1"), Json(new { pressed = "x" }));
             Assert.True(HangerGame.Entered.Wait(TimeSpan.FromSeconds(5), Ct));
-            h.Time.Advance(TimeSpan.FromSeconds(3));
+            h.Time.Advance(h.Services.Options.GameCallTimeout + TimeSpan.FromSeconds(1));
             await m.SweepAsync();
 
             Assert.Equal(0, m.Count);

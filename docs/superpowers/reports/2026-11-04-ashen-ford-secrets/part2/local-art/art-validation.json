@@ -1,0 +1,67 @@
+{
+  "granary": {
+    "size": [
+      222,
+      194
+    ],
+    "origin": [
+      68,
+      102
+    ],
+    "anchor": [
+      84,
+      142
+    ],
+    "deterministic_image_and_shadow": true,
+    "transparent_frame_border": true
+  },
+  "maud_hut": {
+    "size": [
+      188,
+      155
+    ],
+    "origin": [
+      70,
+      81
+    ],
+    "anchor": [
+      70,
+      113
+    ],
+    "deterministic_image_and_shadow": true,
+    "transparent_frame_border": true
+  },
+  "maud_ash_garden": {
+    "size": [
+      98,
+      57
+    ],
+    "origin": [
+      65,
+      6
+    ],
+    "anchor": [
+      49,
+      30
+    ],
+    "deterministic_image_and_shadow": true,
+    "transparent_frame_border": true
+  },
+  "maud_stool_pots": {
+    "size": [
+      33,
+      35
+    ],
+    "origin": [
+      12,
+      4
+    ],
+    "anchor": [
+      12,
+      20
+    ],
+    "deterministic_image_and_shadow": true,
+    "transparent_frame_border": true
+  },
+  "maud_preserves_cottage_frame_and_anchor": true
+}

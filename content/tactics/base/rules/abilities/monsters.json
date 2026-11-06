@@ -20,6 +20,12 @@
       "effects": [ { "attack": { "kind": "spell" }, "onHit": [ { "damage": { "dice": "2d6", "type": "fire" } } ] } ],
       "presentation": { "anim": "characters.point", "projectile": "projectiles.fireball", "fx": "fx.flames.fire" },
       "ai": { "tags": ["damage", "single", "ranged"] } },
+    {"id": "goblin_ford_shaman.cinder_bolt", "name": "Cinder Bolt", "tier": 0, "cost": {"action": 1}, "target": {"kind": "enemy", "range": 6, "los": true, "area": {"shape": "single"}}, "effects": [{"attack": {"kind": "spell"}, "onHit": [{"damage": {"dice": "1d6", "type": "fire"}}]}], "presentation": {"anim": "characters.point", "projectile": "projectiles.fireball", "fx": "fx.flames.fire"}, "ai": {"tags": ["damage", "single", "ranged"]}},
+    { "id": "goblin_shaman.storm_hex", "name": "Storm Hex", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "single" } },
+      "effects": [ { "attack": { "kind": "spell" }, "onHit": [ { "damage": { "dice": "1d8", "type": "lightning" } } ] } ],
+      "presentation": { "anim": "characters.point", "projectile": "projectiles.lightning", "fx": "fx.shock.storm" },
+      "ai": { "tags": ["damage", "single", "ranged"] } },
     { "id": "orc_brute.savage_cleave", "name": "Savage Cleave", "tier": 0, "cost": { "action": 1, "uses": 2 },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "burst", "size": 1 } },
       "effects": [ { "save": { "stat": "dex", "dc": 12 }, "onFail": [ { "damage": { "dice": "2d8", "type": "slashing" } } ] } ],
@@ -117,7 +123,7 @@
       "effects": [ { "save": { "stat": "dex", "dc": 13 },
                      "onFail": [ { "damage": { "dice": { "1": "2d6", "7": "3d8" }, "type": "fire" } }, { "apply": "burning", "rounds": 2 } ],
                      "onSuccess": [ { "damage": { "dice": "1d6", "type": "fire" } } ] } ],
-      "presentation": { "anim": "characters.shoot", "projectile": "projectiles.fireball", "fx": "fx.explosion" },
+      "presentation": { "anim": "characters.cast", "projectile": "projectiles.fireball", "fx": "fx.explosion" },
       "ai": { "tags": ["damage", "area"] } },
     { "id": "boar.gore_charge", "name": "Gore Charge", "tier": 0, "cost": { "action": 1, "uses": 2 }, "isWeaponAttack": true,
       "target": { "kind": "enemy", "range": 1, "los": true, "area": { "shape": "single" } },
@@ -237,7 +243,267 @@
                      "onFail": [ { "damage": { "dice": "4d10", "type": "bludgeoning" } }, { "push": { "distance": 2 } }, { "apply": "prone" } ],
                      "onSuccess": [ { "damage": { "dice": "2d10", "type": "bludgeoning" } } ] } ],
       "presentation": { "anim": "bosses.special", "fx": "fx.explosion" },
-      "ai": { "tags": ["damage", "control", "area"] } }
+      "ai": { "tags": ["damage", "control", "area"] } },
+    {
+      "id": "ashmaw.maul",
+      "name": "Maul",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "piercing"
+              }
+            }
+          ]
+        },
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "slashing"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "beasts.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single",
+          "melee"
+        ]
+      }
+    },
+    {
+      "id": "ashmaw.cinder_roar",
+      "name": "Cinder Roar",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "roar": 1
+        }
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 3
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "wis",
+            "dc": 11
+          },
+          "onFail": [
+            {
+              "apply": "frightened",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "monsters.roar"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area"
+        ]
+      }
+    },
+    {
+      "id": "ashmaw.ash_shake",
+      "name": "Ash Shake",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "dex",
+            "dc": 11
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "fire"
+              }
+            }
+          ],
+          "onSuccess": [
+            {
+              "damage": {
+                "dice": "1d3",
+                "type": "fire"
+              }
+            }
+          ]
+        },
+        {
+          "zone": {
+            "kind": "burning",
+            "area": {
+              "shape": "burst",
+              "size": 1
+            },
+            "rounds": 2,
+            "surface": true,
+            "passives": []
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "monsters.shake"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      }
+    },
+    {
+      "id": "grisk.dig_faster",
+      "name": "Dig faster!",
+      "tier": 0,
+      "cost": {
+        "bonus": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "ally",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "includeSelf": false
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "kobold"
+            },
+            "then": [
+              {
+                "statMod": {
+                  "mods": {
+                    "attack": 1
+                  },
+                  "rounds": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "monsters.shout"
+      },
+      "ai": {
+        "tags": [
+          "buff",
+          "area"
+        ]
+      }
+    },
+    {
+      "id": "ashmaw.party_maul",
+      "name": "Maul",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6+7",
+                "type": "piercing"
+              }
+            }
+          ]
+        },
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6+7",
+                "type": "slashing"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "beasts.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single",
+          "melee"
+        ]
+      }
+    }
   ],
   "passives": [
     { "id": "hobgoblin.martial_advantage", "hook": "onAttackHit", "oncePerTurn": true, "when": { "flanked": true },
@@ -247,6 +513,34 @@
     { "id": "dire_wolf.knockdown", "hook": "onAttackHit", "oncePerTurn": true, "when": { "weapon": ["melee"] },
       "effects": [ { "save": { "stat": "str", "dc": 13 }, "onFail": [ { "apply": "prone" } ] } ] },
     { "id": "spider.venom", "hook": "onAttackHit", "when": { "weapon": ["melee"] },
-      "effects": [ { "damage": { "dice": "2d8", "type": "poison" } } ] }
+      "effects": [ { "damage": { "dice": "2d8", "type": "poison" } } ] },
+    {
+      "id": "ashmaw.roar_recharge",
+      "hook": "onTurnStart",
+      "target": "self",
+      "effects": [
+        {
+          "random": {
+            "table": [
+              {
+                "weight": 4,
+                "effects": []
+              },
+              {
+                "weight": 2,
+                "effects": [
+                  {
+                    "grantResource": {
+                      "resource": "roar",
+                      "amount": 1
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
   ]
 }

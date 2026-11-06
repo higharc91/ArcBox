@@ -63,6 +63,9 @@ public sealed partial class TacticsGame
     /// <summary>When the hold runs out unless it's repeated.</summary>
     private DateTimeOffset _heldUntil;
 
+    /// <summary>True while <see cref="_blocked"/> is by something the TV hasn't been told of: <see cref="ExploreView.Blocked"/> stays false.</summary>
+    private bool _unseenWall;
+
     /// <summary>When the step under way ends: the next can't begin before this, however fast a thumb taps.</summary>
     private DateTimeOffset _stepDue;
 
@@ -116,7 +119,7 @@ public sealed partial class TacticsGame
     /// rather than read as a command the battle doesn't know.
     /// </summary>
     private static bool IsWorldAction(string action)
-        => action is "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "skip" or "vote" or "pickRoller";
+        => action is "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 
@@ -131,6 +134,22 @@ public sealed partial class TacticsGame
 
     /// <summary>Where the battle map <paramref name="map"/> stands in the region, or null with no region or no stamp of it: a plain board.</summary>
     private BattleStage? StageFor(string map) => _region is { } region && Rules.MapFor(map) is { } battleMap ? BattleStage.Of(region, battleMap) : null;
+
+    /// <summary>
+    /// Where the battle <paramref name="save"/> is drawn, and lands: the stage it was saved with, while the region still stamps its map
+    /// there (origin and height); a plain board if a repaint has moved or removed that stamp since (review), so the party ends it where it
+    /// stood before the fight. A fight begun on a plain board stays on one (<see cref="BattleSave.Plain"/>), even if a repaint has stamped
+    /// its map since. A battle saved before stages were kept takes the region's stamp, as it always did.
+    /// </summary>
+    private BattleStage? StageOf(BattleSave save)
+    {
+        if (save.Plain)
+            return null;
+        var live = StageFor(save.State.MapId);
+        if (save.Stage is not { } saved)
+            return live;
+        return live is { } stage && stage.Origin == saved.Origin && stage.Height == saved.Height ? stage : null;
+    }
 
     /// <summary>
     /// The fight on offer and where it stands: the arc's available beat (<see cref="StoryRules.Available"/>), if it's a battle whose
@@ -160,7 +179,7 @@ public sealed partial class TacticsGame
     /// seat in the party (an absent member is given a character, and played by the AI), and companions up to the encounter's smallest
     /// party, as the battle list does. If it won't start, the party is back to walking where it stopped, with a notice.
     /// </summary>
-    private void StartFight(string encounter, string? beat)
+    private void StartFight(string encounter, string? beat, string? mob = null)
     {
         var def = Rules.Encounters.GetValueOrDefault(encounter);
         // Characters first, while the party is still walking: giving one out can settle the lead, and anything the lead arms has to go
@@ -170,7 +189,7 @@ public sealed partial class TacticsGame
         LeaveExploration();
         _toasts.Clear();
         if (def is not null && _players.Count <= def.Party.Max
-            && StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat))
+            && StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat, mob))
             return;
         Note(def is not null && _players.Count > def.Party.Max ? FightTooBig(def) : FightWontStart);
         ToExploration();
@@ -184,6 +203,8 @@ public sealed partial class TacticsGame
     /// </summary>
     private void EnterWorld()
     {
+        RestoreFordSettlement();
+        WorldEntering?.Invoke();
         var saved = _doc.World;
         var region = saved?.Region is { } id && Rules.RegionFor(id) is { } named ? named : Rules.Regions.Values.MinBy(r => r.Def.Chapter);
         if (region is null)
@@ -192,8 +213,9 @@ public sealed partial class TacticsGame
         // Not 0: a server restart restarts Seq under a TV that may have stayed up, and to it only a new Epoch means "snap".
         _epoch = (int)(_ctx.Now.ToUnixTimeSeconds() % int.MaxValue);
         _storySeq = Math.Max(saved?.StorySeq ?? 0, saved?.Story?.Seq ?? 0);     // the TV's line number goes on from where it was
+        _thingSeq = Math.Max(_thingSeq, saved?.ThingSeq ?? 0);                     // and so does its thing events' number
         var start = region.Def.Spawns.Start;
-        if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At, start))
+        if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At))
             (_at, _facing) = (saved.At, saved.Facing);
         else
         {
@@ -203,10 +225,10 @@ public sealed partial class TacticsGame
         }
     }
 
-    private bool CanStandOn(Tile at, Tile start)
+    private bool CanStandOn(Tile at)
     {
-        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
-        return terrain.Map.InBounds(at) && terrain.Walkable(at) && WorldWalk.Reach(terrain, start, ClassDef.DefaultJump).Contains(at);
+        var terrain = WalkGround();
+        return terrain.Map.InBounds(at) && terrain.Walkable(at) && Rules.ReachFor(_region!.Def.Id)!.Contains(at);
     }
 
     private void Note(string text) => _notice = _notice is null ? text : $"{_notice} {text}";
@@ -246,16 +268,29 @@ public sealed partial class TacticsGame
     /// <summary>Into the world, from Muster, the battle list or Results.</summary>
     private void ToExploration()
     {
+        // Found items wait for the party to say who takes them (USER DECISION 1): the vote comes first, then the walk.
+        if (LootWaiting && _doc.World!.Loot!.Voting is false && Camp is null && _doc.World.Shop is null && BeginLootVote())
+            return;
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
+        ShowPendingQuestNotice();
+        NoteAppeared();
+        if (LookAround())       // what the party sees as it comes into the world, or back from a fight or a scene
+        {
+            KeepWorld();
+            Save();
+        }
         ReconsiderLeader();
         _heardAt = _ctx.Now;     // the pad has only just come back
         LeadClock();
+        ArmMobs();
     }
 
     /// <summary>Out of the world, to anywhere: everything walking runs on ends here, and the place is saved at once.</summary>
     private void LeaveExploration()
     {
+        _ctx.CancelTimer(MobTimer);
+        _ctx.CancelTimer(MobAmbushTimer);
         Halt();
         _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
         Unnote(_leadNote);                 // the walk's own notes would mean nothing over a battle
@@ -264,10 +299,22 @@ public sealed partial class TacticsGame
         SaveWorld();
     }
 
+    /// <summary>
+    /// The VIP ends the session, from the walk or from inside a scene: the place is saved, and in a scene its clocks stop, with the cursor
+    /// as saved on its line. An open question's votes go, as on any restart.
+    /// </summary>
     private void EndSession()
     {
+        _ctx.CancelTimer("townBark");
+        _ctx.CancelTimer("questResult");
         if (_phase == TacticsPhase.Exploration)
             LeaveExploration();
+        else if (_phase == TacticsPhase.Story)
+        {
+            EndTelling();
+            KeepWorld();
+            Save();
+        }
         _ctx.EndGame(new GameResults([], $"The party is level {_doc.PartyLevel}; {_doc.Completed.Length} battles won."));
     }
 
@@ -280,6 +327,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void WalkInput(Player player, JsonElement? data)
     {
+        if (QuestLogOpen) return;
         if (!ReadDir(data, out var dir) || player.Profile?.Value != _lead)
             return;
         if (dir is null)
@@ -341,14 +389,18 @@ public sealed partial class TacticsGame
     private void TakeStep(bool onTime)
     {
         var (dir, from, now) = (_dir!.Value, _at, _ctx.Now);
-        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
+        var terrain = WalkGround();
         _owed = false;
         if (WorldWalk.Next(terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is not { } move)
         {
             var (dx, dy) = WorldWalk.Delta(dir);
             _facing = new Tile(from.X + dx, from.Y + dy);
             _blocked = true;
-            _bumps++;
+            // A door nobody has found is a wall the TV doesn't draw: bumping it would give it away, so the party just stands.
+            _unseenWall = WorldWalk.Next(Rules.GroundFor(_region!.Def.Id)!.Terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is { } plain
+                && UnseenBlocker(plain.To);
+            if (!_unseenWall)
+                _bumps++;
             if (!_edgeSaid && !terrain.Map.InBounds(_facing))
             {
                 _edgeSaid = true;
@@ -376,8 +428,10 @@ public sealed partial class TacticsGame
             _arrived = null;     // walking again: the last epoch's arrival is over
             var leg = new WalkLeg(++_walkSeq, move.To, ms);
             _legs = (_legs.Length < LegsKept ? _legs : _legs.RemoveAt(0)).Add(leg);
-            (_notice, _leadNote) = (null, null);      // whatever it said, the party has moved on
+            (_notice, _leadNote, _thingNote) = (null, null, null);      // whatever it said, the party has moved on
+            SteppedOnto();      // a trap underfoot, or something hidden near (interactables design §2.6)
         }
+        if (_phase == TacticsPhase.Exploration && ContactMob()) return;
         SaveSoon();
         ArmStep();
     }
@@ -478,6 +532,7 @@ public sealed partial class TacticsGame
         ReconsiderLeader();
         if (!connected)
             SaveWorld();
+        ArmMobs();
     }
 
     /// <summary>
@@ -597,6 +652,7 @@ public sealed partial class TacticsGame
         }
         var was = _lead;
         _lead = wanted;
+        if (was != wanted) _questLogLeader = null;
         (_heardAt, _settledAt) = (_ctx.Now, _ctx.Now);      // a stand-in gets the pad for at least TakebackAfter, however long the party stood before
         if (_phase == TacticsPhase.Exploration && was is not null && !_electionOpen && Leader is { } leader)     // not a seat found empty at Start
             SayLeader(leader.Name);
@@ -625,13 +681,13 @@ public sealed partial class TacticsGame
     /// Puts the party back in the world after a fight on a stamped map, before the battle is dropped (5c §6). A loss wakes it at the
     /// recovery spawn, which the region check keeps out of every stamp. A win or a flight stands it where the fight left it
     /// (<see cref="Landing"/>). Either is a teleport: a new <see cref="_epoch"/>, with no legs to follow. A fight on a map the region doesn't
-    /// stamp leaves the party where it was, with no new epoch. Call it after the story has taken the fight's outcome, so that a stamp the
+    /// stamp, or no longer stamps where the fight was saved (<see cref="StageOf"/>), leaves the party where it was, with no new epoch. Call it after the story has taken the fight's outcome, so that a stamp the
     /// outcome arms counts.
     /// </summary>
     private void Land(BattleSave save, BattleOutcome outcome)
     {
         _arrived = null;
-        if (_region is not { } region || StageFor(save.State.MapId) is not { } stage)
+        if (_region is not { } region || StageOf(save) is not { } stage)
             return;
         var at = outcome == BattleOutcome.Lost ? region.Def.Spawns.Recovery : Landing(save, stage);
         (_at, _facing, _arrived) = (at, new Tile(at.X + 1, at.Y), outcome == BattleOutcome.Lost ? Woke : FellIn);
@@ -650,9 +706,9 @@ public sealed partial class TacticsGame
     /// </summary>
     private Tile Landing(BattleSave save, BattleStage stage)
     {
-        var ground = Rules.GroundFor(_region!.Def.Id)!.Terrain;
-        var start = _region.Def.Spawns.Start;
-        var reached = WorldWalk.Reach(ground, start, ClassDef.DefaultJump);
+        var ground = WalkGround();
+        var start = _region!.Def.Spawns.Start;
+        var reached = WalkReach();      // with the doors and gates as they are now (interactables design §2.4)
         var armed = Armed()?.Stage;
         bool Allowed(Tile t) => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true;
 
@@ -678,12 +734,14 @@ public sealed partial class TacticsGame
 
     /// <summary>Whether the document is behind the party.</summary>
     private bool WorldChanged => _region is not null
-        && (_doc.World is not { } saved || saved.Region != _region.Def.Id || saved.At != _at || saved.Facing != _facing
+        && (_mobDirty || _doc.World is not { } saved || saved.Region != _region.Def.Id || saved.At != _at || saved.Facing != _facing
             || _sessionLead is not null && saved.LastLeader != _sessionLead);
 
     /// <summary>Brings the document up to the party, without saving it.</summary>
     private void KeepWorld()
     {
+        if (_doc.Shops is { } shops && _region is { } shopRegion && shopRegion.Def.Chapter > shops.Chapter)
+            _doc = _doc with { Shops = shops with { Chapter = shopRegion.Def.Chapter } };
         if (!WorldChanged)
             return;
         _doc = _doc with
@@ -732,5 +790,6 @@ public sealed partial class TacticsGame
             return;
         KeepWorld();
         Save();
+        _mobDirty = false;
     }
 }

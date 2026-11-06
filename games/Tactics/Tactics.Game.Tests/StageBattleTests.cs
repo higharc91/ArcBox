@@ -104,6 +104,58 @@ public sealed class StageBattleTests
 
     // ---- Starting -----------------------------------------------------------------------------------------------------
 
+    /// <summary>
+    /// Review (adapter NOTE 2): a notice of the story's or the start's isn't the fight's. A battle beat whose saved lead-in is gone after a
+    /// content update plays straight into its fight, and "The story has changed…" mustn't hang over the whole of it and its Results.
+    /// </summary>
+    [Fact]
+    public void A_story_notice_doesnt_carry_into_the_fight()
+    {
+        var walking = Walking(Force, Entry().From);
+        var doc = TacticsDocument.Read(walking.Lease.Document);
+        var gone = doc with { World = doc.World! with { Story = new StorySave("ch1_ford_assault", StorySave.Lead, "no_such_scene", null, 0, 1) } };
+        var s = new Session(document: gone.ToJson(), game: WithLore(null));
+        s.Harness.Resume(s.Lease);
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, true);
+
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Equal("ch1_ford_assault", s.Game.Document.Battle!.Beat);
+        Assert.Null(s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_start_notice_doesnt_carry_into_the_fight()
+    {
+        var s = new Session(document: ExplorationTests.DocumentAt(ExplorationTests.Saved(new Tile(-1, 5))));
+        s.Harness.Resume(s.Lease);
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, true);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.NotNull(s.Host.Notice);          // the land has changed: the party starts again
+
+        s.Send(0, "battles");
+        s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Null(s.Host.Notice);
+    }
+
+    /// <summary>A notice that comes with the fight itself stays: the rules changed under a saved battle, and it starts again.</summary>
+    [Fact]
+    public void A_battles_own_notice_stays()
+    {
+        var s = new Session();
+        s.ToBattle(everyoneAway: true);
+        var saved = TacticsDocument.Read(s.Lease.Document);
+        var stale = saved with { Battle = saved.Battle! with { State = saved.Battle.State with { ContentHash = "stale" } } };
+
+        var resumed = new Session(document: stale.ToJson());
+        resumed.Harness.Resume(resumed.Lease);
+
+        Assert.Equal("The rules changed since this battle began, so it starts again.", resumed.Host.Notice);
+    }
+
     [Fact]
     public void Stepping_into_an_armed_stamp_starts_its_fight()
     {

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "presets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "speaker": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "lines": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "$ref": "common.schema.json#/$defs/line"
+            }
+          }
+        },
+        "required": [
+          "speaker",
+          "lines"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "presets"
+  ],
+  "additionalProperties": false
+}

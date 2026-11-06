@@ -25,9 +25,10 @@
     "decider": "Player1",
     "away": [
       "Player4"
-    ]
+    ],
+    "vip": true
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:02:13.4001248\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:02:14.3001664\u002B00:00",
   "header": null
 }

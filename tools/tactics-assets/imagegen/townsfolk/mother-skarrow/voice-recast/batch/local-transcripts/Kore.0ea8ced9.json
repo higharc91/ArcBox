@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.0ea8ced9.wav",
+  "sourceSha256": "aaa3cdee46e13279bb0a3737c7ce56ff983236da7bf03bb3a83f34d504a35c5b",
+  "duration": 9.56,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.0,
+      "text": " But nobody runs when they carry a fortune."
+    },
+    {
+      "start": 4.96,
+      "end": 8.96,
+      "text": " Seven came down and the seven came running."
+    }
+  ],
+  "text": "But nobody runs when they carry a fortune. Seven came down and the seven came running.",
+  "secondsToTranscribe": 2.033
+}

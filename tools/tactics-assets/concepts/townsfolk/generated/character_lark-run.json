@@ -1,0 +1,7 @@
+{
+  "id": "character_lark",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "job_id": "job_Xw9q7KZgtgoMqzX7MNvm6fru",
+  "status": "in-progress",
+  "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Xw9q7KZgtgoMqzX7MNvm6fru' (one call waits on up to 32 jobs)."
+}

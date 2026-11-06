@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 042a6e4d-2488-4968-adb2-7d5f00c41189\ndirection: character_to_portrait\nview: low top-down\nsize: 64×64px\nseed: 7480\ncost: ~15 generations\nstatus: processing (~30-80s)\n\nhint: get_portrait_character(job_id=\"042a6e4d-2488-4968-adb2-7d5f00c41189\")",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

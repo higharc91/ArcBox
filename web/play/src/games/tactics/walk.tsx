@@ -1,4 +1,6 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
+import { WalkJournal } from "./quests";
+import type { JSX } from "preact";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useFeedback } from "../../feedback/feedback";
 import type { CustomScreenProps } from "../module";
 import { Portrait } from "./art";
@@ -168,7 +170,9 @@ function Pad({ sender }: { sender: WalkSender }) {
 
   return (
     <div class="tx-padzone" ref={zone}>
-      <div class="tx-pad" ref={face} role="img" aria-label="Walking pad: hold a direction to walk, and let go to stop">
+      {/* It takes focus so a keyboard finds it, though the arrow keys walk from anywhere on the page. */}
+      <div class="tx-pad" ref={face} role="application" tabIndex={0} aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
+        aria-label="Walking pad: hold a direction to walk, and let go to stop. The arrow keys walk too.">
         <PadFace />
         <span class="tx-pad-knob" ref={knob} />
       </div>
@@ -177,7 +181,11 @@ function Pad({ sender }: { sender: WalkSender }) {
 }
 
 /** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
-function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenProps["send"] }) {
+/**
+ * The VIP's menu: Choose a battle (with the battle list) and End session, each behind a confirm. The story's screens show it
+ * too, with no battle and "Keep playing" (`keep`), as the server takes End session in a scene.
+ */
+export function HostMenu({ canBattle, send, keep = "Keep walking" }: { canBattle: boolean; send: CustomScreenProps["send"]; keep?: string }) {
   // Both take the whole table out of the walk, and the leader's pad with it, so both ask first.
   const [asked, setSure] = useState<"battles" | "endSession" | null>(null);
   // A battle confirm outlives no battles: it goes at once, and stays gone if they come back.
@@ -195,7 +203,7 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
   // The confirm isn't under the finger that asked for it: "Keep walking" takes that finger's place, so a double tap
   // lands on it.
   if (sure) {
-    const keep = <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(null); }}>Keep walking</button>;
+    const no = <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(null); }}>{keep}</button>;
     const yes = (
       <button type="button" class="tx-btn gold" onClick={() => { sfx("confirm"); send(sure); }}>
         {sure === "battles" ? "Yes, choose one" : "Yes, end it"}
@@ -203,7 +211,7 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
     );
     return (
       <div class="tx-walk-host sure" role="group" aria-label={sure === "battles" ? "Stop walking to choose a battle?" : "End the session?"}>
-        {sure === "battles" ? <>{keep}{yes}</> : <>{yes}{keep}</>}
+        {sure === "battles" ? <>{no}{yes}</> : <>{yes}{no}</>}
       </div>
     );
   }
@@ -215,32 +223,143 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
   );
 }
 
+/** How long the list of what's in reach stays open untouched before it closes by itself. */
+const PICK_MS = 12000;
+
+/** One thing the leader can use: a beat's spot (no target, so the server does the beat) or a thing to interact with. */
+export interface InteractChoice {
+  label: string;
+  target: string | null;
+}
+
 /**
- * The leader's Interact button, while a beat's spot is in reach: "Talk", "Look around"… It sits at the foot of the info
- * column, never between the pad and the thumb, so its coming and going doesn't move the pad. One tap starts the beat; a
- * second tap of a double tap is dropped, and the button wakes again if the server didn't take it (out of reach by then).
+ * What the leader can use, the button's first: the beat in reach, when the server says the button is the beat's (`beat`), then each thing
+ * in reach, nearest first (interactables design §2.5). A server that sends no list gives the button alone, as the beat's.
  */
-function Interact({ label, send, viewId }: { label: string; send: CustomScreenProps["send"]; viewId: string }) {
+export function interactChoices(interact: string | null | undefined, targets: WalkData["targets"], beat?: boolean): InteractChoice[] {
+  const things = (targets ?? []).map((t) => ({ label: t.label, target: t.id }));
+  const isBeat = targets === undefined ? !!interact : beat === true;
+  return [...(isBeat && interact ? [{ label: interact, target: null }] : []), ...things];
+}
+
+/**
+ * The leader's Interact button, while a beat's spot or a thing is in reach: "Talk", "Open the chest"… It sits at the foot of the info
+ * column, never between the pad and the thumb, so its coming and going doesn't move the pad. With more than one in reach, a second button
+ * beside it opens the list of all of them, and a pick uses that one. One use per view: a second tap of a double tap is dropped, and it
+ * wakes again if the server didn't take it (out of reach by then).
+ */
+function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: CustomScreenProps["send"]; viewId: string }) {
   const sfx = useSfx();
   const [sent, setSent] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const sentFor = useRef<string | null>(null);
+  // Each touch in the list starts its wait again, so it never closes under a hand that's still choosing.
+  const [touched, setTouched] = useState(0);
+  const more = useRef<HTMLButtonElement>(null);
+  const main = useRef<HTMLButtonElement>(null);
+  const list = useRef<HTMLDivElement>(null);
+  const listId = useId();
+  const shown = open && choices.length > 1;
+  /** Back to the Interact button, if the keyboard's focus was in the list (or on what closed it): it's never left on nothing. */
+  const refocus = () => {
+    const at = document.activeElement;
+    if (!at || at === document.body || list.current?.contains(at) || at === more.current) main.current?.focus();
+  };
+  useEffect(() => {
+    if (!sent) return;
+    const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
+    return () => clearTimeout(id);
+  }, [sent]);
+  useEffect(() => {
+    if (shown) list.current?.querySelector<HTMLButtonElement>("button")?.focus();
+  }, [shown]);
+  useEffect(() => {
+    if (!shown) return;
+    const id = setTimeout(() => { refocus(); setOpen(false); }, PICK_MS);
+    return () => clearTimeout(id);
+  }, [shown, touched]);
+  useEffect(() => {
+    if (open && choices.length < 2) {
+      setOpen(false);
+      main.current?.focus();      // the list went from under it: the focus goes back to the button, not to the page
+    }
+  }, [open, choices.length]);
+
+  // Asleep, it's only aria-disabled, not disabled: a disabled button would drop the keyboard's focus to the page.
+  const busy = sent === viewId;
+  const use = (choice: InteractChoice) => {
+    if (sentFor.current === viewId) return;
+    sentFor.current = viewId;
+    setSent(viewId);
+    sfx("confirm");
+    if (choice.target === null) send("interact");
+    else send("interact", { target: choice.target });
+  };
+  const close = () => {
+    sfx("cancel");
+    refocus();
+    setOpen(false);
+  };
+  const touch = () => setTouched((n) => n + 1);
+  const first = choices[0]!;
+  return (
+    <div class="tx-interact-dock">
+      {shown ? (
+        <div class="tx-interact-pick" id={listId} role="group" aria-label="What to use" ref={list}
+          onPointerDown={touch} onFocusIn={touch} onKeyDown={(e) => { touch(); if (e.key === "Escape") close(); }}>
+          {choices.map((c) => (
+            <button key={c.target ?? ""} type="button" class="tx-btn gold" aria-disabled={busy}
+              onClick={() => { use(c); setOpen(false); main.current?.focus(); }}>
+              {c.label}
+            </button>
+          ))}
+          <button type="button" class="tx-btn ghost" onClick={close}>Back</button>
+        </div>
+      ) : null}
+      <div class="tx-interact-row">
+        <button type="button" class="tx-btn gold tx-interact" aria-disabled={busy} ref={main} onClick={() => use(first)}>
+          <LineIcon name="speech" />
+          {first.label}
+        </button>
+        {choices.length > 1 ? (
+          <button type="button" class="tx-btn ghost tx-interact-more" ref={more} aria-expanded={shown} aria-controls={listId}
+            aria-disabled={busy} aria-label={`${choices.length} things in reach: choose one`}
+            onClick={() => { if (shown) close(); else if (!busy) { sfx("select"); setOpen(true); } }}>
+            <span aria-hidden="true">{choices.length}</span>
+            <span class="tx-interact-caret" aria-hidden="true" />
+          </button>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The leader's Search (interactables design §7.4), in a region with things: the party's Investigation check for whatever is hidden
+ * nearby. It's there whether or not anything is, so it gives nothing away, and it never comes and goes under a thumb. One send per
+ * view, as Interact's: a double tap sends once, and it wakes again if the server didn't take it.
+ */
+function Search({ send, viewId }: { send: CustomScreenProps["send"]; viewId: string }) {
+  const sfx = useSfx();
+  const [sent, setSent] = useState<string | null>(null);
+  const sentFor = useRef<string | null>(null);      // a ref, so the second tap of a double tap sees the first before a render
   useEffect(() => {
     if (!sent) return;
     const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
     return () => clearTimeout(id);
   }, [sent]);
   const busy = sent === viewId;
+  const search = () => {
+    if (sentFor.current === viewId) return;
+    sentFor.current = viewId;
+    setSent(viewId);
+    sfx("confirm");
+    send("search");
+  };
   return (
-    <button type="button" class="tx-btn gold tx-interact" disabled={busy} aria-disabled={busy}
-      onClick={() => {
-        if (sentFor.current === viewId) return;
-        sentFor.current = viewId;
-        setSent(viewId);
-        sfx("confirm");
-        send("interact");
-      }}>
-      <LineIcon name="speech" />
-      {label}
+    <button type="button" class="tx-btn ghost tx-search" aria-disabled={busy} onClick={search}>
+      <LineIcon name="search" />
+      Search
     </button>
   );
 }
@@ -251,6 +370,7 @@ function Party({ party }: { party: WalkMember[] }) {
       {party.map((m) => (
         <li key={m.name} class={`${m.leads ? "leads" : ""}${m.here ? "" : " away"}`}>
           {m.leads ? <span class="tx-crown" title="Leads the party"><LineIcon name="crown" /></span> : null}
+          {m.color ? <i class="tx-dot" style={{ "--c": m.color } as JSX.CSSProperties} aria-hidden="true" /> : null}
           <b>{m.name}</b>
           <span class="tx-walk-cls">{m.here ? m.cls : "away"}</span>
         </li>
@@ -270,6 +390,7 @@ const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
 export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   const d = data as WalkData;
   const sfx = useSfx();
+  const choices = useMemo(() => interactChoices(d.interact, d.targets, d.beat), [d.interact, d.targets, d.beat]);
 
   // The screen's `stream` closes over its view's id, so timers must reach the newest one, or all they send is dropped.
   const out = useRef(stream);
@@ -306,7 +427,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   // Opening the screen as leader is an arrival too. Its sound and buzz come from `useAlertOnMount`, which stays quiet
   // when a reconnect re-sends the view; taking the lead later plays them here.
   // A reconnect's remount inside the alert's quiet window doesn't pulse either.
-  const alerted = useAlertOnMount("yourTurn", d.leader);
+  const alerted = useAlertOnMount("yourTurn", "walk", d.leader);
   const led = useRef(d.leader);
   const arrived = useRef(alerted);
   if (d.leader && !led.current) arrived.current = true;
@@ -318,23 +439,35 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
     mounted.current = true;
   }, [d.leader]);
 
+  if (d.ambush) return <div class="tx tx-mob-ambush" role="alert"><span class="tx-mob-warning" aria-hidden="true"><LineIcon name="sword" /></span><span class="tx-eyebrow">Danger on the road</span><h1>Ambush!</h1><p>{d.ambush} attack!</p><span class="tx-note">Watch the TV—the party is taking position.</span></div>;
+
   return (
     <div class={`tx tx-walk ${d.leader ? "lead" : "follow"}${arrived.current ? " arrived" : ""}`}>
-      <div class="tx-walk-info">
-        {d.vip ? <HostMenu canBattle={d.canBattle} send={send} /> : null}
-        <div class="tx-walk-who">
+      <div class="tx-walk-sidebar">
+        {/* A status, so a screen reader hears who leads, and that it's this phone when the lead comes here. */}
+        <div class="tx-walk-leadrow">
+        <div class="tx-walk-who" role="status">
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>
+        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Session actions">•••</summary><HostMenu canBattle={d.canBattle} send={send} /></details> : null}
+        </div>
+        <div class="tx-walk-info">
         {d.leader || d.leaderName
           ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
           : null}
+        {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
         <div class="tx-walk-goal">
+          <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
+          {d.restReady && <span class="tx-rest-ready">Ready to rest</span>}
+          {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
+          </div>
           <p>{d.objective}</p>
+          {d.leader && d.danger ? <p class="tx-mob-danger" role="status">Danger nearby: {d.danger}</p> : null}
         </div>
         {d.leader ? null : (
-          <div class="tx-me">
+          <div class="tx-me" style={d.me.color ? ({ "--c": d.me.color } as JSX.CSSProperties) : undefined} data-color={d.me.color ? "" : undefined}>
             {/* Player characters have no sprite: the class's portrait from the pack stands in, as on the lobby's cards. */}
             <Portrait unit={{ name: d.me.name, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={classId(d.me.cls)} size={40} tone="you" />
             <div class="tx-me-name">
@@ -345,7 +478,13 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         )}
         <Party party={d.party} />
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
-        {d.leader && d.interact ? <Interact label={d.interact} send={send} viewId={viewId} /> : null}
+      </div>
+        {d.leader && d.search ? (
+          <div class="tx-walk-dock">
+            {choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
+            <Search send={send} viewId={viewId} />
+          </div>
+        ) : d.leader && choices.length > 0 ? <div class="tx-walk-dock"><Interact choices={choices} send={send} viewId={viewId} /></div> : null}
       </div>
       {d.leader ? <Pad sender={sender} /> : null}
     </div>

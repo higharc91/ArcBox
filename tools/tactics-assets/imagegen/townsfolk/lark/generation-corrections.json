@@ -1,0 +1,12 @@
+[
+  {
+    "request": "directional/north-west-correction-request.json",
+    "output": "directional/north-west-corrected-source.png",
+    "originalGeneratedPath": "/workspace/generated_images/exec-5c950cbb-6bbf-4908-84f0-88a21595b63b.png"
+  },
+  {
+    "request": "directional/south-walk-correction-request.json",
+    "output": "directional/south-walk-corrected-source.png",
+    "originalGeneratedPath": "/workspace/generated_images/exec-a0d018e0-c9e7-4d2f-be28-a0a22e218303.png"
+  }
+]

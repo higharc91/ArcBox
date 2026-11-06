@@ -77,4 +77,24 @@ public sealed class WorldCoverTests
         Assert.True(cover.Frame(WorldTuning.OpenTimeout * 0.9, WorldStage.Building, 0));
         Assert.False(cover.Frame(WorldTuning.OpenTimeout * 0.2, WorldStage.Building, 0));
     }
+
+    [Fact]
+    public void Slow_loading_can_continue_while_progress_advances_but_stalls_still_time_out()
+    {
+        var cover = new WorldCover();
+        for (var i = 0; i < 5; i++)
+            Assert.True(cover.Frame(6, WorldStage.Building, 0, i));
+        Assert.False(cover.Frame(WorldTuning.OpenTimeout, WorldStage.Building, 0, 4));
+    }
+
+    [Fact]
+    public void Slow_loading_has_an_absolute_limit_even_when_it_keeps_progressing()
+    {
+        var cover = new WorldCover();
+        for (var i = 0; i < 9; i++)
+            Assert.True(cover.Frame(6, WorldStage.Building, 0, i));
+        Assert.False(cover.Frame(6, WorldStage.Building, 0, 9));
+        cover.Opened();
+        Assert.True(cover.Frame(1, WorldStage.Building, 0, 0));
+    }
 }

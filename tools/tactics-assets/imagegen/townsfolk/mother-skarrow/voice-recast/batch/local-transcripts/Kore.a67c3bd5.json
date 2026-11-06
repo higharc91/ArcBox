@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.a67c3bd5.wav",
+  "sourceSha256": "eb0a33ccdb6af655551638904ee235e4784a5cc52fc93c53f5e8908b414861b8",
+  "duration": 9.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.32,
+      "text": " Then you saw."
+    },
+    {
+      "start": 2.32,
+      "end": 7.36,
+      "text": " My little ones were down on the bank, digging roots."
+    },
+    {
+      "start": 7.36,
+      "end": 9.56,
+      "text": " Your people shot at them."
+    }
+  ],
+  "text": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them.",
+  "secondsToTranscribe": 2.209
+}

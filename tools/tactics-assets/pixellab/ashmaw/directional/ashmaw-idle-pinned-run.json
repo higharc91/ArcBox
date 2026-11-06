@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: d5050cea-2273-413e-9ae6-dcebf35f1ef2\njob_id: d5050cea-2273-413e-9ae6-dcebf35f1ef2\naction: A very slow breathing cycle: all four paws stay exactly planted; only a tiny chest expansion of one pixel and then relaxation. Never stand up, never turn the head, never change body proportions. Return to precisely the supplied final pose. No bones, no guides.\nframes: 4\nsize: 160x160px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 7451\nasset_id: 5f227c44-4c2b-5f26-83f3-8d21dce1ec23\nasset_status: pending (saved when generation completes)\ncost: 2 generations\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"d5050cea-2273-413e-9ae6-dcebf35f1ef2\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/d5050cea-2273-413e-9ae6-dcebf35f1ef2/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

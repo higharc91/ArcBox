@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using Tactics.Logic;
@@ -14,6 +15,18 @@ namespace Tactics.Game.Tests;
 /// </summary>
 public sealed class WalkModelTests
 {
+    // This model describes walking and story-stamp battles. Roaming contact and its clocks
+    // have their own model/runtime tests, so keep ambient encounters out of this fixture.
+    private static readonly Lazy<RulesPack> ModelRules = new(() => EditedRules(folder =>
+    {
+        var path = Path.Combine(folder, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        var files = manifest["files"]!.AsArray();
+        foreach (var file in files.Where(f => f!.GetValue<string>().StartsWith("mobs/", StringComparison.Ordinal)).ToArray()) files.Remove(file);
+        File.WriteAllText(path, manifest.ToJsonString());
+    }));
+    private static RulesPack Rules => ModelRules.Value;
+
     private const int EventsPerSeed = 300;
     private const int DefaultEvents = 6_000;
 
@@ -25,7 +38,11 @@ public sealed class WalkModelTests
     private static readonly Lazy<Tile[]> Tiles = new(() => [.. WorldWalk.Reach(Ground, Rules.RegionFor("ashen_ford")!.Def.Spawns.Start, ClassDef.DefaultJump).Order()]);
     private static readonly Lazy<JsonElement> BaseDocument = new(() => DocumentAt(null));
 
-    private static Terrain Ground => Rules.GroundFor("ashen_ford")!.Terrain;
+    /// <summary>Ashen Ford as the party walks it: the painted ground, and its things that stand in the way (none is opened in these runs).</summary>
+    private static Terrain Ground => WalkedGround.Value;
+
+    private static readonly Lazy<Terrain> WalkedGround = new(() => Rules.GroundFor("ashen_ford")!.With(
+        [.. Interactables.Blocking(Rules.InteractablesIn("ashen_ford"), null, new HashSet<string>())]));
 
     /// <summary>One thing that happens. <paramref name="Player"/> -1 means whoever leads.</summary>
     private sealed record Event(string Kind, int Player = 0, string? Dir = null, int Ms = 0);
@@ -132,6 +149,28 @@ public sealed class WalkModelTests
         private TacticsGame _game = null!;
         private double _slackMs;
         private bool _over;
+
+        private HashSet<string> _groundFlags = [];
+        private Terrain _ground = WalkModelTests.Ground;
+        private JsonElement _groundDocument;
+        // A won story battle opens the authored checkpoint. The oracle must use
+        // the saved story flags while continuing to check every tile and step.
+        private Terrain CurrentGround
+        {
+            get
+            {
+                if (_groundDocument.Equals(_lease.Document)) return _ground;
+                _groundDocument = _lease.Document;
+                var flags = _lease.World?.Flags.ToHashSet(StringComparer.Ordinal) ?? [];
+                if (!_groundFlags.SetEquals(flags))
+                {
+                    _groundFlags = flags;
+                    _ground = Rules.GroundFor("ashen_ford")!.With(
+                        [.. Interactables.Blocking(Rules.InteractablesIn("ashen_ford"), null, flags)], flags);
+                }
+                return _ground;
+            }
+        }
 
         // What the model expects.
         private DateTimeOffset? _heldUntil;
@@ -481,7 +520,11 @@ public sealed class WalkModelTests
         {
             var node = System.Text.Json.Nodes.JsonNode.Parse(phone)!;
             if (node["data"] is System.Text.Json.Nodes.JsonObject data)
+            {
                 data.Remove("interact");
+                data.Remove("targets");     // the things in reach and whether the button is a beat's (interactables design §2.5),
+                data.Remove("beat");        // which a step changes as it does Interact's word
+            }
             return node.ToJsonString();
         }
 
@@ -549,14 +592,14 @@ public sealed class WalkModelTests
                 // the fight is still on offer.
                 Must(party.Epoch == _epoch + 1, $"the epoch went {_epoch} to {party.Epoch} after a fight");
                 Must(party.Legs.IsEmpty, "legs across a teleport");
-                Must(Tiles.Value.Contains(party.At), $"the party was put back where it can't walk from the start, {party.At}");
+                Must(WorldWalk.Reach(CurrentGround, Rules.RegionFor("ashen_ford")!.Def.Spawns.Start, ClassDef.DefaultJump).Contains(party.At), $"the party was put back where it can't walk from the start, {party.At}");
                 Must(ArmedStage()?.Holds(party.At) != true, $"the party was put back inside the armed stamp, at {party.At}");
                 Must(party.Arrived is TacticsGame.FellIn or TacticsGame.Woke, $"put back with Arrived {party.Arrived}");
                 Must(party.Arrived != TacticsGame.Woke || party.At == Rules.RegionFor("ashen_ford")!.Def.Spawns.Recovery, "woke away from the recovery spawn");
                 _epoch = party.Epoch;
             }
             Must(party.Epoch == _epoch, "the epoch changed");
-            Must(Ground.Map.InBounds(party.At) && Ground.Walkable(party.At), $"the party is on a bad tile, {party.At}");
+            Must(CurrentGround.Map.InBounds(party.At) && CurrentGround.Walkable(party.At), $"the party is on a bad tile, {party.At}");
             Must(party.Legs.Length <= 12, "more than 12 legs");
             for (var i = 1; i < party.Legs.Length; i++)
                 Must(party.Legs[i].Seq == party.Legs[i - 1].Seq + 1, "the legs have a gap");
@@ -572,7 +615,7 @@ public sealed class WalkModelTests
                 if (after.Party.Seq == before.Party.Seq)
                 {
                     var (dx, dy) = WorldWalk.Delta(Enum.Parse<WalkDir>(_dir!, ignoreCase: true));
-                    Must(WorldWalk.Next(Ground, before.Party.At, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX) is null,
+                    Must(WorldWalk.Next(CurrentGround, before.Party.At, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX) is null,
                         $"a quick tap was let go and dropped, after {e}");
                     Must(after.Party.Facing == new Tile(before.Party.At.X + dx, before.Party.At.Y + dy), "a quick tap into a wall didn't turn the party");
                 }
@@ -633,20 +676,20 @@ public sealed class WalkModelTests
                 Must(before.Host == after.Host, "the host view changed with no step and no change in Held or Blocked");
             Must(!party.Blocked || !party.Held, "blocked and held at once");
             if (e.Kind == "walk" && before.Phase == after.Phase && was.Leader == party.Leader)
-                Must(before.Phones.SequenceEqual(after.Phones), "a walk input changed a phone");
+                Must(moved == 0 ? before.Phones.SequenceEqual(after.Phones) : before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a walk input changed a phone");
         }
 
         private void CheckStep(Event e, Seen before, Seen after, DateTimeOffset now)
         {
             var (from, leg) = (before.Party.At, after.Party.Legs[^1]);
             Must(_dir is not null, "stepped with nothing held");
-            var step = WorldWalk.Next(Ground, from, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX);
+            var step = WorldWalk.Next(CurrentGround, from, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX);
             Must(step?.To == leg.To, $"the leg {from} to {leg.To} isn't Next, {step?.To}");
             var move = step!.Value;
-            Must(Ground.Walkable(move.To) && (move.Diagonal || WorldWalk.Legal(Ground, from, move.To, ClassDef.DefaultJump)), $"a step onto a blocked tile, {move.To}");
+            Must(CurrentGround.Walkable(move.To) && (move.Diagonal || WorldWalk.Legal(CurrentGround, from, move.To, ClassDef.DefaultJump)), $"a step onto a blocked tile, {move.To}");
             if (_latched)
                 Must(!after.Timers.Contains(TacticsGame.Timers.Step), "a quick tap took more than one step");
-            var drop = Ground.HeightAt(from) - Ground.HeightAt(move.To);
+            var drop = CurrentGround.HeightAt(from) - CurrentGround.HeightAt(move.To);
             var ms = (int)Math.Round(300.0 * move.Cost * (move.Diagonal ? Math.Sqrt(2) : 1) + 60.0 * Math.Max(0, drop - 2));
             Must(leg.Ms == ms, $"the leg took {leg.Ms} ms, not {ms}");
             if (!move.Diagonal)
@@ -659,7 +702,7 @@ public sealed class WalkModelTests
             (_lastCommit, _lastMs) = (now, leg.Ms);
             _commits++;
             if (before.Phase == after.Phase && before.Party.Leader == after.Party.Leader && e.Kind is not ("disc" or "conn"))
-                // Only the leader's Interact may change on a step, and only as a beat's spot comes into reach or goes out of it (5d flag 8).
+                // Only the leader's Interact (and its list of things in reach) may change on a step, as a beat's spot or a thing comes into reach or goes out of it (5d flag 8).
                 Must(before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a phone changed on a step");
         }
 

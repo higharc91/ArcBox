@@ -1,3 +1,4 @@
+import { SurfaceScene } from "./surfaces";
 import { useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Crest, Logo, Portrait } from "./art";
@@ -39,10 +40,11 @@ export function PickClass({ data, send }: CustomScreenProps) {
 }
 
 export function PickEncounter({ data, send }: CustomScreenProps) {
-  const { encounters } = data as { encounters: EncounterOption[] };
+  // canWalk: whether there's a world to go back to; a pack with no region has none, and an older server sends nothing (no button).
+  const { encounters, canWalk } = data as { encounters: EncounterOption[]; canWalk?: boolean };
   const sfx = useSfx();
   return (
-    <div class="tx tx-muster">
+    <div class="tx tx-muster tx-controls-layout"><div class="tx-controls-scroll">
       <h2 class="tx-title">Choose a battle</h2>
       <ul class="tx-encounters">
         {encounters.map((e) => (
@@ -61,9 +63,12 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
-      <div class="tx-foot">
-        <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); send("backToWalk"); }}>Back to walking</button>
       </div>
+      {canWalk ? (
+        <div class="tx-foot">
+          <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); send("backToWalk"); }}>Back to walking</button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -92,17 +97,20 @@ function NamedPortrait({ name, size }: { name: string; size: 40 | 60 }) {
 export function Results({ data, send }: CustomScreenProps) {
   const r = data as ResultsData;
   const won = r.outcome === "Won";
+  // After a loss the server's line says it all: no "+0 XP" or injuries on each hero.
+  const lost = r.outcome === "Lost";
   return (
     <div class="tx tx-results">
       <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : "Defeat"} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
+      {r.note ? <p class="tx-note center tx-result-note">{r.note}</p> : null}
       <ul class="tx-lines">
         {r.lines.map((l) => (
           <li key={l.name}>
             <NamedPortrait name={l.name} size={40} />
             <b>{l.name}</b>
-            <span class="tx-xp">+{l.xp} XP</span>
-            {l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
+            {lost ? null : <span class="tx-xp">+{l.xp} XP</span>}
+            {!lost && l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
           </li>
         ))}
       </ul>
@@ -134,6 +142,7 @@ export function Status({ data }: CustomScreenProps) {
   const active = seen(s.active);
   return (
     <div class="tx tx-status">
+      <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
         {s.active ? <NamedPortrait name={s.active} size={60} /> : null}
@@ -220,7 +229,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const r = data as ReactData;
   const detail = reactionDetail(r);
   const sfx = useSfx();
-  useAlertOnMount("reaction");
+  useAlertOnMount("reaction", "react");
   const answer = (id: string) => {
     sfx(id === "pass" ? "cancel" : "confirm");
     send("react", { choice: id });
@@ -228,6 +237,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const pass = r.options.find((o) => o.id === "pass");
   return (
     <div class="tx tx-react">
+      <SurfaceScene kinds={r.surfaces} />
       <div class="tx-alert" role="alert">
         <span class="tx-eyebrow">Reaction</span>
         <p class="tx-alert-title">{TRIGGERS[r.trigger] ?? "You can react"}</p>

@@ -1,0 +1,136 @@
+{
+  "status": "owner_approved_voice_installed_all_24_lines",
+  "ownerRequest": "her voice is too young sounding",
+  "previousPreset": "Achernar",
+  "previousPitch": -1,
+  "proposedPreset": "Gacrux",
+  "proposedPitch": 0,
+  "presetStatus": "Owner approved Gacrux ancient-voice audition: perfect, let's go with that",
+  "deliveryBrief": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+  "audition": {
+    "line": "bark_old_maud_town_1",
+    "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
+    "path": "voice-recast/audition-gacrux.mp3",
+    "source": "voice-recast/audition-gacrux-source.wav",
+    "jobId": "job_hrJPAVUNz1C47HaDcdMxx82G",
+    "assetId": "asset_JyX7gkJmsDA5hwqQA9UZ7TiS"
+  },
+  "replacementScope": {
+    "speaker": "old_maud",
+    "lineCount": 24,
+    "lines": [
+      {
+        "id": "bark_old_maud_town_1",
+        "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit."
+      },
+      {
+        "id": "bark_old_maud_town_2",
+        "text": "Warm hands and empty heads. Ask yourself why, dearie."
+      },
+      {
+        "id": "bark_old_maud_town_3",
+        "text": "The river remembers. Ask it nicely and it might tell you."
+      },
+      {
+        "id": "bark_old_maud_town_4",
+        "text": "You've the right sort of face for questions. Ask me a better one."
+      },
+      {
+        "id": "bark_old_maud_town_5",
+        "text": "Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind."
+      },
+      {
+        "id": "bark_old_maud_town_6",
+        "text": "Mind the bank. It's softer than it was. Everything's softer than it was."
+      },
+      {
+        "id": "bark_old_maud_town_7",
+        "text": "Never touched a shard. Not once. That's why there's still all of me."
+      },
+      {
+        "id": "ch1_maud_open_3",
+        "text": "Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face."
+      },
+      {
+        "id": "ch1_maud_open_4",
+        "text": "Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one."
+      },
+      {
+        "id": "ch1_maud_hermit_1",
+        "text": "Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think."
+      },
+      {
+        "id": "ch1_maud_hermit_2",
+        "text": "I told you a name once. You wrote it down, I watched you. Kept it safe, have you?"
+      },
+      {
+        "id": "ch1_maud_sage_1",
+        "text": "Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy."
+      },
+      {
+        "id": "ch1_maud_spared_1",
+        "text": "Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing."
+      },
+      {
+        "id": "ch1_maud_slain_1",
+        "text": "Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired."
+      },
+      {
+        "id": "ch1_maud_fell_1",
+        "text": "Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down."
+      },
+      {
+        "id": "ch1_maud_fell_2",
+        "text": "It didn't fall, dearie. It was thrown."
+      },
+      {
+        "id": "ch1_maud_fell_3",
+        "text": "Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long."
+      },
+      {
+        "id": "ch1_maud_fell_4",
+        "text": "And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down."
+      },
+      {
+        "id": "ch1_maud_fell_6",
+        "text": "That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind."
+      },
+      {
+        "id": "ch1_maud_who_1",
+        "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways."
+      },
+      {
+        "id": "ch1_maud_bye_1",
+        "text": "I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers."
+      },
+      {
+        "id": "ch1_maud_bye_2",
+        "text": "Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at."
+      },
+      {
+        "id": "ashmaw_maud_waiting",
+        "text": "The boy is by my fire. Let his father know. As for that old bear\u2026 hunger wakes before a creature does. Go gently, if you can."
+      },
+      {
+        "id": "ashmaw_maud_after",
+        "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home."
+      }
+    ]
+  },
+  "paidCU": 274,
+  "productionVoiceChanged": true,
+  "workflow": [
+    "Completed: exact approved audition reused as town1;23 selected newly rendered recordings installed.",
+    "Old24 production recordings and all6 rejected paid takes retained with provenance.",
+    "Live quotes/cap checks and all61 paid-job receipts retained;274CU including previous5CU audition; no credits purchased.",
+    "Full1443/1443 coverage;24 source/encoded/caption checks;23 tooling and123 targeted game tests pass.",
+    "Artwork appearance approved: I approve Old Mauds, start Mother Skarrow. Motions/portraits authorized and queued; full-set/TV approval remains separate."
+  ],
+  "identityNote": "Gacrux is also used by Dagna and grim.high. The audition requests a distinct ancient papery performance; assess identity separation during listening review.",
+  "ownerApproval": "perfect, let's go with that",
+  "newCU": 269,
+  "batch": "voice-recast/batch/",
+  "voiceSample": "voice-sample.mp3",
+  "listeningReel": "voice-recast/approved-voice-reel.mp3",
+  "validation": "voice-recast/batch/validation.json"
+}

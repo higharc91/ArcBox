@@ -4,8 +4,8 @@ using Tactics.Logic;
 namespace Tactics.Game;
 
 /// <summary>
-/// Story a new campaign starts part way through, for trying a beat without playing up to it: until 5d plays scenes and votes, this is
-/// the only way to make a battle beat available. It's a Development-only server setting (<c>Tactics:Seed</c>), and it touches only a
+/// Story a new campaign starts part way through, for trying a beat without playing the scenes and votes before it (overworld 5d plays
+/// those now). It's a Development-only server setting (<c>Tactics:Seed</c>), and it touches only a
 /// campaign that has no place in the world yet, once: after that the campaign's own story is saved and the seed is never read again.
 /// </summary>
 /// <param name="Flags">The story flags the campaign starts with.</param>

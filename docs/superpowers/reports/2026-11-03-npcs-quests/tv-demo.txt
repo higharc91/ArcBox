@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Things demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-npcs/content/tactics/base
+THINGS demo: 12 views, 14 shots
+THINGS demo step npcs-give at 1.91 s
+STORY marker none
+QUEST tracker none
+QUEST journal closed
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+SHOT /workspace/issue73/npcs-demo-polished/001-tactics.png
+TACTICS walk snapped to 29.5 61.5
+SHOT /workspace/issue73/npcs-demo-polished/002-tactics-world-loading.png
+TACTICS world open: ground 36 ms, plan+light 724 ms, bake 92 ms, total 852 ms, 24 blocks to record, textures 329.1 MB, buffers 8.2 MB, engine 112.4 MB, managed 58.8 MB
+SHOT /workspace/issue73/npcs-demo-polished/003-tactics-exploration.png
+SHOT /workspace/issue73/npcs-demo-polished/004-npcs-quest-givers.png
+THINGS demo step npcs-talk at 17.08 s
+AUDIO Voice clip sq_halden_varrow_001.e2925bf4.ogg tactics.story: Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.
+STORY 1 sq_halden_varrow_001 said lines
+AUDIO Sfx ui_menu_open
+TACTICS screen tactics-story
+SHOT /workspace/issue73/npcs-demo-polished/005-tactics-story-line-speaker.png
+SHOT /workspace/issue73/npcs-demo-polished/006-npcs-conversation.png
+THINGS demo step npcs-journal at 34.01 s
+QUEST tracker sq_missing_grain active Read the Ash Market tally
+QUEST journal sq_missing_grain
+AUDIO Sfx page_turn
+AUDIO Sfx ui_select
+TACTICS screen tactics-exploration
+SHOT /workspace/issue73/npcs-demo-polished/007-npcs-e2e-journal.png
+SHOT /workspace/issue73/npcs-demo-polished/008-npcs-journal-spread.png
+THINGS demo step npcs-tracker at 42.02 s
+QUEST tracker sq_missing_grain active Read the Ash Market tally
+QUEST journal closed
+AUDIO Sfx page_turn
+SHOT /workspace/issue73/npcs-demo-polished/009-npcs-tracker-and-edge-arrow.png
+THINGS demo step npcs-waypoint at 48.03 s
+TACTICS walk snapped to 91.5 101.5
+SHOT /workspace/issue73/npcs-demo-polished/010-npcs-waypoint.png
+THINGS demo step npcs-bark at 55.02 s
+QUEST tracker none
+QUEST journal closed
+AUDIO Voice clip town_farmer_1.b6a1bc49.ogg tactics.npc.townsfolk-farmer: Frost in the furrows again. Ground ought to be warming by now.
+TACTICS walk snapped to 38.5 14.5
+SHOT /workspace/issue73/npcs-demo-polished/011-npcs-bark.png
+THINGS demo step npcs-complete at 67.01 s
+QUEST tracker sq_missing_grain done Quest complete
+QUEST journal closed
+AUDIO Sfx ui_select
+AUDIO Sfx ui_level_up
+TACTICS walk snapped to 29.5 61.5
+SHOT /workspace/issue73/npcs-demo-polished/012-npcs-quest-complete.png
+THINGS demo step npcs-journal-done at 73.06 s
+QUEST tracker none
+QUEST journal sq_missing_grain
+AUDIO Sfx page_turn
+TACTICS walk snapped to 29.5 61.5
+SHOT /workspace/issue73/npcs-demo-polished/013-npcs-e2e-journal.png
+SHOT /workspace/issue73/npcs-demo-polished/014-npcs-journal-complete.png
+THINGS demo step npcs-ford-before at 82.01 s
+QUEST tracker none
+QUEST journal closed
+AUDIO Sfx page_turn
+TACTICS walk snapped to 99.5 64.5
+SHOT /workspace/issue73/npcs-demo-polished/015-npcs-ford-before.png
+THINGS demo step npcs-force-fade at 88.01 s
+QUEST tracker none
+QUEST journal closed
+QUEST people ch1_skarrow_slain
+SHOT /workspace/issue73/npcs-demo-polished/016-npcs-force-fading.png
+SHOT /workspace/issue73/npcs-demo-polished/017-npcs-force-after.png
+THINGS demo step npcs-camp-before at 93.02 s
+QUEST tracker none
+QUEST journal closed
+TACTICS walk snapped to 134.5 25.5
+SHOT /workspace/issue73/npcs-demo-polished/018-npcs-camp-before.png
+THINGS demo step npcs-parley at 99.01 s
+QUEST tracker none
+QUEST journal closed
+QUEST people ch1_skarrow_spared
+SHOT /workspace/issue73/npcs-demo-polished/019-npcs-parley-fading.png
+THINGS demo done
+SHOT /workspace/issue73/npcs-demo-polished/020-npcs-parley-mother-stays.png
+WORLD closed
+TACTICS left: narrator cleared

@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 808551e2-cb8d-471b-a5be-6ed59b28e7a7\nname: Wardenflame Bree candidate 1 curated\nmode: v3 import (0.25 generations, all 8 directions yours, nothing generated)\nbody: humanoid\nsize: 80x80px\nview: low top-down\nstyle: from reference image (outline/detail hints ignored)\nstatus: processing (~3-5 min)\n\nhint: get_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\")"
+    }
+  ],
+  "isError": false
+}

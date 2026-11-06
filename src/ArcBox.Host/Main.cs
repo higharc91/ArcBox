@@ -141,8 +141,42 @@ public partial class Main : Control
             GD.Print("Tactics demo: no server connection");
             ShowGame("tactics");
             var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } previewPack)
+                pack = System.IO.Path.GetFullPath(previewPack);
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
-            OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
+            if (board == "environment")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
+            else if (board.StartsWith("encounter:", StringComparison.Ordinal))
+                OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(
+                    global::Tactics.Presentation.Board.DemoBattle.Encounter(board["encounter:".Length..], pack), ArcJson.Options)));
+            else
+                OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
+            return;
+        }
+        if (_args.StoryDemo is { } storyFrom)
+        {
+            // Dev only: the story's panels and voice over the world, scripted from the real lore, no server; the art comes from the repository.
+            GD.Print("Story demo: no server connection");
+            ShowGame("tactics");
+            var storyPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = storyPack });
+            AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
+            return;
+        }
+        if ((_args.WorldDemo is "mobs" or "cinder_hollow" or "npcs" or "camp" or "camp-ford" or "shop" or "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+            && !(_args.WorldDemo == "cinder_hollow" && _args.Perf))
+        {
+            // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
+            GD.Print("Things demo: no server connection");
+            ShowGame("tactics");
+            var thingsPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } artRoot) thingsPack = System.IO.Path.GetFullPath(artRoot);
+            else if (_args.WorldDemo == "cinder_hollow" && System.Environment.GetEnvironmentVariable("ARCBOX_CINDER_ART_ROOT") is { Length: > 0 } previewRoot) thingsPack = System.IO.Path.GetFullPath(previewRoot);
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
+            var tactics = _scene as Games.Tactics.TacticsScene;
+            AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots, steps: _args.WorldDemo == "mobs" ? global::Tactics.Presentation.World.MobsDemo.Steps(thingsPack) : _args.WorldDemo == "cinder_hollow" ? global::Tactics.Presentation.World.HollowDemo.Steps(thingsPack) : _args.WorldDemo == "npcs" ? global::Tactics.Presentation.World.NpcsDemo.Steps(thingsPack) : null, shop: _args.WorldDemo == "shop", camp: _args.WorldDemo is "npcs" or "camp" or "camp-ford", packRoot: thingsPack, campId: _args.WorldDemo == "camp-ford" ? "af_ford_campfire" : "af_road_campfire"));
             return;
         }
         if (_args.WorldDemo is { } region)
@@ -150,7 +184,8 @@ public partial class Main : Control
             // Dev only: a whole region in blocks, measured; the art comes from the repository.
             GD.Print("World demo: no server connection");
             var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
-            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir));
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } artRoot) worldPack = System.IO.Path.GetFullPath(artRoot);
+            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks, _args.WorldRoute, _args.Perf));
             return;
         }
         if (_args.Demo == AppArgs.DemoCampaignLobby)
@@ -258,6 +293,8 @@ public partial class Main : Control
             _contentHttp?.Dispose();
             _contentHttp = null;
             _connectCts?.Cancel();
+            if (_client is { } client)
+                GD.Print($"HOST view patches applied {client.PatchCounts.Applied}, whole views asked for again {client.PatchCounts.Resent}");
             _ = _client?.DisposeAsync().AsTask();
             _client = null;
         }
@@ -561,8 +598,14 @@ public partial class Main : Control
         _content.Clear();
         _contentHttp?.Dispose();
         _contentHttp = new System.Net.Http.HttpClient { BaseAddress = new Uri(server.AbsoluteUri.TrimEnd('/') + "/") };
-        _contentCache = new ContentCache(ProjectSettings.GlobalizePath("user://content"), _contentHttp);
+        _contentCache = new ContentCache(ProjectSettings.GlobalizePath("user://content"), _contentHttp, installed: LogInstall);
     }
+
+    /// <summary>One line per pack version installed (on a pool thread; GD.Print is thread-safe): what came over the network.</summary>
+    private static void LogInstall(ContentInstall i) =>
+        GD.Print($"Content {i.GameId}/{i.PackId}@{i.Hash[..Math.Min(8, i.Hash.Length)]} installed: fetched {i.FetchedFiles} of {i.Files} files, "
+            + $"{i.FetchedBytes} bytes + {i.IndexBytes} bytes of index; reused {i.ReusedFiles} files, {i.ReusedBytes} bytes"
+            + (i.Evicted.Count > 0 ? $"; evicted {string.Join(", ", i.Evicted.Select(e => e[..Math.Min(e.Length, e.LastIndexOf('/') + 9)]))}" : ""));
 
     /// <summary>
     /// A cached pack is answered here at once (so the loading card doesn't even flash); a download runs on the thread pool,
@@ -593,7 +636,7 @@ public partial class Main : Control
             }
             else if (load.Ready)
             {
-                (_scene as IContentScene)?.SetContentRoots(load.Roots);
+            (_scene as IContentScene)?.SetContentRoots(load.Roots);
                 _sceneContent = load;
             }
             else
@@ -680,6 +723,8 @@ public partial class Main : Control
     {
         if (_client is not { } client)
         {
+            if (_args.TacticsDemo is not null || _args.WorldDemo is not null)
+                return;     // Dev boards acknowledge beats locally; they have no server to report to.
             GD.PushWarning($"Host signal '{kind}' dropped: not connected");
             return;
         }
@@ -874,6 +919,7 @@ public partial class Main : Control
         {
             tactics.LogBeats = _args.BeatLog;
             tactics.LogWalks = _args.WalkLog;
+            tactics.LogStory = _args.StoryLog;
         }
     }
 
@@ -938,6 +984,8 @@ public partial class Main : Control
         // checks for the "interrupted" note, the swap run that the swapped phone's player is listed once).
         string[] parts = [results.Message ?? "", string.Join(", ", results.Scores.Select(s => $"{s.Name} {s.Score}"))];
         GD.Print($"RESULTS {string.Join(" | ", parts.Where(p => p.Length > 0))}");
+        if (_client is { } patching)
+            GD.Print($"HOST view patches applied {patching.PatchCounts.Applied}, whole views asked for again {patching.PatchCounts.Resent}");
     }
 
     // ---- Reconnecting banner -------------------------------------------------------------------------------

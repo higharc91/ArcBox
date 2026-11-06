@@ -1,0 +1,231 @@
+{
+  "id": "talk_halden_varrow",
+  "character": "halden_varrow",
+  "title": "Halden Varrow",
+  "cast": [
+    "halden_varrow"
+  ],
+  "start": "offer",
+  "entries": [
+    {
+      "node": "thanks",
+      "requires": [
+        "sq_grain_done"
+      ],
+      "unless": []
+    },
+    {
+      "node": "report",
+      "requires": [
+        "sq_grain_tally"
+      ],
+      "unless": [
+        "sq_grain_done"
+      ]
+    },
+    {
+      "node": "waiting",
+      "requires": [
+        "sq_grain_asked"
+      ],
+      "unless": []
+    },
+    {
+      "node": "honest",
+      "requires": [
+        "ch1_halden_confessed"
+      ],
+      "unless": []
+    },
+    {
+      "node": "offer",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "offer",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_001",
+          "speaker": "halden_varrow",
+          "text": "Seed sacks have gone missing. I would welcome a quiet pair of eyes at the granary. Quiet, mind. Hungry people do not need another accusation.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "options": [
+        {
+          "id": "accept",
+          "label": "We will look into the missing grain.",
+          "to": "accepted",
+          "quest": {
+            "start": "sq_missing_grain"
+          }
+        },
+        {
+          "id": "press",
+          "label": "Why keep the granary locked?",
+          "to": "deflect"
+        },
+        {
+          "id": "leave",
+          "label": "Another time.",
+          "to": "goodbye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "deflect",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_002",
+          "speaker": "halden_varrow",
+          "text": "The stores must last the winter. That is my responsibility. If you find a cut sack, follow the grain, not the rumours.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "honest",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_003",
+          "speaker": "halden_varrow",
+          "text": "You know what I kept from the town. I cannot put that right with another speech. Find where those seed sacks went; I will see that this account is answered.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "options": [
+        {
+          "id": "accept",
+          "label": "We will follow the missing sacks.",
+          "to": "accepted",
+          "quest": {
+            "start": "sq_missing_grain"
+          }
+        },
+        {
+          "id": "leave",
+          "label": "We will return.",
+          "to": "goodbye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "accepted",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_004",
+          "speaker": "halden_varrow",
+          "text": "Start with the seed sacks beside the granary. The Ash Market keeps a tally of everything it carries.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "waiting",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_005",
+          "speaker": "halden_varrow",
+          "text": "The seed stores, then the market tally. Bring me something I can act on, and I will pay for your trouble.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "report",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_006",
+          "speaker": "halden_varrow",
+          "text": "A market mark on town seed. I had hoped for a simpler answer. Will you leave the account with me, or take it to Lady Marrowby?",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "options": [
+        {
+          "id": "quiet",
+          "label": "Settle this quietly. Return the grain to the town.",
+          "to": "settled",
+          "quest": {
+            "complete": "sq_missing_grain"
+          },
+          "sets": [
+            "sq_grain_quiet"
+          ]
+        },
+        {
+          "id": "confront",
+          "label": "We will speak to Celandine ourselves.",
+          "to": "go_lady"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "settled",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_007",
+          "speaker": "halden_varrow",
+          "text": "I will have the sacks counted in daylight, with witnesses. Your payment comes from my purse. Let us begin with that much honesty.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "go_lady",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_008",
+          "speaker": "halden_varrow",
+          "text": "Then take the tally. She respects a written account, even when she dislikes the sum.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "thanks",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_009",
+          "speaker": "halden_varrow",
+          "text": "The seed has been counted. This time the town saw the count. Thank you.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "goodbye",
+      "lines": [
+        {
+          "id": "sq_halden_varrow_010",
+          "speaker": "halden_varrow",
+          "text": "Keep warm. We have work enough for tomorrow.",
+          "mood": "idle",
+          "direction": "Measured, respectable civic baritone; warm by habit, tired pauses; never an oily villain."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

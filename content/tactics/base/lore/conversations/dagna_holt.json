@@ -1,0 +1,189 @@
+{
+  "id": "talk_dagna_holt",
+  "character": "dagna_holt",
+  "title": "Captain Dagna Holt",
+  "cast": [
+    "dagna_holt"
+  ],
+  "start": "busy",
+  "entries": [
+    {
+      "node": "done",
+      "requires": [
+        "sq_ashmaw_done"
+      ]
+    },
+    {
+      "node": "proof",
+      "requires": [
+        "sq_ashmaw_claw"
+      ]
+    },
+    {
+      "node": "progress",
+      "requires": [
+        "sq_ashmaw_accepted"
+      ]
+    },
+    {
+      "node": "offer",
+      "requires": [
+        "sq_ashmaw_posted",
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "node": "busy"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "busy",
+      "lines": [
+        {
+          "id": "ashmaw_busy",
+          "speaker": "dagna_holt",
+          "text": "The ford first. I have too few guards to bury another.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "offer",
+      "lines": [
+        {
+          "id": "ashmaw_offer",
+          "speaker": "dagna_holt",
+          "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "vote": true,
+      "options": [
+        {
+          "id": "accept",
+          "label": "We will take the bounty.",
+          "to": "accepted",
+          "quest": {
+            "advance": "sq_ashmaw",
+            "stage": "accepted"
+          }
+        },
+        {
+          "id": "later",
+          "label": "We need time to prepare.",
+          "to": "later"
+        }
+      ]
+    },
+    {
+      "id": "accepted",
+      "lines": [
+        {
+          "id": "ashmaw_accepted",
+          "speaker": "dagna_holt",
+          "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "later",
+      "lines": [
+        {
+          "id": "ashmaw_later",
+          "speaker": "dagna_holt",
+          "text": "Then take the time. Cold courage does nobody any good.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "progress",
+      "lines": [
+        {
+          "id": "ashmaw_progress",
+          "speaker": "dagna_holt",
+          "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "proof",
+      "lines": [
+        {
+          "id": "ashmaw_proof",
+          "speaker": "dagna_holt",
+          "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "vote": true,
+      "options": [
+        {
+          "id": "present",
+          "label": "Accept the trinkets; replace any worn.",
+          "to": "presented",
+          "quest": {
+            "complete": "sq_ashmaw"
+          }
+        },
+        {
+          "id": "wait",
+          "label": "Not yet. Keep the rewards safe.",
+          "to": "wait"
+        }
+      ]
+    },
+    {
+      "id": "wait",
+      "lines": [
+        {
+          "id": "ashmaw_wait",
+          "speaker": "dagna_holt",
+          "text": "They will stay here. A promise does not spoil overnight.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "presented",
+      "lines": [
+        {
+          "id": "ashmaw_presented",
+          "speaker": "dagna_holt",
+          "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "done",
+      "lines": [
+        {
+          "id": "ashmaw_done",
+          "speaker": "dagna_holt",
+          "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+          "mood": "idle",
+          "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

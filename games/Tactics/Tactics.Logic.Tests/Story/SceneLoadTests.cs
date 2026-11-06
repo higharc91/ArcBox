@@ -54,6 +54,34 @@ public sealed class SceneLoadTests
     }
 
     [Fact]
+    public void Hook_scenes_have_no_beat_and_are_looked_up_by_id_only()
+    {
+        var hooks = Scenes.Replace("\"beat\": \"talk\",", "");
+        var book = Load(("arcs.json", Arcs), ("scenes/hooks.json", hooks));
+        Assert.Null(book.Scene("s1")!.Beat);
+        Assert.Empty(book.ScenesOf("talk"));
+        Assert.Equal("s2", Assert.Single(book.ScenesOf("fight")).Id);
+        Assert.Null(book.Scene("absent"));
+    }
+
+    [Fact]
+    public void Hook_nodes_and_options_cannot_set_main_story_flags()
+    {
+        var arcs = Arcs.Replace("\"kind\": \"story\"", "\"kind\": \"story\", \"sets\": [\"went\"]");
+        var hooks = Scenes.Replace("\"beat\": \"talk\",", "");
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", arcs), ("scenes/hooks.json", hooks)));
+        Assert.Contains("main-story flag 'went'", error.Message);
+    }
+
+    [Fact]
+    public void A_hook_cannot_be_a_battle_aftermath()
+    {
+        var hooks = Scenes.Replace("\"beat\": \"fight\",", "");
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", Arcs), ("scenes/hooks.json", hooks)));
+        Assert.Contains("aftermath", error.Message);
+    }
+
+    [Fact]
     public void A_scene_reads_as_it_is_written()
     {
         var book = Load(("arcs.json", Arcs), ("characters.json", Characters), ("scenes/one.json", Scenes));
@@ -108,6 +136,62 @@ public sealed class SceneLoadTests
         Assert.Null(book.ClipSeconds("l1"));
         Assert.Empty(LoreBook.Empty.Scenes);
         Assert.Null(LoreBook.Empty.ClipSeconds("l1"));
+    }
+
+    /// <summary>
+    /// Review (rules NOTE 2 and 3): what a game can play but would never show, which <c>tools/tactics-lore/check.py</c> refuses as well. An
+    /// option back to its own node is never offered (<see cref="SceneRun.Offered"/> counts the node as played), and a node whose every option
+    /// waits on flags can be left with nothing, unless one vote's choices each set a flag one of them waits on.
+    /// </summary>
+    [Fact]
+    public void A_scene_that_can_never_show_an_option_is_warned_of()
+    {
+        const string arcs = """
+            { "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [
+                { "id": "pick", "kind": "choice", "choices": [{ "id": "c1", "sets": ["left"] }, { "id": "c2", "sets": ["right"] }] },
+                { "id": "talk", "kind": "story" } ] }] }
+            """;
+        const string scenes = """
+            { "scenes": [{ "id": "s", "beat": "talk", "cast": ["narrator"], "start": "hub", "nodes": [
+                { "id": "hub", "lines": [{ "id": "l1", "speaker": "narrator", "text": "Hub." }], "options": [
+                  { "id": "again", "label": "Again.", "to": "hub" },
+                  { "id": "try", "label": "Try.", "check": { "skill": "athletics", "dc": 10, "pass": "sides", "fail": "hub" } },
+                  { "id": "both", "label": "Both.", "to": "hub", "check": { "skill": "athletics", "dc": 10, "pass": "sides", "fail": "done" } },
+                  { "id": "on", "label": "On.", "to": "sides" } ] },
+                { "id": "sides", "lines": [{ "id": "l2", "speaker": "narrator", "text": "Which?" }], "options": [
+                  { "id": "l", "label": "Left.", "to": "gated", "requires": ["left"] },
+                  { "id": "r", "label": "Right.", "to": "gated", "requires": ["right"] } ] },
+                { "id": "gated", "lines": [{ "id": "l3", "speaker": "narrator", "text": "Maybe." }], "options": [
+                  { "id": "m", "label": "Maybe.", "to": "done", "requires": ["left", "maybe"] } ] },
+                { "id": "done", "lines": [{ "id": "l4", "speaker": "narrator", "text": "Done." }], "end": true } ] }] }
+            """;
+
+        var book = Load(("arcs.json", arcs), ("scenes/one.json", scenes));
+
+        Assert.Equal(
+        [
+            "the option 'again' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
+            "the option 'try' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
+            "the option 'both' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",     // its 'to', beside a check
+            "the node 'gated' of the scene 's' has every option gated on flags, and no vote guarantees one of them is set: the party could be left with nothing to pick.",
+        ], book.Warnings.Select(w => w[(w.IndexOf(": ", StringComparison.Ordinal) + 2)..]));
+        Assert.All(book.Warnings, w => Assert.Contains("one.json", w, StringComparison.Ordinal));      // each names its file
+        Assert.Empty(LoreBook.Empty.Warnings);
+    }
+
+    /// <summary>
+    /// Review A6: an option with both a <c>to</c> and a check names all three nodes, as <c>check.py</c> counts them, so the two agree on what
+    /// it leads to; where it goes is still the check's to decide.
+    /// </summary>
+    [Fact]
+    public void An_options_to_beside_a_check_is_one_of_its_targets()
+    {
+        var option = new SceneOption("o", "O.", "side", null, [], [], OptionTags.None, new SceneCheck("athletics", 10, "pass", "fail"));
+
+        Assert.Equal(["side", "pass", "fail"], option.Targets);
+        Assert.Equal(("pass", "fail"), (SceneRun.Target(option, passed: true), SceneRun.Target(option, passed: false)));
+        Assert.Equal(["pass", "fail"], (option with { To = null }).Targets);
+        Assert.Equal(["side"], (option with { Check = null }).Targets);
     }
 
     /// <summary>Scenes with no arcs to play them aren't read: as before, a pack with no <c>arcs.json</c> is the empty book.</summary>

@@ -136,6 +136,41 @@ public static class WorldWalk
         return reached;
     }
 
+    /// <summary>
+    /// The pad taps of a shortest walk, in steps, from <paramref name="from"/> to the first tile <paramref name="goal"/> holds, or null if
+    /// there's none: for the bots and the tests that play a chapter, so they walk by this rule and can't disagree with the party. Every tap
+    /// is a step <see cref="Next"/> takes exactly as asked, never a slide, so the walk doesn't depend on which way the party last went. It
+    /// never steps onto a tile <paramref name="avoid"/> holds, unless that's the goal. Empty when <paramref name="from"/> is the goal already.
+    /// </summary>
+    public static System.Collections.Immutable.ImmutableArray<WalkDir>? Route(Terrain terrain, Tile from, Func<Tile, bool> goal, int jump,
+        Func<Tile, bool>? avoid = null)
+    {
+        if (goal(from))
+            return [];
+        var came = new Dictionary<Tile, (Tile From, WalkDir Dir)>();
+        var open = new Queue<Tile>([from]);
+        var seen = new HashSet<Tile> { from };
+        while (open.TryDequeue(out var at))
+            foreach (var dir in Enum.GetValues<WalkDir>())
+            {
+                var (dx, dy) = Delta(dir);
+                if (Next(terrain, at, dir, jump, null) is not { Slid: false } move || move.To != new Tile(at.X + dx, at.Y + dy) || !seen.Add(move.To))
+                    continue;
+                came[move.To] = (at, dir);
+                if (goal(move.To))
+                {
+                    var taps = new List<WalkDir>();
+                    for (var t = move.To; t != from; t = came[t].From)
+                        taps.Add(came[t].Dir);
+                    taps.Reverse();
+                    return [.. taps];
+                }
+                if (avoid?.Invoke(move.To) != true)
+                    open.Enqueue(move.To);
+            }
+        return null;
+    }
+
     /// <summary>A diagonal's cost, or null if it isn't legal.</summary>
     private static int? DiagonalCost(Terrain terrain, Tile from, Tile to, Tile cornerX, Tile cornerY, int jump)
     {

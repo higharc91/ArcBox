@@ -302,4 +302,189 @@ public class StorageWriterTests
 
         Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
     }
+
+    // ---- A failing disk (the chapter e2e that hung after "disk I/O error" flushes on a full disk) ------------------------
+
+    /// <summary>A disk that fails while <see cref="Broken"/>, as SQLite says it: error 10, "disk I/O error", from the open.</summary>
+    internal sealed class FailingDisk(ArcDb db)
+    {
+        public bool Broken { get; set; }
+        public int Tries { get; private set; }
+
+        public Microsoft.Data.Sqlite.SqliteConnection Open()
+        {
+            Tries++;
+            if (Broken) throw new Microsoft.Data.Sqlite.SqliteException("SQLite Error 10: 'disk I/O error'.", 10);
+            return db.Open();
+        }
+    }
+
+    [Fact]
+    public async Task A_failing_disk_keeps_the_newest_writes_and_writes_them_when_it_recovers()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var disk = new FailingDisk(db) { Broken = true };
+        var log = new RecordingLogger();
+        using var writer = new StorageWriter(db, time, log) { Connect = disk.Open };
+        var ct = TestContext.Current.CancellationToken;
+        writer.Write("a", Insert("a", 1));
+        writer.Write("b", Insert("b", 2));
+
+        await writer.FlushAsync(ct);            // never throws for the storage
+        Assert.True(writer.Failing);
+        Assert.Equal(0, writer.WritesExecuted);
+        time.Advance(TimeSpan.FromSeconds(12));
+        Assert.Equal(TimeSpan.FromSeconds(12), writer.OldestPendingAge);    // kept, and the health check sees how long for
+        writer.Write("a", Insert("a", 3));      // a newer save of a, meanwhile: it replaces the one kept
+        writer.Write("c", Insert("c", 4));
+        await writer.FlushAsync(ct);
+        Assert.Equal(0, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+
+        disk.Broken = false;
+        await writer.FlushAsync(ct);
+
+        Assert.False(writer.Failing);
+        Assert.Equal("a:3,b:2,c:4", db.Scalar<string>("SELECT group_concat(k || ':' || v) FROM (SELECT k, v FROM scratch ORDER BY rowid)"));
+        Assert.Equal(TimeSpan.Zero, writer.OldestPendingAge);
+        Assert.Equal(3, disk.Tries);
+        // Said clearly: an error when it starts, a warning for each retry that fails, and the recovery.
+        Assert.Equal([LogLevel.Error, LogLevel.Warning, LogLevel.Warning], log.Entries.Select(e => e.Level));
+        Assert.Contains("Storage is failing: 2 writes are kept", log.Entries[0].Message);
+        Assert.Contains("Storage still failing after 2 tries: 3 writes kept", log.Entries[1].Message);
+        Assert.Contains("Storage recovered after 2 failed tries", log.Entries[2].Message);
+    }
+
+    [Fact]
+    public async Task A_batch_the_disk_fails_is_kept_whole_and_a_write_that_fails_on_its_own_is_dropped()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        using var writer = new StorageWriter(db, time, NullLogger<StorageWriter>.Instance);
+        var ct = TestContext.Current.CancellationToken;
+        var full = true;
+        writer.Write("a", Insert("a", 1));
+        writer.Write("full", c =>
+        {
+            if (full) throw new Microsoft.Data.Sqlite.SqliteException("SQLite Error 13: 'database or disk is full'.", 13);
+            Insert("full", 2)(c);
+        });
+        writer.Write("bad", _ => throw new InvalidOperationException("boom"));
+
+        await writer.FlushAsync(ct);
+        Assert.True(writer.Failing);
+        Assert.Equal(0, writer.WritesExecuted);        // the disk's fault: the whole batch waits, nothing is tried one by one
+        Assert.Equal(3, writer.PendingCount);
+
+        full = false;
+        await writer.FlushAsync(ct);
+        Assert.False(writer.Failing);
+        Assert.Equal("a,full", db.Scalar<string>("SELECT group_concat(k) FROM (SELECT k FROM scratch ORDER BY rowid)"));
+    }
+
+    [Fact]
+    public void The_back_off_doubles_from_half_a_second_to_thirty()
+    {
+        Assert.Equal([0.5, 1, 2, 4, 8, 16, 30, 30], Enumerable.Range(1, 8).Select(n => StorageWriter.RetryAfter(n).TotalSeconds));
+        Assert.Equal(StorageWriter.RetryMost, StorageWriter.RetryAfter(1_000));
+        Assert.True(StorageWriter.IsStorageFault(new Microsoft.Data.Sqlite.SqliteException("disk I/O error", 10)));
+        Assert.True(StorageWriter.IsStorageFault(new IOException("No space left on device")));
+        Assert.False(StorageWriter.IsStorageFault(new Microsoft.Data.Sqlite.SqliteException("constraint failed", 19)));
+        Assert.False(StorageWriter.IsStorageFault(new InvalidOperationException("boom")));
+    }
+
+    /// <summary>The loop, on a disk that's out for a simulated minute: it backs off rather than trying every 250 ms, then writes.</summary>
+    [Fact]
+    public async Task The_loop_backs_off_while_the_disk_fails_and_flushes_once_it_recovers()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var disk = new FailingDisk(db) { Broken = true };
+        using var writer = new StorageWriter(db, time, NullLogger<StorageWriter>.Instance) { Connect = disk.Open };
+        var ct = TestContext.Current.CancellationToken;
+        await writer.StartAsync(ct);
+        writer.Write("a", Insert("a", 1));
+
+        for (var i = 0; i < 240; i++)           // a minute in steps of 250 ms
+        {
+            time.Advance(TimeSpan.FromMilliseconds(250));
+            await Task.Delay(2, ct);
+        }
+        Assert.True(writer.Failing);
+        Assert.InRange(disk.Tries, 2, 12);      // 0.25 + 0.5 + 1 + 2 + 4 + 8 + 16 + 30 s: about 8, against 240 without the back-off
+
+        disk.Broken = false;
+        var deadline = DateTime.UtcNow + Patience;
+        while (writer.WritesExecuted < 1 && DateTime.UtcNow < deadline)
+        {
+            time.Advance(TimeSpan.FromMilliseconds(250));
+            await Task.Delay(5, ct);
+        }
+        Assert.Equal(1, writer.WritesExecuted);
+        Assert.False(writer.Failing);
+        await writer.StopAsync(ct);
+    }
+
+    [Fact]
+    public async Task A_save_queued_while_the_disk_fails_wins_over_the_one_kept()
+    {
+        var (db, writer, _) = Create();
+        using var _db = db;
+        using var _w = writer;
+        var ct = TestContext.Current.CancellationToken;
+        writer.Write("c:1", _ =>
+        {
+            writer.Write("c:1", Insert("c:1", 2));      // a newer save, mid-flush
+            throw new Microsoft.Data.Sqlite.SqliteException("SQLite Error 10: 'disk I/O error'.", 10);
+        });
+
+        await writer.FlushAsync(ct);
+        await writer.FlushAsync(ct);
+
+        Assert.Equal(2, db.Scalar<int>("SELECT v FROM scratch"));
+        Assert.False(writer.Failing);
+    }
+
+    /// <summary>Review: a stop on a disk that's failing retries, with the back-off, inside the drain's cap, rather than trying once.</summary>
+    [Fact]
+    public async Task StopAsync_retries_a_failing_disk_inside_the_cap()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var failures = 2;
+        var disk = new FailingDisk(db) { Broken = true };
+        using var writer = new StorageWriter(db, time, NullLogger<StorageWriter>.Instance)
+        {
+            Connect = () =>
+            {
+                disk.Broken = failures-- > 0;
+                return disk.Open();
+            },
+            StopDrainLimit = TimeSpan.FromSeconds(4),
+        };
+        writer.Write("a", Insert("a", 1));
+
+        await writer.StopAsync(new CancellationToken(canceled: true));
+
+        Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));         // the third try: after 0.5 s and 1 s of back-off
+        Assert.Equal(3, disk.Tries);
+    }
+
+    [Fact]
+    public async Task StopAsync_on_a_disk_that_stays_down_gives_up_at_the_cap_and_says_so()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var log = new RecordingLogger();
+        var disk = new FailingDisk(db) { Broken = true };
+        using var writer = new StorageWriter(db, time, log) { Connect = disk.Open, StopDrainLimit = TimeSpan.FromMilliseconds(1200) };
+        writer.Write("a", Insert("a", 1));
+
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        await writer.StopAsync(new CancellationToken(canceled: true));
+
+        Assert.InRange(clock.Elapsed, TimeSpan.FromSeconds(1), Patience);
+        Assert.InRange(disk.Tries, 2, 3);
+        Assert.Contains(log.Entries, e => e.Level == LogLevel.Error && e.Message.Contains("1 queued writes may be lost"));
+    }
 }

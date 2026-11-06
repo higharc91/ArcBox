@@ -1,0 +1,55 @@
+{
+  "baselineCommit": "340e1de5",
+  "afterRuntimeCommit": "d8714796",
+  "harnessCommit": "cdace94e",
+  "solutionPassed": 5727,
+  "webPassed": 478,
+  "buildWarnings": 0,
+  "performanceP95Ms": {
+    "hazardStress": 128.7,
+    "stress": 80.2,
+    "crypt": 35.1,
+    "crystal": 32.9
+  },
+  "sourceSHA256": {
+    "games/Tactics/Tactics.Logic/Ai/Planner.Positions.cs": "bf56b7fef112d1433aca5759bf115eab21c13a14f4669d82e8cb616412b39bbd",
+    "games/Tactics/Tactics.Logic/Ai/Scoring.Hazards.cs": "9f739f9c698d6e74862403a31ac37fd14a489374a1e0992cab522371c459a3a9"
+  },
+  "goldenSHA256": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "assembliesSHA256": {
+    "baseline": {
+      "Tactics.Sim": "eee245b735d06e937ad177d6a5930dd1b9c7ab0022583c63597f7473771c98b3",
+      "Tactics.Logic": "71780db97185139110d2d81c07f510db4a9725170ae6bc79da5477cf81708d49"
+    },
+    "after": {
+      "Tactics.Sim": "801949ccdc7652ef88a47b669a338daa23c4721ded93fbe5693116ca2695b7e0",
+      "Tactics.Logic": "d7d04cbba8b92d32e9c48e037493f5190bbf06a2bb6c56f65cee22fddd964b76"
+    }
+  },
+  "sweep": {
+    "cases": 16200,
+    "seeds": 100,
+    "outcomes": {
+      "Lost": 7512,
+      "Won": 8460,
+      "unfinished": 228
+    },
+    "unfinishedByEncounter": {
+      "crypt_hall": 25,
+      "crystal_cave": 26,
+      "ford_assault": 73,
+      "forest_ruins": 7,
+      "keep_gate": 5,
+      "rime_tower": 19,
+      "river_crossing": 73
+    },
+    "stepLimit": 1500
+  }
+}

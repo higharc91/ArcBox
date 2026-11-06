@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.0aa2cecb.wav",
+  "sourceSha256": "53e57183f9a51d5ab064c3e5690353b06d4b7bae4e6584c01e78719edaee13b1",
+  "duration": 7.08,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.5600000000000005,
+      "text": " Two day bread from the innkeeper. Yes the one who feeds anybody"
+    }
+  ],
+  "text": "Two day bread from the innkeeper. Yes the one who feeds anybody",
+  "secondsToTranscribe": 1.719
+}

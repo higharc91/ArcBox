@@ -62,6 +62,27 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
+    public void A_ford_cliff_face_uses_its_full_four_tile_span()
+    {
+        var plan = Plan(Map(["rock_ford/bank"], [], "1:0:0 0:0:0"));
+        var side = Assert.Single(SidesOf(plan, new Tile(0, 0)), face => face.Facing == Facing.U);
+
+        Assert.Equal("native_cliff_ford.png", Path.GetFileName(side.Image!.Path));
+        Assert.Equal(1f / 4, side.Uvs[1].X);
+    }
+
+    [Fact]
+    public void Ashen_ford_repaints_legacy_surfaces_but_preserves_stamped_tiles()
+    {
+        var map = BattleMap.FromBytes("ashen_ford", 2, 1, [0, 0, 0, 0, 0, 0], ["grass/frost"], [], NoZones,
+            ImmutableHashSet.Create(new Tile(1, 0)));
+        var terrain = new BoardTerrain(map, null);
+
+        Assert.Equal("grass_ford", terrain.Look(new Tile(0, 0)).Top.Family);
+        Assert.Equal("grass", terrain.Look(new Tile(1, 0)).Top.Family);
+    }
+
+    [Fact]
     public void A_top_stands_at_its_height()
     {
         var plan = Plan(Map(["rock/grey"], [], "3:0:0"));
@@ -279,6 +300,9 @@ public sealed class BoardPlanTests
 
     [Theory]
     [InlineData("fire", "burning")]
+    [InlineData("burning", "burning")]
+    [InlineData("ice_sheet", "ice")]
+    [InlineData("oil", "oil")]
     [InlineData("web", "web")]
     [InlineData("ice", "ice")]
     [InlineData("grease", "oil")]
@@ -288,6 +312,18 @@ public sealed class BoardPlanTests
     [InlineData("spikes", "spikes")]
     public void Zone_kinds_map_onto_the_hazard_set(string kind, string hazard)
         => Assert.Equal(hazard, ZoneArt.HazardFor(kind));
+
+    [Fact]
+    public void Scorched_surface_is_a_decal_on_the_raised_tile_and_never_a_fallback_tint()
+    {
+        var at = new Tile(0, 0);
+        var plan = Plan(Map(["planks/oak"], [], "2:0:0"), new BoardChanges([new ZoneView(1, "scorched", [at])], [], []));
+        var decal = Assert.Single(Faces(plan), f => f.Kind == FaceKind.Decal);
+        Assert.Equal(Pack.Art.Decal("scorch_burnt"), decal.Image);
+        Assert.InRange(decal.Alpha, 0.6f, 0.8f);
+        Assert.Equal(BoardProjection.Corner(0, 0, 2), decal.Points[0]);
+        Assert.DoesNotContain(Faces(plan), f => f.Kind == FaceKind.Tint);
+    }
 
     [Fact]
     public void A_zone_kind_with_no_hazard_art_still_shows_as_a_tint()
@@ -322,9 +358,15 @@ public sealed class BoardPlanTests
         var map = Pack.Map(id);
         var plan = Plan(map);
 
-        Assert.Equal(map.Width * map.Height, Tops(plan).Count());
+        var terrain = new BoardTerrain(map, null);
+        // Native bridge pieces own their surfaces instead of a duplicate flat terrain top.
+        Assert.Equal(terrain.Tiles.Count(t => !terrain.Look(t).OpenSpan), Tops(plan).Count());
         Assert.All(Faces(plan), f => Assert.NotNull(f.Image));
-        Assert.Equal(map.Props.Length, plan.Items.OfType<Sprite>().Count());
+        // A low prop wider than a tile (a bridge's deck) is drawn in pieces, one for each tile it lies over.
+        var present = map.Props.Where(p => p.Present()).ToArray();
+        var spread = present.Count(p => Pack.Art.Prop(p.Id, [p.Variant ?? ""])?.Shape is not null);
+        Assert.Equal(present.Length - spread, plan.Items.OfType<Sprite>().Count());
+        Assert.Equal(spread, plan.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Prop).Select(f => f.Image!.Path).Distinct().Count());
         Assert.All(plan.Items.OfType<Sprite>(), s => Assert.True(File.Exists(Path.Combine(Pack.Root, s.Image.Path))));
         Assert.Equal(2, BoardFit.For(new BoardTerrain(map, null), Pack.Art).Scale);
     }
@@ -341,7 +383,7 @@ public sealed class BoardPlanTests
     [Fact]
     public void The_plan_says_whether_it_needs_a_clock()
     {
-        Assert.True(Plan(Pack.Map("river_crossing")).Animated);    // water
+        Assert.True(Plan(Map(["water/clear"], [], "0:0:1")).Animated);    // water: river_crossing's ford water is still
         Assert.False(Plan(Map(["cobble/grey"], [], "1:0:0")).Animated);
     }
 

@@ -119,6 +119,42 @@ public sealed class StageSceneTests
         Assert.Equal(WorldState.Failed, StageLayout.WorldOf(new WorldSeen(false, false, false, false, true)));
         Assert.Equal(WorldState.Loading, StageLayout.WorldOf(new WorldSeen(false, false, false, false, false)));
         Assert.Equal(WorldState.Ready, StageLayout.WorldOf(new WorldSeen(true, true, true, false, true)));     // a new world after one was given up
+        Assert.Equal(WorldState.Loading, StageLayout.WorldOf(new WorldSeen(true, true, true, false, false, StageShown: false)));
+        Assert.Equal(WorldState.Failed, StageLayout.WorldOf(new WorldSeen(true, false, false, true, false, StageShown: false)));
+    }
+
+    // A TV back mid-fight: the plain board keeps the fight until the world's blocks where the takeover cuts to are recorded, then the world
+    // takes over, cutting to just that place.
+    [Fact]
+    public void The_plain_board_keeps_a_fight_until_the_world_has_the_stage_recorded()
+    {
+        var script = new StageScript();
+        var director = script.Director(WorldState.Loading);
+        director.Receive(Fight(Battle(lastSeq: 30)));
+        var cut = director.TakeoverOn(script.Terrain);
+
+        foreach (var shown in new[] { false, false, true })
+        {
+            var state = StageLayout.WorldOf(new WorldSeen(true, true, true, false, false, shown));
+            director.SetWorld(state, state == WorldState.Ready ? script.Terrain : null);
+            Assert.Equal(shown, director.InPlace);
+        }
+        Assert.Equal(cut, director.CameraTarget);
+        Assert.Equal(1, director.CameraCuts);
+    }
+
+    [Fact]
+    public void A_cut_shows_what_a_camera_snapped_there_shows()
+    {
+        var camera = new WorldCamera(200, 200);     // well inside the region: a cut near its edge is clamped at first, and glides out as Hold has it
+        camera.Snap(new System.Numerics.Vector2(100.5f, 93.5f), 2);
+        Assert.Equal(camera.Fit, WorldCamera.FitOn(new System.Numerics.Vector2(100.5f, 93.5f), 2));
+
+        var window = new System.Numerics.Vector2(1920, 1080);
+        var seen = WorldView.Seen(camera.Fit, window);
+        Assert.Equal(WorldView.Seen(WorldView.OriginIn(camera.Fit, window), window), seen);
+        var middle = BoardProjection.Corner(100.5f, 93.5f, 2);
+        Assert.True(seen.Min.X < middle.X && middle.X < seen.Max.X && seen.Min.Y < middle.Y && middle.Y < seen.Max.Y);
     }
 
     [Fact]
@@ -160,5 +196,34 @@ public sealed class StageSceneTests
         Assert.Null(job.Changes);
         Assert.False(queue.Waiting);
         Assert.Null(queue.Take());
+    }
+
+    // Review of the fix wave, item 3: near a region's edge a walking camera cuts with its clamp, and the fight's hold eases it off and glides
+    // out to the stage's middle. What the takeover waits for takes in every view of that glide.
+    [Theory]
+    [InlineData(3.5f, 3.5f)]        // a corner
+    [InlineData(20.5f, 1.5f)]       // an edge
+    [InlineData(20.5f, 15.5f)]      // the middle
+    public void What_the_takeover_waits_for_covers_the_cut_and_the_glide_after_it(float x, float y)
+    {
+        var window = new System.Numerics.Vector2(1920, 1080);
+        var map = new System.Numerics.Vector2(x, y);
+        var cut = WorldCamera.CutSeen(40, 30, map, 1, window);
+        var camera = new WorldCamera(40, 30);
+        camera.Follow(new System.Numerics.Vector2(20.5f, 15.5f), 1, System.Numerics.Vector2.Zero, 0);     // walking, clamp on
+        camera.Snap(map, 1);
+
+        var views = new List<ArtArea> { WorldView.Seen(camera.Fit, window) };
+        for (var t = 0; t < 300; t++)
+        {
+            camera.Hold(map, 1, 1 / 60.0);
+            views.Add(WorldView.Seen(camera.Fit, window));
+        }
+
+        Assert.All(views, v => Assert.True(v.Min.X >= cut.Min.X - 0.5f && v.Min.Y >= cut.Min.Y - 0.5f && v.Max.X <= cut.Max.X + 0.5f && v.Max.Y <= cut.Max.Y + 0.5f,
+            $"{v.Min} {v.Max} outside {cut.Min} {cut.Max}"));
+        var unclamped = WorldView.Seen(WorldCamera.FitOn(map, 1), window);
+        Assert.True(x > 5 && y > 5 || !views.All(v => v.Min.X >= unclamped.Min.X - 0.5f && v.Min.Y >= unclamped.Min.Y - 0.5f
+            && v.Max.X <= unclamped.Max.X + 0.5f && v.Max.Y <= unclamped.Max.Y + 0.5f));      // at the edge, the point alone would miss the start
     }
 }

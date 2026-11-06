@@ -1,0 +1,451 @@
+{
+  "region": "ashen_ford",
+  "interactables": [
+    {
+      "id": "af_square_notice",
+      "kind": "note",
+      "at": [
+        35,
+        61
+      ],
+      "name": "council notice",
+      "text": [
+        "Nailed to the lamp post: by order of the council, bread at the granary gate, one loaf a household, at noon. Nobody is to cross the ford. H. Varrow, Mayor.",
+        "Under it, in another hand: \"Ask the Marrowbys where their grain went.\""
+      ]
+    },
+    {
+      "id": "af_square_well",
+      "kind": "well",
+      "at": [
+        31,
+        60
+      ],
+      "name": "square well",
+      "text": [
+        "The bucket comes up warm. The old folk swear this well used to steam in winter.",
+        "It doesn't now."
+      ]
+    },
+    {
+      "id": "af_hearth_shrine",
+      "kind": "shrine",
+      "at": [
+        27,
+        68
+      ],
+      "name": "hearthstone",
+      "text": [
+        "A hearthstone of the Church of the Hearth, out on the green where the town buries its own. Someone keeps it swept.",
+        "You lay a hand on it. For a moment the cold goes out of your fingers."
+      ]
+    },
+    {
+      "id": "af_grave_coll",
+      "kind": "gravestone",
+      "at": [
+        25,
+        68
+      ],
+      "name": "Coll's grave",
+      "text": [
+        "COLL. GUARD OF EMBERWICK. HE HELD THE BRIDGE END.",
+        "The stone is new, and the earth is still soft."
+      ]
+    },
+    {
+      "id": "af_grave_annet",
+      "kind": "gravestone",
+      "at": [
+        26,
+        68
+      ],
+      "name": "Annet's grave",
+      "text": [
+        "ANNET. GUARD OF EMBERWICK.",
+        "Someone has left a heel of bread on the stone, and a guard's whistle."
+      ],
+      "scene": "sq_whistle_grave"
+    },
+    {
+      "id": "af_east_signpost",
+      "kind": "signpost",
+      "at": [
+        51,
+        63
+      ],
+      "name": "signpost",
+      "text": [
+        "East: the Ford Bridge. North: the Skarrow Hills. West: Emberwick.",
+        "Somebody has scratched out \"Bridge\" and cut \"TOLL\" into the wood."
+      ]
+    },
+    {
+      "id": "af_granary_crate",
+      "kind": "crate",
+      "at": [
+        38,
+        69
+      ],
+      "name": "grain crate",
+      "text": [
+        "Empty. The straw at the bottom smells of last year's wheat."
+      ]
+    },
+    {
+      "id": "af_granary_sack",
+      "kind": "sack",
+      "at": [
+        40,
+        70
+      ],
+      "name": "split sack",
+      "text": [
+        "Seed corn, and a slit in the side where somebody has been helping themselves."
+      ],
+      "scene": "sq_grain_sack"
+    },
+    {
+      "id": "af_granary_barrel",
+      "kind": "barrel",
+      "at": [
+        46,
+        71
+      ],
+      "name": "rain barrel",
+      "text": [
+        "Rainwater, with a skin of ice on it. There was never ice in Emberwick."
+      ]
+    },
+    {
+      "id": "af_market_crate",
+      "kind": "crate",
+      "at": [
+        23,
+        64
+      ],
+      "name": "market crate",
+      "text": [
+        "Turnips, mostly. Small ones."
+      ]
+    },
+    {
+      "id": "af_reeves_key",
+      "kind": "pickup",
+      "at": [
+        19,
+        84
+      ],
+      "name": "reeve's key",
+      "sets": [
+        "af_reeves_key"
+      ]
+    },
+    {
+      "id": "af_reeves_chest",
+      "kind": "chest",
+      "at": [
+        30,
+        83
+      ],
+      "name": "reeve's chest",
+      "lock": {
+        "key": "af_reeves_key",
+        "keyName": "reeve's key",
+        "pick": 13,
+        "force": 15
+      },
+      "loot": [
+        {
+          "item": "potion_of_healing",
+          "count": 1
+        },
+        {
+          "item": "oil_flask",
+          "count": 1
+        },
+        {
+          "gold": 60
+        }
+      ]
+    },
+    {
+      "id": "af_dock_crate",
+      "kind": "crate",
+      "at": [
+        106,
+        93
+      ],
+      "name": "pier crate",
+      "trap": {
+        "spot": 13,
+        "disarm": 12,
+        "text": [
+          "A cord pulls taut and a bell rattles somewhere up the pier. Nobody comes. Nobody here ever does."
+        ]
+      },
+      "text": [
+        "Packing straw and a smell of hot stone. Whatever was in here has gone."
+      ]
+    },
+    {
+      "id": "af_dock_barrel",
+      "kind": "barrel",
+      "at": [
+        106,
+        105
+      ],
+      "name": "fish barrel",
+      "text": [
+        "Salt and the last of the summer's eels. The river's too warm for them now, the fishers say."
+      ]
+    },
+    {
+      "id": "af_ash_market_tally",
+      "kind": "note",
+      "at": [
+        92,
+        102
+      ],
+      "name": "tally scrap",
+      "text": [
+        "First night: two shards, small. Second night: none, the water's too hot. Third night: one, and Gus burned his hand.",
+        "Tell the lady the price goes up."
+      ],
+      "scene": "sq_grain_tally"
+    },
+    {
+      "id": "af_ash_market_scuffs",
+      "kind": "disturbed_earth",
+      "at": [
+        93,
+        98
+      ],
+      "name": "scuffed boards",
+      "hidden": 10,
+      "text": [
+        "Boot scuffs in the ash, all heading the same way and stopping at nothing in particular."
+      ],
+      "reveals": [
+        "af_ash_market_cache"
+      ]
+    },
+    {
+      "id": "af_ash_market_cache",
+      "kind": "cache",
+      "at": [
+        92,
+        96
+      ],
+      "name": "smugglers' cache",
+      "hidden": 12,
+      "loot": [
+        {
+          "item": "smoke_bomb",
+          "count": 1
+        },
+        {
+          "gold": 40
+        }
+      ]
+    },
+    {
+      "id": "af_ford_campfire",
+      "kind": "campfire",
+      "at": [
+        119,
+        62
+      ],
+      "name": "ford campfire"
+    },
+    {
+      "id": "af_road_campfire",
+      "kind": "campfire",
+      "at": [
+        73,
+        64
+      ],
+      "name": "road campfire"
+    },
+    {
+      "id": "af_dock_charcoal",
+      "kind": "note",
+      "at": [
+        104,
+        105
+      ],
+      "name": "covered charcoal bundle",
+      "text": [
+        "The dock stores are neatly covered again."
+      ],
+      "requires": [
+        "sq_forge_asked"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ],
+      "scene": "sq_forge_docks"
+    },
+    {
+      "id": "af_bounty_board",
+      "kind": "bounty_board",
+      "at": [
+        37,
+        60
+      ],
+      "name": "Watch bounty board",
+      "scene": "ashmaw_board",
+      "text": [
+        "Town notices hang beneath the Watch seal."
+      ]
+    },
+    {
+      "id": "af_cinder_hollow_mouth",
+      "kind": "cave_mouth",
+      "at": [
+        131,
+        98
+      ],
+      "name": "the Cinder Hollow",
+      "requires": [
+        "sq_ashmaw_accepted"
+      ],
+      "sets": [
+        "sq_ashmaw_entered"
+      ],
+      "to": {
+        "region": "cinder_hollow",
+        "spawn": "entrance"
+      }
+    },
+    {
+      "id": "af_reed_bank_track",
+      "kind": "hidden_path",
+      "at": [
+        118,
+        86
+      ],
+      "facing": "se",
+      "name": "reed-bank track",
+      "hidden": {
+        "dc": 12,
+        "skill": "survival"
+      }
+    },
+    {
+      "id": "af_market_cellar_hatch",
+      "kind": "secret_door",
+      "at": [
+        92,
+        101
+      ],
+      "facing": "sw",
+      "name": "cellar hatch",
+      "hidden": {
+        "dc": 13,
+        "skill": "investigation"
+      },
+      "sets": [
+        "af_cellar_open"
+      ]
+    },
+    {
+      "id": "af_market_cellar_draft",
+      "kind": "draft",
+      "at": [
+        93,
+        101
+      ],
+      "name": "cold draft",
+      "hidden": 10,
+      "text": [
+        "Cold air slips through a seam behind the tally scrap. The boards lift at one edge."
+      ],
+      "reveals": [
+        "af_market_cellar_hatch"
+      ]
+    },
+    {
+      "id": "af_market_cellar_store",
+      "kind": "crate",
+      "at": [
+        92,
+        100
+      ],
+      "name": "smugglers' cellar store",
+      "requires": [
+        "af_cellar_open"
+      ],
+      "loot": [
+        {
+          "item": "smoke_bomb",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "af_market_cellar_ledger",
+      "kind": "note",
+      "at": [
+        93,
+        100
+      ],
+      "name": "cellar ledger",
+      "text": [
+        "A few wrapped parcels and an empty ledger box sit below the boards. Someone has kept the store small enough to abandon in a hurry.",
+        "Three deliveries crossed out, no names. A margin note reads: keep the parcels dry and the hatch shut."
+      ],
+      "requires": [
+        "af_cellar_open"
+      ]
+    },
+    {
+      "id": "af_bank_claw_marks",
+      "kind": "scratches",
+      "at": [
+        118,
+        80
+      ],
+      "name": "claw marks",
+      "hidden": 11,
+      "text": [
+        "Long claws scored the ash. The trail turns north toward a hollow in the cinders."
+      ],
+      "requires": [
+        "ch1_met_maud"
+      ]
+    },
+    {
+      "id": "af_bridge_carving",
+      "kind": "carving",
+      "at": [
+        94,
+        67
+      ],
+      "name": "bridge-stub carving",
+      "hidden": 11,
+      "text": [
+        "A child carved two figures holding hands across the broken span. The ash has settled into the cuts."
+      ],
+      "requires": [
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "af_southfield_goat_tracks",
+      "kind": "tracks",
+      "at": [
+        23,
+        86
+      ],
+      "name": "goat tracks",
+      "hidden": 10,
+      "text": [
+        "Small hoofprints circle the pen twice, then stop beside a gap in the fence."
+      ],
+      "requires": [
+        "ch1_met_maud"
+      ]
+    }
+  ]
+}

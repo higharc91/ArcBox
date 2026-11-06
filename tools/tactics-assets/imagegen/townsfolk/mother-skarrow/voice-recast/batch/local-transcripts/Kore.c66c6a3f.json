@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.c66c6a3f.wav",
+  "sourceSha256": "5e0f83acacd8983262198940f901be6ed1ebac2b055cd6719734dd1f9539b709",
+  "duration": 6.56,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.84,
+      "text": " Your captain thinks good tell her to think about the grain"
+    }
+  ],
+  "text": "Your captain thinks good tell her to think about the grain",
+  "secondsToTranscribe": 1.851
+}

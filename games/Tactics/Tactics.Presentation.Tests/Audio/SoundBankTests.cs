@@ -23,6 +23,16 @@ public sealed class SoundBankTests
     }
 
     [Fact]
+    public void Creature_coat_variants_keep_their_species_voice_and_weapon()
+    {
+        var baseGear = Bank.Value.Gear("beasts.wolf.wildshape");
+        var grey = Bank.Value.Gear("beasts.wolf.grey");
+        Assert.NotNull(baseGear.Family);
+        Assert.Equal(baseGear.Family, grey.Family);
+        Assert.Equal(baseGear.Weapon, grey.Weapon);
+    }
+
+    [Fact]
     public void Every_sounds_files_are_on_disk()
     {
         Assert.NotEmpty(Bank.Value.Ids);
@@ -117,6 +127,12 @@ public sealed class SoundBankTests
     [InlineData("grass/lush", "step_grass")]
     [InlineData("dirt/dark", "step_dirt")]
     [InlineData("water/clear", "step_water")]
+    [InlineData("ford_water/clear", "step_water")]
+    [InlineData("grass_ford/autumn", "step_grass")]
+    [InlineData("dirt_ford/wet", "step_dirt")]
+    [InlineData("path_ford/packed", "step_dirt")]
+    [InlineData("rock_ford/bank", "step_stone")]
+    [InlineData("ash_ford/charred", "step_dirt")]
     [InlineData("rock/grey", "step_stone")]
     [InlineData("mine_boards/oak", "step_wood")]
     [InlineData("lava/molten", "step_lava")]
@@ -163,6 +179,58 @@ public sealed class SoundBankTests
         var found = keys.Count(k => Bank.Value.ForEffect(k) is not null);
 
         Assert.True(found * 2 > keys.Length, $"{found} of {keys.Length}");
+    }
+
+    [Fact]
+    public void Creature_attack_families_are_explicit_manifest_data()
+    {
+        using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "sfx", "manifest.json")));
+        foreach (var sound in manifest.RootElement.GetProperty("sounds").EnumerateObject())
+        {
+            if (sound.Value.GetProperty("group").GetString() != "creature" || !sound.Name.EndsWith("_attack", StringComparison.Ordinal))
+                continue;
+            Assert.True(sound.Value.TryGetProperty("families", out var families), sound.Name);
+            Assert.NotEmpty(families.EnumerateArray());
+            Assert.All(families.EnumerateArray(), family => Assert.False(string.IsNullOrWhiteSpace(family.GetString())));
+        }
+    }
+
+    [Fact]
+    public void Every_rules_monster_has_a_sound_family_or_a_documented_silent_decision()
+    {
+        using var decisions = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "sfx", "silent-monsters.json")));
+        var silence = decisions.RootElement.GetProperty("silent").EnumerateObject()
+            .ToDictionary(entry => entry.Name, entry => entry.Value.GetString()!, StringComparer.Ordinal);
+        var borrowed = decisions.RootElement.GetProperty("borrowed").EnumerateObject()
+            .ToDictionary(entry => entry.Name, entry => entry.Value.GetString()!, StringComparer.Ordinal);
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        var families = new Dictionary<string, string?>(StringComparer.Ordinal);
+        var missing = new List<string>();
+        foreach (var file in Directory.GetFiles(Path.Combine(Pack.Root, "rules", "monsters"), "*.json"))
+        {
+            using var rules = JsonDocument.Parse(File.ReadAllText(file));
+            foreach (var monster in rules.RootElement.EnumerateArray())
+            {
+                var id = monster.GetProperty("id").GetString()!;
+                seen.Add(id);
+                var sprite = monster.TryGetProperty("sprite", out var value) ? value.GetString() : null;
+                families[id] = Bank.Value.Gear(sprite).Family;
+                if (families[id] is null && !silence.ContainsKey(id))
+                    missing.Add(id);
+            }
+        }
+        Assert.Empty(missing);
+        Assert.All(silence, decision =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(decision.Value), decision.Key);
+            Assert.Null(families[decision.Key]);
+        });
+        Assert.All(borrowed, decision =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(decision.Value), decision.Key);
+            Assert.NotNull(families[decision.Key]);
+        });
+        Assert.Empty(silence.Keys.Concat(borrowed.Keys).Except(seen));
     }
 
     [Theory]
@@ -230,6 +298,7 @@ public sealed class SoundBankTests
     [InlineData("projectiles.arrow", "shortbow", "bow_release")]
     [InlineData("projectiles.arrow", "light_crossbow", "crossbow_release")]
     [InlineData("projectiles.arrow", null, "bow_release")]
+    [InlineData("projectiles.rock", "sling", "sling_release")]
     [InlineData("projectiles.rock", "claws", "throw")]
     [InlineData("projectiles.rock", null, "throw")]
     [InlineData("projectiles.fireball", "staff", "spell_cast")]

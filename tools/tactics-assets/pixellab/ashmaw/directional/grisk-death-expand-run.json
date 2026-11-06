@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: The kobold staggers and falls backward, ending motionless. Right hand keeps its mining pick; helmet lantern and tally cord stay attached. No fading, no vanishing, no resurrection.\nmode: template\ndirections: south-east, east, north-east, north, north-west, west, south-west (7 jobs)\njob_ids: south-east=c3534781-9675-44c6-afc8-3dddc27d08c9, east=7bc42bf0-6676-43ff-8eb1-a1848e796737, north-east=da1134a2-b7ce-45d8-a2f9-6b45916fed91, north=973d6705-04af-48c5-849c-a7af3032889f, north-west=40b2b46a-6362-41e7-9a53-218349f0cedb, west=48d82bcf-674c-4e1e-b58c-13156e6e7691, south-west=60e8e169-5a12-435a-aae6-9811013141bb\ngroup: f545c684-dcef-4f87-9695-ed90777751d8\ncost: 7 generations (1/dir x 7)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", template_animation_id=\"falling-back-death\", animation_group_id=\"f545c684-dcef-4f87-9695-ed90777751d8\", directions=[...])\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nif poor: delete_animation(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

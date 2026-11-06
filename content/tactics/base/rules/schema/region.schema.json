@@ -48,7 +48,7 @@
           "tiles": {
             "type": "string",
             "contentEncoding": "base64",
-            "description": "32 × 32 × 3 bytes, row-major: height (0 to 9), material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
+            "description": "32 \u00d7 32 \u00d7 3 bytes, row-major: height (0 to 9), material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
           }
         },
         "required": [
@@ -58,7 +58,7 @@
         ],
         "additionalProperties": false
       },
-      "description": "32 × 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
+      "description": "32 \u00d7 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
     },
     "stamps": {
       "type": "array",
@@ -107,6 +107,62 @@
         "additionalProperties": false
       }
     },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A prop id from props/manifest.json."
+          },
+          "variant": {
+            "type": "string",
+            "description": "An optional variant name for the prop."
+          },
+          "at": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/tile"
+            },
+            "description": "Tiles where this prop is placed."
+          }
+        },
+        "required": [
+          "id",
+          "at"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Props placed in the world, grouped by id and variant."
+    },
+    "buildings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A building id from town/manifest.json."
+          },
+          "variant": {
+            "type": "string",
+            "description": "One of the building's variants."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile",
+            "description": "The back corner tile of its footprint: the smallest x and y it covers."
+          }
+        },
+        "required": [
+          "id",
+          "variant",
+          "at"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Buildings placed in the world, sorted by y, x, id and variant. What each blocks, how tall it is and how it's drawn come from town/manifest.json."
+    },
     "spawns": {
       "type": "object",
       "properties": {
@@ -115,6 +171,11 @@
         },
         "recovery": {
           "$ref": "common.schema.json#/$defs/tile"
+        },
+        "named": {
+          "type": "object",
+          "propertyNames": { "minLength": 1, "not": { "enum": ["start", "recovery"] } },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/tile" }
         }
       },
       "required": [
@@ -154,6 +215,74 @@
         "additionalProperties": false
       },
       "description": "Where the region meets its neighbours."
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "preset": {
+            "type": "string"
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "face": {
+            "type": "string",
+            "enum": [
+              "se",
+              "sw",
+              "nw",
+              "ne"
+            ]
+          },
+          "walk": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "$ref": "common.schema.json#/$defs/tile"
+            }
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "character": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bark": {
+            "type": "string",
+            "minLength": 1
+          },
+          "voice": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "unless": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "preset",
+          "at",
+          "face"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [

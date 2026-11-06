@@ -30,6 +30,7 @@ public sealed class HudArt
     private readonly Dictionary<string, HudPiece> _panels = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HudPiece> _turn = new(StringComparer.Ordinal);
     private readonly Dictionary<string, string> _portraits = new(StringComparer.Ordinal);
+    private readonly Dictionary<(string Preset, string Mood), string> _moods = [];
     private readonly Dictionary<UnitTone, string> _backdrops = [];
     private int _portraitSize;
 
@@ -62,11 +63,44 @@ public sealed class HudArt
     public HudPortrait Portrait(string? sprite, UnitTone tone)
     {
         var parts = sprite?.Split('.') ?? [];
+        var figure = _units.Sprite(sprite) ?? _units.StandIn(tone);
+        if (parts is ["monsters", var monster, ..] && _portraits.TryGetValue(monster, out var monsterPortrait))
+            return new HudPortrait(monsterPortrait, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
+        if (parts is [CharacterSet, "kobold" or "kobold_slinger", ..] && _portraits.TryGetValue(parts[1], out var koboldPortrait))
+            return new HudPortrait(koboldPortrait, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
+        if (figure.PortraitSource is { } authored)
+            return new HudPortrait(figure.Path, authored, _backdrops[tone]);
+        if (parts is [CharacterSet, ..] && figure.PixelScale < 1)
+            return new HudPortrait(figure.Path, new ArtRect(figure.AnchorX - 20, Math.Max(0, figure.HeadTop - 4), 40, 40), _backdrops[tone]);
         if (parts is [CharacterSet, var preset, ..] && _portraits.TryGetValue(preset, out var file))
             return new HudPortrait(file, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
-        var figure = _units.Sprite(sprite) ?? _units.StandIn(tone);
         return new HudPortrait(figure.Path, figure.Source(figure.Idle.Frames[0], 0), _backdrops[tone]);
     }
+
+    /// <summary>
+    /// The face of whoever speaks a scene's line (overworld 5d §10): their portrait preset (<see cref="Tactics.Game.StoryLineView.Portrait"/>)
+    /// in the line's mood, on a backdrop by their role in the lore (<see cref="ToneOf"/>). A mood the preset wasn't drawn in falls back to
+    /// its idle face. Null for the narrator, who has no portrait (mockup 02), and for a preset the pack hasn't drawn: the caption then goes
+    /// without a face rather than show a stranger's.
+    /// </summary>
+    public HudPortrait? Speaker(string? preset, string mood, string? role)
+    {
+        if (preset is null || !_portraits.TryGetValue(preset, out var idle))
+            return null;
+        var file = _moods.GetValueOrDefault((preset, mood), idle);
+        return new HudPortrait(file, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[ToneOf(role)]);
+    }
+
+    /// <summary>
+    /// The backdrop's side for a speaker's role in the lore (<c>characters.json</c>): an ally's own, an enemy's for a villain, and the
+    /// neutral one for anyone else, a rival or an npc, who may yet be either.
+    /// </summary>
+    public static UnitTone ToneOf(string? role) => role switch
+    {
+        "ally" => UnitTone.Party,
+        "villain" => UnitTone.Enemy,
+        _ => UnitTone.Neutral,
+    };
 
     private void ReadUi(JsonElement ui)
     {
@@ -89,7 +123,11 @@ public sealed class HudArt
         _backdrops[UnitTone.Enemy] = $"portraits/{backdrops.GetProperty("enemy").GetString()}";
         _backdrops[UnitTone.Neutral] = $"portraits/{backdrops.GetProperty("neutral").GetString()}";
         foreach (var preset in root.GetProperty("presets").EnumerateObject())
+        {
             _portraits[preset.Name] = $"portraits/{preset.Value.GetProperty(Mood).GetString()}";
+            foreach (var mood in preset.Value.EnumerateObject())
+                _moods[(preset.Name, mood.Name)] = $"portraits/{mood.Value.GetString()}";
+        }
     }
 
     private static HudPiece Piece(JsonElement e)

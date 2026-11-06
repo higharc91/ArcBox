@@ -1,0 +1,21 @@
+{
+  "frameSize": [
+    160,
+    160
+  ],
+  "frameCount": 4,
+  "direction": "south",
+  "anchor": [
+    80,
+    143
+  ],
+  "sourceFrames": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "omittedClosingFrame": 4,
+  "fps": 1,
+  "reason": "Shared padded canvas, fixed placement per character; no per-frame bounding-box recentering. Closing endpoint retained in raw sources for seam review. Preview only; production anchors/physical scales require actual TV review."
+}

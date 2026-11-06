@@ -27,24 +27,27 @@ public readonly record struct CoverLook(float Card, bool Backdrop, bool HeaderAn
 /// <summary>
 /// The screen over the world, frame by frame (interaction review 5b, item 14): the region's title card while the world opens, then the
 /// world. A world that's opened, or brought back from a fight, puts the card up again (<see cref="Opened"/>). A world that fails, or doesn't
-/// open within <see cref="WorldTuning.OpenTimeout"/>, is given up, and the screen says where the party is without it. Godot only applies
+/// make progress within <see cref="WorldTuning.OpenTimeout"/>, or exceeds <see cref="WorldTuning.OpenMaxWait"/>, is given up. Godot only applies
 /// the numbers.
 /// </summary>
 public sealed class WorldCover
 {
     private double _waiting;
+    private double _total;
+    private long? _progress;
 
     /// <summary>Where the card and the panels are.</summary>
     public WorldReveal Reveal { get; private set; } = WorldReveal.Loading;
 
     /// <summary>The world was opened, or brought back from a fight: the card goes up again, and the wait for it starts again.</summary>
-    public void Opened() => (Reveal, _waiting) = (WorldReveal.Loading, 0);
+    public void Opened() => (Reveal, _waiting, _total, _progress) = (WorldReveal.Loading, 0, 0, null);
 
     /// <summary>
     /// A frame of a world at <paramref name="stage"/>, with its fade <paramref name="lifted"/> by so much, 0 to 1. False when the world must
-    /// be given up: it failed, or it hasn't opened in <see cref="WorldTuning.OpenTimeout"/> of frames.
+    /// be given up: it failed, made no progress for <see cref="WorldTuning.OpenTimeout"/>, or exceeded the overall wait limit.
+    /// When supplied, <paramref name="progress"/> must increase as loading work completes.
     /// </summary>
-    public bool Frame(double seconds, WorldStage stage, double lifted)
+    public bool Frame(double seconds, WorldStage stage, double lifted, long? progress = null)
     {
         switch (stage)
         {
@@ -54,9 +57,16 @@ public sealed class WorldCover
                 Reveal = WorldReveal.Of(open: true, lifted);
                 return true;
             default:
-                _waiting += Math.Max(0, seconds);
+                var elapsed = Math.Max(0, seconds);
+                _total += elapsed;
+                if (progress is { } current && (_progress is null || current > _progress))
+                {
+                    _progress = current;
+                    _waiting = 0;
+                }
+                else _waiting += elapsed;
                 Reveal = WorldReveal.Loading;
-                return _waiting < WorldTuning.OpenTimeout;
+                return _waiting < WorldTuning.OpenTimeout && _total < WorldTuning.OpenMaxWait;
         }
     }
 

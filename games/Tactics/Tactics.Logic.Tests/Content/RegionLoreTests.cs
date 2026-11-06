@@ -20,7 +20,7 @@ public sealed class RegionLoreTests
     {
         Assert.NotEmpty(Rules.Regions);
         foreach (var region in Rules.Regions.Values.Select(r => r.Def))
-            foreach (var arc in Arcs().Where(a => a.GetProperty("chapter").GetInt32() == region.Chapter))
+            foreach (var arc in Arcs().Where(a => a.GetProperty("region").GetString() == region.Id))
                 foreach (var beat in arc.GetProperty("beats").EnumerateArray())
                     yield return (region, beat);
     }

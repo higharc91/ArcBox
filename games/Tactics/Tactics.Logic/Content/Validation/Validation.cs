@@ -7,7 +7,7 @@ using ArcBox.Sdk;
 namespace Tactics.Logic;
 
 /// <summary>What a content reference points at; see <see cref="Validation.Resolve"/>.</summary>
-internal enum RefKind { Ability, Passive, AbilityOrPassive, Condition, Monster, Item, Weapon, Armor, Map, AiProfile, Art }
+internal enum RefKind { Ability, Passive, AbilityOrPassive, Condition, Monster, Item, Weapon, Armor, Map, AiProfile, Surface, Art }
 
 /// <summary>A reference from one content file to an id, checked once every pack is loaded.</summary>
 internal sealed record ContentRef(RefKind Kind, string Id, string File, string Pointer);
@@ -24,6 +24,8 @@ internal sealed record MapContent(MapDef Def, BattleMap Map);
 /// </summary>
 internal sealed partial class Validation(ArtManifest? art)
 {
+    internal ArtManifest? Art => art;
+
     /// <summary>The largest ability or effect range, in tiles.</summary>
     public const int MaxRange = 12;
 

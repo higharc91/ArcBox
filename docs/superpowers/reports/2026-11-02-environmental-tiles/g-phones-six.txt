@@ -1,0 +1,314 @@
+04:08:23 Ana joined HBCX
+04:08:23 Bo joined HBCX
+04:08:23 Cy joined HBCX
+04:08:23 Dee joined HBCX
+04:08:23 Eli joined HBCX
+04:08:23 Fen joined HBCX
+04:08:23 Game on
+04:08:29 Ana picks fighter
+04:08:35 Bo picks cleric
+04:08:41 Cy picks rogue
+04:08:47 Dee picks wizard
+04:08:53 Eli picks paladin
+04:08:59 Fen picks ranger
+04:09:04 CHAPTER 1: ch1_mayors_request at 33,59
+04:09:07 CHAPTER Cy walks 5 steps from 26,58 to ch1_mayors_request
+04:09:09 CHAPTER Cy taps Talk: ch1_mayors_request
+04:09:09 CHAPTER ch1_mayors_request begins
+04:09:09 LINE ch1_mayor_open_1 narrator
+04:09:10 Cy skips line ch1_mayor_open_1
+04:09:10 LINE ch1_mayor_open_2 narrator
+04:09:11 Cy skips line ch1_mayor_open_2
+04:09:11 LINE ch1_mayor_open_3 Pip Ashdown
+04:09:12 Cy skips line ch1_mayor_open_3
+04:09:13 LINE ch1_mayor_open_4 Bree Tallow
+04:09:14 Cy skips line ch1_mayor_open_4
+04:09:14 LINE ch1_mayor_halden_1 Halden Varrow
+04:09:15 Cy skips line ch1_mayor_halden_1
+04:09:15 LINE ch1_mayor_halden_2 Halden Varrow
+04:09:16 Cy skips line ch1_mayor_halden_2
+04:09:16 LINE ch1_mayor_halden_3 Dagna Holt
+04:09:17 Cy skips line ch1_mayor_halden_3
+04:09:18 Cy votes goblins
+04:09:26 LINE ch1_mayor_goblins_1 Halden Varrow
+04:09:27 Cy skips line ch1_mayor_goblins_1
+04:09:27 LINE ch1_mayor_goblins_2 Dagna Holt
+04:09:28 Cy skips line ch1_mayor_goblins_2
+04:09:28 LINE ch1_mayor_goblins_3 Bree Tallow
+04:09:29 Cy skips line ch1_mayor_goblins_3
+04:09:29 LINE ch1_mayor_goblins_4 Halden Varrow
+04:09:30 Cy skips line ch1_mayor_goblins_4
+04:09:31 LINE ch1_mayor_close_1 narrator
+04:09:32 Cy skips line ch1_mayor_close_1
+04:09:32 LINE ch1_mayor_close_2 Pip Ashdown
+04:09:33 Cy skips line ch1_mayor_close_2
+04:09:33 LINE ch1_mayor_close_3 The Hooded Stranger
+04:09:34 Cy skips line ch1_mayor_close_3
+04:09:34 LINE ch1_mayor_close_4 Halden Varrow
+04:09:35 Cy skips line ch1_mayor_close_4
+04:09:36 CHAPTER ch1_mayors_request is over
+04:09:38 CHAPTER 2: ch1_the_ford_choice at 94,59
+04:09:42 CHAPTER Cy walks 109 steps from 31,57 to ch1_the_ford_choice
+04:10:23 CHAPTER Cy taps Talk: ch1_the_ford_choice
+04:10:23 CHAPTER ch1_the_ford_choice begins
+04:10:23 LINE ch1_ford_open_1 narrator
+04:10:24 Cy skips line ch1_ford_open_1
+04:10:24 LINE ch1_ford_open_2 narrator
+04:10:25 Cy skips line ch1_ford_open_2
+04:10:25 LINE ch1_ford_open_3 Halden Varrow
+04:10:26 Cy skips line ch1_ford_open_3
+04:10:27 LINE ch1_ford_open_4 Dagna Holt
+04:10:28 Cy skips line ch1_ford_open_4
+04:10:28 Cy votes why
+04:10:33 LINE ch1_ford_why_1 Halden Varrow
+04:10:35 Cy skips line ch1_ford_why_1
+04:10:35 Cy votes insight
+04:10:41 Ana picks Bo to roll insight
+04:10:41 Bo picks Bo to roll insight
+04:10:41 Cy picks Bo to roll insight
+04:10:41 Dee picks Bo to roll insight
+04:10:41 Eli picks Bo to roll insight
+04:10:41 Fen picks Bo to roll insight
+04:10:48 LINE ch1_ford_why_pass_1 narrator
+04:10:49 Cy skips line ch1_ford_why_pass_1
+04:10:49 LINE ch1_ford_why_pass_2 Halden Varrow
+04:10:50 Cy skips line ch1_ford_why_pass_2
+04:10:50 LINE ch1_ford_cases_1 Dagna Holt
+04:10:51 Cy skips line ch1_ford_cases_1
+04:10:51 LINE ch1_ford_cases_2 Dagna Holt
+04:10:52 Cy skips line ch1_ford_cases_2
+04:10:53 LINE ch1_ford_cases_3 Bree Tallow
+04:10:54 Cy skips line ch1_ford_cases_3
+04:10:54 LINE ch1_ford_cases_4 Bree Tallow
+04:10:55 Cy skips line ch1_ford_cases_4
+04:10:55 LINE ch1_ford_cases_5 Halden Varrow
+04:10:56 Cy skips line ch1_ford_cases_5
+04:10:56 LINE ch1_ford_vote_1 Halden Varrow
+04:10:57 Cy skips line ch1_ford_vote_1
+04:10:58 Ana votes force
+04:10:58 Bo votes force
+04:10:58 Cy votes force
+04:10:58 Dee votes force
+04:10:58 Eli votes force
+04:10:58 Fen votes force
+04:11:01 LINE ch1_ford_force_1 Dagna Holt
+04:11:02 Cy skips line ch1_ford_force_1
+04:11:02 LINE ch1_ford_force_2 Bree Tallow
+04:11:03 Cy skips line ch1_ford_force_2
+04:11:04 LINE ch1_ford_force_3 Halden Varrow
+04:11:05 Cy skips line ch1_ford_force_3
+04:11:07 LINE ch1_dawn_open_1 narrator
+04:11:08 Cy skips line ch1_dawn_open_1
+04:11:08 LINE ch1_dawn_open_2 Mother Skarrow
+04:11:09 Cy skips line ch1_dawn_open_2
+04:11:10 LINE ch1_dawn_open_3 Mother Skarrow
+04:11:11 Cy skips line ch1_dawn_open_3
+04:11:11 LINE ch1_dawn_open_4 Dagna Holt
+04:11:12 Cy skips line ch1_dawn_open_4
+04:11:12 Cy ends the turn
+04:11:13 Fen ends the turn
+04:11:27 Dee ends the turn
+04:11:27 Bo ends the turn
+04:11:30 Ana ends the turn
+04:11:31 Eli ends the turn
+04:11:31 Cy ends the turn
+04:11:31 Fen ends the turn
+04:11:40 Dee ends the turn
+04:11:40 Bo ends the turn
+04:11:43 Ana moves
+04:11:43 Ana ends the turn
+04:11:43 Eli moves
+04:11:44 Eli ends the turn
+04:11:44 Cy moves
+04:11:44 Cy ends the turn
+04:11:44 Fen uses Hail of Thorns on Mother Skarrow
+04:11:45 Fen ends the turn
+04:12:00 Dee moves
+04:12:00 Dee uses Magic Missile on Mother Skarrow
+04:12:00 Dee ends the turn
+04:12:00 Bo moves
+04:12:01 Bo uses Guiding Bolt on Mother Skarrow
+04:12:01 Bo ends the turn
+04:12:06 Ana moves back
+04:12:06 Ana ends the turn
+04:12:06 Eli uses Cure Wounds on Dee
+04:12:06 Eli ends the turn
+04:12:07 Cy moves back
+04:12:07 Cy ends the turn
+04:12:07 Fen ends the turn
+04:12:21 Dee uses Magic Missile on Mother Skarrow
+04:12:22 Dee ends the turn
+04:12:22 Bo uses Guiding Bolt on Mother Skarrow
+04:12:22 Bo ends the turn
+04:12:26 Ana ends the turn
+04:12:27 Eli uses Cure Wounds on Dee
+04:12:27 Eli ends the turn
+04:12:27 Cy ends the turn
+04:12:27 Fen ends the turn
+04:12:46 Dee uses Magic Missile on Goblin Archer
+04:12:47 Dee ends the turn
+04:12:47 Bo moves back
+04:12:47 Bo: the foes keep away, so the party goes after them
+04:12:47 Bo ends the turn
+04:12:50 Ana moves
+04:12:50 Ana ends the turn
+04:12:50 Eli moves
+04:12:50 Eli ends the turn
+04:12:51 Cy moves
+04:12:51 Cy ends the turn
+04:12:51 Fen moves
+04:12:51 Fen uses Hail of Thorns on Goblin Archer
+04:12:52 Fen ends the turn
+04:13:04 Dee moves
+04:13:04 Dee ends the turn
+04:13:05 Bo moves
+04:13:05 Bo ends the turn
+04:13:08 Ana moves
+04:13:08 Ana ends the turn
+04:13:09 Eli moves
+04:13:09 Eli ends the turn
+04:13:09 Cy moves
+04:13:09 Cy ends the turn
+04:13:10 Fen moves
+04:13:10 Fen ends the turn
+04:13:23 Dee moves
+04:13:23 Dee ends the turn
+04:13:24 Bo moves
+04:13:24 Bo ends the turn
+04:13:28 Ana moves
+04:13:28 Ana uses Potion of Healing on Dee
+04:13:28 Ana ends the turn
+04:13:29 Eli moves
+04:13:29 Eli ends the turn
+04:13:29 Cy moves
+04:13:29 Cy ends the turn
+04:13:30 Fen moves
+04:13:30 Fen uses Attack on Mother Skarrow
+04:13:30 Fen ends the turn
+04:13:46 Dee uses Potion of Healing on Cy
+04:13:46 Dee uses Magic Missile on Mother Skarrow
+04:13:46 Dee ends the turn
+04:13:47 Bo ends the turn
+04:13:49 Ana moves
+04:13:49 Ana ends the turn
+04:13:49 Eli moves
+04:13:50 Eli uses Attack on Mother Skarrow
+04:14:01 Won at Storming the Ford: Ana +300 XP, Bo +300 XP, Cy +300 XP, Dee +300 XP, Eli +300 XP, Fen +300 XP
+04:14:03 LINE ch1_bridge_cost_open_1 narrator
+04:14:04 Cy skips line ch1_bridge_cost_open_1
+04:14:04 LINE ch1_bridge_cost_open_2 Mother Skarrow
+04:14:05 Cy skips line ch1_bridge_cost_open_2
+04:14:06 LINE ch1_bridge_cost_open_3 Mother Skarrow
+04:14:07 Cy skips line ch1_bridge_cost_open_3
+04:14:07 Cy votes song
+04:14:14 LINE ch1_bridge_cost_song_1 Mother Skarrow
+04:14:15 Cy skips line ch1_bridge_cost_song_1
+04:14:15 LINE ch1_bridge_cost_song_2 narrator
+04:14:16 Cy skips line ch1_bridge_cost_song_2
+04:14:17 LINE ch1_bridge_cost_over_1 Dagna Holt
+04:14:18 Cy skips line ch1_bridge_cost_over_1
+04:14:18 LINE ch1_bridge_cost_over_2 Dagna Holt
+04:14:19 Cy skips line ch1_bridge_cost_over_2
+04:14:19 CHAPTER ch1_the_ford_choice is over
+04:14:21 CHAPTER 3: ch1_old_maud at 132,93
+04:14:27 CHAPTER Cy walks 45 steps from 95,57 to ch1_old_maud
+04:14:27 CHAPTER step 1 (e) went to 108,59, not 96,56: routing again
+04:14:32 CHAPTER Cy walks 33 steps from 108,59 to ch1_old_maud (route 2)
+04:14:44 CHAPTER Cy taps Look around: ch1_old_maud
+04:14:44 CHAPTER ch1_old_maud begins
+04:14:44 LINE ch1_maud_open_1 narrator
+04:14:45 Cy skips line ch1_maud_open_1
+04:14:45 LINE ch1_maud_open_2 narrator
+04:14:46 Cy skips line ch1_maud_open_2
+04:14:46 LINE ch1_maud_open_3 Old Maud
+04:14:47 Cy skips line ch1_maud_open_3
+04:14:48 Cy votes fell
+04:14:54 LINE ch1_maud_fell_1 Old Maud
+04:14:55 Cy skips line ch1_maud_fell_1
+04:14:55 LINE ch1_maud_fell_2 Old Maud
+04:14:56 Cy skips line ch1_maud_fell_2
+04:14:56 LINE ch1_maud_fell_3 Old Maud
+04:14:57 Cy skips line ch1_maud_fell_3
+04:14:57 LINE ch1_maud_fell_4 Old Maud
+04:14:58 Cy skips line ch1_maud_fell_4
+04:14:59 LINE ch1_maud_fell_5 narrator
+04:15:00 Cy skips line ch1_maud_fell_5
+04:15:00 LINE ch1_maud_fell_6 Old Maud
+04:15:01 Cy skips line ch1_maud_fell_6
+04:15:01 LINE ch1_maud_fell_7 The Hooded Stranger
+04:15:02 Cy skips line ch1_maud_fell_7
+04:15:02 Cy votes who
+04:15:09 LINE ch1_maud_who_1 Old Maud
+04:15:10 Cy skips line ch1_maud_who_1
+04:15:10 LINE ch1_maud_bye_1 Old Maud
+04:15:11 Cy skips line ch1_maud_bye_1
+04:15:11 LINE ch1_maud_bye_2 Old Maud
+04:15:12 Cy skips line ch1_maud_bye_2
+04:15:12 CHAPTER ch1_old_maud is over
+04:15:14 CHAPTER 4: ch1_the_ember at 99,99
+04:15:20 CHAPTER Cy walks 72 steps from 130,91 to ch1_the_ember
+04:15:54 CHAPTER Cy taps Talk: ch1_the_ember
+04:15:54 CHAPTER ch1_the_ember begins
+04:15:55 LINE ch1_docks_open_1 narrator
+04:15:56 Cy skips line ch1_docks_open_1
+04:15:56 LINE ch1_docks_open_2 Pip Ashdown
+04:15:57 Cy skips line ch1_docks_open_2
+04:15:57 LINE ch1_docks_open_3 narrator
+04:15:58 Cy skips line ch1_docks_open_3
+04:15:58 Cy votes cut
+04:16:06 LINE ch1_docks_rook_1 Rook
+04:16:07 Cy skips line ch1_docks_rook_1
+04:16:07 LINE ch1_docks_rook_2 narrator
+04:16:08 Cy skips line ch1_docks_rook_2
+04:16:09 LINE ch1_docks_rook_3 Rook
+04:16:10 Cy skips line ch1_docks_rook_3
+04:16:10 Cy votes killing
+04:16:19 LINE ch1_docks_killing_1 Rook
+04:16:20 Cy skips line ch1_docks_killing_1
+04:16:20 LINE ch1_docks_killing_2 Rook
+04:16:21 Cy skips line ch1_docks_killing_2
+04:16:22 LINE ch1_docks_killing_3 Rook
+04:16:23 Cy skips line ch1_docks_killing_3
+04:16:23 LINE ch1_docks_close_1 Pip Ashdown
+04:16:24 Cy skips line ch1_docks_close_1
+04:16:24 LINE ch1_docks_close_2 Pip Ashdown
+04:16:25 Cy skips line ch1_docks_close_2
+04:16:27 LINE ch1_kindler_open_1 narrator
+04:16:28 Cy skips line ch1_kindler_open_1
+04:16:29 LINE ch1_kindler_open_2 Maren Sorrel
+04:16:30 Cy skips line ch1_kindler_open_2
+04:16:30 LINE ch1_kindler_open_3 Maren Sorrel
+04:16:31 Cy skips line ch1_kindler_open_3
+04:16:31 LINE ch1_kindler_open_4 Mother Aubrine
+04:16:32 Cy skips line ch1_kindler_open_4
+04:16:33 LINE ch1_kindler_open_5 Maren Sorrel
+04:16:34 Cy skips line ch1_kindler_open_5
+04:16:34 LINE ch1_kindler_open_6 narrator
+04:16:35 Cy skips line ch1_kindler_open_6
+04:16:35 Cy votes slain
+04:16:43 LINE ch1_kindler_slain_1 Maren Sorrel
+04:16:44 Cy skips line ch1_kindler_slain_1
+04:16:44 LINE ch1_kindler_pitch_1 Maren Sorrel
+04:16:45 Cy skips line ch1_kindler_pitch_1
+04:16:46 Cy votes careful
+04:16:51 LINE ch1_kindler_done_1 narrator
+04:16:52 Cy skips line ch1_kindler_done_1
+04:16:54 LINE ch1_four_more_open_1 narrator
+04:16:55 Cy skips line ch1_four_more_open_1
+04:16:55 LINE ch1_four_more_open_2 The Hooded Stranger
+04:16:56 Cy skips line ch1_four_more_open_2
+04:16:56 Cy votes who
+04:17:03 LINE ch1_four_more_who_1 The Hooded Stranger
+04:17:04 Cy skips line ch1_four_more_who_1
+04:17:04 LINE ch1_four_more_where_1 The Hooded Stranger
+04:17:05 Cy skips line ch1_four_more_where_1
+04:17:06 LINE ch1_four_more_where_2 The Hooded Stranger
+04:17:07 Cy skips line ch1_four_more_where_2
+04:17:07 LINE ch1_four_more_where_4 The Hooded Stranger
+04:17:08 Cy skips line ch1_four_more_where_4
+04:17:08 LINE ch1_four_more_where_3 narrator
+04:17:09 Cy skips line ch1_four_more_where_3
+04:17:10 CHAPTER ch1_the_ember is over
+04:17:12 CHAPTER the card: Chapter I · The Bridge at the Ford
+04:17:24 CHAPTER walking on: 4 steps w
+04:17:24 Session over: The party is level 1; 1 battles won.

@@ -1,0 +1,6 @@
+  Discovering: Tactics.Logic.Tests
+  Discovered:  Tactics.Logic.Tests
+  Starting:    Tactics.Logic.Tests
+  Finished:    Tactics.Logic.Tests (ID = 'fd7f52b818c59665298501dbc9c9e0f62b5ce9176028437723ec3c633c0d289a')
+=== TEST EXECUTION SUMMARY ===
+   Tactics.Logic.Tests  Total: 71, Errors: 0, Failed: 0, Skipped: 0, Not Run: 0, Time: 1.024s

@@ -1,0 +1,15 @@
+{
+  "method": "ContentPackRegistry ordered path + SHA256 file inventory; raw file bodies excluding HTTP/index overhead",
+  "beforeBytes": 201146592,
+  "afterBytes": 201517448,
+  "deltaBytes": 370856,
+  "afterMiB": 192.18201446533203,
+  "files": 4814,
+  "beforePackHash": "c2d06696c35c8aa9d3cf2b3dac796cd49e697357254a78506af734b1bed752c9",
+  "afterPackHash": "4768b6dd60fccb5d03b23637dc35c861105edea899f7ec125498007e25e2d674",
+  "productionChanges": [
+    "creatures/halden_varrow.png",
+    "creatures/manifest.json"
+  ],
+  "creditsSpent": 0
+}

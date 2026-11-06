@@ -1,0 +1,31 @@
+{
+  "name": "wardenflame-imagegen-townsfolk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline image-generated NPC review tooling; no game dependencies or API credentials",
+  "scripts": {
+    "build-aubrine": "node mother-aubrine/build-review.cjs && node mother-aubrine/build-portraits.cjs",
+    "verify-aubrine": "node mother-aubrine/verify-review.cjs",
+    "build-tobin": "node tobin-fell/build-review.cjs && node tobin-fell/build-portraits.cjs && node tobin-fell/build-closeup.cjs",
+    "verify-tobin": "node tobin-fell/verify-review.cjs",
+    "build-lark": "node lark/build-review.cjs && node lark/build-portraits.cjs && node lark/build-closeup.cjs",
+    "verify-lark": "node lark/verify-review.cjs && node lark/verify-preserved.cjs",
+    "build-pip": "node pip-ashdown/build-review.cjs && node pip-ashdown/build-portraits.cjs && node pip-ashdown/build-closeup.cjs",
+    "verify-pip": "node pip-ashdown/verify-review.cjs",
+    "build-dagna": "node dagna-holt/build-review.cjs && node dagna-holt/build-portraits.cjs && node dagna-holt/build-closeup.cjs",
+    "verify-dagna": "node dagna-holt/verify-review.cjs && node dagna-holt/verify-receipts.cjs",
+    "build-celandine": "node celandine-marrowby/build-review.cjs && node celandine-marrowby/build-portraits.cjs && node celandine-marrowby/build-closeup.cjs",
+    "verify-celandine": "node celandine-marrowby/verify-review.cjs && node celandine-marrowby/verify-receipts.cjs",
+    "build-rook": "node rook/build-review.cjs && node rook/build-portraits.cjs && node rook/build-closeup.cjs",
+    "verify-rook": "node rook/verify-review.cjs && node rook/verify-receipts.cjs",
+    "build-mother-skarrow": "node mother-skarrow/build-review.cjs && node mother-skarrow/build-portraits.cjs && node mother-skarrow/build-closeup.cjs",
+    "verify-mother-skarrow": "node mother-skarrow/verify-review.cjs && node mother-skarrow/verify-receipts.cjs",
+    "verify-mother-skarrow-installed": "node mother-skarrow/verify-installed.cjs",
+    "build-old-maud": "node old-maud/build-review.cjs && node old-maud/build-portraits.cjs && node old-maud/build-closeup.cjs",
+    "verify-old-maud": "node old-maud/verify-review.cjs && node old-maud/verify-receipts.cjs"
+  },
+  "dependencies": {
+    "gifenc": "1.0.3",
+    "pngjs": "7.0.0"
+  }
+}

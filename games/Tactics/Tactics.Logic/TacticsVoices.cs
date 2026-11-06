@@ -3,8 +3,9 @@ using ArcBox.Sdk.Speech;
 namespace Tactics.Logic;
 
 /// <summary>
-/// Wardenflame's voice themes: one per speaker, so a line with no pre-rendered clip is spoken live (<c>/api/tts</c>) in
-/// the same voice its clips use. The casting's source of truth is <c>tools/tactics-lore/voice-casting.json</c>; a test
+/// Wardenflame's voice themes: one per speaker, matching the authored recordings. Tactics playback uses recordings
+/// only; these registered themes do not enable live fallback. The casting's source of truth is
+/// <c>tools/tactics-lore/voice-casting.json</c>; a test
 /// keeps this list in step with it, and lore characters name their theme in <c>voice.theme</c>.
 /// </summary>
 /// <remarks>
@@ -55,7 +56,8 @@ public static class TacticsVoices
         new(Npc("bree_tallow"), "Bree Tallow: alto, brisk and kind", Voice("Zephyr"), Fallback: new FallbackVoice()),
         new(Npc("celandine_marrowby"), "Lady Celandine Marrowby: smooth, cultured alto", Voice("Autonoe"), Fallback: new FallbackVoice()),
         new(Npc("corvin_ashby"), "Corvin Ashby: light, quick, anxious", Voice("Sadachbia"), Fallback: new FallbackVoice()),
-        new(Npc("dagna_holt"), "Dagna Holt: low, flat, few words", Voice("Callirrhoe"), Fallback: new FallbackVoice()),
+        new(Npc("dagna_holt"), "Dagna Holt: mature veteran, low, flat Northern delivery", Voice("Gacrux"), Fallback: new FallbackVoice()),
+        new(Npc("grisk"), "Grisk: nasal kobold foreman; rendered clips pitch +4", Voice("Algenib"), Fallback: new FallbackVoice(Pitch: 1.2599f)),
         new(Npc("halden_varrow"), "Halden Varrow: warm baritone, hoarse", Voice("Charon"), Fallback: new FallbackVoice()),
         new(Npc("halvard"), "Ser Halvard: deep and hollow inside the helm", Voice("Schedar"), Fallback: new FallbackVoice()),
         new(Npc("hooded_stranger"), "The Hooded Stranger: shares scholarly.low; pitch and echo keep them apart", Voice("Sadaltager"), Fallback: new FallbackVoice()),
@@ -63,14 +65,24 @@ public static class TacticsVoices
         new(Npc("lark"), "Lark: androgynous, musical", Voice("Aoede"), Fallback: new FallbackVoice()),
         new(Npc("maren_sorrel"), "Maren Sorrel: warm, persuasive alto", Voice("Sulafat"), Fallback: new FallbackVoice()),
         new(Npc("mother_aubrine"), "Mother Aubrine: clear mezzo, measured", Voice("Vindemiatrix"), Fallback: new FallbackVoice()),
-        new(Npc("mother_skarrow"), "Mother Skarrow: cracked, rasping", Voice("Laomedeia"), Fallback: new FallbackVoice()),
-        new(Npc("old_maud"), "Old Maud: ancient, papery", Voice("Achernar"), Fallback: new FallbackVoice()),
+        new(Npc("mother_skarrow"), "Mother Skarrow: cracked, rasping", Voice("Kore"), Fallback: new FallbackVoice()),
+        new(Npc("old_maud"), "Old Maud: ancient, papery, unhurried", Voice("Gacrux"), Fallback: new FallbackVoice()),
         new(Npc("oswin_hale"), "Oswin Hale: dry, cold, very old", Voice("Rasalgethi"), Fallback: new FallbackVoice()),
         new(Npc("pip_ashdown"), "Pip Ashdown: a child; shares earnest.high, pitched up", Voice("Leda"), Fallback: new FallbackVoice()),
         new(Npc("rook"), "Rook: dry, low, unhurried", Voice("Umbriel"), Fallback: new FallbackVoice()),
         new(Npc("tobin_fell"), "Tobin Fell: deep, rough bass", Voice("Orus"), Fallback: new FallbackVoice()),
         new(Npc("vorga"), "Vorga: young swagger; clear and loud", Voice("Iapetus"), Fallback: new FallbackVoice()),
         new(Npc("ysolde"), "Ysolde: shares wry.high; fey shimmer and pitch keep them apart", Voice("Despina"), Fallback: new FallbackVoice()),
+        new(Npc("townsfolk_farmer"), "Ashen Ford farmer", Voice("Charon"), Fallback: new FallbackVoice(Pitch: 0.8909f)),
+        new(Npc("townsfolk_farmhand"), "Ashen Ford farmhand", Voice("Achird"), Fallback: new FallbackVoice(Pitch: 1.1225f)),
+        new(Npc("townsfolk_fisher"), "Ashen Ford fisher", Voice("Algenib"), Fallback: new FallbackVoice(Pitch: 0.8909f)),
+        new(Npc("townsfolk_merchant"), "Ashen Ford merchant", Voice("Zubenelgenubi"), Fallback: new FallbackVoice(Pitch: 1.1225f)),
+        new(Npc("townsfolk_guard"), "Ashen Ford guard", Voice("Fenrir"), Fallback: new FallbackVoice(Pitch: 0.8909f)),
+        new(Npc("townsfolk_barmaid"), "Ashen Ford barmaid", Voice("Zephyr"), Fallback: new FallbackVoice(Pitch: 1.1225f)),
+        new(Npc("townsfolk_child"), "Ashen Ford child", Voice("Laomedeia"), Fallback: new FallbackVoice(Pitch: 1.2599f)),
+        new(Npc("townsfolk_goblin_archer"), "Ashen Ford goblin archer", Voice("Enceladus"), Fallback: new FallbackVoice(Pitch: 0.8409f)),
+        new(Npc("townsfolk_goblin_cutthroat"), "Ashen Ford goblin cutthroat", Voice("Iapetus"), Fallback: new FallbackVoice(Pitch: 0.8409f)),
+        new(Npc("townsfolk_goblin_spear"), "Ashen Ford goblin spear", Voice("Orus"), Fallback: new FallbackVoice(Pitch: 0.7937f)),
         new(PlayerVoice("earnest", "high"), "Player voice: earnest, high", Voice("Leda"), Fallback: new FallbackVoice()),
         new(PlayerVoice("earnest", "low"), "Player voice: earnest, low", Voice("Achird"), Fallback: new FallbackVoice()),
         new(PlayerVoice("fierce", "high"), "Player voice: fierce, high", Voice("Pulcherrima"), Fallback: new FallbackVoice()),

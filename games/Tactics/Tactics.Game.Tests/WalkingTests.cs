@@ -1,4 +1,8 @@
+using ArcBox.Sdk.Protocol;
+using System.Text.Json.Nodes;
+using System.Text;
 using System.Text.Json;
+using System.Collections.Immutable;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
@@ -49,7 +53,10 @@ public sealed class WalkingTests
     /// <summary>A session already in the world at <paramref name="at"/>, everyone here, with player 0 leading.</summary>
     private static Session At(Tile at)
     {
-        var s = new Session(document: DocumentAt(Saved(at)));
+        // These tests measure the walking controller after optional encounters have been cleared.
+        // Mob timers, contact and packet costs are covered in MobRuntimeTests.
+        var world = Saved(at) with { MobChapter = 1, MobsBeaten = [.. Rules.Mobs.Values.SelectMany(m => m).Select(m => m.Id)] };
+        var s = new Session(document: DocumentAt(world));
         s.Harness.StartCampaign(s.Lease);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
@@ -871,11 +878,58 @@ public sealed class WalkingTests
 
         Hold(s, "se", 15);
 
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(Party(s), ArcJson.Options).Length < 1024);
+        // A kilobyte, plus each walker's colour (",\"color\":\"#rrggbb\"", 20 bytes; the character screens, 2026-11-01). The walk's own part:
+        // the region's things ride along beside it, and are weighed on their own below.
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(Party(s)), ArcJson.Options).Length < 1024 + 4 * 20);
+    }
+
+    /// <summary>The core walking cost without region things, discovery speech and wall plugs. The real patch budgets below include them all.</summary>
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null, ThingSpeech = null, Plugs = null, Gold = null, Traders = null };
+
+    /// <summary>One network packet's payload: a 1,500-byte frame less the IP, TCP and TLS headers (issue #77).</summary>
+    private const int Packet = 1420;
+
+    /// <summary>The TV's view as the server sends it: whole first, then each change as a patch against the last (issue #77).</summary>
+    private static List<(int Bytes, JsonElement View)> Patches(IEnumerable<string> hostViews)
+    {
+        var sent = new List<(int, JsonElement)>();
+        JsonElement? had = null;
+        foreach (var json in hostViews)
+        {
+            var view = JsonDocument.Parse(json).RootElement.Clone();
+            if (had is { } before)
+            {
+                var patch = HostViewPatch.Diff(before, view)!.ToJsonString();
+                var rebuilt = HostViewPatch.Apply(before, JsonDocument.Parse(patch).RootElement);
+                Assert.True(HostViewPatch.SameJson(view, rebuilt), "the TV rebuilds the server's view exactly");
+                sent.Add((Encoding.UTF8.GetByteCount(patch), view));
+            }
+            had = view;
+        }
+        return sent;
     }
 
     [Fact]
-    public void The_explore_view_stays_under_1300_bytes_for_a_full_party_with_real_ids()
+    public void Every_step_of_a_walk_through_ashen_ford_reaches_the_tv_in_one_packet()
+    {
+        // The whole view carries every seen thing (17 in Ashen Ford, about 190 bytes each), which no longer goes out on each step:
+        // only what changed does.
+        var s = At(Road());
+        var views = new List<string> { HostJson(s) };
+        for (var i = 0; i < 25; i++)
+        {
+            Hold(s, "se", 1);
+            views.Add(HostJson(s));
+        }
+        Walk(s, null);
+        views.Add(HostJson(s));
+
+        Assert.True(Encoding.UTF8.GetByteCount(views[0]) > Packet, "the whole view is over a packet, which is why patches are sent");
+        Assert.All(Patches(views), p => Assert.InRange(p.Bytes, 1, Packet));
+    }
+
+    [Fact]
+    public void A_full_party_of_six_walking_reaches_the_tv_in_one_packet_a_step()
     {
         var doc = TacticsDocument.Read(DocumentAt(Saved(Road())));
         var character = doc.Members.Values.First();
@@ -885,17 +939,40 @@ public sealed class WalkingTests
         var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value, [], 1);
         h.StartCampaign(new FakeCampaignLease(info, full.ToJson()));
 
+        var views = new List<string> { JsonSerializer.Serialize(h.Game.HostView(), ArcJson.Options) };
         h.Input(0, new { action = "walk", data = new { dir = "se" } });
         for (var i = 0; i < 40; i++)
         {
             h.Advance(Ms100);
             h.Input(0, new { action = "walk", data = new { dir = "se" } });
+            var json = JsonSerializer.Serialize(h.Game.HostView(), ArcJson.Options);
+            if (json != views[^1])
+                views.Add(json);    // the platform only sends a view that changed
         }
 
         var party = h.HostView<TacticsHostView>().Explore!;
         Assert.Equal(12, party.Legs.Length);
         Assert.Equal(6, party.Party.Length);
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(party, ArcJson.Options).Length < 1300);
+        var sizes = Patches(views).Select(p => p.Bytes).ToList();
+        Assert.True(sizes.Count >= 12);
+        Assert.All(sizes, b => Assert.InRange(b, 1, Packet));
+    }
+
+    [Fact]
+    public void Opening_one_of_ashen_fords_things_reaches_the_tv_in_one_packet()
+    {
+        // A thing that changes goes as that thing alone, not as all seventeen (the view's arrays of things patch by id).
+        var s = At(Road());
+        var json = HostJson(s);
+        var view = JsonNode.Parse(json)!;
+        var things = view["explore"]!["things"]!.AsArray();
+        Assert.True(things.Count >= 17, "Ashen Ford's seen things, the cave's bounty board among them once #74 lands");
+        var thing = things.First(t => t!["state"]?.GetValue<string>() == "closed")!;
+        thing["state"] = "open";
+        view["explore"]!["thingEvents"] = new JsonArray(new JsonObject { ["seq"] = 1, ["id"] = thing["id"]!.GetValue<string>(), ["what"] = "opened", ["by"] = "Ana", ["line"] = "Empty. The straw at the bottom smells of last year's wheat." });
+
+        var sizes = Patches([json, view.ToJsonString(ArcJson.Options)]);
+        Assert.InRange(Assert.Single(sizes).Bytes, 1, Packet);
     }
 
     [Fact]
@@ -1698,11 +1775,19 @@ public sealed class WalkingTests
 
     private static IEnumerable<Tile> Route(Tile from, Tile to)
     {
+        // Route around authored interactables too: the new bridge approach passes
+        // the ford campfire, which is blocked in the actual walking session.
+        var flags = ImmutableHashSet<string>.Empty;
+        var blocked = Interactables.Blocking(Rules.InteractablesIn("ashen_ford"),
+            ImmutableSortedDictionary<string, InteractableSave>.Empty, flags);
+        var ground = Rules.GroundFor("ashen_ford")!.With(blocked, flags);
+        var danger = Rules.MobsIn("ashen_ford").SelectMany(m => m.Patch).SelectMany(t => new[]
+            { t, new Tile(t.X + 1, t.Y), new Tile(t.X - 1, t.Y), new Tile(t.X, t.Y + 1), new Tile(t.X, t.Y - 1) }).ToHashSet();
         var back = new Dictionary<Tile, Tile> { [from] = from };
         var open = new Queue<Tile>([from]);
         while (open.TryDequeue(out var tile) && tile != to)
-            foreach (var next in WorldWalk.Steps(Ground, tile, ClassDef.DefaultJump))
-                if (back.TryAdd(next, tile))
+            foreach (var next in WorldWalk.Steps(ground, tile, ClassDef.DefaultJump))
+                if (!danger.Contains(next) && back.TryAdd(next, tile))
                     open.Enqueue(next);
         Assert.True(back.ContainsKey(to), $"No way from {from} to {to}.");
         var route = new List<Tile>();

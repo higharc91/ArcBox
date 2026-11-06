@@ -1,0 +1,1 @@
+{"pack": "/workspace/work/ford82-ground-installed/reproduced/content/tactics/base", "tops": 12, "sides": 1, "native_spend": 0, "palette": "ashen_ford", "installed_content_changed": false}

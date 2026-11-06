@@ -240,6 +240,18 @@ public sealed class PhaseScreenTests
         Assert.Equal(new ScreenRow("Bo", "Broken Rib, Scar", null, "+80 XP"), screen.Rows[1]);
     }
 
+    /// <summary>After a loss (the user's rule): the game's one line in the notice slot, and no injury words or "+0 XP" on the heroes.</summary>
+    [Fact]
+    public void A_lost_battle_shows_the_games_one_line_and_no_xp_or_injuries()
+    {
+        var note = TacticsGame.LossNote(woke: true);
+        var screen = PhaseScreen.Of(View("Results", outcome: "Lost", results: [new ResultLine("Ana", 0, []), new ResultLine("Bo", 0, [])])
+            with { ResultNote = note });
+
+        Assert.Equal("You wake at the recovery point. Wounds tended — no XP. Potions used are gone.", screen.Notice);
+        Assert.Equal([new ScreenRow("Ana", "", null, null), new ScreenRow("Bo", "", null, null)], screen.Rows);
+    }
+
     [Theory]
     [InlineData("Lost", "Results · Battle lost")]
     [InlineData("Fled", "Results · The party fled")]

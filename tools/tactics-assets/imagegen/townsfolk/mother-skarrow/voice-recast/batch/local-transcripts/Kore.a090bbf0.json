@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.a090bbf0.wav",
+  "sourceSha256": "e5921bb315a4b8ad7e2179ee8e7b95d6c576594cea7b38e46d8c97f11b47c29d",
+  "duration": 6.64,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.62,
+      "text": " I have buried better than you."
+    },
+    {
+      "start": 3.62,
+      "end": 6.38,
+      "text": " I will not be buried by you."
+    }
+  ],
+  "text": "I have buried better than you. I will not be buried by you.",
+  "secondsToTranscribe": 1.893
+}

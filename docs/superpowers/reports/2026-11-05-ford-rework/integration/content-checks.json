@@ -1,0 +1,36 @@
+{
+  "deck_fuel_cells": [
+    [
+      5,
+      9
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      5,
+      10
+    ],
+    [
+      6,
+      10
+    ],
+    [
+      7,
+      10
+    ]
+  ],
+  "shallows_water_preserved": true,
+  "native_png_count": 138,
+  "binary_alpha_and_palette": true,
+  "only_crossing_checks": "Covered by full WorldTools and presentation suites",
+  "world_exports": {
+    "ashen_ford": "301d14d0bd8505f58ac4b7eb307a82ac9b118417fa7104be2cc91754801ac36c",
+    "cinder_hollow": "07a959d40e89341eb6560072762df07ee4fa68319242d2702174ed7390c9fdcc"
+  }
+}

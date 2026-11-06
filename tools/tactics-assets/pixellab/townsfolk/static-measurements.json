@@ -1,0 +1,67 @@
+[
+  {
+    "file": "current-hero-idle.png",
+    "bounds": [
+      56,
+      50,
+      107,
+      123
+    ],
+    "visibleHeight": 74,
+    "visibleWorldHeight": 37.0,
+    "colours": 40,
+    "sha256": "881d0738cb3a3caec7bcf84fedc28018ca9a3b0253d35afb20f68063d98864d5"
+  },
+  {
+    "file": "static/candidate-1.png",
+    "bounds": [
+      57,
+      29,
+      101,
+      143
+    ],
+    "visibleHeight": 115,
+    "visibleWorldHeight": 57.5,
+    "colours": 30,
+    "sha256": "486eb90f20d6f0e64ce0def50b2d56c5a5628803d758310a5feb48d872d2d687"
+  },
+  {
+    "file": "static/candidate-2.png",
+    "bounds": [
+      55,
+      29,
+      102,
+      143
+    ],
+    "visibleHeight": 115,
+    "visibleWorldHeight": 57.5,
+    "colours": 27,
+    "sha256": "0ad81890f50df8fe9a6fa2f25d773feb404360882ec63d7b14defe7fb316b33c"
+  },
+  {
+    "file": "static/candidate-3.png",
+    "bounds": [
+      57,
+      27,
+      102,
+      143
+    ],
+    "visibleHeight": 117,
+    "visibleWorldHeight": 58.5,
+    "colours": 34,
+    "sha256": "f0eab1f759c60ee93dd87278c640df47c7e4f09644bdb98ff02db1a2c00140cd"
+  },
+  {
+    "file": "static/candidate-4.png",
+    "bounds": [
+      58,
+      27,
+      102,
+      143
+    ],
+    "visibleHeight": 117,
+    "visibleWorldHeight": 58.5,
+    "colours": 26,
+    "sha256": "3c32afcbcb534abba8a3eb93a5c99745d55a470365a574d0cf823127b61c32c2"
+  }
+]

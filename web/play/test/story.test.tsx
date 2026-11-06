@@ -4,6 +4,7 @@ import type { CustomView } from "../src/protocol";
 import { loadModule } from "../src/games/registry";
 import { QUEUE_MS } from "../src/games/tactics/story";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
+import { Feedback, FeedbackContext } from "../src/feedback/feedback";
 
 // Real views from a real session, written by games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs.
 const fixtures = import.meta.glob<{ default: unknown }>("./fixtures/tactics/*.json", { eager: true });
@@ -35,7 +36,41 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.useRealTimers();
+  vi.unstubAllGlobals();
 });
+
+/**
+ * A run of views on one phone with the speaker on, counting its alerts by their buzz (the sound needs an AudioContext,
+ * which tests don't have). The clock starts clear of any alert an earlier test played.
+ */
+let clear = Date.now();
+function phone() {
+  const vibrate = vi.fn(() => true);
+  vi.stubGlobal("navigator", { ...navigator, vibrate });
+  // Each test's fake clock starts again from the real one, so each phone starts an hour past the last.
+  clear += 3_600_000;
+  vi.setSystemTime(clear);
+  const feedback = new Feedback({ getItem: () => null, setItem() {}, removeItem() {} } as never, { unlock() {}, play() {} } as never);
+  const send = vi.fn();
+  const shown = (v: CustomView) => (
+    <FeedbackContext.Provider value={feedback}>
+      <ControllerScreen view={v} send={send} me="Player1" game="tactics" />
+    </FeedbackContext.Provider>
+  );
+  let utils: ReturnType<typeof render> | null = null;
+  const to = (v: CustomView) => {
+    if (utils) utils.rerender(shown(v));
+    else utils = render(shown(v));
+    vi.advanceTimersByTime(10);
+  };
+  /** A reconnect: the screen goes, and the same view comes back. */
+  const remount = (v: CustomView) => {
+    utils?.unmount();
+    utils = null;
+    to(v);
+  };
+  return { send, to, remount, alerts: () => vibrate.mock.calls.length };
+}
 
 describe("dialogue", () => {
   it("shows the line and its speaker", () => {
@@ -88,6 +123,17 @@ describe("dialogue", () => {
     expect(screen.getByText("Rain on the ford.")).toBeTruthy();
     expect(document.querySelector(".tx-say .tx-portrait")).toBeNull();
     expect(document.querySelector(".tx-say.narration")).not.toBeNull();
+  });
+
+  it("says each new line to a screen reader, in a live region that stays put", () => {
+    const { again } = show("dialogue");
+    const live = document.querySelector<HTMLElement>(".tx-story [aria-live='polite']")!;
+    expect(live.textContent).toMatch(/Halden Varrow.*Forty of them, perhaps/);
+    again(view("dialogue", (d) => { d.line = "ch1_ford_open_4"; d.speaker = null; d.portrait = null; d.text = "Rain on the ford."; }, "v2"));
+    expect(document.querySelector(".tx-story [aria-live='polite']")).toBe(live);
+    expect(live.textContent).toBe("Rain on the ford.");
+    again(view("dialogue", (d) => { d.line = null; d.speaker = null; d.text = null; }, "v3"));
+    expect(live.textContent).toBe("The story goes on. Watch the TV.");
   });
 
   it("between lines, shows the scene and no skip", () => {
@@ -163,6 +209,19 @@ describe("votes and choices", () => {
     expect(within(option(/Make your cases/)).queryByText("The party's choice")).toBeNull();
   });
 
+  it("asks who takes a found item, with a vote for each player here (the owner's decision 1)", () => {
+    const { send, again } = show("vote-loot");
+    expect(screen.getByRole("heading", { name: "Who takes the Smoke Bomb?" })).toBeTruthy();
+    expect(screen.getByText("Party vote")).toBeTruthy();
+    expect(within(option(/Player3/)).getByText("Your vote")).toBeTruthy();
+    fireEvent.click(option(/Player2/));
+    expect(send).toHaveBeenLastCalledWith({ action: "vote", data: { option: "pr_member2" } });
+    // The next item's vote is a new question, even between the same players: nothing tapped carries over.
+    again(view("vote-loot", (d) => { d.question = "Who takes the Potion of Healing?"; d.vote = 1; d.mine = null; }, "v2"));
+    expect(screen.getByRole("heading", { name: "Who takes the Potion of Healing?" })).toBeTruthy();
+    expect(screen.queryByText("Your vote")).toBeNull();
+  });
+
   it("offers only the tied options on a tie-break, and names who's away", () => {
     const { send } = show("vote-tie");
     expect(screen.getByText("Tied: you break it")).toBeTruthy();
@@ -224,7 +283,8 @@ describe("votes and choices", () => {
   it("shows a tie-break someone else decides read-only", () => {
     show("vote-tie", (d) => { d.canChoose = false; });
     expect(screen.getByText("Tied: Player1 breaks it")).toBeTruthy();
-    expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-ask"))).toEqual([]);
+    // Nothing to answer with: the only button is the VIP's End session, which isn't the question's.
+    expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-ask") && !b.closest(".tx-walk-host"))).toEqual([]);
   });
 });
 
@@ -289,6 +349,168 @@ describe("skill checks", () => {
   });
 });
 
+describe("a search's check (interactables design §7.4)", () => {
+  it("shows no DC while the party picks who rolls", () => {
+    show("check-search");
+    const head = document.querySelector(".tx-check-head")!;
+    expect(head.textContent).toContain("DC hidden");
+    expect(head.textContent).toContain("Search the area");
+    expect(head.textContent).not.toMatch(/DC \d/);
+  });
+
+  it("rolls with no DC, and says what it found", () => {
+    show("check-search-rolled");
+    const roll = document.querySelector(".tx-roll")! as HTMLElement;
+    expect(roll.textContent).toMatch(/5\s*\+\s*5\s*=\s*10/);
+    expect(roll.textContent).not.toContain("vs DC");
+    expect(within(roll).getByText("Nothing found")).toBeTruthy();
+    expect(roll.getAttribute("aria-label")).not.toContain("DC");
+    cleanup();
+    show("check-search-rolled", (d) => { (d.roll as { success: boolean }).success = true; });
+    expect(within(document.querySelector(".tx-roll")! as HTMLElement).getByText("Found something")).toBeTruthy();
+  });
+});
+
+describe("alerts", () => {
+  it("a who-rolls question right after a vote alerts too: the quiet window is the vote's, not every question's", () => {
+    const p = phone();
+    p.to(view("vote"));
+    expect(p.alerts()).toBe(1);
+    expect(document.querySelector(".tx-ask.arrived")).not.toBeNull();
+    vi.advanceTimersByTime(2500);
+    p.to(view("check-pick", (d) => { d.canChoose = true; }, "v2"));
+    expect(p.alerts()).toBe(2);
+    expect(document.querySelector(".tx-check.arrived")).not.toBeNull();
+  });
+
+  it("a reconnect re-sending the same question stays quiet and still", () => {
+    const p = phone();
+    p.to(view("check-pick", (d) => { d.canChoose = true; }));
+    expect(p.alerts()).toBe(1);
+    vi.advanceTimersByTime(1000);
+    p.remount(view("check-pick", (d) => { d.canChoose = true; }, "v2"));
+    expect(p.alerts()).toBe(1);
+    expect(document.querySelector(".tx-check.arrived")).toBeNull();
+    // Long after, it's an arrival again (a reload, say).
+    vi.advanceTimersByTime(5000);
+    p.remount(view("check-pick", (d) => { d.canChoose = true; }, "v3"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("a question straight after another is a new screen: it alerts, and the same question's next view doesn't", () => {
+    const p = phone();
+    p.to(view("vote"));
+    p.to(view("vote", (d) => { d.mine = "parley"; }, "v2"));
+    expect(p.alerts()).toBe(1);
+    const first = document.querySelector(".tx-ask");
+    p.to(view("choice-leader", undefined, "v3"));
+    expect(p.alerts()).toBe(2);
+    expect(document.querySelector(".tx-ask")).not.toBe(first);
+    expect(document.querySelector(".tx-ask.arrived")).not.toBeNull();
+  });
+
+  it("a question that reuses the last one's option ids is still a new question", () => {
+    const p = phone();
+    p.to(view("vote"));
+    p.to(view("vote", (d) => { (d.options as { label: string }[])[0]!.label = "We'll hold the ford."; }, "v2"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("two skill checks in a row are two questions; the same check's next view is not", () => {
+    const p = phone();
+    const pick = (change?: (d: Record<string, unknown>) => void) => (d: Record<string, unknown>) => { d.canChoose = true; change?.(d); };
+    p.to(view("check-pick", pick()));
+    p.to(view("check-pick", pick((d) => { d.mine = "pr_member2"; }), "v2"));
+    expect(p.alerts()).toBe(1);
+    p.to(view("check-pick", pick((d) => { d.skill = "athletics"; d.title = "We'll swim it."; }), "v3"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("a card added mid-check (someone got a character) is the same check: no alert, no remount, and a held tap still goes", () => {
+    const p = phone();
+    const pick = (change?: (d: Record<string, unknown>) => void) => (d: Record<string, unknown>) => { d.canChoose = true; d.mine = null; change?.(d); };
+    p.to(view("check-pick", pick()));
+    expect(p.alerts()).toBe(1);
+    const first = document.querySelector(".tx-check");
+    act(() => {
+      screen.getByRole("button", { name: /Player2/ }).click();
+      screen.getByRole("button", { name: /Player3/ }).click();      // held behind the first, for the next view
+    });
+    vi.advanceTimersByTime(500);
+    // Buzzes so far: the alert, and the taps' own feedback. From here on, only a send's tap cue may buzz.
+    const [buzzed, sent] = [p.alerts(), p.send.mock.calls.length];
+    p.to(view("check-pick", pick((d) => {
+      const cards = d.cards as { id: string; name: string; player: string }[];
+      cards.push({ ...cards[0]!, id: "pr_member5", name: "Player5", player: "Player5" });
+      d.mine = "pr_member2";
+    }), "v2"));
+
+    expect(p.alerts() - buzzed).toBe(p.send.mock.calls.length - sent);     // no alert
+    expect(document.querySelector(".tx-check")).toBe(first);
+    expect(screen.getByRole("button", { name: /Player5/ })).toBeTruthy();
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([
+      { action: "pickRoller", data: { member: "pr_member2" } },
+      { action: "pickRoller", data: { member: "pr_member3" } },
+    ]);
+    expect(pressed(screen.getByRole("button", { name: /Player3/ }))).toBe("true");
+  });
+
+  it("the same check rolled is a new screen, and so is its tie-break", () => {
+    const p = phone();
+    p.to(view("check-pick", (d) => { d.canChoose = true; }));
+    const first = document.querySelector(".tx-check");
+    p.to(view("check-pick", (d) => { d.canChoose = true; d.tie = true; d.decider = "Player1"; d.tied = ["pr_member2", "pr_member3"]; }, "v2"));
+    const tie = document.querySelector(".tx-check");
+    expect(tie).not.toBe(first);
+    p.to(view("check-rolled", undefined, "v3"));
+    expect(document.querySelector(".tx-check")).not.toBe(tie);
+  });
+
+  it("a tap held behind question 1 never goes out on question 2", () => {
+    const p = phone();
+    p.to(view("vote"));
+    act(() => {
+      option(/parley with the chief/).click();
+      option(/what's it worth/).click();
+    });
+    p.to(view("choice-leader", undefined, "v2"));
+    vi.advanceTimersByTime(QUEUE_MS + 100);
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "parley" } }]);
+    expect(screen.getAllByRole("button").filter((b) => b.closest(".tx-options") && pressed(b) === "true")).toEqual([]);
+  });
+
+  it("a tap held when the vote closes in a tie is dropped: the decider breaks it from the tie-break's view", () => {
+    const p = phone();
+    // A two-way vote that ties: the tie-break offers the very same options.
+    p.to(view("vote", (d) => { d.mine = null; d.options = (d.options as unknown[]).slice(0, 2); }));
+    act(() => {
+      option(/clear the ford by force/).click();
+      option(/parley with the chief/).click();
+    });
+    p.to(view("vote-tie", (d) => { d.mine = "force"; }, "v2"));
+    vi.advanceTimersByTime(QUEUE_MS + 100);
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "force" } }]);
+    expect(pressed(option(/parley with the chief/))).toBe("false");
+    expect(within(option(/clear the ford by force/)).getByText("You voted this earlier")).toBeTruthy();
+  });
+
+  it("a tie-break landing on the decider's phone alerts once; on anyone else's, not at all", () => {
+    const p = phone();
+    p.to(view("vote", (d) => { d.options = (d.options as unknown[]).slice(0, 2); }));
+    vi.advanceTimersByTime(3000);
+    p.to(view("vote-tie", undefined, "v2"));
+    expect(p.alerts()).toBe(2);
+    p.to(view("vote-tie", (d) => { d.mine = "parley"; }, "v3"));
+    expect(p.alerts()).toBe(2);
+    cleanup();
+
+    const q = phone();
+    q.to(view("vote"));
+    q.to(view("vote-tie", (d) => { d.canChoose = false; }, "v2"));
+    expect(q.alerts()).toBe(1);
+  });
+});
+
 describe("Interact", () => {
   it("shows Interact on the walk screen and sends it", () => {
     const { send } = show("walk-interact");
@@ -320,6 +542,19 @@ describe("Interact", () => {
     expect(send.mock.calls.filter((c) => (c[0] as { action: string }).action === "interact").length).toBe(2);
   });
 
+  it("a tapped Interact sleeps without dropping keyboard focus", () => {
+    const { send } = show("walk-interact");
+    const talk = screen.getByRole("button", { name: "Talk" }) as HTMLButtonElement;
+    talk.focus();
+    fireEvent.click(talk);
+    expect(talk.getAttribute("aria-disabled")).toBe("true");
+    expect(talk.disabled).toBe(false);
+    expect(document.activeElement).toBe(talk);
+    // Asleep, a tap or Enter on it sends nothing more.
+    fireEvent.click(talk);
+    expect(send.mock.calls.filter((c) => (c[0] as { action: string }).action === "interact").length).toBe(1);
+  });
+
   it("keeps the pad working when Interact appears", () => {
     const { send, again } = show("walk-leader");
     const zone = document.querySelector<HTMLElement>(".tx-padzone")!;
@@ -341,5 +576,70 @@ describe("Interact", () => {
     expect(pings.length).toBeGreaterThanOrEqual(2);
     expect(pings).toEqual(pings.map(() => ({ action: "walk", data: { dir: "n" } })));
     expect(screen.getByRole("button", { name: "Talk" })).toBeTruthy();
+  });
+});
+
+describe("the VIP's End session in a scene", () => {
+  /** The host menu's places, in order: with no battle list the first is an empty slot, as on the walk screen. */
+  const places = () => [...document.querySelector(".tx-walk-host")!.children];
+
+  it.each([["dialogue-leader"], ["choice-leader"], ["vote-tie"]])("is on the VIP's %s, and on nobody else's", (name) => {
+    show(name);
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
+    cleanup();
+    show(name, (d) => { d.vip = false; });
+    expect(screen.queryByRole("button", { name: "End session" })).toBeNull();
+  });
+
+  it.each([["dialogue"], ["vote"], ["check-pick"], ["check-rolled"]])("isn't on a player's %s", (name) => {
+    show(name);
+    expect(screen.queryByRole("button", { name: "End session" })).toBeNull();
+  });
+
+  it.each([["check-pick"], ["check-rolled"]])("is on a skill check's screen for the VIP (%s)", (name) => {
+    show(name, (d) => { d.vip = true; });
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
+  });
+
+  it.each([["dialogue-leader", ".tx-story-foot"], ["choice-leader", ".tx-options"], ["vote-tie", ".tx-options"]])(
+    "heads %s, above the thumbs (%s), and isn't inside them", (name, thumbs) => {
+      show(name);
+      const menu = document.querySelector(".tx-walk-host")!;
+      const root = menu.parentElement!;
+      expect(root.classList.contains("tx")).toBe(true);
+      expect(root.firstElementChild).toBe(menu);
+      const under = document.querySelector(thumbs)!;
+      expect(under.contains(menu)).toBe(false);
+      expect(menu.compareDocumentPosition(under) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    });
+
+  it("asks first: \"Keep playing\" takes the place of the first tap, and yes ends the session", () => {
+    const { send } = show("dialogue-leader");
+    const at = places().indexOf(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    expect(send).not.toHaveBeenCalledWith({ action: "endSession" });
+    expect(places()[at]!.textContent).toBe("Keep playing");
+    fireEvent.click(places()[at]!);       // a double tap lands on "Keep playing"
+    expect(screen.queryByRole("button", { name: "Yes, end it" })).toBeNull();
+    expect(send).not.toHaveBeenCalledWith({ action: "endSession" });
+
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
+    expect(send).toHaveBeenLastCalledWith({ action: "endSession" });
+  });
+
+  it("works from a question too, and doesn't answer it", () => {
+    const { send } = show("choice-leader");
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
+    expect(send.mock.calls.map((c) => (c[0] as { action: string }).action)).toEqual(["endSession"]);
+  });
+
+  it("lets its confirm lapse by itself", () => {
+    show("dialogue-leader");
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    act(() => { vi.advanceTimersByTime(5000); });
+    expect(screen.queryByRole("button", { name: "Yes, end it" })).toBeNull();
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
   });
 });

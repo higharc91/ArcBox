@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_tTCWq9NJ6Z29CFdsFE4h7gLu",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_JyX7gkJmsDA5hwqQA9UZ7TiS",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_eSjRwXRnM82DvJ26b5VT56qB"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 9.36,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 9,
+            "start": 0,
+            "text": " Sit down, dearie. I've waited a hundred years. I can wait while you sit.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:38.256Z",
+    "updatedAt": "2026-11-05T00:36:47.345Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:38.256Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:38.345Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:47.345Z"
+      }
+    ],
+    "progress": 1
+  }
+}

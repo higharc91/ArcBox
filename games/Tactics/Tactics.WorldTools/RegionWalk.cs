@@ -18,8 +18,14 @@ public sealed class RegionWalk
 
     private readonly Terrain _terrain;
 
-    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps.</summary>
-    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps) => _terrain = WorldGround.Of(region, maps).Terrain;
+    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps, and <paramref name="art"/> its props and buildings.</summary>
+    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art) => _terrain = WorldGround.Of(region, maps, art).Terrain;
+
+    /// <summary>Walking on <paramref name="terrain"/>: a region's ground with things in the way (<see cref="WorldGround.With"/>).</summary>
+    public RegionWalk(Terrain terrain) => _terrain = terrain;
+
+    /// <summary>Walking on an existing <see cref="WorldGround"/>.</summary>
+    public RegionWalk(WorldGround ground) => _terrain = ground.Terrain;
 
     /// <summary>The tiles one legal straight step from <paramref name="t"/>.</summary>
     public IEnumerable<Tile> Steps(Tile t) => WorldWalk.Steps(_terrain, t, Jump);

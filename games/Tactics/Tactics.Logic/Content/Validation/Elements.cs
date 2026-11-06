@@ -73,6 +73,13 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<ConditionDef>(e, file, ptr);
+            if (def?.DamageTaken is { } damage)
+            {
+                var at = Pointer.Append(ptr, "damageTaken");
+                if (!DamageTypes.Contains(damage.Type))
+                    Error(file, Pointer.Append(at, "type"), $"Unknown damage type '{damage.Type}'.");
+                AtLeast(damage.Bonus, 0, file, Pointer.Append(at, "bonus"));
+            }
             if (def?.Implies is { } implies)
                 Ref(RefKind.Condition, implies.Value, file, Pointer.Append(ptr, "implies"));
             if (def?.Static is { MaxHp: not 0 })
@@ -129,7 +136,10 @@ internal sealed partial class Validation
         {
             var def = Deserialize<ItemDef>(e, file, ptr);
             if (def is not null)
+            {
                 Ref(RefKind.Ability, def.Use.Value, file, Pointer.Append(ptr, "use"));
+                if (def.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
+            }
             return def;
         });
 
@@ -138,13 +148,19 @@ internal sealed partial class Validation
         => Guarded(file, ptr, () =>
         {
             var def = Deserialize<WeaponDef>(e, file, ptr);
+            if (def?.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
             if (def is { Range: < 1 })
                 Error(file, Pointer.Append(ptr, "range"), "The range must be at least 1.");
             return def;
         });
 
     /// <summary>A suit of armour.</summary>
-    public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<ArmorDef>(e, file, ptr));
+    public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () =>
+    {
+        var def = Deserialize<ArmorDef>(e, file, ptr);
+        if (def?.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
+        return def;
+    });
 
     /// <summary>An injury: a weight of at least 1, its hook name and its effects, which need a hook to run on.</summary>
     public InjuryDef? Injury(JsonElement e, string file, string ptr)
@@ -159,6 +175,8 @@ internal sealed partial class Validation
             if (!EffectsIn(e, "effects", file, ptr, inSave: false))
                 return null;
             var def = Deserialize<InjuryDef>(e, file, ptr);
+            if (def is not null && def.Mends is not ("rest" or "spirit" or "body"))
+                Error(file, Pointer.Append(ptr, "mends"), "An injury mends with rest, spirit or body recovery.");
             if (def is { Weight: < 1 })
                 Error(file, Pointer.Append(ptr, "weight"), "The weight must be at least 1.");
             if (def is { Hook: null, Effects.IsEmpty: false })
@@ -238,7 +256,7 @@ internal sealed partial class Validation
                     Error(file, Pointer.Append(at, "at"), $"Prop '{prop.Id}' at {prop.At} is outside the {w}x{h} map.");
                 if (!MapDef.CoverNames.ContainsKey(prop.Cover))
                     Error(file, Pointer.Append(at, "cover"),
-                        $"Cover '{prop.Cover}' isn't allowed in content (use \"none\", \"half\" or \"three_quarters\").");
+                        $"Cover '{prop.Cover}' isn't allowed in content (use \"none\", \"half\", \"three_quarters\" or \"full\").");
             }
             foreach (var (zone, zoneTiles) in def.Zones)
                 for (var i = 0; i < zoneTiles.Length; i++)

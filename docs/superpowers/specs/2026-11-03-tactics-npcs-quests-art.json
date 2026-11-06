@@ -1,0 +1,471 @@
+{
+  "notes": "Prompt-only brief for issue #73. No art or SFX generated. Runtime uses procedural CSS and TV Canvas stand-ins. UI nine-slices keep centres quiet; fonts render separately. Coordinates are native pixel dimensions.",
+  "sets": {
+    "fx": {
+      "props": {
+        "quest_give": {
+          "variants": {
+            "default": "quest_give.png"
+          },
+          "size": [
+            16,
+            24
+          ],
+          "anchor": [
+            8,
+            23
+          ],
+          "frames": 4,
+          "fps": 5,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "effect"
+          ]
+        },
+        "quest_turnin": {
+          "variants": {
+            "default": "quest_turnin.png"
+          },
+          "size": [
+            16,
+            24
+          ],
+          "anchor": [
+            8,
+            23
+          ],
+          "frames": 4,
+          "fps": 5,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "effect"
+          ]
+        },
+        "talk": {
+          "variants": {
+            "default": "talk.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "effect"
+          ]
+        },
+        "waypoint": {
+          "variants": {
+            "default": "waypoint.png"
+          },
+          "size": [
+            24,
+            24
+          ],
+          "anchor": [
+            12,
+            23
+          ],
+          "frames": 4,
+          "fps": 4,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "effect"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "fx.quest_give": {
+            "prompt": "A small warm gold exclamation mark bobbing above an NPC. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "existing beat exclamation marker"
+          },
+          "fx.quest_turnin": {
+            "prompt": "A small warm gold question mark bobbing above an NPC. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural question marker"
+          },
+          "fx.talk": {
+            "prompt": "Small cream speech bubble with three dark dots. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "existing question emote / caption"
+          },
+          "fx.waypoint": {
+            "prompt": "Four-frame soft gold quest target ring, gentle pulse, transparent centre, dark outline for grass and stone. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural gold marker with dark halo"
+          }
+        }
+      }
+    },
+    "icons": {
+      "props": {
+        "journal": {
+          "variants": {
+            "default": "journal.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "quest_done": {
+          "variants": {
+            "default": "quest_done.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "quest_failed": {
+          "variants": {
+            "default": "quest_failed.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "seal_active": {
+          "variants": {
+            "default": "seal_active.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "seal_done": {
+          "variants": {
+            "default": "seal_done.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "seal_failed": {
+          "variants": {
+            "default": "seal_failed.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "pin_ribbon": {
+          "variants": {
+            "default": "pin_ribbon.png"
+          },
+          "size": [
+            12,
+            20
+          ],
+          "anchor": [
+            6,
+            19
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "icons.journal": {
+            "prompt": "Closed brown leather field journal with ember sigil. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "book glyph"
+          },
+          "icons.quest_done": {
+            "prompt": "Gold quest completion tick badge. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "check glyph"
+          },
+          "icons.quest_failed": {
+            "prompt": "Grey quest failure cross badge. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "cross glyph"
+          },
+          "icons.seal_active": {
+            "prompt": "Ember red wax seal, subtle flame impression. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "red disc"
+          },
+          "icons.seal_done": {
+            "prompt": "Gold wax seal, small completion tick impression. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "gold disc"
+          },
+          "icons.seal_failed": {
+            "prompt": "Grey wax seal, broken edge and small cross impression. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "grey disc"
+          },
+          "icons.pin_ribbon": {
+            "prompt": "Muted red ribbon bookmark with forked tail and one gold stitch. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural ribbon polygon"
+          }
+        }
+      }
+    },
+    "ui": {
+      "props": {
+        "quest_banner": {
+          "variants": {
+            "default": "quest_banner.png"
+          },
+          "size": [
+            192,
+            48
+          ],
+          "anchor": [
+            96,
+            47
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "questlog_spread": {
+          "variants": {
+            "default": "questlog_spread.png"
+          },
+          "size": [
+            320,
+            192
+          ],
+          "anchor": [
+            160,
+            191
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "questlog_cover": {
+          "variants": {
+            "default": "questlog_cover.png"
+          },
+          "size": [
+            192,
+            48
+          ],
+          "anchor": [
+            96,
+            47
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "parchment_card": {
+          "variants": {
+            "default": "parchment_card.png"
+          },
+          "size": [
+            128,
+            64
+          ],
+          "anchor": [
+            64,
+            63
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "tracker_frame": {
+          "variants": {
+            "default": "tracker_frame.png"
+          },
+          "size": [
+            192,
+            48
+          ],
+          "anchor": [
+            96,
+            47
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        },
+        "waypoint_arrow": {
+          "variants": {
+            "default": "waypoint_arrow.png"
+          },
+          "size": [
+            16,
+            16
+          ],
+          "anchor": [
+            8,
+            15
+          ],
+          "frames": 1,
+          "fps": 0,
+          "blocks": false,
+          "cover": "none",
+          "height": 0,
+          "tags": [
+            "quest",
+            "ui"
+          ]
+        }
+      },
+      "notes": {
+        "prompts": {
+          "ui.quest_banner": {
+            "prompt": "Nine-slice story panel frame with a tiny ember seal for quest notices; leave the centre clear. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural story panel"
+          },
+          "ui.questlog_spread": {
+            "prompt": "Nine-slice open leather journal, two parchment pages, a subtle centre fold and thin ink rules; no text. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "QuestHud procedural spread"
+          },
+          "ui.questlog_cover": {
+            "prompt": "Tooled dark brown leather header, small ember sigil and room for a title; no lettering. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "CSS leather gradient"
+          },
+          "ui.parchment_card": {
+            "prompt": "Nine-slice warm parchment with restrained worn edges and an ink-brown rule; clear readable centre. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "CSS parchment card"
+          },
+          "ui.tracker_frame": {
+            "prompt": "Nine-slice compact dark leather quest tracker with gold edging and an empty text area. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural dark tracker panel"
+          },
+          "ui.waypoint_arrow": {
+            "prompt": "Gold arrow pointing up, dark outline, readable rotated at a screen edge. Wardenflame palette, pixel art at 1x normally displayed at 2x, crisp one-pixel edges, no antialiasing, no letters, transparent background, top-left light. Animated frames in a horizontal strip. Keep decorative contrast below the text.",
+            "standIn": "procedural triangle on dark disc"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "character_id": "808551e2-cb8d-471b-a5be-6ed59b28e7a7",
+  "mode": "template",
+  "template_animation_id": "breathing-idle",
+  "animation_name": "bree_idle",
+  "directions": [
+    "north-east",
+    "east"
+  ],
+  "ai_freedom": 0,
+  "animation_group_id": "3ef17b07-2db8-4403-9958-af10f1c4ca11"
+}

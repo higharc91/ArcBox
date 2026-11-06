@@ -1,0 +1,144 @@
+{
+  "runtimeErrors": 0,
+  "locations": 10,
+  "bridgeStates": 3,
+  "battleBoards": 1,
+  "images": [
+    {
+      "name": "world-town-square.png",
+      "sha256": "5df122a3abe127a984477f4eda9a97ff1b380a9921d6626946cc1ce2b5468312",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-granary-yard.png",
+      "sha256": "4e46b6ea266bdde29dc29317c6fdc2fff34deed0582fba7ca94bdfa6632d6bd7",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-autumn-fields.png",
+      "sha256": "2469244ceab1be399c0c249feb0d3dcf34383d21a8e9b1409d46034e37d84098",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-windmill-road.png",
+      "sha256": "4679c20bfc530012404de6c24de3eb0a75e725567c16103078e4731c54430529",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-burned-ruins.png",
+      "sha256": "1ec48ba8e69d4a556c7f135779ad4fdad2641c8738d8cb7cc235c0da6e1c48cd",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-riverbank.png",
+      "sha256": "af6a27a2b669c5b09db24f0f22e84f106b54e92100a41a47154d4ba233cdc764",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-mauds-hut.png",
+      "sha256": "9fd80d096be32725827115212ea3a93ee224373a304c4dec235898e653dddbdc",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-docks.png",
+      "sha256": "96d603ff8013a2cbb1618a5502d99be08f4d5e1a4a5072e4e9455715171599fd",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-high-hills.png",
+      "sha256": "f760fb8a0c98723a29bb37fc0da2f81cdadae6a8a16b54f2de574673ef0d4a91",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "world-skarrow-camp.png",
+      "sha256": "0e77b186abf5839206d0612bf3fa962a65b3128d4c9f88cff038afb7b68eabf0",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "fortified-west.png",
+      "sha256": "5f51ad5e2f38c831704c00c44aa5c6772a03c400e0eb0bc86a9fab192f4da0e8",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "fortified-east.png",
+      "sha256": "5792f1d47ccd187f3ece3b197c276e74b68692bbed39d1ffba9d0cd0f91fff2c",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "force-west.png",
+      "sha256": "b45c97d2009296c77e4c5a0a2d0b1b7badbd9995d2c7f8ba525c7050bff9978b",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "force-east.png",
+      "sha256": "b1c4040e612290f8a4eed6aecedb7c3b3bdc04ea59d93ea5750c3a29ff461b4d",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "parley-west.png",
+      "sha256": "237c6bc3cbd61bf59a1ecc30be21c9df7337d6f2a066448c0f8442b4d9c80298",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "parley-east.png",
+      "sha256": "d0eff1d37c8b98c3fa241af59379ba7edad780b338b16f6d95eca0d498c89bd8",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "battle.png",
+      "sha256": "be0af4b10252444db4893e29e638b1bec89c43ea3fc2e1828d92e5a9c084790d",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  ]
+}

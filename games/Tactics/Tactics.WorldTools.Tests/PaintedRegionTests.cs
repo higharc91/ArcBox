@@ -8,6 +8,17 @@ public sealed class PaintedRegionTests
 
     private static readonly Tile A = new(1, 2), B = new(3, 4);
 
+    [Fact]
+    public void Named_markers_keep_their_destination_and_report_duplicate_names()
+    {
+        var painted = Painted() with { NamedSpawns = [("cave_return", new Tile(5, 2))] };
+        var (source, problems) = painted.ToSource();
+        Assert.Empty(problems);
+        Assert.Equal(new Tile(5, 2), source.NamedSpawns["cave_return"]);
+        var duplicate = painted with { NamedSpawns = [("cave_return", new Tile(5, 2)), ("cave_return", new Tile(6, 2))] };
+        Assert.Contains(duplicate.ToSource().Problems, p => p.Contains("'cave_return' is repeated", StringComparison.Ordinal));
+    }
+
     /// <summary>An 8x8 region with every tile painted, so a test's only problem is the one it sets up.</summary>
     private static PaintedRegion Painted() => new("r", "Region", 1, 8, 8)
     {
@@ -188,4 +199,34 @@ public sealed class PaintedRegionTests
     [InlineData(-32.5, 0, -2, 0)]
     public void A_marker_stands_on_the_tile_its_position_falls_in(double x, double y, int tileX, int tileY)
         => Assert.Equal(new Tile(tileX, tileY), PaintedRegion.TileAt(x, y));
+
+    [Fact]
+    public void Erasing_a_prop_leaves_the_ground()
+    {
+        var painted = Painted() with
+        {
+            Heights = new Dictionary<Tile, int> { [A] = 2 },
+            Flags = new Dictionary<Tile, TileFlags> { [A] = TileFlags.Difficult },
+            Props = new Dictionary<Tile, (string Id, string? Variant)> { [A] = ("tree", "green") },
+        };
+
+        var erased = painted with { Props = new Dictionary<Tile, (string Id, string? Variant)>() };
+        var source = erased.ToSource().Source;
+
+        Assert.Equal(new TileInfoNamed(2, Grass, TileFlags.Difficult), source.Get(A));
+        Assert.Empty(source.Props);
+    }
+
+    [Fact]
+    public void Apply_stamp_puts_nothing_on_the_props_layer()
+    {
+        var painted = Painted() with
+        {
+            Stamps = [new RegionStamp("ford", A, 0)],
+        };
+
+        var source = painted.ToSource().Source;
+
+        Assert.Empty(source.Props);
+    }
 }

@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_BJ8jJwke5Jb4TTuWtf6MqidB",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_9xLDN8VyB5rwTfcHBwPi96RV",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_cKPheqto4xqmWtaaDtxm3LY1"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 9.92,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 4.8,
+            "start": 0,
+            "text": " Oh, never touched a shard.",
+            "words": null
+          },
+          {
+            "end": 6.6,
+            "start": 4.8,
+            "text": " Not once.",
+            "words": null
+          },
+          {
+            "end": 9.52,
+            "start": 6.6,
+            "text": " That's why there's still all of me.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:40:32.186Z",
+    "updatedAt": "2026-11-05T00:40:39.396Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:40:32.185Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:40:32.285Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:40:39.396Z"
+      }
+    ],
+    "progress": 1
+  }
+}

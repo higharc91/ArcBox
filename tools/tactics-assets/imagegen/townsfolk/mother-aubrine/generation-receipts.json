@@ -1,0 +1,151 @@
+{
+  "appearanceTrial": "candidate-1.json",
+  "completionCalls": 13,
+  "pixelLabCreditsSpent": 0,
+  "receipts": [
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/rotations-request.json",
+      "retainedCopy": "directional/rotations-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-5253332e-da0f-461e-b9f5-4d20dcdcf737.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "1b561753942da7fe5fe613bde31ee4e56d7d71aa0d972f954b20999c9e1d56f7",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/candidate-1.png": "9fef89fd3edc9cb5d70e87ab0d54d13050cb2710a83b5106688990b15a239aeb"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/south-request.json",
+      "retainedCopy": "directional/south-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-31001f76-3207-4154-9d98-11f262f6fbeb.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "fa4cc5a0aad98275906946aa248e9e9ca2de6735854266ab6407afb7d580c14d",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/south.png": "fc094f9fc3a3bf5bee0a738dfadb2f3afb221863871b3005e41290b1446130e4"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/south-west-request.json",
+      "retainedCopy": "directional/south-west-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-5cc1ad19-0024-4ea4-90ab-91efc3fddc68.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "c630f71fb3ec3e6f9755aecdc94d9aa2ecd9a40be49159a2377f953246bd92e8",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/south-west.png": "6c9b85267a95bfda0c44594fb85094f96aba8bb7ad1d6ce1a1ac6c8c48395307"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/west-request.json",
+      "retainedCopy": "directional/west-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-adee3300-2d7e-4945-a96a-11f1e0af0a3c.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "dc9f56893dac69a02229b84a44c4f3c8f42141b33bf8b0183575a19651c94dba",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/west.png": "0e1a030b54a732d000ca8f31525c05a44357bb0465b402b1867fea0008c024a8"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/north-west-request.json",
+      "retainedCopy": "directional/north-west-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-14a20821-7a84-45bc-a884-4ec10df4e62f.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "52bf60da45508bc32378e8bb58129e484deeaef264937d4ed842241acf44f534",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/north-west.png": "a3973d736e8d2ad94c8411cd66dfee2006d79608c5b7b3e4dc97fee29c740b62"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/north-request.json",
+      "retainedCopy": "directional/north-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-9a704928-5644-40bb-9c75-369cfcb2d081.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "eb939177ee8aae5397a7f29b8a220722e25e1cbcdd18935d576977acfdf6660d",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/north.png": "2b3f8c8f5271c903134eface1d077431aec226201ffa19c893e28d58e9b2460a"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/north-east-request.json",
+      "retainedCopy": "directional/north-east-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-0d3fc5f8-26a2-4ea2-8e0a-05ce13a6e013.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "4333dc8b27f5b3a00657499c89adbb499c399598ce95e84911a6e8b2c4607b4e",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/north-east.png": "002a20a871c73c1c4da03cb4203f5a39c229b34bb21934d50ab41c78a738f4eb"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/east-request.json",
+      "retainedCopy": "directional/east-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-24e050c8-a402-488c-baaa-3972f913d293.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "37b667fff15c70e6d96913a1681b96caa2af8e62268605c83100527c49576fc5",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/east.png": "7a86a65b64ac754fee7c3a095911ee10e49bdfddffdd726c4a104ee0fa4d6f1c"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/south-east-request.json",
+      "retainedCopy": "directional/south-east-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-abb0d2dc-ab31-4ecb-852d-726958580773.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "6023e1af7d39fc6e30766badcdae0099cb397f0c2b338fdef1a9a3faa9e4047f",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/south-east.png": "166251c01740667b66511b5705f595bc80345ebcb85ec0bae09491284e277808"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/south-east-cleanup-request.json",
+      "retainedCopy": "directional/south-east-clean-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-ada3be39-2454-4faf-98cf-eabb550726c9.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "759caa6e6e3414609db66b778fd187f0ef3b7fbf625e83f232410f0c84884efc",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/south-east-source.png": "6023e1af7d39fc6e30766badcdae0099cb397f0c2b338fdef1a9a3faa9e4047f"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "portraits-request.json",
+      "retainedCopy": "portraits-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-1bc304f1-c58a-459e-b9ab-e3a01b2dd64d.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "e0810add7288a469dfc471c07541c9aacf5d92252b61a012a58c3fb84a183f70",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/rotations/south.png": "fc094f9fc3a3bf5bee0a738dfadb2f3afb221863871b3005e41290b1446130e4",
+        "tools/tactics-assets/concepts/townsfolk/generated/character_mother_aubrine.png": "aff8f606f5cca2bfbc71df44e951e5a63a2c3c01fc6752bf81f9535a77c9f66b"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "portraits-cleanup-request.json",
+      "retainedCopy": "portraits-clean-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-67614302-15b0-4ea6-a276-f2dbf4ae8fa2.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "4382442572031b3118b9d01cd8d9955f6a2cfa3071110fdf21591a0108161100",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/portraits-source.png": "e0810add7288a469dfc471c07541c9aacf5d92252b61a012a58c3fb84a183f70"
+      }
+    },
+    {
+      "tool": "image_gen.imagegen",
+      "request": "directional/west-cleanup-request.json",
+      "retainedCopy": "directional/west-clean-source.png",
+      "generatedOriginal": "/workspace/generated_images/exec-396e8f20-4889-4f64-b979-212eba429cf5.png",
+      "pixelLabCreditsSpent": 0,
+      "sha256": "e6ee395c760f9c7f8a6e854595c6e3babdcf14b2d71341d701f6ba404320f191",
+      "inputsSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/directional/west-source.png": "dc9f56893dac69a02229b84a44c4f3c8f42141b33bf8b0183575a19651c94dba"
+      }
+    }
+  ]
+}

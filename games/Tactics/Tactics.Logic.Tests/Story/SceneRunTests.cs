@@ -354,7 +354,7 @@ public sealed class SceneRunTests
                 PlayBeat(step, (scene, flags) => Explore(scene, step.Beat, flags, tags, problems, memo), played);
         }
         Assert.Empty(problems);
-        Assert.Equal(Book.Scenes.Select(s => s.Id).Order(), played.Order());
+        Assert.Equal(Book.Scenes.Where(s => !s.Camp && s.Beat is not null).Select(s => s.Id).Order(), played.Order());
     }
 
     /// <summary>A <c>next</c> can't lead round in a circle: only an option can go back, and options are each taken once.</summary>
@@ -430,7 +430,7 @@ public sealed class SceneRunTests
         var (ended, emptied) = (0, 0);
         foreach (var (scene, index) in Book.Scenes.Select((s, i) => (s, i)))
         {
-            var beat = BeatOf(scene.Beat);
+            var beat = scene.Beat is { } beatId ? BeatOf(beatId) : new ArcBeat(scene.Id, "story", null, null, [], [], []);
             for (var walk = 0; walk < 300; walk++)
             {
                 var rng = new Random(index * 1000 + walk);

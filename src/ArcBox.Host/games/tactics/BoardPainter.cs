@@ -1,5 +1,7 @@
 using Godot;
+using Tactics.Logic;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
 
@@ -35,6 +37,9 @@ internal sealed class BoardPainter
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
         public bool OneFrame { get; set; }
+
+        /// <summary>One frame of its texture, in texels: art made at another size than its manifest's is drawn whole into <see cref="Target"/>, not cut to <see cref="Size"/> texels of it.</summary>
+        public Vector2 Source { get; set; } = size;
     }
 
     private static readonly Color GridLine = new(0, 0, 0, 0.22f);
@@ -43,6 +48,48 @@ internal sealed class BoardPainter
     private readonly Dictionary<string, Texture2D?> _textures = [];
     private readonly Dictionary<string, Texture2D?> _tops = [];
     private readonly Dictionary<string, Texture2D?> _glows = [];
+    private readonly UnitTextureQueue _unitQueue = new();
+    private readonly Dictionary<ulong, HashSet<string>> _unitOwners = [];
+    private readonly HashSet<string> _pinned = new(StringComparer.Ordinal);
+    private string[] _regionUnits = [];
+
+    public bool StreamUnits { get; set; }
+    public int PendingUnits => _unitQueue.Pending;
+
+    public void RegionUnits(IEnumerable<string> paths)
+    {
+        _regionUnits = paths.Distinct(StringComparer.Ordinal).ToArray();
+        RetainUnits();
+    }
+
+    public void RequestUnits(ulong owner, IEnumerable<string> paths)
+    {
+        if (!StreamUnits) return;
+        if (_unitOwners.TryGetValue(owner, out var previous) && previous.SetEquals(paths)) return;
+        _unitOwners[owner] = paths.ToHashSet(StringComparer.Ordinal);
+        RetainUnits();
+    }
+
+    private void RetainUnits()
+    {
+        foreach (var path in _unitQueue.Retain(_regionUnits.Concat(_unitOwners.Values.SelectMany(paths => paths))))
+            if (!_pinned.Contains(path) && _textures.Remove(path, out var texture))
+            {
+                texture?.Dispose();
+                GD.Print($"WORLD unit-release {path}");
+            }
+    }
+
+    public bool LoadOneUnit()
+    {
+        if (!_unitQueue.TryTake(out var path)) return false;
+        var texture = LoadFile(path, pin: false);
+        GD.Print($"WORLD unit-texture {path} {(texture is null ? "missing" : $"{texture.GetWidth()}x{texture.GetHeight()}")}");
+        return true;
+    }
+
+    // A world draw never performs a synchronous image decode; pending figures wait for the frame-budgeted upload.
+    public Texture2D? UnitTexture(string path) => StreamUnits ? _textures.GetValueOrDefault(path) : Load(path);
 
     /// <summary>The pack's root, which files are read from.</summary>
     public string Root { get; set; } = "";
@@ -63,6 +110,9 @@ internal sealed class BoardPainter
         _textures.Clear();
         _tops.Clear();
         _glows.Clear();
+        _pinned.Clear();
+        _unitOwners.Clear();
+        _unitQueue.Retain([]);
     }
 
     /// <summary>
@@ -77,8 +127,11 @@ internal sealed class BoardPainter
         if (drawn is DrawnFace face)
         {
             var lit = face.Lit;
-            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Facing == Facing.Up) : null;
-            face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour) : null;
+            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Flat) : null;
+            face.Glow = !lit.Glow ? null
+                : lit.Face.Lights is { } lights ? Texture(lights, false)
+                : lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour)
+                : null;
             face.OneFrame = Moves(lit.Face.Image);
         }
         else if (drawn is DrawnSprite sprite)
@@ -87,6 +140,11 @@ internal sealed class BoardPainter
             sprite.Texture = Texture(lit.Sprite.Image, false);
             sprite.Glow = lit.Glow && lit.Sprite.Light is { } light ? Glow(lit.Sprite.Image, light.Mask, light.Colour) : null;
             sprite.OneFrame = Moves(lit.Sprite.Image);
+            if (sprite.Texture is { } texture)
+            {
+                var frames = sprite.OneFrame && Frames!.Of(lit.Sprite.Image.Key) == texture ? 1 : Math.Max(1, lit.Sprite.Image.Frames);
+                sprite.Source = new Vector2(texture.GetWidth() / frames, texture.GetHeight());
+            }
         }
     }
 
@@ -94,25 +152,32 @@ internal sealed class BoardPainter
     public void Preload(ArtImage image, bool flat) => Texture(image, flat);
 
     /// <summary>Paints one item on <paramref name="canvas"/> as things stand at <paramref name="clock"/>. With no <paramref name="now"/>, its colours are as prepared.</summary>
-    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock)
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock) => Paint(canvas, drawn, now, clock, 1f);
+
+    /// <summary>Paints one item on <paramref name="canvas"/> with <paramref name="alpha"/> modulation.</summary>
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock, float alpha)
     {
         if (drawn is DrawnFace face)
         {
-            PaintFace(canvas, face, now, clock);
+            PaintFace(canvas, face, now, clock, alpha);
         }
         else if (drawn is DrawnSprite sprite)
         {
-            PaintSprite(canvas, sprite, now, clock);
+            PaintSprite(canvas, sprite, now, clock, alpha);
         }
     }
 
     /// <summary>A file of the pack, relative to its root, or null if there's none or it can't be read.</summary>
     public Texture2D? Load(string? file)
+        => LoadFile(file, pin: true);
+
+    private Texture2D? LoadFile(string? file, bool pin)
     {
         if (file is null)
         {
             return null;
         }
+        if (pin) _pinned.Add(file);
         if (_textures.TryGetValue(file, out var known))
         {
             return known;
@@ -151,9 +216,13 @@ internal sealed class BoardPainter
         {
             return null;
         }
+        if (image.Blend >= 0)
+        {
+            return LoadBlend(image);
+        }
         if (Moves(image))
         {
-            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Path, image, strip) : Load(image.Path));
+            return Frames!.Of(image.Key) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Key, image, strip) : Load(image.Path));
         }
         return flat ? LoadTop(image) : Load(image.Path);
     }
@@ -167,6 +236,24 @@ internal sealed class BoardPainter
             return known;
         }
         return _tops[image.Path] = Turned(image) is { } top ? Upload(top) : Load(image.Path);   // which warns
+    }
+
+    /// <summary>A top through one of <see cref="GroundBlend"/>'s masks, baked once for each ground and way the world uses. The art's files don't change.</summary>
+    private Texture2D? LoadBlend(ArtImage image)
+    {
+        if (_tops.TryGetValue(image.Key, out var known))
+        {
+            return known;
+        }
+        if (Pixels(image.Path) is not { } art)
+        {
+            return _tops[image.Key] = null;
+        }
+        var doubled = DitherTexels.Always(art.GetData(), art.GetWidth(), art.GetHeight());
+        art.Dispose();
+        var masked = GroundBlend.Masked(doubled, image.Blend, image.Span, image.ClusteredEdges);
+        var size = (int)Math.Sqrt(masked.Length / sizeof(uint));
+        return _tops[image.Key] = Upload(Image.CreateFromData(size, size, false, Image.Format.Rgba8, masked));
     }
 
     /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>
@@ -192,7 +279,9 @@ internal sealed class BoardPainter
         Vector2[] points = [.. face.Points.Select(p => new Vector2(p.X, p.Y))];
         Vector2[] uvs = [.. face.Uvs.Select(p => new Vector2(p.X, p.Y))];
         var colour = Colour(face.Tint, face.Alpha);
-        Color[] colours = [colour, colour, colour, colour];
+        Color[] colours = face.VertexTints.IsDefaultOrEmpty
+            ? [colour, colour, colour, colour]
+            : [.. face.VertexTints.Select(t => Colour(t, face.Alpha))];
         if (baked is not null)
         {
             for (var i = 0; i < colours.Length; i++)
@@ -211,10 +300,21 @@ internal sealed class BoardPainter
             baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
-    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock)
+    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         LightUp(drawn, now);
         var uvs = drawn.OneFrame ? drawn.Uvs : FrameUvs(drawn, clock);
+        if (alpha < 1f)
+        {
+            // Only what's fading comes here, and it fades as whole faces: nothing else in a frame pays for this.
+            var colours = drawn.Colours.Select(c => new Color(c.R, c.G, c.B, c.A * alpha)).ToArray();
+            canvas.DrawPrimitive(drawn.Points, colours, uvs, drawn.Texture);
+            if (drawn.Glow is not null)
+            {
+                canvas.DrawPrimitive(drawn.Points, Unlit.Select(c => c with { A = alpha }).ToArray(), uvs, drawn.Glow);
+            }
+            return;
+        }
         if (drawn.Lit.Art)
         {
             if (drawn.Texture is null)
@@ -264,16 +364,21 @@ internal sealed class BoardPainter
         return drawn.FrameUvs;
     }
 
-    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock)
+    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         if (drawn.Texture is not null)
         {
-            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
+            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Source.X, 0), drawn.Source);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
+            if (alpha < 1f)
+            {
+                light = new Color(light.R, light.G, light.B, light.A * alpha);
+            }
             canvas.DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
             if (drawn.Glow is not null)
             {
-                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source);
+                var glow = alpha < 1f ? new Color(1, 1, 1, alpha) : Colors.White;
+                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source, glow);
             }
         }
     }

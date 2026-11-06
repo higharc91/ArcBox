@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-03",
+  "policy": "Reuse existing sheets; no duplicate concept generation. Keep the owner-approved Bree and Mother Skarrow versions.",
+  "checks": {
+    "repository": "Searched concept files and existing generation receipts; only Bree and Mother Skarrow were saved locally.",
+    "scenario": "17 named/preset text searches, semantic concept search covering all 79 results, prompt-asset metadata and recent job list. Exact-name searches alone miss records whose prompt is stored as a text asset ID."
+  },
+  "reused": [
+    {
+      "id": "character_halden_varrow",
+      "asset_id": "asset_D2Ptf1BdfWKJfpFussoh9prg",
+      "prompt_asset_id": "asset_1kj5EdYCfyEn8jdim3zHoNtD",
+      "source_job_id": "job_Vor6cDeecP6ndBT2UB3m1UZa",
+      "design_approval": "pending",
+      "newCU": 0
+    },
+    {
+      "id": "character_old_maud",
+      "asset_id": "asset_5StWG7pyvVrtbPP99aYXWdjc",
+      "prompt_asset_id": "asset_Tz9hM5jymWVX1tRCm1xtBvso",
+      "source_job_id": "job_6xAxowD5qZRcjNUFMXPGGYM9",
+      "design_approval": "pending",
+      "newCU": 0
+    }
+  ],
+  "other_existing": {
+    "bree_alternatives": [
+      "asset_EPqWaHgg5n9mb2sb695MM1St",
+      "asset_YvEuMBT52T2oNNnQzXvY4Dad"
+    ],
+    "mother_skarrow_alternatives": [
+      "asset_sZ5H8Zo9DoHbBLME27Z3g1ws",
+      "asset_UxugXUd58rCWMT5L3EwLAwCw",
+      "asset_V5FmjHNFSkz2cMsjAvh8qcv1"
+    ],
+    "outside_this_batch": {
+      "maren_sorrel": "asset_BsMS4QLyspxfuK9L7AAYiDDu",
+      "hooded_stranger": "asset_PkDZrEL7XkvM1QNy3f1aJUwZ"
+    }
+  }
+}

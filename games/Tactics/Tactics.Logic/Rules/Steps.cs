@@ -14,6 +14,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(SkipTurnStep), nameof(SkipTurnStep))]
 [JsonDerivedType(typeof(DelayStep), nameof(DelayStep))]
 [JsonDerivedType(typeof(PayCostStep), nameof(PayCostStep))]
+[JsonDerivedType(typeof(ReactStep), nameof(ReactStep))]
 [JsonDerivedType(typeof(RunEffectsStep), nameof(RunEffectsStep))]
 [JsonDerivedType(typeof(MoveStep), nameof(MoveStep))]
 [JsonDerivedType(typeof(OfferReactionStep), nameof(OfferReactionStep))]
@@ -201,7 +202,8 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
     ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int HookDepth = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PassiveRef? Passive = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null) : Step
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -220,11 +222,12 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
             w.Emit(new PassiveTriggered(passive.Owner, passive.Id, Source == passive.Owner ? null : Source));
         }
         var resolution = Resolution ?? w.NewResolution();
+        var origin = w.State.Environment ? SourceZone ?? Passive?.Zone : null;
         if (Effects.Length > 1)
-            w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null, Resolution = resolution });
+            w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null, Resolution = resolution, SourceZone = origin });
 
         var ability = Ability is { } id ? rules.Abilities.GetValueOrDefault(id) : null;
-        var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat, resolution);
+        var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat, resolution, origin);
         BlockRegistry.For(Effects[0]).Run(Effects[0], ctx);
         if (HookDepth == 0 && ability is not null && Metamagic.Shapes(ability)
             && !w.State.Queue.Any(s => s is RunEffectsStep r && r.HookDepth == 0 && r.Source == Source && r.Ability == Ability))

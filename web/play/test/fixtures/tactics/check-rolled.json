@@ -56,7 +56,8 @@
       "total": 6,
       "dc": 15,
       "success": false
-    }
+    },
+    "vip": false
   },
   "viewId": "v1",
   "deadlineUtc": null,

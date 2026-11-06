@@ -13,6 +13,11 @@ public sealed record PackManifest(string Id, int RulesVersion, ImmutableArray<st
 /// <summary>A definition read from a pack file, with its id, the id it replaces and where it was written.</summary>
 internal sealed record Loaded<T>(T Def, string Id, string? Replaces, string File, string Pointer);
 
+/// <summary>A thing to interact with, and the region its file places it in.</summary>
+internal sealed record RegionThing(string Region, InteractableDef Def);
+internal sealed record RegionShop(string Region, ShopDef Def);
+internal sealed record RegionMob(string Region, MobDef Def);
+
 /// <summary>
 /// Reads rules packs for <see cref="RulesPack.Load"/>: the manifests, the pack order, each listed file by its kind, the
 /// merge of ids across packs (a later pack may add ids but changes one only with <c>"replaces"</c>) and the content hash.
@@ -37,7 +42,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region }
+    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Trinkets, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops, Mobs }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -55,9 +60,14 @@ internal static class PackLoader
         public List<Loaded<MapContent>> Maps { get; } = [];
         public List<Loaded<EncounterDef>> Encounters { get; } = [];
         public List<Loaded<RegionDef>> Regions { get; } = [];
+        public List<Loaded<RegionThing>> Things { get; } = [];
+        public List<Loaded<RegionShop>> Shops { get; } = [];
+        public List<Loaded<RegionMob>> Mobs { get; } = [];
         public List<Loaded<AiProfileDef>> AiProfiles { get; } = [];
         public List<Loaded<InjuryDef>> Injuries { get; } = [];
+        public List<Loaded<TrinketDef>> Trinkets { get; } = [];
         public List<Loaded<XpTable>> Xp { get; } = [];
+        public List<Loaded<EnvironmentDef>> Environments { get; } = [];
     }
 
     /// <summary>Loads the packs in <paramref name="packDirectories"/>; see <see cref="RulesPack.Load"/>.</summary>
@@ -70,6 +80,15 @@ internal static class PackLoader
         foreach (var pack in Order(ReadManifests(packDirectories, v), v))
         {
             hashed.Add((pack.ManifestFile, pack.ManifestBytes));
+            // Material traits must validate even for callers (such as the simulator) that do not load all art.
+            var terrainManifest = Path.Combine(Path.GetDirectoryName(pack.Dir)!, "terrain", "manifest.json");
+            if (art is null && File.Exists(terrainManifest))
+            {
+                using var terrain = JsonDocument.Parse(File.ReadAllBytes(terrainManifest));
+                if (terrain.RootElement.TryGetProperty("textures", out var textures))
+                    foreach (var family in textures.EnumerateObject())
+                        v.MaterialFamilies.Add(family.Name);
+            }
             var seen = new HashSet<string>(StringComparer.Ordinal);
             for (var i = 0; i < pack.Manifest.Files.Length; i++)
             {
@@ -89,7 +108,7 @@ internal static class PackLoader
                     try
                     {
                         var bytes = File.ReadAllBytes(Path.Combine(pack.Dir, file));
-                        if (kind != FileKind.Region)    // battles never read the world, so a repaint mustn't restart one
+                        if (kind is not (FileKind.Region or FileKind.Interactables))    // battles never read the world, so a repaint mustn't restart one
                             hashed.Add((label, bytes));
                         if (Parse(bytes, label, v) is { } doc)
                             using (doc)
@@ -116,9 +135,17 @@ internal static class PackLoader
         var maps = Merge(content.Maps, "map", v);
         var encounters = Merge(content.Encounters, "encounter", v);
         var regions = Merge(content.Regions, "region", v);
+        var things = Merge(content.Things, "interactable", v);
+        var shops = Merge(content.Shops, "shop", v);
+        var mobs = Merge(content.Mobs, "mob", v);
         var aiProfiles = Merge(content.AiProfiles, "AI profile", v);
         var injuries = Merge(content.Injuries, "injury", v);
+        var trinkets = Merge(content.Trinkets, "trinket", v);
+        foreach (var t in trinkets.Values)
+            if (!classes.ContainsKey(t.Def.Class))
+                v.Error(t.File, Pointer.Append(t.Pointer, "class"), $"Unknown class '{t.Def.Class}'.");
         var xp = Merge(content.Xp, "XP table", v);
+        var environments = Merge(content.Environments, "environment", v);
 
         v.Resolve((kind, id) => kind switch
         {
@@ -131,12 +158,16 @@ internal static class PackLoader
             RefKind.Armor => armors.ContainsKey(id),
             RefKind.Map => maps.ContainsKey(id),
             RefKind.AiProfile => aiProfiles.ContainsKey(id),
+            RefKind.Surface => environments.Values.SingleOrDefault()?.Def.Surfaces.ContainsKey(id) == true,
             _ => false,
         });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);
+        v.CheckEnvironment(environments.Values.SingleOrDefault(), maps.Values);
         v.CheckEncounters(encounters.Values, battleMaps, Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal));
-        v.CheckRegions(regions.Values, battleMaps);
+        v.CheckRegions(regions.Values, battleMaps, things.Values, injuries.Keys.ToHashSet(StringComparer.Ordinal));
 
+        v.CheckShops(shops.Values, regions.Values, battleMaps, things.Values, items.Values);
+        v.CheckMobs(mobs.Values, regions.Values, battleMaps, encounters.Values.ToDictionary(e => e.Id, e => e.Def, StringComparer.Ordinal), things.Values);
         if (v.Errors.Count > 0)
             throw new ContentException([.. v.Errors]);
 
@@ -157,7 +188,15 @@ internal static class PackLoader
                 Index(encounters.Values, e => e.Id, e => e.Def, StringComparer.Ordinal),
                 Index(aiProfiles.Values, a => a.Id, a => a.Def, StringComparer.Ordinal),
                 xp.Values.SingleOrDefault()?.Def ?? XpTable.Default,
-                Index(regions.Values, r => r.Id, r => WorldRegion.From(r.Def), StringComparer.Ordinal)));
+                Index(regions.Values, r => r.Id, r => WorldRegion.From(r.Def), StringComparer.Ordinal),
+                content.Things.Where(t => things[t.Id] == t).GroupBy(t => t.Def.Region, StringComparer.Ordinal)
+                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
+                shops.Values.GroupBy(t => t.Def.Region, StringComparer.Ordinal)
+                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
+                Environment: environments.Values.SingleOrDefault()?.Def, Warnings: [.. v.Warnings],
+                Trinkets: Index(trinkets.Values, t => t.Id, t => t.Def, StringComparer.Ordinal),
+                Mobs: mobs.Values.GroupBy(m => m.Def.Region, StringComparer.Ordinal)
+                    .ToImmutableSortedDictionary(g => g.Key, g => g.Select(m => m.Def.Def).ToImmutableArray(), StringComparer.Ordinal)));
     }
 
     // ---- Packs ------------------------------------------------------------------------------------------------------
@@ -245,10 +284,12 @@ internal static class PackLoader
 
     private static FileKind? KindOf(string file) => file.Split('/') switch
     {
+        ["environment.json"] => FileKind.Environment,
         ["conditions.json"] => FileKind.Conditions,
         ["races.json"] => FileKind.Races,
         ["backgrounds.json"] => FileKind.Backgrounds,
         ["injuries.json"] => FileKind.Injuries,
+        ["trinkets.json"] => FileKind.Trinkets,
         ["xp.json"] => FileKind.Xp,
         ["ai-profiles.json"] => FileKind.AiProfiles,
         ["items.json"] => FileKind.Items,
@@ -260,6 +301,9 @@ internal static class PackLoader
         ["maps", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Map,
         ["encounters", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Encounter,
         ["world", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Region,
+        ["mobs", var mobName] when mobName.EndsWith(".json", StringComparison.Ordinal) => FileKind.Mobs,
+        ["shops", var shopName] when shopName.EndsWith(".json", StringComparison.Ordinal) => FileKind.Shops,
+        ["interactables", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Interactables,
         _ => null,
     };
 
@@ -285,6 +329,9 @@ internal static class PackLoader
     {
         switch (kind)
         {
+            case FileKind.Environment:
+                Add(c.Environments, v.Environment(root, file, ""), _ => EnvironmentDef.Id, e => e.Replaces, file, "", v, idPointer: false);
+                break;
             case FileKind.Conditions:
                 List(root, file, "conditions", v, (e, p) => Add(c.Conditions, v.Condition(e, file, p), d => d.Id.Value,
                     d => d.Replaces?.Value, file, p, v, e, RefKind.Condition));
@@ -299,6 +346,10 @@ internal static class PackLoader
             case FileKind.Injuries:
                 List(root, file, "injuries", v,
                     (e, p) => Add(c.Injuries, v.Injury(e, file, p), d => d.Id.Value, d => d.Replaces?.Value, file, p, v));
+                break;
+            case FileKind.Trinkets:
+                List(root, file, "trinkets", v,
+                    (e, p) => Add(c.Trinkets, v.Trinket(e, file, p), d => d.Id, d => d.Replaces, file, p, v));
                 break;
             case FileKind.AiProfiles:
                 List(root, file, "AI profiles", v, (e, p) => Add(c.AiProfiles, v.AiProfile(e, file, p), d => d.Id, d => d.Replaces,
@@ -334,6 +385,22 @@ internal static class PackLoader
                 break;
             case FileKind.Region:
                 Add(c.Regions, v.Region(root, file, ""), d => d.Id, _ => null, file, "", v);
+                break;
+            case FileKind.Mobs:
+                if (v.MobsFile(root, file, "") is { } mobs)
+                    for (var i = 0; i < mobs.Mobs.Length; i++)
+                        Add(c.Mobs, new RegionMob(mobs.Region, mobs.Mobs[i]), m => m.Def.Id, _ => null, file, $"/mobs/{i}", v);
+                break;
+            case FileKind.Shops:
+                if (v.ShopsFile(root, file, "") is { } shops)
+                    for (var i = 0; i < shops.Shops.Length; i++)
+                        Add(c.Shops, new RegionShop(shops.Region, shops.Shops[i] with { SellRatio = shops.SellRatio }), t => t.Def.Id, _ => null, file, $"/shops/{i}", v);
+                break;
+            case FileKind.Interactables:
+                if (v.ThingsFile(root, file, "") is { } list)
+                    for (var i = 0; i < list.Interactables.Length; i++)
+                        Add(c.Things, new RegionThing(list.Region, list.Interactables[i]), t => t.Def.Id, _ => null, file,
+                            Pointer.Append("/interactables", i), v);
                 break;
             case FileKind.Abilities:
                 if (root.ValueKind != JsonValueKind.Object)

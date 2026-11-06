@@ -50,7 +50,10 @@ public sealed class StoryTests
     {
         var spot = SpotOf(beat);
         foreach (var from in StageBattleTests.Reached.Order())
-            if (!StoryRules.InReach(Ground, from, spot))
+            if (!StoryRules.InReach(Ground, from, spot)
+                && !Rules.ShopsIn("ashen_ford").Any(shop => shop.Keeper.Person is { } person
+                    && Interactables.InReach(Ground, from, new InteractableDef(shop.Id, "stall", StageBattleTests.Region.People[person].At)))
+                && !Rules.InteractablesIn("ashen_ford").Any(thing => Interactables.InReach(Ground, from, thing)))
                 foreach (var dir in Enum.GetValues<WalkDir>())
                     if (WorldWalk.Next(Ground, from, dir, ClassDef.DefaultJump, null) is { } move && StoryRules.InReach(Ground, move.To, spot))
                         return (from, dir);
@@ -159,13 +162,14 @@ public sealed class StoryTests
     }
 
     [Fact]
-    public void Interact_appears_only_in_reach()
+    public void Story_interact_appears_only_in_reach()
     {
         var (from, dir) = StepIntoReach(Mayor);
         var s = new Session(game: new TacticsGame(Rules, lore: Lore, seed: SeedFor(Mayor) with { At = from }));
         s.ToWalking();
         var lead = StageBattleTests.Lead(s);
-        Assert.Equal(JsonValueKind.Null, Data(s, lead).GetProperty("interact").ValueKind);
+        // Nearby townspeople may offer their own talk action; the main-story Talk is still out of reach.
+        Assert.NotEqual("Talk", Data(s, lead).GetProperty("interact").GetString());
 
         s.Send(lead, "walk", new { dir = StageBattleTests.Name(dir) });
         s.Send(lead, "walk", new { dir = (string?)null });

@@ -1,0 +1,78 @@
+{
+  "region": "ashen_ford",
+  "sellRatio": 0.5,
+  "shops": [
+    {
+      "id": "af_market_herbalist",
+      "name": "Wenna's Remedies",
+      "keeper": {
+        "person": 30
+      },
+      "greeting": "Wenna wipes her hands on her apron. Potions, salves. Coin first.",
+      "farewell": "Mind the ford.",
+      "stock": [
+        {
+          "item": "potion_of_healing",
+          "count": 3,
+          "restock": "chapter"
+        },
+        {
+          "item": "smoke_bomb",
+          "count": 2,
+          "restock": "never"
+        }
+      ],
+      "buys": [
+        "potion",
+        "obscure"
+      ],
+      "priceMod": 1.0,
+      "requires": [],
+      "unless": [
+        "af_market_burned"
+      ]
+    },
+    {
+      "id": "af_inn",
+      "name": "The Last Coal",
+      "keeper": {
+        "person": 10
+      },
+      "stock": [],
+      "buys": [],
+      "greeting": "A bed, a bowl, and a door that shuts. Ten gold a head.",
+      "farewell": "Keep warm on the road.",
+      "requires": [],
+      "unless": [],
+      "services": [
+        {
+          "id": "room",
+          "name": "A room for the night",
+          "kind": "room",
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": "af_chapel",
+      "name": "Chapel of the Hearth",
+      "keeper": {
+        "person": 11
+      },
+      "stock": [],
+      "buys": [],
+      "greeting": "Set down what hurts. The Hearth asks twenty-five gold for the work.",
+      "farewell": "Keep warm on the road.",
+      "requires": [],
+      "unless": [],
+      "services": [
+        {
+          "id": "cure",
+          "name": "Healing",
+          "kind": "cure",
+          "price": 25
+        }
+      ]
+    }
+  ]
+}

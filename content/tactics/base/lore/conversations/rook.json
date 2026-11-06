@@ -1,0 +1,100 @@
+{
+  "id": "talk_rook",
+  "character": "rook",
+  "title": "Rook",
+  "cast": [
+    "rook"
+  ],
+  "start": "offer",
+  "entries": [
+    {
+      "node": "supplied",
+      "requires": [
+        "sq_forge_fuel"
+      ],
+      "unless": []
+    },
+    {
+      "node": "offer",
+      "requires": [
+        "sq_forge_contact"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "offer",
+      "lines": [
+        {
+          "id": "sq_rook_001",
+          "speaker": "rook",
+          "text": "Tobin sent you? I have charcoal. Dry, counted, and quite ordinary. He can mend my cart axle when the forge is hot.",
+          "mood": "idle",
+          "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight."
+        }
+      ],
+      "options": [
+        {
+          "id": "deal",
+          "label": "Fuel now, an axle repair in return. Agreed.",
+          "to": "deal",
+          "sets": [
+            "sq_forge_rook_debt"
+          ],
+          "quest": {
+            "advance": "sq_cold_forge",
+            "stage": "fuel"
+          }
+        },
+        {
+          "id": "no",
+          "label": "We will find another supply.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "deal",
+      "lines": [
+        {
+          "id": "sq_rook_002",
+          "speaker": "rook",
+          "text": "Take the marked bundle. Tell Tobin I remember my debts, and his. No shards in this bargain.",
+          "mood": "idle",
+          "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "supplied",
+      "lines": [
+        {
+          "id": "sq_rook_003",
+          "speaker": "rook",
+          "text": "The bundle went to the forge. I will bring the cart when the road lets me.",
+          "mood": "idle",
+          "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_rook_004",
+          "speaker": "rook",
+          "text": "Fair enough. Mind the boards. They are older than my promises.",
+          "mood": "idle",
+          "direction": "Low, easy, confidential dockside voice; a smile kept just out of sight."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

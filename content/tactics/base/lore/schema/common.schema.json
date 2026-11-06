@@ -65,7 +65,7 @@
     },
     "replaces": {
       "$ref": "#/$defs/id",
-      "description": "Set to this entry's own id to change an id an earlier pack defined (same rule as the rules packs, spec §4.9)."
+      "description": "Set to this entry's own id to change an id an earlier pack defined (same rule as the rules packs, spec \u00a74.9)."
     },
     "line": {
       "type": "object",
@@ -88,6 +88,15 @@
           "type": "integer",
           "minimum": 1,
           "description": "Relative chance among a bark event's lines. Default 1."
+        },
+        "speaker": {
+          "$ref": "#/$defs/id"
+        },
+        "requires": {
+          "$ref": "#/$defs/flags"
+        },
+        "unless": {
+          "$ref": "#/$defs/flags"
         }
       },
       "required": [
@@ -105,7 +114,7 @@
     },
     "barkEvents": {
       "type": "object",
-      "description": "Moment → lines. The engine maps its battle events to these names; any it doesn't raise yet are simply unused.",
+      "description": "Moment \u2192 lines. The engine maps its battle events to these names; any it doesn't raise yet are simply unused.",
       "propertyNames": {
         "enum": [
           "battle_start",

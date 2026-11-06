@@ -1,0 +1,38 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "questLog",
+  "data": {
+    "quests": [
+      {
+        "id": "sq_missing_grain",
+        "name": "Where the Grain Went",
+        "status": "active",
+        "giver": "Halden Varrow",
+        "portrait": "mayor",
+        "objective": "Speak to Celandine or Halden",
+        "history": [
+          {
+            "log": "Halden asked us to trace missing seed without stirring more accusations.",
+            "done": true,
+            "objective": null
+          },
+          {
+            "log": "The tally lists town seed as a private transfer. We can confront Celandine or ask Halden to settle it quietly.",
+            "done": false,
+            "objective": "Speak to Celandine or Halden"
+          }
+        ],
+        "result": null,
+        "rewards": null
+      }
+    ],
+    "selected": "sq_missing_grain",
+    "pinned": "sq_missing_grain",
+    "canPin": false,
+    "reading": "Player1"
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

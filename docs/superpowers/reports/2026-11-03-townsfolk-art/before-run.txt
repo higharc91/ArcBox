@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 5080
+
+Render preset ultra
+NARRATOR built-in voice Microsoft David (en_US)
+NARRATOR Fallback
+World demo: no server connection
+WORLD window 1920x1080 at (160, 100), spec ashen_ford, optimised False, adapter NVIDIA GeForce RTX 5080
+WORLD build ground 254 ms, plan+light 456 ms, bake 91 ms, total 801 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 2 tiles; spots inn@25,55 square@29,62 market@28,64
+WORLD memory after build: managed 41.5 MB (+40.6), engine 49.8 MB (+2.8), textures 26.6 MB, buffers 7.8 MB, process 534 MB
+WORLD textures 215 in 561 ms, worst 23.0 ms; binding items (and baking glows) 9 ms; 67 blocks still to record at reveal
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.2 s, 20 frames: frame ms median 7.14, p95 11.11, p99 11.11, worst 11.11
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 0 of 20
+WORLD recording during the walk: 4 frames, ms a frame median 4.22, p95 4.62, p99 4.62, worst 4.62
+WORLD frames while recording: frame ms median 11.11, p95 11.11, p99 11.11, worst 11.11
+WORLD _Draw per block, first time: median 0.24, p95 0.62, p99 1.76, worst 1.76, sum 22.4 ms
+WORLD render CPU ms median 1.10, p95 1.48, p99 1.48, worst 1.48; GPU ms median 0.09, p95 0.09, p99 0.09, worst 0.09; at most 2,175 draw calls
+WORLD overlay query ms median 4.81, p95 9.98, p99 9.98, worst 9.98; draw ms median 0.31, p95 0.55, p99 0.55, worst 0.55; items median 379.00, p95 379.00, p99 379.00, worst 379.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 47.4 MB (+46.5), engine 67.2 MB (+20.2), textures 190.5 MB, buffers 7.8 MB, process 726 MB
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/before\world-ashen_ford.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/before\world-inn.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/before\world-square.png
+WORLD shot C:\Users\fatma\Programming\dotnet\ArcBox\docs\superpowers\reports\2026-11-03-townsfolk-art/before\world-market.png
+PERF 23 fps   42.9 ms (worst 353.7) | 2,601 draw calls   16.8 k primitives | ULTRA · 1920×1080 | VOICE FALLBACK
+WORLD closed

@@ -1,0 +1,142 @@
+{
+  "imageToolCalls": 12,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "newSpeechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-source.png",
+      "originalPath": "/workspace/generated_images/exec-ee539088-3926-4366-b6a3-275f33fe2d40.png",
+      "requestSha256": "4a303346ffc7955e5234a4d7f1056e1cbb3f9fa6ea8de9ae448cc4497a50a46d",
+      "outputSha256": "0c825df2311da6fc0f0680c53c8238196b80f8aacb622a488df7f130cce39b23",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_rook.png": "85bce522affb8cc34139d6f362134ca2eb43675f9288aaa89c46e900f4ba6d3c",
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/rotations/south.png": "8c113b42abb005990f928ef090b6d26f160d00fec6c2d5d607a362a7b088063a"
+      }
+    },
+    {
+      "request": "appearance-cleanup-request.json",
+      "output": "candidate-1.png",
+      "originalPath": "/workspace/generated_images/exec-b5523cc3-1956-4b5c-a163-97aedf485ec1.png",
+      "requestSha256": "c1bc1f50f180a7543043b9d7d08383a3fabc428bd582d605c95fe9f48d4e5581",
+      "outputSha256": "e778a06fe64438be6d6573a8df7e85f12b9513d06c2eb0563d4762fa94e2b349",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/candidate-1-source.png": "0c825df2311da6fc0f0680c53c8238196b80f8aacb622a488df7f130cce39b23"
+      }
+    },
+    {
+      "request": "appearance-export-repair-request.json",
+      "output": "candidate-1-export.png",
+      "originalPath": "/workspace/generated_images/exec-fb38453a-ae76-46da-ac00-ef39beb57062.png",
+      "requestSha256": "dbb078032cbbc2600351afd606f9ae6f4b56eb327ac70ac5d9ae469acdae5ef6",
+      "outputSha256": "236eb5325a722e8b934c4427bd7a010d45379170ffa891bb3337d2f6264a874e",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_rook.png": "85bce522affb8cc34139d6f362134ca2eb43675f9288aaa89c46e900f4ba6d3c",
+        "tools/tactics-assets/imagegen/townsfolk/rook/candidate-1.png": "e778a06fe64438be6d6573a8df7e85f12b9513d06c2eb0563d4762fa94e2b349"
+      }
+    },
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-export.png",
+      "originalPath": "/workspace/generated_images/exec-ec4b57f4-a95e-424f-bd6d-fd51d75734ed.png",
+      "requestSha256": "cb2c82cae8ec267944659ba5491ec57ef63e01540a66790ba78f81aaca08bfdc",
+      "outputSha256": "04237884301fa74d2d570cab90df8fb25a0277124197a67693d696953bd18500",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/south.png": "74b29e1e015732a4f4bf9505630bd28bf2cb2432a94a784159d1ce5db702abf0"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-d34cb504-e923-4f31-a867-4a334d137b96.png",
+      "requestSha256": "9502b9a0db2bfda9958838e31eb71c5ba462828b45cbcd6ba49ac415e7c0d13e",
+      "outputSha256": "7b46d4f654694211b478e30db5ca443c1a2a912cf0eb9e1d8c79b42615172645",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/south-west.png": "dd94cc3c5e54a5f4f49b556895fbe02dc543b311e004408728fd5153f06a3082"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-export.png",
+      "originalPath": "/workspace/generated_images/exec-5ccb777c-2ad1-4ee0-be43-2b6436756de3.png",
+      "requestSha256": "22295bdf0ec8bbbf50e03906cef86e329a149e80158f357d0623d98d53ec7d63",
+      "outputSha256": "9e9eafcfdbcba1f3f7d6076219e96cfd159ae6b5ac8d5f73275d2478c10b6b57",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/west.png": "b95e9c54f63eba88254e41a8d19ad2402528dd7bea1822d15d6667c7b3bd737e"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-export.png",
+      "originalPath": "/workspace/generated_images/exec-dea8dad8-8210-4010-8aad-214b505d4b92.png",
+      "requestSha256": "19917eade65e8e5a3e7e6e9bad0500a204e491832ff9a24cd7de74dd1a4e872f",
+      "outputSha256": "25ebfb24a12d626448202680ec4c0c91c0a3d4d27d79dc561c3d995725808d5a",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/north-west.png": "ddfba0d2d622003439b0dca5247ff507145378baaced62fb2e9512f4a6cb8f9d"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-export.png",
+      "originalPath": "/workspace/generated_images/exec-643b46ca-ec68-41c8-a747-6309fb576ee1.png",
+      "requestSha256": "2b0d72ccb985ec1d86687888d4e046ff21a90b308d6a99a4f24174365942a366",
+      "outputSha256": "92b7acbc9922ae37c9c97a4c31d98bd17b9942bdf3b236824a3aaa7bc8883be9",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/north.png": "adbc1635966e657064cae04603f6964f2d0308294a3ce20825a99ceab84e9e34"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-a6e227f6-e1d5-4429-a4b3-826faee1165b.png",
+      "requestSha256": "1aa2a017e59cdd5a7e3a1786bd2f682ab89ae080af7801e624a9afb8ba8b05cb",
+      "outputSha256": "aaf22f9b0520aaba9cad0dd70410e4483d922f2354f8eb0701dc4f69c76157bc",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/north-east.png": "28bbcb6aa8c84c8230c67078bd98ad2a2a0aa7b9210cef7bbc80b03eece92e3a"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-export.png",
+      "originalPath": "/workspace/generated_images/exec-61bb2b00-3521-4c92-87bc-f9673aaab288.png",
+      "requestSha256": "8c7bf9e8c7c126127d58c6456823ab6b4433f72d12a6dcb8a90a1f057dd05f44",
+      "outputSha256": "1f61730d48e4ac619e71fd830dcb0f125735e2c8712887f0c5b6f2a04e9942ce",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/east.png": "426b5abfc798d5fbde3e6520a2774f083ec55e415f320d8e1c0b9fa7913f7eae"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-export.png",
+      "originalPath": "/workspace/generated_images/exec-168e6b88-963f-49ec-a428-d41c2cb1a89e.png",
+      "requestSha256": "fd8cb2577a8fb152f5a8535dd1177e70aff1e18df9c7d5415fd0bf8ccf445a87",
+      "outputSha256": "25f542a5096b35aa5babb8678b0c6a59ca26238c07ef3051f720c5dbd1bee48b",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/directional/guides/south-east.png": "7ac3903021675daf4fa26740c457b8c831d6ff961114ce8ed32e4ad9d7888ee4"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-export.png",
+      "originalPath": "/workspace/generated_images/exec-bf8805bc-3a22-424c-b949-5de36dc3d352.png",
+      "requestSha256": "39924359f2506582d182448072aeba2e998c6587a5ec41c33a0e624221acfea7",
+      "outputSha256": "089b1dfecc05a25ddf2c8fdb3ed29409c029fc80e3089aba01dc3e5e8c9f0ac3",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/rook/candidate-1-export.png": "236eb5325a722e8b934c4427bd7a010d45379170ffa891bb3337d2f6264a874e"
+      }
+    }
+  ],
+  "runtimeAlphaPreview": {
+    "script": "build-appearance.cjs",
+    "source": "candidate-1-export.png",
+    "output": "candidate-1-preview.png",
+    "operation": "Remove magenta colour-key pixels, clear transparent RGB, preserve non-key RGB; no redraw/rescale/mirror.",
+    "reason": "Prior transparent output erased some dark coat/gear pixels. Opaque colour-key export retained instead."
+  },
+  "completionImageToolCalls": 9,
+  "normalization": {
+    "script": "key-sources.cjs",
+    "operation": "Remove magenta key without recolouring non-key pixels; preserve original opaque exports. Fixed per-direction grid transform and one shared sprite palette downstream."
+  }
+}

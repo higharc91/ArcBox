@@ -133,6 +133,25 @@ public class PortalApiTests
         Assert.Equal(other.Code, bea.GetProperty("campaigns")[0].GetProperty("code").GetString());
     }
 
+    /// <summary>A campaign's view is compressed for a phone that asks (Wardenflame's runs to tens of kilobytes); a plain request isn't.</summary>
+    [Theory]
+    [InlineData("br")]
+    [InlineData("gzip")]
+    public async Task A_campaign_is_compressed_when_asked(string encoding)
+    {
+        await using var t = await Table.CreateAsync();
+        var asked = new HttpRequestMessage(HttpMethod.Get, $"/api/campaigns/{t.Code}");
+        asked.Headers.TryAddWithoutValidation("Authorization", "Profile " + t.Ann.Key);
+        asked.Headers.TryAddWithoutValidation("Accept-Encoding", encoding);
+        var response = await t.Http.SendAsync(asked, Ct);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal([encoding], response.Content.Headers.ContentEncoding);
+
+        var plain = await Get(t, $"/api/campaigns/{t.Code}", t.Ann.Key);
+        Assert.Empty(plain.Content.Headers.ContentEncoding);
+        Assert.Equal("Embers", (await Body(plain)).GetProperty("info").GetProperty("name").GetString());
+    }
+
     [Fact]
     public async Task Missing_or_unknown_key_401()
     {
@@ -472,6 +491,28 @@ public class PortalApiTests
         var limited = await SendAsync(http, HttpMethod.Get, "/api/me", null);
 
         Assert.Equal(HttpStatusCode.TooManyRequests, limited.StatusCode);
+    }
+
+    // Behind Fly.io's proxy every request has the proxy's address: the client's is in Fly-Client-IP.
+    [Fact]
+    public async Task Behind_a_proxy_the_rate_limit_is_per_client_from_the_configured_header()
+    {
+        using var f = new ArcServerFactory().WithWebHostBuilder(b => b
+            .UseSetting("Portal:PermitsPerMinute", "2")
+            .UseSetting("Portal:ClientIpHeader", "Fly-Client-IP"));
+        using var http = f.CreateClient();
+
+        async Task<HttpStatusCode> From(string ip)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/me");
+            request.Headers.Add("Fly-Client-IP", ip);
+            return (await http.SendAsync(request, Ct)).StatusCode;
+        }
+
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.TooManyRequests, await From("203.0.113.1"));
+        Assert.Equal(HttpStatusCode.Unauthorized, await From("203.0.113.2"));    // another client has its own window
     }
 
     [Fact]

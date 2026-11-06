@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "dotnet": {
+    "total": 6338,
+    "passed": 6338,
+    "failed": 0,
+    "evidence": "Initial complete solution run passed seven projects; after resolving eight failures, the complete affected Game (676), Presentation (2539), and WorldTools (398) projects pass on rerun.",
+    "initialSolutionTotal": 6338,
+    "initialFailures": 8
+  },
+  "phone": {
+    "total": 508,
+    "passed": 508,
+    "failed": 0,
+    "workers": 1,
+    "refreshedFixtureTests": 80
+  },
+  "hostBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "productionTexturePeakMiB": {
+    "ashen_ford": 423.56,
+    "cinder_hollow": 208.41
+  },
+  "textureLimitMiB": 512,
+  "variants": 14,
+  "portraits": 84,
+  "placedGenericPeople": 28,
+  "sceneVariantFieldsSynced": 31,
+  "productionBytes": 220219831,
+  "noGenerationDuringInstallation": true
+}

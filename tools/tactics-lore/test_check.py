@@ -11,6 +11,19 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CheckTests(unittest.TestCase):
+    def test_story_gold_matches_the_runtime_int32_contract(self):
+        schemas = check.load_schemas()
+        for value in (0, 25, -20, 2147483647, -2147483647):
+            errors = check.Errors()
+            check.validate(value, schemas["scenes.schema.json"]["$defs"]["option"]["properties"]["gold"],
+                           "scenes.schema.json", schemas, "gold-test", "/gold", errors)
+            self.assertFalse(errors)
+        for value in (True, 1.5, "25", None, 2147483648, -2147483648):
+            errors = check.Errors()
+            check.validate(value, schemas["scenes.schema.json"]["$defs"]["node"]["properties"]["gold"],
+                           "scenes.schema.json", schemas, "gold-test", "/gold", errors)
+            self.assertTrue(errors, repr(value))
+
     def test_base_lore_pack_is_valid(self):
         self.assertEqual(check.check([check.CONTENT / "lore"]), [])
 
@@ -98,6 +111,104 @@ class CheckTests(unittest.TestCase):
         # The well-formed scene (a check, a tagged option, a flag the beat sets) raises nothing.
         self.assertFalse([e for e in errors if "/scenes/0/" in e], errors)
 
+    def test_camp_scenes_are_separate_from_battle_aftermaths_and_can_set_their_own_flags(self):
+        def scene(id_, **extra):
+            return dict(id=id_, beat="fight", cast=["narrator"], start="n",
+                        nodes=[dict(id="n", lines=[dict(id=id_+"_line", speaker="narrator", text="Fire.")],
+                                    sets=["camp_reflection"] if extra.get("camp") is True else [], end=True)], **extra)
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            (pack / "scenes").mkdir()
+            (pack / "pack.json").write_text(json.dumps(dict(id="camp", loreVersion=1, requires=["story"], files=["scenes/camp.json"])))
+            (pack / "scenes/camp.json").write_text(json.dumps(dict(scenes=[
+                scene("won", after=True), scene("reflection", camp=True), scene("bad_both", camp=True, after=True)])) )
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        self.assertTrue(any("camp scene cannot also" in e for e in errors), errors)
+        self.assertFalse(any("reflection" in e or "lead-in" in e for e in errors), errors)
+
+    def test_side_content_rejects_bad_entries_targets_unset_stages_and_main_flag_actions(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            # Keep real art lookup on the original content; cross references are the same stable IDs.
+            lore = content / "lore"
+            def edit(file, change):
+                p = lore / file; d = json.loads(p.read_text()); change(d); p.write_text(json.dumps(d))
+            edit("conversations/halden_varrow.json", lambda d: d["entries"][0].update(node="missing_entry"))
+            edit("quests.json", lambda d: d["quests"][0]["stages"][0].update(when=["sq_unset_stage"], target={"tile":[9999,9999]}))
+            edit("conversations/tobin_fell.json", lambda d: d["nodes"][0]["options"][0].update(sets=["ch1_skarrow_slain"]))
+            # Removing the start action makes its former first-stage flag genuinely unreachable.
+            edit("conversations/halden_varrow.json", lambda d: [o.pop("quest",None) for n in d["nodes"] for o in n.get("options",[]) if o.get("quest",{}).get("start")])
+            edit("barks/mother_skarrow.json", lambda d: d["events"].pop("town"))
+            errors = check.check([lore])
+        self.assertTrue(any("mother_skarrow" in e and "neither conversation nor barks" in e for e in errors), errors)
+        self.assertTrue(any("missing_entry" in e for e in errors), errors)
+        self.assertTrue(any("stage 'asked'" in e and "nothing" in e for e in errors), errors)
+        self.assertTrue(any("outside" in e for e in errors), errors)
+        self.assertTrue(any("main-story" in e for e in errors), errors)
+
+    def test_class_trinket_rewards_cover_every_class_with_its_own_known_item(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            path = content / "lore/quests.json"
+            data = json.loads(path.read_text())
+            trinkets = json.loads((content / "rules/trinkets.json").read_text())
+            valid = {t["class"]: t["id"] for t in trinkets}
+            data["quests"][0]["rewards"]["trinkets"] = valid
+            path.write_text(json.dumps(data))
+            self.assertEqual(check.check([content / "lore"]), [])
+            for kind in ["unknown_class", "unknown_trinket", "wrong_class", "missing_class"]:
+                with self.subTest(kind=kind):
+                    reward = dict(valid)
+                    if kind == "unknown_class": reward["invented"] = "ember_claw_gauntlet"
+                    elif kind == "unknown_trinket": reward["fighter"] = "missing"
+                    elif kind == "wrong_class": reward["fighter"] = "hearthstone_pendant"
+                    else: reward.pop("wizard")
+                    data["quests"][0]["rewards"]["trinkets"] = reward
+                    path.write_text(json.dumps(data))
+                    self.assertTrue(any("trinket" in e for e in check.check([content / "lore"])))
+
+    def test_quest_targets_accept_an_explicit_region_and_reject_unknown_regions(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            path = content / "lore/quests.json"
+            data = json.loads(path.read_text())
+            target = {"region": "ashen_ford", "tile": [4, 3]}
+            data["quests"][0]["stages"][0]["target"] = target
+            path.write_text(json.dumps(data))
+            self.assertEqual(check.check([content / "lore"]), [])
+            target["region"] = "missing"
+            path.write_text(json.dumps(data))
+            self.assertTrue(any("unknown target region" in e for e in check.check([content / "lore"])))
+
+    def test_optional_beat_hooks_cannot_set_main_flags_or_be_aftermaths(self):
+        def scene(id_, **kw):
+            return dict(id=id_, cast=["narrator"], start="n", nodes=[dict(id="n", lines=[
+                dict(id=id_+"_1", speaker="narrator", text="Hello.")], end=True, sets=["sq_hook_seen"])], **kw)
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp) / "hooks"
+            (pack / "scenes").mkdir(parents=True)
+            (pack / "pack.json").write_text(json.dumps(dict(id="hooks", loreVersion=1,
+                requires=["story"], files=["scenes/hooks.json"])))
+            good = scene("good")
+            bad = scene("bad", after=True)
+            main = scene("main")
+            main["nodes"][0]["sets"] = ["mill_found"]
+            (pack / "scenes/hooks.json").write_text(json.dumps(dict(scenes=[good, bad, main])))
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        mine = [e for e in errors if "scenes/hooks.json" in e]
+        self.assertFalse(any("/scenes/0" in e for e in mine), mine)
+        self.assertTrue(any("aftermath" in e for e in mine), mine)
+        self.assertTrue(any("main-story" in e for e in mine), mine)
+
     def test_after_is_only_for_a_battle_beat(self):
         def scene(id_: str, beat: str, after: bool | None) -> dict:
             s = {"id": id_, "beat": beat, "cast": ["narrator"], "start": "n",
@@ -122,6 +233,35 @@ class CheckTests(unittest.TestCase):
         self.assertEqual(mine, [
             "/scenes/2: a lead-in of 'fight' comes after one of its aftermath scenes; move it before them",
             "/scenes/3/after: only a battle beat has an aftermath, and 'find_mill' is a discovery beat",
+        ])
+
+    def test_an_option_back_to_its_own_node_is_refused(self):
+        """The game never offers an option leading to a node already played, its own included, so it could never show.
+        Tactics.Logic's LoreBook warns of the same thing (LoreBook.Warnings)."""
+        def line(id_: str) -> dict:
+            return {"id": id_, "speaker": "narrator", "text": "t"}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp) / "loops"
+            (pack / "scenes").mkdir(parents=True)
+            (pack / "pack.json").write_text(json.dumps(
+                {"id": "loops", "loreVersion": 1, "requires": ["story"], "files": ["scenes/loops.json"]}))
+            (pack / "scenes" / "loops.json").write_text(json.dumps({"scenes": [{
+                "id": "loops", "beat": "find_mill", "cast": ["narrator"], "start": "hub", "nodes": [
+                    {"id": "hub", "lines": [line("loops_1")], "options": [
+                        {"id": "again", "label": "Again.", "to": "hub"},
+                        {"id": "try", "label": "Try.", "check": {"skill": "athletics", "dc": 10, "pass": "out", "fail": "hub"}},
+                        # A 'to' beside a check counts as a target, as C#'s SceneOption.Targets has it (review A6).
+                        {"id": "both", "label": "Both.", "to": "hub",
+                         "check": {"skill": "athletics", "dc": 10, "pass": "out", "fail": "out"}},
+                        {"id": "go", "label": "Go.", "to": "out"}]},
+                    {"id": "out", "lines": [line("loops_2")], "end": True}]}]}))
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        mine = sorted(e.split("#")[1] for e in errors if "scenes/loops.json" in e.split("#")[0])
+        self.assertEqual(mine, [
+            "/scenes/0/nodes/0/options/0: leads back to its own node 'hub', so it's never offered",
+            "/scenes/0/nodes/0/options/1: leads back to its own node 'hub', so it's never offered",
+            "/scenes/0/nodes/0/options/2: leads back to its own node 'hub', so it's never offered",
         ])
 
     def test_art_keys_follow_the_rules_engine_harvest(self):

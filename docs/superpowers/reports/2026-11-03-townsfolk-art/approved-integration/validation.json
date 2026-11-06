@@ -1,0 +1,75 @@
+{
+  "status": "PASS: current unit/build, memory, native editor and four-phone live walk gates",
+  "builds": {
+    "solutionDebug": "0 warnings, 0 errors",
+    "solutionRelease": "0 warnings, 0 errors",
+    "finalPresentationTestsDebugRelease": "0 warnings, 0 errors"
+  },
+  "tests": {
+    "presentation": {
+      "passed": 2460,
+      "failed": 0,
+      "skipped": 0
+    },
+    "game": {
+      "passed": 676,
+      "failed": 0,
+      "skipped": 0
+    },
+    "worldToolsBeforeExtraVariantCase": {
+      "passed": 397,
+      "failed": 0,
+      "skipped": 0
+    },
+    "finalRegionWriterIncludingNewVariantCase": {
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    "phone": {
+      "passed": 508,
+      "failed": 0
+    },
+    "node": {
+      "passed": 16,
+      "failed": 0
+    }
+  },
+  "nativeVariant": "PASS: actual packed scene save/load, painted export and JSON round-trip",
+  "textureLimitBytes": 536870912,
+  "memoryGates": {
+    "ashen": "PASS",
+    "hollow": "PASS",
+    "haldenReview": "PASS"
+  },
+  "pixelLab": {
+    "spent": 30,
+    "remaining": 0.75,
+    "purchase": false
+  },
+  "remainingScope": "Halden owner pixel/TV approval; 24 other sprites; portraits; final whole-cast regression and hardware review",
+  "historicalChecks": "Prior full-solution/isolated-logic and cave-tour receipts remain in ../loading; not rerun or claimed current here.",
+  "liveE2e": {
+    "result": "PASS",
+    "renderer": "Linux Mesa software Vulkan Mobile, low, 640x360, no screenshots",
+    "cpuQuota": "800000 / 200000 = 4 CPUs",
+    "LP_NUM_THREADS": 2,
+    "landed": 20,
+    "pressed": 20,
+    "medianMs": 95,
+    "p90Ms": 221,
+    "worstMs": 234,
+    "unchangedMedianBudgetMs": 100,
+    "restartSavedPosition": "PASS",
+    "coldTvReconnect": "PASS",
+    "leaderDrop": "PASS",
+    "defaultMesaInitialRun": {
+      "result": "FAIL: median input latency",
+      "medianMs": 136,
+      "p90Ms": 429,
+      "worstMs": 1193,
+      "functionalRestartReconnectDrop": "PASS"
+    },
+    "timingLimit": "CPU software render; not a hardware benchmark or guaranteed product latency"
+  }
+}

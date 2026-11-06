@@ -32,6 +32,7 @@ public static class Replay
     /// g1, g2, g3, kara.</item>
     /// <item><c>river-crossing</c>: the base pack's <c>river_crossing</c> encounter (Normal) with a level-1 party of default
     /// human characters, all player-controlled: fighter, cleric, rogue and wizard (<see cref="BasePackTests.Party"/>).</item>
+    /// <item><c>river-ford-storm</c>: a controlled vignette on the shipped ford map: Storm Hex, freeze, Fire Pot and dousing.</item>
     /// <item><c>warlord-bridge</c>: the base pack's <c>warlord_bridge</c> showcase (Normal) with a level-5 party of default
     /// human characters, all AI-controlled companions: fighter, cleric, rogue, wizard and ranger. Its commands are recorded
     /// from <see cref="Ai.Plan"/> for both sides (<see cref="RecordWithAi"/>).</item>
@@ -58,6 +59,27 @@ public static class Replay
                 var rules = BasePackTests.Rules;
                 var setup = Encounters.Setup("river_crossing", BasePackTests.Party(4, rules), Difficulty.Normal, rules);
                 return new Start(rules, seed => Battle.Start(setup, rules, seed));
+            case "river-ford-storm":
+                // A controlled ford vignette: real Storm Hex and Fire Pot, one tile-directed cold probe.
+                // Extra HP keeps the replay focused on surfaces rather than an early battle outcome.
+                var fordRules = BasePackTests.Rules;
+                var storm = fordRules.Abilities[new AbilityId("goblin_shaman.storm_hex")];
+                var pot = fordRules.Abilities[new AbilityId("kobold_slinger.fire_pot")];
+                var frost = new AbilityDef(new AbilityId("replay.frost"), "Frost probe", 0,
+                    new CostDef(Action: 1), new TargetDef(TargetKind.Tile, 6, false, new AreaDef(AreaShape.Single)),
+                    [new DamageEffect(TestAbilities.Flat("8"), "cold", [])]);
+                var ford = TestBattle.On(fordRules.Maps["river_crossing"])
+                    .WithEnvironment(fordRules.Environment).With(storm, pot, frost)
+                    .WithConditions([.. fordRules.Conditions.Values])
+                    .Enemy("shaman", (TestSheets.Cleric with { MaxHp = 100, InitiativeBonus = 40 }).Knowing(storm, pot), new Tile(8, 5))
+                    .Party("mage", (TestSheets.Cleric.WithScore(Stat.Dex, 1) with { MaxHp = 100, InitiativeBonus = 30 }).Knowing(frost), new Tile(5, 6))
+                    .Enemy("gob", TestSheets.Goblin with { MaxHp = 100 }, new Tile(7, 7))
+                    .Party("wet", TestSheets.Cleric with { MaxHp = 100, Ac = 1 }, new Tile(6, 7));
+                return new Start(ford.Rules, seed =>
+                {
+                    var (state, events) = ford.Start(seed);
+                    return new Resolution(state, events, null);
+                });
             case "warlord-bridge":
                 var baseRules = BasePackTests.Rules;
                 string[] classes = ["fighter", "cleric", "rogue", "wizard", "ranger"];

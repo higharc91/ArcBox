@@ -24,11 +24,11 @@ public sealed class StageDirectorTests
     }
 
     /// <summary>Plays a started fight through its walk-in and its last blow, to the results with <paramref name="after"/> as the party.</summary>
-    private static void ToResults(StageDirector director, ExploreView after, ImmutableArray<UnitView>? final = null)
+    private static void ToResults(StageDirector director, ExploreView after, ImmutableArray<UnitView>? final = null, string outcome = "Won")
     {
         Run(director, StageTuning.FormingMost + 0.1);
         director.Receive(Fight(Battle(lastSeq: 9)));
-        director.Receive(Results(Battle(lastSeq: 10, units: final), after));
+        director.Receive(Results(Battle(lastSeq: 10, units: final), after, outcome));
         director.LastBlowPlayed();
         Run(director, StageTuning.GridOut + 0.05);
     }
@@ -269,6 +269,74 @@ public sealed class StageDirectorTests
         _ = script;
     }
 
+    /// <summary>
+    /// The server's <see cref="ExploreView.Arrived"/> lasts only until the party's next step. A TV that hears of the new epoch and a step
+    /// together (a slow frame, a thumb on the pad as the results go) still falls the party in, from the fight's outcome: seen on the e2e TV,
+    /// where the four walkers stood stacked on the leader's tile instead.
+    /// </summary>
+    [Fact]
+    public void A_win_heard_with_a_step_already_taken_still_falls_in()
+    {
+        var (_, director) = Started();
+        var final = Units(hero1: new Tile(3, 2), hero2: new Tile(5, 1));
+        var after = Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn");
+        ToResults(director, after, final);
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(20, 14), seq: 1)));     // the step cleared Arrived
+
+        Assert.Equal(StageStep.FallingIn, director.Stage);
+        Assert.True(director.Seed.ContainsKey("p2"));
+        Assert.NotEqual(director.Walkers!["p1"].Map, director.Walkers["p2"].Map);
+    }
+
+    [Fact]
+    public void A_loss_heard_with_a_step_already_taken_still_wakes()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(3, 3), arrived: "woke"), outcome: "Lost");
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(3, 4), seq: 1)));
+
+        Assert.Equal(StageStep.Waking, director.Stage);
+    }
+
+    /// <summary>A server restarted between the results and the first step starts the epoch from its clock, with no arrival: a snap.</summary>
+    [Fact]
+    public void A_restarted_servers_epoch_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn"));
+
+        director.Receive(Walking(Explore(epoch: 1_793_500_000, at: new Tile(90, 40))));
+
+        Assert.Equal(StageStep.Walking, director.Stage);
+        Assert.Empty(director.Seed);
+    }
+
+    /// <summary>A slow TV that hears of an aftermath's travel with the fight's epoch has the party in another region: no fall-in to it.</summary>
+    [Fact]
+    public void An_epoch_in_another_region_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn"));
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(5, 5), seq: 1) with { Region = "elsewhere" }));
+
+        Assert.NotEqual(StageStep.FallingIn, director.Stage);
+        Assert.Empty(director.Seed);
+    }
+
+    [Fact]
+    public void A_step_in_the_same_epoch_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 1, at: new Tile(12, 13), seq: 1));
+
+        director.Receive(Walking(Explore(epoch: 1, at: new Tile(12, 14), seq: 2)));
+
+        Assert.Equal(StageStep.Walking, director.Stage);
+    }
+
     [Fact]
     public void A_loss_fades_to_the_recovery_spawn()
     {
@@ -396,6 +464,42 @@ public sealed class StageDirectorTests
         Run(director, StageTuning.Takeover / 2 + 0.02);
         Assert.Equal(0, director.Fade);
         Assert.True(director.BeatsRun);
+    }
+
+    // The hardware check (§5.4): a TV back mid-fight logged WORLD late block 41, 56 and 62 as the world took over. The takeover cuts the camera
+    // to the stage's middle, and the scene now waits until the world's blocks there are recorded; this says where that is, and when to wait.
+    [Fact]
+    public void A_takeover_says_where_the_camera_will_cut_to_until_it_happens()
+    {
+        var script = new StageScript();
+        var director = script.Director(WorldState.Loading);
+        director.Receive(Fight(Battle(lastSeq: 30)));
+
+        Assert.False(director.InPlace);
+        var cut = Assert.NotNull(director.TakeoverOn(script.Terrain));
+        Assert.Null(director.TakeoverOn(new BoardTerrain(StageWorld.Map("elsewhere", 4, 4, (_, _) => StageWorld.Flat(0)), null)));     // another region's world
+
+        director.SetWorld(WorldState.Ready, script.Terrain);
+        Assert.True(director.InPlace);
+        Assert.Equal(cut, director.CameraTarget);
+        Assert.Null(director.TakeoverOn(script.Terrain));      // it's happened
+    }
+
+    [Fact]
+    public void A_fight_that_starts_in_place_or_results_with_no_fight_wait_for_no_takeover()
+    {
+        var (script, director) = Started();
+        Assert.Equal(StageStep.Forming, director.Stage);
+        Assert.Null(director.TakeoverOn(script.Terrain));
+
+        var fresh = script.Director(WorldState.Loading);
+        fresh.Receive(Results(Battle(lastSeq: 9), Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn")));
+        Assert.Equal(StageStep.Results, fresh.Stage);
+        Assert.Null(fresh.TakeoverOn(script.Terrain));
+
+        var walking = script.Director(WorldState.Loading);
+        walking.Receive(Walking());
+        Assert.Null(walking.TakeoverOn(script.Terrain));
     }
 
     [Fact]

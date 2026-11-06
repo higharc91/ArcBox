@@ -1,0 +1,1190 @@
+[
+  {
+    "id": "bark_dagna_holt_battle_start_1.main",
+    "line": "bark_dagna_holt_battle_start_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Form up. Nobody dies stupid.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Form up. Nobody dies stupid.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.2187f302",
+    "file": "bark_dagna_holt_battle_start_1.229764f9.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_battle_start_2.main",
+    "line": "bark_dagna_holt_battle_start_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Eyes front. Shields up.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Eyes front. Shields up.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.bd70e1d6",
+    "file": "bark_dagna_holt_battle_start_2.de9faf88.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_battle_start_3.main",
+    "line": "bark_dagna_holt_battle_start_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Right. Let's earn our bread.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Right. Let's earn our bread.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.3dea3516",
+    "file": "bark_dagna_holt_battle_start_3.7b8ecace.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_turn_start_1.main",
+    "line": "bark_dagna_holt_turn_start_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Mine.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Mine.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.23c99db8",
+    "file": "bark_dagna_holt_turn_start_1.a1f3d5fa.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_turn_start_2.main",
+    "line": "bark_dagna_holt_turn_start_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Moving.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Moving.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.341afda9",
+    "file": "bark_dagna_holt_turn_start_2.8fbf731b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_hit_1.main",
+    "line": "bark_dagna_holt_hit_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Down.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Down.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.b1edf88d",
+    "file": "bark_dagna_holt_hit_1.1c393822.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_hit_2.main",
+    "line": "bark_dagna_holt_hit_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Stay there.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Stay there.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.282c1dcd",
+    "file": "bark_dagna_holt_hit_2.c92675f8.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_miss_1.main",
+    "line": "bark_dagna_holt_miss_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Damn it.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Damn it.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.23e6de24",
+    "file": "bark_dagna_holt_miss_1.ae5cb45d.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_crit_1.main",
+    "line": "bark_dagna_holt_crit_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "That's for the bridge.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> That's for the bridge.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.a2fc627e",
+    "file": "bark_dagna_holt_crit_1.113e6172.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_kill_1.main",
+    "line": "bark_dagna_holt_kill_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Done.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Done.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.6ee983ca",
+    "file": "bark_dagna_holt_kill_1.636ce126.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_kill_2.main",
+    "line": "bark_dagna_holt_kill_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "One less.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> One less.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0812218e",
+    "file": "bark_dagna_holt_kill_2.6d10259b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_ally_down_1.main",
+    "line": "bark_dagna_holt_ally_down_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Someone's down! Cover them!",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Someone's down! Cover them!",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0b435fba",
+    "file": "bark_dagna_holt_ally_down_1.9f48f15b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_ally_down_2.main",
+    "line": "bark_dagna_holt_ally_down_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Not again. Not on my watch.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not again. Not on my watch.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.c8bf5717",
+    "file": "bark_dagna_holt_ally_down_2.b0883969.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_low_hp_1.main",
+    "line": "bark_dagna_holt_low_hp_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Had worse. Not much worse.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Had worse. Not much worse.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.9c991cba",
+    "file": "bark_dagna_holt_low_hp_1.97b25ab9.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_healed_1.main",
+    "line": "bark_dagna_holt_healed_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Ta. Back in.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Ta. Back in.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.f319508a",
+    "file": "bark_dagna_holt_healed_1.f3df214e.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_revived_1.main",
+    "line": "bark_dagna_holt_revived_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Still here. Don't fuss.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Still here. Don't fuss.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.5694e90b",
+    "file": "bark_dagna_holt_revived_1.13b0138a.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_victory_1.main",
+    "line": "bark_dagna_holt_victory_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Count heads. Everyone? Good.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Count heads. Everyone? Good.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.f6dbebaf",
+    "file": "bark_dagna_holt_victory_1.40d4243b.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_victory_2.main",
+    "line": "bark_dagna_holt_victory_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "That'll do.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> That'll do.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.4e12c52f",
+    "file": "bark_dagna_holt_victory_2.76ad0105.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_defeat_1.main",
+    "line": "bark_dagna_holt_defeat_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Fall back! Back, now!",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Fall back! Back, now!",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.545e70b8",
+    "file": "bark_dagna_holt_defeat_1.8aac13d5.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_camp_1.main",
+    "line": "bark_dagna_holt_camp_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Sleep. I'll take the watch. Habit.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Sleep. I'll take the watch. Habit.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.6e49fdf9",
+    "file": "bark_dagna_holt_camp_1.4fc7522c.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_camp_2.main",
+    "line": "bark_dagna_holt_camp_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Don't tell me it'll be all right. Tell me what we're doing.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d2e7a3a9",
+    "file": "bark_dagna_holt_camp_2.91193ef4.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_town_1.main",
+    "line": "bark_dagna_holt_town_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Don't tell me it'll be all right. Tell me what we're doing.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d2e7a3a9",
+    "file": "bark_dagna_holt_town_1.91193ef4.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_town_2.main",
+    "line": "bark_dagna_holt_town_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Form up. Nobody dies stupid.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Form up. Nobody dies stupid.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.2187f302",
+    "file": "bark_dagna_holt_town_2.229764f9.ogg",
+    "done": false
+  },
+  {
+    "id": "bark_dagna_holt_town_3.main",
+    "line": "bark_dagna_holt_town_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Right. Let's earn our bread.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Right. Let's earn our bread.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.3dea3516",
+    "file": "bark_dagna_holt_town_3.7b8ecace.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_camp_open_2.main",
+    "line": "ch1_camp_open_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Skarrow counts mouths. Varrow counts sacks. I used to think a guard only had to count spears.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.af843f81",
+    "file": "ch1_camp_open_2.73f05588.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_camp_hunger_1.main",
+    "line": "ch1_camp_hunger_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll had a little girl. Skarrow has a whole hill of them. Don't ask me to make that come out even. Just... don't let me forget either side.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0e4b83be",
+    "file": "ch1_camp_hunger_1.a925b2e9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_camp_truth_1.main",
+    "line": "ch1_camp_truth_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> He keeps saying we must trust him. A captain who has to say that has usually stopped listening.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0d49daf0",
+    "file": "ch1_camp_truth_1.8e17b167.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_camp_warmth_2.main",
+    "line": "ch1_camp_warmth_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then we'd better learn how to give something back.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Then we'd better learn how to give something back.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.e49d3738",
+    "file": "ch1_camp_warmth_2.788b7405.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_mayor_halden_3.main",
+    "line": "ch1_mayor_halden_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Killed two of my guards doing it. Coll and Annet. Good people.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Killed two of my guards doing it. Coll and Annet. Good people.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.f8a4b6f0",
+    "file": "ch1_mayor_halden_3.c0a18099.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_mayor_goblins_2.main",
+    "line": "ch1_mayor_goblins_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Forty winters she's led them. Clever. She'll smile at you while her archers find the range.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Forty winters she's led them. Clever. She'll smile at you while her archers find the range.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.fe43a149",
+    "file": "ch1_mayor_goblins_2.529013eb.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_mayor_hero_3.main",
+    "line": "ch1_mayor_hero_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Calm's for after. Bridge first.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Calm's for after. Bridge first.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.4d3c3900",
+    "file": "ch1_mayor_hero_3.d0eba4c9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_mayor_soldier_1.main",
+    "line": "ch1_mayor_soldier_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Aye. You were. Not many of us walked off it.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Aye. You were. Not many of us walked off it.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.5aa27a90",
+    "file": "ch1_mayor_soldier_1.56849c9a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_mayor_soldier_2.main",
+    "line": "ch1_mayor_soldier_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "You saw what they did. When the time comes, you tell them.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> You saw what they did. When the time comes, you tell them.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.bcdf11b1",
+    "file": "ch1_mayor_soldier_2.771bb153.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_open_4.main",
+    "line": "ch1_ford_open_4",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Hit them at dawn, from both banks. They'll break. Goblins always break.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Hit them at dawn, from both banks. They'll break. Goblins always break.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.2230937b",
+    "file": "ch1_ford_open_4.2b2a190e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_truth_1.main",
+    "line": "ch1_ford_truth_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Say that again.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Say that again.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0e80a424",
+    "file": "ch1_ford_truth_1.60a6b2de.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_truth_2.main",
+    "line": "ch1_ford_truth_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.1b501a03",
+    "file": "ch1_ford_truth_2.d482b35e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_truth_3.main",
+    "line": "ch1_ford_truth_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.2c8fb4cd",
+    "file": "ch1_ford_truth_3.f9b54bfb.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_cases_1.main",
+    "line": "ch1_ford_cases_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.a8c25da3",
+    "file": "ch1_ford_cases_1.e6e53880.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_cases_2.main",
+    "line": "ch1_ford_cases_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.1cc7d587",
+    "file": "ch1_ford_cases_2.76569cc2.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_pay_fail_2.main",
+    "line": "ch1_ford_pay_fail_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Twenty crowns. My own. Now choose.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twenty crowns. My own. Now choose.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d0c9bfa7",
+    "file": "ch1_ford_pay_fail_2.6ca21a20.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_force_1.main",
+    "line": "ch1_ford_force_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.a5f2519b",
+    "file": "ch1_ford_force_1.73b8bd59.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_ford_parley_1.main",
+    "line": "ch1_ford_parley_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Talk, then. When she puts a spear through you, remember who told you she would.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Talk, then. When she puts a spear through you, remember who told you she would.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.6ce2cdb6",
+    "file": "ch1_ford_parley_1.a116cfdb.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_dawn_open_4.main",
+    "line": "ch1_dawn_open_4",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Now. Before she says anything else.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Now. Before she says anything else.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.b133b6f0",
+    "file": "ch1_dawn_open_4.7515dedd.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_soldier_1.main",
+    "line": "ch1_bridge_cost_soldier_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Children. Our lads shot at children.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Children. Our lads shot at children.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.67da7bb3",
+    "file": "ch1_bridge_cost_soldier_1.4f2c774e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_soldier_2.main",
+    "line": "ch1_bridge_cost_soldier_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "And we've just finished what they started. Gods help me.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> And we've just finished what they started. Gods help me.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.465a990b",
+    "file": "ch1_bridge_cost_soldier_2.478b3292.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_over_1.main",
+    "line": "ch1_bridge_cost_over_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The road's open. That's what we came for.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The road's open. That's what we came for.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.fb7b9683",
+    "file": "ch1_bridge_cost_over_1.1b6f15a7.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_bridge_cost_over_2.main",
+    "line": "ch1_bridge_cost_over_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Funny. I thought this would feel like something.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Funny. I thought this would feel like something.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.e446341a",
+    "file": "ch1_bridge_cost_over_2.2263557f.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_young_ones_open_5.main",
+    "line": "ch1_young_ones_open_5",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Truce or no truce, they're on my bridge. Ready when you are.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Truce or no truce, they're on my bridge. Ready when you are.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.cfd7204c",
+    "file": "ch1_young_ones_open_5.f5514a10.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_road_east_open_3.main",
+    "line": "ch1_road_east_open_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Bridge is clear. Carts can cross by noon.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Bridge is clear. Carts can cross by noon.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.e39666dc",
+    "file": "ch1_road_east_open_3.83c877d3.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_road_east_open_4.main",
+    "line": "ch1_road_east_open_4",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "I wanted her dead, you know. For Coll and Annet. I still might, some days.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I wanted her dead, you know. For Coll and Annet. I still might, some days.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.a4a23df5",
+    "file": "ch1_road_east_open_4.cbf32ed1.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_road_east_open_5.main",
+    "line": "ch1_road_east_open_5",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "But I've never seen goblins carry their own children off a bridge before. I'll think on it.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> But I've never seen goblins carry their own children off a bridge before. I'll think on it.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.60b6b895",
+    "file": "ch1_road_east_open_5.0f67bcd4.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_granary_open_3.main",
+    "line": "ch1_granary_open_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The goblins, Halden. They want feeding. We gave our word.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The goblins, Halden. They want feeding. We gave our word.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.0660a3a9",
+    "file": "ch1_granary_open_3.348770e3.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_granary_press_1.main",
+    "line": "ch1_granary_press_1",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Halden. You locked those gates in the spring, before the clan ever came down. I want to know why.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Halden. You locked those gates in the spring, before the clan ever came down. I want to know why.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.4b827e6b",
+    "file": "ch1_granary_press_1.89d11779.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_granary_confess_4.main",
+    "line": "ch1_granary_confess_4",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Six years. I've sat at your table for six years.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Six years. I've sat at your table for six years.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.fb4328cc",
+    "file": "ch1_granary_confess_4.d145315b.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_granary_doors_2.main",
+    "line": "ch1_granary_doors_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Aye. Somebody has to count the sacks honestly.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Aye. Somebody has to count the sacks honestly.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.1adf11cb",
+    "file": "ch1_granary_doors_2.b7e525b1.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_slain_rekindled_open_3.main",
+    "line": "ch5_epi_clan_slain_rekindled_open_3",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.55c465fd",
+    "file": "ch5_epi_clan_slain_rekindled_open_3.78ea8dc8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch5_epi_clan_slain_returned_open_2.main",
+    "line": "ch5_epi_clan_slain_returned_open_2",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "They remember the bridge. So do I. That's the trouble with remembering. It works on both sides.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They remember the bridge. So do I. That's the trouble with remembering. It works on both sides.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.395d3398",
+    "file": "ch5_epi_clan_slain_returned_open_2.c35be44d.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_busy.main",
+    "line": "ashmaw_busy",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The ford first. I have too few guards to bury another.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.47b37507",
+    "file": "ashmaw_busy.9e9a9aeb.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_offer.main",
+    "line": "ashmaw_offer",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.fe6c264d",
+    "file": "ashmaw_offer.0061d72d.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_accepted.main",
+    "line": "ashmaw_accepted",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.ec54291b",
+    "file": "ashmaw_accepted.7b2094b8.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_later.main",
+    "line": "ashmaw_later",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Then take the time. Cold courage does nobody any good.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.aec53cd3",
+    "file": "ashmaw_later.be53c235.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_progress.main",
+    "line": "ashmaw_progress",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud\u2019s hut. Follow the miners\u2019 track. Come back with the claw, and with every soul you take in.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.d5fc595e",
+    "file": "ashmaw_progress.800a02aa.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_proof.main",
+    "line": "ashmaw_proof",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.9bb3f5a8",
+    "file": "ashmaw_proof.53b3925b.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_wait.main",
+    "line": "ashmaw_wait",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "They will stay here. A promise does not spoil overnight.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.783e8d78",
+    "file": "ashmaw_wait.b9b16c30.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_presented.main",
+    "line": "ashmaw_presented",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.74854def",
+    "file": "ashmaw_presented.167e3765.ogg",
+    "done": false
+  },
+  {
+    "id": "ashmaw_done.main",
+    "line": "ashmaw_done",
+    "cast": "main",
+    "speaker": "dagna_holt",
+    "preset": "Gacrux",
+    "pitch": 0,
+    "filter": "",
+    "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+    "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+    "delivery": {
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+      "mood": "idle"
+    },
+    "raw": "Gacrux.867a63f5",
+    "file": "ashmaw_done.fa47da21.ogg",
+    "done": false
+  }
+]

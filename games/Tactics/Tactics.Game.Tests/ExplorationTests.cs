@@ -43,10 +43,14 @@ public sealed class ExplorationTests
         var manifest = Path.Combine(rules, "manifest.json");
         var node = JsonNode.Parse(File.ReadAllText(manifest))!;
         var files = node["files"]!.AsArray();
-        foreach (var file in files.Where(f => f!.GetValue<string>().StartsWith("world/", StringComparison.Ordinal)).ToArray())
+        // A region's things go with it: a things file for a region that isn't loaded is an error.
+        foreach (var file in files.Where(f => f!.GetValue<string>() is var name
+                     && (name.StartsWith("world/", StringComparison.Ordinal) || name.StartsWith("interactables/", StringComparison.Ordinal) || name.StartsWith("shops/", StringComparison.Ordinal) || name.StartsWith("mobs/", StringComparison.Ordinal))).ToArray())
             files.Remove(file);
         File.WriteAllText(manifest, node.ToJsonString());
         Directory.Delete(Path.Combine(rules, "world"), recursive: true);
+        if (Directory.Exists(Path.Combine(rules, "interactables")))
+            Directory.Delete(Path.Combine(rules, "interactables"), recursive: true);
     }));
 
     /// <summary>Loads a copy of the rules after <paramref name="change"/> has edited it.</summary>
@@ -63,7 +67,7 @@ public sealed class ExplorationTests
                 File.Copy(file, to);
             }
             change(copy.FullName);
-            return RulesPack.Load([copy.FullName]);
+            return RulesPack.Load([copy.FullName], ArtManifests.Load(ContentRules()));
         }
         finally
         {

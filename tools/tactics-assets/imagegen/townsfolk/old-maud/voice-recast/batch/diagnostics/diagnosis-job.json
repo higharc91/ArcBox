@@ -1,0 +1,91 @@
+{
+  "jobId": "job_t3poaWUX9PLtzfwAq6hP7uRe",
+  "jobType": "custom",
+  "billing": {
+    "cuCost": 4,
+    "cuDiscount": 0
+  },
+  "metadata": {
+    "input": {
+      "modelId": "model_scenario-audio-to-text",
+      "file": "asset_yrsxedvjjvvRVUSPUf2PE2ut",
+      "language": "en",
+      "modelSize": "small.en",
+      "task": "transcribe",
+      "vadFilter": true
+    },
+    "assetIds": [
+      "asset_2Uik6R4nXH6hsXnKSrhCHwfz"
+    ],
+    "output": {
+      "detected_language": "en",
+      "duration": 65.76,
+      "language_probability": 1,
+      "segment_count": 7,
+      "segments": [
+        {
+          "end": 13.45,
+          "start": 0,
+          "text": " A woman aged one hundred and five, ancient, dry, papery voice with age-cracked creak,",
+          "words": null
+        },
+        {
+          "end": 23.77,
+          "start": 13.45,
+          "text": " light breathy quaver and frail breath support, soft, low-mid register, unhurried, short phrases",
+          "words": null
+        },
+        {
+          "end": 34.97,
+          "start": 23.77,
+          "text": " with small natural pauses, warm, wry, rural English manner, perfectly lucid and self-possessed,",
+          "words": null
+        },
+        {
+          "end": 42.01,
+          "start": 34.97,
+          "text": " clearly very elderly, not a young actress speaking slowly, not the firm, resonant guard",
+          "words": null
+        },
+        {
+          "end": 48.01,
+          "start": 42.01,
+          "text": " captain, no cartoon witch or theatrical croak.",
+          "words": null
+        },
+        {
+          "end": 58.03,
+          "start": 48.01,
+          "text": " only the dialogue. Mood, idle. If I knew that, dearie, I'd not have spent",
+          "words": null
+        },
+        {
+          "end": 65.39,
+          "start": 58.03,
+          "text": " a century watching the water. Ask them. They'll answer you sideways.",
+          "words": null
+        }
+      ]
+    }
+  },
+  "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "authorId": "user_9378dDd1b8d6e376eC44bB68",
+  "createdAt": "2026-11-05T00:29:46.937Z",
+  "updatedAt": "2026-11-05T00:29:57.710Z",
+  "status": "success",
+  "statusHistory": [
+    {
+      "status": "pending",
+      "date": "2026-11-05T00:29:46.937Z"
+    },
+    {
+      "status": "in-progress",
+      "date": "2026-11-05T00:29:47.070Z"
+    },
+    {
+      "status": "success",
+      "date": "2026-11-05T00:29:57.710Z"
+    }
+  ],
+  "progress": 1
+}

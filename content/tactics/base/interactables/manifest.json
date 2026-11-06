@@ -1,0 +1,28 @@
+{
+  "about": "Actual campfire states, generated and edited with PixelLab. The camp presentation uses the five-frame fire loop from camp/.",
+  "props": {
+    "campfire": {
+      "variants": {
+        "unlit": "campfire_unlit.png",
+        "lit": "campfire_lit.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": true,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "rest"
+      ]
+    }
+  }
+}

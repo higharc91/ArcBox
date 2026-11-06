@@ -1,0 +1,46 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": true,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "pr_member1",
+        "label": "Player1",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "pr_member2",
+        "label": "Player2",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "pr_member3",
+        "label": "Player3",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "pr_member4",
+        "label": "Player4",
+        "skill": null,
+        "dc": null
+      }
+    ],
+    "mine": "pr_member3",
+    "chosen": null,
+    "tie": false,
+    "decider": null,
+    "away": [],
+    "vip": false,
+    "question": "Who takes the Smoke Bomb?",
+    "vote": 0
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:15\u002B00:00",
+  "header": null
+}

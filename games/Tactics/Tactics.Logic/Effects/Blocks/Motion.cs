@@ -100,6 +100,7 @@ public static class Motion
     /// </summary>
     public static void FallIn(BattleWriter w, UnitId unit, int levels)
     {
+        Surfaces.Douse(w, unit, w.Unit(unit).Pos);
         w.Emit(new Fell(unit, Math.Max(0, levels), 0, IntoDeep: true));
         DownedRules.Drop(w, unit, null);
     }
@@ -146,6 +147,7 @@ public static class Motion
     /// </summary>
     internal static void Entered(BattleWriter w, UnitId unit, Tile tile)
     {
+        Surfaces.Douse(w, unit, tile);
         Conditions.BreakIfIncapacitated(w, unit);
         Hooks.Fire(w, HookKind.OnEnterTile, new HookArgs(unit, Tile: tile), w.Rules);
     }
@@ -277,6 +279,7 @@ public sealed class DashBlock : EffectBlock<DashEffect>
 
         ctx.W.Set(source with { Pos = at });
         ctx.W.Emit(new Moved(source.Id, [.. path]));
+        Surfaces.Douse(ctx.W, source.Id, at);
         Conditions.BreakIfIncapacitated(ctx.W, source.Id);
         var hooks = new List<Step>();
         Hooks.Collect(ctx.W, HookKind.OnMove, new HookArgs(source.Id, Tile: at), ctx.Rules, hooks);

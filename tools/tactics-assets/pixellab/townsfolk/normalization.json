@@ -1,0 +1,70 @@
+[
+  {
+    "worldHeight": 36.0,
+    "sourceBounds": [
+      57,
+      29,
+      101,
+      143
+    ],
+    "method": "nearest-neighbour; fixed transform before animation",
+    "destination": [
+      66,
+      52,
+      28,
+      72
+    ],
+    "candidate": 1
+  },
+  {
+    "worldHeight": 36.0,
+    "sourceBounds": [
+      55,
+      29,
+      102,
+      143
+    ],
+    "method": "nearest-neighbour; fixed transform before animation",
+    "destination": [
+      65,
+      52,
+      30,
+      72
+    ],
+    "candidate": 2
+  },
+  {
+    "worldHeight": 36.0,
+    "sourceBounds": [
+      57,
+      27,
+      102,
+      143
+    ],
+    "method": "nearest-neighbour; fixed transform before animation",
+    "destination": [
+      66,
+      52,
+      28,
+      72
+    ],
+    "candidate": 3
+  },
+  {
+    "worldHeight": 36.0,
+    "sourceBounds": [
+      58,
+      27,
+      102,
+      143
+    ],
+    "method": "nearest-neighbour; fixed transform before animation",
+    "destination": [
+      66,
+      52,
+      28,
+      72
+    ],
+    "candidate": 4
+  }
+]

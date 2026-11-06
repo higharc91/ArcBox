@@ -13,9 +13,14 @@ public sealed class BaseLoreTests
     private static IEnumerable<(Arc Arc, ArcBeat Beat)> Battles()
         => Book.Value.Arcs.SelectMany(arc => arc.Beats.Where(b => b.Kind == ArcBeat.Battle).Select(b => (arc, b)));
 
+    /// <summary>The base lore has nothing a game would play and never show (<see cref="LoreBook.Warnings"/>), as <c>check.py</c> agrees.</summary>
+    [Fact]
+    public void The_base_lore_has_no_warnings()
+        => Assert.Empty(Book.Value.Warnings);
+
     [Fact]
     public void Every_chapter_has_its_arc_in_order()
-        => Assert.Equal([1, 2, 3, 4, 5], Book.Value.Arcs.Select(a => a.Chapter));
+        => Assert.Equal([1, 2, 3, 4, 5], Book.Value.Arcs.Where(a => !a.SideAdventure).Select(a => a.Chapter));
 
     [Fact]
     public void The_book_reads_a_beat_as_it_is_written()
@@ -24,7 +29,7 @@ public sealed class BaseLoreTests
 
         Assert.Equal(("battle", "ford_bridge", "river_crossing"), (beat.Kind, beat.Place, beat.Encounter));
         Assert.Equal(["ch1_skarrow_spared"], beat.Requires);
-        Assert.Empty(beat.Sets);
+        Assert.Equal(["ch1_ford_settled"], beat.Sets);
         Assert.Empty(beat.Choices);
 
         var choice = Book.Value.ArcFor("ashen_ford")!.Beats.Single(b => b.Id == "ch1_the_ford_choice");
@@ -46,14 +51,14 @@ public sealed class BaseLoreTests
     [Fact]
     public void Every_arc_battle_takes_a_full_party()
     {
-        foreach (var (_, beat) in Battles())
-            Assert.True(Rules.Encounters[beat.Encounter!].Party.Max >= Seats, $"The encounter '{beat.Encounter}' of '{beat.Id}' takes at most {Rules.Encounters[beat.Encounter!].Party.Max}.");
+        foreach (var (arc, beat) in Battles())
+            Assert.True(Rules.Encounters[beat.Encounter!].Party.Max >= (arc.SideAdventure ? 4 : Seats), $"The encounter '{beat.Encounter}' of '{beat.Id}' takes at most {Rules.Encounters[beat.Encounter!].Party.Max}.");
     }
 
     [Fact]
     public void Every_battle_beat_in_chapter_1_has_a_stamp()
     {
-        var arc = Book.Value.Arcs.Single(a => a.Chapter == 1);
+        var arc = Book.Value.Arcs.Single(a => a.Chapter == 1 && !a.SideAdventure);
         var region = Rules.RegionFor(arc.Region)!;
         var battles = arc.Beats.Where(b => b.Kind == ArcBeat.Battle).ToList();
 

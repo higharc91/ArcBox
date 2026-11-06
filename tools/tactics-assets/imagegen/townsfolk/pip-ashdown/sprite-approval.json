@@ -1,0 +1,71 @@
+{
+  "character": "Pip Ashdown",
+  "stage": "complete_set_approved_installed",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 1,
+  "originalPath": "/workspace/generated_images/exec-31958d9e-da33-403b-8e26-ea9e21e4a448.png",
+  "candidateSha256": "8881166890c30272827901285b5b2e75c32ead0a7bb74ca50b705c4122338cb2",
+  "requestSha256": "b69391a1c535f85f7d2808d22958b0b25f23386958c8387b66231c1884ceebf5",
+  "inputSha256": {
+    "tools/tactics-assets/concepts/townsfolk/generated/character_pip_ashdown.png": "3cef2d6d0c51f588663f146a00eebafcb046d018a191ee8b278e6a847e0bdc9d",
+    "tools/tactics-assets/imagegen/townsfolk/lark/rotations/south.png": "bf8f6238c3639a9519137047d8830ebace7c5577f610519e0f153764c41a2300"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": true,
+  "animationApproval": "authorized_generation_complete",
+  "fullSetTvApproval": "approved",
+  "nativeHeightTarget": 52,
+  "worldHeightTarget": 26,
+  "reviewNotes": [
+    "Appearance approved; full-set/TV approval pending.",
+    "Southwest facing corrected in generated motion set; use final rotations, not old southwest appearance guide.",
+    "64x64 frames, anchor32/56, child body target52 native /26 world pixels, 2.25MiB atlas.",
+    "Southeast talk holds prior valid pose instead of drifting last source cell; no per-frame recentering.",
+    "Review uses Pip-only child_pip variant and preserves other children.",
+    "Existing voice recording included in voiced review reel; no speech generation."
+  ],
+  "ownerAppearanceApproval": {
+    "date": "2026-11-04",
+    "quote": "Yep, she looks good",
+    "source": "candidate-1.png"
+  },
+  "completedSet": {
+    "status": "approved",
+    "nativeFrameSlots": 144,
+    "selectedSourceCells": 143,
+    "curatedHeldSlots": 1,
+    "portraits": 6,
+    "completionImageToolCalls": 9,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": true,
+    "sha256": {
+      "review_pip.png": "f30cf3a5178e89425ef49ab0848639f3bda771c5c9065b31e461e617fd3f3df0",
+      "review-sprite.json": "45498c19552f7b96b9a0627bf7665f2513b972cc962fdd0daeaf4b8a9d043c50",
+      "palette.json": "a0ccb287dae172b8e5be9eab091daf7f8001164b37f45217e4ce4a9bfef2ae5c",
+      "atlas-validation.json": "5ad58ae05dcfebe32a6adbba87af25556c3be53e4b174c2a08f5c8311f4d1224",
+      "portraits-validation.json": "9e5875383453ef87419bae1a2d3122e10f63d781ead92930a25ab9ecdd0f290c",
+      "pip-eight-direction-idle.gif": "8003ae5c128e0e7d7c5b5ae2a3bf3d20b469bc74dc0c38dd1f519944e56b1fd7",
+      "pip-eight-direction-walk.gif": "9d535a53d655c97c810d28c5858256effa33c484e29f770dd483ae7ba212ca19",
+      "pip-eight-direction-talk.gif": "9128f29344919113d7e8441ef2e7a4ae6511229bf71fd1442c9cd97ab9f8bc41",
+      "pip-portraits-review.png": "73affd6d8f3519b9b9be21951466223cec0d31d7083781fd40280c87a4a8cf28",
+      "pip-directions-review.png": "868b727918e2ee0c652dd466dfa38c8cba195e7cd3701d0711ecafb400ff0fdd",
+      "pip-closeup-review.gif": "0ef877e8691a369e2461ebc8fd692a3a25d6eaa9dcd34324f79f932baf4dde15",
+      "pip-finished-review.mp4": "5112f64e34e9858f264140e5bd1fe83154503986b17426cd851f38144f2ccf04",
+      "review-validation.json": "92b998d04f4980a680741e4d241436710c185b354a58617d1850bdcff3e21a5e",
+      "voice-sample.mp3": "57c3b6678ad5a74309b5e728e890eb604429af808e508e5001afc74cff7931b3",
+      "voice-sample.json": "1a0395541dd68c3f0987bc3e21fafcfaa92b1e53a08018e7750c847b044e9108"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/pip-imagegen/world-pip.png",
+      "sha256": "2d104f7822bd238e3945d682b6433a1b0cb809f954a9d28a0fa121cf908b5016"
+    }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks great, what's next",
+    "installationAuthorization": "OK proceed",
+    "context": "Owner approved finished review, then authorized installation and next character draft."
+  }
+}

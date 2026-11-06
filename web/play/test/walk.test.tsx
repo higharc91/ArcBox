@@ -78,6 +78,14 @@ describe("the walk pad", () => {
     expect(document.querySelector(".tx-pad")).not.toBeNull();
   });
 
+  it("shows each player's colour in the party and on your card", () => {
+    show("walk-follower");
+    const data = (fixtures["./fixtures/tactics/walk-follower.json"]!.default as { data: { me: { color: string }; party: { color: string }[] } }).data;
+    const dots = [...document.querySelectorAll<HTMLElement>(".tx-walk-party .tx-dot")];
+    expect(dots.map((d) => d.style.getPropertyValue("--c"))).toEqual(data.party.map((p) => p.color));
+    expect(document.querySelector<HTMLElement>(".tx-walk .tx-me")!.style.getPropertyValue("--c")).toBe(data.me.color);
+  });
+
   it("draws its chevrons where the party goes, the road directions on a road's bearing", () => {
     show("walk-leader");
     const turn = (dir: string) => document.querySelector(`.tx-chevron.${dir}`)!.getAttribute("transform");
@@ -493,12 +501,29 @@ describe("the walk screen", () => {
     expect(document.querySelector(".tx-walk.arrived")).toBeNull();
   });
 
+  it("tells a screen reader who leads, and when this phone takes the lead", () => {
+    const { rerender } = render(<ControllerScreen view={view("walk-follower")} send={vi.fn()} me="ALEX" game="tactics" />);
+    const status = document.querySelector<HTMLElement>(".tx-walk-who")!;
+    expect(status.getAttribute("role")).toBe("status");
+    rerender(<ControllerScreen view={view("walk-leader", undefined, "v2")} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect(document.querySelector(".tx-walk-who")).toBe(status);
+    expect(status.textContent).toBe("You lead the party");
+  });
+
+  it("the pad takes keyboard focus and says the arrow keys walk", () => {
+    show("walk-leader");
+    const face = document.querySelector<HTMLElement>(".tx-pad")!;
+    expect(face.tabIndex).toBe(0);
+    expect(face.getAttribute("aria-label")).toMatch(/arrow keys/i);
+    expect(face.getAttribute("aria-keyshortcuts")).toBe("ArrowUp ArrowDown ArrowLeft ArrowRight");
+  });
+
   it("says under the banner what to do: the leader walks, everyone watches the TV", () => {
     show("walk-leader");
-    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Hold a direction to walk. Watch the TV.");
+    expect(screen.getByText("Hold a direction to walk. Watch the TV.")).toBeTruthy();
     cleanup();
     show("walk-follower");
-    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Player1 steers. Watch the TV.");
+    expect(screen.getByText("Player1 steers. Watch the TV.")).toBeTruthy();
     cleanup();
     show("walk-follower", (d) => {
       d.leaderName = null;
@@ -605,5 +630,18 @@ describe("the battle list, from the world", () => {
     const { send } = show("pickEncounter");
     fireEvent.click(screen.getByRole("button", { name: "Back to walking" }));
     expect(send).toHaveBeenLastCalledWith({ action: "backToWalk" });
+  });
+
+  it("has no Back to walking in a pack with no world (canWalk false), so there's no dead button", () => {
+    show("pickEncounter-noWalk");
+    expect(screen.queryByRole("button", { name: "Back to walking" })).toBeNull();
+    expect(screen.getByRole("button", { name: /River Crossing/ })).toBeTruthy();
+  });
+
+  it("has no Back to walking from a server that doesn't say canWalk", () => {
+    const v = view("pickEncounter");
+    delete (v.data as Record<string, unknown>).canWalk;
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.queryByRole("button", { name: "Back to walking" })).toBeNull();
   });
 });

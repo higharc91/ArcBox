@@ -10,7 +10,8 @@ namespace Tactics.Sim;
 /// <see cref="Difficulty"/>. A battle still going when round <see cref="RoundCap"/> is over stops and counts as lost.
 /// </summary>
 public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray<int> Levels, int PartiesPerSize,
-    ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30);
+    ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30,
+    ImmutableDictionary<string, string>? Trinkets = null);
 
 /// <summary>
 /// One simulated battle: the encounter, the party's level and classes (one entry per member, ordinal order), the seed,
@@ -25,7 +26,7 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
 public sealed record SimBattle(string Encounter, int Level, ImmutableArray<string> Classes, ulong Seed, BattleOutcome Outcome,
     int Rounds, int Downs, int Outs, ImmutableSortedDictionary<string, ClassStats> PerClass,
     ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false,
-    int Rejected = 0, int Replans = 0, int ForcedEnds = 0, int? EncounterLevel = null);
+    int Rejected = 0, int Replans = 0, int ForcedEnds = 0, int? EncounterLevel = null, EnvironmentStats? Environmental = null);
 
 /// <summary>
 /// A class's measures in one battle, per member of that class (see <see cref="Tally"/> for how each is read from the
@@ -152,6 +153,9 @@ public static class SimRunner
     public static IEnumerable<SimBattle> Run(SimConfig config, RulesPack rules)
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(config.RoundCap, 1);
+        foreach (var (cls, trinket) in config.Trinkets ?? ImmutableDictionary<string, string>.Empty)
+            if (!rules.Classes.ContainsKey(cls) || !rules.Trinkets.TryGetValue(trinket, out var def) || def.Class != cls)
+                throw new ArgumentException($"Trinket '{trinket}' is not a reward for class '{cls}'.", nameof(config));
         var parties = Parties(config, rules);
         var jobs = new List<(string Encounter, int Level, ImmutableArray<string> Party, ulong Seed)>();
         foreach (var encounter in config.Encounters)
@@ -174,7 +178,9 @@ public static class SimRunner
         ImmutableArray<PartyMember> party = [.. classes.Select((cls, i) =>
         {
             var id = new UnitId($"p{i + 1}.{cls}");
-            return new PartyMember(id, SheetBuilder.DefaultCharacter(id.Value, race, cls, null, level, rules),
+            var character = SheetBuilder.DefaultCharacter(id.Value, race, cls, null, level, rules)
+                with { Trinket = config.Trinkets?.GetValueOrDefault(cls) };
+            return new PartyMember(id, character,
                 new AiControlled(ProfileFor(rules.Classes[cls])));
         })];
         var setup = Encounters.Setup(encounter, party, config.Difficulty, rules);
@@ -200,7 +206,7 @@ public static class SimRunner
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
             tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
-            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level);
+            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment);
     }
 
     /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>

@@ -30,8 +30,8 @@ public sealed record UnitGear(string? Weapon, bool Armoured, string? Family, boo
 
 /// <summary>
 /// What the pack holds for the ear: the sfx and music manifests, and what the rest of the pack says about who a sprite is. The
-/// sfx manifest says what each sound is for only in its <c>use</c> text, so effects and creatures are read from that text,
-/// which keeps a sound added to the pack from needing a change here.
+/// creature attack entries name their monster ids explicitly; effect keys and movement traits still come from the
+/// manifest's descriptive <c>use</c> text.
 /// </summary>
 public sealed partial class SoundBank
 {
@@ -108,11 +108,13 @@ public sealed partial class SoundBank
     private UnitGear WorkOutGear(string sprite)
     {
         var parts = sprite.Split('.');
-        var monsters = _monsters.GetValueOrDefault(sprite) ?? [];
+        var monsters = _monsters.GetValueOrDefault(sprite) ?? (parts.Length >= 3
+            ? _monsters.Where(m => m.Key.StartsWith(parts[0] + "." + parts[1] + ".", StringComparison.Ordinal)).SelectMany(m => m.Value).Distinct().ToList()
+            : []);
         var (layer, torso) = parts is ["characters", var preset, ..] ? Preset(preset) : (null, null);
         var ids = monsters.Select(m => m.Id).ToArray();
         return new UnitGear(monsters.Select(m => m.Weapon).FirstOrDefault(w => w is not null) ?? layer, torso is not null && Armour.Contains(torso),
-            ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
+            ids.Contains("ashmaw") ? "ashmaw" : ids.Contains("kobold_foreman") ? "goblin" : ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
     }
 
     private (string? Weapon, string? Torso) Preset(string id)
@@ -144,8 +146,8 @@ public sealed partial class SoundBank
             if (entry.Group == "spell")
                 ReadEffects(entry);
             else if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
-                foreach (var name in Words(entry.Use))
-                    _families.TryAdd(name, entry.Id[..^"_attack".Length]);
+                foreach (var name in v.GetProperty("families").EnumerateArray())
+                    _families.TryAdd(name.GetString()!, entry.Id[..^"_attack".Length]);
         }
         _heavy = [.. Words(_sounds.GetValueOrDefault("step_heavy")?.Use ?? "")];
         _fliers = [.. Words(_sounds.GetValueOrDefault("flap_wings")?.Use ?? "")];

@@ -1,0 +1,1910 @@
+[
+  {
+    "key": "wolf/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140000
+    }
+  },
+  {
+    "key": "wolf/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140001
+    }
+  },
+  {
+    "key": "wolf/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140002
+    }
+  },
+  {
+    "key": "wolf/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140003
+    }
+  },
+  {
+    "key": "wolf/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140004
+    }
+  },
+  {
+    "key": "wolf/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140005
+    }
+  },
+  {
+    "key": "wolf/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140006
+    }
+  },
+  {
+    "key": "wolf/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140007
+    }
+  },
+  {
+    "key": "wolf/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140008
+    }
+  },
+  {
+    "key": "wolf/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140009
+    }
+  },
+  {
+    "key": "wolf/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140010
+    }
+  },
+  {
+    "key": "wolf/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140011
+    }
+  },
+  {
+    "key": "wolf/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140012
+    }
+  },
+  {
+    "key": "wolf/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four canid legs. Natural four-beat wolf walk, alternating forelegs and hind legs, steady spine and a lightly following bushy tail. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140013
+    }
+  },
+  {
+    "key": "boar/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140100
+    }
+  },
+  {
+    "key": "boar/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140101
+    }
+  },
+  {
+    "key": "boar/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140102
+    }
+  },
+  {
+    "key": "boar/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140103
+    }
+  },
+  {
+    "key": "boar/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140104
+    }
+  },
+  {
+    "key": "boar/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140105
+    }
+  },
+  {
+    "key": "boar/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140106
+    }
+  },
+  {
+    "key": "boar/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140107
+    }
+  },
+  {
+    "key": "boar/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140108
+    }
+  },
+  {
+    "key": "boar/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140109
+    }
+  },
+  {
+    "key": "boar/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140110
+    }
+  },
+  {
+    "key": "boar/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140111
+    }
+  },
+  {
+    "key": "boar/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140112
+    }
+  },
+  {
+    "key": "boar/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four short cloven-hoofed legs. Heavy low boar gait, brisk small steps, steady barrel and shoulders; tusks remain fixed to the snout. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140113
+    }
+  },
+  {
+    "key": "bear/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140200
+    }
+  },
+  {
+    "key": "bear/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140201
+    }
+  },
+  {
+    "key": "bear/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140202
+    }
+  },
+  {
+    "key": "bear/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140203
+    }
+  },
+  {
+    "key": "bear/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140204
+    }
+  },
+  {
+    "key": "bear/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140205
+    }
+  },
+  {
+    "key": "bear/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140206
+    }
+  },
+  {
+    "key": "bear/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140207
+    }
+  },
+  {
+    "key": "bear/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140208
+    }
+  },
+  {
+    "key": "bear/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140209
+    }
+  },
+  {
+    "key": "bear/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140210
+    }
+  },
+  {
+    "key": "bear/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140211
+    }
+  },
+  {
+    "key": "bear/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140212
+    }
+  },
+  {
+    "key": "bear/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four plantigrade bear paws. Heavy deliberate quadrupedal steps with the weight over the supporting paws, subtle shoulder roll; no standing upright. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140213
+    }
+  },
+  {
+    "key": "spider/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140300
+    }
+  },
+  {
+    "key": "spider/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140301
+    }
+  },
+  {
+    "key": "spider/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140302
+    }
+  },
+  {
+    "key": "spider/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140303
+    }
+  },
+  {
+    "key": "spider/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140304
+    }
+  },
+  {
+    "key": "spider/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140305
+    }
+  },
+  {
+    "key": "spider/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140306
+    }
+  },
+  {
+    "key": "spider/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140307
+    }
+  },
+  {
+    "key": "spider/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140308
+    }
+  },
+  {
+    "key": "spider/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140309
+    }
+  },
+  {
+    "key": "spider/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140310
+    }
+  },
+  {
+    "key": "spider/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140311
+    }
+  },
+  {
+    "key": "spider/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140312
+    }
+  },
+  {
+    "key": "spider/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly eight spider legs attached to the cephalothorax. Alternating coordinated leg groups scuttle, body stays level and abdomen follows as one mass. Pedipalps are not extra walking legs. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140313
+    }
+  },
+  {
+    "key": "slime/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140400
+    }
+  },
+  {
+    "key": "slime/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140401
+    }
+  },
+  {
+    "key": "slime/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140402
+    }
+  },
+  {
+    "key": "slime/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140403
+    }
+  },
+  {
+    "key": "slime/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140404
+    }
+  },
+  {
+    "key": "slime/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140405
+    }
+  },
+  {
+    "key": "slime/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140406
+    }
+  },
+  {
+    "key": "slime/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140407
+    }
+  },
+  {
+    "key": "slime/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140408
+    }
+  },
+  {
+    "key": "slime/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140409
+    }
+  },
+  {
+    "key": "slime/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140410
+    }
+  },
+  {
+    "key": "slime/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140411
+    }
+  },
+  {
+    "key": "slime/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle surface ripple; retain volume.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140412
+    }
+  },
+  {
+    "key": "slime/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Ooze forward in place by a traveling ripple along the lower edge, squashing and stretching a little while preserving volume. No fixed legs, arms, humanoid skeleton or new faces. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140413
+    }
+  },
+  {
+    "key": "bat/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140500,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140501,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140502,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140503,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140504,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140505,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140506,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140507,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140510,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140511,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140512,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "bat/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two membranous wing forelimbs and two small hind legs. Fly in place with coherent upstroke and downstroke; wing fingers and membranes remain connected to shoulders. Feet hang naturally. No separate human arms. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140513,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "drake/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140600
+    }
+  },
+  {
+    "key": "drake/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140601
+    }
+  },
+  {
+    "key": "drake/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140602
+    }
+  },
+  {
+    "key": "drake/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140603
+    }
+  },
+  {
+    "key": "drake/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140604
+    }
+  },
+  {
+    "key": "drake/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140605
+    }
+  },
+  {
+    "key": "drake/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140606
+    }
+  },
+  {
+    "key": "drake/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140607
+    }
+  },
+  {
+    "key": "drake/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140608
+    }
+  },
+  {
+    "key": "drake/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140609
+    }
+  },
+  {
+    "key": "drake/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140610
+    }
+  },
+  {
+    "key": "drake/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140611
+    }
+  },
+  {
+    "key": "drake/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140612
+    }
+  },
+  {
+    "key": "drake/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four low sprawling reptilian legs. Slow deliberate stalk, alternating planted clawed feet; neck steady, long tail follows its base. Both wings stay folded on the back, no detaching scales or horns. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140613
+    }
+  },
+  {
+    "key": "warg/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140700
+    }
+  },
+  {
+    "key": "warg/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140701
+    }
+  },
+  {
+    "key": "warg/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140702
+    }
+  },
+  {
+    "key": "warg/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140703
+    }
+  },
+  {
+    "key": "warg/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140704
+    }
+  },
+  {
+    "key": "warg/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140705
+    }
+  },
+  {
+    "key": "warg/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140706
+    }
+  },
+  {
+    "key": "warg/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140707
+    }
+  },
+  {
+    "key": "warg/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140708
+    }
+  },
+  {
+    "key": "warg/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140709
+    }
+  },
+  {
+    "key": "warg/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140710
+    }
+  },
+  {
+    "key": "warg/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140711
+    }
+  },
+  {
+    "key": "warg/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140712
+    }
+  },
+  {
+    "key": "warg/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four large canid legs. A heavy mount-sized wolf walk, strong shoulders and coordinated alternating steps. Mane and tail remain attached and follow the torso. No rider appears. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140713
+    }
+  },
+  {
+    "key": "hookbeak/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140800
+    }
+  },
+  {
+    "key": "hookbeak/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140801
+    }
+  },
+  {
+    "key": "hookbeak/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140802
+    }
+  },
+  {
+    "key": "hookbeak/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140803
+    }
+  },
+  {
+    "key": "hookbeak/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140804
+    }
+  },
+  {
+    "key": "hookbeak/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140805
+    }
+  },
+  {
+    "key": "hookbeak/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140806
+    }
+  },
+  {
+    "key": "hookbeak/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140807
+    }
+  },
+  {
+    "key": "hookbeak/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140808
+    }
+  },
+  {
+    "key": "hookbeak/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140809
+    }
+  },
+  {
+    "key": "hookbeak/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140810
+    }
+  },
+  {
+    "key": "hookbeak/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140811
+    }
+  },
+  {
+    "key": "hookbeak/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140812
+    }
+  },
+  {
+    "key": "hookbeak/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Exactly four heavy clawed weight-bearing limbs. Walk like a massive quadruped, alternating paws with shoulder weight shifts. Hooked beak remains part of the head and feather ruff remains attached. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140813
+    }
+  },
+  {
+    "key": "scorpion/animations/south/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140900
+    }
+  },
+  {
+    "key": "scorpion/animations/south/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140901
+    }
+  },
+  {
+    "key": "scorpion/animations/south-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140902
+    }
+  },
+  {
+    "key": "scorpion/animations/south-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140903
+    }
+  },
+  {
+    "key": "scorpion/animations/west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140904
+    }
+  },
+  {
+    "key": "scorpion/animations/west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140905
+    }
+  },
+  {
+    "key": "scorpion/animations/north-west/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140906
+    }
+  },
+  {
+    "key": "scorpion/animations/north-west/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140907
+    }
+  },
+  {
+    "key": "scorpion/animations/north/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140908
+    }
+  },
+  {
+    "key": "scorpion/animations/north/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140909
+    }
+  },
+  {
+    "key": "scorpion/animations/north-east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140910
+    }
+  },
+  {
+    "key": "scorpion/animations/north-east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140911
+    }
+  },
+  {
+    "key": "scorpion/animations/east/idle",
+    "name": "animate_image",
+    "arguments": {
+      "action": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 140912
+    }
+  },
+  {
+    "key": "scorpion/animations/east/move",
+    "name": "animate_image",
+    "arguments": {
+      "action": "One complete locomotion cycle IN PLACE. Eight walking legs plus two claw-bearing pedipalps. Scuttle with alternating leg groups, pincers held ahead, one segmented tail and one stinger remaining attached throughout. Claws do not become feet. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 140913
+    }
+  },
+  {
+    "key": "harpy/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141000,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141001,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141002,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141003,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141004,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141005,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141006,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141007,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141008,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141009,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141010,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141011,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Gentle stationary hover with coherent small wingbeats.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141012,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "harpy/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Exactly two feathered wing-arms and two taloned legs. Fly in place with an anatomically coherent wing stroke; feather tips remain attached to wings, talons hang naturally, no extra arms. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141013,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141200,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141201,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141202,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141203,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141204,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141205,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141206,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141207,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141208,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141209,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141210,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141211,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141212,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "gargoyle/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Two arms, two legs and two rigid stone wings. Heavy crouched walking steps, deliberate weight shift on the existing feet. Stone plates remain solid; wings make only tiny hinge adjustments, never rubbery flapping. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141213,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/south/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141300,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/south/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing south throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141301,
+      "direction": "south",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/south-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141302,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/south-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing south-west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141303,
+      "direction": "south-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141304,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing west throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141305,
+      "direction": "west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north-west/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141306,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north-west/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing north-west throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141307,
+      "direction": "north-west",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141308,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing north throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141309,
+      "direction": "north",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north-east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141310,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/north-east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing north-east throughout. Keep back to viewer; no turning head or body to face camera. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141311,
+      "direction": "north-east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/east/idle",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "Subtle breathing or body settling with all supporting feet planted.  Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 4,
+      "no_background": true,
+      "seed": 141312,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  },
+  {
+    "key": "crab/animations/east/move",
+    "name": "animate_image_pixminimax",
+    "arguments": {
+      "description": "One complete locomotion cycle IN PLACE. Eight walking legs and two claw-bearing limbs. A coordinated sideways crab scuttle IN PLACE, alternating support legs, rigid carapace, eye stalks and both claws stay connected. No forward mammal gait. Facing east throughout. Keep exact anatomy, attached limbs and tail, fixed physical scale and canvas position. Preserve material palette and crisp pixel clusters. No camera motion, scenery, morphing or duplicated limbs. All extremities stay within margins. End at the starting pose.",
+      "frame_count": 8,
+      "no_background": true,
+      "seed": 141313,
+      "direction": "east",
+      "view": "low top-down"
+    }
+  }
+]

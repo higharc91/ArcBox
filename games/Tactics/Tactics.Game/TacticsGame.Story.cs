@@ -13,6 +13,16 @@ namespace Tactics.Game;
 /// </summary>
 public sealed partial class TacticsGame
 {
+    /// <summary>Older saves predate the bounty flag; a completed main-story battle is already proof of victory.</summary>
+    private void RestoreFordSettlement()
+    {
+        const string settled = "ch1_ford_settled";
+        if (_doc.World is not { } world || world.Flags.Contains(settled)) return;
+        var ford = Lore.ArcFor("ashen_ford");
+        if (ford is null || !ford.Beats.Any(b => b.Kind == ArcBeat.Battle && b.Sets.Contains(settled) && world.Beats.Contains(b.Id))) return;
+        _doc = _doc with { World = world with { Flags = world.Flags.Add(settled) } };
+    }
+
     /// <summary>What a scene is doing: the values of <see cref="StoryView.State"/>.</summary>
     public static class StoryStates
     {
@@ -58,6 +68,7 @@ public sealed partial class TacticsGame
 
     /// <summary>What the open question offers, in the node's order.</summary>
     private ImmutableArray<SceneOption> _offered = [];
+    private ImmutableArray<SceneOption> _shopOptions = [];
 
     /// <summary>When the open question closes, or null while it waits for a phone (nobody here can answer it). The TV's countdown.</summary>
     private DateTimeOffset? _closeAt;
@@ -67,6 +78,12 @@ public sealed partial class TacticsGame
     /// can close it sooner, but doesn't change their views, so nobody's tap is dropped for a view that changed under it.
     /// </summary>
     private DateTimeOffset? _due;
+
+    /// <summary>
+    /// How long the open question's clock ran when it started, in seconds: its length, or longer when the line asking it outlasts that; null
+    /// while it holds. The TV reads its countdown by it (<see cref="StoryAskView.Span"/>), so it never has to guess the length.
+    /// </summary>
+    private double? _span;
 
     /// <summary>When everyone here had answered, which starts the settle (5d default 5); null while someone hasn't.</summary>
     private DateTimeOffset? _allInAt;
@@ -123,7 +140,7 @@ public sealed partial class TacticsGame
     private Tile? SpotOf(ArcBeat beat) => _region?.Def.Beats.Where(b => b.Beat == beat.Id).Select(b => (Tile?)b.At).FirstOrDefault();
 
     /// <summary>The beat of the arc with this id, or null.</summary>
-    private ArcBeat? BeatNamed(string id) => StoryArc?.Beats.FirstOrDefault(b => b.Id == id);
+    private ArcBeat? BeatNamed(string? id) => StoryArc?.Beats.FirstOrDefault(b => b.Id == id);
 
     /// <summary>True while <paramref name="beat"/> is a battle waiting at its fight: its lead-in played, and it was lost, fled or never begun.</summary>
     private bool AtTheFight(ArcBeat beat) => Cursor is { Stage: StorySave.Fight } c && c.Beat == beat.Id;
@@ -141,7 +158,47 @@ public sealed partial class TacticsGame
         var opening = SceneRun.Next(scenes, StoryFlags(), null, aftermath: false) ?? scenes.FirstOrDefault();
         var figure = opening?.Cast.Where(c => c != SceneDef.Narrator).Select(Lore.Character).FirstOrDefault(c => c is not null);
         var waiting = Cursor?.Beat != beat.Id || AtTheFight(beat) && _phase == TacticsPhase.Exploration;
-        return [new StoryMarker(beat.Id, spot, figure is null ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
+        // While one of its scenes plays, the scene's cast stands in the figure's place (CastOf), so nobody is shown twice.
+        var playing = _phase == TacticsPhase.Story && Cursor?.Beat == beat.Id && CurrentScene() is not null;
+        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : figure.SpriteKey, waiting ? "alert" : null)];
+    }
+
+    /// <summary>
+    /// Who stands in the world for the scene under way (the user's answer of 2026-11-01, item 21): the speakers who aren't the narrator and are
+    /// in the lore, of the node playing and every node that can lead to it (<see cref="SceneCast.SpeakersBy"/>), so nobody is shown before a
+    /// line could reveal them. They stand at <see cref="SceneSpot(SceneDef, ArcBeat, Terrain)"/>, facing the leader, on tiles
+    /// <see cref="SceneCast.Place"/> chooses for the whole scene's cast, so each keeps their tile as the cast grows. The tiles depend only on
+    /// what's saved (the scene, the party's tile and facing), so a restart puts everyone where they were. Empty outside the Story phase, in
+    /// the gap before a scene, and in the chapter's card; so they leave as the scene ends.
+    /// </summary>
+    private ImmutableArray<CastView> CastOf()
+    {
+        if (_phase != TacticsPhase.Story || _telling is StoryStates.Card or StoryStates.Gap || _region is not { } region
+            || CurrentScene() is not { } scene || Cursor?.Node is not { } node || (Cursor.Person is not null ? CursorBeat() : BeatNamed(scene.Beat)) is not { } beat)
+            return [];
+        var cast = SceneCast.Speakers(scene).Select(Lore.Character).OfType<LoreCharacter>().ToList();
+        var by = SceneCast.SpeakersBy(scene, node).ToHashSet(StringComparer.Ordinal);
+        if (!cast.Any(c => by.Contains(c.Id)))
+            return [];
+        var ground = WalkGround();
+        var reached = WalkReach();      // on the ground as it is, things and painted props in the way
+        var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
+        return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
+            .Select(c => new CastView(c.Who.Id, c.Who.Name, c.Who.SpriteKey, c.Tile, _at))];
+    }
+
+    /// <summary>
+    /// Where <paramref name="scene"/> of <paramref name="beat"/> plays in the region: for a scene set in another place, that place's spot
+    /// (<see cref="StoryRules.SpotFor"/>, where <see cref="TravelFor"/> takes the party), else its beat's. Where the party stands when
+    /// there's no spot, or the leader isn't within <see cref="StoryRules.Reach"/> steps of it: a battle's aftermath, which plays where the
+    /// fight ended, or a lead-in begun by stepping into the stamp, away from the "!".
+    /// </summary>
+    private Tile SceneSpot(SceneDef scene, ArcBeat beat, Terrain ground)
+    {
+        var spot = scene.Place is { } place && place != beat.Place
+            ? StoryArc is { } arc ? StoryRules.SpotFor(arc, _region!.Def, place) : null
+            : SpotOf(beat);
+        return spot is { } at && StoryRules.InReach(ground, _at, at) ? at : _at;
     }
 
     /// <summary>
@@ -149,7 +206,7 @@ public sealed partial class TacticsGame
     /// chapter's last beat, that the next chapter isn't here yet (5d default 13).
     /// </summary>
     private string Objective() => OnOffer() is { Place: { } place } ? $"Go to {Lore.PlaceName(place) ?? place}"
-        : ChapterOver ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
+        : ChapterOver && StoryArc is { SideAdventure: false } ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
         : "Explore the region";
 
     /// <summary>A chapter's number as the cards write it.</summary>
@@ -166,7 +223,7 @@ public sealed partial class TacticsGame
     private string? InteractLabel()
     {
         if (_phase != TacticsPhase.Exploration || OnOffer() is not { } beat || SpotOf(beat) is not { } spot
-            || !StoryRules.InReach(Rules.GroundFor(_region!.Def.Id)!.Terrain, _at, spot))
+            || !StoryRules.InReach(WalkGround(), _at, spot))
             return null;
         return beat.Kind switch
         {
@@ -177,8 +234,8 @@ public sealed partial class TacticsGame
         };
     }
 
-    /// <summary>The leader tapped Interact: checked again here, since the phone's button can be a step behind.</summary>
-    private void Interact(Player player)
+    /// <summary>The leader tapped Interact for the beat: checked again here, since the phone's button can be a step behind.</summary>
+    private void InteractBeat(Player player)
     {
         if (player.Profile?.Value != _lead || InteractLabel() is null)
             return;
@@ -248,9 +305,14 @@ public sealed partial class TacticsGame
     private void EnterNode(SceneDef scene, string id)
     {
         var node = scene.Node(id)!;
+        if (!Cursor!.Played.Contains(node.Id) && !CanPayGold(node.Gold)) { Note($"Needs {-(long)node.Gold} gold."); StageDone(); return; }
+        if (!Cursor!.Played.Contains(node.Id)) ChangePartyGold(node.Gold);
         AddFlags(node.Sets);
         var c = Cursor!;
-        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null });
+        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
+        ThingNodeEntered(node, c.Roll);     // an interaction's outcome, saved with this node's first line; the roll that led here, for a search
+        if (node.End && node.Lines.IsEmpty)
+        { KeepWorld(); Save(); StageDone(); return; }
         PlayLine(scene, node, 0);
     }
 
@@ -313,8 +375,9 @@ public sealed partial class TacticsGame
     /// <summary>The scene ended: the next of its stage that plays, after a gap, or else what follows the stage.</summary>
     private void SceneDone(SceneDef scene)
     {
+        if (CampTalk) { BeginSleep(); return; }
         var c = Cursor!;
-        var next = SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
+        var next = c.Thing is not null || c.Person is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
         {
             StageDone();
@@ -326,7 +389,7 @@ public sealed partial class TacticsGame
     /// <summary>The gap before <paramref name="next"/>, saved with the cursor on it, so a restart starts it; the party travels as it begins.</summary>
     private void Between(SceneDef next)
     {
-        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null });
+        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
         Travel(next);
         KeepWorld();
         Save();
@@ -342,7 +405,15 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StageDone()
     {
+        if (CampTalk) { BeginSleep(); return; }
+        if (Haggling) { FinishHaggle(); return; }
         var c = Cursor!;
+        if (c.Person is not null) { FinishConversation(); return; }
+        if (c.Thing is not null)
+        {
+            FinishInteraction();
+            return;
+        }
         var beat = BeatNamed(c.Beat)!;
         if (beat.Kind == ArcBeat.Battle && c.Stage != StorySave.After)
             ToTheFight(beat);
@@ -386,10 +457,12 @@ public sealed partial class TacticsGame
                 Flags = [.. world.Flags.Concat(beat.Sets).Distinct(StringComparer.Ordinal)],
                 Beats = world.Beats.Contains(beat.Id) ? world.Beats : world.Beats.Add(beat.Id),
                 Story = null,
+                RestReady = true,
             },
         };
+        PrepareQuestSave();
         KeepWorld();
-        if (ChapterOver)
+        if (ChapterOver && StoryArc is { SideAdventure: false })
         {
             _lease.Checkpoint(_doc.ToJson(), $"End of Chapter {Numeral(StoryArc!.Chapter)}");
             ShowCard();
@@ -430,8 +503,8 @@ public sealed partial class TacticsGame
         if (_region is not { } region || scene.Place is not { } place || BeatNamed(scene.Beat) is not { } beat || place == beat.Place
             || StoryArc is not { } arc || StoryRules.SpotFor(arc, region.Def, place) is not { } spot)
             return null;
-        var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
-        var reached = WorldWalk.Reach(ground, region.Def.Spawns.Start, ClassDef.DefaultJump);
+        var ground = WalkGround();
+        var reached = WalkReach();      // with the doors and gates as they are now (interactables design §2.4)
         // Clear of every stamp a battle still to come could arm: mid-beat nothing is armed yet, and the beat's outcome can arm one (review).
         var stamps = PendingStamps();
         var to = BattleStage.Standable(ground, spot, [spot, _at], t => ground.Map.InBounds(t) && reached.Contains(t) && !stamps.Any(st => st.Holds(t)));
@@ -475,15 +548,26 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// Back into the beat the cursor names, after Muster, Results or a restart (5d §8): on the saved line, said again with a new
-    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved; a roll shows its result again, and is never made again. A
+    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved, unless it was decided for a check, which goes back to the
+    /// pick of who rolls (<see cref="StorySave.Checking"/>); a roll shows its result again, and is never made again. A
     /// beat at its fight waits there, in the world. A beat won goes on to its aftermath. A beat that's gone, a scene or node that's gone, or a
     /// scene that no longer plays with the flags as they are restarts its stage from the beginning with a notice (or is dropped, for a
     /// beat that's gone); a battle beat is never marked done by any of it.
     /// </summary>
     private void ResumeStory()
     {
+        if (Camp is not null) { ResumeCamp(); return; }
+        if (_doc.World?.Shop is not null) { ResumeShop(); return; }
+        // Found items the party was voting on, or that wait with nothing else under way: the vote, asked again.
+        if (_doc.World?.Loot is { } loot && (loot.Voting || Cursor is null or { Stage: StorySave.Fight })) { ResumeLoot(); return; }
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
+        if (c.Person is not null) { ResumeConversation(c); return; }
+        if (c.Thing is { } thing)
+        {
+            ResumeInteraction(c, thing);
+            return;
+        }
         var beat = BeatNamed(c.Beat);
         var wrongStage = beat is not null && c.Stage != StorySave.Lead && beat.Kind != ArcBeat.Battle;
         if (beat is null || wrongStage || _doc.World!.Beats.Contains(beat.Id))
@@ -516,7 +600,7 @@ public sealed partial class TacticsGame
                 return;
             }
             // The aftermath, from its first scene that plays; with none, the beat is done.
-            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null });
+            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
             if (SceneRun.Next(Lore.ScenesOf(beat.Id), StoryFlags(), null, aftermath: true) is { } first)
                 Between(first);
             else
@@ -538,11 +622,25 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// Opens <paramref name="node"/>'s question as its last line starts: what's offered to this party now, given the flags, the party's
-    /// tags and the nodes already played. With nothing offered, the line plays out and the beat ends (<see cref="LineDone"/>).
+    /// tags and the nodes already played. With nothing offered, the line plays out and the beat ends (<see cref="LineDone"/>). A question
+    /// already decided for a check (<see cref="StorySave.Checking"/>, on a restart) goes straight back to the pick of who rolls; if that
+    /// check is no longer on offer, the question is asked again.
     /// </summary>
     private void OpenQuestion(SceneDef scene, SceneNode node)
     {
-        _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), Cursor!.Played.ToHashSet(StringComparer.Ordinal));
+        var c = Cursor!;
+        _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), c.Played.ToHashSet(StringComparer.Ordinal));
+        _shopOptions = _offered;
+        _offered = [.. _offered.Where(o => CanPayGold(o.Gold))];
+        if (c.Checking is { } decided)
+        {
+            SetCursor(c with { Checking = null });
+            if (_offered.FirstOrDefault(o => o.Id == decided && o.Check is not null) is { } option)
+            {
+                Decide(option);
+                return;
+            }
+        }
         if (_offered.IsEmpty)
             return;
         Ask(StoryStates.Asking);
@@ -557,7 +655,7 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>How long the open question has (5d default 4).</summary>
-    private TimeSpan QuestionLength() => _telling switch
+    private TimeSpan QuestionLength() => CampVote || EntranceVote ? TimeSpan.FromSeconds(20) : LootVote && _telling == StoryStates.Asking ? LootVoteLength : _telling switch
     {
         StoryStates.TieBreak => Tell.TieBreak,
         StoryStates.PickRoller => Tell.Roller,
@@ -579,12 +677,14 @@ public sealed partial class TacticsGame
         }
         var due = _ctx.Now + QuestionLength();
         _due = due > _lineDue ? due : _lineDue;
+        _span = (_due.Value - _ctx.Now).TotalSeconds;
         Reclose();
     }
 
     private void Hold()
     {
         (_due, _closeAt, _allInAt) = (null, null, null);
+        _span = null;
         _ctx.CancelTimer(Timers.Vote);
     }
 
@@ -620,7 +720,14 @@ public sealed partial class TacticsGame
     private void CloseQuestion()
     {
         _ctx.CancelTimer(Timers.Vote);
+        ResetQuestion();
+    }
+
+    private void ResetQuestion()
+    {
+        _shopOptions = [];
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
+        _span = null;
         _votes.Clear();
         _pickedBy = null;
     }
@@ -667,6 +774,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StoryPresenceChanged()
     {
+        if (Trading && Camp is null) return;
         if (!Questioning)
             return;
         if (!Voters().Any())
@@ -710,6 +818,9 @@ public sealed partial class TacticsGame
     /// </summary>
     private void QuestionDue()
     {
+        if (CampVote) { RestVoteDue(); return; }
+        if (EntranceVote) { EntranceVoteDue(); return; }
+        if (LootVote) { LootVoteDue(); return; }      // only the players here count (USER DECISION 1)
         if (!Questioning || CurrentNode() is null)
             return;
         switch (_telling)
@@ -749,21 +860,29 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// The question settled on <paramref name="option"/>: its flags are set and the scene goes where it leads, in one save. A check goes to
-    /// the party first, to pick who rolls; its flags are set with the roll.
+    /// the party first, to pick who rolls, saved as decided (<see cref="StorySave.Checking"/>), so a restart comes back to the pick and
+    /// never reopens the question (review); its flags are set with the roll.
     /// </summary>
     private void Decide(SceneOption option)
     {
-        var (scene, beat) = (CurrentScene()!, BeatNamed(Cursor!.Beat)!);
+        if (LootVote) { TakeLoot(option.Id); return; }
+        var (scene, beat) = (CurrentScene()!, CursorBeat());
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(scene, CurrentNode()!); return; }
         if (option.Check is not null)
         {
             var offered = _offered;
             CloseQuestion();
             (_offered, _checking) = (offered, option);
+            SetCursor(Cursor! with { Checking = option.Id });
+            KeepWorld();
+            Save();
             Ask(StoryStates.PickRoller);
             return;
         }
         CloseQuestion();
+        ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, beat));
+        ConversationAction(option);
         EnterNode(scene, SceneRun.Target(option));
     }
 
@@ -779,15 +898,18 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Roll(SceneOption option, string member)
     {
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(CurrentScene()!, CurrentNode()!); return; }
         var check = option.Check!;
         var bonus = SkillCheck.Bonus(_doc.Members[member].Character, check.Skill, Rules);
         var die = _ctx.Random.Next(1, 21);
         var result = SkillCheck.Roll(die, bonus, check.Dc);
-        AddFlags(SceneRun.Sets(option, BeatNamed(Cursor!.Beat)!));
+        ChangePartyGold(option.Gold);
+        AddFlags(SceneRun.Sets(option, CursorBeat()));
+        ConversationAction(option);
         SetCursor(Cursor! with
         {
             Node = SceneRun.Target(option, result.Success), Line = 0,
-            Roll = new StoryRoll(member, option.Id, check.Skill, check.Dc, die, bonus, result.Success),
+            Roll = new StoryRoll(member, option.Id, check.Skill, check.Dc, die, bonus, result.Success), Checking = null,
         });
         KeepWorld();
         Save();
@@ -859,10 +981,18 @@ public sealed partial class TacticsGame
         var world = _doc.World!;
         var all = world.Flags.Concat(flags).Distinct(StringComparer.Ordinal).ToImmutableArray();
         if (all.Length != world.Flags.Length)
+        {
             _doc = _doc with { World = world with { Flags = all } };
+            if (_phase == TacticsPhase.Exploration) ArmMobs();
+        }
     }
 
-    private SceneDef? CurrentScene() => Cursor is { Scene: { } id } c ? Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id) : null;
+    private SceneDef? CurrentScene() => Camp is { Stage: "vote" or "talk" } ? CampScene() : LootVote ? LootScene() : Haggling ? HaggleScene() : Cursor is { Scene: { } id } c
+        ? c.Person is not null ? Lore.Scene(id) : c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
+        : null;
+
+    /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
+    private ArcBeat CursorBeat() => Camp is not null || LootVote || Haggling || Cursor!.Thing is not null || Cursor.Person is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 
@@ -882,7 +1012,7 @@ public sealed partial class TacticsGame
     private StoryLineView LineView(SceneLine line)
     {
         var who = Lore.Character(line.Speaker);
-        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.Preset, line.Mood, line.Text, who?.Role);
+        return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.PortraitKey, line.Mood, line.Text, who?.Role);
     }
 
     /// <summary>The scene for the TV, in the Story phase, with the live tally: the TV's alone (5d flag 7).</summary>
@@ -893,7 +1023,7 @@ public sealed partial class TacticsGame
         var line = _telling is StoryStates.Gap or StoryStates.Rolled || CurrentLine() is not { } showing ? null : LineView(showing);
         var asking = Questioning && _checking is null;
         return new StoryView(_storySeq, scene.Id, scene.Title, _telling, line, asking ? AskView() : null,
-            _checking is not null || _telling == StoryStates.Rolled ? CheckView(scene) : null, _lineDue);
+            _checking is not null || _telling == StoryStates.Rolled ? CheckView(scene) : null, _lineDue, _lease.Info.Id);
     }
 
     private string PlayerName(string member) => _players.FirstOrDefault(p => p.Profile?.Value == member)?.Name ?? member;
@@ -903,16 +1033,27 @@ public sealed partial class TacticsGame
         => [.. (members ?? Party().Where(m => !m.Here).Select(m => m.Member)).Select(PlayerName)];
 
     /// <summary>What's on offer now: everything, or only the tied during a tie-break.</summary>
-    private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _offered;
+    private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _shopOptions.IsEmpty ? _offered : _shopOptions;
+
+    private object OptionPhone(SceneOption option)
+    {
+        var node = System.Text.Json.JsonSerializer.SerializeToNode(new { id = option.Id, label = option.Label, skill = option.Check?.Skill, dc = option.Check?.Dc }, ArcJson.Options)!.AsObject();
+        if (option.Gold < 0)
+        {
+            node["can"] = CanPayGold(option.Gold);
+            node["needs"] = $"needs {-(long)option.Gold} gold";
+        }
+        return node;
+    }
 
     private StoryAskView AskView()
     {
         var votes = LiveVotes().ToList();
         var of = PartyQuestion ? Voters().Select(p => p.Profile!.Value.Value).Union(votes.Select(v => v.Key)).Count() : 1;
         return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
-            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
+            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, !CanPayGold(o.Gold) ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
                 ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
-                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))]);
+                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))], _closeAt is null ? null : _span);
     }
 
     /// <summary>
@@ -937,6 +1078,9 @@ public sealed partial class TacticsGame
             return (m.Member, m.Player, m.Character, SkillCheck.Bonus(sheet, skill), SkillCheck.Proficient(sheet, skill) ? $"Proficient · {score}" : score, m.Here);
         });
 
+    /// <summary>True while the check is an active Search's: its DC is the lowest of what it looks for, and shows nowhere (interactables design §7.4).</summary>
+    private bool SecretDc => Cursor?.Thing is { Searching: true };
+
     /// <summary>The option a saved roll was for, found by its id and skill in the scene, since option ids repeat across nodes.</summary>
     private static SceneOption? RolledFor(SceneDef scene, StoryRoll roll)
         => scene.Nodes.SelectMany(n => n.Options).FirstOrDefault(o => o.Id == roll.Option && o.Check?.Skill == roll.Skill);
@@ -949,33 +1093,44 @@ public sealed partial class TacticsGame
             : (_checking!.Check!.Skill, _checking.Check.Dc, _checking.Label);
         var votes = LiveVotes().ToList();
         var tie = _telling == StoryStates.TieBreak;
-        return new StoryCheckView(skill, dc, title,
+        return new StoryCheckView(skill, SecretDc ? null : dc, title,
             [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
-                HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member)))],
-            roll?.Member, roll is null ? null : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
-            roll is null ? _closeAt : null);
+                HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member), ClassName(c.Character)))],
+            roll?.Member, roll is null ? null : SecretDc ? Rolls.Flat(roll.Die, roll.Bonus, roll.Dc) with { Vs = 0 } : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
+            roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null);
     }
 
     /// <summary>
     /// A phone in a scene: the line showing, or the question, or the check. None of it changes with what anyone else does, except when the
     /// question itself does: no tally, the countdown of the question's own clock and not of a settle, and who's away as of when it was asked.
+    /// Each says <c>vip</c>, so the VIP's phone has its End session there too (the server takes it in a scene, c23a42f).
     /// </summary>
     private CustomView StoryScreen(Player player, ProfileId profile)
     {
         var member = profile.Value;
         var scene = CurrentScene();
         if (Questioning && _checking is null)
-            return Custom(Screens.Vote, new
+        {
+            var vote = JsonSerializer.SerializeToNode(new
             {
                 party = PartyQuestion,
                 canChoose = Decider() is { } decider ? decider == member : true,
-                options = OptionsShown().Select(o => new { id = o.Id, label = o.Label, skill = o.Check?.Skill, dc = o.Check?.Dc }),
+                options = OptionsShown().Select(OptionPhone),
                 mine = MineOf(member),
                 chosen = PartyChoice(),
                 tie = _telling == StoryStates.TieBreak,
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),
-            }) with { DeadlineUtc = _due };
+                vip = IsVip(player),
+            }, ArcJson.Options)!.AsObject();
+            // The loot vote says what it asks, and which of the votes it is, so each item's is a new question (USER DECISION 1).
+            if (LootVote && scene is not null)
+            {
+                vote["question"] = scene.Title;
+                vote["vote"] = _doc.World!.Loot!.Seq;
+            }
+            return Custom(Screens.Vote, vote) with { DeadlineUtc = _due };
+        }
         if (scene is not null && (_checking is not null || _telling == StoryStates.Rolled))
         {
             var check = CheckView(scene);
@@ -983,7 +1138,7 @@ public sealed partial class TacticsGame
             return Custom(Screens.Check, new
             {
                 skill = check.Skill,
-                dc = check.Dc,
+                dc = check.Dc,      // null for a search
                 title = check.Title,
                 cards = CardsWithNotes(check.Skill).Select(c => new
                 {
@@ -995,7 +1150,8 @@ public sealed partial class TacticsGame
                 tie = _telling == StoryStates.TieBreak,
                 decider = _telling == StoryStates.TieBreak && Decider() is { } d2 ? PlayerName(d2) : null,
                 tied = _telling == StoryStates.TieBreak ? _tied : [],
-                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = roll.Dc, success = roll.Passed },
+                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = SecretDc ? (int?)null : roll.Dc, success = roll.Passed },
+                vip = IsVip(player),
             }) with { DeadlineUtc = roll is null ? _due : null };
         }
         var line = _telling is StoryStates.Gap or StoryStates.Rolled ? null : CurrentLine();
@@ -1005,10 +1161,11 @@ public sealed partial class TacticsGame
             title = scene?.Title ?? _card,
             line = line?.Id,
             speaker = who?.Name,
-            portrait = who?.Preset,
+            portrait = who?.PortraitKey,
             mood = line?.Mood,
             text = line?.Text,
             canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,
+            vip = IsVip(player),
         });
     }
 }

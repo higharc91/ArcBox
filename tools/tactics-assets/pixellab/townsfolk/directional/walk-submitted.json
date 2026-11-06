@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 808551e2-cb8d-471b-a5be-6ed59b28e7a7\nanimation: walking\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=596e057f-9e22-4dcc-8867-9147c58d38fb, south-west=9cadc482-2d11-477f-a146-6c191afbbcb3, west=1d4fbb58-4b45-415d-83d3-3dbafe2aa334, north-west=278b8bf5-c6d3-450a-9390-ff6608b32a2e, north=78e1c8c5-70bd-4d3e-8d80-451614f82bd3, north-east=993e434e-97ee-4910-a3a2-c8d058bb995c, east=83b7be3e-16e3-4285-a1f4-11d1dc8f3957, south-east=5c7dba2a-77aa-4a6f-8456-5f94fb306ecb\ngroup: 6b51ee92-573e-48b9-89c8-759ea916bd1e\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\", template_animation_id=\"walking\", animation_group_id=\"6b51ee92-573e-48b9-89c8-759ea916bd1e\", directions=[...])\n\nhint: get_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\")\nif poor: delete_animation(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\", animation_type=\"...\") then retry with mode=\"v3\""
+    }
+  ],
+  "isError": false
+}

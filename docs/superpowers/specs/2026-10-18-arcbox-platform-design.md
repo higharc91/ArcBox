@@ -149,6 +149,20 @@ public sealed record Player(PlayerId Id, string Name, bool IsVip);
 
 **View publishing.** After every call into the game, the room calls `HostView()` and `PlayerView(id)` for each player. Each view is serialized and compared with the last one sent to that recipient, and only changed views are sent. There's no diffing beyond that in v1, because the payloads are tiny at 8 players.
 
+**Host view patches (2026-11-03, issue #77).** A TV that calls `UseHostPatches()` after `CreateRoom` or `ResumeHost` is sent `HostViewPatch(gameId, patch)` instead of `HostView(gameId, view)` whenever a patch against the view it already has is smaller than the whole view. Tactics' overworld view grew to about 4.3 KB, while one walking step changes a few hundred bytes of it, and a payload over one network packet (about 1,420 bytes) risks a stutter on busy Wi-Fi.
+- **The format** is `HostViewPatch` in `ArcBox.Sdk.Protocol`: JSON merge patch made exact.
+  - `null` is a value, and removed properties are listed in `$delete`.
+  - Arrays of objects with distinct string `id`s patch by id (`$keyed`, `$set`, `$order`).
+  - Anything else in the patch replaces the old value.
+- **The room keeps the view that host holds.** It sends the whole view:
+  - when a host binds or rebinds;
+  - for a new game;
+  - on `ResendHostView()`;
+  - when a patch wouldn't be smaller;
+  - when a property name starts with `$`.
+- **The TV's `HostClient`** applies each patch and raises the same whole-view event as before, so game scenes are unchanged. A patch it can't apply makes it ask for the whole view again.
+- **A host that never asks** (the web dev panel, the bots' `--host` mode, an older TV) gets whole views as before.
+
 **Timers.** These are server-side only. The room runs them on its own scheduler and posts `OnTimer` into the actor inbox. Views carry `DeadlineUtc` so clients can draw countdowns locally.
 
 ### 4.1 Controller kit (phone widgets, v1)
@@ -211,7 +225,7 @@ A small Quiplash-style game that exercises the whole contract:
 |---|---|
 | Host → server | `CreateRoom()`, `ResumeHost(code, hostToken)`, `SelectGame(gameId)`, `StartGame()`, `ReturnToLobby()`, `Kick(playerId)` |
 | Phone → server | `Join(code, name)`, `Rejoin(code, playerId, secret)`, `SelectGame(gameId)` (VIP only), `StartGame()` (VIP only), `SendInput(viewId, payload)` |
-| Server → host | `LobbyChanged(lobby)`, `HostView(gameId, view)`, `GameEnded(results)`, `RoomClosed(reason)` |
+| Server → host | `LobbyChanged(lobby)`, `HostView(gameId, view)`, `HostViewPatch(gameId, patch)` (only after `UseHostPatches`), `GameEnded(results)`, `RoomClosed(reason)` |
 | Server → phone | `LobbyChanged(lobby)`, `ControllerView(view)`, `GameEnded(results)`, `RoomClosed(reason)`, `Kicked` |
 
 Hub methods only validate the input, look up the room and post a command to that room's inbox. They never touch room state directly.
@@ -234,7 +248,7 @@ Hub methods only validate the input, look up the room and post a command to that
 | Failure | Behavior |
 |---|---|
 | Game throws an exception | Log it with the room code and game ID, then end the game with "Game crashed" and return to the lobby. Players stay connected, and other rooms are unaffected. |
-| Game call takes longer than 2 s | The watchdog logs it and closes the room (`RoomClosed("game stopped responding")`). **Known limitation:** .NET can't abort the stuck thread, so it stays busy until the server restarts. This is acceptable for trusted authors. |
+| Game call takes longer than 10 s by default | The watchdog logs it and closes the room (`RoomClosed("game stopped responding")`). The timeout is configurable and allows for scheduling delays on a busy machine. **Known limitation:** .NET can't abort the stuck thread, so it stays busy until the server restarts. This is acceptable for trusted authors. |
 | `HostView` / `PlayerView` throws | Handled the same as a game exception. |
 | Stale `viewId`, oversized payload, or bad JSON | Dropped and logged at debug level. |
 | Message flood | Rate limit of about 20 messages per second per connection. Excess messages are dropped. |

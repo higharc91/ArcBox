@@ -15,11 +15,18 @@ public partial class SpawnMarker : TileMarker
 
         /// <summary>Where the party recovers after a defeat.</summary>
         Recovery,
+
+        /// <summary>An authored entrance destination.</summary>
+        Named,
     }
 
     private static readonly Color Ink = new(0.5f, 1f, 0.6f);
 
     private SpawnKind _kind;
+
+    /// <summary>The destination name, used when Kind is Named.</summary>
+    [Export]
+    public string SpawnName { get; set; } = "";
 
     /// <inheritdoc />
     public override string Group => RegionScene.Spawns;
@@ -42,6 +49,6 @@ public partial class SpawnMarker : TileMarker
         if (!Engine.IsEditorHint())
             return;
         DrawTile(Ink);
-        DrawString(ThemeDB.FallbackFont, new Vector2(18, -6), Kind.ToString(), modulate: Ink);
+        DrawString(ThemeDB.FallbackFont, new Vector2(18, -6), Kind == SpawnKind.Named ? SpawnName : Kind.ToString(), modulate: Ink);
     }
 }

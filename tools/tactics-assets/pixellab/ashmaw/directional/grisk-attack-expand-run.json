@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 87f7effb-96de-402f-90ae-a37905475882\nanimation: v3 custom (A short right-handed mining-pick chop: right hand grips the pick shaft at all times, raises it beside the right shoulder, chops down forward, and returns to the starting guard. Left hand stays free. Helmet lantern and tally cord remain attached; feet planted, facing straight south.)\ndirections: south-east, east, north-east, north, north-west, west, south-west (7 jobs)\njob_ids: south-east=f44b8664-2e87-49a8-a921-00758c9efef8, east=37b305ca-fe01-40db-906e-8ace3a3446b2, north-east=ebea54f0-6b16-47dd-a8e5-cb0d610b414a, north=df362a00-3f97-4555-9b0e-cf26b39611d1, north-west=a52ecd25-5df0-46f4-8504-fadf398f7561, west=b73ff6db-89a4-49dc-ab56-7e1113e1d115, south-west=e991e936-d774-483d-84dc-7ff6c1361eae\ngroup: 081ffb68-72c9-4c53-9bb3-43deb1133e0c\nframes: 6 (reference stripped, keep_first_frame=false)\ncanvas: south-east 116x116, east 120x120, north-east 112x112, north 112x112, north-west 112x112, west 112x112, south-west 116x116 (frames are stored at this size: the character plus room to move)\ncost: 14 generations (2/dir x 7)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\")\nadd more directions to this group: animate_character(character_id=\"87f7effb-96de-402f-90ae-a37905475882\", action_description=\"A short right-handed mining-pick chop: right hand grips the pick shaft at all times, raises it beside the right shoulder, chops down forward, and returns to the starting guard. Left hand stays free. Helmet lantern and tally cord remain attached; feet planted, facing straight south.\", animation_group_id=\"081ffb68-72c9-4c53-9bb3-43deb1133e0c\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: aa983ed4-fd89-4e61-85cd-93b185bd2f40\nanimation: breathing-idle\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=2e0f7155-e7ff-4ea4-9b9b-0faf9e670560, south-west=22370015-0fff-4e76-a26e-7f5d1d46c889, west=bf5053a1-59b9-41f1-87d4-28188929cc69, north-west=f77d6791-6f8d-4482-8716-1a57982491fe, north=a0e72530-b234-44ec-b8d3-52f2acfdf340, north-east=5a4c4a8f-8900-4b07-bcae-a3e3b8a15c70, east=343a3ec6-e014-496a-9232-5f36344a074e, south-east=d17732d9-58da-4124-b206-7db3817bc773\ngroup: c0f9d3d8-7e00-4c75-ab7d-bf38f4f0d2a0\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", template_animation_id=\"breathing-idle\", animation_group_id=\"c0f9d3d8-7e00-4c75-ab7d-bf38f4f0d2a0\", directions=[...])\n\nhint: get_character(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\")\nif poor: delete_animation(character_id=\"aa983ed4-fd89-4e61-85cd-93b185bd2f40\", animation_type=\"...\") then retry with mode=\"v3\"",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

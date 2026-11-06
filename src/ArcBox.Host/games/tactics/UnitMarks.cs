@@ -33,6 +33,13 @@ public partial class UnitMarks : Node2D
         QueueRedraw();
     }
 
+    /// <summary>Shows nothing, and forgets the art, which may be let go.</summary>
+    public void Clear()
+    {
+        (_units, _art) = ([], null);
+        QueueRedraw();
+    }
+
     /// <summary>Moves what's animated on to a moment.</summary>
     public void Tick(double clock)
     {
@@ -54,6 +61,10 @@ public partial class UnitMarks : Node2D
 
     private void DrawMarks(BoardUnit unit, UnitArt art)
     {
+        if (unit.Thing is { Label: { } label, Alpha: > 0 } thing)
+        {
+            DrawLabel(label, thing.Alpha);
+        }
         if (unit.Bar is { } bar)
         {
             DrawBar(bar, art.Bar(unit.Tone));
@@ -76,6 +87,12 @@ public partial class UnitMarks : Node2D
             var size = new Vector2(crown.Width, crown.Height);
             var corner = new Vector2(crownAt.X - crown.AnchorX, crownAt.Y - crown.AnchorY);
             DrawTextureRectRegion(emotes, new Rect2(corner, size), Region(crown.Source(crown.FrameAt(_clock))));
+        }
+        if (unit.EmoteAt is { } emoteAt && unit.Emote is { } emote && _load(emote.Path) is { } sheet)
+        {
+            var size = new Vector2(emote.Width, emote.Height);
+            var corner = new Vector2(emoteAt.X - emote.AnchorX, emoteAt.Y - emote.AnchorY);
+            DrawTextureRectRegion(sheet, new Rect2(corner, size), Region(emote.Source(emote.FrameAt(_clock))));
         }
         if (unit.ArrowAt is { } arrow && _load(art.Arrow.Path) is { } cursor)
         {
@@ -117,16 +134,35 @@ public partial class UnitMarks : Node2D
         {
             return;
         }
-        var glyphs = countdown.Text.Select(art.Digit).ToArray();
-        var width = glyphs.Sum(g => g.Advance) * UnitPlan.CountdownScale;
-        var pen = countdown.Centre.X - width / 2f;
-        foreach (var (rect, advance) in glyphs)
+        foreach (var (rect, topLeft, size) in MarkRule.CountGlyphs(countdown, art))     // where MarkRule.CountBox says it is
         {
-            var size = new Vector2(rect.Width, rect.Height) * UnitPlan.CountdownScale;
-            DrawTextureRectRegion(texture, new Rect2(new Vector2(pen, countdown.Centre.Y - size.Y / 2), size), Region(rect));
-            pen += advance * UnitPlan.CountdownScale;
+            DrawTextureRectRegion(texture, new Rect2(topLeft.X, topLeft.Y, size.X, size.Y), Region(rect));
         }
     }
+
+    /// <summary>
+    /// A thing's words, centred under it with a dark outline, at twice the art's pixels: the world is drawn at 2x, so the font is drawn at half
+    /// scale and twice the size, and stays sharp.
+    /// </summary>
+    private void DrawLabel(ThingLabel label, float alpha)
+    {
+        var font = global::ArcBox.Host.Shell.ArcTheme.Bold;
+        DrawSetTransform(new Vector2(label.At.X, label.At.Y), 0, new Vector2(0.5f, 0.5f));
+        var colour = new Color(label.Colour.R, label.Colour.G, label.Colour.B, alpha);
+        var outline = new Color(0.04f, 0.04f, 0.06f, 0.9f * alpha);
+        var ascent = font.GetAscent(LabelSize);
+        for (var i = 0; i < label.Lines.Length; i++)
+        {
+            var at = new Vector2(-LabelWidth / 2, ascent + i * (LabelSize + 2));
+            DrawStringOutline(font, at, label.Lines[i], HorizontalAlignment.Center, LabelWidth, LabelSize, LabelOutline, outline);
+            DrawString(font, at, label.Lines[i], HorizontalAlignment.Center, LabelWidth, LabelSize, colour);
+        }
+        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+    }
+
+    private const int LabelSize = 15;
+    private const int LabelOutline = 5;
+    private const float LabelWidth = 420;
 
     private static Rect2 Region(ArtRect rect) => new(rect.X, rect.Y, rect.Width, rect.Height);
 }

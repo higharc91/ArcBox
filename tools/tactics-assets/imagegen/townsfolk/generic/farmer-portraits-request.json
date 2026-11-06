@@ -1,0 +1,9 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/concepts/townsfolk/generated/townsfolk_farmer.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/farmer_a/sprite-source.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/generic/farmer_b/sprite-source.png"
+  ],
+  "prompt": "Create matching pixel-art dialogue PORTRAITS for BOTH approved Wardenflame generic farmer variants shown in these references. Use the paired concept for identity and the two sprite sheets for exact clothing and hair colours. FIRST character is variantA, SECOND character is variantB. Preserve each age, gender, skin tone, hairstyle and clothing.  Exactly TWELVE separate head-and-shoulder busts in a THREE-COLUMN FOUR-ROW evenly spaced grid on TRANSPARENT background. Rows1-2 are VARIANT A ONLY, rows3-4 are VARIANT B ONLY. Row1 left-to-right: A neutral attentive IDLE, A HURT slight wince no injuries, A HAPPY warm smile. Row2: A ANGRY firm disapproval, A SAD worried, A SURPRISED widened eyes. Row3: B neutral IDLE, B HURT, B HAPPY. Row4: B ANGRY, B SAD, B SURPRISED. Same near-frontal slight-three-quarter camera and same head size/placement across all expressions of each person. Deliberate crisp low-resolution square pixel clusters at logical40x40 detail per bust, selective dark outline, warm top-left light, cool shadows, restrained64colour palette. Full hair, helmets where present, neck and shoulders fit completely in every cell with GENEROUS transparent gutters and outer padding. Every bust interior fully opaque. Alpha ZERO outside busts. No text, labels, frames, numbers, extra heads, full bodies, glow, scenery or painterly gradients. Twelve busts total. All six expressions are distinct and recognizable as the SAME person within each variant. Do not exchange the two variants or invent a third person."
+}

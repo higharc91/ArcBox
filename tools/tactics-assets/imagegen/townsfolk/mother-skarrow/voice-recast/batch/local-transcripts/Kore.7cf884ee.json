@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.7cf884ee.wav",
+  "sourceSha256": "bdb27ee7bd2af3f194a257ae80147cb4b3bf88f90d38736d86d4f6d1f813dfb4",
+  "duration": 11.24,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.72,
+      "text": " When the bellies are full, the clan sings."
+    },
+    {
+      "start": 4.72,
+      "end": 11.040000000000001,
+      "text": " Tonight I sing the old one, because my bones say I should."
+    }
+  ],
+  "text": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should.",
+  "secondsToTranscribe": 2.252
+}

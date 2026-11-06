@@ -1,0 +1,850 @@
+{
+  "sourceSha256": "3c7fff6dd7f0212636216c792d5fedee4c2ce8b2294fb4661160afc6706f4ec1",
+  "sourceSize": [
+    1086,
+    1448
+  ],
+  "sourceFrames": 48,
+  "frame": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    84
+  ],
+  "pixelScale": 0.5,
+  "bodyHeightWorld": 36,
+  "uniformScale": 0.44036697247706424,
+  "mirroring": false,
+  "perFrameRecentering": false,
+  "discardedDisconnectedPixels": 22,
+  "directions": {
+    "south": {
+      "gridPitch": 161.72857142857143,
+      "gridFirstCenter": 141.76190476190482,
+      "fixedFloor": 197,
+      "frames": [
+        {
+          "sourceBounds": [
+            99,
+            24,
+            176,
+            197
+          ],
+          "outputBounds": [
+            30,
+            8,
+            63,
+            84
+          ],
+          "opaquePixels": 1841,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            268,
+            24,
+            344,
+            197
+          ],
+          "outputBounds": [
+            33,
+            8,
+            66,
+            84
+          ],
+          "opaquePixels": 1839,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            432,
+            28,
+            509,
+            200
+          ],
+          "outputBounds": [
+            34,
+            10,
+            67,
+            85
+          ],
+          "opaquePixels": 1700,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            589,
+            28,
+            661,
+            200
+          ],
+          "outputBounds": [
+            32,
+            10,
+            63,
+            85
+          ],
+          "opaquePixels": 1703,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            749,
+            28,
+            827,
+            200
+          ],
+          "outputBounds": [
+            31,
+            10,
+            65,
+            85
+          ],
+          "opaquePixels": 1738,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            914,
+            28,
+            985,
+            200
+          ],
+          "outputBounds": [
+            32,
+            10,
+            63,
+            85
+          ],
+          "opaquePixels": 1669,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    },
+    "south-west": {
+      "gridPitch": 161.25714285714287,
+      "gridFirstCenter": 138.52380952380946,
+      "fixedFloor": 390,
+      "frames": [
+        {
+          "sourceBounds": [
+            100,
+            220,
+            172,
+            390
+          ],
+          "outputBounds": [
+            32,
+            10,
+            63,
+            84
+          ],
+          "opaquePixels": 1760,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            266,
+            220,
+            339,
+            390
+          ],
+          "outputBounds": [
+            34,
+            10,
+            65,
+            84
+          ],
+          "opaquePixels": 1737,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            424,
+            223,
+            502,
+            394
+          ],
+          "outputBounds": [
+            32,
+            11,
+            66,
+            86
+          ],
+          "opaquePixels": 1729,
+          "footDeltaWorld": 1
+        },
+        {
+          "sourceBounds": [
+            583,
+            224,
+            658,
+            392
+          ],
+          "outputBounds": [
+            31,
+            11,
+            64,
+            85
+          ],
+          "opaquePixels": 1606,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            740,
+            224,
+            826,
+            389
+          ],
+          "outputBounds": [
+            29,
+            11,
+            67,
+            83
+          ],
+          "opaquePixels": 1694,
+          "footDeltaWorld": -0.5
+        },
+        {
+          "sourceBounds": [
+            908,
+            223,
+            982,
+            392
+          ],
+          "outputBounds": [
+            32,
+            11,
+            64,
+            85
+          ],
+          "opaquePixels": 1612,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    },
+    "west": {
+      "gridPitch": 159.55714285714285,
+      "gridFirstCenter": 139.02380952380952,
+      "fixedFloor": 575,
+      "frames": [
+        {
+          "sourceBounds": [
+            107,
+            409,
+            167,
+            575
+          ],
+          "outputBounds": [
+            34,
+            11,
+            60,
+            84
+          ],
+          "opaquePixels": 1425,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            273,
+            409,
+            333,
+            575
+          ],
+          "outputBounds": [
+            37,
+            11,
+            63,
+            84
+          ],
+          "opaquePixels": 1417,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            418,
+            412,
+            498,
+            574
+          ],
+          "outputBounds": [
+            31,
+            13,
+            65,
+            83
+          ],
+          "opaquePixels": 1442,
+          "footDeltaWorld": -0.5
+        },
+        {
+          "sourceBounds": [
+            578,
+            412,
+            654,
+            574
+          ],
+          "outputBounds": [
+            31,
+            13,
+            64,
+            83
+          ],
+          "opaquePixels": 1407,
+          "footDeltaWorld": -0.5
+        },
+        {
+          "sourceBounds": [
+            733,
+            412,
+            814,
+            575
+          ],
+          "outputBounds": [
+            29,
+            13,
+            64,
+            84
+          ],
+          "opaquePixels": 1475,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            906,
+            412,
+            974,
+            577
+          ],
+          "outputBounds": [
+            35,
+            13,
+            64,
+            85
+          ],
+          "opaquePixels": 1429,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    },
+    "north-west": {
+      "gridPitch": 161,
+      "gridFirstCenter": 137.5,
+      "fixedFloor": 750,
+      "frames": [
+        {
+          "sourceBounds": [
+            107,
+            588,
+            165,
+            750
+          ],
+          "outputBounds": [
+            35,
+            13,
+            60,
+            84
+          ],
+          "opaquePixels": 1452,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            272,
+            588,
+            333,
+            750
+          ],
+          "outputBounds": [
+            37,
+            13,
+            63,
+            84
+          ],
+          "opaquePixels": 1479,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            422,
+            595,
+            501,
+            753
+          ],
+          "outputBounds": [
+            32,
+            16,
+            66,
+            85
+          ],
+          "opaquePixels": 1513,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            582,
+            594,
+            650,
+            751
+          ],
+          "outputBounds": [
+            32,
+            16,
+            61,
+            84
+          ],
+          "opaquePixels": 1404,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            740,
+            594,
+            812,
+            753
+          ],
+          "outputBounds": [
+            30,
+            16,
+            61,
+            85
+          ],
+          "opaquePixels": 1512,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            911,
+            594,
+            985,
+            752
+          ],
+          "outputBounds": [
+            35,
+            16,
+            67,
+            85
+          ],
+          "opaquePixels": 1489,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    },
+    "north": {
+      "gridPitch": 160.8,
+      "gridFirstCenter": 136.83333333333337,
+      "fixedFloor": 926,
+      "frames": [
+        {
+          "sourceBounds": [
+            97,
+            764,
+            174,
+            926
+          ],
+          "outputBounds": [
+            31,
+            13,
+            64,
+            84
+          ],
+          "opaquePixels": 1697,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            263,
+            764,
+            340,
+            926
+          ],
+          "outputBounds": [
+            33,
+            13,
+            67,
+            84
+          ],
+          "opaquePixels": 1712,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            420,
+            767,
+            499,
+            929
+          ],
+          "outputBounds": [
+            32,
+            14,
+            66,
+            85
+          ],
+          "opaquePixels": 1623,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            577,
+            767,
+            650,
+            926
+          ],
+          "outputBounds": [
+            30,
+            14,
+            61,
+            84
+          ],
+          "opaquePixels": 1524,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            740,
+            767,
+            819,
+            929
+          ],
+          "outputBounds": [
+            31,
+            14,
+            65,
+            85
+          ],
+          "opaquePixels": 1632,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            905,
+            767,
+            982,
+            927
+          ],
+          "outputBounds": [
+            33,
+            14,
+            66,
+            84
+          ],
+          "opaquePixels": 1609,
+          "footDeltaWorld": 0
+        }
+      ]
+    },
+    "north-east": {
+      "gridPitch": 160.3,
+      "gridFirstCenter": 139.83333333333337,
+      "fixedFloor": 1102,
+      "frames": [
+        {
+          "sourceBounds": [
+            107,
+            939,
+            168,
+            1102
+          ],
+          "outputBounds": [
+            34,
+            13,
+            60,
+            84
+          ],
+          "opaquePixels": 1509,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            271,
+            939,
+            335,
+            1102
+          ],
+          "outputBounds": [
+            36,
+            13,
+            63,
+            84
+          ],
+          "opaquePixels": 1542,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            423,
+            943,
+            504,
+            1102
+          ],
+          "outputBounds": [
+            32,
+            14,
+            67,
+            84
+          ],
+          "opaquePixels": 1574,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            583,
+            943,
+            651,
+            1105
+          ],
+          "outputBounds": [
+            32,
+            14,
+            61,
+            85
+          ],
+          "opaquePixels": 1432,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            740,
+            943,
+            819,
+            1102
+          ],
+          "outputBounds": [
+            30,
+            14,
+            65,
+            84
+          ],
+          "opaquePixels": 1572,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            907,
+            943,
+            979,
+            1102
+          ],
+          "outputBounds": [
+            33,
+            14,
+            65,
+            84
+          ],
+          "opaquePixels": 1503,
+          "footDeltaWorld": 0
+        }
+      ]
+    },
+    "east": {
+      "gridPitch": 161.24285714285713,
+      "gridFirstCenter": 139.97619047619054,
+      "fixedFloor": 1277.5,
+      "frames": [
+        {
+          "sourceBounds": [
+            108,
+            1117,
+            166,
+            1277
+          ],
+          "outputBounds": [
+            34,
+            14,
+            59,
+            84
+          ],
+          "opaquePixels": 1387,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            274,
+            1117,
+            333,
+            1278
+          ],
+          "outputBounds": [
+            37,
+            14,
+            62,
+            84
+          ],
+          "opaquePixels": 1389,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            427,
+            1120,
+            505,
+            1281
+          ],
+          "outputBounds": [
+            33,
+            15,
+            66,
+            85
+          ],
+          "opaquePixels": 1380,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            587,
+            1120,
+            658,
+            1279
+          ],
+          "outputBounds": [
+            32,
+            15,
+            63,
+            85
+          ],
+          "opaquePixels": 1337,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            744,
+            1122,
+            821,
+            1279
+          ],
+          "outputBounds": [
+            30,
+            16,
+            64,
+            85
+          ],
+          "opaquePixels": 1384,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            911,
+            1121,
+            983,
+            1281
+          ],
+          "outputBounds": [
+            33,
+            16,
+            64,
+            85
+          ],
+          "opaquePixels": 1373,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    },
+    "south-east": {
+      "gridPitch": 160.42857142857142,
+      "gridFirstCenter": 139.09523809523807,
+      "fixedFloor": 1443,
+      "frames": [
+        {
+          "sourceBounds": [
+            102,
+            1293,
+            171,
+            1443
+          ],
+          "outputBounds": [
+            32,
+            18,
+            62,
+            84
+          ],
+          "opaquePixels": 1474,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            270,
+            1293,
+            337,
+            1443
+          ],
+          "outputBounds": [
+            35,
+            18,
+            64,
+            84
+          ],
+          "opaquePixels": 1468,
+          "footDeltaWorld": 0
+        },
+        {
+          "sourceBounds": [
+            428,
+            1297,
+            494,
+            1445
+          ],
+          "outputBounds": [
+            34,
+            20,
+            63,
+            85
+          ],
+          "opaquePixels": 1355,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            589,
+            1297,
+            650,
+            1445
+          ],
+          "outputBounds": [
+            35,
+            20,
+            61,
+            85
+          ],
+          "opaquePixels": 1271,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            741,
+            1298,
+            812,
+            1445
+          ],
+          "outputBounds": [
+            31,
+            21,
+            62,
+            85
+          ],
+          "opaquePixels": 1370,
+          "footDeltaWorld": 0.5
+        },
+        {
+          "sourceBounds": [
+            912,
+            1299,
+            976,
+            1445
+          ],
+          "outputBounds": [
+            36,
+            21,
+            63,
+            85
+          ],
+          "opaquePixels": 1317,
+          "footDeltaWorld": 0.5
+        }
+      ]
+    }
+  },
+  "atlasSha256": "16505f0170415de9227e1728381393234385fd4dca94677ae84888ab9e3055a4",
+  "textureMiB": 1.6875
+}

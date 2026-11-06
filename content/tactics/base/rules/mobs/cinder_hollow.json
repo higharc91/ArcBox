@@ -1,0 +1,95 @@
+{
+  "region": "cinder_hollow",
+  "mobs": [
+    {
+      "id": "mob_hollow_bats",
+      "encounter": "mob_hollow_bats",
+      "arena": "mob_hollow_bats",
+      "patch": [
+        [
+          27,
+          7
+        ],
+        [
+          28,
+          7
+        ],
+        [
+          26,
+          7
+        ],
+        [
+          27,
+          6
+        ],
+        [
+          29,
+          7
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          25,
+          7
+        ],
+        [
+          26,
+          6
+        ]
+      ],
+      "show": [
+        "beasts.bat.dusk"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    },
+    {
+      "id": "mob_hollow_kobolds",
+      "encounter": "mob_hollow_kobolds",
+      "arena": "mob_hollow_kobolds",
+      "patch": [
+        [
+          27,
+          19
+        ],
+        [
+          28,
+          19
+        ],
+        [
+          26,
+          19
+        ],
+        [
+          27,
+          20
+        ],
+        [
+          27,
+          18
+        ],
+        [
+          29,
+          19
+        ],
+        [
+          28,
+          20
+        ],
+        [
+          28,
+          18
+        ]
+      ],
+      "show": [
+        "characters.kobold"
+      ],
+      "pace": 2.5,
+      "xp": 75,
+      "gold": 10
+    }
+  ]
+}

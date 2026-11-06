@@ -13,13 +13,9 @@ public sealed class RulesInvariantException(string message) : Exception(message)
 public static class Invariants
 {
     /// <summary>
-    /// Whether <see cref="Battle.Start"/> and <see cref="Battle.Apply"/> check every state they produce. On in Debug builds;
-    /// tests turn it on in any build.
+    /// Whether <see cref="Battle.Start"/> and <see cref="Battle.Apply"/> check every state they produce. Enabled in every build.
     /// </summary>
-    public static bool Enabled { get; set; }
-#if DEBUG
-        = true;
-#endif
+    public static bool Enabled { get; set; } = true;
 
     /// <summary>
     /// Throws <see cref="RulesInvariantException"/>, naming the first broken rule, unless:
@@ -44,6 +40,7 @@ public static class Invariants
     /// <summary><see cref="Check(BattleState, RulesPack)"/> with the map as it is now already built.</summary>
     internal static void Check(BattleState s, RulesPack rules, Terrain terrain)
     {
+        CheckSurfaces(s, rules, terrain);
         var walking = s.Queue.OfType<MoveStep>().Select(m => m.Unit).ToImmutableSortedSet();
         var holders = new Dictionary<Tile, UnitId>();   // lookups only
         foreach (var u in s.Units.Values)
@@ -79,6 +76,37 @@ public static class Invariants
 
         if (s.Outcome is null && (s.TurnIndex < 0 || s.TurnIndex >= s.Order.Length))
             Fail($"TurnIndex {s.TurnIndex} is outside the turn order of {s.Order.Length}.");
+    }
+
+    private static void CheckSurfaces(BattleState state, RulesPack rules, Terrain terrain)
+    {
+        var occupied = new Dictionary<Tile, string>();
+        var scorched = state.Zones.Where(z => z.Surface && z.Kind == "scorched").SelectMany(z => z.Tiles).ToHashSet();
+        foreach (var zone in state.Zones.Where(z => z.Surface))
+        {
+            if (!state.Environment)
+                Fail("A disabled encounter contains an environmental surface.");
+            if (!rules.Environment.Surfaces.ContainsKey(zone.Kind))
+                Fail($"Unknown surface '{zone.Kind}'.");
+            if (zone.Concentration || zone.RoundsLeft is <= 0)
+                Fail($"Surface '{zone.Kind}' has an invalid lifetime.");
+            foreach (var tile in zone.Tiles)
+            {
+                if (!terrain.Map.InBounds(tile))
+                    Fail($"Surface '{zone.Kind}' is outside the map at {tile}.");
+                var water = (terrain.Map[tile].Flags & TileFlags.Water) != 0;
+                if (zone.Kind == "burning" && (water || scorched.Contains(tile)))
+                    Fail($"Burning surface on water or scorched ground at {tile}.");
+                if (zone.Kind == "ice_sheet" && (!water || terrain.Deep(tile)))
+                    Fail($"Ice surface is not on shallow water at {tile}.");
+                if (zone.Kind is "burning" or "ice_sheet" or "oil")
+                {
+                    if (occupied.TryGetValue(tile, out var other))
+                        Fail($"Surface '{zone.Kind}' overlaps '{other}' at {tile}.");
+                    occupied[tile] = zone.Kind;
+                }
+            }
+        }
     }
 
     /// <summary>A deep tile that would be walkable but for its depth (not impassable, no blocking prop).</summary>

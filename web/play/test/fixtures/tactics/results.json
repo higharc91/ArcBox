@@ -24,9 +24,12 @@
       {
         "name": "Player4",
         "xp": 250,
-        "injuries": []
+        "injuries": [
+          "Cracked ribs"
+        ]
       }
     ],
+    "note": null,
     "vip": true,
     "level": 1,
     "portal": "/c/ABCD"

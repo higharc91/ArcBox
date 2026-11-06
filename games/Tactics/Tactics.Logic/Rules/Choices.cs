@@ -1,15 +1,19 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
 /// <summary>A tile the unit can walk to this turn: the Move it costs and the path <see cref="Move"/> takes.</summary>
-public sealed record MoveChoice(Tile To, int Cost, ImmutableArray<Tile> Path);
+public sealed record MoveChoice(Tile To, int Cost, ImmutableArray<Tile> Path,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] double? Risk = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Warn = null);
 
 /// <summary>What one use is expected to do to a unit it affects: average damage (after resistances) and healing.</summary>
 public sealed record UnitPreview(UnitId Unit, double Damage, double Heal);
 
 /// <summary>A legal target for an ability: what to send in <see cref="Use.Target"/>, where it lands and whom it affects.</summary>
-public sealed record TargetChoice(Target Target, Tile Aim, ImmutableArray<UnitPreview> Affected);
+public sealed record TargetChoice(Target Target, Tile Aim, ImmutableArray<UnitPreview> Affected,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<Tile> Spread = default);
 
 /// <summary>
 /// An ability or item the unit can use now, with its tooltip, its cost and every legal target. <see cref="Item"/> is set
@@ -38,11 +42,11 @@ public static class Choices
 
         var w = new BattleWriter(state, rules);
         var scorer = new Scorer(state, rules, unit);
-        return new TurnChoices(unit, me.Economy, Moves(state, me, w, rules), Abilities(state, me, w, scorer, rules),
+        return new TurnChoices(unit, me.Economy, Moves(state, me, w, scorer, rules), Abilities(state, me, w, scorer, rules),
             CanDelay: Battle.Check(state, new Delay(unit, 1), rules) is null);
     }
 
-    private static ImmutableArray<MoveChoice> Moves(BattleState state, UnitState me, BattleWriter w, RulesPack rules)
+    private static ImmutableArray<MoveChoice> Moves(BattleState state, UnitState me, BattleWriter w, Scorer scorer, RulesPack rules)
     {
         if (me.Economy.MoveLeft <= 0 || Modifiers.For(w, me.Id, rules).CantMove)
             return [];
@@ -56,7 +60,17 @@ public static class Choices
         {
             ImmutableArray<Tile> path = [me.Pos, .. paths.PathTo(to)];   // PathTo leaves out the origin; Move starts at it
             if (path.Length >= 2 && Battle.Check(state, new Move(me.Id, path), rules) is null)
-                moves.Add(new MoveChoice(to, paths.CostTo(to), path));
+            {
+                var hazard = state.Environment ? scorer.Hazards(me, to, path[1..]) : (Entering: 0.0, Staying: 0.0);
+                var risk = Math.Round(hazard.Entering + hazard.Staying, 1);
+                var zones = state.Environment ? state.Zones.Where(z => z.Tiles.Any(t => path.Skip(1).Contains(t))).ToArray() : [];
+                var warning = !state.Environment ? null : risk > 0
+                    ? $"{(zones.Any(z => z.Kind is "burning" or "fire") ? "burns" : "hazard")} ~{Math.Ceiling(risk)}"
+                    : zones.Any(z => z.Kind is "ice_sheet" or "ice") ? "ice · may slip"
+                    : zones.Any(z => z.Kind is "oil" or "grease") ? "oil · flammable"
+                    : Surfaces.Water(w, to) ? "water · conducts lightning" : null;
+                moves.Add(new MoveChoice(to, paths.CostTo(to), path, risk > 0 ? risk : null, warning));
+            }
         }
         return moves.ToImmutable();
     }
@@ -83,12 +97,14 @@ public static class Choices
                 if (Battle.Check(state, new Use(me.Id, command, target, item), rules) is not null
                     || Battle.ResolveTarget(w, me, ability, target, out var aim, out var affected) is not null)
                     continue;
-                targets.Add(new TargetChoice(target, aim, Previews(ability, me, aim, affected, w, scorer)));
+                var preview = Previews(ability, me, aim, affected, w, scorer);
+                var reaction = scorer.ReactionPreview(new Strike(w, me, ability, aim, neutral: true), aim, affected);
+                targets.Add(new TargetChoice(target, aim, preview.AddRange(reaction.Affected), reaction.Spread));
             }
             if (targets.Count == 0)
                 continue;
             var name = item is { } i ? rules.Items[i].Name : ability.Name;
-            choices.Add(new AbilityChoice(command, item, name, Tooltips.For(ability, me.Sheet.Level, rules), ability.Cost,
+            choices.Add(new AbilityChoice(command, item, name, Tooltips.For(ability, me.Sheet.Level, rules, state.Environment), ability.Cost,
                 targets.ToImmutable()));
         }
         return choices.ToImmutable();

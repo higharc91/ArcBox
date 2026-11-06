@@ -52,6 +52,20 @@
         128
       ]
     },
+    "path_ford": {
+      "kind": "top",
+      "variants": {
+        "packed": "top/native_path_ford_packed.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
     "sand": {
       "kind": "top",
       "variants": {
@@ -167,6 +181,20 @@
         128
       ]
     },
+    "ford_water": {
+      "kind": "top",
+      "variants": {
+        "clear": "top/native_ford_water_clear.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
     "lava": {
       "kind": "top",
       "variants": {
@@ -267,20 +295,7 @@
       "size": [
         128,
         128
-      ],
-      "emissive": {
-        "slot": "glow",
-        "light": {
-          "every": 4,
-          "radius": 1.0,
-          "lift": 2,
-          "flicker": "pulse",
-          "power": 0.25
-        },
-        "colour": {
-          "grey": "#ffa94b"
-        }
-      }
+      ]
     },
     "basalt": {
       "kind": "top",
@@ -306,6 +321,81 @@
       "size": [
         128,
         128
+      ]
+    },
+    "ash_ford": {
+      "kind": "top",
+      "variants": {
+        "charred": "top/native_ash_ford_charred.png",
+        "roots": "top/native_ash_ford_roots.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
+    "grass_ford": {
+      "kind": "top",
+      "variants": {
+        "autumn": "top/native_grass_ford_autumn.png",
+        "dry": "top/native_grass_ford_dry.png",
+        "pasture": "top/native_grass_ford_pasture.png",
+        "moist": "top/native_grass_ford_moist.png",
+        "moist_earth": "top/native_grass_ford_moist_earth.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
+    "dirt_ford": {
+      "kind": "top",
+      "variants": {
+        "wet": "top/native_dirt_ford_wet.png",
+        "dry": "top/native_dirt_ford_dry.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
+    "rock_ford": {
+      "kind": "top",
+      "variants": {
+        "bank": "top/native_rock_ford_bank.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "span": 4,
+      "edges": "clustered"
+    },
+    "planks_ford": {
+      "kind": "top",
+      "variants": {
+        "oak": "top/planks_ford_oak.png",
+        "dark": "top/planks_ford_oak.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        256,
+        256
       ]
     },
     "dirt_side": {
@@ -334,6 +424,19 @@
         128,
         32
       ]
+    },
+    "cliff_ford": {
+      "kind": "side",
+      "variants": {
+        "grey": "side/native_cliff_ford.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ],
+      "span": 4
     },
     "brick_side": {
       "kind": "side",
@@ -429,7 +532,8 @@
     "plank_side": {
       "kind": "side",
       "variants": {
-        "oak": "side/plank_side_oak.png"
+        "oak": "side/plank_side_oak.png",
+        "dark": "side/plank_side_dark.png"
       },
       "frames": 1,
       "fps": 0.0,
@@ -633,6 +737,87 @@
       "size": [
         32,
         32
+      ]
+    },
+    "warden_deck": {
+      "kind": "top",
+      "variants": {
+        "oak": "top/planks_ford_oak.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        256,
+        256
+      ]
+    },
+    "warden_ramp": {
+      "kind": "top",
+      "variants": {
+        "west": "top/rock_ford.png",
+        "east_high": "top/rock_ford.png",
+        "east_low": "top/rock_ford.png",
+        "u1": "top/rock_ford.png",
+        "u2": "top/rock_ford.png",
+        "nu1": "top/rock_ford.png",
+        "nu2": "top/rock_ford.png",
+        "v1": "top/rock_ford.png",
+        "v2": "top/rock_ford.png",
+        "nv1": "top/rock_ford.png",
+        "nv2": "top/rock_ford.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        256,
+        256
+      ]
+    },
+    "road_ramp": {
+      "kind": "top",
+      "variants": {
+        "q_0_0_-1_-2_d1": "top/path_ford.png",
+        "q_2_3_1_0_d1": "top/path_ford.png",
+        "q_0_1_0_0_d1": "top/path_ford.png",
+        "q_0_0_0_-1_d1": "top/path_ford.png",
+        "q_-1_0_-2_-3_d1": "top/path_ford.png",
+        "q_1_2_0_0_d1": "top/path_ford.png",
+        "q_0_3_1_0_d1": "top/path_ford.png",
+        "q_-1_0_0_-3_d1": "top/path_ford.png",
+        "q_0_0_-2_-3_d1": "top/path_ford.png",
+        "q_0_0_-1_0_d1": "top/path_ford.png",
+        "q_0_0_-3_-1_d1": "top/path_ford.png",
+        "q_3_1_0_0_d1": "top/path_ford.png",
+        "q_1_0_0_0_d1": "top/path_ford.png",
+        "q_0_0_-3_-2_d1": "top/path_ford.png",
+        "q_2_1_0_0_d1": "top/path_ford.png",
+        "q_0_0_-2_-1_d1": "top/path_ford.png",
+        "q_3_2_0_0_d1": "top/path_ford.png",
+        "q_0_-3_-2_0_d1": "top/path_ford.png",
+        "q_0_-2_-2_0_d1": "top/path_ford.png",
+        "q_0_0_0_1_d1": "top/path_ford.png",
+        "q_1_0_0_2_d1": "top/path_ford.png",
+        "q_2_0_0_2_d1": "top/path_ford.png",
+        "q_0_2_2_0_d1": "top/path_ford.png",
+        "q_-2_0_0_-2_d2": "top/path_ford.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        256,
+        256
+      ]
+    },
+    "warden_edge": {
+      "kind": "top",
+      "variants": {
+        "stone": "top/rock_ford.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        256,
+        256
       ]
     }
   }

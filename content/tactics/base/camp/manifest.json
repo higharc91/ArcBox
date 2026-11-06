@@ -1,0 +1,115 @@
+{
+  "about": "Reusable camp dressing. fire_0..4 and pot_0..4 are native PixelLab animation frames, played at 6/5 fps. hearth.png is a 320x180 inn backdrop; fire_unlit.png is the cold ring. All provenance is in the camp art brief.",
+  "props": {
+    "fire": {
+      "variants": {
+        "default": "fire_0.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "camp",
+        "dressing"
+      ]
+    },
+    "pot": {
+      "variants": {
+        "default": "pot_0.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        43
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "camp",
+        "dressing"
+      ]
+    },
+    "bedroll": {
+      "variants": {
+        "default": "bedroll.png"
+      },
+      "size": [
+        48,
+        32
+      ],
+      "anchor": [
+        24,
+        26
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "camp",
+        "dressing"
+      ]
+    },
+    "shelter": {
+      "variants": {
+        "default": "shelter.png"
+      },
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        59
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "camp",
+        "dressing"
+      ]
+    },
+    "bowl": {
+      "variants": {
+        "default": "bowl.png"
+      },
+      "size": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "frames": 1,
+      "fps": 0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "camp",
+        "dressing"
+      ]
+    }
+  }
+}

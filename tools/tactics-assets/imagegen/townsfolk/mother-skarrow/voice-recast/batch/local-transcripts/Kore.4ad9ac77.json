@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.4ad9ac77.wav",
+  "sourceSha256": "37368a3057fba031f8bf5257ded855b0567fb2924d01f4919e3389cde3e7bdaf",
+  "duration": 15.52,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 10.92,
+      "text": " You ask well, so, Akram, in the old song, the gold is not gold, we sing gold because"
+    },
+    {
+      "start": 10.92,
+      "end": 15.120000000000001,
+      "text": " it rhymes, and the true word is sad."
+    }
+  ],
+  "text": "You ask well, so, Akram, in the old song, the gold is not gold, we sing gold because it rhymes, and the true word is sad.",
+  "secondsToTranscribe": 3.087
+}

@@ -1,0 +1,204 @@
+{
+  "cases": 6,
+  "failures": [],
+  "results": [
+    {
+      "screen": "walk-trinket-presented",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 99.09375,
+        "w": 288,
+        "h": 93.390625,
+        "right": 304,
+        "bottom": 192.484375
+      },
+      "dock": {
+        "x": 16,
+        "y": 200.484375,
+        "w": 288,
+        "h": 113.6875,
+        "right": 304,
+        "bottom": 314.171875
+      },
+      "pad": {
+        "x": 0,
+        "y": 314.171875,
+        "w": 320,
+        "h": 253.828125,
+        "right": 320,
+        "bottom": 568
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    },
+    {
+      "screen": "walk-trinket-presented",
+      "width": 360,
+      "height": 640,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 90,
+        "w": 328,
+        "h": 147.125,
+        "right": 344,
+        "bottom": 237.125
+      },
+      "dock": {
+        "x": 16,
+        "y": 245.125,
+        "w": 328,
+        "h": 113.6875,
+        "right": 344,
+        "bottom": 358.8125
+      },
+      "pad": {
+        "x": 0,
+        "y": 358.8125,
+        "w": 360,
+        "h": 281.1875,
+        "right": 360,
+        "bottom": 640
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    },
+    {
+      "screen": "walk-trinket-presented",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 90,
+        "w": 358,
+        "h": 316,
+        "right": 374,
+        "bottom": 406
+      },
+      "dock": {
+        "x": 16,
+        "y": 414,
+        "w": 358,
+        "h": 112,
+        "right": 374,
+        "bottom": 526
+      },
+      "pad": {
+        "x": 0,
+        "y": 526,
+        "w": 390,
+        "h": 318,
+        "right": 390,
+        "bottom": 844
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    },
+    {
+      "screen": "walk-trinket-presented",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 90,
+        "w": 398,
+        "h": 404,
+        "right": 414,
+        "bottom": 494
+      },
+      "dock": {
+        "x": 16,
+        "y": 502,
+        "w": 398,
+        "h": 112,
+        "right": 414,
+        "bottom": 614
+      },
+      "pad": {
+        "x": 0,
+        "y": 614,
+        "w": 430,
+        "h": 318,
+        "right": 430,
+        "bottom": 932
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    },
+    {
+      "screen": "walk-trinket-presented",
+      "width": 568,
+      "height": 320,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 89.09375,
+        "w": 248,
+        "h": 87.375,
+        "right": 264,
+        "bottom": 176.46875
+      },
+      "dock": {
+        "x": 16,
+        "y": 184.46875,
+        "w": 248,
+        "h": 135.53125,
+        "right": 264,
+        "bottom": 320
+      },
+      "pad": {
+        "x": 276,
+        "y": 28,
+        "w": 292,
+        "h": 292,
+        "right": 568,
+        "bottom": 320
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    },
+    {
+      "screen": "walk-trinket-presented",
+      "width": 844,
+      "height": 390,
+      "overflow": false,
+      "info": {
+        "x": 16,
+        "y": 80,
+        "w": 476,
+        "h": 190,
+        "right": 492,
+        "bottom": 270
+      },
+      "dock": {
+        "x": 16,
+        "y": 278,
+        "w": 476,
+        "h": 112,
+        "right": 492,
+        "bottom": 390
+      },
+      "pad": {
+        "x": 504,
+        "y": 28,
+        "w": 340,
+        "h": 362,
+        "right": 844,
+        "bottom": 390
+      },
+      "overlap": false,
+      "dockOffscreen": false,
+      "padOffscreen": false
+    }
+  ]
+}

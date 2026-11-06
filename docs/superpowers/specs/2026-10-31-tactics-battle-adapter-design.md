@@ -179,7 +179,7 @@ Because the engine's state includes the RNG and any pending reaction, the battle
 | Screen | When | Data |
 |---|---|---|
 | `pickClass` | Muster, no character | the 12 classes with role and one line each |
-| `pickEncounter` | VIP, Encounter pick | the encounters (§3) |
+| `pickEncounter` | VIP, Encounter pick | the encounters (§3), and `canWalk`: whether "Back to walking" has a world to go back to (false in a pack with no region) |
 | `turn` | your turn | your unit, the economy pips, `TurnChoices` (§5), a mini-map of nearby tiles |
 | `react` | your reaction | the trigger ("The goblin is leaving your reach"), the options with odds, and a 10 s deadline (`DeadlineUtc`) |
 | `status` | anyone else's turn | whose turn it is, "you're up in n" (exact, rules-engine §3.2), and your HP and conditions |
@@ -198,7 +198,7 @@ Because the engine's state includes the RNG and any pending reaction, the battle
 | 4 | The VIP picks the encounter from the whole pack | Gate by `completed` / chapter order once sub-project 5 adds a story map |
 | 5 | Reaction window 10 s, turn 60 s (spec), AI pacing fallback 400 ms + 250 ms per event | Constants in one place (`TacticsTiming`) |
 | 6 | `lease.Save` after every command | Throttle it (e.g. at most once a second, plus at every turn end) if storage load shows up |
-| 7 | An engine failure the AI can't skip calls the battle off with nothing won or lost (§4.6) | Count it as a loss (half XP, injuries) instead; `CallOffBattle` is the one place |
+| 7 | An engine failure the AI can't skip calls the battle off with nothing won or lost (§4.6) | Count it as a loss (no XP, the fight's injuries tended, consumables spent) instead; `CallOffBattle` is the one place |
 | 8 | The watchdog catches any exception from the engine, not only `RulesInvariantException` | Narrow `IsEngineFailure` |
 
 ## 10. Testing

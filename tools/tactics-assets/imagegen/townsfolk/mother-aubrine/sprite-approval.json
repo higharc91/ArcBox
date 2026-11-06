@@ -1,0 +1,41 @@
+{
+  "stage": "complete_set_approved",
+  "ownerAppearanceApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks good, continue so we can she her finished",
+    "source": "candidate-1.png"
+  },
+  "fullSetTvApproval": "approved",
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": true,
+  "completedSet": {
+    "status": "approved",
+    "sourceFrames": 144,
+    "portraits": 6,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": true,
+    "sha256": {
+      "review_aubrine.png": "a9f5fe5ae077f432194f189c5f5c08bf532b58b3a17c978eabf461835d8dc85f",
+      "review-sprite.json": "b18838342ccb8e77b685fc09de8906aebf7ed9c356fdf8e7b2414d8b3972f72a",
+      "palette.json": "97f4b3bf6f9bc42936972bcfa0a87a3a4001386b9556d7f7c1d0bb7b46dc4e7a",
+      "atlas-validation.json": "1a6a3743998e510973a93e5267e7760383a01a164f55f71276db509a6fccbe0e",
+      "portraits-validation.json": "b52b2ddf997efbdce5cae158f98e7ef542f102bea87af49ccf09617346591ed4",
+      "aubrine-eight-direction-idle.gif": "acee92524bf96390aa4d183e24b818f57f748f00c63a47c606efae670bcc736e",
+      "aubrine-eight-direction-walk.gif": "44eab5b66fdc0e4594e03aa5c9f17c4dee78df860d24b67f0229c7a0c20c8735",
+      "aubrine-eight-direction-talk.gif": "844f103b3fc0ef97e991bba3dae6a033d90c602099e6e1e9e74906f3b17c3636",
+      "aubrine-portraits-review.png": "85dabf9d1257bef5bbc4648c5391f5e8a2de64028d0678d9815276dc5c45b496",
+      "aubrine-directions-review.png": "799a8bad914ca17d51d10df7b191975ca32f296f1d6b2d6e5c3f49b91b19b9a7",
+      "aubrine-finished-review.mp4": "e4e3a25eb88a2d57156f54bd4ed20c17413b235f8b96c16ae9fa262be59cd324",
+      "review-validation.json": "0ce57a061035f01b38dadc0592cb3cc1b1bebf1d2ff29c794ca239a44a6ce23e"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/aubrine-imagegen/world-chapel.png",
+      "sha256": "23cabd013b399e39a69086fe007886d7897d3253a1563cdba1a6464d0c7f0268"
+    }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "She looks great! Who is next?",
+    "context": "Owner response after the complete directional motion, six portraits and native TV review shown in chat."
+  }
+}

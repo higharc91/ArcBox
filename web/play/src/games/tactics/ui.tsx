@@ -133,5 +133,6 @@ const ICONS = {
   shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 7v10"/>',
   crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',
   speech: '<path d="M4 5h16v11h-9l-5 4v-4H4z"/><path d="M12 8v3M12 13.5v.01"/>',
+  search: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>',
   skip: '<path d="M5 5l8 7-8 7zM16 5v14"/>',
 } as const;

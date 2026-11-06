@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-03",
+  "branch": "environmental-tiles",
+  "baseCommit": "20296494",
+  "apiCommit": "32a0d3fe460dd73a231107ab5278d8e9e9982d18",
+  "webCommit": "c6211f9fdf919da88967c34de96f0ce89e0c06d8",
+  "dotnet": {
+    "passed": 5864,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 11,
+    "duration": "3m 48s 877ms",
+    "buildWarnings": 0
+  },
+  "web": {
+    "passed": 483,
+    "failed": 0,
+    "files": 21,
+    "newCases": 5,
+    "typeCheckAndBuild": "pass",
+    "buildWarning": "Existing Three.js flyover chunk is 537.65 kB, above Vite 500 kB advisory.",
+    "stderr": "Existing happy-dom localhost-fetch/abort and intentional error-boundary diagnostics, as previous milestones."
+  },
+  "focused": {
+    "logic": 5,
+    "gameFixturesCompactionAndSize": 14,
+    "webEnvironment": 5
+  },
+  "browser": {
+    "errors": [],
+    "terrainLooks": 6,
+    "riskTap": true,
+    "selectedSpread": true,
+    "reducedMotion": true,
+    "clears": true,
+    "narrowAndLandscape": true
+  },
+  "media": {
+    "source": "Real Chromium controller, dev preview of six cosmetic looks on a server-produced turn fixture; actual pack art served from repository",
+    "viewport": "390x844",
+    "fps": 25,
+    "format": {
+      "duration": "20.400000",
+      "size": "1064017"
+    },
+    "audio": false
+  },
+  "phoneContract": {
+    "move": [
+      "risk?: number",
+      "warn?: string"
+    ],
+    "target": [
+      "spread?: Tile[]",
+      "affected includes secondary conducted units"
+    ],
+    "battleScreenData": [
+      "surfaces?: string[] on turn/status/react"
+    ],
+    "omission": "No forecast or ambient fields emitted for disabled encounters; no empty spread arrays emitted."
+  },
+  "sizes": {
+    "environmentTurnFixtureCompactJsonBytes": 8963,
+    "enabledLevel10WizardDruidCleric": "All three below 64 KiB choices warning threshold"
+  },
+  "sourceSha256": {
+    "games/Tactics/Tactics.Game.Tests/PhoneEnvironmentViewTests.cs": "7dee870c0460a7e8ab81aefe6e4c87e4eae1f2414baf456ea0396e5122360480",
+    "games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs": "febf486cc4f78fdf384c9f49c45bf8dfe003181b54b6f7ce234e7394058457cd",
+    "games/Tactics/Tactics.Game.Tests/ViewSizeTests.cs": "620e82ed69ec18167dcd8ebcc5a907d77a0cb3d28dc2a1ff89d333936f5142d5",
+    "games/Tactics/Tactics.Game/PhoneSurfaces.cs": "e50fb7b5dfee6efbecd6f883dc15423368626c8512035a4dd97eb53eb704579b",
+    "games/Tactics/Tactics.Game/TacticsGame.Views.cs": "bfffb5febdc48e90cccee913f356f0e4a5304096fa0b1052f605602dc43c6ed0",
+    "games/Tactics/Tactics.Logic.Tests/Rules/PhoneEnvironmentTests.cs": "d5cd3e7daa3e14ebce5c2d07b5fb58a444bba7293d6d4efd8f4c05180c781612",
+    "games/Tactics/Tactics.Logic/Ai/Scoring.Phone.cs": "df3f3d113b08a71493ab561ac837df15e83f630815c3617256eab0462aac6196",
+    "games/Tactics/Tactics.Logic/Rules/Choices.cs": "ed6aff74572ae47c77b9b28f3e1e0976a0fa623f99e71820a8b841e8cccb6fe0",
+    "web/play/environment.html": "c03c46208cebdd3ebdde65d33867834fa5548a6dc95734c6859e0bfc093f6341",
+    "web/play/src/dev/environment.tsx": "33a4d8050b3b45b3760a906d091ff469e0cb70941ad873e72554ea47cb8a63fc",
+    "web/play/src/games/tactics/map.ts": "757bb7247789b1d0ee8ad4bc9395597e7beb7a5f8f538f29c9aee5200812cdb8",
+    "web/play/src/games/tactics/screens.tsx": "d97e50cf7a1c4f609284f7890f7952a03326b78eec8d7d2504821d2be20916d9",
+    "web/play/src/games/tactics/surfaces.tsx": "37fedae7d12902413ee16fe99b135278090f54836cf9a76b8d1aa84afedbf6c0",
+    "web/play/src/games/tactics/tactics.css": "28c7065afcb787bb3546c8573c3075e8d0b3f7f67af36816f32f73aeba7183f3",
+    "web/play/src/games/tactics/turn.tsx": "7718999d6eee169a8f5ff65056f60163260359fe0a0141426fd94086cfea0bce",
+    "web/play/src/games/tactics/types.ts": "d395cbb3ac1b958e63cc8fafcaafa2e625784b9aca90fba904d5281dccb3879d",
+    "web/play/test/fixtures/tactics/environment-status.json": "823b17dd4a8cf71a63c60114a1045b69df6e27d4ee022d524a6bfc97e6b064ff",
+    "web/play/test/fixtures/tactics/environment-turn.json": "77dad60643c653b3585ef9d2498ca05c9f53e1e556a7de8a3e749da54b7fba91",
+    "web/play/test/tactics.test.tsx": "de5d92b76a6f32388394ec4cabffc957c0ae3b31ae7af2a0aacf80c8ef0f7a62",
+    "web/play/test/tacticsEnvironment.test.tsx": "73e06c75df1929fc51c3c42dfc1616a5784715fc4f3fb0c305450270fda645e2"
+  },
+  "existingFixtureSha256Unchanged": {
+    "web/play/test/fixtures/tactics/check-search-rolled.json": "5b80deb436a0117c2fbc72dfd4a2d5d102fef42a741c048f6a0abf9bf0108f5f",
+    "web/play/test/fixtures/tactics/react.json": "5d6a1d6ed614920c2877328ba280276cf33ffa02f9e090b6e8aa4584dc48f7b2",
+    "web/play/test/fixtures/tactics/pickEncounter-noWalk.json": "95d9f25e9ae1a8af411935305b04e0c47697bfc66704358f9155e4ce2af76b82",
+    "web/play/test/fixtures/tactics/pickClass.json": "aa2a9ce8789b303e3ce60e488179f5157a9e52a1f98b3f5068eeb1475e9790a6",
+    "web/play/test/fixtures/tactics/dialogue-leader.json": "b15d82052e5483a68763fe44ee2ea05531823c00ac1d2d285da78b3f83c36c51",
+    "web/play/test/fixtures/tactics/choice-leader.json": "76e873039558e93e27b9960aa69235c1f4d92b7a0ee74efaf2112dea7693fe4f",
+    "web/play/test/fixtures/tactics/turn.json": "1280b4dc6ad7cdebb5e33f2e2a2c7539aac3c837ac959ebc8bf23082b639416c",
+    "web/play/test/fixtures/tactics/results.json": "e167faa5a31d180656418704069968edc15c7d71ab9c11a5adb9ba761d265186",
+    "web/play/test/fixtures/tactics/portal-character.json": "97a45cb1389ae6c497022547339a5838fa09e803658a5227c112d4d40558582c",
+    "web/play/test/fixtures/tactics/walk-leader.json": "bdce93ffb460e19cd58890653f473b5c7ee5cd94ae9603da6b2cbdcf4610477c",
+    "web/play/test/fixtures/tactics/walk-follower.json": "907bf812c2e7d6b1c6b67eebf6bbb0a6c760819e6ee38095dc21adefb54c5764",
+    "web/play/test/fixtures/tactics/walk-interact.json": "d5e2f21182b3c6863642a3afd2647f2b5e3dfcb3558e1f78e246555e72de112c",
+    "web/play/test/fixtures/tactics/dialogue.json": "f65850a26c9655fbdb5f26d29e5142645fd843c4db7fe0d194d2dca631a39cae",
+    "web/play/test/fixtures/tactics/check-rolled.json": "fd8416b087f5ab9f623475344bcf0617da2630601b9aa63cbfa5f26c0919eff6",
+    "web/play/test/fixtures/tactics/walk-things.json": "d0e6d01ceaa22493a451ff74683caa7bb1cbb4053fa09ef4d2e1e12f4dd474a4",
+    "web/play/test/fixtures/tactics/vote-tie.json": "07b3391bd19ee5a69bc8cda5f9a51e5e02ed095530b5575ba3d855531581e854",
+    "web/play/test/fixtures/tactics/check-pick.json": "af637a701c258e9de324855b8a2e3cc52024d0fb4b3161a7ca575d7f3d0b69d3",
+    "web/play/test/fixtures/tactics/walk-things-follower.json": "88b3116ebbe67ac6e115b3f2856b5f48c11836334cf2265a05eee060804242d2",
+    "web/play/test/fixtures/tactics/portal-new.json": "35224456b0aa5e829c075ce548028a4e523e53d628b2766c00d4373ee4928eec",
+    "web/play/test/fixtures/tactics/vote.json": "c8f6eca5bbfd7685cd6197d24ef4069dd95b9e5d65b8a2ac99468a5a93fb7d21",
+    "web/play/test/fixtures/tactics/choice-follower.json": "6e47ea3513f86f7c64109cef86aba425e0079f6e75700cf6e90f977fb2fc694e",
+    "web/play/test/fixtures/tactics/pickEncounter.json": "1d0e43c1210e593e6adb6eada94e76faee3a38f5cf613917cf87bcdd0ae20944",
+    "web/play/test/fixtures/tactics/check-search.json": "3e4ad5234dfdbd36db0d87952ed01b51693fdabf98a7e5db74d49103fae373a7",
+    "web/play/test/fixtures/tactics/status.json": "4fdb48472b464255c1429909eb820346bdc111b397d9b98eca8c43278b30a870"
+  },
+  "goldensUnchanged": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "productionEncountersEnabled": 0,
+  "logNote": "Trailing whitespace normalized in committed logs; originals in /workspace/issue69-f.",
+  "artifactSha256": {
+    "f-phone-fire.png": "1106d8146332ee1320ff4b4eff97783b318a159da88c1759db70b7db2e74c8eb",
+    "f-web-build.txt": "6f9f0573b202e9b15297227b9535d212b6c61aecc50edca4bb4d50c367d52359",
+    "f-phone-spread.png": "f601ec6c651c9c319113b375e19ded0ebac97056792c567d2b2dec4f1afd9431",
+    "f-tests.txt": "d61356a7916fb946ee2882160fc2894ceffbfce3319227eb2685d8559aa4ca67",
+    "f-phone-surfaces.mp4": "f25564d5481cba5b1860a90441d427aca48b3193ee819e03790f5cb748b22ddf",
+    "f-browser-check.json": "af6bb89275a7ea4d38545523d977686f81a17af218bde5cc481db8b06a71963f",
+    "f-web.txt": "ba8a9e4b2846b81de560ad60ba10aa52dafaec443c7203b5ec953adb8b9bfac2",
+    "f-dotnet-build.txt": "f10baf8c5d5e0a64333c6be9e18350aa7b5f05fe0ca08b6c00e994f9cba51b17",
+    "f-phone-water.png": "eee8794d5d34b4d90e71661d8620e32c657b94d9ec7442283691eec2e4de048c"
+  }
+}

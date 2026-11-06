@@ -1,0 +1,14 @@
+{
+  "name": "wardenflame-townsfolk-review",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline sprite review tooling; no runtime game dependencies or credentials",
+  "scripts": {
+    "verify": "node verify-pilot.cjs && node verify-review-pack.cjs",
+    "build-review": "node build-review-pack.cjs && node build-motion-review.cjs"
+  },
+  "dependencies": {
+    "gifenc": "1.0.3",
+    "pngjs": "7.0.0"
+  }
+}

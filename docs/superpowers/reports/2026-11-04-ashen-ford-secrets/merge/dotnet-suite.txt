@@ -1,0 +1,38 @@
+Running tests from /workspace/arcbox-secrets/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (988ms)
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 11s 062ms)
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (3m 10s 646ms)
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (2m 39s 396ms)
+Running tests from /workspace/arcbox-secrets/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 278ms)
+Running tests from /workspace/arcbox-secrets/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 255ms)
+Running tests from /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 15s 712ms)
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (1m 20s 379ms)
+Running tests from /workspace/arcbox-secrets/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (5s 024ms)
+Running tests from /workspace/arcbox-secrets/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (43s 724ms)
+
+Test run summary: Passed!
+  /workspace/arcbox-secrets/src/ArcBox.Sdk.Tests/bin/Debug/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 278ms)
+  /workspace/arcbox-secrets/games/Tactics/Tactics.WorldTools.Tests/bin/Debug/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (2m 39s 396ms)
+  /workspace/arcbox-secrets/src/ArcBox.Server.Tests/bin/Debug/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (43s 724ms)
+  /workspace/arcbox-secrets/src/ArcBox.Host.Core.Tests/bin/Debug/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (5s 024ms)
+  /workspace/arcbox-secrets/games/Counter/Counter.Logic.Tests/bin/Debug/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (988ms)
+  /workspace/arcbox-secrets/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (3m 11s 062ms)
+  /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (1m 20s 379ms)
+  /workspace/arcbox-secrets/games/Redline/Redline.Logic.Tests/bin/Debug/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 255ms)
+  /workspace/arcbox-secrets/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (3m 10s 646ms)
+  /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 15s 712ms)
+
+  total: 6376
+  failed: 0
+  succeeded: 6376
+  skipped: 0
+  duration: 12m 31s 759ms

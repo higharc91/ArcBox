@@ -1,0 +1,271 @@
+{
+  "comparisons": [
+    {
+      "speaker": "bree_tallow.main",
+      "oldCount": 54,
+      "newCount": 0,
+      "medianPitch": 187.69
+    },
+    {
+      "speaker": "celandine_marrowby.main",
+      "oldCount": 21,
+      "newCount": 0,
+      "medianPitch": 177.78
+    },
+    {
+      "speaker": "corvin_ashby.main",
+      "oldCount": 25,
+      "newCount": 0,
+      "medianPitch": 133.33
+    },
+    {
+      "speaker": "dagna_holt.main",
+      "oldCount": 48,
+      "newCount": 0,
+      "medianPitch": 172.04
+    },
+    {
+      "speaker": "earnest.high",
+      "oldCount": 13,
+      "newCount": 0,
+      "medianPitch": 231.93
+    },
+    {
+      "speaker": "earnest.low",
+      "oldCount": 13,
+      "newCount": 0,
+      "medianPitch": 168.42
+    },
+    {
+      "speaker": "fierce.high",
+      "oldCount": 16,
+      "newCount": 0,
+      "medianPitch": 174.47
+    },
+    {
+      "speaker": "fierce.low",
+      "oldCount": 15,
+      "newCount": 0,
+      "medianPitch": 210.67
+    },
+    {
+      "speaker": "grim.high",
+      "oldCount": 12,
+      "newCount": 0,
+      "medianPitch": 138.26
+    },
+    {
+      "speaker": "grim.low",
+      "oldCount": 10,
+      "newCount": 0,
+      "medianPitch": 121.02
+    },
+    {
+      "speaker": "halden_varrow.main",
+      "oldCount": 48,
+      "newCount": 0,
+      "medianPitch": 128.52
+    },
+    {
+      "speaker": "halvard.main",
+      "oldCount": 31,
+      "newCount": 0,
+      "medianPitch": 121.21
+    },
+    {
+      "speaker": "hooded_stranger.main",
+      "oldCount": 40,
+      "newCount": 0,
+      "medianPitch": 122.84
+    },
+    {
+      "speaker": "ivo_rime.main",
+      "oldCount": 47,
+      "newCount": 0,
+      "medianPitch": 130.61
+    },
+    {
+      "speaker": "lark.main",
+      "oldCount": 66,
+      "newCount": 0,
+      "medianPitch": 179.78
+    },
+    {
+      "speaker": "maren_sorrel.main",
+      "oldCount": 66,
+      "newCount": 0,
+      "medianPitch": 201.9
+    },
+    {
+      "speaker": "mother_aubrine.main",
+      "oldCount": 19,
+      "newCount": 0,
+      "medianPitch": 179.78
+    },
+    {
+      "speaker": "mother_skarrow.main",
+      "oldCount": 67,
+      "newCount": 0,
+      "medianPitch": 160.0
+    },
+    {
+      "speaker": "narrator.main",
+      "oldCount": 344,
+      "newCount": 12,
+      "medianPitch": 105.96,
+      "oldPitch": 105.79,
+      "newPitch": 107.4,
+      "pitchShift": 0.26,
+      "oldCentroid": 2157.26,
+      "newCentroid": 2725.69,
+      "centroidRatio": 1.263
+    },
+    {
+      "speaker": "old_maud.main",
+      "oldCount": 22,
+      "newCount": 0,
+      "medianPitch": 184.13
+    },
+    {
+      "speaker": "oswin_hale.main",
+      "oldCount": 47,
+      "newCount": 0,
+      "medianPitch": 136.75
+    },
+    {
+      "speaker": "pip_ashdown.main",
+      "oldCount": 69,
+      "newCount": 0,
+      "medianPitch": 242.42
+    },
+    {
+      "speaker": "rook.main",
+      "oldCount": 22,
+      "newCount": 0,
+      "medianPitch": 122.17
+    },
+    {
+      "speaker": "scholarly.high",
+      "oldCount": 16,
+      "newCount": 0,
+      "medianPitch": 212.41
+    },
+    {
+      "speaker": "scholarly.low",
+      "oldCount": 17,
+      "newCount": 0,
+      "medianPitch": 137.93
+    },
+    {
+      "speaker": "steady.high",
+      "oldCount": 11,
+      "newCount": 0,
+      "medianPitch": 184.98
+    },
+    {
+      "speaker": "steady.low",
+      "oldCount": 11,
+      "newCount": 0,
+      "medianPitch": 147.47
+    },
+    {
+      "speaker": "tobin_fell.main",
+      "oldCount": 15,
+      "newCount": 0,
+      "medianPitch": 111.89
+    },
+    {
+      "speaker": "townsfolk_barmaid.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 213.33
+    },
+    {
+      "speaker": "townsfolk_child.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 280.7
+    },
+    {
+      "speaker": "townsfolk_farmer.main",
+      "oldCount": 4,
+      "newCount": 0,
+      "medianPitch": 85.79
+    },
+    {
+      "speaker": "townsfolk_farmhand.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 150.94
+    },
+    {
+      "speaker": "townsfolk_fisher.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 106.31
+    },
+    {
+      "speaker": "townsfolk_goblin_archer.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 130.08
+    },
+    {
+      "speaker": "townsfolk_goblin_cutthroat.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 110.73
+    },
+    {
+      "speaker": "townsfolk_goblin_spear.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 106.31
+    },
+    {
+      "speaker": "townsfolk_guard.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 117.22
+    },
+    {
+      "speaker": "townsfolk_merchant.main",
+      "oldCount": 3,
+      "newCount": 0,
+      "medianPitch": 202.53
+    },
+    {
+      "speaker": "vorga.main",
+      "oldCount": 60,
+      "newCount": 0,
+      "medianPitch": 150.94
+    },
+    {
+      "speaker": "wry.high",
+      "oldCount": 17,
+      "newCount": 0,
+      "medianPitch": 192.77
+    },
+    {
+      "speaker": "wry.low",
+      "oldCount": 14,
+      "newCount": 0,
+      "medianPitch": 128.98
+    },
+    {
+      "speaker": "ysolde.main",
+      "oldCount": 53,
+      "newCount": 0,
+      "medianPitch": 192.77
+    }
+  ],
+  "flagged": [],
+  "thresholds": {
+    "clipSemitones": 10,
+    "speakerSemitones": 6,
+    "centroidRatio": [
+      0.6,
+      1.65
+    ]
+  }
+}

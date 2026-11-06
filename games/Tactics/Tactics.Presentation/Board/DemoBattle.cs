@@ -15,6 +15,7 @@ public static class DemoBattle
 {
     private const string Changed = ":changed";
     private const string Fight = ":fight";
+    private const string Creatures = ":creatures";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -32,15 +33,28 @@ public static class DemoBattle
         Unit("goblin", "Enemy", "characters.goblin_cutthroat", 9, 5, 3, 7),
         Unit("scout", "Enemy", "characters.kobold", 5, 7, 5, 5),
         Unit("lookout", "Enemy", "characters.kobold", 0, 0, 5, 5),
-        Unit("spider", "Enemy", "beasts.spider.black", 9, 8, 6, 11, "Up", 0, "stunned"),
+        Unit("spider", "Enemy", "beasts.spider.black", 11, 7, 6, 11, "Up", 0, "stunned"),
         Unit("archer", "Enemy", "characters.goblin_archer", 12, 3, 7, 7),
-        Unit("wolf", "Enemy", "beasts.wolf.grey", 10, 6, 11, 11),
+        Unit("wolf", "Enemy", "beasts.wolf.grey", 11, 6, 11, 11),
         Unit("troll", "Enemy", "bosses.troll.troll", 11, 9, 50, 84),
         Unit("dragon", "Enemy", "bosses.dragon.red", 10, 2, 120, 200),
         Unit("wraith", "Enemy", "bosses.wraith.wraith", 12, 7, 20, 30),
         Unit("mystery", "Enemy", "nonsense.key", 11, 11, 4, 8),
         Unit("dead", "Enemy", "characters.bandit", 9, 3, 0, 8, "Dead"),
     ];
+
+    /// <summary>Art review only: every primary creature beside a party figure, using the real battle renderer.</summary>
+    private static ImmutableArray<UnitView> CreatureUnits()
+    {
+        string[] keys = ["beasts.wolf.grey", "beasts.boar.brown", "beasts.bear.brown", "beasts.spider.black",
+            "beasts.slime.green", "beasts.bat.dusk", "beasts.drake.red", "bestiary.warg.black",
+            "bestiary.hookbeak.brown", "bestiary.scorpion.sand", "bestiary.harpy.dusk", "bestiary.wisp.marsh",
+            "bestiary.gargoyle.granite", "bestiary.crab.shore"];
+        Tile[] spots = [new(2,1),new(5,1),new(8,1),new(11,1),new(2,4),new(5,4),new(8,4),new(11,4),
+            new(2,7),new(5,7),new(8,7),new(11,7),new(3,10),new(10,10)];
+        return [.. keys.Select((key,i) => Unit(key.Split('.')[1], "Enemy", key, spots[i].X, spots[i].Y, 10, 10)),
+            Unit("human reference", "Party", "characters.class_fighter", 6, 11, 30, 30)];
+    }
 
     private static BoardChanges Changes()
     {
@@ -57,13 +71,32 @@ public static class DemoBattle
             bridge);
     }
 
+    /// <summary>A visual check of the shipped encounter at its intended level, with real enemies and starting zones.</summary>
+    public static TacticsHostView Encounter(string id, string packRoot)
+    {
+        var rules = RulesPack.Load([Path.Combine(packRoot, "rules")], ArtManifests.Load(packRoot));
+        var encounter = rules.Encounters[id];
+        string[] classes = ["fighter", "cleric", "rogue", "wizard", "ranger", "paladin"];
+        var size = Math.Clamp(5, encounter.Party.Min, encounter.Party.Max);
+        ImmutableArray<PartyMember> party = [.. classes.Take(size).Select(cls => new PartyMember(new UnitId(cls),
+            SheetBuilder.DefaultCharacter(cls, "human", cls, null, encounter.Level ?? 1, rules), new AiControlled("companion")))];
+        var state = Battle.Start(Encounters.Setup(id, party, Difficulty.Normal, rules), rules, 7).State;
+        ImmutableArray<UnitView> units = [.. state.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name,
+            u.Sheet.Side.ToString(), HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), u.Pos, u.Hp, u.Sheet.MaxHp, u.TempHp,
+            u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], null))];
+        var battle = new BattleView(id, state.MapId, state.Round, state.Order, state.Active, units, [], null,
+            BoardChanges.Of(state), state.Objectives.Current, Name: encounter.Name);
+        return new TacticsHostView("Battle", "Encounter art preview", null, 1, [], null, battle, null, null);
+    }
+
     /// <summary>The host view for a demo spec: a map id, with <c>:changed</c> or <c>:fight</c> or neither.</summary>
     public static TacticsHostView View(string spec)
     {
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
-        var map = changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = fight ? Units() : [];
+        var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
+        var map = creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

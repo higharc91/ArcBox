@@ -7,6 +7,54 @@ namespace Tactics.Presentation.Tests.Hud;
 /// <summary><see cref="HudArt"/> against the real pack: ui/manifest.json's rectangles and each unit's portrait.</summary>
 public sealed class HudArtTests
 {
+    [Theory]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "idle")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "hurt")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "happy")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "angry")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "sad")]
+    [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "surprised")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "idle")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "hurt")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "happy")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "angry")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "sad")]
+    [InlineData("guard_captain", "dagna_holt", "dagna", "surprised")]
+    [InlineData("bandit_captain", "rook", "rook", "idle")]
+    [InlineData("bandit_captain", "rook", "rook", "hurt")]
+    [InlineData("bandit_captain", "rook", "rook", "happy")]
+    [InlineData("bandit_captain", "rook", "rook", "angry")]
+    [InlineData("bandit_captain", "rook", "rook", "sad")]
+    [InlineData("bandit_captain", "rook", "rook", "surprised")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "idle")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "hurt")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "happy")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "angry")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "sad")]
+    [InlineData("noble", "celandine_marrowby", "celandine", "surprised")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "idle")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "hurt")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "happy")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "angry")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "sad")]
+    [InlineData("innkeeper", "bree_tallow", "bree_tallow", "surprised")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "idle")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "hurt")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "happy")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "angry")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "sad")]
+    [InlineData("mayor", "halden_varrow", "halden_varrow", "surprised")]
+    public void Approved_named_portrait_aliases_select_each_authored_mood(string preset, string character, string file, string mood)
+    {
+        foreach (var key in new[] { preset, character })
+        {
+            var face = Art.Value.Speaker(key, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/{file}_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
     private static readonly Lazy<UnitArt> Units = new(() => UnitArt.Load(Pack.Root));
     private static readonly Lazy<HudArt> Art = new(() => HudArt.Load(Pack.Root, Units.Value));
 
@@ -41,9 +89,8 @@ public sealed class HudArtTests
     }
 
     [Theory]
-    [InlineData("characters.class_fighter", UnitTone.Party, "portraits/class_fighter_idle.png", "portraits/backdrops/ally.png")]
     [InlineData("characters.goblin_cutthroat", UnitTone.Enemy, "portraits/goblin_cutthroat_idle.png", "portraits/backdrops/enemy.png")]
-    [InlineData("characters.farmer", UnitTone.Neutral, "portraits/farmer_idle.png", "portraits/backdrops/neutral.png")]
+    [InlineData("characters.farmer", UnitTone.Neutral, "portraits/generic_farmer_a_idle.png", "portraits/backdrops/neutral.png")]
     public void A_character_has_its_portrait_on_its_sides_backdrop(string sprite, UnitTone tone, string path, string backdrop)
     {
         var portrait = Art.Value.Portrait(sprite, tone);
@@ -53,15 +100,119 @@ public sealed class HudArtTests
         Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
     }
 
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Aubrines_priest_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "priest", "mother_aubrine" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/mother_aubrine_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Tobins_blacksmith_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "blacksmith", "tobin_fell" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/tobin_fell_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Larks_minstrel_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "minstrel", "lark" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/lark_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Corvins_sage_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "sage", "corvin_ashby" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/corvin_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
+    [Theory]
+    [InlineData("idle")]
+    [InlineData("hurt")]
+    [InlineData("happy")]
+    [InlineData("angry")]
+    [InlineData("sad")]
+    [InlineData("surprised")]
+    public void Pips_variant_and_named_portrait_aliases_select_each_authored_mood(string mood)
+    {
+        foreach (var preset in new[] { "child_pip", "pip_ashdown" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "ally");
+            Assert.NotNull(face);
+            Assert.Equal($"portraits/pip_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            Assert.True(File.Exists(Path.Combine(Pack.Root, face.Path)));
+        }
+    }
+
     [Fact]
-    public void A_beast_with_no_portrait_is_its_own_sprites_first_idle_frame()
+    public void Tactical_portraits_crop_the_face_instead_of_shrinking_the_padded_frame()
+    {
+        var portrait = Art.Value.Portrait("characters.tiefling_warlock", UnitTone.Party);
+        var sprite = Units.Value.Sprite("characters.tiefling_warlock")!;
+        Assert.Equal(sprite.Path, portrait.Path);
+        Assert.Equal(new ArtRect(sprite.AnchorX - 20, sprite.HeadTop - 4, 40, 40), portrait.Source);
+    }
+
+    [Fact]
+    public void A_creature_portrait_uses_its_authored_region_or_first_idle_frame()
     {
         var sprite = Units.Value.Sprite("beasts.wolf.grey")!;
 
         var portrait = Art.Value.Portrait("beasts.wolf.grey", UnitTone.Enemy);
 
         Assert.Equal(sprite.Path, portrait.Path);
-        Assert.Equal(sprite.Source(sprite.Idle.Frames[0], 0), portrait.Source);
+        Assert.Equal(sprite.PortraitSource ?? sprite.Source(sprite.Idle.Frames[0], 0), portrait.Source);
     }
 
     [Theory]

@@ -1,0 +1,171 @@
+{
+  "batch": "ashmaw_dagna_holt_batch",
+  "source": "dagna-batch.wav",
+  "sourceSha256": "9102a0ca7d3fe6276f9bd6198f0a0695ad9ee49474ad9963ee018f31c0d47d5b",
+  "transcriptSha256": "047a15ed0d1f4e73b21fe4ca88b20aacc2317cf3bf2abc88d31a98f3773596b5",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. ASR is a timing aid; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Callirrhoe.5f9525f0",
+      "preset": "Callirrhoe",
+      "text": "The ford first. I have too few guards to bury another.",
+      "line": "ashmaw_busy",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The ford first. I have too few guards to bury another.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 0,
+      "end": 4.04,
+      "matchingCoverage": 0.9091,
+      "recognized": "The Ford first. I have two few guards to bury another.",
+      "wavSha256": "6afebce78be8609cc6abadf4b6639409adeee78b4ee7824fa23012cc96cab8d9"
+    },
+    {
+      "raw": "Callirrhoe.d15873f6",
+      "preset": "Callirrhoe",
+      "text": "The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "line": "ashmaw_offer",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The bridge cost us enough. Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 5.66,
+      "end": 19.36,
+      "matchingCoverage": 0.881,
+      "recognized": "The bridge cost us enough. Now a gray bear takes goats from the pens. The boy got out. Maud has them by her fire. The cave mouth is below her hut on the burned bank. Will you put it into this?",
+      "wavSha256": "92bdbed8b0601474b4ecbb8fef49d446aef7859773dd717747be85bc2395bb6c"
+    },
+    {
+      "raw": "Callirrhoe.44213570",
+      "preset": "Callirrhoe",
+      "text": "Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "line": "ashmaw_accepted",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Bring the ember-claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully; that bear has lived through more winters than this Watch.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 20.54,
+      "end": 31.52,
+      "matchingCoverage": 1.0,
+      "recognized": "Bring the Ember Claw back. Sixty gold and a fitted trinket each. I will keep gifts for anyone away. Go carefully. That bear has lived through. More winters than this watch.",
+      "wavSha256": "d00a811d9bfba54934ab7621468bfbf76e78b189a603bad53fcbdd768366d3ce"
+    },
+    {
+      "raw": "Callirrhoe.6abe32f5",
+      "preset": "Callirrhoe",
+      "text": "Then take the time. Cold courage does nobody any good.",
+      "line": "ashmaw_later",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Then take the time. Cold courage does nobody any good.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 32.68,
+      "end": 36.54,
+      "matchingCoverage": 1.0,
+      "recognized": "Then take the time. Cold courage does nobody any good.",
+      "wavSha256": "3e6773f2b7687b178078c8ccdae54e553e12590aeb718415dfc047e3e4c0ec23"
+    },
+    {
+      "raw": "Callirrhoe.00de6679",
+      "preset": "Callirrhoe",
+      "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "line": "ashmaw_progress",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 37.52,
+      "end": 43.86,
+      "matchingCoverage": 1.0,
+      "recognized": "Below Maud's hut, follow the miners track. Come back with the claw and with every soul you take in.",
+      "wavSha256": "6e446cfe905c685620a8e796701bb277aac47b7be8a4b90c7e65c07185bbd07d"
+    },
+    {
+      "raw": "Callirrhoe.fff13bfd",
+      "preset": "Callirrhoe",
+      "text": "Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "line": "ashmaw_proof",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> Still warm. Tobin can work with this. Your gold is counted, and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 44.7,
+      "end": 56.94,
+      "matchingCoverage": 0.9706,
+      "recognized": "Still warm. Tobin can work with us. Your gold is counted and there is a rare trinket fitted to each of your callings. Accepting replaces any trinket you already wear. Shall I present them?",
+      "wavSha256": "358cc285d52d6e07ec6f716a1888d7707a6b1d1c6709c9e65ea40f928b677f1a"
+    },
+    {
+      "raw": "Callirrhoe.4ad1a029",
+      "preset": "Callirrhoe",
+      "text": "They will stay here. A promise does not spoil overnight.",
+      "line": "ashmaw_wait",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> They will stay here. A promise does not spoil overnight.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 57.56,
+      "end": 60.78,
+      "matchingCoverage": 1.0,
+      "recognized": "They will stay here. A promise does not spoil overnight.",
+      "wavSha256": "7ecccc251125108a792c6c26553fa4f5fdc5c6bf2a0c8e134d3f296f34862da3"
+    },
+    {
+      "raw": "Callirrhoe.fb4b386f",
+      "preset": "Callirrhoe",
+      "text": "For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "line": "ashmaw_presented",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> For the ones here, and the ones we expect home. The Watch remembers who stood for this town.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 61.82,
+      "end": 67.12,
+      "matchingCoverage": 1.0,
+      "recognized": "For the ones here and the ones we expect home. The watch remembers who stood for this town.",
+      "wavSha256": "5ec399d21f3c431293f73890a4b806b183d2cb5ca082a25c6571ef1f105ba36b"
+    },
+    {
+      "raw": "Callirrhoe.8378895f",
+      "preset": "Callirrhoe",
+      "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+      "line": "ashmaw_done",
+      "speaker": "dagna_holt",
+      "renderText": "<Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet. The boy is home. That is enough good news for one day.",
+      "delivery": {
+        "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony.",
+        "mood": "idle"
+      },
+      "scene": false,
+      "start": 68.0,
+      "end": 73.04,
+      "matchingCoverage": 1.0,
+      "recognized": "The pens are quiet. The boy is home. That is enough good news for one day.",
+      "wavSha256": "a9c95ad5b4c911b1d515348b6a92f96ee849c89303b6eeaa0122cc728a8eb252"
+    }
+  ]
+}

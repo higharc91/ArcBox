@@ -1,0 +1,7 @@
+xUnit.net v3 In-Process Runner v4.0.2+0c7aa4991f (64-bit .NET 10.0.14)
+  Discovering: Tactics.WorldTools.Tests
+  Discovered:  Tactics.WorldTools.Tests
+  Starting:    Tactics.WorldTools.Tests
+  Finished:    Tactics.WorldTools.Tests (ID = '8fc9acef0e112899a6dbca2366a23428ce32418163f21c4e278ea4d7412e99ad')
+=== TEST EXECUTION SUMMARY ===
+   Tactics.WorldTools.Tests  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Not Run: 0, Time: 5.104s

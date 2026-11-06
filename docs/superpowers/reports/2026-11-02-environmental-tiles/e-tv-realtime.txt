@@ -1,0 +1,57 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-environmental/content/tactics/base
+THINGS demo: 12 views, 12 shots
+THINGS demo step The ford at 0.25 s
+AUDIO Music boss
+AUDIO Sfx ambience amb_plains_wind
+TACTICS screen tactics-battle-warlord_bridge
+THINGS demo step Lightning through water at 2.01 s
+AUDIO Sfx spell_lightning
+AUDIO Sfx ui_dice_roll
+AUDIO Sfx dmg_lightning
+AUDIO Sfx goblin_hurt
+BEAT 1 from 1.866 to 2.554 took 0.688 scripted 0.720 swings 0 waiting 0 [TileReacted,Damaged]
+THINGS demo step Freeze the ford at 5.01 s
+AUDIO Sfx spell_ice
+BEAT 2 from 4.853 to 5.487 took 0.634 scripted 0.671 swings 0 waiting 0 [TileReacted,ZoneCreated]
+THINGS demo step Thaw to steam at 8.02 s
+AUDIO Sfx smoke_poof
+BEAT 3 from 7.853 to 8.619 took 0.767 scripted 0.767 swings 0 waiting 0 [TileReacted,ZoneEnded]
+THINGS demo step Timber bridge at 11.02 s
+THINGS demo step Ignite the deck at 13.02 s
+AUDIO Sfx spell_fire_aura
+BEAT 1 from 12.853 to 13.719 took 0.866 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneCreated]
+THINGS demo step Fire spreads at 16.02 s
+AUDIO Sfx round_start
+AUDIO Sfx spell_fire_aura
+BEAT 2 from 15.853 to 16.786 took 0.933 scripted 0.957 swings 0 waiting 0 [RoundStarted,TileReacted,ZoneCreated]
+THINGS demo step Douse the flames at 19.02 s
+AUDIO Sfx smoke_poof
+BEAT 3 from 18.853 to 19.519 took 0.667 scripted 0.683 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo step Oil on the deck at 22.02 s
+AUDIO Sfx zone_created
+BEAT 4 from 21.852 to 22.153 took 0.300 scripted 0.300 swings 0 waiting 0 [ZoneCreated]
+THINGS demo step Oil catches fire at 25.02 s
+AUDIO Sfx spell_fire_aura
+BEAT 5 from 24.853 to 25.719 took 0.867 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo step Webs across the path at 28.02 s
+AUDIO Sfx zone_created
+BEAT 6 from 27.853 to 28.119 took 0.266 scripted 0.300 swings 0 waiting 0 [ZoneCreated]
+THINGS demo step Burn away the webs at 31.02 s
+AUDIO Sfx spell_fire_aura
+BEAT 7 from 30.853 to 31.719 took 0.867 scripted 0.897 swings 0 waiting 0 [TileReacted,ZoneEnded,ZoneCreated]
+THINGS demo done
+TACTICS left: narrator cleared
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

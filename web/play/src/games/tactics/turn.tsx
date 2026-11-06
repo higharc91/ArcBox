@@ -1,3 +1,4 @@
+import { SurfaceScene } from "./surfaces";
 import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Portrait, abilityClass, useIcons } from "./art";
@@ -41,7 +42,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   const map = useMap(mapId);
   const icons = useIcons();
   const sfx = useSfx();
-  useAlertOnMount("yourTurn");
+  useAlertOnMount("yourTurn", `turn ${me.id}`);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
@@ -80,7 +81,8 @@ export function Turn({ data, send }: CustomScreenProps) {
   const targetUnit = target?.target.unit && target.target.unit !== me.id ? byId.get(target.target.unit) : undefined;
 
   return (
-    <div class={`tx tx-turn${ability ? " aiming" : ""}`}>
+    <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
+      <SurfaceScene kinds={(data as TurnData).surfaces} />
       {ability ? (
         <MeCard me={me} title={ability.name} subtitle={target ? "Ready: check the TV, then use it" : aimHint(ability)}
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
@@ -98,13 +100,16 @@ export function Turn({ data, send }: CustomScreenProps) {
 
       <div class="tx-field">
         <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor} map={map}
-          reach={ability ? [] : choices.moves.map((m) => m.to)} aims={all.map((t) => t.aim)} />
+          reach={ability ? [] : choices.moves.map((m) => m.to)} risks={ability ? [] : choices.moves.filter(m => m.warn || (m.risk ?? 0) > 0).map(m => m.to)}
+          spread={target?.spread ?? []} aims={all.map((t) => t.aim)} />
         <DPad cursor={cursor} onMove={setCursor} />
+        {(target?.spread?.length ?? 0) > 0 ? <span class="tx-spread-key">Dashed blue: reaction spread · includes allies</span> : null}
       </div>
 
       {ability ? null : <AbilityList abilities={choices.abilities} cls={cls} onPick={pick} />}
 
-      {/* The commit buttons stay on screen (a sticky footer), so they're in reach without scrolling past the map. */}
+      </div>
+      {/* Actions have their own row, outside the scrolling map and ability list. */}
       {ability ? (
         <div class="tx-foot tx-commit aim">
           <button type="button" class="tx-btn ghost" onClick={back}>Back</button>
@@ -117,7 +122,7 @@ export function Turn({ data, send }: CustomScreenProps) {
         <div class="tx-foot tx-commit">
           <button type="button" class={`tx-btn${move ? " gold" : ""}`} disabled={!move}
             onClick={() => { if (move) { sfx("confirm"); send("move", { path: move.path }); } }}>
-            {move ? `Move here · ${move.cost}` : "Pick a tile to move"}
+            {move ? `Move here · ${move.cost}${move.warn ? ` · ${move.warn}` : ""}` : "Pick a tile to move"}
           </button>
           {/* Delay stays when it's spent, so End turn doesn't jump into its place under a thumb. */}
           <button type="button" class="tx-btn" disabled={!choices.canDelay} onClick={() => send("delay", { slots: 1 })}>
@@ -243,10 +248,10 @@ function Aim({ ability, target, unit, byId, onPick }: {
  * The battlefield: the whole map with its terrain once it has loaded from the content pack, else (and in tests) just
  * the box around the units, your moves and the aims. Tap a tile to put the cursor there.
  */
-function MiniMap({ me, units, cursor, reach, aims, onPick, map }: {
-  me: UnitView; units: UnitView[]; cursor: Tile; reach: Tile[]; aims: Tile[]; onPick(t: Tile): void; map: MapData | null;
+function MiniMap({ me, units, cursor, reach, risks, spread, aims, onPick, map }: {
+  me: UnitView; units: UnitView[]; cursor: Tile; reach: Tile[]; risks: Tile[]; spread: Tile[]; aims: Tile[]; onPick(t: Tile): void; map: MapData | null;
 }) {
-  const tiles = [me.at, cursor, ...units.map((u) => u.at), ...reach, ...aims];
+  const tiles = [me.at, cursor, ...units.map((u) => u.at), ...reach, ...aims, ...spread];
   const [x0, x1] = map ? [0, map.w - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[0])) - 1), Math.max(...tiles.map((t) => t[0])) + 1];
   const [y0, y1] = map ? [0, map.h - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[1])) - 1), Math.max(...tiles.map((t) => t[1])) + 1];
   const at = (t: Tile) => units.find((u) => same(u.at, t));
@@ -260,9 +265,11 @@ function MiniMap({ me, units, cursor, reach, aims, onPick, map }: {
         u ? (u.id === me.id ? "me" : u.side === me.side ? "ally" : "foe") : "",
         reach.some((r) => same(r, t)) ? "reach" : "",
         aims.some((a) => same(a, t)) ? "aim" : "",
+        risks.some(r => same(r, t)) ? "risk" : "",
+        spread.some(r => same(r, t)) ? "spread" : "",
         same(cursor, t) ? "cursor" : ""].filter(Boolean).join(" ");
       cells.push(
-        <button type="button" key={x} class={cls} aria-label={u ? u.name : `${x}, ${y}`} onClick={() => onPick(t)}
+        <button type="button" key={x} class={cls} aria-label={u ? u.name : `${x}, ${y}`} aria-description={spread.some(r => same(r, t)) ? "Within reaction spread" : risks.some(r => same(r, t)) ? "Hazardous movement" : undefined} onClick={() => onPick(t)}
           style={map && !u ? tileStyle(map, y * map.w + x) : undefined}>
           {u ? u.name[0] : ""}
         </button>,

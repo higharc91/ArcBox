@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "id: fd23d1bf-f605-440e-b4ea-86e4c431fef9\njob_id: fd23d1bf-f605-440e-b4ea-86e4c431fef9\naction: Seamless WALK IN PLACE loop straight toward viewer. Alternate left and right planted foot contacts and return exactly to initial pose, never rotate the head, shoulders or body. Helmet remains rigidly attached to head. RIGHT hand (viewer LEFT) firmly grips the pick shaft throughout; hand, handle and pick head form one connected piece. Carry pick upright; do not wave it, swap hands or let it float. Tail follows the hips subtly. Maintain sprite scale and fixed camera.\nframes: 8\nsize: 96x96px\ntransparent: True\nlast_frame: yes (interpolating to it)\nseed: 7425\nasset_id: 53d73c1e-c246-5f69-a990-3fa6a6cd8bc1\nasset_status: pending (saved when generation completes)\ncost: 2 generations\nstatus: processing (~30-180s)\n\nhint: get_image(job_id=\"fd23d1bf-f605-440e-b4ea-86e4c431fef9\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/fd23d1bf-f605-440e-b4ea-86e4c431fef9/download (423 + Retry-After until ready; ?index=N for the Nth of several images)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

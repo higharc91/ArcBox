@@ -16,6 +16,38 @@ public sealed class VoiceTests
     private static readonly Dictionary<string, VoiceTheme> Themes = TacticsVoices.All.ToDictionary(t => t.Id);
 
     [Fact]
+    public void Every_conversation_quest_and_town_bark_has_a_rendered_clip()
+    {
+        var book = LoreBook.Load(ContentPaths.ContentBase);
+        var manifest = Json("content", "tactics", "base", "lore", "audio", "manifest.json").GetProperty("lines");
+        var spoken = book.Scenes.SelectMany(s => s.Lines).Select(l => l.Id).Concat(book.Barks.LineIds);
+        foreach (var id in spoken.Distinct())
+        {
+            Assert.True(manifest.TryGetProperty(id, out var line) && line.TryGetProperty("main", out _), $"unvoiced line '{id}'");
+            Assert.True(book.ClipSeconds(id) > .3, $"missing or unreadable clip '{id}'");
+        }
+    }
+
+    [Fact]
+    public void Every_new_ashen_ford_narration_has_a_rendered_narrator_clip()
+    {
+        var manifest = Json("content", "tactics", "base", "lore", "audio", "manifest.json").GetProperty("lines");
+        var notices = new[] { "af_market_cellar_draft", "af_bank_claw_marks", "af_bridge_carving", "af_southfield_goat_tracks" };
+        var ids = notices.SelectMany(id => new[] { id, id + "_use" }).Concat(new[]
+        {
+            "thing.af_market_cellar_ledger.words.0", "thing.af_market_cellar_ledger.words.1",
+            "af_market_cellar_hatch_use", "af_market_cellar_store_use",
+        });
+        foreach (var id in ids)
+        {
+            Assert.True(manifest.TryGetProperty(id, out var line) && line.TryGetProperty("main", out _), $"unvoiced thing line '{id}'");
+            var file = Path.Combine(ContentPaths.ContentBase, "lore", "audio", line.GetProperty("main").GetString()!);
+            Assert.True(File.Exists(file), $"missing thing clip '{id}'");
+            Assert.Equal("OggS"u8.ToArray(), File.ReadAllBytes(file)[..4]);
+        }
+    }
+
+    [Fact]
     public void Theme_ids_are_valid_and_unique()
     {
         Assert.All(TacticsVoices.All, t => Assert.True(VoiceThemes.IsValidId(t.Id), t.Id));

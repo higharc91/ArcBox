@@ -1,0 +1,62 @@
+{
+  "source": "candidate-1-export.png",
+  "sourceSha256": "b8c54740ba6d77bd03a06da406be9a41f9be94a0e94db0f394a38e2fced50ab6",
+  "previewSha256": "97c6305834ccf0037181520bbe6a595ee3ae1206939cf6edcbbe6bce3b2ec463",
+  "colourKey": "r>g+35 && b>g+35 && r+b>150",
+  "alpha": "binary; transparent RGB cleared; non-key RGB preserved",
+  "layout": [
+    4,
+    2
+  ],
+  "bounds": [
+    {
+      "left": 102,
+      "top": 41,
+      "right": 332,
+      "bottom": 483
+    },
+    {
+      "left": 95,
+      "top": 39,
+      "right": 320,
+      "bottom": 481
+    },
+    {
+      "left": 103,
+      "top": 39,
+      "right": 303,
+      "bottom": 484
+    },
+    {
+      "left": 64,
+      "top": 39,
+      "right": 299,
+      "bottom": 484
+    },
+    {
+      "left": 80,
+      "top": 33,
+      "right": 318,
+      "bottom": 483
+    },
+    {
+      "left": 73,
+      "top": 32,
+      "right": 283,
+      "bottom": 484
+    },
+    {
+      "left": 66,
+      "top": 30,
+      "right": 268,
+      "bottom": 484
+    },
+    {
+      "left": 60,
+      "top": 30,
+      "right": 294,
+      "bottom": 484
+    }
+  ],
+  "nativeAtlasValidated": false
+}

@@ -33,11 +33,23 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// <summary>The beat spots.</summary>
     public List<BeatSpot> Beats { get; } = [];
 
+    /// <summary>The props placed in the region.</summary>
+    public List<RegionProps> Props { get; } = [];
+
+    /// <summary>The buildings placed in the region.</summary>
+    public List<RegionBuilding> Buildings { get; } = [];
+
+    /// <summary>The people standing in the region.</summary>
+    public List<RegionPerson> People { get; } = [];
+
     /// <summary>Where the party starts.</summary>
     public Tile Start { get; set; }
 
     /// <summary>Where the party recovers after a defeat.</summary>
     public Tile Recovery { get; set; }
+
+    /// <summary>Authored entrance destinations, ordered by name for deterministic export.</summary>
+    public SortedDictionary<string, Tile> NamedSpawns { get; } = new(StringComparer.Ordinal);
 
     /// <summary>The painted tiles.</summary>
     public IReadOnlyDictionary<Tile, TileInfoNamed> Tiles => _tiles;

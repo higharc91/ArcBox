@@ -45,6 +45,7 @@ drag with the middle mouse to move around. Ctrl+Z undoes.
 | `Material` | What a tile is made of. Each swatch is the corner of the real texture, so it won't line up the way it does in the game | Void. Fine for a whole 32x32 chunk. In a chunk with any paint it's a hole, which the export refuses |
 | `Height` | The tile's height, 0 to 9 | Height 0 |
 | `Flags` | How a tile plays. A swatch is a combination of marks, and the palette has all 32 | Plain ground |
+| `Props` | Props and scenery. Swatches show the prop's art at a small size; blocking props are marked with a red X in the corner | No prop on the tile. Erasing a prop leaves the ground underneath alone |
 
 **The Height ramp** is a contour map: clear is 0, then 1 blue, 2 cyan, 3 green, 4 lime, 5 yellow, 6 orange, 7 red, 8 pink and 9 violet.
 The number is on each tile when you're zoomed in. A party can climb 2 levels in a step, and can drop any distance. So a drop of 3 or more is
@@ -80,12 +81,26 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 |---|---|---|
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
-| `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
+| `Spawns` | `SpawnMarker`, one Start and one Recovery, plus optional named destinations | `Kind`: `Start`, `Recovery` (where a beaten party wakes), or `Named` with a unique `SpawnName` |
+| `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
+| `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
 
 **To move one,** select it in the Scene dock and drag it. It snaps to tiles and outlines the tile it's on. A stamp is different: see below.
 
+**Props** are painted on the `Props` layer. Choose the id and variant from the swatches; a red X means the prop blocks walking. Erase only the prop cell to leave the terrain unchanged. The sprite size, anchor, and height come from `props/manifest.json`.
+
+**Buildings** snap to their back corner. Their orange outline shows the full footprint, divided into tiles. The outline comes from `town/manifest.json`; the building's blocked footprint and door positions are checked on export. A building can cover more than one tile, so leave its whole footprint clear of props and stamps.
+
+**People** are placed under `People` with `PersonMarker`. Choose a preset and facing in the Inspector. `Walk` is an optional short list of tiles for a local idle loop; leave it empty for someone who stands still. They never affect path checks. Optional `Id` is a stable interaction identity; `Character` names a lore character. `Requires` and `Unless` are comma-separated story flags: all required flags must hold and no excluded flag may hold. `Bark` overrides the bark set; `Voice` selects a townsfolk cast. Blank fields are omitted on export. Keep IDs stable when moving markers. The game fades people when their gates change; ending gates settle after the corresponding battle is won.
+
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.
+
+**Region entrances (#74 foundation):** a `Named` spawn exports under optional `spawns.named`, sorted by destination name. Existing scenes without named markers export without that field. Names must be nonempty and cannot replace `start` or `recovery`. Keep destinations off battle stamps and on walkable ground that can reach the start and return.
+
+A hand-authored `cave_mouth` interactable links to `{ "to": { "region": "cinder_hollow", "spawn": "entrance" } }`. The mouth is always open; `requires` controls when it is available. Put a return mouth in the destination region and its named return spawn beside the source mouth. The loader checks destination names and return reachability, including passages that might otherwise strand the party. Only the leader proposes travel, followed by a 20-second party vote. Unanswered votes count as Enter; a strict majority is required. Travel preserves a paused regional story cursor, saves the destination and uses the existing epoch/fade presentation.
+
+`regions/cinder_hollow.tscn` now contains the 56×44 Hollow with four forced battle stamps, a safe fire after the Nest and two clearings reserved for later wandering encounters. The Ford mouth is at 131,98, with its named return at 131,99. The cave starts at its named `entrance` (5,2). Plain candles mark the mine; animal remains and dried stains gather near Ashmaw. These decorations do not block the route. Rebuilding the props atlas requires remapping Ashen Ford's painted prop cells with the previous manifest before exporting; the cave draft uses the current atlas. The final cave exported identically twice, and the Ford remap preserved its world JSON byte for byte.
 
 **A stamp is a tuned battle,** so its tiles must match the map exactly. Don't paint inside its outline.
 
@@ -127,10 +142,15 @@ clicking a line that names a tile goes to it.
 | the scene is named X but its Id is Y | Two scenes could overwrite each other's file | Rename the scene, or change `Id` |
 | Save the scene first | It couldn't be saved | Check it isn't read-only, or use Save Scene As |
 | couldn't be read, couldn't be written | Something's holding a file | Close it, and export again |
+| a thing in `interactables/<id>.json` (not on walkable ground, in a stamp, can't be reached…) | The region's things to interact with are in their own hand-written file beside the region, which the export never writes; its check loads them against the new painting, as the game will | Move the thing in that file, or paint round it |
 
 | Warning (the file is still written) | What it means | What to do |
 |---|---|---|
 | old stamp at (x, y) may still be in the world | A pending area | Repaint it, then Done repainting |
+| a blocking prop on a road | A tree or obstacle blocking a road or street | Move the prop off the road, or change the material |
+| a prop on a beat spot | A prop placed on a story beat's tile | Move the prop, or move the beat marker |
+| a prop on a spawn | A prop placed on the Start or Recovery spawn | Move the prop, or move the spawn marker |
+| a tall prop in front of a stamp | A prop of height 2 or more within 4 tiles in front of a battle stamp (+X or +Y), where it would hide the fight | Move the prop, or move the stamp |
 | a beat has no spot | The story reaches a beat with no marker | Add a `BeatMarker` |
 | a battle beat has no stamp | Its encounter's map isn't stamped here | Add a `StampMarker`, press Apply stamp |
 | party can't walk to a beat | The story can't get there in order, or, for a battle, can't reach its spot or a step into its stamp | Paint a way there, or move the marker |
@@ -157,9 +177,8 @@ Each export changes the pack's hash: see the note at the end of [Exporting from 
 
 - **The scarp is one long even ridge,** x 54 to 59 from the south edge up to about y 17. It's the first thing to break up. Keep it closed:
   it's what sends the road north round its tip, and a gap shortens the walk.
-- **Start to ford is about 40 seconds,** and the far ends a little over a minute. Nothing checks those times on a painted scene until
-  the walking milestone, so a shortcut won't be reported.
-- **Woods are only floor,** as the world has no props yet. So moored boats and tents are low blocks.
+- **Start to ford is about 40 seconds,** and the far ends a little over a minute. Walking and route tools now use the exported scene; remeasure routes after painting.
+- **Woods, boats and tents use authored props/buildings** in the integrated world; keep their collision and navigation clear.
 
 Keep a note of how long Ashen Ford takes to paint. It's the guide for how long later chapters will take, and it decides whether a chapter a
 week is realistic (spec section 7). Write it here when it's done:
@@ -238,3 +257,30 @@ Copy-Item content/tactics/base/rules $env:TEMP\rules-copy -Recurse
 `regions/ashen_ford.tscn` began as Claude's scripted draft, `AshenFordDraft` in `Tactics.WorldTools`. It's now painted work like any other
 scene. `--draft=ashen_ford` writes the scene only if it isn't there. No command replaces a scene: `--draft`, `--new` and `--sample` all
 say so, change nothing and exit 2, so re-drafting means deleting the scene by hand.
+
+**Party-specific monster profiles (#74):** encounter placements may provide `unitByParty`, with a valid monster id for every supported party size. Selection happens before placement and phase resolution; the placement id and original trigger tag remain stable. Hollow Lair uses the original Ashmaw for 1–3 members and a stronger, visually identical profile for 4–6. Both remain level 2, so gaining XP helps. Older encounters omit the mapping.
+## Editing existing props without repainting
+
+Use `--edit-props=<region>` to change individual props while preserving the scene’s terrain paint. Repeat `--clear-prop=<x>,<y>` and `--place-prop=<id>@<variant>@<x>,<y>` for each edit, then export and check the region. Do not regenerate the region from its draft.
+
+```bash
+godot --headless --path tools/tactics-world -- --edit-props=ashen_ford --clear-prop=26,58
+```
+
+### Cosmetic people variants
+
+A PersonMarker's optional `Variant` is an art suffix: preset `farmer`, variant `b`
+selects `characters.farmer_b` when that sprite exists. Blank or unavailable variants
+use the preset's original art. Identity, voice, gates and interactions stay with the
+preset/person. Save/load/export preserves the suffix; no placed production variants
+are changed by adding this field. Drawing and region preloading share the selector.
+
+Run `godot --headless --path tools/tactics-world -- --check-person-variants` from
+the repository root after building the editor. It checks native scene save/load,
+painted export and JSON round-trip in a temporary scene, preserving production work.
+
+## Roaming arenas (#79)
+
+Mob groups live in manifest-listed `rules/mobs/<region>.json`; see `rules/schema/mobs.schema.json`. Each arena is an explicitly painted 14×12 battle-map stamp. Keep the patch and its cardinal contact tiles clear of required routes. The loader validates bounds, connected walkable tiles, roads, NPCs, things, spawns and route reachability. Export twice and compare bytes.
+
+The development command `--apply-mob-arenas=<absolute JSON path>` can register stamps and apply a small set of explicitly supplied tiles to an existing scene. The JSON has a `regions` array; each entry has `region`, `stamps` (`map`, `at`, `height`) and `paint` (`at`, `material`). Painted additions use height zero and clear flags; untouched terrain keeps its original height and flags. It removes scene props inside those stamps because the battle map owns their props. This is an authoring operation, not a runtime extraction mechanism; review its scene diff before exporting. `--world-demo=mobs` in the TV previews all seven current placements.

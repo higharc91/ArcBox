@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.36110c89.wav",
+  "sourceSha256": "d3a8f1df63ec4abf95360aefa28045c52f4f458eaf0f0fd2aa7d178b2e7ada72",
+  "duration": 8.48,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 8.120000000000001,
+      "text": " Your wardens sang that it was given we never warmed our hands at it so we never forgot it was stolen"
+    }
+  ],
+  "text": "Your wardens sang that it was given we never warmed our hands at it so we never forgot it was stolen",
+  "secondsToTranscribe": 2.963
+}

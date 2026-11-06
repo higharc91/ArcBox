@@ -1,0 +1,80 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+PERF 5 fps   218.0 ms (worst 240.2) | 3 draw calls   184 primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD build ground 486 ms, plan+light 1706 ms, bake 242 ms, total 4580 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 2 tiles; spots archive@36,58
+WORLD memory after build: managed 41.2 MB (+40.5), engine 39.8 MB (+3.0), textures 3.9 MB, buffers 7.6 MB, process 425 MB
+PERF 6 fps   167.7 ms (worst 261.6) | 396 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 6 fps   161.0 ms (worst 200.0) | 396 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+PERF 5 fps   221.2 ms (worst 225.8) | 395 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/review_corvin.png 1728x768
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+PERF 1 fps   1187.2 ms (worst 1187.2) | 394 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 11 actors, 7 shared textures
+PERF 4 fps   260.9 ms (worst 300.0) | 2,164 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=ashen_ford stage=open party=4 textures-bytes=296540416 peak-bytes=296540416 limit-bytes=536870912 result=PASS
+WORLD textures 215 in 9304 ms, worst 2550.7 ms; binding items (and baking glows) 90 ms; 74 blocks still to record at reveal
+WORLD texture-budget region=ashen_ford stage=crossing party=4 textures-bytes=296540416 peak-bytes=296540416 limit-bytes=536870912 result=PASS
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.5 s, 2 frames: frame ms median 396.06, p95 396.06, p99 396.06, worst 396.06
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 2 of 2, at 0.00s=149.3 0.15s=396.1, 2 while recording
+WORLD recording during the walk: 2 frames, ms a frame median 3.53, p95 3.53, p99 3.53, worst 3.53
+WORLD frames while recording: frame ms median 396.06, p95 396.06, p99 396.06, worst 396.06
+WORLD _Draw per block, first time: median 1.84, p95 5.97, p99 5.97, worst 5.97, sum 24.2 ms
+WORLD render CPU ms median 4.51, p95 4.51, p99 4.51, worst 4.51; GPU ms median 96.79, p95 96.79, p99 96.79, worst 96.79; at most 2,186 draw calls
+WORLD overlay query ms median 144.44, p95 144.44, p99 144.44, worst 144.44; draw ms median 1.50, p95 1.50, p99 1.50, worst 1.50; items median 394.00, p95 394.00, p99 394.00, worst 394.00
+WORLD blocks recorded once, whatever the walk did: False; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 43.6 MB (+42.9), engine 53.6 MB (+16.9), textures 282.8 MB, buffers 7.6 MB, process 849 MB
+WORLD shot /workspace/artifacts/issue80-corvin-tv/world-ashen_ford.png
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-change party=4 textures-bytes=296540416 peak-bytes=335862016 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+PERF 1 fps   1266.7 ms (worst 1266.7) | 2,176 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-restored party=4 textures-bytes=296540416 peak-bytes=335862016 limit-bytes=536870912 result=PASS
+PERF 4 fps   261.0 ms (worst 261.0) | 2,850 draw calls   17.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD shot /workspace/artifacts/issue80-corvin-tv/world-archive.png
+PERF 2 fps   495.9 ms (worst 495.9) | 2,857 draw calls   17.5 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD closed

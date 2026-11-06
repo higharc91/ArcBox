@@ -1,0 +1,71 @@
+[tv-e2e 09:40:11] starting the server on http://127.0.0.1:44513
+[tv-e2e 09:40:23] starting the TV (640x360, preset low)
+[tv-e2e 09:40:32] TV opened room GMPP
+[tv-e2e 09:40:32] phones: 4 bots walk: route:af_market_herbalist,route:af_inn,route:af_market_herbalist,stop:2,pause:restart,route:af_inn,stop:2,pause:tv,route:af_market_herbalist,stop:2, then 20 timed presses, then the leader's phone is cut
+09:40:32 Ana joined GMPP
+09:40:33 Bo joined GMPP
+09:40:33 Cy joined GMPP
+09:40:33 Dee joined GMPP
+09:40:34 Game on
+09:40:35 Ana picks fighter
+09:40:36 Bo picks cleric
+09:40:37 Cy picks rogue
+09:40:38 Dee picks wizard
+09:40:38 Cy leads
+09:41:32 CHAPTER Cy walks 5 steps from 26,58 to shop:af_market_herbalist
+09:41:35 WALK route arrived at shop:af_market_herbalist
+09:41:45 CHAPTER Cy walks 7 steps from 27,63 to shop:af_inn
+09:41:48 WALK route arrived at shop:af_inn
+09:42:04 CHAPTER Cy walks 7 steps from 24,56 to shop:af_market_herbalist
+09:42:06 WALK route arrived at shop:af_market_herbalist
+09:42:06 WALK stop for 2 s
+09:42:09 PAUSE restart
+[tv-e2e 09:42:09] restart: the party stopped on 27 63; stopping the server (TV log line 117)
+09:42:10 Cy: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Bo: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Dee: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Ana: walk failed: Invocation canceled due to the underlying connection being closed.
+[tv-e2e 09:42:14] server stopped
+[tv-e2e 09:42:26] restart: the server is back; waiting for the TV to put the party somewhere
+09:42:28 Ana rejoined GMPP
+09:42:28 Dee rejoined GMPP
+09:42:28 Bo rejoined GMPP
+09:42:28 Cy rejoined GMPP
+09:42:32 GO restart: Cy leads
+09:42:42 CHAPTER Cy walks 7 steps from 27,63 to shop:af_inn
+09:42:44 WALK route arrived at shop:af_inn
+09:42:44 WALK stop for 2 s
+09:42:46 PAUSE tv
+[tv-e2e 09:42:46] reconnect: the party stopped on 24 56; killing the TV (log line 151)
+tools/tv-e2e.sh: line 346: 169649 Killed                  DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver "${TV_RENDERING_DRIVER:-vulkan}" -- "${shots[@]}" --preset="$PRESET" --res="$RES" --server="$URL" --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1
+09:43:25 GO tv: Cy leads
+09:43:36 CHAPTER Cy walks 7 steps from 24,56 to shop:af_market_herbalist
+09:43:38 WALK route arrived at shop:af_market_herbalist
+09:43:38 WALK stop for 2 s
+09:44:00 LATENCY 20 of 20 presses, ms: median 95 p90 221 worst 234
+09:44:01 DROP kill at 1793785441884
+09:44:01 Cy: walk failed: WebSocket closed with status code: 1006 (no reason given).
+09:44:02 DROP party stopped after 765 ms
+09:44:09 DROP lead passed after 7865 ms
+09:44:17 DROP disconnect after 16023 ms
+09:44:17 DROP last step 480 ms after the cut
+09:44:17 DROP the TV drew the party stopped 757 ms after the cut, by its clock
+09:44:17 WALK done
+[tv-e2e 09:44:18] letting the TV finish its shots (12 s)
+[tv-e2e 09:44:30] TV stopped
+[tv-e2e 09:44:31] Xvfb stopped
+[tv-e2e 09:44:31] server stopped
+[tv-e2e 09:44:31] the TV was told of 19 steps before the restart, 58 in all
+[tv-e2e 09:44:31] the TV drew the leader 5 tiles from where it started, before the restart
+[tv-e2e 09:44:31] restart: the TV is back in room GMPP
+[tv-e2e 09:44:31] restart: saved on 27 63; the TV put the party on 27.5 63.5
+[tv-e2e 09:44:31] restart: the first step after it went to 26 62
+[tv-e2e 09:44:31] reconnect: the new TV is in room GMPP
+[tv-e2e 09:44:31] reconnect: the party stood on 24 56; the new TV snapped to 24.5 56.5
+[tv-e2e 09:44:31] drop: the last step reached the TV 480 ms after the cut; the TV heard the party had stopped 757 ms after it
+[tv-e2e 09:44:31] drop: DROP party stopped after 765 ms
+[tv-e2e 09:44:31] drop: DROP lead passed after 7865 ms
+[tv-e2e 09:44:31] drop: DROP disconnect after 16023 ms
+[tv-e2e 09:44:31] latency: LATENCY 20 of 20 presses, ms: median 95 p90 221 worst 234
+[tv-e2e 09:44:31] the TV's frames while walking: median of the walks' median frame times 219.40 ms
+[tv-e2e 09:44:31] OK

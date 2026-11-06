@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 6ae31756-f31e-447b-8c00-67671cf0efa0\nanimation: v3 custom (Strike forward with the dagger, keeping the dagger firmly gripped in the same hand through every frame, then return to stance.)\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=2f89c626-d56f-4138-828e-8b5a46d39bc1, south-west=5e752987-9233-4f72-b9e1-87f42d169c9b, west=fc4faaad-b9a3-40f7-a41d-4c2cad7efd1b, north-west=8c199ef5-7c06-47ea-95bb-d8c25c8fce3b, north=b5846c11-76b5-4210-bce1-e27ee705c7e5, north-east=d72fa7d3-148c-4307-be4a-743fb0b715ab, east=de5a4b66-ad35-4186-b23f-3a444e86562b, south-east=e9aa93a8-380a-40be-97f8-fb98834276a7\ngroup: 6018f0f6-bd96-460f-b7d4-ded4ac035d29\nframes: 7 (1 reference + 6 animated)\ncanvas: south 112x112, south-west 116x116, west 112x112, north-west 112x112, north 112x112, north-east 112x112, east 116x116, south-east 112x112 (frames are stored at this size: the character plus room to move)\ncost: 16 generations (2/dir x 8)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\")\nadd more directions to this group: animate_character(character_id=\"6ae31756-f31e-447b-8c00-67671cf0efa0\", action_description=\"Strike forward with the dagger, keeping the dagger firmly gripped in the same hand through every frame, then return to stance.\", animation_group_id=\"6018f0f6-bd96-460f-b7d4-ded4ac035d29\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

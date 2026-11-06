@@ -18,22 +18,42 @@ namespace ArcBox.Host.Games.Tactics;
 internal sealed partial class WorldDemo : Node
 {
     private const string Stress = "hilly";
+    private const string WoodSpec = "wood";
+    private const string TavernSpec = "tavern";
+    private const string TownSpec = "town";
+    private const string SwatchSpec = "swatches";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
-    private const int SettleFrames = 3;                 // before a shot, for the overlay to have drawn what the shot is of
+    private const int FadeFrames = 40;                  // before a shot, for a fade to have finished, which also has the overlay drawn
     private const double SecondLook = 0.3;              // between two shots of water, to see that it moved
 
-    private enum Stage { Loading, Crossing, Spots, Done }
+    private enum Stage { Loading, Crossing, ChangingParty, RestoringParty, Spots, Done }
 
     private readonly record struct Frame(double Seconds, double Ms, double RenderCpu, double RenderGpu, double Record, double Query, double Draw, int Items, double DrawCalls);
 
     private readonly string _spec;
     private readonly string _pack;
     private readonly string? _shots;
+    private readonly string? _looks;
+    private readonly string? _walk;
     private readonly List<Frame> _frames = [];
 
     private WorldCanvas _canvas = null!;
+    private WorldPeople? _people;
+    private readonly HashSet<string> _storyFlags = (OS.GetCmdlineUserArgs().FirstOrDefault(a => a.StartsWith("--world-story-flags=", StringComparison.Ordinal))?["--world-story-flags=".Length..] ?? "")
+        .Split(',', StringSplitOptions.RemoveEmptyEntries).ToHashSet(StringComparer.Ordinal);
+    private Task<ImmutableArray<LitItem>>? _scenery;
+    private bool _scenerySet;
+    private readonly bool _partyWalk = OS.GetCmdlineUserArgs().Contains("--world-party-walk");
+    private float WalkSpeed => _partyWalk ? 1 / .3f : StepsPerSecond;
+    private WalkShow? _proof;
+    private int _proofTarget = -1;
+    private bool _proofHeld;
+    private ImmutableArray<string> _proofRoster = [];
+    private float _proofSteps;
+    private double _frameDelta;
+
     private UnitArt _art = null!;
     private WorldGround? _ground;
     private ImmutableArray<Tile> _route = [];
@@ -49,12 +69,20 @@ internal sealed partial class WorldDemo : Node
     private double _waited;
     private bool _secondShot;
     private bool _logged;
+    private readonly bool _perfGate;
+    private double _peakTextures;
+    private bool _gateFailed;
+    private ImmutableArray<string> _roster = WorldTextureBudget.Party;
+    private int _rosterFrames;
 
-    public WorldDemo(string spec, string packRoot, string? shots)
+    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null, bool perfGate = false)
     {
         _shots = shots;
+        _looks = looks;
+        _walk = walk;
         _spec = spec;
         _pack = packRoot;
+        _perfGate = perfGate;
     }
 
     public override void _Ready()
@@ -66,17 +94,48 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
-        var blocks = parts.Length > 1 ? int.Parse(parts[1], CultureInfo.InvariantCulture) : WorldTuning.BlockSize;
+        var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
         _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
         AddChild(_canvas);
     }
 
     private WorldGround Ground(string region)
     {
-        var ground = region == Stress ? DemoRegion.Hilly(160, 120) : DemoRegion.FromPack(_pack, region);
-        var start = region == Stress ? new Tile(80, 60) : RegionStart(region);
-        _route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
-        _spots = WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
+        var ground = region switch
+        {
+            Stress => DemoRegion.Hilly(160, 120),
+            WoodSpec => DemoRegion.Wood(160, 120),
+            TavernSpec => DemoRegion.Tavern(_pack),
+            TownSpec => DemoRegion.Town(_pack),
+            SwatchSpec => DemoRegion.Swatches(_pack),
+            _ => DemoRegion.FromPack(_pack, region),
+        };
+        var start = region switch
+        {
+            Stress => new Tile(80, 60),
+            WoodSpec => DemoRegion.WoodStart(160, 120),
+            TavernSpec => DemoRegion.TavernWalk()[0],
+            TownSpec => DemoRegion.TownWalk()[0],
+            SwatchSpec => DemoRegion.SwatchLooks()[0].Stand,
+            _ when _walk is not null => WorldSpots.Route(_walk)[0],
+            _ => RegionStart(region),
+        };
+        _route = region switch
+        {
+            _ when _walk is not null => WorldSpots.Route(_walk),
+            _ when _looks is not null || region == SwatchSpec => [start, start],
+            TavernSpec => DemoRegion.TavernWalk(),
+            TownSpec => DemoRegion.TownWalk(),
+            _ => WorldRoute.Across(ground.With([], _storyFlags), start, ClassDef.DefaultJump),
+        };
+        _spots = region switch
+        {
+            _ when _looks is not null => WorldSpots.Parse(_looks),
+            SwatchSpec => DemoRegion.SwatchLooks(),
+            TavernSpec => DemoRegion.TavernSpots(),
+            TownSpec => DemoRegion.TownSpots(),
+            _ => WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain),
+        };
         _ground = ground;
         return ground;
     }
@@ -94,7 +153,10 @@ internal sealed partial class WorldDemo : Node
 
     public override void _Process(double delta)
     {
+        _frameDelta = delta;
         _clock += delta;
+        if (_perfGate)
+            _peakTextures = Math.Max(_peakTextures, Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed));
         switch (_stage)
         {
             case Stage.Loading:
@@ -106,8 +168,12 @@ internal sealed partial class WorldDemo : Node
             case Stage.Spots:
                 Visit(delta);
                 break;
+            case Stage.ChangingParty:
+            case Stage.RestoringParty:
+                CheckPartyChange();
+                break;
             case Stage.Done:
-                GetTree().Quit();
+                GetTree().Quit(_gateFailed ? 1 : 0);
                 break;
         }
     }
@@ -116,6 +182,7 @@ internal sealed partial class WorldDemo : Node
     {
         if (_canvas.Now == WorldCanvas.Stage.Failed)
         {
+            _gateFailed = _perfGate;
             _stage = Stage.Done;
             return;
         }
@@ -131,6 +198,7 @@ internal sealed partial class WorldDemo : Node
         }
         if (_canvas.Now == WorldCanvas.Stage.Open)
         {
+            CheckTextures("open");
             var load = _canvas.LoadMs;
             Log($"textures {_canvas.Plan.Images.Length} in {load.Textures:0} ms, worst {load.Worst:0.0} ms; binding items (and baking glows) {load.Bind:0} ms; {_canvas.Waiting} blocks still to record at reveal");
             _stage = Stage.Crossing;
@@ -151,13 +219,53 @@ internal sealed partial class WorldDemo : Node
     /// <summary>Puts the walker <paramref name="steps"/> along the route and the camera on it.</summary>
     private UnitPlace Walk(float steps)
     {
+        _proofSteps = steps;
         var terrain = _canvas.Plan!.Terrain;
         var place = WorldRoute.At(terrain, _route, steps);
         var heading = WorldRoute.Heading(_route, steps);
         _canvas.Place(WorldView.Centred(place.Feet));
         _canvas.Aim(place.Map, heading * StepsPerSecond);
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, heading, _clock), _art);
+        Show(terrain, place, heading);
         return place;
+    }
+
+    /// <summary>The stand-in, and the region's people round where the camera is, as the TV has them.</summary>
+    private void Show(BoardTerrain terrain, UnitPlace place, System.Numerics.Vector2 heading, System.Numerics.Vector2? looking = null)
+    {
+        if (_scenery is null)
+            _scenery = Task.Run(() => LitBoard.Build(BoardPlan.StoryProps(terrain, _canvas.Art!, _storyFlags), _canvas.Plan!.Lighting).Items);
+        if (!_scenerySet && _scenery.IsCompletedSuccessfully)
+        {
+            _canvas.SetPlugs(_scenery.Result);
+            _scenerySet = true;
+        }
+        _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
+        var walkers = _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
+            : DemoRegion.StandIn(terrain, _art, place, heading, _clock);
+        _canvas.PartySheets(walkers.Select(u => u.Sprite.Path));
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [], flags: _storyFlags)).OrderBy(u => u.Order)];
+        _canvas.ShowUnits(units, walkers, _art);
+    }
+
+    // Development-only evidence uses the real walking/formation presenter, not
+    // four sprites offset at a shared height. Inputs have the server's view shape.
+    private ImmutableArray<BoardUnit> ProofWalkers(BoardTerrain terrain, UnitPlace place)
+    {
+        _proof ??= new WalkShow(new BoardTerrain(terrain.Map.WithStoryFlags(_storyFlags), null), _art, null);
+        var epoch = _stage == Stage.Spots ? 100 + _spot : 1;
+        var moving = _route.Length > 1 && _route.Zip(_route.Skip(1)).Any(p => p.First != p.Second);
+        var target = _stage == Stage.Spots || !moving ? 0 : Math.Clamp((int)MathF.Floor(_proofSteps) + 1, 0, _route.Length - 1);
+        var held = moving && _stage != Stage.Spots && _proofSteps < _route.Length - 1;
+        var at = _stage == Stage.Spots ? new Tile((int)MathF.Floor(place.Map.X), (int)MathF.Floor(place.Map.Y)) : _route[target];
+        ImmutableArray<WalkLeg> legs = _stage == Stage.Spots || !moving ? [] : [.. Enumerable.Range(Math.Max(1, target - 11), Math.Min(12, target))
+            .Select(i => new WalkLeg(i, _route[i], (int)(1000 / WalkSpeed)))];
+        ImmutableArray<WalkerView> party = [.. _roster.Select((sprite, i) => new WalkerView("proof-" + i, "Hero " + (i + 1), sprite, true, i == 0))];
+        if (_proofTarget < 0)
+            _proof.Receive(new ExploreView(terrain.Map.Id, "Road proof", 1, 0, _route[0], _route[0] with { X = _route[0].X + 1 }, false, [], party, "proof-0") { PeopleFlags = [.. _storyFlags] });
+        if (_stage == Stage.Spots || target != _proofTarget || held != _proofHeld || !_proofRoster.SequenceEqual(_roster))
+            _proof.Receive(new ExploreView(terrain.Map.Id, "Road proof", epoch, target, at, at with { X = at.X + 1 }, held, legs, party, "proof-0") { PeopleFlags = [.. _storyFlags] });
+        (_proofTarget, _proofHeld, _proofRoster) = (target, held, _roster);
+        return _proof.Frame(_frameDelta).Walkers;
     }
 
     private void Cross(double delta)
@@ -168,7 +276,7 @@ internal sealed partial class WorldDemo : Node
             RenderingServer.ViewportGetMeasuredRenderTimeGpu(rid), _canvas.RecordMs, query, draw, _canvas.OverItems,
             Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)));
         _crossing += delta;
-        _steps = (float)_crossing * StepsPerSecond;
+        _steps = (float)_crossing * WalkSpeed;
         Walk(_steps);
         if (_steps < _route.Length - 1)
         {
@@ -176,11 +284,34 @@ internal sealed partial class WorldDemo : Node
         }
         LogCrossing();
         Shoot($"world-{_spec.Replace(':', '-')}.png");
-        _stage = _shots is null ? Stage.Done : Stage.Spots;
+        if (_perfGate)
+        {
+            _roster = WorldTextureBudget.ChangedParty;
+            _stage = Stage.ChangingParty;
+            _rosterFrames = 0;
+        }
+        else _stage = _shots is null ? Stage.Done : Stage.Spots;
+    }
+
+    private void CheckPartyChange()
+    {
+        Walk(_route.Length - 1);
+        // Submit the new roster, drain the upload budget, then allow two rendered frames for the monitor to settle.
+        if (_canvas.PendingUnitTextures > 0) { _rosterFrames = 0; return; }
+        if (++_rosterFrames < 3) return;
+        CheckTextures(_stage == Stage.ChangingParty ? "party-change" : "party-restored");
+        if (_stage == Stage.ChangingParty)
+        {
+            _roster = WorldTextureBudget.Party;
+            _rosterFrames = 0;
+            _stage = Stage.RestoringParty;
+        }
+        else _stage = _shots is null ? Stage.Done : Stage.Spots;
     }
 
     private void LogCrossing()
     {
+        CheckTextures("crossing");
         var all = _frames;
         var warm = all.Where(f => f.Seconds >= ColdSeconds).ToArray();
         var recording = all.Where(f => f.Record > 0).ToArray();
@@ -196,8 +327,18 @@ internal sealed partial class WorldDemo : Node
         Log($"_Draw per block, first time: {Spread(_canvas.BlockMs)}, sum {_canvas.BlockMs.Sum():0.0} ms");
         Log($"render CPU ms {Spread(all.Select(f => f.RenderCpu))}; GPU ms {Spread(all.Select(f => f.RenderGpu))}; at most {all.Max(f => f.DrawCalls):N0} draw calls");
         Log($"overlay query ms {Spread(all.Select(f => f.Query))}; draw ms {Spread(all.Select(f => f.Draw))}; items {Spread(all.Select(f => (double)f.Items))}");
-        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}");
+        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}; recorded again for a fade: {_canvas.Rerecorded}");
         Log($"memory at end of crossing: {MemoryText()}");
+    }
+
+    private void CheckTextures(string stage)
+    {
+        if (!_perfGate) return;
+        var bytes = Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed);
+        _peakTextures = Math.Max(_peakTextures, bytes);
+        var passed = WorldTextureBudget.Passes(_peakTextures, WorldTextureBudget.Party.Length);
+        _gateFailed |= !passed;
+        Log(FormattableString.Invariant($"texture-budget region={_spec} stage={stage} party=4 textures-bytes={bytes:0} peak-bytes={_peakTextures:0} limit-bytes={WorldTextureBudget.LimitBytes} result={(passed ? "PASS" : "FAIL")}"));
     }
 
     private void Visit(double delta)
@@ -211,8 +352,8 @@ internal sealed partial class WorldDemo : Node
         var terrain = _canvas.Plan!.Terrain;
         var place = UnitPlace.On(terrain, spot.Stand);
         _canvas.Place(WorldView.Centred(terrain.Centre(spot.Look)));
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, new System.Numerics.Vector2(1, 0), _clock), _art);
-        if (++_settling < SettleFrames)
+        Show(terrain, place, new System.Numerics.Vector2(1, 0), terrain.Centre(spot.Look));
+        if (++_settling < FadeFrames)
         {
             return;
         }

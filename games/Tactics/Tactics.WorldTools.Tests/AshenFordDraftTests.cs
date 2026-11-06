@@ -16,8 +16,8 @@ public sealed class AshenFordDraftTests
     /// <summary>The beats at the Ford Bridge.</summary>
     private static readonly string[] FordBeats = ["ch1_the_ford_choice", "ch1_ford_assault", "ch1_river_crossing"];
 
-    /// <summary>What the road is made of: the path, and the town's cobbles and square.</summary>
-    private static readonly string[] RoadMaterials = ["cobble/warm", "flagstone/warm", "path/packed"];
+    /// <summary>What can be walked along from the square to the ford: the path, the town's cobbles and the square itself.</summary>
+    private static readonly string[] RoadMaterials = ["cobble/grey", "cobble/warm", "path/packed"];
 
     private static readonly Lazy<Proved> Draft = new(Prove);
 
@@ -57,16 +57,19 @@ public sealed class AshenFordDraftTests
         Materials = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Material),
         Heights = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Height),
         Flags = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Flags),
+        Props = source.Props.SelectMany(g => g.At.Select(t => (Tile: t, g.Id, g.Variant))).ToDictionary(p => p.Tile, p => (p.Id, p.Variant)),
         Beats = [.. source.Beats],
+        Buildings = [.. source.Buildings],
         Stamps = [.. source.Stamps],
         Starts = [source.Start],
         Recoveries = [source.Recovery],
+        NamedSpawns = [.. source.NamedSpawns.Select(s => (s.Key, s.Value))],
     };
 
     /// <summary>Exports the draft into a copy of the pack, over the region the pack lists, and loads the copy, which runs every check the game does.</summary>
     private static Proved Prove()
     {
-        var pack = RulesPack.Load([ContentPaths.BaseRules]);
+        var pack = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
         var source = AshenFordDraft.Build(pack);
         var rules = Directory.CreateTempSubdirectory("tactics-draft-test-").FullName;
         try
@@ -78,12 +81,14 @@ public sealed class AshenFordDraftTests
                 File.Copy(file, to);
             }
 
+            RegionExportTests.WithoutShops(rules, Id); // The historical draft predates the painted market keeper.
+            RegionExportTests.WithoutMobs(rules, Id); // The historical draft predates the painted roaming arenas.
             var export = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
             Assert.True(export.Written is not null, string.Join("\n", export.Problems));
             Assert.True(export.Listed);
 
-            var region = RulesPack.Load([rules]).RegionFor(Id)!;
-            return new Proved(pack, source, export, region, new RegionWalk(region, pack.Maps));
+            var region = RulesPack.Load([rules], ArtManifests.Load(ContentPaths.ContentBase)).RegionFor(Id)!;
+            return new Proved(pack, source, export, region, new RegionWalk(region, pack.Maps, pack.Art!));
         }
         finally
         {
@@ -96,7 +101,7 @@ public sealed class AshenFordDraftTests
         using var lore = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "lore", "arcs.json")));
         return
         [
-            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("chapter").GetInt32() == 1)
+            .. lore.RootElement.GetProperty("arcs").EnumerateArray().Where(arc => arc.GetProperty("region").GetString() == "ashen_ford")
                 .SelectMany(arc => arc.GetProperty("beats").EnumerateArray())
                 .Select(beat => (beat.GetProperty("id").GetString()!, beat.GetProperty("place").GetString()!)),
         ];
@@ -327,6 +332,10 @@ public sealed class AshenFordDraftTests
     {
         var draft = Draft.Value;
         var solid = draft.Tiles.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Impassable) == true).ToHashSet();
+        // The authored bridge parapets are intentional three-cell structures.
+        var parapets = (from y in new[] { 60, 63 } from x in Enumerable.Range(105, 3) select new Tile(x, y)).ToArray();
+        Assert.All(parapets, t => { Assert.Contains(t, solid); Assert.Equal("warden_edge/stone", draft.Material(t)); });
+        solid.ExceptWith(parapets);
         while (solid.Count > 0)
         {
             var first = solid.First();
@@ -422,6 +431,8 @@ public sealed class AshenFordDraftTests
         var source = AshenFordDraft.Build(draft.Pack);
         Pit(source, pit);
         var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
         try
         {
             var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
@@ -445,6 +456,9 @@ public sealed class AshenFordDraftTests
         Pit(source, pit);
         source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_mayors_request")] = new BeatSpot("ch1_mayors_request", pit);
         var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
+        RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' own check refuses a beat it can't walk back from: this is the story's warning
         try
         {
             var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
@@ -485,6 +499,9 @@ public sealed class AshenFordDraftTests
         Pit(source, pit);
         source.Recovery = pit;
         var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
+        RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' check says the same in its own words: this is the region's
         try
         {
             var problem = Assert.Single(RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase).Problems);
@@ -557,7 +574,7 @@ public sealed class AshenFordDraftTests
         var draft = Draft.Value;
 
         // Through the unarmed stamp the camp is still in reach, which is why no reach check can see this.
-        var reached = new RegionWalk(region, draft.Pack.Maps).From(draft.Start);
+        var reached = new RegionWalk(region, draft.Pack.Maps, draft.Pack.Art!).From(draft.Start);
         Assert.Contains(draft.Spot("ch1_river_crossing"), reached);
         Assert.Contains(draft.Spot("ch1_skarrow_song"), reached);
 
@@ -607,35 +624,404 @@ public sealed class AshenFordDraftTests
         Assert.Contains(east, t => t.X == 159);
     }
 
+    private static BuildingArtDef Art(Proved draft, RegionBuilding building) => draft.Pack.Art!.Buildings[building.Id];
+
+    private static IEnumerable<Tile> Footprint(BuildingArtDef art, Tile at)
+        => Enumerable.Range(0, art.Depth).SelectMany(y => Enumerable.Range(0, art.Width).Select(x => new Tile(at.X + x, at.Y + y)));
+
     [Fact]
-    public void Emberwick_is_a_village_of_streets_and_buildings()
+    public void Emberwick_is_a_town_of_twenty_to_thirty_buildings_on_a_cobbled_square()
     {
         var draft = Draft.Value;
-        Assert.Equal("flagstone/warm", draft.Material(draft.Start));
-        var town = draft.Tiles.Where(t => Distance(t, draft.Start) <= 24).ToList();
-        var roofs = town.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Impassable) == true && draft.Material(t).StartsWith("planks", StringComparison.Ordinal)).ToHashSet();
+        Assert.Equal("cobble/grey", draft.Material(draft.Start));
+        Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/grey") >= 150);
+        Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/warm") >= 250);
 
-        var buildings = 0;
-        while (roofs.Count > 0)
-        {
-            buildings++;
-            var open = new Stack<Tile>([roofs.First()]);
-            while (open.TryPop(out var tile))
-                if (roofs.Remove(tile))
-                    foreach (var (x, y) in new[] { (0, 1), (1, 0), (0, -1), (-1, 0) })
-                        open.Push(new Tile(tile.X + x, tile.Y + y));
-        }
-        Assert.InRange(buildings, 16, 40);
-        Assert.True(town.Count(t => draft.Material(t) == "cobble/warm") > 150);
+        var homes = draft.Region.Buildings.Where(b => b.Id is "cottage" or "house" or "tavern" or "store" or "smithy" or "chapel").Where(b => Distance(b.At, draft.Start) < 40);
+        Assert.InRange(homes.Count(), 20, 30);
+        foreach (var kit in new[] { "wall_u", "wall_v", "wall_tower", "gate_u", "gate_v", "stall", "notice_board_u", "clutter_crates", "clutter_barrels", "clutter_produce" })
+            Assert.Contains(draft.Region.Buildings, b => b.Id == kit);
+        Assert.All(draft.Region.Buildings.Where(b => b.Id is "wall_u" or "wall_v" or "wall_tower" or "gate_u" or "gate_v"), b => Assert.Equal("warm", b.Variant));
+    }
+
+    [Theory]
+    [InlineData("tavern")]
+    [InlineData("chapel")]
+    [InlineData("store")]
+    [InlineData("smithy")]
+    public void The_square_has_its_chapel_inn_store_and_smithy_on_it(string id)
+    {
+        var draft = Draft.Value;
+        var building = draft.Region.Buildings.First(b => b.Id == id);
+        Assert.Equal("cobble/grey", draft.Material(Art(draft, building).DoorSteps(building.At).Single()));
     }
 
     [Fact]
-    public void The_far_bank_looks_burned_and_the_near_bank_doesnt()
+    public void Every_building_stands_on_flat_ground()
     {
         var draft = Draft.Value;
-        static bool Burned(string material) => material is "ash/grey" or "basalt/dark";
-        Assert.DoesNotContain(draft.NearBank, t => Burned(draft.Material(t)));
-        Assert.True(Near(draft, draft.Spot("ch1_old_maud"), 8, Burned) > 0.6);
+        foreach (var building in draft.Region.Buildings)
+        {
+            var heights = Footprint(Art(draft, building), building.At).Select(t => draft.Region.TileAt(t)!.Height).Distinct();
+            Assert.True(heights.Count() == 1, $"The {building.Id} at {building.At} stands on heights {string.Join(", ", heights)}.");
+        }
+    }
+
+    [Fact]
+    public void Every_door_can_be_walked_to()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var dressed = WorldRegion.From(RegionWriter.Write(source, known).Region!);
+        var reached = new RegionWalk(dressed, draft.Pack.Maps, draft.Pack.Art!).From(draft.Start);
+
+        foreach (var building in dressed.Buildings)
+            foreach (var step in Art(draft, building).DoorSteps(building.At))
+                Assert.True(reached.Contains(step), $"The door of the {building.Id} at {building.At} opens on {step}.");
+    }
+
+    [Fact]
+    public void The_party_can_walk_every_street_and_leaves_by_a_gate()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var dressed = WorldRegion.From(RegionWriter.Write(source, known).Region!);
+        var walk = new RegionWalk(dressed, draft.Pack.Maps, draft.Pack.Art!);
+
+        var reached = walk.From(draft.Start);
+        var streets = source.Tiles.Where(t => t.Value.Material == "cobble/warm").Select(t => t.Key).ToList();
+        var blocked = streets.Where(t => !reached.Contains(t)).ToList();
+        Assert.True(blocked.Count <= 8, $"{blocked.Count} street tiles can't be walked, the first at {blocked.FirstOrDefault()}.");
+
+        // Both gates shut, the party is inside the wall.
+        var gates = dressed.Buildings.Where(b => b.Id is "gate_u" or "gate_v").SelectMany(b => Footprint(draft.Pack.Art!.Buildings[b.Id], b.At)).ToArray();
+        Assert.Equal(2, gates.Length / 3);
+        var inside = walk.From(draft.Start, gates);
+        Assert.DoesNotContain(draft.Spot("ch1_the_ford_choice"), inside);
+    }
+
+    [Fact]
+    public void The_ground_burned_in_rings_from_the_ford()
+    {
+        var draft = Draft.Value;
+        static bool Ash(string material) => material == "ash/grey";
+        static bool Scorched(string material) => material is "ash/grey" or "dirt/dark";
+
+        // On both banks, and on down the far one to Maud's, as the scene says.
+        Assert.True(Near(draft, new Tile(90, 70), 6, Ash) > 0.4);
+        Assert.True(Near(draft, new Tile(122, 66), 6, Scorched) > 0.8);
+        Assert.True(Near(draft, draft.Spot("ch1_old_maud"), 8, Ash) > 0.6);
+
+        // And nothing burned reaches the town.
+        Assert.DoesNotContain(draft.Tiles, t => Distance(t, draft.Start) <= 22 && Ash(draft.Material(t)));
+    }
+
+    [Fact]
+    public void Theres_almost_no_green_and_little_that_shouts()
+    {
+        var draft = Draft.Value;
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+        Assert.DoesNotContain(ground, t => draft.Material(t) is "grass/green" or "grass/lush" or "forest_floor/mossy");
+        Assert.True(ground.Count(t => draft.Material(t) == "grass/autumn") < ground.Count / 8.0);
+    }
+
+    [Fact]
+    public void A_place_is_broad_and_calm()
+    {
+        // Few tiles have a neighbour of a different ground: the patchwork the first draft was is what this stops.
+        var draft = Draft.Value;
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+        var edges = ground.Count(t => draft.Material(t) != draft.Material(t with { X = t.X + 1 }) || draft.Material(t) != draft.Material(t with { Y = t.Y + 1 }));
+        Assert.True(edges < ground.Count / 4.5, $"{edges} of {ground.Count} tiles change material at their edge.");
+    }
+
+    private static IEnumerable<(Tile At, string Id, string? Variant)> Props(RegionSource source) => source.Props.SelectMany(p => p.At.Select(t => (t, p.Id, p.Variant)));
+
+    [Fact]
+    public void Nothing_stands_on_water_or_in_rock_or_inside_a_building()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var built = source.Buildings.SelectMany(b => Footprint(draft.Pack.Art!.Buildings[b.Id], b.At)).ToHashSet();
+
+        foreach (var (at, id, _) in Props(source))
+        {
+            var tile = source.Get(at);
+            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster" or "fishing_skiff" or "river_duck", $"The {id} at {at} stands on {tile}.");
+            Assert.False(built.Contains(at), $"The {id} at {at} is inside a building.");
+        }
+    }
+
+    [Fact]
+    public void Goblin_fires_burn_on_the_far_bank_and_reeds_grow_on_both()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var near = draft.NearBank;
+        var fires = Props(source).Where(p => p.Id == "campfire" && p.At.X > draft.Stamp.At.X && p.At.Y > 40).ToList();
+        Assert.True(fires.Count >= 3);
+        Assert.All(fires, f => Assert.DoesNotContain(f.At, near));
+        Assert.True(Props(source).Count(p => p.Id == "banner" && p.Variant == "goblin") >= 4);
+
+        var reeds = Props(source).Where(p => p.Id == "reeds").Select(p => p.At).ToList();
+        Assert.True(reeds.Count(near.Contains) >= 8);
+        Assert.True(reeds.Count(t => !near.Contains(t)) >= 8);
+        Assert.All(reeds, t => Assert.Contains(new[] { t with { X = t.X + 1 }, t with { X = t.X - 1 }, t with { Y = t.Y + 1 }, t with { Y = t.Y - 1 } },
+            n => source.Get(n)?.Flags.HasFlag(TileFlags.Water) == true));
+    }
+
+    [Fact]
+    public void The_docks_have_their_sheds_market_and_lanterns()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var docks = draft.Spot("ch1_the_ember");
+        Assert.True(source.Buildings.Count(b => b.Id == "stall" && Distance(b.At, docks) <= 12) >= 3);
+        Assert.True(source.Buildings.Count(b => b.Id is "cottage" or "house" or "store" && Distance(b.At, docks) <= 14) >= 3);
+        Assert.True(Props(source).Count(p => p.Id == "lantern_iron" && Distance(p.At, docks) <= 12) >= 5);
+    }
+
+    [Fact]
+    public void The_docks_moor_skiffs_in_open_water_beside_their_piers()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var boats = source.Props.Single(p => p.Id == "fishing_skiff");
+
+        Assert.Equal(3, boats.At.Length);
+        foreach (var pier in new[] { 92, 98, 104 })
+        {
+            Assert.Equal("flagstone/grey", source.Get(new Tile(100, pier))!.Material);
+            Assert.Equal("planks/oak", source.Get(new Tile(101, pier))!.Material);
+        }
+        Assert.All(boats.At, tile =>
+        {
+            var water = source.Get(tile)!;
+            Assert.Equal("water/clear", water.Material);
+            Assert.True(water.Flags.HasFlag(TileFlags.Water));
+            Assert.True(water.Flags.HasFlag(TileFlags.Deep));
+            Assert.False(water.Flags.HasFlag(TileFlags.Impassable));
+        });
+    }
+
+    [Fact]
+    public void The_camp_is_small_and_hungry()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var near = Props(source).Where(p => Distance(p.At, draft.Spot("ch1_skarrow_song")) <= 10).ToList();
+        Assert.InRange(near.Count(p => p.Id == "tent"), 2, 4);
+        Assert.Single(near, p => p.Id == "campfire");
+        Assert.DoesNotContain(near, p => p.Id is "haystack" or "lamp_post" or "crate");
+    }
+
+    [Fact]
+    public void The_camp_is_a_place_pulled_in_round_its_fire()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var spot = draft.Spot("ch1_skarrow_song");
+        var near = Props(source).Where(p => Distance(p.At, spot) <= 10).ToList();
+        var fire = near.Single(p => p.Id == "campfire").At;
+
+        Assert.All(near.Where(p => p.Id == "tent"), tent => Assert.True(Distance(tent.At, fire) <= 3, $"The tent at {tent.At} is off by itself."));
+        Assert.Contains(near, p => p.Id == "mantlet");
+        Assert.True(near.Count(p => p.Id is "palisade" or "barricade") >= 8);
+
+        // The trodden ground stops where the camp stops.
+        var trodden = draft.Tiles.Count(t => Distance(t, fire) <= 10 && t.Y < 31 && draft.Material(t) == "dirt/dark");
+        Assert.InRange(trodden, 50, 110);
+    }
+
+    private static RegionPerson OnePerson(Proved draft, string preset) => draft.Source.People.Single(p => p.Preset == preset);
+
+    [Theory]
+    [InlineData("mayor", "the square", 24, 55, 38, 66)]
+    [InlineData("innkeeper", "The Last Coal's door", 24, 55, 26, 55)]
+    [InlineData("priest", "the chapel", 29, 55, 30, 55)]
+    [InlineData("blacksmith", "the smithy", 36, 55, 37, 55)]
+    [InlineData("guard_captain", "the east gate", 44, 60, 47, 64)]
+    [InlineData("hermit", "her hut", 128, 88, 134, 92)]
+    [InlineData("goblin_shaman", "the camp's fire", 131, 20, 136, 25)]
+    public void Named_people_stand_where_they_live(string preset, string place, int left, int top, int right, int bottom)
+    {
+        var at = OnePerson(Draft.Value, preset).At;
+
+        Assert.True(at.X >= left && at.X <= right && at.Y >= top && at.Y <= bottom, $"The {preset} should be at {place}, and is at {at}.");
+    }
+
+    [Fact]
+    public void Theres_a_town_of_people_about_25_of_them_where_their_work_is()
+    {
+        var draft = Draft.Value;
+        var folk = draft.Source.People.Where(p => p.Preset is not ("mayor" or "innkeeper" or "priest" or "blacksmith" or "guard_captain" or "hermit" or "goblin_shaman" or "minstrel" or "sage" or "noble")).ToList();
+        Assert.InRange(folk.Count, 25, 45);
+
+        var goblins = folk.Where(p => p.Preset.StartsWith("goblin", StringComparison.Ordinal)).ToList();
+        Assert.True(goblins.Count(p => Distance(p.At, draft.Spot("ch1_skarrow_song")) <= 8) >= 3);
+        Assert.True(goblins.Count(p => Distance(p.At, draft.Stamp.At with { X = draft.Stamp.At.X + 7, Y = draft.Stamp.At.Y + 6 }) <= 15) >= 5);
+        Assert.Contains(folk, p => p.Preset == "child");
+        Assert.True(folk.Count(p => p.Preset == "guard") >= 4);
+        Assert.True(folk.Count(p => p.Preset == "merchant") >= 4);
+        Assert.True(folk.Count(p => p.Preset == "fisher" && draft.Material(p.At).StartsWith("planks", StringComparison.Ordinal)) >= 3);
+        Assert.True(folk.Count(p => p.Preset is "farmer" or "farmhand" && p.At.Y is < 44 or > 79) >= 4);
+    }
+
+    [Fact]
+    public void Nobody_stands_on_the_road_the_party_walks_nor_on_a_spawn()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        Assert.DoesNotContain(draft.Source.People, p => draft.Material(p.At) == "path/packed");
+        Assert.DoesNotContain(draft.Source.People, p => p.At == draft.Start || p.At == draft.Recovery);
+
+        // A gate's way through stays clear, and so does every door.
+        var doors = source.Buildings.SelectMany(b => draft.Pack.Art!.Buildings[b.Id].DoorSteps(b.At)).ToHashSet();
+        Assert.Empty(draft.Source.People.Where(p => p.Preset is not ("innkeeper" or "priest" or "blacksmith" or "hermit") && doors.Contains(p.At)).Select(p => $"{p.Preset} {p.At}"));
+        Assert.DoesNotContain(draft.Source.People, p => p.At == new Tile(47, 62) || p.At == new Tile(31, 79));
+    }
+
+    [Fact]
+    public void Mauds_hut_stands_alone()
+    {
+        var draft = Draft.Value;
+        var hut = draft.Region.Buildings.Single(b => Distance(b.At, draft.Spot("ch1_old_maud")) <= 8);
+        Assert.Equal("cottage", hut.Id);
+        Assert.DoesNotContain(draft.Region.Buildings, b => b != hut && Distance(b.At, hut.At) < 28);
+    }
+
+    [Fact]
+    public void The_fields_have_their_fences_hay_and_a_mill()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        Assert.Single(source.Buildings, b => b.Id == "windmill");
+        var fields = source.Tiles.Where(t => t.Value.Material is "grass/autumn" or "dirt/brown").Select(t => t.Key).ToHashSet();
+        Assert.True(Props(source).Count(p => p.Id == "haystack" && fields.Contains(p.At)) >= 10);
+        Assert.True(Props(source).Count(p => p.Id == "fence") >= 30);
+    }
+
+    [Fact]
+    public void Each_fence_stands_on_its_fields_level_and_no_rail_is_doubled()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var fences = Props(source).Where(p => p.Id is "fence" or "fence_join").ToDictionary(p => p.At, p => p.Variant);
+        var roads = new HashSet<string>(["path/packed", "cobble/grey", "cobble/warm", "flagstone/grey"]);
+
+        Assert.NotEmpty(fences);
+        foreach (var (at, variant) in fences)
+        {
+            var ground = source.Get(at)!;
+            Tile[] round = [new(at.X + 1, at.Y), new(at.X - 1, at.Y), new(at.X, at.Y + 1), new(at.X, at.Y - 1)];
+            Assert.DoesNotContain(ground.Material, roads);
+            Assert.All(round.Where(fences.ContainsKey), n => Assert.True(Math.Abs(source.Get(n)!.Height - ground.Height) <= 1, $"The rail steps up a cliff at {at}."));
+            Assert.All(round.Select(source.Get).OfType<TileInfoNamed>(), n => Assert.True(ground.Height - n.Height <= 1, $"The fence at {at} stands on a lip."));
+            // Two fields side by side share a rail, rather than each having its own a tile apart.
+            Assert.False(variant == "oak" && fences.GetValueOrDefault(new Tile(at.X, at.Y + 1)) == "oak", $"A doubled rail at {at}.");
+            Assert.False(variant == "oak_reversed" && fences.GetValueOrDefault(new Tile(at.X + 1, at.Y)) == "oak_reversed", $"A doubled rail at {at}.");
+        }
+    }
+
+    [Fact]
+    public void A_wood_is_dense_enough_to_be_one_and_the_road_through_it_stays_open()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var trees = Props(source).Where(p => p.Id is "tree" or "pine" or "dead_tree").Select(p => p.At).ToHashSet();
+        Assert.True(trees.Count >= 150, $"{trees.Count} trees.");
+        var woods = source.Tiles.Keys.Where(t => Distance(t, new Tile(72, 34)) <= 6).ToList();
+        Assert.True(woods.Count(trees.Contains) >= 28, $"{woods.Count(trees.Contains)} trees in the middle of Scarpfoot Wood.");
+    }
+
+    [Fact]
+    public void A_living_wood_has_something_growing_under_its_trees_and_a_floor_thats_more_than_one_stuff()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var wood = source.Tiles.Keys.Where(t => Distance(t, new Tile(72, 34)) <= 7).ToHashSet();
+
+        Assert.True(Props(source).Count(p => wood.Contains(p.At) && p.Id is "bush" or "fern" or "tall_grass" or "stump" or "log" or "mushroom_cluster") >= 8);
+        Assert.InRange(wood.Count(t => draft.Material(t) == "forest_needles/pine") / (double)wood.Count, 0.35, 0.75);
+    }
+
+    [Fact]
+    public void The_old_bridge_is_broken_and_cant_be_walked()
+    {
+        var draft = Draft.Value;
+        var spans = draft.Source.Buildings.Where(b => b.Id == "bridge_u").Select(b => b.At).ToList();
+
+        // A stump from each bank, a span missing, and every tile under it still the river.
+        Assert.Equal(3, spans.Count);
+        Assert.All(spans, t => Assert.Equal(TileFlags.Water | TileFlags.Deep, draft.Region.TileAt(t)!.Flags));
+        Assert.All(spans, t => Assert.False(draft.InStamp(t)));
+        var (west, east) = (spans.Min(t => t.X), spans.Max(t => t.X));
+        Assert.Contains(Enumerable.Range(west, east - west + 1), x => !spans.Contains(new Tile(x, spans[0].Y)));
+        Assert.All(spans, t => Assert.DoesNotContain(t, draft.Walk.From(draft.Start)));
+
+        // Behind the stamp, so it never hides a fight.
+        Assert.All(spans, t => Assert.True(t.Y < draft.Stamp.At.Y));
+    }
+
+    [Fact]
+    public void A_stone_causeway_leads_to_the_crossing_from_each_bank()
+    {
+        var draft = Draft.Value;
+        bool Paved(Tile t) => draft.Material(t) == "cobble/grey";
+        var edge = (West: draft.Stamp.At.X - 1, East: draft.Stamp.At.X + draft.Crossing.Width);
+
+        Assert.True(draft.Tiles.Count(t => Paved(t) && t.X > edge.West - 10 && t.X <= edge.West) > 20);
+        Assert.True(draft.Tiles.Count(t => Paved(t) && t.X >= edge.East && t.X < edge.East + 10) > 20);
+        Assert.Contains(draft.Tiles, t => t.X == edge.West && Paved(t));
+        Assert.Contains(draft.Tiles, t => t.X == edge.East && Paved(t));
+    }
+
+    [Fact]
+    public void Bare_stone_is_rough_and_broken_not_laid_in_slabs()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+
+        // Only the stamp's ridge, run on a little past it, has the pack's slabbed rock: nothing outside it.
+        Assert.DoesNotContain(ground, t => draft.Material(t) is "rock/grey" or "rock/dark");
+        Assert.True(ground.Count(t => draft.Material(t) == "cave_floor/cool") > 2000);
+        Assert.True(ground.Count(t => draft.Material(t) == "mine_gravel/brown") > 400);
+        Assert.True(Props(source).Count(p => p.Id == "crag") >= 25);
+        Assert.True(Props(source).Count(p => p.Id == "rock_cluster") >= 20);
+        Assert.True(Props(source).Count(p => p.Id == "boulder") >= 15);
+    }
+
+    [Fact]
+    public void The_road_is_a_narrow_worn_track_with_a_verge()
+    {
+        var draft = Draft.Value;
+        var track = draft.Tiles.Where(t => !draft.InStamp(t) && draft.Material(t) == "path/packed").ToHashSet();
+
+        // Nearly every tile of it has its verge within two tiles.
+        var verged = track.Count(t => Enumerable.Range(-2, 5).Any(d => draft.Material(t with { X = t.X + d }) == "dirt/dark" || draft.Material(t with { Y = t.Y + d }) == "dirt/dark"));
+        Assert.True(verged > track.Count * 0.9, $"{verged} of {track.Count}");
+
+        // It's never three tiles wide, but where one way meets another.
+        var wide = track.Count(t => Enumerable.Range(-1, 3).All(dy => Enumerable.Range(-1, 3).All(dx => track.Contains(new Tile(t.X + dx, t.Y + dy)))));
+        Assert.True(wide <= 8, $"{wide} tiles are in the middle of a block of track.");
     }
 
     [Fact]
@@ -671,5 +1057,95 @@ public sealed class AshenFordDraftTests
         Assert.Contains(draft.Spot("ch1_ford_assault"), draft.NearBank);
         Assert.DoesNotContain(draft.Spot("ch1_river_crossing"), draft.NearBank);
         Assert.All(FordBeats, beat => Assert.True(draft.Walk.Seconds(draft.Spot(beat), draft.InStamp) <= 3, beat));
+    }
+
+    [Fact]
+    public void The_dressing_passes_with_no_warnings()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        Assert.NotEmpty(source.Props);
+        var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutShops(rules, Id);
+        RegionExportTests.WithoutMobs(rules, Id);
+        try
+        {
+            var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
+            Assert.NotNull(result.Written);
+            Assert.Empty(result.Problems);
+            Assert.Empty(result.Warnings);
+            Assert.Empty(result.StoryWarnings);
+        }
+        finally
+        {
+            Directory.Delete(rules, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void The_story_still_walks_on_both_branches()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var painted = Painted(source);
+        var (builtSource, _) = painted.ToSource();
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var region = WorldRegion.From(RegionWriter.Write(builtSource, known).Region!);
+
+        var story = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase);
+        Assert.Empty(story.Problems);
+        Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
+        Assert.All(story.Legs, leg => Assert.NotNull(leg.Seconds));
+        Assert.All(story.Retries, leg => Assert.NotNull(leg.Seconds));
+    }
+
+    [Fact]
+    public void The_road_stays_clear()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        var roadTiles = source.Tiles.Where(t => AshenFordDraft.RoadMaterials.Contains(t.Value.Material)).Select(t => t.Key).ToHashSet();
+        Assert.DoesNotContain(source.Props.SelectMany(p => p.At), t => roadTiles.Contains(t));
+    }
+
+    [Fact]
+    public void Dressing_twice_is_refused_and_changes_nothing()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var propsBefore = source.Props.Select(p => (p.Id, p.Variant, At: p.At.ToArray())).ToList();
+        var tilesBefore = source.Tiles.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+        var ex = Assert.Throws<InvalidOperationException>(() => AshenFordDraft.Dress(source, draft.Pack));
+        Assert.Contains("already has props", ex.Message, StringComparison.OrdinalIgnoreCase);
+
+        Assert.Equal(propsBefore.Count, source.Props.Count);
+        for (var i = 0; i < propsBefore.Count; i++)
+        {
+            Assert.Equal(propsBefore[i].Id, source.Props[i].Id);
+            Assert.Equal(propsBefore[i].Variant, source.Props[i].Variant);
+            Assert.True(propsBefore[i].At.SequenceEqual(source.Props[i].At));
+        }
+        Assert.Equal(tilesBefore.Count, source.Tiles.Count);
+        foreach (var (tile, info) in tilesBefore)
+            Assert.Equal(info, source.Get(tile));
+    }
+
+    [Fact]
+    public void Dressing_leaves_the_terrain_alone()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        var tilesBefore = source.Tiles.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        Assert.Equal(tilesBefore.Count, source.Tiles.Count);
+        foreach (var (tile, info) in tilesBefore)
+            Assert.Equal(info, source.Get(tile));
     }
 }

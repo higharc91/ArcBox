@@ -15,12 +15,35 @@ namespace Tactics.Presentation.Board;
 /// <param name="Lip">What hangs over the top of its sides, or null.</param>
 /// <param name="Void">Nothing to stand on: drawn sunk, with chasm walls around it.</param>
 /// <param name="Water">Water, which lies a little below its banks when deep.</param>
+/// <param name="OpenSpan">Native structure art supplies this surface and its sides; do not fill its arches with terrain columns.</param>
 /// <param name="Deck">Planks: a thin deck, not a solid column, where they span a void.</param>
 public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRef Chasm, ArtRef? Lip = null,
-    bool Void = false, bool Water = false, bool Deck = false)
+    bool Void = false, bool Water = false, bool Deck = false, bool OpenSpan = false)
 {
     private static readonly ArtRef EarthChasm = new("chasm_side", "brown");
     private static readonly ArtRef CaveChasm = new("chasm_side", "cool");
+
+    private static readonly ImmutableDictionary<string, string> FordMaterials = new Dictionary<string, string>(StringComparer.Ordinal)
+    {
+        ["ash/grey"] = "ash_ford/charred",
+        ["dirt/brown"] = "dirt_ford/dry",
+        ["dirt/dark"] = "dirt_ford/wet",
+        ["grass/autumn"] = "grass_ford/autumn",
+        ["grass/dry"] = "grass_ford/dry",
+        ["grass/frost"] = "grass_ford/dry",
+        ["path/packed"] = "path_ford/packed",
+        ["planks/oak"] = "planks_ford/oak",
+        ["planks/dark"] = "planks_ford/dark",
+        ["cave_floor/cool"] = "rock_ford/bank",
+        ["mine_gravel/brown"] = "rock_ford/bank",
+        ["rock/grey"] = "rock_ford/bank",
+        ["rock/dark"] = "rock_ford/bank",
+        ["water/clear"] = "ford_water/clear",
+    }.ToImmutableDictionary(StringComparer.Ordinal);
+
+    /// <summary>The local surface art for a region, without changing its material or any game rules.</summary>
+    public static string ArtMaterial(string regionId, string material)
+        => regionId == "ashen_ford" ? FordMaterials.GetValueOrDefault(material, material) : material;
 
     /// <summary>The look of <paramref name="material"/>; an unknown family draws its top (if the pack has it) on grey rock.</summary>
     public static MaterialLook Of(string material)
@@ -30,17 +53,37 @@ public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRe
         var top = new ArtRef(family, variant);
         MaterialLook With(ArtRef side, ArtRef chasm) => new(variant, top, side, chasm);
         var cliff = new ArtRef("cliff_side", variant);
-        var ashlar = new ArtRef("ashlar_side", "grey");
+        var ashlar = new ArtRef("ashlar_side", variant == "warm" ? "warm" : "grey");
         var dungeon = new ArtRef("dungeon_wall", variant);
         var cave = new ArtRef("cave_wall", "cool");
         return family switch
         {
-            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", variant) },
+            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with
+                { Lip = variant == "frost" ? new ArtRef("snow_lip", "fresh") : new ArtRef("grass_lip", variant) },
             "dirt" => With(new ArtRef("dirt_side", variant), EarthChasm),
+            "path" => With(new ArtRef("dirt_side", "brown"), EarthChasm),
+            "ash" or "mud" or "bog" => With(new ArtRef("dirt_side", "dark"), EarthChasm),
+            "forest_floor" or "forest_needles" => With(new ArtRef("dirt_side", "brown"), EarthChasm)
+                with { Lip = variant == "snowy" ? new ArtRef("snow_lip", "fresh") : new ArtRef("moss_lip", "green") },
+            "sand" or "dunes" => With(new ArtRef("sandstone_side", "desert"), EarthChasm),
+            "sandstone" => With(new ArtRef("sandstone_side", variant), EarthChasm),
+            "snow" => With(new ArtRef("ice_side", "glacier"), EarthChasm) with { Lip = new ArtRef("snow_lip", "fresh") },
+            "ice" => With(new ArtRef("ice_side", "clear"), EarthChasm),
+            "warden_deck" => With(new ArtRef("plank_side", "oak"), EarthChasm) with { Deck = true, OpenSpan = true },
+            "warden_edge" or "road_ramp" or "warden_approach" or "warden_ramp" => With(ashlar, EarthChasm) with { OpenSpan = true },
+            "planks" => With(new ArtRef("plank_side", variant == "dark" ? "dark" : "oak"), EarthChasm) with { Deck = true },
+            "pavers" => With(ashlar, EarthChasm),
+            "grass_ford" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", "autumn") },
+            "dirt_ford" => With(new ArtRef("dirt_side", "brown"), EarthChasm),
+            "ash_ford" => With(new ArtRef("dirt_side", "dark"), EarthChasm),
+            "path_ford" => With(new ArtRef("dirt_side", "brown"), EarthChasm),
+            "planks_ford" => With(new ArtRef("plank_side", "oak"), EarthChasm),
             "rock" => With(cliff, EarthChasm),
+            "rock_ford" => With(new ArtRef("cliff_ford", "grey"), new ArtRef("cliff_ford", "grey")),
             "lava" => With(new ArtRef("lava_side", variant), EarthChasm),
             "basalt" => With(new ArtRef("basalt_side", variant), EarthChasm),
             "water" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Water = true },
+            "ford_water" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Water = true },
             "flagstone" => With(ashlar, EarthChasm) with { Lip = variant == "mossy" ? new ArtRef("moss_lip", "green") : null },
             "cobble" => With(ashlar, EarthChasm),
             "dungeon_floor" or "dungeon_floor_mossy" or "dungeon_floor_cracked" => With(dungeon, EarthChasm),
@@ -63,6 +106,9 @@ public static class ZoneArt
     private static readonly ImmutableDictionary<string, string> Hazards = new Dictionary<string, string>
     {
         ["fire"] = "burning",
+        ["burning"] = "burning",
+        ["ice_sheet"] = "ice",
+        ["oil"] = "oil",
         ["ember_rune"] = "burning",
         ["poison"] = "poison",
         ["ice"] = "ice",

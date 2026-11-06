@@ -1,0 +1,361 @@
+{
+  "id": "mob_rooting_boars",
+  "size": [
+    14,
+    12
+  ],
+  "tiles": "AwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAwQAAxQAAxQA",
+  "materials": [
+    "ash/grey",
+    "cave_floor/cool",
+    "cobble/grey",
+    "cobble/warm",
+    "dirt/brown",
+    "dirt/dark",
+    "dirt_ford/wet",
+    "flagstone/grey",
+    "ford_water/clear",
+    "forest_needles/pine",
+    "grass/autumn",
+    "grass/dry",
+    "grass/frost",
+    "grass_ford/autumn",
+    "mine_gravel/brown",
+    "path/packed",
+    "planks/dark",
+    "planks/oak",
+    "rock_ford/bank",
+    "water/clear",
+    "grass_ford/pasture"
+  ],
+  "props": [
+    {
+      "id": "crop_wheat_stubble",
+      "at": [
+        1,
+        9
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "gold"
+    },
+    {
+      "id": "crop_wheat_stubble",
+      "at": [
+        9,
+        3
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "gold"
+    },
+    {
+      "id": "fence",
+      "at": [
+        0,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        1,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        2,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        3,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        6,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        7,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        8,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        9,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        10,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        0
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        1
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        2
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        3
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        4
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        5
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        7
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        8
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        9
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        10
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence",
+      "at": [
+        11,
+        11
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "oak_reversed"
+    },
+    {
+      "id": "fence_join",
+      "at": [
+        11,
+        6
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "tee_sw"
+    },
+    {
+      "id": "field_crow",
+      "at": [
+        7,
+        1
+      ],
+      "blocks": false,
+      "cover": "none",
+      "variant": "charcoal"
+    },
+    {
+      "id": "training_dummy",
+      "at": [
+        5,
+        1
+      ],
+      "blocks": true,
+      "cover": "half",
+      "variant": "straw"
+    }
+  ],
+  "zones": {
+    "party_spawn": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "enemy_spawn": [
+      [
+        7,
+        5
+      ],
+      [
+        7,
+        4
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        8,
+        5
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        9,
+        5
+      ],
+      [
+        7,
+        7
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        6,
+        3
+      ]
+    ]
+  }
+}

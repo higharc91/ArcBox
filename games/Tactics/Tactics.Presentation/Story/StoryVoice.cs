@@ -1,0 +1,48 @@
+using Tactics.Game;
+using Tactics.Logic;
+using Tactics.Presentation.Audio;
+
+namespace Tactics.Presentation.Story;
+
+/// <summary>What the TV does with a scene's line that has no recording.</summary>
+public enum SpeechFallback
+{
+    /// <summary>It shows the caption and says nothing.</summary>
+    Captions,
+
+    /// <summary>The voice chain reads the line out (a TTS key's work).</summary>
+    Speech,
+}
+
+/// <summary>A line for the voice: say it now, at Question priority, so it cuts whatever was speaking.</summary>
+/// <param name="Line">The line's id.</param>
+/// <param name="Text">What's said: the voice chain's text when there's no clip.</param>
+/// <param name="Clip">The recording, relative to the pack's root; null to have the voice chain read <paramref name="Text"/>.</param>
+/// <param name="Theme">The voice theme for the voice chain.</param>
+public sealed record StorySay(string Line, string Text, string? Clip, string Theme);
+
+/// <summary>Which voice a scene's line gets (overworld 5d §10): its own clip, or for a line with none, <see cref="Fallback"/>.</summary>
+public static class StoryVoice
+{
+    /// <summary>
+    /// Missing recordings remain captions only; Tactics never synthesizes a replacement voice.
+    /// Captions remain visible, and callers can still opt into captions-only playback.
+    /// </summary>
+    public const SpeechFallback Fallback = SpeechFallback.Captions;
+
+    /// <summary>The voice theme the voice chain reads a line with no clip in.</summary>
+    public const string Theme = "tactics.story";
+
+    /// <summary>
+    /// Whether a <see cref="StoryTick.Cut"/> should stop the voice: only while it's still saying the story's own line,
+    /// <paramref name="story"/> (<see cref="StoryTrack.Speaking"/>). A clip that has ended, or commentary that came after it, isn't the
+    /// story's to stop.
+    /// </summary>
+    public static bool Owns(bool speaking, string? playing, string? story) => speaking && story is not null && playing?.Trim() == story.Trim();
+
+    /// <summary>What to say for <paramref name="line"/>: its clip, or by <paramref name="fallback"/>, the voice chain's reading, or nothing.</summary>
+    public static StorySay? For(StoryLineView line, VoiceClips? clips, SpeechFallback fallback = Fallback)
+        => clips?.ForLine(line.Id) is { } clip
+            ? new StorySay(line.Id, line.Text, clip.Path, Theme)
+            : fallback == SpeechFallback.Speech ? new StorySay(line.Id, line.Text, null, TacticsVoices.ForSpeaker(line.Speaker)) : null;
+}

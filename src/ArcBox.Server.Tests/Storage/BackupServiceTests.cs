@@ -1,3 +1,4 @@
+using System.Threading.Channels;
 using ArcBox.Server.Storage;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -86,21 +87,28 @@ public sealed class BackupServiceTests : IDisposable
     {
         var options = StorageTestSupport.FileOptions(_dir.FullName);
         using var db = StorageTestSupport.NewDb(options);
-        var time = new FakeTimeProvider(new DateTimeOffset(2026, 1, 20, 3, 0, 0, TimeSpan.Zero));
-        var service = NewService(db, options, time);
+        var time = new TimerWatch(new FakeTimeProvider(new DateTimeOffset(2026, 1, 20, 3, 0, 0, TimeSpan.Zero)));
+        var service = new BackupService(db, Options.Create(options), time, NullLogger<BackupService>.Instance);
         var ct = TestContext.Current.CancellationToken;
         var backups = Path.Combine(_dir.FullName, "backups");
         await service.StartAsync(ct);
         try
         {
-            await Task.Delay(100, ct);
+            // Each wait is for the service's own timer, so the clock never moves before the service is waiting on it.
+            Assert.Equal(TimeSpan.FromHours(1), await time.NextTimer(ct));
             Assert.False(Directory.Exists(backups)); // not yet 04:00
 
-            time.Advance(TimeSpan.FromHours(1));
-            await WaitFor(() => File.Exists(Path.Combine(backups, "arcbox-2026-01-20.db")), ct);
+            time.Fake.Advance(TimeSpan.FromHours(1));
+            Assert.Equal(TimeSpan.FromHours(24), await time.NextTimer(ct));
+            Assert.True(File.Exists(Path.Combine(backups, "arcbox-2026-01-20.db")));
+            Assert.False(File.Exists(Path.Combine(backups, "arcbox-2026-01-21.db")));
 
-            time.Advance(TimeSpan.FromHours(24));
-            await WaitFor(() => File.Exists(Path.Combine(backups, "arcbox-2026-01-21.db")), ct);
+            time.Fake.Advance(TimeSpan.FromHours(23));
+            Assert.False(File.Exists(Path.Combine(backups, "arcbox-2026-01-21.db"))); // 03:00 the next day
+
+            time.Fake.Advance(TimeSpan.FromHours(1));
+            Assert.Equal(TimeSpan.FromHours(24), await time.NextTimer(ct));
+            Assert.True(File.Exists(Path.Combine(backups, "arcbox-2026-01-21.db")));
         }
         finally
         {
@@ -108,10 +116,37 @@ public sealed class BackupServiceTests : IDisposable
         }
     }
 
-    private static async Task WaitFor(Func<bool> condition, CancellationToken ct)
+    /// <summary>
+    /// A fake clock that says when a timer is made, and for how long: the service makes one each time it starts to wait, after the backup
+    /// before it is written, so a test can wait for that rather than for the wall clock.
+    /// </summary>
+    private sealed class TimerWatch(FakeTimeProvider fake) : TimeProvider
     {
-        var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(10);
-        while (!condition() && DateTime.UtcNow < deadline) await Task.Delay(20, ct);
-        Assert.True(condition());
+        private readonly Channel<TimeSpan> _made = Channel.CreateUnbounded<TimeSpan>();
+
+        public FakeTimeProvider Fake => fake;
+
+        public override DateTimeOffset GetUtcNow() => fake.GetUtcNow();
+
+        public override long GetTimestamp() => fake.GetTimestamp();
+
+        public override long TimestampFrequency => fake.TimestampFrequency;
+
+        public override TimeZoneInfo LocalTimeZone => fake.LocalTimeZone;
+
+        public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
+        {
+            var timer = fake.CreateTimer(callback, state, dueTime, period);
+            _made.Writer.TryWrite(dueTime);
+            return timer;
+        }
+
+        /// <summary>The due time of the next timer made. Only a hang is timed out, never an answer.</summary>
+        public async Task<TimeSpan> NextTimer(CancellationToken ct)
+        {
+            using var hang = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            hang.CancelAfter(TimeSpan.FromMinutes(1));
+            return await _made.Reader.ReadAsync(hang.Token);
+        }
     }
 }

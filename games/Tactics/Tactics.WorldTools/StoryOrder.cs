@@ -41,7 +41,13 @@ public static class StoryOrder
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        var walk = new RegionWalk(region, rules.Maps);
+        // Replay cannot assume the party finds a hidden shortcut or door. Those stay shut; the ordinary passages
+        // are handled by the loader's sure-reachability check before export.
+        var solid = rules.Interactables.GetValueOrDefault(region.Def.Id, [])
+            .Where(d => Interactables.Solid(d) || d.Hidden is not null &&
+                Interactables.KindOf(d).Family is InteractableFamily.Passage or InteractableFamily.Path)
+            .Select(d => d.At).ToList();
+        var walk = new RegionWalk(WorldGround.Of(region, rules.Maps, rules.Art ?? ArtManifest.None).With(solid));
         var trapped = walk.Trapped(region.Def.Spawns.Start);
         if (trapped.Count > 0)
             problems.Add($"{TileSpread.Say(trapped, "can be walked into but has no way back", "can be walked into but have no way back")}. Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or raise {TileSpread.It(trapped)}.");
@@ -55,7 +61,8 @@ public static class StoryOrder
         {
             var beats = arc.GetProperty("beats").EnumerateArray().Select(ReadBeat).ToImmutableArray();
             var scenes = ReadScenes(contentBase, arc.GetProperty("chapter").GetInt32());
-            var start = new Progress("", region.Def.Spawns.Start, null, [], [], [], []);
+            var prerequisite = arc.TryGetProperty("sideAdventure", out var side) && side.GetBoolean() && !beats.IsEmpty ? beats[0].Requires.ToImmutableHashSet(StringComparer.Ordinal) : ImmutableHashSet<string>.Empty;
+            var start = new Progress("", region.Def.Spawns.Start, null, prerequisite, [], [], []);
             foreach (var finished in new Replay(region, rules, walk, beats, scenes, problems).Run(start))
             {
                 legs.AddRange(finished.Legs);

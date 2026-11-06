@@ -1,0 +1,163 @@
+{
+  "model_id": "model_google-gemini-3-8-flash-tts",
+  "name": "Gemini 3.8 Flash TTS",
+  "capabilities": [
+    "txt2audio"
+  ],
+  "parameters": [
+    {
+      "name": "text",
+      "type": "string",
+      "description": "Text to convert to speech. Add inline vocal tags in angle brackets, e.g. <laugh>, <sigh>, <short pause>. In multi-speaker mode, write each turn as a '<speaker>: <text>' line.",
+      "required": true,
+      "min_length": 1,
+      "max_length": 5000,
+      "cost_impact": true,
+      "prompt_spark": true,
+      "prompt": true
+    },
+    {
+      "name": "voice",
+      "type": "string",
+      "description": "Voice preset to use for speech synthesis. Ignore if you are using multi-speaker config.",
+      "default": "Puck",
+      "allowed_values": [
+        "Achernar",
+        "Achird",
+        "Algenib",
+        "Algieba",
+        "Alnilam",
+        "Aoede",
+        "Autonoe",
+        "Callirrhoe",
+        "Charon",
+        "Despina",
+        "Enceladus",
+        "Erinome",
+        "Fenrir",
+        "Gacrux",
+        "Iapetus",
+        "Kore",
+        "Laomedeia",
+        "Leda",
+        "Orus",
+        "Pulcherrima",
+        "Puck",
+        "Rasalgethi",
+        "Sadachbia",
+        "Sadaltager",
+        "Schedar",
+        "Sulafat",
+        "Umbriel",
+        "Vindemiatrix",
+        "Zephyr",
+        "Zubenelgenubi"
+      ],
+      "required": false
+    },
+    {
+      "name": "multiSpeakerConfig",
+      "type": "inputs_array",
+      "description": "Map speaker names to voices. Up to 2 speakers. Leave empty to use the single Voice option above. Each row must set a non-empty Speaker name, and the text must start with a '<speaker>: ' line using one of these names; lines without a speaker prefix continue the previous turn.",
+      "max_length": 2,
+      "fields": [
+        {
+          "name": "speaker",
+          "type": "string",
+          "description": "Label as it appears in the text before a colon",
+          "min_length": 1,
+          "max_length": 64,
+          "required": false
+        },
+        {
+          "name": "speakerVoice",
+          "type": "string",
+          "description": "Voice preset for this speaker",
+          "default": "Puck",
+          "allowed_values": [
+            "Achernar",
+            "Achird",
+            "Algenib",
+            "Algieba",
+            "Alnilam",
+            "Aoede",
+            "Autonoe",
+            "Callirrhoe",
+            "Charon",
+            "Despina",
+            "Enceladus",
+            "Erinome",
+            "Fenrir",
+            "Gacrux",
+            "Iapetus",
+            "Kore",
+            "Laomedeia",
+            "Leda",
+            "Orus",
+            "Pulcherrima",
+            "Puck",
+            "Rasalgethi",
+            "Sadachbia",
+            "Sadaltager",
+            "Schedar",
+            "Sulafat",
+            "Umbriel",
+            "Vindemiatrix",
+            "Zephyr",
+            "Zubenelgenubi"
+          ],
+          "required": false
+        }
+      ],
+      "required": false,
+      "array": true,
+      "array_note": "Pass an array, even for a single value \u2014 a bare value is ignored."
+    },
+    {
+      "name": "language",
+      "type": "string",
+      "description": "Language for speech synthesis (auto-detected if not specified)",
+      "default": "en-US",
+      "allowed_values": [
+        "ar-EG",
+        "bn-BD",
+        "de-DE",
+        "en-IN",
+        "en-US",
+        "es-US",
+        "fr-FR",
+        "hi-IN",
+        "id-ID",
+        "it-IT",
+        "ja-JP",
+        "ko-KR",
+        "mr-IN",
+        "nl-NL",
+        "pl-PL",
+        "pt-BR",
+        "ro-RO",
+        "ru-RU",
+        "ta-IN",
+        "te-IN",
+        "th-TH",
+        "tr-TR",
+        "uk-UA",
+        "vi-VN"
+      ],
+      "required": false
+    }
+  ],
+  "prompting": {
+    "prompt_spark_fields": [
+      "text"
+    ],
+    "next_step": {
+      "tool": "prompt_spark",
+      "optional": true,
+      "instructions": "Optional: prompt_spark rewrites a short or underspecified prompt into an on-model one \u2014 pass your draft or the user intent as prompt (model_id is required), then use its recommended_call.parameters as the model_run parameters, as-is or edited. Skip it when the user wants their exact prompt used verbatim.",
+      "suggested_arguments": {
+        "model_id": "model_google-gemini-3-8-flash-tts"
+      }
+    }
+  }
+}

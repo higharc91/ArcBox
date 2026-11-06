@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "preservedNativeFrames": 119,
+  "correctedNorthWestSlots": 18,
+  "correctedSouthWalkSlots": 6,
+  "curatedHeldTalkSlots": 1,
+  "priorAtlasSha256": "e7605c553a1e6561a119d2beb062bb04787e40b14a615ac095f15868bb151017",
+  "currentAtlasSha256": "c532af63e88448bba8b0433b515ab0a95036b4915cb48a196c580fb1ebc6ff3b"
+}

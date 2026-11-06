@@ -1,7 +1,15 @@
 {
-  "about": "Generated sfx: id -> Ogg Vorbis files in this folder (pick one at random when there are several). See tools/tactics-audio/audio.py.",
+  "about": "Generated sfx: id -> audio files in this folder (gameplay effects are Ogg Vorbis; nearby world-animal calls may be WAV). Pick one at random when there are several. See tools/tactics-audio/audio.py.",
   "model": "model_mirelo-sfx-2-0-text-to-audio",
   "sounds": {
+    "altar_use": {
+      "files": [
+        "altar_use.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Altar used"
+    },
     "amb_campfire": {
       "files": [
         "amb_campfire.ogg"
@@ -9,6 +17,14 @@
       "loop": true,
       "group": "ambience",
       "use": "Camp screen and night camps"
+    },
+    "amb_cinder_hollow": {
+      "files": [
+        "amb_cinder_hollow.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Cinder Hollow region ambience"
     },
     "amb_dungeon": {
       "files": [
@@ -74,6 +90,46 @@
       "group": "ambience",
       "use": "Town and market maps"
     },
+    "animal_crow_caw": {
+      "files": [
+        "animal_crow_caw.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby rook calls over farm fields; positional world ambience"
+    },
+    "animal_duck_quack": {
+      "files": [
+        "animal_duck_quack.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby mallard call at the river; positional world ambience"
+    },
+    "animal_fox_yip": {
+      "files": [
+        "animal_fox_yip.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Rare distant red fox call at the woodland edge; positional world ambience"
+    },
+    "animal_goat_bleat": {
+      "files": [
+        "animal_goat_bleat.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby goat call in Ashen Ford; positional world ambience"
+    },
+    "animal_mule_call": {
+      "files": [
+        "animal_mule_call.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby pack mule call in Ashen Ford; positional world ambience"
+    },
     "arrow_armor": {
       "files": [
         "arrow_armor.1.ogg",
@@ -91,6 +147,62 @@
       "loop": false,
       "group": "weapon",
       "use": "Arrow, bolt, dart or javelin hits an unarmoured target"
+    },
+    "ashmaw_breath_loop": {
+      "files": [
+        "ashmaw_breath_loop.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Quiet idle breath in Ashmaw lair",
+      "voice": "bear"
+    },
+    "ashmaw_death": {
+      "files": [
+        "ashmaw_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_hurt": {
+      "files": [
+        "ashmaw_hurt.1.ogg",
+        "ashmaw_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_maul": {
+      "files": [
+        "ashmaw_maul.1.ogg",
+        "ashmaw_maul.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Maul for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_roar": {
+      "files": [
+        "ashmaw_roar.1.ogg",
+        "ashmaw_roar.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Cinder Roar for Ashmaw",
+      "voice": "bear"
+    },
+    "ashmaw_shake": {
+      "files": [
+        "ashmaw_shake.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Ash Shake for Ashmaw"
     },
     "attack_crit": {
       "files": [
@@ -111,6 +223,15 @@
       "group": "battle",
       "use": "AttackResolved with Hit=false"
     },
+    "barrel_open": {
+      "files": [
+        "barrel_open.1.ogg",
+        "barrel_open.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Barrel opened"
+    },
     "bat_attack": {
       "files": [
         "bat_attack.ogg"
@@ -118,7 +239,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for giant_bat",
-      "voice": "bat"
+      "voice": "bat",
+      "families": [
+        "giant_bat"
+      ]
     },
     "bat_death": {
       "files": [
@@ -154,7 +278,12 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for bear, elder_bear, boar",
-      "voice": "bear"
+      "voice": "bear",
+      "families": [
+        "bear",
+        "elder_bear",
+        "boar"
+      ]
     },
     "bear_death": {
       "files": [
@@ -223,6 +352,14 @@
       "group": "weapon",
       "use": "Bludgeoning weapon hits an unarmoured target"
     },
+    "bounty_accept": {
+      "files": [
+        "bounty_accept.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Dagna bounty accepted"
+    },
     "bow_release": {
       "files": [
         "bow_release.1.ogg",
@@ -241,6 +378,31 @@
       "loop": false,
       "group": "battle",
       "use": "ConditionApplied for a beneficial condition (blessed, hasted, raging)"
+    },
+    "cache_open": {
+      "files": [
+        "cache_open.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Hidden cache opened"
+    },
+    "cave_enter": {
+      "files": [
+        "cave_enter.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Voted cave entrance travel"
+    },
+    "chest_open": {
+      "files": [
+        "chest_open.1.ogg",
+        "chest_open.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Chest opened"
     },
     "collided": {
       "files": [
@@ -266,6 +428,15 @@
       "loop": false,
       "group": "battle",
       "use": "Countered (counterspell)"
+    },
+    "crate_open": {
+      "files": [
+        "crate_open.1.ogg",
+        "crate_open.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Crate opened"
     },
     "crossbow_release": {
       "files": [
@@ -419,6 +590,24 @@
       "group": "impact",
       "use": "Damaged with Type=thunder"
     },
+    "door_close": {
+      "files": [
+        "door_close.1.ogg",
+        "door_close.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Interactable door closed"
+    },
+    "door_open": {
+      "files": [
+        "door_open.1.ogg",
+        "door_open.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Interactable door opened"
+    },
     "downed": {
       "files": [
         "downed.1.ogg",
@@ -435,7 +624,11 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for drake, dragon",
-      "voice": "dragon"
+      "voice": "dragon",
+      "families": [
+        "drake",
+        "dragon"
+      ]
     },
     "dragon_death": {
       "files": [
@@ -456,6 +649,22 @@
       "use": "Damaged for drake, dragon",
       "voice": "dragon"
     },
+    "drawbridge_lower": {
+      "files": [
+        "drawbridge_lower.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Drawbridge lowered"
+    },
+    "drawbridge_raise": {
+      "files": [
+        "drawbridge_raise.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Drawbridge raised"
+    },
     "dust_burst": {
       "files": [
         "dust_burst.ogg"
@@ -471,7 +680,14 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
-      "voice": "elemental"
+      "voice": "elemental",
+      "families": [
+        "fire_elemental",
+        "water_elemental",
+        "earth_elemental",
+        "air_elemental",
+        "golem"
+      ]
     },
     "elemental_death": {
       "files": [
@@ -518,6 +734,22 @@
       "group": "footstep",
       "use": "Moved for flying units (bat, drake, dragon, imp)"
     },
+    "gate_close": {
+      "files": [
+        "gate_close.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Gate closed"
+    },
+    "gate_open": {
+      "files": [
+        "gate_open.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Gate opened"
+    },
     "goblin_attack": {
       "files": [
         "goblin_attack.ogg"
@@ -525,7 +757,16 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
-      "voice": "goblin"
+      "voice": "goblin",
+      "families": [
+        "goblin",
+        "goblin_archer",
+        "goblin_boss",
+        "goblin_shaman",
+        "hobgoblin",
+        "kobold",
+        "kobold_slinger"
+      ]
     },
     "goblin_death": {
       "files": [
@@ -564,6 +805,50 @@
       "group": "spell",
       "use": "fx.hit.magic, fx.hit.spark"
     },
+    "item_pickup": {
+      "files": [
+        "item_pickup.1.ogg",
+        "item_pickup.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Item picked up"
+    },
+    "kobold_pick": {
+      "files": [
+        "kobold_pick.1.ogg",
+        "kobold_pick.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Kobold mining interaction in the Diggings"
+    },
+    "lever_pull": {
+      "files": [
+        "lever_pull.1.ogg",
+        "lever_pull.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Lever pulled"
+    },
+    "lock_fail": {
+      "files": [
+        "lock_fail.1.ogg",
+        "lock_fail.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Lockpick failed"
+    },
+    "lock_open": {
+      "files": [
+        "lock_open.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Lock opened"
+    },
     "mimic_attack": {
       "files": [
         "mimic_attack.ogg"
@@ -571,7 +856,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for mimic",
-      "voice": "mimic"
+      "voice": "mimic",
+      "families": [
+        "mimic"
+      ]
     },
     "mimic_death": {
       "files": [
@@ -599,7 +887,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for orc_brute",
-      "voice": "orc"
+      "voice": "orc",
+      "families": [
+        "orc_brute"
+      ]
     },
     "orc_death": {
       "files": [
@@ -619,6 +910,15 @@
       "group": "creature",
       "use": "Damaged for orc_brute",
       "voice": "orc"
+    },
+    "page_turn": {
+      "files": [
+        "page_turn.1.ogg",
+        "page_turn.2.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Book or note read"
     },
     "pierce_armor": {
       "files": [
@@ -663,6 +963,46 @@
       "group": "battle",
       "use": "RoundStarted"
     },
+    "sack_open": {
+      "files": [
+        "sack_open.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Sack opened"
+    },
+    "secret_door_close": {
+      "files": [
+        "secret_door_close.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Secret door closed"
+    },
+    "secret_door_open": {
+      "files": [
+        "secret_door_open.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Secret door opened"
+    },
+    "secret_found": {
+      "files": [
+        "secret_found.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Something hidden found"
+    },
+    "shrine_use": {
+      "files": [
+        "shrine_use.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Shrine used"
+    },
     "slime_attack": {
       "files": [
         "slime_attack.ogg"
@@ -670,7 +1010,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for slime",
-      "voice": "slime"
+      "voice": "slime",
+      "families": [
+        "slime"
+      ]
     },
     "slime_death": {
       "files": [
@@ -883,7 +1226,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for giant_spider",
-      "voice": "spider"
+      "voice": "spider",
+      "families": [
+        "giant_spider"
+      ]
     },
     "spider_death": {
       "files": [
@@ -1094,6 +1440,38 @@
       "group": "weapon",
       "use": "Thrust for spear, pike, lance, trident"
     },
+    "trap_disarm": {
+      "files": [
+        "trap_disarm.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Trap disarmed"
+    },
+    "trap_spotted": {
+      "files": [
+        "trap_spotted.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Trap spotted"
+    },
+    "trap_spring": {
+      "files": [
+        "trap_spring.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Trap sprung"
+    },
+    "trinket_presented": {
+      "files": [
+        "trinket_presented.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Each class trinket presented at turn-in"
+    },
     "troll_attack": {
       "files": [
         "troll_attack.ogg"
@@ -1101,7 +1479,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for troll",
-      "voice": "troll"
+      "voice": "troll",
+      "families": [
+        "troll"
+      ]
     },
     "troll_death": {
       "files": [
@@ -1248,7 +1629,14 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for skeleton, skeleton_archer, zombie, necromancer, lich",
-      "voice": "undead"
+      "voice": "undead",
+      "families": [
+        "skeleton",
+        "skeleton_archer",
+        "zombie",
+        "necromancer",
+        "lich"
+      ]
     },
     "undead_death": {
       "files": [
@@ -1269,6 +1657,14 @@
       "use": "Damaged for skeleton, skeleton_archer, zombie, necromancer, lich",
       "voice": "undead"
     },
+    "well_draw": {
+      "files": [
+        "well_draw.ogg"
+      ],
+      "loop": false,
+      "group": "world",
+      "use": "Well drawn from"
+    },
     "whip_crack": {
       "files": [
         "whip_crack.1.ogg",
@@ -1285,7 +1681,12 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for wolf, dire_wolf, hound",
-      "voice": "wolf"
+      "voice": "wolf",
+      "families": [
+        "wolf",
+        "dire_wolf",
+        "hound"
+      ]
     },
     "wolf_death": {
       "files": [
@@ -1313,7 +1714,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for wraith",
-      "voice": "wraith"
+      "voice": "wraith",
+      "families": [
+        "wraith"
+      ]
     },
     "wraith_death": {
       "files": [

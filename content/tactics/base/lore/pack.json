@@ -38,10 +38,26 @@
     "barks/halvard.json",
     "barks/hooded_stranger.json",
     "barks/narrator.json",
+    "scenes/camp.json",
     "scenes/ch1.json",
     "scenes/ch2.json",
     "scenes/ch3.json",
     "scenes/ch4.json",
-    "scenes/ch5.json"
+    "scenes/ch5.json",
+    "barks/townsfolk.json",
+    "conversations/halden_varrow.json",
+    "conversations/bree_tallow.json",
+    "conversations/mother_aubrine.json",
+    "conversations/tobin_fell.json",
+    "conversations/pip_ashdown.json",
+    "conversations/corvin_ashby.json",
+    "conversations/celandine_marrowby.json",
+    "conversations/rook.json",
+    "quests.json",
+    "scenes/side_quests.json",
+    "scenes/ashmaw.json",
+    "conversations/dagna_holt.json",
+    "barks/grisk.json",
+    "conversations/old_maud.json"
   ]
 }

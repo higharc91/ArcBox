@@ -234,7 +234,11 @@ public sealed record ConditionDef(ConditionId Id, string Name,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PassiveDef> Passives,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Implies = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] DamageTakenDef? DamageTaken = null);
+
+/// <summary>A condition's flat bonus to a matching positive damage packet, before defenses, optionally consumed by it.</summary>
+public sealed record DamageTakenDef(string Type, int Bonus, bool Consume = false);
 
 /// <summary>
 /// A lasting area effect on the map (e.g. a wall of fire or a difficult-terrain spell), numbered by
@@ -247,19 +251,23 @@ public sealed record ConditionDef(ConditionId Id, string Name,
 public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray<Tile> Tiles, int? RoundsLeft,
     bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Surface = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Source = null);
 
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by
 /// <see cref="Weight"/>. Its <see cref="Static"/> modifiers hold in later battles until healed in town, and its
 /// <see cref="Effects"/>, if any, run on its owner on <see cref="Hook"/> (Deep cut: bleeding at the start of each battle);
 /// both reach the battle as the passive <see cref="RulesPack.InjuryPassiveId"/>. <see cref="Replaces"/> lets a later pack
-/// override an id.
+/// override an id. <see cref="Battle"/> false keeps it out of the battle table: an out-of-battle trap's minor injury (owner decision
+/// of 2026-11-03, issue #83), which a sprung trap picks by weight among the rest-kind injuries (<see cref="TrapInjuries"/>).
 /// </summary>
 public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HookKind? Hook = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<EffectDef> Effects = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<EffectDef> Effects = default,
+    string Mends = "body", bool Battle = true);
 
 /// <summary>A resource that refills during the battle: <see cref="Amount"/> every <see cref="EveryRounds"/> rounds.</summary>
 public sealed record ResourceRegenDef(string Resource, int Amount, int EveryRounds);
@@ -370,7 +378,8 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
 /// </summary>
 public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
 
 /// <summary>
 /// A suit of armour (<c>armor.json</c>): its <see cref="Kind"/> caps the DEX bonus (light: none, medium: +2, heavy: DEX
@@ -378,13 +387,17 @@ public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
 /// character's <see cref="CharacterRecord.Shield"/> adds +2. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ArmorDef(string Id, string Name, ArmorKind Kind, int BaseAc,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
 
 /// <summary>
 /// A prop as written in a map file. <see cref="Cover"/> is <c>"none"</c>, <c>"half"</c> or <c>"three_quarters"</c>
 /// (total cover comes only from line of sight, never from content).
 /// </summary>
-public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none");
+public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none",
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default);
 
 /// <summary>
 /// A battle map as written in <c>maps/&lt;id&gt;.json</c> (spec §4.8): <see cref="Size"/> is <c>[w, h]</c> and
@@ -398,7 +411,7 @@ public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, I
 {
     /// <summary>The cover names content may use, by name.</summary>
     public static ImmutableSortedDictionary<string, Cover> CoverNames { get; } =
-        Ordinal.Map(("none", Cover.None), ("half", Cover.Half), ("three_quarters", Cover.ThreeQuarters));
+        Ordinal.Map(("none", Cover.None), ("half", Cover.Half), ("three_quarters", Cover.ThreeQuarters), ("full", Cover.Total));
 
     /// <summary>
     /// The engine's map. Throws <see cref="FormatException"/> or <see cref="ArgumentException"/> on bad tiles, size or
@@ -409,7 +422,8 @@ public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, I
         if (Size.Length != 2)
             throw new ArgumentException($"Map '{Id}' needs a size of [w, h].");
         var props = Props.Select(p => new PropPlacement(p.Id, p.At, p.Blocks,
-                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'.")))
+                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'."), p.Variant,
+                p.Requires.IsDefaultOrEmpty ? default : p.Requires, p.Unless.IsDefaultOrEmpty ? default : p.Unless))
             .ToImmutableArray();
         return BattleMap.FromBytes(Id, Size[0], Size[1], Convert.FromBase64String(Tiles), Materials, props, Zones);
     }
@@ -433,7 +447,10 @@ public sealed record EncounterUnitDef(string Unit,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Tag = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Id = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Id = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, int>? CountByParty = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, int>? HpByParty = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<int, string>? UnitByParty = null)
 {
     /// <summary>The tag objectives and triggers use: <see cref="Tag"/>, or the monster id.</summary>
     [JsonIgnore]
@@ -442,14 +459,18 @@ public sealed record EncounterUnitDef(string Unit,
 
 /// <summary>
 /// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, optional intended party
-/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, objectives (the default lose is
+/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, objectives (the default lose is
 /// <c>party_out</c>) and triggers. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
     ImmutableArray<EncounterUnitDef> Npcs, ImmutableArray<LootTableId> Loot, ObjectivesDef Objectives,
     ImmutableArray<TriggerDef> Triggers, int Xp = 250,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool StoryOnly = false);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value

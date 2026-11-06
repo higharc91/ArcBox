@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.6739e2c7.wav",
+  "sourceSha256": "cbc674ec69ced7306129db9939cce6ff9a1ad6ad604b5728b2367555589a929b",
+  "duration": 9.44,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.96,
+      "text": " Hmm well fought my grandson always said the valley would never share I"
+    },
+    {
+      "start": 7.5600000000000005,
+      "end": 9.56,
+      "text": " Should have listened to him"
+    }
+  ],
+  "text": "Hmm well fought my grandson always said the valley would never share I Should have listened to him",
+  "secondsToTranscribe": 2.049
+}

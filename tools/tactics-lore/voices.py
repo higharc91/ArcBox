@@ -64,12 +64,39 @@ def lines() -> list[tuple[str, str, str]]:
         kind = file.split("/")[0].removesuffix(".json")
         if kind == "voices":
             out += [(f"set:{doc['id']}", b["id"], b["text"]) for bs in doc["events"].values() for b in bs]
+        elif file == "barks/townsfolk.json":
+            out += [(f"char:{data['speaker']}", b["id"], b["text"])
+                    for data in doc["presets"].values() for b in data["lines"]]
         elif kind == "barks":
             out += [(f"char:{doc['speaker']}", b["id"], b["text"]) for bs in doc["events"].values() for b in bs]
+        elif kind == "conversations":
+            out += [(f"char:{ln['speaker']}", ln["id"], ln["text"])
+                    for n in doc["nodes"] for ln in n["lines"]]
         elif kind == "scenes":
             out += [(f"char:{ln['speaker']}", ln["id"], ln["text"])
                     for s in doc["scenes"] for n in s["nodes"] for ln in n["lines"]]
-    return out + say_lines()
+    return out + say_lines() + ashen_ford_thing_lines()
+
+
+def ashen_ford_thing_lines() -> list[tuple[str, str, str]]:
+    """The new Ashen Ford notices and cellar narration use the existing narrator cast.
+
+    A notice has two delivery moments: the passive/Search find and a later Look. They
+    share one TTS render, though their stable line IDs differ.
+    """
+    path = ROOT / "content/tactics/base/rules/interactables/ashen_ford.json"
+    things = {thing["id"]: thing for thing in json.loads(path.read_text(encoding="utf-8"))["interactables"]}
+    out = []
+    for id in ("af_market_cellar_draft", "af_bank_claw_marks", "af_bridge_carving", "af_southfield_goat_tracks"):
+        spoken = " ".join(things[id]["text"])
+        out.extend([("char:narrator", id, spoken), ("char:narrator", id + "_use", spoken)])
+    for index, spoken in enumerate(things["af_market_cellar_ledger"]["text"]):
+        out.append(("char:narrator", f"thing.af_market_cellar_ledger.words.{index}", spoken))
+    out.extend([
+        ("char:narrator", "af_market_cellar_hatch_use", "The cellar hatch opens."),
+        ("char:narrator", "af_market_cellar_store_use", "Inside: Smoke Bomb."),
+    ])
+    return out
 
 
 def say_lines() -> list[tuple[str, str, str]]:
@@ -101,9 +128,27 @@ def say_lines() -> list[tuple[str, str, str]]:
     return out
 
 
+def delivery() -> dict[str, dict]:
+    """Version delivery only for the new directed lines; the existing 1,262 clip hashes stay stable."""
+    out = {}
+    def walk(node):
+        if isinstance(node, dict):
+            if (isinstance(node.get("id"), str) and "text" in node and
+                    node["id"].startswith(("sq_", "town_", "bark_pip_whistle_", "ashmaw_", "bark_grisk_"))):
+                out[node["id"]] = {"direction": node.get("direction", ""), "mood": node.get("mood", "idle")}
+            for value in node.values(): walk(value)
+        elif isinstance(node, list):
+            for value in node: walk(value)
+    for file in json.loads((LORE / "pack.json").read_text())["files"]:
+        if file.startswith(("conversations/", "scenes/", "barks/")):
+            walk(json.loads((LORE / file).read_text()))
+    return out
+
+
 def jobs() -> list[dict]:
     cast = casting()
     out = []
+    directed = delivery()
     for source, line_id, text in lines():
         kind, who = source.split(":", 1)
         if kind == "set":
@@ -115,10 +160,23 @@ def jobs() -> list[dict]:
         for name, v in voices:
             preset, pitch, filt = v["preset"], v.get("pitch", 0), v.get("filter", "")
             # The raw TTS clip depends only on preset and text: speakers sharing a preset can share a render.
-            raw = f"{preset}.{sha8(preset, text)}"
-            file = f"{line_id}.{sha8(preset, pitch, filt, text)}.ogg"
+            style = directed.get(line_id)
+            # A recast's approved delivery belongs to the speaker, including old battle barks
+            # without per-line directions. Include it in both raw and encoded identities.
+            if v.get("direction"):
+                style = {"direction": " ".join(filter(None, [v["direction"], (style or {}).get("direction")])),
+                         "mood": (style or {}).get("mood", "idle")}
+            render_text = f"<{style['direction']} Mood: {style['mood']}.> {text}" if style else text
+            # Preserve an approved take's exact request while its caption and delivery still match.
+            approved = v.get("approvedRenderText", {}).get(line_id)
+            if (approved and approved["text"] == text and approved["preset"] == preset and
+                    approved["direction"] == v.get("direction") and
+                    approved.get("lineDelivery") == directed.get(line_id)):
+                render_text = approved["renderText"]
+            raw = f"{preset}.{sha8(preset, render_text)}"
+            file = f"{line_id}.{sha8(preset, pitch, filt, text, render_text) if style or render_text != text else sha8(preset, pitch, filt, text)}.ogg"
             out.append({"id": f"{line_id}.{name}", "line": line_id, "cast": name, "speaker": who, "preset": preset,
-                        "pitch": pitch, "filter": filt, "text": text, "raw": raw, "file": file,
+                        "pitch": pitch, "filter": filt, "text": text, "renderText": render_text, "delivery": style, "raw": raw, "file": file,
                         "done": (AUDIO / file).exists()})
     return out
 
@@ -189,34 +247,57 @@ def _features(ogg: Path) -> tuple[float, float]:
     return (float(np.median(pitches)) if pitches else math.nan), centroid
 
 
-def check() -> int:
-    """A coarse screen for gross render failures: a clip whose pitch is far (over 10 semitones) from the rest of its
-    speaker's, or that is almost silent. Pitch and brightness can't tell emotion from identity (a shout sits several
-    semitones up), so ordinary expressive range is expected and isn't flagged, and clips under 1.2 s, where pitch
-    tracking is unreliable, are skipped. Voice identity itself comes from the fixed preset each speaker is rendered
-    with; this only catches a wrong preset or a broken render."""
-    by: dict[str, list[tuple[str, float, float]]] = {}
+def check(report_path: Path | None = None) -> int:
+    """Measure pitch AND brightness, including new-versus-existing identity drift; cache unchanged clips."""
+    import statistics
+    cache_path = ROOT / ".cache" / "tactics-voice-features.json"
+    cache_path.parent.mkdir(exist_ok=True)
+    cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+    assets = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text())
+    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("voiceRecasts", []) + assets.get("ashenFordSecrets", [])
+    new_raws = {r["raw"] for r in records}
+    by = {}
     for j in jobs():
-        if j["done"]:
-            p, c = _features(AUDIO / j["file"])
-            dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
-                                        str(AUDIO / j["file"])], capture_output=True, text=True).stdout or 0)
-            by.setdefault(f"{j['speaker']}.{j['cast']}", []).append((j["id"], p, c, dur))
-    flagged = 0
+        if not j["done"]: continue
+        path = AUDIO / j["file"]
+        key = f"{j['file']}:{path.stat().st_size}"
+        if key not in cache:
+            p, c = _features(path)
+            dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)], text=True))
+            cache[key] = [p if math.isfinite(p) else None, c, dur]
+            if len(cache) % 25 == 0: cache_path.write_text(json.dumps(cache))
+        p, c, dur = cache[key]
+        by.setdefault(f"{j['speaker']}.{j['cast']}", []).append(dict(id=j["id"], pitch=p, centroid=c, duration=dur, new=j["raw"] in new_raws))
+    cache_path.write_text(json.dumps(cache))
+    flagged, comparisons = [], []
     for who, rows in sorted(by.items()):
-        ps = sorted(p for _, p, _, _ in rows if not math.isnan(p))
-        if len(ps) < 4:
-            continue
-        med = ps[len(ps) // 2]
-        for id_, p, c, dur in rows:
-            off = abs(12 * math.log2(p / med)) if not math.isnan(p) else 0
-            if dur < 1.2:
-                continue
-            if off > 10 or (math.isnan(p) and dur > 2):
-                flagged += 1
-                print(f"  {id_}: pitch {p:.0f} Hz vs {med:.0f} ({off:.1f} st), {dur:.1f} s")
-        print(f"{who}: {len(rows)} clips, median pitch {med:.0f} Hz")
-    print(f"{flagged} clip(s) flagged")
+        voiced = [r["pitch"] for r in rows if r["pitch"] and r["duration"] >= 1.2]
+        if not voiced: continue
+        med = statistics.median(voiced)
+        for r in rows:
+            if r["duration"] < 1.2: continue
+            off = abs(12*math.log2(r["pitch"]/med)) if r["pitch"] else 0
+            if off > 10 or (not r["pitch"] and r["duration"] > 2):
+                flagged.append(dict(speaker=who, line=r["id"], kind="clip", semitones=round(off,2)))
+        old = [r for r in rows if not r["new"] and r["pitch"] and r["duration"] >= 1.2]
+        new = [r for r in rows if r["new"] and r["pitch"] and r["duration"] >= 1.2]
+        comparison = dict(speaker=who, oldCount=len(old), newCount=len(new), medianPitch=round(med,2))
+        if old and new:
+            op, np = statistics.median(r["pitch"] for r in old), statistics.median(r["pitch"] for r in new)
+            oc, nc = statistics.median(r["centroid"] for r in old), statistics.median(r["centroid"] for r in new)
+            shift, ratio = 12*math.log2(np/op), nc/oc
+            comparison.update(oldPitch=round(op,2),newPitch=round(np,2),pitchShift=round(shift,2),oldCentroid=round(oc,2),newCentroid=round(nc,2),centroidRatio=round(ratio,3))
+            if abs(shift) > 6 or not .6 <= ratio <= 1.65:
+                flagged.append(dict(speaker=who,kind="drift",pitchShift=round(shift,2),centroidRatio=round(ratio,3)))
+        comparisons.append(comparison)
+        print(json.dumps(comparison), flush=True)
+    report = dict(comparisons=comparisons,flagged=flagged,thresholds=dict(clipSemitones=10,speakerSemitones=6,centroidRatio=[.6,1.65]))
+    report_path = report_path or ROOT / ".cache/tactics-voice-check.json"
+
+    report_path.parent.mkdir(parents=True,exist_ok=True)
+    report_path.write_text(json.dumps(report,indent=2)+"\n")
+    print(f"{len(flagged)} clip(s) or speaker group(s) flagged")
+    for row in flagged: print(json.dumps(row))
     return 1 if flagged else 0
 
 
@@ -229,7 +310,7 @@ def main(argv: list[str]) -> int:
             if not j["done"] and j["raw"] not in seen:
                 seen.add(j["raw"])
                 todo.append({"raw": j["raw"], "preset": j["preset"], "text": j["text"], "line": j["line"],
-                             "speaker": j["speaker"], "scene": j["line"].startswith("ch")})
+                             "speaker": j["speaker"], "renderText": j["renderText"], "delivery": j["delivery"], "scene": j["line"].startswith("ch")})
         print(json.dumps(todo, indent=1))
         return 0
     if cmd == "import":
@@ -254,7 +335,7 @@ def main(argv: list[str]) -> int:
         print(f"imported {done}, {missing} still without a render; manifest covers {len(m['lines'])} lines")
         return 0
     if cmd == "check":
-        return check()
+        return check(Path(argv[2]) if len(argv) > 2 else None)
     if cmd == "status":
         js = jobs()
         raws = {j["raw"] for j in js if not j["done"]}

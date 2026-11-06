@@ -26,10 +26,36 @@ public sealed class StagePlanTests(ITestOutputHelper output)
 
     private static string Whole(BoardItem item) => item switch
     {
-        Face f => $"{f.Order} {f.Tile} {Geometry(f)} {string.Join(' ', f.Uvs)} {f.Shade}",
+        Face f => $"{f.Order} {f.Tile} {Geometry(f)} {string.Join(' ', f.Uvs)} {f.Shade} {(f.VertexTints.IsDefaultOrEmpty ? "" : string.Join(' ', f.VertexTints))}",
         Sprite s => $"{s.Order} {s.Tile} {Geometry(s)}",
         _ => throw new InvalidOperationException(),
     };
+
+    [Theory]
+    [InlineData("ashen_ford", "mob_kobold_scouts")]
+    [InlineData("ashen_ford", "mob_river_slimes")]
+    [InlineData("cinder_hollow", "mob_hollow_kobolds")]
+    public void Roaming_arenas_keep_world_terrain_art_and_the_stage_matches_it(string regionId, string arena)
+    {
+        var ground = DemoRegion.FromPack(Pack.Root, regionId);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")], Pack.Manifests);
+        var map = rules.Maps[arena];
+        var region = rules.RegionFor(regionId)!;
+        var stage = BattleStage.Of(region, map)!.Value;
+        var rect = new TileRect(stage.Origin.X, stage.Origin.Y, stage.Width, stage.Depth);
+        Assert.DoesNotContain(ground.Map.StampedTiles, rect.Contains);
+        Assert.Equal(rules.GroundFor(regionId)!.Map.StampedTiles, ground.Map.StampedTiles);
+        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, rect, grid: true, world: true)
+            .Shifted(-BoardFit.StageOffset(stage));
+        var staged = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+        foreach (var face in world.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Top))
+        {
+            var actual = Assert.Single(staged.Items.OfType<Face>(), f => f.Tile == face.Tile && f.Kind == FaceKind.Top);
+            Assert.Equal(Whole(face), Whole(actual));
+        }
+        if (regionId == "ashen_ford")
+            Assert.NotEmpty(ground.Map.StampedTiles); // The story ford retains its deliberately authored battle art.
+    }
 
     private static Tile Local(BattleStage stage, Tile world) => stage.ToBattle(world);
 
@@ -115,7 +141,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // Against the world, everything the stage draws is the world's own item, moved: no seam in texture, shade, light or order.
         var world = new BoardTerrain(ground.Map, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp));
         var drawn = new TileRect(stamp.X, stamp.Y, stamp.W + StagePlan.Reach, stamp.H + StagePlan.Reach);
-        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true).Shifted(-BoardFit.StageOffset(stage)).Items
+        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true, world: true, storyFlags: new HashSet<string>()).Shifted(-BoardFit.StageOffset(stage)).Items
             .Select(i => i is Face f && !stamp.Contains(f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
         Assert.All(stagePlan.Plan.Items, i => Assert.Contains(Whole(i), worldItems));
     }
@@ -192,13 +218,15 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         var fit = BoardFit.For(terrain, Pack.Art);
 
         Assert.NotEmpty(map.Props);
-        foreach (var prop in map.Props)
+        foreach (var prop in map.Props.Where(p => p.Present()))
             foreach (var near in new[] { new Tile(prop.At.X + 1, prop.At.Y), new Tile(prop.At.X - 1, prop.At.Y), new Tile(prop.At.X, prop.At.Y + 1), new Tile(prop.At.X, prop.At.Y - 1) }.Where(map.InBounds))
             {
                 var onBoard = Assert.Single(UnitPlan.Build(Battle(Unit("hero1", near.X, near.Y)), terrain, Units.Value, fit));
                 var onStage = Assert.Single(UnitPlan.Build(Battle(Unit("hero1", near.X, near.Y)), terrain, Units.Value, fit, worldOffset: stage.Origin));
-                var boardProp = Assert.Single(plain.Items, i => i is Sprite && i.Tile == prop.At);
-                var stageProp = Assert.Single(plan.Items, i => i is Sprite && i.Tile == stage.ToWorld(prop.At));
+                // A bridge's deck is in pieces, each on the tile it lies over: the one on its own tile stands for it here.
+                static bool Drawn(BoardItem i) => i is Sprite or Face { Kind: FaceKind.Prop };
+                var boardProp = plain.Items.First(i => Drawn(i) && i.Tile == prop.At);
+                var stageProp = plan.Items.First(i => Drawn(i) && i.Tile == stage.ToWorld(prop.At));
                 Assert.Equal(boardProp.Order < onBoard.Order, stageProp.Order < onStage.Order);
                 Assert.Equal(onBoard.Feet, onStage.Feet);
             }
@@ -249,7 +277,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // The world's blocks round it are what the whole region, changed, would build: the lowered top and the sides now down to it.
         var changed = new BoardTerrain(ground.Map, BoardChangesOnWorld.Of(changes, stage));
         Assert.True(rebuilt.Length >= 2);
-        Assert.All(rebuilt, b => Assert.Equal(BoardPlan.BuildBlock(changed, Pack.Art, b.Tiles, grid: false).Items.Select(Whole), b.Plan.Items.Select(Whole)));
+        Assert.All(rebuilt, b => Assert.Equal(BoardPlan.BuildBlock(changed, Pack.Art, b.Tiles, grid: false, world: true).Items.Select(Whole), b.Plan.Items.Select(Whole)));
         Assert.All(rebuilt, b => Assert.Equal(world.Blocks[b.Index].Tiles, b.Tiles));
         var top = (BoardItem i) => i is Face { Kind: FaceKind.Top } && i.Tile == stage.ToWorld(lowered);
         var stageTop = (Face)Assert.Single(stagePlan.With(changes).Plan.Items, i => top(i));
@@ -373,8 +401,116 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         output.WriteLine($"160x120: whole BoardTerrain {terrainMs:F2} ms; stage rebuild {stageMs:F2} ms against {wholeMs:F2} ms without the window "
             + $"({plan.Plan.Items.Length} items, {plan.Lit.Items.Length} lit, {plan.Lighting.Lights.Length} lights); {blocks} world blocks {blocksMs:F2} ms");
 
-        // Alone it's about 5 ms in Debug against 13 or so; under load both grow. A rebuild that went back to reading the whole region would cost
-        // what the second does, so it has to stay well under it.
-        Assert.True(stageMs < wholeMs * 0.75, $"a stage rebuild took {stageMs:F2} ms, against {wholeMs:F2} ms reading the whole region");
+        // The times are printed, not asserted: on real hardware in Release the whole-region read is cheap enough that the ratio between them
+        // sits near 0.8, and under the solution's parallel load both grow tenfold (local-windows-checks.md, problem 1). What keeps the rebuild
+        // quick is that it reads a window round what's drawn, not the region, and that is asserted on the work itself, the same on any machine.
+        var region = ground.Map.Width * ground.Map.Height;
+        var most = (plan.Drawn.W + 9) * (plan.Drawn.H + 9);     // a tile round, and up to 7 more to align an 8-tile regional texture
+        Assert.True(plan.Read <= most, $"a stage rebuild read {plan.Read} tiles, against at most {most} round what it draws");
+        Assert.True(plan.Read * 10 < region, $"a stage rebuild read {plan.Read} of the region's {region} tiles");
+    }
+
+    [Fact]
+    public void The_ground_past_the_stamp_keeps_the_worlds_tint_and_decals_so_a_fight_shows_no_step()
+    {
+        var (ground, stage, _) = Ford.Value;
+        var shift = -BoardFit.StageOffset(stage);
+        var world = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art).Blocks.Select(b => b.Plan.Shifted(shift)).SelectMany(p => p.Items).OfType<Face>()
+            .Where(f => f.Kind is FaceKind.Top or FaceKind.Decal).ToDictionary(f => (f.Tile, f.Kind));
+        var skirt = StagePlan.Build(ground, stage, null, Pack.Art).Plan.Items.OfType<Face>()
+            .Where(f => f.Kind is FaceKind.Top or FaceKind.Decal && !ground.Map.StampedTiles.Contains(f.Tile)).ToArray();
+
+        Assert.Contains(skirt, f => f.Kind == FaceKind.Top);       // the ford's own ground art takes no decals (BoardPlan.DecalFor), so the tops carry it
+        Assert.All(skirt, f => Assert.Equal(Whole(world[(f.Tile, f.Kind)]).Split(' ').Skip(3), Whole(f).Split(' ').Skip(3)));
+        foreach (var missing in skirt.Where(f => f.Kind == FaceKind.Top).Select(f => f.Tile).Where(t => world.ContainsKey((t, FaceKind.Decal))))
+            Assert.Contains(skirt, f => f.Tile == missing && f.Kind == FaceKind.Decal);
+    }
+
+    /// <summary>The ford with a tavern <paramref name="dx"/>, <paramref name="dy"/> from the stamp's far corner.</summary>
+    private static (WorldGround Ground, BattleStage Stage, Tile At) Built(int dx, int dy)
+    {
+        var (_, stage, map) = Ford.Value;
+        var at = new Tile(stage.Origin.X + stage.Width + dx, stage.Origin.Y + stage.Depth + dy);
+        var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Buildings = [new RegionBuilding("tavern", "red", at)] });
+        return (WorldGround.Of(region, new Dictionary<string, BattleMap> { ["river_crossing"] = map }, Pack.Manifests), stage, at);
+    }
+
+    [Theory]
+    [InlineData(1, -6)]
+    [InlineData(-6, 1)]
+    [InlineData(1, 1)]
+    public void A_building_in_front_of_the_stamp_stands_on_the_stage_exactly_as_in_the_world(int dx, int dy)
+    {
+        var (ground, stage, _) = Built(dx, dy);
+
+        var plan = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+
+        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, new TileRect(0, 0, ground.Map.Width, ground.Map.Height), grid: true, world: true, storyFlags: new HashSet<string>())
+            .Shifted(-BoardFit.StageOffset(stage)).Items.Select(i => i is Face f && !StampHolds(stage, f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
+        Assert.Contains(plan.Items, i => i is Face { Kind: FaceKind.Building });
+        Assert.All(plan.Items, i => Assert.Contains(Whole(i), world));
+    }
+
+    private static bool StampHolds(BattleStage stage, Tile tile) => stage.Holds(tile);
+
+    [Fact]
+    public void A_building_in_front_of_the_stamp_sorts_over_a_unit_on_the_stamp_behind_it()
+    {
+        var (ground, stage, _) = Built(1, -6);
+
+        var columns = StagePlan.Build(ground, stage, null, Pack.Art).Plan.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Building).ToArray();
+
+        Assert.All(columns, c => Assert.True(c.Order > BoardOrder.Key(stage.Origin, BoardLayer.Unit)));
+    }
+
+    [Fact]
+    public void A_building_behind_the_stamp_stays_in_the_world_under_the_stage()
+    {
+        var (ground, stage, at) = Built(-stage0Width() - 3, -stage0Depth() - 3);
+
+        var plan = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+
+        Assert.DoesNotContain(plan.Items, i => i is Face { Kind: FaceKind.Building });
+    }
+
+    private static int stage0Width() => Ford.Value.Stage.Width;
+
+    private static int stage0Depth() => Ford.Value.Stage.Depth;
+
+    [Fact]
+    public void A_fight_at_the_ford_stands_in_the_worlds_dusk_so_handing_over_changes_no_colour()
+    {
+        var (ground, stage, _) = Built(1, -6);
+        var world = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
+        var stagePlan = StagePlan.Build(ground, stage, null, Pack.Art);
+        var shift = BoardFit.StageOffset(stage);
+
+        Assert.Equal(BoardLighting.Dusk, stagePlan.Lighting.Ambient);
+        var lit = world.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty)
+            .ToLookup(f => (f.Face.Tile, f.Face.Kind, Art: f.Face.Image?.Key, Corner: f.Face.Points[0]));
+        var compared = 0;
+        foreach (var face in stagePlan.Lit.Items.OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty))
+            foreach (var same in lit[(face.Face.Tile, face.Face.Kind, face.Face.Image?.Key, face.Face.Points[0] + shift)])
+            {
+                var (mine, theirs) = (face.MeanColourAt(0, stagePlan.Lighting), same.MeanColourAt(0, world.Lighting));
+                Assert.True(Math.Abs(mine.R - theirs.R) + Math.Abs(mine.G - theirs.G) + Math.Abs(mine.B - theirs.B) < 0.02f, $"{face.Face.Tile} {face.Face.Kind}: {mine} against {theirs}");
+                compared++;
+            }
+        Assert.True(compared > 100, $"{compared}");
+    }
+
+    [Fact]
+    public void The_stage_draws_props_near_the_fight()
+    {
+        var (ground, stage, map) = Ford.Value;
+        var propTile = new Tile(stage.Origin.X + stage.Width, stage.Origin.Y + 1);
+        var baseRegion = Pack.Region("ashen_ford");
+        var regionDef = baseRegion.Def with { Props = [new RegionProps("tree", "autumn", [propTile])] };
+        var regionWithProp = WorldRegion.From(regionDef);
+        var groundWithProp = WorldGround.Of(regionWithProp, new Dictionary<string, BattleMap> { ["river_crossing"] = map }, Pack.Manifests);
+        var stagePlan = StagePlan.Build(groundWithProp, stage, null, Pack.Art);
+
+        var prop = stagePlan.Plan.Items.OfType<Sprite>().FirstOrDefault(s => s.Tile == propTile);
+        Assert.NotNull(prop);
     }
 }

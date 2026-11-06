@@ -29,14 +29,26 @@ describe("tactics phone module", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
       .filter((n) => !n.startsWith("portal-")).sort();
     expect(names).toEqual([
-      "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
-      "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader",
+      "camp-job", "camp-rolled", "camp-target", "camp-vote", "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "environment-status", "environment-turn", "inn-rooms", "pickClass", "pickEncounter",
+      "pickEncounter-noWalk",
+      "questlog-leader", "questlog-private", "questlog-viewer", "react", "results", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "talk-check", "talk-vote", "temple", "turn", "vote", "vote-loot", "vote-tie", "walk-ambush", "walk-danger", "walk-follower", "walk-interact", "walk-leader", "walk-pinned", "walk-pinned-done", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-trinket-presented", "walk-with-gold",
     ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);
       expect(screen.queryByText("This screen needs a newer app")).toBeNull();
       cleanup();
     }
+  });
+
+  it("shows the nearby hostile group on the leader's walking screen", () => {
+    show("walk-danger");
+    expect(screen.getByText(/Danger nearby: Wolves in the Pines/)).toBeTruthy();
+  });
+
+  it("shows an ambush announcement while the party takes position", () => {
+    show("walk-ambush");
+    expect(screen.getByRole("alert").textContent).toContain("Wolves in the Pines");
+    expect(screen.getByRole("heading", { name: "Ambush!" })).toBeTruthy();
   });
 
   it("muster: tapping a class picks it", () => {
@@ -219,6 +231,30 @@ describe("tactics phone module", () => {
     expect(screen.getByText("Victory")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Carry on" }));
     expect(send).toHaveBeenLastCalledWith({ action: "next" });
+  });
+
+  it("results after a win list each hero's XP and injuries, and no loss line", () => {
+    const v = view("results");
+    (v.data as unknown as { lines: { injuries: string[] }[] }).lines[0]!.injuries = ["Black Eye"];
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getAllByText("+250 XP").length).toBeGreaterThan(0);
+    expect(screen.getByText("Black Eye")).toBeTruthy();
+    expect(document.querySelector(".tx-result-note")).toBeNull();
+  });
+
+  it("results after a loss show the server's one line, and no XP or injuries on the heroes", () => {
+    const note = "You wake at the recovery point. Wounds tended — no XP. Potions used are gone.";
+    const v = view("results");
+    const d = v.data as unknown as { outcome: string; note: string | null; lines: { xp: number; injuries: string[] }[] };
+    d.outcome = "Lost";
+    d.note = note;
+    for (const l of d.lines) l.xp = 0;
+    d.lines[0]!.injuries = ["Black Eye"];       // even if a server sent one, a loss tended it
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByText("Defeat")).toBeTruthy();
+    expect(screen.getByText(note)).toBeTruthy();
+    expect(screen.queryByText(/XP$/)).toBeNull();
+    expect(screen.queryByText("Black Eye")).toBeNull();
   });
 
   it("status: says who is acting and when you're up", () => {

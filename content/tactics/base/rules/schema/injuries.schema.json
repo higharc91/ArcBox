@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://arcbox.local/tactics/rules/schema/injuries.schema.json",
   "title": "Injuries",
-  "description": "injuries.json (spec §3.8): picked by weight when a party member goes Out. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "description": "injuries.json (spec \u00a73.8): picked by weight when a party member goes Out. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec \u00a74.10).",
   "type": "array",
   "items": {
     "type": "object",
@@ -30,6 +30,19 @@
       "effects": {
         "$ref": "common.schema.json#/$defs/effects",
         "description": "Effects run on the owner on the hook (Deep cut: bleeding at the start of each battle)."
+      },
+      "mends": {
+        "type": "string",
+        "enum": [
+          "rest",
+          "spirit",
+          "body"
+        ]
+      },
+      "battle": {
+        "type": "boolean",
+        "default": true,
+        "description": "False keeps it off the battle table: a minor injury only an out-of-battle trap gives (owner decision, issue #83)."
       }
     },
     "required": [

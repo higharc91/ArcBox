@@ -1,0 +1,17 @@
+{
+  "character_id": "808551e2-cb8d-471b-a5be-6ed59b28e7a7",
+  "mode": "v3",
+  "animation_name": "bree_talk",
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "frame_count": 4,
+  "action_description": "Standing relaxed and speaking warmly, a small open-palm gesture with the free hand, gentle nod, then settle back into the starting pose for a seamless conversation loop. Both feet planted. The closed notebook stays fixed at the belt; do not open it, pick it up or swap equipment sides. No walking, large arm swings, extra objects, camera motion or zoom."
+}

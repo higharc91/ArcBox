@@ -45,6 +45,63 @@ public sealed class StoryResumeTests
         Assert.Equal(1, Cursor(again)!.Line);
     }
 
+    /// <summary>
+    /// What ending the session in a scene must leave (review A4): no clock of the scene's still running (the line's, the question's), and
+    /// the document saved as it ends, the party's place with it.
+    /// </summary>
+    private static void EndedCleanly(Session s, int savesBefore)
+    {
+        Assert.True(s.Harness.IsOver);
+        Assert.DoesNotContain(TacticsGame.Timers.Line, s.Harness.ActiveTimers);
+        Assert.DoesNotContain(TacticsGame.Timers.Vote, s.Harness.ActiveTimers);
+        Assert.True(s.Lease.Saves.Count > savesBefore, "ending the session saves");
+        Assert.Equal(s.Game.Document.ToJson().GetRawText(), s.Lease.Document.GetRawText());
+    }
+
+    /// <summary>
+    /// Review (adapter NOTE 3): a long scene, or a question held with every phone asleep, could only be left by closing the room. The VIP
+    /// can end the session from inside a scene; the cursor is saved on every line, so the next session starts on the same line.
+    /// </summary>
+    [Fact]
+    public void The_vip_can_end_the_session_in_a_scene()
+    {
+        var s = Telling(Mayor);
+        LineEnds(s);
+        var line = Story(s).Line!.Id;
+        Assert.Contains(TacticsGame.Timers.Line, s.Harness.ActiveTimers);     // the line's clock, which ending must stop
+
+        s.Send(1, "endSession");
+        Assert.False(s.Harness.IsOver);          // only the VIP's
+        Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+
+        var saves = s.Lease.Saves.Count;
+        s.Send(0, "endSession");
+
+        EndedCleanly(s, saves);
+        Assert.Equal(1, Cursor(s)!.Line);
+        var again = Restarted(s);
+        AllBack(again);
+        Assert.Equal(TacticsPhase.Story, again.Game.Phase);
+        Assert.Equal(line, Story(again).Line!.Id);
+    }
+
+    [Fact]
+    public void The_vip_can_end_the_session_at_a_question()
+    {
+        var s = AtTheVote();
+        Vote(s, 1, "pay");
+        Assert.Contains(TacticsGame.Timers.Vote, s.Harness.ActiveTimers);     // the question's clock
+
+        var saves = s.Lease.Saves.Count;
+        s.Send(0, "endSession");
+
+        EndedCleanly(s, saves);
+        var again = Restarted(s);
+        AllBack(again);
+        Assert.Equal(TacticsGame.StoryStates.Asking, Story(again).State);     // votes aren't saved: the question is asked again
+        Assert.Equal("vote", Cursor(again)!.Node);
+    }
+
     [Fact]
     public void It_resumes_on_the_saved_line()
     {

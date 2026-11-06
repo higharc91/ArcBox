@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "focusedTests": {
+    "WorldPeople": 36,
+    "CreatureAtlas": 5,
+    "UnitArt": 54,
+    "HudArt": 45
+  },
+  "totalTests": 140,
+  "builds": {
+    "Debug": "0 warnings/errors",
+    "Release": "0 warnings/errors"
+  },
+  "genericChildrenPreserved": true,
+  "regionOnlyChangesPipCosmeticVariant": true,
+  "newPipGenerations": 0,
+  "pixelLabCalls": 0
+}

@@ -1,0 +1,285 @@
+{
+  "date": "2026-11-03",
+  "timezone": "UTC",
+  "branch": "environmental-tiles",
+  "baseCommit": "974f451a",
+  "runtimeCommit": "89d94e78893ead4d2b57b482fec40734a14b98fa",
+  "demoCommit": "740aa1e7bb49cf4c73d71910926d80b3d6037f14",
+  "dotnet": {
+    "passed": 5851,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "duration": "4m 00s 202ms",
+    "command": "DOTNET_PROCESSOR_COUNT=3 dotnet test --solution ArcBox.slnx -c Release --no-progress --max-parallel-test-modules 1"
+  },
+  "web": {
+    "passed": 478,
+    "failed": 0,
+    "files": 20,
+    "command": "npm test -- --run",
+    "stderr": "Existing happy-dom abort/local localhost:3000 fetch refusal and intentional error-boundary diagnostics; also present in milestone D log. No test failures."
+  },
+  "focused": {
+    "passed": 192,
+    "failed": 0,
+    "newCases": 16,
+    "classes": [
+      "BeatScriptTests",
+      "BeatPlayerTests",
+      "BoardPlanTests"
+    ]
+  },
+  "goldensUnchanged": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "sourceSha256": {
+    "games/Tactics/Tactics.Presentation.Tests/Beats/BeatPlayerTests.cs": "a6bc4b44cc730dca875ac991a9bbffacf89d6be22df1863e0750b4ea02416ea6",
+    "games/Tactics/Tactics.Presentation.Tests/Beats/BeatScriptTests.cs": "a8faef945f79e96a852e86ce3efe0cb474ae717c4a337fdcabcdcdcec01f46b3",
+    "games/Tactics/Tactics.Presentation.Tests/Board/BoardPlanTests.cs": "8a56440a5122790eeb39166a94df366c5e75594c167e661630d875e512face30",
+    "games/Tactics/Tactics.Presentation/Beats/BeatPlayer.cs": "1fe9ffd132de077ac8a4276dca5f049a2e33eda9a6ee630327ca2f1550db1370",
+    "games/Tactics/Tactics.Presentation/Beats/BeatScript.cs": "fd60379d25aa8913635fb3a0362b35e963b1a323e1846c8c1703a90603a273c1",
+    "games/Tactics/Tactics.Presentation/Beats/EnvironmentDemo.cs": "94801edf4d25f90e12180c3ba0d1636ee9c78361e15771a639d06380214dbd16",
+    "games/Tactics/Tactics.Presentation/Beats/FxArt.cs": "6bef8f0113e02f5dd72083f00ddd33ff728cd2f1821eb6821495b62109b9c92b",
+    "games/Tactics/Tactics.Presentation/Board/BoardPlan.cs": "1622cf15aded34dfe36aa6afccf4e0cf168f08582100e4f8760016aa2ae149ba",
+    "games/Tactics/Tactics.Presentation/Board/MaterialLook.cs": "f973e3f543fc56b1f33048f6cb3a0f74d8eda4464d04cc87b4ed17611f24bf5b",
+    "src/ArcBox.Host/Main.cs": "c26bcf2d52259f66483f8571bc53c922c8503ad987bf6c1b08fecbb2df3a1eca",
+    "src/ArcBox.Host/games/tactics/BoardCanvas.cs": "d06246c4cb49c7fd33aa6485131c542bb617a99b4a914e5f54925ec21740224d",
+    "src/ArcBox.Host/games/tactics/FxLayer.cs": "03c92bc4ad3bc664f18d383005bc6c3650dbd01fdb7765f5305c7f59e19a4362",
+    "src/ArcBox.Host/games/tactics/TacticsScene.cs": "3680943b30f26190a72d0b6c13150e701cc694035059f589f1ded4dcedd4bda6",
+    "src/ArcBox.Host/games/tactics/ThingsDemoFeeder.cs": "0c4503580a58a5dcf9d6d2232d8ecd5caee1c34c4a7b02591f15599177e595c9"
+  },
+  "tv": {
+    "engine": "Godot 4.7.2 Mono",
+    "renderer": "Compatibility / Mesa llvmpipe / Xvfb",
+    "window": "1280x720",
+    "exitCode": 0,
+    "reactions": 8,
+    "beats": 10,
+    "idleLiveBeats": [
+      {
+        "seq": 1,
+        "actualSeconds": 0.688,
+        "scriptSeconds": 0.72,
+        "events": [
+          "TileReacted",
+          "Damaged"
+        ]
+      },
+      {
+        "seq": 2,
+        "actualSeconds": 0.634,
+        "scriptSeconds": 0.671,
+        "events": [
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 3,
+        "actualSeconds": 0.767,
+        "scriptSeconds": 0.767,
+        "events": [
+          "TileReacted",
+          "ZoneEnded"
+        ]
+      },
+      {
+        "seq": 1,
+        "actualSeconds": 0.866,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 2,
+        "actualSeconds": 0.933,
+        "scriptSeconds": 0.957,
+        "events": [
+          "RoundStarted",
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 3,
+        "actualSeconds": 0.667,
+        "scriptSeconds": 0.683,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 4,
+        "actualSeconds": 0.3,
+        "scriptSeconds": 0.3,
+        "events": [
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 5,
+        "actualSeconds": 0.867,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 6,
+        "actualSeconds": 0.266,
+        "scriptSeconds": 0.3,
+        "events": [
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 7,
+        "actualSeconds": 0.867,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      }
+    ],
+    "loadedLiveBeats": [
+      {
+        "seq": 1,
+        "actualSeconds": 0.667,
+        "scriptSeconds": 0.72,
+        "events": [
+          "TileReacted",
+          "Damaged"
+        ]
+      },
+      {
+        "seq": 2,
+        "actualSeconds": 0.727,
+        "scriptSeconds": 0.671,
+        "events": [
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 3,
+        "actualSeconds": 0.788,
+        "scriptSeconds": 0.767,
+        "events": [
+          "TileReacted",
+          "ZoneEnded"
+        ]
+      },
+      {
+        "seq": 1,
+        "actualSeconds": 0.897,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 2,
+        "actualSeconds": 1.007,
+        "scriptSeconds": 0.957,
+        "events": [
+          "RoundStarted",
+          "TileReacted",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 3,
+        "actualSeconds": 0.752,
+        "scriptSeconds": 0.683,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 4,
+        "actualSeconds": 0.38,
+        "scriptSeconds": 0.3,
+        "events": [
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 5,
+        "actualSeconds": 1.085,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 6,
+        "actualSeconds": 0.304,
+        "scriptSeconds": 0.3,
+        "events": [
+          "ZoneCreated"
+        ]
+      },
+      {
+        "seq": 7,
+        "actualSeconds": 1.034,
+        "scriptSeconds": 0.897,
+        "events": [
+          "TileReacted",
+          "ZoneEnded",
+          "ZoneCreated"
+        ]
+      }
+    ],
+    "maximumIdleReactionSeconds": 0.933,
+    "maximumLoadedReactionSeconds": 1.085,
+    "movie": {
+      "render": "1920x1080 at fixed 30 fps",
+      "export": "1280x720 H.264/AAC, 30 fps, burned-in captions",
+      "durationSeconds": 33.033333,
+      "file": "e-reactions.mp4"
+    },
+    "warnings": [
+      "V-Sync unsupported and screen-space AA unavailable under the software Compatibility driver.",
+      "Eight ObjectDB instances reported at shutdown; the existing board-only demo with no reaction cues reproduces this warning."
+    ],
+    "applicationErrors": 0,
+    "note": "Loaded run overlaps full tests and media encoding: wall time can exceed the scripted length. Final idle run checks normal completion separately."
+  },
+  "artifactSha256": {
+    "e-tv-loaded.txt": "3be8aa2e74c427062bed5e83eefe0943e5de168c5f9be4edfd05dd26c26796aa",
+    "e-fire.png": "ed4dc6b20ba7c1db5649d7cebfb598ac309ca7b295610716805c77f52f393f32",
+    "e-tv-realtime.txt": "458a35e24c1af3e2445a7b76db0a776744df45e4d2f88506705b0267e78fb484",
+    "e-conduct.png": "64947806b686fce674c5e060d956b8aaaab59fe102ba5b04a185a762095eee6f",
+    "e-reactions.mp4": "57d4300ce883af9ae629cef3167dd831b9c1a1b0955b6165bf5c7559e3101b48",
+    "e-web.txt": "ad934b5a32bc9a6f4cb7d69ca5808a7c09c23887ef5694ff20f17503b51bfdcf",
+    "e-host-build.txt": "f41afa1ea443197a987e777249e779d1683a5906fd468d020a2a9cf00047a133",
+    "e-tv-board-only.txt": "61220925266df0ad5ba73f361e7824d921b06103a75e0bdc37b457c259fdc490",
+    "e-scorch.png": "33f5ba4ef4f91c6c9d2a53d997c361f53bc29f013a6738a383d92334b1acd2a3",
+    "e-freeze-settled.png": "89b111c70756558cdc62c84720afdf4be6ec972f43b3e38d035490a76cc12f36",
+    "e-freeze.png": "af8094a58ae86a15cfe16229f262ba06df91aa00632ad6a569cb95a62ab53f87",
+    "e-tests.txt": "63fe4f72a2d2413835391510d591cfdf7828b2d120ae6e6e43b60d722b4dc319",
+    "e-tv-movie.txt": "d052972bf33ad0225373429366c703f9fc7eaeb06697512b7e1d0db26639c2ab"
+  },
+  "productionEncountersEnabled": 0,
+  "generatedArtOrAudio": false,
+  "logNote": "Committed log copies normalize trailing whitespace; original logs remain in /workspace/issue69-e."
+}

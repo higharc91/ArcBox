@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-03",
+  "branch": "environmental-tiles",
+  "baseCommit": "e768e1c2",
+  "codeCommit": "5bcf0d66484894809668cdf3eb0a47283757feae",
+  "change": "Webs use three tethered radial SVG silk nets with curved cross-strands; no web particles or rectangular fills. Gentle sway and reduced-motion support.",
+  "dotnet": {
+    "passed": 5864,
+    "failed": 0,
+    "skipped": 0,
+    "duration": "3m 48s 770ms"
+  },
+  "web": {
+    "passed": 484,
+    "failed": 0,
+    "newRegressionCases": 1,
+    "typeCheckAndBuild": "pass",
+    "warning": "Existing flyover chunk-size advisory, as F."
+  },
+  "browser": {
+    "errors": [],
+    "webHasNoParticles": true,
+    "webCorners": 3,
+    "webReducedMotion": true,
+    "webClears": true,
+    "terrainLooks": 6,
+    "riskTap": true,
+    "selectedSpread": true,
+    "reducedMotion": true,
+    "clears": true,
+    "narrowAndLandscape": true
+  },
+  "sourceSha256": {
+    "web/play/src/games/tactics/surfaces.tsx": "ab74da99782e0f295eef5c93807899f14a45dd1bce56cf60673711af127c6e49",
+    "web/play/src/games/tactics/tactics.css": "c6e53f8cb230d8f6c033fa523b483d12fa6c507a81df2e1b7ded8833e76b26a9",
+    "web/play/test/tacticsEnvironment.test.tsx": "78cde007bb39dd550c5c632f339827411d289d298dce2c69d9fb2355119c78ff"
+  },
+  "fixtureSha256Unchanged": {
+    "web/play/test/fixtures/tactics/check-search-rolled.json": "5b80deb436a0117c2fbc72dfd4a2d5d102fef42a741c048f6a0abf9bf0108f5f",
+    "web/play/test/fixtures/tactics/react.json": "5d6a1d6ed614920c2877328ba280276cf33ffa02f9e090b6e8aa4584dc48f7b2",
+    "web/play/test/fixtures/tactics/pickEncounter-noWalk.json": "95d9f25e9ae1a8af411935305b04e0c47697bfc66704358f9155e4ce2af76b82",
+    "web/play/test/fixtures/tactics/pickClass.json": "aa2a9ce8789b303e3ce60e488179f5157a9e52a1f98b3f5068eeb1475e9790a6",
+    "web/play/test/fixtures/tactics/dialogue-leader.json": "b15d82052e5483a68763fe44ee2ea05531823c00ac1d2d285da78b3f83c36c51",
+    "web/play/test/fixtures/tactics/choice-leader.json": "76e873039558e93e27b9960aa69235c1f4d92b7a0ee74efaf2112dea7693fe4f",
+    "web/play/test/fixtures/tactics/environment-status.json": "823b17dd4a8cf71a63c60114a1045b69df6e27d4ee022d524a6bfc97e6b064ff",
+    "web/play/test/fixtures/tactics/turn.json": "1280b4dc6ad7cdebb5e33f2e2a2c7539aac3c837ac959ebc8bf23082b639416c",
+    "web/play/test/fixtures/tactics/results.json": "e167faa5a31d180656418704069968edc15c7d71ab9c11a5adb9ba761d265186",
+    "web/play/test/fixtures/tactics/environment-turn.json": "77dad60643c653b3585ef9d2498ca05c9f53e1e556a7de8a3e749da54b7fba91",
+    "web/play/test/fixtures/tactics/portal-character.json": "97a45cb1389ae6c497022547339a5838fa09e803658a5227c112d4d40558582c",
+    "web/play/test/fixtures/tactics/walk-leader.json": "bdce93ffb460e19cd58890653f473b5c7ee5cd94ae9603da6b2cbdcf4610477c",
+    "web/play/test/fixtures/tactics/walk-follower.json": "907bf812c2e7d6b1c6b67eebf6bbb0a6c760819e6ee38095dc21adefb54c5764",
+    "web/play/test/fixtures/tactics/walk-interact.json": "d5e2f21182b3c6863642a3afd2647f2b5e3dfcb3558e1f78e246555e72de112c",
+    "web/play/test/fixtures/tactics/dialogue.json": "f65850a26c9655fbdb5f26d29e5142645fd843c4db7fe0d194d2dca631a39cae",
+    "web/play/test/fixtures/tactics/check-rolled.json": "fd8416b087f5ab9f623475344bcf0617da2630601b9aa63cbfa5f26c0919eff6",
+    "web/play/test/fixtures/tactics/walk-things.json": "d0e6d01ceaa22493a451ff74683caa7bb1cbb4053fa09ef4d2e1e12f4dd474a4",
+    "web/play/test/fixtures/tactics/vote-tie.json": "07b3391bd19ee5a69bc8cda5f9a51e5e02ed095530b5575ba3d855531581e854",
+    "web/play/test/fixtures/tactics/check-pick.json": "af637a701c258e9de324855b8a2e3cc52024d0fb4b3161a7ca575d7f3d0b69d3",
+    "web/play/test/fixtures/tactics/walk-things-follower.json": "88b3116ebbe67ac6e115b3f2856b5f48c11836334cf2265a05eee060804242d2",
+    "web/play/test/fixtures/tactics/portal-new.json": "35224456b0aa5e829c075ce548028a4e523e53d628b2766c00d4373ee4928eec",
+    "web/play/test/fixtures/tactics/vote.json": "c8f6eca5bbfd7685cd6197d24ef4069dd95b9e5d65b8a2ac99468a5a93fb7d21",
+    "web/play/test/fixtures/tactics/choice-follower.json": "6e47ea3513f86f7c64109cef86aba425e0079f6e75700cf6e90f977fb2fc694e",
+    "web/play/test/fixtures/tactics/pickEncounter.json": "1d0e43c1210e593e6adb6eada94e76faee3a38f5cf613917cf87bcdd0ae20944",
+    "web/play/test/fixtures/tactics/check-search.json": "3e4ad5234dfdbd36db0d87952ed01b51693fdabf98a7e5db74d49103fae373a7",
+    "web/play/test/fixtures/tactics/status.json": "4fdb48472b464255c1429909eb820346bdc111b397d9b98eca8c43278b30a870"
+  },
+  "goldensUnchanged": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": "26e62506e1d031b378411220935d746604def2a9bbc9277c2ee0be14afebe4db",
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.replay.json": "1bbef400c1c0238d2d8909bfdff3e236ef172cbd4ffeab64bd64a25fd1c2fb20",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.events.json": "4e8af305bfaa13d6f29b360c178001eef82be62b95eae9c98a36fa2fc0a2fe47",
+    "games/Tactics/Tactics.Logic.Tests/Golden/skirmish-basic.replay.json": "42ed4cae39cd0710eb9955f30ef583f0a2a2b5b04aaa65f6f80f5cb0dc958cd5",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": "bb65eaccd65d74bd5d87181868dc0e9e26dfae7b46bbd8648e149f40ca51a530",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.replay.json": "255a2b2557644c5fe4fc907d30da352cb93680f894f9706146ecd97523342fff"
+  },
+  "preview": {
+    "file": "phone-web-preview.mp4",
+    "durationSeconds": 11,
+    "width": 390,
+    "height": 844,
+    "fps": 25,
+    "bytes": 516855,
+    "source": "Actual Chromium controller; explicit dev web-look override on the real F fixture"
+  },
+  "artifactSha256": {
+    "phone-web-strands.png": "2aae08413d73f4a256923df3552068c234d2ba4591b7a87832496de3ba5ea42a",
+    "phone-web-preview.mp4": "83d2eb742a4b005fe65c73c64358d7b4a81e34ea002da82f0e974d4bde39d4e0",
+    "phone-web-tests.txt": "c74825cced3d0b8022dc0e7153b3f23ca427d8ac8025dab63434c7b74eaee349",
+    "phone-web-build.txt": "ce736ea29e9058a92548bf55e085256e834e1e2ea971a0a720de82ff881eb747",
+    "phone-web-client-tests.txt": "8a5aa9a6af264f872ecffdf0be8e2e45145c144a759a302a8b863fe3df24fcdd"
+  },
+  "logs": "Trailing whitespace normalized; raw logs in /workspace/issue69-web-silk."
+}

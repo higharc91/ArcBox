@@ -26,12 +26,46 @@ public sealed class RegionTests
 
     private static string Json(RegionDef def) => JsonSerializer.Serialize(def, ArcJson.Options);
 
-    private static bool Standable(WorldRegion region, Tile t) => WorldGround.Of(region, new Dictionary<string, BattleMap>()).Terrain.Walkable(t);
+    private static bool Standable(WorldRegion region, Tile t) => WorldGround.Of(region, new Dictionary<string, BattleMap>(), ArtManifest.None).Terrain.Walkable(t);
 
     private static IReadOnlyList<ContentError> ErrorsOf(string json)
         => ValidationTests.ErrorsOfChapter(("world/r.json", json));
 
     private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ErrorsOf(Json(def));
+
+    [Fact]
+    public void Named_spawns_are_optional_and_legacy_spawn_json_is_unchanged()
+    {
+        var spawns = new RegionSpawns(new Tile(0, 0), new Tile(1, 0));
+        Assert.Equal("""{"start":[0,0],"recovery":[1,0]}""", JsonSerializer.Serialize(spawns, ArcJson.Options));
+        Assert.Equal(new Tile(0, 0), spawns.Find("start"));
+        Assert.Equal(new Tile(1, 0), spawns.Find("recovery"));
+        Assert.Null(spawns.Find("cave_return"));
+        var named = spawns with { Named = Ordinal.Map(new[] { ("cave_return", new Tile(3, 2)) }) };
+        var again = JsonSerializer.Deserialize<RegionSpawns>(JsonSerializer.Serialize(named, ArcJson.Options), ArcJson.Options)!;
+        Assert.Equal(new Tile(3, 2), again.Find("cave_return"));
+    }
+
+    [Fact]
+    public void A_named_spawn_on_walkable_reachable_ground_is_valid()
+    {
+        var region = Region(8, 8, new RegionChunk(0, 0, Tiles()));
+        region = region with { Spawns = region.Spawns with { Named = Ordinal.Map(new[] { ("cave_return", new Tile(3, 2)) }) } };
+        var loaded = ValidationTests.LoadChapter(("world/r.json", Json(region)));
+        Assert.Equal(new Tile(3, 2), loaded.RegionFor("r")!.Def.Spawns.Find("cave_return"));
+    }
+
+    [Theory]
+    [InlineData("start", 3, 2, false)]
+    [InlineData("", 3, 2, false)]
+    [InlineData("cave_return", 9, 2, false)]
+    [InlineData("cave_return", 3, 2, true)]
+    public void Named_spawns_reject_reserved_names_empty_names_and_unwalkable_destinations(string name, int x, int y, bool blocked)
+    {
+        var region = Region(8, 8, new RegionChunk(0, 0, blocked ? Tiles((3, 2, 0, 0, TileFlags.Impassable)) : Tiles()));
+        region = region with { Spawns = region.Spawns with { Named = Ordinal.Map(new[] { (name, new Tile(x, y)) }) } };
+        Assert.Contains(ErrorsOf(region), e => e.Pointer.StartsWith("/spawns/named", StringComparison.Ordinal));
+    }
 
     [Fact]
     public void Tile_lookups_cross_chunks()

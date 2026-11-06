@@ -5,19 +5,172 @@ over a small set of parts. Re-running the build gives byte-identical output, so 
 when the art does.
 
 ```bash
-python3 tools/tactics-assets/build.py               # every set
-python3 tools/tactics-assets/build.py characters    # one set
+python3 tools/tactics-assets/build.py                    # content sets, no review images
+python3 tools/tactics-assets/build.py characters         # one content set
+python3 tools/tactics-assets/build.py previews           # content sets and review images
+python3 tools/tactics-assets/build.py previews terrain   # one set and its review images
 ```
 
 | Output | What |
 |---|---|
 | `content/tactics/base/…` | What the game loads (served by the content-pack endpoints, cached by the TV's `ContentCache`) |
-| `tools/tactics-assets/previews/*.png` | Contact sheets for review |
+| `tools/tactics-assets/previews/*` | Review sheets and animated previews, generated only by `build.py previews` |
+| `docs/superpowers/mockups/tactics/assets/*` | Review mockups, generated only by `build.py previews` |
 
-Needs Python 3.11+ with Pillow and numpy. `dev_preview.py` and `dev_zoom.py` are quick-look helpers used while
-drawing.
+The existing tracked preview images linked throughout this README remain available; new review output is ignored.
+Concept and provenance art lives in `tools/tactics-assets/concepts/` and `tools/tactics-assets/imagegen/`;
+the runtime pack lives in `content/tactics/base/`. See [the storage proposal](../../docs/tactics-asset-storage-proposal.md)
+for measured sizes and migration choices.
+
+Needs Python 3.11+ with Pillow and numpy. The normal entry point is `build.py`; the tools in `dev/` are explicit authoring or review commands.
+
+## Build order and scripts
+
+`python3 tools/tactics-assets/build.py` runs the sets in this order, as registered in `build.py`:
+
+1. `palettes`, `characters`, `anims`, `terrain`, `tactical`
+2. `props`, `portraits`, `beasts`, `backgrounds`, `ui`, `icons`, `fx`, `ambient`, `bosses`, `bestiary`, `emotes`, `town`, `status`, `pickups`, `worldmap`
+3. `signature`, `title`, `crests`, `dungeon`, `projectiles`, `gear_icons`, `grades`, `creator_thumbs`, `hazards`, `transitions`, `sheet_icons`, `chapters`, `camp`
+4. `showcase`, `gallery`, `lore_places` after their source sets; these read baked pack files or review sheets.
+
+For a partial build, run the needed source sets first. In particular, `showcase` reads `fx`, `ui`, and `title`; `gallery` reads the built pack and existing previews. The order above describes the current script, including its review generation; it is not a dependency resolver.
+
+| Script | Purpose |
+|---|---|
+| `build.py` | Build the content pack and its review images in the order above, or selected sets from the command line. |
+| `creature_scale.py` | Shared creature scale policy and scale-only manifest tuning. |
+| `pixel_atlas.py` | Lossless indexed PNG encoding and portrait crop helper. |
+| `test_tactical.py` | Check tactical atlas coverage, animation contracts, and deterministic rebakes. |
+| `test_overworld.py` | Check environment art, review inventory, and overworld metadata. |
+| `test_manifest_crosscheck.py` | Check shipped manifest files and cross-references. |
+| `dev/dev_keys.py` | Snapshot, compare, and validate art keys referenced by rules. |
+| `dev/dev_preview.py` | Render character recipe contact sheets. |
+| `dev/dev_zoom.py` | Render close-up character frames. |
+| `dev/dev_terrain.py` | Render tiled terrain textures for seam checks. |
+| `dev/audit_overworld.py` | Audit overworld art coverage and write a searchable gallery. |
+| `dev/review_overworld_context.py` | Compare baked environment art at matching world scale. |
+| `dev/review_materials.py` | Compare current and earlier material renders. |
+| `dev/review_creature_assets.py` | Render creature atlas and animation reviews. |
+
+`arcpix/` and `parts/` contain imported modules rather than separate entry scripts. Follow-up splits: `parts/signature.py` (3,508 lines) and `parts/dungeon.py` (3,392 lines) exceed 3,000 lines; `parts/town.py` (2,924 lines) and `parts/fx.py` (2,686 lines) are approaching that size. This pass leaves those modules intact.
+
+## Tactical player characters (runtime)
+
+`python3 tools/tactics-assets/build.py tactical` builds the approved tactical art
+into `content/tactics/base/tactical/`. This is the live player-character set: 11
+races × 12 classes, each with all 38 production animations (189 frames per facing).
+Run `python3 tools/tactics-assets/test_tactical.py` to validate coverage, atlas
+addressing, extreme poses, renderer/export agreement and deterministic rebakes.
+
+The authoring canvas is 64×80. Body, garments, head/hair, headwear, cloak, weapon,
+offhand and hands are independent indexed layers in `parts/tactical_art/`; race
+traits and build fitting are applied before animation. The existing production
+pose timings drive per-layer articulation, foot motion, weapon rotation, blinking,
+cloth trailing and collapse. This pass does not add a new appearance editor or
+persist arbitrary per-item cosmetic choices; the live sheets use the class kit.
+
+Runtime atlases use padded 160×160 frames in 24 columns, with each facing occupying
+eight rows. The manifest specifies frame dimensions, anchor, columns, frame count,
+animations, texture density and per-character head position. Padding leaves room
+for raised weapons and lying poses; it is excluded from ground rings and body
+lighting. The host draws at half texture density, preserving the existing world
+footprint, and crops HUD faces rather than shrinking the padded frame.
+
+`characters.<race>_<class>` selects a tactical sheet. `characters.class_<class>`
+is a human alias; named party presets with race/class metadata resolve to the
+matching tactical art. Monsters, NPCs and old packs without a tactical manifest
+continue to use their existing character sheets. Explicit monster/wild-shape
+sprites override race/class selection. Legacy campaign race tags are understood.
+
+The classic `characters/` layer library below remains the format for existing
+NPCs, enemies and asset-tool consumers; its frame size has not changed.
+
+### Held-item attachment contracts
+
+`parts/tactical_art/attachments.py` declares each carried item's hand, grip point,
+rotation behavior and whether it is held or an intentionally floating effect.
+The same race-fitting profile positions the artwork, shoulder, palm and grip.
+Arms solve exactly for the fitted socket, and items rotate about that moving
+socket. The bard's second hand follows the lute, and its rear instrument stays
+in the equipment system rather than receiving cloak motion.
+
+Palms are separate rigid layers; sleeves/forearms can bend and stretch without
+shrinking the hand out of the image. The arm solver, palm and carried item share
+the same fitted socket. Do not add palms or a second weapon into another hand's
+layer, as that would give them the wrong motion owner.
+
+Every rendered runtime frame checks the actual rasterized hand/item contact at
+the grip (allowing one adjacent pixel for nearest-neighbor sampling and outlines).
+A detached held object or equipment layer missing its attachment metadata fails
+the build with the race, class, facing and pose. Floating spells are explicitly
+exempt from physical contact; they still follow their assigned hand. Regression
+tests cover all race/class/facing/pose attachment transforms, pixel contact for
+every walking frame and animation endpoints, and deliberate failure cases.
+Rebuilds stage the entire set before publishing it, preserving the last working
+sheets if any animation frame fails its contact check.
+
+### Material finishing and review
+
+`parts/tactical_art/materials.py` authors broad cloth folds, turned leather planes,
+plate bevels and sleeve/boot shading before race fitting. Its stencils change only
+shades inside the matching material; they cannot grow silhouettes or repaint trim.
+The posed compositor adds one authoring pixel of contact shadow under overlapping
+opaque parts, following the current hand/equipment masks. Emissive spell pixels
+neither cast these shadows nor receive them. Keep folds broad enough to survive
+the runtime's half-density draw; isolated texture specks usually disappear or flicker.
+
+`parts/material_finish.py` applies the same material direction to the classic
+32×40 library, including all 19 humanoid enemy recipes and NPCs. Those details
+are authored from rig points before cloth trailing and whole-body rotation, and
+are exported in both the recolourable layers and the baked preset sheets.
+Beasts and large bosses keep their separate art pipelines.
+
+To compare a revision, save the previous `tactical/` and `characters/presets/`
+directories, then run:
+
+```bash
+python3 tools/tactics-assets/dev/review_materials.py --before /path/to/snapshot
+```
+
+The generated `material-refinement.png` compares identical
+poses at runtime pixel density; `material-world-comparison.png` uses identical
+world layouts with terrain, props and enemies. These software compositions are
+asset reviews, not Godot screenshots; review the game camera as well.
+`material-enemies.png` shows the finishing pass on every humanoid enemy.
 
 ## How the art is built
+
+### Overworld review
+
+The [individual asset review](../../docs/superpowers/reports/overworld-art-review/README.md)
+covers all shipped terrain, props, town buildings and textures, ambient animations,
+map icons, and their shadow/light masks. `dev/audit_overworld.py` produces a searchable
+standalone gallery plus per-image JSON decisions and checks every PNG against its
+manifest. Unknown families require an explicit assessment in
+`parts/overworld_review.py`. Run `python3 tools/tactics-assets/test_overworld.py`
+for the environment-specific regression contracts.
+
+Town families share one frame across every roof/material variant, animation frame
+and day/night state; use the manifest's common size, origin and anchor. Ordinary
+`ash/grey` is cold, non-emissive ash. The `river_steam` ambient asset is low-opacity
+mist anchored to warm water, with no emitted light. `worldmap.placeIcons` overrides
+generic map icons for specific lore place ids and must inherit their lore unlocks.
+
+Ashen Ford's detailed buildings, props and people are authored in
+`tools/tactics-world/regions/ashen_ford.tscn` and exported into the live region.
+The owner-approved granary and Maud's hut/dressing use the native town renderer
+in `parts/lore_places.py`, with shared materials, pixel scale, anchors and shadows.
+Rebuild these four families additively with:
+
+```bash
+python3 tools/tactics-assets/build.py lore_places
+```
+
+This preserves the other curated/imported assets. The legacy full-set generators
+and imported art have separate authoring pipelines; use the targeted command for
+the lore-place art. Town/props generation also appends the corresponding lore-place
+families. Paint placement changes in the saved scene and re-export headless; do not
+maintain a separate hand-edited runtime region. See the [integration report](../../docs/superpowers/reports/2026-11-04-ashen-ford-secrets/integration/README.md).
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,
   `hair`, `cloth1`, `metal`, and so on. A *shade* indexes a 6-step, hue-shifted ramp (`arcpix/palette.py`).

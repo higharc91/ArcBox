@@ -20,11 +20,12 @@ public sealed class TestBattle
     private readonly List<(string Id, UnitSheet Sheet)> _monsters = [];
     private readonly List<ItemDef> _items = [];
     private readonly List<AiProfileDef> _aiProfiles = [];
+    private EnvironmentDef? _environment;
+    private bool _environmentEnabled;
     private ObjectivesDef _objectives = ObjectivesDef.Default;
     private ImmutableArray<TriggerDef> _triggers = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
-    static TestBattle() => Invariants.Enabled = true;
 
     private TestBattle(BattleMap map)
     {
@@ -94,10 +95,17 @@ public sealed class TestBattle
         return Rebuild();
     }
 
+    public TestBattle WithEnvironment(EnvironmentDef definition, bool enabled = true)
+    {
+        _environment = definition;
+        _environmentEnabled = enabled;
+        return Rebuild();
+    }
+
     private TestBattle Rebuild()
     {
         Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map],
-            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters, items: _items, aiProfiles: _aiProfiles);
+            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters, items: _items, aiProfiles: _aiProfiles, environment: _environment);
         return this;
     }
 
@@ -134,7 +142,7 @@ public sealed class TestBattle
     /// <summary>Starts the battle and returns its first state and events.</summary>
     public (BattleState State, ImmutableArray<BattleEvent> Events) Start(ulong seed = 1)
     {
-        var setup = new BattleSetup(_map, _units.ToImmutable(), _objectives, _triggers, Difficulty.Normal, Xp: 250, Loot: []);
+        var setup = new BattleSetup(_map, _units.ToImmutable(), _objectives, _triggers, Difficulty.Normal, Xp: 250, Loot: [], Environment: _environmentEnabled);
         var resolution = Battle.Start(setup, Rules, seed);
         return (resolution.State, resolution.Events);
     }

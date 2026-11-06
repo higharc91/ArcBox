@@ -1,0 +1,95 @@
+{
+  "region": "cinder_hollow",
+  "interactables": [
+    {
+      "id": "hollow_exit",
+      "kind": "cave_mouth",
+      "at": [
+        4,
+        2
+      ],
+      "name": "the burned bank",
+      "to": {
+        "region": "ashen_ford",
+        "spawn": "cinder_hollow_return"
+      }
+    },
+    {
+      "id": "hollow_supply_crate",
+      "kind": "crate",
+      "at": [
+        35,
+        18
+      ],
+      "name": "miners\u2019 supply crate",
+      "loot": [
+        {
+          "item": "potion_of_healing",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "hollow_hidden_cache",
+      "kind": "cache",
+      "at": [
+        45,
+        20
+      ],
+      "name": "foreman\u2019s hidden cache",
+      "hidden": 12,
+      "loot": [
+        {
+          "gold": 12
+        },
+        {
+          "item": "oil_flask",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hollow_satchel",
+      "kind": "note",
+      "at": [
+        25,
+        34
+      ],
+      "name": "fisher\u2019s boy\u2019s satchel",
+      "scene": "ashmaw_satchel",
+      "text": [
+        "A small satchel with a scrap of charcoal writing."
+      ]
+    },
+    {
+      "id": "hollow_safe_fire",
+      "kind": "campfire",
+      "at": [
+        28,
+        32
+      ],
+      "name": "sheltered campfire"
+    },
+    {
+      "id": "hollow_ember_claw",
+      "kind": "pickup",
+      "at": [
+        10,
+        33
+      ],
+      "name": "Ashmaw\u2019s ember-claw",
+      "requires": [
+        "sq_ashmaw_slain"
+      ],
+      "unless": [
+        "sq_ashmaw_claw"
+      ],
+      "sets": [
+        "sq_ashmaw_claw"
+      ],
+      "text": [
+        "Ashmaw\u2019s claw is warm against your palm. Dagna will know it."
+      ]
+    }
+  ]
+}

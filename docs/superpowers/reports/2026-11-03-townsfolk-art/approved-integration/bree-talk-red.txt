@@ -1,0 +1,19 @@
+Running tests from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+failed Tactics.Presentation.Tests.World.WorldPeopleTests.Approved_Bree_uses_her_talk_clip_while_holding_ground_then_resumes_walking (325ms)
+  from /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: UnitAnim { Frames = System.Collections.Immutable.ImmutableArray`1[System.Int32], Fps = 5.333333333333333, Loop = True }
+  Actual:   UnitAnim { Frames = System.Collections.Immutable.ImmutableArray`1[System.Int32], Fps = 3.3333333333333335, Loop = True }
+    at Tactics.Presentation.Tests.World.WorldPeopleTests.Approved_Bree_uses_her_talk_clip_while_holding_ground_then_resumes_walking() in /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/World/WorldPeopleTests.cs:44
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+/workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 1 error(s) (3s 963ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 1
+  failed: 1
+  succeeded: 0
+  skipped: 0
+  duration: 5s 683ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

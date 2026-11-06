@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
@@ -34,6 +35,99 @@ public sealed class BeatPlayerTests
         for (var t = 0.0; t < seconds; t += Frame)
             shown.AddRange(player.Tick(Frame).Shown);
         return shown;
+    }
+
+    [Fact]
+    public void A_battle_walk_follows_the_ramp_plane_every_frame_without_a_synthetic_hop()
+    {
+        byte[] bytes=[0,0,0,0,1,0,1,1,0,2,0,0];
+        var t=new BoardTerrain(BattleMap.FromBytes("ramp",4,1,bytes,["cobble/grey","warden_ramp/west"],[],ImmutableSortedDictionary<string,ImmutableArray<Tile>>.Empty),null);
+        var player=Player();
+        player.Receive(new BattleView("e","ramp",1,[],null,[Unit(Hero,"Party",1,0)],[],null,BoardChanges.None));
+        player.Receive(new BattleView("e","ramp",1,[],null,[Unit(Hero,"Party",2,0)],
+            [new Beat(1,Hero,[new Moved(Hero,[new Tile(1,0),new Tile(2,0)])])],null,BoardChanges.None));
+        var samples=0;
+        for(var frame=0;frame<200;frame++)
+        {
+            player.Tick(.005);
+            if(player.Frame(t).Places.TryGetValue(Hero,out var place))
+            {Assert.Equal(place.Map.X-1,place.Height,3);samples++;}
+        }
+        Assert.True(samples>10);
+    }
+
+    [Fact]
+    public void Electrical_ground_and_arcs_follow_the_tile_height_and_fade_out_without_changing_the_board()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        var tile = new Tile(6, 7);
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TileReacted("conduct", Hero, [tile])])));
+        Run(player, 0.12);
+        var draws = player.Frame(River).Draws;
+        var ground = Assert.Single(draws, d => d.Path == "hazards/electrified.png");
+        var over = Assert.Single(draws, d => d.Path == "hazards/electrified_over.png");
+        Assert.Equal(BoardOrder.Key(tile, BoardLayer.Ground), ground.Order);
+        Assert.Equal(BoardOrder.Key(tile, BoardLayer.Over), over.Order);
+        Assert.Equal(River.Centre(tile) - new Vector2(32, 16), ground.TopLeft);
+        Assert.Equal(1, ground.Alpha);
+        var origin = new Tile(46, 52);
+        Assert.Equal(BoardOrder.Key(new Tile(tile.X + origin.X, tile.Y + origin.Y), BoardLayer.Ground), ground.AtWorldOrigin(origin).Order);
+        Assert.Equal(BoardOrder.Key(new Tile(tile.X + origin.X, tile.Y + origin.Y), BoardLayer.Over), over.AtWorldOrigin(origin).Order);
+        Run(player, 0.4);
+        Assert.All(player.Frame(River).Draws, d => Assert.InRange(d.Alpha, 0, 0.7f));
+        Assert.Equal([1], Run(player, 0.5));
+        Assert.Empty(player.Frame(River).Draws);
+        Assert.Equal(BoardChanges.None, player.Shown!.Board);
+    }
+
+    [Theory]
+    [InlineData("thaw")]
+    [InlineData("douse")]
+    public void Steam_lingers_after_the_beat_rises_and_softly_dissipates(string rule)
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TileReacted(rule, Hero, [new Tile(6, 7)])])));
+        var shown = Run(player, 0.9);
+        Assert.Equal([1], shown);
+        var early = Assert.Single(player.Frame(River).Draws);
+        Run(player, 0.7);
+        var late = Assert.Single(player.Frame(River).Draws);
+        Assert.True(late.Alpha < early.Alpha);
+        Assert.True(late.TopLeft.Y < early.TopLeft.Y);
+        Assert.True(late.Size.X > early.Size.X);
+        Assert.True(late.Source.X > early.Source.X);
+        Run(player, 1);
+        Assert.Empty(player.Frame(River).Draws);
+        Assert.Empty(Run(player, 1));
+    }
+
+    [Fact]
+    public void Ignition_bursts_leave_room_for_the_figures_and_stay_anchored_to_the_floor()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        var tile = new Tile(6, 7);
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TileReacted("ignite", Hero, [tile])])));
+        Run(player, 0.2);
+        var draw = Assert.Single(player.Frame(River).Draws);
+        var clip = Fx.Value.Clip("fx.flames.fire")!;
+        Assert.InRange(draw.Alpha, 0.6f, 0.8f);
+        Assert.Equal(new Vector2(clip.Width, clip.Height) * 0.8f, draw.Size);
+        Assert.Equal(River.Centre(tile), draw.TopLeft + new Vector2(clip.AnchorX, clip.AnchorY) * 0.8f);
+    }
+
+    [Fact]
+    public void An_unknown_reaction_still_acknowledges_the_beat_and_resets_cleanly_on_reconnect()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TileReacted("future_rule", Hero, [])])));
+        Assert.Equal([1], Run(player, 1));
+        player.Reset();
+        player.Receive(View(3, 10));
+        Assert.Empty(player.Frame(River).Draws);
     }
 
     [Fact]

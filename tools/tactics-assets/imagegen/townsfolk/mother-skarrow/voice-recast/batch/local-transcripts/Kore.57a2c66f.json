@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.57a2c66f.wav",
+  "sourceSha256": "7ad581888ed2ec17480107b3d743050593509213f8ee8f8bdca8475861584cea",
+  "duration": 8.04,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.32,
+      "text": " We never used your fire, so we will remember for you"
+    },
+    {
+      "start": 6.2,
+      "end": 8.2,
+      "text": " Somebody has to sing it"
+    }
+  ],
+  "text": "We never used your fire, so we will remember for you Somebody has to sing it",
+  "secondsToTranscribe": 1.944
+}

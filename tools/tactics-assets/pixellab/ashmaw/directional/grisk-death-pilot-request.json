@@ -1,0 +1,11 @@
+{
+  "character_id": "87f7effb-96de-402f-90ae-a37905475882",
+  "template_animation_id": "falling-back-death",
+  "mode": "template",
+  "ai_freedom": 0,
+  "action_description": "The kobold staggers and falls backward, ending motionless. Right hand keeps its mining pick; helmet lantern and tally cord stay attached. No fading, no vanishing, no resurrection.",
+  "animation_name": "grisk_death_pilot",
+  "directions": [
+    "south"
+  ]
+}

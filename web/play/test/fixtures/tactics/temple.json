@@ -1,0 +1,256 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "shop",
+  "data": {
+    "shop": {
+      "id": "af_chapel",
+      "name": "Chapel of the Hearth",
+      "keeper": "Chapel of the Hearth",
+      "greeting": "Set down what hurts. The Hearth asks twenty-five gold for the work."
+    },
+    "gold": 100,
+    "items": [],
+    "sell": [],
+    "you": {
+      "member": "pr_member1",
+      "canBuy": true
+    },
+    "leader": true,
+    "vip": true,
+    "feed": [],
+    "portal": "/c/ABCD",
+    "services": [
+      {
+        "id": "cure",
+        "name": "Healing",
+        "kind": "cure",
+        "price": 25
+      }
+    ],
+    "guests": [
+      {
+        "member": "pr_member1",
+        "name": "Player1",
+        "room": false,
+        "wellFed": false,
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ]
+      },
+      {
+        "member": "pr_member2",
+        "name": "Player2",
+        "room": false,
+        "wellFed": false,
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ]
+      },
+      {
+        "member": "pr_member3",
+        "name": "Player3",
+        "room": false,
+        "wellFed": false,
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ]
+      },
+      {
+        "member": "pr_member4",
+        "name": "Player4",
+        "room": false,
+        "wellFed": false,
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ]
+      }
+    ],
+    "members": [
+      {
+        "member": "pr_member1",
+        "name": "Player1",
+        "class": "fighter",
+        "here": true,
+        "hp": 7,
+        "maxHp": 7,
+        "resources": [
+          {
+            "name": "second_wind",
+            "current": 2,
+            "max": 2
+          },
+          {
+            "name": "superiority",
+            "current": 2,
+            "max": 2
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member2",
+        "name": "Player2",
+        "class": "cleric",
+        "here": true,
+        "hp": 5,
+        "maxHp": 5,
+        "resources": [
+          {
+            "name": "devotion",
+            "current": 4,
+            "max": 4
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member3",
+        "name": "Player3",
+        "class": "rogue",
+        "here": true,
+        "hp": 5,
+        "maxHp": 5,
+        "resources": [
+          {
+            "name": "edge",
+            "current": 3,
+            "max": 3
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      },
+      {
+        "member": "pr_member4",
+        "name": "Player4",
+        "class": "wizard",
+        "here": true,
+        "hp": 3,
+        "maxHp": 3,
+        "resources": [
+          {
+            "name": "mana",
+            "current": 4,
+            "max": 4
+          }
+        ],
+        "injuries": [
+          {
+            "id": "black_eye",
+            "name": "Black eye",
+            "kind": "rest",
+            "detail": "Black eye \u00B7 rest recovery"
+          },
+          {
+            "id": "cracked_ribs",
+            "name": "Cracked ribs",
+            "kind": "body",
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+          }
+        ],
+        "wellFed": false,
+        "room": false
+      }
+    ],
+    "restReady": true,
+    "roomsOpen": false,
+    "canPropose": true,
+    "haggle": {
+      "can": true,
+      "dc": 15,
+      "result": null
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

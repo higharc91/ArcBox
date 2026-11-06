@@ -9,7 +9,8 @@
     "portrait": "mayor",
     "mood": "idle",
     "text": "There. Forty of them, perhaps. Dagna has eight guards left. And she has you.",
-    "canSkip": true
+    "canSkip": true,
+    "vip": true
   },
   "viewId": "v1",
   "deadlineUtc": null,

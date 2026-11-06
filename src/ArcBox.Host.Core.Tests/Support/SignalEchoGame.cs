@@ -21,7 +21,12 @@ public sealed class SignalEchoGame : IGame, IHostAware
 
     public void OnHostSignal(string kind, PlayerInput payload) => _signals.Add($"{kind}:{payload.Payload.GetRawText()}");
 
-    public object HostView() => new { Signals = _signals.ToArray() };
+    // Things that never change, beside signals that do: so a patch against the TV's view is smaller than the view (issue #77).
+    public object HostView() => new
+    {
+        Signals = _signals.ToArray(),
+        Things = Enumerable.Range(0, 20).Select(i => new { Id = $"thing_{i:00}", Name = $"A rather long name for thing {i}" }),
+    };
 
     public ControllerView PlayerView(PlayerId id) => new ButtonsView(null, [new Option("ping", "Ping")]);
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "request": "north-west-guide-correction-request.json",
+    "output": "directional/north-west-guide-corrected-source.png",
+    "originalPath": "/workspace/generated_images/exec-5d89ce04-109a-4a6f-9783-b97faf78dc93.png"
+  },
+  {
+    "request": "directional/south-request.json",
+    "output": "directional/south-source.png",
+    "originalPath": "/workspace/generated_images/exec-8155888f-50fe-4920-a248-8e53189b09a6.png"
+  },
+  {
+    "request": "directional/south-west-request.json",
+    "output": "directional/south-west-source.png",
+    "originalPath": "/workspace/generated_images/exec-1e1af6ae-a538-40a9-a412-de7cbdc53505.png"
+  },
+  {
+    "request": "directional/west-request.json",
+    "output": "directional/west-source.png",
+    "originalPath": "/workspace/generated_images/exec-fee847eb-4d17-4ec4-bc62-a58948fd0b41.png"
+  },
+  {
+    "request": "directional/north-west-request.json",
+    "output": "directional/north-west-source.png",
+    "originalPath": "/workspace/generated_images/exec-9465625c-318d-4d7f-8975-0852f00ccce1.png"
+  },
+  {
+    "request": "directional/north-request.json",
+    "output": "directional/north-source.png",
+    "originalPath": "/workspace/generated_images/exec-3dbbcecc-14b9-414d-9147-464aa8a6e453.png"
+  },
+  {
+    "request": "directional/north-east-request.json",
+    "output": "directional/north-east-source.png",
+    "originalPath": "/workspace/generated_images/exec-1c121268-9f44-41c0-b156-dfb092e410d7.png"
+  },
+  {
+    "request": "directional/east-request.json",
+    "output": "directional/east-source.png",
+    "originalPath": "/workspace/generated_images/exec-8eec7209-77be-475d-be91-3f35fa24cce5.png"
+  },
+  {
+    "request": "directional/south-east-request.json",
+    "output": "directional/south-east-source.png",
+    "originalPath": "/workspace/generated_images/exec-a5b95380-8198-4d5a-a6d2-aaa5a6b78a76.png"
+  },
+  {
+    "request": "portraits-request.json",
+    "output": "portraits-source.png",
+    "originalPath": "/workspace/generated_images/exec-d328fcb0-265d-4e0f-87f7-f5315552351f.png"
+  },
+  {
+    "request": "north-facing-correction-request.json",
+    "output": "directional/north-corrected-source.png",
+    "originalPath": "/workspace/generated_images/exec-06ff031f-a1cf-435e-801e-61eee80f6bf8.png"
+  },
+  {
+    "request": "north-east-facing-correction-request.json",
+    "output": "directional/north-east-corrected-source.png",
+    "originalPath": "/workspace/generated_images/exec-b6dc312c-6f2b-4b1c-a3a5-38915c97aa8e.png"
+  }
+]

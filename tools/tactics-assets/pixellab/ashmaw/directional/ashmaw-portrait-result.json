@@ -1,0 +1,20 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "status: completed\nid: 042a6e4d-2488-4968-adb2-7d5f00c41189\nsize: 64\u00d764px\ndownload: https://api.pixellab.ai/mcp/portrait-character/042a6e4d-2488-4968-adb2-7d5f00c41189/download\nseed: 7480",
+      "annotations": null,
+      "meta": null
+    },
+    {
+      "type": "image",
+      "data": "[Saved as ashmaw-portrait-source.png]",
+      "mimeType": "image/png",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

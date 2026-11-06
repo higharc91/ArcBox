@@ -1,0 +1,6 @@
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 1.945s
+
+OK
+Reviewed 647 assets; all 647 shipped PNGs accounted for. Changes: {'reviewed': 647}

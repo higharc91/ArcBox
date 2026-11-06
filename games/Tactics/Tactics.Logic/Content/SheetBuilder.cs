@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
@@ -13,7 +14,8 @@ namespace Tactics.Logic;
 public sealed record CharacterRecord(string Name, string Race, string Class, string? Subclass, string Background,
     int Level, ImmutableSortedDictionary<Stat, int> BaseScores, ImmutableSortedDictionary<Stat, int> Increases,
     ImmutableArray<AbilityId> Picks, ImmutableArray<InjuryId> Injuries, string Weapon, string Armor, bool Shield,
-    ImmutableArray<ItemStack> Bag);
+    ImmutableArray<ItemStack> Bag,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)
@@ -24,6 +26,9 @@ public static class SheetBuilder
 {
     /// <summary>The prefix of the sheet tag that names a character's class: <c>"class:cleric"</c>.</summary>
     public const string ClassTag = "class:";
+
+    /// <summary>Explicit race identity for presentation; the unprefixed race tag remains for rules.</summary>
+    public const string RaceTag = "race:";
 
     private const int MaxLevel = 10;
     private const int MaxScore = 20;
@@ -46,8 +51,8 @@ public static class SheetBuilder
     /// A <c>resourceRegen</c> feature isn't part of the sheet.</item>
     /// <item>Resources are the class's tables at the level, with its primary resource. Saves are the class's. Skills are the
     /// background's two and the first few of the class's list (its skill choice count, plus the race's extra skills).</item>
-    /// <item>Tags are <c>humanoid</c>, the race id and the class (<see cref="ClassTag"/> + its id, which the AI reads the
-    /// class's <c>aiTags</c> by). There is no sprite: the portal draws a character from its creator look.</item>
+    /// <item>Tags include <c>humanoid</c>, the race id, explicit <see cref="RaceTag"/> identity, and the class
+    /// (<see cref="ClassTag"/> + its id, which the AI reads). Presentation selects art from these tags.</item>
     /// </list>
     /// Throws <see cref="ContentException"/> with every bad id: race, class, subclass, background, weapon, armour, injuries,
     /// bag items and picks, and a level outside 1–10. A pick must be offered by a <c>choose</c> feature of the class or
@@ -86,6 +91,8 @@ public static class SheetBuilder
                 injuries.Add(injury);
             else
                 problems.Add($"/injuries/{i}", $"Unknown injury '{recordedInjuries[i]}'.");
+        if (c.Trinket is { } trinket && !rules.Trinkets.ContainsKey(trinket))
+            problems.Add("/trinket", $"Unknown trinket '{trinket}'.");
         var bag = c.Bag.IsDefault ? [] : c.Bag;
         for (var i = 0; i < bag.Length; i++)
             if (!rules.Items.ContainsKey(bag[i].Item))
@@ -130,10 +137,12 @@ public static class SheetBuilder
             else
                 passives.Add(pick.Value);
 
+        var trinket = c.Trinket is { } worn && rules.Trinkets.TryGetValue(worn, out var known) && known.ActiveFor(c) ? known : null;
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
                     + passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0)
-                    + injuries.Sum(i => i.Static.MaxHp);
+                    + injuries.Sum(i => i.Static.MaxHp) + (trinket?.Static.MaxHp ?? 0);
         passives.AddRange(injuries.Select(i => RulesPack.InjuryPassiveId(i.Id)));
+        if (trinket is not null) passives.Add(RulesPack.TrinketPassiveId(trinket.Id));
 
         var skills = new List<string>(background.Skills);
         skills.AddRange(cls.SkillChoices.From.Where(s => !skills.Contains(s)).Take(cls.SkillChoices.Count + race.ExtraSkills));
@@ -147,7 +156,7 @@ public static class SheetBuilder
             Skills: Ordinal.Set(skills),
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
             Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon, Attacks: attacks,
-            Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, ClassTag + cls.Id),
+            Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
             Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
     }
 
@@ -181,6 +190,13 @@ public static class SheetBuilder
     /// </summary>
     public static ImmutableArray<(int Level, FeatureRef Feature)> PickChoices(ClassDef cls, SubclassDef? subclass, int level)
         => PickRules.Choices(cls, subclass, Math.Clamp(level, 1, MaxLevel));
+
+    /// <summary>
+    /// Which of <see cref="PickChoices"/> each of <paramref name="picks"/> fills, matched as the sheet's check matches them: one list per
+    /// choice, in the same order. A pick that fits none is left out.
+    /// </summary>
+    public static ImmutableArray<ImmutableArray<AbilityId>> AssignPicks(IReadOnlyList<AbilityId> picks, IReadOnlyList<(int Level, FeatureRef Feature)> choices)
+        => PickRules.Assign(picks, choices);
 
     /// <summary>The class's default loadout at <paramref name="level"/> (the picks of an AI-built character).</summary>
     public static ImmutableArray<AbilityId> DefaultLoadout(ClassDef cls, int level) => DefaultPicks(cls, level);

@@ -1,0 +1,45 @@
+{
+  "approvalSource": "Owner review in this chat",
+  "approvalDate": "2026-11-03",
+  "ownerResponse": "ok, both look good now for concept art",
+  "characters": {
+    "ashmaw": {
+      "status": "approved",
+      "asset_id": "asset_wynqsh1xvxktkt87JBqpupQN",
+      "file": "ashmaw-concept.png"
+    },
+    "grisk": {
+      "status": "approved",
+      "asset_id": "asset_TXx2ypS9LjXJ3uPfmPB353fr",
+      "file": "grisk-concept.png"
+    }
+  },
+  "environment": {
+    "status": "shown for review",
+    "asset_id": "asset_PQHAc99yMMSUBJFMbBsxm8ic",
+    "file": "cinder_hollow-concept.png"
+  },
+  "pixelArt": "Full eight-direction action sets and actual TV world/battle motion approved for production integration.",
+  "reviewPreference": "Always show the relevant art alongside review questions.",
+  "pixelPilotReview": {
+    "status": "approved direction",
+    "ownerResponse": "Yes, keep this direction",
+    "date": "2026-11-03",
+    "preview": "Ashmaw and Grisk idle pilots shown together",
+    "scope": "Preserve this design direction; actual world and battle motion approval still required before final integration."
+  },
+  "inGameMotionReview": {
+    "status": "approved",
+    "ownerResponse": "Approve both",
+    "date": "2026-11-03",
+    "characters": [
+      "ashmaw",
+      "grisk"
+    ],
+    "evidence": [
+      "grisk-world-battle-v7.gif",
+      "ashmaw-world-battle-v7.gif"
+    ],
+    "scope": "Actual in-game scale and animations approved for production integration."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "character: a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\nanimation: walking\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=f624ffcb-f109-4aca-be47-333021d25bf0, south-west=7cf181e5-cc23-422d-ad57-995fbafa3c6e, west=e0e89778-e918-49e6-ac11-786147097d47, north-west=b9f94a35-67f4-41fc-8a43-738af0d4779f, north=0d6dcd0c-e03f-405d-90f2-c74a5cb6c001, north-east=f0630cba-24f0-4435-ac10-d834afd2ea82, east=d55afaa0-d197-468f-81ca-aa65d7da8828, south-east=6abd9cf0-4d4a-4ae3-a7c4-8c4bec71a5c8\ngroup: 6348e84e-3773-4372-a70f-5567f7915864\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\", template_animation_id=\"walking\", animation_group_id=\"6348e84e-3773-4372-a70f-5567f7915864\", directions=[...])\n\nhint: get_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\")\nif poor: delete_animation(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\", animation_type=\"...\") then retry with mode=\"v3\""
+      }
+    ],
+    "isError": false
+  }
+}

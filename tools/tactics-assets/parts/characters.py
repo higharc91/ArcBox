@@ -14,6 +14,7 @@ from arcpix.canvas import Canvas, SlotTable
 from arcpix.palette import FAMILIES, RAMP_LEN
 from arcpix.sheet import Sheet, Anim
 from . import character_parts as P
+from .material_finish import finish_part
 from .rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIMS, ANIM_ORDER, frame_list, points
 
 SLOTS = SlotTable()
@@ -82,6 +83,7 @@ def _render_layer(layer: str, variant: str, build: str, direction: str, pose) ->
     c = Canvas(FRAME_W, FRAME_H, SLOTS)
     pts = points(BUILDS[build], pose, direction)
     PARTS[layer][variant](c, pts)
+    finish_part(c,layer,variant,pts)
     loose = P.loose_rows(layer, variant, pts)
     if loose and pose.drag != (0, 0):
         _trail(c, *loose, pose.drag[0] * pts.near_sign, pose.drag[1])

@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_Jc6Fjr2mq7UGHPgfttnNAYQw",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_jWMdZEu8TsHfy8yTFZXmYLLH",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_EKUsBZTrndMwiRzozUSgvPLL"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 11.16,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 6,
+            "start": 0,
+            "text": " I never once warmed my hands at that fire in the river.",
+            "words": null
+          },
+          {
+            "end": 11,
+            "start": 7,
+            "text": " Think on why I'm the one who remembers.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:01.856Z",
+    "updatedAt": "2026-11-05T00:37:03.399Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:01.856Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:01.959Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:03.399Z"
+      }
+    ],
+    "progress": 1
+  }
+}

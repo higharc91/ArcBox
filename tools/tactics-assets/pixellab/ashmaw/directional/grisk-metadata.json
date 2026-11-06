@@ -1,0 +1,36 @@
+{
+  "group_id": "722a2ad9-c752-4a56-b291-f2eafe63c780",
+  "states": [
+    {
+      "character": {
+        "id": "87f7effb-96de-402f-90ae-a37905475882",
+        "name": "Idle",
+        "prompt": "The exact small reptilian kobold foreman in the front-facing input, which is straight SOUTH. Rotate consistently: helmet with caged lamp fixed to head, patched vest, tally cord and curved tail. Mining pick stays in anatomical RIGHT hand in every view, fingers wrapped around shaft, including from back. Back views show back of helmet and clothes, no front belt buckle or face. Preserve native pixel style, colors and proportions.",
+        "size": {
+          "width": 96,
+          "height": 96
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-03T16:22:32.809051+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {}
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-03T16:30:49.848082"
+}

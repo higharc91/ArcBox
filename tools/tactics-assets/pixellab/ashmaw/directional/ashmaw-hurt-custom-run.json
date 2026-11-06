@@ -1,0 +1,13 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "character: cbb9f46d-b896-49c1-a981-a5344be6a411\nanimation: v3 custom (The grey bear flinches briefly at the shoulders and returns to its original stance. Four paws remain grounded, facing stays straight south, fur covers the entire body, no skeleton or guides. Restrained, heavy motion.)\ndirections: south (1 jobs)\njob_ids: south=38bcb0b4-7b0d-4639-87cb-924834589e48\ngroup: 95df699e-653d-4070-9040-9084f8c1da0e\nframes: 4 (reference stripped, keep_first_frame=false)\ncanvas: south 180x180 (frames are stored at this size: the character plus room to move)\ncost: 2 generations (2/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\")\nadd more directions to this group: animate_character(character_id=\"cbb9f46d-b896-49c1-a981-a5344be6a411\", action_description=\"The grey bear flinches briefly at the shoulders and returns to its original stance. Four paws remain grounded, facing stays straight south, fur covers the entire body, no skeleton or guides. Restrained, heavy motion.\", animation_group_id=\"95df699e-653d-4070-9040-9084f8c1da0e\", directions=[...])",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false
+}

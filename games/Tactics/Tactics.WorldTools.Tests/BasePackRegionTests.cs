@@ -17,6 +17,21 @@ public sealed class BasePackRegionTests
 
     private static PaintedRegion Scene(string id) => SceneText.Read(World("regions", $"{id}.tscn"), World("palette", "materials.tres"));
 
+    [Fact]
+    public void The_reed_track_shortens_the_walk_to_maud_but_the_regular_route_remains_open()
+    {
+        var rules = Pack.Value;
+        var region = rules.RegionFor("ashen_ford")!;
+        var path = Assert.Single(rules.InteractablesIn("ashen_ford"), d => d.Id == "af_reed_bank_track");
+        var ground = WorldGround.Of(region, rules.Maps, rules.Art!);
+        var start = new Tile(117, 85);
+        var hut = new Tile(132, 93);
+        var open = new RegionWalk(ground).Seconds(start, t => t == hut);
+        var shut = new RegionWalk(ground.With([path.At])).Seconds(start, t => t == hut);
+        Assert.NotNull(shut);
+        Assert.True(shut - open >= 0.3, $"The path at {path.At} saves too little time: open {open}, shut {shut}.");
+    }
+
     public static TheoryData<string> Regions() => [.. Pack.Value.Regions.Keys];
 
     [Fact]
@@ -68,7 +83,8 @@ public sealed class BasePackRegionTests
             .Where(b => b.TryGetProperty("choices", out _))
             .SelectMany(b => b.GetProperty("choices").EnumerateArray())
             .Select(c => c.GetProperty("id").GetString()!).ToList();
-        Assert.NotEmpty(choices);
+        if (choices.Count == 0)
+            Assert.True(lore.RootElement.GetProperty("arcs").EnumerateArray().Single(a => a.GetProperty("region").GetString() == id).TryGetProperty("sideAdventure", out var side) && side.GetBoolean(), "Only a linear side adventure has no main-story vote.");
         return choices;
     }
 

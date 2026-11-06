@@ -1,0 +1,105 @@
+{
+  "policy": "Small disconnected specks only; no rescaling, recentering or body edits. Raw originals preserved.",
+  "changes": [
+    {
+      "file": "canonical/bear/poses/south-west.png",
+      "removed_disconnected_pixels": 14
+    },
+    {
+      "file": "canonical/drake/poses/east.png",
+      "removed_disconnected_pixels": 9
+    },
+    {
+      "file": "canonical/drake/poses/north-west.png",
+      "removed_disconnected_pixels": 21
+    },
+    {
+      "file": "canonical/drake/poses/south-west.png",
+      "removed_disconnected_pixels": 20
+    },
+    {
+      "file": "canonical/drake/poses/west.png",
+      "removed_disconnected_pixels": 35
+    },
+    {
+      "file": "canonical/gargoyle/poses/east.png",
+      "removed_disconnected_pixels": 45
+    },
+    {
+      "file": "canonical/gargoyle/poses/north-east.png",
+      "removed_disconnected_pixels": 7
+    },
+    {
+      "file": "canonical/gargoyle/poses/north-west.png",
+      "removed_disconnected_pixels": 16
+    },
+    {
+      "file": "canonical/gargoyle/poses/south-west.png",
+      "removed_disconnected_pixels": 25
+    },
+    {
+      "file": "canonical/gargoyle/poses/west.png",
+      "removed_disconnected_pixels": 61
+    },
+    {
+      "file": "canonical/harpy/poses/east.png",
+      "removed_disconnected_pixels": 12
+    },
+    {
+      "file": "canonical/harpy/poses/north-east.png",
+      "removed_disconnected_pixels": 3
+    },
+    {
+      "file": "canonical/harpy/poses/north.png",
+      "removed_disconnected_pixels": 3
+    },
+    {
+      "file": "canonical/harpy/poses/south-west.png",
+      "removed_disconnected_pixels": 26
+    },
+    {
+      "file": "canonical/harpy/poses/west.png",
+      "removed_disconnected_pixels": 32
+    },
+    {
+      "file": "canonical/hookbeak/poses/east.png",
+      "removed_disconnected_pixels": 5
+    },
+    {
+      "file": "canonical/hookbeak/poses/north-east.png",
+      "removed_disconnected_pixels": 14
+    },
+    {
+      "file": "canonical/hookbeak/poses/north-west.png",
+      "removed_disconnected_pixels": 17
+    },
+    {
+      "file": "canonical/hookbeak/poses/north.png",
+      "removed_disconnected_pixels": 2
+    },
+    {
+      "file": "canonical/hookbeak/poses/west.png",
+      "removed_disconnected_pixels": 4
+    },
+    {
+      "file": "canonical/warg/poses/east.png",
+      "removed_disconnected_pixels": 5
+    },
+    {
+      "file": "canonical/warg/poses/north-east.png",
+      "removed_disconnected_pixels": 4
+    },
+    {
+      "file": "canonical/warg/poses/north-west.png",
+      "removed_disconnected_pixels": 3
+    },
+    {
+      "file": "canonical/warg/poses/south-west.png",
+      "removed_disconnected_pixels": 1
+    },
+    {
+      "file": "canonical/warg/poses/west.png",
+      "removed_disconnected_pixels": 23
+    }
+  ]
+}

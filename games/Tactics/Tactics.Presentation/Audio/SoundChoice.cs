@@ -36,10 +36,11 @@ public static class SoundChoice
 
     private static readonly (string Prefix, string Step)[] Steps =
     [
-        ("grass", "step_grass"), ("dirt", "step_dirt"), ("path", "step_dirt"), ("cave_floor", "step_dirt"), ("mine_gravel", "step_dirt"),
-        ("water", "step_water"), ("mud", "step_mud"), ("bog", "step_mud"), ("sand", "step_sand"), ("dunes", "step_sand"), ("snow", "step_snow"), ("ice", "step_ice"),
-        ("lava", "step_lava"), ("mine_boards", "step_wood"), ("planks", "step_wood"),
-        ("cobble", "step_stone"), ("flagstone", "step_stone"), ("rock", "step_stone"), ("dungeon", "step_stone"), ("crypt", "step_stone"), ("wet_stone", "step_stone"), ("basalt", "step_stone"),
+        ("grass_ford", "step_grass"), ("grass", "step_grass"), ("dirt_ford", "step_dirt"), ("dirt", "step_dirt"), ("path_ford", "step_dirt"), ("path", "step_dirt"), ("cave_floor", "step_dirt"), ("mine_gravel", "step_dirt"),
+        ("ford_water", "step_water"), ("water", "step_water"), ("mud", "step_mud"), ("bog", "step_mud"), ("sand", "step_sand"), ("dunes", "step_sand"), ("snow", "step_snow"), ("ice", "step_ice"),
+        ("lava", "step_lava"), ("mine_boards", "step_wood"), ("planks", "step_wood"), ("warden_deck", "step_wood"),
+        ("warden_ramp", "step_stone"), ("road_ramp", "step_stone"),
+        ("cobble", "step_stone"), ("flagstone", "step_stone"), ("rock_ford", "step_stone"), ("rock", "step_stone"), ("ash_ford", "step_dirt"), ("dungeon", "step_stone"), ("crypt", "step_stone"), ("wet_stone", "step_stone"), ("basalt", "step_stone"),
     ];
 
     private static readonly string[] Mundane = ["fx.dust", "fx.smoke", "fx.poof"];
@@ -67,7 +68,7 @@ public static class SoundChoice
     }
 
     /// <summary>The sound of swinging <paramref name="weapon"/> (a rules id or a preset's layer), or null for claws and the like, whose sound is the creature's bark.</summary>
-    public static string? Swing(string? weapon) => weapon is not null && Swings.TryGetValue(weapon, out var sound) ? sound : null;
+    public static string? Swing(string? weapon) => weapon == "mining_pick" ? "kobold_pick" : weapon is not null && Swings.TryGetValue(weapon, out var sound) ? sound : null;
 
     /// <summary>The sound of a weapon that's only fired, or null for one that's swung.</summary>
     public static string? Release(string? weapon) => weapon switch
@@ -88,7 +89,7 @@ public static class SoundChoice
     public static string Launch(string key, string? weapon) => key switch
     {
         ArrowKey => Shot(weapon),
-        RockKey => "throw",
+        RockKey => weapon == "sling" ? "sling_release" : "throw",
         _ => "spell_cast",
     };
 

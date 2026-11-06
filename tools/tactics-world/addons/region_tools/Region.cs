@@ -5,7 +5,7 @@ namespace Tactics.World.Editor;
 
 /// <summary>
 /// The root of a region scene. Its children are the <c>Material</c>, <c>Height</c> and <c>Flags</c> tile layers on one flat grid,
-/// and the <c>Beats</c>, <c>Stamps</c> and <c>Spawns</c> nodes holding markers. See <see cref="RegionScene"/>.
+/// and the <c>Beats</c>, <c>Stamps</c>, <c>Spawns</c> and <c>Buildings</c> nodes holding markers. See <see cref="RegionScene"/>.
 /// </summary>
 [Tool]
 [GlobalClass]

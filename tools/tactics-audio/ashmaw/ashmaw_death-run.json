@@ -1,0 +1,15 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"model_id\": \"model_mirelo-sfx-2-0-text-to-audio\",\n  \"job_id\": \"job_WYHziwvZR4FtSYNebcg75Rze\",\n  \"status\": \"queued\",\n  \"message\": \"Job started (status 'queued'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_WYHziwvZR4FtSYNebcg75Rze' (one call waits on up to 32 jobs).\"\n}"
+    }
+  ],
+  "structuredContent": {
+    "model_id": "model_mirelo-sfx-2-0-text-to-audio",
+    "job_id": "job_WYHziwvZR4FtSYNebcg75Rze",
+    "status": "queued",
+    "message": "Job started (status 'queued'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_WYHziwvZR4FtSYNebcg75Rze' (one call waits on up to 32 jobs)."
+  },
+  "isError": false
+}

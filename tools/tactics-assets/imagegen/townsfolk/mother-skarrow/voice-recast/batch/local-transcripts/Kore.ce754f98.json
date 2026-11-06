@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.ce754f98.wav",
+  "sourceSha256": "604d75144a2acca27a41a796a522fa85214e956a396342b7a6b34f627bb666e9",
+  "duration": 6.72,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.0,
+      "text": " Ugh, up little one, up."
+    },
+    {
+      "start": 4.0,
+      "end": 6.0,
+      "text": " Ugh, no."
+    }
+  ],
+  "text": "Ugh, up little one, up. Ugh, no.",
+  "secondsToTranscribe": 1.926
+}

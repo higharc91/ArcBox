@@ -1,0 +1,267 @@
+[tv-e2e 14:50:51] starting the server on http://127.0.0.1:42109
+[tv-e2e 14:50:55] starting the TV (1280x720, preset low)
+[tv-e2e 14:50:57] TV opened room WTLG
+[tv-e2e 14:50:57] chapter: 6 bots play Chapter 1 by skip-assault
+14:50:57 Ana joined WTLG
+14:50:57 Bo joined WTLG
+14:50:57 Cy joined WTLG
+14:50:57 Dee joined WTLG
+14:50:57 Eli joined WTLG
+14:50:57 Fen joined WTLG
+14:50:58 Game on
+14:50:59 Ana picks fighter
+14:51:00 Bo picks cleric
+14:51:01 Cy picks rogue
+14:51:02 Dee picks wizard
+14:51:03 Eli picks paladin
+14:51:04 Fen picks ranger
+14:51:15 CHAPTER Dee walks 4 steps from 26,58 to person:halden_varrow
+14:51:16 CHAPTER Dee taps Draw from the square well: person:halden_varrow
+14:51:16 CHAPTER person:halden_varrow begins
+14:51:16 Ana votes accept
+14:51:16 Bo votes accept
+14:51:16 Cy votes accept
+14:51:16 Dee votes accept
+14:51:16 Eli votes accept
+14:51:16 Fen votes accept
+14:51:28 LINE sq_halden_varrow_004 Halden Varrow
+14:51:29 Dee skips line sq_halden_varrow_004
+14:51:29 QUEST started: Where the Grain Went
+14:51:32 QUEST journal: opened on TV, selected and pinned
+14:51:36 CHAPTER Dee walks 11 steps from 30,61 to thing:af_granary_sack
+14:51:40 CHAPTER Dee taps Open the split sack: thing:af_granary_sack
+14:51:40 CHAPTER thing:af_granary_sack begins
+14:51:40 Ana votes trace
+14:51:40 Bo votes trace
+14:51:40 Cy votes trace
+14:51:40 Dee votes trace
+14:51:40 Eli votes trace
+14:51:40 Fen votes trace
+14:51:51 LINE sq_narrator_002 narrator
+14:51:52 Dee skips line sq_narrator_002
+14:51:52 QUEST tracker: Read the Ash Market tally
+14:51:55 CHAPTER Dee walks 148 steps from 39,70 to thing:af_ash_market_tally
+14:52:56 CHAPTER Dee taps Read the tally scrap: thing:af_ash_market_tally
+14:52:56 CHAPTER thing:af_ash_market_tally begins
+14:52:56 Ana votes record
+14:52:56 Bo votes record
+14:52:56 Cy votes record
+14:52:56 Dee votes record
+14:52:56 Eli votes record
+14:52:56 Fen votes record
+14:53:03 LINE sq_narrator_005 narrator
+14:53:04 Dee skips line sq_narrator_005
+14:53:05 QUEST tracker: Speak to Celandine or Halden
+14:53:11 CHAPTER Dee walks 154 steps from 93,101 to person:halden_varrow
+14:54:06 CHAPTER Dee taps Draw from the square well: person:halden_varrow
+14:54:06 CHAPTER person:halden_varrow begins
+14:54:06 Ana votes quiet
+14:54:06 Bo votes quiet
+14:54:06 Cy votes quiet
+14:54:06 Dee votes quiet
+14:54:06 Eli votes quiet
+14:54:06 Fen votes quiet
+14:54:17 LINE sq_halden_varrow_007 Halden Varrow
+14:54:18 Dee skips line sq_halden_varrow_007
+14:54:25 QUEST OK: talked, voted, opened journal, pinned, followed both clues, completed, auto-unpinned
+14:54:25 CHAPTER 1: ch1_mayors_request at 33,59
+14:54:32 CHAPTER Dee walks 2 steps from 30,61 to ch1_mayors_request
+14:54:32 CHAPTER Dee taps Talk: ch1_mayors_request
+14:54:32 CHAPTER ch1_mayors_request begins
+14:54:32 LINE ch1_mayor_open_1 narrator
+14:54:33 Dee skips line ch1_mayor_open_1
+14:54:34 LINE ch1_mayor_open_2 narrator
+14:54:35 Dee skips line ch1_mayor_open_2
+14:54:35 LINE ch1_mayor_open_3 Pip Ashdown
+14:54:36 Dee skips line ch1_mayor_open_3
+14:54:36 LINE ch1_mayor_open_4 Bree Tallow
+14:54:37 Dee skips line ch1_mayor_open_4
+14:54:38 LINE ch1_mayor_halden_1 Halden Varrow
+14:54:39 Dee skips line ch1_mayor_halden_1
+14:54:39 LINE ch1_mayor_halden_2 Halden Varrow
+14:54:40 Dee skips line ch1_mayor_halden_2
+14:54:41 LINE ch1_mayor_halden_3 Dagna Holt
+14:54:42 Dee skips line ch1_mayor_halden_3
+14:54:42 Dee votes goblins
+14:54:50 LINE ch1_mayor_goblins_1 Halden Varrow
+14:54:51 Dee skips line ch1_mayor_goblins_1
+14:54:51 LINE ch1_mayor_goblins_2 Dagna Holt
+14:54:52 Dee skips line ch1_mayor_goblins_2
+14:54:52 LINE ch1_mayor_goblins_3 Bree Tallow
+14:54:53 Dee skips line ch1_mayor_goblins_3
+14:54:54 LINE ch1_mayor_goblins_4 Halden Varrow
+14:54:55 Dee skips line ch1_mayor_goblins_4
+14:54:55 LINE ch1_mayor_close_1 narrator
+14:54:56 Dee skips line ch1_mayor_close_1
+14:54:56 LINE ch1_mayor_close_2 Pip Ashdown
+14:54:57 Dee skips line ch1_mayor_close_2
+14:54:57 LINE ch1_mayor_close_3 The Hooded Stranger
+14:54:59 Dee skips line ch1_mayor_close_3
+14:54:59 LINE ch1_mayor_close_4 Halden Varrow
+14:55:00 Dee skips line ch1_mayor_close_4
+14:55:00 CHAPTER ch1_mayors_request is over
+14:55:02 CHAPTER 2: ch1_the_ford_choice at 94,59
+14:55:06 CHAPTER Dee walks 108 steps from 32,61 to ch1_the_ford_choice
+14:55:47 CHAPTER Dee taps Talk: ch1_the_ford_choice
+14:55:47 CHAPTER ch1_the_ford_choice begins
+14:55:47 LINE ch1_ford_open_1 narrator
+14:55:48 Dee skips line ch1_ford_open_1
+14:55:48 LINE ch1_ford_open_2 narrator
+14:55:49 Dee skips line ch1_ford_open_2
+14:55:49 LINE ch1_ford_open_3 Halden Varrow
+14:55:50 Dee skips line ch1_ford_open_3
+14:55:51 LINE ch1_ford_open_4 Dagna Holt
+14:55:52 Dee skips line ch1_ford_open_4
+14:55:52 Dee votes why
+14:55:57 LINE ch1_ford_why_1 Halden Varrow
+14:55:58 Dee skips line ch1_ford_why_1
+14:55:59 Dee votes insight
+14:56:05 Ana picks Bo to roll insight
+14:56:05 Bo picks Bo to roll insight
+14:56:05 Cy picks Bo to roll insight
+14:56:05 Dee picks Bo to roll insight
+14:56:05 Eli picks Bo to roll insight
+14:56:05 Fen picks Bo to roll insight
+14:56:11 LINE ch1_ford_why_pass_1 narrator
+14:56:12 Dee skips line ch1_ford_why_pass_1
+14:56:13 LINE ch1_ford_why_pass_2 Halden Varrow
+14:56:14 Dee skips line ch1_ford_why_pass_2
+14:56:14 LINE ch1_ford_cases_1 Dagna Holt
+14:56:15 Dee skips line ch1_ford_cases_1
+14:56:15 LINE ch1_ford_cases_2 Dagna Holt
+14:56:16 Dee skips line ch1_ford_cases_2
+14:56:16 LINE ch1_ford_cases_3 Bree Tallow
+14:56:17 Dee skips line ch1_ford_cases_3
+14:56:18 LINE ch1_ford_cases_4 Bree Tallow
+14:56:19 Dee skips line ch1_ford_cases_4
+14:56:19 LINE ch1_ford_cases_5 Halden Varrow
+14:56:20 Dee skips line ch1_ford_cases_5
+14:56:20 LINE ch1_ford_vote_1 Halden Varrow
+14:56:21 Dee skips line ch1_ford_vote_1
+14:56:21 Ana votes force
+14:56:21 Bo votes force
+14:56:21 Cy votes force
+14:56:21 Dee votes force
+14:56:21 Eli votes force
+14:56:21 Fen votes force
+14:56:25 LINE ch1_ford_force_1 Dagna Holt
+14:56:26 Dee skips line ch1_ford_force_1
+14:56:26 LINE ch1_ford_force_2 Bree Tallow
+14:56:27 Dee skips line ch1_ford_force_2
+14:56:27 LINE ch1_ford_force_3 Halden Varrow
+14:56:28 Dee skips line ch1_ford_force_3
+14:56:29 CHAPTER ch1_the_ford_choice is over
+14:56:31 CHAPTER 3: ch1_old_maud at 132,93
+14:56:36 CHAPTER Dee walks 45 steps from 95,57 to ch1_old_maud
+14:56:53 CHAPTER Dee taps Look around: ch1_old_maud
+14:56:53 CHAPTER ch1_old_maud begins
+14:56:53 LINE ch1_maud_open_1 narrator
+14:56:54 Dee skips line ch1_maud_open_1
+14:56:55 LINE ch1_maud_open_2 narrator
+14:56:56 Dee skips line ch1_maud_open_2
+14:56:56 LINE ch1_maud_open_3 Old Maud
+14:56:57 Dee skips line ch1_maud_open_3
+14:56:57 Dee votes fell
+14:57:03 LINE ch1_maud_fell_1 Old Maud
+14:57:04 Dee skips line ch1_maud_fell_1
+14:57:05 LINE ch1_maud_fell_2 Old Maud
+14:57:06 Dee skips line ch1_maud_fell_2
+14:57:06 LINE ch1_maud_fell_3 Old Maud
+14:57:07 Dee skips line ch1_maud_fell_3
+14:57:07 LINE ch1_maud_fell_4 Old Maud
+14:57:08 Dee skips line ch1_maud_fell_4
+14:57:09 LINE ch1_maud_fell_5 narrator
+14:57:10 Dee skips line ch1_maud_fell_5
+14:57:10 LINE ch1_maud_fell_6 Old Maud
+14:57:11 Dee skips line ch1_maud_fell_6
+14:57:11 LINE ch1_maud_fell_7 The Hooded Stranger
+14:57:12 Dee skips line ch1_maud_fell_7
+14:57:12 Dee votes who
+14:57:19 LINE ch1_maud_who_1 Old Maud
+14:57:20 Dee skips line ch1_maud_who_1
+14:57:20 LINE ch1_maud_bye_1 Old Maud
+14:57:21 Dee skips line ch1_maud_bye_1
+14:57:21 LINE ch1_maud_bye_2 Old Maud
+14:57:22 Dee skips line ch1_maud_bye_2
+14:57:22 CHAPTER ch1_old_maud is over
+14:57:24 CHAPTER 4: ch1_the_ember at 99,99
+14:57:29 CHAPTER Dee walks 72 steps from 130,91 to ch1_the_ember
+14:58:03 CHAPTER Dee taps Talk: ch1_the_ember
+14:58:03 CHAPTER ch1_the_ember begins
+14:58:03 LINE ch1_docks_open_1 narrator
+14:58:04 Dee skips line ch1_docks_open_1
+14:58:05 LINE ch1_docks_open_2 Pip Ashdown
+14:58:06 Dee skips line ch1_docks_open_2
+14:58:06 LINE ch1_docks_open_3 narrator
+14:58:07 Dee skips line ch1_docks_open_3
+14:58:07 Dee votes cut
+14:58:15 LINE ch1_docks_rook_1 Rook
+14:58:16 Dee skips line ch1_docks_rook_1
+14:58:16 LINE ch1_docks_rook_2 narrator
+14:58:17 Dee skips line ch1_docks_rook_2
+14:58:18 LINE ch1_docks_rook_3 Rook
+14:58:19 Dee skips line ch1_docks_rook_3
+14:58:19 Dee votes killing
+14:58:28 LINE ch1_docks_killing_1 Rook
+14:58:29 Dee skips line ch1_docks_killing_1
+14:58:30 LINE ch1_docks_killing_2 Rook
+14:58:31 Dee skips line ch1_docks_killing_2
+14:58:31 LINE ch1_docks_killing_3 Rook
+14:58:32 Dee skips line ch1_docks_killing_3
+14:58:32 LINE ch1_docks_close_1 Pip Ashdown
+14:58:33 Dee skips line ch1_docks_close_1
+14:58:33 LINE ch1_docks_close_2 Pip Ashdown
+14:58:34 Dee skips line ch1_docks_close_2
+14:58:36 LINE ch1_kindler_open_1 narrator
+14:58:38 Dee skips line ch1_kindler_open_1
+14:58:38 LINE ch1_kindler_open_2 Maren Sorrel
+14:58:39 Dee skips line ch1_kindler_open_2
+14:58:39 LINE ch1_kindler_open_3 Maren Sorrel
+14:58:40 Dee skips line ch1_kindler_open_3
+14:58:40 LINE ch1_kindler_open_4 Mother Aubrine
+14:58:41 Dee skips line ch1_kindler_open_4
+14:58:42 LINE ch1_kindler_open_5 Maren Sorrel
+14:58:43 Dee skips line ch1_kindler_open_5
+14:58:43 LINE ch1_kindler_open_6 narrator
+14:58:44 Dee skips line ch1_kindler_open_6
+14:58:45 Dee votes slain
+14:58:52 LINE ch1_kindler_slain_1 Maren Sorrel
+14:58:53 Dee skips line ch1_kindler_slain_1
+14:58:54 LINE ch1_kindler_pitch_1 Maren Sorrel
+14:58:55 Dee skips line ch1_kindler_pitch_1
+14:58:55 Dee votes careful
+14:59:00 LINE ch1_kindler_done_1 narrator
+14:59:01 Dee skips line ch1_kindler_done_1
+14:59:03 LINE ch1_four_more_open_1 narrator
+14:59:04 Dee skips line ch1_four_more_open_1
+14:59:04 LINE ch1_four_more_open_2 The Hooded Stranger
+14:59:05 Dee skips line ch1_four_more_open_2
+14:59:06 Dee votes who
+14:59:12 LINE ch1_four_more_who_1 The Hooded Stranger
+14:59:13 Dee skips line ch1_four_more_who_1
+14:59:14 LINE ch1_four_more_where_1 The Hooded Stranger
+14:59:15 Dee skips line ch1_four_more_where_1
+14:59:15 LINE ch1_four_more_where_2 The Hooded Stranger
+14:59:16 Dee skips line ch1_four_more_where_2
+14:59:16 LINE ch1_four_more_where_4 The Hooded Stranger
+14:59:17 Dee skips line ch1_four_more_where_4
+14:59:18 LINE ch1_four_more_where_3 narrator
+14:59:19 Dee skips line ch1_four_more_where_3
+14:59:19 CHAPTER ch1_the_ember is over
+14:59:21 CHAPTER the card: Chapter I · The Bridge at the Ford
+14:59:28 CHAPTER walking on: 4 steps w
+14:59:28 Session over: The party is level 1; 0 battles won.
+[tv-e2e 14:59:28] letting the TV finish its shots (12 s)
+[tv-e2e 14:59:41] shots stopped
+[tv-e2e 14:59:41] TV stopped
+[tv-e2e 14:59:42] Xvfb stopped
+[tv-e2e 14:59:42] server stopped
+[tv-e2e 14:59:42] chapter: scenes: ch1_mayor (16), ch1_ford (19), ch1_maud (15), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+[tv-e2e 14:59:42] chapter: lines: 90, said 90
+[tv-e2e 14:59:42] chapter: the card: Chapter I · The Bridge at the Ford (line 2358)
+[tv-e2e 14:59:42] chapter: the fights:
+[tv-e2e 14:59:42] chapter: 4 walks to a "!", 0 routed again; CHAPTER walking on: 4 steps w
+[tv-e2e 14:59:42] a shot of the chapter-card: /workspace/issue73/e2e-verified-quests/chapter/19-chapter-card.png
+[tv-e2e 14:59:42] a shot of the walking-after: /workspace/issue73/e2e-verified-quests/chapter/20-walking-after.png
+[tv-e2e 14:59:42] chapter: 20 shots in /workspace/issue73/e2e-verified-quests/chapter
+[tv-e2e 14:59:42] OK

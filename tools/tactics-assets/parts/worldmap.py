@@ -310,6 +310,78 @@ ICONS = {
 }
 
 
+def bridge_icon(rope=False) -> Canvas:
+    c=_icon()
+    for y in (18,20):c.line(1,y,22,y,'b',3)
+    c.polygon([(2,12),(20,12),(22,16),(2,16)],'a',3)
+    for x in range(4,22,3):c.line(x,13,x,15,'ink',2)
+    if rope:
+        for x in (3,20):c.line(x,7,x,18,'a',2)
+        c.line(3,8,11,11,'ink',2);c.line(11,11,20,8,'ink',2)
+        for x in (6,10,14,18):c.line(x,10,x,13,'ink',2)
+    else:
+        c.rect(3,15,6,20,'c',3);c.rect(18,15,21,20,'c',2)
+        c.line(7,17,10,15,'c',4);c.line(14,15,17,17,'c',3)
+        c.line(3,11,20,11,'c',4)
+    c.outline();return c
+
+
+def hut_icon(inn=False) -> Canvas:
+    c=_icon();_ground(c,20)
+    c.rect(5,12,19,20,'c',3)
+    c.rect(17,12,19,20,'c',2)
+    c.polygon([(2,12),(10,4),(14,4),(22,12)],'a',3)
+    c.line(4,11,10,5,'a',4)
+    c.rect(10,14,12,20,'ink',1)
+    c.rect(15,14,16,16,'b',4)
+    if inn:
+        c.rect(16,2,18,8,'c',2)
+        c.line(3,13,3,18,'ink',2);c.rect(1,14,5,16,'b',3)
+    else:
+        # Maud's charms hang from the eaves, not a temple's sacred orb.
+        for x in (5,8,17):c.line(x,12,x,14,'ink',2);c.px(x,15,'b',3)
+    c.outline();return c
+
+
+def pool_icon(crater=False) -> Canvas:
+    c=_icon();_ground(c,20)
+    c.ellipse(12,16,10,5,'c',3)
+    c.ellipse(12,15,8,3,'ink',0)
+    c.line(5,14,9,13,'c',4)
+    if crater:
+        for x,y in ((3,13),(7,11),(18,12),(21,15)):c.px(x,y,'ink',1)
+    else:
+        c.ellipse(12,15,4,1,'a',2);c.px(12,15,'b',4)
+    c.outline();return c
+
+
+def flame_hall_icon() -> Canvas:
+    c=ruins();c.polygon([(8,18),(10,13),(12,15),(14,8),(17,14),(17,18)],'a',3)
+    c.polygon([(11,18),(12,14),(14,16),(15,13),(16,18)],'b',4)
+    return c
+
+
+ICONS.update({
+    'stone_bridge':(bridge_icon,{'a':'stone','b':'sea','c':'stone'}),
+    'rope_bridge':(lambda:bridge_icon(True),{'a':'roof','b':'sea','c':'stone'}),
+    'hut':(hut_icon,{'a':'hills','b':'gold','c':'roof'}),
+    'inn':(lambda:hut_icon(True),{'a':'roof','b':'gold','c':'stone'}),
+    'crater':(lambda:pool_icon(True),{'a':'red','b':'gold','c':'stone'}),
+    'heartpool':(pool_icon,{'a':'sea','b':'gold','c':'forest'}),
+    'flame_hall':(flame_hall_icon,{'a':'red','b':'gold','c':'stone'}),
+    'ice_cave':(dungeon,{'a':'snow','b':'blue','c':'snow'}),
+})
+
+# Place ids stay in lore. This art override preserves each place's existing
+# generic `kind` and visibility gates while giving literal landmarks literal art.
+PLACE_ICONS={
+    'the_last_coal':'inn','ford_bridge':'stone_bridge','maud_hut':'hut',
+    'canyon_bridge':'rope_bridge','the_crater':'crater',
+    'the_heartpool':'heartpool','flame_hall':'flame_hall',
+    'cold_ember_caves':'ice_cave',
+}
+
+
 def _pal(slots: dict[str, str]) -> dict[str, list[str]]:
     return {"ink": INK, "paper": PAPER, **{k: WASH[v] for k, v in slots.items()}}
 
@@ -436,8 +508,22 @@ def build() -> None:
                          "files": {n: f"icons/{n}.png" for n in list(ICONS) + ["party", "quest"]},
                          "animated": {"party": {"frames": 4, "fps": 6}, "quest": {"frames": 4, "fps": 6}}},
                 "sample": "sample_map.png",
+                "placeIcons": PLACE_ICONS,
                 "notes": "Compose a campaign map from parchment + region washes + icons; the sample shows the style"},
                out / "manifest.json")
+    import json
+    regions=json.loads((PACK/'lore/regions.json').read_text())['regions']
+    landmarks=[]
+    for region in regions:
+        for place in region['places']:
+            icon=PLACE_ICONS.get(place['id'],place['kind'])
+            # Leave room for actual place names instead of letting the labels
+            # overlap neighbouring 24px icon cells.
+            cell=Image.new('RGBA',(64,24));cell.alpha_composite(render_icon(icon),(20,0))
+            landmarks.append(Tile(cell,place['name'],f'{region["name"]} · {icon}'))
+    save(contact_sheet('Lore landmarks',landmarks,columns=5,zoom=4,
+        subtitle='Literal place overrides; existing lore kinds and visibility gates are unchanged. Art-library review, not a live map.'),
+        PREVIEWS/'27-place-landmarks.png')
     on_paper = []
     paper = parchment()
     for t in tiles:

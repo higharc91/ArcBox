@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "character: 808551e2-cb8d-471b-a5be-6ed59b28e7a7\nanimation: v3 custom (Standing relaxed and speaking warmly, a small open-palm gesture with the free hand, gentle nod, then settle back into the starting pose for a seamless conversation loop. Both feet planted. The closed notebook stays fixed at the belt; do not open it, pick it up or swap equipment sides. No walking, large arm swings, extra objects, camera motion or zoom.)\ndirections: south-east (1 jobs)\njob_ids: south-east=64df0419-5d12-40c3-910a-95a19404b10f\ngroup: c27ce5fe-da26-43c5-872e-dd505c17fd31\nframes: 5 (1 reference + 4 animated)\ncanvas: south-east 104x104 (frames are stored at this size: the character plus room to move)\ncost: 1 generation (1/dir x 1)\neta: ~2-4 min/direction\n\nhint: get_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\")\nadd more directions to this group: animate_character(character_id=\"808551e2-cb8d-471b-a5be-6ed59b28e7a7\", action_description=\"Standing relaxed and speaking warmly, a small open-palm gesture with the free hand, gentle nod, then settle back into the starting pose for a seamless conversation loop. Both feet planted. The closed notebook stays fixed at the belt; do not open it, pick it up or swap equipment sides. No walking, large arm swings, extra objects, camera motion or zoom.\", animation_group_id=\"c27ce5fe-da26-43c5-872e-dd505c17fd31\", directions=[...])"
+    }
+  ],
+  "isError": false
+}

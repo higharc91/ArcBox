@@ -62,8 +62,8 @@
         "side": "Enemy",
         "sprite": "characters.goblin_cutthroat",
         "at": [
-          9,
-          6
+          11,
+          5
         ],
         "hp": 16,
         "maxHp": 16,
@@ -79,8 +79,8 @@
         "side": "Enemy",
         "sprite": "characters.goblin_cutthroat",
         "at": [
-          10,
-          6
+          12,
+          5
         ],
         "hp": 16,
         "maxHp": 16,
@@ -663,35 +663,6 @@
             [
               4,
               11
-            ]
-          ]
-        },
-        {
-          "to": [
-            5,
-            10
-          ],
-          "cost": 4,
-          "path": [
-            [
-              1,
-              10
-            ],
-            [
-              2,
-              10
-            ],
-            [
-              3,
-              10
-            ],
-            [
-              4,
-              10
-            ],
-            [
-              5,
-              10
             ]
           ]
         }

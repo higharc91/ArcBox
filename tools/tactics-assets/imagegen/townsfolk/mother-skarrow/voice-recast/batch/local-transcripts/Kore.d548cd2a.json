@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.d548cd2a.wav",
+  "sourceSha256": "71667c28049401042eb923b0fc3d0cf874e90e73f8a3b2ddf3875d6ffa32f4de",
+  "duration": 6.44,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.0,
+      "text": " 40 winters I have bled for this clan. Your turn."
+    }
+  ],
+  "text": "40 winters I have bled for this clan. Your turn.",
+  "secondsToTranscribe": 1.871
+}

@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "error: need 7 job slots but only 0 available (8/8 used)\n\nhint: wait_for_jobs(min_finished=7) returns once 7 job(s) have finished (~2-4 min each), then retry"
+    }
+  ],
+  "isError": true
+}

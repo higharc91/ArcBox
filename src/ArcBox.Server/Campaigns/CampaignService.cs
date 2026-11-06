@@ -395,7 +395,12 @@ public sealed class CampaignService
         if (!_snapshots.TryGetValue(c.Info.Id, out var list)) _snapshots[c.Info.Id] = list = [];
         var snapshot = new Snapshot(++_lastSnapshotId, c.Info.Version, label, text, now);
         list.Add(snapshot);
-        if (list.Count > MaxSnapshots) list.RemoveRange(0, list.Count - MaxSnapshots);
+        if (list.Count > MaxSnapshots)
+        {
+            // Pushed out of the last MaxSnapshots: if its write hasn't run (a disk that's down), it never needs to.
+            foreach (var old in list.Take(list.Count - MaxSnapshots)) _writer.Forget($"campaign-snapshot:{old.Id}");
+            list.RemoveRange(0, list.Count - MaxSnapshots);
+        }
 
         var campaign = c.Info.Id;
         _writer.Write($"campaign-snapshot:{snapshot.Id}", connection =>

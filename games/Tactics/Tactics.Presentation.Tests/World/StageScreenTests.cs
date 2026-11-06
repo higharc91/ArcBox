@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Board;
 using Tactics.Presentation.World;
 using Xunit;
 using static Tactics.Presentation.Tests.World.StageScript;
@@ -63,6 +64,32 @@ public sealed class StageScreenTests
         Assert.Equal(StageStep.FallingIn, director.Stage);
         Assert.Equal(2, after.World!.Epoch);
         Assert.False(after.InPlace);
+    }
+
+    // Whole-branch review, TV finding 2: a TV back mid-fight while the world loads plays it on the plain board. The results come with blows
+    // left, so the scene holds them until the last one plays; the world takes the fight over meanwhile. The results the scene shows then
+    // are made from the view as the stage is at that moment (TacticsScene.Render's held closure), not as it was when they came.
+    [Fact]
+    public void Results_held_for_the_last_blow_are_drawn_as_the_stage_is_when_it_lands()
+    {
+        var script = new StageScript();
+        var director = script.Director(WorldState.Loading);
+        director.Receive(Fight(Battle(lastSeq: 5)));
+        var results = Results(Battle(lastSeq: 9), Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn")) with { Results = Lines };
+        director.Receive(results);
+        var held = PhaseScreen.Of(results, director);           // what the scene had when the results came
+        Assert.False(held.InPlace);
+
+        director.SetWorld(WorldState.Ready, script.Terrain);     // the world takes the fight over before the last blow plays
+        Assert.True(director.InPlace);
+        var shown = PhaseScreen.Of(results, director);
+
+        Assert.True(shown.InPlace);                               // the results go over the world, its units where the fight left them
+        Assert.True(shown.OverWorld);
+        Assert.NotEqual(held, shown);                             // so the screen made when they came is stale: the closure makes it again
+        Assert.True(Look(shown).HeaderAndTable);
+        director.LastBlowPlayed();
+        Assert.Equal(StageStep.Fading, director.Stage);
     }
 
     [Fact]
@@ -189,5 +216,40 @@ public sealed class StageScreenTests
         Assert.True(screen.OverWorld);
         Assert.True(screen.InPlace);
         Assert.True(Look(screen).HeaderAndTable);
+    }
+
+    // The hardware check (local-windows-checks §5.7): at the results over the world a unit's bar poked out bright above the table, its Downed
+    // counts showed through it, and the table ran about 200 px empty past its rows. The results come while the last blow still plays, so the
+    // marks go with the table, before the stage itself is at its results; and the table is only as tall as its rows.
+    [Fact]
+    public void Results_over_the_world_hide_the_units_marks_and_fit_the_table_to_its_rows()
+    {
+        var script = new StageScript();
+        var director = script.Director();
+        director.Receive(Walking());
+        director.Receive(Fight(Battle()), script.Walkers(new Tile(12, 12), new Tile(12, 13)));
+        Run(director, StageTuning.FormingMost + 0.1);
+        var results = Results(Battle(lastSeq: 9), Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn")) with { Results = Lines };
+        director.Receive(results);
+        var screen = PhaseScreen.Of(results, director);
+
+        Assert.Equal(StageStep.Fighting, director.Stage);       // the last blow is still playing
+        Assert.True(screen.OverWorld);
+        Assert.True(MarkRule.Shown(director.Stage, covered: false));
+        Assert.False(MarkRule.Shown(director.Stage, screen.OverWorld));
+        director.LastBlowPlayed();
+        var steps = new HashSet<StageStep>();
+        Run(director, StageTuning.GridOut + 0.2, each: () =>
+        {
+            steps.Add(director.Stage);
+            Assert.False(MarkRule.Shown(director.Stage, PhaseScreen.Of(results, director).OverWorld));
+        });
+        Assert.Equal([StageStep.Fading, StageStep.Results], steps.Order());
+
+        Assert.False(screen.TableFills);
+        Assert.Equal(0, screen.EmptySlots);
+        var plain = PhaseScreen.Of(results);     // a fight on the plain board: its results have the screen to themselves
+        Assert.True(plain.TableFills);
+        Assert.Equal(PhaseScreen.TableSlots - Lines.Length, plain.EmptySlots);
     }
 }

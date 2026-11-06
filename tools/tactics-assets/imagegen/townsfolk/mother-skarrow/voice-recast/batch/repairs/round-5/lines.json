@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ch3_skarrow_messenger_song_1.main",
+    "line": "ch3_skarrow_messenger_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "renderText": "Read the dialogue with an elderly woman's low husky contralto, dry rasp and quiet authority:\n\nYou FED my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.aa300f5c",
+    "file": "ch3_skarrow_messenger_song_1.ada85e9a.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_4.main",
+    "line": "ch3_skarrow_messenger_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "renderText": "Read the dialogue with an elderly woman's low husky contralto, dry rasp and quiet authority:\n\nYour Wardens SANG that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e56a7dc5",
+    "file": "ch3_skarrow_messenger_song_4.49fe6b28.ogg",
+    "done": false
+  }
+]
