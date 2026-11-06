@@ -194,6 +194,7 @@ public sealed class RetreatVoteTests
         var after = TacticsDocument.Read(s.Lease.Document);
         Assert.Null(after.Battle);
         Assert.DoesNotContain("river_crossing", after.Completed);
+        Assert.True(after.World!.RestReady);     // a flight earns a rest, like a loss
         foreach (var (id, member) in after.Members)
             Assert.Equal(before.Members[id].Xp + 125, member.Xp);
         Assert.Contains(injury, after.Members["pr_member2"].Character.Injuries);

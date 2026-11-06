@@ -597,7 +597,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         };
         if (result.Outcome == BattleOutcome.Won)
             _doc = _doc.ChangeGold(mob?.Gold ?? Rules.Encounters[save.Encounter].Gold, save.Members.Where(m => mob is null || _players.Any(p => p.Profile == m && _online.Contains(p.Id))).Select(m => m.Value));
-        if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost && _doc.World is { } resting)
+        if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost or BattleOutcome.Fled && _doc.World is { } resting)
             _doc = _doc with { World = resting with { RestReady = true } };
         if (mob is not null && result.Outcome == BattleOutcome.Won && _doc.World is { } mobWorld)
             _doc = _doc with { World = mobWorld with { MobsBeaten = (mobWorld.MobsBeaten.IsDefault ? [] : mobWorld.MobsBeaten).Add(mob.Id) } };
