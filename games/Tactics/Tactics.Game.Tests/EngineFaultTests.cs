@@ -150,6 +150,28 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    public async Task A_save_with_a_zeroed_rng_is_called_off_when_opened_instead_of_hanging_the_room()
+    {
+        var first = new Session();
+        first.ToBattle(everyoneAway: true);
+        var doc = TacticsDocument.Read(first.Lease.Document);
+        var zeroed = (doc with { Battle = doc.Battle! with { State = doc.Battle.State with { Rng = default } } }).ToJson();
+        var (game, faults) = Watched();
+        var s = new Session(document: zeroed, game: game);
+
+        var opened = Task.Run(() => s.Harness.Resume(s.Lease), TestContext.Current.CancellationToken);
+        var finished = await Task.WhenAny(opened, Task.Delay(TimeSpan.FromSeconds(20), TestContext.Current.CancellationToken));
+        Assert.True(finished == opened, "resuming a save with a zeroed Rng hung");
+        await opened;
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Contains(TacticsGame.BattleCalledOff, s.Host.Notice);
+        Assert.Null(TacticsDocument.Read(s.Lease.Document).Battle);
+        Assert.Contains(faults, f => f.Where == "resume" && f.Error is RulesInvariantException);
+    }
+
+    [Fact]
     public void A_save_the_engine_fails_on_every_command_is_called_off_when_opened_and_opens_cleanly_after()
     {
         // A state that breaks an invariant (a negative resource), so the real engine throws on every command, ending a turn

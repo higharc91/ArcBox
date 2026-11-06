@@ -28,7 +28,9 @@ public static class Invariants
     /// <item><see cref="BattleState.Order"/> names only units in the battle's roster, each at most once, and holds every
     /// Up or Downed unit except those <see cref="BattleState.Joining"/> it next round, which are in the battle and not in
     /// it;</item>
-    /// <item>while the battle goes on, <see cref="BattleState.TurnIndex"/> is a valid index into the order.</item>
+    /// <item>while the battle goes on, <see cref="BattleState.TurnIndex"/> is a valid index into the order;</item>
+    /// <item>the battle's <see cref="BattleState.Rng"/> has an odd increment (a PCG32 stream; a zeroed generator never ends
+    /// <see cref="Rng.Below"/>'s rejection loop).</item>
     /// </list>
     /// </summary>
     public static void Check(BattleState s, RulesPack rules)
@@ -40,6 +42,8 @@ public static class Invariants
     /// <summary><see cref="Check(BattleState, RulesPack)"/> with the map as it is now already built.</summary>
     internal static void Check(BattleState s, RulesPack rules, Terrain terrain)
     {
+        if ((s.Rng.Inc & 1) == 0)
+            Fail($"The battle's Rng has an even increment ({s.Rng.Inc}), so it isn't a valid generator.");
         CheckSurfaces(s, rules, terrain);
         var walking = s.Queue.OfType<MoveStep>().Select(m => m.Unit).ToImmutableSortedSet();
         var holders = new Dictionary<Tile, UnitId>();   // lookups only
