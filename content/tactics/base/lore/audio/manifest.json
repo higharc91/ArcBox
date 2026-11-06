@@ -147,6 +147,36 @@
     }
   },
   "lines": {
+    "af_bank_claw_marks": {
+      "main": "af_bank_claw_marks.eb0e3450.ogg"
+    },
+    "af_bank_claw_marks_use": {
+      "main": "af_bank_claw_marks_use.eb0e3450.ogg"
+    },
+    "af_bridge_carving": {
+      "main": "af_bridge_carving.36b04b27.ogg"
+    },
+    "af_bridge_carving_use": {
+      "main": "af_bridge_carving_use.36b04b27.ogg"
+    },
+    "af_market_cellar_draft": {
+      "main": "af_market_cellar_draft.35028fe8.ogg"
+    },
+    "af_market_cellar_draft_use": {
+      "main": "af_market_cellar_draft_use.35028fe8.ogg"
+    },
+    "af_market_cellar_hatch_use": {
+      "main": "af_market_cellar_hatch_use.16859b58.ogg"
+    },
+    "af_market_cellar_store_use": {
+      "main": "af_market_cellar_store_use.adfdbcfc.ogg"
+    },
+    "af_southfield_goat_tracks": {
+      "main": "af_southfield_goat_tracks.82ea1e7b.ogg"
+    },
+    "af_southfield_goat_tracks_use": {
+      "main": "af_southfield_goat_tracks_use.82ea1e7b.ogg"
+    },
     "ashmaw_accepted": {
       "main": "ashmaw_accepted.7b2094b8.ogg"
     },
@@ -1041,17 +1071,89 @@
     "ch1_bridge_cost_song_2": {
       "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
     },
+    "ch1_camp_ashmaw_open_1": {
+      "main": "ch1_camp_ashmaw_open_1.d68e304d.ogg"
+    },
+    "ch1_camp_ashmaw_open_2": {
+      "main": "ch1_camp_ashmaw_open_2.45a7989e.ogg"
+    },
+    "ch1_camp_ashmaw_pity_1": {
+      "main": "ch1_camp_ashmaw_pity_1.43a5f525.ogg"
+    },
+    "ch1_camp_ashmaw_pity_2": {
+      "main": "ch1_camp_ashmaw_pity_2.0dd3698f.ogg"
+    },
+    "ch1_camp_ashmaw_resolve_1": {
+      "main": "ch1_camp_ashmaw_resolve_1.afbf2854.ogg"
+    },
+    "ch1_camp_ashmaw_resolve_2": {
+      "main": "ch1_camp_ashmaw_resolve_2.7fbac2d6.ogg"
+    },
+    "ch1_camp_force_duty_1": {
+      "main": "ch1_camp_force_duty_1.5589e4ff.ogg"
+    },
+    "ch1_camp_force_duty_2": {
+      "main": "ch1_camp_force_duty_2.f4510c7b.ogg"
+    },
+    "ch1_camp_force_grief_1": {
+      "main": "ch1_camp_force_grief_1.d538bcd0.ogg"
+    },
+    "ch1_camp_force_grief_2": {
+      "main": "ch1_camp_force_grief_2.f2070ee2.ogg"
+    },
+    "ch1_camp_force_open_1": {
+      "main": "ch1_camp_force_open_1.a37f40de.ogg"
+    },
+    "ch1_camp_force_open_2": {
+      "main": "ch1_camp_force_open_2.51e66496.ogg"
+    },
     "ch1_camp_hunger_1": {
       "main": "ch1_camp_hunger_1.a925b2e9.ogg"
     },
     "ch1_camp_hunger_2": {
       "main": "ch1_camp_hunger_2.750c194a.ogg"
     },
+    "ch1_camp_maud_open_1": {
+      "main": "ch1_camp_maud_open_1.3d2d806f.ogg"
+    },
+    "ch1_camp_maud_open_2": {
+      "main": "ch1_camp_maud_open_2.509849d4.ogg"
+    },
+    "ch1_camp_maud_protect_1": {
+      "main": "ch1_camp_maud_protect_1.0a0accd9.ogg"
+    },
+    "ch1_camp_maud_protect_2": {
+      "main": "ch1_camp_maud_protect_2.73f2d65c.ogg"
+    },
+    "ch1_camp_maud_seek_1": {
+      "main": "ch1_camp_maud_seek_1.d94ca64d.ogg"
+    },
+    "ch1_camp_maud_seek_2": {
+      "main": "ch1_camp_maud_seek_2.81e153a2.ogg"
+    },
     "ch1_camp_open_1": {
       "main": "ch1_camp_open_1.b7fd3291.ogg"
     },
     "ch1_camp_open_2": {
       "main": "ch1_camp_open_2.73f05588.ogg"
+    },
+    "ch1_camp_parley_caution_1": {
+      "main": "ch1_camp_parley_caution_1.fdd3cfff.ogg"
+    },
+    "ch1_camp_parley_caution_2": {
+      "main": "ch1_camp_parley_caution_2.79eafbf7.ogg"
+    },
+    "ch1_camp_parley_open_1": {
+      "main": "ch1_camp_parley_open_1.7e8df336.ogg"
+    },
+    "ch1_camp_parley_open_2": {
+      "main": "ch1_camp_parley_open_2.9c3e0aff.ogg"
+    },
+    "ch1_camp_parley_trust_1": {
+      "main": "ch1_camp_parley_trust_1.7e997e20.ogg"
+    },
+    "ch1_camp_parley_trust_2": {
+      "main": "ch1_camp_parley_trust_2.18bca828.ogg"
     },
     "ch1_camp_truth_1": {
       "main": "ch1_camp_truth_1.8e17b167.ogg"
@@ -3771,6 +3873,12 @@
     "sq_tobin_fell_008": {
       "main": "sq_tobin_fell_008.463aa699.ogg"
     },
+    "thing.af_market_cellar_ledger.words.0": {
+      "main": "thing.af_market_cellar_ledger.words.0.3af6f197.ogg"
+    },
+    "thing.af_market_cellar_ledger.words.1": {
+      "main": "thing.af_market_cellar_ledger.words.1.a006a30c.ogg"
+    },
     "town_barmaid_1": {
       "main": "town_barmaid_1.ae904edb.ogg"
     },
@@ -4271,42 +4379,6 @@
     "voice_wry_victory_2": {
       "high": "voice_wry_victory_2.b93f39de.ogg",
       "low": "voice_wry_victory_2.8623a47e.ogg"
-    },
-    "af_bank_claw_marks": {
-      "main": "af_bank_claw_marks.eb0e3450.ogg"
-    },
-    "af_bank_claw_marks_use": {
-      "main": "af_bank_claw_marks_use.eb0e3450.ogg"
-    },
-    "af_bridge_carving": {
-      "main": "af_bridge_carving.36b04b27.ogg"
-    },
-    "af_bridge_carving_use": {
-      "main": "af_bridge_carving_use.36b04b27.ogg"
-    },
-    "af_market_cellar_draft": {
-      "main": "af_market_cellar_draft.35028fe8.ogg"
-    },
-    "af_market_cellar_draft_use": {
-      "main": "af_market_cellar_draft_use.35028fe8.ogg"
-    },
-    "af_market_cellar_hatch_use": {
-      "main": "af_market_cellar_hatch_use.16859b58.ogg"
-    },
-    "af_market_cellar_store_use": {
-      "main": "af_market_cellar_store_use.adfdbcfc.ogg"
-    },
-    "af_southfield_goat_tracks": {
-      "main": "af_southfield_goat_tracks.82ea1e7b.ogg"
-    },
-    "af_southfield_goat_tracks_use": {
-      "main": "af_southfield_goat_tracks_use.82ea1e7b.ogg"
-    },
-    "thing.af_market_cellar_ledger.words.0": {
-      "main": "thing.af_market_cellar_ledger.words.0.3af6f197.ogg"
-    },
-    "thing.af_market_cellar_ledger.words.1": {
-      "main": "thing.af_market_cellar_ledger.words.1.a006a30c.ogg"
     }
   }
 }
