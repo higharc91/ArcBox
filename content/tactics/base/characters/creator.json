@@ -89,8 +89,8 @@
         "eyes": "dark"
       },
       "traits": [
-        "Versatile",
-        "+1 to every score"
+        "Resourceful",
+        "+1 skill"
       ]
     },
     "elf": {
@@ -157,7 +157,7 @@
       "traits": [
         "Darkvision",
         "Fey ancestry",
-        "Keen senses"
+        "Fey step"
       ]
     },
     "half_elf": {
@@ -228,7 +228,7 @@
       "traits": [
         "Darkvision",
         "Fey ancestry",
-        "Two extra skills"
+        "+1 skill"
       ]
     },
     "dwarf": {
@@ -302,7 +302,7 @@
       "traits": [
         "Darkvision",
         "Poison resilience",
-        "Stone sense"
+        "Stoneskin"
       ]
     },
     "halfling": {
@@ -367,9 +367,7 @@
         "eyes": "green"
       },
       "traits": [
-        "Lucky",
-        "Brave",
-        "Nimble"
+        "Lucky"
       ]
     },
     "gnome": {
@@ -510,8 +508,7 @@
       },
       "traits": [
         "Darkvision",
-        "Relentless endurance",
-        "Savage attacks"
+        "Relentless endurance"
       ]
     },
     "tiefling": {
@@ -589,7 +586,7 @@
       "traits": [
         "Darkvision",
         "Hellish resistance",
-        "Infernal legacy"
+        "Hellish rebuke"
       ]
     },
     "aasimar": {
@@ -657,8 +654,7 @@
       },
       "traits": [
         "Darkvision",
-        "Healing hands",
-        "Radiant soul"
+        "Healing hands"
       ]
     },
     "goliath": {
@@ -724,9 +720,7 @@
         "paint": "kohl"
       },
       "traits": [
-        "Stone's endurance",
-        "Powerful build",
-        "Mountain born"
+        "Stone's endurance"
       ]
     },
     "dragonborn": {
@@ -898,11 +892,12 @@
       "name": "Paladin",
       "role": "Defender",
       "gear": {
-        "torso": "plate",
-        "legs": "greaves",
-        "feet": "sabatons",
-        "hands": "gauntlets",
-        "weapon": "greatsword",
+        "torso": "chain",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "gloves",
+        "weapon": "sword",
+        "offhand": "round_shield",
         "cape": "cloak"
       },
       "colours": {
@@ -947,7 +942,8 @@
         "feet": "sandals",
         "hands": "bare",
         "weapon": "staff",
-        "headgear": "circlet"
+        "headgear": "circlet",
+        "offhand": "round_shield"
       },
       "colours": {
         "cloth1": "cloth/moss",
@@ -991,7 +987,8 @@
         "torso": "tunic",
         "legs": "pants",
         "feet": "sandals",
-        "hands": "bare"
+        "hands": "bare",
+        "weapon": "spear"
       },
       "colours": {
         "cloth1": "cloth/ochre",
@@ -1110,7 +1107,7 @@
     "shadow": {
       "name": "Shadow",
       "class": "rogue",
-      "role": "Stealth, backstabs from behind",
+      "role": "Stealth, teleport between shadows",
       "gear": {
         "headgear": "mask_hood",
         "offhand": "dagger",
@@ -1377,7 +1374,7 @@
     "lore": {
       "name": "College of Lore",
       "class": "bard",
-      "role": "Debuffs, copies an enemy ability",
+      "role": "Debuffs, cutting words, extra spells",
       "gear": {
         "torso": "coat",
         "weapon": "tome",
@@ -1410,7 +1407,7 @@
       "companion": null
     },
     "shapeshifter": {
-      "name": "Shapeshifter",
+      "name": "Circle of the Shapeshifter",
       "class": "druid",
       "role": "Beast forms",
       "gear": {
@@ -1426,7 +1423,7 @@
       "companion": null
     },
     "stormcaller": {
-      "name": "Stormcaller",
+      "name": "Circle of the Stormcaller",
       "class": "druid",
       "role": "Weather zones",
       "gear": {
@@ -1442,7 +1439,7 @@
       "companion": null
     },
     "grovekeeper": {
-      "name": "Grovekeeper",
+      "name": "Circle of the Grovekeeper",
       "class": "druid",
       "role": "Summons, healing over time",
       "gear": {
@@ -1491,7 +1488,7 @@
       "companion": "imp"
     },
     "void": {
-      "name": "Void",
+      "name": "Voidcaller",
       "class": "warlock",
       "role": "Teleport, pull",
       "gear": {
@@ -1629,7 +1626,7 @@
       "companion": null
     },
     "chaos": {
-      "name": "Chaos Bloodline",
+      "name": "Wild Chaos",
       "class": "sorcerer",
       "role": "Wild magic surges",
       "gear": {
