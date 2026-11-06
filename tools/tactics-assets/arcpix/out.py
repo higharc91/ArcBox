@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from PIL import Image
 
 HERE = Path(__file__).resolve().parents[1]           # tools/tactics-assets
-PACK = HERE.parents[1] / "content" / "tactics" / "base"
+PACK = Path(os.environ.get("TACTICS_PACK", HERE.parents[1] / "content" / "tactics" / "base"))
 PREVIEWS = HERE / "previews"
 MOCKUPS = HERE.parents[1] / "docs" / "superpowers" / "mockups" / "tactics" / "assets"
 

@@ -1,8 +1,14 @@
 # Wardenflame assets (working name: tactics)
 
-Procedural pixel art for Wardenflame, the tactics RPG. The art is drawn in Python, not by hand: every sprite is code
-over a small set of parts. Re-running the build gives byte-identical output, so the content pack's hash changes only
-when the art does.
+Procedural pixel art and reviewed imported art for Wardenflame, the tactics RPG. The catalogue is drawn in Python
+over a small set of parts. The shipped pack also contains authored overrides and retained sources that the current
+catalogue build does not yet reproduce. See the measured rebuild status below before rebuilding the live pack.
+
+Install the shared pinned Python dependencies first:
+
+```bash
+python3 -m pip install -r tools/requirements.txt
+```
 
 ```bash
 python3 tools/tactics-assets/build.py                    # content sets, no review images
@@ -10,6 +16,71 @@ python3 tools/tactics-assets/build.py characters         # one content set
 python3 tools/tactics-assets/build.py previews           # content sets and review images
 python3 tools/tactics-assets/build.py previews terrain   # one set and its review images
 ```
+
+## Rebuild verification and cold-build measurement (#203)
+
+The workflow is configured to build the assets with pinned Pillow 12.3.0 and numpy 2.3.5, then run
+`git diff --exit-code -- content/`. GitHub Actions remains manually disabled at the owner's request; adding this
+step does not enable it. A clean generated-content result is still outstanding because committed content includes
+approved native artwork, imported townsfolk/scenes, and retained source assets.
+
+### Ability-icon enumeration repair
+The cold-build crash in `parts/ability_icons.py` (`KeyError: 'villains'`) was resolved by excluding `villains.json`
+from the player-ability catalogue in `parts/ability_icons.py:abilities`. Boss/villain encounter abilities use the
+fallback icons already allowlisted in `manifest-allowlist.json`.
+
+### Completed cold-build measurement
+A full cold build was run across all 32 content sets with Python 3.11, pinned `Pillow==12.3.0` and `numpy==2.3.5`,
+and output redirected via `TACTICS_PACK` into an isolated pack copy, preserving committed content.
+The full build completed successfully across all sets in **669.15 seconds (11 min 9 s)** (2 CPU cores, fresh process).
+
+### Drift analysis across completed sets
+
+The isolated build produced the following comparison against committed `content/tactics/base`:
+
+| Set | Changed files | Removed files | Added files | Notes |
+|---|---:|---:|---:|---|
+| ambient | 0 | 0 | 0 | Byte-identical |
+| backgrounds | 0 | 0 | 0 | Byte-identical |
+| beasts | 0 | 0 | 0 | Byte-identical |
+| bestiary | 0 | 0 | 0 | Byte-identical |
+| bosses | 0 | 0 | 0 | Byte-identical |
+| camp | 0 | 0 | 0 | Byte-identical |
+| crests | 0 | 0 | 0 | Byte-identical |
+| dungeon | 0 | 0 | 0 | Byte-identical |
+| emotes | 0 | 0 | 0 | Byte-identical |
+| fx | 0 | 0 | 0 | Byte-identical |
+| grades | 0 | 0 | 0 | Byte-identical |
+| hazards | 0 | 0 | 0 | Byte-identical |
+| injury_icons | 0 | 0 | 0 | Byte-identical |
+| pickups | 0 | 0 | 0 | Byte-identical |
+| projectiles | 0 | 0 | 0 | Byte-identical |
+| sheet_icons | 0 | 0 | 0 | Byte-identical |
+| signature | 0 | 0 | 0 | Byte-identical |
+| tactical | 0 | 0 | 0 | Byte-identical (all 132 sheets) |
+| town | 0 | 0 | 0 | Byte-identical |
+| transitions | 0 | 0 | 0 | Byte-identical |
+| ui | 0 | 0 | 0 | Byte-identical |
+| worldmap | 0 | 0 | 0 | Byte-identical |
+| characters | 2 | 0 | 0 | Drops 4 authored aliases (`mother_skarrow`, `goblin_shaman_mother_skarrow`, `hermit_old_maud`, `old_maud`) in `manifest.json`; `palettes.json` |
+| terrain | 1 | 23 | 0 | `shutil.rmtree` drops 16 native Ford ground/cliff textures (commit `ac79e092`) and 7 legacy source textures in `manifest-allowlist.json` |
+| props | 13 | 173 | 0 | `shutil.rmtree` drops 173 authored Ashen Ford structures, granary, Maud hut, secrets, bridges; 13 props differ in pixels |
+| portraits | 324 | 160 | 0 | `shutil.rmtree` drops 160 approved portraits (townsfolk, bosses, Maud, Skarrow); 324 change due to material shading refinement in `c0637476` |
+| icons | 3 | 0 | 0 | `abilities_by_id.png` (@2x, manifest) changed because `common.shove_prone` and `extinguish` were added to rules without rebake |
+| chapters | 5 | 0 | 0 | PNG re-compression differences |
+| creator | 12 | 0 | 0 | Skin atlas encoding differences |
+| gear_icons | 9 | 0 | 0 | Atlas compression differences |
+| status | 1 | 0 | 4 | Additional generated status overlay variations |
+| title | 1 | 0 | 0 | Composed title re-render |
+
+22 of 32 sets are completely byte-identical. The remaining drift is accounted for by approved native artwork,
+imported townsfolk/structures, allowlisted source assets, and rule additions.
+
+Approved native artwork has been preserved byte-for-byte in `content/tactics/base/`. No destructive replacements
+or deletions were committed to `content/`. The workflow rebuild step remains in place, and hosted verification is
+pending reconciliation of generated catalogues with approved native art.
+
+## Outputs
 
 | Output | What |
 |---|---|
