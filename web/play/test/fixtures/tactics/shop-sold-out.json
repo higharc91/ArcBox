@@ -49,6 +49,7 @@
     "portal": "/c/ABCD",
     "haggle": {
       "can": true,
+      "spent": false,
       "dc": 15,
       "result": null
     }
