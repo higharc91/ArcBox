@@ -342,8 +342,8 @@ describe("skill checks", () => {
   it("shows the roll", () => {
     show("check-rolled");
     const roll = document.querySelector(".tx-roll")!;
-    expect(within(roll as HTMLElement).getByText("Failure")).toBeTruthy();
-    expect(roll.textContent).toMatch(/6\s*\+\s*0\s*=\s*6\s*vs DC\s*15/);
+    expect(within(roll as HTMLElement).getByText("Success")).toBeTruthy();
+    expect(roll.textContent).toMatch(/16\s*\+\s*0\s*=\s*16\s*vs DC\s*15/);
     expect(within(roll as HTMLElement).getByText(/Player3 rolled/)).toBeTruthy();
     expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-check"))).toEqual([]);
   });
@@ -361,7 +361,7 @@ describe("a search's check (interactables design §7.4)", () => {
   it("rolls with no DC, and says what it found", () => {
     show("check-search-rolled");
     const roll = document.querySelector(".tx-roll")! as HTMLElement;
-    expect(roll.textContent).toMatch(/5\s*\+\s*5\s*=\s*10/);
+    expect(roll.textContent).toMatch(/3\s*\+\s*5\s*=\s*8/);
     expect(roll.textContent).not.toContain("vs DC");
     expect(within(roll).getByText("Nothing found")).toBeTruthy();
     expect(roll.getAttribute("aria-label")).not.toContain("DC");

@@ -119,7 +119,7 @@ public sealed partial class TacticsGame
     /// rather than read as a command the battle doesn't know.
     /// </summary>
     private static bool IsWorldAction(string action)
-        => action is "giveOpen" or "giveClose" or "give" or "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService";
+        => action is "help" or "groupRoll" or "giveOpen" or "giveClose" or "give" or "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 

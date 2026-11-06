@@ -1406,6 +1406,7 @@
               "label": "Where did they go?",
               "check": {
                 "skill": "perception",
+                "group": true,
                 "dc": 15,
                 "pass": "track",
                 "fail": "lost"

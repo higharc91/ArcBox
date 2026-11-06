@@ -257,6 +257,8 @@ export interface CheckCard {
 }
 
 export interface CheckRoll {
+  dice?: number[] | null;
+  group?: { member: string; name: string; die: number; bonus: number; success: boolean }[] | null;
   member: string;
   die: number;
   bonus: number;
@@ -268,6 +270,8 @@ export interface CheckRoll {
 
 /** A skill check: the party picks who rolls, by a vote on the same rules, then the roll. */
 export interface CheckData {
+  group?: boolean;
+  help?: { can: boolean; member: string | null; name: string | null };
   skill: string;
   /** Null for a search (interactables design §7.4): each thing it looks for has its own DC, and it mustn't say whether there are any. */
   dc: number | null;
