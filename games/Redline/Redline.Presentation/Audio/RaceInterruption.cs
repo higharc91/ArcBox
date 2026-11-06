@@ -10,11 +10,12 @@ namespace Redline.Presentation.Audio;
 public static class RaceInterruption
 {
     /// <param name="lastPhase">The phase of the last view the TV showed, or null when it showed none.</param>
+    /// <param name="resultMessage">The authoritative result from GameEnded or the rebuilt lobby. A restart can interrupt Champagne too.</param>
     /// <returns>
-    /// False after the Champagne (the podium's last phase) or the Chequered flag (the last phase when nobody takes the
-    /// podium; a race cut off during it can't be told apart from one that ended there), and with nothing on air; true
-    /// after any other phase.
+    /// True for an explicit server interruption, including during Champagne or Chequered. Without that signal, false
+    /// after those normal ending phases or with nothing on air; true after any other phase.
     /// </returns>
-    public static bool WasInterrupted(RacePhase? lastPhase) =>
-        lastPhase is { } phase && phase is not (RacePhase.Champagne or RacePhase.Chequered);
+    public static bool WasInterrupted(RacePhase? lastPhase, string? resultMessage = null) =>
+        resultMessage == "Game interrupted: the server restarted."
+        || lastPhase is { } phase && phase is not (RacePhase.Champagne or RacePhase.Chequered);
 }

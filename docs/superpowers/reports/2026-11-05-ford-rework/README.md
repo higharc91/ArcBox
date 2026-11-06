@@ -90,7 +90,7 @@ with Ford thresholds 0.12/0.94 and wobble 0.34. Battle stamps skip world edge
 blending, so changing only that mask cannot fix the battle camouflage.
 
 Part 2 should author clustered, crisp ground forms through the terrain pipeline
-(`parts/terrain.py`, `dev_terrain.py`, `build.py`) at the current town's visible
+(`parts/terrain.py`, `dev/dev_terrain.py`, `build.py`) at the current town's visible
 pixel density. Preserve the original Ford PNGs and their hashes as evidence.
 The one-off Ford repaint has no reproducible generator found in that pipeline;
 do not claim a rerun of the generic catalogue will reproduce it. New ground art

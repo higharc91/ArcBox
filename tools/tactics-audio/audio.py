@@ -2,7 +2,7 @@
 
 The sound and music lists live next to this script:
 
-    sfx-list.json     {"voices": {...}, "<id>": {"prompt", "negative", "duration", "variants", "group", "loop", "use"}}
+    sfx-list.json     {"voices": {...}, "<id>": {"prompt", "negative", "duration", "variants", "group", "loop", "use", "families"?}}
     music-list.json   {"<id>": {"prompt", "duration", "variants", "group", "loop", "use", "seed", "instrumental"}}
     sfx-assets.json   {"model", "team", "project", "clips": {"<clip id>": {"asset", "job", ...}}}
     music-assets.json (same shape)
@@ -19,11 +19,12 @@ this script (Scenario's MCP tools), so the flow is:
 Import: one-shots get leading/trailing silence trimmed (-50 dB) and a 5 ms fade at each end; loops are not trimmed, they
 are made seamless by crossfading their last second(s) into their first. Loudness is measured (EBU R128 integrated, on
 the clip repeated to at least 3 s so sub-400 ms clicks still measure), then a fixed gain brings it to its group's
-target, capped so the sample peak stays at or under -1 dBFS; a spiky clip that the cap holds back gets at most 6 dB of
-peak limiting on top, and stays under its target if it needs more. SFX are mono, music
+target, capped so the sample peak stays at or under -2 dBFS before encoding; the shipped-file gate checks
+-1 dBTP true peak and each group's target within 3 dB. Spiky clips get at most 6 dB of peak limiting and
+stay under target if they need more. SFX are mono, music
 stereo, both 48 kHz Ogg Vorbis, encoded bit-exactly so re-imports are byte-identical. Output:
 
-    content/tactics/base/sfx/<clip id>.ogg   + manifest.json  {"sounds": {"<id>": {"files": [...], "loop", "group", "use"}}}
+    content/tactics/base/sfx/<clip id>.ogg   + manifest.json  {"sounds": {"<id>": {"files": [...], "loop", "group", "use", "families"?}}}
     content/tactics/base/music/<clip id>.ogg + manifest.json  {"tracks": {"<id>": {...}}}
 
 The art loader turns each top-level object's entries into `<set>.<id>` keys, so `sfx.swing_sword` and `music.battle`
@@ -35,6 +36,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 import sys
 from pathlib import Path
 
@@ -43,10 +45,15 @@ ROOT = HERE.parents[1]
 BASE = ROOT / "content" / "tactics" / "base"
 EXTS = (".wav", ".flac", ".mp3", ".ogg", ".opus")
 
-# LUFS targets per group. UI sits a little under the SFX, beds well under, music under the SFX.
-TARGET = {"ui": -21.0, "ambience": -24.0, "music": -20.0, "sting": -19.0}
-SFX_TARGET = -18.0
-PEAK_CEILING = -1.0       # dBFS, sample peak after gain
+# Integrated LUFS targets (RMS dBFS for clips too short for EBU R128 gating).
+TARGET = {
+    "ambience": -24.0, "battle": -18.0, "creature": -18.0, "footstep": -18.0,
+    "impact": -18.0, "music": -20.0, "spell": -18.0, "sting": -19.0,
+    "ui": -21.0, "weapon": -18.0, "world": -18.0,
+}
+LOUDNESS_TOLERANCE = 3.0
+TRUE_PEAK_CEILING = -1.0  # dBTP on the shipped encoded file
+PEAK_CEILING = -2.0       # dBFS before Vorbis encoding; leaves true-peak headroom
 MAX_LIMIT = 6.0           # dB of peak limiting allowed when gain alone can't reach the target
 LOOP_XFADE = {"ambience": 1.0, "music": 2.0}
 
@@ -89,7 +96,7 @@ def clips() -> dict[str, dict]:
 
 
 def target_of(spec: dict) -> float:
-    return TARGET.get(spec.get("group", ""), SFX_TARGET)
+    return TARGET[spec["group"]]
 
 
 def find_source(src: Path, cid: str) -> Path | None:
@@ -124,6 +131,45 @@ def measure(path: Path, pre: str = "") -> dict:
     return {"lufs": num(lufs.group(1) if lufs else None),
             "peak": num(peak.group(1) if peak else (as_peak[-1] if as_peak else None)),
             "duration": probe_duration(path)}
+
+
+def shipped_measure(path: Path) -> dict:
+    """Measure the encoded file: LUFS for gated clips, RMS for clips under 400 ms, and true peak."""
+    duration = probe_duration(path)
+    result = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(path),
+                             "-af", "ebur128=peak=true,astats=metadata=0:reset=0",
+                             "-f", "null", "-"], capture_output=True, text=True, check=True)
+    report = result.stderr
+    summary = report[report.rfind("Summary:"):]
+    integrated = re.search(r"Integrated loudness:\s+I:\s*(-?[\d.]+|-inf) LUFS", summary)
+    true_peak = re.search(r"True peak:\s+Peak:\s*(-?[\d.]+|-inf) dBFS", summary)
+    rms = re.findall(r"RMS level dB:\s*(-?[\d.]+|-inf)", report)
+    if not true_peak or not rms or (duration >= 0.4 and not integrated):
+        raise ValueError(f"ffmpeg did not report loudness and true peak for {path}")
+    def number(value: str) -> float:
+        return -120.0 if value == "-inf" else float(value)
+    short = duration < 0.4 or integrated is None or number(integrated.group(1)) <= -69.0
+    return {"duration": duration, "level": number(rms[-1] if short else integrated.group(1)),
+            "metric": "RMS dBFS" if short else "LUFS", "true_peak": number(true_peak.group(1))}
+
+
+def audit_shipped() -> list[dict]:
+    """Every file registered in the shipped music and sfx manifests, including external WAVs."""
+    jobs = []
+    for kind, table in KINDS.items():
+        manifest = load(table["out"] / "manifest.json")
+        for sid, spec in manifest.get(table["group_key"], {}).items():
+            for filename in spec["files"]:
+                jobs.append((table["out"] / filename, kind, sid, spec["group"]))
+    def inspect(job: tuple) -> dict:
+        path, kind, sid, group = job
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        measured = shipped_measure(path)
+        return {"file": path.relative_to(BASE).as_posix(), "id": sid, "kind": kind,
+                "group": group, "target": TARGET[group], **measured}
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        return list(pool.map(inspect, jobs))
 
 
 TRIM = "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03"
@@ -197,6 +243,8 @@ def write_manifests() -> dict[str, int]:
                 entry["source"] = spec["source"]
             if "voice" in spec:
                 entry["voice"] = spec["voice"]
+            if "families" in spec:
+                entry["families"] = spec["families"]
             table[sid] = entry
         external = load(k["external"]).get(k["group_key"], {}) if "external" in k else {}
         for sid, entry in external.items():

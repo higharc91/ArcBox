@@ -51,20 +51,6 @@
       "loop": true,
       "layer": "over"
     },
-    "chilled": {
-      "file": "chilled.png",
-      "frames": 12,
-      "fps": 10,
-      "loop": true,
-      "layer": "over"
-    },
-    "frozen": {
-      "file": "frozen.png",
-      "frames": 8,
-      "fps": 8,
-      "loop": true,
-      "layer": "over"
-    },
     "bleeding": {
       "file": "bleeding.png",
       "frames": 8,
@@ -109,20 +95,6 @@
     },
     "inspired": {
       "file": "inspired.png",
-      "frames": 12,
-      "fps": 10,
-      "loop": true,
-      "layer": "over"
-    },
-    "regenerating": {
-      "file": "regenerating.png",
-      "frames": 12,
-      "fps": 10,
-      "loop": true,
-      "layer": "over"
-    },
-    "concentrating": {
-      "file": "concentrating.png",
       "frames": 12,
       "fps": 10,
       "loop": true,

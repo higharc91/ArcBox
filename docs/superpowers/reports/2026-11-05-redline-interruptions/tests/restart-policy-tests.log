@@ -1,0 +1,16 @@
+✔ the default keeps round-two interruption behavior (1.066278ms)
+✔ qualifying waits for both the phone and the actual TV (0.443977ms)
+✔ question waits for both the phone and the actual TV (0.107048ms)
+✔ reveal waits for both the phone and the actual TV (0.111575ms)
+✔ anthem waits for both the phone and the actual TV (0.086769ms)
+✔ champagne waits for both the phone and the actual TV (0.077906ms)
+✔ latest TV phase handles CRLF and ignores old phase lines (4.237914ms)
+✔ unsupported phase names fail instead of silently testing another phase (0.72915ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 241.05637

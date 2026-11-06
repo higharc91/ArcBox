@@ -462,5 +462,5 @@ def _gif(anim: dict) -> None:
             img.alpha_composite(p.resize((p.width * z, p.height * z), Image.NEAREST), (x, y))
             d.text((x + 4, y + ph + 4), hid, font=font(12, True), fill=INK)
         frames.append(img.convert("RGB").quantize(colors=255, method=Image.Quantize.MEDIANCUT))
-    frames[0].save(PREVIEWS / "anim-hazards.gif", save_all=True, append_images=frames[1:], duration=125, loop=0,
+    save(frames[0], PREVIEWS / "anim-hazards.gif", save_all=True, append_images=frames[1:], duration=125, loop=0,
                    optimize=True, disposal=1)

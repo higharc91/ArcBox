@@ -2682,5 +2682,5 @@ def _preview_gif(rendered: dict[str, dict[str, list[Image.Image]]]) -> None:
                 _composite(cell, fx, gx - ax, gy - lift - ay, e.blend)
         img = Image.fromarray(canvas.clip(0, 255).astype(np.uint8), "RGBA").convert("RGB")
         frames.append(img.quantize(colors=255, method=Image.Quantize.MEDIANCUT))
-    frames[0].save(PREVIEWS / "anim-fx.gif", save_all=True, append_images=frames[1:], duration=GIF_TICK, loop=0,
+    save(frames[0], PREVIEWS / "anim-fx.gif", save_all=True, append_images=frames[1:], duration=GIF_TICK, loop=0,
                    optimize=True, disposal=1)

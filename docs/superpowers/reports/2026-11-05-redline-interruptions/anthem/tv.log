@@ -1,0 +1,566 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+Autostart: redline once 3 player(s) are in
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/001-connect.png
+NARRATOR Google
+ROOM JMLM
+LOBBY JMLM
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+SHOT /workspace/issue24/anthem/tv/002-lobby.png
+SHOT /workspace/issue24/anthem/tv/003-lobby.png
+REDLINE model landmarks/grandstand_main.glb: imported scene
+REDLINE model landmarks/pit_station.glb: imported scene
+REDLINE model landmarks/pit_building.glb: imported scene
+REDLINE model landmarks/grandstand_t1.glb: imported scene
+REDLINE model landmarks/tower.glb: imported scene
+REDLINE model landmarks/grandstand_corner.glb: imported scene
+REDLINE model landmarks/start_gantry.glb: imported scene
+REDLINE model landmarks/trees.glb: imported scene
+REDLINE surroundings planned in 1072 ms, built in 1728 ms: 9 car parks, 990 cars, 6 compounds, 46 tents, 24 roads, 1300 shrubs, 750 groves, 3600 far clumps, 25 plaza props, 41 trees cleared
+REDLINE model surroundings/amphitheatre.glb: imported scene
+REDLINE model surroundings/plaza_props.glb: imported scene
+REDLINE model surroundings/tents.glb: imported scene
+REDLINE model surroundings/parked_cars.glb: imported scene
+REDLINE model surroundings/shrubs.glb: imported scene
+REDLINE model surroundings/groves.glb: imported scene
+REDLINE model surroundings/far_clumps.glb: imported scene
+REDLINE model surroundings/skyline.glb: imported scene
+REDLINE trackside planned in 94 ms: 921 TecPro blocks, 921 tyre modules, 1584 armco posts, 2669 fence posts, 18 marshal posts, 20 corner boards, 15 brake boards, 4 camera platforms
+REDLINE model trackside/barriers.glb: imported scene
+REDLINE model trackside/furniture.glb: imported scene
+REDLINE model trackside/big_screen.glb: imported scene
+REDLINE model car_2026.glb: imported scene
+REDLINE model car_2026_lod1.glb: imported scene
+REDLINE model helmets/NOR.glb: imported scene
+REDLINE model helmets/PIA.glb: imported scene
+REDLINE model helmets/LEC.glb: imported scene
+REDLINE model helmets/HAM.glb: imported scene
+REDLINE model helmets/VER.glb: imported scene
+REDLINE model helmets/HAD.glb: imported scene
+REDLINE model helmets/RUS.glb: imported scene
+REDLINE model helmets/ANT.glb: imported scene
+REDLINE model helmets/ALO.glb: imported scene
+REDLINE model helmets/STR.glb: imported scene
+REDLINE model helmets/GAS.glb: imported scene
+REDLINE model helmets/COL.glb: imported scene
+REDLINE model helmets/ALB.glb: imported scene
+REDLINE model helmets/SAI.glb: imported scene
+REDLINE model helmets/LAW.glb: imported scene
+REDLINE model helmets/LIN.glb: imported scene
+REDLINE model helmets/OCO.glb: imported scene
+REDLINE model helmets/BEA.glb: imported scene
+REDLINE model helmets/HUL.glb: imported scene
+REDLINE model helmets/BOR.glb: imported scene
+REDLINE model helmets/PER.glb: imported scene
+REDLINE model helmets/BOT.glb: imported scene
+REDLINE model podium.glb: imported scene
+REDLINE world ready in 2460 ms (geometry 0 ms: circuit:cota 4101 ms; preset Low)
+REDLINE warming up behind the lobby
+REDLINE sounds ready (17 effects and 2 music loops synthesised in 6255 ms)
+AUDIO Music lobby-loop
+SHOT /workspace/issue24/anthem/tv/004-lobby.png
+SHOT /workspace/issue24/anthem/tv/005-lobby.png
+SHOT /workspace/issue24/anthem/tv/006-lobby.png
+REDLINE model drivers/NOR.glb: imported scene
+REDLINE model drivers/LEC.glb: imported scene
+REDLINE model drivers/ANT.glb: imported scene
+REDLINE warm-up done
+Autostart: starting redline with 3 player(s)
+REDLINE DriverSelect round 0
+SHOT /workspace/issue24/anthem/tv/007-redline.png
+SHOT /workspace/issue24/anthem/tv/008-driverselect.png
+SHOT /workspace/issue24/anthem/tv/009-driverselect-claim.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/010-qualifyingreading-lap1.png
+AUDIO Voice redline.questions: How many rings are there on the Olympic flag?
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/anthem/tv/011-qualifyingquestion-lap1.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+SHOT /workspace/issue24/anthem/tv/012-qualifyingresult-lap1.png
+AUDIO Voice redline.announcer: Provisional pole for Antonelli.
+SHOT /workspace/issue24/anthem/tv/013-qualifyingresult-lap1-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the largest ocean on Earth?
+SHOT /workspace/issue24/anthem/tv/014-qualifyingreading-lap2.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/anthem/tv/015-qualifyingquestion-lap2.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+SHOT /workspace/issue24/anthem/tv/016-qualifyingresult-lap2.png
+SHOT /workspace/issue24/anthem/tv/017-qualifyingresult-lap2-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many sides does a hexagon have?
+SHOT /workspace/issue24/anthem/tv/018-qualifyingreading-lap3.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/anthem/tv/019-qualifyingquestion-lap3.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Antonelli goes purple!
+SHOT /workspace/issue24/anthem/tv/020-qualifyingresult-lap3.png
+AUDIO Voice redline.announcer: Pole position for Antonelli, 4.39 seconds in total!
+SHOT /workspace/issue24/anthem/tv/021-qualifyingresult-lap3-card.png
+REDLINE Grid round 0
+REDLINE grid ANT PIA VER NOR STR HAD GAS LAW RUS ALB COL LEC OCO BOR LIN ALO SAI PER HUL BOT HAM BEA
+AUDIO Sfx engine ANT
+AUDIO Sfx engine PIA
+AUDIO Sfx engine VER
+AUDIO Sfx start-beep #1
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #2
+SHOT /workspace/issue24/anthem/tv/022-grid.png
+AUDIO Sfx start-beep #3
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+REDLINE Throttle round 1
+AUDIO Sfx lights-out
+AUDIO Sfx engine RUS
+AUDIO Voice redline.announcer: And it's lights out!
+SHOT /workspace/issue24/anthem/tv/023-throttle.png
+AUDIO Voice redline.announcer: Round 1. Geography, hard.
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+NARRATOR Google
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 4
+REDLINE Reading round 1
+AUDIO Sfx whoosh
+AUDIO Sfx engine LAW
+AUDIO Sfx engine RUS
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.questions: Which is the longest river in Europe?
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/024-reading.png
+REDLINE Question round 1
+SHOT /workspace/issue24/anthem/tv/025-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 1
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Volga.
+AUDIO Sfx engine PER
+AUDIO Sfx engine BOT
+SHOT /workspace/issue24/anthem/tv/026-reveal.png
+AUDIO Voice redline.announcer: Bot3 storms up 15 places!
+SHOT /workspace/issue24/anthem/tv/027-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/028-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/029-reveal-6s.png
+REDLINE Throttle round 2
+AUDIO Voice redline.announcer: Round 2. Geography, medium.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/030-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the capital city of Canada?
+AUDIO Sfx engine GAS
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/031-reading.png
+REDLINE Question round 2
+AUDIO Sfx tick
+SHOT /workspace/issue24/anthem/tv/032-question.png
+AUDIO Sfx tick
+REDLINE Reveal round 2
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Ottawa.
+AUDIO Sfx engine RUS
+AUDIO Sfx engine ALB
+SHOT /workspace/issue24/anthem/tv/033-reveal.png
+SHOT /workspace/issue24/anthem/tv/034-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/035-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/036-reveal-6s.png
+REDLINE Throttle round 3
+AUDIO Voice redline.announcer: Round 3. General Knowledge, hard.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/037-throttle.png
+AUDIO Sfx lock
+REDLINE Reading round 3
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which is the only letter that does not appear in any US state name?
+AUDIO Sfx engine STR
+SHOT /workspace/issue24/anthem/tv/038-reading.png
+REDLINE Question round 3
+SHOT /workspace/issue24/anthem/tv/039-question.png
+AUDIO Sfx tick
+NARRATOR Google
+AUDIO Sfx tick
+REDLINE Reveal round 3
+AUDIO Sfx wrong
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: The answer is Q.
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/040-reveal.png
+SHOT /workspace/issue24/anthem/tv/041-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/042-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/043-reveal-6s.png
+REDLINE Throttle round 4
+AUDIO Voice redline.announcer: Round 4. Music, easy.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/044-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx lock
+REDLINE Reading round 4
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which band recorded the song "Hey Jude"?
+AUDIO Sfx engine STR
+SHOT /workspace/issue24/anthem/tv/045-reading.png
+REDLINE Question round 4
+SHOT /workspace/issue24/anthem/tv/046-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 4
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is The Beatles.
+AUDIO Sfx screech ALO
+AUDIO Sfx engine ALO
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/047-reveal.png
+SHOT /workspace/issue24/anthem/tv/048-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/049-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/050-reveal-6s.png
+REDLINE Throttle round 5
+AUDIO Voice redline.announcer: Round 5. Music, medium.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/051-throttle.png
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+AUDIO Sfx countdown 3
+AUDIO Sfx lock
+REDLINE Reading round 5
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which composer wrote The Four Seasons violin concertos?
+AUDIO Sfx engine LAW
+AUDIO Sfx engine RUS
+SHOT /workspace/issue24/anthem/tv/052-reading.png
+REDLINE Question round 5
+SHOT /workspace/issue24/anthem/tv/053-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 5
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Antonio Vivaldi.
+AUDIO Sfx screech ALB
+AUDIO Sfx engine PER
+AUDIO Sfx engine ALB
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/054-reveal.png
+SHOT /workspace/issue24/anthem/tv/055-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/056-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/057-reveal-6s.png
+REDLINE Throttle round 6
+AUDIO Voice redline.announcer: Round 6. Film, easy.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/058-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx lock
+NARRATOR Google
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 6
+AUDIO Sfx whoosh
+AUDIO Sfx engine LAW
+AUDIO Sfx engine RUS
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.questions: In Disney's Frozen, what is the name of the living snowman?
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/059-reading.png
+REDLINE Question round 6
+SHOT /workspace/issue24/anthem/tv/060-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+REDLINE Reveal round 6
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Olaf.
+AUDIO Sfx screech COL
+AUDIO Sfx screech SAI
+AUDIO Sfx engine COL
+AUDIO Sfx engine SAI
+AUDIO Sfx crunch
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/061-reveal.png
+AUDIO Voice redline.announcer: Bot2 spins the Alpine!
+SHOT /workspace/issue24/anthem/tv/062-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/063-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/064-reveal-6s.png
+REDLINE Throttle round 7
+AUDIO Voice redline.announcer: Round 7. Film, easy.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/065-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 7
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which 1993 Spielberg film is about a theme park of cloned dinosaurs?
+AUDIO Sfx engine RUS
+AUDIO Sfx engine COL
+SHOT /workspace/issue24/anthem/tv/066-reading.png
+REDLINE Question round 7
+SHOT /workspace/issue24/anthem/tv/067-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 7
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Jurassic Park.
+AUDIO Sfx screech RUS
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/068-reveal.png
+AUDIO Voice redline.announcer: Bot1 spins the Mercedes!
+SHOT /workspace/issue24/anthem/tv/069-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/anthem/tv/070-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/071-reveal-6s.png
+REDLINE Throttle round 8
+AUDIO Voice redline.announcer: Round 8. Film, hard.
+AUDIO Sfx engine PER
+NARRATOR Google
+SHOT /workspace/issue24/anthem/tv/072-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 8
+AUDIO Sfx whoosh
+AUDIO Sfx engine RUS
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.questions: Which 1941 Orson Welles film centres on the mystery of the word "Rosebud"?
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/073-reading.png
+REDLINE Question round 8
+SHOT /workspace/issue24/anthem/tv/074-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+REDLINE Reveal round 8
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Citizen Kane.
+AUDIO Sfx screech COL
+AUDIO Sfx engine COL
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/075-reveal.png
+AUDIO Voice redline.announcer: Bot2 spins the Alpine!
+SHOT /workspace/issue24/anthem/tv/076-reveal-2s.png
+AUDIO Sfx engine HAM
+SHOT /workspace/issue24/anthem/tv/077-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/078-reveal-6s.png
+REDLINE Throttle round 9
+AUDIO Voice redline.announcer: Round 9. Science & Nature, hard.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/079-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+REDLINE Reading round 9
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which element has the atomic number 26?
+AUDIO Sfx engine RUS
+SHOT /workspace/issue24/anthem/tv/080-reading.png
+REDLINE Question round 9
+SHOT /workspace/issue24/anthem/tv/081-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx countdown 1
+NARRATOR Google
+REDLINE Reveal round 9
+AUDIO Sfx correct
+AUDIO Sfx engine COL
+AUDIO Sfx engine PER
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: The answer is Iron.
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/082-reveal.png
+SHOT /workspace/issue24/anthem/tv/083-reveal-2s.png
+AUDIO Sfx engine HAM
+SHOT /workspace/issue24/anthem/tv/084-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/085-reveal-6s.png
+REDLINE Throttle round 10
+AUDIO Voice redline.announcer: Round 10. Sports, medium.
+AUDIO Sfx engine COL
+SHOT /workspace/issue24/anthem/tv/086-throttle.png
+AUDIO Sfx lock
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 10
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which country hosted the 2016 Summer Olympics?
+AUDIO Sfx engine PER
+AUDIO Sfx engine SAI
+SHOT /workspace/issue24/anthem/tv/087-reading.png
+REDLINE Question round 10
+SHOT /workspace/issue24/anthem/tv/088-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 10
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Brazil.
+AUDIO Sfx engine COL
+SHOT /workspace/issue24/anthem/tv/089-reveal.png
+SHOT /workspace/issue24/anthem/tv/090-reveal-2s.png
+AUDIO Sfx engine HAM
+SHOT /workspace/issue24/anthem/tv/091-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/092-reveal-6s.png
+REDLINE Throttle round 11
+AUDIO Voice redline.announcer: Round 11. Science & Nature, medium.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/093-throttle.png
+AUDIO Sfx countdown 5
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx lock
+REDLINE Reading round 11
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the chemical symbol for gold?
+AUDIO Sfx engine ALB
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/094-reading.png
+REDLINE Question round 11
+SHOT /workspace/issue24/anthem/tv/095-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 11
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is Au.
+AUDIO Sfx screech PER
+AUDIO Sfx engine PER
+AUDIO Sfx engine SAI
+AUDIO Sfx crunch
+SHOT /workspace/issue24/anthem/tv/096-reveal.png
+AUDIO Voice redline.announcer: Bot3 spins the Cadillac!
+SHOT /workspace/issue24/anthem/tv/097-reveal-2s.png
+AUDIO Sfx engine HAM
+SHOT /workspace/issue24/anthem/tv/098-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/099-reveal-6s.png
+REDLINE Throttle round 12
+AUDIO Voice redline.announcer: Round 12. History, easy.
+AUDIO Sfx engine PER
+SHOT /workspace/issue24/anthem/tv/100-throttle.png
+AUDIO Sfx countdown 5
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+NARRATOR Google
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+REDLINE Reading round 12
+AUDIO Sfx whoosh
+AUDIO Sfx engine ALB
+AUDIO Sfx engine PER
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.questions: In which year did the Second World War end?
+NARRATOR Off
+SHOT /workspace/issue24/anthem/tv/101-reading.png
+REDLINE Question round 12
+SHOT /workspace/issue24/anthem/tv/102-question.png
+AUDIO Sfx tick
+REDLINE Reveal round 12
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is 1945.
+AUDIO Sfx engine RUS
+AUDIO Sfx engine ALB
+SHOT /workspace/issue24/anthem/tv/103-reveal.png
+AUDIO Voice redline.announcer: Bot1 storms up 3 places!
+SHOT /workspace/issue24/anthem/tv/104-reveal-2s.png
+AUDIO Sfx engine LIN
+SHOT /workspace/issue24/anthem/tv/105-reveal-4s.png
+SHOT /workspace/issue24/anthem/tv/106-reveal-6s.png
+REDLINE Chequered round 12
+AUDIO Sfx fanfare
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: Lindblad takes the win. Best of the players, Bot1 in P19.
+REDLINE victory theme synthesised in 1853 ms (16.0 s)
+REDLINE anthem gb synthesised in 1848 ms (13.9 s)
+SHOT /workspace/issue24/anthem/tv/107-chequered.png
+SHOT /workspace/issue24/anthem/tv/108-chequered-podium.png
+REDLINE Anthem round 12
+AUDIO Voice redline.announcer: The national anthem of Great Britain, for Bot1 in the Mercedes!
+REDLINE model drivers/RUS.glb: imported scene
+REDLINE model drivers/PER.glb: imported scene
+REDLINE model drivers/COL.glb: imported scene
+ROOM JMLM
+SHOT /workspace/issue24/anthem/tv/109-reconnecting.png
+SHOT /workspace/issue24/anthem/tv/110-anthem.png
+AUDIO Music anthem gb
+SHOT /workspace/issue24/anthem/tv/111-reconnecting.png
+SHOT /workspace/issue24/anthem/tv/112-anthem-pushin.png
+AUDIO Music lobby-loop
+REDLINE parked for the next race (interrupted)
+LOBBY JMLM
+RESULTS Game interrupted: the server restarted.
+HOST view patches applied 143, whole views asked for again 0
+ROOM JMLM
+SHOT /workspace/issue24/anthem/tv/113-lobby.png
+SHOT /workspace/issue24/anthem/tv/114-results.png
+LOBBY JMLM
+SHOT /workspace/issue24/anthem/tv/115-lobby.png

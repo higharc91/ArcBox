@@ -1,0 +1,238 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+Autostart: redline once 3 player(s) are in
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+SHOT /workspace/issue24/question/tv/001-connect.png
+NARRATOR Google
+ROOM QVVH
+LOBBY QVVH
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+SHOT /workspace/issue24/question/tv/002-lobby.png
+SHOT /workspace/issue24/question/tv/003-lobby.png
+SHOT /workspace/issue24/question/tv/004-lobby.png
+SHOT /workspace/issue24/question/tv/005-lobby.png
+SHOT /workspace/issue24/question/tv/006-lobby.png
+REDLINE model landmarks/grandstand_main.glb: imported scene
+REDLINE model landmarks/pit_station.glb: imported scene
+REDLINE model landmarks/pit_building.glb: imported scene
+REDLINE model landmarks/grandstand_t1.glb: imported scene
+REDLINE model landmarks/tower.glb: imported scene
+REDLINE model landmarks/grandstand_corner.glb: imported scene
+REDLINE model landmarks/start_gantry.glb: imported scene
+REDLINE model landmarks/trees.glb: imported scene
+REDLINE surroundings planned in 1531 ms, built in 2092 ms: 9 car parks, 990 cars, 6 compounds, 46 tents, 24 roads, 1300 shrubs, 750 groves, 3600 far clumps, 25 plaza props, 41 trees cleared
+REDLINE model surroundings/amphitheatre.glb: imported scene
+REDLINE model surroundings/plaza_props.glb: imported scene
+REDLINE model surroundings/tents.glb: imported scene
+REDLINE model surroundings/parked_cars.glb: imported scene
+REDLINE model surroundings/shrubs.glb: imported scene
+REDLINE model surroundings/groves.glb: imported scene
+REDLINE model surroundings/far_clumps.glb: imported scene
+REDLINE model surroundings/skyline.glb: imported scene
+REDLINE trackside planned in 107 ms: 921 TecPro blocks, 921 tyre modules, 1584 armco posts, 2669 fence posts, 18 marshal posts, 20 corner boards, 15 brake boards, 4 camera platforms
+REDLINE model trackside/barriers.glb: imported scene
+REDLINE model trackside/furniture.glb: imported scene
+REDLINE model trackside/big_screen.glb: imported scene
+REDLINE model car_2026.glb: imported scene
+REDLINE model car_2026_lod1.glb: imported scene
+REDLINE model helmets/NOR.glb: imported scene
+REDLINE model helmets/PIA.glb: imported scene
+REDLINE model helmets/LEC.glb: imported scene
+REDLINE model helmets/HAM.glb: imported scene
+REDLINE model helmets/VER.glb: imported scene
+REDLINE model helmets/HAD.glb: imported scene
+REDLINE model helmets/RUS.glb: imported scene
+REDLINE model helmets/ANT.glb: imported scene
+REDLINE model helmets/ALO.glb: imported scene
+REDLINE model helmets/STR.glb: imported scene
+REDLINE model helmets/GAS.glb: imported scene
+REDLINE model helmets/COL.glb: imported scene
+REDLINE model helmets/ALB.glb: imported scene
+REDLINE model helmets/SAI.glb: imported scene
+REDLINE model helmets/LAW.glb: imported scene
+REDLINE model helmets/LIN.glb: imported scene
+REDLINE model helmets/OCO.glb: imported scene
+REDLINE model helmets/BEA.glb: imported scene
+REDLINE model helmets/HUL.glb: imported scene
+REDLINE model helmets/BOR.glb: imported scene
+REDLINE model helmets/PER.glb: imported scene
+REDLINE model helmets/BOT.glb: imported scene
+REDLINE model podium.glb: imported scene
+REDLINE world ready in 3158 ms (geometry 0 ms: circuit:cota 6385 ms; preset Low)
+REDLINE warming up behind the lobby
+REDLINE sounds ready (17 effects and 2 music loops synthesised in 7837 ms)
+AUDIO Music lobby-loop
+REDLINE model drivers/NOR.glb: imported scene
+REDLINE model drivers/LEC.glb: imported scene
+REDLINE model drivers/ANT.glb: imported scene
+REDLINE warm-up done
+Autostart: starting redline with 3 player(s)
+REDLINE DriverSelect round 0
+SHOT /workspace/issue24/question/tv/007-redline.png
+SHOT /workspace/issue24/question/tv/008-driverselect.png
+SHOT /workspace/issue24/question/tv/009-driverselect-claim.png
+SHOT /workspace/issue24/question/tv/010-driverselect-claim.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+NARRATOR Off
+SHOT /workspace/issue24/question/tv/011-qualifyingreading-lap1.png
+AUDIO Voice redline.questions: Which 1993 Spielberg film is about a theme park of cloned dinosaurs?
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/question/tv/012-qualifyingquestion-lap1.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Russell goes purple!
+SHOT /workspace/issue24/question/tv/013-qualifyingresult-lap1.png
+AUDIO Voice redline.announcer: Provisional pole for Russell.
+SHOT /workspace/issue24/question/tv/014-qualifyingresult-lap1-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many rings are there on the Olympic flag?
+SHOT /workspace/issue24/question/tv/015-qualifyingreading-lap2.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/question/tv/016-qualifyingquestion-lap2.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx tick
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Verstappen goes purple!
+SHOT /workspace/issue24/question/tv/017-qualifyingresult-lap2.png
+AUDIO Voice redline.announcer: Provisional pole for Verstappen.
+SHOT /workspace/issue24/question/tv/018-qualifyingresult-lap2-card.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which gas do plants absorb from the air for photosynthesis?
+SHOT /workspace/issue24/question/tv/019-qualifyingreading-lap3.png
+REDLINE QualifyingQuestion round 0
+SHOT /workspace/issue24/question/tv/020-qualifyingquestion-lap3.png
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+REDLINE QualifyingResult round 0
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Russell goes purple!
+SHOT /workspace/issue24/question/tv/021-qualifyingresult-lap3.png
+AUDIO Voice redline.announcer: Pole position for Russell, 5.25 seconds in total!
+SHOT /workspace/issue24/question/tv/022-qualifyingresult-lap3-card.png
+REDLINE Grid round 0
+REDLINE grid RUS LEC PIA STR SAI OCO BOR BEA HAM ANT VER ALO HAD BOT PER COL LAW LIN ALB NOR GAS HUL
+AUDIO Sfx engine RUS
+AUDIO Sfx engine LEC
+AUDIO Sfx engine PIA
+AUDIO Sfx start-beep #1
+AUDIO Sfx start-beep #2
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #3
+SHOT /workspace/issue24/question/tv/023-grid.png
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+REDLINE Throttle round 1
+AUDIO Sfx lights-out
+AUDIO Sfx engine SAI
+AUDIO Voice redline.announcer: And it's lights out!
+SHOT /workspace/issue24/question/tv/024-throttle.png
+NARRATOR Google
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Round 1. Science & Nature, hard.
+NARRATOR Off
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx lock
+REDLINE Reading round 1
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which element has the atomic number 26?
+AUDIO Sfx engine STR
+AUDIO Sfx engine SAI
+SHOT /workspace/issue24/question/tv/025-reading.png
+REDLINE Question round 1
+SHOT /workspace/issue24/question/tv/026-question.png
+AUDIO Sfx tick
+AUDIO Sfx tick
+REDLINE Reveal round 1
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Iron.
+AUDIO Sfx screech PER
+AUDIO Sfx engine PER
+AUDIO Sfx engine COL
+AUDIO Sfx crunch
+SHOT /workspace/issue24/question/tv/027-reveal.png
+AUDIO Voice redline.announcer: Bot3 spins the Cadillac!
+SHOT /workspace/issue24/question/tv/028-reveal-2s.png
+AUDIO Sfx engine LEC
+SHOT /workspace/issue24/question/tv/029-reveal-4s.png
+REDLINE Throttle round 2
+AUDIO Voice redline.announcer: Round 2. General Knowledge, easy.
+AUDIO Sfx engine SAI
+SHOT /workspace/issue24/question/tv/030-reveal-6s.png
+SHOT /workspace/issue24/question/tv/031-throttle.png
+AUDIO Sfx countdown 5
+REDLINE Reading round 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: How many days are there in a leap year?
+AUDIO Sfx engine PIA
+AUDIO Sfx engine SAI
+SHOT /workspace/issue24/question/tv/032-reading.png
+REDLINE Question round 2
+ROOM QVVH
+AUDIO Sfx tick
+SHOT /workspace/issue24/question/tv/033-reconnecting.png
+SHOT /workspace/issue24/question/tv/034-question.png
+REDLINE Reveal round 2
+AUDIO Sfx wrong
+AUDIO Voice redline.announcer: The answer is 366.
+AUDIO Sfx engine HAM
+AUDIO Sfx engine COL
+SHOT /workspace/issue24/question/tv/035-reveal.png
+SHOT /workspace/issue24/question/tv/036-reveal-2s.png
+AUDIO Sfx engine VER
+SHOT /workspace/issue24/question/tv/037-reveal-4s.png
+SHOT /workspace/issue24/question/tv/038-reconnecting.png
+SHOT /workspace/issue24/question/tv/039-reveal-6s.png
+AUDIO Music lobby-loop
+REDLINE parked for the next race (interrupted)
+LOBBY QVVH
+RESULTS Game interrupted: the server restarted.
+HOST view patches applied 37, whole views asked for again 0
+ROOM QVVH
+SHOT /workspace/issue24/question/tv/040-lobby.png
+SHOT /workspace/issue24/question/tv/041-results.png
+NARRATOR Google
+LOBBY QVVH
+SHOT /workspace/issue24/question/tv/042-lobby.png
+REDLINE DriverSelect round 0
+SHOT /workspace/issue24/question/tv/043-redline.png
+SHOT /workspace/issue24/question/tv/044-driverselect.png
+SHOT /workspace/issue24/question/tv/045-driverselect-claim.png
+SHOT /workspace/issue24/question/tv/046-driverselect-claim.png
+REDLINE QualifyingReading round 0
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+NARRATOR server voice unavailable (Unavailable 503); built-in voice for 60 s
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+NARRATOR Off
+SHOT /workspace/issue24/question/tv/047-qualifyingreading-lap1.png

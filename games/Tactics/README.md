@@ -1,5 +1,32 @@
 # ArcBox Tactics
 
+## View and phone load byte budgets (#201)
+
+`Tactics.Game.Tests/ViewBudgetTests.cs` serializes the Ashen Ford exploration view and each phone view with `ArcJson.Options` after a six-member campaign enters the region. These are UTF-8 JSON payload bytes, before transport framing or compression.
+
+| View | Measured | Test ceiling |
+|---|---:|---:|
+| `ExploreView` for the TV | 4,724 B | 6,144 B |
+| Owner phone | 943 B | 1,280 B per phone |
+| Each of five other phones | 869 B | 1,280 B per phone |
+| All six phones together | 5,288 B | 6,400 B |
+
+Phone first load was measured from `npm ci && npm run build -- --manifest` in `web/play`, using the Vite manifest's eager import closure for `index.html`, then the Tactics route and its lobby flyover. Distinct HTML, JavaScript and CSS files were counted once. This includes the three.js flyover chunk, which the lobby loads dynamically.
+
+| Asset scope | On disk | Gzip of built text |
+|---|---:|---:|
+| Base page and eager imports | 166,655 B | 50,650 B |
+| Through the Tactics route | 371,424 B | 108,269 B |
+| Through the lobby flyover | 909,071 B | 245,675 B |
+
+For the first Ashen Ford flyover area, the map's material set, map props, dressing, sky, ranges, clouds, grade and transition reference 160 distinct pack files: 603,966 B on disk. Of that, seven JSON files are 188,297 B (17,217 B gzipped); the image files are 415,669 B. With gzip for text and images transferred at their stored sizes, the measured first-area footprint is about **678,561 B** (245,675 B built text + 17,217 B pack JSON + 415,669 B images). The content index, fonts selected by the browser, response headers, and later tour areas are outside that figure; actual network transfer also depends on server compression and cache state.
+
+## Check the repository
+
+From the repository root, run `bash tools/check-all.sh --full` to reproduce CI, or `bash tools/check-all.sh --fast` while iterating. The full mode builds and tests the .NET solution; fast mode runs the Tactics logic and game tests. Both modes run the phone tests and TypeScript build, Node playtest tool tests, Python asset and audio tests, and the lore validator and tests. The script prints a pass/fail line for each group and exits nonzero if any fails. Install .NET 10, Node 22, Python 3.13 with Pillow and numpy, and npm dependencies are installed by the script.
+
+The .NET group guards `games/`, `src/`, and the Tactics content consumed by their tests. The phone group guards `web/play/`; the Node group guards `tools/tactics-playtest/`; and the Python group guards `tools/tactics-assets/`, `tools/tactics-audio/`, and `content/tactics/base/lore/` through `tools/tactics-lore/`. The Godot TV end-to-end runner, `tools/tv-e2e.sh`, is a separate manual check.
+
 ArcBox Tactics is a turn-based tactical battle game for the ArcBox party platform. `Tactics.Logic` is its rules engine: a deterministic, pure C# library (no clock, no `System.Random`, sorted collections only) that takes a battle state and a command and returns the new state and the events that happened, so every battle can be replayed from its seed. `Tactics.Logic.Tests` covers it, and `Tactics.Sim` balance-tests the content: it plays every encounter with sampled AI parties, AI on both sides, and writes a Markdown report (the latest is in `docs/superpowers/reports/`):
 
 ```

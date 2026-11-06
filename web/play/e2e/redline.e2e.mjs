@@ -25,6 +25,9 @@
 //   ARCBOX_RESTART  1 = once the race is in round 2 (after phone 2's reload), log `RESTART now` and wait for whoever
 //                   runs the server to restart it (tools/tv-e2e.sh does, on the same database); the goal is then every
 //                   phone on the "Game interrupted: the server restarted." results, and back in the same room's lobby
+//   ARCBOX_RESTART_PHASE  round2 (default), qualifying, question, reveal, anthem or champagne
+//   ARCBOX_TV_LOG   optional TV log: require the TV to reach the target too (set by tools/tv-e2e.sh)
+//   ARCBOX_RESTART_AGAIN  1 = the recovered VIP starts a new race; requires ARCBOX_TV_LOG
 //   ARCBOX_SWAP     1 = phone 2 loses its phone on a question in round 2 or later: its storage is cleared and a fresh
 //                   page (no seat, no name) takes its seat back through the picker (Peek, then TakeSeat); the old seat
 //                   secret must no longer rejoin. Implies the full race: phone 2 finishes it in its own seat
@@ -39,6 +42,7 @@ import { createRequire } from "node:module";
 import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import restartPolicy from "./redline-restart.cjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const { chromium } = await loadPlaywright();
@@ -50,7 +54,7 @@ const GAME = (env.ARCBOX_GAME ?? "redline").toLowerCase();
 const FULL = env.ARCBOX_FULL === "1" || process.argv.includes("--full");
 const ROOM = env.ARCBOX_ROOM?.trim().toUpperCase() || null;
 const START = env.ARCBOX_START === "host" ? "host" : "phone";
-const REJOIN = env.ARCBOX_REJOIN !== "0";
+const REJOIN = env.ARCBOX_REJOIN !== "0" && !(env.ARCBOX_RESTART === "1" && env.ARCBOX_RESTART_PHASE === "qualifying");
 const SHOTS = resolve(env.ARCBOX_SHOTS ?? join(here, "shots"));
 const HEADED = env.ARCBOX_HEADED === "1";
 /** Multiplies the bots' reading time; > 1 keeps each phase on screen longer (a slow TV renderer needs that). */
@@ -59,6 +63,9 @@ const PACE = Math.min(10, Math.max(0.1, Number(env.ARCBOX_PACE) || 1));
 const NAME = (env.ARCBOX_NAME ?? "Bot").replace(/[^A-Za-z]/g, "").slice(0, 8) || "Bot";
 /** Restart the server mid-race (someone else does it, when this script logs `RESTART now`). */
 const RESTART = env.ARCBOX_RESTART === "1";
+const RESTART_TARGET = restartPolicy.policy(env.ARCBOX_RESTART_PHASE ?? 'round2');
+const RESTART_AGAIN = env.ARCBOX_RESTART_AGAIN === '1';
+const TV_LOG = env.ARCBOX_TV_LOG;
 /** Swap phone 2 for a fresh one mid-race (Peek, TakeSeat). */
 const SWAP = env.ARCBOX_SWAP === "1";
 /** The rebuilt room's note (spec §3.5). */
@@ -67,7 +74,7 @@ const INTERRUPTED = "Game interrupted: the server restarted.";
 const REJOIN_FAILED = "Couldn't rejoin. Please join again.";
 /** Plays to the end (results and back to the lobby) rather than stopping at the first Reveal; a restart cuts the race short. */
 const TO_THE_END = (FULL || SWAP || GAME !== "redline") && !RESTART;
-const DEADLINE_MS = (TO_THE_END ? 20 : RESTART ? 8 : 4) * 60_000;
+const DEADLINE_MS = (TO_THE_END || RESTART && ['anthem', 'champagne'].includes(RESTART_TARGET.name) ? 20 : RESTART ? 8 : 4) * 60_000;
 /** Longest a phone may show the same view before the run counts as stuck (phase timers are ≤ 20 s). */
 const STUCK_MS = 75_000;
 
@@ -428,7 +435,7 @@ async function run() {
     code = new URL(dev.url()).searchParams.get("room");
     phones = Array.from({ length: PHONES }, (_, i) => devPhone(dev, i + 1));
   }
-  log(`room ${code}, ${PHONES} phone(s), game ${GAME}${TO_THE_END ? " (to the end)" : " (until the first Reveal)"}`);
+  log(`room ${code}, ${PHONES} phone(s), game ${GAME}${RESTART ? ` (restart at ${RESTART_TARGET.name})` : TO_THE_END ? " (to the end)" : " (until the first Reveal)"}`);
 
   // -------- everyone in the lobby
   await until("all phones in the lobby", async () => {
@@ -639,11 +646,12 @@ async function run() {
   const restart = (async () => {
     if (!RESTART) return;
     await rejoin; // not while phone 2 is reloading
-    const at = await until("the race in round 2", async () => {
-      if (done) throw new Error("the run ended before round 2");
+    const at = await until(`the interruption target ${RESTART_TARGET.name} on phone and TV`, async () => {
+      if (done) throw new Error("the run ended before the restart target");
       const s = await snapshot(phones[0]);
-      return roundOf(s) >= 2 && ["throttle", "throttle-locked", "reading", "question", "answered"].includes(phaseOf(s)) ? s : null;
-    }, 8 * 60_000);
+      const tvLog = TV_LOG ? readFileSync(TV_LOG, 'utf8') : undefined;
+      return restartPolicy.matches(RESTART_TARGET, phaseOf(s), roundOf(s), tvLog) ? s : null;
+    }, DEADLINE_MS);
     await phones[0].shot("before-restart.png");
     // tools/tv-e2e.sh waits for this line, then stops the server and starts it again on the same database.
     log(`RESTART now: P1 on ${phaseOf(at)} [${at.header}]`);
@@ -666,6 +674,7 @@ async function run() {
       log(`restart: every phone shows "${INTERRUPTED}"`);
       await phones[0].shot("restart-results.png");
       for (const p of phones) {
+        if (await p.$('.scores .score-row').count()) fail(`restart: P${p.slot} classified an interrupted race`);
         await p.$("button:has-text(\"Back to lobby\")").click({ timeout: 5000 });
         const lobby = await until(`phone ${p.slot} back in the lobby`, async () => {
           const s = await snapshot(p);
@@ -675,6 +684,21 @@ async function run() {
       }
       await phones[0].shot("restart-lobby.png");
       log(`restart: every phone back in room ${code}'s lobby`);
+      if (RESTART_AGAIN) {
+        if (!TV_LOG) throw new Error('ARCBOX_RESTART_AGAIN requires ARCBOX_TV_LOG');
+        await until('the TV back in the interrupted room lobby', async () => {
+          const log = readFileSync(TV_LOG, 'utf8');
+          return log.slice(log.lastIndexOf(`RESULTS ${INTERRUPTED}`)).split(/\r?\n/).includes(`LOBBY ${code}`);
+        }, 60_000);
+        const vip = await until('the recovered VIP', async () => {
+          for (const phone of phones) if ((await snapshot(phone)).vip) return phone;
+        }, 10_000);
+        await vip.$('.picker .start:not([disabled])').click({ timeout: 5000 });
+        await until('all phones selecting drivers in the new race', async () =>
+          (await Promise.all(phones.map(snapshot))).every(s => phaseOf(s) === 'driver-select'), 20_000);
+        await phones[0].shot('restart-new-race.png');
+        log('RESTART_AGAIN OK: VIP started a new race in the same room');
+      }
     } else if (!TO_THE_END) {
       await until("the first Reveal", async () => reachedReveal, DEADLINE_MS);
       await sleep(600);
@@ -717,7 +741,10 @@ async function run() {
     await Promise.all([...bots, shooter, watchdog, rejoin, swap, restart.catch(() => {})]);
   }
   if (GAME === "redline") {
-    for (const phase of ["driver-select", "quali-reading", "quali-question", "quali-result", "throttle", "reading", "question", "reveal"]) {
+    const required = RESTART && RESTART_TARGET.name === 'qualifying'
+      ? ['driver-select', 'quali-reading', 'quali-question']
+      : ["driver-select", "quali-reading", "quali-question", "quali-result", "throttle", "reading", "question", "reveal"];
+    for (const phase of required) {
       if (!phasesSeen.has(phase)) fail(`phone 1 never showed ${phase}`);
     }
     // For tools/tv-e2e.sh: the bots' grid order qualifying should give, fastest first (compared with the TV's `REDLINE grid`).

@@ -1,0 +1,81 @@
+[tv-e2e 16:34:58] starting the server on http://127.0.0.1:39289
+[tv-e2e 16:35:06] starting the TV (1280x720, preset low)
+[tv-e2e 16:35:09] TV opened room VGXS
+[tv-e2e 16:35:09] phones: 3 bots, the server restarts mid-race
+[   1.4s] room VGXS, 3 phone(s), game redline (until the first Reveal)
+[   2.0s] waiting for the host to start the game
+[  26.3s] P1 driver-select
+[  31.8s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "In which sport would you perform a slam dunk? Answers in a moment…"
+[  39.2s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  39.7s] RESTART now: P1 on quali-question [QUALIFYING · LAP 1/3]
+[tv-e2e 16:35:50] restart: stopping the server mid-race (TV log at line 91)
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=o110b8WKSjNJK7QeYv1BVA' failed: Error in connection establishment: net::ERR_CONNECTION_RESET
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:50.731Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  39.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:50.731Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=33yYeqe5ssk_La6klWWfig' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:50.762Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:39289/hub?id=xOF1JsBwTcM3tJI9e12vXQ' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:50.762Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:50.766Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:50.766Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:35:51] server stopped
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:51.735Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  40.9s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:51.735Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:51.766Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:51.767Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:51.768Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  41.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:51.768Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:35:53] restart: starting it again on http://127.0.0.1:39289 with /workspace/issue24/qualifying/arcbox.db
+[  42.8s] P1 lap 1: right "Basketball" after 3.6 s
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:53.765Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:53.766Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:53.772Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:53.772Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:53.779Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  43.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:53.779Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  44.5s] P2 lap 1: right "Basketball" after 5.3 s
+[  46.0s] P3 lap 1: right "Basketball" after 7.0 s
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:58.770Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e2&devName=Bot2): [2026-11-05T16:35:58.770Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:58.786Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e1&devName=Bot1): [2026-11-05T16:35:58.786Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:58.790Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[  48.0s] console error (http://127.0.0.1:39289/?room=VGXS&slot=e2e3&devName=Bot3): [2026-11-05T16:35:58.790Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:35:59] restart: the server is back
+[  58.4s] restart: every phone shows "Game interrupted: the server restarted."
+[  58.6s] P1 lobby
+[  58.6s] restart: every phone back in room VGXS's lobby
+[  60.3s] qualifying plan: P1 ? 3/3 laps, 10.50 s; P2 HAM 3/3 laps, 15.75 s; P3 BOR 2/3 laps, 14.00 s
+[  60.3s] QUALI order ? HAM BOR
+[  60.3s] phases seen on P1: driver-select, quali-reading, quali-question, lobby
+
+OK
+Screenshots: /workspace/issue24/qualifying/phones
+[tv-e2e 16:36:19] letting the TV finish its shots (2 s)
+[tv-e2e 16:36:22] TV stopped
+[tv-e2e 16:36:22] Xvfb stopped
+[tv-e2e 16:36:23] server stopped
+[tv-e2e 16:36:23] screenshots: 16 from the TV in /workspace/issue24/qualifying/tv, 8 from phone 1 in /workspace/issue24/qualifying/phones
+[tv-e2e 16:36:23] TV phases: DriverSelect(0) QualifyingReading(L1) QualifyingQuestion(L1)
+[tv-e2e 16:36:23] audio: qualifying start · AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+[tv-e2e 16:36:23] qualifying: interrupted in the first lap, before the second reading or grid
+[tv-e2e 16:36:23] restart: TV back in room VGXS · line 99
+[tv-e2e 16:36:23] restart: the race left the air mid-phase · line 101
+[tv-e2e 16:36:23] restart: no sound after the park but the lobby loop
+[tv-e2e 16:36:23] restart: results with the note · line 103, then the lobby of VGXS · line 107
+[tv-e2e 16:36:23] restart: TV interrupted during QualifyingQuestion
+[tv-e2e 16:36:23] narrator: no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off | Off | Google | voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low | server voice unavailable (Unavailable 503); built-in voice for 60 s
+[tv-e2e 16:36:23] audio: 12 AUDIO lines in /workspace/issue24/qualifying/audio.log
+[tv-e2e 16:36:23] OK

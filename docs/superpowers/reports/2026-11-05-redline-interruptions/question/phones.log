@@ -1,0 +1,93 @@
+[   1.3s] room QVVH, 3 phone(s), game redline (until the first Reveal)
+[   1.8s] waiting for the host to start the game
+[  26.5s] P1 driver-select
+[  31.7s] P1 seated  "You're Carlos Sainz. Waiting for the grid…"
+[  33.9s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "Which 1993 Spielberg film is about a theme park of cloned dinosaurs? Answers in a moment…"
+[  42.3s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  45.9s] P1 lap 1: right "Jurassic Park" after 3.6 s
+[  46.1s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.63 s — checking…"
+[  47.6s] P2 lap 1: right "Jurassic Park" after 5.4 s
+[  49.5s] P3 lap 1: right "Jurassic Park" after 7.1 s
+[  49.6s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.63 s P7 so far"
+[  54.6s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "How many rings are there on the Olympic flag? Answers in a moment…"
+[  58.5s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[  62.1s] P1 lap 2: right "5" after 3.6 s
+[  62.4s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.71 s — checking…"
+[  64.0s] P2 lap 2: right "5" after 5.3 s
+[  65.5s] P3 lap 2: WRONG (planned) "7" after 7.1 s
+[  65.7s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.71 s P8 so far"
+[  70.7s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "Which gas do plants absorb from the air for photosynthesis? Answers in a moment…"
+[  74.8s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[  78.4s] P1 lap 3: right "Carbon dioxide" after 3.6 s
+[  78.7s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.64 s — checking…"
+[  80.0s] P2 lap 3: right "Carbon dioxide" after 5.3 s
+[  81.9s] P3 lap 3: right "Carbon dioxide" after 7.2 s
+[  81.9s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.64 s P5 so far"
+[  87.2s] P1 grid  "You're Carlos Sainz, #55, Williams. Lights out in a moment… · Qualified P5"
+[  92.9s] P1 throttle  [P5 ROUND 1/15]
+[  93.0s] rejoin: reloading P2 during throttle [P9 ROUND 1/15]
+[  93.3s] rejoin: P2 back on throttle [P9 ROUND 1/15]
+[  95.7s] P1 throttle-locked  [P5 ROUND 1/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 101.5s] P1 reading  [PUSH P5 ROUND 1/15]  "Which element has the atomic number 26? Answers open in a moment…"
+[ 104.3s] P1 question  [PUSH P5 ROUND 1/15]
+[ 111.7s] P1 answered  [P5 ROUND 1/15]  "Answer locked. Eyes on the TV!"
+[ 112.3s] P1 reveal  [P1 ROUND 1/15]  "Correct! +3 · now P1"
+[ 119.3s] P1 throttle  [P1 ROUND 2/15]
+[ 124.6s] P1 reading  [PUSH P1 ROUND 2/15]  "How many days are there in a leap year? Answers open in a moment…"
+[ 128.1s] P1 question  [PUSH P1 ROUND 2/15]
+[ 128.7s] RESTART now: P1 on question [PUSH P1 ROUND 2/15]
+[ 129.5s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:35241/hub?id=dUmINXc5XzzCW2kUJ0sMAg' failed: Error during WebSocket handshake: Unexpected response code: 404
+[ 130.5s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:35241/hub?id=9BWXtyw_bIBuNeyviwm06g' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:35241/hub?id=UreHYQg6CEJBmAiKHGekYQ' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:44.979Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:44.979Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:35241/hub?id=gj7eIGAE9btxoH98uXBA3g' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:44.982Z] Error: Failed to start the transport 'WebSockets': Error: WebSocket failed to connect. The connection could not be found on the server, either the endpoint may not be a SignalR endpoint, the connection ID is not present on the server, or there is a proxy blocking WebSockets. If you have multiple servers check that sticky sessions are enabled.
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:44.984Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 130.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:44.984Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:45.984Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:45.984Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:45.988Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 131.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:45.988Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:47.991Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:47.991Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:47.999Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 133.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:47.999Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 134.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:35241/hub?id=1pHS6mS_exOC0nB3ARKALw' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 134.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:48.580Z] Error: Connection disconnected with error 'Error: WebSocket closed with status code: 1006 (no reason given).'.
+[ 134.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 134.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:48.583Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 134.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:48.583Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 135.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 135.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:49.588Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 135.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:49.588Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 137.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:51.593Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:51.593Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:53.000Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e1&devName=Bot1): [2026-11-05T16:38:53.000Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:53.002Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 138.6s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e3&devName=Bot3): [2026-11-05T16:38:53.002Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 142.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 142.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:56.597Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 142.2s] console error (http://127.0.0.1:35241/?room=QVVH&slot=e2e2&devName=Bot2): [2026-11-05T16:38:56.597Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 149.2s] P1 results
+[ 152.3s] restart: every phone shows "Game interrupted: the server restarted."
+[ 152.4s] P1 lobby
+[ 152.6s] restart: every phone back in room QVVH's lobby
+[ 163.2s] P1 driver-select
+[ 163.4s] RESTART_AGAIN OK: VIP started a new race in the same room
+[ 168.7s] qualifying plan: P1 SAI 3/3 laps, 10.50 s; P2 HAM 3/3 laps, 15.75 s; P3 PER 2/3 laps, 14.00 s
+[ 168.7s] QUALI order SAI HAM PER
+[ 168.7s] phases seen on P1: driver-select, seated, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, answered, reveal, results, lobby
+
+OK
+Screenshots: /workspace/issue24/question/phones

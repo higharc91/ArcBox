@@ -18,6 +18,20 @@ public class RaceInterruptionTests
     [Fact]
     public void Nothing_on_air_is_not_interrupted() => Assert.False(RaceInterruption.WasInterrupted(null));
 
+    [Theory]
+    [InlineData(RacePhase.QualifyingQuestion)]
+    [InlineData(RacePhase.Question)]
+    [InlineData(RacePhase.Reveal)]
+    [InlineData(RacePhase.Anthem)]
+    [InlineData(RacePhase.Champagne)]
+    [InlineData(RacePhase.Chequered)]
+    public void A_server_restart_interrupts_even_the_last_podium_phase(RacePhase phase) =>
+        Assert.True(RaceInterruption.WasInterrupted(phase, "Game interrupted: the server restarted."));
+
+    [Fact]
+    public void A_normal_podium_result_keeps_the_last_cork_and_line_ringing() =>
+        Assert.False(RaceInterruption.WasInterrupted(RacePhase.Champagne, "Ann wins the race"));
+
     [Fact]
     public void Every_other_phase_is_interrupted()
     {

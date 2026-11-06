@@ -38,7 +38,7 @@ Run from the repository root:
 python tools/tactics-assets/pixellab/animal-concepts/directional/export-creatures.py
 python tools/tactics-assets/pixellab/overworld-animals/export-overworld.py
 python tools/tactics-assets/creature_scale.py content/tactics/base/creatures/manifest.json
-python tools/tactics-assets/review_creature_assets.py
+python tools/tactics-assets/dev/review_creature_assets.py
 ```
 
 The first exporter checks edge contact and required combat poses before replacing the runtime output. The fauna exporter requires all expected validated loops. `canonical/` contains accepted normalized frames; provider request manifests and job identifiers document their origins. Concept references are from Scenario; native poses and most motion are from PixelLab. The final duck buoyancy loop is locally authored. Local scripts perform palette, stray-pixel, anchor, scale and atlas cleanup.

@@ -46,6 +46,15 @@ class MusicList(unittest.TestCase):
                 self.assertIs(music[sid]["instrumental"], True)
 
 
+class CreatureFamilies(unittest.TestCase):
+    def test_attack_family_lists_match_the_existing_voice_roster(self):
+        entries = audio.load(audio.KINDS["sfx"]["list"])
+        for family, voice in entries["voices"].items():
+            with self.subTest(family):
+                self.assertEqual([name.strip() for name in voice["monsters"].split(",")],
+                                 entries[f"{family}_attack"]["families"])
+
+
 class Plan(unittest.TestCase):
     def test_a_music_job_carries_instrumental(self):
         with tempfile.TemporaryDirectory() as d:
@@ -79,13 +88,14 @@ class Manifests(unittest.TestCase):
             external = {"files": ["crow.wav"], "loop": False, "group": "ambience", "use": "A nearby crow"}
             table["external"].write_text(json.dumps({"sounds": {"animal_crow": external}}))
             (table["out"] / "crow.wav").write_bytes(b"existing")
-            table["list"].write_text(json.dumps({"chime": cue()}))
+            table["list"].write_text(json.dumps({"chime": cue(group="creature", families=["mimic"])}))
             (table["out"] / "chime.ogg").write_bytes(b"generated")
             with patch.object(audio, "KINDS", {"sfx": table}):
                 self.assertEqual(audio.write_manifests(), {"sfx": 2})
             result = json.loads((table["out"] / "manifest.json").read_text())
             self.assertEqual(result["sounds"]["animal_crow"], external)
             self.assertEqual(result["sounds"]["chime"]["files"], ["chime.ogg"])
+            self.assertEqual(result["sounds"]["chime"]["families"], ["mimic"])
             # A later unrelated import must leave an unchanged manifest byte-identical, including its authored ordering.
             manifest_path = table["out"] / "manifest.json"
             authored = json.dumps(result, sort_keys=True, separators=(",", ":"))
@@ -93,6 +103,21 @@ class Manifests(unittest.TestCase):
             with patch.object(audio, "KINDS", {"sfx": table}):
                 audio.write_manifests()
             self.assertEqual(manifest_path.read_text(), authored)
+
+
+class ShippedLoudness(unittest.TestCase):
+    def test_every_manifest_clip_meets_its_group_target_and_true_peak_ceiling(self):
+        measurements = audio.audit_shipped()
+        self.assertTrue(measurements)
+        failures = [f"{row['file']}: {row['level']:.1f} {row['metric']} vs {row['target']:.1f}, "
+                    f"true peak {row['true_peak']:.1f} dBTP"
+                    for row in measurements
+                    if abs(row["level"] - row["target"]) > audio.LOUDNESS_TOLERANCE
+                    or row["true_peak"] > audio.TRUE_PEAK_CEILING]
+        self.assertEqual([], failures)
+        dungeon = next(row for row in measurements if row["file"] == "music/dungeon.ogg")
+        self.assertLessEqual(dungeon["true_peak"], -5.0)
+        self.assertEqual("RMS dBFS", next(row for row in measurements if row["file"] == "sfx/ui_cancel.ogg")["metric"])
 
 
 if __name__ == "__main__":

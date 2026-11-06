@@ -6,12 +6,13 @@ import tempfile
 from PIL import Image
 from parts.creator import RACES,CLASSES
 from parts.rig import frame_list,ANIMS
-from arcpix.out import PACK,PREVIEWS
+from arcpix.out import PACK,PREVIEWS,previews_enabled,save
 from .animation import FRAME,ANCHOR,COLUMNS,frame,rest,OFFSET
 from parts.rig import Pose
 import numpy as np
 
 def review():
+    if not previews_enabled(): return
     from arcpix.preview import matrix
     cells=[]
     for race in RACES:
@@ -20,6 +21,7 @@ def review():
         [c.name for c in CLASSES.values()], cells, zoom=2).save(PREVIEWS/'tactical-roster.png')
 
 def walking_review():
+    if not previews_enabled(): return
     from arcpix.preview import contact_sheet,Tile,strip
     picks=[('human','fighter'),('tiefling','rogue'),('dragonborn','wizard'),
         ('dwarf','cleric'),('elf','ranger'),('half_elf','paladin'),('gnome','bard'),
@@ -78,11 +80,12 @@ def build():
             (staged/f'{key}.png').replace(root/f'{key}.png')
         (staged/'manifest.json').replace(root/'manifest.json')
     # Short animated review strips from the exact runtime frames.
-    for role,race in [('fighter','human'),('wizard','dragonborn'),('rogue','tiefling'),('cleric','dwarf')]:
-        images=[frame(role,race,False,p).convert('RGB') for p in ANIMS['walk'][2]]
-        images[0].save(PREVIEWS/f'tactical-{race}-{role}-walk.gif',save_all=True,append_images=images[1:],duration=round(1000/ANIMS['walk'][0]),loop=0)
-    review()
-    walking_review()
+    if previews_enabled():
+        for role,race in [('fighter','human'),('wizard','dragonborn'),('rogue','tiefling'),('cleric','dwarf')]:
+            images=[frame(role,race,False,p).convert('RGB') for p in ANIMS['walk'][2]]
+            save(images[0], PREVIEWS/f'tactical-{race}-{role}-walk.gif',save_all=True,append_images=images[1:],duration=round(1000/ANIMS['walk'][0]),loop=0)
+        review()
+        walking_review()
     print(f'Built {len(keys)} tactical sheets, {len(frame_list())} frames per facing.')
 
 if __name__=='__main__':build()

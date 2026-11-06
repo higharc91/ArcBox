@@ -26,6 +26,10 @@ public static class MusicChoice
     private const string Camp = "camp";
     private const string Dawn = "camp_dawn";
     private const string Emberwick = "town_emberwick";
+    private const string Mirewood = "court_mirewood";
+    private const string ScarwalkerCamp = "camp_scarwalker";
+    private const string Greyhold = "town_greyhold";
+    private const string Festival = "town_emberwick_festival";
 
     private static readonly ImmutableDictionary<string, string> Fights = new Dictionary<string, string>
     {
@@ -40,6 +44,8 @@ public static class MusicChoice
     {
         ["ashen_ford"] = Emberwick,
         ["cinder_hollow"] = Dungeon,
+        ["mirewood"] = Mirewood,
+        ["frostpeak"] = Greyhold,
     }.ToImmutableDictionary();
 
     private static readonly ImmutableDictionary<string, string> Beds = new Dictionary<string, string>
@@ -62,17 +68,20 @@ public static class MusicChoice
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Dungeon, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn, Emberwick];
+    public static IEnumerable<string> Ids => [Title, Explore, Dungeon, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn,
+        Emberwick, Mirewood, ScarwalkerCamp, Greyhold, Festival];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
     {
         if (!Enum.TryParse<TacticsPhase>(view.Phase, out var phase))
             return null;
+        if (phase == TacticsPhase.Story && view.Story?.Scene == "ch5_epilogue_rekindled")
+            return new MusicCue(Festival);
         if (phase == TacticsPhase.Story && view.Camp is { Stage: "dawn" })
             return new MusicCue(Dawn, view.Explore is { } dawnPlace ? Regions.GetValueOrDefault(dawnPlace.Region, Explore) : Explore);
         if (phase == TacticsPhase.Story && view.Camp is { Stage: not ("vote" or "dawn") })
-            return new MusicCue(Camp);
+            return new MusicCue(view.Explore?.Region == "sunscar" ? ScarwalkerCamp : Camp);
         return phase switch
         {
             TacticsPhase.Muster => new MusicCue(Title),
@@ -92,8 +101,29 @@ public static class MusicChoice
     /// <summary>Whether <paramref name="battle"/> was a fight with boss music, so winning it earns the grander fanfare.</summary>
     private static bool IsBoss(BattleView? battle) => battle is not null && Fights.ContainsKey(battle.Encounter);
 
-    /// <summary>The bed under <paramref name="view"/>'s fight, or null away from one.</summary>
-    public static string? AmbienceOf(TacticsHostView view) => view.Camp is { Mode: "camp", Stage: not ("vote" or "dawn") } ? "amb_campfire" : view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : view.Explore?.Region == "cinder_hollow" ? "amb_cinder_hollow" : null;
+    /// <summary>The bed for the current battle or walking place. Rain replaces the dry place bed while its weather layer is active.</summary>
+    public static string? AmbienceOf(TacticsHostView view)
+    {
+        if (view.Camp is { Mode: "camp", Stage: not ("vote" or "dawn") }) return "amb_campfire";
+        if (view.Camp is not null) return null;
+        if (view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle) return Ambience(battle.Map);
+        if (view.Phase is not (nameof(TacticsPhase.Exploration) or nameof(TacticsPhase.Story)) || view.Explore is not { } explore)
+            return null;
+        if (explore.Weather is "rain" or "storm" or "drizzle") return "amb_rain";
+        return explore.Region switch
+        {
+            "ashen_ford" => FordBed(explore.At.X, explore.At.Y),
+            "cinder_hollow" => "amb_cinder_hollow",
+            "mirewood" => "amb_swamp",
+            _ => null,
+        };
+    }
+
+    // Ashen Ford's town is west of the river; the docks, bridge and banks share the river bed.
+    // The remaining fields, hills and roads hear open wind.
+    private static string FordBed(int x, int y) =>
+        x is >= 14 and <= 55 && y is >= 44 and <= 78 ? "amb_town" :
+        x is >= 88 and <= 123 ? "amb_river" : "amb_plains_wind";
 
     /// <summary>The bed for a map, by its id in <c>sfx/manifest.json</c>, or null.</summary>
     public static string? Ambience(string map) => Beds.GetValueOrDefault(map);

@@ -1,0 +1,149 @@
+[   0.8s] room LCWF, 3 phone(s), game redline (to the end)
+[   1.1s] waiting for the host to start the game
+[  13.8s] P1 driver-select
+[  21.0s] P1 seated  "You're Esteban Ocon. Waiting for the grid…"
+[  21.2s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "In Disney's Frozen, what is the name of the living snowman? Answers in a moment…"
+[  29.5s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  33.0s] P1 lap 1: right "Olaf" after 3.6 s
+[  33.2s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.84 s — checking…"
+[  34.5s] P2 lap 1: right "Olaf" after 5.3 s
+[  36.2s] P3 lap 1: right "Olaf" after 7.0 s
+[  36.2s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.84 s P12 so far"
+[  41.5s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "What is the chemical formula for water? Answers in a moment…"
+[  44.3s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[  47.9s] P1 lap 2: right "H2O" after 3.5 s
+[  48.1s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.54 s — checking…"
+[  49.8s] P2 lap 2: right "H2O" after 5.3 s
+[  51.4s] P3 lap 2: WRONG (planned) "NaCl" after 7.0 s
+[  51.6s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.54 s P8 so far"
+[  56.6s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "Which planet is known as the Red Planet? Answers in a moment…"
+[  59.9s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[  63.4s] P1 lap 3: right "Mars" after 3.5 s
+[  63.6s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.53 s — checking…"
+[  65.3s] P2 lap 3: right "Mars" after 5.3 s
+[  67.2s] P3 lap 3: right "Mars" after 7.1 s
+[  67.3s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.53 s P6 so far"
+[  72.3s] P1 grid  "You're Esteban Ocon, #31, Haas. Lights out in a moment… · Qualified P6"
+[  78.3s] rejoin: reloading P2 during throttle [P9 ROUND 1/15]
+[  78.4s] P1 throttle  [P6 ROUND 1/15]
+[  78.5s] rejoin: P2 back on throttle [P9 ROUND 1/15]
+[  80.2s] P1 throttle-locked  [P6 ROUND 1/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[  85.0s] P1 reading  [REDLINE P6 ROUND 1/15]  "Which river flows through the centre of Paris? Answers open in a moment…"
+[  88.2s] P1 question  [REDLINE P6 ROUND 1/15]
+[  90.1s] P1 answered  [P6 ROUND 1/15]  "Answer locked. Eyes on the TV!"
+[  92.0s] P1 reveal  [P15 ROUND 1/15]  "Spun out! Pit limiter next round · P15"
+[  99.0s] P1 throttle-locked  [P15 ROUND 2/15]  "Pit limiter: you're on Cruise this round."
+[ 104.5s] P1 reading  [CRUISE P15 ROUND 2/15]  "Which part of a cell is often called its powerhouse? Answers open in a moment…"
+[ 108.8s] swap: Bot2 loses its phone on the question [CRUISE P15 ROUND 2/15]; a new phone with empty storage takes the seat back
+[ 108.8s] P1 question  [CRUISE P15 ROUND 2/15]
+[ 108.8s] swap: picker offers Bot2; taking Bot2
+[ 109.2s] swap: Bot2 (seat p2) back on question [CRUISE P15 ROUND 2/15], was [CRUISE P15 ROUND 2/15]
+[ 109.7s] swap: the old phone's secret is refused: join "Couldn't rejoin. Please join again."
+[ 117.2s] P1 reveal  [P19 ROUND 2/15]  "Wrong answer. No change · P19"
+[ 124.1s] P1 throttle  [P19 ROUND 3/15]
+[ 130.0s] P1 reading  [REDLINE P19 ROUND 3/15]  "Which country hosted the 2016 Summer Olympics? Answers open in a moment…"
+[ 133.2s] P1 question  [REDLINE P19 ROUND 3/15]
+[ 137.5s] P1 answered  [P19 ROUND 3/15]  "Answer locked. Eyes on the TV!"
+[ 141.8s] P1 reveal  [P9 ROUND 3/15]  "Correct! +4 · now P9"
+[ 148.9s] P1 throttle  [P9 ROUND 4/15]
+[ 150.3s] P1 throttle-locked  [P9 ROUND 4/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 151.8s] P1 reading  [PUSH P9 ROUND 4/15]  "Which element has the atomic number 26? Answers open in a moment…"
+[ 154.9s] P1 question  [PUSH P9 ROUND 4/15]
+[ 155.0s] P3 sits out question: the phase timer decides
+[ 162.7s] P1 answered  [P9 ROUND 4/15]  "Answer locked. Eyes on the TV!"
+[ 174.9s] P1 reveal  [P13 ROUND 4/15]  "Wrong answer. −1 · now P13"
+[ 181.9s] P1 throttle  [P13 ROUND 5/15]
+[ 184.8s] P1 throttle-locked  [P13 ROUND 5/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 189.7s] P1 reading  [PUSH P13 ROUND 5/15]  "Which Pokemon is number 25 in the original Pokedex? Answers open in a moment…"
+[ 193.3s] P1 question  [PUSH P13 ROUND 5/15]
+[ 199.9s] P1 reveal  [P17 ROUND 5/15]  "Wrong answer. −1 · now P17"
+[ 206.9s] P1 throttle  [P17 ROUND 6/15]
+[ 209.0s] P1 throttle-locked  [P17 ROUND 6/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 214.5s] P1 reading  [PUSH P17 ROUND 6/15]  "Which Japanese director made the 1954 film Seven Samurai? Answers open in a moment…"
+[ 218.7s] P1 question  [PUSH P17 ROUND 6/15]
+[ 221.4s] P1 answered  [P17 ROUND 6/15]  "Answer locked. Eyes on the TV!"
+[ 226.3s] P1 reveal  [P19 ROUND 6/15]  "Wrong answer. −1 · now P19"
+[ 233.4s] P1 throttle  [P19 ROUND 7/15]
+[ 240.2s] P1 throttle-locked  [P19 ROUND 7/15]  "Locked in: CRUISE. Waiting for the other drivers…"
+[ 240.7s] P1 reading  [CRUISE P19 ROUND 7/15]  "In which year did the Titanic sink? Answers open in a moment…"
+[ 243.9s] P1 question  [CRUISE P19 ROUND 7/15]
+[ 252.0s] P1 reveal  [P22 ROUND 7/15]  "Wrong answer. No change · P22"
+[ 259.0s] P1 throttle  [P22 ROUND 8/15]
+[ 268.0s] P1 reading  [REDLINE P22 ROUND 8/15]  "How many players does one football (soccer) team have on the pitch? Answers open in a moment…"
+[ 272.9s] P1 question  [REDLINE P22 ROUND 8/15]
+[ 277.6s] P1 reveal  [P22 ROUND 8/15]  "Spun out! −1 · pit limiter next round · now P22"
+[ 284.5s] P1 throttle-locked  [P22 ROUND 9/15]  "Pit limiter: you're on Cruise this round."
+[ 288.8s] P1 reading  [CRUISE P22 ROUND 9/15]  "On which continent is the Sahara Desert found? Answers open in a moment…"
+[ 292.5s] P1 question  [CRUISE P22 ROUND 9/15]
+[ 298.6s] P1 answered  [P22 ROUND 9/15]  "Answer locked. Eyes on the TV!"
+[ 298.8s] P1 reveal  [P22 ROUND 9/15]  "Wrong answer. No change · P22"
+[ 305.8s] P1 throttle  [P22 ROUND 10/15]
+[ 310.2s] P1 throttle-locked  [P22 ROUND 10/15]  "Locked in: CRUISE. Waiting for the other drivers…"
+[ 314.4s] P1 reading  [CRUISE P22 ROUND 10/15]  "In which city were the first modern Olympic Games held in 1896? Answers open in a moment…"
+[ 319.3s] P1 question  [CRUISE P22 ROUND 10/15]
+[ 325.6s] P1 reveal  [P22 ROUND 10/15]  "Wrong answer. No change · P22"
+[ 332.4s] P1 throttle  [P22 ROUND 11/15]
+[ 337.9s] P1 reading  [PUSH P22 ROUND 11/15]  "Which is the only letter that does not appear in any US state name? Answers open in a moment…"
+[ 343.4s] P1 question  [PUSH P22 ROUND 11/15]
+[ 345.3s] P1 answered  [P22 ROUND 11/15]  "Answer locked. Eyes on the TV!"
+[ 351.7s] P1 reveal  [P22 ROUND 11/15]  "Wrong answer. No change · P22"
+[ 358.6s] P1 throttle  [P22 ROUND 12/15]
+[ 364.2s] P1 reading  [CRUISE P22 ROUND 12/15]  "What is the largest ocean on Earth? Answers open in a moment…"
+[ 367.0s] P1 question  [CRUISE P22 ROUND 12/15]
+[ 375.0s] P1 reveal  [P22 ROUND 12/15]  "Wrong answer. No change · P22"
+[ 381.9s] P1 throttle  [P22 ROUND 13/15]
+[ 389.5s] P1 reading  [REDLINE P22 ROUND 13/15]  "Which colour do you get by mixing blue and yellow paint? Answers open in a moment…"
+[ 393.8s] P1 question  [REDLINE P22 ROUND 13/15]
+[ 397.3s] P1 answered  [P22 ROUND 13/15]  "Answer locked. Eyes on the TV!"
+[ 402.4s] P1 reveal  [P22 ROUND 13/15]  "Spun out! Pit limiter next round · P22"
+[ 409.2s] P1 chequered  [P22 ROUND 13/15]  "You finished P22 of 22."
+[ 419.3s] P1 anthem  [P22 ROUND 13/15]
+[ 435.9s] P1 champagne  [P22 ROUND 13/15]
+[ 436.0s] P3 pops the cork at 1.00 (pop 1)
+[ 436.5s] P2 pops the cork at 1.00 (pop 1)
+[ 437.2s] P3 pops the cork at 0.25 (pop 2)
+[ 437.3s] P1 pops the cork at 1.00 (pop 1)
+[ 438.3s] P2 pops the cork at 0.45 (pop 2)
+[ 438.7s] P3 pops the cork at 0.35 (pop 3)
+[ 439.5s] P1 pops the cork at 0.65 (pop 2)
+[ 440.2s] P3 pops the cork at 0.30 (pop 4)
+[ 440.4s] P2 pops the cork at 0.55 (pop 3)
+[ 441.6s] P1 pops the cork at 0.65 (pop 3)
+[ 442.1s] P3 pops the cork at 0.30 (pop 5)
+[ 442.6s] P2 pops the cork at 0.55 (pop 4)
+[ 443.8s] P1 pops the cork at 0.65 (pop 4)
+[ 443.8s] P3 pops the cork at 0.35 (pop 6)
+[ 444.4s] P2 pops the cork at 0.50 (pop 5)
+[ 445.3s] P3 pops the cork at 0.30 (pop 7)
+[ 446.3s] P2 pops the cork at 0.55 (pop 6)
+[ 446.3s] P1 pops the cork at 0.75 (pop 5)
+[ 446.8s] P3 pops the cork at 0.35 (pop 8)
+[ 448.0s] P3 pops the cork at 0.25 (pop 9)
+[ 448.1s] P2 pops the cork at 0.55 (pop 7)
+[ 448.5s] P1 pops the cork at 0.65 (pop 6)
+[ 449.6s] P3 pops the cork at 0.30 (pop 10)
+[ 449.8s] P2 pops the cork at 0.50 (pop 8)
+[ 451.2s] P1 pops the cork at 0.75 (pop 7)
+[ 451.7s] results:
+1
+Bot3 (HAD)
+2
+2
+Bot2 (PER)
+0
+3
+Bot1 (OCO)
+0
+[ 451.7s] swap: Bot2 finished 2 of 3 players, in its own seat
+[ 451.7s] P1 results
+[ 451.8s] champagne: P3 10 pop(s), best 1.00, P2 8 pop(s), best 1.00, P1 7 pop(s), best 1.00
+[ 451.8s] race over after round 13
+[ 451.8s] back in the lobby; REDLINE still picked
+[ 452.3s] P3 bottle: locator.click: Timeout 1000ms exceeded.
+[ 452.3s] P2 bottle: locator.click: Timeout 1000ms exceeded.
+[ 453.8s] qualifying plan: P1 OCO 3/3 laps, 10.50 s; P2 PER 3/3 laps, 15.75 s; P3 HAD 2/3 laps, 14.00 s
+[ 453.8s] QUALI order OCO PER HAD
+[ 453.8s] phases seen on P1: driver-select, seated, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, answered, reveal, chequered, anthem, champagne, results
+
+OK
+Screenshots: /workspace/issue24/swap/phones

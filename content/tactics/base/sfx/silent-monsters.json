@@ -1,0 +1,30 @@
+{
+  "silent": {
+    "bandit": "Needs humanoid attack, hurt and death grunts.",
+    "bandit_captain": "Needs captain attack, hurt and death grunts.",
+    "bandit_roamer": "Needs humanoid attack, hurt and death grunts.",
+    "bandit_roamer_gang": "Needs humanoid attack, hurt and death grunts.",
+    "bandit_roamer_lone": "Needs humanoid attack, hurt and death grunts.",
+    "black_knight": "Needs armoured villain attack, hurt and death grunts.",
+    "cult_leader": "Needs cult leader attack, hurt and death grunts.",
+    "cultist": "Needs cultist attack, hurt and death grunts.",
+    "dark_elf": "Needs dark elf attack, hurt and death grunts.",
+    "halvard": "Needs Halvard attack, hurt and death voice.",
+    "imp": "Needs imp attack, hurt and death calls.",
+    "maren_sorrel": "Needs Maren attack, hurt and death voice.",
+    "mother_skarrow": "Needs Mother Skarrow attack, hurt and death voice.",
+    "sapling": "Needs sapling attack, hurt and death wood sounds."
+  },
+  "borrowed": {
+    "boar": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
+    "boar_roamer": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
+    "boar_roamer_lone": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
+    "boar_roamer_pair": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
+    "boar_roamer_sounder": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
+    "drake": "Dedicated drake family is silent; currently borrows dragon and needs drake attack, hurt and death calls.",
+    "golem": "Dedicated golem family is silent; currently borrows elemental and needs golem attack, hurt and death stone sounds.",
+    "hound": "Dedicated hound family is silent; currently borrows wolf and needs hound attack, hurt and death calls.",
+    "ivo_rime": "Dedicated Ivo family is silent; currently borrows undead through the necromancer sprite and needs Ivo attack, hurt and death voice.",
+    "vorga": "Dedicated Vorga family is silent; currently borrows goblin through the goblin spear sprite and needs Vorga attack, hurt and death voice."
+  }
+}

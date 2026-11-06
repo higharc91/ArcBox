@@ -735,7 +735,25 @@
       "angry": "generic_merchant_b_angry.png",
       "sad": "generic_merchant_b_sad.png",
       "surprised": "generic_merchant_b_surprised.png"
-    }
+    },
+    "archived_bandit_captain": {"idle": "bandit_captain_idle.png", "hurt": "bandit_captain_hurt.png", "happy": "bandit_captain_happy.png", "angry": "bandit_captain_angry.png", "sad": "bandit_captain_sad.png", "surprised": "bandit_captain_surprised.png"},
+    "archived_barmaid": {"idle": "barmaid_idle.png", "hurt": "barmaid_hurt.png", "happy": "barmaid_happy.png", "angry": "barmaid_angry.png", "sad": "barmaid_sad.png", "surprised": "barmaid_surprised.png"},
+    "archived_blacksmith": {"idle": "blacksmith_idle.png", "hurt": "blacksmith_hurt.png", "happy": "blacksmith_happy.png", "angry": "blacksmith_angry.png", "sad": "blacksmith_sad.png", "surprised": "blacksmith_surprised.png"},
+    "archived_child": {"idle": "child_idle.png", "hurt": "child_hurt.png", "happy": "child_happy.png", "angry": "child_angry.png", "sad": "child_sad.png", "surprised": "child_surprised.png"},
+    "archived_farmer": {"idle": "farmer_idle.png", "hurt": "farmer_hurt.png", "happy": "farmer_happy.png", "angry": "farmer_angry.png", "sad": "farmer_sad.png", "surprised": "farmer_surprised.png"},
+    "archived_farmhand": {"idle": "farmhand_idle.png", "hurt": "farmhand_hurt.png", "happy": "farmhand_happy.png", "angry": "farmhand_angry.png", "sad": "farmhand_sad.png", "surprised": "farmhand_surprised.png"},
+    "archived_fisher": {"idle": "fisher_idle.png", "hurt": "fisher_hurt.png", "happy": "fisher_happy.png", "angry": "fisher_angry.png", "sad": "fisher_sad.png", "surprised": "fisher_surprised.png"},
+    "archived_guard": {"idle": "guard_idle.png", "hurt": "guard_hurt.png", "happy": "guard_happy.png", "angry": "guard_angry.png", "sad": "guard_sad.png", "surprised": "guard_surprised.png"},
+    "archived_guard_captain": {"idle": "guard_captain_idle.png", "hurt": "guard_captain_hurt.png", "happy": "guard_captain_happy.png", "angry": "guard_captain_angry.png", "sad": "guard_captain_sad.png", "surprised": "guard_captain_surprised.png"},
+    "archived_innkeeper": {"idle": "innkeeper_idle.png", "hurt": "innkeeper_hurt.png", "happy": "innkeeper_happy.png", "angry": "innkeeper_angry.png", "sad": "innkeeper_sad.png", "surprised": "innkeeper_surprised.png"},
+    "archived_kobold": {"idle": "kobold_idle.png", "hurt": "kobold_hurt.png", "happy": "kobold_happy.png", "angry": "kobold_angry.png", "sad": "kobold_sad.png", "surprised": "kobold_surprised.png"},
+    "archived_kobold_slinger": {"idle": "kobold_slinger_idle.png", "hurt": "kobold_slinger_hurt.png", "happy": "kobold_slinger_happy.png", "angry": "kobold_slinger_angry.png", "sad": "kobold_slinger_sad.png", "surprised": "kobold_slinger_surprised.png"},
+    "archived_mayor": {"idle": "mayor_idle.png", "hurt": "mayor_hurt.png", "happy": "mayor_happy.png", "angry": "mayor_angry.png", "sad": "mayor_sad.png", "surprised": "mayor_surprised.png"},
+    "archived_merchant": {"idle": "merchant_idle.png", "hurt": "merchant_hurt.png", "happy": "merchant_happy.png", "angry": "merchant_angry.png", "sad": "merchant_sad.png", "surprised": "merchant_surprised.png"},
+    "archived_minstrel": {"idle": "minstrel_idle.png", "hurt": "minstrel_hurt.png", "happy": "minstrel_happy.png", "angry": "minstrel_angry.png", "sad": "minstrel_sad.png", "surprised": "minstrel_surprised.png"},
+    "archived_noble": {"idle": "noble_idle.png", "hurt": "noble_hurt.png", "happy": "noble_happy.png", "angry": "noble_angry.png", "sad": "noble_sad.png", "surprised": "noble_surprised.png"},
+    "archived_priest": {"idle": "priest_idle.png", "hurt": "priest_hurt.png", "happy": "priest_happy.png", "angry": "priest_angry.png", "sad": "priest_sad.png", "surprised": "priest_surprised.png"},
+    "archived_sage": {"idle": "sage_idle.png", "hurt": "sage_hurt.png", "happy": "sage_happy.png", "angry": "sage_angry.png", "sad": "sage_sad.png", "surprised": "sage_surprised.png"}
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
 }

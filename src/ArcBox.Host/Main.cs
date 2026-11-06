@@ -748,14 +748,15 @@ public partial class Main : Control
 
     // ---- Screens -------------------------------------------------------------------------------------------
 
-    private void SetScreen(Node screen, ScreenKind kind, string? shot)
+    private void SetScreen(Node screen, ScreenKind kind, string? shot, string? resultMessage = null)
     {
         if (_screen is IPreloadScene finished && _kind == ScreenKind.Game && _sceneGameId is { } finishedGame
             && screen != _screen)
         {
             // Keep the finished game's scene, ready for a rematch; WarmUp drops it if another game is picked.
             DropWarm();
-            finished.Park();
+            // Rebuilt rooms can send LobbyChanged before GameEnded. Either ordering must carry the restart reason.
+            finished.Park(resultMessage ?? (_lobby is { InGame: false } ? _lobby.LastResults?.Message : null));
             _warm = _screen;
             _warmGameId = finishedGame;
         }
@@ -979,7 +980,7 @@ public partial class Main : Control
                 ShowLobby();
             }
         };
-        SetScreen(screen, ScreenKind.Results, "results");
+        SetScreen(screen, ScreenKind.Results, "results", results.Message);
         // Tools read it: `RESULTS <message> | <name> <score>, …`, either part left out when empty (the e2e restart run
         // checks for the "interrupted" note, the swap run that the swapped phone's player is listed once).
         string[] parts = [results.Message ?? "", string.Join(", ", results.Scores.Select(s => $"{s.Name} {s.Score}"))];
