@@ -225,7 +225,8 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] QuestLogView? QuestLog = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<QuestPersonMarker>? QuestMarkers = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<MobView>? Mobs = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Danger = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Danger = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Weather = null);
 
 public sealed record MobView(string Id, string Group, string Sprite, Tile At, long Step,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<WalkLeg> Legs = default);

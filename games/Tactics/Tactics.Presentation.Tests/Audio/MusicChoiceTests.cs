@@ -251,8 +251,52 @@ public sealed class MusicChoiceTests
     [InlineData("SomePhaseFromTheFuture")]
     public void A_screen_with_no_tune_of_its_own_leaves_the_music_alone(string phase) => Assert.Null(MusicChoice.Of(View(phase)));
 
+    [Theory]
+    [InlineData(26, 58, "amb_town")]         // Emberwick square and the Last Coal
+    [InlineData(100, 93, "amb_river")]       // docks and riverbank
+    [InlineData(103, 60, "amb_river")]       // ford bridge
+    [InlineData(38, 13, "amb_plains_wind")]  // farm fields
+    [InlineData(134, 24, "amb_plains_wind")] // Skarrow hills
+    [InlineData(130, 90, "amb_plains_wind")] // Maud's hut
+    public void Every_ashen_ford_place_has_a_bed(int x, int y, string bed)
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(x, y), new Tile(x, y), false, [], [], null);
+        Assert.Equal(bed, MusicChoice.AmbienceOf(View("Exploration") with { Explore = explore }));
+        Assert.Equal(bed, MusicChoice.AmbienceOf(View("Story") with { Explore = explore }));
+        Assert.True(Bank.Value.Sound(bed)!.Loop);
+    }
+
     [Fact]
-    public void Only_a_fight_has_ambience()
+    public void The_whole_ford_map_has_an_exploration_bed()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(0, 0), new Tile(0, 0), false, [], [], null);
+        for (var y = 0; y < 120; y++)
+            for (var x = 0; x < 160; x++)
+                Assert.NotNull(MusicChoice.AmbienceOf(View("Exploration") with { Explore = explore with { At = new Tile(x, y) } }));
+    }
+
+    [Theory]
+    [InlineData("rain")]
+    [InlineData("storm")]
+    [InlineData("drizzle")]
+    public void Rain_weather_uses_the_rain_bed(string weather)
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(26, 58), new Tile(26, 58), false, [], [], null)
+            with { Weather = weather };
+        Assert.Equal("amb_rain", MusicChoice.AmbienceOf(View("Exploration") with { Explore = explore }));
+        Assert.True(Bank.Value.Sound("amb_rain")!.Loop);
+        Assert.Equal("amb_town", MusicChoice.AmbienceOf(View("Exploration") with { Explore = explore with { Weather = null } }));
+    }
+
+    [Fact]
+    public void Mirewood_uses_the_swamp_bed()
+    {
+        var explore = new ExploreView("mirewood", "Mirewood", 1, 0, new Tile(1, 2), new Tile(1, 2), false, [], [], null);
+        Assert.Equal("amb_swamp", MusicChoice.AmbienceOf(View("Exploration") with { Explore = explore }));
+    }
+
+    [Fact]
+    public void Battles_keep_their_map_bed_and_non_world_screens_are_quiet()
     {
         Assert.Equal("amb_river", MusicChoice.AmbienceOf(View("Battle", Fight("river_crossing", "river_crossing"))));
         Assert.Null(MusicChoice.AmbienceOf(View("Results", outcome: "Won")));
