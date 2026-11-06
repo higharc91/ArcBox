@@ -12,10 +12,11 @@ internal sealed partial class Planner
     /// a disengage (<see cref="Escape"/>) or a dash, and whether it leaves the map as it is (<see cref="Stable"/>), so a
     /// move planned before it still holds after it. <see cref="Surge"/> marks one that gives the unit an extra action (Action
     /// Surge); <see cref="Hop"/> is how far one that moves the unit to an empty tile (a teleport or a leap) takes it, 0 for
-    /// any other.
+    /// any other; <see cref="Meta"/> is the kind of a metamagic ability (<c>twinned</c>, <c>careful</c>, …), null for any
+    /// other.
     /// </summary>
     private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable,
-        bool Reacts, bool Surge, int Hop);
+        bool Reacts, bool Surge, int Hop, string? Meta);
 
     /// <summary>
     /// What the unit can use: its sheet's abilities and the built-in <c>common.*</c> actions it can pay for (in id order),
@@ -56,8 +57,10 @@ internal sealed partial class Planner
         var stable = !Scorer.All(top).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect or DashEffect
             or JumpToEffect or ZoneEffect or HazardEffect or AlterTerrainEffect or SummonEffect or TransformEffect or TurnOrderEffect
             || e is ApplyEffect a && Halts(a.Condition) || e is StatModEffect m && (m.Mods.CantMove || m.Mods.Incapacitated));
+        var meta = top.OfType<TransformEffect>().Where(t => t.Hook == "metamagic").Select(t => NamedHooks.String(t.Args, "kind"))
+            .FirstOrDefault(k => k is not null);
         return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash,
-            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet), surge, Math.Max(0, hop));
+            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet), surge, Math.Max(0, hop), meta);
     }
 
     /// <summary>True when the condition (or one it implies) stops its holder moving or acting.</summary>

@@ -340,21 +340,31 @@ public sealed partial class TacticsGame
         }
     }
 
+    /// <summary>
+    /// The AI's whole turn for <paramref name="active"/> as the battle plays it (<see cref="PlanEngine"/>): finishing a timed-out
+    /// turn with the companion profile and no items, an absent member with the companion's one-potion rule, anyone else as
+    /// their own profile plays. Throws what the planner throws.
+    /// </summary>
+    internal TurnPlan PlanAi(BattleState state, UnitId active)
+    {
+        var options = _aiFinishing == active
+            ? new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: Companion)
+            : state.Units[active].Controller is AiControlled { Profile: Companion }
+                ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
+                : new AiOptions();
+        return PlanEngine(state, active, Rules, options);
+    }
+
     /// <summary>The next step of the AI's plan for <paramref name="active"/>, or null if planning failed (logged).</summary>
     private Command? NextAiCommand(BattleState state, UnitId active)
     {
         if (_plan is not { } plan || plan.Unit != active || plan.Round != state.Round || plan.TurnIndex != state.TurnIndex
             || plan.Commands.Count == 0)
         {
-            var options = _aiFinishing == active
-                ? new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: Companion)
-                : state.Units[active].Controller is AiControlled { Profile: Companion }
-                    ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
-                    : new AiOptions();
             ImmutableArray<Command> commands;
             try
             {
-                commands = PlanEngine(state, active, Rules, options).Commands;
+                commands = PlanAi(state, active).Commands;
             }
             catch (Exception e) when (IsEngineFailure(e))
             {

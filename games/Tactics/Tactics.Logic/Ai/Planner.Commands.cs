@@ -35,6 +35,7 @@ internal sealed partial class Planner
             case Kind.MoveAct:
                 Act(c.Escape, new Target());
                 Walk(here, _paths.PathTo(c.ActTile));
+                Act(c.Lead, new Target());   // Twinned or Careful Spell, shaping the spell after it
                 Main();
                 break;
             case Kind.MoveActMove:
@@ -86,25 +87,27 @@ internal sealed partial class Planner
             leaving = leaving.Union(surge.Leaving);
             selfOnly |= !surge.Stable;
         }
-        if (Bonus(state, leaving, selfOnly) is { } bonus && Battle.Check(state, bonus, _rules) is null)
-            commands.Add(bonus);
+        if (Bonus(state, leaving, selfOnly) is { } bonus && Battle.Check(state, bonus.Use, _rules) is null)
+            commands.Add(bonus.Use);
         commands.Add(new EndTurn(_me.Id));
         return [.. commands];
     }
 
     /// <summary>
     /// The units <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
-    /// may take out of reach of a later action: any it may kill (or, Downed, finish), and unless the profile is cruel any foe
-    /// it may Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile
-    /// in reach with the least HP, ties by id), if they may drop it. None for an action that deals no damage.
+    /// may take out of reach of a later action: a Downed one it hits (it may finish it), any it may kill (one that dies at
+    /// 0 HP, when its damage can reach the HP left: <see cref="MayDrop"/>), and unless the profile is cruel any foe it may
+    /// Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile in
+    /// reach with the least HP, ties by id), if they may drop it. None for an action that deals no damage.
     /// </summary>
     private ImmutableSortedSet<UnitId> Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
     {
         if (usable is null || action is null || !Scorer.Deals(usable.Ability.Effects))
             return [];
         var leaving = action.Affected.Where(id => _s.Units[id] is var u
-                                                  && (u.Life == LifeState.Downed || !DownedRules.GoesDown(u)
-                                                      || !_p.Cruel && Scorer.Hostile(_me, u) && MayDrop(usable, action, at, id)))
+                                                  && (u.Life == LifeState.Downed
+                                                      || (!DownedRules.GoesDown(u) || !_p.Cruel && Scorer.Hostile(_me, u))
+                                                      && MayDrop(usable, action, at, id)))
             .ToImmutableSortedSet();
         var me = at.State.Units[_me.Id];
         if (Strikes.Aimed(usable.Ability) && me.Sheet.Attacks > 1 && action.Affected.Any(id => MayDrop(usable, action, at, id))
@@ -168,9 +171,9 @@ internal sealed partial class Planner
     /// second action it buys, <see cref="Surge"/>) and a concentration ability after the plan has just begun concentrating on
     /// another. A teleport or leap goes to the landing tile worth most over staying. It never targets a unit in
     /// <paramref name="leaving"/> (the main action may have killed or Downed it) and, with <paramref name="selfOnly"/>, only
-    /// uses abilities on the unit itself.
+    /// uses abilities on the unit itself. Its score is what it is worth less its cost.
     /// </summary>
-    private Use? Bonus(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
+    private (Use Use, double Score)? Bonus(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
     {
         var me = state.Units[_me.Id];
         if (!me.Economy.Bonus)
@@ -195,7 +198,29 @@ internal sealed partial class Planner
                         action.Value - hoard);
             }
         }
-        return best;
+        return best is null ? null : (best, bestScore);
+    }
+
+    private readonly Dictionary<(Tile, AbilityId?, AbilityId?, AbilityId?, ItemId?, bool), double> _bonusLeft = [];
+
+    /// <summary>
+    /// What the bonus action <paramref name="c"/> leaves for the end of its turn is worth: the best bonus action's score
+    /// (<see cref="Bonus"/>) where the plan ends, once its disengage, its lead (a teleport or dash) and its action are paid
+    /// for; 0 when one of them spends the bonus action. An estimate for ranking (it doesn't know which foes the action
+    /// drops), cached by where the plan ends and what it uses.
+    /// </summary>
+    private double BonusLeft(Candidate c)
+    {
+        var selfOnly = c.Usable is { Stable: false } && c.Kind is not (Kind.Move or Kind.DashMove);
+        var key = (c.End, c.Escape?.Command, c.Lead?.Command, c.Usable?.Command, c.Usable?.Item, selfOnly);
+        if (_bonusLeft.TryGetValue(key, out var known))
+            return known;
+        var state = Hypo(c.End).State;
+        foreach (var (usable, target) in new[] { (c.Escape, new Target()), (c.Lead, c.Kind == Kind.HopAct ? new Target(Tile: c.ActTile) : new Target()),
+                     (c.Usable, c.Action?.Target ?? new Target()) })
+            if (usable is not null && Battle.CostRefusal(state.Units[_me.Id], usable.Ability) is null)
+                state = Advance(state, new Use(_me.Id, usable.Command, target, usable.Item));
+        return _bonusLeft[key] = Bonus(state, [], selfOnly)?.Score ?? 0;
     }
 
     /// <summary>

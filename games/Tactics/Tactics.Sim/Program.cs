@@ -21,9 +21,10 @@ const string Usage = """
       --round-cap N          stop a battle after this round, counted as lost (default 30)
       --companions N         the first N members of every party (class order) play the companion profile (default 0)
       --trinkets cls:id,...  equip listed class trinkets for a paired reward-impact sweep (default none)
-      --subclasses cls:id,...  give the listed classes that subclass (default none)
+      --subclasses cls:id,...
+                             give the listed classes that subclass (default none)
       --race ID              every party member's race (default human)
-      --rules DIR           the rules pack (default content/tactics/base/rules under the repository root)
+      --rules DIR            the rules pack (default content/tactics/base/rules under the repository root)
       --out PATH             write the report to PATH (default: print it)
       -h, --help             this text
     """;

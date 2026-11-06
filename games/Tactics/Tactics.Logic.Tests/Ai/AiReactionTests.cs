@@ -241,4 +241,33 @@ public sealed class AiReactionTests
         Assert.Equal(7, after.Units[U("gob")].Hp);
         Assert.Equal(8, after.Units[U("mage")].Resources["mana"]);
     }
+
+    [Fact]
+    public void Counterspells_a_cruel_foes_spell_that_would_take_a_Downed_hero_Out()
+    {
+        // #110: a hit takes Aldo (Downed, countdown 1) Out. Countering is worth what the spell is worth to its cruel caster,
+        // not what the party mage's own fair-play profile would make of hitting a Downed unit (that is a cost to it).
+        var bolt = A("cleric.guiding_bolt");
+        var counter = A("wizard.counterspell");
+        var mage = TestSheets.Cleric with
+        {
+            Level = 5, CastingStat = "Int", Scores = TestSheets.Scores(8, 14, 12, 16, 10, 10),
+            Resources = Ordinal.Map(("mana", 11)), Abilities = [counter.Id],
+        };
+        var battle = TestBattle.On("""
+            0. 0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0. 0.
+            """).WithAiProfiles(Base.AiProfiles.Values).With(bolt, counter)
+            .WithConditions(Base.Conditions[new ConditionId("lit")])
+            .Enemy("lich", TestSheets.Cleric.Knowing(bolt) with { InitiativeBonus = 10, Resources = Ordinal.Map(("devotion", 2)) }, T(0, 0),
+                new AiControlled("boss_cruel"))
+            .Party("aldo", TestSheets.Fighter, T(3, 0))
+            .Party("mage", mage, T(5, 1), new AiControlled("caster"));
+        var state = battle.Start().State.Change("aldo", u => u with { Hp = 0, Life = LifeState.Downed, Countdown = 1 });
+
+        var (after, events) = battle.Apply(state, new Use(U("lich"), bolt.Id, new Target(Unit: U("aldo"))));
+
+        Assert.Contains(new Reacted(U("mage"), "wizard.counterspell"), events);
+        Assert.Equal(LifeState.Downed, after.Units[U("aldo")].Life);
+    }
 }

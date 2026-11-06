@@ -15,12 +15,15 @@ namespace Tactics.Logic;
 /// a summon beside its foes):
 /// "move, then act", scored as what the action is worth plus the tile, less the resources it spends (hoard). For the
 /// ranged and skirmisher profiles (<see cref="HitAndRun"/>), also "move, act, then move again" to the best tile the Move
-/// left reaches, for actions that leave the map as it is.</item>
+/// left reaches, for actions that leave the map as it is. A spell that Twinned or Careful Spell would improve is also
+/// planned with that metamagic first (<see cref="Shaped"/>).</item>
 /// <item>"Act from here, then move to the best tile the Move left reaches", for actions that leave the map as it is;
 /// "just move"; and Dash then move.</item>
 /// <item>With a bonus action that teleports or leaps, "walk, teleport, act" to landing tiles near the best position tiles
 /// and beside foes, never where the foes would Down it next round (<see cref="HopThenAct"/>); with a bonus-action Dash,
 /// "dash, walk further, act" (<see cref="DashThenAct"/>).</item>
+/// <item>The best 16 plans are ranked again with the bonus action they leave for the end (<see cref="Ranked"/>), so a
+/// disengage, teleport or dash that spends it gives up what it would be worth.</item>
 /// <item>The best second action, after an extra action (Action Surge) when it is worth what the surge costs, then the best
 /// bonus action, added greedily where the turn ends.</item>
 /// </list>
@@ -144,6 +147,12 @@ internal sealed partial class Planner
                     if (away is { } back && Round(back.Score) > Round(arrive))
                         candidates.Add(new Candidate(Kind.MoveActMove, back.Score + action.Value - hoard, usable, action, t,
                             back.Spot.Tile, back.Escape, action.Value - hoard, back.Spot.Position, back.Path));
+                    foreach (var (meta, shaped) in Shaped(usable, t, action))
+                    {
+                        var worth = shaped.Value - hoard - Hoard(meta);
+                        candidates.Add(new Candidate(Kind.MoveAct, arrive + worth, usable, shaped, t, end, escape, worth, spot.Position,
+                            Lead: meta));
+                    }
                 }
             }
         }
@@ -192,11 +201,25 @@ internal sealed partial class Planner
         }
 
         candidates.Sort(Candidate.Order);
-        foreach (var candidate in candidates)
+        foreach (var candidate in Ranked(candidates))
             if (Commands(candidate) is { } commands)
                 return Finish(candidate, commands, candidates);
         return new TurnPlan([new EndTurn(_me.Id)], 0, $"{_me.Id} ({_p.Id}): no legal plan; end turn.");
     }
+
+    /// <summary>How many of the best plans are ranked again with the bonus action they leave for the end.</summary>
+    private const int RankedPlans = 16;
+
+    /// <summary>
+    /// <paramref name="sorted"/> with its best <see cref="RankedPlans"/> ranked again by their score plus what the bonus
+    /// action they leave for the end is worth (<see cref="BonusLeft"/>), ties in their order, then the rest as they were. A
+    /// plan that spends the bonus action early (on a disengage, a teleport or a dash) gives up what it would be worth at the
+    /// end: Step of the Wind is taken over Flurry of Blows only when escaping is worth more.
+    /// </summary>
+    private IEnumerable<Candidate> Ranked(List<Candidate> sorted)
+        => sorted.Take(RankedPlans).Select((c, i) => (c, i, Total: c.Score + BonusLeft(c)))
+            .OrderByDescending(x => Round(x.Total)).ThenBy(x => x.i).Select(x => x.c)
+            .Concat(sorted.Skip(RankedPlans));
 
     /// <summary>
     /// A plan's shape, in the order its commands run: <see cref="MoveAct"/> walk, act; <see cref="ActMove"/> act, walk;

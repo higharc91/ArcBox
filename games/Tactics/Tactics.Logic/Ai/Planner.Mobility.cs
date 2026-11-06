@@ -162,9 +162,10 @@ internal sealed partial class Planner
 
     /// <summary>
     /// Where <paramref name="hop"/> is planned from and to: from the unit's own tile to its <see cref="Landings"/> (near the best
-    /// position tiles); and for a unit that fights in melee (<see cref="Melee"/>), to the empty tiles beside each foe, each
-    /// from the reachable tile whose walk costs least (the unit's own if it is in range), keeping the best
-    /// <see cref="KeptLandings"/> by that walk and the landing. Never to a tile where the threat map says the foes would Down
+    /// position tiles); and for a unit that fights in melee (<see cref="Melee"/>), to the empty tiles beside each foe (the best
+    /// <see cref="BesideLandings"/> by <see cref="Land"/>), each from the reachable tile whose walk costs least (the unit's own
+    /// if it is in range; at most <see cref="HopVias"/> tried), keeping the best <see cref="KeptLandings"/> by that walk and
+    /// the landing. Never to a tile where the threat map says the foes would Down
     /// the unit next round (<see cref="Companion.WouldDrop"/>): a teleport can carry it past its allies into the middle of the
     /// foes, where nobody can revive it. Every route is one the engine allows (range, line of sight).
     /// </summary>
@@ -177,23 +178,37 @@ internal sealed partial class Planner
         var terrain = _scorer.Terrain;
         var taken = Taken();
         var vias = _spots.Values.Where(s => !MayStop(s.Path)).OrderByDescending(s => Round(s.Score - s.Place)).ThenBy(s => s.Tile).ToArray();
+        var landings = _foes.SelectMany(f => Neighbours(f.Pos)).Distinct()
+            .Where(t => t != here && terrain.Map.InBounds(t) && terrain.Walkable(t) && !taken.Contains(t)
+                        && !Companion.WouldDrop(_threat, _me, t) && !routes.Any(r => r.Item2 == t))
+            .OrderByDescending(t => Round(Land(t))).ThenBy(t => t).Take(BesideLandings);
         var beside = new List<(Tile Via, Tile Landing, double Score)>();
-        foreach (var landing in _foes.SelectMany(f => Neighbours(f.Pos)).Distinct().Order())
+        foreach (var landing in landings)
         {
-            if (landing == here || !terrain.Map.InBounds(landing) || !terrain.Walkable(landing) || taken.Contains(landing)
-                || Companion.WouldDrop(_threat, _me, landing) || routes.Any(r => r.Item2 == landing))
-                continue;
+            var tried = 0;
             foreach (var via in vias)
-                if (Reach.Distance(via.Tile, landing) <= hop.Hop && CanHop(hop, via.Tile, landing))
+            {
+                if (Reach.Distance(via.Tile, landing) > hop.Hop)
+                    continue;
+                if (CanHop(hop, via.Tile, landing))
                 {
                     beside.Add((via.Tile, landing, via.Score - via.Place + Land(landing)));
                     break;
                 }
+                if (++tried == HopVias)
+                    break;
+            }
         }
         routes.AddRange(beside.OrderByDescending(b => Round(b.Score)).ThenBy(b => b.Landing).Take(KeptLandings)
             .Select(b => (b.Via, b.Landing)));
         return routes;
     }
+
+    /// <summary>How many of the empty tiles beside foes (the best by <see cref="Land"/>) a melee unit's teleport is tried on.</summary>
+    private const int BesideLandings = 2 * KeptLandings;
+
+    /// <summary>How many reachable tiles in range (the cheapest walks first) each of those is tried from.</summary>
+    private const int HopVias = 4;
 
     /// <summary>True when the engine lets the unit, having walked to <paramref name="via"/>, use <paramref name="hop"/> on <paramref name="landing"/>.</summary>
     private bool CanHop(Usable hop, Tile via, Tile landing)

@@ -162,12 +162,15 @@ public static class Ai
     /// <summary>
     /// What countering <paramref name="caster"/>'s <paramref name="spellId"/> is worth: its effects still queued (its unit
     /// runs as their worth to the caster on each unit, its tile runs as <see cref="Scorer.TileWorth"/> at their aim), times
-    /// the chance <paramref name="reactor"/> counters it.
+    /// the chance <paramref name="reactor"/> counters it. The worth is what the spell does, whatever the reactor's own
+    /// fair-play rule (#110): a hit on a Downed unit counts as a cruel profile's gain (it takes the countdown down), never as
+    /// the cost it is to a profile that won't hit the Downed itself.
     /// </summary>
     private static double Countering(Scorer scorer, AiProfile profile, UnitState reactor, UnitState caster, AbilityId spellId)
     {
         if (!scorer.Rules.Abilities.TryGetValue(spellId, out var spell) || spell.Tier < 1)
             return 0;
+        profile = profile with { Cruel = true };
         var units = scorer.State.Units;
         var worth = 0.0;
         foreach (var step in scorer.State.Queue.OfType<RunEffectsStep>())

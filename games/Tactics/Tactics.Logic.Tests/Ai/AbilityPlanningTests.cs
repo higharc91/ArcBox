@@ -74,15 +74,16 @@ public sealed class AbilityPlanningTests
     [Fact]
     public void An_archer_does_not_plan_to_walk_on_from_a_web()
     {
-        // As above (with Move enough to step back past the web's difficult ground), but the tiles it shoots from are webbed: a
-        // web it walks into may hold it (Restrained), so it plans no second walk after the shot.
+        // As above (with Move enough to step back past the web's difficult ground, and a swordsman nearly dead, so the shot is
+        // worth taking even from a tile in their reach), but the tiles it shoots from are webbed: a web it walks into may hold
+        // it (Restrained), so it shoots and plans no second walk.
         var shortbow = TestConditions.Longbow with { Id = "shortbow", Range = 6 };
         var battle = On(Open(14, 2)).With(A("wizard.web")).WithConditions(Base.Conditions[new ConditionId("restrained")])
             .Enemy("archer", First(TestSheets.Fighter with { Weapon = shortbow, Ac = 12, Move = 8 }), T(2, 0), new AiControlled("archer"))
             .Party("a", TestSheets.Fighter with { Move = 6 }, T(12, 0))
             .Party("b", TestSheets.Fighter with { Move = 6 }, T(12, 1));
         var web = A("wizard.web").Effects.OfType<ZoneEffect>().Single();
-        var state = battle.Start().State with
+        var state = battle.Start().State.Change("a", u => u with { Hp = 2 }) with
         {
             Zones = [new Zone(1, null, web.Kind, [T(6, 0), T(6, 1)], 10, false, web.Difficult, web.Passives)],
             NextSerial = 2,
@@ -90,8 +91,7 @@ public sealed class AbilityPlanningTests
 
         var plan = Ai.Plan(state, U("archer"), battle.Rules);
 
-        var shot = plan.Commands.IndexOf(plan.Commands.OfType<Use>().FirstOrDefault()!);
-        Assert.True(shot < 0 || !plan.Commands.Skip(shot).Any(c => c is Move), plan.Explain);
+        Assert.True(plan.Commands is [Move, Use { Ability.Value: "common.attack" }, EndTurn], plan.Explain);
     }
 
     [Fact]
@@ -114,7 +114,7 @@ public sealed class AbilityPlanningTests
         var hop = UseOf(plan, "wizard.misty_step");
         Assert.True(hop?.Target.Tile is { } landing && threat.At(landing) == 0, plan.Explain);
         Assert.NotNull(UseOf(plan, "wizard.fire_bolt"));
-        Assert.DoesNotContain(plan.Commands, c => c is Move);
+        Assert.True(plan.Commands is [Use { Ability.Value: "wizard.misty_step" }, Use { Ability.Value: "wizard.fire_bolt" }, EndTurn], plan.Explain);
         var after = ApplyAll(state, plan, battle.Rules);
         Assert.Equal(hop!.Target.Tile, after.Units[U("mage")].Pos);
         Assert.Equal(20, after.Units[U("mage")].Hp);
@@ -170,6 +170,76 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void A_sorcerer_twins_a_single_target_spell_when_a_second_foe_is_in_range()
+    {
+        // Twinned Spell (2 Sorcery) makes Fire Bolt hit a second foe in range too: the planner casts the metamagic first, then
+        // the spell, when the second hit is worth more than the Sorcery.
+        var (bolt, twin) = (A("sorcerer.fire_bolt"), A("sorcerer.metamagic_twinned"));
+        var battle = On(Open(8, 3)).With(bolt, twin)
+            .Enemy("sora", Mage(bolt, twin) with { Move = 0, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
+            .Party("aldo", TestSheets.Fighter with { Move = 0 }, T(5, 1))
+            .Party("bree", TestSheets.Fighter with { Move = 0 }, T(5, 2));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("sora"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "sorcerer.metamagic_twinned" }, Use { Ability.Value: "sorcerer.fire_bolt" }, EndTurn],
+            plan.Explain);
+        var after = ApplyAll(state, plan, battle.Rules);
+        Assert.Equal(4, after.Units[U("sora")].Resources["sorcery"]);
+
+        // Alone, the foe isn't worth the Sorcery of a twin.
+        var alone = On(Open(8, 3)).With(bolt, twin)
+            .Enemy("sora", Mage(bolt, twin) with { Move = 0, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
+            .Party("aldo", TestSheets.Fighter with { Move = 0 }, T(5, 1));
+        Assert.Null(UseOf(Ai.Plan(alone.Start().State, U("sora"), alone.Rules), "sorcerer.metamagic_twinned"));
+    }
+
+    [Fact]
+    public void A_sorcerer_casts_a_careful_fireball_over_an_ally()
+    {
+        // Every blast that catches the three swordsmen catches the goblin among them too. Careful Spell (1 Sorcery) makes
+        // the sorcerer's allies pass the save: it spares the goblin half the damage.
+        var (fireball, careful) = (A("sorcerer.fireball"), A("sorcerer.metamagic_careful"));
+        var sorcerer = Mage(fireball, careful) with { Move = 0, Resources = Ordinal.Map(("mana", 6), ("sorcery", 4)) };
+        var battle = On(Open(10, 5)).With(fireball, careful)
+            .Enemy("sora", sorcerer, T(6, 4), new AiControlled("caster"))
+            .Enemy("gob", TestSheets.Goblin with { MaxHp = 40, Move = 0 }, T(6, 3))
+            .Party("a", TestSheets.Fighter with { Move = 0 }, T(5, 2))
+            .Party("b", TestSheets.Fighter with { Move = 0 }, T(6, 2))
+            .Party("c", TestSheets.Fighter with { Move = 0 }, T(7, 2));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("sora"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "sorcerer.metamagic_careful" }, Use { Ability.Value: "sorcerer.fireball" } cast, EndTurn]
+            && cast.Target.Tile is { } aim && Reach.Distance(aim, T(6, 3)) <= 2, plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void A_cleric_wards_the_ally_the_foes_are_about_to_drop()
+    {
+        // Death Ward does nothing until its holder is Downed: it is worth the chance the foes drop it next round (the threat on
+        // its tile over its HP) times what losing it costs. Aldo has three goblins on him; Bree has none.
+        var ward = A("cleric.death_ward");
+        var priest = First(TestSheets.Cleric.Knowing(ward)) with { Level = 7, Resources = Ordinal.Map(("devotion", 8)), Move = 0 };
+        var goblin = TestSheets.Goblin with { Move = 0 };
+        var battle = On(Open(6, 3)).With(ward).WithConditions(Base.Conditions[new ConditionId("death_ward")])
+            .Enemy("priest", priest, T(2, 1), new AiControlled("healer"))
+            .Enemy("aldo", TestSheets.Fighter, T(3, 1))
+            .Enemy("bree", TestSheets.Fighter, T(1, 1))
+            .Party("g1", goblin, T(4, 1)).Party("g2", goblin, T(3, 0)).Party("g3", goblin, T(3, 2));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("priest"), battle.Rules);
+
+        Assert.True(UseOf(plan, "cleric.death_ward")?.Target.Unit == U("aldo"), plan.Explain);
+        var after = ApplyAll(state, plan, battle.Rules);
+        Assert.Contains(after.Units[U("aldo")].Conditions, c => c.Id.Value == "death_ward");
+    }
+
+    [Fact]
     public void A_druid_conjures_animals_beside_its_foes()
     {
         var conjure = A("druid.conjure_animals");
@@ -208,6 +278,25 @@ public sealed class AbilityPlanningTests
         // With nothing in reach, a second action is worth nothing: the surge is kept.
         var far = Battle(T(7, 0));
         Assert.Null(UseOf(Ai.Plan(far.Start().State, U("kara"), far.Rules), "fighter.action_surge"));
+    }
+
+    [Fact]
+    public void A_hero_surges_to_strike_a_lone_monster_twice()
+    {
+        // The ogre can't drop to one swing, so the second action may go at it again: a monster that dies at 0 HP is only off
+        // limits to a later action when the first may kill it.
+        var surge = A("fighter.action_surge");
+        var battle = On(Open(4, 1)).With(surge)
+            .Party("kara", First(TestSheets.Fighter.Knowing(surge)) with { Move = 0 }, T(0, 0), new AiControlled("brute"))
+            .Enemy("ogre", TestSheets.Fighter with { MaxHp = 80, Move = 0 }, T(1, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("kara"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "common.attack" } first, Use { Ability.Value: "fighter.action_surge" },
+            Use { Ability.Value: "common.attack" } second, EndTurn] && first.Target.Unit == U("ogre") && second.Target.Unit == U("ogre"),
+            plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
     }
 
     [Fact]
@@ -254,6 +343,28 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void A_monk_flurries_rather_than_spending_its_bonus_action_on_stepping_away()
+    {
+        // Two swordsmen beside the monk (Move 2, then a step). Stepping out of their reach after the strike, with Step of the
+        // Wind so they get no opportunity attack, is worth a little more than standing there; but the bonus action it spends
+        // is worth far more as Flurry of Blows. A plan is ranked with the bonus action it leaves for the end.
+        var (flurry, step) = (A("monk.flurry_of_blows"), A("monk.step_of_the_wind"));
+        var monk = First(TestSheets.Rogue.Knowing(flurry, step)) with { MaxHp = 12, Move = 6, Resources = Ordinal.Map(("ki", 10)) };
+        var swordsman = TestSheets.Fighter with { MaxHp = 40, Move = 2 };
+        var battle = On(Open(12, 3)).With(flurry, step).WithConditions(Base.Conditions[new ConditionId("disengaged")])
+            .Enemy("li", monk, T(2, 1), new AiControlled("skirmisher"))
+            .Party("kara", swordsman, T(3, 1))
+            .Party("bree", swordsman, T(2, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("li"), battle.Rules);
+
+        Assert.True(UseOf(plan, "monk.flurry_of_blows")?.Target.Unit is { } target && (target == U("kara") || target == U("bree"))
+            && UseOf(plan, "monk.step_of_the_wind") is null, plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
     public void A_rogue_dashes_with_its_bonus_action_to_reach_a_foe()
     {
         // 8 tiles to the foe and Move 4: the bonus-action Dash doubles it, and the action is left for the attack.
@@ -268,6 +379,68 @@ public sealed class AbilityPlanningTests
         Assert.True(plan.Commands is [Use { Ability.Value: "rogue.cunning_dash" }, Move { Path: [.., var end] },
             Use { Ability.Value: "common.attack" }, EndTurn] && end == T(7, 0), plan.Explain);
         ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void With_its_action_spent_a_rogue_dashes_with_its_bonus_action_to_close_in()
+    {
+        // A timed-out turn finishing what the player left: the action is gone, so Cunning Action's Dash is the way to walk
+        // twice as far toward the foe.
+        var dash = A("rogue.cunning_dash");
+        var battle = On(Open(16, 1)).With(dash)
+            .Enemy("vex", First(TestSheets.Rogue.Knowing(dash)), T(0, 0), new AiControlled("skirmisher"))
+            .Party("kara", TestSheets.Fighter with { Move = 0 }, T(15, 0));
+        var state = battle.Start().State.Change("vex", u => u with { Economy = u.Economy with { Action = false } });
+
+        var plan = Ai.Plan(state, U("vex"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "rogue.cunning_dash" }, Move { Path: [.., var end] }, EndTurn] && end.X > 4,
+            plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void A_bonus_action_keeps_off_the_foe_a_multi_attack_may_move_on_to()
+    {
+        // As with Action Surge below: if the two attacks drop Aldo, the rest go to Bree, so the Spiritual Weapon goes to Cass.
+        var weapon = A("cleric.spiritual_weapon");
+        var priest = First(TestSheets.Fighter.Knowing(weapon)) with
+        {
+            Attacks = 2, Move = 0, CastingStat = "Wis", Resources = Ordinal.Map(("devotion", 4)),
+        };
+        var battle = On(Open(3, 3)).With(weapon)
+            .Enemy("kara", priest, T(1, 1), new AiControlled("brute"))
+            .Party("aldo", TestSheets.Goblin with { MaxHp = 9, Attacks = 3, Move = 0 }, T(0, 1))
+            .Party("bree", TestSheets.Goblin with { MaxHp = 30, Move = 0 }, T(2, 1))
+            .Party("cass", TestSheets.Goblin with { MaxHp = 60, Move = 0 }, T(1, 2));
+        var state = battle.Start().State.Change("bree", u => u with { Hp = 12 });
+
+        var plan = Ai.Plan(state, U("kara"), battle.Rules);
+
+        Assert.True(UseOf(plan, "common.attack") is { Target.Unit.Value: "aldo", Targets.IsDefaultOrEmpty: true }
+            && UseOf(plan, "cleric.spiritual_weapon")?.Target.Unit == U("cass"), plan.Explain);
+    }
+
+    [Fact]
+    public void A_mage_caught_in_melee_dimension_doors_clear_with_its_action()
+    {
+        // Dimension Door is an action: walking away draws three opportunity attacks; the door draws none and lands out of
+        // the swordsmen's reach.
+        var door = A("warlock.dimension_door");
+        var swordsman = TestSheets.Fighter with { Move = 2 };
+        var battle = On(Open(14, 9)).With(door)
+            .Enemy("mage", Mage(door) with { Resources = Ordinal.Map(("pact", 2)) }, T(5, 2), new AiControlled("caster"))
+            .Party("a", swordsman, T(4, 2))
+            .Party("b", swordsman, T(6, 2))
+            .Party("c", swordsman, T(5, 1));
+        var state = battle.Start().State;
+        var threat = ThreatMap.For(state, Side.Enemy, battle.Rules);
+
+        var plan = Ai.Plan(state, U("mage"), battle.Rules);
+
+        Assert.True(UseOf(plan, "warlock.dimension_door")?.Target.Tile is { } landing && threat.At(landing) == 0, plan.Explain);
+        var after = ApplyAll(state, plan, battle.Rules);
+        Assert.Equal(20, after.Units[U("mage")].Hp);
     }
 
     [Fact]

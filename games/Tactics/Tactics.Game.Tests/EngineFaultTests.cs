@@ -128,9 +128,7 @@ public sealed class EngineFaultTests
         first.ToBattle(everyoneAway: true);
         for (var i = 0; i < 6; i++)
             first.Harness.Advance(TimeSpan.FromSeconds(7));
-        static bool OnlyEndsTurn(BattleState s) => s.Pending is null && s.Active is { } unit
-            && Ai.Plan(s, unit, TacticsGameTests.Rules, s.Units[unit].Controller is AiControlled { Profile: "companion" }
-                ? new AiOptions(AllowItems: true) : new AiOptions()).Commands is [EndTurn];
+        bool OnlyEndsTurn(BattleState s) => s.Pending is null && s.Active is { } unit && first.Game.PlanAi(s, unit).Commands is [EndTurn];
         for (var i = 0; i < 20 && OnlyEndsTurn(TacticsDocument.Read(first.Lease.Document).Battle!.State); i++)
             first.Harness.Advance(TimeSpan.FromSeconds(7));
         Assert.Equal(TacticsPhase.Battle, first.Game.Phase);

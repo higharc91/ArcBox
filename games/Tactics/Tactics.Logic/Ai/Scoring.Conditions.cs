@@ -4,6 +4,29 @@ namespace Tactics.Logic;
 
 internal sealed partial class Scorer
 {
+    private readonly Dictionary<ConditionId, bool> _wards = [];
+
+    /// <summary>
+    /// True when the condition stands its holder back up when it is Downed (Death Ward): a passive of its own on
+    /// <see cref="HookKind.OnDowned"/> that revives or heals it. Its static modifiers can't say what that is worth
+    /// (<see cref="ConditionBenefit"/>); <see cref="Worth"/> values it by the chance the holder drops.
+    /// </summary>
+    private bool Wards(ConditionId id)
+    {
+        if (!_wards.TryGetValue(id, out var wards))
+            _wards[id] = wards = Rules.Conditions.TryGetValue(id, out var def) && !def.Passives.IsDefaultOrEmpty
+                && def.Passives.Any(p => p.Hook == HookKind.OnDowned && p.Target == PassiveTarget.Self
+                                         && All(p.Effects).Any(e => e is ReviveEffect or HealEffect));
+        return wards;
+    }
+
+    /// <summary>
+    /// The chance <paramref name="unit"/> is Downed before its next turn, as a share: the threat on its tile next round over
+    /// its HP and temporary HP, at most 1.
+    /// </summary>
+    public double DropChance(UnitState unit)
+        => Math.Clamp(ThreatAgainst(unit.Sheet.Side).At(unit.Pos) / Math.Max(1, unit.Hp + unit.TempHp), 0, 1);
+
     /// <summary>
     /// What a condition does to its holder (its modifiers and those it implies), split into fighting and holding up, and how
     /// many of the holder's turns each part can matter for: one that ends itself as the holder's turn starts (prone, Dodge)

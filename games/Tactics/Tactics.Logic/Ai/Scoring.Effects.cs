@@ -94,7 +94,8 @@ internal sealed partial class Scorer
                     var turns = Turns(apply.Rounds, apply.UntilSave);
                     return new Outcome(DamageDist.Zero, Offense: benefit.Offense * Math.Min(turns, benefit.OffenseTurns),
                         Defense: benefit.Defense * Math.Min(turns, benefit.DefenseTurns),
-                        Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0);
+                        Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0,
+                        Ward: Wards(apply.Condition) && target.Life == LifeState.Up ? 1 : 0);
                 }
             case StatModEffect statMod:
                 {
@@ -345,8 +346,10 @@ internal sealed partial class Scorer
         var advantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Advantage)
                          + (target.Conditions.Any(c => c.Id == RulesPack.Helped.Id) ? 1 : 0);
         var disadvantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Disadvantage);
-        var pFail = mods.AutoFailSaves?.Contains(def.Stat) == true
-            ? 1
+        // Careful Spell: the caster's allies pass (the engine's rule in SaveBlock).
+        var careful = target.Id != st.User.Id && target.Sheet.Side == st.User.Sheet.Side && Metamagic.Has(st.User, Metamagic.Careful);
+        var pFail = careful ? 0
+            : mods.AutoFailSaves?.Contains(def.Stat) == true ? 1
             : Odds.SaveFail(bonus, dc, Rolls.Combine(advantages, disadvantages));
 
         var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;

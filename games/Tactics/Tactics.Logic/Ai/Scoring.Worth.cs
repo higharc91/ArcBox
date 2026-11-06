@@ -12,8 +12,9 @@ internal sealed partial class Scorer
     /// what it is worth (<see cref="KillWorth"/>), and control (a lost turn costs it its damage per round). Hurting a Downed
     /// one ticks its countdown: a cruel profile gains the chance of a hit times its worth over the countdown left; any other
     /// loses as much (fair play, spec §5.4, #110), so an area that would catch it looks for another aim.</item>
-    /// <item>An ally (or the user): healing (double below half HP), getting up from Downed, buffs; hurting it costs one and a
-    /// half times what hurting a hostile is worth.</item>
+    /// <item>An ally (or the user): healing (double below half HP), getting up from Downed, buffs, a ward that stands it back
+    /// up when Downed (worth getting it up, times the chance it drops next round: <see cref="DropChance"/>); hurting it costs
+    /// one and a half times what hurting a hostile is worth.</item>
     /// <item>A neutral: hurting it costs a little. A unit the objectives are about (<see cref="IsObjective"/>: a protected
     /// unit, a hostile the party must defeat, a party unit it must protect) counts the objective weight on top.</item>
     /// </list>
@@ -48,6 +49,7 @@ internal sealed partial class Scorer
             var pKill = hp > 0 ? outcome.Damage.AtLeast(hp) : 0;
             value = p.Heal * urgency * Math.Min(outcome.Heal, target.Sheet.MaxHp - target.Hp)
                     + p.Heal * 0.5 * Math.Max(0, outcome.TempHp - target.TempHp)
+                    + p.Revive * outcome.Ward * DropChance(target) * KillWorth(target)
                     + p.Control * (outcome.Offense * Math.Max(2, Dpr(target)) + outcome.Defense * Incoming(target) - 0.3 * outcome.Push)
                     - 1.5 * (p.Damage * (outcome.Damage.MeanCapped(hp) + outcome.Splash) + p.Kill * pKill * KillWorth(target));
         }
