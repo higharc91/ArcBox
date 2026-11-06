@@ -1,0 +1,1679 @@
+[
+  {
+    "number": 1,
+    "name": "Air Elemental",
+    "key": "bosses.air_elemental.gale",
+    "path": "bosses/air_elemental_gale.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Air Elemental"
+    ],
+    "ids": [
+      "air_elemental"
+    ],
+    "x": 48,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 2,
+    "name": "Red Dragon",
+    "key": "bosses.dragon.red",
+    "path": "bosses/dragon_red.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Red Dragon"
+    ],
+    "ids": [
+      "dragon"
+    ],
+    "x": 648,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 3,
+    "name": "Earth Elemental",
+    "key": "bosses.earth_elemental.stone",
+    "path": "bosses/earth_elemental_stone.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Earth Elemental"
+    ],
+    "ids": [
+      "earth_elemental"
+    ],
+    "x": 1248,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 4,
+    "name": "Fire Elemental",
+    "key": "bosses.fire_elemental.ember",
+    "path": "bosses/fire_elemental_ember.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Fire Elemental"
+    ],
+    "ids": [
+      "fire_elemental"
+    ],
+    "x": 1848,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 5,
+    "name": "Stone Golem",
+    "key": "bosses.golem.granite",
+    "path": "bosses/golem_granite.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Stone Golem"
+    ],
+    "ids": [
+      "golem"
+    ],
+    "x": 2448,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 6,
+    "name": "Hunting Hound",
+    "key": "bosses.hound.tan",
+    "path": "bosses/hound_tan.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Hunting Hound"
+    ],
+    "ids": [
+      "hound"
+    ],
+    "x": 3048,
+    "y": 300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 7,
+    "name": "Bound Imp",
+    "key": "bosses.imp.crimson",
+    "path": "bosses/imp_crimson.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Bound Imp"
+    ],
+    "ids": [
+      "imp"
+    ],
+    "x": 48,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 8,
+    "name": "Mimic",
+    "key": "bosses.mimic.oak",
+    "path": "bosses/mimic_oak.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Mimic"
+    ],
+    "ids": [
+      "mimic"
+    ],
+    "x": 648,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 9,
+    "name": "Grove Sapling",
+    "key": "bosses.sapling.spring",
+    "path": "bosses/sapling_spring.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Grove Sapling"
+    ],
+    "ids": [
+      "sapling"
+    ],
+    "x": 1248,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 10,
+    "name": "Troll",
+    "key": "bosses.troll.troll",
+    "path": "bosses/troll_troll.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Troll"
+    ],
+    "ids": [
+      "troll"
+    ],
+    "x": 1848,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 11,
+    "name": "Water Elemental",
+    "key": "bosses.water_elemental.sea",
+    "path": "bosses/water_elemental_sea.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Water Elemental"
+    ],
+    "ids": [
+      "water_elemental"
+    ],
+    "x": 2448,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 12,
+    "name": "Wraith",
+    "key": "bosses.wraith.wraith",
+    "path": "bosses/wraith_wraith.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Wraith"
+    ],
+    "ids": [
+      "wraith"
+    ],
+    "x": 3048,
+    "y": 650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 13,
+    "name": "Bandit / Roadside Tough",
+    "key": "characters.bandit",
+    "path": "characters/presets/bandit.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Bandit",
+      "Roadside Tough"
+    ],
+    "ids": [
+      "bandit",
+      "bandit_roamer",
+      "bandit_roamer_lone",
+      "bandit_roamer_gang"
+    ],
+    "x": 48,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 14,
+    "name": "Black Knight / Ser Halvard",
+    "key": "characters.black_knight",
+    "path": "characters/presets/black_knight.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Black Knight",
+      "Ser Halvard"
+    ],
+    "ids": [
+      "black_knight",
+      "halvard"
+    ],
+    "x": 648,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 15,
+    "name": "Ember Hierophant / Maren Sorrel",
+    "key": "characters.cult_leader",
+    "path": "characters/presets/cult_leader.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Ember Hierophant",
+      "Maren Sorrel"
+    ],
+    "ids": [
+      "cult_leader",
+      "maren_sorrel"
+    ],
+    "x": 1248,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 16,
+    "name": "Cultist",
+    "key": "characters.cultist",
+    "path": "characters/presets/cultist.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Cultist"
+    ],
+    "ids": [
+      "cultist"
+    ],
+    "x": 1848,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 17,
+    "name": "Drow Blade",
+    "key": "characters.dark_elf",
+    "path": "characters/presets/dark_elf.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Drow Blade"
+    ],
+    "ids": [
+      "dark_elf"
+    ],
+    "x": 2448,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 18,
+    "name": "Goblin Archer",
+    "key": "characters.goblin_archer",
+    "path": "characters/presets/goblin_archer.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Goblin Archer"
+    ],
+    "ids": [
+      "goblin_archer"
+    ],
+    "x": 3048,
+    "y": 1000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 19,
+    "name": "Goblin",
+    "key": "characters.goblin_cutthroat",
+    "path": "characters/presets/goblin_cutthroat.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Goblin"
+    ],
+    "ids": [
+      "goblin"
+    ],
+    "x": 48,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 20,
+    "name": "Goblin Shaman / Skarrow Stormcaller",
+    "key": "characters.goblin_shaman",
+    "path": "characters/presets/goblin_shaman.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Goblin Shaman",
+      "Skarrow Stormcaller"
+    ],
+    "ids": [
+      "goblin_shaman",
+      "goblin_ford_shaman"
+    ],
+    "x": 648,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 21,
+    "name": "Goblin Boss / Vorga",
+    "key": "characters.goblin_spear",
+    "path": "characters/presets/goblin_spear.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Goblin Boss",
+      "Vorga"
+    ],
+    "ids": [
+      "goblin_boss",
+      "vorga"
+    ],
+    "x": 1248,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 22,
+    "name": "Hobgoblin",
+    "key": "characters.hobgoblin",
+    "path": "characters/presets/hobgoblin.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Hobgoblin"
+    ],
+    "ids": [
+      "hobgoblin"
+    ],
+    "x": 1848,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 23,
+    "name": "Lich",
+    "key": "characters.lich",
+    "path": "characters/presets/lich.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Lich"
+    ],
+    "ids": [
+      "lich"
+    ],
+    "x": 2448,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 24,
+    "name": "Ivo Rime / Necromancer",
+    "key": "characters.necromancer",
+    "path": "characters/presets/necromancer.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Ivo Rime",
+      "Necromancer"
+    ],
+    "ids": [
+      "necromancer",
+      "ivo_rime"
+    ],
+    "x": 3048,
+    "y": 1350,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 25,
+    "name": "Orc Brute",
+    "key": "characters.orc_brute",
+    "path": "characters/presets/orc_brute.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Orc Brute"
+    ],
+    "ids": [
+      "orc_brute"
+    ],
+    "x": 48,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 26,
+    "name": "Skeleton",
+    "key": "characters.skeleton",
+    "path": "characters/presets/skeleton.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Skeleton"
+    ],
+    "ids": [
+      "skeleton"
+    ],
+    "x": 648,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 27,
+    "name": "Skeleton Archer",
+    "key": "characters.skeleton_archer",
+    "path": "characters/presets/skeleton_archer.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Skeleton Archer"
+    ],
+    "ids": [
+      "skeleton_archer"
+    ],
+    "x": 1248,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 28,
+    "name": "Zombie",
+    "key": "characters.zombie",
+    "path": "characters/presets/zombie.png",
+    "category": "combat",
+    "style": "OLDER ATLAS",
+    "names": [
+      "Zombie"
+    ],
+    "ids": [
+      "zombie"
+    ],
+    "x": 1848,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 29,
+    "name": "Giant Bat / Hollow Bat",
+    "key": "beasts.bat.dusk",
+    "path": "creatures/bat_dusk.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Giant Bat",
+      "Hollow Bat"
+    ],
+    "ids": [
+      "giant_bat",
+      "hollow_bat",
+      "hollow_bat_lone",
+      "hollow_bat_swarm"
+    ],
+    "x": 2448,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 30,
+    "name": "Bear / Elder Bear",
+    "key": "beasts.bear.wildshape",
+    "path": "creatures/bear_wildshape.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Bear",
+      "Elder Bear"
+    ],
+    "ids": [
+      "bear",
+      "elder_bear"
+    ],
+    "x": 3048,
+    "y": 1700,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 31,
+    "name": "Boar",
+    "key": "beasts.boar.brown",
+    "path": "creatures/boar_brown.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Boar"
+    ],
+    "ids": [
+      "boar",
+      "boar_roamer",
+      "boar_roamer_lone",
+      "boar_roamer_pair",
+      "boar_roamer_sounder"
+    ],
+    "x": 48,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 32,
+    "name": "Drake",
+    "key": "beasts.drake.red",
+    "path": "creatures/drake_red.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Drake"
+    ],
+    "ids": [
+      "drake"
+    ],
+    "x": 648,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 33,
+    "name": "River Slime / Slime",
+    "key": "beasts.slime.green",
+    "path": "creatures/slime_green.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "River Slime",
+      "Slime"
+    ],
+    "ids": [
+      "slime",
+      "river_slime",
+      "river_slime_lone",
+      "river_slime_pair"
+    ],
+    "x": 1248,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 34,
+    "name": "Giant Spider",
+    "key": "beasts.spider.black",
+    "path": "creatures/spider_black.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Giant Spider"
+    ],
+    "ids": [
+      "giant_spider",
+      "rime_spider"
+    ],
+    "x": 1848,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 35,
+    "name": "Dire Wolf / Wolf",
+    "key": "beasts.wolf.wildshape",
+    "path": "creatures/wolf_wildshape.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Dire Wolf",
+      "Wolf"
+    ],
+    "ids": [
+      "wolf_roamer",
+      "wolf_roamer_lone",
+      "wolf",
+      "dire_wolf"
+    ],
+    "x": 2448,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 36,
+    "name": "Bandit Captain",
+    "key": "characters.bandit_captain",
+    "path": "creatures/rook.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Bandit Captain"
+    ],
+    "ids": [
+      "bandit_captain"
+    ],
+    "x": 3048,
+    "y": 2050,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 37,
+    "name": "Kobold / Kobold Scout",
+    "key": "characters.kobold",
+    "path": "creatures/kobold_refresh_worker.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Kobold",
+      "Kobold Scout"
+    ],
+    "ids": [
+      "kobold",
+      "kobold_roamer",
+      "kobold_roamer_lone",
+      "kobold_roamer_patrol",
+      "kobold_roamer_diggers"
+    ],
+    "x": 48,
+    "y": 2400,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 38,
+    "name": "Kobold Scout Slinger / Kobold Slinger",
+    "key": "characters.kobold_slinger",
+    "path": "creatures/kobold_refresh_slinger.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Kobold Scout Slinger",
+      "Kobold Slinger"
+    ],
+    "ids": [
+      "kobold_slinger",
+      "kobold_roamer_slinger",
+      "kobold_roamer_slinger_lone",
+      "kobold_roamer_slinger_patrol"
+    ],
+    "x": 648,
+    "y": 2400,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 39,
+    "name": "Mother Skarrow",
+    "key": "characters.mother_skarrow",
+    "path": "creatures/mother_skarrow.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Mother Skarrow"
+    ],
+    "ids": [
+      "mother_skarrow"
+    ],
+    "x": 1248,
+    "y": 2400,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 40,
+    "name": "Ashmaw",
+    "key": "monsters.ashmaw",
+    "path": "creatures/ashmaw_bounty.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Ashmaw"
+    ],
+    "ids": [
+      "ashmaw",
+      "ashmaw_party"
+    ],
+    "x": 1848,
+    "y": 2400,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 41,
+    "name": "Grisk",
+    "key": "monsters.kobold_foreman",
+    "path": "creatures/grisk_bounty.png",
+    "category": "combat",
+    "style": "DEDICATED ATLAS",
+    "names": [
+      "Grisk"
+    ],
+    "ids": [
+      "kobold_foreman"
+    ],
+    "x": 2448,
+    "y": 2400,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 42,
+    "name": "Bat Vampire",
+    "key": "beasts.bat.vampire",
+    "path": "beasts/bat_vampire.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 43,
+    "name": "Bear Black",
+    "key": "beasts.bear.black",
+    "path": "creatures/bear_black.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 44,
+    "name": "Bear Brown",
+    "key": "beasts.bear.brown",
+    "path": "creatures/bear_brown.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 45,
+    "name": "Bear Polar",
+    "key": "beasts.bear.polar",
+    "path": "creatures/bear_polar.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 46,
+    "name": "Bear Undead",
+    "key": "beasts.bear.undead",
+    "path": "beasts/bear_undead.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 47,
+    "name": "Boar Dark",
+    "key": "beasts.boar.dark",
+    "path": "creatures/boar_dark.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 2850,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 48,
+    "name": "Drake Blue",
+    "key": "beasts.drake.blue",
+    "path": "creatures/drake_blue.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 49,
+    "name": "Drake Green",
+    "key": "beasts.drake.green",
+    "path": "creatures/drake_green.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 50,
+    "name": "Slime Blue",
+    "key": "beasts.slime.blue",
+    "path": "creatures/slime_blue.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 51,
+    "name": "Slime Crystal",
+    "key": "beasts.slime.crystal",
+    "path": "beasts/slime_crystal.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 52,
+    "name": "Slime Magma",
+    "key": "beasts.slime.magma",
+    "path": "creatures/slime_magma.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 53,
+    "name": "Spider Phase",
+    "key": "beasts.spider.phase",
+    "path": "beasts/spider_phase.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 3200,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 54,
+    "name": "Spider Red",
+    "key": "beasts.spider.red",
+    "path": "creatures/spider_red.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 55,
+    "name": "Wolf Alpha",
+    "key": "beasts.wolf.alpha",
+    "path": "beasts/wolf_alpha.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 56,
+    "name": "Wolf Dire",
+    "key": "beasts.wolf.dire",
+    "path": "creatures/wolf_dire.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 57,
+    "name": "Wolf Frost",
+    "key": "beasts.wolf.frost",
+    "path": "creatures/wolf_frost.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 58,
+    "name": "Wolf Grey",
+    "key": "beasts.wolf.grey",
+    "path": "creatures/wolf_grey.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 59,
+    "name": "Wolf Timber",
+    "key": "beasts.wolf.timber",
+    "path": "creatures/wolf_timber.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 3550,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 60,
+    "name": "Crab Deep",
+    "key": "bestiary.crab.deep",
+    "path": "bestiary/crab_deep.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 61,
+    "name": "Crab Shore",
+    "key": "bestiary.crab.shore",
+    "path": "creatures/crab_shore.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 62,
+    "name": "Gargoyle Granite",
+    "key": "bestiary.gargoyle.granite",
+    "path": "creatures/gargoyle_granite.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 63,
+    "name": "Gargoyle Obsidian",
+    "key": "bestiary.gargoyle.obsidian",
+    "path": "creatures/gargoyle_obsidian.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 64,
+    "name": "Harpy Dusk",
+    "key": "bestiary.harpy.dusk",
+    "path": "creatures/harpy_dusk.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 65,
+    "name": "Harpy Storm",
+    "key": "bestiary.harpy.storm",
+    "path": "creatures/harpy_storm.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 3900,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 66,
+    "name": "Hookbeak Brown",
+    "key": "bestiary.hookbeak.brown",
+    "path": "creatures/hookbeak_brown.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 67,
+    "name": "Hookbeak Snow",
+    "key": "bestiary.hookbeak.snow",
+    "path": "creatures/hookbeak_snow.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 68,
+    "name": "Scorpion Black",
+    "key": "bestiary.scorpion.black",
+    "path": "bestiary/scorpion_black.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 69,
+    "name": "Scorpion Ember",
+    "key": "bestiary.scorpion.ember",
+    "path": "creatures/scorpion_ember.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 70,
+    "name": "Scorpion Sand",
+    "key": "bestiary.scorpion.sand",
+    "path": "creatures/scorpion_sand.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 71,
+    "name": "Warg Ash",
+    "key": "bestiary.warg.ash",
+    "path": "creatures/warg_ash.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 4250,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 72,
+    "name": "Warg Black",
+    "key": "bestiary.warg.black",
+    "path": "creatures/warg_black.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 73,
+    "name": "Warg Rider",
+    "key": "bestiary.warg.rider",
+    "path": "bestiary/warg_rider.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 74,
+    "name": "Wisp Ember",
+    "key": "bestiary.wisp.ember",
+    "path": "creatures/wisp_ember.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 75,
+    "name": "Wisp Marsh",
+    "key": "bestiary.wisp.marsh",
+    "path": "creatures/wisp_marsh.png",
+    "category": "library",
+    "style": "DEDICATED ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 8
+  },
+  {
+    "number": 76,
+    "name": "Air Elemental Storm",
+    "key": "bosses.air_elemental.storm",
+    "path": "bosses/air_elemental_storm.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 77,
+    "name": "Dragon Black",
+    "key": "bosses.dragon.black",
+    "path": "bosses/dragon_black.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 4600,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 78,
+    "name": "Dragon Blue",
+    "key": "bosses.dragon.blue",
+    "path": "bosses/dragon_blue.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 79,
+    "name": "Dragon Gold",
+    "key": "bosses.dragon.gold",
+    "path": "bosses/dragon_gold.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 80,
+    "name": "Dragon Green",
+    "key": "bosses.dragon.green",
+    "path": "bosses/dragon_green.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 81,
+    "name": "Earth Elemental Magma",
+    "key": "bosses.earth_elemental.magma",
+    "path": "bosses/earth_elemental_magma.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 82,
+    "name": "Fire Elemental Azure",
+    "key": "bosses.fire_elemental.azure",
+    "path": "bosses/fire_elemental_azure.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 83,
+    "name": "Fire Elemental Radiant",
+    "key": "bosses.fire_elemental.radiant",
+    "path": "bosses/fire_elemental_radiant.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 4950,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 84,
+    "name": "Fire Elemental Shadow",
+    "key": "bosses.fire_elemental.shadow",
+    "path": "bosses/fire_elemental_shadow.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 85,
+    "name": "Golem Basalt",
+    "key": "bosses.golem.basalt",
+    "path": "bosses/golem_basalt.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 86,
+    "name": "Golem Crystal",
+    "key": "bosses.golem.crystal",
+    "path": "bosses/golem_crystal.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 87,
+    "name": "Golem Temple",
+    "key": "bosses.golem.temple",
+    "path": "bosses/golem_temple.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 88,
+    "name": "Hound Black",
+    "key": "bosses.hound.black",
+    "path": "bosses/hound_black.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 89,
+    "name": "Hound Grey",
+    "key": "bosses.hound.grey",
+    "path": "bosses/hound_grey.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 5300,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 90,
+    "name": "Imp Violet",
+    "key": "bosses.imp.violet",
+    "path": "bosses/imp_violet.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 91,
+    "name": "Mimic Ironbound",
+    "key": "bosses.mimic.ironbound",
+    "path": "bosses/mimic_ironbound.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 92,
+    "name": "Sapling Autumn",
+    "key": "bosses.sapling.autumn",
+    "path": "bosses/sapling_autumn.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 93,
+    "name": "Sapling Blossom",
+    "key": "bosses.sapling.blossom",
+    "path": "bosses/sapling_blossom.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1848,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 94,
+    "name": "Troll Frost",
+    "key": "bosses.troll.frost",
+    "path": "bosses/troll_frost.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 2448,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 95,
+    "name": "Troll Ogre",
+    "key": "bosses.troll.ogre",
+    "path": "bosses/troll_ogre.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 3048,
+    "y": 5650,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 96,
+    "name": "Water Elemental Swamp",
+    "key": "bosses.water_elemental.swamp",
+    "path": "bosses/water_elemental_swamp.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 48,
+    "y": 6000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 97,
+    "name": "Wraith Shade",
+    "key": "bosses.wraith.shade",
+    "path": "bosses/wraith_shade.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 648,
+    "y": 6000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  },
+  {
+    "number": 98,
+    "name": "Wraith Spectre",
+    "key": "bosses.wraith.spectre",
+    "path": "bosses/wraith_spectre.png",
+    "category": "library",
+    "style": "OLDER ATLAS",
+    "names": [],
+    "ids": [],
+    "x": 1248,
+    "y": 6000,
+    "width": 600,
+    "height": 350,
+    "directions": 2
+  }
+]
