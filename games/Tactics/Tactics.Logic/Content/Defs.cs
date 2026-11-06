@@ -110,7 +110,7 @@ public enum HookKind
     [JsonStringEnumMemberName("onKill")] OnKill,
     /// <summary>An ally of the owner (<see cref="HookArgs.Other"/>) was Downed; fires for standing allies.</summary>
     [JsonStringEnumMemberName("onAllyDowned")] OnAllyDowned,
-    /// <summary>The owner regained HP; Amount is the HP actually restored.</summary>
+    /// <summary>The owner regained HP; Other is the healer when known, and Amount is the HP actually restored.</summary>
     [JsonStringEnumMemberName("onHealed")] OnHealed,
 }
 

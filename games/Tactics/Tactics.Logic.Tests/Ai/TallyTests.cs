@@ -27,6 +27,20 @@ public sealed class TallyTests
     }
 
     [Fact]
+    public void Bleeding_cleanup_does_not_steal_later_targets_of_a_group_heal()
+    {
+        var (tally, state) = Fresh();
+        state = state.Change("wiz", u => u with { Hp = u.Hp - 2 }).Change("kara", u => u with { Hp = u.Hp - 2 });
+        tally.Read([], state);
+        tally.Read([new TurnStarted(U("wiz"), 1), new AbilityUsed(U("wiz"), new("bard.mass_healing_word"), new Target(), null),
+            new Healed(U("wiz"), 2, state.Units[U("wiz")].Hp + 2),
+            new PassiveTriggered(U("wiz"), "bleeding.healed", Source: U("gob")),
+            new ConditionRemoved(U("wiz"), new("bleeding")),
+            new Healed(U("kara"), 2, state.Units[U("kara")].Hp + 2)], state);
+        Assert.Equal(4, tally.PerClass(1)["wizard"].HealingPerRound);
+    }
+
+    [Fact]
     public void Area_damage_is_averaged_per_target_in_the_casters_turn_without_losing_raw_damage()
     {
         var (tally, state) = Fresh();

@@ -29,6 +29,11 @@ namespace Tactics.Sim;
 internal sealed class Tally(RulesPack rules)
 {
     private readonly EnvironmentTally _environment = new(rules);
+    // Pure cleanup hooks do not change the source of the containing action (e.g. a multi-target heal).
+    private readonly ImmutableSortedSet<string> _cleanupPassives = rules.Passives.Values
+        .Concat(rules.Conditions.Values.SelectMany(c => c.Passives.IsDefault ? [] : c.Passives))
+        .Where(p => !p.Effects.IsDefaultOrEmpty && p.Effects.All(e => e is RemoveEffect))
+        .Select(p => p.Id).ToImmutableSortedSet(StringComparer.Ordinal);
 
     public EnvironmentStats Environment => _environment.Snapshot();
 
@@ -142,7 +147,8 @@ internal sealed class Tally(RulesPack rules)
             case PassiveTriggered passive:
                 // A hook on a hit (sneak attack) still belongs to that hit; a zone's or condition's effects belong to
                 // whoever cast the zone or applied the condition, not the unit standing in it or carrying it.
-                _source = passive.Source ?? passive.Owner;
+                if (!_cleanupPassives.Contains(passive.Passive))
+                    _source = passive.Source ?? passive.Owner;
                 break;
             case AttackResolved attack:
                 _source = attack.Source;

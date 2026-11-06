@@ -86,9 +86,9 @@ public static class Hp
     /// <summary>
     /// Restores up to <paramref name="amount"/> HP (never above max). Emits <see cref="Healed"/> with the HP restored. A
     /// Downed unit healed for more than 0 gets up with the HP healed (<see cref="DownedRules.Revive"/>); an Out or Dead one
-    /// can't be healed.
+    /// can't be healed. Positive HP restored fires OnHealed after revival, with the healer as Other when known.
     /// </summary>
-    public static int Heal(BattleWriter w, UnitId unit, int amount)
+    public static int Heal(BattleWriter w, UnitId unit, int amount, UnitId? source = null)
     {
         var u = w.Unit(unit);
         if (!DownedRules.InBattle(u))
@@ -99,7 +99,7 @@ public static class Hp
         if (u.Life == LifeState.Downed && hp > 0)
             DownedRules.Revive(w, unit, hp);
         if (hp > u.Hp)
-            Hooks.Fire(w, HookKind.OnHealed, new HookArgs(unit, Amount: hp - u.Hp), w.Rules);
+            Hooks.Fire(w, HookKind.OnHealed, new HookArgs(unit, source, Amount: hp - u.Hp), w.Rules);
         return hp - u.Hp;
     }
 }
@@ -165,7 +165,7 @@ public sealed class HealBlock : EffectBlock<HealEffect>
     {
         var target = ctx.TargetUnit(Key);
         var amount = Rolls.Damage(ctx.W, def.Dice.At(ctx.Level), crit: false) + ctx.Sum(def.Bonus);
-        Hp.Heal(ctx.W, target.Id, amount);
+        Hp.Heal(ctx.W, target.Id, amount, ctx.Source);
     }
 }
 

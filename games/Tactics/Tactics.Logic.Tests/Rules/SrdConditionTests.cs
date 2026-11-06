@@ -122,4 +122,18 @@ public sealed class SrdConditionTests
         Assert.DoesNotContain(after.Units[Hero].Conditions, c => c.Id.Value == "bleeding");
     }
 
+    [Fact]
+    public void On_healed_hooks_can_target_the_healer()
+    {
+        var response = new PassiveDef("test.healed", HookKind.OnHealed, null,
+            [new TempHpEffect(TestAbilities.Flat("3"), [])], null, Target: PassiveTarget.Other);
+        var battle = Build().WithPassives(response);
+        var (state, _) = battle.Start();
+        state = state.Change("hero", u => u with { Hp = u.Hp - 2,
+            Sheet = u.Sheet with { Passives = u.Sheet.Passives.Add(response.Id) } });
+        var (after, _) = battle.Run(state, "foe", "hero", null, new HealEffect(TestAbilities.Flat("2"), []));
+        Assert.Equal(3, after.Units[Foe].TempHp);
+        Assert.Equal(0, after.Units[Hero].TempHp);
+    }
+
 }
