@@ -108,6 +108,25 @@ public sealed class AiReactionTests
     }
 
     [Fact]
+    public void A_reaction_changes_the_outcome_only_when_it_turns_this_attacks_hit_into_a_miss()
+    {
+        // The question behind a player's "only when it turns a hit into a miss" setting (#113), asked of each offered attack on its own roll.
+        var (battle, state) = MageAttacked();
+        var shield = new ReactionChoice("wizard.shield", new AbilityId("wizard.shield"), U("mage"));
+        bool Changes(RollResult roll, bool pass = false)
+        {
+            var trigger = new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("kara"), U("mage"), Attack, roll);
+            var offer = OfferTo("mage", state, trigger, battle.Rules);
+            return Ai.ChangesOutcome(state, offer, pass ? offer.Options[0] : shield, battle.Rules);
+        }
+
+        Assert.True(Changes(Hit(10, 5, 12)));      // 15 against AC 12: Shield's +5 makes 17, a miss
+        Assert.False(Changes(Hit(12, 5, 12)));     // 17 against AC 12: 17 against 17 still hits
+        Assert.False(Changes(Hit(20, 5, 12)));     // a natural 20 hits whatever
+        Assert.False(Changes(Hit(10, 5, 12), pass: true));     // declining changes nothing
+    }
+
+    [Fact]
     public void Passes_when_shield_wouldnt_matter()
     {
         var (battle, state) = MageAttacked();

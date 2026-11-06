@@ -580,7 +580,22 @@ public sealed partial class TacticsGame
         Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
             [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags(), Bark: CurrentBark(), ThingSpeech: _thingSpeech is { } speech && speech.Until > _ctx.Now ? speech : null, QuestEvent: _questEvent, Pinned: QuestTracker(), QuestLog: QuestLogOpen ? Journal(true) : null, QuestMarkers: QuestPersonMarkers(), Mobs: VisibleMobs(), Danger: NearbyMob());
 
+    /// <summary>
+    /// The phone's battle screen with the player's reaction preferences (issue #113) as <c>reactions</c> ({ opportunity, defence }: the words
+    /// the "Reactions" sheet sets), for the sheet to show.
+    /// </summary>
     private ControllerView BattleScreen(ProfileId profile)
+    {
+        var view = BattleScreenOf(profile);
+        if (view is not CustomView custom)
+            return view;
+        var prefs = _doc.For(profile)?.Reactions ?? ReactionPrefs.Ask;
+        var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(custom.Data, ArcJson.Options)!;
+        data["reactions"] = JsonSerializer.SerializeToElement(new { opportunity = prefs.OpportunityWord, defence = prefs.DefenceWord }, ArcJson.Options);
+        return custom with { Data = JsonSerializer.SerializeToElement(data, ArcJson.Options) };
+    }
+
+    private ControllerView BattleScreenOf(ProfileId profile)
     {
         var state = State;
         if (UnitOf(profile) is not { } hero || !state.Units.TryGetValue(hero, out var heroUnit))

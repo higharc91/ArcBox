@@ -4,6 +4,7 @@ import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Portrait, abilityClass, useIcons } from "./art";
 import { tileStyle, useMap, type MapData } from "./map";
 import { FallBack } from "./fallback";
+import { ReactionsSheet } from "./reactions";
 import { classFrom, remembered, rememberTurn } from "./memory";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView } from "./types";
@@ -50,7 +51,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   const [picks, setPicks] = useState<Pick[]>([]);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
   // A vote to fall back changes the view for everyone, which mustn't undo what this player is aiming.
-  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined }), [data]);
+  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined, reactions: undefined }), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
@@ -115,6 +116,7 @@ export function Turn({ data, send }: CustomScreenProps) {
       ) : <MeCard me={me} cls={cls} />}
       <TurnBanner summon={summoned ? me.name : undefined} />
       {ability ? null : <FallBack fallBack={fallBack} send={send} />}
+      {ability ? null : <ReactionsSheet reactions={(data as TurnData).reactions} send={send} />}
 
       {ability ? (
         <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }}

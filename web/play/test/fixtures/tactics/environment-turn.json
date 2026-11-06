@@ -1434,7 +1434,11 @@
     },
     "surfaces": [
       "burning"
-    ]
+    ],
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
+    }
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:01:00\u002B00:00",

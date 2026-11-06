@@ -8,6 +8,7 @@ import { usePackBase } from "./pack";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
 import { FallBack } from "./fallback";
+import { ReactionsSheet } from "./reactions";
 import { HpBar, HpText, MeCard, Section } from "./ui";
 
 export { costText, Turn } from "./turn";
@@ -157,6 +158,7 @@ export function Status({ data, send }: CustomScreenProps) {
       </div>
       {s.upIn ? <Section>You're up in {s.upIn}</Section> : null}
       <FallBack fallBack={s.fallBack} send={send} />
+      <ReactionsSheet reactions={s.reactions} send={send} />
 
       <div class="tx-tabs" role="tablist">
         {(["abilities", "sheet", "bag"] as const).map((t) => (

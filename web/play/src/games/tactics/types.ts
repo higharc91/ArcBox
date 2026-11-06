@@ -109,9 +109,16 @@ export interface FallBackData {
   };
 }
 
+/** A player's reaction preferences (#113): what the game answers for them without asking. */
+export interface ReactionPrefsData {
+  opportunity: "ask" | "always" | "never";
+  defence: "ask" | "miss" | "never";
+}
+
 export interface TurnData {
   surfaces?: string[];
   fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
   /** Who is acting: the hero, or one of their summons (then `summoned` is set and the header names it). */
   me: UnitView;
   summoned?: boolean;
@@ -132,6 +139,7 @@ export interface ReactOption {
 export interface ReactData {
   surfaces?: string[];
   fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
   unit: string;
   trigger: string;
   cause: {
@@ -148,6 +156,7 @@ export interface ReactData {
 export interface StatusData {
   surfaces?: string[];
   fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
   me: UnitView;
   active: string | null;
   upIn: number | null;

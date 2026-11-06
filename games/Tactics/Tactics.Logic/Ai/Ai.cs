@@ -76,6 +76,24 @@ public static class Ai
     }
 
     /// <summary>
+    /// Whether taking <paramref name="option"/> of <paramref name="offer"/> changes how the pending event turns out for the reactor: the
+    /// question behind a player's "only when it matters" reaction preference (issue #113). Per reaction, so a rule is one more case
+    /// here. Today that is a defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
+    /// on the reactor that turns this hit into a miss: the AC it adds lifts the AC above the roll's total (never against a natural 20).
+    /// Judged on the offer's own cause, so each attack of a multi-attack is its own question. Rolls nothing. False for the pass, for an
+    /// offer without a cause, and for any reaction with no rule yet.
+    /// </summary>
+    public static bool ChangesOutcome(BattleState s, ReactionOffer offer, ReactionChoice option, RulesPack rules)
+    {
+        if (option.Id == Reactions.Pass || option.Id == Reactions.Opportunity || option.Ability is not { } id
+            || !rules.Abilities.TryGetValue(id, out var ability) || ability.Target.Kind != TargetKind.Self
+            || offer.Cause is not { Kind: ReactionTriggerKind.BeforeHit } trigger || trigger.Target != offer.Reactor
+            || !s.Units.TryGetValue(offer.Reactor, out var reactor) || !s.Units.TryGetValue(trigger.Actor, out var actor))
+            return false;
+        return Defends(new Scorer(s, rules), ability, reactor, actor, trigger).Miss;
+    }
+
+    /// <summary>
     /// Whether <paramref name="ability"/> turns the hit <paramref name="trigger"/> describes into a miss, and how much of
     /// its expected damage it prevents otherwise (its temporary HP).
     /// </summary>

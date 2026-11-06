@@ -26,6 +26,12 @@ public sealed partial class TacticsGame
     private UnitId? _aiFinishing;
 
     private (UnitId Unit, int Round, int TurnIndex)? _turnTimerFor;
+
+    /// <summary>The turn whose clock has been cut to <see cref="TacticsTiming.SpentTurn"/> (its Move and Action are spent).</summary>
+    private (UnitId Unit, int Round, int TurnIndex)? _turnShortFor;
+
+    /// <summary>The Move the unit had left when its clock started: a Move below it has been used (<see cref="TurnSpent"/>).</summary>
+    private int _turnMoveAtStart;
     private (UnitId Reactor, int Seq)? _reactTimerFor;
     private int _seq;
 
@@ -235,6 +241,12 @@ public sealed partial class TacticsGame
                 _ctx.CancelTimer(Timers.Turn);
                 _turnTimerFor = null;
             }
+            // A reaction the player's preferences answer is answered here, as if they had tapped it: no prompt, no clock, no pause.
+            if (state.Pending is ReactionOffer preferred && IsPlayed(preferred.Reactor) && PreferredAnswer(state, preferred) is { } preference)
+            {
+                ApplyAi(new React(preferred.Reactor, preference), aiFinished: false);
+                continue;
+            }
             // A player's reaction prompt is on their phone the moment the offer exists, so its 10 s start then, not once the
             // TV has caught up (else the prompt shows without a countdown and its window runs long).
             if (state.Pending is ReactionOffer played && IsPlayed(played.Reactor))
@@ -246,6 +258,10 @@ public sealed partial class TacticsGame
                 }
                 return;
             }
+            // The clock of a player's turn drops the moment their last Move or Action is spent, not once the TV has caught up with it.
+            if (state.Active is { } playing && state.Pending is null && IsPlayed(playing) && _aiFinishing != playing
+                && _turnTimerFor == (playing, state.Round, state.TurnIndex))
+                ShortenSpentTurn(state, playing);
             if (_awaitShown is not null)
                 return;
 
@@ -264,13 +280,63 @@ public sealed partial class TacticsGame
                 {
                     _ctx.SetTimer(Timers.Turn, _timing.Turn);
                     _turnTimerFor = key;
+                    _turnMoveAtStart = state.Units[active].Economy.MoveLeft;
                 }
+                ShortenSpentTurn(state, active);
                 return;
             }
             if (NextAiCommand(state, active) is { } next)
                 ApplyAi(next, aiFinished: _aiFinishing == active);
             else
                 SkipFailedStep(state, null, aiFinished: _aiFinishing == active);
+        }
+    }
+
+    /// <summary>
+    /// Once <paramref name="unit"/>, whose clock is running, has spent both its Move and its Action, cuts that clock to the shorter of what's
+    /// left and <see cref="TacticsTiming.SpentTurn"/> (issue #113). Once a turn.
+    /// </summary>
+    private void ShortenSpentTurn(BattleState state, UnitId unit)
+    {
+        var key = (unit, state.Round, state.TurnIndex);
+        if (_turnShortFor == key || !TurnSpent(state, unit))
+            return;
+        _turnShortFor = key;
+        if (_ctx.TimerDeadline(Timers.Turn) is { } due && due - _ctx.Now > _timing.SpentTurn)
+            _ctx.SetTimer(Timers.Turn, _timing.SpentTurn);
+    }
+
+    /// <summary>
+    /// True when <paramref name="unit"/> has spent its Move and its Action (and any extra ones). The Action is spent when none is left. The
+    /// Move is spent once the unit has walked this turn (it has less left than when its clock started), or has none left, or has nowhere to
+    /// go: a player who has stepped up and struck has made their move, and the clock needn't wait for them to walk further.
+    /// </summary>
+    private bool TurnSpent(BattleState state, UnitId unit)
+    {
+        var economy = state.Units[unit].Economy;
+        return !economy.Action && economy.ExtraActions <= 0
+            && (economy.MoveLeft <= 0 || economy.MoveLeft < _turnMoveAtStart || Choices.For(state, unit, Rules).Moves.IsDefaultOrEmpty);
+    }
+
+    /// <summary>
+    /// The reactor's own preferences (<see cref="ReactionPrefs"/>): those of the player who controls it, so a summon's follow its owner's.
+    /// </summary>
+    private ReactionPrefs PrefsOf(BattleState state, UnitId reactor)
+        => state.Units.TryGetValue(reactor, out var u) && u.Controller is PlayerControlled { Owner: var owner }
+            ? _doc.For(owner)?.Reactions ?? ReactionPrefs.Ask
+            : ReactionPrefs.Ask;
+
+    /// <summary>The answer the reactor's player's preferences give to <paramref name="offer"/>, or null to ask them.</summary>
+    private ReactionChoice? PreferredAnswer(BattleState state, ReactionOffer offer)
+    {
+        try
+        {
+            return PrefsOf(state, offer.Reactor).Answer(state, offer, Rules);
+        }
+        catch (Exception e) when (IsEngineFailure(e))
+        {
+            Fault("reaction", state, null, e);
+            return null;     // ask rather than guess
         }
     }
 
@@ -379,6 +445,11 @@ public sealed partial class TacticsGame
                 VoteFallBack(profile, input.Data);
             return;
         }
+        if (input.Action == "reactionPrefs")
+        {
+            SetReactionPrefs(player, profile, input.Data);
+            return;
+        }
         if (input.Action == "react")
         {
             if (state.Pending is not ReactionOffer offer || !Plays(state, hero, offer.Reactor) || !IsPlayed(offer.Reactor))
@@ -427,6 +498,24 @@ public sealed partial class TacticsGame
             _reactTimerFor = null;
         }
         Pace(AddBeat(unit, resolution.Events, state.Active), resolution.Events.Length);
+        Drive();
+    }
+
+    /// <summary>
+    /// A phone sets its player's reaction preferences (<c>opportunity</c>: ask, always, never; <c>defence</c>: ask, miss, never; either may
+    /// be left out). Saved on their member record at once. A prompt that is up for them is answered right away if the new settings cover it.
+    /// </summary>
+    private void SetReactionPrefs(Player player, ProfileId profile, JsonElement? data)
+    {
+        if (_doc.For(profile) is not { } member)
+            return;
+        if ((member.Reactions ?? ReactionPrefs.Ask).With(Str(data, "opportunity"), Str(data, "defence")) is not { } next)
+        {
+            Toast(player.Id, "That isn't one of the reaction settings.");
+            return;
+        }
+        _doc = _doc with { Members = _doc.Members.SetItem(profile.Value, member with { Reactions = next == ReactionPrefs.Ask ? null : next }) };
+        Save();
         Drive();
     }
 
@@ -548,6 +637,6 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Pace);
         _ctx.CancelTimer(Timers.Retreat);
         (_retreat, _retreatFailedRound) = (null, 0);
-        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, 0, null);
+        (_turnTimerFor, _turnShortFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, null, 0, null);
     }
 }

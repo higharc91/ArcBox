@@ -905,6 +905,10 @@
     },
     "fallBack": {
       "canPropose": true
+    },
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
     }
   },
   "viewId": "v1",
