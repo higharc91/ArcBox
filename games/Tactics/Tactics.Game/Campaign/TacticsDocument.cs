@@ -97,7 +97,20 @@ public sealed record StoryGroupRoll(string Member, int Die, int Bonus, bool Pass
 public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Helper = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<int> Dice = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<StoryGroupRoll> Group = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<StoryGroupRoll> Group = default)
+{
+    public bool Equals(StoryRoll? other) => other is not null && Member == other.Member && Option == other.Option
+        && Skill == other.Skill && Dc == other.Dc && Die == other.Die && Bonus == other.Bonus && Passed == other.Passed
+        && Helper == other.Helper && Dice.AsSpan().SequenceEqual(other.Dice.AsSpan()) && Group.AsSpan().SequenceEqual(other.Group.AsSpan());
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(Member); hash.Add(Option); hash.Add(Skill); hash.Add(Dc); hash.Add(Die); hash.Add(Bonus); hash.Add(Passed); hash.Add(Helper);
+        if (!Dice.IsDefault) foreach (var die in Dice) hash.Add(die);
+        if (!Group.IsDefault) foreach (var roll in Group) hash.Add(roll);
+        return hash.ToHashCode();
+    }
+}
 
 /// <summary>
 /// Where a story beat is (overworld 5d §7), saved on every line so that a restart resumes on the same line. Votes aren't kept: a restart
