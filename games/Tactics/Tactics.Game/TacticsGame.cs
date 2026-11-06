@@ -108,7 +108,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Start(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign);
-        _doc = TacticsDocument.Read(campaign.Document);
+        _doc = TacticsDocument.Read(campaign.Document, Rules);
         WorldCall("start", () => StartCore(ctx, players, campaign));
     }
 
@@ -117,7 +117,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         (_ctx, _players, _lease) = (ctx, players, campaign);
         foreach (var p in players)
             _online.Add(p.Id);
-        _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
+        _doc = TacticsDocument.Read(campaign.Document, Rules) with { RulesHash = Rules.Hash };
         if (seed is not null)
             _doc = seed.SeedInto(_doc, Rules);
         _doc = Coloured(_doc);
@@ -146,14 +146,14 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
-        _doc = TacticsDocument.Read(_lease.Document);
+        _doc = TacticsDocument.Read(_lease.Document, Rules);
         WorldCall("resume", () => ResumeCore(ctx, players, campaign));
     }
 
     private void ResumeCore(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
-        _doc = Coloured(TacticsDocument.Read(_lease.Document));
+        _doc = Coloured(TacticsDocument.Read(_lease.Document, Rules));
         _questLogLeader = null;
         _questObservedFlags = null;
         EnterWorld();
