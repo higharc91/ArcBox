@@ -40,6 +40,7 @@
   { "id": "hasted", "name": "Hasted", "tags": ["magical"],
     "static": { "ac": 2, "initiative": 5, "move": 1, "extraActions": 1, "saveEdges": { "dex": "advantage" } } },
   { "id": "marked", "name": "Marked", "tags": ["mark"] },
+  { "id": "vexed", "name": "Vexed", "tags": ["mark"] },
   { "id": "lit", "name": "Lit", "tags": ["magical", "light"],
     "static": { "attackedMelee": "advantage", "attackedRanged": "advantage" },
     "passives": [ { "id": "lit.fades", "hook": "onDamaged", "target": "self", "effects": [ { "remove": "lit" } ] } ] },

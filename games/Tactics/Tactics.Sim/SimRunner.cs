@@ -215,8 +215,10 @@ public static class SimRunner
             }
             if (state.Pending is not null || state.Active is not { } unit)
                 throw new InvalidOperationException($"The battle is waiting on something the AI can't answer ({state.Pending}).");
-            var scripted = config.Policy == HiddenRogue.Name && RogueTally.IsRogue(state.Units[unit]);
-            state = PlayTurn(state, unit, rules, tally, ai, rogues, scripted);
+            Func<BattleState, ImmutableArray<Command>?>? script = config.Policy == HiddenRogue.Name && RogueTally.IsRogue(state.Units[unit])
+                ? s => HiddenRogue.Plan(s, unit, rules)
+                : null;
+            state = PlayTurn(state, unit, rules, tally, ai, rogues, script);
         }
 
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
@@ -243,7 +245,7 @@ public static class SimRunner
     }
 
     /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>
-    private sealed class AiCounts
+    internal sealed class AiCounts
     {
         public int Rejected { get; set; }
         public int Replans { get; set; }
@@ -251,12 +253,13 @@ public static class SimRunner
     }
 
     /// <summary>
-    /// <paramref name="unit"/>'s whole turn: the AI's plan (with <paramref name="scripted"/>, <see cref="HiddenRogue"/>'s
-    /// when it has one), applied command by command, planned again when a command is refused or a move is cut short (at most
-    /// <see cref="MaxPlansPerTurn"/> plans), then ended if it hasn't ended.
+    /// <paramref name="unit"/>'s whole turn: the AI's plan (or <paramref name="script"/>'s, when it gives one), applied
+    /// command by command, planned again when a command is refused or a move is cut short (at most
+    /// <see cref="MaxPlansPerTurn"/> plans), then ended if it hasn't ended. A refused scripted command counts as a refusal of
+    /// the rogue's (<see cref="RogueSetUp.Refused"/>) and hands the rest of the turn to the AI.
     /// </summary>
-    private static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally, AiCounts ai, RogueTally rogues,
-        bool scripted)
+    internal static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally, AiCounts ai, RogueTally rogues,
+        Func<BattleState, ImmutableArray<Command>?>? script)
     {
         var party = tally.IsMember(state, unit);
         if (party)
@@ -268,13 +271,19 @@ public static class SimRunner
         {
             if (plan > 0)
                 ai.Replans++;
-            var commands = (scripted ? HiddenRogue.Plan(state, unit, rules) : null) ?? Ai.Plan(state, unit, rules, options).Commands;
+            var scripted = script?.Invoke(state);
+            var commands = scripted ?? Ai.Plan(state, unit, rules, options).Commands;
             foreach (var command in commands)
             {
                 var resolution = Battle.Apply(state, command, rules);
                 if (resolution.Rejected is not null)
                 {
                     ai.Rejected++;
+                    if (scripted is not null)
+                    {
+                        rogues.Refused();
+                        script = null;    // the script would only ask again: the rest of the turn is the AI's
+                    }
                     break;
                 }
                 rogues.Read(state, command, resolution.Events);

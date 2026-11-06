@@ -226,11 +226,14 @@ public sealed record RefreshReactionEffect : EffectDef;
 public sealed record StatModEffect(StaticMods Mods, int Rounds, bool Concentration = false) : EffectDef;
 
 /// <summary>
-/// <c>"mark"</c>: the target becomes the user's marked unit (the condition <c>marked</c>, from the user) for
-/// <see cref="Rounds"/> rounds; the user's mark on any other unit ends. Content passives read it with
-/// <c>targetHasCondition</c>.
+/// <c>"mark"</c>: the target becomes the user's marked unit for <see cref="Rounds"/> rounds: the condition
+/// <see cref="Condition"/> (<c>marked</c> unless given), from the user and flagged as a mark
+/// (<see cref="ActiveCondition.Mark"/>), so the user's attacks on it have advantage. The user's mark of that condition on any
+/// other unit ends. Content passives read it with <c>targetHasCondition</c>; the rogue's Vex marks with its own
+/// <c>vexed</c>, so it never takes the place of another class's <c>marked</c> nor feeds the passives that read it (#108).
 /// </summary>
-public sealed record MarkEffect(int Rounds) : EffectDef;
+public sealed record MarkEffect(int Rounds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Condition = null) : EffectDef;
 
 /// <summary>
 /// <c>"taunt"</c>: the target is taunted by the user (the condition <c>taunted</c>) for <see cref="Rounds"/> rounds: its

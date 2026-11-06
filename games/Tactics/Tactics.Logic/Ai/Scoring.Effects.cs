@@ -124,11 +124,11 @@ internal sealed partial class Scorer
                 return new Outcome(DamageDist.Zero, Offense: -0.3 * Turns(taunt.Rounds, untilSave: false));
             case MarkEffect mark:
                 {
-                    if (!Hostile(st.User, target) || MarkBlock.MarkedBy(target, st.User.Id))
+                    var condition = MarkBlock.ConditionOf(mark);
+                    if (!Hostile(st.User, target) || target.Conditions.Any(c => c.Mark && c.Id == condition && c.Source == st.User.Id))
                         return Outcome.None;
                     var turns = Turns(mark.Rounds, untilSave: false);
-                    return new Outcome(DamageDist.Zero, Defense: -0.25 * turns,
-                        Splash: QuarryDamage(MarkBlock.Condition, st, target, turns));
+                    return new Outcome(DamageDist.Zero, Defense: -0.25 * turns, Splash: QuarryDamage(condition, st, target, turns));
                 }
             case RepeatEffect repeat:
                 {
@@ -210,27 +210,13 @@ internal sealed partial class Scorer
         var modifier = statModifier + Stats.Proficiency(sheet.Level) + def.Bonus + Modifiers.Sum(userSources).Attack
                        + (st.Neutral ? 0 : Reach.HighGroundBonus(Terrain, user.Pos, target.Pos));
 
-        var (advantages, disadvantages) = (0, 0);
-        foreach (var mods in userSources)
-        {
-            advantages += (mods.OwnAttacks == Edge.Advantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
-            disadvantages += mods.OwnAttacks == Edge.Disadvantage ? 1 : 0;
-        }
-        foreach (var mods in targetSources)
-        {
-            var against = ranged ? mods.AttackedRanged : mods.AttackedMelee;
-            advantages += against == Edge.Advantage ? 1 : 0;
-            disadvantages += (against == Edge.Disadvantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
-        }
-        if (!st.Neutral && !ranged && Modifiers.Flanked(st.W.State, user.Id, target.Id, Rules))
-            advantages++;
-        if (!st.Neutral && MarkBlock.MarkedBy(target, user.Id))
-            advantages++;
-        if (!st.Neutral && TauntBlock.TauntedAway(st.W.State, user.Id, target.Id))
-            disadvantages++;
-        if (user.Conditions.Any(c => c.Id == RulesPack.Helped.Id))
-            advantages++;
-        var edge = Rolls.Combine(advantages, disadvantages);
+        // The roll's own count, from the sources at the tiles the strike imagines; a neutral strike (a preview) leaves out
+        // the situation that depends on who strikes whom.
+        var edge = Rolls.AttackEdge(userSources, targetSources, ranged,
+            flanked: !st.Neutral && !ranged && Modifiers.Flanked(st.W.State, user.Id, target.Id, Rules),
+            marked: !st.Neutral && MarkBlock.MarkedBy(target, user.Id),
+            tauntedAway: !st.Neutral && TauntBlock.TauntedAway(st.W.State, user.Id, target.Id),
+            helped: user.Conditions.Any(c => c.Id == RulesPack.Helped.Id));
 
         var cover = !st.Neutral && (ranged || def.Kind == "spell") ? Cover(user.Pos, target.Pos, ranged: true) : 0;
         var targetMods = Modifiers.Sum(targetSources);

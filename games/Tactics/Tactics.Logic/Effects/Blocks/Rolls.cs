@@ -107,33 +107,11 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var modifier = statModifier + Stats.Proficiency(source.Sheet.Level) + def.Bonus
                        + Modifiers.Sum(attackerSources).Attack + Reach.HighGroundBonus(w.Terrain, source.Pos, target.Pos);
 
-        var (advantages, disadvantages) = (0, 0);
-        void Count(Edge edge)
-        {
-            if (edge == Edge.Advantage)
-                advantages++;
-            else if (edge == Edge.Disadvantage)
-                disadvantages++;
-        }
-        foreach (var mods in attackerSources)
-        {
-            Count(mods.OwnAttacks);
-            Count(mods.Invisible ? Edge.Advantage : Edge.None);
-        }
-        foreach (var mods in targetSources)
-        {
-            Count(ranged ? mods.AttackedRanged : mods.AttackedMelee);
-            Count(mods.Invisible ? Edge.Disadvantage : Edge.None);
-        }
-        if (!ranged && Modifiers.Flanked(w.State, Source, Target, rules))
-            advantages++;
-        if (MarkBlock.MarkedBy(target, Source))
-            advantages++;
-        if (TauntBlock.TauntedAway(w.State, Source, Target))
-            disadvantages++;
-        if (HelpBlock.Consume(w, Source))
-            advantages++;
-        var edge = Rolls.Combine(advantages, disadvantages);
+        var edge = Rolls.AttackEdge(attackerSources, targetSources, ranged,
+            flanked: !ranged && Modifiers.Flanked(w.State, Source, Target, rules),
+            marked: MarkBlock.MarkedBy(target, Source),
+            tauntedAway: TauntBlock.TauntedAway(w.State, Source, Target),
+            helped: HelpBlock.Consume(w, Source));    // the roll uses the help up
 
         var cover = ranged || def.Kind == "spell" ? Modifiers.CoverAgainst(w, source.Pos, target.Pos, ranged: true) : 0;
         var roll = Rolls.D20(w, modifier, Ac(w, rules, target, cover), edge, critOn20: true, autoMissOn1: true);

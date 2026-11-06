@@ -134,7 +134,7 @@
       "effects": [ { "mark": { "rounds": 3 } } ],
       "presentation": { "anim": "characters.point", "fx": "signature.avenger_vengeance_brand.ember" },
       "ai": { "tags": ["mark", "debuff", "single"] },
-      "flavor": "You swear a vow of enmity: your attacks against the marked foe have advantage for 3 rounds." },
+      "flavor": "You swear a vow of enmity against one foe." },
     { "id": "avenger.abjure_enemy", "name": "Abjure Enemy", "tier": 0, "cost": { "action": 1, "resource": { "oath": 1 } },
       "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "single" } },
       "effects": [ { "save": { "stat": "wis" },

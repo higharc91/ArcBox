@@ -11,21 +11,20 @@ namespace Tactics.Logic;
 /// </summary>
 public static class Stealth
 {
-    /// <summary>True when <paramref name="unit"/> stands in plain view of a foe in <paramref name="state"/>.</summary>
+    /// <summary>
+    /// True when <paramref name="unit"/> stands in plain view of a foe in <paramref name="state"/>. The foes that can act
+    /// are found once; an adjacent one answers before any line of sight is traced.
+    /// </summary>
     public static bool InPlainView(BattleState state, Terrain terrain, UnitId unit, RulesPack rules)
     {
         var me = state.Units[unit];
+        var foes = state.Units.Values.Where(u => u.Sheet.Side != me.Sheet.Side && Modifiers.CanAct(state, u.Id, rules)).ToArray();
+        if (foes.Any(foe => Reach.Distance(foe.Pos, me.Pos) <= 1))
+            return true;
+        if (foes.Length == 0)
+            return false;
         var obscured = ZoneRules.Obscured(state);
-        foreach (var foe in state.Units.Values)
-        {
-            if (foe.Sheet.Side == me.Sheet.Side || !Modifiers.CanAct(state, foe.Id, rules))
-                continue;
-            if (Reach.Distance(foe.Pos, me.Pos) <= 1)
-                return true;
-            var sight = Sight.Trace(terrain, foe.Pos, me.Pos, ImmutableSortedSet<Tile>.Empty, ranged: false, obscured);
-            if (sight.HasLineOfSight && sight.Cover == Cover.None)
-                return true;
-        }
-        return false;
+        return foes.Any(foe => Sight.Trace(terrain, foe.Pos, me.Pos, ImmutableSortedSet<Tile>.Empty, ranged: false, obscured)
+            is { HasLineOfSight: true, Cover: Cover.None });
     }
 }

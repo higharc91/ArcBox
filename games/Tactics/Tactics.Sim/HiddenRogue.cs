@@ -16,7 +16,7 @@ namespace Tactics.Sim;
 /// turn, and hiding.</item>
 /// </list>
 /// A plan scores <see cref="StrikeWorth"/> for striking (so it always strikes when it can), <see cref="AdvantageWorth"/> when
-/// the strike has advantage (from hiding, a flank, its mark or the target's condition: Sneak Attack) and
+/// the strike has advantage (from hiding, a flank, its mark, help or the target's condition: Sneak Attack) and
 /// <see cref="HiddenWorth"/> for ending the turn hiding, which buys the next turn's advantage and the foes' disadvantage
 /// meanwhile (so, seen at the start of its turn, it strikes and then hides rather than hides and then strikes, when it can
 /// do both). Ties go to the weaker target, then the fewest foes left behind to make an opportunity attack, then the shortest
@@ -164,31 +164,9 @@ internal static class HiddenRogue
         => [.. s.Units.Values.Where(u => Movement.Hostile(s.Units[unit], u) && u.Life == LifeState.Up
                                          && Battle.Check(s, attack with { Target = new Target(Unit: u.Id) }, rules) is null)];
 
-    /// <summary>
-    /// Whether the attack roll would have advantage, as <see cref="AttackStep"/> counts it: the user's own-attack edges and
-    /// invisibility, the target's attacked-in-melee or at-range edges and invisibility, a flank in melee and the user's mark.
-    /// </summary>
+    /// <summary>Whether the attack roll would have advantage, as the engine counts it (<see cref="Rolls.AttackEdge(BattleState, UnitId, UnitId, bool, RulesPack)"/>).</summary>
     private static bool Advantage(BattleState s, UnitId unit, UnitId target, RulesPack rules)
-    {
-        var ranged = s.Units[unit].Sheet.Weapon.Ranged;
-        var (advantages, disadvantages) = (0, 0);
-        foreach (var m in Modifiers.Sources(s, unit, rules))
-        {
-            advantages += (m.OwnAttacks == Edge.Advantage ? 1 : 0) + (m.Invisible ? 1 : 0);
-            disadvantages += m.OwnAttacks == Edge.Disadvantage ? 1 : 0;
-        }
-        foreach (var m in Modifiers.Sources(s, target, rules))
-        {
-            var against = ranged ? m.AttackedRanged : m.AttackedMelee;
-            advantages += against == Edge.Advantage ? 1 : 0;
-            disadvantages += (against == Edge.Disadvantage ? 1 : 0) + (m.Invisible ? 1 : 0);
-        }
-        if (!ranged && Modifiers.Flanked(s, unit, target, rules))
-            advantages++;
-        if (MarkBlock.MarkedBy(s.Units[target], unit))
-            advantages++;
-        return Rolls.Combine(advantages, disadvantages) == Edge.Advantage;
-    }
+        => Rolls.AttackEdge(s, unit, target, s.Units[unit].Sheet.Weapon.Ranged, rules) == Edge.Advantage;
 
     /// <summary>The foes able to react that stand next to a tile of <paramref name="walk"/> before its last: each may strike as the unit leaves.</summary>
     private static int Opportunities(BattleState s, UnitId unit, ImmutableArray<Tile> walk)

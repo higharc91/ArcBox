@@ -7,16 +7,17 @@ namespace Tactics.Sim;
 /// How a battle's party rogues set up Sneak Attack (#108), summed over their own turns: the <see cref="Turns"/>, those in
 /// which they used Hide (<see cref="HideTurns"/>), landed Sneak Attack (<see cref="SneakTurns"/>) and used a weapon attack
 /// (<see cref="AttackTurns"/>); and of those weapon attacks, the ones used from hiding (<see cref="FromHiding"/>) and the
-/// melee ones used flanking their target (<see cref="Flanking"/>).
+/// melee ones used flanking their target (<see cref="Flanking"/>). <see cref="Refused"/> counts the commands of a scripted
+/// rogue (<c>--policy hidden-rogue</c>) that the engine refused.
 /// </summary>
-public sealed record RogueSetUp(int Turns, int HideTurns, int SneakTurns, int AttackTurns, int FromHiding, int Flanking)
+public sealed record RogueSetUp(int Turns, int HideTurns, int SneakTurns, int AttackTurns, int FromHiding, int Flanking, int Refused = 0)
 {
     /// <summary>No rogue turns.</summary>
     public static RogueSetUp None { get; } = new(0, 0, 0, 0, 0, 0);
 
     /// <summary>The two added up.</summary>
     public RogueSetUp Add(RogueSetUp other) => new(Turns + other.Turns, HideTurns + other.HideTurns, SneakTurns + other.SneakTurns,
-        AttackTurns + other.AttackTurns, FromHiding + other.FromHiding, Flanking + other.Flanking);
+        AttackTurns + other.AttackTurns, FromHiding + other.FromHiding, Flanking + other.Flanking, Refused + other.Refused);
 }
 
 /// <summary>
@@ -64,6 +65,9 @@ internal sealed class RogueTally(RulesPack rules)
                        && Modifiers.Flanked(before, rogue, target, rules);
         _total = _total with { FromHiding = _total.FromHiding + (hiding ? 1 : 0), Flanking = _total.Flanking + (flanking ? 1 : 0) };
     }
+
+    /// <summary>A scripted command of the turn's was refused.</summary>
+    public void Refused() => _total = _total with { Refused = _total.Refused + 1 };
 
     /// <summary>The turn ends.</summary>
     public void EndTurn()

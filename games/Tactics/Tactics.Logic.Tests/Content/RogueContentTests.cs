@@ -6,7 +6,8 @@ namespace Tactics.Logic.Tests;
 
 /// <summary>
 /// The rogue's numbers after the rebalance for human play (#108): at most two attacks per Attack action at any level and in
-/// any subclass, Sneak Attack within 1.5× the SRD's dice, and Steady Aim folded into Hide.
+/// any subclass, its once-per-turn damage riders (Sneak Attack and any subclass passive like it) within the ruling's caps,
+/// Vex marking only for itself, and Steady Aim folded into Hide.
 /// </summary>
 public sealed class RogueContentTests
 {
@@ -15,8 +16,25 @@ public sealed class RogueContentTests
     private static UnitSheet Rogue(int level, string? subclass = null)
         => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("vex", "human", "rogue", subclass, level, Rules), Rules);
 
-    /// <summary>The most Sneak Attack d6s at each level: 1.5× the SRD's, rounded down (2d6 at 1–2, 3d6 at 3–4, 5d6 at 5–8, 7d6 at 9–10).</summary>
-    private static int SneakCap(int level) => level switch { <= 2 => 2, <= 4 => 3, <= 8 => 5, _ => 7 };
+    /// <summary>
+    /// The ruling's cap on the d6s of a rogue's once-per-turn damage riders at each level: 2d6 at 1–2, 3d6 at 3–4, 5d6 at 5–8,
+    /// 7d6 at 9–10 (ruling R29: Sneak Attack and any subclass passive like it, together).
+    /// </summary>
+    private static int RiderCap(int level) => level switch { <= 2 => 2, <= 4 => 3, <= 8 => 5, _ => 7 };
+
+    /// <summary>The rogue with no subclass and, from level 3, with each of its subclasses.</summary>
+    private static IEnumerable<(string? Subclass, UnitSheet Sheet)> Rogues(int level)
+        => new string?[] { null }.Concat(Rules.Classes["rogue"].Subclasses.Where(_ => level >= 3).Select(s => s.Id))
+            .Select(sub => (sub, Rogue(level, sub)));
+
+    /// <summary>The damage effects a passive's hit runs: its own and those of its <c>if</c> branches.</summary>
+    private static IEnumerable<DamageEffect> Damage(IEnumerable<EffectDef> effects)
+        => effects.SelectMany(e => e switch
+        {
+            DamageEffect d => [d],
+            IfEffect i => Damage(i.Then.IsDefault ? [] : i.Then).Concat(Damage(i.Else.IsDefault ? [] : i.Else)),
+            _ => Enumerable.Empty<DamageEffect>(),
+        });
 
     public static TheoryData<int> Levels => [.. Enumerable.Range(1, 10)];
 
@@ -31,13 +49,59 @@ public sealed class RogueContentTests
 
     [Theory]
     [MemberData(nameof(Levels))]
-    public void Sneak_attack_stays_within_one_and_a_half_times_the_srd(int level)
+    public void Once_per_turn_damage_riders_stay_within_the_rulings_caps(int level)
     {
-        var sneak = Assert.IsType<DamageEffect>(Assert.Single(Rules.Passives["rogue.sneak_attack"].Effects));
-        var dice = sneak.Dice!.At(level);
+        foreach (var (subclass, sheet) in Rogues(level))
+        {
+            // Every once-per-turn (or -round) damage a hit adds, summed as average damage against the cap's d6s.
+            var riders = sheet.Passives.Select(Rules.PassiveFor).OfType<PassiveDef>()
+                .Where(p => p.Hook == HookKind.OnAttackHit && (p.OncePerTurn || p.OncePerRound))
+                .SelectMany(p => Damage(p.Effects).Select(d => (p.Id, Dice: d.Dice!.At(level), d.Bonus)))
+                .ToArray();
+            Assert.All(riders, r => Assert.True(r.Bonus.IsDefaultOrEmpty, $"{r.Id} adds a bonus the cap can't size."));
+            var average = riders.Sum(r => r.Dice.Count * (r.Dice.Sides + 1) / 2.0 + r.Dice.Bonus);
+            Assert.True(average <= RiderCap(level) * 3.5,
+                $"Level {level} {subclass ?? "rogue"}: {string.Join(" + ", riders.Select(r => $"{r.Id} {r.Dice}"))} is over {RiderCap(level)}d6.");
+        }
+        Assert.Contains(Rules.PassiveFor("rogue.sneak_attack")!.Effects.OfType<DamageEffect>(), d => d.Dice!.At(level).Count >= 1);
+    }
 
-        Assert.Equal((6, 0), (dice.Sides, dice.Bonus));
-        Assert.InRange(dice.Count, 1, SneakCap(level));
+    [Fact]
+    public void A_rogues_vex_leaves_a_paladins_vow_alone()
+    {
+        // #108, ruling R28: Vex is the rogue's own mark (vexed), so it doesn't take the place of a paladin's Vow of Enmity.
+        var (state, rules) = Fight("rapier", new Tile(2, 0), Paladin(6, "paladin.avenger"));   // beside the goblin, not opposite
+        state = Act(state, rules, new Use(new UnitId("kara"), new AbilityId("avenger.vow_of_enmity"), new Target(Unit: new UnitId("gob"))));
+        state = Act(state, rules, new EndTurn(new UnitId("kara")));
+        (state, _) = HitWith(state, rules, "vex");
+
+        var gob = state.Units[new UnitId("gob")];
+        Assert.Contains(gob.Conditions, c => c.Id.Value == "marked" && c.Source == new UnitId("kara"));
+        Assert.Contains(gob.Conditions, c => c.Id.Value == "vexed" && c.Source == new UnitId("vex"));
+        state = Act(Act(state, rules, new EndTurn(new UnitId("vex"))), rules, new EndTurn(new UnitId("gob")));
+        var swing = Battle.Apply(state, new Use(new UnitId("kara"), RulesPack.CommonAttack.Id, new Target(Unit: new UnitId("gob"))), rules);
+        Assert.Equal(2, swing.Events.OfType<Rolled>().First(r => r.Kind == RollKind.Attack).Result.D20s.Length);   // the vow still counts
+    }
+
+    [Fact]
+    public void Passives_that_read_a_mark_do_not_fire_on_a_target_only_vexed()
+    {
+        // Vengeful Strikes and Ferocious Bond read "marked": the rogue's Vex isn't one.
+        foreach (var (sheet, passive) in new[]
+                 {
+                     (Paladin(6, "paladin.avenger"), "avenger.vengeful_strikes"),
+                     (SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("kara", "human", "ranger", "ranger.beastmaster", 10, Rules), Rules),
+                         "beastmaster.ferocious_bond"),
+                 })
+        {
+            var (state, rules) = Fight("rapier", new Tile(2, 0), sheet with { InitiativeBonus = 40 });
+            (state, _) = HitWith(state, rules, "vex");
+            Assert.Contains(state.Units[new UnitId("gob")].Conditions, c => c.Id.Value == "vexed");
+            while (state.Active != new UnitId("kara"))     // the beastmaster's hound may come first
+                state = Act(state, rules, new EndTurn(state.Active!.Value));
+            var (_, events) = HitWith(state, rules, "kara");
+            Assert.DoesNotContain(new PassiveTriggered(new UnitId("kara"), passive), events);
+        }
     }
 
     [Fact]
@@ -53,8 +117,32 @@ public sealed class RogueContentTests
         Assert.True(Rules.Conditions[new ConditionId("hiding")].Static?.Invisible);
     }
 
+    private static UnitSheet Paladin(int level, string subclass)
+        => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("kara", "human", "paladin", subclass, level, Rules), Rules)
+            with { InitiativeBonus = 60 };
+
+    private static BattleState Act(BattleState state, RulesPack rules, Command command)
+    {
+        var applied = Battle.Apply(state, command, rules);
+        Assert.True(applied.Rejected is null, $"{command}: {applied.Rejected?.Reason}");
+        return applied.State;
+    }
+
+    /// <summary><paramref name="unit"/>'s weapon attack on the goblin, from the first seed on which its first attack hits.</summary>
+    private static (BattleState State, ImmutableArray<BattleEvent> Events) HitWith(BattleState state, RulesPack rules, string unit)
+    {
+        for (ulong seed = 1; seed < 200; seed++)
+        {
+            var used = Battle.Apply(state with { Rng = Rng.Seeded(seed) }, new Use(new UnitId(unit), RulesPack.CommonAttack.Id,
+                new Target(Unit: new UnitId("gob"))), rules);
+            if (used.Events.OfType<AttackResolved>().FirstOrDefault() is { Hit: true, Crit: false })
+                return (used.State, used.Events);
+        }
+        throw new InvalidOperationException("No seed hits.");
+    }
+
     /// <summary>A level-1 rogue (with <paramref name="weapon"/>), acting first, a goblin with HP to spare and an ally.</summary>
-    private static (BattleState State, RulesPack Rules) Fight(string weapon, Tile ally)
+    private static (BattleState State, RulesPack Rules) Fight(string weapon, Tile ally, UnitSheet? allySheet = null)
     {
         var map = AsciiMap.Parse("""
             0. 0. 0. 0. 0.
@@ -62,9 +150,9 @@ public sealed class RogueContentTests
             0. 0. 0. 0. 0.
             """);
         var rules = RulesPack.InMemory("rogue", Rules.Abilities.Values, Rules.Passives.Values, Rules.Conditions.Values, [map],
-            Rules.Injuries.Values);
+            Rules.Injuries.Values, monsters: Rules.Monsters.Keys.Select(m => (m, SheetBuilder.ForMonster(m, Rules))));   // a beastmaster's hound
         var rogue = Rogue(1) with { InitiativeBonus = 50, Weapon = Rules.Weapons[weapon] };
-        var fighter = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("kara", "human", "fighter", null, 1, Rules), Rules);
+        var fighter = allySheet ?? SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("kara", "human", "fighter", null, 1, Rules), Rules);
         var setup = new BattleSetup(map,
         [
             new UnitPlacement(new UnitId("vex"), rogue, new PlayerControlled(new ProfileId("pr_vex")), new Tile(1, 1), []),
@@ -96,7 +184,8 @@ public sealed class RogueContentTests
         var (state, events, _) = FirstHit("rapier", new Tile(4, 2));
 
         Assert.Contains(new PassiveTriggered(new UnitId("vex"), "rogue.vex"), events);
-        Assert.Contains(state.Units[new UnitId("gob")].Conditions, c => c.Id.Value == "marked" && c.Source == new UnitId("vex"));
+        Assert.Contains(state.Units[new UnitId("gob")].Conditions, c => c.Id.Value == "vexed" && c.Source == new UnitId("vex"));
+        Assert.DoesNotContain(state.Units[new UnitId("gob")].Conditions, c => c.Id.Value == "marked");
         Assert.Equal([1, 2], events.OfType<Rolled>().Where(r => r.Kind == RollKind.Attack).Select(r => r.Result.D20s.Length));
 
         // A scimitar has another mastery (Nick), so no Vex.

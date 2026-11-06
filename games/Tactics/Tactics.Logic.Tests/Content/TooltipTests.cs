@@ -96,6 +96,10 @@ public sealed class TooltipTests
         var vex = new PassiveDef("rogue.vex", HookKind.OnAttackHit, new WhenDef(Weapon: ["rapier"]), [new MarkEffect(1)], null);
         Assert.Equal("When you hit, if you attack with a rapier weapon: marks target for 1 round (your attacks on it have advantage)",
             Tooltips.For(vex, 1, Rules));
+        // A mark of its own condition (Vex's vexed, R28) names it.
+        var own = vex with { Effects = [new MarkEffect(1, new ConditionId("lit"))] };
+        Assert.Equal("When you hit, if you attack with a rapier weapon: marks target as Lit for 1 round (your attacks on it have advantage)",
+            Tooltips.For(own, 1, Rules));
     }
 
     [Fact]

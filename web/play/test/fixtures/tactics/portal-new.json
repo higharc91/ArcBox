@@ -2597,7 +2597,7 @@
           "Bonus action",
           "1 oath"
         ],
-        "text": "4 tiles: marks target for 3 rounds (your attacks on it have advantage) \u2014 You swear a vow of enmity: your attacks against the marked foe have advantage for 3 rounds."
+        "text": "4 tiles: marks target for 3 rounds (your attacks on it have advantage) \u2014 You swear a vow of enmity against one foe."
       },
       "barbarian.cleaving_blow": {
         "name": "Cleaving Blow",
@@ -3954,7 +3954,7 @@
         "tags": [
           "Always on"
         ],
-        "text": "When you hit, if you attack with a dart or rapier or shortbow or shortsword weapon: marks target for 1 round (your attacks on it have advantage)"
+        "text": "When you hit, if you attack with a dart or rapier or shortbow or shortsword weapon: marks target as Vexed for 1 round (your attacks on it have advantage)"
       },
       "rogue.withdraw": {
         "name": "Cunning Strike: Withdraw",

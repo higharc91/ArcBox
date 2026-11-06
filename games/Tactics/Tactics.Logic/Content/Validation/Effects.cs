@@ -104,6 +104,9 @@ internal sealed partial class Validation
             case RemoveEffect remove:
                 Ref(RefKind.Condition, remove.Condition.Value, file, At("condition"));
                 break;
+            case MarkEffect { Condition: { } marks }:
+                Ref(RefKind.Condition, marks.Value, file, At("condition"));
+                break;
             case TeleportEffect { Range: > MaxRange } teleport:
                 Error(file, At("range"), $"Range {teleport.Range} is over the limit of {MaxRange}.");
                 break;

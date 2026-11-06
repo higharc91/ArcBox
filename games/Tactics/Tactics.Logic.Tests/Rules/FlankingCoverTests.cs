@@ -49,6 +49,27 @@ public sealed class FlankingCoverTests
     }
 
     [Fact]
+    public void The_attack_edge_counts_flank_mark_taunt_and_help_as_the_roll_does()
+    {
+        // Rolls.AttackEdge is the attack roll's own count, which the AI and the simulator's scripted rogue share (#108).
+        var battle = TestBattle.On(Field).Party("kara", Fighter, T(2, 1)).Party("ari", TestSheets.Rogue, T(4, 1))
+            .Enemy("gob", Goblin, T(3, 1)).WithConditions([.. TestConditions.All]);
+        var (state, _) = battle.Start(seed: 11);
+        Edge EdgeOf(BattleState s) => Rolls.AttackEdge(s, U("kara"), U("gob"), ranged: false, battle.Rules);
+        static ActiveCondition On(string id, string source) => new(new ConditionId(id), new UnitId(source), 1, false, 0, Stat.Con, false);
+        var apart = state.Change("ari", u => u with { Pos = T(3, 0) });
+
+        Assert.Equal(Edge.Advantage, EdgeOf(state));                                                    // ari flanks
+        Assert.Equal(Edge.None, EdgeOf(apart));
+        Assert.Equal(Edge.Advantage, EdgeOf(apart.Give("kara", On("helped", "ari"))));
+        Assert.Equal(Edge.Disadvantage, EdgeOf(apart.Give("kara", On("taunted", "ari"))));             // drawn to ari, not the goblin
+        Assert.Equal(Edge.None, EdgeOf(apart.Give("kara", On("helped", "ari"), On("taunted", "ari"))));
+        Assert.Equal(Edge.Advantage, EdgeOf(apart.Give("gob", On("marked", "kara") with { Mark = true })));
+        Assert.Equal(Edge.None, EdgeOf(apart.Give("gob", On("marked", "kara"))));                       // named so, but not a mark
+        Assert.Equal(Edge.Disadvantage, EdgeOf(apart.Give("gob", TestConditions.Lasting(TestConditions.Invisible))));
+    }
+
+    [Fact]
     public void Downed_ally_does_not_flank()
     {
         BattleState Downed(BattleState s) => s.Change("ari", a => a with { Life = LifeState.Downed, Hp = 0, Countdown = 3 });

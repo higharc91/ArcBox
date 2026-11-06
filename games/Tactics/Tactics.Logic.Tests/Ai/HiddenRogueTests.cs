@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using ArcBox.Sdk;
 using Tactics.Sim;
 
@@ -129,6 +130,18 @@ public sealed class HiddenRogueTests
     }
 
     [Fact]
+    public void A_helped_strike_has_advantage_so_the_rogue_takes_it()
+    {
+        // As A_plain_strike_with_no_cover_in_reach_is_the_ais_turn, but an ally helped: the strike has advantage after all.
+        var (state, rules) = Start(T(6, 0), T(7, 1));
+        state = state.Give("vex", new ActiveCondition(RulesPack.Helped.Id, U("vex"), 1, false, 0, Stat.Con, false));
+
+        var plan = HiddenRogue.Plan(state, U("vex"), rules);
+
+        Assert.Contains("use common.attack on gob", plan!.Value.Select(Said));
+    }
+
+    [Fact]
     public void Far_from_the_foes_it_leaves_the_turn_to_the_ai_to_close_in()
     {
         // Behind the wall is the only cover, more than a turn's walk from the goblin: the AI dashes in faster.
@@ -151,6 +164,23 @@ public sealed class HiddenRogueTests
         var (state, rules) = Start(T(2, 2), T(7, 2), hiding: true);
 
         Assert.Null(HiddenRogue.Plan(state, U("vex"), rules));
+    }
+
+    [Fact]
+    public void After_a_refused_scripted_command_the_turn_is_the_ais()
+    {
+        // A script whose command the engine refuses: the turn is planned again by the AI, not by the script, and played out.
+        var (state, rules) = Start(T(0, 3), T(7, 3));
+        var tally = new Tally(rules);
+        var rogues = new RogueTally(rules);
+        var ai = new SimRunner.AiCounts();
+        ImmutableArray<Command>? Refused(BattleState _) => [new Use(U("vex"), new AbilityId("rogue.no_such_trick"), new Target()), new EndTurn(U("vex"))];
+
+        var after = SimRunner.PlayTurn(state, U("vex"), rules, tally, ai, rogues, Refused);
+
+        Assert.NotEqual(U("vex"), after.Active);
+        Assert.Equal((1, 0), (ai.Rejected, ai.ForcedEnds));
+        Assert.Equal(1, rogues.SetUp.Refused);
     }
 
     [Fact]

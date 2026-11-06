@@ -21,7 +21,8 @@ public sealed record ActiveCondition(ConditionId Id, UnitId? Source, int? Rounds
     Stat SaveStat, bool Concentration,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StaticMods? Mods = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Mark = false);
 
 /// <summary>A stack of one item in a unit's bag.</summary>
 public sealed record ItemStack(ItemId Item, int Count);

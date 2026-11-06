@@ -80,7 +80,7 @@ export function ConditionChip({ id }: { id: string }) {
 const STATUS_ALIASES: Record<string, string> = {
   poison: "poisoned", burn: "burning", stun: "stunned", hasted: "hasted", haste: "hasted", slow: "slowed", bless: "blessed",
   shield: "shielded", shield_of_faith: "shielded", hunters_mark: "marked", hex: "marked", faerie_fire: "marked",
-  invisible: "hidden", hiding: "hidden", dodging: "shielded", restrained: "slowed", paralyzed: "stunned", incapacitated: "stunned",
+  invisible: "hidden", hiding: "hidden", vexed: "marked", dodging: "shielded", restrained: "slowed", paralyzed: "stunned", incapacitated: "stunned",
   frozen: "chilled", concentration: "concentrating",
 };
 

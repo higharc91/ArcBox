@@ -209,6 +209,46 @@ public sealed class ValidationTests
         Assert.Equal(("/abilities/0/requires/all/1/targetHasCondition", "Unknown condition 'lurkingg'."), (error.Pointer, error.Message));
     }
 
+    [Fact]
+    public void A_marks_own_condition_must_be_known()
+    {
+        // #108, ruling R28: Vex marks with its own condition, so a mark can name one.
+        var errors = ErrorsOfChapter(("abilities/m.json", """
+            { "abilities": [ { "id": "ch.mark", "name": "Mark", "tier": 0, "cost": { "bonus": 1 },
+                "target": { "kind": "enemy", "range": 4, "los": true, "area": { "shape": "single" } },
+                "effects": [ { "mark": { "rounds": 1, "condition": "vexxed" } } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal(("/abilities/0/effects/0/mark/condition", "Unknown condition 'vexxed'."), (error.Pointer, error.Message));
+    }
+
+    [Theory]
+    [InlineData("""{ "weapon": ["finesse"] }""", "/weapon")]
+    [InlineData("""{ "advantage": true }""", "/advantage")]
+    [InlineData("""{ "disadvantage": false }""", "/disadvantage")]
+    [InlineData("""{ "any": [ { "seen": false }, { "success": true } ] }""", "/any/1/success")]
+    [InlineData("""{ "not": { "flanked": true } }""", "/not/flanked")]
+    [InlineData("""{ "all": [ { "allyBesideTarget": true } ] }""", "/all/0/allyBesideTarget")]
+    [InlineData("""{ "heightAbove": 1 }""", "/heightAbove")]
+    [InlineData("""{ "isSpell": true }""", "/isSpell")]
+    [InlineData("""{ "damageType": "fire" }""", "/damageType")]
+    public void An_abilitys_requirement_cannot_test_a_hooks_situation(string requires, string leaf)
+    {
+        // #108: "requires" is checked on the user alone, before anything is rolled or aimed: a leaf that reads an attack,
+        // a roll or a target has nothing to read.
+        var errors = ErrorsOfChapter(("abilities/r.json", $$"""
+            { "abilities": [ { "id": "ch.lurk", "name": "Lurk", "tier": 0, "cost": { "bonus": 1 },
+                "requires": {{requires}},
+                "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+                "effects": [ { "apply": "prone", "rounds": 1 } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal("/abilities/0/requires" + leaf, error.Pointer);
+        Assert.Contains("the user alone", error.Message);
+    }
+
     [Theory]
     [InlineData("""{ "1": "wolf" }""", "/enemies/0/unitByParty", "every supported party size")]
     [InlineData("""{ "1": "wolf", "2": "missing" }""", "/enemies/0/unitByParty/2", "Unknown monster")]

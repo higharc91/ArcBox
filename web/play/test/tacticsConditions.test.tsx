@@ -4,7 +4,10 @@ import { ConditionChip } from "../src/games/tactics/art";
 
 // The pack as the server serves it: an index naming the base pack's hash, then its icon manifest.
 const icons = {
-  icons: { hidden: { atlas: "status.png", rect: [73, 19, 16, 16], category: "status" } },
+  icons: {
+    hidden: { atlas: "status.png", rect: [73, 19, 16, 16], category: "status" },
+    marked: { atlas: "status.png", rect: [91, 19, 16, 16], category: "status" },
+  },
   abilityIcons: {},
 };
 const fetchMock = vi.fn(async (url: string) => {
@@ -24,5 +27,11 @@ describe("condition chips", () => {
     const { container } = render(<ConditionChip id="hiding" />);
     expect(screen.getByText("hiding")).toBeTruthy();
     await waitFor(() => expect(container.querySelector(".tx-cond-icon img")?.getAttribute("src")).toBe("/content/tactics/base/h/icons/status.png"));
+  });
+
+  it("a rogue's Vex (#108) wears the Marked status icon", async () => {
+    const { container } = render(<ConditionChip id="vexed" />);
+    expect(screen.getByText("vexed")).toBeTruthy();
+    await waitFor(() => expect(container.querySelector(".tx-cond-icon img")).toBeTruthy());
   });
 });

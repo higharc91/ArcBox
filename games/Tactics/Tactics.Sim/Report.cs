@@ -259,7 +259,7 @@ public static class Report
     /// <summary>
     /// The party rogues' Sneak Attack set-up by level (<see cref="RogueSetUp"/>), when any rogue had a turn: the share of
     /// their turns with Hide, with Sneak Attack and with a weapon attack, and of those attacks the share from hiding and,
-    /// in melee, flanking.
+    /// in melee, flanking; and the scripted rogue's refused commands (<see cref="RogueSetUp.Refused"/>).
     /// </summary>
     private static void RogueSetUps(StringBuilder md, IReadOnlyList<SimBattle> battles)
     {
@@ -271,13 +271,14 @@ public static class Report
         Line(md);
         Line(md, "How the party's rogues set up Sneak Attack (#108), over their own turns: the share of turns in which they used Hide, "
                  + "landed Sneak Attack and made a weapon attack; and of those weapon attacks, the share made from hiding and the "
-                 + "share made in melee flanking the target (an ally that can act on the far side of it).");
+                 + "share made in melee flanking the target (an ally that can act on the far side of it). Scripted refusals are the "
+                 + "commands of a scripted rogue (`--policy hidden-rogue`) the engine refused; each hands the rest of that turn to the AI.");
         Line(md);
-        Line(md, "| Level | Rogue turns | Hide | Sneak Attack | Attacking | From hiding | Flanking |");
-        Line(md, "|---:|---:|---:|---:|---:|---:|---:|");
+        Line(md, "| Level | Rogue turns | Hide | Sneak Attack | Attacking | From hiding | Flanking | Scripted refusals |");
+        Line(md, "|---:|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var (level, r) in levels)
             Line(md, $"| {level} | {r.Turns} | {Pct(r.HideTurns, r.Turns)} | {Pct(r.SneakTurns, r.Turns)} | {Pct(r.AttackTurns, r.Turns)} | "
-                     + $"{Pct(r.FromHiding, r.AttackTurns)} | {Pct(r.Flanking, r.AttackTurns)} |");
+                     + $"{Pct(r.FromHiding, r.AttackTurns)} | {Pct(r.Flanking, r.AttackTurns)} | {r.Refused} |");
         Line(md);
     }
 

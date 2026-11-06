@@ -128,34 +128,40 @@ public sealed class StatModBlock : EffectBlock<StatModEffect>
 }
 
 /// <summary>
-/// <c>"mark"</c>: the source's mark (<see cref="Condition"/>) moves to the target: removed from any other unit it marked,
-/// then put on the target for the rounds. Emits <see cref="ConditionApplied"/> and <see cref="Marked"/>.
+/// <c>"mark"</c>: the source's mark (the effect's condition, <see cref="Condition"/> unless given) moves to the target:
+/// removed from any other unit the source marked with it, then put on the target for the rounds, flagged as a mark
+/// (<see cref="ActiveCondition.Mark"/>). Emits <see cref="ConditionApplied"/> and <see cref="Marked"/>.
 /// </summary>
 public sealed class MarkBlock : EffectBlock<MarkEffect>
 {
-    /// <summary>The condition a mark is.</summary>
+    /// <summary>The condition a mark is unless the effect names another.</summary>
     public static readonly ConditionId Condition = new("marked");
 
-    /// <summary>True when <paramref name="target"/> is marked by <paramref name="attacker"/>.</summary>
+    /// <summary>The condition <paramref name="def"/> marks with.</summary>
+    public static ConditionId ConditionOf(MarkEffect def) => def.Condition ?? Condition;
+
+    /// <summary>True when <paramref name="target"/> carries a mark <paramref name="attacker"/> made (any mark condition).</summary>
     public static bool MarkedBy(UnitState target, UnitId attacker)
-        => target.Conditions.Any(c => c.Id == Condition && c.Source == attacker);
+        => target.Conditions.Any(c => c.Mark && c.Source == attacker);
 
     /// <inheritdoc />
     public override string Key => "mark";
 
     /// <inheritdoc />
     protected override string? Describe(MarkEffect def, int level, RulesPack rules)
-        => $"marks target {TooltipText.ForRounds(def.Rounds)} (your attacks on it have advantage)";
+        => (def.Condition is { } named && named != Condition ? $"marks target as {TooltipText.Condition(named, rules)} " : "marks target ")
+           + $"{TooltipText.ForRounds(def.Rounds)} (your attacks on it have advantage)";
 
     /// <inheritdoc />
     protected override void Run(MarkEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
+        var condition = ConditionOf(def);
         foreach (var other in ctx.W.State.Units.Values
-                     .Where(u => u.Id != target.Id && u.Conditions.Any(c => c.Id == Condition && c.Source == ctx.Source))
+                     .Where(u => u.Id != target.Id && u.Conditions.Any(c => c.Id == condition && c.Source == ctx.Source))
                      .Select(u => u.Id).ToArray())
-            Conditions.Remove(ctx.W, other, Condition);
-        Sourced.Put(ctx, target.Id, Condition, def.Rounds, concentration: false, mods: null);
+            Conditions.Remove(ctx.W, other, condition);
+        Sourced.Put(ctx, target.Id, condition, def.Rounds, concentration: false, mods: null, mark: true);
         ctx.W.Emit(new Marked(target.Id, ctx.Source));
     }
 }
@@ -223,14 +229,16 @@ internal static class Sourced
 {
     /// <summary>
     /// Puts <paramref name="id"/> from the source on <paramref name="target"/> for <paramref name="rounds"/>, replacing one
-    /// with the same id; applied during the source's turn, it is marked <see cref="ActiveCondition.AppliedThisTurn"/>.
-    /// Emits <see cref="ConditionApplied"/>.
+    /// with the same id; applied during the source's turn, it is marked <see cref="ActiveCondition.AppliedThisTurn"/>, and
+    /// with <paramref name="mark"/> it is the source's mark (<see cref="ActiveCondition.Mark"/>). Emits
+    /// <see cref="ConditionApplied"/>.
     /// </summary>
-    public static void Put(EffectContext ctx, UnitId target, ConditionId id, int rounds, bool concentration, StaticMods? mods)
+    public static void Put(EffectContext ctx, UnitId target, ConditionId id, int rounds, bool concentration, StaticMods? mods,
+        bool mark = false)
     {
         var unit = ctx.W.Unit(target);
         var condition = new ActiveCondition(id, ctx.Source, rounds, UntilSave: false, SaveDc: 0, Stat.Con, concentration,
-            AppliedThisTurn: ctx.W.State.Active == ctx.Source, Mods: mods);
+            AppliedThisTurn: ctx.W.State.Active == ctx.Source, Mods: mods, Mark: mark);
         ctx.W.Set(unit with { Conditions = unit.Conditions.RemoveAll(c => c.Id == id).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target, id));
     }
