@@ -25,6 +25,29 @@ public sealed class TacticalSpellChoiceTests
         Assert.True(plan.Commands.OfType<Use>().Any(u => u.Ability == command.Id && u.Target.Unit == U("brute")), plan.Explain);
     }
 
+    [Fact]
+    public void A_guardian_can_command_from_range_after_spending_its_move()
+    {
+        var command = Base.Abilities[new("paladin.command")];
+        var smite = Base.Abilities[new("paladin.divine_smite")];
+        var paladin = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("guard", "human", "paladin", null, 3, Base), Base)
+            with { InitiativeBonus = 100, Abilities = [command.Id, smite.Id] };
+        var battle = TestBattle.On(Field).With(command, smite).WithAiProfiles(Base.AiProfiles.Values)
+            .WithConditions([.. Base.Conditions.Values])
+            .Party("guard", paladin, new(0, 1), new AiControlled("guardian"))
+            .Party("ally", TestSheets.Fighter, new(3, 1))
+            .Enemy("foe", TestSheets.Fighter with { MaxHp = 40 }, new(4, 1));
+        var state = battle.Start().State.Change("guard", u => u with { Economy = u.Economy with { MoveLeft = 0 } });
+        var plan = Ai.Plan(state, U("guard"), battle.Rules);
+        Assert.True(plan.Commands.OfType<Use>().Any(u => u.Ability == command.Id && u.Target.Unit == U("foe")), plan.Explain);
+        foreach (var action in plan.Commands)
+        {
+            var result = Battle.Apply(state, action, battle.Rules);
+            Assert.Null(result.Rejected);
+            state = result.State;
+        }
+    }
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
