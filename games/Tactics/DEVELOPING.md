@@ -111,4 +111,4 @@ python3 tools/tactics-assets/build.py previews showcase gallery
 
 The measured cold default-build attempt took **342.97 seconds (5m43s)** before the existing icon-builder error. A complete deterministic rebuild is still blocked by [#203](https://github.com/higharc91/ArcBox/issues/203) / [draft #230](https://github.com/higharc91/ArcBox/pull/230), including generated-art drift; the figure is a failed-attempt time, not a successful build benchmark. Playing and testing use the checked-in pack. Review generated diffs before adopting any art output.
 
-The [overworld issue board](../../docs/superpowers/plans/overworld-issue-board.md) links the feature specs and work items. Historical simulation and bot-session notes remain in [the original game guide](README.md); this guide is the path for running the whole game.
+The [tracker index](../../docs/superpowers/README.md) identifies live work. The [overworld issue board](../../docs/superpowers/plans/overworld-issue-board.md) links the feature specs and work items. Historical simulation and bot-session notes remain in [the original game guide](README.md); this guide is the path for running the whole game.

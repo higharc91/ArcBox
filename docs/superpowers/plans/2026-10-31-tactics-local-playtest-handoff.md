@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Handoff: playtest ArcBox Tactics on a PC and a real phone
 
 You're a local Claude Code session on the user's PC, in their clone of `higharc91/arcbox`. A cloud session built ArcBox Tactics' battle adapter (milestone 3a) and character portal (sub-project 4a), and played them in headless Chromium. Nobody has tried them on a real phone yet. Your job is to help the user do that, fix what's small, and write down what isn't.

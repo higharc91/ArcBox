@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Task 23 review: findings to resume from
 
 Task 23's commit `98b06c5` was reviewed on 2026-10-30 and came back **Needs fixes**. No fix round has run yet. The session's git-ignored ledger stays on the local machine, so this file carries what the next session needs.

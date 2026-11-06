@@ -41,6 +41,8 @@ See [Developing Wardenflame](games/Tactics/DEVELOPING.md) for prerequisite detai
 
 ## Platform design
 
+- [Live trackers and documentation index](docs/superpowers/README.md)
+
 - Design spec: [docs/superpowers/specs/2026-10-18-arcbox-platform-design.md](docs/superpowers/specs/2026-10-18-arcbox-platform-design.md)
 - M0–M1 implementation plan: [docs/superpowers/plans/2026-10-18-arcbox-m0-m1-platform-core.md](docs/superpowers/plans/2026-10-18-arcbox-m0-m1-platform-core.md)
 
