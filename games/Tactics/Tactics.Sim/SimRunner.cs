@@ -34,7 +34,7 @@ public sealed record SimBattle(string Encounter, int Level, ImmutableArray<strin
     int Rounds, int Downs, int Outs, ImmutableSortedDictionary<string, ClassStats> PerClass,
     ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false,
     int Rejected = 0, int Replans = 0, int ForcedEnds = 0, int? EncounterLevel = null, EnvironmentStats? Environmental = null,
-    int Companions = 0, RogueSetUp? Rogue = null);
+    int Companions = 0, RogueSetUp? Rogue = null, ImmutableSortedDictionary<string, int>? RefusalReasons = null);
 
 /// <summary>
 /// A class's measures in one battle, per member of that class (see <see cref="Tally"/> for how each is read from the
@@ -236,7 +236,8 @@ public static class SimRunner
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
             tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
-            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment, config.Companions, rogues.SetUp);
+            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment, config.Companions, rogues.SetUp,
+            ai.RefusalReasons.ToImmutableSortedDictionary(StringComparer.Ordinal));
     }
 
     /// <summary>
@@ -262,6 +263,15 @@ public static class SimRunner
         public int Rejected { get; set; }
         public int Replans { get; set; }
         public int ForcedEnds { get; set; }
+        public SortedDictionary<string, int> RefusalReasons { get; } = new(StringComparer.Ordinal);
+
+        public void Refused(Command command, Rejection rejection)
+        {
+            Rejected++;
+            var action = command is Use use ? use.Ability.Value : command.GetType().Name;
+            var key = $"{action} / {rejection.Code}";
+            RefusalReasons[key] = RefusalReasons.GetValueOrDefault(key) + 1;
+        }
     }
 
     /// <summary>
@@ -288,9 +298,9 @@ public static class SimRunner
             foreach (var command in commands)
             {
                 var resolution = Battle.Apply(state, command, rules);
-                if (resolution.Rejected is not null)
+                if (resolution.Rejected is { } rejection)
                 {
-                    ai.Rejected++;
+                    ai.Refused(command, rejection);
                     if (scripted is not null)
                     {
                         rogues.Refused();

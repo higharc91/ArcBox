@@ -484,6 +484,19 @@ public sealed class ValidationTests
     }
 
     [Fact]
+    public void A_ranged_attack_feature_must_be_positive()
+    {
+        var json = ClassJson("ranged", """
+            "subclasses": [ { "id": "ranged.one", "name": "One", "features": {
+              "3": [ { "attacks": 1 } ], "6": [ { "attacks": 1 } ], "10": [ { "attacks": 1 } ] } } ]
+            """)
+            .Replace("\"2\": [ { \"attacks\": 1 } ]", "\"2\": [ { \"rangedAttacks\": 0 } ]", StringComparison.Ordinal);
+        var error = Assert.Single(ErrorsOfChapter(("classes/ranged.json", json)));
+        Assert.Equal("/features/2/0/rangedAttacks", error.Pointer);
+        Assert.Equal("'rangedAttacks' must be at least 1.", error.Message);
+    }
+
+    [Fact]
     public void Content_error_to_string_is_file_hash_pointer_colon_message()
         => Assert.Equal("base/x.json#/a/0: Bad.", new ContentError("base/x.json", "/a/0", "Bad.").ToString());
 

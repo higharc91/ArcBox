@@ -189,6 +189,21 @@ public static class Report
                      + $"{c.Battles.Sum(b => b.Rejected)} | {c.Battles.Sum(b => b.Replans)} | {c.Battles.Sum(b => b.ForcedEnds)} |");
         Line(md);
 
+        var refusals = battles.SelectMany(b => b.RefusalReasons ?? ImmutableSortedDictionary<string, int>.Empty)
+            .GroupBy(p => p.Key).OrderBy(g => g.Key, StringComparer.Ordinal).ToArray();
+        if (refusals.Length > 0)
+        {
+            Line(md, "### Refused commands by ability and reason");
+            Line(md);
+            Line(md, "Actual engine refusals remain counted above; the simulator replans from the current state with a bounded retry budget. Legacy rows may have no reason detail.");
+            Line(md);
+            Line(md, "| Command / rejection | Count |");
+            Line(md, "|---|---:|");
+            foreach (var reason in refusals)
+                Line(md, $"| {reason.Key} | {reason.Sum(p => p.Value)} |");
+            Line(md);
+        }
+
         Line(md, "### Environmental reactions and surfaces");
         Line(md);
         Line(md, "Friendly conduction damage is same-side/self HP and temporary HP actually lost, without overkill. Burning tile-rounds count unique tiles present at any point in each round; surface deaths count terminal Died/Out events directly caused by surface packets, not Downs.");

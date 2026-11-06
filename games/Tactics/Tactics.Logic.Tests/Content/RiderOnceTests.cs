@@ -92,7 +92,7 @@ public sealed class RiderOnceTests
         }
         static IEnumerable<AbilityId> Granted(IEnumerable<FeatureRef> features)
             => features.SelectMany(f => f.Ability is { } a ? [a] : f.From.IsDefault ? [] : f.From.Select(id => new AbilityId(id)));
-        static int Attacks(IEnumerable<FeatureRef> features) => features.Select(f => f.Attacks ?? 1).DefaultIfEmpty(1).Max();
+        static int Attacks(IEnumerable<FeatureRef> features) => features.Select(f => Math.Max(f.Attacks ?? 1, f.RangedAttacks ?? 1)).DefaultIfEmpty(1).Max();
 
         var classAttacks = 1;
         foreach (var cls in Base.Classes.Values)

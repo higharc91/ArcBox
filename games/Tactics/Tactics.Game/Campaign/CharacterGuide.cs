@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Text.Json.Serialization;
 using Tactics.Logic;
 
 namespace Tactics.Game;
@@ -11,7 +12,8 @@ namespace Tactics.Game;
 public sealed record RaceGuide(string Name, ImmutableArray<string> Facts, ImmutableArray<string> Traits);
 
 /// <summary>What a class gains at one level: features by id, how many attacks an Attack makes from here, and the choices to make.</summary>
-public sealed record LevelGuide(int Level, ImmutableArray<string> Features, int? Attacks, ImmutableArray<ChoiceGuide> Choices);
+public sealed record LevelGuide(int Level, ImmutableArray<string> Features, int? Attacks, ImmutableArray<ChoiceGuide> Choices,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RangedAttacks = null);
 
 /// <summary>A "choose <paramref name="Choose"/> of" feature, its options by feature id.</summary>
 public sealed record ChoiceGuide(int Choose, ImmutableArray<string> From);
@@ -151,6 +153,7 @@ public static class CharacterGuide
             List<string> named = [];
             List<ChoiceGuide> choices = [];
             int? attacks = null;
+            int? rangedAttacks = null;
             foreach (var f in list)
             {
                 if (f.Ability is { } ability)
@@ -159,12 +162,14 @@ public static class CharacterGuide
                     named.Add(passive);
                 else if (f.Attacks is { } n)
                     attacks = n;
+                else if (f.RangedAttacks is { } ranged)
+                    rangedAttacks = ranged;
                 else if (f.Choose is { } choose && !f.From.IsDefaultOrEmpty)
                     choices.Add(new ChoiceGuide(choose, f.From));
             }
             foreach (var id in named.Concat(choices.SelectMany(c => c.From)))
                 ids?.Add(id);
-            levels.Add(new LevelGuide(level, [.. named], attacks, [.. choices]));
+            levels.Add(new LevelGuide(level, [.. named], attacks, [.. choices], rangedAttacks));
         }
         return levels.ToImmutable();
     }

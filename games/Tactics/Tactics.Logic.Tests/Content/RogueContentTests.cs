@@ -40,6 +40,39 @@ public sealed class RogueContentTests
 
     [Theory]
     [MemberData(nameof(Levels))]
+    public void The_rogues_ranged_attack_budget_is_one_while_melee_remains_two(int level)
+    {
+        foreach (var subclass in new string?[] { null }.Concat(Rules.Classes["rogue"].Subclasses.Where(_ => level >= 3).Select(s => s.Id)))
+        {
+            var character = SheetBuilder.DefaultCharacter("vex", "human", "rogue", subclass, level, Rules);
+            Assert.Equal(2, SheetBuilder.ForCharacter(character, Rules).Attacks);
+            Assert.Equal(1, SheetBuilder.ForCharacter(character with { Weapon = "shortbow" }, Rules).Attacks);
+        }
+    }
+
+    [Fact]
+    public void Sneak_attack_damage_never_falls_on_level_up()
+    {
+        var dice = Assert.Single(Rules.PassiveFor("rogue.sneak_attack")!.Effects.OfType<DamageEffect>()).Dice!;
+        foreach (var level in Enumerable.Range(2, 9))
+            Assert.True(dice.At(level).Average >= dice.At(level - 1).Average);
+    }
+
+    [Theory]
+    [InlineData("fighter")]
+    [InlineData("ranger")]
+    public void Classes_without_a_ranged_override_keep_their_existing_attack_schedule(string cls)
+    {
+        foreach (var level in Enumerable.Range(1, 10))
+        {
+            var character = SheetBuilder.DefaultCharacter("other", "human", cls, null, level, Rules);
+            Assert.Equal(SheetBuilder.ForCharacter(character, Rules).Attacks,
+                SheetBuilder.ForCharacter(character with { Weapon = "shortbow" }, Rules).Attacks);
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(Levels))]
     public void The_rogue_makes_at_most_two_attacks_per_action(int level)
     {
         Assert.InRange(Rogue(level).Attacks, 1, 2);
