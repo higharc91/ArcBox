@@ -38,7 +38,12 @@ jobs:
           python-version: '3.13'
 
       - name: Install Python test dependencies
-        run: python -m pip install Pillow numpy
+        run: python -m pip install -r tools/requirements.txt
 
       - name: Build and run all test groups
         run: bash tools/check-all.sh --full
+
+      - name: Rebuild assets and check committed content
+        run: |
+          python tools/tactics-assets/build.py
+          git diff --exit-code -- content/

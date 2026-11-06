@@ -1,8 +1,14 @@
 # Wardenflame assets (working name: tactics)
 
-Procedural pixel art for Wardenflame, the tactics RPG. The art is drawn in Python, not by hand: every sprite is code
-over a small set of parts. Re-running the build gives byte-identical output, so the content pack's hash changes only
-when the art does.
+Procedural pixel art and reviewed imported art for Wardenflame, the tactics RPG. The catalogue is drawn in Python
+over a small set of parts. The shipped pack also contains authored overrides and retained sources that the current
+catalogue build does not yet reproduce. See the measured rebuild status below before rebuilding the live pack.
+
+Install the shared pinned Python dependencies first:
+
+```bash
+python3 -m pip install -r tools/requirements.txt
+```
 
 ```bash
 python3 tools/tactics-assets/build.py                    # content sets, no review images
@@ -10,6 +16,41 @@ python3 tools/tactics-assets/build.py characters         # one content set
 python3 tools/tactics-assets/build.py previews           # content sets and review images
 python3 tools/tactics-assets/build.py previews terrain   # one set and its review images
 ```
+
+## Rebuild verification and cold-build measurement (#203)
+
+The workflow is configured to build the assets with pinned Pillow 12.3.0 and numpy 2.3.5, then run
+`git diff --exit-code -- content/`. GitHub Actions remains manually disabled at the owner's request; adding this
+step does not enable it. A clean generated-content result is still outstanding.
+
+A cold attempt on 2026-11-05 used Python 3.12.14, those exact dependencies, four Linux CPU workers where supported,
+and a fresh Python process. Output was redirected into an isolated copy of the 225 MB pack, preserving the working
+content. The attempt took **342.97 seconds (5 min 43 s)** and stopped in the icons set with
+`KeyError: 'villains'` from `parts/ability_icons.py:compose`. The player-icon catalogue excludes `monsters.json`
+but also reads `villains.json`, whose filename is not a supported player-class plate. This is a failed attempt,
+not a measurement of a completed full build.
+
+Completed sets already demonstrate drift against committed content:
+
+| Set | Changed files | Removed files | Added files |
+|---|---:|---:|---:|
+| characters | 2 | 0 | 0 |
+| terrain | 1 | 23 | 0 |
+| tactical | 0 | 0 | 0 |
+| props | 13 | 173 | 0 |
+| portraits | 324 | 160 | 0 |
+| beasts, backgrounds, ui | 0 | 0 | 0 |
+
+All 132 tactical sheets reproduce byte-identically. The character manifest drops four authored aliases; the terrain
+build drops the native Ford structures and retained terrain sources. Sample portrait and prop differences change
+decoded pixels, not just PNG encoding. The icons set was incomplete, and later sets were not reached.
+
+The strict rebuild gate must remain red until the generator handles the enemy-only ability file and the authored
+overrides/imports are reconciled with the build. Preserve approved art while deciding which files are generated
+outputs and which are retained inputs. No generated deletions or replacement artwork from this diagnostic were
+applied to the working content. The successful full cold-build time remains to be measured after that repair.
+
+## Outputs
 
 | Output | What |
 |---|---|
