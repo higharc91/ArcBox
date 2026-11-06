@@ -1,0 +1,9 @@
+Running tests from /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1s 139ms)
+
+Test run summary: Passed!
+  total: 11
+  failed: 0
+  succeeded: 11
+  skipped: 0
+  duration: 1s 394ms

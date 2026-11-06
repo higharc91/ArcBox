@@ -4,6 +4,8 @@
 #   GODOT=/path/to/Godot_v4.7.2-stable_mono_linux.x86_64 tools/tv-e2e.sh            REDLINE to the first Reveal
 #   ARCBOX_FULL=1 GODOT=… tools/tv-e2e.sh                                           a full race, results, back to the lobby
 #   ARCBOX_RESTART=1 GODOT=… tools/tv-e2e.sh                                        the server restarts mid-race (issue #24)
+#   ARCBOX_RESTART=1 ARCBOX_RESTART_PHASE=champagne GODOT=… tools/tv-e2e.sh          interrupt qualifying, question, reveal, anthem or champagne
+#   ARCBOX_RESTART=1 ARCBOX_RESTART_AGAIN=1 GODOT=… tools/tv-e2e.sh                  the recovered VIP immediately starts another race
 #   ARCBOX_SWAP=1 GODOT=… tools/tv-e2e.sh                                           a phone is swapped mid-race (issue #24)
 #   ARCBOX_GAME=tactics GODOT=… tools/tv-e2e.sh                                     a Tactics battle to its Results, with bot phones
 #   ARCBOX_GAME=tactics ARCBOX_RECONNECT=1 GODOT=… tools/tv-e2e.sh                  the TV is killed mid-battle and comes back
@@ -217,6 +219,8 @@ SHOTS=${ARCBOX_SHOTS:-1}
 OUT=${ARCBOX_E2E_OUT:-/tmp/arcbox-tv-e2e-$(date +%Y%m%d-%H%M%S)}
 FULL=${ARCBOX_FULL:-}
 RESTART=${ARCBOX_RESTART:-}
+RESTART_PHASE=${ARCBOX_RESTART_PHASE:-round2}
+RESTART_AGAIN=${ARCBOX_RESTART_AGAIN:-0}
 SWAP=${ARCBOX_SWAP:-}
 RECONNECT=${ARCBOX_RECONNECT:-}
 AT_BEAT=${ARCBOX_AT_BEAT:-30}
@@ -255,6 +259,20 @@ case "$GAME" in
   redline|tactics) ;;
   *) echo "ARCBOX_GAME is redline or tactics, not $GAME." >&2; exit 2 ;;
 esac
+case "$RESTART_PHASE" in
+  round2|qualifying|question|reveal|anthem|champagne) ;;
+  *) echo "Unknown ARCBOX_RESTART_PHASE: $RESTART_PHASE" >&2; exit 2 ;;
+esac
+case "$RESTART_AGAIN" in
+  0|1) ;;
+  *) echo "ARCBOX_RESTART_AGAIN must be 0 or 1." >&2; exit 2 ;;
+esac
+if [[ "$RESTART_PHASE" != "round2" || "$RESTART_AGAIN" == "1" ]]; then
+  if [[ "$GAME" != "redline" || "$RESTART" != "1" ]]; then
+    echo "REDLINE restart controls require ARCBOX_GAME=redline and ARCBOX_RESTART=1." >&2
+    exit 2
+  fi
+fi
 RESTART_KILL=
 case "$RESTART" in
   ""|1) ;;
@@ -1232,6 +1250,7 @@ set +e
 run_phones() {
   ARCBOX_URL="$URL" ARCBOX_ROOM="$CODE" ARCBOX_PHONES="$PHONES" ARCBOX_START=host ARCBOX_SHOTS="$OUT/phones" \
     ARCBOX_PACE="${ARCBOX_PACE:-4}" ARCBOX_FULL="$FULL" ARCBOX_RESTART="$RESTART" ARCBOX_SWAP="$SWAP" \
+    ARCBOX_RESTART_PHASE="$RESTART_PHASE" ARCBOX_RESTART_AGAIN="$RESTART_AGAIN" ARCBOX_TV_LOG="$OUT/tv.log" \
     node "$ROOT/web/play/e2e/redline.e2e.mjs" 2>&1 | tee "$OUT/phones.log"
   return "${PIPESTATUS[0]}"
 }
@@ -1323,6 +1342,9 @@ expect_in_order() {
   done
 }
 # Qualifying runs before the start lights; its closing line may overlap them, so it is checked on its own.
+if [[ "$RESTART" == "1" && "$RESTART_PHASE" == "qualifying" ]]; then
+  expect_in_order "audio" "qualifying start|^AUDIO Voice redline\\.announcer: Qualifying! Three questions, fastest correct answers take pole\\.$"
+else
 expect_in_order "audio" \
   "qualifying start|^AUDIO Voice redline\.announcer: Qualifying! Three questions, fastest correct answers take pole\.$" \
   "pole position|^AUDIO Voice redline\.announcer: Pole position for "
@@ -1342,6 +1364,7 @@ if [[ "$FULL" == "1" ]]; then
   EXPECT+=("fanfare|^AUDIO Sfx fanfare$" "the winner|^AUDIO Voice redline\.announcer: (Chequered flag!|.* takes the win\.)")
 fi
 (( AUDIO_FAIL )) || expect_in_order "audio" "${EXPECT[@]}"
+fi
 
 # ---- 7. the podium (ARCBOX_FULL=1): the TV reaches the Champagne; the anthem (or, for a country without a melody,
 # the victory theme) plays in the Anthem and the theme follows it; every podium phone's cork pops on the TV, the
@@ -1380,7 +1403,15 @@ fi
 QUALI_FAIL=0
 QSEQ=$(awk '$1 == "Grid" { exit } $1 ~ /^Qualifying/ { printf "%s ", $1 }' <<< "$PHASES")
 QWANT=$(for _ in 1 2 3; do printf 'QualifyingReading QualifyingQuestion QualifyingResult '; done)
-if [[ "$QSEQ" == "$QWANT" ]]; then
+if [[ "$RESTART" == "1" && "$RESTART_PHASE" == "qualifying" ]]; then
+  # A graceful server stop can drain a pending answer and its result before the sockets close.
+  if [[ "$QSEQ" != "QualifyingReading QualifyingQuestion " && "$QSEQ" != "QualifyingReading QualifyingQuestion QualifyingResult " ]]; then
+    log "qualifying: interrupted prefix WRONG: $QSEQ"
+    QUALI_FAIL=1
+  else
+    log "qualifying: interrupted in the first lap, before the second reading or grid"
+  fi
+elif [[ "$QSEQ" == "$QWANT" ]]; then
   log "qualifying: QualifyingReading → QualifyingQuestion → QualifyingResult for laps 1–3, then Grid"
 else
   log "qualifying: WRONG phases before the Grid: '${QSEQ% }' (want '${QWANT% }')"
@@ -1388,6 +1419,7 @@ else
 fi
 race=0
 for plog in "$OUT/phones.log" "$OUT/phones-rematch.log"; do
+  [[ "$RESTART" != "1" || "$RESTART_PHASE" != "qualifying" ]] || break
   [[ -f "$plog" ]] || continue
   race=$((race + 1))
   want=$(grep -oE 'QUALI order .*' "$plog" | tail -1 | cut -d' ' -f3-)
@@ -1424,7 +1456,8 @@ if [[ "$RESTART" == "1" ]]; then
     if [[ -n "$PARKED" ]]; then
       log "restart: the race left the air mid-phase · line $PARKED"
       # Nothing of the cut-off race may start once it is off the air (narration, anthem, effects): only the lobby loop.
-      LEFT=$(awk -v from="$PARKED" 'NR > from && /^AUDIO / && $0 != "AUDIO Music lobby-loop"' "$OUT/tv.log")
+      LEFT=$(awk -v from="$PARKED" -v again="$RESTART_AGAIN" 'NR > from && again == "1" && /^REDLINE DriverSelect round / { exit }
+        NR > from && /^AUDIO / && $0 != "AUDIO Music lobby-loop"' "$OUT/tv.log")
       if [[ -n "$LEFT" ]]; then
         log "restart: sound from the race after it was parked:"
         echo "$LEFT"
@@ -1442,6 +1475,19 @@ if [[ "$RESTART" == "1" ]]; then
       n=$(after "$NOTE" '$0 == "LOBBY " code')
       [[ -n "$n" ]] && log "restart: results with the note · line $NOTE, then the lobby of $CODE · line $n" || restart_fail "LOBBY $CODE after the results"
     fi
+  fi
+  if [[ "$RESTART_PHASE" != "round2" ]]; then
+    case "$RESTART_PHASE" in
+      qualifying) wanted=QualifyingQuestion ;; question) wanted=Question ;; reveal) wanted=Reveal ;;
+      anthem) wanted=Anthem ;; champagne) wanted=Champagne ;;
+    esac
+    last=$(awk -v to="$RESTART_AT" 'NR <= to && /^REDLINE [A-Za-z]+ round / { phase=$2 } END {print phase}' "$OUT/tv.log")
+    [[ "$last" == "$wanted" ]] && log "restart: TV interrupted during $wanted" || restart_fail "TV phase $wanted at cut (was $last)"
+  fi
+  if [[ "$RESTART_AGAIN" == "1" ]]; then
+    grep -q 'RESTART_AGAIN OK:' "$OUT/phones.log" || restart_fail "VIP starts a new race after recovery"
+    again=$(after "${PARKED:-0}" '/^REDLINE DriverSelect round /')
+    [[ -n "$again" ]] && log "restart: new DriverSelect after recovery · line $again" || restart_fail "new DriverSelect on TV"
   fi
 fi
 

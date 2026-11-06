@@ -338,6 +338,10 @@ Everything lands in one folder (`ARCBOX_E2E_OUT`, default `/tmp/arcbox-tv-e2e-<t
 |---|---|---|
 | `GODOT` | `godot` on PATH | Godot 4.7.2 .NET binary |
 | `ARCBOX_FULL` | – | `1`: whole race, results, back to the lobby |
+| `ARCBOX_RESTART` | – | `1`: restart the server on the same database and URL; require the same room, interruption results, lobby, and no race audio after parking |
+| `ARCBOX_RESTART_PHASE` | round2 | With REDLINE restart: `qualifying`, `question`, `reveal`, `anthem`, `champagne`, or the original `round2` target. Waits for both the phone and TV to reach that phase. Podium targets play the full race first. |
+| `ARCBOX_RESTART_AGAIN` | 0 | `1`: after REDLINE restart recovery, the VIP starts another race; every phone and the TV must reach Driver Select |
+| `ARCBOX_SWAP` | – | `1`: replace phone 2 mid-question, reject its old secret, and finish the race with its original seat listed once |
 | `ARCBOX_PHONES` | 3 | bot phones |
 | `ARCBOX_PACE` | 4 | bots' reading-time multiplier: 1–9 s per decision, so each phase stays on the TV long enough to be captured (qualifying answers: see above) |
 | `TV_RES`, `TV_PRESET` | 1280x720, low | anything bigger or prettier can't keep up with real-time phases in software |
@@ -347,3 +351,12 @@ Everything lands in one folder (`ARCBOX_E2E_OUT`, default `/tmp/arcbox-tv-e2e-<t
 Linux only. Needs the .NET 10 SDK, Node 22 with Playwright's Chromium, `Xvfb`, Mesa's Vulkan driver
 (`mesa-vulkan-drivers`) and `curl`. The TV always renders on the Xvfb display, so in software even on a machine
 with a GPU: the script checks that everything works together, not how fast it runs.
+
+For #24's restart matrix, run `ARCBOX_RESTART=1 ARCBOX_RESTART_PHASE=<phase> tools/tv-e2e.sh` once for each
+explicit phase above. Add `ARCBOX_RESTART_AGAIN=1` to the question run. A graceful shutdown may finish a pending
+qualifying answer before disconnecting; the qualifying case checks the interrupted first-lap prefix instead of
+requiring a completed three-lap grid. All other runs retain the full qualifying checks. A rematch may start new
+audio only after the next Driver Select; the interrupted scene must remain silent until then.
+
+These browser runs do not replace testing a physical phone locked across a restart or a second physical phone
+taking its seat. Check those separately, along with listening to the normal podium ending for a cut-off line or cork.

@@ -42,7 +42,8 @@ public interface IPreloadScene
     void Preload();
 
     /// <summary>The game on screen is over: stop drawing and be ready to start again (<see cref="PreloadDone"/>).</summary>
-    void Park();
+    /// <param name="resultMessage">The ending's message, including a server-restart interruption when applicable.</param>
+    void Park(string? resultMessage = null);
 
     bool PreloadDone { get; }
 

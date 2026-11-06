@@ -1,0 +1,27 @@
+Running tests from /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+failed Redline.Presentation.Tests.Audio.RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(phase: Champagne) (1ms)
+  from /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+  Assert.True() Failure
+  Expected: True
+  Actual:   False
+    at Redline.Presentation.Tests.Audio.RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(RacePhase phase) in /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/Audio/RaceInterruptionTests.cs:29
+    at InvokeStub_RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(Object, Span`1)
+    at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Redline.Presentation.Tests.Audio.RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(phase: Chequered) (0ms)
+  from /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+  Assert.True() Failure
+  Expected: True
+  Actual:   False
+    at Redline.Presentation.Tests.Audio.RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(RacePhase phase) in /workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/Audio/RaceInterruptionTests.cs:29
+    at InvokeStub_RaceInterruptionTests.A_server_restart_interrupts_even_the_last_podium_phase(Object, Span`1)
+    at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+/workspace/arcbox-secrets/games/Redline/Redline.Presentation.Tests/bin/Debug/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) failed with 2 error(s) (1s 316ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 11
+  failed: 2
+  succeeded: 9
+  skipped: 0
+  duration: 1s 576ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

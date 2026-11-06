@@ -1,0 +1,128 @@
+[tv-e2e 16:39:27] starting the server on http://127.0.0.1:43005
+[tv-e2e 16:39:31] starting the TV (1280x720, preset low)
+[tv-e2e 16:39:33] TV opened room WDVM
+[tv-e2e 16:39:33] phones: 3 bots, the server restarts mid-race
+[   0.9s] room WDVM, 3 phone(s), game redline (until the first Reveal)
+[   1.4s] waiting for the host to start the game
+[  19.5s] P1 driver-select
+[  28.0s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "What is the name of Mario's younger brother? Answers in a moment…"
+[  34.7s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  38.3s] P1 lap 1: right "Luigi" after 3.6 s
+[  38.7s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.57 s — checking…"
+[  40.1s] P2 lap 1: right "Luigi" after 5.3 s
+[  41.9s] P3 lap 1: right "Luigi" after 7.1 s
+[  42.1s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.57 s P13 so far"
+[  47.2s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "In which year did the Second World War end? Answers in a moment…"
+[  50.9s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[  54.5s] P1 lap 2: right "1945" after 3.6 s
+[  54.7s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.71 s — checking…"
+[  56.3s] P2 lap 2: right "1945" after 5.4 s
+[  57.9s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.71 s P13 so far"
+[  57.9s] P3 lap 2: WRONG (planned) "1950" after 7.1 s
+[  63.2s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "In Minecraft, which green mob sneaks up and explodes near the player? Answers in a moment…"
+[  67.9s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[  71.5s] P1 lap 3: right "Creeper" after 3.6 s
+[  71.8s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.66 s — checking…"
+[  73.6s] P2 lap 3: right "Creeper" after 5.3 s
+[  75.1s] P3 lap 3: right "Creeper" after 7.1 s
+[  75.1s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.66 s P11 so far"
+[  80.1s] P1 grid  "You're Franco Colapinto, #43, Alpine. Lights out in a moment… · Qualified P11"
+[  86.2s] rejoin: reloading P2 during throttle [P12 ROUND 1/15]
+[  86.3s] P1 throttle  [P11 ROUND 1/15]
+[  86.4s] rejoin: P2 back on throttle [P12 ROUND 1/15]
+[  91.7s] P1 throttle-locked  [P11 ROUND 1/15]  "Locked in: CRUISE. Waiting for the other drivers…"
+[  95.0s] P1 reading  [CRUISE P11 ROUND 1/15]  "What is the largest ocean on Earth? Answers open in a moment…"
+[  98.1s] P1 question  [CRUISE P11 ROUND 1/15]
+[ 100.6s] P1 answered  [P11 ROUND 1/15]  "Answer locked. Eyes on the TV!"
+[ 106.4s] P1 reveal  [P16 ROUND 1/15]  "Correct! +1 · now P16"
+[ 113.4s] P1 throttle  [P16 ROUND 2/15]
+[ 115.5s] P1 throttle-locked  [P16 ROUND 2/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 122.5s] P1 reading  [PUSH P16 ROUND 2/15]  "How many rings are there on the Olympic flag? Answers open in a moment…"
+[ 126.2s] P1 question  [PUSH P16 ROUND 2/15]
+[ 135.2s] P1 reveal  [P19 ROUND 2/15]  "Wrong answer. −1 · now P19"
+[ 135.5s] RESTART now: P1 on reveal [P19 ROUND 2/15]
+[tv-e2e 16:41:50] restart: stopping the server mid-race (TV log at line 208)
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:43005/hub?id=zaqOQZOt9POsk7DecVD33Q' failed: Error during WebSocket handshake: Unexpected response code: 404
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:43005/hub?id=hLL89RR15AJaR-fIgF-bBw' failed: Error during WebSocket handshake: Unexpected response code: 404
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:43005/hub?id=2TRS4ldaWA2xTcK7IXNJ3g' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:50.619Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 136.0s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:50.619Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 136.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:43005/hub?id=XqEtb-tpY5G8V8DeueYlvA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 136.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:50.625Z] Error: Failed to start the transport 'WebSockets': Error: WebSocket failed to connect. The connection could not be found on the server, either the endpoint may not be a SignalR endpoint, the connection ID is not present on the server, or there is a proxy blocking WebSockets. If you have multiple servers check that sticky sessions are enabled.
+[ 136.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 136.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:50.630Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 136.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:50.630Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:51.627Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:51.627Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:51.632Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 137.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:51.632Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:53.629Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:53.630Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:53.634Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 139.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:53.634Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 140.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:43005/hub?id=_rlZPl__sF0KqEnusiPV4A' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 140.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:55.164Z] Error: Connection disconnected with error 'Error: WebSocket closed with status code: 1006 (no reason given).'.
+[ 140.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 140.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:55.176Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 140.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:55.179Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:41:55] server stopped
+[ 141.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 141.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:56.184Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 141.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:56.184Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:41:57] restart: starting it again on http://127.0.0.1:43005 with /workspace/issue24/reveal/arcbox.db
+[ 143.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 143.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:58.192Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 143.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:41:58.192Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:58.632Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e1&devName=Bot1): [2026-11-05T16:41:58.632Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:58.659Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 144.1s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e2&devName=Bot2): [2026-11-05T16:41:58.659Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 148.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 148.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:42:03.195Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 148.6s] console error (http://127.0.0.1:43005/?room=WDVM&slot=e2e3&devName=Bot3): [2026-11-05T16:42:03.195Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[tv-e2e 16:42:04] restart: the server is back
+[ 154.4s] P1 results
+[ 158.9s] restart: every phone shows "Game interrupted: the server restarted."
+[ 159.3s] P1 lobby
+[ 159.3s] restart: every phone back in room WDVM's lobby
+[ 159.7s] qualifying plan: P1 COL 3/3 laps, 10.50 s; P2 HUL 3/3 laps, 15.75 s; P3 BOT 2/3 laps, 14.00 s
+[ 159.7s] QUALI order COL HUL BOT
+[ 159.7s] phases seen on P1: driver-select, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, answered, reveal, results, lobby
+
+OK
+Screenshots: /workspace/issue24/reveal/phones
+[tv-e2e 16:42:23] letting the TV finish its shots (2 s)
+[tv-e2e 16:42:26] TV stopped
+[tv-e2e 16:42:27] Xvfb stopped
+[tv-e2e 16:42:27] server stopped
+[tv-e2e 16:42:27] screenshots: 42 from the TV in /workspace/issue24/reveal/tv, 27 from phone 1 in /workspace/issue24/reveal/phones
+[tv-e2e 16:42:27] TV phases: DriverSelect(0) QualifyingReading(L1) QualifyingQuestion(L1) QualifyingResult(L1) QualifyingReading(L2) QualifyingQuestion(L2) QualifyingResult(L2) QualifyingReading(L3) QualifyingQuestion(L3) QualifyingResult(L3) Grid(0) Throttle(1) Reading(1) Question(1) Reveal(1) Throttle(2) Reading(2) Question(2) Reveal(2)
+[tv-e2e 16:42:27] audio: qualifying start · AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+[tv-e2e 16:42:27] audio: pole position · AUDIO Voice redline.announcer: Pole position for Verstappen, 5.33 seconds in total!
+[tv-e2e 16:42:27] audio: start beep 1 · AUDIO Sfx start-beep #1
+[tv-e2e 16:42:27] audio: start beep 2 · AUDIO Sfx start-beep #2
+[tv-e2e 16:42:27] audio: start beep 3 · AUDIO Sfx start-beep #3
+[tv-e2e 16:42:27] audio: start beep 4 · AUDIO Sfx start-beep #4
+[tv-e2e 16:42:27] audio: start beep 5 · AUDIO Sfx start-beep #5
+[tv-e2e 16:42:27] audio: lights out · AUDIO Sfx lights-out
+[tv-e2e 16:42:27] audio: round 1 commentary · AUDIO Voice redline.announcer: And it's lights out!
+[tv-e2e 16:42:27] audio: question read out · AUDIO Voice redline.questions: What is the largest ocean on Earth?
+[tv-e2e 16:42:27] audio: Reveal sting or buzz · AUDIO Sfx correct
+[tv-e2e 16:42:27] audio: the answer · AUDIO Voice redline.announcer: The answer is Pacific Ocean.
+[tv-e2e 16:42:27] qualifying: QualifyingReading → QualifyingQuestion → QualifyingResult for laps 1–3, then Grid
+[tv-e2e 16:42:27] qualifying: race 1: bots on the grid as they qualified: COL HUL BOT · REDLINE grid VER ALO ANT HAM PIA RUS LEC LAW HAD STR COL HUL GAS SAI LIN BOR BEA BOT NOR ALB OCO PER
+[tv-e2e 16:42:27] restart: TV back in room WDVM · line 209
+[tv-e2e 16:42:27] restart: the race left the air mid-phase · line 220
+[tv-e2e 16:42:27] restart: no sound after the park but the lobby loop
+[tv-e2e 16:42:27] restart: results with the note · line 223, then the lobby of WDVM · line 227
+[tv-e2e 16:42:27] restart: TV interrupted during Reveal
+[tv-e2e 16:42:27] narrator: no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off | Off | Google | voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low | server voice unavailable (Unavailable 503); built-in voice for 60 s
+[tv-e2e 16:42:27] audio: 84 AUDIO lines in /workspace/issue24/reveal/audio.log
+[tv-e2e 16:42:27] OK

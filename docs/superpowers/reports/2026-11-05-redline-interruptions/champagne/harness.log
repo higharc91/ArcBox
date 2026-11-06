@@ -1,0 +1,205 @@
+[tv-e2e 16:50:21] starting the server on http://127.0.0.1:33659
+[tv-e2e 16:50:25] starting the TV (1280x720, preset low)
+[tv-e2e 16:50:26] TV opened room GKMM
+[tv-e2e 16:50:26] phones: 3 bots, the server restarts mid-race
+[   0.6s] room GKMM, 3 phone(s), game redline (restart at champagne)
+[   0.9s] waiting for the host to start the game
+[  13.8s] P3 sits out driver-select: the phase timer decides
+[  13.8s] P1 driver-select
+[  29.6s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "Which 1993 Spielberg film is about a theme park of cloned dinosaurs? Answers in a moment…"
+[  37.8s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  41.4s] P1 lap 1: right "Jurassic Park" after 3.5 s
+[  41.7s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.57 s — checking…"
+[  43.2s] P2 lap 1: right "Jurassic Park" after 5.3 s
+[  45.0s] P3 lap 1: right "Jurassic Park" after 7.0 s
+[  45.1s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.57 s P9 so far"
+[  50.0s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "On which continent is the Sahara Desert found? Answers in a moment…"
+[  53.8s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[  57.3s] P1 lap 2: right "Africa" after 3.5 s
+[  57.5s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.79 s — checking…"
+[  58.9s] P2 lap 2: right "Africa" after 5.3 s
+[  60.7s] P3 lap 2: WRONG (planned) "South America" after 7.1 s
+[  60.9s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.79 s P7 so far"
+[  65.7s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "In Minecraft, which green mob sneaks up and explodes near the player? Answers in a moment…"
+[  70.9s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[  74.4s] P1 lap 3: right "Creeper" after 3.5 s
+[  74.7s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.84 s — checking…"
+[  76.1s] P2 lap 3: right "Creeper" after 5.3 s
+[  77.8s] P3 lap 3: right "Creeper" after 7.0 s
+[  78.1s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.84 s P4 so far"
+[  82.8s] P1 grid  "You're Lance Stroll, #18, Aston Martin. Lights out in a moment… · Qualified P4"
+[  89.0s] rejoin: reloading P2 during throttle [P6 ROUND 1/15]
+[  89.1s] P1 throttle  [P4 ROUND 1/15]
+[  89.1s] rejoin: P2 back on throttle [P6 ROUND 1/15]
+[  92.5s] P1 throttle-locked  [P4 ROUND 1/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[  97.9s] P1 reading  [PUSH P4 ROUND 1/15]  "In chess, which piece can only ever move diagonally? Answers open in a moment…"
+[ 101.8s] P1 question  [PUSH P4 ROUND 1/15]
+[ 107.9s] P1 reveal  [P10 ROUND 1/15]  "Wrong answer. No change · P10"
+[ 114.7s] P1 throttle  [P10 ROUND 2/15]
+[ 121.1s] P1 reading  [CRUISE P10 ROUND 2/15]  "How many sides does a hexagon have? Answers open in a moment…"
+[ 124.0s] P1 question  [CRUISE P10 ROUND 2/15]
+[ 126.9s] P1 answered  [P10 ROUND 2/15]  "Answer locked. Eyes on the TV!"
+[ 131.9s] P1 reveal  [P15 ROUND 2/15]  "Correct! +1 · now P15"
+[ 138.9s] P1 throttle  [P15 ROUND 3/15]
+[ 141.3s] P1 throttle-locked  [P15 ROUND 3/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 145.2s] P1 reading  [PUSH P15 ROUND 3/15]  "What is the chemical symbol for gold? Answers open in a moment…"
+[ 148.4s] P1 question  [PUSH P15 ROUND 3/15]
+[ 154.1s] P1 answered  [P15 ROUND 3/15]  "Answer locked. Eyes on the TV!"
+[ 156.5s] P1 reveal  [P19 ROUND 3/15]  "Wrong answer. −1 · now P19"
+[ 163.7s] P1 throttle  [P19 ROUND 4/15]
+[ 165.4s] P1 throttle-locked  [P19 ROUND 4/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 167.9s] P1 reading  [PUSH P19 ROUND 4/15]  "Which city was divided by a wall from 1961 until 1989? Answers open in a moment…"
+[ 172.3s] P1 question  [PUSH P19 ROUND 4/15]
+[ 177.6s] P1 answered  [P19 ROUND 4/15]  "Answer locked. Eyes on the TV!"
+[ 180.8s] P1 reveal  [P20 ROUND 4/15]  "Wrong answer. No change · P20"
+[ 187.7s] P1 throttle  [P20 ROUND 5/15]
+[ 192.4s] P1 throttle-locked  [P20 ROUND 5/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 195.9s] P1 reading  [PUSH P20 ROUND 5/15]  "Who composed the Ninth Symphony that ends with the "Ode to Joy"? Answers open in a moment…"
+[ 200.8s] P1 question  [PUSH P20 ROUND 5/15]
+[ 205.1s] P1 answered  [P20 ROUND 5/15]  "Answer locked. Eyes on the TV!"
+[ 209.7s] P1 reveal  [P20 ROUND 5/15]  "Wrong answer. No change · P20"
+[ 216.8s] P1 throttle  [P20 ROUND 6/15]
+[ 219.5s] P1 throttle-locked  [P20 ROUND 6/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 222.7s] P1 reading  [REDLINE P20 ROUND 6/15]  "How many days are there in a leap year? Answers open in a moment…"
+[ 226.6s] P1 question  [REDLINE P20 ROUND 6/15]
+[ 234.9s] P1 reveal  [P20 ROUND 6/15]  "Spun out! Pit limiter next round · P20"
+[ 241.6s] P1 throttle-locked  [P20 ROUND 7/15]  "Pit limiter: you're on Cruise this round."
+[ 248.4s] P1 reading  [CRUISE P20 ROUND 7/15]  "How many rings are there on the Olympic flag? Answers open in a moment…"
+[ 251.9s] P1 question  [CRUISE P20 ROUND 7/15]
+[ 257.0s] P1 answered  [P20 ROUND 7/15]  "Answer locked. Eyes on the TV!"
+[ 258.1s] P1 reveal  [P21 ROUND 7/15]  "Wrong answer. No change · P21"
+[ 265.0s] P1 throttle  [P21 ROUND 8/15]
+[ 270.2s] P1 reading  [CRUISE P21 ROUND 8/15]  "Which currency was launched as an electronic currency in 1999, with notes following in 2002? Answers open in a moment…"
+[ 276.0s] P1 question  [CRUISE P21 ROUND 8/15]
+[ 282.6s] P1 reveal  [P20 ROUND 8/15]  "Wrong answer. No change · P20"
+[ 289.8s] P1 throttle  [P20 ROUND 9/15]
+[ 292.7s] P1 reading  [PUSH P20 ROUND 9/15]  "In tennis, what is the word for a score of zero? Answers open in a moment…"
+[ 297.3s] P1 question  [PUSH P20 ROUND 9/15]
+[ 297.3s] P1 sits out question: the phase timer decides
+[ 317.5s] P1 reveal  [P21 ROUND 9/15]  "No answer. No change · P21"
+[ 324.3s] P1 throttle  [P21 ROUND 10/15]
+[ 327.7s] P1 throttle-locked  [P21 ROUND 10/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 333.4s] P1 reading  [PUSH P21 ROUND 10/15]  "In Disney's Frozen, what is the name of the living snowman? Answers open in a moment…"
+[ 338.2s] P1 question  [PUSH P21 ROUND 10/15]
+[ 344.1s] P1 reveal  [P21 ROUND 10/15]  "Wrong answer. No change · P21"
+[ 351.1s] P1 throttle  [P21 ROUND 11/15]
+[ 357.3s] P1 reading  [REDLINE P21 ROUND 11/15]  "Which river flows through the centre of Paris? Answers open in a moment…"
+[ 360.6s] P1 question  [REDLINE P21 ROUND 11/15]
+[ 368.5s] P1 reveal  [P21 ROUND 11/15]  "Spun out! Pit limiter next round · P21"
+[ 375.4s] P1 chequered  [P21 ROUND 11/15]  "You finished P21 of 22."
+[ 385.4s] P1 anthem  [P21 ROUND 11/15]
+[ 401.4s] P1 champagne  [P21 ROUND 11/15]
+[ 401.8s] RESTART now: P1 on champagne [P21 ROUND 11/15]
+[tv-e2e 16:57:09] restart: stopping the server mid-race (TV log at line 507)
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:33659/hub?id=GPxNfyX0oWP5tHZl5bHVFg' failed: Error during WebSocket handshake: Unexpected response code: 404
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): WebSocket connection to 'ws://127.0.0.1:33659/hub?id=f1lavTDmHFDnNpBGkyLLhw' failed: Error during WebSocket handshake: Unexpected response code: 404
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:09.368Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:09.369Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): WebSocket connection to 'ws://127.0.0.1:33659/hub?id=P4sCyThEeuVje85CRDZYig' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:09.383Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:09.383Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): WebSocket connection to 'ws://127.0.0.1:33659/hub?id=e3U1Aou9t0OSRIVfRo_qlw' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:09.389Z] Error: Failed to start the transport 'WebSockets': Error: WebSocket failed to connect. The connection could not be found on the server, either the endpoint may not be a SignalR endpoint, the connection ID is not present on the server, or there is a proxy blocking WebSockets. If you have multiple servers check that sticky sessions are enabled.
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:09.397Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:09.397Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 402.7s] P3 pops the cork at 1.00 (pop 1)
+[ 402.7s] P1 pops the cork at 1.00 (pop 1)
+[ 403.0s] P2 pops the cork at 1.00 (pop 1)
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:10.372Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:10.372Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:10.385Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:10.385Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:10.400Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 403.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:10.400Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 404.0s] P3 pops the cork at 0.30 (pop 2)
+[ 405.0s] P1 pops the cork at 0.65 (pop 2)
+[ 405.1s] P2 pops the cork at 0.55 (pop 2)
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:12.383Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:12.384Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:12.391Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:12.391Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:12.404Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:12.404Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 405.5s] P3 pops the cork at 0.25 (pop 3)
+[ 407.0s] P2 pops the cork at 0.55 (pop 3)
+[ 407.1s] P3 pops the cork at 0.35 (pop 4)
+[ 407.2s] P1 pops the cork at 0.70 (pop 3)
+[tv-e2e 16:57:14] server stopped
+[ 408.7s] P3 pops the cork at 0.30 (pop 5)
+[ 409.0s] P2 pops the cork at 0.55 (pop 4)
+[tv-e2e 16:57:16] restart: starting it again on http://127.0.0.1:33659 with /workspace/issue24/champagne/arcbox.db
+[ 410.1s] P1 pops the cork at 0.75 (pop 4)
+[ 410.1s] P3 pops the cork at 0.25 (pop 6)
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:17.392Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e2&devName=Bot2): [2026-11-05T16:57:17.392Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:17.398Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e1&devName=Bot1): [2026-11-05T16:57:17.399Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): Failed to load resource: net::ERR_CONNECTION_REFUSED
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:17.414Z] Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 410.4s] console error (http://127.0.0.1:33659/?room=GKMM&slot=e2e3&devName=Bot3): [2026-11-05T16:57:17.414Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: TypeError: Failed to fetch
+[ 411.6s] P2 pops the cork at 0.55 (pop 5)
+[ 411.6s] P3 pops the cork at 0.25 (pop 7)
+[ 412.4s] P1 pops the cork at 0.65 (pop 5)
+[ 413.3s] P3 pops the cork at 0.30 (pop 8)
+[ 413.5s] P2 pops the cork at 0.45 (pop 6)
+[tv-e2e 16:57:21] restart: the server is back
+[ 414.8s] P3 pops the cork at 0.25 (pop 9)
+[ 415.2s] P1 pops the cork at 0.70 (pop 6)
+[ 415.3s] P2 pops the cork at 0.50 (pop 7)
+[ 416.6s] P3 pops the cork at 0.35 (pop 10)
+[ 417.4s] P2 pops the cork at 0.55 (pop 8)
+[ 417.6s] P1 pops the cork at 0.70 (pop 7)
+[ 417.9s] P3 pops the cork at 0.30 (pop 11)
+[ 419.0s] P2 pops the cork at 0.50 (pop 9)
+[ 419.3s] P3 pops the cork at 0.30 (pop 12)
+[ 420.0s] P1 pops the cork at 0.65 (pop 8)
+[ 420.6s] P1 results
+[ 420.6s] restart: every phone shows "Game interrupted: the server restarted."
+[ 420.8s] restart: every phone back in room GKMM's lobby
+[ 421.5s] P3 bottle: locator.click: Timeout 1000ms exceeded.
+[ 421.5s] P2 bottle: locator.click: Timeout 1000ms exceeded.
+[ 421.8s] qualifying plan: P1 STR 3/3 laps, 10.50 s; P2 HAD 3/3 laps, 15.75 s; P3 PER 2/3 laps, 14.00 s
+[ 421.8s] QUALI order STR HAD PER
+[ 421.8s] phases seen on P1: driver-select, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, reveal, answered, chequered, anthem, champagne, results
+
+OK
+Screenshots: /workspace/issue24/champagne/phones
+[tv-e2e 16:57:32] letting the TV finish its shots (2 s)
+[tv-e2e 16:57:35] TV stopped
+[tv-e2e 16:57:35] Xvfb stopped
+[tv-e2e 16:57:36] server stopped
+[tv-e2e 16:57:36] screenshots: 111 from the TV in /workspace/issue24/champagne/tv, 30 from phone 1 in /workspace/issue24/champagne/phones
+[tv-e2e 16:57:36] TV phases: DriverSelect(0) QualifyingReading(L1) QualifyingQuestion(L1) QualifyingResult(L1) QualifyingReading(L2) QualifyingQuestion(L2) QualifyingResult(L2) QualifyingReading(L3) QualifyingQuestion(L3) QualifyingResult(L3) Grid(0) Throttle(1) Reading(1) Question(1) Reveal(1) Throttle(2) Reading(2) Question(2) Reveal(2) Throttle(3) Reading(3) Question(3) Reveal(3) Throttle(4) Reading(4) Question(4) Reveal(4) Throttle(5) Reading(5) Question(5) Reveal(5) Throttle(6) Reading(6) Question(6) Reveal(6) Throttle(7) Reading(7) Question(7) Reveal(7) Throttle(8) Reading(8) Question(8) Reveal(8) Throttle(9) Reading(9) Question(9) Reveal(9) Throttle(10) Reading(10) Question(10) Reveal(10) Throttle(11) Reading(11) Question(11) Reveal(11) Chequered(11) Anthem(11) Champagne(11)
+[tv-e2e 16:57:36] audio: qualifying start · AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+[tv-e2e 16:57:36] audio: pole position · AUDIO Voice redline.announcer: Pole position for Russell, 6.47 seconds in total!
+[tv-e2e 16:57:36] audio: start beep 1 · AUDIO Sfx start-beep #1
+[tv-e2e 16:57:36] audio: start beep 2 · AUDIO Sfx start-beep #2
+[tv-e2e 16:57:36] audio: start beep 3 · AUDIO Sfx start-beep #3
+[tv-e2e 16:57:36] audio: start beep 4 · AUDIO Sfx start-beep #4
+[tv-e2e 16:57:36] audio: start beep 5 · AUDIO Sfx start-beep #5
+[tv-e2e 16:57:36] audio: lights out · AUDIO Sfx lights-out
+[tv-e2e 16:57:36] audio: round 1 commentary · AUDIO Voice redline.announcer: And it's lights out!
+[tv-e2e 16:57:36] audio: question read out · AUDIO Voice redline.questions: In chess, which piece can only ever move diagonally?
+[tv-e2e 16:57:36] audio: Reveal sting or buzz · AUDIO Sfx wrong
+[tv-e2e 16:57:36] audio: the answer · AUDIO Voice redline.announcer: The answer is Bishop.
+[tv-e2e 16:57:36] qualifying: QualifyingReading → QualifyingQuestion → QualifyingResult for laps 1–3, then Grid
+[tv-e2e 16:57:36] qualifying: race 1: bots on the grid as they qualified: STR HAD PER · REDLINE grid RUS PIA VER STR BEA HAD HAM BOR GAS LAW LEC NOR ALB BOT COL OCO SAI PER HUL ANT LIN ALO
+[tv-e2e 16:57:36] restart: TV back in room GKMM · line 508
+[tv-e2e 16:57:36] restart: the race left the air mid-phase · line 515
+[tv-e2e 16:57:36] restart: no sound after the park but the lobby loop
+[tv-e2e 16:57:36] restart: results with the note · line 517, then the lobby of GKMM · line 522
+[tv-e2e 16:57:36] restart: TV interrupted during Champagne
+[tv-e2e 16:57:36] narrator: no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off | Off | Google | voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low | server voice unavailable (Unavailable 503); built-in voice for 60 s
+[tv-e2e 16:57:36] audio: 257 AUDIO lines in /workspace/issue24/champagne/audio.log
+[tv-e2e 16:57:36] OK

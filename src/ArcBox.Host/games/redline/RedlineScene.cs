@@ -172,11 +172,11 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     /// from a spin. A race that ran to its end parks as it always has, its last line or cork pop ringing out.
     /// </para>
     /// </summary>
-    public void Park()
+    public void Park(string? resultMessage = null)
     {
         _warm = WarmState.Ready;
         _pendingShots.Clear();
-        var interrupted = RaceInterruption.WasInterrupted(_view?.Phase);
+        var interrupted = RaceInterruption.WasInterrupted(_view?.Phase, resultMessage);
         _view = null;
         _podium?.HideCeremony();
         Hide3D();
