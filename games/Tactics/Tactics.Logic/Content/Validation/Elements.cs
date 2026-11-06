@@ -58,6 +58,7 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<PassiveDef>(e, file, ptr);
+            RejectHpPercent(def?.Static, file, Pointer.Append(ptr, "static"));
             if (def?.When is { } when)
                 When(when, file, Pointer.Append(ptr, "when"));
             return def;
@@ -81,6 +82,7 @@ internal sealed partial class Validation
             if (!ok)
                 return null;
             var def = Deserialize<ConditionDef>(e, file, ptr);
+            RejectHpPercent(def?.Static, file, Pointer.Append(ptr, "static"));
             if (def?.DamageTaken is { } damage)
             {
                 var at = Pointer.Append(ptr, "damageTaken");
@@ -99,6 +101,12 @@ internal sealed partial class Validation
         });
 
     private const string NoMaxHp = "A condition can't change max HP (only passives and injuries do, when a character's sheet is built).";
+
+    private void RejectHpPercent(StaticMods? mods, string file, string ptr)
+    {
+        if (mods is { MaxHpPercent: not 0 })
+            Error(file, Pointer.Append(ptr, "maxHpPercent"), "Only injuries support percentage max HP modifiers.");
+    }
 
     /// <summary>A race: its racial ability and trait passives.</summary>
     public RaceDef? Race(JsonElement e, string file, string ptr)

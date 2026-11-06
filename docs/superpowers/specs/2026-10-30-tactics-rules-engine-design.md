@@ -167,7 +167,7 @@ This spec defines that seam (`Battle`, `Ai.Plan`, `BattleResult`) but doesn't bu
   - class and race features as their data says.
 - **Ties** go to player-controlled units first, then higher DEX, then the fixed unit-id order. There are no initiative rolls, so the phone's "you're up in 3" is exact for the current round.
 - The order is **re-sorted every round**, so speed changes take effect next round. The Chronomancer's turn manipulation (§4.2, `turnOrder` block) edits the current round's order directly.
-- **Delay(n)** moves your turn n places later in the current round, without using any of the turn's economy.
+- **Delay(n)** moves your turn n places later without using any of the turn's economy. The delayed position persists into later rounds, behind the same unit (or at the end), so waiting cannot grant consecutive turns across the round boundary (#105).
 - A unit spawned mid-round joins the order from the next round, unless the spawn says otherwise.
 
 ### 3.3 A turn
@@ -237,7 +237,7 @@ This spec defines that seam (`Battle`, `Ai.Plan`, `BattleResult`) but doesn't bu
 
 ### 3.8 Downed, Out and injuries
 - A player character at **0 HP** becomes **Downed**: prone and incapacitated, with a **countdown of 3**. The TV shows the countdown over them.
-- The countdown drops by 1 at the **start of each new round**, and by 1 for each hit taken while Downed (2 for a critical hit).
+- The countdown drops by 1 at the **start of each of the unit's own turns**, and by 1 for each hit taken while Downed (2 for a critical hit). This gives a newly Downed hero three own turns regardless of when in the round they fell (#105).
 - **Revive:** any healing (HP = the amount healed) or **Help** from an adjacent ally (1 HP) clears the countdown. The unit stays prone.
 - **When the countdown reaches 0**, the character is **Out**: removed from the battle with a `UnitOut` event, and given an **Injury** from `injuries.json`. The table is weighted, the injury is rolled from the battle RNG, and examples include "Cracked ribs: −5 max HP" and "Concussion: −1 INT and WIS saves". Injuries go in `BattleResult` and persist in the campaign until healed in town (sub-project 5).
 - **Enemies** die at 0 HP. Bosses get their phases from triggers (§4.8), for example "at 0 HP the first time, heal to 50% and gain Phase 2 abilities".

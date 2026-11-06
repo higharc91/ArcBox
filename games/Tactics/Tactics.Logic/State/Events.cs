@@ -150,7 +150,7 @@ public sealed record Retargeted(UnitId Unit, UnitId Target) : BattleEvent;
 /// <summary>A unit dropped to 0 HP and is Downed: prone, unable to act, with a countdown of 3 (spec §3.8).</summary>
 public sealed record Downed(UnitId Unit) : BattleEvent;
 
-/// <summary>A Downed unit's countdown dropped (a new round, or a hit) to <see cref="Left"/>; at 0 the unit goes Out.</summary>
+/// <summary>A Downed unit's countdown dropped (its own turn starts, or a hit) to <see cref="Left"/>; at 0 the unit goes Out.</summary>
 public sealed record CountdownTicked(UnitId Unit, int Left) : BattleEvent;
 
 /// <summary>A Downed unit got back up with <see cref="Hp"/> HP (healing, or Help at 1 HP).</summary>

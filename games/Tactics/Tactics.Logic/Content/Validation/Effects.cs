@@ -147,6 +147,7 @@ internal sealed partial class Validation
                 NeedsConcentration(summon.Concentration, concentration, file, At("concentration"));
                 break;
             case StatModEffect statMod:
+                RejectHpPercent(statMod.Mods, file, At("mods"));
                 NeedsConcentration(statMod.Concentration, concentration, file, At("concentration"));
                 break;
             case TransformEffect transform:

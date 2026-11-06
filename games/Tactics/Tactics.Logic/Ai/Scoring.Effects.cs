@@ -125,7 +125,8 @@ internal sealed partial class Scorer
             case MarkEffect mark:
                 {
                     var condition = MarkBlock.ConditionOf(mark);
-                    if (!Hostile(st.User, target) || target.Conditions.Any(c => c.Mark && c.Id == condition && c.Source == st.User.Id))
+                    if (!Hostile(st.User, target) || target.Conditions.Any(c => (c.Mark || c.Id == MarkBlock.Condition)
+                            && c.Id == condition && c.Source == st.User.Id))
                         return Outcome.None;
                     var turns = Turns(mark.Rounds, untilSave: false);
                     return new Outcome(DamageDist.Zero, Defense: -0.25 * turns, Splash: QuarryDamage(condition, st, target, turns));

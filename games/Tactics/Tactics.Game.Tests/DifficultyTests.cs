@@ -84,6 +84,9 @@ public sealed class DifficultyTests
     [InlineData("Brutal")]
     [InlineData("")]
     [InlineData("7")]
+    [InlineData("0")]
+    [InlineData("2")]
+    [InlineData("Story,Hard")]
     public void A_word_that_is_not_a_difficulty_changes_nothing(string level)
     {
         var s = new TacticsGameTests.Session();

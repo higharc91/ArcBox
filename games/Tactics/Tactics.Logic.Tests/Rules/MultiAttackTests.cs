@@ -40,6 +40,34 @@ public sealed class MultiAttackTests
     }
 
     [Fact]
+    public void An_invalid_later_target_wraps_to_an_earlier_listed_target_before_fallback()
+    {
+        var battle = TestBattle.On(Field).Party("kara", Kara, T(2, 1))
+            .Enemy("a", Gob(100), T(3, 1)).Enemy("b", Gob(1), T(2, 0)).Enemy("c", Gob(2), T(2, 2));
+        var (state, _) = battle.Start(seed: 3);
+        var use = new Use(U("kara"), Attack, new Target(Unit: U("a"))) { Targets = [U("a"), U("b"), U("b")] };
+        Assert.Equal([U("a"), U("b"), U("a")], Struck(battle.Apply(state, use).Events));
+    }
+
+    [Fact]
+    public void Cleaves_extra_die_lands_once_across_all_targets()
+    {
+        var cleave = BasePackTests.Rules.Abilities[new("weaponmaster.cleave")];
+        var battle = TestBattle.On(Field).With(cleave)
+            .Party("kara", Kara.Knowing(cleave) with { Attacks = 1, Resources = Ordinal.Map(("superiority", 1)),
+                Weapon = Kara.Weapon with { Damage = Dice.Parse("1") }, Scores = Kara.Scores.SetItem(Stat.Str, 10) }, T(2, 1))
+            .Enemy("a", Gob(100), T(3, 1)).Enemy("b", Gob(100), T(2, 0));
+        var (state, _) = battle.Start(seed: 3);
+        var (_, events) = battle.Apply(state, new Use(U("kara"), cleave.Id, new Target()));
+        Assert.Equal([U("a"), U("b")], Struck(events));
+        var attacks = events.OfType<AttackResolved>().ToArray();
+        Assert.All(attacks, hit => Assert.True(hit.Hit));
+        var damage = events.OfType<Damaged>().ToArray();
+        Assert.InRange(damage[0].Amount, attacks[0].Crit ? 4 : 2, attacks[0].Crit ? 18 : 9); // weapon + first hit's rider
+        Assert.Equal(attacks[1].Crit ? 2 : 1, damage[1].Amount);
+    }
+
+    [Fact]
     public void Each_attack_goes_to_its_listed_target_in_order()
     {
         var battle = TestBattle.On(Field)

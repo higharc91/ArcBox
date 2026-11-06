@@ -400,6 +400,24 @@ public sealed class ValidationTests
     }
 
     [Fact]
+    public void Percentage_max_hp_is_rejected_outside_injuries()
+    {
+        var errors = ErrorsOfChapter(("conditions.json", """
+            [ { "id": "bloated", "name": "Bloated", "static": { "maxHpPercent": -10 }, "tags": [] },
+              { "id": "swollen", "name": "Swollen", "passives": [ { "id": "swollen.up", "static": { "maxHpPercent": -10 } } ], "tags": [] } ]
+            """), ("abilities/hp.json", """
+            { "passives": [ { "id": "ch.hp", "static": { "maxHpPercent": -10 } } ],
+              "abilities": [ { "id": "ch.hp", "name": "HP", "tier": 0, "cost": { "action": 1 },
+              "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+              "effects": [ { "statMod": { "mods": { "maxHpPercent": -10 }, "rounds": 1 } },
+                { "zone": { "kind": "fire", "area": { "shape": "burst", "size": 1 }, "rounds": 1,
+                  "passives": [ { "id": "ch.zone.hp", "static": { "maxHpPercent": -10 } } ] } } ] } ] }
+            """));
+        Assert.Equal(5, errors.Length);
+        Assert.All(errors, error => Assert.Equal("Only injuries support percentage max HP modifiers.", error.Message));
+    }
+
+    [Fact]
     public void A_condition_cannot_change_max_hp()
     {
         var errors = ErrorsOfChapter(("conditions.json", """

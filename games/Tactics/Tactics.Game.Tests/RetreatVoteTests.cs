@@ -138,6 +138,25 @@ public sealed class RetreatVoteTests
     }
 
     [Fact]
+    public void A_vote_failing_after_a_round_boundary_blocks_reproposal_in_the_failure_round()
+    {
+        var hero = new UnitId("hero1");
+        var s = Fight(round: 3, edit: state => state with
+        {
+            Order = [.. state.Order.Where(id => id != hero), hero], TurnIndex = state.Order.Length - 1,
+        });
+        s.Send(0, "fallBack");
+        s.Send(0, "endTurn");
+        Assert.Equal(4, s.Game.Document.Battle!.State.Round);
+        No(s, 1);
+        No(s, 2);
+        Assert.Null(Vote(s));
+        Assert.Null(Panel(s, 1, "canPropose"));
+        s.Send(1, "fallBack");
+        Assert.Null(Vote(s));
+    }
+
+    [Fact]
     public void An_unanswered_vote_times_out_after_20_seconds_and_fails()
     {
         var s = Fight(round: 3);

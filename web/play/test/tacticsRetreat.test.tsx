@@ -73,7 +73,7 @@ describe("falling back from a losing battle (#111)", () => {
   });
 
   describe("the results", () => {
-    const hint = "Too hard? Change difficulty in the party menu";
+    const hint = "Too hard? After Carry on, change difficulty in the party menu";
 
     it("call a flight a retreat, with half XP shown and the difficulty hint for the VIP", () => {
       show("results-fled");

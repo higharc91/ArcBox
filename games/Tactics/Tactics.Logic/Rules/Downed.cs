@@ -153,7 +153,8 @@ public static class DownedRules
         => w.State = w.State with
         {
             Queue = w.State.Queue.RemoveAll(step => (step is RunEffectsStep { HookDepth: 0 } run && run.Source == unit)
-                                                    || (step is AttackStep { HookDepth: 0 } attack && attack.Source == unit)),
+                                                    || (step is AttackStep { HookDepth: 0 } attack && attack.Source == unit)
+                                                    || (step is StrikeStep strike && strike.Source == unit)),
         };
 
     private static void Tick(BattleWriter w, UnitId unit, int by)

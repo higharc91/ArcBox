@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
-/// <summary>A Downed unit's countdown already lost to one hit (<see cref="Resolution"/>) while that hit resolves.</summary>
 /// <summary>
 /// <see cref="Unit"/> delayed its turn to just behind <see cref="After"/> (null: to the end of the order).
 /// </summary>
 public readonly record struct DelayMark(UnitId Unit, UnitId? After);
 
+/// <summary>A Downed unit's countdown already lost to one hit (<see cref="Resolution"/>) while that hit resolves.</summary>
 public readonly record struct HitMark(int Resolution, UnitId Unit) : IComparable<HitMark>
 {
     /// <summary>Orders by resolution, then unit.</summary>

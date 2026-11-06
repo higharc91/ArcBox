@@ -361,9 +361,12 @@ public static partial class Battle
 
         // Charm protects its source, including from aimed area effects. Helpful abilities remain legal.
         var harmful = IsHarmful(ability);
+        var charmers = harmful
+            ? Conditions.Active(user, w.Rules).Where(c => c.Def.Id.Value == "charmed")
+                .Select(c => c.From.Source).OfType<UnitId>().ToImmutableSortedSet()
+            : ImmutableSortedSet<UnitId>.Empty;
         var victims = affected;
-        if (harmful && Conditions.Active(user, w.Rules).Any(c => c.Def.Id.Value == "charmed"
-                && c.From.Source is { } charmer && victims.Contains(charmer)))
+        if (victims.Any(charmers.Contains))
             return new Rejection(RejectCode.InvalidTarget, "You can't harm your charmer.");
 
         if (self || everywhere)
@@ -414,6 +417,7 @@ public static partial class Battle
             var obscured = los ? ZoneRules.Obscured(s) : ImmutableSortedSet<Tile>.Empty;
             var second = s.Units.Values
                 .Where(u => u.Id != first.Id && u.Id != user.Id && DownedRules.InBattle(u) && u.Sheet.Side == first.Sheet.Side)
+                .Where(u => !charmers.Contains(u.Id))
                 .Where(u =>
                 {
                     var d = Reach.Distance(user.Pos, u.Pos);
@@ -489,7 +493,11 @@ public static partial class Battle
     {
         Settle(w, rules);
         if (w.State.Queue.IsEmpty && (w.State.NextResolution != 0 || !w.State.DownedHits.IsEmpty))
+        {
             w.State = w.State with { NextResolution = 0, DownedHits = [] };
+            foreach (var unit in w.State.Units.Values.Where(u => u.HalvedHit is not null || u.HalvedHitDamage != 0).ToArray())
+                w.Set(unit with { HalvedHit = null, HalvedHitDamage = 0 });
+        }
         if (Invariants.Enabled)
             Invariants.Check(w.State, rules, w.Terrain);
         return new Resolution(w.Freeze(), w.Events, null);

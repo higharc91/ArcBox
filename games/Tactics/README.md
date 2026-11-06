@@ -64,7 +64,7 @@ If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dot
 
 ## Campaign difficulty (#114)
 
-A campaign has a difficulty, Story, Normal (the default, and what a document from before it reads as) or Hard, saved in the campaign document and passed through `Encounters.Setup` into every battle's `BattleState.Difficulty`: story fights, roaming mobs and Hollow fights alike. Only the VIP can change it, from the "•••" session menu on their phone, any time outside a battle (an input during a battle is refused; a battle keeps the difficulty it began at). After a lost battle the VIP's results screen says "Too hard? Change difficulty in the party menu", unless it is Story already. The TV battle HUD carries a small "Story" or "Hard" tag when it isn't Normal. There is no portal control: the portal has no campaign-settings page.
+A campaign has a difficulty, Story, Normal (the default, and what a document from before it reads as) or Hard, saved in the campaign document and passed through `Encounters.Setup` into every battle's `BattleState.Difficulty`: story fights, roaming mobs and Hollow fights alike. Only the VIP can change it, from the "•••" session menu on their phone, any time outside a battle (an input during a battle is refused; a battle keeps the difficulty it began at). After a lost battle the VIP's results screen says "Too hard? After Carry on, change difficulty in the party menu", unless it is Story already. The TV battle HUD carries a small "Story" or "Hard" tag when it isn't Normal. There is no portal control: the portal has no campaign-settings page.
 
 For testing, the Development setting `Tactics:Difficulty` (`Story`, `Normal` or `Hard`) is an override: when it is set it wins over the campaign's value for every battle (and the phone menu shows it), and the menu's changes are still saved but have no effect while it is set. It is read in Development only; leave it unset to play the campaign's own setting.
 
@@ -159,6 +159,9 @@ A pack is a folder with a `manifest.json`, and each weekly chapter is its own pa
 A pack with errors doesn't load: errors carry the file and a JSON pointer. The content hash covers every loaded pack and is stored in each saved battle, so changing a pack mid-campaign is detected.
 
 ## Content conventions
+
+- **Persistent Delay and Downed countdown (#105):** Delay keeps the unit behind the same anchor (or at the end) in later rounds; waiting cannot buy consecutive turns across a round boundary. A Downed hero loses one countdown at each own-turn start, plus hits, rather than at round start.
+- **Area weapon riders (#107):** Sweeping Cleave's extra 1d8 (1d10 at level 10) applies once per use across all struck targets, through the first hit; subsequent hits use the weapon's base damage.
 
 These turn SRD 5.2 into this game, and every content file starts from them. **The balance pass moved some numbers away from them on purpose**; the [balance report](../../docs/superpowers/reports/2026-10-30-tactics-balance.md) lists each change and its reason, and the differences are noted below.
 

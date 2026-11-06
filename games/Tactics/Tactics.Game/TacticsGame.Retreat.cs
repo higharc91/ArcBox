@@ -30,7 +30,7 @@ public sealed partial class TacticsGame
     {
         public string Proposer { get; } = proposer;
 
-        /// <summary>The round it was proposed in: a failed vote shuts proposing until the next.</summary>
+        /// <summary>The round it was proposed in; failure blocks proposals until after the failure round.</summary>
         public int Round { get; } = round;
 
         public Dictionary<string, bool> Votes { get; } = new(StringComparer.Ordinal) { [proposer] = true };
@@ -113,12 +113,12 @@ public sealed partial class TacticsGame
 
     private void CloseRetreat(bool failed)
     {
-        if (_retreat is not { } vote)
+        if (_retreat is null)
             return;
         _ctx.CancelTimer(Timers.Retreat);
         _retreat = null;
         if (failed)
-            _retreatFailedRound = vote.Round;
+            _retreatFailedRound = State.Round;
     }
 
     /// <summary>The vote carried: the rules end the battle as a flight (<see cref="Retreat"/>), and the campaign takes the result.</summary>

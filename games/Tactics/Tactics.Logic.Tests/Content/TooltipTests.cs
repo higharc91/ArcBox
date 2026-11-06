@@ -71,7 +71,7 @@ public sealed class TooltipTests
                 new SaveEffect(Stat.Str, 13, [Apply("prone", null)], [])], [], [])],
             IsWeaponAttack: true, RiderOnce: true);
         Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone). "
-                     + "With more than one attack, only the first hit gets this; the rest are plain hits", Tooltips.For(trip, 1, Rules));
+                     + "With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits", Tooltips.For(trip, 1, Rules));
         Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone)",
             Tooltips.For(trip with { RiderOnce = false }, 1, Rules));
     }

@@ -308,7 +308,8 @@ public sealed class SteadfastTests
         setup = setup with { Units = [.. setup.Units.Select(u => u.Id == U("fighter") ? u with { At = bridge[0] }
             : u.Id == U("warlord") ? u with { At = bridge[^1] } : u)] };
 
-        var (state, events) = (Battle.Start(setup, rules, 3).State, Battle.Start(setup, rules, 3).Events);
+        var started = Battle.Start(setup, rules, 3);
+        var (state, events) = (started.State, started.Events);
 
         Assert.Contains(new TriggerFired("bridge_collapse"), events);
         var vorga = state.Units[U("warlord")];

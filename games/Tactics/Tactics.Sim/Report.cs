@@ -243,7 +243,7 @@ public static class Report
                 .Select(p => $"{p.Key}: `{p.Value}`")) + ".");
         Line(md, $"- **Parties:** {config.Race ?? SimRunner.Race} characters from `SheetBuilder.DefaultCharacter` "
                  + $"({(withSubclasses ? "the subclasses above, otherwise none" : "no subclass")}, default picks), playing the "
-                 + "profile their class's `aiTags` name (healer → `healer`, caster or control → `caster`, ranged → `archer`, striker "
+                 + "profile their class's `aiTags` name (controller → `controller`, guardian → `guardian`, healer → `healer`, caster or control → `caster`, ranged → `archer`, striker "
                  + "→ `skirmisher`, otherwise `brute`) with items off; enemies play their monster's profile. Party compositions "
                  + $"are drawn from every combination with at least one healer or defender and at most {SimRunner.MaxCopies} of a class, "
                  + $"by a generator seeded {SimRunner.PartySeed}:");

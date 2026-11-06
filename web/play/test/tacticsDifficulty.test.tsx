@@ -40,7 +40,7 @@ describe("the campaign difficulty", () => {
     expect(screen.queryByRole("group", { name: "Difficulty" })).toBeNull();
   });
 
-  const hint = "Too hard? Change difficulty in the party menu";
+  const hint = "Too hard? After Carry on, change difficulty in the party menu";
   it("is offered after a loss, to the VIP, unless it is Story already", () => {
     show("results", (d) => { d.outcome = "Lost"; d.difficulty = "Normal"; });
     expect(screen.getByText(hint)).toBeTruthy();

@@ -141,7 +141,8 @@ public static class SheetBuilder
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
                     + passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0)
                     + (trinket?.Static.MaxHp ?? 0);
-        maxHp += injuries.Sum(i => i.Static.MaxHp + PercentOf(maxHp, i.Static.MaxHpPercent));
+        var uninjuredMaxHp = maxHp;
+        maxHp += injuries.Sum(i => i.Static.MaxHp + PercentOf(uninjuredMaxHp, i.Static.MaxHpPercent));
         passives.AddRange(injuries.Select(i => RulesPack.InjuryPassiveId(i.Id)));
         if (trinket is not null) passives.Add(RulesPack.TrinketPassiveId(trinket.Id));
 

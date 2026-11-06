@@ -15,6 +15,7 @@ internal sealed partial class Validation
         if (!EffectsIn(e, "effects", file, ptr, inSave: false)) return null;
         var def = Deserialize<TrinketDef>(e, file, ptr);
         if (def is null) return null;
+        RejectHpPercent(def.Static, file, Pointer.Append(ptr, "static"));
         if (def.Rarity != "rare") Error(file, Pointer.Append(ptr, "rarity"), "A trinket must declare rare rarity.");
         if (string.IsNullOrWhiteSpace(def.Text)) Error(file, Pointer.Append(ptr, "text"), "A trinket needs a readable description.");
         if (def.Hook is null && !def.Effects.IsDefaultOrEmpty)

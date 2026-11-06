@@ -31,6 +31,10 @@ public sealed class UncannyHitTests
         Assert.Equal(0, dodged.Units[new("rogue")].TempHp);
         Assert.Equal(ordinary.Rng, dodged.Rng);
         Assert.False(dodged.Units[new("rogue")].Economy.Reaction);
+        // A later command reuses the hit numbering after settlement (e.g. an Action Surge attack).
+        var ready = dodged.Change("attacker", u => u with { Economy = u.Economy with { Action = true } });
+        var (nextHit, _) = battle.Apply(ready, new Use(new("attacker"), strike.Id, new Target(Unit: new("rogue"))));
+        Assert.Equal(90, nextHit.Units[new("rogue")].Hp);
         var w = new BattleWriter(dodged, battle.Rules);
         Hp.Damage(w, new("rogue"), 7, "fire", new("attacker"), resolution: 999);
         Assert.Equal(90, w.State.Units[new("rogue")].Hp);

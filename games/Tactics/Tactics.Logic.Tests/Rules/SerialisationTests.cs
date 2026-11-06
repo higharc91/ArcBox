@@ -27,6 +27,8 @@ public sealed class SerialisationTests
         {
             Hp = 5,
             TempHp = 2,
+            HalvedHit = 2,
+            HalvedHitDamage = 3,
             Conditions =
             [
                 new ActiveCondition(new ConditionId("prone"), null, null, false, 0, Stat.Str, false),
@@ -115,6 +117,8 @@ public sealed class SerialisationTests
         Assert.Equal(state.Active, back.Active);
         Assert.Equal(300, back.Xp);
         Assert.Equal(3, back.NextResolution);
+        Assert.Equal(2, back.Units[U("kara")].HalvedHit);
+        Assert.Equal(3, back.Units[U("kara")].HalvedHitDamage);
         Assert.Equal([new HitMark(0, U("gob")), new HitMark(2, U("gob"))], back.DownedHits);
         Assert.Equal(state.Loot, back.Loot);
         Assert.Equal(state.StartedThisRound, back.StartedThisRound);

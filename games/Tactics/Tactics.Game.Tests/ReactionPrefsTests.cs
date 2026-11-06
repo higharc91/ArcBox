@@ -191,6 +191,7 @@ public sealed class ReactionPrefsTests
 
         Assert.Null(State(s).Pending);
         var status = s.Screen(0)!;
+        Assert.DoesNotContain("react", s.Harness.ActiveTimers);
         Assert.Equal("never", status.Data.GetProperty("reactions").GetProperty("opportunity").GetString());
         Assert.Equal("ask", status.Data.GetProperty("reactions").GetProperty("defence").GetString());
     }

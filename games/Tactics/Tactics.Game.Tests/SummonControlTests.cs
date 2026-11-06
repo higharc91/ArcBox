@@ -38,7 +38,8 @@ public sealed class SummonControlTests
         var saved = doc with { Battle = doc.Battle with { State = state } };
         var resumed = new Session(document: saved.ToJson());
         resumed.Harness.Resume(resumed.Lease);
-        foreach (var p in here.DefaultIfEmpty(0).Concat(here.Length == 0 ? [1, 2, 3] : []))
+        var connectedSeats = here.Length == 0 ? [0, 1, 2, 3] : here;
+        foreach (var p in connectedSeats)
             resumed.Harness.SetConnected(p, true);
         if (resumed.Game.Phase == TacticsPhase.Resuming)
             resumed.Send(here.Length == 0 ? 0 : here[0], "continue");

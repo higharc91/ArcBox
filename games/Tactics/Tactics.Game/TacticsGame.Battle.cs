@@ -82,6 +82,7 @@ public sealed partial class TacticsGame
     private void SetDifficulty(JsonElement? data)
     {
         if (_phase == TacticsPhase.Battle || Str(data, "level") is not { } level
+            || !Enum.GetNames<Difficulty>().Any(name => string.Equals(name, level, StringComparison.OrdinalIgnoreCase))
             || !Enum.TryParse<Difficulty>(level, ignoreCase: true, out var chosen) || !Enum.IsDefined(chosen) || chosen == _doc.Difficulty)
             return;
         _doc = _doc with { Difficulty = chosen };
@@ -244,6 +245,8 @@ public sealed partial class TacticsGame
             // A reaction the player's preferences answer is answered here, as if they had tapped it: no prompt, no clock, no pause.
             if (state.Pending is ReactionOffer preferred && IsPlayed(preferred.Reactor) && PreferredAnswer(state, preferred) is { } preference)
             {
+                _ctx.CancelTimer(Timers.React);
+                _reactTimerFor = null;
                 ApplyAi(new React(preferred.Reactor, preference), aiFinished: false);
                 continue;
             }

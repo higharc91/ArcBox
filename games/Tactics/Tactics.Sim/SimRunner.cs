@@ -87,7 +87,8 @@ public static class SimRunner
 
     /// <summary>
     /// The AI profile a party member of <paramref name="cls"/> plays, from its <c>aiTags</c>: <c>healer</c> for a healer,
-    /// <c>caster</c> for a caster or controller, <c>archer</c> for another ranged class, <c>skirmisher</c> for a striker,
+    /// specialist <c>controller</c>/<c>guardian</c> when tagged, <c>caster</c> for a general caster/control class,
+    /// <c>archer</c> for another ranged class, <c>skirmisher</c> for a striker,
     /// <c>brute</c> otherwise.
     /// </summary>
     public static string ProfileFor(ClassDef cls) => AiProfile.IdForRoles(cls.AiTags.Tags.IsDefault ? [] : cls.AiTags.Tags);

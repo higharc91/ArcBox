@@ -110,6 +110,26 @@ public sealed class SrdConditionTests
     }
 
     [Fact]
+    public void Twinned_harmful_save_spell_skips_the_charmer_for_a_legal_second_target()
+    {
+        var spell = TestAbilities.GuidingBolt with { Id = new("test.twin"), Cost = new CostDef(Action: 1),
+            Effects = [new SaveEffect(Stat.Wis, 100, [new DamageEffect(TestAbilities.Flat("2"), "fire", [])], [])] };
+        var battle = TestBattle.On("0. 0. 0. 0. 0.")
+            .Party("hero", TestSheets.Fighter.Knowing(spell) with { InitiativeBonus = 100 }, new Tile(0, 0))
+            .Enemy("first", TestSheets.Goblin, new Tile(1, 0))
+            .Enemy("charmer", TestSheets.Goblin, new Tile(2, 0))
+            .Enemy("legal", TestSheets.Goblin, new Tile(3, 0))
+            .With(spell).WithConditions([.. BasePackTests.Rules.Conditions.Values]);
+        var (state, _) = battle.Start();
+        state = state.Give("hero", TestConditions.Lasting(BasePackTests.Rules.Conditions[new("charmed")], new("charmer")),
+            new ActiveCondition(Metamagic.Twinned, Hero, 0, false, 0, Stat.Con, false));
+        var (after, events) = battle.Apply(state, new Use(Hero, spell.Id, new Target(Unit: new("first"))));
+        Assert.Equal(state.Units[new("charmer")].Hp, after.Units[new("charmer")].Hp);
+        Assert.Equal(state.Units[new("legal")].Hp - 2, after.Units[new("legal")].Hp);
+        Assert.DoesNotContain(events.OfType<Rolled>(), e => e.Roller == new UnitId("charmer"));
+    }
+
+    [Fact]
     public void Healing_a_downed_bleeding_unit_revives_it_and_ends_bleeding()
     {
         var battle = Build();
