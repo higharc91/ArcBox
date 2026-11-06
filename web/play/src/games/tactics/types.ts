@@ -230,6 +230,7 @@ export interface WalkData {
    * Investigation check for what's hidden nearby. False for everyone else; absent in a region with no things.
    */
   search?: boolean;
+  choices?: CharacterChoicesData | null;
 }
 
 /**
@@ -334,10 +335,49 @@ export interface CheckData {
   difficulty?: string;
 }
 
+export interface ChoiceOptionData {
+  id: string;
+  name: string;
+  tooltip?: string;
+}
+
+export interface ChoiceSlotData {
+  level: number;
+  choose?: number;
+  from: ChoiceOptionData[];
+  picked: string[];
+}
+
+export interface CharacterChoicesData {
+  name: string;
+  class: string;
+  className: string;
+  subclass?: string | null;
+  subclassName?: string | null;
+  level: number;
+  xp: number;
+  nextLevelXp?: number | null;
+  prevLevelXp?: number;
+  scores: Record<string, number>;
+  needsSubclass: boolean;
+  subclasses?: { id: string; name: string; role?: string }[] | null;
+  increasesLeft: number;
+  choices: ChoiceSlotData[];
+  waiting: number;
+}
+
 export interface ResultsData {
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
-  lines: { name: string; xp: number; injuries: string[] }[];
+  lines: {
+    name: string;
+    xp: number;
+    injuries: string[];
+    totalXp?: number;
+    nextLevelXp?: number | null;
+    prevLevelXp?: number;
+    level?: number;
+  }[];
   /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
   note?: string | null;
   vip: boolean;
@@ -346,4 +386,8 @@ export interface ResultsData {
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */
   portal?: string | null;
+  leveledUp?: boolean;
+  gold?: number | null;
+  loot?: { id: string; name: string; count?: number }[] | null;
+  choices?: CharacterChoicesData | null;
 }

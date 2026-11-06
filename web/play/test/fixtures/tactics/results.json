@@ -9,29 +9,142 @@
       {
         "name": "Player1",
         "xp": 0,
-        "injuries": []
+        "injuries": [],
+        "totalXp": 0,
+        "nextLevelXp": 1000,
+        "prevLevelXp": 0,
+        "level": 1
       },
       {
         "name": "Player2",
         "xp": 0,
-        "injuries": []
+        "injuries": [],
+        "totalXp": 0,
+        "nextLevelXp": 1000,
+        "prevLevelXp": 0,
+        "level": 1
       },
       {
         "name": "Player3",
         "xp": 0,
-        "injuries": []
+        "injuries": [],
+        "totalXp": 0,
+        "nextLevelXp": 1000,
+        "prevLevelXp": 0,
+        "level": 1
       },
       {
         "name": "Player4",
         "xp": 0,
-        "injuries": []
+        "injuries": [],
+        "totalXp": 0,
+        "nextLevelXp": 1000,
+        "prevLevelXp": 0,
+        "level": 1
       }
     ],
     "note": "You wake at the recovery point. Wounds tended \u2014 no XP. Potions used are gone.",
     "vip": true,
     "difficulty": "Normal",
     "level": 1,
-    "portal": "/c/ABCD"
+    "portal": "/c/ABCD",
+    "leveledUp": false,
+    "gold": null,
+    "loot": null,
+    "choices": {
+      "name": "Player1",
+      "class": "fighter",
+      "className": "Fighter",
+      "subclass": null,
+      "subclassName": null,
+      "level": 1,
+      "xp": 0,
+      "nextLevelXp": 1000,
+      "prevLevelXp": 0,
+      "scores": {
+        "str": 17,
+        "dex": 13,
+        "con": 15,
+        "int": 8,
+        "wis": 12,
+        "cha": 10
+      },
+      "needsSubclass": false,
+      "subclasses": null,
+      "increasesLeft": 0,
+      "choices": [
+        {
+          "level": 1,
+          "choose": 1,
+          "from": [
+            {
+              "id": "fighter.style_defense",
+              "name": "Style defense",
+              "tooltip": "\u002B1 AC"
+            },
+            {
+              "id": "fighter.style_dueling",
+              "name": "Style dueling",
+              "tooltip": "\u002B2 weapon damage"
+            },
+            {
+              "id": "fighter.style_great_weapon",
+              "name": "Style great weapon",
+              "tooltip": "\u002B1 weapon damage"
+            }
+          ],
+          "picked": [
+            "fighter.style_defense"
+          ]
+        },
+        {
+          "level": 1,
+          "choose": 2,
+          "from": [
+            {
+              "id": "fighter.trip_attack",
+              "name": "Trip Attack",
+              "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+            },
+            {
+              "id": "fighter.pushing_attack",
+              "name": "Pushing Attack",
+              "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+            },
+            {
+              "id": "fighter.menacing_attack",
+              "name": "Menacing Attack",
+              "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+            },
+            {
+              "id": "fighter.precision_attack",
+              "name": "Precision Attack",
+              "tooltip": "Weapon attack, weapon range: weapon damage. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit."
+            },
+            {
+              "id": "fighter.goading_attack",
+              "name": "Goading Attack",
+              "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+            },
+            {
+              "id": "fighter.rally",
+              "name": "Rally",
+              "tooltip": "6 tiles: target gains 1d8 \u002B CHA modifier temporary HP"
+            },
+            {
+              "id": "fighter.feinting_attack",
+              "name": "Feint",
+              "tooltip": "Self: you get \u002B4 weapon damage and have advantage on your attack rolls until the end of your turn \u2014 A feint opens your foe up: advantage and \u002B4 damage on your attacks this turn."
+            }
+          ],
+          "picked": [
+            "fighter.trip_attack",
+            "fighter.precision_attack"
+          ]
+        }
+      ],
+      "waiting": 0
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

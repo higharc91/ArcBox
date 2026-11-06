@@ -8,6 +8,7 @@ import { Portrait } from "./art";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { WalkData, WalkMember } from "./types";
 import { LineIcon } from "./ui";
+import { ChoicesCard } from "./choices";
 import { DEAD_ZONE, dirAt, SECTORS, stickyDirAt, WalkSender, type Dir, type Sector } from "./walkModel";
 
 /** How long "Choose a battle" and "End session" wait for their confirm before they stand down. */
@@ -496,6 +497,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           </div>
         )}
         <Party party={d.party} />
+        {d.choices && d.choices.waiting > 0 ? <ChoicesCard choices={d.choices} send={send} /> : null}
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
       </div>
         {d.leader && d.search ? (
