@@ -115,6 +115,67 @@ public sealed class MultiAttackTests
         Assert.Equal([new Retargeted(U("kara"), U("c"))], events.OfType<Retargeted>());
     }
 
+    /// <summary>
+    /// A goblin with three attacks who acts first, at (2, 1), among heroes who are hit by anything but a natural 1; each hero
+    /// with a countdown is Downed with it.
+    /// </summary>
+    private static (TestBattle Battle, BattleState State) Orc(params (string Id, Tile At, int? Countdown)[] heroes)
+    {
+        var battle = TestBattle.On(Field).Enemy("orc", TestSheets.Goblin with { Attacks = 3, InitiativeBonus = 40 }, T(2, 1));
+        foreach (var (id, at, _) in heroes)
+            battle.Party(id, TestSheets.Fighter with { MaxHp = 40, Ac = 0 }, at);
+        var (state, _) = battle.Start(FirstHitSeed(battle));
+        foreach (var (id, _, countdown) in heroes)
+        {
+            if (countdown is not { } left)
+                continue;
+            (state, _) = battle.Run(state, "orc", id, null, new DamageEffect(TestAbilities.Flat("100"), null, []));
+            Assert.Equal(LifeState.Downed, state.Units[U(id)].Life);
+            state = state with { Units = state.Units.SetItem(U(id), state.Units[U(id)] with { Countdown = left }) };
+        }
+        return (battle, state);
+    }
+
+    [Fact]
+    public void Retargeting_after_a_target_goes_out_skips_a_downed_foe_for_a_standing_one()
+    {
+        // R9: a's last hit puts it Out; b is Downed (0 HP) and c is standing: c, not b, takes the rest.
+        var (battle, state) = Orc(("a", T(3, 1), 1), ("b", T(2, 0), 3), ("c", T(2, 2), null));
+
+        var (after, events) = battle.Apply(state, new Use(U("orc"), Attack, new Target(Unit: U("a"))));
+
+        Assert.Equal(LifeState.Out, after.Units[U("a")].Life);
+        Assert.Equal([U("a"), U("c"), U("c")], Struck(events));
+        Assert.Equal(3, after.Units[U("b")].Countdown);
+    }
+
+    [Fact]
+    public void With_only_downed_foes_left_in_reach_the_remaining_attacks_are_spent()
+    {
+        // The standing hero is out of reach, so the battle goes on; b, Downed beside the goblin, isn't struck.
+        var (battle, state) = Orc(("a", T(3, 1), 1), ("b", T(2, 0), 3), ("far", T(6, 1), null));
+
+        var (after, events) = battle.Apply(state, new Use(U("orc"), Attack, new Target(Unit: U("a"))));
+
+        Assert.Equal(LifeState.Out, after.Units[U("a")].Life);
+        Assert.Equal([U("a")], Struck(events));
+        Assert.Single(events.OfType<Rolled>(), r => r.Kind == RollKind.Attack);
+        Assert.Equal(3, after.Units[U("b")].Countdown);
+        Assert.Empty(events.OfType<Retargeted>());
+    }
+
+    [Fact]
+    public void A_listed_downed_target_still_takes_its_attacks()
+    {
+        // A deliberate choice (a cruel AI's): the list names the Downed hero, so it is struck.
+        var (battle, state) = Orc(("b", T(2, 0), 3), ("c", T(2, 2), null));
+
+        var use = new Use(U("orc"), Attack, new Target(Unit: U("c"))) { Targets = [U("c"), U("b")] };
+        var (_, events) = battle.Apply(state, use);
+
+        Assert.Equal([U("c"), U("b"), U("b")], Struck(events));
+    }
+
     [Fact]
     public void An_attack_whose_target_was_pushed_out_of_reach_turns_to_a_foe_still_in_reach()
     {

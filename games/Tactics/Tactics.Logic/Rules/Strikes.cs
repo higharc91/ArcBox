@@ -68,8 +68,9 @@ public static class Strikes
 
     /// <summary>
     /// Whom attack <paramref name="index"/> of an aimed weapon attack goes to: its listed target if it can still be attacked
-    /// (in the battle, a valid target and in reach: <see cref="Battle.ResolveTarget"/>), else the next listed one that can,
-    /// in list order and round to the start; else the hostile in reach with the least HP, ties by id; else nobody.
+    /// (in the battle, a valid target and in reach: <see cref="Battle.ResolveTarget"/>; a listed Downed unit counts, as
+    /// the player or AI chose it), else the next listed one that can, in list order and round to the start; else the
+    /// standing (Up) hostile in reach with the least HP, ties by id, never a Downed one; else nobody, and the attack is spent.
     /// </summary>
     internal static UnitState? Pick(BattleWriter w, UnitState user, AbilityDef ability, ImmutableArray<UnitId> targets, int index)
     {
@@ -78,7 +79,8 @@ public static class Strikes
             if (w.State.Units.TryGetValue(id, out var unit) && Attackable(w, user, ability, unit))
                 return unit;
         return w.State.Units.Values
-            .Where(u => u.Sheet.Side != user.Sheet.Side && u.Sheet.Side != Side.Neutral && Attackable(w, user, ability, u))
+            .Where(u => u.Life == LifeState.Up && u.Sheet.Side != user.Sheet.Side && u.Sheet.Side != Side.Neutral
+                        && Attackable(w, user, ability, u))
             .OrderBy(u => u.Hp).ThenBy(u => u.Id)
             .FirstOrDefault();
     }
