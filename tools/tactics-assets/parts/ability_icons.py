@@ -1532,7 +1532,7 @@ def abilities() -> list[Ability]:
     """Every player ability (monsters.json is for enemies), in rules-pack order, with its class plate and spec."""
     out = []
     for f in sorted(RULES.glob("*.json")):
-        if f.stem == "monsters":
+        if f.stem in ("monsters", "villains"):
             continue
         cls = {"common": "common", "races": "race"}.get(f.stem, f.stem)
         for ab in json.loads(f.read_text())["abilities"]:

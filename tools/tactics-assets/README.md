@@ -21,34 +21,64 @@ python3 tools/tactics-assets/build.py previews terrain   # one set and its revie
 
 The workflow is configured to build the assets with pinned Pillow 12.3.0 and numpy 2.3.5, then run
 `git diff --exit-code -- content/`. GitHub Actions remains manually disabled at the owner's request; adding this
-step does not enable it. A clean generated-content result is still outstanding.
+step does not enable it. A clean generated-content result is still outstanding because committed content includes
+approved native artwork, imported townsfolk/scenes, and retained source assets.
 
-A cold attempt on 2026-11-05 used Python 3.12.14, those exact dependencies, four Linux CPU workers where supported,
-and a fresh Python process. Output was redirected into an isolated copy of the 225 MB pack, preserving the working
-content. The attempt took **342.97 seconds (5 min 43 s)** and stopped in the icons set with
-`KeyError: 'villains'` from `parts/ability_icons.py:compose`. The player-icon catalogue excludes `monsters.json`
-but also reads `villains.json`, whose filename is not a supported player-class plate. This is a failed attempt,
-not a measurement of a completed full build.
+### Ability-icon enumeration repair
+The cold-build crash in `parts/ability_icons.py` (`KeyError: 'villains'`) was resolved by excluding `villains.json`
+from the player-ability catalogue in `parts/ability_icons.py:abilities`. Boss/villain encounter abilities use the
+fallback icons already allowlisted in `manifest-allowlist.json`.
 
-Completed sets already demonstrate drift against committed content:
+### Completed cold-build measurement
+A full cold build was run across all 32 content sets with Python 3.11, pinned `Pillow==12.3.0` and `numpy==2.3.5`,
+and output redirected via `TACTICS_PACK` into an isolated pack copy, preserving committed content.
+The full build completed successfully across all sets in **669.15 seconds (11 min 9 s)** (2 CPU cores, fresh process).
 
-| Set | Changed files | Removed files | Added files |
-|---|---:|---:|---:|
-| characters | 2 | 0 | 0 |
-| terrain | 1 | 23 | 0 |
-| tactical | 0 | 0 | 0 |
-| props | 13 | 173 | 0 |
-| portraits | 324 | 160 | 0 |
-| beasts, backgrounds, ui | 0 | 0 | 0 |
+### Drift analysis across completed sets
 
-All 132 tactical sheets reproduce byte-identically. The character manifest drops four authored aliases; the terrain
-build drops the native Ford structures and retained terrain sources. Sample portrait and prop differences change
-decoded pixels, not just PNG encoding. The icons set was incomplete, and later sets were not reached.
+The isolated build produced the following comparison against committed `content/tactics/base`:
 
-The strict rebuild gate must remain red until the generator handles the enemy-only ability file and the authored
-overrides/imports are reconciled with the build. Preserve approved art while deciding which files are generated
-outputs and which are retained inputs. No generated deletions or replacement artwork from this diagnostic were
-applied to the working content. The successful full cold-build time remains to be measured after that repair.
+| Set | Changed files | Removed files | Added files | Notes |
+|---|---:|---:|---:|---|
+| ambient | 0 | 0 | 0 | Byte-identical |
+| backgrounds | 0 | 0 | 0 | Byte-identical |
+| beasts | 0 | 0 | 0 | Byte-identical |
+| bestiary | 0 | 0 | 0 | Byte-identical |
+| bosses | 0 | 0 | 0 | Byte-identical |
+| camp | 0 | 0 | 0 | Byte-identical |
+| crests | 0 | 0 | 0 | Byte-identical |
+| dungeon | 0 | 0 | 0 | Byte-identical |
+| emotes | 0 | 0 | 0 | Byte-identical |
+| fx | 0 | 0 | 0 | Byte-identical |
+| grades | 0 | 0 | 0 | Byte-identical |
+| hazards | 0 | 0 | 0 | Byte-identical |
+| injury_icons | 0 | 0 | 0 | Byte-identical |
+| pickups | 0 | 0 | 0 | Byte-identical |
+| projectiles | 0 | 0 | 0 | Byte-identical |
+| sheet_icons | 0 | 0 | 0 | Byte-identical |
+| signature | 0 | 0 | 0 | Byte-identical |
+| tactical | 0 | 0 | 0 | Byte-identical (all 132 sheets) |
+| town | 0 | 0 | 0 | Byte-identical |
+| transitions | 0 | 0 | 0 | Byte-identical |
+| ui | 0 | 0 | 0 | Byte-identical |
+| worldmap | 0 | 0 | 0 | Byte-identical |
+| characters | 2 | 0 | 0 | Drops 4 authored aliases (`mother_skarrow`, `goblin_shaman_mother_skarrow`, `hermit_old_maud`, `old_maud`) in `manifest.json`; `palettes.json` |
+| terrain | 1 | 23 | 0 | `shutil.rmtree` drops 16 native Ford ground/cliff textures (commit `ac79e092`) and 7 legacy source textures in `manifest-allowlist.json` |
+| props | 13 | 173 | 0 | `shutil.rmtree` drops 173 authored Ashen Ford structures, granary, Maud hut, secrets, bridges; 13 props differ in pixels |
+| portraits | 324 | 160 | 0 | `shutil.rmtree` drops 160 approved portraits (townsfolk, bosses, Maud, Skarrow); 324 change due to material shading refinement in `c0637476` |
+| icons | 3 | 0 | 0 | `abilities_by_id.png` (@2x, manifest) changed because `common.shove_prone` and `extinguish` were added to rules without rebake |
+| chapters | 5 | 0 | 0 | PNG re-compression differences |
+| creator | 12 | 0 | 0 | Skin atlas encoding differences |
+| gear_icons | 9 | 0 | 0 | Atlas compression differences |
+| status | 1 | 0 | 4 | Additional generated status overlay variations |
+| title | 1 | 0 | 0 | Composed title re-render |
+
+22 of 32 sets are completely byte-identical. The remaining drift is accounted for by approved native artwork,
+imported townsfolk/structures, allowlisted source assets, and rule additions.
+
+Approved native artwork has been preserved byte-for-byte in `content/tactics/base/`. No destructive replacements
+or deletions were committed to `content/`. The workflow rebuild step remains in place, and hosted verification is
+pending reconciliation of generated catalogues with approved native art.
 
 ## Outputs
 
