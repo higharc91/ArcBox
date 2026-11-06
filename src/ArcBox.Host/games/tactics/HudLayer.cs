@@ -37,6 +37,7 @@ public partial class HudLayer : Control
     private readonly Control _head;
     private readonly Label _title;
     private readonly Label _round;
+    private readonly Label _tag;
     private readonly Control _objective;
     private readonly Label _objectiveText;
     private readonly Control _notice;
@@ -56,9 +57,10 @@ public partial class HudLayer : Control
         var panels = Scaled(packRoot, art.PanelsPath);
         _title = ArcTheme.Label("", ArcTheme.Bold, 36, Ink);
         _round = ArcTheme.Label("", ArcTheme.SemiBold, 26, Gold);
+        _tag = ArcTheme.Label("", ArcTheme.SemiBold, 22, Muted);
         _objectiveText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
         _objective = ArcTheme.HBox(8, ArcTheme.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
-        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _objective));
+        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
         _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 22, Ink);
@@ -101,6 +103,8 @@ public partial class HudLayer : Control
     {
         _title.Text = hud.Title.ToUpperInvariant();
         _round.Text = hud.Turn is { } turn ? $"{hud.Round} · {turn}" : hud.Round;
+        _tag.Visible = hud.Tag is not null;
+        _tag.Text = hud.Tag ?? "";
         _objective.Visible = hud.Objective is not null;
         _objectiveText.Text = hud.Objective ?? "";
         _strip.Show(hud);

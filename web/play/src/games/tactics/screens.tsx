@@ -114,6 +114,7 @@ export function Results({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
+      {r.vip && lost && r.difficulty !== "Story" ? <p class="tx-note center tx-difficulty-hint">Too hard? Change difficulty in the party menu</p> : null}
       {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
       {r.vip ? (
         <div class="tx-foot">

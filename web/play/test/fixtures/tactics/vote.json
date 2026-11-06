@@ -30,7 +30,8 @@
     "tie": false,
     "decider": null,
     "away": [],
-    "vip": false
+    "vip": false,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:02:04.3001664\u002B00:00",

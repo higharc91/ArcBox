@@ -28,8 +28,8 @@ const LETTERS = "ABCDEFGHIJ";
  * The VIP's End session in a scene, walk's menu with its confirm. It heads the screen, above the words and the question, so it's
  * never where the thumb that skips a line or answers a question is.
  */
-function StoryHost({ vip, send }: { vip: boolean; send: CustomScreenProps["send"] }) {
-  return vip ? <HostMenu canBattle={false} keep="Keep playing" send={send} /> : null;
+function StoryHost({ vip, difficulty, send }: { vip: boolean; difficulty?: string; send: CustomScreenProps["send"] }) {
+  return vip ? <HostMenu canBattle={false} keep="Keep playing" difficulty={difficulty} send={send} /> : null;
 }
 
 /** The question's clock, in its heading, from the shell's countdown (which the CSS hides on these screens). */
@@ -82,7 +82,7 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
   const narration = !d.speaker;
   return (
     <div class="tx tx-story">
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       {d.title ? <p class="tx-story-title"><span class="tx-eyebrow">The story</span><b>{d.title}</b></p> : null}
       {/* Live, and never remounted, so a screen reader says each new line as it comes. */}
@@ -257,7 +257,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
 
   return (
     <div class={`tx tx-ask${alerted ? " arrived" : ""}`}>
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       <AskHead eyebrow={eyebrow} title={title} tie={d.tie} />
       <ul class={`tx-options${d.canChoose ? "" : " static"}`} aria-label="Options">
@@ -377,7 +377,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
 
   return (
     <div class={`tx tx-check${roll ? " rolled" : ""}${alerted ? " arrived" : ""}`}>
-      <StoryHost vip={d.vip} send={send} />
+      <StoryHost vip={d.vip} difficulty={d.difficulty} send={send} />
       {d.campScene && <CampScene {...d.campScene} />}
       <div class="tx-check-head">
         <span class="tx-eyebrow">Skill check</span>

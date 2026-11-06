@@ -148,6 +148,7 @@ public sealed partial class TacticsGame
             you = new { member = member is null ? null : profile.Value, canBuy = member is not null && _online.Contains(player.Id) },
             leader = profile.Value == _lead,
             vip = IsVip(player),
+            difficulty = CampaignDifficulty.ToString(),
             feed = _tradeFeed.ToArray(),
             portal = PortalPath(),
         }), profile);

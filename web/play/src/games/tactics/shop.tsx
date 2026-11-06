@@ -15,7 +15,7 @@ interface HaggleData {
 interface ShopData extends ServiceData {
   shop: { id: string; name: string; keeper: string; greeting: string };
   gold: number; items: ShopRow[]; sell: ShopRow[];
-  you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; feed: string[];
+  you: { member?: string; canBuy: boolean }; leader: boolean; vip?: boolean; difficulty?: string; feed: string[];
   /** Only at a shop that trades: an inn or a temple has none. */
   haggle?: HaggleData;
 }
@@ -62,7 +62,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
     });
   };
   return <section class={`tx tx-shop${recovery ? " tx-recovery" : ""}`}>
-    {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" send={send} /> : <HostMenu canBattle={false} keep="Keep trading" send={send} />)}
+    {d.vip && (recovery ? <RecoveryMenu keep="Keep resting" difficulty={d.difficulty} send={send} /> : <HostMenu canBattle={false} keep="Keep trading" difficulty={d.difficulty} send={send} />)}
     <header><span class="tx-eyebrow">{recovery ? inn ? "Inn" : "Temple" : `Trader · ${d.shop.keeper}`}</span><h1>{d.shop.name}</h1>
       {recovery ? <strong class="tx-recovery-purse" aria-label="Your purse" aria-live="polite">{d.gold} gold</strong> : <><span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></>}</header>
     {d.haggle && <Haggle haggle={d.haggle} send={send} shop={d.shop.id} pending={pending} />}

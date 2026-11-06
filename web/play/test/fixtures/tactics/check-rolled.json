@@ -57,7 +57,8 @@
       "dc": 15,
       "success": false
     },
-    "vip": false
+    "vip": false,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": null,

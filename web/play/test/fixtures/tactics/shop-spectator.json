@@ -35,6 +35,7 @@
     },
     "leader": false,
     "vip": false,
+    "difficulty": "Normal",
     "feed": [],
     "portal": "/c/ABCD",
     "haggle": {

@@ -269,6 +269,7 @@ public sealed partial class TacticsGame
             picked = pick, result = camp.Results.IsEmpty ? null : camp.Results[^1],
             party = camp.Actors.Select(m => new { member = m, name = _doc.Members[m].Character.Name, job = camp.Jobs.GetValueOrDefault(m)?.Job }),
             leader = profile.Value == _lead, vip = IsVip(player),
+            difficulty = CampaignDifficulty.ToString(),
         }) with { DeadlineUtc = camp.Due };
     }
 

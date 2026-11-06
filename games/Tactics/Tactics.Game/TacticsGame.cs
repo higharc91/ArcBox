@@ -263,6 +263,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             return;
         if (_doc.World?.MobAmbush is not null && custom.Action != "endSession") return;
         HeardFrom(profile);
+        if (custom.Action == "difficulty") { if (IsVip(player)) SetDifficulty(custom.Data); return; }
         if (custom.Action == "questLog") { QuestLogInput(player, profile, custom.Data); return; }
         if (QuestLogOpen && custom.Action is not ("endSession" or "pickClass")) return;
         switch (_phase)

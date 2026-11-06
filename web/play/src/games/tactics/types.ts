@@ -171,6 +171,8 @@ export interface WalkData {
   me: { name: string; cls: string; level: number; color?: string };
   party: WalkMember[];
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   canBattle: boolean;
   /** The campaign portal's path; null outside a campaign. */
   portal?: string | null;
@@ -206,6 +208,8 @@ export interface DialogueData {
   canSkip: boolean;
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
 }
 
 export interface StoryOption {
@@ -235,6 +239,8 @@ export interface VoteData {
   away: string[];
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   /** What a loot vote asks ("Who takes the Potion of Healing?"), the owner's decision 1; absent for a story's vote. */
   question?: string;
   /** Which of a run of loot votes this is, so each item's question is a new one. */
@@ -281,6 +287,8 @@ export interface CheckData {
   roll: CheckRoll | null;
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
 }
 
 export interface ResultsData {
@@ -290,6 +298,8 @@ export interface ResultsData {
   /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
   note?: string | null;
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */
   portal?: string | null;

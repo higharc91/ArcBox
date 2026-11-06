@@ -128,7 +128,7 @@ public sealed record StageView(string Region, Tile Origin, int Height, Immutable
 /// <param name="Stage">Where it stands in the world, or null for a battle on a plain board: no region, or a map the region doesn't stamp.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
-    UnitId? Reacting = null, string? Name = null, StageView? Stage = null);
+    UnitId? Reacting = null, string? Name = null, StageView? Stage = null, string? Difficulty = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -485,7 +485,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
-                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player),
+                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player), difficulty = CampaignDifficulty.ToString(),
                 level = _doc.PartyLevel, portal = PortalPath(),
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
@@ -523,6 +523,7 @@ public sealed partial class TacticsGame
             party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads,
                 color = ColorOf(w.Player.Profile!.Value.Value) }),
             vip,
+            difficulty = CampaignDifficulty.ToString(),
             canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
@@ -669,7 +670,8 @@ public sealed partial class TacticsGame
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
             StageOf(save) is { } stage
                 ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
-                : null);
+                : null,
+            state.Difficulty.ToString());
     }
 
     /// <summary>

@@ -47,9 +47,28 @@ public sealed partial class TacticsGame
 
     private Controller ControllerFor(ProfileId profile) => Online(profile) ? new PlayerControlled(profile) : new AiControlled(Companion);
 
-    /// <summary>Development harness settings; real sessions retain Normal difficulty and fresh random seeds.</summary>
-    public Difficulty BattleDifficulty { get; init; } = Difficulty.Normal;
+    /// <summary>
+    /// Development harness settings (<c>Tactics:Difficulty</c>, <c>Tactics:BattleSeed</c>). A set <see cref="BattleDifficulty"/> overrides the
+    /// campaign's difficulty for every battle; real sessions leave both null: the campaign's setting and fresh random seeds.
+    /// </summary>
+    public Difficulty? BattleDifficulty { get; init; }
     public ulong? BattleSeed { get; init; }
+
+    /// <summary>The difficulty the next battle starts at: the development override if set, else the campaign's own (default Normal).</summary>
+    private Difficulty CampaignDifficulty => BattleDifficulty ?? _doc.Difficulty;
+
+    /// <summary>
+    /// The VIP sets the campaign's difficulty from the session menu, any time outside a battle (a battle keeps the difficulty it began at).
+    /// A word that isn't one is ignored.
+    /// </summary>
+    private void SetDifficulty(JsonElement? data)
+    {
+        if (_phase == TacticsPhase.Battle || Str(data, "level") is not { } level
+            || !Enum.TryParse<Difficulty>(level, ignoreCase: true, out var chosen) || !Enum.IsDefined(chosen) || chosen == _doc.Difficulty)
+            return;
+        _doc = _doc with { Difficulty = chosen };
+        Save();
+    }
 
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
@@ -97,7 +116,7 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        var setup = Encounters.Setup(encounter, party, BattleDifficulty, Rules);
+        var setup = Encounters.Setup(encounter, party, CampaignDifficulty, Rules);
         var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
         if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
             setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)

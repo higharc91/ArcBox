@@ -27,6 +27,12 @@ Simulated parties have no subclass. The latest numbers and every tuning decision
 
 If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dotnet test games/Tactics/Tactics.Logic.Tests`, review each diff, then run again without the flag. The recording run fails `Warlord_bridge_plays_the_showcase_triggers` if it runs before the replay is written; the second run must pass. To re-record `warlord-bridge` from the AI, empty its `commands` in `Golden/warlord-bridge.replay.json`.
 
+## Campaign difficulty (#114)
+
+A campaign has a difficulty, Story, Normal (the default, and what a document from before it reads as) or Hard, saved in the campaign document and passed through `Encounters.Setup` into every battle's `BattleState.Difficulty`: story fights, roaming mobs and Hollow fights alike. Only the VIP can change it, from the "•••" session menu on their phone, any time outside a battle (an input during a battle is refused; a battle keeps the difficulty it began at). After a lost battle the VIP's results screen says "Too hard? Change difficulty in the party menu", unless it is Story already. The TV battle HUD carries a small "Story" or "Hard" tag when it isn't Normal. There is no portal control: the portal has no campaign-settings page.
+
+For testing, the Development setting `Tactics:Difficulty` (`Story`, `Normal` or `Hard`) is an override: when it is set it wins over the campaign's value for every battle (and the phone menu shows it), and the menu's changes are still saved but have no effect while it is set. It is read in Development only; leave it unset to play the campaign's own setting.
+
 ## Environmental encounter balance
 
 Environmental reactions are opt-in per encounter. River Crossing, Ford Assault, Forest Ruins, Warlord Bridge and Crystal Cave enable them. The [completion report](../../docs/superpowers/reports/2026-11-02-environmental-tiles/completion.md) records final Ford/cave tuning, on/off comparisons, party-size results, visual review and Chapter 1 validation. The [earlier Phase G checkpoint](../../docs/superpowers/reports/2026-11-02-environmental-tiles/milestone-g.md) preserves the original measurements. Showcase opt-ins require their intended-level simulation to meet the win-rate and battle-length targets. A pooled pass does not guarantee equal difficulty at every party size.

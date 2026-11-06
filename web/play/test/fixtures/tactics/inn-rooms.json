@@ -18,6 +18,7 @@
     },
     "leader": true,
     "vip": true,
+    "difficulty": "Normal",
     "feed": [],
     "portal": "/c/ABCD",
     "services": [

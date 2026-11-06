@@ -1122,6 +1122,7 @@ public sealed partial class TacticsGame
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),
                 vip = IsVip(player),
+                difficulty = CampaignDifficulty.ToString(),
             }, ArcJson.Options)!.AsObject();
             // The loot vote says what it asks, and which of the votes it is, so each item's is a new question (USER DECISION 1).
             if (LootVote && scene is not null)
@@ -1152,6 +1153,7 @@ public sealed partial class TacticsGame
                 tied = _telling == StoryStates.TieBreak ? _tied : [],
                 roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = SecretDc ? (int?)null : roll.Dc, success = roll.Passed },
                 vip = IsVip(player),
+                difficulty = CampaignDifficulty.ToString(),
             }) with { DeadlineUtc = roll is null ? _due : null };
         }
         var line = _telling is StoryStates.Gap or StoryStates.Rolled ? null : CurrentLine();
@@ -1166,6 +1168,7 @@ public sealed partial class TacticsGame
             text = line?.Text,
             canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,
             vip = IsVip(player),
+            difficulty = CampaignDifficulty.ToString(),
         });
     }
 }

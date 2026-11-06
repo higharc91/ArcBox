@@ -44,6 +44,7 @@
       }
     ],
     "vip": true,
+    "difficulty": "Normal",
     "canBattle": true,
     "portal": "/c/ABCD",
     "interact": "Trade with The Last Coal",

@@ -925,3 +925,8 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-mob-warning svg { width: 38px; height: 38px; }
 @keyframes tx-mob-pulse { 50% { transform: scale(1.06); box-shadow: 0 0 42px #ec694a66; } }
 @media (prefers-reduced-motion: reduce) { .tx-mob-warning { animation: none; } }
+
+.tx-walk-host .tx-difficulty { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.tx-difficulty-label { grid-column: 1 / -1; font: 700 11px/1 var(--wf-sans); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.tx .tx-difficulty .tx-btn { min-height: 40px; padding: 0 6px; }
+.tx .tx-difficulty .tx-btn.on { border-color: var(--wf-gold, #e6bd5c); color: var(--wf-gold, #e6bd5c); }
