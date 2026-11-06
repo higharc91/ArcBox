@@ -353,4 +353,14 @@ public sealed class PhaseScreenTests
         Assert.Null(screen.Banner);
         Assert.Equal(new global::Tactics.Presentation.Audio.MusicCue("title"), screen.Music);
     }
+
+    [Fact]
+    public void Level_up_results_display_level_up_anim_and_notice()
+    {
+        var view = View("Results", outcome: "Won", results: [], level: 2) with { LeveledUp = true };
+        var screen = PhaseScreen.Of(view);
+
+        Assert.Equal("level_up_anim", screen.Banner);
+        Assert.Equal("LEVEL UP! The party reached level 2.", screen.Notice);
+    }
 }

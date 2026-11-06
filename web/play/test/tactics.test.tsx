@@ -295,4 +295,67 @@ describe("tactics phone module", () => {
     expect(costText({ action: 1, resource: { mana: 3 }, concentration: true })).toBe("Action · 3 Mana · Concentration");
     expect(costText({})).toBe("Free");
   });
+
+  it("muster prompts returning players with pending level up choices", () => {
+    const v = view("pickClass");
+    v.data = {
+      classes: [],
+      portal: "/c/ABCD",
+      me: {
+        name: "Ana",
+        class: "fighter",
+        className: "Fighter",
+        subclass: null,
+        level: 3,
+        xp: 900,
+        scores: { str: 16, dex: 14, con: 14, int: 10, wis: 12, cha: 8 },
+        needsSubclass: true,
+        subclasses: [{ id: "champion", name: "Champion" }, { id: "battle_master", name: "Battle Master" }],
+        increasesLeft: 0,
+        choices: [],
+        waiting: 1,
+      },
+    };
+    const send = vi.fn();
+    render(<ControllerScreen view={v} send={send} me="ALEX" game="tactics" />);
+    expect(screen.getByText("Welcome back, Ana")).toBeTruthy();
+    expect(screen.getByText("1 choice waiting")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Champion" }));
+    expect(send).toHaveBeenCalledWith({ action: "chooseSubclass", data: { subclass: "champion" } });
+  });
+
+  it("results show level up banner, xp progress, loot, and choices card", () => {
+    const v = view("results");
+    v.data = {
+      outcome: "Won",
+      encounter: "ford_assault",
+      level: 2,
+      leveledUp: true,
+      gold: 50,
+      loot: [{ id: "oil_flask", name: "Oil Flask", count: 1 }],
+      lines: [
+        { name: "Ana", xp: 150, injuries: [], totalXp: 300, nextLevelXp: 900, prevLevelXp: 300, level: 2 },
+      ],
+      choices: {
+        name: "Ana",
+        class: "fighter",
+        className: "Fighter",
+        level: 2,
+        xp: 300,
+        scores: { str: 16, dex: 14, con: 14, int: 10, wis: 12, cha: 8 },
+        needsSubclass: false,
+        increasesLeft: 0,
+        choices: [],
+        waiting: 0,
+      },
+      vip: true,
+      portal: "/c/ABCD",
+    };
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByText("LEVEL UP! The party reached level 2.")).toBeTruthy();
+    expect(screen.getByText("Gold won: +50 gold")).toBeTruthy();
+    expect(screen.getByText("Loot: Oil Flask")).toBeTruthy();
+    expect(screen.getByText(/300 \/ 900 XP/)).toBeTruthy();
+  });
 });
+

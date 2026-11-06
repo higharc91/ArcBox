@@ -6,18 +6,36 @@ import { conditionName } from "./conditions";
 import { remembered } from "./memory";
 import { usePackBase } from "./pack";
 import { useAlertOnMount, useSfx } from "./sfx";
-import type { AbilityChoice, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
+import type { AbilityChoice, CharacterChoicesData, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
 import { FallBack } from "./fallback";
 import { ReactionsSheet } from "./reactions";
 import { HpBar, HpText, MeCard, Section } from "./ui";
+import { ChoicesCard } from "./choices";
 
 export { costText, Turn } from "./turn";
 
 // ---- Muster, encounter pick, results -------------------------------------------------------------------------------
 
 export function PickClass({ data, send }: CustomScreenProps) {
-  const { classes, portal } = data as { classes: ClassOption[]; portal?: string | null };
+  const { classes, portal, me } = data as { classes: ClassOption[]; portal?: string | null; me?: CharacterChoicesData | null };
   const sfx = useSfx();
+
+  if (me && me.waiting > 0) {
+    return (
+      <div class="tx tx-muster">
+        <Logo />
+        <h2 class="tx-title">Welcome back, {me.name}</h2>
+        <p class="tx-note center">You have pending level up choices.</p>
+        <ChoicesCard choices={me} send={send} />
+        {portal ? (
+          <p class="tx-note center">
+            Or <a class="tx-link" href={portal} target="_blank" rel="noopener">open your character sheet</a> in the portal.
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <div class="tx tx-muster">
       <Logo />
@@ -102,23 +120,49 @@ export function Results({ data, send }: CustomScreenProps) {
   // After a loss the server's line says it all: no "+0 XP" or injuries on each hero.
   const lost = r.outcome === "Lost";
   const fled = r.outcome === "Fled";
+  const bannerArt = r.leveledUp ? "level_up" : won ? "victory" : "defeat";
+  const bannerText = r.leveledUp ? "Level Up!" : won ? "Victory" : fled ? "Retreat" : "Defeat";
   return (
     <div class="tx tx-results">
-      <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : fled ? "Retreat" : "Defeat"} tone={won ? "won" : "lost"} />
+      <MomentBanner art={bannerArt} text={bannerText} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
+      {r.leveledUp ? <p class="tx-note center tx-levelup-note">LEVEL UP! The party reached level {r.level}.</p> : null}
       {r.note ? <p class="tx-note center tx-result-note">{r.note}</p> : null}
       <ul class="tx-lines">
-        {r.lines.map((l) => (
-          <li key={l.name}>
-            <NamedPortrait name={l.name} size={40} />
-            <b>{l.name}</b>
-            {lost ? null : <span class="tx-xp">+{l.xp} XP</span>}
-            {!lost && l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
-          </li>
-        ))}
+        {r.lines.map((l) => {
+          const prev = l.prevLevelXp ?? 0;
+          const next = l.nextLevelXp;
+          const cur = l.totalXp;
+          const pct = next && next > prev && cur !== undefined
+            ? Math.max(0, Math.min(100, Math.round(((cur - prev) / (next - prev)) * 100)))
+            : 100;
+          return (
+            <li key={l.name}>
+              <NamedPortrait name={l.name} size={40} />
+              <div class="tx-line-main">
+                <b>{l.name}</b>
+                {cur !== undefined ? (
+                  <div class="tx-xp-progress" aria-label={`XP progress: ${cur} of ${next ?? cur} XP`}>
+                    <div class="tx-xp-bar">
+                      <div class="tx-xp-fill" style={{ width: `${pct}%` }} />
+                    </div>
+                    <span class="tx-xp-text">{cur} / {next ?? "Max"} XP{l.level ? ` (Lv ${l.level})` : ""}</span>
+                  </div>
+                ) : null}
+              </div>
+              {lost ? null : <span class="tx-xp">+{l.xp} XP</span>}
+              {!lost && l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
+            </li>
+          );
+        })}
       </ul>
+      {r.gold ? <p class="tx-loot-line">Gold won: +{r.gold} gold</p> : null}
+      {r.loot && r.loot.length > 0 ? (
+        <p class="tx-loot-line">Loot: {r.loot.map(it => `${it.name}${it.count && it.count > 1 ? ` x${it.count}` : ""}`).join(", ")}</p>
+      ) : null}
+      {r.choices && r.choices.waiting > 0 ? <ChoicesCard choices={r.choices} send={send} /> : null}
       {r.vip && (lost || fled) && r.difficulty !== "Story" ? <p class="tx-note center tx-difficulty-hint">Too hard? After Carry on, change difficulty in the party menu</p> : null}
-      {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
+      {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character</a></p> : null}
       {r.vip ? (
         <div class="tx-foot">
           <button type="button" class="tx-btn gold" onClick={() => send("next")}>Carry on</button>
