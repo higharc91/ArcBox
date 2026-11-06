@@ -13,7 +13,8 @@ public sealed record RegionDef(string Id, string Name, [property: JsonRequired] 
     ImmutableArray<BeatSpot> Beats, RegionSpawns Spawns, ImmutableArray<RegionEdge> Edges,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionProps> Props = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionBuilding> Buildings = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionPerson> People = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionPerson> People = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Weather = null);
 
 /// <summary>
 /// A group of props of the same <see cref="Id"/> and optional <see cref="Variant"/> standing at world tiles <see cref="At"/>.

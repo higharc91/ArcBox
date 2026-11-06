@@ -70,6 +70,20 @@ public partial class TacticsAudio : Node
     /// <summary>The pack to play from.</summary>
     public void Use(string root, SoundBank bank) => (_root, _bank, _picker) = (root, bank, new SoundPicker(bank));
 
+    public override void _ExitTree()
+    {
+        _stingEnds.Stop();
+        foreach (var fade in _fades.Values) fade.Kill();
+        _fades.Clear();
+        foreach (var player in _music.Concat(_effects).Append(_bed).Append(_creatureBed))
+        {
+            player.Stop();
+            player.Stream = null;
+        }
+        foreach (var stream in _streams.Values.OfType<AudioStreamOggVorbis>()) stream.Dispose();
+        _streams.Clear();
+    }
+
     /// <summary>Asks for <paramref name="cue"/>, or leaves the music alone for null. Asking for what's already on changes nothing.</summary>
     public void Music(MusicCue? cue)
     {
