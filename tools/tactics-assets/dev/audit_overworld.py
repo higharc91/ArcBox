@@ -18,7 +18,7 @@ import json
 from pathlib import Path
 from PIL import Image
 from arcpix.out import PACK
-from parts.overworld_review import assessment
+from parts.overworld_review import assessment, NONVISUAL_PROPS
 
 REPORT=Path(__file__).resolve().parents[3]/'docs/superpowers/reports/overworld-art-review'
 
@@ -50,7 +50,7 @@ def inventory():
                 for var,path in item['variants'].items():
                     look=item.get('looks',{}).get(var,{})
                     add(section,name,var,path,look.get('size',item['size']),item['frames'],look.get('anchor',item['anchor']),
-                        role='sprite',blocks=item['blocks'],cover=item['cover'])
+                        role='collision proxy' if name in NONVISUAL_PROPS else 'sprite',blocks=item['blocks'],cover=item['cover'])
                 if item.get('light',{}).get('emissive'):
                     add(section,name,'emissive-mask',item['light']['emissive'],item['size'],item['frames'],role='emissive mask')
         if section=='town':
@@ -77,6 +77,21 @@ def inventory():
     for name,frames in (('wild_crow',1),('wild_crow_anim',4)):
         add('props',name,'retired',name+'.png',[34,32],frames,
             role='retired wildlife sheet',runtime=False)
+    # The approved native ground installation retains its earlier source images.
+    # Keep the whitelist explicit so a newly shipped PNG still requires review.
+    for family,variant,path,size in (
+        ('ash_ford','charred','top/ash_ford.png',[256,256]),
+        ('grass_ford','autumn','top/grass_ford.png',[256,256]),
+        ('grass_ford','dry','top/grass_ford_dry.png',[256,256]),
+        ('dirt_ford','wet','top/dirt_ford.png',[256,256]),
+        ('dirt_ford','dry','top/dirt_ford_dry.png',[256,256]),
+        ('path_ford','packed','top/path_ford.png',[256,256]),
+        ('rock_ford','bank','top/rock_ford.png',[256,256]),
+        ('ford_water','clear','top/ford_water_clear.png',[256,256]),
+        ('cliff_ford','grey','side/cliff_ford_grey.png',[256,32]),
+    ):
+        add('terrain',family,'retired-'+variant,path,size,
+            role='retired terrain source',runtime=False)
     return records
 
 
@@ -101,7 +116,11 @@ def review(before=None,output=REPORT):
             if density<1 or density!=int(density) or im.width!=w*frames*density:
                 raise ValueError(f'{path}: {im.size} is not a uniform integer-density strip of {(w*frames,h)}')
             record['textureDensity']=int(density)
-            if not im.convert('RGBA').getchannel('A').getbbox():raise ValueError(f'Empty asset: {path}')
+            visible=im.convert('RGBA').getchannel('A').getbbox()
+            if record['role']=='collision proxy':
+                if not record.get('blocks') or (w,h,frames)!=(1,1,1) or visible:
+                    raise ValueError(f'Invalid invisible collision proxy: {path}')
+            elif not visible:raise ValueError(f'Empty asset: {path}')
             if record['anchor']:
                 ax,ay=record['anchor']
                 if not (0<=ax<w and 0<=ay<h):raise ValueError(f'{path}: anchor outside frame')
@@ -121,7 +140,7 @@ def review(before=None,output=REPORT):
             record['placement']=f'{usage[material]} tiles in saved regions; battle maps may also use it.'
         elif section=='terrain':record['placement']='Selected by material renderer or explicitly placed decal; not a standalone region prop.'
         else:record['placement']='Library asset; placement must be checked in the saved region and live walking renderer.'
-        if record.get('runtime') is False:record['placement']='Retained source sheet, unreferenced by live manifests; current wildlife uses field_crow.'
+        if record.get('runtime') is False:record['placement']='Retained historical source, unreferenced by live manifests; the current manifest selects the replacement art.'
         if record.get('replaces'):
             record['assessment']+=' Animated replacement: geometry/anchor must agree with the named static prop.'
             static=json.loads((PACK/'props/manifest.json').read_text())['props'][record['replaces']]

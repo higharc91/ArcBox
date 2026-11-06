@@ -4,6 +4,7 @@ These are placement recommendations, not new canon or live prop placements.
 Region lore, scenes and the painted region remain the sources of truth.
 """
 POLICIES={}
+NONVISUAL_PROPS=frozenset({'warden_gate_collision'})
 
 
 def group(section,names,where,note):
@@ -80,6 +81,75 @@ group('props','training_dummy archery_target','Guard training yard',
     'Keep readable targets, stable bases and worn equipment. Place in a small guarded yard with approach space, not on public travel lanes.')
 group('props','vent','Active volcanic ground / Ember Keep',
     'Keep the hot core and basalt rim. This is active heat; do not use it as a substitute for century-old cold ash.')
+
+# Explicit reviewed families from the approved #82 installation; unknown names still fail.
+group('terrain',
+    'warden_deck',
+    'Approved Warden bridge at the ford',
+    'Owner-approved timber deck over the supported arches. Preserve its walkable surface, fuel classification and tile-owned structure; the broken northern bridge remains impassable.')
+
+group('terrain',
+    'warden_ramp road_ramp',
+    'Approved bridge approaches and authored road elevation changes',
+    'Supported sloped masonry joins road and deck heights. Keep shared corner heights, character surface sampling and clear travel lanes aligned with the saved geometry.')
+
+group('terrain',
+    'warden_edge',
+    'Approved Warden bridge parapets',
+    'Stone edge surfaces retain blocking parapets beside the cart lane. These tiles belong to the authored structure, not an extra river crossing.')
+
+group('props',
+    'warden_fortified_10_10 warden_fortified_10_6 warden_fortified_10_7 warden_fortified_10_8 '
+    'warden_fortified_10_9 warden_fortified_11_6 warden_fortified_11_7 warden_fortified_2_10 '
+    'warden_fortified_2_9 warden_fortified_3_10 warden_fortified_3_11 warden_fortified_3_9 '
+    'warden_fortified_4_10 warden_fortified_4_11 warden_fortified_4_9 warden_fortified_5_10 '
+    'warden_fortified_5_11 warden_fortified_5_8 warden_fortified_5_9 warden_fortified_6_10 '
+    'warden_fortified_6_11 warden_fortified_6_8 warden_fortified_6_9 warden_fortified_7_10 '
+    'warden_fortified_7_11 warden_fortified_7_8 warden_fortified_7_9 warden_fortified_8_10 '
+    'warden_fortified_8_11 warden_fortified_8_8 warden_fortified_8_9 warden_fortified_9_10 '
+    'warden_fortified_9_11 warden_fortified_9_6 warden_fortified_9_7 warden_fortified_9_8 '
+    'warden_fortified_9_9',
+    'Owner-approved Ford bridge: fortified',
+    'Closed defenses, hides, stakes and the modest gatehouse follow the fortified story flag state. Each approved piece belongs to one physical tile. Preserve its native anchor, density and sorting; do not combine the pieces into a single overlay.')
+
+group('props',
+    'warden_force_10_10 warden_force_10_6 warden_force_10_7 warden_force_10_8 warden_force_10_9 '
+    'warden_force_11_6 warden_force_11_7 warden_force_2_10 warden_force_2_9 warden_force_3_10 '
+    'warden_force_3_11 warden_force_3_9 warden_force_4_10 warden_force_4_11 warden_force_4_7 '
+    'warden_force_4_9 warden_force_5_10 warden_force_5_11 warden_force_5_8 warden_force_5_9 '
+    'warden_force_6_10 warden_force_6_11 warden_force_6_8 warden_force_6_9 warden_force_7_10 '
+    'warden_force_7_11 warden_force_7_8 warden_force_7_9 warden_force_8_10 warden_force_8_11 '
+    'warden_force_8_8 warden_force_8_9 warden_force_9_10 warden_force_9_11 warden_force_9_6 '
+    'warden_force_9_7 warden_force_9_8 warden_force_9_9',
+    'Owner-approved Ford bridge: force',
+    'Broken removable defenses are pulled aside after force; the supported bridge remains sound. Each approved piece belongs to one physical tile. Preserve its native anchor, density and sorting; do not combine the pieces into a single overlay.')
+
+group('props',
+    'warden_parley_10_10 warden_parley_10_6 warden_parley_10_7 warden_parley_10_8 warden_parley_10_9 '
+    'warden_parley_11_6 warden_parley_11_7 warden_parley_2_10 warden_parley_2_9 warden_parley_3_10 '
+    'warden_parley_3_11 warden_parley_3_9 warden_parley_4_10 warden_parley_4_11 warden_parley_4_8 '
+    'warden_parley_4_9 warden_parley_5_10 warden_parley_5_11 warden_parley_5_8 warden_parley_5_9 '
+    'warden_parley_6_10 warden_parley_6_11 warden_parley_6_8 warden_parley_6_9 warden_parley_7_10 '
+    'warden_parley_7_11 warden_parley_7_8 warden_parley_7_9 warden_parley_8_10 warden_parley_8_11 '
+    'warden_parley_8_8 warden_parley_8_9 warden_parley_9_10 warden_parley_9_11 warden_parley_9_6 '
+    'warden_parley_9_7 warden_parley_9_8 warden_parley_9_9',
+    'Owner-approved Ford bridge: parley',
+    'Open defenses, stacked materials and modest grain delivery follow the parley outcome. Each approved piece belongs to one physical tile. Preserve its native anchor, density and sorting; do not combine the pieces into a single overlay.')
+
+group('props',
+    'warden_gate_collision',
+    'Ford checkpoint collision',
+    'Intentionally invisible one-pixel collision proxy. It blocks the closed checkpoint while the visible gate art supplies its appearance; story flags remove its collision after the crossing is won.')
+
+group('props',
+    'road_ramp_q_-1_0_-2_-3_d1 road_ramp_q_-1_0_0_-3_d1 road_ramp_q_-2_0_0_-2_d2 road_ramp_q_0_-2_-2_0_d1 '
+    'road_ramp_q_0_-3_-2_0_d1 road_ramp_q_0_0_-1_-2_d1 road_ramp_q_0_0_-1_0_d1 road_ramp_q_0_0_-2_-1_d1 '
+    'road_ramp_q_0_0_-2_-3_d1 road_ramp_q_0_0_-3_-1_d1 road_ramp_q_0_0_-3_-2_d1 road_ramp_q_0_0_0_-1_d1 '
+    'road_ramp_q_0_0_0_1_d1 road_ramp_q_0_1_0_0_d1 road_ramp_q_0_2_2_0_d1 road_ramp_q_0_3_1_0_d1 '
+    'road_ramp_q_1_0_0_0_d1 road_ramp_q_1_0_0_2_d1 road_ramp_q_1_2_0_0_d1 road_ramp_q_2_0_0_2_d1 '
+    'road_ramp_q_2_1_0_0_d1 road_ramp_q_2_3_1_0_d1 road_ramp_q_3_1_0_0_d1 road_ramp_q_3_2_0_0_d1',
+    'Approved authored road ramps',
+    'Tile-owned sloped road meshes match the road material, shared corner heights and character footing. Keep them aligned to the saved road cells; they are structural surfaces, not loose scenery.')
 
 group('terrain','grass grass_lip','Warm fields / cooling autumn verge',
     'Reduced grass tuft density and isolated white tips. Preserve broad colour masses; autumn/dry palettes carry the cooling land while green/lush remain near warm fields.')
