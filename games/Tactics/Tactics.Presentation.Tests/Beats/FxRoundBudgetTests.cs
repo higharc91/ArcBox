@@ -15,6 +15,7 @@ public sealed class FxRoundBudgetTests
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
         var art = FxArt.Load(Pack.Root);
+        var unitArt = UnitArt.Load(Pack.Root);
         string[] classes = ["fighter", "cleric", "rogue", "wizard", "barbarian", "bard"];
         ImmutableArray<PartyMember> party = [.. classes.Select((cls, i) => new PartyMember(new($"hero{i + 1}"),
             SheetBuilder.DefaultCharacter(cls, "human", cls, null, 1, rules), new AiControlled("companion")))];
@@ -26,6 +27,16 @@ public sealed class FxRoundBudgetTests
             var state = Battle.Start(setup, rules, seed).State;
             var totals = new Dictionary<(int Round, BattleCinematics Mode), double>();
             var carried = new Dictionary<BattleCinematics, CutInFrame?>();
+            var actual = new Dictionary<(int Round, BattleCinematics Mode), double>();
+            var players = Enum.GetValues<BattleCinematics>().ToDictionary(mode => mode, mode =>
+            {
+                var player = new BeatPlayer(art, unitArt) { EnhancedEffects = mode != BattleCinematics.Off };
+                if (mode != BattleCinematics.Off)
+                    player.CutIn = (beat, before, script) => CutInPlayback.For(beat, before, script, rules,
+                        new BoardTerrain(setup.Map, before.Board), mode, player.CarriedCamera);
+                return player;
+            });
+            var sequence = 0;
             var actions = 0;
             while (state.Outcome is null && state.Round <= 3 && actions++ < 300)
             {
@@ -59,14 +70,20 @@ public sealed class FxRoundBudgetTests
                 Assert.Equal(0, totals.GetValueOrDefault((round, BattleCinematics.Off)));
                 Assert.InRange(automatic, 0, 3.0 + 1e-6); // measured fixture bounds; the owner chooses the product cap
                 Assert.InRange(full, automatic, 3.3 + 1e-6);
-                rows.Add(new { Seed = seed, Round = round, Full = full, AutoSixPlayers = automatic, Off = 0 });
+                var original = actual.GetValueOrDefault((round, BattleCinematics.Off));
+                var measuredFull = actual.GetValueOrDefault((round, BattleCinematics.Full)) - original;
+                var measuredAuto = actual.GetValueOrDefault((round, BattleCinematics.Short)) - original;
+                Assert.InRange(measuredAuto, -1e-6, 3.1);
+                Assert.InRange(measuredFull, measuredAuto - 1e-6, 3.4);
+                rows.Add(new { Seed = seed, Round = round, Full = measuredFull, AutoSixPlayers = measuredAuto,
+                    Off = 0, IdealFull = full, IdealAutoSixPlayers = automatic, PlaybackFps = 60 });
                 complete++;
             }
 
             void Measure(BattleState before, Resolution result, UnitId actor)
             {
                 var old = View(before, []);
-                var beat = new Beat(actions, actor, result.Events);
+                var beat = new Beat(++sequence, actor, result.Events);
                 var next = View(result.State, [beat]);
                 var script = BeatScript.Of(beat, old, next, art);
                 var terrain = new BoardTerrain(setup.Map, old.Board);
@@ -75,6 +92,14 @@ public sealed class FxRoundBudgetTests
                     var playback = CutInPlayback.For(beat, old, script, rules, terrain, mode, incoming: carried.GetValueOrDefault(mode));
                     totals[(before.Round, mode)] = totals.GetValueOrDefault((before.Round, mode)) + (playback?.Extra ?? 0);
                     carried[mode] = playback?.HoldsForReaction == true ? playback.Frame(playback.Length) : null;
+                    var player = players[mode];
+                    player.Receive(old); player.Receive(next);
+                    var frames = 0;
+                    do
+                    {
+                        Assert.True(++frames < 2000, $"No shown for seed {seed}, beat {sequence}, {mode}");
+                    } while (!player.Tick(1.0 / 60).Shown.Contains(sequence));
+                    actual[(before.Round, mode)] = actual.GetValueOrDefault((before.Round, mode)) + frames / 60.0;
                 }
             }
         }
