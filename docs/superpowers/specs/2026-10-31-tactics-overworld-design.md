@@ -152,3 +152,11 @@ This starts after milestone 3b.
 - **Weekly chapters depend on painting time.** A hand-painted world is slower to extend than a generated one, so the time Ashen Ford takes to paint should be noted as the guide for later chapters.
 - **Painted terrain can drift from the rules.** The export and checks in §3 keep the data the game uses in step with what was painted.
 - **Battle areas fix where fights happen.** The game has no fights away from a stamp in this slice.
+
+## Party checks (#158)
+
+Single-hero checks offer **Help** to a present hero proficient in that skill. One helper grants advantage (two d20s, keep the higher); a hero cannot help their own roll. Repeated Help messages retain the offer. The TV names the helper.
+
+An option's check can set `"group": true`: every present hero rolls their own d20 and bonus, and at least half must succeed. This supports shared sneaking (Stealth), climbing (Athletics), and enduring the wilds (Survival). Chapter I's search for the trail after Maud uses group Perception. Away heroes do not roll in a group. Single-hero checks retain their existing away-character selection rule.
+
+A pending check saves its seed before selection. Each member's dice derive from that seed and their stable member ID; Help and restarts cannot reroll it. The saved outcome includes both advantage dice or all group dice and applies its flags/gold once. Existing documents need no version migration.

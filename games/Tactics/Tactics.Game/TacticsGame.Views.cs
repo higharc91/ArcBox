@@ -383,7 +383,7 @@ public sealed record StoryCardView(string Member, string Name, string Player, st
 /// <param name="Span">How long the pick's clock ran when it started, in seconds, with <paramref name="Deadline"/> (<see cref="StoryAskView.Span"/>).</param>
 /// <param name="Deadline">When the pick closes, or null.</param>
 public sealed record StoryCheckView(string Skill, int? Dc, string Title, ImmutableArray<StoryCardView> Cards, string? Chosen, RollResult? Roll,
-    bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null, double? Span = null);
+    bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null, double? Span = null, string? Helper = null, bool GroupCheck = false, [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<StoryGroupRoll> Group = default);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>

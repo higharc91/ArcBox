@@ -44,6 +44,12 @@
         "here": true
       }
     ],
+    "help": {
+      "can": false,
+      "member": null,
+      "name": null
+    },
+    "group": false,
     "mine": null,
     "canChoose": true,
     "tie": false,

@@ -382,7 +382,7 @@ public sealed partial class LoreBook
             : OptionTags.None;
         var check = Field(e, "check", where) is { ValueKind: not (JsonValueKind.Undefined or JsonValueKind.Null) } c
             ? new SceneCheck(Required(c, "skill", $"the check of {where}"), Whole(c, "dc", $"the check of {where}"),
-                Required(c, "pass", $"the check of {where}"), Required(c, "fail", $"the check of {where}"))
+                Required(c, "pass", $"the check of {where}"), Required(c, "fail", $"the check of {where}"), Flag(c, "group", $"the check of {where}"))
             : null;
         if (check is not null && SkillCheck.StatOf(check.Skill) is null)
             throw new BadLore($"the check of {where} is of '{check.Skill}', which isn't a skill.");

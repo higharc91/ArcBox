@@ -91,7 +91,13 @@ public sealed record SavedStage(Tile Origin, int Height);
 /// A roll made in a scene (overworld 5d §6), kept with the node it leads to so a restart never rolls again: who rolled, for which option
 /// and skill, the DC, the die, their bonus and whether it passed.
 /// </summary>
-public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed);
+/// <summary>One present hero’s d20 and bonus in a group check.</summary>
+public sealed record StoryGroupRoll(string Member, int Die, int Bonus, bool Passed);
+/// <summary>A saved result. For groups, Die counts successes, Bonus is zero, and Group retains the actual d20s.</summary>
+public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Helper = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<int> Dice = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<StoryGroupRoll> Group = default);
 
 /// <summary>
 /// Where a story beat is (overworld 5d §7), saved on every line so that a restart resumes on the same line. Votes aren't kept: a restart
@@ -122,7 +128,9 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ThingCursor? Thing = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PersonCursor? Person = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PersonCursor? Person = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? CheckSeed = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Helper = null)
 {
     /// <summary>The scenes before a fight, and all of a story beat's.</summary>
     public const string Lead = "lead";

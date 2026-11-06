@@ -45,6 +45,20 @@ public sealed class PhoneFixtureTests
     }
 
     [Fact]
+    public void Help_and_group_checks_match_their_fixtures()
+    {
+        var help = PartyCheckTests.Waiting();
+        help.Send(3, "help");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-help"] = Node(help.Harness.PlayerView(0)) });
+        PartyCheckTests.Pick(help);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-help-rolled"] = Node(help.Harness.PlayerView(0)) });
+        var group = PartyCheckTests.Waiting(true);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-group"] = Node(group.Harness.PlayerView(0)) });
+        group.Send(0, "groupRoll");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["check-group-rolled"] = Node(group.Harness.PlayerView(0)) });
+    }
+
+    [Fact]
     public void Giving_to_an_absent_member_matches_the_walk_fixture()
     {
         var s = ShopTests.AtShop(100);
