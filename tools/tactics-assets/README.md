@@ -589,6 +589,42 @@ inspire, rage, hold, dispel and web. `signature/` adds 12 school spells (`spell_
 of Cold, Spirit Guardians and others), whose entries carry `school` instead of `subclass`. Abilities pick their
 effect in `presentation.fx`.
 
+### Shared combat language (#247)
+
+Keep effects at the characters' pixel scale, with nearest-neighbour filtering and quantised ramps; no smooth
+particles or gradients. Reuse the existing ramps below. These are the shared design defaults for the class
+passes, not a claim that all existing effects have been converted. Distinguish elements by motion and silhouette
+as well as colour, so Reduced effects still communicate the action.
+
+| Type | Body ramp (in `parts/fx.py`) | Motif |
+|---|---|---|
+| Fire | `magic/fire` | Rising tapered tongues, hot core, falling embers |
+| Cold | `fx/ice` | Angular crystal wedges, outward frost, brittle shards |
+| Lightning | `fx/storm` | Narrow branching zigzags, quick forks, short afterimage |
+| Thunder | `fx/thunder` | Expanding broken pressure rings and displaced dust |
+| Acid | `fx/acid` | Heavy droplets, splash crown, low corrosive residue |
+| Poison | `fx/poison` | Rounded low drifting puffs and sparse suspended motes |
+| Necrotic | `fx/necro` with `fx/grave` accent | Inward wisps and broken green-black tendrils |
+| Radiant | `fx/radiant` | Clean outward rays and a brief star-shaped impact |
+| Force | `fx/force` | Hard-edged concentric facets and compact geometric pulses |
+| Psychic | `fx/psychic` | Offset mirrored arcs and a small ripple above the head |
+| Piercing | `fx/steel` | Thin directional streak and a compact puncture spark |
+| Slashing | `fx/steel` with `fx/spark` accent | Curved directional smear and short edge sparks |
+| Bludgeoning | `fx/dust` with `fx/spark` accent | Compressed impact disk, chunky chips and low dust |
+| Healing | `magic/nature` with `magic/holy` core | Ascending separated motes and an opening leaf-like ring |
+| Buffs | `fx/gold` with `fx/wind` core | Stable broken ward ring and slowly orbiting rune marks |
+
+Use anticipation → release → impact → short residue. A flash is local to the struck unit/effect, never a
+full-screen white overlay. Reduced must omit flash, hit-stop and camera shake, keep the identifying shape,
+and shorten the residue. Area telegraphs must use the rule's affected tile set; the art must not suggest a
+larger hit area. Effects must leave figures, HP bars and the grid readable beyond the brief impact.
+
+The optional `presentation.cutIn` is `none`, `short` or `full`. Missing values resolve in the presentation
+layer: ordinary attacks/cantrips/reactions have no cut-in, paid features and levelled spells are short,
+and `signature.*` art and downing criticals are full. The TV preference can shorten or disable a tier;
+five/six-player sessions default to Short unless the viewer explicitly chooses otherwise. The pure timeline
+foundation is in `BattleCutIn`; TV playback/settings integration is tracked in the #247 progress ledger.
+
 ## Backgrounds
 
 `content/tactics/base/backgrounds/` holds parallax layers:
