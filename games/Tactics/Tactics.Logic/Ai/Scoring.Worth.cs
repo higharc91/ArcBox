@@ -9,8 +9,9 @@ internal sealed partial class Scorer
     /// <paramref name="p"/> (spec §5.2, §5.4), in HP-like points:
     /// <list type="bullet">
     /// <item>A hostile: damage (capped at what it has left, more for a hurt one with focus fire), the chance it drops times
-    /// what it is worth (<see cref="KillWorth"/>), and control (a lost turn costs it its damage per round). A Downed one is
-    /// worth nothing unless the profile is cruel.</item>
+    /// what it is worth (<see cref="KillWorth"/>), and control (a lost turn costs it its damage per round). Hurting a Downed
+    /// one ticks its countdown: a cruel profile gains the chance of a hit times its worth over the countdown left; any other
+    /// loses as much (fair play, spec §5.4, #110), so an area that would catch it looks for another aim.</item>
     /// <item>An ally (or the user): healing (double below half HP), getting up from Downed, buffs; hurting it costs one and a
     /// half times what hurting a hostile is worth.</item>
     /// <item>A neutral: hurting it costs a little. A unit the objectives are about (<see cref="IsObjective"/>: a protected
@@ -27,7 +28,7 @@ internal sealed partial class Scorer
         else if (Hostile(user, target))
         {
             if (target.Life == LifeState.Downed)
-                return p.Cruel ? p.Kill * outcome.Damage.AtLeast(1) * KillWorth(target) / Math.Max(1, target.Countdown) : 0;
+                return (p.Cruel ? 1 : -1) * p.Kill * outcome.Damage.AtLeast(1) * KillWorth(target) / Math.Max(1, target.Countdown);
             var pKill = hp > 0 ? outcome.Damage.AtLeast(hp) : 1;
             var focus = 1 + p.FocusFire * (1 - (double)target.Hp / maxHp);
             value = p.Damage * outcome.Damage.MeanCapped(hp) * focus + p.Kill * pKill * KillWorth(target)
