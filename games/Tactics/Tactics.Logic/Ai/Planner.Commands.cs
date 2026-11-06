@@ -98,17 +98,26 @@ internal sealed partial class Planner
     /// may take out of reach of a later action: a Downed one it hits (it may finish it), any it may kill (one that dies at
     /// 0 HP, when its damage can reach the HP left: <see cref="MayDrop"/>), and unless the profile is cruel any foe it may
     /// Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile in
-    /// reach with the least HP, ties by id), if they may drop it. None for an action that deals no damage.
+    /// reach with the least HP, ties by id), if they may drop it. Whatever the damage: the targets of an attack the unit's
+    /// own passives turn into a push on a hit (Repelling Blast), which may carry them out of reach, and the unit's
+    /// concentration summons when the action starts a new concentration, which sends them away.
     /// </summary>
     private ImmutableSortedSet<UnitId> Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
     {
-        if (usable is null || action is null || !Scorer.Deals(usable.Ability.Effects))
+        if (usable is null || action is null)
             return [];
-        var leaving = action.Affected.Where(id => _s.Units[id] is var u
-                                                  && (u.Life == LifeState.Downed
-                                                      || (!DownedRules.GoesDown(u) || !_p.Cruel && Scorer.Hostile(_me, u))
-                                                      && MayDrop(usable, action, at, id)))
-            .ToImmutableSortedSet();
+        var gone = ImmutableSortedSet<UnitId>.Empty;
+        if (Scorer.FirstAttack(usable.Ability.Effects) is not null && PushesOnHit())
+            gone = gone.Union(action.Affected);
+        if (usable.Ability.Cost.Concentration && _me.Concentrating is not null)
+            gone = gone.Union(_s.Units.Values
+                .Where(u => u.Conditions.Any(c => c.Id == Summons.Marker && c.Concentration && c.Source == _me.Id)).Select(u => u.Id));
+        if (!Scorer.Deals(usable.Ability.Effects))
+            return gone;
+        var leaving = gone.Union(action.Affected.Where(id => _s.Units[id] is var u
+                                                             && (u.Life == LifeState.Downed
+                                                                 || (!DownedRules.GoesDown(u) || !_p.Cruel && Scorer.Hostile(_me, u))
+                                                                 && MayDrop(usable, action, at, id))));
         var me = at.State.Units[_me.Id];
         if (Strikes.Aimed(usable.Ability) && me.Sheet.Attacks > 1 && action.Affected.Any(id => MayDrop(usable, action, at, id))
             && at.State.Units.Values
@@ -119,6 +128,12 @@ internal sealed partial class Planner
             leaving = leaving.Add(next.Id);
         return leaving;
     }
+
+    private bool? _pushesOnHit;
+
+    /// <summary>True when one of the unit's own passives pushes, pulls or moves the unit it hits with an attack (Repelling Blast).</summary>
+    private bool PushesOnHit() => _pushesOnHit ??= Modifiers.Passives(_me, _rules)
+        .Any(p => p.Hook == HookKind.OnAttackHit && Scorer.All(p.Effects).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect));
 
     /// <summary>An extra action and the second action it buys, with what the second may take out of reach and whether it moves units or changes the ground.</summary>
     private sealed record Surging(Use Surge, Use Second, ImmutableSortedSet<UnitId> Leaving, bool Moves);

@@ -238,6 +238,51 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void The_bonus_action_keeps_off_a_foe_the_main_action_may_push_out_of_reach()
+    {
+        // Repelling Blast pushes a foe hit by a spell attack 2 tiles: Eldritch Blast from 6 tiles may leave Kara 8 away, out of
+        // Hex's range, so Hex (worth its extra damage on the warlock's later hits) isn't planned on her after the blast.
+        var (blast, hex) = (A("warlock.eldritch_blast"), A("warlock.hex"));
+        var (repelling, hexDamage) = (Base.Passives["warlock.repelling_blast"], Base.Passives["warlock.hex_damage"]);
+        var warlock = Mage(blast, hex) with
+        {
+            Level = 1, CastingStat = "Cha", Scores = TestSheets.Scores(8, 14, 12, 10, 10, 16), Move = 0, Resources = Ordinal.Map(("pact", 2)),
+            Passives = [repelling.Id, hexDamage.Id],
+        };
+        var battle = On(Open(10, 1)).With(blast, hex).WithPassives(repelling, hexDamage).WithConditions([.. Base.Conditions.Values])
+            .Enemy("wren", warlock, T(0, 0), new AiControlled("caster"))
+            .Party("kara", TestSheets.Fighter with { Move = 0, MaxHp = 40 }, T(6, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("wren"), battle.Rules);
+
+        Assert.True(UseOf(plan, "warlock.eldritch_blast")?.Target.Unit == U("kara") && UseOf(plan, "warlock.hex") is null, plan.Explain);
+    }
+
+    [Fact]
+    public void The_bonus_action_keeps_off_a_summon_the_main_action_dismisses()
+    {
+        // The druid holds Conjure Animals; Hold Person is a new concentration, which ends it and sends the wolf away, so the
+        // Healing Word after it isn't planned on the wolf.
+        var (hold, word) = (A("cleric.hold_person"), A("cleric.healing_word"));
+        var druid = First(TestSheets.Cleric.Knowing(hold, word)) with { Level = 5, Move = 0, Resources = Ordinal.Map(("devotion", 6)) };
+        var battle = On(Open(8, 3)).With(hold, word).WithConditions([.. Base.Conditions.Values])
+            .Enemy("druid", druid, T(1, 1), new AiControlled("healer"))
+            .Enemy("wolf", TestSheets.Wolf with { Move = 0 }, T(1, 0))
+            .Party("brute", TestSheets.Fighter with { MaxHp = 40, Move = 0, Attacks = 3 }, T(3, 1));
+        var marker = new ActiveCondition(new ConditionId("summoned"), U("druid"), RoundsLeft: null, UntilSave: false, SaveDc: 0, Stat.Con,
+            Concentration: true);
+        var state = battle.Start().State
+            .Change("druid", u => u with { Concentrating = new AbilityId("druid.conjure_animals") })
+            .Change("wolf", u => u with { Hp = 3, SummonedBy = U("druid"), Conditions = u.Conditions.Add(marker) });
+
+        var plan = Ai.Plan(state, U("druid"), battle.Rules);
+
+        Assert.True(UseOf(plan, "cleric.hold_person") is not null && UseOf(plan, "cleric.healing_word")?.Target.Unit != U("wolf"), plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
     public void A_cleric_wards_the_ally_the_foes_are_about_to_drop()
     {
         // Death Ward does nothing until its holder is Downed: it is worth the chance the foes drop it next round (the threat on
