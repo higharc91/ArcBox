@@ -4,6 +4,11 @@ using System.Text.Json.Serialization;
 namespace Tactics.Logic;
 
 /// <summary>A Downed unit's countdown already lost to one hit (<see cref="Resolution"/>) while that hit resolves.</summary>
+/// <summary>
+/// <see cref="Unit"/> delayed its turn to just behind <see cref="After"/> (null: to the end of the order).
+/// </summary>
+public readonly record struct DelayMark(UnitId Unit, UnitId? After);
+
 public readonly record struct HitMark(int Resolution, UnitId Unit) : IComparable<HitMark>
 {
     /// <summary>Orders by resolution, then unit.</summary>
@@ -68,6 +73,14 @@ public sealed record BattleState(
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public int NextResolution { get; init; }
+
+    /// <summary>
+    /// The places units took by delaying, oldest first, one per unit: <see cref="TurnOrder.Sort"/> puts each such unit
+    /// right behind its <see cref="DelayMark.After"/> (last when null) after sorting by initiative, so a delayed turn
+    /// keeps its new place in later rounds. Left out of the JSON when empty.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public ImmutableArray<DelayMark> Delays { get; init; } = [];
 
     /// <summary>The Downed units whose countdown a resolution still under way has already hit (one tick per hit).</summary>
     public ImmutableSortedSet<HitMark> DownedHits { get; init; } = [];

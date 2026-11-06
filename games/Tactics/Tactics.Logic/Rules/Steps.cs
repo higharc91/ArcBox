@@ -88,17 +88,19 @@ public sealed record SkipTurnStep(UnitId Unit) : Step
 
 /// <summary>
 /// Moves <see cref="Unit"/> to <see cref="ToIndex"/> in this round's order and starts the turn of the unit now at its old
-/// place. When the new place comes up, the delayed unit's turn resumes (see <see cref="Battle.BeginTurn"/>).
+/// place. The new place is kept in later rounds (<see cref="BattleState.Delays"/>). When the new place comes up, the delayed unit's turn resumes (see <see cref="Battle.BeginTurn"/>).
 /// </summary>
 public sealed record DelayStep(UnitId Unit, int ToIndex) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
-        var order = w.State.Order;
+        var order = w.State.Order.RemoveAt(w.State.Order.IndexOf(Unit)).Insert(ToIndex, Unit);
+        UnitId? after = ToIndex < order.Length - 1 ? order[ToIndex - 1] : null;
         w.State = w.State with
         {
-            Order = order.RemoveAt(order.IndexOf(Unit)).Insert(ToIndex, Unit),
+            Order = order,
+            Delays = w.State.Delays.RemoveAll(d => d.Unit == Unit).Add(new DelayMark(Unit, after)),
             DelayedThisRound = w.State.DelayedThisRound.Add(Unit),
         };
         w.Emit(new Delayed(Unit, ToIndex));

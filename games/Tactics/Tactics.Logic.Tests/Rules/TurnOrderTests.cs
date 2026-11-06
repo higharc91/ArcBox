@@ -124,19 +124,56 @@ public sealed class TurnOrderTests
         (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
         Assert.Equal(U("cleric"), state.Active);
 
-        // Next round the delay is forgotten: initiative order again, and the rogue may delay again.
+        // The once-per-round limit resets, but the rogue keeps its new place: right behind the goblin.
         (state, events) = battle.Apply(state, new EndTurn(U("cleric")));
         Assert.Equal(2, state.Round);
-        Assert.Equal(Ids("rogue", "gob", "cleric"), state.Order);
-        Assert.Equal(U("rogue"), state.Active);
-        Assert.Equal(new TurnStarted(U("rogue"), 2), events[^1]);
-        Assert.Equal([U("rogue")], state.StartedThisRound);
+        Assert.Equal(Ids("gob", "rogue", "cleric"), state.Order);
+        Assert.Equal(U("gob"), state.Active);
+        Assert.Equal(new TurnStarted(U("gob"), 2), events[^1]);
+        Assert.Equal([U("gob")], state.StartedThisRound);
         Assert.Empty(state.DelayedThisRound);
 
         // Delaying past the end of the order goes last.
-        (state, events) = battle.Apply(state, new Delay(U("rogue"), 5));
+        (state, events) = battle.Apply(state, new Delay(U("gob"), 5));
+        Assert.Equal(Ids("rogue", "cleric", "gob"), state.Order);
+        Assert.Equal<BattleEvent>([new Delayed(U("gob"), 2), new TurnStarted(U("rogue"), 2)], events);
+    }
+
+    [Fact]
+    public void A_unit_that_delayed_to_the_end_cannot_open_the_next_round_ahead_of_the_enemies_it_waited_past()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("rogue", TestSheets.Rogue, new Tile(0, 0))      // 13
+            .Enemy("gob", TestSheets.Goblin, new Tile(4, 0))       // 12
+            .Party("cleric", TestSheets.Cleric, new Tile(1, 0));   // 10
+        var (state, _) = battle.Start();
+        (state, _) = battle.Apply(state, new Delay(U("rogue"), 5));
         Assert.Equal(Ids("gob", "cleric", "rogue"), state.Order);
-        Assert.Equal<BattleEvent>([new Delayed(U("rogue"), 2), new TurnStarted(U("gob"), 2)], events);
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+        (state, _) = battle.Apply(state, new EndTurn(U("cleric")));
+        (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
+
+        Assert.Equal(2, state.Round);
+        Assert.Equal(Ids("gob", "cleric", "rogue"), state.Order);
+        Assert.Equal(U("gob"), state.Active);
+    }
+
+    [Fact]
+    public void A_delayed_place_survives_a_resume_and_drops_when_the_anchor_leaves()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("rogue", TestSheets.Rogue, new Tile(0, 0))      // 13
+            .Enemy("gob", TestSheets.Goblin, new Tile(4, 0))       // 12
+            .Party("cleric", TestSheets.Cleric, new Tile(1, 0));   // 10
+        var (state, _) = battle.Start();
+        (state, _) = battle.Apply(state, new Delay(U("rogue"), 1));
+        var json = System.Text.Json.JsonSerializer.Serialize(state, ArcJson.Options);
+        state = System.Text.Json.JsonSerializer.Deserialize<BattleState>(json, ArcJson.Options)!;
+        Assert.Equal(Ids("gob", "rogue", "cleric"), TurnOrder.Sort(state, battle.Rules));
+
+        // The goblin, the unit the rogue waited behind, leaves: the rogue falls back to its own initiative.
+        state = state.Change("gob", u => u with { Hp = 0, Life = LifeState.Dead });
+        Assert.Equal(Ids("rogue", "cleric"), TurnOrder.Sort(state, battle.Rules));
     }
 
     [Fact]
@@ -202,6 +239,8 @@ public sealed class TurnOrderTests
         // At the next round's first start the reaction comes back.
         (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
         Assert.Equal(2, state.Round);
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+        Assert.Equal(U("rogue"), state.Active);
         Assert.Equal(new TurnEconomy(4, true, true, true, 0), state.Units[U("rogue")].Economy);
     }
 

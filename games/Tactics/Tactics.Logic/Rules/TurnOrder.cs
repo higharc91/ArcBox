@@ -20,6 +20,7 @@ public static class TurnOrder
     /// Every Up or Downed unit by initiative, highest first. Ties go to player-controlled units, then higher DEX score,
     /// then ordinal <see cref="UnitId"/>. A summon whose summoner is in the order acts right after it (its summons in that
     /// same sort order, each followed by its own); one whose summoner has left takes its place by its own initiative.
+    /// Last, units that delayed (<see cref="BattleState.Delays"/>) move to just behind the unit they waited behind.
     /// </summary>
     public static ImmutableArray<UnitId> Sort(BattleState s, RulesPack rules)
     {
@@ -44,6 +45,22 @@ public static class TurnOrder
 
         foreach (var unit in sorted.Where(u => u.SummonedBy is not { } owner || owner == u.Id || !present.Contains(owner)))
             Place(unit.Id);
-        return order.ToImmutable();
+        return KeepDelays(s, order.ToList());
+    }
+
+    /// <summary>
+    /// Moves every unit that delayed (<see cref="BattleState.Delays"/>, oldest first) to just behind the unit it waited
+    /// behind, or to the end; one whose anchor has left the order keeps its place by initiative.
+    /// </summary>
+    private static ImmutableArray<UnitId> KeepDelays(BattleState s, List<UnitId> order)
+    {
+        foreach (var (unit, after) in s.Delays)
+        {
+            if (order.IndexOf(unit) < 0 || (after is { } a && order.IndexOf(a) < 0))
+                continue;
+            order.Remove(unit);
+            order.Insert(after is { } anchor ? order.IndexOf(anchor) + 1 : order.Count, unit);
+        }
+        return [.. order];
     }
 }
