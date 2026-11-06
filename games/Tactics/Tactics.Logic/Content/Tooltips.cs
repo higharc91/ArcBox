@@ -151,6 +151,8 @@ public static class Tooltips
     {
         List<string> parts = [];
         parts.AddRange(TooltipText.Clauses(c.Static, rules));
+        if (c.Id.Value == "charmed")
+            parts.Add("can't target its charmer with harmful abilities");
         if (c.DamageTaken is { } damage)
             parts.Add(damage.Consume ? $"the next {damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}, then this ends"
                 : $"{damage.Type} damage you take deals {damage.Bonus} extra {damage.Type}");
@@ -212,6 +214,7 @@ public static class Tooltips
             HookKind.OnAttackHit => "When you hit",
             HookKind.OnAttackMiss => "When you miss",
             HookKind.OnDamaged => "When you take damage",
+            HookKind.OnHealed => "When healing restores HP",
             HookKind.OnSave => "When you roll a save",
             HookKind.OnMove => "When you move",
             HookKind.OnEnterTile => "When you enter a tile",

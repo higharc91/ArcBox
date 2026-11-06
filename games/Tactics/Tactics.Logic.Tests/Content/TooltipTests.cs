@@ -314,6 +314,14 @@ public sealed class TooltipTests
         Assert.Equal("no listed effect", Tooltips.For(RulesPack.Helped, Rules));
     }
 
+    [Fact]
+    public void Changed_condition_rules_explain_charm_protection_and_healing_cleanup()
+    {
+        var rules = BasePackTests.Rules;
+        Assert.Contains("can't target its charmer with harmful abilities", Tooltips.For(rules.Conditions[new("charmed")], rules));
+        Assert.Contains("When healing restores HP", Tooltips.For(rules.Conditions[new("bleeding")], rules));
+    }
+
     // ---- Every block and hook ---------------------------------------------------------------------------------------
 
     private static readonly AreaDef Burst1 = new(AreaShape.Burst, 1);

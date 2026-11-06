@@ -22,10 +22,13 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
 
     /// <summary>
     /// The id of the profile a party member plays for the class roles <paramref name="roles"/> (a class's <c>aiTags</c>): <c>healer</c>
-    /// for a healer, <c>caster</c> for a caster or controller, <c>archer</c> for another ranged class, <c>skirmisher</c> for a
+    /// for a healer, <c>controller</c> or <c>guardian</c> for those explicit specialist tags, <c>caster</c> for a general
+    /// caster or control class, <c>archer</c> for another ranged class, <c>skirmisher</c> for a
     /// striker, <c>brute</c> otherwise. The simulator plays it, and the companion derives its weights from it.
     /// </summary>
-    public static string IdForRoles(IReadOnlyCollection<string> roles) => roles.Contains("healer") ? "healer"
+    public static string IdForRoles(IReadOnlyCollection<string> roles) => roles.Contains("controller") ? "controller"
+        : roles.Contains("guardian") ? "guardian"
+        : roles.Contains("healer") ? "healer"
         : roles.Contains("caster") || roles.Contains("control") ? "caster"
         : roles.Contains("ranged") ? "archer"
         : roles.Contains("striker") ? "skirmisher"

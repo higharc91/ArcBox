@@ -188,7 +188,7 @@ public sealed class AiReactionTests
     [Fact]
     public void Uncanny_dodge_when_it_saves_a_quarter_of_max_hp()
     {
-        // Uncanny Dodge at level 5: 1d6 + 5 temporary HP (8.5 on average) against a rogue with 32 HP (a quarter is 8).
+        // AI Dodge halves the hit; it is worthwhile when it prevents a quarter of this rogue's 32 max HP (8).
         var dodge = A("rogue.uncanny_dodge");
         var rogue = TestSheets.Rogue with { Level = 5, MaxHp = 32, Abilities = [dodge.Id], AiProfile = "skirmisher" };
         TestBattle Battle(string weapon) => On().With(dodge)
@@ -205,8 +205,8 @@ public sealed class AiReactionTests
             return Ai.React(state, OfferTo("vex", state, trigger, battle.Rules), battle.Rules);
         }
 
-        // A longsword hit (1d8 + 3, 7.5) is less than 8 HP saved: pass. A greataxe-sized blow (2d12 + 3, 16) loses 8.5 of
-        // it to the temporary HP: take it.
+        // Half a longsword hit (1d8 + 3, mean 7.5) saves less than 8 HP: pass.
+        // Half a large hit (2d12 + 3, mean 16) saves 8 HP: take it.
         Assert.Equal(Reactions.Pass, React("1d8").Id);
         Assert.Equal("rogue.uncanny_dodge", React("2d12").Id);
     }

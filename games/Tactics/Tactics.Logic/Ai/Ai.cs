@@ -25,8 +25,8 @@ public static class Ai
     /// <item>A defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
     /// on the reactor, when it turns the pending hit into a miss against the known roll (the AC it adds, from
     /// <c>statMod</c>s and applied conditions, lifts the AC above the roll's total; never against a natural 20), or when it
-    /// prevents at least 25% of the reactor's max HP of the hit's expected damage (its expected temporary HP, beyond what
-    /// the reactor has, up to that damage). The one that turns the hit into a miss first, then the one preventing most.</item>
+    /// prevents at least 25% of the reactor's max HP of the hit's expected damage (temporary HP beyond what
+    /// the reactor has, resistance or halving, capped at that damage). The one that turns the hit into a miss first, then the one preventing most.</item>
     /// <item>The opportunity attack, or another reaction aimed at the actor (a rebuke, a counterspell), when its expected
     /// value is above 0: what it is worth to the reactor's profile (<see cref="AiProfile.For"/>) less what its resources
     /// cost (<see cref="AiProfile.Spend"/>). A counterspell is worth what the spell being cast (the cause's ability) is worth
@@ -95,18 +95,20 @@ public static class Ai
         {
             var hit = s.Queue.OfType<AttackStep>().FirstOrDefault(step => step.Source == actor.Id
                 && step.Target == reactor.Id && step.Roll is not null && step.Resolution is not null);
-            return hit is not null && !SurvivesHit(s, hit, reactor.Id, false, rules)
-                && SurvivesHit(s, hit, reactor.Id, true, rules);
+            return hit is not null && SurvivesHit(s, hit, reactor.Id, false, rules) == false
+                && SurvivesHit(s, hit, reactor.Id, true, rules) == true;
         }
         return Defends(new Scorer(s, rules), ability, reactor, actor, trigger).Miss;
     }
 
-    // Replay only this hit and its hooks on immutable copies. The battle's RNG and queued future attacks stay untouched.
-    private static bool SurvivesHit(BattleState state, AttackStep hit, UnitId defender, bool halve, RulesPack rules)
+    // Replay only this hit and its hooks on immutable copies. A further player decision makes the result unknown;
+    // it is never evidence of Downing. The battle's RNG and queued future attacks stay untouched.
+    private static bool? SurvivesHit(BattleState state, AttackStep hit, UnitId defender, bool halve, RulesPack rules)
     {
         var w = new BattleWriter(state with { Pending = null, Queue = [hit] }, rules);
         if (halve)
-            w.Set(w.Unit(defender) with { HalvedHit = hit.Resolution, HalvedHitDamage = 0 });
+            w.Set(w.Unit(defender) with { HalvedHit = hit.Resolution, HalvedHitDamage = 0,
+                Economy = w.Unit(defender).Economy with { Reaction = false } });
         for (var steps = 0; steps < Battle.MaxStepsPerCommand && w.State.Pending is null; steps++)
         {
             if (w.PopFront() is not { } step)
@@ -114,7 +116,7 @@ public static class Ai
             w.HookDepth = 0;
             step.Run(w, rules);
         }
-        return false;
+        return null;
     }
 
     /// <summary>

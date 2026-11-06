@@ -35,4 +35,30 @@ public sealed class UncannyHitTests
         Hp.Damage(w, new("rogue"), 7, "fire", new("attacker"), resolution: 999);
         Assert.Equal(90, w.State.Units[new("rogue")].Hp);
     }
+    [Fact]
+    public void An_unresolved_secondary_reaction_is_not_proof_that_dodge_prevents_downing()
+    {
+        var rogue = new UnitId("rogue");
+        var attacker = new UnitId("attacker");
+        var dodge = BasePackTests.Rules.Abilities[new("rogue.uncanny_dodge")];
+        var strike = new AbilityDef(new("test.scratch"), "Scratch", 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, 1, false, new AreaDef(AreaShape.Single)),
+            [new AttackEffect("weapon", null, [new DamageEffect(TestAbilities.Flat("1"), "fire", [])], [], [], Bonus: 100)]);
+        var retaliation = new PassiveDef("test.retaliation", HookKind.OnDamaged, null,
+            [new AttackEffect("weapon", null, [new DamageEffect(TestAbilities.Flat("1"), "fire", [])], [], [], Bonus: 100)], null);
+        var battle = TestBattle.On("0. 0. 0.")
+            .Party("rogue", TestSheets.Rogue with { MaxHp = 10, Abilities = [dodge.Id], Passives = [retaliation.Id] }, new Tile(0, 0))
+            .Enemy("attacker", TestSheets.Goblin with { MaxHp = 100, InitiativeBonus = 100, Abilities = [strike.Id, dodge.Id] }, new Tile(1, 0))
+            .With(dodge, strike).WithPassives(retaliation);
+        var (state, _) = battle.Start(7);
+        state = state.Change("rogue", u => u with { Hp = 5 })
+            .Change("attacker", u => u with { Controller = new PlayerControlled(new("pr_attacker")) });
+        var (paused, _) = battle.Apply(state, new Use(attacker, strike.Id, new Target(Unit: rogue)));
+        var offer = Assert.IsType<ReactionOffer>(paused.Pending);
+        var (ordinary, _) = battle.Apply(paused, new React(rogue, offer.Options.First(c => c.Id == "pass")));
+        Assert.Equal(attacker, Assert.IsType<ReactionOffer>(ordinary.Pending).Reactor);
+        Assert.Equal(4, ordinary.Units[rogue].Hp);
+        Assert.False(Ai.ChangesOutcome(paused, offer, offer.Options.First(c => c.Id == dodge.Id.Value), battle.Rules));
+    }
+
 }

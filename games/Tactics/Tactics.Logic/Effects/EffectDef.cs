@@ -60,7 +60,10 @@ public sealed record HalveHitEffect : EffectDef;
 [EffectShorthand(nameof(Condition))]
 public sealed record ApplyEffect(ConditionId Condition, int? Rounds, bool UntilSave = false) : EffectDef;
 
-/// <summary><c>"remove"</c>: ends every instance of a condition on the target. JSON shorthand: <c>{"remove": "prone"}</c>.</summary>
+/// <summary>
+/// <c>"remove"</c>: ends every instance of a condition on the target. With HalfMove, requires movement and spends
+/// half the available Move, rounded up (standing at turn start). JSON shorthand: <c>{"remove": "prone"}</c>.
+/// </summary>
 [EffectShorthand(nameof(Condition))]
 public sealed record RemoveEffect(ConditionId Condition, bool HalfMove = false) : EffectDef;
 
