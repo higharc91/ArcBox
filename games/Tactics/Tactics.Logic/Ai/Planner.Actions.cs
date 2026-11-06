@@ -331,9 +331,18 @@ internal sealed partial class Planner
     /// </summary>
     private bool MayDrop(Usable usable, Action action, (BattleState State, BattleWriter W) at, UnitId unit)
     {
+        var target = at.State.Units[unit];
+        return DamageOn(usable, action, at, unit).AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
+    }
+
+    /// <summary>
+    /// The damage <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
+    /// is expected to deal <paramref name="unit"/>.
+    /// </summary>
+    private DamageDist DamageOn(Usable usable, Action action, (BattleState State, BattleWriter W) at, UnitId unit)
+    {
         var me = at.State.Units[_me.Id];
         var target = at.State.Units[unit];
-        var outcome = Expected(usable.Ability, me, new Strike(at.W, me, usable.Ability, action.Aim, neutral: false), target);
-        return outcome.Damage.AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
+        return Expected(usable.Ability, me, new Strike(at.W, me, usable.Ability, action.Aim, neutral: false), target).Damage;
     }
 }

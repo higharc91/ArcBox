@@ -187,12 +187,33 @@ public sealed class AbilityPlanningTests
             plan.Explain);
         var after = ApplyAll(state, plan, battle.Rules);
         Assert.Equal(4, after.Units[U("sora")].Resources["sorcery"]);
+    }
 
-        // Alone, the foe isn't worth the Sorcery of a twin.
+    [Fact]
+    public void With_no_second_foe_in_range_a_sorcerer_has_nothing_to_twin()
+    {
+        var (bolt, twin) = (A("sorcerer.fire_bolt"), A("sorcerer.metamagic_twinned"));
         var alone = On(Open(8, 3)).With(bolt, twin)
             .Enemy("sora", Mage(bolt, twin) with { Move = 0, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
             .Party("aldo", TestSheets.Fighter with { Move = 0 }, T(5, 1));
         Assert.Null(UseOf(Ai.Plan(alone.Start().State, U("sora"), alone.Rules), "sorcerer.metamagic_twinned"));
+    }
+
+    [Fact]
+    public void A_sorcerer_does_not_twin_a_spell_when_the_second_hit_is_not_worth_the_sorcery()
+    {
+        // As above, but Bree resists fire: the twin still has a second target, yet half a Fire Bolt on her is worth less than
+        // the 2 Sorcery it costs, so the bolt goes plain.
+        var (bolt, twin) = (A("sorcerer.fire_bolt"), A("sorcerer.metamagic_twinned"));
+        var battle = On(Open(8, 3)).With(bolt, twin)
+            .Enemy("sora", Mage(bolt, twin) with { Move = 0, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
+            .Party("aldo", TestSheets.Fighter with { Move = 0 }, T(5, 1))
+            .Party("bree", TestSheets.Fighter with { Move = 0, Resist = Ordinal.Set("fire") }, T(5, 2));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("sora"), battle.Rules);
+
+        Assert.True(UseOf(plan, "sorcerer.fire_bolt") is not null && UseOf(plan, "sorcerer.metamagic_twinned") is null, plan.Explain);
     }
 
     [Fact]
@@ -257,6 +278,54 @@ public sealed class AbilityPlanningTests
         var plan = Ai.Plan(state, U("wren"), battle.Rules);
 
         Assert.True(UseOf(plan, "warlock.eldritch_blast")?.Target.Unit == U("kara") && UseOf(plan, "warlock.hex") is null, plan.Explain);
+    }
+
+    [Fact]
+    public void A_warlock_blasts_a_foe_and_still_hexes_her_when_the_push_keeps_her_in_range()
+    {
+        // From 4 tiles, Repelling Blast's 2-tile push leaves Kara at most 6 away, still in Hex's range: Hex follows the blast.
+        var (blast, hex) = (A("warlock.eldritch_blast"), A("warlock.hex"));
+        var (repelling, hexDamage) = (Base.Passives["warlock.repelling_blast"], Base.Passives["warlock.hex_damage"]);
+        var warlock = Mage(blast, hex) with
+        {
+            Level = 1, CastingStat = "Cha", Scores = TestSheets.Scores(8, 14, 12, 10, 10, 16), Move = 0, Resources = Ordinal.Map(("pact", 2)),
+            Passives = [repelling.Id, hexDamage.Id],
+        };
+        var battle = On(Open(10, 1)).With(blast, hex).WithPassives(repelling, hexDamage).WithConditions([.. Base.Conditions.Values])
+            .Enemy("wren", warlock, T(0, 0), new AiControlled("caster"))
+            .Party("kara", TestSheets.Fighter with { Move = 0, MaxHp = 40 }, T(4, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("wren"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "warlock.eldritch_blast" } shot, Use { Ability.Value: "warlock.hex" } hexed, EndTurn]
+            && shot.Target.Unit == U("kara") && hexed.Target.Unit == U("kara"), plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void Repelling_blast_pushes_only_on_a_spell_so_a_crossbow_shot_leaves_the_foe_in_hex_range()
+    {
+        // Repelling Blast pushes on a spell attack only: a crossbow bolt from 6 tiles leaves Kara where she is, in Hex's range.
+        var hex = A("warlock.hex");
+        var (repelling, hexDamage) = (Base.Passives["warlock.repelling_blast"], Base.Passives["warlock.hex_damage"]);
+        var warlock = Mage(hex) with
+        {
+            Level = 1, CastingStat = "Cha", Scores = TestSheets.Scores(8, 14, 12, 10, 10, 16), Move = 0, Resources = Ordinal.Map(("pact", 2)),
+            Passives = [repelling.Id, hexDamage.Id],
+            Weapon = new WeaponDef("light_crossbow", Dice.Parse("1d8"), "piercing", Stat.Dex, Finesse: false, Ranged: true, Range: 8,
+                Reach: false, Tags: Ordinal.Set()),
+        };
+        var battle = On(Open(10, 1)).With(hex).WithPassives(repelling, hexDamage).WithConditions([.. Base.Conditions.Values])
+            .Enemy("wren", warlock, T(0, 0), new AiControlled("caster"))
+            .Party("kara", TestSheets.Fighter with { Move = 0, MaxHp = 40 }, T(6, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("wren"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "common.attack" } shot, Use { Ability.Value: "warlock.hex" } hexed, EndTurn]
+            && shot.Target.Unit == U("kara") && hexed.Target.Unit == U("kara"), plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
     }
 
     [Fact]
@@ -405,6 +474,30 @@ public sealed class AbilityPlanningTests
         Assert.True(plan.Commands is [Use { Ability.Value: "common.attack" } first, Use { Ability.Value: "fighter.action_surge" },
             Use { Ability.Value: "common.attack" } second, EndTurn] && first.Target.Unit == U("ogre") && second.Target.Unit == U("ogre"),
             plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void The_bonus_action_keeps_off_a_foe_the_main_and_surged_attacks_may_drop_together()
+    {
+        // One longsword hit can't drop the ogre (20 HP), two can: after the attack and the surged attack at it, the ogre may
+        // be dead, so the Spiritual Weapon goes at the troll.
+        var (surge, weapon) = (A("fighter.action_surge"), A("cleric.spiritual_weapon"));
+        var fighter = First(TestSheets.Fighter.Knowing(surge, weapon)) with
+        {
+            Move = 0, CastingStat = "Wis", Resources = Ordinal.Map(("devotion", 4)),
+        };
+        var battle = On(Open(3, 1)).With(surge, weapon)
+            .Party("kara", fighter, T(1, 0), new AiControlled("brute"))
+            .Enemy("ogre", TestSheets.Fighter with { MaxHp = 20, Move = 0 }, T(0, 0))
+            .Enemy("troll", TestSheets.Fighter with { MaxHp = 60, Move = 0 }, T(2, 0));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("kara"), battle.Rules);
+
+        Assert.True(plan.Commands is [Use { Ability.Value: "common.attack" } first, Use { Ability.Value: "fighter.action_surge" },
+            Use { Ability.Value: "common.attack" } second, Use { Ability.Value: "cleric.spiritual_weapon" } bonus, EndTurn]
+            && first.Target.Unit == U("ogre") && second.Target.Unit == U("ogre") && bonus.Target.Unit == U("troll"), plan.Explain);
         ApplyAll(state, plan, battle.Rules);
     }
 

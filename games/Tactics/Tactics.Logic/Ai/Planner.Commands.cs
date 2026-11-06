@@ -75,22 +75,56 @@ internal sealed partial class Planner
         }
 
         // The main action may kill a unit it hits (a Downed one may go Out): the bonus action mustn't count on it. Nor, unless
-        // the profile is cruel, may it strike a foe the main action may have just Downed (fair play, spec §5.4). And after an
-        // action that moves units or changes the map, only a bonus action on the unit itself is sure to still hold.
+        // the profile is cruel, may it strike a foe the main action may have just Downed (fair play, spec §5.4), nor one it may
+        // push out of the bonus action's reach. A surged second action adds what it may take away, and any foe the two may drop
+        // between them. And after an action that moves units or changes the map, only a bonus action on the unit itself is
+        // sure to still hold.
         var main = c.Kind is Kind.Move or Kind.DashMove ? null : c.Usable;
-        var leaving = Leaving(main, c.Action, Hypo(c.ActTile));
+        var at = Hypo(c.ActTile);
+        var off = Leaving(main, c.Action, at);
         var selfOnly = main is { Moves: true };
-        if (Surge(state, leaving, selfOnly) is { } surge)
+        if (Surge(state, off, selfOnly) is { } surge)
         {
             commands.AddRange([surge.Surge, surge.Second]);
             state = Advance(Advance(state, surge.Surge), surge.Second);
-            leaving = leaving.Union(surge.Leaving);
-            selfOnly |= surge.Moves;
+            var together = TogetherDrop((main, c.Action, at), (surge.Usable, surge.Action, surge.At));
+            off = off.Union(surge.Off).Union(Off.None with { Gone = together });
+            selfOnly |= surge.Usable.Moves;
         }
-        if (Bonus(state, leaving, selfOnly) is { } bonus && Battle.Check(state, bonus.Use, _rules) is null)
+        if (Bonus(state, off, selfOnly) is { } bonus && Battle.Check(state, bonus.Use, _rules) is null)
             commands.Add(bonus.Use);
         commands.Add(new EndTurn(_me.Id));
         return [.. commands];
+    }
+
+    /// <summary>
+    /// What a later action in the turn (the surged second action, the bonus action) must keep off: the units that may be gone
+    /// by then (<see cref="Gone"/>: dropped, finished, sent away), and the units a passive may push when the action hits them,
+    /// with how far (<see cref="Pushed"/>), which a later action may still aim at if they stay in its reach pushed that far.
+    /// </summary>
+    private sealed record Off(ImmutableSortedSet<UnitId> Gone, ImmutableSortedDictionary<UnitId, int> Pushed)
+    {
+        public static Off None { get; } = new([], ImmutableSortedDictionary<UnitId, int>.Empty);
+
+        public Off Union(Off other) => new(Gone.Union(other.Gone),
+            other.Pushed.Aggregate(Pushed, (map, p) => map.SetItem(p.Key, Math.Max(p.Value, map.GetValueOrDefault(p.Key)))));
+    }
+
+    /// <summary>
+    /// True when <paramref name="off"/> rules out <paramref name="action"/> of <paramref name="usable"/> by the unit on
+    /// <paramref name="from"/>: a unit it aims at may be gone, or may be pushed out of the ability's reach (its range, or its
+    /// weapon's for a weapon attack).
+    /// </summary>
+    private bool RulesOut(Off off, Usable usable, Tile from, Action action)
+    {
+        var reach = usable.Ability.IsWeaponAttack
+            ? _me.Sheet.Weapon.Ranged ? _me.Sheet.Weapon.Range : _me.Sheet.Weapon.Reach ? 2 : 1
+            : usable.Ability.Target.Range;
+        IEnumerable<UnitId> aimed = action.Targets.IsDefaultOrEmpty ? [] : action.Targets;
+        if (action.Target.Unit is { } unit)
+            aimed = aimed.Append(unit);
+        return aimed.Any(id => off.Gone.Contains(id)
+                               || off.Pushed.TryGetValue(id, out var push) && Reach.Distance(from, _s.Units[id].Pos) + push > reach);
     }
 
     /// <summary>
@@ -98,26 +132,26 @@ internal sealed partial class Planner
     /// may take out of reach of a later action: a Downed one it hits (it may finish it), any it may kill (one that dies at
     /// 0 HP, when its damage can reach the HP left: <see cref="MayDrop"/>), and unless the profile is cruel any foe it may
     /// Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile in
-    /// reach with the least HP, ties by id), if they may drop it. Whatever the damage: the targets of an attack the unit's
-    /// own passives turn into a push on a hit (Repelling Blast), which may carry them out of reach, and the unit's
-    /// concentration summons when the action starts a new concentration, which sends them away.
+    /// reach with the least HP, ties by id), if they may drop it. Whatever the damage: the unit's concentration summons when
+    /// the action starts a new concentration, which sends them away. And the targets the unit's own passives may push when
+    /// the action hits them (Repelling Blast on a spell attack: <see cref="PushOnHit"/>), with how far.
     /// </summary>
-    private ImmutableSortedSet<UnitId> Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
+    private Off Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
     {
         if (usable is null || action is null)
-            return [];
+            return Off.None;
+        var pushed = ImmutableSortedDictionary<UnitId, int>.Empty;
+        foreach (var id in action.Affected)
+            if (PushOnHit(usable, at.State.Units[id], at.W) is var push and > 0)
+                pushed = pushed.SetItem(id, push);
         var gone = ImmutableSortedSet<UnitId>.Empty;
-        if (Scorer.FirstAttack(usable.Ability.Effects) is not null && PushesOnHit())
-            gone = gone.Union(action.Affected);
         if (usable.Ability.Cost.Concentration && _me.Concentrating is not null)
             gone = gone.Union(_s.Units.Values
                 .Where(u => u.Conditions.Any(c => c.Id == Summons.Marker && c.Concentration && c.Source == _me.Id)).Select(u => u.Id));
         if (!Scorer.Deals(usable.Ability.Effects))
-            return gone;
+            return new Off(gone, pushed);
         var leaving = gone.Union(action.Affected.Where(id => _s.Units[id] is var u
-                                                             && (u.Life == LifeState.Downed
-                                                                 || (!DownedRules.GoesDown(u) || !_p.Cruel && Scorer.Hostile(_me, u))
-                                                                 && MayDrop(usable, action, at, id))));
+                                                             && (u.Life == LifeState.Downed || MayFall(u) && MayDrop(usable, action, at, id))));
         var me = at.State.Units[_me.Id];
         if (Strikes.Aimed(usable.Ability) && me.Sheet.Attacks > 1 && action.Affected.Any(id => MayDrop(usable, action, at, id))
             && at.State.Units.Values
@@ -126,26 +160,71 @@ internal sealed partial class Planner
                 .OrderBy(u => u.Hp).ThenBy(u => u.Id).FirstOrDefault() is { } next
             && MayDrop(usable, action, at, next.Id))
             leaving = leaving.Add(next.Id);
-        return leaving;
+        return new Off(leaving, pushed);
     }
 
-    private bool? _pushesOnHit;
+    /// <summary>
+    /// True when dropping <paramref name="u"/> takes it out of a later action's reach: one that dies at 0 HP, and unless the
+    /// profile is cruel a foe that would be Downed (fair play, spec §5.4).
+    /// </summary>
+    private bool MayFall(UnitState u) => !DownedRules.GoesDown(u) || !_p.Cruel && Scorer.Hostile(_me, u);
 
-    /// <summary>True when one of the unit's own passives pushes, pulls or moves the unit it hits with an attack (Repelling Blast).</summary>
-    private bool PushesOnHit() => _pushesOnHit ??= Modifiers.Passives(_me, _rules)
-        .Any(p => p.Hook == HookKind.OnAttackHit && Scorer.All(p.Effects).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect));
+    /// <summary>
+    /// The units both <paramref name="first"/> and <paramref name="second"/> hit that neither may drop alone but both may
+    /// together: their damage on it added up can reach the HP left (each counted where it is taken from).
+    /// </summary>
+    private ImmutableSortedSet<UnitId> TogetherDrop((Usable? Usable, Action? Action, (BattleState State, BattleWriter W) At) first,
+        (Usable Usable, Action Action, (BattleState State, BattleWriter W) At) second)
+    {
+        if (first is not ({ } usable, { } action, var at) || !Scorer.Deals(usable.Ability.Effects) || !Scorer.Deals(second.Usable.Ability.Effects))
+            return [];
+        var drop = ImmutableSortedSet.CreateBuilder<UnitId>();
+        foreach (var id in action.Affected.Intersect(second.Action.Affected))
+        {
+            var u = _s.Units[id];
+            if (u.Life == LifeState.Up && MayFall(u)
+                && DamageOn(usable, action, at, id).Plus(DamageOn(second.Usable, second.Action, second.At, id))
+                    .AtLeast(Math.Max(1, u.Hp + u.TempHp)) > 0)
+                drop.Add(id);
+        }
+        return drop.ToImmutable();
+    }
 
-    /// <summary>An extra action and the second action it buys, with what the second may take out of reach and whether it moves units or changes the ground.</summary>
-    private sealed record Surging(Use Surge, Use Second, ImmutableSortedSet<UnitId> Leaving, bool Moves);
+    private ImmutableArray<PassiveDef>? _onHitPushes;
+
+    /// <summary>
+    /// How far the unit's own on-hit passives may push or pull <paramref name="target"/> when <paramref name="usable"/>'s
+    /// attack hits it (Repelling Blast: 2 tiles, on a spell attack), their conditions checked as the engine checks them; a
+    /// swap or teleport counts as out of any reach. 0 when none would.
+    /// </summary>
+    private int PushOnHit(Usable usable, UnitState target, BattleWriter w)
+    {
+        _onHitPushes ??= [.. Modifiers.Passives(_me, _rules).Where(p => p.Hook == HookKind.OnAttackHit && !p.Effects.IsDefaultOrEmpty
+            && Scorer.All(p.Effects).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect))];
+        if (_onHitPushes.Value.IsEmpty || Scorer.FirstAttack(usable.Ability.Effects) is not { } attack)
+            return 0;
+        var hit = new RollResult([], 0, 0, 0, 0, Success: true, Crit: false, Fumble: false);
+        var args = new HookArgs(_me.Id, target.Id, hit, Tile: target.Pos, Ability: usable.Ability.Id, AttackKind: attack.Kind, Edge: Edge.None);
+        return _onHitPushes.Value.Where(p => p.When is not { } when || Hooks.Holds(when, w, args, _rules))
+            .SelectMany(p => Scorer.All(p.Effects))
+            .Select(e => e switch { PushEffect push => push.Distance, PullEffect pull => pull.Distance, SwapEffect or TeleportEffect => 99, _ => 0 })
+            .DefaultIfEmpty(0).Max();
+    }
+
+    /// <summary>
+    /// An extra action and the second action it buys: its command, its ability and target, where it is taken from, and what
+    /// later actions must keep off after it.
+    /// </summary>
+    private sealed record Surging(Use Surge, Use Second, Usable Usable, Action Action, (BattleState State, BattleWriter W) At, Off Off);
 
     /// <summary>
     /// With the action spent in <paramref name="state"/> and an extra action (Action Surge) the unit can pay for: the best
-    /// second action from where the plan leaves it (any action but a dash, never on a unit in <paramref name="leaving"/>, and
+    /// second action from where the plan leaves it (any action but a dash, never one <paramref name="off"/> rules out, and
     /// with <paramref name="selfOnly"/>, after an action that moved units or changed the map, only one on the unit itself),
     /// when what it is worth less its own cost is more than the surge costs. An extra action is worth the best second action
     /// it buys; null when none is worth it.
     /// </summary>
-    private Surging? Surge(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
+    private Surging? Surge(BattleState state, Off off, bool selfOnly)
     {
         var me = state.Units[_me.Id];
         if (me.Economy.Action || me.Economy.ExtraActions > 0
@@ -165,8 +244,7 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, after.Pos, surged, w))
             {
-                if (action.Target.Unit is { } unit && leaving.Contains(unit)
-                    || !action.Targets.IsDefaultOrEmpty && action.Targets.Any(leaving.Contains) || !ItemOk(usable, after.Pos, action))
+                if (RulesOut(off, usable, after.Pos, action) || !ItemOk(usable, after.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
                     (best, bestScore) = ((usable, action), action.Value - hoard);
@@ -176,7 +254,7 @@ internal sealed partial class Planner
             return null;
         var next = new Use(_me.Id, second.Usable.Command, second.Action.Target, second.Usable.Item) { Targets = second.Action.Targets };
         return Battle.Check(surged, next, _rules) is null
-            ? new Surging(use, next, Leaving(second.Usable, second.Action, (surged, w)), second.Usable.Moves)
+            ? new Surging(use, next, second.Usable, second.Action, (surged, w), Leaving(second.Usable, second.Action, (surged, w)))
             : null;
     }
 
@@ -184,11 +262,11 @@ internal sealed partial class Planner
     /// The best bonus action (or free action) worth more than it costs where the plan leaves the unit, if its Bonus is
     /// still there: escapes and dashes are left out (they only help a move), and so are an extra action (planned with the
     /// second action it buys, <see cref="Surge"/>) and a concentration ability after the plan has just begun concentrating on
-    /// another. A teleport or leap goes to the landing tile worth most over staying. It never targets a unit in
-    /// <paramref name="leaving"/> (the main action may have killed or Downed it) and, with <paramref name="selfOnly"/>, only
-    /// uses abilities on the unit itself. Its score is what it is worth less its cost.
+    /// another. A teleport or leap goes to the landing tile worth most over staying. It never takes an action
+    /// <paramref name="off"/> rules out (the main action may have killed, Downed or pushed its target) and, with
+    /// <paramref name="selfOnly"/>, only uses abilities on the unit itself. Its score is what it is worth less its cost.
     /// </summary>
-    private (Use Use, double Score)? Bonus(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
+    private (Use Use, double Score)? Bonus(BattleState state, Off off, bool selfOnly)
     {
         var me = state.Units[_me.Id];
         if (!me.Economy.Bonus)
@@ -205,8 +283,7 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, me.Pos, state, w))
             {
-                if (action.Target.Unit is { } unit && leaving.Contains(unit)
-                    || !action.Targets.IsDefaultOrEmpty && action.Targets.Any(leaving.Contains) || !ItemOk(usable, me.Pos, action))
+                if (RulesOut(off, usable, me.Pos, action) || !ItemOk(usable, me.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
                     (best, bestScore) = (new Use(_me.Id, usable.Command, action.Target, usable.Item) { Targets = action.Targets },
@@ -235,7 +312,7 @@ internal sealed partial class Planner
                      (c.Usable, c.Action?.Target ?? new Target()) })
             if (usable is not null && Battle.CostRefusal(state.Units[_me.Id], usable.Ability) is null)
                 state = Advance(state, new Use(_me.Id, usable.Command, target, usable.Item));
-        return _bonusLeft[key] = Bonus(state, [], selfOnly)?.Score ?? 0;
+        return _bonusLeft[key] = Bonus(state, Off.None, selfOnly)?.Score ?? 0;
     }
 
     /// <summary>
