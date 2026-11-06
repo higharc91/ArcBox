@@ -99,7 +99,8 @@ def media(before, after, old, new, output, key, mode, cache, reuse=False):
     poster_path = output / f"{key}-{mode}.png"
     if reuse and film.exists() and poster_path.exists() and min(film.stat().st_mtime, poster_path.stat().st_mtime) > max(p.stat().st_mtime for p in left + right):
         return Image.open(poster_path).convert("RGB")
-    # Keep native captures for each half. Hold the shorter side's final frame through the longer cinematic.
+    # Keep full-resolution posters; compact nearest-neighbour videos fit a browser at normal zoom.
+    # Hold the shorter side's final frame through the longer cinematic.
     seq = cache / f"pair-{mode}-{key}"
     seq.mkdir(exist_ok=True)
     for side, images in [("left", left), ("right", right)]:
@@ -109,8 +110,9 @@ def media(before, after, old, new, output, key, mode, cache, reuse=False):
             path = target / f"{i:06}.png"
             if not path.exists(): path.symlink_to(images[min(i, len(images)-1)])
     run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", "30", "-i", str(seq / "left/%06d.png"),
-         "-framerate", "30", "-i", str(seq / "right/%06d.png"), "-filter_complex", "[0:v][1:v]hstack=inputs=2[v]",
-         "-map", "[v]", "-an", "-c:v", "libvpx-vp9", "-row-mt", "1", "-threads", "4", "-crf", "36", "-b:v", "0", str(film)], log=seq / "ffmpeg.log")
+         "-framerate", "30", "-i", str(seq / "right/%06d.png"), "-filter_complex",
+         "[0:v]scale=960:540:flags=neighbor[l];[1:v]scale=960:540:flags=neighbor[r];[l][r]hstack=inputs=2[v]",
+         "-map", "[v]", "-an", "-c:v", "libvpx-vp9", "-row-mt", "1", "-threads", "4", "-cpu-used", "4", "-crf", "36", "-b:v", "0", str(film)], log=seq / "ffmpeg.log")
     # Align the impact in posters, while the video retains the complete real timing from cast to settle.
     moment = {"common.attack": .25, "wizard.fire_bolt": .5, "wizard.magic_missile": .48, "wizard.fireball": .8}.get(old["id"], old["seconds"] * .55)
     lead = max(0, new["seconds"] - old["seconds"] - .3)
@@ -123,12 +125,18 @@ def media(before, after, old, new, output, key, mode, cache, reuse=False):
     pen.text((25, 9), f"BEFORE · {old['name']} · {old['seconds']:.2f}s", font=font, fill="#f5e6bf")
     pen.text((1945, 9), f"AFTER · {mode.upper()} · {new['seconds']:.2f}s", font=font, fill="#f5e6bf")
     poster.save(output / f"{key}-{mode}.png", optimize=True)
+    if old["id"] == "wizard.fireball" and mode == "off":
+        detail = Image.new("RGB", (1220, 440), "#101222")
+        for side, label in [(0, "Before"), (1, "With spell light")]:
+            detail.paste(poster.crop((800 + side * 1920, 430, 1410 + side * 1920, 820)), (side * 610, 50))
+            ImageDraw.Draw(detail).text((side * 610 + 16, 9), label, font=font, fill="#f5e6bf")
+        detail.save(output / "fire-lighting-detail.png", optimize=True)
     return poster
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("selector", help="step0 or class:abilityId; full class fixture inventories are a later increment")
+    parser.add_argument("selector", help="step0 or class[:abilityId]; a missing real trigger fixture fails the class capture")
     parser.add_argument("--before-ref", help="frozen main when this step/class started; required for new classes")
     parser.add_argument("--before-worktree", type=Path)
     parser.add_argument("--cache", type=Path)
@@ -152,8 +160,9 @@ def main():
               "captureFps": 30, "seed": 7, "map": "crypt_hall", "preset": "low", "renderer": "gl_compatibility", "audio": "Dummy"}
     (output / "baseline.json").write_text(json.dumps(report, indent=2) + "\n")
     captures = {}
-    variants = [("before", before, "Off", False), ("full", ROOT, "Full", False), ("short", ROOT, "Short", False),
-                ("off", ROOT, "Off", False), ("reduced", ROOT, "Full", True)]
+    variants = [("before", before, "Full", False), ("full", ROOT, "Full", False)]
+    if args.selector == "step0":
+        variants += [("short", ROOT, "Short", False), ("off", ROOT, "Off", False), ("reduced", ROOT, "Full", True)]
     performance = {}
     for name, tree, mode, reduced in variants:
         directory = cache / name
@@ -168,12 +177,13 @@ def main():
         performance[name] = {row["id"]: statistics.median(r[i]["frameMedianMs"] for r in runs)
                              for i, row in enumerate(captures[name])} if runs else {}
     (output / "timings.json").write_text(json.dumps(captures, indent=2) + "\n")
-    (output / "performance.json").write_text(json.dumps(performance, indent=2) + "\n")
+    if args.perf_runs or not (output / "performance.json").exists():
+        (output / "performance.json").write_text(json.dumps(performance, indent=2) + "\n")
     cards, posters = [], []
     for i, old in enumerate(captures["before"]):
         key = old["id"].replace(".", "-")
         panels = []
-        for mode in ["full", "short", "off", "reduced"]:
+        for mode in [v[0] for v in variants if v[0] != "before"]:
             new = captures[mode][i]
             if old["id"] != new["id"]: raise RuntimeError("Before/after fixture ordering differs.")
             print(f"Media {old['id']} {mode}", flush=True)
@@ -185,14 +195,30 @@ def main():
     sheet = Image.new("RGB", (1920, 565 * len(posters)), "#101222")
     for i, poster in enumerate(posters): sheet.paste(poster.resize((1920, 565), Image.Resampling.NEAREST), (0, i * 565))
     sheet.save(output / "contact-sheet.png", optimize=True)
+    inventory_html = ""
+    inventories = {}
+    for name in ["before", "full"]:
+        source = cache / name / "frames/inventory.json"
+        if source.exists(): inventories[name] = json.loads(source.read_text())
+    if inventories:
+        (output / "inventory.json").write_text(json.dumps(inventories, indent=2) + "\n")
+        old_rows = {(r["id"], r.get("subclass")): r for r in inventories.get("before", [])}
+        def keys(row):
+            return " · ".join(str(v) for k, v in (row.get("presentation") or {}).items() if k != "cutIn" and v) or "No art key"
+        rows = []
+        for row in inventories.get("full", []):
+            old = old_rows.get((row["id"], row.get("subclass")), {})
+            cells = [row["name"], row.get("subclass") or "Base class", str(row["level"]), row["kind"], row["cutIn"], keys(old), keys(row)]
+            rows.append("<tr>" + "".join(f"<td>{html.escape(c)}</td>" for c in cells) + "</tr>")
+        inventory_html = '<h2>Complete feature inventory</h2><p>Static modifiers have no standalone proc. Every ability and visible proc must have a real fixture for this capture to succeed.</p><table><tr><th>Name</th><th>Subclass</th><th>Level</th><th>Kind</th><th>Cut-in</th><th>Before keys</th><th>After keys</th></tr>' + ''.join(rows) + '</table>'
     (output / "index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">'
         '<title>Wardenflame combat VFX preview</title><style>body{background:#101222;color:#eee6d0;font:18px system-ui;margin:2rem auto;max-width:1600px;padding:0 1rem}'
-        'video,img{width:100%;image-rendering:pixelated}article{margin:3rem 0}summary{padding:.8rem;cursor:pointer}a{color:#f0d27a}p{max-width:85ch}</style>'
+        'video,img{width:100%;image-rendering:pixelated}article{margin:3rem 0}summary{padding:.8rem;cursor:pointer}a{color:#f0d27a}p{max-width:85ch}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #555;padding:.4rem;overflow-wrap:anywhere}</style>'
         f'<h1>Combat VFX · {html.escape(args.selector)}</h1><p>Native TV capture: before on the left, after on the right. Fixed map and seed; real engine events and BeatPlayer. '
         'Videos preserve the complete cast, impact, effect tails and camera settle. Posters align the impact for comparison.</p>'
         f'<p>Frozen before: <code>{baseline}</code>. No class art has been reworked in step 0. <a href="review.md">Review notes and limitations</a> · '
         '<a href="performance.json">Frame measurements</a> · <a href="timings.json">Actual beat timings</a></p><img src="contact-sheet.png" alt="Before and after contact sheet">'
-        + ''.join(cards) + '</html>')
+        + inventory_html + ''.join(cards) + '</html>')
     print(f"Preview: {output / 'index.html'}\nRaw captures: {cache}", flush=True)
 
 
