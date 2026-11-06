@@ -52,6 +52,12 @@ public partial class Narrator : Node
     /// <summary>The last line started (for the F3 overlay).</summary>
     public string? LastLine { get; private set; }
 
+    /// <summary>
+    /// A line came to its end, with its text: the recording or the built-in voice finished, or its time ran out with no
+    /// sound to wait for. Not raised for a line cut off by another or by <see cref="StopAll"/>. Raised on the main thread.
+    /// </summary>
+    public event Action<string>? LineFinished;
+
     /// <summary>True while a voice is audible (a clip, or the built-in voice between its start and end callbacks).</summary>
     public bool Speaking => _mode == Mode.Clip || (_mode == Mode.BuiltIn && _utteranceStarted);
 
@@ -338,6 +344,10 @@ public partial class Narrator : Node
         _mode = Mode.Idle;
         _utteranceStarted = false;
         _queue.Finish();
+        if (LastLine is { } finished)
+        {
+            LineFinished?.Invoke(finished);
+        }
     }
 
     private void Report()
