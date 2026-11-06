@@ -771,7 +771,7 @@
           "ability": "fighter.precision_attack",
           "item": null,
           "name": "Precision Attack",
-          "tooltip": "Weapon attack, weapon range: weapon damage. With more than one attack, only the first hit gets this; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit.",
+          "tooltip": "Weapon attack, weapon range: weapon damage. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit.",
           "cost": {
             "action": 1,
             "resource": {
@@ -906,7 +906,7 @@
           "ability": "fighter.trip_attack",
           "item": null,
           "name": "Trip Attack",
-          "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, only the first hit gets this; the rest are plain hits",
+          "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits",
           "cost": {
             "action": 1,
             "resource": {

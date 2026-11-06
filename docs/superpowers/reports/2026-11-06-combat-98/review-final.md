@@ -13,7 +13,7 @@ The independent review below covers merge-base `9f8c2fd8` through `036141da`, wi
 | I5 | Downing cancels queued StrikeStep continuations while preserving revive hooks. | Retaliation downs a two-attack fighter; Death Ward revives it and no second strike follows. |
 | Cheap Minors | Trap duplicate/exhaustion filtering; percentage-HP placement validation; strict difficulty names; current-round retreat cooldown; reaction timer cleanup; clear loss hint; report routing; documentation/test setup corrections; Cleave and retarget coverage. | Focused tests plus final gate below. |
 
-Regressions first reproduced all five Important findings (three mark cases, Dodge lifetime, Twinned charm, interrupted multiattack), the stale reaction timer and cross-round retreat cooldown. Initial test setup/build/filter errors were corrected before counting valid failures. Focused combined rules verification: 176 passed. Game verification and full gate pending.
+Regressions first reproduced all five Important findings (three mark cases, Dodge lifetime, Twinned charm, interrupted multiattack), the stale reaction timer and cross-round retreat cooldown. Initial test setup/build/filter errors were corrected before counting valid failures. Focused combined rules verification: 176 passed. Game verification: 47 passed. Full gate pending.
 
 ---
 
