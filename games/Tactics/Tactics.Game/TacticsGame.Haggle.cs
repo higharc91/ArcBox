@@ -8,8 +8,8 @@ namespace Tactics.Game;
 /// Haggling, once per shop visit (shops design §3.3, USER DECISION E, decided by the owner on 2026-11-03). With a shop open, the leader taps
 /// Haggle; the party picks who rolls Persuasion against the shop's <c>haggle</c> DC (default 15), on the 5d check screen, and the roll is
 /// saved with the node it leads to, as every 5d roll is. A pass takes a tenth off what the party buys and adds a tenth to what it sells for
-/// the rest of the visit; a fail changes nothing and costs nothing. The visit's cursor keeps the result, so a restart neither rolls again nor
-/// forgets it, and the next visit starts fresh. Rooms and cures haggle too (the owner, 2026-11-04): a tenth off, as for what the party buys.
+/// the rest of the visit; a fail keeps prices unchanged and spends the attempt until the next long rest. The visit's cursor keeps the result, so a restart neither rolls again nor
+/// forgets it, and a failed attempt remains spent across visits and restarts until RestSeq advances. Rooms and cures haggle too (the owner, 2026-11-04): a tenth off, as for what the party buys.
 /// </summary>
 public sealed partial class TacticsGame
 {
@@ -25,8 +25,9 @@ public sealed partial class TacticsGame
     /// <summary>True when the open shop has a price to haggle over: it sells, buys, or offers rooms or cures.</summary>
     private static bool Haggles(ShopDef shop) => !shop.Stock.IsEmpty || !shop.Buys.IsEmpty || !shop.Services.IsEmpty;
 
-    /// <summary>True when the party may haggle now: at a shop that trades, not yet this visit, with no rest under way.</summary>
-    private bool CanHaggle => OpenShop is { } shop && Haggles(shop) && _doc.World!.Shop is { Haggle: null, Haggling: false } && Camp is null;
+    /// <summary>True when the party may haggle now: at a shop that trades, not yet this visit, with no failed attempt since the last long rest and no rest under way.</summary>
+    private bool CanHaggle => OpenShop is { } shop && Haggles(shop) && _doc.World!.Shop is { Haggle: null, Haggling: false } && Camp is null
+        && _doc.Shops?.Shops.GetValueOrDefault(shop.Id)?.FailedHaggleRest != _doc.World.RestSeq;
 
     /// <summary>True when this visit's haggle passed: its prices are a tenth better.</summary>
     private bool Haggled => _doc.World?.Shop?.Haggle?.Passed == true;
@@ -48,7 +49,7 @@ public sealed partial class TacticsGame
             new("haggled", [Line("haggled", shop.Stock.IsEmpty && shop.Buys.IsEmpty
                 ? $"{shop.Name} gives way: a tenth off, this visit."
                 : $"{shop.Name} gives way: a tenth off what you buy, and a tenth more for what you sell, this visit.")], [], [], false, null, true),
-            new("refused", [Line("refused", $"{shop.Name} won't budge on price. No harm done.")], [], [], false, null, true),
+            new("refused", [Line("refused", $"{shop.Name} won't budge on price. Try again after a long rest.")], [], [], false, null, true),
         ];
         return new SceneDef(HaggleId, "", null, $"Haggle with {shop.Name}", [], [], [SceneDef.Narrator], HaggleId, nodes, false);
     }
@@ -87,6 +88,11 @@ public sealed partial class TacticsGame
         }
         if (roll is null)
             return;
+        if (!roll.Passed && OpenShop is { } shop)
+        {
+            var stock = StockOf(shop) with { FailedHaggleRest = _doc.World!.RestSeq };
+            _doc = _doc with { Shops = new ShopsSave((_doc.Shops?.Shops ?? Ordinal.Map<ShopSave>()).SetItem(shop.Id, stock), stock.Chapter) };
+        }
         var name = _doc.Members.GetValueOrDefault(roll.Member)?.Character.Name ?? roll.Member;
         _doc = _doc with { World = _doc.World! with { Shop = _doc.World.Shop! with
         {
@@ -137,6 +143,7 @@ public sealed partial class TacticsGame
         return new
         {
             can = CanHaggle && profile.Value == _lead,
+            spent = _doc.Shops?.Shops.GetValueOrDefault(shop.Id)?.FailedHaggleRest == _doc.World.RestSeq,
             dc = shop.Haggle ?? ShopRules.DefaultHaggleDc,
             result = result is null ? null : new { member = result.Member, name = result.Name, die = result.Die, bonus = result.Bonus, total = result.Die + result.Bonus, dc = result.Dc, passed = result.Passed },
         };

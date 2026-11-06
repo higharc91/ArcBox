@@ -9,6 +9,7 @@ import { HostMenu } from "./walk";
 interface ShopRow { item: string; name: string; price: number; count: number; can?: boolean; member?: string; detail?: string }
 /** This visit's haggle (the owner's decision E, 2026-11-03): whether this phone may start it, its DC, and what came of it. */
 interface HaggleData {
+  spent?: boolean;
   can: boolean; dc: number;
   result: { member: string; name: string; die: number; bonus: number; total: number; dc?: number; passed: boolean } | null;
 }
@@ -28,7 +29,7 @@ function Haggle({ haggle, send, shop, pending }: { haggle: HaggleData; send: Cus
       {r.passed ? "A tenth off what you buy, a tenth more for what you sell, this visit." : "Prices stand. No harm done."}</p>
       : haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
         {`Haggle · Persuasion DC ${haggle.dc}`}</button>
-      : <p class="tx-note">{`The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
+      : <p class="tx-note">{haggle.spent ? "Haggle spent. Try again after a long rest." : `The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
   </div>;
 }
 
