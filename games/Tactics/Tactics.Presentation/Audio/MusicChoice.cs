@@ -26,6 +26,10 @@ public static class MusicChoice
     private const string Camp = "camp";
     private const string Dawn = "camp_dawn";
     private const string Emberwick = "town_emberwick";
+    private const string Mirewood = "court_mirewood";
+    private const string ScarwalkerCamp = "camp_scarwalker";
+    private const string Greyhold = "town_greyhold";
+    private const string Festival = "town_emberwick_festival";
 
     private static readonly ImmutableDictionary<string, string> Fights = new Dictionary<string, string>
     {
@@ -40,6 +44,8 @@ public static class MusicChoice
     {
         ["ashen_ford"] = Emberwick,
         ["cinder_hollow"] = Dungeon,
+        ["mirewood"] = Mirewood,
+        ["frostpeak"] = Greyhold,
     }.ToImmutableDictionary();
 
     private static readonly ImmutableDictionary<string, string> Beds = new Dictionary<string, string>
@@ -62,17 +68,20 @@ public static class MusicChoice
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Dungeon, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn, Emberwick];
+    public static IEnumerable<string> Ids => [Title, Explore, Dungeon, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Dawn,
+        Emberwick, Mirewood, ScarwalkerCamp, Greyhold, Festival];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
     {
         if (!Enum.TryParse<TacticsPhase>(view.Phase, out var phase))
             return null;
+        if (phase == TacticsPhase.Story && view.Story?.Scene == "ch5_epilogue_rekindled")
+            return new MusicCue(Festival);
         if (phase == TacticsPhase.Story && view.Camp is { Stage: "dawn" })
             return new MusicCue(Dawn, view.Explore is { } dawnPlace ? Regions.GetValueOrDefault(dawnPlace.Region, Explore) : Explore);
         if (phase == TacticsPhase.Story && view.Camp is { Stage: not ("vote" or "dawn") })
-            return new MusicCue(Camp);
+            return new MusicCue(view.Explore?.Region == "sunscar" ? ScarwalkerCamp : Camp);
         return phase switch
         {
             TacticsPhase.Muster => new MusicCue(Title),

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Audio;
@@ -51,6 +52,42 @@ public sealed class MusicChoiceTests
             Assert.NotNull(track);
             Assert.True(File.Exists(Path.Combine(Pack.Root, track.File)), track.File);
         }
+    }
+
+    [Fact]
+    public void Every_manifest_track_is_chosen_by_the_music_policy()
+    {
+        using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "music", "manifest.json")));
+        var listed = manifest.RootElement.GetProperty("tracks").EnumerateObject().Select(track => track.Name).Order(StringComparer.Ordinal).ToArray();
+        Assert.Equal(listed, MusicChoice.Ids.Order(StringComparer.Ordinal).ToArray());
+    }
+
+    [Theory]
+    [InlineData("mirewood", "court_mirewood")]
+    [InlineData("frostpeak", "town_greyhold")]
+    public void Later_regions_play_their_own_scores(string region, string track)
+    {
+        var explore = new ExploreView(region, region, 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+        Assert.Equal(new MusicCue(track), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+        Assert.Equal(new MusicCue(track), MusicChoice.Of(View("Story") with { Explore = explore }));
+    }
+
+    [Fact]
+    public void The_scarwalker_camp_uses_its_own_score_and_dawn_returns_to_the_field()
+    {
+        var explore = new ExploreView("sunscar", "The Sunscar", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+        var camp = new CampView("camp", "fire", "jobs", new Tile(2, 2), 0, [], null, 0, null);
+        var view = View("Story") with { Explore = explore, Camp = camp };
+        Assert.Equal(new MusicCue("camp_scarwalker"), MusicChoice.Of(view));
+        Assert.Equal(new MusicCue("camp_dawn", "explore"), MusicChoice.Of(view with { Camp = camp with { Stage = "dawn" } }));
+    }
+
+    [Fact]
+    public void A_rekindled_epilogue_plays_the_festival_score()
+    {
+        var scene = new StoryView(1, "ch5_epilogue_rekindled", "Epilogue", "say", null, null, null, null);
+        Assert.Equal(new MusicCue("town_emberwick_festival"), MusicChoice.Of(View("Story") with { Story = scene }));
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Story") with { Story = scene with { Scene = "ch5_epilogue_returned" } }));
     }
 
     [Fact]
@@ -202,11 +239,11 @@ public sealed class MusicChoiceTests
     }
 
     [Fact]
-    public void A_region_with_no_track_of_its_own_gets_the_field_tune()
+    public void Mirewood_uses_its_court_score()
     {
         var explore = new ExploreView("mirewood", "Mirewood", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
 
-        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+        Assert.Equal(new MusicCue("court_mirewood"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
     }
 
     [Theory]
