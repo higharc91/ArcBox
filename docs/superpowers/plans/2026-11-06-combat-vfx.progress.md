@@ -1,4 +1,4 @@
-> Status: shared step 0 preview ready for owner review on `combat-vfx`; all local gates and native captures pass; awaiting owner OK. No class art, approval or PR yet. CI remains manually disabled.
+> Status: owner approved step 0 in chat; preparing its PR and the Wizard pilot. CI remains manually disabled. No later class is approved.
 
 # Combat VFX #247 progress
 
@@ -49,3 +49,9 @@ No step or class checkbox is complete yet. CI remains manually disabled. No clas
 - Final foundation gate: `bash tools/check-all.sh --full` passes all five groups. Build has 0 warnings and 0 errors; 7,204 .NET tests pass with 0 failures/skips, 549 phone tests and production build pass, 24 Node tests pass, and Python asset/audio/lore suites plus lore/docs checks pass. `git diff 9a7ffb54 -- web/play/test/fixtures` is empty. This verifies the foundation increment, not completion of step 0; real camera integration, accessibility settings, showcase/capture tooling and owner preview are still pending.
 
 - Final runtime/tooling gate: `bash tools/check-all.sh --full` passes with 7,224 .NET tests (zero failures/skips), zero build warnings/errors, 549 phone tests and production build, 24 Node tests, and all Python/lore/docs checks. The native pilot completed 49 beats without rendering errors; both before/after native builds have zero warnings/errors. Phone fixtures remain byte-identical. Final three-run comparisons stay within 10% (largest 8.5%); texture snapshot growth is 0.30 MiB, and shipped-content growth is 86 schema bytes. Review assets and detailed measurements are in the step0 report directory.
+
+## Owner approval and Wizard handoff
+
+The owner replied “Yeah, those look good. Finish the rest” after the shared preview and approval question. Step 0 is approved and its issue checkbox is ticked; use the proposed 3.6 s Chapter I round budget. Existing measured assertions remain tighter (3.1 s automatic Short / 3.4 s Full) and are not loosened. Latest main `c4e121eb` was integrated cleanly before the step 0 PR; rerun the full gate on the integration. The frozen step 0 image baseline remains `9a7ffb54`.
+
+The next class is Wizard. Its branch is cut from latest main with the approved shared work included as a dependency while the step 0 PR awaits its owner merge. Keep the Wizard diff and preview separate, and do not start Sorcerer until the Wizard preview receives its required explicit OK.
