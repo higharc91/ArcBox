@@ -19,6 +19,7 @@ const string Usage = """
       --seeds N              seeds 1..N per encounter, level and party (default 20)
       --difficulty D         Story, Normal or Hard (default Normal)
       --round-cap N          stop a battle after this round, counted as lost (default 30)
+      --companions N         the first N members of every party (class order) play the companion profile (default 0)
       --trinkets cls:id,...  equip listed class trinkets for a paired reward-impact sweep (default none)
       --rules DIR            the rules pack (default content/tactics/base/rules under the repository root)
       --out PATH             write the report to PATH (default: print it)
@@ -32,6 +33,7 @@ var parties = 6;
 var seeds = 20;
 var difficulty = Difficulty.Normal;
 var roundCap = 30;
+var companions = 0;
 ImmutableDictionary<string, string>? trinkets = null;
 string? rulesDir = null;
 string? outPath = null;
@@ -54,6 +56,7 @@ try
             case "--seeds": seeds = Int(); break;
             case "--difficulty": difficulty = Enum.Parse<Difficulty>(Next(), ignoreCase: true); break;
             case "--round-cap": roundCap = Int(); break;
+            case "--companions": companions = Int(); break;
             case "--trinkets":
                 trinkets = Next().Split(',').Select(s => s.Split(':', 2)).ToImmutableDictionary(
                     p => p.Length == 2 ? p[0] : throw new ArgumentException("Trinkets use class:id pairs."),
@@ -74,7 +77,7 @@ catch (Exception e) when (e is ArgumentException or FormatException or OverflowE
 
 rulesDir ??= Path.Combine(RepoRoot(), "content", "tactics", "base", "rules");
 var rules = RulesPack.Load([rulesDir]);
-var config = new SimConfig(encounters ?? [.. rules.Encounters.Keys], levels, parties, sizes, seeds, difficulty, roundCap, trinkets);
+var config = new SimConfig(encounters ?? [.. rules.Encounters.Keys], levels, parties, sizes, seeds, difficulty, roundCap, trinkets, companions);
 
 var watch = Stopwatch.StartNew();
 var battles = new List<SimBattle>();

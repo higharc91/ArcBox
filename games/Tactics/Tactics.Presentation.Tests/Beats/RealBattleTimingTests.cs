@@ -26,7 +26,7 @@ public sealed class RealBattleTimingTests
         var rules = Rules.Value;
         var beats = ImmutableArray.CreateBuilder<(Beat, BattleView)>();
         string[] classes = ["wizard", "sorcerer", "cleric", "fighter", "druid", "warlock"];
-        (string, ulong)[] fights = [("river_crossing", 3), ("warlord_bridge", 5), ("forest_ruins", 7), ("crypt_hall", 9), ("crystal_cave", 11), ("warlord_bridge", 13)];
+        (string, ulong)[] fights = [("river_crossing", 4), ("warlord_bridge", 5), ("forest_ruins", 7), ("crypt_hall", 9), ("crystal_cave", 11), ("warlord_bridge", 13), ("crypt_hall", 15), ("forest_ruins", 17), ("warlord_bridge", 19), ("warlord_bridge", 21), ("warlord_bridge", 23), ("warlord_bridge", 25), ("warlord_bridge", 27), ("warlord_bridge", 29)];
         foreach (var (encounter, seed) in fights)
         {
             PartyMember[] party = [.. classes.Select((c, i) => new PartyMember(new UnitId($"hero{i + 1}"),

@@ -28,6 +28,22 @@ public sealed class SimSmokeTests
     }
 
     [Fact]
+    public void A_companion_played_party_finishes_and_is_counted()
+    {
+        var rules = BasePackTests.Rules;
+        SimConfig Config(int companions) => new(["ford_assault"], [1], 1, [4], 2, Difficulty.Normal, Companions: companions);
+
+        var plain = SimRunner.Run(Config(0), rules).ToArray();
+        var played = SimRunner.Run(Config(4), rules).ToArray();
+
+        Assert.Equal(plain.Length, played.Length);
+        Assert.All(played, b => Assert.True(Enum.IsDefined(b.Outcome)));
+        Assert.All(played, b => Assert.Equal(4, b.Companions));
+        Assert.All(plain, b => Assert.Equal(0, b.Companions));
+        Assert.Throws<ArgumentOutOfRangeException>(() => SimRunner.Run(Config(5), rules).ToArray());
+    }
+
+    [Fact]
     public void Every_encounter_ends_with_3_seeds()
     {
         var rules = BasePackTests.Rules;

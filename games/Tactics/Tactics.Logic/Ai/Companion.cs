@@ -6,9 +6,9 @@ namespace Tactics.Logic;
 /// The <c>companion</c> profile (spec §5.5): absent players' characters, and timed-out turns, which play it through
 /// <see cref="AiOptions.ProfileOverride"/>.
 /// <list type="bullet">
-/// <item>Its weights are the content's <c>companion</c> profile scaled by the roles in the class's <c>aiTags</c>
-/// (<see cref="Weigh"/>), with reviving a Downed ally always the highest weight. Its hoard weight is 0: class resources refill
-/// every battle, so they are spent freely.</item>
+/// <item>Its weights are those of the profile its class's <c>aiTags</c> name for a party member (<see cref="Weigh"/>), with
+/// reviving a Downed ally always the highest weight. Its hoard weight is the content's <c>companion</c> profile's, 0: class
+/// resources refill every battle, so they are spent freely.</item>
 /// <item>Healers and protected allies are guarded: the planner adds to a tile's position score for standing next to one the
 /// foes threaten (see <see cref="Planner"/>).</item>
 /// <item>Items: only one tagged <see cref="HealingTag"/>, from its own bag, only on itself, only while it hasn't used an item
@@ -28,29 +28,27 @@ internal static class Companion
     /// <summary>The class <c>aiTags</c> role that marks an ally the companion guards.</summary>
     public const string HealerRole = "healer";
 
-    /// <summary>How each class role scales the companion's weights; roles not listed (melee, sneak) change nothing.</summary>
-    private static readonly ImmutableSortedDictionary<string, Func<AiProfile, AiProfile>> Roles = Ordinal.Map<Func<AiProfile, AiProfile>>(
-        (HealerRole, p => p with { Heal = p.Heal * 1.5, Revive = p.Revive * 1.25 }),
-        ("support", p => p with { Heal = p.Heal * 1.2, Control = p.Control * 1.2 }),
-        ("caster", p => p with { Control = p.Control * 1.2 }),
-        ("control", p => p with { Control = p.Control * 1.5 }),
-        ("defender", p => p with { Caution = p.Caution * 0.5, Objective = p.Objective * 1.5 }),
-        ("front", p => p with { Caution = p.Caution * 0.75 }),
-        ("striker", p => p with { Damage = p.Damage * 1.25, Kill = p.Kill * 1.25, FocusFire = p.FocusFire * 1.5 }),
-        ("ranged", p => p with { Caution = p.Caution * 1.5 }));
+    /// <summary>
+    /// What the companion adds to a tile's position score, per point of expected damage on a guarded ally it stands next to
+    /// (half this weight, times the damage). A companion rule: it doesn't come from the class's profile.
+    /// </summary>
+    public const double GuardWeight = 2.25;
 
     /// <summary>True when <paramref name="profile"/> is the companion's.</summary>
     public static bool Is(AiProfile profile) => profile.Id == ProfileId;
 
     /// <summary>
-    /// The companion weights for <paramref name="unit"/>: <paramref name="profile"/> scaled by each role of its class's
-    /// <c>aiTags</c> in turn (in ordinal order), then Revive raised, if it must be, to stay a quarter above every other weight.
+    /// The companion weights for <paramref name="unit"/>: those of the profile its class would play as a party member
+    /// (<see cref="AiProfile.IdForRoles"/> on the roles in its class's <c>aiTags</c>), under the companion's id, so a companion
+    /// fights like its class's tuned profile and is no more cautious. On top sit the companion's own rules: <c>Hoard</c> is the
+    /// companion profile's (class resources refill every battle, so they are spent freely), and Revive is raised, if it must be,
+    /// to stay a quarter above every other weight. A unit with no class (a monster) keeps <paramref name="profile"/> as it is.
     /// </summary>
     public static AiProfile Weigh(AiProfile profile, UnitState unit, RulesPack rules)
     {
-        foreach (var role in RoleTags(unit, rules))
-            if (Roles.TryGetValue(role, out var scale))
-                profile = scale(profile);
+        var roles = RoleTags(unit, rules);
+        if (roles.Count > 0 && rules.AiProfiles.TryGetValue(AiProfile.IdForRoles(roles), out var tuned))
+            profile = AiProfile.From(tuned) with { Id = profile.Id, Hoard = profile.Hoard };
         var top = new[] { profile.Damage, profile.Kill, profile.Control, profile.Heal, profile.Caution, profile.FocusFire, profile.Objective }.Max();
         return profile with { Revive = Math.Max(profile.Revive, 1.25 * top) };
     }

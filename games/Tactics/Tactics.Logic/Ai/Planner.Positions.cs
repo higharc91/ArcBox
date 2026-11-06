@@ -90,7 +90,7 @@ internal sealed partial class Planner
             score -= 0.1 * _p.Objective * Math.Max(0, protectedAllies.Min(u => Reach.Distance(u.Pos, t)) - 3);
         foreach (var (pos, danger) in Guarded())
             if (Reach.Distance(pos, t) <= 1)
-                score += 0.5 * _p.Objective * danger;
+                score += 0.5 * GuardWeight * danger;
         var goal = _scorer.ReachTiles(_me);
         if (!goal.IsEmpty)
             score -= 0.3 * Math.Max(0.5, _p.Objective) * goal.Min(g => Reach.Distance(g, t));
@@ -99,6 +99,12 @@ internal sealed partial class Planner
 
     private double HazardCost(double damage) => _p.Caution * damage
         * Math.Clamp(2 * damage / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
+
+    /// <summary>
+    /// How much a companion values standing next to an ally it guards (<see cref="Companion.GuardWeight"/>), not
+    /// its class profile's Objective, so guarding stays a companion rule whatever class it plays.
+    /// </summary>
+    private double GuardWeight => Companion.GuardWeight;
 
     private ImmutableArray<(Tile Pos, double Danger)>? _guarded;
 

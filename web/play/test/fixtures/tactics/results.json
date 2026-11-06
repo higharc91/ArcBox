@@ -19,13 +19,15 @@
       {
         "name": "Player3",
         "xp": 250,
-        "injuries": []
+        "injuries": [
+          "Cracked ribs"
+        ]
       },
       {
         "name": "Player4",
         "xp": 250,
         "injuries": [
-          "Cracked ribs"
+          "Shaken"
         ]
       }
     ],

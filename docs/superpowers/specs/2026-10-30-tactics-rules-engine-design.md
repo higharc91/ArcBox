@@ -536,7 +536,7 @@ The AI does one-ply planning plus the threat map, with no deeper search. The tim
 | Hard | Focus fires, uses cover well and times its big abilities |
 
 ### 5.5 Absent players and timed-out turns
-- **Absent members' characters** run the `companion` profile, weighted by their class's `aiTags`:
+- **Absent members' characters** run the `companion` profile, whose weights are those of the profile their class's `aiTags` name for a party member (#109):
   - **Priorities:** revive Downed allies first, then protect the healer and the protected NPC, then do role damage.
   - **Resources:** class resources are spent freely, since they refill every battle.
   - **Items:** at most **one healing item per battle**, from the owner's bag, and only when the threat map says the character would be Downed next round. Its use is recorded in `BattleResult.ItemsUsed`.

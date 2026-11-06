@@ -104,7 +104,7 @@
     "control": 0.8,
     "heal": 1.5,
     "revive": 4.0,
-    "caution": 0.6,
+    "caution": 0.2,
     "focusFire": 0.8,
     "objective": 1.5,
     "hoard": 0.0
