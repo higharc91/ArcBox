@@ -144,6 +144,7 @@ public static class Report
                      + $"{Num(g.Average(x => x.Stats.HealingPerRound))} | {Num(g.Average(x => x.Stats.MitigatedPerRound))} | "
                      + $"{Num(g.Average(x => x.Stats.TurnsDenied))} |");
         Line(md);
+        RogueSetUps(md, battles);
 
         // 5. Abilities
         Line(md, Headings[4]);
@@ -213,9 +214,13 @@ public static class Report
             ? " --trinkets " + string.Join(",", config.Trinkets.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
         var subclasses = config.Subclasses is { Count: > 0 }
             ? " --subclasses " + string.Join(",", config.Subclasses.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
+        var weapons = config.Weapons is { Count: > 0 }
+            ? " --weapons " + string.Join(",", config.Weapons.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : "";
         Line(md, $"  --seeds {config.Seeds} --difficulty {config.Difficulty} --round-cap {config.RoundCap}{trinkets}"
                  + (config.Companions > 0 ? $" --companions {config.Companions}" : "") + subclasses
-                 + (config.Race is { } race ? $" --race {race}" : ""));
+                 + (config.Race is { } race ? $" --race {race}" : "")
+                 + (config.WithClass is { } only ? $" --with-class {only}" : "") + weapons
+                 + (config.Policy is { } policy ? $" --policy {policy}" : ""));
         Line(md, "```");
         Line(md);
         Line(md, $"- **Encounters:** {string.Join(", ", config.Encounters)}.");
@@ -240,7 +245,40 @@ public static class Report
                  + $"by a generator seeded {SimRunner.PartySeed}:");
         foreach (var party in battles.Select(b => b.Classes).DistinctBy(Party).OrderBy(p => p.Length).ThenBy(Party, StringComparer.Ordinal))
             Line(md, $"  - {party.Length}: {string.Join(", ", party)}");
+        if (config.WithClass is { } withClass)
+            Line(md, $"- **Only the parties with a {withClass}** of those sampled.");
+        if (config.Weapons is { Count: > 0 })
+            Line(md, "- **Weapons:** " + string.Join(", ", config.Weapons.OrderBy(p => p.Key, StringComparer.Ordinal)
+                .Select(p => $"{p.Key}: `{p.Value}`")) + " instead of the starting kit's.");
+        if (config.Policy == HiddenRogue.Name)
+            Line(md, $"- **Policy `{HiddenRogue.Name}`:** party rogues play the scripted rogue that hides whenever the rules let it and "
+                     + "strikes from hiding (`HiddenRogue`), not the AI.");
         return md.ToString();
+    }
+
+    /// <summary>
+    /// The party rogues' Sneak Attack set-up by level (<see cref="RogueSetUp"/>), when any rogue had a turn: the share of
+    /// their turns with Hide, with Sneak Attack and with a weapon attack, and of those attacks the share from hiding and,
+    /// in melee, flanking.
+    /// </summary>
+    private static void RogueSetUps(StringBuilder md, IReadOnlyList<SimBattle> battles)
+    {
+        var levels = battles.Where(b => b.Rogue is { Turns: > 0 }).GroupBy(b => b.Level).OrderBy(g => g.Key)
+            .Select(g => (Level: g.Key, SetUp: g.Aggregate(RogueSetUp.None, (sum, b) => sum.Add(b.Rogue!)))).ToArray();
+        if (levels.Length == 0)
+            return;
+        Line(md, "### Sneak Attack set-up (rogues)");
+        Line(md);
+        Line(md, "How the party's rogues set up Sneak Attack (#108), over their own turns: the share of turns in which they used Hide, "
+                 + "landed Sneak Attack and made a weapon attack; and of those weapon attacks, the share made from hiding and the "
+                 + "share made in melee flanking the target (an ally that can act on the far side of it).");
+        Line(md);
+        Line(md, "| Level | Rogue turns | Hide | Sneak Attack | Attacking | From hiding | Flanking |");
+        Line(md, "|---:|---:|---:|---:|---:|---:|---:|");
+        foreach (var (level, r) in levels)
+            Line(md, $"| {level} | {r.Turns} | {Pct(r.HideTurns, r.Turns)} | {Pct(r.SneakTurns, r.Turns)} | {Pct(r.AttackTurns, r.Turns)} | "
+                     + $"{Pct(r.FromHiding, r.AttackTurns)} | {Pct(r.Flanking, r.AttackTurns)} |");
+        Line(md);
     }
 
     // ---- Tables -------------------------------------------------------------------------------------------------------

@@ -10,11 +10,15 @@ namespace Tactics.Sim;
 /// <see cref="Difficulty"/>. A battle still going when round <see cref="RoundCap"/> is over stops and counts as lost.
 /// <see cref="Subclasses"/> gives a class one of its subclasses (class id to subclass id; none by default) and
 /// <see cref="Race"/> every party member a race (<see cref="SimRunner.Race"/> by default), to measure what they add.
+/// <see cref="WithClass"/> plays only the sampled parties that include that class (the same parties, fewer of them);
+/// <see cref="Weapons"/> gives a class another weapon (class id to weapon id); and <see cref="Policy"/>
+/// <see cref="HiddenRogue.Name"/> has the party's rogues play the scripted <see cref="HiddenRogue"/> instead of the AI (#108).
 /// </summary>
 public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray<int> Levels, int PartiesPerSize,
     ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30,
     ImmutableDictionary<string, string>? Trinkets = null, int Companions = 0,
-    ImmutableDictionary<string, string>? Subclasses = null, string? Race = null);
+    ImmutableDictionary<string, string>? Subclasses = null, string? Race = null, string? WithClass = null,
+    ImmutableDictionary<string, string>? Weapons = null, string? Policy = null);
 
 /// <summary>
 /// One simulated battle: the encounter, the party's level and classes (one entry per member, ordinal order), the seed,
@@ -24,13 +28,13 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
 /// stopped at the round cap (counted as <see cref="BattleOutcome.Lost"/>, <see cref="Rounds"/> = the cap). How the AI's
 /// plans fared, on both sides: <see cref="Rejected"/> commands <see cref="Battle.Apply"/> refused, <see cref="Replans"/>
 /// (a turn planned again after a refusal or a move cut short) and <see cref="ForcedEnds"/> (turns the simulator ended
-/// because the plans didn't).
+/// because the plans didn't). <see cref="Rogue"/> is how the party's rogues set up Sneak Attack.
 /// </summary>
 public sealed record SimBattle(string Encounter, int Level, ImmutableArray<string> Classes, ulong Seed, BattleOutcome Outcome,
     int Rounds, int Downs, int Outs, ImmutableSortedDictionary<string, ClassStats> PerClass,
     ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false,
     int Rejected = 0, int Replans = 0, int ForcedEnds = 0, int? EncounterLevel = null, EnvironmentStats? Environmental = null,
-    int Companions = 0);
+    int Companions = 0, RogueSetUp? Rogue = null);
 
 /// <summary>
 /// A class's measures in one battle, per member of that class (see <see cref="Tally"/> for how each is read from the
@@ -91,7 +95,8 @@ public static class SimRunner
     /// The sampled party compositions, size by size in <see cref="SimConfig.PartySizes"/> order: of every combination of the
     /// pack's classes of that size (each member's class in ordinal order, at most <see cref="MaxCopies"/> of a class) with
     /// at least one healer or defender, <see cref="SimConfig.PartiesPerSize"/> distinct ones (all of them if there are no
-    /// more) drawn with one generator seeded <see cref="PartySeed"/>, listed in ordinal order within a size.
+    /// more) drawn with one generator seeded <see cref="PartySeed"/>, listed in ordinal order within a size. With
+    /// <see cref="SimConfig.WithClass"/>, only those of them that include the class.
     /// </summary>
     public static ImmutableArray<ImmutableArray<string>> Parties(SimConfig config, RulesPack rules)
     {
@@ -115,7 +120,7 @@ public static class SimRunner
             }
             parties.AddRange(picks.OrderBy(p => string.Join(",", p), StringComparer.Ordinal));
         }
-        return parties.ToImmutable();
+        return [.. parties.Where(p => config.WithClass is not { } only || p.Contains(only))];
     }
 
     /// <summary>Every multiset of <paramref name="size"/> of <paramref name="classes"/> with at most <paramref name="cap"/> of each, in order.</summary>
@@ -160,6 +165,13 @@ public static class SimRunner
                 throw new ArgumentException($"Subclass '{subclass}' is not one of class '{cls}'.", nameof(config));
         if (config.Race is { } race && !rules.Races.ContainsKey(race))
             throw new ArgumentException($"Unknown race '{race}'.", nameof(config));
+        if (config.WithClass is { } only && !rules.Classes.ContainsKey(only))
+            throw new ArgumentException($"Unknown class '{only}'.", nameof(config));
+        foreach (var (cls, weapon) in config.Weapons ?? ImmutableDictionary<string, string>.Empty)
+            if (!rules.Classes.ContainsKey(cls) || !rules.Weapons.ContainsKey(weapon))
+                throw new ArgumentException($"Weapon '{weapon}' for class '{cls}': unknown class or weapon.", nameof(config));
+        if (config.Policy is { } policy && policy != HiddenRogue.Name)
+            throw new ArgumentException($"Unknown policy '{policy}' (the only one is '{HiddenRogue.Name}').", nameof(config));
         var parties = Parties(config, rules);
         var jobs = new List<(string Encounter, int Level, ImmutableArray<string> Party, ulong Seed)>();
         foreach (var encounter in config.Encounters)
@@ -188,6 +200,7 @@ public static class SimRunner
         var setup = Encounters.Setup(encounter, party, config.Difficulty, rules);
 
         var tally = new Tally(rules);
+        var rogues = new RogueTally(rules);
         var ai = new AiCounts();
         var start = Battle.Start(setup, rules, seed);
         var state = start.State;
@@ -202,25 +215,31 @@ public static class SimRunner
             }
             if (state.Pending is not null || state.Active is not { } unit)
                 throw new InvalidOperationException($"The battle is waiting on something the AI can't answer ({state.Pending}).");
-            state = PlayTurn(state, unit, rules, tally, ai);
+            var scripted = config.Policy == HiddenRogue.Name && RogueTally.IsRogue(state.Units[unit]);
+            state = PlayTurn(state, unit, rules, tally, ai, rogues, scripted);
         }
 
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
             tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
-            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment, config.Companions);
+            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment, config.Companions, rogues.SetUp);
     }
 
     /// <summary>
     /// The party member of class <paramref name="cls"/> at <paramref name="level"/>: <see cref="SheetBuilder.DefaultCharacter"/>
     /// of the config's race (else <see cref="Race"/>, else the pack's first race), with the class's subclass from
-    /// <see cref="SimConfig.Subclasses"/> if it has one, and its trinket from <see cref="SimConfig.Trinkets"/>.
+    /// <see cref="SimConfig.Subclasses"/> if it has one, its trinket from <see cref="SimConfig.Trinkets"/> and its weapon from
+    /// <see cref="SimConfig.Weapons"/> (else its starting kit's).
     /// </summary>
     internal static CharacterRecord Character(SimConfig config, RulesPack rules, string id, string cls, int level)
     {
         var race = config.Race ?? (rules.Races.ContainsKey(Race) ? Race : rules.Races.Keys.First());
-        return SheetBuilder.DefaultCharacter(id, race, cls, config.Subclasses?.GetValueOrDefault(cls), level, rules)
-            with { Trinket = config.Trinkets?.GetValueOrDefault(cls) };
+        var character = SheetBuilder.DefaultCharacter(id, race, cls, config.Subclasses?.GetValueOrDefault(cls), level, rules);
+        return character with
+        {
+            Trinket = config.Trinkets?.GetValueOrDefault(cls),
+            Weapon = config.Weapons?.GetValueOrDefault(cls) ?? character.Weapon,
+        };
     }
 
     /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>
@@ -232,21 +251,25 @@ public static class SimRunner
     }
 
     /// <summary>
-    /// <paramref name="unit"/>'s whole turn: the AI's plan, applied command by command, planned again when a command is
-    /// refused or a move is cut short (at most <see cref="MaxPlansPerTurn"/> plans), then ended if it hasn't ended.
+    /// <paramref name="unit"/>'s whole turn: the AI's plan (with <paramref name="scripted"/>, <see cref="HiddenRogue"/>'s
+    /// when it has one), applied command by command, planned again when a command is refused or a move is cut short (at most
+    /// <see cref="MaxPlansPerTurn"/> plans), then ended if it hasn't ended.
     /// </summary>
-    private static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally, AiCounts ai)
+    private static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally, AiCounts ai, RogueTally rogues,
+        bool scripted)
     {
         var party = tally.IsMember(state, unit);
         if (party)
             tally.BeginTurn(unit, LegalAbilities(state, unit, rules));
+        rogues.BeginTurn(state, unit);
         var options = party ? PartyOptions : null;
         var ended = false;
         for (var plan = 0; plan < MaxPlansPerTurn && !ended && state.Outcome is null; plan++)
         {
             if (plan > 0)
                 ai.Replans++;
-            foreach (var command in Ai.Plan(state, unit, rules, options).Commands)
+            var commands = (scripted ? HiddenRogue.Plan(state, unit, rules) : null) ?? Ai.Plan(state, unit, rules, options).Commands;
+            foreach (var command in commands)
             {
                 var resolution = Battle.Apply(state, command, rules);
                 if (resolution.Rejected is not null)
@@ -254,6 +277,7 @@ public static class SimRunner
                     ai.Rejected++;
                     break;
                 }
+                rogues.Read(state, command, resolution.Events);
                 state = resolution.State;
                 tally.Read(resolution.Events, state);
                 ended = resolution.Events.Any(e => e is TurnEnded t && t.Unit == unit);
@@ -268,6 +292,7 @@ public static class SimRunner
             state = resolution.State;
             tally.Read(resolution.Events, state);
         }
+        rogues.EndTurn();
         return state;
     }
 

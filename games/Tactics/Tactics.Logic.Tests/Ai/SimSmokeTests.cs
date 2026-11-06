@@ -159,6 +159,42 @@ public sealed class SimSmokeTests
     }
 
     [Fact]
+    public void A_sweep_can_play_only_the_rogue_parties_arm_the_rogue_and_script_it_to_hide_every_turn()
+    {
+        // #108 measures a human who sets up Sneak Attack every turn, with a rapier or a shortbow.
+        var rules = BasePackTests.Rules;
+        var all = new SimConfig(["forest_ruins"], [3], 6, [4], 1, Difficulty.Normal);
+        var config = all with
+        {
+            WithClass = "rogue", Weapons = ImmutableDictionary<string, string>.Empty.Add("rogue", "shortbow"), Policy = HiddenRogue.Name,
+        };
+
+        Assert.Equal(SimRunner.Parties(all, rules).Where(p => p.Contains("rogue")), SimRunner.Parties(config, rules));
+        Assert.Equal("shortbow", SimRunner.Character(config, rules, "p1.rogue", "rogue", 3).Weapon);
+        Assert.Equal("rapier", SimRunner.Character(all, rules, "p1.rogue", "rogue", 3).Weapon);
+        var battles = SimRunner.Run(config, rules).ToArray();
+        Assert.NotEmpty(battles);
+        Assert.All(battles, b => Assert.Contains("rogue", b.Classes));
+        var setUp = battles.Select(b => b.Rogue!).ToArray();
+        Assert.All(setUp, r =>
+        {
+            Assert.InRange(r.HideTurns, 0, r.Turns);
+            Assert.InRange(r.SneakTurns, 0, r.Turns);
+            Assert.InRange(r.AttackTurns, 0, r.Turns);
+            Assert.InRange(r.FromHiding + r.Flanking, 0, 2 * r.AttackTurns);
+        });
+        Assert.True(setUp.Sum(r => r.HideTurns) > 0 && setUp.Sum(r => r.FromHiding) > 0, "The scripted rogue never hid and struck.");
+        Assert.All(SimRunner.Run(all, rules).Where(b => !b.Classes.Contains("rogue")), b => Assert.Equal(0, b.Rogue!.Turns));
+
+        var report = Report.Markdown(battles, config);
+        Assert.Contains("--with-class rogue --weapons rogue:shortbow --policy hidden-rogue", report, StringComparison.Ordinal);
+        Assert.Contains("### Sneak Attack set-up (rogues)", report, StringComparison.Ordinal);
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(all with { WithClass = "bandit" }, rules));
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(all with { Weapons = config.Weapons!.SetItem("rogue", "laser") }, rules));
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(all with { Policy = "lazy" }, rules));
+    }
+
+    [Fact]
     public void Sampled_parties_are_fixed_distinct_and_have_a_healer_or_defender()
     {
         var rules = BasePackTests.Rules;
