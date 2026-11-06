@@ -47,6 +47,7 @@
     "canBattle": true,
     "portal": "/c/ABCD",
     "interact": "Trade with Wenna\u0027s Remedies",
+    "canGive": true,
     "gold": 200,
     "targets": [
       {

@@ -220,7 +220,8 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, MemberRecord> Members,
     ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> GiftTrades = default)
 {
     /// <summary>The document version this code reads and writes.</summary>
     public const int CurrentVersion = 1;

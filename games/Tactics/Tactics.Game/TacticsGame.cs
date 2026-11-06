@@ -122,6 +122,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             _doc = seed.SeedInto(_doc, Rules);
         _doc = Coloured(_doc);
         _questLogLeader = null;
+        _giving.Clear();
         _questObservedFlags = null;
         EnterWorld();
         _mobActors.Clear();
@@ -155,6 +156,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
         _doc = Coloured(TacticsDocument.Read(_lease.Document, Rules));
         _questLogLeader = null;
+        _giving.Clear();
         _questObservedFlags = null;
         EnterWorld();
         _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
@@ -278,6 +280,15 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Exploration when custom.Action == "interact":
                 Interact(player, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "giveOpen":
+                if (_online.Contains(player.Id)) _giving.Add(profile.Value);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "giveClose":
+                _giving.Remove(profile.Value);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "give":
+                Give(player, profile, custom.Data);
                 break;
             case TacticsPhase.Exploration when custom.Action == "search":
                 Search(player);
