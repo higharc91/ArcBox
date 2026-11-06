@@ -8,7 +8,8 @@ public static class Hp
     /// <paramref name="source"/> (if a unit dealt it): immunity (the sheet's or a static modifier's) cancels it, resistance
     /// halves it (rounded down), vulnerability doubles it. Returns the damage dealt.
     /// <list type="bullet">
-    /// <item>An Up unit: temporary HP absorbs it first; emits <see cref="Damaged"/>. A transformed unit whose temporary HP
+    /// <item>An Up unit: temporary HP absorbs it first; damage that would take it past an untriggered phase threshold leaves it
+    /// at the threshold instead (<see cref="Steadfast.PhaseFloor"/>); emits <see cref="Damaged"/>. A transformed unit whose temporary HP
     /// run out turns back (<see cref="Transforms.Revert"/>), the rest of the damage carrying over. Damage over 0 that leaves it at 0 HP
     /// drops it (<see cref="DownedRules.Drop"/>); otherwise a concentrating unit saves to keep its concentration
     /// (<see cref="Conditions.ConcentrationDc"/>) and the unit's <see cref="HookKind.OnDamaged"/> hooks fire.</item>
@@ -50,7 +51,10 @@ public static class Hp
         }
 
         var absorbed = Math.Min(u.TempHp, amount);
-        var hp = Math.Max(0, u.Hp - (amount - absorbed));
+        var plain = Math.Max(0, u.Hp - (amount - absorbed));
+        var hp = Steadfast.PhaseFloor(w.State, u, u.Hp, plain);
+        if (hp != plain)
+            amount = absorbed + u.Hp - hp;   // a hit held at a phase threshold deals only what it took
         w.Set(u with { TempHp = u.TempHp - absorbed, Hp = hp });
         w.Emit(new Damaged(unit, amount, type, hp));
         if (amount > 0)

@@ -281,6 +281,6 @@ public static class SheetBuilder
         var maxHp = Math.Max(1, m!.Hp.At(effectiveLevel) + m.Passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0));
         return new UnitSheet(m.Name, Side.Enemy, effectiveLevel, m.Scores, maxHp, m.Ac, m.Armor, m.Move, m.Jump,
             m.InitiativeBonus, m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune,
-            m.Vulnerable, m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
+            m.Vulnerable, m.SheetTags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
     }
 }

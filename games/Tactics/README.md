@@ -147,6 +147,7 @@ These turn SRD 5.2 into this game, and every content file starts from them. **Th
 - **Left out:** spells with no battle use (utility, ritual, travel, divination).
 - **`defaultPicks`:** every class lists a preset loadout per level, used by the simulator and by AI-built characters. Real players choose their own in the portal (sub-project 4).
 - **Content may add, never override:** an id defined twice without `"replaces"` is a load error.
+- **Boss guard (a departure from SRD 5.2, #106):** pushed or pulled into a deep tile (lava, chasm, river), a non-party unit dies. A *guarded* unit, one whose monster sets `"steadfast": true` or that has an `hpBelow` phase trigger in the encounter, stops on the last tile of the push that isn't deep instead (`PushResisted`, "BRACED" on the TV), or doesn't move. Set `steadfast` on every boss stat block. Damage that would take a unit past an untriggered phase threshold also leaves it at the threshold: the phase fires and the rest of that hit is lost. Heroes and ordinary enemies are unchanged. The AI scores a push by where it lands (the target's remaining HP for a deep tile; nothing for a guarded unit) and avoids ending a turn on an edge tile next to deep with a foe able to shove it over.
 
 
 Recovery screens share `RecoveryMemberView` (battle-ready HP, class resources and injury ids) and compact party cards.

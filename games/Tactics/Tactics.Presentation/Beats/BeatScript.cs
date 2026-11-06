@@ -204,6 +204,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private const string Crit = "fx.crit.gold";
     private const string Pillar = "fx.pillar.shadow";
     private const string Miss = "MISS";
+    private const string Braced = "BRACED";
     private const string CritWord = "CRIT";
 
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
@@ -363,6 +364,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case Fell fell:
                     PlayFall(fell);
+                    break;
+                case PushResisted resisted:
+                    Pop(resisted.Unit, Braced, PopStyle.Damage);
+                    Sound("collided");
+                    _cues.Add(new ShakeCue(_t, BeatTiming.Slide));
+                    _t += BeatTiming.Slide;
                     break;
                 case Collided collided:
                     Burst(Spark, TileOf(collided.Unit));

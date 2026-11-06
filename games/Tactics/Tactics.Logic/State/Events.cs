@@ -19,6 +19,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Pushed), nameof(Pushed))]
 [JsonDerivedType(typeof(Fell), nameof(Fell))]
 [JsonDerivedType(typeof(Collided), nameof(Collided))]
+[JsonDerivedType(typeof(PushResisted), nameof(PushResisted))]
 [JsonDerivedType(typeof(Teleported), nameof(Teleported))]
 [JsonDerivedType(typeof(ReactionOffered), nameof(ReactionOffered))]
 [JsonDerivedType(typeof(Reacted), nameof(Reacted))]
@@ -103,6 +104,12 @@ public sealed record Fell(UnitId Unit, int Levels, int Damage, bool IntoDeep) : 
 
 /// <summary>A pushed unit hit a wall, the map edge or another unit (<see cref="With"/>) and took <see cref="Damage"/> (rolled).</summary>
 public sealed record Collided(UnitId Unit, UnitId? With, int Damage) : BattleEvent;
+
+/// <summary>
+/// A guarded unit (<see cref="Steadfast"/>) was pushed toward a deep tile and braced at the edge: it stays on <see cref="At"/>,
+/// the last tile of the push that isn't deep, which is where it was when the push began if it had not moved.
+/// </summary>
+public sealed record PushResisted(UnitId Unit, Tile At) : BattleEvent;
 
 /// <summary>A unit was moved without walking (a teleport or a swap).</summary>
 public sealed record Teleported(UnitId Unit, Tile From, Tile To) : BattleEvent;

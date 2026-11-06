@@ -447,6 +447,18 @@ public sealed class BeatScriptTests
             Script(Near, [.. Hit(6, 4), new ConditionApplied(Hero, new ConditionId("blessed"))]).Length, 3);
 
     [Fact]
+    public void A_guarded_unit_bracing_at_the_edge_pops_a_word_over_its_tile()
+    {
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3));
+
+        var script = Script(view, new PushResisted(Foe, new Tile(4, 3)));
+
+        var pop = Assert.Single(script.Cues.OfType<PopCue>());
+        Assert.Equal("BRACED", pop.Text);
+        Assert.Equal(new Tile(4, 3), pop.Tile);
+    }
+
+    [Fact]
     public void A_foe_shoved_into_another_is_not_an_area()
     {
         var other = new UnitId("goblin.2");

@@ -358,7 +358,8 @@ public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, 
 /// rating (<c>"1/4"</c>, <c>"3"</c>), the XP it is worth, its AI profile, its sprite (an art key such as
 /// <c>"beasts.wolf.grey"</c>) and, for bosses, phases. Its <see cref="Weapon"/> is written inline in the stat block (a monster's
 /// natural weapons are its own; <c>weapons.json</c> holds the gear characters carry). <see cref="Hp"/> is its maximum HP.
-/// <see cref="Replaces"/> lets a later pack override an id.
+/// <see cref="Replaces"/> lets a later pack override an id. <see cref="Steadfast"/> guards the unit against deep-tile pushes
+/// (<see cref="Tactics.Logic.Steadfast"/>): it is the tag <c>steadfast</c> on its sheet.
 /// </summary>
 public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, ByLevel<int> Hp, int Ac,
     WeaponDef Weapon, string AiProfile, string Sprite, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
@@ -372,7 +373,13 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
     ImmutableArray<PhaseDef> Phases,
     int Level = 1, ArmorKind Armor = ArmorKind.None, int Move = 4, int Jump = 2, int InitiativeBonus = 0, int Attacks = 1,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Steadfast = false)
+{
+    /// <summary>The tags its unit's sheet carries: <see cref="Tags"/>, plus <see cref="Tactics.Logic.Steadfast.Tag"/> when it is steadfast.</summary>
+    [JsonIgnore]
+    public ImmutableSortedSet<string> SheetTags => Steadfast ? Tags.Add(Tactics.Logic.Steadfast.Tag) : Tags;
+}
 
 /// <summary>
 /// A consumable item (<c>items.json</c>): using it runs the ability <see cref="Use"/>. <see cref="Tags"/> such as

@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Tactics.Logic;
 
 /// <summary>
@@ -41,6 +43,8 @@ public static class Motion
     /// <item>on a deep tile (<see cref="Fell"/>, into deep): the unit drops as at 0 HP (<see cref="DownedRules.Drop"/>, by
     /// <paramref name="by"/>), so a party member is Downed and anyone else dies; one already Downed keeps its
     /// countdown;</item>
+    /// <item>before a deep tile, when the unit is guarded (<see cref="Steadfast"/>): it stays on the last tile that isn't
+    /// deep (<see cref="PushResisted"/>) and takes nothing;</item>
     /// <item>after a drop of more than 3 levels: 1d6 bludgeoning per level beyond 3, then prone if still standing
     /// (<see cref="Fell"/>).</item>
     /// </list>
@@ -69,6 +73,12 @@ public static class Motion
                 return;
             }
 
+            if (terrain.Deep(next) && Steadfast.Guarded(w.State, u))
+            {
+                w.Emit(new PushResisted(unit, from));   // stops on the last tile that isn't deep: this one
+                return;
+            }
+
             var drop = terrain.HeightAt(from) - terrain.HeightAt(next);
             w.Set(u with { Pos = next });
             w.Emit(new Pushed(unit, from, next));
@@ -91,6 +101,47 @@ public static class Motion
                 return;
             }
         }
+    }
+
+    /// <summary>
+    /// Where a forced move of <paramref name="unit"/> would take it, with no change to the battle (what the AI scores): the
+    /// tiles it enters in order (<see cref="Tiles"/>, a tile that stops it excluded when it is a wall or a unit), whether it
+    /// then hits a wall or another unit (<see cref="Blocked"/>), ends in a deep tile (<see cref="IntoDeep"/>: it is the last of
+    /// <see cref="Tiles"/>), braces at the edge of one when guarded (<see cref="Resisted"/>, see <see cref="Steadfast"/>), and
+    /// the levels it falls where the push ends on a drop of more than 3 (<see cref="Drop"/>). The same rules as
+    /// <see cref="Push"/>.
+    /// </summary>
+    public sealed record ForcedPath(ImmutableArray<Tile> Tiles, bool Blocked, bool IntoDeep, bool Resisted, int Drop);
+
+    /// <summary>See <see cref="ForcedPath"/>: <paramref name="unit"/> pushed up to <paramref name="distance"/> tiles by <paramref name="direction"/>.</summary>
+    public static ForcedPath Trace(BattleState state, Terrain terrain, UnitState unit, (int Dx, int Dy) direction, int distance)
+    {
+        var tiles = ImmutableArray.CreateBuilder<Tile>();
+        var at = unit.Pos;
+        var guarded = Steadfast.Guarded(state, unit);
+        for (var i = 0; i < distance && direction != (0, 0); i++)
+        {
+            var next = new Tile(at.X + direction.Dx, at.Y + direction.Dy);
+            var wall = !terrain.Map.InBounds(next)
+                       || (terrain.Map[next].Flags & TileFlags.Impassable) != 0
+                       || terrain.PropAt(next) is { Blocks: true }
+                       || terrain.HeightAt(next) - terrain.HeightAt(at) > 1;
+            if (wall || state.Units.Values.Any(o => o.Id != unit.Id && o.Pos == next && o.Life is LifeState.Up or LifeState.Downed))
+                return new ForcedPath(tiles.ToImmutable(), Blocked: true, IntoDeep: false, Resisted: false, Drop: 0);
+            if (terrain.Deep(next))
+            {
+                if (guarded)
+                    return new ForcedPath(tiles.ToImmutable(), Blocked: false, IntoDeep: false, Resisted: true, Drop: 0);
+                tiles.Add(next);
+                return new ForcedPath(tiles.ToImmutable(), Blocked: false, IntoDeep: true, Resisted: false, Drop: 0);
+            }
+            var drop = terrain.HeightAt(at) - terrain.HeightAt(next);
+            at = next;
+            tiles.Add(next);
+            if (drop > 3)
+                return new ForcedPath(tiles.ToImmutable(), Blocked: false, IntoDeep: false, Resisted: false, Drop: drop);
+        }
+        return new ForcedPath(tiles.ToImmutable(), Blocked: false, IntoDeep: false, Resisted: false, Drop: 0);
     }
 
     /// <summary>
