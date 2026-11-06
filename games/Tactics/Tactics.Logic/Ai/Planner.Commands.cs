@@ -79,13 +79,13 @@ internal sealed partial class Planner
         // action that moves units or changes the map, only a bonus action on the unit itself is sure to still hold.
         var main = c.Kind is Kind.Move or Kind.DashMove ? null : c.Usable;
         var leaving = Leaving(main, c.Action, Hypo(c.ActTile));
-        var selfOnly = main is { Stable: false };
+        var selfOnly = main is { Moves: true };
         if (Surge(state, leaving, selfOnly) is { } surge)
         {
             commands.AddRange([surge.Surge, surge.Second]);
             state = Advance(Advance(state, surge.Surge), surge.Second);
             leaving = leaving.Union(surge.Leaving);
-            selfOnly |= !surge.Stable;
+            selfOnly |= surge.Moves;
         }
         if (Bonus(state, leaving, selfOnly) is { } bonus && Battle.Check(state, bonus.Use, _rules) is null)
             commands.Add(bonus.Use);
@@ -120,8 +120,8 @@ internal sealed partial class Planner
         return leaving;
     }
 
-    /// <summary>An extra action and the second action it buys, with what the second may take out of reach and whether it leaves the map as it is.</summary>
-    private sealed record Surging(Use Surge, Use Second, ImmutableSortedSet<UnitId> Leaving, bool Stable);
+    /// <summary>An extra action and the second action it buys, with what the second may take out of reach and whether it moves units or changes the ground.</summary>
+    private sealed record Surging(Use Surge, Use Second, ImmutableSortedSet<UnitId> Leaving, bool Moves);
 
     /// <summary>
     /// With the action spent in <paramref name="state"/> and an extra action (Action Surge) the unit can pay for: the best
@@ -161,7 +161,7 @@ internal sealed partial class Planner
             return null;
         var next = new Use(_me.Id, second.Usable.Command, second.Action.Target, second.Usable.Item) { Targets = second.Action.Targets };
         return Battle.Check(surged, next, _rules) is null
-            ? new Surging(use, next, Leaving(second.Usable, second.Action, (surged, w)), second.Usable.Stable)
+            ? new Surging(use, next, Leaving(second.Usable, second.Action, (surged, w)), second.Usable.Moves)
             : null;
     }
 
@@ -211,7 +211,7 @@ internal sealed partial class Planner
     /// </summary>
     private double BonusLeft(Candidate c)
     {
-        var selfOnly = c.Usable is { Stable: false } && c.Kind is not (Kind.Move or Kind.DashMove);
+        var selfOnly = c.Usable is { Moves: true } && c.Kind is not (Kind.Move or Kind.DashMove);
         var key = (c.End, c.Escape?.Command, c.Lead?.Command, c.Usable?.Command, c.Usable?.Item, selfOnly);
         if (_bonusLeft.TryGetValue(key, out var known))
             return known;

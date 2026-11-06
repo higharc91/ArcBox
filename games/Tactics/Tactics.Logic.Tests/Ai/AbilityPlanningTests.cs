@@ -218,6 +218,26 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void After_holding_a_foe_the_bonus_action_still_heals_an_ally()
+    {
+        // Hold Person paralyses the foe but moves nobody and changes no ground, so Healing Word on the hurt ally still holds
+        // after it (only a push, a teleport, a summon, a zone or new ground limits the bonus action to the unit itself).
+        var (hold, word) = (A("cleric.hold_person"), A("cleric.healing_word"));
+        var priest = First(TestSheets.Cleric.Knowing(hold, word)) with { Level = 5, Move = 0, Resources = Ordinal.Map(("devotion", 6)) };
+        var battle = On(Open(8, 3)).With(hold, word).WithConditions([.. Base.Conditions.Values])
+            .Enemy("priest", priest, T(1, 1), new AiControlled("healer"))
+            .Enemy("aldo", TestSheets.Fighter with { Move = 0 }, T(2, 1))
+            .Party("brute", TestSheets.Fighter with { MaxHp = 40, Move = 0, Attacks = 3 }, T(3, 1));
+        var state = battle.Start().State.Change("aldo", u => u with { Hp = 4 });
+
+        var plan = Ai.Plan(state, U("priest"), battle.Rules);
+
+        Assert.True(UseOf(plan, "cleric.hold_person")?.Target.Unit == U("brute") && UseOf(plan, "cleric.healing_word")?.Target.Unit == U("aldo"),
+            plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
     public void A_cleric_wards_the_ally_the_foes_are_about_to_drop()
     {
         // Death Ward does nothing until its holder is Downed: it is worth the chance the foes drop it next round (the threat on
