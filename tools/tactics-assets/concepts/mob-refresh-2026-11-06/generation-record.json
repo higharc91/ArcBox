@@ -139,5 +139,11 @@
       "In-game world/battle visual review"
     ]
   },
-  "owner_scope": "Asked whether combat roster first or entire art library; answer pending."
+  "owner_scope": "Asked whether combat roster first or entire art library; answer pending.",
+  "owner_feedback": {
+    "goblin_style": "approved",
+    "orc_style": "approved",
+    "drake": "Revise: wings must be shown when attacking; folded wing idle and clearly spread attack proposed.",
+    "scope": "Combat roster first as previously recommended; further library variants not prioritized."
+  }
 }
