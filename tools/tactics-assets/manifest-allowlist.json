@@ -27,6 +27,8 @@
     "black_knight.dread_cleave": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "black_knight.unholy_ward": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "boar.gore_charge": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
+    "common.extinguish": "Universal Put out flames action uses the generic ability icon; its phone label identifies the action.",
+    "common.shove_prone": "Universal knock-prone Shove mode uses the generic ability icon; its phone label distinguishes it from push.",
     "cult_leader.fanatic_zeal": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "cult_leader.hellfire_burst": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "cultist.dark_bolt": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",

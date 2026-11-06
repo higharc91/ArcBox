@@ -48,6 +48,37 @@ public sealed class RealBattleTimingTests
                 s = result.State;
             }
         }
+        // A guaranteed real failed save keeps Indomitable coverage independent of which spells the tuned AI chooses.
+        PartyMember[] passiveParty = [.. classes.Select((c, i) => new PartyMember(new UnitId($"hero{i + 1}"),
+            SheetBuilder.DefaultCharacter(c, "human", c, null, 9, rules), new AiControlled("companion")))];
+        var probe = Battle.Start(Encounters.Setup("warlord_bridge", [.. passiveParty], Difficulty.Normal, rules), rules, 5).State;
+        var fighter = new UnitId("hero4");
+        var unit = probe.Units[fighter];
+        probe = probe with
+        {
+            TurnIndex = probe.Order.IndexOf(fighter),
+            Units = probe.Units.SetItem(fighter, unit with { Conditions = unit.Conditions.Add(
+                new ActiveCondition(new("poisoned"), fighter, null, true, 99, Stat.Con, false)) }),
+        };
+        var saved = Battle.Apply(probe, new EndTurn(fighter), rules);
+        Assert.Null(saved.Rejected);
+        Assert.Contains(saved.Events, e => e is PassiveTriggered { Passive: "fighter.indomitable" });
+        beats.Add((new Beat(beats.Count + 1, fighter, saved.Events), ViewOf(probe)));
+        // A real flanked strike keeps the on-hit passive sample stable when area-heavy parties kill guards at range.
+        var hob = new UnitId("probe.hob");
+        var victim = new UnitId("probe.fighter");
+        var defender = SheetBuilder.ForCharacter(passiveParty[3].Character, rules) with { Ac = 0, Abilities = [] };
+        var guard = SheetBuilder.ForMonster("hobgoblin", rules, 5) with { InitiativeBonus = 100, Attacks = 1 };
+        var setup = new BattleSetup(rules.Maps["warlord_bridge"],
+            [new(victim, defender, new AiControlled("companion"), new(1, 5), []),
+             new(hob, guard, new AiControlled("brute"), new(1, 4), []),
+             new(new("probe.ally"), guard with { InitiativeBonus = 0 }, new AiControlled("brute"), new(1, 6), [])],
+            ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
+        var flanked = Battle.Start(setup, rules, 7).State;
+        var struck = Battle.Apply(flanked, new Use(hob, RulesPack.CommonAttack.Id, new Target(Unit: victim)), rules);
+        Assert.Null(struck.Rejected);
+        Assert.Contains(struck.Events, e => e is PassiveTriggered { Passive: "hobgoblin.martial_advantage" });
+        beats.Add((new Beat(beats.Count + 1, hob, struck.Events), ViewOf(flanked)));
         return beats.ToImmutable();
     }
 
@@ -98,6 +129,8 @@ public sealed class RealBattleTimingTests
         Assert.All(areas, b =>
         {
             var last = Script(b).Cues.OfType<ApplyCue>().Where(a => a.Event is Damaged).Select(a => a.At).DefaultIfEmpty(0).Max();
+            if (last > 1.1)
+                Assert.Fail($"Last damage at {last}:\n{string.Join("\n", b.Beat.Events)}\nCues:\n{string.Join("\n", Script(b).Cues)}");
             Assert.InRange(last, 0, 1.1);
         });
     }

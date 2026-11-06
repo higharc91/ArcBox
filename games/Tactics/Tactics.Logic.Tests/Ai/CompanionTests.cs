@@ -219,10 +219,10 @@ public sealed class CompanionTests
     [Fact]
     public void Weights_come_from_the_classs_tuned_profile()
     {
-        // A companion plays the profile its class's aiTags name for a party member (healer, caster, archer, skirmisher, brute),
+        // A companion plays the profile its class's aiTags name for a party member, including specialist controller/guardian profiles,
         // less the cautious companion numbers: no 0.6 caution, no ranged x1.5. Only its own rules sit on top: Hoard 0 and Revive.
         UnitSheet Character(string cls) => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(cls, "human", cls, null, 3, Base), Base);
-        var classes = new[] { ("cleric", "healer"), ("wizard", "caster"), ("ranger", "archer"), ("rogue", "skirmisher"), ("fighter", "brute") };
+        var classes = new[] { ("cleric", "healer"), ("wizard", "controller"), ("ranger", "archer"), ("rogue", "skirmisher"), ("fighter", "brute") };
         var battle = On("0. 0. 0. 0. 0. 0.");
         for (var i = 0; i < classes.Length; i++)
             battle = battle.Party(classes[i].Item1, Character(classes[i].Item1), T(i, 0), Companion);

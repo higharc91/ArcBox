@@ -464,7 +464,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case CountdownTicked:
                     Sound("ui_countdown_tick");
                     Apply(e);
-                    _t += BeatTiming.Condition;
+                    _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
@@ -476,7 +476,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case Despawned or Transformed:
                     Burst(Puff, TileOf(e is Despawned gone ? gone.Unit : ((Transformed)e).Unit));
                     Apply(e);
-                    _t += BeatTiming.Puff;
+                    _t += InArea ? 0 : BeatTiming.Puff;
                     break;
                 case TileReacted reaction:
                     PlayReaction(reaction);
@@ -489,7 +489,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += _reaction is null ? BeatTiming.Condition : 0;
+                    _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);

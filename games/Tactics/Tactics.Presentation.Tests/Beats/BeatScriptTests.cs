@@ -360,6 +360,32 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void An_areas_countdown_transform_and_zone_cleanup_do_not_delay_its_other_targets()
+    {
+        var countdown = new CountdownTicked(Targets[1], 2);
+        var transformed = new Transformed(Targets[2], "druid");
+        var ended = new ZoneEnded(1);
+        var events = new List<BattleEvent> { Fireball };
+        for (var i = 0; i < Targets.Length; i++)
+        {
+            events.Add(new Rolled(Targets[i], RollKind.Save, Roll(4, false)));
+            if (i == 1) events.Add(countdown);
+            else events.Add(new Damaged(Targets[i], 3, "fire", 7));
+            if (i == 2)
+            {
+                events.Add(transformed);
+                events.Add(new Rolled(Targets[i], RollKind.Save, Roll(4, false)));
+                events.Add(new ConcentrationBroken(Targets[i], new("druid.entangle")));
+                events.Add(ended);
+            }
+        }
+        var script = Script(Crowd, [.. events]);
+        Assert.InRange(LastHit(script), 0, 1.1);
+        foreach (var effect in new BattleEvent[] { countdown, transformed, ended })
+            Assert.Contains(script.Cues.OfType<ApplyCue>(), cue => cue.Event == effect);
+    }
+
+    [Fact]
     public void An_area_spell_with_no_saves_lands_within_a_second()
     {
         var script = Script(Crowd, [Fireball, .. Targets.Select(t => new Damaged(t, 3, "fire", 7))]);

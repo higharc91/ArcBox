@@ -65,7 +65,8 @@ public sealed class FlankingCoverTests
         Assert.Equal(Edge.Disadvantage, EdgeOf(apart.Give("kara", On("taunted", "ari"))));             // drawn to ari, not the goblin
         Assert.Equal(Edge.None, EdgeOf(apart.Give("kara", On("helped", "ari"), On("taunted", "ari"))));
         Assert.Equal(Edge.Advantage, EdgeOf(apart.Give("gob", On("marked", "kara") with { Mark = true })));
-        Assert.Equal(Edge.None, EdgeOf(apart.Give("gob", On("marked", "kara"))));                       // named so, but not a mark
+        Assert.Equal(Edge.Advantage, EdgeOf(apart.Give("gob", On("marked", "kara"))));              // legacy saves omit the Mark flag
+        Assert.Equal(Edge.None, EdgeOf(apart.Give("gob", On("vexed", "kara"))));                     // other conditions still need the mark flag
         Assert.Equal(Edge.Disadvantage, EdgeOf(apart.Give("gob", TestConditions.Lasting(TestConditions.Invisible))));
     }
 
