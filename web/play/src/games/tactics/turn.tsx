@@ -111,7 +111,7 @@ export function Turn({ data, send }: CustomScreenProps) {
     <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
       <SurfaceScene kinds={(data as TurnData).surfaces} />
       {ability ? (
-        <MeCard me={me} title={ability.name} subtitle={target ? "Ready: check the TV, then use it" : aimHint(ability)}
+        <MeCard me={me} title={ability.name} subtitle={target ? "Ready: tap Use" : aimHint(ability)}
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
       ) : <MeCard me={me} cls={cls} />}
       <TurnBanner summon={summoned ? me.name : undefined} />

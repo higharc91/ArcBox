@@ -88,6 +88,8 @@ describe("tactics phone module", () => {
   it("turn: an ability with one target uses it, and End turn ends it", () => {
     const send = show("turn");
     fireEvent.click(screen.getByRole("button", { name: /^Dash/ }));
+    expect(screen.getByText("Ready: tap Use")).toBeTruthy();
+    expect(screen.queryByText(/check the TV/)).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Use" }));
     expect(send).toHaveBeenLastCalledWith({ action: "use", data: { ability: "common.dash" } });
 
