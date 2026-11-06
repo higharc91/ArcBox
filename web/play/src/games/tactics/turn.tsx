@@ -45,11 +45,14 @@ export function Turn({ data, send }: CustomScreenProps) {
   useAlertOnMount("yourTurn", `turn ${me.id}`);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
+  // A multi-attack's earlier attacks, aimed already: the one being aimed is the next (#107).
+  const [picks, setPicks] = useState<Pick[]>([]);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
   const content = useMemo(() => JSON.stringify(data), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
+    setPicks([]);
   }, [content]);
 
   const cls = useMemo(() => classFrom(choices.abilities, (id) => abilityClass(icons, id)) ?? remembered().classes[me.id],
@@ -68,17 +71,38 @@ export function Turn({ data, send }: CustomScreenProps) {
   const pick = (i: number) => {
     sfx("select");
     setAbilityIx(i);
+    setPicks([]);
     window.scrollTo(0, 0);
   };
   const back = () => {
     sfx("cancel");
+    const last = picks[picks.length - 1];
+    if (last) {
+      // Back to aiming the attack before, where it was aimed.
+      setPicks(picks.slice(0, -1));
+      setCursor(last.aim);
+      return;
+    }
     setAbilityIx(null);
+  };
+  const targetUnit = target?.target.unit && target.target.unit !== me.id ? byId.get(target.target.unit) : undefined;
+  // Each attack's target: the ones aimed, then the one being aimed for the rest (each defaults to the one before).
+  const attacks = ability?.attacks ?? 1;
+  const plan = attacks > 1 && targetUnit
+    ? [...picks.map((p) => p.unit), ...Array<string>(attacks - picks.length).fill(targetUnit.id)]
+    : null;
+  const spread = plan !== null && plan.some((u) => u !== plan[0]);
+  const next = () => {
+    if (!targetUnit || !target) return;
+    sfx("select");
+    setPicks([...picks, { unit: targetUnit.id, aim: target.aim }]);   // the cursor stays: the next attack starts here
   };
   const use = (a: AbilityChoice, t: TargetChoice) => {
     sfx(t.target.unit && t.target.unit !== me.id ? "dice" : "confirm");
-    send("use", { ability: a.ability, item: a.item ?? undefined, unit: t.target.unit ?? undefined, tile: t.target.tile ?? undefined });
+    send("use", spread && plan
+      ? { ability: a.ability, item: a.item ?? undefined, unit: plan[0], targets: plan }
+      : { ability: a.ability, item: a.item ?? undefined, unit: t.target.unit ?? undefined, tile: t.target.tile ?? undefined });
   };
-  const targetUnit = target?.target.unit && target.target.unit !== me.id ? byId.get(target.target.unit) : undefined;
 
   return (
     <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
@@ -90,7 +114,8 @@ export function Turn({ data, send }: CustomScreenProps) {
       <TurnBanner summon={summoned ? me.name : undefined} />
 
       {ability ? (
-        <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }} />
+        <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }}
+          strikes={plan ? { plan, at: picks.length, onNext: next } : undefined} />
       ) : (
         <>
           <EconomyChips e={choices.economy} />
@@ -114,7 +139,7 @@ export function Turn({ data, send }: CustomScreenProps) {
         <div class="tx-foot tx-commit aim">
           <button type="button" class="tx-btn ghost" onClick={back}>Back</button>
           <button type="button" class="tx-btn gold" disabled={!target} onClick={() => target && use(ability, target)}>
-            {target ? `Use${targetUnit ? ` on ${targetUnit.name}` : ""}`
+            {target ? spread ? `Use · ${attacks} attacks` : `Use${targetUnit ? ` on ${targetUnit.name}` : ""}`
               : ability.aim === "direction" ? "Pick a direction" : ability.aim === "tile" ? "Pick a tile" : "Pick a target"}
           </button>
         </div>
@@ -134,6 +159,9 @@ export function Turn({ data, send }: CustomScreenProps) {
     </div>
   );
 }
+
+/** An attack of a multi-attack aimed already: at whom, and the tile the cursor was on. */
+interface Pick { unit: string; aim: Tile }
 
 const aimHint = (a: AbilityChoice) =>
   a.aim === "direction" ? "Pick a direction on the map" : a.aim === "tile" ? "Pick a tile on the map" : "Pick a target";
@@ -184,10 +212,12 @@ function Tags({ a, cls }: { a: AbilityChoice; cls?: string }) {
 
 /**
  * Aiming: the target (portrait, HP), what the ability does to each unit it touches, and, when there's more than one,
- * the targets to step through or tap.
+ * the targets to step through or tap. For a multi-attack (`strikes`), which attack is being aimed, each attack's target so
+ * far, and the button to aim the next one ("Attack 2 of 3"), which starts on the same target.
  */
-function Aim({ ability, target, unit, byId, onPick }: {
+function Aim({ ability, target, unit, byId, onPick, strikes }: {
   ability: AbilityChoice; target?: TargetChoice; unit?: UnitView; byId: Map<string, UnitView>; onPick(t: TargetChoice): void;
+  strikes?: { plan: string[]; at: number; onNext(): void };
 }) {
   const targets = ability.targets;
   const at = target ? targets.indexOf(target) : -1;
@@ -210,6 +240,23 @@ function Aim({ ability, target, unit, byId, onPick }: {
         </div>
       ) : null}
       <p class="tx-aim-what"><span class="tx-cost">{costText(ability.cost)}</span> {ability.tooltip}</p>
+      {strikes ? (
+        <div class="tx-strikes">
+          <div class="tx-strike-step">
+            <span>{`Aiming attack ${strikes.at + 1} of ${strikes.plan.length}`}</span>
+            {strikes.at + 1 < strikes.plan.length ? (
+              <button type="button" class="tx-btn" onClick={strikes.onNext}>
+                {`Attack ${strikes.at + 2} of ${strikes.plan.length}`}<LineIcon name="next" />
+              </button>
+            ) : null}
+          </div>
+          <ol class="tx-strike-plan" aria-label="Each attack's target">
+            {strikes.plan.map((id, i) => (
+              <li key={i} class={i === strikes.at ? "on" : i > strikes.at ? "later" : ""}>{byId.get(id)?.name ?? id}</li>
+            ))}
+          </ol>
+        </div>
+      ) : null}
       {target && target.affected.length > 0 ? (
         <div class="tx-chips">
           {target.affected.map((p) => {

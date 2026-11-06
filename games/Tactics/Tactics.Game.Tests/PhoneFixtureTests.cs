@@ -380,6 +380,17 @@ public sealed class PhoneFixtureTests
         { ["walk-trinket-presented"] = Node(s.Harness.PlayerView(ConversationQuestTests.Lead(s))) });
     }
 
+    /// <summary>
+    /// #107: the turn of a hero who makes two attacks, with foes in reach: its Attack says how many (<c>attacks</c>), so the
+    /// phone can aim each one ("Attack 2 of 2").
+    /// </summary>
+    [Fact]
+    public void The_turn_of_a_hero_with_two_attacks_matches_its_fixture()
+    {
+        var (s, _, _) = MultiAttackPhoneTests.Arranged(new UnitId("hero1"));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["turn-attacks"] = Node(s.Harness.PlayerView(0)) });
+    }
+
     /// <summary>Who takes a found item (the owner's decision 1): the 5d vote screen, with what it asks.</summary>
     [Fact]
     public void The_loot_vote_matches_its_fixture()

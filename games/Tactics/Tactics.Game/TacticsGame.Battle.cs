@@ -456,7 +456,7 @@ public sealed partial class TacticsGame
                 "use" => new Use(unit, new AbilityId(Str(input.Data, "ability") ?? ""), new Target(
                         Str(input.Data, "unit") is { } u ? new UnitId(u) : null,
                         input.Data?.TryGetProperty("tile", out var tile) == true && tile.ValueKind == JsonValueKind.Array ? ReadTile(tile) : null),
-                    Str(input.Data, "item") is { } item ? new ItemId(item) : null),
+                    Str(input.Data, "item") is { } item ? new ItemId(item) : null) { Targets = Units(input.Data, "targets") },
                 "delay" => new Delay(unit, input.Data?.TryGetProperty("slots", out var slots) == true ? slots.GetInt32() : 1),
                 "endTurn" => new EndTurn(unit),
                 _ => null,
@@ -469,6 +469,15 @@ public sealed partial class TacticsGame
     }
 
     private static Tile ReadTile(JsonElement e) => new(e[0].GetInt32(), e[1].GetInt32());
+
+    /// <summary>
+    /// The unit ids in the array <paramref name="name"/> of <paramref name="data"/> (a <c>use</c>'s <c>targets</c>, one per
+    /// attack: <see cref="Use.Targets"/>); none when it's missing or null. Anything but an array of strings doesn't parse.
+    /// </summary>
+    private static ImmutableArray<UnitId> Units(JsonElement? data, string name)
+        => data is not { ValueKind: JsonValueKind.Object } d || !d.TryGetProperty(name, out var list) || list.ValueKind == JsonValueKind.Null
+            ? default
+            : [.. list.EnumerateArray().Select(e => new UnitId(e.GetString() ?? throw new FormatException($"'{name}' holds a null.")))];
 
     private static string? Str(JsonElement? data, string name)
         => data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty(name, out var v) && v.ValueKind == JsonValueKind.String

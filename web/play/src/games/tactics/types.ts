@@ -76,6 +76,11 @@ export interface AbilityChoice {
   tiles: Tile[];
   /** How it's aimed: at a unit, a tile, a direction (a line or cone from you), or just used ("self"). */
   aim?: "unit" | "tile" | "direction" | "self";
+  /**
+   * Set (above 1) for a weapon attack that makes several attacks: each may go at any of `targets` ("Attack 2 of 3"), sent as
+   * `targets`, one unit id per attack. Without a list every attack goes at the one target. Previews are for all at one.
+   */
+  attacks?: number;
 }
 
 export interface TurnChoices {

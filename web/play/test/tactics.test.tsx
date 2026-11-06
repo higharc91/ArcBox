@@ -31,7 +31,7 @@ describe("tactics phone module", () => {
     expect(names).toEqual([
       "camp-job", "camp-rolled", "camp-target", "camp-vote", "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "environment-status", "environment-turn", "inn-rooms", "pickClass", "pickEncounter",
       "pickEncounter-noWalk",
-      "questlog-leader", "questlog-private", "questlog-viewer", "react", "results", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "talk-check", "talk-vote", "temple", "turn", "vote", "vote-loot", "vote-tie", "walk-ambush", "walk-danger", "walk-follower", "walk-interact", "walk-leader", "walk-pinned", "walk-pinned-done", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-trinket-presented", "walk-with-gold",
+      "questlog-leader", "questlog-private", "questlog-viewer", "react", "results", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "talk-check", "talk-vote", "temple", "turn", "turn-attacks", "vote", "vote-loot", "vote-tie", "walk-ambush", "walk-danger", "walk-follower", "walk-interact", "walk-leader", "walk-pinned", "walk-pinned-done", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-trinket-presented", "walk-with-gold",
     ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);

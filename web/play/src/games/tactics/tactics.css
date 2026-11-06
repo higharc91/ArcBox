@@ -238,6 +238,16 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-targets { flex-direction: row; flex-wrap: wrap; gap: 6px; }
 .tx-targets button { padding: 6px 12px; font-weight: 700; font-size: 14px; }
 .tx-targets button.on { border-color: var(--wf-gold); background: rgba(230, 189, 92, 0.18); color: var(--wf-gold-hi); }
+/* A multi-attack: which attack is being aimed, the button to aim the next, and each attack's target so far (#107). */
+.tx-strikes { display: flex; flex-direction: column; gap: 6px; }
+.tx-strike-step { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tx-strike-step span { color: var(--wf-muted); font-size: 15px; }
+.tx-strike-step .tx-btn { min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; }
+.tx-strike-plan { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; counter-reset: strike; }
+.tx-strike-plan li { counter-increment: strike; padding: 4px 10px; border: 1px solid var(--wf-line); border-radius: 999px; font-size: 13px; font-weight: 700; }
+.tx-strike-plan li::before { content: counter(strike) " · "; color: var(--wf-muted); }
+.tx-strike-plan li.on { border-color: var(--wf-gold); color: var(--wf-gold-hi); }
+.tx-strike-plan li.later { opacity: 0.6; }
 
 /* ---------------------------------------------------------------- waiting */
 .tx-now { display: flex; gap: 14px; align-items: center; padding: 12px; border-color: rgba(95, 224, 138, 0.5); }

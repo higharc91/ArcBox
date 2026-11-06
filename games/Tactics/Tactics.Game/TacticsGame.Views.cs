@@ -18,10 +18,13 @@ public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprit
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
 /// previews); <see cref="Tiles"/> are the other legal aim tiles, bare, since a tile-aimed area spell can have hundreds
-/// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB).
+/// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB). <see cref="Attacks"/> is
+/// set for a weapon attack of several attacks (<see cref="AbilityChoice.Attacks"/>): the phone offers "Attack 2 of N" and
+/// sends a <c>targets</c> list (<see cref="Use.Targets"/>).
 /// </summary>
 public sealed record PhoneAbility(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
-    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit");
+    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit",
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
 
 /// <summary><see cref="TurnChoices"/> as the phone gets them, abilities compacted (<see cref="PhoneAbility"/>).</summary>
 public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
@@ -39,7 +42,7 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
                 : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
                 : rules.Abilities.GetValueOrDefault(a.Ability);
             return new PhoneAbility(a.Ability, a.Item, a.Name, a.Tooltip, a.Cost,
-                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def));
+                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def), a.Attacks);
         })],
         choices.CanDelay);
 
