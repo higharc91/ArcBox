@@ -127,6 +127,79 @@ class ManifestCrosscheckTests(unittest.TestCase):
                     missing.add(sprite)
         self.assertEqual(set(), missing, "Unresolved rules monster sprites")
 
+    def test_creator_traits_and_subclass_names_match_rules(self):
+        creator = json.loads((BASE / "characters/creator.json").read_text())
+
+        # 1. Subclass names match rules exactly (36 total, 3 per class).
+        subclasses = creator.get("subclasses", {})
+        self.assertEqual(36, len(subclasses), "Expected 36 subclasses in creator.json")
+        for sub_id, sub_data in subclasses.items():
+            cls_id = sub_data["class"]
+            cls_rule = json.loads((BASE / f"rules/classes/{cls_id}.json").read_text())
+            rule_sub = next((s for s in cls_rule.get("subclasses", [])
+                             if s["id"] == f"{cls_id}.{sub_id}" or s["id"].endswith(f".{sub_id}")), None)
+            self.assertIsNotNone(rule_sub, f"Subclass {cls_id}.{sub_id} not found in rules")
+            self.assertEqual(sub_data["name"], rule_sub["name"],
+                             f"Subclass name mismatch for {cls_id}.{sub_id}: creator='{sub_data['name']}', rules='{rule_sub['name']}'")
+
+        # 2. Race traits match rules and have no unimplemented drift traits.
+        drift_traits = {
+            "+1 to every score", "Two extra skills", "Brave", "Nimble",
+            "Savage attacks", "Powerful build", "Mountain born",
+            "Radiant soul", "Keen senses", "Stone sense", "Versatile"
+        }
+        for race_id, race_data in creator["races"].items():
+            traits = set(race_data.get("traits", []))
+            bad = traits & drift_traits
+            self.assertEqual(set(), bad, f"Drift traits in {race_id}: {bad}")
+
+        self.assertEqual(creator["races"]["human"]["traits"], ["Resourceful", "+1 skill"])
+        self.assertEqual(creator["races"]["half_elf"]["traits"], ["Darkvision", "Fey ancestry", "+1 skill"])
+        self.assertEqual(creator["races"]["halfling"]["traits"], ["Lucky"])
+        self.assertEqual(creator["races"]["half_orc"]["traits"], ["Darkvision", "Relentless endurance"])
+        self.assertEqual(creator["races"]["goliath"]["traits"], ["Stone's endurance"])
+        self.assertEqual(creator["races"]["aasimar"]["traits"], ["Darkvision", "Healing hands"])
+        self.assertEqual(creator["races"]["dwarf"]["traits"], ["Darkvision", "Poison resilience", "Stoneskin"])
+        self.assertEqual(creator["races"]["gnome"]["traits"], ["Darkvision", "Gnome cunning"])
+        self.assertEqual(creator["races"]["tiefling"]["traits"], ["Darkvision", "Hellish resistance", "Hellish rebuke"])
+        self.assertEqual(creator["races"]["elf"]["traits"], ["Darkvision", "Fey ancestry", "Fey step"])
+        self.assertEqual(creator["races"]["dragonborn"]["traits"], ["Breath weapon", "Damage resistance"])
+
+        # 3. Subclass role text does not promise non-existent mechanics.
+        shadow_role = creator["subclasses"]["shadow"]["role"].lower()
+        self.assertNotIn("backstab", shadow_role, "Shadow role should not promise backstabs (no facing)")
+        self.assertNotIn("behind", shadow_role, "Shadow role should not promise positioning behind")
+        lore_role = creator["subclasses"]["lore"]["role"].lower()
+        self.assertNotIn("cop", lore_role, "Lore role should not promise copying abilities")
+
+    def test_creator_drawn_weapon_and_shield_match_starting_kit(self):
+        creator = json.loads((BASE / "characters/creator.json").read_text())
+        shields = {"round_shield", "kite_shield", "tower_shield", "buckler"}
+        for cls_id, cls_data in creator["classes"].items():
+            cls_rule = json.loads((BASE / f"rules/classes/{cls_id}.json").read_text())
+            sk = cls_rule["startingKit"]
+            gear = cls_data["gear"]
+
+            has_shield = sk.get("shield", False)
+            drawn_offhand = gear.get("offhand")
+            if has_shield:
+                self.assertIn(drawn_offhand, shields,
+                              f"{cls_id} startingKit has shield, but drawn offhand is {drawn_offhand}")
+            else:
+                self.assertNotIn(drawn_offhand, shields,
+                                 f"{cls_id} startingKit has no shield, but drawn offhand is {drawn_offhand}")
+
+            drawn_weapon = gear.get("weapon")
+            self.assertIsNotNone(drawn_weapon, f"{cls_id} has no drawn weapon")
+
+            if cls_id == "paladin":
+                self.assertEqual("sword", drawn_weapon, "Paladin drawn weapon should match startingKit longsword ('sword')")
+                self.assertEqual("chain", gear.get("torso"), "Paladin drawn torso should match startingKit chain_mail ('chain')")
+            elif cls_id == "monk":
+                self.assertEqual("spear", drawn_weapon, "Monk drawn weapon should match startingKit spear ('spear')")
+            elif cls_id == "druid":
+                self.assertEqual("staff", drawn_weapon, "Druid drawn weapon should match startingKit quarterstaff ('staff')")
+
 
 if __name__ == "__main__":
     unittest.main()

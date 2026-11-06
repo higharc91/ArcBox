@@ -1,0 +1,206 @@
+WorkerThreadPool: 5 threads, 1 max low-priority.
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+SDL: Init OK!
+Accessibility: AccessKit driver loaded.
+Xshape 1.1 detected.
+Xinerama 1.1 detected.
+Xrandr 1.6 detected.
+Xrender 0.11 detected.
+Xinput 2.2 detected.
+XInput: Refreshing devices.
+XInput: No touch devices found.
+Input method started.
+Detecting GPUs, set DRI_PRIME in the environment to override GPU detection logic.
+Only one GPU found, using default.
+Accessibility: window 0 adapter created.
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+XcursorGetTheme could not get cursor theme
+Failed loading custom cursor: crossed_circle
+DBus 1.16.2 detected.
+Using "default" pen tablet driver...
+Shader 'CanvasSdfShaderGLES3' SHA256: e1fc4015d45db07fce0346b99c312728ab006030520ec796da1461e1428345c5
+Shader 'SkeletonShaderGLES3' SHA256: e42116215ed2a92dea7085176e3b3f1089edcb71a3405ab67073ce8e77114587
+Shader 'ParticlesShaderGLES3' SHA256: ffb4401639aafac71f9f113685cb6db157587dac2f1a352495327188f37419b2
+Shader 'ParticlesCopyShaderGLES3' SHA256: 826f4c822241d48a5251f5069f9781b034e657d580e0c94bb916da952bee53b5
+Shader 'CopyShaderGLES3' SHA256: 8e9443aa4b684ddd8943bffac4063cca51daba573b73bd6ebb6a15a023b35d42
+Shader 'CubemapFilterShaderGLES3' SHA256: 7d0f7673e184bb74d9f911e0aa90b55d157f7c33b79e4672b4fca4fb3573ac00
+Shader 'GlowShaderGLES3' SHA256: 427cfd9bd0cc4045ecaa4bc4f23055a2a40660411d8e1663897a7c2cd3c80665
+Shader 'PostShaderGLES3' SHA256: d42fe4516c6fdc8d420760c688277f65a0eb2c3ab6939c556404e04b25605697
+Shader 'FeedShaderGLES3' SHA256: 9c5f15371d9ed62661ff3bb3ecc28f82cb15be9a4be89518b1f6fd8d372fbe4b
+Shader 'CanvasShaderGLES3' SHA256: 16f1396f2f5ac39d277138cd33a6d284e2d97309f2a547816c220d0ef0318826
+Shader 'CanvasOcclusionShaderGLES3' SHA256: 6baa8caaecef40c331cf27f156879d8ca7d8bf94ec84f8168903490f61264d2d
+Shader 'SceneShaderGLES3' SHA256: 31a20b10164e4dec5c32d2d55b7815f3753e61e5a14deee17dcbc8ad8ddad8d8
+Shader 'SkyShaderGLES3' SHA256: 018037c76675d5aa479b8d6fab4462587586616124093692f099b74ed4b847ef
+Shader 'TexBlitShaderGLES3' SHA256: 164ea8204afa014fcb0dc8b854e570f311fcde3c83c12332ea81730620f6a63d
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+.NET: Initializing module...
+Found hostfxr: /workspace/toolchains/dotnet/host/fxr/10.0.14/libhostfxr.so
+.NET: hostfxr initialized
+.NET: GodotPlugins initialized
+CORE API HASH: 3677103882
+EDITOR API HASH: 1629494564
+SceneTreeFTI: traversal method DEFAULT
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Loaded system CA certificates
+Loading resource: res://Main.tscn remapped: res://Main.tscn
+Loading resource: res://Main.cs remapped: res://Main.cs
+Completed load for: 'res://Main.cs' remapped 'res://Main.cs' at thread -1
+Completed load for: 'res://Main.tscn' remapped 'res://Main.tscn' at thread -1
+Loading resource: res://fonts/TitilliumWeb-SemiBold.ttf remapped: res://fonts/TitilliumWeb-SemiBold.ttf
+Loading resource: res://.godot/imported/TitilliumWeb-SemiBold.ttf-a3b0ec255251c6d616bd64ac81535d48.fontdata remapped: res://.godot/imported/TitilliumWeb-SemiBold.ttf-a3b0ec255251c6d616bd64ac81535d48.fontdata
+Completed load for: 'res://fonts/TitilliumWeb-SemiBold.ttf' remapped 'res://fonts/TitilliumWeb-SemiBold.ttf' at thread -1
+Loading resource: res://fonts/TitilliumWeb-Bold.ttf remapped: res://fonts/TitilliumWeb-Bold.ttf
+Loading resource: res://.godot/imported/TitilliumWeb-Bold.ttf-fd72053f0c93fc523c673d3f54458744.fontdata remapped: res://.godot/imported/TitilliumWeb-Bold.ttf-fd72053f0c93fc523c673d3f54458744.fontdata
+Completed load for: 'res://fonts/TitilliumWeb-Bold.ttf' remapped 'res://fonts/TitilliumWeb-Bold.ttf' at thread -1
+Loading resource: res://Shell/Screenshotter.cs remapped: res://Shell/Screenshotter.cs
+Completed load for: 'res://Shell/Screenshotter.cs' remapped 'res://Shell/Screenshotter.cs' at thread -1
+Render preset ultra
+Loading resource: res://Audio/Narrator.cs remapped: res://Audio/Narrator.cs
+Completed load for: 'res://Audio/Narrator.cs' remapped 'res://Audio/Narrator.cs' at thread -1
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Loading resource: res://Audio/Ducking.cs remapped: res://Audio/Ducking.cs
+Completed load for: 'res://Audio/Ducking.cs' remapped 'res://Audio/Ducking.cs' at thread -1
+Loading resource: res://Shell/HostOverlay.cs remapped: res://Shell/HostOverlay.cs
+Completed load for: 'res://Shell/HostOverlay.cs' remapped 'res://Shell/HostOverlay.cs' at thread -1
+Loading resource: res://fonts/TitilliumWeb-Black.ttf remapped: res://fonts/TitilliumWeb-Black.ttf
+Loading resource: res://.godot/imported/TitilliumWeb-Black.ttf-489d050abc4dff5ee36ebb2ceed5234e.fontdata remapped: res://.godot/imported/TitilliumWeb-Black.ttf-489d050abc4dff5ee36ebb2ceed5234e.fontdata
+Completed load for: 'res://fonts/TitilliumWeb-Black.ttf' remapped 'res://fonts/TitilliumWeb-Black.ttf' at thread -1
+Things demo: no server connection
+Loading resource: res://games/tactics/TacticsScene.tscn remapped: res://games/tactics/TacticsScene.tscn
+Loading resource: res://games/tactics/TacticsScene.cs remapped: res://games/tactics/TacticsScene.cs
+Completed load for: 'res://games/tactics/TacticsScene.cs' remapped 'res://games/tactics/TacticsScene.cs' at thread -1
+Completed load for: 'res://games/tactics/TacticsScene.tscn' remapped 'res://games/tactics/TacticsScene.tscn' at thread -1
+Tactics content:
+Loading resource: res://Shell/BroadcastBackground.cs remapped: res://Shell/BroadcastBackground.cs
+Completed load for: 'res://Shell/BroadcastBackground.cs' remapped 'res://Shell/BroadcastBackground.cs' at thread -1
+Loading resource: res://Shell/BrandSlab.cs remapped: res://Shell/BrandSlab.cs
+Completed load for: 'res://Shell/BrandSlab.cs' remapped 'res://Shell/BrandSlab.cs' at thread -1
+Loading resource: res://games/tactics/BoardCanvas.cs remapped: res://games/tactics/BoardCanvas.cs
+Completed load for: 'res://games/tactics/BoardCanvas.cs' remapped 'res://games/tactics/BoardCanvas.cs' at thread -1
+Loading resource: res://games/tactics/FxLayer.cs remapped: res://games/tactics/FxLayer.cs
+Completed load for: 'res://games/tactics/FxLayer.cs' remapped 'res://games/tactics/FxLayer.cs' at thread -1
+Loading resource: res://games/tactics/UnitMarks.cs remapped: res://games/tactics/UnitMarks.cs
+Completed load for: 'res://games/tactics/UnitMarks.cs' remapped 'res://games/tactics/UnitMarks.cs' at thread -1
+Loading resource: res://games/tactics/ResultBanner.cs remapped: res://games/tactics/ResultBanner.cs
+Completed load for: 'res://games/tactics/ResultBanner.cs' remapped 'res://games/tactics/ResultBanner.cs' at thread -1
+Loading resource: res://games/tactics/TacticsAudio.cs remapped: res://games/tactics/TacticsAudio.cs
+Completed load for: 'res://games/tactics/TacticsAudio.cs' remapped 'res://games/tactics/TacticsAudio.cs' at thread -1
+Tactics content: base at /workspace/arcbox-secrets/content/tactics/base
+Loading resource: res://games/tactics/ThingsDemoFeeder.cs remapped: res://games/tactics/ThingsDemoFeeder.cs
+Completed load for: 'res://games/tactics/ThingsDemoFeeder.cs' remapped 'res://games/tactics/ThingsDemoFeeder.cs' at thread -1
+THINGS demo: 7 views, 7 shots
+THINGS demo step town at 2.01 s
+Loading resource: res://games/tactics/StoryLayer.cs remapped: res://games/tactics/StoryLayer.cs
+Completed load for: 'res://games/tactics/StoryLayer.cs' remapped 'res://games/tactics/StoryLayer.cs' at thread -1
+Loading resource: res://games/tactics/CheckBoard.cs remapped: res://games/tactics/CheckBoard.cs
+Completed load for: 'res://games/tactics/CheckBoard.cs' remapped 'res://games/tactics/CheckBoard.cs' at thread -1
+Loading resource: res://games/tactics/StoryPanel.cs remapped: res://games/tactics/StoryPanel.cs
+Completed load for: 'res://games/tactics/StoryPanel.cs' remapped 'res://games/tactics/StoryPanel.cs' at thread -1
+Loading resource: res://games/tactics/VoteBoard.cs remapped: res://games/tactics/VoteBoard.cs
+Completed load for: 'res://games/tactics/VoteBoard.cs' remapped 'res://games/tactics/VoteBoard.cs' at thread -1
+Loading resource: res://games/tactics/ChapterBoard.cs remapped: res://games/tactics/ChapterBoard.cs
+Completed load for: 'res://games/tactics/ChapterBoard.cs' remapped 'res://games/tactics/ChapterBoard.cs' at thread -1
+Loading resource: res://games/tactics/WorldHud.cs remapped: res://games/tactics/WorldHud.cs
+Completed load for: 'res://games/tactics/WorldHud.cs' remapped 'res://games/tactics/WorldHud.cs' at thread -1
+Loading resource: res://games/tactics/QuestHud.cs remapped: res://games/tactics/QuestHud.cs
+Completed load for: 'res://games/tactics/QuestHud.cs' remapped 'res://games/tactics/QuestHud.cs' at thread -1
+Loading resource: res://games/tactics/WorldCanvas.cs remapped: res://games/tactics/WorldCanvas.cs
+Completed load for: 'res://games/tactics/WorldCanvas.cs' remapped 'res://games/tactics/WorldCanvas.cs' at thread -1
+Loading resource: res://games/tactics/WorldRain.cs remapped: res://games/tactics/WorldRain.cs
+Completed load for: 'res://games/tactics/WorldRain.cs' remapped 'res://games/tactics/WorldRain.cs' at thread -1
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+AUDIO Sfx ambience amb_town
+TACTICS screen tactics-exploration
+Loading resource: res://games/tactics/CampHud.cs remapped: res://games/tactics/CampHud.cs
+Completed load for: 'res://games/tactics/CampHud.cs' remapped 'res://games/tactics/CampHud.cs' at thread -1
+TACTICS stage Walking
+SHOT /workspace/issue186/verified-tv/001-tactics.png
+Loading resource: res://games/tactics/WorldBlock.cs remapped: res://games/tactics/WorldBlock.cs
+Completed load for: 'res://games/tactics/WorldBlock.cs' remapped 'res://games/tactics/WorldBlock.cs' at thread -1
+Loading resource: res://games/tactics/WorldAmbient.cs remapped: res://games/tactics/WorldAmbient.cs
+Completed load for: 'res://games/tactics/WorldAmbient.cs' remapped 'res://games/tactics/WorldAmbient.cs' at thread -1
+WORLD open on the main thread 16.7 ms
+Loading resource: res://games/tactics/CampProps.cs remapped: res://games/tactics/CampProps.cs
+Completed load for: 'res://games/tactics/CampProps.cs' remapped 'res://games/tactics/CampProps.cs' at thread -1
+TACTICS walk snapped to 26.5 58.5
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture creatures/generic_farmer_a.png 576x768
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture creatures/mother_skarrow.png 1728x1536
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture creatures/generic_merchant_a.png 576x768
+WORLD unit-texture creatures/generic_farmhand_a.png 576x768
+WORLD unit-texture creatures/generic_guard_a.png 576x768
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture creatures/generic_child_a.png 576x768
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/corvin.png 1728x768
+WORLD unit-texture creatures/pip.png 1152x512
+WORLD unit-texture creatures/generic_child_b.png 576x768
+WORLD unit-texture creatures/generic_farmhand_b.png 576x768
+WORLD unit-texture creatures/generic_guard_b.png 576x768
+WORLD unit-texture creatures/generic_farmer_b.png 576x768
+WORLD unit-texture creatures/generic_barmaid_a.png 576x768
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture creatures/generic_merchant_b.png 576x768
+WORLD unit-texture creatures/dagna.png 1728x768
+WORLD unit-texture creatures/generic_barmaid_b.png 576x768
+WORLD unit-texture creatures/celandine.png 1728x768
+WORLD unit-texture creatures/old_maud.png 1728x768
+WORLD unit-texture creatures/generic_fisher_a.png 576x768
+WORLD unit-texture creatures/generic_fisher_b.png 576x768
+WORLD unit-texture creatures/rook.png 1728x768
+WORLD unit-texture creatures/fauna_crow.png 352x1248
+WORLD unit-texture creatures/fauna_dog.png 448x928
+WORLD unit-texture creatures/fauna_goat.png 400x768
+WORLD unit-texture creatures/fauna_sheep.png 448x832
+WORLD unit-texture creatures/fauna_mule.png 592x1312
+WORLD unit-texture creatures/fauna_fox.png 416x1088
+WORLD unit-texture creatures/fauna_duck.png 256x448
+SHOT /workspace/issue186/verified-tv/002-tactics-world-loading.png
+TACTICS world open: ground 42 ms, plan+light 701 ms, bake 80 ms, herd 80 ms, nodes 10 ms, total 912 ms, main thread 16.7 ms, 16 blocks to record, textures 340.3 MB, buffers 8.2 MB, engine 105.6 MB, managed 62.6 MB
+SHOT /workspace/issue186/verified-tv/003-tactics-exploration.png
+SHOT /workspace/issue186/verified-tv/004-ambience-town.png
+THINGS demo step river at 24.00 s
+AUDIO Sfx ambience amb_river
+TACTICS walk snapped to 100.5 93.5
+SHOT /workspace/issue186/verified-tv/005-ambience-river.png
+THINGS demo step fields at 30.03 s
+AUDIO Sfx ambience amb_plains_wind
+TACTICS walk snapped to 38.5 13.5
+SHOT /workspace/issue186/verified-tv/006-ambience-fields.png
+THINGS demo step rain at 36.03 s
+AUDIO Sfx ambience amb_rain
+TACTICS walk snapped to 26.5 58.5
+SHOT /workspace/issue186/verified-tv/007-ambience-rain.png
+THINGS demo step storm at 42.06 s
+TACTICS walk snapped to 26.5 58.5
+SHOT /workspace/issue186/verified-tv/008-ambience-storm.png
+THINGS demo step drizzle at 48.04 s
+TACTICS walk snapped to 26.5 58.5
+SHOT /workspace/issue186/verified-tv/009-ambience-drizzle.png
+THINGS demo step clear at 54.06 s
+AUDIO Sfx ambience amb_town
+TACTICS walk snapped to 26.5 58.5
+THINGS demo done
+SHOT /workspace/issue186/verified-tv/010-ambience-clear.png
+WORLD closed
+TACTICS left: narrator cleared
+Unloading: Disposing tracked instances...
+Unloading: Finished disposing tracked instances.
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Accessibility: window 0 adapter destroyed.

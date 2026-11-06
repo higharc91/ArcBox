@@ -1,0 +1,27 @@
+Running tests from /workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+failed Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption (6ms)
+  from /workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: 921
+  Actual:   945
+    at Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption() in /workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/Story/StoryScreenTests.cs:135
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+failed Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in (5ms)
+  from /workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Assert.Equal() Failure: Values differ
+  Expected: 590
+  Actual:   614
+    at Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in() in /workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/Story/StoryScreenTests.cs:86
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+/workspace/issue186/baseline/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) failed with 2 error(s) (2s 793ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 57
+  failed: 2
+  succeeded: 55
+  skipped: 0
+  duration: 3s 825ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

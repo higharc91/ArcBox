@@ -78,6 +78,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private Node2D _world = null!;
     private PropFade? _propFade;
     private WorldAmbient? _ambient;
+    private WorldRain _rain = null!;
+    public string? Weather { get; set; }
     private WorldHerd? _herd;
     private bool _adopted;      // the built nodes are in the tree
     private BoardCanvas _over = null!;
@@ -320,6 +322,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     public void Suspend()
     {
         Suspended = true;
+        _rain.Hide();
         RenderingServer.CanvasItemSetVisible(_world.GetCanvasItem(), false);
         _back.Visible = false;
         _fade.Visible = false;
@@ -333,6 +336,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     public void Resume(bool fade = true)
     {
         Suspended = false;
+        _rain.Show();
         RenderingServer.CanvasItemSetVisible(_world.GetCanvasItem(), true);
         _back.Visible = true;
         ProcessMode = ProcessModeEnum.Inherit;
@@ -376,6 +380,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
             TextureRepeat = CanvasItem.TextureRepeatEnum.Enabled,    // a side deeper than its texture repeats
         };
         AddChild(_world);
+
+        _rain = new WorldRain(_painter.Root) { TextureFilter = CanvasItem.TextureFilterEnum.Nearest, ZIndex = (int)RenderingServer.CanvasItemZMax - 1 };
+        AddChild(_rain);
 
         _fade = new ColorRect { Color = Colors.Black, ZIndex = (int)RenderingServer.CanvasItemZMax, MouseFilter = Control.MouseFilterEnum.Ignore };
         _fade.SetAnchorsPreset(Control.LayoutPreset.FullRect);
@@ -564,6 +571,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _frames.Step(_clock);
         _herd?.Step(delta);
         _ambient?.Update(_view, _clock);
+        _rain.Step(Now == Stage.Open ? Weather : null, _clock);
         SwapRepainted();
         if (_stage is { Visible: true } stage)
         {

@@ -33,6 +33,28 @@ public sealed class RegionTests
 
     private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ErrorsOf(Json(def));
 
+    [Theory]
+    [InlineData("rain")]
+    [InlineData("storm")]
+    [InlineData("drizzle")]
+    public void Authored_rain_weather_survives_loading(string weather)
+    {
+        var json = System.Text.Json.Nodes.JsonNode.Parse(Json(Region(8, 8, new RegionChunk(0, 0, Tiles()))))!;
+        json["weather"] = weather;
+        var region = ValidationTests.LoadChapter(("world/r.json", json.ToJsonString())).RegionFor("r")!;
+        Assert.Equal(weather, JsonDocument.Parse(Json(region.Def)).RootElement.GetProperty("weather").GetString());
+    }
+
+    [Theory]
+    [InlineData("snow")]
+    [InlineData("")]
+    public void Unsupported_weather_is_reported_at_its_field(string weather)
+    {
+        var json = System.Text.Json.Nodes.JsonNode.Parse(Json(Region(8, 8, new RegionChunk(0, 0, Tiles()))))!;
+        json["weather"] = weather;
+        Assert.Contains(ErrorsOf(json.ToJsonString()), e => e.Pointer == "/weather");
+    }
+
     [Fact]
     public void Named_spawns_are_optional_and_legacy_spawn_json_is_unchanged()
     {

@@ -1,0 +1,9 @@
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/arcbox-secrets/games/Tactics/Tactics.Game.Tests/bin/Debug/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (5m 22s 372ms)
+
+Test run summary: Passed!
+  total: 828
+  failed: 0
+  succeeded: 828
+  skipped: 0
+  duration: 5m 22s 665ms

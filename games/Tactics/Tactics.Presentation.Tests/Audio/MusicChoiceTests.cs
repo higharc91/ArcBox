@@ -289,6 +289,20 @@ public sealed class MusicChoiceTests
     }
 
     [Fact]
+    public void Rain_clears_with_the_world_and_does_not_override_camp_or_battle_beds()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(26, 58), new Tile(26, 58), false, [], [], null)
+            with { Weather = "rain" };
+        var wet = View("Exploration") with { Explore = explore };
+        Assert.Equal("amb_rain", PhaseScreen.Of(wet).Ambience);
+        Assert.Equal("amb_river", PhaseScreen.Of(wet with { Phase = "Battle", Battle = Fight("river_crossing") }).Ambience);
+        Assert.Equal("amb_campfire", PhaseScreen.Of(wet with { Phase = "Story",
+            Camp = new CampView("camp", "fire", "jobs", new Tile(26, 58), 0, [], null, 0, null) }).Ambience);
+        Assert.Null(PhaseScreen.Of(wet with { Phase = "Results" }).Ambience);
+        Assert.Equal("amb_town", PhaseScreen.Of(wet with { Explore = explore with { Weather = null } }).Ambience);
+    }
+
+    [Fact]
     public void Mirewood_uses_the_swamp_bed()
     {
         var explore = new ExploreView("mirewood", "Mirewood", 1, 0, new Tile(1, 2), new Tile(1, 2), false, [], [], null);

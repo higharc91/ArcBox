@@ -17,6 +17,8 @@ internal sealed partial class Validation
             var def = Deserialize<RegionDef>(e, file, ptr);
             if (def is null)
                 return null;
+            if (def.Weather is not (null or "rain" or "storm" or "drizzle"))
+                Error(file, Pointer.Append(ptr, "weather"), "Weather must be rain, storm, drizzle, or omitted for dry weather.");
             if (def.Size is not [var w and > 0, var h and > 0])
             {
                 Error(file, Pointer.Append(ptr, "size"), "The size must be [w, h], both at least 1.");

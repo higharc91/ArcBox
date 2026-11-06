@@ -1,0 +1,13 @@
+{
+  "baseline_main": "06a5fefd",
+  "baseline_failures": [
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption",
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch"
+  ],
+  "branch_failures": [
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in",
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch"
+  ]
+}

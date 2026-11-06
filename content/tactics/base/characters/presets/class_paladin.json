@@ -6,11 +6,12 @@
   "build": "standard",
   "layers": {
     "body": "dragon",
-    "torso": "plate",
-    "legs": "greaves",
-    "feet": "sabatons",
-    "hands": "gauntlets",
-    "weapon": "greatsword",
+    "torso": "chain",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "weapon": "sword",
+    "offhand": "round_shield",
     "cape": "cloak",
     "horns": "swept",
     "tail": "dragon"

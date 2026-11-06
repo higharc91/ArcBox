@@ -1,0 +1,50 @@
+Running tests from /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+failed Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(weather: "drizzle") (674ms)
+  from /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Xunit.MicrosoftTestingPlatform.XunitException: Tactics.Logic.ContentException : The rules content has 1 error:
+    chapter-01/world/r.json#/weather: Unknown property 'weather'.
+    at Tactics.Logic.PackLoader.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/PackLoader.cs:172
+    at Tactics.Logic.RulesPack.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/RulesPack.cs:194
+    at Tactics.Logic.Tests.ValidationTests.<>c__DisplayClass41_0.<LoadChapter>b__0(String dir) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.WithChapter[T](ValueTuple`2[] files, String requires, String[] extraFiles, Func`2 load) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:556
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ArtManifest art, ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:518
+    at Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(String weather) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/RegionTests.cs:44
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+failed Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(weather: "rain") (21ms)
+  from /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Xunit.MicrosoftTestingPlatform.XunitException: Tactics.Logic.ContentException : The rules content has 1 error:
+    chapter-01/world/r.json#/weather: Unknown property 'weather'.
+    at Tactics.Logic.PackLoader.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/PackLoader.cs:172
+    at Tactics.Logic.RulesPack.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/RulesPack.cs:194
+    at Tactics.Logic.Tests.ValidationTests.<>c__DisplayClass41_0.<LoadChapter>b__0(String dir) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.WithChapter[T](ValueTuple`2[] files, String requires, String[] extraFiles, Func`2 load) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:556
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ArtManifest art, ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:518
+    at Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(String weather) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/RegionTests.cs:44
+    at InvokeStub_RegionTests.Authored_rain_weather_survives_loading(Object, Span`1)
+    at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+failed Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(weather: "storm") (4ms)
+  from /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Xunit.MicrosoftTestingPlatform.XunitException: Tactics.Logic.ContentException : The rules content has 1 error:
+    chapter-01/world/r.json#/weather: Unknown property 'weather'.
+    at Tactics.Logic.PackLoader.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/PackLoader.cs:172
+    at Tactics.Logic.RulesPack.Load(IEnumerable`1 packDirectories, ArtManifest art) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/Content/RulesPack.cs:194
+    at Tactics.Logic.Tests.ValidationTests.<>c__DisplayClass41_0.<LoadChapter>b__0(String dir) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.WithChapter[T](ValueTuple`2[] files, String requires, String[] extraFiles, Func`2 load) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:556
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ArtManifest art, ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:521
+    at Tactics.Logic.Tests.ValidationTests.LoadChapter(ValueTuple`2[] files) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/ValidationTests.cs:518
+    at Tactics.Logic.Tests.RegionTests.Authored_rain_weather_survives_loading(String weather) in /workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/Content/RegionTests.cs:44
+    at InvokeStub_RegionTests.Authored_rain_weather_survives_loading(Object, Span`1)
+    at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+/workspace/arcbox-secrets/games/Tactics/Tactics.Logic.Tests/bin/Debug/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) failed with 3 error(s) (1s 678ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 3
+  failed: 3
+  succeeded: 0
+  skipped: 0
+  duration: 1s 923ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)
