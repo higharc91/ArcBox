@@ -73,6 +73,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     private BattleView? _lastBattle;
     private string? _resultEncounter;
     private ImmutableArray<ProfileId> _resultMembers = [];
+    private bool _resultLeveledUp;
+    private int _resultGold;
+    private ImmutableArray<LootDef> _resultLoot = [];
 
     // Resuming: the members who were playing before the restart and haven't come back yet.
     private readonly HashSet<ProfileId> _awaited = [];
@@ -268,6 +271,16 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (custom.Action == "difficulty") { if (IsVip(player)) SetDifficulty(custom.Data); return; }
         if (custom.Action == "questLog") { QuestLogInput(player, profile, custom.Data); return; }
         if (QuestLogOpen && custom.Action is not ("endSession" or "pickClass")) return;
+        if (custom.Action is "chooseSubclass" or "spendIncrease" or "setPicks")
+        {
+            if (_phase == TacticsPhase.Battle)
+            {
+                Toast(player.Id, "You can't change your character during battle.");
+                return;
+            }
+            HandleCharacterChoice(player, profile, custom.Action, custom.Data);
+            return;
+        }
         switch (_phase)
         {
             case TacticsPhase.Muster when custom.Action == "pickClass":
@@ -328,6 +341,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Results when IsVip(player) && custom.Action is "next":
                 _result = null;
+                _resultLeveledUp = false;
+                _resultGold = 0;
+                _resultLoot = [];
                 ToMusterOrPick();
                 break;
             case TacticsPhase.Results when IsVip(player) && custom.Action is "end":
@@ -597,7 +613,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
 
         var level = TacticsDocument.LevelFor(members.Values.Select(m => m.Xp), Rules.Xp);
-        if (level > _doc.PartyLevel)
+        var leveledUp = level > _doc.PartyLevel;
+        if (leveledUp)
             members = Ordinal.Map(members.Select(m => (m.Key, m.Value with { Character = LevelUp(m.Value.Character, level) })));
         var name = Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name ?? save.Encounter;
         _doc = _doc with
@@ -606,8 +623,12 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             Completed = result.Outcome == BattleOutcome.Won ? _doc.Completed.Add(save.Encounter) : _doc.Completed,
             World = StoryAfter(save, result),
         };
+        var goldWon = 0;
         if (result.Outcome == BattleOutcome.Won)
-            _doc = _doc.ChangeGold(mob?.Gold ?? Rules.Encounters[save.Encounter].Gold, save.Members.Where(m => mob is null || _players.Any(p => p.Profile == m && _online.Contains(p.Id))).Select(m => m.Value));
+        {
+            goldWon = mob?.Gold ?? Rules.Encounters[save.Encounter].Gold;
+            _doc = _doc.ChangeGold(goldWon, save.Members.Where(m => mob is null || _players.Any(p => p.Profile == m && _online.Contains(p.Id))).Select(m => m.Value));
+        }
         if (result.Outcome is BattleOutcome.Won or BattleOutcome.Lost or BattleOutcome.Fled && _doc.World is { } resting)
             _doc = _doc with { World = resting with { RestReady = true } };
         if (mob is not null && result.Outcome == BattleOutcome.Won && _doc.World is { } mobWorld)
@@ -618,6 +639,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _doc = _doc with { Battle = null };
         KeepWorld();
         _lease.Checkpoint(_doc.ToJson(), $"After {name}");
+        _resultLeveledUp = leveledUp;
+        _resultGold = goldWon;
+        _resultLoot = rewards;
         (_result, _resultEncounter, _resultMembers, _phase) = (result, name, save.Members, TacticsPhase.Results);
         _resultNote = result.Outcome == BattleOutcome.Lost ? LossNote(woke: _arrived == Woke) : null;
         _toasts.Clear();
