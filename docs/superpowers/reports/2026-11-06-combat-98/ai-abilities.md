@@ -8,13 +8,14 @@ Task 9 of the combat-area fixes (#98). The planner skipped empty-tile aims, neve
 - **Action Surge.** An extra action is worth the best second action it buys: once the plan has spent its action, the surge is planned with the best second action from where the plan leaves the unit when that action, less its own cost, is worth more than the surge costs.
 - **What a later action may count on.** The surged second action and the bonus action keep off a unit the first action may take out of reach:
   - one it may drop (a monster only when its damage can reach the HP left, so a hero surges at a lone boss);
+  - after a surge, one the two actions may drop between them (their damage added up);
   - the foe a multi-attack moves on to after a kill;
-  - the targets of an attack the unit's passives turn into a push (Repelling Blast);
+  - a target the unit's own on-hit passive may push or pull to a tile from which the later action can't reach it. The planner works out the push as the engine makes it (Repelling Blast: 2 tiles, on a spell attack only). It then asks the engine's targeting, range and line of sight, from there. So a warlock still Hexes the foe it blasted from 4 tiles;
   - the unit's own concentration summons, when the action starts a new concentration.
 
   After an action that moves units or changes the ground (a push, a teleport, a summon, a zone), only an action on the unit itself counts. Holding a foe in place (Hold Person) no longer counts as such an action.
 - **Twinned and Careful Spell** lead the spell they improve ("metamagic, then the spell"). Twinned is used when a single-target spell finds a second target in range (the engine's own pick); Careful when an area spell with a save catches the sorcerer's allies, who then pass the save (the scorer now knows Careful). Each is planned only when the shaped spell beats the plain one by more than the Sorcery costs.
-- **Death Ward.** A condition whose passive stands its holder back up when it is Downed is worth what getting that ally up is worth, times the chance it drops next round (the threat on its tile over its HP). So a cleric wards the endangered front-liner.
+- **Death Ward.** A condition whose passive stands its holder back up when it is Downed is worth what getting that ally up is worth, times the chance it drops next round (the threat on its tile over its HP). So a cleric wards the endangered front-liner. A ward that can't fire is worth nothing. The ward ends when it fires, so a fresh casting saves its holder again (fix round 2, ruling R21: the condition's passive had kept a one-a-battle use, so a second casting could never fire).
 - **Ranking with the bonus action.** The best 16 plans are ranked again with the bonus action they leave for the end (its best use where the plan ends). A plan that spends the bonus action early (a disengage, a teleport, a dash) gives that up, so Step of the Wind is taken over Flurry of Blows only when escaping is worth more.
 - **Bonus-action Dash.** Cunning Action Dash, Withdraw and Step of the Wind are planned as "dash, walk further, act" to the 12 best tiles only the dash brings in reach (Withdraw and Step of the Wind also disengage, so that walk draws no opportunity attack), and lengthen the move of a turn whose action is already spent.
 - **Move–act–move** for the `archer` and `skirmisher` profiles (and companions whose class plays one): the 4 best tiles the unit can strike from are kept as well as the 12 best positions, and after acting there it walks on to the best tile its Move left reaches, scored as the whole walk (a foe's opportunity attack counts once; a disengage at the start covers both walks). It never plans the second walk after walking into a zone that may hold it (a web).
@@ -24,7 +25,7 @@ Task 9 of the combat-area fixes (#98). The planner skipped empty-tile aims, neve
 
 ## How it was measured
 
-"Before" is `fd4a1827` (the planner as it was, with the new Sim options). "First version" is `a8bf0778`, the version first reviewed. "After" is `03ca509f`, after fix round 1. Each is a published copy of the Sim run against the same copy of the rules (this task changes no content). Normal difficulty, party sizes 4, 5 and 6, 6 sampled parties per size.
+"Before" is `fd4a1827` (the planner as it was, with the new Sim options). "First version" is `a8bf0778`, the version first reviewed. "After" is `6917d795`, after fix round 2. Fix round 2 changes one condition: Death Ward ends when it fires. Its runs use the rules with that change. The other columns use the rules before it, which are otherwise the same. Each column is a published copy of the Sim. Normal difficulty, party sizes 4, 5 and 6, 6 sampled parties per size.
 
 ```
 usage:      dotnet Tactics.Sim.dll --encounters crypt_hall,crystal_cave,forest_ruins,river_crossing,warlord_bridge \
@@ -45,19 +46,19 @@ Rates are used turns over legal turns.
 
 | Ability | Before | First version | After |
 |---|---:|---:|---:|
-| `wizard.misty_step` | 0.0% (0 of 6,933) | 5.6% | **13.1%** (2,536 of 19,374) |
+| `wizard.misty_step` | 0.0% (0 of 6,933) | 5.6% | **13.1%** (2,537 of 19,374) |
 | `sorcerer.misty_step` | 0.0% (0 of 1,840) | 2.9% | **2.6%** (149 of 5,838) |
-| `druid.conjure_animals` | 0.0% (0 of 2,077) | 14.2% | **15.6%** (903 of 5,787) |
-| `rogue.cunning_dash` | 0.0% (0 of 7,873) | 48.9% | **35.8%** (6,610 of 18,486) |
+| `druid.conjure_animals` | 0.0% (0 of 2,077) | 14.2% | **15.6%** (903 of 5,782) |
+| `rogue.cunning_dash` | 0.0% (0 of 7,873) | 48.9% | **35.8%** (6,610 of 18,479) |
 | `rogue.withdraw` | 0.0% (0 of 1,707) | 8.1% | **7.9%** (334 of 4,238) |
-| `fighter.action_surge` | 0.0% (0 of 6,856) | 18.2% | **20.3%** (2,380 of 11,702) |
-| `sorcerer.metamagic_twinned` | 0.0% (0 of 5,854) | 0.0% | **10.6%** (1,515 of 14,228) |
-| `sorcerer.metamagic_careful` | 0.0% (0 of 6,539) | 0.0% | **2.5%** (430 of 17,049) |
+| `fighter.action_surge` | 0.0% (0 of 6,856) | 18.2% | **20.3%** (2,380 of 11,699) |
+| `sorcerer.metamagic_twinned` | 0.0% (0 of 5,854) | 0.0% | **10.7%** (1,518 of 14,223) |
+| `sorcerer.metamagic_careful` | 0.0% (0 of 6,539) | 0.0% | **2.5%** (430 of 17,052) |
 | `cleric.death_ward` | 0.0% (0 of 2,615) | 0.0% | **26.1%** (1,639 of 6,287) |
-| `rogue.steady_aim` | 0.0% (0 of 7,873) | 0.0% | 0.0% (0 of 18,486) |
+| `rogue.steady_aim` | 0.0% (0 of 7,873) | 0.0% | 0.0% (0 of 18,479) |
 | `warlock.misty_step` | not in any default loadout | – | – |
 | `monk.step_of_the_wind` (bonus Dash and Disengage) | 5.1% | 47.1% | 26.0% |
-| `monk.flurry_of_blows` | 7.7% | 0.6% | **5.4%** (585 of 10,924) |
+| `monk.flurry_of_blows` | 7.7% | 0.6% | **5.4%** (588 of 10,920) |
 | `monk.martial_arts` | 1.9% | 2.1% | 5.0% |
 | `rogue.cunning_disengage` | 5.9% | 9.1% | 4.8% |
 | `common.dash` | 10.6% | 8.1% | 9.8% |
@@ -68,16 +69,18 @@ Rates are used turns over legal turns.
 
 Action Surge is legal only until it is spent (one use a battle), so its legal turns are the turns before the surge.
 
+Fix round 2 moved no listed ability by more than 0.1 points from fix round 1. Death Ward stays at 26.1% (1,639 of 6,287), 20.7% in the subclass sweep. The AI already cast it on an ally whose ward had fired, which was the bug: those castings now fire. Hex rises from 26.2% to 26.6% (6,416 of 24,095), and from 4.2% to 4.4% in the subclass sweep: a foe Repelling Blast pushes but leaves in range and in sight can now be Hexed after the blast.
+
 ### Subclass signatures and Fey Step (subclass sweep, seeds 1–6, elf parties)
 
 | Ability | Before | First version | After |
 |---|---:|---:|---:|
-| `shadow.shadowstep` | 0.0% (0 of 3,224) | 24.9% | **31.6%** (628 of 1,989) |
-| `windstep.gale_leap` | 0.0% (0 of 2,884) | 30.8% | **37.5%** (592 of 1,578) |
-| `void.rift_step` | 0.0% (0 of 4,100) | 12.1% | **12.4%** (282 of 2,266) |
-| `avenger.relentless_step` | 0.0% (0 of 1,093) | 54.3% | **35.8%** (311 of 869) |
-| `draconic.dragon_wings` | 0.0% (0 of 907) | 15.2% | **5.8%** (38 of 658) |
-| `elf.fey_step` | 0.0% (0 of 38,761) | 5.8% | **6.1%** (1,814 of 29,866) |
+| `shadow.shadowstep` | 0.0% (0 of 3,224) | 24.9% | **31.5%** (627 of 1,988) |
+| `windstep.gale_leap` | 0.0% (0 of 2,884) | 30.8% | **37.5%** (591 of 1,577) |
+| `void.rift_step` | 0.0% (0 of 4,100) | 12.1% | **12.5%** (284 of 2,269) |
+| `avenger.relentless_step` | 0.0% (0 of 1,093) | 54.3% | **35.9%** (312 of 870) |
+| `draconic.dragon_wings` | 0.0% (0 of 907) | 15.2% | **5.9%** (39 of 656) |
+| `elf.fey_step` | 0.0% (0 of 38,761) | 5.8% | **6.1%** (1,816 of 29,857) |
 | `sorcerer.metamagic_twinned` | 0.0% | 0.0% | 8.4% |
 | `sorcerer.metamagic_careful` | 0.0% | 0.0% | 2.6% |
 | `cleric.death_ward` | 0.0% | 0.0% | 20.7% |
@@ -102,7 +105,7 @@ Over the whole usage sweep, 43 abilities are under 2% (54 before, at seeds 1–6
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | river_crossing | 1 | 92.2 | 85.6 | 88.3 | −3.9 | 10.4 | 10.2 | 11 | 15 | |
 | ford_assault | 1 | 78.3 | 75.6 | 80.6 | +2.2 | 9.2 | 9.1 | 6 | 7 | |
-| forest_ruins | 3 | 88.1 | 88.3 | 91.1 | +3.1 | 10.4 | 9.1 | 3 | 1 | |
+| forest_ruins | 3 | 88.1 | 88.3 | 90.8 | +2.7 | 10.4 | 9.1 | 3 | 1 | |
 | warlord_bridge | 5 | 93.6 | 94.2 | 90.0 | −3.6 | 11.3 | 11.1 | 0 | 0 | |
 | crypt_hall | 5 | 91.7 | 91.7 | 92.5 | +0.8 | 12.1 | 9.5 | 4 | 4 | |
 | crystal_cave | 7 | 94.4 | 92.8 | 90.8 | −3.6 | 11.8 | 10.0 | 0 | 0 | |
@@ -110,12 +113,12 @@ Over the whole usage sweep, 43 abilities are under 2% (54 before, at seeds 1–6
 | keep_gate | 9 | 84.7 | 83.6 | 86.7 | +1.9 | 10.5 | 9.0 | 2 | 1 | |
 | hall_of_the_flame | 10 | 64.2 | 71.9 | 75.6 | +11.4 | 9.5 | 6.9 | 0 | 0 | **SHORT** (6.9 rounds) |
 
-Every cell stays inside 60–95% wins. One leaves 8–12 rounds: **hall_of_the_flame at level 10, 6.9 rounds** (it was 9.5). crypt_hall comes back inside (12.1 to 9.5). Nothing was retuned here; the final balance task (T11) retunes, and owns this cell and river_crossing below.
+Fix round 2 moved one story cell: forest_ruins, 91.1% to 90.8% (one battle). Every cell stays inside 60–95% wins. One leaves 8–12 rounds: **hall_of_the_flame at level 10, 6.9 rounds** (it was 9.5). crypt_hall comes back inside (12.1 to 9.5). Nothing was retuned here; the final balance task (T11) retunes, and owns this cell and river_crossing below.
 
 - **Battles are shorter.** Mean rounds fall in all 9 cells (0.1 to 2.6 rounds). Action Surge, bonus-action dashes, teleports and twinned spells bring damage in sooner; across the usage sweep the mean is 8.3 rounds (9.3 before).
 - **river_crossing, level 1: −3.9 points** (size 4: 80.0% to 74.2%), 15 capped battles (11 before). A level-1 party has none of the new abilities (Action Surge and Cunning Action come at level 2), but its foes gain: the goblins play `skirmisher` and the goblin archers `archer`, so both now step out across the river, strike and step back.
 - **hall_of_the_flame, level 10: +11.4 points** (size 6: 70.8% to 93.3%; size 4: 46.7% to 56.7%), at 6.9 rounds. A level-10 party gains the most: Action Surge, Withdraw, Conjure Animals, Misty Step, Twinned Spell and Death Ward all arrive by then.
-- **Subclass and elf parties (subclass sweep): 86.9% to 84.9% won** (84.0% for the first version), 9.7 to 8.4 rounds. At warlord_bridge the win rate is back near or above baseline (level 7: 94.4% to 97.2%; level 10: 100% to 94.4%). Outs per battle are still higher there (level 7: 0.4 to 1.1; level 10: 0.1 to 0.7). The off-level crystal_cave at level 3 falls from 37.0% to 25.0%. The Sim's default parties have no subclass, so T11's bands won't see this.
+- **Subclass and elf parties (subclass sweep): 86.9% to 85.0% won** (84.0% for the first version), 9.7 to 8.4 rounds. At warlord_bridge the win rate is back near or above baseline (level 7: 94.4% to 97.2%; level 10: 100% to 94.4%). Outs per battle are still higher there (level 7: 0.4 to 1.1; level 10: 0.1 to 0.7). The off-level crystal_cave at level 3 falls from 37.0% to 25.0%. The Sim's default parties have no subclass, so T11's bands won't see this.
 
 ## Teleports that ran ahead of the party
 
@@ -134,7 +137,7 @@ Both rules are kept, with an AI test each. The default parties were barely touch
 
 ## Planner timing
 
-`AiPerformanceTests` p95 (ms), 100 timed plans each, on the 4-core container with nothing else running. The battles behind the timed turn states are played by the AI, so they differ before and after.
+`AiPerformanceTests` p95 (ms), 100 timed plans each, on the 4-core container with nothing else running. The battles behind the timed turn states are played by the AI, so they differ before and after. The "After" column is fix round 1's. Fix round 2's code measured 37–40, 24–26, 19–22, 19–20, 8.5–9.4, 7.9–8.2 and 15–16 in the same order, over two runs. Fix round 1's code, measured again in the same session, gave 36.4, 26.0, 19.0, 19.2, 8.3, 7.9 and 13.8, so the container was simply slower that day.
 
 | Setup | Before | First version | After |
 |---|---:|---:|---:|
@@ -160,7 +163,14 @@ The new setup times the melee teleport routes; the old ones only build human par
 
 In a narrow run (warlord_bridge and crystal_cave, levels 5 and 7, seeds 1–6), the Sim's refused AI commands went from 1 to 13, then back to 2 after three fixes (each with an AI test): no second walk after walking into a web (Restrained), no surged second action aimed at a foe a Shove has just moved, and neither a surged action nor the bonus action aimed at the foe a multi-attack moves on to after a kill. The 2 left are older: a reaction (Shield, Hellish Rebuke) spends the Mana or Pact the planned spell needed.
 
-Fix round 1's ranking with the bonus action made two other blind spots show more often: in the subclass sweep refusals rose from 6 (before) to 16–21. They were Hex after an Eldritch Blast whose Repelling Blast had pushed the foe out of range, and Healing Word on a wolf a new concentration had sent away. With both covered (each with an AI test) it is back to 6. Across the final usage sweep, 24 commands of 9,000 battles were refused (37 for the first version).
+Fix round 1's ranking with the bonus action made two other blind spots show more often: in the subclass sweep refusals rose from 6 (before) to 16–21. They were Hex after an Eldritch Blast whose Repelling Blast had pushed the foe out of range, and Healing Word on a wolf a new concentration had sent away. With both covered (each with an AI test) it is back to 6. Across fix round 1's usage sweep, 24 commands of 9,000 battles were refused (37 for the first version).
+
+Fix round 2 lets the bonus action aim at a foe Repelling Blast pushes but leaves in reach. Its first version judged that by range plus push distance, and one Hex went to a foe pushed in range but behind a block. The planner now traces the push and asks the engine's targeting from where it leaves the foe. That refusal is gone, and an AI test covers it. Refusals are 26 in the usage sweep (24 before) and 7 in the subclass sweep (6 before). In a probe, every extra one was the older reaction case:
+1. A warlock walks off and draws opportunity attacks.
+2. It answers them with Hellish Rebuke, which spends its last Pact.
+3. The Hex or Hold Person planned after the walk is then refused.
+
+Hex is planned a little more often now, so this case shows a little more.
 
 ## Goldens and fixtures
 
@@ -168,3 +178,4 @@ Fix round 1's ranking with the bonus action made two other blind spots show more
 - **Phone fixtures** recorded from AI-played battles were re-recorded (`UPDATE_FIXTURES=1`): `react.json` (the first reaction offer now comes later in the recorded battle, so its deadline moved) and `results.json` (that party ends the battle with no injuries). The view types are unchanged.
 - **`EngineFaultTests.A_save_whose_next_ai_step_fails_…`** took its save after a fixed six beats, which now lands mid-turn where the AI's remaining plan is only "end turn" (which can't fail there). It now goes on beat by beat (at most 20) to a save where the AI's next step is a real command, which is what the test means. It asks the adapter for that plan (`TacticsGame.PlanAi`, which the adapter's own AI step now uses), so the two can't drift apart.
 - **Fix round 1** changed no golden and no phone fixture.
+- **Fix round 2** changed none either. Its content change (Death Ward ends when it fires) only matters after a ward has fired. No golden replay casts Death Ward.
