@@ -137,6 +137,7 @@ public partial class Main : Control
         }
         if (_args.FxDemo is { } demo)
         {
+            if (_shots is not null && System.Environment.GetEnvironmentVariable("ARCBOX_FX_CAPTURE") == "0") _shots.CaptureEnabled = false;
             ShowGame("tactics");
             var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
