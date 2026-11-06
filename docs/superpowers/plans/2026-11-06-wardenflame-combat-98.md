@@ -1,4 +1,4 @@
-> Status: current combat #98 plan and ledger; Tasks 1–10 complete, Task 11 implemented with final balance audit and local gate pending. See the final balance and review reports for completion evidence.
+> Status: Task 11 completed with documented balance exceptions; final twenty-seed audit, independent review and full local gate complete. See [balance-final.md](../reports/2026-11-06-combat-98/balance-final.md). The owner decides when to merge.
 
 # Wardenflame combat rules and AI (#98): implementation plan
 

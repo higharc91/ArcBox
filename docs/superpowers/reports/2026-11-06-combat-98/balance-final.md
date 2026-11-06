@@ -1,6 +1,6 @@
 # Combat #98 final balance and integration report (#112)
 
-Task 11 starts from `4e90a904`. Main was merged normally at `9dd18828`. The independent review covered merge-base `9f8c2fd8` through `036141da`; one fix wave is included in the final measured revision below. CI remains manually disabled. This session pushes only to `wardenflame-combat-98`, opens no PR and closes no issues.
+Task 11 starts from `4e90a904`. Main was merged normally at `9dd18828`, then refreshed cleanly to `cb488e23` at merge `b221c479` after its unrelated REDLINE update. The independent review covered merge-base `9f8c2fd8` through `036141da`; one fix wave is included in the final measured revision below. CI remains manually disabled. This session pushes only to `wardenflame-combat-98`, opens no PR and closes no issues.
 
 ## Task 11 changes and retained departures
 
@@ -32,11 +32,13 @@ Five benchmark encounters run at every level 1–10 (18,000 battles). Four addit
 |---|---|---|
 | 0fbd804c5af3ff49350a19cdaa81103070a3fea0 | a52dd6d512ec1c1b148e6888d2e2e072c4788b0cc1a9855716df7105156a47a4 | 28520 |
 
-CLI-equivalent benchmark command (story/companion/scripted cohorts change only the displayed configuration options):
+CLI-equivalent benchmark command:
 
 ```sh
 dotnet run -c Release --project games/Tactics/Tactics.Sim -- --rules content/tactics/base/rules --encounters crypt_hall,crystal_cave,forest_ruins,river_crossing,warlord_bridge --levels 1,2,3,4,5,6,7,8,9,10 --sizes 4,5,6 --parties 6 --seeds 20 --rotate-formation
 ```
+
+For each story encounter, use its intended level from the table below. Normal story runs retain sizes 4–6; paired companion runs use `--sizes 4 --companions 4`. The scripted run keeps the benchmark configuration and adds `--with-class rogue --policy hidden-rogue`. Every cohort retains `--parties 6 --seeds 20 --rotate-formation`.
 
 ## Final judgment and every residual outlier
 
@@ -178,11 +180,24 @@ The complete current benchmark rare-use table is in appendix section 5, includin
 
 ## Integration, independent review and checks
 
-The [whole-branch review and complete deferred-minor triage](review-final.md) records five Important findings, no Critical, and all 39 deferred entries as fix-now or leave with reasons. One fix wave addresses every confirmed Important and cheap Minor. Focused verification passes 176 rules checks and 47 game checks. The approved scoped re-review independently passes 46 focused checks with no remaining Critical/Important findings. Full local check-all is recorded below. CI remains disabled.
+Main was merged normally at `9dd18828`, then refreshed to `cb488e23` at `b221c479`. The refresh consists of six REDLINE/host-narration files and merges without conflicts. Tactics rules, AI and simulator files have no diff from measured revision `0fbd804c`; the final measurements remain applicable.
 
-FINAL_GATE_PENDING
+The [whole-branch review and complete deferred-minor triage](review-final.md) records five Important findings, no Critical, and all 39 deferred entries as fix-now or leave with reasons. One fix wave addresses every confirmed Important and cheap Minor. Focused verification passes 176 rules checks and 47 game checks. The approved scoped re-review independently passes 46 focused checks with no remaining Critical/Important findings in that fix diff.
 
-The first full gate exposed two obsolete test assumptions, three slow real-area sequences, missing deterministic passive coverage after AI tuning, and two missing icon-fallback records. The test expectations now follow the reviewed legacy-mark/controller behavior. Countdown, transformation and zone cleanup cues overlap within an area instead of pausing later victims; the 1.1-second bound and original seeds remain. Direct RED: 1.51 seconds. Focused GREEN: 100 presentation, 14 rules and 5 manifest checks. Added real engine fixtures preserve both Indomitable and Martial Advantage coverage. These changes affect presentation/tests/tool bookkeeping only, so the measured rules/AI/simulator revision is unchanged.
+The first full gate then exposed two obsolete test assumptions, three slow real-area sequences, missing stable passive samples after AI tuning, and two missing icon-fallback records. The test expectations now follow the reviewed legacy-mark/controller behavior. Countdown, transformation and zone cleanup cues overlap within an area instead of pausing later victims; the original 1.1-second bound and all original seeds remain. Direct RED: 1.51 seconds. Focused GREEN: 100 presentation, 14 rules and 5 manifest checks. Added real engine fixtures preserve both Indomitable and Martial Advantage coverage independently of the AI's choices. These final repairs affect presentation, tests and asset bookkeeping, with no change to the measured combat implementation.
+
+**Final integrated-tree gate: `tools/check-all.sh --full` — PASS, exit 0.** Performance checks ran after the simulator finished. No tests were skipped or quarantined.
+
+| Group | Result | Evidence |
+|---|---|---|
+| .NET build | PASS | Full Release solution build, zero warnings/errors. |
+| .NET tests | PASS | 7,161 passed, zero failed/skipped, including performance tests and the six tests brought in by main. |
+| Phone | PASS | 547 tests; clean npm install and production build. |
+| Node tools | PASS | 24 tests. |
+| Python tools/lore/docs | PASS | 26 asset + 9 audio + 23 lore tests, lore checker and documentation drift checker. |
+| Goldens/fixtures | PASS | Normal verification: 7 golden and 17 fixture checks; also covered by the full suite. |
+
+The repaired pre-refresh tree also passed all five groups (7,155 .NET tests). The full gate was rerun after main integration. Final documentation completion edits were followed by the documentation drift checker and whitespace validation. GitHub's only workflow, Check all, remains `disabled_manually`; it was never enabled. Delivery is only to `wardenflame-combat-98`; no PR is opened and no issue is closed.
 
 ## Goldens and phone fixtures
 

@@ -1,6 +1,6 @@
 # Whole-branch review and resolution (#112)
 
-The independent review below covers merge-base `9f8c2fd8` through `036141da`, with no inherited implementation context. Its five Important findings are addressed in one fix wave. The scoped re-review approves the fix wave; the full local gate remains pending. The original 39-item triage is preserved in full.
+The independent review below covers merge-base `9f8c2fd8` through `036141da`, with no inherited implementation context. Its five Important findings are addressed in one fix wave. The scoped re-review approves the fix wave; the final integrated-tree full local gate passes all five groups. The original 39-item triage is preserved in full.
 
 ## Fix-wave resolution
 
@@ -218,3 +218,7 @@ No repository edits, commits, GitHub posts, workflow changes, delegation, full-s
 ## Full-gate follow-through
 
 After scoped approval, the complete gate exposed two stale test expectations and a presentation timing edge outside the earlier focused sample. Legacy sourced marks correctly retain advantage, and wizard companions correctly inherit the specialist controller profile; their old assertions are updated without changing runtime rules. Three real area sequences took 1.12–1.15 seconds because countdown, transformation and zone cleanup each held the shared timeline. A direct regression reproduced 1.51 seconds; those side effects now overlap within the area, retaining every application/visual cue. The 1.1-second bound and all original battle seeds are unchanged. Real engine fixtures guarantee both required passive samples even when the tuned AI kills guards before they flank. Focused verification: 100 presentation + 14 rules passed. Five manifest checks also pass after documenting generic icon fallbacks for the two new common actions. No combat rules, AI or simulator implementation changed after the measured/reviewed `0fbd804c`. The fresh full gate result follows in balance-final.md.
+
+## Completion evidence
+
+Final integrated-tree `tools/check-all.sh --full`: PASS, exit 0; 7,161 .NET tests, 547 phone tests/build, 24 Node tests, all Python/lore/docs checks, no skipped tests. The twenty-seed audit completes 28,520 battles: 9/9 aggregate intended-level story targets, 10/10 scripted default-rapier caps; 15/120 role values and two paired companion gaps remain exceptions, with individual size misses also recorded. Full measurements and every ruling/cost are in [balance-final.md](balance-final.md). Main refreshed cleanly to `cb488e23` at `b221c479`, with no measured Tactics implementation changes. CI stays disabled; only the combat branch is delivered.
