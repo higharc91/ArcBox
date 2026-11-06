@@ -11,10 +11,10 @@ public enum BattleCinematics { Full, Short, Off }
 public enum CutInTier { None, Short, Full }
 
 /// <summary>One linked action's original timing and framing, in board art pixels.</summary>
-public sealed record CutInAction(CutInTier Tier, double Seconds, Vector2 Caster, Vector2 Target);
+public sealed record CutInAction(CutInTier Tier, double Seconds, Vector2 Caster, Vector2 Target, int TargetZoom = 0, Vector2? TargetExtent = null);
 
 /// <summary>Board framing layered over BoardFit. The HUD keeps its ordinary screen transform.</summary>
-public sealed record CutInFrame(float Zoom, Vector2 Focus, float Dim, bool Banner);
+public sealed record CutInFrame(float Zoom, Vector2 Focus, float Dim, bool Banner, Vector2? Extent = null);
 
 /// <summary>
 /// Pure cut-in clock for a linked action/reaction chain. Playback uses ScriptTime to advance the existing BeatPlayer;
@@ -33,7 +33,7 @@ public sealed class BattleCutIn
     {
         if (actions.IsDefaultOrEmpty || actions.Any(a => !double.IsFinite(a.Seconds) || a.Seconds <= 0
             || !float.IsFinite(a.Caster.X) || !float.IsFinite(a.Caster.Y) || !float.IsFinite(a.Target.X) || !float.IsFinite(a.Target.Y)
-            || !Enum.IsDefined(a.Tier)))
+            || !Enum.IsDefined(a.Tier) || a.TargetZoom is < 0 or > 3))
             throw new ArgumentException("A chain needs finite positions and positive action lengths.", nameof(actions));
         if (zoom is not (2 or 3)) throw new ArgumentOutOfRangeException(nameof(zoom));
         if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode));
@@ -90,7 +90,9 @@ public sealed class BattleCutIn
         var focus = Vector2.Lerp(action.Caster, action.Target, (float)release);
         var weight = seconds < PushSeconds ? Ease(seconds / PushSeconds)
             : seconds > Length - SettleSeconds ? Ease((Length - seconds) / SettleSeconds) : 1;
-        return new((float)(1 + (_zoom - 1) * weight), focus, (float)(0.35 * weight), seconds < Lead);
+        var heldZoom = _zoom + ((action.TargetZoom == 0 ? _zoom : action.TargetZoom) - _zoom) * release;
+        return new((float)(1 + (heldZoom - 1) * weight), focus, (float)(0.35 * weight), seconds < Lead,
+            action.TargetExtent * (float)release);
     }
 
     private static double Ease(double t) => t * t * (3 - 2 * t);
