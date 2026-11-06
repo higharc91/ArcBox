@@ -10,9 +10,18 @@ namespace Redline.Logic;
 /// then every round is Throttle → Reading → Question → Reveal until a car crosses the line (spec §2, §3; Reading: audio spec §2).
 /// After the Chequered flag, the top three players take the podium: Anthem, then Champagne (podium spec §2).
 /// </summary>
-public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules = null, Grid? grid = null) : IGame
+public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules = null, Grid? grid = null) : IGame, IHostAware
 {
     public const string PhaseTimer = "phase";
+
+    /// <summary>
+    /// The TV's signal that it has finished reading the question out, <c>{seq}</c> (issue #25). It ends a Reading or
+    /// QualifyingReading phase early; the phase's timer stays as the fallback, so a TV that never signals changes nothing.
+    /// </summary>
+    public const string NarrationDone = "narrationDone";
+
+    /// <summary>Counts the read-outs (Reading and QualifyingReading phases) so a late signal for an earlier one is ignored.</summary>
+    private int _readSeq;
 
     private readonly Grid _grid = grid ?? Grid2026.Load();
 
@@ -101,6 +110,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _podium = [];
         _anthemCountry = null;
         _spraySeq = 0;
+        _readSeq = 0;
         _seatOf.Clear();
         _connected.Clear();
         _claimRejected.Clear();
@@ -165,6 +175,23 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         }
     }
 
+    /// <summary>
+    /// <see cref="NarrationDone"/> <c>{seq}</c> opens the answers as soon as the read-out it names has ended. Only shortens
+    /// the wait: anything else (another kind, another phase, a stale or malformed seq) is ignored.
+    /// </summary>
+    public void OnHostSignal(string kind, PlayerInput payload)
+    {
+        if (_ctx is null || kind != NarrationDone || Phase is not (RacePhase.Reading or RacePhase.QualifyingReading))
+            return;
+        if (payload.Payload.ValueKind != JsonValueKind.Object
+            || !payload.Payload.TryGetProperty("seq", out var seq)
+            || seq.ValueKind != JsonValueKind.Number
+            || !seq.TryGetInt32(out var acknowledged)
+            || acknowledged != _readSeq)
+            return;
+        OnTimer(PhaseTimer);
+    }
+
     public void OnPlayerConnectionChanged(PlayerId id, bool connected)
     {
         if (_ctx is null || !_connected.ContainsKey(id)) return;
@@ -182,7 +209,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
     public object HostView() => HostViews.Build(
         Phase, Round, Rules, QuestionCard(), CurrentAnswers?.CorrectIndex, _standings,
-        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution, PodiumHostView(), (_qualiLap, _fastestLap));
+        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution, PodiumHostView(), (_qualiLap, _fastestLap), _readSeq);
 
     public ControllerView PlayerView(PlayerId id)
     {
@@ -289,6 +316,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         }
 
         Phase = RacePhase.QualifyingReading;
+        _readSeq++;
         _ctx!.SetTimer(PhaseTimer, Rules.QualifyingReadingTime(CurrentLap.Text, _qualiLap));
     }
 
@@ -477,6 +505,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         }
 
         Phase = RacePhase.Reading;
+        _readSeq++;
         _ctx!.SetTimer(PhaseTimer, Rules.ReadingTime(Current.Text));
     }
 
