@@ -32,6 +32,36 @@ internal sealed partial class Scorer
                                            && u.Sheet.Side != Side.Neutral && Reach.Distance(unit.Pos, u.Pos) <= reach);
     }
 
+    /// <summary>
+    /// A push or pull of <paramref name="target"/> by <paramref name="direction"/>, scored by where it lands (<see cref="Motion.Trace"/>):
+    /// the tiles it moves; the target's whole remaining HP when it ends in a deep tile (it drops, as at 0 HP; a guarded unit
+    /// braces at the edge instead, so a boss is worth nothing there); a fall's damage; 1d4 for a collision; and the zone
+    /// damage on the tiles it crosses and the tile it lands on.
+    /// </summary>
+    private Outcome Forced(Strike st, UnitState target, (int Dx, int Dy) direction, int distance)
+    {
+        var path = Motion.Trace(st.W.State, Terrain, target, direction, distance);
+        var damage = DamageDist.Zero;
+        if (target.Life == LifeState.Up)
+        {
+            if (path.IntoDeep)
+                damage = DamageDist.Point(Math.Max(1, target.Hp + target.TempHp));
+            else
+            {
+                if (path.Blocked)
+                    damage = DamageDist.Dice(1, 4);
+                if (path.Drop > 3)
+                    damage = damage.Plus(DamageDist.Dice(path.Drop - 3, 6));
+                if (!path.Tiles.IsEmpty)
+                {
+                    var zones = Hazards(target, path.Tiles[^1], path.Tiles);
+                    damage = damage.Plus(DamageDist.Point((int)Math.Round(zones.Entering + zones.Staying)));
+                }
+            }
+        }
+        return new Outcome(damage, Push: path.Tiles.Length);
+    }
+
     private Outcome One(EffectDef effect, Strike st, UnitState target, bool crit, bool half, RollResult? last)
     {
         switch (effect)
@@ -79,9 +109,16 @@ internal sealed partial class Scorer
             case CleanseEffect cleanse:
                 return Removing(target, c => Rules.Conditions.TryGetValue(c.Id, out var def) && def.Tags.Overlaps(cleanse.Tags));
             case PushEffect push:
-                return new Outcome(DamageDist.Zero, Push: push.Distance);
+                return Forced(st, target, Motion.Toward(push.AwayFromSource ? st.User.Pos : st.Aim ?? st.User.Pos, target.Pos), push.Distance);
             case PullEffect pull:
-                return new Outcome(DamageDist.Zero, Push: pull.Distance);
+                {
+                    var source = st.User.Pos;
+                    var direction = Motion.Toward(target.Pos, source);
+                    var (along, across) = direction.Dx != 0
+                        ? (Math.Abs(source.X - target.Pos.X), Math.Abs(source.Y - target.Pos.Y))
+                        : (Math.Abs(source.Y - target.Pos.Y), Math.Abs(source.X - target.Pos.X));
+                    return Forced(st, target, direction, Math.Min(pull.Distance, across == 0 ? along - 1 : along));
+                }
             case TauntEffect taunt:
                 return new Outcome(DamageDist.Zero, Offense: -0.3 * Turns(taunt.Rounds, untilSave: false));
             case MarkEffect mark:

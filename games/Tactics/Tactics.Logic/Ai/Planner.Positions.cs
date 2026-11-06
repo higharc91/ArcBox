@@ -53,6 +53,8 @@ internal sealed partial class Planner
         }
         var score = -_p.Caution * _wariness * threat * Math.Clamp(2 * threat / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
 
+        score -= EdgeRisk(t);
+
         // Known zone damage uses the threat term's caution and HP urgency, without its late-battle wariness decay.
         score -= HazardCost(zoneDamage);
 
@@ -95,6 +97,42 @@ internal sealed partial class Planner
         if (!goal.IsEmpty)
             score -= 0.3 * Math.Max(0.5, _p.Objective) * goal.Min(g => Reach.Distance(g, t));
         return score;
+    }
+
+    /// <summary>The share of an edge exposure's stake it is charged: a shove has to be used and has to land.</summary>
+    private const double EdgeOdds = 0.25;
+
+    private ImmutableArray<UnitState>? _pushers;
+
+    /// <summary>The foes that can push or pull: a push or pull among their abilities or the <c>common.*</c> ones (Shove).</summary>
+    private ImmutableArray<UnitState> Pushers() => _pushers ??= [.. _foes.Where(f => f.Life == LifeState.Up
+        && f.Sheet.Abilities.Concat(_rules.Abilities.Keys.Where(a => a.Value.StartsWith("common.", StringComparison.Ordinal)))
+            .Select(a => _rules.Abilities.GetValueOrDefault(a))
+            .Any(a => a is not null && Scorer.All(a.Effects).Any(e => e is PushEffect or PullEffect)))];
+
+    /// <summary>
+    /// What ending the turn on <paramref name="t"/> risks from the edge: a deep tile beside it with, on the other side, a tile a
+    /// foe that can push could stand on by its next turn (within its Move, straight-line), so one shove drops the unit as at 0 HP.
+    /// Costs <see cref="EdgeOdds"/> × caution × (its HP and what taking it out is worth). Nothing for a guarded unit
+    /// (<see cref="Steadfast"/>), who braces at the edge, or where nobody can push.
+    /// </summary>
+    private double EdgeRisk(Tile t)
+    {
+        var terrain = _scorer.Terrain;
+        if (_pushers is { IsEmpty: true } || Steadfast.Guarded(_s, _me))
+            return 0;
+        foreach (var (dx, dy) in new[] { (0, -1), (1, 0), (0, 1), (-1, 0) })
+        {
+            if (!terrain.Deep(new Tile(t.X + dx, t.Y + dy)))
+                continue;
+            var from = new Tile(t.X - dx, t.Y - dy);
+            if (!terrain.Walkable(from))
+                continue;
+            if (Pushers().Any(f => f.Pos == from || Reach.Distance(f.Pos, from) <= f.Sheet.Move
+                                                    && !_s.Units.Values.Any(u => u.Id != f.Id && u.Id != _me.Id && u.Pos == from && DownedRules.InBattle(u))))
+                return EdgeOdds * Math.Max(0.5, _p.Caution) * (_me.Hp + _me.TempHp + _scorer.KillWorth(_me));
+        }
+        return 0;
     }
 
     private double HazardCost(double damage) => _p.Caution * damage
