@@ -40,6 +40,14 @@ public static class Hp
                 amount *= 2;
         }
 
+        if (resolution is { } hit && u.HalvedHit == hit)
+        {
+            var total = u.HalvedHitDamage + amount;
+            amount = total / 2 - u.HalvedHitDamage / 2;
+            u = u with { HalvedHitDamage = total };
+            w.Set(u);
+        }
+
         if (u.Life == LifeState.Downed)
         {
             if (amount > 0)
@@ -90,6 +98,8 @@ public static class Hp
         w.Emit(new Healed(unit, hp - u.Hp, hp));
         if (u.Life == LifeState.Downed && hp > 0)
             DownedRules.Revive(w, unit, hp);
+        if (hp > u.Hp)
+            Hooks.Fire(w, HookKind.OnHealed, new HookArgs(unit, Amount: hp - u.Hp), w.Rules);
         return hp - u.Hp;
     }
 }
@@ -238,4 +248,22 @@ public sealed class ReviveBlock : EffectBlock<ReviveEffect>
 
     /// <inheritdoc />
     protected override void Run(ReviveEffect def, EffectContext ctx) => DownedRules.Revive(ctx.W, ctx.TargetUnit(Key).Id, def.Hp);
+}
+
+/// <summary>Marks only the pending attack hit; unrelated damage is unaffected.</summary>
+public sealed class HalveHitBlock : EffectBlock<HalveHitEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "halveHit";
+    /// <inheritdoc />
+    protected override string? Describe(HalveHitEffect def, int level, RulesPack rules)
+        => "halves the triggering hit's damage, including riders (rounded down)";
+    /// <inheritdoc />
+    protected override void Run(HalveHitEffect def, EffectContext ctx)
+    {
+        if (ctx.Resolution is not { } hit)
+            return;
+        var target = ctx.TargetUnit(Key);
+        ctx.W.Set(target with { HalvedHit = hit, HalvedHitDamage = 0 });
+    }
 }

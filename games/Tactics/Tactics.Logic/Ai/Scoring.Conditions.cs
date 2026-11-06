@@ -54,7 +54,12 @@ internal sealed partial class Scorer
                 if (passive.Hook == HookKind.OnTurnStart && effects.Any(e => e is DamageEffect))
                     defense -= 0.3;
                 if (passive.Hook == HookKind.OnTurnStart && effects.Any(e => e is RemoveEffect r && r.Condition == id))
+                {
                     (offenseTurns, defenseTurns) = (0, 1);
+                    // Standing also spends half Move: it limits repositioning even though the attack penalty ends.
+                    if (effects.OfType<RemoveEffect>().Any(r => r.Condition == id && r.HalfMove))
+                        defense -= 0.15;
+                }
             }
             foreach (var mods in statics)
             {

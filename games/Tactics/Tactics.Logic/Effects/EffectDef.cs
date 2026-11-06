@@ -36,7 +36,7 @@ public sealed record AttackEffect(string Kind, Stat? Stat, ImmutableArray<Effect
 /// <see cref="OnFail"/> at half (rounded down) when <see cref="HalfOnSuccess"/> is set.
 /// </summary>
 public sealed record SaveEffect(Stat Stat, int? Dc, ImmutableArray<EffectDef> OnFail,
-    ImmutableArray<EffectDef> OnSuccess, bool HalfOnSuccess = false, Stat? DcStat = null) : EffectDef;
+    ImmutableArray<EffectDef> OnSuccess, bool HalfOnSuccess = false, Stat? DcStat = null, Stat? AlternativeStat = null) : EffectDef;
 
 /// <summary>
 /// <c>"damage"</c>: <see cref="Dice"/> at the user's level plus the named <see cref="Bonus"/> addends, of
@@ -49,6 +49,9 @@ public sealed record DamageEffect(ByLevel<Dice>? Dice, string? Type, ImmutableAr
 /// <summary><c>"heal"</c>: restores <see cref="Dice"/> at the user's level plus the named <see cref="Bonus"/> addends, up to max HP.</summary>
 public sealed record HealEffect(ByLevel<Dice> Dice, ImmutableArray<string> Bonus) : EffectDef;
 
+/// <summary><c>"halveHit"</c>: halves the triggering attack hit, including its riders; rounded down across damage blocks.</summary>
+public sealed record HalveHitEffect : EffectDef;
+
 /// <summary>
 /// <c>"apply"</c>: gives the target a condition for <see cref="Rounds"/> rounds (null: until removed), or until it saves
 /// at the end of its turn (<see cref="UntilSave"/>, which needs an enclosing <c>"save"</c> for its stat and DC).
@@ -59,7 +62,7 @@ public sealed record ApplyEffect(ConditionId Condition, int? Rounds, bool UntilS
 
 /// <summary><c>"remove"</c>: ends every instance of a condition on the target. JSON shorthand: <c>{"remove": "prone"}</c>.</summary>
 [EffectShorthand(nameof(Condition))]
-public sealed record RemoveEffect(ConditionId Condition) : EffectDef;
+public sealed record RemoveEffect(ConditionId Condition, bool HalfMove = false) : EffectDef;
 
 /// <summary>
 /// <c>"push"</c>: moves the target <see cref="Distance"/> tiles, one at a time, straight away from the source (or, without

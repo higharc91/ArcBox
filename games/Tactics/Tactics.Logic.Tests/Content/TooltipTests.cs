@@ -324,6 +324,7 @@ public sealed class TooltipTests
         ("attack", new AttackEffect("spell", Stat.Wis, [Dmg("1d6", "fire")], [], [])),
         ("save", new SaveEffect(Stat.Dex, 12, [Dmg("1d6", "fire")], [], true)),
         ("damage", Dmg("1d6", "fire")),
+        ("halveHit", new HalveHitEffect()),
         ("heal", new HealEffect(TestAbilities.Flat("1d6"), ["mod.wis"])),
         ("tempHp", new TempHpEffect(TestAbilities.Flat("1d6"), ["prof"])),
         ("revive", new ReviveEffect(1)),

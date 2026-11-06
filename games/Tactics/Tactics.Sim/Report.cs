@@ -117,8 +117,8 @@ public static class Report
         Line(md);
         Line(md, "Each class's band measure at each level (the mean over the battles it fought, per member), against the mean of "
                  + $"its band's classes at that level; **FLAG** beyond ±{Pct(BandTolerance)}. Measures: Defender, damage mitigated per "
-                 + "round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, damage per round "
-                 + "(HP taken off foes: no overkill, and temporary HP soaked doesn't count); Healer, healing and revives per round; "
+                 + "round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, target-normalized damage per round "
+                 + "(mean HP damage per victim within each member turn, summed over turns; off-turn effects belong to the owner’s latest turn; no overkill or temporary HP); Healer, healing and revives per round; "
                  + "Control, enemy turns denied per battle. A band with one class present sits on its own mean.");
         Line(md);
         Line(md, "| Level | Band | Measure | Class | Value | Band mean | Deviation | Flag |");
@@ -135,13 +135,13 @@ public static class Report
         Line(md);
         Line(md, "Every measure, by class and level:");
         Line(md);
-        Line(md, "| Class | Band | Level | Battles | Damage / round | Healing / round | Mitigated / round | Turns denied |");
-        Line(md, "|---|---|---:|---:|---:|---:|---:|---:|");
+        Line(md, "| Class | Band | Level | Battles | Damage / round | Target damage / round | Healing / round | Mitigated / round | Turns denied |");
+        Line(md, "|---|---|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var g in battles.SelectMany(b => b.PerClass.Select(p => (b.Level, Class: p.Key, Stats: p.Value)))
                      .GroupBy(x => (x.Class, x.Level))
                      .OrderBy(g => g.Key.Class, StringComparer.Ordinal).ThenBy(g => g.Key.Level))
             Line(md, $"| {g.Key.Class} | {SimRunner.BandOf(g.Key.Class)} | {g.Key.Level} | {g.Count()} | {Num(g.Average(x => x.Stats.DamagePerRound))} | "
-                     + $"{Num(g.Average(x => x.Stats.HealingPerRound))} | {Num(g.Average(x => x.Stats.MitigatedPerRound))} | "
+                     + $"{Num(g.Average(x => x.Stats.TargetDamagePerRound ?? x.Stats.DamagePerRound))} | {Num(g.Average(x => x.Stats.HealingPerRound))} | {Num(g.Average(x => x.Stats.MitigatedPerRound))} | "
                      + $"{Num(g.Average(x => x.Stats.TurnsDenied))} |");
         Line(md);
         RogueSetUps(md, battles);
@@ -332,7 +332,7 @@ public static class Report
     private static double Measure(RoleBand band, ClassStats s) => band switch
     {
         RoleBand.Defender => s.MitigatedPerRound,
-        RoleBand.Striker => s.DamagePerRound,
+        RoleBand.Striker => s.TargetDamagePerRound ?? s.DamagePerRound,
         RoleBand.Healer => s.HealingPerRound,
         RoleBand.Control => s.TurnsDenied,
         _ => 0,
@@ -341,7 +341,7 @@ public static class Report
     private static string MeasureName(RoleBand band) => band switch
     {
         RoleBand.Defender => "mitigated / round",
-        RoleBand.Striker => "damage / round",
+        RoleBand.Striker => "damage / target-turn",
         RoleBand.Healer => "healing / round",
         RoleBand.Control => "turns denied / battle",
         _ => "",

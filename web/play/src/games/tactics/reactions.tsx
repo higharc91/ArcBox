@@ -11,7 +11,7 @@ const OPPORTUNITY = [
 
 const DEFENCE = [
   { id: "ask", label: "Ask" },
-  { id: "miss", label: "Only when it turns a hit into a miss" },
+  { id: "miss", label: "Only when it changes the outcome" },
   { id: "never", label: "Never" },
 ] as const;
 
@@ -33,7 +33,7 @@ export function ReactionsSheet({ reactions, send }: { reactions?: ReactionPrefsD
             onPick={(id) => send("reactionPrefs", { opportunity: id })} />
           <Setting title="Shield and other defensive reactions" noun="defensive reactions" options={DEFENCE} value={reactions.defence}
             onPick={(id) => send("reactionPrefs", { defence: id })} />
-          <span class="tx-tip">Ask shows the prompt. The other choices answer for you at once, so the table never waits on a reaction.</span>
+          <span class="tx-tip">Ask shows the prompt. Outcome means a hit becomes a miss, or Uncanny Dodge prevents you being Downed. Other choices answer at once.</span>
         </section>
       ) : null}
     </div>

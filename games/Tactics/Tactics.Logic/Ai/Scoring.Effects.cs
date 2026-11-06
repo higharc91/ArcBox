@@ -321,24 +321,25 @@ internal sealed partial class Scorer
         var sheet = target.Sheet;
         var sources = Sources(target.Id, target.Pos);
         var mods = Modifiers.Sum(sources);
+        var stat = SaveBlock.StatFor(def, sheet, mods);
         var dc = def.Dc ?? (def.DcStat is { } dcStat ? st.Context.DcFor(dcStat) : st.Context.SaveDc);
-        var proficient = sheet.SaveProficiencies.Contains(def.Stat) || mods.SaveProficiencies?.Contains(def.Stat) == true;
+        var proficient = sheet.SaveProficiencies.Contains(stat) || mods.SaveProficiencies?.Contains(stat) == true;
         var origin = st.Ability?.Target.Area.Shape is AreaShape.Burst or AreaShape.Cross or AreaShape.Ring && st.Aim is { } aim
             ? aim
             : st.User.Pos;
-        var cover = def.Stat == Stat.Dex && !st.Neutral ? Cover(origin, target.Pos, ranged: false) : 0;
-        var bonus = Stats.Mod(sheet.Score(def.Stat)) + (proficient ? Stats.Proficiency(sheet.Level) : 0)
-                    + (mods.Saves?.GetValueOrDefault(def.Stat) ?? 0) + cover;
-        var advantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Advantage)
+        var cover = stat == Stat.Dex && !st.Neutral ? Cover(origin, target.Pos, ranged: false) : 0;
+        var bonus = Stats.Mod(sheet.Score(stat)) + (proficient ? Stats.Proficiency(sheet.Level) : 0)
+                    + (mods.Saves?.GetValueOrDefault(stat) ?? 0) + cover;
+        var advantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(stat) == Edge.Advantage)
                          + (target.Conditions.Any(c => c.Id == RulesPack.Helped.Id) ? 1 : 0);
-        var disadvantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Disadvantage);
+        var disadvantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(stat) == Edge.Disadvantage);
         // Careful Spell: the caster's allies pass (the engine's rule in SaveBlock).
         var careful = target.Id != st.User.Id && target.Sheet.Side == st.User.Sheet.Side && Metamagic.Has(st.User, Metamagic.Careful);
         var pFail = careful ? 0
-            : mods.AutoFailSaves?.Contains(def.Stat) == true ? 1
+            : mods.AutoFailSaves?.Contains(stat) == true ? 1
             : Odds.SaveFail(bonus, dc, Rolls.Combine(advantages, disadvantages));
 
-        var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;
+        var evades = stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;
         var failed = new RollResult([], 0, bonus, 0, dc, Success: false, Crit: false, Fumble: false);
         return (pFail, evades, failed);
     }

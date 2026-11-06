@@ -43,7 +43,7 @@ describe("the Reactions sheet (#113)", () => {
     const send = show("status", (d) => { d.reactions = { opportunity: "always", defence: "miss" }; });
     fireEvent.click(screen.getByRole("button", { name: "Reactions" }));
     expect(screen.getByRole("button", { name: "Always · opportunity attacks" }).getAttribute("aria-pressed")).toBe("true");
-    expect(screen.getByRole("button", { name: "Only when it turns a hit into a miss · defensive reactions" }).getAttribute("aria-pressed")).toBe("true");
+    expect(screen.getByRole("button", { name: "Only when it changes the outcome · defensive reactions" }).getAttribute("aria-pressed")).toBe("true");
 
     fireEvent.click(screen.getByRole("button", { name: "Never · opportunity attacks" }));
     expect(send).toHaveBeenLastCalledWith({ action: "reactionPrefs", data: { opportunity: "never" } });

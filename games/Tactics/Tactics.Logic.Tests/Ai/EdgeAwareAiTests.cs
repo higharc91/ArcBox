@@ -97,4 +97,18 @@ public sealed class EdgeAwareAiTests
         var (bossBattle, bossState) = EdgeChoice(Steadfast(gob), Hero, deepBehind: true);
         Assert.Equal(T(2, 1), EndTile(bossState, Plan(bossBattle, bossState, "gob")));
     }
+    [Fact]
+    public void The_AI_can_choose_prone_when_an_ally_can_exploit_it()
+    {
+        var prone = Base.Abilities[new("common.shove_prone")];
+        var battle = On(Flat).With(prone).WithConditions([.. Base.Conditions.Values])
+            .Enemy("gob", First(TestSheets.Goblin with { Move = 0,
+                Scores = TestSheets.Goblin.Scores.SetItem(Stat.Int, 2),
+                Weapon = TestSheets.Goblin.Weapon with { Damage = Dice.Parse("0"), Stat = Stat.Int, Finesse = false } }), T(2, 2))
+            .Enemy("ally", TestSheets.Goblin with { Move = 0, Weapon = TestSheets.Goblin.Weapon with { Damage = Dice.Parse("10d10") } }, T(1, 1))
+            .Party("kara", Hero with { MaxHp = 500 }, T(2, 1));
+        var plan = Plan(battle, battle.Start().State, "gob");
+        Assert.True(plan.Commands.OfType<Use>().Any(u => u.Ability == prone.Id), plan.Explain);
+    }
+
 }

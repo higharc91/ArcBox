@@ -8,7 +8,7 @@ public enum OpportunityPref { Ask, Always, Never }
 
 /// <summary>
 /// What a player wants done when a defensive reaction (Shield and its like: an ability aimed at the reactor itself) is on offer. JSON
-/// and phone: <c>ask</c>, <c>miss</c> (only when it turns the hit into a miss), <c>never</c>.
+/// and phone: <c>ask</c>, <c>miss</c> (only when it changes the outcome: a miss or Uncanny Dodge preventing Downing), <c>never</c>.
 /// </summary>
 public enum DefencePref { Ask, Miss, Never }
 

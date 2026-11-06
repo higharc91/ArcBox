@@ -84,6 +84,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var target = w.Unit(Target);
         if (target.Life is LifeState.Dead or LifeState.Out || (HookDepth == 0 && w.Unit(Source).Life != LifeState.Up))
             return;
+        if (Conditions.Active(w.Unit(Source), rules).Any(c => c.Def.Id.Value == "charmed" && c.From.Source == Target))
+            return;
         w.HookDepth = HookDepth;
         if (Roll is null)
             RollAttack(w, rules, target);
@@ -181,7 +183,17 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
         => $"{Label(def)} ({Body(def, level, rules)})";
 
     /// <summary>The roll's name in a tooltip: <c>"Dex save"</c>.</summary>
-    internal static string Label(SaveEffect def) => $"{def.Stat} save";
+    internal static string Label(SaveEffect def) => def.AlternativeStat is { } other
+        ? $"better of {def.Stat}/{other} save" : $"{def.Stat} save";
+
+    /// <summary>Choose the greater total save bonus, including proficiency and current modifiers; ties use Stat.</summary>
+    internal static Stat StatFor(SaveEffect def, UnitSheet sheet, StaticMods mods)
+    {
+        int Bonus(Stat stat) => Stats.Mod(sheet.Score(stat)) + (sheet.SaveProficiencies.Contains(stat)
+            || mods.SaveProficiencies?.Contains(stat) == true ? Stats.Proficiency(sheet.Level) : 0)
+            + (mods.Saves?.GetValueOrDefault(stat) ?? 0);
+        return def.AlternativeStat is { } other && Bonus(other) > Bonus(def.Stat) ? other : def.Stat;
+    }
 
     /// <summary>What the save does: the failure effects, the half damage and what a success does.</summary>
     internal static string Body(SaveEffect def, int level, RulesPack rules)
@@ -200,25 +212,26 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
     protected override void Run(SaveEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
-        var cover = def.Stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
+        var stat = StatFor(def, target.Sheet, Modifiers.For(ctx.W, target.Id, ctx.Rules));
+        var cover = stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
         // Careful Spell: the caster's allies succeed, and the event and their OnSave hooks see the success.
         var careful = target.Id != ctx.Source && target.Sheet.Side == ctx.SourceUnit.Sheet.Side && Metamagic.Has(ctx.SourceUnit, Metamagic.Careful);
-        var roll = Rolls.Save(ctx.W, target.Id, def.Stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover,
+        var roll = Rolls.Save(ctx.W, target.Id, stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover,
             ctx.Source, autoSucceed: careful);
         ctx.Last = roll;
         // Evasion: against a DEX save for half, none on a success and half on a failure.
-        var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;
+        var evades = stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;
 
         if (!roll.Success)
         {
-            ctx.Queue(def.OnFail, roll, halfDamage: evades, saveStat: def.Stat);
+            ctx.Queue(def.OnFail, roll, halfDamage: evades, saveStat: stat);
             return;
         }
 
         // Each Queue goes to the front, so queue the success branch first for the half damage to run before it.
-        ctx.Queue(def.OnSuccess, roll, saveStat: def.Stat);
+        ctx.Queue(def.OnSuccess, roll, saveStat: stat);
         if (def.HalfOnSuccess && !evades && !def.OnFail.IsDefault)
-            ctx.Queue([.. def.OnFail.OfType<DamageEffect>()], roll, halfDamage: true, saveStat: def.Stat);
+            ctx.Queue([.. def.OnFail.OfType<DamageEffect>()], roll, halfDamage: true, saveStat: stat);
     }
 
     /// <summary>Where a save's effect comes from, for cover: the aimed tile of a burst, cross or ring, else the source.</summary>

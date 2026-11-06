@@ -359,6 +359,15 @@ public static partial class Battle
                 return invalid;
         }
 
+        // Charm protects its source, including from aimed area effects. Helpful abilities remain legal.
+        var harmful = ability.Target.Kind == TargetKind.Enemy
+            || EffectTree.All(ability.Effects).Any(e => e is AttackEffect or DamageEffect or PushEffect or PullEffect
+                || e is ApplyEffect && ability.Target.Kind is not TargetKind.Ally and not TargetKind.DownedAlly);
+        var victims = affected;
+        if (harmful && Conditions.Active(user, w.Rules).Any(c => c.Def.Id.Value == "charmed"
+                && c.From.Source is { } charmer && victims.Contains(charmer)))
+            return new Rejection(RejectCode.InvalidTarget, "You can't harm your charmer.");
+
         if (self || everywhere)
             return null;
 
@@ -471,7 +480,7 @@ public static partial class Battle
     /// More steps than this in one command means the battle can't settle (e.g. every unit is incapacitated for good);
     /// <see cref="Settle"/> throws <see cref="RulesInvariantException"/> rather than loop forever.
     /// </summary>
-    private const int MaxStepsPerCommand = 100_000;
+    internal const int MaxStepsPerCommand = 100_000;
 
     /// <summary>
     /// Settles the queue; once it is empty, the hit numbering (<see cref="BattleState.NextResolution"/>,

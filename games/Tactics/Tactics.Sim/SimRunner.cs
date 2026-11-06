@@ -41,9 +41,10 @@ public sealed record SimBattle(string Encounter, int Level, ImmutableArray<strin
 /// events): HP taken off hostile units per round (no overkill, nor temporary HP); healing done (HP restored, and the HP of a revive that wasn't a
 /// heal) per round; damage mitigated per round (soaked: HP and temporary HP lost, no overkill; plus attacks against it
 /// that missed times the battle's mean soaked damage of a hostile hit on the party); and enemy turns denied (skipped while incapacitated by a condition it applied) in the
-/// battle.
+/// battle. TargetDamagePerRound sums each member-turn’s mean HP damage per damaged hostile, divided by rounds;
+/// off-turn damage belongs to the source’s latest turn. Null supports legacy report callers. Raw damage remains above.
 /// </summary>
-public sealed record ClassStats(double DamagePerRound, double HealingPerRound, double MitigatedPerRound, double TurnsDenied);
+public sealed record ClassStats(double DamagePerRound, double HealingPerRound, double MitigatedPerRound, double TurnsDenied, double? TargetDamagePerRound = null);
 
 /// <summary>The simulator's role bands (spec §5.6); <see cref="None"/> for a class in no band.</summary>
 public enum RoleBand { None, Defender, Striker, Healer, Control }

@@ -51,10 +51,21 @@ public sealed class RemoveBlock : EffectBlock<RemoveEffect>
 
     /// <inheritdoc />
     protected override string? Describe(RemoveEffect def, int level, RulesPack rules)
-        => $"ends {TooltipText.Condition(def.Condition, rules)} on target";
+        => $"ends {TooltipText.Condition(def.Condition, rules)} on target"
+           + (def.HalfMove ? "; requires movement and costs half Move (rounded up)" : "");
 
     /// <inheritdoc />
-    protected override void Run(RemoveEffect def, EffectContext ctx) => Conditions.Remove(ctx.W, ctx.TargetUnit(Key).Id, def.Condition);
+    protected override void Run(RemoveEffect def, EffectContext ctx)
+    {
+        var target = ctx.TargetUnit(Key);
+        if (def.HalfMove)
+        {
+            if (target.Economy.MoveLeft <= 0 || Modifiers.For(ctx.W, target.Id, ctx.Rules).CantMove)
+                return;
+            ctx.W.Set(target with { Economy = target.Economy with { MoveLeft = target.Economy.MoveLeft / 2 } });
+        }
+        Conditions.Remove(ctx.W, target.Id, def.Condition);
+    }
 }
 
 /// <summary>

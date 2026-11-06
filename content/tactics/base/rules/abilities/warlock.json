@@ -4,7 +4,7 @@
       "target": { "kind": "enemy", "range": 8, "los": true, "area": { "shape": "single" } },
       "effects": [ { "repeat": { "times": { "byLevel": { "1": 1, "5": 2, "7": 3 } } },
                      "effects": [ { "attack": { "kind": "spell" },
-                                    "onHit": [ { "damage": { "dice": { "byLevel": { "1": "2d8", "3": "1d10", "5": "1d12" } }, "type": "force" } } ] } ] } ],
+                                    "onHit": [ { "damage": { "dice": { "byLevel": { "1": "1d10", "5": "1d12" } }, "type": "force" } } ] } ] } ],
       "presentation": { "anim": "characters.point", "projectile": "projectiles.eldritch", "fx": "fx.force.eldritch" },
       "ai": { "tags": ["damage", "single"] } },
     { "id": "warlock.hex", "name": "Hex", "tier": 1,

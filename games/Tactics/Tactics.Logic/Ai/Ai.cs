@@ -79,7 +79,8 @@ public static class Ai
     /// Whether taking <paramref name="option"/> of <paramref name="offer"/> changes how the pending event turns out for the reactor: the
     /// question behind a player's "only when it matters" reaction preference (issue #113). Per reaction, so a rule is one more case
     /// here. Today that is a defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
-    /// on the reactor that turns this hit into a miss: the AC it adds lifts the AC above the roll's total (never against a natural 20).
+    /// on the reactor that turns this hit into a miss: the AC it adds lifts the AC above the roll's total (never against a natural 20),
+    /// or Uncanny Dodge when halving this hit prevents Downing (an isolated replay using copies of state and RNG).
     /// Judged on the offer's own cause, so each attack of a multi-attack is its own question. Rolls nothing. False for the pass, for an
     /// offer without a cause, and for any reaction with no rule yet.
     /// </summary>
@@ -90,12 +91,35 @@ public static class Ai
             || offer.Cause is not { Kind: ReactionTriggerKind.BeforeHit } trigger || trigger.Target != offer.Reactor
             || !s.Units.TryGetValue(offer.Reactor, out var reactor) || !s.Units.TryGetValue(trigger.Actor, out var actor))
             return false;
+        if (Scorer.All(ability.Effects).Any(e => e is HalveHitEffect))
+        {
+            var hit = s.Queue.OfType<AttackStep>().FirstOrDefault(step => step.Source == actor.Id
+                && step.Target == reactor.Id && step.Roll is not null && step.Resolution is not null);
+            return hit is not null && !SurvivesHit(s, hit, reactor.Id, false, rules)
+                && SurvivesHit(s, hit, reactor.Id, true, rules);
+        }
         return Defends(new Scorer(s, rules), ability, reactor, actor, trigger).Miss;
+    }
+
+    // Replay only this hit and its hooks on immutable copies. The battle's RNG and queued future attacks stay untouched.
+    private static bool SurvivesHit(BattleState state, AttackStep hit, UnitId defender, bool halve, RulesPack rules)
+    {
+        var w = new BattleWriter(state with { Pending = null, Queue = [hit] }, rules);
+        if (halve)
+            w.Set(w.Unit(defender) with { HalvedHit = hit.Resolution, HalvedHitDamage = 0 });
+        for (var steps = 0; steps < Battle.MaxStepsPerCommand && w.State.Pending is null; steps++)
+        {
+            if (w.PopFront() is not { } step)
+                return w.Unit(defender).Life == LifeState.Up;
+            w.HookDepth = 0;
+            step.Run(w, rules);
+        }
+        return false;
     }
 
     /// <summary>
     /// Whether <paramref name="ability"/> turns the hit <paramref name="trigger"/> describes into a miss, and how much of
-    /// its expected damage it prevents otherwise (its temporary HP).
+    /// its expected damage it prevents otherwise (temporary HP, resistance or halving).
     /// </summary>
     private static (bool Miss, double Prevented) Defends(Scorer scorer, AbilityDef ability, UnitState reactor, UnitState actor,
         ReactionTrigger trigger)
@@ -125,7 +149,8 @@ public static class Ai
             return (true, hit);
         var temp = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, reactor.Pos, neutral: false), reactor).TempHp;
         var resists = Scorer.All(ability.Effects).Any(e => e is StatModEffect { Mods.Resist.IsEmpty: false });
-        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists ? 0.5 * hit : 0.0));
+        var halves = Scorer.All(ability.Effects).Any(e => e is HalveHitEffect);
+        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists || halves ? 0.5 * hit : 0.0));
         return (false, prevented);
     }
 

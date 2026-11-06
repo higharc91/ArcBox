@@ -170,7 +170,8 @@ public sealed record ReactionStep(UnitId Reactor, ReactionChoice Choice) : Step
             ? rules.Abilities[RulesPack.CommonAttack.Id]
             : rules.Abilities[Choice.Ability ?? throw new InvalidOperationException($"Reaction '{Choice.Id}' names no ability.")];
         var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        var run = new RunEffectsStep(Reactor, target.Id, target.Pos, ability.Id, effects);
+        var hit = w.State.Queue.OfType<AttackStep>().FirstOrDefault(s => s.Target == Reactor && s.Roll is not null)?.Resolution;
+        var run = new RunEffectsStep(Reactor, target.Id, target.Pos, ability.Id, effects, Resolution: hit);
 
         if (Choice.Id != Reactions.Opportunity)
         {

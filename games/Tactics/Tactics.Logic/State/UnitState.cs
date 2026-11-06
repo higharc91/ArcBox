@@ -52,4 +52,12 @@ public sealed record UnitState(UnitId Id, UnitSheet Sheet, Controller Controller
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool Helper { get; init; }
+
+    /// <summary>The numbered attack hit halved by a defensive reaction; absent in older saves.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? HalvedHit { get; init; }
+
+    /// <summary>Damage seen for HalvedHit, for rounding once across all its damage blocks.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public int HalvedHitDamage { get; init; }
 }

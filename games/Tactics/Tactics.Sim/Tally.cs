@@ -36,6 +36,17 @@ internal sealed class Tally(RulesPack rules)
     {
         public string Class { get; } = cls;
         public double Damage { get; set; }
+        // Each own turn accumulates all its hits on each victim, including effects that tick off-turn.
+        public List<SortedDictionary<UnitId, double>> DamageTurns { get; } = [];
+        public void NewDamageTurn() => DamageTurns.Add([]);
+        public void RecordDamage(UnitId target, int lost)
+        {
+            if (lost <= 0) return;
+            if (DamageTurns.Count == 0) NewDamageTurn();
+            var turn = DamageTurns[^1];
+            turn[target] = turn.GetValueOrDefault(target) + lost;
+        }
+        public double TargetDamage => DamageTurns.Sum(t => t.Count == 0 ? 0 : t.Values.Average());
         public double Healing { get; set; }
         public double Taken { get; set; }
         public int MissedBy { get; set; }
@@ -105,6 +116,7 @@ internal sealed class Tally(RulesPack rules)
                 (_source, _hitTarget) = (null, null);
                 break;
             case TurnStarted t:
+                if (_members.TryGetValue(t.Unit, out var starter)) starter.NewDamageTurn();
                 (_source, _hitTarget) = (t.Unit, null);
                 break;
             case TurnSkipped skipped:
@@ -192,7 +204,10 @@ internal sealed class Tally(RulesPack rules)
                 _hostileHitDamage += lost + absorbed;
         }
         if (by is { } dealer && _members.TryGetValue(dealer, out var member) && Hostile(dealer, unit))
+        {
             member.Damage += lost;
+            member.RecordDamage(unit, lost);
+        }
     }
 
     private void EndTurn()
@@ -218,7 +233,8 @@ internal sealed class Tally(RulesPack rules)
                 DamagePerRound: g.Sum(m => m.Damage) / n / rounds,
                 HealingPerRound: g.Sum(m => m.Healing) / n / rounds,
                 MitigatedPerRound: g.Sum(m => m.Taken + m.MissedBy * perHit) / n / rounds,
-                TurnsDenied: (double)g.Sum(m => m.Denied) / n));
+                TurnsDenied: (double)g.Sum(m => m.Denied) / n,
+                TargetDamagePerRound: g.Sum(m => m.TargetDamage) / n / rounds));
         }));
     }
 

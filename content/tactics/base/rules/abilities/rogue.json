@@ -65,10 +65,10 @@
       "ai": { "tags": ["damage", "control", "single"] } },
     { "id": "rogue.uncanny_dodge", "name": "Uncanny Dodge", "tier": 0, "cost": { "reaction": 1 },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
-      "effects": [ { "tempHp": { "dice": "1d6", "bonus": ["level"] } } ],
+      "effects": [ { "halveHit": {} } ],
       "presentation": { "anim": "characters.dodge" },
       "ai": { "tags": ["defend", "self", "reactsTo:beforeHit"] },
-      "flavor": "When a blow is about to land, you roll with it and take far less of it." },
+      "flavor": "Use your Reaction to halve the triggering hit’s damage, including its riders, rounded down. Other hits are unaffected." },
 
     { "id": "shadow.shadowstep", "name": "Shadowstep", "tier": 0, "cost": { "bonus": 1, "resource": { "edge": 1 } },
       "target": { "kind": "empty_tile", "range": 6, "los": true, "area": { "shape": "single" } },
