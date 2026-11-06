@@ -59,7 +59,7 @@ public sealed class StoryTrackTests
     public void Camp_reflections_use_existing_portraits_and_the_completed_voice_batch()
     {
         var lines = AllLines().Where(l => l.Scene.Camp).ToArray();
-        Assert.Equal(8, lines.Length);
+        Assert.Equal(32, lines.Length);
         foreach (var (_, line) in lines)
         {
             Assert.NotNull(Clips.ForLine(line.Id));
