@@ -126,7 +126,8 @@ public enum HookKind
 /// actions to each turn's economy.</item>
 /// <item><see cref="MaxHp"/> adds to the sheet's maximum HP. It is applied once, by <see cref="SheetBuilder"/>, from the
 /// passives and injuries a character's sheet is built with (Cracked ribs: −5); a battle never re-reads it, so a condition
-/// can't carry it (the loader rejects that).</item>
+/// can't carry it (the loader rejects that). <see cref="MaxHpPercent"/> is the same for an injury, as a percentage of the max
+/// HP before injuries (Cracked ribs: −15), rounded down, at least 1 either way, so it scales with the level.</item>
 /// </list>
 /// </summary>
 public sealed record StaticMods(
@@ -153,7 +154,8 @@ public sealed record StaticMods(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedDictionary<Stat, Edge>? SaveEdges = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedSet<Stat>? SaveProficiencies = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Evasion = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int SpellDc = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int SpellDc = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHpPercent = 0)
 {
     /// <summary>No modifiers.</summary>
     public static StaticMods None { get; } = new();

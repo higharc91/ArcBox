@@ -288,6 +288,7 @@ public sealed partial class TacticsGame
     private static string JobName(string job) => job switch { "tend" => "Tend wounds", "rally" => "Rally", "cook" => "Cook", "watch" => "Keep watch", _ => "Rest easy" };
     private static string InjuryDetail(InjuryDef injury)
         => injury.Name + " · " + injury.Mends + " recovery" + (injury.Static.MaxHp != 0 ? $" · max HP {injury.Static.MaxHp}" : "")
+            + (injury.Static.MaxHpPercent != 0 ? $" · max HP {injury.Static.MaxHpPercent}%" : "")
             + (injury.Static.Move != 0 ? $" · movement {injury.Static.Move}" : "") + (injury.Static.Attack != 0 ? $" · attack {injury.Static.Attack}" : "")
             + (injury.Static.Initiative != 0 ? $" · initiative {injury.Static.Initiative}" : "")
             + (injury.Id.Value == "concussion" ? " · INT/WIS saves −1" : injury.Id.Value == "deep_cut" ? " · Bleeding at battle start" : injury.Id.Value == "shaken" ? " · Frightened at battle start" : "");

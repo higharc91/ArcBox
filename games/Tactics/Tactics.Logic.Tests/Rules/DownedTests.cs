@@ -249,6 +249,45 @@ public sealed class DownedTests
         Assert.Equal(2, seen.Count);
     }
 
+    private static BattleState HoldInjury(BattleState s, string unit, InjuryDef injury)
+        => s.Change(unit, u => u with { Sheet = u.Sheet with { Passives = u.Sheet.Passives.Add(RulesPack.InjuryPassiveId(injury.Id)) } });
+
+    [Fact]
+    public void A_unit_going_out_never_gains_an_injury_it_already_holds()
+    {
+        var ribs = new InjuryDef(new InjuryId("cracked_ribs"), "Cracked ribs", Weight: 9, new StaticMods());
+        var concussion = new InjuryDef(new InjuryId("concussion"), "Concussion", Weight: 1, new StaticMods());
+        for (ulong seed = 1; seed <= 12; seed++)
+        {
+            var battle = Build().WithInjuries(ribs, concussion);
+            var (state, _) = battle.Start(seed);
+            state = HoldInjury(Down(state, "kara", countdown: 1), "kara", ribs);   // held from an earlier battle
+            (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+
+            var (after, events) = battle.Apply(state, new EndTurn(U("brin")));
+
+            Assert.Contains(new UnitOut(U("kara"), concussion.Id), events);
+            Assert.Equal([new RecordedInjury(U("kara"), concussion.Id)], after.Injuries);
+        }
+    }
+
+    [Fact]
+    public void A_unit_that_holds_every_injury_gains_none()
+    {
+        var ribs = new InjuryDef(new InjuryId("cracked_ribs"), "Cracked ribs", Weight: 1, new StaticMods());
+        var concussion = new InjuryDef(new InjuryId("concussion"), "Concussion", Weight: 1, new StaticMods());
+        var battle = Build().WithInjuries(ribs, concussion);
+        var (state, _) = battle.Start(seed: 3);
+        state = HoldInjury(HoldInjury(Down(state, "kara", countdown: 1), "kara", ribs), "kara", concussion);
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+
+        var (after, events) = battle.Apply(state, new EndTurn(U("brin")));
+
+        Assert.Contains(new UnitOut(U("kara"), null), events);
+        Assert.Empty(after.Injuries);
+        Assert.Equal(LifeState.Out, after.Units[U("kara")].Life);
+    }
+
     [Fact]
     public void An_injury_can_carry_a_hook_on_its_owner()
     {

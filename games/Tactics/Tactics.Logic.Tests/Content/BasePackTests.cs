@@ -134,6 +134,36 @@ public sealed class BasePackTests
     }
 
     [Fact]
+    public void No_single_injury_removes_more_than_a_fifth_of_max_hp_at_any_level()
+    {
+        var rules = Rules;
+        foreach (var cls in rules.Classes.Values)
+            for (var level = 1; level <= 10; level++)
+            {
+                var healthy = SheetBuilder.DefaultCharacter(cls.Id, "human", cls.Id, null, level, rules);
+                var max = SheetBuilder.ForCharacter(healthy, rules).MaxHp;
+                foreach (var injury in rules.Injuries.Values)
+                {
+                    var hurt = SheetBuilder.ForCharacter(healthy with { Injuries = [injury.Id] }, rules).MaxHp;
+                    Assert.True((max - hurt) * 5 <= max, $"{injury.Id} takes {max - hurt} of a level {level} {cls.Id}'s {max} max HP");
+                }
+            }
+    }
+
+    [Fact]
+    public void Cracked_ribs_takes_15_percent_of_max_hp_rounded_down_and_at_least_1()
+    {
+        var rules = Rules;
+        foreach (var (level, cls) in new[] { (1, "wizard"), (1, "barbarian"), (5, "fighter"), (10, "barbarian") })
+        {
+            var healthy = SheetBuilder.DefaultCharacter(cls, "human", cls, null, level, rules);
+            var max = SheetBuilder.ForCharacter(healthy, rules).MaxHp;
+            var hurt = SheetBuilder.ForCharacter(healthy with { Injuries = [new InjuryId("cracked_ribs")] }, rules).MaxHp;
+            Assert.Equal(Math.Max(1, max * 15 / 100), max - hurt);
+        }
+    }
+
+    [Fact]
     public void Every_monster_builds()
     {
         var rules = Rules;

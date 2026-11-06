@@ -52,8 +52,8 @@
         "name": "Player1",
         "class": "fighter",
         "here": true,
-        "hp": 7,
-        "maxHp": 7,
+        "hp": 11,
+        "maxHp": 11,
         "resources": [
           {
             "name": "second_wind",
@@ -77,7 +77,7 @@
             "id": "cracked_ribs",
             "name": "Cracked ribs",
             "kind": "body",
-            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -15%"
           },
           {
             "id": "shaken",
@@ -94,8 +94,8 @@
         "name": "Player2",
         "class": "cleric",
         "here": true,
-        "hp": 5,
-        "maxHp": 5,
+        "hp": 9,
+        "maxHp": 9,
         "resources": [
           {
             "name": "devotion",
@@ -114,7 +114,7 @@
             "id": "cracked_ribs",
             "name": "Cracked ribs",
             "kind": "body",
-            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -15%"
           },
           {
             "id": "shaken",
@@ -131,8 +131,8 @@
         "name": "Player3",
         "class": "rogue",
         "here": true,
-        "hp": 5,
-        "maxHp": 5,
+        "hp": 9,
+        "maxHp": 9,
         "resources": [
           {
             "name": "edge",
@@ -151,7 +151,7 @@
             "id": "cracked_ribs",
             "name": "Cracked ribs",
             "kind": "body",
-            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -15%"
           },
           {
             "id": "shaken",
@@ -168,8 +168,8 @@
         "name": "Player4",
         "class": "wizard",
         "here": true,
-        "hp": 3,
-        "maxHp": 3,
+        "hp": 7,
+        "maxHp": 7,
         "resources": [
           {
             "name": "mana",
@@ -188,7 +188,7 @@
             "id": "cracked_ribs",
             "name": "Cracked ribs",
             "kind": "body",
-            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -5"
+            "detail": "Cracked ribs \u00B7 body recovery \u00B7 max HP -15%"
           },
           {
             "id": "shaken",

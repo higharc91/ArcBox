@@ -141,8 +141,12 @@ public sealed record CountdownTicked(UnitId Unit, int Left) : BattleEvent;
 /// <summary>A Downed unit got back up with <see cref="Hp"/> HP (healing, or Help at 1 HP).</summary>
 public sealed record Revived(UnitId Unit, int Hp) : BattleEvent;
 
-/// <summary>A Downed unit's countdown ran out: it has left the battle with <see cref="Injury"/>.</summary>
-public sealed record UnitOut(UnitId Unit, InjuryId Injury) : BattleEvent;
+/// <summary>
+/// A Downed unit's countdown ran out: it has left the battle with <see cref="Injury"/>, or with none (null) when it already
+/// held every injury on the battle table.
+/// </summary>
+public sealed record UnitOut(UnitId Unit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Injury) : BattleEvent;
 
 /// <summary>A unit that doesn't go Downed (an enemy, a summon) dropped to 0 HP and died.</summary>
 public sealed record Died(UnitId Unit) : BattleEvent;

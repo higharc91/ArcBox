@@ -126,6 +126,8 @@ internal static class TooltipText
             clauses.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
         if (mods.MaxHp != 0)
             clauses.Add($"{Signed(mods.MaxHp)} max HP");
+        if (mods.MaxHpPercent != 0)
+            clauses.Add($"{Signed(mods.MaxHpPercent)}% max HP");
         return clauses;
     }
 
@@ -156,6 +158,8 @@ internal static class TooltipText
             numbers.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
         if (mods.MaxHp != 0)
             numbers.Add($"{Signed(mods.MaxHp)} max HP");
+        if (mods.MaxHpPercent != 0)
+            numbers.Add($"{Signed(mods.MaxHpPercent)}% max HP");
 
         List<string> parts = [];
         if (numbers.Count > 0)
