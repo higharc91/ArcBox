@@ -14,6 +14,7 @@ public partial class FxDemoFeeder : Node
     private readonly Action<JsonElement> _send = _ => { };
     private readonly Screenshotter? _shots;
     private readonly IReadOnlyList<FxShowcaseSample> _samples = [];
+    private readonly double[] _tails = [];
     private readonly List<object> _measurements = [];
     private readonly List<double> _frameMs = [];
     private int _sample = -1;
@@ -29,10 +30,11 @@ public partial class FxDemoFeeder : Node
     private bool _finished;
 
     public FxDemoFeeder() { }
-    public FxDemoFeeder(Action<JsonElement> send, Screenshotter? shots, IReadOnlyList<FxShowcaseSample> samples)
+    public FxDemoFeeder(Action<JsonElement> send, Screenshotter? shots, IReadOnlyList<FxShowcaseSample> samples, FxArt? art = null)
     {
         (_send, _shots, _samples) = (send, shots, samples);
         if (samples.Count == 0) throw new ArgumentException("The showcase needs samples.", nameof(samples));
+        _tails = [.. samples.Select(s => art is null ? .85 : FxShowcase.TailFor(s, art))];
     }
     public void Signal(string kind, object payload)
     {
@@ -40,7 +42,7 @@ public partial class FxDemoFeeder : Node
         var seq = JsonSerializer.SerializeToElement(payload, ArcJson.Options).GetProperty("seq").GetInt32();
         if (seq != _sample + 1) return;
         _shownAt = _clock;
-        _endAt = _clock + 0.85;
+        _endAt = _clock + _tails[_sample];
     }
     private void Send(BattleView battle, FxShowcaseSample sample)
         => _send(JsonSerializer.SerializeToElement(new TacticsHostView("Battle", sample.Name, null, sample.Level, [], null, battle, null, null), ArcJson.Options));
@@ -59,7 +61,8 @@ public partial class FxDemoFeeder : Node
                 var ordered = _frameMs.Order().ToArray();
                 var sample = _samples[_sample];
                 _measurements.Add(new { sample.Id, sample.Name, sample.Description, sample.Level, Seconds = _shownAt - _began,
-                    Frames = _frame, FrameMedianMs = ordered.Length == 0 ? 0 : ordered[ordered.Length / 2] });
+                    Frames = _frame, FrameMedianMs = ordered.Length == 0 ? 0 : ordered[ordered.Length / 2],
+                    TextureBytes = (long)Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed) });
             }
             if (++_sample >= _samples.Count)
             {

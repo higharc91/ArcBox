@@ -11,6 +11,66 @@ namespace Tactics.Presentation.Tests.Beats;
 public sealed class FxShowcaseTests
 {
     [Fact]
+    public void A_ranged_class_gets_a_distant_real_target_and_an_ordinary_arrow()
+    {
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var sample = FxShowcase.Sample("ranger", RulesPack.CommonAttack.Id, 1, rules, 1);
+        var hero = sample.Before.Units.First(u => u.Id.Value == "hero1");
+        var used = sample.After.Beats.Single().Events.OfType<AbilityUsed>().First();
+        var target = sample.Before.Units.First(u => u.Id == used.Target.Unit);
+        Assert.True(Reach.Distance(hero.At, target.At) > 1);
+        var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, FxArt.Load(Pack.Root));
+        var arrow = Assert.Single(script.Cues.OfType<FlightCue>());
+        Assert.Null(arrow.Art.Emission);
+    }
+
+    [Fact]
+    public void Inventory_includes_all_class_and_subclass_choices_and_uses_the_shared_tiers_and_real_art_keys()
+    {
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var art = FxArt.Load(Pack.Root);
+        foreach (var cls in rules.Classes.Values)
+        {
+            var rows = FxShowcase.Inventory(cls.Id, rules);
+            var features = cls.Features.Values.SelectMany(f => f).Concat(cls.Subclasses.SelectMany(s => s.Features.Values.SelectMany(f => f)));
+            var expected = features.SelectMany(f => (f.From.IsDefault ? [] : f.From)
+                .Concat(f.Ability is { } a ? [a.Value] : []).Concat(f.Passive is { } p ? [p] : [])).Distinct().Order();
+            Assert.Equal(expected, rows.Select(r => r.Id).Distinct().Order());
+            foreach (var row in rows.Where(r => r.Kind == "ability"))
+            {
+                Assert.Equal(BattleCutIn.Tier(rules.Abilities[new(row.Id)]).ToString().ToLowerInvariant(), row.CutIn);
+                if (row.Presentation?.Fx is { } effect) Assert.NotNull(art.Clip(effect));
+                if (row.Presentation?.Projectile is { } shot) Assert.NotNull(art.Shot(shot));
+            }
+        }
+    }
+
+    [Fact]
+    public void The_pilot_class_reel_plays_every_ability_and_visible_proc_including_real_defensive_reactions()
+    {
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var inventory = FxShowcase.Inventory("wizard", rules);
+        var samples = FxShowcase.ForClass("wizard", rules);
+        Assert.Equal(inventory.Count(r => r.Kind != "static") + 1, samples.Length);
+        foreach (var feature in inventory.Where(r => r.Kind != "static"))
+        {
+            var sample = Assert.Single(samples.Where(s => s.Id == feature.Id));
+            var events = sample.After.Beats.SelectMany(b => b.Events);
+            if (feature.Kind == "proc") Assert.Contains(events, e => e is PassiveTriggered p && p.Passive == feature.Id);
+            else Assert.Contains(events, e => e is AbilityUsed a && a.Ability.Value == feature.Id);
+            Assert.Equal(feature.Level, sample.Level);
+        }
+        var art = FxArt.Load(Pack.Root);
+        Assert.Contains(samples, sample => FxShowcase.TailFor(sample, art) > .85);
+        foreach (var sample in samples)
+        {
+            var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, art);
+            Assert.All(script.Cues, cue => Assert.True(cue.At + cue.Length <= script.Length + FxShowcase.TailFor(sample, art)));
+        }
+        Assert.All(FxShowcase.StepZero(Pack.Root), sample => Assert.Equal(.85, FxShowcase.TailFor(sample, art)));
+    }
+
+    [Fact]
     public void Close_up_plays_the_real_cast_frames_without_releasing_the_spell_or_its_light_early()
     {
         var sample = FxShowcase.StepZero(Pack.Root)[3];
