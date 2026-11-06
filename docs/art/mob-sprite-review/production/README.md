@@ -1,0 +1,30 @@
+# Approved first batch: integrated
+
+Goblin cutthroat, orc brute and red drake are registered in the game on `mob-sprite-refresh`. Existing combat keys are retained. The red drake keeps its original `beasts.drake` alias and remains grounded by the rules. Other mob roles, named designs and drake color variants retain their own art; [refresh-status.json](refresh-status.json) tracks the remaining 26 older combat looks.
+
+- [Standalone review](index.html): all eight directions and all five actions, with embedded battle/overworld evidence. Animation playback uses the shipped manifest's frame sequence and cadence.
+- [Combined animation GIF](first-batch-motion.gif) / [MP4](first-batch-motion.mp4): walking and attacks in four representative directions, at the shipped action cadence with brief pauses between attacks.
+- [All-facing idle](idle-all-facings.png) and [attack](attack-all-facings.png) contact sheets.
+- [Battle](battle.png), [clear overworld lineup](overworld-lineup.png), and [town lighting/occlusion](overworld-lighting-occlusion.png). These use the actual Godot TV renderers, with party/newer-kobold references. They are development stand-ins for visual review, not new town enemy spawns.
+
+The three sets contain 336 selected authored poses: four quiet-idle frames, four walk keys, four attack source poses, one hurt pose and one collapsed pose for each of eight facings. Attack playback includes recovery and deliberate anticipation/peak holds. The drake visibly unfolds both wings during attack/special and folds them during idle/walk. Hurt/down are single poses, not animated transitions. Goblin/orc dialogue portraits include all six expression roles; battle HUD heads crop the new atlas art. Sources, generation receipts, corrections and reproducible technical export scripts are in `tools/tactics-assets/imagegen/mob-refresh-2026-11-06/production/`.
+
+## Verification
+
+- Final affected-class run: **116 passed, zero failures** ([log](checks/final-focused.txt)). Covers atlas addressing/clipping, real facing selection, ground contact, world scale, visible drake wing spread, source silhouette connectivity, non-static motion, new HUD crops/expression roles and the corrected battle review placement.
+- Full solution run: **7,207 passed / 5 failed**, no skips ([log](checks/full-solution.txt)). Two branch-related failures were the old goblin portrait expectation and the initial orc review position on a blocked tile. Both are corrected and included in the green final 116-test run. The other three are existing story-count failures (590 vs 614 speakers, 921 vs 945 lines, 8 vs 32 camp reflections), previously reproduced on unchanged main in [the ambience report](../../../superpowers/reports/2026-11-06-ashen-ford-ambience/README.md). The full solution was not repeated after those focused corrections.
+- [Host build](checks/host-build.txt): zero warnings/errors. Godot imported and loaded the new assets through the actual [battle](checks/battle.txt) and [overworld](checks/overworld.txt) paths. In the town, both foreground occlusion and warm/cool scene lighting apply to the new art.
+- [Browser check](browser-validation.json): all embedded scenes decode, every action renders, no page errors, and no horizontal overflow at 390px.
+- [Padding check](checks/drake-padding.json): all 112 drake poses remain pixel-identical after trimming the initial 256px authoring frame to 192px; decoded atlas allocation falls from 32 to 18 MiB. [Runtime asset hashes](checks/runtime-assets.json).
+
+These are visual and functional checks in a software-rendered cloud environment, not a hardware performance benchmark. No combat balance, abilities, encounter spawns, music or player outfit art changed.
+
+Reproduce the scene checks with the host:
+
+```sh
+# Godot arguments after --
+--tactics-demo=river_crossing:mob-refresh --shots=/absolute/battle-shots --quit-after=12
+--world-demo=ashen_ford:mob-refresh '--world-looks=road@37,61@37,61;lineup@52,60@52,60' '--world-route=37,61;39,61' --shots=/absolute/world-shots --quit-after=30
+```
+
+No PR has been opened for this batch.

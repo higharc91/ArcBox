@@ -18,3 +18,7 @@ python tools/tactics-assets/dev/review_mob_sprites.py
 ```
 
 The Python tool calls `tools/tactics-mob-review` to resolve the production sprite metadata, inspects alpha bounds, then renders the unchanged source atlases with Chromium. It does not redraw, recolour or resample source artwork. No game files are changed by this baseline review.
+
+## First batch integrated
+
+The original 98-card sheet and inventory above are the pre-refresh baseline. [Current first-batch animation review](production/index.html) shows the integrated goblin cutthroat, orc brute and red drake, including all eight facings, world-scale loops and real renderer screenshots. These replace two of the original 28 older combat looks plus the dedicated red drake; 26 older combat looks remain. Other goblin roles and drake color variants retain their own designs until their pass. [Tracker](production/refresh-status.json).

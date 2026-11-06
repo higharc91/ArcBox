@@ -1,0 +1,92 @@
+[
+  {
+    "file": "content/tactics/base/creatures/mob_refresh_goblin.png",
+    "width": 1024,
+    "height": 2048,
+    "sha256": "91f030393ecf6ce46bafb697a1ec1907055951e7370ea17b2a9f37fef40c2f94"
+  },
+  {
+    "file": "content/tactics/base/creatures/mob_refresh_drake.png",
+    "width": 1536,
+    "height": 3072,
+    "sha256": "de25f8c2d64bfdfdaff6fd1b0c5ae402299c67911bb86489f449e699cd00bc8b"
+  },
+  {
+    "file": "content/tactics/base/creatures/mob_refresh_orc.png",
+    "width": 1536,
+    "height": 3072,
+    "sha256": "192782a44114701f92470281d91f6904e245b909080d2efa7fb6b6ddc2b3457c"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_hurt.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "5a3f56611cb7619103160950447c806140b06c189d5e23843b2d978096e057c6"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_angry.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "6956c202a74b3fcb76dc2ab223e4335a8a36411b061188d9b309626857a55a56"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_surprised.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "f0efaa5f680760856c3c41cbeddc271ee84df05bce2817a384ab2950d9f674a2"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_happy.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "a1189cbe7aa400cac033a3747f97447883bd714bbd336b23b034e5e380f042fc"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_idle.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "34f978afb3109ac65f07cf1ee14509a94979cebdb3e08697c67c3e69f0d767a8"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_sad.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "984bcf61d9e8859febd65a3ea27cbee8922907989872703920837f6bad2bfe87"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_hurt.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "4195a7633fc4e4f84ba77501276efd2891e3bcb00c01535b2d0f6a4e0e88c34c"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_happy.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "799cb81e292bbca50ba840ae2e62e21c014023c8d0044eb79ff8996cf2878daa"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_surprised.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "3f32ade7f3bce65110d48d73be0d59826de4d252bcaeef7b0b78eb6c21b7fca0"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_sad.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "e6467d4fe6a19f9a535c0608d9f0d1d6183ba0e8e41ed5617e4ac89df440cba6"
+  },
+  {
+    "file": "content/tactics/base/portraits/goblin_cutthroat_refresh_angry.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "b204e27649bc2fa331fcd70ca6f1eca98e5194a01c200cf0022ae423b4bb597c"
+  },
+  {
+    "file": "content/tactics/base/portraits/orc_brute_refresh_idle.png",
+    "width": 40,
+    "height": 40,
+    "sha256": "fe01f275c40474c3ed5a9bef0c9cf91a9bffaa1057ad3a5ef0619873455862a7"
+  }
+]

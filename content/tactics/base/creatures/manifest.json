@@ -117,7 +117,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_goat": {
       "file": "fauna_goat.png",
@@ -224,7 +224,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_fox": {
       "file": "fauna_fox.png",
@@ -331,7 +331,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_duck": {
       "file": "fauna_duck.png",
@@ -438,7 +438,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_crow": {
       "file": "fauna_crow.png",
@@ -556,7 +556,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_dog": {
       "file": "fauna_dog.png",
@@ -663,7 +663,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_sheep": {
       "file": "fauna_sheep.png",
@@ -770,7 +770,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "wolf_grey": {
       "file": "wolf_grey.png",
@@ -3058,26 +3058,27 @@
       "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
     },
     "drake_red": {
-      "file": "drake_red.png",
+      "file": "mob_refresh_drake.png",
+      "family": "drake",
+      "variant": "red",
       "frame": {
-        "width": 246,
-        "height": 223,
+        "width": 192,
+        "height": 192,
         "anchor": [
-          116,
-          213
+          96,
+          171
         ]
       },
       "portrait": [
-        26,
-        36,
-        180,
-        180
+        64,
+        77,
+        64,
+        64
       ],
-      "headTop": 38,
-      "pixelScale": 0.36,
-      "unlit": false,
+      "headTop": 76,
+      "pixelScale": 0.32,
       "columns": 8,
-      "rowsPerDirection": 3,
+      "rowsPerDirection": 2,
       "directions": [
         "south",
         "south-west",
@@ -3091,39 +3092,39 @@
       "facingOffsets": {
         "south": [
           0,
-          1
+          0
         ],
         "south-west": [
           0,
-          6
+          0
         ],
         "west": [
           0,
-          22
+          0
         ],
         "north-west": [
           0,
-          22
+          0
         ],
         "north": [
           0,
-          8
+          0
         ],
         "north-east": [
           0,
-          5
+          0
         ],
         "east": [
           0,
-          6
+          0
         ],
         "south-east": [
           0,
-          1
+          0
         ]
       },
-      "footprintWidth": 85.67999999999999,
-      "footprintHeight": 75.96,
+      "footprintWidth": 32.64,
+      "footprintHeight": 30.4,
       "keys": [
         "beasts.drake.red",
         "beasts.drake"
@@ -3136,7 +3137,7 @@
             2,
             3
           ],
-          "fps": 5.555555555555555,
+          "fps": 3,
           "loop": true
         },
         "walk": {
@@ -3144,55 +3145,51 @@
             4,
             5,
             6,
-            7,
-            8,
-            9,
-            10,
-            11
+            7
           ],
-          "fps": 9.090909090909092,
+          "fps": 6,
           "loop": true
         },
         "attack": {
           "frames": [
-            12,
-            13,
-            14,
-            15,
+            8,
+            9,
+            10,
+            10,
+            9,
             0
           ],
-          "fps": 10,
-          "loop": false
-        },
-        "special": {
-          "frames": [
-            12,
-            13,
-            14,
-            15,
-            0
-          ],
-          "fps": 9,
+          "fps": 8,
           "loop": false
         },
         "hurt": {
           "frames": [
-            16
+            12
           ],
-          "fps": 10,
+          "fps": 8,
           "loop": false
         },
         "down": {
           "frames": [
-            17
+            13
           ],
           "fps": 1,
           "loop": false
+        },
+        "special": {
+          "frames": [
+            8,
+            9,
+            10,
+            10,
+            9,
+            0
+          ],
+          "fps": 6,
+          "loop": false
         }
       },
-      "family": "drake",
-      "variant": "red",
-      "provenance": "Scenario concepts, PixelLab authored rotations and motion; original game palette roles retained."
+      "provenance": "Owner-approved Scenario concept and OpenAI-authored pixel frames; source, extraction, facing corrections and review in tools/tactics-assets/imagegen/mob-refresh-2026-11-06/production."
     },
     "drake_green": {
       "file": "drake_green.png",
@@ -7803,6 +7800,247 @@
         }
       },
       "provenance": "Generic townsfolk review: eight real facings, generated idle/walk source pixels; owner finished-set/TV approval pending."
+    },
+    "mob_refresh_goblin": {
+      "file": "mob_refresh_goblin.png",
+      "family": "goblin",
+      "variant": "cutthroat",
+      "frame": {
+        "width": 128,
+        "height": 128,
+        "anchor": [
+          64,
+          111
+        ]
+      },
+      "portrait": [
+        40,
+        30,
+        48,
+        48
+      ],
+      "headTop": 29,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 18.24,
+      "footprintHeight": 26.56,
+      "keys": [
+        "characters.goblin_cutthroat"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Owner-approved Scenario concept and OpenAI-authored pixel frames; source, extraction, facing corrections and review in tools/tactics-assets/imagegen/mob-refresh-2026-11-06/production."
+    },
+    "mob_refresh_orc": {
+      "file": "mob_refresh_orc.png",
+      "family": "orc",
+      "variant": "brute",
+      "frame": {
+        "width": 192,
+        "height": 192,
+        "anchor": [
+          96,
+          171
+        ]
+      },
+      "portrait": [
+        72,
+        38,
+        48,
+        48
+      ],
+      "headTop": 35,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 32.0,
+      "footprintHeight": 43.52,
+      "keys": [
+        "characters.orc_brute"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Owner-approved Scenario concept and OpenAI-authored pixel frames; source, extraction, facing corrections and review in tools/tactics-assets/imagegen/mob-refresh-2026-11-06/production."
     }
   },
   "legacyDistinctForms": [

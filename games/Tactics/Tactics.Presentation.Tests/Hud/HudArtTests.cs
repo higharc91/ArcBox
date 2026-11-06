@@ -89,7 +89,6 @@ public sealed class HudArtTests
     }
 
     [Theory]
-    [InlineData("characters.goblin_cutthroat", UnitTone.Enemy, "portraits/goblin_cutthroat_idle.png", "portraits/backdrops/enemy.png")]
     [InlineData("characters.farmer", UnitTone.Neutral, "portraits/generic_farmer_a_idle.png", "portraits/backdrops/neutral.png")]
     public void A_character_has_its_portrait_on_its_sides_backdrop(string sprite, UnitTone tone, string path, string backdrop)
     {
@@ -98,6 +97,36 @@ public sealed class HudArtTests
         Assert.Equal(path, portrait.Path);
         Assert.Equal(backdrop, portrait.Backdrop);
         Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
+    }
+
+    [Theory]
+    [InlineData("characters.goblin_cutthroat", "goblin", 48)]
+    [InlineData("characters.orc_brute", "orc", 48)]
+    [InlineData("beasts.drake.red", "drake", 64)]
+    public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
+    {
+        var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
+        Assert.Equal($"creatures/mob_refresh_{file}.png", portrait.Path);
+        Assert.Equal(Units.Value.Sprite(key)!.PortraitSource, portrait.Source);
+        Assert.Equal(size, portrait.Source.Width);
+        Assert.Equal(size, portrait.Source.Height);
+        Assert.Equal("portraits/backdrops/enemy.png", portrait.Backdrop);
+    }
+
+    [Theory]
+    [InlineData("goblin_cutthroat")]
+    [InlineData("orc_brute")]
+    public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
+    {
+        var files = new HashSet<string>();
+        foreach (var mood in new[] { "idle", "hurt", "happy", "angry", "sad", "surprised" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "villain")!;
+            Assert.Equal($"portraits/{preset}_refresh_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            files.Add(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(Path.Combine(Pack.Root, face.Path)))));
+        }
+        Assert.Equal(6, files.Count);
     }
 
     [Theory]

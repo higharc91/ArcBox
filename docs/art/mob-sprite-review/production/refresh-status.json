@@ -1,0 +1,599 @@
+{
+  "scope": "Combat roster first; first three owner-approved designs integrated. Baseline numbers remain stable.",
+  "integratedKeys": [
+    "beasts.drake.red",
+    "characters.goblin_cutthroat",
+    "characters.orc_brute"
+  ],
+  "remainingOlderCombatLooks": 26,
+  "looks": [
+    {
+      "baselineNumber": 1,
+      "name": "Air Elemental",
+      "key": "bosses.air_elemental.gale",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 2,
+      "name": "Red Dragon",
+      "key": "bosses.dragon.red",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 3,
+      "name": "Earth Elemental",
+      "key": "bosses.earth_elemental.stone",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 4,
+      "name": "Fire Elemental",
+      "key": "bosses.fire_elemental.ember",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 5,
+      "name": "Stone Golem",
+      "key": "bosses.golem.granite",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 6,
+      "name": "Hunting Hound",
+      "key": "bosses.hound.tan",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 7,
+      "name": "Bound Imp",
+      "key": "bosses.imp.crimson",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 8,
+      "name": "Mimic",
+      "key": "bosses.mimic.oak",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 9,
+      "name": "Grove Sapling",
+      "key": "bosses.sapling.spring",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 10,
+      "name": "Troll",
+      "key": "bosses.troll.troll",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 11,
+      "name": "Water Elemental",
+      "key": "bosses.water_elemental.sea",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 12,
+      "name": "Wraith",
+      "key": "bosses.wraith.wraith",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 13,
+      "name": "Bandit / Roadside Tough",
+      "key": "characters.bandit",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 14,
+      "name": "Black Knight / Ser Halvard",
+      "key": "characters.black_knight",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 15,
+      "name": "Ember Hierophant / Maren Sorrel",
+      "key": "characters.cult_leader",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 16,
+      "name": "Cultist",
+      "key": "characters.cultist",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 17,
+      "name": "Drow Blade",
+      "key": "characters.dark_elf",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 18,
+      "name": "Goblin Archer",
+      "key": "characters.goblin_archer",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 19,
+      "name": "Goblin",
+      "key": "characters.goblin_cutthroat",
+      "status": "integrated first batch"
+    },
+    {
+      "baselineNumber": 20,
+      "name": "Goblin Shaman / Skarrow Stormcaller",
+      "key": "characters.goblin_shaman",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 21,
+      "name": "Goblin Boss / Vorga",
+      "key": "characters.goblin_spear",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 22,
+      "name": "Hobgoblin",
+      "key": "characters.hobgoblin",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 23,
+      "name": "Lich",
+      "key": "characters.lich",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 24,
+      "name": "Ivo Rime / Necromancer",
+      "key": "characters.necromancer",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 25,
+      "name": "Orc Brute",
+      "key": "characters.orc_brute",
+      "status": "integrated first batch"
+    },
+    {
+      "baselineNumber": 26,
+      "name": "Skeleton",
+      "key": "characters.skeleton",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 27,
+      "name": "Skeleton Archer",
+      "key": "characters.skeleton_archer",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 28,
+      "name": "Zombie",
+      "key": "characters.zombie",
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 29,
+      "name": "Giant Bat / Hollow Bat",
+      "key": "beasts.bat.dusk",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 30,
+      "name": "Bear / Elder Bear",
+      "key": "beasts.bear.wildshape",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 31,
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 32,
+      "name": "Drake",
+      "key": "beasts.drake.red",
+      "status": "integrated first batch"
+    },
+    {
+      "baselineNumber": 33,
+      "name": "River Slime / Slime",
+      "key": "beasts.slime.green",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 34,
+      "name": "Giant Spider",
+      "key": "beasts.spider.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 35,
+      "name": "Dire Wolf / Wolf",
+      "key": "beasts.wolf.wildshape",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 36,
+      "name": "Bandit Captain",
+      "key": "characters.bandit_captain",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 37,
+      "name": "Kobold / Kobold Scout",
+      "key": "characters.kobold",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 38,
+      "name": "Kobold Scout Slinger / Kobold Slinger",
+      "key": "characters.kobold_slinger",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 39,
+      "name": "Mother Skarrow",
+      "key": "characters.mother_skarrow",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 40,
+      "name": "Ashmaw",
+      "key": "monsters.ashmaw",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 41,
+      "name": "Grisk",
+      "key": "monsters.kobold_foreman",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 42,
+      "name": "Bat Vampire",
+      "key": "beasts.bat.vampire",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 43,
+      "name": "Bear Black",
+      "key": "beasts.bear.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 44,
+      "name": "Bear Brown",
+      "key": "beasts.bear.brown",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 45,
+      "name": "Bear Polar",
+      "key": "beasts.bear.polar",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 46,
+      "name": "Bear Undead",
+      "key": "beasts.bear.undead",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 47,
+      "name": "Boar Dark",
+      "key": "beasts.boar.dark",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 48,
+      "name": "Drake Blue",
+      "key": "beasts.drake.blue",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 49,
+      "name": "Drake Green",
+      "key": "beasts.drake.green",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 50,
+      "name": "Slime Blue",
+      "key": "beasts.slime.blue",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 51,
+      "name": "Slime Crystal",
+      "key": "beasts.slime.crystal",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 52,
+      "name": "Slime Magma",
+      "key": "beasts.slime.magma",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 53,
+      "name": "Spider Phase",
+      "key": "beasts.spider.phase",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 54,
+      "name": "Spider Red",
+      "key": "beasts.spider.red",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 55,
+      "name": "Wolf Alpha",
+      "key": "beasts.wolf.alpha",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 56,
+      "name": "Wolf Dire",
+      "key": "beasts.wolf.dire",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 57,
+      "name": "Wolf Frost",
+      "key": "beasts.wolf.frost",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 58,
+      "name": "Wolf Grey",
+      "key": "beasts.wolf.grey",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 59,
+      "name": "Wolf Timber",
+      "key": "beasts.wolf.timber",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 60,
+      "name": "Crab Deep",
+      "key": "bestiary.crab.deep",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 61,
+      "name": "Crab Shore",
+      "key": "bestiary.crab.shore",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 62,
+      "name": "Gargoyle Granite",
+      "key": "bestiary.gargoyle.granite",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 63,
+      "name": "Gargoyle Obsidian",
+      "key": "bestiary.gargoyle.obsidian",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 64,
+      "name": "Harpy Dusk",
+      "key": "bestiary.harpy.dusk",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 65,
+      "name": "Harpy Storm",
+      "key": "bestiary.harpy.storm",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 66,
+      "name": "Hookbeak Brown",
+      "key": "bestiary.hookbeak.brown",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 67,
+      "name": "Hookbeak Snow",
+      "key": "bestiary.hookbeak.snow",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 68,
+      "name": "Scorpion Black",
+      "key": "bestiary.scorpion.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 69,
+      "name": "Scorpion Ember",
+      "key": "bestiary.scorpion.ember",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 70,
+      "name": "Scorpion Sand",
+      "key": "bestiary.scorpion.sand",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 71,
+      "name": "Warg Ash",
+      "key": "bestiary.warg.ash",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 72,
+      "name": "Warg Black",
+      "key": "bestiary.warg.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 73,
+      "name": "Warg Rider",
+      "key": "bestiary.warg.rider",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 74,
+      "name": "Wisp Ember",
+      "key": "bestiary.wisp.ember",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 75,
+      "name": "Wisp Marsh",
+      "key": "bestiary.wisp.marsh",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 76,
+      "name": "Air Elemental Storm",
+      "key": "bosses.air_elemental.storm",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 77,
+      "name": "Dragon Black",
+      "key": "bosses.dragon.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 78,
+      "name": "Dragon Blue",
+      "key": "bosses.dragon.blue",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 79,
+      "name": "Dragon Gold",
+      "key": "bosses.dragon.gold",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 80,
+      "name": "Dragon Green",
+      "key": "bosses.dragon.green",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 81,
+      "name": "Earth Elemental Magma",
+      "key": "bosses.earth_elemental.magma",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 82,
+      "name": "Fire Elemental Azure",
+      "key": "bosses.fire_elemental.azure",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 83,
+      "name": "Fire Elemental Radiant",
+      "key": "bosses.fire_elemental.radiant",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 84,
+      "name": "Fire Elemental Shadow",
+      "key": "bosses.fire_elemental.shadow",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 85,
+      "name": "Golem Basalt",
+      "key": "bosses.golem.basalt",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 86,
+      "name": "Golem Crystal",
+      "key": "bosses.golem.crystal",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 87,
+      "name": "Golem Temple",
+      "key": "bosses.golem.temple",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 88,
+      "name": "Hound Black",
+      "key": "bosses.hound.black",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 89,
+      "name": "Hound Grey",
+      "key": "bosses.hound.grey",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 90,
+      "name": "Imp Violet",
+      "key": "bosses.imp.violet",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 91,
+      "name": "Mimic Ironbound",
+      "key": "bosses.mimic.ironbound",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 92,
+      "name": "Sapling Autumn",
+      "key": "bosses.sapling.autumn",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 93,
+      "name": "Sapling Blossom",
+      "key": "bosses.sapling.blossom",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 94,
+      "name": "Troll Frost",
+      "key": "bosses.troll.frost",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 95,
+      "name": "Troll Ogre",
+      "key": "bosses.troll.ogre",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 96,
+      "name": "Water Elemental Swamp",
+      "key": "bosses.water_elemental.swamp",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 97,
+      "name": "Wraith Shade",
+      "key": "bosses.wraith.shade",
+      "status": "existing art; outside first batch"
+    },
+    {
+      "baselineNumber": 98,
+      "name": "Wraith Spectre",
+      "key": "bosses.wraith.spectre",
+      "status": "existing art; outside first batch"
+    }
+  ]
+}

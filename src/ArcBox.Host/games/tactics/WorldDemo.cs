@@ -74,6 +74,7 @@ internal sealed partial class WorldDemo : Node
     private bool _gateFailed;
     private ImmutableArray<string> _roster = WorldTextureBudget.Party;
     private int _rosterFrames;
+    private bool _mobReview;
 
     public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null, bool perfGate = false)
     {
@@ -94,6 +95,9 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        _mobReview = parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (_mobReview)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.orc_brute", "beasts.drake.red", "characters.kobold"];
         var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
         _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
         AddChild(_canvas);
@@ -240,7 +244,9 @@ internal sealed partial class WorldDemo : Node
             _scenerySet = true;
         }
         _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
-        var walkers = _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
+        var walkers = _mobReview ? _roster.SelectMany((sprite, i) => DemoRegion.StandIn(terrain, _art,
+                new UnitPlace(place.Map + new System.Numerics.Vector2(-i * 1.2f, i * 1.2f), place.Height), heading, _clock, sprite, $"mob-review-{i}")).ToImmutableArray()
+            : _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
             : DemoRegion.StandIn(terrain, _art, place, heading, _clock);
         _canvas.PartySheets(walkers.Select(u => u.Sprite.Path));
         ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [], flags: _storyFlags)).OrderBy(u => u.Order)];

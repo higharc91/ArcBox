@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 0,
+    "scale": 0.65,
+    "bounds": [
+      55,
+      40,
+      154,
+      169
+    ],
+    "count": 7268
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 1,
+    "scale": 0.65,
+    "bounds": [
+      55,
+      40,
+      154,
+      169
+    ],
+    "count": 7235
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 2,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      40,
+      154,
+      169
+    ],
+    "count": 7207
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 3,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      40,
+      154,
+      169
+    ],
+    "count": 7180
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 0,
+    "scale": 0.677,
+    "bounds": [
+      55,
+      42,
+      157,
+      172
+    ],
+    "count": 7226
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 1,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      43,
+      156,
+      171
+    ],
+    "count": 6968
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 2,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      42,
+      156,
+      170
+    ],
+    "count": 6979
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 3,
+    "scale": 0.677,
+    "bounds": [
+      59,
+      41,
+      156,
+      169
+    ],
+    "count": 6856
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7,
+    "bounds": [
+      48,
+      55,
+      141,
+      171
+    ],
+    "count": 6468
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7,
+    "bounds": [
+      46,
+      32,
+      144,
+      172
+    ],
+    "count": 6755
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7,
+    "bounds": [
+      49,
+      72,
+      141,
+      183
+    ],
+    "count": 6041
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7,
+    "bounds": [
+      40,
+      73,
+      154,
+      182
+    ],
+    "count": 5916
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5,
+    "bounds": [
+      55,
+      41,
+      161,
+      173
+    ],
+    "count": 8236
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5,
+    "bounds": [
+      27,
+      110,
+      163,
+      175
+    ],
+    "count": 5423
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 4,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      36,
+      146,
+      169
+    ],
+    "count": 7158
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 5,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      36,
+      146,
+      169
+    ],
+    "count": 7171
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 6,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      36,
+      146,
+      169
+    ],
+    "count": 7189
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 7,
+    "scale": 0.65,
+    "bounds": [
+      56,
+      36,
+      146,
+      169
+    ],
+    "count": 7156
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 4,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      38,
+      151,
+      170
+    ],
+    "count": 7003
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 5,
+    "scale": 0.677,
+    "bounds": [
+      59,
+      39,
+      148,
+      171
+    ],
+    "count": 6681
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 6,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      38,
+      146,
+      169
+    ],
+    "count": 6710
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 7,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      37,
+      143,
+      167
+    ],
+    "count": 6449
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7,
+    "bounds": [
+      56,
+      60,
+      139,
+      176
+    ],
+    "count": 6080
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7,
+    "bounds": [
+      42,
+      32,
+      140,
+      172
+    ],
+    "count": 6376
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7,
+    "bounds": [
+      48,
+      74,
+      141,
+      185
+    ],
+    "count": 5597
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7,
+    "bounds": [
+      42,
+      76,
+      147,
+      186
+    ],
+    "count": 6061
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5,
+    "bounds": [
+      48,
+      40,
+      145,
+      172
+    ],
+    "count": 7757
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5,
+    "bounds": [
+      24,
+      114,
+      156,
+      174
+    ],
+    "count": 5316
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 8,
+    "scale": 0.65,
+    "bounds": [
+      60,
+      39,
+      125,
+      170
+    ],
+    "count": 5529
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 9,
+    "scale": 0.65,
+    "bounds": [
+      60,
+      39,
+      124,
+      170
+    ],
+    "count": 5489
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 10,
+    "scale": 0.65,
+    "bounds": [
+      61,
+      39,
+      125,
+      170
+    ],
+    "count": 5501
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 11,
+    "scale": 0.65,
+    "bounds": [
+      60,
+      38,
+      124,
+      169
+    ],
+    "count": 5476
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 0,
+    "scale": 0.37,
+    "bounds": [
+      61,
+      42,
+      144,
+      172
+    ],
+    "count": 5729
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 1,
+    "scale": 0.37,
+    "bounds": [
+      63,
+      43,
+      125,
+      175
+    ],
+    "count": 5171
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 2,
+    "scale": 0.37,
+    "bounds": [
+      61,
+      42,
+      143,
+      173
+    ],
+    "count": 5756
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 3,
+    "scale": 0.37,
+    "bounds": [
+      64,
+      41,
+      125,
+      174
+    ],
+    "count": 5184
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7,
+    "bounds": [
+      50,
+      57,
+      139,
+      172
+    ],
+    "count": 5642
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7,
+    "bounds": [
+      40,
+      28,
+      133,
+      172
+    ],
+    "count": 6344
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7,
+    "bounds": [
+      33,
+      76,
+      154,
+      180
+    ],
+    "count": 5880
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7,
+    "bounds": [
+      34,
+      76,
+      152,
+      177
+    ],
+    "count": 5712
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5,
+    "bounds": [
+      37,
+      39,
+      127,
+      172
+    ],
+    "count": 6191
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5,
+    "bounds": [
+      26,
+      115,
+      168,
+      175
+    ],
+    "count": 5783
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 12,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      127,
+      170
+    ],
+    "count": 6485
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 13,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      127,
+      170
+    ],
+    "count": 6500
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 14,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      35,
+      127,
+      170
+    ],
+    "count": 6494
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 15,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      127,
+      170
+    ],
+    "count": 6477
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 12,
+    "scale": 0.677,
+    "bounds": [
+      47,
+      37,
+      149,
+      170
+    ],
+    "count": 7469
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 13,
+    "scale": 0.677,
+    "bounds": [
+      54,
+      38,
+      145,
+      171
+    ],
+    "count": 6554
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 14,
+    "scale": 0.677,
+    "bounds": [
+      53,
+      37,
+      145,
+      168
+    ],
+    "count": 6683
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 15,
+    "scale": 0.677,
+    "bounds": [
+      53,
+      36,
+      140,
+      169
+    ],
+    "count": 6585
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7,
+    "bounds": [
+      41,
+      59,
+      142,
+      173
+    ],
+    "count": 6018
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7,
+    "bounds": [
+      51,
+      29,
+      148,
+      172
+    ],
+    "count": 6459
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7,
+    "bounds": [
+      34,
+      79,
+      155,
+      173
+    ],
+    "count": 5836
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7,
+    "bounds": [
+      37,
+      80,
+      151,
+      173
+    ],
+    "count": 5417
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5,
+    "bounds": [
+      57,
+      39,
+      154,
+      171
+    ],
+    "count": 6799
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5,
+    "bounds": [
+      31,
+      118,
+      166,
+      175
+    ],
+    "count": 5147
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 16,
+    "scale": 0.65,
+    "bounds": [
+      42,
+      38,
+      139,
+      169
+    ],
+    "count": 6983
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 17,
+    "scale": 0.65,
+    "bounds": [
+      42,
+      38,
+      139,
+      170
+    ],
+    "count": 6950
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 18,
+    "scale": 0.65,
+    "bounds": [
+      42,
+      38,
+      139,
+      169
+    ],
+    "count": 6946
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 19,
+    "scale": 0.65,
+    "bounds": [
+      42,
+      38,
+      140,
+      169
+    ],
+    "count": 6939
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 16,
+    "scale": 0.677,
+    "bounds": [
+      36,
+      40,
+      142,
+      173
+    ],
+    "count": 7064
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 17,
+    "scale": 0.677,
+    "bounds": [
+      37,
+      41,
+      139,
+      172
+    ],
+    "count": 6757
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 18,
+    "scale": 0.677,
+    "bounds": [
+      36,
+      40,
+      139,
+      170
+    ],
+    "count": 6722
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 19,
+    "scale": 0.677,
+    "bounds": [
+      38,
+      39,
+      141,
+      170
+    ],
+    "count": 6806
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 16,
+    "scale": 0.7,
+    "bounds": [
+      47,
+      55,
+      148,
+      171
+    ],
+    "count": 6745
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 17,
+    "scale": 0.7,
+    "bounds": [
+      54,
+      30,
+      146,
+      172
+    ],
+    "count": 6848
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 18,
+    "scale": 0.7,
+    "bounds": [
+      46,
+      77,
+      146,
+      172
+    ],
+    "count": 5243
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 19,
+    "scale": 0.7,
+    "bounds": [
+      42,
+      76,
+      151,
+      171
+    ],
+    "count": 5205
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5,
+    "bounds": [
+      47,
+      40,
+      157,
+      172
+    ],
+    "count": 7886
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5,
+    "bounds": [
+      33,
+      110,
+      165,
+      173
+    ],
+    "count": 5229
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 20,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      141,
+      169
+    ],
+    "count": 6796
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 21,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      141,
+      169
+    ],
+    "count": 6757
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 22,
+    "scale": 0.65,
+    "bounds": [
+      52,
+      36,
+      141,
+      169
+    ],
+    "count": 6755
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 23,
+    "scale": 0.65,
+    "bounds": [
+      51,
+      36,
+      141,
+      169
+    ],
+    "count": 6771
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 20,
+    "scale": 0.677,
+    "bounds": [
+      38,
+      38,
+      140,
+      170
+    ],
+    "count": 6674
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 21,
+    "scale": 0.677,
+    "bounds": [
+      40,
+      39,
+      135,
+      168
+    ],
+    "count": 6219
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 22,
+    "scale": 0.677,
+    "bounds": [
+      40,
+      38,
+      135,
+      170
+    ],
+    "count": 6562
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 23,
+    "scale": 0.677,
+    "bounds": [
+      43,
+      37,
+      136,
+      166
+    ],
+    "count": 6285
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 20,
+    "scale": 0.7,
+    "bounds": [
+      44,
+      59,
+      148,
+      173
+    ],
+    "count": 6049
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 21,
+    "scale": 0.7,
+    "bounds": [
+      64,
+      30,
+      152,
+      172
+    ],
+    "count": 6068
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 22,
+    "scale": 0.7,
+    "bounds": [
+      40,
+      79,
+      154,
+      174
+    ],
+    "count": 5609
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 23,
+    "scale": 0.7,
+    "bounds": [
+      38,
+      80,
+      156,
+      172
+    ],
+    "count": 5322
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5,
+    "bounds": [
+      56,
+      41,
+      156,
+      172
+    ],
+    "count": 7066
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5,
+    "bounds": [
+      28,
+      112,
+      164,
+      172
+    ],
+    "count": 5619
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 24,
+    "scale": 0.65,
+    "bounds": [
+      66,
+      39,
+      130,
+      170
+    ],
+    "count": 5415
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 25,
+    "scale": 0.65,
+    "bounds": [
+      66,
+      39,
+      130,
+      170
+    ],
+    "count": 5389
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 26,
+    "scale": 0.65,
+    "bounds": [
+      67,
+      39,
+      131,
+      170
+    ],
+    "count": 5401
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 27,
+    "scale": 0.65,
+    "bounds": [
+      66,
+      39,
+      130,
+      170
+    ],
+    "count": 5369
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 4,
+    "scale": 0.37,
+    "bounds": [
+      44,
+      42,
+      133,
+      172
+    ],
+    "count": 5835
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 5,
+    "scale": 0.37,
+    "bounds": [
+      67,
+      43,
+      129,
+      175
+    ],
+    "count": 5058
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 6,
+    "scale": 0.37,
+    "bounds": [
+      47,
+      42,
+      134,
+      173
+    ],
+    "count": 5777
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/orc-walk-corrected.png",
+    "sourcePose": 7,
+    "scale": 0.37,
+    "bounds": [
+      67,
+      41,
+      129,
+      173
+    ],
+    "count": 5207
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/orc-attack.png",
+    "sourcePose": 24,
+    "scale": 0.7,
+    "bounds": [
+      54,
+      56,
+      142,
+      171
+    ],
+    "count": 5556
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/orc-attack.png",
+    "sourcePose": 25,
+    "scale": 0.7,
+    "bounds": [
+      67,
+      33,
+      145,
+      172
+    ],
+    "count": 5759
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/orc-attack.png",
+    "sourcePose": 26,
+    "scale": 0.7,
+    "bounds": [
+      40,
+      76,
+      151,
+      173
+    ],
+    "count": 5555
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/orc-attack.png",
+    "sourcePose": 27,
+    "scale": 0.7,
+    "bounds": [
+      34,
+      81,
+      157,
+      174
+    ],
+    "count": 5312
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5,
+    "bounds": [
+      46,
+      36,
+      139,
+      171
+    ],
+    "count": 6307
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5,
+    "bounds": [
+      24,
+      112,
+      166,
+      176
+    ],
+    "count": 5975
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/orc-idle.png",
+    "sourcePose": 28,
+    "scale": 0.65,
+    "bounds": [
+      58,
+      37,
+      148,
+      170
+    ],
+    "count": 6969
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/orc-idle.png",
+    "sourcePose": 29,
+    "scale": 0.65,
+    "bounds": [
+      58,
+      36,
+      148,
+      169
+    ],
+    "count": 6934
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/orc-idle.png",
+    "sourcePose": 30,
+    "scale": 0.65,
+    "bounds": [
+      58,
+      36,
+      147,
+      169
+    ],
+    "count": 6952
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/orc-idle.png",
+    "sourcePose": 31,
+    "scale": 0.65,
+    "bounds": [
+      58,
+      37,
+      147,
+      170
+    ],
+    "count": 6954
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/orc-walk.png",
+    "sourcePose": 28,
+    "scale": 0.677,
+    "bounds": [
+      52,
+      38,
+      152,
+      169
+    ],
+    "count": 7052
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/orc-walk.png",
+    "sourcePose": 29,
+    "scale": 0.677,
+    "bounds": [
+      55,
+      39,
+      148,
+      166
+    ],
+    "count": 6403
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/orc-walk.png",
+    "sourcePose": 30,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      38,
+      152,
+      169
+    ],
+    "count": 6788
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/orc-walk.png",
+    "sourcePose": 31,
+    "scale": 0.677,
+    "bounds": [
+      58,
+      37,
+      149,
+      163
+    ],
+    "count": 6265
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/orc-attack-corrected.png",
+    "sourcePose": 4,
+    "scale": 0.37,
+    "bounds": [
+      55,
+      53,
+      158,
+      171
+    ],
+    "count": 7367
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/orc-attack-corrected.png",
+    "sourcePose": 5,
+    "scale": 0.37,
+    "bounds": [
+      55,
+      17,
+      147,
+      171
+    ],
+    "count": 8113
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/orc-attack-corrected.png",
+    "sourcePose": 6,
+    "scale": 0.37,
+    "bounds": [
+      53,
+      54,
+      140,
+      173
+    ],
+    "count": 6597
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/orc-attack-corrected.png",
+    "sourcePose": 7,
+    "scale": 0.37,
+    "bounds": [
+      44,
+      59,
+      149,
+      173
+    ],
+    "count": 6711
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5,
+    "bounds": [
+      76,
+      37,
+      183,
+      172
+    ],
+    "count": 7868
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/orc-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5,
+    "bounds": [
+      21,
+      113,
+      158,
+      174
+    ],
+    "count": 5617
+  }
+]

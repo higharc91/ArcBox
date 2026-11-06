@@ -224,12 +224,12 @@
       "surprised": "class_sorcerer_surprised.png"
     },
     "goblin_cutthroat": {
-      "idle": "goblin_cutthroat_idle.png",
-      "hurt": "goblin_cutthroat_hurt.png",
-      "happy": "goblin_cutthroat_happy.png",
-      "angry": "goblin_cutthroat_angry.png",
-      "sad": "goblin_cutthroat_sad.png",
-      "surprised": "goblin_cutthroat_surprised.png"
+      "idle": "goblin_cutthroat_refresh_idle.png",
+      "hurt": "goblin_cutthroat_refresh_hurt.png",
+      "happy": "goblin_cutthroat_refresh_happy.png",
+      "angry": "goblin_cutthroat_refresh_angry.png",
+      "sad": "goblin_cutthroat_refresh_sad.png",
+      "surprised": "goblin_cutthroat_refresh_surprised.png"
     },
     "goblin_spear": {
       "idle": "goblin_spear_idle.png",
@@ -248,12 +248,12 @@
       "surprised": "goblin_shaman_surprised.png"
     },
     "orc_brute": {
-      "idle": "orc_brute_idle.png",
-      "hurt": "orc_brute_hurt.png",
-      "happy": "orc_brute_happy.png",
-      "angry": "orc_brute_angry.png",
-      "sad": "orc_brute_sad.png",
-      "surprised": "orc_brute_surprised.png"
+      "idle": "orc_brute_refresh_idle.png",
+      "hurt": "orc_brute_refresh_hurt.png",
+      "happy": "orc_brute_refresh_happy.png",
+      "angry": "orc_brute_refresh_angry.png",
+      "sad": "orc_brute_refresh_sad.png",
+      "surprised": "orc_brute_refresh_surprised.png"
     },
     "skeleton": {
       "idle": "skeleton_idle.png",

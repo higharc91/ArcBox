@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 0,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      32,
+      88,
+      110
+    ],
+    "count": 2635
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 1,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      32,
+      89,
+      110
+    ],
+    "count": 2641
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 2,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      32,
+      88,
+      110
+    ],
+    "count": 2613
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 3,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      32,
+      88,
+      110
+    ],
+    "count": 2645
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 0,
+    "scale": 0.432,
+    "bounds": [
+      33,
+      35,
+      88,
+      114
+    ],
+    "count": 2437
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 1,
+    "scale": 0.432,
+    "bounds": [
+      33,
+      36,
+      88,
+      115
+    ],
+    "count": 2474
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 2,
+    "scale": 0.432,
+    "bounds": [
+      34,
+      35,
+      88,
+      114
+    ],
+    "count": 2408
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 3,
+    "scale": 0.432,
+    "bounds": [
+      34,
+      34,
+      88,
+      110
+    ],
+    "count": 2388
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 0,
+    "scale": 0.35,
+    "bounds": [
+      39,
+      36,
+      93,
+      113
+    ],
+    "count": 2518
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 1,
+    "scale": 0.35,
+    "bounds": [
+      35,
+      15,
+      98,
+      113
+    ],
+    "count": 2788
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 2,
+    "scale": 0.35,
+    "bounds": [
+      39,
+      37,
+      98,
+      113
+    ],
+    "count": 2437
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 3,
+    "scale": 0.35,
+    "bounds": [
+      38,
+      40,
+      95,
+      113
+    ],
+    "count": 2535
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 0,
+    "scale": 0.332,
+    "bounds": [
+      28,
+      36,
+      98,
+      113
+    ],
+    "count": 2995
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 1,
+    "scale": 0.332,
+    "bounds": [
+      22,
+      78,
+      102,
+      113
+    ],
+    "count": 1774
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 4,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      31,
+      87,
+      110
+    ],
+    "count": 2556
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 5,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      31,
+      86,
+      110
+    ],
+    "count": 2550
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 6,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      31,
+      86,
+      110
+    ],
+    "count": 2513
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 7,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      31,
+      86,
+      110
+    ],
+    "count": 2559
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 4,
+    "scale": 0.432,
+    "bounds": [
+      29,
+      35,
+      85,
+      115
+    ],
+    "count": 2476
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 5,
+    "scale": 0.432,
+    "bounds": [
+      29,
+      36,
+      86,
+      116
+    ],
+    "count": 2527
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 6,
+    "scale": 0.432,
+    "bounds": [
+      29,
+      35,
+      85,
+      114
+    ],
+    "count": 2461
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 7,
+    "scale": 0.432,
+    "bounds": [
+      32,
+      34,
+      84,
+      112
+    ],
+    "count": 2274
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 4,
+    "scale": 0.44,
+    "bounds": [
+      21,
+      38,
+      101,
+      112
+    ],
+    "count": 3036
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 5,
+    "scale": 0.44,
+    "bounds": [
+      27,
+      20,
+      97,
+      112
+    ],
+    "count": 3092
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 6,
+    "scale": 0.44,
+    "bounds": [
+      32,
+      45,
+      104,
+      116
+    ],
+    "count": 2883
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 7,
+    "scale": 0.44,
+    "bounds": [
+      30,
+      38,
+      107,
+      113
+    ],
+    "count": 3025
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 2,
+    "scale": 0.332,
+    "bounds": [
+      27,
+      36,
+      99,
+      114
+    ],
+    "count": 2964
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 3,
+    "scale": 0.332,
+    "bounds": [
+      26,
+      77,
+      111,
+      112
+    ],
+    "count": 1941
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 8,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      30,
+      81,
+      110
+    ],
+    "count": 1942
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 9,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      81,
+      111
+    ],
+    "count": 1936
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 10,
+    "scale": 0.408,
+    "bounds": [
+      40,
+      30,
+      81,
+      110
+    ],
+    "count": 1937
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 11,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      81,
+      111
+    ],
+    "count": 1943
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 8,
+    "scale": 0.432,
+    "bounds": [
+      33,
+      33,
+      88,
+      112
+    ],
+    "count": 2408
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 9,
+    "scale": 0.432,
+    "bounds": [
+      38,
+      34,
+      86,
+      113
+    ],
+    "count": 2111
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 10,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      33,
+      90,
+      112
+    ],
+    "count": 2182
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 11,
+    "scale": 0.432,
+    "bounds": [
+      42,
+      32,
+      85,
+      110
+    ],
+    "count": 2039
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 8,
+    "scale": 0.44,
+    "bounds": [
+      20,
+      38,
+      95,
+      113
+    ],
+    "count": 2849
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 9,
+    "scale": 0.44,
+    "bounds": [
+      30,
+      19,
+      90,
+      112
+    ],
+    "count": 2767
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 10,
+    "scale": 0.44,
+    "bounds": [
+      26,
+      43,
+      108,
+      113
+    ],
+    "count": 2865
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 11,
+    "scale": 0.44,
+    "bounds": [
+      30,
+      38,
+      99,
+      111
+    ],
+    "count": 2707
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 4,
+    "scale": 0.332,
+    "bounds": [
+      38,
+      33,
+      94,
+      113
+    ],
+    "count": 2403
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 5,
+    "scale": 0.332,
+    "bounds": [
+      18,
+      78,
+      107,
+      112
+    ],
+    "count": 2105
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 12,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      93,
+      110
+    ],
+    "count": 2540
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 13,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      92,
+      110
+    ],
+    "count": 2540
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 14,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      92,
+      111
+    ],
+    "count": 2568
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 15,
+    "scale": 0.408,
+    "bounds": [
+      41,
+      31,
+      93,
+      110
+    ],
+    "count": 2532
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 0,
+    "scale": 0.213,
+    "bounds": [
+      31,
+      33,
+      86,
+      113
+    ],
+    "count": 2564
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 1,
+    "scale": 0.213,
+    "bounds": [
+      37,
+      34,
+      85,
+      114
+    ],
+    "count": 2424
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 2,
+    "scale": 0.213,
+    "bounds": [
+      35,
+      33,
+      86,
+      113
+    ],
+    "count": 2406
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 3,
+    "scale": 0.213,
+    "bounds": [
+      38,
+      32,
+      86,
+      112
+    ],
+    "count": 2316
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 12,
+    "scale": 0.44,
+    "bounds": [
+      23,
+      38,
+      90,
+      111
+    ],
+    "count": 2655
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 13,
+    "scale": 0.44,
+    "bounds": [
+      30,
+      20,
+      88,
+      112
+    ],
+    "count": 2817
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 14,
+    "scale": 0.44,
+    "bounds": [
+      10,
+      40,
+      92,
+      111
+    ],
+    "count": 2771
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 15,
+    "scale": 0.44,
+    "bounds": [
+      34,
+      38,
+      95,
+      112
+    ],
+    "count": 2695
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 6,
+    "scale": 0.332,
+    "bounds": [
+      26,
+      33,
+      96,
+      113
+    ],
+    "count": 2911
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 7,
+    "scale": 0.332,
+    "bounds": [
+      15,
+      78,
+      102,
+      113
+    ],
+    "count": 2046
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 16,
+    "scale": 0.408,
+    "bounds": [
+      39,
+      31,
+      95,
+      110
+    ],
+    "count": 2672
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 17,
+    "scale": 0.408,
+    "bounds": [
+      39,
+      31,
+      95,
+      110
+    ],
+    "count": 2651
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 18,
+    "scale": 0.408,
+    "bounds": [
+      39,
+      32,
+      95,
+      110
+    ],
+    "count": 2645
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 19,
+    "scale": 0.408,
+    "bounds": [
+      39,
+      31,
+      95,
+      110
+    ],
+    "count": 2634
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 16,
+    "scale": 0.432,
+    "bounds": [
+      39,
+      34,
+      93,
+      112
+    ],
+    "count": 2393
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 17,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      35,
+      93,
+      112
+    ],
+    "count": 2394
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 18,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      34,
+      92,
+      111
+    ],
+    "count": 2334
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 19,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      33,
+      93,
+      110
+    ],
+    "count": 2365
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 16,
+    "scale": 0.44,
+    "bounds": [
+      29,
+      37,
+      104,
+      112
+    ],
+    "count": 2853
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 17,
+    "scale": 0.44,
+    "bounds": [
+      26,
+      18,
+      92,
+      112
+    ],
+    "count": 2981
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 18,
+    "scale": 0.44,
+    "bounds": [
+      26,
+      40,
+      108,
+      111
+    ],
+    "count": 2672
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 19,
+    "scale": 0.44,
+    "bounds": [
+      31,
+      37,
+      95,
+      112
+    ],
+    "count": 2688
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 8,
+    "scale": 0.332,
+    "bounds": [
+      31,
+      36,
+      103,
+      115
+    ],
+    "count": 2931
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 9,
+    "scale": 0.332,
+    "bounds": [
+      30,
+      78,
+      111,
+      116
+    ],
+    "count": 1794
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 20,
+    "scale": 0.408,
+    "bounds": [
+      40,
+      32,
+      93,
+      110
+    ],
+    "count": 2536
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 21,
+    "scale": 0.408,
+    "bounds": [
+      40,
+      32,
+      93,
+      110
+    ],
+    "count": 2516
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 22,
+    "scale": 0.408,
+    "bounds": [
+      40,
+      31,
+      92,
+      110
+    ],
+    "count": 2519
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 23,
+    "scale": 0.408,
+    "bounds": [
+      40,
+      32,
+      93,
+      110
+    ],
+    "count": 2519
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 20,
+    "scale": 0.432,
+    "bounds": [
+      37,
+      35,
+      94,
+      114
+    ],
+    "count": 2541
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 21,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      36,
+      93,
+      114
+    ],
+    "count": 2323
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 22,
+    "scale": 0.432,
+    "bounds": [
+      39,
+      35,
+      93,
+      113
+    ],
+    "count": 2367
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 23,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      34,
+      93,
+      109
+    ],
+    "count": 2255
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 20,
+    "scale": 0.44,
+    "bounds": [
+      29,
+      38,
+      106,
+      113
+    ],
+    "count": 2852
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 21,
+    "scale": 0.44,
+    "bounds": [
+      28,
+      19,
+      98,
+      111
+    ],
+    "count": 2969
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 22,
+    "scale": 0.44,
+    "bounds": [
+      29,
+      43,
+      111,
+      114
+    ],
+    "count": 2683
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 23,
+    "scale": 0.44,
+    "bounds": [
+      30,
+      36,
+      105,
+      111
+    ],
+    "count": 2795
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 10,
+    "scale": 0.332,
+    "bounds": [
+      34,
+      35,
+      104,
+      114
+    ],
+    "count": 2841
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 11,
+    "scale": 0.332,
+    "bounds": [
+      30,
+      78,
+      113,
+      114
+    ],
+    "count": 1943
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 24,
+    "scale": 0.408,
+    "bounds": [
+      46,
+      30,
+      87,
+      110
+    ],
+    "count": 1959
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 25,
+    "scale": 0.408,
+    "bounds": [
+      47,
+      30,
+      88,
+      110
+    ],
+    "count": 1952
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 26,
+    "scale": 0.408,
+    "bounds": [
+      47,
+      29,
+      88,
+      111
+    ],
+    "count": 1956
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 27,
+    "scale": 0.408,
+    "bounds": [
+      46,
+      30,
+      88,
+      110
+    ],
+    "count": 1947
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 24,
+    "scale": 0.432,
+    "bounds": [
+      35,
+      33,
+      89,
+      111
+    ],
+    "count": 2274
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 25,
+    "scale": 0.432,
+    "bounds": [
+      46,
+      34,
+      89,
+      112
+    ],
+    "count": 1980
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 26,
+    "scale": 0.432,
+    "bounds": [
+      40,
+      33,
+      92,
+      111
+    ],
+    "count": 2189
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/goblin-walk.png",
+    "sourcePose": 27,
+    "scale": 0.432,
+    "bounds": [
+      45,
+      32,
+      90,
+      109
+    ],
+    "count": 2041
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 24,
+    "scale": 0.44,
+    "bounds": [
+      35,
+      38,
+      91,
+      113
+    ],
+    "count": 2423
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 25,
+    "scale": 0.44,
+    "bounds": [
+      37,
+      19,
+      91,
+      112
+    ],
+    "count": 2727
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 26,
+    "scale": 0.44,
+    "bounds": [
+      40,
+      43,
+      118,
+      113
+    ],
+    "count": 2626
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/goblin-attack.png",
+    "sourcePose": 27,
+    "scale": 0.44,
+    "bounds": [
+      41,
+      37,
+      102,
+      111
+    ],
+    "count": 2479
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 12,
+    "scale": 0.332,
+    "bounds": [
+      31,
+      35,
+      84,
+      114
+    ],
+    "count": 2307
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 13,
+    "scale": 0.332,
+    "bounds": [
+      26,
+      78,
+      112,
+      112
+    ],
+    "count": 1865
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 28,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      33,
+      87,
+      110
+    ],
+    "count": 2494
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 29,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      33,
+      87,
+      110
+    ],
+    "count": 2493
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 30,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      33,
+      88,
+      111
+    ],
+    "count": 2507
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/goblin-idle.png",
+    "sourcePose": 31,
+    "scale": 0.408,
+    "bounds": [
+      33,
+      33,
+      88,
+      110
+    ],
+    "count": 2510
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 4,
+    "scale": 0.213,
+    "bounds": [
+      34,
+      36,
+      87,
+      114
+    ],
+    "count": 2400
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 5,
+    "scale": 0.213,
+    "bounds": [
+      35,
+      37,
+      85,
+      117
+    ],
+    "count": 2228
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 6,
+    "scale": 0.213,
+    "bounds": [
+      35,
+      36,
+      86,
+      115
+    ],
+    "count": 2317
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/goblin-walk-corrected.png",
+    "sourcePose": 7,
+    "scale": 0.213,
+    "bounds": [
+      35,
+      35,
+      84,
+      115
+    ],
+    "count": 2185
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 4,
+    "scale": 0.35,
+    "bounds": [
+      40,
+      36,
+      93,
+      113
+    ],
+    "count": 2425
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 5,
+    "scale": 0.35,
+    "bounds": [
+      37,
+      14,
+      95,
+      113
+    ],
+    "count": 2758
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 6,
+    "scale": 0.35,
+    "bounds": [
+      39,
+      37,
+      105,
+      113
+    ],
+    "count": 2561
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/goblin-attack-corrected.png",
+    "sourcePose": 7,
+    "scale": 0.35,
+    "bounds": [
+      40,
+      40,
+      93,
+      113
+    ],
+    "count": 2310
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 14,
+    "scale": 0.332,
+    "bounds": [
+      36,
+      35,
+      96,
+      113
+    ],
+    "count": 2680
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/goblin-damage.png",
+    "sourcePose": 15,
+    "scale": 0.332,
+    "bounds": [
+      21,
+      77,
+      95,
+      113
+    ],
+    "count": 1842
+  }
+]
