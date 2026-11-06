@@ -15,7 +15,7 @@ A tied vote leaves the party walking. Existing 5d vote screens, presence holds a
 | R2 | Tend Medicine DC 12; Rally better of Performance/Persuasion DC 12; Cook Survival DC 10. |
 | R3 | A known rules-pack healing spell gives advantage on Tend. |
 | R4 | Successful cooking gives every character Well fed: 3 temporary HP at the next battle start, removed at its end. |
-| R5 | Keep watch rolls Perception and reveals unfound hidden things within 6 tiles of the fire that its total meets. |
+| R5 | Keep watch rolls Perception and reveals unfound hidden things within a 32-tile patrol of the fire (#151; Chebyshev distance) that its total meets. |
 | R6 | An inn room costs 10 gold per character. |
 | R7 | Temple healing costs 25 gold per chosen injury. |
 | R8 | The inn needs and spends the party's rest. |
@@ -74,3 +74,5 @@ The owner subsequently authorized the full cozy camp presentation and new art. T
 job poses, PixelLab props/loops, honest progress and compact party bars. Saved sleep (3 seconds) precedes sunrise (8 seconds),
 both skippable. Recovery applies once at dawn; morning continues after leaving camp. The inn shares the night progression with
 its own hearth interior. [The follow-up report](../reports/2026-11-03-camp-presentation/README.md) records the final preview and checks.
+
+Keep watch uses the same `RecoveryRules.WatchRange` in gameplay and loader validation. A campfire with no potential hidden find in that range emits a warning. The road fire’s nearer bridge clue requires the spared-Skarrow branch; the 32-tile patrol also reaches its unconditional cache, so Watch works before that decision and on either branch. The wider patrol reaches existing authored clues at all three shipped fires without moving secrets or writing new voiced lines. Finds still require the Perception total to meet each secret’s DC and survive restarts. New milestone camp talks remain deferred until voice clips are available.

@@ -27,6 +27,29 @@ public sealed class InteractableCheckTests
 
     private static string Message(params string[] things) => Assert.Single(ErrorsOf(things)).Message;
 
+    [Theory]
+    [InlineData(32, 32, true)]
+    [InlineData(33, 0, false)]
+    [InlineData(0, -33, false)]
+    public void Watch_range_has_the_same_square_boundary_as_the_patrol(int x, int y, bool within)
+        => Assert.Equal(within, RecoveryRules.InWatchRange(new Tile(0, 0), new Tile(x, y)));
+
+    [Fact]
+    public void A_campfire_without_a_hidden_find_warns_without_rejecting_the_pack()
+    {
+        var pack = ValidationTests.LoadChapter(Vault.World(Vault.Region()), Vault.Things("vault", ["""{ "id":"fire", "kind":"campfire", "at":[3,1] }"""]));
+        Assert.Contains(pack.Warnings, w => w.Message.Contains("fire") && w.Message.Contains("watch range"));
+    }
+
+    [Fact]
+    public void A_campfire_with_a_hidden_find_has_no_watch_warning()
+    {
+        var pack = ValidationTests.LoadChapter(Vault.World(Vault.Region()), Vault.Things("vault", [
+            """{ "id":"fire", "kind":"campfire", "at":[3,1] }""",
+            """{ "id":"secret", "kind":"cache", "at":[8,8], "hidden":20, "loot":[{"item":"potion"}] }"""]));
+        Assert.DoesNotContain(pack.Warnings, w => w.Message.Contains("watch range"));
+    }
+
     [Fact]
     public void The_whole_vault_loads_and_its_things_are_kept_by_region()
     {
