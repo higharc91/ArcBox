@@ -1,8 +1,9 @@
-"""Builds the tactics base content pack and its review sheets.
+"""Builds the tactics base content pack; review sheets require the previews command.
 
-    python3 tools/tactics-assets/build.py [set ...]     # sets: characters (default: all)
+    python3 tools/tactics-assets/build.py [set ...]          # default: all content sets
+    python3 tools/tactics-assets/build.py previews [set ...] # default: all sets
 
-Writes content/tactics/base/... (what the game loads) and tools/tactics-assets/previews/*.png (what people review).
+Writes content/tactics/base/... (what the game loads). The previews command also writes review images.
 Everything is deterministic: the same code produces byte-identical PNGs, so the pack hash only moves when art does.
 """
 from __future__ import annotations
@@ -25,7 +26,7 @@ from parts import creator  # noqa: E402
 from arcpix.preview import matrix  # noqa: E402
 from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
 
-from arcpix.out import PACK, PREVIEWS, MOCKUPS, save, write_json  # noqa: E402
+from arcpix.out import PACK, PREVIEWS, MOCKUPS, save, write_json, set_previews, previews_enabled  # noqa: E402
 
 
 # --------------------------------------------------------------------------------------------------- characters
@@ -245,7 +246,8 @@ def build_terrain() -> None:
     save(contact_sheet("Terrain · ground decals", by_kind["decal"], columns=10, zoom=4, checker=True,
                        subtitle="Scattered on tile tops for variety: flowers, stones, leaves, bones, cracks, "
                                 "puddles, blood and scorch marks."), PREVIEWS / "11-decals.png")
-    build_dioramas()
+    if previews_enabled():
+        build_dioramas()
 
 
 def build_dioramas() -> None:
@@ -260,11 +262,11 @@ def build_dioramas() -> None:
     bd = D.backdrop("ashen-ford")
     frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd, margin=40), zoom=1)
               .convert("P", palette=Image.Palette.ADAPTIVE) for k in range(48)]
-    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
+    save(frames[0], PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
     # the keep by its own light: lava seams, fumaroles, torches and the fire crystal flicker (16 frames: lava)
     frames = [D.render_scene("ember-keep", k, zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
               for k in range(16)]
-    frames[0].save(PREVIEWS / "anim-ember.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
+    save(frames[0], PREVIEWS / "anim-ember.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
 
 
 def build_palettes() -> None:
@@ -541,7 +543,23 @@ for _name in PLUGIN_SETS:
     if hasattr(_mod, "build"):          # a set still being written has no build() yet
         SETS[_name] = _mod.build
 
-if __name__ == "__main__":
-    for name in sys.argv[1:] or list(SETS):
+PREVIEW_ONLY_SETS = {"palettes", "anims", "gallery", "showcase"}
+
+
+def main(args: list[str]) -> None:
+    with_previews = bool(args and args[0] == "previews")
+    names = args[1:] if with_previews else args
+    names = names or [name for name in SETS if with_previews or name not in PREVIEW_ONLY_SETS]
+    unknown = sorted(set(names) - SETS.keys())
+    if unknown:
+        raise SystemExit(f"unknown asset set: {', '.join(unknown)}")
+    set_previews(with_previews)
+    for name in names:
+        if name in PREVIEW_ONLY_SETS and not with_previews:
+            raise SystemExit(f"{name} only writes previews; use build.py previews {name}")
         print("building", name)
         SETS[name]()
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

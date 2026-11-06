@@ -1320,7 +1320,7 @@ def _extras_preview(ps, hud, anims, gl, to, frames, fills) -> None:
         canvas = Image.new("RGBA", (W + 16, fr.height + 16), BG)
         canvas.alpha_composite(im, (8, 8))
         gif.append(scale(canvas, 5).convert("RGB"))
-    gif[0].save(PREVIEWS / "15-ui-bars.gif", save_all=True, append_images=gif[1:], duration=80, loop=0, optimize=True)
+    save(gif[0], PREVIEWS / "15-ui-bars.gif", save_all=True, append_images=gif[1:], duration=80, loop=0, optimize=True)
 
 
 BUTTONS_CACHE: dict = {}
@@ -1687,5 +1687,5 @@ def _mock(ps, bs, frames, fills, mk, ph, cu, to, nf, dc) -> None:
         if f == 0:
             save(draw(img, texts, 3).convert("RGB"), PREVIEWS / "15-ui-mock.png")
         gif.append(draw(img, texts, 2).convert("RGB").quantize(colors=255, method=Image.Quantize.MEDIANCUT))
-    gif[0].save(PREVIEWS / "15-ui-anim.gif", save_all=True, append_images=gif[1:], duration=1000 // MARK_FPS,
+    save(gif[0], PREVIEWS / "15-ui-anim.gif", save_all=True, append_images=gif[1:], duration=1000 // MARK_FPS,
                 loop=0, optimize=True, disposal=1)

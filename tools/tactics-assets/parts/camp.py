@@ -95,5 +95,5 @@ def build() -> None:
     big = [f.resize((f.width * 2, f.height * 2), Image.NEAREST) for f in frames]
     save(big[0].convert("RGBA"), PREVIEWS / "41-camp.png")
     pal = [f.quantize(colors=255, method=Image.Quantize.MEDIANCUT) for f in big]
-    pal[0].save(PREVIEWS / "anim-camp.gif", save_all=True, append_images=pal[1:], duration=110, loop=0,
+    save(pal[0], PREVIEWS / "anim-camp.gif", save_all=True, append_images=pal[1:], duration=110, loop=0,
                 optimize=True)
