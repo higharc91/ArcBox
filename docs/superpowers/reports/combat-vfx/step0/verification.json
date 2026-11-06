@@ -1,0 +1,18 @@
+{
+  "command": "bash tools/check-all.sh --full",
+  "result": "PASS",
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "dotnetTestsPassed": 7224,
+  "dotnetTestsFailed": 0,
+  "dotnetTestsSkipped": 0,
+  "phoneTestsPassed": 549,
+  "phoneProductionBuild": "PASS",
+  "nodeTestsPassed": 24,
+  "pythonAndLore": "PASS",
+  "docsDrift": "PASS",
+  "phoneFixturesChanged": false,
+  "nativePilotBeats": 49,
+  "nativePilotRenderingErrors": 0,
+  "ci": "disabled_manually"
+}
