@@ -309,7 +309,7 @@ public sealed partial class TacticsGame
         if (!Cursor!.Played.Contains(node.Id)) ChangePartyGold(node.Gold);
         AddFlags(node.Sets);
         var c = Cursor!;
-        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
+        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null, CheckSeed = null, Helper = null });
         ThingNodeEntered(node, c.Roll);     // an interaction's outcome, saved with this node's first line; the roll that led here, for a search
         if (node.End && node.Lines.IsEmpty)
         { KeepWorld(); Save(); StageDone(); return; }
@@ -389,7 +389,7 @@ public sealed partial class TacticsGame
     /// <summary>The gap before <paramref name="next"/>, saved with the cursor on it, so a restart starts it; the party travels as it begins.</summary>
     private void Between(SceneDef next)
     {
-        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
+        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null, Checking = null, CheckSeed = null, Helper = null });
         Travel(next);
         KeepWorld();
         Save();
@@ -600,7 +600,7 @@ public sealed partial class TacticsGame
                 return;
             }
             // The aftermath, from its first scene that plays; with none, the beat is done.
-            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
+            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null, Checking = null, CheckSeed = null, Helper = null });
             if (SceneRun.Next(Lore.ScenesOf(beat.Id), StoryFlags(), null, aftermath: true) is { } first)
                 Between(first);
             else
@@ -873,7 +873,7 @@ public sealed partial class TacticsGame
             var offered = _offered;
             CloseQuestion();
             (_offered, _checking) = (offered, option);
-            SetCursor(Cursor! with { Checking = option.Id });
+            SetCursor(Cursor! with { Checking = option.Id, CheckSeed = Cursor.CheckSeed ?? _ctx.Random.Next() });
             KeepWorld();
             Save();
             Ask(StoryStates.PickRoller);
@@ -900,21 +900,49 @@ public sealed partial class TacticsGame
     {
         if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(CurrentScene()!, CurrentNode()!); return; }
         var check = option.Check!;
+        var seed = Cursor!.CheckSeed ?? 0;
+        var helper = !check.Group && Cursor.Helper != member && EligibleHelper(Cursor.Helper, check.Skill) ? Cursor.Helper : null;
+        var random = CheckRandom(seed, member);
+        var first = random.Next(1, 21);
+        var second = helper is null ? first : random.Next(1, 21);
         var bonus = SkillCheck.Bonus(_doc.Members[member].Character, check.Skill, Rules);
-        var die = _ctx.Random.Next(1, 21);
-        var result = SkillCheck.Roll(die, bonus, check.Dc);
+        var die = Math.Max(first, second);
+        ImmutableArray<StoryGroupRoll> group = default;
+        if (check.Group)
+        {
+            group = [.. Cards(check.Skill).Where(c => c.Here).Select(c =>
+            {
+                var d = CheckRandom(seed, c.Member).Next(1, 21);
+                return new StoryGroupRoll(c.Member, d, c.Bonus, d + c.Bonus >= check.Dc);
+            })];
+            if (group.IsEmpty) return;
+            die = group.Count(r => r.Passed);
+            bonus = 0;
+        }
+        var result = SkillCheck.Roll(die, bonus, check.Group ? (group.Length + 1) / 2 : check.Dc);
         ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, CursorBeat()));
         ConversationAction(option);
         SetCursor(Cursor! with
         {
             Node = SceneRun.Target(option, result.Success), Line = 0,
-            Roll = new StoryRoll(member, option.Id, check.Skill, check.Dc, die, bonus, result.Success), Checking = null,
+            Roll = new StoryRoll(check.Group ? "party" : member, option.Id, check.Skill, check.Dc, die, bonus, result.Success, helper, helper is null ? default : [first, second], group), Checking = null,
         });
         KeepWorld();
         Save();
         ShowRoll();
     }
+
+    private static Random CheckRandom(int seed, string member)
+    {
+        // Stable across processes; string.GetHashCode is deliberately randomized by the runtime.
+        var hash = System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes($"{seed}:{member}"));
+        return new Random(System.Buffers.Binary.BinaryPrimitives.ReadInt32LittleEndian(hash));
+    }
+
+    private bool EligibleHelper(string? member, string skill)
+        => member is not null && Party().Any(m => m.Member == member && m.Here
+            && SkillCheck.Proficient(SheetBuilder.ForCharacter(m.Character, Rules), skill));
 
     private void ShowRoll()
     {
@@ -936,7 +964,17 @@ public sealed partial class TacticsGame
             case "vote":
                 Answer(profile, Str(input.Data, "option"), roller: false);
                 break;
-            case "pickRoller":
+            case "help" when _telling == StoryStates.PickRoller && _checking?.Check is { Group: false } check:
+                if (EligibleHelper(profile.Value, check.Skill))
+                {
+                    SetCursor(Cursor! with { Helper = profile.Value });
+                    KeepWorld(); Save();
+                }
+                break;
+            case "groupRoll" when _telling == StoryStates.PickRoller && _checking?.Check is { Group: true }:
+                if (Party().Any(m => m.Member == profile.Value && m.Here)) Roll(_checking, profile.Value);
+                break;
+            case "pickRoller" when _checking?.Check?.Group != true:
                 Answer(profile, Str(input.Data, "member"), roller: true);
                 break;
         }
@@ -1096,8 +1134,11 @@ public sealed partial class TacticsGame
         return new StoryCheckView(skill, SecretDc ? null : dc, title,
             [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
                 HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member), ClassName(c.Character)))],
-            roll?.Member, roll is null ? null : SecretDc ? Rolls.Flat(roll.Die, roll.Bonus, roll.Dc) with { Vs = 0 } : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
-            roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null);
+            roll?.Member, roll is null ? null : SecretDc ? Rolls.Flat(roll.Die, roll.Bonus, roll.Dc) with { Vs = 0 } : Rolls.Flat(roll.Die, roll.Bonus, roll.Group.IsDefaultOrEmpty ? roll.Dc : (roll.Group.Length + 1) / 2), tie, tie && Decider() is { } d ? PlayerName(d) : null,
+            roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null,
+            Helper: (roll is null ? Cursor?.Helper : roll.Helper) is { } h ? _doc.Members.GetValueOrDefault(h)?.Character.Name : null,
+            GroupCheck: roll is null ? _checking!.Check!.Group : !roll.Group.IsDefaultOrEmpty,
+            Group: roll?.Group ?? default);
     }
 
     /// <summary>
@@ -1146,12 +1187,15 @@ public sealed partial class TacticsGame
                     id = c.Member, name = c.Character.Name, player = c.Player.Name, cls = ClassName(c.Character), bonus = c.Bonus, note = c.Note,
                     here = !_awayAtOpen.Contains(c.Member),
                 }),
+                help = new { can = roll is null && _checking?.Check is { Group: false } ck && EligibleHelper(member, ck.Skill),
+                    member = roll is null ? Cursor?.Helper : roll.Helper, name = check.Helper },
+                group = check.GroupCheck,
                 mine = MineOf(member),
                 canChoose = _telling == StoryStates.PickRoller || (_telling == StoryStates.TieBreak && Decider() == member),
                 tie = _telling == StoryStates.TieBreak,
                 decider = _telling == StoryStates.TieBreak && Decider() is { } d2 ? PlayerName(d2) : null,
                 tied = _telling == StoryStates.TieBreak ? _tied : [],
-                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = SecretDc ? (int?)null : roll.Dc, success = roll.Passed },
+                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = SecretDc ? (int?)null : roll.Dc, success = roll.Passed, dice = roll.Dice.IsDefault ? null : (int[]?)[.. roll.Dice], group = roll.Group.IsDefault ? null : roll.Group.Select(r => new { member = r.Member, name = _doc.Members[r.Member].Character.Name, die = r.Die, bonus = r.Bonus, success = r.Passed }) },
                 vip = IsVip(player),
                 difficulty = CampaignDifficulty.ToString(),
             }) with { DeadlineUtc = roll is null ? _due : null };

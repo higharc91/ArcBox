@@ -100,7 +100,7 @@ public sealed class DocumentTests
     [InlineData(2)]
     [InlineData(-1)]
     public void An_unknown_version_is_still_refused(int version)
-        => Assert.Throws<JsonException>(() => TacticsDocument.Read(Json($$"""{ "version": {{version}}, "partyLevel": 1, "members": {}, "completed": [] }""")));
+        => Assert.Throws<CampaignDocumentException>(() => TacticsDocument.Read(Json($$"""{ "version": {{version}}, "partyLevel": 1, "members": {}, "completed": [] }""")));
 
     [Fact]
     public void A_battle_saved_with_an_ability_since_removed_starts_again_without_it()

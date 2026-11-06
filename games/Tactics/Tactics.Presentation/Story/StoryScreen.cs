@@ -383,7 +383,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
     {
         var cards = check.Cards.IsDefault ? [] : check.Cards;
         var chosen = cards.FirstOrDefault(c => c.Member == check.Chosen);
-        var roll = check.Roll is { } result ? Reveal(result, chosen?.Name ?? check.Chosen ?? "", revealed, hidden: check.Dc is null) : null;
+        var roll = !check.GroupCheck && check.Roll is { } result ? Reveal(result, chosen?.Name ?? check.Chosen ?? "", revealed, hidden: check.Dc is null) : null;
         string? footer = null;
         if (roll is null)
         {
@@ -393,9 +393,15 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
                 : check.Deadline is null ? "Waiting for a phone to come back"
                 : votes > 0 ? string.Create(CultureInfo.InvariantCulture, $"Vote for who rolls · {votes} voted") : "Vote for who rolls";
         }
-        return new CheckPanel("Skill check", SkillName(check.Skill), check.Dc is { } dc ? string.Create(CultureInfo.InvariantCulture, $"DC {dc}") : HiddenDc,
+        if (check.GroupCheck)
+        {
+            footer = check.Group.IsDefaultOrEmpty ? "Everyone present rolls. Half or more must succeed."
+                : $"{check.Group.Count(r => r.Passed)} of {check.Group.Length} succeeded — {(check.Roll?.Success == true ? "Success" : "Failure")}";
+        }
+        if (check.Helper is { } helper) footer = $"{helper} helps · advantage" + (footer is null ? "" : $" · {footer}");
+        return new CheckPanel(check.GroupCheck ? "Group check" : "Skill check", SkillName(check.Skill), check.Dc is { } dc ? string.Create(CultureInfo.InvariantCulture, $"DC {dc}") : HiddenDc,
             Typeset($"“{check.Title}”"),
-            [.. cards.Select(c => new CheckCard(c.Member, c.Name, c.Player, c.Sprite, Signed(c.Bonus), c.Note,
+            [.. cards.Select(c => new CheckCard(c.Member, c.Name, c.Player, c.Sprite, Signed(c.Bonus), !check.Group.IsDefaultOrEmpty && check.Group.FirstOrDefault(r => r.Member == c.Member) is { } g ? $"Rolled {g.Die} + {g.Bonus} = {g.Die + g.Bonus} — {(g.Passed ? "Success" : "Failure")}" : c.Note,
                 c.Member == check.Chosen ? "Rolls for the party" : c.Here ? null : $"{c.Player} away", c.Member == check.Chosen, c.Here, c.Votes,
                 CheckCard.WhoOf(c.Name, c.Player, c.Class), PlayerInk.Of(c.Color)))],
             roll is null && check.Deadline is not null ? clock : null, footer, roll);

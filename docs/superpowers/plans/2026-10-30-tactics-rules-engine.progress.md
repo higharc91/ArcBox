@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # ArcBox Tactics Rules Engine: progress against the plan
 
 This tracker lets another session or agent pick the work up. It goes with:

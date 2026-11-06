@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Environmental tiles: build plan
 
 **2026-11-03 completion authorization:** The user asked to finish all remaining steps, review the art again and make a PR: “If there are remaining steps, do all of them.” This authorizes the remaining Ford/cave balance tuning and final polish, superseding the earlier ask-before-tuning and no-PR gates below. Record every final value and validation result in the completion report. Target the PR at `main`, which now contains the overworld and shops/gold work; do not merge the PR without a further instruction.

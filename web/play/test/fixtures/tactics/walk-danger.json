@@ -48,6 +48,7 @@
     "canBattle": false,
     "portal": "/c/ABCD",
     "interact": null,
+    "canGive": true,
     "danger": "Wolves in the Pines",
     "gold": 0,
     "targets": [],

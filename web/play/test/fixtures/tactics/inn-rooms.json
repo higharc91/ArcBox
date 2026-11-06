@@ -247,6 +247,7 @@
     "canPropose": false,
     "haggle": {
       "can": false,
+      "spent": false,
       "dc": 15,
       "result": null
     }

@@ -175,7 +175,7 @@ public sealed partial class TacticsGame
             case "watch":
                 var lines = new List<string>();
                 foreach (var def in AllThings.Where(t => t.Hidden is not null && !ThingState(t).Found
-                    && Math.Max(Math.Abs(t.At.X - camp.At.X), Math.Abs(t.At.Y - camp.At.Y)) <= 6 && chosen + bonus >= t.Hidden.Dc).OrderBy(t => t.Id, StringComparer.Ordinal))
+                    && RecoveryRules.InWatchRange(camp.At, t.At) && chosen + bonus >= t.Hidden.Dc).OrderBy(t => t.Id, StringComparer.Ordinal))
                     Find(def, Interactables.FindingOf(def), who, lines, FindHow.Search);
                 text = lines.Count > 0 ? string.Join(" ", lines) : $"{character.Name} keeps watch. The night is quiet.";
                 camp = camp with { Watcher = camp.Watcher ?? who };

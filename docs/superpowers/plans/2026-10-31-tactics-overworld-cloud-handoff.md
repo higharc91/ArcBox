@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Handoff: finish the Wardenflame overworld overnight
 
 You're a cloud Claude Code session taking over from a local session on the user's Windows PC. The user is asleep or away, and won't answer. Work without them: decide, record the decision, and carry on. Anything only they can decide goes on the list in §8.

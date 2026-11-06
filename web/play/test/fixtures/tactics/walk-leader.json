@@ -48,6 +48,7 @@
     "canBattle": false,
     "portal": "/c/ABCD",
     "interact": null,
+    "canGive": true,
     "targets": [],
     "beat": false,
     "search": true

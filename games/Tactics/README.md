@@ -1,6 +1,10 @@
+[Run the game and develop Wardenflame](DEVELOPING.md) — prerequisites, TV/phone quick start, checks and asset tools.
+
 # ArcBox Tactics
 
 ## View and phone load byte budgets (#201)
+
+The measurements below are the historical #201 baseline, not current-size promises. The test ceilings remain enforced. Generate current pack/build/test counts with [repo-metrics.py](../../tools/repo-metrics.py); use a fresh full-check log for executed test counts. Built-text totals cover all entries and are not a first-load estimate.
 
 `Tactics.Game.Tests/ViewBudgetTests.cs` serializes the Ashen Ford exploration view and each phone view with `ArcJson.Options` after a six-member campaign enters the region. These are UTF-8 JSON payload bytes, before transport framing or compression.
 
@@ -23,7 +27,7 @@ For the first Ashen Ford flyover area, the map's material set, map props, dressi
 
 ## Check the repository
 
-From the repository root, run `bash tools/check-all.sh --full` to reproduce CI, or `bash tools/check-all.sh --fast` while iterating. The full mode builds and tests the .NET solution; fast mode runs the Tactics logic and game tests. Both modes run the phone tests and TypeScript build, Node playtest tool tests, Python asset and audio tests, and the lore validator and tests. The script prints a pass/fail line for each group and exits nonzero if any fails. Install .NET 10, Node 22, Python 3.13 with Pillow and numpy, and npm dependencies are installed by the script.
+From the repository root, run `bash tools/check-all.sh --full` to reproduce CI, or `bash tools/check-all.sh --fast` while iterating. The full mode builds and tests the .NET solution; fast mode runs the Tactics logic and game tests. Both modes run the phone tests and TypeScript build, Node playtest tool tests, Python asset and audio tests, and the lore validator and tests. The script prints a pass/fail line for each group and exits nonzero if any fails. Install .NET 10, Node 22, Python 3.11+ with Pillow and numpy, and npm dependencies are installed by the script.
 
 The .NET group guards `games/`, `src/`, and the Tactics content consumed by their tests. The phone group guards `web/play/`; the Node group guards `tools/tactics-playtest/`; and the Python group guards `tools/tactics-assets/`, `tools/tactics-audio/`, and `content/tactics/base/lore/` through `tools/tactics-lore/`. The Godot TV end-to-end runner, `tools/tv-e2e.sh`, is a separate manual check.
 
@@ -41,7 +45,7 @@ The design is in [docs/superpowers/specs/2026-10-30-tactics-rules-engine-design.
 dotnet run -c Release --project games/Tactics/Tactics.Sim -- --levels 1,3,5,7,10 --sizes 4,5,6 --parties 6 --seeds 20 --difficulty Normal --out <report.md>
 ```
 
-That full sweep is 9,000 battles and takes about 5 minutes. While iterating, use `--seeds 6` (about 1.5 minutes), or narrow it with `--encounters a,b` and `--levels`. `--help` lists every option. The rules are read at run time, so a content edit needs no rebuild.
+The sweep size follows the selected encounters, levels, party sizes, parties and seeds; elapsed time depends on the machine and current content. While iterating, use `--seeds 6`, or narrow it with `--encounters a,b` and `--levels`. `--help` lists every option. The rules are read at run time, so a content edit needs no rebuild.
 
 The report also groups environmental reactions, same-side/self conduction damage, burning tile-rounds and terminal surface deaths by encounter and level. Downs are reported separately from deaths. Environment-off encounters produce zero environmental tallies.
 

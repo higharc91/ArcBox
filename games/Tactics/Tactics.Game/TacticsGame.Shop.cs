@@ -81,7 +81,7 @@ public sealed partial class TacticsGame
             stock = stock.SetItem(line.Item.Value, count);
         }
         return new ShopSave(stock, chapter, saved?.Seq ?? 0, saved is null || saved.Trades.IsDefault ? [] : saved.Trades,
-            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))), _doc.World?.RestSeq ?? 0);
+            Ordinal.Map(shop.Stock.Select(s => (s.Item.Value, s.Count))), _doc.World?.RestSeq ?? 0, saved?.FailedHaggleRest);
     }
 
     private void ShopInput(Player player, ProfileId profile, CustomInput input)

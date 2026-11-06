@@ -1,0 +1,102 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "check",
+  "data": {
+    "skill": "stealth",
+    "dc": 15,
+    "title": "First, what\u0027s it worth to you?",
+    "cards": [
+      {
+        "id": "pr_member1",
+        "name": "Player1",
+        "player": "Player1",
+        "cls": "Fighter",
+        "bonus": 1,
+        "note": "DEX 13",
+        "here": true
+      },
+      {
+        "id": "pr_member2",
+        "name": "Player2",
+        "player": "Player2",
+        "cls": "Cleric",
+        "bonus": 1,
+        "note": "DEX 12",
+        "here": true
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3",
+        "player": "Player3",
+        "cls": "Rogue",
+        "bonus": 5,
+        "note": "Proficient \u00B7 DEX 17",
+        "here": true
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4",
+        "player": "Player4",
+        "cls": "Wizard",
+        "bonus": 1,
+        "note": "DEX 13",
+        "here": true
+      }
+    ],
+    "help": {
+      "can": false,
+      "member": null,
+      "name": null
+    },
+    "group": true,
+    "mine": null,
+    "canChoose": false,
+    "tie": false,
+    "decider": null,
+    "tied": [],
+    "roll": {
+      "member": "party",
+      "die": 2,
+      "bonus": 0,
+      "total": 2,
+      "dc": 15,
+      "success": true,
+      "dice": null,
+      "group": [
+        {
+          "member": "pr_member1",
+          "name": "Player1",
+          "die": 20,
+          "bonus": 1,
+          "success": true
+        },
+        {
+          "member": "pr_member2",
+          "name": "Player2",
+          "die": 8,
+          "bonus": 1,
+          "success": false
+        },
+        {
+          "member": "pr_member3",
+          "name": "Player3",
+          "die": 11,
+          "bonus": 5,
+          "success": true
+        },
+        {
+          "member": "pr_member4",
+          "name": "Player4",
+          "die": 3,
+          "bonus": 1,
+          "success": false
+        }
+      ]
+    },
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

@@ -13,7 +13,7 @@ public sealed record SceneLine(string Id, string Speaker, string Text, string Mo
 }
 
 /// <summary>A skill check on an option: the party picks who rolls d20 + their bonus for <see cref="Skill"/> against <see cref="Dc"/>.</summary>
-public sealed record SceneCheck(string Skill, int Dc, string Pass, string Fail);
+public sealed record SceneCheck(string Skill, int Dc, string Pass, string Fail, bool Group = false);
 
 /// <summary>
 /// The tags that gate an option: it's offered only when someone in the party has one of them, of any kind. An option with no tags is

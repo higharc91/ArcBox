@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Issue #80 — final cast installed on townsfolk-art
 
 Work in `higharc91/ArcBox`, branch **`townsfolk-art`**. Fetch and check out that
