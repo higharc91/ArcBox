@@ -3,13 +3,47 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from collections import Counter
+from unittest.mock import patch
 import numpy as np
 from PIL import Image
 from arcpix.out import PACK
 from dev.audit_overworld import inventory,review
+from dev import audit_overworld
+from parts.overworld_review import assessment
 
 
 class OverworldArtTests(unittest.TestCase):
+    def test_unreviewed_bridge_families_still_require_a_decision(self):
+        for section, family in [('terrain', 'warden_unreviewed'), ('props', 'warden_force_99_99')]:
+            with self.subTest(section=section, family=family), self.assertRaises(KeyError):
+                assessment(section, family)
+
+    def test_only_the_declared_invisible_collision_proxy_may_be_empty(self):
+        cases = [('sprite', True, (1, 1), False, False),
+                 ('collision proxy', True, (1, 1), False, True),
+                 ('collision proxy', False, (1, 1), False, False),
+                 ('collision proxy', True, (2, 2), False, False),
+                 ('collision proxy', True, (1, 1), True, False)]
+        for role, blocks, size, visible, accepted in cases:
+            with self.subTest(role=role, blocks=blocks, size=size, visible=visible), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                (root/'props').mkdir()
+                Image.new('RGBA', size, (255, 255, 255, 255 if visible else 0)).save(root/'props/gate.png')
+                record = dict(id='props/warden_gate_collision/default', section='props',
+                    family='warden_gate_collision', variant='default', path='props/gate.png',
+                    size=list(size), frames=1, anchor=[0, 0], role=role, blocks=blocks,
+                    where='Ford gate', assessment='Invisible collision proxy.')
+                with patch.object(audit_overworld, 'PACK', root), \
+                     patch.object(audit_overworld, 'inventory', return_value=[record]), \
+                     patch.object(audit_overworld, 'region_usage', return_value=Counter()):
+                    if accepted:
+                        review(output=root/'review')
+                        self.assertTrue((root/'review/assets.json').exists())
+                    else:
+                        with self.assertRaises(ValueError):
+                            review(output=root/'review')
+
     def test_every_environment_image_has_a_review_and_valid_strip_metadata(self):
         with tempfile.TemporaryDirectory() as out:
             review(output=Path(out))
