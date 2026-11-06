@@ -254,4 +254,75 @@ public sealed class SteadfastTests
         }
         Assert.True(pushed, "no seed failed Maren's Strength save in 24 tries");
     }
+
+    // A bridge over a chasm: the middle tile is five levels up and about to collapse.
+    private const string Bridge = "0. 0. 5. 0. 0.";
+
+    private static readonly AlterTerrainEffect Collapse = new(new AreaDef(AreaShape.Single), -9, Deep: true);
+
+    [Fact]
+    public void A_guarded_unit_on_a_collapsing_tile_lands_on_the_nearest_free_bank()
+    {
+        var battle = TestBattle.On(Bridge)
+            .Party("kara", TestSheets.Fighter, T(0, 0))
+            .Enemy("gob", Goblin, T(1, 0))
+            .Enemy("boss", Steadfast(Goblin with { MaxHp = 60 }), T(2, 0));
+        var (state, _) = battle.Start();
+
+        var (after, events) = battle.Run(state, "kara", null, T(2, 0), Collapse);
+
+        // (1, 0) is taken, so the nearest free bank is (3, 0).
+        var boss = after.Units[U("boss")];
+        Assert.Equal(T(3, 0), boss.Pos);
+        Assert.Equal(LifeState.Up, boss.Life);
+        Assert.Contains(new PushResisted(U("boss"), T(3, 0)), events);
+        var fell = Assert.Single(events.OfType<Fell>());
+        Assert.False(fell.IntoDeep);
+        Assert.Equal(5, fell.Levels);
+        Assert.True(boss.Hp < 60 && boss.Hp > 0);
+        Assert.DoesNotContain(events, e => e is Died);
+        Assert.Contains(T(2, 0), after.Sunk!);
+    }
+
+    [Fact]
+    public void An_ordinary_unit_on_a_collapsing_tile_still_falls_in_and_dies()
+    {
+        var battle = TestBattle.On(Bridge)
+            .Party("kara", TestSheets.Fighter, T(0, 0))
+            .Enemy("gob", Goblin, T(2, 0));
+        var (state, _) = battle.Start();
+
+        var (after, events) = battle.Run(state, "kara", null, T(2, 0), Collapse);
+
+        Assert.Equal(LifeState.Dead, after.Units[U("gob")].Life);
+        Assert.Contains(events, e => e is Fell { IntoDeep: true });
+        Assert.DoesNotContain(events, e => e is PushResisted);
+    }
+
+    [Fact]
+    public void Vorga_on_the_Warlord_Bridge_survives_the_collapse_with_his_phase_intact()
+    {
+        var rules = BasePackTests.Rules;
+        var setup = Encounters.Setup("warlord_bridge", BasePackTests.Party(4, rules), Difficulty.Normal, rules);
+        var bridge = setup.Map.Zones["bridge"];
+        setup = setup with { Units = [.. setup.Units.Select(u => u.Id == U("fighter") ? u with { At = bridge[0] }
+            : u.Id == U("warlord") ? u with { At = bridge[^1] } : u)] };
+
+        var (state, events) = (Battle.Start(setup, rules, 3).State, Battle.Start(setup, rules, 3).Events);
+
+        Assert.Contains(new TriggerFired("bridge_collapse"), events);
+        var vorga = state.Units[U("warlord")];
+        Assert.Equal(LifeState.Up, vorga.Life);
+        Assert.Contains(events, e => e is PushResisted { Unit.Value: "warlord" });
+        Assert.DoesNotContain(events, e => e is Died { Unit.Value: "warlord" });
+        Assert.DoesNotContain(vorga.Pos, state.Sunk!);
+
+        // His phase is still ahead of him: a huge hit holds at the threshold and the phase then fires.
+        var w = new BattleWriter(state, rules);
+        Hp.Damage(w, U("warlord"), 5000, "slashing", U("fighter"));
+        var held = w.Freeze();
+        Assert.Equal(LifeState.Up, held.Units[U("warlord")].Life);
+        var (_, later) = (held, Battle.Apply(held, new EndTurn(held.Active!.Value), rules).Events);
+        Assert.Contains(new PhaseEntered(U("warlord"), 1), later);
+    }
 }

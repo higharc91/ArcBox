@@ -145,12 +145,58 @@ public static class Motion
     }
 
     /// <summary>
-    /// The ground gave way under <paramref name="unit"/> (a collapse into deep water or a chasm): <see cref="Fell"/> into
+    /// The ground gave way under a guarded <paramref name="unit"/> (<see cref="Steadfast"/>): it is put on the nearest walkable,
+    /// empty tile that isn't deep (a search outward by steps, ties in tile order), takes the fall's damage for a drop of more than
+    /// 3 levels as a push does, and braces (<see cref="PushResisted"/>). False, doing nothing, when there is no such tile.
+    /// </summary>
+    private static bool Brace(BattleWriter w, UnitId unit, int levels)
+    {
+        var terrain = w.Terrain;
+        var from = w.Unit(unit).Pos;
+        var seen = new HashSet<Tile> { from };
+        var ring = new List<Tile> { from };
+        Tile? bank = null;
+        while (ring.Count > 0 && bank is null)
+        {
+            var next = new SortedSet<Tile>();
+            foreach (var tile in ring)
+                foreach (var (dx, dy) in new[] { (0, -1), (1, 0), (0, 1), (-1, 0) })
+                {
+                    var n = new Tile(tile.X + dx, tile.Y + dy);
+                    if (terrain.Map.InBounds(n) && seen.Add(n))
+                        next.Add(n);
+                }
+            var found = next.Where(t => CanLand(w, t, unit)).Cast<Tile?>().FirstOrDefault();
+            bank = found;
+            ring = [.. next];
+        }
+        if (bank is not { } landing)
+            return false;
+
+        w.Set(w.Unit(unit) with { Pos = landing });
+        w.Emit(new Pushed(unit, from, landing));
+        Entered(w, unit, landing);
+        w.Emit(new PushResisted(unit, landing));
+        if (levels > 3)
+        {
+            var damage = Rolls.Damage(w, new Dice(levels - 3, 6, 0), crit: false);
+            w.Emit(new Fell(unit, levels, damage, IntoDeep: false));
+            Hp.Damage(w, unit, damage, Bludgeoning, null);
+            if (w.Unit(unit).Life == LifeState.Up)
+                KnockProne(w, unit);
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// The ground gave way under <paramref name="unit"/> (a collapse into deep water or a chasm; a guarded unit is put on the nearest bank instead, see <see cref="Steadfast"/>): <see cref="Fell"/> into
     /// deep, by <paramref name="levels"/>, then it drops as at 0 HP (<see cref="DownedRules.Drop"/>, by no one), so a party
     /// member is Downed and anyone else dies; one already Downed keeps its countdown.
     /// </summary>
     public static void FallIn(BattleWriter w, UnitId unit, int levels)
     {
+        if (Steadfast.Guarded(w.State, w.Unit(unit)) && Brace(w, unit, levels))
+            return;
         Surfaces.Douse(w, unit, w.Unit(unit).Pos);
         w.Emit(new Fell(unit, Math.Max(0, levels), 0, IntoDeep: true));
         DownedRules.Drop(w, unit, null);

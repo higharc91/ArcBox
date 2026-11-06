@@ -287,7 +287,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         {
             var source = ((AbilityUsed)beat.Events[start]).Source;
             var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded or TileReacted)).ToArray();
-            var rolled = window.Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
+            var rolled = window.Where((e, i) => !IsConcentrationCheck(window, i)).Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
             var targets = rolled.Count > 0
                 ? rolled
                 : window.TakeWhile(e => e is not (PassiveTriggered or Collided)).Select(Touched).OfType<UnitId>().Where(u => u != source).ToHashSet();
@@ -296,6 +296,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var last = Array.FindLastIndex(window, e => (RolledAgainst(e) ?? Touched(e)) is { } unit && targets.Contains(unit));
             return start + 1 + last;
         }
+
+        /// <summary>
+        /// True when <c>window[i]</c> is the save a unit makes to keep its concentration after a collision hurt it
+        /// (<see cref="Collided"/> for it, then its <see cref="Damaged"/>, then the roll): a side effect of a push, not a target.
+        /// </summary>
+        private static bool IsConcentrationCheck(BattleEvent[] window, int i)
+            => i >= 2 && window[i] is Rolled { Kind: RollKind.Save } save && window[i - 1] is Damaged hurt && hurt.Unit == save.Roller
+               && window[i - 2] is Collided hit && hit.Unit == save.Roller;
 
         private static UnitId? RolledAgainst(BattleEvent e) => e switch
         {

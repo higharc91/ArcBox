@@ -447,6 +447,30 @@ public sealed class BeatScriptTests
             Script(Near, [.. Hit(6, 4), new ConditionApplied(Hero, new ConditionId("blessed"))]).Length, 3);
 
     [Fact]
+    public void A_three_beam_blast_whose_repelling_blast_shoves_the_foe_into_a_concentrating_ally_is_still_three_swings()
+    {
+        var ally = new UnitId("druid");
+        var other = new UnitId("bandit.1");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 7, 3), Unit(ally, "Party", 8, 3), Unit(other, "Enemy", 9, 3));
+        var script = Script(view,
+            Used("characters.point", "fx.force.eldritch", "projectiles.eldritch", Foe),
+            new Rolled(Hero, RollKind.Attack, Roll(7, false)), new AttackResolved(Hero, Foe, false, false),
+            new Rolled(Hero, RollKind.Attack, Roll(3, false)), new AttackResolved(Hero, Foe, false, false),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
+            new Damaged(Foe, 4, "force", 12),
+            new PassiveTriggered(Foe, "lit.fades"), new ConditionRemoved(Foe, new ConditionId("lit")),
+            new PassiveTriggered(Hero, "warlock.agonizing_blast"), new Damaged(Foe, 3, "force", 9),
+            new PassiveTriggered(Hero, "warlock.repelling_blast"),
+            new Collided(Foe, ally, 2), new Damaged(Foe, 2, "bludgeoning", 7),
+            new Collided(ally, Foe, 3), new Damaged(ally, 3, "bludgeoning", 66),
+            new Rolled(ally, RollKind.Save, Roll(1, false)), new ConcentrationBroken(ally, new AbilityId("druid.entangle")),
+            new ConditionRemoved(other, new ConditionId("restrained")),
+            new PassiveTriggered(Hero, "warlock.lifedrinker"), new Damaged(Foe, 5, "necrotic", 2));
+
+        Assert.Equal(3, script.Cues.OfType<PoseCue>().Count(c => c.Toward is not null));
+    }
+
+    [Fact]
     public void A_guarded_unit_bracing_at_the_edge_pops_a_word_over_its_tile()
     {
         var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3));
