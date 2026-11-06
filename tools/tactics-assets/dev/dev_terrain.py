@@ -1,4 +1,8 @@
+# Render tiled terrain texture seam checks.
 """Quick look at terrain textures, tiled 2x2 to show the seams: python3 dev_terrain.py [ids...]"""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import sys
 from PIL import Image
 from arcpix.preview import contact_sheet, Tile

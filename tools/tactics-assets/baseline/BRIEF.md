@@ -29,8 +29,8 @@ with pixel sprites, shown at about 3–4× on a TV. Five workstreams run **at th
 
 ## Hard contract (breaking these breaks the game or other workstreams)
 1. **Never remove or rename an art key.** The rules pack references keys built from every manifest
-   (`set.asset` and `set.asset.variant`, see `dev_keys.py`). After building, run:
-   `python3 tools/tactics-assets/dev_keys.py check tools/tactics-assets/baseline/art-keys.json`. It must report 0 gone.
+   (`set.asset` and `set.asset.variant`, see `dev/dev_keys.py`). After building, run:
+   `python3 tools/tactics-assets/dev/dev_keys.py check tools/tactics-assets/baseline/art-keys.json`. It must report 0 gone.
    - Adding keys is fine.
    - Changing frame counts or sizes is fine **if the manifest describes them**.
 2. **A brand-new beast or boss creature** (a new top-level entry in `beasts` → `beasts` or `bosses` → `monsters`) fails a C# test
@@ -55,7 +55,7 @@ with pixel sprites, shown at about 3–4× on a TV. Five workstreams run **at th
 
 ## Judging your own work
 Look at what you make. Use the Read tool on preview PNGs (they render as images), and render zoomed crops with
-`dev_zoom.py` or your own throwaway script. Put throwaway scripts and renders in
+`dev/dev_zoom.py` or your own throwaway script. Put throwaway scripts and renders in
 `/tmp/claude-0/-home-user-ArcBox/96209855-791c-56f7-b997-7ec0e92b7063/scratchpad/<your-workstream>/`.
 - Compare before and after side by side. The `git show HEAD:path > file` gives you the old one.
 - Iterate until it's clearly better. If a change isn't clearly better, revert it.

@@ -1,9 +1,13 @@
+# Render creature atlas and animation reviews.
 """Portable animation review built from the same atlases and manifest the game reads."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import base64,html,io,json,shutil,sys
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 from pixel_atlas import exact_png_bytes
-ROOT=Path(__file__).resolve().parents[2];PACK=ROOT/'content/tactics/base';OUT=ROOT/'docs/art/creatures';OUT.mkdir(parents=True,exist_ok=True)
+ROOT=Path(__file__).resolve().parents[3];PACK=ROOT/'content/tactics/base';OUT=ROOT/'docs/art/creatures';OUT.mkdir(parents=True,exist_ok=True)
 PRIMARY={'wolf':'beasts.wolf.grey','boar':'beasts.boar.brown','bear':'beasts.bear.brown','spider':'beasts.spider.black','slime':'beasts.slime.green','bat':'beasts.bat.dusk','drake':'beasts.drake.red','warg':'bestiary.warg.black','hookbeak':'bestiary.hookbeak.brown','scorpion':'bestiary.scorpion.sand','harpy':'bestiary.harpy.dusk','wisp':'bestiary.wisp.marsh','gargoyle':'bestiary.gargoyle.granite','crab':'bestiary.crab.shore','mule':'fauna.pack_mule','goat':'fauna.farm_goat','fox':'fauna.red_fox','duck':'fauna.river_duck','crow':'fauna.field_crow','dog':'fauna.farm_dog','sheep':'fauna.farm_sheep'}
 NAMES={'spider':'Giant Spider','bat':'Giant Bat','scorpion':'Giant Scorpion','crab':'Giant Crab','mule':'Pack Mule','dog':'Farm Dog','sheep':'Farm Sheep','wisp':"Will-o’-Wisp"}
 HERO=Image.open(PACK/'tactical/human_fighter.png').convert('RGBA').crop((0,0,160,160))

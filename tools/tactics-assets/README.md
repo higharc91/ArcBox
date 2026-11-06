@@ -22,8 +22,37 @@ Concept and provenance art lives in `tools/tactics-assets/concepts/` and `tools/
 the runtime pack lives in `content/tactics/base/`. See [the storage proposal](../../docs/tactics-asset-storage-proposal.md)
 for measured sizes and migration choices.
 
-Needs Python 3.11+ with Pillow and numpy. `dev_preview.py` and `dev_zoom.py` are quick-look helpers used while
-drawing.
+Needs Python 3.11+ with Pillow and numpy. The normal entry point is `build.py`; the tools in `dev/` are explicit authoring or review commands.
+
+## Build order and scripts
+
+`python3 tools/tactics-assets/build.py` runs the sets in this order, as registered in `build.py`:
+
+1. `palettes`, `characters`, `anims`, `terrain`, `tactical`
+2. `props`, `portraits`, `beasts`, `backgrounds`, `ui`, `icons`, `fx`, `ambient`, `bosses`, `bestiary`, `emotes`, `town`, `status`, `pickups`, `worldmap`
+3. `signature`, `title`, `crests`, `dungeon`, `projectiles`, `gear_icons`, `grades`, `creator_thumbs`, `hazards`, `transitions`, `sheet_icons`, `chapters`, `camp`
+4. `showcase`, `gallery`, `lore_places` after their source sets; these read baked pack files or review sheets.
+
+For a partial build, run the needed source sets first. In particular, `showcase` reads `fx`, `ui`, and `title`; `gallery` reads the built pack and existing previews. The order above describes the current script, including its review generation; it is not a dependency resolver.
+
+| Script | Purpose |
+|---|---|
+| `build.py` | Build the content pack and its review images in the order above, or selected sets from the command line. |
+| `creature_scale.py` | Shared creature scale policy and scale-only manifest tuning. |
+| `pixel_atlas.py` | Lossless indexed PNG encoding and portrait crop helper. |
+| `test_tactical.py` | Check tactical atlas coverage, animation contracts, and deterministic rebakes. |
+| `test_overworld.py` | Check environment art, review inventory, and overworld metadata. |
+| `test_manifest_crosscheck.py` | Check shipped manifest files and cross-references. |
+| `dev/dev_keys.py` | Snapshot, compare, and validate art keys referenced by rules. |
+| `dev/dev_preview.py` | Render character recipe contact sheets. |
+| `dev/dev_zoom.py` | Render close-up character frames. |
+| `dev/dev_terrain.py` | Render tiled terrain textures for seam checks. |
+| `dev/audit_overworld.py` | Audit overworld art coverage and write a searchable gallery. |
+| `dev/review_overworld_context.py` | Compare baked environment art at matching world scale. |
+| `dev/review_materials.py` | Compare current and earlier material renders. |
+| `dev/review_creature_assets.py` | Render creature atlas and animation reviews. |
+
+`arcpix/` and `parts/` contain imported modules rather than separate entry scripts. Follow-up splits: `parts/signature.py` (3,508 lines) and `parts/dungeon.py` (3,392 lines) exceed 3,000 lines; `parts/town.py` (2,924 lines) and `parts/fx.py` (2,686 lines) are approaching that size. This pass leaves those modules intact.
 
 ## Tactical player characters (runtime)
 
@@ -100,7 +129,7 @@ To compare a revision, save the previous `tactical/` and `characters/presets/`
 directories, then run:
 
 ```bash
-python3 tools/tactics-assets/review_materials.py --before /path/to/snapshot
+python3 tools/tactics-assets/dev/review_materials.py --before /path/to/snapshot
 ```
 
 The generated `material-refinement.png` compares identical
@@ -115,7 +144,7 @@ asset reviews, not Godot screenshots; review the game camera as well.
 
 The [individual asset review](../../docs/superpowers/reports/overworld-art-review/README.md)
 covers all shipped terrain, props, town buildings and textures, ambient animations,
-map icons, and their shadow/light masks. `audit_overworld.py` produces a searchable
+map icons, and their shadow/light masks. `dev/audit_overworld.py` produces a searchable
 standalone gallery plus per-image JSON decisions and checks every PNG against its
 manifest. Unknown families require an explicit assessment in
 `parts/overworld_review.py`. Run `python3 tools/tactics-assets/test_overworld.py`

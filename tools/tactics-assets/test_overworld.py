@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 from PIL import Image
 from arcpix.out import PACK
-from audit_overworld import inventory,review
+from dev.audit_overworld import inventory,review
 
 
 class OverworldArtTests(unittest.TestCase):

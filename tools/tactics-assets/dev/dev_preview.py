@@ -1,4 +1,8 @@
+# Render quick character recipe contact sheets.
 """Quick look at recipes while developing: python3 dev_preview.py [ids...]"""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import sys
 from PIL import Image
 from arcpix.preview import contact_sheet, Tile, strip

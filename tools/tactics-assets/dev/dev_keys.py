@@ -1,21 +1,25 @@
+# Snapshot and check the art-key contract against the rules pack.
 """Guards the art-key contract while the art changes.
 
 The rules pack refers to art by key (`fx.heal.holy`, `beasts.wolf.grey`, `characters.cast`), and the C# loader
 (`Tactics.Logic.ArtManifests`) builds those keys from every set's manifest.json. Removing or renaming a key breaks the
 rules pack, so this script computes the keys exactly as the loader does and compares them with a saved baseline.
 
-    python3 tools/tactics-assets/dev_keys.py snapshot base.json   # save today's keys
-    python3 tools/tactics-assets/dev_keys.py check base.json      # fail if any saved key is gone; list new ones
-    python3 tools/tactics-assets/dev_keys.py refs                 # fail if the rules pack names a key no set defines
+    python3 tools/tactics-assets/dev/dev_keys.py snapshot base.json   # save today's keys
+    python3 tools/tactics-assets/dev/dev_keys.py check base.json      # fail if any saved key is gone; list new ones
+    python3 tools/tactics-assets/dev/dev_keys.py refs                 # fail if the rules pack names a key no set defines
 """
 from __future__ import annotations
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import json
 import re
 import sys
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parents[2] / "content" / "tactics" / "base"
+BASE = Path(__file__).resolve().parents[3] / "content" / "tactics" / "base"
 NAME = re.compile(r"^[A-Za-z0-9_-]+$")
 
 
