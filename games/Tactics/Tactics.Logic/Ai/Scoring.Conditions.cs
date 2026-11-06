@@ -4,20 +4,22 @@ namespace Tactics.Logic;
 
 internal sealed partial class Scorer
 {
-    private readonly Dictionary<ConditionId, bool> _wards = [];
+    private readonly Dictionary<ConditionId, ImmutableArray<PassiveDef>> _wards = [];
 
     /// <summary>
-    /// True when the condition stands its holder back up when it is Downed (Death Ward): a passive of its own on
-    /// <see cref="HookKind.OnDowned"/> that revives or heals it. Its static modifiers can't say what that is worth
-    /// (<see cref="ConditionBenefit"/>); <see cref="Worth"/> values it by the chance the holder drops.
+    /// True when the condition, put on <paramref name="holder"/>, would stand it back up when it is Downed (Death Ward): a
+    /// passive of its own on <see cref="HookKind.OnDowned"/> that revives or heals it, with a use left on the holder if it is
+    /// limited per battle (a spent one can't fire again, so it is worth nothing). Its static modifiers can't say what that is
+    /// worth (<see cref="ConditionBenefit"/>); <see cref="Worth"/> values it by the chance the holder drops.
     /// </summary>
-    private bool Wards(ConditionId id)
+    private bool Wards(ConditionId id, UnitState holder)
     {
         if (!_wards.TryGetValue(id, out var wards))
             _wards[id] = wards = Rules.Conditions.TryGetValue(id, out var def) && !def.Passives.IsDefaultOrEmpty
-                && def.Passives.Any(p => p.Hook == HookKind.OnDowned && p.Target == PassiveTarget.Self
-                                         && All(p.Effects).Any(e => e is ReviveEffect or HealEffect));
-        return wards;
+                ? [.. def.Passives.Where(p => p.Hook == HookKind.OnDowned && p.Target == PassiveTarget.Self
+                                              && All(p.Effects).Any(e => e is ReviveEffect or HealEffect))]
+                : [];
+        return wards.Any(p => p.UsesPerBattle is not { } uses || holder.UsesLeft.GetValueOrDefault(p.Id, uses) >= 1);
     }
 
     /// <summary>

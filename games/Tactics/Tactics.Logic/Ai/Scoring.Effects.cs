@@ -95,7 +95,7 @@ internal sealed partial class Scorer
                     return new Outcome(DamageDist.Zero, Offense: benefit.Offense * Math.Min(turns, benefit.OffenseTurns),
                         Defense: benefit.Defense * Math.Min(turns, benefit.DefenseTurns),
                         Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0,
-                        Ward: Wards(apply.Condition) && target.Life == LifeState.Up ? 1 : 0);
+                        Ward: target.Life == LifeState.Up && Wards(apply.Condition, target) ? 1 : 0);
                 }
             case StatModEffect statMod:
                 {

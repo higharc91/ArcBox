@@ -304,6 +304,50 @@ public sealed class AbilityPlanningTests
         Assert.Contains(after.Units[U("aldo")].Conditions, c => c.Id.Value == "death_ward");
     }
 
+    /// <summary>
+    /// The reviewer's scenario (#110, R21): Aldo at 1 HP with three goblins on him, the priest beside him with Death Ward and
+    /// Cure Wounds. <paramref name="spentWard"/> gives the ward's passive a use a battle that Aldo has already spent.
+    /// </summary>
+    private static (TestBattle Battle, BattleState State) Endangered(bool spentWard)
+    {
+        var (ward, cure) = (A("cleric.death_ward"), A("cleric.cure_wounds"));
+        var condition = Base.Conditions[new ConditionId("death_ward")];
+        if (spentWard)
+            condition = condition with { Passives = [.. condition.Passives.Select(p => p with { UsesPerBattle = 1 })] };
+        var priest = First(TestSheets.Cleric.Knowing(ward, cure)) with { Level = 7, Resources = Ordinal.Map(("devotion", 8)), Move = 0 };
+        var goblin = TestSheets.Goblin with { Move = 0 };
+        var battle = On(Open(6, 3)).With(ward, cure).WithConditions(condition)
+            .Enemy("priest", priest, T(2, 1), new AiControlled("healer"))
+            .Enemy("aldo", TestSheets.Fighter with { Attacks = 3 }, T(3, 1))
+            .Party("g1", goblin, T(4, 1)).Party("g2", goblin, T(3, 0)).Party("g3", goblin, T(3, 2));
+        var state = battle.Start().State.Change("aldo", u => u with { Hp = 1, UsesLeft = u.UsesLeft.SetItem("death_ward.save", 0) });
+        return (battle, state);
+    }
+
+    [Fact]
+    public void A_ward_that_cannot_fire_is_worth_nothing_and_the_cleric_heals_instead()
+    {
+        var (battle, state) = Endangered(spentWard: true);
+
+        var plan = Ai.Plan(state, U("priest"), battle.Rules);
+
+        Assert.True(UseOf(plan, "cleric.death_ward") is null && UseOf(plan, "cleric.cure_wounds")?.Target.Unit == U("aldo"), plan.Explain);
+    }
+
+    [Fact]
+    public void Once_a_ward_has_fired_and_ended_a_fresh_one_is_worth_casting_again()
+    {
+        // The ward ends when it fires (the condition goes, and nothing else is spent), so the endangered Aldo is worth
+        // warding again.
+        var (battle, state) = Endangered(spentWard: false);
+
+        var plan = Ai.Plan(state, U("priest"), battle.Rules);
+
+        Assert.True(UseOf(plan, "cleric.death_ward")?.Target.Unit == U("aldo"), plan.Explain);
+        var after = ApplyAll(state, plan, battle.Rules);
+        Assert.Contains(after.Units[U("aldo")].Conditions, c => c.Id.Value == "death_ward");
+    }
+
     [Fact]
     public void A_druid_conjures_animals_beside_its_foes()
     {
