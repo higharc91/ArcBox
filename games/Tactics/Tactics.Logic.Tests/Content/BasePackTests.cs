@@ -308,6 +308,8 @@ public sealed class BasePackTests
             if (ability.Target.Range <= 1 && ability.Target.Kind is TargetKind.Enemy or TargetKind.AnyUnit && !ability.IsWeaponAttack
                 || ability.IsWeaponAttack && !sheet.Weapon.Ranged || ability.Target.Kind == TargetKind.Self)
                 state = state.Change("enemy", u => u with { Pos = new Tile(2, 1) });
+            if (ability.Requires is not null)     // Hide needs the user out of plain view: a stunned foe sees nothing
+                state = state.Give("enemy", TestConditions.Lasting(TestConditions.Stunned));
             var enemy = state.Units[U("enemy")].Pos;
             var target = ability.Target.Kind switch
             {

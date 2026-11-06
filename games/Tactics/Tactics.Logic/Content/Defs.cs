@@ -60,7 +60,9 @@ public sealed record AiHints(ImmutableArray<string> Tags);
 /// for range and damage and make <see cref="UnitSheet.Attacks"/> attacks, each running the effects on its own target
 /// (<see cref="StrikeStep"/>). With <see cref="RiderOnce"/>, only the attacks up to and including the first that hits run
 /// the whole list; the attacks after it are plain hits (<see cref="Strikes.Plain"/>), so a rider bought with one resource
-/// lands once. <see cref="Replaces"/> lets a later pack override an id.
+/// lands once. <see cref="Replaces"/> lets a later pack override an id. <see cref="Requires"/> is a test on the user that
+/// must hold for the ability to be used at all (<see cref="Hooks.Holds"/> with the user as owner and no other unit; refused
+/// with <see cref="RejectCode.Unmet"/> otherwise): Hide's <c>{"seen": false}</c> (#108).
 /// </summary>
 public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cost, TargetDef Target,
     ImmutableArray<EffectDef> Effects,
@@ -69,7 +71,8 @@ public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cos
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Flavor = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] AbilityId? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IsWeaponAttack = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RiderOnce = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RiderOnce = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] WhenDef? Requires = null);
 
 /// <summary>
 /// When a passive's effects run (spec §4.4). JSON: <c>"onBattleStart"</c>, <c>"onAttackHit"</c>, …. Each hook fires for one
@@ -172,8 +175,10 @@ public sealed record StaticMods(
 /// <list type="bullet">
 /// <item><see cref="Weapon"/>: a weapon attack whose weapon is any of these (<c>"finesse"</c>, <c>"ranged"</c>,
 /// <c>"melee"</c>, <c>"reach"</c>, its id or one of its tags).</item>
-/// <item><see cref="Advantage"/>: whether the roll had advantage. <see cref="Flanked"/>: whether the owner flanks the target
-/// (an ally that can act stands directly opposite).</item>
+/// <item><see cref="Advantage"/>, <see cref="Disadvantage"/>: whether the roll had advantage, disadvantage.
+/// <see cref="Flanked"/>: whether the owner flanks the target (an ally that can act stands directly opposite).
+/// <see cref="AllyBesideTarget"/>: whether an ally of the owner that can act (not the owner) stands next to the target, as
+/// SRD 5.2's Sneak Attack asks.</item>
 /// <item><see cref="TargetHasCondition"/>, <see cref="TargetTag"/>: the target has the condition (implied ones included) or
 /// the sheet tag. <see cref="HpBelow"/>: the target's HP is below this percentage of its max.</item>
 /// <item><see cref="HeightAbove"/>: the owner stands at least this many levels above the target.</item>
@@ -182,6 +187,8 @@ public sealed record StaticMods(
 /// <item><see cref="Success"/>: whether the roll the effect follows succeeded (an attack hit, a save was made).</item>
 /// <item><see cref="RoundEven"/>: whether the current round number is even. <see cref="RoundAtLeast"/>: the current round is at
 /// least this number.</item>
+/// <item><see cref="Seen"/>: whether the owner stands in plain view (<see cref="Stealth.InPlainView"/>: a foe that can act is
+/// next to it, or sees it with no cover).</item>
 /// </list>
 /// Every key present must hold.
 /// </summary>
@@ -200,7 +207,10 @@ public sealed record WhenDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Success = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? RoundEven = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RoundAtLeast = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RoundAtLeast = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Seen = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Disadvantage = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? AllyBesideTarget = null);
 
 /// <summary>Whom a passive's effects land on. JSON: <c>"other"</c> (the default) or <c>"self"</c>.</summary>
 public enum PassiveTarget

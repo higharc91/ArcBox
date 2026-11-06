@@ -2119,16 +2119,16 @@
             "level": 1,
             "features": [
               "rogue.sneak_attack",
+              "rogue.vex",
               "rogue.cunning_hide"
             ],
-            "attacks": 3,
+            "attacks": 2,
             "choices": []
           },
           {
             "level": 2,
             "features": [
-              "rogue.cunning_dash",
-              "rogue.cunning_disengage"
+              "rogue.cunning_dash"
             ],
             "attacks": null,
             "choices": []
@@ -2136,7 +2136,7 @@
           {
             "level": 3,
             "features": [
-              "rogue.steady_aim"
+              "rogue.cunning_disengage"
             ],
             "attacks": null,
             "choices": []
@@ -2161,7 +2161,7 @@
             "features": [
               "rogue.uncanny_dodge"
             ],
-            "attacks": 4,
+            "attacks": null,
             "choices": []
           }
         ],
@@ -3039,7 +3039,7 @@
           "Bonus action",
           "1 oath"
         ],
-        "text": "4 tiles: marks target for 3 rounds \u2014 You swear a vow of enmity: your attacks against the marked foe have advantage for 3 rounds."
+        "text": "4 tiles: marks target for 3 rounds (your attacks on it have advantage) \u2014 You swear a vow of enmity: your attacks against the marked foe have advantage for 3 rounds."
       },
       "barbarian.cleaving_blow": {
         "name": "Cleaving Blow",
@@ -3279,7 +3279,7 @@
           "Bonus action",
           "1 focus"
         ],
-        "text": "6 tiles: marks target for 2 rounds; target is Lit for 1 round"
+        "text": "6 tiles: marks target for 2 rounds (your attacks on it have advantage); target is Lit for 1 round"
       },
       "berserker.frenzy_strike": {
         "name": "Frenzy Strike",
@@ -4013,7 +4013,7 @@
           "Bonus action",
           "Once per battle"
         ],
-        "text": "6 tiles: marks target for 5 rounds; target is Hexed for 5 rounds"
+        "text": "6 tiles: marks target for 5 rounds (your attacks on it have advantage); target is Hexed for 5 rounds"
       },
       "human.resourceful": {
         "name": "Resourceful",
@@ -4398,7 +4398,7 @@
         "tags": [
           "Bonus action"
         ],
-        "text": "Self: you are Hidden for 1 round"
+        "text": "Self: you are Hiding for 1 round. Only when you aren\u0027t in plain view \u2014 Plain view: a foe next to you, or one that sees you with no cover between (walls, crates, height, smoke). While you\u0027re hiding, attacks against you have disadvantage and your next attack has advantage (this is Steady Aim too). It ends when you attack or end your turn in plain view."
       },
       "rogue.poison_strike": {
         "name": "Cunning Strike: Poison",
@@ -4413,14 +4413,7 @@
         "tags": [
           "Always on"
         ],
-        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or you are flanking the target): 6d6 damage (once per turn)"
-      },
-      "rogue.steady_aim": {
-        "name": "Steady Aim",
-        "tags": [
-          "Bonus action"
-        ],
-        "text": "Self: you can\u0027t move and have advantage on your attack rolls until the end of your turn"
+        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or (an ally is next to the target and you don\u0027t have disadvantage)): 3d6 damage (once per turn)"
       },
       "rogue.trip": {
         "name": "Cunning Strike: Trip",
@@ -4436,6 +4429,13 @@
           "Reaction"
         ],
         "text": "Self: you gain 1d6 \u002B level temporary HP \u2014 When a blow is about to land, you roll with it and take far less of it."
+      },
+      "rogue.vex": {
+        "name": "Vex",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a dart or rapier or shortbow or shortsword weapon: marks target for 1 round (your attacks on it have advantage)"
       },
       "rogue.withdraw": {
         "name": "Cunning Strike: Withdraw",

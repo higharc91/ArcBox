@@ -128,6 +128,34 @@ public sealed class HookTests
     }
 
     [Fact]
+    public void An_ally_beside_the_target_and_disadvantage_are_tests_a_hook_can_make()
+    {
+        // SRD 5.2's Sneak Attack (#108): an ally that can act within 5 feet of the target, and no disadvantage.
+        (BattleWriter W, RulesPack Rules) With(Tile ally, Func<BattleState, BattleState>? change = null)
+        {
+            var battle = TestBattle.On(Field).Party("ari", TestSheets.Rogue, T(0, 1)).Party("kara", TestSheets.Fighter, ally)
+                .Enemy("gob", Goblin, T(3, 1)).WithConditions([.. TestConditions.All]);
+            var (state, _) = battle.Start();
+            return (new BattleWriter(change?.Invoke(state) ?? state, battle.Rules), battle.Rules);
+        }
+        bool Holds(WhenDef when, (BattleWriter W, RulesPack Rules) at, Edge edge = Edge.None)
+            => Hooks.Holds(when, at.W, new HookArgs(U("ari"), U("gob"), Edge: edge), at.Rules);
+        var beside = new WhenDef(AllyBesideTarget: true);
+
+        Assert.True(Holds(beside, With(T(3, 0))));                       // next to the goblin, not opposite the rogue
+        Assert.True(Holds(beside, With(T(4, 1))));
+        Assert.False(Holds(beside, With(T(5, 1))));                      // two tiles off
+        Assert.False(Holds(beside, With(T(3, 0), s => s.Give("kara", TestConditions.Lasting(TestConditions.Stunned)))));
+        Assert.False(Holds(beside, With(T(3, 0), s => s.Change("kara", u => u with { Life = LifeState.Downed, Hp = 0, Countdown = 3 }))));
+        Assert.False(Holds(beside, With(T(0, 0), s => s.Change("ari", u => u with { Pos = T(2, 1) }))));   // the rogue isn't its own ally
+
+        var disadvantage = new WhenDef(Disadvantage: true);
+        Assert.True(Holds(disadvantage, With(T(3, 0)), Edge.Disadvantage));
+        Assert.False(Holds(disadvantage, With(T(3, 0)), Edge.None));
+        Assert.False(Holds(disadvantage, With(T(3, 0)), Edge.Advantage));
+    }
+
+    [Fact]
     public void Static_resist_halves_fire()
     {
         var burn = new AbilityDef(new AbilityId("test.burn"), "Burn", 1, new CostDef(),

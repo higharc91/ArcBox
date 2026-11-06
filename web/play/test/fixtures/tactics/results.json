@@ -3,31 +3,31 @@
   "module": "tactics",
   "screen": "results",
   "data": {
-    "outcome": "Won",
+    "outcome": "Lost",
     "encounter": "River Crossing",
     "lines": [
       {
         "name": "Player1",
-        "xp": 250,
+        "xp": 0,
         "injuries": []
       },
       {
         "name": "Player2",
-        "xp": 250,
+        "xp": 0,
         "injuries": []
       },
       {
         "name": "Player3",
-        "xp": 250,
+        "xp": 0,
         "injuries": []
       },
       {
         "name": "Player4",
-        "xp": 250,
+        "xp": 0,
         "injuries": []
       }
     ],
-    "note": null,
+    "note": "You wake at the recovery point. Wounds tended \u2014 no XP. Potions used are gone.",
     "vip": true,
     "difficulty": "Normal",
     "level": 1,

@@ -1,0 +1,39 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "results",
+  "data": {
+    "outcome": "Lost",
+    "encounter": "River Crossing",
+    "lines": [
+      {
+        "name": "Player1",
+        "xp": 0,
+        "injuries": []
+      },
+      {
+        "name": "Player2",
+        "xp": 0,
+        "injuries": []
+      },
+      {
+        "name": "Player3",
+        "xp": 0,
+        "injuries": []
+      },
+      {
+        "name": "Player4",
+        "xp": 0,
+        "injuries": []
+      }
+    ],
+    "note": "Wounds tended \u2014 no XP. Potions used are gone.",
+    "vip": true,
+    "difficulty": "Normal",
+    "level": 1,
+    "portal": "/c/ABCD"
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

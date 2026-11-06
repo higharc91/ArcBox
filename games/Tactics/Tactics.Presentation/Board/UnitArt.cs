@@ -177,6 +177,7 @@ public sealed class UnitArt
         ["incapacitated"] = "stunned",
         ["unconscious"] = "sleeping",
         ["invisible"] = "hidden",
+        ["hiding"] = "hidden",
         ["hunters_mark"] = "marked",
         ["hex"] = "marked",
         ["mage_armor"] = "shielded",

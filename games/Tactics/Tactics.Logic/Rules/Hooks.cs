@@ -168,7 +168,11 @@ public static class Hooks
             return false;
         if (when.Advantage is { } advantage && (args.Edge == Edge.Advantage) != advantage)
             return false;
+        if (when.Disadvantage is { } disadvantage && (args.Edge == Edge.Disadvantage) != disadvantage)
+            return false;
         if (when.Flanked is { } flanked && (args.Other is { } other && Modifiers.Flanked(state, owner.Id, other, rules)) != flanked)
+            return false;
+        if (when.AllyBesideTarget is { } beside && AllyBeside(state, owner, subject, rules) != beside)
             return false;
         if (when.TargetHasCondition is { } condition && !Conditions.Has(subject, condition, rules))
             return false;
@@ -186,8 +190,15 @@ public static class Hooks
             return false;
         if (when.RoundAtLeast is { } minRound && state.Round < minRound)
             return false;
+        if (when.Seen is { } seen && Stealth.InPlainView(state, w.Terrain, owner.Id, rules) != seen)
+            return false;
         return when.TargetTag is not { } tag || subject.Sheet.Tags.Contains(tag);
     }
+
+    /// <summary>True when an ally of <paramref name="owner"/> that can act, other than it, stands next to <paramref name="target"/>.</summary>
+    private static bool AllyBeside(BattleState state, UnitState owner, UnitState target, RulesPack rules)
+        => state.Units.Values.Any(u => u.Id != owner.Id && u.Id != target.Id && u.Sheet.Side == owner.Sheet.Side
+                                       && Reach.Distance(u.Pos, target.Pos) == 1 && Modifiers.CanAct(state, u.Id, rules));
 
     private static bool WeaponIs(WeaponDef weapon, string property) => property switch
     {

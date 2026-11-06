@@ -807,36 +807,6 @@
           "aim": "unit"
         },
         {
-          "ability": "rogue.cunning_hide",
-          "item": null,
-          "name": "Cunning Action: Hide",
-          "tooltip": "Self: you are Hidden for 1 round",
-          "cost": {
-            "bonus": 1
-          },
-          "targets": [
-            {
-              "target": {
-                "unit": null,
-                "tile": null
-              },
-              "aim": [
-                1,
-                10
-              ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 0
-                }
-              ]
-            }
-          ],
-          "tiles": [],
-          "aim": "self"
-        },
-        {
           "ability": "common.use_item",
           "item": "potion_of_healing",
           "name": "Potion of Healing",

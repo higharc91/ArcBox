@@ -45,6 +45,9 @@ public enum RejectCode
 
     /// <summary>Retreating isn't allowed yet (before round 3) or at all (the encounter forbids it).</summary>
     CantRetreat,
+
+    /// <summary>The ability's own requirement on its user (<see cref="AbilityDef.Requires"/>) doesn't hold now: Hide in plain view.</summary>
+    Unmet,
 }
 
 /// <summary>A refused command: the code and the exact text shown on the phone.</summary>
@@ -73,6 +76,7 @@ public sealed record Rejection(RejectCode Code, string Reason)
         RejectCode.CantDelay => "You can only delay at the start of your turn, once per round.",
         RejectCode.NoItem => "You don't have that item.",
         RejectCode.CantRetreat => "The party can't fall back now.",
+        RejectCode.Unmet => "You can't do that here.",
         _ => throw new ArgumentOutOfRangeException(nameof(code), code, null),
     });
 }

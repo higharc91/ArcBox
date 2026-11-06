@@ -426,8 +426,15 @@
         "advantage": {
           "type": "boolean"
         },
+        "disadvantage": {
+          "type": "boolean"
+        },
         "flanked": {
           "type": "boolean"
+        },
+        "allyBesideTarget": {
+          "type": "boolean",
+          "description": "Whether an ally of the owner that can act (not the owner) stands next to the target: SRD 5.2's Sneak Attack (#108)."
         },
         "targetHasCondition": {
           "type": "string"
@@ -449,6 +456,10 @@
         },
         "success": {
           "type": "boolean"
+        },
+        "seen": {
+          "type": "boolean",
+          "description": "Whether the owner stands in plain view: a foe that can act is next to it, or sees it with no cover (#108)."
         }
       },
       "description": "A test on a hook's situation; every key present must hold.",
@@ -664,6 +675,10 @@
         },
         "isWeaponAttack": {
           "type": "boolean"
+        },
+        "requires": {
+          "$ref": "#/$defs/when",
+          "description": "A test on the user that must hold for the ability to be used at all (refused otherwise): Hide's {\"seen\": false} (#108)."
         },
         "riderOnce": {
           "type": "boolean",

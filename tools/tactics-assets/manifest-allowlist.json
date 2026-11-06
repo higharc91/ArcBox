@@ -84,6 +84,7 @@
     "elemental_weapon": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
     "ensnared": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
     "grappled": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
+    "hiding": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
     "helped": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
     "hunters_mark": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
     "incapacitated": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",

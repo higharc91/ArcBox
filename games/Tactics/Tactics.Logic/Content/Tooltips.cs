@@ -14,7 +14,8 @@ namespace Tactics.Logic;
 /// for an area (nothing for a single target or the caster). A range of 1 reads <c>"1 tile"</c>; the basic weapon attack
 /// reads <c>"weapon range"</c>, as its reach is the weapon's. Effects are joined with "; ". A roll further down the
 /// list is described inline: <c>"Con save (target is Stunned for 1 round)"</c>. A <see cref="AbilityDef.RiderOnce"/>
-/// ability adds <c>". With more than one attack, only the first hit gets this; the rest are plain hits"</c> (#107).</item>
+/// ability adds <c>". With more than one attack, only the first hit gets this; the rest are plain hits"</c> (#107), and one
+/// with <see cref="AbilityDef.Requires"/> <c>". Only when {test}"</c> (Hide: <c>"you aren't in plain view"</c>, #108).</item>
 /// <item>Durations: <c>"for 1 round"</c>, <c>"for N rounds"</c>, <c>"until the end of your turn"</c> (0 rounds),
 /// <c>"until saved"</c>. Condition names come from the pack, else the capitalised id.</item>
 /// <item>Passive: the hook (<c>"When you hit"</c>), <c>", if {when}"</c>, <c>", on yourself"</c> for a self target, then
@@ -53,6 +54,8 @@ public static class Tooltips
         var text = parts.Count == 0 ? header : $"{header}: {string.Join("; ", parts)}";
         if (a.RiderOnce)
             text += ". With more than one attack, only the first hit gets this; the rest are plain hits";
+        if (a.Requires is { } requires)
+            text += $". Only when {TooltipText.When(requires, rules)}";
         if (environment)
         {
             var types = EffectTree.All(effects).OfType<DamageEffect>().Select(d => d.Type).ToHashSet();

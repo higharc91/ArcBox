@@ -194,6 +194,21 @@ public sealed class ValidationTests
         Assert.Equal("/abilities/0/effects/0/zone/passives/0/static/maxHp", error.Pointer);
     }
 
+    [Fact]
+    public void An_abilitys_requirement_names_known_conditions()
+    {
+        // #108: "requires" is a test like a passive's "when", and is checked the same way.
+        var errors = ErrorsOfChapter(("abilities/r.json", """
+            { "abilities": [ { "id": "ch.lurk", "name": "Lurk", "tier": 0, "cost": { "bonus": 1 },
+                "requires": { "all": [ { "seen": false }, { "targetHasCondition": "lurkingg" } ] },
+                "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+                "effects": [ { "apply": "prone", "rounds": 1 } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal(("/abilities/0/requires/all/1/targetHasCondition", "Unknown condition 'lurkingg'."), (error.Pointer, error.Message));
+    }
+
     [Theory]
     [InlineData("""{ "1": "wolf" }""", "/enemies/0/unitByParty", "every supported party size")]
     [InlineData("""{ "1": "wolf", "2": "missing" }""", "/enemies/0/unitByParty/2", "Unknown monster")]

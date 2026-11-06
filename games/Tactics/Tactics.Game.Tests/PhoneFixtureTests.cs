@@ -296,6 +296,10 @@ public sealed class PhoneFixtureTests
         Assert.True(screens.Remove("pickEncounter", out var list));
         Assert.False(list["data"]!["canWalk"]!.GetValue<bool>());
         screens["pickEncounter-noWalk"] = list;
+        // The captured battle is lost (#108's rogue; the phone tests set a win themselves), and with no region there is no
+        // recovery point to wake at, so its note differs.
+        Assert.True(screens.Remove("results", out var results));
+        screens["results-noRegion"] = results;
         Check(screens);
     }
 

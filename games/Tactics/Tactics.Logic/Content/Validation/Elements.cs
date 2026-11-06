@@ -7,7 +7,7 @@ internal sealed partial class Validation
 {
     // ---- Elements -------------------------------------------------------------------------------------------------
 
-    /// <summary>An ability: its effects, then the whole; range, area and presentation keys.</summary>
+    /// <summary>An ability: its effects, then the whole; range, area, the conditions its <c>requires</c> names and presentation keys.</summary>
     public AbilityDef? Ability(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
@@ -25,6 +25,8 @@ internal sealed partial class Validation
             if (def.Target.Area.Size > MaxAreaSize)
                 Error(file, Pointer.Append(Pointer.Append(target, "area"), "size"),
                     $"Area size {def.Target.Area.Size} is over the limit of {MaxAreaSize}.");
+            if (def.Requires is { } requires)
+                When(requires, file, Pointer.Append(ptr, "requires"));
             if (def.Presentation is { } p)
             {
                 var at = Pointer.Append(ptr, "presentation");

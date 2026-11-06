@@ -77,6 +77,28 @@ public sealed class TooltipTests
     }
 
     [Fact]
+    public void An_ability_with_a_requirement_says_when_it_can_be_used()
+    {
+        // #108: Hide needs the user out of plain view.
+        var hide = new AbilityDef(new AbilityId("test.hide"), "Hide", 0, new CostDef(Bonus: 1),
+            new TargetDef(TargetKind.Self, 0, false, new AreaDef(AreaShape.Self)), [Apply("lit", 1)],
+            Flavor: "Out of sight.", Requires: new WhenDef(Seen: false));
+        Assert.Equal("Self: you are Lit for 1 round. Only when you aren't in plain view — Out of sight.", Tooltips.For(hide, 1, Rules));
+        Assert.Equal("At the end of your turn, if you are in plain view, on yourself: ends Lit on target",
+            Tooltips.For(new PassiveDef("test.seen", HookKind.OnTurnEnd, new WhenDef(Seen: true),
+                [new RemoveEffect(new ConditionId("lit"))], null, Target: PassiveTarget.Self), 1, Rules));
+    }
+
+    [Fact]
+    public void A_mark_says_what_it_gives_its_maker()
+    {
+        // #108: the rogue's Vex marks what it hits, with no flavour text to explain the mark.
+        var vex = new PassiveDef("rogue.vex", HookKind.OnAttackHit, new WhenDef(Weapon: ["rapier"]), [new MarkEffect(1)], null);
+        Assert.Equal("When you hit, if you attack with a rapier weapon: marks target for 1 round (your attacks on it have advantage)",
+            Tooltips.For(vex, 1, Rules));
+    }
+
+    [Fact]
     public void Missing_describe_throws_naming_block()
     {
         // A transform whose hook doesn't exist has no phrase: the block answers null and the tooltip names it.

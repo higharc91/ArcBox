@@ -145,7 +145,7 @@ public sealed class MarkBlock : EffectBlock<MarkEffect>
 
     /// <inheritdoc />
     protected override string? Describe(MarkEffect def, int level, RulesPack rules)
-        => $"marks target {TooltipText.ForRounds(def.Rounds)}";
+        => $"marks target {TooltipText.ForRounds(def.Rounds)} (your attacks on it have advantage)";
 
     /// <inheritdoc />
     protected override void Run(MarkEffect def, EffectContext ctx)

@@ -31,7 +31,7 @@ describe("tactics phone module", () => {
     expect(names).toEqual([
       "camp-job", "camp-rolled", "camp-target", "camp-vote", "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "environment-status", "environment-turn", "inn-rooms", "pickClass", "pickEncounter",
       "pickEncounter-noWalk",
-      "questlog-leader", "questlog-private", "questlog-viewer", "react", "results", "results-fled", "retreat-status", "retreat-turn", "retreat-vote", "retreat-vote-proposer", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "talk-check", "talk-vote", "temple", "turn", "turn-attacks", "vote", "vote-loot", "vote-tie", "walk-ambush", "walk-danger", "walk-follower", "walk-interact", "walk-leader", "walk-pinned", "walk-pinned-done", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-trinket-presented", "walk-with-gold",
+      "questlog-leader", "questlog-private", "questlog-viewer", "react", "results", "results-fled", "results-noRegion", "retreat-status", "retreat-turn", "retreat-vote", "retreat-vote-proposer", "shop-open", "shop-poor", "shop-sell", "shop-sold-out", "shop-spectator", "status", "talk-check", "talk-vote", "temple", "turn", "turn-attacks", "vote", "vote-loot", "vote-tie", "walk-ambush", "walk-danger", "walk-follower", "walk-interact", "walk-leader", "walk-pinned", "walk-pinned-done", "walk-ready-to-rest", "walk-things", "walk-things-follower", "walk-trinket-presented", "walk-with-gold",
     ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);
@@ -238,15 +238,29 @@ describe("tactics phone module", () => {
     expect(screen.getByRole("link", { name: /Your character/ }).getAttribute("href")).toBe("/c/ABCD");
   });
 
+  /**
+   * The recorded results as a win. The recorded battle's outcome follows the balance of the day (#108 made it a loss), so
+   * the win is set here, as the loss is below.
+   */
+  const won = () => {
+    const v = view("results");
+    const d = v.data as unknown as { outcome: string; note: string | null; lines: { xp: number }[] };
+    d.outcome = "Won";
+    d.note = null;
+    for (const l of d.lines) l.xp = 250;
+    return v;
+  };
+
   it("results: the VIP carries on, back to the world (the action is still next)", () => {
-    const send = show("results");
+    const send = vi.fn();
+    render(<ControllerScreen view={won()} send={send} me="ALEX" game="tactics" />);
     expect(screen.getByText("Victory")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Carry on" }));
     expect(send).toHaveBeenLastCalledWith({ action: "next" });
   });
 
   it("results after a win list each hero's XP and injuries, and no loss line", () => {
-    const v = view("results");
+    const v = won();
     (v.data as unknown as { lines: { injuries: string[] }[] }).lines[0]!.injuries = ["Black Eye"];
     render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
     expect(screen.getAllByText("+250 XP").length).toBeGreaterThan(0);

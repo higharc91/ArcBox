@@ -277,9 +277,11 @@ public static partial class Battle
 
     /// <summary>
     /// Where <paramref name="ability"/> lands and whom it affects, or why <paramref name="target"/> is refused
-    /// (<see cref="RejectCode.InvalidTarget"/>, then <see cref="RejectCode.OutOfRange"/>, then
-    /// <see cref="RejectCode.NoLineOfSight"/>).
+    /// (<see cref="RejectCode.Unmet"/>, then <see cref="RejectCode.InvalidTarget"/>, then <see cref="RejectCode.OutOfRange"/>,
+    /// then <see cref="RejectCode.NoLineOfSight"/>).
     /// <list type="bullet">
+    /// <item>The ability's own test on the user (<see cref="AbilityDef.Requires"/>) must hold wherever it is aimed: Hide out
+    /// of plain view. It is checked here so the AI and the phone, which ask this for every aim, never offer it otherwise.</item>
     /// <item>The aim is <see cref="Target.Tile"/>, else the target unit's tile. A <c>self</c> ability aims at the user's own
     /// tile (a line or cone at <see cref="Target.Tile"/>, which only sets its direction), and an <c>all_allies</c> or
     /// <c>all_enemies</c> area needs no aim; both skip the range and sight checks.</item>
@@ -305,6 +307,8 @@ public static partial class Battle
         var area = def.Area;
         var everywhere = area.Shape is AreaShape.AllAllies or AreaShape.AllEnemies;
         var invalid = Rejection.Of(RejectCode.InvalidTarget);
+        if (ability.Requires is { } requires && !Hooks.Holds(requires, w, new HookArgs(user.Id), w.Rules))
+            return new Rejection(RejectCode.Unmet, $"Only when {TooltipText.When(requires, w.Rules)}.");
 
         UnitState? picked = null;
         if (target.Unit is { } id)
