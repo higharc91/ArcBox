@@ -135,6 +135,21 @@ public partial class Main : Control
             AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
             return;
         }
+        if (_args.FxDemo is { } demo)
+        {
+            ShowGame("tactics");
+            var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
+            var parts = demo.Split(':', 2);
+            var samples = parts[0] == "step0" ? global::Tactics.Presentation.Beats.FxShowcase.StepZero(pack)
+                : parts.Length == 2 ? System.Collections.Immutable.ImmutableArray.Create(global::Tactics.Presentation.Beats.FxShowcase.Sample(parts[0], new(parts[1]), 10,
+                    global::Tactics.Logic.RulesPack.Load([System.IO.Path.Combine(pack, "rules")]), 1))
+                : throw new ArgumentException("Choose step0 or class:abilityId for the current showcase fixtures.");
+            var feeder = new Games.Tactics.FxDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _shots, samples);
+            if (_scene is ISignalingScene signaling) signaling.Signal = feeder.Signal;
+            AddChild(feeder);
+            return;
+        }
         if (_args.TacticsDemo is { } board)
         {
             // Dev only: a battle's board through the normal host-view path, no server; the art comes from the repository.
