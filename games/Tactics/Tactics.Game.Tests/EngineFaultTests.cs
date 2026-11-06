@@ -122,13 +122,21 @@ public sealed class EngineFaultTests
     public void A_save_whose_next_ai_step_fails_moves_on_the_same_way_each_time_it_is_opened()
     {
         // The seed-108 shape: the save is good, but the AI's next step fails, and it would make the same step on every open.
+        // Six beats in, then on a beat at a time until the AI's next step is more than ending the turn (ending a turn never
+        // fails here), however many steps the AI's turns happen to take.
         var first = new Session();
         first.ToBattle(everyoneAway: true);
         for (var i = 0; i < 6; i++)
             first.Harness.Advance(TimeSpan.FromSeconds(7));
+        static bool OnlyEndsTurn(BattleState s) => s.Pending is null && s.Active is { } unit
+            && Ai.Plan(s, unit, TacticsGameTests.Rules, s.Units[unit].Controller is AiControlled { Profile: "companion" }
+                ? new AiOptions(AllowItems: true) : new AiOptions()).Commands is [EndTurn];
+        for (var i = 0; i < 20 && OnlyEndsTurn(TacticsDocument.Read(first.Lease.Document).Battle!.State); i++)
+            first.Harness.Advance(TimeSpan.FromSeconds(7));
         Assert.Equal(TacticsPhase.Battle, first.Game.Phase);
         var save = first.Lease.Document;
         var at = TacticsDocument.Read(save).Battle!.State;
+        Assert.False(OnlyEndsTurn(at));
 
         string Open()
         {

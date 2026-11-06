@@ -6,45 +6,62 @@ internal sealed partial class Planner
 {
     /// <summary>
     /// The commands of <paramref name="c"/>, each checked with <see cref="Battle.Check"/> against the state the plan expects
-    /// by then, or null when one would be refused. Then the best bonus action at the end, if one is worth its cost.
+    /// by then, or null when one would be refused. Then, with the action spent, an extra action (Action Surge) and the best
+    /// second action if that is worth more than the surge costs (<see cref="Surge"/>), and the best bonus action at the end,
+    /// if one is worth its cost.
     /// </summary>
     private ImmutableArray<Command>? Commands(Candidate c)
     {
         var commands = new List<Command>();
-        Usable? Escape(bool first) => c.Escape is { } e && first == (c.Kind != Kind.ActMove && c.Kind != Kind.DashMove) ? e : null;
+        var here = _me.Pos;
         void Act(Usable? usable, Target target, ImmutableArray<UnitId> targets = default)
         {
             if (usable is not null)
                 commands.Add(new Use(_me.Id, usable.Command, target, usable.Item) { Targets = targets });
         }
-        void Walk()
+        void Walk(Tile from, ImmutableArray<Tile> path)
         {
-            if (c.End != c.ActTile || c.Kind == Kind.DashMove)
-            {
-                var path = c.Path.IsDefault ? _paths.PathTo(c.End) : c.Path;
-                if (!path.IsEmpty)
-                    commands.Add(new Move(_me.Id, [c.ActTile, .. path]));
-            }
+            if (!path.IsDefaultOrEmpty)
+                commands.Add(new Move(_me.Id, [from, .. path]));
         }
+        void Main() => Act(c.Usable, c.Action!.Target, c.Action.Targets);
 
         switch (c.Kind)
         {
             case Kind.Move:
-                Act(Escape(first: true), new Target());
-                if (c.End != _me.Pos)
-                    commands.Add(new Move(_me.Id, [_me.Pos, .. _paths.PathTo(c.End)]));
+                Act(c.Escape, new Target());
+                Walk(here, _paths.PathTo(c.End));
                 break;
             case Kind.MoveAct:
-                Act(Escape(first: true), new Target());
-                if (c.ActTile != _me.Pos)
-                    commands.Add(new Move(_me.Id, [_me.Pos, .. _paths.PathTo(c.ActTile)]));
-                Act(c.Usable, c.Action!.Target, c.Action.Targets);
+                Act(c.Escape, new Target());
+                Walk(here, _paths.PathTo(c.ActTile));
+                Main();
+                break;
+            case Kind.MoveActMove:
+                Act(c.Escape, new Target());   // a disengage lasts the turn: both walks
+                Walk(here, _paths.PathTo(c.ActTile));
+                Main();
+                Walk(c.ActTile, c.Path);
                 break;
             case Kind.ActMove:
+                Main();
+                Act(c.Escape, new Target());
+                Walk(here, _paths.PathTo(c.End));
+                break;
             case Kind.DashMove:
-                Act(c.Usable, c.Action!.Target, c.Action.Targets);
-                Act(Escape(first: false), new Target());
-                Walk();
+                Main();
+                Act(c.Escape, new Target());
+                Walk(here, c.Path);
+                break;
+            case Kind.HopAct:
+                Walk(here, _paths.PathTo(c.Via!.Value));
+                Act(c.Lead, new Target(Tile: c.ActTile));
+                Main();
+                break;
+            case Kind.DashAct:
+                Act(c.Lead, new Target());
+                Walk(here, c.Path);
+                Main();
                 break;
         }
 
@@ -59,24 +76,99 @@ internal sealed partial class Planner
         // The main action may kill a unit it hits (a Downed one may go Out): the bonus action mustn't count on it. Nor, unless
         // the profile is cruel, may it strike a foe the main action may have just Downed (fair play, spec §5.4). And after an
         // action that moves units or changes the map, only a bonus action on the unit itself is sure to still hold.
-        var main = c.Kind is Kind.MoveAct or Kind.ActMove ? c.Usable : null;
-        var leaving = main is not null && Scorer.Deals(main.Ability.Effects)
-            ? c.Action!.Affected.Where(id => _s.Units[id] is var u
-                                              && (u.Life == LifeState.Downed || !DownedRules.GoesDown(u)
-                                                  || !_p.Cruel && Scorer.Hostile(_me, u) && MayDrop(c, id)))
-                .ToImmutableSortedSet()
-            : [];
-        if (Bonus(state, leaving, selfOnly: main is { Stable: false }) is { } bonus && Battle.Check(state, bonus, _rules) is null)
+        var main = c.Kind is Kind.Move or Kind.DashMove ? null : c.Usable;
+        var leaving = Leaving(main, c.Action, Hypo(c.ActTile));
+        var selfOnly = main is { Stable: false };
+        if (Surge(state, leaving, selfOnly) is { } surge)
+        {
+            commands.AddRange([surge.Surge, surge.Second]);
+            state = Advance(Advance(state, surge.Surge), surge.Second);
+            leaving = leaving.Union(surge.Leaving);
+            selfOnly |= !surge.Stable;
+        }
+        if (Bonus(state, leaving, selfOnly) is { } bonus && Battle.Check(state, bonus, _rules) is null)
             commands.Add(bonus);
         commands.Add(new EndTurn(_me.Id));
         return [.. commands];
     }
 
     /// <summary>
+    /// The units <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
+    /// may take out of reach of a later action: any it may kill (or, Downed, finish), and unless the profile is cruel any foe
+    /// it may Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile
+    /// in reach with the least HP, ties by id), if they may drop it. None for an action that deals no damage.
+    /// </summary>
+    private ImmutableSortedSet<UnitId> Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
+    {
+        if (usable is null || action is null || !Scorer.Deals(usable.Ability.Effects))
+            return [];
+        var leaving = action.Affected.Where(id => _s.Units[id] is var u
+                                                  && (u.Life == LifeState.Downed || !DownedRules.GoesDown(u)
+                                                      || !_p.Cruel && Scorer.Hostile(_me, u) && MayDrop(usable, action, at, id)))
+            .ToImmutableSortedSet();
+        var me = at.State.Units[_me.Id];
+        if (Strikes.Aimed(usable.Ability) && me.Sheet.Attacks > 1 && action.Affected.Any(id => MayDrop(usable, action, at, id))
+            && at.State.Units.Values
+                .Where(u => u.Life == LifeState.Up && Scorer.Hostile(me, u) && u.Sheet.Side != Side.Neutral && !action.Affected.Contains(u.Id)
+                            && Battle.ResolveTarget(at.W, me, usable.Ability, new Target(Unit: u.Id), out _, out var hit) is null && hit.Contains(u.Id))
+                .OrderBy(u => u.Hp).ThenBy(u => u.Id).FirstOrDefault() is { } next
+            && MayDrop(usable, action, at, next.Id))
+            leaving = leaving.Add(next.Id);
+        return leaving;
+    }
+
+    /// <summary>An extra action and the second action it buys, with what the second may take out of reach and whether it leaves the map as it is.</summary>
+    private sealed record Surging(Use Surge, Use Second, ImmutableSortedSet<UnitId> Leaving, bool Stable);
+
+    /// <summary>
+    /// With the action spent in <paramref name="state"/> and an extra action (Action Surge) the unit can pay for: the best
+    /// second action from where the plan leaves it (any action but a dash, never on a unit in <paramref name="leaving"/>, and
+    /// with <paramref name="selfOnly"/>, after an action that moved units or changed the map, only one on the unit itself),
+    /// when what it is worth less its own cost is more than the surge costs. An extra action is worth the best second action
+    /// it buys; null when none is worth it.
+    /// </summary>
+    private Surging? Surge(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
+    {
+        var me = state.Units[_me.Id];
+        if (me.Economy.Action || me.Economy.ExtraActions > 0
+            || _usables.FirstOrDefault(u => u.Surge && Battle.CostRefusal(me, u.Ability) is null) is not { } surge)
+            return null;
+        var use = new Use(_me.Id, surge.Command, new Target(), surge.Item);
+        if (Battle.Check(state, use, _rules) is not null)
+            return null;
+        var surged = Advance(state, use);
+        var after = surged.Units[_me.Id];
+        var w = new BattleWriter(surged, _rules);
+        (Usable Usable, Action Action)? best = null;
+        var bestScore = Hoard(surge) + Epsilon;
+        foreach (var usable in _usables.Where(u => u.Phase == Phase.Main && !u.Dash && !u.Surge && Battle.CostRefusal(after, u.Ability) is null
+                                                   && (!selfOnly || u.Ability.Target.Kind == TargetKind.Self)))
+        {
+            var hoard = Hoard(usable);
+            foreach (var action in Actions(usable, after.Pos, surged, w))
+            {
+                if (action.Target.Unit is { } unit && leaving.Contains(unit)
+                    || !action.Targets.IsDefaultOrEmpty && action.Targets.Any(leaving.Contains) || !ItemOk(usable, after.Pos, action))
+                    continue;
+                if (Round(action.Value - hoard) > Round(bestScore))
+                    (best, bestScore) = ((usable, action), action.Value - hoard);
+            }
+        }
+        if (best is not { } second)
+            return null;
+        var next = new Use(_me.Id, second.Usable.Command, second.Action.Target, second.Usable.Item) { Targets = second.Action.Targets };
+        return Battle.Check(surged, next, _rules) is null
+            ? new Surging(use, next, Leaving(second.Usable, second.Action, (surged, w)), second.Usable.Stable)
+            : null;
+    }
+
+    /// <summary>
     /// The best bonus action (or free action) worth more than it costs where the plan leaves the unit, if its Bonus is
-    /// still there: escapes and dashes are left out (they only help a move), and so is a concentration ability after the
-    /// plan has just begun concentrating on another. It never targets a unit in <paramref name="leaving"/> (the main action
-    /// may have killed or Downed it) and, with <paramref name="selfOnly"/>, only uses abilities on the unit itself.
+    /// still there: escapes and dashes are left out (they only help a move), and so are an extra action (planned with the
+    /// second action it buys, <see cref="Surge"/>) and a concentration ability after the plan has just begun concentrating on
+    /// another. A teleport or leap goes to the landing tile worth most over staying. It never targets a unit in
+    /// <paramref name="leaving"/> (the main action may have killed or Downed it) and, with <paramref name="selfOnly"/>, only
+    /// uses abilities on the unit itself.
     /// </summary>
     private Use? Bonus(BattleState state, ImmutableSortedSet<UnitId> leaving, bool selfOnly)
     {
@@ -86,13 +178,14 @@ internal sealed partial class Planner
         Use? best = null;
         var bestScore = Epsilon;
         var justConcentrating = me.Concentrating is not null && me.Concentrating != _me.Concentrating;
-        foreach (var usable in _usables.Where(u => u.Phase == Phase.Bonus && !u.Escape && !u.Dash))
+        var w = new BattleWriter(state, _rules);
+        foreach (var usable in _usables.Where(u => u.Phase == Phase.Bonus && !u.Escape && !u.Dash && !u.Surge))
         {
             if (Battle.CostRefusal(me, usable.Ability) is not null || usable.Ability.Cost.Concentration && justConcentrating
                 || selfOnly && usable.Ability.Target.Kind != TargetKind.Self)
                 continue;
             var hoard = Hoard(usable);
-            foreach (var action in Actions(usable, me.Pos, state))
+            foreach (var action in Actions(usable, me.Pos, state, w))
             {
                 if (action.Target.Unit is { } unit && leaving.Contains(unit)
                     || !action.Targets.IsDefaultOrEmpty && action.Targets.Any(leaving.Contains) || !ItemOk(usable, me.Pos, action))
@@ -105,7 +198,10 @@ internal sealed partial class Planner
         return best;
     }
 
-    /// <summary>The state the plan expects after <paramref name="command"/>: no dice, just positions and what is spent.</summary>
+    /// <summary>
+    /// The state the plan expects after <paramref name="command"/>: no dice, just positions and what is spent, where a
+    /// teleport or leap lands, and what an ability on the unit itself gives back (an extra action, the bonus action, Move).
+    /// </summary>
     private BattleState Advance(BattleState state, Command command)
     {
         var me = state.Units[_me.Id];
@@ -145,8 +241,16 @@ internal sealed partial class Planner
                             .Add(new ActiveCondition(id, me.Id, RoundsLeft: 0, UntilSave: false, SaveDc: 0, Stat.Con, Concentration: false));
                     }
                     economy = economy with { MoveLeft = economy.MoveLeft - cost.Move };
-                    if (usable.Dash)
-                        economy = economy with { MoveLeft = economy.MoveLeft + Modifiers.Move(me.Sheet, _scorer.Mods(me)) };
+                    if (usable.Ability.Target.Kind == TargetKind.Self)
+                        foreach (var extra in (usable.Ability.Effects.IsDefault ? [] : usable.Ability.Effects).OfType<ExtraActionEffect>())
+                            economy = extra.Kind switch
+                            {
+                                "action" => economy with { ExtraActions = economy.ExtraActions + 1 },
+                                "bonus" => economy with { Bonus = true },
+                                "move" => economy with { MoveLeft = economy.MoveLeft + Modifiers.Move(me.Sheet, _scorer.Mods(me)) },
+                                _ => economy,
+                            };
+                    var pos = usable.Hop > 0 && use.Target.Tile is { } landing ? landing : me.Pos;
                     var resources = me.Resources;
                     foreach (var (name, amount) in cost.Resource ?? Ordinal.Map<int>())
                         resources = resources.SetItem(name, resources.GetValueOrDefault(name) - amount);
@@ -158,7 +262,7 @@ internal sealed partial class Planner
                         bag = stack.Count > 1 ? bag.Replace(stack, stack with { Count = stack.Count - 1 }) : bag.Remove(stack);
                     me = me with
                     {
-                        Economy = economy, Resources = resources, UsesLeft = uses, Bag = bag, Conditions = conditions,
+                        Pos = pos, Economy = economy, Resources = resources, UsesLeft = uses, Bag = bag, Conditions = conditions,
                         Concentrating = cost.Concentration ? usable.Ability.Id : me.Concentrating,
                     };
                     break;

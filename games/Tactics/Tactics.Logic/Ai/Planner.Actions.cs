@@ -10,9 +10,12 @@ internal sealed partial class Planner
     /// An ability the unit may use on its turn: its definition (an item's own ability), the command's ability id
     /// (<see cref="Battle.UseItem"/> for an item) and item, whether it takes the action or the bonus action, whether it is
     /// a disengage (<see cref="Escape"/>) or a dash, and whether it leaves the map as it is (<see cref="Stable"/>), so a
-    /// move planned before it still holds after it.
+    /// move planned before it still holds after it. <see cref="Surge"/> marks one that gives the unit an extra action (Action
+    /// Surge); <see cref="Hop"/> is how far one that moves the unit to an empty tile (a teleport or a leap) takes it, 0 for
+    /// any other.
     /// </summary>
-    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable, bool Reacts);
+    private sealed record Usable(AbilityDef Ability, AbilityId Command, ItemId? Item, Phase Phase, bool Escape, bool Dash, bool Stable,
+        bool Reacts, bool Surge, int Hop);
 
     /// <summary>
     /// What the unit can use: its sheet's abilities and the built-in <c>common.*</c> actions it can pay for (in id order),
@@ -45,11 +48,16 @@ internal sealed partial class Planner
         var top = ability.Effects.IsDefault ? [] : ability.Effects;
         var escape = self && top.Any(e => e is ApplyEffect { Condition: var c } && c == Movement.Disengaged);
         var dash = self && top.Any(e => e is ExtraActionEffect { Kind: "move" });
+        var surge = self && top.Any(e => e is ExtraActionEffect { Kind: "action" });
+        var hop = ability.Target is { Kind: TargetKind.EmptyTile, Area.Shape: AreaShape.Single }
+            ? Math.Min(ability.Target.Range, top.Select(e => e switch { TeleportEffect { Self: true } t => t.Range, JumpToEffect j => j.Range, _ => 0 })
+                .DefaultIfEmpty(0).Max())
+            : 0;
         var stable = !Scorer.All(top).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect or DashEffect
             or JumpToEffect or ZoneEffect or HazardEffect or AlterTerrainEffect or SummonEffect or TransformEffect or TurnOrderEffect
             || e is ApplyEffect a && Halts(a.Condition) || e is StatModEffect m && (m.Mods.CantMove || m.Mods.Incapacitated));
         return new Usable(ability, command, item, cost.Action > 0 ? Phase.Main : Phase.Bonus, escape, dash,
-            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet));
+            stable && !_scorer.ChangesSurface(ability, _me.Sheet), _scorer.Reacts(ability, _me.Sheet), surge, Math.Max(0, hop));
     }
 
     /// <summary>True when the condition (or one it implies) stops its holder moving or acting.</summary>
@@ -101,25 +109,29 @@ internal sealed partial class Planner
     private sealed record Action(Target Target, Tile Aim, ImmutableArray<UnitId> Affected, double Value,
         ImmutableArray<UnitId> Targets = default);
 
-    private IEnumerable<Action> Actions(Usable usable, Tile from) => Actions(usable, from, Hypo(from).State);
+    private IEnumerable<Action> Actions(Usable usable, Tile from) => Actions(usable, from, Hypo(from).State, Hypo(from).W);
 
     /// <summary>
     /// Every legal target or aim for <paramref name="usable"/> by the unit on <paramref name="from"/> in
-    /// <paramref name="state"/>, with its worth. Single-target unit abilities try each unit; area abilities aim only at tiles
-    /// whose area covers a unit they are meant for (a foe; an ally for ally abilities); self lines and cones try the four
-    /// directions. Legality is the engine's own (<see cref="Battle.ResolveTarget"/>).
+    /// <paramref name="state"/> (<paramref name="w"/>, a working copy of it, if there is one), with its worth. Single-target
+    /// unit abilities try each unit; area abilities aim only at tiles whose area covers a unit they are meant for (a foe; an
+    /// ally for ally abilities); self lines and cones try the four directions. A teleport or leap (<see cref="Usable.Hop"/>)
+    /// aims at the best landing tiles (<see cref="Landings"/>) and is worth what landing there gains on staying
+    /// (<see cref="Land"/> less <see cref="Place"/>); a summon aims at the empty tiles beside its foes and next to the user,
+    /// the ones nearer a foe first. Legality is the engine's own (<see cref="Battle.ResolveTarget"/>).
     /// </summary>
-    private IEnumerable<Action> Actions(Usable usable, Tile from, BattleState state)
+    private IEnumerable<Action> Actions(Usable usable, Tile from, BattleState state, BattleWriter? w = null)
     {
         var ability = usable.Ability;
         var def = ability.Target;
         var area = def.Area;
         var me = state.Units[_me.Id];
-        var w = ReferenceEquals(state, Hypo(from).State) ? Hypo(from).W : new BattleWriter(state, _rules);
+        w ??= new BattleWriter(state, _rules);
         var everywhere = area.Shape is AreaShape.AllAllies or AreaShape.AllEnemies;
         var forAllies = def.Kind is TargetKind.Ally or TargetKind.DownedAlly;
         var units = state.Units.Values.Where(DownedRules.InBattle).ToArray();
         var meant = units.Where(u => forAllies ? !Scorer.Hostile(me, u) : Scorer.Hostile(me, u)).ToArray();
+        var summons = def.Kind == TargetKind.EmptyTile && Scorer.All(ability.Effects).Any(e => e is SummonEffect);
         // A weapon attack reaches as far as the sheet's weapon, not the ability's nominal range of 1 (Battle.Check decides
         // exactly; this only bounds the candidates, with room for the high-ground bonus).
         var maxRange = (ability.IsWeaponAttack && me.Sheet.Weapon.Ranged ? Math.Max(def.Range, me.Sheet.Weapon.Range) : def.Range) + 5;
@@ -135,8 +147,15 @@ internal sealed partial class Planner
             targets = units.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Unit: u.Id));
         else if (area.Shape == AreaShape.Single && def.Kind == TargetKind.Tile)
             targets = meant.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Tile: u.Pos));
+        else if (area.Shape == AreaShape.Single && usable.Hop > 0)
+            targets = Landings(from, usable.Hop).Select(t => new Target(Tile: t));
         else if (area.Shape == AreaShape.Single)
-            targets = [];   // empty-tile abilities move the user or place something; the planner leaves them be
+            targets = summons
+                ? meant.SelectMany(u => Neighbours(u.Pos)).Concat(Neighbours(from))
+                    .Where(t => Reach.Distance(from, t) <= maxRange && _scorer.Terrain.Map.InBounds(t) && _scorer.Terrain.Walkable(t)
+                                && !units.Any(u => u.Pos == t))
+                    .Distinct().Order().Select(t => new Target(Tile: t))
+                : [];   // other empty-tile abilities: nothing the planner knows how to value
         else if (area.Shape is AreaShape.Line or AreaShape.Cone)
             targets = meant.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Tile: u.Pos));
         else
@@ -166,6 +185,10 @@ internal sealed partial class Planner
                 if (fixedAim)
                     _aimValues[(usable.Command, usable.Item, aim)] = value;
             }
+            if (usable.Hop > 0)
+                value += Land(aim) - Place(from);
+            else if (summons)
+                value -= 0.01 * meant.Select(u => Reach.Distance(u.Pos, aim)).DefaultIfEmpty(0).Min();
             if (usable.Reacts)
             {
                 var reaction = _scorer.ReactionWorth(new Strike(w, me, ability, aim, neutral: false), aim, affected, _p);
@@ -294,13 +317,15 @@ internal sealed partial class Planner
             ? _scorer.StrikeOutcomes(ability, me.Sheet.Attacks, st, target)[^1]
             : _scorer.Walk(Scorer.UnitBlocks(ability.Effects), st, target);
 
-    /// <summary>True when <paramref name="c"/>'s action may drop <paramref name="unit"/>: its damage can reach the HP left.</summary>
-    private bool MayDrop(Candidate c, UnitId unit)
+    /// <summary>
+    /// True when <paramref name="usable"/>'s <paramref name="action"/>, taken by the unit as it stands in <paramref name="at"/>,
+    /// may drop <paramref name="unit"/>: its damage can reach the HP left.
+    /// </summary>
+    private bool MayDrop(Usable usable, Action action, (BattleState State, BattleWriter W) at, UnitId unit)
     {
-        var (state, w) = Hypo(c.ActTile);
-        var me = state.Units[_me.Id];
-        var target = state.Units[unit];
-        var outcome = Expected(c.Usable!.Ability, me, new Strike(w, me, c.Usable.Ability, c.Action!.Aim, neutral: false), target);
+        var me = at.State.Units[_me.Id];
+        var target = at.State.Units[unit];
+        var outcome = Expected(usable.Ability, me, new Strike(at.W, me, usable.Ability, action.Aim, neutral: false), target);
         return outcome.Damage.AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
     }
 }
