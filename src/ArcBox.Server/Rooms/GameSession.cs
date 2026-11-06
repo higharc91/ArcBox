@@ -30,6 +30,7 @@ public sealed class GameSession : IDisposable
     private string? _lastHostJsonText;
     private int _viewCounter;
     private long _busySinceTicks;
+    private bool _startingCampaign;
 
     public GameSession(
         IGame game,
@@ -80,16 +81,11 @@ public sealed class GameSession : IDisposable
         // The lease stays the room's: it releases it when the game ends, however that happens.
         if (_campaign is not null && _game is ICampaignGame campaignGame)
         {
-            Guard(() => campaignGame.Start(_context, _players, _campaign));
+            StartOrResume(() => campaignGame.Start(_context, _players, _campaign));
         }
         else
         {
-            Guard(() => _game.Start(_context, _players));
-        }
-
-        if (!IsOver)
-        {
-            PublishViews();
+            StartOrResume(() => _game.Start(_context, _players));
         }
     }
 
@@ -107,12 +103,24 @@ public sealed class GameSession : IDisposable
             throw new InvalidOperationException($"Game {GameId} can't be resumed.");
         }
 
-        Guard(() => resumable.Resume(_context, _players, _campaign));
+        StartOrResume(() => resumable.Resume(_context, _players, _campaign));
+    }
 
-        if (!IsOver)
+    private void StartOrResume(Action action)
+    {
+        _startingCampaign = _campaign is not null;
+        try
         {
-            PublishViews();
+            Guard(() =>
+            {
+                // A lease may parse stored JSON lazily. Refuse it before calling a game that could save.
+                try { if (_campaign is not null) _ = _campaign.Document; }
+                catch (JsonException error) { throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention, error); }
+                action();
+            });
+            if (!IsOver) PublishViews();
         }
+        finally { _startingCampaign = false; }
     }
 
     public bool Input(PlayerId from, string viewId, JsonElement payload)
@@ -276,7 +284,7 @@ public sealed class GameSession : IDisposable
         catch (Exception ex)
         {
             _logger.LogError(ex, "Game {GameId} crashed", GameId);
-            Results = new GameResults([], "Game crashed");
+            Results = new GameResults([], _startingCampaign && ex is CampaignDocumentException refusal ? refusal.Message : "Game crashed");
             IsOver = true;
             DisposeTimers();
         }
@@ -298,7 +306,7 @@ public sealed class GameSession : IDisposable
         catch (Exception ex)
         {
             _logger.LogError(ex, "Game {GameId} crashed", GameId);
-            Results = new GameResults([], "Game crashed");
+            Results = new GameResults([], _startingCampaign && ex is CampaignDocumentException refusal ? refusal.Message : "Game crashed");
             IsOver = true;
             DisposeTimers();
             return default;

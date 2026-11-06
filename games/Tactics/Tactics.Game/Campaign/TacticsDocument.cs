@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
 using Tactics.Logic;
 
 namespace Tactics.Game;
@@ -242,29 +243,50 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         return Math.Max(Members.Values.Min(m => m.Xp), threshold);
     }
 
-    /// <summary>Reads a document of any version up to <see cref="CurrentVersion"/>, as that version; an empty or unreadable one is a new campaign's.</summary>
-    public static TacticsDocument Read(JsonElement json)
+    /// <summary>Reads supported documents. Only the store's empty-object marker starts a new campaign; unreadable data is refused.</summary>
+    public static TacticsDocument Read(JsonElement json, RulesPack? rules = null)
     {
-        if (json.ValueKind != JsonValueKind.Object || !json.EnumerateObject().Any())
-            return New;
-        var doc = json.Deserialize<TacticsDocument>(ArcJson.Options)
-                  ?? throw new JsonException("The campaign document is null.");
-        if (doc.Version is < 0 or > CurrentVersion)
-            throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads 0 to {CurrentVersion}).");
-        doc = doc with
+        try
         {
-            Version = CurrentVersion,
-            Gold = Math.Max(0, doc.Gold),
-            Completed = doc.Completed.IsDefault ? [] : doc.Completed,
-            Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
-                .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
-        };
-        // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
-        if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
-            doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
-        // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
-        return doc.Gold > 0 && !doc.Members.IsEmpty
-            ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
+            if (json.ValueKind != JsonValueKind.Object)
+                throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            if (!json.EnumerateObject().Any()) return New;
+            if (json.TryGetProperty("version", out var version) && version.ValueKind == JsonValueKind.Number &&
+                version.TryGetInt64(out var number) && number > CurrentVersion)
+                throw new CampaignDocumentException(CampaignDocumentException.NewerVersion);
+            var doc = json.Deserialize<TacticsDocument>(ArcJson.Options)
+                      ?? throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            if (doc.Version > CurrentVersion)
+                throw new CampaignDocumentException(CampaignDocumentException.NewerVersion);
+            if (doc.Version < 0)
+                throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention);
+            doc = doc with
+            {
+                Version = CurrentVersion,
+                Gold = Math.Max(0, doc.Gold),
+                Completed = doc.Completed.IsDefault ? [] : doc.Completed,
+                Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
+                    .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
+            };
+            // Validate every saved member, including absent members, before Start/Resume can save anything.
+            if (rules is not null && doc.Members.Values.Any(m =>
+                !rules.Classes.ContainsKey(m.Character.Class) ||
+                m.Character.Bag.Any(s => string.IsNullOrEmpty(s.Item.Value) || !rules.Items.ContainsKey(s.Item)) ||
+                (!string.IsNullOrEmpty(m.Character.Weapon) && !rules.Weapons.ContainsKey(m.Character.Weapon)) ||
+                (!string.IsNullOrEmpty(m.Character.Armor) && !rules.Armors.ContainsKey(m.Character.Armor))))
+                throw new CampaignDocumentException(CampaignDocumentException.MissingContent);
+            // Failed lock ways and searches saved before USER DECISION 2 name no rest: they're spent until the next one (issue #83).
+            if (doc.World is { Things: { } things } stamped && things.Values.Any(t => Interactables.Stamped(t, stamped.RestSeq) != t))
+                doc = doc with { World = stamped with { Things = Ordinal.Map(things.Select(t => (t.Key, Interactables.Stamped(t.Value, stamped.RestSeq)))) } };
+            // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
+            return doc.Gold > 0 && !doc.Members.IsEmpty
+                ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
+        }
+        catch (CampaignDocumentException) { throw; }
+        catch (JsonException error)
+        {
+            throw new CampaignDocumentException(CampaignDocumentException.NeedsAttention, error);
+        }
     }
 
     /// <summary>
