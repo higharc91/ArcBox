@@ -619,6 +619,14 @@ full-screen white overlay. Reduced must omit flash, hit-stop and camera shake, k
 and shorten the residue. Area telegraphs must use the rule's affected tile set; the art must not suggest a
 larger hit area. Effects must leave figures, HP bars and the grid readable beyond the brief impact.
 
+Luminous magic also lights the scene. Shared `SpellEmission` defaults give fire an amber pool, lightning/frost
+a cool blue cast, force an arcane blue cast, and holy magic warm cream. The light follows a projectile or the
+rotated beam/cone, illuminates floor/wall vertices, props and figures, and fades with the effect. Persistent
+spell fire and luminous zones remain lit between turns and clear when their zone disappears. Ordinary arrows,
+dust and poison do not glow; impact sparks are small and faint so they cannot drown out a spell's colour.
+Reduced retains softer spell lighting without flashing or flickering. Reuse the board's static illumination and
+brightness ceiling; do not bake temporary spell light into cached scenery or add duplicate glow textures.
+
 The optional `presentation.cutIn` is `none`, `short` or `full`. Missing values resolve in the presentation
 layer: ordinary attacks/cantrips/reactions have no cut-in, paid features and levelled spells are short,
 and `signature.*` art and downing criticals are full. The TV preference can shorten or disable a tier;
