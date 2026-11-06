@@ -170,7 +170,10 @@ public static partial class Battle
     /// runs of consecutive blocks: a run of tile blocks (<see cref="EffectDef.OnTile"/>) runs once at the aim with no target
     /// unit, even when the area holds no units; a run of other blocks runs once per affected unit in sorted
     /// <see cref="UnitId"/> order (one <see cref="RunEffectsStep"/> each). So <c>[attack, teleport]</c> attacks every target,
-    /// then teleports. Returns the rejection otherwise, leaving the queue untouched. An item use is the AI's
+    /// then teleports. A weapon attack (<see cref="AbilityDef.IsWeaponAttack"/>) instead queues its
+    /// <see cref="UnitSheet.Attacks"/> attacks as <see cref="StrikeStep"/>s (<see cref="Strikes.Plan"/>), aimed at
+    /// <see cref="Use.Targets"/> when the command lists them (checked by <see cref="ListRefusal"/>), else all at its target.
+    /// Returns the rejection otherwise, leaving the queue untouched. An item use is the AI's
     /// (<see cref="PayCostStep.ByAi"/>) when the user is AI-controlled or <paramref name="aiFinished"/> is set.
     /// </summary>
     private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules, bool aiFinished)
@@ -195,13 +198,21 @@ public static partial class Battle
             return cost;
         if (ResolveTarget(w, user, ability, use.Target, out var aim, out var targets) is { } target)
             return target;
-
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
+        if (!use.Targets.IsDefaultOrEmpty)
+        {
+            if (ListRefusal(w, user, ability, use, targets) is { } listed)
+                return listed;
+            targets = use.Targets;
+        }
 
         var byAi = use.Item is not null && (aiFinished || user.Controller is AiControlled);
         var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target, use.Item, byAi) };
+        if (ability.IsWeaponAttack)
+        {
+            steps.AddRange(Strikes.Plan(user, ability, aim, targets, Math.Max(1, user.Sheet.Attacks)));
+            targets = [.. targets.Distinct()];
+        }
+        var effects = ability.IsWeaponAttack || ability.Effects.IsDefault ? [] : ability.Effects;
         for (var start = 0; start < effects.Length;)
         {
             var onTile = effects[start].OnTile;
@@ -218,6 +229,28 @@ public static partial class Battle
         if (w.State.Environment)
             steps.Add(new ReactStep(user.Id, ability.Id, aim, Areas.Tiles(ability.Target.Area, user.Pos, aim, w.Terrain), w.NewResolution(), targets));
         w.PushFront([.. steps]);
+        return null;
+    }
+
+    /// <summary>
+    /// Why <paramref name="use"/>'s <see cref="Use.Targets"/> is refused, or null: only an aimed weapon attack
+    /// (<see cref="Strikes.Aimed"/>) takes a list, of at most one entry per attack, starting with the unit the command's
+    /// target picks (<paramref name="aimed"/>), and every unit in it must be one the ability could be used on now
+    /// (<see cref="ResolveTarget"/>'s rejection otherwise).
+    /// </summary>
+    private static Rejection? ListRefusal(BattleWriter w, UnitState user, AbilityDef ability, Use use, ImmutableArray<UnitId> aimed)
+    {
+        var invalid = Rejection.Of(RejectCode.InvalidTarget);
+        var list = use.Targets;
+        if (!Strikes.Aimed(ability) || list.Length > Math.Max(1, user.Sheet.Attacks) || aimed.Length != 1 || list[0] != aimed[0])
+            return invalid;
+        foreach (var id in list.Distinct().Skip(1))
+        {
+            if (ResolveTarget(w, user, ability, new Target(Unit: id), out _, out var affected) is { } refused)
+                return refused;
+            if (!affected.Contains(id))
+                return invalid;
+        }
         return null;
     }
 

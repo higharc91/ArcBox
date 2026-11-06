@@ -20,7 +20,27 @@ public sealed record Move(UnitId Actor, ImmutableArray<Tile> Path) : Command(Act
 /// <c>common.use_item</c> and <see cref="Item"/> names the item from the actor's bag; the item's own ability runs.
 /// </summary>
 public sealed record Use(UnitId Actor, AbilityId Ability, Target Target,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Item = null) : Command(Actor);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Item = null) : Command(Actor)
+{
+    /// <summary>
+    /// For a weapon attack aimed at one unit (<see cref="AbilityDef.IsWeaponAttack"/>), the target of each of its attacks in
+    /// order, one per attack (<see cref="UnitSheet.Attacks"/>), the first being <see cref="Target"/>'s unit. A shorter list
+    /// repeats its last entry. Empty (the default, and what a command from before it reads as) means every attack at
+    /// <see cref="Target"/>. Whatever the list says, an attack whose target has fallen goes on to another (see
+    /// <see cref="StrikeStep"/>). Left out of the JSON when empty.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public ImmutableArray<UnitId> Targets { get; init; }
+
+    /// <summary>Equal when every field is, the <see cref="Targets"/> compared entry by entry (an empty list equals none).</summary>
+    public bool Equals(Use? other)
+        => other is not null && base.Equals(other) && Ability == other.Ability && Target == other.Target && Item == other.Item
+           && (Targets.IsDefaultOrEmpty ? other.Targets.IsDefaultOrEmpty : !other.Targets.IsDefault && Targets.SequenceEqual(other.Targets));
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+        => HashCode.Combine(base.GetHashCode(), Ability, Target, Item, Targets.IsDefaultOrEmpty ? 0 : Targets.Length);
+}
 
 /// <summary>Move the actor's turn <see cref="Slots"/> places later in the current round.</summary>
 public sealed record Delay(UnitId Actor, int Slots) : Command(Actor);

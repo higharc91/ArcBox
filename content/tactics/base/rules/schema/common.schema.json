@@ -665,6 +665,10 @@
         "isWeaponAttack": {
           "type": "boolean"
         },
+        "riderOnce": {
+          "type": "boolean",
+          "description": "With isWeaponAttack: only the attacks up to and including the first that hits run the whole effect list; the later attacks are plain hits (the first attack roll with no bonus, dealing the first damage block, weapon damage without extra dice), so a rider bought with a resource lands once however many attacks the unit makes (#107)."
+        },
         "replaces": {
           "type": "string",
           "description": "Set to this definition's own id to override the definition an earlier pack gave it. Without it, a repeated id is a load error."

@@ -93,8 +93,13 @@ internal sealed partial class Planner
         return _hypo[t] = (state, new BattleWriter(state, _rules));
     }
 
-    /// <summary>One way to use an ability from a tile: the target, the aim, whom it affects and what that is worth.</summary>
-    private sealed record Action(Target Target, Tile Aim, ImmutableArray<UnitId> Affected, double Value);
+    /// <summary>
+    /// One way to use an ability from a tile: the target, the aim, whom it affects and what that is worth; for a weapon
+    /// attack that spreads its attacks, the target of each (<see cref="Use.Targets"/>, default when they all go to
+    /// <see cref="Target"/>).
+    /// </summary>
+    private sealed record Action(Target Target, Tile Aim, ImmutableArray<UnitId> Affected, double Value,
+        ImmutableArray<UnitId> Targets = default);
 
     private IEnumerable<Action> Actions(Usable usable, Tile from) => Actions(usable, from, Hypo(from).State);
 
@@ -150,8 +155,11 @@ internal sealed partial class Planner
             if (Battle.ResolveTarget(w, me, ability, target, out var aim, out var affected) is not null)
                 continue;
             double value;
+            ImmutableArray<UnitId> listed = default;
             if (fixedAim && _aimValues.TryGetValue((usable.Command, usable.Item, aim), out var known))
                 value = known;
+            else if (Strikes.Aimed(ability) && me.Sheet.Attacks > 1 && affected.Length == 1)
+                (value, listed, affected) = Aimed(usable, w, me, w.State.Units[affected[0]]);
             else
             {
                 value = Value(usable, w, me, aim, affected);
@@ -165,8 +173,60 @@ internal sealed partial class Planner
                     continue;
                 value += reaction.Value;
             }
-            yield return new Action(target, aim, affected, value);
+            yield return new Action(target, aim, affected, value, listed);
         }
+    }
+
+    /// <summary>
+    /// A share of the first target's HP at which it is "predicted" dead: once the attacks so far drop it at least this
+    /// likely, the rest may go to another foe.
+    /// </summary>
+    private const double PredictedKill = 0.5;
+
+    /// <summary>
+    /// What an aimed weapon attack of several attacks (<see cref="Strikes.Aimed"/>) at <paramref name="first"/> is worth, and
+    /// where its attacks go. All of them at <paramref name="first"/> is the default. Once the first k attacks are expected to
+    /// drop it at least <see cref="PredictedKill"/> likely, the other attacks may go to another foe the ability can reach
+    /// from here (<see cref="Battle.ResolveTarget"/>; plain attacks after a <see cref="AbilityDef.RiderOnce"/> rider,
+    /// <see cref="Scorer.FollowUps"/>): every such k and foe is tried, and the split worth most is kept when it beats all of
+    /// them at <paramref name="first"/>. Ties keep the fewer attacks moved, then the lower unit id.
+    /// </summary>
+    private (double Value, ImmutableArray<UnitId> Targets, ImmutableArray<UnitId> Affected) Aimed(Usable usable, BattleWriter w,
+        UnitState me, UnitState first)
+    {
+        var ability = usable.Ability;
+        var count = me.Sheet.Attacks;
+        var st = new Strike(w, me, ability, first.Pos, neutral: false);
+        var onFirst = _scorer.StrikeOutcomes(ability, count, st, first);
+        var best = _scorer.Worth(me, first, onFirst[^1], _p);
+        ImmutableArray<UnitId> targets = default;
+        ImmutableArray<UnitId> affected = [first.Id];
+
+        var hp = Math.Max(1, first.Hp + first.TempHp);
+        var from = Enumerable.Range(1, count - 1).FirstOrDefault(k => onFirst[k - 1].Damage.AtLeast(hp) >= PredictedKill);
+        if (from == 0 || !Scorer.Hostile(me, first))
+            return (best, targets, affected);
+        var others = w.State.Units.Values
+            .Where(u => u.Id != first.Id && DownedRules.InBattle(u) && Scorer.Hostile(me, u) && u.Sheet.Side != Side.Neutral
+                        && Battle.ResolveTarget(w, me, ability, new Target(Unit: u.Id), out _, out var hit) is null && hit.Contains(u.Id))
+            .ToArray();
+        var fired = st.Fired.ToArray();
+        foreach (var other in others)
+        {
+            st.Fired.Clear();
+            st.Fired.UnionWith(fired);
+            var follow = _scorer.FollowUps(ability, count - from, st, other);
+            for (var k = count - 1; k >= from; k--)
+            {
+                var value = _scorer.Worth(me, first, onFirst[k - 1], _p) + _scorer.Worth(me, other, follow[count - k - 1], _p);
+                if (Round(value) <= Round(best))
+                    continue;
+                best = value;
+                targets = [.. Enumerable.Repeat(first.Id, k), .. Enumerable.Repeat(other.Id, count - k)];
+                affected = [first.Id, other.Id];
+            }
+        }
+        return (best, targets, affected);
     }
 
     private readonly Dictionary<AbilityId, ImmutableArray<Tile>> _reactionAims = [];
@@ -200,13 +260,13 @@ internal sealed partial class Planner
 
     /// <summary>
     /// What using <paramref name="usable"/> at <paramref name="aim"/> is worth: for each affected unit, what the ability's
-    /// unit blocks (all its attacks, for the Attack action) are expected to do to it (<see cref="Scorer.Worth"/>); plus its
+    /// unit blocks (all its attacks, for a weapon attack: <see cref="Expected"/>) are expected to do to it (<see cref="Scorer.Worth"/>); plus its
     /// tile blocks at the aim (a zone's effects on the units in it, a summon); less a little for dropping a concentration.
     /// </summary>
     private double Value(Usable usable, BattleWriter w, UnitState me, Tile aim, ImmutableArray<UnitId> affected)
     {
         var ability = usable.Ability;
-        var unitEffects = UnitEffects(ability, me);
+        var unitEffects = Scorer.UnitBlocks(ability.Effects);
         var tileEffects = (ability.Effects.IsDefault ? [] : ability.Effects).Where(e => e.OnTile).ToImmutableArray();
 
         var st = new Strike(w, me, ability, aim, neutral: false);
@@ -215,7 +275,7 @@ internal sealed partial class Planner
             foreach (var id in affected)
             {
                 var target = w.State.Units[id];
-                value += _scorer.Worth(me, target, _scorer.Walk(unitEffects, st, target), _p);
+                value += _scorer.Worth(me, target, Expected(ability, me, st, target), _p);
             }
         foreach (var effect in tileEffects)
             value += _scorer.TileWorth(effect, st, aim, _p);
@@ -225,15 +285,14 @@ internal sealed partial class Planner
     }
 
     /// <summary>
-    /// The ability's blocks that run on each unit it affects, in order: all of them for each attack of the Attack action.
+    /// What <paramref name="ability"/>'s unit blocks are expected to do to <paramref name="target"/>: once, or for a weapon
+    /// attack all of the user's attacks at it (<see cref="Scorer.StrikeOutcomes"/>, a <see cref="AbilityDef.RiderOnce"/>
+    /// rider counted once).
     /// </summary>
-    private static ImmutableArray<EffectDef> UnitEffects(AbilityDef ability, UnitState user)
-    {
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        if (ability.IsWeaponAttack)
-            effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
-        return [.. effects.Where(e => !e.OnTile)];
-    }
+    private Outcome Expected(AbilityDef ability, UnitState me, Strike st, UnitState target)
+        => ability.IsWeaponAttack
+            ? _scorer.StrikeOutcomes(ability, me.Sheet.Attacks, st, target)[^1]
+            : _scorer.Walk(Scorer.UnitBlocks(ability.Effects), st, target);
 
     /// <summary>True when <paramref name="c"/>'s action may drop <paramref name="unit"/>: its damage can reach the HP left.</summary>
     private bool MayDrop(Candidate c, UnitId unit)
@@ -241,8 +300,7 @@ internal sealed partial class Planner
         var (state, w) = Hypo(c.ActTile);
         var me = state.Units[_me.Id];
         var target = state.Units[unit];
-        var outcome = _scorer.Walk(UnitEffects(c.Usable!.Ability, me), new Strike(w, me, c.Usable.Ability, c.Action!.Aim, neutral: false),
-            target);
+        var outcome = Expected(c.Usable!.Ability, me, new Strike(w, me, c.Usable.Ability, c.Action!.Aim, neutral: false), target);
         return outcome.Damage.AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
     }
 }

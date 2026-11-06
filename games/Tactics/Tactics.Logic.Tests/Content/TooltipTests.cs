@@ -62,6 +62,21 @@ public sealed class TooltipTests
     }
 
     [Fact]
+    public void A_rider_once_weapon_attack_says_its_extras_land_on_the_first_hit()
+    {
+        // #107: Trip Attack's die and prone save land once however many attacks the unit makes.
+        var trip = new AbilityDef(new AbilityId("test.trip"), "Trip", 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, 1, false, new AreaDef(AreaShape.Single)),
+            [new AttackEffect("weapon", null, [new DamageEffect(TestAbilities.Flat("1d8"), null, [], Weapon: true),
+                new SaveEffect(Stat.Str, 13, [Apply("prone", null)], [])], [], [])],
+            IsWeaponAttack: true, RiderOnce: true);
+        Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone). "
+                     + "With more than one attack, only the first hit gets this; the rest are plain hits", Tooltips.For(trip, 1, Rules));
+        Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone)",
+            Tooltips.For(trip with { RiderOnce = false }, 1, Rules));
+    }
+
+    [Fact]
     public void Missing_describe_throws_naming_block()
     {
         // A transform whose hook doesn't exist has no phrase: the block answers null and the tooltip names it.

@@ -3108,7 +3108,7 @@
           "Action",
           "1 oath"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; 2d6 radiant; target is Burning for 2 rounds"
+        "text": "Weapon attack, weapon range: weapon damage; 2d6 radiant; target is Burning for 2 rounds. With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "draconic.dragon_breath": {
         "name": "Draconic Breath",
@@ -3327,7 +3327,7 @@
           "Reaction",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "dwarf.stoneskin": {
         "name": "Stoneskin",
@@ -3411,7 +3411,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "fighter.menacing_attack": {
         "name": "Menacing Attack",
@@ -3419,7 +3419,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "fighter.precision_attack": {
         "name": "Precision Attack",
@@ -3427,7 +3427,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u2014 Your superiority die steadies the blow: \u002B4 to hit."
+        "text": "Weapon attack, weapon range: weapon damage. With more than one attack, only the first hit gets this; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit."
       },
       "fighter.pushing_attack": {
         "name": "Pushing Attack",
@@ -3435,7 +3435,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "fighter.rally": {
         "name": "Rally",
@@ -3480,7 +3480,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone)"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "geomancer.raise_earth": {
         "name": "Raise Earth",
@@ -3670,7 +3670,7 @@
           "Action",
           "1 ki"
         ],
-        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round) \u2014 A strike at the body\u0027s flow of ki: on a hit, a CON save or the target is stunned until your next turn ends."
+        "text": "Weapon attack, weapon range: 1d10 \u002B DEX modifier bludgeoning; if not the target is Stunned, Con save (target is Stunned for 1 round). With more than one attack, only the first hit gets this; the rest are plain hits \u2014 A strike at the body\u0027s flow of ki: on a hit, a CON save or the target is stunned until your next turn ends."
       },
       "monk.unarmed_strike": {
         "name": "Unarmed Strike",
@@ -3692,7 +3692,7 @@
           "Action",
           "1 ki"
         ],
-        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; Str save (pushes target 3 tiles away; target is Prone)"
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; Str save (pushes target 3 tiles away; target is Prone). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "open_hand.sweeping_kick": {
         "name": "Sweeping Kick",
@@ -3925,7 +3925,7 @@
           "Action",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; Con save (target is Poisoned until saved)"
+        "text": "Weapon attack, weapon range: weapon damage; Con save (target is Poisoned until saved). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "rogue.sneak_attack": {
         "name": "Sneak attack",
@@ -3947,7 +3947,7 @@
           "Action",
           "1 edge"
         ],
-        "text": "Weapon attack, weapon range: weapon damage; Dex save (target is Prone)"
+        "text": "Weapon attack, weapon range: weapon damage; Dex save (target is Prone). With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "rogue.uncanny_dodge": {
         "name": "Uncanny Dodge",
@@ -4001,7 +4001,7 @@
           "Action",
           "1 focus"
         ],
-        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "sharpshooter.high_ground_mastery": {
         "name": "High ground mastery",
@@ -4597,7 +4597,7 @@
           "Action",
           "1 superiority"
         ],
-        "text": "Weapon attack, weapon range, burst 1: weapon damage \u002B 1d8"
+        "text": "Weapon attack, weapon range, burst 1: weapon damage \u002B 1d8. With more than one attack, only the first hit gets this; the rest are plain hits"
       },
       "weaponmaster.keen_edge": {
         "name": "Keen edge",

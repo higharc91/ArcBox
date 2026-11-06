@@ -69,7 +69,8 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// <see cref="StaticMods.CritWhenAdjacent"/> from an adjacent attacker is a critical hit. Emits
 /// <see cref="AttackResolved"/>, fires
 /// <see cref="HookKind.OnAttackHit"/> or <see cref="HookKind.OnAttackMiss"/> for the attacker and queues the branch
-/// (hit, plus crit; or miss) ahead of the hook effects.</item>
+/// (hit, plus crit; or miss) ahead of the hook effects. An ability's hit (<see cref="HookDepth"/> 0) lands a
+/// <see cref="AbilityDef.RiderOnce"/> rider: the ability's attacks still to come are plain (<see cref="Strikes.RecordHit"/>).</item>
 /// </list>
 /// </summary>
 public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, AbilityId? Ability, EffectDef Attack,
@@ -159,7 +160,11 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var roll = rolled with { Vs = ac, Success = hit, Crit = crit };
         w.Emit(new AttackResolved(Source, Target, hit, crit));
         if (HookDepth == 0)
+        {
             Surfaces.RecordHit(w, Source, Ability, hit);
+            if (hit)
+                Strikes.RecordHit(w, Source, Ability);
+        }
 
         var hooks = new List<Step>();
         Hooks.Collect(w, hit ? HookKind.OnAttackHit : HookKind.OnAttackMiss,

@@ -12,10 +12,10 @@ internal sealed partial class Planner
     {
         var commands = new List<Command>();
         Usable? Escape(bool first) => c.Escape is { } e && first == (c.Kind != Kind.ActMove && c.Kind != Kind.DashMove) ? e : null;
-        void Act(Usable? usable, Target target)
+        void Act(Usable? usable, Target target, ImmutableArray<UnitId> targets = default)
         {
             if (usable is not null)
-                commands.Add(new Use(_me.Id, usable.Command, target, usable.Item));
+                commands.Add(new Use(_me.Id, usable.Command, target, usable.Item) { Targets = targets });
         }
         void Walk()
         {
@@ -38,11 +38,11 @@ internal sealed partial class Planner
                 Act(Escape(first: true), new Target());
                 if (c.ActTile != _me.Pos)
                     commands.Add(new Move(_me.Id, [_me.Pos, .. _paths.PathTo(c.ActTile)]));
-                Act(c.Usable, c.Action!.Target);
+                Act(c.Usable, c.Action!.Target, c.Action.Targets);
                 break;
             case Kind.ActMove:
             case Kind.DashMove:
-                Act(c.Usable, c.Action!.Target);
+                Act(c.Usable, c.Action!.Target, c.Action.Targets);
                 Act(Escape(first: false), new Target());
                 Walk();
                 break;
@@ -94,10 +94,12 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, me.Pos, state))
             {
-                if (action.Target.Unit is { } unit && leaving.Contains(unit) || !ItemOk(usable, me.Pos, action))
+                if (action.Target.Unit is { } unit && leaving.Contains(unit)
+                    || !action.Targets.IsDefaultOrEmpty && action.Targets.Any(leaving.Contains) || !ItemOk(usable, me.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
-                    (best, bestScore) = (new Use(_me.Id, usable.Command, action.Target, usable.Item), action.Value - hoard);
+                    (best, bestScore) = (new Use(_me.Id, usable.Command, action.Target, usable.Item) { Targets = action.Targets },
+                        action.Value - hoard);
             }
         }
         return best;

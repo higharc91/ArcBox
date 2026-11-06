@@ -57,6 +57,9 @@ public sealed class SerialisationTests
                     [new DamageEffect(TestAbilities.Flat("1d6"), null, [])], HookDepth: 2, Passive: new PassiveRef(U("kara"), "rogue.sneak_attack")),
                 new AttackStep(U("kara"), U("gob"), new Tile(3, 1), new AbilityId("common.attack"), RulesPack.CommonAttack.Effects[0],
                     new RollResult([4, 17], 17, 5, 22, 15, true, false, false), Cover: 2, Edge: Edge.Advantage, HookDepth: 1),
+                new StrikeStep(U("kara"), new AbilityId("fighter.trip_attack"), new Tile(3, 1), [U("gob"), U("Brin"), U("Brin")], 1, 3,
+                    Last: U("gob"), Landed: true),
+                new StrikeStep(U("kara"), new AbilityId("weaponmaster.cleave"), new Tile(0, 0), [U("gob")], 0, 2, Fixed: true),
             ],
             Pending = new ReactionOffer(U("gob"),
                 [new ReactionChoice("pass", null, null), new ReactionChoice("opportunity", new AbilityId("common.attack"), U("kara"))],
@@ -121,6 +124,9 @@ public sealed class SerialisationTests
         Assert.Equal(JsonSerializer.Serialize(state.Queue, ArcJson.Options), JsonSerializer.Serialize(back.Queue, ArcJson.Options));
         Assert.Equal(state.Queue.Select(s => s.GetType()), back.Queue.Select(s => s.GetType()));
         Assert.Contains("\"$type\":\"AttackStep\"", json);
+        Assert.Contains("\"$type\":\"StrikeStep\",\"source\":\"kara\",\"ability\":\"fighter.trip_attack\"", json);
+        Assert.Contains("\"last\":\"gob\",\"landed\":true", json);
+        Assert.Contains("\"fixed\":true", json);
         Assert.Contains("\"hookDepth\":2,\"passive\":{\"owner\":\"kara\",\"id\":\"rogue.sneak_attack\"}", json);
         Assert.Contains("\"edge\":\"advantage\"", json);
         Assert.Equal(state.Units[U("kara")].Conditions, back.Units[U("kara")].Conditions);

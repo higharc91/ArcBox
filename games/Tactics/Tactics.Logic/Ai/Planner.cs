@@ -206,12 +206,12 @@ internal sealed partial class Planner
 
         private string AbilityKey => Usable is null ? "" : Usable.Command.Value + "/" + Usable.Item?.Value;
 
-        public string TargetKey => Action?.Target switch
+        public string TargetKey => (Action?.Target switch
         {
             { Unit: { } unit } => "u:" + unit.Value,
             { Tile: { } tile } => $"t:{tile.X:D3},{tile.Y:D3}",
             _ => "",
-        };
+        }) + (Action is { Targets.IsDefaultOrEmpty: false } a ? ">" + string.Join(",", a.Targets.Select(t => t.Value)) : "");
     }
 
     /// <summary>Scores compared to a millionth, so sums that differ only by rounding still tie.</summary>

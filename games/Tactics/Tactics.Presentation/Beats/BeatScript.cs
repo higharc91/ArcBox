@@ -281,12 +281,15 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         /// -1. The events don't say which of their units the ability was aimed at, as a passive's effects run inline with nothing
         /// to mark their end, so only what can't be a side effect counts: the units other than the caster that a roll was made
         /// against. A passive's save lands on the target it was triggered by, so it can't add one. An ability with no rolls at all
-        /// (a mass heal) is judged by whom it touched before anything else could join in: a passive, or a collision.
+        /// (a mass heal) is judged by whom it touched before anything else could join in: a passive, or a collision. A weapon
+        /// attack whose attacks turn to another foe (<see cref="Retargeted"/>) is never an area: its attacks are swung one by one.
         /// </summary>
         private int AreaEnd(int start)
         {
             var source = ((AbilityUsed)beat.Events[start]).Source;
             var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded or TileReacted)).ToArray();
+            if (window.Any(e => e is Retargeted turned && turned.Unit == source))
+                return -1;   // one attack after another, each at its own foe (#107)
             var rolled = window.Where((e, i) => !IsConcentrationCheck(window, i)).Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
             var targets = rolled.Count > 0
                 ? rolled
@@ -395,6 +398,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case AbilityUsed used:
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
+                    break;
+                case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
+                    _ability = aimed with { Target = new Target(Unit: turned.Target) };   // the next swing goes at it
                     break;
                 case Rolled { Kind: RollKind.Attack } when _ability is { } again:
                     if (_swings > 0 && !InArea)

@@ -45,6 +45,12 @@ internal sealed class Strike(BattleWriter w, UnitState user, AbilityDef? ability
     public HashSet<string> Fired { get; } = new(StringComparer.Ordinal);
     public HashSet<ConditionId> Quarrying { get; } = [];
     public bool ProjectingDamageTaken { get; set; }
+
+    /// <summary>
+    /// Set, the next attack roll walked is taken as a hit (true) or a miss (false) instead of weighed by its odds; walking it
+    /// clears this (see <see cref="Scorer.StrikeOutcomes"/>).
+    /// </summary>
+    public bool? Force { get; set; }
     public EffectContext Context { get; } = new(w, w.Rules, user.Id, null, aim, ability);
 }
 

@@ -16,6 +16,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(PayCostStep), nameof(PayCostStep))]
 [JsonDerivedType(typeof(ReactStep), nameof(ReactStep))]
 [JsonDerivedType(typeof(RunEffectsStep), nameof(RunEffectsStep))]
+[JsonDerivedType(typeof(StrikeStep), nameof(StrikeStep))]
 [JsonDerivedType(typeof(MoveStep), nameof(MoveStep))]
 [JsonDerivedType(typeof(OfferReactionStep), nameof(OfferReactionStep))]
 [JsonDerivedType(typeof(ReactionStep), nameof(ReactionStep))]

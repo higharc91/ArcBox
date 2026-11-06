@@ -240,17 +240,26 @@ internal sealed partial class Scorer
         return (modifier, ac, edge, pHit, pCrit);
     }
 
-    /// <summary>An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives.</summary>
+    /// <summary>
+    /// An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives. With
+    /// <see cref="Strike.Force"/> set, just the hit (crit or not, by their odds) or just the miss.
+    /// </summary>
     private Outcome Attack(AttackEffect def, Strike st, UnitState target)
     {
+        var force = st.Force;
+        st.Force = null;
         var (modifier, ac, edge, pHit, pCrit) = AttackOdds(def, st, target);
         var hitRoll = new RollResult([], 0, modifier, 0, ac, Success: true, Crit: false, Fumble: false);
         var critRoll = hitRoll with { Crit = true };
+        if (force == false)
+            return Walk(def.OnMiss, st, target, last: hitRoll with { Success = false });
         var hooks = OnHitPassives(def, st, target, edge, hitRoll);
         var onHit = def.OnHit.IsDefault ? [] : def.OnHit;
         var hit = Walk(onHit, st, target, last: hitRoll).Then(Walk(hooks, st, target, last: hitRoll));
         var critical = Walk(def.OnCrit.IsDefaultOrEmpty ? onHit : onHit.AddRange(def.OnCrit), st, target, crit: true, last: critRoll)
             .Then(Walk(hooks, st, target, crit: true, last: critRoll));
+        if (force == true)
+            return pHit <= 0 ? hit : Outcome.Mix([(pCrit / pHit, critical), (1 - pCrit / pHit, hit)]);
         var miss = Walk(def.OnMiss, st, target, last: hitRoll with { Success = false });
         return Outcome.Mix([(pCrit, critical), (pHit - pCrit, hit), (1 - pHit, miss)]);
     }

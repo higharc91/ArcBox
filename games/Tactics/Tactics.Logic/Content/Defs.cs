@@ -56,8 +56,11 @@ public sealed record AiHints(ImmutableArray<string> Tags);
 
 /// <summary>
 /// An ability from the content: what it costs, how it is aimed and the effect blocks it runs on each target.
-/// <see cref="IsWeaponAttack"/> marks the basic Attack action, which uses the sheet's weapon for range and damage and
-/// repeats its effects <see cref="UnitSheet.Attacks"/> times. <see cref="Replaces"/> lets a later pack override an id.
+/// <see cref="IsWeaponAttack"/> marks the basic Attack action and the manoeuvres built on it, which use the sheet's weapon
+/// for range and damage and make <see cref="UnitSheet.Attacks"/> attacks, each running the effects on its own target
+/// (<see cref="StrikeStep"/>). With <see cref="RiderOnce"/>, only the attacks up to and including the first that hits run
+/// the whole list; the attacks after it are plain hits (<see cref="Strikes.Plain"/>), so a rider bought with one resource
+/// lands once. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cost, TargetDef Target,
     ImmutableArray<EffectDef> Effects,
@@ -65,7 +68,8 @@ public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cos
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] AiHints? Ai = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Flavor = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] AbilityId? Replaces = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IsWeaponAttack = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IsWeaponAttack = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool RiderOnce = false);
 
 /// <summary>
 /// When a passive's effects run (spec §4.4). JSON: <c>"onBattleStart"</c>, <c>"onAttackHit"</c>, …. Each hook fires for one

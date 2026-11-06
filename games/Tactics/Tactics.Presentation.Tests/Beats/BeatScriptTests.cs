@@ -577,6 +577,23 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void Attacks_that_turn_to_another_foe_after_a_kill_are_swings_at_each_not_an_area()
+    {
+        // #107: the first attack drops the goblin; the engine sends the other two at the second one.
+        var other = new UnitId("goblin.2");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3), Unit(other, "Enemy", 3, 4));
+        var script = Script(view, [.. Hit(3, 0), new Died(Foe),
+            new Retargeted(Hero, other),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, other, true, false), new Damaged(other, 3, "slashing", 7),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, other, true, false), new Damaged(other, 3, "slashing", 4)]);
+
+        var lunges = script.Cues.OfType<LungeCue>().ToArray();
+        Assert.Equal(3, lunges.Length);
+        Assert.Equal([new Tile(4, 3), new Tile(3, 4), new Tile(3, 4)], lunges.Select(l => l.Toward));
+        Assert.True(lunges[1].At >= script.Cues.OfType<ApplyCue>().First(a => a.Event is Died).At, "the next swing waits for the fall");
+    }
+
+    [Fact]
     public void A_double_attack_on_one_target_is_still_two_swings_after_all_this()
         => Assert.Equal(2, Script(Near, [.. Hit(3, 7), new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
             new Damaged(Foe, 3, "slashing", 4)]).Cues.OfType<LungeCue>().Count());

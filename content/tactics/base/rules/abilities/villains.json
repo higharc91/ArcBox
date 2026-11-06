@@ -18,7 +18,7 @@
                      "onSuccess": [ { "damage": { "dice": "1d6", "type": "cold" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.frost.frost" },
       "ai": { "tags": ["damage", "control", "area"] } },
-    { "id": "halvard.wardens_judgement", "name": "Warden's Judgement", "tier": 0, "cost": { "action": 1, "uses": 2 }, "isWeaponAttack": true,
+    { "id": "halvard.wardens_judgement", "name": "Warden's Judgement", "tier": 0, "cost": { "action": 1, "uses": 2 }, "isWeaponAttack": true, "riderOnce": true,
       "target": { "kind": "enemy", "range": 1, "los": true, "area": { "shape": "single" } },
       "effects": [ { "attack": { "kind": "weapon" },
                      "onHit": [ { "damage": { "dice": "3d8", "type": "necrotic" } },

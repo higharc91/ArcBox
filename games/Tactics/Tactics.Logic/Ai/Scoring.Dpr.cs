@@ -66,14 +66,16 @@ internal sealed partial class Scorer
         return _options[(attacker.Id, victim.Id)] = options.ToImmutable();
     }
 
-    /// <summary>The expected damage of <paramref name="ability"/> (its effects <paramref name="times"/> over) on <paramref name="victim"/>.</summary>
+    /// <summary>
+    /// The expected damage of <paramref name="ability"/> on <paramref name="victim"/>: its effects once, or for a weapon attack
+    /// <paramref name="times"/> attacks (<see cref="StrikeOutcomes"/>, a <see cref="AbilityDef.RiderOnce"/> rider counted once).
+    /// </summary>
     private double Expected(UnitState attacker, AbilityDef ability, UnitState victim, int times)
     {
         var st = new Strike(W, attacker, ability, victim.Pos, neutral: true);
-        var effects = ability.Effects.IsDefault ? [] : ability.Effects;
-        var total = Outcome.None;
-        for (var i = 0; i < times; i++)
-            total = total.Then(Walk(effects, st, victim));
+        var total = ability.IsWeaponAttack
+            ? StrikeOutcomes(ability, times, st, victim)[^1]
+            : Walk(ability.Effects.IsDefault ? [] : ability.Effects, st, victim);
         return total.Damage.Mean + total.Splash;
     }
 

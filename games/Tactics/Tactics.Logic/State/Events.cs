@@ -27,6 +27,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(ConcentrationBroken), nameof(ConcentrationBroken))]
 [JsonDerivedType(typeof(PassiveTriggered), nameof(PassiveTriggered))]
 [JsonDerivedType(typeof(AttackResolved), nameof(AttackResolved))]
+[JsonDerivedType(typeof(Retargeted), nameof(Retargeted))]
 [JsonDerivedType(typeof(Downed), nameof(Downed))]
 [JsonDerivedType(typeof(CountdownTicked), nameof(CountdownTicked))]
 [JsonDerivedType(typeof(Revived), nameof(Revived))]
@@ -138,6 +139,13 @@ public sealed record PassiveTriggered(UnitId Owner, string Passive,
 /// helpless adjacent target a critical hit). The TV labels the attack from this.
 /// </summary>
 public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent;
+
+/// <summary>
+/// The next attack of <see cref="Unit"/>'s multi-attack goes to <see cref="Target"/>, not to the unit its last attack (or,
+/// for the first, the ability's aim) went to: the player listed another target for it (<see cref="Use.Targets"/>), or the
+/// one it was meant for has fallen or is out of reach (<see cref="StrikeStep"/>). The TV turns the next swing to it.
+/// </summary>
+public sealed record Retargeted(UnitId Unit, UnitId Target) : BattleEvent;
 
 /// <summary>A unit dropped to 0 HP and is Downed: prone, unable to act, with a countdown of 3 (spec §3.8).</summary>
 public sealed record Downed(UnitId Unit) : BattleEvent;
