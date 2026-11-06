@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using ArcBox.Host.Audio;
 using ArcBox.Host.Core.Audio;
+using ArcBox.Host.Core;
 using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using Godot;
@@ -51,6 +52,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private const int WalkShots = 24;
     private const double TilesBetweenShots = 24;
     private const double RestBeforeShot = 1.6;
+
+    private BattlePresentationControls _presentationControls = null!;
+    private RulesPack? _cinemaRules;
+    private AbilityBanner _abilityBanner = null!;
+    public BattleCinematics? CinematicsOverride { get; set; }
+    public bool ReducedEffects { get; set; }
 
     private Label _meta = null!;
     private Label _title = null!;
@@ -172,6 +179,13 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     public override void _Ready()
     {
+        var preferenceStore = new SettingsStore(ProjectSettings.GlobalizePath("user://settings.json"));
+        var preferences = preferenceStore.Load();
+        CinematicsOverride = Enum.TryParse<BattleCinematics>(preferences.BattleCinematics, out var mode) && Enum.IsDefined(mode) ? mode : null;
+        ReducedEffects = preferences.ReducedBattleEffects == true;
+        if (Enum.TryParse<BattleCinematics>(System.Environment.GetEnvironmentVariable("ARCBOX_FX_CINEMATICS"), out var previewMode) && Enum.IsDefined(previewMode))
+            CinematicsOverride = previewMode;
+        if (System.Environment.GetEnvironmentVariable("ARCBOX_FX_REDUCED") is { } reducedPreview) ReducedEffects = reducedPreview == "1";
         var column = ShellLayout.Frame(this, 24);
         _backdrop = GetChild<Control>(0);
 
@@ -184,6 +198,16 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _board = new BoardCanvas { Visible = false };
         AddChild(_board);
         MoveChild(_board, 1);   // over the background, under the column
+
+        _abilityBanner = new AbilityBanner();
+        AddChild(_abilityBanner);
+        _presentationControls = new BattlePresentationControls(CinematicsOverride, ReducedEffects, (cinema, reduced) =>
+        {
+            (CinematicsOverride, ReducedEffects) = (cinema, reduced);
+            if (cinema == BattleCinematics.Off) _player?.ClearCinematics();
+            preferenceStore.Update(s => s with { BattleCinematics = cinema?.ToString(), ReducedBattleEffects = reduced });
+        });
+        AddChild(_presentationControls);
 
         _stageFade = new ColorRect { Color = Colors.Black, Visible = false, MouseFilter = MouseFilterEnum.Ignore };
         _stageFade.SetAnchorsPreset(LayoutPreset.FullRect);
@@ -233,8 +257,24 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
     }
 
+    public override void _UnhandledKeyInput(InputEvent input)
+    {
+        if (_battle && input is InputEventKey { Pressed: true, Echo: false, Keycode: Key.F6 })
+        {
+            _presentationControls.Toggle();
+            GetViewport().SetInputAsHandled();
+        }
+    }
+
     public override void _Process(double delta)
     {
+        _presentationControls.Visible = _battle;
+        if (!_battle)
+        {
+            _board.SetCinematic(null, 1);
+            if (_abilityBanner.Visible) _abilityBanner.ShowName(null);
+            if (_world is { } restingWorld) restingWorld.Cinematic = null;
+        }
         GiftAudio();
         if (_director is { } director)
         {
@@ -1248,7 +1288,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _art ??= ArtIndex.Load(root);
             _unitArt ??= UnitArt.Load(root);
             _fx ??= FxArt.Load(root);
+            _cinemaRules ??= RulesPack.Load([Path.Combine(root, "rules")]);
             _player ??= new BeatPlayer(_fx, _unitArt, _sound, _voices);
+            _player.EnhancedEffects = true;
+            _player.ReducedEffects = ReducedEffects;
+            _player.CutIn = (beat, before, script) => _map is null ? null : CutInPlayback.For(beat, before, script, _cinemaRules,
+                new BoardTerrain(_map, before.Board), BattleCutIn.Preference(Math.Clamp(before.Units.Count(u => u.Side == "Party" && u.Id.Value.StartsWith("hero", StringComparison.Ordinal) && int.TryParse(u.Id.Value.AsSpan(4), out _)), 1, 6), CinematicsOverride), _player.CarriedCamera);
             _loop ??= new BeatLoop(_player, Finished, Present, message => GD.PushError($"Tactics board: {message}"));
             if (_hud is null)
             {
@@ -1303,12 +1348,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _board.SetPlan(plan, LitBoard.Build(plan, BoardLighting.Of(plan, _map.Id, _art.Lighting)), fit, root);
         }
         var frame = _player.Frame(_terrain);
-        var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);
+        var framed = CinematicFit.Of(fit, _player.Camera);
+        _board.SetFit(framed);
+        _board.SetCinematic(_player.Camera, framed.Scale);
+        _abilityBanner.ShowName(_player.AbilityBanner);
+        var units = UnitPlan.Build(shown, _terrain, _unitArt, framed, frame.Places, frame.Poses);
         var (marked, draws) = MarkRule.Apply(units, frame, _unitArt, MarkRule.Shown(StageStep.Off, covered: false));
         _board.SetUnits(marked, _unitArt);
-        _board.SetEffects(draws, frame.Shake);
+        _board.SetFlashes(frame.Flashes);
+        _board.SetSpellLights(frame.Lights);
+        _board.SetTelegraph(_player.Telegraph, _terrain);
+        _board.SetEffects(draws, ReducedEffects ? System.Numerics.Vector2.Zero : frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
-        _hud?.Show(_said, units, fit, _player.AiFinished);
+        _hud?.Show(_said, units, framed, _player.AiFinished);
         ShowRetreat(_player.Live ?? shown);
     }
 
@@ -1347,13 +1399,22 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
         var director = _director;
         var beat = _player.Frame(_terrain);
-        var stage = StageFrame.Of(beat, director, where, walk.Fit, _stageShake);
+        var camera = _player.Camera;
+        world.Cinematic = camera is null ? null : camera with { Focus = camera.Focus + BoardFit.StageOffset(where) };
+        world.Place(walk.Fit);
+        var cameraFit = CinematicFit.Of(walk.Fit, world.Cinematic, new System.Numerics.Vector2(960, 540));
+        var stage = StageFrame.Of(beat, director, where, cameraFit, _stageShake);
+        board.SetCinematic(camera, stage.HudFit.Scale, parentDims: true);
+        _abilityBanner.ShowName(_player.AbilityBanner);
         var units = stage.Shown(UnitPlan.Build(shown, _terrain, _unitArt, stage.Fit, stage.Places, stage.Poses, where.Origin));
         var (marked, draws) = MarkRule.Apply(units, beat, _unitArt, MarkRule.Shown(director.Stage, _overWorld));
         board.SetUnits(marked, _unitArt);
+        board.SetFlashes(beat.Flashes);
+        board.SetSpellLights(beat.Lights);
+        board.SetTelegraph(_player.Telegraph, _terrain, where.Origin);
         board.SetEffects([.. draws.Select(d => d.AtWorldOrigin(where.Origin))], System.Numerics.Vector2.Zero);
         board.GridAlpha = director.GridAlpha;
-        _stageShake = beat.Shake;      // on the camera: the world and the board shake together
+        _stageShake = ReducedEffects ? System.Numerics.Vector2.Zero : beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, stage.HudFit, _player.AiFinished);
         ShowRetreat(_player.Live ?? shown);
