@@ -67,7 +67,45 @@ public partial class AudioDirector : Node
         SfxBank.Prewarm();
     }
 
-    public void SetNarrator(Narrator narrator) => _narrator = narrator;
+    /// <summary>Sends a signal to the game (set by <see cref="RedlineScene"/> from the shell's <c>ISignalingScene</c>).</summary>
+    public Action<string, object>? Signal { get; set; }
+
+    /// <summary>The question being read out, and the view's <c>readSeq</c> to acknowledge when it ends (issue #25).</summary>
+    private (int Seq, string Text)? _reading;
+
+    public void SetNarrator(Narrator narrator)
+    {
+        if (_narrator is not null)
+        {
+            _narrator.LineFinished -= OnLineFinished;
+        }
+        _narrator = narrator;
+        narrator.LineFinished += OnLineFinished;
+    }
+
+    public override void _ExitTree()
+    {
+        // The narrator is the shell's and outlives this scene.
+        if (_narrator is not null)
+        {
+            _narrator.LineFinished -= OnLineFinished;
+        }
+    }
+
+    /// <summary>
+    /// The question's read-out ended: tell the game, so the answers open now rather than at the Reading estimate. The
+    /// game ignores a stale seq, and its timer still opens the answers if this never comes (a dropped or skipped line).
+    /// </summary>
+    private void OnLineFinished(string text)
+    {
+        if (_reading is not { } reading || text != reading.Text.Trim())
+        {
+            return;
+        }
+        _reading = null;
+        GD.Print($"REDLINE {RedlineGame.NarrationDone} seq {reading.Seq}");
+        Signal?.Invoke(RedlineGame.NarrationDone, new { seq = reading.Seq });
+    }
 
     /// <summary>
     /// The race has left the air (<see cref="RedlineScene.Park"/>). A race that ran to its podium has nothing left to say
@@ -77,6 +115,7 @@ public partial class AudioDirector : Node
     /// </summary>
     public void OffAir()
     {
+        _reading = null;
         _narrator?.StopAll();
         foreach (var player in _players.Values)
         {
@@ -132,7 +171,12 @@ public partial class AudioDirector : Node
             }
             if (AudioCues.ReadsQuestion(view, previous))
             {
+                _reading = view.ReadSeq is { } seq ? (seq, view.Question!.Text!) : null;
                 narrator.Say(view.Question!.Text!, RedlineVoices.Questions, NarrationPriority.Question);
+            }
+            else if (view.Phase is not (RacePhase.Reading or RacePhase.QualifyingReading))
+            {
+                _reading = null;
             }
         }
 
