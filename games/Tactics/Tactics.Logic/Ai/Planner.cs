@@ -11,14 +11,16 @@ namespace Tactics.Logic;
 /// <item>Each tile's score on position alone (<see cref="Position"/>); the best 12 plus the current tile are kept, and for
 /// the ranged and skirmisher profiles the best few it can strike a foe from (<see cref="StrikeTiles"/>).</item>
 /// <item>From each kept tile, each ability it can pay for on each legal target or aim (an area aim only on tiles in range
-/// that cover a unit it is meant for; a teleport or leap on the best landing tiles in reach, a summon beside its foes):
+/// that cover a unit it is meant for; a teleport or leap, as an escape, on the best landing tiles in reach with less threat,
+/// a summon beside its foes):
 /// "move, then act", scored as what the action is worth plus the tile, less the resources it spends (hoard). For the
 /// ranged and skirmisher profiles (<see cref="HitAndRun"/>), also "move, act, then move again" to the best tile the Move
 /// left reaches, for actions that leave the map as it is.</item>
 /// <item>"Act from here, then move to the best tile the Move left reaches", for actions that leave the map as it is;
 /// "just move"; and Dash then move.</item>
 /// <item>With a bonus action that teleports or leaps, "walk, teleport, act" to landing tiles near the best position tiles
-/// and beside foes (<see cref="HopThenAct"/>); with a bonus-action Dash, "dash, walk further, act" (<see cref="DashThenAct"/>).</item>
+/// and beside foes, never where the foes would Down it next round (<see cref="HopThenAct"/>); with a bonus-action Dash,
+/// "dash, walk further, act" (<see cref="DashThenAct"/>).</item>
 /// <item>The best second action, after an extra action (Action Surge) when it is worth what the surge costs, then the best
 /// bonus action, added greedily where the turn ends.</item>
 /// </list>

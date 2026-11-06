@@ -141,6 +141,35 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void A_teleport_on_its_own_only_escapes_and_never_lands_where_the_foes_would_Down_the_unit()
+    {
+        // Out of everyone's reach, Fey Step would only close in a little sooner; the walk does that, and the step is kept.
+        var fey = A("elf.fey_step");
+        var fighter = First(TestSheets.Fighter.Knowing(fey)) with { MaxHp = 20 };
+        var far = On(Open(16, 1)).With(fey)
+            .Enemy("kara", fighter, T(0, 0), new AiControlled("brute"))
+            .Party("ogre", TestSheets.Fighter with { Move = 0 }, T(15, 0));
+        var farPlan = Ai.Plan(far.Start().State, U("kara"), far.Rules);
+        Assert.True(UseOf(farPlan, "elf.fey_step") is null, farPlan.Explain);
+
+        // As the Shadowstep test, with the foe nearly dead, but four swordsmen stand round it: landing beside it, the rogue
+        // would be Downed next round, so it doesn't step in.
+        var shadowstep = A("shadow.shadowstep");
+        var rogue = First(TestSheets.Rogue.Knowing(shadowstep)) with { Resources = Ordinal.Map(("edge", 1)) };
+        var guarded = On(Open(13, 3)).With(shadowstep)
+            .Enemy("vex", rogue, T(0, 1), new AiControlled("skirmisher"))
+            .Party("kara", TestSheets.Fighter with { Move = 0 }, T(9, 1))
+            .Party("a", TestSheets.Fighter, T(10, 0))
+            .Party("b", TestSheets.Fighter, T(10, 2))
+            .Party("c", TestSheets.Fighter, T(11, 1))
+            .Party("d", TestSheets.Fighter, T(12, 1));
+        var state = guarded.Start().State.Change("kara", u => u with { Hp = 1 });
+        Assert.True(ThreatMap.For(state, Side.Enemy, guarded.Rules).At(T(8, 1)) >= state.Units[U("vex")].Hp);
+        var plan = Ai.Plan(state, U("vex"), guarded.Rules);
+        Assert.True(UseOf(plan, "shadow.shadowstep") is null, plan.Explain);
+    }
+
+    [Fact]
     public void A_druid_conjures_animals_beside_its_foes()
     {
         var conjure = A("druid.conjure_animals");

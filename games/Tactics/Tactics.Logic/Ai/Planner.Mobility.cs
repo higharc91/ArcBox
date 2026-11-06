@@ -164,7 +164,9 @@ internal sealed partial class Planner
     /// Where <paramref name="hop"/> is planned from and to: from the unit's own tile to its <see cref="Landings"/> (near the best
     /// position tiles); and for a unit that fights in melee (<see cref="Melee"/>), to the empty tiles beside each foe, each
     /// from the reachable tile whose walk costs least (the unit's own if it is in range), keeping the best
-    /// <see cref="KeptLandings"/> by that walk and the landing. Every route is one the engine allows (range, line of sight).
+    /// <see cref="KeptLandings"/> by that walk and the landing. Never to a tile where the threat map says the foes would Down
+    /// the unit next round (<see cref="Companion.WouldDrop"/>): a teleport can carry it past its allies into the middle of the
+    /// foes, where nobody can revive it. Every route is one the engine allows (range, line of sight).
     /// </summary>
     private List<(Tile Via, Tile Landing)> HopRoutes(Usable hop)
     {
@@ -179,7 +181,7 @@ internal sealed partial class Planner
         foreach (var landing in _foes.SelectMany(f => Neighbours(f.Pos)).Distinct().Order())
         {
             if (landing == here || !terrain.Map.InBounds(landing) || !terrain.Walkable(landing) || taken.Contains(landing)
-                || routes.Any(r => r.Item2 == landing))
+                || Companion.WouldDrop(_threat, _me, landing) || routes.Any(r => r.Item2 == landing))
                 continue;
             foreach (var via in vias)
                 if (Reach.Distance(via.Tile, landing) <= hop.Hop && CanHop(hop, via.Tile, landing))

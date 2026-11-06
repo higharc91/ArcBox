@@ -116,9 +116,11 @@ internal sealed partial class Planner
     /// <paramref name="state"/> (<paramref name="w"/>, a working copy of it, if there is one), with its worth. Single-target
     /// unit abilities try each unit; area abilities aim only at tiles whose area covers a unit they are meant for (a foe; an
     /// ally for ally abilities); self lines and cones try the four directions. A teleport or leap (<see cref="Usable.Hop"/>)
-    /// aims at the best landing tiles (<see cref="Landings"/>) and is worth what landing there gains on staying
-    /// (<see cref="Land"/> less <see cref="Place"/>); a summon aims at the empty tiles beside its foes and next to the user,
-    /// the ones nearer a foe first. Legality is the engine's own (<see cref="Battle.ResolveTarget"/>).
+    /// on its own is an escape: it aims at the best landing tiles with less threat on them than where it is used from
+    /// (<see cref="Landings"/>) and is worth what landing there gains on staying (<see cref="Land"/> less <see cref="Place"/>);
+    /// to close in, the unit walks (or teleports and then acts, <see cref="HopThenAct"/>). A summon aims at the empty tiles
+    /// beside its foes and next to the user, the ones nearer a foe first. Legality is the engine's own
+    /// (<see cref="Battle.ResolveTarget"/>).
     /// </summary>
     private IEnumerable<Action> Actions(Usable usable, Tile from, BattleState state, BattleWriter? w = null)
     {
@@ -148,7 +150,7 @@ internal sealed partial class Planner
         else if (area.Shape == AreaShape.Single && def.Kind == TargetKind.Tile)
             targets = meant.Where(u => Reach.Distance(from, u.Pos) <= maxRange).Select(u => new Target(Tile: u.Pos));
         else if (area.Shape == AreaShape.Single && usable.Hop > 0)
-            targets = Landings(from, usable.Hop).Select(t => new Target(Tile: t));
+            targets = Landings(from, usable.Hop, escape: true).Select(t => new Target(Tile: t));
         else if (area.Shape == AreaShape.Single)
             targets = summons
                 ? meant.SelectMany(u => Neighbours(u.Pos)).Concat(Neighbours(from))

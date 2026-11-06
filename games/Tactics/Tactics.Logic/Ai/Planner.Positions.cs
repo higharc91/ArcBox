@@ -48,28 +48,32 @@ internal sealed partial class Planner
     /// <summary>How many landing tiles a teleport or a leap is planned with, from each tile it may be used from.</summary>
     private const int KeptLandings = 5;
 
-    private readonly Dictionary<(Tile, int), ImmutableArray<Tile>> _landings = [];
+    private readonly Dictionary<(Tile, int, bool), ImmutableArray<Tile>> _landings = [];
 
     /// <summary>
     /// The tiles a teleport or a leap of <paramref name="range"/> from <paramref name="from"/> is planned to land on: of the
-    /// walkable tiles in range with no unit on them, the best <see cref="KeptLandings"/> by <see cref="Land"/> (ties by tile).
-    /// Line of sight is the engine's to check.
+    /// walkable tiles in range with no unit on them, those with less threat on them than on <paramref name="from"/> for an
+    /// <paramref name="escape"/>, otherwise those where the foes wouldn't Down the unit next round
+    /// (<see cref="Companion.WouldDrop"/>), the best <see cref="KeptLandings"/> by <see cref="Land"/> (ties by tile). Line of
+    /// sight is the engine's to check.
     /// </summary>
-    private ImmutableArray<Tile> Landings(Tile from, int range)
+    private ImmutableArray<Tile> Landings(Tile from, int range, bool escape = false)
     {
-        if (_landings.TryGetValue((from, range), out var known))
+        if (_landings.TryGetValue((from, range, escape), out var known))
             return known;
         var terrain = _scorer.Terrain;
         var taken = Taken();
+        var threat = _threat.At(from);
         var tiles = new List<Tile>();
         for (var dx = -range; dx <= range; dx++)
             for (var dy = Math.Abs(dx) - range; dy <= range - Math.Abs(dx); dy++)
             {
                 var t = new Tile(from.X + dx, from.Y + dy);
-                if (t != from && terrain.Map.InBounds(t) && terrain.Walkable(t) && !taken.Contains(t))
+                if (t != from && terrain.Map.InBounds(t) && terrain.Walkable(t) && !taken.Contains(t)
+                    && (escape ? _threat.At(t) < threat : !Companion.WouldDrop(_threat, _me, t)))
                     tiles.Add(t);
             }
-        return _landings[(from, range)] = [.. tiles.OrderByDescending(t => Round(Land(t))).ThenBy(t => t).Take(KeptLandings)];
+        return _landings[(from, range, escape)] = [.. tiles.OrderByDescending(t => Round(Land(t))).ThenBy(t => t).Take(KeptLandings)];
     }
 
     private ImmutableSortedSet<Tile>? _taken;
