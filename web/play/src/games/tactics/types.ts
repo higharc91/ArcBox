@@ -91,8 +91,27 @@ export interface TurnChoices {
   canDelay: boolean;
 }
 
+/** Falling back (#111): the button, the vote under way, or that it failed this round. Absent before round 3 or when the fight forbids it. */
+export interface FallBackData {
+  canPropose?: boolean;
+  failed?: boolean;
+  vote?: {
+    proposer: string;
+    yes: number;
+    no: number;
+    /** Players here (they vote), and the yes votes a strict majority takes. */
+    present: number;
+    needed: number;
+    /** This player's own answer, once given. */
+    mine: "yes" | "no" | null;
+    /** When it times out, ISO UTC. */
+    until?: string | null;
+  };
+}
+
 export interface TurnData {
   surfaces?: string[];
+  fallBack?: FallBackData;
   /** Who is acting: the hero, or one of their summons (then `summoned` is set and the header names it). */
   me: UnitView;
   summoned?: boolean;
@@ -112,6 +131,7 @@ export interface ReactOption {
 
 export interface ReactData {
   surfaces?: string[];
+  fallBack?: FallBackData;
   unit: string;
   trigger: string;
   cause: {
@@ -127,6 +147,7 @@ export interface ReactData {
 
 export interface StatusData {
   surfaces?: string[];
+  fallBack?: FallBackData;
   me: UnitView;
   active: string | null;
   upIn: number | null;

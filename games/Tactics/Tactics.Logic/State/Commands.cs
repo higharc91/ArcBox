@@ -10,6 +10,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Delay), nameof(Delay))]
 [JsonDerivedType(typeof(React), nameof(React))]
 [JsonDerivedType(typeof(EndTurn), nameof(EndTurn))]
+[JsonDerivedType(typeof(Retreat), nameof(Retreat))]
 public abstract record Command([property: JsonPropertyOrder(-1)] UnitId Actor);
 
 /// <summary>Walk along <see cref="Path"/>, which starts at the actor's tile.</summary>
@@ -50,6 +51,13 @@ public sealed record React(UnitId Actor, ReactionChoice Choice) : Command(Actor)
 
 /// <summary>End the actor's turn.</summary>
 public sealed record EndTurn(UnitId Actor) : Command(Actor);
+
+/// <summary>
+/// The party falls back (issue #111): the battle ends <see cref="BattleOutcome.Fled"/>. <see cref="Command.Actor"/> is any unit of the
+/// party's side, whoever's turn it is. Refused (<see cref="RejectCode.CantRetreat"/>) before <see cref="Battle.RetreatRound"/> or when the
+/// encounter forbids it (<see cref="BattleState.NoRetreat"/>). The vote that decides to retreat is the adapter's, not the rules'.
+/// </summary>
+public sealed record Retreat(UnitId Actor) : Command(Actor);
 
 /// <summary>What an ability is aimed at: a unit, a tile, or neither (self).</summary>
 public sealed record Target(UnitId? Unit = null, Tile? Tile = null);

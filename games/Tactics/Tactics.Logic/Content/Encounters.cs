@@ -75,7 +75,7 @@ public static class Encounters
         problems.ThrowIfAny();
 
         return new BattleSetup(map, placer.Units.ToImmutable(), def.Objectives ?? ObjectivesDef.Default, WithPhases(def, rules), d,
-            def.Xp, def.Loot, def.Environment);
+            def.Xp, def.Loot, def.Environment, NoRetreat: !def.Retreat);
     }
 
     /// <summary>

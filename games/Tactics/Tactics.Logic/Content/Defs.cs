@@ -472,7 +472,7 @@ public sealed record EncounterUnitDef(string Unit,
 
 /// <summary>
 /// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, optional intended party
-/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, objectives (the default lose is
+/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, optional fixed <see cref="ItemLoot"/>, <see cref="Retreat"/> (false forbids falling back), objectives (the default lose is
 /// <c>party_out</c>) and triggers. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
@@ -483,7 +483,8 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<LootDef> ItemLoot = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool StoryOnly = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool StoryOnly = false,
+    bool Retreat = true);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value

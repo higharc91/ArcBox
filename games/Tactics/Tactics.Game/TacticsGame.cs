@@ -53,7 +53,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// <summary>The timer keys.</summary>
     public static class Timers
     {
-        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save", Line = "line", Vote = "vote";
+        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save", Line = "line", Vote = "vote", Retreat = "retreat";
     }
 
     private readonly TacticsTiming _timing = timing ?? TacticsTiming.Default;
@@ -378,6 +378,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case Timers.React:
                 ReactionTimedOut();
+                break;
+            case Timers.Retreat:
+                RetreatTimedOut();
                 break;
         }
     }

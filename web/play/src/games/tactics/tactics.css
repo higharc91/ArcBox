@@ -92,6 +92,10 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx button:disabled { opacity: 0.45; }
 .tx button:focus-visible { outline: 2px solid var(--wf-gold-hi); outline-offset: 2px; }
 .tx button:not(:disabled):active { transform: translateY(1px); background: rgba(230, 189, 92, 0.14); }
+.tx-fallback.propose { display: flex; flex-direction: column; gap: 4px; align-items: stretch; }
+.tx-fallback.propose .tx-btn { min-height: 44px; }
+.tx-fallback.vote { display: flex; flex-direction: column; gap: 8px; border-color: var(--wf-gold, #e6bd5c); }
+.tx-fallback-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .tx-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 6px 10px;
   font: 800 16px/1.15 var(--wf-sans); letter-spacing: 0.02em; text-align: center; }
 .tx .tx-btn.gold { color: var(--wf-on-gold); background: linear-gradient(180deg, #ffe39a, #e6bd5c 50%, #b88a2c); border-color: #fff0c0;

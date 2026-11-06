@@ -14,7 +14,8 @@ public sealed record UnitPlacement(UnitId Id, UnitSheet Sheet, Controller Contro
 /// <summary>Everything <see cref="Battle.Start"/> needs: the map, the units, objectives, triggers and rewards.</summary>
 public sealed record BattleSetup(BattleMap Map, ImmutableArray<UnitPlacement> Units, ObjectivesDef Objectives,
     ImmutableArray<TriggerDef> Triggers, Difficulty Difficulty, int Xp, ImmutableArray<LootTableId> Loot,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool NoRetreat = false);
 
 /// <summary>Objective expression: a leaf string ("defeat_all", "survive:8", …) or {"any": […]} / {"all": […]}.
 /// JSON: a bare string is a leaf. Task 8 evaluates defeat_all and party_out; Task 22 adds the rest.</summary>

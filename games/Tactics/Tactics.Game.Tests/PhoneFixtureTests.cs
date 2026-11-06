@@ -460,6 +460,29 @@ public sealed class PhoneFixtureTests
         });
     }
 
+    /// <summary>The retreat button, the vote under way and the flight's results (#111), each a real view from a real session.</summary>
+    [Fact]
+    public void Retreat_screens_match_real_views()
+    {
+        var s = RetreatVoteTests.Fight(round: 3);
+        var waiting = Enumerable.Range(0, 4).First(p => s.Screen(p)!.Screen == TacticsGame.Screens.Status);
+        var acting = Enumerable.Range(0, 4).First(p => s.Screen(p)!.Screen == TacticsGame.Screens.Turn);
+        var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["retreat-status"] = Node(s.Screen(waiting)!),
+            ["retreat-turn"] = Node(s.Screen(acting)!),
+        };
+        s.Send(waiting, "fallBack");
+        seen["retreat-vote"] = Node(s.Screen(acting)!);
+        seen["retreat-vote-proposer"] = Node(s.Screen(waiting)!);
+        var others = Enumerable.Range(0, 4).Where(p => p != waiting).ToArray();
+        s.Send(others[0], "fallBackVote", new { yes = true });
+        s.Send(others[1], "fallBackVote", new { yes = true });
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+        seen["results-fled"] = Node(s.Screen(0)!);
+        Check(seen);
+    }
+
     private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)
     {
         var rules = pack ?? Pack.Value;

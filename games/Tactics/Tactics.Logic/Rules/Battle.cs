@@ -32,7 +32,7 @@ public static partial class Battle
             Counters: Ordinal.Map<int>(), FiredTriggers: Ordinal.Set(), Outcome: null, Injuries: [], ItemsUsed: [],
             NextSerial: 0, StartedThisRound: [], DelayedThisRound: [], Xp: setup.Xp,
             Loot: setup.Loot.IsDefault ? [] : setup.Loot, Difficulty: setup.Difficulty,
-            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment };
+            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment, NoRetreat = setup.NoRetreat };
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);
@@ -101,6 +101,8 @@ public static partial class Battle
         var state = w.State;
         if (state.Outcome is not null)
             return Rejection.Of(RejectCode.BattleOver);
+        if (command is Retreat retreat)
+            return PrepareRetreat(w, retreat);
         if (command is React react)
             return PrepareReact(w, react);
         if (state.Pending is not null)
@@ -125,6 +127,25 @@ public static partial class Battle
             default:
                 throw new ArgumentException($"Unknown command {command.GetType().Name}.", nameof(command));
         }
+    }
+
+    /// <summary>The round from which the party may fall back (<see cref="Retreat"/>).</summary>
+    public const int RetreatRound = 3;
+
+    /// <summary>
+    /// A party unit's <see cref="Retreat"/>, on anyone's turn and even with a reaction offer pending (the offer goes with the battle):
+    /// <see cref="RejectCode.InvalidTarget"/> for a unit that isn't on the party's side, <see cref="RejectCode.CantRetreat"/> before
+    /// round <see cref="RetreatRound"/> or when the encounter forbids it. Ends the battle <see cref="BattleOutcome.Fled"/>.
+    /// </summary>
+    private static Rejection? PrepareRetreat(BattleWriter w, Retreat retreat)
+    {
+        var state = w.State;
+        if (!state.Units.TryGetValue(retreat.Actor, out var unit) || unit.Sheet.Side != Side.Party)
+            return Rejection.Of(RejectCode.InvalidTarget);
+        if (state.NoRetreat || state.Round < RetreatRound)
+            return Rejection.Of(RejectCode.CantRetreat);
+        Objectives.End(w, BattleOutcome.Fled);
+        return null;
     }
 
     /// <summary>

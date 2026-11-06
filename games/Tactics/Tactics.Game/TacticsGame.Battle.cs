@@ -105,6 +105,7 @@ public sealed partial class TacticsGame
                 stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob),
         };
         _seq = 0;
+        (_retreat, _retreatFailedRound) = (null, 0);
         if (AddBeat(null, resolution.Events) is { } opening && stage is not null)
         {
             _awaitShown = opening;
@@ -192,6 +193,9 @@ public sealed partial class TacticsGame
             else
                 failed = true;
         SetState(state);
+        SettleRetreat();     // a vote counts the players who are here
+        if (_phase != TacticsPhase.Battle)
+            return;     // the vote carried and the battle is over
         if (connected && _aiFinishing is { } finishing && Plays(State, unit, finishing) && IsPlayed(finishing))
             (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
         if (failed && connected)
@@ -365,6 +369,16 @@ public sealed partial class TacticsGame
         var state = State;
         var unit = hero;
         Command? command;
+        if (input.Action is "fallBack" or "fallBackVote")
+        {
+            if (state.Outcome is not null || !state.Units.ContainsKey(hero))
+                return;
+            if (input.Action == "fallBack")
+                ProposeFallBack(player, profile, hero);
+            else
+                VoteFallBack(profile, input.Data);
+            return;
+        }
         if (input.Action == "react")
         {
             if (state.Pending is not ReactionOffer offer || !Plays(state, hero, offer.Reactor) || !IsPlayed(offer.Reactor))
@@ -532,6 +546,8 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Turn);
         _ctx.CancelTimer(Timers.React);
         _ctx.CancelTimer(Timers.Pace);
+        _ctx.CancelTimer(Timers.Retreat);
+        (_retreat, _retreatFailedRound) = (null, 0);
         (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, 0, null);
     }
 }

@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Portrait, abilityClass, useIcons } from "./art";
 import { tileStyle, useMap, type MapData } from "./map";
+import { FallBack } from "./fallback";
 import { classFrom, remembered, rememberTurn } from "./memory";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView } from "./types";
@@ -38,7 +39,7 @@ const GROUPS: { title: string; has(c: Cost): boolean }[] = [
  * option comes from the server's `Choices.For`, so anything you can pick, the game accepts.
  */
 export function Turn({ data, send }: CustomScreenProps) {
-  const { me, units, choices, map: mapId, summoned } = data as TurnData;
+  const { me, units, choices, map: mapId, summoned, fallBack } = data as TurnData;
   const map = useMap(mapId);
   const icons = useIcons();
   const sfx = useSfx();
@@ -48,7 +49,8 @@ export function Turn({ data, send }: CustomScreenProps) {
   // A multi-attack's earlier attacks, aimed already: the one being aimed is the next (#107).
   const [picks, setPicks] = useState<Pick[]>([]);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
-  const content = useMemo(() => JSON.stringify(data), [data]);
+  // A vote to fall back changes the view for everyone, which mustn't undo what this player is aiming.
+  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined }), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
@@ -112,6 +114,7 @@ export function Turn({ data, send }: CustomScreenProps) {
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
       ) : <MeCard me={me} cls={cls} />}
       <TurnBanner summon={summoned ? me.name : undefined} />
+      {ability ? null : <FallBack fallBack={fallBack} send={send} />}
 
       {ability ? (
         <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }}

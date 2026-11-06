@@ -82,6 +82,10 @@ public sealed record BattleState(
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public ImmutableArray<DelayMark> Delays { get; init; } = [];
 
+    /// <summary>The encounter forbids retreating (<c>"retreat": false</c>). Left out of the JSON when false.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool NoRetreat { get; init; }
+
     /// <summary>The Downed units whose countdown a resolution still under way has already hit (one tick per hit).</summary>
     public ImmutableSortedSet<HitMark> DownedHits { get; init; } = [];
 

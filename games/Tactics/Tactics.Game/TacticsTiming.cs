@@ -107,6 +107,9 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
     /// </summary>
     public TimeSpan FormUp { get; init; } = TimeSpan.FromSeconds(3);
 
+    /// <summary>How long a vote to fall back runs before it fails (issue #111).</summary>
+    public TimeSpan RetreatVote { get; init; } = TimeSpan.FromSeconds(20);
+
     /// <summary>The fallback wait for a beat of <paramref name="events"/> events.</summary>
     public TimeSpan Pace(int events)
     {

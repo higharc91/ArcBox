@@ -131,7 +131,8 @@ public sealed record StageView(string Region, Tile Origin, int Height, Immutable
 /// <param name="Stage">Where it stands in the world, or null for a battle on a plain board: no region, or a map the region doesn't stamp.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
-    UnitId? Reacting = null, string? Name = null, StageView? Stage = null, string? Difficulty = null);
+    UnitId? Reacting = null, string? Name = null, StageView? Stage = null, string? Difficulty = null,
+    RetreatView? Retreat = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -589,7 +590,7 @@ public sealed partial class TacticsGame
             // The hero's own reaction, or a summon's: the owner's phone answers for both.
             var unit = offer.Reactor;
             var me = state.Units[unit];
-            return PhoneSurfaces.Attach(Custom(Screens.React, new
+            var prompt = PhoneSurfaces.Attach(Custom(Screens.React, new
             {
                 unit,
                 trigger = offer.Trigger,
@@ -605,30 +606,31 @@ public sealed partial class TacticsGame
                     target = o.Target,
                     tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
-            }), state, me, Rules) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
+            }), state, me, Rules);
+            return WithFallBack(prompt, profile, hero, offer: false) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         }
         // The active unit of this phone's: the hero, or one of its summons (the owner's phone controls them, spec 4.5).
         var turn = TurnUnit(state, hero);
         if (state.Active == turn && state.Pending is null && IsPlayed(turn) && _aiFinishing != turn)
         {
             var actor = state.Units[turn];
-            return PhoneSurfaces.Attach(Custom(Screens.Turn, new
+            return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Turn, new
             {
                 me = UnitViewOf(actor),
                 summoned = actor.SummonedBy is not null,
                 map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
                 choices = PhoneChoices.Of(Choices.For(state, turn, Rules), Rules),
-            }), state, actor, Rules)
+            }), state, actor, Rules), profile, hero)
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
         }
-        return PhoneSurfaces.Attach(Custom(Screens.Status, new
+        return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
             me = UnitViewOf(heroUnit),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
             upIn = UpIn(state, hero),
             aiPlaying = !IsPlayed(hero),
-        }), state, heroUnit, Rules);
+        }), state, heroUnit, Rules), profile, hero);
     }
 
     /// <summary>How many turns until <paramref name="unit"/>'s, this round (exact: no initiative rolls), or null.</summary>
@@ -685,7 +687,7 @@ public sealed partial class TacticsGame
             StageOf(save) is { } stage
                 ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
                 : null,
-            state.Difficulty.ToString());
+            state.Difficulty.ToString(), RetreatViewOf());
     }
 
     /// <summary>
@@ -718,7 +720,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.EncounterPick:
                 return $"{Vip?.Name ?? "The host"} is choosing a battle";
             case TacticsPhase.Results:
-                return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
+                return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : _result?.Outcome == BattleOutcome.Fled ? $"The party fled {_resultEncounter}" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:
                 return _doc.Battle is null ? "Resuming the story…" : "Resuming the battle…";
             case TacticsPhase.Exploration:

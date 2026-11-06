@@ -7,6 +7,7 @@ import { remembered } from "./memory";
 import { usePackBase } from "./pack";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
+import { FallBack } from "./fallback";
 import { HpBar, HpText, MeCard, Section } from "./ui";
 
 export { costText, Turn } from "./turn";
@@ -99,9 +100,10 @@ export function Results({ data, send }: CustomScreenProps) {
   const won = r.outcome === "Won";
   // After a loss the server's line says it all: no "+0 XP" or injuries on each hero.
   const lost = r.outcome === "Lost";
+  const fled = r.outcome === "Fled";
   return (
     <div class="tx tx-results">
-      <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : "Defeat"} tone={won ? "won" : "lost"} />
+      <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : fled ? "Retreat" : "Defeat"} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
       {r.note ? <p class="tx-note center tx-result-note">{r.note}</p> : null}
       <ul class="tx-lines">
@@ -114,7 +116,7 @@ export function Results({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
-      {r.vip && lost && r.difficulty !== "Story" ? <p class="tx-note center tx-difficulty-hint">Too hard? Change difficulty in the party menu</p> : null}
+      {r.vip && (lost || fled) && r.difficulty !== "Story" ? <p class="tx-note center tx-difficulty-hint">Too hard? Change difficulty in the party menu</p> : null}
       {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
       {r.vip ? (
         <div class="tx-foot">
@@ -134,7 +136,7 @@ type Tab = "abilities" | "sheet" | "bag";
  * Waiting your turn: who's acting, when you're up, and your character (sheet, abilities and bag as of your last turn,
  * which this phone remembers, since the status view doesn't carry them).
  */
-export function Status({ data }: CustomScreenProps) {
+export function Status({ data, send }: CustomScreenProps) {
   const s = data as StatusData;
   const [tab, setTab] = useState<Tab>("sheet");
   const sfx = useSfx();
@@ -154,6 +156,7 @@ export function Status({ data }: CustomScreenProps) {
         </div>
       </div>
       {s.upIn ? <Section>You're up in {s.upIn}</Section> : null}
+      <FallBack fallBack={s.fallBack} send={send} />
 
       <div class="tx-tabs" role="tablist">
         {(["abilities", "sheet", "bag"] as const).map((t) => (
@@ -239,6 +242,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   return (
     <div class="tx tx-react">
       <SurfaceScene kinds={r.surfaces} />
+      <FallBack fallBack={r.fallBack} send={send} />
       <div class="tx-alert" role="alert">
         <span class="tx-eyebrow">Reaction</span>
         <p class="tx-alert-title">{TRIGGERS[r.trigger] ?? "You can react"}</p>
