@@ -28,7 +28,8 @@ public sealed class RealBattleTimingTests
         string[] classes = ["wizard", "sorcerer", "cleric", "fighter", "druid", "warlock"];
         // Curated presentation coverage, not a random balance sample: several bridge seeds exercise phases/terrain.
         // Forest seed 7 is restored after the three-beam/Repelling area-beat fix (R8). The historical 1.15 s
-        // save-area beat is covered by the direct regression; river seed 4 remains a sample, not proof about seed 3.
+        // save-area report from Task 3 has not been proven to be that same fault; river seed 4 is a sample,
+        // not proof about seed 3. The 1.1 s bound is unchanged.
         (string, ulong)[] fights = [("river_crossing", 4), ("warlord_bridge", 5), ("forest_ruins", 7), ("crypt_hall", 9), ("crystal_cave", 11), ("warlord_bridge", 13), ("crypt_hall", 15), ("forest_ruins", 17), ("warlord_bridge", 19), ("warlord_bridge", 21), ("warlord_bridge", 23), ("warlord_bridge", 25), ("warlord_bridge", 27), ("warlord_bridge", 29)];
         foreach (var (encounter, seed) in fights)
         {

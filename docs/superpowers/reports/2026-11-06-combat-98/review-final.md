@@ -1,6 +1,6 @@
 # Whole-branch review and resolution (#112)
 
-The independent review below covers merge-base `9f8c2fd8` through `036141da`, with no inherited implementation context. Its five Important findings are addressed in one fix wave. A scoped re-review and final gate are pending. The original 39-item triage is preserved in full.
+The independent review below covers merge-base `9f8c2fd8` through `036141da`, with no inherited implementation context. Its five Important findings are addressed in one fix wave. The scoped re-review approves the fix wave; the full local gate remains pending. The original 39-item triage is preserved in full.
 
 ## Fix-wave resolution
 
@@ -137,3 +137,80 @@ Focused existing tests at the snapshot: **56 passed**, zero failed/skipped, usin
 The Important findings were confirmed by deterministic code-path inspection; their missing cases are outside the 56 existing tests. I sent them immediately to the implementation agent so RED regressions can run in the one authorized fix wave. No claim is made that the whole suite or final 20-seed balance audit passed. The isolated pending-hit preview otherwise preserves immutable input/RNG and stops at an unresolved secondary decision; its lifetime marker must be fixed by I1. Target-normalized tallies retain raw damage and put pre-first-turn/off-turn damage and delayed starts into the documented buckets; no additional normalization defect was confirmed. Final audit must run after gameplay fixes, particularly Dodge and multi-source Vex.
 
 One scoped re-review should inspect the fix diff and its regression evidence, plus ensure the final report records the agreed departures and pending balance evidence. Do not restart an unrelated whole-branch review loop.
+
+
+---
+
+# Scoped re-review: one fix wave
+
+Reviewed `036141da70404b43df4433193de7f32b100af6ff..0fbd804c5af3ff49350a19cdaa81103070a3fea0` in detached worktree `/workspace/work/combat-review-112`. Scope: the 42-file fix diff and the original five Important findings plus cheap-Minor dispositions. This is the one requested scoped re-review, not another whole-branch review.
+
+**Outcome: gameplay/code fixes approved. No remaining Critical or Important findings in this diff.** All five Important findings are fixed. Two small documentation corrections noticed during this pass have been made by the implementation agent and read back; one final-report consequence remains part of the already pending report assembly. None requires another gameplay change or restarting measurement.
+
+## Important fix verification
+
+| Finding | Scoped result and evidence |
+|---|---|
+| I1: Dodge lifetime | Fixed in `Rules/Battle.cs:493`. Settlement clears both `HalvedHit` and `HalvedHitDamage` at the same drained-queue boundary where resolution numbering resets. Pending queued work retains these fields. The regression issues a second actual Use command after restoring Action, exercising reused resolution IDs; HP goes from 97 to 90. Serialization retains non-default marker/accumulator with queued work and NextResolution. The prior exact pending-hit simulation and unresolved-secondary-decision behavior remain intact. |
+| I2: multiple mark sources | Fixed in `Effects/Blocks/Combat.cs:163,242` and `Rules/Conditions.cs:44,135`. Insertion/refresh replaces only the same source for marks; moving a mark removes only that source; duration expiry carries the expiring condition's source through removal. Ordinary non-mark replacement behavior remains unchanged. Behavioral tests cover Vex and marked coexistence, actual independent attack advantage, own refresh, transfer, and independent expiry. Until-save/concentration paths do not create another source-blind mark issue: MarkBlock creates neither kind. |
+| I3: old marked saves | Fixed in `Effects/Blocks/Combat.cs:144` and `Ai/Scoring.Effects.cs:128`: the literal legacy `marked` condition still counts when its new boolean is absent/default false, with source identity required. AI also avoids incorrectly revaluing its already-present old mark. Old-JSON regression checks a real advantaged attack. |
+| I4: Twinned charm protection | Fixed in `Rules/Battle.cs:364,420`. A harmful ability computes the active charm sources once, rejects explicit protected victims, and excludes those sources before selecting the automatic second victim. Helpful spells retain their existing behavior. Regression uses a non-common known save spell, guaranteed failed saves, and three enemies; it spares the charmer and damages the next legal alternative. |
+| I5: interrupted multiattack | Fixed in `Rules/Downed.cs:156`: own-source StrikeStep continuations are removed on stopping action, alongside the existing top-level attack/effect removal. Hook work is preserved. Regression makes retaliation down a two-attack fighter, Death Ward revive it, and verifies exactly one attack rather than resuming the interrupted action. |
+
+## Cheap-Minor verification and complete triage reconciliation
+
+The full original 39-row triage and its reasons remain preserved in `docs/superpowers/reports/2026-11-06-combat-98/review-final.md` and the independent-review artifact. The following explicitly reconciles every row without reopening the previously justified leave decisions.
+
+| Original row | Scoped disposition |
+|---:|---|
+| 1 | Fixed: trap random selection filters held injuries consistently in Table/Total/Pick and adapter; fixed duplicates return none, exhausted table returns none. Focused behavior regression passes. |
+| 2 | Fixed: HitMark XML summary restored to HitMark. |
+| 3 | Fixed: countdown and persistent Delay documentation updated. New README issue-reference typo #105 corrected to #115 by implementation agent; read back after notification. |
+| 4 | Leave unchanged: prior deterministic/bounded Delay-chain reasoning stands. |
+| 5 | Fixed: named uninjuredMaxHp makes the common percentage basis explicit without changing math. |
+| 6 | Fixed: unsupported nonzero MaxHpPercent rejected on passives, conditions, stat-mod effects, trinkets, and recursively validated zone/condition passives. Injury percentages remain supported. |
+| 7 | Fixed: difficulty input must match one enum name case-insensitively; numeric/composite inputs rejected. |
+| 8 | Fixed: loss hint and matching tests/docs direct the VIP through Carry on before party settings. |
+| 9 | Fixed: companion report now says six of nine. |
+| 10 | Fixed in documentation follow-up: timing sample comment explains curated coverage. Initial fix text overclaimed linkage of the historical Task3 1.15s beat to R8; implementation agent corrected it to explicitly unproven linkage, read back. The 1.1s bound remains unchanged. |
+| 11 | Fixed: single-use GuardWeight pass-through removed/inlined. |
+| 12 | Leave unchanged: no shipped companion-mapped profile enables Cruel/Flee. |
+| 13 | Leave unchanged: direct ownership checks cover cross-player summon authorization. |
+| 14 | Leave unchanged: summon reaction routing consistent; coverage-only omission. |
+| 15 | Leave unchanged: nested summons absent from shipped templates. |
+| 16 | Fixed: readable named effective connected-seat list. |
+| 17 | Leave unchanged: valid battle states retain hero records; malformed missing-roster path not a confirmed shipped failure. |
+| 18 | Leave unchanged; final balance evidence pending: next-turn Shove risk approximation remains as previously justified. |
+| 19 | Leave unchanged: Brace landing enter hooks are intentional. |
+| 20 | Leave unchanged: no additional confirmed presentation misclassification; direct collateral regression remains. |
+| 21 | Fixed: one Battle.Start in the Steadfast setup. |
+| 22 | Fixed: explicit once-per-use Cleave rider convention and multi-target behavioral regression. |
+| 23 | Fixed: tooltip explains bonuses/riders apply until first hit, including preceding misses. |
+| 24 | Fixed: wrap-around listed-target regression distinguishes the earlier surviving listed target from fallback. |
+| 25 | Leave unchanged: deliberate listed Downed targets allowed; scorer handles non-cruel penalty. |
+| 26 | Leave unchanged: historical localhost stderr is not itself a confirmed code failure. |
+| 27 | Pending final-report assembly only: name the Brutal Strike/Cleaving Blow consequence when a push moves a later target out of reach (retarget or spend). Implementation agent confirms the final report generator already includes this exact consequence; draft replacement awaits audit. No rule change needed. |
+| 28 | Leave unchanged: retreat uses shared battle-result path and Won-only story progression. |
+| 29 | Leave unchanged: explicit default-true Retreat serialization is correct. |
+| 30 | Leave unchanged: custom retreat-clock display cap does not alter authoritative deadline. |
+| 31 | Fixed: preference auto-answer cancels reaction timer and clears tracking before ApplyAi; game regression asserts timer absent. |
+| 32 | Leave unchanged: settings-screen persistence is UX expansion, not lost preferences. |
+| 33 | Leave unchanged: do not overfit noisy historical wait reduction percentages; current report evidence remains required. |
+| 34 | Leave unchanged: active-unit clock path is shared by heroes and summons. |
+| 35 | Leave unchanged: retreat vote and reaction state do not conflict. |
+| 36 | Leave unchanged: explicitly excluded #241 planned-spell resource race. |
+| 37 | Leave unchanged: Twinned checks protect distinct planning stages. |
+| 38 | Leave unchanged: unsupported push combinations/origins are not shipped. |
+| 39 | Fixed as I2, including source-aware expiry and transfer. |
+
+Other original cheap Minors: M1 is fixed by recording the failure's current round in `TacticsGame.Retreat.cs:121`, with a vote-crossing-round regression. M2 is fixed by specialist controller/guardian routing in the simulator report text and updated SimRunner summary. Reaction timer cleanup is ordered before applying the preferred answer, avoiding stale timer identity even when another prompt follows.
+
+## Verification and limits
+
+Independent focused execution at exact `0fbd804c`: **46 passed, 0 failed, 0 skipped**, covering CombatBlockTests, UncannyHitTests, DeathWardTests, SrdConditionTests, SerialisationTests and TrapInjuriesTests. Log: `/workspace/work/combat-final-112-logs/scoped-focused-tests.txt`. Activated `/workspace/.arcbox/activate.sh`; disabled MSBuild node reuse and CLI MSBuild server as requested. An initial `dotnet run` invocation rejected the MTP filter option before running tests; corrected to `dotnet test --project ... --no-build` with repeated `--filter-class` arguments. Only the successful 46-test run is counted. `git diff --check 036141da..0fbd804c` is clean; detached worktree remains unmodified.
+
+Also inspected the implementation agent's valid GREEN logs: `review-runtime-green.txt` records 176 logic tests passing; `review-game-green.txt` records 47 game tests passing. The zero-test retry/repeat logs are not regression evidence and are not counted. The independently read regression setups correspond to the five reported defects; supplied RED setup/filter errors are not counted as failures proving a defect.
+
+Final 20-seed balance audit, final full local gate, and final report/results remain pending external evidence. No claim of their success is made here. Golden replay/fixture/phone results reported by the implementation agent are separate validation, outside this fix-source review. Source snapshot for gameplay measurement remains `0fbd804c`; documentation-only corrections and replay data regeneration do not change reviewed combat semantics. #239, #240 and #241 stay excluded.
+
+No repository edits, commits, GitHub posts, workflow changes, delegation, full-suite runs, or performance tests were made by this reviewer. No further whole-branch or iterative review wave is requested.

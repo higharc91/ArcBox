@@ -1,3 +1,5 @@
+> Status: current combat #98 plan and ledger; Tasks 1–10 complete, Task 11 implemented with final balance audit and local gate pending. See the final balance and review reports for completion evidence.
+
 # Wardenflame combat rules and AI (#98): implementation plan
 
 **Spec:** GitHub issue #98 and its 11 sub-issues (#105–#115) in higharc91/arcbox. Each task below embeds its issue's text verbatim under "Issue text", then adds "Rulings". The rulings are decisions made for this plan. Where a ruling and the issue text differ, the ruling wins.

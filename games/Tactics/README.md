@@ -160,7 +160,7 @@ A pack with errors doesn't load: errors carry the file and a JSON pointer. The c
 
 ## Content conventions
 
-- **Persistent Delay and Downed countdown (#105):** Delay keeps the unit behind the same anchor (or at the end) in later rounds; waiting cannot buy consecutive turns across a round boundary. A Downed hero loses one countdown at each own-turn start, plus hits, rather than at round start.
+- **Persistent Delay and Downed countdown (#115):** Delay keeps the unit behind the same anchor (or at the end) in later rounds; waiting cannot buy consecutive turns across a round boundary. A Downed hero loses one countdown at each own-turn start, plus hits, rather than at round start.
 - **Area weapon riders (#107):** Sweeping Cleave's extra 1d8 (1d10 at level 10) applies once per use across all struck targets, through the first hit; subsequent hits use the weapon's base damage.
 
 These turn SRD 5.2 into this game, and every content file starts from them. **The balance pass moved some numbers away from them on purpose**; the [balance report](../../docs/superpowers/reports/2026-10-30-tactics-balance.md) lists each change and its reason, and the differences are noted below.
