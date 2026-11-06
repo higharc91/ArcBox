@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.da537c99.wav",
+  "sourceSha256": "5a0fcf64d7206ec5b84fb5c566d3bbefa3b3f11e195c8f8227aaa78ccfc29eeb",
+  "duration": 6.12,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.0,
+      "text": " Small kindnesses. Small stomachs. It is not nothing."
+    }
+  ],
+  "text": "Small kindnesses. Small stomachs. It is not nothing.",
+  "secondsToTranscribe": 4.555
+}

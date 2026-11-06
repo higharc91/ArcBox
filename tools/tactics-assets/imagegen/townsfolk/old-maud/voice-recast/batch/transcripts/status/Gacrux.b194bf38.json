@@ -1,0 +1,69 @@
+{
+  "job": {
+    "jobId": "job_NG6GQujJT7gv94MxVMKfnj8j",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_EJQA5a1nY7ukNxzckbwxkR69",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_ziX8DTXQnVnKzdRgkFYtaLHR"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 15.8,
+        "language_probability": 1,
+        "segment_count": 3,
+        "segments": [
+          {
+            "end": 5.05,
+            "start": 0.05,
+            "text": " The boy is by my fire, let his father know.",
+            "words": null
+          },
+          {
+            "end": 11.05,
+            "start": 6.05,
+            "text": " As for that old bear, hunger wakes before a creature does.",
+            "words": null
+          },
+          {
+            "end": 15.05,
+            "start": 13.05,
+            "text": " Go gently if you can.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:02.993Z",
+    "updatedAt": "2026-11-05T00:37:04.734Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:02.993Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:03.087Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:04.734Z"
+      }
+    ],
+    "progress": 1
+  }
+}

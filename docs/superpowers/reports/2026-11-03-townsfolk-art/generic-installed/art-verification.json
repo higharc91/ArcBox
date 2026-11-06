@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "approvedVariants": 14,
+  "portraits": 84,
+  "placedPeople": 28,
+  "artFiles": 98,
+  "cosmeticDocuments": [
+    "creatures/manifest.json",
+    "portraits/manifest.json",
+    "rules/world/ashen_ford.json"
+  ],
+  "productionFiles": 5151,
+  "productionBytes": 220219831,
+  "productionInventorySha256": "4c5bf769aa5295f727cabd5012c49d6b844b33b10402c76d110decfd6f53145a",
+  "unrelatedContentChanges": 0
+}

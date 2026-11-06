@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-05",
+  "code_commit": "d3a85d02e5645733c8fdb51acffa9f74816bbec4",
+  "dotnet": {
+    "passed": 6779,
+    "failed": 0,
+    "skipped": 0
+  },
+  "phone": {
+    "passed": 517,
+    "failed": 0
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "overlay_picture_cases": 53,
+  "motion_checks": {
+    "party_sizes": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "directions": "both",
+    "contexts": [
+      "exploration",
+      "combat"
+    ],
+    "real_presenter_video": "ramp-walk.mp4"
+  },
+  "road_audit": {
+    "regions": 2,
+    "elevation_edges": 13,
+    "ramp_tiles": 38,
+    "profiles": 24,
+    "cinder_hollow_road_cells": 0
+  },
+  "world_exports": {
+    "both_second_exports_byte_identical": true,
+    "sha256": {
+      "ashen_ford": "301d14d0bd8505f58ac4b7eb307a82ac9b118417fa7104be2cc91754801ac36c",
+      "cinder_hollow": "07a959d40e89341eb6560072762df07ee4fa68319242d2702174ed7390c9fdcc"
+    },
+    "original_people_props_buildings_markers_stamps_spawns_preserved": true
+  },
+  "art": {
+    "new_native_pngs": 138,
+    "state_pieces": 113,
+    "whole_assembly_shipped": false,
+    "palette_and_binary_alpha": true,
+    "existing_townsfolk_hero_creature_voice_assets_changed": false
+  },
+  "texture_budget": {
+    "four_members_and_roster_change_peak_bytes": 446461823,
+    "limit_bytes": 536870912,
+    "passed": true
+  },
+  "simulation": {
+    "main_cases_per_layout": 480,
+    "stress_cases_per_layout": 480,
+    "total_battles": 1920,
+    "environment_on": true,
+    "levels": [
+      1,
+      2,
+      3
+    ],
+    "players": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "seeds": 20,
+    "stats_rewards_and_enemy_counts_changed": false,
+    "report": "balance.md"
+  },
+  "chapters": {
+    "force": {
+      "players": 6,
+      "difficulty": "Story",
+      "fight_won": true,
+      "strict_checker_pass": true,
+      "card": true,
+      "steps_after_card": 4
+    },
+    "parley": {
+      "players": 4,
+      "difficulty": "Story",
+      "line_seconds": 2.5,
+      "fight_won": true,
+      "strict_checker_pass": true,
+      "said_lines": 129,
+      "card": true,
+      "steps_after_card": 4
+    }
+  },
+  "open_owner_decisions": {
+    "four_hero_force_balance": "Six losses in the canonical four-hero bot campaign; no encounter tuning applied",
+    "ground_concept": "Awaiting required #82 concept approval; production ground unchanged"
+  },
+  "credits": {
+    "scenario_cu": 65,
+    "native": 0,
+    "pixellab": 0
+  },
+  "pr_opened": false,
+  "merged": false
+}

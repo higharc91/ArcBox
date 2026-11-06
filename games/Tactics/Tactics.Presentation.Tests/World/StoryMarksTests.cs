@@ -29,7 +29,8 @@ public sealed class StoryMarksTests
         Assert.Equal(0, figure.Ring);                                     // dressing: no ring, so it isn't read as one of the party
         Assert.Equal(Art.Value.Emote("alert"), mark.Emote);
         Assert.Equal(figure.Feet.X, mark.EmoteAt!.Value.X);
-        Assert.True(mark.EmoteAt.Value.Y < figure.Feet.Y - figure.Sprite.AnchorY + figure.Sprite.HeadTop);   // above the head
+        var visibleHeadHeight = (figure.Sprite.AnchorY - figure.Sprite.HeadTop) * figure.Sprite.PixelScale;
+        Assert.True(mark.EmoteAt.Value.Y < figure.Feet.Y - visibleHeadHeight);   // above the scaled head
     }
 
     [Fact]

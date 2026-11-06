@@ -7,6 +7,7 @@ from typing import Sequence
 from PIL import Image, ImageDraw
 
 from .preview import BG, PANEL, INK, MUTED, EDGE, font, scale
+from .out import is_preview_path, previews_enabled, save
 
 
 @dataclass
@@ -26,6 +27,8 @@ def stage_gif(path, title: str, actors: Sequence[Actor], beats: Sequence[tuple[s
     beats: (caption, per-actor frame list, ms per frame). Each actor's frame list for a beat may differ in length
     (e.g. a swing for the fighter, a shot for the ranger); shorter lists hold their last frame.
     """
+    if is_preview_path(path) and not previews_enabled():
+        return
     cols = columns or len(actors)
     rows = -(-len(actors) // cols)
     cw, ch = cell_w * zoom, cell_h * zoom
@@ -62,5 +65,5 @@ def stage_gif(path, title: str, actors: Sequence[Actor], beats: Sequence[tuple[s
                 d.text((x + 4, y + ch + 25), a.sub, font=f_sub, fill=MUTED)
             frames.append(img.convert("RGB").quantize(colors=255, method=Image.Quantize.MEDIANCUT))
             durations.append(ms)
-    frames[0].save(path, save_all=True, append_images=frames[1:], duration=durations, loop=0, optimize=True,
-                   disposal=1)
+    save(frames[0], path, save_all=True, append_images=frames[1:], duration=durations, loop=0, optimize=True,
+         disposal=1)

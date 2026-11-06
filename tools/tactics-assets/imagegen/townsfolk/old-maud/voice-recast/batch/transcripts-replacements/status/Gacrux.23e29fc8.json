@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_C8XZQFb8AcdiLMbPcTd4WChP",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_XA3Q4e5eD4Um51oosCXPv2VU",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_xPRWQLLqneGgEbwFEb9E5oQ7"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 9.52,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": " Go on, then. Ask me.",
+            "words": null
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": " Everybody asks the wrong thing, so I'll forgive you the first one.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:40:32.829Z",
+    "updatedAt": "2026-11-05T00:40:35.237Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:40:32.829Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:40:32.929Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:40:35.237Z"
+      }
+    ],
+    "progress": 1
+  }
+}

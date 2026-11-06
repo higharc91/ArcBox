@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_RcHg4vJkinPrnNUNQEgoULao",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_JjMTTHDNpd26QVsMx6pWioS5",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_Mz7jxwicumupiSrcVe4yg5HZ"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 11.96,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 11.6,
+            "start": 0,
+            "text": " Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:57.340Z",
+    "updatedAt": "2026-11-05T00:37:05.728Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:57.340Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:57.445Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:05.728Z"
+      }
+    ],
+    "progress": 1
+  }
+}

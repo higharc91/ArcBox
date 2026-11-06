@@ -1,0 +1,8 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/corvin-ashby/candidate-1.png",
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/tobin-fell/portraits/tobin_idle.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Create six pixel art dialogue bust portraits of Corvin, the approved grey-haired short-bearded archivist with round glasses from reference 1, in the native 40x40 game portrait style of reference 2. Exactly 3 columns by 2 rows, fully separated transparent gutters. Same face, hair, glasses, scale, clothing and pose throughout. Expressions in order neutral, hurt, happy; angry, sad, surprised. Crisp nearest-neighbour pixel clusters, no text, frames, scenery or magic."
+}

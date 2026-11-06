@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.8dc00faa.wav",
+  "sourceSha256": "f46fa1cdb4595a99c7578e1f8e0e77bfa43d12744d9e3f487ba9e7607a0b6440",
+  "duration": 8.44,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.64,
+      "text": " For he winters I have held this clan."
+    },
+    {
+      "start": 4.64,
+      "end": 8.120000000000001,
+      "text": " Do not ask me if I can hold it one more."
+    }
+  ],
+  "text": "For he winters I have held this clan. Do not ask me if I can hold it one more.",
+  "secondsToTranscribe": 2.137
+}

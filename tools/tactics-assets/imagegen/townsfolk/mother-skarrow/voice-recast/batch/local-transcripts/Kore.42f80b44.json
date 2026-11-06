@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.42f80b44.wav",
+  "sourceSha256": "bf99596f0f74d1212de11ab54810de1aa6e08100b4cb9b265d734925d19282a0",
+  "duration": 9.36,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.88,
+      "text": " You lock your grain and call us thieves."
+    },
+    {
+      "start": 4.88,
+      "end": 9.08,
+      "text": " Sit, we will talk about who stole what."
+    }
+  ],
+  "text": "You lock your grain and call us thieves. Sit, we will talk about who stole what.",
+  "secondsToTranscribe": 2.171
+}

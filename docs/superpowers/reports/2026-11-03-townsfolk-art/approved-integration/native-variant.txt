@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+
+PERSON VARIANT CHECK PASS: native scene save/load, painted export, JSON round-trip; 3 distinct variants.

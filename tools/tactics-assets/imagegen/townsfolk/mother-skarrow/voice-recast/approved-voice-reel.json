@@ -1,0 +1,18 @@
+{
+  "operation": "Concatenate three installed recordings with0.6-second pauses; no new synthesis or pitch/filter.",
+  "lines": [
+    {
+      "line": "bark_mother_skarrow_town_2",
+      "file": "bark_mother_skarrow_town_2.fb22946e.ogg"
+    },
+    {
+      "line": "ch3_skarrow_messenger_song_4",
+      "file": "ch3_skarrow_messenger_song_4.6f5979c9.ogg"
+    },
+    {
+      "line": "bark_mother_skarrow_battle_start_1",
+      "file": "bark_mother_skarrow_battle_start_1.21029d6f.ogg"
+    }
+  ],
+  "sha256": "f75a9ee6d0531ba526877f5803a6029be168b3bf46664aee810a933e38758405"
+}

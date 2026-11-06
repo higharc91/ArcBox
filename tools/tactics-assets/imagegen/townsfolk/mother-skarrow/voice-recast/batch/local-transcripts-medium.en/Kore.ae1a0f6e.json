@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.ae1a0f6e.wav",
+  "sourceSha256": "661cf8849a4af9c7dc19a3a98f390598a9d82e5b2002d5f7c1420fd385b208c5",
+  "duration": 12.8,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "text": " Here is the bargain, and it is a short one."
+    },
+    {
+      "start": 5.0,
+      "end": 7.0,
+      "text": " Your town eats."
+    },
+    {
+      "start": 7.0,
+      "end": 9.0,
+      "text": " My clan eats."
+    },
+    {
+      "start": 9.0,
+      "end": 13.0,
+      "text": " The bridge goes back to being a bridge."
+    }
+  ],
+  "text": "Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge.",
+  "secondsToTranscribe": 6.498
+}

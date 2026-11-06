@@ -1162,7 +1162,7 @@ def union(bs) -> tuple[int, int, int, int]:
     return min(b[0] for b in bs), min(b[1] for b in bs), max(b[2] for b in bs), max(b[3] for b in bs)
 
 
-def render(m: Model, *, pad: int = 4, bounds: tuple[int, int, int, int] | None = None) -> Rendered:
+def render(m: Model, *, pad: int = 4, bounds: tuple[int, int, int, int] | None = None, ownership: dict | None = None) -> Rendered:
     """Rasterises a model: z-buffered faces and blobs, top-left lighting with cast shadows, selective outlines,
     and the ground shadow it throws. `bounds` (x0, y0, x1, y1 in screen units relative to the origin) fixes the
     frame, so every frame of an animation shares one size and origin."""
@@ -1262,9 +1262,27 @@ def render(m: Model, *, pad: int = 4, bounds: tuple[int, int, int, int] | None =
                 zbuf[y, x] = dep
                 part[y, x] = bl.part
                 fid[y, x] = 10 ** 6
+                if ownership is not None:
+                    world[y, x] = bl.p
     rgb = _outline(rgb, alpha, zbuf, part)
     img = np.dstack([np.clip(rgb, 0, 255), np.where(rgb[..., 0] >= 0, alpha, 0)])
     img[..., 3] = np.maximum(img[..., 3], np.where(_silhouette(alpha), 255, 0))
+    if ownership is not None:
+        # Give each silhouette pixel its nearest visible surface's physical tile.
+        # Native exporters can split a render without changing a single art pixel.
+        edge = (img[..., 3] > 0) & (alpha == 0)
+        best = np.full((H, W), -1e10)
+        for dy, dx in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            depth = np.roll(zbuf, (dy, dx), (0, 1))
+            valid = np.roll(alpha > 0, (dy, dx), (0, 1))
+            if dy == 1: valid[0] = False
+            if dy == -1: valid[-1] = False
+            if dx == 1: valid[:, 0] = False
+            if dx == -1: valid[:, -1] = False
+            take = edge & valid & (depth > best)
+            world[take] = np.roll(world, (dy, dx), (0, 1))[take]
+            best[take] = depth[take]
+        ownership['world'] = world.copy()
     # the ground shadow (z = 0, outside the footprint)
     YY, XX = np.mgrid[0:H, 0:W]
     sxr, syr = XX + 0.5 - OX, YY + 0.5 - OY
@@ -2901,6 +2919,6 @@ def build() -> None:
     save(iso.finish(_scene_img(interior_scene(), "dusk", margin=110)), PREVIEWS / "24-town-interior.png")
     save(iso.finish(_scene_img(kit_scene(), "day", margin=110)), PREVIEWS / "24-town-kit.png")
     frames = [iso.finish(render_market(k), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE) for k in range(8)]
-    frames[0].save(PREVIEWS / "anim-town.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
+    save(frames[0], PREVIEWS / "anim-town.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
     from . import lore_places
     lore_places.export(PACK, families=("town",))

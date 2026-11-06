@@ -1,0 +1,28 @@
+{
+  "unit": "PixelLab subscription generations",
+  "initialPilotAndAlternativeIdle": 19,
+  "extension": {
+    "rejectedFrontEdit": 1,
+    "proFlashFirstAndEightDirections": 6,
+    "curatedImport": 0.25,
+    "walkEightDirections": 8,
+    "idleSevenDirections": 7,
+    "talkEightDirections": 8
+  },
+  "extensionTotal": 30.25,
+  "breeTotal": 49.25,
+  "observedRemaining": 0.75,
+  "scenarioCUSeparate": 221,
+  "note": "Bree history unchanged. Halden generated once from approved concept, with no rerolls; exact submission receipts and final live balance retained. All 30 additional generations spent within the 30.75 live starting allowance. No purchase or upgrade.",
+  "historicalBreeCheckpointRemaining": 30.75,
+  "halden": {
+    "characterEightDirections": 6,
+    "idleEightDirections": 8,
+    "walkEightDirections": 8,
+    "talkEightDirections": 8,
+    "total": 30,
+    "receipts": "halden/",
+    "productionInstalled": true
+  },
+  "townsfolkTotal": 79.25
+}

@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.4abd13c6.wav",
+  "sourceSha256": "bb973a28e25cd90f4384e2ce1428250f412a7b27bce9622529651df5d60ae0be",
+  "duration": 10.56,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.32,
+      "text": " Seven went up where the wall meets the sky."
+    },
+    {
+      "start": 5.32,
+      "end": 10.26,
+      "text": " No, not for you, not for the ones with spears."
+    }
+  ],
+  "text": "Seven went up where the wall meets the sky. No, not for you, not for the ones with spears.",
+  "secondsToTranscribe": 2.268
+}

@@ -1,0 +1,313 @@
+{
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "rotations": {
+    "south": "directional/curated-rotations/south.png",
+    "south-west": "directional/curated-rotations/south-west.png",
+    "west": "directional/curated-rotations/west.png",
+    "north-west": "directional/curated-rotations/north-west.png",
+    "north": "directional/curated-rotations/north.png",
+    "north-east": "directional/curated-rotations/north-east.png",
+    "east": "directional/curated-rotations/east.png",
+    "south-east": "directional/curated-rotations/south-east.png"
+  },
+  "actions": {
+    "idle": {
+      "frames": 5,
+      "fps": 3.3333333333333335,
+      "directions": {
+        "south": {
+          "files": [
+            "directional/motion/idle/south/0.png",
+            "directional/motion/idle/south/1.png",
+            "directional/motion/idle/south/2.png",
+            "directional/motion/idle/south/3.png",
+            "directional/motion/idle/south/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-west": {
+          "files": [
+            "directional/motion/idle/south-west/0.png",
+            "directional/motion/idle/south-west/1.png",
+            "directional/motion/idle/south-west/2.png",
+            "directional/motion/idle/south-west/3.png",
+            "directional/motion/idle/south-west/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "west": {
+          "files": [
+            "directional/motion/idle/west/0.png",
+            "directional/motion/idle/west/1.png",
+            "directional/motion/idle/west/2.png",
+            "directional/motion/idle/west/3.png",
+            "directional/motion/idle/west/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-west": {
+          "files": [
+            "directional/motion/idle/north-west/0.png",
+            "directional/motion/idle/north-west/1.png",
+            "directional/motion/idle/north-west/2.png",
+            "directional/motion/idle/north-west/3.png",
+            "directional/motion/idle/north-west/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "north": {
+          "files": [
+            "directional/motion/idle/north/0.png",
+            "directional/motion/idle/north/1.png",
+            "directional/motion/idle/north/2.png",
+            "directional/motion/idle/north/3.png",
+            "directional/motion/idle/north/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-east": {
+          "files": [
+            "directional/motion/idle/north-east/0.png",
+            "directional/motion/idle/north-east/1.png",
+            "directional/motion/idle/north-east/2.png",
+            "directional/motion/idle/north-east/3.png",
+            "directional/motion/idle/north-east/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "east": {
+          "files": [
+            "directional/motion/idle/east/0.png",
+            "directional/motion/idle/east/1.png",
+            "directional/motion/idle/east/2.png",
+            "directional/motion/idle/east/3.png",
+            "directional/motion/idle/east/0.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-east": {
+          "files": [
+            "idle/frame-0.png",
+            "idle/frame-1.png",
+            "idle/frame-2.png",
+            "idle/frame-3.png",
+            "idle/frame-4.png"
+          ],
+          "productionCanvas": true
+        }
+      }
+    },
+    "walk": {
+      "frames": 6,
+      "fps": 6.666666666666667,
+      "directions": {
+        "south": {
+          "files": [
+            "directional/motion/walk/south/0.png",
+            "directional/motion/walk/south/1.png",
+            "directional/motion/walk/south/2.png",
+            "directional/motion/walk/south/3.png",
+            "directional/motion/walk/south/4.png",
+            "directional/motion/walk/south/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-west": {
+          "files": [
+            "directional/motion/walk/south-west/0.png",
+            "directional/motion/walk/south-west/1.png",
+            "directional/motion/walk/south-west/2.png",
+            "directional/motion/walk/south-west/3.png",
+            "directional/motion/walk/south-west/4.png",
+            "directional/motion/walk/south-west/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "west": {
+          "files": [
+            "directional/motion/walk/west/0.png",
+            "directional/motion/walk/west/1.png",
+            "directional/motion/walk/west/2.png",
+            "directional/motion/walk/west/3.png",
+            "directional/motion/walk/west/4.png",
+            "directional/motion/walk/west/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-west": {
+          "files": [
+            "directional/motion/walk/north-west/0.png",
+            "directional/motion/walk/north-west/1.png",
+            "directional/motion/walk/north-west/2.png",
+            "directional/motion/walk/north-west/3.png",
+            "directional/motion/walk/north-west/4.png",
+            "directional/motion/walk/north-west/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "north": {
+          "files": [
+            "directional/motion/walk/north/0.png",
+            "directional/motion/walk/north/1.png",
+            "directional/motion/walk/north/2.png",
+            "directional/motion/walk/north/3.png",
+            "directional/motion/walk/north/4.png",
+            "directional/motion/walk/north/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-east": {
+          "files": [
+            "directional/motion/walk/north-east/0.png",
+            "directional/motion/walk/north-east/1.png",
+            "directional/motion/walk/north-east/2.png",
+            "directional/motion/walk/north-east/3.png",
+            "directional/motion/walk/north-east/4.png",
+            "directional/motion/walk/north-east/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "east": {
+          "files": [
+            "directional/motion/walk/east/0.png",
+            "directional/motion/walk/east/1.png",
+            "directional/motion/walk/east/2.png",
+            "directional/motion/walk/east/3.png",
+            "directional/motion/walk/east/4.png",
+            "directional/motion/walk/east/5.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-east": {
+          "files": [
+            "directional/motion/walk/south-east/0.png",
+            "directional/motion/walk/south-east/1.png",
+            "directional/motion/walk/south-east/2.png",
+            "directional/motion/walk/south-east/3.png",
+            "directional/motion/walk/south-east/4.png",
+            "directional/motion/walk/south-east/5.png"
+          ],
+          "productionCanvas": false
+        }
+      }
+    },
+    "talk": {
+      "frames": 5,
+      "fps": 5.333333333333333,
+      "directions": {
+        "south": {
+          "files": [
+            "directional/motion/talk/south/0.png",
+            "directional/motion/talk/south/1.png",
+            "directional/motion/talk/south/2.png",
+            "directional/motion/talk/south/3.png",
+            "directional/motion/talk/south/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-west": {
+          "files": [
+            "directional/motion/talk/south-west/0.png",
+            "directional/motion/talk/south-west/1.png",
+            "directional/motion/talk/south-west/2.png",
+            "directional/motion/talk/south-west/3.png",
+            "directional/motion/talk/south-west/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "west": {
+          "files": [
+            "directional/motion/talk/west/0.png",
+            "directional/motion/talk/west/1.png",
+            "directional/motion/talk/west/2.png",
+            "directional/motion/talk/west/3.png",
+            "directional/motion/talk/west/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-west": {
+          "files": [
+            "directional/motion/talk/north-west/0.png",
+            "directional/motion/talk/north-west/1.png",
+            "directional/motion/talk/north-west/2.png",
+            "directional/motion/talk/north-west/3.png",
+            "directional/motion/talk/north-west/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "north": {
+          "files": [
+            "directional/motion/talk/north/0.png",
+            "directional/motion/talk/north/1.png",
+            "directional/motion/talk/north/2.png",
+            "directional/motion/talk/north/3.png",
+            "directional/motion/talk/north/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "north-east": {
+          "files": [
+            "directional/motion/talk/north-east/0.png",
+            "directional/motion/talk/north-east/1.png",
+            "directional/motion/talk/north-east/2.png",
+            "directional/motion/talk/north-east/3.png",
+            "directional/motion/talk/north-east/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "east": {
+          "files": [
+            "directional/motion/talk/east/0.png",
+            "directional/motion/talk/east/1.png",
+            "directional/motion/talk/east/2.png",
+            "directional/motion/talk/east/3.png",
+            "directional/motion/talk/east/4.png"
+          ],
+          "productionCanvas": false
+        },
+        "south-east": {
+          "files": [
+            "directional/motion/talk/south-east/0.png",
+            "directional/motion/talk/south-east/1.png",
+            "directional/motion/talk/south-east/2.png",
+            "directional/motion/talk/south-east/3.png",
+            "directional/motion/talk/south-east/4.png"
+          ],
+          "productionCanvas": false
+        }
+      },
+      "playback": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        3,
+        2,
+        1
+      ]
+    }
+  },
+  "outputFrame": {
+    "width": 96,
+    "height": 96,
+    "anchor": [
+      48,
+      84
+    ]
+  },
+  "curationNotes": {
+    "canvas": "Remove transparent padding only. Preserve native pixels and 0.5 world scale, aligning ground anchor to [48,84].",
+    "talk": "Five source frames open the hand without returning to rest. Ping-pong the source indices for a smooth return, without generating or mirroring pixels.",
+    "idle": "Original approved southeast idle stays intact; four-frame template idles repeat their first frame for the shared five-slot clip."
+  }
+}

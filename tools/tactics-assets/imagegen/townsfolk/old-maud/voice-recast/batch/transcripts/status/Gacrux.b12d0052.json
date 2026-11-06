@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_QSjVHnFTWGWQQbWR6S3LY8RT",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_BGczxr3hfPEn9BVASpP9QsiF",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_KRyZ7DXkJ1HyyHj9Fs1RMNwb"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 17.52,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 10.4,
+            "start": 0,
+            "text": " Oh poor old thing, a hundred winters, and the last was the coldest.",
+            "words": null
+          },
+          {
+            "end": 17.08,
+            "start": 10.4,
+            "text": " No dearie, keep the claw, there is nothing else down there to carry home.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:37:03.568Z",
+    "updatedAt": "2026-11-05T00:37:06.198Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:37:03.568Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:37:03.674Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:06.198Z"
+      }
+    ],
+    "progress": 1
+  }
+}

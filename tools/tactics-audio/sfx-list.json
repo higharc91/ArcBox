@@ -750,7 +750,16 @@
   "loop": false,
   "use": "Attack bark for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
   "voice": "goblin",
-  "seed": 7100
+  "seed": 7100,
+  "families": [
+   "goblin",
+   "goblin_archer",
+   "goblin_boss",
+   "goblin_shaman",
+   "hobgoblin",
+   "kobold",
+   "kobold_slinger"
+  ]
  },
  "goblin_hurt": {
   "prompt": "small wiry goblin, nasal raspy high-pitched voice, short pained yelp when struck",
@@ -783,7 +792,10 @@
   "loop": false,
   "use": "Attack bark for orc_brute",
   "voice": "orc",
-  "seed": 7137
+  "seed": 7137,
+  "families": [
+   "orc_brute"
+  ]
  },
  "orc_hurt": {
   "prompt": "hulking orc brute, deep gravelly guttural voice, short pained yelp when struck",
@@ -816,7 +828,14 @@
   "loop": false,
   "use": "Attack bark for skeleton, skeleton_archer, zombie, necromancer, lich",
   "voice": "undead",
-  "seed": 7174
+  "seed": 7174,
+  "families": [
+   "skeleton",
+   "skeleton_archer",
+   "zombie",
+   "necromancer",
+   "lich"
+  ]
  },
  "undead_hurt": {
   "prompt": "dry rattling skeleton or rotting zombie, hollow raspy undead moan with clattering bones, short pained yelp when struck",
@@ -849,7 +868,12 @@
   "loop": false,
   "use": "Attack bark for wolf, dire_wolf, hound",
   "voice": "wolf",
-  "seed": 7211
+  "seed": 7211,
+  "families": [
+   "wolf",
+   "dire_wolf",
+   "hound"
+  ]
  },
  "wolf_hurt": {
   "prompt": "large grey wolf, deep snarling canine growl, short pained yelp when struck",
@@ -882,7 +906,12 @@
   "loop": false,
   "use": "Attack bark for bear, elder_bear, boar",
   "voice": "bear",
-  "seed": 7248
+  "seed": 7248,
+  "families": [
+   "bear",
+   "elder_bear",
+   "boar"
+  ]
  },
  "bear_hurt": {
   "prompt": "huge brown bear, deep heavy chesty bellow, short pained yelp when struck",
@@ -915,7 +944,10 @@
   "loop": false,
   "use": "Attack bark for giant_spider",
   "voice": "spider",
-  "seed": 7285
+  "seed": 7285,
+  "families": [
+   "giant_spider"
+  ]
  },
  "spider_hurt": {
   "prompt": "giant spider, dry clicking mandibles and sharp hiss, short pained yelp when struck",
@@ -948,7 +980,10 @@
   "loop": false,
   "use": "Attack bark for slime",
   "voice": "slime",
-  "seed": 7322
+  "seed": 7322,
+  "families": [
+   "slime"
+  ]
  },
  "slime_hurt": {
   "prompt": "gelatinous slime ooze, wet squelching gloopy bubbling, short pained yelp when struck",
@@ -981,7 +1016,10 @@
   "loop": false,
   "use": "Attack bark for giant_bat",
   "voice": "bat",
-  "seed": 7359
+  "seed": 7359,
+  "families": [
+   "giant_bat"
+  ]
  },
  "bat_hurt": {
   "prompt": "giant cave bat, shrill squeaking screech with leathery wing flutter, short pained yelp when struck",
@@ -1014,7 +1052,11 @@
   "loop": false,
   "use": "Attack bark for drake, dragon",
   "voice": "dragon",
-  "seed": 7396
+  "seed": 7396,
+  "families": [
+   "drake",
+   "dragon"
+  ]
  },
  "dragon_hurt": {
   "prompt": "enormous dragon, massive rumbling reptilian throat roar, short pained yelp when struck",
@@ -1047,7 +1089,10 @@
   "loop": false,
   "use": "Attack bark for troll",
   "voice": "troll",
-  "seed": 7433
+  "seed": 7433,
+  "families": [
+   "troll"
+  ]
  },
  "troll_hurt": {
   "prompt": "towering cave troll, booming low guttural voice, short pained yelp when struck",
@@ -1080,7 +1125,14 @@
   "loop": false,
   "use": "Attack bark for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
   "voice": "elemental",
-  "seed": 7470
+  "seed": 7470,
+  "families": [
+   "fire_elemental",
+   "water_elemental",
+   "earth_elemental",
+   "air_elemental",
+   "golem"
+  ]
  },
  "elemental_hurt": {
   "prompt": "elemental spirit of fire, stone and storm, rushing roaring whoosh of raw elements, short pained yelp when struck",
@@ -1113,7 +1165,10 @@
   "loop": false,
   "use": "Attack bark for wraith",
   "voice": "wraith",
-  "seed": 7507
+  "seed": 7507,
+  "families": [
+   "wraith"
+  ]
  },
  "wraith_hurt": {
   "prompt": "ghostly wraith, hollow ethereal wailing whisper, short pained yelp when struck",
@@ -1146,7 +1201,10 @@
   "loop": false,
   "use": "Attack bark for mimic",
   "voice": "mimic",
-  "seed": 7544
+  "seed": 7544,
+  "families": [
+   "mimic"
+  ]
  },
  "mimic_hurt": {
   "prompt": "treasure chest mimic, creaking wooden lid and wet slobbering tongue growl, short pained yelp when struck",

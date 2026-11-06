@@ -184,12 +184,12 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     private static readonly Rgb ZoneTint = new(0.55f, 0.4f, 0.95f);
 
     /// <summary>The plan for a board.</summary>
-    public static BoardPlan Build(BoardTerrain terrain, ArtIndex art)
+    public static BoardPlan Build(BoardTerrain terrain, ArtIndex art, IReadOnlySet<string>? storyFlags = null)
     {
         var items = new List<BoardItem>();
         foreach (var tile in terrain.Tiles)
             AddTile(items, terrain, art, tile);
-        AddProps(items, terrain, art);
+        AddProps(items, terrain, art, flags: storyFlags);
         BuildingPlan.Add(items, terrain, art);
         AddZones(items, terrain, art);
 
@@ -208,12 +208,12 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     /// With <paramref name="world"/>, decals and ground tint are added (skipping stamped tiles). They go by where a tile is in the region, and <paramref name="origin"/>
     /// is where this terrain's tile (0, 0) is in it, for a terrain that's a window on a region.
     /// </summary>
-    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid, bool world = false, Tile origin = default)
+    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid, bool world = false, Tile origin = default, IReadOnlySet<string>? storyFlags = null)
     {
         var items = new List<BoardItem>();
         foreach (var tile in terrain.TilesIn(rect))
             AddTile(items, terrain, art, tile, world, origin);
-        AddProps(items, terrain, art, rect, world);
+        AddProps(items, terrain, art, rect, world, storyFlags);
         BuildingPlan.Add(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
@@ -365,14 +365,20 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var look = terrain.Look(tile);
         var isStamped = terrain.Map.StampedTiles.Contains(tile);
         var height = terrain.Top(tile);
+        if (look.OpenSpan && look.Deck)
+            items.Add(Flat(FaceKind.Under, BoardOrder.Key(tile, BoardLayer.Under), tile, height - 2,
+                art.Texture(new ArtRef("ford_water", "clear")), ShadeFord));
         if (terrain.Spans(tile))
         {
             var floor = terrain.Floor(tile);
             items.Add(Flat(FaceKind.Under, BoardOrder.Key(tile, BoardLayer.Under), tile, floor,
                 art.Texture(MaterialLook.Of("void/deep").Top), ShadeDeep));
         }
-        AddSide(items, terrain, art, tile, Facing.U, world);
-        AddSide(items, terrain, art, tile, Facing.V, world);
+        if (!look.OpenSpan)
+        {
+            AddSide(items, terrain, art, tile, Facing.U, world);
+            AddSide(items, terrain, art, tile, Facing.V, world);
+        }
 
         var shade = look.Water
             ? terrain.Deep(tile) ? ShadeDeep : ShadeFord
@@ -401,7 +407,12 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         {
             top = top with { VertexTints = [graded, graded, graded, graded] };
         }
-        items.Add(top);
+        if (!look.OpenSpan)
+            items.Add(top);
+        else if (terrain.Map.Materials[terrain.Map[tile].Material].StartsWith("road_ramp/", StringComparison.Ordinal)
+            && art.Prop("road_ramp_" + look.Variant, ["default"]) is { } ramp)
+            items.Add(new Sprite(BoardOrder.Key(tile, BoardLayer.Prop), tile, ramp.Image,
+                terrain.Centre(tile) - new Vector2(ramp.AnchorX, ramp.AnchorY), new Vector2(ramp.Width, ramp.Height), TileHeight: 1));
 
         if (world)
             AddBlends(items, terrain, art, tile, top, inRegion);
@@ -518,12 +529,21 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             [new(u, v), new(u + step, v), new(u + step, v + step), new(u, v + step)], image, image is null ? NoArt : null, shade);
     }
 
-    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null, bool world = false)
+    /// <summary>Story-dependent props, drawn separately over the static world in its existing painter order.</summary>
+    public static BoardPlan StoryProps(BoardTerrain terrain, ArtIndex art, IReadOnlySet<string> flags)
+    {
+        var items = new List<BoardItem>();
+        AddProps(items, terrain, art, flags: flags, conditionalOnly: true);
+        return Of([.. items.OrderBy(i => i.Order)]);
+    }
+
+    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null, bool world = false, IReadOnlySet<string>? flags = null, bool conditionalOnly = false)
     {
         var mapVariants = terrain.Map.Materials.Select(m => MaterialLook.Of(m).Variant).ToArray();
         // A wide prop's columns can lie on tiles of a block its own tile isn't in, so props that near are read too.
         var near = within is { } rect ? new TileRect(rect.X - SpreadReach, rect.Y - SpreadReach, rect.W + 2 * SpreadReach, rect.H + 2 * SpreadReach) : (TileRect?)null;
-        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && near?.Contains(p.At) != false))
+        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && near?.Contains(p.At) != false
+            && (!world || flags is not null || !p.Conditional) && (!conditionalOnly || p.Conditional) && p.Present(flags)))
         {
             // Living world creatures are drawn by the TV's actor layer. Battle maps keep the same art baked into the board.
             if (world && WorldAnimalIds.Contains(prop.Id))

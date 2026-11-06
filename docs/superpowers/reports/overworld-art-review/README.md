@@ -62,8 +62,8 @@ Review decisions and the gallery can be rebuilt with:
 
 ```bash
 python3 tools/tactics-assets/build.py terrain props ambient town worldmap
-python3 tools/tactics-assets/audit_overworld.py --before /path/to/previous/sets
-python3 tools/tactics-assets/review_overworld_context.py --before /path/to/previous/sets
+python3 tools/tactics-assets/dev/audit_overworld.py --before /path/to/previous/sets
+python3 tools/tactics-assets/dev/review_overworld_context.py --before /path/to/previous/sets
 python3 tools/tactics-assets/test_overworld.py
 ```
 

@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/corvin-ashby/directional/guides/north.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Make exactly a six-column three-row animation sheet of the supplied Corvin sprite, ALL 18 poses directly facing AWAY from the viewer, true BACK view. No face, eyes, glasses, beard, or front buckle visible. Grey hair back, hood down, scholar coat and crossbody strap, satchel on anatomical right at image right. Row 1 six subtle breathing idle poses; row 2 six alternating-leg walk poses; row 3 six gentle empty-hand talk gestures. Same scale and baseline in every cell, full figures, generous transparent gutters, no text, no background, crisp pixel clusters."
+}

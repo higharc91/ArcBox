@@ -1,0 +1,5 @@
+{
+  "request": "north-pauldron-correction-request.json",
+  "output": "directional/north-corrected-source.png",
+  "originalPath": "/workspace/generated_images/exec-0a023085-02ec-489b-afcd-c1941047faa0.png"
+}

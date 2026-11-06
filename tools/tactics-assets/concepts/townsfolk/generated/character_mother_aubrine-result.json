@@ -1,0 +1,19 @@
+{
+  "id": "character_mother_aubrine",
+  "jobId": "job_VFE6yQfgTe37BjpsJhTrEtDb",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:03:15.128Z",
+  "updatedAt": "2026-11-04T02:04:03.753Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_yRTrJMK4YQNcXqkSLGKz91TA"
+  ],
+  "cuCost": 13,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "character_mother_aubrine.png"
+}

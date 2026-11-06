@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.bf716c56.wav",
+  "sourceSha256": "84ee153f8ee7cee902668559bd8fa3ebe88abd5c5a1181a7890d4433946a0592",
+  "duration": 8.12,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "text": " Sit. You are guests now, which is worse than enemies."
+    },
+    {
+      "start": 5.0,
+      "end": 8.0,
+      "text": " Guests we have to feed."
+    }
+  ],
+  "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+  "secondsToTranscribe": 2.093
+}

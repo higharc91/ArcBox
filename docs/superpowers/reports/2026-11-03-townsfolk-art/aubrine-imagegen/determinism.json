@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "files": {
+    "review_aubrine.png": "a9f5fe5ae077f432194f189c5f5c08bf532b58b3a17c978eabf461835d8dc85f",
+    "review-sprite.json": "b18838342ccb8e77b685fc09de8906aebf7ed9c356fdf8e7b2414d8b3972f72a",
+    "atlas-validation.json": "1a6a3743998e510973a93e5267e7760383a01a164f55f71276db509a6fccbe0e",
+    "aubrine-eight-direction-idle.gif": "acee92524bf96390aa4d183e24b818f57f748f00c63a47c606efae670bcc736e",
+    "aubrine-eight-direction-walk.gif": "44eab5b66fdc0e4594e03aa5c9f17c4dee78df860d24b67f0229c7a0c20c8735",
+    "aubrine-eight-direction-talk.gif": "844f103b3fc0ef97e991bba3dae6a033d90c602099e6e1e9e74906f3b17c3636",
+    "aubrine-portraits-review.png": "85dabf9d1257bef5bbc4648c5391f5e8a2de64028d0678d9815276dc5c45b496",
+    "portraits-validation.json": "b52b2ddf997efbdce5cae158f98e7ef542f102bea87af49ccf09617346591ed4"
+  }
+}

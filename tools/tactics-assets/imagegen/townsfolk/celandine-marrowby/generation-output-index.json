@@ -1,0 +1,12 @@
+[
+  {
+    "request": "appearance-request.json",
+    "output": "candidate-1-source.png",
+    "originalPath": "/workspace/generated_images/exec-6d738ab7-d00e-43d1-8fb6-1bfc54453c7d.png"
+  },
+  {
+    "request": "appearance-cleanup-request.json",
+    "output": "candidate-1.png",
+    "originalPath": "/workspace/generated_images/exec-7faa86ac-30b9-4e1d-bc7a-f61bd5f56cb0.png"
+  }
+]

@@ -1,0 +1,159 @@
+{
+  "imageToolCalls": 14,
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "speechGenerations": 0,
+  "records": [
+    {
+      "request": "appearance-request.json",
+      "output": "candidate-1-source.png",
+      "originalPath": "/workspace/generated_images/exec-6d738ab7-d00e-43d1-8fb6-1bfc54453c7d.png",
+      "requestSha256": "6901735e5fd7d09bf73ed8ccb5e9f0f8d051ec56be8287ac7e12da732556fd3d",
+      "outputSha256": "cb234bcb01ee226bba1890835970d2950185570fbafc1416d513662ed218c6e9",
+      "inputSha256": {
+        "tools/tactics-assets/concepts/townsfolk/generated/character_celandine_marrowby.png": "f7d914938f1ccb8d8d32fb2ca1fcf2309b50bf9a714e30d35e70cf707dda5d9b",
+        "tools/tactics-assets/imagegen/townsfolk/dagna-holt/rotations/south.png": "d0043caba4faff046b3860d9dbb4e66b5d91770e38f95185d55ecc5dc6cb2644"
+      }
+    },
+    {
+      "request": "appearance-cleanup-request.json",
+      "output": "candidate-1.png",
+      "originalPath": "/workspace/generated_images/exec-7faa86ac-30b9-4e1d-bc7a-f61bd5f56cb0.png",
+      "requestSha256": "1ff28da34d932d8a58cb16eec64298b41ae1cefa051cdec591d1b42f8ad6c5c6",
+      "outputSha256": "52882bba836a94f9ff57f306c7876c20227facbd78173bd06c66bdeb811f239c",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1-source.png": "cb234bcb01ee226bba1890835970d2950185570fbafc1416d513662ed218c6e9"
+      },
+      "inputPathAtGeneration": {
+        "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1.png": "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1-source.png"
+      }
+    },
+    {
+      "request": "north-west-guide-correction-request.json",
+      "output": "directional/north-west-guide-corrected-source.png",
+      "originalPath": "/workspace/generated_images/exec-5d89ce04-109a-4a6f-9783-b97faf78dc93.png",
+      "requestSha256": "39919ca009b4ad6c1237a0dd72b814362dbd348e812ab2499c9f1c7a237803ee",
+      "outputSha256": "b33f8541f272033bd63bf707df86812196b146448c48d69fdcabec84dc499a9d",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-west-original.png": "fc20b28a5a8a0307dbb69a3117b57f1296ccf00e2290c7fbaf8fb1522f704fc5"
+      },
+      "inputPathAtGeneration": {
+        "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-west.png": "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-west-original.png"
+      }
+    },
+    {
+      "request": "directional/south-request.json",
+      "output": "directional/south-source.png",
+      "originalPath": "/workspace/generated_images/exec-8155888f-50fe-4920-a248-8e53189b09a6.png",
+      "requestSha256": "75669b0f22e67a7ee2dd5d33168913667003f1303d38508cbf5c2c909035cdfd",
+      "outputSha256": "9ed9178d4ba32cc5b49f4295207edfc606f891718d9a5131c5ad8b0065e48b37",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/south.png": "dba8b36c2289364c00c9316ae186dcc49df9634bd1bb50b519cd69e29e1652d6"
+      }
+    },
+    {
+      "request": "directional/south-west-request.json",
+      "output": "directional/south-west-source.png",
+      "originalPath": "/workspace/generated_images/exec-1e1af6ae-a538-40a9-a412-de7cbdc53505.png",
+      "requestSha256": "4314d8247b4b17157edc1101ac5588467e38c132116206909a19bd2ead95f29c",
+      "outputSha256": "f7f730d23015be10f3eb25e0fda68482e48584ddfc1dcce905b379b9b6bc64c8",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/south-west.png": "fabaebd17f1df9fb8778567d0f1fd1cf911d0ae48438929eb57187db113a55dd"
+      }
+    },
+    {
+      "request": "directional/west-request.json",
+      "output": "directional/west-source.png",
+      "originalPath": "/workspace/generated_images/exec-fee847eb-4d17-4ec4-bc62-a58948fd0b41.png",
+      "requestSha256": "f2ad4d3d50875ceb273505590ecaedb78bec375ae6d78b0a6c73d8923c8f8439",
+      "outputSha256": "2a0a4c2714f24ccd152d009a493308d95f7c5fd3c747d94f6159b00750e4bdb2",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/west.png": "a3523203fef03925ec71aec23e3c851f0d78393366833af6c7533a841ef1ccb2"
+      }
+    },
+    {
+      "request": "directional/north-west-request.json",
+      "output": "directional/north-west-source.png",
+      "originalPath": "/workspace/generated_images/exec-9465625c-318d-4d7f-8975-0852f00ccce1.png",
+      "requestSha256": "b353d0361dd0cd85881f69a5e7c76660ac2504e3723f771e9ef68183a919d34d",
+      "outputSha256": "a1d4ddabae0f89fac4f03d59a17eb1483ef53060b377d6b6c6d6f011e7fb786a",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-west.png": "8947bb932f6fd6bb133c5e088bf0d7b185573166cc2a517b10dae8b3532d7b54"
+      }
+    },
+    {
+      "request": "directional/north-request.json",
+      "output": "directional/north-source.png",
+      "originalPath": "/workspace/generated_images/exec-3dbbcecc-14b9-414d-9147-464aa8a6e453.png",
+      "requestSha256": "a9b0e6391ebb40e7635762c3fd45e42bd3ac0623507938bc86ded7171365872f",
+      "outputSha256": "db654646131b12fdce62eb9bf595b4f8ef96a25f93fb5bfbb590da20a177aee7",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north.png": "e07e4322e805a3cbad777b65732182b5dc0da82f72f6af866906a61cb6aa271b"
+      }
+    },
+    {
+      "request": "directional/north-east-request.json",
+      "output": "directional/north-east-source.png",
+      "originalPath": "/workspace/generated_images/exec-1c121268-9f44-41c0-b156-dfb092e410d7.png",
+      "requestSha256": "f86d60deb93695802bbf4d4a4193e35c35b196bd73968849020dec72ed3b295c",
+      "outputSha256": "4daf733000f2864d9fb58b19e3048a6d777ac4143d864efc8b65c6580258cde0",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-east.png": "c4a579238fe7c6bf29712d26c38d128d5a04a45a7eae8a5e2e6e52f123bcb190"
+      }
+    },
+    {
+      "request": "directional/east-request.json",
+      "output": "directional/east-source.png",
+      "originalPath": "/workspace/generated_images/exec-8eec7209-77be-475d-be91-3f35fa24cce5.png",
+      "requestSha256": "4903d3e8c2338b128b51a6849447e33b2c19f47aa973cb37ce58d7344f6b2dcc",
+      "outputSha256": "8f17e93e93151069d4acf22d111026be6b73fa785bac06037e8e9037f4388298",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/east.png": "62a77ff0d0ff3f73ec9a836e6ae51d6c599d99240311631514da0686d334e56d"
+      }
+    },
+    {
+      "request": "directional/south-east-request.json",
+      "output": "directional/south-east-source.png",
+      "originalPath": "/workspace/generated_images/exec-a5b95380-8198-4d5a-a6d2-aaa5a6b78a76.png",
+      "requestSha256": "8512f16953dbdd9aa94ba8f619173f7efdfbf0c338575f5ebb09e58da0757d00",
+      "outputSha256": "5d7e5d647ab976e46e05d8ba4e8be42e89d62d5c7567bace084336312c788a86",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/south-east.png": "2c2c822edb8122edb79db4c513b1581004784a66b7ac36ca76edddb7ba031574"
+      }
+    },
+    {
+      "request": "portraits-request.json",
+      "output": "portraits-source.png",
+      "originalPath": "/workspace/generated_images/exec-d328fcb0-265d-4e0f-87f7-f5315552351f.png",
+      "requestSha256": "20e1806da4b652ab081c71b01c5db96a2cc35f7ed771e43186a80ac87feb14a4",
+      "outputSha256": "126357a76b2ed2a99128503224c2a55a5e2a7ecfaeadce958dbd1a0a998b91d3",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/candidate-1.png": "52882bba836a94f9ff57f306c7876c20227facbd78173bd06c66bdeb811f239c"
+      }
+    },
+    {
+      "request": "north-facing-correction-request.json",
+      "output": "directional/north-corrected-source.png",
+      "originalPath": "/workspace/generated_images/exec-06ff031f-a1cf-435e-801e-61eee80f6bf8.png",
+      "requestSha256": "2ebda9b04266d747b248ef01f81713d2b79cd9f4e499c744f83e4915ec06599c",
+      "outputSha256": "27446cb905f79e451c0e34f90a316c36eed0a691ed38f5832d3d783de1d735f4",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north.png": "e07e4322e805a3cbad777b65732182b5dc0da82f72f6af866906a61cb6aa271b",
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/north-west-source.png": "a1d4ddabae0f89fac4f03d59a17eb1483ef53060b377d6b6c6d6f011e7fb786a"
+      }
+    },
+    {
+      "request": "north-east-facing-correction-request.json",
+      "output": "directional/north-east-corrected-source.png",
+      "originalPath": "/workspace/generated_images/exec-b6dc312c-6f2b-4b1c-a3a5-38915c97aa8e.png",
+      "requestSha256": "7c047fe9afa0b49e0b422c216c829f09181049e417eabbf5764282af30866888",
+      "outputSha256": "737561cb694da15c2cc25e0609da639ad6458b1eb0809301da316fb70a1fb05f",
+      "inputSha256": {
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/guides/north-east.png": "c4a579238fe7c6bf29712d26c38d128d5a04a45a7eae8a5e2e6e52f123bcb190",
+        "tools/tactics-assets/imagegen/townsfolk/celandine-marrowby/directional/north-west-source.png": "a1d4ddabae0f89fac4f03d59a17eb1483ef53060b377d6b6c6d6f011e7fb786a"
+      }
+    }
+  ],
+  "priorAppearanceCalls": 2,
+  "completionImageToolCalls": 12
+}

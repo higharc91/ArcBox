@@ -1,0 +1,203 @@
+[
+  {
+    "raw": "Kore.cd6d6069",
+    "line": "bark_mother_skarrow_defeat_1",
+    "job": "job_jydSSmfPsE7ikBWdovfuGh8B",
+    "asset": "asset_yBtAvNaPk4YPE6zfiqFKqr6T",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.cd6d6069/source.wav",
+    "sourceSha256": "b615c10a90176139038bc116cfb3eadfdc9edaff6507c9060d1e10ed1741df22",
+    "reason": "Model spoke direction notes; never installed."
+  },
+  {
+    "raw": "Kore.52258660",
+    "line": "ch1_parley_young_pass_1",
+    "job": "job_miQyqk9RbdqJmHXgBPUwmHmR",
+    "asset": "asset_QXmEmybG7S3bjzMrcpNNxdUt",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.52258660/source.wav",
+    "sourceSha256": "6b4440740353a466b509e19551af677daf11d0d6c6b3fe1e3285075de4ba64b6",
+    "reason": "Model spoke direction notes; never installed."
+  },
+  {
+    "raw": "Kore.020a9c88",
+    "line": "ch1_song_song_3",
+    "job": "job_NzKn3bTQKcFQHAsaP4w7bWn5",
+    "asset": "asset_Y75jmCSXFmB773ursw6FrF9Z",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.020a9c88/source.wav",
+    "sourceSha256": "ee802a1773d5f8115bcc0f60f940dadf56c4a988953b4bccf18ba644a0d5d3cc",
+    "reason": "Model spoke direction notes; never installed."
+  },
+  {
+    "raw": "Kore.61d086d5",
+    "line": "ch3_skarrow_messenger_song_1",
+    "job": "job_nDi7Q5jjQReLjuBmCHWp2wZ2",
+    "asset": "asset_iV77b4bWPj8PyQiGEAhT3LjE",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.61d086d5/source.wav",
+    "sourceSha256": "dc69fc309a19db9ff9c7347d0316fb303421ab5bdcd9d0ce0573c4740dd61552",
+    "reason": "Model spoke direction notes; never installed."
+  },
+  {
+    "raw": "Kore.107f9bf4",
+    "line": "ch3_skarrow_messenger_grandson_3",
+    "job": "job_u31eB2SQrjLYuzs2qPqAbqWo",
+    "asset": "asset_j2AzhVoNR3h362t5MvfQ5xKZ",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.107f9bf4/source.wav",
+    "sourceSha256": "5ca11607d711244fb1a4d3d2f6e964165a0254ae37468384c6fe96fbdd464e40",
+    "reason": "Model spoke direction notes; never installed."
+  },
+  {
+    "raw": "Kore.8dc00faa",
+    "line": "ch1_parley_young_fail_1",
+    "job": "job_t2aXG9HsS5HGMYxzbQJCFG2K",
+    "asset": "asset_ZofHct8kXoETFSWLCX6qwc9P",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.8dc00faa/source.wav",
+    "sourceSha256": "f46fa1cdb4595a99c7578e1f8e0e77bfa43d12744d9e3f487ba9e7607a0b6440",
+    "reason": "Opening number ambiguous; use shared verified numeric40 take instead."
+  },
+  {
+    "raw": "Kore.da537c99",
+    "line": "ch1_parley_bread_2",
+    "job": "job_GaAnaJCrTWuiS9JxdyKDkL28",
+    "asset": "asset_9yoGhoYsUFpRW8B2q5pmJ7y1",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.da537c99/source.wav",
+    "sourceSha256": "5a0fcf64d7206ec5b84fb5c566d3bbefa3b3f11e195c8f8227aaa78ccfc29eeb",
+    "reason": "Word substitution or unresolved word-joining in both small and medium ASR; replace conservatively with punctuation/pauses, canonical words unchanged."
+  },
+  {
+    "raw": "Kore.4ad9ac77",
+    "line": "ch1_song_crumb_1",
+    "job": "job_yBQYP623meosPtWVti8etSnp",
+    "asset": "asset_iQsrQEWwDoYABPXWmQheoWmG",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.4ad9ac77/source.wav",
+    "sourceSha256": "37368a3057fba031f8bf5257ded855b0567fb2924d01f4919e3389cde3e7bdaf",
+    "reason": "Word substitution or unresolved word-joining in both small and medium ASR; replace conservatively with punctuation/pauses, canonical words unchanged."
+  },
+  {
+    "raw": "Kore.cfe8012d",
+    "line": "ch3_skarrow_messenger_song_4",
+    "job": "job_uijqVMhAqHV8LhptRTQhEeES",
+    "asset": "asset_ondeSKez4MwYrH6CSggoK1xy",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.cfe8012d/source.wav",
+    "sourceSha256": "7cddecadabcf93144e5012853e469d8a2007ebb668904ea39b5d021a060dff6a",
+    "reason": "Word substitution or unresolved word-joining in both small and medium ASR; replace conservatively with punctuation/pauses, canonical words unchanged."
+  },
+  {
+    "raw": "Kore.a6581767",
+    "line": "ch3_skarrow_messenger_grandson_2",
+    "job": "job_spuMvrbPwNERS9JB1fFgJERF",
+    "asset": "asset_GnNzUMEvKb6ZzZLeXdr58Fx4",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.a6581767/source.wav",
+    "sourceSha256": "9e494da831fa2e573197d552f8002ef5cb629d4b9a5edde8409abafc4b7c6dec",
+    "reason": "Word substitution or unresolved word-joining in both small and medium ASR; replace conservatively with punctuation/pauses, canonical words unchanged."
+  },
+  {
+    "raw": "Kore.610ed4be",
+    "line": "ch1_parley_bread_2",
+    "job": "job_hB577nHJBQ7w1pjm3nU662Xj",
+    "asset": "asset_LsGk4Jpa3HS9qHziBxGNSphG",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.610ed4be/source.wav",
+    "sourceSha256": "5bfeb227d0804d127016b849014cf011444a4ea0a4ab1366dbbf7e7373605979",
+    "reason": "Short cue was narrated; return to the exact approved Elderly goblin matriarch cue without Mood prose."
+  },
+  {
+    "raw": "Kore.273a3e65",
+    "line": "ch1_song_song_3",
+    "job": "job_QwnnepxVWUdZPMtKfj3CrBQ8",
+    "asset": "asset_zQEnv5skiGNzUdmUrBTbdLSH",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.273a3e65/source.wav",
+    "sourceSha256": "aa3563c97e0f34e6c1bd131f514878d6421fd12ad016eb4ec7b34d553c55f3a1",
+    "reason": "Short cue was narrated; return to the exact approved Elderly goblin matriarch cue without Mood prose."
+  },
+  {
+    "raw": "Kore.b06084ee",
+    "line": "ch1_song_crumb_1",
+    "job": "job_5PVBpEGBxSZnHgja3cwJWBFw",
+    "asset": "asset_TkUADAT5ttY5BpTkpJwboVNn",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.b06084ee/source.wav",
+    "sourceSha256": "c636bb3ba3aaa23c8e71a9e306d001552d11cea5435e93a47736942e189ea3e7",
+    "reason": "Short cue was narrated; return to the exact approved Elderly goblin matriarch cue without Mood prose."
+  },
+  {
+    "raw": "Kore.cd28c42d",
+    "line": "ch3_skarrow_messenger_song_4",
+    "job": "job_D3XNauxKN8GyEVZ3iAXKour1",
+    "asset": "asset_2B3jis1qcQB55JDcWK8ZL5DQ",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.cd28c42d/source.wav",
+    "sourceSha256": "14b5bbc44152eb79562ec957827b1572cb11d121f2b8b14220c6c8b73b9829af",
+    "reason": "Short cue was narrated; return to the exact approved Elderly goblin matriarch cue without Mood prose."
+  },
+  {
+    "raw": "Kore.e278948d",
+    "line": "ch3_skarrow_messenger_song_1",
+    "job": "job_i1NZJMa2JafiJ3QWEjYkRfi2",
+    "asset": "asset_ZEcpaQU8RWgkhmj5Rtsmkczs",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.e278948d/source.wav",
+    "sourceSha256": "11c2714bff0bd92b04dd6ca4fd87aa4dd2c2ae4eb09737ee10690ee5d8ec603a",
+    "reason": "Both ASR models hear You have instead of canonical You fed; add a pause to clarify without changing words."
+  },
+  {
+    "raw": "Kore.e2e1bd36",
+    "line": "bark_mother_skarrow_town_2",
+    "job": "job_2vogLvZjzqAdoEtQ6Q78eein",
+    "asset": "asset_k2gEoLwCvM2QmTHdynGdV5pU",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/audition-kore-source.wav",
+    "sourceSha256": "e1fdd0baf759a182de9bc670a01d21a8c09fcac5fae1060f3f89b8741e112da8",
+    "reason": "Owner approved voice performance; both recognizers found opening Forty unclear. Clarified selected production take uses numeric40 with the same cast/direction.",
+    "ownerApprovedPerformance": true
+  },
+  {
+    "raw": "Kore.6711100b",
+    "line": "ch3_skarrow_messenger_song_1",
+    "job": "job_kWpXzTod79tG5ARXqmNR29jP",
+    "asset": "asset_cDsyTxDZwacHXzyNcS5mbFhi",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.6711100b/source.wav",
+    "sourceSha256": "30317754ba262c46bf1d7940f712cb69db6f8dab69a2d64c13a4aadf0be86bec",
+    "reason": "Remaining cue narration; switch to native plain-language read instruction rather than descriptive angle-bracket tag."
+  },
+  {
+    "raw": "Kore.3ed0c02c",
+    "line": "ch3_skarrow_messenger_song_4",
+    "job": "job_qSvV2cyeARfeuiQ2rHv367yg",
+    "asset": "asset_JsJULmMz2gMxXPBy6V8Pf6YN",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.3ed0c02c/source.wav",
+    "sourceSha256": "2825b37345076b15be88734acd88a05421e9f29b63ff39d84e06c15da384e86b",
+    "reason": "Remaining cue narration; switch to native plain-language read instruction rather than descriptive angle-bracket tag."
+  },
+  {
+    "raw": "Kore.aa300f5c",
+    "line": "ch3_skarrow_messenger_song_1",
+    "job": "job_BVQfB5YDCm8ow2ayiQ5vRp6d",
+    "asset": "asset_fzqKZLW9pxHpu7BB8jHnfHTt",
+    "creativeUnits": 3,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.aa300f5c/source.wav",
+    "sourceSha256": "69fe55a07060d8c77bc905fab9e4ad3ff1f7001b30a634588146869dc764d684",
+    "reason": "Explicit prose instructions were narrated; same Kore cast with dialogue and supported pause tags only."
+  },
+  {
+    "raw": "Kore.e56a7dc5",
+    "line": "ch3_skarrow_messenger_song_4",
+    "job": "job_9SFMDKsMTybfoBXhBvccQU8t",
+    "asset": "asset_AamGzWmvjdfgLpPBRHNxns9G",
+    "creativeUnits": 2,
+    "sourcePath": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/superseded/Kore.e56a7dc5/source.wav",
+    "sourceSha256": "e61704b883c2eb9bd6cb2355c9a45049f7122b18f162dc694129d7f3bb2c73c0",
+    "reason": "Explicit prose instructions were narrated; same Kore cast with dialogue and supported pause tags only."
+  }
+]

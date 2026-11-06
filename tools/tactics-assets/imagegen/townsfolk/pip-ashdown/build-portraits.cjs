@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const {PNG}=require('pngjs');
+const {quantize,applyPalette}=require('gifenc');
+const root=__dirname,bytes=fs.readFileSync(path.join(root,'portraits-source.png')),src=PNG.sync.read(bytes),cw=src.width/3,ch=src.height/2;
+const moods=['idle','hurt','happy','angry','sad','surprised'],threshold=128,measures=[];
+for(let i=0;i<6;i++){let left=cw,top=ch,right=-1,bottom=-1;const col=i%3,row=Math.floor(i/3);for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const p=((row*ch+y)*src.width+col*cw+x)*4;if(src.data[p+3]>=threshold){left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x);bottom=Math.max(bottom,y);}}assert(right>=left);assert(left>0&&right<cw-1&&top>0&&bottom<ch-1,`Portrait spills across cell ${i}`);measures.push({left,top,right,bottom});}
+const maxW=Math.max(...measures.map(b=>b.right-b.left+1)),maxH=Math.max(...measures.map(b=>b.bottom-b.top+1)),scale=Math.min(36/maxW,36/maxH);
+const center=measures.reduce((s,b)=>s+(b.left+b.right)/2,0)/6,floor=Math.max(...measures.map(b=>b.bottom)),offset=[20-center*scale,38-floor*scale];
+const sheet=new PNG({width:120,height:80});
+for(let i=0;i<6;i++){const col=i%3,row=Math.floor(i/3);for(let y=0;y<40;y++)for(let x=0;x<40;x++){const sx=Math.floor((x-offset[0])/scale),sy=Math.floor((y-offset[1])/scale);if(sx<0||sx>=cw||sy<0||sy>=ch)continue;const p=((row*ch+sy)*src.width+col*cw+sx)*4,q=((row*40+y)*sheet.width+col*40+x)*4;if(src.data[p+3]<threshold)continue;src.data.copy(sheet.data,q,p,p+3);sheet.data[q+3]=255;}}
+const opaque=[];for(let p=0;p<sheet.data.length;p+=4)if(sheet.data[p+3])opaque.push(...sheet.data.subarray(p,p+4));const palette=quantize(Uint8Array.from(opaque),64),indexed=applyPalette(sheet.data,palette);for(let p=0,i=0;p<sheet.data.length;p+=4,i++)if(sheet.data[p+3])for(let c=0;c<3;c++)sheet.data[p+c]=palette[indexed[i]][c];
+const audit={sourceSha256:crypto.createHash('sha256').update(bytes).digest('hex'),sourceGrid:[3,2],outputSize:40,alphaThreshold:threshold,paletteColors:64,fixedScale:scale,fixedOffset:offset,perMoodRecentering:false,moods:{},reviewOnly:true};
+fs.mkdirSync(path.join(root,'portraits'),{recursive:true});
+for(let i=0;i<6;i++){const out=new PNG({width:40,height:40});PNG.bitblt(sheet,out,i%3*40,Math.floor(i/3)*40,40,40,0,0);const b=PNG.sync.write(out);fs.writeFileSync(path.join(root,'portraits',`pip_${moods[i]}.png`),b);audit.moods[moods[i]]={sourceBounds:measures[i],sha256:crypto.createHash('sha256').update(b).digest('hex')};}
+const contact=new PNG({width:480,height:320});for(let y=0;y<320;y++)for(let x=0;x<480;x++){const p=(Math.floor(y/4)*sheet.width+Math.floor(x/4))*4,q=(y*contact.width+x)*4;for(let c=0;c<3;c++)contact.data[q+c]=sheet.data[p+3]?sheet.data[p+c]:[35,32,40][c];contact.data[q+3]=255;}fs.writeFileSync(path.join(root,'pip-portraits-review.png'),PNG.sync.write(contact));fs.writeFileSync(path.join(root,'portraits-validation.json'),JSON.stringify(audit,null,2)+'\n');console.log(JSON.stringify({portraits:moods,size:40,uniformScale:scale,reviewOnly:true}));

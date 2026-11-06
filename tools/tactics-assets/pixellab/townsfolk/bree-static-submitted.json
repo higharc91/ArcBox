@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "id: f4e7da2d-389f-40e7-8814-04e2e040dac0\njob_id: f4e7da2d-389f-40e7-8814-04e2e040dac0\nmodel: pro\ndescription: ONE standalone full-body sprite of Bree Tallow, the approved older working innkeeper. Match the concept identity exactly: kind lined face, grey braided crown and low bun, charcoal olive long dress, rolled practical sleeves, worn tan apron, sturdy brown boots, closed brown notebook at belt and a small keyring. Quiet relaxed idle, both feet planted, hands resting naturally by sides, no weapon. Three-quarter low top-down tactical RPG camera, facing down-right, consistent with supplied hero. Translate the painted design into crisp high quality pixel art at the HERO REFERENCE native pixel density: roughly 72 pixels from head to boot soles on this 160x160 transparent canvas. Center body near x80, feet near y123. Maintain adult human proportions, readable silhouette and clean clustered material shading, selective coloured outline, top-left warm light and cool shadows. Same detail density as supplied shipped hero, without copying armour, sword, shield or heroic costume. Full feet visible, no cast shadow plane, no scenic background, no turnaround sheet, no labels, no smooth painting, no tiny chibi proportions.\nsize: 160x160px\ntransparent: True\ncandidates: 4\nreferences: 2\nstyle_image: yes (outline, detail, shading)\npalette: 97 colours (Wardenflame / Ashen Ford)\nmax colours: 48 per image\nseed: 80301\nasset_id: c7cfad09-e007-55b3-aeb9-342b966ebbbe\nasset_status: pending (saved when generation completes)\ncost: 15 generations\nstatus: processing (~1-10 min)\n\nhint: get_image(job_id=\"f4e7da2d-389f-40e7-8814-04e2e040dac0\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/f4e7da2d-389f-40e7-8814-04e2e040dac0/download (423 + Retry-After until ready; ?index=N for the Nth of several images)"
+    }
+  ],
+  "isError": false
+}

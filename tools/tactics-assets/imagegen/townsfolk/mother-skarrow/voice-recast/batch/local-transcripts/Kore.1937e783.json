@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.1937e783.wav",
+  "sourceSha256": "d438062301af243d989d17702e5adb60e4981473cc79e5a583d64f450dfca4b9",
+  "duration": 5.84,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.08,
+      "text": " Huh, the hill is crooked like your mayor"
+    }
+  ],
+  "text": "Huh, the hill is crooked like your mayor",
+  "secondsToTranscribe": 1.568
+}

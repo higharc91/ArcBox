@@ -38,8 +38,8 @@
       "preset": "Sadachbia"
     },
     "dagna_holt": {
-      "preset": "Callirrhoe",
-      "pitch": -1
+      "preset": "Gacrux",
+      "pitch": 0
     },
     "grisk": {
       "preset": "Algenib",
@@ -71,15 +71,15 @@
       "preset": "Vindemiatrix"
     },
     "mother_skarrow": {
-      "preset": "Laomedeia",
-      "pitch": -2
+      "preset": "Kore",
+      "pitch": 0
     },
     "narrator": {
       "preset": "Algieba"
     },
     "old_maud": {
-      "preset": "Achernar",
-      "pitch": -1
+      "preset": "Gacrux",
+      "pitch": 0
     },
     "oswin_hale": {
       "preset": "Rasalgethi",
@@ -148,7 +148,7 @@
   },
   "lines": {
     "ashmaw_accepted": {
-      "main": "ashmaw_accepted.93693713.ogg"
+      "main": "ashmaw_accepted.7b2094b8.ogg"
     },
     "ashmaw_bounty_1": {
       "main": "ashmaw_bounty_1.3cfd0e65.ogg"
@@ -157,7 +157,7 @@
       "main": "ashmaw_bounty_2.37ac95a8.ogg"
     },
     "ashmaw_busy": {
-      "main": "ashmaw_busy.922760d5.ogg"
+      "main": "ashmaw_busy.9e9a9aeb.ogg"
     },
     "ashmaw_death": {
       "main": "ashmaw_death.df68b839.ogg"
@@ -166,22 +166,22 @@
       "main": "ashmaw_diggings_open.65724d3b.ogg"
     },
     "ashmaw_done": {
-      "main": "ashmaw_done.74badb62.ogg"
+      "main": "ashmaw_done.fa47da21.ogg"
     },
     "ashmaw_lair_open": {
       "main": "ashmaw_lair_open.4840edf3.ogg"
     },
     "ashmaw_later": {
-      "main": "ashmaw_later.406b4cff.ogg"
+      "main": "ashmaw_later.be53c235.ogg"
     },
     "ashmaw_leave": {
       "main": "ashmaw_leave.d9d0647e.ogg"
     },
     "ashmaw_maud_after": {
-      "main": "ashmaw_maud_after.3dc23202.ogg"
+      "main": "ashmaw_maud_after.4189c88e.ogg"
     },
     "ashmaw_maud_waiting": {
-      "main": "ashmaw_maud_waiting.a10ae239.ogg"
+      "main": "ashmaw_maud_waiting.2a9e0989.ogg"
     },
     "ashmaw_nest_open": {
       "main": "ashmaw_nest_open.4175425b.ogg"
@@ -190,16 +190,16 @@
       "main": "ashmaw_notices.2616717b.ogg"
     },
     "ashmaw_offer": {
-      "main": "ashmaw_offer.fa64e1c4.ogg"
+      "main": "ashmaw_offer.0061d72d.ogg"
     },
     "ashmaw_presented": {
-      "main": "ashmaw_presented.bfb48d48.ogg"
+      "main": "ashmaw_presented.167e3765.ogg"
     },
     "ashmaw_progress": {
-      "main": "ashmaw_progress.73bbc710.ogg"
+      "main": "ashmaw_progress.800a02aa.ogg"
     },
     "ashmaw_proof": {
-      "main": "ashmaw_proof.b0ebb092.ogg"
+      "main": "ashmaw_proof.53b3925b.ogg"
     },
     "ashmaw_satchel": {
       "main": "ashmaw_satchel.aad805b1.ogg"
@@ -208,7 +208,7 @@
       "main": "ashmaw_throat_open.ee49d2bb.ogg"
     },
     "ashmaw_wait": {
-      "main": "ashmaw_wait.be377409.ogg"
+      "main": "ashmaw_wait.b9b16c30.ogg"
     },
     "bark_bree_tallow_ally_down_1": {
       "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
@@ -295,76 +295,76 @@
       "main": "bark_corvin_ashby_town_8.b3f5e0db.ogg"
     },
     "bark_dagna_holt_ally_down_1": {
-      "main": "bark_dagna_holt_ally_down_1.ff93315f.ogg"
+      "main": "bark_dagna_holt_ally_down_1.9f48f15b.ogg"
     },
     "bark_dagna_holt_ally_down_2": {
-      "main": "bark_dagna_holt_ally_down_2.41f6474b.ogg"
+      "main": "bark_dagna_holt_ally_down_2.b0883969.ogg"
     },
     "bark_dagna_holt_battle_start_1": {
-      "main": "bark_dagna_holt_battle_start_1.26ec0bc2.ogg"
+      "main": "bark_dagna_holt_battle_start_1.229764f9.ogg"
     },
     "bark_dagna_holt_battle_start_2": {
-      "main": "bark_dagna_holt_battle_start_2.147b8fa2.ogg"
+      "main": "bark_dagna_holt_battle_start_2.de9faf88.ogg"
     },
     "bark_dagna_holt_battle_start_3": {
-      "main": "bark_dagna_holt_battle_start_3.43d579f7.ogg"
+      "main": "bark_dagna_holt_battle_start_3.7b8ecace.ogg"
     },
     "bark_dagna_holt_camp_1": {
-      "main": "bark_dagna_holt_camp_1.6214915d.ogg"
+      "main": "bark_dagna_holt_camp_1.4fc7522c.ogg"
     },
     "bark_dagna_holt_camp_2": {
-      "main": "bark_dagna_holt_camp_2.7ac0db21.ogg"
+      "main": "bark_dagna_holt_camp_2.91193ef4.ogg"
     },
     "bark_dagna_holt_crit_1": {
-      "main": "bark_dagna_holt_crit_1.4c576aa2.ogg"
+      "main": "bark_dagna_holt_crit_1.113e6172.ogg"
     },
     "bark_dagna_holt_defeat_1": {
-      "main": "bark_dagna_holt_defeat_1.66e4f293.ogg"
+      "main": "bark_dagna_holt_defeat_1.8aac13d5.ogg"
     },
     "bark_dagna_holt_healed_1": {
-      "main": "bark_dagna_holt_healed_1.ff09c641.ogg"
+      "main": "bark_dagna_holt_healed_1.f3df214e.ogg"
     },
     "bark_dagna_holt_hit_1": {
-      "main": "bark_dagna_holt_hit_1.e4cfc937.ogg"
+      "main": "bark_dagna_holt_hit_1.1c393822.ogg"
     },
     "bark_dagna_holt_hit_2": {
-      "main": "bark_dagna_holt_hit_2.818d1d12.ogg"
+      "main": "bark_dagna_holt_hit_2.c92675f8.ogg"
     },
     "bark_dagna_holt_kill_1": {
-      "main": "bark_dagna_holt_kill_1.ec90a23c.ogg"
+      "main": "bark_dagna_holt_kill_1.636ce126.ogg"
     },
     "bark_dagna_holt_kill_2": {
-      "main": "bark_dagna_holt_kill_2.62cbb1d2.ogg"
+      "main": "bark_dagna_holt_kill_2.6d10259b.ogg"
     },
     "bark_dagna_holt_low_hp_1": {
-      "main": "bark_dagna_holt_low_hp_1.b78d5029.ogg"
+      "main": "bark_dagna_holt_low_hp_1.97b25ab9.ogg"
     },
     "bark_dagna_holt_miss_1": {
-      "main": "bark_dagna_holt_miss_1.4594bb4e.ogg"
+      "main": "bark_dagna_holt_miss_1.ae5cb45d.ogg"
     },
     "bark_dagna_holt_revived_1": {
-      "main": "bark_dagna_holt_revived_1.51964b23.ogg"
+      "main": "bark_dagna_holt_revived_1.13b0138a.ogg"
     },
     "bark_dagna_holt_town_1": {
-      "main": "bark_dagna_holt_town_1.7ac0db21.ogg"
+      "main": "bark_dagna_holt_town_1.91193ef4.ogg"
     },
     "bark_dagna_holt_town_2": {
-      "main": "bark_dagna_holt_town_2.26ec0bc2.ogg"
+      "main": "bark_dagna_holt_town_2.229764f9.ogg"
     },
     "bark_dagna_holt_town_3": {
-      "main": "bark_dagna_holt_town_3.43d579f7.ogg"
+      "main": "bark_dagna_holt_town_3.7b8ecace.ogg"
     },
     "bark_dagna_holt_turn_start_1": {
-      "main": "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
+      "main": "bark_dagna_holt_turn_start_1.a1f3d5fa.ogg"
     },
     "bark_dagna_holt_turn_start_2": {
-      "main": "bark_dagna_holt_turn_start_2.d24e2314.ogg"
+      "main": "bark_dagna_holt_turn_start_2.8fbf731b.ogg"
     },
     "bark_dagna_holt_victory_1": {
-      "main": "bark_dagna_holt_victory_1.58175f8b.ogg"
+      "main": "bark_dagna_holt_victory_1.40d4243b.ogg"
     },
     "bark_dagna_holt_victory_2": {
-      "main": "bark_dagna_holt_victory_2.a110d71f.ogg"
+      "main": "bark_dagna_holt_victory_2.76ad0105.ogg"
     },
     "bark_grisk_ally_down_1": {
       "main": "bark_grisk_ally_down_1.37f6eed4.ogg"
@@ -640,49 +640,49 @@
       "main": "bark_mother_aubrine_town_7.54ef4883.ogg"
     },
     "bark_mother_skarrow_ally_down_1": {
-      "main": "bark_mother_skarrow_ally_down_1.99b9e0b6.ogg"
+      "main": "bark_mother_skarrow_ally_down_1.0aaf554c.ogg"
     },
     "bark_mother_skarrow_battle_start_1": {
-      "main": "bark_mother_skarrow_battle_start_1.643e6027.ogg"
+      "main": "bark_mother_skarrow_battle_start_1.21029d6f.ogg"
     },
     "bark_mother_skarrow_battle_start_2": {
-      "main": "bark_mother_skarrow_battle_start_2.f8e24da9.ogg"
+      "main": "bark_mother_skarrow_battle_start_2.b1a68813.ogg"
     },
     "bark_mother_skarrow_battle_start_3": {
-      "main": "bark_mother_skarrow_battle_start_3.de019a05.ogg"
+      "main": "bark_mother_skarrow_battle_start_3.f87d9d9b.ogg"
     },
     "bark_mother_skarrow_crit_1": {
-      "main": "bark_mother_skarrow_crit_1.b5964de6.ogg"
+      "main": "bark_mother_skarrow_crit_1.c1f83a79.ogg"
     },
     "bark_mother_skarrow_defeat_1": {
-      "main": "bark_mother_skarrow_defeat_1.f2d02731.ogg"
+      "main": "bark_mother_skarrow_defeat_1.a4127dd7.ogg"
     },
     "bark_mother_skarrow_hit_1": {
-      "main": "bark_mother_skarrow_hit_1.a8a57c70.ogg"
+      "main": "bark_mother_skarrow_hit_1.fb99e7b7.ogg"
     },
     "bark_mother_skarrow_kill_1": {
-      "main": "bark_mother_skarrow_kill_1.281a834e.ogg"
+      "main": "bark_mother_skarrow_kill_1.905f9c3b.ogg"
     },
     "bark_mother_skarrow_low_hp_1": {
-      "main": "bark_mother_skarrow_low_hp_1.9511e53e.ogg"
+      "main": "bark_mother_skarrow_low_hp_1.7bf36e62.ogg"
     },
     "bark_mother_skarrow_low_hp_2": {
-      "main": "bark_mother_skarrow_low_hp_2.18a7e6b8.ogg"
+      "main": "bark_mother_skarrow_low_hp_2.d872aded.ogg"
     },
     "bark_mother_skarrow_miss_1": {
-      "main": "bark_mother_skarrow_miss_1.cb584b82.ogg"
+      "main": "bark_mother_skarrow_miss_1.8865d18d.ogg"
     },
     "bark_mother_skarrow_town_1": {
-      "main": "bark_mother_skarrow_town_1.78f71d05.ogg"
+      "main": "bark_mother_skarrow_town_1.94e41642.ogg"
     },
     "bark_mother_skarrow_town_2": {
-      "main": "bark_mother_skarrow_town_2.833a159c.ogg"
+      "main": "bark_mother_skarrow_town_2.fb22946e.ogg"
     },
     "bark_mother_skarrow_town_3": {
-      "main": "bark_mother_skarrow_town_3.75e2525f.ogg"
+      "main": "bark_mother_skarrow_town_3.d0c8ade6.ogg"
     },
     "bark_mother_skarrow_victory_1": {
-      "main": "bark_mother_skarrow_victory_1.75c16ffb.ogg"
+      "main": "bark_mother_skarrow_victory_1.86f78549.ogg"
     },
     "bark_narrator_ally_down_1": {
       "main": "bark_narrator_ally_down_1.8eb28cf7.ogg"
@@ -787,25 +787,25 @@
       "main": "bark_narrator_victory_4.06e871a9.ogg"
     },
     "bark_old_maud_town_1": {
-      "main": "bark_old_maud_town_1.ab5a6e1e.ogg"
+      "main": "bark_old_maud_town_1.7c28e676.ogg"
     },
     "bark_old_maud_town_2": {
-      "main": "bark_old_maud_town_2.3350ad53.ogg"
+      "main": "bark_old_maud_town_2.3ae00f41.ogg"
     },
     "bark_old_maud_town_3": {
-      "main": "bark_old_maud_town_3.caaa9ec4.ogg"
+      "main": "bark_old_maud_town_3.e853ed96.ogg"
     },
     "bark_old_maud_town_4": {
-      "main": "bark_old_maud_town_4.75eff5ec.ogg"
+      "main": "bark_old_maud_town_4.5a3ed168.ogg"
     },
     "bark_old_maud_town_5": {
-      "main": "bark_old_maud_town_5.f2770b4d.ogg"
+      "main": "bark_old_maud_town_5.6bb37cf4.ogg"
     },
     "bark_old_maud_town_6": {
-      "main": "bark_old_maud_town_6.928c5d0e.ogg"
+      "main": "bark_old_maud_town_6.a66615bc.ogg"
     },
     "bark_old_maud_town_7": {
-      "main": "bark_old_maud_town_7.ee04a66b.ogg"
+      "main": "bark_old_maud_town_7.38f9cbcc.ogg"
     },
     "bark_oswin_hale_battle_start_1": {
       "main": "bark_oswin_hale_battle_start_1.2a7f35c1.ogg"
@@ -1015,34 +1015,34 @@
       "main": "ch1_bridge_cost_open_1.d261d7f3.ogg"
     },
     "ch1_bridge_cost_open_2": {
-      "main": "ch1_bridge_cost_open_2.6044701c.ogg"
+      "main": "ch1_bridge_cost_open_2.8b0254e2.ogg"
     },
     "ch1_bridge_cost_open_3": {
-      "main": "ch1_bridge_cost_open_3.cd87c5a7.ogg"
+      "main": "ch1_bridge_cost_open_3.5f8c3a70.ogg"
     },
     "ch1_bridge_cost_open_4": {
       "main": "ch1_bridge_cost_open_4.0d843dbc.ogg"
     },
     "ch1_bridge_cost_over_1": {
-      "main": "ch1_bridge_cost_over_1.5ccafd05.ogg"
+      "main": "ch1_bridge_cost_over_1.1b6f15a7.ogg"
     },
     "ch1_bridge_cost_over_2": {
-      "main": "ch1_bridge_cost_over_2.42da10f9.ogg"
+      "main": "ch1_bridge_cost_over_2.2263557f.ogg"
     },
     "ch1_bridge_cost_soldier_1": {
-      "main": "ch1_bridge_cost_soldier_1.8018ae7a.ogg"
+      "main": "ch1_bridge_cost_soldier_1.4f2c774e.ogg"
     },
     "ch1_bridge_cost_soldier_2": {
-      "main": "ch1_bridge_cost_soldier_2.d99efce8.ogg"
+      "main": "ch1_bridge_cost_soldier_2.478b3292.ogg"
     },
     "ch1_bridge_cost_song_1": {
-      "main": "ch1_bridge_cost_song_1.ae48080d.ogg"
+      "main": "ch1_bridge_cost_song_1.7103969b.ogg"
     },
     "ch1_bridge_cost_song_2": {
       "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
     },
     "ch1_camp_hunger_1": {
-      "main": "ch1_camp_hunger_1.506f828b.ogg"
+      "main": "ch1_camp_hunger_1.a925b2e9.ogg"
     },
     "ch1_camp_hunger_2": {
       "main": "ch1_camp_hunger_2.750c194a.ogg"
@@ -1051,10 +1051,10 @@
       "main": "ch1_camp_open_1.b7fd3291.ogg"
     },
     "ch1_camp_open_2": {
-      "main": "ch1_camp_open_2.43f35597.ogg"
+      "main": "ch1_camp_open_2.73f05588.ogg"
     },
     "ch1_camp_truth_1": {
-      "main": "ch1_camp_truth_1.c769024e.ogg"
+      "main": "ch1_camp_truth_1.8e17b167.ogg"
     },
     "ch1_camp_truth_2": {
       "main": "ch1_camp_truth_2.f40316a9.ogg"
@@ -1063,19 +1063,19 @@
       "main": "ch1_camp_warmth_1.3e92d833.ogg"
     },
     "ch1_camp_warmth_2": {
-      "main": "ch1_camp_warmth_2.8fe4d02a.ogg"
+      "main": "ch1_camp_warmth_2.788b7405.ogg"
     },
     "ch1_dawn_open_1": {
       "main": "ch1_dawn_open_1.57455db3.ogg"
     },
     "ch1_dawn_open_2": {
-      "main": "ch1_dawn_open_2.7f6f3b2d.ogg"
+      "main": "ch1_dawn_open_2.e2c80851.ogg"
     },
     "ch1_dawn_open_3": {
-      "main": "ch1_dawn_open_3.fe362e89.ogg"
+      "main": "ch1_dawn_open_3.9c5b542e.ogg"
     },
     "ch1_dawn_open_4": {
-      "main": "ch1_dawn_open_4.59bf8346.ogg"
+      "main": "ch1_dawn_open_4.7515dedd.ogg"
     },
     "ch1_docks_artisan_1": {
       "main": "ch1_docks_artisan_1.6bd5dc8e.ogg"
@@ -1129,10 +1129,10 @@
       "main": "ch1_docks_sailor_1.6d1f5c9a.ogg"
     },
     "ch1_ford_cases_1": {
-      "main": "ch1_ford_cases_1.2c529cf3.ogg"
+      "main": "ch1_ford_cases_1.e6e53880.ogg"
     },
     "ch1_ford_cases_2": {
-      "main": "ch1_ford_cases_2.58984b22.ogg"
+      "main": "ch1_ford_cases_2.76569cc2.ogg"
     },
     "ch1_ford_cases_3": {
       "main": "ch1_ford_cases_3.476edd31.ogg"
@@ -1144,7 +1144,7 @@
       "main": "ch1_ford_cases_5.c2e8f3e2.ogg"
     },
     "ch1_ford_force_1": {
-      "main": "ch1_ford_force_1.06892ef8.ogg"
+      "main": "ch1_ford_force_1.73b8bd59.ogg"
     },
     "ch1_ford_force_2": {
       "main": "ch1_ford_force_2.7d39c66c.ogg"
@@ -1162,13 +1162,13 @@
       "main": "ch1_ford_open_3.d955fd91.ogg"
     },
     "ch1_ford_open_4": {
-      "main": "ch1_ford_open_4.db2ad6b8.ogg"
+      "main": "ch1_ford_open_4.2b2a190e.ogg"
     },
     "ch1_ford_open_5": {
       "main": "ch1_ford_open_5.47bb98ad.ogg"
     },
     "ch1_ford_parley_1": {
-      "main": "ch1_ford_parley_1.075c5961.ogg"
+      "main": "ch1_ford_parley_1.a116cfdb.ogg"
     },
     "ch1_ford_parley_2": {
       "main": "ch1_ford_parley_2.d2d9390c.ogg"
@@ -1180,7 +1180,7 @@
       "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
     },
     "ch1_ford_pay_fail_2": {
-      "main": "ch1_ford_pay_fail_2.b0f2f3b1.ogg"
+      "main": "ch1_ford_pay_fail_2.6ca21a20.ogg"
     },
     "ch1_ford_pay_pass_1": {
       "main": "ch1_ford_pay_pass_1.7ad9feb7.ogg"
@@ -1189,13 +1189,13 @@
       "main": "ch1_ford_pay_pass_2.8f12827f.ogg"
     },
     "ch1_ford_truth_1": {
-      "main": "ch1_ford_truth_1.a7b52a99.ogg"
+      "main": "ch1_ford_truth_1.60a6b2de.ogg"
     },
     "ch1_ford_truth_2": {
-      "main": "ch1_ford_truth_2.f9b4967e.ogg"
+      "main": "ch1_ford_truth_2.d482b35e.ogg"
     },
     "ch1_ford_truth_3": {
-      "main": "ch1_ford_truth_3.e18a6ca5.ogg"
+      "main": "ch1_ford_truth_3.f9b54bfb.ogg"
     },
     "ch1_ford_truth_4": {
       "main": "ch1_ford_truth_4.d822333e.ogg"
@@ -1270,7 +1270,7 @@
       "main": "ch1_granary_confess_3.1f24e7e2.ogg"
     },
     "ch1_granary_confess_4": {
-      "main": "ch1_granary_confess_4.17e1447f.ogg"
+      "main": "ch1_granary_confess_4.d145315b.ogg"
     },
     "ch1_granary_confess_5": {
       "main": "ch1_granary_confess_5.09a5bde5.ogg"
@@ -1282,7 +1282,7 @@
       "main": "ch1_granary_doors_1.959ee1f1.ogg"
     },
     "ch1_granary_doors_2": {
-      "main": "ch1_granary_doors_2.8ea3074e.ogg"
+      "main": "ch1_granary_doors_2.b7e525b1.ogg"
     },
     "ch1_granary_lend_fail_1": {
       "main": "ch1_granary_lend_fail_1.466fef93.ogg"
@@ -1303,7 +1303,7 @@
       "main": "ch1_granary_open_2.145c5151.ogg"
     },
     "ch1_granary_open_3": {
-      "main": "ch1_granary_open_3.7467d3c4.ogg"
+      "main": "ch1_granary_open_3.348770e3.ogg"
     },
     "ch1_granary_open_4": {
       "main": "ch1_granary_open_4.24a2bbc1.ogg"
@@ -1318,7 +1318,7 @@
       "main": "ch1_granary_open_7.1a8d343f.ogg"
     },
     "ch1_granary_press_1": {
-      "main": "ch1_granary_press_1.3cbb3dec.ogg"
+      "main": "ch1_granary_press_1.89d11779.ogg"
     },
     "ch1_granary_sums_fail_1": {
       "main": "ch1_granary_sums_fail_1.2b3e5da8.ogg"
@@ -1369,28 +1369,28 @@
       "main": "ch1_kindler_spared_1.e9581c34.ogg"
     },
     "ch1_maud_bye_1": {
-      "main": "ch1_maud_bye_1.b24b49d6.ogg"
+      "main": "ch1_maud_bye_1.625caf26.ogg"
     },
     "ch1_maud_bye_2": {
-      "main": "ch1_maud_bye_2.1c65ab25.ogg"
+      "main": "ch1_maud_bye_2.8897ef7c.ogg"
     },
     "ch1_maud_fell_1": {
-      "main": "ch1_maud_fell_1.703e251a.ogg"
+      "main": "ch1_maud_fell_1.614d2c97.ogg"
     },
     "ch1_maud_fell_2": {
-      "main": "ch1_maud_fell_2.bfc49e76.ogg"
+      "main": "ch1_maud_fell_2.f8502c5f.ogg"
     },
     "ch1_maud_fell_3": {
-      "main": "ch1_maud_fell_3.66ed66ae.ogg"
+      "main": "ch1_maud_fell_3.230d4f24.ogg"
     },
     "ch1_maud_fell_4": {
-      "main": "ch1_maud_fell_4.138bba78.ogg"
+      "main": "ch1_maud_fell_4.cf876833.ogg"
     },
     "ch1_maud_fell_5": {
       "main": "ch1_maud_fell_5.0d313f98.ogg"
     },
     "ch1_maud_fell_6": {
-      "main": "ch1_maud_fell_6.cbfe4efa.ogg"
+      "main": "ch1_maud_fell_6.b060e280.ogg"
     },
     "ch1_maud_fell_7": {
       "main": "ch1_maud_fell_7.cafa5695.ogg"
@@ -1399,10 +1399,10 @@
       "main": "ch1_maud_fell_8.43794a78.ogg"
     },
     "ch1_maud_hermit_1": {
-      "main": "ch1_maud_hermit_1.4e0ec949.ogg"
+      "main": "ch1_maud_hermit_1.f0cb1c4a.ogg"
     },
     "ch1_maud_hermit_2": {
-      "main": "ch1_maud_hermit_2.97a47809.ogg"
+      "main": "ch1_maud_hermit_2.b50cfd5a.ogg"
     },
     "ch1_maud_lost_1": {
       "main": "ch1_maud_lost_1.a5c4977d.ogg"
@@ -1414,25 +1414,25 @@
       "main": "ch1_maud_open_2.38feb09d.ogg"
     },
     "ch1_maud_open_3": {
-      "main": "ch1_maud_open_3.fad9008b.ogg"
+      "main": "ch1_maud_open_3.927ec861.ogg"
     },
     "ch1_maud_open_4": {
-      "main": "ch1_maud_open_4.50070cac.ogg"
+      "main": "ch1_maud_open_4.e9dd8825.ogg"
     },
     "ch1_maud_sage_1": {
-      "main": "ch1_maud_sage_1.b7bdb0d5.ogg"
+      "main": "ch1_maud_sage_1.552d5ea8.ogg"
     },
     "ch1_maud_slain_1": {
-      "main": "ch1_maud_slain_1.6ed84455.ogg"
+      "main": "ch1_maud_slain_1.c75da1db.ogg"
     },
     "ch1_maud_spared_1": {
-      "main": "ch1_maud_spared_1.53cb3c98.ogg"
+      "main": "ch1_maud_spared_1.300aac3f.ogg"
     },
     "ch1_maud_track_1": {
       "main": "ch1_maud_track_1.9494f47c.ogg"
     },
     "ch1_maud_who_1": {
-      "main": "ch1_maud_who_1.bb5f5e61.ogg"
+      "main": "ch1_maud_who_1.640e18bf.ogg"
     },
     "ch1_mayor_close_1": {
       "main": "ch1_mayor_close_1.bfddf799.ogg"
@@ -1450,7 +1450,7 @@
       "main": "ch1_mayor_goblins_1.6abdd4d0.ogg"
     },
     "ch1_mayor_goblins_2": {
-      "main": "ch1_mayor_goblins_2.b798fc89.ogg"
+      "main": "ch1_mayor_goblins_2.529013eb.ogg"
     },
     "ch1_mayor_goblins_3": {
       "main": "ch1_mayor_goblins_3.3d5c0336.ogg"
@@ -1465,7 +1465,7 @@
       "main": "ch1_mayor_halden_2.9a96527a.ogg"
     },
     "ch1_mayor_halden_3": {
-      "main": "ch1_mayor_halden_3.79860a20.ogg"
+      "main": "ch1_mayor_halden_3.c0a18099.ogg"
     },
     "ch1_mayor_halden_4": {
       "main": "ch1_mayor_halden_4.26b72526.ogg"
@@ -1477,7 +1477,7 @@
       "main": "ch1_mayor_hero_2.50e933ce.ogg"
     },
     "ch1_mayor_hero_3": {
-      "main": "ch1_mayor_hero_3.ace591b0.ogg"
+      "main": "ch1_mayor_hero_3.d0eba4c9.ogg"
     },
     "ch1_mayor_noble_1": {
       "main": "ch1_mayor_noble_1.f2109686.ogg"
@@ -1498,10 +1498,10 @@
       "main": "ch1_mayor_open_4.66fb5c56.ogg"
     },
     "ch1_mayor_soldier_1": {
-      "main": "ch1_mayor_soldier_1.4e1f4079.ogg"
+      "main": "ch1_mayor_soldier_1.56849c9a.ogg"
     },
     "ch1_mayor_soldier_2": {
-      "main": "ch1_mayor_soldier_2.ade6e018.ogg"
+      "main": "ch1_mayor_soldier_2.771bb153.ogg"
     },
     "ch1_mayor_soldier_3": {
       "main": "ch1_mayor_soldier_3.ff5e9760.ogg"
@@ -1516,31 +1516,31 @@
       "main": "ch1_mayor_urchin_3.71e0f989.ogg"
     },
     "ch1_parley_bread_1": {
-      "main": "ch1_parley_bread_1.8c25822a.ogg"
+      "main": "ch1_parley_bread_1.f4afec83.ogg"
     },
     "ch1_parley_bread_2": {
-      "main": "ch1_parley_bread_2.355cad93.ogg"
+      "main": "ch1_parley_bread_2.3c9d8de9.ogg"
     },
     "ch1_parley_deal_1": {
-      "main": "ch1_parley_deal_1.f1ed9c2f.ogg"
+      "main": "ch1_parley_deal_1.72d391bd.ogg"
     },
     "ch1_parley_deal_2": {
       "main": "ch1_parley_deal_2.dd3df279.ogg"
     },
     "ch1_parley_haggle_fail_1": {
-      "main": "ch1_parley_haggle_fail_1.75f815f7.ogg"
+      "main": "ch1_parley_haggle_fail_1.3c08fcfe.ogg"
     },
     "ch1_parley_haggle_fail_2": {
-      "main": "ch1_parley_haggle_fail_2.6a6a922c.ogg"
+      "main": "ch1_parley_haggle_fail_2.8eea32e2.ogg"
     },
     "ch1_parley_haggle_pass_1": {
-      "main": "ch1_parley_haggle_pass_1.9c5cdadd.ogg"
+      "main": "ch1_parley_haggle_pass_1.9fa766a4.ogg"
     },
     "ch1_parley_hill_1": {
-      "main": "ch1_parley_hill_1.4780c336.ogg"
+      "main": "ch1_parley_hill_1.335a90a0.ogg"
     },
     "ch1_parley_hill_2": {
-      "main": "ch1_parley_hill_2.6c185b63.ogg"
+      "main": "ch1_parley_hill_2.77a07ca9.ogg"
     },
     "ch1_parley_open_1": {
       "main": "ch1_parley_open_1.5e51e76b.ogg"
@@ -1549,61 +1549,61 @@
       "main": "ch1_parley_open_2.cfd714a8.ogg"
     },
     "ch1_parley_open_3": {
-      "main": "ch1_parley_open_3.78f71d05.ogg"
+      "main": "ch1_parley_open_3.94e41642.ogg"
     },
     "ch1_parley_open_4": {
-      "main": "ch1_parley_open_4.bb7c1f39.ogg"
+      "main": "ch1_parley_open_4.4b67b2cd.ogg"
     },
     "ch1_parley_soldier_1": {
-      "main": "ch1_parley_soldier_1.aecfcbc3.ogg"
+      "main": "ch1_parley_soldier_1.b8a1391e.ogg"
     },
     "ch1_parley_soldier_2": {
-      "main": "ch1_parley_soldier_2.6d214a47.ogg"
+      "main": "ch1_parley_soldier_2.950e84f3.ogg"
     },
     "ch1_parley_terms_1": {
-      "main": "ch1_parley_terms_1.240b6493.ogg"
+      "main": "ch1_parley_terms_1.13aea2ae.ogg"
     },
     "ch1_parley_terms_2": {
-      "main": "ch1_parley_terms_2.5023f5f2.ogg"
+      "main": "ch1_parley_terms_2.5293bdb8.ogg"
     },
     "ch1_parley_young_fail_1": {
-      "main": "ch1_parley_young_fail_1.833a159c.ogg"
+      "main": "ch1_parley_young_fail_1.fb22946e.ogg"
     },
     "ch1_parley_young_pass_1": {
-      "main": "ch1_parley_young_pass_1.5998e9b2.ogg"
+      "main": "ch1_parley_young_pass_1.e95c782e.ogg"
     },
     "ch1_parley_young_pass_2": {
-      "main": "ch1_parley_young_pass_2.1323850c.ogg"
+      "main": "ch1_parley_young_pass_2.fd7c01c4.ogg"
     },
     "ch1_road_east_open_1": {
       "main": "ch1_road_east_open_1.bd071394.ogg"
     },
     "ch1_road_east_open_2": {
-      "main": "ch1_road_east_open_2.65db2db4.ogg"
+      "main": "ch1_road_east_open_2.aaa4fa51.ogg"
     },
     "ch1_road_east_open_3": {
-      "main": "ch1_road_east_open_3.1ff0c1e8.ogg"
+      "main": "ch1_road_east_open_3.83c877d3.ogg"
     },
     "ch1_road_east_open_4": {
-      "main": "ch1_road_east_open_4.562c7c3f.ogg"
+      "main": "ch1_road_east_open_4.cbf32ed1.ogg"
     },
     "ch1_road_east_open_5": {
-      "main": "ch1_road_east_open_5.7f710b38.ogg"
+      "main": "ch1_road_east_open_5.0f67bcd4.ogg"
     },
     "ch1_road_east_open_6": {
-      "main": "ch1_road_east_open_6.9153deb0.ogg"
+      "main": "ch1_road_east_open_6.90f5d914.ogg"
     },
     "ch1_song_crumb_1": {
-      "main": "ch1_song_crumb_1.1aa12ac4.ogg"
+      "main": "ch1_song_crumb_1.5b969918.ogg"
     },
     "ch1_song_crumb_2": {
-      "main": "ch1_song_crumb_2.6e74076c.ogg"
+      "main": "ch1_song_crumb_2.0ae8a3fc.ogg"
     },
     "ch1_song_ent_1": {
-      "main": "ch1_song_ent_1.2834da7c.ogg"
+      "main": "ch1_song_ent_1.32f78208.ogg"
     },
     "ch1_song_ent_2": {
-      "main": "ch1_song_ent_2.d4693cc5.ogg"
+      "main": "ch1_song_ent_2.420a44de.ogg"
     },
     "ch1_song_open_1": {
       "main": "ch1_song_open_1.3d56c7fd.ogg"
@@ -1612,34 +1612,34 @@
       "main": "ch1_song_open_2.fa5f5338.ogg"
     },
     "ch1_song_open_3": {
-      "main": "ch1_song_open_3.75e2525f.ogg"
+      "main": "ch1_song_open_3.d0c8ade6.ogg"
     },
     "ch1_song_open_4": {
-      "main": "ch1_song_open_4.53fe9861.ogg"
+      "main": "ch1_song_open_4.921f090c.ogg"
     },
     "ch1_song_outl_1": {
-      "main": "ch1_song_outl_1.6b9c6c1f.ogg"
+      "main": "ch1_song_outl_1.0068cfbe.ogg"
     },
     "ch1_song_outl_2": {
-      "main": "ch1_song_outl_2.deea052a.ogg"
+      "main": "ch1_song_outl_2.a6080384.ogg"
     },
     "ch1_song_rest_1": {
-      "main": "ch1_song_rest_1.f13264a2.ogg"
+      "main": "ch1_song_rest_1.ccffd9ea.ogg"
     },
     "ch1_song_rest_2": {
-      "main": "ch1_song_rest_2.fb0c40b0.ogg"
+      "main": "ch1_song_rest_2.809fd71a.ogg"
     },
     "ch1_song_song_1": {
       "main": "ch1_song_song_1.8a91ff86.ogg"
     },
     "ch1_song_song_2": {
-      "main": "ch1_song_song_2.da22e3f2.ogg"
+      "main": "ch1_song_song_2.59324d97.ogg"
     },
     "ch1_song_song_3": {
-      "main": "ch1_song_song_3.b0de7a78.ogg"
+      "main": "ch1_song_song_3.97cbdbe8.ogg"
     },
     "ch1_song_song_4": {
-      "main": "ch1_song_song_4.6c9d2460.ogg"
+      "main": "ch1_song_song_4.3d6910c0.ogg"
     },
     "ch1_song_song_5": {
       "main": "ch1_song_song_5.3bb967d2.ogg"
@@ -1651,13 +1651,13 @@
       "main": "ch1_young_ones_open_2.cd508d14.ogg"
     },
     "ch1_young_ones_open_3": {
-      "main": "ch1_young_ones_open_3.c007e02d.ogg"
+      "main": "ch1_young_ones_open_3.33a3f783.ogg"
     },
     "ch1_young_ones_open_4": {
-      "main": "ch1_young_ones_open_4.ba1bd52f.ogg"
+      "main": "ch1_young_ones_open_4.dff0427a.ogg"
     },
     "ch1_young_ones_open_5": {
-      "main": "ch1_young_ones_open_5.f6aa80d0.ogg"
+      "main": "ch1_young_ones_open_5.f5514a10.ogg"
     },
     "ch2_bree_book_1": {
       "main": "ch2_bree_book_1.85eabeef.ogg"
@@ -2386,10 +2386,10 @@
       "main": "ch3_skarrow_messenger_grandson_1.3d66a7ea.ogg"
     },
     "ch3_skarrow_messenger_grandson_2": {
-      "main": "ch3_skarrow_messenger_grandson_2.acb0cafc.ogg"
+      "main": "ch3_skarrow_messenger_grandson_2.adbab612.ogg"
     },
     "ch3_skarrow_messenger_grandson_3": {
-      "main": "ch3_skarrow_messenger_grandson_3.3b125355.ogg"
+      "main": "ch3_skarrow_messenger_grandson_3.a4c27e64.ogg"
     },
     "ch3_skarrow_messenger_honest_1": {
       "main": "ch3_skarrow_messenger_honest_1.2a4ecfbe.ogg"
@@ -2413,16 +2413,16 @@
       "main": "ch3_skarrow_messenger_soldier_1.e66b0d23.ogg"
     },
     "ch3_skarrow_messenger_song_1": {
-      "main": "ch3_skarrow_messenger_song_1.855c445d.ogg"
+      "main": "ch3_skarrow_messenger_song_1.fb5a0a21.ogg"
     },
     "ch3_skarrow_messenger_song_2": {
-      "main": "ch3_skarrow_messenger_song_2.efb6659d.ogg"
+      "main": "ch3_skarrow_messenger_song_2.3e232dab.ogg"
     },
     "ch3_skarrow_messenger_song_3": {
-      "main": "ch3_skarrow_messenger_song_3.28a115f1.ogg"
+      "main": "ch3_skarrow_messenger_song_3.d1e94f6e.ogg"
     },
     "ch3_skarrow_messenger_song_4": {
-      "main": "ch3_skarrow_messenger_song_4.69eb6d50.ogg"
+      "main": "ch3_skarrow_messenger_song_4.6f5979c9.ogg"
     },
     "ch3_skarrow_messenger_song_5": {
       "main": "ch3_skarrow_messenger_song_5.5ad92531.ogg"
@@ -2908,19 +2908,19 @@
       "main": "ch5_epi_clan_slain_rekindled_open_2.2facfd63.ogg"
     },
     "ch5_epi_clan_slain_rekindled_open_3": {
-      "main": "ch5_epi_clan_slain_rekindled_open_3.659715ea.ogg"
+      "main": "ch5_epi_clan_slain_rekindled_open_3.78ea8dc8.ogg"
     },
     "ch5_epi_clan_slain_returned_open_1": {
       "main": "ch5_epi_clan_slain_returned_open_1.53eb5e74.ogg"
     },
     "ch5_epi_clan_slain_returned_open_2": {
-      "main": "ch5_epi_clan_slain_returned_open_2.248abc6c.ogg"
+      "main": "ch5_epi_clan_slain_returned_open_2.c35be44d.ogg"
     },
     "ch5_epi_clan_spared_extinguished_open_1": {
       "main": "ch5_epi_clan_spared_extinguished_open_1.542e1d62.ogg"
     },
     "ch5_epi_clan_spared_extinguished_open_2": {
-      "main": "ch5_epi_clan_spared_extinguished_open_2.5228fc92.ogg"
+      "main": "ch5_epi_clan_spared_extinguished_open_2.66456fc5.ogg"
     },
     "ch5_epi_clan_spared_extinguished_open_3": {
       "main": "ch5_epi_clan_spared_extinguished_open_3.1316c3b4.ogg"
@@ -2929,16 +2929,16 @@
       "main": "ch5_epi_clan_spared_rekindled_open_1.0526616a.ogg"
     },
     "ch5_epi_clan_spared_rekindled_open_2": {
-      "main": "ch5_epi_clan_spared_rekindled_open_2.63c2e155.ogg"
+      "main": "ch5_epi_clan_spared_rekindled_open_2.fbdcb75f.ogg"
     },
     "ch5_epi_clan_spared_rekindled_open_3": {
-      "main": "ch5_epi_clan_spared_rekindled_open_3.1780190d.ogg"
+      "main": "ch5_epi_clan_spared_rekindled_open_3.707dcae7.ogg"
     },
     "ch5_epi_clan_spared_returned_open_1": {
       "main": "ch5_epi_clan_spared_returned_open_1.bfd0e63f.ogg"
     },
     "ch5_epi_clan_spared_returned_open_2": {
-      "main": "ch5_epi_clan_spared_returned_open_2.0550adca.ogg"
+      "main": "ch5_epi_clan_spared_returned_open_2.0c91127f.ogg"
     },
     "ch5_epi_close_extinguished_open_1": {
       "main": "ch5_epi_close_extinguished_open_1.0c95225c.ogg"
@@ -3523,13 +3523,13 @@
       "main": "ch5_the_stranger_who_2.b269a6d2.ogg"
     },
     "say_ford_assault_1": {
-      "main": "say_ford_assault_1.e8adbccb.ogg"
+      "main": "say_ford_assault_1.fba9424c.ogg"
     },
     "say_ford_assault_2": {
-      "main": "say_ford_assault_2.a64dbc0f.ogg"
+      "main": "say_ford_assault_2.1c750113.ogg"
     },
     "say_ford_assault_3": {
-      "main": "say_ford_assault_3.111d469f.ogg"
+      "main": "say_ford_assault_3.e3ff1147.ogg"
     },
     "say_hall_of_the_flame_1": {
       "main": "say_hall_of_the_flame_1.9ed06f98.ogg"

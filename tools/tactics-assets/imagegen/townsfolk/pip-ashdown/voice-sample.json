@@ -1,0 +1,10 @@
+{
+  "character": "pip_ashdown",
+  "barkId": "bark_pip_ashdown_town_1",
+  "text": "I can run that for you! Two coppers. One if you're nice. Three if you're not.",
+  "sourcePath": "content/tactics/base/lore/audio/bark_pip_ashdown_town_1.397e121f.ogg",
+  "sourceSha256": "67680db6992308719564f7d3fd4736adab078b23a065b3c077b8cc9d88afcf28",
+  "reviewFile": "voice-sample.mp3",
+  "reviewSha256": "57c3b6678ad5a74309b5e728e890eb604429af808e508e5001afc74cff7931b3",
+  "operation": "Existing recording transcoded to MP3; no new voice generation"
+}

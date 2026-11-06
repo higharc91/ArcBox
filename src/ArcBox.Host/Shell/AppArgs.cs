@@ -131,6 +131,10 @@ public sealed record AppArgs
                 case "--world-route" when !string.IsNullOrWhiteSpace(value):
                     args = args with { WorldRoute = value };
                     break;
+                // Consumed by the dev-only WorldDemo directly.
+                case "--world-story-flags" when !string.IsNullOrWhiteSpace(value):
+                case "--world-party-walk" when value is null:
+                    break;
                 case "--walk-log" when value is null:
                     args = args with { WalkLog = true };
                     break;

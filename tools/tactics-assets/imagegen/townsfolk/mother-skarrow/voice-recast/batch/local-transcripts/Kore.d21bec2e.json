@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.d21bec2e.wav",
+  "sourceSha256": "996b622930cb7ba0c188f3f6c24a759547f739352c46143007e0e015accdfa15",
+  "duration": 15.16,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.84,
+      "text": " You ask well, so a crumb in the old song"
+    },
+    {
+      "start": 6.24,
+      "end": 8.540000000000001,
+      "text": " The gold is not gold"
+    },
+    {
+      "start": 9.24,
+      "end": 14.540000000000001,
+      "text": " We sing gold because it rhymes and the true word is sad"
+    }
+  ],
+  "text": "You ask well, so a crumb in the old song The gold is not gold We sing gold because it rhymes and the true word is sad",
+  "secondsToTranscribe": 4.238
+}

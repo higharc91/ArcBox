@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.64b8623c.wav",
+  "sourceSha256": "7f592d6848da88b3dd1571f901a2bb8c66e36b679e53b6a580991e61db43dd10",
+  "duration": 11.2,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.28,
+      "text": " Most of them, some of the young ones, belong to my grandson now."
+    },
+    {
+      "start": 5.28,
+      "end": 10.92,
+      "text": " In their hearts, Vorga, he left us to take instead of ask."
+    },
+    {
+      "start": 10.92,
+      "end": 12.92,
+      "text": " You"
+    }
+  ],
+  "text": "Most of them, some of the young ones, belong to my grandson now. In their hearts, Vorga, he left us to take instead of ask. You",
+  "secondsToTranscribe": 8.815
+}

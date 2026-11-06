@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.f904ff29.wav",
+  "sourceSha256": "5ee7364b3c6ab27805cbadb0cb2725abdca7ae7a6bf717ff56fc41026ffbcfca",
+  "duration": 10.44,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": " The Valley Song."
+    },
+    {
+      "start": 2.0,
+      "end": 4.0,
+      "text": " Seven went over."
+    },
+    {
+      "start": 4.0,
+      "end": 6.0,
+      "text": " Seven came home."
+    },
+    {
+      "start": 6.0,
+      "end": 8.0,
+      "text": " They brought something heavy."
+    },
+    {
+      "start": 8.0,
+      "end": 10.0,
+      "text": " Yes, pretty."
+    }
+  ],
+  "text": "The Valley Song. Seven went over. Seven came home. They brought something heavy. Yes, pretty.",
+  "secondsToTranscribe": 2.283
+}

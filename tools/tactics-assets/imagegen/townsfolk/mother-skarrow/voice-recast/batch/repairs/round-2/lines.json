@@ -1,0 +1,92 @@
+[
+  {
+    "id": "bark_mother_skarrow_defeat_1.main",
+    "line": "bark_mother_skarrow_defeat_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Whatever you think of me, feed the little ones. Feed them.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Whatever you think of me, feed the little ones. Feed them.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.697dc16a",
+    "file": "bark_mother_skarrow_defeat_1.a4127dd7.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_parley_young_pass_1.main",
+    "line": "ch1_parley_young_pass_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.64b8623c",
+    "file": "ch1_parley_young_pass_1.e95c782e.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_song_3.main",
+    "line": "ch1_song_song_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.273a3e65",
+    "file": "ch1_song_song_3.ebaca5f8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_1.main",
+    "line": "ch3_skarrow_messenger_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e278948d",
+    "file": "ch3_skarrow_messenger_song_1.6c12fcc5.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_grandson_3.main",
+    "line": "ch3_skarrow_messenger_grandson_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+    "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.5685703c",
+    "file": "ch3_skarrow_messenger_grandson_3.a4c27e64.ogg",
+    "done": false
+  }
+]

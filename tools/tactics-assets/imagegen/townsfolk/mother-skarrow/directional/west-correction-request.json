@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/mother-skarrow/directional/west-export.png"
+  ],
+  "transparent_background": false,
+  "prompt": "Edit this exact6x6 Mother Skarrow animation sheet. Preserve ALL36 sprites, exact layout/cell positions/scale, facingLEFT and identity. Repair ONLY ROW4 STAFF ATTACK: she must have exactly ONE wooden staff in every frame, continuous staff in anatomicalLEFT primary hand, right hand may help. In row4 columns4 and5 there are erroneous extra vertical staffs behind her: REMOVE those duplicates, keep the ONE horizontal/diagonal striking staff held in her hands. Restore clean magenta where duplicates were. Row4 column2 also must have only ONE staff. Keep ALL other rows and poses unchanged. Pure opaque #FF00FF background. No glow, new objects, labels or new poses. Exact square6x6 sheet."
+}

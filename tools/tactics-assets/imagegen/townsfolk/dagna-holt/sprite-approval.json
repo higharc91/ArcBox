@@ -1,0 +1,81 @@
+{
+  "character": "Dagna Holt",
+  "characterId": "dagna_holt",
+  "presetReference": "guard_captain",
+  "stage": "complete_set_approved_installed",
+  "date": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "imageToolCalls": 12,
+  "originalPath": "/workspace/generated_images/exec-ee75e6fd-a92d-4b52-a549-ba7501f1bad4.png",
+  "candidateSha256": "70e1f5b7aa54ebd48a585298cb740760e12e415b56bda3d00899a2ffb490557a",
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": true,
+  "animationApproval": "authorized_generation_complete",
+  "fullSetTvApproval": "approved",
+  "reviewNotes": [
+    "Appearance continuation authorized by owner: ok, finish those please.",
+    "Eight real idle/walk/talk facings and six portraits complete; finished set approved and installed.",
+    "Use final rotations and corrected north pauldron source; original north guide/source superseded.",
+    "Fixed transform per direction, no per-frame recentering or mirroring;144 source cells, no held slots.",
+    "Approved Gacrux production town bark included in finished reel; no new voice generation.",
+    "Native four-party peaks325.77/192.37 MiB below512; exact reviewed art is installed."
+  ],
+  "voiceReview": {
+    "status": "approved_recast_installed",
+    "reason": "Owner says existing voice sounds too young for a seasoned veteran.",
+    "plan": "voice-recast-plan.json",
+    "sample": "voice-sample.mp3",
+    "voice": "Gacrux",
+    "paidCU": 236,
+    "installedLines": 66,
+    "distinctBatchRenders": 63,
+    "approval": "That's perfect, go ahead and fix her other voice lines with this same sound"
+  },
+  "ownerAppearanceApproval": {
+    "quote": "ok, finish those please",
+    "date": "2026-11-04",
+    "scope": "Continue the existing appearance into directional animations, portraits and finished TV review."
+  },
+  "completedSet": {
+    "status": "approved",
+    "nativeFrameSlots": 144,
+    "selectedSourceCells": 144,
+    "portraits": 6,
+    "completionImageToolCalls": 10,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": true,
+    "sha256": {
+      "review_dagna.png": "af8f62f541bf973b4d20c527bdf8447a4142b3dbb23f93ea31593f9e81752100",
+      "review-sprite.json": "6fd3e5caec41591186351c96043eec2f31e3ff3ba3284c824e78d577f0d5e3e7",
+      "palette.json": "f8d3eb1b8b2f1557a72f67b2fa75a128e145fabe330fcfa10ae751ef3179965c",
+      "atlas-validation.json": "12ed2ae6ca97be49a53e9e6b04ce93b31eceb5f6c1a4235df3d6cde70d8548ec",
+      "portraits-validation.json": "50d3264af28e4f411cf9152f8484286a558582d009bc6f8c1291e63bb9a6eaa9",
+      "review-validation.json": "7d03f67c9fabe790a6e077c105234c2933d211851664ea7a2635923f177ec50a",
+      "dagna-directions-review.png": "8dd687f4b176bb007501fd72ecb7df2187fccd2268cabe8cdd69c82e36e70bde",
+      "dagna-portraits-review.png": "d305d3d5b3a765c418fd311a7fad00774b1c19e2b777d21188fa3bca0e09d6ee",
+      "dagna-closeup-review.gif": "49417c4ec1b91adc28cb441a2db3a1548acb2473732797a6ac969defa08f90ec",
+      "dagna-finished-review.mp4": "763f74680b797321845176a011fa803e01104580c16914cd12368cb9be60cf47",
+      "dagna-eight-direction-idle.gif": "c78477fc2ffc37f062371ea833e99dd13cb58489db61b43695decfef243cc55a",
+      "dagna-eight-direction-walk.gif": "317aed0b85bb342bae070d48285f3954a88dd44bb60fd9bf37c6a2b0c85d909e",
+      "dagna-eight-direction-talk.gif": "9e43af125a0b822af118ac9f30bb5d2c86e74bd7dba594d87345ab7d4fa6a70a",
+      "portraits/dagna_idle.png": "c1f287ec218ae8b7430568390bc93cda6b2165eceb41b857728ede95a11dd789",
+      "portraits/dagna_hurt.png": "01495639738b2478f1a2cae34b7fb67d97d3fd52bffebcfa93edb15d6eb8aa31",
+      "portraits/dagna_happy.png": "a229edf761a58f66964b7df9ad63693e1398ee41f6a18e97469c546658a84936",
+      "portraits/dagna_angry.png": "c743982d4894be1cd3a14c36a94460ec8057c96102850e31f9a94033b7fbc2c2",
+      "portraits/dagna_sad.png": "ca8d417bac38f355155982fee2e70b4783a536f0eb4ea43f7292e6844a758a93",
+      "portraits/dagna_surprised.png": "8163c65effe42cf24a0e44274dec5322be842c87ce6550c88cda75239bbc959e"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/dagna-imagegen/ashen_ford-shots/world-gate.png",
+      "sha256": "8cf12e33dd167065cc872d294a9b33eaa8103e237b09db64542d0a3e1ce083e0"
+    }
+  },
+  "priorAppearanceCalls": 2,
+  "completionImageToolCalls": 10,
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Perfect, do the next character",
+    "scope": "Accepts the completed voiced directional/motion/portrait/TV review; install exact bound assets."
+  }
+}

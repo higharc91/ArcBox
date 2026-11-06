@@ -37,7 +37,34 @@ public enum Cover
 public sealed record TileInfo(int Height, int Material, TileFlags Flags);
 
 /// <summary>An object standing on a tile. A blocking prop cannot be walked into; any prop may give cover.</summary>
-public sealed record PropPlacement(string Id, Tile At, bool Blocks, Cover Cover, string? Variant = null);
+public sealed record PropPlacement(string Id, Tile At, bool Blocks, Cover Cover, string? Variant = null,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default)
+{
+    public bool Equals(PropPlacement? other) => other is not null
+        && Id == other.Id && At == other.At && Blocks == other.Blocks && Cover == other.Cover && Variant == other.Variant
+        && (Requires.IsDefaultOrEmpty ? other.Requires.IsDefaultOrEmpty : !other.Requires.IsDefaultOrEmpty && Requires.SequenceEqual(other.Requires))
+        && (Unless.IsDefaultOrEmpty ? other.Unless.IsDefaultOrEmpty : !other.Unless.IsDefaultOrEmpty && Unless.SequenceEqual(other.Unless));
+
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(Id); hash.Add(At); hash.Add(Blocks); hash.Add(Cover); hash.Add(Variant);
+        if (!Requires.IsDefaultOrEmpty) foreach (var flag in Requires) hash.Add(flag);
+        hash.Add(0);
+        if (!Unless.IsDefaultOrEmpty) foreach (var flag in Unless) hash.Add(flag);
+        return hash.ToHashCode();
+    }
+
+    /// <summary>Whether this placement has story gates; ordinary props keep their legacy behavior.</summary>
+    [System.Text.Json.Serialization.JsonIgnore]
+    public bool Conditional => !Requires.IsDefaultOrEmpty || !Unless.IsDefaultOrEmpty;
+
+    /// <summary>All required flags must hold, and no excluded flag may hold.</summary>
+    public bool Present(IReadOnlySet<string>? flags = null)
+        => (Requires.IsDefaultOrEmpty || Requires.All(f => flags?.Contains(f) == true))
+        && (Unless.IsDefaultOrEmpty || Unless.All(f => flags?.Contains(f) != true));
+}
 
 /// <summary>
 /// A building standing on the map, as the world has it. A region's alone has any. It's read for drawing: what it blocks is on the map's props.
@@ -92,7 +119,10 @@ public sealed class BattleMap
     /// <summary>The buildings on the map: a region's, or none.</summary>
     public ImmutableArray<BuildingPlacement> Buildings { get; }
 
-    /// <summary>The same map, sharing its tiles, stamps and buildings, with <paramref name="props"/> in place of its props: the world's things to interact with standing on it (<see cref="WorldGround.With"/>).</summary>
+    /// <summary>The same terrain with only the scenery present for these story flags.</summary>
+    public BattleMap WithStoryFlags(IReadOnlySet<string> flags) => WithProps([.. Props.Where(p => p.Present(flags))]);
+
+    /// <summary>The same map with different props, sharing its tiles, stamps and buildings.</summary>
     internal BattleMap WithProps(ImmutableArray<PropPlacement> props) => new(Id, Width, Height, _tiles, Materials, props, Zones, StampedTiles, Buildings);
 
     /// <summary>True when the tile lies on the grid.</summary>

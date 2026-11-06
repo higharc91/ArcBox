@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_aPFJzeo8vwMgMoYwRgRZPAMj",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_kigTDiS7xQXozg8VCzDeBxYU",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_fgLrzRRQM1aJcP2YnCPxKgTm"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 12.88,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 9.96,
+            "start": 0,
+            "text": " Took you long enough, a hundred years I've sat here, and finally somebody comes knocking",
+            "words": null
+          },
+          {
+            "end": 12.36,
+            "start": 9.96,
+            "text": " with a sensible face.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:47.959Z",
+    "updatedAt": "2026-11-05T00:36:56.189Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:47.959Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:48.056Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:56.189Z"
+      }
+    ],
+    "progress": 1
+  }
+}

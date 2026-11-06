@@ -1,0 +1,6 @@
+  Discovering: Tactics.Presentation.Tests
+  Discovered:  Tactics.Presentation.Tests
+  Starting:    Tactics.Presentation.Tests
+  Finished:    Tactics.Presentation.Tests (ID = 'd6587aacc92eb40d65481e888f63f9734960acdb1be9bf0e325d6bb792011bf7')
+=== TEST EXECUTION SUMMARY ===
+   Tactics.Presentation.Tests  Total: 154, Errors: 0, Failed: 0, Skipped: 0, Not Run: 0, Time: 2.686s

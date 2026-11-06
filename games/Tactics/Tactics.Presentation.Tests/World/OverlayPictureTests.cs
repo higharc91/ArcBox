@@ -446,10 +446,13 @@ public sealed class OverlayPictureTests
     /// <summary>The ford's timber bridge (OW-08), in the world and on the fight's own map: its pieces, and the tiles of the map they lie over.</summary>
     private static (BoardItem[] Pieces, BoardTerrain Terrain, Func<Tile, bool> Walkable) Bridge(bool world)
     {
-        var map = world ? FordGround.Value.Map : Pack.Map("river_crossing");
-        var terrain = world ? Ford.Value.Plan.Terrain : new BoardTerrain(map, null);
-        var logic = world ? FordGround.Value.Terrain : new Terrain(map, ImmutableSortedDictionary<Tile, int>.Empty, []);
-        var items = world ? Ford.Value.Plan.Blocks.SelectMany(b => b.Plan.Items) : BoardPlan.Build(terrain, Pack.Art).Items;
+        // Keep OW-08's original oversized-texture regression independently of
+        // the new authored ford. Its library sprite remains supported.
+        var map = BattleMap.FromBytes("legacy_bridge", 9, 9, new byte[9*9*3], ["grass/autumn"],
+            [new PropPlacement("bridge_span_timber",new Tile(5,5),false,Cover.None)], ImmutableSortedDictionary<string,ImmutableArray<Tile>>.Empty);
+        var terrain = new BoardTerrain(map, null);
+        var logic = new Terrain(map, ImmutableSortedDictionary<Tile, int>.Empty, []);
+        var items = world ? WorldPlan.Build(terrain, Pack.Art).Blocks.SelectMany(b => b.Plan.Items) : BoardPlan.Build(terrain, Pack.Art).Items;
         var pieces = items.Where(i => (i is Face face ? face.Image : (i as Sprite)?.Image)?.Path.Contains("bridge_timber", StringComparison.Ordinal) == true).ToArray();
         Assert.NotEmpty(pieces);
         return (pieces, terrain, logic.Walkable);
@@ -521,6 +524,57 @@ public sealed class OverlayPictureTests
         var area = WorldPlan.AreaOf(back);
         var body = Enumerable.Range((int)area.Min.X, (int)(area.Max.X - area.Min.X)).SelectMany(x => Enumerable.Range((int)area.Min.Y, (int)(area.Max.Y - area.Min.Y)).Select(y => new Vector2(x + 0.5f, y + 0.5f))).ToArray();
         Assert.Contains(pieces, p => p.Order > back.Order && body.Any(b => Covers(p, b)));
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void Native_walkable_ramp_surfaces_never_cover_feet_in_the_world_or_battle(bool world)
+    {
+        var flags=new HashSet<string>{"ch1_ford_settled","ch1_skarrow_slain"};
+        var map=world?Pack.Ground("ashen_ford").Map:Pack.Map("river_crossing");
+        var terrain=new BoardTerrain(map,null);
+        var pieces=world?BoardPlan.StoryProps(terrain,Pack.Art,flags).Items:BoardPlan.Build(terrain,Pack.Art,flags).Items;
+        var walkable = new Terrain(map.WithStoryFlags(flags), ImmutableSortedDictionary<Tile,int>.Empty, []);
+        // Walls in front may legitimately hide feet. A walkable surface may not.
+        var images=pieces.OfType<Sprite>().Where(p=>walkable.Walkable(p.Tile) && p.Image.Path.Contains("props/ford/",StringComparison.Ordinal)).ToArray();
+        Assert.NotEmpty(images);
+        foreach(var y in new[]{9,10})foreach(var x in new[]{3,4,8,9})
+        {
+            var tile=new Tile(x+(world?100:0),y+(world?52:0));
+            var place=UnitPlace.On(terrain,tile);
+            var unit=UnitPlan.Walkers(Party(1),new Dictionary<string,UnitPlace>{{"a",place}},new Dictionary<string,UnitPose>(),Art.Value)[0];
+            foreach(var dx in Enumerable.Range(-2,5))
+            {
+                var point=place.Feet+new Vector2(dx,-3);
+                var wrong=images.Where(p=>p.Order>unit.Order&&NativeCovers(p,point)).Select(p=>p.Image.Path).ToArray();
+                Assert.True(wrong.Length==0,$"Native art over feet on {tile}: {string.Join(',',wrong)}");
+            }
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_real_parapet_hides_feet_behind_its_corner_but_not_the_upper_body(bool world)
+    {
+        var flags=new HashSet<string>{"ch1_ford_settled","ch1_skarrow_slain"};
+        var map=world?Pack.Ground("ashen_ford").Map:Pack.Map("river_crossing");
+        var terrain=new BoardTerrain(map,null);
+        var pieces=world?BoardPlan.StoryProps(terrain,Pack.Art,flags).Items:BoardPlan.Build(terrain,Pack.Art,flags).Items;
+        var tile=new Tile(4+(world?100:0),10+(world?52:0));
+        var place=UnitPlace.On(terrain,tile);
+        var unit=UnitPlan.Walkers(Party(1),new Dictionary<string,UnitPlace>{{"a",place}},new Dictionary<string,UnitPose>(),Art.Value)[0];
+        var walls=pieces.OfType<Sprite>().Where(p=>map[p.Tile].Flags.HasFlag(TileFlags.Impassable)&&p.Order>unit.Order).ToArray();
+        Assert.Contains(walls,p=>NativeCovers(p,place.Feet+new Vector2(0,-3)));
+        Assert.DoesNotContain(walls,p=>NativeCovers(p,place.Feet+new Vector2(0,-16)));
+    }
+
+    private static bool NativeCovers(Sprite sprite,Vector2 point)
+    {
+        var at=point-sprite.TopLeft;var x=(int)MathF.Floor(at.X);var y=(int)MathF.Floor(at.Y);
+        var (solid,width)=Mask(sprite.Image);
+        return x>=0&&y>=0&&x<width&&y<solid!.Length/width&&solid[y*width+x];
     }
 
     /// <summary>A field with a haystack at (8, 8) and a goat at <paramref name="goat"/>, which never leaves home in a test that doesn't step the herd.</summary>

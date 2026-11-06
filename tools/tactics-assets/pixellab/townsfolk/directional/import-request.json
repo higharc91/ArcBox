@@ -1,0 +1,17 @@
+{
+  "description": "Bree Tallow approved candidate 1. Import these eight verified facings exactly. South-east is the owner-approved sprite; south faces the viewer. Preserve each supplied direction, grey braid, apron, closed notebook on anatomical right, and native pixel grid.",
+  "name": "Wardenflame Bree candidate 1 curated",
+  "mode": "v3",
+  "body_type": "humanoid",
+  "n_directions": 8,
+  "reference_image_url": "upload:6b1806bc-038b-4fd7-b73e-89d8d720267e",
+  "direction_images": {
+    "south-west": "upload:1152542f-5109-4628-8aaf-9923d1153e69",
+    "west": "upload:d7ea07f8-65e3-4960-a08f-e0233346e7f2",
+    "north-west": "upload:9ac8b839-4bee-46a1-aebd-b09d924f7513",
+    "north": "upload:d9a19c6c-4c92-4bd8-958c-74d0e991248f",
+    "north-east": "upload:d641fbb0-e50d-44f6-bb5d-4d289c898743",
+    "east": "upload:73b8c2fc-99f4-4231-8c76-8b0431d9a56e",
+    "south-east": "upload:0b99dbdf-1977-4728-952c-eed34404e030"
+  }
+}

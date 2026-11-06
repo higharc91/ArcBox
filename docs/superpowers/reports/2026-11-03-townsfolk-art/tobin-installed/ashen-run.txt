@@ -1,0 +1,79 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+PERF 6 fps   169.2 ms (worst 307.8) | 3 draw calls   182 primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD build ground 1069 ms, plan+light 2918 ms, bake 182 ms, total 6247 ms
+WORLD items 34,357 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 84 lights, active True; 158 images; route 177 tiles; spots behind-cliff@157,60 behind-crate@104,55 water-block-edge@112,6 block-corner@80,64 region-edge@159,60 void-near@31,95 void-far@32,0
+WORLD memory after build: managed 41.5 MB (+40.8), engine 39.8 MB (+3.0), textures 3.9 MB, buffers 7.6 MB, process 450 MB
+PERF 1 fps   843.7 ms (worst 1506.1) | 393 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 4 fps   241.7 ms (worst 387.3) | 393 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 10 fps   95.4 ms (worst 102.3) | 393 draw calls   1.3 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture characters/presets/minstrel.png 6048x80
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 11 actors, 7 shared textures
+WORLD texture-budget region=ashen_ford stage=open party=4 textures-bytes=289794304 peak-bytes=289794304 limit-bytes=536870912 result=PASS
+WORLD textures 215 in 3526 ms, worst 301.4 ms; binding items (and baking glows) 15 ms; 64 blocks still to record at reveal
+PERF 11 fps   88.7 ms (worst 95.2) | 2,166 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 8 fps   133.1 ms (worst 145.9) | 2,611 draw calls   14.6 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 17 fps   58.3 ms (worst 66.7) | 2,468 draw calls   7.8 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 18 fps   55.9 ms (worst 58.2) | 1,891 draw calls   7.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 14 fps   70.6 ms (worst 81.9) | 1,095 draw calls   6.0 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 13 fps   76.6 ms (worst 118.4) | 848 draw calls   4.7 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=ashen_ford stage=crossing party=4 textures-bytes=289975552 peak-bytes=289975552 limit-bytes=536870912 result=PASS
+WORLD crossing 177 tiles at 6.7 tiles/s, 26.4 s, 339 frames: frame ms median 63.89, p95 147.86, p99 260.33, worst 1052.91
+WORLD crossing after the first 1 s: frame ms median 63.65, p95 140.67, p99 260.33, worst 1052.91
+WORLD frames over 16 ms: 339 of 339, at 0.00s=95.2 0.10s=150.2 0.25s=147.9 0.39s=150.2 0.54s=145.8 0.69s=146.7 0.84s=141.9 0.98s=146.7 1.12s=135.7 1.26s=168.2 1.43s=178.6 1.61s=128.3, 8 while recording
+WORLD recording during the walk: 8 frames, ms a frame median 4.41, p95 7.34, p99 7.34, worst 7.34
+WORLD frames while recording: frame ms median 146.67, p95 150.24, p99 150.24, worst 150.24
+WORLD _Draw per block, first time: median 0.34, p95 2.43, p99 5.53, worst 5.53, sum 49.5 ms
+WORLD render CPU ms median 1.48, p95 3.32, p99 4.67, worst 7.47; GPU ms median 38.44, p95 61.18, p99 125.76, worst 832.35; at most 3,332 draw calls
+WORLD overlay query ms median 2.13, p95 60.85, p99 106.28, worst 134.46; draw ms median 1.87, p95 5.64, p99 9.81, worst 19.69; items median 11.00, p95 370.00, p99 452.00, worst 477.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 68
+WORLD memory at end of crossing: managed 43.6 MB (+42.9), engine 58.0 MB (+21.2), textures 276.5 MB, buffers 9.6 MB, process 800 MB
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-change party=4 textures-bytes=289975552 peak-bytes=329297152 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=ashen_ford stage=party-restored party=4 textures-bytes=289975552 peak-bytes=329297152 limit-bytes=536870912 result=PASS
+WORLD closed

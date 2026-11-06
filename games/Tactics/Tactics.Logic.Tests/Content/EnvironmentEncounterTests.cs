@@ -9,7 +9,7 @@ public sealed class EnvironmentEncounterTests
         Assert.True(rules.Encounters["river_crossing"].Environment);
         Assert.True(rules.Encounters["ford_assault"].Environment);
         var spawn = Assert.Single(rules.Encounters["ford_assault"].Enemies, e => e.Unit == "goblin_ford_shaman");
-        Assert.Equal(new Tile(9, 7), spawn.At);
+        Assert.Equal(new Tile(8, 5), spawn.At); // clear of the new gatehouse footprint
         Assert.DoesNotContain(rules.Encounters.Where(e => e.Key != "ford_assault").SelectMany(e => e.Value.Enemies), e => e.Unit == "goblin_ford_shaman");
         var shaman = rules.Monsters[spawn.Unit];
         Assert.Contains(new AbilityId("goblin_ford_shaman.cinder_bolt"), shaman.Abilities);

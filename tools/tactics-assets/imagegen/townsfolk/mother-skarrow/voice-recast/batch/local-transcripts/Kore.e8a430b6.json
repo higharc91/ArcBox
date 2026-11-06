@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.e8a430b6.wav",
+  "sourceSha256": "b5756906aac65050b7a84bf79db2571dfa8fd6f27ff49a5b7591c98edadba961",
+  "duration": 12.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 12.52,
+      "text": " 40 winters. I have buried grandchildren. I will not bury more for you. Sing with me."
+    }
+  ],
+  "text": "40 winters. I have buried grandchildren. I will not bury more for you. Sing with me.",
+  "secondsToTranscribe": 2.057
+}

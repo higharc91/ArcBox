@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-03",
+  "totals": {
+    "totalCU": 196,
+    "totalDiscountCU": 0,
+    "totalBeforeDiscountCU": 196,
+    "users": 1,
+    "startDate": "2026-11-04T02:00:00Z",
+    "endDate": "2026-11-04T03:00:00Z"
+  },
+  "usageTypes": [
+    {
+      "usageName": "custom-asset-created",
+      "total": 36,
+      "totalApiKey": 0
+    },
+    {
+      "usageName": "refunds",
+      "total": 4,
+      "totalApiKey": 0
+    },
+    {
+      "usageName": "custom",
+      "total": 20,
+      "totalApiKey": 0
+    },
+    {
+      "usageName": "creative-unit-cost",
+      "total": 196,
+      "totalApiKey": 0
+    }
+  ],
+  "activity": [
+    {
+      "time": "2026-11-04T02:23:38.482Z",
+      "jobId": "job_TDcTfEpPAdqdX8nHZJMxJm9C",
+      "creativeUnitsCost": 9
+    },
+    {
+      "time": "2026-11-04T02:18:23.328Z",
+      "jobId": "job_9b481c4PkiXCgup5DtYTdxT9",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:18:04.619Z",
+      "jobId": "job_LqqW6vNTjcqxYg4egEZQDmqW",
+      "creativeUnitsCost": 9
+    },
+    {
+      "time": "2026-11-04T02:18:03.146Z",
+      "jobId": "job_b6Ujt6zRKbv7YquBMrPYZgRr",
+      "creativeUnitsCost": 9
+    },
+    {
+      "time": "2026-11-04T02:13:52.910Z",
+      "jobId": "job_ZLbVXWoUP8WAYgtzVvpVHxtu",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:13:51.358Z",
+      "jobId": "job_dkZHvUBhqUgkrnJQgjxT8U3t",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:09:28.147Z",
+      "jobId": "job_KmF3xedCEAgdvEknkPKwk5Tx",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:08:36.114Z",
+      "jobId": "job_5zq92vwVWnvywa1iJsV59zVG",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:08:34.051Z",
+      "jobId": "job_caynfx7SqsiLcxt4Cq7Ba1pp",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:07:35.223Z",
+      "jobId": "job_aLcrj5yGfrhhqe1H3UDC8tEr",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:07:15.783Z",
+      "jobId": "job_U3xrPdeuMyh1JZVLbycQpXSt",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:06:32.389Z",
+      "jobId": "job_mYMZWoToTPLM6smRscyqBDFW",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:06:29.915Z",
+      "jobId": "job_BPTp85AU4CBNcbNg6LGTZPvT",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:05:49.064Z",
+      "jobId": "job_ANy6N17mniq8ymjnBaTqkisf",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:05:47.405Z",
+      "jobId": "job_AXqNoey5HtWwhwdvHAWHSasD",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:05:07.977Z",
+      "jobId": "job_QtrLEzWZ8vMmaNpkkzv9Jj9X",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:04:22.086Z",
+      "jobId": "job_kyMev4kJeqvBF2BjA4AJ2hkj",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:04:18.616Z",
+      "jobId": "job_Xw9q7KZgtgoMqzX7MNvm6fru",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:03:16.086Z",
+      "jobId": "job_TUpve3iYrjSZdhE1JkKVzuRC",
+      "creativeUnitsCost": 13
+    },
+    {
+      "time": "2026-11-04T02:03:14.674Z",
+      "jobId": "job_VFE6yQfgTe37BjpsJhTrEtDb",
+      "creativeUnitsCost": 13
+    }
+  ],
+  "netResumedCU": 196,
+  "earlierBreeCU": 12,
+  "earlierSkArrowCU": 13,
+  "netIssue80CU": 221,
+  "note": "Usage ledger includes four refund events. The resumed-run net ledger agrees with successful output receipts. Recovered Halden and Maud had zero additional CU in this issue."
+}

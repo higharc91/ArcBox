@@ -1,0 +1,55 @@
+{
+  "jobId": "job_eaBVHYR3F14xy2Kbm34LRpBs",
+  "jobType": "custom",
+  "billing": {
+    "cuCost": 4,
+    "cuDiscount": 0
+  },
+  "metadata": {
+    "input": {
+      "modelId": "model_scenario-audio-to-text",
+      "file": "asset_k2gEoLwCvM2QmTHdynGdV5pU",
+      "language": "en",
+      "modelSize": "small.en",
+      "task": "transcribe",
+      "vadFilter": true
+    },
+    "assetIds": [
+      "asset_xm7ae7Tk3HCTSoQDmy5ckx4L"
+    ],
+    "output": {
+      "detected_language": "en",
+      "duration": 7.84,
+      "language_probability": 1,
+      "segment_count": 1,
+      "segments": [
+        {
+          "end": 7.26,
+          "start": 0.24,
+          "text": " For to you winters I have held this clan do not ask me if I can hold it one more",
+          "words": null
+        }
+      ]
+    }
+  },
+  "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "authorId": "user_9378dDd1b8d6e376eC44bB68",
+  "createdAt": "2026-11-05T01:50:33.282Z",
+  "updatedAt": "2026-11-05T01:50:42.560Z",
+  "status": "success",
+  "statusHistory": [
+    {
+      "status": "pending",
+      "date": "2026-11-05T01:50:33.282Z"
+    },
+    {
+      "status": "in-progress",
+      "date": "2026-11-05T01:50:33.381Z"
+    },
+    {
+      "status": "success",
+      "date": "2026-11-05T01:50:42.560Z"
+    }
+  ],
+  "progress": 1
+}

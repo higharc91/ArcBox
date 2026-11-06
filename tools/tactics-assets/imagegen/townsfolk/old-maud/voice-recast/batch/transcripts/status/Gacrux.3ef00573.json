@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_1UjBS4RTSFU7RcpiLZe9hKSP",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_JSVN8jBLW5TMDz8GTxLWgKHj",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_1qVUtRhmd9E3B2QQaGgVmmrC"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 11.24,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 5.5,
+            "start": 0.02,
+            "text": " Corvin? Still counting his missing years, is he?",
+            "words": null
+          },
+          {
+            "end": 11.06,
+            "start": 5.5,
+            "text": " Good boy. Reads by the wrong lamp, but a good boy.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:56.075Z",
+    "updatedAt": "2026-11-05T00:36:58.676Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:56.075Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:56.169Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:58.676Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -161,9 +161,20 @@ def jobs() -> list[dict]:
             preset, pitch, filt = v["preset"], v.get("pitch", 0), v.get("filter", "")
             # The raw TTS clip depends only on preset and text: speakers sharing a preset can share a render.
             style = directed.get(line_id)
+            # A recast's approved delivery belongs to the speaker, including old battle barks
+            # without per-line directions. Include it in both raw and encoded identities.
+            if v.get("direction"):
+                style = {"direction": " ".join(filter(None, [v["direction"], (style or {}).get("direction")])),
+                         "mood": (style or {}).get("mood", "idle")}
             render_text = f"<{style['direction']} Mood: {style['mood']}.> {text}" if style else text
+            # Preserve an approved take's exact request while its caption and delivery still match.
+            approved = v.get("approvedRenderText", {}).get(line_id)
+            if (approved and approved["text"] == text and approved["preset"] == preset and
+                    approved["direction"] == v.get("direction") and
+                    approved.get("lineDelivery") == directed.get(line_id)):
+                render_text = approved["renderText"]
             raw = f"{preset}.{sha8(preset, render_text)}"
-            file = f"{line_id}.{sha8(preset, pitch, filt, text, render_text) if style else sha8(preset, pitch, filt, text)}.ogg"
+            file = f"{line_id}.{sha8(preset, pitch, filt, text, render_text) if style or render_text != text else sha8(preset, pitch, filt, text)}.ogg"
             out.append({"id": f"{line_id}.{name}", "line": line_id, "cast": name, "speaker": who, "preset": preset,
                         "pitch": pitch, "filter": filt, "text": text, "renderText": render_text, "delivery": style, "raw": raw, "file": file,
                         "done": (AUDIO / file).exists()})
@@ -243,8 +254,7 @@ def check(report_path: Path | None = None) -> int:
     cache_path.parent.mkdir(exist_ok=True)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     assets = json.loads((ROOT / "tools/tactics-lore/voice-assets.json").read_text())
-    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("ashenFordSecrets", [])
-
+    records = assets.get("npcsAndQuests", []) + assets.get("ashmawBounty", []) + assets.get("voiceRecasts", []) + assets.get("ashenFordSecrets", [])
     new_raws = {r["raw"] for r in records}
     by = {}
     for j in jobs():

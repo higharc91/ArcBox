@@ -3504,5 +3504,5 @@ def _preview_gif(rendered: dict[str, dict[str, list[Image.Image]]], only: list[s
                 _composite(cell, fxim, ex, ey, e.blend)
         img = Image.fromarray(canvas.clip(0, 255).astype(np.uint8), "RGBA").convert("RGB")
         frames.append(img.quantize(colors=255, method=Image.Quantize.MEDIANCUT))
-    frames[0].save(path or PREVIEWS / "anim-signature.gif", save_all=True, append_images=frames[1:],
+    save(frames[0], path or PREVIEWS / "anim-signature.gif", save_all=True, append_images=frames[1:],
                    duration=GIF_TICK, loop=0, optimize=True, disposal=1)

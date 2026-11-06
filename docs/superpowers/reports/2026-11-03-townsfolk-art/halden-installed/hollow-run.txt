@@ -1,0 +1,53 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec cinder_hollow, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 526 ms, plan+light 457 ms, bake 30 ms, total 1047 ms
+WORLD items 3,410 lit; 2,464 tiles, 12 blocks, block items median 293, most 587; 13 lights, active True; 14 images; route 87 tiles; spots behind-cliff@5,1 block-corner@32,32
+WORLD memory after build: managed 6.9 MB (+6.2), engine 38.5 MB (+1.7), textures 3.9 MB, buffers 7.6 MB, process 324 MB
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+PERF 1 fps   1227.6 ms (worst 1227.6) | 47 draw calls   536 primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 0 actors, 0 shared textures
+WORLD texture-budget region=cinder_hollow stage=open party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD textures 12 in 3013 ms, worst 1139.9 ms; binding items (and baking glows) 9 ms; 9 blocks still to record at reveal
+PERF 4 fps   266.7 ms (worst 266.7) | 523 draw calls   4.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 8 fps   125.0 ms (worst 130.1) | 474 draw calls   4.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 15 fps   66.8 ms (worst 84.3) | 450 draw calls   3.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=cinder_hollow stage=crossing party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD crossing 87 tiles at 6.7 tiles/s, 12.9 s, 128 frames: frame ms median 103.41, p95 180.48, p99 266.67, worst 346.83
+WORLD crossing after the first 1 s: frame ms median 97.88, p95 180.48, p99 266.67, worst 346.83
+WORLD frames over 16 ms: 128 of 128, at 0.00s=150.6 0.15s=135.1 0.29s=148.2 0.43s=174.7 0.61s=129.2 0.74s=112.4 0.85s=162.2 1.01s=231.7 1.24s=346.8 1.59s=178.7 1.77s=126.0 1.90s=266.7, 2 while recording
+WORLD recording during the walk: 2 frames, ms a frame median 13.84, p95 13.84, p99 13.84, worst 13.84
+WORLD frames while recording: frame ms median 150.64, p95 150.64, p99 150.64, worst 150.64
+WORLD _Draw per block, first time: median 1.17, p95 25.59, p99 25.59, worst 25.59, sum 46.5 ms
+WORLD render CPU ms median 0.79, p95 2.68, p99 8.68, worst 16.54; GPU ms median 54.05, p95 126.55, p99 167.24, worst 194.04; at most 679 draw calls
+WORLD overlay query ms median 1.49, p95 7.86, p99 86.50, worst 93.02; draw ms median 0.49, p95 2.52, p99 9.36, worst 9.78; items median 11.00, p95 33.00, p99 36.00, worst 40.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 1
+WORLD memory at end of crossing: managed 6.3 MB (+5.6), engine 39.6 MB (+2.8), textures 154.9 MB, buffers 7.6 MB, process 535 MB
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=cinder_hollow stage=party-change party=4 textures-bytes=162396416 peak-bytes=201718016 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+PERF 2 fps   649.1 ms (worst 1091.7) | 447 draw calls   3.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=cinder_hollow stage=party-restored party=4 textures-bytes=162396416 peak-bytes=201718016 limit-bytes=536870912 result=PASS
+WORLD closed

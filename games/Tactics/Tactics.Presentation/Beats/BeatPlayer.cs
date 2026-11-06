@@ -346,7 +346,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private static UnitPlace Between(BoardTerrain terrain, Tile from, Tile to, float share, float hop)
     {
         var (a, b) = (UnitPlace.On(terrain, from), UnitPlace.On(terrain, to));
-        return new UnitPlace(Vector2.Lerp(a.Map, b.Map, share), a.Height + (b.Height - a.Height) * share + hop);
+        var at = Vector2.Lerp(a.Map, b.Map, share);
+        return new UnitPlace(at, RoadSurface.TryHeight(terrain, at, out var height)
+            ? height : a.Height + (b.Height - a.Height) * share + hop);
     }
 
     private void Draw(Cue cue, double into, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws, ImmutableArray<PopBox>.Builder pops)

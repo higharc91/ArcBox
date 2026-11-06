@@ -181,6 +181,58 @@ public sealed class SoundBankTests
         Assert.True(found * 2 > keys.Length, $"{found} of {keys.Length}");
     }
 
+    [Fact]
+    public void Creature_attack_families_are_explicit_manifest_data()
+    {
+        using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "sfx", "manifest.json")));
+        foreach (var sound in manifest.RootElement.GetProperty("sounds").EnumerateObject())
+        {
+            if (sound.Value.GetProperty("group").GetString() != "creature" || !sound.Name.EndsWith("_attack", StringComparison.Ordinal))
+                continue;
+            Assert.True(sound.Value.TryGetProperty("families", out var families), sound.Name);
+            Assert.NotEmpty(families.EnumerateArray());
+            Assert.All(families.EnumerateArray(), family => Assert.False(string.IsNullOrWhiteSpace(family.GetString())));
+        }
+    }
+
+    [Fact]
+    public void Every_rules_monster_has_a_sound_family_or_a_documented_silent_decision()
+    {
+        using var decisions = JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "sfx", "silent-monsters.json")));
+        var silence = decisions.RootElement.GetProperty("silent").EnumerateObject()
+            .ToDictionary(entry => entry.Name, entry => entry.Value.GetString()!, StringComparer.Ordinal);
+        var borrowed = decisions.RootElement.GetProperty("borrowed").EnumerateObject()
+            .ToDictionary(entry => entry.Name, entry => entry.Value.GetString()!, StringComparer.Ordinal);
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        var families = new Dictionary<string, string?>(StringComparer.Ordinal);
+        var missing = new List<string>();
+        foreach (var file in Directory.GetFiles(Path.Combine(Pack.Root, "rules", "monsters"), "*.json"))
+        {
+            using var rules = JsonDocument.Parse(File.ReadAllText(file));
+            foreach (var monster in rules.RootElement.EnumerateArray())
+            {
+                var id = monster.GetProperty("id").GetString()!;
+                seen.Add(id);
+                var sprite = monster.TryGetProperty("sprite", out var value) ? value.GetString() : null;
+                families[id] = Bank.Value.Gear(sprite).Family;
+                if (families[id] is null && !silence.ContainsKey(id))
+                    missing.Add(id);
+            }
+        }
+        Assert.Empty(missing);
+        Assert.All(silence, decision =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(decision.Value), decision.Key);
+            Assert.Null(families[decision.Key]);
+        });
+        Assert.All(borrowed, decision =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(decision.Value), decision.Key);
+            Assert.NotNull(families[decision.Key]);
+        });
+        Assert.Empty(silence.Keys.Concat(borrowed.Keys).Except(seen));
+    }
+
     [Theory]
     [InlineData("characters.goblin_cutthroat", "goblin")]
     [InlineData("characters.goblin_archer", "goblin")]

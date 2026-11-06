@@ -245,7 +245,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             }
             if (result.Character is not { } character)
                 return new(null, result.Problem);
-            var record = mine is null ? new MemberRecord(character, 0, Color: color)
+            var record = mine is null ? new MemberRecord(character, doc.StartingXpForNewMember(rules.Xp), Color: color)
                 : type == "createCharacter"
                     // Every remake keeps the existing inventory, injuries and purse. Starting kits are granted only
                     // on first creation, so selling a kit then remaking cannot refill it. Only post-battle remakes use the free one.

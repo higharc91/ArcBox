@@ -1,0 +1,7 @@
+{
+  "referenced_image_paths": [
+    "/workspace/ArcBox/tools/tactics-assets/imagegen/townsfolk/corvin-ashby/directional/guides/east.png"
+  ],
+  "transparent_background": true,
+  "prompt": "Create an animation sheet of the exact approved pixel character in the reference, preserving this SAME east facing in all frames. Exactly six columns by three rows: six subtle idle breathing frames, six alternating-leg walk frames, six friendly conversational empty-hand talk frames. Full body uncropped in each equal cell, consistent size and foot baseline, transparent background, no text. Corvin is an older lean archivist with round glasses, loose grey hair, short grey beard, worn layered scholar clothing, satchel and keys on anatomical right, notebooks and ink bottle on anatomical left. Preserve their sides, no mirroring, staff or magic. Keep hands empty and retain crisp pixel style. His feet stay planted in idle and talk; walk alternates legs. Keep enough gutters around every sprite."
+}

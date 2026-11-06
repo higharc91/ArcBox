@@ -1,0 +1,384 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+LOBBY GMPP
+NARRATOR Google
+ROOM GMPP
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+Tactics content: base at /workspace/.arcbox/data/godot/app_userdata/ArcBox/content/tactics/base/c2d06696c35c8aa9d3cf2b3dac796cd49e697357254a78506af734b1bed752c9
+AUDIO Music title
+TACTICS screen tactics-muster-0
+TACTICS screen tactics-muster-1
+TACTICS stage Walking
+TACTICS screen tactics-muster-2
+TACTICS screen tactics-muster-3
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+TACTICS screen tactics-exploration
+TACTICS walk snapped to 26.5 58.5
+WALKAT 1793785245014 0 0 26.50 58.50 2.38 Cy 26.50 58.50 Bo 25.57 59.59 Dee 26.38 57.36 Ana 24.48 58.38
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture characters/presets/priest.png 6048x80
+WORLD unit-texture characters/presets/blacksmith.png 6048x80
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture characters/presets/minstrel.png 6048x80
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture characters/presets/mayor.png 6048x80
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD fauna 11 actors, 7 shared textures
+TACTICS world open: ground 769 ms, plan+light 2698 ms, bake 183 ms, total 5089 ms, 55 blocks to record, textures 311.2 MB, buffers 3.6 MB, engine 118.7 MB, managed 79.8 MB
+WALK 1 27 59 1793785292522
+WALKAT 1793785292642 1 1 26.93 58.93 2.38 Cy 26.93 58.93 Bo 25.57 59.59 Dee 26.38 57.36 Ana 24.48 58.38
+AUDIO Sfx step_stone
+WALKAT 1793785292921 1 1 27.50 59.50 2.16 Cy 27.50 59.50 Bo 26.02 59.07 Dee 26.38 57.36 Ana 24.48 58.38
+WALK 2 27 60 1793785292968
+AUDIO Sfx step_stone
+WALKAT 1793785294059 2 0 27.50 60.50 2.16 Cy 27.50 60.50 Bo 26.02 59.07 Dee 26.38 57.36 Ana 24.48 58.38
+WALK 3 27 61 1793785294164
+AUDIO Sfx step_stone
+WALK 4 27 62 1793785294796
+WALKAT 1793785295104 4 0 27.50 62.50 3.05 Cy 27.50 62.50 Bo 26.57 59.59 Dee 28.38 59.36 Ana 27.47 58.38
+WALK 5 27 63 1793785295407
+AUDIO Sfx step_stone
+WALKAT 1793785295691 5 0 27.50 63.50 4.02 Cy 27.50 63.50 Bo 26.57 59.59 Dee 28.38 59.36 Ana 27.48 58.38
+WALKSTATS frames 6 ms median 584.45 p99 1194.02 worst 1194.02 over16 6; screen px a frame: raw median 6.7 worst 28.1 flips 2+2; drawn median 10.0 worst 28.1 flips 2+2; ground median 64.8 worst 97.1 flips 0+0
+WALK 6 26 62 1793785305249
+AUDIO Sfx step_stone
+WALKAT 1793785305531 6 0 26.50 62.50 2.91 Cy 26.50 62.50 Bo 26.57 59.59 Dee 28.38 59.36 Ana 27.48 58.38
+WALK 7 25 61 1793785305652
+AUDIO Sfx step_stone
+WALKAT 1793785305850 7 0 25.50 61.50 2.19 Cy 25.50 61.50 Bo 26.57 59.59 Dee 28.38 59.36 Ana 27.48 58.38
+WALK 8 24 60 1793785305960
+AUDIO Sfx step_stone
+WALK 9 23 59 1793785307509
+AUDIO Sfx step_grass
+WALKAT 1793785307801 9 0 23.50 59.50 3.39 Cy 23.50 59.50 Bo 26.88 59.26 Dee 27.82 59.44 Ana 27.13 58.73
+WALK 10 23 58 1793785307934
+AUDIO Sfx step_grass
+WALKAT 1793785308220 10 0 23.50 58.50 2.27 Cy 23.50 58.50 Bo 25.56 59.45 Dee 26.17 59.88 Ana 25.57 59.43
+WALK 11 23 57 1793785308407
+AUDIO Sfx step_grass
+WALKAT 1793785308536 11 0 23.50 57.50 2.42 Cy 23.50 57.50 Bo 24.77 59.56 Dee 24.83 60.24 Ana 24.05 60.12
+WALK 12 24 56 1793785308624
+AUDIO Sfx step_grass
+AUDIO Sfx step_stone
+WALKAT 1793785309000 12 0 24.50 56.50 3.35 Cy 24.50 56.50 Bo 24.51 59.85 Dee 24.70 60.38 Ana 23.57 59.61
+WALKAT 1793785310158 12 0 24.50 56.50 1.25 Cy 24.50 56.50 Bo 23.85 57.57 Dee 23.75 58.20 Ana 24.25 57.95
+WALKSTATS frames 8 ms median 426.69 p99 1545.10 worst 1545.10 over16 8; screen px a frame: raw median 8.0 worst 17.3 flips 2+3; drawn median 8.0 worst 17.3 flips 2+3; ground median 56.0 worst 94.0 flips 0+0
+WALKAT 1793785310439 12 0 24.50 56.50 1.07 Cy 24.50 56.50 Bo 23.58 56.63 Dee 23.39 57.38 Ana 24.47 57.41
+WALKAT 1793785310710 12 0 24.50 56.50 1.09 Cy 24.50 56.50 Bo 23.57 56.60 Dee 23.39 57.37 Ana 24.47 57.39
+WALK 13 24 57 1793785324678
+WALKAT 1793785324742 13 0 24.50 57.05 0.83 Cy 24.50 57.05 Bo 23.73 56.76 Dee 23.43 57.53 Ana 24.10 57.89
+WALK 14 24 58 1793785324991
+AUDIO Sfx step_stone
+WALKAT 1793785325066 14 0 24.50 58.16 1.52 Cy 24.50 58.16 Bo 24.24 56.66 Dee 23.59 57.34 Ana 23.62 58.53
+WALKAT 1793785325341 14 1 24.50 58.50 1.92 Cy 24.50 58.50 Bo 24.48 56.96 Dee 24.16 56.81 Ana 23.55 58.63
+WALK 15 25 59 1793785325411
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785325698 15 1 25.50 59.50 1.23 Cy 25.50 59.50 Bo 24.86 58.86 Dee 24.50 58.04 Ana 24.13 56.87
+WALK 16 26 60 1793785325766
+AUDIO Sfx step_stone
+WALKAT 1793785326016 16 1 26.26 60.26 1.63 Cy 26.26 60.26 Bo 25.62 59.62 Dee 24.98 58.98 Ana 24.50 57.42
+WALK 17 27 61 1793785326076
+WALKAT 1793785326273 17 0 26.75 60.75 1.55 Cy 26.75 60.75 Bo 26.11 60.11 Dee 25.47 59.47 Ana 24.50 58.27
+AUDIO Sfx step_stone
+WALK 18 27 62 1793785326495
+AUDIO Sfx step_stone
+WALKAT 1793785326592 18 0 27.50 62.18 1.17 Cy 27.50 62.18 Bo 27.30 61.30 Dee 26.66 60.66 Ana 25.84 59.84
+WALK 19 27 63 1793785326854
+AUDIO Sfx step_stone
+WALKAT 1793785326946 19 0 27.50 63.29 0.90 Cy 27.50 63.29 Bo 27.50 62.39 Dee 27.49 61.49 Ana 26.85 60.85
+WALKAT 1793785327450 19 0 27.50 63.50 1.08 Cy 27.50 63.50 Bo 27.30 62.43 Dee 27.47 61.68 Ana 26.99 60.97
+WALKSTATS frames 14 ms median 168.68 p99 270.03 worst 270.03 over16 14; screen px a frame: raw median 17.2 worst 51.0 flips 3+2; drawn median 14.3 worst 51.2 flips 3+2; ground median 36.2 worst 71.4 flips 2+0
+WALKAT 1793785327821 19 0 27.50 63.50 1.22 Cy 27.50 63.50 Bo 26.73 62.56 Dee 27.40 62.21 Ana 27.37 61.29
+WALKAT 1793785328131 19 0 27.50 63.50 1.27 Cy 27.50 63.50 Bo 26.62 62.58 Dee 27.39 62.31 Ana 27.44 61.35
+WALKAT 1793785328436 19 0 27.50 63.50 1.29 Cy 27.50 63.50 Bo 26.59 62.59 Dee 27.39 62.35 Ana 27.47 61.37
+WALKAT 1793785328752 19 0 27.50 63.50 1.30 Cy 27.50 63.50 Bo 26.57 62.59 Dee 27.38 62.36 Ana 27.47 61.38
+ROOM GMPP
+ROOM GMPP
+TACTICS walk snapped to 27.5 63.5
+WALKAT 1793785352585 0 0 27.50 63.50 1.83 Cy 27.50 63.50 Bo 26.57 62.59 Dee 28.38 62.36 Ana 27.48 61.38
+WALK 1 26 62 1793785362257
+WALKAT 1793785362382 1 0 27.14 63.14 1.83 Cy 27.14 63.14 Bo 26.57 62.59 Dee 28.38 62.36 Ana 27.48 61.38
+AUDIO Sfx step_stone
+WALK 2 25 61 1793785362677
+AUDIO Sfx step_stone
+WALKAT 1793785362792 2 0 25.86 61.86 2.04 Cy 25.86 61.86 Bo 27.31 63.31 Dee 27.96 62.90 Ana 27.48 61.38
+AUDIO Sfx step_stone
+WALK 3 24 60 1793785363076
+WALKAT 1793785363158 3 0 24.87 60.87 2.94 Cy 24.87 60.87 Bo 26.95 62.95 Dee 27.56 63.42 Ana 27.49 62.91
+AUDIO Sfx step_stone
+WALK 4 23 59 1793785363468
+AUDIO Sfx step_grass
+WALKAT 1793785363564 4 0 23.85 59.85 2.45 Cy 23.85 59.85 Bo 25.58 61.58 Dee 26.41 62.40 Ana 27.50 63.43
+WALKAT 1793785363857 4 1 23.50 59.50 1.96 Cy 23.50 59.50 Bo 24.40 60.40 Dee 25.22 61.22 Ana 26.61 62.60
+WALKSTATS frames 8 ms median 191.65 p99 232.11 worst 232.11 over16 8; screen px a frame: raw median 9.0 worst 17.0 flips 0+1; drawn median 8.0 worst 21.0 flips 0+1; ground median 40.0 worst 53.0 flips 0+0
+WALK 5 23 58 1793785363927
+AUDIO Sfx step_grass
+WALKAT 1793785364152 5 1 23.50 58.60 1.96 Cy 23.50 58.60 Bo 23.50 59.50 Dee 24.25 60.25 Ana 25.64 61.64
+WALK 6 23 57 1793785364213
+AUDIO Sfx step_grass
+WALKAT 1793785364534 6 1 23.50 57.50 1.41 Cy 23.50 57.50 Bo 23.50 58.40 Dee 23.50 59.30 Ana 24.39 60.39
+WALK 7 24 56 1793785364618
+AUDIO Sfx step_stone
+WALKAT 1793785364851 7 0 24.49 56.51 1.01 Cy 24.49 56.51 Bo 23.85 57.15 Dee 23.50 57.98 Ana 23.50 58.98
+WALKAT 1793785365170 7 0 24.50 56.50 0.89 Cy 24.50 56.50 Bo 23.80 57.04 Dee 23.67 57.86 Ana 23.50 58.67
+WALKSTATS frames 7 ms median 150.00 p99 208.99 worst 208.99 over16 7; screen px a frame: raw median 22.0 worst 79.6 flips 3+2; drawn median 21.2 worst 79.2 flips 3+3; ground median 62.9 worst 81.4 flips 0+1
+WALKAT 1793785365520 7 0 24.50 56.50 0.88 Cy 24.50 56.50 Bo 23.67 56.79 Dee 24.07 57.58 Ana 23.48 57.95
+WALKAT 1793785365803 7 0 24.50 56.50 1.01 Cy 24.50 56.50 Bo 23.61 56.67 Dee 24.26 57.45 Ana 23.48 57.61
+WALKAT 1793785366054 7 0 24.50 56.50 1.08 Cy 24.50 56.50 Bo 23.58 56.62 Dee 24.34 57.39 Ana 23.48 57.47
+WALKAT 1793785366417 7 0 24.50 56.50 1.10 Cy 24.50 56.50 Bo 23.58 56.60 Dee 24.37 57.37 Ana 23.48 57.41
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics content:
+Tactics content: base at /workspace/.arcbox/data/godot/app_userdata/ArcBox/content/tactics/base/c2d06696c35c8aa9d3cf2b3dac796cd49e697357254a78506af734b1bed752c9
+NARRATOR Google
+ROOM GMPP
+Resumed room GMPP from /workspace/.arcbox/data/godot/app_userdata/ArcBox/session.json
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+TACTICS screen tactics-exploration
+TACTICS stage Walking
+NARRATOR voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low
+TACTICS walk snapped to 24.5 56.5
+WALKAT 1793785378961 7 0 24.50 56.50 0.90 Cy 24.50 56.50 Bo 23.86 57.14 Dee 23.50 57.96 Ana 23.50 58.86
+WALKAT 1793785379217 7 0 24.50 56.50 0.93 Cy 24.50 56.50 Bo 23.65 56.74 Dee 24.15 57.52 Ana 23.48 57.78
+WALKAT 1793785379538 7 0 24.50 56.50 1.04 Cy 24.50 56.50 Bo 23.60 56.65 Dee 24.30 57.42 Ana 23.48 57.53
+WALKAT 1793785379892 7 0 24.50 56.50 1.09 Cy 24.50 56.50 Bo 23.58 56.61 Dee 24.35 57.38 Ana 23.48 57.44
+WALKAT 1793785380216 7 0 24.50 56.50 1.11 Cy 24.50 56.50 Bo 23.57 56.60 Dee 24.37 57.37 Ana 23.48 57.40
+WALKAT 1793785381011 7 0 24.50 56.50 1.12 Cy 24.50 56.50 Bo 23.57 56.59 Dee 24.38 57.36 Ana 23.48 57.38
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture characters/presets/farmer.png 6048x80
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture characters/presets/goblin_shaman.png 6048x80
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture characters/presets/merchant.png 6048x80
+WORLD unit-texture characters/presets/farmhand.png 6048x80
+WORLD unit-texture characters/presets/guard.png 6048x80
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture characters/presets/priest.png 6048x80
+WORLD unit-texture characters/presets/blacksmith.png 6048x80
+WORLD unit-texture characters/presets/child.png 6048x80
+WORLD unit-texture characters/presets/minstrel.png 6048x80
+WORLD unit-texture characters/presets/sage.png 6048x80
+WORLD unit-texture characters/presets/barmaid.png 6048x80
+WORLD unit-texture characters/presets/mayor.png 6048x80
+WORLD unit-texture characters/presets/guard_captain.png 6048x80
+WORLD unit-texture characters/presets/noble.png 6048x80
+WORLD unit-texture characters/presets/hermit.png 6048x80
+WORLD unit-texture characters/presets/fisher.png 6048x80
+WORLD unit-texture characters/presets/bandit_captain.png 6048x80
+WORLD fauna 11 actors, 7 shared textures
+TACTICS world open: ground 523 ms, plan+light 1936 ms, bake 259 ms, total 4660 ms, 55 blocks to record, textures 307.3 MB, buffers 3.6 MB, engine 106.1 MB, managed 65.4 MB
+WALK 8 24 57 1793785416474
+AUDIO Sfx step_stone
+WALKAT 1793785416546 8 0 24.50 56.91 0.92 Cy 24.50 56.91 Bo 23.65 56.74 Dee 24.13 57.53 Ana 23.48 57.80
+WALK 9 24 58 1793785416829
+AUDIO Sfx step_stone
+WALKAT 1793785416893 9 0 24.50 58.21 1.33 Cy 24.50 58.21 Bo 23.83 57.06 Dee 23.62 57.87 Ana 23.50 58.66
+WALK 10 25 59 1793785417090
+AUDIO Sfx step_stone
+WALKAT 1793785417228 10 0 24.79 58.79 2.25 Cy 24.79 58.79 Bo 24.41 56.57 Dee 23.75 57.25 Ana 23.50 58.03
+WALKAT 1793785417497 10 1 25.50 59.50 1.77 Cy 25.50 59.50 Bo 24.50 58.05 Dee 24.50 57.07 Ana 24.27 56.72
+WALK 11 26 60 1793785417582
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785417836 11 1 26.37 60.37 1.56 Cy 26.37 60.37 Bo 25.26 59.26 Dee 24.57 58.57 Ana 24.50 57.70
+WALK 12 27 61 1793785417920
+AUDIO Sfx step_stone
+WALKAT 1793785418178 12 1 27.41 61.41 1.24 Cy 27.41 61.41 Bo 26.53 60.53 Dee 25.84 59.84 Ana 25.20 59.20
+WALKAT 1793785418429 12 1 27.50 61.50 0.90 Cy 27.50 61.50 Bo 26.86 60.86 Dee 26.23 60.23 Ana 25.59 59.59
+WALK 13 27 62 1793785418535
+AUDIO Sfx step_stone
+WALK 14 27 63 1793785418702
+WALKAT 1793785418776 14 0 27.50 62.98 1.51 Cy 27.50 62.98 Bo 27.47 61.47 Dee 26.84 60.84 Ana 26.20 60.20
+AUDIO Sfx step_stone
+WALKAT 1793785419123 14 0 27.50 63.50 1.85 Cy 27.50 63.50 Bo 27.32 61.66 Dee 26.93 61.09 Ana 26.41 60.40
+WALKSTATS frames 14 ms median 169.06 p99 333.33 worst 333.33 over16 14; screen px a frame: raw median 13.4 worst 70.3 flips 2+4; drawn median 12.2 worst 70.3 flips 2+2; ground median 34.4 worst 78.2 flips 2+0
+WALKAT 1793785419480 14 0 27.50 63.50 1.52 Cy 27.50 63.50 Bo 27.00 62.06 Dee 27.12 61.64 Ana 26.87 60.82
+WALKAT 1793785419903 14 0 27.50 63.50 1.31 Cy 27.50 63.50 Bo 26.64 62.51 Dee 27.34 62.25 Ana 27.38 61.30
+WALKAT 1793785420288 14 0 27.50 63.50 1.30 Cy 27.50 63.50 Bo 26.59 62.57 Dee 27.37 62.33 Ana 27.45 61.36
+WALKAT 1793785420679 14 0 27.50 63.50 1.30 Cy 27.50 63.50 Bo 26.57 62.59 Dee 27.38 62.35 Ana 27.47 61.38
+WALK 15 28 62 1793785421119
+WALKAT 1793785421247 15 1 27.88 63.12 1.10 Cy 27.88 63.12 Bo 26.92 62.58 Dee 27.43 62.16 Ana 27.32 61.26
+AUDIO Sfx step_stone
+WALKAT 1793785421506 15 0 28.50 62.50 1.58 Cy 28.50 62.50 Bo 26.92 62.58 Dee 27.43 62.16 Ana 27.32 61.26
+WALKSTATS frames 2 ms median 258.58 p99 258.58 worst 258.58 over16 2; screen px a frame: raw median 10.0 worst 10.0 flips 0+0; drawn median 11.2 worst 11.2 flips 0+0; ground median 69.0 worst 69.0 flips 0+0
+WALKAT 1793785421948 15 0 28.50 62.50 1.19 Cy 28.50 62.50 Bo 27.32 62.59 Dee 28.01 62.89 Ana 27.41 62.55
+WALK 16 27 63 1793785422026
+AUDIO Sfx step_stone
+WALKAT 1793785422273 16 0 27.57 63.43 0.77 Cy 27.57 63.43 Bo 27.86 63.12 Dee 27.63 62.89 Ana 27.48 62.13
+WALKAT 1793785422646 16 0 27.50 63.50 0.67 Cy 27.50 63.50 Bo 28.00 63.22 Dee 27.78 62.78 Ana 27.48 62.18
+WALKSTATS frames 3 ms median 180.86 p99 197.02 worst 197.02 over16 3; screen px a frame: raw median 26.0 worst 26.0 flips 1+0; drawn median 27.0 worst 27.0 flips 1+0; ground median 53.0 worst 53.0 flips 0+0
+WALKAT 1793785422907 16 0 27.50 63.50 0.74 Cy 27.50 63.50 Bo 28.20 63.35 Dee 27.99 62.63 Ana 27.48 62.25
+WALK 17 28 62 1793785422985
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785423230 17 0 28.50 62.50 0.95 Cy 28.50 62.50 Bo 28.05 63.21 Dee 28.10 62.72 Ana 27.50 63.47
+WALKSTATS frames 2 ms median 247.62 p99 247.62 worst 247.62 over16 2; screen px a frame: raw median 12.0 worst 12.0 flips 0+0; drawn median 13.0 worst 13.0 flips 0+0; ground median 47.0 worst 47.0 flips 0+0
+WALKAT 1793785423517 17 0 28.50 62.50 0.91 Cy 28.50 62.50 Bo 28.26 63.36 Dee 27.81 62.58 Ana 27.49 63.43
+WALKAT 1793785423804 17 0 28.50 62.50 1.33 Cy 28.50 62.50 Bo 28.43 63.49 Dee 27.58 62.46 Ana 27.48 63.41
+WALK 18 27 63 1793785423884
+AUDIO Sfx step_stone
+WALKAT 1793785424105 18 0 27.76 63.24 0.59 Cy 27.76 63.24 Bo 28.10 63.22 Dee 27.87 62.79 Ana 28.40 62.55
+WALKAT 1793785424436 18 0 27.50 63.50 0.71 Cy 27.50 63.50 Bo 28.18 63.28 Dee 27.79 62.72 Ana 28.42 62.53
+WALKSTATS frames 3 ms median 173.34 p99 175.29 worst 175.29 over16 3; screen px a frame: raw median 14.0 worst 14.0 flips 1+0; drawn median 14.0 worst 14.0 flips 1+0; ground median 45.0 worst 45.0 flips 0+0
+WALKAT 1793785424768 18 0 27.50 63.50 1.28 Cy 27.50 63.50 Bo 28.41 63.46 Dee 27.55 62.51 Ana 28.45 62.44
+WALK 19 28 62 1793785424835
+AUDIO Sfx step_stone
+WALKAT 1793785425180 19 0 28.34 62.66 0.54 Cy 28.34 62.66 Bo 28.12 63.15 Dee 27.86 62.82 Ana 27.73 63.23
+WALKAT 1793785425537 19 0 28.50 62.50 0.80 Cy 28.50 62.50 Bo 28.22 63.24 Dee 27.76 62.72 Ana 27.68 63.27
+WALKSTATS frames 3 ms median 194.79 p99 218.52 worst 218.52 over16 3; screen px a frame: raw median 23.0 worst 23.0 flips 1+0; drawn median 23.1 worst 23.1 flips 1+0; ground median 53.0 worst 53.0 flips 0+0
+WALK 20 27 63 1793785425813
+AUDIO Sfx step_stone
+WALKAT 1793785425951 20 1 28.13 62.87 0.78 Cy 28.13 62.87 Bo 28.25 63.27 Dee 27.73 62.69 Ana 28.02 62.92
+WALKAT 1793785426363 20 0 27.50 63.50 0.72 Cy 27.50 63.50 Bo 28.10 63.11 Dee 27.91 62.86 Ana 28.14 62.83
+WALKAT 1793785426665 20 0 27.50 63.50 0.78 Cy 27.50 63.50 Bo 28.24 63.26 Dee 27.75 62.71 Ana 28.24 62.70
+WALKSTATS frames 3 ms median 194.44 p99 199.70 worst 199.70 over16 3; screen px a frame: raw median 30.0 worst 30.0 flips 1+0; drawn median 30.0 worst 30.0 flips 1+0; ground median 58.0 worst 58.0 flips 0+0
+WALK 21 28 62 1793785426753
+AUDIO Sfx step_stone
+WALKAT 1793785427010 21 1 28.17 62.83 0.33 Cy 28.17 62.83 Bo 28.12 63.13 Dee 27.91 62.88 Ana 27.90 63.07
+AUDIO Sfx step_stone
+WALKAT 1793785427385 21 0 28.50 62.50 0.74 Cy 28.50 62.50 Bo 28.12 63.13 Dee 27.91 62.88 Ana 27.90 63.07
+WALKAT 1793785427676 21 0 28.50 62.50 1.16 Cy 28.50 62.50 Bo 28.39 63.41 Dee 27.59 62.57 Ana 27.65 63.26
+WALKSTATS frames 2 ms median 322.12 p99 322.12 worst 322.12 over16 2; screen px a frame: raw median 15.0 worst 15.0 flips 0+0; drawn median 15.5 worst 15.5 flips 0+0; ground median 57.0 worst 57.0 flips 0+0
+WALK 22 27 63 1793785427773
+WALKAT 1793785427928 22 1 27.96 63.04 0.62 Cy 27.96 63.04 Bo 28.21 63.22 Dee 27.79 62.76 Ana 27.73 63.21
+AUDIO Sfx step_stone
+WALKAT 1793785428307 22 0 27.50 63.50 0.85 Cy 27.50 63.50 Bo 28.28 63.30 Dee 27.70 62.68 Ana 27.89 63.04
+WALKSTATS frames 2 ms median 250.68 p99 250.68 worst 250.68 over16 2; screen px a frame: raw median 2.0 worst 2.0 flips 0+0; drawn median 5.8 worst 5.8 flips 0+0; ground median 56.0 worst 56.0 flips 0+0
+WALKAT 1793785428637 22 0 27.50 63.50 1.41 Cy 27.50 63.50 Bo 28.47 63.49 Dee 27.49 62.47 Ana 28.27 62.61
+WALK 23 28 62 1793785428725
+AUDIO Sfx step_stone
+WALKAT 1793785429024 23 0 28.26 62.74 0.52 Cy 28.26 62.74 Bo 28.17 63.18 Dee 27.82 62.80 Ana 27.80 63.16
+WALKAT 1793785429517 23 0 28.50 62.50 0.87 Cy 28.50 62.50 Bo 28.29 63.30 Dee 27.69 62.67 Ana 27.71 63.22
+WALKSTATS frames 3 ms median 166.37 p99 222.48 worst 222.48 over16 3; screen px a frame: raw median 17.0 worst 17.0 flips 1+0; drawn median 17.3 worst 17.3 flips 1+0; ground median 48.0 worst 48.0 flips 0+0
+WALK 24 27 63 1793785429619
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785430008 24 0 27.50 63.50 0.73 Cy 27.50 63.50 Bo 28.15 63.16 Dee 27.85 62.82 Ana 28.28 62.69
+WALKSTATS frames 2 ms median 275.73 p99 275.73 worst 275.73 over16 2; screen px a frame: raw median 4.0 worst 4.0 flips 0+0; drawn median 5.7 worst 5.7 flips 0+0; ground median 53.0 worst 53.0 flips 0+0
+WALKAT 1793785430400 24 0 27.50 63.50 1.15 Cy 27.50 63.50 Bo 28.38 63.40 Dee 27.59 62.56 Ana 28.39 62.52
+WALK 25 28 62 1793785430718
+WALKAT 1793785430847 25 1 28.05 62.95 0.69 Cy 28.05 62.95 Bo 28.21 63.24 Dee 27.75 62.73 Ana 28.36 62.58
+AUDIO Sfx step_stone
+WALKAT 1793785431255 25 0 28.50 62.50 0.95 Cy 28.50 62.50 Bo 28.30 63.33 Dee 27.66 62.63 Ana 28.14 62.78
+WALKSTATS frames 2 ms median 253.14 p99 253.14 worst 253.14 over16 2; screen px a frame: raw median 3.0 worst 3.0 flips 0+0; drawn median 6.4 worst 6.4 flips 0+0; ground median 54.0 worst 54.0 flips 0+0
+WALKAT 1793785431587 25 0 28.50 62.50 1.43 Cy 28.50 62.50 Bo 28.47 63.50 Dee 27.49 62.46 Ana 27.72 63.16
+WALK 26 27 63 1793785431663
+AUDIO Sfx step_stone
+WALKAT 1793785431989 26 0 27.50 63.50 0.99 Cy 27.50 63.50 Bo 28.32 63.35 Dee 27.65 62.62 Ana 28.06 62.87
+WALKSTATS frames 2 ms median 227.15 p99 227.15 worst 227.15 over16 2; screen px a frame: raw median 18.0 worst 18.0 flips 0+0; drawn median 18.4 worst 18.4 flips 0+0; ground median 66.0 worst 66.0 flips 0+0
+WALKAT 1793785432330 26 0 27.50 63.50 1.30 Cy 27.50 63.50 Bo 28.43 63.45 Dee 27.53 62.51 Ana 28.24 62.66
+WALK 27 28 62 1793785432685
+AUDIO Sfx step_stone
+WALKAT 1793785432770 27 1 28.02 62.98 0.75 Cy 28.02 62.98 Bo 28.24 63.26 Dee 27.73 62.70 Ana 27.76 63.18
+WALKAT 1793785433111 27 0 28.50 62.50 0.94 Cy 28.50 62.50 Bo 28.30 63.33 Dee 27.66 62.64 Ana 27.70 63.22
+WALKSTATS frames 2 ms median 243.34 p99 243.34 worst 243.34 over16 2; screen px a frame: raw median 12.0 worst 12.0 flips 0+0; drawn median 13.0 worst 13.0 flips 0+0; ground median 49.0 worst 49.0 flips 0+0
+WALKAT 1793785433448 27 0 28.50 62.50 1.40 Cy 28.50 62.50 Bo 28.46 63.49 Dee 27.50 62.47 Ana 27.57 63.32
+WALK 28 27 63 1793785433648
+AUDIO Sfx step_stone
+WALKAT 1793785433722 28 1 28.23 62.77 1.16 Cy 28.23 62.77 Bo 28.38 63.41 Dee 27.59 62.56 Ana 27.60 63.31
+AUDIO Sfx step_stone
+WALKAT 1793785434099 28 0 27.50 63.50 0.74 Cy 27.50 63.50 Bo 28.18 63.21 Dee 27.80 62.77 Ana 28.16 62.80
+WALKAT 1793785434359 28 0 27.50 63.50 0.81 Cy 27.50 63.50 Bo 28.26 63.29 Dee 27.72 62.69 Ana 28.22 62.71
+WALKSTATS frames 3 ms median 167.05 p99 192.26 worst 192.26 over16 3; screen px a frame: raw median 17.0 worst 17.0 flips 1+0; drawn median 17.0 worst 17.0 flips 1+0; ground median 46.0 worst 46.0 flips 0+0
+WALK 29 28 62 1793785434677
+WALKAT 1793785434803 29 1 27.96 63.04 0.75 Cy 27.96 63.04 Bo 28.24 63.27 Dee 27.74 62.71 Ana 27.77 63.17
+AUDIO Sfx step_stone
+WALKAT 1793785435365 29 0 28.50 62.50 1.05 Cy 28.50 62.50 Bo 28.34 63.37 Dee 27.63 62.60 Ana 27.68 63.24
+WALKSTATS frames 2 ms median 219.40 p99 219.40 worst 219.40 over16 2; screen px a frame: raw median 12.0 worst 12.0 flips 0+0; drawn median 13.0 worst 13.0 flips 0+0; ground median 57.0 worst 57.0 flips 0+0
+WALK 30 27 63 1793785435792
+AUDIO Sfx step_stone
+WALKAT 1793785436008 30 1 27.70 63.30 0.49 Cy 27.70 63.30 Bo 28.15 63.18 Dee 27.83 62.81 Ana 28.16 62.80
+WALKAT 1793785436372 30 0 27.50 63.50 0.73 Cy 27.50 63.50 Bo 28.15 63.18 Dee 27.83 62.81 Ana 28.16 62.80
+WALKSTATS frames 2 ms median 337.08 p99 337.08 worst 337.08 over16 2; screen px a frame: raw median 23.0 worst 23.0 flips 0+0; drawn median 23.2 worst 23.2 flips 0+0; ground median 49.0 worst 49.0 flips 0+0
+WALKAT 1793785436771 30 0 27.50 63.50 1.33 Cy 27.50 63.50 Bo 28.44 63.46 Dee 27.53 62.50 Ana 28.38 62.52
+WALK 31 28 62 1793785436867
+AUDIO Sfx step_stone
+WALKAT 1793785437040 31 1 27.97 63.03 0.77 Cy 27.97 63.03 Bo 28.25 63.27 Dee 27.73 62.70 Ana 28.30 62.64
+WALKAT 1793785437442 31 0 28.50 62.50 0.81 Cy 28.50 62.50 Bo 28.25 63.27 Dee 27.73 62.70 Ana 28.30 62.64
+WALKSTATS frames 2 ms median 302.88 p99 302.88 worst 302.88 over16 2; screen px a frame: raw median 0.0 worst 0.0 flips 0+0; drawn median 5.0 worst 5.0 flips 0+0; ground median 68.0 worst 68.0 flips 0+0
+WALKAT 1793785437807 31 0 28.50 62.50 1.44 Cy 28.50 62.50 Bo 28.48 63.50 Dee 27.48 62.46 Ana 27.72 63.17
+WALK 32 27 63 1793785437877
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785438307 32 0 27.50 63.50 1.07 Cy 27.50 63.50 Bo 28.35 63.38 Dee 27.62 62.60 Ana 27.48 63.44
+WALKSTATS frames 2 ms median 242.47 p99 242.47 worst 242.47 over16 2; screen px a frame: raw median 20.0 worst 20.0 flips 0+0; drawn median 20.4 worst 20.4 flips 0+0; ground median 70.0 worst 70.0 flips 0+0
+WALKAT 1793785438727 32 0 27.50 63.50 1.47 Cy 27.50 63.50 Bo 28.49 63.51 Dee 27.47 62.45 Ana 28.11 62.78
+WALK 33 28 62 1793785438955
+WALKAT 1793785439079 33 1 27.83 63.17 1.09 Cy 27.83 63.17 Bo 28.36 63.38 Dee 27.61 62.59 Ana 28.33 62.59
+AUDIO Sfx step_stone
+WALKAT 1793785439410 33 0 28.38 62.62 0.60 Cy 28.38 62.62 Bo 28.14 63.17 Dee 27.84 62.82 Ana 27.67 63.29
+WALKAT 1793785439695 33 0 28.50 62.50 0.76 Cy 28.50 62.50 Bo 28.14 63.17 Dee 27.84 62.82 Ana 27.67 63.29
+WALKSTATS frames 3 ms median 192.20 p99 367.28 worst 367.28 over16 3; screen px a frame: raw median 34.0 worst 34.0 flips 1+0; drawn median 34.1 worst 34.1 flips 1+0; ground median 54.0 worst 54.0 flips 0+0
+WALK 34 27 63 1793785439979
+WALKAT 1793785440051 34 1 28.16 62.84 0.73 Cy 28.16 62.84 Bo 28.23 63.26 Dee 27.75 62.72 Ana 27.97 62.98
+AUDIO Sfx step_stone
+WALKAT 1793785440327 34 0 27.65 63.35 0.55 Cy 27.65 63.35 Bo 28.10 63.13 Dee 27.89 62.86 Ana 28.38 62.60
+WALKAT 1793785440593 34 0 27.50 63.50 0.71 Cy 27.50 63.50 Bo 28.10 63.13 Dee 27.89 62.86 Ana 28.38 62.60
+WALKAT 1793785440918 34 0 27.50 63.50 0.89 Cy 27.50 63.50 Bo 28.29 63.32 Dee 27.69 62.66 Ana 28.42 62.51
+WALKSTATS frames 3 ms median 178.08 p99 242.38 worst 242.38 over16 3; screen px a frame: raw median 26.0 worst 26.0 flips 1+0; drawn median 25.1 worst 25.1 flips 1+0; ground median 49.0 worst 49.0 flips 0+0
+WALK 35 28 62 1793785441024
+AUDIO Sfx step_stone
+WALKAT 1793785441212 35 1 28.24 62.76 0.40 Cy 28.24 62.76 Bo 28.12 63.14 Dee 27.87 62.84 Ana 27.75 63.22
+WALK 36 29 62 1793785441323
+AUDIO Sfx step_stone
+WALKAT 1793785441525 36 1 29.50 62.50 1.49 Cy 29.50 62.50 Bo 28.09 62.97 Dee 27.98 62.96 Ana 28.21 62.78
+WALKSTATS frames 2 ms median 316.21 p99 316.21 worst 316.21 over16 2; screen px a frame: raw median 23.7 worst 23.7 flips 0+0; drawn median 25.8 worst 25.8 flips 0+0; ground median 120.8 worst 120.8 flips 0+0
+WALK 37 30 61 1793785441814
+AUDIO Sfx step_stone
+WALKAT 1793785441989 37 1 29.95 62.05 1.75 Cy 29.95 62.05 Bo 28.33 62.68 Dee 27.57 63.42 Ana 27.66 63.34
+WALK 38 31 61 1793785442054
+AUDIO Sfx step_stone
+AUDIO Sfx step_stone
+WALKAT 1793785442294 38 1 31.50 61.50 3.72 Cy 31.50 61.50 Bo 28.07 62.93 Dee 28.03 62.97 Ana 29.12 62.50
+WALK 39 32 61 1793785442364
+AUDIO Sfx step_stone
+WALKAT 1793785442641 39 0 32.50 61.50 4.27 Cy 32.50 61.50 Bo 28.38 62.62 Dee 27.52 63.48 Ana 29.69 62.31
+WALKSTATS frames 5 ms median 168.46 p99 240.30 worst 240.30 over16 5; screen px a frame: raw median 12.4 worst 25.3 flips 1+1; drawn median 12.0 worst 26.9 flips 1+1; ground median 61.4 worst 100.8 flips 0+0
+WALKAT 1793785443002 39 0 32.50 61.50 2.82 Cy 32.50 61.50 Bo 29.70 61.78 Dee 28.78 62.55 Ana 30.63 62.35
+WALKAT 1793785443311 39 0 32.50 61.50 1.87 Cy 32.50 61.50 Bo 30.66 61.17 Dee 29.66 61.89 Ana 31.15 62.37
+WALKAT 1793785443626 39 0 32.50 61.50 1.49 Cy 32.50 61.50 Bo 31.25 60.80 Dee 30.14 61.54 Ana 31.37 62.38
+WALKAT 1793785443971 39 0 32.50 61.50 1.49 Cy 32.50 61.50 Bo 31.47 60.66 Dee 30.31 61.41 Ana 31.45 62.38
+WALKAT 1793785444514 39 0 32.50 61.50 1.50 Cy 32.50 61.50 Bo 31.55 60.60 Dee 30.37 61.37 Ana 31.47 62.38
+WALKAT 1793785445045 39 0 32.50 61.50 1.50 Cy 32.50 61.50 Bo 31.57 60.59 Dee 30.38 61.36 Ana 31.48 62.38
+WALKAT 1793785450595 39 0 32.17 61.18 1.73 Bo 32.17 61.18 Cy 31.19 61.50 Dee 31.03 60.71 Ana 31.48 62.38
+WALKAT 1793785450944 39 0 32.39 61.39 1.92 Bo 32.39 61.39 Cy 30.72 61.50 Dee 31.26 60.48 Ana 31.48 62.38
+WALKAT 1793785451327 39 0 32.47 61.47 2.00 Bo 32.47 61.47 Cy 30.54 61.50 Dee 31.35 60.39 Ana 31.48 62.38
+WALKAT 1793785451683 39 0 32.49 61.49 2.02 Bo 32.49 61.49 Cy 30.49 61.50 Dee 31.38 60.37 Ana 31.48 62.38
+WALKAT 1793785452098 39 0 32.50 61.50 2.02 Bo 32.50 61.50 Cy 30.48 61.50 Dee 31.38 60.36 Ana 31.48 62.38
+WORLD closed
+TACTICS left: narrator cleared
+RESULTS The party is level 1; 0 battles won.
+HOST view patches applied 62, whole views asked for again 0
+LOBBY GMPP

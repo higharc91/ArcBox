@@ -184,7 +184,7 @@ def frame(t: int) -> Image.Image:
 def build() -> None:
     frames = [frame(t) for t in range(TICKS)]
     pal = [f.convert("RGB").quantize(colors=255, method=Image.Quantize.MEDIANCUT) for f in frames]
-    pal[0].save(PREVIEWS / "anim-battle.gif", save_all=True, append_images=pal[1:], duration=95, loop=0,
+    save(pal[0], PREVIEWS / "anim-battle.gif", save_all=True, append_images=pal[1:], duration=95, loop=0,
                 optimize=True)
     keys = [(4, "Your turn"), (15, "Kara's swing"), (30, "Fireball"), (36, "Explosion"), (52, "Critical arrow"),
             (66, "Victory")]

@@ -59,7 +59,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
-| `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
+| `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in (four distinct heroes with `--perf`) the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
 | `--world-demo=things` | Dev only: the art check for things to interact with (`ThingsDemo` in Tactics.Presentation), without a server: a generated courtyard with every kind in every state the art brief draws, on four labelled gallery screens (each label is the art key, without `interactables.`, and where its picture came from: `art`, `stand-in: <key>` or `marker`), then a chest opened, a hidden cache found, traps seen, set off and disarmed, a lever working a gate both ways, a locked door unlocked and opened, a secret door found and opened, a key picked up, a note read and a shrine used; then the hidden things (design §7): tracks noticed that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found, and a Search with its hidden DC finding a loose flagstone. Use `--res=1920x1080`; with `--shots` it saves a `things-*` shot of each moment, then quits. See [things to interact with](#things-to-interact-with). |
 | `--world-looks=<name>@<x>,<y>[@<x>,<y>];…` | Dev only: with `--world-demo` and `--shots`, go to these places instead of walking, and save `world-<name>.png` of each, with the figure on the second tile if there is one. It's how `place-*.png` were taken. |
 | `--world-route=<x>,<y>;…` | Dev only: with `--world-demo`, time a walk along these corners in place of the demo's own: a walk through a town, say. |
@@ -372,6 +372,15 @@ In Exploration the TV shows the world instead of the header and table, and the s
 
 **The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
 
+### Separate art review packs
+
+For dev-only `--world-demo` runs, set `ARCBOX_TACTICS_ART_ROOT` to an absolute
+review-pack directory to render proposed art through the normal TV pipeline
+without replacing production content. This applies to ordinary region walks and
+the scripted NPC/camp/shop/cave demos. The older `ARCBOX_CINDER_ART_ROOT` still
+works for Cinder Hollow when the general override is absent. Neither variable
+changes the pack downloaded for a live room.
+
 ## Fights in the world
 
 A battle on a stamped map (overworld 5c) is drawn where it stands. `StageDirector` (Tactics.Presentation) has every host view and says
@@ -584,6 +593,21 @@ The cave uses dark ambient light, small warm mining candles, the existing eerie 
 Screenshot directories passed with `--shots=<dir>` must be absolute paths. Relative paths are rejected with an explanatory startup warning to prevent output beneath the Godot project directory.
 
 Chapter automation (`ARCBOX_CHAPTER=1`) defaults to Story difficulty and battle seed 76. Override difficulty with `ARCBOX_DIFFICULTY=Normal` or `Hard`; balance testing remains the simulator’s responsibility. Non-chapter runs retain Normal difficulty and fresh seeds. These overrides are Development-only server settings.
+
+
+### Four-party texture-memory gate (OW-05)
+
+For region demos, `--world-demo=ashen_ford --perf` and `--world-demo=cinder_hollow --perf` run the same budgeted world renderer with four distinct human heroes, walk the region, replace them with four elf heroes, then restore them. The limit is **512 MiB = 536,870,912 bytes**. Each completed stage prints a `WORLD texture-budget` record with the current and peak byte counts. An over-limit completed run exits unsuccessfully. Validate the log as well: a forced/early exit without every stage is not a pass.
+
+```bash
+"$GODOT" --path src/ArcBox.Host --audio-driver Dummy --position 160,100 -- \
+  --world-demo=ashen_ford --perf --res=1920x1080 --quit-after=150 > ashen-memory.log 2>&1
+node tools/tactics-playtest/world-memory.cjs ashen-memory.log
+```
+
+Repeat with `cinder_hollow`. Without `--perf`, Cinder Hollow retains its scripted bounty/creature/battle art tour. With `--perf`, it selects the whole-region memory benchmark. These checks use shipped art; `ARCBOX_TACTICS_ART_ROOT` may still select a separate review pack. Do not change linked production files in such a pack.
+
+The verifier requires all four stages, four members, valid byte counts, the fixed limit, eight real hero uploads and their releases. Native resources may retire a frame later, so the peak includes roster-swap overlap. Frame uploads retain the existing 8 ms budget and always allow one image; a single image decode can itself take longer. No upload is performed in the world's unit draw callback. Screenshots are unnecessary for this memory gate and must stay off when timing frames. Linux software-rendering commands and measurements are in the townsfolk loading report; they are not a GPU benchmark.
 
 ### Visible roaming groups (#79)
 

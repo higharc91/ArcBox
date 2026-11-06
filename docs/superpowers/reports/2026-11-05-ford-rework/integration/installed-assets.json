@@ -1,0 +1,1140 @@
+{
+  "pieces": [
+    {
+      "id": "warden_fortified_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_2_9.png",
+      "sha256": "73192f61d2a733b5efe463e50b6c1fd538e6fc4ae8223b365a15c3aa7b2e23d3"
+    },
+    {
+      "id": "warden_fortified_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_2_10.png",
+      "sha256": "c7b8c94d96270373d3d3ef9a6f464e233e046be61396e4d495d105e76a88111c"
+    },
+    {
+      "id": "warden_fortified_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_3_9.png",
+      "sha256": "5a99c916eb06423189b0a64bbd17889eae26c70d0fd999a9b367047238913d89"
+    },
+    {
+      "id": "warden_fortified_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_3_10.png",
+      "sha256": "d0cdc2f7a0800c49e416210523432d125ad39dadb2ad0994276491da37e428d3"
+    },
+    {
+      "id": "warden_fortified_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_3_11.png",
+      "sha256": "f1a95e27e701abcdfb1c3122a0405b7b259df59f8fd66cc0020c30a781c7a983"
+    },
+    {
+      "id": "warden_fortified_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_4_9.png",
+      "sha256": "34ca440375c8f9c923a218832d8b7b59e7738ffd06168e9ac9105dfa1037dd03"
+    },
+    {
+      "id": "warden_fortified_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_4_10.png",
+      "sha256": "85a98c442e7dd5fb270a613f0f268b9843b102c4cb6091872881238713a70c10"
+    },
+    {
+      "id": "warden_fortified_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_4_11.png",
+      "sha256": "8d289ae6d835a816868fd5cd70d9da319b0cf68a8f9dd2b7a0ab5b9efa0a3001"
+    },
+    {
+      "id": "warden_fortified_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_5_8.png",
+      "sha256": "bd893f918acbe581a48ea544f1dd0cdb246597e4075d025a04b463503ac69fb1"
+    },
+    {
+      "id": "warden_fortified_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_5_9.png",
+      "sha256": "0773a53c986dd36070007c3387aab6478d65b993951d326eb6148c49905d161d"
+    },
+    {
+      "id": "warden_fortified_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_5_10.png",
+      "sha256": "9376e5763ab2397f7f6cf43f67f78fb770be5bb8d15bfd1ba0e0e5776752db43"
+    },
+    {
+      "id": "warden_fortified_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_5_11.png",
+      "sha256": "26f62e90de2d84eae055e1fe0e01d896ffd7252a845616fc112ec13a4fca660b"
+    },
+    {
+      "id": "warden_fortified_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_6_8.png",
+      "sha256": "485bcbff1751c56dfc734bd9672745c7ee01b9f33b027c8e6dbb6411fb75e490"
+    },
+    {
+      "id": "warden_fortified_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_6_9.png",
+      "sha256": "2a05477305f74da5529ea2756b050f66d17c45a981f13d122757531fa6dc18af"
+    },
+    {
+      "id": "warden_fortified_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_6_10.png",
+      "sha256": "fa2affd3cfa1db01e1029904b528ad8a711386ac989304675242f7e2d46d36ef"
+    },
+    {
+      "id": "warden_fortified_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_6_11.png",
+      "sha256": "0893ddcc607c8f4aac7cb48d76547385e06ee47b8252aec6d643c70f5be9f9a0"
+    },
+    {
+      "id": "warden_fortified_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_7_8.png",
+      "sha256": "beeaf96ca4b5a7c3251b4616d7be31982f0e3cd09c855522a7884d7646c853bf"
+    },
+    {
+      "id": "warden_fortified_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_7_9.png",
+      "sha256": "f37ffa83149b2595bdb0804c71d67eb9ba747fee0b1548be4bfdde32c0f804e6"
+    },
+    {
+      "id": "warden_fortified_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_7_10.png",
+      "sha256": "7ef4f40682410f34c5b0c83d70e7028d264eb23cd2bf166bc565b79077607abd"
+    },
+    {
+      "id": "warden_fortified_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_7_11.png",
+      "sha256": "bced0b1fac8bbb05826abb9f89ab2ad7b6c4c35e1f8c7e3db3ad8e756eefd65d"
+    },
+    {
+      "id": "warden_fortified_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_8_8.png",
+      "sha256": "2a8c39555bcbf8dd78e727fd2d4308a54e2423218b510df28390cbcf440526f9"
+    },
+    {
+      "id": "warden_fortified_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_8_9.png",
+      "sha256": "402f7ae64e8759172662e70a37b5e0d9ba30af34f10bec86e77573ed0e1d5f3a"
+    },
+    {
+      "id": "warden_fortified_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_8_10.png",
+      "sha256": "aeba32fa94d551b68284df64814d039642b4adf3ef2a28d17536b57f2ec56349"
+    },
+    {
+      "id": "warden_fortified_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_8_11.png",
+      "sha256": "52d7bd8c55507dcfe8ee4a49ebf6fded9b134871a03eb64fb2706cacf0099f31"
+    },
+    {
+      "id": "warden_fortified_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_6.png",
+      "sha256": "2bf0c8a56c5e0b288dadaf8f09f23ebbfb3f46fdd66e60a891f89913f6ecd1ab"
+    },
+    {
+      "id": "warden_fortified_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_7.png",
+      "sha256": "ceb7d8b0db003898dd5b2143c362e341eab7b0ca7c5285811a069525ab2a911e"
+    },
+    {
+      "id": "warden_fortified_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_8.png",
+      "sha256": "31f44e5594f9cf293fdf952566b1c4bb9799ee45ee4f6e8a0d4369a688df8700"
+    },
+    {
+      "id": "warden_fortified_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_9.png",
+      "sha256": "5ac6a7ad8b56388468ed9bb6a43fd94eb15d91eddfa355804c832748180ea8e6"
+    },
+    {
+      "id": "warden_fortified_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_10.png",
+      "sha256": "021af9e087bd0eddd325d178ce365cd7aeecaf7df5c512b698024aeddfa2dbf4"
+    },
+    {
+      "id": "warden_fortified_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_9_11.png",
+      "sha256": "e7f6f6e6bb256a8396d145ca524e8410748722c85a09a926cbd6069212d65559"
+    },
+    {
+      "id": "warden_fortified_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_10_6.png",
+      "sha256": "6b04898f7bee83dd104147f74ae7c0d294f6d36b7b71bf3a84957e0fe7b21bd2"
+    },
+    {
+      "id": "warden_fortified_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_10_7.png",
+      "sha256": "b5f90a6097a083e77349beea48587e00dd637fc2bc7e849aa1f1a7ce347ba235"
+    },
+    {
+      "id": "warden_fortified_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_10_8.png",
+      "sha256": "81e2f7466eb048b79a71f1a9f14616cc6e68058d9e3e501e2bc2653d48c01a36"
+    },
+    {
+      "id": "warden_fortified_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_10_9.png",
+      "sha256": "51caeafe10a18e50175c1de4ca312ca2d669c6b67de86a3d9fa9deeac0664dc1"
+    },
+    {
+      "id": "warden_fortified_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_10_10.png",
+      "sha256": "5527ef5959897d7312df5ddb8796d07cef4798a3e78ca1e7a6af83563d7c2cde"
+    },
+    {
+      "id": "warden_fortified_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_11_6.png",
+      "sha256": "6951677e71c28907a85556081664f690356224f1bfc6ccd56fb68d98b13177da"
+    },
+    {
+      "id": "warden_fortified_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "state": "fortified",
+      "image": "ford/warden_fortified_11_7.png",
+      "sha256": "cff418d16ee16596dda88b71fb9a8b24b094769286902459e5e6751fa168013f"
+    },
+    {
+      "id": "warden_force_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_2_9.png",
+      "sha256": "73192f61d2a733b5efe463e50b6c1fd538e6fc4ae8223b365a15c3aa7b2e23d3"
+    },
+    {
+      "id": "warden_force_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_2_10.png",
+      "sha256": "c7b8c94d96270373d3d3ef9a6f464e233e046be61396e4d495d105e76a88111c"
+    },
+    {
+      "id": "warden_force_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_3_9.png",
+      "sha256": "5a99c916eb06423189b0a64bbd17889eae26c70d0fd999a9b367047238913d89"
+    },
+    {
+      "id": "warden_force_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_3_10.png",
+      "sha256": "d0cdc2f7a0800c49e416210523432d125ad39dadb2ad0994276491da37e428d3"
+    },
+    {
+      "id": "warden_force_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_3_11.png",
+      "sha256": "f1a95e27e701abcdfb1c3122a0405b7b259df59f8fd66cc0020c30a781c7a983"
+    },
+    {
+      "id": "warden_force_4_7",
+      "at": [
+        4,
+        7
+      ],
+      "state": "force",
+      "image": "ford/warden_force_4_7.png",
+      "sha256": "049f3ad4929250141ebebe471a65d853ee74c829b1223c131d522f92d85ce06b"
+    },
+    {
+      "id": "warden_force_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_4_9.png",
+      "sha256": "82d76e9b4c28ff50b021101625d367ae4d1d778867032fbe2d22e60b34c6854e"
+    },
+    {
+      "id": "warden_force_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_4_10.png",
+      "sha256": "bc41b800eda521a6b7a0770c942aac862ca3e297fe288f91b86f76cc66c84bfd"
+    },
+    {
+      "id": "warden_force_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_4_11.png",
+      "sha256": "8d289ae6d835a816868fd5cd70d9da319b0cf68a8f9dd2b7a0ab5b9efa0a3001"
+    },
+    {
+      "id": "warden_force_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_5_8.png",
+      "sha256": "072d0754611e5a91d2a561ef567c5a4d65a8443f73913f31efdb7b6931012b36"
+    },
+    {
+      "id": "warden_force_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_5_9.png",
+      "sha256": "33675f2757b38240697c6b6debe93c57895a7ef2e017593b35ed26a0017eff07"
+    },
+    {
+      "id": "warden_force_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_5_10.png",
+      "sha256": "9d875e1805c290515192d40aa4b6dcdc3b1eb71329b950f814dae467aeb3dfc4"
+    },
+    {
+      "id": "warden_force_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_5_11.png",
+      "sha256": "26f62e90de2d84eae055e1fe0e01d896ffd7252a845616fc112ec13a4fca660b"
+    },
+    {
+      "id": "warden_force_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_6_8.png",
+      "sha256": "12a40265cd885aff8aa9edd994c13d8048047828e8503793857db9b9cc08293b"
+    },
+    {
+      "id": "warden_force_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_6_9.png",
+      "sha256": "c82ce1e22b6e3d9463f044c507b35805db47ad1eb43d7d90f31cdf3992f924e8"
+    },
+    {
+      "id": "warden_force_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_6_10.png",
+      "sha256": "e8c3b34cb17e835d0458e645e4d61ecd10c609d00ebeec6d6b826987c1990dc1"
+    },
+    {
+      "id": "warden_force_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_6_11.png",
+      "sha256": "1739e6448e4643154a7ee306baf19a9b5b584acb5bd2eba4a2f3213fbd8d594c"
+    },
+    {
+      "id": "warden_force_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_7_8.png",
+      "sha256": "d7e8e91a78ca8125b24ac5dc4bd72814f755c628d9d253616be8965cde84f930"
+    },
+    {
+      "id": "warden_force_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_7_9.png",
+      "sha256": "bbb9bfdd361d1964e9dbe2d2b258460ebe091b03717e557ec74dabf06736bea8"
+    },
+    {
+      "id": "warden_force_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_7_10.png",
+      "sha256": "fd0301f8dd2733f73297e19d5ab214c9a3a62483d7f25e6c3fcf6e0b072d9e22"
+    },
+    {
+      "id": "warden_force_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_7_11.png",
+      "sha256": "c6f946a58bae3e26662ce83466cc363f69d994600c00fe62aba3e72bd40655fa"
+    },
+    {
+      "id": "warden_force_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_8_8.png",
+      "sha256": "2a8c39555bcbf8dd78e727fd2d4308a54e2423218b510df28390cbcf440526f9"
+    },
+    {
+      "id": "warden_force_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_8_9.png",
+      "sha256": "402f7ae64e8759172662e70a37b5e0d9ba30af34f10bec86e77573ed0e1d5f3a"
+    },
+    {
+      "id": "warden_force_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_8_10.png",
+      "sha256": "aeba32fa94d551b68284df64814d039642b4adf3ef2a28d17536b57f2ec56349"
+    },
+    {
+      "id": "warden_force_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_8_11.png",
+      "sha256": "52d7bd8c55507dcfe8ee4a49ebf6fded9b134871a03eb64fb2706cacf0099f31"
+    },
+    {
+      "id": "warden_force_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_6.png",
+      "sha256": "2bf0c8a56c5e0b288dadaf8f09f23ebbfb3f46fdd66e60a891f89913f6ecd1ab"
+    },
+    {
+      "id": "warden_force_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_7.png",
+      "sha256": "e517951329344f3d438c226eb91645ddc7fc89ae2dbc0175a18840247ba2c281"
+    },
+    {
+      "id": "warden_force_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_8.png",
+      "sha256": "2e7854c02dbb892c3d7798e33aeedb40f98e335693be52ba0bf74baaa5bf8823"
+    },
+    {
+      "id": "warden_force_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_9.png",
+      "sha256": "5ac6a7ad8b56388468ed9bb6a43fd94eb15d91eddfa355804c832748180ea8e6"
+    },
+    {
+      "id": "warden_force_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_10.png",
+      "sha256": "021af9e087bd0eddd325d178ce365cd7aeecaf7df5c512b698024aeddfa2dbf4"
+    },
+    {
+      "id": "warden_force_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "state": "force",
+      "image": "ford/warden_force_9_11.png",
+      "sha256": "e7f6f6e6bb256a8396d145ca524e8410748722c85a09a926cbd6069212d65559"
+    },
+    {
+      "id": "warden_force_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "state": "force",
+      "image": "ford/warden_force_10_6.png",
+      "sha256": "9cc1f28bd375e9d15b9116e465a5129c2d657574bfd93bf14d855d366ba01444"
+    },
+    {
+      "id": "warden_force_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "state": "force",
+      "image": "ford/warden_force_10_7.png",
+      "sha256": "91d058c460e266c9785e6030702f87d708f6b61b2862f3bd4a51ea45e9ccca4b"
+    },
+    {
+      "id": "warden_force_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "state": "force",
+      "image": "ford/warden_force_10_8.png",
+      "sha256": "5de3c2c05092eacae981ba68095ed2dae64d26f3eecd5a16a872a0c5d78b8307"
+    },
+    {
+      "id": "warden_force_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "state": "force",
+      "image": "ford/warden_force_10_9.png",
+      "sha256": "51caeafe10a18e50175c1de4ca312ca2d669c6b67de86a3d9fa9deeac0664dc1"
+    },
+    {
+      "id": "warden_force_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "state": "force",
+      "image": "ford/warden_force_10_10.png",
+      "sha256": "5527ef5959897d7312df5ddb8796d07cef4798a3e78ca1e7a6af83563d7c2cde"
+    },
+    {
+      "id": "warden_force_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "state": "force",
+      "image": "ford/warden_force_11_6.png",
+      "sha256": "6951677e71c28907a85556081664f690356224f1bfc6ccd56fb68d98b13177da"
+    },
+    {
+      "id": "warden_force_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "state": "force",
+      "image": "ford/warden_force_11_7.png",
+      "sha256": "cff418d16ee16596dda88b71fb9a8b24b094769286902459e5e6751fa168013f"
+    },
+    {
+      "id": "warden_parley_2_9",
+      "at": [
+        2,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_2_9.png",
+      "sha256": "db3c301841c9ca6be446f2f869389b47634fe9ba17ef71c5cf0f4f3bf7463fea"
+    },
+    {
+      "id": "warden_parley_2_10",
+      "at": [
+        2,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_2_10.png",
+      "sha256": "c7b8c94d96270373d3d3ef9a6f464e233e046be61396e4d495d105e76a88111c"
+    },
+    {
+      "id": "warden_parley_3_9",
+      "at": [
+        3,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_3_9.png",
+      "sha256": "b58eb4d4d440858ef5c1febbd0d93f6eaad2c7884664693a3aab8d33a58780ab"
+    },
+    {
+      "id": "warden_parley_3_10",
+      "at": [
+        3,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_3_10.png",
+      "sha256": "4ba99961dce43c3c720ca1693cada1154fe563a05cee797e230bd1efe2b3c19a"
+    },
+    {
+      "id": "warden_parley_3_11",
+      "at": [
+        3,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_3_11.png",
+      "sha256": "e1201f6f11519107898908ccc98cc0e71fcb29726b196b61e9d74d7da00a33c7"
+    },
+    {
+      "id": "warden_parley_4_8",
+      "at": [
+        4,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_4_8.png",
+      "sha256": "a0d9ce642dd10ae6022bf54a936bfd754f9091d918358715fb13d55d82be0951"
+    },
+    {
+      "id": "warden_parley_4_9",
+      "at": [
+        4,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_4_9.png",
+      "sha256": "b8f48e3ecbfa018f972231bcd46ef325a580dab444a0235734e3e875d9df5dc6"
+    },
+    {
+      "id": "warden_parley_4_10",
+      "at": [
+        4,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_4_10.png",
+      "sha256": "c77f72389147f61143607699929c4df48b900b1f0efb915e680dfb739a32516c"
+    },
+    {
+      "id": "warden_parley_4_11",
+      "at": [
+        4,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_4_11.png",
+      "sha256": "f093bb04dcd1cf8a26afc0114ec69dcc21b2f42a9ccbb47202ab4ca7b2b6e2a6"
+    },
+    {
+      "id": "warden_parley_5_8",
+      "at": [
+        5,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_5_8.png",
+      "sha256": "c6772ec8318d91d91aa4f16d4dec50eb1a8fdc58bbd77babca5e2b2226b3cae4"
+    },
+    {
+      "id": "warden_parley_5_9",
+      "at": [
+        5,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_5_9.png",
+      "sha256": "c8b0279076253860dbe8014c2b8114b50debb83658a59cfef8d5901ee1cef99e"
+    },
+    {
+      "id": "warden_parley_5_10",
+      "at": [
+        5,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_5_10.png",
+      "sha256": "6eaa39ead0ad3b5f49f74fcea75650f2679a4b5753ec386f686cd0db40cc958b"
+    },
+    {
+      "id": "warden_parley_5_11",
+      "at": [
+        5,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_5_11.png",
+      "sha256": "0d0a4e4602a98a1886c6a21185ddb9c14e6fd6b9ee483602f0eaa78287afca09"
+    },
+    {
+      "id": "warden_parley_6_8",
+      "at": [
+        6,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_6_8.png",
+      "sha256": "3b7350933f6af281da90dbb7934460b956effc9a8c7f8597ed8b7bb35b4bc601"
+    },
+    {
+      "id": "warden_parley_6_9",
+      "at": [
+        6,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_6_9.png",
+      "sha256": "3607ab1b3cdf51d14420f664b4db2e0604b99060c98dc7ab52c199137dbac9a6"
+    },
+    {
+      "id": "warden_parley_6_10",
+      "at": [
+        6,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_6_10.png",
+      "sha256": "a67e237f7bdd5db4e7c4118686c91e0b1bf9a09223a617e2f047bb29d779d09b"
+    },
+    {
+      "id": "warden_parley_6_11",
+      "at": [
+        6,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_6_11.png",
+      "sha256": "cea418003d583c9bebd39c577dc355ae5b462fc1053cbb39910ec37d9eda8b6c"
+    },
+    {
+      "id": "warden_parley_7_8",
+      "at": [
+        7,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_7_8.png",
+      "sha256": "1604927bc37a5d49a8c62e2c87686360ef3647a08d02027a8c0006978d913188"
+    },
+    {
+      "id": "warden_parley_7_9",
+      "at": [
+        7,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_7_9.png",
+      "sha256": "8060454fc1d626ee5189e8bd9d76152187482320b796cd859c47f72b7651ccdc"
+    },
+    {
+      "id": "warden_parley_7_10",
+      "at": [
+        7,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_7_10.png",
+      "sha256": "0cd03e9d8807ec8993350ed1ea910e9bae42c3f7be7deeecc67064c488ba2188"
+    },
+    {
+      "id": "warden_parley_7_11",
+      "at": [
+        7,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_7_11.png",
+      "sha256": "a05576d80ec27df79edc992cba614b9b5fc2e8949d44fc39a9728aadd2e1080f"
+    },
+    {
+      "id": "warden_parley_8_8",
+      "at": [
+        8,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_8_8.png",
+      "sha256": "fdb56967dd61f97b63cb010dbbfb1e420b3938781c809f2d570a232f89d3bd87"
+    },
+    {
+      "id": "warden_parley_8_9",
+      "at": [
+        8,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_8_9.png",
+      "sha256": "402f7ae64e8759172662e70a37b5e0d9ba30af34f10bec86e77573ed0e1d5f3a"
+    },
+    {
+      "id": "warden_parley_8_10",
+      "at": [
+        8,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_8_10.png",
+      "sha256": "988facb83784d0f2dec70753896a13cfee79378e885b49e0d77bbe0f0e13a53c"
+    },
+    {
+      "id": "warden_parley_8_11",
+      "at": [
+        8,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_8_11.png",
+      "sha256": "52d7bd8c55507dcfe8ee4a49ebf6fded9b134871a03eb64fb2706cacf0099f31"
+    },
+    {
+      "id": "warden_parley_9_6",
+      "at": [
+        9,
+        6
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_6.png",
+      "sha256": "2bf0c8a56c5e0b288dadaf8f09f23ebbfb3f46fdd66e60a891f89913f6ecd1ab"
+    },
+    {
+      "id": "warden_parley_9_7",
+      "at": [
+        9,
+        7
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_7.png",
+      "sha256": "cfb3b8c56eb8b60ea741b97d173c800965672cbebb77c069d0706f863efa8cd8"
+    },
+    {
+      "id": "warden_parley_9_8",
+      "at": [
+        9,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_8.png",
+      "sha256": "c1154243f757ad15f1eb3dc7bd7da9913e35c6e744301c517c6e98d563b7fb95"
+    },
+    {
+      "id": "warden_parley_9_9",
+      "at": [
+        9,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_9.png",
+      "sha256": "5ac6a7ad8b56388468ed9bb6a43fd94eb15d91eddfa355804c832748180ea8e6"
+    },
+    {
+      "id": "warden_parley_9_10",
+      "at": [
+        9,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_10.png",
+      "sha256": "021af9e087bd0eddd325d178ce365cd7aeecaf7df5c512b698024aeddfa2dbf4"
+    },
+    {
+      "id": "warden_parley_9_11",
+      "at": [
+        9,
+        11
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_9_11.png",
+      "sha256": "e7f6f6e6bb256a8396d145ca524e8410748722c85a09a926cbd6069212d65559"
+    },
+    {
+      "id": "warden_parley_10_6",
+      "at": [
+        10,
+        6
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_10_6.png",
+      "sha256": "6b04898f7bee83dd104147f74ae7c0d294f6d36b7b71bf3a84957e0fe7b21bd2"
+    },
+    {
+      "id": "warden_parley_10_7",
+      "at": [
+        10,
+        7
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_10_7.png",
+      "sha256": "58aca3fdb28cd8a2effc84bedff0c2daa4c1c1130d357c27d4ba3086db3c99db"
+    },
+    {
+      "id": "warden_parley_10_8",
+      "at": [
+        10,
+        8
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_10_8.png",
+      "sha256": "472a6b3ca22b9305a36361b3799c66634ffc9884abfe8ac7128fb1429f9984df"
+    },
+    {
+      "id": "warden_parley_10_9",
+      "at": [
+        10,
+        9
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_10_9.png",
+      "sha256": "51caeafe10a18e50175c1de4ca312ca2d669c6b67de86a3d9fa9deeac0664dc1"
+    },
+    {
+      "id": "warden_parley_10_10",
+      "at": [
+        10,
+        10
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_10_10.png",
+      "sha256": "5527ef5959897d7312df5ddb8796d07cef4798a3e78ca1e7a6af83563d7c2cde"
+    },
+    {
+      "id": "warden_parley_11_6",
+      "at": [
+        11,
+        6
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_11_6.png",
+      "sha256": "6951677e71c28907a85556081664f690356224f1bfc6ccd56fb68d98b13177da"
+    },
+    {
+      "id": "warden_parley_11_7",
+      "at": [
+        11,
+        7
+      ],
+      "state": "parley",
+      "image": "ford/warden_parley_11_7.png",
+      "sha256": "cff418d16ee16596dda88b71fb9a8b24b094769286902459e5e6751fa168013f"
+    }
+  ],
+  "pixel_reconstruction_exact": true,
+  "whole_assembly_installed": false,
+  "gatehouse_shift_tiles": [
+    1,
+    -1
+  ]
+}

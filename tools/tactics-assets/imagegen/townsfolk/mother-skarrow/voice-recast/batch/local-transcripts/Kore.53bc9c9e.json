@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.53bc9c9e.wav",
+  "sourceSha256": "a48340c65552a7520102919a9ecb2189fd3ce7728bc0b81386c87a2791bcfbb5",
+  "duration": 8.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.08,
+      "text": " Valley people walking not running at me with spears"
+    },
+    {
+      "start": 7.2,
+      "end": 9.200000000000001,
+      "text": " This is new"
+    }
+  ],
+  "text": "Valley people walking not running at me with spears This is new",
+  "secondsToTranscribe": 1.878
+}

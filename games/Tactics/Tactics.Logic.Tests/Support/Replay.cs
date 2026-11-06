@@ -71,8 +71,8 @@ public static class Replay
                 var ford = TestBattle.On(fordRules.Maps["river_crossing"])
                     .WithEnvironment(fordRules.Environment).With(storm, pot, frost)
                     .WithConditions([.. fordRules.Conditions.Values])
-                    .Enemy("shaman", (TestSheets.Cleric with { MaxHp = 100, InitiativeBonus = 40 }).Knowing(storm, pot), new Tile(9, 7))
-                    .Party("mage", (TestSheets.Cleric.WithScore(Stat.Dex, 1) with { MaxHp = 100, InitiativeBonus = 30 }).Knowing(frost), new Tile(5, 8))
+                    .Enemy("shaman", (TestSheets.Cleric with { MaxHp = 100, InitiativeBonus = 40 }).Knowing(storm, pot), new Tile(8, 5))
+                    .Party("mage", (TestSheets.Cleric.WithScore(Stat.Dex, 1) with { MaxHp = 100, InitiativeBonus = 30 }).Knowing(frost), new Tile(5, 6))
                     .Enemy("gob", TestSheets.Goblin with { MaxHp = 100 }, new Tile(7, 7))
                     .Party("wet", TestSheets.Cleric with { MaxHp = 100, Ac = 1 }, new Tile(6, 7));
                 return new Start(ford.Rules, seed =>

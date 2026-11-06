@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "id: 00e3be4e-eeb5-463d-9603-78874690fede\njob_id: 00e3be4e-eeb5-463d-9603-78874690fede\nmodel: pixen\nedit: Turn this SAME older innkeeper to face STRAIGHT SOUTH directly toward the viewer, shoulders and boots square and symmetrical in facing, low top-down camera. Keep her exact grey braided bun, lined kind face, charcoal olive dress, tan apron, notebook and keys at original anatomical belt side, natural relaxed hands. Preserve native pixel density, 72-pixel body height and planted feet, transparent 48x80 canvas. One full-body front sprite only. No diagonal turn, armour or new accessories.\nsource: 48x80px\nsize: 48x80px\ntransparent: True\nseed: 80304\nasset_id: 791bbff5-7528-5cba-b0da-05263d42b912\nasset_status: pending (saved when generation completes)\ncost: 1 generation\nstatus: processing (~10-40s)\n\nhint: get_image(job_id=\"00e3be4e-eeb5-463d-9603-78874690fede\")\nwithout get_image: GET https://api.pixellab.ai/mcp/images/00e3be4e-eeb5-463d-9603-78874690fede/download (423 + Retry-After until ready; ?index=N for the Nth of several images)"
+    }
+  ],
+  "isError": false
+}

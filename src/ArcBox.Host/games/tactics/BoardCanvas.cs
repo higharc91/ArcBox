@@ -203,6 +203,7 @@ public partial class BoardCanvas : Node2D
     /// <summary>Shows <paramref name="units"/> over the current plan, which stays as it is, so this can run on every frame.</summary>
     public void SetUnits(ImmutableArray<BoardUnit> units, UnitArt art)
     {
+        _painter.RequestUnits(GetInstanceId(), units.Where(u => !u.MarksOnly && u.Thing is null).Select(u => u.Sprite.Path));
         _units = units;
         _marks.Show(units, art);
         Merge();
@@ -318,7 +319,7 @@ public partial class BoardCanvas : Node2D
         var sprite = unit.Sprite;
         var size = new Vector2(sprite.WorldWidth, sprite.WorldHeight);
         var corner = feet - new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY) * sprite.PixelScale;
-        if (Load(sprite.Path) is { } texture)
+        if (_painter.UnitTexture(sprite.Path) is { } texture)
         {
             var source = sprite.Source(unit.Anim.FrameAt(clock), unit.Row);
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place

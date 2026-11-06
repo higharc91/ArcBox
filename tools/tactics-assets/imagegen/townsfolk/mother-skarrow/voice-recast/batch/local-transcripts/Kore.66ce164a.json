@@ -1,0 +1,21 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.66ce164a.wav",
+  "sourceSha256": "4039080477f5804867df74798fd64816441454c314c04bacaf11f5c1704556a4",
+  "duration": 11.0,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 10.700000000000001,
+      "text": " Half now. Half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you."
+    }
+  ],
+  "text": "Half now. Half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+  "secondsToTranscribe": 2.293
+}

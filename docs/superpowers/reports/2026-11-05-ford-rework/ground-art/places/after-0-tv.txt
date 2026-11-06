@@ -1,0 +1,76 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (0, 0), spec ashen_ford, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD open on the main thread 6.7 ms
+WORLD build ground 282 ms, plan+light 800 ms, bake 110 ms, herd 84 ms, nodes 18 ms, total 1295 ms, main thread 6.7 ms
+WORLD items 34,191 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 82 lights, active True; 189 images; route 2 tiles; spots bridge-west@106,61 bridge-east@109,62 town-square@30,59 granary-yard@40,72 autumn-fields@38,19 windmill-road@57,30 burned-ruins@85,61
+WORLD memory after build: managed 42.0 MB (+41.3), engine 32.4 MB (+0.5), textures 7.1 MB, buffers 8.1 MB, process 354 MB
+WORLD unit-texture creatures/generic_farmer_a.png 576x768
+WORLD unit-texture characters/presets/goblin_cutthroat.png 6048x80
+WORLD unit-texture creatures/mother_skarrow.png 1728x1536
+WORLD unit-texture characters/presets/goblin_spear.png 6048x80
+WORLD unit-texture characters/presets/goblin_archer.png 6048x80
+WORLD unit-texture creatures/generic_merchant_a.png 576x768
+WORLD unit-texture creatures/generic_farmhand_a.png 576x768
+WORLD unit-texture creatures/generic_guard_a.png 576x768
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture creatures/generic_child_a.png 576x768
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/corvin.png 1728x768
+WORLD unit-texture creatures/pip.png 1152x512
+WORLD unit-texture creatures/generic_child_b.png 576x768
+WORLD unit-texture creatures/generic_farmhand_b.png 576x768
+WORLD unit-texture creatures/generic_guard_b.png 576x768
+WORLD unit-texture creatures/generic_farmer_b.png 576x768
+WORLD unit-texture creatures/generic_barmaid_a.png 576x768
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture creatures/generic_merchant_b.png 576x768
+WORLD unit-texture creatures/dagna.png 1728x768
+WORLD unit-texture creatures/generic_barmaid_b.png 576x768
+WORLD unit-texture creatures/celandine.png 1728x768
+WORLD unit-texture creatures/old_maud.png 1728x768
+WORLD unit-texture creatures/generic_fisher_a.png 576x768
+WORLD unit-texture creatures/generic_fisher_b.png 576x768
+WORLD unit-texture creatures/rook.png 1728x768
+WORLD unit-texture creatures/fauna_crow.png 352x1248
+WORLD unit-texture creatures/fauna_dog.png 448x928
+WORLD unit-texture creatures/fauna_goat.png 400x768
+WORLD unit-texture creatures/fauna_sheep.png 448x832
+WORLD unit-texture creatures/fauna_mule.png 592x1312
+WORLD unit-texture creatures/fauna_fox.png 416x1088
+WORLD unit-texture creatures/fauna_duck.png 256x448
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD textures 249 in 1119 ms, worst 142.7 ms; binding items (and baking glows) 10 ms; 70 blocks still to record at reveal
+WORLD crossing 2 tiles at 6.7 tiles/s, 0.4 s, 3 frames: frame ms median 161.04, p95 162.64, p99 162.64, worst 162.64
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 3 of 3, at 0.00s=50.3 0.05s=162.6 0.21s=161.0, 3 while recording
+WORLD recording during the walk: 3 frames, ms a frame median 3.78, p95 4.16, p99 4.16, worst 4.16
+WORLD frames while recording: frame ms median 161.04, p95 162.64, p99 162.64, worst 162.64
+WORLD _Draw per block, first time: median 0.35, p95 1.24, p99 1.49, worst 1.49, sum 18.7 ms
+WORLD render CPU ms median 33.72, p95 41.81, p99 41.81, worst 41.81; GPU ms median 30.07, p95 40.13, p99 40.13, worst 40.13; at most 2,606 draw calls
+WORLD overlay query ms median 111.30, p95 214.58, p99 214.58, worst 214.58; draw ms median 1.59, p95 1.80, p99 1.80, worst 1.80; items median 1111.00, p95 1137.00, p99 1137.00, worst 1137.00
+WORLD blocks recorded once, whatever the walk did: False; recorded again for a fade: 0
+WORLD memory at end of crossing: managed 52.8 MB (+52.1), engine 47.9 MB (+16.0), textures 377.7 MB, buffers 8.2 MB, process 704 MB
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-ashen_ford.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-bridge-west.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-bridge-east.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-town-square.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-granary-yard.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-autumn-fields.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-windmill-road.png
+WORLD shot /workspace/work/ford82-ground-places/after-0/shots/world-burned-ruins.png
+WORLD closed

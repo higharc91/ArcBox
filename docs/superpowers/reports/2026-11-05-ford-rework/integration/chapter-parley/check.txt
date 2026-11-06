@@ -1,0 +1,4 @@
+scenes: ch1_mayor (16), ch1_ford (18), ch1_parley (10), ch1_young_ones (5), ch1_road_east (6), ch1_maud (15), ch1_granary (16), ch1_song (11), ch1_docks (13), ch1_kindler (11), ch1_four_more (8)
+lines: 129, said 129
+the fight: TACTICS screen tactics-battle-river_crossing (line 795)
+the card: Chapter I · The Bridge at the Ford (line 3191)

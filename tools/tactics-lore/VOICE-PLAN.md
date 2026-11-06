@@ -24,11 +24,11 @@ Named characters keep their existing preset, pitch and filter across main scenes
 | bree_tallow | Zephyr | +0 | — |
 | maren_sorrel | Sulafat | +0 | — |
 | mother_aubrine | Vindemiatrix | +0 | — |
-| dagna_holt | Callirrhoe | -1 | — |
+| dagna_holt | Gacrux | +0 | — |
 | pip_ashdown | Leda | +3 | — |
-| old_maud | Achernar | -1 | — |
+| old_maud | Gacrux | +0 | — |
 | celandine_marrowby | Autonoe | +0 | — |
-| mother_skarrow | Laomedeia | -2 | — |
+| mother_skarrow | Kore | +0 | — |
 | ysolde | Despina | +1 | fey |
 | townsfolk_farmer | Charon | -2 | — |
 | townsfolk_farmhand | Achird | +2 | — |
@@ -69,3 +69,58 @@ Grisk uses **Algenib +4 semitones**, with a high nasal, raspy foreman delivery. 
 The candle line is an ordinary hit bark at weight 1 beside Grisk's weight-6 hit line. Low-health and defeat lines take priority. Its approved encoded file is `bark_grisk_candle_1.f31d8679.ogg`; preserve that exact take. Grisk never borrows Ashmaw's sounds; Ashmaw has creature SFX and no speech. The bounty drift report is `docs/superpowers/reports/2026-11-03-ashmaw-bounty/voice-check.json`, with zero flags at this checkpoint.
 
 Tobin retained Orus −2; natural directions improved spectral consistency. Vorga's existing ridge command had an octave-high take; the directed replacement retains Iapetus +1 and measured median F0 145.45 Hz. These repairs do not change captions or cast identity. All scene/bark lines are covered by rendered clips and duration tests; there are no failed-render caption-only exceptions in this delivery. Quest objectives/history are read silently and are not voiced.
+
+## Dagna veteran recast (#80)
+
+The owner approved the Gacrux audition on 2026-11-04. Keep its mature, low, flat
+Northern delivery and no post pitch/filter. Dagna's casting `direction` applies
+to every line, including legacy battle barks, and combines with any authored line
+direction. Direction enters both raw and encoded hashes so changes request a new
+take. Other speakers without a cast direction retain their existing hashes.
+Gacrux is also the grim.high player preset; Dagna's approved performance direction
+distinguishes her. Do not recast the player. Captions and authored-recordings-only
+playback remain unchanged. Retain superseded files and paid provenance.
+
+## Old Maud ancient-voice recast (#80)
+
+The owner approved the papery, unhurried Gacrux audition. Use its105-year-old
+performance direction across all24 Maud lines, without post pitch/filter. The
+existing town audition is reused exactly. Casting approvedRenderText retains
+that paid take's exact request while its caption/preset/character direction/line
+delivery remain unchanged; editing any of those requests a new take. Caption text
+and authored-recordings-only playback stay unchanged. Preserve older recordings
+and paid provenance. Gacrux is shared with Dagna/grim.high; Maud's approved ancient
+performance direction is distinct from their deliveries.
+
+Installed all24 lines; full1443/1443 coverage. The approved town request and four
+shortened vocal-cue repair requests are recorded as approvedRenderText overrides;
+the latter avoid direction narration or repeated lexical substitutions. Their
+caption, preset, character direction and authored delivery guards still apply.
+Six rejected paid takes are in voiceRecastSuperseded; active voiceRecasts contain
+only selected takes. Reproduction and caption-check tools/receipts are in
+old-maud/voice-recast/batch. Total274CU including5CU earlier audition; no purchase.
+
+
+## Mother Skarrow approved elder-voice recast (#80)
+
+Owner approval: “sounds good, use it”. Kore at pitch0 with no filter; keep the
+approved low husky elderly goblin-matriarch direction, measured wary authority
+and tired warmth across all67 lines. Preserve captions and recordings-only
+playback. ApprovedRenderText guards capture actual render requests, including
+numeric40 for an ambiguous opening number, the approved cue without Mood prose,
+and supported pauses for clarity; they do not alter canonical caption words.
+
+Retain original67 recordings and all superseded paid takes. Sources, live
+quotes/cap checks, receipts, source hashes and offline import/local speech-check
+tools live in mother-skarrow/voice-recast/batch. Local small.en/medium.en ASR is
+unbiased and free of per-clip service charges; it is a wording check, not acting
+judgment. Generic goblin art and battle/phone contracts are unchanged. Artwork
+approval gates remain separate from the approved voice.
+
+All67 clips are now installed from64 selected takes; full1443/1443 coverage.
+Two chapter3 takes use only documented pause tags with the same Kore speaker,
+language and zero pitch/filter because descriptive instructions were repeatedly
+narrated. Exact alternate requests are guarded and retained; source/caption and
+pitch/brightness checks pass. Original67 clips and20 superseded new paid takes
+are preserved. Continuation218CU, total224CU including prior6CU audition/ASR;
+local full-set transcription carries no per-clip service fee. No purchases.

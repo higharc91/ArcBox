@@ -239,7 +239,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for giant_bat",
-      "voice": "bat"
+      "voice": "bat",
+      "families": [
+        "giant_bat"
+      ]
     },
     "bat_death": {
       "files": [
@@ -275,7 +278,12 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for bear, elder_bear, boar",
-      "voice": "bear"
+      "voice": "bear",
+      "families": [
+        "bear",
+        "elder_bear",
+        "boar"
+      ]
     },
     "bear_death": {
       "files": [
@@ -616,7 +624,11 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for drake, dragon",
-      "voice": "dragon"
+      "voice": "dragon",
+      "families": [
+        "drake",
+        "dragon"
+      ]
     },
     "dragon_death": {
       "files": [
@@ -668,7 +680,14 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
-      "voice": "elemental"
+      "voice": "elemental",
+      "families": [
+        "fire_elemental",
+        "water_elemental",
+        "earth_elemental",
+        "air_elemental",
+        "golem"
+      ]
     },
     "elemental_death": {
       "files": [
@@ -738,7 +757,16 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
-      "voice": "goblin"
+      "voice": "goblin",
+      "families": [
+        "goblin",
+        "goblin_archer",
+        "goblin_boss",
+        "goblin_shaman",
+        "hobgoblin",
+        "kobold",
+        "kobold_slinger"
+      ]
     },
     "goblin_death": {
       "files": [
@@ -828,7 +856,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for mimic",
-      "voice": "mimic"
+      "voice": "mimic",
+      "families": [
+        "mimic"
+      ]
     },
     "mimic_death": {
       "files": [
@@ -856,7 +887,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for orc_brute",
-      "voice": "orc"
+      "voice": "orc",
+      "families": [
+        "orc_brute"
+      ]
     },
     "orc_death": {
       "files": [
@@ -976,7 +1010,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for slime",
-      "voice": "slime"
+      "voice": "slime",
+      "families": [
+        "slime"
+      ]
     },
     "slime_death": {
       "files": [
@@ -1189,7 +1226,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for giant_spider",
-      "voice": "spider"
+      "voice": "spider",
+      "families": [
+        "giant_spider"
+      ]
     },
     "spider_death": {
       "files": [
@@ -1439,7 +1479,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for troll",
-      "voice": "troll"
+      "voice": "troll",
+      "families": [
+        "troll"
+      ]
     },
     "troll_death": {
       "files": [
@@ -1586,7 +1629,14 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for skeleton, skeleton_archer, zombie, necromancer, lich",
-      "voice": "undead"
+      "voice": "undead",
+      "families": [
+        "skeleton",
+        "skeleton_archer",
+        "zombie",
+        "necromancer",
+        "lich"
+      ]
     },
     "undead_death": {
       "files": [
@@ -1631,7 +1681,12 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for wolf, dire_wolf, hound",
-      "voice": "wolf"
+      "voice": "wolf",
+      "families": [
+        "wolf",
+        "dire_wolf",
+        "hound"
+      ]
     },
     "wolf_death": {
       "files": [
@@ -1659,7 +1714,10 @@
       "loop": false,
       "group": "creature",
       "use": "Attack bark for wraith",
-      "voice": "wraith"
+      "voice": "wraith",
+      "families": [
+        "wraith"
+      ]
     },
     "wraith_death": {
       "files": [

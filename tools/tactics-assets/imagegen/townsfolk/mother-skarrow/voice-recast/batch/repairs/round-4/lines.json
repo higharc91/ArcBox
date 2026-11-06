@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ch1_parley_bread_2.main",
+    "line": "ch1_parley_bread_2",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Small kindness. Small stomachs. It is not nothing.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Small kindness. <short pause> Small stomachs. It is not nothing.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.e1f9b192",
+    "file": "ch1_parley_bread_2.3c9d8de9.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_song_3.main",
+    "line": "ch1_song_song_3",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.a449ab24",
+    "file": "ch1_song_song_3.97cbdbe8.ogg",
+    "done": false
+  },
+  {
+    "id": "ch1_song_crumb_1.main",
+    "line": "ch1_song_crumb_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> You ask well. So. <short pause> A crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.d21bec2e",
+    "file": "ch1_song_crumb_1.5b969918.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_1.main",
+    "line": "ch3_skarrow_messenger_song_1",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> You <short pause> fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.6711100b",
+    "file": "ch3_skarrow_messenger_song_1.a0b864dd.ogg",
+    "done": false
+  },
+  {
+    "id": "ch3_skarrow_messenger_song_4.main",
+    "line": "ch3_skarrow_messenger_song_4",
+    "cast": "main",
+    "speaker": "mother_skarrow",
+    "preset": "Kore",
+    "pitch": 0,
+    "filter": "",
+    "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Your Wardens. <short pause> Sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+    "delivery": {
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "mood": "idle"
+    },
+    "raw": "Kore.3ed0c02c",
+    "file": "ch3_skarrow_messenger_song_4.41645101.ogg",
+    "done": false
+  }
+]

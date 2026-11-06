@@ -85,7 +85,7 @@ public static class RegionScene
             Stamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().Select(s => new RegionStamp(s.Map, s.Tile, s.HeightOffset))],
             Buildings = [.. root.GetNode(Buildings).GetChildren().OfType<BuildingMarker>().Select(b => new RegionBuilding(b.Building, b.Variant, b.Tile))],
             People = [.. root.GetNode(People).GetChildren().OfType<PersonMarker>().Select(p => new RegionPerson(p.Preset, p.Tile, p.Face, PersonText.Walk(p.Walk),
-                PersonText.Optional(p.Id), PersonText.Optional(p.Character), PersonText.Flags(p.Requires), PersonText.Flags(p.Unless), PersonText.Optional(p.Bark), PersonText.Optional(p.Voice)))],
+                PersonText.Optional(p.Id), PersonText.Optional(p.Character), PersonText.Flags(p.Requires), PersonText.Flags(p.Unless), PersonText.Optional(p.Bark), PersonText.Optional(p.Voice), PersonText.Optional(p.Variant)))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
             NamedSpawns = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Named).Select(s => (s.SpawnName, s.Tile))],
@@ -168,7 +168,7 @@ public static class RegionScene
         for (var i = 0; i < source.People.Count; i++)
             AddMarker(root, people, new PersonMarker { Preset = source.People[i].Preset, Face = source.People[i].Face, Walk = PersonText.Walk(source.People[i].Walk),
                 Id = source.People[i].Id ?? "", Character = source.People[i].Character ?? "", Requires = PersonText.Flags(source.People[i].Requires),
-                Unless = PersonText.Flags(source.People[i].Unless), Bark = source.People[i].Bark ?? "", Voice = source.People[i].Voice ?? "" }, $"{source.People[i].Preset}_{i}", source.People[i].At);
+                Unless = PersonText.Flags(source.People[i].Unless), Bark = source.People[i].Bark ?? "", Voice = source.People[i].Voice ?? "", Variant = source.People[i].Variant ?? "" }, $"{source.People[i].Preset}_{i}", source.People[i].At);
         return root;
     }
 

@@ -1,0 +1,12 @@
+{
+  "character": "mother_skarrow",
+  "barkId": "bark_mother_skarrow_town_2",
+  "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+  "preset": "Laomedeia",
+  "pitch": -2,
+  "sourcePath": "content/tactics/base/lore/audio/bark_mother_skarrow_town_2.833a159c.ogg",
+  "sourceSha256": "ef1bc41264b356964b585dad00b5ec5de3dfc09540d178e5c68b5c2ae7f929df",
+  "reviewFile": "voice-sample.mp3",
+  "reviewSha256": "3dc9d7f6fac0df0cf23b228dc87e445807536b44948c9a81af242af44290b597",
+  "operation": "MP3 compatibility transcode of existing installed recording. No new speech or additional pitch/filter."
+}

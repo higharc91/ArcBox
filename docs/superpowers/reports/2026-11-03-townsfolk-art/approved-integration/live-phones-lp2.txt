@@ -1,0 +1,44 @@
+09:40:32 Ana joined GMPP
+09:40:33 Bo joined GMPP
+09:40:33 Cy joined GMPP
+09:40:33 Dee joined GMPP
+09:40:34 Game on
+09:40:35 Ana picks fighter
+09:40:36 Bo picks cleric
+09:40:37 Cy picks rogue
+09:40:38 Dee picks wizard
+09:40:38 Cy leads
+09:41:32 CHAPTER Cy walks 5 steps from 26,58 to shop:af_market_herbalist
+09:41:35 WALK route arrived at shop:af_market_herbalist
+09:41:45 CHAPTER Cy walks 7 steps from 27,63 to shop:af_inn
+09:41:48 WALK route arrived at shop:af_inn
+09:42:04 CHAPTER Cy walks 7 steps from 24,56 to shop:af_market_herbalist
+09:42:06 WALK route arrived at shop:af_market_herbalist
+09:42:06 WALK stop for 2 s
+09:42:09 PAUSE restart
+09:42:10 Cy: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Bo: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Dee: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:10 Ana: walk failed: Invocation canceled due to the underlying connection being closed.
+09:42:28 Ana rejoined GMPP
+09:42:28 Dee rejoined GMPP
+09:42:28 Bo rejoined GMPP
+09:42:28 Cy rejoined GMPP
+09:42:32 GO restart: Cy leads
+09:42:42 CHAPTER Cy walks 7 steps from 27,63 to shop:af_inn
+09:42:44 WALK route arrived at shop:af_inn
+09:42:44 WALK stop for 2 s
+09:42:46 PAUSE tv
+09:43:25 GO tv: Cy leads
+09:43:36 CHAPTER Cy walks 7 steps from 24,56 to shop:af_market_herbalist
+09:43:38 WALK route arrived at shop:af_market_herbalist
+09:43:38 WALK stop for 2 s
+09:44:00 LATENCY 20 of 20 presses, ms: median 95 p90 221 worst 234
+09:44:01 DROP kill at 1793785441884
+09:44:01 Cy: walk failed: WebSocket closed with status code: 1006 (no reason given).
+09:44:02 DROP party stopped after 765 ms
+09:44:09 DROP lead passed after 7865 ms
+09:44:17 DROP disconnect after 16023 ms
+09:44:17 DROP last step 480 ms after the cut
+09:44:17 DROP the TV drew the party stopped 757 ms after the cut, by its clock
+09:44:17 WALK done

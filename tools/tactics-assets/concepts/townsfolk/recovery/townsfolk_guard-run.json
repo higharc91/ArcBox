@@ -1,0 +1,7 @@
+{
+  "id": "townsfolk_guard",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "job_id": "job_ZLbVXWoUP8WAYgtzVvpVHxtu",
+  "status": "in-progress",
+  "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_ZLbVXWoUP8WAYgtzVvpVHxtu' (one call waits on up to 32 jobs)."
+}

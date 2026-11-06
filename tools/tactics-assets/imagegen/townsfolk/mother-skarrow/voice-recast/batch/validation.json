@@ -1,0 +1,1183 @@
+{
+  "result": "PASS",
+  "scope": "sources_and_installed_clips",
+  "lines": 67,
+  "distinctSources": 64,
+  "previousClipsPreserved": 67,
+  "note": "Unbiased local ASR is a wording check, not listening proof of acting quality. Listed vocalizations, homophone/spelling/number forms and physically silent out-of-duration ASR tail tokens are documented normalizations. No audio is trimmed.",
+  "results": [
+    {
+      "line": "bark_mother_skarrow_battle_start_1",
+      "raw": "Kore.e9ac3f30",
+      "seconds": 8.52,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "ee0588b874d9b0939ce76801d993e650289cf6eafa116f380083362a813a9747",
+      "caption": "So. The valley sends swords instead of grain. I expected it.",
+      "captionCheck": {
+        "transcript": "So, the valley sends swords instead of grain. I expected it.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.e9ac3f30.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "4842d5680c3b23d74e8b6ea293aea7fe1f68ed969311bba58600f7e9e3d4f085"
+    },
+    {
+      "line": "bark_mother_skarrow_battle_start_2",
+      "raw": "Kore.0042a09d",
+      "seconds": 5.56,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "c52ff3e464291488228d904ec4055941d17ea06a25fbdaf0cc03640f397c5429",
+      "caption": "Come, then. My grandchildren are watching, and they are hungry.",
+      "captionCheck": {
+        "transcript": "Come then my grandchildren are watching and they are hungry",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.0042a09d.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "dac59868018114360b6e52c890b19a3a0ebb0cf7c9d46a13f538ffd1310bfc1c"
+    },
+    {
+      "line": "bark_mother_skarrow_battle_start_3",
+      "raw": "Kore.03b85bde",
+      "seconds": 7.64,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "fef47841371f63a8eb3614a1f778ed8ec2a00bcd2daf3ef0c52b951ad7046332",
+      "caption": "You lock your grain and call us thieves. Now you come to finish it.",
+      "captionCheck": {
+        "transcript": "You lock your grain and call us thieves, now you come to finish it.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.03b85bde.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "fbdc93f37b89815dfd57d7bd1566df49478cacab24bb977f4e943c76325f8acf"
+    },
+    {
+      "line": "bark_mother_skarrow_hit_1",
+      "raw": "Kore.b1518070",
+      "seconds": 4.84,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "0f2db516e29b97e7f9a77897917c786c0b7190472188e6e55e5f5f3474bf6dc3",
+      "caption": "Old, yes. Soft, no.",
+      "captionCheck": {
+        "transcript": "Old, yes. Soft, no.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.b1518070.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "5aeb3853a563b7d736df0890a242b12cfa462ef31a18143d89f2e83b733761b5"
+    },
+    {
+      "line": "bark_mother_skarrow_miss_1",
+      "raw": "Kore.1937e783",
+      "seconds": 5.84,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "d438062301af243d989d17702e5adb60e4981473cc79e5a583d64f450dfca4b9",
+      "caption": "Hah. The hill is crooked. Like your mayor.",
+      "captionCheck": {
+        "transcript": "Huh, the hill is crooked like your mayor",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.1937e783.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "8d311f52afb5b108e82c714c15888895f7358877e322ccf58c6c5733d3a80d8a"
+    },
+    {
+      "line": "bark_mother_skarrow_crit_1",
+      "raw": "Kore.d548cd2a",
+      "seconds": 6.44,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "71667c28049401042eb923b0fc3d0cf874e90e73f8a3b2ddf3875d6ffa32f4de",
+      "caption": "Forty winters I have bled for this clan. Your turn.",
+      "captionCheck": {
+        "transcript": "40 winters I have bled for this clan. Your turn.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.d548cd2a.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "b37c0d99bf22ccddda9f98770cc96ca7eae688990daeb202c4edc29bd8538433"
+    },
+    {
+      "line": "bark_mother_skarrow_kill_1",
+      "raw": "Kore.76cbc88d",
+      "seconds": 5.08,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "24cd476bec85e3bbf5c45e6d1dde8170546a39ce8efc2e0bf0ec5eb499a7e8a1",
+      "caption": "Go down to the river. Tell it Skarrow sent you.",
+      "captionCheck": {
+        "transcript": "Go down to the river, tell it Scarrow sent you.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts-medium.en/Kore.76cbc88d.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "ebf279276e510a074b8c3149b973d80342076131222724a46d159a873b3dc739"
+    },
+    {
+      "line": "bark_mother_skarrow_ally_down_1",
+      "raw": "Kore.ce754f98",
+      "seconds": 6.72,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "604d75144a2acca27a41a796a522fa85214e956a396342b7a6b34f627bb666e9",
+      "caption": "Up, little one. Up. Ah. No.",
+      "captionCheck": {
+        "transcript": "Ugh, up little one, up. Ugh, no.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.ce754f98.json",
+        "leadingVocalization": "ah",
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "3fc633bd232cc15b683be99ec2c3f2dc03bc5e5b345696573ba7c4b8bbb70200"
+    },
+    {
+      "line": "bark_mother_skarrow_low_hp_1",
+      "raw": "Kore.4229712d",
+      "seconds": 4.4,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "2d4164ba9e03ff87bc71087940789dd58833fa45fefc36a727002ac4171c862e",
+      "caption": "Not yet. The little ones have not eaten.",
+      "captionCheck": {
+        "transcript": "Not yet. The little ones have not eaten.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.4229712d.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "ea94dfeb44a6a3ad5931e21f1ad0174532082728b3086ce1e89503cb39af2333"
+    },
+    {
+      "line": "bark_mother_skarrow_low_hp_2",
+      "raw": "Kore.a090bbf0",
+      "seconds": 6.64,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "e5921bb315a4b8ad7e2179ee8e7b95d6c576594cea7b38e46d8c97f11b47c29d",
+      "caption": "I have buried better than you. I will not be buried by you.",
+      "captionCheck": {
+        "transcript": "I have buried better than you. I will not be buried by you.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.a090bbf0.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "c1dade184dd935f6288575c3e159a06db4c37ff9485e9aab718a98675740c684"
+    },
+    {
+      "line": "bark_mother_skarrow_victory_1",
+      "raw": "Kore.a7d90663",
+      "seconds": 7.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "146d0304d074397282340e84b755092f2b3c398c0c0001b3c592425a263c3697",
+      "caption": "Go home. Tell them the bridge stays ours until the grain comes.",
+      "captionCheck": {
+        "transcript": "Go home tell them the bridge stays ours until the grain comes",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.a7d90663.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "aebabaaaa623fbe738cfeb7b25ae1a7d28e39e2222b8d7d4f37954dc97f7fc10"
+    },
+    {
+      "line": "bark_mother_skarrow_defeat_1",
+      "raw": "Kore.697dc16a",
+      "seconds": 6.0,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "463d6748a8a0be10801b331c9d9edd86ebe816ba1da99c0d65e63a347b1afdf4",
+      "caption": "Whatever you think of me, feed the little ones. Feed them.",
+      "captionCheck": {
+        "transcript": "Whatever you think of me, feed the little ones, feed them.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.697dc16a.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "33ca0c672565c14068de15c0020b0a27646f48eeae2ae782ee4f92e93e733602"
+    },
+    {
+      "line": "bark_mother_skarrow_town_1",
+      "raw": "Kore.53bc9c9e",
+      "seconds": 8.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "a48340c65552a7520102919a9ecb2189fd3ce7728bc0b81386c87a2791bcfbb5",
+      "caption": "Valley people. Walking. Not running at me with spears. This is new.",
+      "captionCheck": {
+        "transcript": "Valley people walking not running at me with spears This is new",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.53bc9c9e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "c4fbe5432856941ec432ce2649a2acec357883eacefcc46b06ae49f0860cb1a0"
+    },
+    {
+      "line": "bark_mother_skarrow_town_2",
+      "raw": "Kore.9b2e912e",
+      "seconds": 8.72,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "e3f5a69947c41667777bc5f680f823a82046926052a2e3b195fa7412354c4393",
+      "caption": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+      "captionCheck": {
+        "transcript": "Forty winters, I have held this clan. Do not ask me if I can hold it one more.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.9b2e912e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "1cc0119d2735333216180622d863a6cdbbcacdec54891f1c7700d2d9221f29c4"
+    },
+    {
+      "line": "bark_mother_skarrow_town_3",
+      "raw": "Kore.bf716c56",
+      "seconds": 8.12,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "84ee153f8ee7cee902668559bd8fa3ebe88abd5c5a1181a7890d4433946a0592",
+      "caption": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+      "captionCheck": {
+        "transcript": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.bf716c56.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "f6eb5fdb980f51f7163b708e41731faf7eb7e96c5991bee2f701c98bf9cbbe4f"
+    },
+    {
+      "line": "ch1_parley_open_3",
+      "raw": "Kore.53bc9c9e",
+      "seconds": 8.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "a48340c65552a7520102919a9ecb2189fd3ce7728bc0b81386c87a2791bcfbb5",
+      "caption": "Valley people. Walking. Not running at me with spears. This is new.",
+      "captionCheck": {
+        "transcript": "Valley people walking not running at me with spears This is new",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.53bc9c9e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "c4fbe5432856941ec432ce2649a2acec357883eacefcc46b06ae49f0860cb1a0"
+    },
+    {
+      "line": "ch1_parley_open_4",
+      "raw": "Kore.42f80b44",
+      "seconds": 9.36,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "bf99596f0f74d1212de11ab54810de1aa6e08100b4cb9b265d734925d19282a0",
+      "caption": "You lock your grain and call us thieves. Sit. We will talk about who stole what.",
+      "captionCheck": {
+        "transcript": "You lock your grain and call us thieves. Sit, we will talk about who stole what.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.42f80b44.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "39db1a3ef49a92779cdde42915fe2d9f3a9b9cf4544d0d609f66286082555fde"
+    },
+    {
+      "line": "ch1_parley_bread_1",
+      "raw": "Kore.0aa2cecb",
+      "seconds": 7.08,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "53e57183f9a51d5ab064c3e5690353b06d4b7bae4e6584c01e78719edaee13b1",
+      "caption": "Two-day bread. From the innkeeper, yes? The one who feeds anybody.",
+      "captionCheck": {
+        "transcript": "Two day bread from the innkeeper. Yes the one who feeds anybody",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.0aa2cecb.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "3e815f9aa00db21927f31a0affd521a9ed5ec51023fb0622d14f6327d66922a8"
+    },
+    {
+      "line": "ch1_parley_bread_2",
+      "raw": "Kore.e1f9b192",
+      "seconds": 7.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "80ee4634aa931c8a39cc3cdba6aa05638d351e668967fa9604770b5fd0f85dca",
+      "caption": "Small kindness. Small stomachs. It is not nothing.",
+      "captionCheck": {
+        "transcript": "Small kindness, small stomachs, it is not nothing.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.e1f9b192.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "ce7e1258db41d7b58d8f6e3919cadca79a005096b1f9c31f96cee25daad698f1"
+    },
+    {
+      "line": "ch1_parley_hill_1",
+      "raw": "Kore.8cf1a688",
+      "seconds": 8.88,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "720e03c9eab1279efa58b4d68052a78d7d7c08afff0f2828067286845b3f1325",
+      "caption": "Ha! Somebody's mother taught you properly. You say my name like you have been scolded with it.",
+      "captionCheck": {
+        "transcript": "Hah, somebody's mother taught you properly. You say my name like you have been scolded with it.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.8cf1a688.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "90ade2cf6c4f280b898d91b3ed71c1d49aa85b96a04cd63bfc5299cd6c08dec2"
+    },
+    {
+      "line": "ch1_parley_hill_2",
+      "raw": "Kore.563e7c8c",
+      "seconds": 10.08,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "d7b2b1dc7546ddf8631bc981cd1fb8cf20c178e3607bd9a7d83d18f3d5c5288a",
+      "caption": "Then you know a hill word the valley does not have. It means a debt that both sides pretend is a gift.",
+      "captionCheck": {
+        "transcript": "Then you know a hill-word the valley does not have. It means a debt that both sides pretend is a gift.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.563e7c8c.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "b26d0c3e35a6a7f80353babd4465e4c53da17016e2287e5f29d55615d24c42b5"
+    },
+    {
+      "line": "ch1_parley_soldier_1",
+      "raw": "Kore.a67c3bd5",
+      "seconds": 9.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "eb0a33ccdb6af655551638904ee235e4784a5cc52fc93c53f5e8908b414861b8",
+      "caption": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them.",
+      "captionCheck": {
+        "transcript": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.a67c3bd5.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "97fedaaa8f410c9e08a338f1c6a2aeed6eb2ad5ee7c3a6b7327cacab34ec041e"
+    },
+    {
+      "line": "ch1_parley_soldier_2",
+      "raw": "Kore.2f798a4e",
+      "seconds": 9.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "ecb992d32a65e98a760cba4f00f0ff9121a637deb9541ab47323ceab074a148d",
+      "caption": "We took the bridge after. Not before. Tell your captain that, if she will hear it.",
+      "captionCheck": {
+        "transcript": "We took the bridge after, not before. Tell your captain that, if she will hear it.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.2f798a4e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "7e23a1144d2256d9670b65c2d0d00d6a8bc5b5d1a235640a3cdf3e78ef195e07"
+    },
+    {
+      "line": "ch1_parley_terms_1",
+      "raw": "Kore.ae1a0f6e",
+      "seconds": 12.8,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "661cf8849a4af9c7dc19a3a98f390598a9d82e5b2002d5f7c1420fd385b208c5",
+      "caption": "Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge.",
+      "captionCheck": {
+        "transcript": "Here is the bargain, and it is a short one. Your town eats, my clan eats, the bridge goes back to being a bridge.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.ae1a0f6e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": [
+          {
+            "segment": {
+              "start": 12.64,
+              "end": 14.64,
+              "text": " You"
+            },
+            "peak": 20,
+            "rmsDbfs": -75.55925224618261,
+            "reason": "out-of-duration near-silent tail, not a spoken extra word"
+          }
+        ]
+      },
+      "clipSha256": "97592c70695bfa3143b0aeae39a169f6b486c994275dd54dbe7d18a6dca46574"
+    },
+    {
+      "line": "ch1_parley_terms_2",
+      "raw": "Kore.ff068f53",
+      "seconds": 13.72,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "2c2c08fe8586476b18824b6784621bc4784cde1465d809c353aa58565e4ef046",
+      "caption": "Not coin. Coin does not boil. A share of the grain your mayor keeps behind his locks. Every week, until the thaw.",
+      "captionCheck": {
+        "transcript": "Not coin, coin does not boil, a share of the grain your mayor keeps behind his locks, every week until the thaw.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.ff068f53.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "4f71f44db474d6238dff66e7943baba4377d1195cebb505024be877c70c69a77"
+    },
+    {
+      "line": "ch1_parley_haggle_pass_1",
+      "raw": "Kore.66ce164a",
+      "seconds": 11.0,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "4039080477f5804867df74798fd64816441454c314c04bacaf11f5c1704556a4",
+      "caption": "Half now, half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+      "captionCheck": {
+        "transcript": "Half now. Half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.66ce164a.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "a984a6583fe93d9f1415eb87883f1d0a26d67b6f524e1ac473fe9f912a10249d"
+    },
+    {
+      "line": "ch1_parley_haggle_fail_1",
+      "raw": "Kore.c6c6abab",
+      "seconds": 10.6,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "1fc09b8cb2fe90974978c9f071dba999e164f9484e2635a95fed343e87166224",
+      "caption": "Half? My children do not eat half. All of it, every week, or go home and fetch your captain.",
+      "captionCheck": {
+        "transcript": "Half? My children do not eat half, all of it, every week. Or go home and fetch your captain.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.c6c6abab.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "26639c6c053418d66c6deaaad0bb4503bfca139baeb390b31c210c47037ddb88"
+    },
+    {
+      "line": "ch1_parley_haggle_fail_2",
+      "raw": "Kore.eee98b8e",
+      "seconds": 6.96,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "1d30bba66a75cd941ce129cb4ad0c573bdf51884e3e93daec583cb6ac3993228",
+      "caption": "But you climbed the hill. So. Sit down again, and agree with me.",
+      "captionCheck": {
+        "transcript": "But you climbed the hill so sit down again and agree with me",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.eee98b8e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "62e0f9f1d0dd922e5fcd42fb1ea4d139b9110da0f15e805fc72c389e45d269a7"
+    },
+    {
+      "line": "ch1_parley_young_pass_1",
+      "raw": "Kore.64b8623c",
+      "seconds": 11.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "7f592d6848da88b3dd1571f901a2bb8c66e36b679e53b6a580991e61db43dd10",
+      "caption": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+      "captionCheck": {
+        "transcript": "Most of them. Some of the young ones belong to my grandson now, in their hearts, Vorga. He left us to take instead of ask.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts-medium.en/Kore.64b8623c.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "7862bbffacf90c58ac2752cd707ae3de75af25e91c54b53fca439ce34db0efa0"
+    },
+    {
+      "line": "ch1_parley_young_pass_2",
+      "raw": "Kore.e49ea999",
+      "seconds": 9.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "47e3e933b64d929ecfde224ca1676145ec880fa3ec6aa240a097ebb39a91b756",
+      "caption": "His friends will not like a truce. If they bare their teeth on the bridge, do not kill more of them than you must.",
+      "captionCheck": {
+        "transcript": "His friends will not like a truce if they bear their teeth on the bridge Do not kill more of them than you must",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.e49ea999.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "22f0a8f6d1070ac338dfde6e04b5674a8fe039fe97b12cf5144195b5ca5f4133"
+    },
+    {
+      "line": "ch1_parley_young_fail_1",
+      "raw": "Kore.9b2e912e",
+      "seconds": 8.72,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "e3f5a69947c41667777bc5f680f823a82046926052a2e3b195fa7412354c4393",
+      "caption": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+      "captionCheck": {
+        "transcript": "Forty winters, I have held this clan. Do not ask me if I can hold it one more.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.9b2e912e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "1cc0119d2735333216180622d863a6cdbbcacdec54891f1c7700d2d9221f29c4"
+    },
+    {
+      "line": "ch1_parley_deal_1",
+      "raw": "Kore.d5c0ff43",
+      "seconds": 12.36,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "2e8026a608487af8fbd41edde997144de492c6d8d3e81e244e67fcec21fca7ee",
+      "caption": "Then it is agreed. Tell your mayor the old mother will give back his bridge. Tell him she is counting the sacks.",
+      "captionCheck": {
+        "transcript": "Then it is agreed tell your mayor the old mother will give back his bridge Tell him she is counting the sacks",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.d5c0ff43.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "b249050ff2d35fd837b5aee1de4da276e81df13ad10b9c0e736c64017cc67fcb"
+    },
+    {
+      "line": "ch1_dawn_open_2",
+      "raw": "Kore.92a08fe4",
+      "seconds": 11.12,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "7abe595a0c8c037fe2f12bfd0dfc8ecb6f7309a428f50f7eafbef6551d39a921",
+      "caption": "I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope.",
+      "captionCheck": {
+        "transcript": "I see you, Valley People. You came with spears, after all. I hoped. I am old enough to know better than hope.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.92a08fe4.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "e1876113d6621b4a7a5c2ae1cd8ce6693eb97196b452d91d69e25900097830a5"
+    },
+    {
+      "line": "ch1_dawn_open_3",
+      "raw": "Kore.8f627eeb",
+      "seconds": 10.92,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "a57ef7a9d814bd1f0a593651b482c208044269bd3ea2735ace397dfeb3407c5e",
+      "caption": "Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased.",
+      "captionCheck": {
+        "transcript": "Come then, every one of us you kill is one less mouth this winter. Your mayor will be so pleased.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.8f627eeb.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": [
+          {
+            "segment": {
+              "start": 10.78,
+              "end": 12.78,
+              "text": " You"
+            },
+            "peak": 25,
+            "rmsDbfs": -71.82817987831282,
+            "reason": "out-of-duration near-silent tail, not a spoken extra word"
+          }
+        ]
+      },
+      "clipSha256": "8b3322c4317c70fb494423843c1c3c1dad812a3a6957b23d851e2c3dde50611c"
+    },
+    {
+      "line": "ch1_bridge_cost_open_2",
+      "raw": "Kore.6739e2c7",
+      "seconds": 9.44,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "cbc674ec69ced7306129db9939cce6ff9a1ad6ad604b5728b2367555589a929b",
+      "caption": "Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.",
+      "captionCheck": {
+        "transcript": "Hmm well fought my grandson always said the valley would never share I Should have listened to him",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.6739e2c7.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "492b9a869ad753f30fd3f86cf52f91ce1ff085773a9c539ecb86feb70e868700"
+    },
+    {
+      "line": "ch1_bridge_cost_open_3",
+      "raw": "Kore.b0d6d6b2",
+      "seconds": 10.0,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "ce73c4e6dffb60841af61adc90a20de91690af66f2b95d638bc32f9cb070781a",
+      "caption": "There was a song I meant to teach somebody. Too late now. It goes into the river with me.",
+      "captionCheck": {
+        "transcript": "There was a song I meant to teach somebody. Too late now, it goes into the river with me.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.b0d6d6b2.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "139db1ca9a747c00d95a2e656667572dea3647e6efdd25989214d9e6ee47c9a5"
+    },
+    {
+      "line": "ch1_bridge_cost_song_1",
+      "raw": "Kore.4abd13c6",
+      "seconds": 10.56,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "bb973a28e25cd90f4384e2ce1428250f412a7b27bce9622529651df5d60ae0be",
+      "caption": "Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears.",
+      "captionCheck": {
+        "transcript": "Seven went up where the wall meets the sky. No, not for you, not for the ones with spears.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.4abd13c6.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "ea6b5875e70cb1910dcabe3e411f7e4629f722cca846c4514a11c67953df5f91"
+    },
+    {
+      "line": "ch1_young_ones_open_3",
+      "raw": "Kore.04af4e85",
+      "seconds": 10.28,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "b479a22061d1a4708ebc789180d697df012dfd3758ed080b6e9262eb72eb8945",
+      "caption": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children.",
+      "captionCheck": {
+        "transcript": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.04af4e85.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "4619c5a8371d5ac499f8313af67d5b20df031a776c90c4b61608b54dcd7f9822"
+    },
+    {
+      "line": "ch1_young_ones_open_4",
+      "raw": "Kore.6130eaca",
+      "seconds": 9.4,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "bc30a90beef8d778d49efe7946b41d797b8eba88d653b61fb4919a13dff00e19",
+      "caption": "Do what you must. But I have buried enough of them this year. Leave me some to scold.",
+      "captionCheck": {
+        "transcript": "Hmm, do what you must, but I have buried enough of them this year, leave me some to scold.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.6130eaca.json",
+        "leadingVocalization": "hm",
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "c54ab9088c5b487c01b7726d8e195c2d845d941b55bca512eaa83b13086a3868"
+    },
+    {
+      "line": "ch1_road_east_open_2",
+      "raw": "Kore.62a84f24",
+      "seconds": 10.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "3cbd8187bb4a090469943158f6bb0afbd6804f94b30dda6aa05840bd9381408c",
+      "caption": "They will go to him. He will tell them they were brave. They were. Brave is cheap this winter.",
+      "captionCheck": {
+        "transcript": "They will go to him He will tell them they were brave They were brave is cheap this winter",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.62a84f24.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "76205481db7e26b24697dea97c9fc1df7a6ad44e841b301ceddd876922fd892f"
+    },
+    {
+      "line": "ch1_road_east_open_6",
+      "raw": "Kore.c66c6a3f",
+      "seconds": 6.56,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "5e0f83acacd8983262198940f901be6ed1ebac2b055cd6719734dd1f9539b709",
+      "caption": "Your captain thinks. Good. Tell her to think about the grain.",
+      "captionCheck": {
+        "transcript": "Your captain thinks good tell her to think about the grain",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.c66c6a3f.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "6178465f80acafc0213b92128744bdb374431ae2737e8a0cc48a02825f967bf5"
+    },
+    {
+      "line": "ch1_song_open_3",
+      "raw": "Kore.bf716c56",
+      "seconds": 8.12,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "84ee153f8ee7cee902668559bd8fa3ebe88abd5c5a1181a7890d4433946a0592",
+      "caption": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+      "captionCheck": {
+        "transcript": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.bf716c56.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "f6eb5fdb980f51f7163b708e41731faf7eb7e96c5991bee2f701c98bf9cbbe4f"
+    },
+    {
+      "line": "ch1_song_open_4",
+      "raw": "Kore.7cf884ee",
+      "seconds": 11.24,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "bdb27ee7bd2af3f194a257ae80147cb4b3bf88f90d38736d86d4f6d1f813dfb4",
+      "caption": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should.",
+      "captionCheck": {
+        "transcript": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.7cf884ee.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "7c540c64fb96c88c569108e595c6afa8b01bab91a5d77b0135a3612e9c2808d0"
+    },
+    {
+      "line": "ch1_song_ent_1",
+      "raw": "Kore.f904ff29",
+      "seconds": 10.44,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "5ee7364b3c6ab27805cbadb0cb2725abdca7ae7a6bf717ff56fc41026ffbcfca",
+      "caption": "The valley song. Seven went over, seven came home, they brought something heavy. Yes. Pretty.",
+      "captionCheck": {
+        "transcript": "The Valley Song. Seven went over. Seven came home. They brought something heavy. Yes, pretty.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.f904ff29.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "ae84707513838a512bfd73f5c82f1ec5a737800c788d27f3fa3a82253c274bf4"
+    },
+    {
+      "line": "ch1_song_ent_2",
+      "raw": "Kore.48b90e00",
+      "seconds": 9.68,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "c82ddf9e7ef14598efff1e35f0b4f3c91de19771bd46b9b0e6633d1b572a1bbd",
+      "caption": "Your song was made by the ones who came home. Ours was made by the ones who watched them come.",
+      "captionCheck": {
+        "transcript": "Oh, your song was made by the ones who came home. Ours was made by the ones who watched them come.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.48b90e00.json",
+        "leadingVocalization": "oh",
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "37f68d83d4eddf654e4e7de88d63dbfc139a6abf32dcab6384c90b4b0dd33307"
+    },
+    {
+      "line": "ch1_song_outl_1",
+      "raw": "Kore.bda9a816",
+      "seconds": 9.92,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "2a41bb4f20b6584df070c4d05a4da7446d9ee1ea069e83545e0d59bb0b6ad0c7",
+      "caption": "Hm. I thought you smelled wrong. Not bad. Only far. Like snow from the other side.",
+      "captionCheck": {
+        "transcript": "Hm, I thought you smelled wrong, not bad, only far, like snow from the other side.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.bda9a816.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "0a7a07aba62f04626caced56392a053fcadd26c2a73fe59c757ba1a260e5b938"
+    },
+    {
+      "line": "ch1_song_outl_2",
+      "raw": "Kore.1136f44e",
+      "seconds": 11.64,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "9d4dacc929b863b06ccfd99eafae846dcc4bf2ad5cc1810e13cbe3d9c2f8aea3",
+      "caption": "Then listen close. This song is about your side of the mountain, a little. Perhaps it is about you.",
+      "captionCheck": {
+        "transcript": "Then, listen close. This song is about your side of the mountain, a little. Perhaps it is about you.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.1136f44e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "dc2e4e4e407cac1a5b6c744d0c79a713c7fbb5b6460f9261794f987b87560e20"
+    },
+    {
+      "line": "ch1_song_song_2",
+      "raw": "Kore.76644b6f",
+      "seconds": 10.52,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "2a0f6c9c73f60d753a4e80e1a5432f8a04541747acbd01164386e5f10e0b8acb",
+      "caption": "Seven went up where the wall meets the sky, seven with nothing, and hungry, and cold.",
+      "captionCheck": {
+        "transcript": "Seven went up where the wall meets the sky. Seven with nothing and hungry and cold.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.76644b6f.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": [
+          {
+            "segment": {
+              "start": 10.28,
+              "end": 12.28,
+              "text": " You"
+            },
+            "peak": 24,
+            "rmsDbfs": -75.59836412050734,
+            "reason": "out-of-duration near-silent tail, not a spoken extra word"
+          }
+        ]
+      },
+      "clipSha256": "1c0b29ea331944c6c2fbf377e233757fd008f39ae0ad33f3fb32d75df6c0696e"
+    },
+    {
+      "line": "ch1_song_song_3",
+      "raw": "Kore.a449ab24",
+      "seconds": 10.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "cb604d1fb3d7a91bd867992312ba1367d5d4f25f3cab1d4d6c10a925e437154e",
+      "caption": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+      "captionCheck": {
+        "transcript": "Seven came down when the snow was still falling. Seven came down with their hands full of gold.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.a449ab24.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "fcda52efd86976f4d8471c867f65877d935ee3ff803c61aa9dcba9ffa8d947c6"
+    },
+    {
+      "line": "ch1_song_song_4",
+      "raw": "Kore.0ea8ced9",
+      "seconds": 9.56,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "aaa3cdee46e13279bb0a3737c7ce56ff983236da7bf03bb3a83f34d504a35c5b",
+      "caption": "But nobody runs when they carry a fortune. Seven came down, and the seven came running.",
+      "captionCheck": {
+        "transcript": "But nobody runs when they carry a fortune. Seven came down and the seven came running.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.0ea8ced9.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "169f9aa4c603e4a52f069f9229bcf00daf44355c9a8a5089ca0812213539a3fb"
+    },
+    {
+      "line": "ch1_song_rest_1",
+      "raw": "Kore.491ca49e",
+      "seconds": 7.08,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "e2179a14accc0bfa203536b64a808c5ecacf011841be0405b0532ccbdd622bc0",
+      "caption": "That is the next verse. And the next verse is not for strangers.",
+      "captionCheck": {
+        "transcript": "That is the next verse, and the next verse is not for strangers.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.491ca49e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "b6a63f968362c3b664166d51ae7dd58469c11787e30eebfbb1193a6646e972b9"
+    },
+    {
+      "line": "ch1_song_rest_2",
+      "raw": "Kore.284a1397",
+      "seconds": 10.8,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "46dcc2fa0f129ae52274737ea632d6f5883ae00691b9be570304c5aad666457c",
+      "caption": "You fed my children. That makes you something. Not family. Not yet. Come back when you are.",
+      "captionCheck": {
+        "transcript": "You fed my children. That makes you something. Not family. Not yet. Come back when you are.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts-medium.en/Kore.284a1397.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "a49e5b343f8e9870a811451bfe01bb618a10b309ee3affd0f7fbc41ad68ecfef"
+    },
+    {
+      "line": "ch1_song_crumb_1",
+      "raw": "Kore.d21bec2e",
+      "seconds": 15.16,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "996b622930cb7ba0c188f3f6c24a759547f739352c46143007e0e015accdfa15",
+      "caption": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+      "captionCheck": {
+        "transcript": "You ask well, so a crumb in the old song The gold is not gold We sing gold because it rhymes and the true word is sad",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.d21bec2e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "1ea4e7a8f206a0a8f50fb17c828e98898bfc1521a6ef3313b20a2c6aabc6cc69"
+    },
+    {
+      "line": "ch1_song_crumb_2",
+      "raw": "Kore.3ce50eba",
+      "seconds": 9.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "44000c518ae992ad8a45a5832f4e13a3a0777f643820c83989af06089f330a96",
+      "caption": "The rest when you are family. Not before. Now eat. You are too thin for valley people.",
+      "captionCheck": {
+        "transcript": "The rest when you are family not before now eat you are too thin for Valley people",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.3ce50eba.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "0f53e19c217e3513f1c934bf213ea07bdaa512701ac54058c8be27c15bf138aa"
+    },
+    {
+      "line": "ch3_skarrow_messenger_song_1",
+      "raw": "Kore.e7786839",
+      "seconds": 13.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "aeda2a8a1e7c4acc2feaa0699622d0c4ae091330264e8f1469d58c726062adef",
+      "caption": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+      "captionCheck": {
+        "transcript": "You fed my children Valley people so I give you what I do not give to strangers Not all of it the last verse stays with the clan",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.e7786839.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "a4284b665fa1c53929e430a4bf63dea0533ff89d89dd76517733b9a77e17b206"
+    },
+    {
+      "line": "ch3_skarrow_messenger_song_2",
+      "raw": "Kore.bbace059",
+      "seconds": 10.4,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "01b7cf19b1d925976f11e87c69883b72500be0b1086a39c0f8e1c231f2992800",
+      "caption": "Seven went over the Greywall in the long winters, and seven came back with fire. They came back running.",
+      "captionCheck": {
+        "transcript": "Seven went over the gray wall in the long winters, and seven came back with fire. They came back running.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.bbace059.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "e9d373a92031e7dd853f51680cb3ccbd0477f68b5c1ad0ca99efa1b840cbfab0"
+    },
+    {
+      "line": "ch3_skarrow_messenger_song_3",
+      "raw": "Kore.d86b1e8e",
+      "seconds": 11.68,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "b580a9e64085bd8eabead8e5a6abf218e129e721001294bda43a875344613e35",
+      "caption": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+      "captionCheck": {
+        "transcript": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.d86b1e8e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "c39fa803b9956f5537e28c407e7516065824b595e617ba1b98a4f70745ad6683"
+    },
+    {
+      "line": "ch3_skarrow_messenger_song_4",
+      "raw": "Kore.36110c89",
+      "seconds": 8.48,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "d3a8f1df63ec4abf95360aefa28045c52f4f458eaf0f0fd2aa7d178b2e7ada72",
+      "caption": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+      "captionCheck": {
+        "transcript": "Your wardens sang that it was given we never warmed our hands at it so we never forgot it was stolen",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.36110c89.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "fc5f6fd850ab999fcaf3d8ecd70f14e70a1174a0853d5f742e1c37e4ef221a06"
+    },
+    {
+      "line": "ch3_skarrow_messenger_grandson_2",
+      "raw": "Kore.a61e4327",
+      "seconds": 10.04,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "f69698946e8808df2b471f85d0c970b5774ec822a971baa145306f6c6263bb8a",
+      "caption": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+      "captionCheck": {
+        "transcript": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.a61e4327.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "a564d391b4e0e765a7f34ed855bbc753f27da35de173301e33fe8d6e0fc8ca0d"
+    },
+    {
+      "line": "ch3_skarrow_messenger_grandson_3",
+      "raw": "Kore.5685703c",
+      "seconds": 8.88,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "a8ff9736ac36978d15074aa277e04ca33d8a7334ab17bd456bc1bc201997e8b7",
+      "caption": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+      "captionCheck": {
+        "transcript": "Do not kill him if you can help it beat him if you must Then send him home to me",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.5685703c.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "1bbad9bc728a65b2155537507909bbb90f4909a461ac03e2a7c7eb0b4e891620"
+    },
+    {
+      "line": "ch5_epi_clan_spared_rekindled_open_2",
+      "raw": "Kore.cbad0dfd",
+      "seconds": 11.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "5c850733d60503ec8f07f0cdcbf66a72591e638b6baa02b9dab50be4d9305184",
+      "caption": "Warm again. Good for the children. But watch. In ten winters you valley folk will forget you owe us grain.",
+      "captionCheck": {
+        "transcript": "Warm again, good for the children, but watch. In ten winters, you valley folk will forget you owe us grain.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts-medium.en/Kore.cbad0dfd.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "101eb868ff8e39c79ab34cc30d8409de201ddb6c60720a1331e88743909ea944"
+    },
+    {
+      "line": "ch5_epi_clan_spared_rekindled_open_3",
+      "raw": "Kore.57a2c66f",
+      "seconds": 8.04,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "7ad581888ed2ec17480107b3d743050593509213f8ee8f8bdca8475861584cea",
+      "caption": "We never used your fire, so we will remember for you. Somebody has to sing it.",
+      "captionCheck": {
+        "transcript": "We never used your fire, so we will remember for you Somebody has to sing it",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.57a2c66f.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "b67b7ecfd080c421f40a57f1a046e351c366cf3d34679ef85c3e324a5f6471e5"
+    },
+    {
+      "line": "ch5_epi_clan_spared_returned_open_2",
+      "raw": "Kore.1ab7b8b2",
+      "seconds": 11.96,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "9bed8439f3d1a3151054ae80ac036854896444b554ff2a1b1fc78ef6727599d5",
+      "caption": "Cold again, like the old songs. Now you valley folk learn what we know. Sit. We will teach you how to winter.",
+      "captionCheck": {
+        "transcript": "Cold again, like the old songs. Now you valley folk learn what we know. Sit, we will teach you how to winter.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.1ab7b8b2.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "0663ce1e0ec10adf00162207c53c973acf6d8c95a4127e570d3bd6116c127c2e"
+    },
+    {
+      "line": "ch5_epi_clan_spared_extinguished_open_2",
+      "raw": "Kore.0a0c9d4d",
+      "seconds": 11.52,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "4c2f07a30e99aa71c2a922c615da4fb0939d748c1b1a0861267a6ea4f4b8a35a",
+      "caption": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+      "captionCheck": {
+        "transcript": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.0a0c9d4d.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "3548ce16bf3cc5888eeb92f392f3dbd11ece3724ef5a64afa6c4508f79f1183b"
+    },
+    {
+      "line": "say_ford_assault_1",
+      "raw": "Kore.4d300437",
+      "seconds": 10.2,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "e007efa864b11767a5550e619c1721be51c2ee104e82326bb9903d5f51b9b1bb",
+      "caption": "You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman.",
+      "captionCheck": {
+        "transcript": "You lock your grain and call us thieves. Come then, valley folk, take the bridge from an old woman.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.4d300437.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "301114530408ffc1d3caf9ba55004f535431e54712ba86dfa46add655f88be0d"
+    },
+    {
+      "line": "say_ford_assault_2",
+      "raw": "Kore.ce41b93e",
+      "seconds": 5.92,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "91741953794eaa4b05febd2285ea9c01356e118df5ebebb3891fd54d8e15d14a",
+      "caption": "They are in the water! Shoot them while they wade, children!",
+      "captionCheck": {
+        "transcript": "They are in the water. Shoot them while they wade, children.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.ce41b93e.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "21fde234690a2fec4e49cdd9d03078e367cde9b5a7036f1c17437fe7d0388f1f"
+    },
+    {
+      "line": "say_ford_assault_3",
+      "raw": "Kore.e8a430b6",
+      "seconds": 12.76,
+      "channels": 1,
+      "sampleRate": 24000,
+      "clippedSamples": 0,
+      "sourceSha256": "b5756906aac65050b7a84bf79db2571dfa8fd6f27ff49a5b7591c98edadba961",
+      "caption": "Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!",
+      "captionCheck": {
+        "transcript": "40 winters. I have buried grandchildren. I will not bury more for you. Sing with me.",
+        "receipt": "tools/tactics-assets/imagegen/townsfolk/mother-skarrow/voice-recast/batch/local-transcripts/Kore.e8a430b6.json",
+        "leadingVocalization": null,
+        "excludedSilentTailSegments": []
+      },
+      "clipSha256": "00dba88a3a162615cc4a9aa2fd75b6d05386fd0fbd794c32de50bdddb1fecec3"
+    }
+  ],
+  "failures": []
+}

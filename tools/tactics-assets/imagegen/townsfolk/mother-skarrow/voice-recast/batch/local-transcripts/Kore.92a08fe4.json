@@ -1,0 +1,36 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.92a08fe4.wav",
+  "sourceSha256": "7abe595a0c8c037fe2f12bfd0dfc8ecb6f7309a428f50f7eafbef6551d39a921",
+  "duration": 11.12,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.6,
+      "text": " I see you, Valley People."
+    },
+    {
+      "start": 3.6,
+      "end": 6.48,
+      "text": " You came with spears, after all."
+    },
+    {
+      "start": 6.48,
+      "end": 7.48,
+      "text": " I hoped."
+    },
+    {
+      "start": 7.48,
+      "end": 10.4,
+      "text": " I am old enough to know better than hope."
+    }
+  ],
+  "text": "I see you, Valley People. You came with spears, after all. I hoped. I am old enough to know better than hope.",
+  "secondsToTranscribe": 2.467
+}

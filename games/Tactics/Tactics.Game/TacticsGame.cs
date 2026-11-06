@@ -440,7 +440,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             Toast(player.Id, "Pick one of the classes.");
             return;
         }
-        SetMember(profile, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
+        SetMember(profile, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), _doc.StartingXpForNewMember(Rules.Xp)));
         Save();
         MusterDone();
         if (_phase is TacticsPhase.Exploration or TacticsPhase.Story)
@@ -477,7 +477,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         foreach (var player in _players.Where(p => _doc.For(p.Profile!.Value) is null))
         {
             var cls = ClassForMissingRole(_doc.Members.Values.Select(m => m.Character.Class));
-            SetMember(player.Profile!.Value, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
+            SetMember(player.Profile!.Value, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), _doc.StartingXpForNewMember(Rules.Xp)));
         }
         ReconsiderLeader();     // someone here may have just got the character that lets them lead
     }

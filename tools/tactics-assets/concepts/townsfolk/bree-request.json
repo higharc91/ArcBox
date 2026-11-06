@@ -1,0 +1,18 @@
+{
+  "provider": "Scenario",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "seed": null,
+  "seed_note": "The inspected model schema exposes no seed parameter.",
+  "approval": "pending",
+  "source_brief": "scenario-briefs.json:character_bree_tallow",
+  "parameters": {
+    "prompt": "Original concept art for Wardenflame, set in Embers of the Vale. Grounded, humane tactical fantasy, melancholy with warmth, visibly used practical materials, coherent top-left key light, warm highlights and cooler shadows, strong readable silhouettes and separated material planes. A restrained stylized painted game-development reference, intended for later pixel-art translation: clear shapes rather than photographic microtexture, no cinematic blur or excessive bloom. Maintain one coherent design language across the series; no copied franchise characters or logos. No lettering, captions, watermark or interface. Create a production concept sheet for Bree Tallow. Canon: The innkeeper who hears everything and feeds anyone who sits at her hearth. Bree runs the Last Coal, Emberwick's inn, and has done since her husband, Ned, drowned at the ford eleven years ago. The inn's hearth burns on an ember shard her grandmother bought from a Warden. She feeds the party between chapters, passes on rumours, and is the closest thing the town has to a conscience. Visual direction: A capable, kind working innkeeper, worn apron over substantial practical clothing, sturdy sleeves, small personal notebook kept close; warmth comes from her expression and ordinary work. No regal gown or exaggerated fantasy tavern costume. Sheet layout: matching front, three-quarter and back full-body views at identical height and ground line, plus a head and one gear/material close-up, generous clear spacing, no text. Preserve the same face, build, hairstyle, outfit, accessories and handedness across views. Rear garments must be genuinely drawn from behind: no front belt buckle, front pouch, facial features or chest emblem pasted onto the back. Show the hands gripping any equipment naturally. Draw complete feet and every full-body view without cropping. Any non-canon appearance choice is a proposed design, not a new lore claim. Bree is a mature adult woman, warm and capable, with substantial practical work clothes. Plain muted parchment background. Keep the notebook closed and without readable text. This is the series anchor; subsequent sheets will reuse its rendering style. Use restrained large colour planes that remain readable in a detailed 36-pixel-tall world sprite.",
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "thinkingLevel": "HIGH",
+    "numOutputs": 1,
+    "useGoogleSearch": false
+  }
+}

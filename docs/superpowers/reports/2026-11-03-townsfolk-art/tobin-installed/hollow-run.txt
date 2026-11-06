@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.305 - Forward Mobile - Using Device #0: Unknown - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1280x720 at (160, 100), spec cinder_hollow, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD build ground 425 ms, plan+light 291 ms, bake 19 ms, total 753 ms
+WORLD items 3,410 lit; 2,464 tiles, 12 blocks, block items median 293, most 587; 13 lights, active True; 14 images; route 87 tiles; spots behind-cliff@5,1 block-corner@32,32
+WORLD memory after build: managed 6.9 MB (+6.2), engine 38.5 MB (+1.7), textures 3.9 MB, buffers 7.6 MB, process 325 MB
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD fauna 0 actors, 0 shared textures
+WORLD texture-budget region=cinder_hollow stage=open party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD textures 12 in 640 ms, worst 200.8 ms; binding items (and baking glows) 10 ms; 0 blocks still to record at reveal
+PERF 26 fps   38.4 ms (worst 53.8) | 522 draw calls   4.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 13 fps   78.5 ms (worst 84.2) | 477 draw calls   4.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+PERF 15 fps   65.6 ms (worst 71.8) | 449 draw calls   3.4 k primitives | LOW · 1280×720 (UI 1920×1080) | VOICE OFF
+WORLD texture-budget region=cinder_hollow stage=crossing party=4 textures-bytes=162396416 peak-bytes=162396416 limit-bytes=536870912 result=PASS
+WORLD crossing 87 tiles at 6.7 tiles/s, 12.9 s, 275 frames: frame ms median 42.78, p95 71.67, p99 87.50, worst 142.38
+WORLD crossing after the first 1 s: frame ms median 43.56, p95 71.76, p99 87.50, worst 142.38
+WORLD frames over 16 ms: 275 of 275, at 0.00s=41.7 0.04s=59.7 0.10s=50.0 0.15s=48.6 0.20s=50.0 0.25s=50.0 0.30s=50.0 0.35s=43.7 0.39s=23.4 0.42s=29.7 0.45s=33.3 0.48s=33.3, 0 while recording
+WORLD recording during the walk: 0 frames, ms a frame none
+WORLD _Draw per block, first time: median 0.30, p95 0.90, p99 0.90, worst 0.90, sum 4.1 ms
+WORLD render CPU ms median 0.59, p95 2.18, p99 6.81, worst 7.35; GPU ms median 24.32, p95 41.11, p99 49.60, worst 117.55; at most 679 draw calls
+WORLD overlay query ms median 1.29, p95 3.99, p99 9.46, worst 27.68; draw ms median 0.52, p95 2.33, p99 4.09, worst 6.46; items median 12.00, p95 30.00, p99 37.00, worst 38.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 1
+WORLD memory at end of crossing: managed 7.0 MB (+6.4), engine 39.6 MB (+2.8), textures 154.9 MB, buffers 7.6 MB, process 525 MB
+WORLD unit-release tactical/human_fighter.png
+WORLD unit-release tactical/human_cleric.png
+WORLD unit-release tactical/human_rogue.png
+WORLD unit-release tactical/human_wizard.png
+WORLD unit-texture tactical/elf_fighter.png 3840x2560
+WORLD unit-texture tactical/elf_cleric.png 3840x2560
+WORLD unit-texture tactical/elf_rogue.png 3840x2560
+WORLD unit-texture tactical/elf_wizard.png 3840x2560
+WORLD texture-budget region=cinder_hollow stage=party-change party=4 textures-bytes=162396416 peak-bytes=201718016 limit-bytes=536870912 result=PASS
+WORLD unit-release tactical/elf_fighter.png
+WORLD unit-release tactical/elf_cleric.png
+WORLD unit-release tactical/elf_rogue.png
+WORLD unit-release tactical/elf_wizard.png
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture tactical/human_cleric.png 3840x2560
+WORLD unit-texture tactical/human_rogue.png 3840x2560
+WORLD unit-texture tactical/human_wizard.png 3840x2560
+WORLD texture-budget region=cinder_hollow stage=party-restored party=4 textures-bytes=162396416 peak-bytes=201718016 limit-bytes=536870912 result=PASS
+WORLD closed

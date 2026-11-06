@@ -1,0 +1,57 @@
+{
+  "job": {
+    "jobId": "job_h2SCC7AmmwRGYh2UDc4xHW1F",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_4Vzak6dwktvDmVMwNwwtLXDt",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_v1E4SsEuoG695XovadYGYqio"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 7,
+        "language_probability": 1,
+        "segment_count": 1,
+        "segments": [
+          {
+            "end": 6.6,
+            "start": 0,
+            "text": " The river remembers, ask it nicely and it might tell you.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:39.371Z",
+    "updatedAt": "2026-11-05T00:36:50.339Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:39.371Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:39.457Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:36:50.339Z"
+      }
+    ],
+    "progress": 1
+  }
+}

@@ -332,6 +332,10 @@ public sealed class AshenFordDraftTests
     {
         var draft = Draft.Value;
         var solid = draft.Tiles.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Impassable) == true).ToHashSet();
+        // The authored bridge parapets are intentional three-cell structures.
+        var parapets = (from y in new[] { 60, 63 } from x in Enumerable.Range(105, 3) select new Tile(x, y)).ToArray();
+        Assert.All(parapets, t => { Assert.Contains(t, solid); Assert.Equal("warden_edge/stone", draft.Material(t)); });
+        solid.ExceptWith(parapets);
         while (solid.Count > 0)
         {
             var first = solid.First();

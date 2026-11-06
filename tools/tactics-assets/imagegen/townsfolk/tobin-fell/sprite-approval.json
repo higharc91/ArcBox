@@ -1,0 +1,61 @@
+{
+  "stage": "complete_set_approved_installed",
+  "generatedDate": "2026-11-04",
+  "tool": "image_gen.imagegen",
+  "originalPath": "/workspace/generated_images/exec-0175630f-f859-4b18-82a2-be6fc4c906de.png",
+  "candidateSha256": "ccb33f493b4b06caa9b75ec4da29ef92ebba43f3a0d9bc0c5238f3078ae9fc01",
+  "inputSha256": {
+    "tools/tactics-assets/concepts/townsfolk/generated/character_tobin_fell.png": "2e915a413337500c77128cd72795e21375ea12c7d6e50e3e8762f2f466782f4e",
+    "tools/tactics-assets/imagegen/townsfolk/mother-aubrine/rotations/south.png": "2a1edd0362dd14935480c1b9d98161be261a1d79d281ac7dcfec092f0aa2a000"
+  },
+  "pixelLabCalls": 0,
+  "pixelLabCreditsSpent": 0,
+  "productionInstalled": true,
+  "animationApproval": "authorized_generation_complete",
+  "fullSetTvApproval": "approved",
+  "notes": [
+    "Approved concept and appearance preserved.",
+    "Complete eight-direction idle/walk/talk set, 144 native frames, six native40x40 portraits.",
+    "Full-set/portrait/TV approval pending; separate review overlay only.",
+    "One shared regular grid and scale/offset per direction, never per-frame recentering or mirroring.",
+    "Corrected front walk; all138 other native frames preserved exactly."
+  ],
+  "ownerAppearanceApproval": {
+    "date": "2026-11-04",
+    "quote": "yeah that looks great. Proceed with finishing him",
+    "source": "candidate-1.png",
+    "scope": "Appearance approved; complete motion/portrait/TV set retains its separate approval gate."
+  },
+  "completedSet": {
+    "status": "approved",
+    "sourceFrames": 144,
+    "portraits": 6,
+    "completionImageToolCalls": 10,
+    "pixelLabCreditsSpent": 0,
+    "productionInstalled": true,
+    "sha256": {
+      "review_tobin.png": "d0b6a196f881238c2a5ea9928abe1a68abc5dc083a5c3a7491a3e9265a0bf11e",
+      "review-sprite.json": "9661fc1673739a9408af070cd3235a3b50c072eb10307d58f57de3515782da42",
+      "palette.json": "586c3f6421b715f2f7717bea8ef389618bcb5b49e18256d32ba9c2d9fc1cf353",
+      "atlas-validation.json": "fb18b46035c74d465c86f0b2c9b44eaf4725dbfc64b793c038291a34d45c59dc",
+      "portraits-validation.json": "e67376becfbdac36de82b35e2c1ca3384e2f2fcff75b36aa4819ee180e75e110",
+      "tobin-eight-direction-idle.gif": "0955ac242e745a50008c10e38e8c7ab88db595c9be4b0cc09b8c82aa90233dc6",
+      "tobin-eight-direction-walk.gif": "b69a7f9336da055293bf700378b2a5832c84565a1281080f8038c420d32f070a",
+      "tobin-eight-direction-talk.gif": "06790c81c37b2c321e4fc3afbce57cd70c56d43465f57c695e1f78d052d20bac",
+      "tobin-portraits-review.png": "a32cdf262541b342c8fc6dc3670aac2f0da1c01f78820f6475583db8021e1aee",
+      "tobin-directions-review.png": "cc40e2235fae9927657f5366228ab349ae1be812054d390532df3f76f4ca57ed",
+      "tobin-finished-review.mp4": "d4de96361358e8a820cb5a026689206e80c99855fb5e46a984568a5978c0ebe7",
+      "review-validation.json": "827301053904a039609335baa799eca463c147a899417c33359aea12f69178f6",
+      "tobin-closeup-review.gif": "b5b75342f568624770a6c8f48701ea8854650593f36dc5a3a008db8a47a16edf"
+    },
+    "tv": {
+      "path": "docs/superpowers/reports/2026-11-03-townsfolk-art/tobin-imagegen/world-forge.png",
+      "sha256": "8b6ffa5cc774deafaba5b80b1040574205cc5bedb3b2094578451365c37610af"
+    }
+  },
+  "ownerFullSetApproval": {
+    "date": "2026-11-04",
+    "quote": "Looks good. Who is next",
+    "context": "Owner response to the completed eight-direction motion, six portraits and native forge TV review shown in chat."
+  }
+}

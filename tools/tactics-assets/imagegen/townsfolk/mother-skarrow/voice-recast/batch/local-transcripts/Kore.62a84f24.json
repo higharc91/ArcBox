@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.62a84f24.wav",
+  "sourceSha256": "3cbd8187bb4a090469943158f6bb0afbd6804f94b30dda6aa05840bd9381408c",
+  "duration": 10.76,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": " They will go to him"
+    },
+    {
+      "start": 3.2800000000000002,
+      "end": 5.68,
+      "text": " He will tell them they were brave"
+    },
+    {
+      "start": 6.5600000000000005,
+      "end": 10.32,
+      "text": " They were brave is cheap this winter"
+    }
+  ],
+  "text": "They will go to him He will tell them they were brave They were brave is cheap this winter",
+  "secondsToTranscribe": 2.129
+}

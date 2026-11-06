@@ -1,0 +1,31 @@
+  ArcBox.Sdk -> /workspace/ArcBox/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Counter.Logic -> /workspace/ArcBox/games/Counter/Counter.Logic/bin/Release/net10.0/Counter.Logic.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Counter.Logic.Tests -> /workspace/ArcBox/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll
+  Redline.Logic -> /workspace/ArcBox/games/Redline/Redline.Logic/bin/Release/net10.0/Redline.Logic.dll
+  Redline.Logic.Tests -> /workspace/ArcBox/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll
+  Redline.Presentation -> /workspace/ArcBox/games/Redline/Redline.Presentation/bin/Release/net10.0/Redline.Presentation.dll
+  Redline.Presentation.Tests -> /workspace/ArcBox/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll
+  Redline.Sim -> /workspace/ArcBox/games/Redline/tools/Redline.Sim/bin/Release/net10.0/Redline.Sim.dll
+  Tactics.Logic -> /workspace/ArcBox/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/ArcBox/games/Tactics/Tactics.Game/bin/Release/net10.0/Tactics.Game.dll
+  Tactics.Game.Tests -> /workspace/ArcBox/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll
+  Tactics.Sim -> /workspace/ArcBox/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/ArcBox/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+  Tactics.Presentation -> /workspace/ArcBox/games/Tactics/Tactics.Presentation/bin/Release/net10.0/Tactics.Presentation.dll
+  Tactics.Presentation.Tests -> /workspace/ArcBox/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll
+  Tactics.WorldTools -> /workspace/ArcBox/games/Tactics/Tactics.WorldTools/bin/Release/net10.0/Tactics.WorldTools.dll
+  Tactics.WorldTools.Tests -> /workspace/ArcBox/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll
+  ArcBox.Host.Core -> /workspace/ArcBox/src/ArcBox.Host.Core/bin/Release/net10.0/ArcBox.Host.Core.dll
+  ArcBox.Server -> /workspace/ArcBox/src/ArcBox.Server/bin/Release/net10.0/ArcBox.Server.dll
+  ArcBox.Host.Core.Tests -> /workspace/ArcBox/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll
+  ArcBox.Host -> /workspace/ArcBox/src/ArcBox.Host/.godot/mono/temp/bin/Release/ArcBox.Host.dll
+  ArcBox.Sdk.Tests -> /workspace/ArcBox/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll
+  ArcBox.Server.Tests -> /workspace/ArcBox/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll
+  Tactics.World.Editor -> /workspace/ArcBox/tools/tactics-world/.godot/mono/temp/bin/Release/Tactics.World.Editor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:04:16.18

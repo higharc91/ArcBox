@@ -1,0 +1,63 @@
+{
+  "job": {
+    "jobId": "job_qamtRPYLAjRjsUN5XxNzaMN7",
+    "jobType": "custom",
+    "billing": {
+      "cuCost": 4,
+      "cuDiscount": 0
+    },
+    "metadata": {
+      "input": {
+        "modelId": "model_scenario-audio-to-text",
+        "file": "asset_egFcdXAAdmEKVTGiki9oBqMr",
+        "language": "en",
+        "modelSize": "small.en",
+        "task": "transcribe",
+        "vadFilter": true
+      },
+      "assetIds": [
+        "asset_4pg6JwgvUFDMo7fJZ2TeHXMZ"
+      ],
+      "output": {
+        "detected_language": "en",
+        "duration": 13.92,
+        "language_probability": 1,
+        "segment_count": 2,
+        "segments": [
+          {
+            "end": 11.75,
+            "start": 0.11,
+            "text": " falling things tumble. This came down straight like a stone from a hand, hissed in the river",
+            "words": null
+          },
+          {
+            "end": 13.35,
+            "start": 11.75,
+            "text": " all night long.",
+            "words": null
+          }
+        ]
+      }
+    },
+    "ownerId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "authorId": "user_9378dDd1b8d6e376eC44bB68",
+    "createdAt": "2026-11-05T00:36:59.444Z",
+    "updatedAt": "2026-11-05T00:37:01.203Z",
+    "status": "success",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "date": "2026-11-05T00:36:59.444Z"
+      },
+      {
+        "status": "in-progress",
+        "date": "2026-11-05T00:36:59.541Z"
+      },
+      {
+        "status": "success",
+        "date": "2026-11-05T00:37:01.203Z"
+      }
+    ],
+    "progress": 1
+  }
+}

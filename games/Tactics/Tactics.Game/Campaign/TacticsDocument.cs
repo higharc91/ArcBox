@@ -233,6 +233,15 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
     /// <summary>The member's record, or null when they have no character yet.</summary>
     public MemberRecord? For(ProfileId profile) => Members.GetValueOrDefault(profile.Value);
 
+    /// <summary>A new member joins at the least experienced member's XP, never below the party's current level.</summary>
+    public int StartingXpForNewMember(XpTable table)
+    {
+        if (Members.IsEmpty) return 0;
+        var threshold = table.Thresholds.IsDefaultOrEmpty ? 0
+            : table.Thresholds[Math.Clamp(PartyLevel - 1, 0, table.Thresholds.Length - 1)];
+        return Math.Max(Members.Values.Min(m => m.Xp), threshold);
+    }
+
     /// <summary>Reads a document of any version up to <see cref="CurrentVersion"/>, as that version; an empty or unreadable one is a new campaign's.</summary>
     public static TacticsDocument Read(JsonElement json)
     {

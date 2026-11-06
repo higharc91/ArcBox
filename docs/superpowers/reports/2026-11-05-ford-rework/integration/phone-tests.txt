@@ -1,0 +1,386 @@
+
+> arcbox-play@0.0.0 test
+> vitest run --maxWorkers=1
+
+
+ RUN  v4.1.12 /workspace/ArcBox/web/play
+
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=3&devName=P3". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=GHJK&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=GHJK&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=GHJK&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=GHJK&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=2&devName=P2". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:793:58)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+DOMException [NotSupportedError]: Failed to load iframe page "http://localhost:3000/?room=BCDF&slot=1&devName=P1". Iframe page loading is disabled.
+    at HTMLIFrameElement.#loadPage (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:334:27)
+    at HTMLIFrameElement.[connectedToDocument] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:230:23)
+    at HTMLIFrameElement.[connectedToNode] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLDivElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLDivElement.[appendChild] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLDivElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:522:45)
+    at HTMLDivElement.[insertBefore] (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/element/Element.js:1118:63)
+    at HTMLDivElement.insertBefore (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/nodes/node/Node.js:339:49)
+    at j (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:2954)
+    at L (file:///workspace/ArcBox/web/play/node_modules/preact/dist/preact.mjs:1:1905)
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///workspace/ArcBox/web/play/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///workspace/ArcBox/web/play/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+
+ Test Files  24 passed (24)
+      Tests  517 passed (517)
+   Start at  18:38:56
+   Duration  73.84s (transform 8.06s, setup 0ms, import 16.00s, tests 19.47s, environment 24.91s)
+

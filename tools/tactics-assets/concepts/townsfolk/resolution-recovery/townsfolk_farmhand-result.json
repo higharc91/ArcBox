@@ -1,0 +1,21 @@
+{
+  "id": "townsfolk_farmhand",
+  "jobId": "job_b6Ujt6zRKbv7YquBMrPYZgRr",
+  "jobType": "custom",
+  "status": "success",
+  "progress": 1,
+  "createdAt": "2026-11-04T02:18:03.691Z",
+  "updatedAt": "2026-11-04T02:18:18.486Z",
+  "modelId": "model_google-gemini-nano-banana-2-1",
+  "assetIds": [
+    "asset_mv9S9tjfZgKg6TQRXVGfxRpy"
+  ],
+  "cuCost": 9,
+  "design_approval": "pending",
+  "reference_asset_ids": [
+    "asset_5BTscGVgZiaVkGpPJb65F1X1"
+  ],
+  "output": "townsfolk_farmhand.png",
+  "request_file": "resolution-recovery-requests.json",
+  "resolution": "1K"
+}

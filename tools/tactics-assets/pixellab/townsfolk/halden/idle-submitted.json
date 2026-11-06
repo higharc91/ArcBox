@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "character: a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\nanimation: breathing-idle\nmode: template\ndirections: south, south-west, west, north-west, north, north-east, east, south-east (8 jobs)\njob_ids: south=75fa8f92-d286-48cb-9e4b-ea969b698b3e, south-west=aa80394e-f88f-475e-9b92-3f810cfe348d, west=816987e6-87c6-4082-a2a0-521ebecc9c3d, north-west=57e32ff0-76cb-44f6-8fa8-fd4a16e46842, north=7a8441a5-408e-4b9e-afc1-57a6ba849879, north-east=6b62bbc0-fbc5-423a-b5ff-42075012331d, east=5fdecb3b-a5ef-4d52-a210-a8a46328f32b, south-east=771de2b9-b7db-491a-aa41-7844c9db2338\ngroup: b4f721e6-4455-4aa2-b7d5-a765094d2149\ncost: 8 generations (1/dir x 8)\neta: ~2-4 min\nadd more directions to this group: animate_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\", template_animation_id=\"breathing-idle\", animation_group_id=\"b4f721e6-4455-4aa2-b7d5-a765094d2149\", directions=[...])\n\nhint: get_character(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\")\nif poor: delete_animation(character_id=\"a25c93f8-7dcd-45fa-8db2-4b1539c19e6e\", animation_type=\"...\") then retry with mode=\"v3\""
+      }
+    ],
+    "isError": false
+  }
+}

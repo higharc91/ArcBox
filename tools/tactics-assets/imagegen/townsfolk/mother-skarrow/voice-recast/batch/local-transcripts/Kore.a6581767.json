@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.a6581767.wav",
+  "sourceSha256": "9e494da831fa2e573197d552f8002ef5cb629d4b9a5edde8409abafc4b7c6dec",
+  "duration": 10.32,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.34,
+      "text": " My grandson Vorga holds the bridge you need"
+    },
+    {
+      "start": 5.14,
+      "end": 9.34,
+      "text": " He is a fool and a thief, but he is mine"
+    }
+  ],
+  "text": "My grandson Vorga holds the bridge you need He is a fool and a thief, but he is mine",
+  "secondsToTranscribe": 2.156
+}

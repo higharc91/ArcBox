@@ -1,0 +1,7 @@
+{
+  "status": "rejected",
+  "jobId": "00e3be4e-eeb5-463d-9603-78874690fede",
+  "image": "rejected-front.png",
+  "reason": "Retained diagonal pose and introduced a white patch at the notebook. Not used in the review atlas.",
+  "chargedGenerations": 1
+}

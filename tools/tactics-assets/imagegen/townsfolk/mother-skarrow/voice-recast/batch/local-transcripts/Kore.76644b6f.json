@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.76644b6f.wav",
+  "sourceSha256": "2a0f6c9c73f60d753a4e80e1a5432f8a04541747acbd01164386e5f10e0b8acb",
+  "duration": 10.52,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.28,
+      "text": " Seven went up where the wall meets the sky."
+    },
+    {
+      "start": 5.28,
+      "end": 10.28,
+      "text": " Seven with nothing and hungry and cold."
+    },
+    {
+      "start": 10.28,
+      "end": 12.28,
+      "text": " You"
+    }
+  ],
+  "text": "Seven went up where the wall meets the sky. Seven with nothing and hungry and cold. You",
+  "secondsToTranscribe": 3.2
+}

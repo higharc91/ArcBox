@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-05",
+  "baseline_commit": "8bb089e19d7dc4fc704292a2a0fc38ff686baeff",
+  "concept_approval": "Approve ground concept",
+  "pixel_tv_approval": "awaiting owner",
+  "installed_content_changed": false,
+  "native_tops": 9,
+  "native_sides": 1,
+  "source_pixels_per_tile": 32,
+  "texture_period_tiles": 4,
+  "palette": "ashen_ford",
+  "presentation_tests": {
+    "passed": 2852,
+    "failed": 0
+  },
+  "host_build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "preview_runtime": {
+    "rulesLoaded": true,
+    "battlePlans": 2,
+    "worldBlocks": 80,
+    "bridgeStates": 3,
+    "allWorldTilesMechanicallyEquivalent": true,
+    "installedGroundUnchanged": true
+  },
+  "mechanics": {
+    "repainted_west_bank_cells": 56,
+    "heights_flags_and_per_cell_fuel_unchanged": true,
+    "water_conduction_flags_unchanged": true,
+    "enemy_counts_stats_rewards_objectives_unchanged": true
+  },
+  "captures": {
+    "world_and_overview_pairs": 5,
+    "real_encounter_pair": 1,
+    "resolution": [
+      1280,
+      720
+    ],
+    "errors": 0
+  },
+  "credits": {
+    "native": 0,
+    "pixellab": 0,
+    "scenario_total_cu": 65
+  }
+}

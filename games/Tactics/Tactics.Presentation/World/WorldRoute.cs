@@ -37,7 +37,8 @@ public static class WorldRoute
             return UnitPlace.On(terrain, route[^1]);
         var (from, to) = (UnitPlace.On(terrain, route[index]), UnitPlace.On(terrain, route[index + 1]));
         var part = steps - index;
-        return new UnitPlace(Vector2.Lerp(from.Map, to.Map, part), from.Height + (to.Height - from.Height) * part);
+        var at = Vector2.Lerp(from.Map, to.Map, part);
+        return new UnitPlace(at, RoadSurface.TryHeight(terrain, at, out var height) ? height : from.Height + (to.Height - from.Height) * part);
     }
 
     /// <summary>Which way a walker <paramref name="steps"/> along is heading, on the map.</summary>

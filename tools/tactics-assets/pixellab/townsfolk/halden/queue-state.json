@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "no active jobs (nothing pending or processing)\nhint: list_jobs(include_recent=true) also shows jobs that finished in the last 30 minutes"
+      }
+    ],
+    "isError": false
+  }
+}

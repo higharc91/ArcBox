@@ -1,0 +1,26 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.2f798a4e.wav",
+  "sourceSha256": "ecb992d32a65e98a760cba4f00f0ff9121a637deb9541ab47323ceab074a148d",
+  "duration": 9.2,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "text": " We took the bridge after, not before."
+    },
+    {
+      "start": 5.0,
+      "end": 9.0,
+      "text": " Tell your captain that, if she will hear it."
+    }
+  ],
+  "text": "We took the bridge after, not before. Tell your captain that, if she will hear it.",
+  "secondsToTranscribe": 2.098
+}

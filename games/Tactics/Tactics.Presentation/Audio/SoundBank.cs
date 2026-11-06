@@ -30,8 +30,8 @@ public sealed record UnitGear(string? Weapon, bool Armoured, string? Family, boo
 
 /// <summary>
 /// What the pack holds for the ear: the sfx and music manifests, and what the rest of the pack says about who a sprite is. The
-/// sfx manifest says what each sound is for only in its <c>use</c> text, so effects and creatures are read from that text,
-/// which keeps a sound added to the pack from needing a change here.
+/// creature attack entries name their monster ids explicitly; effect keys and movement traits still come from the
+/// manifest's descriptive <c>use</c> text.
 /// </summary>
 public sealed partial class SoundBank
 {
@@ -146,8 +146,8 @@ public sealed partial class SoundBank
             if (entry.Group == "spell")
                 ReadEffects(entry);
             else if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
-                foreach (var name in Words(entry.Use))
-                    _families.TryAdd(name, entry.Id[..^"_attack".Length]);
+                foreach (var name in v.GetProperty("families").EnumerateArray())
+                    _families.TryAdd(name.GetString()!, entry.Id[..^"_attack".Length]);
         }
         _heavy = [.. Words(_sounds.GetValueOrDefault("step_heavy")?.Use ?? "")];
         _fliers = [.. Words(_sounds.GetValueOrDefault("flap_wings")?.Use ?? "")];

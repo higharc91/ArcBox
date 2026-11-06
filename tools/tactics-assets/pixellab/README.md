@@ -1,5 +1,19 @@
 # Wardenflame PixelLab profile
 
+Issue #80's NPC and townsfolk concepts are in
+[`../concepts/townsfolk/README.md`](../concepts/townsfolk/README.md).
+All 19 character/preset concept designs and the child-B body-view supplement are
+approved as of 2026-11-03. Existing Halden and Maud concepts were reused. NPC
+PixelLab authenticated through the owner-supplied local MCP configuration.
+The [Bree pilot](townsfolk/README.md) has four static candidates (15 generations)
+and two short idle studies (2 generations each). The owner switched back to candidate 1;
+the original displayed idle is approved. Its full eight-direction idle/walk/talk
+review set and real TV shots are complete; full directional/TV approval remains
+pending. See the [cloud handoff](../../../docs/superpowers/plans/2026-11-03-townsfolk-art-cloud-handoff.md).
+Use the current shipped tactical hero density and anchors for the
+production comparison, rather than assuming the older reference PNGs establish
+the current hero size.
+
 `wardenflame-style.json` is the reusable **local** generation profile. It contains
 the shared art brief, five biome palettes taken from the shipped material ramps,
 approved reference-image paths/hashes, intended canvas sizes and animation rules.

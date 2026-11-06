@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-medium.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.aa300f5c.wav",
+  "sourceSha256": "69fe55a07060d8c77bc905fab9e4ad3ff1f7001b30a634588146869dc764d684",
+  "duration": 21.4,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.7,
+      "text": " Read the dialogue with an elderly woman's low husky contralto,"
+    },
+    {
+      "start": 5.7,
+      "end": 8.120000000000001,
+      "text": " dry rasp and quiet authority."
+    },
+    {
+      "start": 10.120000000000001,
+      "end": 17.44,
+      "text": " You fed my children, Ballypeople, so I give you what I do not give to strangers."
+    },
+    {
+      "start": 17.44,
+      "end": 18.68,
+      "text": " Not all of it."
+    },
+    {
+      "start": 18.68,
+      "end": 21.080000000000002,
+      "text": " The last verse stays with the clan."
+    }
+  ],
+  "text": "Read the dialogue with an elderly woman's low husky contralto, dry rasp and quiet authority. You fed my children, Ballypeople, so I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+  "secondsToTranscribe": 16.235
+}

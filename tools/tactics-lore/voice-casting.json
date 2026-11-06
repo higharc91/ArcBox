@@ -1,5 +1,5 @@
 {
-  "about": "One voice per speaker, everywhere: pre-rendered lines, and live TTS of any line without a clip (the TV's /api/tts with theme tactics.npc.<id>). Presets are Gemini TTS / Chirp3-HD voice names (en-US-Chirp3-HD-<preset>). Player voice sets have two casts each (low, high). NPCs have one; where two speakers must share a preset, a pitch shift (semitones) or a filter keeps them apart in the pre-rendered clips. Filters can't reach live TTS, so major speakers get presets of their own. The ArcBox host (lobby) is Puck, so Wardenflame keeps Puck off its speakers.",
+  "about": "One voice per speaker: authored pre-rendered lines and registered theme metadata (tactics.npc.<id>). Tactics uses recordings only; missing clips never enable live TTS. Presets are Gemini TTS / Chirp3-HD voice names (en-US-Chirp3-HD-<preset>). Player voice sets have two casts each (low, high). NPCs have one; where two speakers must share a preset, a pitch shift (semitones) or a filter keeps them apart in the pre-rendered clips. Filters can't reach live TTS, so major speakers get presets of their own. The ArcBox host (lobby) is Puck, so Wardenflame keeps Puck off its speakers.",
   "model": "model_google-gemini-3-8-flash-tts",
   "language": "en-US",
   "sets": {
@@ -101,9 +101,10 @@
       "note": "clear mezzo, measured"
     },
     "dagna_holt": {
-      "preset": "Callirrhoe",
-      "pitch": -1,
-      "note": "low, flat, few words"
+      "preset": "Gacrux",
+      "pitch": 0,
+      "note": "Owner-approved mature veteran captain: low, flat Northern delivery, grounded and lightly weathered. Shares grim.high preset; authored direction distinguishes her.",
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue."
     },
     "pip_ashdown": {
       "preset": "Leda",
@@ -111,18 +112,136 @@
       "note": "a child; shares earnest.high, pitched up"
     },
     "old_maud": {
-      "preset": "Achernar",
-      "pitch": -1,
-      "note": "ancient, papery"
+      "preset": "Gacrux",
+      "pitch": 0,
+      "note": "Owner-approved ancient105-year-old, papery and unhurried but lucid; distinct performance direction from Dagna/ grim.high.",
+      "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+      "approvedRenderText": {
+        "bark_old_maud_town_1": {
+          "preset": "Gacrux",
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
+          "lineDelivery": null,
+          "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit."
+        },
+        "ch1_maud_who_1": {
+          "preset": "Gacrux",
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways.",
+          "lineDelivery": null,
+          "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways."
+        },
+        "bark_old_maud_town_7": {
+          "preset": "Gacrux",
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "text": "Never touched a shard. Not once. That's why there's still all of me.",
+          "lineDelivery": null,
+          "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Never touched a shard. Not once. That's why there's still all of me."
+        },
+        "ch1_maud_open_4": {
+          "preset": "Gacrux",
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "text": "Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one.",
+          "lineDelivery": null,
+          "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one."
+        },
+        "ch1_maud_bye_2": {
+          "preset": "Gacrux",
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "text": "Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at.",
+          "lineDelivery": null,
+          "renderText": "<Ancient, papery, breathy105-year-old woman; warm, wry, frail but lucid, unhurried.> Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at."
+        }
+      }
     },
     "celandine_marrowby": {
       "preset": "Autonoe",
       "note": "smooth, cultured alto"
     },
     "mother_skarrow": {
-      "preset": "Laomedeia",
-      "pitch": -2,
-      "note": "cracked, rasping"
+      "preset": "Kore",
+      "pitch": 0,
+      "note": "cracked, rasping",
+      "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+      "approvedRenderText": {
+        "bark_mother_skarrow_town_2": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+          "lineDelivery": null,
+          "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> 40 winters I have held this clan. Do not ask me if I can hold it one more."
+        },
+        "ch1_parley_young_fail_1": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+          "lineDelivery": null,
+          "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> 40 winters I have held this clan. Do not ask me if I can hold it one more."
+        },
+        "bark_mother_skarrow_defeat_1": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Whatever you think of me, feed the little ones. Feed them.",
+          "lineDelivery": null,
+          "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Whatever you think of me, feed the little ones. Feed them."
+        },
+        "ch1_parley_young_pass_1": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask.",
+          "lineDelivery": null,
+          "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask."
+        },
+        "ch1_song_song_3": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+          "lineDelivery": null,
+          "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Seven came down when the snow was still falling, seven came down with their hands full of gold."
+        },
+        "ch3_skarrow_messenger_song_1": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+          "lineDelivery": null,
+          "renderText": "You fed my children, valley people. <short pause> So I give you what I do not give to strangers. <short pause> Not all of it. <short pause> The last verse stays with the clan."
+        },
+        "ch3_skarrow_messenger_grandson_3": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+          "lineDelivery": null,
+          "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> Do not kill him, if you can help it. Beat him if you must. Then send him home to me."
+        },
+        "ch1_parley_bread_2": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Small kindness. Small stomachs. It is not nothing.",
+          "lineDelivery": null,
+          "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> Small kindness. <short pause> Small stomachs. It is not nothing."
+        },
+        "ch1_song_crumb_1": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+          "lineDelivery": null,
+          "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.> You ask well. So. <short pause> A crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad."
+        },
+        "ch3_skarrow_messenger_song_4": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+          "lineDelivery": null,
+          "renderText": "Your Wardens sang that it was given. <short pause> We never warmed our hands at it, so we never forgot. <short pause> It was stolen."
+        },
+        "ch3_skarrow_messenger_grandson_2": {
+          "preset": "Kore",
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "text": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+          "lineDelivery": null,
+          "renderText": "<Old female goblin, low husky contralto, dry rasp; calm authority.> My grandson Vorga holds the bridge you need. He is a fool and a thief. <short pause> And he is mine."
+        }
+      }
     },
     "ysolde": {
       "preset": "Despina",

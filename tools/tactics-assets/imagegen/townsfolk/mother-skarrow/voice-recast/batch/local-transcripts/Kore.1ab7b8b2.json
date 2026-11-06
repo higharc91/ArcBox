@@ -1,0 +1,31 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.1ab7b8b2.wav",
+  "sourceSha256": "9bed8439f3d1a3151054ae80ac036854896444b554ff2a1b1fc78ef6727599d5",
+  "duration": 11.96,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.44,
+      "text": " Cold again, like the old songs."
+    },
+    {
+      "start": 4.44,
+      "end": 8.32,
+      "text": " Now you valley folk learn what we know."
+    },
+    {
+      "start": 8.32,
+      "end": 11.76,
+      "text": " Sit, we will teach you how to winter."
+    }
+  ],
+  "text": "Cold again, like the old songs. Now you valley folk learn what we know. Sit, we will teach you how to winter.",
+  "secondsToTranscribe": 2.404
+}

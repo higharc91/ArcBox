@@ -1,0 +1,15 @@
+{
+  "model": {
+    "modelId": "model_google-gemini-3-8-flash-tts",
+    "language": "en-US",
+    "text": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.> Sit down, dearie. I\u2019ve waited a hundred years, I can wait while you sit.",
+    "voice": "Gacrux"
+  },
+  "quotedCU": 5,
+  "billedCU": 5,
+  "jobId": "job_hrJPAVUNz1C47HaDcdMxx82G",
+  "assetId": "asset_JyX7gkJmsDA5hwqQA9UZ7TiS",
+  "scope": "one-line audition for owner review before replacing all24 lines",
+  "postPitchSemitones": 0,
+  "filter": null
+}

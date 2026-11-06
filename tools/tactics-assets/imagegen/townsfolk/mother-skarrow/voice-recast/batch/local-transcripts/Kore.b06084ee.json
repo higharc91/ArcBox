@@ -1,0 +1,41 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper1.2.1 / CTranslate2 CPU int8",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "initialPrompt": null,
+  "source": "Kore.b06084ee.wav",
+  "sourceSha256": "c636bb3ba3aaa23c8e71a9e306d001552d11cea5435e93a47736942e189ea3e7",
+  "duration": 23.0,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 8.88,
+      "text": " Old female goblin, low husky contralto, dry rasp, calm authority."
+    },
+    {
+      "start": 8.88,
+      "end": 13.72,
+      "text": " You ask well, so a crumb."
+    },
+    {
+      "start": 13.72,
+      "end": 17.44,
+      "text": " In the old song, the gold is not gold."
+    },
+    {
+      "start": 17.44,
+      "end": 22.76,
+      "text": " We sing gold because it rhymes, and the true word is sad."
+    },
+    {
+      "start": 22.76,
+      "end": 24.76,
+      "text": " You"
+    }
+  ],
+  "text": "Old female goblin, low husky contralto, dry rasp, calm authority. You ask well, so a crumb. In the old song, the gold is not gold. We sing gold because it rhymes, and the true word is sad. You",
+  "secondsToTranscribe": 8.782
+}

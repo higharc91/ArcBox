@@ -159,7 +159,7 @@ public sealed class GoldenTests
         var stats = tally.Snapshot();
         Assert.Equal(4, stats.Reactions);
         Assert.Equal(6, stats.FriendlyConductionDamage); // the shaman conducts into its own goblin
-        Assert.Equal(1, stats.BurningTileRounds);
+        Assert.Equal(3, stats.BurningTileRounds); // three grass cells beside the new parapet, before the mage wades
         Assert.Equal(0, stats.SurfaceDeaths);
     }
 

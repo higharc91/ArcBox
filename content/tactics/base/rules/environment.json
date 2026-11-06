@@ -5,7 +5,11 @@
     "grass/dry",
     "grass/autumn",
     "grass_ford/autumn",
-    "forest_floor/leafy"
+    "forest_floor/leafy",
+    "warden_deck/*",
+    "ash_ford/roots",
+    "grass_ford/pasture",
+    "grass_ford/moist"
   ],
   "zoneFuel": [
     "grease"

@@ -1908,5 +1908,5 @@ def _showcase(R: dict) -> None:
         probe.paste(shown[k], (0, n * shown[0].height))
     pal = probe.quantize(colors=255, method=Image.Quantize.MEDIANCUT)
     gif = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in shown]
-    gif[0].save(PREVIEWS / "anim-ambient.gif", save_all=True, append_images=gif[1:], duration=GIF_MS, loop=0,
+    save(gif[0], PREVIEWS / "anim-ambient.gif", save_all=True, append_images=gif[1:], duration=GIF_MS, loop=0,
                 optimize=True)
