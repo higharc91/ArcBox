@@ -135,6 +135,30 @@ public sealed class SimSmokeTests
     }
 
     [Fact]
+    public void Sweeps_can_give_a_class_its_subclass_and_every_member_a_race()
+    {
+        // #110 measures the subclass signatures (Shadowstep, Gale Leap, …) and the elf's Fey Step, which a default party lacks.
+        var rules = BasePackTests.Rules;
+        var plain = new SimConfig([], [3], 1, [4], 1, Difficulty.Normal);
+        var config = plain with { Subclasses = ImmutableDictionary<string, string>.Empty.Add("rogue", "rogue.shadow"), Race = "elf" };
+
+        var rogue = SimRunner.Character(config, rules, "p1.rogue", "rogue", 3);
+        Assert.Equal(("rogue.shadow", "elf"), (rogue.Subclass, rogue.Race));
+        Assert.Contains(new AbilityId("shadow.shadowstep"), SheetBuilder.ForCharacter(rogue, rules).Abilities);
+        var fighter = SimRunner.Character(config, rules, "p2.fighter", "fighter", 3);
+        Assert.Equal((null, "elf"), (fighter.Subclass, fighter.Race));
+        Assert.Equal((null, SimRunner.Race), (SimRunner.Character(plain, rules, "p1.rogue", "rogue", 3).Subclass,
+            SimRunner.Character(plain, rules, "p1.rogue", "rogue", 3).Race));
+
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(plain with { Subclasses = config.Subclasses!.SetItem("rogue", "monk.windstep") }, rules));
+        Assert.Throws<ArgumentException>(() => SimRunner.Run(plain with { Race = "dragon" }, rules));
+        var report = Report.Markdown([], config with { Subclasses = config.Subclasses!.Add("monk", "monk.windstep") });
+        Assert.Contains("--subclasses monk:monk.windstep,rogue:rogue.shadow --race elf", report, StringComparison.Ordinal);
+        Assert.Contains("- **Subclasses:** monk: `monk.windstep`, rogue: `rogue.shadow`.", report, StringComparison.Ordinal);
+        Assert.Contains("elf characters", report, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Sampled_parties_are_fixed_distinct_and_have_a_healer_or_defender()
     {
         var rules = BasePackTests.Rules;

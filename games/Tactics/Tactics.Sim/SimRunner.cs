@@ -8,10 +8,13 @@ namespace Tactics.Sim;
 /// <see cref="Levels"/>, with <see cref="PartiesPerSize"/> sampled class combinations of each size in
 /// <see cref="PartySizes"/> (sizes the encounter doesn't take are skipped), each with seeds 1 to <see cref="Seeds"/>, on
 /// <see cref="Difficulty"/>. A battle still going when round <see cref="RoundCap"/> is over stops and counts as lost.
+/// <see cref="Subclasses"/> gives a class one of its subclasses (class id to subclass id; none by default) and
+/// <see cref="Race"/> every party member a race (<see cref="SimRunner.Race"/> by default), to measure what they add.
 /// </summary>
 public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray<int> Levels, int PartiesPerSize,
     ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30,
-    ImmutableDictionary<string, string>? Trinkets = null, int Companions = 0);
+    ImmutableDictionary<string, string>? Trinkets = null, int Companions = 0,
+    ImmutableDictionary<string, string>? Subclasses = null, string? Race = null);
 
 /// <summary>
 /// One simulated battle: the encounter, the party's level and classes (one entry per member, ordinal order), the seed,
@@ -43,7 +46,8 @@ public enum RoleBand { None, Defender, Striker, Healer, Control }
 
 /// <summary>
 /// Plays the battles a <see cref="SimConfig"/> describes, AI on both sides (spec §5.6). Party members are built with
-/// <see cref="SheetBuilder.DefaultCharacter"/> (human, no subclass) and play the profile their class's <c>aiTags</c> name
+/// <see cref="SheetBuilder.DefaultCharacter"/> (<see cref="Character"/>: human, no subclass, unless the config says otherwise) and
+/// play the profile their class's <c>aiTags</c> name
 /// (<see cref="ProfileFor"/>) with no items; enemies play their monster's profile. Every battle is independent and
 /// deterministic, so they run in parallel and come back in the config's order.
 /// </summary>
@@ -55,7 +59,7 @@ public static class SimRunner
     /// <summary>At most this many members of one class in a sampled party (more only when the pack is too small to fill it).</summary>
     public const int MaxCopies = 2;
 
-    /// <summary>The race every simulated character takes.</summary>
+    /// <summary>The race every simulated character takes unless <see cref="SimConfig.Race"/> names another.</summary>
     public const string Race = "human";
 
     /// <summary>How many times a turn is planned again after a plan goes stale (a move cut short) before it is ended.</summary>
@@ -151,6 +155,11 @@ public static class SimRunner
                 throw new ArgumentException($"Trinket '{trinket}' is not a reward for class '{cls}'.", nameof(config));
         if (config.Companions < 0 || config.PartySizes.Any(size => config.Companions > size))
             throw new ArgumentOutOfRangeException(nameof(config), config.Companions, "Companions must be 0 up to the smallest party size.");
+        foreach (var (cls, subclass) in config.Subclasses ?? ImmutableDictionary<string, string>.Empty)
+            if (!rules.Classes.TryGetValue(cls, out var def) || !def.Subclasses.Any(s => s.Id == subclass))
+                throw new ArgumentException($"Subclass '{subclass}' is not one of class '{cls}'.", nameof(config));
+        if (config.Race is { } race && !rules.Races.ContainsKey(race))
+            throw new ArgumentException($"Unknown race '{race}'.", nameof(config));
         var parties = Parties(config, rules);
         var jobs = new List<(string Encounter, int Level, ImmutableArray<string> Party, ulong Seed)>();
         foreach (var encounter in config.Encounters)
@@ -169,14 +178,11 @@ public static class SimRunner
     private static SimBattle Play(SimConfig config, RulesPack rules, string encounter, int level, ImmutableArray<string> classes,
         ulong seed)
     {
-        var race = rules.Races.ContainsKey(Race) ? Race : rules.Races.Keys.First();
         ImmutableArray<PartyMember> party = [.. classes.Select((cls, i) =>
         {
             var id = new UnitId($"p{i + 1}.{cls}");
-            var character = SheetBuilder.DefaultCharacter(id.Value, race, cls, null, level, rules)
-                with { Trinket = config.Trinkets?.GetValueOrDefault(cls) };
             // The first Companions members (in the party's ordinal class order) play the absent-player profile.
-            return new PartyMember(id, character,
+            return new PartyMember(id, Character(config, rules, id.Value, cls, level),
                 new AiControlled(i < config.Companions ? "companion" : ProfileFor(rules.Classes[cls])));
         })];
         var setup = Encounters.Setup(encounter, party, config.Difficulty, rules);
@@ -203,6 +209,18 @@ public static class SimRunner
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
             tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
             ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level, tally.Environment, config.Companions);
+    }
+
+    /// <summary>
+    /// The party member of class <paramref name="cls"/> at <paramref name="level"/>: <see cref="SheetBuilder.DefaultCharacter"/>
+    /// of the config's race (else <see cref="Race"/>, else the pack's first race), with the class's subclass from
+    /// <see cref="SimConfig.Subclasses"/> if it has one, and its trinket from <see cref="SimConfig.Trinkets"/>.
+    /// </summary>
+    internal static CharacterRecord Character(SimConfig config, RulesPack rules, string id, string cls, int level)
+    {
+        var race = config.Race ?? (rules.Races.ContainsKey(Race) ? Race : rules.Races.Keys.First());
+        return SheetBuilder.DefaultCharacter(id, race, cls, config.Subclasses?.GetValueOrDefault(cls), level, rules)
+            with { Trinket = config.Trinkets?.GetValueOrDefault(cls) };
     }
 
     /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>

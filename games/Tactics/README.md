@@ -25,7 +25,7 @@ Six seeds are noisy, so judge the final numbers at 20. The report flags:
 
 `--companions N` (0 up to the smallest party size) plays the first N members of every party, in class order, with the `companion` profile that plays absent players, timed-out turns and AI fillers, instead of their class's profile. Run the same sweep with and without it to compare (#109). A companion's weights are those of its class's profile (`healer`, `caster`, `archer`, `skirmisher` or `brute`, chosen from the class's `aiTags`), with the companion-only rules on top: it revives first, spends class resources freely, guards healers and protected allies, and uses at most one healing item.
 
-Simulated parties have no subclass. The latest numbers and every tuning decision are in [the final balance report](../../docs/superpowers/reports/2026-10-30-tactics-balance.md).
+Simulated parties are human and have no subclass. To measure what a subclass or race adds, `--subclasses rogue:rogue.shadow,monk:monk.windstep` gives each listed class that subclass, and `--race elf` makes every party member that race (#110). The latest numbers and every tuning decision are in [the final balance report](../../docs/superpowers/reports/2026-10-30-tactics-balance.md).
 
 If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dotnet test games/Tactics/Tactics.Logic.Tests`, review each diff, then run again without the flag. The recording run fails `Warlord_bridge_plays_the_showcase_triggers` if it runs before the replay is written; the second run must pass. To re-record `warlord-bridge` from the AI, empty its `commands` in `Golden/warlord-bridge.replay.json`.
 
