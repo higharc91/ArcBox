@@ -46,6 +46,15 @@ class MusicList(unittest.TestCase):
                 self.assertIs(music[sid]["instrumental"], True)
 
 
+class CreatureFamilies(unittest.TestCase):
+    def test_attack_family_lists_match_the_existing_voice_roster(self):
+        entries = audio.load(audio.KINDS["sfx"]["list"])
+        for family, voice in entries["voices"].items():
+            with self.subTest(family):
+                self.assertEqual([name.strip() for name in voice["monsters"].split(",")],
+                                 entries[f"{family}_attack"]["families"])
+
+
 class Plan(unittest.TestCase):
     def test_a_music_job_carries_instrumental(self):
         with tempfile.TemporaryDirectory() as d:
@@ -79,13 +88,14 @@ class Manifests(unittest.TestCase):
             external = {"files": ["crow.wav"], "loop": False, "group": "ambience", "use": "A nearby crow"}
             table["external"].write_text(json.dumps({"sounds": {"animal_crow": external}}))
             (table["out"] / "crow.wav").write_bytes(b"existing")
-            table["list"].write_text(json.dumps({"chime": cue()}))
+            table["list"].write_text(json.dumps({"chime": cue(group="creature", families=["mimic"])}))
             (table["out"] / "chime.ogg").write_bytes(b"generated")
             with patch.object(audio, "KINDS", {"sfx": table}):
                 self.assertEqual(audio.write_manifests(), {"sfx": 2})
             result = json.loads((table["out"] / "manifest.json").read_text())
             self.assertEqual(result["sounds"]["animal_crow"], external)
             self.assertEqual(result["sounds"]["chime"]["files"], ["chime.ogg"])
+            self.assertEqual(result["sounds"]["chime"]["families"], ["mimic"])
             # A later unrelated import must leave an unchanged manifest byte-identical, including its authored ordering.
             manifest_path = table["out"] / "manifest.json"
             authored = json.dumps(result, sort_keys=True, separators=(",", ":"))

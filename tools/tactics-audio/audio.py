@@ -2,7 +2,7 @@
 
 The sound and music lists live next to this script:
 
-    sfx-list.json     {"voices": {...}, "<id>": {"prompt", "negative", "duration", "variants", "group", "loop", "use"}}
+    sfx-list.json     {"voices": {...}, "<id>": {"prompt", "negative", "duration", "variants", "group", "loop", "use", "families"?}}
     music-list.json   {"<id>": {"prompt", "duration", "variants", "group", "loop", "use", "seed", "instrumental"}}
     sfx-assets.json   {"model", "team", "project", "clips": {"<clip id>": {"asset", "job", ...}}}
     music-assets.json (same shape)
@@ -23,7 +23,7 @@ target, capped so the sample peak stays at or under -1 dBFS; a spiky clip that t
 peak limiting on top, and stays under its target if it needs more. SFX are mono, music
 stereo, both 48 kHz Ogg Vorbis, encoded bit-exactly so re-imports are byte-identical. Output:
 
-    content/tactics/base/sfx/<clip id>.ogg   + manifest.json  {"sounds": {"<id>": {"files": [...], "loop", "group", "use"}}}
+    content/tactics/base/sfx/<clip id>.ogg   + manifest.json  {"sounds": {"<id>": {"files": [...], "loop", "group", "use", "families"?}}}
     content/tactics/base/music/<clip id>.ogg + manifest.json  {"tracks": {"<id>": {...}}}
 
 The art loader turns each top-level object's entries into `<set>.<id>` keys, so `sfx.swing_sword` and `music.battle`
@@ -197,6 +197,8 @@ def write_manifests() -> dict[str, int]:
                 entry["source"] = spec["source"]
             if "voice" in spec:
                 entry["voice"] = spec["voice"]
+            if "families" in spec:
+                entry["families"] = spec["families"]
             table[sid] = entry
         external = load(k["external"]).get(k["group_key"], {}) if "external" in k else {}
         for sid, entry in external.items():
