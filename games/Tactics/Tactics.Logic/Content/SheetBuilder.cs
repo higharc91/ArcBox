@@ -119,6 +119,7 @@ public static class SheetBuilder
         var abilities = new List<AbilityId>();
         var passives = new List<string>(race.Passives);
         var attacks = 1;
+        int? rangedAttacks = null;
         if (race.Ability is { } racial)
             abilities.Add(racial);
         for (var level = 1; level <= c.Level; level++)
@@ -130,6 +131,8 @@ public static class SheetBuilder
                     passives.Add(passive);
                 else if (feature.Attacks is { } n)
                     attacks = Math.Max(attacks, n);
+                else if (feature.RangedAttacks is { } ranged)
+                    rangedAttacks = Math.Max(rangedAttacks ?? 1, ranged);
             }
         foreach (var pick in picks)
             if (rules.Abilities.ContainsKey(pick))
@@ -157,7 +160,8 @@ public static class SheetBuilder
             Move: race.Move, Jump: race.Jump ?? cls.Jump, InitiativeBonus: 0, SaveProficiencies: [.. cls.Saves],
             Skills: Ordinal.Set(skills),
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
-            Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon, Attacks: attacks,
+            Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon,
+            Attacks: weapon.Ranged ? rangedAttacks ?? attacks : attacks,
             Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
             Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
     }

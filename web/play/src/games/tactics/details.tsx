@@ -11,7 +11,7 @@ import { Crest } from "./art";
 export type StatKey = "str" | "dex" | "con" | "int" | "wis" | "cha";
 export const STATS: StatKey[] = ["str", "dex", "con", "int", "wis", "cha"];
 
-export interface LevelGuide { level: number; features: string[]; attacks: number | null; choices: { choose: number; from: string[] }[] }
+export interface LevelGuide { level: number; features: string[]; attacks: number | null; rangedAttacks?: number; choices: { choose: number; from: string[] }[] }
 export interface PortalDetails {
   level: number;
   races: Record<string, { name: string; facts: string[]; traits: string[] }>;
@@ -191,7 +191,8 @@ function Levels({ details, levels, open }: { details: PortalDetails; levels: Lev
         <li key={l.level}>
           <span class="tx-level-n">Level {l.level}</span>
           <div class="tx-level-body">
-            {l.attacks ? <p class="tx-note">Attack makes {l.attacks} attacks.</p> : null}
+            {l.attacks ? <p class="tx-note">Attack makes {l.attacks}{l.rangedAttacks != null ? " melee" : ""} attacks{l.rangedAttacks != null ? ` or ${l.rangedAttacks} ranged ${l.rangedAttacks === 1 ? "attack" : "attacks"}` : ""}.</p>
+              : l.rangedAttacks != null ? <p class="tx-note">Attack makes {l.rangedAttacks} ranged {l.rangedAttacks === 1 ? "attack" : "attacks"}.</p> : null}
             {l.features.map((id) => <FeatureCard key={id} details={details} id={id} open={open} />)}
             {l.choices.map((c, i) => (
               <div key={i} class="tx-level-choice">

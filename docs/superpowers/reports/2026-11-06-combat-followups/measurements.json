@@ -1,0 +1,404 @@
+{
+  "metadata": {
+    "config": {
+      "encounters": [
+        "crypt_hall",
+        "crystal_cave",
+        "forest_ruins",
+        "river_crossing",
+        "warlord_bridge"
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "partiesPerSize": 6,
+      "partySizes": [
+        4,
+        5,
+        6
+      ],
+      "seeds": 20,
+      "difficulty": "Normal",
+      "roundCap": 30,
+      "trinkets": null,
+      "companions": 0,
+      "subclasses": null,
+      "race": null,
+      "withClass": null,
+      "weapons": null,
+      "policy": null,
+      "rotateFormation": true
+    },
+    "hash": "c1f25acf33a330bf000e20b631666d34cda4133f3f74c40536a9466422086216",
+    "revision": "158be1da"
+  },
+  "caps": {
+    "rows": [
+      {
+        "level": 1,
+        "band": 3.1793601037914345,
+        "rapier": 3.3380307649705387,
+        "rapierDeviation": 0.04990647677496085,
+        "bowAi": 3.99113066804519,
+        "bowAiRatio": 1.2553251402021768,
+        "bowScript": 3.5253139920230914,
+        "bowScriptRatio": 1.1088124266952655
+      },
+      {
+        "level": 2,
+        "band": 3.811136876046681,
+        "rapier": 4.167921536436775,
+        "rapierDeviation": 0.09361633339188513,
+        "bowAi": 4.231002389273094,
+        "bowAiRatio": 1.1101680487692016,
+        "bowScript": 4.189156503916155,
+        "bowScriptRatio": 1.0991881530798222
+      },
+      {
+        "level": 3,
+        "band": 4.150762101338248,
+        "rapier": 4.43792975475623,
+        "rapierDeviation": 0.06918431998918861,
+        "bowAi": 4.621964152672018,
+        "bowAiRatio": 1.1135218159532316,
+        "bowScript": 4.424942802711848,
+        "bowScriptRatio": 1.06605550852582
+      },
+      {
+        "level": 4,
+        "band": 4.462445853390859,
+        "rapier": 5.078047251960601,
+        "rapierDeviation": 0.13795156709900858,
+        "bowAi": 4.577268090740647,
+        "bowAiRatio": 1.0257307855651714,
+        "bowScript": 4.797705190644325,
+        "bowScriptRatio": 1.075129054394848
+      },
+      {
+        "level": 5,
+        "band": 5.880291218140178,
+        "rapier": 5.974727579107876,
+        "rapierDeviation": 0.016059810214223758,
+        "bowAi": 5.247417184256232,
+        "bowAiRatio": 0.8923736919811751,
+        "bowScript": 5.709716094577937,
+        "bowScriptRatio": 0.9709920619176085
+      },
+      {
+        "level": 6,
+        "band": 6.289284177161685,
+        "rapier": 6.786110470342137,
+        "rapierDeviation": 0.07899568204988738,
+        "bowAi": 5.230684547743922,
+        "bowAiRatio": 0.8316820166495479,
+        "bowScript": 5.955892052188008,
+        "bowScriptRatio": 0.9469904498536852
+      },
+      {
+        "level": 7,
+        "band": 6.867569551775254,
+        "rapier": 6.933243995219929,
+        "rapierDeviation": 0.00956298191806404,
+        "bowAi": 5.415923338411245,
+        "bowAiRatio": 0.7886230052102259,
+        "bowScript": 5.888347755359607,
+        "bowScriptRatio": 0.8574136324309202
+      },
+      {
+        "level": 8,
+        "band": 7.425287823922528,
+        "rapier": 7.349479992182561,
+        "rapierDeviation": -0.01020941322917246,
+        "bowAi": 5.5986226330096205,
+        "bowAiRatio": 0.7539940222885606,
+        "bowScript": 6.243377273257788,
+        "bowScriptRatio": 0.8408262980921893
+      },
+      {
+        "level": 9,
+        "band": 8.355130920292975,
+        "rapier": 7.897030916999667,
+        "rapierDeviation": -0.05482858469406782,
+        "bowAi": 6.128640426770941,
+        "bowAiRatio": 0.7335181800545668,
+        "bowScript": 6.386561860423074,
+        "bowScriptRatio": 0.7643880055680955
+      },
+      {
+        "level": 10,
+        "band": 8.156910249587149,
+        "rapier": 7.604068802316264,
+        "rapierDeviation": -0.06777584040462703,
+        "bowAi": 5.977233821121689,
+        "bowAiRatio": 0.7327816094855547,
+        "bowScript": 6.404730254937056,
+        "bowScriptRatio": 0.7851907228305256
+      }
+    ],
+    "rapierPass": true,
+    "bowAiPass": true,
+    "bowScriptPass": true,
+    "usage": {
+      "paladin.command": {
+        "used": 355,
+        "legal": 9293,
+        "rate": 0.038200796298289035
+      },
+      "ranger.cure_wounds": {
+        "used": 538,
+        "legal": 27079,
+        "rate": 0.019867794231692455
+      }
+    }
+  },
+  "cohorts": {
+    "benchmark": {
+      "battles": 18000,
+      "levels": {
+        "1": 1800,
+        "2": 1800,
+        "3": 1800,
+        "4": 1800,
+        "5": 1800,
+        "6": 1800,
+        "7": 1800,
+        "8": 1800,
+        "9": 1800,
+        "10": 1800
+      },
+      "band": {
+        "1": 3.1793601037914345,
+        "2": 3.811136876046681,
+        "3": 4.150762101338248,
+        "4": 4.462445853390859,
+        "5": 5.880291218140178,
+        "6": 6.289284177161685,
+        "7": 6.867569551775254,
+        "8": 7.425287823922528,
+        "9": 8.355130920292975,
+        "10": 8.156910249587149
+      },
+      "rogue": {
+        "1": 3.3380307649705387,
+        "2": 4.167921536436775,
+        "3": 4.43792975475623,
+        "4": 5.078047251960601,
+        "5": 5.974727579107876,
+        "6": 6.786110470342137,
+        "7": 6.933243995219929,
+        "8": 7.349479992182561,
+        "9": 7.897030916999667,
+        "10": 7.604068802316264
+      },
+      "rapierDeviation": {
+        "1": 0.04990647677496085,
+        "2": 0.09361633339188513,
+        "3": 0.06918431998918861,
+        "4": 0.13795156709900858,
+        "5": 0.016059810214223758,
+        "6": 0.07899568204988738,
+        "7": 0.00956298191806404,
+        "8": -0.01020941322917246,
+        "9": -0.05482858469406782,
+        "10": -0.06777584040462703
+      },
+      "usage": {
+        "paladin.command": {
+          "used": 355,
+          "legal": 9293,
+          "rate": 0.038200796298289035
+        },
+        "ranger.cure_wounds": {
+          "used": 538,
+          "legal": 27079,
+          "rate": 0.019867794231692455
+        }
+      },
+      "refusalReasons": {
+        "warlock.hex / CantAfford": 34,
+        "wizard.sleep / CantAfford": 14,
+        "rogue.cunning_hide / Unmet": 101,
+        "warlock.arms_of_hadar / CantAfford": 2,
+        "warlock.eldritch_blast / InvalidTarget": 5,
+        "Move / PathBlocked": 1,
+        "sorcerer.font_of_magic_sorcery / CantAfford": 3,
+        "warlock.hex / InvalidTarget": 4,
+        "sorcerer.scorching_ray / CantAfford": 2,
+        "warlock.hunger_of_hadar / CantAfford": 2,
+        "warlock.maddening_hex / InvalidTarget": 1,
+        "wizard.fireball / CantAfford": 1,
+        "warlock.blight / CantAfford": 2,
+        "warlock.shadow_of_moil / CantAfford": 2
+      },
+      "rejected": 174,
+      "replans": 1248,
+      "forcedEnds": 0
+    },
+    "bow-ai": {
+      "battles": 8000,
+      "levels": {
+        "1": 800,
+        "2": 800,
+        "3": 800,
+        "4": 800,
+        "5": 800,
+        "6": 800,
+        "7": 800,
+        "8": 800,
+        "9": 800,
+        "10": 800
+      },
+      "band": {
+        "1": 3.308873281980819,
+        "2": 3.9056402007360833,
+        "3": 4.4408459078906155,
+        "4": 4.510454983407231,
+        "5": 6.106156270100466,
+        "6": 6.449943652057819,
+        "7": 6.79052973243334,
+        "8": 7.211945980626987,
+        "9": 8.24639700464892,
+        "10": 8.246934495251933
+      },
+      "rogue": {
+        "1": 3.99113066804519,
+        "2": 4.231002389273094,
+        "3": 4.621964152672018,
+        "4": 4.577268090740647,
+        "5": 5.247417184256232,
+        "6": 5.230684547743922,
+        "7": 5.415923338411245,
+        "8": 5.5986226330096205,
+        "9": 6.128640426770941,
+        "10": 5.977233821121689
+      },
+      "rapierDeviation": {
+        "1": 0.20619024299895394,
+        "2": 0.08330572500654077,
+        "3": 0.04078462719446918,
+        "4": 0.01481294183828541,
+        "5": -0.14063496704942746,
+        "6": -0.1890340706968655,
+        "7": -0.202429920519546,
+        "8": -0.22370152964971435,
+        "9": -0.25680992276797854,
+        "10": -0.27521749753644764
+      },
+      "usage": {
+        "paladin.command": {
+          "used": 126,
+          "legal": 4037,
+          "rate": 0.03121129551647263
+        },
+        "ranger.cure_wounds": {
+          "used": 423,
+          "legal": 15493,
+          "rate": 0.02730265281094688
+        }
+      },
+      "refusalReasons": {
+        "warlock.hex / CantAfford": 16,
+        "rogue.cunning_hide / Unmet": 146,
+        "wizard.sleep / CantAfford": 9,
+        "warlock.arms_of_hadar / CantAfford": 1,
+        "warlock.eldritch_blast / InvalidTarget": 1,
+        "sorcerer.scorching_ray / CantAfford": 2,
+        "ranger.hunters_mark / InvalidTarget": 1,
+        "warlock.shatter / CantAfford": 1,
+        "wizard.misty_step / CantAfford": 1,
+        "warlock.hunger_of_hadar / CantAfford": 3,
+        "sorcerer.font_of_magic_sorcery / CantAfford": 3,
+        "warlock.maddening_hex / InvalidTarget": 1
+      },
+      "rejected": 185,
+      "replans": 661,
+      "forcedEnds": 0
+    },
+    "bow-script": {
+      "battles": 8000,
+      "levels": {
+        "1": 800,
+        "2": 800,
+        "3": 800,
+        "4": 800,
+        "5": 800,
+        "6": 800,
+        "7": 800,
+        "8": 800,
+        "9": 800,
+        "10": 800
+      },
+      "band": {
+        "1": 3.341944603075797,
+        "2": 3.8827933020626344,
+        "3": 4.422406814918958,
+        "4": 4.561096890902437,
+        "5": 6.209199906578964,
+        "6": 6.578611747450081,
+        "7": 6.844569704041921,
+        "8": 7.286038862926289,
+        "9": 8.097537746005226,
+        "10": 8.130471670444013
+      },
+      "rogue": {
+        "1": 3.5253139920230914,
+        "2": 4.189156503916155,
+        "3": 4.424942802711848,
+        "4": 4.797705190644325,
+        "5": 5.709716094577937,
+        "6": 5.955892052188008,
+        "7": 5.888347755359607,
+        "8": 6.243377273257788,
+        "9": 6.386561860423074,
+        "10": 6.404730254937056
+      },
+      "rapierDeviation": {
+        "1": 0.0548690689781417,
+        "2": 0.07890278416076701,
+        "3": 0.0005734406396840086,
+        "4": 0.05187530662061279,
+        "5": -0.08044254002384399,
+        "6": -0.09465822261109169,
+        "7": -0.13970519550960758,
+        "8": -0.14310403900998925,
+        "9": -0.21129582093349697,
+        "10": -0.2122560025367769
+      },
+      "usage": {
+        "paladin.command": {
+          "used": 118,
+          "legal": 4036,
+          "rate": 0.02923686818632309
+        },
+        "ranger.cure_wounds": {
+          "used": 372,
+          "legal": 15579,
+          "rate": 0.023878297708453688
+        }
+      },
+      "refusalReasons": {
+        "rogue.cunning_hide / Unmet": 305,
+        "wizard.sleep / CantAfford": 6,
+        "warlock.hex / CantAfford": 17,
+        "warlock.eldritch_blast / InvalidTarget": 1,
+        "sorcerer.scorching_ray / CantAfford": 3,
+        "ranger.hunters_mark / InvalidTarget": 2,
+        "wizard.misty_step / CantAfford": 2,
+        "warlock.hunger_of_hadar / CantAfford": 1,
+        "warlock.maddening_hex / InvalidTarget": 1
+      },
+      "rejected": 338,
+      "replans": 645,
+      "forcedEnds": 0
+    }
+  }
+}

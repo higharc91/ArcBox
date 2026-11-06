@@ -180,6 +180,9 @@ public sealed class HiddenRogueTests
 
         Assert.NotEqual(U("vex"), after.Active);
         Assert.Equal((1, 0), (ai.Rejected, ai.ForcedEnds));
+        var reason = Assert.Single(ai.RefusalReasons);
+        Assert.StartsWith("rogue.no_such_trick / ", reason.Key);
+        Assert.Equal(ai.Rejected, reason.Value);
         Assert.Equal(1, rogues.SetUp.Refused);
     }
 
