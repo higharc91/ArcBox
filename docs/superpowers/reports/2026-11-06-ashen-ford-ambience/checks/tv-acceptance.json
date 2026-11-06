@@ -1,0 +1,22 @@
+{
+  "exit_code": 0,
+  "audio_sequence": [
+    "amb_town",
+    "amb_river",
+    "amb_plains_wind",
+    "amb_rain",
+    "amb_town"
+  ],
+  "preview_stops": [
+    "town",
+    "river",
+    "fields",
+    "rain",
+    "storm",
+    "drizzle",
+    "clear"
+  ],
+  "engine_errors": 0,
+  "leaked_objects": 0,
+  "source_commit": "3b00ecbc"
+}
