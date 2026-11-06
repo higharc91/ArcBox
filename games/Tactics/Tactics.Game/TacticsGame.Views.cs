@@ -579,9 +579,13 @@ public sealed partial class TacticsGame
     private ControllerView BattleScreen(ProfileId profile)
     {
         var state = State;
-        if (UnitOf(profile) is not { } unit || !state.Units.TryGetValue(unit, out var me))
+        if (UnitOf(profile) is not { } hero || !state.Units.TryGetValue(hero, out var heroUnit))
             return new WaitView("You're not in this battle.");
-        if (state.Pending is ReactionOffer offer && offer.Reactor == unit && IsPlayed(unit))
+        if (state.Pending is ReactionOffer offer && Plays(state, hero, offer.Reactor) && IsPlayed(offer.Reactor))
+        {
+            // The hero's own reaction, or a summon's: the owner's phone answers for both.
+            var unit = offer.Reactor;
+            var me = state.Units[unit];
             return PhoneSurfaces.Attach(Custom(Screens.React, new
             {
                 unit,
@@ -599,22 +603,29 @@ public sealed partial class TacticsGame
                     tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
             }), state, me, Rules) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
-        if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
+        }
+        // The active unit of this phone's: the hero, or one of its summons (the owner's phone controls them, spec 4.5).
+        var turn = TurnUnit(state, hero);
+        if (state.Active == turn && state.Pending is null && IsPlayed(turn) && _aiFinishing != turn)
+        {
+            var actor = state.Units[turn];
             return PhoneSurfaces.Attach(Custom(Screens.Turn, new
             {
-                me = UnitViewOf(me),
+                me = UnitViewOf(actor),
+                summoned = actor.SummonedBy is not null,
                 map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
-                choices = PhoneChoices.Of(Choices.For(state, unit, Rules), Rules),
-            }), state, me, Rules)
+                choices = PhoneChoices.Of(Choices.For(state, turn, Rules), Rules),
+            }), state, actor, Rules)
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
+        }
         return PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
-            me = UnitViewOf(me),
+            me = UnitViewOf(heroUnit),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
-            upIn = UpIn(state, unit),
-            aiPlaying = !IsPlayed(unit),
-        }), state, me, Rules);
+            upIn = UpIn(state, hero),
+            aiPlaying = !IsPlayed(hero),
+        }), state, heroUnit, Rules);
     }
 
     /// <summary>How many turns until <paramref name="unit"/>'s, this round (exact: no initiative rolls), or null.</summary>

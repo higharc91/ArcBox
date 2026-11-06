@@ -88,7 +88,9 @@ export interface TurnChoices {
 
 export interface TurnData {
   surfaces?: string[];
+  /** Who is acting: the hero, or one of their summons (then `summoned` is set and the header names it). */
   me: UnitView;
+  summoned?: boolean;
   /** The map id, for its terrain from the content pack. */
   map?: string;
   units: UnitView[];

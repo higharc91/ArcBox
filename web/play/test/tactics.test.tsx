@@ -127,6 +127,18 @@ describe("tactics phone module", () => {
     expect((screen.getByRole("button", { name: "Delay" }) as HTMLButtonElement).disabled).toBe(true);
   });
 
+  it("turn: a hero's turn is headed 'Your turn' and a summon's by its own name", () => {
+    show("turn");
+    expect(document.querySelector(".tx-banner b")?.textContent).toBe("Your turn");
+    cleanup();
+    const v = view("turn");
+    const data = v.data as unknown as TurnData;
+    data.me.name = "Hound";
+    data.summoned = true;
+    render(<ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect(document.querySelector(".tx-banner b")?.textContent).toBe("Hound's turn");
+  });
+
   it("turn: Attack comes first, then the class's own abilities, the common actions and items", () => {
     const v = view("turn");
     const data = v.data as unknown as TurnData;

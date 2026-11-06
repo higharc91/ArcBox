@@ -39,6 +39,18 @@ public sealed partial class TacticsGame
     private UnitId? UnitOf(ProfileId profile)
         => _doc.Battle is { } save && save.Members.IndexOf(profile) is var i and >= 0 ? UnitFor(i) : null;
 
+    /// <summary>True when <paramref name="unit"/> is <paramref name="hero"/> or one of its summons: what that hero's phone plays.</summary>
+    private static bool Plays(BattleState state, UnitId hero, UnitId unit)
+        => unit == hero || state.Units.TryGetValue(unit, out var u) && u.SummonedBy == hero;
+
+    /// <summary>The unit the phone of <paramref name="hero"/> plays the turn of: the active summon of theirs, else the hero.</summary>
+    private static UnitId TurnUnit(BattleState state, UnitId hero)
+        => state.Active is { } active && Plays(state, hero, active) ? active : hero;
+
+    /// <summary>The hero's own unit and its summons.</summary>
+    private static IEnumerable<UnitId> WithSummons(BattleState state, UnitId hero)
+        => state.Units.Values.Where(u => u.SummonedBy == hero).Select(u => u.Id).Prepend(hero);
+
     private bool Online(ProfileId profile) => _players.Any(p => p.Profile == profile && _online.Contains(p.Id));
 
     /// <summary>True when a present player decides for <paramref name="unit"/>.</summary>
@@ -151,9 +163,13 @@ public sealed partial class TacticsGame
         for (var i = 0; i < Save_.Members.Length; i++)
             if (state.Units.ContainsKey(UnitFor(i)))
             {
-                if (TryHand(state, UnitFor(i), ControllerFor(Save_.Members[i])) is { } handed)
-                    state = handed;
-                else
+                var failed = false;
+                foreach (var id in WithSummons(state, UnitFor(i)).ToList())     // a summon follows its owner's seat
+                    if (TryHand(state, id, ControllerFor(Save_.Members[i])) is { } handed)
+                        state = handed;
+                    else
+                        failed = true;
+                if (failed)
                     HandBackFailedFor(Save_.Members[i]);     // it keeps the controller it was saved with
             }
         SetState(state);
@@ -167,16 +183,21 @@ public sealed partial class TacticsGame
             return;
         // If the engine fails to hand the unit over it keeps its controller: a returning player's hero stays the AI's (they're
         // told), and a leaving player's is played by the AI anyway, since a player who isn't here doesn't decide for it.
-        if (TryHand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)) is { } handed)
-        {
-            if (connected && _aiFinishing == unit)
-                (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
-            SetState(handed);
-        }
-        else if (connected)
+        var controller = connected ? new PlayerControlled(profile) : (Controller)new AiControlled(Companion);
+        var state = State;
+        var failed = false;
+        foreach (var id in WithSummons(state, unit).ToList())     // the hero's summons follow its seat
+            if (TryHand(state, id, controller) is { } handed)
+                state = handed;
+            else
+                failed = true;
+        SetState(state);
+        if (connected && _aiFinishing is { } finishing && Plays(State, unit, finishing) && IsPlayed(finishing))
+            (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
+        if (failed && connected)
             HandBackFailedFor(profile);
-        if (!connected && State.Active == unit && State.Pending is null)
-            _aiFinishing = unit;     // the AI finishes what's left of the turn
+        if (!connected && State.Active is { } active && Plays(State, unit, active) && State.Pending is null)
+            _aiFinishing = active;     // the AI finishes what's left of the turn
         Save();
         Drive();
     }
@@ -339,14 +360,16 @@ public sealed partial class TacticsGame
 
     private void BattleInput(Player player, ProfileId profile, CustomInput input)
     {
-        if (UnitOf(profile) is not { } unit)
+        if (UnitOf(profile) is not { } hero)
             return;
         var state = State;
+        var unit = hero;
         Command? command;
         if (input.Action == "react")
         {
-            if (state.Pending is not ReactionOffer offer || offer.Reactor != unit || !IsPlayed(unit))
+            if (state.Pending is not ReactionOffer offer || !Plays(state, hero, offer.Reactor) || !IsPlayed(offer.Reactor))
                 return;
+            unit = offer.Reactor;
             var id = Str(input.Data, "choice");
             if (offer.Options.FirstOrDefault(o => o.Id == id) is not { } choice)
             {
@@ -357,6 +380,7 @@ public sealed partial class TacticsGame
         }
         else
         {
+            unit = TurnUnit(state, hero);
             if (state.Active != unit || state.Pending is not null || !IsPlayed(unit) || _aiFinishing == unit)
                 return;
             command = ParseCommand(unit, input);

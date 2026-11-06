@@ -38,7 +38,7 @@ const GROUPS: { title: string; has(c: Cost): boolean }[] = [
  * option comes from the server's `Choices.For`, so anything you can pick, the game accepts.
  */
 export function Turn({ data, send }: CustomScreenProps) {
-  const { me, units, choices, map: mapId } = data as TurnData;
+  const { me, units, choices, map: mapId, summoned } = data as TurnData;
   const map = useMap(mapId);
   const icons = useIcons();
   const sfx = useSfx();
@@ -87,7 +87,7 @@ export function Turn({ data, send }: CustomScreenProps) {
         <MeCard me={me} title={ability.name} subtitle={target ? "Ready: check the TV, then use it" : aimHint(ability)}
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
       ) : <MeCard me={me} cls={cls} />}
-      <TurnBanner />
+      <TurnBanner summon={summoned ? me.name : undefined} />
 
       {ability ? (
         <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }} />

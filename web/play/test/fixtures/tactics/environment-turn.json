@@ -20,6 +20,7 @@
       "conditions": [],
       "player": "Player4"
     },
+    "summoned": false,
     "map": "river_crossing",
     "units": [
       {
