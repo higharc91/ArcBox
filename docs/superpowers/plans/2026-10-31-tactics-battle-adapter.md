@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # ArcBox Tactics battle adapter: implementation plan (milestone 3a)
 
 - **Spec:** [`../specs/2026-10-31-tactics-battle-adapter-design.md`](../specs/2026-10-31-tactics-battle-adapter-design.md)

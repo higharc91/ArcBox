@@ -72,6 +72,7 @@ python_tools() {
     "$python_cmd" -m unittest discover -s tools/tactics-audio -p 'test_*.py' || status=1
     "$python_cmd" tools/tactics-lore/check.py || status=1
     "$python_cmd" -m unittest discover -s tools/tactics-lore -p 'test_*.py' || status=1
+    "$python_cmd" tools/docs-drift.py || status=1
     return "$status"
 }
 

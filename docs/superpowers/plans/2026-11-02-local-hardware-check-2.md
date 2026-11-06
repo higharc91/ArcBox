@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Prompt for the local Claude: second hardware check (Wardenflame only)
 
 Paste everything below the line into the local Claude session on the Windows PC (RTX 5080).

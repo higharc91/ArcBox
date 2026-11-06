@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Task 23 report: balance pass and final report
 
 **Status:** DONE_WITH_CONCERNS. One target is unmet (role bands).

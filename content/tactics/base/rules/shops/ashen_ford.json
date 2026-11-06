@@ -28,9 +28,7 @@
       ],
       "priceMod": 1.0,
       "requires": [],
-      "unless": [
-        "af_market_burned"
-      ]
+      "unless": []
     },
     {
       "id": "af_inn",

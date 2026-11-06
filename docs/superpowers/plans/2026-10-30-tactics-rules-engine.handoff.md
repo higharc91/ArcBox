@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # ArcBox Tactics Rules Engine: handoff guide
 
 This guide is for an agent or person picking up the rules-engine plan partway through. Read these in order:

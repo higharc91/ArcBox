@@ -1,3 +1,5 @@
+> Status: historical planning/review snapshot; superseded for current task status by the [live tracker index](../README.md). Retain decisions and evidence; this is not a current instruction to resume an old branch.
+
 # Handoff: finish rebuilding Ashen Ford
 
 You're taking over from a Claude session on the user's Windows PC. The user is the owner of ArcBox. Wardenflame is the game's display name, and its ids stay `tactics`.
