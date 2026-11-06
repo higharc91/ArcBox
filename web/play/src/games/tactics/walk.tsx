@@ -1,3 +1,4 @@
+import { Give } from "./give";
 import { WalkJournal } from "./quests";
 import type { JSX } from "preact";
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
@@ -457,6 +458,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
           : null}
         {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
+        {(d.canGive || d.give) && <Give data={d.give} gold={d.gold ?? 0} send={send} viewId={viewId} stop={() => sender.release()} />}
         <div class="tx-walk-goal">
           <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}

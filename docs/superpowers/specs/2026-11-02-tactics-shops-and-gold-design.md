@@ -302,7 +302,7 @@ Record these in the doc as **USER DECISION**s with the defaults, like the intera
 ## 9. Later, noted (don't build now)
 - Weapons and armour for sale and equipping (changes AC, attacks: a rules change and an equip screen).
 - Need/greed loot rolls and a shared stash screen.
-- Player-to-player trades and gifting.
+- Direct exchange/barter between players remains deferred. Gifting shipped in #153: the walk screen gives bag items and/or gold to any saved member, including absent heroes, in one atomic save. Receipts are scoped to the sender and retained across restarts so retrying an old gift cannot duplicate it. Gifts are announced on the TV.
 - Stealing (Sleight of Hand) and a fence.
 - A rest model (restock on rest; inns that cost gold).
 - Gold sinks: injury healing at a temple (ties into "injuries never heal"), training, a ferry fare.

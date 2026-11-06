@@ -528,6 +528,8 @@ public sealed partial class TacticsGame
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
         }, ArcJson.Options)!.AsObject();
+        if (_doc.Members.Count > 1) data["canGive"] = true;
+        if (_giving.Contains(profile.Value)) data["give"] = JsonSerializer.SerializeToNode(GiveScreen(profile), ArcJson.Options);
         if (_doc.World?.MobAmbush is { } ambush) data["ambush"] = Rules.Mobs.Values.SelectMany(m => m).Where(m => m.Id == ambush).Select(m => Rules.Encounters[m.Encounter].Name).FirstOrDefault();
         if (leads && NearbyMob() is { } danger) data["danger"] = danger;
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a

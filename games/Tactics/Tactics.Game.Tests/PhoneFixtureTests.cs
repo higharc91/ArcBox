@@ -45,6 +45,15 @@ public sealed class PhoneFixtureTests
     }
 
     [Fact]
+    public void Giving_to_an_absent_member_matches_the_walk_fixture()
+    {
+        var s = ShopTests.AtShop(100);
+        s.Harness.SetConnected(3, false);
+        s.Send(0, "giveOpen");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["walk-give-away"] = Node(s.Harness.PlayerView(0)) });
+    }
+
+    [Fact]
     public void Roaming_danger_and_ambush_screens_match_their_fixtures()
     {
         var rules = TacticsGameTests.Rules;

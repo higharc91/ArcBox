@@ -155,6 +155,8 @@ export interface WalkMember {
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  canGive?: boolean;
+  give?: Omit<import("./give").GiveData, "gold">;
   danger?: string;
   ambush?: string;
   journal?: import("./quests").JournalData;

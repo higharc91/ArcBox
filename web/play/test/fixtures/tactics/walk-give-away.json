@@ -1,0 +1,88 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Ashen Ford",
+    "objective": "Explore the region",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1,
+      "color": "#ffd23f"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": false,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": true,
+    "canBattle": true,
+    "portal": "/c/ABCD",
+    "interact": "Trade with Wenna\u0027s Remedies",
+    "canGive": true,
+    "give": {
+      "items": [
+        {
+          "id": "potion_of_healing",
+          "name": "Potion of Healing",
+          "count": 1
+        }
+      ],
+      "members": [
+        {
+          "id": "pr_member2",
+          "name": "Player2"
+        },
+        {
+          "id": "pr_member3",
+          "name": "Player3"
+        },
+        {
+          "id": "pr_member4",
+          "name": "Player4",
+          "away": true
+        }
+      ]
+    },
+    "gold": 100,
+    "targets": [
+      {
+        "id": "shop:af_market_herbalist",
+        "label": "Trade with Wenna\u0027s Remedies"
+      }
+    ],
+    "beat": false,
+    "search": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}
