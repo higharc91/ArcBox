@@ -20,6 +20,10 @@ public sealed record HostSettings(string? ServerUrl = null, string? Preset = nul
     public double? VoiceVolume { get; init; }
     public bool? Muted { get; init; }
 
+    /// <summary>TV battle framing: Full, Short or Off; null selects the party-size default.</summary>
+    public string? BattleCinematics { get; init; }
+    public bool? ReducedBattleEffects { get; init; }
+
     /// <summary>Part of the id or name of the built-in voice to use when the server's voice is unavailable.</summary>
     public string? NarrationVoice { get; init; }
 }

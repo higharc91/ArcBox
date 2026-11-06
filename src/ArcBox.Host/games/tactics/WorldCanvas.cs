@@ -187,6 +187,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>Puts the fight's board away, and gives the world its halos back.</summary>
     public void HideStage()
     {
+        Cinematic = null;
+        if (_world is not null) _world.Modulate = Colors.White;
         if (_stage is not { Visible: true } stage)
         {
             return;
@@ -466,6 +468,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
+    public CutInFrame? Cinematic { get; set; }
+
     public void Place(BoardFit fit)
     {
         var size = GetViewport().GetVisibleRect().Size;
@@ -473,10 +477,13 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var origin = WorldView.OriginIn(fit, window);
         var focus = window * .5f;
         var zoomedOrigin = focus + (origin - focus) * _campZoom;
-        _world.Position = new Vector2(zoomedOrigin.X, zoomedOrigin.Y);
-        _world.Scale = new Vector2(WorldTuning.Scale * _campZoom, WorldTuning.Scale * _campZoom);
-        var min = -zoomedOrigin / (WorldTuning.Scale * _campZoom);
-        _view = new ArtArea(min, min + window / (WorldTuning.Scale * _campZoom));
+        var framed = CinematicFit.Of(new BoardFit(zoomedOrigin, WorldTuning.Scale * _campZoom), Cinematic, focus);
+        _world.Position = new Vector2(framed.Origin.X, framed.Origin.Y);
+        _world.Scale = new Vector2(framed.Scale, framed.Scale);
+        var light = 1 - (Cinematic?.Dim ?? 0);
+        _world.Modulate = new Color(light, light, light);
+        var min = -framed.Origin / framed.Scale;
+        _view = new ArtArea(min, min + window / framed.Scale);
         if (_stage is not { Visible: true })
         {
             _over?.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));

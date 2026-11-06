@@ -121,6 +121,12 @@ public static class BeatTiming
 /// <summary>Something that happens at <paramref name="At"/> seconds into a beat, for <paramref name="Length"/> seconds.</summary>
 public abstract record Cue(double At, double Length);
 
+/// <summary>The start of a real cast or swing, with its rule event and resolved aiming tiles.</summary>
+public sealed record AbilityCue(double At, AbilityUsed Used, Tile From, Tile Toward) : Cue(At, 0);
+
+/// <summary>Visual impact feedback contained in the existing landing pause, with no added beat time.</summary>
+public sealed record ImpactCue(double At, double Length, UnitId Unit, int Amount) : Cue(At, Length);
+
 /// <summary>The displayed battle takes this event.</summary>
 public sealed record ApplyCue(double At, BattleEvent Event) : Cue(At, 0);
 
@@ -657,6 +663,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Burst(effect, aim);
                 return;
             }
+            _cues.Add(new AbilityCue(_t, used, source, aim ?? source));
             if (aim is not { } target || target == source)
             {
                 var length = used.Ability.Value switch
@@ -744,6 +751,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void PlayDamage(Damaged hit)
         {
+            if (hit.Amount > 0) _cues.Add(new ImpactCue(_t, BeatTiming.Impact, hit.Unit, hit.Amount));
             Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);

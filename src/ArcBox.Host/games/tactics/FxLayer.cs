@@ -13,6 +13,7 @@ public partial class FxLayer : Node2D
 {
     private readonly Func<string?, Texture2D?> _load;
     private readonly bool _additive;
+    private readonly bool _white;
     private ImmutableArray<FxDraw> _draws = [];
 
     public FxLayer()
@@ -20,10 +21,13 @@ public partial class FxLayer : Node2D
         _load = _ => null;
     }
 
-    public FxLayer(Func<string?, Texture2D?> load, bool additive)
+    public FxLayer(Func<string?, Texture2D?> load, bool additive, bool white = false)
     {
         _load = load;
         _additive = additive;
+        _white = white;
+        if (white)
+            Material = new ShaderMaterial { Shader = new Shader { Code = "shader_type canvas_item; render_mode unshaded; void fragment(){ vec4 s = texture(TEXTURE, UV); COLOR = vec4(vec3(1.0), s.a * COLOR.a); }" } };
         if (additive)
         {
             Material = new CanvasItemMaterial { BlendMode = CanvasItemMaterial.BlendModeEnum.Add };
@@ -33,7 +37,7 @@ public partial class FxLayer : Node2D
     /// <summary>Shows the draws of <paramref name="draws"/> in this layer's blend.</summary>
     public void Show(ImmutableArray<FxDraw> draws)
     {
-        var mine = draws.Where(d => d.Order is null && d.Additive == _additive).ToImmutableArray();
+        var mine = draws.Where(d => d.Order is null && d.Additive == _additive && d.White == _white).ToImmutableArray();
         if (!mine.IsEmpty || !_draws.IsEmpty)
         {
             _draws = mine;

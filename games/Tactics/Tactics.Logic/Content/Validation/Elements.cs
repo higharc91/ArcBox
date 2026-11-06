@@ -36,6 +36,8 @@ internal sealed partial class Validation
             if (def.Presentation is { } p)
             {
                 var at = Pointer.Append(ptr, "presentation");
+                if (p.CutIn is not (null or "none" or "short" or "full"))
+                    Error(file, Pointer.Append(at, "cutIn"), "'cutIn' must be none, short or full.");
                 Ref(RefKind.Art, p.Anim, file, Pointer.Append(at, "anim"));
                 Ref(RefKind.Art, p.Fx, file, Pointer.Append(at, "fx"));
                 Ref(RefKind.Art, p.Projectile, file, Pointer.Append(at, "projectile"));

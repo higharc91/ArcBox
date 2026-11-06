@@ -24,12 +24,16 @@ public partial class Screenshotter : Node
 
     public string Dir { get; }
 
+    /// <summary>Performance passes retain the output directory for metadata without doing GPU readback or PNG encoding.</summary>
+    public bool CaptureEnabled { get; set; } = true;
+
     /// <summary>Last saved file, for logs and tests.</summary>
     public string? LastPath { get; private set; }
 
     /// <summary>Saves the frame after this one (so layout changes made this frame are visible) as <c>NNN-label.png</c>.</summary>
     public async void Capture(string label)
     {
+        if (!CaptureEnabled) return;
         var name = $"{++_seq:000}-{Sanitise(label)}.png";
         // Two frames: containers settle their sizes one frame after a screen is swapped in.
         await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
@@ -39,7 +43,7 @@ public partial class Screenshotter : Node
             return;
         }
 
-        var image = GetViewport().GetTexture().GetImage();
+        using var image = GetViewport().GetTexture().GetImage();
         var path = System.IO.Path.Combine(Dir, name);
         var err = image.SavePng(path);
         if (err == Error.Ok)
