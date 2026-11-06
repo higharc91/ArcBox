@@ -72,7 +72,7 @@ public sealed record StartNextTurnStep : Step
 
 /// <summary>
 /// Ends the turn of <see cref="Unit"/>, which was skipped because it can't act (<see cref="TurnSkipped"/>): the hand-off to
-/// the next unit is queued, then its until-save conditions roll and the durations it ticks tick
+/// the next unit is queued, a Downed unit's countdown ticks (<see cref="DownedRules.TickTurn"/>), then its until-save conditions roll and the durations it ticks tick
 /// (<see cref="Conditions.EndTurn"/>), so a stun can wear off and the conditions it applied still expire. No turn-end hooks
 /// fire and no <see cref="TurnEnded"/> is emitted.
 /// </summary>
@@ -82,6 +82,7 @@ public sealed record SkipTurnStep(UnitId Unit) : Step
     public override void Run(BattleWriter w, RulesPack rules)
     {
         w.PushFront(new StartNextTurnStep());
+        DownedRules.TickTurn(w, Unit);   // after the hand-off is queued, so a unit going Out leaves the order there
         Conditions.EndTurn(w, Unit, rules);
     }
 }

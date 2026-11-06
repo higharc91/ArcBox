@@ -95,21 +95,52 @@ public sealed class DownedTests
     }
 
     [Fact]
-    public void Countdown_ticks_at_round_start()
+    public void Countdown_ticks_at_the_start_of_the_downed_units_own_skipped_turn()
     {
         var battle = Build();
         var (state, _) = battle.Start(seed: 3);
         state = Down(state, "kara");
         (state, _) = battle.Apply(state, new EndTurn(U("gob")));
 
+        // Kara's own skipped turn ends round 1 and ticks her countdown; the new round starting costs nothing more.
         var (after, events) = battle.Apply(state, new EndTurn(U("brin")));
-
-        Assert.Equal(2, after.Units[U("kara")].Countdown);
-        var round = events.IndexOf(events.OfType<RoundStarted>().Single());
+        var skip = events.IndexOf(new TurnSkipped(U("kara"), "downed"));
         var tick = events.IndexOf(new CountdownTicked(U("kara"), 2));
-        Assert.True(round >= 0 && tick > round, "the countdown ticks once the new round has started");
+        var round = events.IndexOf(events.OfType<RoundStarted>().Single());
+        Assert.True(skip >= 0 && tick > skip && round > tick, "the countdown ticks in kara's own skipped turn, before the next round");
+        Assert.Single(events.OfType<CountdownTicked>());
+        Assert.Equal(2, after.Units[U("kara")].Countdown);
         Assert.Equal(2, after.Round);
         Assert.Equal(U("gob"), after.Active);
+
+        (after, events) = battle.Apply(after, new EndTurn(U("gob")));
+        Assert.DoesNotContain(events, e => e is CountdownTicked);
+        (after, events) = battle.Apply(after, new EndTurn(U("brin")));
+        Assert.Contains(new CountdownTicked(U("kara"), 1), events);
+        Assert.Equal(1, after.Units[U("kara")].Countdown);
+    }
+
+    [Theory]
+    [InlineData("gob")]     // brin hasn't had her turn this round yet
+    [InlineData("kara")]    // brin's turn this round is already over
+    public void A_hero_downed_at_any_point_goes_out_at_the_start_of_their_third_own_turn(string whenDowned)
+    {
+        var battle = Build();
+        var (state, _) = battle.Start(seed: 3);
+        while (state.Active != U(whenDowned))
+            (state, _) = battle.Apply(state, new EndTurn(state.Active!.Value));
+        state = Down(state, "brin");
+
+        var skipped = 0;
+        while (state.Units[U("brin")].Life == LifeState.Downed)
+        {
+            (state, var events) = battle.Apply(state, new EndTurn(state.Active!.Value));
+            skipped += events.Count(e => e is TurnSkipped { Unit.Value: "brin" });
+            Assert.True(skipped <= 3, "brin must be Out by her third own turn");
+        }
+
+        Assert.Equal(3, skipped);
+        Assert.Equal(LifeState.Out, state.Units[U("brin")].Life);
     }
 
     [Fact]

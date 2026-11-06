@@ -458,8 +458,7 @@ public static partial class Battle
     /// order is re-sorted (taking in the units <see cref="BattleState.Joining"/> it), <see cref="BattleState.Joining"/>,
     /// <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every unit's
     /// <see cref="UnitState.UsedThisRound"/> are cleared, <see cref="RoundStarted"/> is emitted, zones whose owner has left
-    /// the battle tick (<see cref="ZoneRules.TickOrphans"/>) and every Downed unit's countdown ticks
-    /// (<see cref="DownedRules.TickRound"/>; if that decides the battle, nothing else happens).
+    /// the battle tick (<see cref="ZoneRules.TickOrphans"/>).
     /// Every turn start clears every unit's <see cref="UnitState.UsedThisTurn"/>.
     /// <para>A unit that can't act (<see cref="SkipReason"/>) has its turn skipped: <see cref="TurnSkipped"/>, then a
     /// <see cref="SkipTurnStep"/> ends it (conditions still tick) and hands on to the next unit.</para>
@@ -485,7 +484,6 @@ public static partial class Battle
             w.Emit(new RoundStarted(round, order));
             ZoneRules.TickOrphans(w);
             Surfaces.RoundStart(w);
-            DownedRules.TickRound(w);
             if (Objectives.Check(w))
                 return;
         }

@@ -89,12 +89,11 @@ public static class DownedRules
         Tick(w, unit, crit ? 2 : 1);
     }
 
-    /// <summary>The start of a new round: every Downed unit's countdown drops by 1, in <see cref="UnitId"/> order.</summary>
-    public static void TickRound(BattleWriter w)
-    {
-        foreach (var id in w.State.Units.Values.Where(u => u.Life == LifeState.Downed).Select(u => u.Id).ToArray())
-            Tick(w, id, 1);
-    }
+    /// <summary>
+    /// The start of a Downed <paramref name="unit"/>'s own (skipped) turn: its countdown drops by 1 (<see cref="CountdownTicked"/>),
+    /// and at 0 it goes Out. So it is Out at the start of its third own turn however late in a round it dropped.
+    /// </summary>
+    public static void TickTurn(BattleWriter w, UnitId unit) => Tick(w, unit, 1);
 
     /// <summary>
     /// A Downed <paramref name="unit"/> gets up with <paramref name="hp"/> HP (at least 1, at most its max): its countdown
