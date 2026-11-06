@@ -1,3 +1,7 @@
+# Render close-up character frame crops.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import sys
 from arcpix.preview import contact_sheet, Tile
 from parts.recipes import ALL

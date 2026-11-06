@@ -1,9 +1,13 @@
+# Compare old and current material renders at world scale.
 """Compare two baked asset packs at the same world density.
 
-Usage: python3 tools/tactics-assets/review_materials.py --before /path/to/snapshot
+Usage: python3 tools/tactics-assets/dev/review_materials.py --before /path/to/snapshot
 Snapshot must contain tactical/ and presets/ (or characters/presets/).
 Software-composed world previews use the game assets, not the Godot light rig.
 """
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import argparse
 import json
 from pathlib import Path

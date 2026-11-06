@@ -1,8 +1,12 @@
+# Compare baked environment art in world context.
 """Same-scale environmental art comparisons, composed from baked pack images.
 
 These are proposed dressing studies, not screenshots of a walking overworld.
-python3 tools/tactics-assets/review_overworld_context.py --before /path/to/sets
+python3 tools/tactics-assets/dev/review_overworld_context.py --before /path/to/sets
 """
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import argparse
 import json
 from functools import lru_cache

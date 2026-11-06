@@ -1,9 +1,13 @@
+# Audit overworld art coverage and render a searchable review.
 """Rebuild the per-asset overworld review and standalone searchable gallery.
 
-python3 tools/tactics-assets/audit_overworld.py --before /path/to/previous/sets
+python3 tools/tactics-assets/dev/audit_overworld.py --before /path/to/previous/sets
 Unknown asset families, missing art, malformed strips and unreviewed PNGs fail.
 The gallery reports library readiness separately from actual region placement.
 """
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import argparse
 import base64
 from collections import Counter
@@ -16,7 +20,7 @@ from PIL import Image
 from arcpix.out import PACK
 from parts.overworld_review import assessment
 
-REPORT=Path(__file__).resolve().parents[2]/'docs/superpowers/reports/overworld-art-review'
+REPORT=Path(__file__).resolve().parents[3]/'docs/superpowers/reports/overworld-art-review'
 
 
 def inventory():
