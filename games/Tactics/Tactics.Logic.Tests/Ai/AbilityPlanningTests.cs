@@ -304,6 +304,36 @@ public sealed class AbilityPlanningTests
     }
 
     [Fact]
+    public void The_bonus_action_keeps_off_a_foe_the_main_action_may_push_out_of_sight()
+    {
+        // Kara is 3 tiles off and to the side: the blast pushes her 2 tiles along the row, still in Hex's range of 6 but
+        // behind the block at (3, 0) from where the warlock stands, so Hex couldn't reach her there.
+        var (blast, hex) = (A("warlock.eldritch_blast"), A("warlock.hex"));
+        var (repelling, hexDamage) = (Base.Passives["warlock.repelling_blast"], Base.Passives["warlock.hex_damage"]);
+        var warlock = Mage(blast, hex) with
+        {
+            Level = 1, CastingStat = "Cha", Scores = TestSheets.Scores(8, 14, 12, 10, 10, 16), Move = 0, Resources = Ordinal.Map(("pact", 2)),
+            Passives = [repelling.Id, hexDamage.Id],
+        };
+        var battle = On("""
+            0. 0. 0. 0C 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0. 0. 0.
+            """).With(blast, hex).WithPassives(repelling, hexDamage).WithConditions([.. Base.Conditions.Values])
+            .Enemy("wren", warlock, T(0, 0), new AiControlled("caster"))
+            .Party("kara", TestSheets.Fighter with { Move = 0, MaxHp = 40 }, T(3, 1));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("wren"), battle.Rules);
+
+        Assert.True(UseOf(plan, "warlock.eldritch_blast")?.Target.Unit == U("kara") && UseOf(plan, "warlock.hex") is null, plan.Explain);
+        // Where the push leaves her, the warlock has no line of sight to her.
+        var pushed = state.Change("kara", u => u with { Pos = T(5, 1) });
+        Assert.Equal(RejectCode.NoLineOfSight,
+            Battle.Check(pushed, new Use(U("wren"), hex.Id, new Target(Unit: U("kara"))), battle.Rules)?.Code);
+    }
+
+    [Fact]
     public void Repelling_blast_pushes_only_on_a_spell_so_a_crossbow_shot_leaves_the_foe_in_hex_range()
     {
         // Repelling Blast pushes on a spell attack only: a crossbow bolt from 6 tiles leaves Kara where she is, in Hex's range.

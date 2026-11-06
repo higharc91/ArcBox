@@ -99,32 +99,45 @@ internal sealed partial class Planner
 
     /// <summary>
     /// What a later action in the turn (the surged second action, the bonus action) must keep off: the units that may be gone
-    /// by then (<see cref="Gone"/>: dropped, finished, sent away), and the units a passive may push when the action hits them,
-    /// with how far (<see cref="Pushed"/>), which a later action may still aim at if they stay in its reach pushed that far.
+    /// by then (<see cref="Gone"/>: dropped, finished, sent away), and the units a passive may push or pull when the action
+    /// hits them, with the tile it would leave each on (<see cref="Pushed"/>), which a later action may still aim at if it
+    /// could from there too. A unit two actions may push counts as gone: it may be anywhere.
     /// </summary>
-    private sealed record Off(ImmutableSortedSet<UnitId> Gone, ImmutableSortedDictionary<UnitId, int> Pushed)
+    private sealed record Off(ImmutableSortedSet<UnitId> Gone, ImmutableSortedDictionary<UnitId, Tile> Pushed)
     {
-        public static Off None { get; } = new([], ImmutableSortedDictionary<UnitId, int>.Empty);
+        public static Off None { get; } = new([], ImmutableSortedDictionary<UnitId, Tile>.Empty);
 
-        public Off Union(Off other) => new(Gone.Union(other.Gone),
-            other.Pushed.Aggregate(Pushed, (map, p) => map.SetItem(p.Key, Math.Max(p.Value, map.GetValueOrDefault(p.Key)))));
+        public Off Union(Off other)
+        {
+            UnitId[] twice = [.. Pushed.Keys.Where(other.Pushed.ContainsKey)];
+            var gone = Gone.Union(other.Gone).Union(twice);
+            var pushed = other.Pushed.Aggregate(Pushed, (map, p) => map.SetItem(p.Key, p.Value)).RemoveRange(gone);
+            return new(gone, pushed);
+        }
     }
 
     /// <summary>
-    /// True when <paramref name="off"/> rules out <paramref name="action"/> of <paramref name="usable"/> by the unit on
-    /// <paramref name="from"/>: a unit it aims at may be gone, or may be pushed out of the ability's reach (its range, or its
-    /// weapon's for a weapon attack).
+    /// True when <paramref name="off"/> rules out <paramref name="action"/> of <paramref name="usable"/>, planned in
+    /// <paramref name="state"/>: a unit it aims at may be gone, or may be pushed to a tile the ability couldn't reach it on
+    /// (out of range, out of sight: <see cref="Battle.ResolveTarget"/> with the unit moved there).
     /// </summary>
-    private bool RulesOut(Off off, Usable usable, Tile from, Action action)
+    private bool RulesOut(Off off, Usable usable, BattleState state, Action action)
     {
-        var reach = usable.Ability.IsWeaponAttack
-            ? _me.Sheet.Weapon.Ranged ? _me.Sheet.Weapon.Range : _me.Sheet.Weapon.Reach ? 2 : 1
-            : usable.Ability.Target.Range;
         IEnumerable<UnitId> aimed = action.Targets.IsDefaultOrEmpty ? [] : action.Targets;
         if (action.Target.Unit is { } unit)
             aimed = aimed.Append(unit);
-        return aimed.Any(id => off.Gone.Contains(id)
-                               || off.Pushed.TryGetValue(id, out var push) && Reach.Distance(from, _s.Units[id].Pos) + push > reach);
+        foreach (var id in aimed.Distinct())
+        {
+            if (off.Gone.Contains(id))
+                return true;
+            if (!off.Pushed.TryGetValue(id, out var landing))
+                continue;
+            var moved = state with { Units = state.Units.SetItem(id, state.Units[id] with { Pos = landing }) };
+            if (Battle.ResolveTarget(new BattleWriter(moved, _rules), moved.Units[_me.Id], usable.Ability, new Target(Unit: id), out _, out var hit) is not null
+                || !hit.Contains(id))
+                return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -134,22 +147,29 @@ internal sealed partial class Planner
     /// Down; and when an attack of several may drop its target, the foe the rest go on to (#107: the standing hostile in
     /// reach with the least HP, ties by id), if they may drop it. Whatever the damage: the unit's concentration summons when
     /// the action starts a new concentration, which sends them away. And the targets the unit's own passives may push when
-    /// the action hits them (Repelling Blast on a spell attack: <see cref="PushOnHit"/>), with how far.
+    /// the action hits them (Repelling Blast on a spell attack: <see cref="PushOnHit"/>), with where to.
     /// </summary>
     private Off Leaving(Usable? usable, Action? action, (BattleState State, BattleWriter W) at)
     {
         if (usable is null || action is null)
             return Off.None;
-        var pushed = ImmutableSortedDictionary<UnitId, int>.Empty;
-        foreach (var id in action.Affected)
-            if (PushOnHit(usable, at.State.Units[id], at.W) is var push and > 0)
-                pushed = pushed.SetItem(id, push);
         var gone = ImmutableSortedSet<UnitId>.Empty;
+        var pushed = ImmutableSortedDictionary<UnitId, Tile>.Empty;
+        foreach (var id in action.Affected)
+            switch (PushOnHit(usable, at.State.Units[id], at))
+            {
+                case (true, _):
+                    gone = gone.Add(id);
+                    break;
+                case (false, { } landing):
+                    pushed = pushed.SetItem(id, landing);
+                    break;
+            }
         if (usable.Ability.Cost.Concentration && _me.Concentrating is not null)
             gone = gone.Union(_s.Units.Values
                 .Where(u => u.Conditions.Any(c => c.Id == Summons.Marker && c.Concentration && c.Source == _me.Id)).Select(u => u.Id));
         if (!Scorer.Deals(usable.Ability.Effects))
-            return new Off(gone, pushed);
+            return new Off(gone, pushed.RemoveRange(gone));
         var leaving = gone.Union(action.Affected.Where(id => _s.Units[id] is var u
                                                              && (u.Life == LifeState.Downed || MayFall(u) && MayDrop(usable, action, at, id))));
         var me = at.State.Units[_me.Id];
@@ -160,7 +180,7 @@ internal sealed partial class Planner
                 .OrderBy(u => u.Hp).ThenBy(u => u.Id).FirstOrDefault() is { } next
             && MayDrop(usable, action, at, next.Id))
             leaving = leaving.Add(next.Id);
-        return new Off(leaving, pushed);
+        return new Off(leaving, pushed.RemoveRange(leaving));
     }
 
     /// <summary>
@@ -193,22 +213,49 @@ internal sealed partial class Planner
     private ImmutableArray<PassiveDef>? _onHitPushes;
 
     /// <summary>
-    /// How far the unit's own on-hit passives may push or pull <paramref name="target"/> when <paramref name="usable"/>'s
-    /// attack hits it (Repelling Blast: 2 tiles, on a spell attack), their conditions checked as the engine checks them; a
-    /// swap or teleport counts as out of any reach. 0 when none would.
+    /// Where the unit's own on-hit passives would move <paramref name="target"/> when <paramref name="usable"/>'s attack,
+    /// made from where the unit stands in <paramref name="at"/>, hits it (Repelling Blast: 2 tiles away, on a spell attack),
+    /// their conditions checked as the engine checks them: the tile the push or pull leaves it on, as
+    /// <see cref="Motion.Trace"/> works it out (the longest, if several would), or null when none would move it. Gone when
+    /// one may send it beyond reckoning: a swap, a teleport, or a push into a deep tile.
     /// </summary>
-    private int PushOnHit(Usable usable, UnitState target, BattleWriter w)
+    private (bool Gone, Tile? Landing) PushOnHit(Usable usable, UnitState target, (BattleState State, BattleWriter W) at)
     {
         _onHitPushes ??= [.. Modifiers.Passives(_me, _rules).Where(p => p.Hook == HookKind.OnAttackHit && !p.Effects.IsDefaultOrEmpty
             && Scorer.All(p.Effects).Any(e => e is PushEffect or PullEffect or SwapEffect or TeleportEffect))];
         if (_onHitPushes.Value.IsEmpty || Scorer.FirstAttack(usable.Ability.Effects) is not { } attack)
-            return 0;
+            return (false, null);
+        var source = at.State.Units[_me.Id].Pos;
         var hit = new RollResult([], 0, 0, 0, 0, Success: true, Crit: false, Fumble: false);
         var args = new HookArgs(_me.Id, target.Id, hit, Tile: target.Pos, Ability: usable.Ability.Id, AttackKind: attack.Kind, Edge: Edge.None);
-        return _onHitPushes.Value.Where(p => p.When is not { } when || Hooks.Holds(when, w, args, _rules))
-            .SelectMany(p => Scorer.All(p.Effects))
-            .Select(e => e switch { PushEffect push => push.Distance, PullEffect pull => pull.Distance, SwapEffect or TeleportEffect => 99, _ => 0 })
-            .DefaultIfEmpty(0).Max();
+        (int Dx, int Dy) direction = (0, 0);
+        var distance = 0;
+        foreach (var effect in _onHitPushes.Value.Where(p => p.When is not { } when || Hooks.Holds(when, at.W, args, _rules))
+                     .SelectMany(p => Scorer.All(p.Effects)))
+        {
+            switch (effect)
+            {
+                case SwapEffect or TeleportEffect:
+                    return (true, null);
+                case PushEffect push when push.Distance > distance:
+                    (direction, distance) = (Motion.Toward(source, target.Pos), push.Distance);
+                    break;
+                case PullEffect pull when pull.Distance > distance:
+                    {
+                        // As the engine pulls: along the dominant axis, never onto the unit's own tile.
+                        var toward = Motion.Toward(target.Pos, source);
+                        var (along, across) = toward.Dx != 0
+                            ? (Math.Abs(source.X - target.Pos.X), Math.Abs(source.Y - target.Pos.Y))
+                            : (Math.Abs(source.Y - target.Pos.Y), Math.Abs(source.X - target.Pos.X));
+                        (direction, distance) = (toward, Math.Min(pull.Distance, across == 0 ? along - 1 : along));
+                        break;
+                    }
+            }
+        }
+        if (distance <= 0 || direction == (0, 0))
+            return (false, null);
+        var path = Motion.Trace(at.State, at.W.Terrain, target, direction, distance);
+        return path.IntoDeep ? (true, null) : path.Tiles.IsEmpty ? (false, null) : (false, path.Tiles[^1]);
     }
 
     /// <summary>
@@ -244,7 +291,7 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, after.Pos, surged, w))
             {
-                if (RulesOut(off, usable, after.Pos, action) || !ItemOk(usable, after.Pos, action))
+                if (RulesOut(off, usable, surged, action) || !ItemOk(usable, after.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
                     (best, bestScore) = ((usable, action), action.Value - hoard);
@@ -283,7 +330,7 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, me.Pos, state, w))
             {
-                if (RulesOut(off, usable, me.Pos, action) || !ItemOk(usable, me.Pos, action))
+                if (RulesOut(off, usable, state, action) || !ItemOk(usable, me.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
                     (best, bestScore) = (new Use(_me.Id, usable.Command, action.Target, usable.Item) { Targets = action.Targets },
