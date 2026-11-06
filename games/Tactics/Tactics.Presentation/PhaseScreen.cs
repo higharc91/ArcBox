@@ -137,14 +137,14 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
                 _ => "Results",
             },
             Tone = view.Outcome == "Won" ? Tone.Good : Tone.Bad,
-            Banner = view.Outcome switch
+            Banner = view.LeveledUp ? "level_up_anim" : view.Outcome switch
             {
                 "Won" => "victory_anim",
                 "Lost" => "defeat_anim",
                 _ => null,
             },
             // After a loss the game's one line says it all (TacticsGame.LossNote): no injury words and no "+0 XP" on each row.
-            Notice = view.ResultNote ?? screen.Notice,
+            Notice = view.LeveledUp ? $"LEVEL UP! The party reached level {view.PartyLevel}." : (view.ResultNote ?? screen.Notice),
             Rows = [.. lines.Select(r => view.Outcome == "Lost"
                 ? new ScreenRow(r.Name, "", null, null)
                 : new ScreenRow(r.Name, r.Injuries.IsEmpty ? "No injuries" : string.Join(", ", r.Injuries), null,

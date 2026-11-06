@@ -702,7 +702,7 @@
       "description": "An ability (spec §4.2)."
     },
     "feature": {
-      "description": "Exactly one of ability, passive, choose (with from), resourceRegen or attacks.",
+      "description": "Exactly one of ability, passive, choose (with from), resourceRegen, attacks or rangedAttacks. RangedAttacks optionally overrides the general attack progression for equipped ranged weapons.",
       "oneOf": [
         {
           "type": "object",
@@ -787,6 +787,14 @@
           "required": [
             "attacks"
           ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rangedAttacks": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["rangedAttacks"],
           "additionalProperties": false
         }
       ]

@@ -47,9 +47,18 @@ internal sealed partial class Scorer
         {
             var urgency = target.Hp * 2 < maxHp ? 2 : 1;
             var pKill = hp > 0 ? outcome.Damage.AtLeast(hp) : 0;
-            value = p.Heal * urgency * Math.Min(outcome.Heal, target.Sheet.MaxHp - target.Hp)
+            var restored = Math.Max(0, Math.Min(outcome.Heal, target.Sheet.MaxHp - target.Hp));
+            var drop = DropChance(target);
+            var afterHealing = restored > 0
+                ? Math.Clamp(ThreatAgainst(target.Sheet.Side).At(target.Pos) / Math.Max(1, hp + restored), 0, 1)
+                : drop;
+            // Healing uses its mean amount: discount the uncertain survival gain against a guaranteed ward.
+            const double healingSurvivalConfidence = 0.8;
+            var preserved = healingSurvivalConfidence * Math.Max(0, drop - afterHealing);
+            // Preventing a Down preserves the ally's turn, in addition to restoring HP. A ward covers the risk left after healing.
+            value = p.Heal * urgency * restored
                     + p.Heal * 0.5 * Math.Max(0, outcome.TempHp - target.TempHp)
-                    + p.Revive * outcome.Ward * DropChance(target) * KillWorth(target)
+                    + p.Revive * (preserved + outcome.Ward * afterHealing) * KillWorth(target)
                     + p.Control * (outcome.Offense * Math.Max(2, Dpr(target)) + outcome.Defense * Incoming(target) - 0.3 * outcome.Push)
                     - 1.5 * (p.Damage * (outcome.Damage.MeanCapped(hp) + outcome.Splash) + p.Kill * pKill * KillWorth(target));
         }

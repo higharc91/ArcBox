@@ -293,7 +293,8 @@ public sealed record ResourceRegenDef(string Resource, int Amount, int EveryRoun
 /// <summary>
 /// One entry in a class's or subclass's feature list. Exactly one key is set: <c>{"ability": id}</c>,
 /// <c>{"passive": id}</c>, <c>{"choose": n, "from": [ids]}</c> (pick n of these abilities or passives, e.g. spells known),
-/// <c>{"resourceRegen": {...}}</c> or <c>{"attacks": n}</c> (attacks per Attack action from this level).
+/// <c>{"resourceRegen": {...}}</c>, <c>{"attacks": n}</c> or <c>{"rangedAttacks": n}</c>.
+/// The optional ranged progression replaces the general attacks count only for an equipped ranged weapon.
 /// </summary>
 public sealed record FeatureRef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AbilityId? Ability = null,
@@ -301,7 +302,8 @@ public sealed record FeatureRef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Choose = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> From = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ResourceRegenDef? ResourceRegen = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RangedAttacks = null);
 
 /// <summary>How many skills a new character of the class picks, and from which.</summary>
 public sealed record SkillChoicesDef(int Count, ImmutableArray<string> From);

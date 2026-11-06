@@ -141,7 +141,7 @@ public sealed record EncounterOption(string Id, string Name, int? Level, int Min
 public sealed record ClassOption(string Id, string Name, string Role);
 
 /// <summary>A member's line on the results screen.</summary>
-public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Injuries);
+public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Injuries, int TotalXp = 0, int? NextLevelXp = null, int PrevLevelXp = 0, int Level = 1);
 
 /// <summary>One step the party took: the tile it reached and how long the step takes.</summary>
 /// <param name="Seq">The step's number, which only goes up.</param>
@@ -412,7 +412,9 @@ public sealed record TacticsHostView(string Phase, string Banner, string? Notice
     string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null,
     string? Chapter = null, string? ResultNote = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopView? Shop = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CampView? Camp = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CampView? Camp = null,
+    bool LeveledUp = false, int Gold = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<LootDef>? Loot = null);
 
 /// <summary>The TV shop panel, sent separately from the walking packet.</summary>
 public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, long Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null,
@@ -449,7 +451,10 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null, ShopViewOf(), CampViewOf());
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null, ShopViewOf(), CampViewOf(),
+        _phase == TacticsPhase.Results && _resultLeveledUp,
+        _phase == TacticsPhase.Results ? _resultGold : 0,
+        _phase == TacticsPhase.Results && !_resultLoot.IsDefaultOrEmpty ? _resultLoot : null);
 
     /// <summary>The player's colour: the one kept with them (every member has one, <see cref="PlayerColors.Assign"/>).</summary>
     private string ColorOf(string member) => _doc.Members.GetValueOrDefault(member)?.Color ?? PlayerColors.Default(0);
@@ -480,6 +485,12 @@ public sealed partial class TacticsGame
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
                 portal = PortalPath(),
             }),
+            TacticsPhase.Muster when _doc.For(profile) is { } musterMember && PendingChoices(musterMember.Character) > 0 => Custom(Screens.PickClass, new
+            {
+                classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
+                portal = PortalPath(),
+                me = CharacterChoices(musterMember),
+            }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
             TacticsPhase.Exploration when QuestLogOpen => QuestLogScreen(player, profile),
             TacticsPhase.Exploration => WalkScreen(player, profile),
@@ -492,6 +503,10 @@ public sealed partial class TacticsGame
             {
                 outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player), difficulty = CampaignDifficulty.ToString(),
                 level = _doc.PartyLevel, portal = PortalPath(),
+                leveledUp = _resultLeveledUp,
+                gold = _resultGold > 0 ? _resultGold : (int?)null,
+                loot = _resultLoot.IsDefaultOrEmpty ? null : _resultLoot.Select(l => new { id = l.Item.Value, name = Rules.Items.GetValueOrDefault(l.Item)?.Name ?? l.Item.Value, count = l.Count }).ToArray(),
+                choices = _doc.For(profile) is { } resMember ? CharacterChoices(resMember) : null,
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
                 $"Resuming… waiting for {string.Join(", ", Waiting())}", [new Option("continue", "Continue without them")]),
@@ -533,6 +548,8 @@ public sealed partial class TacticsGame
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
         }, ArcJson.Options)!.AsObject();
+        if (PendingChoices(character) is var waiting and > 0)
+            data["choices"] = JsonSerializer.SerializeToNode(CharacterChoices(_doc.For(profile)!), ArcJson.Options);
         if (_doc.Members.Count > 1) data["canGive"] = true;
         if (_giving.Contains(profile.Value)) data["give"] = JsonSerializer.SerializeToNode(GiveScreen(profile), ArcJson.Options);
         if (_doc.World?.MobAmbush is { } ambush) data["ambush"] = Rules.Mobs.Values.SelectMany(m => m).Where(m => m.Id == ambush).Select(m => Rules.Encounters[m.Encounter].Name).FirstOrDefault();
@@ -687,9 +704,15 @@ public sealed partial class TacticsGame
         return [.. _resultMembers.Select((profile, i) =>
         {
             var unit = UnitFor(i);
-            var name = _players.FirstOrDefault(p => p.Profile == profile)?.Name ?? _doc.For(profile)?.Character.Name ?? unit.Value;
+            var member = _doc.For(profile);
+            var name = _players.FirstOrDefault(p => p.Profile == profile)?.Name ?? member?.Character.Name ?? unit.Value;
+            var totalXp = member?.Xp ?? 0;
+            var lvl = member?.Character.Level ?? 1;
+            var nextLevelXp = lvl < Rules.Xp.Thresholds.Length ? Rules.Xp.Thresholds[lvl] : (int?)null;
+            var prevLevelXp = lvl > 1 && lvl - 1 < Rules.Xp.Thresholds.Length ? Rules.Xp.Thresholds[lvl - 1] : 0;
             return new ResultLine(name, _result.Xp.GetValueOrDefault(unit), _result.Outcome == BattleOutcome.Lost ? [] :
-                [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
+                [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)],
+                TotalXp: totalXp, NextLevelXp: nextLevelXp, PrevLevelXp: prevLevelXp, Level: lvl);
         })];
     }
 
