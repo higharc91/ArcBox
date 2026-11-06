@@ -115,6 +115,362 @@
           "end": true
         }
       ]
+    },
+    {
+      "id": "ch1_camp_force",
+      "beat": "ch1_ford_assault",
+      "camp": true,
+      "title": "Ash on the Water",
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "requires": [
+        "ch1_skarrow_slain"
+      ],
+      "unless": [],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_camp_force_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The smell of scorched timber hangs over the river. Nobody mentions the bridge, but nobody looks away from it either."
+            },
+            {
+              "id": "ch1_camp_force_open_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "I held that crossing with Coll and Annet. Now Skarrow's people will count their dead on the same planks. It had to be done. Doesn't mean I have to like the taste of it."
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "duty",
+              "label": "We did what the town hired us to do.",
+              "to": "duty",
+              "sets": [
+                "camp_ch1_duty"
+              ]
+            },
+            {
+              "id": "grief",
+              "label": "There was no good ending once the spears came out.",
+              "to": "grief",
+              "sets": [
+                "camp_ch1_grief"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "duty",
+          "lines": [
+            {
+              "id": "ch1_camp_force_duty_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Aye. The carts will roll again, and Emberwick eats this winter. Just don't let me call it glory."
+            },
+            {
+              "id": "ch1_camp_force_duty_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The watch shifts in silence. The embers glow steady and hard in the dark."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "grief",
+          "lines": [
+            {
+              "id": "ch1_camp_force_grief_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Aye. Two sides starved of warmth, tearing at each other for scraps. May the Hearth forgive us."
+            },
+            {
+              "id": "ch1_camp_force_grief_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "A sudden gust scatters sparks over the river stones. The night turns colder."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_camp_parley",
+      "beat": "ch1_river_crossing",
+      "camp": true,
+      "title": "A Shared Crust",
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "unless": [],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_camp_parley_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Across the shallows, the goblin cookfires twinkle like fallen stars. For the first time in memory, neither side is reaching for their bow."
+            },
+            {
+              "id": "ch1_camp_parley_open_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Halden will spit when he sees the grain tallies. But Mother Skarrow took my hand. Her palms were like dry bark, but she took it."
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "trust",
+              "label": "Peace bought with bread lasts longer than peace bought with blood.",
+              "to": "trust",
+              "sets": [
+                "camp_ch1_trust"
+              ]
+            },
+            {
+              "id": "caution",
+              "label": "Keep one eye on the hills. Vorga's hotheads haven't laid down their blades.",
+              "to": "caution",
+              "sets": [
+                "camp_ch1_caution"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "trust",
+          "lines": [
+            {
+              "id": "ch1_camp_parley_trust_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "I hope you're right. If Halden tries to cheat them, he answers to my Watch first."
+            },
+            {
+              "id": "ch1_camp_parley_trust_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "A warm draught drifts from the embers. Somewhere in the dark, a goblin flute plays two slow notes."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "caution",
+          "lines": [
+            {
+              "id": "ch1_camp_parley_caution_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "I will. A truce is like thin ice on the millpond. Step carefully or you're under."
+            },
+            {
+              "id": "ch1_camp_parley_caution_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The party checks their boots and bows before sleeping. The night remains quiet."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_camp_maud",
+      "beat": "ch1_old_maud",
+      "camp": true,
+      "title": "Ember and Ash",
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "requires": [
+        "ch1_met_maud"
+      ],
+      "unless": [],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_camp_maud_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Maud's kettle still whistles in the memory. 'It was thrown,' she said, and her blind eyes saw more than anyone in town."
+            },
+            {
+              "id": "ch1_camp_maud_open_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "A hundred years. She sat by that burned bank while three generations grew up, lied to themselves, and died. Is the whole Vale built on borrowed fire?"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "seek",
+              "label": "If it was thrown, someone threw it. We find out who.",
+              "to": "seek",
+              "sets": [
+                "camp_ch1_seek"
+              ]
+            },
+            {
+              "id": "protect",
+              "label": "Borrowed or not, people live by it. We keep it burning.",
+              "to": "protect",
+              "sets": [
+                "camp_ch1_protect"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seek",
+          "lines": [
+            {
+              "id": "ch1_camp_maud_seek_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "The Stranger knows. I see how he watches the road east. When the time comes, we make him talk."
+            },
+            {
+              "id": "ch1_camp_maud_seek_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "A coal cracks open with a soft pop, revealing a red heart of heat."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "protect",
+          "lines": [
+            {
+              "id": "ch1_camp_maud_protect_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Aye. The cold doesn't care who threw the stone. It only cares who freezes."
+            },
+            {
+              "id": "ch1_camp_maud_protect_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The party draws their cloaks closer around the fire. Warmth is precious here."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_camp_ashmaw",
+      "beat": "hollow_lair",
+      "camp": true,
+      "title": "Cold in the Cave",
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "requires": [
+        "sq_ashmaw_slain"
+      ],
+      "unless": [],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_camp_ashmaw_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The stench of ancient ash and bear fur clings to clothes and hair. Ashmaw is gone, but the Hollow feels emptier than before."
+            },
+            {
+              "id": "ch1_camp_ashmaw_open_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "That beast wasn't cruel. Just starving, cold, and driven from its deep den by the chill creeping into the rock. Even the monsters are freezing."
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "pity",
+              "label": "It died defending the last warm stone in the cave.",
+              "to": "pity",
+              "sets": [
+                "camp_ch1_pity"
+              ]
+            },
+            {
+              "id": "resolve",
+              "label": "The boy is safe with Maud. That is what counts tonight.",
+              "to": "resolve",
+              "sets": [
+                "camp_ch1_resolve"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pity",
+          "lines": [
+            {
+              "id": "ch1_camp_ashmaw_pity_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Aye. When the Hearth fails, the strong eat the weak, and everyone starves in the end. We have to rekindle it."
+            },
+            {
+              "id": "ch1_camp_ashmaw_pity_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The flames flicker low, casting long shadows against the campsite."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "resolve",
+          "lines": [
+            {
+              "id": "ch1_camp_ashmaw_resolve_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "You're right. One life pulled out of the dark. We take our victories where we can find them."
+            },
+            {
+              "id": "ch1_camp_ashmaw_resolve_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Silence settles over the camp. For once, the night feels earned."
+            }
+          ],
+          "end": true
+        }
+      ]
     }
   ]
 }

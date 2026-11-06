@@ -191,7 +191,8 @@ public sealed partial class TacticsGame
     {
         var seen = _doc.World!.CampScenes.IsDefault ? [] : _doc.World.CampScenes;
         var scene = Lore.Scenes.FirstOrDefault(s => s.Camp && !seen.Contains(s.Id) && SceneRun.Plays(s, StoryFlags())
-            && StoryArc?.Beats.Any(b => b.Id == s.Beat) == true && s.Beat is not null && _doc.World.Beats.Contains(s.Beat));
+            && s.Beat is not null && _doc.World.Beats.Contains(s.Beat)
+            && Lore.Arcs.Any(a => a.Chapter == StoryArc?.Chapter && (a.Id == StoryArc.Id || a.SideAdventure) && a.Beats.Any(b => b.Id == s.Beat)));
         if (scene is null) { BeginSleep(); return; }
         EndTelling();
         _doc = _doc with { World = _doc.World with
