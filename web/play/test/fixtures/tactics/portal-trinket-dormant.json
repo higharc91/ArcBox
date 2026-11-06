@@ -2123,7 +2123,8 @@
               "rogue.cunning_hide"
             ],
             "attacks": 2,
-            "choices": []
+            "choices": [],
+            "rangedAttacks": 1
           },
           {
             "level": 2,
@@ -4413,7 +4414,7 @@
         "tags": [
           "Always on"
         ],
-        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or (an ally is next to the target and you don\u0027t have disadvantage)): 3d6 damage (once per turn)"
+        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or (an ally is next to the target and you don\u0027t have disadvantage)): 2d6\u002B2 damage (once per turn)"
       },
       "rogue.trip": {
         "name": "Cunning Strike: Trip",

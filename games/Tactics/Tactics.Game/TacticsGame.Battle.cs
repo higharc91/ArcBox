@@ -661,6 +661,6 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Pace);
         _ctx.CancelTimer(Timers.Retreat);
         (_retreat, _retreatFailedRound) = (null, 0);
-        (_turnTimerFor, _turnShortFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, null, 0, null);
+        (_turnTimerFor, _turnShortFor, _reactTimerFor, _awaitShown, _plan, _replannedTurn, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, null, null, 0, null);
     }
 }
