@@ -22,6 +22,9 @@ public sealed partial class TacticsGame
     /// <summary>The rest of the AI's plan for the unit whose turn it is.</summary>
     private (UnitId Unit, int Round, int TurnIndex, Queue<Command> Commands)? _plan;
 
+    /// <summary>The turn already given its one retry after a refused plan; reactions must not reset that guard.</summary>
+    private (UnitId Unit, int Round, int TurnIndex)? _replannedTurn;
+
     /// <summary>A played unit whose turn the AI is finishing (it timed out, or its seat dropped mid-turn).</summary>
     private UnitId? _aiFinishing;
 
@@ -422,11 +425,19 @@ public sealed partial class TacticsGame
         }
         if (resolution.Rejected is not null)
         {
-            // The plan went stale (a reaction moved things): end the turn rather than loop. A refused EndTurn can't happen
-            // for the active unit, so this always moves the battle on.
+            // Reactions can spend resources or move targets after planning. Replan once from the remaining economy;
+            // a repeatedly invalid planner still ends its turn, and engine exceptions retain their separate watchdog.
             _plan = null;
             if (command is not EndTurn && before.Active == command.Actor && before.Pending is null)
+            {
+                var turn = (command.Actor, before.Round, before.TurnIndex);
+                if (_replannedTurn != turn)
+                {
+                    _replannedTurn = turn;
+                    return;
+                }
                 ApplyAi(new EndTurn(command.Actor), aiFinished, skipping);
+            }
             return;
         }
         if (!skipping)
