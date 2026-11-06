@@ -204,8 +204,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _presentationControls = new BattlePresentationControls(CinematicsOverride, ReducedEffects, (cinema, reduced) =>
         {
             (CinematicsOverride, ReducedEffects) = (cinema, reduced);
+            if (_player is not null) _player.ReducedEffects = reduced;
             if (cinema == BattleCinematics.Off) _player?.ClearCinematics();
             preferenceStore.Update(s => s with { BattleCinematics = cinema?.ToString(), ReducedBattleEffects = reduced });
+            _loop?.Guard(Redraw);
         });
         AddChild(_presentationControls);
 

@@ -398,15 +398,10 @@ public partial class BoardCanvas : Node2D
                 var lit = SpellLighting.Apply(new Rgb(light.R, light.G, light.B), at, _spellLights);
                 light = new Color(lit.R, lit.G, lit.B, light.A);
             }
-            if (_cinematic is { Dim: > 0 } camera)
+            if (_cinematic is { Dim: > 0 } camera && CinematicFit.Focuses(camera, unit.Feet, _cinematicScale))
             {
-                var half = camera.Extent ?? new System.Numerics.Vector2(150 / _cinematicScale, 170 / _cinematicScale);
-                var delta = unit.Feet - camera.Focus;
-                if (Math.Abs(delta.X) <= half.X && Math.Abs(delta.Y) <= half.Y)
-                {
-                    var restore = 1 / (1 - camera.Dim);
-                    light = new Color(light.R * restore, light.G * restore, light.B * restore, light.A);
-                }
+                var restore = 1 / (1 - camera.Dim);
+                light = new Color(light.R * restore, light.G * restore, light.B * restore, light.A);
             }
             light = unit.Away ? light * AwayShade : light;
             light.A *= unit.Opacity;
