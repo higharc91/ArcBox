@@ -23,14 +23,14 @@ public sealed class HiddenRogueTests
 
     private static Tile T(int x, int y) => new(x, y);
 
-    /// <summary>A level-3 human rogue (Move 4, acting first), hiding if asked, and a sturdy goblin.</summary>
-    private static (BattleState State, RulesPack Rules) Start(Tile rogue, Tile goblin, bool hiding = false)
+    /// <summary>A human rogue (level 3 unless given: Move 4, Cunning Dash), acting first, hiding if asked, and a sturdy goblin.</summary>
+    private static (BattleState State, RulesPack Rules) Start(Tile rogue, Tile goblin, bool hiding = false, int level = 3)
     {
         var base_ = BasePackTests.Rules;
         var map = AsciiMap.Parse(Field);
         var rules = RulesPack.InMemory("scripted", base_.Abilities.Values, base_.Passives.Values, base_.Conditions.Values, [map],
             base_.Injuries.Values);
-        var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("vex", "human", "rogue", null, 3, base_), base_)
+        var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("vex", "human", "rogue", null, level, base_), base_)
             with { InitiativeBonus = 50 };
         var setup = new BattleSetup(map,
         [
@@ -109,13 +109,23 @@ public sealed class HiddenRogueTests
     [Fact]
     public void With_no_foe_in_reach_it_hides_where_it_can_strike_from_next_turn()
     {
-        var (state, rules) = Start(T(0, 3), T(6, 3));
+        // Level 1: no Cunning Dash to close the gap this turn.
+        var (state, rules) = Start(T(0, 3), T(6, 3), level: 1);
 
         var plan = HiddenRogue.Plan(state, U("vex"), rules)!.Value;
 
         Assert.Equal(3, plan.Length);
         Assert.Equal(T(2, 2), Assert.IsType<Move>(plan[0]).Path[^1]);
         Assert.Equal<Command>([new Use(U("vex"), Hide, new Target()), new EndTurn(U("vex"))], plan[1..]);
+    }
+
+    [Fact]
+    public void With_a_foe_in_reach_of_a_dash_it_leaves_the_turn_to_the_ai_to_dash_in_and_strike()
+    {
+        // Level 3: Cunning Dash brings the goblin in reach this turn, so it strikes rather than creep to cover.
+        var (state, rules) = Start(T(0, 3), T(6, 3));
+
+        Assert.Null(HiddenRogue.Plan(state, U("vex"), rules));
     }
 
     [Fact]

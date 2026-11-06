@@ -11,8 +11,9 @@ namespace Tactics.Sim;
 /// <item>walking, striking a foe (the weapon attack) and walking on to a tile where it may Hide, then hiding;</item>
 /// <item>walking to one of the <see cref="HideTiles"/> nearest tiles where it may Hide, hiding, then walking and striking
 /// from hiding;</item>
-/// <item>with nothing to strike, walking to the tile nearest a foe where it may Hide, if that is nearer a foe than where it
-/// stands and close enough to strike from next turn, and hiding.</item>
+/// <item>with nothing to strike on foot and no foe a bonus-action dash (Cunning Dash) could bring in reach, walking to the
+/// tile nearest a foe where it may Hide, if that is nearer a foe than where it stands and close enough to strike from next
+/// turn, and hiding.</item>
 /// </list>
 /// A plan scores <see cref="StrikeWorth"/> for striking (so it always strikes when it can), <see cref="AdvantageWorth"/> when
 /// the strike has advantage (from hiding, a flank, its mark or the target's condition: Sneak Attack) and
@@ -20,8 +21,8 @@ namespace Tactics.Sim;
 /// meanwhile (so, seen at the start of its turn, it strikes and then hides rather than hides and then strikes, when it can
 /// do both). Ties go to the weaker target, then the fewest foes left behind to make an opportunity attack, then the shortest
 /// walk, then tile and unit order. When the best plan sets nothing up (a strike without advantage that can't end hidden),
-/// or there is none (nothing to strike, and no hiding place that close), the turn is the AI's: it chooses targets, riders
-/// and Cunning Dash at least as well.
+/// or there is none (nothing to strike, a foe a dash away, or no hiding place close enough), the turn is the AI's: it
+/// chooses targets, riders and Cunning Dash at least as well.
 /// </summary>
 internal static class HiddenRogue
 {
@@ -96,10 +97,14 @@ internal static class HiddenRogue
                 }
             }
 
-        // Nothing to strike: hide as close to a foe as it can, if that brings it nearer one and within a turn's strike of it.
+        // Nothing to strike on foot and no foe a dash away: hide as close to a foe as it can, if that brings it nearer one and
+        // within a turn's strike of it.
         int Nearest(Tile t) => s.Units.Values.Where(u => Movement.Hostile(me, u) && u.Life == LifeState.Up)
             .Select(u => Reach.Distance(u.Pos, t)).DefaultIfEmpty(0).Min();
-        var strikeReach = Modifiers.Move(me.Sheet, Modifiers.For(s, unit, rules)) + (me.Sheet.Weapon.Ranged ? me.Sheet.Weapon.Range : 1);
+        var move = Modifiers.Move(me.Sheet, Modifiers.For(s, unit, rules));
+        var strikeReach = move + (me.Sheet.Weapon.Ranged ? me.Sheet.Weapon.Range : 1);
+        if (options.Count == 0 && CanDash(s, unit, rules) && Nearest(me.Pos) <= strikeReach + move)
+            return null;
         if (options.Count == 0)
             foreach (var b in here.Reachable.Where(b => Nearest(b) < Nearest(me.Pos) && Nearest(b) <= strikeReach
                                                         && CanHide(Moved(s, unit, b, here.CostTo(b)), unit, rules)))
@@ -144,6 +149,12 @@ internal static class HiddenRogue
 
     private static BattleState Change(BattleState s, UnitId unit, Func<UnitState, UnitState> change)
         => s with { Units = s.Units.SetItem(unit, change(s.Units[unit])) };
+
+    /// <summary>True when the unit can use a bonus-action dash on itself now (Cunning Dash).</summary>
+    private static bool CanDash(BattleState s, UnitId unit, RulesPack rules)
+        => s.Units[unit].Sheet.Abilities.Any(id => rules.Abilities.TryGetValue(id, out var a) && a.Cost.Bonus > 0
+            && a.Target.Kind == TargetKind.Self && a.Effects.OfType<ExtraActionEffect>().Any(e => e.Kind == "move")
+            && Battle.Check(s, new Use(unit, id, new Target()), rules) is null);
 
     private static bool CanHide(BattleState s, UnitId unit, RulesPack rules)
         => Battle.Check(s, new Use(unit, Hide, new Target()), rules) is null;
