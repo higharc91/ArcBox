@@ -76,6 +76,11 @@ export interface AbilityChoice {
   tiles: Tile[];
   /** How it's aimed: at a unit, a tile, a direction (a line or cone from you), or just used ("self"). */
   aim?: "unit" | "tile" | "direction" | "self";
+  /**
+   * Set (above 1) for a weapon attack that makes several attacks: each may go at any of `targets` ("Attack 2 of 3"), sent as
+   * `targets`, one unit id per attack. Without a list every attack goes at the one target. Previews are for all at one.
+   */
+  attacks?: number;
 }
 
 export interface TurnChoices {
@@ -86,9 +91,37 @@ export interface TurnChoices {
   canDelay: boolean;
 }
 
+/** Falling back (#111): the button, the vote under way, or that it failed this round. Absent before round 3 or when the fight forbids it. */
+export interface FallBackData {
+  canPropose?: boolean;
+  failed?: boolean;
+  vote?: {
+    proposer: string;
+    yes: number;
+    no: number;
+    /** Players here (they vote), and the yes votes a strict majority takes. */
+    present: number;
+    needed: number;
+    /** This player's own answer, once given. */
+    mine: "yes" | "no" | null;
+    /** When it times out, ISO UTC. */
+    until?: string | null;
+  };
+}
+
+/** A player's reaction preferences (#113): what the game answers for them without asking. */
+export interface ReactionPrefsData {
+  opportunity: "ask" | "always" | "never";
+  defence: "ask" | "miss" | "never";
+}
+
 export interface TurnData {
   surfaces?: string[];
+  fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
+  /** Who is acting: the hero, or one of their summons (then `summoned` is set and the header names it). */
   me: UnitView;
+  summoned?: boolean;
   /** The map id, for its terrain from the content pack. */
   map?: string;
   units: UnitView[];
@@ -105,6 +138,8 @@ export interface ReactOption {
 
 export interface ReactData {
   surfaces?: string[];
+  fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
   unit: string;
   trigger: string;
   cause: {
@@ -120,6 +155,8 @@ export interface ReactData {
 
 export interface StatusData {
   surfaces?: string[];
+  fallBack?: FallBackData;
+  reactions?: ReactionPrefsData;
   me: UnitView;
   active: string | null;
   upIn: number | null;
@@ -173,6 +210,8 @@ export interface WalkData {
   me: { name: string; cls: string; level: number; color?: string };
   party: WalkMember[];
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   canBattle: boolean;
   /** The campaign portal's path; null outside a campaign. */
   portal?: string | null;
@@ -208,6 +247,8 @@ export interface DialogueData {
   canSkip: boolean;
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
 }
 
 export interface StoryOption {
@@ -237,6 +278,8 @@ export interface VoteData {
   away: string[];
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   /** What a loot vote asks ("Who takes the Potion of Healing?"), the owner's decision 1; absent for a story's vote. */
   question?: string;
   /** Which of a run of loot votes this is, so each item's question is a new one. */
@@ -287,6 +330,8 @@ export interface CheckData {
   roll: CheckRoll | null;
   /** This phone is the VIP's: it can end the session from the scene. */
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
 }
 
 export interface ResultsData {
@@ -296,6 +341,8 @@ export interface ResultsData {
   /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
   note?: string | null;
   vip: boolean;
+  /** The campaign difficulty ("Story", "Normal" or "Hard"); absent from an older server. */
+  difficulty?: string;
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */
   portal?: string | null;

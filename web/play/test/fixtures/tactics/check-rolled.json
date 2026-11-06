@@ -65,7 +65,8 @@
       "dice": null,
       "group": null
     },
-    "vip": false
+    "vip": false,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": null,

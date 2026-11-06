@@ -4,6 +4,7 @@ using Godot;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
 
 namespace ArcBox.Host.Games.Tactics;
 
@@ -37,6 +38,7 @@ public partial class HudLayer : Control
     private readonly Control _head;
     private readonly Label _title;
     private readonly Label _round;
+    private readonly Label _tag;
     private readonly Control _objective;
     private readonly Label _objectiveText;
     private readonly Control _notice;
@@ -46,8 +48,10 @@ public partial class HudLayer : Control
     private readonly Control _prompt;
     private readonly Label _promptText;
     private readonly Control _badge;
+    private readonly VoteBoard? _retreat;
 
-    public HudLayer(string packRoot, HudArt art)
+    /// <param name="story">The story panels' art, for the vote to fall back (#111); with none, the vote isn't drawn.</param>
+    public HudLayer(string packRoot, HudArt art, StoryArt? story = null)
     {
         _root = packRoot;
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
@@ -56,9 +60,10 @@ public partial class HudLayer : Control
         var panels = Scaled(packRoot, art.PanelsPath);
         _title = ArcTheme.Label("", ArcTheme.Bold, 36, Ink);
         _round = ArcTheme.Label("", ArcTheme.SemiBold, 26, Gold);
+        _tag = ArcTheme.Label("", ArcTheme.SemiBold, 22, Muted);
         _objectiveText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
         _objective = ArcTheme.HBox(8, ArcTheme.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
-        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _objective));
+        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
         _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 22, Ink);
@@ -87,7 +92,16 @@ public partial class HudLayer : Control
         _badge = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), ArcTheme.Label(BattleHud.AiFinishedBadge, ArcTheme.Bold, 22, Gold));
         _badge.Visible = false;
         AddChild(_badge);
+
+        if (story is not null)
+        {
+            _retreat = new VoteBoard(story);     // the same panel as a party vote, bottom right
+            AddChild(_retreat);
+        }
     }
+
+    /// <summary>Shows the party's vote to fall back (<see cref="RetreatPlan"/>), or nothing.</summary>
+    public void ShowRetreat(VotePanel? vote) => _retreat?.Show(vote);
 
     /// <summary>Shows a note from the game for everyone, under the battle's panel, or nothing.</summary>
     public void ShowNotice(string? notice)
@@ -101,6 +115,8 @@ public partial class HudLayer : Control
     {
         _title.Text = hud.Title.ToUpperInvariant();
         _round.Text = hud.Turn is { } turn ? $"{hud.Round} · {turn}" : hud.Round;
+        _tag.Visible = hud.Tag is not null;
+        _tag.Text = hud.Tag ?? "";
         _objective.Visible = hud.Objective is not null;
         _objectiveText.Text = hud.Objective ?? "";
         _strip.Show(hud);

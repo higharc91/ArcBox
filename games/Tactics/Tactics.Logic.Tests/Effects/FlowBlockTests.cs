@@ -116,7 +116,7 @@ public sealed class FlowBlockTests
     /// <summary>Every block key and the test class that pins its behaviour.</summary>
     private static readonly ImmutableSortedDictionary<string, string> TestedKeys = Ordinal.Map(
         ("attack", nameof(UseCommandTests)), ("save", nameof(UseCommandTests)), ("damage", nameof(UseCommandTests)),
-        ("heal", nameof(UseCommandTests)), ("apply", nameof(ConditionTests)), ("remove", nameof(UseCommandTests)),
+        ("halveHit", nameof(UncannyHitTests)), ("heal", nameof(UseCommandTests)), ("apply", nameof(ConditionTests)), ("remove", nameof(UseCommandTests)),
         ("help", nameof(DownedTests)), ("push", nameof(MotionTests)), ("pull", nameof(MotionTests)),
         ("teleport", nameof(MotionTests)), ("swap", nameof(MotionTests)), ("dash", nameof(MotionTests)),
         ("jumpTo", nameof(MotionTests)),

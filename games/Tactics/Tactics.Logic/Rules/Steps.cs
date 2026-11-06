@@ -16,6 +16,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(PayCostStep), nameof(PayCostStep))]
 [JsonDerivedType(typeof(ReactStep), nameof(ReactStep))]
 [JsonDerivedType(typeof(RunEffectsStep), nameof(RunEffectsStep))]
+[JsonDerivedType(typeof(StrikeStep), nameof(StrikeStep))]
 [JsonDerivedType(typeof(MoveStep), nameof(MoveStep))]
 [JsonDerivedType(typeof(OfferReactionStep), nameof(OfferReactionStep))]
 [JsonDerivedType(typeof(ReactionStep), nameof(ReactionStep))]
@@ -72,7 +73,7 @@ public sealed record StartNextTurnStep : Step
 
 /// <summary>
 /// Ends the turn of <see cref="Unit"/>, which was skipped because it can't act (<see cref="TurnSkipped"/>): the hand-off to
-/// the next unit is queued, then its until-save conditions roll and the durations it ticks tick
+/// the next unit is queued, a Downed unit's countdown ticks (<see cref="DownedRules.TickTurn"/>), then its until-save conditions roll and the durations it ticks tick
 /// (<see cref="Conditions.EndTurn"/>), so a stun can wear off and the conditions it applied still expire. No turn-end hooks
 /// fire and no <see cref="TurnEnded"/> is emitted.
 /// </summary>
@@ -82,23 +83,26 @@ public sealed record SkipTurnStep(UnitId Unit) : Step
     public override void Run(BattleWriter w, RulesPack rules)
     {
         w.PushFront(new StartNextTurnStep());
+        DownedRules.TickTurn(w, Unit);   // after the hand-off is queued, so a unit going Out leaves the order there
         Conditions.EndTurn(w, Unit, rules);
     }
 }
 
 /// <summary>
 /// Moves <see cref="Unit"/> to <see cref="ToIndex"/> in this round's order and starts the turn of the unit now at its old
-/// place. When the new place comes up, the delayed unit's turn resumes (see <see cref="Battle.BeginTurn"/>).
+/// place. The new place is kept in later rounds (<see cref="BattleState.Delays"/>). When the new place comes up, the delayed unit's turn resumes (see <see cref="Battle.BeginTurn"/>).
 /// </summary>
 public sealed record DelayStep(UnitId Unit, int ToIndex) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
-        var order = w.State.Order;
+        var order = w.State.Order.RemoveAt(w.State.Order.IndexOf(Unit)).Insert(ToIndex, Unit);
+        UnitId? after = ToIndex < order.Length - 1 ? order[ToIndex - 1] : null;
         w.State = w.State with
         {
-            Order = order.RemoveAt(order.IndexOf(Unit)).Insert(ToIndex, Unit),
+            Order = order,
+            Delays = w.State.Delays.RemoveAll(d => d.Unit == Unit).Add(new DelayMark(Unit, after)),
             DelayedThisRound = w.State.DelayedThisRound.Add(Unit),
         };
         w.Emit(new Delayed(Unit, ToIndex));

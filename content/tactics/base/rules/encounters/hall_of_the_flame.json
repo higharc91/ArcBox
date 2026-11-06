@@ -1,6 +1,6 @@
 { "id": "hall_of_the_flame", "name": "The Hall of the Flame", "map": "hall_of_the_flame", "level": 10, "party": { "min": 4, "max": 6 },
-  "enemies": [ { "unit": "maren_sorrel", "at": [9, 4], "id": "maren_sorrel", "tag": "maren_sorrel", "level": 10 },
-               { "unit": "cult_leader", "zone": "heart", "count": 2, "level": 10, "tag": "kindled" },
+  "enemies": [ {"unit": "maren_sorrel", "at": [9, 4], "id": "maren_sorrel", "tag": "maren_sorrel", "level": 10, "hpByParty": {"4": 105, "5": 180, "6": 240}},
+               {"unit": "cult_leader", "zone": "heart", "count": 2, "level": 10, "tag": "kindled", "countByParty": {"4": 1, "5": 2, "6": 2}},
                { "unit": "cultist", "zone": "north_gallery", "count": 2, "level": 10, "tag": "kindled" },
                { "unit": "cultist", "zone": "south_gallery", "count": 2, "level": 10, "tag": "kindled" } ],
   "xp": 2500, "loot": ["crypt_vault"],

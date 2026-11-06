@@ -67,7 +67,7 @@
                      "onSuccess": [ { "damage": { "dice": "2d8", "type": "necrotic" } } ] } ],
       "presentation": { "anim": "characters.summon", "fx": "fx.necrotic.grave" },
       "ai": { "tags": ["damage", "area"] } },
-    { "id": "bandit.dirty_strike", "name": "Dirty Strike", "tier": 0, "cost": { "action": 1, "uses": 1 }, "isWeaponAttack": true,
+    { "id": "bandit.dirty_strike", "name": "Dirty Strike", "tier": 0, "cost": { "action": 1, "uses": 1 }, "isWeaponAttack": true, "riderOnce": true,
       "target": { "kind": "enemy", "range": 1, "los": true, "area": { "shape": "single" } },
       "effects": [ { "attack": { "kind": "weapon" },
                      "onHit": [ { "damage": { "dice": "2d6", "type": "piercing" } },

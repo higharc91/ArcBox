@@ -67,6 +67,8 @@ public sealed class InvariantTests
         Throws(s.Change("kara", u => u with { Hp = -1 }), rules, "HP");
         Throws(s.Change("kara", u => u with { Resources = u.Resources.SetItem("second_wind", -1) }), rules, "second_wind");
         Throws(s.Change("kara", u => u with { Economy = u.Economy with { MoveLeft = -1 } }), rules, "negative");
+        Throws(s with { Rng = default }, rules, "Rng");                 // a zeroed generator: Below's rejection loop would never end
+        Throws(s with { Rng = s.Rng with { Inc = 2 } }, rules, "Rng");  // an even increment has a short cycle
         Throws(s with { Order = s.Order.Remove(U("gob")) }, rules, "gob");
         Throws(s with { Order = s.Order.Add(U("kara")) }, rules, "kara");
         Throws(s with { TurnIndex = s.Order.Length }, rules, "TurnIndex");

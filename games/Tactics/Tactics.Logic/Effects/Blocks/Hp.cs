@@ -8,7 +8,8 @@ public static class Hp
     /// <paramref name="source"/> (if a unit dealt it): immunity (the sheet's or a static modifier's) cancels it, resistance
     /// halves it (rounded down), vulnerability doubles it. Returns the damage dealt.
     /// <list type="bullet">
-    /// <item>An Up unit: temporary HP absorbs it first; emits <see cref="Damaged"/>. A transformed unit whose temporary HP
+    /// <item>An Up unit: temporary HP absorbs it first; damage that would take it past an untriggered phase threshold leaves it
+    /// at the threshold instead (<see cref="Steadfast.PhaseFloor"/>); emits <see cref="Damaged"/>. A transformed unit whose temporary HP
     /// run out turns back (<see cref="Transforms.Revert"/>), the rest of the damage carrying over. Damage over 0 that leaves it at 0 HP
     /// drops it (<see cref="DownedRules.Drop"/>); otherwise a concentrating unit saves to keep its concentration
     /// (<see cref="Conditions.ConcentrationDc"/>) and the unit's <see cref="HookKind.OnDamaged"/> hooks fire.</item>
@@ -39,6 +40,14 @@ public static class Hp
                 amount *= 2;
         }
 
+        if (resolution is { } hit && u.HalvedHit == hit)
+        {
+            var total = u.HalvedHitDamage + amount;
+            amount = total / 2 - u.HalvedHitDamage / 2;
+            u = u with { HalvedHitDamage = total };
+            w.Set(u);
+        }
+
         if (u.Life == LifeState.Downed)
         {
             if (amount > 0)
@@ -50,7 +59,10 @@ public static class Hp
         }
 
         var absorbed = Math.Min(u.TempHp, amount);
-        var hp = Math.Max(0, u.Hp - (amount - absorbed));
+        var plain = Math.Max(0, u.Hp - (amount - absorbed));
+        var hp = Steadfast.PhaseFloor(w.State, u, u.Hp, plain);
+        if (hp != plain)
+            amount = absorbed + u.Hp - hp;   // a hit held at a phase threshold deals only what it took
         w.Set(u with { TempHp = u.TempHp - absorbed, Hp = hp });
         w.Emit(new Damaged(unit, amount, type, hp));
         if (amount > 0)
@@ -74,9 +86,9 @@ public static class Hp
     /// <summary>
     /// Restores up to <paramref name="amount"/> HP (never above max). Emits <see cref="Healed"/> with the HP restored. A
     /// Downed unit healed for more than 0 gets up with the HP healed (<see cref="DownedRules.Revive"/>); an Out or Dead one
-    /// can't be healed.
+    /// can't be healed. Positive HP restored fires OnHealed after revival, with the healer as Other when known.
     /// </summary>
-    public static int Heal(BattleWriter w, UnitId unit, int amount)
+    public static int Heal(BattleWriter w, UnitId unit, int amount, UnitId? source = null)
     {
         var u = w.Unit(unit);
         if (!DownedRules.InBattle(u))
@@ -86,6 +98,8 @@ public static class Hp
         w.Emit(new Healed(unit, hp - u.Hp, hp));
         if (u.Life == LifeState.Downed && hp > 0)
             DownedRules.Revive(w, unit, hp);
+        if (hp > u.Hp)
+            Hooks.Fire(w, HookKind.OnHealed, new HookArgs(unit, source, Amount: hp - u.Hp), w.Rules);
         return hp - u.Hp;
     }
 }
@@ -151,7 +165,7 @@ public sealed class HealBlock : EffectBlock<HealEffect>
     {
         var target = ctx.TargetUnit(Key);
         var amount = Rolls.Damage(ctx.W, def.Dice.At(ctx.Level), crit: false) + ctx.Sum(def.Bonus);
-        Hp.Heal(ctx.W, target.Id, amount);
+        Hp.Heal(ctx.W, target.Id, amount, ctx.Source);
     }
 }
 
@@ -234,4 +248,22 @@ public sealed class ReviveBlock : EffectBlock<ReviveEffect>
 
     /// <inheritdoc />
     protected override void Run(ReviveEffect def, EffectContext ctx) => DownedRules.Revive(ctx.W, ctx.TargetUnit(Key).Id, def.Hp);
+}
+
+/// <summary>Marks only the pending attack hit; unrelated damage is unaffected.</summary>
+public sealed class HalveHitBlock : EffectBlock<HalveHitEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "halveHit";
+    /// <inheritdoc />
+    protected override string? Describe(HalveHitEffect def, int level, RulesPack rules)
+        => "halves the triggering hit's damage, including riders (rounded down)";
+    /// <inheritdoc />
+    protected override void Run(HalveHitEffect def, EffectContext ctx)
+    {
+        if (ctx.Resolution is not { } hit)
+            return;
+        var target = ctx.TargetUnit(Key);
+        ctx.W.Set(target with { HalvedHit = hit, HalvedHitDamage = 0 });
+    }
 }

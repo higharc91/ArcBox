@@ -140,7 +140,9 @@ public static class SheetBuilder
         var trinket = c.Trinket is { } worn && rules.Trinkets.TryGetValue(worn, out var known) && known.ActiveFor(c) ? known : null;
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
                     + passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0)
-                    + injuries.Sum(i => i.Static.MaxHp) + (trinket?.Static.MaxHp ?? 0);
+                    + (trinket?.Static.MaxHp ?? 0);
+        var uninjuredMaxHp = maxHp;
+        maxHp += injuries.Sum(i => i.Static.MaxHp + PercentOf(uninjuredMaxHp, i.Static.MaxHpPercent));
         passives.AddRange(injuries.Select(i => RulesPack.InjuryPassiveId(i.Id)));
         if (trinket is not null) passives.Add(RulesPack.TrinketPassiveId(trinket.Id));
 
@@ -159,6 +161,10 @@ public static class SheetBuilder
             Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
             Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
     }
+
+    /// <summary><paramref name="percent"/> of <paramref name="hp"/>, rounded down toward 0 and at least 1 in size (0 for 0%).</summary>
+    private static int PercentOf(int hp, int percent)
+        => percent == 0 ? 0 : Math.Sign(percent) * Math.Max(1, Math.Abs(hp * percent) / 100);
 
     private static IEnumerable<FeatureRef> Features(ClassDef cls, int level)
         => cls.Features.TryGetValue(level, out var list) ? list : [];
@@ -276,6 +282,6 @@ public static class SheetBuilder
         var maxHp = Math.Max(1, m!.Hp.At(effectiveLevel) + m.Passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0));
         return new UnitSheet(m.Name, Side.Enemy, effectiveLevel, m.Scores, maxHp, m.Ac, m.Armor, m.Move, m.Jump,
             m.InitiativeBonus, m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune,
-            m.Vulnerable, m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
+            m.Vulnerable, m.SheetTags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
     }
 }

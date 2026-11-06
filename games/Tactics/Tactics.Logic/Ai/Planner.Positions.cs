@@ -4,11 +4,14 @@ namespace Tactics.Logic;
 
 internal sealed partial class Planner
 {
-    /// <summary>A reachable tile: the path there, its Move cost, its score on position alone and the opportunity attacks
-    /// the walk would draw.</summary>
-    private sealed record Spot(Tile Tile, ImmutableArray<Tile> Path, int Cost, double Position, double Risk, double Score);
+    /// <summary>A reachable tile: the path there, its Move cost, its score on position alone (<see cref="Place"/>: the tile
+    /// and the zone damage of staying on it), that less what getting there costs (Move and the zone damage on the way), the
+    /// opportunity attacks the walk would draw, and the score of ending the walk there.</summary>
+    private sealed record Spot(Tile Tile, ImmutableArray<Tile> Path, int Cost, double Place, double Position, double Risk, double Score);
 
-    private Spot SpotAt(Tile t, ImmutableArray<Tile> path)
+    /// <summary>Walking <paramref name="path"/> from the unit's tile to <paramref name="t"/>; with <paramref name="escaped"/>
+    /// (a disengage that comes with the walk), it draws no opportunity attack.</summary>
+    private Spot SpotAt(Tile t, ImmutableArray<Tile> path, bool escaped = false)
     {
         var cost = 0;
         var prev = _me.Pos;
@@ -18,14 +21,75 @@ internal sealed partial class Planner
             prev = step;
         }
         var hazards = _scorer.Hazards(_me, t, path);
-        var position = Position(t, hazards.Staying) - 0.01 * cost
-                       - (HazardCost(hazards.Entering + hazards.Staying) - HazardCost(hazards.Staying));
-        var risk = Risk(path);
-        return new Spot(t, path, cost, position, risk, position - (1 + _p.Caution) * risk);
+        var place = Position(t, hazards.Staying);
+        var position = place - 0.01 * cost - (HazardCost(hazards.Entering + hazards.Staying) - HazardCost(hazards.Staying));
+        var risk = escaped ? 0 : Risk(path);
+        return new Spot(t, path, cost, place, position, risk, position - (1 + _p.Caution) * risk);
     }
 
+    private readonly Dictionary<Tile, double> _lands = [];
+
     /// <summary>
-    /// A tile's score on position alone (spec §5.2): minus caution × the threat on it next round (with the unit's own AC and
+    /// What ending the turn on <paramref name="t"/> is worth when the unit gets there without walking (a teleport or a leap):
+    /// its position score, less the zone damage of landing there and of staying. No Move is spent and no opportunity attack
+    /// drawn.
+    /// </summary>
+    private double Land(Tile t)
+    {
+        if (_lands.TryGetValue(t, out var known))
+            return known;
+        var hazards = _scorer.Hazards(_me, t, [t]);
+        return _lands[t] = Standing(t) - HazardCost(hazards.Entering + hazards.Staying);
+    }
+
+    /// <summary>The score of staying on <paramref name="t"/>: its position score with the zone damage of staying there.</summary>
+    private double Place(Tile t) => _spots.TryGetValue(t, out var spot) ? spot.Place : Position(t, _scorer.Hazards(_me, t, []).Staying);
+
+    /// <summary>How many landing tiles a teleport or a leap is planned with, from each tile it may be used from.</summary>
+    private const int KeptLandings = 5;
+
+    private readonly Dictionary<(Tile, int, bool), ImmutableArray<Tile>> _landings = [];
+
+    /// <summary>
+    /// The tiles a teleport or a leap of <paramref name="range"/> from <paramref name="from"/> is planned to land on: of the
+    /// walkable tiles in range with no unit on them, those with less threat on them than on <paramref name="from"/> for an
+    /// <paramref name="escape"/>, otherwise those where the foes wouldn't Down the unit next round
+    /// (<see cref="Companion.WouldDrop"/>), the best <see cref="KeptLandings"/> by <see cref="Land"/> (ties by tile). Line of
+    /// sight is the engine's to check.
+    /// </summary>
+    private ImmutableArray<Tile> Landings(Tile from, int range, bool escape = false)
+    {
+        if (_landings.TryGetValue((from, range, escape), out var known))
+            return known;
+        var terrain = _scorer.Terrain;
+        var taken = Taken();
+        var threat = _threat.At(from);
+        var tiles = new List<Tile>();
+        for (var dx = -range; dx <= range; dx++)
+            for (var dy = Math.Abs(dx) - range; dy <= range - Math.Abs(dx); dy++)
+            {
+                var t = new Tile(from.X + dx, from.Y + dy);
+                if (t != from && terrain.Map.InBounds(t) && terrain.Walkable(t) && !taken.Contains(t)
+                    && (escape ? _threat.At(t) < threat : !Companion.WouldDrop(_threat, _me, t)))
+                    tiles.Add(t);
+            }
+        return _landings[(from, range, escape)] = [.. tiles.OrderByDescending(t => Round(Land(t))).ThenBy(t => t).Take(KeptLandings)];
+    }
+
+    private ImmutableSortedSet<Tile>? _taken;
+
+    /// <summary>The tiles other units in the battle hold (the unit's own is free: it is moving).</summary>
+    private ImmutableSortedSet<Tile> Taken() => _taken ??= [.. _s.Units.Values
+        .Where(u => u.Id != _me.Id && DownedRules.InBattle(u)).Select(u => u.Pos)];
+
+    /// <summary>A tile's score on position alone, with <paramref name="zoneDamage"/> the zone damage expected there
+    /// (<see cref="Standing"/> less its cost).</summary>
+    private double Position(Tile t, double zoneDamage) => Standing(t) - HazardCost(zoneDamage);
+
+    private readonly Dictionary<Tile, double> _standing = [];
+
+    /// <summary>
+    /// A tile's score on position alone (spec §5.2), before any zone damage: minus caution × the threat on it next round (with the unit's own AC and
     /// the cover the tile gives against each foe that would shoot), weighed by how much of the unit's HP that threat is (half
     /// for a scratch, up to double when it could drop it) and by <see cref="_wariness"/>, high
     /// ground, setting up a flank for an ally, staying near an ally who heals while hurt, closing in (a little for each tile
@@ -34,8 +98,10 @@ internal sealed partial class Planner
     /// zone (the objectives). A companion also guards: standing next to a healer or
     /// protected ally adds half the objective weight × the damage the foes threaten it with next round (capped at its HP).
     /// </summary>
-    private double Position(Tile t, double zoneDamage)
+    private double Standing(Tile t)
     {
+        if (_standing.TryGetValue(t, out var known))
+            return known;
         var mods = _scorer.Mods(_me.Id, t);
         var ac = _me.Sheet.Ac + mods.Ac;
         var threat = 0.0;
@@ -53,8 +119,7 @@ internal sealed partial class Planner
         }
         var score = -_p.Caution * _wariness * threat * Math.Clamp(2 * threat / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
 
-        // Known zone damage uses the threat term's caution and HP urgency, without its late-battle wariness decay.
-        score -= HazardCost(zoneDamage);
+        score -= EdgeRisk(t);
 
         var nearest = _foes.OrderBy(f => Reach.Distance(f.Pos, t)).ThenBy(f => f.Id).FirstOrDefault();
         if (nearest is not null)
@@ -90,13 +155,50 @@ internal sealed partial class Planner
             score -= 0.1 * _p.Objective * Math.Max(0, protectedAllies.Min(u => Reach.Distance(u.Pos, t)) - 3);
         foreach (var (pos, danger) in Guarded())
             if (Reach.Distance(pos, t) <= 1)
-                score += 0.5 * _p.Objective * danger;
+                score += 0.5 * Companion.GuardWeight * danger;
         var goal = _scorer.ReachTiles(_me);
         if (!goal.IsEmpty)
             score -= 0.3 * Math.Max(0.5, _p.Objective) * goal.Min(g => Reach.Distance(g, t));
-        return score;
+        return _standing[t] = score;
     }
 
+    /// <summary>The share of an edge exposure's stake it is charged: a shove has to be used and has to land.</summary>
+    private const double EdgeOdds = 0.25;
+
+    private ImmutableArray<UnitState>? _pushers;
+
+    /// <summary>The foes that can push or pull: a push or pull among their abilities or the <c>common.*</c> ones (Shove).</summary>
+    private ImmutableArray<UnitState> Pushers() => _pushers ??= [.. _foes.Where(f => f.Life == LifeState.Up
+        && f.Sheet.Abilities.Concat(_rules.Abilities.Keys.Where(a => a.Value.StartsWith("common.", StringComparison.Ordinal)))
+            .Select(a => _rules.Abilities.GetValueOrDefault(a))
+            .Any(a => a is not null && Scorer.All(a.Effects).Any(e => e is PushEffect or PullEffect)))];
+
+    /// <summary>
+    /// What ending the turn on <paramref name="t"/> risks from the edge: a deep tile beside it with, on the other side, a tile a
+    /// foe that can push could stand on by its next turn (within its Move, straight-line), so one shove drops the unit as at 0 HP.
+    /// Costs <see cref="EdgeOdds"/> × caution × (its HP and what taking it out is worth). Nothing for a guarded unit
+    /// (<see cref="Steadfast"/>), who braces at the edge, or where nobody can push.
+    /// </summary>
+    private double EdgeRisk(Tile t)
+    {
+        var terrain = _scorer.Terrain;
+        if (_pushers is { IsEmpty: true } || Steadfast.Guarded(_s, _me))
+            return 0;
+        foreach (var (dx, dy) in new[] { (0, -1), (1, 0), (0, 1), (-1, 0) })
+        {
+            if (!terrain.Deep(new Tile(t.X + dx, t.Y + dy)))
+                continue;
+            var from = new Tile(t.X - dx, t.Y - dy);
+            if (!terrain.Walkable(from))
+                continue;
+            if (Pushers().Any(f => f.Pos == from || Reach.Distance(f.Pos, from) <= f.Sheet.Move
+                                                    && !_s.Units.Values.Any(u => u.Id != f.Id && u.Id != _me.Id && u.Pos == from && DownedRules.InBattle(u))))
+                return EdgeOdds * Math.Max(0.5, _p.Caution) * (_me.Hp + _me.TempHp + _scorer.KillWorth(_me));
+        }
+        return 0;
+    }
+
+    /// <summary>What known zone damage costs: the threat term's caution and HP urgency, without its late-battle wariness decay.</summary>
     private double HazardCost(double damage) => _p.Caution * damage
         * Math.Clamp(2 * damage / Math.Max(1, _me.Hp + _me.TempHp), 0.5, 2);
 

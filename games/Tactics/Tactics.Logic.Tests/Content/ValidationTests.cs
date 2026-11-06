@@ -194,6 +194,61 @@ public sealed class ValidationTests
         Assert.Equal("/abilities/0/effects/0/zone/passives/0/static/maxHp", error.Pointer);
     }
 
+    [Fact]
+    public void An_abilitys_requirement_names_known_conditions()
+    {
+        // #108: "requires" is a test like a passive's "when", and is checked the same way.
+        var errors = ErrorsOfChapter(("abilities/r.json", """
+            { "abilities": [ { "id": "ch.lurk", "name": "Lurk", "tier": 0, "cost": { "bonus": 1 },
+                "requires": { "all": [ { "seen": false }, { "targetHasCondition": "lurkingg" } ] },
+                "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+                "effects": [ { "apply": "prone", "rounds": 1 } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal(("/abilities/0/requires/all/1/targetHasCondition", "Unknown condition 'lurkingg'."), (error.Pointer, error.Message));
+    }
+
+    [Fact]
+    public void A_marks_own_condition_must_be_known()
+    {
+        // #108, ruling R28: Vex marks with its own condition, so a mark can name one.
+        var errors = ErrorsOfChapter(("abilities/m.json", """
+            { "abilities": [ { "id": "ch.mark", "name": "Mark", "tier": 0, "cost": { "bonus": 1 },
+                "target": { "kind": "enemy", "range": 4, "los": true, "area": { "shape": "single" } },
+                "effects": [ { "mark": { "rounds": 1, "condition": "vexxed" } } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal(("/abilities/0/effects/0/mark/condition", "Unknown condition 'vexxed'."), (error.Pointer, error.Message));
+    }
+
+    [Theory]
+    [InlineData("""{ "weapon": ["finesse"] }""", "/weapon")]
+    [InlineData("""{ "advantage": true }""", "/advantage")]
+    [InlineData("""{ "disadvantage": false }""", "/disadvantage")]
+    [InlineData("""{ "any": [ { "seen": false }, { "success": true } ] }""", "/any/1/success")]
+    [InlineData("""{ "not": { "flanked": true } }""", "/not/flanked")]
+    [InlineData("""{ "all": [ { "allyBesideTarget": true } ] }""", "/all/0/allyBesideTarget")]
+    [InlineData("""{ "heightAbove": 1 }""", "/heightAbove")]
+    [InlineData("""{ "isSpell": true }""", "/isSpell")]
+    [InlineData("""{ "damageType": "fire" }""", "/damageType")]
+    public void An_abilitys_requirement_cannot_test_a_hooks_situation(string requires, string leaf)
+    {
+        // #108: "requires" is checked on the user alone, before anything is rolled or aimed: a leaf that reads an attack,
+        // a roll or a target has nothing to read.
+        var errors = ErrorsOfChapter(("abilities/r.json", $$"""
+            { "abilities": [ { "id": "ch.lurk", "name": "Lurk", "tier": 0, "cost": { "bonus": 1 },
+                "requires": {{requires}},
+                "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+                "effects": [ { "apply": "prone", "rounds": 1 } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal("/abilities/0/requires" + leaf, error.Pointer);
+        Assert.Contains("the user alone", error.Message);
+    }
+
     [Theory]
     [InlineData("""{ "1": "wolf" }""", "/enemies/0/unitByParty", "every supported party size")]
     [InlineData("""{ "1": "wolf", "2": "missing" }""", "/enemies/0/unitByParty/2", "Unknown monster")]
@@ -342,6 +397,24 @@ public sealed class ValidationTests
             """));
         Assert.Equal(Dice.Parse("1d10"), pack.Weapons["longsword"].Damage);
         Assert.Null(pack.Weapons["longsword"].Replaces);
+    }
+
+    [Fact]
+    public void Percentage_max_hp_is_rejected_outside_injuries()
+    {
+        var errors = ErrorsOfChapter(("conditions.json", """
+            [ { "id": "bloated", "name": "Bloated", "static": { "maxHpPercent": -10 }, "tags": [] },
+              { "id": "swollen", "name": "Swollen", "passives": [ { "id": "swollen.up", "static": { "maxHpPercent": -10 } } ], "tags": [] } ]
+            """), ("abilities/hp.json", """
+            { "passives": [ { "id": "ch.hp", "static": { "maxHpPercent": -10 } } ],
+              "abilities": [ { "id": "ch.hp", "name": "HP", "tier": 0, "cost": { "action": 1 },
+              "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+              "effects": [ { "statMod": { "mods": { "maxHpPercent": -10 }, "rounds": 1 } },
+                { "zone": { "kind": "fire", "area": { "shape": "burst", "size": 1 }, "rounds": 1,
+                  "passives": [ { "id": "ch.zone.hp", "static": { "maxHpPercent": -10 } } ] } } ] } ] }
+            """));
+        Assert.Equal(5, errors.Length);
+        Assert.All(errors, error => Assert.Equal("Only injuries support percentage max HP modifiers.", error.Message));
     }
 
     [Fact]

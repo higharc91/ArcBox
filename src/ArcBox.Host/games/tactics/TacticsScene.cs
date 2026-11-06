@@ -271,11 +271,33 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             PresentStory(story.Step(delta));
             StoryShot(delta);
         }
+        if (_retreatVote is not null)
+        {
+            _retreatClock.Tick(delta);
+            _hud?.ShowRetreat(RetreatPlan.Of(_retreatVote, _retreatClock.Text));
+        }
         if (_inPlace)
         {
             _loop?.Guard(Redraw);       // the walk-in moves units every frame, and the camera moves the HUD's marks
         }
     }
+
+    private readonly VoteClock _retreatClock = new();
+    private RetreatView? _retreatVote;
+
+    /// <summary>
+    /// The party's vote to fall back, from the latest view (it isn't a beat, so it needn't wait for the TV to show one), with its clock read
+    /// on the TV's own (<see cref="VoteClock"/>) and run down each frame.
+    /// </summary>
+    private void ShowRetreat(BattleView live)
+    {
+        var vote = live.Retreat;
+        _retreatClock.Read(vote?.Deadline, DateTimeOffset.UtcNow, RetreatLength.TotalSeconds, opened: vote is not null && _retreatVote is null);
+        _retreatVote = vote;
+        _hud?.ShowRetreat(RetreatPlan.Of(vote, _retreatClock.Text));
+    }
+
+    private static readonly TimeSpan RetreatLength = TacticsTiming.Default.RetreatVote;
 
     /// <summary>Tells the director whether the world can be drawn, when that changes.</summary>
     private void TellWorld(StageDirector director)
@@ -1230,7 +1252,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _loop ??= new BeatLoop(_player, Finished, Present, message => GD.PushError($"Tactics board: {message}"));
             if (_hud is null)
             {
-                _hud = new HudLayer(root, HudArt.Load(root, _unitArt));
+                var hudArt = HudArt.Load(root, _unitArt);
+                _hud = new HudLayer(root, hudArt, new StoryArt(root, hudArt, _unitArt));
                 AddChild(_hud);
                 MoveChild(_hud, _caption.GetIndex());   // over the board and under the caption
             }
@@ -1286,6 +1309,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _board.SetEffects(draws, frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, fit, _player.AiFinished);
+        ShowRetreat(_player.Live ?? shown);
     }
 
     /// <summary>
@@ -1332,6 +1356,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _stageShake = beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, stage.HudFit, _player.AiFinished);
+        ShowRetreat(_player.Live ?? shown);
     }
 
     private void ShowRows(PhaseScreen screen)

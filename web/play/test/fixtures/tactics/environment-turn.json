@@ -20,6 +20,7 @@
       "conditions": [],
       "player": "Player4"
     },
+    "summoned": false,
     "map": "river_crossing",
     "units": [
       {
@@ -776,6 +777,70 @@
           "aim": "self"
         },
         {
+          "ability": "common.extinguish",
+          "item": null,
+          "name": "Put out flames",
+          "tooltip": "1 tile: ends Burning on target \u2014 Spend your Action to put out burning on yourself or an adjacent ally.",
+          "cost": {
+            "action": 1
+          },
+          "targets": [
+            {
+              "target": {
+                "unit": "hero2",
+                "tile": null
+              },
+              "aim": [
+                2,
+                9
+              ],
+              "affected": [
+                {
+                  "unit": "hero2",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": "hero3",
+                "tile": null
+              },
+              "aim": [
+                1,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero3",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            },
+            {
+              "target": {
+                "unit": "hero4",
+                "tile": null
+              },
+              "aim": [
+                2,
+                10
+              ],
+              "affected": [
+                {
+                  "unit": "hero4",
+                  "damage": 0,
+                  "heal": 0
+                }
+              ]
+            }
+          ],
+          "tiles": [],
+          "aim": "unit"
+        },
+        {
           "ability": "common.help",
           "item": null,
           "name": "Help",
@@ -1433,7 +1498,11 @@
     },
     "surfaces": [
       "burning"
-    ]
+    ],
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
+    }
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:01:00\u002B00:00",

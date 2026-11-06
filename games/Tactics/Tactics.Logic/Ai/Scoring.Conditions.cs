@@ -4,6 +4,31 @@ namespace Tactics.Logic;
 
 internal sealed partial class Scorer
 {
+    private readonly Dictionary<ConditionId, ImmutableArray<PassiveDef>> _wards = [];
+
+    /// <summary>
+    /// True when the condition, put on <paramref name="holder"/>, would stand it back up when it is Downed (Death Ward): a
+    /// passive of its own on <see cref="HookKind.OnDowned"/> that revives or heals it, with a use left on the holder if it is
+    /// limited per battle (a spent one can't fire again, so it is worth nothing). Its static modifiers can't say what that is
+    /// worth (<see cref="ConditionBenefit"/>); <see cref="Worth"/> values it by the chance the holder drops.
+    /// </summary>
+    private bool Wards(ConditionId id, UnitState holder)
+    {
+        if (!_wards.TryGetValue(id, out var wards))
+            _wards[id] = wards = Rules.Conditions.TryGetValue(id, out var def) && !def.Passives.IsDefaultOrEmpty
+                ? [.. def.Passives.Where(p => p.Hook == HookKind.OnDowned && p.Target == PassiveTarget.Self
+                                              && All(p.Effects).Any(e => e is ReviveEffect or HealEffect))]
+                : [];
+        return wards.Any(p => p.UsesPerBattle is not { } uses || holder.UsesLeft.GetValueOrDefault(p.Id, uses) >= 1);
+    }
+
+    /// <summary>
+    /// The chance <paramref name="unit"/> is Downed before its next turn, as a share: the threat on its tile next round over
+    /// its HP and temporary HP, at most 1.
+    /// </summary>
+    public double DropChance(UnitState unit)
+        => Math.Clamp(ThreatAgainst(unit.Sheet.Side).At(unit.Pos) / Math.Max(1, unit.Hp + unit.TempHp), 0, 1);
+
     /// <summary>
     /// What a condition does to its holder (its modifiers and those it implies), split into fighting and holding up, and how
     /// many of the holder's turns each part can matter for: one that ends itself as the holder's turn starts (prone, Dodge)
@@ -29,7 +54,12 @@ internal sealed partial class Scorer
                 if (passive.Hook == HookKind.OnTurnStart && effects.Any(e => e is DamageEffect))
                     defense -= 0.3;
                 if (passive.Hook == HookKind.OnTurnStart && effects.Any(e => e is RemoveEffect r && r.Condition == id))
+                {
                     (offenseTurns, defenseTurns) = (0, 1);
+                    // Standing also spends half Move: it limits repositioning even though the attack penalty ends.
+                    if (effects.OfType<RemoveEffect>().Any(r => r.Condition == id && r.HalfMove))
+                        defense -= 0.15;
+                }
             }
             foreach (var mods in statics)
             {

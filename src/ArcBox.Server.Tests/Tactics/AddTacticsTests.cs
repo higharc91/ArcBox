@@ -40,12 +40,12 @@ public class AddTacticsTests
     }
 
     [Theory]
-    [InlineData("Development", null, Difficulty.Normal)]
+    [InlineData("Development", null, null)]
     [InlineData("Development", "Story", Difficulty.Story)]
     [InlineData("Development", "Hard", Difficulty.Hard)]
-    [InlineData("Production", "Story", Difficulty.Normal)]
-    [InlineData("Test", "Story", Difficulty.Normal)]
-    public void Harness_settings_keep_normal_defaults_and_stay_development_only(string environment, string? difficulty, Difficulty expected)
+    [InlineData("Production", "Story", null)]
+    [InlineData("Test", "Story", null)]
+    public void Harness_settings_override_the_campaign_in_development_only(string environment, string? difficulty, Difficulty? expected)
     {
         using var sp = Build(environment: environment, settings: new Dictionary<string, string?>
         {

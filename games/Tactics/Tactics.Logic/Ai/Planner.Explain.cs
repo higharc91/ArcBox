@@ -23,6 +23,7 @@ internal sealed partial class Planner
     {
         Move m => $"move {m.Path[0]}→{m.Path[^1]}",
         Use { Item: { } item } u => $"use {item.Value} on {Describe(u.Target)}",
+        Use { Targets.IsDefaultOrEmpty: false } u => $"{u.Ability.Value} on {string.Join(", ", u.Targets.Select(t => t.Value))}",
         Use u => $"{u.Ability.Value} on {Describe(u.Target)}",
         EndTurn => "end turn",
         _ => command.GetType().Name,

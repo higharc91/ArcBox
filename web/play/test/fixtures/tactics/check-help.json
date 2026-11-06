@@ -56,7 +56,8 @@
     "decider": null,
     "tied": [],
     "roll": null,
-    "vip": true
+    "vip": true,
+    "difficulty": "Normal"
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",

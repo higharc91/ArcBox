@@ -323,10 +323,10 @@ public sealed partial class TacticsGame
         if (!_doc.Members.TryGetValue(member, out var record))
             return null;
         var character = record.Character;
-        var total = TrapInjuries.Total(Rules);
+        var total = TrapInjuries.Total(Rules, character.Injuries);
         var roll = trap.Injury is null && total > 0 ? TrapRoll?.Invoke(total) ?? _ctx.Random.Next(1, total + 1) : 1;
         string? hurt = null;
-        if (TrapInjuries.Pick(trap, Rules, roll) is { } injury)
+        if (TrapInjuries.Pick(trap, Rules, roll, character.Injuries) is { } injury)
         {
             character = character with { Injuries = character.Injuries.Add(injury) };
             hurt = $"{character.Name} takes a minor injury: {Rules.Injuries[injury].Name}.";

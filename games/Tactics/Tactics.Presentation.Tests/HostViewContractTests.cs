@@ -109,7 +109,7 @@ public sealed class HostViewContractTests
     {
         var rules = Pack.Value;
         ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo")];
-        var game = new TacticsGame(rules, battleList: true);     // the battle list, as in Development
+        var game = new TacticsGame(rules, battleList: true) { BattleSeed = 1 };     // the battle list, as in Development; a fixed seed the companions win
         var h = new GameHarness<TacticsGame>(game, playerCount: 2, seed: 3, profiles: profiles);
         var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
             [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);

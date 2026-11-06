@@ -26,6 +26,12 @@ public sealed partial class TacticsGame
     private UnitId? _aiFinishing;
 
     private (UnitId Unit, int Round, int TurnIndex)? _turnTimerFor;
+
+    /// <summary>The turn whose clock has been cut to <see cref="TacticsTiming.SpentTurn"/> (its Move and Action are spent).</summary>
+    private (UnitId Unit, int Round, int TurnIndex)? _turnShortFor;
+
+    /// <summary>The Move the unit had left when its clock started: a Move below it has been used (<see cref="TurnSpent"/>).</summary>
+    private int _turnMoveAtStart;
     private (UnitId Reactor, int Seq)? _reactTimerFor;
     private int _seq;
 
@@ -39,6 +45,18 @@ public sealed partial class TacticsGame
     private UnitId? UnitOf(ProfileId profile)
         => _doc.Battle is { } save && save.Members.IndexOf(profile) is var i and >= 0 ? UnitFor(i) : null;
 
+    /// <summary>True when <paramref name="unit"/> is <paramref name="hero"/> or one of its summons: what that hero's phone plays.</summary>
+    private static bool Plays(BattleState state, UnitId hero, UnitId unit)
+        => unit == hero || state.Units.TryGetValue(unit, out var u) && u.SummonedBy == hero;
+
+    /// <summary>The unit the phone of <paramref name="hero"/> plays the turn of: the active summon of theirs, else the hero.</summary>
+    private static UnitId TurnUnit(BattleState state, UnitId hero)
+        => state.Active is { } active && Plays(state, hero, active) ? active : hero;
+
+    /// <summary>The hero's own unit and its summons.</summary>
+    private static IEnumerable<UnitId> WithSummons(BattleState state, UnitId hero)
+        => state.Units.Values.Where(u => u.SummonedBy == hero).Select(u => u.Id).Prepend(hero);
+
     private bool Online(ProfileId profile) => _players.Any(p => p.Profile == profile && _online.Contains(p.Id));
 
     /// <summary>True when a present player decides for <paramref name="unit"/>.</summary>
@@ -47,9 +65,29 @@ public sealed partial class TacticsGame
 
     private Controller ControllerFor(ProfileId profile) => Online(profile) ? new PlayerControlled(profile) : new AiControlled(Companion);
 
-    /// <summary>Development harness settings; real sessions retain Normal difficulty and fresh random seeds.</summary>
-    public Difficulty BattleDifficulty { get; init; } = Difficulty.Normal;
+    /// <summary>
+    /// Development harness settings (<c>Tactics:Difficulty</c>, <c>Tactics:BattleSeed</c>). A set <see cref="BattleDifficulty"/> overrides the
+    /// campaign's difficulty for every battle; real sessions leave both null: the campaign's setting and fresh random seeds.
+    /// </summary>
+    public Difficulty? BattleDifficulty { get; init; }
     public ulong? BattleSeed { get; init; }
+
+    /// <summary>The difficulty the next battle starts at: the development override if set, else the campaign's own (default Normal).</summary>
+    private Difficulty CampaignDifficulty => BattleDifficulty ?? _doc.Difficulty;
+
+    /// <summary>
+    /// The VIP sets the campaign's difficulty from the session menu, any time outside a battle (a battle keeps the difficulty it began at).
+    /// A word that isn't one is ignored.
+    /// </summary>
+    private void SetDifficulty(JsonElement? data)
+    {
+        if (_phase == TacticsPhase.Battle || Str(data, "level") is not { } level
+            || !Enum.GetNames<Difficulty>().Any(name => string.Equals(name, level, StringComparison.OrdinalIgnoreCase))
+            || !Enum.TryParse<Difficulty>(level, ignoreCase: true, out var chosen) || !Enum.IsDefined(chosen) || chosen == _doc.Difficulty)
+            return;
+        _doc = _doc with { Difficulty = chosen };
+        Save();
+    }
 
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
@@ -74,6 +112,7 @@ public sealed partial class TacticsGame
                 stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob),
         };
         _seq = 0;
+        (_retreat, _retreatFailedRound) = (null, 0);
         if (AddBeat(null, resolution.Events) is { } opening && stage is not null)
         {
             _awaitShown = opening;
@@ -97,7 +136,7 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        var setup = Encounters.Setup(encounter, party, BattleDifficulty, Rules);
+        var setup = Encounters.Setup(encounter, party, CampaignDifficulty, Rules);
         var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
         if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
             setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)
@@ -132,9 +171,13 @@ public sealed partial class TacticsGame
         for (var i = 0; i < Save_.Members.Length; i++)
             if (state.Units.ContainsKey(UnitFor(i)))
             {
-                if (TryHand(state, UnitFor(i), ControllerFor(Save_.Members[i])) is { } handed)
-                    state = handed;
-                else
+                var failed = false;
+                foreach (var id in WithSummons(state, UnitFor(i)).ToList())     // a summon follows its owner's seat
+                    if (TryHand(state, id, ControllerFor(Save_.Members[i])) is { } handed)
+                        state = handed;
+                    else
+                        failed = true;
+                if (failed)
                     HandBackFailedFor(Save_.Members[i]);     // it keeps the controller it was saved with
             }
         SetState(state);
@@ -148,16 +191,24 @@ public sealed partial class TacticsGame
             return;
         // If the engine fails to hand the unit over it keeps its controller: a returning player's hero stays the AI's (they're
         // told), and a leaving player's is played by the AI anyway, since a player who isn't here doesn't decide for it.
-        if (TryHand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)) is { } handed)
-        {
-            if (connected && _aiFinishing == unit)
-                (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
-            SetState(handed);
-        }
-        else if (connected)
+        var controller = connected ? new PlayerControlled(profile) : (Controller)new AiControlled(Companion);
+        var state = State;
+        var failed = false;
+        foreach (var id in WithSummons(state, unit).ToList())     // the hero's summons follow its seat
+            if (TryHand(state, id, controller) is { } handed)
+                state = handed;
+            else
+                failed = true;
+        SetState(state);
+        SettleRetreat();     // a vote counts the players who are here
+        if (_phase != TacticsPhase.Battle)
+            return;     // the vote carried and the battle is over
+        if (connected && _aiFinishing is { } finishing && Plays(State, unit, finishing) && IsPlayed(finishing))
+            (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
+        if (failed && connected)
             HandBackFailedFor(profile);
-        if (!connected && State.Active == unit && State.Pending is null)
-            _aiFinishing = unit;     // the AI finishes what's left of the turn
+        if (!connected && State.Active is { } active && Plays(State, unit, active) && State.Pending is null)
+            _aiFinishing = active;     // the AI finishes what's left of the turn
         Save();
         Drive();
     }
@@ -191,6 +242,14 @@ public sealed partial class TacticsGame
                 _ctx.CancelTimer(Timers.Turn);
                 _turnTimerFor = null;
             }
+            // A reaction the player's preferences answer is answered here, as if they had tapped it: no prompt, no clock, no pause.
+            if (state.Pending is ReactionOffer preferred && IsPlayed(preferred.Reactor) && PreferredAnswer(state, preferred) is { } preference)
+            {
+                _ctx.CancelTimer(Timers.React);
+                _reactTimerFor = null;
+                ApplyAi(new React(preferred.Reactor, preference), aiFinished: false);
+                continue;
+            }
             // A player's reaction prompt is on their phone the moment the offer exists, so its 10 s start then, not once the
             // TV has caught up (else the prompt shows without a countdown and its window runs long).
             if (state.Pending is ReactionOffer played && IsPlayed(played.Reactor))
@@ -202,6 +261,10 @@ public sealed partial class TacticsGame
                 }
                 return;
             }
+            // The clock of a player's turn drops the moment their last Move or Action is spent, not once the TV has caught up with it.
+            if (state.Active is { } playing && state.Pending is null && IsPlayed(playing) && _aiFinishing != playing
+                && _turnTimerFor == (playing, state.Round, state.TurnIndex))
+                ShortenSpentTurn(state, playing);
             if (_awaitShown is not null)
                 return;
 
@@ -220,7 +283,9 @@ public sealed partial class TacticsGame
                 {
                     _ctx.SetTimer(Timers.Turn, _timing.Turn);
                     _turnTimerFor = key;
+                    _turnMoveAtStart = state.Units[active].Economy.MoveLeft;
                 }
+                ShortenSpentTurn(state, active);
                 return;
             }
             if (NextAiCommand(state, active) is { } next)
@@ -230,21 +295,79 @@ public sealed partial class TacticsGame
         }
     }
 
+    /// <summary>
+    /// Once <paramref name="unit"/>, whose clock is running, has spent both its Move and its Action, cuts that clock to the shorter of what's
+    /// left and <see cref="TacticsTiming.SpentTurn"/> (issue #113). Once a turn.
+    /// </summary>
+    private void ShortenSpentTurn(BattleState state, UnitId unit)
+    {
+        var key = (unit, state.Round, state.TurnIndex);
+        if (_turnShortFor == key || !TurnSpent(state, unit))
+            return;
+        _turnShortFor = key;
+        if (_ctx.TimerDeadline(Timers.Turn) is { } due && due - _ctx.Now > _timing.SpentTurn)
+            _ctx.SetTimer(Timers.Turn, _timing.SpentTurn);
+    }
+
+    /// <summary>
+    /// True when <paramref name="unit"/> has spent its Move and its Action (and any extra ones). The Action is spent when none is left. The
+    /// Move is spent once the unit has walked this turn (it has less left than when its clock started), or has none left, or has nowhere to
+    /// go: a player who has stepped up and struck has made their move, and the clock needn't wait for them to walk further.
+    /// </summary>
+    private bool TurnSpent(BattleState state, UnitId unit)
+    {
+        var economy = state.Units[unit].Economy;
+        return !economy.Action && economy.ExtraActions <= 0
+            && (economy.MoveLeft <= 0 || economy.MoveLeft < _turnMoveAtStart || Choices.For(state, unit, Rules).Moves.IsDefaultOrEmpty);
+    }
+
+    /// <summary>
+    /// The reactor's own preferences (<see cref="ReactionPrefs"/>): those of the player who controls it, so a summon's follow its owner's.
+    /// </summary>
+    private ReactionPrefs PrefsOf(BattleState state, UnitId reactor)
+        => state.Units.TryGetValue(reactor, out var u) && u.Controller is PlayerControlled { Owner: var owner }
+            ? _doc.For(owner)?.Reactions ?? ReactionPrefs.Ask
+            : ReactionPrefs.Ask;
+
+    /// <summary>The answer the reactor's player's preferences give to <paramref name="offer"/>, or null to ask them.</summary>
+    private ReactionChoice? PreferredAnswer(BattleState state, ReactionOffer offer)
+    {
+        try
+        {
+            return PrefsOf(state, offer.Reactor).Answer(state, offer, Rules);
+        }
+        catch (Exception e) when (IsEngineFailure(e))
+        {
+            Fault("reaction", state, null, e);
+            return null;     // ask rather than guess
+        }
+    }
+
+    /// <summary>
+    /// The AI's whole turn for <paramref name="active"/> as the battle plays it (<see cref="PlanEngine"/>): finishing a timed-out
+    /// turn with the companion profile and no items, an absent member with the companion's one-potion rule, anyone else as
+    /// their own profile plays. Throws what the planner throws.
+    /// </summary>
+    internal TurnPlan PlanAi(BattleState state, UnitId active)
+    {
+        var options = _aiFinishing == active
+            ? new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: Companion)
+            : state.Units[active].Controller is AiControlled { Profile: Companion }
+                ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
+                : new AiOptions();
+        return PlanEngine(state, active, Rules, options);
+    }
+
     /// <summary>The next step of the AI's plan for <paramref name="active"/>, or null if planning failed (logged).</summary>
     private Command? NextAiCommand(BattleState state, UnitId active)
     {
         if (_plan is not { } plan || plan.Unit != active || plan.Round != state.Round || plan.TurnIndex != state.TurnIndex
             || plan.Commands.Count == 0)
         {
-            var options = _aiFinishing == active
-                ? new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: Companion)
-                : state.Units[active].Controller is AiControlled { Profile: Companion }
-                    ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
-                    : new AiOptions();
             ImmutableArray<Command> commands;
             try
             {
-                commands = PlanEngine(state, active, Rules, options).Commands;
+                commands = PlanAi(state, active).Commands;
             }
             catch (Exception e) when (IsEngineFailure(e))
             {
@@ -320,14 +443,31 @@ public sealed partial class TacticsGame
 
     private void BattleInput(Player player, ProfileId profile, CustomInput input)
     {
-        if (UnitOf(profile) is not { } unit)
+        if (UnitOf(profile) is not { } hero)
             return;
         var state = State;
+        var unit = hero;
         Command? command;
+        if (input.Action is "fallBack" or "fallBackVote")
+        {
+            if (state.Outcome is not null || !state.Units.ContainsKey(hero))
+                return;
+            if (input.Action == "fallBack")
+                ProposeFallBack(player, profile, hero);
+            else
+                VoteFallBack(profile, input.Data);
+            return;
+        }
+        if (input.Action == "reactionPrefs")
+        {
+            SetReactionPrefs(player, profile, input.Data);
+            return;
+        }
         if (input.Action == "react")
         {
-            if (state.Pending is not ReactionOffer offer || offer.Reactor != unit || !IsPlayed(unit))
+            if (state.Pending is not ReactionOffer offer || !Plays(state, hero, offer.Reactor) || !IsPlayed(offer.Reactor))
                 return;
+            unit = offer.Reactor;
             var id = Str(input.Data, "choice");
             if (offer.Options.FirstOrDefault(o => o.Id == id) is not { } choice)
             {
@@ -338,6 +478,7 @@ public sealed partial class TacticsGame
         }
         else
         {
+            unit = TurnUnit(state, hero);
             if (state.Active != unit || state.Pending is not null || !IsPlayed(unit) || _aiFinishing == unit)
                 return;
             command = ParseCommand(unit, input);
@@ -370,6 +511,24 @@ public sealed partial class TacticsGame
             _reactTimerFor = null;
         }
         Pace(AddBeat(unit, resolution.Events, state.Active), resolution.Events.Length);
+        Drive();
+    }
+
+    /// <summary>
+    /// A phone sets its player's reaction preferences (<c>opportunity</c>: ask, always, never; <c>defence</c>: ask, miss, never; either may
+    /// be left out). Saved on their member record at once. A prompt that is up for them is answered right away if the new settings cover it.
+    /// </summary>
+    private void SetReactionPrefs(Player player, ProfileId profile, JsonElement? data)
+    {
+        if (_doc.For(profile) is not { } member)
+            return;
+        if ((member.Reactions ?? ReactionPrefs.Ask).With(Str(data, "opportunity"), Str(data, "defence")) is not { } next)
+        {
+            Toast(player.Id, "That isn't one of the reaction settings.");
+            return;
+        }
+        _doc = _doc with { Members = _doc.Members.SetItem(profile.Value, member with { Reactions = next == ReactionPrefs.Ask ? null : next }) };
+        Save();
         Drive();
     }
 
@@ -413,7 +572,7 @@ public sealed partial class TacticsGame
                 "use" => new Use(unit, new AbilityId(Str(input.Data, "ability") ?? ""), new Target(
                         Str(input.Data, "unit") is { } u ? new UnitId(u) : null,
                         input.Data?.TryGetProperty("tile", out var tile) == true && tile.ValueKind == JsonValueKind.Array ? ReadTile(tile) : null),
-                    Str(input.Data, "item") is { } item ? new ItemId(item) : null),
+                    Str(input.Data, "item") is { } item ? new ItemId(item) : null) { Targets = Units(input.Data, "targets") },
                 "delay" => new Delay(unit, input.Data?.TryGetProperty("slots", out var slots) == true ? slots.GetInt32() : 1),
                 "endTurn" => new EndTurn(unit),
                 _ => null,
@@ -426,6 +585,15 @@ public sealed partial class TacticsGame
     }
 
     private static Tile ReadTile(JsonElement e) => new(e[0].GetInt32(), e[1].GetInt32());
+
+    /// <summary>
+    /// The unit ids in the array <paramref name="name"/> of <paramref name="data"/> (a <c>use</c>'s <c>targets</c>, one per
+    /// attack: <see cref="Use.Targets"/>); none when it's missing or null. Anything but an array of strings doesn't parse.
+    /// </summary>
+    private static ImmutableArray<UnitId> Units(JsonElement? data, string name)
+        => data is not { ValueKind: JsonValueKind.Object } d || !d.TryGetProperty(name, out var list) || list.ValueKind == JsonValueKind.Null
+            ? default
+            : [.. list.EnumerateArray().Select(e => new UnitId(e.GetString() ?? throw new FormatException($"'{name}' holds a null.")))];
 
     private static string? Str(JsonElement? data, string name)
         => data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty(name, out var v) && v.ValueKind == JsonValueKind.String
@@ -480,6 +648,8 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Turn);
         _ctx.CancelTimer(Timers.React);
         _ctx.CancelTimer(Timers.Pace);
-        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, 0, null);
+        _ctx.CancelTimer(Timers.Retreat);
+        (_retreat, _retreatFailedRound) = (null, 0);
+        (_turnTimerFor, _turnShortFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, null, 0, null);
     }
 }

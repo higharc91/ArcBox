@@ -32,6 +32,36 @@ internal sealed partial class Scorer
                                            && u.Sheet.Side != Side.Neutral && Reach.Distance(unit.Pos, u.Pos) <= reach);
     }
 
+    /// <summary>
+    /// A push or pull of <paramref name="target"/> by <paramref name="direction"/>, scored by where it lands (<see cref="Motion.Trace"/>):
+    /// the tiles it moves; the target's whole remaining HP when it ends in a deep tile (it drops, as at 0 HP; a guarded unit
+    /// braces at the edge instead, so a boss is worth nothing there); a fall's damage; 1d4 for a collision; and the zone
+    /// damage on the tiles it crosses and the tile it lands on.
+    /// </summary>
+    private Outcome Forced(Strike st, UnitState target, (int Dx, int Dy) direction, int distance)
+    {
+        var path = Motion.Trace(st.W.State, Terrain, target, direction, distance);
+        var damage = DamageDist.Zero;
+        if (target.Life == LifeState.Up)
+        {
+            if (path.IntoDeep)
+                damage = DamageDist.Point(Math.Max(1, target.Hp + target.TempHp));
+            else
+            {
+                if (path.Blocked)
+                    damage = DamageDist.Dice(1, 4);
+                if (path.Drop > 3)
+                    damage = damage.Plus(DamageDist.Dice(path.Drop - 3, 6));
+                if (!path.Tiles.IsEmpty)
+                {
+                    var zones = Hazards(target, path.Tiles[^1], path.Tiles);
+                    damage = damage.Plus(DamageDist.Point((int)Math.Round(zones.Entering + zones.Staying)));
+                }
+            }
+        }
+        return new Outcome(damage, Push: path.Tiles.Length);
+    }
+
     private Outcome One(EffectDef effect, Strike st, UnitState target, bool crit, bool half, RollResult? last)
     {
         switch (effect)
@@ -64,7 +94,8 @@ internal sealed partial class Scorer
                     var turns = Turns(apply.Rounds, apply.UntilSave);
                     return new Outcome(DamageDist.Zero, Offense: benefit.Offense * Math.Min(turns, benefit.OffenseTurns),
                         Defense: benefit.Defense * Math.Min(turns, benefit.DefenseTurns),
-                        Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0);
+                        Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0,
+                        Ward: target.Life == LifeState.Up && Wards(apply.Condition, target) ? 1 : 0);
                 }
             case StatModEffect statMod:
                 {
@@ -79,18 +110,26 @@ internal sealed partial class Scorer
             case CleanseEffect cleanse:
                 return Removing(target, c => Rules.Conditions.TryGetValue(c.Id, out var def) && def.Tags.Overlaps(cleanse.Tags));
             case PushEffect push:
-                return new Outcome(DamageDist.Zero, Push: push.Distance);
+                return Forced(st, target, Motion.Toward(push.AwayFromSource ? st.User.Pos : st.Aim ?? st.User.Pos, target.Pos), push.Distance);
             case PullEffect pull:
-                return new Outcome(DamageDist.Zero, Push: pull.Distance);
+                {
+                    var source = st.User.Pos;
+                    var direction = Motion.Toward(target.Pos, source);
+                    var (along, across) = direction.Dx != 0
+                        ? (Math.Abs(source.X - target.Pos.X), Math.Abs(source.Y - target.Pos.Y))
+                        : (Math.Abs(source.Y - target.Pos.Y), Math.Abs(source.X - target.Pos.X));
+                    return Forced(st, target, direction, Math.Min(pull.Distance, across == 0 ? along - 1 : along));
+                }
             case TauntEffect taunt:
                 return new Outcome(DamageDist.Zero, Offense: -0.3 * Turns(taunt.Rounds, untilSave: false));
             case MarkEffect mark:
                 {
-                    if (!Hostile(st.User, target) || MarkBlock.MarkedBy(target, st.User.Id))
+                    var condition = MarkBlock.ConditionOf(mark);
+                    if (!Hostile(st.User, target) || target.Conditions.Any(c => (c.Mark || c.Id == MarkBlock.Condition)
+                            && c.Id == condition && c.Source == st.User.Id))
                         return Outcome.None;
                     var turns = Turns(mark.Rounds, untilSave: false);
-                    return new Outcome(DamageDist.Zero, Defense: -0.25 * turns,
-                        Splash: QuarryDamage(MarkBlock.Condition, st, target, turns));
+                    return new Outcome(DamageDist.Zero, Defense: -0.25 * turns, Splash: QuarryDamage(condition, st, target, turns));
                 }
             case RepeatEffect repeat:
                 {
@@ -172,27 +211,13 @@ internal sealed partial class Scorer
         var modifier = statModifier + Stats.Proficiency(sheet.Level) + def.Bonus + Modifiers.Sum(userSources).Attack
                        + (st.Neutral ? 0 : Reach.HighGroundBonus(Terrain, user.Pos, target.Pos));
 
-        var (advantages, disadvantages) = (0, 0);
-        foreach (var mods in userSources)
-        {
-            advantages += (mods.OwnAttacks == Edge.Advantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
-            disadvantages += mods.OwnAttacks == Edge.Disadvantage ? 1 : 0;
-        }
-        foreach (var mods in targetSources)
-        {
-            var against = ranged ? mods.AttackedRanged : mods.AttackedMelee;
-            advantages += against == Edge.Advantage ? 1 : 0;
-            disadvantages += (against == Edge.Disadvantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
-        }
-        if (!st.Neutral && !ranged && Modifiers.Flanked(st.W.State, user.Id, target.Id, Rules))
-            advantages++;
-        if (!st.Neutral && MarkBlock.MarkedBy(target, user.Id))
-            advantages++;
-        if (!st.Neutral && TauntBlock.TauntedAway(st.W.State, user.Id, target.Id))
-            disadvantages++;
-        if (user.Conditions.Any(c => c.Id == RulesPack.Helped.Id))
-            advantages++;
-        var edge = Rolls.Combine(advantages, disadvantages);
+        // The roll's own count, from the sources at the tiles the strike imagines; a neutral strike (a preview) leaves out
+        // the situation that depends on who strikes whom.
+        var edge = Rolls.AttackEdge(userSources, targetSources, ranged,
+            flanked: !st.Neutral && !ranged && Modifiers.Flanked(st.W.State, user.Id, target.Id, Rules),
+            marked: !st.Neutral && MarkBlock.MarkedBy(target, user.Id),
+            tauntedAway: !st.Neutral && TauntBlock.TauntedAway(st.W.State, user.Id, target.Id),
+            helped: user.Conditions.Any(c => c.Id == RulesPack.Helped.Id));
 
         var cover = !st.Neutral && (ranged || def.Kind == "spell") ? Cover(user.Pos, target.Pos, ranged: true) : 0;
         var targetMods = Modifiers.Sum(targetSources);
@@ -203,17 +228,26 @@ internal sealed partial class Scorer
         return (modifier, ac, edge, pHit, pCrit);
     }
 
-    /// <summary>An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives.</summary>
+    /// <summary>
+    /// An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives. With
+    /// <see cref="Strike.Force"/> set, just the hit (crit or not, by their odds) or just the miss.
+    /// </summary>
     private Outcome Attack(AttackEffect def, Strike st, UnitState target)
     {
+        var force = st.Force;
+        st.Force = null;
         var (modifier, ac, edge, pHit, pCrit) = AttackOdds(def, st, target);
         var hitRoll = new RollResult([], 0, modifier, 0, ac, Success: true, Crit: false, Fumble: false);
         var critRoll = hitRoll with { Crit = true };
+        if (force == false)
+            return Walk(def.OnMiss, st, target, last: hitRoll with { Success = false });
         var hooks = OnHitPassives(def, st, target, edge, hitRoll);
         var onHit = def.OnHit.IsDefault ? [] : def.OnHit;
         var hit = Walk(onHit, st, target, last: hitRoll).Then(Walk(hooks, st, target, last: hitRoll));
         var critical = Walk(def.OnCrit.IsDefaultOrEmpty ? onHit : onHit.AddRange(def.OnCrit), st, target, crit: true, last: critRoll)
             .Then(Walk(hooks, st, target, crit: true, last: critRoll));
+        if (force == true)
+            return pHit <= 0 ? hit : Outcome.Mix([(pCrit / pHit, critical), (1 - pCrit / pHit, hit)]);
         var miss = Walk(def.OnMiss, st, target, last: hitRoll with { Success = false });
         return Outcome.Mix([(pCrit, critical), (pHit - pCrit, hit), (1 - pHit, miss)]);
     }
@@ -288,22 +322,25 @@ internal sealed partial class Scorer
         var sheet = target.Sheet;
         var sources = Sources(target.Id, target.Pos);
         var mods = Modifiers.Sum(sources);
+        var stat = SaveBlock.StatFor(def, sheet, mods);
         var dc = def.Dc ?? (def.DcStat is { } dcStat ? st.Context.DcFor(dcStat) : st.Context.SaveDc);
-        var proficient = sheet.SaveProficiencies.Contains(def.Stat) || mods.SaveProficiencies?.Contains(def.Stat) == true;
+        var proficient = sheet.SaveProficiencies.Contains(stat) || mods.SaveProficiencies?.Contains(stat) == true;
         var origin = st.Ability?.Target.Area.Shape is AreaShape.Burst or AreaShape.Cross or AreaShape.Ring && st.Aim is { } aim
             ? aim
             : st.User.Pos;
-        var cover = def.Stat == Stat.Dex && !st.Neutral ? Cover(origin, target.Pos, ranged: false) : 0;
-        var bonus = Stats.Mod(sheet.Score(def.Stat)) + (proficient ? Stats.Proficiency(sheet.Level) : 0)
-                    + (mods.Saves?.GetValueOrDefault(def.Stat) ?? 0) + cover;
-        var advantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Advantage)
+        var cover = stat == Stat.Dex && !st.Neutral ? Cover(origin, target.Pos, ranged: false) : 0;
+        var bonus = Stats.Mod(sheet.Score(stat)) + (proficient ? Stats.Proficiency(sheet.Level) : 0)
+                    + (mods.Saves?.GetValueOrDefault(stat) ?? 0) + cover;
+        var advantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(stat) == Edge.Advantage)
                          + (target.Conditions.Any(c => c.Id == RulesPack.Helped.Id) ? 1 : 0);
-        var disadvantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(def.Stat) == Edge.Disadvantage);
-        var pFail = mods.AutoFailSaves?.Contains(def.Stat) == true
-            ? 1
+        var disadvantages = sources.Count(m => m.SaveEdges?.GetValueOrDefault(stat) == Edge.Disadvantage);
+        // Careful Spell: the caster's allies pass (the engine's rule in SaveBlock).
+        var careful = target.Id != st.User.Id && target.Sheet.Side == st.User.Sheet.Side && Metamagic.Has(st.User, Metamagic.Careful);
+        var pFail = careful ? 0
+            : mods.AutoFailSaves?.Contains(stat) == true ? 1
             : Odds.SaveFail(bonus, dc, Rolls.Combine(advantages, disadvantages));
 
-        var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;
+        var evades = stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;
         var failed = new RollResult([], 0, bonus, 0, dc, Success: false, Crit: false, Fumble: false);
         return (pFail, evades, failed);
     }

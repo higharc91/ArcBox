@@ -217,53 +217,58 @@ public sealed class CompanionTests
     }
 
     [Fact]
-    public void Role_weights_come_from_class_aiTags()
+    public void Weights_come_from_the_classs_tuned_profile()
     {
-        // A cleric (healer, support, caster) heals and controls more; a fighter (defender, melee, front) stands in harm's way.
+        // A companion plays the profile its class's aiTags name for a party member, including specialist controller/guardian profiles,
+        // less the cautious companion numbers: no 0.6 caution, no ranged x1.5. Only its own rules sit on top: Hoard 0 and Revive.
         UnitSheet Character(string cls) => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(cls, "human", cls, null, 3, Base), Base);
-        var state = On("0. 0. 0.")
-            .Party("cleric", Character("cleric"), T(0, 0), Companion)
-            .Party("fighter", Character("fighter"), T(1, 0), Companion)
-            .Enemy("gob", TestSheets.Goblin, T(2, 0))
-            .Start().State;
-        var plain = AiProfile.From(Base.AiProfiles["companion"]);
+        var classes = new[] { ("cleric", "healer"), ("wizard", "controller"), ("ranger", "archer"), ("rogue", "skirmisher"), ("fighter", "brute") };
+        var battle = On("0. 0. 0. 0. 0. 0.");
+        for (var i = 0; i < classes.Length; i++)
+            battle = battle.Party(classes[i].Item1, Character(classes[i].Item1), T(i, 0), Companion);
+        var state = battle.Enemy("gob", TestSheets.Goblin, T(5, 0)).Start().State;
 
-        var cleric = AiProfile.For(state, U("cleric"), Base);
-        var fighter = AiProfile.For(state, U("fighter"), Base);
+        foreach (var (cls, tuned) in classes)
+        {
+            var want = AiProfile.From(Base.AiProfiles[tuned]);
+            var got = AiProfile.For(state, U(cls), Base);
 
-        Assert.Equal("companion", cleric.Id);
-        Assert.True(cleric.Heal > plain.Heal && cleric.Control > plain.Control, cleric.ToString());
-        Assert.True(fighter.Caution < plain.Caution && fighter.Objective > plain.Objective, fighter.ToString());
-        Assert.Equal(plain.Heal, fighter.Heal);
-        Assert.All(new[] { cleric, fighter }, p => Assert.True(p.Revive > p.Heal && p.Revive > p.Damage && p.Revive > p.Objective));
+            Assert.Equal("companion", got.Id);
+            Assert.Equal(want with { Id = "companion", Hoard = 0, Revive = got.Revive }, got);
+            Assert.True(got.Caution <= 0.25, $"{cls}: {got}");
+            Assert.True(got.Revive > new[] { got.Damage, got.Kill, got.Control, got.Heal, got.Caution, got.FocusFire, got.Objective }.Max(), $"{cls}: {got}");
+        }
     }
+
+    [Fact]
+    public void The_fallback_companion_profile_is_no_longer_cautious()
+        => Assert.True(Base.AiProfiles["companion"].Caution <= 0.25);
 
     [Fact]
     public void Guards_the_healer()
     {
-        // Kara can't reach the goblins this turn, but they can reach the cleric next round. A companion fighter steps in
-        // beside her; a brute walks on towards the goblins.
+        // Kara can't reach the goblins this turn, but they can reach her ally next round. A companion fighter steps in beside
+        // a threatened cleric; a brute walks on towards the goblins.
         UnitSheet Character(string cls) => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(cls, "human", cls, null, 3, Base), Base);
-        TestBattle Battle(string profile) => On("""
+        TestBattle Battle(string ally, AiControlled? controller = null) => On("""
             0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
             0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
             0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
             """)
-            .Party("kara", First(Character("fighter")), T(1, 2), new AiControlled(profile))
-            .Party("priest", Character("cleric"), T(2, 0))
-            .Enemy("g1", TestSheets.Goblin, T(7, 0))
-            .Enemy("g2", TestSheets.Goblin, T(7, 1));
-        Tile End(BattleState state, TurnPlan plan) => plan.Commands.OfType<Move>().LastOrDefault()?.Path[^1] ?? state.Units[U("kara")].Pos;
+            .Party("kara", First(Character("fighter")), T(1, 2), controller ?? Companion)
+            .Party("ally", Character(ally), T(2, 0))
+            .Enemy("g1", TestSheets.Goblin, T(8, 0))
+            .Enemy("g2", TestSheets.Goblin, T(8, 1));
+        Tile EndOf(string ally, AiControlled? controller = null)
+        {
+            var battle = Battle(ally, controller);
+            var state = battle.Start().State;
+            var plan = Ai.Plan(state, U("kara"), battle.Rules, controller is null ? Absent : null);
+            return plan.Commands.OfType<Move>().LastOrDefault()?.Path[^1] ?? state.Units[U("kara")].Pos;
+        }
 
-        var guard = Battle("companion");
-        var state = guard.Start().State;
-        var plan = Ai.Plan(state, U("kara"), guard.Rules, Absent);
-        Assert.True(Reach.Distance(End(state, plan), T(2, 0)) <= 1, plan.Explain);
-
-        var brute = Battle("brute");
-        var bruteState = brute.Start().State;
-        var charge = Ai.Plan(bruteState, U("kara"), brute.Rules);
-        Assert.True(Reach.Distance(End(bruteState, charge), T(2, 0)) > 1, charge.Explain);
+        Assert.True(Reach.Distance(EndOf("cleric"), T(2, 0)) <= 1, $"cleric ally: {EndOf("cleric")}");
+        Assert.True(Reach.Distance(EndOf("cleric", new AiControlled("brute")), T(2, 0)) > 1);
     }
 
     [Fact]

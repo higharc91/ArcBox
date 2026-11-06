@@ -17,12 +17,17 @@ namespace Tactics.Game;
 /// dots and phone. Null when they never picked, and then <see cref="PlayerColors.Default"/> by join order. One more optional field and no
 /// version bump: a document from before reads with none, and a null isn't written.
 /// </param>
+/// <param name="Reactions">
+/// The player's reaction preferences (<see cref="ReactionPrefs"/>, issue #113), set from the phone's battle screen. Null when they never set
+/// any, which reads as ask-about-everything; a null isn't written, so a document from before reads unchanged.
+/// </param>
 public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ReactionPrefs? Reactions = null)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
@@ -242,6 +247,7 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
     ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null,
+    Difficulty Difficulty = Difficulty.Normal,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> GiftTrades = default)
 {
     /// <summary>The document version this code reads and writes.</summary>

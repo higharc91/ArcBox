@@ -37,6 +37,7 @@
     "decider": null,
     "away": [],
     "vip": false,
+    "difficulty": "Normal",
     "question": "Who takes the Smoke Bomb?",
     "vote": 0
   },

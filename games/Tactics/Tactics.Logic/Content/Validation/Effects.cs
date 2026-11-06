@@ -104,6 +104,9 @@ internal sealed partial class Validation
             case RemoveEffect remove:
                 Ref(RefKind.Condition, remove.Condition.Value, file, At("condition"));
                 break;
+            case MarkEffect { Condition: { } marks }:
+                Ref(RefKind.Condition, marks.Value, file, At("condition"));
+                break;
             case TeleportEffect { Range: > MaxRange } teleport:
                 Error(file, At("range"), $"Range {teleport.Range} is over the limit of {MaxRange}.");
                 break;
@@ -144,6 +147,7 @@ internal sealed partial class Validation
                 NeedsConcentration(summon.Concentration, concentration, file, At("concentration"));
                 break;
             case StatModEffect statMod:
+                RejectHpPercent(statMod.Mods, file, At("mods"));
                 NeedsConcentration(statMod.Concentration, concentration, file, At("concentration"));
                 break;
             case TransformEffect transform:

@@ -8,16 +8,28 @@ namespace Tactics.Logic;
 /// The one-ply turn planner behind <see cref="Ai.Plan"/> (spec §5.2):
 /// <list type="number">
 /// <item>The tiles the unit can reach with its Move left (<see cref="Paths.From"/>).</item>
-/// <item>Each tile's score on position alone (<see cref="Position"/>); the best 12 plus the current tile are kept.</item>
+/// <item>Each tile's score on position alone (<see cref="Position"/>); the best 12 plus the current tile are kept, and for
+/// the ranged and skirmisher profiles the best few it can strike a foe from (<see cref="StrikeTiles"/>).</item>
 /// <item>From each kept tile, each ability it can pay for on each legal target or aim (an area aim only on tiles in range
-/// that cover a unit it is meant for): "move, then act", scored as what the action is worth plus the tile, less the
-/// resources it spends (hoard).</item>
+/// that cover a unit it is meant for; a teleport or leap, as an escape, on the best landing tiles in reach with less threat,
+/// a summon beside its foes):
+/// "move, then act", scored as what the action is worth plus the tile, less the resources it spends (hoard). For the
+/// ranged and skirmisher profiles (<see cref="HitAndRun"/>), also "move, act, then move again" to the best tile the Move
+/// left reaches, for actions that leave the map as it is. A spell that Twinned or Careful Spell would improve is also
+/// planned with that metamagic first (<see cref="Shaped"/>).</item>
 /// <item>"Act from here, then move to the best tile the Move left reaches", for actions that leave the map as it is;
 /// "just move"; and Dash then move.</item>
-/// <item>The best bonus action, added greedily where the turn ends.</item>
+/// <item>With a bonus action that teleports or leaps, "walk, teleport, act" to landing tiles near the best position tiles
+/// and beside foes, never where the foes would Down it next round (<see cref="HopThenAct"/>); with a bonus-action Dash,
+/// "dash, walk further, act" (<see cref="DashThenAct"/>).</item>
+/// <item>The best 16 plans are ranked again with the bonus action they leave for the end (<see cref="Ranked"/>), so a
+/// disengage, teleport or dash that spends it gives up what it would be worth.</item>
+/// <item>The best second action, after an extra action (Action Surge) when it is worth what the surge costs, then the best
+/// bonus action, added greedily where the turn ends.</item>
 /// </list>
 /// With the Action already spent (a timed-out turn finishing what the player left), the bonus actions take the action's
-/// place in steps 3 and 4, so the move goes where the bonus action is worth most.
+/// place in steps 3 and 4, so the move goes where the bonus action is worth most, and a bonus-action Dash can lengthen the
+/// move.
 /// Ties break on the ordinal (ability id, tile, target). Every command of the chosen plan is checked with
 /// <see cref="Battle.Check"/> against the state the plan expects at that point; a plan that fails is passed over.
 /// </summary>
@@ -109,9 +121,10 @@ internal sealed partial class Planner
             candidates.Add(new Candidate(Kind.Move, score, null, null, here, t, escape, 0, spot.Position));
         }
 
-        // Move, then act.
+        // Move, then act (a teleport or leap as the action ends where it lands); for the ranged and skirmisher profiles, then
+        // move again with what is left.
         var kept = _spots.Values.OrderByDescending(s => Round(s.Score)).ThenBy(s => s.Tile).Take(KeptTiles)
-            .Select(s => s.Tile).Append(here).Distinct().Order().ToArray();
+            .Select(s => s.Tile).Append(here).Concat(HitAndRun ? StrikeTiles() : []).Distinct().Order().ToArray();
         foreach (var t in kept)
         {
             var spot = _spots[t];
@@ -119,12 +132,36 @@ internal sealed partial class Planner
             foreach (var usable in _usables.Where(u => Leads(u) && Affordable(me, u)))
             {
                 var hoard = Hoard(usable);
-                var (arrive, escape) = Arrive(spot, usable.Ability.Cost.Bonus > 0 ? null : bonusEscape);
+                var escapeFirst = usable.Ability.Cost.Bonus > 0 ? null : bonusEscape;
+                var (arrive, escape) = Arrive(spot, escapeFirst);
+                var away = HitAndRun && usable.Stable && t != here
+                    ? Retreat(t, _me.Economy.MoveLeft - spot.Cost - usable.Ability.Cost.Move, escapeFirst)
+                    : null;
                 foreach (var action in Actions(usable, t))
-                    if (action.Value > Epsilon && ItemOk(usable, t, action))
-                        candidates.Add(new Candidate(Kind.MoveAct, arrive + action.Value - hoard, usable, action, t, t, escape,
-                            action.Value - hoard, spot.Position));
+                {
+                    if (action.Value <= Epsilon || !ItemOk(usable, t, action))
+                        continue;
+                    var end = usable.Hop > 0 ? action.Aim : t;
+                    candidates.Add(new Candidate(Kind.MoveAct, arrive + action.Value - hoard, usable, action, t, end, escape,
+                        action.Value - hoard, usable.Hop > 0 ? Land(end) : spot.Position));
+                    if (away is { } back && Round(back.Score) > Round(arrive))
+                        candidates.Add(new Candidate(Kind.MoveActMove, back.Score + action.Value - hoard, usable, action, t,
+                            back.Spot.Tile, back.Escape, action.Value - hoard, back.Spot.Position, back.Path));
+                    foreach (var (meta, shaped) in Shaped(usable, t, action))
+                    {
+                        var worth = shaped.Value - hoard - Hoard(meta);
+                        candidates.Add(new Candidate(Kind.MoveAct, arrive + worth, usable, shaped, t, end, escape, worth, spot.Position,
+                            Lead: meta));
+                    }
+                }
             }
+        }
+
+        // A bonus-action teleport or leap, then act where it lands; a bonus-action Dash, then walk further and act.
+        if (!_actionSpent)
+        {
+            candidates.AddRange(HopThenAct());
+            candidates.AddRange(DashThenAct());
         }
 
         // Act here, then move with what is left (only when the action leaves the map as it is).
@@ -150,44 +187,72 @@ internal sealed partial class Planner
                         bestEscape, action.Value - hoard, best.Position));
         }
 
-        // Dash, then move further.
-        foreach (var dash in _usables.Where(u => u.Phase == Phase.Main && u.Dash && Affordable(_me, u)))
+        // Dash, then move further: with the action, or with the bonus action when the action is spent.
+        foreach (var dash in _usables.Where(u => u.Dash && (u.Phase == Phase.Main || _actionSpent) && Affordable(_me, u)))
         {
-            var extra = Modifiers.Move(_me.Sheet, _scorer.Mods(_me));
-            var far = Paths.From(_scorer.Terrain, _me.Pos, Mover(_me.Economy.MoveLeft - dash.Ability.Cost.Move + extra));
+            var far = Far(dash);
             foreach (var t in far.Reachable.Where(t => !_spots.ContainsKey(t)))
             {
-                var spot = SpotAt(t, far.PathTo(t));
-                var (arrive, escape) = Arrive(spot, bonusEscape);
+                var spot = SpotAt(t, far.PathTo(t), escaped: dash.Escape);
+                var (arrive, escape) = Arrive(spot, dash.Phase == Phase.Main ? bonusEscape : null);
                 candidates.Add(new Candidate(Kind.DashMove, arrive - Hoard(dash), dash, new Action(new Target(), here, [], 0), here, t,
                     escape, -Hoard(dash), spot.Position, spot.Path));
             }
         }
 
         candidates.Sort(Candidate.Order);
-        foreach (var candidate in candidates)
+        foreach (var candidate in Ranked(candidates))
             if (Commands(candidate) is { } commands)
                 return Finish(candidate, commands, candidates);
         return new TurnPlan([new EndTurn(_me.Id)], 0, $"{_me.Id} ({_p.Id}): no legal plan; end turn.");
     }
 
-    private enum Kind { MoveAct, ActMove, Move, DashMove }
+    /// <summary>How many of the best plans are ranked again with the bonus action they leave for the end.</summary>
+    private const int RankedPlans = 16;
+
+    /// <summary>
+    /// <paramref name="sorted"/> with its best <see cref="RankedPlans"/> ranked again by their score plus what the bonus
+    /// action they leave for the end is worth (<see cref="BonusLeft"/>), ties in their order, then the rest as they were. A
+    /// plan that spends the bonus action early (on a disengage, a teleport or a dash) gives up what it would be worth at the
+    /// end: Step of the Wind is taken over Flurry of Blows only when escaping is worth more.
+    /// </summary>
+    private IEnumerable<Candidate> Ranked(List<Candidate> sorted)
+        => sorted.Take(RankedPlans).Select((c, i) => (c, i, Total: c.Score + BonusLeft(c)))
+            .OrderByDescending(x => Round(x.Total)).ThenBy(x => x.i).Select(x => x.c)
+            .Concat(sorted.Skip(RankedPlans));
+
+    /// <summary>
+    /// A plan's shape, in the order its commands run: <see cref="MoveAct"/> walk, act; <see cref="ActMove"/> act, walk;
+    /// <see cref="Move"/> walk; <see cref="DashMove"/> dash, walk; <see cref="MoveActMove"/> walk, act, walk again;
+    /// <see cref="HopAct"/> walk, teleport or leap (<see cref="Candidate.Lead"/>), act; <see cref="DashAct"/> bonus-action
+    /// dash (<see cref="Candidate.Lead"/>), walk, act. Each may begin with a disengage. New shapes go last, so ties between
+    /// the older ones still break as they did.
+    /// </summary>
+    private enum Kind { MoveAct, ActMove, Move, DashMove, MoveActMove, HopAct, DashAct }
 
     /// <summary>
     /// True for the abilities a turn is planned around: the action's (but not Dash, planned on its own), or with the Action
-    /// spent, the bonus action's (but not an escape, which only helps a move).
+    /// spent, the bonus action's (but not an escape, which only helps a move). Never an extra action (Action Surge), which is
+    /// worth the best second action and is planned after the first (<see cref="Commands"/>).
     /// </summary>
-    private bool Leads(Usable u) => !u.Dash && (u.Phase == Phase.Main || _actionSpent && !u.Escape);
+    private bool Leads(Usable u) => !u.Dash && !u.Surge && (u.Phase == Phase.Main || _actionSpent && !u.Escape);
 
     /// <summary>
     /// A whole-turn plan before it is checked: its shape, total score, the ability and target, the tile it acts from, the
     /// tile it ends on, a disengage to use before walking, what the action is worth less its cost, and the end tile's
-    /// position score (for the explanation); a dash's path, which the ordinary path map doesn't have.
+    /// position score (for the explanation); the path of the walk the ordinary path map doesn't have (a dash's, or the
+    /// walk after acting in move–act–move or before it in <see cref="Kind.DashAct"/>); the bonus action used before acting
+    /// (<see cref="Lead"/>: a teleport or leap to the tile it acts from, or a dash) and the tile a teleport or leap is used
+    /// from (<see cref="Via"/>, the unit's own if none).
     /// </summary>
     private sealed record Candidate(Kind Kind, double Score, Usable? Usable, Action? Action, Tile ActTile, Tile End,
-        Usable? Escape, double ActionValue, double EndPosition, ImmutableArray<Tile> Path = default)
+        Usable? Escape, double ActionValue, double EndPosition, ImmutableArray<Tile> Path = default, Usable? Lead = null,
+        Tile? Via = null)
     {
-        /// <summary>Best score first; ties by ability id, then the tile it acts from, then the target, then the shape.</summary>
+        /// <summary>
+        /// Best score first; ties by ability id, then the tile it acts from, then the target, then the shape, then the end
+        /// tile, then the bonus action used before acting and the tile it is used from.
+        /// </summary>
         public static int Order(Candidate a, Candidate b)
         {
             var c = Round(b.Score).CompareTo(Round(a.Score));
@@ -201,17 +266,23 @@ internal sealed partial class Planner
                 c = a.Kind.CompareTo(b.Kind);
             if (c == 0)
                 c = a.End.CompareTo(b.End);
+            if (c == 0)
+                c = string.CompareOrdinal(Key(a.Lead), Key(b.Lead));
+            if (c == 0)
+                c = (a.Via ?? a.ActTile).CompareTo(b.Via ?? b.ActTile);
             return c;
         }
 
-        private string AbilityKey => Usable is null ? "" : Usable.Command.Value + "/" + Usable.Item?.Value;
+        private string AbilityKey => Key(Usable);
 
-        public string TargetKey => Action?.Target switch
+        private static string Key(Usable? usable) => usable is null ? "" : usable.Command.Value + "/" + usable.Item?.Value;
+
+        public string TargetKey => (Action?.Target switch
         {
             { Unit: { } unit } => "u:" + unit.Value,
             { Tile: { } tile } => $"t:{tile.X:D3},{tile.Y:D3}",
             _ => "",
-        };
+        }) + (Action is { Targets.IsDefaultOrEmpty: false } a ? ">" + string.Join(",", a.Targets.Select(t => t.Value)) : "");
     }
 
     /// <summary>Scores compared to a millionth, so sums that differ only by rounding still tie.</summary>

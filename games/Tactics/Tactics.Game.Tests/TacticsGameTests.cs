@@ -112,7 +112,7 @@ public sealed class TacticsGameTests
     [Fact]
     public void An_all_ai_battle_plays_out_and_writes_its_result_to_the_campaign()
     {
-        var s = new Session();
+        var s = new Session(seed: 2);     // a seed the party wins (seed 1 has lost since #108's rogue), so XP is written
         s.ToBattle(everyoneAway: true);
 
         s.PlayOut();

@@ -62,6 +62,47 @@ public sealed class TooltipTests
     }
 
     [Fact]
+    public void A_rider_once_weapon_attack_says_its_extras_land_on_the_first_hit()
+    {
+        // #107: Trip Attack's die and prone save land once however many attacks the unit makes.
+        var trip = new AbilityDef(new AbilityId("test.trip"), "Trip", 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, 1, false, new AreaDef(AreaShape.Single)),
+            [new AttackEffect("weapon", null, [new DamageEffect(TestAbilities.Flat("1d8"), null, [], Weapon: true),
+                new SaveEffect(Stat.Str, 13, [Apply("prone", null)], [])], [], [])],
+            IsWeaponAttack: true, RiderOnce: true);
+        Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone). "
+                     + "With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits", Tooltips.For(trip, 1, Rules));
+        Assert.Equal("Weapon attack, weapon range: weapon damage + 1d8; Str save (target is Prone)",
+            Tooltips.For(trip with { RiderOnce = false }, 1, Rules));
+    }
+
+    [Fact]
+    public void An_ability_with_a_requirement_says_when_it_can_be_used()
+    {
+        // #108: Hide needs the user out of plain view.
+        var hide = new AbilityDef(new AbilityId("test.hide"), "Hide", 0, new CostDef(Bonus: 1),
+            new TargetDef(TargetKind.Self, 0, false, new AreaDef(AreaShape.Self)), [Apply("lit", 1)],
+            Flavor: "Out of sight.", Requires: new WhenDef(Seen: false));
+        Assert.Equal("Self: you are Lit for 1 round. Only when you aren't in plain view — Out of sight.", Tooltips.For(hide, 1, Rules));
+        Assert.Equal("At the end of your turn, if you are in plain view, on yourself: ends Lit on target",
+            Tooltips.For(new PassiveDef("test.seen", HookKind.OnTurnEnd, new WhenDef(Seen: true),
+                [new RemoveEffect(new ConditionId("lit"))], null, Target: PassiveTarget.Self), 1, Rules));
+    }
+
+    [Fact]
+    public void A_mark_says_what_it_gives_its_maker()
+    {
+        // #108: the rogue's Vex marks what it hits, with no flavour text to explain the mark.
+        var vex = new PassiveDef("rogue.vex", HookKind.OnAttackHit, new WhenDef(Weapon: ["rapier"]), [new MarkEffect(1)], null);
+        Assert.Equal("When you hit, if you attack with a rapier weapon: marks target for 1 round (your attacks on it have advantage)",
+            Tooltips.For(vex, 1, Rules));
+        // A mark of its own condition (Vex's vexed, R28) names it.
+        var own = vex with { Effects = [new MarkEffect(1, new ConditionId("lit"))] };
+        Assert.Equal("When you hit, if you attack with a rapier weapon: marks target as Lit for 1 round (your attacks on it have advantage)",
+            Tooltips.For(own, 1, Rules));
+    }
+
+    [Fact]
     public void Missing_describe_throws_naming_block()
     {
         // A transform whose hook doesn't exist has no phrase: the block answers null and the tooltip names it.
@@ -273,6 +314,14 @@ public sealed class TooltipTests
         Assert.Equal("no listed effect", Tooltips.For(RulesPack.Helped, Rules));
     }
 
+    [Fact]
+    public void Changed_condition_rules_explain_charm_protection_and_healing_cleanup()
+    {
+        var rules = BasePackTests.Rules;
+        Assert.Contains("can't target its charmer with harmful abilities", Tooltips.For(rules.Conditions[new("charmed")], rules));
+        Assert.Contains("When healing restores HP", Tooltips.For(rules.Conditions[new("bleeding")], rules));
+    }
+
     // ---- Every block and hook ---------------------------------------------------------------------------------------
 
     private static readonly AreaDef Burst1 = new(AreaShape.Burst, 1);
@@ -283,6 +332,7 @@ public sealed class TooltipTests
         ("attack", new AttackEffect("spell", Stat.Wis, [Dmg("1d6", "fire")], [], [])),
         ("save", new SaveEffect(Stat.Dex, 12, [Dmg("1d6", "fire")], [], true)),
         ("damage", Dmg("1d6", "fire")),
+        ("halveHit", new HalveHitEffect()),
         ("heal", new HealEffect(TestAbilities.Flat("1d6"), ["mod.wis"])),
         ("tempHp", new TempHpEffect(TestAbilities.Flat("1d6"), ["prof"])),
         ("revive", new ReviveEffect(1)),

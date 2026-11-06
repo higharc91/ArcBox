@@ -49,6 +49,15 @@ public sealed class EncounterSetupTests
     }
 
     [Fact]
+    public void An_encounter_allows_retreat_unless_it_says_retreat_false()
+    {
+        Assert.True(Encounters.Setup("named_units", Party("kara"), Difficulty.Normal, Rules).NoRetreat);
+        Assert.False(Encounters.Setup("field_skirmish", Party("kara"), Difficulty.Normal, Rules).NoRetreat);
+        Assert.False(Rules.Encounters["named_units"].Retreat);
+        Assert.True(Rules.Encounters["field_skirmish"].Retreat);
+    }
+
+    [Fact]
     public void Enemies_are_numbered_by_monster_in_placement_order_unless_they_name_an_id()
     {
         var setup = Encounters.Setup("field_skirmish", Party("kara"), Difficulty.Normal, Rules);

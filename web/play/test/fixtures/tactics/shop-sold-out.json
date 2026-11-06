@@ -43,6 +43,7 @@
     },
     "leader": true,
     "vip": true,
+    "difficulty": "Normal",
     "feed": [
       "Player1 bought 3 \u00D7 Potion of Healing \u2014 150 gold"
     ],

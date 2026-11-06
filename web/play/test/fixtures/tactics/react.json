@@ -40,9 +40,13 @@
         "target": "hero4",
         "tooltip": "Self: you get \u002B5 AC until the end of your turn"
       }
-    ]
+    ],
+    "reactions": {
+      "opportunity": "ask",
+      "defence": "ask"
+    }
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:01:22.95\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:04:10.95\u002B00:00",
   "header": null
 }

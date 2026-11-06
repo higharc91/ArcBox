@@ -360,6 +360,32 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void An_areas_countdown_transform_and_zone_cleanup_do_not_delay_its_other_targets()
+    {
+        var countdown = new CountdownTicked(Targets[1], 2);
+        var transformed = new Transformed(Targets[2], "druid");
+        var ended = new ZoneEnded(1);
+        var events = new List<BattleEvent> { Fireball };
+        for (var i = 0; i < Targets.Length; i++)
+        {
+            events.Add(new Rolled(Targets[i], RollKind.Save, Roll(4, false)));
+            if (i == 1) events.Add(countdown);
+            else events.Add(new Damaged(Targets[i], 3, "fire", 7));
+            if (i == 2)
+            {
+                events.Add(transformed);
+                events.Add(new Rolled(Targets[i], RollKind.Save, Roll(4, false)));
+                events.Add(new ConcentrationBroken(Targets[i], new("druid.entangle")));
+                events.Add(ended);
+            }
+        }
+        var script = Script(Crowd, [.. events]);
+        Assert.InRange(LastHit(script), 0, 1.1);
+        foreach (var effect in new BattleEvent[] { countdown, transformed, ended })
+            Assert.Contains(script.Cues.OfType<ApplyCue>(), cue => cue.Event == effect);
+    }
+
+    [Fact]
     public void An_area_spell_with_no_saves_lands_within_a_second()
     {
         var script = Script(Crowd, [Fireball, .. Targets.Select(t => new Damaged(t, 3, "fire", 7))]);
@@ -445,6 +471,42 @@ public sealed class BeatScriptTests
     public void A_condition_landing_on_the_caster_does_not_make_an_area()
         => Assert.Equal(BeatTiming.Windup + BeatTiming.Impact + BeatTiming.Condition,
             Script(Near, [.. Hit(6, 4), new ConditionApplied(Hero, new ConditionId("blessed"))]).Length, 3);
+
+    [Fact]
+    public void A_three_beam_blast_whose_repelling_blast_shoves_the_foe_into_a_concentrating_ally_is_still_three_swings()
+    {
+        var ally = new UnitId("druid");
+        var other = new UnitId("bandit.1");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 7, 3), Unit(ally, "Party", 8, 3), Unit(other, "Enemy", 9, 3));
+        var script = Script(view,
+            Used("characters.point", "fx.force.eldritch", "projectiles.eldritch", Foe),
+            new Rolled(Hero, RollKind.Attack, Roll(7, false)), new AttackResolved(Hero, Foe, false, false),
+            new Rolled(Hero, RollKind.Attack, Roll(3, false)), new AttackResolved(Hero, Foe, false, false),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
+            new Damaged(Foe, 4, "force", 12),
+            new PassiveTriggered(Foe, "lit.fades"), new ConditionRemoved(Foe, new ConditionId("lit")),
+            new PassiveTriggered(Hero, "warlock.agonizing_blast"), new Damaged(Foe, 3, "force", 9),
+            new PassiveTriggered(Hero, "warlock.repelling_blast"),
+            new Collided(Foe, ally, 2), new Damaged(Foe, 2, "bludgeoning", 7),
+            new Collided(ally, Foe, 3), new Damaged(ally, 3, "bludgeoning", 66),
+            new Rolled(ally, RollKind.Save, Roll(1, false)), new ConcentrationBroken(ally, new AbilityId("druid.entangle")),
+            new ConditionRemoved(other, new ConditionId("restrained")),
+            new PassiveTriggered(Hero, "warlock.lifedrinker"), new Damaged(Foe, 5, "necrotic", 2));
+
+        Assert.Equal(3, script.Cues.OfType<PoseCue>().Count(c => c.Toward is not null));
+    }
+
+    [Fact]
+    public void A_guarded_unit_bracing_at_the_edge_pops_a_word_over_its_tile()
+    {
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3));
+
+        var script = Script(view, new PushResisted(Foe, new Tile(4, 3)));
+
+        var pop = Assert.Single(script.Cues.OfType<PopCue>());
+        Assert.Equal("BRACED", pop.Text);
+        Assert.Equal(new Tile(4, 3), pop.Tile);
+    }
 
     [Fact]
     public void A_foe_shoved_into_another_is_not_an_area()
@@ -538,6 +600,23 @@ public sealed class BeatScriptTests
         var script = Script(view, [heal, .. Targets.Select(t => new Healed(t, 3, 10))]);
 
         Assert.InRange(script.Cues.OfType<ApplyCue>().Where(a => a.Event is Healed).Max(a => a.At), 0.2, 1.0);
+    }
+
+    [Fact]
+    public void Attacks_that_turn_to_another_foe_after_a_kill_are_swings_at_each_not_an_area()
+    {
+        // #107: the first attack drops the goblin; the engine sends the other two at the second one.
+        var other = new UnitId("goblin.2");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3), Unit(other, "Enemy", 3, 4));
+        var script = Script(view, [.. Hit(3, 0), new Died(Foe),
+            new Retargeted(Hero, other),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, other, true, false), new Damaged(other, 3, "slashing", 7),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, other, true, false), new Damaged(other, 3, "slashing", 4)]);
+
+        var lunges = script.Cues.OfType<LungeCue>().ToArray();
+        Assert.Equal(3, lunges.Length);
+        Assert.Equal([new Tile(4, 3), new Tile(3, 4), new Tile(3, 4)], lunges.Select(l => l.Toward));
+        Assert.True(lunges[1].At >= script.Cues.OfType<ApplyCue>().First(a => a.Event is Died).At, "the next swing waits for the fall");
     }
 
     [Fact]

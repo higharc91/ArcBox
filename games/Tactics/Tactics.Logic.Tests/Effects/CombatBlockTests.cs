@@ -242,6 +242,56 @@ public sealed class CombatBlockTests
     }
 
     [Fact]
+    public void Marks_from_two_sources_coexist_and_move_independently()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        var vex = new ConditionId("vexed");
+        foreach (var condition in new[] { vex, Marked })
+        {
+            var (after, _) = battle.Run(state, "kara", "gob", null, new MarkEffect(2, condition));
+            (after, _) = battle.Run(after, "cleric", "gob", null, new MarkEffect(2, condition));
+            Assert.Equal(2, after.Units[U("gob")].Conditions.Count(c => c.Id == condition));
+            (after, _) = battle.Run(after, "kara", "gob", null, new MarkEffect(2, condition));
+            Assert.Equal(2, after.Units[U("gob")].Conditions.Count(c => c.Id == condition));
+            foreach (var source in new[] { "kara", "cleric" })
+            {
+                var (_, rolls) = battle.Run(after, source, "gob", null, new AttackEffect("weapon", null, [], [], []));
+                Assert.Equal(2, TestConditions.FirstAttack(rolls).D20s.Length);
+            }
+            (after, _) = battle.Run(after, "kara", "hob", null, new MarkEffect(2, condition));
+            Assert.Equal(U("cleric"), Assert.Single(after.Units[U("gob")].Conditions).Source);
+            Assert.Equal(U("kara"), Assert.Single(after.Units[U("hob")].Conditions).Source);
+        }
+    }
+
+    [Fact]
+    public void Expiring_one_sources_mark_preserves_another_sources_mark()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        state = state.Give("gob",
+            new ActiveCondition(Marked, U("cleric"), 0, false, 0, Stat.Con, false, Mark: true),
+            new ActiveCondition(Marked, U("kara"), 2, false, 0, Stat.Con, false, Mark: true));
+        (state, _) = battle.Apply(state, new EndTurn(U("cleric")));
+        Assert.Equal(U("kara"), Assert.Single(state.Units[U("gob")].Conditions).Source);
+    }
+
+    [Fact]
+    public void Legacy_sourced_mark_without_mark_flag_still_grants_advantage()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        var oldMark = System.Text.Json.JsonSerializer.Deserialize<ActiveCondition>(
+            """{"id":"marked","source":"kara","roundsLeft":2,"untilSave":false,"saveDc":0,"saveStat":"con","concentration":false}""",
+            ArcBox.Sdk.ArcJson.Options)!;
+        Assert.False(oldMark.Mark);
+        state = state.Give("gob", oldMark);
+        var (_, events) = battle.Run(state, "kara", "gob", null, new AttackEffect("weapon", null, [], [], []));
+        Assert.Equal(2, TestConditions.FirstAttack(events).D20s.Length);
+    }
+
+    [Fact]
     public void Taunt_gives_disadvantage_against_anyone_else()
     {
         var battle = Build();

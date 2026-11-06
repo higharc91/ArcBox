@@ -69,7 +69,8 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// <see cref="StaticMods.CritWhenAdjacent"/> from an adjacent attacker is a critical hit. Emits
 /// <see cref="AttackResolved"/>, fires
 /// <see cref="HookKind.OnAttackHit"/> or <see cref="HookKind.OnAttackMiss"/> for the attacker and queues the branch
-/// (hit, plus crit; or miss) ahead of the hook effects.</item>
+/// (hit, plus crit; or miss) ahead of the hook effects. An ability's hit (<see cref="HookDepth"/> 0) lands a
+/// <see cref="AbilityDef.RiderOnce"/> rider: the ability's attacks still to come are plain (<see cref="Strikes.RecordHit"/>).</item>
 /// </list>
 /// </summary>
 public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, AbilityId? Ability, EffectDef Attack,
@@ -82,6 +83,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
     {
         var target = w.Unit(Target);
         if (target.Life is LifeState.Dead or LifeState.Out || (HookDepth == 0 && w.Unit(Source).Life != LifeState.Up))
+            return;
+        if (Conditions.Active(w.Unit(Source), rules).Any(c => c.Def.Id.Value == "charmed" && c.From.Source == Target))
             return;
         w.HookDepth = HookDepth;
         if (Roll is null)
@@ -106,33 +109,11 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var modifier = statModifier + Stats.Proficiency(source.Sheet.Level) + def.Bonus
                        + Modifiers.Sum(attackerSources).Attack + Reach.HighGroundBonus(w.Terrain, source.Pos, target.Pos);
 
-        var (advantages, disadvantages) = (0, 0);
-        void Count(Edge edge)
-        {
-            if (edge == Edge.Advantage)
-                advantages++;
-            else if (edge == Edge.Disadvantage)
-                disadvantages++;
-        }
-        foreach (var mods in attackerSources)
-        {
-            Count(mods.OwnAttacks);
-            Count(mods.Invisible ? Edge.Advantage : Edge.None);
-        }
-        foreach (var mods in targetSources)
-        {
-            Count(ranged ? mods.AttackedRanged : mods.AttackedMelee);
-            Count(mods.Invisible ? Edge.Disadvantage : Edge.None);
-        }
-        if (!ranged && Modifiers.Flanked(w.State, Source, Target, rules))
-            advantages++;
-        if (MarkBlock.MarkedBy(target, Source))
-            advantages++;
-        if (TauntBlock.TauntedAway(w.State, Source, Target))
-            disadvantages++;
-        if (HelpBlock.Consume(w, Source))
-            advantages++;
-        var edge = Rolls.Combine(advantages, disadvantages);
+        var edge = Rolls.AttackEdge(attackerSources, targetSources, ranged,
+            flanked: !ranged && Modifiers.Flanked(w.State, Source, Target, rules),
+            marked: MarkBlock.MarkedBy(target, Source),
+            tauntedAway: TauntBlock.TauntedAway(w.State, Source, Target),
+            helped: HelpBlock.Consume(w, Source));    // the roll uses the help up
 
         var cover = ranged || def.Kind == "spell" ? Modifiers.CoverAgainst(w, source.Pos, target.Pos, ranged: true) : 0;
         var roll = Rolls.D20(w, modifier, Ac(w, rules, target, cover), edge, critOn20: true, autoMissOn1: true);
@@ -159,7 +140,11 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var roll = rolled with { Vs = ac, Success = hit, Crit = crit };
         w.Emit(new AttackResolved(Source, Target, hit, crit));
         if (HookDepth == 0)
+        {
             Surfaces.RecordHit(w, Source, Ability, hit);
+            if (hit)
+                Strikes.RecordHit(w, Source, Ability);
+        }
 
         var hooks = new List<Step>();
         Hooks.Collect(w, hit ? HookKind.OnAttackHit : HookKind.OnAttackMiss,
@@ -198,7 +183,17 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
         => $"{Label(def)} ({Body(def, level, rules)})";
 
     /// <summary>The roll's name in a tooltip: <c>"Dex save"</c>.</summary>
-    internal static string Label(SaveEffect def) => $"{def.Stat} save";
+    internal static string Label(SaveEffect def) => def.AlternativeStat is { } other
+        ? $"better of {def.Stat}/{other} save" : $"{def.Stat} save";
+
+    /// <summary>Choose the greater total save bonus, including proficiency and current modifiers; ties use Stat.</summary>
+    internal static Stat StatFor(SaveEffect def, UnitSheet sheet, StaticMods mods)
+    {
+        int Bonus(Stat stat) => Stats.Mod(sheet.Score(stat)) + (sheet.SaveProficiencies.Contains(stat)
+            || mods.SaveProficiencies?.Contains(stat) == true ? Stats.Proficiency(sheet.Level) : 0)
+            + (mods.Saves?.GetValueOrDefault(stat) ?? 0);
+        return def.AlternativeStat is { } other && Bonus(other) > Bonus(def.Stat) ? other : def.Stat;
+    }
 
     /// <summary>What the save does: the failure effects, the half damage and what a success does.</summary>
     internal static string Body(SaveEffect def, int level, RulesPack rules)
@@ -217,25 +212,26 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
     protected override void Run(SaveEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
-        var cover = def.Stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
+        var stat = StatFor(def, target.Sheet, Modifiers.For(ctx.W, target.Id, ctx.Rules));
+        var cover = stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
         // Careful Spell: the caster's allies succeed, and the event and their OnSave hooks see the success.
         var careful = target.Id != ctx.Source && target.Sheet.Side == ctx.SourceUnit.Sheet.Side && Metamagic.Has(ctx.SourceUnit, Metamagic.Careful);
-        var roll = Rolls.Save(ctx.W, target.Id, def.Stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover,
+        var roll = Rolls.Save(ctx.W, target.Id, stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover,
             ctx.Source, autoSucceed: careful);
         ctx.Last = roll;
         // Evasion: against a DEX save for half, none on a success and half on a failure.
-        var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;
+        var evades = stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;
 
         if (!roll.Success)
         {
-            ctx.Queue(def.OnFail, roll, halfDamage: evades, saveStat: def.Stat);
+            ctx.Queue(def.OnFail, roll, halfDamage: evades, saveStat: stat);
             return;
         }
 
         // Each Queue goes to the front, so queue the success branch first for the half damage to run before it.
-        ctx.Queue(def.OnSuccess, roll, saveStat: def.Stat);
+        ctx.Queue(def.OnSuccess, roll, saveStat: stat);
         if (def.HalfOnSuccess && !evades && !def.OnFail.IsDefault)
-            ctx.Queue([.. def.OnFail.OfType<DamageEffect>()], roll, halfDamage: true, saveStat: def.Stat);
+            ctx.Queue([.. def.OnFail.OfType<DamageEffect>()], roll, halfDamage: true, saveStat: stat);
     }
 
     /// <summary>Where a save's effect comes from, for cover: the aimed tile of a burst, cross or ring, else the source.</summary>

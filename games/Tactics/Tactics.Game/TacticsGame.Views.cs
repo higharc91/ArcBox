@@ -18,10 +18,13 @@ public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprit
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
 /// previews); <see cref="Tiles"/> are the other legal aim tiles, bare, since a tile-aimed area spell can have hundreds
-/// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB).
+/// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB). <see cref="Attacks"/> is
+/// set for a weapon attack of several attacks (<see cref="AbilityChoice.Attacks"/>): the phone offers "Attack 2 of N" and
+/// sends a <c>targets</c> list (<see cref="Use.Targets"/>).
 /// </summary>
 public sealed record PhoneAbility(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
-    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit");
+    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit",
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
 
 /// <summary><see cref="TurnChoices"/> as the phone gets them, abilities compacted (<see cref="PhoneAbility"/>).</summary>
 public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
@@ -39,7 +42,7 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
                 : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
                 : rules.Abilities.GetValueOrDefault(a.Ability);
             return new PhoneAbility(a.Ability, a.Item, a.Name, a.Tooltip, a.Cost,
-                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def));
+                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def), a.Attacks);
         })],
         choices.CanDelay);
 
@@ -128,7 +131,8 @@ public sealed record StageView(string Region, Tile Origin, int Height, Immutable
 /// <param name="Stage">Where it stands in the world, or null for a battle on a plain board: no region, or a map the region doesn't stamp.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
-    UnitId? Reacting = null, string? Name = null, StageView? Stage = null);
+    UnitId? Reacting = null, string? Name = null, StageView? Stage = null, string? Difficulty = null,
+    RetreatView? Retreat = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -486,7 +490,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
-                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player),
+                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player), difficulty = CampaignDifficulty.ToString(),
                 level = _doc.PartyLevel, portal = PortalPath(),
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
@@ -524,6 +528,7 @@ public sealed partial class TacticsGame
             party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads,
                 color = ColorOf(w.Player.Profile!.Value.Value) }),
             vip,
+            difficulty = CampaignDifficulty.ToString(),
             canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
@@ -578,13 +583,32 @@ public sealed partial class TacticsGame
         Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
             [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))], Morning: HasCampfires && (_doc.World?.RestSeq ?? 0) > 0, PeopleFlags: VisiblePeopleFlags(), Bark: CurrentBark(), ThingSpeech: _thingSpeech is { } speech && speech.Until > _ctx.Now ? speech : null, QuestEvent: _questEvent, Pinned: QuestTracker(), QuestLog: QuestLogOpen ? Journal(true) : null, QuestMarkers: QuestPersonMarkers(), Mobs: VisibleMobs(), Danger: NearbyMob());
 
+    /// <summary>
+    /// The phone's battle screen with the player's reaction preferences (issue #113) as <c>reactions</c> ({ opportunity, defence }: the words
+    /// the "Reactions" sheet sets), for the sheet to show.
+    /// </summary>
     private ControllerView BattleScreen(ProfileId profile)
     {
+        var view = BattleScreenOf(profile);
+        if (view is not CustomView custom)
+            return view;
+        var prefs = _doc.For(profile)?.Reactions ?? ReactionPrefs.Ask;
+        var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(custom.Data, ArcJson.Options)!;
+        data["reactions"] = JsonSerializer.SerializeToElement(new { opportunity = prefs.OpportunityWord, defence = prefs.DefenceWord }, ArcJson.Options);
+        return custom with { Data = JsonSerializer.SerializeToElement(data, ArcJson.Options) };
+    }
+
+    private ControllerView BattleScreenOf(ProfileId profile)
+    {
         var state = State;
-        if (UnitOf(profile) is not { } unit || !state.Units.TryGetValue(unit, out var me))
+        if (UnitOf(profile) is not { } hero || !state.Units.TryGetValue(hero, out var heroUnit))
             return new WaitView("You're not in this battle.");
-        if (state.Pending is ReactionOffer offer && offer.Reactor == unit && IsPlayed(unit))
-            return PhoneSurfaces.Attach(Custom(Screens.React, new
+        if (state.Pending is ReactionOffer offer && Plays(state, hero, offer.Reactor) && IsPlayed(offer.Reactor))
+        {
+            // The hero's own reaction, or a summon's: the owner's phone answers for both.
+            var unit = offer.Reactor;
+            var me = state.Units[unit];
+            var prompt = PhoneSurfaces.Attach(Custom(Screens.React, new
             {
                 unit,
                 trigger = offer.Trigger,
@@ -600,23 +624,31 @@ public sealed partial class TacticsGame
                     target = o.Target,
                     tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
-            }), state, me, Rules) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
-        if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
-            return PhoneSurfaces.Attach(Custom(Screens.Turn, new
+            }), state, me, Rules);
+            return WithFallBack(prompt, profile, hero, offer: false) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
+        }
+        // The active unit of this phone's: the hero, or one of its summons (the owner's phone controls them, spec 4.5).
+        var turn = TurnUnit(state, hero);
+        if (state.Active == turn && state.Pending is null && IsPlayed(turn) && _aiFinishing != turn)
+        {
+            var actor = state.Units[turn];
+            return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Turn, new
             {
-                me = UnitViewOf(me),
+                me = UnitViewOf(actor),
+                summoned = actor.SummonedBy is not null,
                 map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
-                choices = PhoneChoices.Of(Choices.For(state, unit, Rules), Rules),
-            }), state, me, Rules)
+                choices = PhoneChoices.Of(Choices.For(state, turn, Rules), Rules),
+            }), state, actor, Rules), profile, hero)
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
-        return PhoneSurfaces.Attach(Custom(Screens.Status, new
+        }
+        return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
-            me = UnitViewOf(me),
+            me = UnitViewOf(heroUnit),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
-            upIn = UpIn(state, unit),
-            aiPlaying = !IsPlayed(unit),
-        }), state, me, Rules);
+            upIn = UpIn(state, hero),
+            aiPlaying = !IsPlayed(hero),
+        }), state, heroUnit, Rules), profile, hero);
     }
 
     /// <summary>How many turns until <paramref name="unit"/>'s, this round (exact: no initiative rolls), or null.</summary>
@@ -672,7 +704,8 @@ public sealed partial class TacticsGame
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
             StageOf(save) is { } stage
                 ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
-                : null);
+                : null,
+            state.Difficulty.ToString(), RetreatViewOf());
     }
 
     /// <summary>
@@ -705,7 +738,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.EncounterPick:
                 return $"{Vip?.Name ?? "The host"} is choosing a battle";
             case TacticsPhase.Results:
-                return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
+                return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : _result?.Outcome == BattleOutcome.Fled ? $"The party fled {_resultEncounter}" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:
                 return _doc.Battle is null ? "Resuming the story…" : "Resuming the battle…";
             case TacticsPhase.Exploration:

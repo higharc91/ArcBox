@@ -270,19 +270,15 @@ Done while the user was away, on `ccr-18ad4510-q68nad`, which is stacked on this
 
 Hunger of Hadar's ticks were halved to 1d6 + 1d6, and Wall of Fire's burn cut to 1d8 (cast damage unchanged, so the ladder holds). The report's tables come from the sweep after that.
 
-### Decisions for the user
+### Decisions for the user — resolved by #112
 
-1. **Accept or reject Task 23's changes beyond numbers:**
-   - Hide moved to level 1;
-   - the rogue's rapier;
-   - monster `saves` lists;
-   - the rogue's and monk's attack counts;
-   - the warlord_bridge redesign (start tile, one collapse, `survive:11`);
-   - goblin_boss raised to 240 HP.
-2. **The dice that step down at levels 3 and 7** (monk, Eldritch Blast, bard heals): keep the level-1 floor, or smooth the dice and move another lever (attacks, beams, pools) with them.
-3. **Quickened from level 7.** It's affordable there, and the sampled loadouts are unchanged. The alternative is a cheaper Quickened from level 2, which the sweep would have to re-check.
-4. **Measuring the Striker band by damage per target** rather than total damage would let Fireball go back toward the SRD. That's a `Tactics.Sim` change.
-5. **The sorcerer's Cone of Cold at level 10.** It's +33% at the ladder's floor (3d6 over 49 tiles), and −29% as a 25-tile cone, because the AI stops valuing it. The options: accept it, drop it from the level-9 default picks, or measure the Striker band per target (item 4).
+Authority: the owner's final combat handoff explicitly assigns these decisions to Task 11. See [README Content conventions](../../../games/Tactics/README.md#content-conventions), the [rogue report](../reports/2026-11-06-combat-98/rogue.md) and rulings R32–R35 in the combat progress ledger.
+
+1. **Resolved: retain the beyond-number changes.** Hide at level 1 (with #108's plain-view restriction), the rapier, monster save proficiencies, bounded rogue/monk attack schedules, and the warlord bridge's start tile, single collapse, `survive:11` and 240-HP goblin boss remain. These are game balance departures documented in README; the final balance report audits them together.
+2. **Resolved: smooth the dice.** Monk unarmed dice, Eldritch Blast and bard healing never step down. README's “Monotonic level-up dice” records the schedules; `ContentLadderTests` protects every level and primary weapon progression.
+3. **Resolved: retain Quickened at level 7.** Its existing cost and arrival pool satisfy “Affordable on arrival”; moving it earlier is unnecessary scope. README documents the timing departure.
+4. **Resolved: damage per target-turn.** Striker credit is normalized over damaged hostiles within each member's turn; raw damage remains for audit. README's “Striker measurement” and the new Tally regressions define it precisely.
+5. **Resolved: retain the full Cone of Cold footprint and restore its dice.** The new measure permits 8d8 Cone of Cold, at least 1.5× Fireball's 6d6 per target; full-ladder tests cover both casters at every level. The final report records the resulting balance and any remaining outliers.
 
 ### Triage of the deferred table
 
@@ -329,7 +325,7 @@ Hunger of Hadar's ticks were halved to 1d6 + 1d6, and Wall of Fire's burn cut to
 | 17 | Weapon-rider abilities use the ability's range, not the equipped weapon's (matters once players pick weapons); `QuarryDamage` recursion guard; Stunning Strike's rider is missing; Step of the Wind's Jump +2 needs a `StaticMods.Jump` field; thin tests for Lay on Hands, Hail of Thorns and Deflect Attacks |
 | 16 | One unnamed test failure seen once, probably the AI speed test competing for CPU (simulator tests now run on their own); the temporary-HP soak path is untested |
 | 14 | Self-area threat gets a high-ground range bonus; a bonus-action Dash is never planned; the bonus pass only excludes the direct target, not downed foes caught in an area |
-| 13 | SRD approximations parked for the balance pass: manoeuvres apply to each attack with Extra Attack, Feint, Spiritual Weapon, Empowered Evocation, marked, Uncanny Dodge/Stone's Endurance as temporary HP, Lucky, Indomitable, instant Spirit Guardians, bleeding not ended by healing, untyped Sneak Attack damage |
+| 13 | Partial resolution in #112: Uncanny Dodge halves its triggering hit and healing ends Bleeding; #107 limits once-only manoeuvre riders. Other SRD approximations retained from the earlier pass: manoeuvres apply to each attack with Extra Attack, Feint, Spiritual Weapon, Empowered Evocation, marked, Stone's Endurance as temporary HP, Lucky, Indomitable, instant Spirit Guardians, untyped Sneak Attack damage |
 | 12 | Repeated error when the party spawn zone overflows; a placement level below 1 is reported against the monster file; `MaxHp` on monster or zone passives is ignored; inline monster weapons accept `replaces` |
 | 11 | statMod tooltips read awkwardly ("target gets can't act"; Task 13 fixes it); hook phrases not tested for every `HookKind`; "half damage on a save" missed for nested damage |
 | 10 | A second unit's mark replaces the first's; counterspell picks the first queued tier ≥ 1 step; `TerrainAltered.Delta` reports the requested change; negative rounds and unbounded repeat/chain counts aren't validated; zone passives with the default `other` target never fire on enter/turn start; `Battle.cs` is 444 lines |

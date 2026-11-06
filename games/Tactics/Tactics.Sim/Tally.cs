@@ -29,6 +29,11 @@ namespace Tactics.Sim;
 internal sealed class Tally(RulesPack rules)
 {
     private readonly EnvironmentTally _environment = new(rules);
+    // Pure cleanup hooks do not change the source of the containing action (e.g. a multi-target heal).
+    private readonly ImmutableSortedSet<string> _cleanupPassives = rules.Passives.Values
+        .Concat(rules.Conditions.Values.SelectMany(c => c.Passives.IsDefault ? [] : c.Passives))
+        .Where(p => !p.Effects.IsDefaultOrEmpty && p.Effects.All(e => e is RemoveEffect))
+        .Select(p => p.Id).ToImmutableSortedSet(StringComparer.Ordinal);
 
     public EnvironmentStats Environment => _environment.Snapshot();
 
@@ -36,6 +41,23 @@ internal sealed class Tally(RulesPack rules)
     {
         public string Class { get; } = cls;
         public double Damage { get; set; }
+        // Each own turn accumulates all its hits on each victim, including effects that tick off-turn.
+        public List<SortedDictionary<UnitId, double>> DamageTurns { get; } = [];
+        private int _lastOwnRound;
+        public void NewDamageTurn(int round)
+        {
+            if (_lastOwnRound == round) return; // a delayed turn resumes the same turn
+            if (_lastOwnRound != 0 || DamageTurns.Count == 0) DamageTurns.Add([]);
+            _lastOwnRound = round;
+        }
+        public void RecordDamage(UnitId target, int lost)
+        {
+            if (lost <= 0) return;
+            if (DamageTurns.Count == 0) DamageTurns.Add([]); // pre-turn reactions join the first own turn
+            var turn = DamageTurns[^1];
+            turn[target] = turn.GetValueOrDefault(target) + lost;
+        }
+        public double TargetDamage => DamageTurns.Sum(t => t.Count == 0 ? 0 : t.Values.Average());
         public double Healing { get; set; }
         public double Taken { get; set; }
         public int MissedBy { get; set; }
@@ -105,6 +127,7 @@ internal sealed class Tally(RulesPack rules)
                 (_source, _hitTarget) = (null, null);
                 break;
             case TurnStarted t:
+                if (_members.TryGetValue(t.Unit, out var starter)) starter.NewDamageTurn(t.Round);
                 (_source, _hitTarget) = (t.Unit, null);
                 break;
             case TurnSkipped skipped:
@@ -130,7 +153,8 @@ internal sealed class Tally(RulesPack rules)
             case PassiveTriggered passive:
                 // A hook on a hit (sneak attack) still belongs to that hit; a zone's or condition's effects belong to
                 // whoever cast the zone or applied the condition, not the unit standing in it or carrying it.
-                _source = passive.Source ?? passive.Owner;
+                if (!_cleanupPassives.Contains(passive.Passive))
+                    _source = passive.Source ?? passive.Owner;
                 break;
             case AttackResolved attack:
                 _source = attack.Source;
@@ -192,7 +216,10 @@ internal sealed class Tally(RulesPack rules)
                 _hostileHitDamage += lost + absorbed;
         }
         if (by is { } dealer && _members.TryGetValue(dealer, out var member) && Hostile(dealer, unit))
+        {
             member.Damage += lost;
+            member.RecordDamage(unit, lost);
+        }
     }
 
     private void EndTurn()
@@ -218,7 +245,8 @@ internal sealed class Tally(RulesPack rules)
                 DamagePerRound: g.Sum(m => m.Damage) / n / rounds,
                 HealingPerRound: g.Sum(m => m.Healing) / n / rounds,
                 MitigatedPerRound: g.Sum(m => m.Taken + m.MissedBy * perHit) / n / rounds,
-                TurnsDenied: (double)g.Sum(m => m.Denied) / n));
+                TurnsDenied: (double)g.Sum(m => m.Denied) / n,
+                TargetDamagePerRound: g.Sum(m => m.TargetDamage) / n / rounds));
         }));
     }
 

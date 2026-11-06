@@ -126,6 +126,8 @@ internal static class TooltipText
             clauses.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
         if (mods.MaxHp != 0)
             clauses.Add($"{Signed(mods.MaxHp)} max HP");
+        if (mods.MaxHpPercent != 0)
+            clauses.Add($"{Signed(mods.MaxHpPercent)}% max HP");
         return clauses;
     }
 
@@ -156,6 +158,8 @@ internal static class TooltipText
             numbers.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
         if (mods.MaxHp != 0)
             numbers.Add($"{Signed(mods.MaxHp)} max HP");
+        if (mods.MaxHpPercent != 0)
+            numbers.Add($"{Signed(mods.MaxHpPercent)}% max HP");
 
         List<string> parts = [];
         if (numbers.Count > 0)
@@ -233,8 +237,12 @@ internal static class TooltipText
             parts.Add(($"you attack with a {string.Join(" or ", when.Weapon)} weapon", false));
         if (when.Advantage is { } advantage)
             parts.Add((advantage ? "you have advantage" : "you don't have advantage", false));
+        if (when.Disadvantage is { } disadvantage)
+            parts.Add((disadvantage ? "you have disadvantage" : "you don't have disadvantage", false));
         if (when.Flanked is { } flanked)
             parts.Add((flanked ? "you are flanking the target" : "you aren't flanking the target", false));
+        if (when.AllyBesideTarget is { } beside)
+            parts.Add((beside ? "an ally is next to the target" : "no ally is next to the target", false));
         if (when.TargetHasCondition is { } condition)
             parts.Add(($"the target is {Condition(condition, rules)}", false));
         if (when.HpBelow is { } hp)
@@ -253,6 +261,8 @@ internal static class TooltipText
             parts.Add((roundEven ? "the round is even" : "the round is odd", false));
         if (when.RoundAtLeast is { } roundAtLeast)
             parts.Add(($"the round is at least {roundAtLeast}", false));
+        if (when.Seen is { } seen)
+            parts.Add((seen ? "you are in plain view" : "you aren't in plain view", false));
 
         if (parts.Count == 0)
             return "always";

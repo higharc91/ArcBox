@@ -165,4 +165,12 @@ public sealed class MartialClassTests
         Assert.Equal(2, roll.Result.D20s.Length); // advantage rolls 2d20
         Assert.Contains(struck.Events, e => e == new PassiveTriggered(U("pal"), "avenger.vengeful_strikes"));
     }
+
+    [Fact]
+    public void Vow_of_enmitys_tooltip_names_its_advantage_once()
+    {
+        // #108: the mark's own text says what it gives; the flavour doesn't say it again.
+        var text = Tooltips.For(Rules.Abilities[new AbilityId("avenger.vow_of_enmity")], 6, Rules);
+        Assert.Single(System.Text.RegularExpressions.Regex.Matches(text, "advantage"));
+    }
 }

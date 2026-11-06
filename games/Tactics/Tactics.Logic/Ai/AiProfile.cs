@@ -20,8 +20,22 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
     public static AiProfile Default { get; } = new("default", Damage: 1.0, Kill: 1.5, Control: 0.5, Heal: 1.0, Revive: 1.5,
         Caution: 0.4, FocusFire: 0.5, Objective: 1.0, Hoard: 0.3, Cruel: false, FleeBelowHp: 0);
 
+    /// <summary>
+    /// The id of the profile a party member plays for the class roles <paramref name="roles"/> (a class's <c>aiTags</c>): <c>healer</c>
+    /// for a healer, <c>controller</c> or <c>guardian</c> for those explicit specialist tags, <c>caster</c> for a general
+    /// caster or control class, <c>archer</c> for another ranged class, <c>skirmisher</c> for a
+    /// striker, <c>brute</c> otherwise. The simulator plays it, and the companion derives its weights from it.
+    /// </summary>
+    public static string IdForRoles(IReadOnlyCollection<string> roles) => roles.Contains("controller") ? "controller"
+        : roles.Contains("guardian") ? "guardian"
+        : roles.Contains("healer") ? "healer"
+        : roles.Contains("caster") || roles.Contains("control") ? "caster"
+        : roles.Contains("ranged") ? "archer"
+        : roles.Contains("striker") ? "skirmisher"
+        : "brute";
+
     /// <summary>The weights of a content profile.</summary>
-    public static AiProfile From(AiProfileDef def) => new(def.Id, def.Damage, def.Kill, def.Control, def.Heal, def.Revive,
+    public static AiProfile From(AiProfileDef def, int level = 1) => new(def.Id, def.Damage, def.Kill, def.ControlByLevel?.At(level) ?? def.Control, def.Heal, def.Revive,
         def.Caution, def.FocusFire, def.Objective, def.Hoard, def.Cruel, def.FleeBelowHp);
 
     /// <summary>
@@ -47,7 +61,7 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
     {
         var u = state.Units[unit];
         var id = overrideId ?? (u.Controller as AiControlled)?.Profile ?? u.Sheet.AiProfile;
-        var profile = id is not null && rules.AiProfiles.TryGetValue(id, out var def) ? From(def)
+        var profile = id is not null && rules.AiProfiles.TryGetValue(id, out var def) ? From(def, u.Sheet.Level)
             : Default with { Id = id ?? Default.Id };
         if (Companion.Is(profile))
             profile = Companion.Weigh(profile, u, rules);

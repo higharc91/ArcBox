@@ -6,11 +6,12 @@ namespace Tactics.Logic;
 /// What an action is expected to do to one unit (spec §5.2 step 4), computed from the effect blocks with no dice rolled:
 /// the distribution of the damage it takes, the HP it is expected to be healed and given as temporary HP, the chance it
 /// gets up from Downed, the expected change to how well it fights (<see cref="Offense"/>) and how well it holds up
-/// (<see cref="Defense"/>), both in turns' worth (−1 is a lost turn), the tiles it is pushed and the expected damage that
-/// bounces on to its side (<see cref="Splash"/>).
+/// (<see cref="Defense"/>), both in turns' worth (−1 is a lost turn), the tiles it is pushed, the expected damage that
+/// bounces on to its side (<see cref="Splash"/>) and the chance it is given a ward that stands it back up when it is Downed
+/// (<see cref="Ward"/>: Death Ward).
 /// </summary>
 internal sealed record Outcome(DamageDist Damage, double Heal = 0, double TempHp = 0, double Revive = 0, double Offense = 0,
-    double Defense = 0, double Push = 0, double Splash = 0)
+    double Defense = 0, double Push = 0, double Splash = 0, double Ward = 0)
 {
     /// <summary>Nothing happens.</summary>
     public static Outcome None { get; } = new(DamageDist.Zero);
@@ -18,14 +19,14 @@ internal sealed record Outcome(DamageDist Damage, double Heal = 0, double TempHp
     /// <summary>Both happen, independently: the damage adds up.</summary>
     public Outcome Then(Outcome next) => ReferenceEquals(next, None) ? this : ReferenceEquals(this, None) ? next : new(
         Damage.Plus(next.Damage), Heal + next.Heal, TempHp + next.TempHp, 1 - (1 - Revive) * (1 - next.Revive),
-        Offense + next.Offense, Defense + next.Defense, Push + next.Push, Splash + next.Splash);
+        Offense + next.Offense, Defense + next.Defense, Push + next.Push, Splash + next.Splash, 1 - (1 - Ward) * (1 - next.Ward));
 
     /// <summary>One of several outcomes, each with its probability (they add up to 1).</summary>
     public static Outcome Mix(IReadOnlyList<(double Weight, Outcome Outcome)> parts)
     {
         double W(Func<Outcome, double> f) => parts.Sum(p => p.Weight * f(p.Outcome));
         return new(DamageDist.Mix([.. parts.Select(p => (p.Weight, p.Outcome.Damage))]), W(o => o.Heal), W(o => o.TempHp),
-            W(o => o.Revive), W(o => o.Offense), W(o => o.Defense), W(o => o.Push), W(o => o.Splash));
+            W(o => o.Revive), W(o => o.Offense), W(o => o.Defense), W(o => o.Push), W(o => o.Splash), W(o => o.Ward));
     }
 }
 
@@ -45,6 +46,12 @@ internal sealed class Strike(BattleWriter w, UnitState user, AbilityDef? ability
     public HashSet<string> Fired { get; } = new(StringComparer.Ordinal);
     public HashSet<ConditionId> Quarrying { get; } = [];
     public bool ProjectingDamageTaken { get; set; }
+
+    /// <summary>
+    /// Set, the next attack roll walked is taken as a hit (true) or a miss (false) instead of weighed by its odds; walking it
+    /// clears this (see <see cref="Scorer.StrikeOutcomes"/>).
+    /// </summary>
+    public bool? Force { get; set; }
     public EffectContext Context { get; } = new(w, w.Rules, user.Id, null, aim, ability);
 }
 
