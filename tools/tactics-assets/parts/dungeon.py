@@ -3333,7 +3333,7 @@ def _gif() -> None:
         probe.paste(frames[k], (0, n * frames[0].height))
     pal = probe.quantize(colors=255, method=Image.Quantize.MEDIANCUT)
     gif = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
-    gif[0].save(PREVIEWS / "anim-dungeon.gif", save_all=True, append_images=gif[1:], duration=110, loop=0,
+    save(gif[0], PREVIEWS / "anim-dungeon.gif", save_all=True, append_images=gif[1:], duration=110, loop=0,
                 optimize=True)
 
 

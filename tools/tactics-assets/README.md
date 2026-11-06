@@ -5,14 +5,22 @@ over a small set of parts. Re-running the build gives byte-identical output, so 
 when the art does.
 
 ```bash
-python3 tools/tactics-assets/build.py               # every set
-python3 tools/tactics-assets/build.py characters    # one set
+python3 tools/tactics-assets/build.py                    # content sets, no review images
+python3 tools/tactics-assets/build.py characters         # one content set
+python3 tools/tactics-assets/build.py previews           # content sets and review images
+python3 tools/tactics-assets/build.py previews terrain   # one set and its review images
 ```
 
 | Output | What |
 |---|---|
 | `content/tactics/base/…` | What the game loads (served by the content-pack endpoints, cached by the TV's `ContentCache`) |
-| `tools/tactics-assets/previews/*.png` | Contact sheets for review |
+| `tools/tactics-assets/previews/*` | Review sheets and animated previews, generated only by `build.py previews` |
+| `docs/superpowers/mockups/tactics/assets/*` | Review mockups, generated only by `build.py previews` |
+
+The existing tracked preview images linked throughout this README remain available; new review output is ignored.
+Concept and provenance art lives in `tools/tactics-assets/concepts/` and `tools/tactics-assets/imagegen/`;
+the runtime pack lives in `content/tactics/base/`. See [the storage proposal](../../docs/tactics-asset-storage-proposal.md)
+for measured sizes and migration choices.
 
 Needs Python 3.11+ with Pillow and numpy. `dev_preview.py` and `dev_zoom.py` are quick-look helpers used while
 drawing.

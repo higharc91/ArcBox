@@ -2919,6 +2919,6 @@ def build() -> None:
     save(iso.finish(_scene_img(interior_scene(), "dusk", margin=110)), PREVIEWS / "24-town-interior.png")
     save(iso.finish(_scene_img(kit_scene(), "day", margin=110)), PREVIEWS / "24-town-kit.png")
     frames = [iso.finish(render_market(k), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE) for k in range(8)]
-    frames[0].save(PREVIEWS / "anim-town.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
+    save(frames[0], PREVIEWS / "anim-town.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
     from . import lore_places
     lore_places.export(PACK, families=("town",))

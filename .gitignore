@@ -499,3 +499,6 @@ tools/tactics-world/regions/_sample.tscn
 
 # Cached, reproducible measurements of unchanged voice clips
 .cache/tactics-voice-features.json
+
+# New review output; existing linked previews stay tracked.
+tools/tactics-assets/previews/

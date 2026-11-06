@@ -450,7 +450,7 @@ def _gif(frames: list[Image.Image], path) -> None:
         bg = Image.new("RGBA", im.size, BG)
         bg.alpha_composite(im)
         imgs.append(bg.resize((im.width * 3, im.height * 3), Image.NEAREST).convert("RGB"))
-    imgs[0].save(path, save_all=True, append_images=imgs[1:], duration=1000 // 12, loop=0, optimize=True)
+    save(imgs[0], path, save_all=True, append_images=imgs[1:], duration=1000 // 12, loop=0, optimize=True)
 
 
 def font_atlas() -> tuple[Image.Image, dict]:
