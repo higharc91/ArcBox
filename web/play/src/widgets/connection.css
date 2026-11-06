@@ -1,0 +1,4 @@
+.connection-banner { position: sticky; top: 0; z-index: 100; padding: .65rem 1rem; background: #253041; color: #fff; font-size: .9rem; text-align: center; }
+.connection-banner button { margin: .5rem; }
+.session-content { border: 0; padding: 0; margin: 0; min-width: 0; }
+.session-content:disabled { opacity: .45; pointer-events: none; }

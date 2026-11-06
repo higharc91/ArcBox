@@ -8,6 +8,7 @@ export interface Transport {
   invoke<T>(method: string, ...args: unknown[]): Promise<T>;
   /** Handlers get the server's raw arguments; receivers validate them. */
   on(method: string, handler: (...args: any[]) => void): void;
+  onReconnecting(fn: () => void): void;
   onReconnected(fn: () => void): void;
   onClose(fn: (err?: Error) => void): void;
   readonly connected: boolean;
@@ -32,6 +33,7 @@ export function signalrTransport(url: string): Transport {
     stop: () => connection.stop(),
     invoke: <T>(method: string, ...args: unknown[]) => connection.invoke<T>(method, ...args),
     on: (method, handler) => connection.on(method, handler),
+    onReconnecting: (fn) => connection.onreconnecting(() => fn()),
     onReconnected: (fn) => connection.onreconnected(() => fn()),
     onClose: (fn) => connection.onclose((err) => fn(err)),
     get connected() {

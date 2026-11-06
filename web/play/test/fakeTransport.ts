@@ -12,6 +12,7 @@ export class FakeTransport implements Transport {
   responders: Record<string, (...args: unknown[]) => unknown> = {};
   failStart: Error | null = null;
   private handlers = new Map<string, Handler[]>();
+  private reconnecting: (() => void)[] = [];
   private reconnected: (() => void)[] = [];
   private closed: ((err?: Error) => void)[] = [];
 
@@ -32,6 +33,7 @@ export class FakeTransport implements Transport {
   on(method: string, handler: Handler): void {
     this.handlers.set(method, [...(this.handlers.get(method) ?? []), handler]);
   }
+  onReconnecting(fn: () => void): void { this.reconnecting.push(fn); }
   onReconnected(fn: () => void): void {
     this.reconnected.push(fn);
   }
@@ -42,6 +44,10 @@ export class FakeTransport implements Transport {
   // ------------------------------------------------ test helpers
   fire(method: string, ...args: unknown[]): void {
     for (const h of this.handlers.get(method) ?? []) h(...args);
+  }
+  fireReconnecting(): void {
+    this.connected = false;
+    for (const f of this.reconnecting) f();
   }
   fireReconnected(): void {
     this.connected = true;

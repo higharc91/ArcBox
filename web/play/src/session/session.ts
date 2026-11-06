@@ -22,14 +22,15 @@ import type { Transport } from "./transport";
 
 export type { Transport } from "./transport";
 
-export type SessionState =
+export type ConnectionStatus = { since: number; attempts: number } | "recovered";
+export type SessionState = (
   | { screen: "join"; code?: string; name?: string; error?: string; busy?: boolean }
   | { screen: "connecting" }
   | { screen: "pick"; peek: RoomPeek; showAll?: boolean; error?: string; busy?: boolean }
   | { screen: "lobby"; lobby: LobbyState; me: PlayerId; error?: string }
   | { screen: "game"; view: ControllerView; lobby: LobbyState; me: PlayerId }
   | { screen: "results"; results: GameResults; lobby: LobbyState; me: PlayerId }
-  | { screen: "closed"; reason: string };
+  | { screen: "closed"; reason: string }) & { connection?: ConnectionStatus };
 
 const OFFLINE = "Can't reach the server. Check your connection and try again.";
 const KICKED = "You were removed from the room.";
@@ -77,6 +78,8 @@ export class Session {
   private rejoining: Promise<boolean> | null = null;
   private retryTimer: ReturnType<typeof setTimeout> | null = null;
   private retryAttempt = 0;
+  private connection: ConnectionStatus | undefined;
+  private recoveredTimer: ReturnType<typeof setTimeout> | undefined;
   private touchPending = false;
   private inFlight = new Set<string>();
 
@@ -90,6 +93,7 @@ export class Session {
     transport.on(ClientMethods.GameEnded, (results: unknown) => this.onGameEnded(results));
     transport.on(ClientMethods.RoomClosed, (reason: unknown) => this.close(typeof reason === "string" && reason ? reason : "The room has closed."));
     transport.on(ClientMethods.Kicked, () => this.close(KICKED));
+    transport.onReconnecting(() => this.markReconnecting());
     transport.onReconnected(() => void this.rejoin());
     transport.onClose(() => this.onConnectionLost());
   }
@@ -214,7 +218,10 @@ export class Session {
     await this.rejoin();
   }
 
+  async retryConnection(): Promise<void> { await this.rejoin(); }
+
   async send(viewId: string, payload: object): Promise<void> {
+    if (!this.transport.connected || (this.connection && this.connection !== "recovered")) return;
     try {
       await this.transport.invoke("SendInput", viewId, payload);
     } catch {
@@ -243,6 +250,7 @@ export class Session {
   }
 
   dispose(): void {
+    clearTimeout(this.recoveredTimer);
     this.clearRetry();
     this.listeners.clear();
   }
@@ -260,10 +268,16 @@ export class Session {
     if (!code || !seat || this.closedReason !== null) return false;
     this.clearRetry();
     try {
+      if (!this.transport.connected) this.markReconnecting();
       if (!this.transport.connected) await this.transport.start();
       await this.transport.invoke("Rejoin", code, seat.playerId, seat.secret);
       this.me = seat.playerId;
       this.retryAttempt = 0;
+      if (this.connection) {
+        this.connection = "recovered";
+        clearTimeout(this.recoveredTimer);
+        this.recoveredTimer = setTimeout(() => { this.connection = undefined; this.set(this.state); }, 3000);
+      }
       if (this.lobby) this.render();
       return true;
     } catch (err) {
@@ -274,7 +288,7 @@ export class Session {
         await this.open(code, serverMessage(err));
         return false;
       }
-      this.set({ screen: "connecting" });
+      this.markReconnecting();
       this.scheduleRetry();
       return true;
     }
@@ -282,16 +296,27 @@ export class Session {
 
   private onConnectionLost(): void {
     if (this.closedReason !== null || !this.code || !loadSeat(this.store, this.code, this.slot)) return;
-    this.set({ screen: "connecting" });
+    this.markReconnecting();
     this.scheduleRetry();
+  }
+
+  private markReconnecting(): void {
+    if (this.closedReason !== null || !this.code || !loadSeat(this.store, this.code, this.slot)) return;
+    clearTimeout(this.recoveredTimer);
+    if (!this.connection || this.connection === "recovered") this.connection = { since: Date.now(), attempts: 0 };
+    this.set(this.state);
   }
 
   private scheduleRetry(): void {
     this.clearRetry();
     this.retryAttempt++;
+    if (this.connection && this.connection !== "recovered") {
+      this.connection = { ...this.connection, attempts: this.retryAttempt };
+      this.set(this.state);
+    }
     this.retryTimer = setTimeout(() => {
       this.retryTimer = null;
-      if (!this.transport.connected) void this.rejoin();
+      void this.rejoin();
     }, backoffDelays(this.retryAttempt));
   }
 
@@ -371,6 +396,7 @@ export class Session {
   }
 
   private async lobbyCall<T = unknown>(method: string, arg?: unknown, onResult?: (result: T) => void): Promise<void> {
+    if (!this.transport.connected || (this.connection && this.connection !== "recovered")) return;
     if (this.inFlight.has(method)) return; // a double tap
     this.inFlight.add(method);
     try {
@@ -427,6 +453,8 @@ export class Session {
   }
 
   private reset(): void {
+    clearTimeout(this.recoveredTimer);
+    this.connection = undefined;
     this.clearRetry();
     this.me = null;
     this.lobby = null;
@@ -448,7 +476,8 @@ export class Session {
   }
 
   private set(state: SessionState): void {
-    this.state = state;
-    for (const fn of this.listeners) fn(state);
+    const { connection: _, ...screen } = state;
+    this.state = this.connection ? { ...screen, connection: this.connection } : screen;
+    for (const fn of this.listeners) fn(this.state);
   }
 }
