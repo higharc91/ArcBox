@@ -1,5 +1,11 @@
 # ArcBox Tactics
 
+## Check the repository
+
+From the repository root, run `bash tools/check-all.sh --full` to reproduce CI, or `bash tools/check-all.sh --fast` while iterating. The full mode builds and tests the .NET solution; fast mode runs the Tactics logic and game tests. Both modes run the phone tests and TypeScript build, Node playtest tool tests, Python asset and audio tests, and the lore validator and tests. The script prints a pass/fail line for each group and exits nonzero if any fails. Install .NET 10, Node 22, Python 3.13 with Pillow and numpy, and npm dependencies are installed by the script.
+
+The .NET group guards `games/`, `src/`, and the Tactics content consumed by their tests. The phone group guards `web/play/`; the Node group guards `tools/tactics-playtest/`; and the Python group guards `tools/tactics-assets/`, `tools/tactics-audio/`, and `content/tactics/base/lore/` through `tools/tactics-lore/`. The Godot TV end-to-end runner, `tools/tv-e2e.sh`, is a separate manual check.
+
 ArcBox Tactics is a turn-based tactical battle game for the ArcBox party platform. `Tactics.Logic` is its rules engine: a deterministic, pure C# library (no clock, no `System.Random`, sorted collections only) that takes a battle state and a command and returns the new state and the events that happened, so every battle can be replayed from its seed. `Tactics.Logic.Tests` covers it, and `Tactics.Sim` balance-tests the content: it plays every encounter with sampled AI parties, AI on both sides, and writes a Markdown report (the latest is in `docs/superpowers/reports/`):
 
 ```
