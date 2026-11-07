@@ -1,4 +1,4 @@
-> Status: Paladin native review and full local verification complete; awaiting owner approval before its PR or Bard.
+> Status: Owner-approved; PR #259 is open against combat-vfx-druid for the owner merge.
 
 # Paladin — #247
 
@@ -36,4 +36,4 @@ Container medians measure relative software-render performance. Real-hardware 16
 
 ## Approval boundary
 
-Paladin's PR and Bard wait for explicit Paladin approval under [#247](https://github.com/higharc91/ArcBox/issues/247). No later class has started. The owner merges approved PRs.
+The owner approved Paladin with ‘ok look good, on to the next class’. PR #259 is open against combat-vfx-druid. Bard is next; the owner merges approved PRs.

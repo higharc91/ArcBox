@@ -11,7 +11,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Recommended",
+        "unavailableReason": null
       },
       {
         "id": "river_crossing",
@@ -20,7 +22,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Recommended",
+        "unavailableReason": null
       },
       {
         "id": "forest_ruins",
@@ -29,7 +33,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "crypt_hall",
@@ -38,7 +44,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "warlord_bridge",
@@ -47,7 +55,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "crystal_cave",
@@ -56,7 +66,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "rime_tower",
@@ -65,7 +77,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "keep_gate",
@@ -74,7 +88,9 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       },
       {
         "id": "hall_of_the_flame",
@@ -83,10 +99,13 @@
         "min": 4,
         "max": 6,
         "fits": true,
-        "companions": 0
+        "companions": 0,
+        "guidance": "Higher level",
+        "unavailableReason": null
       }
     ],
-    "canWalk": false
+    "canWalk": false,
+    "partyLevel": 1
   },
   "viewId": "v1",
   "deadlineUtc": null,

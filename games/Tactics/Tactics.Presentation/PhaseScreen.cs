@@ -118,8 +118,8 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
         return screen with
         {
             Meta = $"Encounter pick · {Count(encounters.Length, "battle")}",
-            Rows = [.. encounters.Select(e => new ScreenRow(e.Name, PartyLine(e), e.Fits ? null : "PARTY TOO BIG",
-                $"Lv {(e.Level is { } level ? level.ToString(CultureInfo.InvariantCulture) : "?")}", !e.Fits))],
+            Rows = [.. encounters.Select(e => new ScreenRow(e.Name, PartyLine(e), e.UnavailableReason ?? e.Guidance ?? EncounterOption.GuidanceFor(e.Level, view.PartyLevel),
+                e.Level is { } level ? $"Lv {level.ToString(CultureInfo.InvariantCulture)}" : "Unrated", !e.Fits))],
             Empty = encounters.IsEmpty ? "No battles to choose from" : null,
         };
     }

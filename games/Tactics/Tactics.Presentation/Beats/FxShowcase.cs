@@ -52,7 +52,7 @@ public static class FxShowcase
                 rows.TryAdd(parent.Subclass + ":" + proc.Id,
                     new(proc.Id, "Death Ward Rescue", parent.Level, parent.Subclass, "proc", "none", null));
         }
-        if (cls is "druid" or "paladin")
+        if (cls is "druid" or "paladin" or "bard")
             foreach (var parent in rows.Values.Where(r => r.Kind == "ability").ToArray())
                 foreach (var proc in rules.Abilities[new(parent.Id)].Effects.OfType<ZoneEffect>().SelectMany(z => z.Passives))
                     rows.TryAdd(parent.Subclass + ":" + proc.Id,
@@ -205,7 +205,7 @@ public static class FxShowcase
             }
             throw new InvalidOperationException("The real lethal hit did not trigger Death Ward.");
         }
-        if (cls is "druid" or "paladin" && !rules.Passives.ContainsKey(feature.Id))
+        if (cls is "druid" or "paladin" or "bard" && !rules.Passives.ContainsKey(feature.Id))
             return Sample(cls, rules.Abilities.Single(pair=>pair.Value.Effects.OfType<ZoneEffect>().Any(z=>z.Passives.Any(p=>p.Id==feature.Id))).Key, feature.Level, rules, sequence,
                 feature.Subclass, realistic: true, zoneProc: feature.Id) with { Id = feature.Id, Name = feature.Name };
         var passive = rules.Passives[feature.Id];
@@ -252,8 +252,9 @@ public static class FxShowcase
         }
         else
         {
+            var resource=cls=="bard"?"inspiration":"pact";
             state = state with { Units = state.Units.SetItem(hero, state.Units[hero] with
-                { Resources = state.Units[hero].Resources.SetItem("pact", Math.Max(0, state.Units[hero].Resources["pact"] - 1)) }) };
+                { Resources = state.Units[hero].Resources.SetItem(resource, Math.Max(0, state.Units[hero].Resources[resource] - 1)) }) };
             before = ShowcaseView(state, map, []);
             for (var step = 0; step < 12; step++)
             {
@@ -300,8 +301,8 @@ public static class FxShowcase
         if (passive is not null) sheet = sheet with { Passives = [passive] };
         if (needsHex) sheet = sheet with { Abilities = [abilityId, new("warlock.hex")] };
         if(paladinPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(paladinPreparation)] };
-        var friendly = (cls is "cleric" or "druid" or "paladin") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
-            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
+        var friendly = (cls is "cleric" or "druid" or "paladin" or "bard") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
+            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" or "bard" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
         var melee = weaponFollowThrough || formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
@@ -329,7 +330,7 @@ public static class FxShowcase
             var revive = ability.Effects.Any(e => e is ReviveEffect) || ability.Target.Kind == TargetKind.DownedAlly;
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Value.Sheet.Side != Side.Party ? kv.Value : kv.Value with
-                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" ? 3 : 2)),
+                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" or "bard" ? 3 : 2)),
                     Life = revive && kv.Key != caster ? LifeState.Downed : LifeState.Up,
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
@@ -359,8 +360,10 @@ public static class FxShowcase
             state = state with { Units = state.Units.SetItem(new("hero2"), state.Units[new("hero2")] with { Hp = 1 }) };
         var conditions = abilityId.Value switch
         {
-            "cleric.lesser_restoration" or "druid.lesser_restoration" or "paladin.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
-            "cleric.greater_restoration" or "druid.greater_restoration" or "cleric.divine_intervention" => new[] {"poisoned", "charmed", "frightened"},
+            "cleric.lesser_restoration" or "druid.lesser_restoration" or "paladin.lesser_restoration" or "bard.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
+            "cleric.greater_restoration" or "druid.greater_restoration" or "cleric.divine_intervention" or "bard.greater_restoration" => new[] {"poisoned", "charmed", "frightened"},
+            "bard.countercharm" => new[]{"charmed","frightened"},
+            "bard.heroism" => new[]{"frightened"},
             _ => Array.Empty<string>()
         };
         if (conditions.Length > 0)
@@ -384,11 +387,12 @@ public static class FxShowcase
                 if (state.Active == caster) break;
             }
         }
-        if (abilityId.Value == "druid.dispel_magic")
+        if (abilityId.Value is "druid.dispel_magic" or "bard.dispel_magic")
         {
+            var zoneSpell=cls=="bard"?"bard.silence":"druid.entangle";
             state = state with { Units = state.Units.SetItem(caster, state.Units[caster] with
-                { Sheet = state.Units[caster].Sheet with { Abilities = [abilityId,new("druid.entangle")] } }) };
-            var prepared = Battle.Apply(state,new Use(caster,new("druid.entangle"),new Target(Tile: target)),rules);
+                { Sheet = state.Units[caster].Sheet with { Abilities = [abilityId,new(zoneSpell)] } }) };
+            var prepared = Battle.Apply(state,new Use(caster,new(zoneSpell),new Target(Tile: target)),rules);
             if (prepared.Rejected is not null) throw new InvalidOperationException("Could not prepare the real Entangle zone.");
             state = prepared.State;
             do { state = Battle.Apply(state,new EndTurn(state.Active!.Value),rules).State; } while (state.Active != caster);
@@ -510,7 +514,7 @@ public static class FxShowcase
         var defender = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember", "human", cls, subclass, level, rules), rules)
             with { InitiativeBonus = 0, Sprite = "characters.class_" + cls, Abilities = [ability.Id] };
         var trigger = spell ? new AbilityId("wizard.fireball") : RulesPack.CommonAttack.Id;
-        var attacker = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Threat", "human", spell ? "wizard" : "fighter", null, spell ? 5 : cls is "warlock" or "cleric" or "paladin" ? 3 : 10, rules), rules)
+        var attacker = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Threat", "human", spell ? "wizard" : "fighter", null, spell ? 5 : cls is "warlock" or "cleric" or "paladin" or "bard" ? 3 : 10, rules), rules)
             with { Side = Side.Enemy, InitiativeBonus = 100, Abilities = [trigger], Sprite = "characters.class_" + (spell ? "wizard" : "fighter") };
         var setup = new BattleSetup(map,
             [new(hero, defender, new PlayerControlled(new("preview")), new(3, 5), []),

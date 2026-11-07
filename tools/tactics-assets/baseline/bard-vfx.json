@@ -1,0 +1,130 @@
+{
+  "bard.bardic_inspiration": {
+    "anim": "characters.buff",
+    "fx": "fx.inspire.gold"
+  },
+  "bard.song_of_rest": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "bard.countercharm": {
+    "anim": "characters.pray",
+    "fx": "fx.inspire.charm"
+  },
+  "bard.vicious_mockery": {
+    "anim": "characters.talk",
+    "fx": "fx.psychic.mind"
+  },
+  "bard.thunderclap": {
+    "anim": "characters.slam",
+    "fx": "fx.thunder.thunder"
+  },
+  "bard.minor_illusion": {
+    "anim": "characters.point",
+    "fx": "fx.smoke.grey"
+  },
+  "bard.healing_word": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "bard.cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "bard.dissonant_whispers": {
+    "anim": "characters.cast",
+    "fx": "fx.psychic.dread"
+  },
+  "bard.faerie_fire": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.arcane"
+  },
+  "bard.heroism": {
+    "anim": "characters.pray",
+    "fx": "fx.inspire.gold"
+  },
+  "bard.thunderwave": {
+    "anim": "characters.slam",
+    "fx": "fx.thunder.thunder"
+  },
+  "bard.shatter": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_shatter.thunder"
+  },
+  "bard.hold_person": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.arcane"
+  },
+  "bard.lesser_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.holy"
+  },
+  "bard.silence": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.shadow"
+  },
+  "bard.hypnotic_pattern": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.arcane"
+  },
+  "bard.mass_healing_word": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "bard.dispel_magic": {
+    "anim": "characters.channel",
+    "fx": "fx.dispel.arcane"
+  },
+  "bard.greater_invisibility": {
+    "anim": "characters.buff",
+    "fx": "fx.misty.fey"
+  },
+  "bard.dimension_door": {
+    "anim": "characters.cast",
+    "fx": "fx.misty.fey"
+  },
+  "bard.hold_monster": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.arcane"
+  },
+  "bard.greater_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.holy"
+  },
+  "valor.combat_inspiration": {
+    "anim": "characters.wave",
+    "fx": "signature.valor_war_horn.brass"
+  },
+  "valor.battle_magic": {
+    "anim": "characters.attack",
+    "fx": "signature.valor_war_horn.brass"
+  },
+  "lore.cutting_words": {
+    "anim": "characters.talk",
+    "fx": "signature.lore_glyph_echo.arcane"
+  },
+  "lore.counterspell": {
+    "anim": "characters.point",
+    "fx": "signature.lore_glyph_echo.arcane"
+  },
+  "lore.magical_secrets": {
+    "anim": "characters.summon",
+    "fx": "signature.lore_glyph_echo.arcane"
+  },
+  "lore.peerless_skill": {
+    "anim": "characters.cast",
+    "fx": "signature.lore_glyph_echo.arcane"
+  },
+  "siren.alluring_verse": {
+    "anim": "characters.point",
+    "fx": "signature.siren_charm_song.charm"
+  },
+  "siren.enthralling_aria": {
+    "anim": "characters.summon",
+    "fx": "signature.siren_charm_song.charm"
+  },
+  "siren.sirens_call": {
+    "anim": "characters.summon",
+    "fx": "signature.siren_charm_song.charm"
+  }
+}

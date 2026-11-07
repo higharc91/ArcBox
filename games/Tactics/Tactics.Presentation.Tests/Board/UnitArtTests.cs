@@ -128,11 +128,12 @@ public sealed class UnitArtTests
             var cleric = preset.GetString()!.EndsWith("_cleric", StringComparison.Ordinal);
             var druid = preset.GetString()!.EndsWith("_druid",StringComparison.Ordinal);
             var paladin=preset.GetString()!.EndsWith("_paladin",StringComparison.Ordinal);
-            var count = wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : druid || paladin ? 214 : 189;
+            var bard=preset.GetString()!.EndsWith("_bard",StringComparison.Ordinal);
+            var count = wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : druid || paladin || bard ? 214 : 189;
             var last = sprite.Source(count - 1, 1);
             Assert.InRange(last.X + last.Width, 1, 3840);
-            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric || druid || paladin ? 2880 : 2560);
-            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric || druid || paladin ? 9 : 8, sprite.RowsPerDirection);
+            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric || druid || paladin || bard ? 2880 : 2560);
+            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric || druid || paladin || bard ? 9 : 8, sprite.RowsPerDirection);
             if (wizard)
                 foreach (var name in new[] { "wizard_bolt", "wizard_weave", "wizard_ward", "wizard_nova", "wizard_stomp" })
                     Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 222));
@@ -161,6 +162,10 @@ public sealed class UnitArtTests
                 foreach(var name in new[]{"paladin_oath","paladin_mercy","paladin_judgement","paladin_strike","paladin_guard"})
                     Assert.All(sprite.Anim(name).Frames,frame=>Assert.InRange(frame,189,213));
             else Assert.Same(sprite.Anim("block"),sprite.Anim("paladin_guard"));
+            if(bard)
+                foreach(var name in new[]{"bard_play","bard_verse","bard_crescendo","bard_lore","bard_valor"})
+                    Assert.All(sprite.Anim(name).Frames,frame=>Assert.InRange(frame,189,213));
+            else Assert.Same(sprite.Anim("talk"),sprite.Anim("bard_verse"));
             Assert.Equal(32, sprite.FootprintWidth);
         }
     }

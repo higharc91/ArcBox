@@ -1,4 +1,4 @@
-> Status: Paladin native review complete; awaiting owner OK before its PR or Bard. Approved PRs #251–#256 await owner merges. CI remains manually disabled.
+> Status: Bard native review complete; awaiting owner OK before its PR or Ranger. Approved PRs #251–#256 and #259 await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -178,3 +178,17 @@ The focused Paladin, UnitArt and five-party round checks pass, as do the determi
 The 37-sample native gallery is `../reports/combat-vfx/paladin/index.html`: 24 abilities, seven class procs, Consecrated Ground's heal hook, ordinary Attack, three extra undead smite cases and an actual enchanted-weapon attack. Thirty-three deterministic effects and five five-frame gestures use the existing palette/rig with matching light. Smite impacts land on victims, damage rows stay separate, and all real attack/save/proc events remain. Source/art/runtime commit `ce32913c70228e517de53c0a98f53ad78ff127a1`; inventory-test follow-up `e0b7cb8597a73fc22c895aabeb866451ea6df226`.
 
 The full local gate passes: 7,270 .NET tests (zero skipped), 549 phone/build, 24 Node, 50 asset, 9 audio and 23 lore tests, with zero build warnings. Three-run class median 20.0227 → 20.5252 ms (+2.51%, within 10%). Largest individual increase paladin.smite_damage.undead (+12.14%). Texture peak growth +19.37 MiB; shipped pack growth 0.66 MiB. Thirty Paladin-party rounds add at most 3.300/3.017/0 s Full/Auto/Off and pass the unchanged stricter limits. All 4,158 original Paladin frames and all 24 gameplay definitions/passives are preserved; other classes, original creatures, phone/fixtures, replays/goldens and audio clips stay unchanged. Hardware 16 ms and physical TV checks remain pending. Paladin stays unchecked until owner approval; its PR and Bard wait for that OK. CI remains disabled.
+
+
+## Paladin approval and Bard
+
+The owner approved Paladin with “ok look good, on to the next class”. Its #247 checkbox is ticked and PR #259 is open against `combat-vfx-druid`. Bard starts from latest main `9c7e1ab103f3126a86aa27e51c42f8e5f7053912` with approved Paladin dependency `bc0ec70efd44155a59d37f836aed462442001003`. The frozen before merge is `895e6d5ca8ca45c39a4e0a3a018a4dfc7aaac553`.
+
+Bard covers 32 abilities, Font of Inspiration, Silence's embedded turn hook, ordinary Attack and three static inventory features. Five five-frame gestures append 25 frames on all eleven race atlases. Thirty-four distinct native effects use musical notation, psychic masks, thunder fractures and college motifs with matching spell light. Illusion masks, Silence and invisibility remain unlit. Gameplay, original poses, audio clips and other classes stay unchanged. Full verification and native comparisons are in progress. Bard's PR and Ranger wait for explicit Bard approval.
+
+
+## Bard review handoff
+
+The 35-sample gallery is `../reports/combat-vfx/bard/index.html`: 32 abilities, two actual hooks and ordinary Attack, with 37 inventory rows including three static features. Thirty-four native effect sheets and five five-frame cast gestures preserve the original 4,158 frames, all gameplay fields and sounds. Source/art/runtime `9b1e30d680dd1ead9615851089258300496c2264`.
+
+The full gate passes: 7,279 .NET (zero skipped), 562 phone/build, 24 Node, 53 asset, 9 audio and 23 lore tests; zero build warnings. Three-run class median 21.1478 → 21.4184 ms (+1.28%, within 10%); largest individual valor.combat_inspiration (+8.78%). Texture peak +20.15 MiB; pack growth 0.48 MiB. All 150 completed rounds across five Bard-containing parties add at most 3.317/3.017/0 s Full/Auto/Off under unchanged strict assertions. Hardware 16 ms and physical TV checks remain pending. Bard stays unchecked; its PR and Ranger wait for explicit approval. CI remains disabled.

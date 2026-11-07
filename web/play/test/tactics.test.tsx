@@ -95,6 +95,7 @@ describe("tactics phone module", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
     fireEvent.click(screen.getByRole("button", { name: "End turn" }));
+    fireEvent.click(screen.getByRole("button", { name: /End turn\?/ }));
     expect(send).toHaveBeenLastCalledWith({ action: "endTurn" });
   });
 
