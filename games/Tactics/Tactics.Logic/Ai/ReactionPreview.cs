@@ -49,7 +49,7 @@ public static partial class Ai
         }
         var damage = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, actor.Pos, neutral: false), actor).Damage.Mean;
         var text = $"Deals about {Number(damage)} damage on average";
-        return new(text + (beforeHit ? "; the incoming hit still lands." : "; a hit isn't guaranteed."), incoming);
+        return new(text + (beforeHit ? ". Defeating the attacker can stop this hit." : "; a hit isn't guaranteed."), incoming);
     }
 
     private static string Number(double value) => value.ToString("0.#", CultureInfo.InvariantCulture);
