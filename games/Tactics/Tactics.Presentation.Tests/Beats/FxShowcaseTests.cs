@@ -38,6 +38,8 @@ public sealed class FxShowcaseTests
             if (cls.Id == "warlock")
                 expected = expected.Concat(rules.Abilities[new("warlock.hunger_of_hadar")].Effects.OfType<ZoneEffect>()
                     .SelectMany(z => z.Passives).Select(p => p.Id)).Distinct().Order();
+            if (cls.Id == "cleric")
+                expected = expected.Concat(rules.Conditions[new("death_ward")].Passives.Select(p => p.Id)).Distinct().Order();
             Assert.Equal(expected, rows.Select(r => r.Id).Distinct().Order());
             foreach (var row in rows.Where(r => r.Kind == "ability"))
             {

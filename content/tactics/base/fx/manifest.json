@@ -5481,6 +5481,1296 @@
         "frost": "warlock_hunger_of_hadar_pulse_frost.png"
       },
       "default": "frost"
+    },
+    "cleric_sacred_flame": {
+      "name": "Sacred Flame",
+      "group": "Cleric",
+      "frame": [
+        49,
+        61
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        48
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        12,
+        0
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_sacred_flame_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_toll_the_dead": {
+      "name": "Toll The Dead",
+      "group": "Cleric",
+      "frame": [
+        53,
+        32
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        26,
+        31
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        10,
+        17
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "cleric_toll_the_dead_grave.png"
+      },
+      "default": "grave"
+    },
+    "cleric_word_of_radiance": {
+      "name": "Word Of Radiance",
+      "group": "Cleric",
+      "frame": [
+        55,
+        30
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        14
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        9,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_word_of_radiance_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_resistance": {
+      "name": "Resistance",
+      "group": "Cleric",
+      "frame": [
+        39,
+        38
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        30
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        17,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_resistance_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_bless": {
+      "name": "Bless",
+      "group": "Cleric",
+      "frame": [
+        41,
+        52
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        33,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_bless_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_bane": {
+      "name": "Bane",
+      "group": "Cleric",
+      "frame": [
+        49,
+        29
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        24,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "cleric_bane_grave.png"
+      },
+      "default": "grave"
+    },
+    "cleric_cure_wounds": {
+      "name": "Cure Wounds",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_guiding_bolt": {
+      "name": "Guiding Bolt",
+      "group": "Cleric",
+      "frame": [
+        69,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_guiding_bolt_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_healing_word": {
+      "name": "Healing Word",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_healing_word_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_inflict_wounds": {
+      "name": "Inflict Wounds",
+      "group": "Cleric",
+      "frame": [
+        30,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        30
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        33,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "cleric_inflict_wounds_grave.png"
+      },
+      "default": "grave"
+    },
+    "cleric_shield_of_faith": {
+      "name": "Shield Of Faith",
+      "group": "Cleric",
+      "frame": [
+        45,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        28,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_shield_of_faith_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_command": {
+      "name": "Command",
+      "group": "Cleric",
+      "frame": [
+        51,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        45
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_command_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_aid": {
+      "name": "Aid",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_aid_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_hold_person": {
+      "name": "Hold Person",
+      "group": "Cleric",
+      "frame": [
+        49,
+        27
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        24,
+        40
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_hold_person_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_lesser_restoration": {
+      "name": "Lesser Restoration",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_lesser_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_spiritual_weapon": {
+      "name": "Spiritual Weapon",
+      "group": "Cleric",
+      "frame": [
+        71,
+        66
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        36,
+        47
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        12,
+        17
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "cleric_spiritual_weapon_force.png"
+      },
+      "default": "force"
+    },
+    "cleric_blindness": {
+      "name": "Blindness",
+      "group": "Cleric",
+      "frame": [
+        55,
+        31
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        25
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        21,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "cleric_blindness_grave.png"
+      },
+      "default": "grave"
+    },
+    "cleric_spirit_guardians": {
+      "name": "Spirit Guardians",
+      "group": "Cleric",
+      "frame": [
+        135,
+        78
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        49
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        47
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_spirit_guardians_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_mass_healing_word": {
+      "name": "Mass Healing Word",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_mass_healing_word_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_dispel_magic": {
+      "name": "Dispel Magic",
+      "group": "Cleric",
+      "frame": [
+        71,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        32
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        13,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_dispel_magic_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_bestow_curse": {
+      "name": "Bestow Curse",
+      "group": "Cleric",
+      "frame": [
+        57,
+        54
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "cleric_bestow_curse_grave.png"
+      },
+      "default": "grave"
+    },
+    "cleric_banishment": {
+      "name": "Banishment",
+      "group": "Cleric",
+      "frame": [
+        55,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        21,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_banishment_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_death_ward": {
+      "name": "Death Ward",
+      "group": "Cleric",
+      "frame": [
+        69,
+        60
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_death_ward_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_flame_strike": {
+      "name": "Flame Strike",
+      "group": "Cleric",
+      "frame": [
+        135,
+        87
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        64
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "cleric_flame_strike_fire.png"
+      },
+      "default": "fire"
+    },
+    "cleric_mass_cure_wounds": {
+      "name": "Mass Cure Wounds",
+      "group": "Cleric",
+      "frame": [
+        135,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        41
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        55
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_mass_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_greater_restoration": {
+      "name": "Greater Restoration",
+      "group": "Cleric",
+      "frame": [
+        135,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        41
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        55
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_greater_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_divine_spark": {
+      "name": "Divine Spark",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_divine_spark_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_turn_undead": {
+      "name": "Turn Undead",
+      "group": "Cleric",
+      "frame": [
+        155,
+        80
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        77,
+        39
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        19,
+        57
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_turn_undead_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_sear_undead": {
+      "name": "Sear Undead",
+      "group": "Cleric",
+      "frame": [
+        153,
+        83
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        75,
+        42
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        21,
+        54
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_sear_undead_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_divine_intervention": {
+      "name": "Divine Intervention",
+      "group": "Cleric",
+      "frame": [
+        135,
+        98
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        75
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_divine_intervention_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_preserve_life": {
+      "name": "Preserve Life",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_preserve_life_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_word_of_renewal": {
+      "name": "Word Of Renewal",
+      "group": "Cleric",
+      "frame": [
+        69,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_word_of_renewal_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_mass_revival": {
+      "name": "Mass Revival",
+      "group": "Cleric",
+      "frame": [
+        135,
+        74
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        48
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        29,
+        48
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "cleric_mass_revival_healing.png"
+      },
+      "default": "healing"
+    },
+    "cleric_guided_strike": {
+      "name": "Guided Strike",
+      "group": "Cleric",
+      "frame": [
+        69,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        36
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_guided_strike_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_war_priest": {
+      "name": "War Priest",
+      "group": "Cleric",
+      "frame": [
+        67,
+        66
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        32,
+        47
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        16,
+        17
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_war_priest_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_avatar_of_battle": {
+      "name": "Avatar Of Battle",
+      "group": "Cleric",
+      "frame": [
+        97,
+        110
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        48,
+        66
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        48,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_avatar_of_battle_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_radiance_of_the_dawn": {
+      "name": "Radiance Of The Dawn",
+      "group": "Cleric",
+      "frame": [
+        155,
+        85
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        77,
+        45
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        19,
+        51
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_radiance_of_the_dawn_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_warding_flare": {
+      "name": "Warding Flare",
+      "group": "Cleric",
+      "frame": [
+        69,
+        37
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        14,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_warding_flare_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_corona_of_light": {
+      "name": "Corona Of Light",
+      "group": "Cleric",
+      "frame": [
+        155,
+        85
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        77,
+        44
+      ],
+      "sourceFrame": [
+        192,
+        144
+      ],
+      "trim": [
+        19,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_corona_of_light_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_divine_strike": {
+      "name": "Divine Strike",
+      "group": "Cleric",
+      "frame": [
+        41,
+        42
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        22,
+        32
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        14,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_divine_strike_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_burning_luminescence": {
+      "name": "Burning Luminescence",
+      "group": "Cleric",
+      "frame": [
+        42,
+        22
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        11
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        15,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_burning_luminescence_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "cleric_death_ward_rescue": {
+      "name": "Death Ward Rescue",
+      "group": "Cleric",
+      "frame": [
+        61,
+        49
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        38
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        6,
+        10
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "cleric_death_ward_rescue_holy.png"
+      },
+      "default": "holy"
+    },
+    "cleric_guiding_bolt_shot": {
+      "name": "Guiding Bolt flight",
+      "group": "Cleric",
+      "frame": [
+        44,
+        18
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        22,
+        9
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        2,
+        7
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "cleric_guiding_bolt_shot_radiant.png"
+      },
+      "default": "radiant"
     }
   },
   "passives": {
@@ -5493,6 +6783,9 @@
     "warlock.lifedrinker": "fx.warlock_lifedrinker.grave",
     "fiendbound.companion": "fx.warlock_companion.hellfire",
     "fiendbound.dark_ones_blessing": "fx.warlock_dark_ones_blessing.hellfire",
-    "warlock.hunger_of_hadar.turn": "fx.warlock_hunger_of_hadar_pulse.frost"
+    "warlock.hunger_of_hadar.turn": "fx.warlock_hunger_of_hadar_pulse.frost",
+    "cleric.divine_strike": "fx.cleric_divine_strike.radiant",
+    "light.burning_luminescence": "fx.cleric_burning_luminescence.radiant",
+    "death_ward.save": "fx.cleric_death_ward_rescue.holy"
   }
 }
