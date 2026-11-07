@@ -4221,10 +4221,1278 @@
         "fire": "sorcerer_scorching_ray_shot_fire.png"
       },
       "default": "fire"
+    },
+    "warlock_eldritch_blast": {
+      "name": "Eldritch Blast",
+      "group": "Warlock",
+      "frame": [
+        42,
+        28
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        16
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        15,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_eldritch_blast_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_hex": {
+      "name": "Hex",
+      "group": "Warlock",
+      "frame": [
+        73,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        36,
+        26
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        12,
+        35
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_hex_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_chill_touch": {
+      "name": "Chill Touch",
+      "group": "Warlock",
+      "frame": [
+        32,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        14,
+        24
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        22,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_chill_touch_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_poison_spray": {
+      "name": "Poison Spray",
+      "group": "Warlock",
+      "frame": [
+        176,
+        56
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        30
+      ],
+      "sourceFrame": [
+        176,
+        88
+      ],
+      "trim": [
+        0,
+        14
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "venom": "warlock_poison_spray_venom.png"
+      },
+      "default": "venom"
+    },
+    "warlock_fiendish_vigor": {
+      "name": "Fiendish Vigor",
+      "group": "Warlock",
+      "frame": [
+        35,
+        38
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        17,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        19,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_fiendish_vigor_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_maddening_hex": {
+      "name": "Maddening Hex",
+      "group": "Warlock",
+      "frame": [
+        25,
+        18
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        12
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "warlock_maddening_hex_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "warlock_one_with_shadows": {
+      "name": "One With Shadows",
+      "group": "Warlock",
+      "frame": [
+        35,
+        39
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        17,
+        28
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        19,
+        18
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_one_with_shadows_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_shroud_of_shadow": {
+      "name": "Shroud Of Shadow",
+      "group": "Warlock",
+      "frame": [
+        35,
+        39
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        17,
+        28
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        19,
+        18
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_shroud_of_shadow_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_arms_of_hadar": {
+      "name": "Arms Of Hadar",
+      "group": "Warlock",
+      "frame": [
+        158,
+        92
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        76,
+        52
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        36,
+        40
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_arms_of_hadar_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_armor_of_agathys": {
+      "name": "Armor Of Agathys",
+      "group": "Warlock",
+      "frame": [
+        59,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        33
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        19,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "warlock_armor_of_agathys_frost.png"
+      },
+      "default": "frost"
+    },
+    "warlock_hellish_rebuke": {
+      "name": "Hellish Rebuke",
+      "group": "Warlock",
+      "frame": [
+        63,
+        37
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        25
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_hellish_rebuke_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_witch_bolt": {
+      "name": "Witch Bolt",
+      "group": "Warlock",
+      "frame": [
+        176,
+        33
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        19
+      ],
+      "sourceFrame": [
+        176,
+        88
+      ],
+      "trim": [
+        0,
+        25
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "warlock_witch_bolt_storm.png"
+      },
+      "default": "storm"
+    },
+    "warlock_shatter": {
+      "name": "Shatter",
+      "group": "Warlock",
+      "frame": [
+        165,
+        101
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        82,
+        50
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        30,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "warlock_shatter_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "warlock_misty_step": {
+      "name": "Misty Step",
+      "group": "Warlock",
+      "frame": [
+        48,
+        66
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "warlock_misty_step_mist.png"
+      },
+      "default": "mist"
+    },
+    "warlock_hold_person": {
+      "name": "Hold Person",
+      "group": "Warlock",
+      "frame": [
+        70,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_hold_person_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_darkness": {
+      "name": "Darkness",
+      "group": "Warlock",
+      "frame": [
+        165,
+        93
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        82,
+        46
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        30,
+        46
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_darkness_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_hunger_of_hadar": {
+      "name": "Hunger Of Hadar",
+      "group": "Warlock",
+      "frame": [
+        165,
+        93
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        82,
+        46
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        30,
+        46
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "void": "warlock_hunger_of_hadar_void.png"
+      },
+      "default": "void"
+    },
+    "warlock_counterspell": {
+      "name": "Counterspell",
+      "group": "Warlock",
+      "frame": [
+        55,
+        35
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        21,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "warlock_counterspell_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "warlock_vampiric_touch": {
+      "name": "Vampiric Touch",
+      "group": "Warlock",
+      "frame": [
+        49,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_vampiric_touch_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_blight": {
+      "name": "Blight",
+      "group": "Warlock",
+      "frame": [
+        170,
+        93
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        84,
+        50
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        28,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_blight_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_dimension_door": {
+      "name": "Dimension Door",
+      "group": "Warlock",
+      "frame": [
+        48,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        20
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "warlock_dimension_door_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "warlock_shadow_of_moil": {
+      "name": "Shadow Of Moil",
+      "group": "Warlock",
+      "frame": [
+        67,
+        48
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        33
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_shadow_of_moil_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_synaptic_static": {
+      "name": "Synaptic Static",
+      "group": "Warlock",
+      "frame": [
+        158,
+        85
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        74,
+        44
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        38,
+        48
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "warlock_synaptic_static_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "warlock_hold_monster": {
+      "name": "Hold Monster",
+      "group": "Warlock",
+      "frame": [
+        70,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "shadow": "warlock_hold_monster_shadow.png"
+      },
+      "default": "shadow"
+    },
+    "warlock_hexblades_curse": {
+      "name": "Hexblades Curse",
+      "group": "Warlock",
+      "frame": [
+        70,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hex": "warlock_hexblades_curse_hex.png"
+      },
+      "default": "hex"
+    },
+    "warlock_cursed_slash": {
+      "name": "Cursed Slash",
+      "group": "Warlock",
+      "frame": [
+        92,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        44,
+        43
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        4,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_cursed_slash_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_armor_of_hexes": {
+      "name": "Armor Of Hexes",
+      "group": "Warlock",
+      "frame": [
+        70,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        25
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hex": "warlock_armor_of_hexes_hex.png"
+      },
+      "default": "hex"
+    },
+    "warlock_hellfire_surge": {
+      "name": "Hellfire Surge",
+      "group": "Warlock",
+      "frame": [
+        151,
+        93
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        75,
+        63
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        37,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_hellfire_surge_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_hurl_through_hell": {
+      "name": "Hurl Through Hell",
+      "group": "Warlock",
+      "frame": [
+        165,
+        98
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        82,
+        59
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        30,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_hurl_through_hell_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_rift_step": {
+      "name": "Rift Step",
+      "group": "Warlock",
+      "frame": [
+        48,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        36
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        25
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "warlock_rift_step_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "warlock_gravitational_pull": {
+      "name": "Gravitational Pull",
+      "group": "Warlock",
+      "frame": [
+        153,
+        79
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        76,
+        39
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        36,
+        53
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_gravitational_pull_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_entropic_ward": {
+      "name": "Entropic Ward",
+      "group": "Warlock",
+      "frame": [
+        48,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        41
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        20
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "warlock_entropic_ward_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "warlock_abyssal_singularity": {
+      "name": "Abyssal Singularity",
+      "group": "Warlock",
+      "frame": [
+        165,
+        92
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        82,
+        45
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        30,
+        47
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "warlock_abyssal_singularity_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "warlock_pact_magic": {
+      "name": "Pact Magic",
+      "group": "Warlock",
+      "frame": [
+        31,
+        33
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        24
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        21,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_pact_magic_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_hex_damage": {
+      "name": "Hex Damage",
+      "group": "Warlock",
+      "frame": [
+        37,
+        27
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        16,
+        17
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        20,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_hex_damage_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_agonizing_blast": {
+      "name": "Agonizing Blast",
+      "group": "Warlock",
+      "frame": [
+        39,
+        27
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        18,
+        15
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        18,
+        31
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_agonizing_blast_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_repelling_blast": {
+      "name": "Repelling Blast",
+      "group": "Warlock",
+      "frame": [
+        36,
+        27
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        14,
+        14
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_repelling_blast_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_lifedrinker": {
+      "name": "Lifedrinker",
+      "group": "Warlock",
+      "frame": [
+        25,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        24
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "warlock_lifedrinker_grave.png"
+      },
+      "default": "grave"
+    },
+    "warlock_companion": {
+      "name": "Companion",
+      "group": "Warlock",
+      "frame": [
+        41,
+        33
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        16,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_companion_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_dark_ones_blessing": {
+      "name": "Dark Ones Blessing",
+      "group": "Warlock",
+      "frame": [
+        38,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        18,
+        23
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        18,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "warlock_dark_ones_blessing_hellfire.png"
+      },
+      "default": "hellfire"
+    },
+    "warlock_eldritch_blast_shot": {
+      "name": "Eldritch Blast flight",
+      "group": "Warlock",
+      "frame": [
+        46,
+        22
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        23,
+        11
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        1,
+        5
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "warlock_eldritch_blast_shot_force.png"
+      },
+      "default": "force"
+    },
+    "warlock_hunger_of_hadar_pulse": {
+      "name": "Hunger Of Hadar Pulse",
+      "group": "Warlock",
+      "frame": [
+        40,
+        31
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        15
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        16,
+        31
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "warlock_hunger_of_hadar_pulse_frost.png"
+      },
+      "default": "frost"
     }
   },
   "passives": {
     "evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
-    "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire"
+    "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire",
+    "warlock.pact_magic": "fx.warlock_pact_magic.force",
+    "warlock.hex_damage": "fx.warlock_hex_damage.grave",
+    "warlock.agonizing_blast": "fx.warlock_agonizing_blast.force",
+    "warlock.repelling_blast": "fx.warlock_repelling_blast.force",
+    "warlock.lifedrinker": "fx.warlock_lifedrinker.grave",
+    "fiendbound.companion": "fx.warlock_companion.hellfire",
+    "fiendbound.dark_ones_blessing": "fx.warlock_dark_ones_blessing.hellfire",
+    "warlock.hunger_of_hadar.turn": "fx.warlock_hunger_of_hadar_pulse.frost"
   }
 }

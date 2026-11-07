@@ -539,6 +539,62 @@
       ],
       "fps": 10,
       "loop": false
+    },
+    "warlock_pact": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "warlock_lash": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "warlock_rift": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "warlock_blade": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "warlock_release": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
     }
   },
   "builds": {

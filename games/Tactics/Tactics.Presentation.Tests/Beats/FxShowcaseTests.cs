@@ -35,6 +35,9 @@ public sealed class FxShowcaseTests
             var features = cls.Features.Values.SelectMany(f => f).Concat(cls.Subclasses.SelectMany(s => s.Features.Values.SelectMany(f => f)));
             var expected = features.SelectMany(f => (f.From.IsDefault ? [] : f.From)
                 .Concat(f.Ability is { } a ? [a.Value] : []).Concat(f.Passive is { } p ? [p] : [])).Distinct().Order();
+            if (cls.Id == "warlock")
+                expected = expected.Concat(rules.Abilities[new("warlock.hunger_of_hadar")].Effects.OfType<ZoneEffect>()
+                    .SelectMany(z => z.Passives).Select(p => p.Id)).Distinct().Order();
             Assert.Equal(expected, rows.Select(r => r.Id).Distinct().Order());
             foreach (var row in rows.Where(r => r.Kind == "ability"))
             {

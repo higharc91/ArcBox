@@ -1091,7 +1091,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.eldritch, fx.force.*; fx.wizard_magic_missile.force; fx.sorcerer_magic_missile.force"
+      "use": "fx.eldritch, fx.force.*; fx.wizard_magic_missile.force; fx.sorcerer_magic_missile.force; fx.warlock_eldritch_blast.force"
     },
     "spell_fire_aura": {
       "files": [
@@ -1142,7 +1142,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost; fx.sorcerer_ray_of_frost.frost; fx.sorcerer_ice_storm.frost"
+      "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost; fx.sorcerer_ray_of_frost.frost; fx.sorcerer_ice_storm.frost; fx.warlock_armor_of_agathys.frost"
     },
     "spell_lightning": {
       "files": [
@@ -1160,7 +1160,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic; fx.sorcerer_sleep.fey; fx.sorcerer_misty_step.mist; fx.sorcerer_greater_invisibility.mist"
+      "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic; fx.sorcerer_sleep.fey; fx.sorcerer_misty_step.mist; fx.sorcerer_greater_invisibility.mist; fx.warlock_one_with_shadows.shadow; fx.warlock_shroud_of_shadow.shadow; fx.warlock_misty_step.mist; fx.warlock_dimension_door.arcane"
     },
     "spell_nature_circle": {
       "files": [
@@ -1184,7 +1184,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*; fx.wizard_poison_spray.venom; fx.wizard_ray_of_sickness.sickness; fx.sorcerer_poison_spray.venom"
+      "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*; fx.wizard_poison_spray.venom; fx.wizard_ray_of_sickness.sickness; fx.sorcerer_poison_spray.venom; fx.warlock_poison_spray.venom"
     },
     "spell_psychic": {
       "files": [
@@ -1192,7 +1192,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.psychic.*"
+      "use": "fx.psychic.*; fx.warlock_maddening_hex.psychic"
     },
     "spell_shadow": {
       "files": [
@@ -1201,7 +1201,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave; fx.sorcerer_chill_touch.grave"
+      "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave; fx.sorcerer_chill_touch.grave; fx.warlock_hex.shadow; fx.warlock_chill_touch.grave; fx.warlock_arms_of_hadar.grave; fx.warlock_darkness.shadow; fx.warlock_vampiric_touch.grave"
     },
     "spell_shield": {
       "files": [

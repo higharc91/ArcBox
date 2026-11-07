@@ -605,6 +605,14 @@ Use `python tools/tactics-assets/dev/build_sorcerer_vfx.py` for the targeted eff
 
 The optional per-effect `variantsByDamage` map selects an existing palette variant from real `Damaged.Type` events. Only Wild Surge and Controlled Surge opt in. Controlled Surge rolls per victim: mixed outcomes keep a neutral central release, then each victim receives a smaller typed impact and matching light at its actual damage cue. This changes no engine event or gameplay roll. The 50-sample native review includes all damage branches and a mixed burst.
 
+### Warlock (#247)
+
+`parts/warlock_fx.py` adds 41 distinct ability/proc identities and an Eldritch Blast flight sheet. Curses, barbed force, infernal fire, spectral blades and broken void geometry retain the shared damage palettes. Darkness/veils/Moil/Hunger use normal blending and emit no light; luminous fire, force, frost, psychic and lightning effects use the shared emission system.
+
+`parts/warlock_casts.py` appends four five-frame gestures and a held release frame (210 frames per facing, nine rows). The real higher-level Eldritch Blast rolls use one charged wind-up followed by rapid beams, separately stacked damage numbers, and the engine's repelling movement. `dev/build_warlock_vfx.py` exports only Warlock effects, presentation keys, audio reuse and manifests; bake the eleven Warlock sheets with the tactical builder. Existing art and passives for the other classes remain intact.
+
+The 44-sample native review covers all 33 abilities, seven class procs, the real Hunger of Hadar turn pulse, an ordinary attack and both higher-level beam counts. Summon, round-recovery, kill and Hex triggers use real engine events. Source gameplay definitions and existing audio clips remain unchanged.
+
 ### Shared combat language (#247)
 
 Keep effects at the characters' pixel scale, with nearest-neighbour filtering and quantised ramps; no smooth

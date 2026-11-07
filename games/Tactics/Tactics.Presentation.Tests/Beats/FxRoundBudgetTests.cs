@@ -13,6 +13,7 @@ public sealed class FxRoundBudgetTests
     [Theory]
     [InlineData("wizard")]
     [InlineData("sorcerer")]
+    [InlineData("warlock")]
     public void Six_hero_chapter_one_rounds_preserve_rules_and_stay_within_the_proposed_cinematic_budget(string caster)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
@@ -107,7 +108,7 @@ public sealed class FxRoundBudgetTests
         }
         Assert.True(complete >= 20);
         if (Environment.GetEnvironmentVariable("ARCBOX_FX_BUDGET_REPORT") is { Length: > 0 } path)
-            File.WriteAllText(caster == "wizard" ? path : Path.Combine(Path.GetDirectoryName(path)!, Path.GetFileNameWithoutExtension(path) + "-sorcerer.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(caster == "wizard" ? path : Path.Combine(Path.GetDirectoryName(path)!, Path.GetFileNameWithoutExtension(path) + "-" + caster + ".json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
 
         BattleView View(BattleState s, ImmutableArray<Beat> beats) => new("budget", setup.Map.Id, s.Round, s.Order, s.Active,
             [.. s.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), u.Sheet.Sprite, u.Pos,
