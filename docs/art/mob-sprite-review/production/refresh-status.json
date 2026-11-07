@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty refreshed designs integrated across nine batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty-one refreshed designs integrated across ten batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -20,9 +20,10 @@
     "characters.black_knight",
     "characters.dark_elf",
     "bosses.troll.troll",
-    "bosses.golem.granite"
+    "bosses.golem.granite",
+    "bosses.mimic.oak"
   ],
-  "remainingOlderCombatLooks": 9,
+  "remainingOlderCombatLooks": 8,
   "looks": [
     {
       "baselineNumber": 1,
@@ -70,7 +71,7 @@
       "baselineNumber": 8,
       "name": "Mimic",
       "key": "bosses.mimic.oak",
-      "status": "awaiting refresh"
+      "status": "integrated tenth batch"
     },
     {
       "baselineNumber": 9,

@@ -26,6 +26,7 @@ public sealed class MobRefreshTests
     [InlineData("characters.dark_elf", "dark_elf")]
     [InlineData("bosses.troll.troll", "troll")]
     [InlineData("bosses.golem.granite", "golem")]
+    [InlineData("bosses.mimic.oak", "mimic")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -301,6 +302,7 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.dark_elf")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("bosses.troll.troll")!.HeadLift / person, 1.35f, 1.95f);
         Assert.InRange(art.Sprite("bosses.golem.granite")!.HeadLift / person, 1.35f, 1.85f);
+        Assert.InRange(art.Sprite("bosses.mimic.oak")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

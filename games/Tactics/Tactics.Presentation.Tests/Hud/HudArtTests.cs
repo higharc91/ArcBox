@@ -7,6 +7,28 @@ namespace Tactics.Presentation.Tests.Hud;
 /// <summary><see cref="HudArt"/> against the real pack: ui/manifest.json's rectangles and each unit's portrait.</summary>
 public sealed class HudArtTests
 {
+    [Fact]
+    public void Mimic_hud_shows_the_complete_disguised_chest_instead_of_an_invented_head()
+    {
+        var sprite = Units.Value.Sprite("bosses.mimic.oak")!;
+        var portrait = Art.Value.Portrait("bosses.mimic.oak", UnitTone.Enemy);
+        Assert.Equal("creatures/mob_refresh_mimic.png", portrait.Path);
+        Assert.Equal(sprite.PortraitSource, portrait.Source);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var source = sprite.Source(0, 0);
+        var count = 0;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128)
+                {
+                    Assert.InRange(x, portrait.Source.X, portrait.Source.X + portrait.Source.Width - 1);
+                    Assert.InRange(y, portrait.Source.Y, portrait.Source.Y + portrait.Source.Height - 1);
+                    count++;
+                }
+        Assert.True(count > 100);
+        Assert.Equal("portraits/backdrops/enemy.png", portrait.Backdrop);
+    }
+
     [Theory]
     [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "idle")]
     [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "hurt")]

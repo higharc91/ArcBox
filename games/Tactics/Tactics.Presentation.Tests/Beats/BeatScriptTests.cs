@@ -36,6 +36,36 @@ public sealed class BeatScriptTests
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
 
     [Fact]
+    public void Oak_ambush_replay_uses_a_walkable_skitter_and_the_real_adhesive_binding()
+    {
+        var steps = OakAmbushDemo.Steps(Pack.Root);
+        Assert.Equal(5, steps.Count);
+        var walk = Assert.Single(steps[1].View.Battle!.Beats.SelectMany(b => b.Events).OfType<Moved>());
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.All(walk.Path, tile => Assert.False(terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable)));
+        var used = Assert.Single(steps[3].View.Battle!.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>());
+        Assert.Equal("mimic.adhesive_bite", used.Ability.Value);
+        Assert.Equal("bosses.attack", used.Presentation!.Anim);
+        Assert.Equal("fx.hit", used.Presentation.Fx);
+    }
+
+    [Theory]
+    [InlineData("common.attack", null)]
+    [InlineData("mimic.adhesive_bite", "fx.hit")]
+    public void Mimic_bites_keep_the_hinged_wind_up_tongue_contact_and_recovery(string ability, string? fx)
+    {
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.mimic.oak" } : u)] };
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Foe), new("bosses.attack", fx, null));
+        var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "piercing", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.mimic.oak")!.Anim(lunge.Anim);
+        Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
+        Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+    }
+
+    [Fact]
     public void Giant_review_replays_the_four_real_ability_presentations_through_the_beat_path()
     {
         var steps = StoneAndMireDemo.Steps(Pack.Root);

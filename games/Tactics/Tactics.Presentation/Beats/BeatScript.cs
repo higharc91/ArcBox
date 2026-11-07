@@ -710,7 +710,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
                     {
                         "monsters.kobold_foreman" => 0.75,
-                        "bosses.troll.troll" or "bosses.golem.granite" => 0.8,
+                        "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" => 0.8,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));

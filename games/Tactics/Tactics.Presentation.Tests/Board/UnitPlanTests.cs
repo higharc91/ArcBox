@@ -31,14 +31,15 @@ public sealed class UnitPlanTests
         => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
 
     [Theory]
-    [InlineData("bosses.troll.troll")]
-    [InlineData("bosses.golem.granite")]
-    public void Raised_boulders_and_fists_stay_below_their_health_bar(string key)
+    [InlineData("bosses.troll.troll", "bosses.special")]
+    [InlineData("bosses.golem.granite", "bosses.special")]
+    [InlineData("bosses.mimic.oak", "bosses.attack")]
+    public void Raised_boulders_fists_and_jaws_stay_below_their_health_bar(string key, string binding)
     {
         var view = Unit("a", "Enemy", 11, 10, key);
         var idle = One(null, view);
         var posed = Assert.Single(UnitPlan.Build(Battle(null, view), River, Art.Value, Fit, poses:
-            new Dictionary<UnitId, UnitPose> { [view.Id] = new("bosses.special", .3, new Vector2(0, 1)) }));
+            new Dictionary<UnitId, UnitPose> { [view.Id] = new(binding, .3, new Vector2(0, 1)) }));
         var sprite = posed.Sprite;
         var source = sprite.Source(Assert.Single(posed.Anim.Frames), posed.Row);
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));

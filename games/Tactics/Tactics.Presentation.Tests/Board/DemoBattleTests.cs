@@ -7,6 +7,19 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Oak_ambush_review_places_the_small_chest_beside_its_adjacent_target_and_scale_references()
+    {
+        var battle = DemoBattle.View("river_crossing:oak-ambush").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        var mimic = Assert.Single(battle.Units, u => u.Sprite == "bosses.mimic.oak");
+        var fighter = Assert.Single(battle.Units, u => u.Sprite == "characters.class_fighter");
+        Assert.Equal(1, Math.Max(Math.Abs(mimic.At.X - fighter.At.X), Math.Abs(mimic.At.Y - fighter.At.Y)));
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Stone_and_mire_review_places_both_giants_with_human_scale_references()
     {
         var battle = DemoBattle.View("river_crossing:stone-and-mire").Battle!;

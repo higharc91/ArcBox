@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1080,
+      "height": 540
+    },
+    {
+      "title": "Development battle · chest beside the party and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Adhesive bite through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · small chest scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "2ea98842",
+    "walk": "9457bb76",
+    "attack": "52c3c23e",
+    "hurt": "32108e42",
+    "down": "c2c1e026"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "mimic",
+      "hashes": [
+        "9f1732c6",
+        "93c3bb36",
+        "f5fe7e5a",
+        "9457bb76"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

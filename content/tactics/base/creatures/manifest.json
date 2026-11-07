@@ -11008,6 +11008,132 @@
         }
       },
       "provenance": "Scenario creature concepts; OpenAI complete pixel poses. Sources and export checks: tools/tactics-assets/imagegen/stone-and-mire-2026-11-07/."
+    },
+    "mob_refresh_mimic": {
+      "file": "mob_refresh_mimic.png",
+      "family": "mimic",
+      "variant": "oak-ambush",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        84,
+        148,
+        89,
+        89
+      ],
+      "headTop": 149,
+      "overheadClearance": {
+        "attack": 6.8
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 28.16,
+      "footprintHeight": 24.0,
+      "keys": [
+        "bosses.mimic.oak"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario oak Mimic concept; OpenAI complete pixel poses. Sources and export checks: tools/tactics-assets/imagegen/oak-ambush-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

@@ -1,0 +1,17 @@
+{
+  "priorCommit": "83cbed32",
+  "addedCreatureEntries": [
+    "mob_refresh_mimic"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 4,
+  "packedFrameKeys": 112,
+  "distinctAuthoredPoseSelections": 96,
+  "runtimeAssets": 1,
+  "wholePoseFacingSelection": true
+}

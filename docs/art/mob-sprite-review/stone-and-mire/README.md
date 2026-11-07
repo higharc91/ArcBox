@@ -40,3 +40,5 @@ Host arguments after `--`:
 Use `python tools/tactics-assets/imagegen/stone-and-mire-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/special-shots`, then the special-scene/gallery commands in the source README.
 
 Twenty looks are refreshed across nine batches; [nine older combat looks remain](../production/refresh-status.json). The historical baseline remains unchanged. No PR has been opened.
+
+Subsequent batch: [Oak Mimic](../oak-ambush/README.md).

@@ -44,3 +44,5 @@ Latest seventh batch: [Ivo Rime / necromancer and Oswin Hale / lich](../rime-kee
 Latest eighth batch: [Ser Halvard / Black Knight and Drow Blade / Ysolde](../oath-and-shadow/README.md). Eighteen looks refreshed; 11 older combat looks remain.
 
 Latest ninth batch: [Troll and granite Stone Golem](../stone-and-mire/README.md). Twenty looks refreshed; nine older combat looks remain.
+
+Latest tenth batch: [Oak Mimic](../oak-ambush/README.md). Twenty-one looks refreshed; eight older combat looks remain.

@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var oakAmbush = parts.Contains("oak-ambush", StringComparer.Ordinal);
         var stoneAndMire = parts.Contains("stone-and-mire", StringComparer.Ordinal);
         var oathAndShadow = parts.Contains("oath-and-shadow", StringComparer.Ordinal);
         var rimeKeepers = parts.Contains("rime-keepers", StringComparer.Ordinal);
@@ -103,8 +104,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (stoneAndMire)
+        _mobReview = oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (oakAmbush)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.mimic.oak", "characters.skeleton", "bosses.golem.granite"];
+        else if (stoneAndMire)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.troll.troll", "bosses.golem.granite", "characters.skeleton"];
         else if (oathAndShadow)
             _roster = ["characters.class_fighter", "characters.bandit", "characters.black_knight", "characters.dark_elf", "characters.skeleton"];
