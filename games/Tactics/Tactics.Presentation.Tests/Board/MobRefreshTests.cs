@@ -44,6 +44,9 @@ public sealed class MobRefreshTests
     [InlineData("bosses.fire_elemental.azure", "fire_azure")]
     [InlineData("bosses.fire_elemental.radiant", "fire_radiant")]
     [InlineData("bosses.fire_elemental.shadow", "fire_shadow")]
+    [InlineData("bosses.hound.black", "hound_black")]
+    [InlineData("bosses.hound.grey", "hound_grey")]
+    [InlineData("bosses.imp.violet", "imp_violet")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -340,6 +343,9 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.hound.tan")!.HeadLift / person, .35f, .65f);
+        Assert.InRange(art.Sprite("bosses.hound.black")!.HeadLift / person, .35f, .65f);
+        Assert.InRange(art.Sprite("bosses.hound.grey")!.HeadLift / person, .35f, .65f);
+        Assert.InRange(art.Sprite("bosses.imp.violet")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.mimic.oak")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }

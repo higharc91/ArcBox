@@ -9,14 +9,17 @@
     "bosses.golem.temple",
     "bosses.fire_elemental.azure",
     "bosses.fire_elemental.radiant",
-    "bosses.fire_elemental.shadow"
+    "bosses.fire_elemental.shadow",
+    "bosses.hound.black",
+    "bosses.hound.grey",
+    "bosses.imp.violet"
   ],
-  "libraryBatchCount": 3,
-  "overallBatchCount": 18,
+  "libraryBatchCount": 4,
+  "overallBatchCount": 19,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 22,
+  "remainingTwoDirectionLooks": 19,
   "looks": [
     {
       "baselineNumber": 42,
@@ -345,21 +348,21 @@
       "key": "bosses.hound.black",
       "name": "Hound Black",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch4"
     },
     {
       "baselineNumber": 89,
       "key": "bosses.hound.grey",
       "name": "Hound Grey",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch4"
     },
     {
       "baselineNumber": 90,
       "key": "bosses.imp.violet",
       "name": "Imp Violet",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch4"
     },
     {
       "baselineNumber": 91,

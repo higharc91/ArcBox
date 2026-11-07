@@ -13780,6 +13780,378 @@
         }
       },
       "provenance": "Scenario variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/prismatic-flames-2026-11-07/."
+    },
+    "mob_refresh_hound_black": {
+      "file": "mob_refresh_hound_black.png",
+      "family": "hound",
+      "variant": "night-companions",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        108,
+        165,
+        40,
+        40
+      ],
+      "headTop": 162,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 25.28,
+      "footprintHeight": 19.84,
+      "keys": [
+        "bosses.hound.black"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/night-companions-2026-11-07/."
+    },
+    "mob_refresh_hound_grey": {
+      "file": "mob_refresh_hound_grey.png",
+      "family": "hound",
+      "variant": "night-companions",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        108,
+        165,
+        40,
+        40
+      ],
+      "headTop": 167,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 25.92,
+      "footprintHeight": 18.56,
+      "keys": [
+        "bosses.hound.grey"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/night-companions-2026-11-07/."
+    },
+    "mob_refresh_imp_violet": {
+      "file": "mob_refresh_imp_violet.png",
+      "family": "imp",
+      "variant": "night-companions",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        106,
+        165,
+        40,
+        40
+      ],
+      "headTop": 167,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 15.68,
+      "footprintHeight": 18.24,
+      "keys": [
+        "bosses.imp.violet"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/night-companions-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

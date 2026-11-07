@@ -1,0 +1,22 @@
+{
+  "priorCommit": "d437ecb7",
+  "addedCreatureEntries": [
+    "mob_refresh_hound_black",
+    "mob_refresh_hound_grey",
+    "mob_refresh_imp_violet"
+  ],
+  "combatMechanicsUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 13,
+  "packedFrameKeys": 336,
+  "distinctAuthoredPoseSelections": 336,
+  "runtimeAssets": 3,
+  "naturalAttacksPerCreature": 1,
+  "wholePoseFacingSelection": true,
+  "visualContactTimingRefined": true
+}

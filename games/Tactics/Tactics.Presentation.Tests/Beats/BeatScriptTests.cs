@@ -131,6 +131,44 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void Small_library_companions_replay_round_trips_bites_and_real_ranged_hellfire()
+    {
+        var steps = NightCompanionsDemo.Steps(Pack.Root);
+        Assert.Equal(11, steps.Count);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var moves = 0;
+        var attacks = 0;
+        BattleView? previous = null;
+        foreach (var step in steps)
+        {
+            var current = step.View.Battle!;
+            Assert.All(current.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+            foreach (var walk in current.Beats.SelectMany(b => b.Events).OfType<Moved>())
+            {
+                moves++;
+                Assert.Equal(walk.Path[0], walk.Path[^1]);
+                Assert.All(walk.Path, t => Assert.False(terrain.Map[t].Flags.HasFlag(TileFlags.Impassable)));
+            }
+            foreach (var used in current.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>())
+            {
+                attacks++;
+                Assert.NotNull(previous);
+                Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
+                Assert.Equal("common.attack", used.Ability.Value);
+                Assert.Equal(rules.Abilities[used.Ability].Presentation, used.Presentation);
+                var from = Assert.Single(current.Units, u => u.Id == used.Source).At;
+                var to = Assert.Single(current.Units, u => u.Id == used.Target.Unit).At;
+                Assert.Equal(used.Source.Value == "Violet" ? 4 : 1, Math.Max(Math.Abs(from.X-to.X), Math.Abs(from.Y-to.Y)));
+            }
+            previous = current;
+        }
+        Assert.Equal(3, moves);
+        Assert.Equal(3, attacks);
+    }
+
+    [Fact]
     public void Library_elemental_replay_uses_all_six_real_specials_and_walkable_adjacent_physical_targets()
     {
         var steps = WildElementsDemo.Steps(Pack.Root);
@@ -403,11 +441,13 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(4)]
-    public void Bound_imp_natural_attacks_launch_hellfire_from_the_hand_release_instead_of_arrows(int range)
+    [InlineData("bosses.imp.crimson", 1)]
+    [InlineData("bosses.imp.crimson", 4)]
+    [InlineData("bosses.imp.violet", 1)]
+    [InlineData("bosses.imp.violet", 4)]
+    public void Bound_imp_natural_attacks_launch_hellfire_from_the_hand_release_instead_of_arrows(string key, int range)
     {
-        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.imp.crimson", At = new Tile(3, 3) } : u with { At = new Tile(3 + range, 3) })] };
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key, At = new Tile(3, 3) } : u with { At = new Tile(3 + range, 3) })] };
         var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.attack", null, null));
         var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "fire", 6));
         var pose = Assert.Single(script.Cues.OfType<PoseCue>(), p => p.Unit == Hero);
@@ -415,17 +455,19 @@ public sealed class BeatScriptTests
         Assert.Equal("projectiles/fireball.png", flight.Art.Path);
         Assert.Equal("bosses.attack", pose.Anim);
         Assert.Equal(.4, flight.At - pose.At, 3);
-        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.imp.crimson")!.Anim(pose.Anim);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(pose.Anim);
         Assert.Equal(10, anim.FrameAt(flight.At - pose.At));
         Assert.True(pose.Length >= anim.Frames.Length / anim.Fps);
         Assert.True(script.Length >= pose.At + pose.Length);
         Assert.Empty(script.Cues.OfType<LungeCue>());
     }
 
-    [Fact]
-    public void An_explicit_imp_projectile_is_not_replaced_by_the_basic_hellfire_inference()
+    [Theory]
+    [InlineData("bosses.imp.crimson")]
+    [InlineData("bosses.imp.violet")]
+    public void An_explicit_imp_projectile_is_not_replaced_by_the_basic_hellfire_inference(string key)
     {
-        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.imp.crimson" } : u)] };
+        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.shoot", null, "projectiles.arrow"));
         var script = Script(view, used);
         Assert.Equal("projectiles/arrow.png", Assert.Single(script.Cues.OfType<FlightCue>()).Art.Path);
@@ -447,14 +489,17 @@ public sealed class BeatScriptTests
         Assert.Null(used.Presentation.Projectile);
     }
 
-    [Fact]
-    public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose()
+    [Theory]
+    [InlineData("bosses.hound.tan")]
+    [InlineData("bosses.hound.black")]
+    [InlineData("bosses.hound.grey")]
+    public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose(string key)
     {
-        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.hound.tan" } : u)] };
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), null);
         var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "piercing", 6));
         var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
-        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.hound.tan")!.Anim(lunge.Anim);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(lunge.Anim);
         Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
         Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
         Assert.True(script.Length >= lunge.At + lunge.Length);

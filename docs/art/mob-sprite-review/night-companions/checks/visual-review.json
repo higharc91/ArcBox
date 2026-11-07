@@ -1,0 +1,33 @@
+{
+  "reviewed": [
+    "idle-all-facings.png",
+    "walk-all-facings.png",
+    "attack-all-facings.png",
+    "attack-impact-all-facings.png",
+    "hurt-all-facings.png",
+    "down-all-facings.png",
+    "before-after.png",
+    "battle.png",
+    "overworld-lineup.png",
+    "overworld-lighting-occlusion.png",
+    "actions-in-game.png",
+    "godot-specials.mp4",
+    "night-companions-motion.mp4"
+  ],
+  "observations": [
+    "Black and Grey keep lean scent-hound anatomy, floppy ears, four joined legs, a rooted low curved tail and separate charcoal/umber versus slate/silver materials. Full backs show plain collars.",
+    "Violet keeps attached wing roots, horns, waistwrap and spade tail. Full backs have no front face or waist detail. Walking stays close to the ground. The original casting idle draft is not selected.",
+    "All three use the approved primary 56 px authoring height and .32 runtime scale (about 18 world pixels), small beside the fighter and bandit. A development reference was moved aside to expose Grey clearly.",
+    "Native replay shows three movement round trips, two adjacent bite contacts and one ranged hellfire bolt, followed by ready recovery. Jaw/hand poses remain joined; HUD portraits and active-pose bars clear the figures.",
+    "Natural action contact/release is .4 seconds; full clips recover through .8 seconds. Existing hit and fire assets are unchanged. Explicit projectile overrides remain supported.",
+    "The combined inspection reel lasts 24 seconds at 16 fps with four representative facings, walk/attack and held hurt/down poses. The standalone gallery provides all eight facings and five actions.",
+    "Native Godot replay is 20 seconds, 960x540 at 20 fps, silent with Dummy audio. Captures use software rendering for visual verification, not performance measurement."
+  ],
+  "sourceImages": 13,
+  "unselectedDrafts": 1,
+  "packedKeys": 336,
+  "distinctAuthoredPoseSelections": 336,
+  "browserPhoneViewport": 390,
+  "browserSceneCount": 5,
+  "creativeMethod": "Scenario concepts, OpenAI complete pixel figures; technical whole-figure crop/scale/pack only; no PixelLab, procedural recolour or anatomy patches."
+}

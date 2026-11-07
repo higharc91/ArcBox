@@ -37,3 +37,5 @@ Use Godot Mono 4.7.2 with the .NET 10 host build. Before `--`: `--audio-driver D
 ```
 
 Collect with `python tools/tactics-assets/imagegen/prismatic-flames-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Then run special-scenes.cjs, review.cjs and verify-review.cjs. Natural hits and six special-contact captures follow engine beat-clock moments; manual anticipation captures remain separate. Video includes three glides, three natural strikes, six specials and return to ready. Dummy audio means it is silent.
+
+Next: [Black Hound, Grey Hound and Violet Imp](../night-companions/README.md), library batch 4.

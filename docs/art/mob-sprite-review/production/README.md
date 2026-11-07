@@ -62,3 +62,5 @@ Sixteenth overall / first library batch: [Storm, Magma and Swamp Elementals](../
 Seventeenth overall / second library batch: [Basalt, Crystal and Temple Golems](../stone-sentinels/README.md). Combat tracker stays complete at 29; six additional library appearances refreshed, 25 older two-direction looks remaining, 26 existing eight-direction looks preserved.
 
 Eighteenth overall / third library batch: [Azure, Radiant and Shadow Fire Elementals](../prismatic-flames/README.md). Combat tracker stays complete at 29; nine additional library appearances refreshed, 22 older two-direction looks remaining, 26 existing eight-direction looks preserved.
+
+Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet Imp](../night-companions/README.md). Combat tracker stays complete at 29; 12 additional library appearances refreshed, 19 older two-direction looks remaining, 26 existing eight-direction looks preserved.

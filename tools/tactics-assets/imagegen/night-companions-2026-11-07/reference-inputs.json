@@ -1,0 +1,102 @@
+{
+  "hound_black_idle": {
+    "promptKey": "hound_black_idle",
+    "references": [
+      "references/hound_black-idle.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png"
+    ]
+  },
+  "hound_black_walk": {
+    "promptKey": "hound_black_walk",
+    "references": [
+      "references/hound_black-walk.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_black-idle.png"
+    ]
+  },
+  "hound_black_attack": {
+    "promptKey": "hound_black_attack",
+    "references": [
+      "references/hound_black-attack.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_black-idle.png"
+    ]
+  },
+  "hound_black_damage": {
+    "promptKey": "hound_black_damage",
+    "references": [
+      "references/hound_black-damage.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_black-idle.png"
+    ]
+  },
+  "hound_grey_idle": {
+    "promptKey": "hound_grey_idle",
+    "references": [
+      "references/hound_grey-idle.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png"
+    ]
+  },
+  "hound_grey_walk": {
+    "promptKey": "hound_grey_walk",
+    "references": [
+      "references/hound_grey-walk.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_grey-idle.png"
+    ]
+  },
+  "hound_grey_attack": {
+    "promptKey": "hound_grey_attack",
+    "references": [
+      "references/hound_grey-attack.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_grey-idle.png"
+    ]
+  },
+  "hound_grey_damage": {
+    "promptKey": "hound_grey_damage",
+    "references": [
+      "references/hound_grey-damage.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/hound_grey-idle.png"
+    ]
+  },
+  "imp_violet_idle": {
+    "promptKey": "imp_violet_idle",
+    "references": [
+      "references/imp_violet-idle.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png"
+    ]
+  },
+  "imp_violet_walk": {
+    "promptKey": "imp_violet_walk",
+    "references": [
+      "references/imp_violet-walk.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/imp_violet-idle.png"
+    ]
+  },
+  "imp_violet_attack": {
+    "promptKey": "imp_violet_attack",
+    "references": [
+      "references/imp_violet-attack.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/imp_violet-idle.png"
+    ]
+  },
+  "imp_violet_damage": {
+    "promptKey": "imp_violet_damage",
+    "references": [
+      "references/imp_violet-damage.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png",
+      "source/imp_violet-idle.png"
+    ]
+  },
+  "imp_violet_idle_original": {
+    "promptKey": "imp_violet_idle_original",
+    "references": [
+      "references/imp_violet-idle.png",
+      "../../concepts/night-companions-2026-11-07/three-variants.png"
+    ]
+  }
+}
