@@ -1,0 +1,415 @@
+{
+  "scope": "Additional library appearances; original combat-roster tracker remains separate and complete. Existing eight-direction appearances are preserved, not automatically scheduled for replacement.",
+  "integratedKeys": [
+    "bosses.air_elemental.storm",
+    "bosses.earth_elemental.magma",
+    "bosses.water_elemental.swamp"
+  ],
+  "libraryBatchCount": 1,
+  "overallBatchCount": 16,
+  "totalLibraryLooks": 57,
+  "baselineTwoDirectionLooks": 31,
+  "existingEightDirectionLooks": 26,
+  "remainingTwoDirectionLooks": 28,
+  "looks": [
+    {
+      "baselineNumber": 42,
+      "key": "beasts.bat.vampire",
+      "name": "Bat Vampire",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 43,
+      "key": "beasts.bear.black",
+      "name": "Bear Black",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 44,
+      "key": "beasts.bear.brown",
+      "name": "Bear Brown",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 45,
+      "key": "beasts.bear.polar",
+      "name": "Bear Polar",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 46,
+      "key": "beasts.bear.undead",
+      "name": "Bear Undead",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 47,
+      "key": "beasts.boar.dark",
+      "name": "Boar Dark",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 48,
+      "key": "beasts.drake.blue",
+      "name": "Drake Blue",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 49,
+      "key": "beasts.drake.green",
+      "name": "Drake Green",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 50,
+      "key": "beasts.slime.blue",
+      "name": "Slime Blue",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 51,
+      "key": "beasts.slime.crystal",
+      "name": "Slime Crystal",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 52,
+      "key": "beasts.slime.magma",
+      "name": "Slime Magma",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 53,
+      "key": "beasts.spider.phase",
+      "name": "Spider Phase",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 54,
+      "key": "beasts.spider.red",
+      "name": "Spider Red",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 55,
+      "key": "beasts.wolf.alpha",
+      "name": "Wolf Alpha",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 56,
+      "key": "beasts.wolf.dire",
+      "name": "Wolf Dire",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 57,
+      "key": "beasts.wolf.frost",
+      "name": "Wolf Frost",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 58,
+      "key": "beasts.wolf.grey",
+      "name": "Wolf Grey",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 59,
+      "key": "beasts.wolf.timber",
+      "name": "Wolf Timber",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 60,
+      "key": "bestiary.crab.deep",
+      "name": "Crab Deep",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 61,
+      "key": "bestiary.crab.shore",
+      "name": "Crab Shore",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 62,
+      "key": "bestiary.gargoyle.granite",
+      "name": "Gargoyle Granite",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 63,
+      "key": "bestiary.gargoyle.obsidian",
+      "name": "Gargoyle Obsidian",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 64,
+      "key": "bestiary.harpy.dusk",
+      "name": "Harpy Dusk",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 65,
+      "key": "bestiary.harpy.storm",
+      "name": "Harpy Storm",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 66,
+      "key": "bestiary.hookbeak.brown",
+      "name": "Hookbeak Brown",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 67,
+      "key": "bestiary.hookbeak.snow",
+      "name": "Hookbeak Snow",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 68,
+      "key": "bestiary.scorpion.black",
+      "name": "Scorpion Black",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 69,
+      "key": "bestiary.scorpion.ember",
+      "name": "Scorpion Ember",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 70,
+      "key": "bestiary.scorpion.sand",
+      "name": "Scorpion Sand",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 71,
+      "key": "bestiary.warg.ash",
+      "name": "Warg Ash",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 72,
+      "key": "bestiary.warg.black",
+      "name": "Warg Black",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 73,
+      "key": "bestiary.warg.rider",
+      "name": "Warg Rider",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 74,
+      "key": "bestiary.wisp.ember",
+      "name": "Wisp Ember",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 75,
+      "key": "bestiary.wisp.marsh",
+      "name": "Wisp Marsh",
+      "baselineDirections": 8,
+      "status": "existing eight-direction art"
+    },
+    {
+      "baselineNumber": 76,
+      "key": "bosses.air_elemental.storm",
+      "name": "Air Elemental Storm",
+      "baselineDirections": 2,
+      "status": "integrated library batch1"
+    },
+    {
+      "baselineNumber": 77,
+      "key": "bosses.dragon.black",
+      "name": "Dragon Black",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 78,
+      "key": "bosses.dragon.blue",
+      "name": "Dragon Blue",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 79,
+      "key": "bosses.dragon.gold",
+      "name": "Dragon Gold",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 80,
+      "key": "bosses.dragon.green",
+      "name": "Dragon Green",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 81,
+      "key": "bosses.earth_elemental.magma",
+      "name": "Earth Elemental Magma",
+      "baselineDirections": 2,
+      "status": "integrated library batch1"
+    },
+    {
+      "baselineNumber": 82,
+      "key": "bosses.fire_elemental.azure",
+      "name": "Fire Elemental Azure",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 83,
+      "key": "bosses.fire_elemental.radiant",
+      "name": "Fire Elemental Radiant",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 84,
+      "key": "bosses.fire_elemental.shadow",
+      "name": "Fire Elemental Shadow",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 85,
+      "key": "bosses.golem.basalt",
+      "name": "Golem Basalt",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 86,
+      "key": "bosses.golem.crystal",
+      "name": "Golem Crystal",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 87,
+      "key": "bosses.golem.temple",
+      "name": "Golem Temple",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 88,
+      "key": "bosses.hound.black",
+      "name": "Hound Black",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 89,
+      "key": "bosses.hound.grey",
+      "name": "Hound Grey",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 90,
+      "key": "bosses.imp.violet",
+      "name": "Imp Violet",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 91,
+      "key": "bosses.mimic.ironbound",
+      "name": "Mimic Ironbound",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 92,
+      "key": "bosses.sapling.autumn",
+      "name": "Sapling Autumn",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 93,
+      "key": "bosses.sapling.blossom",
+      "name": "Sapling Blossom",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 94,
+      "key": "bosses.troll.frost",
+      "name": "Troll Frost",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 95,
+      "key": "bosses.troll.ogre",
+      "name": "Troll Ogre",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 96,
+      "key": "bosses.water_elemental.swamp",
+      "name": "Water Elemental Swamp",
+      "baselineDirections": 2,
+      "status": "integrated library batch1"
+    },
+    {
+      "baselineNumber": 97,
+      "key": "bosses.wraith.shade",
+      "name": "Wraith Shade",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    },
+    {
+      "baselineNumber": 98,
+      "key": "bosses.wraith.spectre",
+      "name": "Wraith Spectre",
+      "baselineDirections": 2,
+      "status": "awaiting refresh"
+    }
+  ]
+}

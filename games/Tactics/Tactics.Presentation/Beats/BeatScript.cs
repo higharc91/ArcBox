@@ -659,7 +659,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             // Only the refreshed elemental variants select these dedicated gestures.
             // The shared rules, effects and legacy variant presentations stay intact.
             var sourceUnit = _view.Units.FirstOrDefault(u => u.Id == used.Source);
-            (string? Pose, double Length, double Impact) elemental = (sourceUnit?.Sprite, used.Ability.Value, anim) switch
+            var elementalKey = sourceUnit?.Sprite switch
+            {
+                "bosses.air_elemental.storm" => "bosses.air_elemental.gale",
+                "bosses.earth_elemental.magma" => "bosses.earth_elemental.stone",
+                "bosses.water_elemental.swamp" => "bosses.water_elemental.sea",
+                _ => sourceUnit?.Sprite,
+            };
+            (string? Pose, double Length, double Impact) elemental = (elementalKey, used.Ability.Value, anim) switch
             {
                 ("bosses.water_elemental.sea", "water_elemental.tidal_crush", "bosses.special") => ("bosses.special", .8, .4),
                 ("bosses.water_elemental.sea", "water_elemental.undertow", "bosses.special") => ("bosses.cast", .8, .4),
@@ -724,7 +731,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var seismic = used.Ability.Value == "golem.seismic_slam";
                 var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
-                if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red")
+                if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red"
+                    or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp")
                     Moment("special-contact", impact);
                 // The taller flame body exhales from its mouth, above the shared humanoid body anchor.
                 Burst(effect, source, at: _t + impact, toward: clip is { Aimed: true } ? facing : null,
@@ -772,7 +780,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     {
                         "monsters.kobold_foreman" => 0.75,
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring"
-                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" => 0.8,
+                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" => 0.8,
                         "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };

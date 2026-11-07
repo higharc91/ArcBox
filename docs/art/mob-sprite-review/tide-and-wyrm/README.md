@@ -34,3 +34,5 @@ Godot flags before `--`: `--audio-driver Dummy --path src/ArcBox.Host --resoluti
 ```
 
 The world demo exits when its walk/two camera spots finish; 90 s allows a cold software-rendered host to finish. Collect with `python tools/tactics-assets/imagegen/tide-and-wyrm-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Run special-scenes.cjs, review.cjs and verify-review.cjs. Special contact and natural-hit screenshots follow beat-clock moments, avoiding first-use FX loading drift. Separate manual windup captures are retained. Replay shows two walks, two natural strikes, all five specials and return to ready.
+
+Next phase: [Storm, Magma and Swamp Elementals](../wild-elements/README.md), the first additional library-appearance batch. Combat-roster completion remains29.

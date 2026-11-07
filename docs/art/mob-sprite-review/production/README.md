@@ -56,3 +56,5 @@ Latest thirteenth batch: [Grove Sapling](../grove-ward/README.md). Twenty-four l
 Latest fourteenth batch: [Air, Earth and Fire Elementals](../elemental-triad/README.md). Twenty-seven looks refreshed; Water Elemental and Red Dragon remain.
 
 Latest fifteenth batch: [Water Elemental and Red Dragon](../tide-and-wyrm/README.md). Combat-roster pass complete: twenty-nine refreshed looks, no older combat looks remaining. Additional library colour variants remain separate.
+
+Sixteenth overall / first library batch: [Storm, Magma and Swamp Elementals](../wild-elements/README.md). Combat tracker stays complete at29; library tracker records three refreshed appearances,28 older two-direction appearances remaining,26 existing eight-direction appearances preserved.

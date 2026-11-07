@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var wildElements = parts.Contains("wild-elements", StringComparer.Ordinal);
         var tideAndWyrm = parts.Contains("tide-and-wyrm", StringComparer.Ordinal);
         var elementalTriad = parts.Contains("elemental-triad", StringComparer.Ordinal);
         var groveWard = parts.Contains("grove-ward", StringComparer.Ordinal);
@@ -109,8 +110,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (tideAndWyrm)
+        _mobReview = wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (wildElements)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.storm", "bosses.earth_elemental.magma", "bosses.water_elemental.swamp"];
+        else if (tideAndWyrm)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.water_elemental.sea", "bosses.dragon.red"];
         else if (elementalTriad)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.gale", "bosses.earth_elemental.stone", "bosses.fire_elemental.ember"];

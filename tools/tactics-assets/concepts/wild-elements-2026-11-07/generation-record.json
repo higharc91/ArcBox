@@ -1,0 +1,44 @@
+{
+  "scenario": {
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "parameters": {
+      "aspectRatio": "3:2",
+      "resolution": "1K",
+      "numOutputs": 1
+    },
+    "stormJob": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_jZBTktTz8uDYhXbacx96C2Jr",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_jZBTktTz8uDYhXbacx96C2Jr' (one call waits on up to 32 jobs)."
+    },
+    "stormAsset": "asset_PtVifohMJEQtQeykh1oFQ34M",
+    "status": "success",
+    "creativeUnitsCost": 8,
+    "remainingConcepts": "New jobs were rate-limited (HTTP429, cooldown about15 minutes); OpenAI generated the remaining concepts."
+  },
+  "records": [
+    {
+      "id": "air_storm",
+      "brief": "Wardenflame grounded tactical fantasy production concept sheet, ONE coherent elemental variant. Neutral parchment, NO text/labels/grid/scenery. Show front three-quarter, left profile, FULL BACK, natural attack, two special gestures and connected low down pose beside a small1.75m fighter. Crisp dark outlines, readable material clusters,2\u20133 shade ramps, warm upper-left light/cool shadows. No clothes/belts/carried weapons/huge cartoon eyes. All anatomy continuously joined; full backs have no front face. No detached particles, explosions or projectiles; game supplies FX. No new named lore or powers. Storm air spirit made of continuous DARK SLATE/INDIGO wind ribbons over a deep charcoal-blue core. Pale steel-blue ribbon crests and restrained silver-white static seams integrated along wind planes. Swept-back wind crest, narrow icy-white eyes FRONT only. TWO joined wind arms and condensed hands, SINGLE tapered spiralling vortex column and curled base, NO legs/feet/robes/armor. Darker and heavier than pale Gale, but silhouette and anatomy consistent. Glides on coiled base; right forearm sweeps forward for natural strike. Whirlwind spreads arms/connected coils around core. Gale Blast gathers hands then thrusts both palms FORWARD. Down one connected collapsed wind knot, no separate wisps.",
+      "provider": "Scenario",
+      "generationId": null
+    },
+    {
+      "id": "earth_magma",
+      "brief": "Wardenflame grounded tactical fantasy production concept sheet, ONE coherent elemental variant. Neutral parchment, NO text/labels/grid/scenery. Show front three-quarter, left profile, FULL BACK, natural attack, two special gestures and connected low down pose beside a small1.75m fighter. Crisp dark outlines, readable material clusters,2\u20133 shade ramps, warm upper-left light/cool shadows. No clothes/belts/carried weapons/huge cartoon eyes. All anatomy continuously joined; full backs have no front face. No detached particles, explosions or projectiles; game supplies FX. No new named lore or powers. Massive hunched rough BASALT/CHARCOAL volcanic boulder body, dark burgundy lower shadow planes, sparse fixed molten ORANGE/AMBER fissures in rock seams, tiny pale yellow-orange hot seam accents. Narrow amber-orange eyes FRONT only in recessed rock head, broad crag shoulders. TWO heavy arms/fists continuously joined at rock elbows/wrists; TWO short heavy legs with joined blocky feet. No floating rocks, external flames, neon runes, carried weapons, crystals or clothes. Shape matches rough sandstone Earth but distinct dark volcanic materials; do not turn it into a glossy armored robot. Slow alternating four-key heavy gait. Natural right fist punches forward. Tremor raises both fists then slams at ground in front; Aegis crosses forearms at chest. Down whole body slumps low, all rocks/limbs joined.",
+      "provider": "OpenAI",
+      "generationId": "af888f92-d0b7-4282-9304-cb5c212daaeb",
+      "generationPrompt": "Wardenflame grounded tactical fantasy production concept sheet, ONE coherent elemental variant. Neutral parchment, NO text/labels/grid/scenery. Show front three-quarter, left profile, FULL BACK, natural attack, two special gestures and connected low down pose beside a small1.75m fighter. Crisp dark outlines, readable material clusters,2\u20133 shade ramps, warm upper-left light/cool shadows. No clothes/belts/carried weapons/huge cartoon eyes. All anatomy continuously joined; full backs have no front face. No detached particles, explosions or projectiles; game supplies FX. No new named lore or powers. Massive hunched rough BASALT/CHARCOAL volcanic boulder body, dark burgundy lower shadow planes, sparse fixed molten ORANGE/AMBER fissures in rock seams, tiny pale yellow-orange hot seam accents. Narrow amber-orange eyes FRONT only in recessed rock head, broad crag shoulders. TWO heavy arms/fists continuously joined at rock elbows/wrists; TWO short heavy legs with joined blocky feet. No floating rocks, external flames, neon runes, carried weapons, crystals or clothes. Shape matches rough sandstone Earth but distinct dark volcanic materials; do not turn it into a glossy armored robot. Slow alternating four-key heavy gait. Natural right fist punches forward. Tremor raises both fists then slams at ground in front; Aegis crosses forearms at chest. Down whole body slumps low, all rocks/limbs joined. Keep the primary reference's anatomy and scale, show material variant clearly. No front face on full back. No external flames or disconnected droplets."
+    },
+    {
+      "id": "water_swamp",
+      "brief": "Wardenflame grounded tactical fantasy production concept sheet, ONE coherent elemental variant. Neutral parchment, NO text/labels/grid/scenery. Show front three-quarter, left profile, FULL BACK, natural attack, two special gestures and connected low down pose beside a small1.75m fighter. Crisp dark outlines, readable material clusters,2\u20133 shade ramps, warm upper-left light/cool shadows. No clothes/belts/carried weapons/huge cartoon eyes. All anatomy continuously joined; full backs have no front face. No detached particles, explosions or projectiles; game supplies FX. No new named lore or powers. Heavy murky SWAMP water spirit: deep OLIVE/PEAT GREEN liquid core, muted moss-green wave planes, sparse warm OCHRE/CREAM foam rims and small fixed algae-like green streaks joined to liquid. Swept-back curled wave crest, narrow yellow-amber eyes FRONT only. TWO heavy water arms/hands continuously joined at elbows/shoulders, SINGLE tapering water column and low joined curled pool base, NO human legs/feet/clothes/robes or independent plants. Same heavy rounded wave anatomy as Sea variant but green/brown reflective liquid instead of turquoise. Slower-looking glide on flowing base, no humanoid walk. Right palm surges forward for natural Wave Slam. Tidal Crush gathers chest wave then heaves both connected arms/wave FORWARD. Undertow reaches forward then pulls elbows into ribs forming connected inward spiral. Down one low joined water mound, no detached droplets.",
+      "provider": "OpenAI",
+      "generationId": "82cb0c9f-6e60-4b78-8421-1c42f0494324",
+      "generationPrompt": "Wardenflame grounded tactical fantasy production concept sheet, ONE coherent elemental variant. Neutral parchment, NO text/labels/grid/scenery. Show front three-quarter, left profile, FULL BACK, natural attack, two special gestures and connected low down pose beside a small1.75m fighter. Crisp dark outlines, readable material clusters,2\u20133 shade ramps, warm upper-left light/cool shadows. No clothes/belts/carried weapons/huge cartoon eyes. All anatomy continuously joined; full backs have no front face. No detached particles, explosions or projectiles; game supplies FX. No new named lore or powers. Heavy murky SWAMP water spirit: deep OLIVE/PEAT GREEN liquid core, muted moss-green wave planes, sparse warm OCHRE/CREAM foam rims and small fixed algae-like green streaks joined to liquid. Swept-back curled wave crest, narrow yellow-amber eyes FRONT only. TWO heavy water arms/hands continuously joined at elbows/shoulders, SINGLE tapering water column and low joined curled pool base, NO human legs/feet/clothes/robes or independent plants. Same heavy rounded wave anatomy as Sea variant but green/brown reflective liquid instead of turquoise. Slower-looking glide on flowing base, no humanoid walk. Right palm surges forward for natural Wave Slam. Tidal Crush gathers chest wave then heaves both connected arms/wave FORWARD. Undertow reaches forward then pulls elbows into ribs forming connected inward spiral. Down one low joined water mound, no detached droplets. Keep the primary reference's anatomy and scale, show material variant clearly. No front face on full back. No external flames or disconnected droplets."
+    }
+  ]
+}

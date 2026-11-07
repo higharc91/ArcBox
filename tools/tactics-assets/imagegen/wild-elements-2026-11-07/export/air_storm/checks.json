@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 0,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      78,
+      169,
+      222
+    ],
+    "count": 7417
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 1,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      78,
+      170,
+      222
+    ],
+    "count": 7425
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 2,
+    "scale": 1.051094890510949,
+    "bounds": [
+      75,
+      80,
+      168,
+      222
+    ],
+    "count": 7539
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 3,
+    "scale": 1.051094890510949,
+    "bounds": [
+      75,
+      80,
+      168,
+      222
+    ],
+    "count": 7439
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 0,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      72,
+      80,
+      170,
+      224
+    ],
+    "count": 8074
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 1,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      71,
+      81,
+      169,
+      225
+    ],
+    "count": 8036
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 2,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      72,
+      80,
+      170,
+      226
+    ],
+    "count": 8085
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 3,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      72,
+      79,
+      170,
+      222
+    ],
+    "count": 8046
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 0,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      80,
+      169,
+      224
+    ],
+    "count": 7417
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      70,
+      81,
+      175,
+      224
+    ],
+    "count": 8603
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      74,
+      81,
+      176,
+      224
+    ],
+    "count": 8519
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 3,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      82,
+      169,
+      224
+    ],
+    "count": 7439
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      84,
+      89,
+      171,
+      224
+    ],
+    "count": 6452
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      88,
+      142,
+      167,
+      224
+    ],
+    "count": 4311
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 0,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      80,
+      169,
+      224
+    ],
+    "count": 7417
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 0,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      78,
+      80,
+      167,
+      224
+    ],
+    "count": 7910
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 1,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      57,
+      80,
+      190,
+      224
+    ],
+    "count": 9810
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 3,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      82,
+      169,
+      224
+    ],
+    "count": 7439
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 0,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      80,
+      169,
+      224
+    ],
+    "count": 7417
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 2,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      81,
+      79,
+      167,
+      224
+    ],
+    "count": 7824
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 3,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      77,
+      79,
+      167,
+      224
+    ],
+    "count": 7938
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 3,
+    "scale": 1.051094890510949,
+    "bounds": [
+      76,
+      82,
+      169,
+      224
+    ],
+    "count": 7439
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 4,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      80,
+      166,
+      222
+    ],
+    "count": 7586
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 5,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      78,
+      167,
+      222
+    ],
+    "count": 7927
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 6,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      77,
+      165,
+      222
+    ],
+    "count": 8040
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 7,
+    "scale": 1.051094890510949,
+    "bounds": [
+      79,
+      79,
+      166,
+      222
+    ],
+    "count": 7811
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 4,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      77,
+      81,
+      169,
+      223
+    ],
+    "count": 8226
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 5,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      77,
+      83,
+      171,
+      225
+    ],
+    "count": 8481
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 6,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      78,
+      81,
+      173,
+      225
+    ],
+    "count": 8864
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 7,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      79,
+      81,
+      173,
+      223
+    ],
+    "count": 8408
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 4,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      82,
+      166,
+      224
+    ],
+    "count": 7586
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      70,
+      80,
+      173,
+      224
+    ],
+    "count": 8728
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      47,
+      80,
+      175,
+      224
+    ],
+    "count": 9179
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 7,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      81,
+      168,
+      224
+    ],
+    "count": 7811
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      85,
+      87,
+      172,
+      224
+    ],
+    "count": 6534
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      88,
+      149,
+      167,
+      224
+    ],
+    "count": 4150
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 4,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      82,
+      166,
+      224
+    ],
+    "count": 7586
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 4,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      83,
+      79,
+      160,
+      224
+    ],
+    "count": 7506
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 5,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      58,
+      78,
+      189,
+      224
+    ],
+    "count": 9756
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 7,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      81,
+      168,
+      224
+    ],
+    "count": 7811
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 4,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      82,
+      166,
+      224
+    ],
+    "count": 7586
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 6,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      80,
+      77,
+      157,
+      224
+    ],
+    "count": 7652
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 7,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      56,
+      78,
+      158,
+      224
+    ],
+    "count": 8398
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 7,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      81,
+      168,
+      224
+    ],
+    "count": 7811
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 8,
+    "scale": 1.051094890510949,
+    "bounds": [
+      89,
+      85,
+      157,
+      222
+    ],
+    "count": 6438
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 9,
+    "scale": 1.051094890510949,
+    "bounds": [
+      88,
+      83,
+      156,
+      222
+    ],
+    "count": 6583
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 10,
+    "scale": 1.051094890510949,
+    "bounds": [
+      88,
+      82,
+      159,
+      222
+    ],
+    "count": 6434
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 11,
+    "scale": 1.051094890510949,
+    "bounds": [
+      90,
+      85,
+      156,
+      222
+    ],
+    "count": 6363
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 8,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      87,
+      86,
+      158,
+      225
+    ],
+    "count": 6971
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 9,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      88,
+      87,
+      159,
+      226
+    ],
+    "count": 7039
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 10,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      87,
+      86,
+      161,
+      225
+    ],
+    "count": 7084
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 11,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      87,
+      86,
+      159,
+      224
+    ],
+    "count": 7047
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 8,
+    "scale": 1.051094890510949,
+    "bounds": [
+      89,
+      87,
+      157,
+      224
+    ],
+    "count": 6438
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      72,
+      79,
+      165,
+      224
+    ],
+    "count": 8526
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      46,
+      79,
+      166,
+      224
+    ],
+    "count": 9154
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 11,
+    "scale": 1.051094890510949,
+    "bounds": [
+      90,
+      87,
+      156,
+      224
+    ],
+    "count": 6363
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      102,
+      90,
+      159,
+      224
+    ],
+    "count": 5494
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      91,
+      145,
+      163,
+      224
+    ],
+    "count": 4072
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 8,
+    "scale": 1.051094890510949,
+    "bounds": [
+      89,
+      87,
+      157,
+      224
+    ],
+    "count": 6438
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 8,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      82,
+      81,
+      152,
+      224
+    ],
+    "count": 7114
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 9,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      61,
+      81,
+      176,
+      224
+    ],
+    "count": 9197
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 11,
+    "scale": 1.051094890510949,
+    "bounds": [
+      90,
+      87,
+      156,
+      224
+    ],
+    "count": 6363
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 8,
+    "scale": 1.051094890510949,
+    "bounds": [
+      89,
+      87,
+      157,
+      224
+    ],
+    "count": 6438
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 10,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      70,
+      82,
+      154,
+      224
+    ],
+    "count": 7687
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 11,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      48,
+      81,
+      151,
+      224
+    ],
+    "count": 8322
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 11,
+    "scale": 1.051094890510949,
+    "bounds": [
+      90,
+      87,
+      156,
+      224
+    ],
+    "count": 6363
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 12,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      81,
+      164,
+      222
+    ],
+    "count": 7743
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 13,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      82,
+      165,
+      222
+    ],
+    "count": 7884
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 14,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      80,
+      164,
+      222
+    ],
+    "count": 7967
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 15,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      83,
+      165,
+      222
+    ],
+    "count": 7854
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 12,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      76,
+      83,
+      169,
+      225
+    ],
+    "count": 8563
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 13,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      76,
+      84,
+      171,
+      226
+    ],
+    "count": 8751
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 14,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      76,
+      84,
+      171,
+      225
+    ],
+    "count": 8862
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 15,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      76,
+      83,
+      170,
+      224
+    ],
+    "count": 8660
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 12,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      83,
+      164,
+      224
+    ],
+    "count": 7743
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      76,
+      81,
+      165,
+      224
+    ],
+    "count": 8828
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      48,
+      81,
+      170,
+      224
+    ],
+    "count": 9298
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 15,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      85,
+      167,
+      224
+    ],
+    "count": 7854
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      94,
+      86,
+      169,
+      224
+    ],
+    "count": 6331
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      89,
+      154,
+      165,
+      224
+    ],
+    "count": 3959
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 12,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      83,
+      164,
+      224
+    ],
+    "count": 7743
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 12,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      80,
+      82,
+      160,
+      224
+    ],
+    "count": 7642
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 13,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      56,
+      81,
+      184,
+      224
+    ],
+    "count": 9402
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 15,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      85,
+      167,
+      224
+    ],
+    "count": 7854
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 12,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      83,
+      164,
+      224
+    ],
+    "count": 7743
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 14,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      75,
+      82,
+      160,
+      224
+    ],
+    "count": 7947
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 15,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      53,
+      82,
+      159,
+      224
+    ],
+    "count": 8611
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 15,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      85,
+      167,
+      224
+    ],
+    "count": 7854
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 16,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      82,
+      175,
+      222
+    ],
+    "count": 7761
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 17,
+    "scale": 1.051094890510949,
+    "bounds": [
+      83,
+      81,
+      176,
+      222
+    ],
+    "count": 7883
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 18,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      80,
+      174,
+      222
+    ],
+    "count": 7902
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 19,
+    "scale": 1.051094890510949,
+    "bounds": [
+      83,
+      82,
+      176,
+      222
+    ],
+    "count": 7816
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 16,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      78,
+      84,
+      182,
+      224
+    ],
+    "count": 8639
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 17,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      79,
+      84,
+      182,
+      225
+    ],
+    "count": 8632
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 18,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      78,
+      84,
+      182,
+      226
+    ],
+    "count": 8855
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 19,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      79,
+      82,
+      182,
+      223
+    ],
+    "count": 8658
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 16,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      84,
+      175,
+      224
+    ],
+    "count": 7761
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      76,
+      82,
+      181,
+      224
+    ],
+    "count": 8678
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      58,
+      82,
+      182,
+      224
+    ],
+    "count": 9041
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 19,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      84,
+      177,
+      224
+    ],
+    "count": 7816
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-hurt-back.png",
+    "sourcePose": 0,
+    "scale": 0.20987654320987653,
+    "bounds": [
+      82,
+      89,
+      176,
+      224
+    ],
+    "count": 7158
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      88,
+      152,
+      167,
+      224
+    ],
+    "count": 4006
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 16,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      84,
+      175,
+      224
+    ],
+    "count": 7761
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 16,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      82,
+      81,
+      169,
+      224
+    ],
+    "count": 7696
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 17,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      52,
+      81,
+      199,
+      224
+    ],
+    "count": 9858
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 19,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      84,
+      177,
+      224
+    ],
+    "count": 7816
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 16,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      84,
+      175,
+      224
+    ],
+    "count": 7761
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 18,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      85,
+      82,
+      169,
+      224
+    ],
+    "count": 7567
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 19,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      83,
+      81,
+      177,
+      224
+    ],
+    "count": 8533
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 19,
+    "scale": 1.051094890510949,
+    "bounds": [
+      84,
+      84,
+      177,
+      224
+    ],
+    "count": 7816
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 20,
+    "scale": 1.051094890510949,
+    "bounds": [
+      86,
+      83,
+      172,
+      222
+    ],
+    "count": 7821
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 21,
+    "scale": 1.051094890510949,
+    "bounds": [
+      85,
+      80,
+      170,
+      222
+    ],
+    "count": 8040
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 22,
+    "scale": 1.051094890510949,
+    "bounds": [
+      86,
+      78,
+      173,
+      222
+    ],
+    "count": 8094
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 23,
+    "scale": 1.051094890510949,
+    "bounds": [
+      85,
+      79,
+      173,
+      222
+    ],
+    "count": 8000
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 20,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      81,
+      86,
+      179,
+      227
+    ],
+    "count": 8615
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 21,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      81,
+      87,
+      179,
+      230
+    ],
+    "count": 8731
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 22,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      82,
+      85,
+      179,
+      228
+    ],
+    "count": 8872
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 23,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      82,
+      85,
+      177,
+      226
+    ],
+    "count": 8548
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 20,
+    "scale": 1.051094890510949,
+    "bounds": [
+      86,
+      85,
+      172,
+      224
+    ],
+    "count": 7821
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      78,
+      81,
+      179,
+      224
+    ],
+    "count": 8726
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      78,
+      81,
+      193,
+      224
+    ],
+    "count": 8921
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 23,
+    "scale": 1.051094890510949,
+    "bounds": [
+      85,
+      81,
+      173,
+      224
+    ],
+    "count": 8000
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      94,
+      91,
+      165,
+      224
+    ],
+    "count": 5802
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      88,
+      156,
+      166,
+      224
+    ],
+    "count": 3863
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 20,
+    "scale": 1.051094890510949,
+    "bounds": [
+      86,
+      85,
+      172,
+      224
+    ],
+    "count": 7821
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 20,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      86,
+      85,
+      168,
+      224
+    ],
+    "count": 7617
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 21,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      57,
+      85,
+      193,
+      224
+    ],
+    "count": 9403
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 23,
+    "scale": 1.051094890510949,
+    "bounds": [
+      85,
+      81,
+      173,
+      224
+    ],
+    "count": 8000
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 20,
+    "scale": 1.051094890510949,
+    "bounds": [
+      86,
+      85,
+      172,
+      224
+    ],
+    "count": 7821
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 22,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      90,
+      85,
+      168,
+      224
+    ],
+    "count": 7556
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 23,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      92,
+      83,
+      185,
+      224
+    ],
+    "count": 7856
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 23,
+    "scale": 1.051094890510949,
+    "bounds": [
+      85,
+      81,
+      173,
+      224
+    ],
+    "count": 8000
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 24,
+    "scale": 1.051094890510949,
+    "bounds": [
+      96,
+      87,
+      161,
+      222
+    ],
+    "count": 6074
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 25,
+    "scale": 1.051094890510949,
+    "bounds": [
+      97,
+      82,
+      160,
+      222
+    ],
+    "count": 6054
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 26,
+    "scale": 1.051094890510949,
+    "bounds": [
+      97,
+      81,
+      162,
+      222
+    ],
+    "count": 6034
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 27,
+    "scale": 1.051094890510949,
+    "bounds": [
+      98,
+      87,
+      162,
+      222
+    ],
+    "count": 6014
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 24,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      94,
+      89,
+      164,
+      227
+    ],
+    "count": 6518
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 25,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      95,
+      90,
+      164,
+      228
+    ],
+    "count": 6418
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 26,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      94,
+      88,
+      165,
+      227
+    ],
+    "count": 6632
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 27,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      94,
+      88,
+      165,
+      226
+    ],
+    "count": 6556
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 24,
+    "scale": 1.051094890510949,
+    "bounds": [
+      96,
+      89,
+      161,
+      224
+    ],
+    "count": 6074
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      82,
+      81,
+      158,
+      224
+    ],
+    "count": 7724
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      82,
+      81,
+      194,
+      224
+    ],
+    "count": 8738
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 27,
+    "scale": 1.051094890510949,
+    "bounds": [
+      97,
+      89,
+      161,
+      224
+    ],
+    "count": 6014
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      100,
+      94,
+      153,
+      224
+    ],
+    "count": 4980
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      94,
+      158,
+      161,
+      224
+    ],
+    "count": 3382
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 24,
+    "scale": 1.051094890510949,
+    "bounds": [
+      96,
+      89,
+      161,
+      224
+    ],
+    "count": 6074
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 24,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      88,
+      83,
+      160,
+      224
+    ],
+    "count": 7198
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 25,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      69,
+      83,
+      181,
+      224
+    ],
+    "count": 8599
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 27,
+    "scale": 1.051094890510949,
+    "bounds": [
+      97,
+      89,
+      161,
+      224
+    ],
+    "count": 6014
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 24,
+    "scale": 1.051094890510949,
+    "bounds": [
+      96,
+      89,
+      161,
+      224
+    ],
+    "count": 6074
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 26,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      86,
+      83,
+      165,
+      224
+    ],
+    "count": 7609
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 27,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      87,
+      82,
+      183,
+      224
+    ],
+    "count": 8008
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 27,
+    "scale": 1.051094890510949,
+    "bounds": [
+      97,
+      89,
+      161,
+      224
+    ],
+    "count": 6014
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 28,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      83,
+      169,
+      222
+    ],
+    "count": 7895
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 29,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      78,
+      172,
+      222
+    ],
+    "count": 8160
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 30,
+    "scale": 1.051094890510949,
+    "bounds": [
+      81,
+      77,
+      170,
+      222
+    ],
+    "count": 8014
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 31,
+    "scale": 1.051094890510949,
+    "bounds": [
+      82,
+      83,
+      173,
+      222
+    ],
+    "count": 8044
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 28,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      77,
+      84,
+      172,
+      223
+    ],
+    "count": 8254
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 29,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      74,
+      86,
+      172,
+      224
+    ],
+    "count": 8509
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 30,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      75,
+      85,
+      175,
+      223
+    ],
+    "count": 8519
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_storm-walk.png",
+    "sourcePose": 31,
+    "scale": 1.0909090909090908,
+    "bounds": [
+      78,
+      83,
+      175,
+      222
+    ],
+    "count": 8333
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 28,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      169,
+      224
+    ],
+    "count": 7895
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      71,
+      78,
+      168,
+      224
+    ],
+    "count": 9073
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_storm-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6889952153110048,
+    "bounds": [
+      81,
+      80,
+      186,
+      224
+    ],
+    "count": 9006
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 31,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      171,
+      224
+    ],
+    "count": 8044
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      91,
+      94,
+      164,
+      224
+    ],
+    "count": 5934
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7083333333333334,
+    "bounds": [
+      90,
+      160,
+      164,
+      224
+    ],
+    "count": 3554
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 28,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      169,
+      224
+    ],
+    "count": 7895
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 28,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      81,
+      86,
+      161,
+      224
+    ],
+    "count": 7705
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 29,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      61,
+      86,
+      188,
+      224
+    ],
+    "count": 9494
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 31,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      171,
+      224
+    ],
+    "count": 8044
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 28,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      169,
+      224
+    ],
+    "count": 7895
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 30,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      82,
+      86,
+      164,
+      224
+    ],
+    "count": 7827
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_storm-moves.png",
+    "sourcePose": 31,
+    "scale": 1.0746268656716418,
+    "bounds": [
+      80,
+      86,
+      183,
+      224
+    ],
+    "count": 8137
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_storm-idle.png",
+    "sourcePose": 31,
+    "scale": 1.051094890510949,
+    "bounds": [
+      80,
+      85,
+      171,
+      224
+    ],
+    "count": 8044
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "mob": "air_storm",
+    "action": "hurt",
+    "source": "air_storm-hurt-back",
+    "count": 1,
+    "columns": 1,
+    "heightFactor": 0.9444444444444444,
+    "targets": [
+      {
+        "row": 4,
+        "poses": [
+          0
+        ]
+      }
+    ]
+  }
+]
