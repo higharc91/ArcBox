@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Druid form motion correction</title>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Druid form motion correction</title><link rel="icon" href="data:,">
 <style>body{background:#222732;color:#eee4cd;font:18px system-ui;max-width:1280px;margin:2rem auto;padding:0 1rem}a{color:#f0d27a}label{display:inline-block;margin:.5rem 1rem .5rem 0}select,button{font:inherit;color:inherit;background:#303747;border:1px solid #687082;padding:.4rem}canvas{display:block;max-width:100%;height:auto;image-rendering:pixelated;background:#222732;margin-top:1rem}p{max-width:85ch}</style>
 <h1>Druid forms · motion correction</h1><p>Previous decoration on the left, revised art on the right. Both play the same pose at the same time. The original fur shading is retained; smaller leaf ties and bark plates follow explicit neck/shoulder keys. Moving legs and tails no longer slide or reshape the decoration.</p>
 <p>Source-atlas inspection with the player for scale. <a href="../../index.html">Native game gallery</a> · <a href="../index.html">All-direction animation overview</a>. Previous revision: <code>BEFORE_REF</code>.</p>
@@ -9,6 +9,7 @@
 <script>
 'use strict';
 const entries=/* MANIFEST */;
+const heroAnchor=/* PLAYER_ANCHOR */;
 const form=document.getElementById('form'),facing=document.getElementById('facing'),action=document.getElementById('action'),speed=document.getElementById('speed'),pause=document.getElementById('pause'),step=document.getElementById('step'),canvas=document.getElementById('review'),ctx=canvas.getContext('2d'),status=document.getElementById('status');
 const images={};let time=0,last=null,paused=false;
 for(const [index,name] of entries.dire_wolf.directions.entries()){const o=document.createElement('option');o.value=String(index);o.textContent=name;facing.appendChild(o);}facing.value='2';
@@ -18,7 +19,7 @@ function draw(){
  ctx.imageSmoothingEnabled=false;ctx.fillStyle='#222732';ctx.fillRect(0,0,1200,520);ctx.font='22px system-ui';
  for(let side=0;side<2;side++){
   const start=side*600;ctx.fillStyle='#eee4cd';ctx.fillText(side?'REVISED':'PREVIOUS',start+18,34);ctx.fillStyle='#51545d';ctx.fillRect(start+12,445,576,1);
-  ctx.drawImage(images.player,start+140-80*2,445-145*2,320,320);
+  ctx.drawImage(images.player,start+140-heroAnchor[0]*2,445-heroAnchor[1]*2,320,320);
   const z=4*e.pixelScale,dx=start+405-Math.round(e.frame.anchor[0]*z),dy=445-Math.round(e.frame.anchor[1]*z);
   ctx.drawImage(images[(side?'after-':'before-')+form.value],pose%e.columns*w,(d*e.rowsPerDirection+Math.floor(pose/e.columns))*h,w,h,dx,dy,Math.round(w*z),Math.round(h*z));
  }

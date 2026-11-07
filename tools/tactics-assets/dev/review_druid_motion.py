@@ -18,6 +18,6 @@ def main():
   shutil.copyfile(PACK/'creatures'/entry['file'],OUT/('after-'+form+'.png'))
  with Image.open(PACK/'tactical/human_druid.png') as hero:hero.crop((0,0,160,160)).save(OUT/'player.png',optimize=True)
  template=Path(__file__).with_name('druid_motion.html').read_text()
- (OUT/'index.html').write_text(template.replace('/* MANIFEST */',json.dumps(entries)).replace('BEFORE_REF',args.before_ref))
+ (OUT/'index.html').write_text(template.replace('/* MANIFEST */',json.dumps(entries)).replace('/* PLAYER_ANCHOR */',json.dumps(json.loads((PACK/'tactical/manifest.json').read_text())['frame']['anchor'])).replace('BEFORE_REF',args.before_ref))
  print('Exported synchronized previous/revised loops for all four forms, eight facings and every action.')
 if __name__=='__main__':main()
