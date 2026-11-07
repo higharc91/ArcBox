@@ -381,7 +381,8 @@ public sealed class EngineFaultTests
                     Assert.NotSame(offer, s.Game.Document.Battle?.State.Pending);
                     Assert.Equal("reaction", Assert.Single(faults).Where);
                     Assert.Equal(1, s.Game.Skips);
-                    Assert.Equal(TacticsGame.MoveFailed, s.Host.Notice);
+                    Assert.StartsWith(TacticsGame.MoveFailed, s.Host.Notice);
+                    Assert.Contains("Don't react", s.Host.Notice);
 
                     game.ReactEngine = Ai.React;
                     s.PlayOut();
@@ -451,7 +452,7 @@ public sealed class EngineFaultTests
         Assert.Equal("hand", Assert.Single(faults).Where);
         Assert.IsType<AiControlled>(s.Game.Document.Battle!.State.Units[TacticsGame.UnitFor(1)].Controller);
         Assert.Equal(TacticsGame.HandBackFailed, s.Screen(1)?.Header);
-        Assert.Null(s.Host.Notice);     // nobody moved: the TV says nothing
+        Assert.Contains(TacticsGame.HandBackFailed, s.Host.Notice);     // the TV also explains the failed return
 
         // The battle still plays out, the AI deciding for whoever the engine wouldn't hand back.
         s.PlayOut();
@@ -468,13 +469,14 @@ public sealed class EngineFaultTests
 
         s.Harness.SetConnected(1, false);     // fails: the hero stays theirs, and the AI decides while they're away
         Assert.Equal("hand", Assert.Single(faults).Where);
-        Assert.Null(s.Host.Notice);
+        Assert.Contains("is away", s.Host.Notice);
         s.Harness.SetConnected(1, true);      // already theirs: nothing to hand back, nothing to fail
 
         Assert.False(s.Harness.IsOver);
         Assert.Single(faults);
         Assert.Equal(new PlayerControlled(s.Profiles[1]!.Value), s.Game.Document.Battle!.State.Units[TacticsGame.UnitFor(1)].Controller);
         Assert.NotEqual(TacticsGame.HandBackFailed, s.Screen(1)?.Header);
+        Assert.Contains("back in control", s.Host.Notice);
         s.PlayOut();
         Assert.Equal(TacticsPhase.Results, s.Game.Phase);
     }

@@ -144,6 +144,13 @@
         }
       ],
       "waiting": 0
+    },
+    "controlNotice": {
+      "seq": 6,
+      "reason": "reconnected",
+      "text": "Welcome back, Player1. The battle is over; you\u0027re back in control of Player1.",
+      "policy": null,
+      "recap": "While you were away: moved; used Second Wind; used Help."
     }
   },
   "viewId": "v1",

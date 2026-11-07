@@ -9,7 +9,7 @@ import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, CharacterChoicesData, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
 import { FallBack } from "./fallback";
 import { ReactionsSheet } from "./reactions";
-import { HpBar, HpText, MeCard, Section } from "./ui";
+import { ControlNotice, HpBar, HpText, MeCard, Section } from "./ui";
 import { ChoicesCard } from "./choices";
 
 export { costText, Turn } from "./turn";
@@ -127,6 +127,7 @@ export function Results({ data, send }: CustomScreenProps) {
   const bannerText = r.leveledUp ? "Level Up!" : won ? "Victory" : fled ? "Retreat" : "Defeat";
   return (
     <div class="tx tx-results">
+      <ControlNotice notice={r.controlNotice} />
       <MomentBanner art={bannerArt} text={bannerText} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
       {r.leveledUp ? <p class="tx-note center tx-levelup-note">LEVEL UP! The party reached level {r.level}.</p> : null}
@@ -195,12 +196,13 @@ export function Status({ data, send }: CustomScreenProps) {
     <div class="tx tx-status">
       <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
+      <ControlNotice notice={s.controlNotice} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
         {s.active ? <NamedPortrait name={s.active} size={60} /> : null}
         <div>
           <span class="tx-eyebrow">{s.active ? "Now acting" : "Waiting"}</span>
           <b class="tx-now-name">{s.active ?? "Waiting…"}</b>
-          {s.aiPlaying ? <span class="tx-note">The AI is playing your character</span> : null}
+          {s.aiPlaying && !s.controlNotice ? <span class="tx-note">The AI is playing your character</span> : null}
         </div>
       </div>
       {s.upIn ? <Section>You're up in {s.upIn}</Section> : null}
@@ -290,6 +292,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const pass = r.options.find((o) => o.id === "pass");
   return (
     <div class="tx tx-react">
+      <ControlNotice notice={r.controlNotice} />
       <SurfaceScene kinds={r.surfaces} />
       <FallBack fallBack={r.fallBack} send={send} />
       <div class="tx-alert" role="alert">

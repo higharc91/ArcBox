@@ -243,6 +243,10 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 if (player?.Profile is { } who)
                     SeatChanged(who, connected);
                 break;
+            case TacticsPhase.Results:
+                if (connected && player?.Profile is { } returned)
+                    ReturnedAfterBattle(returned);
+                break;
         }
     }
 

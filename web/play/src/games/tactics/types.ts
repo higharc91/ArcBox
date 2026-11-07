@@ -115,7 +115,16 @@ export interface ReactionPrefsData {
   defence: "ask" | "miss" | "never";
 }
 
+export interface ControlNoticeData {
+  seq: number;
+  reason: "turnTimeout" | "reactionTimeout" | "disconnected" | "reconnected" | "controlUnavailable";
+  text: string;
+  policy?: string | null;
+  recap?: string | null;
+}
+
 export interface TurnData {
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -137,6 +146,7 @@ export interface ReactOption {
 }
 
 export interface ReactData {
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -154,6 +164,7 @@ export interface ReactData {
 }
 
 export interface StatusData {
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -370,6 +381,7 @@ export interface CharacterChoicesData {
 }
 
 export interface ResultsData {
+  controlNotice?: ControlNoticeData;
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
   lines: {
