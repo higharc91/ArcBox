@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Druid form motion correction</title><link rel="icon" href="data:,">
+<style>body{background:#222732;color:#eee4cd;font:18px system-ui;max-width:1280px;margin:2rem auto;padding:0 1rem}a{color:#f0d27a}label{display:inline-block;margin:.5rem 1rem .5rem 0}select,button{font:inherit;color:inherit;background:#303747;border:1px solid #687082;padding:.4rem}canvas{display:block;max-width:100%;height:auto;image-rendering:pixelated;background:#222732;margin-top:1rem}p{max-width:85ch}</style>
+<h1>Druid forms · motion correction</h1><p>Previous decoration on the left, revised art on the right. Both play the same pose at the same time. The original fur shading is retained; smaller leaf ties and bark plates follow explicit neck/shoulder keys. Moving legs and tails no longer slide or reshape the decoration.</p>
+<p>Source-atlas inspection with the player for scale. <a href="../../index.html">Native game gallery</a> · <a href="../index.html">All-direction animation overview</a>. Previous revision: <code>BEFORE_REF</code>.</p>
+<label>Form <select id="form"><option value="dire_wolf">Dire wolf</option><option value="wolf">Wolf</option><option value="elder_bear">Elder bear</option><option value="bear">Bear</option></select></label>
+<label>Facing <select id="facing"></select></label><label>Action <select id="action"><option>walk</option><option>idle</option><option>attack</option><option>special</option><option>hurt</option><option>down</option></select></label>
+<label>Speed <select id="speed"><option value="1">Normal</option><option value="0.5">Half speed</option></select></label><button id="pause" type="button">Pause</button><button id="step" type="button">Next frame</button>
+<canvas id="review" width="1200" height="520" aria-label="Synchronized previous and revised Druid forms"></canvas><p id="status" aria-live="off"></p>
+<script>
+'use strict';
+const entries=/* MANIFEST */;
+const heroAnchor=/* PLAYER_ANCHOR */;
+const form=document.getElementById('form'),facing=document.getElementById('facing'),action=document.getElementById('action'),speed=document.getElementById('speed'),pause=document.getElementById('pause'),step=document.getElementById('step'),canvas=document.getElementById('review'),ctx=canvas.getContext('2d'),status=document.getElementById('status');
+const images={};let time=0,last=null,paused=false;
+for(const [index,name] of entries.dire_wolf.directions.entries()){const o=document.createElement('option');o.value=String(index);o.textContent=name;facing.appendChild(o);}facing.value='2';
+const load=(src)=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('Cannot load '+src));im.src=src;});
+function draw(){
+ const e=entries[form.value],anim=e.anims[action.value],pose=anim.frames[Math.floor(time*anim.fps)%anim.frames.length],d=Number(facing.value),w=e.frame.width,h=e.frame.height;
+ ctx.imageSmoothingEnabled=false;ctx.fillStyle='#222732';ctx.fillRect(0,0,1200,520);ctx.font='22px system-ui';
+ for(let side=0;side<2;side++){
+  const start=side*600;ctx.fillStyle='#eee4cd';ctx.fillText(side?'REVISED':'PREVIOUS',start+18,34);ctx.fillStyle='#51545d';ctx.fillRect(start+12,445,576,1);
+  ctx.drawImage(images.player,start+140-heroAnchor[0]*2,445-heroAnchor[1]*2,320,320);
+  const z=4*e.pixelScale,dx=start+405-Math.round(e.frame.anchor[0]*z),dy=445-Math.round(e.frame.anchor[1]*z);
+  ctx.drawImage(images[(side?'after-':'before-')+form.value],pose%e.columns*w,(d*e.rowsPerDirection+Math.floor(pose/e.columns))*h,w,h,dx,dy,Math.round(w*z),Math.round(h*z));
+ }
+ status.textContent=form.options[form.selectedIndex].text+' · '+e.directions[d]+' · '+action.value+' · pose '+pose+' · '+speed.options[speed.selectedIndex].text;
+ canvas.dataset.pose=String(pose);
+}
+for(const control of [form,facing,action])control.addEventListener('change',()=>{time=0;draw();});
+pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'Play':'Pause';});
+step.addEventListener('click',()=>{paused=true;pause.textContent='Play';const anim=entries[form.value].anims[action.value];time=(Math.floor(time*anim.fps)+1)/anim.fps+1e-8;draw();});
+function tick(stamp){if(last!==null&&!paused)time+=Math.min(.1,(stamp-last)/1000)*Number(speed.value);last=stamp;draw();requestAnimationFrame(tick);}
+Promise.all([load('player.png').then(im=>images.player=im),...Object.keys(entries).flatMap(name=>['before-','after-'].map(prefix=>load(prefix+name+'.png').then(im=>images[prefix+name]=im)))]).then(()=>{document.body.dataset.ready='true';requestAnimationFrame(tick);}).catch(err=>{status.textContent=err.message;document.body.dataset.error=err.message;});
+</script></html>

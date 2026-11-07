@@ -14,6 +14,19 @@ public sealed class ValidationTests
         => Assert.Throws<ContentException>(() => RulesPack.Load([Base, ContentPaths.Fixture(fixture, "chapter-01")], art)).Errors;
 
     [Fact]
+    public void An_unknown_cut_in_tier_is_rejected_at_its_content_pointer()
+    {
+        var errors = ErrorsOfChapter(("abilities/cinema.json", """
+            { "abilities": [ { "id": "ch.cinema", "name": "Cinema", "tier": 0, "cost": { "action": 1 },
+                "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+                "effects": [], "presentation": { "cutIn": "epic" } } ] }
+            """));
+        var error = Assert.Single(errors);
+        Assert.Equal("/abilities/0/presentation/cutIn", error.Pointer);
+        Assert.Equal("'cutIn' must be none, short or full.", error.Message);
+    }
+
+    [Fact]
     public void Unknown_block_key()
         => Assert.Equal([new ContentError(Abilities, "/abilities/0/effects/0/onHit/0", "Unknown effect block 'damgae'.")],
             ErrorsOf("unknown_block_key"));

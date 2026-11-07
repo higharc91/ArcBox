@@ -1,0 +1,280 @@
+{
+  "method": "Median of 44 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 20.535400000000003,
+  "afterMs": 20.454500000000003,
+  "changePercent": -0.3939538552937827,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "cleric.flame_strike",
+    "beforeMs": 20.6849,
+    "afterMs": 22.7014,
+    "changePercent": 9.74865723305407
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 21.145,
+      "afterMs": 20.8179,
+      "changePercent": -1.546937810357052
+    },
+    {
+      "id": "cleric.bane",
+      "beforeMs": 19.853,
+      "afterMs": 19.809,
+      "changePercent": -0.22162897295119333
+    },
+    {
+      "id": "cleric.bless",
+      "beforeMs": 19.9827,
+      "afterMs": 19.5631,
+      "changePercent": -2.0998163411350967
+    },
+    {
+      "id": "cleric.command",
+      "beforeMs": 19.5645,
+      "afterMs": 19.4112,
+      "changePercent": -0.7835620639423335
+    },
+    {
+      "id": "cleric.cure_wounds",
+      "beforeMs": 19.7885,
+      "afterMs": 19.1465,
+      "changePercent": -3.244308563054299
+    },
+    {
+      "id": "cleric.guiding_bolt",
+      "beforeMs": 19.6012,
+      "afterMs": 19.9423,
+      "changePercent": 1.740199579617574
+    },
+    {
+      "id": "cleric.healing_word",
+      "beforeMs": 19.6968,
+      "afterMs": 19.724,
+      "changePercent": 0.13809349742091026
+    },
+    {
+      "id": "cleric.inflict_wounds",
+      "beforeMs": 19.4509,
+      "afterMs": 19.8386,
+      "changePercent": 1.9932239639296911
+    },
+    {
+      "id": "cleric.resistance",
+      "beforeMs": 19.2004,
+      "afterMs": 19.3816,
+      "changePercent": 0.9437303389512763
+    },
+    {
+      "id": "cleric.sacred_flame",
+      "beforeMs": 19.5236,
+      "afterMs": 19.1932,
+      "changePercent": -1.6923108443114843
+    },
+    {
+      "id": "cleric.shield_of_faith",
+      "beforeMs": 19.6801,
+      "afterMs": 19.5928,
+      "changePercent": -0.44359530693440785
+    },
+    {
+      "id": "cleric.toll_the_dead",
+      "beforeMs": 19.5222,
+      "afterMs": 19.703,
+      "changePercent": 0.9261251293399164
+    },
+    {
+      "id": "cleric.word_of_radiance",
+      "beforeMs": 19.8655,
+      "afterMs": 19.8937,
+      "changePercent": 0.14195464498754085
+    },
+    {
+      "id": "cleric.divine_spark",
+      "beforeMs": 19.9186,
+      "afterMs": 19.6893,
+      "changePercent": -1.1511853242697878
+    },
+    {
+      "id": "cleric.turn_undead",
+      "beforeMs": 21.217,
+      "afterMs": 20.8692,
+      "changePercent": -1.63925154357355
+    },
+    {
+      "id": "cleric.aid",
+      "beforeMs": 21.2836,
+      "afterMs": 20.9657,
+      "changePercent": -1.493638294273536
+    },
+    {
+      "id": "cleric.blindness",
+      "beforeMs": 19.6549,
+      "afterMs": 20.577,
+      "changePercent": 4.691450986776835
+    },
+    {
+      "id": "cleric.hold_person",
+      "beforeMs": 20.9746,
+      "afterMs": 20.8339,
+      "changePercent": -0.6708113623144163
+    },
+    {
+      "id": "cleric.lesser_restoration",
+      "beforeMs": 20.8938,
+      "afterMs": 20.6328,
+      "changePercent": -1.2491743962323665
+    },
+    {
+      "id": "cleric.spiritual_weapon",
+      "beforeMs": 21.2237,
+      "afterMs": 20.332,
+      "changePercent": -4.201435188020941
+    },
+    {
+      "id": "cleric.bestow_curse",
+      "beforeMs": 20.5273,
+      "afterMs": 19.6073,
+      "changePercent": -4.481836383742632
+    },
+    {
+      "id": "cleric.dispel_magic",
+      "beforeMs": 20.7051,
+      "afterMs": 20.152,
+      "changePercent": -2.6713225244021976
+    },
+    {
+      "id": "cleric.mass_healing_word",
+      "beforeMs": 20.2228,
+      "afterMs": 21.0699,
+      "changePercent": 4.188836362917114
+    },
+    {
+      "id": "cleric.sear_undead",
+      "beforeMs": 21.3592,
+      "afterMs": 22.1168,
+      "changePercent": 3.546949323944726
+    },
+    {
+      "id": "cleric.spirit_guardians",
+      "beforeMs": 21.6808,
+      "afterMs": 22.0372,
+      "changePercent": 1.6438507804140023
+    },
+    {
+      "id": "cleric.banishment",
+      "beforeMs": 21.1475,
+      "afterMs": 19.4359,
+      "changePercent": -8.09362808842653
+    },
+    {
+      "id": "cleric.death_ward",
+      "beforeMs": 20.8137,
+      "afterMs": 19.4766,
+      "changePercent": -6.4241341039795845
+    },
+    {
+      "id": "cleric.divine_strike",
+      "beforeMs": 20.5722,
+      "afterMs": 20.105,
+      "changePercent": -2.271025947638061
+    },
+    {
+      "id": "death_ward.save",
+      "beforeMs": 20.812,
+      "afterMs": 20.8601,
+      "changePercent": 0.2311166634633821
+    },
+    {
+      "id": "cleric.flame_strike",
+      "beforeMs": 20.6849,
+      "afterMs": 22.7014,
+      "changePercent": 9.74865723305407
+    },
+    {
+      "id": "cleric.greater_restoration",
+      "beforeMs": 20.253,
+      "afterMs": 21.3326,
+      "changePercent": 5.330568310867512
+    },
+    {
+      "id": "cleric.mass_cure_wounds",
+      "beforeMs": 21.1001,
+      "afterMs": 21.6223,
+      "changePercent": 2.474869787346967
+    },
+    {
+      "id": "cleric.divine_intervention",
+      "beforeMs": 21.2121,
+      "afterMs": 21.9268,
+      "changePercent": 3.369303369303367
+    },
+    {
+      "id": "life.preserve_life",
+      "beforeMs": 21.5458,
+      "afterMs": 22.0288,
+      "changePercent": 2.2417362084489856
+    },
+    {
+      "id": "life.word_of_renewal",
+      "beforeMs": 20.5471,
+      "afterMs": 22.1241,
+      "changePercent": 7.6750490336835675
+    },
+    {
+      "id": "life.mass_revival",
+      "beforeMs": 21.6513,
+      "afterMs": 22.4502,
+      "changePercent": 3.6898477227695237
+    },
+    {
+      "id": "light.radiance_of_the_dawn",
+      "beforeMs": 21.3193,
+      "afterMs": 22.43,
+      "changePercent": 5.209833343496273
+    },
+    {
+      "id": "light.burning_luminescence",
+      "beforeMs": 21.0856,
+      "afterMs": 20.1739,
+      "changePercent": -4.323803923056491
+    },
+    {
+      "id": "light.warding_flare",
+      "beforeMs": 19.0031,
+      "afterMs": 18.9128,
+      "changePercent": -0.4751856276081212
+    },
+    {
+      "id": "light.corona_of_light",
+      "beforeMs": 20.5435,
+      "afterMs": 21.0359,
+      "changePercent": 2.3968651885024395
+    },
+    {
+      "id": "war.guided_strike",
+      "beforeMs": 19.9956,
+      "afterMs": 20.7233,
+      "changePercent": 3.6393006461421518
+    },
+    {
+      "id": "war.war_priest",
+      "beforeMs": 19.9715,
+      "afterMs": 21.0922,
+      "changePercent": 5.611496382344838
+    },
+    {
+      "id": "war.avatar_of_battle",
+      "beforeMs": 19.9688,
+      "afterMs": 20.846,
+      "changePercent": 4.392852850446682
+    },
+    {
+      "id": "cleric.toll_the_dead.wounded",
+      "beforeMs": 19.2912,
+      "afterMs": 19.6032,
+      "changePercent": 1.6173177407315276
+    }
+  ]
+}

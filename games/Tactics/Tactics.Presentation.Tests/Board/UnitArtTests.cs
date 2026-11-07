@@ -105,7 +105,7 @@ public sealed class UnitArtTests
         Assert.Equal("tactical/tiefling_warlock.png", sprite.Path);
         Assert.True(OnDisk(sprite.Path));
         Assert.Equal(new ArtRect(0, 160, 160, 160), sprite.Source(24, 0));
-        Assert.Equal(new ArtRect(0, 1280, 160, 160), sprite.Source(0, 1));
+        Assert.Equal(new ArtRect(0, 1440, 160, 160), sprite.Source(0, 1));
         Assert.Equal(32, sprite.FootprintWidth);
         Assert.Equal(80, sprite.WorldWidth);
         Assert.Equal(80, sprite.WorldHeight);
@@ -122,9 +122,45 @@ public sealed class UnitArtTests
         {
             var sprite = Art.Value.Sprite("characters." + preset.GetString())!;
             Assert.True(OnDisk(sprite.Path));
-            var last = sprite.Source(188, 1);
+            var wizard = preset.GetString()!.EndsWith("_wizard", StringComparison.Ordinal);
+            var sorcerer = preset.GetString()!.EndsWith("_sorcerer", StringComparison.Ordinal);
+            var warlock = preset.GetString()!.EndsWith("_warlock", StringComparison.Ordinal);
+            var cleric = preset.GetString()!.EndsWith("_cleric", StringComparison.Ordinal);
+            var druid = preset.GetString()!.EndsWith("_druid",StringComparison.Ordinal);
+            var paladin=preset.GetString()!.EndsWith("_paladin",StringComparison.Ordinal);
+            var count = wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : druid || paladin ? 214 : 189;
+            var last = sprite.Source(count - 1, 1);
             Assert.InRange(last.X + last.Width, 1, 3840);
-            Assert.InRange(last.Y + last.Height, 1, 2560);
+            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric || druid || paladin ? 2880 : 2560);
+            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric || druid || paladin ? 9 : 8, sprite.RowsPerDirection);
+            if (wizard)
+                foreach (var name in new[] { "wizard_bolt", "wizard_weave", "wizard_ward", "wizard_nova", "wizard_stomp" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 222));
+            else
+                Assert.Same(sprite.Anim("point"), sprite.Anim("wizard_bolt"));
+            if (sorcerer)
+                foreach (var name in new[] { "sorcerer_fling", "sorcerer_surge", "sorcerer_focus", "sorcerer_breath" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 208));
+            else
+                Assert.Same(sprite.Anim("point"), sprite.Anim("sorcerer_fling"));
+            if (warlock)
+                foreach (var name in new[] { "warlock_pact", "warlock_lash", "warlock_rift", "warlock_blade", "warlock_release" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 209));
+            else
+                Assert.Same(sprite.Anim("point"), sprite.Anim("warlock_lash"));
+            if (cleric)
+                foreach (var name in new[] { "cleric_prayer", "cleric_restore", "cleric_judgement", "cleric_strike" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 208));
+            else
+                Assert.Same(sprite.Anim("pray"), sprite.Anim("cleric_prayer"));
+            if (druid)
+                foreach(var name in new[]{"druid_roots","druid_gale","druid_mend","druid_lash","druid_shape"})
+                    Assert.All(sprite.Anim(name).Frames,frame=>Assert.InRange(frame,189,213));
+            else Assert.Same(sprite.Anim("summon"),sprite.Anim("druid_roots"));
+            if(paladin)
+                foreach(var name in new[]{"paladin_oath","paladin_mercy","paladin_judgement","paladin_strike","paladin_guard"})
+                    Assert.All(sprite.Anim(name).Frames,frame=>Assert.InRange(frame,189,213));
+            else Assert.Same(sprite.Anim("block"),sprite.Anim("paladin_guard"));
             Assert.Equal(32, sprite.FootprintWidth);
         }
     }

@@ -577,7 +577,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire"
+  "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire; fx.paladin_elemental_weapon.fire"
  },
  "spell_lightning": {
   "prompt": "Lightning bolt strike from the sky, sharp crackling electric crack and thunder clap",
@@ -586,7 +586,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.lightning.storm, fx.shock.storm"
+  "use": "fx.lightning.storm, fx.shock.storm; fx.wizard_shocking_grasp.storm; fx.wizard_chromatic_orb.storm; fx.sorcerer_shocking_grasp.storm; fx.sorcerer_chromatic_orb.storm"
  },
  "spell_thunderwave": {
   "prompt": "Booming thunderwave shockwave blast, deep rolling concussive boom",
@@ -595,7 +595,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.thunder.thunder"
+  "use": "fx.thunder.thunder; fx.wizard_thunderwave.thunder; fx.sorcerer_thunderwave.thunder; fx.druid_thunderwave.thunder"
  },
  "spell_ice": {
   "prompt": "Ice spell forming, crystalline freezing crackle and shards of ice snapping",
@@ -604,7 +604,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.ice.frost, fx.frost.frost"
+  "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost; fx.sorcerer_ray_of_frost.frost; fx.sorcerer_ice_storm.frost; fx.warlock_armor_of_agathys.frost; fx.druid_sleet_storm.frost; fx.druid_ice_storm.frost"
  },
  "spell_holy_heal": {
   "prompt": "Holy healing spell, warm shimmering angelic choir swell with soft bells",
@@ -613,7 +613,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.heal.holy, fx.restore.holy"
+  "use": "fx.heal.holy, fx.restore.holy; fx.cleric_cure_wounds.healing; fx.cleric_healing_word.healing; fx.cleric_lesser_restoration.healing; fx.cleric_mass_healing_word.healing; fx.cleric_mass_cure_wounds.healing; fx.cleric_greater_restoration.healing; fx.cleric_divine_spark.healing; fx.cleric_preserve_life.healing; fx.paladin_lay_on_hands.holy; fx.paladin_cure_wounds.holy; fx.paladin_lesser_restoration.holy"
  },
  "spell_holy_pillar": {
   "prompt": "Pillar of holy light descending, bright resonant shimmering beam with a sacred chime",
@@ -622,7 +622,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*"
+  "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*; fx.cleric_sacred_flame.radiant; fx.cleric_word_of_radiance.radiant; fx.cleric_guiding_bolt.radiant; fx.cleric_banishment.holy; fx.cleric_sear_undead.radiant; fx.cleric_divine_intervention.healing; fx.paladin_divine_smite.gold; fx.paladin_divine_smite_2.gold; fx.paladin_divine_smite_3.gold"
  },
  "spell_shield": {
   "prompt": "Magical protective shield forming, glassy shimmering hum that snaps into place",
@@ -631,7 +631,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.shield.*, fx.ward.*"
+  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth; fx.paladin_shield_of_faith.azure"
  },
  "spell_bless": {
   "prompt": "Blessing spell, gentle golden sparkling chimes rising",
@@ -640,7 +640,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.bless.*, fx.inspire.*"
+  "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing; fx.paladin_bless.gold; fx.paladin_aid.gold"
  },
  "spell_arcane_circle": {
   "prompt": "Arcane magic circle activating on the ground, mystical humming resonance with glittering sparkles",
@@ -649,7 +649,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane"
+  "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane; fx.wizard_grease.arcane; fx.wizard_banishment.arcane; fx.wizard_arcane_recovery.arcane; fx.sorcerer_innate_sorcery.arcane; fx.sorcerer_font_of_magic_mana.arcane; fx.sorcerer_font_of_magic_sorcery.psychic; fx.sorcerer_metamagic_twinned.force; fx.sorcerer_metamagic_extended.arcane; fx.sorcerer_metamagic_careful.gold; fx.sorcerer_metamagic_quickened.storm; fx.sorcerer_metamagic_distant.force; fx.sorcerer_banishment.arcane"
  },
  "spell_eldritch": {
   "prompt": "Eldritch energy blast, otherworldly crackling violet beam with a warping whoosh",
@@ -658,7 +658,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.eldritch, fx.force.*"
+  "use": "fx.eldritch, fx.force.*; fx.wizard_magic_missile.force; fx.sorcerer_magic_missile.force; fx.warlock_eldritch_blast.force"
  },
  "spell_nature_heal": {
   "prompt": "Nature healing magic, soft rustling leaves with gentle woody chimes and birdlike sparkle",
@@ -667,7 +667,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.heal.nature, fx.restore.nature"
+  "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing"
  },
  "spell_nature_circle": {
   "prompt": "Roots and vines erupting from the ground, creaking wood and rustling growth",
@@ -676,7 +676,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk"
+  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk; fx.sorcerer_web.silk; fx.druid_faerie_fire.fey; fx.druid_hold_person.nature; fx.druid_spike_growth.nature; fx.druid_conjure_animals.nature"
  },
  "spell_shadow": {
   "prompt": "Shadow curse spell, dark ominous whisper-like whoosh with a low droning pulse",
@@ -685,7 +685,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*"
+  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave; fx.sorcerer_chill_touch.grave; fx.warlock_hex.shadow; fx.warlock_chill_touch.grave; fx.warlock_arms_of_hadar.grave; fx.warlock_darkness.shadow; fx.warlock_vampiric_touch.grave; fx.cleric_toll_the_dead.grave; fx.cleric_bane.grave; fx.cleric_inflict_wounds.grave; fx.cleric_blindness.grave; fx.cleric_bestow_curse.grave"
  },
  "spell_poison_cloud": {
   "prompt": "Poison gas cloud spreading, hissing bubbling toxic vapour",
@@ -694,7 +694,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*"
+  "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*; fx.wizard_poison_spray.venom; fx.wizard_ray_of_sickness.sickness; fx.sorcerer_poison_spray.venom; fx.warlock_poison_spray.venom"
  },
  "spell_misty_step": {
   "prompt": "Teleport blink, quick magical swoosh with an airy shimmer as someone vanishes and reappears",
@@ -703,7 +703,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported"
+  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic; fx.sorcerer_sleep.fey; fx.sorcerer_misty_step.mist; fx.sorcerer_greater_invisibility.mist; fx.warlock_one_with_shadows.shadow; fx.warlock_shroud_of_shadow.shadow; fx.warlock_misty_step.mist; fx.warlock_dimension_door.arcane"
  },
  "spell_psychic": {
   "prompt": "Psychic spell, eerie warbling mind-bending tone sweeping upward",
@@ -712,7 +712,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.psychic.*"
+  "use": "fx.psychic.*; fx.warlock_maddening_hex.psychic"
  },
  "smoke_poof": {
   "prompt": "Small puff of smoke, soft airy poof",
@@ -721,7 +721,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.poof.white, fx.smoke.grey"
+  "use": "fx.poof.white, fx.smoke.grey; fx.druid_wild_shape_wolf.nature; fx.druid_wild_shape_bear.nature; fx.druid_wild_shape_dire_wolf.moon; fx.druid_fog_cloud.mist"
  },
  "dust_burst": {
   "prompt": "Earth and dust kicked up, crumbly gravelly burst",

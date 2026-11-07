@@ -1,0 +1,22 @@
+{
+  "commit": "4eb38ab6a3d287849553c8c0012cb5e39483d76e",
+  "harnessOnlyBackport": [
+    "games/Tactics/Tactics.Presentation/Beats/FxShowcase.cs",
+    "src/ArcBox.Host/games/tactics/FxDemoFeeder.cs",
+    "src/ArcBox.Host/games/tactics/FxDemoFeeder.cs.uid",
+    "src/ArcBox.Host/Main.cs",
+    "src/ArcBox.Host/Shell/AppArgs.cs",
+    "src/ArcBox.Host/Shell/Screenshotter.cs"
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "simulationFps": 60,
+  "captureFps": 30,
+  "seed": 7,
+  "map": "crypt_hall",
+  "preset": "low",
+  "renderer": "gl_compatibility",
+  "audio": "Dummy"
+}

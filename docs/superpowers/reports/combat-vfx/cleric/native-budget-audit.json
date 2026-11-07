@@ -1,0 +1,271 @@
+{
+  "samples": 44,
+  "allPassed": true,
+  "excludesCinematicExtra": true,
+  "abilities": [
+    {
+      "id": "common.attack",
+      "nativeBaseSeconds": 0.45999999999999996,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "cleric.bane",
+      "nativeBaseSeconds": 0.78,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.bless",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.command",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.cure_wounds",
+      "nativeBaseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.guiding_bolt",
+      "nativeBaseSeconds": 0.7999999999999999,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.healing_word",
+      "nativeBaseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.inflict_wounds",
+      "nativeBaseSeconds": 0.66,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.resistance",
+      "nativeBaseSeconds": 0.33999999999999997,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "cleric.sacred_flame",
+      "nativeBaseSeconds": 0.42000000000000004,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "cleric.shield_of_faith",
+      "nativeBaseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.toll_the_dead",
+      "nativeBaseSeconds": 0.66,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "cleric.word_of_radiance",
+      "nativeBaseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "cleric.divine_spark",
+      "nativeBaseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.turn_undead",
+      "nativeBaseSeconds": 0.8600000000000001,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.aid",
+      "nativeBaseSeconds": 0.3,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.blindness",
+      "nativeBaseSeconds": 0.42000000000000004,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.hold_person",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.lesser_restoration",
+      "nativeBaseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.spiritual_weapon",
+      "nativeBaseSeconds": 0.45999999999999996,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.bestow_curse",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.dispel_magic",
+      "nativeBaseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.mass_healing_word",
+      "nativeBaseSeconds": 0.72,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.sear_undead",
+      "nativeBaseSeconds": 0.8600000000000001,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.spirit_guardians",
+      "nativeBaseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.banishment",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.death_ward",
+      "nativeBaseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.divine_strike",
+      "nativeBaseSeconds": 0.5399999999999999,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "death_ward.save",
+      "nativeBaseSeconds": 1.25,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.flame_strike",
+      "nativeBaseSeconds": 0.9600000000000002,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.greater_restoration",
+      "nativeBaseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.mass_cure_wounds",
+      "nativeBaseSeconds": 0.64,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.divine_intervention",
+      "nativeBaseSeconds": 1.08,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "life.preserve_life",
+      "nativeBaseSeconds": 0.72,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "life.word_of_renewal",
+      "nativeBaseSeconds": 0.71,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "life.mass_revival",
+      "nativeBaseSeconds": 1.16,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "light.radiance_of_the_dawn",
+      "nativeBaseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "light.burning_luminescence",
+      "nativeBaseSeconds": 0.9799999999999999,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "light.warding_flare",
+      "nativeBaseSeconds": 0.88,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "light.corona_of_light",
+      "nativeBaseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "war.guided_strike",
+      "nativeBaseSeconds": 0.33999999999999997,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "war.war_priest",
+      "nativeBaseSeconds": 0.5399999999999999,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "war.avatar_of_battle",
+      "nativeBaseSeconds": 0.54,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "cleric.toll_the_dead.wounded",
+      "nativeBaseSeconds": 0.66,
+      "capSeconds": 0.8,
+      "passed": true
+    }
+  ]
+}

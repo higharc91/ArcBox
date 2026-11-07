@@ -1,0 +1,28 @@
+{
+  "baseline": "0e96d34360e71f22497286098ca1fe77cad3af8e",
+  "gameplayDefinitionsUnchanged": 39,
+  "allPassiveDefinitionsUnchanged": true,
+  "phoneByteIdentical": true,
+  "audioClipsByteIdentical": true,
+  "otherClassAtlasesUnchanged": true,
+  "rulesAiImplementationUnchanged": true,
+  "workflowFilesUnchanged": true,
+  "replayCommandsAndPhoneFixturesUnchanged": true,
+  "goldenChangesPresentationOnly": [
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json",
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json"
+  ],
+  "goldenVerification": {
+    "games/Tactics/Tactics.Logic.Tests/Golden/river-crossing.events.json": {
+      "events": 127,
+      "presentationObjectsChanged": 2,
+      "allGameplayEventValuesUnchanged": true
+    },
+    "games/Tactics/Tactics.Logic.Tests/Golden/warlord-bridge.events.json": {
+      "events": 1135,
+      "presentationObjectsChanged": 14,
+      "allGameplayEventValuesUnchanged": true
+    }
+  },
+  "gameplaySha256": "49cfaff5c7235db0826f9cbb58cacede050b0b1a86ebccd56d5139dda970252f"
+}
