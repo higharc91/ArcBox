@@ -17,6 +17,8 @@ public sealed class MobRefreshTests
     [InlineData("characters.cult_leader", "cult_leader")]
     [InlineData("characters.skeleton", "skeleton")]
     [InlineData("characters.skeleton_archer", "skeleton_archer")]
+    [InlineData("characters.zombie", "zombie")]
+    [InlineData("bosses.wraith.wraith", "wraith")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -68,6 +70,17 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Fact]
+    public void Wraith_life_drain_uses_gathering_poses_separate_from_its_physical_touch()
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite("bosses.wraith.wraith")!;
+        var special = sprite.Anim("bosses.special");
+        Assert.Equal(sprite.Anim("cast").Frames.ToArray(), special.Frames.ToArray());
+        Assert.False(special.Loop);
+        Assert.False(special.Frames.SequenceEqual(sprite.Anim("attack").Frames));
+        Assert.True(special.Frames.Distinct().Count() >= 3);
     }
 
     [Fact]
@@ -176,6 +189,8 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.cult_leader")!.HeadLift / person, .85f, 1.15f);
         Assert.InRange(art.Sprite("characters.skeleton")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("characters.skeleton_archer")!.HeadLift / person, .9f, 1.2f);
+        Assert.InRange(art.Sprite("characters.zombie")!.HeadLift / person, .8f, 1.15f);
+        Assert.InRange(art.Sprite("bosses.wraith.wraith")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

@@ -320,12 +320,12 @@
       "surprised": "goblin_archer_refresh_surprised.png"
     },
     "zombie": {
-      "idle": "zombie_idle.png",
-      "hurt": "zombie_hurt.png",
-      "happy": "zombie_happy.png",
-      "angry": "zombie_angry.png",
-      "sad": "zombie_sad.png",
-      "surprised": "zombie_surprised.png"
+      "idle": "zombie_refresh_idle.png",
+      "hurt": "zombie_refresh_hurt.png",
+      "happy": "zombie_refresh_happy.png",
+      "angry": "zombie_refresh_angry.png",
+      "sad": "zombie_refresh_sad.png",
+      "surprised": "zombie_refresh_surprised.png"
     },
     "skeleton_archer": {
       "idle": "skeleton_archer_refresh_idle.png",

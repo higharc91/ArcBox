@@ -25,6 +25,6 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Bone Warden warrior and archer](bone-wardens/index.html), with before/after art, eight-direction walking and attacks, plus actual encounter captures. Twelve looks are refreshed across five batches; 17 older combat looks remain. The historical 98-look baseline above stays unchanged.
+[Latest: Risen of Frostpeak and wraith](hollow-dead/index.html), with before/after art, eight-direction shuffle/glide, attacks and life drain, plus actual encounter captures. Fourteen looks are refreshed across six batches; 15 older combat looks remain. The historical 98-look baseline above stays unchanged.
 
-Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html), [Kindled cultist and Maren](kindled/index.html). [Current tracker](production/refresh-status.json).
+Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html), [Kindled cultist and Maren](kindled/index.html), [Bone Wardens](bone-wardens/index.html). [Current tracker](production/refresh-status.json).

@@ -1,0 +1,14 @@
+[
+  {
+    "mob": "wraith",
+    "action": "attack",
+    "source": "wraith-attack-right",
+    "count": 12,
+    "heightFactor": 1,
+    "targets": [
+      { "row": 5, "poses": [0, 1, 2, 3] },
+      { "row": 6, "poses": [4, 5, 6, 7] },
+      { "row": 7, "poses": [8, 9, 10, 11] }
+    ]
+  }
+]

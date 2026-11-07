@@ -9462,6 +9462,270 @@
         }
       },
       "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/bone-wardens-2026-11-07/."
+    },
+    "mob_refresh_zombie": {
+      "file": "mob_refresh_zombie.png",
+      "family": "zombie",
+      "variant": "hollow-dead",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        80,
+        80,
+        64,
+        64
+      ],
+      "headTop": 83,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 22.4,
+      "footprintHeight": 37.12,
+      "keys": [
+        "characters.zombie"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/hollow-dead-2026-11-07/."
+    },
+    "mob_refresh_wraith": {
+      "file": "mob_refresh_wraith.png",
+      "family": "wraith",
+      "variant": "hollow-dead",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        78,
+        69,
+        64,
+        64
+      ],
+      "headTop": 72,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 22.08,
+      "footprintHeight": 40.64,
+      "keys": [
+        "bosses.wraith.wraith"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/hollow-dead-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

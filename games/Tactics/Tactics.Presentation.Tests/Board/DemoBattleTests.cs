@@ -7,6 +7,19 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Hollow_dead_review_places_risen_and_wraith_with_party_and_refreshed_references()
+    {
+        var battle = DemoBattle.View("river_crossing:hollow-dead").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.zombie");
+        Assert.Contains(battle.Units, u => u.Sprite == "bosses.wraith.wraith");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.class_fighter");
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Bone_warden_review_places_both_weapons_with_party_and_refreshed_human_references()
     {
         var battle = DemoBattle.View("river_crossing:bone-wardens").Battle!;

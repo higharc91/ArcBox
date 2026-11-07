@@ -32,3 +32,5 @@ Host arguments after `--`:
 ```
 
 Twelve looks are refreshed across five batches; [17 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline stays unchanged. No PR has been opened.
+
+Subsequent batch: [Risen of Frostpeak and wraith](../hollow-dead/README.md). Fourteen looks are now refreshed; 15 older combat looks remain.

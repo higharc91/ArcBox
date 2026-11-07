@@ -1,0 +1,14 @@
+{
+  "priorCommit": "68d1b193458cd648704968b532fa2800359f8d39",
+  "addedCreatureEntries": [
+    "mob_refresh_wraith",
+    "mob_refresh_zombie"
+  ],
+  "changedPortraitPresets": [
+    "zombie"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "runtimeAssets": 8,
+  "selectedDistinctPoses": 248
+}

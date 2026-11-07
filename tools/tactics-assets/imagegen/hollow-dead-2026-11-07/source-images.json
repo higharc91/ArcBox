@@ -1,0 +1,13 @@
+{
+  "zombie-idle": "62fda801-60dc-462b-bf6f-95bfaec65db9",
+  "wraith-idle": "d396192e-1f21-4eac-b433-a1b43001ef01",
+  "zombie-walk": "ca6af070-1898-4719-b174-819042c0b596",
+  "wraith-walk": "0ac6f0f9-9356-4d34-82a4-7fdd8ce7628a",
+  "zombie-attack": "2edd1233-ea8f-49aa-977f-b232745136ff",
+  "wraith-attack": "32c17007-c23e-4057-b71d-9eb153ca3d49",
+  "wraith-cast": "448432ad-909d-4082-899e-add20b4f5159",
+  "wraith-attack-right": "719802c9-a35c-49d1-962e-61cde2250f47",
+  "zombie-damage": "e38b441f-8856-4faf-9363-2c4ba55559cf",
+  "wraith-damage": "efb72f43-39fc-42d2-ac08-3be42b8a0389",
+  "zombie-portraits": "608272f3-daa8-4ef5-9d94-d9fa2f7682ab"
+}

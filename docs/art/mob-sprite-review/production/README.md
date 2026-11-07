@@ -1,6 +1,6 @@
 # Approved first batch: integrated
 
-Goblin cutthroat, orc brute and red drake are registered in the game on `mob-sprite-refresh`. Existing combat keys are retained. The red drake keeps its original `beasts.drake` alias and remains grounded by the rules. Other mob roles, named designs and drake color variants retain their own art; [refresh-status.json](refresh-status.json) tracks the remaining 17 older combat looks after the fifth batch.
+Goblin cutthroat, orc brute and red drake are registered in the game on `mob-sprite-refresh`. Existing combat keys are retained. The red drake keeps its original `beasts.drake` alias and remains grounded by the rules. Other mob roles, named designs and drake color variants retain their own art; [refresh-status.json](refresh-status.json) tracks the remaining 15 older combat looks after the sixth batch.
 
 - [Standalone review](index.html): all eight directions and all five actions, with embedded battle/overworld evidence. Animation playback uses the shipped manifest's frame sequence and cadence.
 - [Combined animation GIF](first-batch-motion.gif) / [MP4](first-batch-motion.mp4): walking and attacks in four representative directions, at the shipped action cadence with brief pauses between attacks.
@@ -36,3 +36,5 @@ Latest third batch: [hobgoblin and roadside bandit](../road-and-host/README.md).
 Latest fourth batch: [Kindled cultist and Maren / Ember Hierophant](../kindled/README.md).
 
 Latest fifth batch: [Bone Warden warrior and archer](../bone-wardens/README.md).
+
+Latest sixth batch: [Risen of Frostpeak and wraith](../hollow-dead/README.md).

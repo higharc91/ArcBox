@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twelve refreshed designs integrated across five batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; fourteen refreshed designs integrated across six batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -12,9 +12,11 @@
     "characters.cultist",
     "characters.cult_leader",
     "characters.skeleton",
-    "characters.skeleton_archer"
+    "characters.skeleton_archer",
+    "characters.zombie",
+    "bosses.wraith.wraith"
   ],
-  "remainingOlderCombatLooks": 17,
+  "remainingOlderCombatLooks": 15,
   "looks": [
     {
       "baselineNumber": 1,
@@ -86,7 +88,7 @@
       "baselineNumber": 12,
       "name": "Wraith",
       "key": "bosses.wraith.wraith",
-      "status": "awaiting refresh"
+      "status": "integrated sixth batch"
     },
     {
       "baselineNumber": 13,
@@ -182,7 +184,7 @@
       "baselineNumber": 28,
       "name": "Zombie",
       "key": "characters.zombie",
-      "status": "awaiting refresh"
+      "status": "integrated sixth batch"
     },
     {
       "baselineNumber": 29,

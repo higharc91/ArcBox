@@ -1,0 +1,13 @@
+{
+  "wraith-attack-right.png": "56d964ada7e802cc94d3461efe0f1cf927a61b03b9f81c4debd5587f72c4240f",
+  "wraith-attack.png": "08bcdbb1d35a1835c657239327ef5a070d519f46aaab6cae846e2eeccb6f7c63",
+  "wraith-cast.png": "82843e6955d489632b75043b9041ef5d2cbd34bdf33a0784e619b99dfa804638",
+  "wraith-damage.png": "1cc92b09feb3d9a573cedeb28801b16fb0d217efe71c1b5caa7f1a99e4a1505f",
+  "wraith-idle.png": "350c2abcbf25f863a8715c8f977adc6c12afdeefdbbf5386633a41269e94f559",
+  "wraith-walk.png": "7ba0371577a1570193c0dd621dfdd125f9c0db6d4367010019f98c2172202606",
+  "zombie-attack.png": "91cb79d73c11f6fff8de6173da460a12e93a6d66825208b69680dde2d38a9a3f",
+  "zombie-damage.png": "0974076701e50e61cace05e2f52bbc49e80015692f01e5e98bed2eb94095a84d",
+  "zombie-idle.png": "672093c1fdafd4395c83b6d6af4fddad3be655d89d3e4abb4f4f419a17ee5837",
+  "zombie-portraits.png": "68b05e5049cef960a5003af51b9ce0ae831c4aa857a78d9e14c94cbc8b7bcf18",
+  "zombie-walk.png": "14fdd5fc5d5a2f755a23084bfef97408dd613958fc1c7846e9064be90708c016"
+}
