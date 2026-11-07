@@ -147,6 +147,9 @@ public partial class Main : Control
             if (board == "environment")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
+            else if (board == "stone-and-mire-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.StoneAndMireDemo.Steps(pack)));
             else if (board.StartsWith("encounter:", StringComparison.Ordinal))
                 OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(
                     global::Tactics.Presentation.Board.DemoBattle.Encounter(board["encounter:".Length..], pack), ArcJson.Options)));

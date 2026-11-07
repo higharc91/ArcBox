@@ -30,6 +30,28 @@ public sealed class UnitPlanTests
     private static ImmutableArray<WalkerView> Walkers(params string[] ids)
         => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
 
+    [Theory]
+    [InlineData("bosses.troll.troll")]
+    [InlineData("bosses.golem.granite")]
+    public void Raised_boulders_and_fists_stay_below_their_health_bar(string key)
+    {
+        var view = Unit("a", "Enemy", 11, 10, key);
+        var idle = One(null, view);
+        var posed = Assert.Single(UnitPlan.Build(Battle(null, view), River, Art.Value, Fit, poses:
+            new Dictionary<UnitId, UnitPose> { [view.Id] = new("bosses.special", .3, new Vector2(0, 1)) }));
+        var sprite = posed.Sprite;
+        var source = sprite.Source(Assert.Single(posed.Anim.Frames), posed.Row);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var first = source.Height;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128) first = Math.Min(first, y);
+        var highest = posed.Feet.Y + (first - sprite.AnchorY) * sprite.PixelScale;
+        Assert.True(posed.Bar!.TopLeft.Y + UnitPlan.BarHeight < highest);
+        Assert.True(posed.Bar.TopLeft.Y < idle.Bar!.TopLeft.Y);
+        Assert.Equal(idle.Sprite.HeadLift, posed.Sprite.HeadLift); // headroom does not change body size
+    }
+
     [Fact]
     public void Walkers_have_no_bars_and_only_the_leader_a_crown()
     {
@@ -414,7 +436,7 @@ public sealed class UnitPlanTests
 
     [Fact]
     public void A_downed_monster_holds_its_last_down_frame()
-        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.troll", life: "Downed", countdown: 1)).Anim.FrameAt(0));
+        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.frost", life: "Downed", countdown: 1)).Anim.FrameAt(0));
 
     [Fact]
     public void A_standing_unit_idles_and_units_do_not_bob_in_step()

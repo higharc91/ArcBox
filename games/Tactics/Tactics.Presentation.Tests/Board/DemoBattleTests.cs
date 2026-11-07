@@ -7,6 +7,19 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Stone_and_mire_review_places_both_giants_with_human_scale_references()
+    {
+        var battle = DemoBattle.View("river_crossing:stone-and-mire").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        Assert.Contains(battle.Units, u => u.Sprite == "bosses.troll.troll");
+        Assert.Contains(battle.Units, u => u.Sprite == "bosses.golem.granite");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.class_fighter");
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Oath_and_shadow_review_places_greatsword_and_rapier_roles_with_refreshed_references()
     {
         var battle = DemoBattle.View("river_crossing:oath-and-shadow").Battle!;

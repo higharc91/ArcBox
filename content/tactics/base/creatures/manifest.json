@@ -10560,6 +10560,454 @@
         }
       },
       "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/oath-and-shadow-2026-11-07/."
+    },
+    "mob_refresh_troll": {
+      "file": "mob_refresh_troll.png",
+      "family": "troll",
+      "variant": "stone-and-mire",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          288
+        ]
+      },
+      "portrait": [
+        128,
+        97,
+        64,
+        64
+      ],
+      "headTop": 84,
+      "overheadClearance": {
+        "special": 19.28
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 56.32,
+      "footprintHeight": 65.6,
+      "keys": [
+        "bosses.troll.troll"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario creature concepts; OpenAI complete pixel poses. Sources and export checks: tools/tactics-assets/imagegen/stone-and-mire-2026-11-07/."
+    },
+    "mob_refresh_golem": {
+      "file": "mob_refresh_golem.png",
+      "family": "golem",
+      "variant": "stone-and-mire",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        96,
+        49,
+        64,
+        64
+      ],
+      "headTop": 44,
+      "overheadClearance": {
+        "special": 9.36
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 44.48,
+      "footprintHeight": 57.6,
+      "keys": [
+        "bosses.golem.granite"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario creature concepts; OpenAI complete pixel poses. Sources and export checks: tools/tactics-assets/imagegen/stone-and-mire-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

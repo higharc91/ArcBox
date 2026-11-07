@@ -1,4 +1,5 @@
 using Tactics.Presentation.Board;
+using Tactics.Logic;
 
 namespace Tactics.Presentation.Tests.Board;
 
@@ -23,6 +24,8 @@ public sealed class MobRefreshTests
     [InlineData("characters.lich", "lich")]
     [InlineData("characters.black_knight", "black_knight")]
     [InlineData("characters.dark_elf", "dark_elf")]
+    [InlineData("bosses.troll.troll", "troll")]
+    [InlineData("bosses.golem.granite", "golem")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -31,7 +34,7 @@ public sealed class MobRefreshTests
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         for (var row = 0; row < 8; row++)
         {
-            foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" }.Concat(sprite.Anims.ContainsKey("cast") ? ["cast"] : Array.Empty<string>()))
+            foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" }.Concat(new[] { "cast", "special", "buff" }.Where(sprite.Anims.ContainsKey)))
             {
                 var shapes = new HashSet<string>();
                 foreach (var frame in sprite.Anim(action).Frames.Distinct())
@@ -74,6 +77,37 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Theory]
+    [InlineData("bosses.troll.troll", "troll.boulder_toss", "troll.frenzy_roar")]
+    [InlineData("bosses.golem.granite", "golem.seismic_slam", "golem.stone_aegis")]
+    public void Giants_bind_their_two_special_moves_to_distinct_complete_clips(string key, string primary, string buff)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")], Pack.Manifests);
+        var primaryBinding = rules.Abilities[new(primary)].Presentation!.Anim!;
+        var buffBinding = rules.Abilities[new(buff)].Presentation!.Anim!;
+        Assert.Equal("bosses.special", primaryBinding);
+        Assert.Equal("bosses.buff", buffBinding);
+        Assert.Equal(sprite.Anim("special").Frames.ToArray(), sprite.Anim(primaryBinding).Frames.ToArray());
+        Assert.Equal(sprite.Anim("buff").Frames.ToArray(), sprite.Anim(buffBinding).Frames.ToArray());
+        Assert.False(sprite.Anim(primaryBinding).Frames.SequenceEqual(sprite.Anim(buffBinding).Frames));
+        Assert.False(sprite.Anim(primaryBinding).Loop);
+        Assert.False(sprite.Anim(buffBinding).Loop);
+        Assert.False(sprite.Anim("attack").Frames.SequenceEqual(sprite.Anim(primaryBinding).Frames));
+    }
+
+    [Theory]
+    [InlineData("bosses.troll.frost")]
+    [InlineData("bosses.golem.basalt")]
+    public void Legacy_boss_variants_keep_their_existing_special_clip_for_the_buff_binding(string key)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        Assert.Equal(sprite.Anim("special").Frames.ToArray(), sprite.Anim("bosses.buff").Frames.ToArray());
+        Assert.Equal(sprite.Anim("special").Fps, sprite.Anim("bosses.buff").Fps);
+        Assert.Equal(sprite.Anim("special").Loop, sprite.Anim("bosses.buff").Loop);
+        Assert.Equal(Pack.Frames("bosses", "special"), sprite.Anim("bosses.buff").Frames.ToArray());
     }
 
     [Fact]
@@ -265,6 +299,8 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.lich")!.HeadLift / person, .95f, 1.25f);
         Assert.InRange(art.Sprite("characters.black_knight")!.HeadLift / person, 1f, 1.4f);
         Assert.InRange(art.Sprite("characters.dark_elf")!.HeadLift / person, .9f, 1.2f);
+        Assert.InRange(art.Sprite("bosses.troll.troll")!.HeadLift / person, 1.35f, 1.95f);
+        Assert.InRange(art.Sprite("bosses.golem.granite")!.HeadLift / person, 1.35f, 1.85f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

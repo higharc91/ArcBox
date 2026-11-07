@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; eighteen refreshed designs integrated across eight batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty refreshed designs integrated across nine batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -18,9 +18,11 @@
     "characters.necromancer",
     "characters.lich",
     "characters.black_knight",
-    "characters.dark_elf"
+    "characters.dark_elf",
+    "bosses.troll.troll",
+    "bosses.golem.granite"
   ],
-  "remainingOlderCombatLooks": 11,
+  "remainingOlderCombatLooks": 9,
   "looks": [
     {
       "baselineNumber": 1,
@@ -50,7 +52,7 @@
       "baselineNumber": 5,
       "name": "Stone Golem",
       "key": "bosses.golem.granite",
-      "status": "awaiting refresh"
+      "status": "integrated ninth batch"
     },
     {
       "baselineNumber": 6,
@@ -80,7 +82,7 @@
       "baselineNumber": 10,
       "name": "Troll",
       "key": "bosses.troll.troll",
-      "status": "awaiting refresh"
+      "status": "integrated ninth batch"
     },
     {
       "baselineNumber": 11,

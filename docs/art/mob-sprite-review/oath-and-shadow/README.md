@@ -35,3 +35,5 @@ Host arguments after `--`:
 ```
 
 Eighteen looks are refreshed across eight batches; [11 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline stays unchanged. No PR has been opened.
+
+Subsequent batch: [Troll and granite Stone Golem](../stone-and-mire/README.md).

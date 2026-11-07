@@ -118,6 +118,8 @@ public sealed class HudArtTests
     [InlineData("characters.lich", "lich", 64)]
     [InlineData("characters.black_knight", "black_knight", 64)]
     [InlineData("characters.dark_elf", "dark_elf", 64)]
+    [InlineData("bosses.troll.troll", "troll", 64)]
+    [InlineData("bosses.golem.granite", "golem", 64)]
     public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
     {
         var portrait = Art.Value.Portrait(key, UnitTone.Enemy);

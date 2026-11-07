@@ -35,6 +35,81 @@ public sealed class BeatScriptTests
     private static AbilityUsed Used(string? anim, string? fx, string? projectile, UnitId target)
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
 
+    [Fact]
+    public void Giant_review_replays_the_four_real_ability_presentations_through_the_beat_path()
+    {
+        var steps = StoneAndMireDemo.Steps(Pack.Root);
+        Assert.Equal(5, steps.Count);
+        var used = steps.Skip(1).SelectMany(s => s.View.Battle!.Beats).SelectMany(b => b.Events).OfType<AbilityUsed>().ToArray();
+        Assert.Equal(new[] { "troll.boulder_toss", "troll.frenzy_roar", "golem.seismic_slam", "golem.stone_aegis" }, used.Select(u => u.Ability.Value));
+        Assert.Equal(new[] { "bosses.special", "bosses.buff", "bosses.special", "bosses.buff" }, used.Select(u => u.Presentation!.Anim));
+        foreach (var step in steps)
+        {
+            var battle = step.View.Battle!;
+            var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+            Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        }
+    }
+
+    [Theory]
+    [InlineData("bosses.troll.troll")]
+    [InlineData("bosses.golem.granite")]
+    public void Giant_melee_keeps_its_wind_up_impact_and_recovery(string sprite)
+    {
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = sprite } : u)] };
+        var used = Used("bosses.attack", null, null, Foe);
+        var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "bludgeoning", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite(sprite)!.Anim(lunge.Anim);
+        Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
+        Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+    }
+
+    [Fact]
+    public void Troll_releases_the_rendered_boulder_when_its_authored_hands_open()
+    {
+        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.troll.troll" } : u)] };
+        var used = new AbilityUsed(Hero, new("troll.boulder_toss"), new Target(Unit: Foe), new("bosses.special", "fx.dust", "projectiles.rock"));
+        var script = Script(view, used, new Damaged(Foe, 5, "bludgeoning", 5));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>(), c => c.Unit == Hero);
+        var flight = Assert.Single(script.Cues.OfType<FlightCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.troll.troll")!.Anim(pose.Anim);
+        Assert.Equal(15, anim.FrameAt(flight.At - pose.At - .001)); // held overhead
+        Assert.Equal(16, anim.FrameAt(flight.At - pose.At)); // empty release hands
+        Assert.Equal(flight.At + flight.Length, LastHit(script), 6);
+        Assert.True(pose.Length >= anim.Frames.Length / anim.Fps);
+        Assert.True(script.Length >= pose.At + pose.Length);
+    }
+
+    [Theory]
+    [InlineData("troll.frenzy_roar", "bosses.troll.troll", "bosses.buff")]
+    [InlineData("golem.seismic_slam", "bosses.golem.granite", "bosses.special")]
+    [InlineData("golem.stone_aegis", "bosses.golem.granite", "bosses.buff")]
+    public void Giant_self_moves_keep_their_entire_authored_clip(string ability, string sprite, string binding)
+    {
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), new(binding, null, null));
+        var script = Script(Near, used);
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>(), c => c.Unit == Hero);
+        var anim = UnitArt.Load(Pack.Root).Sprite(sprite)!.Anim(binding);
+        Assert.True(pose.Length >= anim.Frames.Length / anim.Fps);
+        Assert.True(script.Length >= pose.At + pose.Length);
+    }
+
+    [Fact]
+    public void Golem_seismic_dust_and_damage_begin_when_the_fists_land()
+    {
+        var used = new AbilityUsed(Hero, new("golem.seismic_slam"), new Target(Unit: Hero), new("bosses.special", "fx.dust", null));
+        var script = Script(Near, used, new Damaged(Foe, 5, "bludgeoning", 5));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>(), c => c.Unit == Hero);
+        var dust = Assert.Single(script.Cues.OfType<BurstCue>(), c => c.Clip.Path == Fx.Value.Clip("fx.dust")!.Path);
+        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.golem.granite")!.Anim(pose.Anim);
+        Assert.Equal(16, anim.FrameAt(dust.At - pose.At));
+        Assert.Equal(dust.At, LastHit(script), 6);
+        Assert.True(dust.At > pose.At);
+        Assert.True(script.Length >= pose.At + pose.Length);
+    }
+
     [Theory]
     [InlineData("ashmaw.cinder_roar", "monsters.roar", 1.2, "ashmaw_roar")]
     [InlineData("ashmaw.ash_shake", "monsters.shake", 1.0, "ashmaw_shake")]

@@ -664,14 +664,22 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     "ashmaw.cinder_roar" => 1.2, // six frames at five fps
                     "ashmaw.ash_shake" => 1.0,
                     "grisk.dig_faster" => 0.7,
+                    "troll.frenzy_roar" => 0.8,
+                    "golem.seismic_slam" => 1.0,
+                    "golem.stone_aegis" => 0.8,
                     _ => BeatTiming.Cast,
                 };
                 _cues.Add(new PoseCue(_t, length, used.Source, anim));
                 if (length != BeatTiming.Cast) SwingSound(used, anim);
                 else Sound(SoundChoice.IsSpell(effect) ? "spell_cast" : null);
-                EffectSound(effect);
-                Burst(effect, source);
-                _t += length;
+                // The golem's fists hit halfway through the clip; its recovery continues
+                // while the damage/ground effect resolves, rather than kicking dust on the wind-up.
+                var seismic = used.Ability.Value == "golem.seismic_slam";
+                var impact = seismic ? 0.5 : 0;
+                EffectSound(effect, _t + impact);
+                Burst(effect, source, at: _t + impact);
+                if (seismic) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
+                _t += seismic ? impact : length;
                 return;
             }
 
@@ -682,19 +690,29 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
-                _cues.Add(new PoseCue(_t, BeatTiming.Windup + flight, used.Source, anim, source, target));
-                _cues.Add(new FlightCue(_t + BeatTiming.Windup, flight, shot, source, target));
+                // The troll visibly lifts its held boulder before opening its hands at 0.4 s.
+                var boulder = used.Ability.Value == "troll.boulder_toss";
+                var windup = boulder ? 0.4 : BeatTiming.Windup;
+                var length = boulder ? Math.Max(0.8, windup + flight) : windup + flight;
+                _cues.Add(new PoseCue(_t, length, used.Source, anim, source, target));
+                if (boulder) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
+                _cues.Add(new FlightCue(_t + windup, flight, shot, source, target));
                 Cry(used.Source, "attack");
                 var leaving = SoundChoice.Launch(key, GearOf(used.Source).Weapon);
-                Sound(leaving, leaving == "spell_cast" ? _t : _t + BeatTiming.Windup);     // a spell gathers; a shot goes when it's loosed
-                EffectSound(flies ? used.Presentation?.Fx : null, _t + BeatTiming.Windup);
+                Sound(leaving, leaving == "spell_cast" ? _t : _t + windup);     // a spell gathers; a shot goes when it's loosed
+                EffectSound(flies ? used.Presentation?.Fx : null, _t + windup);
                 _shot = SoundChoice.IsArrow(key);
-                _t += BeatTiming.Windup + flight;
+                _t += windup + flight;
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
                 var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
-                    : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman" ? 0.75 : BeatTiming.Lunge;
+                    : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
+                    {
+                        "monsters.kobold_foreman" => 0.75,
+                        "bosses.troll.troll" or "bosses.golem.granite" => 0.8,
+                        _ => BeatTiming.Lunge,
+                    };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);

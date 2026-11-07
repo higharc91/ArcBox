@@ -1,0 +1,17 @@
+{
+  "troll-idle": "dff33d39-6fe9-4cc6-b5bb-311a792a1c9b",
+  "golem-idle": "8f310e8b-93a1-46f8-ab06-7633674efc2c",
+  "troll-walk": "d48fa109-4c86-423b-9e1d-a510ac60da11",
+  "golem-walk": "91b2798a-1285-49ec-8f8c-73a1157a9b88",
+  "troll-attack": "cbcc0f80-5c8b-4eee-8c0c-f9069ad5beec",
+  "golem-attack": "907aaa9d-e149-4317-a225-ec64c849868e",
+  "golem-special": "669ef053-c4d7-4ed0-a467-b2058aef7536",
+  "troll-buff": "ec8be590-a7b8-43e4-9ff1-6d96abcdc47b",
+  "golem-buff": "988819f1-6cb4-491f-b6d7-d6f147481ee9",
+  "troll-damage": "edd08f57-62c4-4f71-8114-211b08859c1d",
+  "golem-damage": "ace8adf8-c566-4710-9de2-0bb9d5b93a21",
+  "troll-special-crowded-rejected": "c9494286-74b2-4cf4-bafa-5af279583a89",
+  "troll-special-front": "2f583eeb-baca-44c3-8b6d-205970d0fc30",
+  "troll-special-back": "25a737e2-ed7c-46ce-96d3-e83810d3eb29",
+  "troll-special-fullback": "a6a87c6c-4879-499f-8df0-199f969fbc65"
+}
