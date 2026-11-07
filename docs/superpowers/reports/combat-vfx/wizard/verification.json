@@ -1,0 +1,232 @@
+{
+  "baseline": "15ecd7a1",
+  "abilityPresentationFields": {
+    "wizard.fire_bolt": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.ray_of_frost": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.shocking_grasp": [
+      "anim",
+      "fx"
+    ],
+    "wizard.acid_splash": [
+      "anim",
+      "fx"
+    ],
+    "wizard.chill_touch": [
+      "anim",
+      "fx"
+    ],
+    "wizard.poison_spray": [
+      "anim",
+      "fx"
+    ],
+    "wizard.magic_missile": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.burning_hands": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.shield": [
+      "anim",
+      "fx"
+    ],
+    "wizard.sleep": [
+      "anim",
+      "fx"
+    ],
+    "wizard.thunderwave": [
+      "anim",
+      "fx"
+    ],
+    "wizard.chromatic_orb": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.mage_armor": [
+      "anim",
+      "fx"
+    ],
+    "wizard.ray_of_sickness": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.grease": [
+      "anim",
+      "fx"
+    ],
+    "wizard.scorching_ray": [
+      "anim",
+      "fx",
+      "projectile"
+    ],
+    "wizard.hold_person": [
+      "anim",
+      "fx"
+    ],
+    "wizard.misty_step": [
+      "anim",
+      "fx"
+    ],
+    "wizard.shatter": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.web": [
+      "anim",
+      "fx"
+    ],
+    "wizard.blur": [
+      "anim",
+      "fx"
+    ],
+    "wizard.invisibility": [
+      "anim",
+      "fx"
+    ],
+    "wizard.fireball": [
+      "anim",
+      "cutIn",
+      "fx",
+      "projectile"
+    ],
+    "wizard.lightning_bolt": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.counterspell": [
+      "anim",
+      "fx"
+    ],
+    "wizard.haste": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.slow": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.hypnotic_pattern": [
+      "anim",
+      "fx"
+    ],
+    "wizard.dispel_magic": [
+      "anim",
+      "fx"
+    ],
+    "wizard.ice_storm": [
+      "anim",
+      "fx"
+    ],
+    "wizard.greater_invisibility": [
+      "anim",
+      "fx"
+    ],
+    "wizard.blight": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.wall_of_fire": [
+      "anim",
+      "fx"
+    ],
+    "wizard.banishment": [
+      "anim",
+      "fx"
+    ],
+    "wizard.cone_of_cold": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.cloudkill": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "wizard.hold_monster": [
+      "anim",
+      "fx"
+    ],
+    "wizard.arcane_recovery": [
+      "anim",
+      "fx"
+    ],
+    "evoker.sculpted_nova": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "evoker.sculpted_inferno": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "chronomancer.time_shift": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "chronomancer.accelerate": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "chronomancer.temporal_stasis": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "geomancer.raise_earth": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "geomancer.sink_earth": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "geomancer.tremor": [
+      "anim",
+      "cutIn",
+      "fx"
+    ],
+    "geomancer.stone_spire": [
+      "anim",
+      "cutIn",
+      "fx"
+    ]
+  },
+  "allGameplayFieldsIdentical": true,
+  "replayPresentationOnlyEventCounts": {
+    "river-ford-storm.events.json": 0,
+    "warlord-bridge.events.json": 16,
+    "skirmish-basic.events.json": 0,
+    "river-crossing.events.json": 2
+  },
+  "phoneFixturesUnchanged": true,
+  "audioFilesUnchanged": true,
+  "fastPngPixelsEqualToGodot": true,
+  "nativeResolution": [
+    1920,
+    1080
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "exactDecodedRgbaMatch": true,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "decodedRgbaSha256": "9bc4e657fc44cd01e3c6ddeeec0cd7e8fd4839cd6224ab8de18a08d56e4420bb",
+  "encoders": [
+    "native viewport pixels, filter-0 PNG using ZLibStream Fastest",
+    "Godot Image.SavePng"
+  ],
+  "pngCrcVerifiedByPillow": true
+}
