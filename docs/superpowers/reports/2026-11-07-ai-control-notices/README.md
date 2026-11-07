@@ -14,7 +14,7 @@ Returning players see a bounded recap of their hero's and summons' last three di
 - Seven phone cases cover the three takeover reasons, return notices/recaps on Turn, React and Results, and preservation of an aimed ability when a notice arrives or expires.
 - Chromium: all four notices at 320 and 390 pixels; panel and text fit without horizontal scrolling. Screenshots below use production components with existing battle fixtures plus representative notice payloads.
 - Godot 4.7.2 / compatibility renderer: production `HudLayer`, actual pack art, 1920×1080. The drop message wraps into two lines at 24 px inside a 600 px label; all lines fit. This is an isolated HUD preview, not a full battle capture. The temporary harness was removed and the normal Debug host rebuilt afterward.
-- Repository gate: `bash tools/check-all.sh --full` (result recorded after completion).
+- Repository gate: `bash tools/check-all.sh --full` passed all groups: Release build (zero warnings), 7,256 .NET tests, 572 phone tests and production build, 24 Node tests, 28 asset tests, 9 audio tests, 23 lore tests, and the lore/documentation validators. No tests skipped.
 
 ![Turn timeout at 320 px](turnTimeout-320.png)
 ![Reaction timeout at 320 px](reactionTimeout-320.png)
