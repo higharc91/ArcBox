@@ -182,30 +182,41 @@ export function Results({ data, send }: CustomScreenProps) {
 type Tab = "abilities" | "sheet" | "bag";
 
 /**
- * Waiting your turn: who's acting, when you're up, and your character (sheet, abilities and bag as of your last turn,
- * which this phone remembers, since the status view doesn't carry them).
+ * Waiting your turn: current battle context and read-only abilities, sent before the first turn too.
  */
 export function Status({ data, send }: CustomScreenProps) {
   const s = data as StatusData;
   const [tab, setTab] = useState<Tab>("sheet");
   const sfx = useSfx();
-  const cls = remembered().classes[s.me.id];
-  const abilities = remembered().abilities[s.me.id] ?? [];
-  const active = seen(s.active);
+  const cls = s.cls ?? remembered().classes[s.me.id];
+  const abilities = s.abilities ?? remembered().abilities[s.me.id] ?? [];
+  const active = s.acting ?? seen(s.active);
   return (
     <div class="tx tx-status">
       <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
       <ControlNotice notice={s.controlNotice} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
-        {s.active ? <NamedPortrait name={s.active} size={60} /> : null}
+        {active ? <Portrait unit={active} size={60} /> : s.active ? <NamedPortrait name={s.active} size={60} /> : null}
         <div>
           <span class="tx-eyebrow">{s.active ? "Now acting" : "Waiting"}</span>
           <b class="tx-now-name">{s.active ?? "Waiting…"}</b>
           {s.aiPlaying && !s.controlNotice ? <span class="tx-note">The AI is playing your character</span> : null}
         </div>
       </div>
-      {s.upIn ? <Section>You're up in {s.upIn}</Section> : null}
+      {s.upIn ? <Section>You're up in {s.upIn} {s.upIn === 1 ? "turn" : "turns"}</Section> : null}
+      {s.round ? <div class="tx-card tx-battle-objective"><b>Round {s.round}</b><span>{s.objective ?? "Defeat every enemy"}</span></div> : null}
+      {s.party?.length ? <section aria-label="Party status" class="tx-wait-party">
+        <Section>Party status</Section>
+        <ul>{s.party.map(ally => <li key={ally.id}>
+          <b>{ally.name}{ally.id === s.me.id ? " (you)" : ""}</b>
+          <span><HpText unit={ally} />{ally.life !== "Up" ? ` · ${ally.life}` : ""}</span>
+          <HpBar unit={ally} />
+        </li>)}</ul>
+      </section> : null}
+      {s.recent?.length ? <section aria-label="Recent events" class="tx-wait-recent">
+        <Section>Recent events</Section><ol>{s.recent.map((event, i) => <li key={i}>{event}</li>)}</ol>
+      </section> : null}
       <FallBack fallBack={s.fallBack} send={send} />
       <ReactionsSheet reactions={s.reactions} send={send} />
 
@@ -220,7 +231,7 @@ export function Status({ data, send }: CustomScreenProps) {
       <div role="tabpanel" class="tx-tabpanel">
         {tab === "sheet" ? <Sheet me={s.me} /> : null}
         {tab === "abilities" ? (
-          <Known list={abilities.filter((a) => !a.item)} empty="Your abilities show here after your first turn." />
+          <Known list={abilities.filter((a) => !a.item)} empty="No abilities to show." />
         ) : null}
         {tab === "bag" ? <Known list={abilities.filter((a) => a.item)} empty="Nothing in your bag to use." /> : null}
       </div>

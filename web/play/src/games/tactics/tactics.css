@@ -994,3 +994,11 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 }
 .tx-control-notice p { margin: 0; font-size: 18px; line-height: 1.3; }
 .tx-control-notice p + p { margin-top: 6px; }
+
+.tx-battle-objective { display: flex; flex-direction: column; gap: 4px; }
+.tx-wait-party ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tx-wait-party li { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: 16px; }
+.tx-wait-party .tx-bar { grid-column: 1 / -1; }
+.tx-wait-party b { overflow-wrap: anywhere; }
+.tx-wait-recent ol { margin: 0; padding-left: 22px; font-size: 17px; line-height: 1.35; }
+.tx-wait-recent li + li { margin-top: 4px; }

@@ -164,6 +164,13 @@ export interface ReactData {
 }
 
 export interface StatusData {
+  cls?: string | null;
+  round?: number;
+  objective?: string | null;
+  party?: UnitView[];
+  acting?: UnitView | null;
+  abilities?: AbilityChoice[];
+  recent?: string[];
   controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;

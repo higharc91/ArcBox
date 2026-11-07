@@ -677,6 +677,13 @@ public sealed partial class TacticsGame
         return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
             me = UnitViewOf(heroUnit),
+            cls = _doc.For(profile)?.Character.Class,
+            round = state.Round,
+            objective = BattleObjectiveWords.Of(state.Objectives.Current, state.Units.Values.Select(UnitViewOf)),
+            party = state.Units.Values.Where(u => u.Sheet.Side == heroUnit.Sheet.Side && u.SummonedBy is null).Select(UnitViewOf),
+            acting = state.Active is { } acting ? UnitViewOf(state.Units[acting]) : null,
+            abilities = WaitingAbilities(heroUnit),
+            recent = RecentBattleEvents(),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
             upIn = UpIn(state, hero),
             aiPlaying = !IsPlayed(hero) || _aiFinishing is { } finishing && Plays(State, hero, finishing),
