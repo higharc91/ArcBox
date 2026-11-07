@@ -147,12 +147,23 @@ public static class Choices
     {
         var unitEffects = Scorer.UnitBlocks(ability.Effects);
         var strike = new Strike(w, me, ability, aim, neutral: true);
-        return [.. affected.Select(id =>
+        var selfHeal = 0.0;
+        var previews = affected.Select(id =>
         {
             var outcome = ability.IsWeaponAttack
                 ? scorer.StrikeOutcomes(ability, me.Sheet.Attacks, strike, w.State.Units[id])[^1]
                 : scorer.Walk(unitEffects, strike, w.State.Units[id]);
+            selfHeal += outcome.SelfHeal;
             return new UnitPreview(id, Math.Round(outcome.Damage.Mean, 1), Math.Round(outcome.Heal, 1));
-        })];
+        }).ToList();
+        if (selfHeal > 0)
+        {
+            var at = previews.FindIndex(p => p.Unit == me.Id);
+            if (at >= 0)
+                previews[at] = previews[at] with { Heal = Math.Round(previews[at].Heal + selfHeal, 1) };
+            else
+                previews.Add(new UnitPreview(me.Id, 0, Math.Round(selfHeal, 1)));
+        }
+        return [.. previews];
     }
 }

@@ -271,7 +271,8 @@ public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Surface = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Source = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Source = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AffectedSide? Affects = null);
 
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by

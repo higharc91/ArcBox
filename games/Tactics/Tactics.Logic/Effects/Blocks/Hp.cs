@@ -158,12 +158,12 @@ public sealed class HealBlock : EffectBlock<HealEffect>
 
     /// <inheritdoc />
     protected override string? Describe(HealEffect def, int level, RulesPack rules)
-        => $"heals {TooltipText.Amount(def.Dice, def.Bonus, level)}";
+        => $"heals {(def.Self ? "you for " : "")}{TooltipText.Amount(def.Dice, def.Bonus, level)}";
 
     /// <inheritdoc />
     protected override void Run(HealEffect def, EffectContext ctx)
     {
-        var target = ctx.TargetUnit(Key);
+        var target = def.Self ? ctx.SourceUnit : ctx.TargetUnit(Key);
         var amount = Rolls.Damage(ctx.W, def.Dice.At(ctx.Level), crit: false) + ctx.Sum(def.Bonus);
         Hp.Heal(ctx.W, target.Id, amount, ctx.Source);
     }
@@ -222,12 +222,12 @@ public sealed class TempHpBlock : EffectBlock<TempHpEffect>
 
     /// <inheritdoc />
     protected override string? Describe(TempHpEffect def, int level, RulesPack rules)
-        => $"target gains {TooltipText.Amount(def.Dice, def.Bonus, level)} temporary HP";
+        => $"{(def.Self ? "you gain" : "target gains")} {TooltipText.Amount(def.Dice, def.Bonus, level)} temporary HP";
 
     /// <inheritdoc />
     protected override void Run(TempHpEffect def, EffectContext ctx)
     {
-        var target = ctx.TargetUnit(Key);
+        var target = def.Self ? ctx.SourceUnit : ctx.TargetUnit(Key);
         var amount = Rolls.Damage(ctx.W, def.Dice.At(ctx.Level), crit: false) + ctx.Sum(def.Bonus);
         if (!DownedRules.InBattle(target) || amount <= target.TempHp)
             return;

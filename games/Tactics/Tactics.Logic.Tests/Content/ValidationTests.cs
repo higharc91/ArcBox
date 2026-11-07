@@ -97,6 +97,9 @@ public sealed class ValidationTests
             new ContentError(Abilities, "/abilities/1/effects/1/zone/passives/0/hook", "Unknown hook 'onEnter'."),
             new ContentError(Abilities, "/abilities/1/effects/2/summon/count", "'count' must be at least 1."),
             new ContentError(Abilities, "/abilities/1/effects/3/chain/times", "'times' must be at least 1."),
+            new ContentError(Abilities, "/abilities/2/effects/0/tempHp", HostileSupport),
+            new ContentError(Abilities, "/abilities/2/effects/1/revive", HostileSupport),
+            new ContentError(Abilities, "/abilities/2/effects/12/statMod", HostileSupport),
             new ContentError(Abilities, "/abilities/0/effects/4/summon/monster", "Unknown monster 'wolff'."),
             new ContentError(Abilities, "/abilities/0/effects/5/transform/args/monster", "Unknown monster 'bear'."),
             new ContentError(Abilities, "/abilities/0/effects/6/transform/hook", "Unknown monster 'sheep'."),
@@ -105,6 +108,9 @@ public sealed class ValidationTests
 
     private const string Endless =
         "'concentration' needs an ability that costs concentration (\"cost\": {\"concentration\": true}); otherwise it would never end.";
+
+    private const string HostileSupport =
+        "A beneficial effect can reach a hostile side; use an ally target, area affects: allies, or self: true for a caster-only heal.";
 
     [Fact]
     public void Collects_all_errors_not_just_first()
