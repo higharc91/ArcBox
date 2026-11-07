@@ -55,6 +55,21 @@ public sealed class RangerVfxTests
   }
  }
  [Fact]
+ public void A_real_marked_volley_places_its_rider_on_the_marked_victim_instead_of_the_archer()
+ {
+  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);
+  for(ulong seed=7;seed<40;seed++)
+  {
+   var s=FxShowcase.Sample("ranger",new("sharpshooter.volley"),10,rules,1,"ranger.sharpshooter","ranger.hunters_mark_bonus",realistic:true,seed:seed);
+   if(!s.After.Beats.Single().Events.OfType<PassiveTriggered>().Any(p=>p.Passive=="ranger.hunters_mark_bonus"))continue;
+   var used=s.After.Beats.Single().Events.OfType<AbilityUsed>().Single();Assert.Null(used.Target.Unit);
+   var marked=s.Before.Units.Single(u=>u.Conditions.Contains("hunters_mark"));var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);var clip=fx.Clip(fx.Passive("ranger.hunters_mark_bonus")!)!;
+   var riders=script.Cues.OfType<BurstCue>().Where(c=>c.Clip.Path==clip.Path).ToArray();Assert.NotEmpty(riders);Assert.All(riders,c=>Assert.Equal(marked.At,c.Tile));
+   return;
+  }
+  Assert.Fail("No real marked volley hit was found.");
+ }
+ [Fact]
  public void Every_ability_retains_its_existing_sound_mapping()
  {
   var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);

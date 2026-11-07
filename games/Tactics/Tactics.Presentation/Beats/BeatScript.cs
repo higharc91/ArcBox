@@ -419,8 +419,11 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Swing(used);
                     break;
                 case PassiveTriggered passive:
-                    var rider=passive.Passive is "paladin.smite_damage" or "paladin.smite_damage_2" or "paladin.smite_damage_3" or "crusader.radiant_blades" or "avenger.vengeful_strikes" or "ranger.hunters_mark_bonus" or "sharpshooter.high_ground_mastery" or "beastmaster.ferocious_bond";
-                    Burst(fx.Passive(passive.Passive),rider&&_ability?.Target.Unit is {} victim?TileOf(victim):TileOf(passive.Owner));
+                    var rangerRider=passive.Passive is "ranger.hunters_mark_bonus" or "sharpshooter.high_ground_mastery" or "beastmaster.ferocious_bond";
+                    var rider=rangerRider || passive.Passive is "paladin.smite_damage" or "paladin.smite_damage_2" or "paladin.smite_damage_3" or "crusader.radiant_blades" or "avenger.vengeful_strikes";
+                    // An area attack names a tile. Its actual resolved hit supplies this proc's victim.
+                    var riderTarget=rangerRider ? beat.Events.Take(_at).OfType<AttackResolved>().LastOrDefault(a=>a.Source==passive.Owner)?.Target : _ability?.Target.Unit;
+                    Burst(fx.Passive(passive.Passive),rider&&riderTarget is {} victim?TileOf(victim):TileOf(passive.Owner));
                     Apply(e);
                     break;
                 case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
