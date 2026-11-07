@@ -6771,6 +6771,1386 @@
         "radiant": "cleric_guiding_bolt_shot_radiant.png"
       },
       "default": "radiant"
+    },
+    "druid_wild_shape_wolf": {
+      "name": "Wild Shape Wolf",
+      "group": "Druid",
+      "frame": [
+        82,
+        52
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        41,
+        34
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        15,
+        40
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_wild_shape_wolf_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_wild_shape_bear": {
+      "name": "Wild Shape Bear",
+      "group": "Druid",
+      "frame": [
+        84,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        42,
+        39
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        14,
+        35
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_wild_shape_bear_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_wild_shape_dire_wolf": {
+      "name": "Wild Shape Dire Wolf",
+      "group": "Druid",
+      "frame": [
+        84,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        42,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        14,
+        25
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "moon": "druid_wild_shape_dire_wolf_moon.png"
+      },
+      "default": "moon"
+    },
+    "druid_thorn_whip": {
+      "name": "Thorn Whip",
+      "group": "Druid",
+      "frame": [
+        160,
+        28
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        16
+      ],
+      "sourceFrame": [
+        160,
+        72
+      ],
+      "trim": [
+        0,
+        20
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_thorn_whip_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_produce_flame": {
+      "name": "Produce Flame",
+      "group": "Druid",
+      "frame": [
+        38,
+        32
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        25
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        17,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "druid_produce_flame_fire.png"
+      },
+      "default": "fire"
+    },
+    "druid_shillelagh": {
+      "name": "Shillelagh",
+      "group": "Druid",
+      "frame": [
+        19,
+        48
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        7,
+        37
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        29,
+        11
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_shillelagh_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_entangle": {
+      "name": "Entangle",
+      "group": "Druid",
+      "frame": [
+        150,
+        79
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        75,
+        48
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        29,
+        47
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_entangle_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_faerie_fire": {
+      "name": "Faerie Fire",
+      "group": "Druid",
+      "frame": [
+        145,
+        78
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        50
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fey": "druid_faerie_fire_fey.png"
+      },
+      "default": "fey"
+    },
+    "druid_thunderwave": {
+      "name": "Thunderwave",
+      "group": "Druid",
+      "frame": [
+        164,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        80,
+        36
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        24,
+        59
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "druid_thunderwave_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "druid_cure_wounds": {
+      "name": "Cure Wounds",
+      "group": "Druid",
+      "frame": [
+        61,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        31
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        26,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_healing_word": {
+      "name": "Healing Word",
+      "group": "Druid",
+      "frame": [
+        62,
+        52
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        38
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        25,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_healing_word_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_fog_cloud": {
+      "name": "Fog Cloud",
+      "group": "Druid",
+      "frame": [
+        208,
+        88
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        104,
+        66
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        0,
+        29
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "mist": "druid_fog_cloud_mist.png"
+      },
+      "default": "mist"
+    },
+    "druid_hold_person": {
+      "name": "Hold Person",
+      "group": "Druid",
+      "frame": [
+        89,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        44,
+        41
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        12,
+        33
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_hold_person_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_spike_growth": {
+      "name": "Spike Growth",
+      "group": "Druid",
+      "frame": [
+        152,
+        78
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        74,
+        46
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        30,
+        49
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_spike_growth_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_barkskin": {
+      "name": "Barkskin",
+      "group": "Druid",
+      "frame": [
+        65,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        32,
+        43
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        24,
+        31
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "earth": "druid_barkskin_earth.png"
+      },
+      "default": "earth"
+    },
+    "druid_moonbeam": {
+      "name": "Moonbeam",
+      "group": "Druid",
+      "frame": [
+        119,
+        101
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        59,
+        87
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        45,
+        8
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "moon": "druid_moonbeam_moon.png"
+      },
+      "default": "moon"
+    },
+    "druid_lesser_restoration": {
+      "name": "Lesser Restoration",
+      "group": "Druid",
+      "frame": [
+        61,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        46
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        25,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_lesser_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_call_lightning": {
+      "name": "Call Lightning",
+      "group": "Druid",
+      "frame": [
+        98,
+        64
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        45,
+        50
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        59,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "druid_call_lightning_storm.png"
+      },
+      "default": "storm"
+    },
+    "druid_sleet_storm": {
+      "name": "Sleet Storm",
+      "group": "Druid",
+      "frame": [
+        150,
+        103
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        79,
+        79
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        25,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "druid_sleet_storm_frost.png"
+      },
+      "default": "frost"
+    },
+    "druid_dispel_magic": {
+      "name": "Dispel Magic",
+      "group": "Druid",
+      "frame": [
+        85,
+        54
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        42,
+        30
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        14,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "druid_dispel_magic_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "druid_conjure_animals": {
+      "name": "Conjure Animals",
+      "group": "Druid",
+      "frame": [
+        145,
+        61
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        30
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        65
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_conjure_animals_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_ice_storm": {
+      "name": "Ice Storm",
+      "group": "Druid",
+      "frame": [
+        151,
+        107
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        76,
+        79
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        28,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "druid_ice_storm_frost.png"
+      },
+      "default": "frost"
+    },
+    "druid_blight": {
+      "name": "Blight",
+      "group": "Druid",
+      "frame": [
+        156,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        78,
+        41
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        26,
+        54
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "druid_blight_grave.png"
+      },
+      "default": "grave"
+    },
+    "druid_mass_cure_wounds": {
+      "name": "Mass Cure Wounds",
+      "group": "Druid",
+      "frame": [
+        145,
+        68
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        40
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        55
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_mass_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_greater_restoration": {
+      "name": "Greater Restoration",
+      "group": "Druid",
+      "frame": [
+        145,
+        86
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        58
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_greater_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_dire_form": {
+      "name": "Dire Form",
+      "group": "Druid",
+      "frame": [
+        86,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        43,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        13,
+        25
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_dire_form_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_elder_bear_form": {
+      "name": "Elder Bear Form",
+      "group": "Druid",
+      "frame": [
+        152,
+        77
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        76,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        28,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_elder_bear_form_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_primal_mend": {
+      "name": "Primal Mend",
+      "group": "Druid",
+      "frame": [
+        43,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        36
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        35,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_primal_mend_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_gale_burst": {
+      "name": "Gale Burst",
+      "group": "Druid",
+      "frame": [
+        198,
+        73
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        94,
+        51
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        10,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "druid_gale_burst_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "druid_chain_tempest": {
+      "name": "Chain Tempest",
+      "group": "Druid",
+      "frame": [
+        145,
+        78
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        50
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "druid_chain_tempest_storm.png"
+      },
+      "default": "storm"
+    },
+    "druid_wrath_of_the_tempest": {
+      "name": "Wrath Of The Tempest",
+      "group": "Druid",
+      "frame": [
+        145,
+        68
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        54
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "druid_wrath_of_the_tempest_storm.png"
+      },
+      "default": "storm"
+    },
+    "druid_bloom": {
+      "name": "Bloom",
+      "group": "Druid",
+      "frame": [
+        38,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        31
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        37,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_bloom_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_sanctuary_grove": {
+      "name": "Sanctuary Grove",
+      "group": "Druid",
+      "frame": [
+        147,
+        75
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        72,
+        47
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        32,
+        48
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_sanctuary_grove_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_ancient_canopy": {
+      "name": "Ancient Canopy",
+      "group": "Druid",
+      "frame": [
+        154,
+        80
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        77,
+        52
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        27,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_ancient_canopy_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_companion": {
+      "name": "Companion",
+      "group": "Druid",
+      "frame": [
+        38,
+        35
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        17,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_companion_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_spike_growth_step": {
+      "name": "Spike Growth Step",
+      "group": "Druid",
+      "frame": [
+        41,
+        24
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        19
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        16,
+        29
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "nature": "druid_spike_growth_step_nature.png"
+      },
+      "default": "nature"
+    },
+    "druid_moonbeam_enter": {
+      "name": "Moonbeam Enter",
+      "group": "Druid",
+      "frame": [
+        31,
+        41
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        18,
+        32
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        18,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "moon": "druid_moonbeam_enter_moon.png"
+      },
+      "default": "moon"
+    },
+    "druid_moonbeam_turn": {
+      "name": "Moonbeam Turn",
+      "group": "Druid",
+      "frame": [
+        43,
+        41
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        36
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        15,
+        12
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "moon": "druid_moonbeam_turn_moon.png"
+      },
+      "default": "moon"
+    },
+    "druid_sleet_storm_turn": {
+      "name": "Sleet Storm Turn",
+      "group": "Druid",
+      "frame": [
+        42,
+        13
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        7
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        16,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "druid_sleet_storm_turn_frost.png"
+      },
+      "default": "frost"
+    },
+    "druid_sanctuary_grove_mend": {
+      "name": "Sanctuary Grove Mend",
+      "group": "Druid",
+      "frame": [
+        12,
+        41
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        6,
+        35
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        30,
+        13
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "druid_sanctuary_grove_mend_healing.png"
+      },
+      "default": "healing"
+    },
+    "druid_chain_tempest_bounce": {
+      "name": "Chain Tempest Bounce",
+      "group": "Druid",
+      "frame": [
+        48,
+        47
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        20,
+        25
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        16,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "druid_chain_tempest_bounce_storm.png"
+      },
+      "default": "storm"
+    },
+    "druid_form_wolf_bite": {
+      "name": "Form Wolf Bite",
+      "group": "Druid",
+      "frame": [
+        17,
+        32
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        26
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        28,
+        22
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "druid_form_wolf_bite_steel.png"
+      },
+      "default": "steel"
+    },
+    "druid_form_dire_wolf_bite": {
+      "name": "Form Dire Wolf Bite",
+      "group": "Druid",
+      "frame": [
+        31,
+        32
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        26
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        21,
+        22
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "druid_form_dire_wolf_bite_steel.png"
+      },
+      "default": "steel"
+    },
+    "druid_form_bear_claw": {
+      "name": "Form Bear Claw",
+      "group": "Druid",
+      "frame": [
+        39,
+        35
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        17,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "druid_form_bear_claw_steel.png"
+      },
+      "default": "steel"
+    },
+    "druid_form_elder_bear_claw": {
+      "name": "Form Elder Bear Claw",
+      "group": "Druid",
+      "frame": [
+        53,
+        35
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        26,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        10,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "druid_form_elder_bear_claw_steel.png"
+      },
+      "default": "steel"
+    },
+    "druid_produce_flame_shot": {
+      "name": "Produce Flame flight",
+      "group": "Druid",
+      "frame": [
+        42,
+        28
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        21,
+        14
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        3,
+        2
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "druid_produce_flame_shot_fire.png"
+      },
+      "default": "fire"
     }
   },
   "passives": {
@@ -6786,6 +8166,12 @@
     "warlock.hunger_of_hadar.turn": "fx.warlock_hunger_of_hadar_pulse.frost",
     "cleric.divine_strike": "fx.cleric_divine_strike.radiant",
     "light.burning_luminescence": "fx.cleric_burning_luminescence.radiant",
-    "death_ward.save": "fx.cleric_death_ward_rescue.holy"
+    "death_ward.save": "fx.cleric_death_ward_rescue.holy",
+    "grovekeeper.companion": "fx.druid_companion.nature",
+    "druid.spike_growth.step": "fx.druid_spike_growth_step.nature",
+    "druid.moonbeam.enter": "fx.druid_moonbeam_enter.moon",
+    "druid.moonbeam.turn": "fx.druid_moonbeam_turn.moon",
+    "druid.sleet_storm.turn": "fx.druid_sleet_storm_turn.frost",
+    "grovekeeper.sanctuary_grove.mend": "fx.druid_sanctuary_grove_mend.healing"
   }
 }

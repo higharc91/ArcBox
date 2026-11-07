@@ -921,6 +921,66 @@
           "loop": false
         }
       }
+    },
+    "druid": {
+      "framesPerDirection": 214,
+      "anims": {
+        "druid_roots": {
+          "frames": [
+            189,
+            190,
+            191,
+            192,
+            193
+          ],
+          "fps": 14,
+          "loop": false
+        },
+        "druid_gale": {
+          "frames": [
+            194,
+            195,
+            196,
+            197,
+            198
+          ],
+          "fps": 14,
+          "loop": false
+        },
+        "druid_mend": {
+          "frames": [
+            199,
+            200,
+            201,
+            202,
+            203
+          ],
+          "fps": 16,
+          "loop": false
+        },
+        "druid_lash": {
+          "frames": [
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "fps": 18,
+          "loop": false
+        },
+        "druid_shape": {
+          "frames": [
+            209,
+            210,
+            211,
+            212,
+            213
+          ],
+          "fps": 14,
+          "loop": false
+        }
+      }
     }
   }
 }

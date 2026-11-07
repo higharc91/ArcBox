@@ -52,6 +52,11 @@ public static class FxShowcase
                 rows.TryAdd(parent.Subclass + ":" + proc.Id,
                     new(proc.Id, "Death Ward Rescue", parent.Level, parent.Subclass, "proc", "none", null));
         }
+        if (cls == "druid")
+            foreach (var parent in rows.Values.Where(r => r.Kind == "ability").ToArray())
+                foreach (var proc in rules.Abilities[new(parent.Id)].Effects.OfType<ZoneEffect>().SelectMany(z => z.Passives))
+                    rows.TryAdd(parent.Subclass + ":" + proc.Id,
+                        new(proc.Id, parent.Name + " · " + proc.Hook, parent.Level, parent.Subclass, "proc", "none", null));
         return [.. rows.Values.OrderBy(r => r.Subclass).ThenBy(r => r.Level).ThenBy(r => r.Id, StringComparer.Ordinal)];
 
         void Add(ImmutableSortedDictionary<int, ImmutableArray<FeatureRef>> levels, string? subclass)
@@ -125,6 +130,10 @@ public static class FxShowcase
             var sample = Sample(cls, new("cleric.toll_the_dead"), 1, rules, samples.Count + 1, realistic: true, woundedTarget: true);
             samples.Add(sample with { Id = "cleric.toll_the_dead.wounded", Name = "Toll the Dead (wounded)" });
         }
+        if (cls == "druid")
+            foreach (var form in new[] {"wolf", "bear", "dire_wolf", "elder_bear"})
+                foreach (var action in new[] {"move", "attack", "revert"})
+                    samples.Add(DruidFormSample(form, action, rules, samples.Count + 1));
         return samples.ToImmutable();
     }
 
@@ -142,6 +151,7 @@ public static class FxShowcase
 
     public static FxShowcaseSample Specific(string cls, string id, RulesPack rules)
     {
+        if (id == "common.attack") return Sample(cls,RulesPack.CommonAttack.Id,1,rules,1);
         if (cls == "sorcerer" && id.Count(c => c == '.') == 2)
         {
             var split = id.LastIndexOf('.');
@@ -156,6 +166,11 @@ public static class FxShowcase
         if (cls == "cleric" && id == "cleric.toll_the_dead.wounded")
             return Sample(cls, new("cleric.toll_the_dead"), 1, rules, 1, realistic: true, woundedTarget: true) with
                 { Id = id, Name = "Toll the Dead (wounded)" };
+        if (cls == "druid" && id.StartsWith("druid.form.", StringComparison.Ordinal))
+        {
+            var parts = id.Split('.');
+            return DruidFormSample(parts[2],parts[3],rules,1);
+        }
         var feature = Inventory(cls, rules).FirstOrDefault(r => r.Id == id);
         if (feature?.Kind == "static") throw new InvalidOperationException($"{id} is a static modifier, not a standalone visible proc.");
         return feature?.Kind == "proc" ? ProcSample(cls, feature, rules, 1)
@@ -176,6 +191,9 @@ public static class FxShowcase
             }
             throw new InvalidOperationException("The real lethal hit did not trigger Death Ward.");
         }
+        if (cls == "druid" && !rules.Passives.ContainsKey(feature.Id))
+            return Sample(cls, new(feature.Id[..feature.Id.LastIndexOf('.')]), feature.Level, rules, sequence,
+                feature.Subclass, realistic: true, zoneProc: feature.Id) with { Id = feature.Id, Name = feature.Name };
         var passive = rules.Passives[feature.Id];
         if (passive.Hook is HookKind.OnBattleStart or HookKind.OnRoundStart)
             return OpeningProcSample(cls, feature, rules, sequence);
@@ -239,7 +257,7 @@ public static class FxShowcase
     }
 
     public static FxShowcaseSample Sample(string cls, AbilityId abilityId, int level, RulesPack rules, int sequence,
-        string? subclass = null, string? passive = null, bool realistic = false, ulong seed = 7, bool zonePulse = false, bool woundedTarget = false, bool wardProc = false)
+        string? subclass = null, string? passive = null, bool realistic = false, ulong seed = 7, bool zonePulse = false, bool woundedTarget = false, bool wardProc = false, string? zoneProc = null, string? formAction = null)
     {
         var ability = rules.Abilities[abilityId];
         if (ability.Cost.Reaction > 0) return ReactionSample(cls, ability, level, rules, sequence, subclass);
@@ -256,10 +274,11 @@ public static class FxShowcase
             with { InitiativeBonus = 100, Sprite = "characters.class_" + cls, Abilities = [abilityId] };
         if (passive is not null) sheet = sheet with { Passives = [passive] };
         if (needsHex) sheet = sheet with { Abilities = [abilityId, new("warlock.hex")] };
-        var friendly = cls == "cleric" && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly || abilityId.Value == "cleric.dispel_magic");
+        var friendly = (cls is "cleric" or "druid") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
+            || abilityId.Value == "cleric.dispel_magic" || cls == "druid" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true);
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
-        var melee = !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
+        var melee = formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
         var distance = ability.IsWeaponAttack || ability.Target.Range == 0 ? 4 : Math.Min(4, ability.Target.Range);
         var target = Place(wardProc ? new(from.X + 2, from.Y) : friendly ? new(from.X + 4, from.Y) : melee ? new(from.X + 1, from.Y) : new(from.X + distance, from.Y));
         var enemyKind = abilityId.Value is "cleric.turn_undead" or "cleric.sear_undead" ? "skeleton" : "goblin";
@@ -271,7 +290,7 @@ public static class FxShowcase
         if (friendly && ability.Target.Area.Shape != AreaShape.Single)
             placements.Add(new(new("hero3"), ally with { Name = "Second Ally" }, new AiControlled("companion"), Place(new(from.X, from.Y - 1)), []));
         placements.Add(new(new("target1"), goblin, new AiControlled("brute"), target, []));
-        if (!realistic || ability.Target.Area.Shape != AreaShape.Single || passive is not null && rules.Passives[passive].Hook == HookKind.OnKill)
+        if (!realistic || ability.Target.Area.Shape != AreaShape.Single || abilityId.Value == "stormcaller.chain_tempest" || passive is not null && rules.Passives[passive].Hook == HookKind.OnKill)
         {
             placements.Add(new(new("target2"), goblin, new AiControlled("brute"), Place(selfArea ? new(from.X, from.Y + 1) : new(target.X + 1, target.Y)), []));
             placements.Add(new(new("target3"), goblin, new AiControlled("brute"), Place(selfArea ? new(from.X - 1, from.Y) : new(target.X, target.Y + 1)), []));
@@ -284,7 +303,7 @@ public static class FxShowcase
             var revive = ability.Effects.Any(e => e is ReviveEffect) || ability.Target.Kind == TargetKind.DownedAlly;
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Value.Sheet.Side != Side.Party ? kv.Value : kv.Value with
-                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls == "cleric" ? 3 : 2)),
+                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" ? 3 : 2)),
                     Life = revive && kv.Key != caster ? LifeState.Downed : LifeState.Up,
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
@@ -308,8 +327,8 @@ public static class FxShowcase
             state = state with { Units = state.Units.SetItem(new("hero2"), state.Units[new("hero2")] with { Hp = 1 }) };
         var conditions = abilityId.Value switch
         {
-            "cleric.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
-            "cleric.greater_restoration" or "cleric.divine_intervention" => new[] {"poisoned", "charmed", "frightened"},
+            "cleric.lesser_restoration" or "druid.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
+            "cleric.greater_restoration" or "druid.greater_restoration" or "cleric.divine_intervention" => new[] {"poisoned", "charmed", "frightened"},
             _ => Array.Empty<string>()
         };
         if (conditions.Length > 0)
@@ -333,6 +352,15 @@ public static class FxShowcase
                 if (state.Active == caster) break;
             }
         }
+        if (abilityId.Value == "druid.dispel_magic")
+        {
+            state = state with { Units = state.Units.SetItem(caster, state.Units[caster] with
+                { Sheet = state.Units[caster].Sheet with { Abilities = [abilityId,new("druid.entangle")] } }) };
+            var prepared = Battle.Apply(state,new Use(caster,new("druid.entangle"),new Target(Tile: target)),rules);
+            if (prepared.Rejected is not null) throw new InvalidOperationException("Could not prepare the real Entangle zone.");
+            state = prepared.State;
+            do { state = Battle.Apply(state,new EndTurn(state.Active!.Value),rules).State; } while (state.Active != caster);
+        }
         var choice = Choices.For(state, caster, rules).Abilities.FirstOrDefault(a => a.Ability == abilityId);
         var aim = choice?.Targets.OrderByDescending(t => t.Affected.Count(u => state.Units[u.Unit].Sheet.Side == (friendly ? Side.Party : Side.Enemy)))
             .ThenByDescending(t => friendly && t.Affected.Any(u => u.Unit.Value == "hero2"))
@@ -345,6 +373,45 @@ public static class FxShowcase
             [.. s.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), u.Sheet.Sprite, u.Pos,
                 u.Hp, u.Sheet.MaxHp, u.TempHp, u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], null))],
             beats, null, BoardChanges.Of(s), Name: $"{ability.Name} · Level {level}");
+        if (zoneProc is not null)
+        {
+            state = result.State;
+            var enter = zoneProc.EndsWith(".step",StringComparison.Ordinal) || zoneProc.EndsWith(".enter",StringComparison.Ordinal);
+            var victim = new UnitId(friendly ? "hero2" : "target1");
+            for (var step = 0; step < 24; step++)
+            {
+                var old = state;
+                if (enter && state.Active == victim)
+                {
+                    var tiles = state.Zones.SelectMany(z=>z.Tiles).ToHashSet();
+                    var move = Choices.For(state,victim,rules).Moves.Where(m=>m.Path.Length==2 && tiles.Contains(m.To)).FirstOrDefault()
+                        ?? throw new InvalidOperationException("Zone entry fixture needs a legal step inside the real zone.");
+                    result = Battle.Apply(state,new Move(victim,move.Path),rules);
+                }
+                else result = Battle.Apply(state,new EndTurn(state.Active!.Value),rules);
+                if (result.Rejected is not null || result.State.Pending is not null) throw new InvalidOperationException("Real zone trigger command failed.");
+                state = result.State;
+                if (result.Events.OfType<PassiveTriggered>().Any(p=>p.Passive==zoneProc))
+                    return new(zoneProc,zoneProc,"Real engine zone " + (enter ? "entry" : "turn-start") + " hook.",level,
+                        View(old,[]),View(state,[new(sequence,old.Active,result.Events)]));
+            }
+            throw new InvalidOperationException("The real zone hook did not fire: " + zoneProc);
+        }
+        if (formAction is not null)
+        {
+            state = result.State;
+            state = state with { Units = state.Units.SetItem(caster,state.Units[caster] with { Hp = state.Units[caster].Sheet.MaxHp,
+                TempHp = formAction == "revert" ? 1 : state.Units[caster].TempHp }) };
+            var actor = formAction == "revert" ? new UnitId("target1") : caster;
+            do { state = Battle.Apply(state,new EndTurn(state.Active!.Value),rules).State; } while (state.Active != actor);
+            var old = state;
+            Command command = formAction == "move"
+                ? new Move(caster,Choices.For(state,caster,rules).Moves.First(m=>m.Path.Length==5 && m.Path.All(t=>Reach.Distance(t,target)>1)).Path)
+                : new Use(actor,RulesPack.CommonAttack.Id,new Target(Unit: formAction == "revert" ? caster : new("target1")));
+            result = Battle.Apply(state,command,rules);
+            if (result.Rejected is not null || result.State.Pending is not null) throw new InvalidOperationException("Form follow-through was not legal.");
+            return new("form",formAction,"Actual transformed " + formAction + ".",level,View(old,[]),View(result.State,[new(sequence,actor,result.Events)]));
+        }
         if (wardProc)
         {
             state = result.State;
@@ -373,6 +440,23 @@ public static class FxShowcase
         }
         return new(abilityId.Value, ability.Name, choice!.Tooltip, level, View(state, []),
             View(result.State, [new Beat(sequence, caster, result.Events)]));
+    }
+
+    private static FxShowcaseSample DruidFormSample(string form, string action, RulesPack rules, int sequence)
+    {
+        var ability = form == "elder_bear" ? "shapeshifter.elder_bear_form" : "druid.wild_shape_" + form;
+        var level = form == "wolf" ? 2 : form == "bear" ? 4 : 6;
+        for (ulong seed = 7; seed < 40; seed++)
+        {
+            var sample = Sample("druid",new(ability),level,rules,sequence,form=="elder_bear"?"druid.shapeshifter":null,
+                realistic:true,seed:seed,formAction:action);
+            if (action == "revert" && !sample.After.Beats.Single().Events.OfType<Transformed>().Any()) continue;
+            if (action == "attack" && !sample.After.Beats.Single().Events.OfType<Damaged>().Any()) continue;
+            if (action == "move" && sample.Before.Units.Single(u=>u.Id.Value=="hero1").Sprite != sample.After.Units.Single(u=>u.Id.Value=="hero1").Sprite) continue;
+            return sample with { Id = "druid.form." + form + "." + action, Name = form.Replace('_',' ') + " · " + action,
+                Description = sample.Description + " Fixture seed " + seed + "." };
+        }
+        throw new InvalidOperationException("Could not obtain the real " + form + " " + action);
     }
 
     private static FxShowcaseSample ReactionSample(string cls, AbilityDef ability, int level, RulesPack rules, int sequence, string? subclass)

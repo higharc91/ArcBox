@@ -645,6 +645,64 @@
       ],
       "fps": 14,
       "loop": false
+    },
+    "druid_roots": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "druid_gale": {
+      "frames": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "druid_mend": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "druid_lash": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "druid_shape": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
     }
   },
   "builds": {

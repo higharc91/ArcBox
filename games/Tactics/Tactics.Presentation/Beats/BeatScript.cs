@@ -235,13 +235,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private AbilityUsed? _ability;
         private int _swings;
         private int _hits;
-        private readonly Dictionary<UnitId, int> _clericDamageRows = [];
-        private readonly bool _clericNumbers = beat.Events.Any(e => e switch
+        private readonly Dictionary<UnitId, int> _stackedDamageRows = [];
+        private readonly bool _stackedDamageNumbers = beat.Events.Any(e => e switch
         {
-            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true,
-            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true,
+            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.druid_", StringComparison.Ordinal) == true,
+            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.druid_", StringComparison.Ordinal) == true,
             _ => false,
-        });
+        }) || shown.Units.Any(u => u.Id == beat.Actor && IsDruidForm(u.Sprite));
         private int _rolls;
         private bool _rolled;          // the last thing to advance the clock was a roll, which already spaced this target from the last
         private int _areaEnd = -1;     // the last event of the area effect being played: before it, its targets resolve together
@@ -385,7 +385,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     PlayWalk(moved);
                     break;
                 case Pushed pushed:
-                    var slide = EldritchVolley ? .05 : BeatTiming.Slide;
+                    var slide = EldritchVolley ? .05 : _ability?.Presentation?.Fx?.StartsWith("fx.druid_",StringComparison.Ordinal) == true ? .06 : BeatTiming.Slide;
                     _cues.Add(new SlideCue(_t, slide, pushed.Unit, pushed.From, pushed.To));
                     Sound("pushed");
                     _t += slide;
@@ -414,7 +414,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AbilityUsed used:
-                    _clericDamageRows.Clear();
+                    _stackedDamageRows.Clear();
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
                     break;
@@ -457,7 +457,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     Sound(e is ConditionApplied gained ? SoundChoice.Condition(gained.Condition.Value) : null);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);
-                    _t += InArea ? 0 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
                     break;
                 case ConcentrationBroken broken:
                     Burst(Puff, TileOf(broken.Caster));
@@ -487,7 +487,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case CountdownTicked:
                     Sound("ui_countdown_tick");
                     Apply(e);
-                    _t += InArea ? 0 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
@@ -512,7 +512,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += InArea ? 0 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);
@@ -747,12 +747,23 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
+                if (DruidFormVolley)
+                {
+                    var length = .35; // all five authored beast attack frames
+                    _cues.Add(new LungeCue(_t,length,used.Source,source,target,anim));
+                    _creaturePoseUntil = Math.Max(_creaturePoseUntil,_t+length);
+                    SwingSound(used,anim);
+                    _t += .14; // the authored bite/swipe impact is frame two
+                }
+                else
+                {
                 var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman" ? 0.75 : BeatTiming.Lunge;
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
                 _t += length != BeatTiming.Lunge ? 0.4 : BeatTiming.Windup;
+                }
             }
             else
             {
@@ -775,7 +786,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
             Sound("ui_dice_roll");
             Moment("save", 0.1);
-            _t += _reaction is not null ? 0 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
+            _t += _reaction is not null ? 0 : DruidFormVolley ? .08 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
             _rolled = true;
         }
 
@@ -792,14 +803,28 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Pop(resolved.Target, Miss, PopStyle.Damage);
                 Sound("attack_miss");
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
-                _t += EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
+                _t += DruidFormVolley ? .08 : EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
         }
+
+        private static bool IsDruidForm(string? key) => key is "beasts.wolf.druid" or "beasts.wolf.druid_dire" or "beasts.bear.druid" or "beasts.bear.druid_elder";
+
+        private bool DruidFormVolley => _ability?.Ability.Value == "common.attack"
+            && IsDruidForm(_view.Units.FirstOrDefault(u => u.Id == _ability.Source)?.Sprite);
 
         private bool EldritchVolley => _ability?.Ability.Value == "warlock.eldritch_blast";
 
         private void PlayDamage(Damaged hit)
         {
+            if (DruidFormVolley)
+            {
+                var sprite = _view.Units.First(u=>u.Id==_ability!.Source).Sprite;
+                var form = sprite switch { "beasts.wolf.druid"=>"wolf_bite", "beasts.wolf.druid_dire"=>"dire_wolf_bite",
+                    "beasts.bear.druid"=>"bear_claw", "beasts.bear.druid_elder"=>"elder_bear_claw", _=>null };
+                if(form is not null) Burst("fx.druid_form_"+form+".steel",TileOf(hit.Unit));
+            }
+            if (_ability?.Ability.Value == "stormcaller.chain_tempest")
+                Burst("fx.druid_chain_tempest_bounce.storm",TileOf(hit.Unit));
             if (hit.Amount > 0) _cues.Add(new ImpactCue(_t, BeatTiming.Impact, hit.Unit, hit.Amount));
             if (_reaction is null && fx.HasDamageVariants(_ability?.Presentation?.Fx))
                 Burst(fx.ForDamage(_ability?.Presentation?.Fx, hit.Type), TileOf(hit.Unit), scale: .5f, alpha: .4f);
@@ -809,10 +834,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 // Split fire/radiant damage and domain procs must not overwrite one another's numbers.
                 // Reserve row 1 for the critical label, as in the Eldritch volley.
-                var row = _clericNumbers ? _clericDamageRows.GetValueOrDefault(hit.Unit) * 2
+                var row = _stackedDamageNumbers ? _stackedDamageRows.GetValueOrDefault(hit.Unit) * 2
                     : EldritchVolley ? Math.Max(0, _swings - 1) * 2 + _hits : 0;
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage, row);
-                if (_clericNumbers) _clericDamageRows[hit.Unit] = row / 2 + 1;
+                if (_stackedDamageNumbers) _stackedDamageRows[hit.Unit] = row / 2 + 1;
             }
             var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch
             {
@@ -835,7 +860,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (_reaction is not null)
                 return;
             if (!InArea)
-                _t += EldritchVolley ? (_hits++ == 0 ? .08 : .02) : _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
+                _t += DruidFormVolley ? (_hits++ == 0 ? .12 : .04) : EldritchVolley ? (_hits++ == 0 ? .08 : .02) : _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
             else if (!_rolled)
                 _t += BeatTiming.Stagger;
             _rolled = false;

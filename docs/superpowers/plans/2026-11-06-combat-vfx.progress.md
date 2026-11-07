@@ -1,4 +1,4 @@
-> Status: Cleric preview complete; awaiting owner OK before its PR or Druid. Approved dependency PRs #251–#254 await owner merges. CI remains manually disabled.
+> Status: Druid native review complete; awaiting owner OK before its PR or Paladin. Approved dependency PRs #251–#255 await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -133,3 +133,30 @@ The 44-sample native gallery is `../reports/combat-vfx/cleric/index.html`: 39 ab
 Full local gate passes: 7,259 .NET tests (zero skipped), 549 phone tests/build, 24 Node, 40 asset, 9 audio, 23 lore tests and lore/docs checks. Release and native Debug builds have zero warnings/errors. Three-run class median 20.5354 → 20.4545 ms (-0.39%, within 10%). Largest individual increase cleric.flame_strike (+9.75%), reported transparently. Peak texture growth +20.71 MiB; shipped-pack growth 0.58 MiB. All 90 six-hero Chapter I rounds containing Cleric remain within the approved cap: max 3.317 s Full / 3.017 s Auto Short / 0 Off. Real-hardware 16 ms and physical TV checks remain hardware validation.
 
 All 39 gameplay definitions and passive data remain unchanged. Only 16 presentation objects changed in two golden event files; event order/counts, gameplay values, replay commands and phone fixtures are unchanged. Existing sounds are reused; other class atlases and workflow files are untouched. Cleric remains unchecked until explicit owner approval. Its PR and Druid wait for that OK; the owner merges the approved dependencies. CI remains disabled.
+
+
+## Cleric approval and Druid
+
+The owner replied “looks good, next class.” Cleric is approved and checked on #247; PR #255 is open against `combat-vfx-warlock`. The approved dependencies #251–#255 await owner merges. Druid starts from latest main `c4e121eb` with approved Cleric dependency `a4208a682d52cb7956dfd35d391cff49bbe13c38`, also its frozen before baseline.
+
+The owner added: “spend time on the shapeshifts, make them match our other sprites and look cool.” Four Druid-only form atlases reuse approved anatomy/motion with native coat, ruff, leaf and bark work. Wolf and dire wolf now have distinct bodies/materials and sizes, as do bear and elder bear. All eight directions and actual actions are retained. Imported idle/walk foot drift is corrected on these variants, and six-column packing removes unused cells. Four monster sprite strings and their art registration change; all statistics and transformation rules remain identical.
+
+Druid has 34 abilities, one visible class proc, five embedded zone hooks and three static features. The native reel has 53 samples: all visible features, ordinary Attack and each form's real movement, attacks and damage-triggered reversion. Healing/restoration/dispel/summoning/zone fixtures establish real prerequisites. Five gestures append 25 frames; every ability/proc has its own effect. Fire, weather, moonlight and healing emit matching light; physical plants/bark/fog stay unlit. Real beast attacks play all five frames with their impact aligned at 0.14 s, preserve every actual attack/save/proc, and keep multiple damage numbers separate.
+
+The 87-test focused presentation/content/round suite passes. The added Druid party has 30 Chapter I rounds at max 3.300 s Full / 3.000 s Auto Short / 0 Off, passing the original stricter assertions. Seven golden tests pass normally, with no replay/golden refresh. Asset export/ground/compass checks pass. The full local gate and native review follow. No Paladin work has started; its work and the Druid PR wait for Druid approval. No paid generation or new sounds were used. CI remains disabled.
+
+
+## Druid review handoff
+
+The 53-sample native gallery is `../reports/combat-vfx/druid/index.html`: 34 abilities, sapling, five zone procs, ordinary Attack and each of four forms moving, attacking and reverting through real engine commands/events. Four Druid-only sprite variants preserve the approved creature anatomy/motion, with distinct sizes, coats, ruffs, leaf/bark work and corrected idle/walk ground contact. The player-scale inspector includes eight-direction walk/attack GIFs. All original creature art remains unchanged. Source/art commit `f6bd5a2334f9bc81d056d2fca7837f5c14fef745`.
+
+The full local gate passes: 7,265 .NET tests (zero skipped), 549 phone tests/build, 24 Node, 46 asset, 9 audio, 23 lore tests and lore/docs checks. Release and native Debug builds have zero warnings/errors. Three-run class median 19.6715 → 19.9522 ms (+1.43%, within 10%). Largest individual increase druid.fog_cloud (+6.81%), reported transparently. Peak texture growth +57.02 MiB; pack growth 2.18 MiB. Thirty six-hero Druid Chapter I rounds add at most 3.300 s Full / 3.000 s Auto Short / 0 Off and pass the unchanged stricter limits. Real-hardware 16 ms and physical TV checks remain hardware validation.
+
+All 34 ability definitions/passives and all four monster gameplay definitions are unchanged after removing only their presentation/sprite fields. Only four monster sprite strings select distinct Druid variants. Original creature metadata/art, phone/fixtures, replays/goldens, audio clips, other classes and workflow files stay unchanged. Legacy species voices/weapons remain available to inherited coats through the presentation sound fallback. All 248 focused checks and original sound assertions pass. No paid generation or new sounds were used. Druid remains unchecked pending explicit owner approval; its PR and Paladin wait for that OK. CI remains disabled.
+
+
+## Druid motion correction
+
+The owner reported swimming plant/fur textures, especially on the dire wolf. Source/art correction `ec4bd6ac66647a8765ab820aed3bd9f7abc05e6e` retains native fur shading, replaces radial/clipped wreaths with small whole leaf ties and shoulder plates, and uses explicit anatomical attachment keys for all 18 poses × 8 facings of each source species. A regression reproduces the old extremity-driven sliding and passes after the fix. Atlas layout, scale, anchors, animation timing, runtime code and gameplay are unchanged. The synchronized previous/revised inspector is `../reports/combat-vfx/druid/forms/motion/index.html`; 768 browser frame steps and live playback pass.
+
+All 18 affected native scenes are recaptured; the 35 unaffected scenes are retained. The full local gate passes again: 7,265 .NET tests, 549 phone/build, 24 Node, 47 asset, 9 audio and 23 lore tests, with zero build warnings. Three fresh native benchmark runs per version give 20.0988 → 20.2511 ms (+0.76%, within 10%). Largest individual increase: druid.spike_growth (+8.40%). Full/Auto round overhead remains 3.300/3.000 s under the unchanged stricter assertions. CI remains disabled; Druid approval, its PR and Paladin still wait for the owner.
