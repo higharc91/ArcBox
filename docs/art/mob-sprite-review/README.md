@@ -22,3 +22,7 @@ The Python tool calls `tools/tactics-mob-review` to resolve the production sprit
 ## First batch integrated
 
 The original 98-card sheet and inventory above are the pre-refresh baseline. [Current first-batch animation review](production/index.html) shows the integrated goblin cutthroat, orc brute and red drake, including all eight facings, world-scale loops and real renderer screenshots. These replace two of the original 28 older combat looks plus the dedicated red drake; 26 older combat looks remain. Other goblin roles and drake color variants retain their own designs until their pass. [Tracker](production/refresh-status.json).
+
+## Current refresh progress
+
+[Second batch: goblin archer, shaman and Vorga](goblin-roles/index.html) includes before/after art, eight-direction animation controls and actual game captures. Six looks are refreshed across both batches; 23 older combat looks remain. The 98-look baseline above remains a historical reference.

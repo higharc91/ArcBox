@@ -8041,6 +8041,521 @@
         }
       },
       "provenance": "Owner-approved Scenario concept and OpenAI-authored pixel frames; source, extraction, facing corrections and review in tools/tactics-assets/imagegen/mob-refresh-2026-11-06/production."
+    },
+    "mob_refresh_goblin_archer": {
+      "file": "mob_refresh_goblin_archer.png",
+      "family": "goblin",
+      "variant": "archer",
+      "frame": {
+        "width": 128,
+        "height": 128,
+        "anchor": [
+          64,
+          111
+        ]
+      },
+      "portrait": [
+        36,
+        26,
+        56,
+        56
+      ],
+      "headTop": 28,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 18.56,
+      "footprintHeight": 25.92,
+      "keys": [
+        "characters.goblin_archer"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "shoot": {
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI-authored pixel poses. Source, corrections, selected gestures and export checks: tools/tactics-assets/imagegen/goblin-roles-2026-11-07/."
+    },
+    "mob_refresh_goblin_shaman": {
+      "file": "mob_refresh_goblin_shaman.png",
+      "family": "goblin",
+      "variant": "shaman",
+      "frame": {
+        "width": 160,
+        "height": 160,
+        "anchor": [
+          80,
+          142
+        ]
+      },
+      "portrait": [
+        45,
+        57,
+        56,
+        56
+      ],
+      "headTop": 59,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 19.52,
+      "footprintHeight": 25.92,
+      "keys": [
+        "characters.goblin_shaman"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI-authored pixel poses. Source, corrections, selected gestures and export checks: tools/tactics-assets/imagegen/goblin-roles-2026-11-07/."
+    },
+    "mob_refresh_goblin_boss": {
+      "file": "mob_refresh_goblin_boss.png",
+      "family": "goblin",
+      "variant": "boss",
+      "frame": {
+        "width": 160,
+        "height": 160,
+        "anchor": [
+          80,
+          142
+        ]
+      },
+      "portrait": [
+        51,
+        46,
+        56,
+        56
+      ],
+      "headTop": 48,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 22.72,
+      "footprintHeight": 29.76,
+      "keys": [
+        "characters.goblin_spear"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI-authored pixel poses. Source, corrections, selected gestures and export checks: tools/tactics-assets/imagegen/goblin-roles-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

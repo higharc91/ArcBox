@@ -1,11 +1,14 @@
 {
-  "scope": "Combat roster first; first three owner-approved designs integrated. Baseline numbers remain stable.",
+  "scope": "Combat roster first; six refreshed designs integrated across two batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
-    "characters.orc_brute"
+    "characters.orc_brute",
+    "characters.goblin_archer",
+    "characters.goblin_shaman",
+    "characters.goblin_spear"
   ],
-  "remainingOlderCombatLooks": 26,
+  "remainingOlderCombatLooks": 23,
   "looks": [
     {
       "baselineNumber": 1,
@@ -113,7 +116,7 @@
       "baselineNumber": 18,
       "name": "Goblin Archer",
       "key": "characters.goblin_archer",
-      "status": "awaiting refresh"
+      "status": "integrated second batch"
     },
     {
       "baselineNumber": 19,
@@ -125,13 +128,13 @@
       "baselineNumber": 20,
       "name": "Goblin Shaman / Skarrow Stormcaller",
       "key": "characters.goblin_shaman",
-      "status": "awaiting refresh"
+      "status": "integrated second batch"
     },
     {
       "baselineNumber": 21,
       "name": "Goblin Boss / Vorga",
       "key": "characters.goblin_spear",
-      "status": "awaiting refresh"
+      "status": "integrated second batch"
     },
     {
       "baselineNumber": 22,

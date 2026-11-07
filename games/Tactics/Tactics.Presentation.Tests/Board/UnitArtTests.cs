@@ -86,10 +86,10 @@ public sealed class UnitArtTests
     [Fact]
     public void A_character_key_is_a_preset_with_the_character_frames_and_its_builds_head()
     {
-        var goblin = Art.Value.Sprite("characters.goblin_archer")!;
+        var goblin = Art.Value.Sprite("characters.bandit")!; // retained legacy preset, rather than a refreshed compass atlas
         var fighter = Art.Value.Sprite("characters.class_fighter")!;   // a "large" build
 
-        Assert.Equal("characters/presets/goblin_archer.png", goblin.Path);
+        Assert.Equal("characters/presets/bandit.png", goblin.Path);
         Assert.Equal((32, 40, 16, 37), (goblin.Width, goblin.Height, goblin.AnchorX, goblin.AnchorY));
         Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
         Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
@@ -159,7 +159,7 @@ public sealed class UnitArtTests
     {
         Assert.Equal("tactical/human_fighter.png", Art.Value.Sprite("characters.kara")!.Path);
         Assert.Equal("tactical/elf_wizard.png", Art.Value.Sprite("characters.ilyra")!.Path);
-        Assert.Equal("characters/presets/goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
+        Assert.Equal("creatures/mob_refresh_goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
     }
 
     [Theory]
@@ -213,7 +213,7 @@ public sealed class UnitArtTests
     [Fact]
     public void A_frames_place_in_the_sheet_is_its_column_and_row()
     {
-        var goblin = Art.Value.Sprite("characters.goblin_archer")!;
+        var goblin = Art.Value.Sprite("characters.bandit")!; // legacy two-row addressing remains supported
 
         Assert.Equal(new ArtRect(62 * 32, 40, 32, 40), goblin.Source(62, 1));
         Assert.Equal(new ArtRect(0, 0, 32, 40), goblin.Source(0, 0));

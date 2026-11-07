@@ -8,6 +8,9 @@ public sealed class MobRefreshTests
     [InlineData("characters.goblin_cutthroat", "goblin")]
     [InlineData("characters.orc_brute", "orc")]
     [InlineData("beasts.drake.red", "drake")]
+    [InlineData("characters.goblin_archer", "goblin_archer")]
+    [InlineData("characters.goblin_shaman", "goblin_shaman")]
+    [InlineData("characters.goblin_spear", "goblin_boss")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -16,7 +19,7 @@ public sealed class MobRefreshTests
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         for (var row = 0; row < 8; row++)
         {
-            foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" })
+            foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" }.Concat(sprite.Anims.ContainsKey("cast") ? ["cast"] : Array.Empty<string>()))
             {
                 var shapes = new HashSet<string>();
                 foreach (var frame in sprite.Anim(action).Frames.Distinct())
@@ -59,6 +62,23 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Fact]
+    public void Goblin_roles_use_their_authored_shooting_spell_and_rally_poses()
+    {
+        var art = UnitArt.Load(Pack.Root);
+        var archer = art.Sprite("characters.goblin_archer")!;
+        Assert.Equal(archer.Anim("attack").Frames.ToArray(), archer.Anim("characters.shoot").Frames.ToArray());
+        Assert.Equal(archer.Anim("attack").Fps, archer.Anim("characters.shoot").Fps);
+        foreach (var key in new[] { "characters.goblin_shaman", "characters.goblin_spear" })
+        {
+            var sprite = art.Sprite(key)!;
+            Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.point").Frames.ToArray());
+            Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.summon").Frames.ToArray());
+            Assert.NotEqual(sprite.Anim("attack").Frames, sprite.Anim("cast").Frames);
+        }
+        Assert.Equal("creatures/mother_skarrow.png", art.Sprite("characters.mother_skarrow")!.Path);
     }
 
     [Fact]

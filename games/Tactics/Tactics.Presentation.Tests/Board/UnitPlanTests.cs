@@ -303,10 +303,10 @@ public sealed class UnitPlanTests
     }
 
     [Theory]
-    [InlineData(5, 5, 5, 7, 0, true)]    // +V: lower left on the screen
-    [InlineData(5, 5, 7, 5, 0, false)]   // +U: lower right
-    [InlineData(5, 5, 3, 5, 1, false)]   // -U: upper left
-    [InlineData(5, 5, 5, 3, 1, true)]    // -V: upper right
+    [InlineData(5, 5, 5, 7, 1, false)]   // +V: south-west, authored view
+    [InlineData(5, 5, 7, 5, 7, false)]   // +U: south-east
+    [InlineData(5, 5, 3, 5, 3, false)]   // -U: north-west
+    [InlineData(5, 5, 5, 3, 5, false)]   // -V: north-east
     [InlineData(5, 5, 8, 8, 0, false)]   // straight down the screen: the art's own way
     public void A_unit_faces_its_foe_by_the_screen_direction(int x, int y, int foeX, int foeY, int row, bool mirror)
     {
@@ -320,7 +320,7 @@ public sealed class UnitPlanTests
     {
         var unit = One(null, Unit("a", "Party", 5, 5), Unit("far", "Enemy", 12, 5), Unit("near", "Enemy", 5, 3));
 
-        Assert.Equal((1, true), (unit.Row, unit.Mirror));
+        Assert.Equal((5, false), (unit.Row, unit.Mirror));
     }
 
     [Fact]
@@ -371,7 +371,7 @@ public sealed class UnitPlanTests
     public void The_bar_sits_over_the_head_centred_on_the_feet()
     {
         var unit = One(null, Unit("a", "Party", 5, 5));
-        var head = unit.Feet.Y - unit.Sprite.AnchorY + unit.Sprite.HeadTop;
+        var head = unit.Feet.Y - unit.Sprite.HeadLift;
 
         Assert.Equal(unit.Feet.X - UnitPlan.BarWidth / 2f, unit.Bar!.TopLeft.X);
         Assert.True(unit.Bar.TopLeft.Y + UnitPlan.BarHeight <= head);
@@ -397,7 +397,7 @@ public sealed class UnitPlanTests
     {
         var unit = One(null, Unit("a", "Party", 5, 5, hp: 0, life: "Downed", countdown: 2));
 
-        Assert.Equal(Pack.Frames("characters", "down")[^1], unit.Anim.Frames[0]);
+        Assert.Equal(13, unit.Anim.Frames[0]);
         Assert.Null(unit.Bar);
         Assert.Equal("2", unit.Countdown!.Text);
         Assert.Equal(unit.Feet.X, unit.Countdown.Centre.X);
@@ -480,15 +480,15 @@ public sealed class UnitPlanTests
             new Dictionary<UnitId, UnitPose> { [new UnitId("a")] = new UnitPose("walk", 0.3, new Vector2(1, 0)) })[0];
 
         Assert.Equal(sprite.Anim("walk").FrameAt(0.3), Assert.Single(walking.Anim.Frames));
-        Assert.Equal(0, walking.Row);       // +X: lower right
+        Assert.Equal(7, walking.Row);       // +X: authored south-east
         Assert.False(walking.Mirror);
     }
 
     [Theory]
-    [InlineData(1, 0, 0, false)]     // +X, lower right
-    [InlineData(0, 1, 0, true)]      // +Y, lower left
-    [InlineData(-1, 0, 1, false)]    // -X, upper left
-    [InlineData(0, -1, 1, true)]     // -Y, upper right
+    [InlineData(1, 0, 7, false)]     // +X, south-east
+    [InlineData(0, 1, 1, false)]     // +Y, south-west
+    [InlineData(-1, 0, 3, false)]    // -X, north-west
+    [InlineData(0, -1, 5, false)]    // -Y, north-east
     public void A_poses_direction_picks_the_sheets_row_and_mirror(float x, float y, int row, bool mirror)
     {
         var posed = UnitPlan.Build(Battle(null, Unit("a", "Party", 5, 5)), River, Art.Value, Fit, null,

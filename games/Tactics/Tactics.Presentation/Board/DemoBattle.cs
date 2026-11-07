@@ -17,6 +17,7 @@ public static class DemoBattle
     private const string Fight = ":fight";
     private const string Creatures = ":creatures";
     private const string MobRefresh = ":mob-refresh";
+    private const string GoblinRoles = ":goblin-roles";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -66,6 +67,15 @@ public static class DemoBattle
         Unit("Kobold reference", "Enemy", "characters.kobold", 13, 10, 5, 5),
     ];
 
+    private static ImmutableArray<UnitView> RefreshedGoblinRoles() =>
+    [
+        Unit("Goblin archer", "Enemy", "characters.goblin_archer", 11, 6, 14, 14),
+        Unit("Stormcaller", "Enemy", "characters.goblin_shaman", 12, 9, 18, 18),
+        Unit("Vorga", "Enemy", "characters.goblin_spear", 9, 10, 21, 21),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Cutthroat reference", "Enemy", "characters.goblin_cutthroat", 13, 10, 16, 16),
+    ];
+
     private static BoardChanges Changes()
     {
         ImmutableArray<Tile> bridge = [.. Enumerable.Range(5, 2).SelectMany(y => Enumerable.Range(5, 4).Select(x => new Tile(x, y)))];
@@ -106,8 +116,9 @@ public static class DemoBattle
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
         var mobRefresh = spec.EndsWith(MobRefresh, StringComparison.Ordinal);
-        var map = mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var goblinRoles = spec.EndsWith(GoblinRoles, StringComparison.Ordinal);
+        var map = goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

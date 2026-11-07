@@ -232,20 +232,20 @@
       "surprised": "goblin_cutthroat_refresh_surprised.png"
     },
     "goblin_spear": {
-      "idle": "goblin_spear_idle.png",
-      "hurt": "goblin_spear_hurt.png",
-      "happy": "goblin_spear_happy.png",
-      "angry": "goblin_spear_angry.png",
-      "sad": "goblin_spear_sad.png",
-      "surprised": "goblin_spear_surprised.png"
+      "idle": "goblin_spear_refresh_idle.png",
+      "hurt": "goblin_spear_refresh_hurt.png",
+      "happy": "goblin_spear_refresh_happy.png",
+      "angry": "goblin_spear_refresh_angry.png",
+      "sad": "goblin_spear_refresh_sad.png",
+      "surprised": "goblin_spear_refresh_surprised.png"
     },
     "goblin_shaman": {
-      "idle": "goblin_shaman_idle.png",
-      "hurt": "goblin_shaman_hurt.png",
-      "happy": "goblin_shaman_happy.png",
-      "angry": "goblin_shaman_angry.png",
-      "sad": "goblin_shaman_sad.png",
-      "surprised": "goblin_shaman_surprised.png"
+      "idle": "goblin_shaman_refresh_idle.png",
+      "hurt": "goblin_shaman_refresh_hurt.png",
+      "happy": "goblin_shaman_refresh_happy.png",
+      "angry": "goblin_shaman_refresh_angry.png",
+      "sad": "goblin_shaman_refresh_sad.png",
+      "surprised": "goblin_shaman_refresh_surprised.png"
     },
     "orc_brute": {
       "idle": "orc_brute_refresh_idle.png",
@@ -312,12 +312,12 @@
       "surprised": "hobgoblin_surprised.png"
     },
     "goblin_archer": {
-      "idle": "goblin_archer_idle.png",
-      "hurt": "goblin_archer_hurt.png",
-      "happy": "goblin_archer_happy.png",
-      "angry": "goblin_archer_angry.png",
-      "sad": "goblin_archer_sad.png",
-      "surprised": "goblin_archer_surprised.png"
+      "idle": "goblin_archer_refresh_idle.png",
+      "hurt": "goblin_archer_refresh_hurt.png",
+      "happy": "goblin_archer_refresh_happy.png",
+      "angry": "goblin_archer_refresh_angry.png",
+      "sad": "goblin_archer_refresh_sad.png",
+      "surprised": "goblin_archer_refresh_surprised.png"
     },
     "zombie": {
       "idle": "zombie_idle.png",

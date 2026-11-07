@@ -48,31 +48,32 @@ def poses(name,count,scale):
     SOURCES[name]=frames
     return frames
 
-items=[]
-for mob,size,floor in [('goblin',128,111),('orc',192,171),('drake',192,171)]:
-    scales={'goblin':{'idle':.408,'walk':.432,'attack':.44,'damage':.332},'orc':{'idle':.65,'walk':.677,'attack':.70,'damage':.50},'drake':{'idle':.521,'walk':.536,'attack':.70,'damage':.449}}[mob]
-    idle=poses(mob+('-idle-breath' if mob=='drake' else '-idle'),32,scales['idle'])
-    walk=poses(mob+'-walk',32,scales['walk'])
-    attack=poses(mob+'-attack',32,scales['attack'])
-    damage=poses(mob+'-damage',16,scales['damage'])
-    if mob=='goblin':
-        correction=poses('goblin-walk-corrected',8,.213)
-        for row,new in [(3,0),(7,4)]:walk[row*4:row*4+4]=correction[new:new+4]
-        correction=poses('goblin-attack-corrected',8,.35)
-        for row,new in [(0,0),(7,4)]:attack[row*4:row*4+4]=correction[new:new+4]
-    if mob=='orc':
-        correction=poses('orc-walk-corrected',8,.37)
-        for row,new in [(2,0),(6,4)]:walk[row*4:row*4+4]=correction[new:new+4]
-        correction=poses('orc-attack-corrected',8,.37)
-        attack[28:32]=correction[4:8]
-    if mob=='drake':
-        correction=poses('drake-attack-rear',8,.34)
-        for row,new in [(3,0),(5,4)]:attack[row*4:row*4+4]=correction[new:new+4]
-    frames=[]
-    for row,d in enumerate(DIRECTIONS):
-        damage_start=(row//2)*4+(row%2)*2
-        for action,selected in [('idle',idle[row*4:row*4+4]),('walk',walk[row*4:row*4+4]),('attack',attack[row*4:row*4+4]),('hurt',[damage[damage_start]]),('down',[damage[damage_start+1]])]:
-            for frame,f in enumerate(selected):frames.append({**f,'direction':d,'row':row,'action':action,'frame':frame})
-    items.append({'id':mob,'size':size,'anchor':[size//2,floor],'pixelScale':.32,'frames':frames})
-(ROOT/'packing.json').write_text(json.dumps(items,indent=2)+'\n')
-print('Measured',sum(len(i['frames'])for i in items),'selected poses across all 8 facings; complete source actors, fixed scale per action.')
+if __name__ == '__main__':
+    items=[]
+    for mob,size,floor in [('goblin',128,111),('orc',192,171),('drake',192,171)]:
+        scales={'goblin':{'idle':.408,'walk':.432,'attack':.44,'damage':.332},'orc':{'idle':.65,'walk':.677,'attack':.70,'damage':.50},'drake':{'idle':.521,'walk':.536,'attack':.70,'damage':.449}}[mob]
+        idle=poses(mob+('-idle-breath' if mob=='drake' else '-idle'),32,scales['idle'])
+        walk=poses(mob+'-walk',32,scales['walk'])
+        attack=poses(mob+'-attack',32,scales['attack'])
+        damage=poses(mob+'-damage',16,scales['damage'])
+        if mob=='goblin':
+            correction=poses('goblin-walk-corrected',8,.213)
+            for row,new in [(3,0),(7,4)]:walk[row*4:row*4+4]=correction[new:new+4]
+            correction=poses('goblin-attack-corrected',8,.35)
+            for row,new in [(0,0),(7,4)]:attack[row*4:row*4+4]=correction[new:new+4]
+        if mob=='orc':
+            correction=poses('orc-walk-corrected',8,.37)
+            for row,new in [(2,0),(6,4)]:walk[row*4:row*4+4]=correction[new:new+4]
+            correction=poses('orc-attack-corrected',8,.37)
+            attack[28:32]=correction[4:8]
+        if mob=='drake':
+            correction=poses('drake-attack-rear',8,.34)
+            for row,new in [(3,0),(5,4)]:attack[row*4:row*4+4]=correction[new:new+4]
+        frames=[]
+        for row,d in enumerate(DIRECTIONS):
+            damage_start=(row//2)*4+(row%2)*2
+            for action,selected in [('idle',idle[row*4:row*4+4]),('walk',walk[row*4:row*4+4]),('attack',attack[row*4:row*4+4]),('hurt',[damage[damage_start]]),('down',[damage[damage_start+1]])]:
+                for frame,f in enumerate(selected):frames.append({**f,'direction':d,'row':row,'action':action,'frame':frame})
+        items.append({'id':mob,'size':size,'anchor':[size//2,floor],'pixelScale':.32,'frames':frames})
+    (ROOT/'packing.json').write_text(json.dumps(items,indent=2)+'\n')
+    print('Measured',sum(len(i['frames'])for i in items),'selected poses across all 8 facings; complete source actors, fixed scale per action.')

@@ -7,6 +7,19 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Goblin_role_review_places_each_role_with_a_party_and_cutthroat_reference()
+    {
+        var battle = DemoBattle.View("river_crossing:goblin-roles").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.goblin_archer");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.goblin_shaman");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.goblin_spear");
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Mob_refresh_review_places_the_new_mobs_beside_the_party_and_kobold_on_walkable_ground()
     {
         var battle = DemoBattle.View("river_crossing:mob-refresh").Battle!;

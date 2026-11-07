@@ -103,6 +103,9 @@ public sealed class HudArtTests
     [InlineData("characters.goblin_cutthroat", "goblin", 48)]
     [InlineData("characters.orc_brute", "orc", 48)]
     [InlineData("beasts.drake.red", "drake", 64)]
+    [InlineData("characters.goblin_archer", "goblin_archer", 56)]
+    [InlineData("characters.goblin_shaman", "goblin_shaman", 56)]
+    [InlineData("characters.goblin_spear", "goblin_boss", 56)]
     public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
     {
         var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
@@ -116,6 +119,9 @@ public sealed class HudArtTests
     [Theory]
     [InlineData("goblin_cutthroat")]
     [InlineData("orc_brute")]
+    [InlineData("goblin_archer")]
+    [InlineData("goblin_shaman")]
+    [InlineData("goblin_spear")]
     public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
     {
         var files = new HashSet<string>();

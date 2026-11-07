@@ -95,8 +95,11 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
-        _mobReview = parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (_mobReview)
+        var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
+        _mobReview = goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (goblinRoles)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.goblin_archer", "characters.goblin_shaman", "characters.goblin_spear"];
+        else if (_mobReview)
             _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.orc_brute", "beasts.drake.red", "characters.kobold"];
         var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
         _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);

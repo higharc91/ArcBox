@@ -4,7 +4,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 (async () => {
-  const root = __dirname;
+  const root = process.argv[2] ? path.resolve(process.argv[2]) : __dirname;
   const data = JSON.parse(fs.readFileSync(path.join(root, 'packing.json')));
   const images = {};
   for (const mob of data)
@@ -23,10 +23,12 @@ const { chromium } = require('playwright');
         value.getContext('2d').imageSmoothingEnabled = false;
         return value;
       }
-      const starts = { idle: 0, walk: 4, attack: 8, hurt: 12, down: 13 };
+      const defaultStarts = { idle: 0, walk: 4, attack: 8, hurt: 12, down: 13 };
       const output = [];
       for (const mob of data) {
-        const atlas = canvas(mob.size * 8, mob.size * 16);
+        const rows = mob.rowsPerDirection ?? 2;
+        const starts = mob.actionOffsets ?? defaultStarts;
+        const atlas = canvas(mob.size * 8, mob.size * rows * 8);
         const atlasContext = atlas.getContext('2d');
         const frames = [], checks = [];
         // Render on the canonical authoring grid before cropping padding. Merely changing the
@@ -75,7 +77,7 @@ const { chromium } = require('playwright');
           if (count < 100 || Math.min(...projected) < 2 || projected[2] > mob.size - 2 || projected[3] > mob.size - 2)
             throw Error(`Clipped ${mob.id}/${frame.direction}/${frame.action}/${frame.frame}: ${projected}`);
           const column = starts[frame.action] + frame.frame;
-          atlasContext.drawImage(packed, column % 8 * mob.size, (frame.row * 2 + Math.floor(column / 8)) * mob.size);
+          atlasContext.drawImage(packed, column % 8 * mob.size, (frame.row * rows + Math.floor(column / 8)) * mob.size);
           frames.push({ name: `${frame.action}/${frame.direction}/${frame.frame}.png`, image: packed.toDataURL() });
           checks.push({ action: frame.action, direction: frame.direction, frame: frame.frame, source: frame.source,
             sourcePose: frame.sourcePose, scale: frame.scale, bounds, count });
