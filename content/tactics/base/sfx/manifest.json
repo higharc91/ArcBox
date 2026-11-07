@@ -1074,7 +1074,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing"
+      "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing; fx.paladin_bless.gold; fx.paladin_aid.gold"
     },
     "spell_cast": {
       "files": [
@@ -1099,7 +1099,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire"
+      "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire; fx.paladin_elemental_weapon.fire"
     },
     "spell_fire_explosion": {
       "files": [
@@ -1125,7 +1125,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.heal.holy, fx.restore.holy; fx.cleric_cure_wounds.healing; fx.cleric_healing_word.healing; fx.cleric_lesser_restoration.healing; fx.cleric_mass_healing_word.healing; fx.cleric_mass_cure_wounds.healing; fx.cleric_greater_restoration.healing; fx.cleric_divine_spark.healing; fx.cleric_preserve_life.healing"
+      "use": "fx.heal.holy, fx.restore.holy; fx.cleric_cure_wounds.healing; fx.cleric_healing_word.healing; fx.cleric_lesser_restoration.healing; fx.cleric_mass_healing_word.healing; fx.cleric_mass_cure_wounds.healing; fx.cleric_greater_restoration.healing; fx.cleric_divine_spark.healing; fx.cleric_preserve_life.healing; fx.paladin_lay_on_hands.holy; fx.paladin_cure_wounds.holy; fx.paladin_lesser_restoration.holy"
     },
     "spell_holy_pillar": {
       "files": [
@@ -1133,7 +1133,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*; fx.cleric_sacred_flame.radiant; fx.cleric_word_of_radiance.radiant; fx.cleric_guiding_bolt.radiant; fx.cleric_banishment.holy; fx.cleric_sear_undead.radiant; fx.cleric_divine_intervention.healing"
+      "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*; fx.cleric_sacred_flame.radiant; fx.cleric_word_of_radiance.radiant; fx.cleric_guiding_bolt.radiant; fx.cleric_banishment.holy; fx.cleric_sear_undead.radiant; fx.cleric_divine_intervention.healing; fx.paladin_divine_smite.gold; fx.paladin_divine_smite_2.gold; fx.paladin_divine_smite_3.gold"
     },
     "spell_ice": {
       "files": [
@@ -1209,7 +1209,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth"
+      "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth; fx.paladin_shield_of_faith.azure"
     },
     "spell_thunderwave": {
       "files": [

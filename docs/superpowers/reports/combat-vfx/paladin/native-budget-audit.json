@@ -1,0 +1,227 @@
+{
+  "method": "Measured real-engine base script times, excluding cinematic lead/settle. Same strict caps as PaladinVfxTests.",
+  "samples": [
+    {
+      "id": "common.attack",
+      "baseSeconds": 0.3,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.bless",
+      "baseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.command",
+      "baseSeconds": 0.42000000000000004,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.compelled_duel",
+      "baseSeconds": 0.42000000000000004,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.cure_wounds",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.lay_on_hands",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.shield_of_faith",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.divine_smite",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage",
+      "baseSeconds": 0.326,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.aid",
+      "baseSeconds": 0.3,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.divine_smite_2",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.lesser_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage_2",
+      "baseSeconds": 0.5900000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.aura_of_protection",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.aura_of_protection_start",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.dispel_magic",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.divine_smite_3",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.elemental_weapon",
+      "baseSeconds": 0.42,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage_3",
+      "baseSeconds": 0.5900000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "avenger.abjure_enemy",
+      "baseSeconds": 0.54,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "avenger.vow_of_enmity",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "avenger.relentless_step",
+      "baseSeconds": 0.47,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "avenger.vengeful_strikes",
+      "baseSeconds": 0.53,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "avenger.soul_of_vengeance",
+      "baseSeconds": 0.6200000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "crusader.radiant_blades",
+      "baseSeconds": 0.3,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "crusader.searing_smite",
+      "baseSeconds": 0.37000000000000005,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "crusader.consecrated.tick",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "crusader.consecrated_ground",
+      "baseSeconds": 1.1600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "crusader.dawnbreaker",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "guardian.righteous_challenge",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "guardian.sanctuary_aegis",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "guardian.divine_intervention",
+      "baseSeconds": 0.88,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "guardian.aegis_of_faith",
+      "baseSeconds": 0.54,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage.undead",
+      "baseSeconds": 0.356,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage_2.undead",
+      "baseSeconds": 0.62,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.smite_damage_3.undead",
+      "baseSeconds": 0.62,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "paladin.elemental_weapon.strike",
+      "baseSeconds": 0.5,
+      "capSeconds": 0.8,
+      "passed": true
+    }
+  ]
+}

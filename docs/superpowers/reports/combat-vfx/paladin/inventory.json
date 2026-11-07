@@ -1,0 +1,824 @@
+{
+  "before": [
+    {
+      "id": "paladin.bless",
+      "name": "Bless",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.bless.gold"
+      }
+    },
+    {
+      "id": "paladin.command",
+      "name": "Command",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hold.holy"
+      }
+    },
+    {
+      "id": "paladin.compelled_duel",
+      "name": "Compelled Duel",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hold.holy"
+      }
+    },
+    {
+      "id": "paladin.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "paladin.lay_on_hands",
+      "name": "Lay on Hands",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "paladin.shield_of_faith",
+      "name": "Shield of Faith",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.ward.holy"
+      }
+    },
+    {
+      "id": "fighter.style_defense",
+      "name": "Style Defense",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fighter.style_dueling",
+      "name": "Style Dueling",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fighter.style_great_weapon",
+      "name": "Style Great Weapon",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.divine_smite",
+      "name": "Divine Smite",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ready",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "paladin.smite_damage",
+      "name": "Smite Damage",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.aid",
+      "name": "Aid",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.bless.gold"
+      }
+    },
+    {
+      "id": "paladin.divine_smite_2",
+      "name": "Divine Smite (2 Oath)",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ready",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "paladin.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.holy"
+      }
+    },
+    {
+      "id": "paladin.smite_damage_2",
+      "name": "Smite Damage 2",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.aura_of_protection",
+      "name": "Aura Of Protection",
+      "level": 6,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.aura_of_protection_start",
+      "name": "Aura Of Protection Start",
+      "level": 6,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.dispel.arcane"
+      }
+    },
+    {
+      "id": "paladin.divine_smite_3",
+      "name": "Divine Smite (3 Oath)",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ready",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "paladin.elemental_weapon",
+      "name": "Elemental Weapon",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.aura.fire"
+      }
+    },
+    {
+      "id": "paladin.smite_damage_3",
+      "name": "Smite Damage 3",
+      "level": 9,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "avenger.abjure_enemy",
+      "name": "Abjure Enemy",
+      "level": 3,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.avenger_vengeance_brand.ember"
+      }
+    },
+    {
+      "id": "avenger.vow_of_enmity",
+      "name": "Vow of Enmity",
+      "level": 3,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.avenger_vengeance_brand.ember"
+      }
+    },
+    {
+      "id": "avenger.relentless_step",
+      "name": "Relentless Step",
+      "level": 6,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.jump",
+        "fx": "signature.avenger_vengeance_brand.ember"
+      }
+    },
+    {
+      "id": "avenger.vengeful_strikes",
+      "name": "Vengeful Strikes",
+      "level": 6,
+      "subclass": "paladin.avenger",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "avenger.soul_of_vengeance",
+      "name": "Soul of Vengeance",
+      "level": 10,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "signature.avenger_vengeance_brand.ember"
+      }
+    },
+    {
+      "id": "crusader.radiant_blades",
+      "name": "Radiant Blades",
+      "level": 3,
+      "subclass": "paladin.crusader",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "crusader.searing_smite",
+      "name": "Searing Smite",
+      "level": 3,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "signature.crusader_smite.radiant"
+      }
+    },
+    {
+      "id": "crusader.consecrated.tick",
+      "name": "Consecrated Ground \u00b7 OnTurnStart",
+      "level": 6,
+      "subclass": "paladin.crusader",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "crusader.consecrated_ground",
+      "name": "Consecrated Ground",
+      "level": 6,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "signature.crusader_smite.radiant"
+      }
+    },
+    {
+      "id": "crusader.dawnbreaker",
+      "name": "Dawnbreaker",
+      "level": 10,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.crusader_smite.radiant"
+      }
+    },
+    {
+      "id": "guardian.righteous_challenge",
+      "name": "Righteous Challenge",
+      "level": 3,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.guardian_bulwark.holy"
+      }
+    },
+    {
+      "id": "guardian.sanctuary_aegis",
+      "name": "Sanctuary Aegis",
+      "level": 3,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.guardian_bulwark.azure"
+      }
+    },
+    {
+      "id": "guardian.divine_intervention",
+      "name": "Divine Ward",
+      "level": 6,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.guardian_bulwark.azure"
+      }
+    },
+    {
+      "id": "guardian.steadfast",
+      "name": "Steadfast",
+      "level": 6,
+      "subclass": "paladin.guardian",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "guardian.aegis_of_faith",
+      "name": "Aegis of Faith",
+      "level": 10,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.guardian_bulwark.holy"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "paladin.bless",
+      "name": "Bless",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_bless.gold"
+      }
+    },
+    {
+      "id": "paladin.command",
+      "name": "Command",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_command.holy"
+      }
+    },
+    {
+      "id": "paladin.compelled_duel",
+      "name": "Compelled Duel",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_compelled_duel.gold"
+      }
+    },
+    {
+      "id": "paladin.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_mercy",
+        "fx": "fx.paladin_cure_wounds.holy"
+      }
+    },
+    {
+      "id": "paladin.lay_on_hands",
+      "name": "Lay on Hands",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_mercy",
+        "fx": "fx.paladin_lay_on_hands.holy"
+      }
+    },
+    {
+      "id": "paladin.shield_of_faith",
+      "name": "Shield of Faith",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_guard",
+        "fx": "fx.paladin_shield_of_faith.azure"
+      }
+    },
+    {
+      "id": "fighter.style_defense",
+      "name": "Style Defense",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fighter.style_dueling",
+      "name": "Style Dueling",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fighter.style_great_weapon",
+      "name": "Style Great Weapon",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "paladin.divine_smite",
+      "name": "Divine Smite",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_divine_smite.gold"
+      }
+    },
+    {
+      "id": "paladin.smite_damage",
+      "name": "Smite Damage",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_smite_hit.gold"
+      }
+    },
+    {
+      "id": "paladin.aid",
+      "name": "Aid",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_aid.gold"
+      }
+    },
+    {
+      "id": "paladin.divine_smite_2",
+      "name": "Divine Smite (2 Oath)",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_divine_smite_2.gold"
+      }
+    },
+    {
+      "id": "paladin.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_mercy",
+        "fx": "fx.paladin_lesser_restoration.holy"
+      }
+    },
+    {
+      "id": "paladin.smite_damage_2",
+      "name": "Smite Damage 2",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_smite_hit_2.gold"
+      }
+    },
+    {
+      "id": "paladin.aura_of_protection",
+      "name": "Aura Of Protection",
+      "level": 6,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_aura_refresh.azure"
+      }
+    },
+    {
+      "id": "paladin.aura_of_protection_start",
+      "name": "Aura Of Protection Start",
+      "level": 6,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_aura_start.azure"
+      }
+    },
+    {
+      "id": "paladin.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_dispel_magic.arcane"
+      }
+    },
+    {
+      "id": "paladin.divine_smite_3",
+      "name": "Divine Smite (3 Oath)",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_divine_smite_3.gold"
+      }
+    },
+    {
+      "id": "paladin.elemental_weapon",
+      "name": "Elemental Weapon",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.paladin_oath",
+        "fx": "fx.paladin_elemental_weapon.fire"
+      }
+    },
+    {
+      "id": "paladin.smite_damage_3",
+      "name": "Smite Damage 3",
+      "level": 9,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_smite_hit_3.gold"
+      }
+    },
+    {
+      "id": "avenger.abjure_enemy",
+      "name": "Abjure Enemy",
+      "level": 3,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_abjure_enemy.ember",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "avenger.vow_of_enmity",
+      "name": "Vow of Enmity",
+      "level": 3,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_vow_of_enmity.ember",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "avenger.relentless_step",
+      "name": "Relentless Step",
+      "level": 6,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_relentless_step.ember",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "avenger.vengeful_strikes",
+      "name": "Vengeful Strikes",
+      "level": 6,
+      "subclass": "paladin.avenger",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_vengeful_strikes.ember"
+      }
+    },
+    {
+      "id": "avenger.soul_of_vengeance",
+      "name": "Soul of Vengeance",
+      "level": 10,
+      "subclass": "paladin.avenger",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_strike",
+        "fx": "fx.paladin_soul_of_vengeance.ember",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "crusader.radiant_blades",
+      "name": "Radiant Blades",
+      "level": 3,
+      "subclass": "paladin.crusader",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_radiant_blades.holy"
+      }
+    },
+    {
+      "id": "crusader.searing_smite",
+      "name": "Searing Smite",
+      "level": 3,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_strike",
+        "fx": "fx.paladin_searing_smite.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "crusader.consecrated.tick",
+      "name": "Consecrated Ground \u00b7 OnTurnStart",
+      "level": 6,
+      "subclass": "paladin.crusader",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.paladin_consecrated_tick.holy"
+      }
+    },
+    {
+      "id": "crusader.consecrated_ground",
+      "name": "Consecrated Ground",
+      "level": 6,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_consecrated_ground.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "crusader.dawnbreaker",
+      "name": "Dawnbreaker",
+      "level": 10,
+      "subclass": "paladin.crusader",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_dawnbreaker.holy",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "guardian.righteous_challenge",
+      "name": "Righteous Challenge",
+      "level": 3,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_judgement",
+        "fx": "fx.paladin_righteous_challenge.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "guardian.sanctuary_aegis",
+      "name": "Sanctuary Aegis",
+      "level": 3,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_guard",
+        "fx": "fx.paladin_sanctuary_aegis.azure",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "guardian.divine_intervention",
+      "name": "Divine Ward",
+      "level": 6,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.paladin_guard",
+        "fx": "fx.paladin_divine_intervention.azure"
+      }
+    },
+    {
+      "id": "guardian.steadfast",
+      "name": "Steadfast",
+      "level": 6,
+      "subclass": "paladin.guardian",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "guardian.aegis_of_faith",
+      "name": "Aegis of Faith",
+      "level": 10,
+      "subclass": "paladin.guardian",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.paladin_guard",
+        "fx": "fx.paladin_aegis_of_faith.azure",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

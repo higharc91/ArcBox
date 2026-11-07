@@ -1,4 +1,4 @@
-> Status: Druid native review complete; awaiting owner OK before its PR or Paladin. Approved dependency PRs #251–#255 await owner merges. CI remains manually disabled.
+> Status: Paladin native review complete; awaiting owner OK before its PR or Bard. Approved PRs #251–#256 await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -160,3 +160,21 @@ All 34 ability definitions/passives and all four monster gameplay definitions ar
 The owner reported swimming plant/fur textures, especially on the dire wolf. Source/art correction `ec4bd6ac66647a8765ab820aed3bd9f7abc05e6e` retains native fur shading, replaces radial/clipped wreaths with small whole leaf ties and shoulder plates, and uses explicit anatomical attachment keys for all 18 poses × 8 facings of each source species. A regression reproduces the old extremity-driven sliding and passes after the fix. Atlas layout, scale, anchors, animation timing, runtime code and gameplay are unchanged. The synchronized previous/revised inspector is `../reports/combat-vfx/druid/forms/motion/index.html`; 768 browser frame steps and live playback pass.
 
 All 18 affected native scenes are recaptured; the 35 unaffected scenes are retained. The full local gate passes again: 7,265 .NET tests, 549 phone/build, 24 Node, 47 asset, 9 audio and 23 lore tests, with zero build warnings. Three fresh native benchmark runs per version give 20.0988 → 20.2511 ms (+0.76%, within 10%). Largest individual increase: druid.spike_growth (+8.40%). Full/Auto round overhead remains 3.300/3.000 s under the unchanged stricter assertions. CI remains disabled; Druid approval, its PR and Paladin still wait for the owner.
+
+
+## Druid approval and Paladin
+
+The owner replied “Those look good, next class” after the corrected Druid animal-motion review. Druid is approved and checked on #247; PR #256 is open against `combat-vfx-cleric`. Latest main remains `c4e121eb`; Paladin starts from it plus approved Druid dependency `d6c216bfbe7db4e7f043ac3cebae59c6700ae92c`, the frozen before baseline.
+
+Paladin has 24 abilities, seven class procs, the Consecrated Ground zone hook and four static features (including the three fighting styles). The 37 real-engine scenes include all visible features, ordinary Attack, three additional undead smite cases and an actual attack while Elemental Weapon remains active. Smite conditions and Avenger marks are prepared by real casts. Healing/restoration/dispel fixtures establish their actual prerequisites. Aura start/end and the Guardian reaction use actual engine hooks.
+
+Thirty-three native effect sheets use holy/gold, azure Guardian, bright Crusader and ember Avenger motifs, with matching light. Five complete five-frame gestures append 25 frames on all eleven Paladin race atlases, preserving old frame indices. Paladin weapon follow-through retains every attack/roll/proc while fitting 0.8 s; split damage uses separate rows, and smite rider effects land on the real victim. Existing sounds are retained; sound art-key parsing accepts digits so second/third rank smites resolve their original clip. Gameplay, AI, numbers, phone fixtures, replays/goldens, original creature art and other class atlases remain unchanged.
+
+The focused Paladin, UnitArt and five-party round checks pass, as do the deterministic effects and all 13 tactical art tests, including every race's new grips. Original stricter round assertions remain unchanged. Native after-capture and the full local gate follow. Paladin's PR and Bard wait for explicit Paladin approval. CI remains disabled.
+
+
+## Paladin review handoff
+
+The 37-sample native gallery is `../reports/combat-vfx/paladin/index.html`: 24 abilities, seven class procs, Consecrated Ground's heal hook, ordinary Attack, three extra undead smite cases and an actual enchanted-weapon attack. Thirty-three deterministic effects and five five-frame gestures use the existing palette/rig with matching light. Smite impacts land on victims, damage rows stay separate, and all real attack/save/proc events remain. Source/art/runtime commit `ce32913c70228e517de53c0a98f53ad78ff127a1`; inventory-test follow-up `e0b7cb8597a73fc22c895aabeb866451ea6df226`.
+
+The full local gate passes: 7,270 .NET tests (zero skipped), 549 phone/build, 24 Node, 50 asset, 9 audio and 23 lore tests, with zero build warnings. Three-run class median 20.0227 → 20.5252 ms (+2.51%, within 10%). Largest individual increase paladin.smite_damage.undead (+12.14%). Texture peak growth +19.37 MiB; shipped pack growth 0.66 MiB. Thirty Paladin-party rounds add at most 3.300/3.017/0 s Full/Auto/Off and pass the unchanged stricter limits. All 4,158 original Paladin frames and all 24 gameplay definitions/passives are preserved; other classes, original creatures, phone/fixtures, replays/goldens and audio clips stay unchanged. Hardware 16 ms and physical TV checks remain pending. Paladin stays unchecked until owner approval; its PR and Bard wait for that OK. CI remains disabled.

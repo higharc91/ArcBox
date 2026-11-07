@@ -8151,6 +8151,996 @@
         "fire": "druid_produce_flame_shot_fire.png"
       },
       "default": "fire"
+    },
+    "paladin_lay_on_hands": {
+      "name": "Lay On Hands",
+      "group": "Paladin",
+      "frame": [
+        59,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        35
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_lay_on_hands_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_divine_smite": {
+      "name": "Divine Smite",
+      "group": "Paladin",
+      "frame": [
+        59,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        35
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_divine_smite_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_divine_smite_2": {
+      "name": "Divine Smite 2",
+      "group": "Paladin",
+      "frame": [
+        63,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        41
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        25,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_divine_smite_2_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_divine_smite_3": {
+      "name": "Divine Smite 3",
+      "group": "Paladin",
+      "frame": [
+        71,
+        64
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        48
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        26
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_divine_smite_3_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_bless": {
+      "name": "Bless",
+      "group": "Paladin",
+      "frame": [
+        135,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_bless_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_command": {
+      "name": "Command",
+      "group": "Paladin",
+      "frame": [
+        59,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        40
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_command_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_compelled_duel": {
+      "name": "Compelled Duel",
+      "group": "Paladin",
+      "frame": [
+        59,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        36
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_compelled_duel_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_cure_wounds": {
+      "name": "Cure Wounds",
+      "group": "Paladin",
+      "frame": [
+        59,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        38
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_cure_wounds_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_shield_of_faith": {
+      "name": "Shield Of Faith",
+      "group": "Paladin",
+      "frame": [
+        59,
+        66
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        58
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_shield_of_faith_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_aid": {
+      "name": "Aid",
+      "group": "Paladin",
+      "frame": [
+        135,
+        72
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        46
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        49
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_aid_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_lesser_restoration": {
+      "name": "Lesser Restoration",
+      "group": "Paladin",
+      "frame": [
+        62,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        41
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_lesser_restoration_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_dispel_magic": {
+      "name": "Dispel Magic",
+      "group": "Paladin",
+      "frame": [
+        65,
+        64
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        32,
+        50
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        24,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "paladin_dispel_magic_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "paladin_elemental_weapon": {
+      "name": "Elemental Weapon",
+      "group": "Paladin",
+      "frame": [
+        59,
+        62
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        55
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "paladin_elemental_weapon_fire.png"
+      },
+      "default": "fire"
+    },
+    "paladin_sanctuary_aegis": {
+      "name": "Sanctuary Aegis",
+      "group": "Paladin",
+      "frame": [
+        67,
+        70
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        56
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        23,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_sanctuary_aegis_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_righteous_challenge": {
+      "name": "Righteous Challenge",
+      "group": "Paladin",
+      "frame": [
+        135,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_righteous_challenge_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_divine_intervention": {
+      "name": "Divine Intervention",
+      "group": "Paladin",
+      "frame": [
+        66,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        36,
+        52
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        20,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_divine_intervention_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_aegis_of_faith": {
+      "name": "Aegis Of Faith",
+      "group": "Paladin",
+      "frame": [
+        135,
+        81
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        55
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        40
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_aegis_of_faith_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_searing_smite": {
+      "name": "Searing Smite",
+      "group": "Paladin",
+      "frame": [
+        59,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        38
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "paladin_searing_smite_fire.png"
+      },
+      "default": "fire"
+    },
+    "paladin_consecrated_ground": {
+      "name": "Consecrated Ground",
+      "group": "Paladin",
+      "frame": [
+        135,
+        74
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_consecrated_ground_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_dawnbreaker": {
+      "name": "Dawnbreaker",
+      "group": "Paladin",
+      "frame": [
+        135,
+        97
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        71
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_dawnbreaker_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_vow_of_enmity": {
+      "name": "Vow Of Enmity",
+      "group": "Paladin",
+      "frame": [
+        59,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        46
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "paladin_vow_of_enmity_ember.png"
+      },
+      "default": "ember"
+    },
+    "paladin_abjure_enemy": {
+      "name": "Abjure Enemy",
+      "group": "Paladin",
+      "frame": [
+        61,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        40
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        26,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "paladin_abjure_enemy_ember.png"
+      },
+      "default": "ember"
+    },
+    "paladin_relentless_step": {
+      "name": "Relentless Step",
+      "group": "Paladin",
+      "frame": [
+        59,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        35
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "paladin_relentless_step_ember.png"
+      },
+      "default": "ember"
+    },
+    "paladin_soul_of_vengeance": {
+      "name": "Soul Of Vengeance",
+      "group": "Paladin",
+      "frame": [
+        137,
+        72
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        68,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        36,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "paladin_soul_of_vengeance_ember.png"
+      },
+      "default": "ember"
+    },
+    "paladin_smite_hit": {
+      "name": "Smite Hit",
+      "group": "Paladin",
+      "frame": [
+        37,
+        45
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        18,
+        32
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        22,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_smite_hit_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_smite_hit_2": {
+      "name": "Smite Hit 2",
+      "group": "Paladin",
+      "frame": [
+        43,
+        48
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        35
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        19,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_smite_hit_2_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_smite_hit_3": {
+      "name": "Smite Hit 3",
+      "group": "Paladin",
+      "frame": [
+        49,
+        51
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        38
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        16,
+        15
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "paladin_smite_hit_3_gold.png"
+      },
+      "default": "gold"
+    },
+    "paladin_aura_start": {
+      "name": "Aura Start",
+      "group": "Paladin",
+      "frame": [
+        135,
+        63
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        37
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        58
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_aura_start_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_aura_refresh": {
+      "name": "Aura Refresh",
+      "group": "Paladin",
+      "frame": [
+        135,
+        55
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        29
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        66
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "paladin_aura_refresh_azure.png"
+      },
+      "default": "azure"
+    },
+    "paladin_radiant_blades": {
+      "name": "Radiant Blades",
+      "group": "Paladin",
+      "frame": [
+        37,
+        45
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        18,
+        32
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        22,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_radiant_blades_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_vengeful_strikes": {
+      "name": "Vengeful Strikes",
+      "group": "Paladin",
+      "frame": [
+        43,
+        48
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        35
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        19,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "paladin_vengeful_strikes_ember.png"
+      },
+      "default": "ember"
+    },
+    "paladin_consecrated_tick": {
+      "name": "Consecrated Tick",
+      "group": "Paladin",
+      "frame": [
+        34,
+        33
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        17,
+        30
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        23,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "paladin_consecrated_tick_holy.png"
+      },
+      "default": "holy"
+    },
+    "paladin_elemental_strike": {
+      "name": "Elemental Strike",
+      "group": "Paladin",
+      "frame": [
+        53,
+        48
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        26,
+        35
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        14,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "paladin_elemental_strike_fire.png"
+      },
+      "default": "fire"
     }
   },
   "passives": {
@@ -8172,6 +9162,14 @@
     "druid.moonbeam.enter": "fx.druid_moonbeam_enter.moon",
     "druid.moonbeam.turn": "fx.druid_moonbeam_turn.moon",
     "druid.sleet_storm.turn": "fx.druid_sleet_storm_turn.frost",
-    "grovekeeper.sanctuary_grove.mend": "fx.druid_sanctuary_grove_mend.healing"
+    "grovekeeper.sanctuary_grove.mend": "fx.druid_sanctuary_grove_mend.healing",
+    "paladin.smite_damage": "fx.paladin_smite_hit.gold",
+    "paladin.smite_damage_2": "fx.paladin_smite_hit_2.gold",
+    "paladin.smite_damage_3": "fx.paladin_smite_hit_3.gold",
+    "paladin.aura_of_protection_start": "fx.paladin_aura_start.azure",
+    "paladin.aura_of_protection": "fx.paladin_aura_refresh.azure",
+    "crusader.radiant_blades": "fx.paladin_radiant_blades.holy",
+    "avenger.vengeful_strikes": "fx.paladin_vengeful_strikes.ember",
+    "crusader.consecrated.tick": "fx.paladin_consecrated_tick.holy"
   }
 }

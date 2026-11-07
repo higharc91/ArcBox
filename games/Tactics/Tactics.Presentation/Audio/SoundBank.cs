@@ -193,7 +193,7 @@ public sealed partial class SoundBank
         }
     }
 
-    [GeneratedRegex(@"fx\.[a-z_]+(?:\.(?:[a-z_]+|\*))?")]
+    [GeneratedRegex(@"fx\.[a-z0-9_]+(?:\.(?:[a-z0-9_]+|\*))?")]
     private static partial Regex EffectKey();
 
     [GeneratedRegex("[a-z_]+")]

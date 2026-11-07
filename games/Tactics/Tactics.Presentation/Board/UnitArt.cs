@@ -90,7 +90,9 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
             "cleric_prayer" => "pray", "cleric_restore" => "buff",
             "cleric_judgement" => "summon", "cleric_strike" => "attack",
             "druid_shape" => "channel", "druid_roots" => "summon", "druid_gale" => "cast",
-            "druid_mend" => "buff", "druid_lash" => "point", _ => name,
+            "druid_mend" => "buff", "druid_lash" => "point",
+            "paladin_oath" => "pray", "paladin_mercy" => "buff", "paladin_judgement" => "summon",
+            "paladin_strike" => "attack", "paladin_guard" => "block", _ => name,
         };
         return Anims.GetValueOrDefault(name)
             ?? (SpellPoses.Contains(name) ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)
