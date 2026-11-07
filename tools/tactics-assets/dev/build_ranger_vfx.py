@@ -46,6 +46,7 @@ def build():
         new={'anim':'characters.'+anim,'fx':f'fx.ranger_{name}.{material}'}
         shot=next((e for e in fx.CATALOGUE if e.id=='ranger_'+name+'_shot'),None)
         if shot:new['projectile']=f'fx.{shot.id}.{material}'
+        elif old.get('projectile'):new['projectile']=old['projectile']
         cost=ability['cost'];tier=old.get('cutIn') or ('none' if cost.get('reaction') else 'full' if any(str(v).startswith('signature.') for v in old.values()) else 'short' if ability['tier']>0 or cost.get('uses') or any(cost.get('resource',{}).values()) else 'none')
         # Preserve signature promotion after replacing its signature.* key. Leave ordinary defaults dynamic,
         # so a cantrip that critically downs a foe can still receive the shared full cinematic.
