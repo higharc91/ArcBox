@@ -17,6 +17,16 @@ public sealed class HostSettingsTests : IDisposable
     }
 
     [Fact]
+    public void Battle_preferences_survive_unrelated_settings_updates()
+    {
+        var store = new SettingsStore(FilePath);
+        store.Save(new HostSettings { BattleCinematics = "Off", ReducedBattleEffects = true });
+        store.Update(s => s with { MusicVolume = .4 });
+        Assert.Equal("Off", store.Load().BattleCinematics);
+        Assert.True(store.Load().ReducedBattleEffects);
+    }
+
+    [Fact]
     public void Missing_file_loads_defaults()
     {
         Assert.Equal(new HostSettings(), new SettingsStore(FilePath).Load());

@@ -37,6 +37,62 @@ public sealed class BeatPlayerTests
         return shown;
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Impact_feedback_adds_no_beat_time_and_reduced_suppresses_flash_and_shake(bool reduced)
+    {
+        var original = Player();
+        var enhanced = Player();
+        enhanced.EnhancedEffects = true;
+        enhanced.ReducedEffects = reduced;
+        var before = View(8, 100);
+        before = before with { Units = [.. before.Units.Select(u => u with { MaxHp = 100 })] };
+        var beat = new Beat(1, Hero, [new AbilityUsed(Hero, RulesPack.CommonAttack.Id, new Target(Unit: Foe), null),
+            new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 20, "slashing", 80)]);
+        var after = before with { Units = [.. before.Units.Select(u => u.Id == Foe ? u with { Hp = 80 } : u)], Beats = [beat] };
+        original.Receive(before); enhanced.Receive(before);
+        original.Receive(after); enhanced.Receive(after);
+        var flashes = false;
+        for (var i = 0; i < 100; i++)
+        {
+            Assert.Equal(original.Tick(Frame).Shown, enhanced.Tick(Frame).Shown);
+            var frame = enhanced.Frame(River);
+            flashes |= !frame.Flashes.IsEmpty;
+            if (reduced) { Assert.Empty(frame.Flashes); Assert.Equal(Vector2.Zero, frame.Shake); }
+        }
+        Assert.Equal(!reduced, flashes);
+    }
+
+    [Fact]
+    public void Cinematic_shown_waits_for_settle_and_skip_clears_the_real_players_camera()
+    {
+        var player = Player();
+        BeatScript? original = null;
+        CutInPlayback? cinema = null;
+        player.CutIn = (_, _, script) =>
+        {
+            original = script;
+            return cinema = new(new BattleCutIn([new(CutInTier.Full, script.Length, Vector2.Zero, Vector2.One)], BattleCinematics.Full), 0, "Test");
+        };
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, Walk(1, 3, 4)));
+        Assert.Empty(player.Tick(Frame).Shown);
+        Assert.NotNull(original);
+        Assert.NotNull(cinema);
+        Assert.Empty(Run(player, original.Length + 0.61));
+        Assert.False(player.Idle);
+        Assert.NotNull(player.Camera);
+        Assert.Equal([1], Run(player, 0.5));
+        Assert.Null(player.Camera);
+        Assert.True(player.Idle);
+        player.Receive(View(5, 10, Walk(2, 4, 5)));
+        player.Tick(Frame);
+        Assert.NotNull(player.Camera);
+        Assert.Equal(2, player.Skip());
+        Assert.Null(player.Camera);
+    }
+
     [Fact]
     public void A_battle_walk_follows_the_ramp_plane_every_frame_without_a_synthetic_hop()
     {

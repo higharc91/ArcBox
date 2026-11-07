@@ -1,0 +1,188 @@
+{
+  "sorcerer.innate_sorcery": {
+    "anim": "characters.buff",
+    "fx": "fx.aura.arcane"
+  },
+  "sorcerer.font_of_magic_mana": {
+    "anim": "characters.cast",
+    "fx": "fx.aura.arcane"
+  },
+  "sorcerer.font_of_magic_sorcery": {
+    "anim": "characters.cast",
+    "fx": "fx.aura.arcane"
+  },
+  "sorcerer.metamagic_twinned": {
+    "anim": "characters.buff",
+    "fx": "fx.circle.arcane"
+  },
+  "sorcerer.metamagic_extended": {
+    "anim": "characters.buff",
+    "fx": "fx.circle.arcane"
+  },
+  "sorcerer.metamagic_careful": {
+    "anim": "characters.buff",
+    "fx": "fx.circle.arcane"
+  },
+  "sorcerer.metamagic_quickened": {
+    "anim": "characters.buff",
+    "fx": "fx.circle.arcane"
+  },
+  "sorcerer.metamagic_distant": {
+    "anim": "characters.buff",
+    "fx": "fx.circle.arcane"
+  },
+  "sorcerer.fire_bolt": {
+    "anim": "characters.point",
+    "fx": "fx.flames.fire",
+    "projectile": "projectiles.fireball"
+  },
+  "sorcerer.ray_of_frost": {
+    "anim": "characters.point",
+    "fx": "fx.frost.frost",
+    "projectile": "projectiles.ice"
+  },
+  "sorcerer.shocking_grasp": {
+    "anim": "characters.point",
+    "fx": "fx.shock.storm"
+  },
+  "sorcerer.acid_splash": {
+    "anim": "characters.cast",
+    "fx": "fx.acid.acid"
+  },
+  "sorcerer.chill_touch": {
+    "anim": "characters.point",
+    "fx": "fx.necrotic.grave"
+  },
+  "sorcerer.poison_spray": {
+    "anim": "characters.point",
+    "fx": "fx.toxin.venom"
+  },
+  "sorcerer.chromatic_orb": {
+    "anim": "characters.point",
+    "fx": "fx.shock.storm",
+    "projectile": "projectiles.lightning"
+  },
+  "sorcerer.burning_hands": {
+    "anim": "characters.summon",
+    "fx": "signature.draconic_dragon_breath.fire"
+  },
+  "sorcerer.magic_missile": {
+    "anim": "characters.point",
+    "fx": "fx.force.force",
+    "projectile": "projectiles.missile"
+  },
+  "sorcerer.shield": {
+    "anim": "characters.block",
+    "fx": "fx.shield.arcane"
+  },
+  "sorcerer.thunderwave": {
+    "anim": "characters.cast",
+    "fx": "fx.thunder.thunder"
+  },
+  "sorcerer.sleep": {
+    "anim": "characters.cast",
+    "fx": "fx.misty.fey"
+  },
+  "sorcerer.scorching_ray": {
+    "anim": "characters.point",
+    "fx": "fx.flames.fire",
+    "projectile": "projectiles.fireball"
+  },
+  "sorcerer.shatter": {
+    "anim": "characters.cast",
+    "fx": "signature.spell_shatter.thunder"
+  },
+  "sorcerer.hold_person": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.arcane"
+  },
+  "sorcerer.misty_step": {
+    "anim": "characters.cast",
+    "fx": "fx.misty.mist"
+  },
+  "sorcerer.web": {
+    "anim": "characters.channel",
+    "fx": "fx.web.silk"
+  },
+  "sorcerer.fireball": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_fireball.fire",
+    "projectile": "projectiles.fireball"
+  },
+  "sorcerer.lightning_bolt": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_lightning_bolt.storm"
+  },
+  "sorcerer.haste": {
+    "anim": "characters.buff",
+    "fx": "signature.chronomancer_time_dial.haste"
+  },
+  "sorcerer.slow": {
+    "anim": "characters.summon",
+    "fx": "signature.chronomancer_time_dial.slow"
+  },
+  "sorcerer.counterspell": {
+    "anim": "characters.point",
+    "fx": "fx.dispel.arcane"
+  },
+  "sorcerer.ice_storm": {
+    "anim": "characters.summon",
+    "fx": "fx.ice.frost"
+  },
+  "sorcerer.wall_of_fire": {
+    "anim": "characters.summon",
+    "fx": "fx.flames.fire"
+  },
+  "sorcerer.banishment": {
+    "anim": "characters.cast",
+    "fx": "fx.pillar.arcane"
+  },
+  "sorcerer.greater_invisibility": {
+    "anim": "characters.buff",
+    "fx": "fx.misty.mist"
+  },
+  "sorcerer.cone_of_cold": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_cone_of_cold.frost"
+  },
+  "sorcerer.hold_monster": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.arcane"
+  },
+  "draconic.dragon_breath": {
+    "anim": "characters.summon",
+    "fx": "signature.draconic_dragon_breath.fire"
+  },
+  "draconic.dragon_wings": {
+    "anim": "characters.jump",
+    "fx": "signature.draconic_dragon_breath.fire"
+  },
+  "chaos.tides_of_chaos": {
+    "anim": "characters.buff",
+    "fx": "signature.chaos_wild_surge.wild"
+  },
+  "chaos.wild_surge": {
+    "anim": "characters.point",
+    "fx": "signature.chaos_wild_surge.wild"
+  },
+  "chaos.bend_luck": {
+    "anim": "characters.block",
+    "fx": "signature.chaos_wild_surge.wild"
+  },
+  "chaos.controlled_surge": {
+    "anim": "characters.summon",
+    "fx": "signature.chaos_wild_surge.wild"
+  },
+  "runeborn.ember_rune": {
+    "anim": "characters.channel",
+    "fx": "signature.runeborn_rune_circle.ember"
+  },
+  "runeborn.frost_rune": {
+    "anim": "characters.channel",
+    "fx": "signature.runeborn_rune_circle.teal"
+  },
+  "runeborn.grand_sigil": {
+    "anim": "characters.summon",
+    "fx": "signature.runeborn_rune_circle.teal"
+  }
+}

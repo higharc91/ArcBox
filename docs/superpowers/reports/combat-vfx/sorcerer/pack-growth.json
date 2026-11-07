@@ -1,0 +1,440 @@
+{
+  "baseline": "a3c5e0d3ad61e059ff470a9fc0fe7b67c4a45244",
+  "beforeBytes": 214640298,
+  "afterBytes": 215288006,
+  "deltaBytes": 647708,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 12243,
+      "after": 12896,
+      "delta": 653
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 50235,
+      "after": 78372,
+      "delta": 28137
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_acid_splash_acid.png",
+      "before": 0,
+      "after": 1326,
+      "delta": 1326
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_banishment_arcane.png",
+      "before": 0,
+      "after": 3274,
+      "delta": 3274
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_bend_luck_psychic.png",
+      "before": 0,
+      "after": 3132,
+      "delta": 3132
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_burning_hands_fire.png",
+      "before": 0,
+      "after": 12812,
+      "delta": 12812
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_chill_touch_grave.png",
+      "before": 0,
+      "after": 911,
+      "delta": 911
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_chromatic_orb_shot_storm.png",
+      "before": 0,
+      "after": 681,
+      "delta": 681
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_chromatic_orb_storm.png",
+      "before": 0,
+      "after": 3001,
+      "delta": 3001
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_cone_of_cold_frost.png",
+      "before": 0,
+      "after": 9361,
+      "delta": 9361
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_controlled_surge_arcane.png",
+      "before": 0,
+      "after": 10997,
+      "delta": 10997
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_controlled_surge_fire.png",
+      "before": 0,
+      "after": 11195,
+      "delta": 11195
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_controlled_surge_force.png",
+      "before": 0,
+      "after": 10976,
+      "delta": 10976
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_counterspell_arcane.png",
+      "before": 0,
+      "after": 2839,
+      "delta": 2839
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_dragon_breath_fire.png",
+      "before": 0,
+      "after": 20248,
+      "delta": 20248
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_dragon_wings_fire.png",
+      "before": 0,
+      "after": 3603,
+      "delta": 3603
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_elemental_affinity_fire.png",
+      "before": 0,
+      "after": 4103,
+      "delta": 4103
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_ember_rune_fire.png",
+      "before": 0,
+      "after": 1850,
+      "delta": 1850
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_fire_bolt_fire.png",
+      "before": 0,
+      "after": 743,
+      "delta": 743
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_fire_bolt_shot_fire.png",
+      "before": 0,
+      "after": 498,
+      "delta": 498
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_fireball_fire.png",
+      "before": 0,
+      "after": 8866,
+      "delta": 8866
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_fireball_shot_fire.png",
+      "before": 0,
+      "after": 373,
+      "delta": 373
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_font_of_magic_mana_arcane.png",
+      "before": 0,
+      "after": 2615,
+      "delta": 2615
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_font_of_magic_sorcery_psychic.png",
+      "before": 0,
+      "after": 2231,
+      "delta": 2231
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_frost_rune_frost.png",
+      "before": 0,
+      "after": 2677,
+      "delta": 2677
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_grand_sigil_arcane.png",
+      "before": 0,
+      "after": 8389,
+      "delta": 8389
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_greater_invisibility_mist.png",
+      "before": 0,
+      "after": 2565,
+      "delta": 2565
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_haste_gold.png",
+      "before": 0,
+      "after": 2361,
+      "delta": 2361
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_hold_monster_arcane.png",
+      "before": 0,
+      "after": 3082,
+      "delta": 3082
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_hold_person_arcane.png",
+      "before": 0,
+      "after": 2804,
+      "delta": 2804
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_ice_storm_frost.png",
+      "before": 0,
+      "after": 10280,
+      "delta": 10280
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_innate_sorcery_arcane.png",
+      "before": 0,
+      "after": 2546,
+      "delta": 2546
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_lightning_bolt_storm.png",
+      "before": 0,
+      "after": 3836,
+      "delta": 3836
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_magic_missile_force.png",
+      "before": 0,
+      "after": 1921,
+      "delta": 1921
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_magic_missile_shot_force.png",
+      "before": 0,
+      "after": 728,
+      "delta": 728
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_metamagic_careful_gold.png",
+      "before": 0,
+      "after": 2544,
+      "delta": 2544
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_metamagic_distant_force.png",
+      "before": 0,
+      "after": 2347,
+      "delta": 2347
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_metamagic_extended_arcane.png",
+      "before": 0,
+      "after": 2479,
+      "delta": 2479
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_metamagic_quickened_storm.png",
+      "before": 0,
+      "after": 2432,
+      "delta": 2432
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_metamagic_twinned_force.png",
+      "before": 0,
+      "after": 1650,
+      "delta": 1650
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_misty_step_mist.png",
+      "before": 0,
+      "after": 2536,
+      "delta": 2536
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_poison_spray_venom.png",
+      "before": 0,
+      "after": 3353,
+      "delta": 3353
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_ray_of_frost_frost.png",
+      "before": 0,
+      "after": 1308,
+      "delta": 1308
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_ray_of_frost_shot_frost.png",
+      "before": 0,
+      "after": 523,
+      "delta": 523
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_scorching_ray_fire.png",
+      "before": 0,
+      "after": 2045,
+      "delta": 2045
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_scorching_ray_shot_fire.png",
+      "before": 0,
+      "after": 470,
+      "delta": 470
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_shatter_thunder.png",
+      "before": 0,
+      "after": 12100,
+      "delta": 12100
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_shield_arcane.png",
+      "before": 0,
+      "after": 2585,
+      "delta": 2585
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_shocking_grasp_storm.png",
+      "before": 0,
+      "after": 462,
+      "delta": 462
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_sleep_fey.png",
+      "before": 0,
+      "after": 2974,
+      "delta": 2974
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_slow_frost.png",
+      "before": 0,
+      "after": 2388,
+      "delta": 2388
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_thunderwave_thunder.png",
+      "before": 0,
+      "after": 6207,
+      "delta": 6207
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_tides_of_chaos_psychic.png",
+      "before": 0,
+      "after": 3380,
+      "delta": 3380
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_wall_of_fire_fire.png",
+      "before": 0,
+      "after": 3826,
+      "delta": 3826
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_web_silk.png",
+      "before": 0,
+      "after": 3132,
+      "delta": 3132
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_wild_surge_force.png",
+      "before": 0,
+      "after": 3112,
+      "delta": 3112
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_wild_surge_psychic.png",
+      "before": 0,
+      "after": 3192,
+      "delta": 3192
+    },
+    {
+      "path": "content/tactics/base/fx/sorcerer_wild_surge_storm.png",
+      "before": 0,
+      "after": 3159,
+      "delta": 3159
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/sorcerer.json",
+      "before": 26418,
+      "after": 27469,
+      "delta": 1051
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 40057,
+      "after": 40790,
+      "delta": 733
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_sorcerer.png",
+      "before": 371582,
+      "after": 407682,
+      "delta": 36100
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_sorcerer.png",
+      "before": 380116,
+      "after": 417115,
+      "delta": 36999
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_sorcerer.png",
+      "before": 334346,
+      "after": 366773,
+      "delta": 32427
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_sorcerer.png",
+      "before": 377101,
+      "after": 413844,
+      "delta": 36743
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_sorcerer.png",
+      "before": 339426,
+      "after": 372569,
+      "delta": 33143
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_sorcerer.png",
+      "before": 363811,
+      "after": 400319,
+      "delta": 36508
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_sorcerer.png",
+      "before": 377445,
+      "after": 413294,
+      "delta": 35849
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_sorcerer.png",
+      "before": 375738,
+      "after": 413355,
+      "delta": 37617
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_sorcerer.png",
+      "before": 340370,
+      "after": 373868,
+      "delta": 33498
+    },
+    {
+      "path": "content/tactics/base/tactical/human_sorcerer.png",
+      "before": 372682,
+      "after": 407651,
+      "delta": 34969
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 13417,
+      "after": 14312,
+      "delta": 895
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_sorcerer.png",
+      "before": 410001,
+      "after": 447359,
+      "delta": 37358
+    }
+  ]
+}

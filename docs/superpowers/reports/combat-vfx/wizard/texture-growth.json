@@ -1,0 +1,13 @@
+{
+  "before": {
+    "peakBytes": 245696817,
+    "lastBytes": 245696817
+  },
+  "full": {
+    "peakBytes": 286782785,
+    "lastBytes": 286782785
+  },
+  "addedPeakBytes": 41085968,
+  "casterAtlasAddedPerRaceBytes": 9830400,
+  "note": "Whole 49-sample reel retains all loaded sheets; normal encounters load only the effects they use."
+}

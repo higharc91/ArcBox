@@ -1,0 +1,88 @@
+{
+  "ranger.hunters_mark": {
+    "anim": "characters.point",
+    "fx": "fx.circle.nature"
+  },
+  "ranger.vanish": {
+    "anim": "characters.dodge",
+    "fx": "fx.misty.shadow"
+  },
+  "ranger.cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.nature"
+  },
+  "ranger.ensnaring_strike": {
+    "anim": "characters.shoot",
+    "fx": "signature.warden_vine_snare.root",
+    "projectile": "projectiles.arrow"
+  },
+  "ranger.entangle": {
+    "anim": "characters.channel",
+    "fx": "signature.warden_vine_snare.root"
+  },
+  "ranger.hail_of_thorns": {
+    "anim": "characters.shoot",
+    "fx": "fx.circle.nature",
+    "projectile": "projectiles.arrow"
+  },
+  "ranger.spike_growth": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.nature"
+  },
+  "ranger.barkskin": {
+    "anim": "characters.buff",
+    "fx": "fx.ward.nature"
+  },
+  "ranger.lesser_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.nature"
+  },
+  "ranger.lightning_arrow": {
+    "anim": "characters.shoot",
+    "fx": "fx.shock.storm",
+    "projectile": "projectiles.arrow"
+  },
+  "ranger.conjure_barrage": {
+    "anim": "characters.shoot",
+    "fx": "fx.arrow.oak"
+  },
+  "sharpshooter.deadeye": {
+    "anim": "characters.shoot",
+    "fx": "signature.sharpshooter_deadeye.scope",
+    "projectile": "projectiles.arrow"
+  },
+  "sharpshooter.piercing_shot": {
+    "anim": "characters.shoot",
+    "fx": "signature.sharpshooter_deadeye.scope",
+    "projectile": "projectiles.arrow"
+  },
+  "sharpshooter.volley": {
+    "anim": "characters.shoot",
+    "fx": "fx.arrow.oak",
+    "projectile": "projectiles.arrow"
+  },
+  "beastmaster.sic": {
+    "anim": "characters.point",
+    "fx": "signature.beastmaster_hunt_mark.amber"
+  },
+  "beastmaster.pack_bond": {
+    "anim": "characters.cast",
+    "fx": "signature.beastmaster_hunt_mark.amber"
+  },
+  "beastmaster.alpha_howl": {
+    "anim": "characters.summon",
+    "fx": "signature.beastmaster_hunt_mark.amber"
+  },
+  "warden.vine_snare": {
+    "anim": "characters.point",
+    "fx": "signature.warden_vine_snare.root"
+  },
+  "warden.natures_veil": {
+    "anim": "characters.buff",
+    "fx": "signature.warden_vine_snare.root"
+  },
+  "warden.guardian_tree": {
+    "anim": "characters.summon",
+    "fx": "signature.warden_vine_snare.root"
+  }
+}

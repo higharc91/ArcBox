@@ -46,6 +46,8 @@ public sealed record AppArgs
     /// <summary>Dev only: the board to show instead of connecting (<c>Tactics.Presentation.Board.DemoBattle</c>), or null.</summary>
     public string? TacticsDemo { get; init; }
 
+    public string? FxDemo { get; init; }
+
     /// <summary>Dev only: the region to draw and measure instead of connecting (<c>Tactics.Presentation.World.DemoRegion</c>), or null.</summary>
     public string? WorldDemo { get; init; }
 
@@ -118,6 +120,9 @@ public sealed record AppArgs
                     break;
                 case "--redline-demo-winner" when !string.IsNullOrWhiteSpace(value):
                     args = args with { RedlineDemoWinner = value.Trim().ToUpperInvariant() };
+                    break;
+                case "--fx-demo" when !string.IsNullOrWhiteSpace(value):
+                    args = args with { FxDemo = value };
                     break;
                 case "--tactics-demo":
                     args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };

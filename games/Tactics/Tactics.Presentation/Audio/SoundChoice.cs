@@ -88,13 +88,13 @@ public static class SoundChoice
     /// <summary>The sound of the projectile <paramref name="key"/> leaving a unit with <paramref name="weapon"/>: an arrow its bow's, a rock a throw, and anything else is magic.</summary>
     public static string Launch(string key, string? weapon) => key switch
     {
-        ArrowKey => Shot(weapon),
+        _ when IsArrow(key) => Shot(weapon),
         RockKey => weapon == "sling" ? "sling_release" : "throw",
         _ => "spell_cast",
     };
 
     /// <summary>True if the projectile <paramref name="key"/> lands with an arrow's impact.</summary>
-    public static bool IsArrow(string key) => key == ArrowKey;
+    public static bool IsArrow(string key) => key == ArrowKey || key.StartsWith("fx.ranger_",StringComparison.Ordinal) && key.Contains("_shot.",StringComparison.Ordinal);
 
     /// <summary>How far under full a sound of this manifest group plays, in dB, so that what's frequent doesn't crowd out what matters.</summary>
     public static double LevelDb(string group) => group switch

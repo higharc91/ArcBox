@@ -18,6 +18,8 @@ namespace Tactics.Presentation.Beats;
 /// <param name="Flies">The manifest attaches it as a projectile: it goes from the shooter to the target, and never just appears on one.</param>
 public sealed record FxClip(string Path, int Width, int Height, int Frames, double Fps, bool Loop, int AnchorX, int AnchorY, int Lift, bool Additive, bool Flies = false)
 {
+    public SpellEmission? Emission { get; init; }
+
     private const int NearEndShare = 6;
 
     /// <summary>
@@ -48,6 +50,8 @@ public sealed record FxClip(string Path, int Width, int Height, int Frames, doub
 /// <param name="Additive">Blended by adding light.</param>
 public sealed record ShotArt(string Path, int Width, int Height, int Frames, double Fps, int Headings, bool Additive)
 {
+    public SpellEmission? Emission { get; init; }
+
     /// <summary>
     /// The row for a direction in radians, with y down the screen as it's drawn. Rows go counter-clockwise from screen-right
     /// (projectiles/manifest.json), so against the angle.
@@ -76,6 +80,8 @@ public sealed class FxArt
     private readonly Dictionary<string, HazardArt> _hazards = new(StringComparer.Ordinal);
 
     private readonly Dictionary<string, ShotArt> _shots = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> _passives = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, Dictionary<string, string>> _damageVariants = new(StringComparer.Ordinal);
 
     private FxArt()
     {
@@ -106,6 +112,21 @@ public sealed class FxArt
     /// <summary>A transient hazard's two layers, or null when the pack has no art for it.</summary>
     public HazardArt? Hazard(string id) => _hazards.GetValueOrDefault(id);
 
+    /// <summary>Optional visible proc art, kept in the presentation manifest rather than the rules.</summary>
+    public string? Passive(string id) => _passives.GetValueOrDefault(id);
+
+    public bool HasDamageVariants(string? key)
+        => key is not null && _damageVariants.ContainsKey(string.Join('.', key.Split('.').Take(2)));
+
+    /// <summary>Only opted-in chaotic effects follow the actual resolved damage material.</summary>
+    public string? ForDamage(string? key, string? damage)
+    {
+        if (key is null || damage is null) return key;
+        var parts = key.Split('.');
+        var stem = parts.Length < 2 ? key : $"{parts[0]}.{parts[1]}";
+        return _damageVariants.TryGetValue(stem, out var variants) && variants.TryGetValue(damage, out var variant) ? stem + "." + variant : key;
+    }
+
     /// <summary>The effect for a key, or null.</summary>
     public FxClip? Clip(string key)
     {
@@ -120,12 +141,16 @@ public sealed class FxArt
     {
         if (key.StartsWith($"{Projectiles}.", StringComparison.Ordinal))
             return _shots.GetValueOrDefault(key[(Projectiles.Length + 1)..]);
-        return Clip(key) is { } clip ? new ShotArt(clip.Path, clip.Width, clip.Height, clip.Frames, clip.Fps, 1, clip.Additive) : null;
+        return Clip(key) is { } clip ? new ShotArt(clip.Path, clip.Width, clip.Height, clip.Frames, clip.Fps, 1, clip.Additive)
+            { Emission = clip.Emission is { } glow ? glow with { Radius = 2, Power = .8f } : null } : null;
     }
 
     private void ReadEffects(string root, string set)
     {
         using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, set, "manifest.json")));
+        if (doc.RootElement.TryGetProperty("passives", out var passives))
+            foreach (var passive in passives.EnumerateObject())
+                _passives[passive.Name] = passive.Value.GetString()!;
         foreach (var effect in doc.RootElement.GetProperty(Effects).EnumerateObject())
         {
             var e = effect.Value;
@@ -134,8 +159,11 @@ public sealed class FxArt
             foreach (var variant in e.GetProperty("variants").EnumerateObject())
                 clips[variant.Name] = new FxClip($"{set}/{variant.Value.GetString()}", frame[0].GetInt32(), frame[1].GetInt32(), e.GetProperty("frames").GetInt32(),
                     e.GetProperty("fps").GetDouble(), e.GetProperty("loop").GetBoolean(), anchor[0].GetInt32(), anchor[1].GetInt32(),
-                    LiftOf(attach), e.GetProperty("blend").GetString() == "add", attach == "projectile");
+                    LiftOf(attach), e.GetProperty("blend").GetString() == "add", attach == "projectile")
+                    { Emission = SpellEmission.ForAsset($"{set}.{effect.Name}.{variant.Name}", e.GetProperty("blend").GetString() == "add") };
             var key = $"{set}.{effect.Name}";
+            if (e.TryGetProperty("variantsByDamage", out var damage))
+                _damageVariants[key] = damage.EnumerateObject().ToDictionary(v => v.Name, v => v.Value.GetString()!, StringComparer.Ordinal);
             _sets[key] = clips;
             _defaults[key] = clips.GetValueOrDefault(e.TryGetProperty("default", out var first) ? first.GetString() ?? "" : "") ?? clips.Values.First();
         }
@@ -150,7 +178,8 @@ public sealed class FxArt
         {
             var e = shot.Value;
             _shots[shot.Name] = new ShotArt($"{Projectiles}/{e.GetProperty("file").GetString()}", frame[0].GetInt32(), frame[1].GetInt32(), e.GetProperty("frames").GetInt32(),
-                e.GetProperty("fps").GetDouble(), r.GetProperty("headings").GetInt32(), e.GetProperty("blend").GetString() == "add");
+                e.GetProperty("fps").GetDouble(), r.GetProperty("headings").GetInt32(), e.GetProperty("blend").GetString() == "add")
+                { Emission = SpellEmission.ForAsset($"projectiles.{shot.Name}", e.GetProperty("blend").GetString() == "add") };
         }
     }
 

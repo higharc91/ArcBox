@@ -22,6 +22,8 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
 {
     /// <summary>It's a mark for the people watching, a number or a die badge, rather than part of the scene: it goes when the units' marks do (<see cref="MarkRule"/>).</summary>
     public bool Mark { get; init; }
+    public bool White { get; init; }
+    public ImmutableArray<SpellLight> Lights { get; init; } = [];
     /// <summary>An optional tint for recovery effects; ordinary effects retain their existing white modulation.</summary>
     public Rgb? Tint { get; init; }
 
@@ -49,6 +51,8 @@ public sealed record BeatFrame(ImmutableDictionary<UnitId, UnitPlace> Places, Im
 {
     /// <summary>The numbers popping up now, for <see cref="MarkRule.ClearOfPops"/>: a Downed count beside one would read as part of it.</summary>
     public ImmutableArray<PopBox> Pops { get; init; } = [];
+    public ImmutableHashSet<UnitId> Flashes { get; init; } = [];
+    public ImmutableArray<SpellLight> Lights { get; init; } = [];
 }
 
 /// <summary>The TV dropped back to the newest beat.</summary>
@@ -111,9 +115,13 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private readonly Queue<SpokenLine> _unread = [];     // lines waiting their turn, as the voice speaks one at a time
     private BattleView? _live;
     private BeatScript? _script;
+    private readonly List<AbilityUsed> _waitingSpells = [];
     private BeatCatchUp? _caughtUp;
     private int _next;
     private int _played;        // the last beat begun
+    private double _cinematicClock;
+    private CutInPlayback? _cutIn;
+    private CutInFrame? _carriedCamera;
     private double _clock;      // into the current beat
     private double _now;        // since the start, as beats see it: a hitch doesn't count past LongestFrame
     private double _real;       // since the start, as the game sees it
@@ -134,6 +142,18 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     /// <summary>The newest view, which runs ahead of <see cref="Shown"/>.</summary>
     public BattleView? Live => _live;
 
+    /// <summary>Optional TV framing factory. Without it the original playback timing is byte-for-byte unchanged.</summary>
+    public Func<Beat, BattleView, BeatScript, CutInPlayback?>? CutIn { get; set; }
+
+    public CutInFrame? Camera => _cutIn?.Frame(_cinematicClock) ?? _carriedCamera;
+    public CutInFrame? CarriedCamera => _carriedCamera;
+    public void ClearCinematics() => (_cutIn, _carriedCamera) = (null, null);
+    public ImmutableArray<Tile> Telegraph => _cutIn?.Telegraph(_cinematicClock) ?? [];
+    public string? AbilityBanner => _cutIn?.Banner(_cinematicClock);
+    public bool EnhancedEffects { get; set; }
+    public bool ReducedEffects { get; set; }
+    private double FadeLength(Cue cue) => cue.Length * (ReducedEffects && cue is BurstCue or HazardCue ? 0.6 : 1);
+
     /// <summary>The unit to badge: its turn timed out, or its player left, and the AI is finishing it on screen.</summary>
     public UnitId? AiFinished { get; private set; }
 
@@ -150,7 +170,10 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public void Receive(BattleView live)
     {
         if (_queue.Offer(live.Beats, _real))
-            (_script, Shown) = (null, null);
+        {
+            (_script, Shown, _cutIn, _carriedCamera) = (null, null, null, null);
+            _waitingSpells.Clear();
+        }
         _live = live;
         if (_script is null && _queue.Late(_real))
             CatchUp(live);
@@ -161,7 +184,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
 
     private void CatchUp(BattleView live)
     {
+        _waitingSpells.Clear();
         _queue.KeepNewest();
+        ClearCinematics();
         _fading.Clear();
         (AiFinished, _aiBegan, _rest, _dirty, Shown) = (null, false, 0, true, Unplayed(live));
         if (_queue.Waiting.LastOrDefault() is { } newest)
@@ -176,10 +201,12 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     /// </summary>
     public void Reset()
     {
+        _waitingSpells.Clear();
         _queue.Clear();
         _fading.Clear();
-        (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp) = (null, null, null, null, 0, null, null);
+        (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp, _cutIn) = (null, null, null, null, 0, null, null, null);
         _unread.Clear();
+        ClearCinematics();
     }
 
     /// <summary>Moves on by <paramref name="delta"/> seconds.</summary>
@@ -188,7 +215,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var seconds = Math.Min(delta, LongestFrame);
         _now += seconds;
         _real += delta;
-        var faded = _fading.RemoveAll(f => _now >= f.Start + f.Cue.Length) > 0;
+        var faded = _fading.RemoveAll(f => _now >= f.Start + FadeLength(f.Cue)) > 0;
         if (_unread.Count > 0 && _now >= _captionRead)
             Caption = Captioned(_unread.Dequeue());
         else if (Caption is not null && _now >= _captionUntil)
@@ -220,13 +247,17 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
 
         if (_script is { } playing)
         {
-            _clock += seconds;
-            for (; _next < playing.Cues.Length && playing.Cues[_next].At <= _clock; _next++)
+            _cinematicClock += seconds;
+            _clock = _cutIn?.ScriptTime(_cinematicClock) ?? _clock + seconds;
+            for (; _next < playing.Cues.Length && playing.Cues[_next].At <= _clock
+                && (_cutIn is null || _cutIn.CanReach(_cinematicClock, playing.Cues[_next].At)); _next++)
                 Reach(playing.Cues[_next], lines, moments, heard);
-            if (_clock >= playing.Length)
+            if (_cutIn is { } cinematic ? cinematic.Finished(_cinematicClock) : _clock >= playing.Length)
             {
                 shown = [playing.Seq];
+                _carriedCamera = _cutIn is { HoldsForReaction: true } ? _cutIn.Frame(_cinematicClock) : null;
                 _script = null;
+                _cutIn = null;
                 _rest = BeatTiming.Rest;
                 if (_queue.Count == 0 && _live is not null)
                     Shown = _live;     // the view's units are the truth now: whatever drifted heals here
@@ -247,12 +278,67 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             CatchUp(_live);
         if (_queue.Next() is not { } beat)
             return null;
+        beat = ResumeSpell(beat);
         (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
-        (_script, _next, _clock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0);
+        (_script, _next, _clock, _cinematicClock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0, 0);
+        _cutIn = CutIn?.Invoke(beat, Shown, _script);
         _opening = null;
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
             (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
+    }
+
+    // The engine already paid for and announced this spell in the parent batch. Only its presentation resumes here.
+    private Beat ResumeSpell(Beat beat)
+    {
+        var open = BeatScript.OpenSpellOffer(beat);
+        if (_waitingSpells.Count == 0 && open is null) return beat;
+        var events = beat.Events;
+        _waitingSpells.RemoveAll(a => events.OfType<Countered>().Any(c => c.Caster == a.Source && c.Ability == a.Ability));
+        var additions = new Dictionary<int, List<AbilityUsed>>();
+        foreach (var held in _waitingSpells.AsEnumerable().Reverse().ToArray())
+        {
+            if (events.OfType<AbilityUsed>().Any(a => a.Source == held.Source && a.Ability == held.Ability))
+            {
+                _waitingSpells.Remove(held);
+                continue;
+            }
+            // One wizard can counter a counter to their own spell: source alone cannot identify that spell's result.
+            var anotherCast = events.OfType<AbilityUsed>().Any(a => a.Source == held.Source && a.Ability != held.Ability);
+            var index = -1;
+            if (!anotherCast)
+                for (var i = 0; i < events.Length && index < 0; i++)
+                    if (events[i] is Countered c && c.By == held.Source
+                        || events[i] is Rolled { Kind: RollKind.Check } r && r.Roller == held.Source) index = i;
+            if (index < 0)
+            {
+                // A new nested window keeps earlier incantations suspended, rather than replacing them.
+                if (open is not null || !events.OfType<Reacted>().Any()) continue;
+                index = 0;
+                for (var i = 0; i < events.Length; i++)
+                    if (events[i] is Reacted or Countered or Rolled { Kind: RollKind.Check }) index = i + 1;
+            }
+            if (!additions.TryGetValue(index, out var here)) additions[index] = here = [];
+            here.Add(held);
+            _waitingSpells.Remove(held);
+        }
+        if (additions.Count > 0)
+        {
+            var resumed = ImmutableArray.CreateBuilder<BattleEvent>();
+            for (var i = 0; i <= events.Length; i++)
+            {
+                if (additions.TryGetValue(i, out var here)) resumed.AddRange(here);
+                if (i < events.Length) resumed.Add(events[i]);
+            }
+            beat = beat with { Events = resumed.ToImmutable() };
+        }
+        if (open is not null)
+        {
+            var announced = events.OfType<AbilityUsed>().LastOrDefault(a => a.Source == open.Actor && a.Ability == open.Ability);
+            if (announced is not null && !_waitingSpells.Any(a => a.Source == announced.Source && a.Ability == announced.Ability))
+                _waitingSpells.Add(announced);
+        }
+        return beat;
     }
 
     private void Reach(Cue cue, ImmutableArray<SpokenLine>.Builder lines, ImmutableArray<string>.Builder moments, ImmutableArray<string>.Builder heard)
@@ -303,10 +389,22 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var places = ImmutableDictionary.CreateBuilder<UnitId, UnitPlace>();
         var poses = ImmutableDictionary.CreateBuilder<UnitId, UnitPose>();
         var shake = Vector2.Zero;
-        if (_script is { } script)
-            foreach (var cue in script.Cues.Where(c => c.At <= _clock && _clock < c.At + c.Length))
+        var flashes = ImmutableHashSet.CreateBuilder<UnitId>();
+        var sampled = _clock;
+        if (EnhancedEffects && !ReducedEffects && _script is { } active)
+        {
+            var impact = active.Cues.OfType<ImpactCue>().LastOrDefault(c => c.At <= _clock && _clock < c.At + c.Length && c.Amount >= 12);
+            if (impact is not null)
             {
-                var (into, share) = (_clock - cue.At, (float)((_clock - cue.At) / cue.Length));
+                var into = _clock - impact.At;
+                var freeze = Math.Clamp(impact.Amount / 10, 2, 4) / 60.0;
+                sampled = impact.At + Math.Max(0, into - freeze) * impact.Length / (impact.Length - freeze);
+            }
+        }
+        if (_script is { } script)
+            foreach (var cue in script.Cues.Where(c => c.At <= sampled && sampled < c.At + c.Length))
+            {
+                var (into, share) = (sampled - cue.At, (float)((sampled - cue.At) / cue.Length));
                 switch (cue)
                 {
                     case WalkCue walk:
@@ -322,12 +420,18 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
                         poses[lunge.Unit] = new UnitPose(lunge.Anim, into, BeatScript.Way(lunge.From, lunge.Toward));
                         break;
                     case PoseCue pose:
-                        poses[pose.Unit] = new UnitPose(pose.Anim, into, pose is { From: { } from, Toward: { } toward } ? BeatScript.Way(from, toward) : null);
+                        poses[pose.Unit] = new UnitPose(pose.Anim, into + (_cutIn?.PoseLead(_cinematicClock, pose.At) ?? 0),
+                            pose is { From: { } from, Toward: { } toward } ? BeatScript.Way(from, toward) : null);
                         break;
                     case FallCue fall:
                         var ground = UnitPlace.On(terrain, fall.Tile);
                         var top = fall.Levels + (terrain.Look(fall.Tile).Void ? BoardTerrain.VoidSink : 0);
                         places[fall.Unit] = ground with { Height = ground.Height + top * (1 - share * share) };
+                        break;
+                    case ImpactCue impact when EnhancedEffects && !ReducedEffects:
+                        if (_clock - cue.At < 2.0 / 60) flashes.Add(impact.Unit);
+                        var kick = Math.Clamp(impact.Amount / 12f, 0.5f, 3f) * (1 - share);
+                        shake += new Vector2(kick * MathF.Sin((float)into * 75), kick * .4f * MathF.Cos((float)into * 51));
                         break;
                     case ShakeCue:
                         var fade = ShakeSize * (1 - share);
@@ -339,8 +443,16 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var draws = ImmutableArray.CreateBuilder<FxDraw>();
         var pops = ImmutableArray.CreateBuilder<PopBox>();
         foreach (var (cue, start) in _fading)
-            Draw(cue, _now - start, terrain, draws, pops);
-        return new BeatFrame(places.ToImmutable(), poses.ToImmutable(), draws.ToImmutable(), shake) { Pops = pops.ToImmutable() };
+        {
+            var age = _now - start - (_clock - sampled);
+            if (age >= 0) Draw(cue, age * (ReducedEffects && cue is BurstCue or HazardCue ? 1 / 0.6 : 1), terrain, draws, pops);
+        }
+        return new BeatFrame(places.ToImmutable(), poses.ToImmutable(), draws.ToImmutable(), ReducedEffects ? Vector2.Zero : shake)
+        {
+            Pops = pops.ToImmutable(), Flashes = flashes.ToImmutable(),
+            Lights = EnhancedEffects ? [.. draws.SelectMany(d => d.Lights).OrderByDescending(l => l.Power).Take(12)
+                .Select(l => ReducedEffects ? l with { Power = l.Power * .75f } : l), .. SpellLighting.ForZones(terrain, _now, ReducedEffects)] : []
+        };
     }
 
     private static UnitPlace Between(BoardTerrain terrain, Tile from, Tile to, float share, float hop)
@@ -364,7 +476,12 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
                 {
                     var frame = (int)(into * image.Fps) % image.Frames;
                     draws.Add(new FxDraw(image.Path, new ArtRect(frame * (int)size.X, 0, (int)size.X, (int)size.Y),
-                        centre - origin, size, 0, false, Math.Clamp(alpha, 0, 1)) { Order = BoardOrder.Key(hazard.Tile, layer) });
+                        centre - origin, size, 0, false, Math.Clamp(alpha, 0, 1))
+                    {
+                        Order = BoardOrder.Key(hazard.Tile, layer),
+                        Lights = layer == BoardLayer.Ground && hazard.Hazard == "electrified"
+                            ? [SpellEmission.ForAsset("fx.shock.storm", true)!.At(centre - new Vector2(0, 5), centre, Math.Clamp(alpha, 0, 1))] : []
+                    });
                 }
                 Layer(art.Ground, art.Frame, art.Origin, BoardLayer.Ground);
                 if (art.Over is { } over)
@@ -403,7 +520,21 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var size = new Vector2(clip.Width, clip.Height) * scale;
         var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) * scale - size / 2, Matrix3x2.CreateRotation(angle));
         var at = from - new Vector2(0, clip.Lift + rise) - anchor - size / 2;
-        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(seconds) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, alpha));
+        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(seconds) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, alpha)
+        {
+            Lights = BurstLights(clip, from, angle, scale, (float)Math.Clamp(into / .08, 0, 1) * (1 - progress) * alpha)
+        });
+    }
+
+    private static ImmutableArray<SpellLight> BurstLights(FxClip clip, Vector2 from, float angle, float scale, float envelope)
+    {
+        if (clip.Emission is not { } emission) return [];
+        var lift = new Vector2(0, clip.Lift);
+        if (!clip.Aimed) return [emission.At(from - lift, from, envelope)];
+        // The luminous line/cone runs along the actual rotated art, rather than pooling only at the caster's feet.
+        var span = new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * (clip.Width - clip.AnchorX) * scale;
+        return [.. new[] { .15f, .5f, .85f }.Select(share =>
+            (emission with { Power = emission.Power * .55f }).At(from - lift + span * share, from + span * share, envelope))];
     }
 
     private static void DrawFlight(FlightCue flight, double into, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
@@ -419,7 +550,11 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var column = (int)(into * shot.Fps) % shot.Frames;
         var size = new Vector2(shot.Width, shot.Height);
         draws.Add(new FxDraw(shot.Path, new ArtRect(column * shot.Width, row * shot.Height, shot.Width, shot.Height), Vector2.Lerp(from, to, share) - size / 2, size,
-            shot.Headings > 1 ? 0 : angle, shot.Additive, 1));
+            shot.Headings > 1 ? 0 : angle, shot.Additive, 1)
+        {
+            Lights = shot.Emission is { } emission ? [emission.At(Vector2.Lerp(from, to, share), Vector2.Lerp(from, to, share) + lift,
+                Math.Min(1, Math.Min(share * 6, (1 - share) * 6)))] : []
+        });
     }
 
     private void DrawPop(PopCue pop, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws, ImmutableArray<PopBox>.Builder pops)
@@ -470,7 +605,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     {
         if ((_script?.Seq ?? _opening) is not { } seq)
             return null;     // nothing to drop, so nothing to put right
-        (_script, _opening) = (null, null);
+        (_script, _opening, _cutIn, _carriedCamera) = (null, null, null, null);
         _fading.Clear();
         _rest = BeatTiming.Rest;
         _dirty = true;

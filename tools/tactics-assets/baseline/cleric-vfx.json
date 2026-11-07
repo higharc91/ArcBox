@@ -1,0 +1,159 @@
+{
+  "cleric.sacred_flame": {
+    "anim": "characters.pray",
+    "fx": "fx.radiant.dawn"
+  },
+  "cleric.toll_the_dead": {
+    "anim": "characters.pray",
+    "fx": "fx.necrotic.grave"
+  },
+  "cleric.word_of_radiance": {
+    "anim": "characters.pray",
+    "fx": "fx.radiant.dawn"
+  },
+  "cleric.resistance": {
+    "anim": "characters.pray",
+    "fx": "fx.ward.holy"
+  },
+  "cleric.bless": {
+    "anim": "characters.pray",
+    "fx": "fx.bless.gold"
+  },
+  "cleric.bane": {
+    "anim": "characters.pray",
+    "fx": "fx.hex.shadow"
+  },
+  "cleric.cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "cleric.guiding_bolt": {
+    "anim": "characters.pray",
+    "fx": "fx.radiant.dawn",
+    "projectile": "projectiles.radiant"
+  },
+  "cleric.healing_word": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "cleric.inflict_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.necrotic.blood"
+  },
+  "cleric.shield_of_faith": {
+    "anim": "characters.pray",
+    "fx": "fx.ward.holy"
+  },
+  "cleric.command": {
+    "anim": "characters.pray",
+    "fx": "fx.hold.holy"
+  },
+  "cleric.aid": {
+    "anim": "characters.pray",
+    "fx": "fx.bless.gold"
+  },
+  "cleric.hold_person": {
+    "anim": "characters.pray",
+    "fx": "fx.hold.holy"
+  },
+  "cleric.lesser_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.holy"
+  },
+  "cleric.spiritual_weapon": {
+    "anim": "characters.pray",
+    "fx": "signature.spell_spiritual_weapon.force"
+  },
+  "cleric.blindness": {
+    "anim": "characters.pray",
+    "fx": "fx.pillar.shadow"
+  },
+  "cleric.spirit_guardians": {
+    "anim": "characters.pray",
+    "fx": "signature.spell_spirit_guardians.radiant"
+  },
+  "cleric.mass_healing_word": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "cleric.dispel_magic": {
+    "anim": "characters.pray",
+    "fx": "fx.dispel.arcane"
+  },
+  "cleric.bestow_curse": {
+    "anim": "characters.pray",
+    "fx": "fx.hex.shadow"
+  },
+  "cleric.banishment": {
+    "anim": "characters.pray",
+    "fx": "fx.pillar.holy"
+  },
+  "cleric.death_ward": {
+    "anim": "characters.pray",
+    "fx": "fx.ward.holy"
+  },
+  "cleric.flame_strike": {
+    "anim": "characters.pray",
+    "fx": "signature.spell_flame_strike.holy"
+  },
+  "cleric.mass_cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "cleric.greater_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.holy"
+  },
+  "cleric.divine_spark": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "cleric.turn_undead": {
+    "anim": "characters.pray",
+    "fx": "fx.circle.holy"
+  },
+  "cleric.sear_undead": {
+    "anim": "characters.pray",
+    "fx": "fx.radiant.dawn"
+  },
+  "cleric.divine_intervention": {
+    "anim": "characters.pray",
+    "fx": "fx.pillar.holy"
+  },
+  "life.preserve_life": {
+    "anim": "characters.summon",
+    "fx": "fx.heal.holy"
+  },
+  "life.word_of_renewal": {
+    "anim": "characters.cast",
+    "fx": "signature.life_revive.holy"
+  },
+  "life.mass_revival": {
+    "anim": "characters.summon",
+    "fx": "signature.life_revive.holy"
+  },
+  "war.guided_strike": {
+    "anim": "characters.cast",
+    "fx": "signature.war_divine_strike.gold"
+  },
+  "war.war_priest": {
+    "anim": "characters.attack",
+    "fx": "signature.war_divine_strike.gold"
+  },
+  "war.avatar_of_battle": {
+    "anim": "characters.summon",
+    "fx": "signature.war_divine_strike.gold"
+  },
+  "light.radiance_of_the_dawn": {
+    "anim": "characters.pray",
+    "fx": "signature.light_radiant_burst.dawn"
+  },
+  "light.warding_flare": {
+    "anim": "characters.block",
+    "fx": "signature.light_radiant_burst.dawn"
+  },
+  "light.corona_of_light": {
+    "anim": "characters.pray",
+    "fx": "signature.light_radiant_burst.dawn"
+  }
+}
