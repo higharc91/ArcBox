@@ -998,6 +998,1659 @@
       },
       "default": "silk",
       "note": "web thrown over a tile; the hazards set's web holds it afterwards"
+    },
+    "wizard_fire_bolt": {
+      "name": "Fire Bolt",
+      "group": "Wizard",
+      "frame": [
+        28,
+        24
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        19
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_fire_bolt_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_ray_of_frost": {
+      "name": "Ray Of Frost",
+      "group": "Wizard",
+      "frame": [
+        28,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        29
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        17
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "wizard_ray_of_frost_frost.png"
+      },
+      "default": "frost"
+    },
+    "wizard_shocking_grasp": {
+      "name": "Shocking Grasp",
+      "group": "Wizard",
+      "frame": [
+        45,
+        40
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        22,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        14,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "wizard_shocking_grasp_storm.png"
+      },
+      "default": "storm"
+    },
+    "wizard_acid_splash": {
+      "name": "Acid Splash",
+      "group": "Wizard",
+      "frame": [
+        28,
+        36
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        28
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "acid": "wizard_acid_splash_acid.png"
+      },
+      "default": "acid"
+    },
+    "wizard_chill_touch": {
+      "name": "Chill Touch",
+      "group": "Wizard",
+      "frame": [
+        31,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        14,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        22,
+        19
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "wizard_chill_touch_grave.png"
+      },
+      "default": "grave"
+    },
+    "wizard_poison_spray": {
+      "name": "Poison Spray",
+      "group": "Wizard",
+      "frame": [
+        160,
+        59
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        29
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        19
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "venom": "wizard_poison_spray_venom.png"
+      },
+      "default": "venom"
+    },
+    "wizard_magic_missile": {
+      "name": "Magic Missile",
+      "group": "Wizard",
+      "frame": [
+        62,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "wizard_magic_missile_force.png"
+      },
+      "default": "force"
+    },
+    "wizard_burning_hands": {
+      "name": "Burning Hands",
+      "group": "Wizard",
+      "frame": [
+        160,
+        73
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        36
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        12
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_burning_hands_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_shield": {
+      "name": "Shield",
+      "group": "Wizard",
+      "frame": [
+        62,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_shield_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_sleep": {
+      "name": "Sleep",
+      "group": "Wizard",
+      "frame": [
+        62,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        38
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fey": "wizard_sleep_fey.png"
+      },
+      "default": "fey"
+    },
+    "wizard_thunderwave": {
+      "name": "Thunderwave",
+      "group": "Wizard",
+      "frame": [
+        209,
+        123
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "wizard_thunderwave_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "wizard_chromatic_orb": {
+      "name": "Chromatic Orb",
+      "group": "Wizard",
+      "frame": [
+        62,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "wizard_chromatic_orb_storm.png"
+      },
+      "default": "storm"
+    },
+    "wizard_mage_armor": {
+      "name": "Mage Armor",
+      "group": "Wizard",
+      "frame": [
+        62,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_mage_armor_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_ray_of_sickness": {
+      "name": "Ray Of Sickness",
+      "group": "Wizard",
+      "frame": [
+        62,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        32
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "sickness": "wizard_ray_of_sickness_sickness.png"
+      },
+      "default": "sickness"
+    },
+    "wizard_grease": {
+      "name": "Grease",
+      "group": "Wizard",
+      "frame": [
+        62,
+        37
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_grease_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_scorching_ray": {
+      "name": "Scorching Ray",
+      "group": "Wizard",
+      "frame": [
+        62,
+        35
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_scorching_ray_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_hold_person": {
+      "name": "Hold Person",
+      "group": "Wizard",
+      "frame": [
+        62,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        39
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_hold_person_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_misty_step": {
+      "name": "Misty Step",
+      "group": "Wizard",
+      "frame": [
+        62,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "wizard_misty_step_mist.png"
+      },
+      "default": "mist"
+    },
+    "wizard_shatter": {
+      "name": "Shatter",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "wizard_shatter_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "wizard_web": {
+      "name": "Web",
+      "group": "Wizard",
+      "frame": [
+        62,
+        54
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "silk": "wizard_web_silk.png"
+      },
+      "default": "silk"
+    },
+    "wizard_blur": {
+      "name": "Blur",
+      "group": "Wizard",
+      "frame": [
+        71,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        13,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "wizard_blur_mist.png"
+      },
+      "default": "mist"
+    },
+    "wizard_invisibility": {
+      "name": "Invisibility",
+      "group": "Wizard",
+      "frame": [
+        62,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "wizard_invisibility_mist.png"
+      },
+      "default": "mist"
+    },
+    "wizard_fireball": {
+      "name": "Fireball",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_fireball_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_lightning_bolt": {
+      "name": "Lightning Bolt",
+      "group": "Wizard",
+      "frame": [
+        160,
+        36
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        25
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        23
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "wizard_lightning_bolt_storm.png"
+      },
+      "default": "storm"
+    },
+    "wizard_counterspell": {
+      "name": "Counterspell",
+      "group": "Wizard",
+      "frame": [
+        62,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_counterspell_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_haste": {
+      "name": "Haste",
+      "group": "Wizard",
+      "frame": [
+        62,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "haste": "wizard_haste_haste.png"
+      },
+      "default": "haste"
+    },
+    "wizard_slow": {
+      "name": "Slow",
+      "group": "Wizard",
+      "frame": [
+        62,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "slow": "wizard_slow_slow.png"
+      },
+      "default": "slow"
+    },
+    "wizard_hypnotic_pattern": {
+      "name": "Hypnotic Pattern",
+      "group": "Wizard",
+      "frame": [
+        209,
+        126
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        73
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "wizard_hypnotic_pattern_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "wizard_dispel_magic": {
+      "name": "Dispel Magic",
+      "group": "Wizard",
+      "frame": [
+        62,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_dispel_magic_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_ice_storm": {
+      "name": "Ice Storm",
+      "group": "Wizard",
+      "frame": [
+        209,
+        116
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        68
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "wizard_ice_storm_frost.png"
+      },
+      "default": "frost"
+    },
+    "wizard_greater_invisibility": {
+      "name": "Greater Invisibility",
+      "group": "Wizard",
+      "frame": [
+        62,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "wizard_greater_invisibility_mist.png"
+      },
+      "default": "mist"
+    },
+    "wizard_blight": {
+      "name": "Blight",
+      "group": "Wizard",
+      "frame": [
+        62,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "wizard_blight_grave.png"
+      },
+      "default": "grave"
+    },
+    "wizard_wall_of_fire": {
+      "name": "Wall Of Fire",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_wall_of_fire_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_banishment": {
+      "name": "Banishment",
+      "group": "Wizard",
+      "frame": [
+        62,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_banishment_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_cone_of_cold": {
+      "name": "Cone Of Cold",
+      "group": "Wizard",
+      "frame": [
+        160,
+        69
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        34
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        14
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "wizard_cone_of_cold_frost.png"
+      },
+      "default": "frost"
+    },
+    "wizard_cloudkill": {
+      "name": "Cloudkill",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "venom": "wizard_cloudkill_venom.png"
+      },
+      "default": "venom"
+    },
+    "wizard_hold_monster": {
+      "name": "Hold Monster",
+      "group": "Wizard",
+      "frame": [
+        62,
+        54
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_hold_monster_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_arcane_recovery": {
+      "name": "Arcane Recovery",
+      "group": "Wizard",
+      "frame": [
+        62,
+        59
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "wizard_arcane_recovery_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "wizard_sculpted_nova": {
+      "name": "Sculpted Nova",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_sculpted_nova_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_sculpted_inferno": {
+      "name": "Sculpted Inferno",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_sculpted_inferno_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_time_shift": {
+      "name": "Time Shift",
+      "group": "Wizard",
+      "frame": [
+        62,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "haste": "wizard_time_shift_haste.png"
+      },
+      "default": "haste"
+    },
+    "wizard_accelerate": {
+      "name": "Accelerate",
+      "group": "Wizard",
+      "frame": [
+        62,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "haste": "wizard_accelerate_haste.png"
+      },
+      "default": "haste"
+    },
+    "wizard_temporal_stasis": {
+      "name": "Temporal Stasis",
+      "group": "Wizard",
+      "frame": [
+        62,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        39
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "slow": "wizard_temporal_stasis_slow.png"
+      },
+      "default": "slow"
+    },
+    "wizard_raise_earth": {
+      "name": "Raise Earth",
+      "group": "Wizard",
+      "frame": [
+        67,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "earth": "wizard_raise_earth_earth.png"
+      },
+      "default": "earth"
+    },
+    "wizard_sink_earth": {
+      "name": "Sink Earth",
+      "group": "Wizard",
+      "frame": [
+        67,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        34
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "earth": "wizard_sink_earth_earth.png"
+      },
+      "default": "earth"
+    },
+    "wizard_tremor": {
+      "name": "Tremor",
+      "group": "Wizard",
+      "frame": [
+        210,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        102,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        26,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "earth": "wizard_tremor_earth.png"
+      },
+      "default": "earth"
+    },
+    "wizard_stone_spire": {
+      "name": "Stone Spire",
+      "group": "Wizard",
+      "frame": [
+        209,
+        113
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "earth": "wizard_stone_spire_earth.png"
+      },
+      "default": "earth"
+    },
+    "wizard_empowered_evocation": {
+      "name": "Empowered Evocation",
+      "group": "Wizard",
+      "frame": [
+        62,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "wizard_empowered_evocation_force.png"
+      },
+      "default": "force"
+    },
+    "wizard_fire_bolt_shot": {
+      "name": "Fire Bolt flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        20
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        10
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        6
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_fire_bolt_shot_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_ray_of_frost_shot": {
+      "name": "Ray Of Frost flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        20
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        10
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        6
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "wizard_ray_of_frost_shot_frost.png"
+      },
+      "default": "frost"
+    },
+    "wizard_magic_missile_shot": {
+      "name": "Magic Missile flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        32
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        16
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "wizard_magic_missile_shot_force.png"
+      },
+      "default": "force"
+    },
+    "wizard_chromatic_orb_shot": {
+      "name": "Chromatic Orb flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        32
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        16
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "wizard_chromatic_orb_shot_storm.png"
+      },
+      "default": "storm"
+    },
+    "wizard_ray_of_sickness_shot": {
+      "name": "Ray Of Sickness flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        32
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        16
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "sickness": "wizard_ray_of_sickness_shot_sickness.png"
+      },
+      "default": "sickness"
+    },
+    "wizard_scorching_ray_shot": {
+      "name": "Scorching Ray flight",
+      "group": "Wizard",
+      "frame": [
+        48,
+        32
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        16
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_scorching_ray_shot_fire.png"
+      },
+      "default": "fire"
+    },
+    "wizard_fireball_shot": {
+      "name": "Fireball flight",
+      "group": "Wizard",
+      "frame": [
+        42,
+        10
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        21,
+        5
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        3,
+        11
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "wizard_fireball_shot_fire.png"
+      },
+      "default": "fire"
     }
+  },
+  "passives": {
+    "evoker.empowered_evocation": "fx.wizard_empowered_evocation.force"
   }
 }

@@ -61,7 +61,13 @@ public sealed class FxShowcaseTests
             Assert.Equal(feature.Level, sample.Level);
         }
         var art = FxArt.Load(Pack.Root);
-        Assert.Contains(samples, sample => FxShowcase.TailFor(sample, art) > .85);
+        // Keep the long-tail regression independent of the pilot's newly shortened sheets.
+        var ward = samples.Single(s => s.Id == "wizard.blur");
+        var used = ward.After.Beats.Single().Events.OfType<AbilityUsed>().Single();
+        var longBeat = ward.After.Beats.Single() with { Events = [used with {
+            Presentation = used.Presentation! with { Fx = "signature.spell_blight.grave" } }] };
+        var longTail = ward with { After = ward.After with { Beats = [longBeat] } };
+        Assert.True(FxShowcase.TailFor(longTail, art) > .85);
         foreach (var sample in samples)
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, art);
@@ -88,28 +94,42 @@ public sealed class FxShowcaseTests
         Assert.Equal(2, player.Camera!.Zoom);
     }
 
-    [Fact]
-    public void A_real_counterspell_keeps_the_frame_across_event_batches_and_settles_before_final_shown()
+    [Theory]
+    [InlineData(true, false)]
+    [InlineData(false, false)]
+    [InlineData(true, true)]
+    public void A_real_counterspell_keeps_the_frame_and_releases_only_when_the_reaction_allows_it(bool counter, bool fail)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
-        var fireball = new AbilityId("wizard.fireball");
+        var fireball = new AbilityId(fail ? "wizard.ice_storm" : "wizard.fireball");
         var counterspell = new AbilityId("wizard.counterspell");
         var caster = new UnitId("enemycaster");
         var foe = new UnitId("hero1");
-        var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Caster", "human", "wizard", null, 5, rules), rules)
+        var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Caster", "human", "wizard", null, 7, rules), rules)
             with { Side = Side.Enemy, InitiativeBonus = 100, Abilities = [fireball] };
         var enemy = sheet with { Name = "Counter", Side = Side.Party, InitiativeBonus = 0, Abilities = [counterspell] };
         var map = rules.Maps["crypt_hall"];
-        var state = Battle.Start(new BattleSetup(map,
+        var setup = new BattleSetup(map,
             [new(caster, sheet, new AiControlled("caster"), new(3, 5), []),
-             new(foe, enemy, new PlayerControlled(new("preview")), new(7, 5), [])], ObjectivesDef.Default, [], Difficulty.Normal, 0, []), rules, 7).State;
+             new(foe, enemy, new PlayerControlled(new("preview")), new(7, 5), [])], ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
+        var state = Battle.Start(setup, rules, 7).State;
         var cast = Battle.Apply(state, new Use(caster, fireball, new Target(Tile: new(7, 5))), rules);
         Assert.Null(cast.Rejected);
         var offer = Assert.IsType<ReactionOffer>(cast.State.Pending);
-        var choice = offer.Options.First(o => o.Ability == counterspell);
+        var choice = counter ? offer.Options.First(o => o.Ability == counterspell) : offer.Options.First(o => o.Id == "pass");
         var reaction = Battle.Apply(cast.State, new React(offer.Reactor, choice), rules);
+        for (ulong seed = 8; fail && reaction.Events.OfType<Countered>().Any() && seed < 100; seed++)
+        {
+            state = Battle.Start(setup, rules, seed).State;
+            cast = Battle.Apply(state, new Use(caster, fireball, new Target(Tile: new(7, 5))), rules);
+            offer = Assert.IsType<ReactionOffer>(cast.State.Pending);
+            choice = offer.Options.First(o => o.Ability == counterspell);
+            reaction = Battle.Apply(cast.State, new React(offer.Reactor, choice), rules);
+        }
         Assert.Null(reaction.Rejected);
         Assert.Null(reaction.State.Pending);
+        Assert.Equal(counter && !fail, reaction.Events.OfType<Countered>().Any());
+        if (fail) Assert.Contains(reaction.Events, e => e is Rolled { Kind: RollKind.Check, Result.Success: false });
         BattleView View(BattleState s, ImmutableArray<Beat> beats) => new("demo", map.Id, s.Round, s.Order, s.Active,
             [.. s.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), "characters.class_wizard", u.Pos,
                 u.Hp, u.Sheet.MaxHp, u.TempHp, u.Life.ToString(), u.Countdown, [], null))], beats, null, BoardChanges.Of(s), Reacting: (s.Pending as ReactionOffer)?.Reactor);
@@ -119,7 +139,16 @@ public sealed class FxShowcaseTests
         player.Receive(View(state, []));
         player.Receive(View(cast.State, [new(1, caster, cast.Events)]));
         var parentShown = false;
-        for (var i = 0; i < 300 && !parentShown; i++) parentShown |= player.Tick(1.0 / 60).Shown.Contains(1);
+        for (var i = 0; i < 300 && !parentShown; i++)
+        {
+            var tick = player.Tick(1.0 / 60);
+            if (tick.Started is { } parent)
+            {
+                Assert.Empty(parent.Cues.OfType<FlightCue>());
+                Assert.DoesNotContain(parent.Cues.OfType<BurstCue>(), c => c.Clip.Path.Contains(fail ? "ice_storm" : "fireball", StringComparison.Ordinal));
+            }
+            parentShown |= tick.Shown.Contains(1);
+        }
         Assert.True(parentShown);
         var held = player.Camera!;
         Assert.Equal(.35f, held.Dim);
@@ -130,11 +159,21 @@ public sealed class FxShowcaseTests
         for (var i = 0; i < 300 && !finished; i++)
         {
             var tick = player.Tick(1.0 / 60);
+            if (tick.Started is { } child)
+            {
+                Assert.Equal(!counter && !fail, child.Cues.OfType<FlightCue>().Any());
+                Assert.Equal(!counter || fail, child.Cues.OfType<BurstCue>().Any(c => c.Clip.Path.Contains(fail ? "ice_storm" : "fireball", StringComparison.Ordinal)));
+                if (fail)
+                    Assert.True(child.Cues.OfType<AbilityCue>().Single(c => c.Used.Ability == fireball).At
+                        > child.Cues.OfType<BadgeCue>().First(c => c.Unit == offer.Reactor).At);
+            }
             settling |= player.Camera is { Dim: > 0 and < .35f };
             if (tick.Shown.Contains(2)) { finished = true; Assert.Null(player.Camera); }
         }
         Assert.True(settling);
         Assert.True(finished);
+        Assert.Equal(View(reaction.State, []).Units.Select(u => (u.Id, u.Hp, u.Life)),
+            player.Shown!.Units.Select(u => (u.Id, u.Hp, u.Life)));
     }
 
     [Fact]

@@ -573,10 +573,10 @@ twist, a gold tab is the spell tier, a gold hook marks a reaction and three dots
 
 ## Effects
 
-`content/tactics/base/fx/` holds 41 effects in colour variants. Each is a horizontal strip, and its manifest
+`content/tactics/base/fx/` holds combat effects in colour variants. Each is a horizontal strip, and its manifest
 entry gives:
 
-- frame size (up to 96–128 px for big spells), fps, `loop` and `loopStart`;
+- frame size (up to 256 px for the Wizard area fronts), fps, `loop` and `loopStart`;
 - the anchor, and where it attaches: `feet`, `body`, `overhead` or `projectile` (projectile art faces +x and the
   game rotates it);
 - blend mode: `add` for glows, `normal` for smoke and dust;
@@ -588,6 +588,14 @@ frost, shock, necrotic, radiant, psychic, thunder, acid, toxin, force); Boons an
 inspire, rage, hold, dispel and web. `signature/` adds 12 school spells (`spell_*`: Fireball, Lightning Bolt, Cone
 of Cold, Spirit Guardians and others), whose entries carry `school` instead of `subclass`. Abilities pick their
 effect in `presentation.fx`.
+
+### Wizard pilot (#247)
+
+`parts/wizard_fx.py` adds 48 spell/proc identities and seven flight sheets. Each damaging Wizard spell has its own silhouette and sheet. The 0.4 s cantrip / 0.6 s levelled sheets use indexed ramps, angular lines, a single white-hot frame and travelling residue. Larger sparse fronts keep figures, marks and the grid visible. Fire, frost, force, arcane, psychic and time magic emit matching light; poison, acid, silk and ordinary earth stay unlit.
+
+`parts/wizard_casts.py` appends 34 Wizard-only frames for bolt, weave, ward, nova and stomp. The tactical manifest's optional `classes.<class>` entry overrides that class's frame count and adds animations; existing indices remain stable. Eleven Wizard sheets grow to ten rows per facing; other classes keep eight. Classic sheets and non-Wizard spell learners use the authored fallback poses.
+
+Run `python tools/tactics-assets/dev/build_wizard_vfx.py` for effects, presentation keys and manifests; bake Wizard tactical sheets through `parts.tactical_art.build.bake`. This targeted export preserves authored townsfolk and unrelated assets. Existing sound IDs are associated with the new keys in both the shipped manifest and `tools/tactics-audio/sfx-list.json`. The optional FX-manifest `passives` map names visible procs without editing gameplay definitions. Wizard exports trim only transparent margins. Anchors, projectile centres and beam-light reach are preserved; the export test restores every original RGBA pixel exactly. Counterspell holds an offered incantation before release; declined and failed counters resume that original spell, while Countered cancels its projectile and detonation. This affects playback only.
 
 ### Shared combat language (#247)
 

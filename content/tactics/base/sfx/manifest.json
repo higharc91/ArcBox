@@ -1066,7 +1066,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane"
+      "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane; fx.wizard_grease.arcane; fx.wizard_banishment.arcane; fx.wizard_arcane_recovery.arcane"
     },
     "spell_bless": {
       "files": [
@@ -1091,7 +1091,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.eldritch, fx.force.*"
+      "use": "fx.eldritch, fx.force.*; fx.wizard_magic_missile.force"
     },
     "spell_fire_aura": {
       "files": [
@@ -1142,7 +1142,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.ice.frost, fx.frost.frost"
+      "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost"
     },
     "spell_lightning": {
       "files": [
@@ -1151,7 +1151,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.lightning.storm, fx.shock.storm"
+      "use": "fx.lightning.storm, fx.shock.storm; fx.wizard_shocking_grasp.storm; fx.wizard_chromatic_orb.storm"
     },
     "spell_misty_step": {
       "files": [
@@ -1160,7 +1160,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported"
+      "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic"
     },
     "spell_nature_circle": {
       "files": [
@@ -1168,7 +1168,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.circle.nature, fx.hold.nature, fx.web.silk"
+      "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk"
     },
     "spell_nature_heal": {
       "files": [
@@ -1184,7 +1184,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*"
+      "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*; fx.wizard_poison_spray.venom; fx.wizard_ray_of_sickness.sickness"
     },
     "spell_psychic": {
       "files": [
@@ -1201,7 +1201,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*"
+      "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave"
     },
     "spell_shield": {
       "files": [
@@ -1209,7 +1209,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.shield.*, fx.ward.*"
+      "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane"
     },
     "spell_thunderwave": {
       "files": [
@@ -1217,7 +1217,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.thunder.thunder"
+      "use": "fx.thunder.thunder; fx.wizard_thunderwave.thunder"
     },
     "spider_attack": {
       "files": [

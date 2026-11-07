@@ -1,4 +1,4 @@
-> Status: owner approved step 0 in chat; preparing its PR and the Wizard pilot. CI remains manually disabled. No later class is approved.
+> Status: step 0 approved and PR #251 open; Wizard preview complete and awaiting owner OK. No later class has started. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -33,13 +33,13 @@ A final area-focus check caught a zero-sized opening extent that dimmed the cast
 
 Recorded texture snapshots add about 0.30 MiB at the last sample (including UI/font caches). No game-art texture or audio file was added. Shipped content-tree growth is 86 bytes in the optional cut-in schema. No paid generation was used.
 
-Remaining boundary:
+Step 0 boundary recorded before approval (historical):
 
 1. Owner reviews the verified gallery/issue preview. No PR until the owner sees it.
 2. Owner reviews step 0 and selects the round budget (3.6 s proposed; no universal cap selected/enforced), plus real-TV/hardware/world-encounter visual checks. Container performance is a relative proxy, not a hardware 16 ms claim.
 3. Wait for explicit step 0 OK before any Wizard art. Open the step 0 PR after review; do not mark the issue checkbox before approval. Class branches start from latest main after the shared work is merged.
 
-No step or class checkbox is complete yet. CI remains manually disabled. No class art work or paid generation has started.
+At that earlier stage no checkbox was complete and class art had not started. The current status is recorded at the top and in the owner-approval/Wizard sections below. CI remains manually disabled; no paid generation was used.
 
 ## Verification log
 
@@ -55,3 +55,25 @@ No step or class checkbox is complete yet. CI remains manually disabled. No clas
 The owner replied “Yeah, those look good. Finish the rest” after the shared preview and approval question. Step 0 is approved and its issue checkbox is ticked; use the proposed 3.6 s Chapter I round budget. Existing measured assertions remain tighter (3.1 s automatic Short / 3.4 s Full) and are not loosened. Latest main `c4e121eb` was integrated cleanly before the step 0 PR; rerun the full gate on the integration. The frozen step 0 image baseline remains `9a7ffb54`.
 
 The next class is Wizard. Its branch is cut from latest main with the approved shared work included as a dependency while the step 0 PR awaits its owner merge. Keep the Wizard diff and preview separate, and do not start Sorcerer until the Wizard preview receives its required explicit OK.
+
+## Wizard implementation
+
+Wizard starts on main `c4e121eb` with approved shared dependency `15ecd7a1`; the frozen before includes that dependency so the class comparison isolates its art. Step 0 is in PR #251, awaiting the owner merge. Class-specific work is on `combat-vfx-wizard`.
+
+All 47 abilities receive distinct native spell sheets, seven receive dedicated flight strips, and Empowered Evocation receives a presentation-only proc sigil. Five casting animations add 34 frames to each Wizard race sheet. Other classes retain their atlases and use fallback poses if they learn these spells. Existing signature tiers remain Full; ordinary default tiers remain dynamic, retaining downing-critical promotion. Scorching Ray winds up once then rapidly releases its remaining real attacks to meet the 1.5 s budget. Gameplay definitions, AI, damage and resources are unchanged.
+
+The showcase captures all 49 real samples: 47 abilities, the Evoker proc and ordinary Attack. Comparisons, three-run container performance, texture/pack growth, round timing and the final full gate are being recorded. The snapshot update changes only AbilityUsed.presentation in river-crossing and warlord-bridge; non-presentation replay events are asserted identical. No phone fixture or audio clip changes. The gallery will be posted once verification passes; no Wizard PR before approval, and no Sorcerer work before Wizard approval.
+
+Native visual review additionally caught a pre-existing Counterspell detonation: the incoming Fireball was drawn despite being canceled. Playback now holds an offered spell and resumes its presentation only after a declined or failed counter, or cancels it when the engine emits Countered. No engine event is changed; the resumed ability marker exists only in BeatPlayer's presentation script. Real-engine tests cover success, pass and a failed higher-tier counter. Native Counterspell footage is retaken. Cold, lightning and poison aimed effects now have distinct geometry and motion, with a palette-independent regression check.
+
+The native Counterspell review led to explicit nested-chain coverage as well. Suspended incantations are retained as a stack rather than a single slot. Real engine tests cover both answering and declining a counter to the Wizard's own spell, with no premature release, correct result ordering, continuous framing, and exact final HP/life. The existing three outcomes remain covered. Source is frozen while the full gate reruns; baseline performance runs are retained and after measurements use the final Debug assembly.
+
+## Wizard review handoff
+
+The complete Wizard gallery is `../reports/combat-vfx/wizard/index.html`: 49 native before/after movies and full-resolution posters, all 50 inventory rows (including two static modifiers), a contact sheet, four highlights and a native cast close-up. All links and representative VP9/1920×540 media validate. Every final capture and benchmark log completes without rendering errors; capture uses the real engine/BeatPlayer at 1920×1080, 60 simulation / 30 capture fps and Dummy audio. All 49 spell/proc/ordinary attack samples are covered.
+
+The final full gate passes with 7,247 .NET tests, zero build warnings/errors, 549 phone tests/build, 24 Node tests, 31 asset tests, 9 audio tests, 23 lore tests and lore/docs checks. Native builds also have zero warnings/errors. All effect PNGs reproduce byte-for-byte; cropped export restores every original RGBA pixel exactly while retaining anchors, shot centres and beam-light reach, saving 18.10 MiB decoded effect storage. Other class atlases, audio clips, phone fixtures and gameplay fields stay unchanged. Replay goldens change only 18 AbilityUsed.presentation events.
+
+Three independent software-render runs per version give a class median 20.6423 → 21.3141 ms (+3.25%, within the 10% class median limit). This is not a per-scene guarantee: the largest individual regression is Temporal Stasis, 20.0742 → 24.6191 ms (+22.64%), documented for physical hardware validation. Whole-reel texture peak grows by 39.18 MiB; shipped content grows by 1.09 MiB. Thirty real six-player Chapter I rounds remain under the approved 3.6 s cap: Full max 3.317 / Auto Short max 3.017 / Off 0 extra seconds. Exact metrics and limitations are in review.md and the JSON reports.
+
+Wizard remains unchecked until the owner's explicit approval. Do not open its PR or start Sorcerer until that approval. The owner merges PR #251 and the later Wizard PR. No new sounds, paid generation, rule/balance/AI edits or CI runs were introduced.

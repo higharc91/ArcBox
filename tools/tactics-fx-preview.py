@@ -51,6 +51,15 @@ def prepare(before, baseline, cache):
         print(f"Build/import {name}", flush=True)
         run(["dotnet", "build", "src/ArcBox.Host/ArcBox.Host.csproj", "-c", "Debug"], cwd=tree, log=cache / f"{name}-build.log")
         run(["godot", "--headless", "--editor", "--path", str(tree / "src/ArcBox.Host"), "--import"], cwd=tree, log=cache / f"{name}-import.log")
+        if name == 'before':
+            # The editor can create a missing C# UID beside a tracked main file. It is import output, not a backport.
+            extras = set(run(['git', 'ls-files', '--others', '--exclude-standard'], cwd=before).splitlines()) - set(HARNESS)
+            tracked = set(run(['git', 'ls-files'], cwd=before).splitlines())
+            for extra in extras:
+                if extra.endswith('.cs.uid') and extra[:-4] in tracked:
+                    (before / extra).unlink()
+                else:
+                    raise RuntimeError(f'Unexpected before import output: {extra}')
 
 
 def capture(tree, selector, directory, mode, reduced=False, performance=False):
@@ -71,7 +80,8 @@ def capture(tree, selector, directory, mode, reduced=False, performance=False):
                 time.sleep(.1)
             env = dict(os.environ, DISPLAY=":" + display.read_text().strip(), LIBGL_ALWAYS_SOFTWARE="1",
                        XDG_DATA_HOME=str(directory / "userdata"), ARCBOX_FX_CINEMATICS=mode,
-                       ARCBOX_FX_REDUCED="1" if reduced else "0", ARCBOX_FX_CAPTURE="0" if performance else "1")
+                       ARCBOX_FX_REDUCED="1" if reduced else "0", ARCBOX_FX_CAPTURE="0" if performance else "1",
+                       ARCBOX_FX_FAST_PNG="1")
             args = ["godot", "--path", str(tree / "src/ArcBox.Host"), "--rendering-method", "gl_compatibility",
                     "--audio-driver", "Dummy", "--disable-vsync", "--fixed-fps", "60", "--resolution", "1920x1080", "--",
                     f"--fx-demo={selector}", "--preset=low", "--res=1920x1080", f"--shots={directory / 'frames'}", "--quit-after=300"]
@@ -114,10 +124,12 @@ def media(before, after, old, new, output, key, mode, cache, reuse=False):
          "[0:v]scale=960:540:flags=neighbor[l];[1:v]scale=960:540:flags=neighbor[r];[l][r]hstack=inputs=2[v]",
          "-map", "[v]", "-an", "-c:v", "libvpx-vp9", "-row-mt", "1", "-threads", "4", "-cpu-used", "4", "-crf", "36", "-b:v", "0", str(film)], log=seq / "ffmpeg.log")
     # Align the impact in posters, while the video retains the complete real timing from cast to settle.
-    moment = {"common.attack": .25, "wizard.fire_bolt": .5, "wizard.magic_missile": .48, "wizard.fireball": .8}.get(old["id"], old["seconds"] * .55)
-    lead = max(0, new["seconds"] - old["seconds"] - .3)
-    a = Image.open(left[min(len(left)-1, round(moment * 30))]).convert("RGB")
-    b = Image.open(right[min(len(right)-1, round((moment + lead) * 30))]).convert("RGB")
+    def peak(row):
+        # Pick each real effect's bright release, including its own cinematic lead; never guess from total duration.
+        lead = max(0, row['seconds'] - row.get('baseSeconds', row['seconds']) - .3)
+        return row.get('posterAt', row['seconds'] * .55) + lead + 1/30
+    a = Image.open(left[min(len(left)-1, round(peak(old) * 30))]).convert("RGB")
+    b = Image.open(right[min(len(right)-1, round(peak(new) * 30))]).convert("RGB")
     poster = Image.new("RGB", (3840, 1130), "#101222")
     poster.paste(a, (0, 50)); poster.paste(b, (1920, 50))
     pen = ImageDraw.Draw(poster)
@@ -174,6 +186,13 @@ def main():
             perf = cache / f"perf-{name}-{repeat}"
             meta = perf / "frames/showcase.json"
             runs.append(json.loads(meta.read_text()) if args.reuse and meta.exists() else capture(tree, args.selector, perf, mode, reduced, True))
+        if runs:
+            # Fresh neutral metadata selects the reviewed ability/proc, including reactions, in reused native frames.
+            for row, measured in zip(captures[name], runs[0]):
+                if row['id'] != measured['id'] or abs(row['seconds'] - measured['seconds']) > 2/60:
+                    raise RuntimeError(f"Native/performance fixture mismatch: {row['id']}")
+                for field in ('baseSeconds', 'posterAt', 'textureBytes'):
+                    if field in measured: row[field] = measured[field]
         performance[name] = {row["id"]: statistics.median(r[i]["frameMedianMs"] for r in runs)
                              for i, row in enumerate(captures[name])} if runs else {}
     (output / "timings.json").write_text(json.dumps(captures, indent=2) + "\n")
@@ -199,7 +218,12 @@ def main():
     inventories = {}
     for name in ["before", "full"]:
         source = cache / name / "frames/inventory.json"
-        if source.exists(): inventories[name] = json.loads(source.read_text())
+        if source.exists():
+            inventories[name] = json.loads(source.read_text())
+            tree = before if name == 'before' else ROOT
+            procs = json.loads((tree / 'content/tactics/base/fx/manifest.json').read_text()).get('passives', {})
+            for row in inventories[name]:
+                if row['kind'] == 'proc' and row['id'] in procs: row['presentation'] = {'fx': procs[row['id']]}
     if inventories:
         (output / "inventory.json").write_text(json.dumps(inventories, indent=2) + "\n")
         old_rows = {(r["id"], r.get("subclass")): r for r in inventories.get("before", [])}
@@ -216,7 +240,7 @@ def main():
         'video,img{width:100%;image-rendering:pixelated}article{margin:3rem 0}summary{padding:.8rem;cursor:pointer}a{color:#f0d27a}p{max-width:85ch}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #555;padding:.4rem;overflow-wrap:anywhere}</style>'
         f'<h1>Combat VFX · {html.escape(args.selector)}</h1><p>Native TV capture: before on the left, after on the right. Fixed map and seed; real engine events and BeatPlayer. '
         'Videos preserve the complete cast, impact, effect tails and camera settle. Posters align the impact for comparison.</p>'
-        f'<p>Frozen before: <code>{baseline}</code>. No class art has been reworked in step 0. <a href="review.md">Review notes and limitations</a> · '
+        f'<p>Frozen before: <code>{baseline}</code>. <a href="review.md">Review notes and limitations</a> · '
         '<a href="performance.json">Frame measurements</a> · <a href="timings.json">Actual beat timings</a></p><img src="contact-sheet.png" alt="Before and after contact sheet">'
         + inventory_html + ''.join(cards) + '</html>')
     print(f"Preview: {output / 'index.html'}\nRaw captures: {cache}", flush=True)

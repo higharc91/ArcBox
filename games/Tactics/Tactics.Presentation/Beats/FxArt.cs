@@ -80,6 +80,7 @@ public sealed class FxArt
     private readonly Dictionary<string, HazardArt> _hazards = new(StringComparer.Ordinal);
 
     private readonly Dictionary<string, ShotArt> _shots = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> _passives = new(StringComparer.Ordinal);
 
     private FxArt()
     {
@@ -110,6 +111,9 @@ public sealed class FxArt
     /// <summary>A transient hazard's two layers, or null when the pack has no art for it.</summary>
     public HazardArt? Hazard(string id) => _hazards.GetValueOrDefault(id);
 
+    /// <summary>Optional visible proc art, kept in the presentation manifest rather than the rules.</summary>
+    public string? Passive(string id) => _passives.GetValueOrDefault(id);
+
     /// <summary>The effect for a key, or null.</summary>
     public FxClip? Clip(string key)
     {
@@ -124,12 +128,16 @@ public sealed class FxArt
     {
         if (key.StartsWith($"{Projectiles}.", StringComparison.Ordinal))
             return _shots.GetValueOrDefault(key[(Projectiles.Length + 1)..]);
-        return Clip(key) is { } clip ? new ShotArt(clip.Path, clip.Width, clip.Height, clip.Frames, clip.Fps, 1, clip.Additive) { Emission = clip.Emission } : null;
+        return Clip(key) is { } clip ? new ShotArt(clip.Path, clip.Width, clip.Height, clip.Frames, clip.Fps, 1, clip.Additive)
+            { Emission = clip.Emission is { } glow ? glow with { Radius = 2, Power = .8f } : null } : null;
     }
 
     private void ReadEffects(string root, string set)
     {
         using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, set, "manifest.json")));
+        if (doc.RootElement.TryGetProperty("passives", out var passives))
+            foreach (var passive in passives.EnumerateObject())
+                _passives[passive.Name] = passive.Value.GetString()!;
         foreach (var effect in doc.RootElement.GetProperty(Effects).EnumerateObject())
         {
             var e = effect.Value;
