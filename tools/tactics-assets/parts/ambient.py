@@ -58,6 +58,8 @@ AMB_RAMPS: dict[str, list[str]] = {
     "wing_monarch": ramp("#e8792f", shift=0.07),
     "fish_silver": ramp("#a3b6c6", shift=0.05, spread=1.2),
     "fish_koi": ramp("#ea7a3a", shift=0.07),
+    "squirrel_fur": ramp("#a4673f", shift=0.06, spread=1.0),
+    "squirrel_belly": ramp("#d2ad79", shift=0.05, spread=0.8),
     "fel": ramp("#8fe05a", shift=0.08, spread=0.9),
     "rune_stone": ramp("#7c7f8e", shift=0.04, spread=1.1),
 }
@@ -989,6 +991,45 @@ def fireflies_frames(n: int = 16, w: int = 32, h: int = 32, count: int = 5, seed
     return out
 
 
+def squirrel_climb_frames(n: int = 8) -> list[Canvas]:
+    """A small russet squirrel climbing head-first, at the fox's one-pixel world density."""
+    out = []
+    for f in range(n):
+        c = _canvas(26, 32)
+        step = (f // 2) % 2
+        # The arched tail is wide enough to read separately from the trunk and body at TV scale.
+        c.thick_line(14, 19, 8, 16, 5, "main", 2)
+        c.thick_line(8, 16, 5, 11, 6, "main", 3)
+        c.thick_line(5, 11, 6, 6, 6, "main", 4)
+        c.thick_line(6, 6, 10, 4, 5, "main", 4)
+        c.thick_line(10, 4, 13, 7, 4, "main", 3)
+        c.line(3, 9, 4, 6, "main", 5)
+        c.line(6, 5, 10, 3, "main", 5)
+        c.ellipse(15, 17, 5, 7, "main", 3)
+        c.ellipse(13, 15, 2, 4, "main", 4)
+        c.ellipse(17, 20, 2, 4, "main", 2)
+        c.ellipse(15, 24, 5, 4, "main", 3)
+        c.ellipse(14, 25, 2, 3, "alt", 4)
+        c.polygon([(10, 22), (11, 19), (13, 21), (13, 23)], "main", 4)
+        c.polygon([(17, 21), (19, 18), (20, 21), (18, 23)], "main", 2)
+        c.thick_line(18, 19 + step, 22, 17 + step, 2, "main", 3)
+        c.thick_line(18, 25 - step, 22, 24 - step, 2, "main", 2)
+        c.thick_line(16, 27, 19, 30 - step, 2, "main", 2)
+        c.px(11, 25, "dark", 0)
+        c.px(10, 27, "dark", 1)
+        c.px(12, 27, "alt", 5)
+        c.px(15, 22, "alt", 5)
+        small = _canvas(26, 32)
+        for y in range(25):
+            for x in range(20):
+                sx, sy = min(25, round(x / 0.78)), min(31, round(y / 0.78))
+                small.slot[y + 5, x + 3] = c.slot[sy, sx]
+                small.shade[y + 5, x + 3] = c.shade[sy, sx]
+        small.outline()
+        out.append(small)
+    return out
+
+
 def leaf_frames(n: int = 8, w: int = 9, h: int = 9) -> list[Canvas]:
     """A falling leaf tumbling end over end: it flips about its long axis (lit face, edge, dark underside, edge)
     while rocking side to side. The game moves it; this is the spin."""
@@ -1450,6 +1491,9 @@ CATALOGUE: list[Amb] = [
         "gold": _v(glow="firefly"), "wisp": _v(glow="wisp"), "ember": _v(glow="ember")}, 8, (16, 16), blend="add",
         extra={"motion": {"vx": 3, "vy": 0, "sway": [6, 4.0]}},
         note="a swarm of five; scatter a few over grass and water at dusk and night"),
+    Amb("squirrel_climb", "Climbing squirrel", "particles", squirrel_climb_frames,
+        {"russet": _v(main="squirrel_fur", alt="squirrel_belly", dark="cloth/charcoal")},
+        8, (15, 30), note="climbs the trunk head-first; place against a broadleaf tree"),
     Amb("leaf", "Falling leaf", "particles", leaf_frames, {
         "green": _v(leaf="foliage/leaf_light"), "autumn": _v(leaf="foliage/leaf_autumn"),
         "red": _v(leaf="foliage/leaf_red"), "blossom": _v(leaf="foliage/blossom")}, 10, (4, 4),

@@ -6,6 +6,7 @@ import {
   type ResolvedTexture, type WorldManifests,
 } from "./assets";
 import { columnLook, type ColumnLook } from "./terrain";
+import { addWildlife } from "./wildlife";
 
 /**
  * One area of the Vale as a three.js scene: the battle map's tile columns (tops, cliff sides and lips, paired in
@@ -169,6 +170,38 @@ export async function buildArea(
 
   const curves = m.props.lighting?.flicker ?? {};
   const propJobs = placements.map(async (p) => {
+    if (p.id === "bridge_span_timber" && area.map === "river_crossing") {
+      // This prop is drawn as an isometric floor. An upright billboard turns it into a giant floating plank;
+      // lay the crossing across the river's two water columns instead, with short stone landings on the banks.
+      // A compact texture keeps each board several screen pixels wide at the flyover's low resolution.
+      const canvas = document.createElement("canvas");
+      canvas.width = 32; canvas.height = 12;
+      const ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = "#553824"; ctx.fillRect(0, 0, 32, 12);
+      for (let board = 0; board < 4; board++) {
+        const x = board * 8;
+        ctx.fillStyle = board % 2 ? "#a56c3e" : "#b87a45"; ctx.fillRect(x + 1, 1, 7, 11);
+        ctx.fillStyle = "#d19a5b"; ctx.fillRect(x + 1, 1, 1, 10);
+        ctx.fillStyle = "#875331"; ctx.fillRect(x + 4, 4 + board % 3, 1, 4);
+      }
+      const wood = own(pixelTexture(new THREE.CanvasTexture(canvas), false));
+      const topMat = own(new THREE.MeshLambertMaterial({ map: wood }));
+      const edgeMat = own(new THREE.MeshLambertMaterial({ color: "#65432e" }));
+      const stoneMat = own(new THREE.MeshLambertMaterial({ color: "#797368" }));
+      const left = top(8 * map.w + 5), right = top(8 * map.w + 8);
+      const cx = ox + 7, cz = oz + 8.5;
+      const deck = new THREE.Mesh(own(new THREE.BoxGeometry(3.5, 0.2, 1.45)),
+        [edgeMat, edgeMat, topMat, edgeMat, edgeMat, edgeMat]);
+      deck.position.set(cx, (left + right) / 2 + 0.32, cz);
+      deck.rotation.z = Math.atan2(right - left, 3.5);
+      world.add(deck);
+      for (const [x, bank] of [[cx - 1.67, left], [cx + 1.67, right]]) {
+        const landing = new THREE.Mesh(own(new THREE.BoxGeometry(0.48, 0.24, 1.6)), stoneMat);
+        landing.position.set(x, bank + 0.22, cz);
+        world.add(landing);
+      }
+      return;
+    }
     const r = resolveProp(m, p.id, p.variant);
     if (!r) return;
     const [x, y] = p.at;
@@ -272,6 +305,9 @@ export async function buildArea(
   world.add(sun, sun.target);
 
   const maxTop = Math.max(...solid.filter(Number.isFinite));
+  const wildlife = await addWildlife(world, area, placements, map.w, map.h,
+    (x, y) => x >= 0 && y >= 0 && x < map.w && y < map.h && !isPit(x, y) ? top(y * map.w + x) : null,
+    m, own, rand);
   return {
     world,
     backdrop: sky.scene,
@@ -292,6 +328,7 @@ export async function buildArea(
         fl.light.intensity = fl.base * (c0 + (c1 - c0) * (k % 1));
       }
       for (const b of billboards) b.rotation.y = yaw;
+      wildlife(t, yaw);
       // The sun stays at the screen's top-left whatever the camera does: up, to the camera's left, a little behind it.
       const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
       const back = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));

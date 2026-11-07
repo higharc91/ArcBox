@@ -995,6 +995,21 @@
       },
       "note": "a swarm of five; scatter a few over grass and water at dusk and night"
     },
+    "squirrel_climb": {
+      "name": "Climbing squirrel",
+      "group": "particles",
+      "kind": "sprite",
+      "frame": [26, 32],
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "anchor": [15, 30],
+      "layer": "over",
+      "blend": "normal",
+      "variants": { "russet": "particles/squirrel_climb_russet.png" },
+      "default": "russet",
+      "note": "climbs the trunk head-first; place against a broadleaf tree"
+    },
     "leaf": {
       "name": "Falling leaf",
       "group": "particles",
