@@ -1,0 +1,1011 @@
+{
+  "before": [
+    {
+      "id": "druid.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.nature"
+      }
+    },
+    {
+      "id": "druid.entangle",
+      "name": "Entangle",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.warden_vine_snare.root"
+      }
+    },
+    {
+      "id": "druid.faerie_fire",
+      "name": "Faerie Fire",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.nature"
+      }
+    },
+    {
+      "id": "druid.fog_cloud",
+      "name": "Fog Cloud",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.smoke.grey"
+      }
+    },
+    {
+      "id": "druid.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.nature"
+      }
+    },
+    {
+      "id": "druid.produce_flame",
+      "name": "Produce Flame",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.flames.fire",
+        "projectile": "projectiles.fireball"
+      }
+    },
+    {
+      "id": "druid.shillelagh",
+      "name": "Shillelagh",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.ready",
+        "fx": "fx.aura.nature"
+      }
+    },
+    {
+      "id": "druid.thorn_whip",
+      "name": "Thorn Whip",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.slash.steel"
+      }
+    },
+    {
+      "id": "druid.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "fx.thunder.thunder"
+      }
+    },
+    {
+      "id": "druid.wild_shape_wolf",
+      "name": "Wild Shape: Wolf",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.poof.white"
+      }
+    },
+    {
+      "id": "druid.barkskin",
+      "name": "Barkskin",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.ward.nature"
+      }
+    },
+    {
+      "id": "druid.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.nature"
+      }
+    },
+    {
+      "id": "druid.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.nature"
+      }
+    },
+    {
+      "id": "druid.moonbeam",
+      "name": "Moonbeam",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "signature.spell_moonbeam.moon"
+      }
+    },
+    {
+      "id": "druid.moonbeam.enter",
+      "name": "Moonbeam \u00b7 OnEnterTile",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "druid.moonbeam.turn",
+      "name": "Moonbeam \u00b7 OnTurnStart",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "druid.spike_growth",
+      "name": "Spike Growth",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.nature"
+      }
+    },
+    {
+      "id": "druid.spike_growth.step",
+      "name": "Spike Growth \u00b7 OnEnterTile",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "druid.wild_shape_bear",
+      "name": "Wild Shape: Bear",
+      "level": 4,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.poof.white"
+      }
+    },
+    {
+      "id": "druid.call_lightning",
+      "name": "Call Lightning",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.stormcaller_storm.storm"
+      }
+    },
+    {
+      "id": "druid.conjure_animals",
+      "name": "Conjure Animals",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.nature"
+      }
+    },
+    {
+      "id": "druid.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "fx.dispel.arcane"
+      }
+    },
+    {
+      "id": "druid.sleet_storm",
+      "name": "Sleet Storm",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.ice.frost"
+      }
+    },
+    {
+      "id": "druid.sleet_storm.turn",
+      "name": "Sleet Storm \u00b7 OnTurnStart",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "druid.wild_shape_dire_wolf",
+      "name": "Wild Shape: Dire Wolf",
+      "level": 6,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.poof.white"
+      }
+    },
+    {
+      "id": "druid.blight",
+      "name": "Blight",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.spell_blight.rot"
+      }
+    },
+    {
+      "id": "druid.ice_storm",
+      "name": "Ice Storm",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.ice.frost"
+      }
+    },
+    {
+      "id": "druid.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.nature"
+      }
+    },
+    {
+      "id": "druid.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.nature"
+      }
+    },
+    {
+      "id": "grovekeeper.bloom",
+      "name": "Verdant Bloom",
+      "level": 3,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.grovekeeper_bloom.blossom"
+      }
+    },
+    {
+      "id": "grovekeeper.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "druid.grovekeeper",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove",
+      "name": "Sanctuary Grove",
+      "level": 6,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.grovekeeper_bloom.blossom"
+      }
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove.mend",
+      "name": "Sanctuary Grove \u00b7 OnTurnStart",
+      "level": 6,
+      "subclass": "druid.grovekeeper",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "grovekeeper.ancient_canopy",
+      "name": "Ancient Canopy",
+      "level": 10,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.grovekeeper_bloom.blossom"
+      }
+    },
+    {
+      "id": "shapeshifter.dire_form",
+      "name": "Combat Wild Shape: Dire Wolf",
+      "level": 3,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "signature.shapeshifter_wild_shape.spring"
+      }
+    },
+    {
+      "id": "shapeshifter.primal_strike",
+      "name": "Primal Strike",
+      "level": 3,
+      "subclass": "druid.shapeshifter",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "shapeshifter.elder_bear_form",
+      "name": "Wild Shape: Elder Bear",
+      "level": 6,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "signature.shapeshifter_wild_shape.spring"
+      }
+    },
+    {
+      "id": "shapeshifter.apex_predator",
+      "name": "Apex Predator",
+      "level": 10,
+      "subclass": "druid.shapeshifter",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "shapeshifter.primal_mend",
+      "name": "Primal Mend",
+      "level": 10,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.shapeshifter_wild_shape.spring"
+      }
+    },
+    {
+      "id": "stormcaller.gale_burst",
+      "name": "Gale Burst",
+      "level": 3,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.stormcaller_storm.storm"
+      }
+    },
+    {
+      "id": "stormcaller.chain_tempest",
+      "name": "Chain Tempest",
+      "level": 6,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.stormcaller_storm.storm"
+      }
+    },
+    {
+      "id": "stormcaller.storm_born",
+      "name": "Storm Born",
+      "level": 6,
+      "subclass": "druid.stormcaller",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "stormcaller.wrath_of_the_tempest",
+      "name": "Wrath of the Tempest",
+      "level": 10,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.stormcaller_storm.storm"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "druid.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "druid.entangle",
+      "name": "Entangle",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_entangle.nature",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "druid.faerie_fire",
+      "name": "Faerie Fire",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_faerie_fire.fey"
+      }
+    },
+    {
+      "id": "druid.fog_cloud",
+      "name": "Fog Cloud",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_fog_cloud.mist"
+      }
+    },
+    {
+      "id": "druid.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_healing_word.healing"
+      }
+    },
+    {
+      "id": "druid.produce_flame",
+      "name": "Produce Flame",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.druid_lash",
+        "fx": "fx.druid_produce_flame.fire",
+        "projectile": "fx.druid_produce_flame_shot.fire"
+      }
+    },
+    {
+      "id": "druid.shillelagh",
+      "name": "Shillelagh",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_shillelagh.nature"
+      }
+    },
+    {
+      "id": "druid.thorn_whip",
+      "name": "Thorn Whip",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.druid_lash",
+        "fx": "fx.druid_thorn_whip.nature"
+      }
+    },
+    {
+      "id": "druid.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_thunderwave.thunder"
+      }
+    },
+    {
+      "id": "druid.wild_shape_wolf",
+      "name": "Wild Shape: Wolf",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_shape",
+        "fx": "fx.druid_wild_shape_wolf.nature"
+      }
+    },
+    {
+      "id": "druid.barkskin",
+      "name": "Barkskin",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_barkskin.earth"
+      }
+    },
+    {
+      "id": "druid.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_hold_person.nature"
+      }
+    },
+    {
+      "id": "druid.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_lesser_restoration.healing"
+      }
+    },
+    {
+      "id": "druid.moonbeam",
+      "name": "Moonbeam",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_moonbeam.moon",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "druid.moonbeam.enter",
+      "name": "Moonbeam \u00b7 OnEnterTile",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_moonbeam_enter.moon"
+      }
+    },
+    {
+      "id": "druid.moonbeam.turn",
+      "name": "Moonbeam \u00b7 OnTurnStart",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_moonbeam_turn.moon"
+      }
+    },
+    {
+      "id": "druid.spike_growth",
+      "name": "Spike Growth",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_spike_growth.nature"
+      }
+    },
+    {
+      "id": "druid.spike_growth.step",
+      "name": "Spike Growth \u00b7 OnEnterTile",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_spike_growth_step.nature"
+      }
+    },
+    {
+      "id": "druid.wild_shape_bear",
+      "name": "Wild Shape: Bear",
+      "level": 4,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_shape",
+        "fx": "fx.druid_wild_shape_bear.nature"
+      }
+    },
+    {
+      "id": "druid.call_lightning",
+      "name": "Call Lightning",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_call_lightning.storm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "druid.conjure_animals",
+      "name": "Conjure Animals",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_conjure_animals.nature"
+      }
+    },
+    {
+      "id": "druid.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_dispel_magic.arcane"
+      }
+    },
+    {
+      "id": "druid.sleet_storm",
+      "name": "Sleet Storm",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_sleet_storm.frost"
+      }
+    },
+    {
+      "id": "druid.sleet_storm.turn",
+      "name": "Sleet Storm \u00b7 OnTurnStart",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_sleet_storm_turn.frost"
+      }
+    },
+    {
+      "id": "druid.wild_shape_dire_wolf",
+      "name": "Wild Shape: Dire Wolf",
+      "level": 6,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_shape",
+        "fx": "fx.druid_wild_shape_dire_wolf.moon"
+      }
+    },
+    {
+      "id": "druid.blight",
+      "name": "Blight",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_blight.grave",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "druid.ice_storm",
+      "name": "Ice Storm",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_ice_storm.frost"
+      }
+    },
+    {
+      "id": "druid.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_greater_restoration.healing"
+      }
+    },
+    {
+      "id": "druid.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_mass_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "grovekeeper.bloom",
+      "name": "Verdant Bloom",
+      "level": 3,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_bloom.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "grovekeeper.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "druid.grovekeeper",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_companion.nature"
+      }
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove",
+      "name": "Sanctuary Grove",
+      "level": 6,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_sanctuary_grove.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove.mend",
+      "name": "Sanctuary Grove \u00b7 OnTurnStart",
+      "level": 6,
+      "subclass": "druid.grovekeeper",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.druid_sanctuary_grove_mend.healing"
+      }
+    },
+    {
+      "id": "grovekeeper.ancient_canopy",
+      "name": "Ancient Canopy",
+      "level": 10,
+      "subclass": "druid.grovekeeper",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_ancient_canopy.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "shapeshifter.dire_form",
+      "name": "Combat Wild Shape: Dire Wolf",
+      "level": 3,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_shape",
+        "fx": "fx.druid_dire_form.nature",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "shapeshifter.primal_strike",
+      "name": "Primal Strike",
+      "level": 3,
+      "subclass": "druid.shapeshifter",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "shapeshifter.elder_bear_form",
+      "name": "Wild Shape: Elder Bear",
+      "level": 6,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_shape",
+        "fx": "fx.druid_elder_bear_form.nature",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "shapeshifter.apex_predator",
+      "name": "Apex Predator",
+      "level": 10,
+      "subclass": "druid.shapeshifter",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "shapeshifter.primal_mend",
+      "name": "Primal Mend",
+      "level": 10,
+      "subclass": "druid.shapeshifter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_primal_mend.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "stormcaller.gale_burst",
+      "name": "Gale Burst",
+      "level": 3,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_gale_burst.thunder",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "stormcaller.chain_tempest",
+      "name": "Chain Tempest",
+      "level": 6,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_chain_tempest.storm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "stormcaller.storm_born",
+      "name": "Storm Born",
+      "level": 6,
+      "subclass": "druid.stormcaller",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "stormcaller.wrath_of_the_tempest",
+      "name": "Wrath of the Tempest",
+      "level": 10,
+      "subclass": "druid.stormcaller",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_wrath_of_the_tempest.storm",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

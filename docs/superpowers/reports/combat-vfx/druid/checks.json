@@ -1,0 +1,39 @@
+{
+  "sourceCommit": "f6bd5a2334f9bc81d056d2fca7837f5c14fef745",
+  "dotnetTests": 7265,
+  "dotnetSkipped": 0,
+  "dotnetBuildWarnings": 0,
+  "phoneTests": 549,
+  "phoneProductionBuildPassed": true,
+  "nodeToolTests": 24,
+  "assetTests": 46,
+  "audioTests": 9,
+  "loreTests": 23,
+  "focusedTests": 248,
+  "nativeSamples": 53,
+  "distinctAbilityProcEffects": 40,
+  "effectSheets": 46,
+  "distinctBeastForms": 4,
+  "druidRaceAtlases": 11,
+  "appendedCastFrames": 25,
+  "framesPerFacing": 214,
+  "ciEnabled": false,
+  "ciWorkflow": "disabled_manually",
+  "realHardware16MsCheck": "pending hardware",
+  "physicalTvReadability": "pending hardware",
+  "paidGeneration": false,
+  "newAudio": false,
+  "performanceClassMedianBudgetPassed": true,
+  "performanceRunsPerVersion": 3,
+  "webmComparisons": 53,
+  "fullResolutionPosters": 53,
+  "losslessGalleryThumbnails": 53,
+  "objectDbShutdownWarningBenchmarkRuns": {
+    "before": 2,
+    "full": 2
+  },
+  "objectDbShutdownWarningRawCaptures": {
+    "before": true,
+    "full": true
+  }
+}

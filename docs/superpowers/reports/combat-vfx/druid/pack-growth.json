@@ -1,0 +1,422 @@
+{
+  "baseline": "a4208a682d52cb7956dfd35d391cff49bbe13c38",
+  "beforeBytes": 216480389,
+  "afterBytes": 218763757,
+  "deltaBytes": 2283368,
+  "changes": [
+    {
+      "path": "content/tactics/base/beasts/manifest.json",
+      "before": 3496,
+      "after": 3663,
+      "delta": 167
+    },
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 14392,
+      "after": 15197,
+      "delta": 805
+    },
+    {
+      "path": "content/tactics/base/creatures/druid_bear.png",
+      "before": 0,
+      "after": 403721,
+      "delta": 403721
+    },
+    {
+      "path": "content/tactics/base/creatures/druid_dire_wolf.png",
+      "before": 0,
+      "after": 280646,
+      "delta": 280646
+    },
+    {
+      "path": "content/tactics/base/creatures/druid_elder_bear.png",
+      "before": 0,
+      "after": 410317,
+      "delta": 410317
+    },
+    {
+      "path": "content/tactics/base/creatures/druid_wolf.png",
+      "before": 0,
+      "after": 265407,
+      "delta": 265407
+    },
+    {
+      "path": "content/tactics/base/creatures/manifest.json",
+      "before": 147485,
+      "after": 157482,
+      "delta": 9997
+    },
+    {
+      "path": "content/tactics/base/fx/druid_ancient_canopy_healing.png",
+      "before": 0,
+      "after": 13165,
+      "delta": 13165
+    },
+    {
+      "path": "content/tactics/base/fx/druid_barkskin_earth.png",
+      "before": 0,
+      "after": 1854,
+      "delta": 1854
+    },
+    {
+      "path": "content/tactics/base/fx/druid_blight_grave.png",
+      "before": 0,
+      "after": 7920,
+      "delta": 7920
+    },
+    {
+      "path": "content/tactics/base/fx/druid_bloom_healing.png",
+      "before": 0,
+      "after": 2621,
+      "delta": 2621
+    },
+    {
+      "path": "content/tactics/base/fx/druid_call_lightning_storm.png",
+      "before": 0,
+      "after": 1976,
+      "delta": 1976
+    },
+    {
+      "path": "content/tactics/base/fx/druid_chain_tempest_bounce_storm.png",
+      "before": 0,
+      "after": 1281,
+      "delta": 1281
+    },
+    {
+      "path": "content/tactics/base/fx/druid_chain_tempest_storm.png",
+      "before": 0,
+      "after": 4480,
+      "delta": 4480
+    },
+    {
+      "path": "content/tactics/base/fx/druid_companion_nature.png",
+      "before": 0,
+      "after": 2662,
+      "delta": 2662
+    },
+    {
+      "path": "content/tactics/base/fx/druid_conjure_animals_nature.png",
+      "before": 0,
+      "after": 4394,
+      "delta": 4394
+    },
+    {
+      "path": "content/tactics/base/fx/druid_cure_wounds_healing.png",
+      "before": 0,
+      "after": 2639,
+      "delta": 2639
+    },
+    {
+      "path": "content/tactics/base/fx/druid_dire_form_nature.png",
+      "before": 0,
+      "after": 8796,
+      "delta": 8796
+    },
+    {
+      "path": "content/tactics/base/fx/druid_dispel_magic_arcane.png",
+      "before": 0,
+      "after": 4288,
+      "delta": 4288
+    },
+    {
+      "path": "content/tactics/base/fx/druid_elder_bear_form_nature.png",
+      "before": 0,
+      "after": 12302,
+      "delta": 12302
+    },
+    {
+      "path": "content/tactics/base/fx/druid_entangle_nature.png",
+      "before": 0,
+      "after": 8893,
+      "delta": 8893
+    },
+    {
+      "path": "content/tactics/base/fx/druid_faerie_fire_fey.png",
+      "before": 0,
+      "after": 4430,
+      "delta": 4430
+    },
+    {
+      "path": "content/tactics/base/fx/druid_fog_cloud_mist.png",
+      "before": 0,
+      "after": 16173,
+      "delta": 16173
+    },
+    {
+      "path": "content/tactics/base/fx/druid_form_bear_claw_steel.png",
+      "before": 0,
+      "after": 381,
+      "delta": 381
+    },
+    {
+      "path": "content/tactics/base/fx/druid_form_dire_wolf_bite_steel.png",
+      "before": 0,
+      "after": 384,
+      "delta": 384
+    },
+    {
+      "path": "content/tactics/base/fx/druid_form_elder_bear_claw_steel.png",
+      "before": 0,
+      "after": 444,
+      "delta": 444
+    },
+    {
+      "path": "content/tactics/base/fx/druid_form_wolf_bite_steel.png",
+      "before": 0,
+      "after": 356,
+      "delta": 356
+    },
+    {
+      "path": "content/tactics/base/fx/druid_gale_burst_thunder.png",
+      "before": 0,
+      "after": 10936,
+      "delta": 10936
+    },
+    {
+      "path": "content/tactics/base/fx/druid_greater_restoration_healing.png",
+      "before": 0,
+      "after": 10799,
+      "delta": 10799
+    },
+    {
+      "path": "content/tactics/base/fx/druid_healing_word_healing.png",
+      "before": 0,
+      "after": 2853,
+      "delta": 2853
+    },
+    {
+      "path": "content/tactics/base/fx/druid_hold_person_nature.png",
+      "before": 0,
+      "after": 5939,
+      "delta": 5939
+    },
+    {
+      "path": "content/tactics/base/fx/druid_ice_storm_frost.png",
+      "before": 0,
+      "after": 8178,
+      "delta": 8178
+    },
+    {
+      "path": "content/tactics/base/fx/druid_lesser_restoration_healing.png",
+      "before": 0,
+      "after": 2417,
+      "delta": 2417
+    },
+    {
+      "path": "content/tactics/base/fx/druid_mass_cure_wounds_healing.png",
+      "before": 0,
+      "after": 12970,
+      "delta": 12970
+    },
+    {
+      "path": "content/tactics/base/fx/druid_moonbeam_enter_moon.png",
+      "before": 0,
+      "after": 1426,
+      "delta": 1426
+    },
+    {
+      "path": "content/tactics/base/fx/druid_moonbeam_moon.png",
+      "before": 0,
+      "after": 11743,
+      "delta": 11743
+    },
+    {
+      "path": "content/tactics/base/fx/druid_moonbeam_turn_moon.png",
+      "before": 0,
+      "after": 1204,
+      "delta": 1204
+    },
+    {
+      "path": "content/tactics/base/fx/druid_primal_mend_healing.png",
+      "before": 0,
+      "after": 2424,
+      "delta": 2424
+    },
+    {
+      "path": "content/tactics/base/fx/druid_produce_flame_fire.png",
+      "before": 0,
+      "after": 1237,
+      "delta": 1237
+    },
+    {
+      "path": "content/tactics/base/fx/druid_produce_flame_shot_fire.png",
+      "before": 0,
+      "after": 980,
+      "delta": 980
+    },
+    {
+      "path": "content/tactics/base/fx/druid_sanctuary_grove_healing.png",
+      "before": 0,
+      "after": 7594,
+      "delta": 7594
+    },
+    {
+      "path": "content/tactics/base/fx/druid_sanctuary_grove_mend_healing.png",
+      "before": 0,
+      "after": 768,
+      "delta": 768
+    },
+    {
+      "path": "content/tactics/base/fx/druid_shillelagh_nature.png",
+      "before": 0,
+      "after": 1046,
+      "delta": 1046
+    },
+    {
+      "path": "content/tactics/base/fx/druid_sleet_storm_frost.png",
+      "before": 0,
+      "after": 7231,
+      "delta": 7231
+    },
+    {
+      "path": "content/tactics/base/fx/druid_sleet_storm_turn_frost.png",
+      "before": 0,
+      "after": 423,
+      "delta": 423
+    },
+    {
+      "path": "content/tactics/base/fx/druid_spike_growth_nature.png",
+      "before": 0,
+      "after": 10129,
+      "delta": 10129
+    },
+    {
+      "path": "content/tactics/base/fx/druid_spike_growth_step_nature.png",
+      "before": 0,
+      "after": 541,
+      "delta": 541
+    },
+    {
+      "path": "content/tactics/base/fx/druid_thorn_whip_nature.png",
+      "before": 0,
+      "after": 3319,
+      "delta": 3319
+    },
+    {
+      "path": "content/tactics/base/fx/druid_thunderwave_thunder.png",
+      "before": 0,
+      "after": 5943,
+      "delta": 5943
+    },
+    {
+      "path": "content/tactics/base/fx/druid_wild_shape_bear_nature.png",
+      "before": 0,
+      "after": 6288,
+      "delta": 6288
+    },
+    {
+      "path": "content/tactics/base/fx/druid_wild_shape_dire_wolf_moon.png",
+      "before": 0,
+      "after": 7293,
+      "delta": 7293
+    },
+    {
+      "path": "content/tactics/base/fx/druid_wild_shape_wolf_nature.png",
+      "before": 0,
+      "after": 5123,
+      "delta": 5123
+    },
+    {
+      "path": "content/tactics/base/fx/druid_wrath_of_the_tempest_storm.png",
+      "before": 0,
+      "after": 5606,
+      "delta": 5606
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 124207,
+      "after": 148879,
+      "delta": 24672
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/druid.json",
+      "before": 20091,
+      "after": 20644,
+      "delta": 553
+    },
+    {
+      "path": "content/tactics/base/rules/monsters/wildshape.json",
+      "before": 2216,
+      "after": 2211,
+      "delta": -5
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 41951,
+      "after": 42476,
+      "delta": 525
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_druid.png",
+      "before": 489584,
+      "after": 549098,
+      "delta": 59514
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_druid.png",
+      "before": 490148,
+      "after": 551216,
+      "delta": 61068
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_druid.png",
+      "before": 446068,
+      "after": 503457,
+      "delta": 57389
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_druid.png",
+      "before": 501016,
+      "after": 562063,
+      "delta": 61047
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_druid.png",
+      "before": 436749,
+      "after": 489666,
+      "delta": 52917
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_druid.png",
+      "before": 477681,
+      "after": 540113,
+      "delta": 62432
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_druid.png",
+      "before": 495097,
+      "after": 554316,
+      "delta": 59219
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_druid.png",
+      "before": 488094,
+      "after": 551085,
+      "delta": 62991
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_druid.png",
+      "before": 438866,
+      "after": 491331,
+      "delta": 52465
+    },
+    {
+      "path": "content/tactics/base/tactical/human_druid.png",
+      "before": 486844,
+      "after": 546745,
+      "delta": 59901
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 16226,
+      "after": 17302,
+      "delta": 1076
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_druid.png",
+      "before": 529572,
+      "after": 592267,
+      "delta": 62695
+    }
+  ]
+}

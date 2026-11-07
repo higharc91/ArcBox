@@ -1,4 +1,4 @@
-> Status: Cleric preview complete and full local checks pass; awaiting owner approval before its PR or Druid.
+> Status: Approved by the owner. [PR #255](https://github.com/higharc91/ArcBox/pull/255) is open; Druid follows.
 
 # Cleric — #247
 
@@ -38,4 +38,4 @@ Container medians are relative software-render measurements. Real-hardware 16 ms
 
 ## Approval boundary
 
-Per [#247](https://github.com/higharc91/ArcBox/issues/247), the Cleric PR and Druid wait for explicit Cleric approval. No later class has started. The owner merges the PRs.
+The owner approved the Cleric preview. [PR #255](https://github.com/higharc91/ArcBox/pull/255) is open against `combat-vfx-warlock`; Druid follows. The owner merges the approved dependencies.
