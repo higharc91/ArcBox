@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Godot;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
@@ -23,6 +24,7 @@ internal sealed class BoardPainter
         public Vector2[] Uvs { get; } = uvs;
         public Vector2[] FrameUvs { get; } = new Vector2[uvs.Length];
         public Color[] Colours { get; } = colours;
+        public Color[] Dynamic { get; } = new Color[colours.Length];
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
         public bool OneFrame { get; set; }
@@ -155,15 +157,15 @@ internal sealed class BoardPainter
     public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock) => Paint(canvas, drawn, now, clock, 1f);
 
     /// <summary>Paints one item on <paramref name="canvas"/> with <paramref name="alpha"/> modulation.</summary>
-    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock, float alpha)
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock, float alpha, ImmutableArray<SpellLight> spellLights = default)
     {
         if (drawn is DrawnFace face)
         {
-            PaintFace(canvas, face, now, clock, alpha);
+            PaintFace(canvas, face, now, clock, alpha, spellLights);
         }
         else if (drawn is DrawnSprite sprite)
         {
-            PaintSprite(canvas, sprite, now, clock, alpha);
+            PaintSprite(canvas, sprite, now, clock, alpha, spellLights);
         }
     }
 
@@ -300,14 +302,25 @@ internal sealed class BoardPainter
             baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
-    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock, float alpha = 1f)
+    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock, float alpha = 1f, ImmutableArray<SpellLight> spellLights = default)
     {
         LightUp(drawn, now);
+        var painted = drawn.Colours;
+        if (!spellLights.IsDefaultOrEmpty)
+        {
+            for (var i = 0; i < painted.Length; i++)
+            {
+                var baseColour = painted[i];
+                var lit = SpellLighting.Apply(new Rgb(baseColour.R, baseColour.G, baseColour.B), drawn.Lit.Face.Points[i], spellLights, drawn.Lit.Face.TintAt(i));
+                drawn.Dynamic[i] = new Color(lit.R, lit.G, lit.B, baseColour.A);
+            }
+            painted = drawn.Dynamic;
+        }
         var uvs = drawn.OneFrame ? drawn.Uvs : FrameUvs(drawn, clock);
         if (alpha < 1f)
         {
             // Only what's fading comes here, and it fades as whole faces: nothing else in a frame pays for this.
-            var colours = drawn.Colours.Select(c => new Color(c.R, c.G, c.B, c.A * alpha)).ToArray();
+            var colours = painted.Select(c => new Color(c.R, c.G, c.B, c.A * alpha)).ToArray();
             canvas.DrawPrimitive(drawn.Points, colours, uvs, drawn.Texture);
             if (drawn.Glow is not null)
             {
@@ -319,11 +332,11 @@ internal sealed class BoardPainter
         {
             if (drawn.Texture is null)
             {
-                canvas.DrawColoredPolygon(drawn.Points, drawn.Colours[0]);
+                canvas.DrawColoredPolygon(drawn.Points, painted[0]);
             }
             else
             {
-                canvas.DrawPrimitive(drawn.Points, drawn.Colours, uvs, drawn.Texture);
+                canvas.DrawPrimitive(drawn.Points, painted, uvs, drawn.Texture);
             }
         }
         if (drawn.Glow is not null)
@@ -364,12 +377,18 @@ internal sealed class BoardPainter
         return drawn.FrameUvs;
     }
 
-    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock, float alpha = 1f)
+    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock, float alpha = 1f, ImmutableArray<SpellLight> spellLights = default)
     {
         if (drawn.Texture is not null)
         {
             var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Source.X, 0), drawn.Source);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
+            if (!spellLights.IsDefaultOrEmpty)
+            {
+                var at = drawn.Target.GetCenter();
+                var lit = SpellLighting.Apply(new Rgb(light.R, light.G, light.B), new System.Numerics.Vector2(at.X, at.Y), spellLights);
+                light = new Color(lit.R, lit.G, lit.B, light.A);
+            }
             if (alpha < 1f)
             {
                 light = new Color(light.R, light.G, light.B, light.A * alpha);

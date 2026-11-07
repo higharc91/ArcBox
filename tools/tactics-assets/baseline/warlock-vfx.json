@@ -1,0 +1,136 @@
+{
+  "warlock.eldritch_blast": {
+    "anim": "characters.point",
+    "projectile": "projectiles.eldritch",
+    "fx": "fx.force.eldritch"
+  },
+  "warlock.hex": {
+    "anim": "characters.point",
+    "fx": "fx.hex.shadow"
+  },
+  "warlock.chill_touch": {
+    "anim": "characters.point",
+    "fx": "fx.necrotic.grave"
+  },
+  "warlock.poison_spray": {
+    "anim": "characters.point",
+    "fx": "fx.toxin.venom"
+  },
+  "warlock.fiendish_vigor": {
+    "anim": "characters.buff",
+    "fx": "fx.aura.shadow"
+  },
+  "warlock.maddening_hex": {
+    "anim": "characters.point",
+    "fx": "fx.psychic.dread"
+  },
+  "warlock.one_with_shadows": {
+    "anim": "characters.dodge",
+    "fx": "fx.misty.shadow"
+  },
+  "warlock.shroud_of_shadow": {
+    "anim": "characters.buff",
+    "fx": "fx.misty.shadow"
+  },
+  "warlock.arms_of_hadar": {
+    "anim": "characters.slam",
+    "fx": "fx.necrotic.grave"
+  },
+  "warlock.armor_of_agathys": {
+    "anim": "characters.buff",
+    "fx": "fx.frost.frost"
+  },
+  "warlock.hellish_rebuke": {
+    "anim": "characters.cast",
+    "fx": "fx.flames.hellfire"
+  },
+  "warlock.witch_bolt": {
+    "anim": "characters.point",
+    "fx": "fx.shock.violet",
+    "projectile": "projectiles.lightning"
+  },
+  "warlock.shatter": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_shatter.thunder"
+  },
+  "warlock.misty_step": {
+    "anim": "characters.cast",
+    "fx": "fx.misty.shadow"
+  },
+  "warlock.hold_person": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.shadow"
+  },
+  "warlock.darkness": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.shadow"
+  },
+  "warlock.hunger_of_hadar": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_hunger_of_hadar.void"
+  },
+  "warlock.counterspell": {
+    "anim": "characters.point",
+    "fx": "fx.dispel.shadow"
+  },
+  "warlock.vampiric_touch": {
+    "anim": "characters.point",
+    "fx": "fx.necrotic.blood"
+  },
+  "warlock.blight": {
+    "anim": "characters.cast",
+    "fx": "signature.spell_blight.rot"
+  },
+  "warlock.dimension_door": {
+    "anim": "characters.cast",
+    "fx": "fx.misty.shadow"
+  },
+  "warlock.shadow_of_moil": {
+    "anim": "characters.channel",
+    "fx": "fx.aura.shadow"
+  },
+  "warlock.synaptic_static": {
+    "anim": "characters.summon",
+    "fx": "signature.spell_synaptic_static.mind"
+  },
+  "warlock.hold_monster": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.shadow"
+  },
+  "hexblade.hexblades_curse": {
+    "anim": "characters.point",
+    "fx": "signature.hexblade_cursed_edge.hex"
+  },
+  "hexblade.cursed_slash": {
+    "anim": "characters.attack",
+    "fx": "signature.hexblade_cursed_edge.hex"
+  },
+  "hexblade.armor_of_hexes": {
+    "anim": "characters.block",
+    "fx": "signature.hexblade_cursed_edge.fel"
+  },
+  "fiendbound.hellfire_surge": {
+    "anim": "characters.summon",
+    "fx": "signature.fiendbound_infernal_gate.hellfire"
+  },
+  "fiendbound.hurl_through_hell": {
+    "anim": "characters.point",
+    "fx": "signature.fiendbound_infernal_gate.hellfire"
+  },
+  "void.rift_step": {
+    "anim": "characters.cast",
+    "fx": "signature.void_rift_step.void"
+  },
+  "void.gravitational_pull": {
+    "anim": "characters.summon",
+    "fx": "signature.void_rift_step.void"
+  },
+  "void.entropic_ward": {
+    "anim": "characters.block",
+    "fx": "signature.void_rift_step.void"
+  },
+  "void.abyssal_singularity": {
+    "anim": "characters.summon",
+    "fx": "signature.void_rift_step.void"
+  }
+}

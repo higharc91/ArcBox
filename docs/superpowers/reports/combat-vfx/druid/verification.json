@@ -1,0 +1,42 @@
+{
+  "baseline": "a4208a682d52cb7956dfd35d391cff49bbe13c38",
+  "abilityGameplayDefinitionsUnchanged": 34,
+  "allPassiveDataUnchanged": true,
+  "monsterGameplayDefinitionsUnchanged": 4,
+  "monsterSpriteChanges": [
+    {
+      "id": "wolf",
+      "before": "beasts.wolf.wildshape",
+      "after": "beasts.wolf.druid"
+    },
+    {
+      "id": "bear",
+      "before": "beasts.bear.wildshape",
+      "after": "beasts.bear.druid"
+    },
+    {
+      "id": "dire_wolf",
+      "before": "beasts.wolf.wildshape",
+      "after": "beasts.wolf.druid_dire"
+    },
+    {
+      "id": "elder_bear",
+      "before": "beasts.bear.wildshape",
+      "after": "beasts.bear.druid_elder"
+    }
+  ],
+  "allOriginalCreatureEntriesAndSourceAtlasesUnchanged": true,
+  "sourceAtlasSha256": {
+    "content/tactics/base/creatures/wolf_grey.png": "1b328f20b4a0b06abdcaf4a70b841f490567639348bbc51383af532e4f691f59",
+    "content/tactics/base/creatures/wolf_dire.png": "be0a7267321b4306cf228893bfb367d95b3e126a857aa31ca0a67a0ac7c0c9b5",
+    "content/tactics/base/creatures/bear_brown.png": "3aa36d952b71854846a99f3df51d32fcb54ecfff453fb3719df0432faef9e1ae",
+    "content/tactics/base/creatures/wolf_wildshape.png": "7156ae6a286f9de1495a31728485ba04bbccab3d2880cfd7fb233ef7c82a1848",
+    "content/tactics/base/creatures/bear_wildshape.png": "13204a1df9fa19674fd7da4de2372f2682ef8d563f247b3b782b8fa4819fde28"
+  },
+  "phoneFilesAndFixturesUnchanged": true,
+  "replaysAndGoldensUnchanged": true,
+  "audioClipsUnchanged": true,
+  "otherClassAtlasesUnchanged": true,
+  "rulesAiImplementationUnchanged": true,
+  "workflowFilesUnchanged": true
+}

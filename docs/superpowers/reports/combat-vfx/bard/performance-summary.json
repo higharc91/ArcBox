@@ -1,0 +1,226 @@
+{
+  "method": "Median of 35 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 21.1478,
+  "afterMs": 21.4184,
+  "changePercent": 1.2795657231484903,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "valor.combat_inspiration",
+    "beforeMs": 20.518,
+    "afterMs": 22.3193,
+    "changePercent": 8.779120772005067
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 20.9021,
+      "afterMs": 20.8254,
+      "changePercent": -0.3669487754819012
+    },
+    {
+      "id": "bard.bardic_inspiration",
+      "beforeMs": 20.8506,
+      "afterMs": 20.4512,
+      "changePercent": -1.9155324067412938
+    },
+    {
+      "id": "bard.cure_wounds",
+      "beforeMs": 20.4155,
+      "afterMs": 20.8008,
+      "changePercent": 1.8872915186990191
+    },
+    {
+      "id": "bard.dissonant_whispers",
+      "beforeMs": 20.3612,
+      "afterMs": 20.363,
+      "changePercent": 0.008840343398230921
+    },
+    {
+      "id": "bard.faerie_fire",
+      "beforeMs": 20.8861,
+      "afterMs": 21.3285,
+      "changePercent": 2.1181551366698415
+    },
+    {
+      "id": "bard.healing_word",
+      "beforeMs": 20.3014,
+      "afterMs": 20.047,
+      "changePercent": -1.2531155486813716
+    },
+    {
+      "id": "bard.heroism",
+      "beforeMs": 20.4854,
+      "afterMs": 20.8478,
+      "changePercent": 1.769064797367892
+    },
+    {
+      "id": "bard.minor_illusion",
+      "beforeMs": 19.523,
+      "afterMs": 20.2566,
+      "changePercent": 3.7576192183578216
+    },
+    {
+      "id": "bard.thunderclap",
+      "beforeMs": 20.5304,
+      "afterMs": 22.2637,
+      "changePercent": 8.442602189923232
+    },
+    {
+      "id": "bard.thunderwave",
+      "beforeMs": 21.735,
+      "afterMs": 22.8255,
+      "changePercent": 5.017253278122857
+    },
+    {
+      "id": "bard.vicious_mockery",
+      "beforeMs": 20.398,
+      "afterMs": 20.9703,
+      "changePercent": 2.8056672222767087
+    },
+    {
+      "id": "bard.song_of_rest",
+      "beforeMs": 21.6,
+      "afterMs": 21.9715,
+      "changePercent": 1.719907407407395
+    },
+    {
+      "id": "bard.hold_person",
+      "beforeMs": 20.7585,
+      "afterMs": 20.0302,
+      "changePercent": -3.508442324830796
+    },
+    {
+      "id": "bard.lesser_restoration",
+      "beforeMs": 20.5172,
+      "afterMs": 21.6677,
+      "changePercent": 5.607490300820772
+    },
+    {
+      "id": "bard.shatter",
+      "beforeMs": 22.0683,
+      "afterMs": 22.7809,
+      "changePercent": 3.2290661265253595
+    },
+    {
+      "id": "bard.silence",
+      "beforeMs": 21.9823,
+      "afterMs": 21.9214,
+      "changePercent": -0.27704107395495337
+    },
+    {
+      "id": "bard.silence.turn",
+      "beforeMs": 20.4318,
+      "afterMs": 21.4184,
+      "changePercent": 4.828747344825213
+    },
+    {
+      "id": "bard.dispel_magic",
+      "beforeMs": 20.7067,
+      "afterMs": 20.6803,
+      "changePercent": -0.12749496539768979
+    },
+    {
+      "id": "bard.font_of_inspiration",
+      "beforeMs": 19.4011,
+      "afterMs": 20.602,
+      "changePercent": 6.189855214395057
+    },
+    {
+      "id": "bard.hypnotic_pattern",
+      "beforeMs": 22.571,
+      "afterMs": 22.1582,
+      "changePercent": -1.828895485357318
+    },
+    {
+      "id": "bard.mass_healing_word",
+      "beforeMs": 21.897,
+      "afterMs": 21.8612,
+      "changePercent": -0.1634927158971511
+    },
+    {
+      "id": "bard.countercharm",
+      "beforeMs": 22.1188,
+      "afterMs": 22.7424,
+      "changePercent": 2.819321120494789
+    },
+    {
+      "id": "bard.dimension_door",
+      "beforeMs": 21.1055,
+      "afterMs": 21.0655,
+      "changePercent": -0.18952405771006653
+    },
+    {
+      "id": "bard.greater_invisibility",
+      "beforeMs": 21.1478,
+      "afterMs": 20.105,
+      "changePercent": -4.931009372133266
+    },
+    {
+      "id": "bard.greater_restoration",
+      "beforeMs": 21.4717,
+      "afterMs": 20.5308,
+      "changePercent": -4.382047066603945
+    },
+    {
+      "id": "bard.hold_monster",
+      "beforeMs": 21.3173,
+      "afterMs": 21.4819,
+      "changePercent": 0.7721428135833319
+    },
+    {
+      "id": "lore.cutting_words",
+      "beforeMs": 21.4199,
+      "afterMs": 21.2842,
+      "changePercent": -0.6335230323204155
+    },
+    {
+      "id": "lore.counterspell",
+      "beforeMs": 21.5634,
+      "afterMs": 20.632,
+      "changePercent": -4.319355945722847
+    },
+    {
+      "id": "lore.magical_secrets",
+      "beforeMs": 22.6482,
+      "afterMs": 23.9716,
+      "changePercent": 5.843289974479204
+    },
+    {
+      "id": "lore.peerless_skill",
+      "beforeMs": 22.2073,
+      "afterMs": 22.1295,
+      "changePercent": -0.3503352501204593
+    },
+    {
+      "id": "siren.alluring_verse",
+      "beforeMs": 21.7023,
+      "afterMs": 22.8365,
+      "changePercent": 5.226174184303045
+    },
+    {
+      "id": "siren.enthralling_aria",
+      "beforeMs": 22.3336,
+      "afterMs": 24.276,
+      "changePercent": 8.697209585557175
+    },
+    {
+      "id": "siren.sirens_call",
+      "beforeMs": 21.7112,
+      "afterMs": 23.5776,
+      "changePercent": 8.59648476362429
+    },
+    {
+      "id": "valor.combat_inspiration",
+      "beforeMs": 20.518,
+      "afterMs": 22.3193,
+      "changePercent": 8.779120772005067
+    },
+    {
+      "id": "valor.battle_magic",
+      "beforeMs": 21.5343,
+      "afterMs": 21.6826,
+      "changePercent": 0.6886687749311449
+    }
+  ]
+}

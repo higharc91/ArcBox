@@ -1,0 +1,362 @@
+{
+  "baseline": "0e96d34360e71f22497286098ca1fe77cad3af8e",
+  "beforeBytes": 215875877,
+  "afterBytes": 216480389,
+  "deltaBytes": 604512,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 13688,
+      "after": 14392,
+      "delta": 704
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_aid_healing.png",
+      "before": 0,
+      "after": 2065,
+      "delta": 2065
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_avatar_of_battle_holy.png",
+      "before": 0,
+      "after": 3564,
+      "delta": 3564
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_bane_grave.png",
+      "before": 0,
+      "after": 668,
+      "delta": 668
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_banishment_holy.png",
+      "before": 0,
+      "after": 1836,
+      "delta": 1836
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_bestow_curse_grave.png",
+      "before": 0,
+      "after": 2021,
+      "delta": 2021
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_bless_holy.png",
+      "before": 0,
+      "after": 913,
+      "delta": 913
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_blindness_grave.png",
+      "before": 0,
+      "after": 1319,
+      "delta": 1319
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_burning_luminescence_radiant.png",
+      "before": 0,
+      "after": 790,
+      "delta": 790
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_command_holy.png",
+      "before": 0,
+      "after": 744,
+      "delta": 744
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_corona_of_light_radiant.png",
+      "before": 0,
+      "after": 10938,
+      "delta": 10938
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_cure_wounds_healing.png",
+      "before": 0,
+      "after": 1819,
+      "delta": 1819
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_death_ward_holy.png",
+      "before": 0,
+      "after": 2300,
+      "delta": 2300
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_death_ward_rescue_holy.png",
+      "before": 0,
+      "after": 1542,
+      "delta": 1542
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_dispel_magic_holy.png",
+      "before": 0,
+      "after": 2106,
+      "delta": 2106
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_divine_intervention_healing.png",
+      "before": 0,
+      "after": 3873,
+      "delta": 3873
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_divine_spark_healing.png",
+      "before": 0,
+      "after": 1856,
+      "delta": 1856
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_divine_strike_radiant.png",
+      "before": 0,
+      "after": 395,
+      "delta": 395
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_flame_strike_fire.png",
+      "before": 0,
+      "after": 5890,
+      "delta": 5890
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_greater_restoration_healing.png",
+      "before": 0,
+      "after": 10621,
+      "delta": 10621
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_guided_strike_holy.png",
+      "before": 0,
+      "after": 1816,
+      "delta": 1816
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_guiding_bolt_radiant.png",
+      "before": 0,
+      "after": 760,
+      "delta": 760
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_guiding_bolt_shot_radiant.png",
+      "before": 0,
+      "after": 329,
+      "delta": 329
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_healing_word_healing.png",
+      "before": 0,
+      "after": 2432,
+      "delta": 2432
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_hold_person_holy.png",
+      "before": 0,
+      "after": 1036,
+      "delta": 1036
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_inflict_wounds_grave.png",
+      "before": 0,
+      "after": 235,
+      "delta": 235
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_lesser_restoration_healing.png",
+      "before": 0,
+      "after": 5303,
+      "delta": 5303
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_mass_cure_wounds_healing.png",
+      "before": 0,
+      "after": 5026,
+      "delta": 5026
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_mass_healing_word_healing.png",
+      "before": 0,
+      "after": 2882,
+      "delta": 2882
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_mass_revival_healing.png",
+      "before": 0,
+      "after": 5100,
+      "delta": 5100
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_preserve_life_healing.png",
+      "before": 0,
+      "after": 2936,
+      "delta": 2936
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_radiance_of_the_dawn_radiant.png",
+      "before": 0,
+      "after": 9381,
+      "delta": 9381
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_resistance_holy.png",
+      "before": 0,
+      "after": 620,
+      "delta": 620
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_sacred_flame_radiant.png",
+      "before": 0,
+      "after": 1061,
+      "delta": 1061
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_sear_undead_radiant.png",
+      "before": 0,
+      "after": 9228,
+      "delta": 9228
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_shield_of_faith_holy.png",
+      "before": 0,
+      "after": 1026,
+      "delta": 1026
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_spirit_guardians_radiant.png",
+      "before": 0,
+      "after": 6756,
+      "delta": 6756
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_spiritual_weapon_force.png",
+      "before": 0,
+      "after": 1912,
+      "delta": 1912
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_toll_the_dead_grave.png",
+      "before": 0,
+      "after": 817,
+      "delta": 817
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_turn_undead_radiant.png",
+      "before": 0,
+      "after": 6751,
+      "delta": 6751
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_war_priest_radiant.png",
+      "before": 0,
+      "after": 1724,
+      "delta": 1724
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_warding_flare_radiant.png",
+      "before": 0,
+      "after": 1250,
+      "delta": 1250
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_word_of_radiance_radiant.png",
+      "before": 0,
+      "after": 1415,
+      "delta": 1415
+    },
+    {
+      "path": "content/tactics/base/fx/cleric_word_of_renewal_healing.png",
+      "before": 0,
+      "after": 1767,
+      "delta": 1767
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 101251,
+      "after": 124207,
+      "delta": 22956
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/cleric.json",
+      "before": 21309,
+      "after": 22211,
+      "delta": 902
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 41203,
+      "after": 41951,
+      "delta": 748
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_cleric.png",
+      "before": 443562,
+      "after": 484686,
+      "delta": 41124
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_cleric.png",
+      "before": 434678,
+      "after": 477052,
+      "delta": 42374
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_cleric.png",
+      "before": 368927,
+      "after": 406405,
+      "delta": 37478
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_cleric.png",
+      "before": 444148,
+      "after": 486532,
+      "delta": 42384
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_cleric.png",
+      "before": 386445,
+      "after": 423801,
+      "delta": 37356
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_cleric.png",
+      "before": 417830,
+      "after": 460640,
+      "delta": 42810
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_cleric.png",
+      "before": 435096,
+      "after": 476255,
+      "delta": 41159
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_cleric.png",
+      "before": 429132,
+      "after": 473138,
+      "delta": 44006
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_cleric.png",
+      "before": 388351,
+      "after": 425923,
+      "delta": 37572
+    },
+    {
+      "path": "content/tactics/base/tactical/human_cleric.png",
+      "before": 425329,
+      "after": 467246,
+      "delta": 41917
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 15334,
+      "after": 16226,
+      "delta": 892
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_cleric.png",
+      "before": 480649,
+      "after": 523956,
+      "delta": 43307
+    }
+  ]
+}

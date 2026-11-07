@@ -79,6 +79,22 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     public UnitAnim Anim(string key)
     {
         var name = key[(key.LastIndexOf('.') + 1)..];
+        if (!Anims.ContainsKey(name)) name = name switch
+        {
+            "wizard_bolt" => "point", "wizard_weave" => "channel", "wizard_ward" => "buff",
+            "wizard_nova" => "summon", "wizard_stomp" => "slam",
+            "sorcerer_fling" => "point", "sorcerer_surge" => "summon",
+            "sorcerer_focus" => "channel", "sorcerer_breath" => "cast",
+            "warlock_pact" => "channel", "warlock_lash" or "warlock_release" => "point",
+            "warlock_rift" => "summon", "warlock_blade" => "attack",
+            "cleric_prayer" => "pray", "cleric_restore" => "buff",
+            "cleric_judgement" => "summon", "cleric_strike" => "attack",
+            "druid_shape" => "channel", "druid_roots" => "summon", "druid_gale" => "cast",
+            "druid_mend" => "buff", "druid_lash" => "point",
+            "paladin_oath" => "pray", "paladin_mercy" => "buff", "paladin_judgement" => "summon",
+            "paladin_strike" => "attack", "paladin_guard" => "block",
+            "bard_play" => "channel", "bard_verse" => "talk", "bard_crescendo" => "summon", "bard_lore" => "point", "bard_valor" => "attack", _ => name,
+        };
         return Anims.GetValueOrDefault(name)
             ?? (SpellPoses.Contains(name) ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)
             ?? (name == Dodge ? null : Anims.GetValueOrDefault(Attack))
@@ -499,11 +515,20 @@ public sealed class UnitArt
             var root = tactical.Root;
             var columns = root.GetProperty("columns").GetInt32();
             var count = root.GetProperty("framesPerDirection").GetInt32();
+            var animations = tactical.Anims;
+            var role = tacticalKey[(tacticalKey.LastIndexOf('_') + 1)..];
+            if (root.TryGetProperty("classes", out var classes) && classes.TryGetProperty(role, out var custom))
+            {
+                count = custom.GetProperty("framesPerDirection").GetInt32();
+                var extra = custom.GetProperty("anims");
+                animations = animations.SetItems(extra.EnumerateObject().Select(a =>
+                    new KeyValuePair<string, UnitAnim>(a.Name, Anim(extra, a.Name))));
+            }
             var headTop = _tacticalHeads[tacticalKey];
             var pixelScale = root.GetProperty("pixelScale").GetSingle();
             var effectShift = (int)MathF.Round(29 - (tactical.AnchorY - headTop) * pixelScale);
             return new UnitSprite($"tactical/{tacticalKey}.png", tactical.Width, tactical.Height, tactical.AnchorX, tactical.AnchorY,
-                headTop, tactical.Idle, tactical.Down, effectShift, tactical.Anims)
+                headTop, tactical.Idle, tactical.Down, effectShift, animations)
             {
                 PixelScale = pixelScale, Columns = columns,
                 RowsPerDirection = (count + columns - 1) / columns,

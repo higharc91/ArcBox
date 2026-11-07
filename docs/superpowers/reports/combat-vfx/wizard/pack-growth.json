@@ -1,0 +1,434 @@
+{
+  "baseline": "15ecd7a16bc0c094c97028099cc5b70aa4682bc3",
+  "beforeBytes": 213500808,
+  "afterBytes": 214640298,
+  "deltaBytes": 1139490,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 11433,
+      "after": 12243,
+      "delta": 810
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 21369,
+      "after": 50235,
+      "delta": 28866
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_accelerate_haste.png",
+      "before": 0,
+      "after": 2317,
+      "delta": 2317
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_acid_splash_acid.png",
+      "before": 0,
+      "after": 1025,
+      "delta": 1025
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_arcane_recovery_arcane.png",
+      "before": 0,
+      "after": 2638,
+      "delta": 2638
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_banishment_arcane.png",
+      "before": 0,
+      "after": 837,
+      "delta": 837
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_blight_grave.png",
+      "before": 0,
+      "after": 2805,
+      "delta": 2805
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_blur_mist.png",
+      "before": 0,
+      "after": 1238,
+      "delta": 1238
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_burning_hands_fire.png",
+      "before": 0,
+      "after": 17035,
+      "delta": 17035
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_chill_touch_grave.png",
+      "before": 0,
+      "after": 880,
+      "delta": 880
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_chromatic_orb_shot_storm.png",
+      "before": 0,
+      "after": 355,
+      "delta": 355
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_chromatic_orb_storm.png",
+      "before": 0,
+      "after": 3172,
+      "delta": 3172
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_cloudkill_venom.png",
+      "before": 0,
+      "after": 9715,
+      "delta": 9715
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_cone_of_cold_frost.png",
+      "before": 0,
+      "after": 7410,
+      "delta": 7410
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_counterspell_arcane.png",
+      "before": 0,
+      "after": 2018,
+      "delta": 2018
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_dispel_magic_arcane.png",
+      "before": 0,
+      "after": 1969,
+      "delta": 1969
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_empowered_evocation_force.png",
+      "before": 0,
+      "after": 1775,
+      "delta": 1775
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_fire_bolt_fire.png",
+      "before": 0,
+      "after": 554,
+      "delta": 554
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_fire_bolt_shot_fire.png",
+      "before": 0,
+      "after": 329,
+      "delta": 329
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_fireball_fire.png",
+      "before": 0,
+      "after": 10697,
+      "delta": 10697
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_fireball_shot_fire.png",
+      "before": 0,
+      "after": 221,
+      "delta": 221
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_grease_arcane.png",
+      "before": 0,
+      "after": 1664,
+      "delta": 1664
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_greater_invisibility_mist.png",
+      "before": 0,
+      "after": 593,
+      "delta": 593
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_haste_haste.png",
+      "before": 0,
+      "after": 2106,
+      "delta": 2106
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_hold_monster_arcane.png",
+      "before": 0,
+      "after": 2397,
+      "delta": 2397
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_hold_person_arcane.png",
+      "before": 0,
+      "after": 1337,
+      "delta": 1337
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_hypnotic_pattern_psychic.png",
+      "before": 0,
+      "after": 14689,
+      "delta": 14689
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_ice_storm_frost.png",
+      "before": 0,
+      "after": 10320,
+      "delta": 10320
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_invisibility_mist.png",
+      "before": 0,
+      "after": 593,
+      "delta": 593
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_lightning_bolt_storm.png",
+      "before": 0,
+      "after": 3403,
+      "delta": 3403
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_mage_armor_arcane.png",
+      "before": 0,
+      "after": 1634,
+      "delta": 1634
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_magic_missile_force.png",
+      "before": 0,
+      "after": 1468,
+      "delta": 1468
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_magic_missile_shot_force.png",
+      "before": 0,
+      "after": 481,
+      "delta": 481
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_misty_step_mist.png",
+      "before": 0,
+      "after": 823,
+      "delta": 823
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_poison_spray_venom.png",
+      "before": 0,
+      "after": 2471,
+      "delta": 2471
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_raise_earth_earth.png",
+      "before": 0,
+      "after": 2162,
+      "delta": 2162
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_ray_of_frost_frost.png",
+      "before": 0,
+      "after": 634,
+      "delta": 634
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_ray_of_frost_shot_frost.png",
+      "before": 0,
+      "after": 327,
+      "delta": 327
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_ray_of_sickness_shot_sickness.png",
+      "before": 0,
+      "after": 351,
+      "delta": 351
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_ray_of_sickness_sickness.png",
+      "before": 0,
+      "after": 2567,
+      "delta": 2567
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_scorching_ray_fire.png",
+      "before": 0,
+      "after": 1432,
+      "delta": 1432
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_scorching_ray_shot_fire.png",
+      "before": 0,
+      "after": 359,
+      "delta": 359
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_sculpted_inferno_fire.png",
+      "before": 0,
+      "after": 8294,
+      "delta": 8294
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_sculpted_nova_fire.png",
+      "before": 0,
+      "after": 13296,
+      "delta": 13296
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_shatter_thunder.png",
+      "before": 0,
+      "after": 9523,
+      "delta": 9523
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_shield_arcane.png",
+      "before": 0,
+      "after": 2667,
+      "delta": 2667
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_shocking_grasp_storm.png",
+      "before": 0,
+      "after": 1381,
+      "delta": 1381
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_sink_earth_earth.png",
+      "before": 0,
+      "after": 2606,
+      "delta": 2606
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_sleep_fey.png",
+      "before": 0,
+      "after": 2065,
+      "delta": 2065
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_slow_slow.png",
+      "before": 0,
+      "after": 2037,
+      "delta": 2037
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_stone_spire_earth.png",
+      "before": 0,
+      "after": 4446,
+      "delta": 4446
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_temporal_stasis_slow.png",
+      "before": 0,
+      "after": 2551,
+      "delta": 2551
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_thunderwave_thunder.png",
+      "before": 0,
+      "after": 7756,
+      "delta": 7756
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_time_shift_haste.png",
+      "before": 0,
+      "after": 2793,
+      "delta": 2793
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_tremor_earth.png",
+      "before": 0,
+      "after": 4143,
+      "delta": 4143
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_wall_of_fire_fire.png",
+      "before": 0,
+      "after": 10126,
+      "delta": 10126
+    },
+    {
+      "path": "content/tactics/base/fx/wizard_web_silk.png",
+      "before": 0,
+      "after": 2729,
+      "delta": 2729
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/wizard.json",
+      "before": 27096,
+      "after": 27936,
+      "delta": 840
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 39415,
+      "after": 40057,
+      "delta": 642
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_wizard.png",
+      "before": 482063,
+      "after": 565941,
+      "delta": 83878
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_wizard.png",
+      "before": 487303,
+      "after": 574390,
+      "delta": 87087
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_wizard.png",
+      "before": 431220,
+      "after": 511148,
+      "delta": 79928
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_wizard.png",
+      "before": 483536,
+      "after": 567646,
+      "delta": 84110
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_wizard.png",
+      "before": 423412,
+      "after": 500078,
+      "delta": 76666
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_wizard.png",
+      "before": 464117,
+      "after": 548306,
+      "delta": 84189
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_wizard.png",
+      "before": 478352,
+      "after": 562721,
+      "delta": 84369
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_wizard.png",
+      "before": 466552,
+      "after": 552147,
+      "delta": 85595
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_wizard.png",
+      "before": 423281,
+      "after": 497777,
+      "delta": 74496
+    },
+    {
+      "path": "content/tactics/base/tactical/human_wizard.png",
+      "before": 472261,
+      "after": 554555,
+      "delta": 82294
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 12163,
+      "after": 13417,
+      "delta": 1254
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_wizard.png",
+      "before": 522058,
+      "after": 611310,
+      "delta": 89252
+    }
+  ]
+}

@@ -435,6 +435,389 @@
       ],
       "fps": 8,
       "loop": false
+    },
+    "wizard_bolt": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "wizard_weave": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "wizard_ward": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "wizard_nova": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "wizard_stomp": {
+      "frames": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "sorcerer_fling": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "sorcerer_surge": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "sorcerer_focus": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "sorcerer_breath": {
+      "frames": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "warlock_pact": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "warlock_lash": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "warlock_rift": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "warlock_blade": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "warlock_release": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "cleric_prayer": {
+      "frames": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143
+      ],
+      "fps": 8,
+      "loop": false
+    },
+    "cleric_restore": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "cleric_judgement": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "cleric_strike": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "druid_roots": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "druid_gale": {
+      "frames": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "druid_mend": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "druid_lash": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "druid_shape": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "paladin_oath": {
+      "frames": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143
+      ],
+      "fps": 8,
+      "loop": false
+    },
+    "paladin_mercy": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "paladin_judgement": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "paladin_strike": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "paladin_guard": {
+      "frames": [
+        70,
+        71,
+        72
+      ],
+      "fps": 8,
+      "loop": false
+    },
+    "bard_play": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "bard_verse": {
+      "frames": [
+        108,
+        109,
+        110,
+        111
+      ],
+      "fps": 5,
+      "loop": true
+    },
+    "bard_crescendo": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "bard_lore": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "bard_valor": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
     }
   },
   "builds": {

@@ -98,7 +98,9 @@
         "dire": "wolf_dire.png",
         "frost": "wolf_frost.png",
         "wildshape": "wolf_wildshape.png",
-        "alpha": "wolf_alpha.png"
+        "alpha": "wolf_alpha.png",
+        "druid": "wolf_wildshape.png",
+        "druid_dire": "wolf_wildshape.png"
       },
       "tags": [
         "beast",
@@ -124,7 +126,9 @@
         "black": "bear_black.png",
         "polar": "bear_polar.png",
         "wildshape": "bear_wildshape.png",
-        "undead": "bear_undead.png"
+        "undead": "bear_undead.png",
+        "druid": "bear_wildshape.png",
+        "druid_elder": "bear_wildshape.png"
       },
       "tags": [
         "beast",

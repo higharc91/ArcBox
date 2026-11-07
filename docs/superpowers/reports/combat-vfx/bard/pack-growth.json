@@ -1,0 +1,308 @@
+{
+  "baseline": "895e6d5ca8ca45c39a4e0a3a018a4dfc7aaac553",
+  "beforeBytes": 219354758,
+  "afterBytes": 219859365,
+  "deltaBytes": 504607,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 16029,
+      "after": 16807,
+      "delta": 778
+    },
+    {
+      "path": "content/tactics/base/fx/bard_alluring_verse_charm.png",
+      "before": 0,
+      "after": 1862,
+      "delta": 1862
+    },
+    {
+      "path": "content/tactics/base/fx/bard_bardic_inspiration_gold.png",
+      "before": 0,
+      "after": 3272,
+      "delta": 3272
+    },
+    {
+      "path": "content/tactics/base/fx/bard_battle_magic_thunder.png",
+      "before": 0,
+      "after": 3293,
+      "delta": 3293
+    },
+    {
+      "path": "content/tactics/base/fx/bard_combat_inspiration_gold.png",
+      "before": 0,
+      "after": 6853,
+      "delta": 6853
+    },
+    {
+      "path": "content/tactics/base/fx/bard_countercharm_arcane.png",
+      "before": 0,
+      "after": 4344,
+      "delta": 4344
+    },
+    {
+      "path": "content/tactics/base/fx/bard_counterspell_arcane.png",
+      "before": 0,
+      "after": 5577,
+      "delta": 5577
+    },
+    {
+      "path": "content/tactics/base/fx/bard_cure_wounds_healing.png",
+      "before": 0,
+      "after": 3330,
+      "delta": 3330
+    },
+    {
+      "path": "content/tactics/base/fx/bard_cutting_words_psychic.png",
+      "before": 0,
+      "after": 2568,
+      "delta": 2568
+    },
+    {
+      "path": "content/tactics/base/fx/bard_dimension_door_arcane.png",
+      "before": 0,
+      "after": 2464,
+      "delta": 2464
+    },
+    {
+      "path": "content/tactics/base/fx/bard_dispel_magic_arcane.png",
+      "before": 0,
+      "after": 4168,
+      "delta": 4168
+    },
+    {
+      "path": "content/tactics/base/fx/bard_dissonant_whispers_psychic.png",
+      "before": 0,
+      "after": 3024,
+      "delta": 3024
+    },
+    {
+      "path": "content/tactics/base/fx/bard_enthralling_aria_charm.png",
+      "before": 0,
+      "after": 6209,
+      "delta": 6209
+    },
+    {
+      "path": "content/tactics/base/fx/bard_faerie_fire_fey.png",
+      "before": 0,
+      "after": 4440,
+      "delta": 4440
+    },
+    {
+      "path": "content/tactics/base/fx/bard_font_of_inspiration_gold.png",
+      "before": 0,
+      "after": 2307,
+      "delta": 2307
+    },
+    {
+      "path": "content/tactics/base/fx/bard_greater_invisibility_illusion.png",
+      "before": 0,
+      "after": 4465,
+      "delta": 4465
+    },
+    {
+      "path": "content/tactics/base/fx/bard_greater_restoration_healing.png",
+      "before": 0,
+      "after": 5255,
+      "delta": 5255
+    },
+    {
+      "path": "content/tactics/base/fx/bard_healing_word_healing.png",
+      "before": 0,
+      "after": 2613,
+      "delta": 2613
+    },
+    {
+      "path": "content/tactics/base/fx/bard_heroism_gold.png",
+      "before": 0,
+      "after": 3615,
+      "delta": 3615
+    },
+    {
+      "path": "content/tactics/base/fx/bard_hold_monster_arcane.png",
+      "before": 0,
+      "after": 5983,
+      "delta": 5983
+    },
+    {
+      "path": "content/tactics/base/fx/bard_hold_person_arcane.png",
+      "before": 0,
+      "after": 2720,
+      "delta": 2720
+    },
+    {
+      "path": "content/tactics/base/fx/bard_hypnotic_pattern_psychic.png",
+      "before": 0,
+      "after": 9392,
+      "delta": 9392
+    },
+    {
+      "path": "content/tactics/base/fx/bard_lesser_restoration_healing.png",
+      "before": 0,
+      "after": 2478,
+      "delta": 2478
+    },
+    {
+      "path": "content/tactics/base/fx/bard_magical_secrets_force.png",
+      "before": 0,
+      "after": 6472,
+      "delta": 6472
+    },
+    {
+      "path": "content/tactics/base/fx/bard_mass_healing_word_healing.png",
+      "before": 0,
+      "after": 6911,
+      "delta": 6911
+    },
+    {
+      "path": "content/tactics/base/fx/bard_minor_illusion_illusion.png",
+      "before": 0,
+      "after": 2683,
+      "delta": 2683
+    },
+    {
+      "path": "content/tactics/base/fx/bard_peerless_skill_arcane.png",
+      "before": 0,
+      "after": 7197,
+      "delta": 7197
+    },
+    {
+      "path": "content/tactics/base/fx/bard_shatter_thunder.png",
+      "before": 0,
+      "after": 7370,
+      "delta": 7370
+    },
+    {
+      "path": "content/tactics/base/fx/bard_silence_illusion.png",
+      "before": 0,
+      "after": 3658,
+      "delta": 3658
+    },
+    {
+      "path": "content/tactics/base/fx/bard_silence_turn_thunder.png",
+      "before": 0,
+      "after": 1099,
+      "delta": 1099
+    },
+    {
+      "path": "content/tactics/base/fx/bard_sirens_call_charm.png",
+      "before": 0,
+      "after": 9155,
+      "delta": 9155
+    },
+    {
+      "path": "content/tactics/base/fx/bard_song_of_rest_healing.png",
+      "before": 0,
+      "after": 5027,
+      "delta": 5027
+    },
+    {
+      "path": "content/tactics/base/fx/bard_thunderclap_thunder.png",
+      "before": 0,
+      "after": 1375,
+      "delta": 1375
+    },
+    {
+      "path": "content/tactics/base/fx/bard_thunderwave_thunder.png",
+      "before": 0,
+      "after": 7795,
+      "delta": 7795
+    },
+    {
+      "path": "content/tactics/base/fx/bard_vicious_mockery_psychic.png",
+      "before": 0,
+      "after": 2660,
+      "delta": 2660
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 166863,
+      "after": 184917,
+      "delta": 18054
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/bard.json",
+      "before": 17447,
+      "after": 17981,
+      "delta": 534
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 42777,
+      "after": 43430,
+      "delta": 653
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_bard.png",
+      "before": 360824,
+      "after": 390400,
+      "delta": 29576
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_bard.png",
+      "before": 381232,
+      "after": 413966,
+      "delta": 32734
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_bard.png",
+      "before": 308406,
+      "after": 337275,
+      "delta": 28869
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_bard.png",
+      "before": 371107,
+      "after": 401979,
+      "delta": 30872
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_bard.png",
+      "before": 334010,
+      "after": 362257,
+      "delta": 28247
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_bard.png",
+      "before": 345749,
+      "after": 376829,
+      "delta": 31080
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_bard.png",
+      "before": 370801,
+      "after": 401072,
+      "delta": 30271
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_bard.png",
+      "before": 346265,
+      "after": 376814,
+      "delta": 30549
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_bard.png",
+      "before": 334428,
+      "after": 363371,
+      "delta": 28943
+    },
+    {
+      "path": "content/tactics/base/tactical/human_bard.png",
+      "before": 365533,
+      "after": 394659,
+      "delta": 29126
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 18397,
+      "after": 19472,
+      "delta": 1075
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_bard.png",
+      "before": 391221,
+      "after": 422833,
+      "delta": 31612
+    }
+  ]
+}

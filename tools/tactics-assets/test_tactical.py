@@ -17,6 +17,14 @@ from parts.tactical_art.races import fit_point
 from arcpix.canvas import Canvas
 from parts.characters import SLOTS
 from parts.tactical_art.build import bake
+from parts.wizard_casts import CASTS
+from parts.class_casts import poses_for
+from parts.sorcerer_casts import CASTS as SORCERER_CASTS
+from parts.warlock_casts import CASTS as WARLOCK_CASTS
+from parts.cleric_casts import CASTS as CLERIC_CASTS
+from parts.druid_casts import CASTS as DRUID_CASTS
+from parts.paladin_casts import CASTS as PALADIN_CASTS
+from parts.bard_casts import CASTS as BARD_CASTS
 
 
 class TacticalTests(unittest.TestCase):
@@ -32,17 +40,46 @@ class TacticalTests(unittest.TestCase):
         self.assertEqual(set(ANIMS),set(self.manifest['anims']))
         for key in expected:
             with Image.open(self.root/f'{key}.png') as im:
-                self.assertEqual((3840,2560),im.size,key)
+                self.assertEqual((3840,3200 if key.endswith('_wizard') else 2880 if key.endswith(('_sorcerer','_warlock','_cleric','_druid','_paladin','_bard')) else 2560),im.size,key)
+        custom=self.manifest['classes']['wizard']
+        self.assertEqual(223,custom['framesPerDirection'])
+        self.assertEqual(set(CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():
+            self.assertTrue(all(189<=i<223 for i in anim['frames']))
+        custom=self.manifest['classes']['sorcerer']
+        self.assertEqual(209,custom['framesPerDirection'])
+        self.assertEqual(set(SORCERER_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<209 for i in anim['frames']))
+        custom=self.manifest['classes']['warlock']
+        self.assertEqual(210,custom['framesPerDirection'])
+        self.assertEqual(set(WARLOCK_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<210 for i in anim['frames']))
+        custom=self.manifest['classes']['cleric']
+        self.assertEqual(209,custom['framesPerDirection'])
+        self.assertEqual(set(CLERIC_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<209 for i in anim['frames']))
+        custom=self.manifest['classes']['druid']
+        self.assertEqual(214,custom['framesPerDirection'])
+        self.assertEqual(set(DRUID_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<214 for i in anim['frames']))
+        custom=self.manifest['classes']['paladin']
+        self.assertEqual(214,custom['framesPerDirection'])
+        self.assertEqual(set(PALADIN_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<214 for i in anim['frames']))
+        custom=self.manifest['classes']['bard']
+        self.assertEqual(214,custom['framesPerDirection'])
+        self.assertEqual(set(BARD_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<214 for i in anim['frames']))
         for anim in self.manifest['anims'].values():
             self.assertTrue(anim['frames'])
             self.assertTrue(all(0<=i<len(frame_list()) for i in anim['frames']))
 
     def test_baked_front_and_back_frames_match_current_renderer(self):
-        poses=frame_list();rows=(len(poses)+COLUMNS-1)//COLUMNS
-        for role,race in [('fighter','human'),('wizard','dragonborn'),('cleric','dwarf'),('warlock','tiefling')]:
+        for role,race in [('fighter','human'),('wizard','dragonborn'),('sorcerer','human'),('cleric','dwarf'),('warlock','tiefling'),('druid','elf'),('paladin','half_orc'),('bard','gnome')]:
+            poses=poses_for(role);rows=(len(poses)+COLUMNS-1)//COLUMNS
             with Image.open(self.root/f'{race}_{role}.png') as sheet:
                 for back in (False,True):
-                    for index in (0,12,22,39,97,137):
+                    for index in (0,12,22,39,97,137)+(tuple(range(189,223 if role=='wizard' else 210 if role=='warlock' else 214 if role in ('druid','paladin','bard') else 209)) if role in ('wizard','sorcerer','warlock','cleric','druid','paladin','bard') else ()):
                         x=index%COLUMNS*FRAME[0];y=(int(back)*rows+index//COLUMNS)*FRAME[1]
                         actual=np.array(sheet.crop((x,y,x+FRAME[0],y+FRAME[1])))
                         expected=np.array(frame(role,race,back,poses[index][2]))
@@ -62,9 +99,10 @@ class TacticalTests(unittest.TestCase):
 
     def test_bake_is_deterministic(self):
         with tempfile.TemporaryDirectory() as root:
-            key=bake(('fighter','human',root))
-            expected=hashlib.sha256((self.root/f'{key}.png').read_bytes()).digest()
-            self.assertEqual(expected,hashlib.sha256((Path(root)/f'{key}.png').read_bytes()).digest())
+            for role in ('fighter','wizard','sorcerer','warlock','cleric','druid','paladin','bard'):
+                key=bake((role,'human',root))
+                expected=hashlib.sha256((self.root/f'{key}.png').read_bytes()).digest()
+                self.assertEqual(expected,hashlib.sha256((Path(root)/f'{key}.png').read_bytes()).digest())
 
     def test_dwarf_hair_stays_attached_to_the_head_in_every_pose(self):
         for anim,_,pose in frame_list():
@@ -135,7 +173,7 @@ class TacticalTests(unittest.TestCase):
             for role in CLASSES:
                 for back in (False,True):
                     _,layers=rest(role,race,back)
-                    for anim,_,pose in frame_list():
+                    for anim,_,pose in poses_for(role):
                         for name,definition in ATTACHMENTS[role].items():
                             if name not in layers:continue
                             source=np.r_[fit_point(definition.grip,race),1.]
@@ -155,7 +193,8 @@ class TacticalTests(unittest.TestCase):
             for role in CLASSES:
                 for back in (False,True):
                     _,layers=rest(role,race,back)
-                    for pose in poses:
+                    custom=[p for _,_,sequence in (CLERIC_CASTS if role=='cleric' else PALADIN_CASTS if role=='paladin' else BARD_CASTS if role=='bard' else DRUID_CASTS).values() for p in sequence] if role in ('cleric','druid','paladin','bard') else []
+                    for pose in poses+custom:
                         posed={}
                         for name,image in layers.items():
                             if name in ATTACHMENTS[role] or name in ('near-hand','far-arm','near-palm','far-palm'):
