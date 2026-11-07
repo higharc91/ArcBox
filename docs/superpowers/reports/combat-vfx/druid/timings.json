@@ -767,7 +767,7 @@
       "baseSeconds": 0.55,
       "posterAt": 0.1,
       "frames": 60,
-      "frameMedianMs": 66.857,
+      "frameMedianMs": 113.3453,
       "textureBytes": 166611173
     },
     {
@@ -875,7 +875,7 @@
       "baseSeconds": 0.55,
       "posterAt": 0.1,
       "frames": 60,
-      "frameMedianMs": 28.0536,
+      "frameMedianMs": 73.378,
       "textureBytes": 199891821
     },
     {
@@ -899,7 +899,7 @@
       "baseSeconds": 0.72,
       "posterAt": 0.32,
       "frames": 65,
-      "frameMedianMs": 28.2734,
+      "frameMedianMs": 184.5526,
       "textureBytes": 200856101
     },
     {
@@ -947,7 +947,7 @@
       "baseSeconds": 0.55,
       "posterAt": 0.1,
       "frames": 60,
-      "frameMedianMs": 28.7861,
+      "frameMedianMs": 163.8146,
       "textureBytes": 221987365
     },
     {
@@ -1067,7 +1067,7 @@
       "baseSeconds": 0.55,
       "posterAt": 0.1,
       "frames": 69,
-      "frameMedianMs": 28.0949,
+      "frameMedianMs": 165.1453,
       "textureBytes": 229051589
     },
     {
@@ -1079,7 +1079,7 @@
       "baseSeconds": 0.55,
       "posterAt": 0.1,
       "frames": 69,
-      "frameMedianMs": 25.7007,
+      "frameMedianMs": 137.0873,
       "textureBytes": 259914201
     },
     {
@@ -1139,7 +1139,7 @@
       "baseSeconds": 0.8,
       "posterAt": 0.44000000000000006,
       "frames": 49,
-      "frameMedianMs": 23.6124,
+      "frameMedianMs": 95.1948,
       "textureBytes": 262404105
     },
     {
@@ -1151,7 +1151,7 @@
       "baseSeconds": 0.43600000000000005,
       "posterAt": 0.24000000000000002,
       "frames": 39,
-      "frameMedianMs": 26.0622,
+      "frameMedianMs": 106.6567,
       "textureBytes": 262427317
     },
     {
@@ -1163,7 +1163,7 @@
       "baseSeconds": 0.71,
       "posterAt": 0.31375,
       "frames": 47,
-      "frameMedianMs": 24.8757,
+      "frameMedianMs": 87.0417,
       "textureBytes": 262427317
     },
     {
@@ -1175,7 +1175,7 @@
       "baseSeconds": 0.8,
       "posterAt": 0.44000000000000006,
       "frames": 49,
-      "frameMedianMs": 24.553,
+      "frameMedianMs": 73.3917,
       "textureBytes": 262427317
     },
     {
@@ -1187,7 +1187,7 @@
       "baseSeconds": 0.61,
       "posterAt": 0.24000000000000002,
       "frames": 44,
-      "frameMedianMs": 24.5994,
+      "frameMedianMs": 71.3103,
       "textureBytes": 262484941
     },
     {
@@ -1199,7 +1199,7 @@
       "baseSeconds": 0.71,
       "posterAt": 0.31375,
       "frames": 47,
-      "frameMedianMs": 23.9111,
+      "frameMedianMs": 31.7643,
       "textureBytes": 262484941
     },
     {
@@ -1211,7 +1211,7 @@
       "baseSeconds": 0.8,
       "posterAt": 0.44000000000000006,
       "frames": 49,
-      "frameMedianMs": 23.8619,
+      "frameMedianMs": 40.3443,
       "textureBytes": 262484941
     },
     {
@@ -1223,7 +1223,7 @@
       "baseSeconds": 0.75,
       "posterAt": 0.24000000000000002,
       "frames": 48,
-      "frameMedianMs": 25.3985,
+      "frameMedianMs": 59.2785,
       "textureBytes": 262527265
     },
     {
@@ -1235,7 +1235,7 @@
       "baseSeconds": 0.71,
       "posterAt": 0.31375,
       "frames": 47,
-      "frameMedianMs": 26.2108,
+      "frameMedianMs": 43.1831,
       "textureBytes": 262527265
     },
     {
@@ -1247,7 +1247,7 @@
       "baseSeconds": 0.8,
       "posterAt": 0.44000000000000006,
       "frames": 49,
-      "frameMedianMs": 23.1867,
+      "frameMedianMs": 34.8479,
       "textureBytes": 262527265
     },
     {
@@ -1259,7 +1259,7 @@
       "baseSeconds": 0.61,
       "posterAt": 0.24000000000000002,
       "frames": 44,
-      "frameMedianMs": 27.692,
+      "frameMedianMs": 29.9326,
       "textureBytes": 262605581
     },
     {
@@ -1271,7 +1271,7 @@
       "baseSeconds": 0.71,
       "posterAt": 0.31375,
       "frames": 47,
-      "frameMedianMs": 25.29,
+      "frameMedianMs": 29.8093,
       "textureBytes": 262605581
     }
   ]

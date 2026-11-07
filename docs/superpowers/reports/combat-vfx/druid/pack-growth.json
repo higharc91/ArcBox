@@ -1,8 +1,8 @@
 {
   "baseline": "a4208a682d52cb7956dfd35d391cff49bbe13c38",
   "beforeBytes": 216480389,
-  "afterBytes": 218763757,
-  "deltaBytes": 2283368,
+  "afterBytes": 218663909,
+  "deltaBytes": 2183520,
   "changes": [
     {
       "path": "content/tactics/base/beasts/manifest.json",
@@ -19,32 +19,32 @@
     {
       "path": "content/tactics/base/creatures/druid_bear.png",
       "before": 0,
-      "after": 403721,
-      "delta": 403721
+      "after": 374152,
+      "delta": 374152
     },
     {
       "path": "content/tactics/base/creatures/druid_dire_wolf.png",
       "before": 0,
-      "after": 280646,
-      "delta": 280646
+      "after": 254802,
+      "delta": 254802
     },
     {
       "path": "content/tactics/base/creatures/druid_elder_bear.png",
       "before": 0,
-      "after": 410317,
-      "delta": 410317
+      "after": 375405,
+      "delta": 375405
     },
     {
       "path": "content/tactics/base/creatures/druid_wolf.png",
       "before": 0,
-      "after": 265407,
-      "delta": 265407
+      "after": 255860,
+      "delta": 255860
     },
     {
       "path": "content/tactics/base/creatures/manifest.json",
       "before": 147485,
-      "after": 157482,
-      "delta": 9997
+      "after": 157506,
+      "delta": 10021
     },
     {
       "path": "content/tactics/base/fx/druid_ancient_canopy_healing.png",

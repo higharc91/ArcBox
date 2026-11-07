@@ -1,12 +1,12 @@
 {
-  "sourceCommit": "f6bd5a2334f9bc81d056d2fca7837f5c14fef745",
+  "sourceCommit": "82dc24e6dc45b1b5c7f3ddaf30e0afe492eac04e",
   "dotnetTests": 7265,
   "dotnetSkipped": 0,
   "dotnetBuildWarnings": 0,
   "phoneTests": 549,
   "phoneProductionBuildPassed": true,
   "nodeToolTests": 24,
-  "assetTests": 46,
+  "assetTests": 47,
   "audioTests": 9,
   "loreTests": 23,
   "focusedTests": 248,
@@ -30,10 +30,37 @@
   "losslessGalleryThumbnails": 53,
   "objectDbShutdownWarningBenchmarkRuns": {
     "before": 2,
-    "full": 2
+    "full": 3
   },
   "objectDbShutdownWarningRawCaptures": {
     "before": true,
     "full": true
-  }
+  },
+  "artCorrectionCommit": "ec4bd6ac66647a8765ab820aed3bd9f7abc05e6e",
+  "previousReviewCommit": "973287973e1b43ea0d82db5c02e84c4c927adef7",
+  "motionRegressionReproducedBeforeFix": true,
+  "affectedNativeSamplesRecaptured": 18,
+  "unaffectedNativeSamplesRetained": 35,
+  "browserMotionChecks": {
+    "forms": 4,
+    "facingsPerForm": 8,
+    "actionsPerFacing": 6,
+    "steppedFrameChecks": 768,
+    "playbackAdvances": true,
+    "pageErrors": [],
+    "playerAnchorMatchesManifest": true,
+    "playerGroundAnchor": [
+      80,
+      123
+    ],
+    "revisedLayoutPlaybackPassed": true
+  },
+  "nativeMotionBrowserPlayback": {
+    "nativeComparisons": 8,
+    "firstVideoPlaybackAdvances": true,
+    "videoWidth": 1920,
+    "videoHeight": 540,
+    "pageErrors": []
+  },
+  "focusedNativeMotionComparisons": 8
 }

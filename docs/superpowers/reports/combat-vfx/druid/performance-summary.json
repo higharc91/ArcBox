@@ -1,334 +1,334 @@
 {
   "method": "Median of 53 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
-  "beforeMs": 19.6715,
-  "afterMs": 19.9522,
-  "changePercent": 1.4269374475764485,
+  "beforeMs": 20.0988,
+  "afterMs": 20.2511,
+  "changePercent": 0.757756681990962,
   "capPercent": 10,
   "capPassed": true,
   "largestIndividual": {
-    "id": "druid.fog_cloud",
-    "beforeMs": 19.9989,
-    "afterMs": 21.3617,
-    "changePercent": 6.814374790613487
+    "id": "druid.spike_growth",
+    "beforeMs": 22.4295,
+    "afterMs": 24.3145,
+    "changePercent": 8.404110657838991
   },
   "abilities": [
     {
       "id": "common.attack",
-      "beforeMs": 20.276,
-      "afterMs": 21.2793,
-      "changePercent": 4.948214637995663
+      "beforeMs": 20.016,
+      "afterMs": 20.5455,
+      "changePercent": 2.6453836930455665
     },
     {
       "id": "druid.cure_wounds",
-      "beforeMs": 19.4457,
-      "afterMs": 19.2268,
-      "changePercent": -1.1256987405955932
+      "beforeMs": 20.1005,
+      "afterMs": 19.7931,
+      "changePercent": -1.5293151911644043
     },
     {
       "id": "druid.entangle",
-      "beforeMs": 20.9893,
-      "afterMs": 21.5891,
-      "changePercent": 2.8576465151291197
+      "beforeMs": 21.4798,
+      "afterMs": 22.0456,
+      "changePercent": 2.6341027383867566
     },
     {
       "id": "druid.faerie_fire",
-      "beforeMs": 19.6715,
-      "afterMs": 19.971,
-      "changePercent": 1.5225071804386925
+      "beforeMs": 19.9196,
+      "afterMs": 20.1088,
+      "changePercent": 0.949818269443159
     },
     {
       "id": "druid.fog_cloud",
-      "beforeMs": 19.9989,
-      "afterMs": 21.3617,
-      "changePercent": 6.814374790613487
+      "beforeMs": 20.3883,
+      "afterMs": 21.7721,
+      "changePercent": 6.787226007072666
     },
     {
       "id": "druid.healing_word",
-      "beforeMs": 19.3523,
-      "afterMs": 19.5547,
-      "changePercent": 1.0458705166827675
+      "beforeMs": 19.9476,
+      "afterMs": 19.9918,
+      "changePercent": 0.22158054101746316
     },
     {
       "id": "druid.produce_flame",
-      "beforeMs": 19.2285,
-      "afterMs": 19.0866,
-      "changePercent": -0.7379670801154536
+      "beforeMs": 19.8346,
+      "afterMs": 19.704,
+      "changePercent": -0.6584453429864912
     },
     {
       "id": "druid.shillelagh",
-      "beforeMs": 18.9156,
-      "afterMs": 18.8908,
-      "changePercent": -0.13110871450021655
+      "beforeMs": 19.8128,
+      "afterMs": 18.9693,
+      "changePercent": -4.257348784624071
     },
     {
       "id": "druid.thorn_whip",
-      "beforeMs": 18.7273,
-      "afterMs": 18.8318,
-      "changePercent": 0.5580088961035568
+      "beforeMs": 19.3619,
+      "afterMs": 19.2105,
+      "changePercent": -0.7819480526187972
     },
     {
       "id": "druid.thunderwave",
-      "beforeMs": 19.8321,
-      "afterMs": 20.024,
-      "changePercent": 0.9676231967366
+      "beforeMs": 20.3134,
+      "afterMs": 20.3509,
+      "changePercent": 0.18460720509614337
     },
     {
       "id": "druid.wild_shape_wolf",
-      "beforeMs": 20.3857,
-      "afterMs": 21.449,
-      "changePercent": 5.2159111534065605
+      "beforeMs": 20.976,
+      "afterMs": 22.4425,
+      "changePercent": 6.9913234172387595
     },
     {
       "id": "druid.barkskin",
-      "beforeMs": 20.7893,
-      "afterMs": 20.4872,
-      "changePercent": -1.4531513807583663
+      "beforeMs": 21.0227,
+      "afterMs": 21.437,
+      "changePercent": 1.9707268809429745
     },
     {
       "id": "druid.hold_person",
-      "beforeMs": 21.6936,
-      "afterMs": 20.1556,
-      "changePercent": -7.089648559943951
+      "beforeMs": 22.0652,
+      "afterMs": 20.6313,
+      "changePercent": -6.498468176132555
     },
     {
       "id": "druid.lesser_restoration",
-      "beforeMs": 22.0709,
-      "afterMs": 19.2103,
-      "changePercent": -12.96095764105678
+      "beforeMs": 22.1691,
+      "afterMs": 19.6093,
+      "changePercent": -11.54670239206823
     },
     {
       "id": "druid.moonbeam",
-      "beforeMs": 22.6052,
-      "afterMs": 21.768,
-      "changePercent": -3.7035726293065285
+      "beforeMs": 22.9502,
+      "afterMs": 23.9298,
+      "changePercent": 4.268372388911645
     },
     {
       "id": "druid.moonbeam.enter",
-      "beforeMs": 22.4486,
-      "afterMs": 20.5085,
-      "changePercent": -8.642409771656123
+      "beforeMs": 23.2334,
+      "afterMs": 20.5997,
+      "changePercent": -11.335835478233925
     },
     {
       "id": "druid.moonbeam.turn",
-      "beforeMs": 22.4911,
-      "afterMs": 20.6858,
-      "changePercent": -8.026730573426821
+      "beforeMs": 22.4298,
+      "afterMs": 21.4403,
+      "changePercent": -4.411541788156825
     },
     {
       "id": "druid.spike_growth",
-      "beforeMs": 21.9724,
-      "afterMs": 22.3218,
-      "changePercent": 1.5901767672170442
+      "beforeMs": 22.4295,
+      "afterMs": 24.3145,
+      "changePercent": 8.404110657838991
     },
     {
       "id": "druid.spike_growth.step",
-      "beforeMs": 24.486,
-      "afterMs": 22.9981,
-      "changePercent": -6.076533529363715
+      "beforeMs": 22.9686,
+      "afterMs": 23.9732,
+      "changePercent": 4.373797271057001
     },
     {
       "id": "druid.wild_shape_bear",
-      "beforeMs": 19.2456,
-      "afterMs": 19.7581,
-      "changePercent": 2.662946335785832
+      "beforeMs": 19.7929,
+      "afterMs": 19.6594,
+      "changePercent": -0.6744842847687726
     },
     {
       "id": "druid.call_lightning",
-      "beforeMs": 20.1056,
-      "afterMs": 20.3248,
-      "changePercent": 1.090243514244782
+      "beforeMs": 20.4554,
+      "afterMs": 20.6604,
+      "changePercent": 1.0021803533541096
     },
     {
       "id": "druid.conjure_animals",
-      "beforeMs": 19.3839,
-      "afterMs": 19.2774,
-      "changePercent": -0.5494250383049848
+      "beforeMs": 19.7147,
+      "afterMs": 19.8515,
+      "changePercent": 0.6938984615540766
     },
     {
       "id": "druid.dispel_magic",
-      "beforeMs": 19.4716,
-      "afterMs": 19.3956,
-      "changePercent": -0.3903120442079633
+      "beforeMs": 19.589,
+      "afterMs": 19.741,
+      "changePercent": 0.7759456838021483
     },
     {
       "id": "druid.sleet_storm",
-      "beforeMs": 20.0337,
-      "afterMs": 20.097,
-      "changePercent": 0.315967594603106
+      "beforeMs": 20.2463,
+      "afterMs": 20.5546,
+      "changePercent": 1.5227473661854285
     },
     {
       "id": "druid.sleet_storm.turn",
-      "beforeMs": 19.998,
-      "afterMs": 19.8409,
-      "changePercent": -0.7855785578557817
+      "beforeMs": 20.4992,
+      "afterMs": 20.5961,
+      "changePercent": 0.4727013737121588
     },
     {
       "id": "druid.wild_shape_dire_wolf",
-      "beforeMs": 19.0661,
-      "afterMs": 19.7365,
-      "changePercent": 3.5161884181872605
+      "beforeMs": 19.8658,
+      "afterMs": 19.7376,
+      "changePercent": -0.6453301654098964
     },
     {
       "id": "druid.blight",
-      "beforeMs": 19.4619,
-      "afterMs": 19.44,
-      "changePercent": -0.11252755383595048
+      "beforeMs": 19.9012,
+      "afterMs": 19.8172,
+      "changePercent": -0.4220851003959525
     },
     {
       "id": "druid.ice_storm",
-      "beforeMs": 20.2428,
-      "afterMs": 20.5242,
-      "changePercent": 1.3901238959037387
+      "beforeMs": 20.8168,
+      "afterMs": 20.7521,
+      "changePercent": -0.3108066561623435
     },
     {
       "id": "druid.greater_restoration",
-      "beforeMs": 19.2551,
-      "afterMs": 19.2936,
-      "changePercent": 0.19994702702141876
+      "beforeMs": 19.9443,
+      "afterMs": 19.3832,
+      "changePercent": -2.813335138360329
     },
     {
       "id": "druid.mass_cure_wounds",
-      "beforeMs": 20.13,
-      "afterMs": 19.9645,
-      "changePercent": -0.8221559860904004
+      "beforeMs": 20.5527,
+      "afterMs": 20.2511,
+      "changePercent": -1.4674470994078703
     },
     {
       "id": "grovekeeper.bloom",
-      "beforeMs": 20.4666,
-      "afterMs": 20.6491,
-      "changePercent": 0.8916967156244793
+      "beforeMs": 20.8084,
+      "afterMs": 21.0566,
+      "changePercent": 1.192787528113648
     },
     {
       "id": "grovekeeper.companion",
-      "beforeMs": 18.499,
-      "afterMs": 19.06,
-      "changePercent": 3.0325963565598135
+      "beforeMs": 18.9316,
+      "afterMs": 19.1212,
+      "changePercent": 1.0015001373365306
     },
     {
       "id": "grovekeeper.sanctuary_grove",
-      "beforeMs": 20.5463,
-      "afterMs": 21.0133,
-      "changePercent": 2.272915318086488
+      "beforeMs": 21.5567,
+      "afterMs": 21.3627,
+      "changePercent": -0.8999522190316633
     },
     {
       "id": "grovekeeper.sanctuary_grove.mend",
-      "beforeMs": 20.9469,
-      "afterMs": 20.8653,
-      "changePercent": -0.3895564498804016
+      "beforeMs": 21.5806,
+      "afterMs": 21.3543,
+      "changePercent": -1.0486270075901638
     },
     {
       "id": "grovekeeper.ancient_canopy",
-      "beforeMs": 20.2993,
-      "afterMs": 20.6583,
-      "changePercent": 1.7685338903312031
+      "beforeMs": 20.876,
+      "afterMs": 20.9691,
+      "changePercent": 0.44596666027973964
     },
     {
       "id": "shapeshifter.dire_form",
-      "beforeMs": 19.6444,
-      "afterMs": 19.7404,
-      "changePercent": 0.488688888436406
+      "beforeMs": 19.8765,
+      "afterMs": 20.3233,
+      "changePercent": 2.2478806630946035
     },
     {
       "id": "shapeshifter.elder_bear_form",
-      "beforeMs": 19.5372,
-      "afterMs": 19.654,
-      "changePercent": 0.5978338758880541
+      "beforeMs": 19.9257,
+      "afterMs": 20.1622,
+      "changePercent": 1.186909368303235
     },
     {
       "id": "shapeshifter.primal_mend",
-      "beforeMs": 19.7671,
-      "afterMs": 20.079,
-      "changePercent": 1.5778743467681267
+      "beforeMs": 20.3306,
+      "afterMs": 20.282,
+      "changePercent": -0.23904852783489527
     },
     {
       "id": "stormcaller.gale_burst",
-      "beforeMs": 20.0498,
-      "afterMs": 20.1222,
-      "changePercent": 0.3611008588614295
+      "beforeMs": 20.5102,
+      "afterMs": 20.4502,
+      "changePercent": -0.29253737164923743
     },
     {
       "id": "stormcaller.chain_tempest",
-      "beforeMs": 19.5683,
-      "afterMs": 20.1173,
-      "changePercent": 2.80555796875559
+      "beforeMs": 20.6557,
+      "afterMs": 20.5247,
+      "changePercent": -0.6342075068867192
     },
     {
       "id": "stormcaller.wrath_of_the_tempest",
-      "beforeMs": 20.1985,
-      "afterMs": 20.4225,
-      "changePercent": 1.1089932420724313
+      "beforeMs": 20.6796,
+      "afterMs": 20.6089,
+      "changePercent": -0.3418828217180314
     },
     {
       "id": "druid.form.wolf.move",
-      "beforeMs": 18.9319,
-      "afterMs": 18.8242,
-      "changePercent": -0.5688810948716094
+      "beforeMs": 19.3333,
+      "afterMs": 19.3493,
+      "changePercent": 0.08275876337717758
     },
     {
       "id": "druid.form.wolf.attack",
-      "beforeMs": 19.2123,
-      "afterMs": 19.3251,
-      "changePercent": 0.5871238737683582
+      "beforeMs": 19.7713,
+      "afterMs": 19.7018,
+      "changePercent": -0.35151962693399375
     },
     {
       "id": "druid.form.wolf.revert",
-      "beforeMs": 19.3497,
-      "afterMs": 19.2387,
-      "changePercent": -0.573652304686878
+      "beforeMs": 19.8577,
+      "afterMs": 19.6934,
+      "changePercent": -0.8273868574910526
     },
     {
       "id": "druid.form.bear.move",
-      "beforeMs": 19.1776,
-      "afterMs": 18.9478,
-      "changePercent": -1.19827298514934
+      "beforeMs": 19.3084,
+      "afterMs": 19.135,
+      "changePercent": -0.8980547326552069
     },
     {
       "id": "druid.form.bear.attack",
-      "beforeMs": 19.2732,
-      "afterMs": 19.2296,
-      "changePercent": -0.2262208662806242
+      "beforeMs": 19.6565,
+      "afterMs": 19.3975,
+      "changePercent": -1.3176303004095336
     },
     {
       "id": "druid.form.bear.revert",
-      "beforeMs": 19.1399,
-      "afterMs": 19.3026,
-      "changePercent": 0.850056687861489
+      "beforeMs": 19.5915,
+      "afterMs": 19.574,
+      "changePercent": -0.0893244519306724
     },
     {
       "id": "druid.form.dire_wolf.move",
-      "beforeMs": 18.936,
-      "afterMs": 19.0185,
-      "changePercent": 0.43567807351077015
+      "beforeMs": 19.3724,
+      "afterMs": 19.4736,
+      "changePercent": 0.5223926823728631
     },
     {
       "id": "druid.form.dire_wolf.attack",
-      "beforeMs": 19.52,
-      "afterMs": 19.5607,
-      "changePercent": 0.2085040983606623
+      "beforeMs": 20.0988,
+      "afterMs": 20.2907,
+      "changePercent": 0.9547833701514463
     },
     {
       "id": "druid.form.dire_wolf.revert",
-      "beforeMs": 19.3924,
-      "afterMs": 19.5278,
-      "changePercent": 0.6982116705513519
+      "beforeMs": 19.6438,
+      "afterMs": 19.6664,
+      "changePercent": 0.11504902310144338
     },
     {
       "id": "druid.form.elder_bear.move",
-      "beforeMs": 19.0193,
-      "afterMs": 19.364,
-      "changePercent": 1.812369540414216
+      "beforeMs": 19.3286,
+      "afterMs": 19.307,
+      "changePercent": -0.11175149778051008
     },
     {
       "id": "druid.form.elder_bear.attack",
-      "beforeMs": 19.9057,
-      "afterMs": 19.9522,
-      "changePercent": 0.23360143074597772
+      "beforeMs": 20.0479,
+      "afterMs": 19.9781,
+      "changePercent": -0.34816614208967867
     },
     {
       "id": "druid.form.elder_bear.revert",
-      "beforeMs": 18.9262,
-      "afterMs": 19.9941,
-      "changePercent": 5.642442751318266
+      "beforeMs": 19.6642,
+      "afterMs": 19.6056,
+      "changePercent": -0.2980034784023866
     }
   ]
 }
