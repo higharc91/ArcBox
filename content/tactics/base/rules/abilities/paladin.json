@@ -116,7 +116,7 @@
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "burst", "size": 2 } },
       "effects": [ { "save": { "stat": "con" }, "halfOnSuccess": true,
                      "onFail": [ { "damage": { "dice": "3d8", "type": "radiant" } } ] },
-                   { "zone": { "kind": "holy", "area": { "shape": "burst", "size": 2 }, "rounds": 2,
+                   { "zone": { "kind": "holy", "affects": "allies", "area": { "shape": "burst", "size": 2 }, "rounds": 2,
                                "passives": [ { "id": "crusader.consecrated.tick", "hook": "onTurnStart", "target": "self",
                                                "effects": [ { "heal": { "dice": "1d6" } } ] } ] } } ],
       "presentation": { "anim": "characters.slam", "fx": "signature.crusader_smite.radiant" },

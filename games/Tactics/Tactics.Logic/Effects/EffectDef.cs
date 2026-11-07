@@ -46,8 +46,8 @@ public sealed record SaveEffect(Stat Stat, int? Dc, ImmutableArray<EffectDef> On
 public sealed record DamageEffect(ByLevel<Dice>? Dice, string? Type, ImmutableArray<string> Bonus,
     bool Weapon = false) : EffectDef;
 
-/// <summary><c>"heal"</c>: restores <see cref="Dice"/> at the user's level plus the named <see cref="Bonus"/> addends, up to max HP.</summary>
-public sealed record HealEffect(ByLevel<Dice> Dice, ImmutableArray<string> Bonus) : EffectDef;
+/// <summary><c>"heal"</c>: restores <see cref="Dice"/> at the user's level plus the named <see cref="Bonus"/> addends, up to max HP. Self directs it to the source instead of the resolved target.</summary>
+public sealed record HealEffect(ByLevel<Dice> Dice, ImmutableArray<string> Bonus, bool Self = false) : EffectDef;
 
 /// <summary><c>"halveHit"</c>: halves the triggering attack hit, including its riders; rounded down across damage blocks.</summary>
 public sealed record HalveHitEffect : EffectDef;
@@ -120,8 +120,9 @@ public sealed record HelpEffect : EffectDef;
 /// <summary>
 /// <c>"tempHp"</c>: the target gains temporary HP: <see cref="Dice"/> at the user's level plus the named
 /// <see cref="Bonus"/> addends. Temporary HP don't stack: the target keeps the higher of what it has and the new amount.
+/// Self directs it to the source instead of the resolved target.
 /// </summary>
-public sealed record TempHpEffect(ByLevel<Dice> Dice, ImmutableArray<string> Bonus) : EffectDef;
+public sealed record TempHpEffect(ByLevel<Dice> Dice, ImmutableArray<string> Bonus, bool Self = false) : EffectDef;
 
 /// <summary><c>"revive"</c>: a Downed target gets up with <see cref="Hp"/> HP (see <see cref="DownedRules.Revive"/>).</summary>
 public sealed record ReviveEffect(int Hp) : EffectDef;
@@ -147,11 +148,13 @@ public sealed record DispelEffect(bool Concentration = false, bool Zones = false
 /// user's concentration with <see cref="Concentration"/>. A <see cref="Difficult"/> zone costs 2 Move per tile; a
 /// <see cref="BlocksSight"/> one blocks line of sight (smoke, darkness). Its
 /// <see cref="Passives"/> belong to every unit standing in it (usually <c>onEnterTile</c> and <c>onTurnStart</c> with
-/// <c>"target": "self"</c>), their effects coming from the zone's owner. With <see cref="Surface"/>, its kind is an
+/// <c>"target": "self"</c>), their effects coming from the zone's owner. Affects filters recipients relative to that owner's side.
+/// With <see cref="Surface"/>, its kind is an
 /// environmental surface: it uses the definition's traits and round clock, and requires an opted-in battle.
 /// </summary>
 public sealed record ZoneEffect(string Kind, AreaDef Area, int? Rounds, ImmutableArray<PassiveDef> Passives,
-    bool Concentration = false, bool Difficult = false, bool BlocksSight = false, bool Surface = false) : EffectDef
+    bool Concentration = false, bool Difficult = false, bool BlocksSight = false, bool Surface = false,
+    AffectedSide? Affects = null) : EffectDef
 {
     /// <inheritdoc />
     public override bool OnTile => true;
