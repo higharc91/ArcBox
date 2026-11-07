@@ -6,6 +6,8 @@ from arcpix.out import PACK
 from parts import fx
 from parts.wizard_fx import DESIGNS,frames
 from parts.wizard_casts import CASTS
+from parts.fx_packing import pack
+import numpy as np
 
 class WizardFxTests(unittest.TestCase):
     def test_aimed_damage_spells_have_distinct_geometry_and_motion_before_colouring(self):
@@ -21,12 +23,24 @@ class WizardFxTests(unittest.TestCase):
         for effect in entries:
             frames=effect.make();w,h=frames[0].w,frames[0].h
             entry=manifest['effects'][effect.id]
-            self.assertEqual([w,h],entry['frame'])
+            self.assertEqual([w,h],entry['sourceFrame'])
             self.assertEqual(len(frames),entry['frames'])
             self.assertEqual(effect.fps,entry['fps'])
             for variant,palette in effect.variants.items():
-                sheet=Image.new('RGBA',(w*len(frames),h))
-                for i,canvas in enumerate(frames):sheet.paste(canvas.render(fx.ramps(palette)),(i*w,0))
+                original=[c.render(fx.ramps(palette)) for c in frames]
+                images,anchor,trim=pack(original,effect.anchor,effect.attach)
+                self.assertEqual(list(anchor),entry['anchor'])
+                self.assertEqual(list(trim),entry['trim'])
+                cw,ch=images[0].size
+                self.assertEqual([cw,ch],entry['frame'])
+                for old,new in zip(original,images):
+                    restored=Image.new('RGBA',(w,h));restored.paste(new,trim)
+                    self.assertTrue(np.array_equal(np.array(old),np.array(restored)),effect.id)
+                if effect.attach=='projectile':
+                    self.assertEqual((w/2-trim[0],h/2-trim[1]),(cw/2,ch/2))
+                if effect.anchor[0]*6<=w:self.assertEqual(w-effect.anchor[0],cw-anchor[0])
+                sheet=Image.new('RGBA',(cw*len(frames),ch))
+                for i,im in enumerate(images):sheet.paste(im,(i*cw,0))
                 out=io.BytesIO();sheet.save(out,format='PNG',optimize=True)
                 self.assertEqual((PACK/'fx'/entry['variants'][variant]).read_bytes(),out.getvalue(),effect.id)
             self.assertTrue(any(c.slot.any() for c in frames),effect.id)

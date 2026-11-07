@@ -1003,15 +1003,23 @@
       "name": "Fire Bolt",
       "group": "Wizard",
       "frame": [
-        72,
-        72
+        28,
+        24
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
-        36,
-        46
+        13,
+        19
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        27
       ],
       "attach": "feet",
       "blend": "add",
@@ -1025,15 +1033,23 @@
       "name": "Ray Of Frost",
       "group": "Wizard",
       "frame": [
-        72,
-        72
+        28,
+        34
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
-        36,
-        46
+        13,
+        29
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        17
       ],
       "attach": "feet",
       "blend": "add",
@@ -1047,15 +1063,23 @@
       "name": "Shocking Grasp",
       "group": "Wizard",
       "frame": [
-        72,
-        72
+        45,
+        40
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
-        36,
-        46
+        22,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        14,
+        19
       ],
       "attach": "feet",
       "blend": "add",
@@ -1069,15 +1093,23 @@
       "name": "Acid Splash",
       "group": "Wizard",
       "frame": [
-        72,
-        72
+        28,
+        36
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
-        36,
-        46
+        13,
+        28
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        18
       ],
       "attach": "feet",
       "blend": "add",
@@ -1091,15 +1123,23 @@
       "name": "Chill Touch",
       "group": "Wizard",
       "frame": [
-        72,
-        72
+        31,
+        34
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
-        36,
-        46
+        14,
+        27
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        22,
+        19
       ],
       "attach": "feet",
       "blend": "add",
@@ -1114,14 +1154,22 @@
       "group": "Wizard",
       "frame": [
         160,
-        96
+        59
       ],
       "frames": 8,
       "fps": 20,
       "loop": false,
       "anchor": [
         8,
-        48
+        29
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        19
       ],
       "attach": "body",
       "blend": "add",
@@ -1135,15 +1183,23 @@
       "name": "Magic Missile",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        42
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1158,14 +1214,22 @@
       "group": "Wizard",
       "frame": [
         160,
-        96
+        73
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
         8,
-        48
+        36
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        12
       ],
       "attach": "body",
       "blend": "add",
@@ -1179,15 +1243,23 @@
       "name": "Shield",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        34
       ],
       "attach": "feet",
       "blend": "add",
@@ -1201,15 +1273,23 @@
       "name": "Sleep",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        57
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        38
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        23
       ],
       "attach": "feet",
       "blend": "add",
@@ -1223,15 +1303,23 @@
       "name": "Thunderwave",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        123
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1245,15 +1333,23 @@
       "name": "Chromatic Orb",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        44
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1267,15 +1363,23 @@
       "name": "Mage Armor",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        42
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1289,15 +1393,23 @@
       "name": "Ray Of Sickness",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        45
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        32
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        29
       ],
       "attach": "feet",
       "blend": "add",
@@ -1311,15 +1423,23 @@
       "name": "Grease",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        37
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1333,15 +1453,23 @@
       "name": "Scorching Ray",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        35
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1355,15 +1483,23 @@
       "name": "Hold Person",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        56
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        39
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        22
       ],
       "attach": "feet",
       "blend": "add",
@@ -1377,15 +1513,23 @@
       "name": "Misty Step",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
       ],
       "attach": "feet",
       "blend": "add",
@@ -1399,15 +1543,23 @@
       "name": "Shatter",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1421,15 +1573,23 @@
       "name": "Web",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        54
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
       ],
       "attach": "feet",
       "blend": "add",
@@ -1443,15 +1603,23 @@
       "name": "Blur",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        71,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        35,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        13,
+        21
       ],
       "attach": "feet",
       "blend": "add",
@@ -1465,15 +1633,23 @@
       "name": "Invisibility",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
       ],
       "attach": "feet",
       "blend": "add",
@@ -1487,15 +1663,23 @@
       "name": "Fireball",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1510,14 +1694,22 @@
       "group": "Wizard",
       "frame": [
         160,
-        96
+        36
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
         8,
-        48
+        25
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        23
       ],
       "attach": "body",
       "blend": "add",
@@ -1531,15 +1723,23 @@
       "name": "Counterspell",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        44
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1553,15 +1753,23 @@
       "name": "Haste",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        46
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1575,15 +1783,23 @@
       "name": "Slow",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        46
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1597,15 +1813,23 @@
       "name": "Hypnotic Pattern",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        126
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        73
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        29
       ],
       "attach": "feet",
       "blend": "add",
@@ -1619,15 +1843,23 @@
       "name": "Dispel Magic",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        44
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1641,15 +1873,23 @@
       "name": "Ice Storm",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        116
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        68
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        34
       ],
       "attach": "feet",
       "blend": "add",
@@ -1663,15 +1903,23 @@
       "name": "Greater Invisibility",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
       ],
       "attach": "feet",
       "blend": "add",
@@ -1685,15 +1933,23 @@
       "name": "Blight",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        43
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        34
       ],
       "attach": "feet",
       "blend": "add",
@@ -1707,15 +1963,23 @@
       "name": "Wall Of Fire",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1729,15 +1993,23 @@
       "name": "Banishment",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        55
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        40
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        21
       ],
       "attach": "feet",
       "blend": "add",
@@ -1752,14 +2024,22 @@
       "group": "Wizard",
       "frame": [
         160,
-        96
+        69
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
         8,
-        48
+        34
+      ],
+      "sourceFrame": [
+        160,
+        96
+      ],
+      "trim": [
+        0,
+        14
       ],
       "attach": "body",
       "blend": "add",
@@ -1773,15 +2053,23 @@
       "name": "Cloudkill",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1795,15 +2083,23 @@
       "name": "Hold Monster",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        54
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
       ],
       "attach": "feet",
       "blend": "add",
@@ -1817,15 +2113,23 @@
       "name": "Arcane Recovery",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        59
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        24
       ],
       "attach": "feet",
       "blend": "add",
@@ -1839,15 +2143,23 @@
       "name": "Sculpted Nova",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1861,15 +2173,23 @@
       "name": "Sculpted Inferno",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1883,15 +2203,23 @@
       "name": "Time Shift",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        46
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1905,15 +2233,23 @@
       "name": "Accelerate",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        46
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -1927,15 +2263,23 @@
       "name": "Temporal Stasis",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        56
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        39
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        22
       ],
       "attach": "feet",
       "blend": "add",
@@ -1949,15 +2293,23 @@
       "name": "Raise Earth",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        67,
+        42
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        33,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        30
       ],
       "attach": "feet",
       "blend": "add",
@@ -1971,15 +2323,23 @@
       "name": "Sink Earth",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        67,
+        38
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        33,
+        27
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        15,
+        34
       ],
       "attach": "feet",
       "blend": "add",
@@ -1993,15 +2353,23 @@
       "name": "Tremor",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        210,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        102,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        26,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -2015,15 +2383,23 @@
       "name": "Stone Spire",
       "group": "Wizard",
       "frame": [
-        256,
-        160
+        209,
+        113
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        128,
-        102
+        101,
+        65
+      ],
+      "sourceFrame": [
+        256,
+        160
+      ],
+      "trim": [
+        27,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -2037,15 +2413,23 @@
       "name": "Empowered Evocation",
       "group": "Wizard",
       "frame": [
-        96,
-        96
+        62,
+        42
       ],
       "frames": 12,
       "fps": 20,
       "loop": false,
       "anchor": [
-        48,
-        61
+        30,
+        24
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        18,
+        37
       ],
       "attach": "feet",
       "blend": "add",
@@ -2060,14 +2444,22 @@
       "group": "Wizard",
       "frame": [
         48,
-        32
+        20
       ],
       "frames": 8,
       "fps": 24,
       "loop": true,
       "anchor": [
         24,
-        16
+        10
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        6
       ],
       "attach": "projectile",
       "blend": "add",
@@ -2082,14 +2474,22 @@
       "group": "Wizard",
       "frame": [
         48,
-        32
+        20
       ],
       "frames": 8,
       "fps": 24,
       "loop": true,
       "anchor": [
         24,
-        16
+        10
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        6
       ],
       "attach": "projectile",
       "blend": "add",
@@ -2113,6 +2513,14 @@
         24,
         16
       ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
       "attach": "projectile",
       "blend": "add",
       "layer": "over",
@@ -2134,6 +2542,14 @@
       "anchor": [
         24,
         16
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
       ],
       "attach": "projectile",
       "blend": "add",
@@ -2157,6 +2573,14 @@
         24,
         16
       ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
       "attach": "projectile",
       "blend": "add",
       "layer": "over",
@@ -2179,6 +2603,14 @@
         24,
         16
       ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        0
+      ],
       "attach": "projectile",
       "blend": "add",
       "layer": "over",
@@ -2191,15 +2623,23 @@
       "name": "Fireball flight",
       "group": "Wizard",
       "frame": [
-        48,
-        32
+        42,
+        10
       ],
       "frames": 8,
       "fps": 24,
       "loop": true,
       "anchor": [
-        24,
-        16
+        21,
+        5
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        3,
+        11
       ],
       "attach": "projectile",
       "blend": "add",

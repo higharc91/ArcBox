@@ -7,6 +7,7 @@ from arcpix.out import PACK,save,write_json
 from parts import fx
 from parts.wizard_fx import DESIGNS
 from parts.wizard_casts import classic_aliases,manifest as cast_manifest
+from parts.fx_packing import pack
 
 def build():
     rules_path=PACK/'rules/abilities/wizard.json'
@@ -19,13 +20,16 @@ def build():
     meta_path=PACK/'fx/manifest.json';meta=json.loads(meta_path.read_text())
     for effect in fx.CATALOGUE:
         if not effect.id.startswith('wizard_'):continue
-        frames=effect.make();w,h=frames[0].w,frames[0].h;variants={}
+        frames=effect.make();variants={}
         for variant,palette in effect.variants.items():
+            images,anchor,trim=pack([c.render(fx.ramps(palette)) for c in frames],effect.anchor,effect.attach)
+            w,h=images[0].size
             sheet=Image.new('RGBA',(w*len(frames),h))
-            for i,canvas in enumerate(frames):sheet.paste(canvas.render(fx.ramps(palette)),(i*w,0))
+            for i,im in enumerate(images):sheet.paste(im,(i*w,0))
             name=f'{effect.id}_{variant}.png';save(sheet,PACK/'fx'/name);variants[variant]=name
         meta['effects'][effect.id]={'name':effect.name,'group':effect.group,'frame':[w,h],
-            'frames':len(frames),'fps':effect.fps,'loop':effect.loop,'anchor':list(effect.anchor),
+            'frames':len(frames),'fps':effect.fps,'loop':effect.loop,'anchor':list(anchor),
+            'sourceFrame':[frames[0].w,frames[0].h],'trim':list(trim),
             'attach':effect.attach,'blend':effect.blend,'layer':effect.layer,'variants':variants,'default':next(iter(variants))}
     meta['passives']={'evoker.empowered_evocation':'fx.wizard_empowered_evocation.force'}
     write_json(meta,meta_path)

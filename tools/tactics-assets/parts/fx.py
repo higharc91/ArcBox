@@ -2487,16 +2487,23 @@ def build() -> None:
         rendered[e.id] = {}
         for vname, v in e.variants.items():
             imgs = [fr.render(ramps(v)) for fr in frames]
-            sheet = Image.new("RGBA", (w * len(imgs), h))
-            for k, im in enumerate(imgs):
+            packed, anchor, trim = imgs, e.anchor, (0, 0)
+            if e.id.startswith('wizard_'):
+                from .fx_packing import pack
+                packed, anchor, trim = pack(imgs, e.anchor, e.attach)
+            w, h = packed[0].size
+            sheet = Image.new("RGBA", (w * len(packed), h))
+            for k, im in enumerate(packed):
                 sheet.paste(im, (k * w, 0))
             rel = f"{e.id}_{vname}.png"
             save(sheet, out / rel)
             files[vname] = rel
             rendered[e.id][vname] = imgs
         entry = {"name": e.name, "group": e.group, "frame": [w, h], "frames": len(frames), "fps": e.fps,
-                 "loop": e.loop, "anchor": list(e.anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
+                 "loop": e.loop, "anchor": list(anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
                  "variants": files, "default": next(iter(files))}
+        if e.id.startswith('wizard_'):
+            entry.update(sourceFrame=[frames[0].w, frames[0].h], trim=list(trim))
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
         if e.note:
