@@ -336,12 +336,12 @@
       "surprised": "skeleton_archer_refresh_surprised.png"
     },
     "lich": {
-      "idle": "lich_idle.png",
-      "hurt": "lich_hurt.png",
-      "happy": "lich_happy.png",
-      "angry": "lich_angry.png",
-      "sad": "lich_sad.png",
-      "surprised": "lich_surprised.png"
+      "idle": "lich_refresh_idle.png",
+      "hurt": "lich_refresh_hurt.png",
+      "happy": "lich_refresh_happy.png",
+      "angry": "lich_refresh_angry.png",
+      "sad": "lich_refresh_sad.png",
+      "surprised": "lich_refresh_surprised.png"
     },
     "dark_elf": {
       "idle": "dark_elf_idle.png",
@@ -352,12 +352,12 @@
       "surprised": "dark_elf_surprised.png"
     },
     "necromancer": {
-      "idle": "necromancer_idle.png",
-      "hurt": "necromancer_hurt.png",
-      "happy": "necromancer_happy.png",
-      "angry": "necromancer_angry.png",
-      "sad": "necromancer_sad.png",
-      "surprised": "necromancer_surprised.png"
+      "idle": "necromancer_refresh_idle.png",
+      "hurt": "necromancer_refresh_hurt.png",
+      "happy": "necromancer_refresh_happy.png",
+      "angry": "necromancer_refresh_angry.png",
+      "sad": "necromancer_refresh_sad.png",
+      "surprised": "necromancer_refresh_surprised.png"
     },
     "bandit_captain": {
       "idle": "rook_idle.png",

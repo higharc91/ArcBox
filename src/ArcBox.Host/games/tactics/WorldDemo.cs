@@ -95,13 +95,16 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var rimeKeepers = parts.Contains("rime-keepers", StringComparer.Ordinal);
         var hollowDead = parts.Contains("hollow-dead", StringComparer.Ordinal);
         var boneWardens = parts.Contains("bone-wardens", StringComparer.Ordinal);
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (hollowDead)
+        _mobReview = rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (rimeKeepers)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.necromancer", "characters.lich", "characters.skeleton"];
+        else if (hollowDead)
             _roster = ["characters.class_fighter", "characters.bandit", "characters.zombie", "bosses.wraith.wraith", "characters.skeleton"];
         else if (boneWardens)
             _roster = ["characters.class_fighter", "characters.bandit", "characters.skeleton", "characters.skeleton_archer", "characters.hobgoblin"];

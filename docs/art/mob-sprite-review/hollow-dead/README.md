@@ -34,3 +34,5 @@ Host arguments after `--`:
 ```
 
 Fourteen looks are refreshed across six batches; [15 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline stays unchanged. No PR has been opened.
+
+Subsequent batch: [Ivo and Oswin](../rime-keepers/README.md). Sixteen looks are now refreshed; 13 older combat looks remain.

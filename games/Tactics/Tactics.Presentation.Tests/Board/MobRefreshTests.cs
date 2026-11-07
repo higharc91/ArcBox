@@ -19,6 +19,8 @@ public sealed class MobRefreshTests
     [InlineData("characters.skeleton_archer", "skeleton_archer")]
     [InlineData("characters.zombie", "zombie")]
     [InlineData("bosses.wraith.wraith", "wraith")]
+    [InlineData("characters.necromancer", "necromancer")]
+    [InlineData("characters.lich", "lich")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -69,6 +71,52 @@ public sealed class MobRefreshTests
                 }
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
+        }
+    }
+
+    [Theory]
+    [InlineData("characters.necromancer", false)]
+    [InlineData("characters.lich", true)]
+    public void Rime_keeper_staff_focus_stays_on_the_right_side_when_walking_and_turning(string key, bool ivory)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        foreach (var row in new[] { 0, 1, 3, 4, 5, 7 })
+            foreach (var action in new[] { "idle", "walk" })
+                foreach (var frame in sprite.Anim(action).Frames.Distinct())
+                {
+                    var source = sprite.Source(frame, row);
+                    var left = 0; var right = 0;
+                    // The small glass cap or ivory ring is the staff's landmark. Exclude
+                    // the central head, and keep the band above the hands and robe trim.
+                    for (var y = sprite.HeadTop; y < sprite.HeadTop + 30; y++)
+                        for (var x = 0; x < source.Width; x++)
+                        {
+                            var at = ((source.Y + y) * width + source.X + x) * 4;
+                            var r = pixels[at]; var g = pixels[at + 1]; var b = pixels[at + 2];
+                            var focus = ivory ? r > 155 && g > 140 && b > 100 && r >= g && g > b + 8
+                                : r > 100 && g > 110 && b > 115 && g >= r && b >= r;
+                            if (pixels[at + 3] < 128 || !focus) continue;
+                            if (x < sprite.AnchorX - 22) left++;
+                            if (x > sprite.AnchorX + 22) right++;
+                        }
+                    var rear = row is 3 or 4 or 5;
+                    Assert.True(rear ? right > left + 3 : left > right + 3,
+                        $"Staff changed side in {key}/{row}/{action}/{frame}: left={left}, right={right}");
+                }
+    }
+
+    [Fact]
+    public void Rime_keeper_spells_use_free_hand_casting_separate_from_staff_melee()
+    {
+        var art = UnitArt.Load(Pack.Root);
+        foreach (var key in new[] { "characters.necromancer", "characters.lich" })
+        {
+            var sprite = art.Sprite(key)!;
+            foreach (var binding in new[] { "characters.cast", "characters.point", "characters.summon" })
+                Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim(binding).Frames.ToArray());
+            Assert.False(sprite.Anim("cast").Loop);
+            Assert.False(sprite.Anim("cast").Frames.SequenceEqual(sprite.Anim("attack").Frames));
         }
     }
 
@@ -191,6 +239,8 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.skeleton_archer")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("characters.zombie")!.HeadLift / person, .8f, 1.15f);
         Assert.InRange(art.Sprite("bosses.wraith.wraith")!.HeadLift / person, .95f, 1.3f);
+        Assert.InRange(art.Sprite("characters.necromancer")!.HeadLift / person, .9f, 1.2f);
+        Assert.InRange(art.Sprite("characters.lich")!.HeadLift / person, .95f, 1.25f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

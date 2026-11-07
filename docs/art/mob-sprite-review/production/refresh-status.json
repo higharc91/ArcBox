@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; fourteen refreshed designs integrated across six batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; sixteen refreshed designs integrated across seven batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -14,9 +14,11 @@
     "characters.skeleton",
     "characters.skeleton_archer",
     "characters.zombie",
-    "bosses.wraith.wraith"
+    "bosses.wraith.wraith",
+    "characters.necromancer",
+    "characters.lich"
   ],
-  "remainingOlderCombatLooks": 15,
+  "remainingOlderCombatLooks": 13,
   "looks": [
     {
       "baselineNumber": 1,
@@ -154,13 +156,13 @@
       "baselineNumber": 23,
       "name": "Lich",
       "key": "characters.lich",
-      "status": "awaiting refresh"
+      "status": "integrated seventh batch"
     },
     {
       "baselineNumber": 24,
       "name": "Ivo Rime / Necromancer",
       "key": "characters.necromancer",
-      "status": "awaiting refresh"
+      "status": "integrated seventh batch"
     },
     {
       "baselineNumber": 25,

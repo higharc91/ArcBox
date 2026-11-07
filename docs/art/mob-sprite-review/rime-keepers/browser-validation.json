@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Ivo / necromancer · actual Crypt Hall encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Ivo · actual Rime Tower encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, bandit, Ivo and Oswin lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "5116391e",
+    "walk": "65386548",
+    "attack": "e6d4de75",
+    "cast": "44d59686",
+    "hurt": "262992bd",
+    "down": "8f560e46"
+  },
+  "walkFrameHashes": [
+    "a7238a4",
+    "51738a01",
+    "65386548",
+    "2823fe4"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

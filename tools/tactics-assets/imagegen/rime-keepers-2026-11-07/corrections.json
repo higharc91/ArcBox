@@ -1,0 +1,37 @@
+[
+  {
+    "mob": "necromancer",
+    "action": "cast",
+    "source": "necromancer-cast-raised",
+    "count": 8,
+    "targets": [
+      { "row": 1, "poses": [0, 2, 3] },
+      { "row": 5, "poses": [4, 6, 7] }
+    ]
+  },
+  {
+    "mob": "lich",
+    "action": "cast",
+    "source": "lich-cast-frontleft",
+    "count": 4,
+    "targets": [{ "row": 1, "poses": [0, 2, 3] }]
+  },
+  {
+    "mob": "necromancer",
+    "action": "hurt",
+    "source": "hurt-backleft",
+    "count": 2,
+    "columns": 2,
+    "referencePose": 0,
+    "targets": [{ "row": 3, "poses": [0] }]
+  },
+  {
+    "mob": "lich",
+    "action": "hurt",
+    "source": "hurt-backleft",
+    "count": 2,
+    "columns": 2,
+    "referencePose": 1,
+    "targets": [{ "row": 3, "poses": [1] }]
+  }
+]

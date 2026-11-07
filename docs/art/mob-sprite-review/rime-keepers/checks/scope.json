@@ -1,0 +1,17 @@
+{
+  "priorCommit": "747fb19b31928339f97bf3bfbfe4c4d2df366c7a",
+  "addedCreatureEntries": [
+    "mob_refresh_lich",
+    "mob_refresh_necromancer"
+  ],
+  "changedPortraitPresets": [
+    "lich",
+    "necromancer"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "runtimeAssets": 14,
+  "sourceImages": 17,
+  "selectedDistinctPoses": 272,
+  "rejectedSourcesExcluded": true
+}
