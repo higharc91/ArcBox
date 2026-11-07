@@ -1,0 +1,11 @@
+{
+  "baseline": "4eb38ab6a3d287849553c8c0012cb5e39483d76e",
+  "warlockGameplayDefinitionsIdentical": true,
+  "abilityCount": 33,
+  "phoneFilesUnchanged": true,
+  "audioClipsUnchanged": true,
+  "nonWarlockAtlasesUnchanged": true,
+  "engineRulesAiBalanceOrWorkflowChanges": false,
+  "paidGenerationUsed": false,
+  "newAudioUsed": false
+}
