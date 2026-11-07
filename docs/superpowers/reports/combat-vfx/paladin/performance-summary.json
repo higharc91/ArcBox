@@ -1,0 +1,238 @@
+{
+  "method": "Median of 37 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 20.0227,
+  "afterMs": 20.5252,
+  "changePercent": 2.5096515454958723,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "paladin.smite_damage.undead",
+    "beforeMs": 19.4998,
+    "afterMs": 21.8672,
+    "changePercent": 12.140637339870143
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 21.3722,
+      "afterMs": 20.1734,
+      "changePercent": -5.609155819241806
+    },
+    {
+      "id": "paladin.bless",
+      "beforeMs": 20.2684,
+      "afterMs": 19.9166,
+      "changePercent": -1.7357068145487542
+    },
+    {
+      "id": "paladin.command",
+      "beforeMs": 19.8883,
+      "afterMs": 19.575,
+      "changePercent": -1.5752980395508986
+    },
+    {
+      "id": "paladin.compelled_duel",
+      "beforeMs": 19.806,
+      "afterMs": 19.4844,
+      "changePercent": -1.6237503786731278
+    },
+    {
+      "id": "paladin.cure_wounds",
+      "beforeMs": 19.5817,
+      "afterMs": 19.6772,
+      "changePercent": 0.4877002507443162
+    },
+    {
+      "id": "paladin.lay_on_hands",
+      "beforeMs": 19.8663,
+      "afterMs": 19.8236,
+      "changePercent": -0.21493685286138042
+    },
+    {
+      "id": "paladin.shield_of_faith",
+      "beforeMs": 19.6851,
+      "afterMs": 19.6506,
+      "changePercent": -0.17525946020084948
+    },
+    {
+      "id": "paladin.divine_smite",
+      "beforeMs": 19.6999,
+      "afterMs": 19.6585,
+      "changePercent": -0.21015335103223842
+    },
+    {
+      "id": "paladin.smite_damage",
+      "beforeMs": 19.2848,
+      "afterMs": 19.2155,
+      "changePercent": -0.35935036920269336
+    },
+    {
+      "id": "paladin.aid",
+      "beforeMs": 20.178,
+      "afterMs": 20.5252,
+      "changePercent": 1.7206858955297832
+    },
+    {
+      "id": "paladin.divine_smite_2",
+      "beforeMs": 19.7812,
+      "afterMs": 19.4241,
+      "changePercent": -1.8052494287505216
+    },
+    {
+      "id": "paladin.lesser_restoration",
+      "beforeMs": 19.6526,
+      "afterMs": 19.5342,
+      "changePercent": -0.6024648138159949
+    },
+    {
+      "id": "paladin.smite_damage_2",
+      "beforeMs": 19.7645,
+      "afterMs": 19.5224,
+      "changePercent": -1.2249234739052373
+    },
+    {
+      "id": "paladin.aura_of_protection",
+      "beforeMs": 18.883,
+      "afterMs": 20.3952,
+      "changePercent": 8.00826139914208
+    },
+    {
+      "id": "paladin.aura_of_protection_start",
+      "beforeMs": 19.0156,
+      "afterMs": 20.6386,
+      "changePercent": 8.535097498895649
+    },
+    {
+      "id": "paladin.dispel_magic",
+      "beforeMs": 19.4477,
+      "afterMs": 20.4532,
+      "changePercent": 5.170277205016527
+    },
+    {
+      "id": "paladin.divine_smite_3",
+      "beforeMs": 20.0332,
+      "afterMs": 19.8364,
+      "changePercent": -0.9823692670167472
+    },
+    {
+      "id": "paladin.elemental_weapon",
+      "beforeMs": 20.0372,
+      "afterMs": 20.7357,
+      "changePercent": 3.4860160102210047
+    },
+    {
+      "id": "paladin.smite_damage_3",
+      "beforeMs": 19.7339,
+      "afterMs": 20.5335,
+      "changePercent": 4.051910671484094
+    },
+    {
+      "id": "avenger.abjure_enemy",
+      "beforeMs": 20.0227,
+      "afterMs": 20.6622,
+      "changePercent": 3.193874951929554
+    },
+    {
+      "id": "avenger.vow_of_enmity",
+      "beforeMs": 20.5456,
+      "afterMs": 20.5103,
+      "changePercent": -0.1718129429172155
+    },
+    {
+      "id": "avenger.relentless_step",
+      "beforeMs": 20.3981,
+      "afterMs": 21.2128,
+      "changePercent": 3.9939994411244184
+    },
+    {
+      "id": "avenger.vengeful_strikes",
+      "beforeMs": 20.2092,
+      "afterMs": 20.6568,
+      "changePercent": 2.21483284840569
+    },
+    {
+      "id": "avenger.soul_of_vengeance",
+      "beforeMs": 20.5173,
+      "afterMs": 22.1323,
+      "changePercent": 7.871406081696919
+    },
+    {
+      "id": "crusader.radiant_blades",
+      "beforeMs": 19.4218,
+      "afterMs": 19.3248,
+      "changePercent": -0.49943877498481726
+    },
+    {
+      "id": "crusader.searing_smite",
+      "beforeMs": 20.6132,
+      "afterMs": 20.8365,
+      "changePercent": 1.083286437816544
+    },
+    {
+      "id": "crusader.consecrated.tick",
+      "beforeMs": 23.2106,
+      "afterMs": 24.3389,
+      "changePercent": 4.8611410303912805
+    },
+    {
+      "id": "crusader.consecrated_ground",
+      "beforeMs": 22.626,
+      "afterMs": 23.5814,
+      "changePercent": 4.2225757977547795
+    },
+    {
+      "id": "crusader.dawnbreaker",
+      "beforeMs": 21.0109,
+      "afterMs": 22.692,
+      "changePercent": 8.001085151040655
+    },
+    {
+      "id": "guardian.righteous_challenge",
+      "beforeMs": 21.2167,
+      "afterMs": 23.0187,
+      "changePercent": 8.493309515617419
+    },
+    {
+      "id": "guardian.sanctuary_aegis",
+      "beforeMs": 20.1601,
+      "afterMs": 21.842,
+      "changePercent": 8.342716553985351
+    },
+    {
+      "id": "guardian.divine_intervention",
+      "beforeMs": 19.4728,
+      "afterMs": 21.8166,
+      "changePercent": 12.036276241732068
+    },
+    {
+      "id": "guardian.aegis_of_faith",
+      "beforeMs": 21.2706,
+      "afterMs": 21.4866,
+      "changePercent": 1.0154861640010004
+    },
+    {
+      "id": "paladin.smite_damage.undead",
+      "beforeMs": 19.4998,
+      "afterMs": 21.8672,
+      "changePercent": 12.140637339870143
+    },
+    {
+      "id": "paladin.smite_damage_2.undead",
+      "beforeMs": 19.8092,
+      "afterMs": 21.5917,
+      "changePercent": 8.998344203703335
+    },
+    {
+      "id": "paladin.smite_damage_3.undead",
+      "beforeMs": 21.0986,
+      "afterMs": 21.4667,
+      "changePercent": 1.7446655228309016
+    },
+    {
+      "id": "paladin.elemental_weapon.strike",
+      "beforeMs": 20.6895,
+      "afterMs": 19.8009,
+      "changePercent": -4.294932211991586
+    }
+  ]
+}

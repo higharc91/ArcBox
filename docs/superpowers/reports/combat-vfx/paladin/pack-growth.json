@@ -1,0 +1,302 @@
+{
+  "baseline": "d6c216bfbe7db4e7f043ac3cebae59c6700ae92c",
+  "beforeBytes": 218663909,
+  "afterBytes": 219354758,
+  "deltaBytes": 690849,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 15197,
+      "after": 16029,
+      "delta": 832
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 148879,
+      "after": 166863,
+      "delta": 17984
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_abjure_enemy_ember.png",
+      "before": 0,
+      "after": 3307,
+      "delta": 3307
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_aegis_of_faith_azure.png",
+      "before": 0,
+      "after": 7900,
+      "delta": 7900
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_aid_gold.png",
+      "before": 0,
+      "after": 5610,
+      "delta": 5610
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_aura_refresh_azure.png",
+      "before": 0,
+      "after": 3668,
+      "delta": 3668
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_aura_start_azure.png",
+      "before": 0,
+      "after": 4321,
+      "delta": 4321
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_bless_gold.png",
+      "before": 0,
+      "after": 3916,
+      "delta": 3916
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_command_holy.png",
+      "before": 0,
+      "after": 2240,
+      "delta": 2240
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_compelled_duel_gold.png",
+      "before": 0,
+      "after": 2429,
+      "delta": 2429
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_consecrated_ground_gold.png",
+      "before": 0,
+      "after": 8012,
+      "delta": 8012
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_consecrated_tick_holy.png",
+      "before": 0,
+      "after": 653,
+      "delta": 653
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_cure_wounds_holy.png",
+      "before": 0,
+      "after": 2719,
+      "delta": 2719
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_dawnbreaker_holy.png",
+      "before": 0,
+      "after": 13130,
+      "delta": 13130
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_dispel_magic_arcane.png",
+      "before": 0,
+      "after": 3568,
+      "delta": 3568
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_divine_intervention_azure.png",
+      "before": 0,
+      "after": 4858,
+      "delta": 4858
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_divine_smite_2_gold.png",
+      "before": 0,
+      "after": 3292,
+      "delta": 3292
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_divine_smite_3_gold.png",
+      "before": 0,
+      "after": 4098,
+      "delta": 4098
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_divine_smite_gold.png",
+      "before": 0,
+      "after": 2561,
+      "delta": 2561
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_elemental_strike_fire.png",
+      "before": 0,
+      "after": 2935,
+      "delta": 2935
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_elemental_weapon_fire.png",
+      "before": 0,
+      "after": 2904,
+      "delta": 2904
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_lay_on_hands_holy.png",
+      "before": 0,
+      "after": 2063,
+      "delta": 2063
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_lesser_restoration_holy.png",
+      "before": 0,
+      "after": 4163,
+      "delta": 4163
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_radiant_blades_holy.png",
+      "before": 0,
+      "after": 2238,
+      "delta": 2238
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_relentless_step_ember.png",
+      "before": 0,
+      "after": 2337,
+      "delta": 2337
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_righteous_challenge_gold.png",
+      "before": 0,
+      "after": 8774,
+      "delta": 8774
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_sanctuary_aegis_azure.png",
+      "before": 0,
+      "after": 4891,
+      "delta": 4891
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_searing_smite_fire.png",
+      "before": 0,
+      "after": 4484,
+      "delta": 4484
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_shield_of_faith_azure.png",
+      "before": 0,
+      "after": 3975,
+      "delta": 3975
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_smite_hit_2_gold.png",
+      "before": 0,
+      "after": 2455,
+      "delta": 2455
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_smite_hit_3_gold.png",
+      "before": 0,
+      "after": 2986,
+      "delta": 2986
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_smite_hit_gold.png",
+      "before": 0,
+      "after": 2060,
+      "delta": 2060
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_soul_of_vengeance_ember.png",
+      "before": 0,
+      "after": 9612,
+      "delta": 9612
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_vengeful_strikes_ember.png",
+      "before": 0,
+      "after": 3267,
+      "delta": 3267
+    },
+    {
+      "path": "content/tactics/base/fx/paladin_vow_of_enmity_ember.png",
+      "before": 0,
+      "after": 2454,
+      "delta": 2454
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/paladin.json",
+      "before": 15544,
+      "after": 16065,
+      "delta": 521
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 42476,
+      "after": 42777,
+      "delta": 301
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_paladin.png",
+      "before": 470819,
+      "after": 520982,
+      "delta": 50163
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_paladin.png",
+      "before": 442975,
+      "after": 494220,
+      "delta": 51245
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_paladin.png",
+      "before": 380050,
+      "after": 422541,
+      "delta": 42491
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_paladin.png",
+      "before": 464295,
+      "after": 515022,
+      "delta": 50727
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_paladin.png",
+      "before": 376479,
+      "after": 417558,
+      "delta": 41079
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_paladin.png",
+      "before": 437195,
+      "after": 487959,
+      "delta": 50764
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_paladin.png",
+      "before": 454677,
+      "after": 505216,
+      "delta": 50539
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_paladin.png",
+      "before": 443590,
+      "after": 495166,
+      "delta": 51576
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_paladin.png",
+      "before": 386831,
+      "after": 427841,
+      "delta": 41010
+    },
+    {
+      "path": "content/tactics/base/tactical/human_paladin.png",
+      "before": 454759,
+      "after": 504952,
+      "delta": 50193
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 17302,
+      "after": 18397,
+      "delta": 1095
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_paladin.png",
+      "before": 495362,
+      "after": 547811,
+      "delta": 52449
+    }
+  ]
+}
