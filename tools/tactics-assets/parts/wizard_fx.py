@@ -61,14 +61,35 @@ def frames(name, shot=False):
                 c.polygon([(35,y),(26,y-3),(21,y),(26,y+3)],main,5)
                 line(5+(i+j)%4,y,24,y,3);c.px(31,y,core,5)
         elif shape in BEAMS:
-            for j in range(7 if 'cone' in shape else 4):
-                y=cy+(j-3)*3;points=[]
-                for x in range(8,153,8):
-                    spread=(x/6 if 'cone' in shape else 3)
-                    yy=y+math.sin(x*.4+j*2+i)*spread
-                    points.append((x*peak,yy))
-                for a,b in zip(points,points[1:]):line(*a,*b)
-                for x,y in points[::3]:c.px(x,y,core,5)
+            if shape=='spray':
+                for j in range(21):
+                    travel=((i*13+j*17)%140)/140
+                    x=10+travel*140*peak;y=cy+(j%7-3)*travel*9
+                    c.ellipse(x,y,1+j%3,1+j%2,main,shade)
+                    if j%3==0:line(x-5,y+1,x-2,y,2)
+            elif shape=='frost_cone':
+                for j in range(15):
+                    travel=((i*9+j*11)%125)/125
+                    x=18+travel*123*peak;y=cy+(j%5-2)*travel*13
+                    c.polygon([(x-8,y),(x+8,y-3),(x+2,y+4)],main,shade)
+                    line(x-5,y,x+6,y-2,5,core)
+                for j in (-1,0,1):line(8,cy,145*peak,cy+j*32,2)
+            elif shape=='lightning':
+                points=[(8,cy)]
+                for j,x in enumerate(range(20,153,12)):
+                    points.append((x*peak,cy+((j*13+i*7)%17-8)))
+                for j,(a,b) in enumerate(zip(points,points[1:])):
+                    line(*a,*b,5,core)
+                    if j%3==1:
+                        x,y=b;line(x,y,x+10,y-9-j%4);line(x+10,y-9-j%4,x+19,y-5)
+            else:
+                for j in range(7):
+                    y=cy+(j-3)*3;points=[]
+                    for x in range(8,153,8):
+                        yy=y+math.sin(x*.4+j*2+i)*(x/6)
+                        points.append((x*peak,yy))
+                    for a,b in zip(points,points[1:]):line(*a,*b)
+                    for x,y in points[::3]:c.px(x,y,core,5)
         elif shape in ('ember','inferno','nova','crown','fire_ring','trident'):
             tongues=3 if small else 9 if shape!='crown' else 13
             for j in range(tongues):

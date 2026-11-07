@@ -1,13 +1,18 @@
 """The shipped Wizard art must match a second deterministic native export."""
-import io,json,unittest
+import io,json,unittest,hashlib
 from pathlib import Path
 from PIL import Image
 from arcpix.out import PACK
 from parts import fx
-from parts.wizard_fx import DESIGNS
+from parts.wizard_fx import DESIGNS,frames
 from parts.wizard_casts import CASTS
 
 class WizardFxTests(unittest.TestCase):
+    def test_aimed_damage_spells_have_distinct_geometry_and_motion_before_colouring(self):
+        silhouettes={hashlib.sha256(b''.join(c.slot.tobytes() for c in frames(name))).digest()
+            for name in ('burning_hands','cone_of_cold','lightning_bolt','poison_spray')}
+        self.assertEqual(4,len(silhouettes))
+
     def test_all_sheets_are_byte_identical_to_their_native_generator(self):
         manifest=json.loads((PACK/'fx/manifest.json').read_text())
         entries=[e for e in fx.CATALOGUE if e.id.startswith('wizard_')]
