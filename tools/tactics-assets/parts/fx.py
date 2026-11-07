@@ -2472,6 +2472,8 @@ from .cleric_fx import catalogue as _cleric_catalogue, PASSIVES as _cleric_passi
 CATALOGUE += _cleric_catalogue()
 from .druid_fx import catalogue as _druid_catalogue, PASSIVES as _druid_passives
 CATALOGUE += _druid_catalogue()
+from .paladin_fx import catalogue as _paladin_catalogue, PASSIVES as _paladin_passives
+CATALOGUE += _paladin_catalogue()
 
 ATTACH = {
     "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
@@ -2496,7 +2498,7 @@ def build() -> None:
         for vname, v in e.variants.items():
             imgs = [fr.render(ramps(v)) for fr in frames]
             packed, anchor, trim = imgs, e.anchor, (0, 0)
-            if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_')):
+            if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_')):
                 from .fx_packing import pack
                 packed, anchor, trim = pack(imgs, e.anchor, e.attach)
             w, h = packed[0].size
@@ -2510,7 +2512,7 @@ def build() -> None:
         entry = {"name": e.name, "group": e.group, "frame": [w, h], "frames": len(frames), "fps": e.fps,
                  "loop": e.loop, "anchor": list(anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
                  "variants": files, "default": next(iter(files))}
-        if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_')):
+        if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_')):
             entry.update(sourceFrame=[frames[0].w, frames[0].h], trim=list(trim))
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
@@ -2529,7 +2531,7 @@ def build() -> None:
         "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
         "effects": effects,
         "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
-                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire", **_warlock_passives, **_cleric_passives, **_druid_passives},
+                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire", **_warlock_passives, **_cleric_passives, **_druid_passives, **_paladin_passives},
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)

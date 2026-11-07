@@ -216,7 +216,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
 
     /// <summary>The animations that are a blow, which lunge at arm's length. The rest (a spell's poses, a block) stay where they are.</summary>
-    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", "warlock_blade", "cleric_strike", Special];
+    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", "warlock_blade", "cleric_strike", "paladin_strike", Special];
 
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
     public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds = null) => new Builder(beat, shown, live, fx, sounds).Build();
@@ -238,10 +238,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private readonly Dictionary<UnitId, int> _stackedDamageRows = [];
         private readonly bool _stackedDamageNumbers = beat.Events.Any(e => e switch
         {
-            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.druid_", StringComparison.Ordinal) == true,
-            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.druid_", StringComparison.Ordinal) == true,
+            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true,
+            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true,
             _ => false,
-        }) || shown.Units.Any(u => u.Id == beat.Actor && IsDruidForm(u.Sprite));
+        }) || shown.Units.Any(u => u.Id == beat.Actor && (IsDruidForm(u.Sprite)||u.Sprite?.EndsWith("_paladin",StringComparison.Ordinal)==true));
         private int _rolls;
         private bool _rolled;          // the last thing to advance the clock was a roll, which already spaced this target from the last
         private int _areaEnd = -1;     // the last event of the area effect being played: before it, its targets resolve together
@@ -419,7 +419,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Swing(used);
                     break;
                 case PassiveTriggered passive:
-                    Burst(fx.Passive(passive.Passive), TileOf(passive.Owner));
+                    var rider=passive.Passive is "paladin.smite_damage" or "paladin.smite_damage_2" or "paladin.smite_damage_3" or "crusader.radiant_blades" or "avenger.vengeful_strikes";
+                    Burst(fx.Passive(passive.Passive),rider&&_ability?.Target.Unit is {} victim?TileOf(victim):TileOf(passive.Owner));
                     Apply(e);
                     break;
                 case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
@@ -457,7 +458,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     Sound(e is ConditionApplied gained ? SoundChoice.Condition(gained.Condition.Value) : null);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);
-                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon ? .06 : BeatTiming.Condition;
                     break;
                 case ConcentrationBroken broken:
                     Burst(Puff, TileOf(broken.Caster));
@@ -487,7 +488,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case CountdownTicked:
                     Sound("ui_countdown_tick");
                     Apply(e);
-                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon ? .06 : BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
@@ -512,7 +513,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += InArea ? 0 : DruidFormVolley ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon ? .06 : BeatTiming.Condition;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);
@@ -747,7 +748,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
-                if (DruidFormVolley)
+                if(PaladinWeapon)
+                {
+                    _cues.Add(new LungeCue(_t,.30,used.Source,source,target,"characters.paladin_strike"));
+                    _creaturePoseUntil=Math.Max(_creaturePoseUntil,_t+.30);
+                    SwingSound(used,"characters.paladin_strike");_t+=.10;
+                    if(_view.Units.Any(u=>u.Id==used.Source&&u.Conditions.Contains("elemental_weapon")))Burst("fx.paladin_elemental_strike.fire",source);
+                }
+                else if (DruidFormVolley)
                 {
                     var length = .35; // all five authored beast attack frames
                     _cues.Add(new LungeCue(_t,length,used.Source,source,target,anim));
@@ -786,7 +794,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
             Sound("ui_dice_roll");
             Moment("save", 0.1);
-            _t += _reaction is not null ? 0 : DruidFormVolley ? .08 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
+            _t += _reaction is not null ? 0 : DruidFormVolley || PaladinWeapon ? .08 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
             _rolled = true;
         }
 
@@ -803,7 +811,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Pop(resolved.Target, Miss, PopStyle.Damage);
                 Sound("attack_miss");
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
-                _t += DruidFormVolley ? .08 : EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
+                _t += DruidFormVolley || PaladinWeapon ? .08 : EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
         }
 
@@ -812,6 +820,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private bool DruidFormVolley => _ability?.Ability.Value == "common.attack"
             && IsDruidForm(_view.Units.FirstOrDefault(u => u.Id == _ability.Source)?.Sprite);
 
+        private bool PaladinWeapon => _ability is {} used && (used.Ability.Value is "crusader.searing_smite" or "avenger.soul_of_vengeance"
+            || used.Ability.Value=="common.attack" && _view.Units.Any(u=>u.Id==used.Source&&u.Sprite?.EndsWith("_paladin",StringComparison.Ordinal)==true));
         private bool EldritchVolley => _ability?.Ability.Value == "warlock.eldritch_blast";
 
         private void PlayDamage(Damaged hit)
@@ -860,7 +870,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (_reaction is not null)
                 return;
             if (!InArea)
-                _t += DruidFormVolley ? (_hits++ == 0 ? .12 : .04) : EldritchVolley ? (_hits++ == 0 ? .08 : .02) : _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
+                _t += PaladinWeapon ? (_hits++ == 0 ? .10 : .03) : DruidFormVolley ? (_hits++ == 0 ? .12 : .04) : EldritchVolley ? (_hits++ == 0 ? .08 : .02) : _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
             else if (!_rolled)
                 _t += BeatTiming.Stagger;
             _rolled = false;
