@@ -46,3 +46,5 @@ Latest eighth batch: [Ser Halvard / Black Knight and Drow Blade / Ysolde](../oat
 Latest ninth batch: [Troll and granite Stone Golem](../stone-and-mire/README.md). Twenty looks refreshed; nine older combat looks remain.
 
 Latest tenth batch: [Oak Mimic](../oak-ambush/README.md). Twenty-one looks refreshed; eight older combat looks remain.
+
+Latest eleventh batch: [Hunting Hound](../trail-companion/README.md). Twenty-two looks refreshed; seven older combat looks remain.

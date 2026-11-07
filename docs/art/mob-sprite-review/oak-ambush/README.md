@@ -34,3 +34,5 @@ Host arguments after `--`:
 Collect with `python tools/tactics-assets/imagegen/oak-ambush-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --moves /absolute/move-shots`, then rebuild review.cjs and run verify-review.cjs.
 
 Twenty-one looks refreshed across ten batches; [eight older combat looks remain](../production/refresh-status.json). No PR opened.
+
+Subsequent batch: [Hunting Hound](../trail-companion/README.md).

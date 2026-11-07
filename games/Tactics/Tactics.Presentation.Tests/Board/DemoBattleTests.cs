@@ -7,6 +7,20 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Trail_companion_review_places_the_friendly_hound_next_to_its_bite_target()
+    {
+        var battle = DemoBattle.View("river_crossing:trail-companion").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        var hound = Assert.Single(battle.Units, u => u.Sprite == "bosses.hound.tan");
+        var bandit = Assert.Single(battle.Units, u => u.Sprite == "characters.bandit");
+        Assert.Equal("Party", hound.Side);
+        Assert.Equal(1, Math.Max(Math.Abs(hound.At.X - bandit.At.X), Math.Abs(hound.At.Y - bandit.At.Y)));
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Oak_ambush_review_places_the_small_chest_beside_its_adjacent_target_and_scale_references()
     {
         var battle = DemoBattle.View("river_crossing:oak-ambush").Battle!;

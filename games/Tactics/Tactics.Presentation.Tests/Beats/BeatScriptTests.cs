@@ -36,6 +36,34 @@ public sealed class BeatScriptTests
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
 
     [Fact]
+    public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose()
+    {
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.hound.tan" } : u)] };
+        var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), null);
+        var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "piercing", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.hound.tan")!.Anim(lunge.Anim);
+        Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
+        Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+    }
+
+    [Fact]
+    public void Companion_replay_uses_a_walkable_round_trip_and_the_unmodified_natural_attack()
+    {
+        var steps = TrailCompanionDemo.Steps();
+        Assert.Equal(4, steps.Count);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var walk = Assert.Single(steps[1].View.Battle!.Beats.SelectMany(b => b.Events).OfType<Moved>());
+        Assert.Equal(walk.Path[0], walk.Path[^1]);
+        Assert.All(walk.Path, tile => Assert.False(terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable)));
+        var used = Assert.Single(steps[2].View.Battle!.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>());
+        Assert.Equal("common.attack", used.Ability.Value);
+        Assert.Null(used.Presentation);
+    }
+
+    [Fact]
     public void Oak_ambush_replay_uses_a_walkable_skitter_and_the_real_adhesive_binding()
     {
         var steps = OakAmbushDemo.Steps(Pack.Root);

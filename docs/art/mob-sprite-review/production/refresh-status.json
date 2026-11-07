@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty-one refreshed designs integrated across ten batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty-two refreshed designs integrated across eleven batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -21,9 +21,10 @@
     "characters.dark_elf",
     "bosses.troll.troll",
     "bosses.golem.granite",
-    "bosses.mimic.oak"
+    "bosses.mimic.oak",
+    "bosses.hound.tan"
   ],
-  "remainingOlderCombatLooks": 8,
+  "remainingOlderCombatLooks": 7,
   "looks": [
     {
       "baselineNumber": 1,
@@ -59,7 +60,7 @@
       "baselineNumber": 6,
       "name": "Hunting Hound",
       "key": "bosses.hound.tan",
-      "status": "awaiting refresh"
+      "status": "integrated eleventh batch"
     },
     {
       "baselineNumber": 7,
