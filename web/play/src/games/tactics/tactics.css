@@ -292,6 +292,11 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   font: 800 20px/1 var(--wf-serif); color: var(--wf-gold-hi); background: rgba(230, 189, 92, 0.1); border: 1px solid rgba(230, 189, 92, 0.45); }
 .tx-lv small { font: 700 9px var(--wf-serif); letter-spacing: 0.15em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-enc-text b { display: block; font: 700 18px var(--wf-serif); letter-spacing: 0.02em; }
+.tx-lv.unrated { font: 700 12px var(--wf-sans); }
+.tx-enc-guidance, .tx-enc-reason { display: block; font: 700 16px/1.3 var(--wf-sans); }
+.tx-enc-guidance { color: var(--wf-gold-hi); }
+.tx-enc-reason { color: var(--wf-ink); }
+.tx .tx-encounter:disabled { opacity: 1; }
 
 .tx-moment { display: flex; justify-content: center; padding: 18px 0 4px; }
 .tx-moment img { width: auto; height: auto; max-width: 100%; }

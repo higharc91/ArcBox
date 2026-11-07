@@ -178,6 +178,9 @@ export interface EncounterOption {
   fits: boolean;
   /** AI companions who'd join to bring the party up to the minimum. */
   companions?: number;
+  /** Intended encounter level compared with the campaign's current party level. */
+  guidance?: string | null;
+  unavailableReason?: string | null;
 }
 
 export interface WalkMember {
