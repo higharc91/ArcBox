@@ -1,0 +1,18 @@
+{
+  "priorCommit": "481f24101022ee4f4f14af4046c0a7535ec0801f",
+  "addedCreatureEntries": [
+    "mob_refresh_black_knight",
+    "mob_refresh_dark_elf"
+  ],
+  "changedPortraitPresets": [
+    "black_knight",
+    "dark_elf"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "runtimeAssets": 14,
+  "sourceImages": 14,
+  "selectedDistinctPoses": 272,
+  "rejectedSourcesExcluded": true
+}

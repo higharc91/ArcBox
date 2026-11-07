@@ -21,6 +21,8 @@ public sealed class MobRefreshTests
     [InlineData("bosses.wraith.wraith", "wraith")]
     [InlineData("characters.necromancer", "necromancer")]
     [InlineData("characters.lich", "lich")]
+    [InlineData("characters.black_knight", "black_knight")]
+    [InlineData("characters.dark_elf", "dark_elf")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -72,6 +74,26 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Fact]
+    public void Halvard_cleave_uses_the_greatsword_swing_and_ward_uses_a_separate_guard()
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.black_knight")!;
+        Assert.Equal(sprite.Anim("attack").Frames.ToArray(), sprite.Anim("characters.slam").Frames.ToArray());
+        Assert.Equal(sprite.Anim("attack").Fps, sprite.Anim("characters.slam").Fps);
+        Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.buff").Frames.ToArray());
+        Assert.False(sprite.Anim("cast").Frames.SequenceEqual(sprite.Anim("attack").Frames));
+        Assert.False(sprite.Anim("characters.slam").Loop);
+    }
+
+    [Fact]
+    public void Drow_shadow_step_uses_an_invocation_separate_from_the_rapier_thrust()
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.dark_elf")!;
+        Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.cast").Frames.ToArray());
+        Assert.False(sprite.Anim("cast").Loop);
+        Assert.False(sprite.Anim("cast").Frames.SequenceEqual(sprite.Anim("attack").Frames));
     }
 
     [Theory]
@@ -241,6 +263,8 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.wraith.wraith")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("characters.necromancer")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("characters.lich")!.HeadLift / person, .95f, 1.25f);
+        Assert.InRange(art.Sprite("characters.black_knight")!.HeadLift / person, 1f, 1.4f);
+        Assert.InRange(art.Sprite("characters.dark_elf")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

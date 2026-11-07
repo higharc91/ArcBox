@@ -272,12 +272,12 @@
       "surprised": "bandit_refresh_surprised.png"
     },
     "black_knight": {
-      "idle": "black_knight_idle.png",
-      "hurt": "black_knight_hurt.png",
-      "happy": "black_knight_happy.png",
-      "angry": "black_knight_angry.png",
-      "sad": "black_knight_sad.png",
-      "surprised": "black_knight_surprised.png"
+      "idle": "black_knight_refresh_idle.png",
+      "hurt": "black_knight_refresh_hurt.png",
+      "happy": "black_knight_refresh_happy.png",
+      "angry": "black_knight_refresh_angry.png",
+      "sad": "black_knight_refresh_sad.png",
+      "surprised": "black_knight_refresh_surprised.png"
     },
     "cultist": {
       "idle": "cultist_refresh_idle.png",
@@ -344,12 +344,12 @@
       "surprised": "lich_refresh_surprised.png"
     },
     "dark_elf": {
-      "idle": "dark_elf_idle.png",
-      "hurt": "dark_elf_hurt.png",
-      "happy": "dark_elf_happy.png",
-      "angry": "dark_elf_angry.png",
-      "sad": "dark_elf_sad.png",
-      "surprised": "dark_elf_surprised.png"
+      "idle": "dark_elf_refresh_idle.png",
+      "hurt": "dark_elf_refresh_hurt.png",
+      "happy": "dark_elf_refresh_happy.png",
+      "angry": "dark_elf_refresh_angry.png",
+      "sad": "dark_elf_refresh_sad.png",
+      "surprised": "dark_elf_refresh_surprised.png"
     },
     "necromancer": {
       "idle": "necromancer_refresh_idle.png",

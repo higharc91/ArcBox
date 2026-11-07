@@ -40,3 +40,5 @@ Latest fifth batch: [Bone Warden warrior and archer](../bone-wardens/README.md).
 Latest sixth batch: [Risen of Frostpeak and wraith](../hollow-dead/README.md).
 
 Latest seventh batch: [Ivo Rime / necromancer and Oswin Hale / lich](../rime-keepers/README.md).
+
+Latest eighth batch: [Ser Halvard / Black Knight and Drow Blade / Ysolde](../oath-and-shadow/README.md). Eighteen looks refreshed; 11 older combat looks remain.

@@ -1,0 +1,16 @@
+{
+  "content/tactics/base/creatures/mob_refresh_black_knight.png": "eef74ee36050b8e46730034c408c7a20f815400c9931eb59f6caca6873d39a00",
+  "content/tactics/base/creatures/mob_refresh_dark_elf.png": "07eb4b3e57c75667d749e719976cee7772741d43210f9c5bd2f72d37c82d26d6",
+  "content/tactics/base/portraits/black_knight_refresh_angry.png": "bbd32da355ac44c687c15393adc17141becc709b70bf2ca4919ac733bc8ead50",
+  "content/tactics/base/portraits/black_knight_refresh_happy.png": "2906fccc1a0cdddbf14f450ff50a8a06d17f3367ddd9f375360589c6a4e5600d",
+  "content/tactics/base/portraits/black_knight_refresh_hurt.png": "d5ee4f57837224aa7ec0e148ea0cd346ce143d86fb1ec477b5d0576c9b2a6188",
+  "content/tactics/base/portraits/black_knight_refresh_idle.png": "785b9f7418fef0fe1be78199dbb9c0ff48cf17405f79cd735fa52734ba183297",
+  "content/tactics/base/portraits/black_knight_refresh_sad.png": "94c2d8d917d93711b900ca14785775d97d4127cc1c339d21aba9ff722836c7fe",
+  "content/tactics/base/portraits/black_knight_refresh_surprised.png": "23659e9fd68c734f2053a74ad90651a6d761cc502b8583713e69e8e4056bdd28",
+  "content/tactics/base/portraits/dark_elf_refresh_angry.png": "1f7769843463f51f9f89da07d59962b23e025ebd3d5978c1ab9daf0fc7630e5d",
+  "content/tactics/base/portraits/dark_elf_refresh_happy.png": "ecf37604d10eb40dc749c1b0d5c718cdf0504efba9ebadc997482717856deb3b",
+  "content/tactics/base/portraits/dark_elf_refresh_hurt.png": "519b3ee5990fe6a1d37fcdfb7b96a0350a0ec6c40eec3f3020be1c25da27fe5e",
+  "content/tactics/base/portraits/dark_elf_refresh_idle.png": "2015de732275ebe5894bde12f6ca475f4296a65ab5f4cf5def1cf2120972caf7",
+  "content/tactics/base/portraits/dark_elf_refresh_sad.png": "4b5ce2424a9633dab817bf6c3ff47e79bfb13070707b16095fc78deb06c40e9b",
+  "content/tactics/base/portraits/dark_elf_refresh_surprised.png": "8f7a5c9557a9495bb39a1428a78e9095a0d4996391ae1f370afd9364a85bb325"
+}

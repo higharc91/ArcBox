@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; sixteen refreshed designs integrated across seven batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; eighteen refreshed designs integrated across eight batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -16,9 +16,11 @@
     "characters.zombie",
     "bosses.wraith.wraith",
     "characters.necromancer",
-    "characters.lich"
+    "characters.lich",
+    "characters.black_knight",
+    "characters.dark_elf"
   ],
-  "remainingOlderCombatLooks": 13,
+  "remainingOlderCombatLooks": 11,
   "looks": [
     {
       "baselineNumber": 1,
@@ -102,7 +104,7 @@
       "baselineNumber": 14,
       "name": "Black Knight / Ser Halvard",
       "key": "characters.black_knight",
-      "status": "awaiting refresh"
+      "status": "integrated eighth batch"
     },
     {
       "baselineNumber": 15,
@@ -120,7 +122,7 @@
       "baselineNumber": 17,
       "name": "Drow Blade",
       "key": "characters.dark_elf",
-      "status": "awaiting refresh"
+      "status": "integrated eighth batch"
     },
     {
       "baselineNumber": 18,

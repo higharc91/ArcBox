@@ -1,0 +1,8202 @@
+[
+  {
+    "id": "black_knight",
+    "size": 288,
+    "anchor": [
+      144,
+      256
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          283.5,
+          16
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          246,
+          5,
+          77,
+          144
+        ],
+        "bounds": [
+          248,
+          7,
+          321,
+          147
+        ],
+        "foot": [
+          282.5,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          574.5,
+          15
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          538,
+          5,
+          76,
+          143
+        ],
+        "bounds": [
+          540,
+          7,
+          612,
+          146
+        ],
+        "foot": [
+          574.5,
+          146
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          867.0,
+          15
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          831,
+          5,
+          76,
+          144
+        ],
+        "bounds": [
+          833,
+          7,
+          905,
+          147
+        ],
+        "foot": [
+          866.5,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1159.0,
+          16
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          1123,
+          5,
+          76,
+          144
+        ],
+        "bounds": [
+          1125,
+          7,
+          1197,
+          147
+        ],
+        "foot": [
+          1158.5,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          149.5,
+          66
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          88,
+          64,
+          96,
+          184
+        ],
+        "bounds": [
+          90,
+          66,
+          182,
+          246
+        ],
+        "foot": [
+          137.5,
+          246
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          359.0,
+          67
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          297,
+          64,
+          98,
+          185
+        ],
+        "bounds": [
+          299,
+          66,
+          393,
+          247
+        ],
+        "foot": [
+          344.5,
+          247
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          67
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          496,
+          64,
+          97,
+          184
+        ],
+        "bounds": [
+          498,
+          66,
+          591,
+          246
+        ],
+        "foot": [
+          544.5,
+          246
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          762.5,
+          66
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          702,
+          64,
+          96,
+          187
+        ],
+        "bounds": [
+          704,
+          66,
+          796,
+          249
+        ],
+        "foot": [
+          748.0,
+          249
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          76
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          68,
+          58,
+          90,
+          174
+        ],
+        "bounds": [
+          70,
+          60,
+          156,
+          230
+        ],
+        "foot": [
+          111.5,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          314.0,
+          35
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          274,
+          33,
+          96,
+          199
+        ],
+        "bounds": [
+          276,
+          35,
+          368,
+          230
+        ],
+        "foot": [
+          333.0,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.0,
+          91
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          481,
+          89,
+          114,
+          143
+        ],
+        "bounds": [
+          483,
+          91,
+          593,
+          230
+        ],
+        "foot": [
+          537.5,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.5,
+          76
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          729,
+          59,
+          86,
+          173
+        ],
+        "bounds": [
+          731,
+          61,
+          813,
+          230
+        ],
+        "foot": [
+          772.0,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          138.0,
+          86
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          73,
+          56,
+          132,
+          248
+        ],
+        "bounds": [
+          75,
+          58,
+          203,
+          302
+        ],
+        "foot": [
+          135.0,
+          302
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          407.5,
+          230
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          271,
+          228,
+          324,
+          77
+        ],
+        "bounds": [
+          273,
+          230,
+          593,
+          303
+        ],
+        "foot": [
+          432.0,
+          303
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          282.0,
+          15
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          243,
+          13,
+          77,
+          136
+        ],
+        "bounds": [
+          245,
+          15,
+          318,
+          147
+        ],
+        "foot": [
+          282.0,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          846.5,
+          8
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          810,
+          6,
+          73,
+          143
+        ],
+        "bounds": [
+          812,
+          8,
+          881,
+          147
+        ],
+        "foot": [
+          848.0,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1124.5,
+          15
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          1086,
+          12,
+          77,
+          137
+        ],
+        "bounds": [
+          1088,
+          14,
+          1161,
+          147
+        ],
+        "foot": [
+          1125.5,
+          147
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          285.0,
+          153
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          241,
+          151,
+          71,
+          135
+        ],
+        "bounds": [
+          243,
+          153,
+          310,
+          284
+        ],
+        "foot": [
+          276.0,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          577.0,
+          153
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          533,
+          150,
+          72,
+          136
+        ],
+        "bounds": [
+          535,
+          152,
+          603,
+          284
+        ],
+        "foot": [
+          568.5,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          869.5,
+          153
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          826,
+          150,
+          71,
+          136
+        ],
+        "bounds": [
+          828,
+          152,
+          895,
+          284
+        ],
+        "foot": [
+          861.0,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1161.5,
+          153
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          1119,
+          150,
+          70,
+          136
+        ],
+        "bounds": [
+          1121,
+          152,
+          1187,
+          284
+        ],
+        "foot": [
+          1153.0,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          147.0,
+          273
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          91,
+          271,
+          90,
+          181
+        ],
+        "bounds": [
+          93,
+          273,
+          179,
+          450
+        ],
+        "foot": [
+          132.5,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          352.0,
+          273
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          297,
+          271,
+          89,
+          180
+        ],
+        "bounds": [
+          299,
+          273,
+          384,
+          449
+        ],
+        "foot": [
+          342.0,
+          449
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5,
+          273
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          497,
+          271,
+          89,
+          181
+        ],
+        "bounds": [
+          499,
+          273,
+          584,
+          450
+        ],
+        "foot": [
+          538.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.0,
+          273
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          704,
+          271,
+          89,
+          181
+        ],
+        "bounds": [
+          706,
+          273,
+          791,
+          450
+        ],
+        "foot": [
+          749.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          270
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          69,
+          268,
+          85,
+          173
+        ],
+        "bounds": [
+          71,
+          270,
+          152,
+          439
+        ],
+        "foot": [
+          111.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.5,
+          260
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          274,
+          258,
+          97,
+          183
+        ],
+        "bounds": [
+          276,
+          260,
+          369,
+          439
+        ],
+        "foot": [
+          331.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.5,
+          298
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          449,
+          296,
+          152,
+          144
+        ],
+        "bounds": [
+          451,
+          298,
+          599,
+          438
+        ],
+        "foot": [
+          524.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          270
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          731,
+          267,
+          80,
+          174
+        ],
+        "bounds": [
+          733,
+          269,
+          809,
+          439
+        ],
+        "foot": [
+          773.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          754.0,
+          67
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          667,
+          64,
+          134,
+          240
+        ],
+        "bounds": [
+          669,
+          66,
+          799,
+          302
+        ],
+        "foot": [
+          728.5,
+          302
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1007.0,
+          222
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          870,
+          220,
+          326,
+          86
+        ],
+        "bounds": [
+          872,
+          222,
+          1194,
+          304
+        ],
+        "foot": [
+          1033.0,
+          304
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          278.5,
+          154
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          239,
+          152,
+          71,
+          138
+        ],
+        "bounds": [
+          241,
+          154,
+          308,
+          288
+        ],
+        "foot": [
+          278.0,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          844.5,
+          149
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          808,
+          146,
+          69,
+          144
+        ],
+        "bounds": [
+          810,
+          148,
+          875,
+          288
+        ],
+        "foot": [
+          845.0,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1123.0,
+          154
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          1084,
+          151,
+          70,
+          139
+        ],
+        "bounds": [
+          1086,
+          153,
+          1152,
+          288
+        ],
+        "foot": [
+          1122.0,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          268.5,
+          298
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          245,
+          286,
+          74,
+          137
+        ],
+        "bounds": [
+          247,
+          288,
+          317,
+          421
+        ],
+        "foot": [
+          270.0,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          562.0,
+          298
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          538,
+          287,
+          73,
+          136
+        ],
+        "bounds": [
+          540,
+          289,
+          609,
+          421
+        ],
+        "foot": [
+          562.0,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          854.0,
+          298
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          831,
+          286,
+          73,
+          137
+        ],
+        "bounds": [
+          833,
+          288,
+          902,
+          421
+        ],
+        "foot": [
+          854.5,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1146.0,
+          298
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          1123,
+          287,
+          73,
+          136
+        ],
+        "bounds": [
+          1125,
+          289,
+          1194,
+          421
+        ],
+        "foot": [
+          1147.0,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.5,
+          482
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          92,
+          465,
+          94,
+          181
+        ],
+        "bounds": [
+          94,
+          467,
+          184,
+          644
+        ],
+        "foot": [
+          123.5,
+          644
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          482
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          301,
+          465,
+          92,
+          181
+        ],
+        "bounds": [
+          303,
+          467,
+          391,
+          644
+        ],
+        "foot": [
+          334.5,
+          644
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          531.5,
+          482
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          502,
+          465,
+          91,
+          184
+        ],
+        "bounds": [
+          504,
+          467,
+          591,
+          647
+        ],
+        "foot": [
+          533.5,
+          647
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          738.0,
+          482
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          707,
+          466,
+          93,
+          180
+        ],
+        "bounds": [
+          709,
+          468,
+          798,
+          644
+        ],
+        "foot": [
+          742.0,
+          644
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.5,
+          496
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          71,
+          477,
+          91,
+          176
+        ],
+        "bounds": [
+          73,
+          479,
+          160,
+          651
+        ],
+        "foot": [
+          103.0,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          472
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          282,
+          469,
+          91,
+          184
+        ],
+        "bounds": [
+          284,
+          471,
+          371,
+          651
+        ],
+        "foot": [
+          327.0,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          523.5,
+          513
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          424,
+          511,
+          175,
+          141
+        ],
+        "bounds": [
+          426,
+          513,
+          597,
+          650
+        ],
+        "foot": [
+          508.5,
+          650
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.5,
+          496
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          733,
+          477,
+          92,
+          176
+        ],
+        "bounds": [
+          735,
+          479,
+          823,
+          651
+        ],
+        "foot": [
+          765.5,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          142.0,
+          351
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          78,
+          349,
+          113,
+          243
+        ],
+        "bounds": [
+          80,
+          351,
+          189,
+          590
+        ],
+        "foot": [
+          132.0,
+          590
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          412.0,
+          517
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          267,
+          514,
+          338,
+          76
+        ],
+        "bounds": [
+          269,
+          516,
+          603,
+          588
+        ],
+        "foot": [
+          436.0,
+          588
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          268.0,
+          297
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          238,
+          294,
+          59,
+          131
+        ],
+        "bounds": [
+          240,
+          296,
+          295,
+          423
+        ],
+        "foot": [
+          270.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          839.0,
+          292
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          810,
+          289,
+          60,
+          136
+        ],
+        "bounds": [
+          812,
+          291,
+          868,
+          423
+        ],
+        "foot": [
+          840.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1120.0,
+          297
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          1086,
+          295,
+          60,
+          130
+        ],
+        "bounds": [
+          1088,
+          297,
+          1144,
+          423
+        ],
+        "foot": [
+          1117.5,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          274.5,
+          436
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          246,
+          426,
+          73,
+          132
+        ],
+        "bounds": [
+          248,
+          428,
+          317,
+          556
+        ],
+        "foot": [
+          273.0,
+          556
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.5,
+          436
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          539,
+          425,
+          72,
+          133
+        ],
+        "bounds": [
+          541,
+          427,
+          609,
+          556
+        ],
+        "foot": [
+          566.0,
+          556
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          859.5,
+          436
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          831,
+          425,
+          72,
+          133
+        ],
+        "bounds": [
+          833,
+          427,
+          901,
+          556
+        ],
+        "foot": [
+          858.0,
+          556
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1151.0,
+          436
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          1123,
+          425,
+          73,
+          133
+        ],
+        "bounds": [
+          1125,
+          427,
+          1194,
+          556
+        ],
+        "foot": [
+          1150.0,
+          556
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          128.5,
+          674
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          87,
+          660,
+          101,
+          184
+        ],
+        "bounds": [
+          89,
+          662,
+          186,
+          842
+        ],
+        "foot": [
+          130.0,
+          842
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          675
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          297,
+          661,
+          100,
+          186
+        ],
+        "bounds": [
+          299,
+          663,
+          395,
+          845
+        ],
+        "foot": [
+          339.5,
+          845
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.5,
+          676
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          494,
+          660,
+          103,
+          184
+        ],
+        "bounds": [
+          496,
+          662,
+          595,
+          842
+        ],
+        "foot": [
+          538.0,
+          842
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          741.5,
+          676
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          702,
+          662,
+          99,
+          182
+        ],
+        "bounds": [
+          704,
+          664,
+          799,
+          842
+        ],
+        "foot": [
+          741.5,
+          842
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.5,
+          712
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          66,
+          698,
+          86,
+          166
+        ],
+        "bounds": [
+          68,
+          700,
+          150,
+          862
+        ],
+        "foot": [
+          105.5,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          684
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          284,
+          682,
+          86,
+          182
+        ],
+        "bounds": [
+          286,
+          684,
+          368,
+          862
+        ],
+        "foot": [
+          329.5,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          531.5,
+          725
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          456,
+          723,
+          143,
+          141
+        ],
+        "bounds": [
+          458,
+          725,
+          597,
+          862
+        ],
+        "foot": [
+          555.0,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          712
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          728,
+          697,
+          86,
+          167
+        ],
+        "bounds": [
+          730,
+          699,
+          812,
+          862
+        ],
+        "foot": [
+          767.5,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          706.0,
+          375
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          662,
+          350,
+          119,
+          240
+        ],
+        "bounds": [
+          664,
+          352,
+          779,
+          588
+        ],
+        "foot": [
+          730.0,
+          588
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1027.5,
+          514
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          869,
+          512,
+          337,
+          78
+        ],
+        "bounds": [
+          871,
+          514,
+          1204,
+          588
+        ],
+        "foot": [
+          1038.0,
+          588
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          280.5,
+          432
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          247,
+          430,
+          60,
+          133
+        ],
+        "bounds": [
+          249,
+          432,
+          305,
+          561
+        ],
+        "foot": [
+          275.0,
+          561
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          844.0,
+          430
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          816,
+          428,
+          58,
+          136
+        ],
+        "bounds": [
+          818,
+          430,
+          872,
+          562
+        ],
+        "foot": [
+          844.5,
+          562
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1126.5,
+          433
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          1093,
+          430,
+          61,
+          133
+        ],
+        "bounds": [
+          1095,
+          432,
+          1152,
+          561
+        ],
+        "foot": [
+          1122.0,
+          561
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          276.5,
+          570
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          246,
+          562,
+          66,
+          133
+        ],
+        "bounds": [
+          248,
+          564,
+          310,
+          693
+        ],
+        "foot": [
+          277.5,
+          693
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          568.5,
+          570
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          538,
+          562,
+          66,
+          133
+        ],
+        "bounds": [
+          540,
+          564,
+          602,
+          693
+        ],
+        "foot": [
+          570.0,
+          693
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          861.0,
+          570
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          831,
+          562,
+          66,
+          133
+        ],
+        "bounds": [
+          833,
+          564,
+          895,
+          693
+        ],
+        "foot": [
+          861.5,
+          693
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1153.5,
+          570
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          1123,
+          562,
+          66,
+          133
+        ],
+        "bounds": [
+          1125,
+          564,
+          1187,
+          693
+        ],
+        "foot": [
+          1154.5,
+          693
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          132.0,
+          871
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          88,
+          859,
+          96,
+          183
+        ],
+        "bounds": [
+          90,
+          861,
+          182,
+          1040
+        ],
+        "foot": [
+          130.5,
+          1040
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          871
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          294,
+          859,
+          95,
+          183
+        ],
+        "bounds": [
+          296,
+          861,
+          387,
+          1040
+        ],
+        "foot": [
+          338.0,
+          1040
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.0,
+          871
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          495,
+          859,
+          97,
+          183
+        ],
+        "bounds": [
+          497,
+          861,
+          590,
+          1040
+        ],
+        "foot": [
+          542.5,
+          1040
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          743.5,
+          871
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          700,
+          859,
+          97,
+          183
+        ],
+        "bounds": [
+          702,
+          861,
+          795,
+          1040
+        ],
+        "foot": [
+          746.5,
+          1040
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.0,
+          914
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          67,
+          890,
+          83,
+          179
+        ],
+        "bounds": [
+          69,
+          892,
+          148,
+          1067
+        ],
+        "foot": [
+          106.5,
+          1067
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.5,
+          914
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          288,
+          885,
+          80,
+          184
+        ],
+        "bounds": [
+          290,
+          887,
+          366,
+          1067
+        ],
+        "foot": [
+          327.5,
+          1067
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.5,
+          931
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          475,
+          928,
+          116,
+          141
+        ],
+        "bounds": [
+          477,
+          930,
+          589,
+          1067
+        ],
+        "foot": [
+          552.5,
+          1067
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.0,
+          914
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          727,
+          889,
+          88,
+          180
+        ],
+        "bounds": [
+          729,
+          891,
+          813,
+          1067
+        ],
+        "foot": [
+          767.5,
+          1067
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          150.0,
+          634
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          66,
+          632,
+          127,
+          255
+        ],
+        "bounds": [
+          68,
+          634,
+          191,
+          885
+        ],
+        "foot": [
+          129.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          397.5,
+          807
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          267,
+          805,
+          338,
+          82
+        ],
+        "bounds": [
+          269,
+          807,
+          603,
+          885
+        ],
+        "foot": [
+          434.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          276.0,
+          569
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          242,
+          567,
+          67,
+          134
+        ],
+        "bounds": [
+          244,
+          569,
+          307,
+          699
+        ],
+        "foot": [
+          275.5,
+          699
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          843.0,
+          565
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          809,
+          563,
+          68,
+          138
+        ],
+        "bounds": [
+          811,
+          565,
+          875,
+          699
+        ],
+        "foot": [
+          843.5,
+          699
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1122.5,
+          569
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          1088,
+          567,
+          68,
+          134
+        ],
+        "bounds": [
+          1090,
+          569,
+          1154,
+          699
+        ],
+        "foot": [
+          1122.5,
+          699
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          274.0,
+          709
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          247,
+          700,
+          72,
+          135
+        ],
+        "bounds": [
+          249,
+          702,
+          317,
+          833
+        ],
+        "foot": [
+          277.0,
+          833
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.0,
+          709
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          539,
+          700,
+          72,
+          135
+        ],
+        "bounds": [
+          541,
+          702,
+          609,
+          833
+        ],
+        "foot": [
+          570.0,
+          833
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          859.0,
+          709
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          832,
+          700,
+          71,
+          135
+        ],
+        "bounds": [
+          834,
+          702,
+          901,
+          833
+        ],
+        "foot": [
+          862.0,
+          833
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1150.5,
+          709
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          1124,
+          700,
+          71,
+          135
+        ],
+        "bounds": [
+          1126,
+          702,
+          1193,
+          833
+        ],
+        "foot": [
+          1154.0,
+          833
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          1072
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          89,
+          1057,
+          102,
+          182
+        ],
+        "bounds": [
+          91,
+          1059,
+          189,
+          1237
+        ],
+        "foot": [
+          134.0,
+          1237
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          1071
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          296,
+          1057,
+          98,
+          184
+        ],
+        "bounds": [
+          298,
+          1059,
+          392,
+          1239
+        ],
+        "foot": [
+          333.0,
+          1239
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.5,
+          1071
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          498,
+          1057,
+          100,
+          184
+        ],
+        "bounds": [
+          500,
+          1059,
+          596,
+          1239
+        ],
+        "foot": [
+          537.5,
+          1239
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          741.5,
+          1071
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          703,
+          1058,
+          100,
+          183
+        ],
+        "bounds": [
+          705,
+          1060,
+          801,
+          1239
+        ],
+        "foot": [
+          742.0,
+          1239
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          1116
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          72,
+          1096,
+          92,
+          178
+        ],
+        "bounds": [
+          74,
+          1098,
+          162,
+          1272
+        ],
+        "foot": [
+          109.0,
+          1272
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.0,
+          1115
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          287,
+          1097,
+          96,
+          177
+        ],
+        "bounds": [
+          289,
+          1099,
+          381,
+          1272
+        ],
+        "foot": [
+          320.5,
+          1272
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.5,
+          1132
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          480,
+          1130,
+          143,
+          143
+        ],
+        "bounds": [
+          482,
+          1132,
+          621,
+          1271
+        ],
+        "foot": [
+          526.5,
+          1271
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1115
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          733,
+          1097,
+          88,
+          177
+        ],
+        "bounds": [
+          735,
+          1099,
+          819,
+          1272
+        ],
+        "foot": [
+          770.0,
+          1272
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          748.0,
+          643
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          664,
+          641,
+          131,
+          246
+        ],
+        "bounds": [
+          666,
+          643,
+          793,
+          885
+        ],
+        "foot": [
+          721.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1012.5,
+          806
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          869,
+          803,
+          339,
+          84
+        ],
+        "bounds": [
+          871,
+          805,
+          1206,
+          885
+        ],
+        "foot": [
+          1035.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          272.0,
+          707
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          243,
+          704,
+          67,
+          135
+        ],
+        "bounds": [
+          245,
+          706,
+          308,
+          837
+        ],
+        "foot": [
+          276.5,
+          837
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          847.5,
+          703
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          812,
+          701,
+          68,
+          138
+        ],
+        "bounds": [
+          814,
+          703,
+          878,
+          837
+        ],
+        "foot": [
+          847.5,
+          837
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1119.0,
+          707
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          1089,
+          705,
+          68,
+          134
+        ],
+        "bounds": [
+          1091,
+          707,
+          1155,
+          837
+        ],
+        "foot": [
+          1122.5,
+          837
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          273.5,
+          849
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          252,
+          842,
+          61,
+          131
+        ],
+        "bounds": [
+          254,
+          844,
+          311,
+          971
+        ],
+        "foot": [
+          276.0,
+          971
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          565.5,
+          849
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          544,
+          842,
+          62,
+          131
+        ],
+        "bounds": [
+          546,
+          844,
+          604,
+          971
+        ],
+        "foot": [
+          568.5,
+          971
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          858.5,
+          849
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          837,
+          842,
+          61,
+          131
+        ],
+        "bounds": [
+          839,
+          844,
+          896,
+          971
+        ],
+        "foot": [
+          861.0,
+          971
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1150.5,
+          849
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          1129,
+          842,
+          61,
+          131
+        ],
+        "bounds": [
+          1131,
+          844,
+          1188,
+          971
+        ],
+        "foot": [
+          1153.5,
+          971
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.0,
+          1268
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          96,
+          1256,
+          83,
+          178
+        ],
+        "bounds": [
+          98,
+          1258,
+          177,
+          1432
+        ],
+        "foot": [
+          130.5,
+          1432
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          1268
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          299,
+          1256,
+          81,
+          178
+        ],
+        "bounds": [
+          301,
+          1258,
+          378,
+          1432
+        ],
+        "foot": [
+          334.5,
+          1432
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.0,
+          1268
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          501,
+          1256,
+          84,
+          177
+        ],
+        "bounds": [
+          503,
+          1258,
+          583,
+          1431
+        ],
+        "foot": [
+          537.5,
+          1431
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          737.5,
+          1268
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          708,
+          1256,
+          82,
+          177
+        ],
+        "bounds": [
+          710,
+          1258,
+          788,
+          1431
+        ],
+        "foot": [
+          745.0,
+          1431
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.0,
+          1330
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          74,
+          1316,
+          82,
+          179
+        ],
+        "bounds": [
+          76,
+          1318,
+          154,
+          1493
+        ],
+        "foot": [
+          105.5,
+          1493
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.5,
+          1329
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          289,
+          1312,
+          92,
+          183
+        ],
+        "bounds": [
+          291,
+          1314,
+          379,
+          1493
+        ],
+        "foot": [
+          322.5,
+          1493
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          1352
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          479,
+          1350,
+          152,
+          143
+        ],
+        "bounds": [
+          481,
+          1352,
+          629,
+          1491
+        ],
+        "foot": [
+          522.0,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.5,
+          1331
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          736,
+          1318,
+          82,
+          177
+        ],
+        "bounds": [
+          738,
+          1320,
+          816,
+          1493
+        ],
+        "foot": [
+          768.5,
+          1493
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          951
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          68,
+          942,
+          119,
+          236
+        ],
+        "bounds": [
+          70,
+          944,
+          185,
+          1176
+        ],
+        "foot": [
+          113.0,
+          1176
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          405.5,
+          1106
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          263,
+          1104,
+          340,
+          78
+        ],
+        "bounds": [
+          265,
+          1106,
+          601,
+          1180
+        ],
+        "foot": [
+          432.0,
+          1180
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          272.5,
+          846
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          248,
+          844,
+          60,
+          131
+        ],
+        "bounds": [
+          250,
+          846,
+          306,
+          973
+        ],
+        "foot": [
+          275.5,
+          973
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          840.0,
+          854
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          814,
+          841,
+          59,
+          135
+        ],
+        "bounds": [
+          816,
+          843,
+          871,
+          974
+        ],
+        "foot": [
+          841.5,
+          974
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1116.5,
+          848
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          1093,
+          844,
+          60,
+          132
+        ],
+        "bounds": [
+          1095,
+          846,
+          1151,
+          974
+        ],
+        "foot": [
+          1121.0,
+          974
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          273.5,
+          985
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          244,
+          979,
+          71,
+          132
+        ],
+        "bounds": [
+          246,
+          981,
+          313,
+          1109
+        ],
+        "foot": [
+          277.5,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.5,
+          985
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          536,
+          978,
+          72,
+          133
+        ],
+        "bounds": [
+          538,
+          980,
+          606,
+          1109
+        ],
+        "foot": [
+          569.5,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          858.5,
+          985
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          828,
+          978,
+          72,
+          133
+        ],
+        "bounds": [
+          830,
+          980,
+          898,
+          1109
+        ],
+        "foot": [
+          862.0,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1151.0,
+          985
+        ],
+        "source": "source/black_knight-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          1121,
+          978,
+          71,
+          133
+        ],
+        "bounds": [
+          1123,
+          980,
+          1190,
+          1109
+        ],
+        "foot": [
+          1154.0,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0076335877862594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.0,
+          1463
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          86,
+          1453,
+          95,
+          180
+        ],
+        "bounds": [
+          88,
+          1455,
+          179,
+          1631
+        ],
+        "foot": [
+          130.5,
+          1631
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          1464
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          292,
+          1454,
+          99,
+          177
+        ],
+        "bounds": [
+          294,
+          1456,
+          389,
+          1629
+        ],
+        "foot": [
+          342.0,
+          1629
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.5,
+          1464
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          492,
+          1454,
+          101,
+          179
+        ],
+        "bounds": [
+          494,
+          1456,
+          591,
+          1631
+        ],
+        "foot": [
+          540.5,
+          1631
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          741.5,
+          1464
+        ],
+        "source": "source/black_knight-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          700,
+          1453,
+          94,
+          177
+        ],
+        "bounds": [
+          702,
+          1455,
+          792,
+          1628
+        ],
+        "foot": [
+          749.0,
+          1628
+        ],
+        "sourceEdge": false,
+        "scale": 0.7333333333333333,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          1557
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          71,
+          1543,
+          90,
+          170
+        ],
+        "bounds": [
+          73,
+          1545,
+          159,
+          1711
+        ],
+        "foot": [
+          112.0,
+          1711
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.5,
+          1523
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          281,
+          1520,
+          90,
+          193
+        ],
+        "bounds": [
+          283,
+          1522,
+          369,
+          1711
+        ],
+        "foot": [
+          332.0,
+          1711
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          540.0,
+          1572
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          481,
+          1569,
+          121,
+          144
+        ],
+        "bounds": [
+          483,
+          1571,
+          600,
+          1711
+        ],
+        "foot": [
+          541.0,
+          1711
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.5,
+          1556
+        ],
+        "source": "source/black_knight-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          732,
+          1543,
+          91,
+          170
+        ],
+        "bounds": [
+          734,
+          1545,
+          821,
+          1711
+        ],
+        "foot": [
+          773.5,
+          1711
+        ],
+        "sourceEdge": false,
+        "scale": 0.8571428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          724.0,
+          957
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          662,
+          945,
+          136,
+          234
+        ],
+        "bounds": [
+          664,
+          947,
+          796,
+          1177
+        ],
+        "foot": [
+          716.0,
+          1177
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1006.0,
+          1104
+        ],
+        "source": "source/black_knight-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          868,
+          1101,
+          337,
+          83
+        ],
+        "bounds": [
+          870,
+          1103,
+          1203,
+          1182
+        ],
+        "foot": [
+          1035.0,
+          1182
+        ],
+        "sourceEdge": false,
+        "scale": 0.6111111111111112,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          278.5,
+          982
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          244,
+          980,
+          72,
+          131
+        ],
+        "bounds": [
+          246,
+          982,
+          314,
+          1109
+        ],
+        "foot": [
+          280.5,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          848.5,
+          978
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          814,
+          976,
+          70,
+          135
+        ],
+        "bounds": [
+          816,
+          978,
+          882,
+          1109
+        ],
+        "foot": [
+          850.5,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1124.0,
+          982
+        ],
+        "source": "source/black_knight-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          1090,
+          980,
+          72,
+          131
+        ],
+        "bounds": [
+          1092,
+          982,
+          1160,
+          1109
+        ],
+        "foot": [
+          1126.5,
+          1109
+        ],
+        "sourceEdge": false,
+        "scale": 1.0,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  },
+  {
+    "id": "dark_elf",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          118.0,
+          17
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          15,
+          101,
+          205
+        ],
+        "bounds": [
+          63,
+          17,
+          160,
+          218
+        ],
+        "foot": [
+          107.5,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          17
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          283,
+          15,
+          100,
+          206
+        ],
+        "bounds": [
+          285,
+          17,
+          381,
+          219
+        ],
+        "foot": [
+          329.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          17
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          504,
+          14,
+          101,
+          207
+        ],
+        "bounds": [
+          506,
+          16,
+          603,
+          219
+        ],
+        "foot": [
+          551.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          17
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          726,
+          14,
+          101,
+          207
+        ],
+        "bounds": [
+          728,
+          16,
+          825,
+          219
+        ],
+        "foot": [
+          773.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          15
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          57,
+          13,
+          108,
+          210
+        ],
+        "bounds": [
+          59,
+          15,
+          163,
+          221
+        ],
+        "foot": [
+          96.0,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          15
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          281,
+          13,
+          107,
+          209
+        ],
+        "bounds": [
+          283,
+          15,
+          386,
+          220
+        ],
+        "foot": [
+          321.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          15
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          503,
+          13,
+          108,
+          209
+        ],
+        "bounds": [
+          505,
+          15,
+          609,
+          220
+        ],
+        "foot": [
+          534.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          15
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          725,
+          13,
+          102,
+          208
+        ],
+        "bounds": [
+          727,
+          15,
+          825,
+          219
+        ],
+        "foot": [
+          763.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.0,
+          14
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          55,
+          12,
+          111,
+          210
+        ],
+        "bounds": [
+          57,
+          14,
+          164,
+          220
+        ],
+        "foot": [
+          106.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          14
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          285,
+          12,
+          118,
+          210
+        ],
+        "bounds": [
+          287,
+          14,
+          401,
+          220
+        ],
+        "foot": [
+          340.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          16
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          510,
+          14,
+          124,
+          209
+        ],
+        "bounds": [
+          512,
+          16,
+          632,
+          221
+        ],
+        "foot": [
+          560.5,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          15
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          726,
+          12,
+          109,
+          210
+        ],
+        "bounds": [
+          728,
+          14,
+          833,
+          220
+        ],
+        "foot": [
+          784.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          66
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          65,
+          64,
+          163,
+          226
+        ],
+        "bounds": [
+          67,
+          66,
+          226,
+          288
+        ],
+        "foot": [
+          133.5,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          421.0,
+          213
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          323,
+          210,
+          265,
+          71
+        ],
+        "bounds": [
+          325,
+          212,
+          586,
+          279
+        ],
+        "foot": [
+          485.5,
+          279
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.0,
+          17
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          59,
+          15,
+          102,
+          208
+        ],
+        "bounds": [
+          61,
+          17,
+          159,
+          221
+        ],
+        "foot": [
+          108.5,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          569.0,
+          4
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          503,
+          2,
+          105,
+          221
+        ],
+        "bounds": [
+          505,
+          4,
+          606,
+          221
+        ],
+        "foot": [
+          553.0,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          783.5,
+          17
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          725,
+          15,
+          102,
+          208
+        ],
+        "bounds": [
+          727,
+          17,
+          825,
+          221
+        ],
+        "foot": [
+          774.5,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          117.5,
+          236
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          61,
+          234,
+          99,
+          207
+        ],
+        "bounds": [
+          63,
+          236,
+          158,
+          439
+        ],
+        "foot": [
+          107.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          236
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          283,
+          234,
+          98,
+          207
+        ],
+        "bounds": [
+          285,
+          236,
+          379,
+          439
+        ],
+        "foot": [
+          329.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          236
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          504,
+          234,
+          98,
+          207
+        ],
+        "bounds": [
+          506,
+          236,
+          600,
+          439
+        ],
+        "foot": [
+          551.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          236
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          726,
+          234,
+          99,
+          207
+        ],
+        "bounds": [
+          728,
+          236,
+          823,
+          439
+        ],
+        "foot": [
+          773.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          235
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          55,
+          232,
+          110,
+          211
+        ],
+        "bounds": [
+          57,
+          234,
+          163,
+          441
+        ],
+        "foot": [
+          86.0,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          235
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          280,
+          232,
+          109,
+          211
+        ],
+        "bounds": [
+          282,
+          234,
+          387,
+          441
+        ],
+        "foot": [
+          315.0,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          234
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          232,
+          109,
+          211
+        ],
+        "bounds": [
+          505,
+          234,
+          610,
+          441
+        ],
+        "foot": [
+          535.5,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          235
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          724,
+          232,
+          107,
+          211
+        ],
+        "bounds": [
+          726,
+          234,
+          829,
+          441
+        ],
+        "foot": [
+          763.5,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          235
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          43,
+          232,
+          120,
+          212
+        ],
+        "bounds": [
+          45,
+          234,
+          161,
+          442
+        ],
+        "foot": [
+          98.5,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          234
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          272,
+          232,
+          131,
+          210
+        ],
+        "bounds": [
+          274,
+          234,
+          401,
+          440
+        ],
+        "foot": [
+          335.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          238
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          452,
+          235,
+          186,
+          209
+        ],
+        "bounds": [
+          454,
+          237,
+          636,
+          442
+        ],
+        "foot": [
+          567.0,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          235
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          719,
+          232,
+          116,
+          212
+        ],
+        "bounds": [
+          721,
+          234,
+          833,
+          442
+        ],
+        "foot": [
+          779.0,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          762.0,
+          64
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          676,
+          61,
+          165,
+          229
+        ],
+        "bounds": [
+          678,
+          63,
+          839,
+          288
+        ],
+        "foot": [
+          747.0,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1059.0,
+          220
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          927,
+          212,
+          265,
+          76
+        ],
+        "bounds": [
+          929,
+          214,
+          1190,
+          286
+        ],
+        "foot": [
+          1079.5,
+          286
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.0,
+          237
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          60,
+          234,
+          100,
+          210
+        ],
+        "bounds": [
+          62,
+          236,
+          158,
+          442
+        ],
+        "foot": [
+          107.0,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          571.0,
+          223
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          505,
+          220,
+          101,
+          223
+        ],
+        "bounds": [
+          507,
+          222,
+          604,
+          441
+        ],
+        "foot": [
+          554.5,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          784.0,
+          237
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          726,
+          234,
+          98,
+          210
+        ],
+        "bounds": [
+          728,
+          236,
+          822,
+          442
+        ],
+        "foot": [
+          773.5,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          118.5,
+          457
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          77,
+          454,
+          65,
+          209
+        ],
+        "bounds": [
+          79,
+          456,
+          140,
+          661
+        ],
+        "foot": [
+          106.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          457
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          299,
+          454,
+          65,
+          209
+        ],
+        "bounds": [
+          301,
+          456,
+          362,
+          661
+        ],
+        "foot": [
+          329.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          457
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          522,
+          454,
+          64,
+          209
+        ],
+        "bounds": [
+          524,
+          456,
+          584,
+          661
+        ],
+        "foot": [
+          550.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          456
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          743,
+          454,
+          64,
+          209
+        ],
+        "bounds": [
+          745,
+          456,
+          805,
+          661
+        ],
+        "foot": [
+          772.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.0,
+          456
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          64,
+          453,
+          97,
+          211
+        ],
+        "bounds": [
+          66,
+          455,
+          159,
+          662
+        ],
+        "foot": [
+          107.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          456
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          289,
+          453,
+          80,
+          211
+        ],
+        "bounds": [
+          291,
+          455,
+          367,
+          662
+        ],
+        "foot": [
+          324.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          455
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          513,
+          453,
+          81,
+          210
+        ],
+        "bounds": [
+          515,
+          455,
+          592,
+          661
+        ],
+        "foot": [
+          543.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          455
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          744,
+          453,
+          71,
+          211
+        ],
+        "bounds": [
+          746,
+          455,
+          813,
+          662
+        ],
+        "foot": [
+          773.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.5,
+          455
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          53,
+          453,
+          85,
+          213
+        ],
+        "bounds": [
+          55,
+          455,
+          136,
+          664
+        ],
+        "foot": [
+          95.5,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.0,
+          456
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          270,
+          453,
+          123,
+          212
+        ],
+        "bounds": [
+          272,
+          455,
+          391,
+          663
+        ],
+        "foot": [
+          329.0,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          460
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          409,
+          458,
+          236,
+          207
+        ],
+        "bounds": [
+          411,
+          460,
+          643,
+          663
+        ],
+        "foot": [
+          575.5,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.5,
+          455
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          723,
+          452,
+          106,
+          214
+        ],
+        "bounds": [
+          725,
+          454,
+          827,
+          664
+        ],
+        "foot": [
+          776.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          139.5,
+          367
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          101,
+          364,
+          117,
+          235
+        ],
+        "bounds": [
+          103,
+          366,
+          216,
+          597
+        ],
+        "foot": [
+          153.0,
+          597
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          353.5,
+          527
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          318,
+          524,
+          275,
+          70
+        ],
+        "bounds": [
+          320,
+          526,
+          591,
+          592
+        ],
+        "foot": [
+          461.5,
+          592
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.0,
+          457
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          74,
+          455,
+          71,
+          210
+        ],
+        "bounds": [
+          76,
+          457,
+          143,
+          663
+        ],
+        "foot": [
+          106.0,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.5,
+          445
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          519,
+          442,
+          77,
+          223
+        ],
+        "bounds": [
+          521,
+          444,
+          594,
+          663
+        ],
+        "foot": [
+          553.5,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          783.5,
+          457
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          741,
+          455,
+          70,
+          210
+        ],
+        "bounds": [
+          743,
+          457,
+          809,
+          663
+        ],
+        "foot": [
+          773.5,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.5,
+          678
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          77,
+          676,
+          96,
+          208
+        ],
+        "bounds": [
+          79,
+          678,
+          171,
+          882
+        ],
+        "foot": [
+          129.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          678
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          299,
+          676,
+          95,
+          208
+        ],
+        "bounds": [
+          301,
+          678,
+          392,
+          882
+        ],
+        "foot": [
+          351.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          678
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          521,
+          676,
+          95,
+          208
+        ],
+        "bounds": [
+          523,
+          678,
+          614,
+          882
+        ],
+        "foot": [
+          572.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          678
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          742,
+          676,
+          96,
+          208
+        ],
+        "bounds": [
+          744,
+          678,
+          836,
+          882
+        ],
+        "foot": [
+          794.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          677
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          69,
+          675,
+          108,
+          208
+        ],
+        "bounds": [
+          71,
+          677,
+          175,
+          881
+        ],
+        "foot": [
+          125.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          677
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          290,
+          675,
+          110,
+          208
+        ],
+        "bounds": [
+          292,
+          677,
+          398,
+          881
+        ],
+        "foot": [
+          357.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          677
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          514,
+          675,
+          109,
+          209
+        ],
+        "bounds": [
+          516,
+          677,
+          621,
+          882
+        ],
+        "foot": [
+          576.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          677
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          737,
+          675,
+          109,
+          209
+        ],
+        "bounds": [
+          739,
+          677,
+          844,
+          882
+        ],
+        "foot": [
+          805.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.0,
+          677
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          53,
+          674,
+          124,
+          212
+        ],
+        "bounds": [
+          55,
+          676,
+          175,
+          884
+        ],
+        "foot": [
+          125.0,
+          884
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.0,
+          677
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          286,
+          674,
+          89,
+          212
+        ],
+        "bounds": [
+          288,
+          676,
+          373,
+          884
+        ],
+        "foot": [
+          331.5,
+          884
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          545.5,
+          679
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          407,
+          677,
+          225,
+          209
+        ],
+        "bounds": [
+          409,
+          679,
+          630,
+          884
+        ],
+        "foot": [
+          567.0,
+          884
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          677
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          729,
+          675,
+          94,
+          211
+        ],
+        "bounds": [
+          731,
+          677,
+          821,
+          884
+        ],
+        "foot": [
+          781.0,
+          884
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          754.5,
+          365
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          705,
+          363,
+          152,
+          236
+        ],
+        "bounds": [
+          707,
+          365,
+          855,
+          597
+        ],
+        "foot": [
+          771.0,
+          597
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1063.5,
+          530
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          932,
+          523,
+          270,
+          74
+        ],
+        "bounds": [
+          934,
+          525,
+          1200,
+          595
+        ],
+        "foot": [
+          1077.5,
+          595
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          679
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          75,
+          676,
+          99,
+          207
+        ],
+        "bounds": [
+          77,
+          678,
+          172,
+          881
+        ],
+        "foot": [
+          128.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          555.0,
+          665
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          525,
+          662,
+          93,
+          221
+        ],
+        "bounds": [
+          527,
+          664,
+          616,
+          881
+        ],
+        "foot": [
+          572.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          779.0,
+          679
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          742,
+          676,
+          98,
+          207
+        ],
+        "bounds": [
+          744,
+          678,
+          838,
+          881
+        ],
+        "foot": [
+          794.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          112.0,
+          900
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          69,
+          898,
+          104,
+          208
+        ],
+        "bounds": [
+          71,
+          900,
+          171,
+          1104
+        ],
+        "foot": [
+          125.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          900
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          291,
+          898,
+          103,
+          208
+        ],
+        "bounds": [
+          293,
+          900,
+          392,
+          1104
+        ],
+        "foot": [
+          347.5,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          900
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          513,
+          898,
+          103,
+          208
+        ],
+        "bounds": [
+          515,
+          900,
+          614,
+          1104
+        ],
+        "foot": [
+          568.5,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          900
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          735,
+          898,
+          103,
+          208
+        ],
+        "bounds": [
+          737,
+          900,
+          836,
+          1104
+        ],
+        "foot": [
+          791.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          898
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          66,
+          896,
+          113,
+          212
+        ],
+        "bounds": [
+          68,
+          898,
+          177,
+          1106
+        ],
+        "foot": [
+          133.5,
+          1106
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          898
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          288,
+          896,
+          113,
+          209
+        ],
+        "bounds": [
+          290,
+          898,
+          399,
+          1103
+        ],
+        "foot": [
+          357.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          898
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          512,
+          896,
+          111,
+          207
+        ],
+        "bounds": [
+          514,
+          898,
+          621,
+          1101
+        ],
+        "foot": [
+          574.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          898
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          732,
+          896,
+          113,
+          212
+        ],
+        "bounds": [
+          734,
+          898,
+          843,
+          1106
+        ],
+        "foot": [
+          799.0,
+          1106
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          898
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          51,
+          895,
+          124,
+          214
+        ],
+        "bounds": [
+          53,
+          897,
+          173,
+          1107
+        ],
+        "foot": [
+          124.0,
+          1107
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          355.0,
+          897
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          260,
+          895,
+          146,
+          213
+        ],
+        "bounds": [
+          262,
+          897,
+          404,
+          1106
+        ],
+        "foot": [
+          335.0,
+          1106
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          586.0,
+          898
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          480,
+          896,
+          167,
+          214
+        ],
+        "bounds": [
+          482,
+          898,
+          645,
+          1108
+        ],
+        "foot": [
+          555.5,
+          1108
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          898
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          712,
+          895,
+          122,
+          214
+        ],
+        "bounds": [
+          714,
+          897,
+          832,
+          1107
+        ],
+        "foot": [
+          778.5,
+          1107
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          165.0,
+          668
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          78,
+          665,
+          173,
+          231
+        ],
+        "bounds": [
+          80,
+          667,
+          249,
+          894
+        ],
+        "foot": [
+          174.0,
+          894
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          461.5,
+          822
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          315,
+          816,
+          277,
+          73
+        ],
+        "bounds": [
+          317,
+          818,
+          590,
+          887
+        ],
+        "foot": [
+          460.5,
+          887
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.5,
+          898
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          76,
+          896,
+          96,
+          209
+        ],
+        "bounds": [
+          78,
+          898,
+          170,
+          1103
+        ],
+        "foot": [
+          125.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          562.5,
+          884
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          521,
+          882,
+          96,
+          223
+        ],
+        "bounds": [
+          523,
+          884,
+          615,
+          1103
+        ],
+        "foot": [
+          569.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          779.0,
+          898
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          742,
+          895,
+          96,
+          210
+        ],
+        "bounds": [
+          744,
+          897,
+          836,
+          1103
+        ],
+        "foot": [
+          791.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          110.5,
+          1122
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          78,
+          1119,
+          95,
+          208
+        ],
+        "bounds": [
+          80,
+          1121,
+          171,
+          1325
+        ],
+        "foot": [
+          129.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          1122
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          300,
+          1119,
+          94,
+          208
+        ],
+        "bounds": [
+          302,
+          1121,
+          392,
+          1325
+        ],
+        "foot": [
+          351.0,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1122
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          521,
+          1119,
+          95,
+          208
+        ],
+        "bounds": [
+          523,
+          1121,
+          614,
+          1325
+        ],
+        "foot": [
+          573.0,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1122
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          744,
+          1120,
+          94,
+          207
+        ],
+        "bounds": [
+          746,
+          1122,
+          836,
+          1325
+        ],
+        "foot": [
+          794.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          1120
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          72,
+          1117,
+          102,
+          208
+        ],
+        "bounds": [
+          74,
+          1119,
+          172,
+          1323
+        ],
+        "foot": [
+          131.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1120
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          298,
+          1117,
+          103,
+          211
+        ],
+        "bounds": [
+          300,
+          1119,
+          399,
+          1326
+        ],
+        "foot": [
+          360.5,
+          1326
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1120
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          513,
+          1117,
+          109,
+          211
+        ],
+        "bounds": [
+          515,
+          1119,
+          620,
+          1326
+        ],
+        "foot": [
+          574.5,
+          1326
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          1120
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          735,
+          1118,
+          109,
+          208
+        ],
+        "bounds": [
+          737,
+          1120,
+          842,
+          1324
+        ],
+        "foot": [
+          797.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1121
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          52,
+          1119,
+          116,
+          212
+        ],
+        "bounds": [
+          54,
+          1121,
+          166,
+          1329
+        ],
+        "foot": [
+          120.0,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          1120
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          253,
+          1118,
+          154,
+          212
+        ],
+        "bounds": [
+          255,
+          1120,
+          405,
+          1328
+        ],
+        "foot": [
+          333.0,
+          1328
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5,
+          1122
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          479,
+          1120,
+          181,
+          211
+        ],
+        "bounds": [
+          481,
+          1122,
+          658,
+          1329
+        ],
+        "foot": [
+          551.5,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.0,
+          1122
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          713,
+          1119,
+          121,
+          212
+        ],
+        "bounds": [
+          715,
+          1121,
+          832,
+          1329
+        ],
+        "foot": [
+          779.5,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          769.0,
+          666
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          677,
+          663,
+          161,
+          235
+        ],
+        "bounds": [
+          679,
+          665,
+          836,
+          896
+        ],
+        "foot": [
+          740.5,
+          896
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1094.5,
+          819
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          925,
+          817,
+          282,
+          72
+        ],
+        "bounds": [
+          927,
+          819,
+          1205,
+          887
+        ],
+        "foot": [
+          1079.0,
+          887
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.0,
+          1121
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          78,
+          1118,
+          91,
+          211
+        ],
+        "bounds": [
+          80,
+          1120,
+          167,
+          1327
+        ],
+        "foot": [
+          126.5,
+          1327
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.0,
+          1107
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          524,
+          1104,
+          90,
+          225
+        ],
+        "bounds": [
+          526,
+          1106,
+          612,
+          1327
+        ],
+        "foot": [
+          572.5,
+          1327
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          776.0,
+          1120
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          745,
+          1118,
+          91,
+          211
+        ],
+        "bounds": [
+          747,
+          1120,
+          834,
+          1327
+        ],
+        "foot": [
+          794.5,
+          1327
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          112.5,
+          1343
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          89,
+          1341,
+          56,
+          208
+        ],
+        "bounds": [
+          91,
+          1343,
+          143,
+          1547
+        ],
+        "foot": [
+          121.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1343
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          311,
+          1340,
+          57,
+          208
+        ],
+        "bounds": [
+          313,
+          1342,
+          366,
+          1546
+        ],
+        "foot": [
+          343.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          1343
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          533,
+          1340,
+          56,
+          209
+        ],
+        "bounds": [
+          535,
+          1342,
+          587,
+          1547
+        ],
+        "foot": [
+          565.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          1343
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          755,
+          1340,
+          56,
+          209
+        ],
+        "bounds": [
+          757,
+          1342,
+          809,
+          1547
+        ],
+        "foot": [
+          787.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          1341
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          81,
+          1339,
+          72,
+          212
+        ],
+        "bounds": [
+          83,
+          1341,
+          151,
+          1549
+        ],
+        "foot": [
+          125.5,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1341
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          309,
+          1339,
+          68,
+          212
+        ],
+        "bounds": [
+          311,
+          1341,
+          375,
+          1549
+        ],
+        "foot": [
+          346.5,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          1342
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          527,
+          1339,
+          71,
+          211
+        ],
+        "bounds": [
+          529,
+          1341,
+          596,
+          1548
+        ],
+        "foot": [
+          569.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1342
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          751,
+          1340,
+          68,
+          211
+        ],
+        "bounds": [
+          753,
+          1342,
+          817,
+          1549
+        ],
+        "foot": [
+          789.0,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          1343
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          85,
+          1341,
+          56,
+          211
+        ],
+        "bounds": [
+          87,
+          1343,
+          139,
+          1550
+        ],
+        "foot": [
+          117.0,
+          1550
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          1341
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          295,
+          1339,
+          88,
+          212
+        ],
+        "bounds": [
+          297,
+          1341,
+          381,
+          1549
+        ],
+        "foot": [
+          339.0,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          1345
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          477,
+          1342,
+          196,
+          210
+        ],
+        "bounds": [
+          479,
+          1344,
+          671,
+          1550
+        ],
+        "foot": [
+          540.5,
+          1550
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          1343
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          742,
+          1340,
+          85,
+          211
+        ],
+        "bounds": [
+          744,
+          1342,
+          825,
+          1549
+        ],
+        "foot": [
+          785.5,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.0,
+          968
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          76,
+          965,
+          127,
+          240
+        ],
+        "bounds": [
+          78,
+          967,
+          201,
+          1203
+        ],
+        "foot": [
+          126.0,
+          1203
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          351.5,
+          1129
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          316,
+          1127,
+          276,
+          74
+        ],
+        "bounds": [
+          318,
+          1129,
+          590,
+          1199
+        ],
+        "foot": [
+          464.5,
+          1199
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          1343
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          85,
+          1340,
+          66,
+          210
+        ],
+        "bounds": [
+          87,
+          1342,
+          149,
+          1548
+        ],
+        "foot": [
+          122.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          568.0,
+          1329
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          530,
+          1327,
+          75,
+          224
+        ],
+        "bounds": [
+          532,
+          1329,
+          603,
+          1549
+        ],
+        "foot": [
+          568.5,
+          1549
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          778.0,
+          1343
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          751,
+          1340,
+          66,
+          210
+        ],
+        "bounds": [
+          753,
+          1342,
+          815,
+          1548
+        ],
+        "foot": [
+          789.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          112.0,
+          1564
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          61,
+          1562,
+          93,
+          208
+        ],
+        "bounds": [
+          63,
+          1564,
+          152,
+          1768
+        ],
+        "foot": [
+          105.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1564
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          283,
+          1562,
+          92,
+          208
+        ],
+        "bounds": [
+          285,
+          1564,
+          373,
+          1768
+        ],
+        "foot": [
+          327.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1564
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          505,
+          1562,
+          93,
+          208
+        ],
+        "bounds": [
+          507,
+          1564,
+          596,
+          1768
+        ],
+        "foot": [
+          549.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          1564
+        ],
+        "source": "source/dark_elf-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          726,
+          1562,
+          93,
+          208
+        ],
+        "bounds": [
+          728,
+          1564,
+          817,
+          1768
+        ],
+        "foot": [
+          771.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5970149253731343,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1563
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          57,
+          1561,
+          102,
+          208
+        ],
+        "bounds": [
+          59,
+          1563,
+          157,
+          1767
+        ],
+        "foot": [
+          98.0,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1563
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          277,
+          1561,
+          106,
+          208
+        ],
+        "bounds": [
+          279,
+          1563,
+          381,
+          1767
+        ],
+        "foot": [
+          319.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1563
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          499,
+          1561,
+          103,
+          206
+        ],
+        "bounds": [
+          501,
+          1563,
+          600,
+          1765
+        ],
+        "foot": [
+          546.5,
+          1765
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          1563
+        ],
+        "source": "source/dark_elf-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          724,
+          1561,
+          100,
+          208
+        ],
+        "bounds": [
+          726,
+          1563,
+          822,
+          1767
+        ],
+        "foot": [
+          763.0,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          1565
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          48,
+          1562,
+          113,
+          210
+        ],
+        "bounds": [
+          50,
+          1564,
+          159,
+          1770
+        ],
+        "foot": [
+          100.0,
+          1770
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          1565
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          287,
+          1562,
+          104,
+          209
+        ],
+        "bounds": [
+          289,
+          1564,
+          389,
+          1769
+        ],
+        "foot": [
+          331.0,
+          1769
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.0,
+          1569
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          476,
+          1566,
+          192,
+          204
+        ],
+        "bounds": [
+          478,
+          1568,
+          666,
+          1768
+        ],
+        "foot": [
+          540.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          1565
+        ],
+        "source": "source/dark_elf-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          731,
+          1563,
+          100,
+          208
+        ],
+        "bounds": [
+          733,
+          1565,
+          829,
+          1769
+        ],
+        "foot": [
+          776.0,
+          1769
+        ],
+        "sourceEdge": false,
+        "scale": 0.5825242718446602,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          772.5,
+          968
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          672,
+          965,
+          157,
+          239
+        ],
+        "bounds": [
+          674,
+          967,
+          827,
+          1202
+        ],
+        "foot": [
+          714.0,
+          1202
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          960.5,
+          1129
+        ],
+        "source": "source/dark_elf-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          926,
+          1127,
+          273,
+          79
+        ],
+        "bounds": [
+          928,
+          1129,
+          1197,
+          1204
+        ],
+        "foot": [
+          1094.5,
+          1204
+        ],
+        "sourceEdge": false,
+        "scale": 0.5405405405405406,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          1565
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          58,
+          1562,
+          96,
+          208
+        ],
+        "bounds": [
+          60,
+          1564,
+          152,
+          1768
+        ],
+        "foot": [
+          105.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          554.5,
+          1565
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          503,
+          1552,
+          103,
+          218
+        ],
+        "bounds": [
+          505,
+          1554,
+          604,
+          1768
+        ],
+        "foot": [
+          551.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          777.0,
+          1565
+        ],
+        "source": "source/dark_elf-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          725,
+          1562,
+          96,
+          208
+        ],
+        "bounds": [
+          727,
+          1564,
+          819,
+          1768
+        ],
+        "foot": [
+          772.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  }
+]

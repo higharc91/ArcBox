@@ -36,3 +36,5 @@ Host arguments after `--`:
 ```
 
 Sixteen looks are refreshed across seven batches; [13 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline stays unchanged. No PR has been opened.
+
+Subsequent batch: [Ser Halvard and Drow / Ysolde](../oath-and-shadow/README.md).

@@ -10136,6 +10136,430 @@
         }
       },
       "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/rime-keepers-2026-11-07/."
+    },
+    "mob_refresh_black_knight": {
+      "file": "mob_refresh_black_knight.png",
+      "family": "black_knight",
+      "variant": "oath-and-shadow",
+      "frame": {
+        "width": 288,
+        "height": 288,
+        "anchor": [
+          144,
+          256
+        ]
+      },
+      "portrait": [
+        113,
+        120,
+        64,
+        64
+      ],
+      "headTop": 123,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 23.68,
+      "footprintHeight": 45.12,
+      "keys": [
+        "characters.black_knight"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "slam": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/oath-and-shadow-2026-11-07/."
+    },
+    "mob_refresh_dark_elf": {
+      "file": "mob_refresh_dark_elf.png",
+      "family": "dark_elf",
+      "variant": "oath-and-shadow",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        102,
+        99,
+        64,
+        64
+      ],
+      "headTop": 102,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 19.2,
+      "footprintHeight": 39.36,
+      "keys": [
+        "characters.dark_elf"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/oath-and-shadow-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

@@ -116,6 +116,8 @@ public sealed class HudArtTests
     [InlineData("bosses.wraith.wraith", "wraith", 64)]
     [InlineData("characters.necromancer", "necromancer", 64)]
     [InlineData("characters.lich", "lich", 64)]
+    [InlineData("characters.black_knight", "black_knight", 64)]
+    [InlineData("characters.dark_elf", "dark_elf", 64)]
     public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
     {
         var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
@@ -141,6 +143,8 @@ public sealed class HudArtTests
     [InlineData("zombie")]
     [InlineData("necromancer")]
     [InlineData("lich")]
+    [InlineData("black_knight")]
+    [InlineData("dark_elf")]
     public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
     {
         var files = new HashSet<string>();

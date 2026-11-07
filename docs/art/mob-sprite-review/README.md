@@ -25,6 +25,6 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Ivo Rime / necromancer and Oswin Hale / lich](rime-keepers/index.html), with before/after art, eight-direction walking, staff melee and spellcasting, plus actual game captures. Sixteen looks are refreshed across seven batches; 13 older combat looks remain. The historical 98-look baseline above stays unchanged.
+[Latest: Ser Halvard / Black Knight and Drow Blade / Ysolde](oath-and-shadow/index.html), with before/after art, eight-direction walking, greatsword cleaves, rapier thrusts and separate ward/shadow-step gestures, plus actual game captures. Eighteen looks are refreshed across eight batches; 11 older combat looks remain. The historical 98-look baseline above stays unchanged.
 
-Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html), [Kindled cultist and Maren](kindled/index.html), [Bone Wardens](bone-wardens/index.html), [Risen and wraith](hollow-dead/index.html). [Current tracker](production/refresh-status.json).
+Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html), [Kindled cultist and Maren](kindled/index.html), [Bone Wardens](bone-wardens/index.html), [Risen and wraith](hollow-dead/index.html), [Ivo Rime and Oswin Hale](rime-keepers/index.html). [Current tracker](production/refresh-status.json).
