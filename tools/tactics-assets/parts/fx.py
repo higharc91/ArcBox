@@ -2462,6 +2462,9 @@ CATALOGUE: list[Fx] = [
        blend="normal", layer="ground", note="web thrown over a tile; the hazards set's web holds it afterwards"),
 ]
 
+from .wizard_fx import catalogue as _wizard_catalogue
+CATALOGUE += _wizard_catalogue()
+
 ATTACH = {
     "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
     "body": "anchor goes on the target's chest: 15 px above its ground point",
@@ -2509,6 +2512,7 @@ def build() -> None:
         "attach": ATTACH,
         "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
         "effects": effects,
+        "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force"},
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)

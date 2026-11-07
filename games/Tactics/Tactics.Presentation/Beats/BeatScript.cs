@@ -405,6 +405,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
                     break;
+                case PassiveTriggered passive:
+                    Burst(fx.Passive(passive.Passive), TileOf(passive.Owner));
+                    Apply(e);
+                    break;
                 case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
                     _ability = aimed with { Target = new Target(Unit: turned.Target) };   // the next swing goes at it
                     break;
@@ -689,14 +693,18 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
-                _cues.Add(new PoseCue(_t, BeatTiming.Windup + flight, used.Source, anim, source, target));
-                _cues.Add(new FlightCue(_t + BeatTiming.Windup, flight, shot, source, target));
+                // The authored Wizard volley winds up once, then releases the remaining real attack rolls as quick rays.
+                var ray = key == "fx.wizard_scorching_ray_shot.fire" && _swings > 0;
+                var windup = ray ? .04 : BeatTiming.Windup;
+                if (ray) flight = .12;
+                _cues.Add(new PoseCue(_t, windup + flight, used.Source, anim, source, target));
+                _cues.Add(new FlightCue(_t + windup, flight, shot, source, target));
                 Cry(used.Source, "attack");
                 var leaving = SoundChoice.Launch(key, GearOf(used.Source).Weapon);
-                Sound(leaving, leaving == "spell_cast" ? _t : _t + BeatTiming.Windup);     // a spell gathers; a shot goes when it's loosed
-                EffectSound(flies ? used.Presentation?.Fx : null, _t + BeatTiming.Windup);
+                Sound(leaving, leaving == "spell_cast" ? _t : _t + windup);     // a spell gathers; a shot goes when it's loosed
+                EffectSound(flies ? used.Presentation?.Fx : null, _t + windup);
                 _shot = SoundChoice.IsArrow(key);
-                _t += BeatTiming.Windup + flight;
+                _t += windup + flight;
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {

@@ -61,7 +61,13 @@ public sealed class FxShowcaseTests
             Assert.Equal(feature.Level, sample.Level);
         }
         var art = FxArt.Load(Pack.Root);
-        Assert.Contains(samples, sample => FxShowcase.TailFor(sample, art) > .85);
+        // Keep the long-tail regression independent of the pilot's newly shortened sheets.
+        var ward = samples.Single(s => s.Id == "wizard.blur");
+        var used = ward.After.Beats.Single().Events.OfType<AbilityUsed>().Single();
+        var longBeat = ward.After.Beats.Single() with { Events = [used with {
+            Presentation = used.Presentation! with { Fx = "signature.spell_blight.grave" } }] };
+        var longTail = ward with { After = ward.After with { Beats = [longBeat] } };
+        Assert.True(FxShowcase.TailFor(longTail, art) > .85);
         foreach (var sample in samples)
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, art);
