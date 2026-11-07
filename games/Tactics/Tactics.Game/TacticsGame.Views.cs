@@ -135,7 +135,21 @@ public sealed record BattleView(string Encounter, string Map, int Round, Immutab
     RetreatView? Retreat = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
-public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
+public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0,
+    string? Guidance = null)
+{
+    /// <summary>Small parties get companions; only the encounter's maximum prevents entry.</summary>
+    public string? UnavailableReason => Fits ? null : $"Party too big (max {Max})";
+
+    /// <summary>Level guidance compares the intended level, not a prediction of the battle's outcome.</summary>
+    public static string GuidanceFor(int? level, int partyLevel) => level switch
+    {
+        null => "Level not specified",
+        _ when level > partyLevel => "Higher level",
+        _ when level < partyLevel => "Lower level",
+        _ => "Recommended",
+    };
+}
 
 /// <summary>A class a member can pick at Muster.</summary>
 public sealed record ClassOption(string Id, string Name, string Role);
@@ -496,7 +510,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Exploration => WalkScreen(player, profile),
             TacticsPhase.Story => StoryScreen(player, profile),
             // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
-            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null }),
+            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null, partyLevel = _doc.PartyLevel }),
             TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
@@ -687,7 +701,8 @@ public sealed partial class TacticsGame
     private ImmutableArray<EncounterOption> EncounterOptions()
         => [.. Rules.Encounters.Values.Where(e => !e.StoryOnly).OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
-                _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
+                _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count),
+                EncounterOption.GuidanceFor(e.Level, _doc.PartyLevel)))];
 
     /// <summary>
     /// The one line Results show after a loss, on the phone and the TV alike: the party wakes with that fight's wounds tended, no XP, and the

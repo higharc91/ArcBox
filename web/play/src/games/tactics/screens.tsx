@@ -61,23 +61,26 @@ export function PickClass({ data, send }: CustomScreenProps) {
 
 export function PickEncounter({ data, send }: CustomScreenProps) {
   // canWalk: whether there's a world to go back to; a pack with no region has none, and an older server sends nothing (no button).
-  const { encounters, canWalk } = data as { encounters: EncounterOption[]; canWalk?: boolean };
+  const { encounters, canWalk, partyLevel } = data as { encounters: EncounterOption[]; canWalk?: boolean; partyLevel?: number };
   const sfx = useSfx();
   return (
     <div class="tx tx-muster tx-controls-layout"><div class="tx-controls-scroll">
       <h2 class="tx-title">Choose a battle</h2>
+      {partyLevel != null ? <p class="tx-note center">Party level {partyLevel}</p> : null}
       <ul class="tx-encounters">
         {encounters.map((e) => (
           <li key={e.id}>
             <button type="button" class="tx-encounter" disabled={!e.fits}
               onClick={() => { sfx("confirm"); send("pickEncounter", { encounter: e.id }); }}>
-              <span class="tx-lv"><small>Lv </small>{e.level ?? "–"}</span>
+              <span class={`tx-lv${e.level == null ? " unrated" : ""}`}>{e.level == null ? "Unrated" : <><small>Lv </small>{e.level}</>}</span>
               <span class="tx-enc-text">
                 <b>{e.name}</b>
                 <span class="tx-tip">
                   {e.min}–{e.max} heroes
                   {e.companions ? ` · +${e.companions} AI companion${e.companions === 1 ? "" : "s"}` : ""}
                 </span>
+                <span class="tx-enc-guidance">{e.guidance ?? (e.level == null ? "Level not specified" : "")}</span>
+                {!e.fits ? <span class="tx-enc-reason">{e.unavailableReason ?? `Party too big (max ${e.max})`}</span> : null}
               </span>
             </button>
           </li>
