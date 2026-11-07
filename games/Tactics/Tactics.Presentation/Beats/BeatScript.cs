@@ -661,6 +661,11 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var sourceUnit = _view.Units.FirstOrDefault(u => u.Id == used.Source);
             (string? Pose, double Length, double Impact) elemental = (sourceUnit?.Sprite, used.Ability.Value, anim) switch
             {
+                ("bosses.water_elemental.sea", "water_elemental.tidal_crush", "bosses.special") => ("bosses.special", .8, .4),
+                ("bosses.water_elemental.sea", "water_elemental.undertow", "bosses.special") => ("bosses.cast", .8, .4),
+                ("bosses.dragon.red", "dragon.fire_breath", "bosses.special") => ("bosses.special", 1.2, .5),
+                ("bosses.dragon.red", "dragon.frightful_roar", "bosses.special") => ("bosses.cast", 1.2, .5),
+                ("bosses.dragon.red", "dragon.cataclysm", "bosses.special") => ("bosses.buff", 1.4, .7),
                 ("bosses.air_elemental.gale", "air_elemental.whirlwind", "bosses.special") => ("bosses.special", .8, .4),
                 ("bosses.air_elemental.gale", "air_elemental.gale_blast", "bosses.special") => ("bosses.cast", .8, .4),
                 ("bosses.earth_elemental.stone", "earth_elemental.tremor", "bosses.special") => ("bosses.special", 1, .5),
@@ -676,6 +681,18 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (from is not { } source)
             {
                 Burst(effect, aim);
+                return;
+            }
+            // Undertow is a directed pull gesture, not a natural swing or inferred bow shot.
+            if (elemental.Pose is not null && used.Ability.Value == "water_elemental.undertow" && aim is { } pulled && pulled != source)
+            {
+                _cues.Add(new PoseCue(_t, elemental.Length, used.Source, anim, source, pulled));
+                SwingSound(used, anim);
+                EffectSound(effect, _t + elemental.Impact);
+                Moment("special-contact", elemental.Impact);
+                Burst(effect, pulled, at: _t + elemental.Impact);
+                _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + elemental.Length);
+                _t += elemental.Impact;
                 return;
             }
             if (aim is not { } target || target == source)
@@ -707,22 +724,29 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var seismic = used.Ability.Value == "golem.seismic_slam";
                 var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
+                if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red")
+                    Moment("special-contact", impact);
                 // The taller flame body exhales from its mouth, above the shared humanoid body anchor.
                 Burst(effect, source, at: _t + impact, toward: clip is { Aimed: true } ? facing : null,
-                    lift: elemental.Pose is not null && used.Ability.Value == "drake.flame_breath" ? 30 : null);
+                    lift: elemental.Pose is not null ? used.Ability.Value switch
+                    {
+                        "drake.flame_breath" => 30,
+                        "dragon.fire_breath" => 42,
+                        _ => (int?)null,
+                    } : null);
                 if (seismic || elemental.Pose is not null) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 _t += seismic || elemental.Pose is not null ? impact : length;
                 return;
             }
 
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
-            // The sapling's attached vine is a physical reach weapon, not an inferred bow.
-            var saplingLash = used.Ability.Value == "common.attack" && reach <= 2
-                && _view.Units.Any(u => u.Id == used.Source && u.Sprite == "bosses.sapling.spring")
+            // The sapling's attached vine and the red dragon's jaws are physical reach weapons.
+            var naturalReach = used.Ability.Value == "common.attack" && reach <= 2
+                && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.dragon.red")
                 && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
                 && anim is "attack" or "characters.attack" or "bosses.attack";
             // Basic ranged attacks infer their projectile from the equipped weapon.
-            var plain = !saplingLash && reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
+            var plain = !naturalReach && reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
             if ((plain ? GearOf(used.Source).Weapon == "sling" ? "projectiles.rock" : Arrow : used.Presentation?.Projectile ?? (flies ? used.Presentation?.Fx : null)) is { } key && fx.Shot(key) is { } shot)
             {
                 anim = plain ? Shoot : anim;
@@ -741,20 +765,21 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _shot = SoundChoice.IsArrow(key);
                 _t += windup + flight;
             }
-            else if ((reach <= 1 || saplingLash) && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
+            else if ((reach <= 1 || naturalReach) && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
                 var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
                     {
                         "monsters.kobold_foreman" => 0.75,
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring"
-                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" => 0.8,
+                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" => 0.8,
+                        "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
-                _t += length != BeatTiming.Lunge ? 0.4 : BeatTiming.Windup;
+                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite == "bosses.dragon.red" ? .5 : .4 : BeatTiming.Windup;
             }
             else
             {

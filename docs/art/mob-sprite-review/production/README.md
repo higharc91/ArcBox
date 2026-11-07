@@ -54,3 +54,5 @@ Latest twelfth batch: [Bound Imp](../ember-familiar/README.md). Twenty-three loo
 Latest thirteenth batch: [Grove Sapling](../grove-ward/README.md). Twenty-four looks refreshed; five older combat looks remain.
 
 Latest fourteenth batch: [Air, Earth and Fire Elementals](../elemental-triad/README.md). Twenty-seven looks refreshed; Water Elemental and Red Dragon remain.
+
+Latest fifteenth batch: [Water Elemental and Red Dragon](../tide-and-wyrm/README.md). Combat-roster pass complete: twenty-nine refreshed looks, no older combat looks remaining. Additional library colour variants remain separate.

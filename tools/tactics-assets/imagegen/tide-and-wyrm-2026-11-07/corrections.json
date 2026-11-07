@@ -1,0 +1,42 @@
+[
+  {
+    "mob": "water_elemental",
+    "action": "special",
+    "source": "water_elemental-moves-backleft",
+    "count": 4,
+    "columns": 4,
+    "targets": [
+      {
+        "row": 3,
+        "frames": [
+          1,
+          2
+        ],
+        "poses": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "water_elemental",
+    "action": "cast",
+    "source": "water_elemental-moves-backleft",
+    "count": 4,
+    "columns": 4,
+    "targets": [
+      {
+        "row": 3,
+        "frames": [
+          1,
+          2
+        ],
+        "poses": [
+          2,
+          3
+        ]
+      }
+    ]
+  }
+]

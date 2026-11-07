@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty-seven refreshed designs integrated across fourteen batches. Baseline numbers remain stable.",
+  "scope": "Combat roster refresh complete: twenty-nine designs integrated across fifteen batches. Historical baseline numbers remain stable; additional library colour variants retain their own art.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -27,9 +27,11 @@
     "bosses.sapling.spring",
     "bosses.air_elemental.gale",
     "bosses.earth_elemental.stone",
-    "bosses.fire_elemental.ember"
+    "bosses.fire_elemental.ember",
+    "bosses.water_elemental.sea",
+    "bosses.dragon.red"
   ],
-  "remainingOlderCombatLooks": 2,
+  "remainingOlderCombatLooks": 0,
   "looks": [
     {
       "baselineNumber": 1,
@@ -41,7 +43,7 @@
       "baselineNumber": 2,
       "name": "Red Dragon",
       "key": "bosses.dragon.red",
-      "status": "awaiting refresh"
+      "status": "integrated fifteenth batch"
     },
     {
       "baselineNumber": 3,
@@ -95,7 +97,7 @@
       "baselineNumber": 11,
       "name": "Water Elemental",
       "key": "bosses.water_elemental.sea",
-      "status": "awaiting refresh"
+      "status": "integrated fifteenth batch"
     },
     {
       "baselineNumber": 12,

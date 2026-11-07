@@ -35,3 +35,5 @@ Godot flags before `--`: `--audio-driver Dummy --path src/ArcBox.Host --resoluti
 ```
 
 Collect with `python tools/tactics-assets/imagegen/elemental-triad-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Run special-scenes.cjs then review.cjs and verify-review.cjs. Physical contact screenshots use the beat's hit clock. Six special captures show release; windup captures are also retained. Video shows complete walks, three natural attacks, all six specials and return to ready.
+
+Subsequent and final combat-roster batch: [Water Elemental and Red Dragon](../tide-and-wyrm/README.md). Current tracker: 29 refreshed across15 batches, no older combat looks remaining in this pass.

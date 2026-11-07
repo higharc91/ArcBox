@@ -25,4 +25,4 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Air, Earth and Fire Elementals](elemental-triad/index.html), with eight authored facings, natural strikes and six distinct special gestures, plus real Godot battle/world captures. Twenty-seven looks are refreshed across fourteen batches; two older combat looks remain (Water Elemental and Red Dragon). [Previous batch: Grove Sapling](grove-ward/index.html). The historical 98-look baseline stays unchanged.
+[Latest: Water Elemental and Red Dragon](tide-and-wyrm/index.html), including eight-direction movement, connected wave gestures, wing-braced bites and five distinct specials through the normal Godot renderer. Twenty-nine combat looks are refreshed across fifteen batches; no older combat looks remain in this pass. Additional creature-library colour variants retain their own art. [Previous batch: Air, Earth and Fire](elemental-triad/index.html). The original 98-look baseline stays unchanged.

@@ -11984,6 +11984,342 @@
         }
       },
       "provenance": "Scenario elemental concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/elemental-triad-2026-11-07/."
+    },
+    "mob_refresh_water_elemental": {
+      "file": "mob_refresh_water_elemental.png",
+      "family": "water_elemental",
+      "variant": "tide-and-wyrm",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        134,
+        101,
+        64,
+        64
+      ],
+      "headTop": 98,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 42.88,
+      "footprintHeight": 50.24,
+      "keys": [
+        "bosses.water_elemental.sea"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario Water Elemental/Red Dragon concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/tide-and-wyrm-2026-11-07/."
+    },
+    "mob_refresh_dragon": {
+      "file": "mob_refresh_dragon.png",
+      "family": "dragon",
+      "variant": "tide-and-wyrm",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          260,
+          400
+        ]
+      },
+      "portrait": [
+        240,
+        197,
+        64,
+        64
+      ],
+      "headTop": 183,
+      "overheadClearance": {
+        "cast": 3.92
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 80.96,
+      "footprintHeight": 69.76,
+      "keys": [
+        "bosses.dragon.red"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario Water Elemental/Red Dragon concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/tide-and-wyrm-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

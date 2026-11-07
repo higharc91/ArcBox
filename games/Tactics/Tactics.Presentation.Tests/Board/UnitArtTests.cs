@@ -164,7 +164,7 @@ public sealed class UnitArtTests
 
     [Theory]
     [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60)]
-    [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90)]
+    [InlineData("bosses.dragon.blue", "bosses/dragon_blue.png", 96, 96, 48, 90)]
     [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30)]
     public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay)
     {
