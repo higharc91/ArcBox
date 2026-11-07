@@ -1,0 +1,21 @@
+{
+  "priorCommit": "3b957490",
+  "addedCreatureEntries": [
+    "mob_refresh_air_elemental",
+    "mob_refresh_earth_elemental",
+    "mob_refresh_fire_elemental"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 15,
+  "packedFrameKeys": 528,
+  "distinctAuthoredPoseSelections": 384,
+  "runtimeAssets": 3,
+  "specialsPerCreature": 2,
+  "wholePoseFacingSelection": true,
+  "visualContactTimingRefined": true
+}

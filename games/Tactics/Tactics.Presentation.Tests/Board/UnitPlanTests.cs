@@ -31,6 +31,30 @@ public sealed class UnitPlanTests
         => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
 
     [Theory]
+    [InlineData("bosses.air_elemental.gale", "bosses.special", .4)]
+    [InlineData("bosses.air_elemental.gale", "bosses.cast", .4)]
+    [InlineData("bosses.earth_elemental.stone", "bosses.special", .5)]
+    [InlineData("bosses.earth_elemental.stone", "bosses.buff", .4)]
+    [InlineData("bosses.fire_elemental.ember", "bosses.special", .4)]
+    [InlineData("bosses.fire_elemental.ember", "bosses.cast", .4)]
+    public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
+    {
+        var view = Unit("a", "Enemy", 11, 10, key);
+        var posed = Assert.Single(UnitPlan.Build(Battle(null, view), River, Art.Value, Fit, poses:
+            new Dictionary<UnitId, UnitPose> { [view.Id] = new(binding, time, new Vector2(0, 1)) }));
+        var sprite = posed.Sprite;
+        var source = sprite.Source(Assert.Single(posed.Anim.Frames), posed.Row);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var first = source.Height;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128) first = Math.Min(first, y);
+        var highest = posed.Feet.Y + (first - sprite.AnchorY) * sprite.PixelScale;
+        Assert.True(posed.Bar!.TopLeft.Y + UnitPlan.BarHeight < highest);
+        Assert.Equal(One(null, view).Sprite.HeadLift, sprite.HeadLift);
+    }
+
+    [Theory]
     [InlineData("bosses.troll.troll", "bosses.special")]
     [InlineData("bosses.golem.granite", "bosses.special")]
     [InlineData("bosses.mimic.oak", "bosses.attack")]

@@ -36,6 +36,106 @@ public sealed class BeatScriptTests
         => new(Hero, Attack, new Target(Unit: target), new PresentationDef(anim, fx, projectile));
 
     [Theory]
+    [InlineData("bosses.air_elemental.gale", "air_elemental.whirlwind", "bosses.special", .4, .8, 16)]
+    [InlineData("bosses.air_elemental.gale", "air_elemental.gale_blast", "bosses.cast", .4, .8, 20)]
+    [InlineData("bosses.earth_elemental.stone", "earth_elemental.tremor", "bosses.special", .5, 1, 16)]
+    [InlineData("bosses.earth_elemental.stone", "golem.stone_aegis", "bosses.buff", .4, .8, 20)]
+    [InlineData("bosses.fire_elemental.ember", "fire_elemental.flame_surge", "bosses.special", .4, .8, 16)]
+    [InlineData("bosses.fire_elemental.ember", "drake.flame_breath", "bosses.cast", .4, 1, 20)]
+    public void Elemental_effects_and_damage_wait_for_their_distinct_authored_contact_frame(string key, string ability, string binding, double impact, double duration, int contact)
+    {
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var def = rules.Abilities[new(ability)];
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
+        var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), def.Presentation);
+        var script = Script(view, used, new Damaged(Foe, 4, "fire", 6));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>(), p => p.Unit == Hero);
+        var burst = Assert.Single(script.Cues.OfType<BurstCue>(), b => b.Tile == view.Units[0].At);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(pose.Anim);
+        Assert.Equal(binding, pose.Anim);
+        Assert.Equal(duration, pose.Length, 3);
+        Assert.True(pose.Length >= anim.Frames.Length / anim.Fps);
+        Assert.Equal(impact, burst.At - pose.At, 3);
+        Assert.Equal(impact, LastHit(script) - pose.At, 3);
+        Assert.Equal(contact, anim.FrameAt(impact));
+        Assert.Equal(Fx.Value.Clip(def.Presentation!.Fx!)!.Path, burst.Clip.Path);
+        Assert.Equal(ability == "drake.flame_breath" ? 30 : Fx.Value.Clip(def.Presentation.Fx!)!.Lift, burst.Clip.Lift);
+        Assert.Equal(view.Units[0].At, pose.From);
+        Assert.Equal(view.Units[1].At, pose.Toward);
+        if (burst.Clip.Aimed) Assert.Equal(view.Units[1].At, burst.Toward);
+        else Assert.Null(burst.Toward);
+        Assert.True(script.Length >= pose.At + pose.Length);
+    }
+
+    [Theory]
+    [InlineData("bosses.air_elemental.storm", "air_elemental.gale_blast")]
+    [InlineData("bosses.earth_elemental.magma", "golem.stone_aegis")]
+    [InlineData("bosses.fire_elemental.azure", "drake.flame_breath")]
+    public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
+    {
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var def = rules.Abilities[new(ability)];
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
+        var script = Script(view, new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), def.Presentation));
+        Assert.Equal(def.Presentation!.Anim, Assert.Single(script.Cues.OfType<PoseCue>()).Anim);
+        Assert.Equal(0, Assert.Single(script.Cues.OfType<BurstCue>()).At);
+    }
+
+    [Theory]
+    [InlineData("bosses.air_elemental.gale")]
+    [InlineData("bosses.earth_elemental.stone")]
+    [InlineData("bosses.fire_elemental.ember")]
+    public void Elemental_natural_attacks_contact_with_connected_fists_and_finish_their_recovery(string key)
+    {
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
+        var script = Script(view, new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.attack", null, null)),
+            new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "bludgeoning", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(lunge.Anim);
+        Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
+        Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+        Assert.Empty(script.Cues.OfType<FlightCue>());
+    }
+
+    [Fact]
+    public void Elemental_replay_uses_all_six_real_specials_and_walkable_adjacent_physical_targets()
+    {
+        var steps = ElementalTriadDemo.Steps(Pack.Root);
+        Assert.Equal(20, steps.Count);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var used = new List<string>();
+        BattleView? previous = null;
+        foreach (var step in steps)
+        {
+            var current = step.View.Battle!;
+            Assert.All(current.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+            foreach (var moved in current.Beats.SelectMany(b => b.Events).OfType<Moved>())
+            {
+                Assert.Equal(moved.Path[0], moved.Path[^1]);
+                Assert.All(moved.Path, tile => Assert.False(terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable)));
+            }
+            foreach (var move in current.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>())
+            {
+                Assert.Equal(rules.Abilities[move.Ability].Presentation, move.Presentation);
+                Assert.NotNull(previous);
+                Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
+                if (move.Ability.Value == "common.attack")
+                {
+                    var from = Assert.Single(current.Units, u => u.Id == move.Source).At;
+                    var to = Assert.Single(current.Units, u => u.Id == move.Target.Unit).At;
+                    Assert.Equal(1, Math.Max(Math.Abs(from.X-to.X),Math.Abs(from.Y-to.Y)));
+                }
+                else used.Add(move.Ability.Value);
+            }
+            previous = current;
+        }
+        Assert.Equal(6, used.Distinct().Count());
+    }
+
+    [Theory]
     [InlineData(1)]
     [InlineData(2)]
     public void Sapling_lashes_are_complete_physical_strikes_at_close_and_reach_distance(int range)

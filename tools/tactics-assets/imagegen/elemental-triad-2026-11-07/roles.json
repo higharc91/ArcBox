@@ -1,0 +1,53 @@
+[
+  {
+    "id": "air_elemental",
+    "key": "bosses.air_elemental.gale",
+    "label": "Air Elemental",
+    "height": 144,
+    "walkFps": 6,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "primary": "air_elemental.whirlwind",
+    "secondary": "air_elemental.gale_blast",
+    "primaryLabel": "Whirlwind",
+    "secondaryLabel": "Gale Blast",
+    "idleFps": 4
+  },
+  {
+    "id": "earth_elemental",
+    "key": "bosses.earth_elemental.stone",
+    "label": "Earth Elemental",
+    "height": 176,
+    "walkFps": 4,
+    "size": 320,
+    "anchor": [
+      160,
+      256
+    ],
+    "primary": "earth_elemental.tremor",
+    "secondary": "golem.stone_aegis",
+    "primaryLabel": "Earth Tremor",
+    "secondaryLabel": "Stone Aegis",
+    "idleFps": 3
+  },
+  {
+    "id": "fire_elemental",
+    "key": "bosses.fire_elemental.ember",
+    "label": "Fire Elemental",
+    "height": 152,
+    "walkFps": 6,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "primary": "fire_elemental.flame_surge",
+    "secondary": "drake.flame_breath",
+    "primaryLabel": "Flame Surge",
+    "secondaryLabel": "Flame Breath",
+    "idleFps": 6
+  }
+]

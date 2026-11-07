@@ -339,10 +339,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Apply(BattleEvent e) => _cues.Add(new ApplyCue(_t, e));
 
-        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null, float scale = 1, float alpha = 1, bool steam = false)
+        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null, float scale = 1, float alpha = 1, bool steam = false, int? lift = null)
         {
             if (key is not null && tile is { } place && fx.Clip(key) is { } clip)
-                _cues.Add(new BurstCue(at ?? _t, steam ? BeatTiming.Steam : clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward) { Scale = scale, Alpha = alpha, Steam = steam });
+                _cues.Add(new BurstCue(at ?? _t, steam ? BeatTiming.Steam : clip.Loop ? BeatTiming.BurstMost : clip.Seconds, lift is { } height ? clip with { Lift = height } : clip, place, toward) { Scale = scale, Alpha = alpha, Steam = steam });
         }
 
         private void Moment(string label, double after = 0) => _cues.Add(new MomentCue(_t + after, label));
@@ -656,6 +656,20 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 && used.Presentation?.Anim is null or "attack" or "characters.attack" or "bosses.attack";
             if (impBolt) used = used with { Presentation = new("bosses.attack", "fx.flames.hellfire", "projectiles.fireball") };
             var anim = used.Presentation?.Anim ?? Attack;
+            // Only the refreshed elemental variants select these dedicated gestures.
+            // The shared rules, effects and legacy variant presentations stay intact.
+            var sourceUnit = _view.Units.FirstOrDefault(u => u.Id == used.Source);
+            (string? Pose, double Length, double Impact) elemental = (sourceUnit?.Sprite, used.Ability.Value, anim) switch
+            {
+                ("bosses.air_elemental.gale", "air_elemental.whirlwind", "bosses.special") => ("bosses.special", .8, .4),
+                ("bosses.air_elemental.gale", "air_elemental.gale_blast", "bosses.special") => ("bosses.cast", .8, .4),
+                ("bosses.earth_elemental.stone", "earth_elemental.tremor", "bosses.special") => ("bosses.special", 1, .5),
+                ("bosses.earth_elemental.stone", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
+                ("bosses.fire_elemental.ember", "fire_elemental.flame_surge", "bosses.special") => ("bosses.special", .8, .4),
+                ("bosses.fire_elemental.ember", "drake.flame_breath", "beasts.special") => ("bosses.cast", 1, .4),
+                _ => (null, 0, 0),
+            };
+            anim = elemental.Pose ?? anim;
             var clip = used.Presentation?.Fx is { } named ? fx.Clip(named) : null;
             var flies = clip is { Flies: true };
             var effect = flies ? null : used.Presentation?.Fx;
@@ -666,7 +680,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             if (aim is not { } target || target == source)
             {
-                var length = used.Ability.Value switch
+                var length = elemental.Pose is not null ? elemental.Length : used.Ability.Value switch
                 {
                     "ashmaw.cinder_roar" => 1.2, // six frames at five fps
                     "ashmaw.ash_shake" => 1.0,
@@ -676,17 +690,28 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     "golem.stone_aegis" => 0.8,
                     _ => BeatTiming.Cast,
                 };
-                _cues.Add(new PoseCue(_t, length, used.Source, anim));
+                // Match UnitPlan's nearest-opponent facing for both the pose and aimed FX.
+                var tone = sourceUnit is null ? UnitTone.Neutral : UnitPlan.ToneOf(sourceUnit.Side);
+                var facing = elemental.Pose is null ? null : _view.Units.Where(u => tone switch
+                    {
+                        UnitTone.Party => UnitPlan.ToneOf(u.Side) == UnitTone.Enemy,
+                        UnitTone.Enemy => UnitPlan.ToneOf(u.Side) == UnitTone.Party,
+                        _ => false,
+                    }).OrderBy(u => Math.Abs(u.At.X - source.X) + Math.Abs(u.At.Y - source.Y))
+                    .ThenBy(u => u.Id.Value, StringComparer.Ordinal).FirstOrDefault()?.At;
+                _cues.Add(new PoseCue(_t, length, used.Source, anim, facing is null ? null : source, facing));
                 if (length != BeatTiming.Cast) SwingSound(used, anim);
                 else Sound(SoundChoice.IsSpell(effect) ? "spell_cast" : null);
                 // The golem's fists hit halfway through the clip; its recovery continues
                 // while the damage/ground effect resolves, rather than kicking dust on the wind-up.
                 var seismic = used.Ability.Value == "golem.seismic_slam";
-                var impact = seismic ? 0.5 : 0;
+                var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
-                Burst(effect, source, at: _t + impact);
-                if (seismic) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
-                _t += seismic ? impact : length;
+                // The taller flame body exhales from its mouth, above the shared humanoid body anchor.
+                Burst(effect, source, at: _t + impact, toward: clip is { Aimed: true } ? facing : null,
+                    lift: elemental.Pose is not null && used.Ability.Value == "drake.flame_breath" ? 30 : null);
+                if (seismic || elemental.Pose is not null) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
+                _t += seismic || elemental.Pose is not null ? impact : length;
                 return;
             }
 
@@ -722,7 +747,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
                     {
                         "monsters.kobold_foreman" => 0.75,
-                        "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring" => 0.8,
+                        "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring"
+                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" => 0.8,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));

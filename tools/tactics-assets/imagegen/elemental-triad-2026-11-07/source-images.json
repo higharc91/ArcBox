@@ -1,0 +1,17 @@
+{
+  "air_elemental-idle": "e10b4c91-febb-4519-8ca5-6e4b813f0b95",
+  "earth_elemental-idle": "2534ea21-646d-4b04-932a-8b4f4a5a2111",
+  "fire_elemental-idle": "4d834dd2-b903-4b66-bb43-9c2b75a91e90",
+  "air_elemental-walk": "02f375f7-c22a-4a21-8353-849bd5184ad2",
+  "earth_elemental-walk": "a8abf25f-5a1a-4f17-a466-ab680fb93823",
+  "fire_elemental-walk": "af1f4259-6d91-44ec-bd06-7992884b3ad1",
+  "air_elemental-attack": "f8374103-592d-4665-abc5-83c1f7f2d178",
+  "earth_elemental-attack": "6ef6a785-f849-4061-ac6e-e1b97eac50e9",
+  "fire_elemental-attack": "6f0ffa77-54d9-4ba7-af23-041c595bc9ab",
+  "air_elemental-moves": "071ef53b-c907-438b-a847-f88ac8253610",
+  "earth_elemental-moves": "a1e99432-d455-42b6-b402-07c6d06090fc",
+  "fire_elemental-moves": "dd90f37b-b682-4731-85ed-a31f3ead0620",
+  "air_elemental-damage": "bb717039-eb6c-424a-96b0-67a8a7099b74",
+  "earth_elemental-damage": "fa65ce3f-8389-4e86-a8cc-c2ce90d23874",
+  "fire_elemental-damage": "39cb48a4-1026-47c4-a5e8-680877d973c0"
+}

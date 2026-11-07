@@ -25,4 +25,4 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Grove Sapling](grove-ward/index.html), with eight-direction root-footed movement, a connected physical vine lash and an actual in-game replay. Twenty-four looks are refreshed across thirteen batches; five older combat looks remain. [Previous batch: Bound Imp](ember-familiar/index.html). The historical 98-look baseline above stays unchanged.
+[Latest: Air, Earth and Fire Elementals](elemental-triad/index.html), with eight authored facings, natural strikes and six distinct special gestures, plus real Godot battle/world captures. Twenty-seven looks are refreshed across fourteen batches; two older combat looks remain (Water Elemental and Red Dragon). [Previous batch: Grove Sapling](grove-ward/index.html). The historical 98-look baseline stays unchanged.

@@ -7,6 +7,18 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Elemental_triad_review_places_all_three_bosses_with_human_scale_references()
+    {
+        var battle = DemoBattle.View("river_crossing:elemental-triad").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        foreach (var key in new[] { "bosses.air_elemental.gale", "bosses.earth_elemental.stone", "bosses.fire_elemental.ember", "characters.class_fighter", "characters.bandit" })
+            Assert.Contains(battle.Units, u => u.Sprite == key);
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Grove_ward_review_places_the_small_companion_at_its_real_two_tile_reach()
     {
         var battle = DemoBattle.View("river_crossing:grove-ward").Battle!;

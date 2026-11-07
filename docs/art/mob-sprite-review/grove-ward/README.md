@@ -36,3 +36,5 @@ Host arguments after `--`:
 Use Godot `--audio-driver Dummy` before `--` on hosts without audio devices. Collect with `python tools/tactics-assets/imagegen/grove-ward-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --moves /absolute/move-shots`, then rebuild review.cjs and run verify-review.cjs.
 
 Twenty-four looks refreshed across thirteen batches; [five older combat looks remain](../production/refresh-status.json). No PR opened.
+
+Subsequent batch: [Air, Earth and Fire Elementals](../elemental-triad/README.md). Current tracker: 27 refreshed, two remaining.

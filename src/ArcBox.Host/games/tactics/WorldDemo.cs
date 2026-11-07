@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var elementalTriad = parts.Contains("elemental-triad", StringComparer.Ordinal);
         var groveWard = parts.Contains("grove-ward", StringComparer.Ordinal);
         var emberFamiliar = parts.Contains("ember-familiar", StringComparer.Ordinal);
         var trailCompanion = parts.Contains("trail-companion", StringComparer.Ordinal);
@@ -107,8 +108,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (groveWard)
+        _mobReview = elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (elementalTriad)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.gale", "bosses.earth_elemental.stone", "bosses.fire_elemental.ember"];
+        else if (groveWard)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.sapling.spring", "bosses.imp.crimson", "bosses.hound.tan"];
         else if (emberFamiliar)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.imp.crimson", "characters.skeleton", "bosses.hound.tan"];

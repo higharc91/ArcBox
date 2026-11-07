@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty-four refreshed designs integrated across thirteen batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty-seven refreshed designs integrated across fourteen batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -24,15 +24,18 @@
     "bosses.mimic.oak",
     "bosses.hound.tan",
     "bosses.imp.crimson",
-    "bosses.sapling.spring"
+    "bosses.sapling.spring",
+    "bosses.air_elemental.gale",
+    "bosses.earth_elemental.stone",
+    "bosses.fire_elemental.ember"
   ],
-  "remainingOlderCombatLooks": 5,
+  "remainingOlderCombatLooks": 2,
   "looks": [
     {
       "baselineNumber": 1,
       "name": "Air Elemental",
       "key": "bosses.air_elemental.gale",
-      "status": "awaiting refresh"
+      "status": "integrated fourteenth batch"
     },
     {
       "baselineNumber": 2,
@@ -44,13 +47,13 @@
       "baselineNumber": 3,
       "name": "Earth Elemental",
       "key": "bosses.earth_elemental.stone",
-      "status": "awaiting refresh"
+      "status": "integrated fourteenth batch"
     },
     {
       "baselineNumber": 4,
       "name": "Fire Elemental",
       "key": "bosses.fire_elemental.ember",
-      "status": "awaiting refresh"
+      "status": "integrated fourteenth batch"
     },
     {
       "baselineNumber": 5,
