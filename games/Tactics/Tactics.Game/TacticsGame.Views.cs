@@ -649,10 +649,14 @@ public sealed partial class TacticsGame
                 actor = offer.Cause is { } c && state.Units.TryGetValue(c.Actor, out var actor) ? actor.Sheet.Name : null,
                 targetName = offer.Cause?.Target is { } t && state.Units.TryGetValue(t, out var tu) ? (t == unit ? "you" : tu.Sheet.Name) : null,
                 ability = offer.Cause?.Ability is { } ca ? Rules.Abilities.GetValueOrDefault(ca)?.Name : null,
+                timeout = ReactionTimeoutWords(state, offer),
+                incomingDamage = Ai.PreviewReaction(state, offer, Pass(offer), Rules).IncomingDamage,
                 options = offer.Options.Select(o => new
                 {
                     id = o.Id,
-                    label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
+                    label = ReactionWords.Label(o, Rules),
+                    outcome = Ai.PreviewReaction(state, offer, o, Rules).Outcome,
+                    cost = ReactionWords.Cost(o, me, Rules),
                     target = o.Target,
                     tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),

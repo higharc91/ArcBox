@@ -34,6 +34,7 @@ public sealed partial class TacticsGame
             UnitOut u => $"{Name(u.Unit)} is out of the battle.",
             Countered c => $"{Name(c.By)} countered {Name(c.Caster)}'s {Rules.Abilities.GetValueOrDefault(c.Ability)?.Name ?? c.Ability.Value}.",
             AbilityUsed a => $"{Name(a.Source)} used {Rules.Abilities.GetValueOrDefault(a.Ability)?.Name ?? a.Ability.Value}.",
+            Reacted r => $"{Name(r.Reactor)}: {(r.Choice == Reactions.Pass ? ReactionWords.PassLabel : Rules.Abilities.GetValueOrDefault(new AbilityId(r.Choice))?.Name ?? r.Choice)}.",
             RoundStarted r => $"Round {r.Round} began.",
             _ => null,
         };

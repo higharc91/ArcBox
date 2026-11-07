@@ -390,6 +390,16 @@ public sealed partial class TacticsGame
     /// Answers <paramref name="offer"/> by the AI's rule. If choosing fails (logged), the reaction is passed, and that pass is
     /// a skip like any other (<see cref="SkipFailedStep"/>).
     /// </summary>
+    private string ReactionTimeoutWords(BattleState state, ReactionOffer offer)
+    {
+        ReactionChoice choice;
+        try { choice = Ai.React(state, offer, Rules); }
+        catch (Exception e) when (IsEngineFailure(e)) { choice = Pass(offer); }
+        return choice.Id == Reactions.Pass
+            ? $"If you do nothing: the AI chooses {ReactionWords.PassLabel}. No resources are spent."
+            : $"If you do nothing: the AI plans to use {ReactionWords.Label(choice, Rules)}. If unavailable: {ReactionWords.PassLabel}.";
+    }
+
     private void AnswerForReactor(BattleState state, ReactionOffer offer)
     {
         ReactionChoice choice;

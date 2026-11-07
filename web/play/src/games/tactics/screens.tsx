@@ -310,7 +310,9 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
         <span class="tx-eyebrow">Reaction</span>
         <p class="tx-alert-title">{TRIGGERS[r.trigger] ?? "You can react"}</p>
         {detail ? <p class="tx-react-detail">{detail}</p> : null}
+        {r.incomingDamage != null ? <p class="tx-react-detail">About {r.incomingDamage} incoming damage on average, before your reaction.</p> : null}
       </div>
+      {r.timeout ? <p class="tx-react-timeout" role="note">{r.timeout}</p> : null}
       <Section>Your reactions</Section>
       <ul class="tx-abilities tx-react-options">
         {r.options.filter((o) => o.id !== "pass").map((o) => (
@@ -319,6 +321,8 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
               <span class="tx-ic"><AbilityIcon ability={o.id} /></span>
               <span class="tx-ab-text">
                 <b>{o.label}</b>
+                {o.outcome ? <span class="tx-react-outcome">{o.outcome}</span> : null}
+                {o.cost ? <span class="tx-react-cost">{o.cost}</span> : null}
                 {o.tooltip ? <span class="tx-react-tip">{o.tooltip}</span> : null}
               </span>
             </button>
@@ -328,6 +332,8 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
       {pass ? (
         <div class="tx-foot">
           <button type="button" class="tx-btn ghost" onClick={() => answer(pass.id)}>{pass.label}</button>
+          {pass.outcome ? <p class="tx-note">{pass.outcome}</p> : null}
+          {pass.cost ? <p class="tx-note">{pass.cost}</p> : null}
         </div>
       ) : null}
     </div>

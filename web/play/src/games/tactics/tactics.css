@@ -1002,3 +1002,11 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-wait-party b { overflow-wrap: anywhere; }
 .tx-wait-recent ol { margin: 0; padding-left: 22px; font-size: 17px; line-height: 1.35; }
 .tx-wait-recent li + li { margin-top: 4px; }
+
+.tx-react-timeout { font-size: 17px; line-height: 1.3; padding: 10px 12px; border-left: 3px solid var(--wf-gold); }
+.tx-react-outcome, .tx-react-cost { display: block; font-size: 17px; line-height: 1.3; }
+.tx-react-outcome { color: var(--wf-ink); }
+.tx-react-cost { color: var(--wf-gold); }
+.tx-react .tx-foot p { margin: 5px 0 0; font-size: 16px; }
+
+.tx-react .tx-foot { display: flex; flex-direction: column; align-items: stretch; }

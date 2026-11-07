@@ -27,16 +27,22 @@
     "actor": "Goblin",
     "targetName": "you",
     "ability": "Attack",
+    "timeout": "If you do nothing: the AI chooses Don\u0027t react. No resources are spent.",
+    "incomingDamage": 6.5,
     "options": [
       {
         "id": "pass",
         "label": "Don\u0027t react",
+        "outcome": "This hit lands. Keep your Reaction.",
+        "cost": "Costs nothing.",
         "target": null,
         "tooltip": null
       },
       {
         "id": "wizard.shield",
         "label": "Shield",
+        "outcome": "This hit still lands.",
+        "cost": "Costs 1 Reaction \u002B 1 Mana (6 left).",
         "target": "hero4",
         "tooltip": "Self: you get \u002B5 AC until the end of your turn"
       }
