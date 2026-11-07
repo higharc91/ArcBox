@@ -586,7 +586,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.lightning.storm, fx.shock.storm; fx.wizard_shocking_grasp.storm; fx.wizard_chromatic_orb.storm; fx.sorcerer_shocking_grasp.storm; fx.sorcerer_chromatic_orb.storm"
+  "use": "fx.lightning.storm, fx.shock.storm; fx.wizard_shocking_grasp.storm; fx.wizard_chromatic_orb.storm; fx.sorcerer_shocking_grasp.storm; fx.sorcerer_chromatic_orb.storm; fx.ranger_lightning_arrow.storm"
  },
  "spell_thunderwave": {
   "prompt": "Booming thunderwave shockwave blast, deep rolling concussive boom",
@@ -631,7 +631,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth; fx.paladin_shield_of_faith.azure"
+  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth; fx.paladin_shield_of_faith.azure; fx.ranger_barkskin.wood"
  },
  "spell_bless": {
   "prompt": "Blessing spell, gentle golden sparkling chimes rising",
@@ -667,7 +667,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing"
+  "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing; fx.ranger_cure_wounds.healing; fx.ranger_lesser_restoration.healing"
  },
  "spell_nature_circle": {
   "prompt": "Roots and vines erupting from the ground, creaking wood and rustling growth",
@@ -676,7 +676,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk; fx.sorcerer_web.silk; fx.druid_faerie_fire.fey; fx.druid_hold_person.nature; fx.druid_spike_growth.nature; fx.druid_conjure_animals.nature"
+  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk; fx.sorcerer_web.silk; fx.druid_faerie_fire.fey; fx.druid_hold_person.nature; fx.druid_spike_growth.nature; fx.druid_conjure_animals.nature; fx.ranger_hunters_mark.force; fx.ranger_hail_of_thorns.wood; fx.ranger_spike_growth.root"
  },
  "spell_shadow": {
   "prompt": "Shadow curse spell, dark ominous whisper-like whoosh with a low droning pulse",
@@ -703,7 +703,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic; fx.sorcerer_sleep.fey; fx.sorcerer_misty_step.mist; fx.sorcerer_greater_invisibility.mist; fx.warlock_one_with_shadows.shadow; fx.warlock_shroud_of_shadow.shadow; fx.warlock_misty_step.mist; fx.warlock_dimension_door.arcane; fx.bard_greater_invisibility.illusion; fx.bard_dimension_door.arcane"
+  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic; fx.sorcerer_sleep.fey; fx.sorcerer_misty_step.mist; fx.sorcerer_greater_invisibility.mist; fx.warlock_one_with_shadows.shadow; fx.warlock_shroud_of_shadow.shadow; fx.warlock_misty_step.mist; fx.warlock_dimension_door.arcane; fx.bard_greater_invisibility.illusion; fx.bard_dimension_door.arcane; fx.ranger_vanish.mist"
  },
  "spell_psychic": {
   "prompt": "Psychic spell, eerie warbling mind-bending tone sweeping upward",

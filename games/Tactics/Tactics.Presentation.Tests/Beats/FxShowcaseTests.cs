@@ -40,7 +40,7 @@ public sealed class FxShowcaseTests
                     .SelectMany(z => z.Passives).Select(p => p.Id)).Distinct().Order();
             if (cls.Id == "cleric")
                 expected = expected.Concat(rules.Conditions[new("death_ward")].Passives.Select(p => p.Id)).Distinct().Order();
-            if (cls.Id is "druid" or "paladin" or "bard")
+            if (cls.Id is "druid" or "paladin" or "bard" or "ranger")
             {
                 var zoneHooks=expected.Where(id=>rules.Abilities.ContainsKey(new(id)))
                     .SelectMany(id=>rules.Abilities[new(id)].Effects.OfType<ZoneEffect>()).SelectMany(z=>z.Passives).Select(p=>p.Id);

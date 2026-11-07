@@ -1101,6 +1101,73 @@
           "loop": false
         }
       }
+    },
+    "ranger": {
+      "framesPerDirection": 215,
+      "anims": {
+        "ranger_draw": {
+          "frames": [
+            189,
+            190,
+            191,
+            192,
+            193
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "ranger_volley": {
+          "frames": [
+            194,
+            195,
+            196,
+            197,
+            198
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "ranger_command": {
+          "frames": [
+            199,
+            200,
+            201,
+            202,
+            203
+          ],
+          "fps": 16,
+          "loop": false
+        },
+        "ranger_ward": {
+          "frames": [
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "fps": 16,
+          "loop": false
+        },
+        "ranger_vanish": {
+          "frames": [
+            209,
+            210,
+            211,
+            212,
+            213
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "ranger_release": {
+          "frames": [
+            214
+          ],
+          "fps": 20,
+          "loop": false
+        }
+      }
     }
   }
 }

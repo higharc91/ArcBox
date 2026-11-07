@@ -16,6 +16,7 @@ public sealed class FxRoundBudgetTests
     [InlineData("warlock")]
     [InlineData("druid")]
     [InlineData("paladin")]
+    [InlineData("ranger")]
     public void Six_hero_chapter_one_rounds_preserve_rules_and_stay_within_the_proposed_cinematic_budget(string caster)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);

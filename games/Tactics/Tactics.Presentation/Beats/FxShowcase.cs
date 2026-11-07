@@ -52,7 +52,7 @@ public static class FxShowcase
                 rows.TryAdd(parent.Subclass + ":" + proc.Id,
                     new(proc.Id, "Death Ward Rescue", parent.Level, parent.Subclass, "proc", "none", null));
         }
-        if (cls is "druid" or "paladin" or "bard")
+        if (cls is "druid" or "paladin" or "bard" or "ranger")
             foreach (var parent in rows.Values.Where(r => r.Kind == "ability").ToArray())
                 foreach (var proc in rules.Abilities[new(parent.Id)].Effects.OfType<ZoneEffect>().SelectMany(z => z.Passives))
                     rows.TryAdd(parent.Subclass + ":" + proc.Id,
@@ -144,6 +144,8 @@ public static class FxShowcase
             samples.Add(Sample(cls,new("paladin.elemental_weapon"),9,rules,samples.Count+1,realistic:true,weaponFollowThrough:true)
                 with { Id="paladin.elemental_weapon.strike",Name="Elemental Weapon · actual attack" });
         }
+        if(cls=="ranger")
+            foreach(var action in new[]{"move","attack"})samples.Add(RangerCompanionSample(action,rules,samples.Count+1));
         return samples.ToImmutable();
     }
 
@@ -185,6 +187,7 @@ public static class FxShowcase
             return ProcSample(cls,Inventory(cls,rules).Single(f=>f.Id==id[..^7]),rules,1,undeadTarget:true) with { Id=id };
         if(cls=="paladin" && id=="paladin.elemental_weapon.strike")
             return Sample(cls,new("paladin.elemental_weapon"),9,rules,1,realistic:true,weaponFollowThrough:true) with { Id=id };
+        if(cls=="ranger" && id.StartsWith("ranger.companion.",StringComparison.Ordinal))return RangerCompanionSample(id.Split('.')[2],rules,1);
         var feature = Inventory(cls, rules).FirstOrDefault(r => r.Id == id);
         if (feature?.Kind == "static") throw new InvalidOperationException($"{id} is a static modifier, not a standalone visible proc.");
         return feature?.Kind == "proc" ? ProcSample(cls, feature, rules, 1)
@@ -205,7 +208,7 @@ public static class FxShowcase
             }
             throw new InvalidOperationException("The real lethal hit did not trigger Death Ward.");
         }
-        if (cls is "druid" or "paladin" or "bard" && !rules.Passives.ContainsKey(feature.Id))
+        if (cls is "druid" or "paladin" or "bard" or "ranger" && !rules.Passives.ContainsKey(feature.Id))
             return Sample(cls, rules.Abilities.Single(pair=>pair.Value.Effects.OfType<ZoneEffect>().Any(z=>z.Passives.Any(p=>p.Id==feature.Id))).Key, feature.Level, rules, sequence,
                 feature.Subclass, realistic: true, zoneProc: feature.Id) with { Id = feature.Id, Name = feature.Name };
         var passive = rules.Passives[feature.Id];
@@ -300,9 +303,11 @@ public static class FxShowcase
             with { InitiativeBonus = 100, Sprite = "characters.class_" + cls, Abilities = [abilityId] };
         if (passive is not null) sheet = sheet with { Passives = [passive] };
         if (needsHex) sheet = sheet with { Abilities = [abilityId, new("warlock.hex")] };
+        var rangerPreparation=passive switch { "ranger.hunters_mark_bonus"=>"ranger.hunters_mark", "beastmaster.ferocious_bond"=>"beastmaster.sic",_=>null };
+        if(rangerPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(rangerPreparation)] };
         if(paladinPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(paladinPreparation)] };
-        var friendly = (cls is "cleric" or "druid" or "paladin" or "bard") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
-            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" or "bard" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
+        var friendly = (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
+            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" or "bard" or "ranger" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
         var melee = weaponFollowThrough || formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
@@ -330,7 +335,7 @@ public static class FxShowcase
             var revive = ability.Effects.Any(e => e is ReviveEffect) || ability.Target.Kind == TargetKind.DownedAlly;
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Value.Sheet.Side != Side.Party ? kv.Value : kv.Value with
-                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" or "bard" ? 3 : 2)),
+                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger" ? 3 : 2)),
                     Life = revive && kv.Key != caster ? LifeState.Downed : LifeState.Up,
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
@@ -354,13 +359,21 @@ public static class FxShowcase
             if(prepared.Rejected is not null || prepared.State.Pending is not null)throw new InvalidOperationException("Paladin rider preparation failed.");
             state=prepared.State;
         }
+        if(passive=="sharpshooter.high_ground_mastery")
+            state=state with { HeightDelta=state.HeightDelta.SetItem(from,terrain.HeightAt(target)+1-terrain.HeightAt(from)) };
+        if(rangerPreparation is not null)
+        {
+            var prepared=Battle.Apply(state,new Use(caster,new(rangerPreparation),new Target(Unit:new("target1"))),rules);
+            if(prepared.Rejected is not null || prepared.State.Pending is not null)throw new InvalidOperationException("Ranger mark preparation failed.");
+            state=prepared.State;
+        }
         if (woundedTarget)
             state = state with { Units = state.Units.SetItem(new("target1"), state.Units[new("target1")] with { Hp = 100 }) };
         if (wardProc)
             state = state with { Units = state.Units.SetItem(new("hero2"), state.Units[new("hero2")] with { Hp = 1 }) };
         var conditions = abilityId.Value switch
         {
-            "cleric.lesser_restoration" or "druid.lesser_restoration" or "paladin.lesser_restoration" or "bard.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
+            "cleric.lesser_restoration" or "druid.lesser_restoration" or "paladin.lesser_restoration" or "bard.lesser_restoration" or "ranger.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
             "cleric.greater_restoration" or "druid.greater_restoration" or "cleric.divine_intervention" or "bard.greater_restoration" => new[] {"poisoned", "charmed", "frightened"},
             "bard.countercharm" => new[]{"charmed","frightened"},
             "bard.heroism" => new[]{"frightened"},
@@ -412,7 +425,7 @@ public static class FxShowcase
         if (zoneProc is not null)
         {
             state = result.State;
-            var enter = zoneProc.EndsWith(".step",StringComparison.Ordinal) || zoneProc.EndsWith(".enter",StringComparison.Ordinal);
+            var enter = zoneProc.EndsWith(".step",StringComparison.Ordinal) || zoneProc.EndsWith(".enter",StringComparison.Ordinal) || zoneProc=="spike_growth.thorns";
             var victim = new UnitId(friendly ? "hero2" : "target1");
             for (var step = 0; step < 24; step++)
             {
@@ -484,6 +497,34 @@ public static class FxShowcase
         }
         return new(abilityId.Value, ability.Name, choice!.Tooltip, level, View(state, []),
             View(result.State, [new Beat(sequence, caster, result.Events)]));
+    }
+
+    private static FxShowcaseSample RangerCompanionSample(string action,RulesPack rules,int sequence)
+    {
+        var map=rules.Maps["crypt_hall"];var hero=new UnitId("hero1");var foe=new UnitId("target1");
+        for(ulong seed=7;seed<40;seed++)
+        {
+            var ranger=SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember","human","ranger","ranger.beastmaster",3,rules),rules)
+                with { InitiativeBonus=100,Sprite="characters.class_ranger",Passives=["beastmaster.companion"],Abilities=[] };
+            var goblin=SheetBuilder.ForMonster("goblin",rules) with { InitiativeBonus=0,MaxHp=200 };
+            var setup=new BattleSetup(map,[new(hero,ranger,new PlayerControlled(new("preview")),new(3,5),[]),new(foe,goblin,new AiControlled("brute"),new(7,5),[])],ObjectivesDef.Default,[],Difficulty.Normal,0,[]);
+            var state=Battle.Start(setup,rules,seed).State;var hound=state.Units.Values.Single(u=>u.SummonedBy==hero).Id;
+            for(var step=0;step<12 && state.Active!=hound;step++)state=Battle.Apply(state,new EndTurn(state.Active!.Value),rules).State;
+            if(state.Active!=hound)throw new InvalidOperationException("Real companion did not receive its turn.");
+            var move=Choices.For(state,hound,rules).Moves.Where(m=>action=="attack"?Reach.Distance(m.To,state.Units[foe].Pos)==1:m.Path.Length==4)
+                .OrderBy(m=>Reach.Distance(m.To,state.Units[foe].Pos)).ThenBy(m=>m.Path.Length).First();
+            var before=state;var result=Battle.Apply(state,new Move(hound,move.Path),rules);
+            if(result.Rejected is not null || result.State.Pending is not null)throw new InvalidOperationException("Companion's real move was rejected.");
+            if(action=="attack")
+            {
+                before=result.State;result=Battle.Apply(before,new Use(hound,RulesPack.CommonAttack.Id,new Target(Unit:foe)),rules);
+                if(result.Rejected is not null || result.State.Pending is not null)throw new InvalidOperationException("Companion's real attack was rejected.");
+                if(!result.Events.OfType<Damaged>().Any())continue;
+            }
+            return new("ranger.companion."+action,"Hound companion · "+action,"Actual summoned hound's own turn and "+action+"; fixture seed "+seed+".",3,
+                ShowcaseView(before,map,[]),ShowcaseView(result.State,map,[new(sequence,hound,result.Events)]));
+        }
+        throw new InvalidOperationException("Could not obtain a real companion "+action+".");
     }
 
     private static FxShowcaseSample DruidFormSample(string form, string action, RulesPack rules, int sequence)
