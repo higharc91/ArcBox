@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      102,
+      202,
+      254
+    ],
+    "count": 8032
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 1,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      114,
+      102,
+      201,
+      254
+    ],
+    "count": 8169
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 2,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      114,
+      97,
+      202,
+      253
+    ],
+    "count": 8645
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      104,
+      203,
+      254
+    ],
+    "count": 8074
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 0,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      114,
+      105,
+      207,
+      256
+    ],
+    "count": 8784
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 1,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      108,
+      105,
+      202,
+      257
+    ],
+    "count": 8883
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 2,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      105,
+      203,
+      259
+    ],
+    "count": 9174
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 3,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      109,
+      104,
+      203,
+      255
+    ],
+    "count": 9097
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      104,
+      202,
+      256
+    ],
+    "count": 8032
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      116,
+      105,
+      208,
+      256
+    ],
+    "count": 8739
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      117,
+      104,
+      207,
+      256
+    ],
+    "count": 8544
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      106,
+      203,
+      256
+    ],
+    "count": 8074
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      118,
+      113,
+      204,
+      256
+    ],
+    "count": 7660
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      117,
+      171,
+      202,
+      256
+    ],
+    "count": 5177
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      104,
+      202,
+      256
+    ],
+    "count": 8032
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 0,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      113,
+      105,
+      206,
+      256
+    ],
+    "count": 8754
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 1,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      88,
+      104,
+      231,
+      256
+    ],
+    "count": 10638
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      106,
+      203,
+      256
+    ],
+    "count": 8074
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      104,
+      202,
+      256
+    ],
+    "count": 8032
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 2,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      104,
+      207,
+      256
+    ],
+    "count": 9971
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 3,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      111,
+      105,
+      210,
+      256
+    ],
+    "count": 9714
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      106,
+      203,
+      256
+    ],
+    "count": 8074
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      103,
+      203,
+      254
+    ],
+    "count": 7988
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 5,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      103,
+      202,
+      254
+    ],
+    "count": 8097
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 6,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      100,
+      202,
+      254
+    ],
+    "count": 8501
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      103,
+      203,
+      254
+    ],
+    "count": 8111
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 4,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      114,
+      106,
+      206,
+      254
+    ],
+    "count": 8910
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 5,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      113,
+      107,
+      205,
+      254
+    ],
+    "count": 9009
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 6,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      115,
+      106,
+      205,
+      252
+    ],
+    "count": 9116
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 7,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      112,
+      104,
+      205,
+      252
+    ],
+    "count": 9047
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 7988
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      115,
+      108,
+      207,
+      256
+    ],
+    "count": 8500
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      92,
+      108,
+      207,
+      256
+    ],
+    "count": 8912
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 8111
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      120,
+      118,
+      201,
+      256
+    ],
+    "count": 7446
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      120,
+      182,
+      200,
+      256
+    ],
+    "count": 4588
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 7988
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 4,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      114,
+      109,
+      204,
+      256
+    ],
+    "count": 8594
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 5,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      89,
+      109,
+      232,
+      256
+    ],
+    "count": 10715
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 8111
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 7988
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 6,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      119,
+      108,
+      206,
+      256
+    ],
+    "count": 9237
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 7,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      100,
+      110,
+      212,
+      256
+    ],
+    "count": 9269
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      105,
+      203,
+      256
+    ],
+    "count": 8111
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      105,
+      192,
+      254
+    ],
+    "count": 6451
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 9,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      101,
+      188,
+      254
+    ],
+    "count": 6619
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 10,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      127,
+      101,
+      190,
+      254
+    ],
+    "count": 6931
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      106,
+      190,
+      254
+    ],
+    "count": 6272
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 8,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      108,
+      193,
+      252
+    ],
+    "count": 7021
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 9,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      108,
+      192,
+      254
+    ],
+    "count": 7020
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 10,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      107,
+      195,
+      252
+    ],
+    "count": 7366
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 11,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      106,
+      193,
+      250
+    ],
+    "count": 7045
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      107,
+      192,
+      256
+    ],
+    "count": 6451
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      117,
+      108,
+      196,
+      256
+    ],
+    "count": 7842
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      88,
+      108,
+      196,
+      256
+    ],
+    "count": 8316
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      129,
+      108,
+      191,
+      256
+    ],
+    "count": 6272
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      129,
+      119,
+      189,
+      256
+    ],
+    "count": 5835
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      121,
+      177,
+      199,
+      256
+    ],
+    "count": 4610
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      107,
+      192,
+      256
+    ],
+    "count": 6451
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 8,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      121,
+      111,
+      193,
+      256
+    ],
+    "count": 7409
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 9,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      87,
+      112,
+      222,
+      256
+    ],
+    "count": 9982
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      129,
+      108,
+      191,
+      256
+    ],
+    "count": 6272
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      107,
+      192,
+      256
+    ],
+    "count": 6451
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 10,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      120,
+      112,
+      192,
+      256
+    ],
+    "count": 7630
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 11,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      91,
+      114,
+      196,
+      256
+    ],
+    "count": 8114
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      129,
+      108,
+      191,
+      256
+    ],
+    "count": 6272
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      104,
+      202,
+      254
+    ],
+    "count": 8324
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 13,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      116,
+      105,
+      200,
+      254
+    ],
+    "count": 8434
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 14,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      113,
+      104,
+      199,
+      254
+    ],
+    "count": 8743
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      106,
+      202,
+      254
+    ],
+    "count": 8401
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 12,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      106,
+      204,
+      251
+    ],
+    "count": 9217
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 13,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      112,
+      106,
+      202,
+      252
+    ],
+    "count": 9134
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 14,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      110,
+      106,
+      201,
+      253
+    ],
+    "count": 9485
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 15,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      105,
+      203,
+      250
+    ],
+    "count": 9385
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      106,
+      202,
+      256
+    ],
+    "count": 8324
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      115,
+      107,
+      207,
+      256
+    ],
+    "count": 8883
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      94,
+      110,
+      206,
+      256
+    ],
+    "count": 8751
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      108,
+      201,
+      256
+    ],
+    "count": 8401
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      114,
+      120,
+      196,
+      256
+    ],
+    "count": 7493
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      117,
+      185,
+      201,
+      256
+    ],
+    "count": 4728
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      106,
+      202,
+      256
+    ],
+    "count": 8324
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 12,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      109,
+      199,
+      256
+    ],
+    "count": 8471
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 13,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      83,
+      108,
+      233,
+      256
+    ],
+    "count": 11080
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      108,
+      201,
+      256
+    ],
+    "count": 8401
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      106,
+      202,
+      256
+    ],
+    "count": 8324
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 14,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      114,
+      109,
+      201,
+      256
+    ],
+    "count": 9105
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 15,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      113,
+      109,
+      207,
+      256
+    ],
+    "count": 9336
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      108,
+      201,
+      256
+    ],
+    "count": 8401
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      104,
+      203,
+      254
+    ],
+    "count": 8386
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 17,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      114,
+      103,
+      200,
+      254
+    ],
+    "count": 8542
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 18,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      103,
+      208,
+      254
+    ],
+    "count": 8963
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      107,
+      203,
+      254
+    ],
+    "count": 8348
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 16,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      106,
+      205,
+      256
+    ],
+    "count": 9242
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 17,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      107,
+      205,
+      258
+    ],
+    "count": 9570
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 18,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      116,
+      107,
+      212,
+      253
+    ],
+    "count": 9861
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 19,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      111,
+      105,
+      205,
+      252
+    ],
+    "count": 9669
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      106,
+      203,
+      256
+    ],
+    "count": 8386
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      113,
+      112,
+      207,
+      256
+    ],
+    "count": 8857
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      111,
+      113,
+      211,
+      256
+    ],
+    "count": 8188
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      109,
+      203,
+      256
+    ],
+    "count": 8348
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      118,
+      120,
+      202,
+      256
+    ],
+    "count": 7479
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      115,
+      168,
+      205,
+      256
+    ],
+    "count": 5322
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      106,
+      203,
+      256
+    ],
+    "count": 8386
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 16,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      113,
+      109,
+      205,
+      256
+    ],
+    "count": 8714
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 17,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      87,
+      110,
+      232,
+      256
+    ],
+    "count": 10654
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      109,
+      203,
+      256
+    ],
+    "count": 8348
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      106,
+      203,
+      256
+    ],
+    "count": 8386
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 18,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      109,
+      207,
+      256
+    ],
+    "count": 9304
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 19,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      106,
+      110,
+      210,
+      256
+    ],
+    "count": 9665
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      109,
+      203,
+      256
+    ],
+    "count": 8348
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      108,
+      197,
+      254
+    ],
+    "count": 8156
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 21,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      119,
+      106,
+      202,
+      254
+    ],
+    "count": 8527
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 22,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      114,
+      103,
+      197,
+      254
+    ],
+    "count": 8728
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      106,
+      199,
+      254
+    ],
+    "count": 8296
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 20,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      113,
+      109,
+      201,
+      257
+    ],
+    "count": 9198
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 21,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      113,
+      111,
+      201,
+      257
+    ],
+    "count": 9476
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 22,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      115,
+      109,
+      204,
+      258
+    ],
+    "count": 9669
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 23,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      112,
+      109,
+      202,
+      255
+    ],
+    "count": 9679
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      110,
+      197,
+      256
+    ],
+    "count": 8156
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      113,
+      110,
+      203,
+      256
+    ],
+    "count": 8486
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      111,
+      111,
+      218,
+      256
+    ],
+    "count": 8766
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      108,
+      200,
+      256
+    ],
+    "count": 8296
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      120,
+      122,
+      198,
+      256
+    ],
+    "count": 7136
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      117,
+      180,
+      203,
+      256
+    ],
+    "count": 4787
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      110,
+      197,
+      256
+    ],
+    "count": 8156
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 20,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      109,
+      195,
+      256
+    ],
+    "count": 8201
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 21,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      87,
+      109,
+      233,
+      256
+    ],
+    "count": 10809
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      108,
+      200,
+      256
+    ],
+    "count": 8296
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      110,
+      197,
+      256
+    ],
+    "count": 8156
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 22,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      114,
+      109,
+      202,
+      256
+    ],
+    "count": 9191
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 23,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      109,
+      111,
+      205,
+      256
+    ],
+    "count": 9443
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      118,
+      108,
+      200,
+      256
+    ],
+    "count": 8296
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      108,
+      193,
+      254
+    ],
+    "count": 6615
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 25,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      127,
+      104,
+      193,
+      254
+    ],
+    "count": 6792
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 26,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      101,
+      196,
+      254
+    ],
+    "count": 7114
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      128,
+      110,
+      195,
+      254
+    ],
+    "count": 6452
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 24,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      109,
+      191,
+      257
+    ],
+    "count": 7160
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 25,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      111,
+      194,
+      259
+    ],
+    "count": 7135
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 26,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      109,
+      195,
+      257
+    ],
+    "count": 7287
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 27,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      109,
+      194,
+      253
+    ],
+    "count": 7152
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      110,
+      193,
+      256
+    ],
+    "count": 6615
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      124,
+      113,
+      193,
+      256
+    ],
+    "count": 7405
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      126,
+      113,
+      219,
+      256
+    ],
+    "count": 7798
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      112,
+      193,
+      256
+    ],
+    "count": 6452
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      128,
+      120,
+      192,
+      256
+    ],
+    "count": 5982
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      121,
+      176,
+      199,
+      256
+    ],
+    "count": 4502
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      110,
+      193,
+      256
+    ],
+    "count": 6615
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 24,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      125,
+      106,
+      194,
+      256
+    ],
+    "count": 7467
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 25,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      91,
+      110,
+      219,
+      256
+    ],
+    "count": 10028
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      112,
+      193,
+      256
+    ],
+    "count": 6452
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      110,
+      193,
+      256
+    ],
+    "count": 6615
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 26,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      127,
+      110,
+      196,
+      256
+    ],
+    "count": 7356
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 27,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      115,
+      216,
+      256
+    ],
+    "count": 8302
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      126,
+      112,
+      193,
+      256
+    ],
+    "count": 6452
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      110,
+      202,
+      254
+    ],
+    "count": 8205
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 29,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      115,
+      109,
+      201,
+      254
+    ],
+    "count": 8318
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 30,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      113,
+      104,
+      199,
+      254
+    ],
+    "count": 8521
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      114,
+      110,
+      200,
+      254
+    ],
+    "count": 8193
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 28,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      108,
+      111,
+      205,
+      258
+    ],
+    "count": 9672
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 29,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      110,
+      112,
+      204,
+      258
+    ],
+    "count": 9406
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 30,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      108,
+      112,
+      203,
+      258
+    ],
+    "count": 9771
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_radiant-walk.png",
+    "sourcePose": 31,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      108,
+      110,
+      203,
+      255
+    ],
+    "count": 9633
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      112,
+      202,
+      256
+    ],
+    "count": 8205
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      114,
+      113,
+      206,
+      256
+    ],
+    "count": 8625
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_radiant-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7958115183246073,
+    "bounds": [
+      114,
+      113,
+      214,
+      256
+    ],
+    "count": 8401
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      116,
+      112,
+      202,
+      256
+    ],
+    "count": 8193
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      121,
+      123,
+      199,
+      256
+    ],
+    "count": 7065
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7741935483870968,
+    "bounds": [
+      117,
+      182,
+      202,
+      256
+    ],
+    "count": 4574
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      112,
+      202,
+      256
+    ],
+    "count": 8205
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 28,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      113,
+      197,
+      256
+    ],
+    "count": 8304
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 29,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      85,
+      111,
+      228,
+      256
+    ],
+    "count": 10727
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      116,
+      112,
+      202,
+      256
+    ],
+    "count": 8193
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      117,
+      112,
+      202,
+      256
+    ],
+    "count": 8205
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 30,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      112,
+      113,
+      200,
+      256
+    ],
+    "count": 8725
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_radiant-moves.png",
+    "sourcePose": 31,
+    "scale": 1.0410958904109588,
+    "bounds": [
+      105,
+      119,
+      208,
+      256
+    ],
+    "count": 8651
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_radiant-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0704225352112675,
+    "bounds": [
+      116,
+      112,
+      202,
+      256
+    ],
+    "count": 8193
+  }
+]

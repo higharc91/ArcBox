@@ -1,0 +1,74 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1120
+    },
+    {
+      "title": "Development battle · elementals beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Six specials through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · elemental scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "db06c707",
+    "walk": "f7fcf35e",
+    "attack": "eaa2c0a2",
+    "special": "81eaf34f",
+    "cast": "69c675c5",
+    "hurt": "af1ed6c2",
+    "down": "409f8817"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "fire_azure",
+      "hashes": [
+        "adcaf801",
+        "d6e33316",
+        "c696955b",
+        "9001208f"
+      ]
+    },
+    {
+      "id": "fire_radiant",
+      "hashes": [
+        "22ef5b06",
+        "58dd0577",
+        "111f4338",
+        "f1e03a6d"
+      ]
+    },
+    {
+      "id": "fire_shadow",
+      "hashes": [
+        "e3bd82c2",
+        "31bb0d3f",
+        "b5b8c16f",
+        "9ff768c8"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

@@ -661,6 +661,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var sourceUnit = _view.Units.FirstOrDefault(u => u.Id == used.Source);
             var elementalKey = sourceUnit?.Sprite switch
             {
+                "bosses.fire_elemental.azure" => "bosses.fire_elemental.ember",
+                "bosses.fire_elemental.radiant" => "bosses.fire_elemental.ember",
+                "bosses.fire_elemental.shadow" => "bosses.fire_elemental.ember",
                 "bosses.air_elemental.storm" => "bosses.air_elemental.gale",
                 "bosses.earth_elemental.magma" => "bosses.earth_elemental.stone",
                 "bosses.water_elemental.swamp" => "bosses.water_elemental.sea",
@@ -739,7 +742,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 EffectSound(effect, _t + impact);
                 if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red"
                     or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
-                    or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple")
+                    or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
+                    or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
                     Moment("special-contact", impact);
                 // The taller flame body exhales from its mouth, above the shared humanoid body anchor.
                 Burst(effect, source, at: _t + impact, toward: clip is { Aimed: true } ? facing : null,
@@ -788,7 +792,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                         "monsters.kobold_foreman" => 0.75,
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring"
                             or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
-                            or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple" => 0.8,
+                            or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
+                            or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow" => 0.8,
                         "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };

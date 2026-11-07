@@ -1,0 +1,17 @@
+{
+  "fire_azure-attack.png": "b0a5dcb4786cac48448017f92de5ed5356456fb5b3c5769c1b24332d56a480df",
+  "fire_azure-damage.png": "ffb8fb241d8fe66fb384ba95dc8974ffd465858a3ab46c9021017d614bccce47",
+  "fire_azure-idle.png": "7cba7f44780e070e3f6ef8fa662811d070633621773b28f8255f309586432c73",
+  "fire_azure-moves.png": "3c638d6faabbd61b464bd0006544282e544cde20a24bd4de9c07b98c74a2396a",
+  "fire_azure-walk.png": "d27ff3ebd928741acf256f542d2933cadd1b51f6fd34ca7abb350e225b1213d6",
+  "fire_radiant-attack.png": "b0a5dcb4786cac48448017f92de5ed5356456fb5b3c5769c1b24332d56a480df",
+  "fire_radiant-damage.png": "ffb8fb241d8fe66fb384ba95dc8974ffd465858a3ab46c9021017d614bccce47",
+  "fire_radiant-idle.png": "7cba7f44780e070e3f6ef8fa662811d070633621773b28f8255f309586432c73",
+  "fire_radiant-moves.png": "3c638d6faabbd61b464bd0006544282e544cde20a24bd4de9c07b98c74a2396a",
+  "fire_radiant-walk.png": "d27ff3ebd928741acf256f542d2933cadd1b51f6fd34ca7abb350e225b1213d6",
+  "fire_shadow-attack.png": "b0a5dcb4786cac48448017f92de5ed5356456fb5b3c5769c1b24332d56a480df",
+  "fire_shadow-damage.png": "ffb8fb241d8fe66fb384ba95dc8974ffd465858a3ab46c9021017d614bccce47",
+  "fire_shadow-idle.png": "7cba7f44780e070e3f6ef8fa662811d070633621773b28f8255f309586432c73",
+  "fire_shadow-moves.png": "3c638d6faabbd61b464bd0006544282e544cde20a24bd4de9c07b98c74a2396a",
+  "fire_shadow-walk.png": "d27ff3ebd928741acf256f542d2933cadd1b51f6fd34ca7abb350e225b1213d6"
+}

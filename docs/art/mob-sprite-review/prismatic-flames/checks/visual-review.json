@@ -1,0 +1,42 @@
+{
+  "reviewed": [
+    "before-after.png",
+    "attack-impact-all-facings.png",
+    "battle.png",
+    "overworld-lineup.png",
+    "overworld-lighting-occlusion.png",
+    "specials-in-game.png"
+  ],
+  "observations": {
+    "materials": "Azure blue/cyan, Radiant amber/cream and Shadow plum/lavender remain distinct at party scale.",
+    "rearViews": "Full backs retain no eyes/front face.",
+    "anatomy": "Connected arms and continuous flame-column/base; glides have no legs or feet.",
+    "hud": "Front-head portraits remain readable; bars clear flame crests and active poses.",
+    "specials": "Surge spreads joined arms; Breath leans forward. Both contact at0.4s; recovery0.8/1s. Shared warm fire FX assets/color remain unchanged.",
+    "world": "Reviewed lamplight, shade and foreground occlusion beside fighter and bandit reference.",
+    "sourceCorrection": "Original Radiant attack draft had a background bridge between two figures. Fresh complete sheet replaces it; draft remains unselected."
+  },
+  "combinedReel": {
+    "seconds": 24,
+    "frames": 384,
+    "width": 1440,
+    "height": 540,
+    "facings": [
+      "south-west",
+      "west",
+      "north",
+      "south-east"
+    ],
+    "allEightFacingsInGallery": true
+  },
+  "godotReplay": {
+    "seconds": 32,
+    "width": 960,
+    "height": 540,
+    "glides": 3,
+    "naturalStrikes": 3,
+    "specials": 6,
+    "silent": true
+  },
+  "softwareRendering": "Visual review, not performance benchmark."
+}

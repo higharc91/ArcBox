@@ -60,3 +60,5 @@ Latest fifteenth batch: [Water Elemental and Red Dragon](../tide-and-wyrm/README
 Sixteenth overall / first library batch: [Storm, Magma and Swamp Elementals](../wild-elements/README.md). Combat tracker stays complete at29; library tracker records three refreshed appearances,28 older two-direction appearances remaining,26 existing eight-direction appearances preserved.
 
 Seventeenth overall / second library batch: [Basalt, Crystal and Temple Golems](../stone-sentinels/README.md). Combat tracker stays complete at 29; six additional library appearances refreshed, 25 older two-direction looks remaining, 26 existing eight-direction looks preserved.
+
+Eighteenth overall / third library batch: [Azure, Radiant and Shadow Fire Elementals](../prismatic-flames/README.md). Combat tracker stays complete at 29; nine additional library appearances refreshed, 22 older two-direction looks remaining, 26 existing eight-direction looks preserved.

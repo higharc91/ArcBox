@@ -37,3 +37,5 @@ Use Godot Mono 4.7.2 with the .NET 10 host build. Before `--`: `--audio-driver D
 ```
 
 Collect with `python tools/tactics-assets/imagegen/stone-sentinels-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Then run special-scenes.cjs, review.cjs and verify-review.cjs. Natural hits and six special-contact captures use engine beat-clock moments; manual anticipation captures remain separate. Video includes three walks, three natural strikes, six specials and return to ready.
+
+Next: [Azure, Radiant and Shadow Fire Elementals](../prismatic-flames/README.md), library batch 3.

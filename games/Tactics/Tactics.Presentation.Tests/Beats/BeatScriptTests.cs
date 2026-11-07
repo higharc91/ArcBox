@@ -57,6 +57,12 @@ public sealed class BeatScriptTests
     [InlineData("bosses.golem.crystal", "golem.stone_aegis", "bosses.buff", .4, .8, 20)]
     [InlineData("bosses.golem.temple", "golem.seismic_slam", "bosses.special", .5, 1, 16)]
     [InlineData("bosses.golem.temple", "golem.stone_aegis", "bosses.buff", .4, .8, 20)]
+    [InlineData("bosses.fire_elemental.azure", "fire_elemental.flame_surge", "bosses.special", .4, .8, 16)]
+    [InlineData("bosses.fire_elemental.azure", "drake.flame_breath", "bosses.cast", .4, 1, 20)]
+    [InlineData("bosses.fire_elemental.radiant", "fire_elemental.flame_surge", "bosses.special", .4, .8, 16)]
+    [InlineData("bosses.fire_elemental.radiant", "drake.flame_breath", "bosses.cast", .4, 1, 20)]
+    [InlineData("bosses.fire_elemental.shadow", "fire_elemental.flame_surge", "bosses.special", .4, .8, 16)]
+    [InlineData("bosses.fire_elemental.shadow", "drake.flame_breath", "bosses.cast", .4, 1, 20)]
     public void Elemental_effects_and_damage_wait_for_their_distinct_authored_contact_frame(string key, string ability, string binding, double impact, double duration, int contact)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
@@ -73,7 +79,7 @@ public sealed class BeatScriptTests
         Assert.Equal(impact, burst.At - pose.At, 3);
         Assert.Equal(impact, LastHit(script) - pose.At, 3);
         Assert.Equal(contact, anim.FrameAt(impact));
-        if (key is "bosses.water_elemental.sea" or "bosses.dragon.red" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple")
+        if (key is "bosses.water_elemental.sea" or "bosses.dragon.red" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple" or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
             Assert.Equal(pose.At + impact, Assert.Single(script.Cues.OfType<MomentCue>(), c => c.Label == "special-contact").At, 3);
         Assert.Equal(Fx.Value.Clip(def.Presentation!.Fx!)!.Path, burst.Clip.Path);
         Assert.Equal(ability == "dragon.fire_breath" ? 42 : ability == "drake.flame_breath" ? 30 : Fx.Value.Clip(def.Presentation.Fx!)!.Lift, burst.Clip.Lift);
@@ -85,7 +91,6 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData("bosses.fire_elemental.azure", "drake.flame_breath")]
     [InlineData("bosses.dragon.blue", "dragon.fire_breath")]
     public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
     {
@@ -109,6 +114,9 @@ public sealed class BeatScriptTests
     [InlineData("bosses.golem.basalt")]
     [InlineData("bosses.golem.crystal")]
     [InlineData("bosses.golem.temple")]
+    [InlineData("bosses.fire_elemental.azure")]
+    [InlineData("bosses.fire_elemental.radiant")]
+    [InlineData("bosses.fire_elemental.shadow")]
     public void Elemental_natural_attacks_contact_with_connected_fists_and_finish_their_recovery(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
@@ -196,6 +204,45 @@ public sealed class BeatScriptTests
         Assert.Equal(6, used.Count);
         Assert.Equal(3, used.Count(a => a == "golem.seismic_slam"));
         Assert.Equal(3, used.Count(a => a == "golem.stone_aegis"));
+    }
+
+    [Fact]
+    public void Library_fire_replay_uses_all_six_real_specials_and_walkable_adjacent_physical_targets()
+    {
+        var steps = PrismaticFlamesDemo.Steps(Pack.Root);
+        Assert.Equal(20, steps.Count);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var used = new List<string>();
+        BattleView? previous = null;
+        foreach (var step in steps)
+        {
+            var current = step.View.Battle!;
+            Assert.All(current.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+            foreach (var moved in current.Beats.SelectMany(b => b.Events).OfType<Moved>())
+            {
+                Assert.Equal(moved.Path[0], moved.Path[^1]);
+                Assert.All(moved.Path, tile => Assert.False(terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable)));
+            }
+            foreach (var move in current.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>())
+            {
+                Assert.Equal(rules.Abilities[move.Ability].Presentation, move.Presentation);
+                Assert.NotNull(previous);
+                Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
+                if (move.Ability.Value == "common.attack")
+                {
+                    var from = Assert.Single(current.Units, u => u.Id == move.Source).At;
+                    var to = Assert.Single(current.Units, u => u.Id == move.Target.Unit).At;
+                    Assert.Equal(1, Math.Max(Math.Abs(from.X-to.X),Math.Abs(from.Y-to.Y)));
+                }
+                else used.Add(move.Ability.Value);
+            }
+            previous = current;
+        }
+        Assert.Equal(6, used.Count);
+        Assert.Equal(3, used.Count(a => a == "fire_elemental.flame_surge"));
+        Assert.Equal(3, used.Count(a => a == "drake.flame_breath"));
     }
 
     [Theory]

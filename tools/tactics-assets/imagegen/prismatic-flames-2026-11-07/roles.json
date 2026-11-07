@@ -1,0 +1,59 @@
+[
+  {
+    "id": "fire_azure",
+    "primaryId": "fire_elemental",
+    "key": "bosses.fire_elemental.azure",
+    "label": "Azure Fire Elemental",
+    "height": 152,
+    "size": 320,
+    "anchor": [
+      160,
+      256
+    ],
+    "idleFps": 6,
+    "walkFps": 6,
+    "primary": "fire_elemental.flame_surge",
+    "secondary": "drake.flame_breath",
+    "primaryLabel": "Flame Surge",
+    "secondaryLabel": "Flame Breath",
+    "identity": "ONE continuous living FLAME body: swept flame crest head, TWO flame arms with hands continuously joined at shoulders/elbows/wrists, single tapered twisting flame column and low joined curled flame base. NO legs/feet, clothes, belts, armor, carried weapons, detached particles or halos. Narrow glowing eyes FRONT only, face turns away on full backs. Dense flame ribbons with clear dark contours and 2\u20133 shade ramps, match approved Ember Fire Elemental proportions and party scale. Glides on coiled flame base, subtle flame tip motion without body pulsing. Natural right palm/forearm pushes forward. Flame Surge gathers then spreads both flame arms outward; Flame Breath braces arms and leans head/chest FORWARD toward facing, mouth ready to exhale. No drawn breath projectile, game supplies FX. Down stays ONE connected low flame mound, never separate wisps. Deep COBALT/ROYAL BLUE flame core, vivid azure midplanes, icy CYAN/PALE BLUE flame-rim highlights and narrow pale-cyan eyes. Clear darker blue inner shadows; NOT yellow/red/orange fire."
+  },
+  {
+    "id": "fire_radiant",
+    "primaryId": "fire_elemental",
+    "key": "bosses.fire_elemental.radiant",
+    "label": "Radiant Fire Elemental",
+    "height": 152,
+    "size": 320,
+    "anchor": [
+      160,
+      256
+    ],
+    "idleFps": 6,
+    "walkFps": 6,
+    "primary": "fire_elemental.flame_surge",
+    "secondary": "drake.flame_breath",
+    "primaryLabel": "Flame Surge",
+    "secondaryLabel": "Flame Breath",
+    "identity": "ONE continuous living FLAME body: swept flame crest head, TWO flame arms with hands continuously joined at shoulders/elbows/wrists, single tapered twisting flame column and low joined curled flame base. NO legs/feet, clothes, belts, armor, carried weapons, detached particles or halos. Narrow glowing eyes FRONT only, face turns away on full backs. Dense flame ribbons with clear dark contours and 2\u20133 shade ramps, match approved Ember Fire Elemental proportions and party scale. Glides on coiled flame base, subtle flame tip motion without body pulsing. Natural right palm/forearm pushes forward. Flame Surge gathers then spreads both flame arms outward; Flame Breath braces arms and leans head/chest FORWARD toward facing, mouth ready to exhale. No drawn breath projectile, game supplies FX. Down stays ONE connected low flame mound, never separate wisps. Rich warm AMBER/OLD GOLD core, golden-yellow middle flame planes, pale IVORY/CREAM rim highlights and tiny warm-white eyes. Gold silhouette remains readable, NOT an overexposed white glow, no angel/holy emblems/wings or new lore."
+  },
+  {
+    "id": "fire_shadow",
+    "primaryId": "fire_elemental",
+    "key": "bosses.fire_elemental.shadow",
+    "label": "Shadow Fire Elemental",
+    "height": 152,
+    "size": 320,
+    "anchor": [
+      160,
+      256
+    ],
+    "idleFps": 6,
+    "walkFps": 6,
+    "primary": "fire_elemental.flame_surge",
+    "secondary": "drake.flame_breath",
+    "primaryLabel": "Flame Surge",
+    "secondaryLabel": "Flame Breath",
+    "identity": "ONE continuous living FLAME body: swept flame crest head, TWO flame arms with hands continuously joined at shoulders/elbows/wrists, single tapered twisting flame column and low joined curled flame base. NO legs/feet, clothes, belts, armor, carried weapons, detached particles or halos. Narrow glowing eyes FRONT only, face turns away on full backs. Dense flame ribbons with clear dark contours and 2\u20133 shade ramps, match approved Ember Fire Elemental proportions and party scale. Glides on coiled flame base, subtle flame tip motion without body pulsing. Natural right palm/forearm pushes forward. Flame Surge gathers then spreads both flame arms outward; Flame Breath braces arms and leans head/chest FORWARD toward facing, mouth ready to exhale. No drawn breath projectile, game supplies FX. Down stays ONE connected low flame mound, never separate wisps. Deep CHARCOAL/PLUM flame core, muted VIOLET middle planes and restrained pale LAVENDER flame-rim highlights; tiny lavender-white eyes. Dark yet readable on dark ground, NOT black silhouette only. No ghost robe/skull/armor or new necrotic abilities."
+  }
+]

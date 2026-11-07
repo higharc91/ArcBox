@@ -13318,6 +13318,468 @@
         }
       },
       "provenance": "Scenario/OpenAI variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/stone-sentinels-2026-11-07/."
+    },
+    "mob_refresh_fire_azure": {
+      "file": "mob_refresh_fire_azure.png",
+      "family": "fire_azure",
+      "variant": "prismatic-flames",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        133,
+        101,
+        64,
+        64
+      ],
+      "headTop": 97,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 27.84,
+      "footprintHeight": 50.88,
+      "keys": [
+        "bosses.fire_elemental.azure"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/prismatic-flames-2026-11-07/."
+    },
+    "mob_refresh_fire_radiant": {
+      "file": "mob_refresh_fire_radiant.png",
+      "family": "fire_radiant",
+      "variant": "prismatic-flames",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        129,
+        101,
+        64,
+        64
+      ],
+      "headTop": 100,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 29.44,
+      "footprintHeight": 50.24,
+      "keys": [
+        "bosses.fire_elemental.radiant"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/prismatic-flames-2026-11-07/."
+    },
+    "mob_refresh_fire_shadow": {
+      "file": "mob_refresh_fire_shadow.png",
+      "family": "fire_shadow",
+      "variant": "prismatic-flames",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        130,
+        101,
+        64,
+        64
+      ],
+      "headTop": 98,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 28.48,
+      "footprintHeight": 51.52,
+      "keys": [
+        "bosses.fire_elemental.shadow"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/prismatic-flames-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

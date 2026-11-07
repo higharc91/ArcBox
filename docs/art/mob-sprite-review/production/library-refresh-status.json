@@ -6,14 +6,17 @@
     "bosses.water_elemental.swamp",
     "bosses.golem.basalt",
     "bosses.golem.crystal",
-    "bosses.golem.temple"
+    "bosses.golem.temple",
+    "bosses.fire_elemental.azure",
+    "bosses.fire_elemental.radiant",
+    "bosses.fire_elemental.shadow"
   ],
-  "libraryBatchCount": 2,
-  "overallBatchCount": 17,
+  "libraryBatchCount": 3,
+  "overallBatchCount": 18,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 25,
+  "remainingTwoDirectionLooks": 22,
   "looks": [
     {
       "baselineNumber": 42,
@@ -300,21 +303,21 @@
       "key": "bosses.fire_elemental.azure",
       "name": "Fire Elemental Azure",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch3"
     },
     {
       "baselineNumber": 83,
       "key": "bosses.fire_elemental.radiant",
       "name": "Fire Elemental Radiant",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch3"
     },
     {
       "baselineNumber": 84,
       "key": "bosses.fire_elemental.shadow",
       "name": "Fire Elemental Shadow",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch3"
     },
     {
       "baselineNumber": 85,
