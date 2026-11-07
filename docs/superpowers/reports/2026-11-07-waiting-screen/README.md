@@ -6,7 +6,7 @@ The objective sentence is shared with the TV through `BattleObjectiveWords`, wit
 
 Validation: two adapter cases check first-screen data, descriptions without legal targets, the 64 KiB bound, live party HP and completed damage events. A phone case checks all panels and first-turn ability access without sending any command. Four existing server fixtures were refreshed; objective wording tests remain applicable. Chromium at 320×844 and 390×844 confirms no horizontal scrolling, party status visible on the first screen and abilities accessible without a previous turn.
 
-Full repository gate results are recorded in the PR after completion.
+The full repository gate passed all groups: Release build with zero warnings, 7,258 .NET tests, 573 phone tests and production build, 24 Node tests, 28 asset tests, 9 audio tests, 23 lore tests and lore/documentation validation. No tests were skipped. The pre-existing missing squirrel audit policy was repaired separately in PR #270 before the final run.
 
 ![Waiting at 390 px](status-390.png)
 ![Abilities before the first turn](abilities-390.png)
