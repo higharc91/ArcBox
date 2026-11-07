@@ -87,7 +87,7 @@ public static class Surfaces
             Zone? replacement = null;
             if (!left.IsEmpty)
                 replacement = ZoneRules.Create(w, zone.Owner, zone.Kind, left, zone.RoundsLeft, zone.Concentration,
-                    zone.Difficult, zone.Passives, zone.BlocksSight, zone.Surface, zone.Source, zone.AppliedThisTurn);
+                    zone.Difficult, zone.Passives, zone.BlocksSight, zone.Surface, zone.Source, zone.AppliedThisTurn, zone.Affects);
             RebindConditions(w, zone, replacement, remove);
         }
     }

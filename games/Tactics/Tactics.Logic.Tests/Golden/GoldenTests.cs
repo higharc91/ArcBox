@@ -121,6 +121,9 @@ public sealed class GoldenTests
         Assert.Contains("bridge_down", final.Flags);
         Assert.Contains(new TriggerFired("warlord_enraged"), events);
         Assert.Contains(new PhaseEntered(new UnitId("warlord"), 1), events);
+        var rallied = events.OfType<ConditionApplied>().Where(e => e.Condition.Value == "statMod.goblin_boss.warcry").ToArray();
+        Assert.NotEmpty(rallied);
+        Assert.All(rallied, e => Assert.Equal(Side.Enemy, final.Units[e.Unit].Sheet.Side));
         Assert.NotNull(final.Outcome);   // defeat the warlord, survive 8 rounds, or fall
         Assert.Single(events.OfType<BattleEnded>());
     }

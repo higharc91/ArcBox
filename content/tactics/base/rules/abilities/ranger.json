@@ -131,7 +131,7 @@
       "presentation": { "anim": "characters.buff", "fx": "signature.warden_vine_snare.root" },
       "ai": { "tags": ["buff", "defend", "self"] } },
     { "id": "warden.guardian_tree", "name": "Guardian of the Grove", "tier": 0, "cost": { "action": 1, "uses": 1 },
-      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "burst", "size": 2, "includeSelf": true } },
+      "target": { "kind": "ally", "range": 0, "los": false, "area": { "shape": "burst", "size": 2, "includeSelf": true } },
       "effects": [ { "zone": { "kind": "entangle", "area": { "shape": "burst", "size": 2 }, "rounds": 3, "difficult": true } },
                    { "tempHp": { "dice": "3d8", "bonus": ["level"] } },
                    { "statMod": { "mods": { "ac": 2 }, "rounds": 2 } } ],

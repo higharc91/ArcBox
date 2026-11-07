@@ -75,9 +75,13 @@ internal sealed partial class Scorer
             case HealEffect heal:
                 {
                     var amount = Math.Max(0, heal.Dice.At(st.Context.Level).Average + st.Context.Sum(heal.Bonus));
+                    if (heal.Self && target.Id != st.User.Id)
+                        return new Outcome(DamageDist.Zero, SelfHeal: amount);
                     return new Outcome(DamageDist.Zero, Heal: amount, Revive: target.Life == LifeState.Downed && amount > 0 ? 1 : 0);
                 }
             case TempHpEffect temp:
+                if (temp.Self && target.Id != st.User.Id)
+                    return new Outcome(DamageDist.Zero, SelfTempHp: Math.Max(0, temp.Dice.At(st.Context.Level).Average + st.Context.Sum(temp.Bonus)));
                 return new Outcome(DamageDist.Zero,
                     TempHp: Math.Max(0, temp.Dice.At(st.Context.Level).Average + st.Context.Sum(temp.Bonus)));
             case ReviveEffect:

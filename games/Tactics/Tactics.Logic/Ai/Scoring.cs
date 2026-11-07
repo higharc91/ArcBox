@@ -11,7 +11,7 @@ namespace Tactics.Logic;
 /// (<see cref="Ward"/>: Death Ward).
 /// </summary>
 internal sealed record Outcome(DamageDist Damage, double Heal = 0, double TempHp = 0, double Revive = 0, double Offense = 0,
-    double Defense = 0, double Push = 0, double Splash = 0, double Ward = 0)
+    double Defense = 0, double Push = 0, double Splash = 0, double Ward = 0, double SelfHeal = 0, double SelfTempHp = 0)
 {
     /// <summary>Nothing happens.</summary>
     public static Outcome None { get; } = new(DamageDist.Zero);
@@ -19,14 +19,16 @@ internal sealed record Outcome(DamageDist Damage, double Heal = 0, double TempHp
     /// <summary>Both happen, independently: the damage adds up.</summary>
     public Outcome Then(Outcome next) => ReferenceEquals(next, None) ? this : ReferenceEquals(this, None) ? next : new(
         Damage.Plus(next.Damage), Heal + next.Heal, TempHp + next.TempHp, 1 - (1 - Revive) * (1 - next.Revive),
-        Offense + next.Offense, Defense + next.Defense, Push + next.Push, Splash + next.Splash, 1 - (1 - Ward) * (1 - next.Ward));
+        Offense + next.Offense, Defense + next.Defense, Push + next.Push, Splash + next.Splash, 1 - (1 - Ward) * (1 - next.Ward),
+        SelfHeal + next.SelfHeal, SelfTempHp + next.SelfTempHp);
 
     /// <summary>One of several outcomes, each with its probability (they add up to 1).</summary>
     public static Outcome Mix(IReadOnlyList<(double Weight, Outcome Outcome)> parts)
     {
         double W(Func<Outcome, double> f) => parts.Sum(p => p.Weight * f(p.Outcome));
         return new(DamageDist.Mix([.. parts.Select(p => (p.Weight, p.Outcome.Damage))]), W(o => o.Heal), W(o => o.TempHp),
-            W(o => o.Revive), W(o => o.Offense), W(o => o.Defense), W(o => o.Push), W(o => o.Splash), W(o => o.Ward));
+            W(o => o.Revive), W(o => o.Offense), W(o => o.Defense), W(o => o.Push), W(o => o.Splash), W(o => o.Ward),
+            W(o => o.SelfHeal), W(o => o.SelfTempHp));
     }
 }
 
