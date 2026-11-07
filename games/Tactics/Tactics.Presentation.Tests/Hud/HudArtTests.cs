@@ -110,6 +110,8 @@ public sealed class HudArtTests
     [InlineData("characters.bandit", "bandit", 64)]
     [InlineData("characters.cultist", "cultist", 64)]
     [InlineData("characters.cult_leader", "cult_leader", 64)]
+    [InlineData("characters.skeleton", "skeleton", 64)]
+    [InlineData("characters.skeleton_archer", "skeleton_archer", 64)]
     public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
     {
         var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
@@ -130,6 +132,8 @@ public sealed class HudArtTests
     [InlineData("bandit")]
     [InlineData("cultist")]
     [InlineData("cult_leader")]
+    [InlineData("skeleton")]
+    [InlineData("skeleton_archer")]
     public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
     {
         var files = new HashSet<string>();

@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; ten refreshed designs integrated across four batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twelve refreshed designs integrated across five batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -10,9 +10,11 @@
     "characters.hobgoblin",
     "characters.bandit",
     "characters.cultist",
-    "characters.cult_leader"
+    "characters.cult_leader",
+    "characters.skeleton",
+    "characters.skeleton_archer"
   ],
-  "remainingOlderCombatLooks": 19,
+  "remainingOlderCombatLooks": 17,
   "looks": [
     {
       "baselineNumber": 1,
@@ -168,13 +170,13 @@
       "baselineNumber": 26,
       "name": "Skeleton",
       "key": "characters.skeleton",
-      "status": "awaiting refresh"
+      "status": "integrated fifth batch"
     },
     {
       "baselineNumber": 27,
       "name": "Skeleton Archer",
       "key": "characters.skeleton_archer",
-      "status": "awaiting refresh"
+      "status": "integrated fifth batch"
     },
     {
       "baselineNumber": 28,

@@ -34,3 +34,5 @@ Host arguments after `--`:
 ```
 
 Ten looks are refreshed across four batches; [19 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline stays unchanged. No PR has been opened.
+
+Subsequent batch: [Bone Warden warrior and archer](../bone-wardens/README.md). Twelve looks are now refreshed; 17 older combat looks remain.

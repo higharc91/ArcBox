@@ -9208,6 +9208,260 @@
         }
       },
       "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/kindled-2026-11-07/."
+    },
+    "mob_refresh_skeleton": {
+      "file": "mob_refresh_skeleton.png",
+      "family": "skeleton",
+      "variant": "bone-wardens",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        80,
+        72,
+        64,
+        64
+      ],
+      "headTop": 75,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 25.28,
+      "footprintHeight": 39.36,
+      "keys": [
+        "characters.skeleton"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/bone-wardens-2026-11-07/."
+    },
+    "mob_refresh_skeleton_archer": {
+      "file": "mob_refresh_skeleton_archer.png",
+      "family": "skeleton_archer",
+      "variant": "bone-wardens",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        80,
+        72,
+        64,
+        64
+      ],
+      "headTop": 75,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 27.52,
+      "footprintHeight": 39.36,
+      "keys": [
+        "characters.skeleton_archer"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "shoot": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/bone-wardens-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

@@ -15,6 +15,8 @@ public sealed class MobRefreshTests
     [InlineData("characters.bandit", "bandit")]
     [InlineData("characters.cultist", "cultist")]
     [InlineData("characters.cult_leader", "cult_leader")]
+    [InlineData("characters.skeleton", "skeleton")]
+    [InlineData("characters.skeleton_archer", "skeleton_archer")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -66,6 +68,17 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Fact]
+    public void Bone_warden_archer_uses_the_authored_bow_shot_for_ranged_attacks()
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.skeleton_archer")!;
+        var shoot = sprite.Anim("characters.shoot");
+        Assert.Equal(sprite.Anim("attack").Frames.ToArray(), shoot.Frames.ToArray());
+        Assert.Equal(sprite.Anim("attack").Fps, shoot.Fps);
+        Assert.False(shoot.Loop);
+        Assert.True(shoot.Frames.Distinct().Count() >= 4);
     }
 
     [Fact]
@@ -161,6 +174,8 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.hobgoblin")!.HeadLift / person, 1f, 1.35f);
         Assert.InRange(art.Sprite("characters.cultist")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("characters.cult_leader")!.HeadLift / person, .85f, 1.15f);
+        Assert.InRange(art.Sprite("characters.skeleton")!.HeadLift / person, .9f, 1.2f);
+        Assert.InRange(art.Sprite("characters.skeleton_archer")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

@@ -20,6 +20,7 @@ public static class DemoBattle
     private const string GoblinRoles = ":goblin-roles";
     private const string RoadAndHost = ":road-and-host";
     private const string Kindled = ":kindled";
+    private const string BoneWardens = ":bone-wardens";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -96,6 +97,15 @@ public static class DemoBattle
         Unit("Hobgoblin reference", "Enemy", "characters.hobgoblin", 13, 10, 11, 11),
     ];
 
+    private static ImmutableArray<UnitView> RefreshedBoneWardens() =>
+    [
+        Unit("Bone warrior", "Enemy", "characters.skeleton", 11, 6, 13, 13),
+        Unit("Bone archer", "Enemy", "characters.skeleton_archer", 12, 9, 16, 16),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 9, 10, 26, 26),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Hobgoblin reference", "Enemy", "characters.hobgoblin", 13, 10, 11, 11),
+    ];
+
     private static BoardChanges Changes()
     {
         ImmutableArray<Tile> bridge = [.. Enumerable.Range(5, 2).SelectMany(y => Enumerable.Range(5, 4).Select(x => new Tile(x, y)))];
@@ -139,8 +149,9 @@ public static class DemoBattle
         var goblinRoles = spec.EndsWith(GoblinRoles, StringComparison.Ordinal);
         var roadAndHost = spec.EndsWith(RoadAndHost, StringComparison.Ordinal);
         var kindled = spec.EndsWith(Kindled, StringComparison.Ordinal);
-        var map = kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var boneWardens = spec.EndsWith(BoneWardens, StringComparison.Ordinal);
+        var map = boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

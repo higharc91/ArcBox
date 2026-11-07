@@ -7,6 +7,19 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Bone_warden_review_places_both_weapons_with_party_and_refreshed_human_references()
+    {
+        var battle = DemoBattle.View("river_crossing:bone-wardens").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.skeleton");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.skeleton_archer");
+        Assert.Contains(battle.Units, u => u.Sprite == "characters.class_fighter");
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Kindled_review_places_both_casters_with_party_and_refreshed_human_references()
     {
         var battle = DemoBattle.View("river_crossing:kindled").Battle!;

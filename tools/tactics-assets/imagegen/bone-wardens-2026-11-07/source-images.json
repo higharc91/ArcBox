@@ -1,0 +1,15 @@
+{
+  "skeleton-idle": "26702000-2d76-4c5a-9e93-c244a7e41296",
+  "skeleton_archer-idle": "1250b1e1-160e-4cdc-af48-889dbd9b385f",
+  "skeleton-walk": "da7cf07d-3872-406a-821d-12c328183b95",
+  "skeleton_archer-walk": "60f01ac4-0853-4f59-aa10-b4f343723f84",
+  "skeleton-attack": "a7484afa-683e-4c51-8de8-2af953f3fc44",
+  "skeleton_archer-attack": "77f79a3e-bb11-49c9-9680-4f843fc1e049",
+  "archer-attack-left": "221d3786-c532-4746-8c1a-3e3789cb4c68",
+  "archer-attack-rear": "2c6d6944-cc2c-47a6-a60d-2a6e3e43ba20",
+  "warrior-attack-backleft": "5a2f88c4-99f6-4fb9-a5ae-198ff71d4889",
+  "skeleton-damage": "07d9b213-5722-40c2-99a1-c61a32af5019",
+  "skeleton_archer-damage": "c77462b8-83d3-4b7c-abca-2c17094bfd9d",
+  "skeleton-portraits": "c568b561-bbf9-4c71-a68e-b807653f5ece",
+  "skeleton_archer-portraits": "57e98fb1-6cb7-4652-908c-027da6c2004e"
+}

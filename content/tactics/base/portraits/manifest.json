@@ -256,12 +256,12 @@
       "surprised": "orc_brute_refresh_surprised.png"
     },
     "skeleton": {
-      "idle": "skeleton_idle.png",
-      "hurt": "skeleton_hurt.png",
-      "happy": "skeleton_happy.png",
-      "angry": "skeleton_angry.png",
-      "sad": "skeleton_sad.png",
-      "surprised": "skeleton_surprised.png"
+      "idle": "skeleton_refresh_idle.png",
+      "hurt": "skeleton_refresh_hurt.png",
+      "happy": "skeleton_refresh_happy.png",
+      "angry": "skeleton_refresh_angry.png",
+      "sad": "skeleton_refresh_sad.png",
+      "surprised": "skeleton_refresh_surprised.png"
     },
     "bandit": {
       "idle": "bandit_refresh_idle.png",
@@ -328,12 +328,12 @@
       "surprised": "zombie_surprised.png"
     },
     "skeleton_archer": {
-      "idle": "skeleton_archer_idle.png",
-      "hurt": "skeleton_archer_hurt.png",
-      "happy": "skeleton_archer_happy.png",
-      "angry": "skeleton_archer_angry.png",
-      "sad": "skeleton_archer_sad.png",
-      "surprised": "skeleton_archer_surprised.png"
+      "idle": "skeleton_archer_refresh_idle.png",
+      "hurt": "skeleton_archer_refresh_hurt.png",
+      "happy": "skeleton_archer_refresh_happy.png",
+      "angry": "skeleton_archer_refresh_angry.png",
+      "sad": "skeleton_archer_refresh_sad.png",
+      "surprised": "skeleton_archer_refresh_surprised.png"
     },
     "lich": {
       "idle": "lich_idle.png",

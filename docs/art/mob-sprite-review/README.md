@@ -25,6 +25,6 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Kindled cultist and Maren / Ember Hierophant](kindled/index.html), with before/after art, eight-direction walking, melee and spellcasting, plus actual encounter captures. Ten looks are refreshed across four batches; 19 older combat looks remain. The historical 98-look baseline above stays unchanged.
+[Latest: Bone Warden warrior and archer](bone-wardens/index.html), with before/after art, eight-direction walking and attacks, plus actual encounter captures. Twelve looks are refreshed across five batches; 17 older combat looks remain. The historical 98-look baseline above stays unchanged.
 
-Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html). [Current tracker](production/refresh-status.json).
+Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html), [Kindled cultist and Maren](kindled/index.html). [Current tracker](production/refresh-status.json).

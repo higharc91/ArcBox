@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      67,
+      77,
+      145,
+      197
+    ],
+    "count": 5507
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      67,
+      78,
+      145,
+      197
+    ],
+    "count": 5501
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      67,
+      77,
+      145,
+      197
+    ],
+    "count": 5518
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      67,
+      77,
+      145,
+      197
+    ],
+    "count": 5479
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 0,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      79,
+      145,
+      198
+    ],
+    "count": 5429
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 1,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      80,
+      144,
+      199
+    ],
+    "count": 5303
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 2,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      69,
+      79,
+      145,
+      198
+    ],
+    "count": 5394
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 3,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      69,
+      78,
+      144,
+      197
+    ],
+    "count": 5284
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 0,
+    "scale": 0.542713567839196,
+    "bounds": [
+      70,
+      90,
+      149,
+      198
+    ],
+    "count": 4843
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 1,
+    "scale": 0.542713567839196,
+    "bounds": [
+      64,
+      91,
+      156,
+      198
+    ],
+    "count": 4943
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 2,
+    "scale": 0.542713567839196,
+    "bounds": [
+      50,
+      91,
+      155,
+      198
+    ],
+    "count": 4657
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 3,
+    "scale": 0.542713567839196,
+    "bounds": [
+      70,
+      90,
+      149,
+      198
+    ],
+    "count": 4800
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      54,
+      78,
+      163,
+      198
+    ],
+    "count": 6533
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      61,
+      151,
+      185,
+      198
+    ],
+    "count": 3968
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      70,
+      77,
+      142,
+      197
+    ],
+    "count": 5056
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      70,
+      77,
+      144,
+      197
+    ],
+    "count": 5145
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      69,
+      76,
+      143,
+      196
+    ],
+    "count": 5137
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      69,
+      76,
+      143,
+      196
+    ],
+    "count": 5118
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 4,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      78,
+      144,
+      197
+    ],
+    "count": 5066
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 5,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      79,
+      143,
+      198
+    ],
+    "count": 4963
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 6,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      78,
+      144,
+      197
+    ],
+    "count": 5053
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 7,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      77,
+      144,
+      196
+    ],
+    "count": 4964
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 4,
+    "scale": 0.542713567839196,
+    "bounds": [
+      69,
+      90,
+      144,
+      198
+    ],
+    "count": 4765
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 5,
+    "scale": 0.542713567839196,
+    "bounds": [
+      60,
+      87,
+      151,
+      198
+    ],
+    "count": 4934
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 6,
+    "scale": 0.542713567839196,
+    "bounds": [
+      37,
+      90,
+      155,
+      198
+    ],
+    "count": 4768
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 7,
+    "scale": 0.542713567839196,
+    "bounds": [
+      69,
+      90,
+      144,
+      198
+    ],
+    "count": 4772
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      59,
+      76,
+      157,
+      198
+    ],
+    "count": 5943
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      40,
+      151,
+      184,
+      198
+    ],
+    "count": 4639
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      77,
+      75,
+      130,
+      197
+    ],
+    "count": 3900
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      77,
+      76,
+      131,
+      196
+    ],
+    "count": 3901
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      132,
+      197
+    ],
+    "count": 3929
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      131,
+      197
+    ],
+    "count": 3903
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 8,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      131,
+      196
+    ],
+    "count": 3877
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 9,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      77,
+      133,
+      197
+    ],
+    "count": 3798
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 10,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      76,
+      134,
+      195
+    ],
+    "count": 3851
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 11,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      81,
+      75,
+      132,
+      196
+    ],
+    "count": 3768
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 8,
+    "scale": 0.542713567839196,
+    "bounds": [
+      67,
+      89,
+      133,
+      198
+    ],
+    "count": 3509
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 9,
+    "scale": 0.542713567839196,
+    "bounds": [
+      66,
+      84,
+      145,
+      198
+    ],
+    "count": 4009
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 10,
+    "scale": 0.542713567839196,
+    "bounds": [
+      31,
+      89,
+      149,
+      198
+    ],
+    "count": 3993
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 11,
+    "scale": 0.542713567839196,
+    "bounds": [
+      68,
+      90,
+      133,
+      198
+    ],
+    "count": 3414
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      65,
+      74,
+      142,
+      198
+    ],
+    "count": 4710
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      34,
+      153,
+      189,
+      198
+    ],
+    "count": 4553
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      82,
+      75,
+      155,
+      197
+    ],
+    "count": 5152
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      82,
+      76,
+      156,
+      197
+    ],
+    "count": 5168
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      82,
+      76,
+      156,
+      197
+    ],
+    "count": 5176
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      83,
+      75,
+      157,
+      197
+    ],
+    "count": 5168
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 12,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      81,
+      77,
+      154,
+      196
+    ],
+    "count": 5023
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 13,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      82,
+      78,
+      156,
+      198
+    ],
+    "count": 5030
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 14,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      82,
+      77,
+      155,
+      197
+    ],
+    "count": 5048
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 15,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      83,
+      76,
+      156,
+      196
+    ],
+    "count": 5001
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 12,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      91,
+      152,
+      198
+    ],
+    "count": 4520
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/warrior-attack-backleft.png",
+    "sourcePose": 1,
+    "scale": 0.2864721485411141,
+    "bounds": [
+      71,
+      91,
+      135,
+      198
+    ],
+    "count": 3751
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/warrior-attack-backleft.png",
+    "sourcePose": 2,
+    "scale": 0.2864721485411141,
+    "bounds": [
+      47,
+      91,
+      135,
+      198
+    ],
+    "count": 3870
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 15,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      91,
+      152,
+      198
+    ],
+    "count": 4526
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      74,
+      75,
+      161,
+      198
+    ],
+    "count": 5850
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      31,
+      157,
+      191,
+      198
+    ],
+    "count": 4420
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      156,
+      197
+    ],
+    "count": 5393
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      76,
+      155,
+      196
+    ],
+    "count": 5358
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      76,
+      156,
+      196
+    ],
+    "count": 5369
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      155,
+      197
+    ],
+    "count": 5387
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 16,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      156,
+      198
+    ],
+    "count": 5442
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 17,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      155,
+      195
+    ],
+    "count": 5404
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 18,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      79,
+      75,
+      155,
+      197
+    ],
+    "count": 5406
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 19,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      75,
+      154,
+      194
+    ],
+    "count": 5303
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 16,
+    "scale": 0.542713567839196,
+    "bounds": [
+      72,
+      90,
+      152,
+      198
+    ],
+    "count": 4700
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 17,
+    "scale": 0.542713567839196,
+    "bounds": [
+      62,
+      90,
+      153,
+      198
+    ],
+    "count": 4641
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 18,
+    "scale": 0.542713567839196,
+    "bounds": [
+      62,
+      90,
+      172,
+      198
+    ],
+    "count": 4572
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 19,
+    "scale": 0.542713567839196,
+    "bounds": [
+      72,
+      90,
+      152,
+      198
+    ],
+    "count": 4703
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      66,
+      74,
+      165,
+      198
+    ],
+    "count": 6440
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      53,
+      150,
+      195,
+      198
+    ],
+    "count": 3858
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      148,
+      197
+    ],
+    "count": 4988
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      79,
+      76,
+      149,
+      197
+    ],
+    "count": 4962
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      77,
+      76,
+      147,
+      197
+    ],
+    "count": 4977
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      78,
+      75,
+      148,
+      197
+    ],
+    "count": 5004
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 20,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      77,
+      76,
+      149,
+      196
+    ],
+    "count": 5032
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 21,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      77,
+      150,
+      196
+    ],
+    "count": 5006
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 22,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      77,
+      76,
+      149,
+      195
+    ],
+    "count": 5082
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 23,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      75,
+      150,
+      194
+    ],
+    "count": 4913
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 20,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      90,
+      157,
+      198
+    ],
+    "count": 4536
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 21,
+    "scale": 0.542713567839196,
+    "bounds": [
+      68,
+      91,
+      157,
+      198
+    ],
+    "count": 4546
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 22,
+    "scale": 0.542713567839196,
+    "bounds": [
+      64,
+      91,
+      176,
+      198
+    ],
+    "count": 4534
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 23,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      90,
+      156,
+      198
+    ],
+    "count": 4532
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      69,
+      76,
+      164,
+      198
+    ],
+    "count": 6243
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      58,
+      149,
+      208,
+      198
+    ],
+    "count": 4069
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      91,
+      75,
+      138,
+      197
+    ],
+    "count": 3669
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      91,
+      75,
+      139,
+      197
+    ],
+    "count": 3672
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      91,
+      75,
+      138,
+      197
+    ],
+    "count": 3649
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      92,
+      75,
+      139,
+      197
+    ],
+    "count": 3625
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 24,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      90,
+      76,
+      138,
+      197
+    ],
+    "count": 3714
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 25,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      91,
+      78,
+      138,
+      199
+    ],
+    "count": 3666
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 26,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      88,
+      77,
+      138,
+      198
+    ],
+    "count": 3733
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 27,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      91,
+      76,
+      140,
+      196
+    ],
+    "count": 3695
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 24,
+    "scale": 0.542713567839196,
+    "bounds": [
+      91,
+      88,
+      138,
+      198
+    ],
+    "count": 3374
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 25,
+    "scale": 0.542713567839196,
+    "bounds": [
+      69,
+      87,
+      138,
+      198
+    ],
+    "count": 3941
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 26,
+    "scale": 0.542713567839196,
+    "bounds": [
+      89,
+      89,
+      180,
+      198
+    ],
+    "count": 3841
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 27,
+    "scale": 0.542713567839196,
+    "bounds": [
+      91,
+      88,
+      139,
+      198
+    ],
+    "count": 3368
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      72,
+      73,
+      140,
+      198
+    ],
+    "count": 4784
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      42,
+      154,
+      184,
+      198
+    ],
+    "count": 4034
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      71,
+      76,
+      138,
+      196
+    ],
+    "count": 4993
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      70,
+      77,
+      138,
+      197
+    ],
+    "count": 5056
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      70,
+      77,
+      138,
+      197
+    ],
+    "count": 5054
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/skeleton-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6091370558375635,
+    "bounds": [
+      70,
+      76,
+      139,
+      197
+    ],
+    "count": 5016
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 28,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      78,
+      138,
+      197
+    ],
+    "count": 4925
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 29,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      79,
+      140,
+      198
+    ],
+    "count": 4963
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 30,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      70,
+      78,
+      141,
+      197
+    ],
+    "count": 5028
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/skeleton-walk.png",
+    "sourcePose": 31,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      71,
+      77,
+      139,
+      196
+    ],
+    "count": 4921
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 28,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      93,
+      144,
+      198
+    ],
+    "count": 4393
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 29,
+    "scale": 0.542713567839196,
+    "bounds": [
+      68,
+      90,
+      156,
+      198
+    ],
+    "count": 4791
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 30,
+    "scale": 0.542713567839196,
+    "bounds": [
+      82,
+      93,
+      180,
+      198
+    ],
+    "count": 4349
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/skeleton-attack.png",
+    "sourcePose": 31,
+    "scale": 0.542713567839196,
+    "bounds": [
+      73,
+      93,
+      145,
+      198
+    ],
+    "count": 4486
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      65,
+      73,
+      157,
+      198
+    ],
+    "count": 6255
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/skeleton-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      37,
+      152,
+      168,
+      198
+    ],
+    "count": 4286
+  }
+]

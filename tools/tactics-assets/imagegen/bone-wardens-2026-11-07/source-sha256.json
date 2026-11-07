@@ -1,0 +1,15 @@
+{
+  "archer-attack-left.png": "952ad4d61398c92b76859ee701a32f4cecae3313f798f03218701da31e2b3548",
+  "archer-attack-rear.png": "96dcf0aa6f62eec5b22faad2cdf719edc9ff6cdea417b234ef1eb9ec9fe9176c",
+  "skeleton-attack.png": "28d846cbf230f6d0f31c7cca3ae100e336a578086861e119238ba09256be6d66",
+  "skeleton-damage.png": "fc5f427fa7d634a0d3373acaea71d0895800e369ddca12458b10fc0b5d8ac67f",
+  "skeleton-idle.png": "0ea9426edae3796d44c2eb1f3783f8f0bfce230e796f5d9e523a8437cfa7ea0e",
+  "skeleton-portraits.png": "64344c10c666831934b6876cf03fa265ea107ae663fe6fc3f6a8b6cabfbbabe3",
+  "skeleton-walk.png": "df91550279bb4d3d8840e36bfd170c1ecb3e8cc858d5e708c8fccdd78b8efa5f",
+  "skeleton_archer-attack.png": "14086ccff34369849d75447d8b28cef31ca1d529ca19d15b02a73ee3a59bda6b",
+  "skeleton_archer-damage.png": "5e15bf47f38a227750be4ce0a0c3667cbdff7b167db29ecdcd96c8e98ad5de8f",
+  "skeleton_archer-idle.png": "b31dfd304177601a371d5ad860959f92b8a507957785e153d700008f7c60d41a",
+  "skeleton_archer-portraits.png": "fadd79e86f4a52e4f2b22ac83c2753463a64bcdc068e2e52b9f1b5cedf27ef4a",
+  "skeleton_archer-walk.png": "0ebe0f6cc4c727fab8d783d16028c0a92a5876c0514252c8b7e48e7b30204873",
+  "warrior-attack-backleft.png": "06bda8a1755171ea6f9459ca085d609c2f108d7261723ee2b63992a362a56abb"
+}
