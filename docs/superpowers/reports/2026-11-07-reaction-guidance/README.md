@@ -8,7 +8,7 @@ The preview uses the existing AI effect maths on immutable state. The AI policy 
 
 Validation: ten server cases cover Shield boundaries and criticals, existing Shield, resource costs, pure state/RNG reads, opportunity cost, halving and both Counterspell tiers. A phone case checks all decision data and verifies both reaction inputs. The real reaction fixture and development-log expectations were refreshed. Chromium at 320×844 and 390×844 confirms no horizontal scrolling, both reaction buttons visible without scrolling, and the original choice command when Shield is tapped. Screenshots use the real server fixture with a fresh ten-second deadline.
 
-Full repository results are recorded in the PR after completion.
+The full repository gate passed all groups: Release build with zero warnings, 7,268 .NET tests, 574 phone tests and production build, 24 Node tests, 28 asset tests, 9 audio tests, 23 lore tests and lore/documentation validation. No tests were skipped.
 
 ![320 px reaction](react-320.png)
 ![390 px reaction](react-390.png)
