@@ -8,7 +8,7 @@ import { ReactionsSheet } from "./reactions";
 import { classFrom, remembered, rememberTurn } from "./memory";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView } from "./types";
-import { Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
+import { ControlNotice, Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
 
 const same = (a: Tile, b: Tile) => a[0] === b[0] && a[1] === b[1];
 
@@ -52,7 +52,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   const [endTurnUntil, setEndTurnUntil] = useState<number | null>(null);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
   // A vote to fall back changes the view for everyone, which mustn't undo what this player is aiming.
-  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined, reactions: undefined }), [data]);
+  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined, reactions: undefined, controlNotice: undefined }), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
@@ -136,6 +136,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   return (
     <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
       <SurfaceScene kinds={(data as TurnData).surfaces} />
+      <ControlNotice notice={(data as TurnData).controlNotice} />
       {ability ? (
         <MeCard me={me} title={ability.name} subtitle={target ? "Ready: tap Use" : aimHint(ability)}
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />

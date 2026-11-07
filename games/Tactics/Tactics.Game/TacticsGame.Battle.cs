@@ -106,6 +106,8 @@ public sealed partial class TacticsGame
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
+        _controlNotices.Clear();
+        _aiRecaps.Clear();
         // Whatever the TV said before, of the story, the start or the walk, isn't the fight's: it comes down, as it would on a step (review).
         (_notice, _leadNote) = (null, null);
         var stage = StageFor(resolution.State.MapId);
@@ -212,6 +214,7 @@ public sealed partial class TacticsGame
             HandBackFailedFor(profile);
         if (!connected && State.Active is { } active && Plays(State, unit, active) && State.Pending is null)
             _aiFinishing = active;     // the AI finishes what's left of the turn
+        ControlChanged(profile, connected ? failed ? "controlUnavailable" : "reconnected" : "disconnected");
         Save();
         Drive();
     }
@@ -442,6 +445,7 @@ public sealed partial class TacticsGame
         }
         if (!skipping)
             Recovered();
+        RecordAiControl(before, command);
         SetState(resolution.State);
         var after = resolution.State;
         if (after.Active != command.Actor || after.Pending is not null
@@ -615,7 +619,11 @@ public sealed partial class TacticsGame
     {
         _turnTimerFor = null;
         if (State.Active is { } active && IsPlayed(active))
+        {
             _aiFinishing = active;     // finished by the AI once any pending reaction is answered
+            if (OwnerOf(State, active) is { } profile)
+                ControlChanged(profile, "turnTimeout");
+        }
         Drive();
     }
 
@@ -626,14 +634,21 @@ public sealed partial class TacticsGame
         if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) && timedOut?.Reactor == offer.Reactor)
         {
             // No answer: the same rule the AI uses (rules-engine spec §5.5), and the same fallbacks if it fails.
-            AnswerForReactor(State, offer);
+            _timedOutReaction = offer.Reactor;
+            try { AnswerForReactor(State, offer); }
+            finally { _timedOutReaction = null; }
         }
         Drive();
     }
 
     // ---- State and the log --------------------------------------------------------------------------------------------
 
-    private void SetState(BattleState state) => _doc = _doc with { Battle = Save_ with { State = state } };
+    private void SetState(BattleState state)
+    {
+        _doc = _doc with { Battle = Save_ with { State = state } };
+        foreach (var profile in _controlNotices.Where(n => !CurrentNotice(n.Key, n.Value)).Select(n => n.Key).ToArray())
+            _controlNotices.Remove(profile);
+    }
 
     /// <summary>Logs a beat and saves the document (rules-engine spec §2.5). Returns its number, or null for no events.</summary>
     private int? AddBeat(UnitId? actor, ImmutableArray<BattleEvent> events, UnitId? activeBefore = null)

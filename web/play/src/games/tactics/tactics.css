@@ -983,3 +983,14 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-stat-pills { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
 .tx-stat-pills .tx-pill { min-height: 36px; padding: 4px 2px; border: 1px solid var(--wf-line, #383e58); border-radius: 6px; background: transparent; color: var(--wf-ink, #f5f2eb); font-weight: 700; font-size: 12px; cursor: pointer; }
 .tx-stat-pills .tx-pill.on { border-color: var(--wf-gold, #e6bd5c); background: rgba(230, 189, 92, 0.25); color: var(--wf-gold-hi, #ffd782); }
+
+/* A control handover stays readable on turn, reaction, status and results screens. */
+.tx-control-notice {
+  padding: 12px 14px;
+  border: 1px solid var(--wf-edge);
+  border-radius: var(--wf-radius);
+  background: var(--wf-fill);
+  overflow-wrap: anywhere;
+}
+.tx-control-notice p { margin: 0; font-size: 18px; line-height: 1.3; }
+.tx-control-notice p + p { margin-top: 6px; }

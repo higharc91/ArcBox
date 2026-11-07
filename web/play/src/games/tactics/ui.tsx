@@ -1,7 +1,7 @@
 import type { ComponentChildren, JSX } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { ConditionChip, Portrait } from "./art";
-import type { Economy, UnitView } from "./types";
+import type { ControlNoticeData, Economy, UnitView } from "./types";
 
 /** Small building blocks shared by the Wardenflame phone screens. */
 
@@ -136,3 +136,12 @@ const ICONS = {
   search: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>',
   skip: '<path d="M5 5l8 7-8 7zM16 5v14"/>',
 } as const;
+
+/** Why the AI acted, or who has control after a connection change. */
+export function ControlNotice({ notice }: { notice?: ControlNoticeData }) {
+  return notice ? <div class="tx-control-notice" role="status" aria-live="polite">
+    <p>{notice.text}</p>
+    {notice.policy ? <p class="tx-note">{notice.policy}</p> : null}
+    {notice.recap ? <p class="tx-note">{notice.recap}</p> : null}
+  </div> : null;
+}

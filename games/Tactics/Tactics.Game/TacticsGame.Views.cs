@@ -527,6 +527,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
+        view = WithControlNotice(view, profile);
         // Recovery is rare and uses the existing header; it stays stable across walk presses/releases.
         if (_phase == TacticsPhase.Exploration && view is CustomView recovered && _worldRecoveryNotice is { } recovery)
             return recovered with { Header = recovery };
@@ -678,7 +679,7 @@ public sealed partial class TacticsGame
             me = UnitViewOf(heroUnit),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
             upIn = UpIn(state, hero),
-            aiPlaying = !IsPlayed(hero),
+            aiPlaying = !IsPlayed(hero) || _aiFinishing is { } finishing && Plays(State, hero, finishing),
         }), state, heroUnit, Rules), profile, hero);
     }
 
