@@ -118,6 +118,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .tx-foot.tx-commit:not(.aim) { grid-template-columns: 1.3fr 1fr 1fr; grid-auto-flow: row; }
 .tx-foot.tx-commit:not(.aim) .tx-btn { font-size: 15px; padding: 4px 6px; }
+.tx .tx-end-turn.gold { font-family: var(--wf-sans); letter-spacing: 0; }
 .tx-foot.aim { grid-template-columns: 1fr 2fr; grid-auto-flow: row; }
 
 /* ---------------------------------------------------------------- pixel art */
