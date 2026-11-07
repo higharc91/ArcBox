@@ -1,0 +1,316 @@
+{
+  "method": "Median of 50 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 20.3094,
+  "afterMs": 20.901049999999998,
+  "changePercent": 2.9131830580913176,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "sorcerer.lightning_bolt",
+    "beforeMs": 20.3053,
+    "afterMs": 22.368,
+    "changePercent": 10.158431542503688
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 20.9662,
+      "afterMs": 20.5415,
+      "changePercent": -2.025641270234957
+    },
+    {
+      "id": "sorcerer.acid_splash",
+      "beforeMs": 20.2669,
+      "afterMs": 19.5858,
+      "changePercent": -3.3606520977554566
+    },
+    {
+      "id": "sorcerer.burning_hands",
+      "beforeMs": 20.6072,
+      "afterMs": 20.2498,
+      "changePercent": -1.7343452773787682
+    },
+    {
+      "id": "sorcerer.chill_touch",
+      "beforeMs": 19.3913,
+      "afterMs": 19.1846,
+      "changePercent": -1.0659419430363193
+    },
+    {
+      "id": "sorcerer.chromatic_orb",
+      "beforeMs": 19.8104,
+      "afterMs": 19.7045,
+      "changePercent": -0.5345677018131934
+    },
+    {
+      "id": "sorcerer.fire_bolt",
+      "beforeMs": 19.7347,
+      "afterMs": 19.2178,
+      "changePercent": -2.619244275312016
+    },
+    {
+      "id": "sorcerer.innate_sorcery",
+      "beforeMs": 20.1453,
+      "afterMs": 19.7925,
+      "changePercent": -1.7512769727926591
+    },
+    {
+      "id": "sorcerer.magic_missile",
+      "beforeMs": 19.6323,
+      "afterMs": 19.8541,
+      "changePercent": 1.1297708368352088
+    },
+    {
+      "id": "sorcerer.poison_spray",
+      "beforeMs": 19.1964,
+      "afterMs": 19.2347,
+      "changePercent": 0.19951657602466089
+    },
+    {
+      "id": "sorcerer.ray_of_frost",
+      "beforeMs": 19.5624,
+      "afterMs": 19.769,
+      "changePercent": 1.0561076350549925
+    },
+    {
+      "id": "sorcerer.shield",
+      "beforeMs": 19.0535,
+      "afterMs": 19.3627,
+      "changePercent": 1.6227989608208482
+    },
+    {
+      "id": "sorcerer.shocking_grasp",
+      "beforeMs": 19.3693,
+      "afterMs": 19.4791,
+      "changePercent": 0.5668764488133249
+    },
+    {
+      "id": "sorcerer.sleep",
+      "beforeMs": 19.9451,
+      "afterMs": 20.6899,
+      "changePercent": 3.734250517671023
+    },
+    {
+      "id": "sorcerer.thunderwave",
+      "beforeMs": 20.904,
+      "afterMs": 20.8595,
+      "changePercent": -0.2128779181017948
+    },
+    {
+      "id": "sorcerer.font_of_magic_mana",
+      "beforeMs": 19.5471,
+      "afterMs": 20.9684,
+      "changePercent": 7.2711553120411665
+    },
+    {
+      "id": "sorcerer.font_of_magic_sorcery",
+      "beforeMs": 20.6882,
+      "afterMs": 20.9388,
+      "changePercent": 1.211318529403238
+    },
+    {
+      "id": "sorcerer.metamagic_careful",
+      "beforeMs": 20.1601,
+      "afterMs": 20.7859,
+      "changePercent": 3.104151269090938
+    },
+    {
+      "id": "sorcerer.metamagic_distant",
+      "beforeMs": 20.2015,
+      "afterMs": 20.8127,
+      "changePercent": 3.025517907086117
+    },
+    {
+      "id": "sorcerer.metamagic_extended",
+      "beforeMs": 20.6739,
+      "afterMs": 21.0175,
+      "changePercent": 1.6619989455303408
+    },
+    {
+      "id": "sorcerer.metamagic_twinned",
+      "beforeMs": 19.7461,
+      "afterMs": 20.5623,
+      "changePercent": 4.133474458247455
+    },
+    {
+      "id": "sorcerer.hold_person",
+      "beforeMs": 20.6429,
+      "afterMs": 20.6981,
+      "changePercent": 0.26740428912603864
+    },
+    {
+      "id": "sorcerer.misty_step",
+      "beforeMs": 20.0468,
+      "afterMs": 20.1117,
+      "changePercent": 0.3237424426841162
+    },
+    {
+      "id": "sorcerer.scorching_ray",
+      "beforeMs": 20.841,
+      "afterMs": 21.2513,
+      "changePercent": 1.9687155126913325
+    },
+    {
+      "id": "sorcerer.shatter",
+      "beforeMs": 21.1931,
+      "afterMs": 21.2678,
+      "changePercent": 0.3524732106204409
+    },
+    {
+      "id": "sorcerer.web",
+      "beforeMs": 21.18,
+      "afterMs": 21.0189,
+      "changePercent": -0.7606232294617654
+    },
+    {
+      "id": "sorcerer.counterspell",
+      "beforeMs": 20.9038,
+      "afterMs": 21.0035,
+      "changePercent": 0.4769467752274714
+    },
+    {
+      "id": "sorcerer.fireball",
+      "beforeMs": 21.5579,
+      "afterMs": 21.4635,
+      "changePercent": -0.4378905180931314
+    },
+    {
+      "id": "sorcerer.haste",
+      "beforeMs": 20.2998,
+      "afterMs": 20.684,
+      "changePercent": 1.892629484034325
+    },
+    {
+      "id": "sorcerer.lightning_bolt",
+      "beforeMs": 20.3053,
+      "afterMs": 22.368,
+      "changePercent": 10.158431542503688
+    },
+    {
+      "id": "sorcerer.slow",
+      "beforeMs": 20.344,
+      "afterMs": 21.1964,
+      "changePercent": 4.189933149823033
+    },
+    {
+      "id": "sorcerer.banishment",
+      "beforeMs": 20.9063,
+      "afterMs": 19.2801,
+      "changePercent": -7.778516523727297
+    },
+    {
+      "id": "sorcerer.greater_invisibility",
+      "beforeMs": 20.134,
+      "afterMs": 21.2473,
+      "changePercent": 5.52945266713023
+    },
+    {
+      "id": "sorcerer.ice_storm",
+      "beforeMs": 22.3107,
+      "afterMs": 20.6752,
+      "changePercent": -7.330563361974296
+    },
+    {
+      "id": "sorcerer.metamagic_quickened",
+      "beforeMs": 21.4558,
+      "afterMs": 22.184,
+      "changePercent": 3.39395408234604
+    },
+    {
+      "id": "sorcerer.wall_of_fire",
+      "beforeMs": 23.4152,
+      "afterMs": 23.5832,
+      "changePercent": 0.717482660835711
+    },
+    {
+      "id": "sorcerer.cone_of_cold",
+      "beforeMs": 22.6569,
+      "afterMs": 22.8669,
+      "changePercent": 0.926869960144594
+    },
+    {
+      "id": "sorcerer.hold_monster",
+      "beforeMs": 21.276,
+      "afterMs": 21.92,
+      "changePercent": 3.0268847527730847
+    },
+    {
+      "id": "chaos.tides_of_chaos",
+      "beforeMs": 21.8261,
+      "afterMs": 22.2527,
+      "changePercent": 1.9545406646171326
+    },
+    {
+      "id": "chaos.wild_surge",
+      "beforeMs": 20.8788,
+      "afterMs": 20.8633,
+      "changePercent": -0.07423798302583773
+    },
+    {
+      "id": "chaos.bend_luck",
+      "beforeMs": 20.2163,
+      "afterMs": 21.3561,
+      "changePercent": 5.638024762196836
+    },
+    {
+      "id": "chaos.controlled_surge",
+      "beforeMs": 20.6262,
+      "afterMs": 21.7754,
+      "changePercent": 5.571554624700625
+    },
+    {
+      "id": "draconic.dragon_breath",
+      "beforeMs": 20.5535,
+      "afterMs": 21.3243,
+      "changePercent": 3.7502128591237582
+    },
+    {
+      "id": "draconic.elemental_affinity",
+      "beforeMs": 19.7819,
+      "afterMs": 20.9755,
+      "changePercent": 6.033798573443394
+    },
+    {
+      "id": "draconic.dragon_wings",
+      "beforeMs": 20.3135,
+      "afterMs": 20.6799,
+      "changePercent": 1.803726585768084
+    },
+    {
+      "id": "runeborn.ember_rune",
+      "beforeMs": 21.0465,
+      "afterMs": 21.436,
+      "changePercent": 1.8506640058917112
+    },
+    {
+      "id": "runeborn.frost_rune",
+      "beforeMs": 20.3002,
+      "afterMs": 21.8446,
+      "changePercent": 7.607806819637242
+    },
+    {
+      "id": "runeborn.grand_sigil",
+      "beforeMs": 20.7062,
+      "afterMs": 22.0267,
+      "changePercent": 6.377316938887878
+    },
+    {
+      "id": "chaos.wild_surge.force",
+      "beforeMs": 19.9532,
+      "afterMs": 19.8017,
+      "changePercent": -0.7592767074955376
+    },
+    {
+      "id": "chaos.wild_surge.psychic",
+      "beforeMs": 20.1345,
+      "afterMs": 20.9638,
+      "changePercent": 4.1188010628523175
+    },
+    {
+      "id": "chaos.controlled_surge.force",
+      "beforeMs": 20.3025,
+      "afterMs": 22.1858,
+      "changePercent": 9.276197512621609
+    }
+  ]
+}

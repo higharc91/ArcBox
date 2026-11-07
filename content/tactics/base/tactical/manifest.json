@@ -767,6 +767,55 @@
           "loop": false
         }
       }
+    },
+    "sorcerer": {
+      "framesPerDirection": 209,
+      "anims": {
+        "sorcerer_fling": {
+          "frames": [
+            189,
+            190,
+            191,
+            192,
+            193
+          ],
+          "fps": 14,
+          "loop": false
+        },
+        "sorcerer_surge": {
+          "frames": [
+            194,
+            195,
+            196,
+            197,
+            198
+          ],
+          "fps": 12,
+          "loop": false
+        },
+        "sorcerer_focus": {
+          "frames": [
+            199,
+            200,
+            201,
+            202,
+            203
+          ],
+          "fps": 12,
+          "loop": false
+        },
+        "sorcerer_breath": {
+          "frames": [
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "fps": 12,
+          "loop": false
+        }
+      }
     }
   }
 }

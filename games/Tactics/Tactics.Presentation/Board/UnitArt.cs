@@ -82,7 +82,9 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
         if (!Anims.ContainsKey(name)) name = name switch
         {
             "wizard_bolt" => "point", "wizard_weave" => "channel", "wizard_ward" => "buff",
-            "wizard_nova" => "summon", "wizard_stomp" => "slam", _ => name,
+            "wizard_nova" => "summon", "wizard_stomp" => "slam",
+            "sorcerer_fling" => "point", "sorcerer_surge" => "summon",
+            "sorcerer_focus" => "channel", "sorcerer_breath" => "cast", _ => name,
         };
         return Anims.GetValueOrDefault(name)
             ?? (SpellPoses.Contains(name) ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)

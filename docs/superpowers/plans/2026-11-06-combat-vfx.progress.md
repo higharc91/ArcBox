@@ -1,4 +1,4 @@
-> Status: step 0 approved and PR #251 open; Wizard preview complete and awaiting owner OK. No later class has started. CI remains manually disabled.
+> Status: Wizard approved and PR #252 open; Sorcerer preview complete, awaiting owner OK before its PR or Warlock. Shared PR #251 awaits the owner merge. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -77,3 +77,21 @@ The final full gate passes with 7,247 .NET tests, zero build warnings/errors, 54
 Three independent software-render runs per version give a class median 20.6423 → 21.3141 ms (+3.25%, within the 10% class median limit). This is not a per-scene guarantee: the largest individual regression is Temporal Stasis, 20.0742 → 24.6191 ms (+22.64%), documented for physical hardware validation. Whole-reel texture peak grows by 39.18 MiB; shipped content grows by 1.09 MiB. Thirty real six-player Chapter I rounds remain under the approved 3.6 s cap: Full max 3.317 / Auto Short max 3.017 / Off 0 extra seconds. Exact metrics and limitations are in review.md and the JSON reports.
 
 Wizard remains unchecked until the owner's explicit approval. Do not open its PR or start Sorcerer until that approval. The owner merges PR #251 and the later Wizard PR. No new sounds, paid generation, rule/balance/AI edits or CI runs were introduced.
+
+
+## Wizard approval and Sorcerer
+
+The owner replied “Looks good, next class.” Wizard is approved, its checkbox on #247 is ticked, and PR #252 is open against `combat-vfx` to keep its review separate from the shared dependency in PR #251. Both await the owner merge. Latest main remains `c4e121eb`; Sorcerer starts from it with approved Wizard dependency `a3c5e0d3`, also the frozen Sorcerer before baseline.
+
+Sorcerer has 45 abilities and one visible proc. The gallery includes these, ordinary Attack, and three additional real random-outcome fixtures, covering all five Wild Surge/Controlled Surge damage branches. Every ability has a distinct native effect. Four Sorcerer cast gestures append 20 frames per race without changing existing indices. Draconic, chaotic and runic motifs distinguish the subclasses. Actual engine damage selects the chaotic effect's material and light; no result is invented by the showcase or renderer. Existing audio, gameplay and phone data remain unchanged. No later class has started.
+
+
+## Sorcerer review handoff
+
+The 50-sample native before/after gallery is `../reports/combat-vfx/sorcerer/index.html`. It covers all 45 abilities, Draconic Affinity, ordinary Attack, and the remaining random outcome fixtures. Four casting gestures append 20 frames for every race. Mixed Controlled Surge outcomes keep a neutral central release and use each victim's actual damage type for its smaller impact and light. All five surge captures were retaken after that correction. No engine rule, number, AI, balance, phone file, audio clip or non-Sorcerer atlas changed.
+
+The final full gate passes: 7,251 .NET tests (zero skipped), zero build warnings/errors, 549 phone tests/build, 24 Node tests, 34 asset tests, 9 audio tests, 23 lore tests, lore/docs checks. Frozen/final native Debug builds have zero warnings/errors. Native captures and three-run benchmarks complete without rendering errors. Source/art commit: `c7530bf44ca2463210575c56a51acc7e17a2b1aa`.
+
+Class median is 20.3094 → 20.9010 ms (+2.91%, within 10%). Largest individual increase: sorcerer.lightning_bolt (+10.16%), published transparently. Whole-reel texture growth is 22.13 MiB; shipped-pack growth 0.62 MiB. Thirty six-hero Sorcerer Chapter I rounds add at most 3.300 s Full / 3.000 s Auto Short / 0 s Off, below the approved 3.6 s cap without loosening assertions. Real-hardware 16 ms and physical 3 m TV validation remain hardware checks.
+
+Sorcerer remains unchecked on #247 until explicit owner approval. Do not open its PR or start Warlock before that approval. The owner merges #251, #252 and the later class PRs. CI remains manually disabled.

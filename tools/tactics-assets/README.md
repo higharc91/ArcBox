@@ -593,9 +593,17 @@ effect in `presentation.fx`.
 
 `parts/wizard_fx.py` adds 48 spell/proc identities and seven flight sheets. Each damaging Wizard spell has its own silhouette and sheet. The 0.4 s cantrip / 0.6 s levelled sheets use indexed ramps, angular lines, a single white-hot frame and travelling residue. Larger sparse fronts keep figures, marks and the grid visible. Fire, frost, force, arcane, psychic and time magic emit matching light; poison, acid, silk and ordinary earth stay unlit.
 
-`parts/wizard_casts.py` appends 34 Wizard-only frames for bolt, weave, ward, nova and stomp. The tactical manifest's optional `classes.<class>` entry overrides that class's frame count and adds animations; existing indices remain stable. Eleven Wizard sheets grow to ten rows per facing; other classes keep eight. Classic sheets and non-Wizard spell learners use the authored fallback poses.
+`parts/wizard_casts.py` appends 34 Wizard-only frames for bolt, weave, ward, nova and stomp. The tactical manifest's optional `classes.<class>` entry overrides that class's frame count and adds animations; existing indices remain stable. Eleven Wizard sheets grow to ten rows per facing; other classes use their own override or keep eight. Classic sheets and non-Wizard spell learners use the authored fallback poses.
 
 Run `python tools/tactics-assets/dev/build_wizard_vfx.py` for effects, presentation keys and manifests; bake Wizard tactical sheets through `parts.tactical_art.build.bake`. This targeted export preserves authored townsfolk and unrelated assets. Existing sound IDs are associated with the new keys in both the shipped manifest and `tools/tactics-audio/sfx-list.json`. The optional FX-manifest `passives` map names visible procs without editing gameplay definitions. Wizard exports trim only transparent margins. Anchors, projectile centres and beam-light reach are preserved; the export test restores every original RGBA pixel exactly. Counterspell holds an offered incantation before release; declined and failed counters resume that original spell, while Countered cancels its projectile and detonation. This affects playback only.
+
+### Sorcerer (#247)
+
+`parts/sorcerer_fx.py` adds 46 ability/proc identities and six flight sheets. Its innate coils, flame streams, draconic wings, fractured Chaos and carved Runeborn motifs follow the shared palettes. Four gestures in `parts/sorcerer_casts.py` append 20 Sorcerer-only frames, giving nine rows per facing. `parts/class_casts.py` routes each class to its native poses and manifest while preserving the original animation indices and fallback poses.
+
+Use `python tools/tactics-assets/dev/build_sorcerer_vfx.py` for the targeted effects/keys/manifests/audio reuse export, then bake the eleven Sorcerer sheets through `parts.tactical_art.build.bake`. Full FX and tactical builders use the same generators. Both class exporters preserve the other class's passive and manifest entries; avoid full classic-character regeneration over authored townsfolk.
+
+The optional per-effect `variantsByDamage` map selects an existing palette variant from real `Damaged.Type` events. Only Wild Surge and Controlled Surge opt in. Controlled Surge rolls per victim: mixed outcomes keep a neutral central release, then each victim receives a smaller typed impact and matching light at its actual damage cue. This changes no engine event or gameplay roll. The 50-sample native review includes all damage branches and a mixed burst.
 
 ### Shared combat language (#247)
 

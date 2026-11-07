@@ -9,7 +9,7 @@ from parts.rig import frame_list,ANIMS
 from arcpix.out import PACK,PREVIEWS,previews_enabled,save
 from .animation import FRAME,ANCHOR,COLUMNS,frame,rest,OFFSET
 from parts.rig import Pose
-from parts.wizard_casts import poses_for,manifest as wizard_manifest
+from parts.class_casts import poses_for,manifests as class_manifests
 import numpy as np
 
 def review():
@@ -76,7 +76,7 @@ def build():
         manifest={'frame':{'width':FRAME[0],'height':FRAME[1],'anchor':ANCHOR},
             'columns':COLUMNS,'framesPerDirection':len(frame_list()),'pixelScale':.5,
             'footprintWidth':32,'heads':heads,'anims':anims,'presets':keys,
-            'classes':{'wizard':wizard_manifest()}}
+            'classes':class_manifests()}
         (staged/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
         for key in keys:
             (staged/f'{key}.png').replace(root/f'{key}.png')
