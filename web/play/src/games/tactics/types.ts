@@ -138,6 +138,8 @@ export interface TurnData {
 }
 
 export interface ReactOption {
+  outcome?: string;
+  cost?: string;
   id: string;
   label: string;
   target: string | null;
@@ -146,6 +148,8 @@ export interface ReactOption {
 }
 
 export interface ReactData {
+  timeout?: string;
+  incomingDamage?: number | null;
   controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;

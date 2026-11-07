@@ -56,7 +56,7 @@ export function describe(e: BattleEvent, name: (id: unknown) => string): string 
       return `${n("unit")} ${condition.startsWith("statMod.") ? "gains" : "is"} ${conditionName(condition)}`;
     }
     case "Reacted": return e.choice === "pass"
-      ? `${n("reactor")} lets it go`
+      ? `${n("reactor")}: Don't react`
       : `${n("reactor")} reacts: ${String(e.choice).split(".").pop()!.replaceAll("_", " ")}`;
     case "Said": return `${n("speaker")}: “${String(e.line)}”`;
     case "TriggerFired": return `⚑ ${String(e.trigger).replaceAll("_", " ")}`;

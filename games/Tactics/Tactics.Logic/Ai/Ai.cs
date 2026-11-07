@@ -5,7 +5,7 @@ namespace Tactics.Logic;
 /// profile, and the reaction policy of AI-controlled units. It never draws from the battle's RNG, so the same state always
 /// gives the same plan and the same reactions.
 /// </summary>
-public static class Ai
+public static partial class Ai
 {
     /// <summary>
     /// The whole turn for <paramref name="unit"/>, whose turn it must be (otherwise the plan has no commands): moves and
@@ -124,7 +124,7 @@ public static class Ai
     /// its expected damage it prevents otherwise (temporary HP, resistance or halving).
     /// </summary>
     private static (bool Miss, double Prevented) Defends(Scorer scorer, AbilityDef ability, UnitState reactor, UnitState actor,
-        ReactionTrigger trigger)
+        ReactionTrigger trigger, bool accountForExistingAc = false)
     {
         var rules = scorer.Rules;
         var ac = 0;
@@ -132,12 +132,30 @@ public static class Ai
             ac += effect switch
             {
                 StatModEffect m => m.Mods.Ac,
-                ApplyEffect a => ConditionAc(a.Condition, rules),
+                ApplyEffect a => accountForExistingAc && Conditions.Has(reactor, a.Condition, rules) ? 0 : ConditionAc(a.Condition, rules),
                 _ => 0,
             };
+        // Reapplying the same statMod replaces it. The public preview must not promise another copy of its AC.
+        // Leave the existing AI policy unchanged; this flag only affects explanatory previews.
+        if (accountForExistingAc && Scorer.All(ability.Effects).Any(e => e is StatModEffect))
+            ac -= reactor.Conditions.Where(c => c.Id.Value == "statMod." + ability.Id.Value).Sum(c => c.Mods?.Ac ?? 0);
         var roll = trigger.Roll;
         var miss = ac > 0 && roll is { Crit: false } && roll.Total < roll.Vs + ac;
 
+        var hit = IncomingHit(scorer, reactor, actor, trigger);
+        if (miss)
+            return (true, hit);
+        var temp = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, reactor.Pos, neutral: false), reactor).TempHp;
+        var resists = Scorer.All(ability.Effects).Any(e => e is StatModEffect { Mods.Resist.IsEmpty: false });
+        var halves = Scorer.All(ability.Effects).Any(e => e is HalveHitEffect);
+        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists || halves ? 0.5 * hit : 0.0));
+        return (false, prevented);
+    }
+
+    private static double IncomingHit(Scorer scorer, UnitState reactor, UnitState actor, ReactionTrigger trigger)
+    {
+        var rules = scorer.Rules;
+        var roll = trigger.Roll;
         var hit = 0.0;
         if (trigger.Ability is { } id && rules.Abilities.TryGetValue(id, out var attack) && Scorer.FirstAttack(attack.Effects) is { } def)
         {
@@ -147,13 +165,7 @@ public static class Ai
             hit = scorer.Walk(branch, new Strike(scorer.W, actor, attack, reactor.Pos, neutral: false), reactor, crit: crit, last: roll)
                 .Damage.Mean;
         }
-        if (miss)
-            return (true, hit);
-        var temp = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, reactor.Pos, neutral: false), reactor).TempHp;
-        var resists = Scorer.All(ability.Effects).Any(e => e is StatModEffect { Mods.Resist.IsEmpty: false });
-        var halves = Scorer.All(ability.Effects).Any(e => e is HalveHitEffect);
-        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists || halves ? 0.5 * hit : 0.0));
-        return (false, prevented);
+        return hit;
     }
 
     /// <summary>The AC a condition (and the ones it implies) adds.</summary>

@@ -92,8 +92,7 @@ public sealed partial class TacticsGame
         if (OwnerOf(before, command.Actor) is not { } profile)
             return;
         if (command is React react && _timedOutReaction == react.Actor)
-            ControlChanged(profile, "reactionTimeout", react.Choice.Ability is { } ability
-                ? Rules.Abilities[ability].Name : "Don't react");
+            ControlChanged(profile, "reactionTimeout", ReactionWords.Label(react.Choice, Rules));
         if (Online(profile))
             return;
         var action = command switch
