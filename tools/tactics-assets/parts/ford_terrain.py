@@ -15,7 +15,7 @@ RAMPS = {
     'grass': ['#5b433c', '#6e584d', '#745c28', '#8c7d36', '#a08f7c', '#bdaf99'],
     'green': ['#5b433c', '#745c28', '#8c7d36', '#42852f', '#a9a548', '#c4b464'],
     'stone': ['#2a2835', '#454152', '#585464', '#706d7c', '#8e8c98', '#afacb9'],
-    'water': ['#2a2835', '#484953', '#5e616a', '#7c8088', '#a4aab1', '#cdd4db'],
+    'water': ['#153b48', '#1c5262', '#286a78', '#3b8491', '#6fa9ad', '#acd3d0'],
 }
 
 
@@ -79,11 +79,15 @@ def top(kind, seed):
             polygon([(x,y),(x+w-3,y-1),(x+w-1,y+2),(x+2,y+h-1)],4)
             line([(x+1,y),(x+w-3,y-1)],5)
     elif kind == 'water':
-        # Short low-contrast current bands; shore foam stays with the shoreline art.
-        for _ in range(36):
-            x,y=map(int,rng.integers(N,size=2));w=int(rng.integers(3,12))
-            line([(x,y),(x+w//2,y),(x+w,y-1)],3 if _%3 else 4)
-            if _%4==0:line([(x+2,y+2),(x+w-1,y+2)],2)
+        # Broad, broken current bands make the river read as water at TV scale.
+        # All strokes wrap, so the four-tile sheet has no visible joins.
+        for i in range(54):
+            x,y=map(int,rng.integers(N,size=2)); w=int(rng.integers(10,27))
+            line([(x,y),(x+w//3,y-1),(x+2*w//3,y),(x+w,y-2)], 3 if i%3 else 4)
+            if i%4==0:
+                line([(x+3,y+2),(x+w//2,y+1)], 1)
+            if i%5==0:
+                line([(x+w//2+1,y-3),(x+w-3,y-4)], 5)
     else:
         for _ in range(20 if kind=='path' else 30):
             x,y=map(int,rng.integers(N,size=2));w=int(rng.integers(2,5))
