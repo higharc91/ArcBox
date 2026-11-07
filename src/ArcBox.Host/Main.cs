@@ -150,6 +150,9 @@ public partial class Main : Control
             else if (board == "stone-and-mire-moves")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.StoneAndMireDemo.Steps(pack)));
+            else if (board == "ember-familiar-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.EmberFamiliarDemo.Steps(pack)));
             else if (board == "trail-companion-moves")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.TrailCompanionDemo.Steps()));

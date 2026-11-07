@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var emberFamiliar = parts.Contains("ember-familiar", StringComparer.Ordinal);
         var trailCompanion = parts.Contains("trail-companion", StringComparer.Ordinal);
         var oakAmbush = parts.Contains("oak-ambush", StringComparer.Ordinal);
         var stoneAndMire = parts.Contains("stone-and-mire", StringComparer.Ordinal);
@@ -105,8 +106,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (trailCompanion)
+        _mobReview = emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (emberFamiliar)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.imp.crimson", "characters.skeleton", "bosses.hound.tan"];
+        else if (trailCompanion)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.hound.tan", "characters.skeleton", "bosses.mimic.oak"];
         else if (oakAmbush)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.mimic.oak", "characters.skeleton", "bosses.golem.granite"];

@@ -1,0 +1,3381 @@
+[
+  {
+    "id": "imp",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          119.57317073170732,
+          19
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          34,
+          14,
+          163,
+          200
+        ],
+        "bounds": [
+          36,
+          16,
+          195,
+          212
+        ],
+        "foot": [
+          105.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.10091743119267,
+          19
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          256,
+          14,
+          163,
+          201
+        ],
+        "bounds": [
+          258,
+          16,
+          417,
+          213
+        ],
+        "foot": [
+          328.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.4792899408284,
+          19
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          479,
+          14,
+          162,
+          200
+        ],
+        "bounds": [
+          481,
+          16,
+          639,
+          212
+        ],
+        "foot": [
+          550.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0470588235294,
+          19
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          699,
+          14,
+          164,
+          201
+        ],
+        "bounds": [
+          701,
+          16,
+          861,
+          213
+        ],
+        "foot": [
+          771.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.61714285714285,
+          28
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          18,
+          23,
+          195,
+          195
+        ],
+        "bounds": [
+          20,
+          25,
+          211,
+          216
+        ],
+        "foot": [
+          109.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5982142857143,
+          28
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          248,
+          23,
+          184,
+          195
+        ],
+        "bounds": [
+          250,
+          25,
+          430,
+          216
+        ],
+        "foot": [
+          331.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0773333333333,
+          33
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          475,
+          28,
+          171,
+          191
+        ],
+        "bounds": [
+          477,
+          30,
+          644,
+          217
+        ],
+        "foot": [
+          578.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.7422096317281,
+          31
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          692,
+          26,
+          181,
+          190
+        ],
+        "bounds": [
+          694,
+          28,
+          871,
+          214
+        ],
+        "foot": [
+          795.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.51570680628272,
+          21
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          27,
+          17,
+          174,
+          204
+        ],
+        "bounds": [
+          29,
+          19,
+          199,
+          219
+        ],
+        "foot": [
+          108.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.3529411764706,
+          22
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          248,
+          17,
+          174,
+          204
+        ],
+        "bounds": [
+          250,
+          19,
+          420,
+          219
+        ],
+        "foot": [
+          329.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.3246753246754,
+          21
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          459,
+          17,
+          186,
+          204
+        ],
+        "bounds": [
+          461,
+          19,
+          643,
+          219
+        ],
+        "foot": [
+          552.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.1979695431472,
+          21
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          692,
+          17,
+          173,
+          204
+        ],
+        "bounds": [
+          694,
+          19,
+          863,
+          219
+        ],
+        "foot": [
+          774.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          183.10725552050474,
+          65
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          74,
+          59,
+          197,
+          248
+        ],
+        "bounds": [
+          76,
+          61,
+          269,
+          305
+        ],
+        "foot": [
+          181.5,
+          305
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          405.4451612903226,
+          176
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          331,
+          170,
+          268,
+          137
+        ],
+        "bounds": [
+          333,
+          172,
+          597,
+          305
+        ],
+        "foot": [
+          465.0,
+          305
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          102.475,
+          244
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          44,
+          239,
+          146,
+          196
+        ],
+        "bounds": [
+          46,
+          241,
+          188,
+          433
+        ],
+        "foot": [
+          98.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.88688946015424,
+          244
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          266,
+          239,
+          146,
+          196
+        ],
+        "bounds": [
+          268,
+          241,
+          410,
+          433
+        ],
+        "foot": [
+          320.5,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.5826972010178,
+          244
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          487,
+          238,
+          147,
+          197
+        ],
+        "bounds": [
+          489,
+          240,
+          632,
+          433
+        ],
+        "foot": [
+          542.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.4910485933503,
+          244
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          709,
+          238,
+          147,
+          197
+        ],
+        "bounds": [
+          711,
+          240,
+          854,
+          433
+        ],
+        "foot": [
+          763.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          93.61111111111111,
+          243
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          19,
+          238,
+          178,
+          197
+        ],
+        "bounds": [
+          21,
+          240,
+          195,
+          433
+        ],
+        "foot": [
+          87.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.4251012145749,
+          248
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          249,
+          243,
+          167,
+          194
+        ],
+        "bounds": [
+          251,
+          245,
+          414,
+          435
+        ],
+        "foot": [
+          318.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          540.3991507430998,
+          254
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          476,
+          249,
+          154,
+          188
+        ],
+        "bounds": [
+          478,
+          251,
+          628,
+          435
+        ],
+        "foot": [
+          549.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.0198807157058,
+          248
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          693,
+          242,
+          168,
+          195
+        ],
+        "bounds": [
+          695,
+          244,
+          859,
+          435
+        ],
+        "foot": [
+          762.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.95071868583162,
+          244
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          32,
+          240,
+          161,
+          199
+        ],
+        "bounds": [
+          34,
+          242,
+          191,
+          437
+        ],
+        "foot": [
+          96.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          321.3304347826087,
+          244
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          247,
+          240,
+          171,
+          199
+        ],
+        "bounds": [
+          249,
+          242,
+          416,
+          437
+        ],
+        "foot": [
+          315.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.6477272727273,
+          244
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          441,
+          240,
+          201,
+          199
+        ],
+        "bounds": [
+          443,
+          242,
+          640,
+          437
+        ],
+        "foot": [
+          542.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.6703539823009,
+          244
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          698,
+          240,
+          161,
+          199
+        ],
+        "bounds": [
+          700,
+          242,
+          857,
+          437
+        ],
+        "foot": [
+          761.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          740.7777777777778,
+          55
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          668,
+          50,
+          196,
+          258
+        ],
+        "bounds": [
+          670,
+          52,
+          862,
+          306
+        ],
+        "foot": [
+          756.5,
+          306
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          984.7131782945736,
+          174
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          928,
+          162,
+          268,
+          145
+        ],
+        "bounds": [
+          930,
+          164,
+          1194,
+          305
+        ],
+        "foot": [
+          1062.0,
+          305
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          88.75,
+          463
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          44,
+          457,
+          136,
+          202
+        ],
+        "bounds": [
+          46,
+          459,
+          178,
+          657
+        ],
+        "foot": [
+          83.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.86633663366337,
+          463
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          268,
+          457,
+          136,
+          202
+        ],
+        "bounds": [
+          270,
+          459,
+          402,
+          657
+        ],
+        "foot": [
+          306.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.4963855421687,
+          463
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          489,
+          458,
+          136,
+          201
+        ],
+        "bounds": [
+          491,
+          460,
+          623,
+          657
+        ],
+        "foot": [
+          527.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.5247524752475,
+          463
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          458,
+          136,
+          201
+        ],
+        "bounds": [
+          713,
+          460,
+          845,
+          657
+        ],
+        "foot": [
+          750.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          89.71479500891266,
+          459
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          33,
+          453,
+          155,
+          198
+        ],
+        "bounds": [
+          35,
+          455,
+          186,
+          649
+        ],
+        "foot": [
+          82.0,
+          649
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.1829484902309,
+          463
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          256,
+          457,
+          148,
+          194
+        ],
+        "bounds": [
+          258,
+          459,
+          402,
+          649
+        ],
+        "foot": [
+          326.0,
+          649
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.830223880597,
+          463
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          478,
+          458,
+          146,
+          196
+        ],
+        "bounds": [
+          480,
+          460,
+          622,
+          652
+        ],
+        "foot": [
+          532.5,
+          652
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          756.5370705244123,
+          460
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          701,
+          454,
+          150,
+          197
+        ],
+        "bounds": [
+          703,
+          456,
+          849,
+          649
+        ],
+        "foot": [
+          758.5,
+          649
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          90.53218884120172,
+          461
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          41,
+          457,
+          141,
+          203
+        ],
+        "bounds": [
+          43,
+          459,
+          180,
+          658
+        ],
+        "foot": [
+          84.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.9699570815451,
+          461
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          262,
+          457,
+          142,
+          203
+        ],
+        "bounds": [
+          264,
+          459,
+          402,
+          658
+        ],
+        "foot": [
+          307.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.4933628318583,
+          462
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          430,
+          457,
+          202,
+          203
+        ],
+        "bounds": [
+          432,
+          459,
+          630,
+          658
+        ],
+        "foot": [
+          535.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          757.1075268817204,
+          461
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          708,
+          457,
+          142,
+          203
+        ],
+        "bounds": [
+          710,
+          459,
+          848,
+          658
+        ],
+        "foot": [
+          751.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          132.32,
+          360
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          74,
+          355,
+          190,
+          247
+        ],
+        "bounds": [
+          76,
+          357,
+          262,
+          600
+        ],
+        "foot": [
+          158.0,
+          600
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          391.6949152542373,
+          474
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          348,
+          470,
+          248,
+          132
+        ],
+        "bounds": [
+          350,
+          472,
+          594,
+          600
+        ],
+        "foot": [
+          472.0,
+          600
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          94.24193548387098,
+          686
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          46,
+          680,
+          140,
+          196
+        ],
+        "bounds": [
+          48,
+          682,
+          184,
+          874
+        ],
+        "foot": [
+          88.0,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.6565349544073,
+          686
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          268,
+          680,
+          140,
+          196
+        ],
+        "bounds": [
+          270,
+          682,
+          406,
+          874
+        ],
+        "foot": [
+          310.5,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.3169230769231,
+          685
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          489,
+          680,
+          140,
+          196
+        ],
+        "bounds": [
+          491,
+          682,
+          627,
+          874
+        ],
+        "foot": [
+          532.0,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.8,
+          685
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          711,
+          680,
+          140,
+          196
+        ],
+        "bounds": [
+          713,
+          682,
+          849,
+          874
+        ],
+        "foot": [
+          753.5,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          85.84569138276552,
+          679
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          35,
+          673,
+          157,
+          200
+        ],
+        "bounds": [
+          37,
+          675,
+          190,
+          871
+        ],
+        "foot": [
+          66.5,
+          871
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.01875,
+          682
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          264,
+          677,
+          151,
+          195
+        ],
+        "bounds": [
+          266,
+          679,
+          413,
+          870
+        ],
+        "foot": [
+          290.0,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.6951456310679,
+          682
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          487,
+          677,
+          143,
+          198
+        ],
+        "bounds": [
+          489,
+          679,
+          628,
+          873
+        ],
+        "foot": [
+          532.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          759.0243902439024,
+          681
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          708,
+          676,
+          156,
+          196
+        ],
+        "bounds": [
+          710,
+          678,
+          862,
+          870
+        ],
+        "foot": [
+          749.5,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          92.93569844789357,
+          681
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          41,
+          676,
+          145,
+          204
+        ],
+        "bounds": [
+          43,
+          678,
+          184,
+          878
+        ],
+        "foot": [
+          87.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          314.84175824175827,
+          681
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          263,
+          676,
+          146,
+          204
+        ],
+        "bounds": [
+          265,
+          678,
+          407,
+          878
+        ],
+        "foot": [
+          307.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.0860927152318,
+          680
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          445,
+          676,
+          187,
+          204
+        ],
+        "bounds": [
+          447,
+          678,
+          630,
+          878
+        ],
+        "foot": [
+          531.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          759.81179138322,
+          681
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          706,
+          676,
+          145,
+          204
+        ],
+        "bounds": [
+          708,
+          678,
+          849,
+          878
+        ],
+        "foot": [
+          753.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          731.6783536585366,
+          353
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          684,
+          349,
+          180,
+          248
+        ],
+        "bounds": [
+          686,
+          351,
+          862,
+          595
+        ],
+        "foot": [
+          755.5,
+          595
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          993.3405797101449,
+          481
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          933,
+          476,
+          263,
+          124
+        ],
+        "bounds": [
+          935,
+          478,
+          1194,
+          598
+        ],
+        "foot": [
+          1064.5,
+          598
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.66261398176292,
+          905
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          30,
+          900,
+          162,
+          202
+        ],
+        "bounds": [
+          32,
+          902,
+          190,
+          1100
+        ],
+        "foot": [
+          116.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.8374233128834,
+          905
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          252,
+          900,
+          162,
+          202
+        ],
+        "bounds": [
+          254,
+          902,
+          412,
+          1100
+        ],
+        "foot": [
+          339.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.1515151515151,
+          906
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          473,
+          900,
+          162,
+          201
+        ],
+        "bounds": [
+          475,
+          902,
+          633,
+          1099
+        ],
+        "foot": [
+          562.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0809968847352,
+          905
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          695,
+          900,
+          162,
+          202
+        ],
+        "bounds": [
+          697,
+          902,
+          855,
+          1100
+        ],
+        "foot": [
+          782.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.27872860635696,
+          901
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          19,
+          896,
+          187,
+          204
+        ],
+        "bounds": [
+          21,
+          898,
+          204,
+          1098
+        ],
+        "foot": [
+          95.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.2914438502674,
+          903
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          243,
+          898,
+          179,
+          200
+        ],
+        "bounds": [
+          245,
+          900,
+          420,
+          1096
+        ],
+        "foot": [
+          329.0,
+          1096
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.6034985422741,
+          907
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          467,
+          902,
+          171,
+          195
+        ],
+        "bounds": [
+          469,
+          904,
+          636,
+          1095
+        ],
+        "foot": [
+          565.5,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.1445086705203,
+          902
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          683,
+          897,
+          183,
+          196
+        ],
+        "bounds": [
+          685,
+          899,
+          864,
+          1091
+        ],
+        "foot": [
+          781.5,
+          1091
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          284.7915287888815,
+          103
+        ],
+        "source": "source/imp-attack-fullback.png",
+        "sourcePose": 0,
+        "cell": [
+          76,
+          97,
+          410,
+          496
+        ],
+        "bounds": [
+          78,
+          99,
+          484,
+          591
+        ],
+        "foot": [
+          291.0,
+          591
+        ],
+        "sourceEdge": false,
+        "scale": 0.11475409836065574,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          813.1095477386934,
+          103
+        ],
+        "source": "source/imp-attack-fullback.png",
+        "sourcePose": 1,
+        "cell": [
+          607,
+          97,
+          407,
+          495
+        ],
+        "bounds": [
+          609,
+          99,
+          1012,
+          590
+        ],
+        "foot": [
+          818.0,
+          590
+        ],
+        "sourceEdge": false,
+        "scale": 0.11475409836065574,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1351.711744966443,
+          103
+        ],
+        "source": "source/imp-attack-fullback.png",
+        "sourcePose": 2,
+        "cell": [
+          1133,
+          97,
+          440,
+          496
+        ],
+        "bounds": [
+          1135,
+          99,
+          1571,
+          591
+        ],
+        "foot": [
+          1359.0,
+          591
+        ],
+        "sourceEdge": false,
+        "scale": 0.11475409836065574,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1887.7393582187296,
+          104
+        ],
+        "source": "source/imp-attack-fullback.png",
+        "sourcePose": 3,
+        "cell": [
+          1685,
+          97,
+          402,
+          496
+        ],
+        "bounds": [
+          1687,
+          99,
+          2085,
+          591
+        ],
+        "foot": [
+          1892.5,
+          591
+        ],
+        "sourceEdge": false,
+        "scale": 0.11475409836065574,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          175.35972461273667,
+          652
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          68,
+          646,
+          205,
+          249
+        ],
+        "bounds": [
+          70,
+          648,
+          271,
+          893
+        ],
+        "foot": [
+          179.0,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          532.0564516129032,
+          767
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          335,
+          758,
+          260,
+          135
+        ],
+        "bounds": [
+          337,
+          760,
+          593,
+          891
+        ],
+        "foot": [
+          465.0,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.20833333333333,
+          1131
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          34,
+          1125,
+          135,
+          195
+        ],
+        "bounds": [
+          36,
+          1127,
+          167,
+          1318
+        ],
+        "foot": [
+          126.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.6309523809524,
+          1131
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          256,
+          1125,
+          135,
+          195
+        ],
+        "bounds": [
+          258,
+          1127,
+          389,
+          1318
+        ],
+        "foot": [
+          348.5,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.1206896551724,
+          1131
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          478,
+          1125,
+          135,
+          195
+        ],
+        "bounds": [
+          480,
+          1127,
+          611,
+          1318
+        ],
+        "foot": [
+          569.5,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.9467680608365,
+          1131
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          699,
+          1125,
+          136,
+          195
+        ],
+        "bounds": [
+          701,
+          1127,
+          833,
+          1318
+        ],
+        "foot": [
+          791.5,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          131.8382608695652,
+          1125
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          26,
+          1120,
+          159,
+          199
+        ],
+        "bounds": [
+          28,
+          1122,
+          183,
+          1317
+        ],
+        "foot": [
+          104.0,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          354.2748226950355,
+          1128
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          252,
+          1123,
+          153,
+          197
+        ],
+        "bounds": [
+          254,
+          1125,
+          403,
+          1318
+        ],
+        "foot": [
+          355.5,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.7517482517483,
+          1131
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          467,
+          1126,
+          157,
+          195
+        ],
+        "bounds": [
+          469,
+          1128,
+          622,
+          1319
+        ],
+        "foot": [
+          573.5,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          794.0694444444445,
+          1126
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          691,
+          1121,
+          157,
+          199
+        ],
+        "bounds": [
+          693,
+          1123,
+          846,
+          1318
+        ],
+        "foot": [
+          786.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.49656750572082,
+          1129
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          28,
+          1124,
+          142,
+          198
+        ],
+        "bounds": [
+          30,
+          1126,
+          168,
+          1320
+        ],
+        "foot": [
+          106.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.02714932126696,
+          1129
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          249,
+          1125,
+          141,
+          198
+        ],
+        "bounds": [
+          251,
+          1127,
+          388,
+          1321
+        ],
+        "foot": [
+          327.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.8242280285035,
+          1129
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          462,
+          1125,
+          196,
+          197
+        ],
+        "bounds": [
+          464,
+          1127,
+          656,
+          1320
+        ],
+        "foot": [
+          549.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.3502304147465,
+          1129
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          692,
+          1124,
+          143,
+          198
+        ],
+        "bounds": [
+          694,
+          1126,
+          833,
+          1320
+        ],
+        "foot": [
+          771.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          804.471264367816,
+          648
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          671,
+          643,
+          180,
+          251
+        ],
+        "bounds": [
+          673,
+          645,
+          849,
+          892
+        ],
+        "foot": [
+          781.0,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1137.1322314049587,
+          767
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          926,
+          759,
+          258,
+          134
+        ],
+        "bounds": [
+          928,
+          761,
+          1182,
+          891
+        ],
+        "foot": [
+          1055.0,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.4770642201835,
+          1348
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          32,
+          1343,
+          132,
+          201
+        ],
+        "bounds": [
+          34,
+          1345,
+          162,
+          1542
+        ],
+        "foot": [
+          124.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.002427184466,
+          1349
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          254,
+          1343,
+          132,
+          201
+        ],
+        "bounds": [
+          256,
+          1345,
+          384,
+          1542
+        ],
+        "foot": [
+          346.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.3867924528302,
+          1348
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          475,
+          1343,
+          133,
+          201
+        ],
+        "bounds": [
+          477,
+          1345,
+          606,
+          1542
+        ],
+        "foot": [
+          568.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.4367245657568,
+          1349
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          697,
+          1343,
+          133,
+          201
+        ],
+        "bounds": [
+          699,
+          1345,
+          828,
+          1542
+        ],
+        "foot": [
+          789.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          131.30742659758204,
+          1346
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          28,
+          1340,
+          154,
+          204
+        ],
+        "bounds": [
+          30,
+          1342,
+          180,
+          1542
+        ],
+        "foot": [
+          144.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          349.53017944535077,
+          1353
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          250,
+          1348,
+          154,
+          193
+        ],
+        "bounds": [
+          252,
+          1350,
+          402,
+          1539
+        ],
+        "foot": [
+          352.5,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.3441780821918,
+          1354
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          475,
+          1350,
+          144,
+          191
+        ],
+        "bounds": [
+          477,
+          1352,
+          617,
+          1539
+        ],
+        "foot": [
+          558.5,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.5460869565218,
+          1350
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          691,
+          1345,
+          154,
+          188
+        ],
+        "bounds": [
+          693,
+          1347,
+          843,
+          1531
+        ],
+        "foot": [
+          790.0,
+          1531
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.39092872570194,
+          1343
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          24,
+          1338,
+          141,
+          202
+        ],
+        "bounds": [
+          26,
+          1340,
+          163,
+          1538
+        ],
+        "foot": [
+          123.0,
+          1538
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.26726057906455,
+          1343
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          243,
+          1338,
+          142,
+          203
+        ],
+        "bounds": [
+          245,
+          1340,
+          383,
+          1539
+        ],
+        "foot": [
+          349.5,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.3790849673203,
+          1343
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          458,
+          1338,
+          192,
+          202
+        ],
+        "bounds": [
+          460,
+          1340,
+          648,
+          1538
+        ],
+        "foot": [
+          566.5,
+          1538
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.9469214437368,
+          1343
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          690,
+          1338,
+          141,
+          203
+        ],
+        "bounds": [
+          692,
+          1340,
+          829,
+          1539
+        ],
+        "foot": [
+          789.0,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          202.70889894419307,
+          948
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          68,
+          943,
+          187,
+          256
+        ],
+        "bounds": [
+          70,
+          945,
+          253,
+          1197
+        ],
+        "foot": [
+          178.5,
+          1197
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          524.4214285714286,
+          1080
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          325,
+          1059,
+          264,
+          137
+        ],
+        "bounds": [
+          327,
+          1061,
+          587,
+          1194
+        ],
+        "foot": [
+          457.0,
+          1194
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.45169712793734,
+          1573
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          33,
+          1568,
+          146,
+          195
+        ],
+        "bounds": [
+          35,
+          1570,
+          177,
+          1761
+        ],
+        "foot": [
+          110.0,
+          1761
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.07103825136613,
+          1573
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          255,
+          1568,
+          147,
+          195
+        ],
+        "bounds": [
+          257,
+          1570,
+          400,
+          1761
+        ],
+        "foot": [
+          331.5,
+          1761
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.3518005540166,
+          1573
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          476,
+          1568,
+          147,
+          195
+        ],
+        "bounds": [
+          478,
+          1570,
+          621,
+          1761
+        ],
+        "foot": [
+          553.0,
+          1761
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.7796610169491,
+          1573
+        ],
+        "source": "source/imp-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          698,
+          1567,
+          147,
+          196
+        ],
+        "bounds": [
+          700,
+          1569,
+          843,
+          1761
+        ],
+        "foot": [
+          775.5,
+          1761
+        ],
+        "sourceEdge": false,
+        "scale": 0.29015544041450775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.99642218246869,
+          1569
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          20,
+          1563,
+          179,
+          197
+        ],
+        "bounds": [
+          22,
+          1565,
+          197,
+          1758
+        ],
+        "foot": [
+          138.0,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.469512195122,
+          1576
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          246,
+          1570,
+          169,
+          189
+        ],
+        "bounds": [
+          248,
+          1572,
+          413,
+          1757
+        ],
+        "foot": [
+          345.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.7931034482758,
+          1581
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          473,
+          1575,
+          161,
+          185
+        ],
+        "bounds": [
+          475,
+          1577,
+          632,
+          1758
+        ],
+        "foot": [
+          570.0,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.8893360160965,
+          1573
+        ],
+        "source": "source/imp-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          688,
+          1568,
+          178,
+          189
+        ],
+        "bounds": [
+          690,
+          1570,
+          864,
+          1755
+        ],
+        "foot": [
+          788.0,
+          1755
+        ],
+        "sourceEdge": false,
+        "scale": 0.2978723404255319,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.56900212314225,
+          1562
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          27,
+          1558,
+          155,
+          198
+        ],
+        "bounds": [
+          29,
+          1560,
+          180,
+          1754
+        ],
+        "foot": [
+          111.0,
+          1754
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.74620390455533,
+          1562
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          245,
+          1558,
+          156,
+          198
+        ],
+        "bounds": [
+          247,
+          1560,
+          399,
+          1754
+        ],
+        "foot": [
+          333.5,
+          1754
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.9212962962963,
+          1562
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          461,
+          1558,
+          189,
+          198
+        ],
+        "bounds": [
+          463,
+          1560,
+          648,
+          1754
+        ],
+        "foot": [
+          554.0,
+          1754
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.6815144766147,
+          1562
+        ],
+        "source": "source/imp-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          691,
+          1557,
+          159,
+          199
+        ],
+        "bounds": [
+          693,
+          1559,
+          848,
+          1754
+        ],
+        "foot": [
+          777.0,
+          1754
+        ],
+        "sourceEdge": false,
+        "scale": 0.2828282828282828,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          775.3105095541401,
+          937
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          646,
+          932,
+          199,
+          266
+        ],
+        "bounds": [
+          648,
+          934,
+          843,
+          1196
+        ],
+        "foot": [
+          756.5,
+          1196
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1120.1410256410256,
+          1082
+        ],
+        "source": "source/imp-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          921,
+          1059,
+          275,
+          142
+        ],
+        "bounds": [
+          923,
+          1061,
+          1194,
+          1199
+        ],
+        "foot": [
+          1058.5,
+          1199
+        ],
+        "sourceEdge": false,
+        "scale": 0.21666666666666667,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

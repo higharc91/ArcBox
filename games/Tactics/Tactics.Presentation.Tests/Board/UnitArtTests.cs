@@ -292,7 +292,9 @@ public sealed class UnitArtTests
         Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);
         Assert.True(dwarf.EffectShift > fighter.EffectShift);
         Assert.Equal(-23, Art.Value.Sprite("bosses.troll.frost")!.EffectShift);
-        Assert.Equal(7, Art.Value.Sprite("bosses.imp.crimson")!.EffectShift);
+        Assert.Equal(7, Art.Value.Sprite("bosses.imp.violet")!.EffectShift); // unchanged library build
+        var imp = Art.Value.Sprite("bosses.imp.crimson")!;
+        Assert.Equal((int)MathF.Round(29 - imp.HeadLift), imp.EffectShift);
     }
 
     [Fact]

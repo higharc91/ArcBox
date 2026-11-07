@@ -7,6 +7,20 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Ember_familiar_review_keeps_the_small_friendly_imp_in_range_of_its_target()
+    {
+        var battle = DemoBattle.View("river_crossing:ember-familiar").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        var imp = Assert.Single(battle.Units, u => u.Sprite == "bosses.imp.crimson");
+        var bandit = Assert.Single(battle.Units, u => u.Sprite == "characters.bandit");
+        Assert.Equal("Party", imp.Side);
+        Assert.InRange(Math.Max(Math.Abs(imp.At.X - bandit.At.X), Math.Abs(imp.At.Y - bandit.At.Y)), 2, 5);
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Trail_companion_review_places_the_friendly_hound_next_to_its_bite_target()
     {
         var battle = DemoBattle.View("river_crossing:trail-companion").Battle!;

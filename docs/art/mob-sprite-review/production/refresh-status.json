@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty-two refreshed designs integrated across eleven batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty-three refreshed designs integrated across twelve batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -22,9 +22,10 @@
     "bosses.troll.troll",
     "bosses.golem.granite",
     "bosses.mimic.oak",
-    "bosses.hound.tan"
+    "bosses.hound.tan",
+    "bosses.imp.crimson"
   ],
-  "remainingOlderCombatLooks": 7,
+  "remainingOlderCombatLooks": 6,
   "looks": [
     {
       "baselineNumber": 1,
@@ -66,7 +67,7 @@
       "baselineNumber": 7,
       "name": "Bound Imp",
       "key": "bosses.imp.crimson",
-      "status": "awaiting refresh"
+      "status": "integrated twelfth batch"
     },
     {
       "baselineNumber": 8,

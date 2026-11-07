@@ -25,4 +25,4 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Latest: Hunting Hound](trail-companion/index.html), with eight-direction canine movement, a grounded bite and an actual in-game replay. Twenty-two looks are refreshed across eleven batches; seven older combat looks remain. [Previous batch: Oak Mimic](oak-ambush/index.html). The historical 98-look baseline above stays unchanged.
+[Latest: Bound Imp](ember-familiar/index.html), with eight-direction wing-assisted motion, a hand-cast hellfire bolt and an actual in-game replay. Twenty-three looks are refreshed across twelve batches; six older combat looks remain. [Previous batch: Hunting Hound](trail-companion/index.html). The historical 98-look baseline above stays unchanged.

@@ -648,6 +648,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         {
             var from = TileOf(used.Source);
             var aim = used.Target.Unit is { } unit ? TileOf(unit) : used.Target.Tile;
+            // The imp's natural hellfire attack has no equipped bow. Infer its existing
+            // fire visuals only for the generic basic attack; explicit presentations win.
+            var impBolt = used.Ability.Value == "common.attack"
+                && _view.Units.Any(u => u.Id == used.Source && u.Sprite == "bosses.imp.crimson")
+                && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
+                && used.Presentation?.Anim is null or "attack" or "characters.attack" or "bosses.attack";
+            if (impBolt) used = used with { Presentation = new("bosses.attack", "fx.flames.hellfire", "projectiles.fireball") };
             var anim = used.Presentation?.Anim ?? Attack;
             var clip = used.Presentation?.Fx is { } named ? fx.Clip(named) : null;
             var flies = clip is { Flies: true };
@@ -690,12 +697,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
-                // The troll visibly lifts its held boulder before opening its hands at 0.4 s.
+                // The boulder and natural hellfire release on their authored hand pose at 0.4 s.
                 var boulder = used.Ability.Value == "troll.boulder_toss";
-                var windup = boulder ? 0.4 : BeatTiming.Windup;
-                var length = boulder ? Math.Max(0.8, windup + flight) : windup + flight;
+                var windup = boulder || impBolt ? 0.4 : BeatTiming.Windup;
+                var length = boulder || impBolt ? Math.Max(0.8, windup + flight) : windup + flight;
                 _cues.Add(new PoseCue(_t, length, used.Source, anim, source, target));
-                if (boulder) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
+                if (boulder || impBolt) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 _cues.Add(new FlightCue(_t + windup, flight, shot, source, target));
                 Cry(used.Source, "attack");
                 var leaving = SoundChoice.Launch(key, GearOf(used.Source).Weapon);

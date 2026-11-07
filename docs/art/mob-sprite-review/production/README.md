@@ -48,3 +48,5 @@ Latest ninth batch: [Troll and granite Stone Golem](../stone-and-mire/README.md)
 Latest tenth batch: [Oak Mimic](../oak-ambush/README.md). Twenty-one looks refreshed; eight older combat looks remain.
 
 Latest eleventh batch: [Hunting Hound](../trail-companion/README.md). Twenty-two looks refreshed; seven older combat looks remain.
+
+Latest twelfth batch: [Bound Imp](../ember-familiar/README.md). Twenty-three looks refreshed; six older combat looks remain.

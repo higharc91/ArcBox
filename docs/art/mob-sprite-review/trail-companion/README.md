@@ -34,3 +34,5 @@ Host arguments after `--`:
 Collect with `python tools/tactics-assets/imagegen/trail-companion-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --moves /absolute/move-shots`, then rebuild review.cjs and run verify-review.cjs.
 
 Twenty-two looks refreshed across eleven batches; [seven older combat looks remain](../production/refresh-status.json). No PR opened.
+
+Subsequent batch: [Bound Imp](../ember-familiar/README.md).
