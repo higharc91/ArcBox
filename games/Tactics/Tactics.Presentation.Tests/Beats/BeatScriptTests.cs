@@ -37,6 +37,46 @@ public sealed class BeatScriptTests
 
     [Theory]
     [InlineData(1)]
+    [InlineData(2)]
+    public void Sapling_lashes_are_complete_physical_strikes_at_close_and_reach_distance(int range)
+    {
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.sapling.spring", At = new Tile(3, 3) } : u with { At = new Tile(3 + range, 3) })] };
+        var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.attack", null, null));
+        var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "bludgeoning", 6));
+        var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
+        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.sapling.spring")!.Anim(lunge.Anim);
+        Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
+        Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
+        Assert.True(script.Length >= lunge.At + lunge.Length);
+        Assert.Empty(script.Cues.OfType<FlightCue>());
+    }
+
+    [Fact]
+    public void A_saplings_explicit_projectile_override_is_preserved()
+    {
+        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.sapling.spring" } : u)] };
+        var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.shoot", null, "projectiles.arrow"));
+        Assert.Equal("projectiles/arrow.png", Assert.Single(Script(view, used).Cues.OfType<FlightCue>()).Art.Path);
+    }
+
+    [Fact]
+    public void Grove_ward_replay_uses_a_walkable_round_trip_and_unmodified_common_attack()
+    {
+        var steps = GroveWardDemo.Steps(Pack.Root);
+        Assert.Equal(4, steps.Count);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var walk = Assert.Single(steps[1].View.Battle!.Beats.SelectMany(b => b.Events).OfType<Moved>());
+        Assert.Equal(walk.Path[0], walk.Path[^1]);
+        Assert.All(walk.Path, tile => Assert.False(terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable)));
+        var used = Assert.Single(steps[2].View.Battle!.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>());
+        Assert.Equal("characters.attack", used.Presentation!.Anim);
+        Assert.Null(used.Presentation.Projectile);
+        Assert.Null(used.Presentation.Fx);
+    }
+
+    [Theory]
+    [InlineData(1)]
     [InlineData(4)]
     public void Bound_imp_natural_attacks_launch_hellfire_from_the_hand_release_instead_of_arrows(int range)
     {

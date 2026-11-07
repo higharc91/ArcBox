@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; twenty-three refreshed designs integrated across twelve batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; twenty-four refreshed designs integrated across thirteen batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -23,9 +23,10 @@
     "bosses.golem.granite",
     "bosses.mimic.oak",
     "bosses.hound.tan",
-    "bosses.imp.crimson"
+    "bosses.imp.crimson",
+    "bosses.sapling.spring"
   ],
-  "remainingOlderCombatLooks": 6,
+  "remainingOlderCombatLooks": 5,
   "looks": [
     {
       "baselineNumber": 1,
@@ -79,7 +80,7 @@
       "baselineNumber": 9,
       "name": "Grove Sapling",
       "key": "bosses.sapling.spring",
-      "status": "awaiting refresh"
+      "status": "integrated thirteenth batch"
     },
     {
       "baselineNumber": 10,

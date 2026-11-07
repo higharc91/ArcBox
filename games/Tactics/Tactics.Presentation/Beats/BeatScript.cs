@@ -691,8 +691,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
 
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
+            // The sapling's attached vine is a physical reach weapon, not an inferred bow.
+            var saplingLash = used.Ability.Value == "common.attack" && reach <= 2
+                && _view.Units.Any(u => u.Id == used.Source && u.Sprite == "bosses.sapling.spring")
+                && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
+                && anim is "attack" or "characters.attack" or "bosses.attack";
             // Basic ranged attacks infer their projectile from the equipped weapon.
-            var plain = reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
+            var plain = !saplingLash && reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
             if ((plain ? GearOf(used.Source).Weapon == "sling" ? "projectiles.rock" : Arrow : used.Presentation?.Projectile ?? (flies ? used.Presentation?.Fx : null)) is { } key && fx.Shot(key) is { } shot)
             {
                 anim = plain ? Shoot : anim;
@@ -711,13 +716,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _shot = SoundChoice.IsArrow(key);
                 _t += windup + flight;
             }
-            else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
+            else if ((reach <= 1 || saplingLash) && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
                 var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
                     {
                         "monsters.kobold_foreman" => 0.75,
-                        "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" => 0.8,
+                        "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring" => 0.8,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));

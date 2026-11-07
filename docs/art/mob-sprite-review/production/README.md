@@ -50,3 +50,5 @@ Latest tenth batch: [Oak Mimic](../oak-ambush/README.md). Twenty-one looks refre
 Latest eleventh batch: [Hunting Hound](../trail-companion/README.md). Twenty-two looks refreshed; seven older combat looks remain.
 
 Latest twelfth batch: [Bound Imp](../ember-familiar/README.md). Twenty-three looks refreshed; six older combat looks remain.
+
+Latest thirteenth batch: [Grove Sapling](../grove-ward/README.md). Twenty-four looks refreshed; five older combat looks remain.

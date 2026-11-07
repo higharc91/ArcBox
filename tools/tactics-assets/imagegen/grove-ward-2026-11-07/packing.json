@@ -1,0 +1,3381 @@
+[
+  {
+    "id": "sapling",
+    "size": 320,
+    "anchor": [
+      160,
+      192
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          116.10588917899622,
+          22
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          45,
+          19,
+          141,
+          193
+        ],
+        "bounds": [
+          47,
+          21,
+          184,
+          210
+        ],
+        "foot": [
+          115.5,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.48749272833044,
+          22
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          262,
+          19,
+          144,
+          193
+        ],
+        "bounds": [
+          264,
+          21,
+          404,
+          210
+        ],
+        "foot": [
+          334.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.8526698350573,
+          22
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          481,
+          19,
+          142,
+          193
+        ],
+        "bounds": [
+          483,
+          21,
+          621,
+          210
+        ],
+        "foot": [
+          552.5,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.8022133938706,
+          21
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          699,
+          19,
+          143,
+          193
+        ],
+        "bounds": [
+          701,
+          21,
+          840,
+          210
+        ],
+        "foot": [
+          771.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.00442628532517,
+          20
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          40,
+          17,
+          140,
+          196
+        ],
+        "bounds": [
+          42,
+          19,
+          178,
+          211
+        ],
+        "foot": [
+          106.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.4924956369982,
+          20
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          266,
+          18,
+          137,
+          191
+        ],
+        "bounds": [
+          268,
+          20,
+          401,
+          207
+        ],
+        "foot": [
+          343.5,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.246425008314,
+          19
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          488,
+          17,
+          136,
+          196
+        ],
+        "bounds": [
+          490,
+          19,
+          622,
+          211
+        ],
+        "foot": [
+          575.5,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.2999641191245,
+          21
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          710,
+          17,
+          135,
+          192
+        ],
+        "bounds": [
+          712,
+          19,
+          843,
+          207
+        ],
+        "foot": [
+          778.5,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.10588917899622,
+          22
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          45,
+          19,
+          141,
+          193
+        ],
+        "bounds": [
+          47,
+          21,
+          184,
+          210
+        ],
+        "foot": [
+          115.5,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          173.6227212681638,
+          24
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          96,
+          21,
+          161,
+          200
+        ],
+        "bounds": [
+          98,
+          23,
+          255,
+          219
+        ],
+        "foot": [
+          177.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          318.22160033167495,
+          31
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 0,
+        "cell": [
+          229,
+          28,
+          175,
+          283
+        ],
+        "bounds": [
+          231,
+          30,
+          402,
+          309
+        ],
+        "foot": [
+          322.5,
+          261
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.8022133938706,
+          21
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          699,
+          19,
+          143,
+          193
+        ],
+        "bounds": [
+          701,
+          21,
+          840,
+          210
+        ],
+        "foot": [
+          771.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          178.66317213391952,
+          44
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          81,
+          39,
+          188,
+          246
+        ],
+        "bounds": [
+          83,
+          41,
+          267,
+          283
+        ],
+        "foot": [
+          175.5,
+          283
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          417.5377286585366,
+          139
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          335,
+          133,
+          256,
+          152
+        ],
+        "bounds": [
+          337,
+          135,
+          589,
+          283
+        ],
+        "foot": [
+          463.0,
+          283
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.57192319798551,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          44,
+          237,
+          135,
+          199
+        ],
+        "bounds": [
+          46,
+          239,
+          177,
+          434
+        ],
+        "foot": [
+          115.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.56646083847903,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          264,
+          237,
+          130,
+          199
+        ],
+        "bounds": [
+          266,
+          239,
+          392,
+          434
+        ],
+        "foot": [
+          335.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.8116522811345,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          482,
+          237,
+          132,
+          199
+        ],
+        "bounds": [
+          484,
+          239,
+          612,
+          434
+        ],
+        "foot": [
+          554.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.7853144550543,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          699,
+          237,
+          135,
+          200
+        ],
+        "bounds": [
+          701,
+          239,
+          832,
+          435
+        ],
+        "foot": [
+          773.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.17172812725958,
+          242
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          38,
+          238,
+          136,
+          199
+        ],
+        "bounds": [
+          40,
+          240,
+          172,
+          435
+        ],
+        "foot": [
+          136.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.7995452823039,
+          242
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          260,
+          237,
+          132,
+          199
+        ],
+        "bounds": [
+          262,
+          239,
+          390,
+          434
+        ],
+        "foot": [
+          343.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.8584939978174,
+          242
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          482,
+          238,
+          135,
+          198
+        ],
+        "bounds": [
+          484,
+          240,
+          615,
+          434
+        ],
+        "foot": [
+          571.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.3079233946677,
+          241
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          706,
+          237,
+          133,
+          199
+        ],
+        "bounds": [
+          708,
+          239,
+          837,
+          434
+        ],
+        "foot": [
+          797.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.57192319798551,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          44,
+          237,
+          135,
+          199
+        ],
+        "bounds": [
+          46,
+          239,
+          177,
+          434
+        ],
+        "foot": [
+          115.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          156.63855421686748,
+          244
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          87,
+          240,
+          160,
+          201
+        ],
+        "bounds": [
+          89,
+          242,
+          245,
+          439
+        ],
+        "foot": [
+          170.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          956.7858808564765,
+          31
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 1,
+        "cell": [
+          695,
+          28,
+          357,
+          267
+        ],
+        "bounds": [
+          697,
+          30,
+          1050,
+          293
+        ],
+        "foot": [
+          888.5,
+          262
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.7853144550543,
+          240
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          699,
+          237,
+          135,
+          200
+        ],
+        "bounds": [
+          701,
+          239,
+          832,
+          435
+        ],
+        "foot": [
+          773.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          792.1178658043654,
+          44
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          687,
+          39,
+          194,
+          249
+        ],
+        "bounds": [
+          689,
+          41,
+          879,
+          286
+        ],
+        "foot": [
+          787.0,
+          286
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1013.5099127676447,
+          138
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          938,
+          133,
+          250,
+          152
+        ],
+        "bounds": [
+          940,
+          135,
+          1186,
+          283
+        ],
+        "foot": [
+          1063.0,
+          283
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.32306057385759,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          55,
+          456,
+          107,
+          201
+        ],
+        "bounds": [
+          57,
+          458,
+          160,
+          655
+        ],
+        "foot": [
+          117.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.44595588235296,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          273,
+          456,
+          108,
+          201
+        ],
+        "bounds": [
+          275,
+          458,
+          379,
+          655
+        ],
+        "foot": [
+          337.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          545.6217485549133,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          492,
+          456,
+          108,
+          201
+        ],
+        "bounds": [
+          494,
+          458,
+          598,
+          655
+        ],
+        "foot": [
+          555.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0740474478793,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          456,
+          108,
+          201
+        ],
+        "bounds": [
+          713,
+          458,
+          817,
+          655
+        ],
+        "foot": [
+          773.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.3940385314431,
+          462
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          45,
+          457,
+          124,
+          200
+        ],
+        "bounds": [
+          47,
+          459,
+          167,
+          655
+        ],
+        "foot": [
+          136.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.3865578865579,
+          464
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          266,
+          459,
+          116,
+          198
+        ],
+        "bounds": [
+          268,
+          461,
+          380,
+          655
+        ],
+        "foot": [
+          343.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.269066976384,
+          463
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          490,
+          457,
+          117,
+          200
+        ],
+        "bounds": [
+          492,
+          459,
+          605,
+          655
+        ],
+        "foot": [
+          567.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.9728385615914,
+          463
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          458,
+          116,
+          199
+        ],
+        "bounds": [
+          713,
+          460,
+          825,
+          655
+        ],
+        "foot": [
+          792.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.32306057385759,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          55,
+          456,
+          107,
+          201
+        ],
+        "bounds": [
+          57,
+          458,
+          160,
+          655
+        ],
+        "foot": [
+          117.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          164.0107115531752,
+          462
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          101,
+          458,
+          124,
+          205
+        ],
+        "bounds": [
+          103,
+          460,
+          223,
+          661
+        ],
+        "foot": [
+          172.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          378.5054764512596,
+          350
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 2,
+        "cell": [
+          31,
+          347,
+          458,
+          233
+        ],
+        "bounds": [
+          33,
+          349,
+          487,
+          578
+        ],
+        "foot": [
+          411.5,
+          578
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0740474478793,
+          459
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          456,
+          108,
+          201
+        ],
+        "bounds": [
+          713,
+          458,
+          817,
+          655
+        ],
+        "foot": [
+          773.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          188.51525352409004,
+          339
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          99,
+          333,
+          158,
+          258
+        ],
+        "bounds": [
+          101,
+          335,
+          255,
+          589
+        ],
+        "foot": [
+          189.5,
+          589
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          395.8354085603113,
+          440
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          336,
+          435,
+          247,
+          151
+        ],
+        "bounds": [
+          338,
+          437,
+          581,
+          584
+        ],
+        "foot": [
+          459.5,
+          584
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          104.95252225519287,
+          680
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          42,
+          677,
+          140,
+          200
+        ],
+        "bounds": [
+          44,
+          679,
+          180,
+          875
+        ],
+        "foot": [
+          115.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.47496251874065,
+          681
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          263,
+          677,
+          139,
+          200
+        ],
+        "bounds": [
+          265,
+          679,
+          400,
+          875
+        ],
+        "foot": [
+          335.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          545.4216831386643,
+          680
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          482,
+          676,
+          139,
+          201
+        ],
+        "bounds": [
+          484,
+          678,
+          619,
+          875
+        ],
+        "foot": [
+          554.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.3825746156165,
+          680
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          701,
+          677,
+          139,
+          200
+        ],
+        "bounds": [
+          703,
+          679,
+          838,
+          875
+        ],
+        "foot": [
+          773.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          98.5879491017964,
+          680
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          36,
+          675,
+          142,
+          202
+        ],
+        "bounds": [
+          38,
+          677,
+          176,
+          875
+        ],
+        "foot": [
+          97.0,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.86302395209583,
+          681
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          260,
+          676,
+          140,
+          200
+        ],
+        "bounds": [
+          262,
+          678,
+          398,
+          874
+        ],
+        "foot": [
+          342.5,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.6934335443038,
+          680
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          481,
+          675,
+          142,
+          202
+        ],
+        "bounds": [
+          483,
+          677,
+          621,
+          875
+        ],
+        "foot": [
+          543.0,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.8877005347593,
+          680
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          702,
+          675,
+          142,
+          201
+        ],
+        "bounds": [
+          704,
+          677,
+          842,
+          874
+        ],
+        "foot": [
+          789.5,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.95252225519287,
+          680
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          42,
+          677,
+          140,
+          200
+        ],
+        "bounds": [
+          44,
+          679,
+          180,
+          875
+        ],
+        "foot": [
+          115.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          158.70460122699387,
+          682
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          93,
+          678,
+          149,
+          201
+        ],
+        "bounds": [
+          95,
+          680,
+          240,
+          877
+        ],
+        "foot": [
+          168.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          933.0439733707078,
+          348
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 3,
+        "cell": [
+          691,
+          344,
+          367,
+          241
+        ],
+        "bounds": [
+          693,
+          346,
+          1056,
+          583
+        ],
+        "foot": [
+          969.0,
+          583
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.3825746156165,
+          680
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          701,
+          677,
+          139,
+          200
+        ],
+        "bounds": [
+          703,
+          679,
+          838,
+          875
+        ],
+        "foot": [
+          773.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          781.1866300051555,
+          339
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          692,
+          333,
+          177,
+          258
+        ],
+        "bounds": [
+          694,
+          335,
+          867,
+          589
+        ],
+        "foot": [
+          774.5,
+          589
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1010.3260015710919,
+          448
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          941,
+          442,
+          250,
+          146
+        ],
+        "bounds": [
+          943,
+          444,
+          1189,
+          586
+        ],
+        "foot": [
+          1066.0,
+          586
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.13093676200472,
+          902
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          41,
+          899,
+          144,
+          196
+        ],
+        "bounds": [
+          43,
+          901,
+          183,
+          1093
+        ],
+        "foot": [
+          113.5,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.32721877529,
+          906
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          261,
+          903,
+          144,
+          192
+        ],
+        "bounds": [
+          263,
+          905,
+          403,
+          1093
+        ],
+        "foot": [
+          334.0,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.7182594326632,
+          906
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          481,
+          902,
+          143,
+          193
+        ],
+        "bounds": [
+          483,
+          904,
+          622,
+          1093
+        ],
+        "foot": [
+          552.5,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.9565680788702,
+          903
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          699,
+          900,
+          146,
+          195
+        ],
+        "bounds": [
+          701,
+          902,
+          843,
+          1093
+        ],
+        "foot": [
+          772.0,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.49680306905371,
+          902
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          40,
+          899,
+          144,
+          197
+        ],
+        "bounds": [
+          42,
+          901,
+          182,
+          1094
+        ],
+        "foot": [
+          90.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.7155252556554,
+          903
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          262,
+          899,
+          143,
+          192
+        ],
+        "bounds": [
+          264,
+          901,
+          403,
+          1089
+        ],
+        "foot": [
+          335.0,
+          1089
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.7709611451943,
+          904
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          483,
+          899,
+          144,
+          197
+        ],
+        "bounds": [
+          485,
+          901,
+          625,
+          1094
+        ],
+        "foot": [
+          558.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.67,
+          903
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          707,
+          899,
+          141,
+          194
+        ],
+        "bounds": [
+          709,
+          901,
+          846,
+          1091
+        ],
+        "foot": [
+          779.0,
+          1091
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.13093676200472,
+          902
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          41,
+          899,
+          144,
+          196
+        ],
+        "bounds": [
+          43,
+          901,
+          183,
+          1093
+        ],
+        "foot": [
+          113.5,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          165.99323371863545,
+          905
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          88,
+          901,
+          160,
+          199
+        ],
+        "bounds": [
+          90,
+          903,
+          246,
+          1098
+        ],
+        "foot": [
+          170.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          305.2408675799087,
+          639
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 4,
+        "cell": [
+          103,
+          635,
+          327,
+          264
+        ],
+        "bounds": [
+          105,
+          637,
+          428,
+          897
+        ],
+        "foot": [
+          331.0,
+          897
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.9565680788702,
+          903
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          699,
+          900,
+          146,
+          195
+        ],
+        "bounds": [
+          701,
+          902,
+          843,
+          1093
+        ],
+        "foot": [
+          772.0,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          174.93021608218208,
+          650
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          84,
+          644,
+          180,
+          247
+        ],
+        "bounds": [
+          86,
+          646,
+          262,
+          889
+        ],
+        "foot": [
+          179.5,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          411.92525431225124,
+          757
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          337,
+          752,
+          250,
+          135
+        ],
+        "bounds": [
+          339,
+          754,
+          585,
+          885
+        ],
+        "foot": [
+          462.0,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.77072704081633,
+          1126
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          44,
+          1123,
+          133,
+          196
+        ],
+        "bounds": [
+          46,
+          1125,
+          175,
+          1317
+        ],
+        "foot": [
+          108.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.74094040131774,
+          1124
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          264,
+          1120,
+          134,
+          199
+        ],
+        "bounds": [
+          266,
+          1122,
+          396,
+          1317
+        ],
+        "foot": [
+          328.0,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.9254050749006,
+          1124
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          483,
+          1121,
+          134,
+          198
+        ],
+        "bounds": [
+          485,
+          1123,
+          615,
+          1317
+        ],
+        "foot": [
+          546.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.3848550950452,
+          1124
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          703,
+          1121,
+          135,
+          198
+        ],
+        "bounds": [
+          705,
+          1123,
+          836,
+          1317
+        ],
+        "foot": [
+          766.0,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.30789560621076,
+          1123
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          40,
+          1118,
+          138,
+          201
+        ],
+        "bounds": [
+          42,
+          1120,
+          176,
+          1317
+        ],
+        "foot": [
+          120.0,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.99708643573973,
+          1122
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          262,
+          1117,
+          135,
+          203
+        ],
+        "bounds": [
+          264,
+          1119,
+          395,
+          1318
+        ],
+        "foot": [
+          340.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.8122878479294,
+          1122
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          483,
+          1118,
+          138,
+          200
+        ],
+        "bounds": [
+          485,
+          1120,
+          619,
+          1316
+        ],
+        "foot": [
+          547.5,
+          1316
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.980825479363,
+          1123
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          705,
+          1118,
+          135,
+          201
+        ],
+        "bounds": [
+          707,
+          1120,
+          838,
+          1317
+        ],
+        "foot": [
+          791.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.77072704081633,
+          1126
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          44,
+          1123,
+          133,
+          196
+        ],
+        "bounds": [
+          46,
+          1125,
+          175,
+          1317
+        ],
+        "foot": [
+          108.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          173.68563049853373,
+          1125
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          100,
+          1121,
+          143,
+          201
+        ],
+        "bounds": [
+          102,
+          1123,
+          241,
+          1320
+        ],
+        "foot": [
+          169.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          924.8423298089408,
+          648
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 5,
+        "cell": [
+          785,
+          644,
+          394,
+          252
+        ],
+        "bounds": [
+          787,
+          646,
+          1177,
+          894
+        ],
+        "foot": [
+          876.5,
+          894
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.3848550950452,
+          1124
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          703,
+          1121,
+          135,
+          198
+        ],
+        "bounds": [
+          705,
+          1123,
+          836,
+          1317
+        ],
+        "foot": [
+          766.0,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          778.2952516958229,
+          649
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          688,
+          644,
+          181,
+          250
+        ],
+        "bounds": [
+          690,
+          646,
+          867,
+          892
+        ],
+        "foot": [
+          786.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1018.248012718601,
+          757
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          940,
+          753,
+          250,
+          135
+        ],
+        "bounds": [
+          942,
+          755,
+          1188,
+          886
+        ],
+        "foot": [
+          1065.0,
+          886
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.32559750606165,
+          1342
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          60,
+          1339,
+          117,
+          203
+        ],
+        "bounds": [
+          62,
+          1341,
+          175,
+          1540
+        ],
+        "foot": [
+          108.5,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.32634521313764,
+          1343
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          279,
+          1339,
+          116,
+          203
+        ],
+        "bounds": [
+          281,
+          1341,
+          393,
+          1540
+        ],
+        "foot": [
+          328.0,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.1800136892539,
+          1343
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          497,
+          1339,
+          118,
+          203
+        ],
+        "bounds": [
+          499,
+          1341,
+          613,
+          1540
+        ],
+        "foot": [
+          547.0,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.7434944237918,
+          1342
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          716,
+          1339,
+          118,
+          203
+        ],
+        "bounds": [
+          718,
+          1341,
+          832,
+          1540
+        ],
+        "foot": [
+          767.0,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.35450304987441,
+          1344
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          50,
+          1339,
+          122,
+          205
+        ],
+        "bounds": [
+          52,
+          1341,
+          170,
+          1542
+        ],
+        "foot": [
+          90.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.3220338983051,
+          1343
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1339,
+          122,
+          206
+        ],
+        "bounds": [
+          273,
+          1341,
+          391,
+          1543
+        ],
+        "foot": [
+          313.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5060007742934,
+          1344
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          494,
+          1340,
+          122,
+          204
+        ],
+        "bounds": [
+          496,
+          1342,
+          614,
+          1542
+        ],
+        "foot": [
+          545.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.4732687477574,
+          1344
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          714,
+          1339,
+          124,
+          202
+        ],
+        "bounds": [
+          716,
+          1341,
+          836,
+          1539
+        ],
+        "foot": [
+          765.0,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.32559750606165,
+          1342
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          60,
+          1339,
+          117,
+          203
+        ],
+        "bounds": [
+          62,
+          1341,
+          175,
+          1540
+        ],
+        "foot": [
+          108.5,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          160.58310439560438,
+          1343
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          102,
+          1338,
+          123,
+          207
+        ],
+        "bounds": [
+          104,
+          1340,
+          223,
+          1543
+        ],
+        "foot": [
+          157.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          211.79611650485435,
+          961
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 6,
+        "cell": [
+          135,
+          958,
+          438,
+          227
+        ],
+        "bounds": [
+          137,
+          960,
+          571,
+          1183
+        ],
+        "foot": [
+          205.5,
+          1183
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.7434944237918,
+          1342
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          716,
+          1339,
+          118,
+          203
+        ],
+        "bounds": [
+          718,
+          1341,
+          832,
+          1540
+        ],
+        "foot": [
+          767.0,
+          1540
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          159.2369194591417,
+          953
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          89,
+          947,
+          152,
+          268
+        ],
+        "bounds": [
+          91,
+          949,
+          239,
+          1213
+        ],
+        "foot": [
+          158.0,
+          1213
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          404.43166789125644,
+          1078
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          333,
+          1073,
+          254,
+          137
+        ],
+        "bounds": [
+          335,
+          1075,
+          585,
+          1208
+        ],
+        "foot": [
+          460.0,
+          1208
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.31863857374393,
+          1566
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          41,
+          1562,
+          141,
+          198
+        ],
+        "bounds": [
+          43,
+          1564,
+          180,
+          1758
+        ],
+        "foot": [
+          110.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.4870988042794,
+          1567
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          262,
+          1563,
+          139,
+          196
+        ],
+        "bounds": [
+          264,
+          1565,
+          399,
+          1757
+        ],
+        "foot": [
+          331.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.3450386597938,
+          1566
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          482,
+          1563,
+          139,
+          196
+        ],
+        "bounds": [
+          484,
+          1565,
+          619,
+          1757
+        ],
+        "foot": [
+          551.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.9558958652374,
+          1566
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          701,
+          1562,
+          140,
+          197
+        ],
+        "bounds": [
+          703,
+          1564,
+          839,
+          1757
+        ],
+        "foot": [
+          769.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.85377519644688,
+          1571
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          34,
+          1566,
+          145,
+          192
+        ],
+        "bounds": [
+          36,
+          1568,
+          177,
+          1756
+        ],
+        "foot": [
+          111.0,
+          1756
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0136076999668,
+          1571
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          261,
+          1566,
+          140,
+          193
+        ],
+        "bounds": [
+          263,
+          1568,
+          399,
+          1757
+        ],
+        "foot": [
+          315.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.7483085250338,
+          1569
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          482,
+          1566,
+          139,
+          194
+        ],
+        "bounds": [
+          484,
+          1568,
+          619,
+          1758
+        ],
+        "foot": [
+          550.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.4512070724244,
+          1570
+        ],
+        "source": "source/sapling-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          704,
+          1566,
+          138,
+          189
+        ],
+        "bounds": [
+          706,
+          1568,
+          840,
+          1753
+        ],
+        "foot": [
+          780.5,
+          1753
+        ],
+        "sourceEdge": false,
+        "scale": 0.33507853403141363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.31863857374393,
+          1566
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          41,
+          1562,
+          141,
+          198
+        ],
+        "bounds": [
+          43,
+          1564,
+          180,
+          1758
+        ],
+        "foot": [
+          110.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          171.07438766253404,
+          1568
+        ],
+        "source": "source/sapling-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          88,
+          1564,
+          170,
+          200
+        ],
+        "bounds": [
+          90,
+          1566,
+          256,
+          1762
+        ],
+        "foot": [
+          173.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.3282051282051282,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          836.4718820294927,
+          958
+        ],
+        "source": "source/sapling-contact.png",
+        "sourcePose": 7,
+        "cell": [
+          737,
+          955,
+          436,
+          242
+        ],
+        "bounds": [
+          739,
+          957,
+          1171,
+          1195
+        ],
+        "foot": [
+          820.0,
+          1179
+        ],
+        "sourceEdge": false,
+        "scale": 0.2782608695652174,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.9558958652374,
+          1566
+        ],
+        "source": "source/sapling-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          701,
+          1562,
+          140,
+          197
+        ],
+        "bounds": [
+          703,
+          1564,
+          839,
+          1757
+        ],
+        "foot": [
+          769.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.3404255319148936,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          766.4917736394865,
+          950
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          687,
+          945,
+          184,
+          264
+        ],
+        "bounds": [
+          689,
+          947,
+          869,
+          1207
+        ],
+        "foot": [
+          760.5,
+          1207
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1011.1876796714579,
+          1075
+        ],
+        "source": "source/sapling-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          940,
+          1070,
+          251,
+          141
+        ],
+        "bounds": [
+          942,
+          1072,
+          1189,
+          1209
+        ],
+        "foot": [
+          1065.5,
+          1209
+        ],
+        "sourceEdge": false,
+        "scale": 0.2510460251046025,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

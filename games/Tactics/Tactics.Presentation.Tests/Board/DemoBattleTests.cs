@@ -7,6 +7,20 @@ namespace Tactics.Presentation.Tests.Board;
 public sealed class DemoBattleTests
 {
     [Fact]
+    public void Grove_ward_review_places_the_small_companion_at_its_real_two_tile_reach()
+    {
+        var battle = DemoBattle.View("river_crossing:grove-ward").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        var sapling = Assert.Single(battle.Units, u => u.Sprite == "bosses.sapling.spring");
+        var bandit = Assert.Single(battle.Units, u => u.Sprite == "characters.bandit");
+        Assert.Equal("Party", sapling.Side);
+        Assert.Equal(2, Math.Max(Math.Abs(sapling.At.X - bandit.At.X), Math.Abs(sapling.At.Y - bandit.At.Y)));
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Ember_familiar_review_keeps_the_small_friendly_imp_in_range_of_its_target()
     {
         var battle = DemoBattle.View("river_crossing:ember-familiar").Battle!;

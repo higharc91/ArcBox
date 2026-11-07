@@ -36,3 +36,5 @@ Host arguments after `--`:
 Use Godot `--audio-driver Dummy` before `--` on hosts without an audio device. Collect with `python tools/tactics-assets/imagegen/ember-familiar-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --moves /absolute/move-shots`, then rebuild review.cjs and run verify-review.cjs.
 
 Twenty-three looks refreshed across twelve batches; [six older combat looks remain](../production/refresh-status.json). No PR opened.
+
+Subsequent batch: [Grove Sapling](../grove-ward/README.md).

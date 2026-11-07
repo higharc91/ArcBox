@@ -25,6 +25,7 @@ public static class DemoBattle
     private const string RimeKeepers = ":rime-keepers";
     private const string OathAndShadow = ":oath-and-shadow";
     private const string StoneAndMire = ":stone-and-mire";
+    private const string GroveWard = ":grove-ward";
     private const string EmberFamiliar = ":ember-familiar";
     private const string TrailCompanion = ":trail-companion";
     private const string OakAmbush = ":oak-ambush";
@@ -149,6 +150,15 @@ public static class DemoBattle
         Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
     ];
 
+    private static ImmutableArray<UnitView> RefreshedGroveWard() =>
+    [
+        Unit("Sapling", "Party", "bosses.sapling.spring", 11, 9, 18, 18),
+        Unit("Bandit", "Enemy", "characters.bandit", 13, 9, 26, 26),
+        Unit("Fighter", "Party", "characters.class_fighter", 11, 6, 28, 28),
+        Unit("Hound reference", "Party", "bosses.hound.tan", 9, 10, 16, 16),
+        Unit("Imp reference", "Party", "bosses.imp.crimson", 13, 6, 14, 14),
+    ];
+
     private static ImmutableArray<UnitView> RefreshedEmberFamiliar() =>
     [
         Unit("Imp", "Party", "bosses.imp.crimson", 11, 9, 14, 14),
@@ -222,13 +232,14 @@ public static class DemoBattle
         var boneWardens = spec.EndsWith(BoneWardens, StringComparison.Ordinal);
         var hollowDead = spec.EndsWith(HollowDead, StringComparison.Ordinal);
         var rimeKeepers = spec.EndsWith(RimeKeepers, StringComparison.Ordinal);
+        var groveWard = spec.EndsWith(GroveWard, StringComparison.Ordinal);
         var emberFamiliar = spec.EndsWith(EmberFamiliar, StringComparison.Ordinal);
         var trailCompanion = spec.EndsWith(TrailCompanion, StringComparison.Ordinal);
         var oakAmbush = spec.EndsWith(OakAmbush, StringComparison.Ordinal);
         var stoneAndMire = spec.EndsWith(StoneAndMire, StringComparison.Ordinal);
         var oathAndShadow = spec.EndsWith(OathAndShadow, StringComparison.Ordinal);
-        var map = emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var map = groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);
