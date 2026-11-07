@@ -435,6 +435,64 @@
       ],
       "fps": 8,
       "loop": false
+    },
+    "wizard_bolt": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "wizard_weave": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "wizard_ward": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "wizard_nova": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "wizard_stomp": {
+      "frames": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      "fps": 12,
+      "loop": false
     }
   },
   "builds": {
