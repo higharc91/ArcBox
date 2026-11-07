@@ -94,3 +94,40 @@ it("keeps the little camp on each phone during fireside dialogue and votes", () 
   fireEvent.click(screen.getByRole("button", { name: /parley with the chief/ }));
   expect(send).toHaveBeenCalledWith("vote", { option: "parley" });
 });
+
+it("explains each job on the button, using the player's actual skill and target", () => {
+  const send = vi.fn();
+  render(<Camp data={{ ...camp, jobs: [
+    ...camp.jobs,
+    { id: "rally", name: "Rally", skill: "performance", dc: 14 },
+    { id: "watch", name: "Keep watch", skill: "perception", dc: 0 },
+    { id: "rest", name: "Rest easy", skill: "survival", dc: 0 },
+  ] }} send={send} stream={send} viewId="one" />);
+  expect(screen.getByText("Mend one body injury on a successful roll.")).toBeTruthy();
+  expect(screen.getByText("Give everyone 3 temporary HP next battle on a successful roll.")).toBeTruthy();
+  expect(screen.getByText("Performance · roll 14+")).toBeTruthy();
+  expect(screen.getByText("Perception · varies by secret")).toBeTruthy();
+  expect(screen.getByText("No roll")).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Rally" }).getAttribute("aria-describedby")).toBe("camp-job-rally");
+  expect(send).not.toHaveBeenCalled();
+});
+
+it("labels Well fed and injuries visibly without relying on hover", () => {
+  const send = vi.fn();
+  const { container } = render(<Shop data={{ ...service, members: [{ member: "bo", name: "Bo", class: "cleric", here: true,
+    hp: 9, maxHp: 9, resources: [], injuries: service.guests[0]!.injuries, wellFed: true, room: false }] }} send={send} stream={send} viewId="one" />);
+  expect(screen.getByText("Well fed")).toBeTruthy();
+  expect(screen.getByText("3 temporary HP next battle")).toBeTruthy();
+  expect(screen.getByText("Cracked ribs")).toBeTruthy();
+  expect(container.querySelectorAll("[title]")).toHaveLength(0);
+  fireEvent.click(screen.getByRole("button", { name: "Bo: Cracked ribs" }));
+  expect(screen.getByText("HP −5")).toBeTruthy();
+});
+
+it("explains taking no extra job and rolling twice for a healing spell", () => {
+  const send = vi.fn();
+  render(<Camp data={camp} send={send} stream={send} viewId="one" />);
+  fireEvent.click(screen.getByRole("button", { name: "About jobs" }));
+  expect(screen.getByText(/If you know a healing spell, roll twice and keep the higher result/)).toBeTruthy();
+  expect(screen.getByText(/Choose Rest, or leave your job unchosen/)).toBeTruthy();
+});
