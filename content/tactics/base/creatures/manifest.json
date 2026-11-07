@@ -7938,7 +7938,7 @@
       },
       "family": "wolf",
       "variant": "druid_wolf",
-      "provenance": "Native Druid mantle, fur and bark work on the approved wolf_grey anatomy and eight-direction motion. No source creature atlas is modified."
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved wolf_grey anatomy and eight-direction motion. No source creature atlas is modified."
     },
     "druid_dire_wolf": {
       "file": "druid_dire_wolf.png",
@@ -8074,7 +8074,7 @@
       },
       "family": "wolf",
       "variant": "druid_dire_wolf",
-      "provenance": "Native Druid mantle, fur and bark work on the approved wolf_dire anatomy and eight-direction motion. No source creature atlas is modified."
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved wolf_dire anatomy and eight-direction motion. No source creature atlas is modified."
     },
     "druid_bear": {
       "file": "druid_bear.png",
@@ -8210,7 +8210,7 @@
       },
       "family": "bear",
       "variant": "druid_bear",
-      "provenance": "Native Druid mantle, fur and bark work on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
     },
     "druid_elder_bear": {
       "file": "druid_elder_bear.png",
@@ -8346,7 +8346,7 @@
       },
       "family": "bear",
       "variant": "druid_elder_bear",
-      "provenance": "Native Druid mantle, fur and bark work on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
     }
   },
   "legacyDistinctForms": [

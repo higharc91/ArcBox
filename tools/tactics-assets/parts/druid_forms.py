@@ -3,87 +3,77 @@ Natural coats, attached fur/bark mantles and small living-green details retain t
 clustered pixels and lighting. Source atlases and all non-Druid creatures stay untouched.
 """
 from pathlib import Path
-import copy,json,math
+import copy,json
 import numpy as np
-from PIL import Image,ImageDraw,ImageFilter
+from PIL import Image,ImageDraw
 from arcpix.out import PACK,save,write_json
+from .druid_form_poses import POSE_NECK
 FORMS={
  'wolf':('wolf_grey','beasts.wolf.druid',.4),
  'dire_wolf':('wolf_dire','beasts.wolf.druid_dire',.5),
  'bear':('bear_brown','beasts.bear.druid',.4),
  'elder_bear':('bear_brown','beasts.bear.druid_elder',.5)}
-# Where the shoulder lies in each approved facing, as a fraction of the posed body bounds.
-WOLF_NECK=[(.5,.50),(.40,.32),(.35,.31),(.42,.29),(.5,.27),(.58,.29),(.65,.31),(.60,.32)]
-BEAR_NECK=[(.5,.32),(.40,.30),(.37,.28),(.42,.25),(.5,.25),(.58,.25),(.63,.28),(.60,.30)]
 LEAF=['#263c2d','#39563c','#567548','#88a361','#c5d19a']
 BARK=['#302c2b','#4a3e31','#71583b','#a58758','#d0b681']
-FUR=['#34313b','#5b5862','#89858d','#b8b5ad','#e3ddc6']
+
+# Small, continuous neck ties follow each facing. The original fur is the ruff;
+# no brightness threshold/window repaints a moving piece of the coat.
+VINES=(
+ ((-7,-1),(0,3),(7,-1)), ((-5,-5),(0,0),(3,6)),
+ ((-3,-7),(0,0),(2,6)), ((-4,-4),(0,0),(5,3)),
+ ((-7,0),(0,3),(7,0)), ((-5,3),(0,0),(4,-4)),
+ ((-2,6),(0,0),(3,-7)), ((-3,6),(0,0),(5,-5)))
+
+def leaf_sprig(pen,x,y,side=1):
+ # One attached sprig: broad leaf planes rather than a ring of competing spikes.
+ pen.line([(x,y-2),(x,y+5)],fill=LEAF[0],width=2)
+ pen.polygon([(x,y),(x-4*side,y-4),(x-5*side,y-1),(x-1*side,y+3)],fill=LEAF[0])
+ pen.polygon([(x,y),(x-3*side,y-2),(x-3*side,y),(x,y+2)],fill=LEAF[2])
+ pen.line([(x,y+1),(x-3*side,y-2)],fill=LEAF[3])
+ pen.polygon([(x,y+2),(x+3*side,y-2),(x+5*side,y),(x+1*side,y+5)],fill=LEAF[0])
+ pen.polygon([(x+1*side,y+2),(x+3*side,y),(x+3*side,y+2),(x+1*side,y+4)],fill=LEAF[2])
+
+def bark_plate(pen,x,y):
+ pen.polygon([(x-4,y+3),(x-4,y-3),(x+1,y-6),(x+4,y-3),(x+4,y+3),(x,y+6)],fill=BARK[0])
+ pen.polygon([(x-2,y+2),(x-2,y-2),(x+1,y-4),(x+2,y-2),(x+2,y+2),(x,y+4)],fill=BARK[2])
+ pen.line([(x-2,y-2),(x+1,y-4),(x+2,y-2)],fill=BARK[3])
+ pen.line([(x,y-1),(x,y+2)],fill=BARK[1])
 
 def frame_image(source,form,direction,index):
- im=source.copy().convert('RGBA')
- # Imported idle/walk frames can drift by several pixels. Keep the grounded foot at the
- # runtime anchor, retaining the authored airborne attack frames unchanged.
+ im=source.copy().convert('RGBA');offset=0
  if index<12:
-  alpha=np.array(im.getchannel('A'));ys=np.where(alpha>0)[0]
+  ys=np.where(np.array(im.getchannel('A'))>0)[0]
   if len(ys):
    offset=im.height-5-int(ys.max())
    if offset:
     aligned=Image.new('RGBA',im.size);aligned.paste(im,(0,offset));im=aligned
- a=np.array(im);mask=a[:,:,3]>0
- if not mask.any():return im
- ys,xs=np.where(mask);left,top,right,bottom=xs.min(),ys.min(),xs.max(),ys.max();bw,bh=right-left+1,bottom-top+1
- bear='bear' in form;elder=form in ('dire_wolf','elder_bear');neck=(BEAR_NECK if bear else WOLF_NECK)[direction]
- cx,cy=left+neck[0]*bw,top+neck[1]*bh
- # Amber/red eyes become a restrained living green, retaining each original shade.
+ if not im.getbbox():return im
+ bear='bear' in form;cx,cy=POSE_NECK['bear' if bear else 'wolf'][direction][index];cy+=offset
  if not bear:
-  eyes=mask & (a[:,:,0]>a[:,:,1]*1.15) & (a[:,:,0]>a[:,:,2]*1.15) & (a[:,:,0]>90)
+  # Retain the authored coat/ruff and change only the source's red/amber eyes.
+  a=np.array(im);eyes=(a[:,:,3]>0)&(a[:,:,0]>a[:,:,1]*1.15)&(a[:,:,0]>a[:,:,2]*1.15)&(a[:,:,0]>90)
   for y,x in zip(*np.where(eyes)):
-   value=a[y,x,:3].max()/255
-   a[y,x,:3]=np.array([125,185,114])*max(.45,value)
+   value=a[y,x,:3].max()/255;a[y,x,:3]=np.array([125,185,114])*max(.45,value)
   im=Image.fromarray(a)
- # Elder forms have broad grizzled ruffs, retaining the original clustered shade planes.
- if elder:
-  yy,xx=np.indices(mask.shape);rx=23 if bear else 14;ry=14 if bear else 10
-  ruff=mask & (((xx-cx)/rx)**2+((yy-cy)/ry)**2<1)
-  lum=np.mean(a[:,:,:3],axis=2)
-  shade=np.clip(((lum-(28 if bear else 16))/(36 if bear else 22)).astype(int),0,4)
-  colors=np.array([[49,44,43],[83,74,64],[124,111,91],[166,150,121],[208,194,157]] if bear else [[39,38,46],[74,72,83],[117,116,128],[163,164,172],[211,214,205]],dtype='uint8')
-  a[ruff,:3]=colors[shade[ruff]]
-  im=Image.fromarray(a)
- # Materials stay broad and directional: a fur ruff on the dire wolf; bark plates on bears.
  overlay=Image.new('RGBA',im.size);pen=ImageDraw.Draw(overlay)
- palette=BARK if bear else FUR if elder else LEAF
- radius=(18 if form=='elder_bear' else 14 if bear else 10 if elder else 6)
- # Mantle wraps the shoulders instead of a detached aura. Each leaf/fur tuft has a dark
- # underside, a broad middle plane and one top-left highlight, like the source creature.
- count=11 if elder else 7
- for j in range(count):
-  angle=math.tau*j/count
-  x=cx+math.cos(angle)*radius;y=cy+math.sin(angle)*radius*.42
-  reach=(6 if elder else 4)+(j%3==0)
-  side=1 if math.cos(angle)>=0 else -1
-  poly=[(round(x-3),round(y-2)),(round(x+2),round(y-3)),(round(x+side*reach),round(y+reach*.65)),(round(x-2),round(y+2))]
-  pen.polygon(poly,fill=palette[0]);pen.polygon([(px,py-1) for px,py in poly[:-1]],fill=palette[2])
-  pen.line([(round(x-1),round(y-2)),(round(x+side*(reach-1)),round(y+reach*.45))],fill=palette[3],width=1)
-  pen.point((round(x-1),round(y-2)),fill=palette[4])
- # Elder bear carries a broad living-bark ridge with inset moss, rather than a scaled-up recolour.
- if form=='elder_bear':
-  for j in (-1,0,1):
-   x=round(cx+j*9);y=round(cy-4+abs(j)*2)
-   pen.polygon([(x-5,y+3),(x-4,y-6),(x+3,y-9),(x+6,y+1),(x,y+7)],fill=BARK[0])
-   pen.polygon([(x-3,y+1),(x-2,y-5),(x+2,y-6),(x+4,y),(x,y+4)],fill=BARK[2])
-   pen.line([(x-2,y-4),(x+1,y-5),(x+2,y+1)],fill=BARK[4],width=1)
-   pen.line([(x-2,y+1),(x,y+3),(x+3,y+1)],fill=LEAF[2],width=2)
- # Living leaf ties distinguish the caster from a hostile animal without turning the whole coat green.
- for side in (-1,1):
-  x=round(cx+side*(radius*.6));y=round(cy+4)
-  pen.polygon([(x,y-3),(x+side*4,y),(x+side*2,y+6),(x-1,y+2)],fill=LEAF[0])
-  pen.line([(x,y-1),(x+side*2,y+3)],fill=LEAF[3],width=2)
- # Limit extensions to a three-pixel connected fringe of the posed animal. Blank atlas cells stay blank.
- allowed=Image.fromarray((mask.astype('uint8')*255)).filter(ImageFilter.MaxFilter(7))
- alpha=np.minimum(np.array(overlay.getchannel('A')),np.array(allowed));overlay.putalpha(Image.fromarray(alpha))
- im=Image.alpha_composite(im,overlay)
- return im
+ if bear:
+  # Front-facing shoulder details sit beside the head, never across the face.
+  if direction in (0,4):sites=[(cx-15,cy-2),(cx+15,cy-2)]
+  else:sites=[(cx,cy)]
+  if form=='elder_bear':
+   if direction not in (0,4):
+    back=1 if direction in (1,2,3) else -1
+    sites.append((cx+back*9,cy+(-3 if direction in (1,2,6,7) else 5)))
+   for x,y in sites:bark_plate(pen,x,y)
+  # A little living green belongs to the shoulder rather than obscuring its fur.
+  for x,y in sites:leaf_sprig(pen,x,y+5,1 if direction<4 else -1)
+ else:
+  points=[(cx+x,cy+y) for x,y in VINES[direction]]
+  pen.line(points,fill=LEAF[0],width=3);pen.line(points,fill=LEAF[2],width=1)
+  leaf_sprig(pen,*points[1],1 if direction<4 else -1)
+ # No silhouette clipping: the same whole sprig/plate survives every gait frame.
+ # Pose keys move it with the neck; moving legs/tails cannot reshape the material.
+ return Image.alpha_composite(im,overlay)
 
 def render(form,manifest=None):
  source_name,key,scale=FORMS[form]
@@ -99,7 +89,7 @@ def render(form,manifest=None):
  entry['anims']['attack']['fps']=100/7  # impact frame 2 lands at the 0.14 s bite/swipe cue
  oldscale=entry['pixelScale'];entry.update(file='druid_'+form+'.png',keys=[key],variant='druid_'+form,pixelScale=scale,columns=targetcols,rowsPerDirection=targetrows,
   footprintWidth=entry['footprintWidth']*scale/oldscale,footprintHeight=entry['footprintHeight']*scale/oldscale,
-  provenance='Native Druid mantle, fur and bark work on the approved '+source_name+' anatomy and eight-direction motion. No source creature atlas is modified.')
+  provenance='Pose-keyed Druid leaf ties and shoulder bark on the approved '+source_name+' anatomy and eight-direction motion. No source creature atlas is modified.')
  return atlas,entry
 
 def build():
