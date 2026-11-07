@@ -1049,7 +1049,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.poof.white, fx.smoke.grey"
+      "use": "fx.poof.white, fx.smoke.grey; fx.druid_wild_shape_wolf.nature; fx.druid_wild_shape_bear.nature; fx.druid_wild_shape_dire_wolf.moon; fx.druid_fog_cloud.mist"
     },
     "spawned": {
       "files": [
@@ -1142,7 +1142,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost; fx.sorcerer_ray_of_frost.frost; fx.sorcerer_ice_storm.frost; fx.warlock_armor_of_agathys.frost"
+      "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost; fx.sorcerer_ray_of_frost.frost; fx.sorcerer_ice_storm.frost; fx.warlock_armor_of_agathys.frost; fx.druid_sleet_storm.frost; fx.druid_ice_storm.frost"
     },
     "spell_lightning": {
       "files": [
@@ -1168,7 +1168,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk; fx.sorcerer_web.silk"
+      "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk; fx.sorcerer_web.silk; fx.druid_faerie_fire.fey; fx.druid_hold_person.nature; fx.druid_spike_growth.nature; fx.druid_conjure_animals.nature"
     },
     "spell_nature_heal": {
       "files": [
@@ -1176,7 +1176,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.heal.nature, fx.restore.nature"
+      "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing"
     },
     "spell_poison_cloud": {
       "files": [
@@ -1209,7 +1209,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy"
+      "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy; fx.druid_barkskin.earth"
     },
     "spell_thunderwave": {
       "files": [
@@ -1217,7 +1217,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.thunder.thunder; fx.wizard_thunderwave.thunder; fx.sorcerer_thunderwave.thunder"
+      "use": "fx.thunder.thunder; fx.wizard_thunderwave.thunder; fx.sorcerer_thunderwave.thunder; fx.druid_thunderwave.thunder"
     },
     "spider_attack": {
       "files": [
