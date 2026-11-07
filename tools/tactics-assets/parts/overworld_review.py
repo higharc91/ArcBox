@@ -227,8 +227,8 @@ group('ambient','portal rune_stone','Authored magical / Warden story site',
     'Keep clear activation states. Reserve these for named story purposes; casual town portals would undermine the grounded journey and visible cost of magic.')
 group('ambient','fireflies leaf snowflake rain_splash motes embers','Sparse local particles',
     'Keep small silhouettes and loop timing. Prefer autumn leaves/ordinary motes here; snow belongs to cold weather, fire embers to a real nearby flame.')
-group('ambient','bird flock butterfly fish','Regional wildlife',
-    'Keep readable motion at low density. Crows/swallow/silver fish fit the ford; koi and blossom palettes are library alternatives, not default local fauna.')
+group('ambient','bird flock butterfly fish squirrel_climb','Regional wildlife',
+    'Keep readable motion at low density. Russet squirrels climb authored trunks, not open ground. Crows/swallow/silver fish fit the ford; koi and blossom palettes are library alternatives, not default local fauna.')
 group('ambient','rain snow fog light_shafts','Regional weather and atmosphere',
     'Keep the map and party readable underneath. Use thin local mist, autumn light and occasional rain at the ford; snow is Frostpeak, miasma Mirewood, falling ash Ember Keep.')
 
