@@ -1413,6 +1413,26 @@ def headgear(kind: str) -> Part:
                 c.rect(x0 + 2, y0 + 2, x1 - 1, y0 + 2, "cloth1", 2)
                 c.rect(x0 + 1, y0 + 7, x1 - 1, y0 + 9, "cloth2", 3)
                 c.rect(x0 + 2, y0 + 7, x1 - 2, y0 + 7, "cloth2", 4)
+        elif kind == "stranger_mask_hood":
+            # The Stranger's Scenario portrait has an opaque bone mask nested in a dark
+            # hood. Cover the whole face: the generic mask_hood leaves the body's
+            # bright eyes exposed, which gives away a face the story never reveals.
+            for y in range(p.build.head_h + 2):
+                inset = 2 if y == 0 else (1 if y == 1 else 0)
+                c.rect(x0 + inset - 1, y0 - 1 + y, x1 - inset + 1, y0 - 1 + y,
+                       "cloth1", 3 if y < 4 else 2)
+            c.rect(x0 + 1, y0 + 2, x0 + 2, y0 + 7, "cloth1", 4)
+            if front:
+                c.rect(x0 + 2, y0 + 3, x1 - 2, y0 + 8, "cloth1", 0)
+                c.rect(x0 + 3, y0 + 4, x1 - 3, y0 + 8, "skin", 3)
+                c.rect(x0 + 4, y0 + 5, x0 + 5, y0 + 5, "cloth1", 0)
+                c.rect(x1 - 5, y0 + 5, x1 - 4, y0 + 5, "cloth1", 0)
+                c.rect(p.head_cx, y0 + 5, p.head_cx, y0 + 7, "skin", 4)
+                c.rect(x0 + 2, y0 + 9, x1 - 2, y0 + 10, "cloth2", 2)
+                c.px(x1 - 2, y0 + 10, "trim", 4)
+            else:
+                c.rect(x0 + 2, y0 + 2, x1 - 2, y0 + 8, "cloth1", 2)
+                c.rect(x0 + 3, y0 + 3, x0 + 3, y0 + 7, "cloth1", 4)
         elif kind == "winged_helm":
             for y in range(5):
                 inset = 2 if y == 0 else (1 if y == 1 else 0)

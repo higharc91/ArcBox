@@ -38,7 +38,7 @@ PARTS: dict[str, dict[str, P.Part]] = {
     "marks": {k: P.marks(k) for k in ("freckles", "scar", "warpaint", "tattoo", "stripes", "scales", "runes")},
     "horns": {k: P.horns(k) for k in ("curled", "straight", "ram", "small", "swept")},
     "headgear": {k: P.headgear(k) for k in ("open_helm", "great_helm", "hood", "wizard_hat", "circlet", "bandana", "crown",
-                                               "horned_helm", "feathered_cap", "mask_hood", "winged_helm", "halo",
+                                               "horned_helm", "feathered_cap", "mask_hood", "stranger_mask_hood", "winged_helm", "halo",
                                                "beret", "antlers", "flower_crown", "headband", "straw_hat",
                                                "cap", "mitre", "wolf_pelt")},
     "weapon": {k: P.weapon(k) for k in ("sword", "greatsword", "axe", "mace", "dagger", "spear", "staff", "bow", "tome", "wand", "rapier", "lute", "warhammer",

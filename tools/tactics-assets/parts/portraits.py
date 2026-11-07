@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import shutil
 from dataclasses import replace
+from pathlib import Path
 
 import numpy as np
 from PIL import Image
@@ -28,6 +29,8 @@ SIZE = CROP * SCALE
 SKIP = ("weapon", "offhand")             # held items crowd the frame
 MOODS = {"idle": ANIMS["idle"][2][0], "hurt": ANIMS["hurt"][2][0],
          **{m: replace(ANIMS["idle"][2][0], expression=m) for m in ("happy", "angry", "sad", "surprised")}}
+
+STRANGER_PORTRAIT = Path(__file__).resolve().parents[1] / "scenario" / "hooded-stranger-portrait.png"
 
 BACKDROPS = {                              # backdrop ramps: allies warm-neutral, enemies red, neutral navy
     "ally": ramp("#3a4a7a", shift=0.05),
@@ -73,6 +76,11 @@ def backdrop(kind: str) -> Image.Image:
 
 def portrait(recipe, mood: str = "idle", kind: str | None = None) -> Image.Image:
     kind = kind or ("enemy" if "enemy" in recipe.tags else "ally")
+    if recipe.id == "stranger":
+        out = backdrop("neutral").resize((SIZE, SIZE), Image.Resampling.NEAREST)
+        with Image.open(STRANGER_PORTRAIT) as source:
+            out.alpha_composite(source.convert("RGBA"))
+        return out
     out = backdrop(kind)
     out.alpha_composite(bust(recipe, mood))
     return out.resize((SIZE, SIZE), Image.NEAREST)
