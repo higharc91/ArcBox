@@ -221,6 +221,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
     public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds = null) => new Builder(beat, shown, live, fx, sounds).Build();
 
+    internal static ReactionTrigger? OpenSpellOffer(Beat beat)
+        => beat.Events.LastOrDefault(e => e is ReactionOffered or Reacted) is ReactionOffered
+            { Offer.Cause: { Kind: ReactionTriggerKind.SpellCast } cause } ? cause : null;
+
     private sealed class Builder(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds)
     {
         private double _creaturePoseUntil;
@@ -668,6 +672,16 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 return;
             }
             _cues.Add(new AbilityCue(_t, used, source, aim ?? source));
+            var cancelled = beat.Events.OfType<Countered>().Any(c => c.Caster == used.Source && c.Ability == used.Ability);
+            var waiting = OpenSpellOffer(beat) is { } offer && offer.Actor == used.Source && offer.Ability == used.Ability;
+            if (cancelled || waiting)
+            {
+                // A pending or successfully countered incantation gathers; it never detonates before the answer.
+                _cues.Add(new PoseCue(_t, BeatTiming.Cast, used.Source, anim, source, aim));
+                Sound("spell_cast");
+                _t += BeatTiming.Cast;
+                return;
+            }
             if (aim is not { } target || target == source)
             {
                 var length = used.Ability.Value switch

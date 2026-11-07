@@ -186,6 +186,13 @@ def main():
             perf = cache / f"perf-{name}-{repeat}"
             meta = perf / "frames/showcase.json"
             runs.append(json.loads(meta.read_text()) if args.reuse and meta.exists() else capture(tree, args.selector, perf, mode, reduced, True))
+        if runs:
+            # Fresh neutral metadata selects the reviewed ability/proc, including reactions, in reused native frames.
+            for row, measured in zip(captures[name], runs[0]):
+                if row['id'] != measured['id'] or abs(row['seconds'] - measured['seconds']) > 2/60:
+                    raise RuntimeError(f"Native/performance fixture mismatch: {row['id']}")
+                for field in ('baseSeconds', 'posterAt', 'textureBytes'):
+                    if field in measured: row[field] = measured[field]
         performance[name] = {row["id"]: statistics.median(r[i]["frameMedianMs"] for r in runs)
                              for i, row in enumerate(captures[name])} if runs else {}
     (output / "timings.json").write_text(json.dumps(captures, indent=2) + "\n")
@@ -211,7 +218,12 @@ def main():
     inventories = {}
     for name in ["before", "full"]:
         source = cache / name / "frames/inventory.json"
-        if source.exists(): inventories[name] = json.loads(source.read_text())
+        if source.exists():
+            inventories[name] = json.loads(source.read_text())
+            tree = before if name == 'before' else ROOT
+            procs = json.loads((tree / 'content/tactics/base/fx/manifest.json').read_text()).get('passives', {})
+            for row in inventories[name]:
+                if row['kind'] == 'proc' and row['id'] in procs: row['presentation'] = {'fx': procs[row['id']]}
     if inventories:
         (output / "inventory.json").write_text(json.dumps(inventories, indent=2) + "\n")
         old_rows = {(r["id"], r.get("subclass")): r for r in inventories.get("before", [])}

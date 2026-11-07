@@ -42,10 +42,17 @@ public partial class FxDemoFeeder : Node
         _baseSeconds = [.. scripts.Select(s => s?.Length ?? 0)];
         _posterAt = [.. samples.Select((sample, i) =>
         {
-            var key = sample.After.Beats.Single().Events.OfType<AbilityUsed>().FirstOrDefault()?.Presentation?.Fx;
+            var events = sample.After.Beats.Single().Events;
+            var used = events.OfType<AbilityUsed>().FirstOrDefault(a => a.Ability.Value == sample.Id)
+                ?? events.OfType<AbilityUsed>().FirstOrDefault();
+            var key = used?.Presentation?.Fx;
             var path = key is null ? null : art?.Clip(key)?.Path;
             var bursts = scripts[i]?.Cues.OfType<BurstCue>().ToArray() ?? [];
-            var burst = bursts.FirstOrDefault(b => b.Clip.Path == path) ?? bursts.FirstOrDefault();
+            var proc = events.OfType<PassiveTriggered>().FirstOrDefault(p => p.Passive == sample.Id);
+            var procAt = scripts[i]?.Cues.OfType<ApplyCue>().FirstOrDefault(c => c.Event == proc)?.At;
+            var owner = proc is null ? null : sample.Before.Units.FirstOrDefault(u => u.Id == proc.Owner);
+            var burst = procAt is { } at && owner is not null ? bursts.FirstOrDefault(b => b.At >= at && b.Tile == owner.At) : null;
+            burst ??= bursts.FirstOrDefault(b => b.Clip.Path == path) ?? bursts.FirstOrDefault();
             return burst is null ? _baseSeconds[i] * .55 : burst.At + Math.Min(.1, burst.Length * .25);
         })];
     }
@@ -58,7 +65,8 @@ public partial class FxDemoFeeder : Node
         _endAt = _clock + _tails[_sample];
     }
     private void Send(BattleView battle, FxShowcaseSample sample)
-        => _send(JsonSerializer.SerializeToElement(new TacticsHostView("Battle", sample.Name, null, sample.Level, [], null, battle, null, null), ArcJson.Options));
+        => _send(JsonSerializer.SerializeToElement(new TacticsHostView("Battle", sample.Name, null, sample.Level, [], null,
+            battle with { Name = $"{sample.Name} · Level {sample.Level}" }, null, null), ArcJson.Options));
 
     public override void _Process(double delta)
     {

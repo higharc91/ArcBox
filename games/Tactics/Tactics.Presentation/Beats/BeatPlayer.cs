@@ -115,6 +115,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private readonly Queue<SpokenLine> _unread = [];     // lines waiting their turn, as the voice speaks one at a time
     private BattleView? _live;
     private BeatScript? _script;
+    private AbilityUsed? _waitingSpell;
     private BeatCatchUp? _caughtUp;
     private int _next;
     private int _played;        // the last beat begun
@@ -169,7 +170,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public void Receive(BattleView live)
     {
         if (_queue.Offer(live.Beats, _real))
-            (_script, Shown, _cutIn, _carriedCamera) = (null, null, null, null);
+            (_script, Shown, _cutIn, _carriedCamera, _waitingSpell) = (null, null, null, null, null);
         _live = live;
         if (_script is null && _queue.Late(_real))
             CatchUp(live);
@@ -180,6 +181,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
 
     private void CatchUp(BattleView live)
     {
+        _waitingSpell = null;
         _queue.KeepNewest();
         ClearCinematics();
         _fading.Clear();
@@ -196,6 +198,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     /// </summary>
     public void Reset()
     {
+        _waitingSpell = null;
         _queue.Clear();
         _fading.Clear();
         (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp, _cutIn) = (null, null, null, null, 0, null, null, null);
@@ -272,6 +275,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             CatchUp(_live);
         if (_queue.Next() is not { } beat)
             return null;
+        beat = ResumeSpell(beat);
         (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
         (_script, _next, _clock, _cinematicClock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0, 0);
         _cutIn = CutIn?.Invoke(beat, Shown, _script);
@@ -279,6 +283,33 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
             (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
+    }
+
+    // The engine already paid for and announced this spell in the parent batch. Only its presentation resumes here.
+    private Beat ResumeSpell(Beat beat)
+    {
+        var open = BeatScript.OpenSpellOffer(beat);
+        if (_waitingSpell is { } held && beat.Events.OfType<Reacted>().FirstOrDefault() is { } answer
+            && !(open?.Actor == held.Source && open.Ability == held.Ability))
+        {
+            _waitingSpell = null;
+            var cancelled = beat.Events.OfType<Countered>().Any(c => c.Caster == held.Source && c.Ability == held.Ability);
+            if (!cancelled && !beat.Events.OfType<AbilityUsed>().Any(a => a.Source == held.Source && a.Ability == held.Ability))
+            {
+                var index = beat.Events.IndexOf(answer) + 1;
+                var response = beat.Events.OfType<AbilityUsed>().FirstOrDefault(a => a.Source == answer.Reactor);
+                if (response is not null)
+                {
+                    index = beat.Events.IndexOf(response) + 1;
+                    var check = beat.Events.Skip(index).OfType<Rolled>().FirstOrDefault(r => r.Roller == answer.Reactor && r.Kind == RollKind.Check);
+                    if (check is not null) index = beat.Events.IndexOf(check) + 1;
+                }
+                beat = beat with { Events = beat.Events.Insert(index, held) };
+            }
+        }
+        if (open is not null)
+            _waitingSpell = beat.Events.OfType<AbilityUsed>().LastOrDefault(a => a.Source == open.Actor && a.Ability == open.Ability) ?? _waitingSpell;
+        return beat;
     }
 
     private void Reach(Cue cue, ImmutableArray<SpokenLine>.Builder lines, ImmutableArray<string>.Builder moments, ImmutableArray<string>.Builder heard)
