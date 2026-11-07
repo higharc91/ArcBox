@@ -108,6 +108,8 @@ public sealed class HudArtTests
     [InlineData("characters.goblin_spear", "goblin_boss", 56)]
     [InlineData("characters.hobgoblin", "hobgoblin", 64)]
     [InlineData("characters.bandit", "bandit", 64)]
+    [InlineData("characters.cultist", "cultist", 64)]
+    [InlineData("characters.cult_leader", "cult_leader", 64)]
     public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
     {
         var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
@@ -126,6 +128,8 @@ public sealed class HudArtTests
     [InlineData("goblin_spear")]
     [InlineData("hobgoblin")]
     [InlineData("bandit")]
+    [InlineData("cultist")]
+    [InlineData("cult_leader")]
     public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
     {
         var files = new HashSet<string>();

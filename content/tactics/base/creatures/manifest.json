@@ -8798,6 +8798,416 @@
         }
       },
       "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/road-and-host-2026-11-07/."
+    },
+    "mob_refresh_cultist": {
+      "file": "mob_refresh_cultist.png",
+      "family": "cultist",
+      "variant": "kindled",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        81,
+        71,
+        64,
+        64
+      ],
+      "headTop": 74,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 26.88,
+      "footprintHeight": 39.68,
+      "keys": [
+        "characters.cultist"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/kindled-2026-11-07/."
+    },
+    "mob_refresh_cult_leader": {
+      "file": "mob_refresh_cult_leader.png",
+      "family": "cult_leader",
+      "variant": "kindled",
+      "frame": {
+        "width": 224,
+        "height": 224,
+        "anchor": [
+          112,
+          198
+        ]
+      },
+      "portrait": [
+        74,
+        77,
+        64,
+        64
+      ],
+      "headTop": 80,
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 22.4,
+      "footprintHeight": 37.76,
+      "keys": [
+        "characters.cult_leader"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            0
+          ],
+          "fps": 8,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario lore concepts; OpenAI pixel poses. Sources, rejected drafts and complete export checks: tools/tactics-assets/imagegen/kindled-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

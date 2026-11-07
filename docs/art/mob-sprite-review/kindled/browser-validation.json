@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Kindled · actual Hall of the Flame encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Cultists · actual Forest Ruins encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, bandit and Kindled lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "26e82543",
+    "walk": "dafc48c6",
+    "attack": "d13a6d8c",
+    "hurt": "2af727dd",
+    "down": "a2e1ea9b",
+    "cast": "90aa4896"
+  },
+  "walkFrameHashes": [
+    "7f9c013",
+    "62146384",
+    "dafc48c6",
+    "ef606aa6"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

@@ -1,5 +1,5 @@
 {
-  "scope": "Combat roster first; eight refreshed designs integrated across three batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; ten refreshed designs integrated across four batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
@@ -8,9 +8,11 @@
     "characters.goblin_shaman",
     "characters.goblin_spear",
     "characters.hobgoblin",
-    "characters.bandit"
+    "characters.bandit",
+    "characters.cultist",
+    "characters.cult_leader"
   ],
-  "remainingOlderCombatLooks": 21,
+  "remainingOlderCombatLooks": 19,
   "looks": [
     {
       "baselineNumber": 1,
@@ -100,13 +102,13 @@
       "baselineNumber": 15,
       "name": "Ember Hierophant / Maren Sorrel",
       "key": "characters.cult_leader",
-      "status": "awaiting refresh"
+      "status": "integrated fourth batch"
     },
     {
       "baselineNumber": 16,
       "name": "Cultist",
       "key": "characters.cultist",
-      "status": "awaiting refresh"
+      "status": "integrated fourth batch"
     },
     {
       "baselineNumber": 17,

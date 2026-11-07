@@ -280,12 +280,12 @@
       "surprised": "black_knight_surprised.png"
     },
     "cultist": {
-      "idle": "cultist_idle.png",
-      "hurt": "cultist_hurt.png",
-      "happy": "cultist_happy.png",
-      "angry": "cultist_angry.png",
-      "sad": "cultist_sad.png",
-      "surprised": "cultist_surprised.png"
+      "idle": "cultist_refresh_idle.png",
+      "hurt": "cultist_refresh_hurt.png",
+      "happy": "cultist_refresh_happy.png",
+      "angry": "cultist_refresh_angry.png",
+      "sad": "cultist_refresh_sad.png",
+      "surprised": "cultist_refresh_surprised.png"
     },
     "kobold": {
       "idle": "kobold_refresh.png",
@@ -368,12 +368,12 @@
       "surprised": "rook_surprised.png"
     },
     "cult_leader": {
-      "idle": "cult_leader_idle.png",
-      "hurt": "cult_leader_hurt.png",
-      "happy": "cult_leader_happy.png",
-      "angry": "cult_leader_angry.png",
-      "sad": "cult_leader_sad.png",
-      "surprised": "cult_leader_surprised.png"
+      "idle": "cult_leader_refresh_idle.png",
+      "hurt": "cult_leader_refresh_hurt.png",
+      "happy": "cult_leader_refresh_happy.png",
+      "angry": "cult_leader_refresh_angry.png",
+      "sad": "cult_leader_refresh_sad.png",
+      "surprised": "cult_leader_refresh_surprised.png"
     },
     "mayor": {
       "idle": "halden_varrow_idle.png",

@@ -32,3 +32,5 @@ Host review arguments after `--`:
 ```
 
 Eight refreshed looks are now integrated across three batches; [21 older combat looks remain](../production/refresh-status.json). The historical 98-look baseline remains unchanged. No PR has been opened.
+
+Subsequent batch: [Kindled cultist and Maren / Ember Hierophant](../kindled/README.md) brings progress to ten refreshed looks and 19 older combat looks remaining.

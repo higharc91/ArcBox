@@ -1,0 +1,21 @@
+{
+  "cult_leader-cast-profile": "03d0e488-35eb-405a-9e35-60d600955df2",
+  "cultist-idle": "c3766faf-4840-4838-b3a6-f11c0bcb4ac4",
+  "cult_leader-idle": "6113ec83-8cb7-4d95-8454-c68b01c22e6d",
+  "cult_leader-idle-rear": "9df23957-3e7f-49e3-90e6-f8693b1c8113",
+  "cultist-walk": "67910a4a-3768-469d-b37b-b4f84ccaf52c",
+  "cult_leader-walk": "d43aa2cd-ce0a-46b3-a4f1-e22b963db268",
+  "cultist-attack": "6a43979c-9e81-43fc-964f-30afb7764ebc",
+  "cult_leader-walk-rear": "f20eb1b9-5113-4243-9ea9-e6b3b9996901",
+  "cult_leader-attack": "a0758ed2-ef67-46f3-b182-626c0949b87e",
+  "cultist-cast": "1313a263-17b7-4079-9d13-6b29b5bc736b",
+  "cult_leader-cast": "3ded10ba-4d2a-4817-bd2e-fa67bba573a5",
+  "cult_leader-cast-rear": "4dbdb9c0-fe27-4d0e-9861-c0608f1a9a59",
+  "cultist-damage": "2de9abd0-6f2a-4289-a22a-90d271980772",
+  "cult_leader-damage": "11b15002-040a-47b0-ac22-703510089aeb",
+  "cultist-portraits": "cfce87d4-9bd6-4601-b19a-f3b88db613b9",
+  "cult_leader-portraits": "9f27d9b4-e134-47f9-bc9e-855e37ada29d",
+  "cult_leader-damage-rejected": "12d36ccb-09b4-4126-8723-982019664378",
+  "cultist-portraits-rejected": "be777472-bf11-4c1a-bfbb-154b44a44854",
+  "cult_leader-hurt-rear": "393e1f22-4f15-44ab-8242-e465fe644117"
+}

@@ -25,6 +25,6 @@ The original 98-card sheet and inventory above are the pre-refresh baseline. [Cu
 
 ## Current refresh progress
 
-[Second batch: goblin archer, shaman and Vorga](goblin-roles/index.html) includes before/after art, eight-direction animation controls and actual game captures. Eight looks are refreshed across three batches; 21 older combat looks remain. The 98-look baseline above remains a historical reference.
+[Latest: Kindled cultist and Maren / Ember Hierophant](kindled/index.html), with before/after art, eight-direction walking, melee and spellcasting, plus actual encounter captures. Ten looks are refreshed across four batches; 19 older combat looks remain. The historical 98-look baseline above stays unchanged.
 
-Latest: [hobgoblin and roadside bandit](road-and-host/index.html), with before/after art, all eight facings, motion reel and authored encounter captures.
+Earlier reviews: [cutthroat, orc and drake](production/index.html), [goblin roles](goblin-roles/index.html), [hobgoblin and roadside bandit](road-and-host/index.html). [Current tracker](production/refresh-status.json).
